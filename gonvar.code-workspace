@@ -1,0 +1,36 @@
+{
+  "folders": [
+    {
+      "path": "src",
+      "name": "App"
+    },
+    {
+      "path": "public",
+      "name": "Public"
+    },
+    {
+      "path": ".",
+      "name": "Project Root"
+    }
+  ],
+  "settings": {
+    "eslint.alwaysShowStatus": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "eslint.validate": [
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact"
+    ],
+    "files.exclude": {
+      "**/build": true,
+      "**/node_modules": true,
+      "**/public": true,
+      "**/src": true
+    }
+  },
+  "extensions": {
+    "recommendations": ["mikestead.dotenv", "esbenp.prettier-vscode"]
+  }
+}
