@@ -1,22 +1,30 @@
 # Gonvar Nails Academy
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project contains the code for the Gonvar Nails platform.
+
+## Tools and technologies used
+- Next.js for loading speeds.
+- Bootstrap for styling components.
+- Type checking TypeScript.
+- Strict Mode for TypeScript and React 17.
+- Code Formatter with Prettier.
 
 ## Getting Started
 
-First, run the development server:
+Run the following command on your local environment:
+
+```bash 
+cd gonvar-academy
+npm install
+```
+
+Then, you can run locally in development mode with live reload:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-# Gonvar-Nails-Academy
+## Contributors
+- Project structure was created by: Iván Morales

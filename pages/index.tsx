@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
+import { Button } from 'react-bootstrap'
+import { NavBar } from '../components/NavBar/NavBar'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -9,8 +11,7 @@ export default function Home() {
       <Head>
         <title>Gonvar Nails Academy</title>
       </Head>
-      <h1>Gonvar Nails</h1>
-      <Link href="/about">Ir a about</Link>
+      <NavBar />
     </div>
   )
 }
