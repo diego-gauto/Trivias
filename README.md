@@ -8,6 +8,7 @@ This project contains the code for the Gonvar Nails platform.
 - Type checking TypeScript.
 - Strict Mode for TypeScript and React 17.
 - Code Formatter with Prettier.
+- Styled components for styles management.
 
 ## Getting Started
 
