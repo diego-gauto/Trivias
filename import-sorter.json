@@ -1,0 +1,87 @@
+{
+  "generalConfiguration": {
+    "sortOnBeforeSave": true,
+    "exclude": [
+      "test",
+      "release",
+      "src/main.prod.js",
+      "src/renderer.prod.js",
+      "src/dist",
+      ".erb/dll"
+    ]
+  },
+  "importStringConfiguration": {
+    "hasSemicolon": true,
+    "numberOfEmptyLinesAfterAllImports": 1,
+    "quoteMark": "double",
+    "tabSize": 2,
+    "tabType": "spaces",
+    "trailingComma": "multiLine",
+    "maximumNumberOfImportExpressionsPerLine": {
+      "count": 100,
+      "type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne"
+    },
+    "spacingPerImportExpression": {
+      "afterComma": 1,
+      "afterStartingBracket": 1,
+      "beforeComma": 0,
+      "beforeEndingBracket": 1
+    }
+  },
+  "sortConfiguration": {
+    "joinImportPaths": true,
+    "removeUnusedImports": true,
+    "removeUnusedDefaultImports": true,
+    "importMembers": {
+      "direction": "asc",
+      "order": "lowercaseFirst"
+    },
+    "importPaths": {
+      "direction": "asc",
+      "order": "caseInsensitive"
+    },
+    "customOrderingRules": {
+      "defaultNumberOfEmptyLinesAfterGroup": 1,
+      "defaultOrderLevel": 90,
+      "disableDefaultOrderSort": false,
+      "rules": [
+        {
+          "type": "path",
+          "regex": "^react$",
+          "orderLevel": 0,
+          "disableSort": false
+        },
+        {
+          "type": "path",
+          "regex": "^react-|^redux",
+          "orderLevel": 10,
+          "disableSort": false
+        },
+        {
+          "type": "path",
+          "regex": "^[a-z]",
+          "orderLevel": 20,
+          "disableSort": false
+        },
+        {
+          "type": "path",
+          "regex": "^\\@",
+          "orderLevel": 30,
+          "disableSort": false
+        },
+        {
+          "type": "importMember",
+          "regex": "^[*]",
+          "orderLevel": 40,
+          "disableSort": false
+        },
+        {
+          "type": "path",
+          "regex": "^[.]",
+          "orderLevel": 1000,
+          "disableSort": false
+        }
+      ]
+    }
+  }
+}

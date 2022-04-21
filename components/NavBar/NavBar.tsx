@@ -1,7 +1,7 @@
-import React from 'react'
-import { Container, Navbar } from 'react-bootstrap'
-import { INavBar } from './INavBar'
-import { PurpleButton } from './NavBar.styled'
+import { Container, Navbar } from "react-bootstrap";
+
+import { INavBar } from "./INavBar";
+import { PurpleButton } from "./NavBar.styled";
 
 export const NavBar = (props: INavBar) => {
   const { title } = props;
