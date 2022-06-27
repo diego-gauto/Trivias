@@ -1,7 +1,6 @@
 import { Container, Col, Row, Navbar, Button, Image } from "react-bootstrap";
 import { ISlideModule } from "./ISlideModule";
 import React, { Component, useEffect } from "react";
-import Slider from "react-slick";
 
 import { SlideImg } from "./SlideModule.styled";
 

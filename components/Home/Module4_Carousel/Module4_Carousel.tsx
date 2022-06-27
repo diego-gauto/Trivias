@@ -15,6 +15,9 @@ import B2 from "./MediaSources/B2.png"
 export const Module4_Carousel = (props: IModule4_Carousel) => {
 
   const { isInfinite } = props;
+  const { slideData } = props;
+  var slideDataArr = [{ title: "Manicure Avanzado", subtitle: "27 Lecciones", imgURL: "./MediaSources/A1.png" }]
+
 
   var settings = {
     dots: false,
@@ -25,7 +28,15 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   };
   return (
     <Container>
+
+      {slideDataArr.map((element) => (
+        <span key={element.title} ></span>
+      ))}
+
       <Slider {...settings}>
+
+
+
         <div>
 
           <SlideModule isNew={true} title={"Manicure Avanzado"} subtitle={"27 Lecciones"} imgURL={A1.src}></SlideModule>

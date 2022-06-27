@@ -2,7 +2,8 @@ import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
 export const SlideImg = styled.div ` 
-width: auto;
-height: 300px;
+width: 100% !important;
+height: 250px !important;
+background-repeat: no-repeat !important;
 `;
 
