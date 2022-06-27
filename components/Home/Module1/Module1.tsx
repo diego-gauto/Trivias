@@ -5,10 +5,8 @@ import Img3 from "./MediaSources/Icon03.png"
 import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
-import { PurpleButton } from "./Module1.styled";
 
 export const Module1 = (props: IModule1) => {
-  const { title } = props;
   return (
     <Container>
       <Row>

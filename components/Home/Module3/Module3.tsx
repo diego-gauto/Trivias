@@ -104,9 +104,9 @@ export const Module3 = (props: IModule3) => {
           </Row>
           <Row>
             <Col>
-              <Row><Button>{button} </Button></Row>
-              <Row>{title} </Row>
-              <Row>{subtitle} </Row>
+              <Row><span>{button}</span></Row>
+              <Row><h1>{title}</h1> </Row>
+              <Row><h2>{subtitle}</h2> </Row>
             </Col>
           </Row>
         </Col>

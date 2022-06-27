@@ -9,10 +9,8 @@ import BG1 from "./MediaSources/BG01.png"
 import BG2 from "./MediaSources/BG02.png"
 import BG3 from "./MediaSources/BG03.png"
 import { IModule2 } from "./IModule2";
-import { PurpleButton } from "./Module2.styled";
 
 export const Module2 = (props: IModule2) => {
-  const { title } = props;
   return (
     <Container>
       <Row>
