@@ -1,0 +1,77 @@
+import React from 'react'
+import {
+  LoginBox,
+  Title,
+  Text2,
+  Box1,
+  TextInput,
+  PurpleButton2,
+  GoogleButton,
+  FacebookButton,
+  Background,
+  AllButtons,
+  Text3,
+  LinkText,
+  ProfilePicture,
+  GoogleIcon,
+  FacebookIcon,
+  EyeIcon,
+  Box2,
+  PasswordBox
+} from './Login.styled'
+export const Login = () => {
+  return (
+    <Background>
+      <LoginBox>
+        <ProfilePicture />
+        <Title>
+          Iniciar Sesión
+        </Title>
+        <Box1>
+          <Text2>
+            Correo electrónico
+          </Text2>
+          <TextInput
+            placeholder="correo@correo.com"
+          />
+        </Box1>
+        <Box2>
+          <Text2>
+            Contraseña
+          </Text2>
+          <PasswordBox>
+            <TextInput
+              placeholder="Contraseña"
+            />
+            <EyeIcon />
+          </PasswordBox>
+        </Box2>
+        <AllButtons>
+          <PurpleButton2>
+            Acceder
+          </PurpleButton2>
+          <GoogleButton>
+            <GoogleIcon></GoogleIcon>
+            Acceder con Google
+          </GoogleButton>
+          <FacebookButton>
+            <FacebookIcon></FacebookIcon>
+            Acceder con Facebook
+          </FacebookButton>
+        </AllButtons>
+        <Text3>
+          ¿Olvidaste tu contraseña? &nbsp;
+          <LinkText>
+            Clic aqui
+          </LinkText>
+        </Text3>
+        <Text3>
+          ¿Es tu primera vez con nosotros? &nbsp;
+          <LinkText>
+            Registrate
+          </LinkText>
+        </Text3>
+      </LoginBox>
+    </Background>
+  )
+}
