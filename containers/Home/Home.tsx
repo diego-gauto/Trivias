@@ -22,7 +22,17 @@ const HomeContainer = () => {
       subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
 
 
-    <Module4_Carousel isInfinite={true} />
+    <Module4_Carousel isInfinite={true} slideData={
+      [
+
+        { isNew: true, title: "Manicure Avanzado", subtitle: "27 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FA1.png?alt=media&token=ab4ac5e1-8477-42ae-917e-528256c72a1f" },
+        { isNew: false, title: "Uñas creativas", subtitle: "12 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FA2.png?alt=media&token=d6f8b315-5b15-4b3a-82d1-6241e7f7a0d4" },
+        { isNew: false, title: "Introducción a la Manicure", subtitle: "10 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FA3.png?alt=media&token=0bd5bdc1-e6cc-40ef-a0a3-17991fc5209d" },
+        { isNew: true, title: "Introducción a la Manicure 2", subtitle: "5 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FA3.png?alt=media&token=0bd5bdc1-e6cc-40ef-a0a3-17991fc5209d" },
+        { isNew: false, title: "Uñas creativas 2", subtitle: "9 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FA1.png?alt=media&token=ab4ac5e1-8477-42ae-917e-528256c72a1f" },
+
+      ]
+    } />
   </>
 
 

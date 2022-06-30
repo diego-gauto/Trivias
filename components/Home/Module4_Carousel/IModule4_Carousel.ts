@@ -1,7 +1,7 @@
-export interface IModule4_Carousel{
-  /**
-   * The title of the navbar
-   */ 
+export interface IModule4_Carousel{ 
   isInfinite : boolean,
-  slideData : object,
+  
+  slideData : SlideObj[]
 }
+interface SlideObj
+ {isNew : boolean, title : string, subtitle : string, imgURL : string} 

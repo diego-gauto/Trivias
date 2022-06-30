@@ -1,7 +1,4 @@
-export interface IModule3{
-  /**
-   * The title of the navbar
-   */
+export interface IModule3{ 
   button: string;
   title: string;
   subtitle: string;

@@ -1,5 +1,2 @@
-export interface IModule2{
-  /**
-   * The title of the navbar
-   */ 
+export interface IModule2{ 
 }

@@ -1,10 +1,13 @@
-import { Container, Col, Row, Navbar, Button, Image } from "react-bootstrap";
+import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import { ISlideModule } from "./ISlideModule";
 import React, { Component, useEffect } from "react";
 
 import { SlideImg } from "./SlideModule.styled";
 
+
+
 export const SlideModule = (props: ISlideModule) => {
+
 
 
   const { isNew } = props;
@@ -17,7 +20,15 @@ export const SlideModule = (props: ISlideModule) => {
     <Container>
       <Col>
         <Row>
-          <SlideImg className="slide" style={{ backgroundImage: "url(" + imgURL + ")" }} >
+          <SlideImg
+
+            style={{
+              backgroundImage: 'url(' + imgURL + ')',
+              width: "100%",
+              height: "250px",
+              backgroundRepeat: "no-repeat"
+            }}
+          >
 
             {isNew ? <span>Nuevo</span> : <></>}
 
@@ -30,7 +41,7 @@ export const SlideModule = (props: ISlideModule) => {
           <h5>{subtitle} </h5>
         </Row>
       </Col>
-    </Container>
+    </Container >
 
   )
 }

@@ -1,4 +1,4 @@
-import { Container, Col, Row, Navbar, Button, Image } from "react-bootstrap";
+import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import Img1 from "./MediaSources/Icon01.png"
 import Img2 from "./MediaSources/Icon02.png"
 import Img3 from "./MediaSources/Icon03.png"

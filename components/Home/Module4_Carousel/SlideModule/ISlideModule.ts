@@ -1,7 +1,4 @@
-export interface ISlideModule{
-  /**
-   * The title of the navbar
-   */ 
+export interface ISlideModule{ 
    isNew : boolean, 
    title : string, 
    subtitle : string, 
