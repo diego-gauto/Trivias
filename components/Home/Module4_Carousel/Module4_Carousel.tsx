@@ -23,10 +23,12 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     infinite: isInfinite,
     speed: 200,
     slidesToShow: 3.5,
-
     slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 2000,
+
+    centerMode: true,
+    centerPadding: '40px',
   };
   return (
     <Container>

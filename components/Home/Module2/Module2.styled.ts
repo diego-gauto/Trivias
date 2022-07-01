@@ -17,7 +17,7 @@ position: relative;
 margin-left: 225px;
 `;
 export const LeftImage = styled.div  `
-margin-top: 90px;
+margin-top: 90px;  
 `;
 
 export const RightImage = styled.div  `
