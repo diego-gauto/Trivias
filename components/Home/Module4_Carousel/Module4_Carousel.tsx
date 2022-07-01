@@ -22,8 +22,9 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     dots: false,
     infinite: isInfinite,
     speed: 200,
-    slidesToShow: 3.2,
-    slidesToScroll: 1,
+    slidesToShow: 3.5,
+
+    slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 2000,
   };

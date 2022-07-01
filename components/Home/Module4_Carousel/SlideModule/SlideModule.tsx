@@ -2,8 +2,7 @@ import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import { ISlideModule } from "./ISlideModule";
 import React, { Component, useEffect } from "react";
 
-import { SlideImg } from "./SlideModule.styled";
-
+import { NewTag, SlideImg, TextSectionWrapper } from "./SlideModule.styled";
 
 
 export const SlideModule = (props: ISlideModule) => {
@@ -25,21 +24,32 @@ export const SlideModule = (props: ISlideModule) => {
             style={{
               backgroundImage: 'url(' + imgURL + ')',
               width: "100%",
-              height: "250px",
-              backgroundRepeat: "no-repeat"
+              height: "210px",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "95% auto",
+              padding: "0",
+              marginLeft: "2.5%",
+              marginRight: "2.5%",
             }}
           >
 
-            {isNew ? <span>Nuevo</span> : <></>}
+            {isNew ?
+              <NewTag>
+                <span>Nuevo</span>
+              </NewTag>
+              : <></>}
 
           </SlideImg>
         </Row>
-        <Row>
-          <h3>{title} </h3>
-        </Row>
-        <Row>
-          <h5>{subtitle} </h5>
-        </Row>
+
+        <TextSectionWrapper>
+          <Row>
+            <h4>{title} </h4>
+          </Row>
+          <Row>
+            <h6>{subtitle} </h6>
+          </Row>
+        </TextSectionWrapper>
       </Col>
     </Container >
 
