@@ -31,7 +31,7 @@ width: 67%;
 height: 600px;
 margin-left: 33%;
 position: relative;
-background: linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%) ;
+
 `;
 export const SectionRight01 = styled.div  `
 padding-top: 65px;

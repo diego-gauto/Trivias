@@ -139,7 +139,7 @@ export const Module3 = (props: IModule3) => {
               </SectionLeft02>
             </Left>
           </Col>
-          <Col>
+          <Col style={{ background: "linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%)" }}>
             <Right>
               <Row>
                 <SectionRight01><h4>Lo que aprenderas en este curso...</h4></SectionRight01>
