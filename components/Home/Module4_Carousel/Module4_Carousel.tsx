@@ -23,9 +23,9 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     infinite: isInfinite,
     speed: 200,
     slidesToShow: 3.5,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 1750,
 
     centerMode: true,
     centerPadding: '40px',
