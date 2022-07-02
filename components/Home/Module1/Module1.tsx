@@ -9,7 +9,10 @@ import { IModule1 } from "./IModule1";
 import {
   BackgroundWrapper, Left, Right, SectionA_01,
   RightImage, SectionB, SectionB_01, SectionB_02,
-  SectionC, SectionA_02, LeftWrapper, Button01, Button02, Button01Content, Button02Content,
+  SectionC, SectionA_02, LeftWrapper, Button01, Button02,
+  Button01Content, Button02Content, SectionA_01Text01,
+  SectionA_01Text02, SectionA_02Text01, SectionA_02Text02,
+  SectionB_Text, IconElement, IconImageWrapper
 } from "./Module1.styled";
 
 
@@ -23,16 +26,16 @@ export const Module1 = (props: IModule1) => {
 
               <SectionA_01>
                 <Row>
-                  <h1>APRENDE A APLICAR UÑAS DESDE CERO</h1>
+                  <p> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></p>
                 </Row>
               </SectionA_01>
               <SectionA_02>
                 <Row>
-                  <h5>Descubre tu verdadero potencial a través nuestros entrenamientos personalizados
+                  <p> <SectionA_02Text01>Descubre tu verdadero potencial a través nuestros <SectionA_02Text02>entrenamientos personalizados</SectionA_02Text02>
                     <br />
                     <br />
-                    En Gonvar descubrirás la manera más fácil, rápida y divertida de convertirte en un aplicador profesional.
-                    Entrenamientos de primer nivel para lograr resultados extraordinarios</h5>
+                    En Gonvar descubrirás la manera más fácil, rápida y divertida de convertirte en un <SectionA_02Text02>aplicador profesional. </SectionA_02Text02>
+                    Entrenamientos de primer nivel para lograr resultados extraordinarios </SectionA_02Text01></p>
                 </Row>
 
               </SectionA_02>
@@ -41,7 +44,9 @@ export const Module1 = (props: IModule1) => {
                   <SectionB_01>
                     <Button01>
                       <Button01Content>
-                        Comienza desde $49
+                        <SectionB_Text>
+                          Comienza desde $49
+                        </SectionB_Text>
                       </Button01Content>
                     </Button01>
                   </SectionB_01>
@@ -50,16 +55,33 @@ export const Module1 = (props: IModule1) => {
                   <SectionB_02>
                     <Button02>
                       <Button02Content>
-                        Ve más cursos <Image src={Img1.src} ></Image>
+                        <SectionB_Text>
+                          Ve más cursos <Image src={Img1.src} ></Image>
+                        </SectionB_Text>
                       </Button02Content>
                     </Button02>
                   </SectionB_02>
                 </Col>
               </SectionB>
               <SectionC>
-                <Col><Image src={Img2.src}></Image>+4700 Alumnos</Col>
-                <Col><Image src={Img3.src}></Image>+250 Cursos</Col>
-                <Col><Image src={Img4.src}></Image>+50 Presenciales</Col>
+                <IconElement>
+                  <IconImageWrapper>
+
+                  </IconImageWrapper>
+                  <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img2.src}></Image>+4700 Alumnos</SectionB_Text>
+                </IconElement>
+                <IconElement>
+                  <IconImageWrapper>
+
+                  </IconImageWrapper>
+                  <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img4.src}></Image>+250 Cursos</SectionB_Text>
+                </IconElement>
+                <IconElement>
+
+                  <SectionB_Text>
+                    <Image style={{ paddingRight: "5px" }} src={Img3.src}></Image>
+                    +50 Presenciales</SectionB_Text>
+                </IconElement>
               </SectionC>
             </Left>
           </LeftWrapper>
@@ -69,7 +91,7 @@ export const Module1 = (props: IModule1) => {
                 <Image style={{
                   height: "auto",
                   width: "100%",
-                  marginTop: "75px"
+                  marginTop: "125px"
                 }}
                   src={Img5.src}></Image>
               </RightImage>

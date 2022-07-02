@@ -21,6 +21,13 @@ import {
   Button01,
   Button02,
   Newtag,
+  Text02,
+  Text01,
+  Text03,
+  Text04,
+  Text05,
+  Text06,
+  TextNew,
 } from "./Module3.styled";
 
 import { IModule3 } from "./IModule3";
@@ -137,13 +144,13 @@ export const Module3 = (props: IModule3) => {
                 <Col>
                   <Row>
                     <Newtag>
-                      <span>{button}</span>
+                      <TextNew>{button}</TextNew>
                     </Newtag>
 
 
                   </Row>
-                  <Row><h2>{title}</h2> </Row>
-                  <Row><h3>{subtitle}</h3> </Row>
+                  <Row><Text02>{title}</Text02> </Row>
+                  <Row><Text01>{subtitle}</Text01> </Row>
                 </Col>
               </SectionLeft02>
             </Left>
@@ -151,7 +158,7 @@ export const Module3 = (props: IModule3) => {
           <Col style={{ background: "linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%)" }}>
             <Right>
               <Row>
-                <SectionRight01><h4>Lo que aprenderas en este curso...</h4></SectionRight01>
+                <SectionRight01><Text01>Lo que aprenderas en este curso...</Text01></SectionRight01>
               </Row>
               <Row>
                 <SectionRight02>
@@ -162,8 +169,8 @@ export const Module3 = (props: IModule3) => {
                       </SectionRight02_01>
 
                       <SectionRight02_02>
-                        <Row>Resultado 1</Row>
-                        <Row>Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Row>
+                        <Row><Text03>Resultado 1</Text03> </Row>
+                        <Row><Text04> Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Text04></Row>
                       </SectionRight02_02>
 
                     </SectionRight02_Wrapper>
@@ -175,8 +182,8 @@ export const Module3 = (props: IModule3) => {
                       </SectionRight02_01>
 
                       <SectionRight02_02>
-                        <Row>Resultado 2</Row>
-                        <Row>Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Row>
+                        <Row><Text03>Resultado 2</Text03> </Row>
+                        <Row><Text04> Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Text04></Row>
                       </SectionRight02_02>
                     </SectionRight02_Wrapper>
                   </Row>
@@ -187,8 +194,8 @@ export const Module3 = (props: IModule3) => {
                       </SectionRight02_01>
 
                       <SectionRight02_02>
-                        <Row>Resultado 3</Row>
-                        <Row>Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Row>
+                        <Row><Text03>Resultado 3</Text03> </Row>
+                        <Row><Text04>Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Text04> </Row>
                       </SectionRight02_02>
                     </SectionRight02_Wrapper>
                   </Row>
@@ -196,7 +203,7 @@ export const Module3 = (props: IModule3) => {
               </Row>
 
               <Row>
-                <SectionRight03>Desde $120.00</SectionRight03>
+                <SectionRight03><Text05>Desde $120.00</Text05></SectionRight03>
               </Row>
 
               <Row>
@@ -205,12 +212,12 @@ export const Module3 = (props: IModule3) => {
 
                     <Col>
                       <Button01>
-                        Ve un adelanto
+                        <Text06 style={{ marginLeft: "10px" }} >Ve un adelanto</Text06>
                       </Button01>
                     </Col>
                     <Col>
                       <Button02>
-                        Más información
+                        <Text06>Más información</Text06>
                       </Button02>
                     </Col>
                   </Row>

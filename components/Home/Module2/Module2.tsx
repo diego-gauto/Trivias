@@ -12,12 +12,15 @@ import { IModule2 } from "./IModule2";
 import {
   IconImage,
   IconText,
+  IconText_B,
   LeftImage,
   RightImage,
   SectionCentered,
   SectionCenteredBackground,
   SectionCenteredTopColumn,
-  SectionCenteredWrapper
+  SectionCenteredWrapper,
+  TitleCenter,
+  TitleCenter2
 } from "./Module2.styled";
 
 export const Module2 = (props: IModule2) => {
@@ -47,7 +50,14 @@ export const Module2 = (props: IModule2) => {
             <Row>
               <Col></Col>
               <SectionCenteredTopColumn>
-                <IconText>La mejor plataforma</IconText>
+                <IconText>
+                  <TitleCenter>
+                    La mejor
+                  </TitleCenter>
+                  <TitleCenter2>
+                    {" "}plataforma
+                  </TitleCenter2>
+                </IconText>
 
               </SectionCenteredTopColumn>
 
@@ -61,7 +71,11 @@ export const Module2 = (props: IModule2) => {
                   </IconImage>
                 </Row>
                 <Row>
-                  <IconText>Lorem ipsum dolor sit</IconText></Row>
+                  <IconText>
+                    <IconText_B>
+                      Lorem ipsum dolor sit
+                    </IconText_B>
+                  </IconText></Row>
               </Col>
               <Col>
                 <Row>
@@ -70,7 +84,11 @@ export const Module2 = (props: IModule2) => {
                   </IconImage>
                 </Row>
                 <Row>
-                  <IconText>Lorem ipsum dolor sit</IconText></Row>
+                  <IconText>
+                    <IconText_B>
+                      Lorem ipsum dolor sit
+                    </IconText_B>
+                  </IconText></Row>
               </Col>
               <Col>
                 <Row>
@@ -79,7 +97,11 @@ export const Module2 = (props: IModule2) => {
                   </IconImage>
                 </Row>
                 <Row>
-                  <IconText>Lorem ipsum dolor sit</IconText></Row>
+                  <IconText>
+                    <IconText_B>
+                      Lorem ipsum dolor sit
+                    </IconText_B>
+                  </IconText></Row>
               </Col>
             </Row>
             <Row>
@@ -90,7 +112,11 @@ export const Module2 = (props: IModule2) => {
                   </IconImage>
                 </Row>
                 <Row>
-                  <IconText>Lorem ipsum dolor sit</IconText></Row>
+                  <IconText>
+                    <IconText_B>
+                      Lorem ipsum dolor sit
+                    </IconText_B>
+                  </IconText></Row>
               </Col>
               <Col>
                 <Row>
@@ -99,7 +125,11 @@ export const Module2 = (props: IModule2) => {
                   </IconImage>
                 </Row>
                 <Row>
-                  <IconText>Lorem ipsum dolor sit</IconText></Row>
+                  <IconText>
+                    <IconText_B>
+                      Lorem ipsum dolor sit
+                    </IconText_B>
+                  </IconText></Row>
               </Col>
               <Col>
                 <Row>
@@ -107,7 +137,11 @@ export const Module2 = (props: IModule2) => {
                     <Image src={Img1.src} ></Image>
                   </IconImage>
                 </Row>
-                <Row><IconText>Lorem ipsum dolor sit</IconText></Row>
+                <Row><IconText>
+                  <IconText_B>
+                    Lorem ipsum dolor sit
+                  </IconText_B>
+                </IconText></Row>
               </Col>
             </Row>
           </SectionCentered>

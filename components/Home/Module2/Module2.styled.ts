@@ -44,6 +44,36 @@ margin-left: 30%
 export const IconText = styled.p  `
 margin-top: 27px;
 text-align: center;
-width: 90%;
-margin-left: 8px;
+width: 100%; 
+`;
+export const IconText_B = styled.p  `
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+ 
+text-align: center;
+`;
+export const TitleCenter = styled.span  `
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 150%;
+ 
+text-align: center;
+`;
+export const TitleCenter2 = styled.span  `
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 150%;
+ color: #6717CD;
+text-align: center;
+@font-face{
+  font-family:Montserrat;
+  src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+} 
 `;
