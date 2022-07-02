@@ -221,6 +221,11 @@ export const PurpleButton2 = styled.button`
   height: 50px;
   border-radius: 30px;
   border:none;
+  &:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const GoogleButton = styled.button`
   display:flex;
@@ -233,6 +238,11 @@ export const GoogleButton = styled.button`
   width:100%;
   border-radius: 30px;
   border:none;
+  &:hover{
+    background-color: #db2c1d;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const FacebookButton = styled.button`
   display:flex;
@@ -245,6 +255,11 @@ export const FacebookButton = styled.button`
   width:100%;
   border-radius: 30px;
   border:none;
+  &:hover{
+    background-color: #0755fd;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const TransparentButton = styled.button`
   background:transparent;
@@ -252,6 +267,10 @@ export const TransparentButton = styled.button`
   height: 50px;
   border-radius: 30px;
   border:1px solid white;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const GoogleIcon = styled.i`
   background-image: url(../images/logo-google.png);
@@ -335,4 +354,5 @@ export const LinkText = styled.span`
   @media (max-width: 670px) {
     font-size: 10px;;
   }
+  cursor:pointer;
 `;

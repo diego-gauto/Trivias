@@ -1,22 +1,34 @@
-import { Container, Navbar } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 import { INavBar } from "./INavBar";
-import { PurpleButton } from "./NavBar.styled";
+import { Logo, NavContainer, NavTags, NavText, PurpleButton } from "./NavBar.styled";
 
 export const NavBar = (props: INavBar) => {
   const { title } = props;
   return (
-    <Container>
-      <Navbar expand="lg" variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="#">{title}</Navbar.Brand>
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              <PurpleButton>Suscribirse Ya</PurpleButton>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </Container>
+    <NavContainer>
+      <Logo />
+      <NavTags>
+        <Link to="/">
+          <NavText>
+            Inicio
+          </NavText>
+        </Link>
+        <NavText>
+          Tienda
+        </NavText>
+        <Link to="/login">
+          <NavText>
+            Iniciar Sesión
+          </NavText>
+        </Link>
+        <Link to="/register">
+          <PurpleButton>
+            Suscribirse Ya
+          </PurpleButton>
+        </Link>
+
+      </NavTags>
+    </NavContainer>
+
   )
 }
