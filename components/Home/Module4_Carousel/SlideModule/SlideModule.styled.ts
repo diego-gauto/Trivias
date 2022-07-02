@@ -9,6 +9,11 @@ export const TextSectionWrapper = styled.div  `
 `;
 
 export const NewTag = styled.div  `
-padding-top: 10px;
-padding-left: 20px;
+margin-top: 9px;
+margin-left: 9px;
+border: 1px solid #FFFFFF;
+border-radius: 10px;
+width: 79px;
+height: 29px;
+text-align: center;
 `;

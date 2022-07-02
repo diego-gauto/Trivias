@@ -6,7 +6,11 @@ import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
 
-import { BackgroundWrapper, Left, Right, SectionA_01, RightImage, SectionB, SectionB_01, SectionB_02, SectionC, SectionA_02, LeftWrapper } from "./Module1.styled";
+import {
+  BackgroundWrapper, Left, Right, SectionA_01,
+  RightImage, SectionB, SectionB_01, SectionB_02,
+  SectionC, SectionA_02, LeftWrapper, Button01, Button02, Button01Content, Button02Content,
+} from "./Module1.styled";
 
 
 export const Module1 = (props: IModule1) => {
@@ -35,12 +39,20 @@ export const Module1 = (props: IModule1) => {
               <SectionB>
                 <Col>
                   <SectionB_01>
-                    <Button>Comienza desde $49</Button>
+                    <Button01>
+                      <Button01Content>
+                        Comienza desde $49
+                      </Button01Content>
+                    </Button01>
                   </SectionB_01>
                 </Col>
                 <Col>
                   <SectionB_02>
-                    <Button>Ve más cursos <Image src={Img1.src} ></Image></Button>
+                    <Button02>
+                      <Button02Content>
+                        Ve más cursos <Image src={Img1.src} ></Image>
+                      </Button02Content>
+                    </Button02>
                   </SectionB_02>
                 </Col>
               </SectionB>

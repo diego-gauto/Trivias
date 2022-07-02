@@ -8,15 +8,36 @@ background-repeat: no-repeat !important ;
 `;
  */
 
+export const Button01 = styled.div  ` 
+background: #6717CD;
+border-radius: 100px;
+width: 157.5px;
+height: 48.7px;
+`;
+export const Button02 = styled.div  ` 
+border: 1px solid #FFFFFF;
+border-radius: 100px;
+width: 157.5px;
+height: 48.7px;  
+`;
+export const Newtag = styled.div  ` 
+border: 1px solid #FFFFFF;
+border-radius: 10px;
+margin-left: 14px;
+margin-bottom: 5px;
+width: 79px;
+height: 29px;
+`;
+
 export const ModuleImage = styled.div  `
  
 `;
 
 export const ImageTag = styled.div  `
- 
+   
 `;
 export const SectionLeft01 = styled.div  `
- height: 302px
+ height: 290px
 `;
 export const SectionLeft02 = styled(Row)  `
  padding-left: 15%;
@@ -37,7 +58,7 @@ export const SectionRight01 = styled.div  `
 padding-top: 65px;
 `;
 export const SectionRight02 = styled.div  `
-padding-top: 50px;
+padding-top: 40px;
 margin-left: 50px;
 `;
 export const SectionRight02_Wrapper = styled(Row)  `
@@ -57,6 +78,7 @@ margin-top: 40px;
 margin-left: 50px;
 `;
 export const SectionRight04 = styled.div  `
-margin-top: 50px;
-margin-left: 50px;
+margin-top: 36px;
+margin-left: 45px;
+width: 90%;
 `;

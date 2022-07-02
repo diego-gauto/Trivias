@@ -17,7 +17,10 @@ import {
   SectionRight02_02,
   SectionRight02_Wrapper,
   SectionRight03,
-  SectionRight04
+  SectionRight04,
+  Button01,
+  Button02,
+  Newtag,
 } from "./Module3.styled";
 
 import { IModule3 } from "./IModule3";
@@ -132,7 +135,13 @@ export const Module3 = (props: IModule3) => {
               <SectionLeft02
               >
                 <Col>
-                  <Row><span>{button}</span></Row>
+                  <Row>
+                    <Newtag>
+                      <span>{button}</span>
+                    </Newtag>
+
+
+                  </Row>
                   <Row><h2>{title}</h2> </Row>
                   <Row><h3>{subtitle}</h3> </Row>
                 </Col>
@@ -194,8 +203,16 @@ export const Module3 = (props: IModule3) => {
                 <SectionRight04>
                   <Row>
 
-                    <Col>Ve un adelanto</Col>
-                    <Col>Más información</Col>
+                    <Col>
+                      <Button01>
+                        Ve un adelanto
+                      </Button01>
+                    </Col>
+                    <Col>
+                      <Button02>
+                        Más información
+                      </Button02>
+                    </Col>
                   </Row>
                 </SectionRight04>
               </Row>
