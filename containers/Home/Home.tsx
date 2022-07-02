@@ -2,6 +2,7 @@ import { NavBar } from "../../components/NavBar/NavBar";
 import { Module1 } from "../../components/Home/Module1/Module1";
 import { Module2 } from "../../components/Home/Module2/Module2";
 import { Module3 } from "../../components/Home/Module3/Module3";
+import { Module5 } from "../../components/Home/Module5/Module5";
 import { Module4_Carousel } from "../../components/Home/Module4_Carousel/Module4_Carousel";
 import { Container } from "react-bootstrap";
 
@@ -104,6 +105,12 @@ const HomeContainer = () => {
           { isNew: false, title: "Uñas creativas 3 B DE-8-22", subtitle: "21 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F6.png?alt=media&token=39f7efdc-7bd4-4c2e-95ce-fe5b8d348ae5" },
         ]
       } />
+
+
+      <Module5>
+      </Module5>
+
+
 
     </Container>
   </>
