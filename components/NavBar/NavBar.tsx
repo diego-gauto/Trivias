@@ -8,7 +8,7 @@ export const NavBar = (props: INavBar) => {
     <NavContainer>
       <Logo />
       <NavTags>
-        <Link to="/">
+        <Link to="/home">
           <NavText>
             Inicio
           </NavText>

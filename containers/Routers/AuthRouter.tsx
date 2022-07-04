@@ -4,6 +4,7 @@ import { Footer } from '../../components/Footer/Footer'
 import { NavBar } from '../../components/NavBar/NavBar'
 import { Login } from '../auth/Login'
 import { Register } from '../auth/Register'
+import { HomeContainer } from '../..//containers/Home/Home'
 
 export const AuthRouter = () => {
   return (
@@ -12,6 +13,7 @@ export const AuthRouter = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/home" component={HomeContainer} />
       </Switch>
       <Footer />
     </>

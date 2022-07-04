@@ -17,7 +17,7 @@ import { Container } from "react-bootstrap";
 //Module 2: Panel de iconos y texto
 //Module 3: Informacion principal del curso y es imagen estatica
 //Module 4: Carrusel de lecciones particulares del curso
-const HomeContainer = () => {
+export const HomeContainer = () => {
   return <>
     <Container
       style={{
@@ -25,7 +25,6 @@ const HomeContainer = () => {
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <NavBar title={"Gonvar Academy"} />
       <Module1 />
       <Module2 />
       <Module3 courseImg={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2FFondo.png?alt=media&token=ee1bc68b-924a-49d0-8278-6f6b2f1adc01"}
@@ -120,4 +119,3 @@ const HomeContainer = () => {
 
 };
 
-export default HomeContainer;
