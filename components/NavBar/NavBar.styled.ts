@@ -6,7 +6,7 @@ export const NavContainer = styled.div`
   width:100%;
   justify-content:space-between;
   background-color:black;
-  padding-block: 30px;
+  padding-block: 10px;
   padding-inline: 20px;
   @font-face{
     font-family:Montserrat;
