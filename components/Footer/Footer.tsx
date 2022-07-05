@@ -57,7 +57,6 @@ const Footer = () => {
             <WAIcon />
           </SocialContainer>
         </FooterIcons>
-
       </FooterContainer>
       <BottomContainer>
         <BottomText>
