@@ -13,9 +13,11 @@ export const NavBar = (props: INavBar) => {
             Inicio
           </NavText>
         </Link>
-        <NavText>
-          Tienda
-        </NavText>
+        <Link to="/profile">
+          <NavText>
+            Tienda
+          </NavText>
+        </Link>
         <Link to="/login">
           <NavText>
             Iniciar Sesión
