@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { INavBar } from "./INavBar";
 import { Logo, NavContainer, NavTags, NavText, PurpleButton } from "./NavBar.styled";
 
-export const NavBar = (props: INavBar) => {
-  const { title } = props;
+const NavBar = () => {
+
   return (
     <NavContainer>
-      <Logo />
+      <Logo src="/images/logo.png" width={130} height={70} />
       <NavTags>
-        <Link to="/">
+        <Link href="/">
           <NavText>
             Inicio
           </NavText>
@@ -16,19 +16,18 @@ export const NavBar = (props: INavBar) => {
         <NavText>
           Tienda
         </NavText>
-        <Link to="/login">
+        <Link href="/auth/Login">
           <NavText>
             Iniciar Sesión
           </NavText>
         </Link>
-        <Link to="/register">
+        <Link href="/auth/Register">
           <PurpleButton>
             Suscribirse Ya
           </PurpleButton>
         </Link>
-
       </NavTags>
     </NavContainer>
-
   )
 }
+export default NavBar;

@@ -16,11 +16,11 @@ import {
   WAIcon
 } from './Footer.styled'
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <>
       <FooterContainer>
-        <Logo2 />
+        <Logo2 src="/images/logo2.png" width={120} height={100} />
         <FooterGroupText>
           <Column1>
             <FooterText>
@@ -71,3 +71,4 @@ export const Footer = () => {
 
   )
 }
+export default Footer;

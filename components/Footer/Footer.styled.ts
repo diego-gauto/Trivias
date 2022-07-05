@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
@@ -6,7 +7,7 @@ export const FooterContainer = styled.div`
   width:100%;
   justify-content:space-between;
   align-items:center;
-  padding-block: 30px;
+  padding-block: 20px;
   padding-inline: 20px;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   @font-face{
@@ -18,11 +19,7 @@ export const FooterContainer = styled.div`
     src:url(../fonts/Nunito-VariableFont_wght.ttf);
   }
 `;
-export const Logo2 = styled.i`
-  background-image: url(../images/logo2.png);
-  background-repeat:no-repeat;
-  width: 100px;
-  height:100px;
+export const Logo2 = styled(Image)`
   cursor:pointer;
 `;
 export const FooterGroupText = styled.div`

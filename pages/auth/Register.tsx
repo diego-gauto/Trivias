@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import NavBar from '../../components/NavBar/NavBar';
 import {
   LoginBox,
   Title,
@@ -17,7 +18,7 @@ import {
   Box2,
   PasswordBox
 } from './Login.styled'
-export const Register = () => {
+const Register = () => {
 
   return (
     <Background>
@@ -95,3 +96,4 @@ export const Register = () => {
     </Background>
   )
 }
+export default Register;
