@@ -18,6 +18,7 @@ export const FooterContainer = styled.div`
     font-family:Nunito;
     src:url(../fonts/Nunito-VariableFont_wght.ttf);
   }
+  
 `;
 export const Logo2 = styled(Image)`
   cursor:pointer;
@@ -59,6 +60,7 @@ export const BottomContainer = styled.div`
   width:100%;
   padding-block: 15px;
   padding-inline: 20px;
+  
 `;
 export const BottomText = styled.p`
   font-size:14px;
