@@ -1,4 +1,5 @@
 import React from 'react'
+import NavBar from '../../components/NavBar/NavBar'
 import {
   LoginBox,
   Title,
@@ -19,7 +20,7 @@ import {
   Box2,
   PasswordBox
 } from './Login.styled'
-export const Login = () => {
+const Login = () => {
   return (
     <Background>
       <LoginBox>
@@ -75,3 +76,4 @@ export const Login = () => {
     </Background>
   )
 }
+export default Login;

@@ -1,11 +1,13 @@
+import Image from "next/image";
 import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
 export const NavContainer = styled.div`
+  position:fixed;
   display:flex;
   width:100%;
   justify-content:space-between;
-  background-color:black;
+  background-color:transparent;
   padding-block: 10px;
   padding-inline: 20px;
   @font-face{
@@ -18,11 +20,7 @@ export const NavTags = styled.div`
   gap:40px;
   align-items:center;
 `;
-export const Logo = styled.i`
-  background-image: url(../images/logo.png);
-  background-repeat:no-repeat;
-  width: 130px;
-  height:70px;
+export const Logo = styled(Image)`
   cursor:pointer;
 `;
 export const NavText = styled.p`
