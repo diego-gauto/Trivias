@@ -8,12 +8,12 @@ const NavBar = () => {
     <NavContainer>
       <Logo src="/images/logo.png" width={130} height={70} />
       <NavTags>
-        <Link href="/home">
+        <Link href="/Screens/Landings">
           <NavText>
             Inicio
           </NavText>
         </Link>
-        <Link href="/profile">
+        <Link href="/Screens/Profile">
           <NavText>
             Tienda
           </NavText>
