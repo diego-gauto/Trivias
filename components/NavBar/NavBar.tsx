@@ -1,33 +1,22 @@
-import Link from "next/link";
+import { Container, Navbar } from "react-bootstrap";
+
 import { INavBar } from "./INavBar";
-import { Logo, NavContainer, NavTags, NavText, PurpleButton } from "./NavBar.styled";
+import { PurpleButton } from "./NavBar.styled";
 
-const NavBar = () => {
-
+export const NavBar = (props: INavBar) => {
+  const { title } = props;
   return (
-    <NavContainer>
-      <Logo src="/images/logo.png" width={130} height={70} />
-      <NavTags>
-        <Link href="/">
-          <NavText>
-            Inicio
-          </NavText>
-        </Link>
-        <NavText>
-          Tienda
-        </NavText>
-        <Link href="/auth/Login">
-          <NavText>
-            Iniciar Sesión
-          </NavText>
-        </Link>
-        <Link href="/auth/Register">
-          <PurpleButton>
-            Suscribirse Ya
-          </PurpleButton>
-        </Link>
-      </NavTags>
-    </NavContainer>
+    <Container>
+      <Navbar expand="lg" variant="light" bg="light">
+        <Container>
+          <Navbar.Brand href="#">{title}</Navbar.Brand>
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+              <PurpleButton>Suscribirse Ya</PurpleButton>
+            </Navbar.Text>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </Container>
   )
 }
-export default NavBar;
