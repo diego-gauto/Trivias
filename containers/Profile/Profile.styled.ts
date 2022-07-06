@@ -1,0 +1,392 @@
+import styled from 'styled-components';
+
+export const BackgroundProfile = styled.div`
+  background:#f4f4f4;
+  background-size:cover;
+  width: 100%;
+  min-height:100vh;
+  height: 100%;
+  display:flex;
+  @font-face{
+    font-family:Montserrat;
+    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  @font-face{
+    font-family:Raleway;
+    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  }
+`;
+export const SecondBox = styled.div`
+  display:flex;
+  flex-direction:column;
+  padding:20px;
+  gap:20px;
+  width:100%;
+`;
+export const ThirdBox = styled.div`
+  display:flex;
+  width:100%;
+  gap:20px;
+`;
+export const ProfileContainer =  styled.div`
+  width:100%;
+  max-width:400px;
+  background:white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+`;
+export const ProfilePayment = styled.div`
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:340px;
+  background:white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius:10px;
+  padding:20px;
+`;
+export const ProfileData = styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+  width:50%;
+  background:white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius:10px;
+  padding:20px;
+`;
+export const ProfileIconContain =  styled.div`
+  display:flex;
+  justify-content:center;
+`;
+export const ProfileIcon = styled.i`
+  background-image: url(../images/Ellipse.png);
+  background-repeat:no-repeat;
+  height: 200px;
+  width: 200px;
+  background-position: center;
+`;
+export const LogOutIcon = styled.i`
+  background-image: url(../images/Logout.png);
+  background-repeat:no-repeat;
+  height: 20px;
+  width: 20px;
+  background-position: center;
+`;
+export const ArrowRight = styled.i`
+  background-image: url(../images/arrowr.png);
+  background-repeat:no-repeat;
+  height: 16px;
+  width: 20px;
+  background-position: center;
+`;
+export const UserContainer = styled.div`
+
+`;
+export const LabelText = styled.label`
+  font-family:'Raleway',sans-serif;
+  font-size:14px;
+`;
+export const UserInfo = styled.p`
+  font-family:'Montserrat',sans-serif;
+  font-size:18px;
+  color:#8E2DE2;
+  font-weight:600;
+  margin:0;
+`;
+export const LogOut = styled.p`
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:'Montserrat',sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: #8E2DE2;
+  margin: auto auto 0 auto;
+  cursor: pointer;
+`;
+export const PaymentTitle = styled.h1`
+  font-family:'Montserrat',sans-serif;
+  font-size: 24px;
+  margin-bottom:20px;
+`;
+export const PaymentBox = styled.div`
+  display:flex;
+  width:100%;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  padding-block:14px;
+  padding-inline:20px;
+  border-radius:10px;
+  justify-content:space-between;
+  align-items:center;
+`;
+export const PayBox = styled.div`
+  display:flex;
+  gap:10px;
+  align-items:center;
+`;
+export const PayContainer = styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+`;
+export const VisaIcon = styled.i`
+  background-image: url(../images/Visa.png);
+  background-repeat:no-repeat;
+  height: 32px;
+  width: 47px;
+  background-position: center;
+`;
+export const PaypalIcon = styled.i`
+  background-image: url(../images/Paypal.png);
+  background-repeat:no-repeat;
+  height: 32px;
+  width: 47px;
+  background-position: center;
+`;
+export const TrashIcon = styled.i`
+  background-image: url(../images/Trash.png);
+  background-repeat:no-repeat;
+  height: 21px;
+  width: 18px;
+  background-position: center;
+`;
+export const PaymentText = styled.p`
+  font-size:16px;
+  font-family:'Montserrat',sans-serif;
+  font-weight: 600;
+  margin:0;
+`;
+export const DeleteText = styled.p`
+  font-size:14px;
+  font-family:'Raleway',sans-serif;
+  font-weight: 400;
+  color: #6717CD;
+  display:flex;
+  gap:5px;
+  cursor:pointer;
+  margin:0;
+  &:hover{
+    font-weight: 600;
+  }
+`;
+export const AddPay = styled.p`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-top:auto;
+  margin-bottom:0;
+  font-size:14px;
+  font-family:'Raleway',sans-serif;
+  font-weight: 700;
+  color: #6717CD;
+  cursor:pointer;
+  &:hover{
+    text-decoration:underline;
+  }
+`;
+export const RewardBox = styled.div`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  gap:10px;
+`;
+export const DataTitle = styled.h1`
+  font-family:'Montserrat',sans-serif;
+  font-size: 24px;
+  margin:0;
+`;
+export const VectorLeft = styled.i`
+  background-image: url(../images/chevronl.png);
+  background-repeat:no-repeat;
+  height: 22px;
+  width: 18px;
+  background-position: center;
+  cursor:pointer;
+`;
+export const VectorRight = styled.i`
+  background-image: url(../images/chevronr.png);
+  background-repeat:no-repeat;
+  height: 22px;
+  width: 18px;
+  background-position: center;
+  cursor:pointer;
+`;
+export const RewardTitle = styled.p`
+  font-size: 18px;
+  font-family:'Montserrat',sans-serif;
+  font-weight: 600;
+  margin:0;
+  text-align:center;
+`
+export const Pointbox = styled.div`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+`;
+export const Currentlvl = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 16px;
+  font-family:'Montserrat',sans-serif;
+  font-weight: 600;
+  color:white;
+  background-color: #6717CD;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-position: center;
+`;
+export const Nextlvl = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 16px;
+  font-family:'Montserrat',sans-serif;
+  font-weight: 600;
+  color:#6717CD;
+  background-color: white;
+  border: 1px solid #6717CD;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-position: center;
+`;
+export const ProgressBar1 = styled.div`
+  height: 7px;
+  background-color:#6717CD;
+  width: 40%;
+  border:1px solid #6717CD;
+  position:relative;
+`;
+export const CompleteBar = styled.div`
+  display:flex;
+  width:100%;
+  height: 8px;
+  max-width:186px;
+  border-radius:5px;
+  border:1px solid #6717CD;
+`;
+export const PointsBox = styled.div`
+  display:flex;
+  flex-direction:column;
+  position: absolute;
+  right: -16px;
+  top: -35px;
+`;
+export const PolygonDown = styled.i`
+  background-image: url(../images/PolygonDown.png);
+  height: 9px;
+  width: 12px;
+  background-repeat:no-repeat;
+`;
+export const UserPoints = styled.p`
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-size: 14px;
+  font-family:'Raleway',sans-serif;
+  font-weight: 400;
+  color: #6717CD;
+  margin:0;
+`;
+export const RewardData = styled.div`
+  display:flex;
+  gap:20px;
+`;
+export const RewardInfo = styled.div`
+  display:flex;
+  margin-top:10px;
+  flex-direction:column;
+  width:100%;
+  gap:15px;
+`;
+export const RewardTitleBox = styled.p`
+  font-size: 14px;
+  font-weight:600;
+  font-family:'Montserrat',sans-serif;
+  margin:0;
+`;
+export const RewardPoints = styled.p`
+  font-size: 12px;
+  opacity:.7;
+  font-family:'Raleway',sans-serif;
+  margin:0;
+`;
+export const RewardParagraph = styled.p`
+  font-size: 12px;
+  font-family:'Raleway',sans-serif;
+  margin:0;
+`;
+export const RewardImage = styled.div`
+  background-color:white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  height: 205px;
+  border-radius:10px;
+  width: 100%;
+`;
+export const AllEditInputs = styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+`;
+export const Inputs = styled.div`
+  display:flex;
+  flex-direction:column;
+`;
+export const EditText = styled.label`
+  font-size: 14px;
+  color: #6717CD;
+  font-family:'Montserrat',sans-serif;
+`;
+export const EditInput = styled.input`
+  font-size: 14px;
+  font-family:'Montserrat',sans-serif;
+  padding:10px 0 10px 20px;
+  border:1px solid #6717CD;
+  border-radius:20px;
+`;
+export const EditButtons = styled.div`
+  display:flex;
+  justify-content:space-between;
+  margin-top:auto;
+`;
+export const SaveButton = styled.button`
+  height: 50px;
+  width: 120px;
+  color: white;
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;
+  border:none;
+  border-radius: 25px;
+  background-color: #6717CD;
+  &:hover{
+    background-color: #5b02cc;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
+export const SubscriptionButton = styled.button`
+  height: 50px;
+  width: 220px;
+  color: #6717CD;
+  font-family:'Montserrat',sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #6717CD;
+  border-radius: 25px;
+  background-color:white;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
+
+
