@@ -38,7 +38,7 @@ export const Column2 = styled.div`
 `;
 export const Column3 = styled.div`
   display:flex;
-  flex-direction:column;
+  flex-direction:column; 
   gap:20px;
 `;
 export const FooterText = styled.p`

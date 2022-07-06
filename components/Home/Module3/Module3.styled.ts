@@ -15,7 +15,7 @@ width: 157.5px;
 height: 48.7px;
 `;
 export const Button02 = styled.div  ` 
-border: 1px solid #FFFFFF;
+border: 1px solid #FFFFFF; 
 border-radius: 100px;
 width: 157.5px;
 height: 48.7px;  

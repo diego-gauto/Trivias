@@ -9,7 +9,7 @@ background-color: white;
 height: 378px;
 z-index: 1;
 position: absolute;
-width: 858.5px;  
+width: 858.5px;   
 background: #FFFFFF;
 box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;

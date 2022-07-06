@@ -1,8 +1,7 @@
 import { Container, Col, Button, Image, Row } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
+import { CardTitle, MainContainer, MasonryBox, MasonryCard, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle } from './Module5.styled'
 
-import Masonry from 'react-masonry-css'
-import styles from "styles.css"
 import {
 
 
@@ -14,20 +13,72 @@ export const Module5 = (props: IModule5) => {
 
   return (
     <Container>
-      <div>
-        hola
-        <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column">
-          {/* array of JSX items */}
-          <div className="test">My Element</div>
-          <div className="test">My Element</div>
-          <div className="test">My Element</div>
-          <div className="test">My Element</div>
-        </Masonry>
+      <MasonryBox>
+        <MasonryTitle>
+          Experiencias de &nbsp;
+          <MasonrySpan>
+            nuestros clientes
+          </MasonrySpan>
+        </MasonryTitle>
+      </MasonryBox>
 
-      </div>
-    </Container >
+      <MasonryContent>
+        {/* Ejemplo Masonry */}
+        <MasonryCard>
+          <CardTitle>
+            Luke Skywalker
+          </CardTitle>
+          <MasonryImage src="/images/nail1.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Han Solo
+          </CardTitle>
+          <MasonryImage src="/images/nail2.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Obi-Wan Kenobi
+          </CardTitle>
+          <MasonryImage src="/images/nail3.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Luke Skywalker
+          </CardTitle>
+          <MasonryImage src="/images/nail1.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Han Solo
+          </CardTitle>
+          <MasonryImage src="/images/nail2.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Obi-Wan Kenobi
+          </CardTitle>
+          <MasonryImage src="/images/nail3.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Luke Skywalker
+          </CardTitle>
+          <MasonryImage src="/images/nail1.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Han Solo
+          </CardTitle>
+          <MasonryImage src="/images/nail2.png" />
+        </MasonryCard>
+        <MasonryCard>
+          <CardTitle>
+            Obi-Wan Kenobi
+          </CardTitle>
+          <MasonryImage src="/images/nail3.png" />
+        </MasonryCard>
+      </MasonryContent>
+    </ Container >
   )
 }

@@ -10,7 +10,7 @@ export const NavContainer = styled.div`
   background-color:transparent;
   padding-block: 10px;
   padding-inline: 20px;
-  @font-face{
+  @font-face{ 
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
@@ -31,7 +31,7 @@ export const NavText = styled.p`
   cursor:pointer;
   margin:0;
   &:hover{
-    text-decoration:underline;
+    text-decoration:underline; 
   }
 `;
 export const PurpleButton = styled.button`

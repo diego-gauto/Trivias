@@ -17,7 +17,7 @@ export const MasonryContainer = styled.div`
   display:flex;
   flex-direction:column;
   justify-content:center;
-  position:absolute;  
+  position:absolute;   
   margin-top:200px;
   background-color:white;
   width:100%;

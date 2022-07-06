@@ -6,7 +6,6 @@ import { Module3 } from '../../components/Home/Module3/Module3';
 import { Module4_Carousel } from '../../components/Home/Module4_Carousel/Module4_Carousel';
 import { Module5 } from '../../components/Home/Module5/Module5';
 import { Module6 } from '../../components/Home/Module6/Module6';
-import { CardTitle, MainContainer, MasonryBox, MasonryCard, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle } from './Landings.styled'
 
 const Landings = () => {
   return (
@@ -112,76 +111,6 @@ const Landings = () => {
 
 
 
-
-      {/* Masonry- Experiencia con nuestros clientes */}
-      <MasonryContainer>
-        <MasonryBox>
-          <MasonryTitle>
-            Experiencias de &nbsp;
-            <MasonrySpan>
-              nuestros clientes
-            </MasonrySpan>
-          </MasonryTitle>
-        </MasonryBox>
-
-        <MasonryContent>
-          {/* Ejemplo Masonry */}
-          <MasonryCard>
-            <CardTitle>
-              Luke Skywalker
-            </CardTitle>
-            <MasonryImage src="/images/nail1.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Han Solo
-            </CardTitle>
-            <MasonryImage src="/images/nail2.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Obi-Wan Kenobi
-            </CardTitle>
-            <MasonryImage src="/images/nail3.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Luke Skywalker
-            </CardTitle>
-            <MasonryImage src="/images/nail1.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Han Solo
-            </CardTitle>
-            <MasonryImage src="/images/nail2.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Obi-Wan Kenobi
-            </CardTitle>
-            <MasonryImage src="/images/nail3.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Luke Skywalker
-            </CardTitle>
-            <MasonryImage src="/images/nail1.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Han Solo
-            </CardTitle>
-            <MasonryImage src="/images/nail2.png" />
-          </MasonryCard>
-          <MasonryCard>
-            <CardTitle>
-              Obi-Wan Kenobi
-            </CardTitle>
-            <MasonryImage src="/images/nail3.png" />
-          </MasonryCard>
-        </MasonryContent>
-      </MasonryContainer>
     </Container>
   )
 }

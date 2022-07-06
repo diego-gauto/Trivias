@@ -9,7 +9,7 @@ export const SectionC = styled(Row)  `
 margin-top: 40px;
 `;
 export const LeftWrapper = styled(Col)  `
-
+ 
 `;
 export const Left = styled.div  `
 margin-left: 50px;
