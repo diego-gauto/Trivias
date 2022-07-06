@@ -7,9 +7,9 @@ import {
 
 } from "./Module6.styled";
 
-import { IModule5 } from "./IModule6";
+import { IModule6 } from "./IModule6";
 
-export const Module5 = (props: IModule5) => {
+export const Module6 = (props: IModule6) => {
 
   return (
     <Container>

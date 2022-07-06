@@ -21,9 +21,9 @@ import Landings from "../../pages/Screens/Landings";
 //Module 4: Carrusel de lecciones particulares del curso
 export const HomeContainer = () => {
   return <>
-  
-  <Landings />
-    <Container
+
+    <Landings />
+    {/* <Container
       style={{
         width: "100%",
         padding: "0",
@@ -120,7 +120,7 @@ export const HomeContainer = () => {
 
 
 
-    </Container>
+    </Container> */}
   </>
 
 
