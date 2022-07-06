@@ -1,14 +1,14 @@
-import React from "react";
-import { ReactElement } from "react";
-import Landings from "../../pages/Screens/Landings";
+import { NavBar } from "../../components/NavBar/NavBar";
+
 /**
  * The home page.
  * @returns {ReactElement} The home page.
  */
 const HomeContainer = () => {
   return <>
-    <Landings />
+    <NavBar title={"Gonvar Academy"} />
   </>
+
 };
 
 export default HomeContainer;
