@@ -6,14 +6,14 @@ export const MainContainer = styled.div`
   background-repeat:no-repeat;
   background-size: cover;
   width: 100%;
-  min-height:100vh;
-  height: 100%;
+  height:100vh;
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
 `;
 export const MasonryContainer = styled.div`
+
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -41,6 +41,7 @@ export const MasonryContent = styled.div`
   display: column;
   columns:3;
   gap:20px;
+  margin-bottom:10px;
 `;
 export const MasonryImage = styled.img`
   width:100%;
