@@ -16,7 +16,7 @@ position: relative;
     -webkit-transform: rotate(-185deg);
     -ms-transform: rotate(-185deg);
     transform: rotate(-185deg);
-    margin-left: -5%;  
+    margin-left: -5%;   
     bottom: 130px;
     z-index: -1;
 `;
@@ -25,7 +25,7 @@ export const ContainerMain = styled.div  `
 padding-bottom: 78px;
 position: inherit; 
 width: 1200px;
-margin-top: 20px;  
+margin-top: -240px;  
 margin-left: 20%; 
 z-index: -1;
 `; 

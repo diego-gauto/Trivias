@@ -34,8 +34,8 @@ export const Column1 = styled.div`
 `;
 export const Column2 = styled.div`
   display:flex;
-  flex-direction:column;
-  gap:20px; 
+  flex-direction:column; 
+  gap:20px;  
 `;
 export const Column3 = styled.div`
   display:flex;
