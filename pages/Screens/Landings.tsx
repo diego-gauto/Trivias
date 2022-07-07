@@ -106,12 +106,19 @@ const Landings = () => {
       <Module5>
       </Module5>
 
-      <Module6>
-      </Module6>
+      <Module6 slideData={
+        [
+          { isNew: false, title: "Manicure Avanzado DE-8-22", subtitle: "28 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F1.png?alt=media&token=e683e4d0-1b42-4a96-a414-4701eb93ddb3" },
+          { isNew: false, title: "Uñas creativas 1 A DE-8-22", subtitle: "12 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F2.png?alt=media&token=1db92e92-bf90-4bf0-8995-627148736553" },
+          { isNew: false, title: "Introducción a la Manicure DE-8-22", subtitle: "10 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F3.png?alt=media&token=5515c17a-3dd2-4197-945a-0d3fe3efe9e1" },
+          { isNew: false, title: "Introducción a la Manicure 2 DE-8-22", subtitle: "99 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F4.png?alt=media&token=ff1f4630-7652-47f4-b758-90bb7751f3e2" },
+          { isNew: true, title: "Uñas creativas 2 B DE-8-22", subtitle: "6 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F5.png?alt=media&token=33be20ca-bb9a-4d6d-879a-fe9417d8fe70" },
+          { isNew: false, title: "Uñas creativas 3 B DE-8-22", subtitle: "21 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F6.png?alt=media&token=39f7efdc-7bd4-4c2e-95ce-fe5b8d348ae5" },
+        ]
+      } />
 
 
-
-    </Container>
+    </Container >
   )
 }
 export default Landings;

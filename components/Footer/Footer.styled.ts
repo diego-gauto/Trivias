@@ -24,7 +24,7 @@ export const Logo2 = styled(Image)`
 `;
 export const FooterGroupText = styled.div`
   display:flex;
-  gap:100px;
+  gap:100px; 
 `;
 export const Column1 = styled.div`
   display:flex;
@@ -34,12 +34,12 @@ export const Column1 = styled.div`
 export const Column2 = styled.div`
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:20px; 
 `;
 export const Column3 = styled.div`
   display:flex;
-  flex-direction:column; 
-  gap:20px;
+  flex-direction:column;  
+  gap:20px; 
 `;
 export const FooterText = styled.p`
   font-size:18px;
