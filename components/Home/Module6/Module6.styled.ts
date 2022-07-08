@@ -9,27 +9,34 @@ background-repeat: no-repeat !important ;
  */
  
 export const Divisor = styled.div  ` 
-position: relative; 
-    width: 110%;
-    height: 200px;
+position: absolute;
+    width: 110%; 
+    height: 270px;
     background: white;
-    -webkit-transform: rotate(-185deg); 
-    -ms-transform: rotate(-185deg);
-    transform: rotate(-185deg);
+    transform: rotate(-185deg); 
     margin-left: -5%;
-    bottom: 130px;
-    z-index: -1; 
+    bottom: 570px;
+    z-index: 2;
+}
 `;
  
 export const ContainerMain = styled.div  ` 
 padding-bottom: 78px; 
 position: inherit; 
 width: 1200px;
-margin-top: -400px;  
+margin-top: -400px; 
 z-index: -1;
 `; 
 export const SliderContainer = styled.div  `
 
+`; 
+export const AnimatedBackground = styled.video  `
+width: 100%;
+height: auto;
+transform: rotate(0deg);
+position: absolute;
+z-index: -2;
+bottom: 0%;
 `; 
 export const SliderContainerChild = styled.div  ` 
 background-color: rebeccapurple;

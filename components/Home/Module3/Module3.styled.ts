@@ -11,7 +11,7 @@ background-repeat: no-repeat !important ;
 export const Button01 = styled.div  ` 
 background: #6717CD;
 border-radius: 100px;
-width: 157.5px;
+width: 157.5px; 
 height: 48.7px; 
 `;
 export const Button02 = styled.div  ` 

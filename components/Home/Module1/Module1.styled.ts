@@ -1,4 +1,4 @@
-import { Button,Row, Col } from "react-bootstrap";
+ import { Button,Row, Col } from "react-bootstrap";
 import styled from 'styled-components';
 
 

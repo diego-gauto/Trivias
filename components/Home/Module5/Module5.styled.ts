@@ -17,7 +17,7 @@ export const  Container = styled.div`
 export const MasonryContainer = styled.div`
 padding-top: 125px:
   display:flex;
-  flex-direction:column;
+  flex-direction:column; 
   justify-content:center; 
   position:absolute;   
   margin-top:200px;
