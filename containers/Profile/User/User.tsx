@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal1 from './Modal1/Modal1';
+import Modal2 from './Modal2/Modal2';
 import {
   AddPay,
   ArrowRight,
@@ -50,9 +52,18 @@ import {
   EditButtons,
   SaveButton,
   SubscriptionButton,
-} from '../Profile/Profile.styled'
+  DeleteContain,
+} from '../../Profile/User/User.styled'
 
-export const Profile = () => {
+
+const User = () => {
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
+  const [show2, setShow2] = useState(false);
+  const handleShow2 = () => setShow2(true);
+
   return (
     <BackgroundProfile>
       {/* FIRST BOX */}
@@ -111,10 +122,12 @@ export const Profile = () => {
                   Visa terminada en 1486
                 </PaymentText>
               </PayBox>
-              <DeleteText>
-                Eliminar método
+              <DeleteContain>
+                <DeleteText>
+                  Eliminar método
+                </DeleteText>
                 <TrashIcon />
-              </DeleteText>
+              </DeleteContain>
             </PaymentBox>
             <PaymentBox>
               <PayBox>
@@ -123,13 +136,15 @@ export const Profile = () => {
                   Paypal Mofupiyo
                 </PaymentText>
               </PayBox>
-              <DeleteText>
-                Eliminar método
+              <DeleteContain>
+                <DeleteText>
+                  Eliminar método
+                </DeleteText>
                 <TrashIcon />
-              </DeleteText>
+              </DeleteContain>
             </PaymentBox>
           </PayContainer>
-          <AddPay>
+          <AddPay onClick={handleShow}>
             Añadir método de pago
           </AddPay>
         </ProfilePayment>
@@ -215,7 +230,7 @@ export const Profile = () => {
               </Inputs>
             </AllEditInputs>
             <EditButtons>
-              <SubscriptionButton>
+              <SubscriptionButton onClick={handleShow2}>
                 Cambiar Suscripción
               </SubscriptionButton>
               <SaveButton>
@@ -225,6 +240,9 @@ export const Profile = () => {
           </ProfileData>
         </ThirdBox>
       </SecondBox>
+      <Modal1 show={show} setShow={setShow} />
+      <Modal2 show={show2} setShow={setShow2} />
     </BackgroundProfile>
   )
 }
+export default User;

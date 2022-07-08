@@ -342,7 +342,7 @@ export const Text3 = styled.p`
   margin:0;
   opacity: .8;
   @media (max-width: 670px) {
-    font-size: 10px;;
+    font-size: 10px;
   }
 `;
 export const LinkText = styled.span`
@@ -352,7 +352,7 @@ export const LinkText = styled.span`
   color: #fff;
   text-decoration: underline;
   @media (max-width: 670px) {
-    font-size: 10px;;
+    font-size: 10px;
   }
   cursor:pointer;
 `;

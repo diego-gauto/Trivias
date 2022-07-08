@@ -4,7 +4,7 @@ export const BackgroundProfile = styled.div`
   background:#f4f4f4;
   background-size:cover;
   width: 100%;
-  min-height:100vh;
+  min-height:70vh;
   height: 100%;
   display:flex;
   @font-face{
@@ -27,6 +27,9 @@ export const ThirdBox = styled.div`
   display:flex;
   width:100%;
   gap:20px;
+  @media (max-width: 1023px) {
+    flex-wrap:wrap;
+  }
 `;
 export const ProfileContainer =  styled.div`
   width:100%;
@@ -37,6 +40,9 @@ export const ProfileContainer =  styled.div`
   display:flex;
   flex-direction:column;
   gap:20px;
+  @media (max-width: 1023px) {
+    display:none
+  }
 `;
 export const ProfilePayment = styled.div`
   display:flex;
@@ -47,6 +53,9 @@ export const ProfilePayment = styled.div`
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius:10px;
   padding:20px;
+  @media (max-width: 1023px) {
+    order:3;
+  }
 `;
 export const ProfileData = styled.div`
   display:flex;
@@ -57,6 +66,9 @@ export const ProfileData = styled.div`
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius:10px;
   padding:20px;
+  @media (max-width: 1023px) {
+    width:100%;
+  }
 `;
 export const ProfileIconContain =  styled.div`
   display:flex;
@@ -122,6 +134,10 @@ export const PaymentBox = styled.div`
   border-radius:10px;
   justify-content:space-between;
   align-items:center;
+  @media (max-width: 510px) {
+    padding-block: 10px;
+    padding-inline: 10px;
+  }
 `;
 export const PayBox = styled.div`
   display:flex;
@@ -159,18 +175,26 @@ export const PaymentText = styled.p`
   font-family:'Montserrat',sans-serif;
   font-weight: 600;
   margin:0;
+  @media (max-width: 510px) {
+    font-size:12px;
+  }
+`;
+export const DeleteContain = styled.div`
+  display:flex;
+  gap:5px;
+  cursor:pointer;
 `;
 export const DeleteText = styled.p`
   font-size:14px;
   font-family:'Raleway',sans-serif;
   font-weight: 400;
   color: #6717CD;
-  display:flex;
-  gap:5px;
-  cursor:pointer;
   margin:0;
   &:hover{
     font-weight: 600;
+  }
+  @media (max-width: 600px) {
+    display:none;
   }
 `;
 export const AddPay = styled.p`
@@ -195,11 +219,17 @@ export const RewardBox = styled.div`
   align-items:center;
   width:100%;
   gap:10px;
+  @media (max-width: 400px) {
+    gap: 5px
+  }
 `;
 export const DataTitle = styled.h1`
   font-family:'Montserrat',sans-serif;
   font-size: 24px;
   margin:0;
+  @media (max-width: 400px) {
+    font-size: 18px;
+  }
 `;
 export const VectorLeft = styled.i`
   background-image: url(../images/chevronl.png);
@@ -223,6 +253,9 @@ export const RewardTitle = styled.p`
   font-weight: 600;
   margin:0;
   text-align:center;
+  @media (max-width: 400px) {
+    font-size: 14px;
+  }
 `
 export const Pointbox = styled.div`
   display:flex;
@@ -300,6 +333,13 @@ export const UserPoints = styled.p`
 export const RewardData = styled.div`
   display:flex;
   gap:20px;
+  @media (max-width: 1023px) {
+    flex-direction:column;
+    padding-inline:60px;
+  }
+  @media (max-width: 400px) {
+    padding-inline:20px;
+  }
 `;
 export const RewardInfo = styled.div`
   display:flex;
@@ -307,6 +347,9 @@ export const RewardInfo = styled.div`
   flex-direction:column;
   width:100%;
   gap:15px;
+  @media (max-width: 1023px) {
+    text-align:center;
+  }
 `;
 export const RewardTitleBox = styled.p`
   font-size: 14px;
@@ -324,6 +367,9 @@ export const RewardParagraph = styled.p`
   font-size: 12px;
   font-family:'Raleway',sans-serif;
   margin:0;
+  @media (max-width: 1023px) {
+    display:none;
+  }
 `;
 export const RewardImage = styled.div`
   background-color:white;
@@ -357,6 +403,11 @@ export const EditButtons = styled.div`
   display:flex;
   justify-content:space-between;
   margin-top:auto;
+  @media (max-width: 1023px) {
+    flex-direction:column;
+    gap:10px;
+    align-items:center;
+  }
 `;
 export const SaveButton = styled.button`
   height: 50px;
@@ -371,6 +422,12 @@ export const SaveButton = styled.button`
     background-color: #5b02cc;
     transform:scale(1.03);
     transition:.5s ease all;
+  }
+  @media (max-width: 1023px) {
+    width: 60%;
+  }
+  @media (max-width: 400px) {
+    font-size:12px;
   }
 `;
 export const SubscriptionButton = styled.button`
@@ -387,6 +444,10 @@ export const SubscriptionButton = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
+  @media (max-width: 1023px) {
+    width: 60%;
+  }
+  @media (max-width: 400px) {
+    font-size:12px;
+  }
 `;
-
-
