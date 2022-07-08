@@ -1,11 +1,8 @@
 import { Container, Col, Button, Image, Row } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
-import { CardTitle, Col_Table, MasonryBox, MasonryCard, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table } from './Module5.styled'
-
-import {
+import { CardTitle, Col_Table, DecoImage, DecoImageWrapper, MasonryBox, MasonryCard, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table } from './Module5.styled'
 
 
-} from "./Module5.styled";
 
 import { IModule5 } from "./IModule5";
 
@@ -26,6 +23,9 @@ export const Module5 = (props: IModule5) => {
   return (
     <Container style={{ paddingTop: "75px" }}>
       <MasonryBox>
+        <DecoImageWrapper>
+          <DecoImage src="/images/mancha1.png" width={340} height={400}></DecoImage>
+        </DecoImageWrapper>
         <MasonryTitle>
           Experiencias de
           <MasonrySpan>

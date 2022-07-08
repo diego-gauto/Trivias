@@ -1,15 +1,15 @@
 import Image from "next/image";
 import styled from "styled-components";
-import {Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap"; 
 
 export const  Container = styled.div`
   background-image: url(../images/background.png);
   background-repeat:no-repeat;
   background-size: cover;
   width: 100%;
-  min-height:100vh; 
+  min-height:100vh;  
   height: 100%;
-  @font-face{ 
+  @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
@@ -116,10 +116,20 @@ export const MasonryCardAlignA = styled.div`
 
 `;
 export const MasonryCardAlignB = styled.div`
-bottom: 80px;
+bottom: 80px; 
 position: relative;
 `;
 export const CardTitle = styled.h1`
   font-family:'Montserrat',sans-serif;
   font-size: 18px;
+`;
+export const DecoImage = styled(Image)`  
+width: 100% !important; 
+height: auto !important;
+`;
+
+export const DecoImageWrapper = styled.div`
+margin-left: -1510px;
+position: absolute;
+margin-top: 460px;
 `;

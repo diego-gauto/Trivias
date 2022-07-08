@@ -16,10 +16,6 @@ const Landings = () => {
         padding: "0",
         maxWidth: "100% !important",
       }}>
-
-
-
-
       <Module1 />
       <Module2 />
       <Module3 courseImg={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2FFondo.png?alt=media&token=ee1bc68b-924a-49d0-8278-6f6b2f1adc01"}
@@ -108,12 +104,13 @@ const Landings = () => {
 
       <Module6 slideData={
         [
-          { isNew: false, title: "Manicure Avanzado DE-8-22", subtitle: "28 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F1.png?alt=media&token=e683e4d0-1b42-4a96-a414-4701eb93ddb3" },
-          { isNew: false, title: "Uñas creativas 1 A DE-8-22", subtitle: "12 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F2.png?alt=media&token=1db92e92-bf90-4bf0-8995-627148736553" },
-          { isNew: false, title: "Introducción a la Manicure DE-8-22", subtitle: "10 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F3.png?alt=media&token=5515c17a-3dd2-4197-945a-0d3fe3efe9e1" },
-          { isNew: false, title: "Introducción a la Manicure 2 DE-8-22", subtitle: "99 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F4.png?alt=media&token=ff1f4630-7652-47f4-b758-90bb7751f3e2" },
-          { isNew: true, title: "Uñas creativas 2 B DE-8-22", subtitle: "6 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F5.png?alt=media&token=33be20ca-bb9a-4d6d-879a-fe9417d8fe70" },
-          { isNew: false, title: "Uñas creativas 3 B DE-8-22", subtitle: "21 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F6.png?alt=media&token=39f7efdc-7bd4-4c2e-95ce-fe5b8d348ae5" },
+          { isNew: false, title: "Gonvar Nails Cover B0Z14", subtitle: "Desde $ 25.25", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F1.png?alt=media&token=9492ee18-b03e-420e-b4a5-13820f15d1c2" },
+          { isNew: false, title: "Gonvar Nails Leonardo Da Vinci", subtitle: "Desde $ 12.00", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F2.png?alt=media&token=db67c8ab-3258-40ac-bf35-c2547fc6a019" },
+
+          { isNew: false, title: "Gonvar Nails Monómero", subtitle: "Desde $ 18.99", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F3.png?alt=media&token=c779235b-155c-4d94-a883-812be9398103" },
+          { isNew: false, title: "Gonvar Nails Aristoteles", subtitle: "Desde $ 20.00", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F4.png?alt=media&token=95481926-eae5-4a6b-a219-4493f0d81fca" },
+          { isNew: true, title: "Gonvar Nails Miguel Ángel", subtitle: "Desde $ 8.00", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F5.png?alt=media&token=24e34731-aa96-4ad3-8254-6f7e8f7530f5" },
+          { isNew: false, title: "Gonvar Nails Máscara 9570-A", subtitle: "Desde $ 16.50", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F6.png?alt=media&token=0cae5f47-e0ea-4c5d-9359-b404c043b278" },
         ]
       } />
 

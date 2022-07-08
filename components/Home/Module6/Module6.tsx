@@ -8,7 +8,7 @@ import Masonry from 'react-masonry-css'
 import { ContainerMain, Divisor, SliderContainer, SliderContainerChild } from "./Module6.styled";
 
 import { IModule6 } from "./IModule6";
-import { SlideModule } from "../Module4_Carousel/SlideModule/SlideModule";
+import { SlideModule } from "./SlideModule/SlideModule";
 
 export const Module6 = (props: IModule6) => {
 
@@ -19,10 +19,16 @@ export const Module6 = (props: IModule6) => {
 
 
 
+
   var settings = {
     centerMode: true,
     centerPadding: '60px',
     slidesToShow: 3,
+    focusOnSelect: true,
+    infinite: true,
+    pauseOnFocus: true,
+    autoplay: true,
+    autoplaySpeed: 1750,
     responsive: [
       {
         breakpoint: 768,
@@ -48,7 +54,7 @@ export const Module6 = (props: IModule6) => {
   return (
     <Container>
       <ContainerMain id="MainSliderCentered">
-        <div style={{ position: "relative", bottom: "-600px" }}>
+        <div style={{ position: "relative", bottom: "-650px" }}>
           <Slider {...settings} >
             {slideDataArr.map((element) => (
               <div key={element.title + "_ID"}  >

@@ -23,16 +23,17 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     infinite: isInfinite,
     speed: 200,
     slidesToShow: 3.5,
-    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1750,
+    pauseOnFocus: true,
+    swipeToSlide: true,
 
     centerMode: true,
     centerPadding: '40px',
   };
   return (
     <Container>
-      <Slider {...settings}>
+      <Slider {...settings} >
         {slideDataArr.map((element) => (
           <div key={element.title + "_ID"}  >
             <SlideModule isNew={element.isNew} title={element.title} subtitle={element.subtitle} imgURL={element.imgURL}></SlideModule>

@@ -9,23 +9,23 @@ background-repeat: no-repeat !important ;
  */
  
 export const Divisor = styled.div  ` 
-position: relative;
+position: relative; 
     width: 110%;
     height: 200px;
     background: white;
     -webkit-transform: rotate(-185deg); 
     -ms-transform: rotate(-185deg);
     transform: rotate(-185deg);
-    margin-left: -5%;   
+    margin-left: -5%;
     bottom: 130px;
-    z-index: -1;
+    z-index: -1; 
 `;
  
 export const ContainerMain = styled.div  ` 
 padding-bottom: 78px; 
 position: inherit; 
 width: 1200px;
-margin-top: -240px;  
+margin-top: -400px;  
 z-index: -1;
 `; 
 export const SliderContainer = styled.div  `
@@ -35,5 +35,5 @@ export const SliderContainerChild = styled.div  `
 background-color: rebeccapurple;
 z-index: -1;
 position: relative;
-height: 700px;
+height: 650px;
 `; 

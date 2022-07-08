@@ -14,7 +14,7 @@ export const FooterContainer = styled.div`
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
   }
-  @font-face{
+  @font-face{ 
     font-family:Nunito;
     src:url(../fonts/Nunito-VariableFont_wght.ttf);
   }
