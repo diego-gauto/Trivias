@@ -12,7 +12,7 @@ import {
   SectionC, SectionA_02, LeftWrapper, Button01, Button02,
   Button01Content, Button02Content, SectionA_01Text01,
   SectionA_01Text02, SectionA_02Text01, SectionA_02Text02,
-  SectionB_Text, IconElement, IconImageWrapper
+  SectionB_Text, IconElement, IconImageWrapper, AnimatedBackground, BlurWindow, SectionB_TextALT1
 } from "./Module1.styled";
 
 
@@ -22,6 +22,7 @@ export const Module1 = (props: IModule1) => {
       <BackgroundWrapper>
         <Row>
           <LeftWrapper>
+
             <Left>
 
               <SectionA_01>
@@ -78,12 +79,17 @@ export const Module1 = (props: IModule1) => {
                 </IconElement>
                 <IconElement>
 
-                  <SectionB_Text>
+                  <SectionB_TextALT1>
                     <Image style={{ paddingRight: "5px" }} src={Img3.src}></Image>
-                    +50 Presenciales</SectionB_Text>
+                    +50 Presenciales</SectionB_TextALT1>
                 </IconElement>
               </SectionC>
+              <BlurWindow></BlurWindow>
+              <AnimatedBackground width="320" height="240" autoPlay muted loop >
+                <source src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FAnimatedColors.mp4?alt=media&token=94a7f4cc-9efb-4a74-be52-67674970e026" type="video/mp4"></source>
+              </AnimatedBackground>
             </Left>
+
           </LeftWrapper>
           <Col>
             <Right>
@@ -91,7 +97,8 @@ export const Module1 = (props: IModule1) => {
                 <Image style={{
                   height: "auto",
                   width: "100%",
-                  marginTop: "125px"
+                  marginTop: "125px",
+                  marginLeft: "15px"
                 }}
                   src={Img5.src}></Image>
               </RightImage>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
-export const NavContainer = styled.div` 
+export const NavContainer = styled.div`
   position:fixed;
   z-index: 1;
   display:flex;

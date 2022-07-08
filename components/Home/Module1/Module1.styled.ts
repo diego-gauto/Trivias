@@ -15,6 +15,26 @@ export const Left = styled.div  `
 margin-left: 50px;
 width: 90 %; 
 `; 
+export const AnimatedBackground = styled.video  `
+width: auto;
+    height: 780px;
+    position: absolute;
+    top: 0;
+    z-index: -2;
+    margin-left: -80px;
+`; 
+ //filter: blur(40px);
+export const BlurWindow = styled.div  `
+opacity: 0.25; 
+ z-index: -1;
+box-shadow: 0px 0px 20px 4px rgb(0 0 0 / 25%);
+background-color: #FFFFFF;
+width: 650px;
+height: 780px;
+position: absolute;
+top: 0;
+margin-left: -80px;
+`; 
 export const Right = styled.div  ` 
 width: 115%;
 `;
@@ -33,9 +53,9 @@ export const Button02Content = styled.div  `
 export const Button01Content = styled.div  ` 
     padding-top: 15px;
 `;
-
+//background: #CEEFDA;
 export const BackgroundWrapper = styled.div  `
-background-color: rebeccapurple;
+
 padding-bottom: 80px;
 padding-top: 40px;
 `;
@@ -124,6 +144,20 @@ font-style: normal;
 font-weight: 600;
 font-size: 18px;
 line-height: 150%;
+@font-face{
+  font-family:Montserrat;
+  src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+color: #FFFFFF;
+}
+`;
+export const SectionB_TextALT1 = styled.span  `
+font-style: normal; 
+font-weight: 600;
+font-size: 18px;
+line-height: 150%;
+margin-left: -25px;
 @font-face{
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
