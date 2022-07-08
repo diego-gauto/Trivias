@@ -13,7 +13,7 @@ position: relative;
     width: 110%;
     height: 200px;
     background: white;
-    -webkit-transform: rotate(-185deg);
+    -webkit-transform: rotate(-185deg); 
     -ms-transform: rotate(-185deg);
     transform: rotate(-185deg);
     margin-left: -5%;   
@@ -22,11 +22,10 @@ position: relative;
 `;
  
 export const ContainerMain = styled.div  ` 
-padding-bottom: 78px;
+padding-bottom: 78px; 
 position: inherit; 
 width: 1200px;
 margin-top: -240px;  
-margin-left: 20%; 
 z-index: -1;
 `; 
 export const SliderContainer = styled.div  `

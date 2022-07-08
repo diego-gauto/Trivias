@@ -30,7 +30,7 @@ export const FooterGroupText = styled.div`
 export const Column1 = styled.div`
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:20px; 
 `;
 export const Column2 = styled.div`
   display:flex;

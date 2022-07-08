@@ -8,7 +8,7 @@ export const  Container = styled.div`
   background-size: cover;
   width: 100%;
   min-height:100vh; 
-  height: 100%;  
+  height: 100%;
   @font-face{ 
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);

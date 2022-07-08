@@ -46,24 +46,26 @@ export const Module6 = (props: IModule6) => {
   };
 
   return (
-    <ContainerMain id="MainSliderCentered">
-      <div style={{ position: "relative", bottom: "-600px" }}>
-        <Slider {...settings} >
-          {slideDataArr.map((element) => (
-            <div key={element.title + "_ID"}  >
-              <SlideModule isNew={element.isNew} title={element.title} subtitle={element.subtitle} imgURL={element.imgURL}></SlideModule>
-            </div>
-          ))}
+    <Container>
+      <ContainerMain id="MainSliderCentered">
+        <div style={{ position: "relative", bottom: "-600px" }}>
+          <Slider {...settings} >
+            {slideDataArr.map((element) => (
+              <div key={element.title + "_ID"}  >
+                <SlideModule isNew={element.isNew} title={element.title} subtitle={element.subtitle} imgURL={element.imgURL}></SlideModule>
+              </div>
+            ))}
 
 
 
-        </Slider>
-      </div>
+          </Slider>
+        </div>
 
-      <SliderContainerChild>
-        <Divisor></Divisor>
+        <SliderContainerChild>
+          <Divisor></Divisor>
 
-      </SliderContainerChild>
-    </ContainerMain >
+        </SliderContainerChild>
+      </ContainerMain >
+    </Container>
   )
 }
