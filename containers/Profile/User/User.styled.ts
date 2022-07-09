@@ -5,7 +5,7 @@ export const BackgroundProfile = styled.div`
   background-size:cover;
   width: 100%;
   min-height:70vh;
-  height: 100%;
+  padding-block:20px;
   display:flex;
   @font-face{
     font-family:Montserrat;
@@ -48,7 +48,6 @@ export const ProfilePayment = styled.div`
   display:flex;
   flex-direction:column;
   width:100%;
-  height:340px;
   background:white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius:10px;
@@ -61,7 +60,20 @@ export const ProfileData = styled.div`
   display:flex;
   flex-direction:column;
   gap:40px;
-  width:50%;
+  width:100%;
+  background:white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius:10px;
+  padding:20px;
+  @media (max-width: 1023px) {
+    width:100%;
+  }
+`;
+export const RewardContain = styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+  width:100%;
   background:white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius:10px;
@@ -102,7 +114,7 @@ export const LabelText = styled.label`
   font-family:'Raleway',sans-serif;
   font-size:14px;
 `;
-export const UserInfo = styled.p`
+export const UserText = styled.p`
   font-family:'Montserrat',sans-serif;
   font-size:18px;
   color:#8E2DE2;
@@ -129,8 +141,8 @@ export const PaymentBox = styled.div`
   display:flex;
   width:100%;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  padding-block:14px;
-  padding-inline:20px;
+  padding-block:8px;
+  padding-inline:10px;
   border-radius:10px;
   justify-content:space-between;
   align-items:center;
@@ -171,7 +183,7 @@ export const TrashIcon = styled.i`
   background-position: center;
 `;
 export const PaymentText = styled.p`
-  font-size:16px;
+  font-size:14px;
   font-family:'Montserrat',sans-serif;
   font-weight: 600;
   margin:0;
@@ -185,7 +197,7 @@ export const DeleteContain = styled.div`
   cursor:pointer;
 `;
 export const DeleteText = styled.p`
-  font-size:14px;
+  font-size:12px;
   font-family:'Raleway',sans-serif;
   font-weight: 400;
   color: #6717CD;
