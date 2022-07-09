@@ -18,6 +18,15 @@ export const ProfilePicture2 = styled.i`
   background-repeat:no-repeat;
 `;
 
+export const AnimatedBackground = styled.video  `
+width: auto;
+    height: 780px;
+    position: absolute;
+    top: 0;
+    z-index: -2;
+    margin-left: -80px;
+`; 
+
 export const Background = styled.div`
   background-image: url(../images/background.png);
   background-repeat:no-repeat;

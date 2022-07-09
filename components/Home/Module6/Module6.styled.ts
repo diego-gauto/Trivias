@@ -21,11 +21,11 @@ position: absolute;
 `;
  
 export const ContainerMain = styled.div  ` 
-padding-bottom: 78px; 
-position: inherit; 
-width: 1200px;
-margin-top: -400px; 
-z-index: -1;
+padding-bottom: 0;
+    position: inherit;
+    width: 1200px;
+    margin-top: -380px;
+    z-index: -1;
 `; 
 export const SliderContainer = styled.div  `
 
@@ -42,5 +42,5 @@ export const SliderContainerChild = styled.div  `
 background-color: rebeccapurple;
 z-index: -1;
 position: relative;
-height: 650px;
+height: 675px;
 `; 

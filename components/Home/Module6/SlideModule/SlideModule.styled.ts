@@ -20,11 +20,13 @@ text-align: center;
 export const ContainerMain = styled.div  `
 
 
+`;
+/*
+
 div:hover {
   background-color: #FF1493;
 }
-`;
-
+ */
 export const TextNew = styled.span `
  
 font-family: 'Raleway';
