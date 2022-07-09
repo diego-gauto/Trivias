@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
-export const NavContainer = styled.div`
+export const NavContainer = styled.div` 
   position:fixed;
   z-index: 1;
   display:flex;
@@ -31,6 +31,7 @@ export const NavText = styled.p`
   font-family:'Montserrat',sans-serif;
   cursor:pointer;
   margin:0;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &:hover{
     text-decoration:underline; 
   }

@@ -26,14 +26,18 @@ width: auto;
  //filter: blur(40px);
 export const BlurWindow = styled.div  `
 opacity: 0.25; 
- z-index: -1;
-box-shadow: 0px 0px 20px 4px rgb(0 0 0 / 25%);
+ z-index: -1; 
 background-color: #FFFFFF;
 width: 650px;
 height: 780px;
 position: absolute;
 top: 0;
 margin-left: -80px;
+
+backdrop-filter: blur(180px);
+    border: 2px solid #ffffff;
+    box-sizing: border-box;    
+    box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%); 
 `; 
 export const Right = styled.div  ` 
 width: 115%;

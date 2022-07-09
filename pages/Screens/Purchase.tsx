@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap';
-import User from '../../containers/Profile/User/User';
+import Purchase from '../../containers/Profile/Purchase/Purchase';
 const Landings = () => {
   return (
 
@@ -10,7 +10,7 @@ const Landings = () => {
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <User></User>
+      <Purchase></Purchase>
 
     </Container>
   )

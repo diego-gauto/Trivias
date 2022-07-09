@@ -15,7 +15,12 @@ const NavBar = () => {
         </Link>
         <Link href="/Screens/Profile">
           <NavText>
-            Tienda
+            Perfil Usuario{" (Temp)"}
+          </NavText>
+        </Link>
+        <Link href="/Screens/Purchase">
+          <NavText>
+            Comprar{" (Temp)"}
           </NavText>
         </Link>
         <Link href="/auth/Login">
