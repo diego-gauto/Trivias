@@ -1,8 +1,11 @@
 import React from 'react'
 import PointPrizes from './PointPrizes'
-import { Circle1, Container, MainContain, MainTitle, OffContainer, RewardContainer } from './RewardComp.styled'
+import Points from './Points'
+import { Container, MainContain, MainTitle, OffContainer, RewardContainer } from './RewardComp.styled'
 
 const PointRewards = ({ setRewards }: any) => {
+
+
 
   return (
     <>
@@ -19,10 +22,8 @@ const PointRewards = ({ setRewards }: any) => {
         </OffContainer>
       </MainContain>
       <RewardContainer>
-        <Circle1>
-        </Circle1>
+        <Points />
       </RewardContainer>
-
       <PointPrizes />
     </>
   )

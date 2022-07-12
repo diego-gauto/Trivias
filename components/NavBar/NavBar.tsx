@@ -23,6 +23,11 @@ const NavBar = () => {
             Comprar{" (Temp)"}
           </NavText>
         </Link>
+        <Link href="/Screens/Lesson">
+          <NavText>
+            Lesson{" (Temp)"}
+          </NavText>
+        </Link>
         <Link href="/auth/Login">
           <NavText>
             Iniciar Sesión

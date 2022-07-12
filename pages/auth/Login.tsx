@@ -74,11 +74,11 @@ const Login = () => {
           </LinkText>
         </Text3>
       </LoginBox>
-      {/*
+
       <AnimatedBackground width="320" height="240" autoPlay muted loop >
         <source src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FAnimatedColors.mp4?alt=media&token=94a7f4cc-9efb-4a74-be52-67674970e026" type="video/mp4"></source>
       </AnimatedBackground>
-       */}
+
     </Background>
 
   )

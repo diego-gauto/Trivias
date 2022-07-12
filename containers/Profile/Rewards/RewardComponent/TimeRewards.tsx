@@ -1,6 +1,7 @@
 import React from 'react'
-import { Container, MainContain, MainTitle, OffContainer, RewardContainer, Circle1, Circle2 } from './RewardComp.styled';
+import { Container, MainContain, MainTitle, OffContainer, RewardContainer } from './RewardComp.styled';
 import TimePrizes from './TimePrizes';
+import Times from './Times';
 
 const TimeRewards = ({ setRewards }: any) => {
   return (
@@ -18,12 +19,7 @@ const TimeRewards = ({ setRewards }: any) => {
         </Container>
       </MainContain>
       <RewardContainer>
-        <Circle1>
-
-        </Circle1>
-        <Circle2>
-
-        </Circle2>
+        <Times />
       </RewardContainer>
       <TimePrizes />
     </>

@@ -20,7 +20,7 @@ export const ProfilePicture2 = styled.i`
 
 export const AnimatedBackground = styled.video  `
 width: auto;
-    height: 780px;
+    height: 100vh;
     position: absolute;
     top: 0;
     z-index: -2;
@@ -28,15 +28,11 @@ width: auto;
 `; 
 
 export const Background = styled.div`
-  background-image: url(../images/background.png);
-  background-repeat:no-repeat;
-  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height:100vh;
-  height: 100%;
+  min-height: 90vh;
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);

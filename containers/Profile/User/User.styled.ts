@@ -286,7 +286,7 @@ export const Currentlvl = styled.div`
   background-color: #6717CD;
   height: 50px;
   width: 50px;
-  border-radius: 25px;
+  border-radius: 50%;
   background-position: center;
 `;
 export const Nextlvl = styled.div`
@@ -301,7 +301,7 @@ export const Nextlvl = styled.div`
   border: 1px solid #6717CD;
   height: 50px;
   width: 50px;
-  border-radius: 25px;
+  border-radius: 50%;
   background-position: center;
 `;
 export const ProgressBar1 = styled.div`
