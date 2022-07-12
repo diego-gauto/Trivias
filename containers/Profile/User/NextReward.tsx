@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 import { DataTitle, RewardBox, VectorLeft, RewardTitle, VectorRight, Pointbox, Currentlvl, CompleteBar, ProgressBar1, PointsBox, UserPoints, PolygonDown, Nextlvl, RewardData, RewardImage, RewardInfo, RewardTitleBox, RewardPoints, RewardParagraph, AddPay, ArrowRight, RewardContain } from './User.styled';
 
@@ -46,10 +47,12 @@ const NextReward = () => {
           </RewardParagraph>
         </RewardInfo>
       </RewardData>
-      <AddPay>
-        Ir al Centro de Recompensas
-        <ArrowRight />
-      </AddPay>
+      <Link href="/Screens/Rewards">
+        <AddPay>
+          Ir al Centro de Recompensas
+          <ArrowRight />
+        </AddPay>
+      </Link>
     </RewardContain>
   )
 }
