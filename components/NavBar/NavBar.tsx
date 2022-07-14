@@ -28,6 +28,11 @@ const NavBar = () => {
             Lesson{" (Temp)"}
           </NavText>
         </Link>
+        <Link href="/Screens/Preview">
+          <NavText>
+            Preview{" (Temp)"}
+          </NavText>
+        </Link>
         <Link href="/auth/Login">
           <NavText>
             Iniciar Sesión
