@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
@@ -23,10 +24,10 @@ export const NavTags = styled.div`
 export const Logo = styled(Image)`
   cursor:pointer;
 `;
-export const NavText = styled.p`
-  color:white;
+export const NavText = styled.a`
+  color: white;
+  text-decoration: none;
   font-size: 18px;
-  font-weight: 500;
   font-family:'Montserrat',sans-serif;
   cursor:pointer;
   margin:0;
@@ -34,6 +35,26 @@ export const NavText = styled.p`
   &:hover{
     text-decoration:underline; 
   }
+  &:active{
+    font-weight: 600;
+    color:red;
+  }
+`;
+export const UserText = styled.p`
+  color: black;
+  font-size: 18px;
+  font-family:'Montserrat',sans-serif;
+  cursor:pointer;
+  margin:0;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  &:hover{
+    text-decoration:underline; 
+  }
+`;
+export const UserContain = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
 `;
 export const PurpleButton = styled.button`
   background-color: #6717CD;
@@ -49,4 +70,17 @@ export const PurpleButton = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
+`;
+export const Level = styled.i`
+  background-image: url(../images/Navbar/lvl.png);
+  background-repeat:no-repeat;
+  width: 50px;
+  height: 50px;
+`;
+export const UserImage = styled.i`
+  background-image: url(../images/Navbar/userImage.png);
+  background-repeat:no-repeat;
+  width: 50px;
+  height: 50px;
+  cursor:pointer;
 `;

@@ -9,14 +9,6 @@ export const MainContainer = styled.div`
 export const Banner2 = styled(Image)`
   filter: brightness(40%);
   postion: absolute;
-  clip-path: polygon(
-    100% 0%,
-    100% 0%,
-    100% 0%,
-    100% 100%,
-    0% 100%,
-    0% 20%
-    );
 `;
 export const Content = styled.div`
   display: flex;

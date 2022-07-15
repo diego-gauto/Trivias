@@ -13,11 +13,6 @@ export const RewardContainer = styled.div`
 `;
 export const Banner = styled(Image)`
   position: absolute;
-  clip-path: polygon(100% 0%,
-    100% 0%,
-    100% 70%,
-    0% 100%,
-    0% 0%);
   `;
 export const BannerContain = styled.div`
   display: flex;

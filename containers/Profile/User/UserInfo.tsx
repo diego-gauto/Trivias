@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 import { ProfileContainer, ProfileIconContain, ProfileIcon, UserContainer, LabelText, LogOut, LogOutIcon, UserText } from './User.styled';
 
@@ -39,10 +40,13 @@ const UserInfo = () => {
           Gonvar Plus
         </UserText>
       </UserContainer>
-      <LogOut>
-        Cerrar Sesión
-        <LogOutIcon />
-      </LogOut>
+      <Link href="/Screens/Landings">
+        <LogOut>
+          Cerrar Sesión
+          <LogOutIcon />
+        </LogOut>
+      </Link>
+
     </ProfileContainer>
   )
 }

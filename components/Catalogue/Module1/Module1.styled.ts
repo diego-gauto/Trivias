@@ -33,11 +33,6 @@ export const SubText = styled.p`
 `;
 export const Banner = styled(Image)`
   postion: absolute;
-  clip-path: polygon(100% 0%,
-    100% 0%,
-    100% 80%,
-    0% 100%,
-    0% 0%);
   `;
   export const PurpleButton = styled.button`
   display: flex;
