@@ -1,6 +1,6 @@
 import React from 'react'
 import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent } from './About.styled';
-import { PositionTitle, TitleContain, Titles } from './Module.styled';
+import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
 
 const About = ({ value, setValue }: any) => {
   return (
@@ -25,6 +25,27 @@ const About = ({ value, setValue }: any) => {
           Comentarios
         </Titles>
       </TitleContain>
+      <IconContain>
+        <SelectContain>
+          <ListIcon />
+        </SelectContain>
+        <UnSelected>
+          <BookIcon onClick={() => {
+            setValue(3)
+          }} style={{ backgroundColor: 'gray' }} />
+        </UnSelected>
+        <UnSelected>
+          <ChatboxIcon onClick={() => {
+            setValue(4)
+          }} style={{ backgroundColor: 'gray' }} />
+        </UnSelected>
+        <UnSelected>
+          <EaselIcon
+            onClick={() => {
+              setValue(2)
+            }} style={{ backgroundColor: 'gray' }} />
+        </UnSelected>
+      </IconContain>
       <AboutContain>
         <CircleContain>
           <NumberText>
@@ -43,9 +64,7 @@ const About = ({ value, setValue }: any) => {
           </LessonContent>
         </TextContainer>
       </AboutContain>
-
     </>
-
   )
 }
 export default About;

@@ -12,6 +12,9 @@ export const MainContainer = styled.div`
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
 `;
+export const Container = styled.div`
+  width: 100%;
+`;
 export const MasonryContainer = styled.div`
 
   display:flex;

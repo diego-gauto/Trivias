@@ -3,14 +3,22 @@ import styled from "styled-components";
 export const AboutContain = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    border-radius: 10px;
+  }
 `;
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 80%;
+  max-width: 100%;
 `;
 export const CircleContain = styled.div`
+  min-width: 150px;
   width: 150px;
   height: 150px;
   border-radius: 50%;

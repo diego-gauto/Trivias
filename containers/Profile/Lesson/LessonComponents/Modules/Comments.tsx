@@ -1,6 +1,6 @@
 import React from 'react'
 import { Comment, CommentContain, CommentInput, CommentText, MainContainer, Pp1, Pp2, Pp3 } from './Comments.styled'
-import { TitleContain, PositionTitle, Titles } from './Module.styled'
+import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
 
 const Comments = ({ value, setValue }: any) => {
   return (
@@ -11,20 +11,45 @@ const Comments = ({ value, setValue }: any) => {
         }}>
           Acerca de
         </Titles>
+
         <Titles onClick={() => {
           setValue(2)
         }}>
           Material Extra
         </Titles>
+
         <Titles onClick={() => {
           setValue(3)
         }}>
           Tareas
         </Titles>
+
         <PositionTitle>
           Comentarios
         </PositionTitle>
+
       </TitleContain>
+      <IconContain>
+        <UnSelected>
+          <ListIcon onClick={() => {
+            setValue(1)
+          }} style={{ backgroundColor: 'gray' }} />
+        </UnSelected>
+        <UnSelected>
+          <BookIcon onClick={() => {
+            setValue(3)
+          }} style={{ backgroundColor: 'gray' }} />
+        </UnSelected>
+        <SelectContain>
+          <ChatboxIcon />
+        </SelectContain>
+        <UnSelected>
+          <EaselIcon
+            onClick={() => {
+              setValue(2)
+            }} style={{ backgroundColor: 'gray' }} />
+        </UnSelected>
+      </IconContain>
       <MainContainer>
         <CommentContain>
           <Pp1 />

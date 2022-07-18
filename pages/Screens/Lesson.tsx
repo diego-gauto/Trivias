@@ -1,18 +1,13 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
 import Lesson from '../../containers/Profile/Lesson/Lesson';
-const Landings = () => {
+import { MainContain } from './Styles.styled';
+const LessonScreen = () => {
   return (
 
-    <Container
-      style={{
-        width: "100%",
-        padding: "0",
-        maxWidth: "100% !important",
-      }}>
+    <MainContain>
       <Lesson></Lesson>
 
-    </Container>
+    </MainContain>
   )
 }
-export default Landings;
+export default LessonScreen;

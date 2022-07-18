@@ -2,6 +2,8 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const PreviewContain = styled.div`
+  margin-top: 10px;
+  width: 100%;
   display: flex;
   flex-direction: Column;
   gap: 40px;

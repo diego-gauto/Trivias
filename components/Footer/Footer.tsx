@@ -2,12 +2,9 @@ import React from 'react'
 import {
   BottomContainer,
   BottomText,
-  Column1,
-  Column2,
-  Column3,
+  Column,
   FBIcon,
   FooterContainer,
-  FooterGroupText,
   FooterIcons,
   FooterText,
   IGIcon,
@@ -20,33 +17,32 @@ const Footer = () => {
   return (
     <>
       <FooterContainer>
-        <Logo2 src="/images/logo2.png" width={120} height={100} />
-        <FooterGroupText>
-          <Column1>
-            <FooterText>
-              Aviso de Privacidad
-            </FooterText>
-            <FooterText>
-              Inicio
-            </FooterText>
-          </Column1>
-          <Column2>
-            <FooterText>
-              Academia
-            </FooterText>
-            <FooterText>
-              Condiciones
-            </FooterText>
-          </Column2>
-          <Column3>
-            <FooterText>
-              Tienda Online
-            </FooterText>
-            <FooterText>
-              Registrarse
-            </FooterText>
-          </Column3>
-        </FooterGroupText>
+        <Logo2 src="/images/logo2.png" width={120} height={80} />
+
+        <Column>
+          <FooterText>
+            Aviso de Privacidad
+          </FooterText>
+          <FooterText>
+            Inicio
+          </FooterText>
+        </Column>
+        <Column>
+          <FooterText>
+            Academia
+          </FooterText>
+          <FooterText>
+            Condiciones
+          </FooterText>
+        </Column>
+        <Column>
+          <FooterText>
+            Tienda Online
+          </FooterText>
+          <FooterText>
+            Registrarse
+          </FooterText>
+        </Column>
         <FooterIcons>
           <FooterText>
             Contactanos

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Container } from 'react-bootstrap';
+import { MainContain } from './Styles.styled';
 import User from '../../containers/Profile/User/User';
 const Landings = () => {
   return (
 
-    <Container
+    <MainContain
       style={{
         width: "100%",
         padding: "0",
@@ -12,7 +13,7 @@ const Landings = () => {
       }}>
       <User></User>
 
-    </Container>
+    </MainContain>
   )
 }
 export default Landings;

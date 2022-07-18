@@ -7,8 +7,7 @@ export const FooterContainer = styled.div`
   width:100%;
   justify-content:space-between;
   align-items:center;
-  padding-block: 20px;
-  padding-inline: 20px;
+  padding: 20px;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   @font-face{
     font-family:Raleway;
@@ -18,34 +17,40 @@ export const FooterContainer = styled.div`
     font-family:Nunito;
     src:url(../fonts/Nunito-VariableFont_wght.ttf);
   }
-  
+  @media(max-width: 1023px) {
+    display: block;
+    min-height: 200px;
+    padding: 10px;
+    flex-direction: column;
+    column-count: 2;
+    column-gap: 60%;
+  }
 `;
 export const Logo2 = styled(Image)`
   cursor:pointer;
 `;
-export const FooterGroupText = styled.div`
-  display:flex;  
-  gap:100px;
-`;
-export const Column1 = styled.div`
+// export const FooterGroupText = styled.div`
+//   display:flex;  
+//   gap:100px;
+//   @media(max-width: 1023px) {
+//     flex-direction: column;
+//     gap: 10px;
+//   }
+// `;
+export const Column = styled.div`
   display:flex;
   flex-direction:column;
   gap:20px; 
-`;
-export const Column2 = styled.div`
-  display:flex;
-  flex-direction:column; 
-  gap:20px;  
-`;
-export const Column3 = styled.div`
-  display:flex;
-  flex-direction:column;  
-  gap:20px; 
+  @media(max-width: 1023px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 export const FooterText = styled.p`
-  font-size:18px;
-  font-family:'Nunito',sans-serif;
-  margin:0;
+  font-size: 18px;
+  font-family: 'Nunito',sans-serif;
+  margin: 0;
+
 `;
 export const FooterIcons = styled.div`
   display:flex;

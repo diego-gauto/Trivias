@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  justify-content: center;
   position: relative;
 `;
 export const TextContain = styled.div`
@@ -32,6 +33,7 @@ export const SubText = styled.p`
   margin: 0;
 `;
 export const Banner = styled(Image)`
+  width: 100%;
   postion: absolute;
   `;
   export const PurpleButton = styled.button`

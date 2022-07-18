@@ -16,6 +16,20 @@ export const NavContainer = styled.div`
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
 `;
+export const NavHome = styled.div` 
+  position: fixed;
+  z-index: 10;
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+  background-color:transparent;
+  padding-block: 10px;
+  padding-inline: 20px;
+  @font-face{ 
+    font-family:Montserrat;
+    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+`;
 export const NavTags = styled.div`
   display:flex;
   gap:40px;

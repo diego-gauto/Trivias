@@ -5,6 +5,11 @@ export const HomeWorkContain = styled.div`
   flex-direction: column;
   gap: 20px;
   padding-inline: 20px;
+  @media (max-width: 1023px){
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    border-radius: 10px;
+  }
 `;
 export const TaskTitle = styled.p`
   font-size: 16px;
@@ -36,6 +41,9 @@ export const UploadButton = styled.button`
   &:hover{
     transform:scale(1.03);
     transition:.5s ease all;
+  }
+  @media (max-width: 1023px) {
+    display: none;
   }
 `;
 export const UploadIcon = styled.i`

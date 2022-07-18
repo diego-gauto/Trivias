@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 10px;
 `;
@@ -18,13 +19,13 @@ export const CardContainer = styled.div`
 export const Video = styled.div`
   display: flex;
   flex-direction: column;
+  width:420px;
 `;
 export const VideoContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   position: relative;
-  width: 420px;
 `;
 export const Background = styled(Image)`
 `;

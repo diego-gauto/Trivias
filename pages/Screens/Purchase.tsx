@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
+import { MainContain } from './Styles.styled';
 import Purchase from '../../containers/Profile/Purchase/Purchase';
-const Landings = () => {
+const PurchaseScreen = () => {
   return (
 
-    <Container
+    <MainContain
       style={{
         width: "100%",
         padding: "0",
@@ -12,7 +12,7 @@ const Landings = () => {
       }}>
       <Purchase></Purchase>
 
-    </Container>
+    </MainContain>
   )
 }
-export default Landings;
+export default PurchaseScreen;

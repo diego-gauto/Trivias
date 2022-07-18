@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 export const BackgroundProfile = styled.div`
-  background:#f4f4f4;
-  background-size:cover;
   width: 100%;
-  min-height:70vh;
   padding-block:20px;
   display:flex;
   @font-face{
@@ -205,7 +202,7 @@ export const DeleteText = styled.p`
   &:hover{
     font-weight: 600;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 1023px) {
     display:none;
   }
 `;
@@ -223,6 +220,9 @@ export const AddPay = styled.p`
   cursor:pointer;
   &:hover{
     text-decoration:underline;
+  }
+  @media(max-width: 1023px) {
+    margin-top: 25px;
   }
 `;
 export const RewardBox = styled.div`

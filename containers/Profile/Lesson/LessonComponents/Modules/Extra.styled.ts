@@ -4,6 +4,11 @@ export const ExtraContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media (max-width: 1023px){
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    border-radius: 10px;
+  }
 `;
 export const Paragraph = styled.p`
   font-size: 14px;

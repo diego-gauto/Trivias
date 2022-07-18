@@ -1,20 +1,13 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
 import Preview from '../../components/Catalogue/Preview';
-import Lesson from '../../containers/Profile/Lesson/Lesson';
+import { MainContain } from './Styles.styled';
 
-const Landings = () => {
+const PreviewScreen = () => {
   return (
-
-    <Container
-      style={{
-        width: "100%",
-        padding: "0",
-        maxWidth: "100% !important",
-      }}>
+    <MainContain>
       <Preview></Preview>
 
-    </Container>
+    </MainContain>
   )
 }
-export default Landings;
+export default PreviewScreen;

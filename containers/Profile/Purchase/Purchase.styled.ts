@@ -8,7 +8,8 @@ export const Container = styled.div`
   background-color:white;
   width: 100%;
   min-height:100vh;
-  padding-block:40px;
+  margin-top: 10px;
+  padding-block:30px;
   padding-inline:90px;
   @font-face{
     font-family:Montserrat;
@@ -17,6 +18,9 @@ export const Container = styled.div`
   @font-face{
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  }
+  @media (max-width: 760px) {
+    width: 80%;
   }
 `;
 export const Title = styled.h1`
@@ -95,7 +99,7 @@ export const SubContainer2 = styled.div`
   flex-direction:column;
   gap:30px;
   width:50%;
-  flex: 1 413px;
+  flex: 1 403.5px;
 `;
 export const ContainTitle = styled.h1`
   font-weight:600;
@@ -199,7 +203,7 @@ export const PurpleButton = styled.button`
 export const PurchaseContainer = styled.div`
   display:flex;
   flex-direction:column;
-  flex: 1 413px;
+  flex: 1 403.5px;
   gap: 20px;
   padding:20px;
   border-radius: 10px;
