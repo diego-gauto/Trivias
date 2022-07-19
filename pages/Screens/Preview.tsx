@@ -1,6 +1,6 @@
 import React from 'react'
 import Preview from '../../components/Catalogue/Preview';
-import { MainContain } from './Styles.styled';
+import { MainContain } from '../../screens/Styles.styled';
 
 const PreviewScreen = () => {
   return (

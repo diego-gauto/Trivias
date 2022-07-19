@@ -19,7 +19,7 @@ import {
   Box2,
   PhoneOption,
   PasswordBox,
-} from './Login.styled'
+} from '../pages/auth/Login.styled'
 export const UserUpdate = () => {
   return (
     <Background>
