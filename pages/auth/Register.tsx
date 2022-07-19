@@ -18,7 +18,7 @@ import {
   Box2,
   PasswordBox,
   AnimatedBackground
-} from './Login.styled'
+} from '../../auth/Login.styled'
 const Register = () => {
 
   return (
