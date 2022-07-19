@@ -15,7 +15,7 @@ import {
   ArchiveInput,
   Box2,
   FolderIcon
-} from './Login.styled'
+} from '../../screens/Login.styled'
 export const RegisterImage = () => {
   return (
     <Background>
@@ -53,3 +53,4 @@ export const RegisterImage = () => {
     </Background>
   )
 }
+export default RegisterImage;

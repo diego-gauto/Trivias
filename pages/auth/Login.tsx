@@ -20,7 +20,7 @@ import {
   Box2,
   PasswordBox,
   AnimatedBackground,
-} from '../../auth/Login.styled'
+} from '../../screens/Login.styled'
 const Login = () => {
   return (
     <Background>

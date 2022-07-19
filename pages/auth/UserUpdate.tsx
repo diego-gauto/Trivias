@@ -19,7 +19,7 @@ import {
   Box2,
   PhoneOption,
   PasswordBox,
-} from './Login.styled'
+} from '../../screens/Login.styled'
 export const UserUpdate = () => {
   return (
     <Background>
@@ -100,3 +100,5 @@ export const UserUpdate = () => {
     </Background>
   )
 }
+
+export default UserUpdate;
