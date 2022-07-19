@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
 export const NavContainer = styled.div` 
@@ -15,6 +13,9 @@ export const NavContainer = styled.div`
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+  @media(max-width: 1023px) {
+    display: none;
+  }
 `;
 export const NavHome = styled.div` 
   position: fixed;
@@ -22,18 +23,53 @@ export const NavHome = styled.div`
   display:flex;
   width:100%;
   justify-content:space-between;
-  background-color:transparent;
+  background-color: transparent;
   padding-block: 10px;
   padding-inline: 20px;
   @font-face{ 
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+  @media(max-width: 1023px) {
+    display: none;
+  }
+`;
+export const NavResponsive = styled.div`
+  z-index: 10;
+  display: none ;
+  width: 100%;
+  justify-content:space-between;
+  background-color:white;
+  padding-block: 10px;
+  padding-inline: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @font-face{ 
+    font-family:Montserrat;
+    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  @media(max-width: 1023px) {
+    display: flex;
+  }
+  @font-face{
+    font-family:Raleway;
+    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  }
 `;
 export const NavTags = styled.div`
   display:flex;
   gap:40px;
   align-items:center;
+  @media(max-width: 1023px) {
+    display: none;
+  }
+`;
+export const NavTags2 = styled.div`
+  display:none;
+  gap:40px;
+  align-items:center;
+  @media(max-width: 1023px) {
+    display: flex;
+  }
 `;
 export const Logo = styled(Image)`
   cursor:pointer;
@@ -73,8 +109,8 @@ export const UserContain = styled.div`
 export const PurpleButton = styled.button`
   background-color: #6717CD;
   color: #fff;
-  width: 160px;
-  height: 50px;
+  padding-block: 15px;
+  padding-inline: 25px;
   font-size: 16px;
   font-family:'Montserrat',sans-serif;
   border-radius: 25px;
@@ -84,6 +120,20 @@ export const PurpleButton = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
+  @media(max-width: 1023px) {
+    padding-block: 10px;
+  }
+`;
+export const PointsContain = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+`;
+export const Points = styled.p`
+  font-size: 12px;
+  font-family:'Raleway',sans-serif;
+  font-weight: 600;
+  margin:0;
 `;
 export const Level = styled.i`
   background-image: url(../images/Navbar/lvl.png);
@@ -97,4 +147,17 @@ export const UserImage = styled.i`
   width: 50px;
   height: 50px;
   cursor:pointer;
+`;
+export const MenuIcon = styled.i`
+  background-image: url(../images/Navbar/menu.png);
+  background-repeat:no-repeat;
+  width: 50px;
+  height: 50px;
+  cursor:pointer;
+`;
+export const LogoS = styled.i`
+  background-image: url(../images/Navbar/LogoSmall.png);
+  background-repeat:no-repeat;
+  width: 50px;
+  height: 50px;
 `;

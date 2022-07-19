@@ -29,11 +29,10 @@ export const ThirdBox = styled.div`
   }
 `;
 export const ProfileContainer =  styled.div`
-  width:100%;
-  max-width:400px;
+  width:40%;
   background:white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  padding:40px;
+  padding: 40px;
   display:flex;
   flex-direction:column;
   gap:20px;
@@ -132,7 +131,10 @@ export const LogOut = styled.p`
 export const PaymentTitle = styled.h1`
   font-family:'Montserrat',sans-serif;
   font-size: 24px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
+  @media (max-width: 1023px) {
+    font-size: 20px;
+  }
 `;
 export const PaymentBox = styled.div`
   display:flex;
@@ -202,7 +204,7 @@ export const DeleteText = styled.p`
   &:hover{
     font-weight: 600;
   }
-  @media (max-width: 1023px) {
+  @media (max-width: 1280px) {
     display:none;
   }
 `;
@@ -239,8 +241,8 @@ export const DataTitle = styled.h1`
   font-family:'Montserrat',sans-serif;
   font-size: 24px;
   margin:0;
-  @media (max-width: 400px) {
-    font-size: 18px;
+  @media (max-width: 1023px) {
+    font-size: 20px;
   }
 `;
 export const VectorLeft = styled.i`
@@ -422,13 +424,13 @@ export const EditButtons = styled.div`
   }
 `;
 export const SaveButton = styled.button`
-  height: 50px;
-  width: 120px;
+  padding-block: 15px;
+  padding-inline: 25px;
   color: white;
   font-family:'Montserrat',sans-serif;
   font-size:16px;
   border:none;
-  border-radius: 25px;
+  border-radius: 30px;
   background-color: #6717CD;
   &:hover{
     background-color: #5b02cc;
@@ -438,19 +440,19 @@ export const SaveButton = styled.button`
   @media (max-width: 1023px) {
     width: 60%;
   }
-  @media (max-width: 400px) {
-    font-size:12px;
+  @media (max-width: 1185px) {
+    font-size:14px;
   }
 `;
 export const SubscriptionButton = styled.button`
-  height: 50px;
-  width: 220px;
+  padding-block: 15px;
+  padding-inline: 25px;
   color: #6717CD;
   font-family:'Montserrat',sans-serif;
   font-size: 16px;
   font-weight: 600;
   border: 1px solid #6717CD;
-  border-radius: 25px;
+  border-radius: 30px;
   background-color:white;
   &:hover{
     transform:scale(1.03);
@@ -459,7 +461,7 @@ export const SubscriptionButton = styled.button`
   @media (max-width: 1023px) {
     width: 60%;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 1185px) {
     font-size:12px;
   }
 `;

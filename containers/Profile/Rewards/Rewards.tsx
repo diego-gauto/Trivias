@@ -14,11 +14,11 @@ const Rewards = () => {
         <Banner
           src="/images/Rewards/banner.png"
           width={1400}
-          height={350}
+          height={450}
         />
         <InsideContain>
           <BannerTitle>
-            Centro de recompensas
+            Centro de Recompensas
           </BannerTitle>
           <ProgressContain>
             <PointsText>

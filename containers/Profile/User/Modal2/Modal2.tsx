@@ -41,9 +41,9 @@ const Modal2 = ({ show, setShow }: any) => {
             </PayMethod>
           </PaymentMethod>
           <ButtonsDiv>
-            <TransparentButton onClick={() => { setShow(false); setShow3(true) }}>
+            {/* <TransparentButton onClick={() => { setShow(false); setShow3(true) }}>
               Terminar suscripción
-            </TransparentButton>
+            </TransparentButton> */}
             <PurpleButton>
               Aceptar
             </PurpleButton>

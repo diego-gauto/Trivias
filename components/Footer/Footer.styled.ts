@@ -2,9 +2,9 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-  display:flex;
-  background:white;
-  width:100%;
+  display: flex;
+  background: white;
+  width: 100%;
   justify-content:space-between;
   align-items:center;
   padding: 20px;
@@ -26,8 +26,17 @@ export const FooterContainer = styled.div`
     column-gap: 60%;
   }
 `;
-export const Logo2 = styled(Image)`
-  cursor:pointer;
+export const Logo2 = styled.i`
+  display: flex;
+  background-image: url(../images/logo2.png);
+  background-repeat:no-repeat;
+  width: 100px;
+  height: 75px;
+  cursor: pointer;
+  @media(max-width: 1023px) {
+
+    height: 100px;
+  }
 `;
 // export const FooterGroupText = styled.div`
 //   display:flex;  
@@ -50,12 +59,18 @@ export const FooterText = styled.p`
   font-size: 18px;
   font-family: 'Nunito',sans-serif;
   margin: 0;
-
+  @media(max-width: 1023px) {
+    font-size: 14px;
+  }
 `;
 export const FooterIcons = styled.div`
   display:flex;
   flex-direction: column;
   gap:10px;
+  align-items: center;
+  @media(max-width: 1023px) {
+    align-items: unset;
+  }
 `;
 export const BottomContainer = styled.div`
   display: flex;

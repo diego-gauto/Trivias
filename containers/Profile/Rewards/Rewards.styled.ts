@@ -2,6 +2,11 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const RewardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-inline: 20px;
+  margin-top: 10px;
+  width: 100%;
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -13,6 +18,7 @@ export const RewardContainer = styled.div`
 `;
 export const Banner = styled(Image)`
   position: absolute;
+  filter: brightness(50%);
   `;
 export const BannerContain = styled.div`
   display: flex;
@@ -20,29 +26,43 @@ export const BannerContain = styled.div`
 `;
 export const InsideContain = styled.div`
   display: flex;
-  align-items:center;
-  width:100%;
-  justify-content:space-between;
-  padding-block:60px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding-block: 60px;
   padding-inline: 20px;
   position: absolute;
+  @media(max-width: 1023px) {
+    padding-block: 30px;
+    flex-direction: column;
+  }
 `;
 export const BannerTitle = styled.h1`
   font-size: 36px;
   font-family: 'Montserrat', sans-serif;
   color: white;
   margin: 0;
+  @media(max-width: 1023px) {
+    font-size: 24px;
+  }
 `;
 export const PointsText = styled.p`
   font-size: 36px;
   font-family: 'Montserrat', sans-serif;
   color: #E0C3FC;
   margin: 0;
+  @media(max-width: 1023px) {
+    order: 2;
+    font-size: 24px;
+  }
 `;
 export const ProgressContain = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  @media(max-width: 1023px) {
+    flex-direction: column;
+  }
 `;
 export const OuterProgress = styled.div`
   width: 130px;

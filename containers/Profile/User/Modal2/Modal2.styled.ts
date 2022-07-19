@@ -83,7 +83,7 @@ export const VisaIcon = styled.i`
 `;
 export const ButtonsDiv = styled.div`
   display: flex;
-  justify-content:space-between;
+  justify-content: flex-end;
   margin-bottom:20px;
 `;
 export const PurpleButton = styled.button`

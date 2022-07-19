@@ -9,21 +9,44 @@ export const Container = styled.div`
 export const TextContain = styled.div`
   display: flex;
   flex-direction: column;
-  bottom: 100px;
+  padding-right: 20px;
+  top: 60px;
   left: 20px;
   gap: 10px;
   position: absolute;
+  @media (max-width: 650px) {
+    top: 40px;
+  }
+  @media (max-width: 424px) {
+    top: 10px;
+  }
 `;
 export const ButtonContain = styled.div`
   display: flex;
   margin-top: 20px;
   gap: 10px;
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    max-width: 190px;
+  }
+  @media (max-width: 650px) {
+    flex-direction: column;
+    margin-top: 0;
+    max-width: 150px;
+    gap: 5px;
+  }
 `;
 export const Title = styled.h1`
   font-size: 36px;
   font-family: 'Montserrat', sans-serif;
   color: white;
   margin: 0;
+  @media (max-width: 1023px) {
+    font-size: 24px;
+  }
+  @media (max-width: 424px) {
+    font-size: 18px;
+  }
 `;
 export const SubText = styled.p`
   width: 50%;
@@ -31,6 +54,9 @@ export const SubText = styled.p`
   font-family: 'Montserrat', sans-serif;
   color: white;
   margin: 0;
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 export const Banner = styled(Image)`
   width: 100%;
@@ -43,6 +69,7 @@ export const Banner = styled(Image)`
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  justify-content: center;
   padding-block: 15px;
   padding-inline: 25px;
   background-color: #6717CD;
@@ -53,6 +80,14 @@ export const Banner = styled(Image)`
     background-color: #5000b5;
     transform:scale(1.03);
     transition:.5s ease all;
+  }
+  @media (max-width: 1023px) {
+    font-size: 12px;
+    padding-block: 8px;
+    padding-inline: 15px;
+  }
+  @media (max-width: 424px) {
+    font-size: 10px;
   }
 `;
 export const TransparentButton = styled.button`
@@ -68,6 +103,14 @@ export const TransparentButton = styled.button`
   &:hover{
     transform:scale(1.03);
     transition:.5s ease all;
+  }
+  @media (max-width: 1023px) {
+    font-size: 12px;
+    padding-block: 10px;
+    padding-inline: 15px;
+  }
+  @media (max-width: 424px) {
+    font-size: 10px;
   }
 `;
 export const PlayIcon = styled.i`

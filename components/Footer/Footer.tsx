@@ -17,8 +17,7 @@ const Footer = () => {
   return (
     <>
       <FooterContainer>
-        <Logo2 src="/images/logo2.png" width={120} height={80} />
-
+        <Logo2 />
         <Column>
           <FooterText>
             Aviso de Privacidad

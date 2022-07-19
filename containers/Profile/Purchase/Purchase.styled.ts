@@ -9,7 +9,8 @@ export const Container = styled.div`
   width: 100%;
   min-height:100vh;
   margin-top: 10px;
-  padding-block:30px;
+  margin-bottom: 10px;
+  padding-block:10px;
   padding-inline:90px;
   @font-face{
     font-family:Montserrat;

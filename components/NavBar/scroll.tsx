@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Scroll = ({ color, setColor, pathname }: any) => {
 
   const ChangeNav = () => {
-    if (pathname == '/Screens/Landings' && window.scrollY >= 500) {
+    if (pathname == '/Screens/Landings' && window.scrollY >= 800) {
       setColor(true)
     }
     else {

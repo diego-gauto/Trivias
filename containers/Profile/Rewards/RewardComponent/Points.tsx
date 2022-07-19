@@ -3,7 +3,7 @@ import { Circle, CompleteCircle, CompleteDivisor, CompleteText, ContainLevel, Di
 
 
 const Points = () => {
-  let UserPoints = 2000;
+  let UserPoints = 600;
 
   if (UserPoints >= 100 && UserPoints <= 399) {
     return (
