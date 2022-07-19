@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap';
-import { MainContain } from './Styles.styled';
+import { MainContain } from '../../screens/Styles.styled';
 import User from '../../containers/Profile/User/User';
 const Landings = () => {
   return (

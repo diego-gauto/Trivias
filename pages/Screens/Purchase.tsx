@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainContain } from './Styles.styled';
+import { MainContain } from '../../screens/Styles.styled';
 import Purchase from '../../containers/Profile/Purchase/Purchase';
 const PurchaseScreen = () => {
   return (
