@@ -1,6 +1,6 @@
 import { Container, Col, Button, Image, Row } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
-import { CardTitle, Col_Table, DecoImage, DecoImageWrapper, MasonryBox, MasonryCard, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table } from './Module5.styled'
+import { CardTitle, Col_Table, DecoImage, DecoImageWrapper, MasonryBox, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table } from './Module5.styled'
 
 
 

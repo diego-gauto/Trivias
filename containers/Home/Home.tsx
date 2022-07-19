@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactElement } from "react";
-import { NavBar } from "../../components/NavBar/NavBar";
+// import { NavBar } from "../../components/NavBar/NavBar";
 import { Module1 } from "../../components/Home/Module1/Module1";
 import { Module2 } from "../../components/Home/Module2/Module2";
 import { Module3 } from "../../components/Home/Module3/Module3";
