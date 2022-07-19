@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Scroll = ({ color, setColor, pathname }: any) => {
 
@@ -10,7 +10,14 @@ const Scroll = ({ color, setColor, pathname }: any) => {
       setColor(false)
     }
   }
-  window.addEventListener('scroll', ChangeNav);
+
+  useEffect(
+    () => {
+      window.addEventListener('scroll', ChangeNav);
+    },
+    [],
+  );
+
   return (
     <></>
   )
