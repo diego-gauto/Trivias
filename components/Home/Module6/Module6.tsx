@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Masonry from 'react-masonry-css'
 import { AnimatedBackground, ContainerMain, Divisor, SliderContainer, SliderContainerChild } from "./Module6.styled";
+import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
 import { IModule6 } from "./IModule6";
 import { SlideModule } from "./SlideModule/SlideModule";
@@ -76,9 +77,7 @@ export const Module6 = (props: IModule6) => {
 */}
 
 
-          <AnimatedBackground width="320" height="240" autoPlay muted loop >
-            <source src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FAnimatedColors.mp4?alt=media&token=94a7f4cc-9efb-4a74-be52-67674970e026" type="video/mp4"></source>
-          </AnimatedBackground>
+          <GradientCanvas id="gradient-canvas2" />
 
 
         </SliderContainerChild>
