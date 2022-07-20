@@ -21,7 +21,7 @@ export const Module5 = (props: IModule5) => {
     ); */
 
   return (
-    <Container style={{ paddingTop: "75px" }}>
+    <Container style={{ paddingTop: "75px", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);" }}>
       <MasonryBox>
         <DecoImageWrapper>
           <DecoImage src="/images/mancha1.png" width={340} height={400}></DecoImage>

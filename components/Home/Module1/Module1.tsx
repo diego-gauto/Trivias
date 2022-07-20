@@ -86,7 +86,7 @@ export const Module1 = (props: IModule1) => {
                 </IconElement>
               </SectionC>
               <BlurWindow></BlurWindow>
-              <GradientCanvas id="gradient-canvas" />
+              <GradientCanvas id="gradient-canvas" skewBottom />
             </Left>
 
           </LeftWrapper>

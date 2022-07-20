@@ -17,15 +17,17 @@ border-radius: 10px;
 export const SectionCenteredWrapper = styled.div  `
 bottom: 335px;
 position: relative;
-margin-left: 225px;
+display: flex;
+justify-content: space-around;
 `;
 export const LeftImage = styled.div  `
-margin-top: 90px;  
+margin-left: 20px;
+margin-top: 90px;
 `;
 
 export const RightImage = styled.div  `
 margin-top: 65px;
-margin-left: 80px;
+margin-left: 140px;
 }
 `;
 export const SectionCenteredBackground = styled(Row)  `
@@ -34,7 +36,7 @@ height: 480px;
 export const SectionCenteredTopColumn = styled(Col)  `
 height: 10px;
 bottom: 70px;
-position: relative; 
+position: relative;
 `;
 
 export const IconImage = styled.div  `

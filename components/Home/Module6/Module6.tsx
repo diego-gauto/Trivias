@@ -5,7 +5,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Masonry from 'react-masonry-css'
-import { AnimatedBackground, ContainerMain, Divisor, SliderContainer, SliderContainerChild } from "./Module6.styled";
+import {
+  AnimatedBackground,
+  ContainerMain,
+  Divisor,
+  SliderContainer,
+  SliderContainerChild,
+  SliderSectionTitle
+} from "./Module6.styled";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
 import { IModule6 } from "./IModule6";
@@ -53,10 +60,11 @@ export const Module6 = (props: IModule6) => {
   };
 
   return (
-    <Container>
+    <Container fluid style={{ padding: 0 }}>
 
       <ContainerMain id="MainSliderCentered">
-        <div style={{ position: "relative", bottom: "-650px" }}>
+        <div style={{ position: "relative", bottom: "-650px", overflow: "hidden" }}>
+          <SliderSectionTitle>Visita nuestra tienda</SliderSectionTitle>
           <Slider {...settings} >
             {slideDataArr.map((element) => (
               <div key={element.title + "_ID"}  >
@@ -77,7 +85,7 @@ export const Module6 = (props: IModule6) => {
 */}
 
 
-          <GradientCanvas id="gradient-canvas2" />
+          <GradientCanvas id="gradient-canvas2" skewTop />
 
 
         </SliderContainerChild>

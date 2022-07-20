@@ -11,10 +11,12 @@ const Landings = () => {
   return (
 
     <Container
+      fluid
       style={{
         width: "100%",
         padding: "0",
         maxWidth: "100% !important",
+        margin: "0 auto"
       }}>
       <Module1 />
       <Module2 />
@@ -115,7 +117,7 @@ const Landings = () => {
       } />
 
 
-    </Container >
+    </Container>
   )
 }
 export default Landings;

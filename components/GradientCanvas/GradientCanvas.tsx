@@ -4,7 +4,7 @@ import { IGradientCanvas } from "./IGradientCanvas"
 // @ts-expect-error
 import Gradient from "./Gradient"
 
-const GradientCanvas = ({ id }: IGradientCanvas) => {
+const GradientCanvas = ({ id, skewTop, skewBottom }: IGradientCanvas) => {
   let gradient : any
 
   // Needs window object
@@ -23,6 +23,8 @@ const GradientCanvas = ({ id }: IGradientCanvas) => {
         "--gradient-color-4": "#0575E6"
       }}
       id={id}
+      skewTop={skewTop}
+      skewBottom={skewBottom}
     />
   )
 }

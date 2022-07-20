@@ -22,7 +22,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     dots: false,
     infinite: isInfinite,
     speed: 200,
-    slidesToShow: 3.5,
+    slidesToShow: 3,
     autoplay: true,
     autoplaySpeed: 1750,
     pauseOnFocus: true,
@@ -32,7 +32,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     centerPadding: '40px',
   };
   return (
-    <Container>
+    <Container fluid style={{ overflow: "hidden" }}>
       <Slider {...settings} >
         {slideDataArr.map((element) => (
           <div key={element.title + "_ID"}  >
