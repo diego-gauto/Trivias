@@ -36,7 +36,9 @@ export const Module6 = (props: IModule6) => {
     infinite: true,
     pauseOnFocus: true,
     autoplay: true,
-    autoplaySpeed: 1750,
+    autoplaySpeed: 4000,
+    speed: 4000,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 768,
