@@ -22,12 +22,14 @@ justify-content: space-around;
 `;
 export const LeftImage = styled.div  `
 margin-left: 20px;
-margin-top: 90px;
+display: flex;
+align-items: flex-end;
 `;
 
 export const RightImage = styled.div  `
-margin-top: 65px;
 margin-left: 140px;
+display: flex;
+align-items: flex-start;
 }
 `;
 export const SectionCenteredBackground = styled(Row)  `

@@ -27,7 +27,7 @@ export const Module2 = (props: IModule2) => {
   return (
     <Container fluid>
       <SectionCenteredBackground>
-        <Col style={{ paddingLeft: 0 }}>
+        <Col style={{ paddingLeft: 0, display: "flex" }}>
 
           <LeftImage>
             <Image src={BG3.src} ></Image>
@@ -36,7 +36,7 @@ export const Module2 = (props: IModule2) => {
         <Col>
 
         </Col>
-        <Col>
+        <Col style={{ display: "flex" }}>
 
           <RightImage>
             <Image src={BG2.src} ></Image>

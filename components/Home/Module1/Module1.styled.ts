@@ -9,18 +9,16 @@ export const SectionC = styled(Row)  `
 margin-top: 40px;
 `;
 export const LeftWrapper = styled(Col)  `
- 
 `;
 export const Left = styled.div  `
-margin-left: 50px;
-width: 90 %; 
+margin: 0 5%;
 `; 
 export const BlurWindow = styled.div  `
 opacity: 0.25; 
  z-index: -1; 
 background-color: #FFFFFF;
-width: 650px;
-height: 780px;
+width: 50%;
+height: 100%;
 position: absolute;
 top: 0;
 margin-left: -80px;
@@ -28,10 +26,16 @@ margin-left: -80px;
 backdrop-filter: blur(180px);
     border: 2px solid #ffffff;
     box-sizing: border-box;    
-    box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%); 
+    box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
+    
+@media (min-width: 1600px) {
+  height: 95%;
+}
+@media (min-width: 1800px) {
+  height: 87.5%;
+}
 `; 
 export const Right = styled.div  ` 
-width: 115%;
 `;
 export const Button01 = styled.div  ` 
 background: #6717CD;
@@ -73,10 +77,9 @@ margin-right: 160px;
 text-align: center;
 `;
 export const RightImage = styled.div  `
-width: 90%;
 height: auto;
 position: relative;
-right: 30px;
+margin: 0 5%;
 `;
 export const IconImageWrapper = styled.div  `
 padding-left: 15px

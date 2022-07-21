@@ -19,7 +19,7 @@ import {
 
 export const Module1 = (props: IModule1) => {
   return (
-    <Container>
+    <Container fluid>
       <BackgroundWrapper>
         <Row>
           <LeftWrapper>
@@ -28,7 +28,7 @@ export const Module1 = (props: IModule1) => {
 
               <SectionA_01>
                 <Row>
-                  <p> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></p>
+                  <p className="ms-0"> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></p>
                 </Row>
               </SectionA_01>
               <SectionA_02>
@@ -97,7 +97,6 @@ export const Module1 = (props: IModule1) => {
                   height: "auto",
                   width: "100%",
                   marginTop: "125px",
-                  marginLeft: "15px"
                 }}
                   src={Img5.src}></Image>
               </RightImage>
