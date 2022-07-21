@@ -29,10 +29,12 @@ export const IconContain = styled.div`
 `;
 export const SelectContain = styled.div`
   display: flex;
+  position: relative;
+  background-color: white;
   padding-block: 10px;
   padding-inline: 30px;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0px -6px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, 0.2);
 `;
 export const UnSelected = styled.div`
   display: flex;

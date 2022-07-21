@@ -12,7 +12,7 @@ class MyDocument extends Document {
       <Html lang={appConfig.locale}>
         <Head />
 
-        <body>
+        <body style={{ display: "flex" }}>
           <Main />
           <NextScript />
         </body>

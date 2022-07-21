@@ -27,6 +27,7 @@ const About = ({ value, setValue }: any) => {
       </TitleContain>
       <IconContain>
         <SelectContain>
+          {/* <WhiteDivide /> */}
           <ListIcon />
         </SelectContain>
         <UnSelected>
