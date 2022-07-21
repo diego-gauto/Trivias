@@ -17,10 +17,5 @@ clip-path: polygon(0px 15%, 100% 0px, 100% 100%, 0px 100%);
 
 export const CanvasSkewBottom = styled(Canvas) `
 clip-path: polygon(0px 0px, 100% 0px, 100% 90%, 0px 100%);
-@media (min-width: 1600px) {
-  height: 95%;
-}
-@media (min-width: 1800px) {
-  height: 87.5%;
-}
+height: 100%;
 `

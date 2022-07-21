@@ -6,34 +6,44 @@ export const ImageTag = styled.div  `
 `;
 export const SectionCentered = styled.div  `
 background-color: white;
-height: 378px;
+height: 430.5px;
 z-index: 1;
 position: absolute;
-width: 858.5px;   
+width: 1073.125px;
 background: #FFFFFF;
 box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
+@media (min-width: 1800px) {
+  height: 500px;
+  width: 1225px;   
+}
 `;
 export const SectionCenteredWrapper = styled.div  `
-bottom: 335px;
+bottom: 375px;
 position: relative;
 display: flex;
 justify-content: space-around;
+@media (min-width: 1800px) {
+  bottom: 450px;  
+}
 `;
 export const LeftImage = styled.div  `
-margin-left: 20px;
 display: flex;
+width: 100%;
 align-items: flex-end;
+justify-content: flex-start;
+margin-left: 15px;
 `;
 
 export const RightImage = styled.div  `
-margin-left: 140px;
 display: flex;
-align-items: flex-start;
+width: 100%;
+align-items: center;
+justify-content: flex-end;
 }
 `;
 export const SectionCenteredBackground = styled(Row)  `
-height: 480px;
+height: 70vh;
 `;
 export const SectionCenteredTopColumn = styled(Col)  `
 height: 10px;

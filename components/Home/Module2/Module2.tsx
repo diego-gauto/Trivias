@@ -30,20 +30,17 @@ export const Module2 = (props: IModule2) => {
         <Col style={{ paddingLeft: 0, display: "flex" }}>
 
           <LeftImage>
-            <Image src={BG3.src} ></Image>
+            <Image src={BG3.src} style={{width: "50%"}}></Image>
           </LeftImage>
-        </Col>
-        <Col>
-
         </Col>
         <Col style={{ display: "flex" }}>
 
           <RightImage>
-            <Image src={BG2.src} ></Image>
+            <Image src={BG2.src} style={{width: "50%"}}></Image>
           </RightImage>
         </Col>
       </SectionCenteredBackground>
-      <Row>
+      <div>
         <SectionCenteredWrapper>
           <SectionCentered>
             <Image src={BG1.src} ></Image>
@@ -146,7 +143,7 @@ export const Module2 = (props: IModule2) => {
             </Row>
           </SectionCentered>
         </SectionCenteredWrapper>
-      </Row>
+      </div>
     </Container>
   )
 }

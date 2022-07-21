@@ -27,13 +27,6 @@ backdrop-filter: blur(180px);
     border: 2px solid #ffffff;
     box-sizing: border-box;    
     box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
-    
-@media (min-width: 1600px) {
-  height: 95%;
-}
-@media (min-width: 1800px) {
-  height: 87.5%;
-}
 `; 
 export const Right = styled.div  ` 
 `;
