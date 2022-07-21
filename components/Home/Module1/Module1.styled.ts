@@ -15,15 +15,6 @@ export const Left = styled.div  `
 margin-left: 50px;
 width: 90 %; 
 `; 
-export const AnimatedBackground = styled.video  `
-width: auto;
-    height: 780px;
-    position: absolute;
-    top: 0;
-    z-index: -2;
-    margin-left: -80px;
-`; 
- //filter: blur(40px);
 export const BlurWindow = styled.div  `
 opacity: 0.25; 
  z-index: -1; 

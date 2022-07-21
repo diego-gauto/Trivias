@@ -29,8 +29,7 @@ export const SlideModule = (props: ISlideModule) => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "95% auto",
                 padding: "0",
-                marginLeft: "5%",
-                marginRight: "5%",
+                margin: "0 auto"
               }}
             >
 

@@ -37,7 +37,8 @@ export const ImageTag = styled.div  `
    
 `;
 export const SectionLeft01 = styled.div  `
- height: 290px
+ height: 290px;
+ padding: 0;
 `;
 export const SectionLeft02 = styled(Row)  `
  padding-left: 15%;
@@ -63,6 +64,7 @@ margin-left: 50px;
 `;
 export const SectionRight02_Wrapper = styled(Row)  `
 margin-bottom: 16px;
+padding-right: 0;
 `;
 export const SectionRight02_01 = styled(Col)  ` 
 margin-left: 5px;

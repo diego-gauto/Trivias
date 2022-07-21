@@ -23,12 +23,12 @@ position: absolute;
 export const ContainerMain = styled.div  ` 
 padding-bottom: 0;
     position: inherit;
-    width: 1200px;
+    width: 100%;
     margin-top: -380px;
     z-index: -1;
 `; 
 export const SliderContainer = styled.div  `
-
+margin-top: 30px;
 `; 
 export const AnimatedBackground = styled.video  `
 width: 100%;
@@ -39,8 +39,16 @@ z-index: -2;
 bottom: 0%;
 `; 
 export const SliderContainerChild = styled.div  ` 
-background-color: rebeccapurple;
 z-index: -1;
 position: relative;
 height: 675px;
-`; 
+`;
+
+export const SliderSectionTitle = styled.p  `
+font-weight: 700;
+font-size: 48px;
+text-transform: uppercase;
+color: #FFFFFF;
+text-align: right;
+padding-right: 20px;
+`

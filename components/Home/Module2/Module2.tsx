@@ -25,9 +25,9 @@ import {
 
 export const Module2 = (props: IModule2) => {
   return (
-    <Container>
+    <Container fluid>
       <SectionCenteredBackground>
-        <Col>
+        <Col style={{ paddingLeft: 0 }}>
 
           <LeftImage>
             <Image src={BG3.src} ></Image>
@@ -147,6 +147,6 @@ export const Module2 = (props: IModule2) => {
           </SectionCentered>
         </SectionCenteredWrapper>
       </Row>
-    </Container >
+    </Container>
   )
 }
