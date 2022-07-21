@@ -52,7 +52,8 @@ position: relative;
 `;
 
 export const IconImage = styled.div  `
-margin-left: 30%
+display: flex;
+justify-content: space-around;
 `;
 
 export const IconText = styled.p  `
