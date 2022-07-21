@@ -156,6 +156,33 @@ export const TextInput = styled.input`
   @media (max-width: 670px) {
     font-size: 12px;;
   }
+`; 
+export const TextInput_2 = styled.input`
+  
+
+  color: #fff;
+  outline: none;
+  opacity: .8;
+  border: 1px solid white;
+  width: 100%;
+  height: 40px;
+  background:transparent;
+  box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
+  border-radius: 20px;
+  padding: 0 0 0 20px;
+  font-size: 14px;
+
+  > i {
+    display: none !important;
+  }
+  
+  ::placeholder{
+    color: #adadac;
+  }
+  @media (max-width: 670px) {
+    font-size: 12px;;
+  }
+
 `;
 export const InputPhone = styled.input`
   color: #fff;
@@ -297,7 +324,7 @@ width: 22.5px;
 background-position: center;
 position: absolute;
 top: 50%;
-right: 20px;
+right: 30px;
 transform: translateY(-50%);
 `;
 export const LineIcon = styled.i`

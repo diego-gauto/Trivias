@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react'
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useForm, SubmitHandler } from "react-hook-form"; 
+import { useForm, SubmitHandler } from "react-hook-form";
 import GradientCanvas from '../../components/GradientCanvas/GradientCanvas';
-import NavBar from '../../components/NavBar/NavBar';
-import Error from "./Error";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   LoginBox,
   Title,
@@ -21,14 +22,14 @@ import {
   PhoneSelect,
   Box2,
   PasswordBox,
-  AnimatedBackground
+  TextInput_2
 } from '../../screens/Login.styled'
 
 import {
   signUpWithCreds
 } from "../../store/actions/AuthActions"
 
-const schema = yup.object().shape({
+const formSchema = yup.object().shape({
   name: yup
     .string()
     .min(6, "El nombre debe ser de al menos 6 caracteres")
@@ -37,22 +38,48 @@ const schema = yup.object().shape({
     .string()
     .email("Debe ser un email válido")
     .required("Campo requerido"),
-  password: yup
-    .string()
-    .min(6, "La contraseña debe ser de al menos 6 caracteres"),
+  password: yup.string()
+    .required('Password is required')
+    .min(6, 'La contraseña debe tener al menos 6 carácteres'),
+  confirmPassword: yup.string()
+    .required('Confirm Password is required')
+    .oneOf([yup.ref('password'), null], 'La contraseña no coincide'),
 });
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
+
+
+
 
 const Register = () => {
 
+  const [passwordShown_1, setPasswordShown_1] = useState(false);
+  const [passwordShown_2, setPasswordShown_2] = useState(false);
+
+  const togglePassword_1 = () => {
+    setPasswordShown_1(!passwordShown_1);
+  };
 
 
-  const { register, handleSubmit } = useForm<FormValues>();
+  const togglePassword_2 = () => {
+    setPasswordShown_2(!passwordShown_2);
+  };
+
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<FormValues>({
+    resolver: yupResolver(formSchema)
+  });
+
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
     console.log(formData)
@@ -75,7 +102,6 @@ const Register = () => {
       <LoginBox>
         <form
           onSubmit={handleSubmit(onSubmit)}
-
         >
           <Title>
             Registrarse
@@ -84,26 +110,30 @@ const Register = () => {
             <Text2>
               Correo electrónico
             </Text2>
-            <input
-
+            <TextInput
               type="text"
               placeholder="correo@correo.com"
-
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               {...register("email")}
             />
+            <div className="invalid-feedback">
+              {errors.email?.message}
+            </div>
 
           </Box1>
           <Box1>
             <Text2>
               Nombre de Usuario
             </Text2>
-            <input
-
+            <TextInput
               type="text"
               placeholder="John Doe"
-
+              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
               {...register("name")}
-            ></input>
+            ></TextInput>
+            <div className="invalid-feedback">
+              {errors.name?.message}
+            </div>
 
           </Box1>
           <Box2>
@@ -112,16 +142,23 @@ const Register = () => {
             </Text2>
             <PasswordBox>
 
-              <input
+              <div>
+                <TextInput_2
+                  type={passwordShown_1 ? "text" : "password"}
+                  placeholder="Contraseña"
+                  className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                  {...register("password")}
+                />
 
-                type={"password"}
-                placeholder="Contraseña"
+                <div
+                  onMouseDown={togglePassword_1}
+                  onMouseUp={togglePassword_1}
+                ><EyeIcon ></EyeIcon></div>
+              </div>
+              <div className="invalid-feedback">
+                {errors.password?.message}
+              </div>
 
-
-                {...register("password")}
-              />
-
-              <EyeIcon />
             </PasswordBox>
           </Box2>
           <Box2>
@@ -129,13 +166,22 @@ const Register = () => {
               Confirmar Contraseña
             </Text2>
             <PasswordBox>
-              <TextInput type={"password"}
-                placeholder="Contraseña"
+              <div>
+                <TextInput_2
+                  type={passwordShown_2 ? "text" : "password"}
+                  placeholder="Confirma la contraseña"
+                  className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                  {...register("confirmPassword")}
+                />
+                <div
+                  onMouseDown={togglePassword_2}
+                  onMouseUp={togglePassword_2}
+                ><EyeIcon ></EyeIcon></div>
+              </div>
 
-              />
-
-
-              <EyeIcon />
+              <div className="invalid-feedback">
+                {errors.confirmPassword?.message}
+              </div>
             </PasswordBox>
           </Box2>
           <Box2>
