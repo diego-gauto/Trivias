@@ -1,6 +1,31 @@
-import Link from 'next/link';
-import React from 'react'
-import { DataTitle, RewardBox, VectorLeft, RewardTitle, VectorRight, Pointbox, Currentlvl, CompleteBar, ProgressBar1, PointsBox, UserPoints, PolygonDown, Nextlvl, RewardData, RewardImage, RewardInfo, RewardTitleBox, RewardPoints, RewardParagraph, AddPay, ArrowRight, RewardContain } from './User.styled';
+
+
+import Link from "next/link";
+
+import {
+  AddPay,
+  ArrowRight,
+  CompleteBar,
+  Currentlvl,
+  DataTitle,
+  Nextlvl,
+  Pointbox,
+  PointsBox,
+  PolygonDown,
+  ProgressBar1,
+  RewardBox,
+  RewardContain,
+  RewardData,
+  RewardImage,
+  RewardInfo,
+  RewardParagraph,
+  RewardPoints,
+  RewardTitle,
+  RewardTitleBox,
+  UserPoints,
+  VectorLeft,
+  VectorRight,
+} from "./User.styled";
 
 const NextReward = () => {
   return (
