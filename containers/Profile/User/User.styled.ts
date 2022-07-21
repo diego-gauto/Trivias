@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
@@ -285,8 +285,8 @@ export const Currentlvl = styled.div`
   font-family:'Montserrat',sans-serif;
   font-weight: 600;
   color:white;
-  background-color: #6717CD;
-  height: 50px;
+  background-color: #0717CD;
+  height: 5px;
   width: 50px;
   border-radius: 50%;
   background-position: center;
@@ -341,7 +341,7 @@ export const UserPoints = styled.p`
   font-size: 14px;
   font-family:'Raleway',sans-serif;
   font-weight: 400;
-  color: #6717CD;
+  color: #0000FD;
   margin:0;
 `;
 export const RewardData = styled.div`
