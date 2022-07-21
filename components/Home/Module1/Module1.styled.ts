@@ -42,6 +42,12 @@ background: #6717CD;
 border-radius: 100px;
 width: 223px;
 height: 54px;
+cursor: pointer;
+&:hover{
+  background-color: #5000b5;
+  transform:scale(1.03);
+  transition:.5s ease all;
+}
 `;
 export const Button02 = styled.div  ` 
 width: 115%;
