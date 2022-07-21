@@ -75,7 +75,7 @@ export const RewardContain = styled.div`
   border-radius:10px;
   padding:20px;
   @media (max-width: 1023px) {
-    width:100%;
+    //width:100%;
   }
 `;
 export const ProfileIconContain =  styled.div`
@@ -127,6 +127,9 @@ export const LogOut = styled.p`
   color: #8E2DE2;
   margin: auto auto 0 auto;
   cursor: pointer;
+ @media (max-width: 850px) {
+  margin-right:6px;
+  }
 `;
 export const PaymentTitle = styled.h1`
   font-family:'Montserrat',sans-serif;
@@ -285,11 +288,15 @@ export const Currentlvl = styled.div`
   font-family:'Montserrat',sans-serif;
   font-weight: 600;
   color:white;
-  background-color: #0717CD;
-  height: 5px;
+  background-color: #6717CD;
+  height: 50px;
   width: 50px;
   border-radius: 50%;
   background-position: center;
+  @media (max-width: 400px) {
+    height: 32px;
+    width: 32px;
+  }
 `;
 export const Nextlvl = styled.div`
   display:flex;
@@ -305,6 +312,10 @@ export const Nextlvl = styled.div`
   width: 50px;
   border-radius: 50%;
   background-position: center;
+  @media (max-width: 400px) {
+    height: 32px;
+    width: 32px;
+  }
 `;
 export const ProgressBar1 = styled.div`
   height: 7px;
@@ -351,8 +362,8 @@ export const RewardData = styled.div`
     flex-direction:column;
     padding-inline:60px;
   }
-  @media (max-width: 400px) {
-    padding-inline:20px;
+  @media (max-width: 850px) {
+    align-items:center;
   }
 `;
 export const RewardInfo = styled.div`
@@ -386,11 +397,14 @@ export const RewardParagraph = styled.p`
   }
 `;
 export const RewardImage = styled.div`
+  background-image: url(../images/reward.png);
+  background-position: center;
+  background-repeat: no-repeat;
   background-color:white;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  height: 205px;
+  //box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  height: 215px;
   border-radius:10px;
-  width: 100%;
+  width: 290px;
 `;
 export const AllEditInputs = styled.div`
   display:flex;

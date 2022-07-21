@@ -158,6 +158,6 @@ export const MenuIcon = styled.i`
 export const LogoS = styled.i`
   background-image: url(../images/Navbar/LogoSmall.png);
   background-repeat:no-repeat;
-  width: 50px;
+  width: 90px;
   height: 50px;
 `;

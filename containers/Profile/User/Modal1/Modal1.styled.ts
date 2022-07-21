@@ -1,5 +1,6 @@
-import { ModalHeader } from 'react-bootstrap';
-import styled from 'styled-components';
+import { ModalHeader } from "react-bootstrap";
+
+import styled from "styled-components";
 
 export const ModalContain = styled.div`
   @font-face{
@@ -26,6 +27,10 @@ export const Title = styled(ModalHeader)`
 export const ModalPay = styled.div`
   display:flex;
   gap: 40px;
+  @media(max-width: 870px) {
+    flex-direction:column;
+    align-items:center;
+  }
 `;
 export const CardText = styled.p`
   font-size: 16px;
@@ -38,7 +43,7 @@ export const PaymentIcon = styled.div`
 `;
 export const PaymentMethod = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: row;
   align-items:center;
   width: 100%;
   padding-block:20px;
@@ -50,6 +55,10 @@ export const ModalPayment = styled.div`
   width:40%;
   gap:40px;
   flex-direction: column;
+  @media(max-width: 870px) {
+    flex-direction: row;
+    width:100%;
+  }
 `;
 export const ModalForm = styled.div`
   display:flex;
@@ -57,6 +66,9 @@ export const ModalForm = styled.div`
   border-radius: 10px;
   padding:20px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  @media(max-width: 870px) {
+    width:100%;
+  }
 `;
 export const Inputs = styled.div`
   display:flex;
@@ -84,6 +96,9 @@ export const ModalInput = styled.input`
 export const BottomInputs = styled.div`
   display:flex;
   gap:20px;
+   @media(max-width: 870px) {
+    flex-direction:column;
+  }
 `;
 export const ButtonDiv = styled.div`
   display: flex;

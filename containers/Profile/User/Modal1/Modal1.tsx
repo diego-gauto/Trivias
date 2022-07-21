@@ -1,10 +1,32 @@
-import Image from 'next/image';
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap';
-import { AddText, BottomInputs, ButtonDiv, CardText, InputInfo, Inputs, ModalCont, ModalContain, ModalForm, ModalInput, ModalPay, ModalPayment, PaymentIcon, PaymentMethod, PurpleButton, Title } from './Modal1.styled';
+
+
+import { Modal } from "react-bootstrap";
+import { useMediaQuery } from "react-responsive";
+
+import Image from "next/image";
+
+import {
+  AddText,
+  BottomInputs,
+  ButtonDiv,
+  CardText,
+  Inputs,
+  InputInfo,
+  ModalCont,
+  ModalContain,
+  ModalForm,
+  ModalInput,
+  ModalPay,
+  ModalPayment,
+  PaymentIcon,
+  PaymentMethod,
+  PurpleButton,
+  Title,
+} from "./Modal1.styled";
 
 const Modal1 = ({ show, setShow }: any) => {
 
+  const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
   const handleClose = () => setShow(false);
 
   return (
@@ -19,8 +41,12 @@ const Modal1 = ({ show, setShow }: any) => {
               <ModalPayment>
                 <PaymentMethod>
                   <PaymentIcon>
-                    <Image src="/images/McPay.png" width={90} height={60} />
+                    {/* <Image src="/images/McPay.png" width={90} height={60} /> */}
                     <Image src="/images/VisaPay.png" width={90} height={60} />
+                  </PaymentIcon>
+                  <PaymentIcon>
+                    <Image src="/images/McPay.png" width={90} height={60} />
+                    {/* <Image src="/images/VisaPay.png" width={90} height={60} /> */}
                   </PaymentIcon>
                   <CardText>
                     Tarjeta de Crédito/Débito

@@ -1,7 +1,26 @@
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { Level, Logo, LogoS, MenuIcon, NavContainer, NavHome, NavResponsive, NavTags, NavTags2, NavText, Points, PointsContain, PurpleButton, UserContain, UserImage, UserText } from "./NavBar.styled";
+
+import {
+  Level,
+  Logo,
+  LogoS,
+  MenuIcon,
+  NavContainer,
+  NavHome,
+  NavResponsive,
+  NavTags,
+  NavTags2,
+  NavText,
+  Points,
+  PointsContain,
+  PurpleButton,
+  UserContain,
+  UserImage,
+  UserText,
+} from "./NavBar.styled";
 import Scroll from "./scroll";
 
 const NavBar = () => {

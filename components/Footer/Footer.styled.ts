@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   display: flex;
@@ -17,13 +16,13 @@ export const FooterContainer = styled.div`
     font-family:Nunito;
     src:url(../fonts/Nunito-VariableFont_wght.ttf);
   }
-  @media(max-width: 1023px) {
+  @media(max-width: 870px) {
     display: block;
-    min-height: 200px;
+    min-height: 220px;
     padding: 10px;
     flex-direction: column;
     column-count: 2;
-    column-gap: 60%;
+    column-gap: 30%;
   }
 `;
 export const Logo2 = styled.i`
@@ -33,25 +32,23 @@ export const Logo2 = styled.i`
   width: 100px;
   height: 75px;
   cursor: pointer;
-  @media(max-width: 1023px) {
-
-    height: 100px;
+  @media(max-width: 870px) {
+    height: 90px;
   }
 `;
-// export const FooterGroupText = styled.div`
-//   display:flex;  
-//   gap:100px;
-//   @media(max-width: 1023px) {
-//     flex-direction: column;
-//     gap: 10px;
-//   }
-// `;
-export const Column = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:20px; 
-  @media(max-width: 1023px) {
+export const FooterGroupText = styled.div`
+  display:flex;  
+  gap:100px;
+  @media(max-width: 870px) {
     flex-direction: column;
+    gap: 10px;
+  }
+`;
+export const Column = styled.div`
+  display: inline;
+  //flex-direction:flex-end;
+  gap:20px; 
+  @media(max-width: 870px) {
     gap: 10px;
   }
 `;
@@ -59,18 +56,16 @@ export const FooterText = styled.p`
   font-size: 18px;
   font-family: 'Nunito',sans-serif;
   margin: 0;
-  @media(max-width: 1023px) {
-    font-size: 14px;
+  @media(max-width: 870px) {
+    font-size: 15px;
+    line-height: 25px;
   }
 `;
 export const FooterIcons = styled.div`
   display:flex;
   flex-direction: column;
   gap:10px;
-  align-items: center;
-  @media(max-width: 1023px) {
-    align-items: unset;
-  }
+  align-items: flex-end;
 `;
 export const BottomContainer = styled.div`
   display: flex;
@@ -88,6 +83,9 @@ export const BottomText = styled.p`
   font-family:'Raleway',sans-serif;
   margin:0;
   opacity:.8;
+  @media(max-width: 870px) {
+      font-size:12px;
+  }
 `;
 export const SocialContainer = styled.div`
   display: flex;
