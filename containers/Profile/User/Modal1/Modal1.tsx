@@ -19,7 +19,9 @@ import {
   ModalPay,
   ModalPayment,
   PaymentIcon,
+  PaymentIcon2,
   PaymentMethod,
+  PaymentMethod2,
   PurpleButton,
   Title,
 } from "./Modal1.styled";
@@ -40,20 +42,20 @@ const Modal1 = ({ show, setShow }: any) => {
             <ModalPay>
               <ModalPayment>
                 <PaymentMethod>
-                  <PaymentIcon>
-                    {/* <Image src="/images/McPay.png" width={90} height={60} /> */}
-                    <Image src="/images/VisaPay.png" width={90} height={60} />
-                  </PaymentIcon>
-                  <PaymentIcon>
-                    <Image src="/images/McPay.png" width={90} height={60} />
-                    {/* <Image src="/images/VisaPay.png" width={90} height={60} /> */}
-                  </PaymentIcon>
-                  <CardText>
+                  <PaymentMethod2>
+                    <PaymentIcon>
+                      <Image src="/images/McPay.svg" width={"180%"} height={"180%"} />
+                    </PaymentIcon>
+                    <PaymentIcon2>
+                      <Image src="/images/VisaPay.svg" width={"180%"} height={"180%"} />
+                    </PaymentIcon2>
+                  </PaymentMethod2>
+                  <CardText >
                     Tarjeta de Crédito/Débito
                   </CardText>
                 </PaymentMethod>
                 <PaymentMethod>
-                  <Image src="/images/PaypalPay.png" width={90} height={60} />
+                  <Image src="/images/Paypal.svg" width={"180%"} height={"180%"} />
                   <CardText>
                     Cuenta de Paypal
                   </CardText>

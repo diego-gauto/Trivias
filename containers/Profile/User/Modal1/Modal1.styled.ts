@@ -29,26 +29,41 @@ export const ModalPay = styled.div`
   gap: 40px;
   @media(max-width: 870px) {
     flex-direction:column;
-    align-items:center;
   }
 `;
 export const CardText = styled.p`
   font-size: 16px;
   font-weight: 600;
+  margin-top:-20px;
   font-family:'Montserrat',sans-serif;
 `;
 export const PaymentIcon = styled.div`
   display: flex;
-  gap: 20px;
+  margin-right:-40px;
+  margin-top:-20px;
+`;
+export const PaymentIcon2 = styled.div`
+  display: flex;
+  margin-top:-20px;
 `;
 export const PaymentMethod = styled.div`
+  height:170px;
+  width:100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items:center;
-  width: 100%;
-  padding-block:20px;
   border-radius:10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+`;
+export const PaymentMethod2 = styled.div`
+  display: flex;
+  align-items:center;
+  border-radius:10px;
+    @media(max-width: 870px) {
+      & div:first-child {
+        display:none;
+      }
+    }
 `;
 export const ModalPayment = styled.div`
   display:flex;
