@@ -19,7 +19,7 @@ border-radius: 10px;
 }
 `;
 export const SectionCenteredWrapper = styled.div  `
-bottom: 375px;
+bottom: 395px;
 position: relative;
 display: flex;
 justify-content: space-around;
@@ -29,7 +29,7 @@ justify-content: space-around;
 `;
 export const LeftImage = styled.div  `
 display: flex;
-width: 100%;
+width: 95%;
 align-items: flex-end;
 justify-content: flex-start;
 margin-left: 15px;
@@ -37,7 +37,8 @@ margin-left: 15px;
 
 export const RightImage = styled.div  `
 display: flex;
-width: 100%;
+width: 95%;
+margin-top: 25px;
 align-items: center;
 justify-content: flex-end;
 }

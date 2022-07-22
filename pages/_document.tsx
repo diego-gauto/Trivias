@@ -10,7 +10,9 @@ class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang={appConfig.locale}>
-        <Head />
+        <Head>
+          <link rel="icon" href="/images/logo.png" />
+        </Head>
 
         <body>
           <Main />

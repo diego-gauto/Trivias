@@ -95,7 +95,7 @@ const Register = () => {
           </LinkText>
         </Text3>
       </LoginBox>
-      <GradientCanvas id="gradient-canvas" />
+      <GradientCanvas id="gradient-canvas" increasedHeight />
     </Background>
   )
 }
