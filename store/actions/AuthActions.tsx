@@ -1,61 +1,80 @@
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, getDocs, getFirestore, query, setDoc, addDoc } from "firebase/firestore";
+import { db } from '../../firebase/firebaseConfig';
+import firebase from "firebase/compat/app";
+import { useAuth } from "../../hooks/useAuth";
 
-//import fb from "../../config/fbConfig"; 
-//import { completeRegistrationEvent } from "./FbPixelsActions";
-
-
-export const signUpWithCreds = (signUpData) => {
+export const signUpWithCreds = (signUpData: { credentials: any; }) => {
   const {
     credentials,
   } = signUpData;
 
-  return (dispatch, { getFirebase, getFirestore }) => {
-    const firebase = getFirebase();
+  console.log(signUpData)
+  //Una vez inicializado es contextual a las llamadas de firebase
+  const auth = getAuth();
 
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(credentials.email, credentials.password)
-      .then((response) => {
-        localStorage.setItem("username", credentials.name);
-        localStorage.setItem("email", credentials.email);
+  return createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
+    .then(async (userCredential) => {
 
-        let usrData = {
-          uid: response.user.uid,
-          name: credentials.name,
-          email: credentials.email,
-        }
+      const user = userCredential.user;
+      localStorage.setItem("username", credentials.name);
+      localStorage.setItem("email", credentials.email);
 
-        //Create the document in Firestore
-        createNewUserDoc(getFirebase, getFirestore, usrData).then(() => {
+      console.log("a")
 
-          /*firebase.auth().currentUser.sendEmailVerification()
-          .then(()=>{
-            console.log("Email verification sent");
-          });*/ //verificación de correo temporalmente desactivada 11-04-2022
+      //createNewUserDoc(usrData).then(() => {
+      await addDoc(collection(db, "users"), {
+        uid: user?.uid,
+        name: credentials.name,
+        email: credentials.email,
 
-          /*
-          //Register user CompleteRegistration event in Facebook Pixel
-          dispatch(completeRegistrationEvent());
-  
-          //Register successful registration in customer.io
-          const cioRegisterSuccessfulRegistration = firebase.functions().httpsCallable('cioRegisterSuccessfulRegistration');
-          return cioRegisterSuccessfulRegistration({name: usrData.name, from_view: fromView}).then(()=>{
-            dispatch({ type: "SIGNUP_SUCCESS" });
-          }).catch((error) => {
-            console.error(new Error(`Error registering event in cio: ${error}`));
-          });
-  
-  
-          */
-        }).catch((error) => {
-          let docCreationError = new Error(`Error creating user document: ${error}`);
-          console.error(docCreationError);
-          throw (docCreationError);
-        })
-      }).catch((error) => {
-        firebase.auth().signOut();
-        console.error(error);
-        dispatch({ type: "SIGNUP_ERROR", error });
-        throw error;
+      }).then(() => {
+
+        console.log("c")
+
+      }).catch((error: any) => {
+        let docCreationError = new Error(`Error creating user document: ${error}`);
+        console.error(docCreationError);
+        throw (docCreationError);
       })
-  }
+    }).catch((error: any) => {
+      firebase.auth().signOut();
+      console.error(error);
+      throw error;
+    })
+
+}
+
+
+export const createNewUserDoc = (
+  usrData: { uid: any; name: any; email: any; photoURL?: any; initScore?: any; }) => {
+  const {
+    uid,
+    name,
+    email,
+    photoURL = null,
+    initScore = 0
+  } = usrData;
+
+
+  console.log("b")
+
+  localStorage.setItem("email", email);
+  localStorage.setItem("username", name);
+
+
+  return setDoc(doc(db, "users", uid), {
+    name: name,
+    email: email,
+    profileImage: photoURL,
+    score: initScore
+
+  }).then((res) => {
+    console.log("setdoc")
+    console.log(res)
+  }).catch((error: any) => {
+    let newError = new Error(`Error in creating user document: ${error}`);
+    console.error(newError);
+    throw (newError);
+  })
 }

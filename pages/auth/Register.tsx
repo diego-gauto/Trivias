@@ -82,7 +82,7 @@ const Register = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log(formData)
+
     let signUpData = {
       credentials: {
         name: formData.name,
@@ -90,7 +90,6 @@ const Register = () => {
         password: formData.password,
       },
     };
-    console.log(signUpData)
     signUpWithCreds(signUpData);
   }
 
