@@ -10,6 +10,7 @@ import {
   BottomInputs,
   ButtonDiv,
   CardText,
+  CardTextContainer,
   Inputs,
   InputInfo,
   ModalCont,
@@ -50,12 +51,19 @@ const Modal1 = ({ show, setShow }: any) => {
                       <Image src="/images/VisaPay.svg" width={"180%"} height={"180%"} />
                     </PaymentIcon2>
                   </PaymentMethod2>
-                  <CardText >
-                    Tarjeta de Crédito/Débito
-                  </CardText>
+                  <CardTextContainer>
+                    <CardText>
+                      Tarjeta de
+                    </CardText>
+                    <CardText>
+                      Crédito/Débito
+                    </CardText>
+                  </CardTextContainer>
                 </PaymentMethod>
                 <PaymentMethod>
-                  <Image src="/images/Paypal.svg" width={"180%"} height={"180%"} />
+                  <PaymentIcon>
+                    <Image src="/images/Paypal.svg" width={"140%"} height={"140%"} />
+                  </PaymentIcon>
                   <CardText>
                     Cuenta de Paypal
                   </CardText>

@@ -1,13 +1,31 @@
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap';
-import Modal3 from '../Modal3/Modal3';
-import { ButtonsDiv, CardInfo, CardText, ChangeMethod, Container, Membership, MemberText, Modal2Contain, PaymentMethod, PayMethod, PurpleButton, RenewalText, Title, TransparentButton, VisaIcon } from './Modal2.styled';
+import React, { useState } from "react";
+
+import { Modal } from "react-bootstrap";
+
+import Modal3 from "../Modal3/Modal3";
+import {
+  ButtonsDiv,
+  CardInfo,
+  CardText,
+  ChangeMethod,
+  Container,
+  Membership,
+  MemberText,
+  Modal2Contain,
+  PaymentMethod,
+  PayMethod,
+  PurpleButton,
+  RenewalText,
+  Title,
+  VisaIcon,
+} from "./Modal2.styled";
 
 const Modal2 = ({ show, setShow }: any) => {
 
   const handleClose = () => setShow(false);
 
   const [show3, setShow3] = useState(false);
+  const handleShow = () => setShow3(true);
 
   return (
     <Modal2Contain>
@@ -44,7 +62,9 @@ const Modal2 = ({ show, setShow }: any) => {
             {/* <TransparentButton onClick={() => { setShow(false); setShow3(true) }}>
               Terminar suscripción
             </TransparentButton> */}
-            <PurpleButton>
+            <PurpleButton onClick={() => {
+              setShow3(true); setShow(false)
+            }} >
               Aceptar
             </PurpleButton>
           </ButtonsDiv>

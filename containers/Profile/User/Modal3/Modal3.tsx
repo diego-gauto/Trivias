@@ -1,6 +1,18 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap';
-import { ButtonsDiv, Container, Expire, Modal3Contain, PurpleButton, Text, TextContainer, Title, TransparentButton } from './Modal3.styled';
+
+
+import { Modal } from "react-bootstrap";
+
+import {
+  ButtonsDiv,
+  Container,
+  Expire,
+  Modal3Contain,
+  PurpleButton,
+  Text,
+  TextContainer,
+  Title,
+  TransparentButton,
+} from "./Modal3.styled";
 
 const Modal3 = ({ show, setShow, setShow2 }: any) => {
 
@@ -30,7 +42,7 @@ const Modal3 = ({ show, setShow, setShow2 }: any) => {
             }}>
               Regresar
             </TransparentButton>
-            <PurpleButton>
+            <PurpleButton onClick={handleClose}>
               Continuar
             </PurpleButton>
           </ButtonsDiv>

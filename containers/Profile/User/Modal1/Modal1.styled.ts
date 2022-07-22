@@ -31,35 +31,67 @@ export const ModalPay = styled.div`
     flex-direction:column;
   }
 `;
+export const CardTextContainer = styled.p`
+  display:flex;
+  justify-content:center;
+  @media(max-width: 870px) {
+    flex-direction:column;
+    & div:first-child {
+      
+    }
+  }
+`;
 export const CardText = styled.p`
+  display:flex;
   font-size: 16px;
   font-weight: 600;
-  margin-top:-20px;
+  margin-left:5px;
+  justify-content:center;
   font-family:'Montserrat',sans-serif;
+  @media(max-width: 870px) {
+    margin-left:0;
+    margin-top:-15px;
+    width:100%;
+  }
 `;
 export const PaymentIcon = styled.div`
   display: flex;
-  margin-right:-40px;
+  //margin-right:-40px;
   margin-top:-20px;
+  margin-bottom:-20px;
+  justify-content:center;
+  @media(max-width: 870px) {
+    margin-bottom:0;
+  }
+
 `;
 export const PaymentIcon2 = styled.div`
   display: flex;
+  margin-bottom:-20px;
   margin-top:-20px;
+  @media(max-width: 870px) {
+    margin-bottom:-5px;
+  }
 `;
 export const PaymentMethod = styled.div`
-  height:170px;
+  height:140px;
   width:100%;
   display: flex;
   flex-direction: column;
-  align-items:center;
   border-radius:10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  @media(max-width: 870px) {
+    width:160px;
+    height:165px;
+    align-items:center;
+  }
 `;
 export const PaymentMethod2 = styled.div`
   display: flex;
   align-items:center;
   border-radius:10px;
     @media(max-width: 870px) {
+      width:140px;
       & div:first-child {
         display:none;
       }
