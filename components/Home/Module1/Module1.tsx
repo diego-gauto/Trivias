@@ -13,22 +13,24 @@ import {
   SectionC, SectionA_02, LeftWrapper, Button01, Button02,
   Button01Content, Button02Content, SectionA_01Text01,
   SectionA_01Text02, SectionA_02Text01, SectionA_02Text02,
-  SectionB_Text, IconElement, IconImageWrapper, BlurWindow, SectionB_TextALT1
+  SectionB_Text, IconElement, IconImageWrapper, BlurWindow,
+  SectionB_TextALT1, ModuleContentWrapper, RightWrapper,
+  RightImageElement, SectionA_01TextWrapper
 } from "./Module1.styled";
 
 
 export const Module1 = (props: IModule1) => {
   return (
-    <Container fluid>
+    <Container fluid style={{ height: "100vh" }}>
       <BackgroundWrapper>
-        <Row>
+        <ModuleContentWrapper>
           <LeftWrapper>
 
             <Left>
 
               <SectionA_01>
                 <Row>
-                  <p className="ms-0"> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></p>
+                  <SectionA_01TextWrapper className="ms-0"> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></SectionA_01TextWrapper>
                 </Row>
               </SectionA_01>
               <SectionA_02>
@@ -90,19 +92,14 @@ export const Module1 = (props: IModule1) => {
             </Left>
 
           </LeftWrapper>
-          <Col>
+          <RightWrapper>
             <Right>
               <RightImage>
-                <Image style={{
-                  height: "auto",
-                  width: "100%",
-                  marginTop: "125px",
-                }}
-                  src={Img5.src}></Image>
+                <RightImageElement src={Img5.src}></RightImageElement>
               </RightImage>
             </Right>
-          </Col>
-        </Row>
+          </RightWrapper>
+        </ModuleContentWrapper>
       </BackgroundWrapper >
     </Container >
   )

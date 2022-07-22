@@ -41,10 +41,9 @@ width: 95%;
 margin-top: 25px;
 align-items: center;
 justify-content: flex-end;
-}
 `;
 export const SectionCenteredBackground = styled(Row)  `
-height: 70vh;
+height: 65vh;
 `;
 export const SectionCenteredTopColumn = styled(Col)  `
 height: 10px;
