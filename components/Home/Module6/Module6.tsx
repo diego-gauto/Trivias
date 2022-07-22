@@ -84,7 +84,7 @@ export const Module6 = (props: IModule6) => {
 */}
 
 
-          <GradientCanvas id="gradient-canvas2" skewTop />
+          <GradientCanvas id="gradient-canvas2" />
 
 
         </SliderContainerChild>

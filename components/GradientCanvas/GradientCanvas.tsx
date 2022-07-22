@@ -1,11 +1,11 @@
 import { useEffect, useRef, useContext } from "react"
-import { CanvasSkewBottom, CanvasSkewTop, Canvas } from "./GradientCanvas.styled"
+import { CanvasIncreasedHeight, Canvas } from "./GradientCanvas.styled"
 import { IGradientCanvas } from "./IGradientCanvas"
 // @ts-expect-error
 import Gradient from "./Gradient"
 
-const GradientCanvas = ({ id, skewTop, skewBottom }: IGradientCanvas) => {
-  let gradient : any
+const GradientCanvas = ({ id, increasedHeight }: IGradientCanvas) => {
+  let gradient: any
 
   // Needs window object
   useEffect(() => {
@@ -25,12 +25,9 @@ const GradientCanvas = ({ id, skewTop, skewBottom }: IGradientCanvas) => {
 
   // @ts-expect-error
   let canvas = <Canvas {...canvasProps} />
-  if (skewTop) {
+  if (increasedHeight) {
     // @ts-expect-error
-    canvas = <CanvasSkewTop {...canvasProps} />
-  } else if (skewBottom) {
-    // @ts-expect-error
-    canvas = <CanvasSkewBottom {...canvasProps} />
+    canvas = <CanvasIncreasedHeight {...canvasProps} />
   }
 
   return canvas

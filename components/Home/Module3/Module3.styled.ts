@@ -13,12 +13,23 @@ background: #6717CD;
 border-radius: 100px;
 width: 157.5px;
 height: 48.7px; 
+cursor: pointer;
+&:hover{
+  background-color: #5000b5;
+  transform:scale(1.03);
+  transition:.5s ease all;
+}
 `;
 export const Button02 = styled.div  ` 
 border: 1px solid #FFFFFF; 
 border-radius: 100px;
 width: 157.5px;
 height: 48.7px;  
+cursor: pointer;
+&:hover{
+  transform:scale(1.03);
+  transition:.5s ease all;
+}
 `;
 export const Newtag = styled.div  ` 
 border: 1px solid #FFFFFF;
@@ -173,7 +184,7 @@ position: relative;
 @font-face{
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
-}  
+}
 `;
 export const TextNew = styled.span  `  
 font-family: 'Raleway';
