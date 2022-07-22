@@ -1,20 +1,39 @@
-import React, { useState } from 'react'
-import ClaimPrizes from './RewardComponent/PointPrizes';
-import PointRewards from './RewardComponent/PointRewards';
-import TimeRewards from './RewardComponent/TimeRewards';
-import { Banner, BannerContain, BannerTitle, CurrentLevel, InnerProgress, InsideContain, LevelContain, OuterProgress, PointsText, ProgressCircle, ProgressContain, ProgressSvg, RewardContainer, UpNarrow, UpNarrow2 } from './Rewards.styled';
+import React, { useState } from "react";
+
+import { useMediaQuery } from "react-responsive";
+
+import PointRewards from "./RewardComponent/PointRewards";
+import TimeRewards from "./RewardComponent/TimeRewards";
+import {
+  Banner,
+  BannerContain,
+  BannerTitle,
+  CurrentLevel,
+  InnerProgress,
+  InsideContain,
+  LevelContain,
+  OuterProgress,
+  PointsText,
+  ProgressCircle,
+  ProgressContain,
+  ProgressSvg,
+  RewardContainer,
+  UpNarrow,
+  UpNarrow2,
+} from "./Rewards.styled";
 
 const Rewards = () => {
 
   const [rewards, setRewards] = useState(true);
+  const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
 
   return (
     <RewardContainer>
       <BannerContain>
         <Banner
           src="/images/Rewards/banner.png"
-          width={1400}
-          height={450}
+          width={responsive870 ? "420" : "1400"}
+          height={responsive870 ? "272" : "450"}
         />
         <InsideContain>
           <BannerTitle>
@@ -34,8 +53,12 @@ const Rewards = () => {
                   <UpNarrow2 />
                 </LevelContain>
               </InnerProgress>
-              <ProgressSvg width="130px" height="130px">
-                <ProgressCircle cx="65" cy="65" r="60" stroke-linecap="round" />
+              <ProgressSvg width={responsive870 ? "96px" : "130px"} height={responsive870 ? "96px" : "130px"}>
+                <ProgressCircle
+                  cx={responsive870 ? "47.5" : "65"}
+                  cy={responsive870 ? "47.5" : "65"}
+                  r={responsive870 ? "42.5" : "60"}
+                  stroke-linecap="round" />
               </ProgressSvg>
             </OuterProgress>
           </ProgressContain>

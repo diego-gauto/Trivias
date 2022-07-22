@@ -4,6 +4,11 @@ export const MainContain = styled.div`
   display:flex;
   padding-inline: 30px;
   margin-top: 20px;
+  @media(max-width: 1023px) {
+    margin-top: -30px;
+    justify-content: space-between;
+    z-index:999;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -12,6 +17,15 @@ export const Container = styled.div`
   padding-inline: 25px;
   border-radius: 10px 10px 0 0;
   box-shadow: 0px -6px 20px 2px rgba(0, 0, 0, 0.25);
+  @media(max-width: 1023px) {
+    width: 160px;
+    height: 40px;
+    margin-top:-20px;
+    background: #6717CD;
+    border-radius: 100px;
+    padding-top: 8px;
+    justify-content: center;
+  }
 `;
 export const OffContainer = styled.div`
   display: flex;
@@ -19,6 +33,15 @@ export const OffContainer = styled.div`
   padding-bottom: 30px;
   padding-inline: 25px;
   cursor:pointer;
+  @media(max-width: 1023px) {
+    width: 160px;
+    height: 40px;
+    margin-top:-20px;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+    padding-top: 8px;
+    justify-content: center;
+  }
 `;
 export const MainTitle = styled.p`
   font-size: 16px;
@@ -26,6 +49,9 @@ export const MainTitle = styled.p`
   font-family:'Montserrat', sans-serif;
   color: #6717CD;
   margin: 0;
+  @media(max-width: 1023px) {
+    color: #FFFFFF;
+  }
 `;
 export const RewardContainer = styled.div`
   display: flex;

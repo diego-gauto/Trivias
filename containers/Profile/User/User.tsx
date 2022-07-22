@@ -16,7 +16,7 @@ import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 
 const User = () => {
-  const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
+  const responsive470 = useMediaQuery({ query: "(max-width: 870px)" });
 
   return (
     <BackgroundProfile>

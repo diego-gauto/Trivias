@@ -29,7 +29,7 @@ import {
 
 const Modal1 = ({ show, setShow }: any) => {
 
-  const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
+  const responsive470 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
 
   return (
