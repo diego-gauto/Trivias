@@ -7,7 +7,7 @@ import {
   EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle,
   ImageBack, LessonContain, LessonTitle, ModalBackground,
   ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle,
-  Text, TextContainer, Title, Titles, TransparentButton, VideoContain, Lock, PlayIcon,
+  Text, TextContainer, Title, Titles, TransparentButton, VideoContain, Lock, PlayIcon, InsideContent, InsideText, ContainVideo,
 } from '../../Module3/Modal/Modal1.styled';
 
 const Modal1 = ({ show, setShow }: any) => {
@@ -27,6 +27,11 @@ const Modal1 = ({ show, setShow }: any) => {
                 x
               </Cross>
               <TextContainer>
+                <InsideContent>
+                  <InsideText>
+                    Nuevo
+                  </InsideText>
+                </InsideContent>
                 <Title>
                   Curso de Uñas Francesas
                 </Title>
@@ -98,10 +103,12 @@ const Modal1 = ({ show, setShow }: any) => {
               </TransparentButton>
             </SeasonContain>
             <VideoContain>
-              <EpisodeContain>
-                <CardImage src="/images/Preview/card8.png" width={350} height={200} />
-                <Lock />
-              </EpisodeContain>
+              <ContainVideo>
+                <EpisodeContain>
+                  <CardImage src="/images/Preview/card8.png" width={350} height={200} />
+                  <Lock />
+                </EpisodeContain>
+              </ContainVideo>
               <EpisodeInfo>
                 <EpisodeTitle>
                   Epidosio 1: Lorem Ipsum

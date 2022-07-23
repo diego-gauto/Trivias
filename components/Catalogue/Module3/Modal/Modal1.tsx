@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react'
 import { PlayIcon, PurpleButton } from '../../Module1/Module1.styled';
 import { Progress } from '../../Module2/Module2.styled';
-import { AboutContain, BackgroundOverlay, ButtonContain, Container, CourseContain, Cross, Data, Datacontain, DataSpan, Description, DropDown, EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle, ImageBack, InsideContent, InsideText, LessonContain, LessonTitle, ModalBackground, ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle, Text, TextContainer, Title, Titles, TransparentButton, VideoContain } from './Modal1.styled';
+import { AboutContain, BackgroundOverlay, ButtonContain, Container, ContainVideo, CourseContain, Cross, Data, Datacontain, DataSpan, Description, DropDown, EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle, ImageBack, ImageDiv, InsideContent, InsideText, LessonContain, LessonTitle, ModalBackground, ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle, Text, TextContainer, Title, Titles, TransparentButton, VideoContain } from './Modal1.styled';
 
 const Modal1 = ({ show, setShow }: any) => {
   const handleClose = () => setShow(false);
@@ -94,10 +94,12 @@ const Modal1 = ({ show, setShow }: any) => {
               </TransparentButton>
             </SeasonContain>
             <VideoContain>
-              <EpisodeContain>
-                <Image src="/images/Preview/card1.png" width={350} height={200} />
-                <Progress style={{ width: '60%' }} />
-              </EpisodeContain>
+              <ContainVideo>
+                <EpisodeContain>
+                  <Image src="/images/Preview/card1.png" width={350} height={200} />
+                  <Progress style={{ width: '60%' }} />
+                </EpisodeContain>
+              </ContainVideo>
               <EpisodeInfo>
                 <EpisodeTitle>
                   Epidosio 1: Lorem Ipsum

@@ -3,8 +3,26 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  width: 100%;
   justify-content: center;
   position: relative;
+`;
+export const ImageContain = styled.div`
+  width: 100%;
+  height: 600px;
+  position: relative;
+  @media (max-width: 1100px) {
+    height 500px;
+  }
+  @media (max-width: 850px) {
+    height 400px;
+  }
+  @media (max-width: 650px) {
+    height 300px;
+  }
+  @media (max-width: 450px) {
+    height 200px;
+  }
 `;
 export const TextContain = styled.div`
   display: flex;

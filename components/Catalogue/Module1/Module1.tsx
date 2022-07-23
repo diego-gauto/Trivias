@@ -1,14 +1,16 @@
 import React from 'react'
-import { Title, Banner, Container, TextContain, SubText, ButtonContain, PurpleButton, TransparentButton, PlayIcon } from './Module1.styled';
+import { Title, Banner, Container, TextContain, SubText, ButtonContain, PurpleButton, TransparentButton, PlayIcon, ImageContain } from './Module1.styled';
 
 const Module1 = () => {
   return (
     <Container>
-      <Banner
-        src="/images/Preview/fondo1.png"
-        width={1400}
-        height={650}
-      />
+      <ImageContain>
+        <Banner
+          src="/images/Preview/fondo1.png"
+          layout="fill"
+        />
+      </ImageContain>
+
       <TextContain>
         <Title>
           Curso 1: Episodio 05 “El Regreso”
@@ -26,7 +28,6 @@ const Module1 = () => {
           </TransparentButton>
         </ButtonContain>
       </TextContain>
-
     </Container>
   )
 }
