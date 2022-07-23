@@ -5,6 +5,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   margin-top: 40px;
+  margin-left: 12px;
 `;
 export const TitleClaim = styled.h1`
   font-size: 18px;
@@ -24,15 +25,14 @@ export const AllPrizes = styled.div`
   margin-bottom: 20px;
   gap: 60px;
   @media (max-width: 870px) {
+    flex-wrap: wrap;
     margin-left:2%;
     margin-right:2%;
-    flex-wrap: wrap;
-    flex-flow: row-wrap;
-    width: 158px;
   }
 `;
 export const PrizeContain = styled.div`
   display: flex;
+  width: 150px;
   flex-direction: column;
   gap: 3px;
 `;

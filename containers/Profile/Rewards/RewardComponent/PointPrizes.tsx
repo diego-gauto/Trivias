@@ -1,6 +1,16 @@
-import Image from 'next/image';
-import React from 'react'
-import { AllPrizes, MainContainer, PrizeContain, PrizeImage, PrizeInfo, PrizeTitle, TitleClaim } from './ClaimPrizes.styled';
+
+
+import Image from "next/image";
+
+import {
+  AllPrizes,
+  MainContainer,
+  PrizeContain,
+  PrizeImage,
+  PrizeInfo,
+  PrizeTitle,
+  TitleClaim,
+} from "./ClaimPrizes.styled";
 
 const PointPrizes = () => {
   return (

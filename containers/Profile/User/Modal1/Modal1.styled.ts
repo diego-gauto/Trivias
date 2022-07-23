@@ -36,9 +36,6 @@ export const CardTextContainer = styled.p`
   justify-content:center;
   @media(max-width: 870px) {
     flex-direction:column;
-    & div:first-child {
-      
-    }
   }
 `;
 export const CardText = styled.p`

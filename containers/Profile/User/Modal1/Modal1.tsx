@@ -29,7 +29,7 @@ import {
 
 const Modal1 = ({ show, setShow }: any) => {
 
-  const responsive470 = useMediaQuery({ query: "(max-width: 870px)" });
+  const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
 
   return (
@@ -64,9 +64,14 @@ const Modal1 = ({ show, setShow }: any) => {
                   <PaymentIcon>
                     <Image src="/images/Paypal.svg" width={"140%"} height={"140%"} />
                   </PaymentIcon>
-                  <CardText>
-                    Cuenta de Paypal
-                  </CardText>
+                  <CardTextContainer>
+                    <CardText>
+                      Cuenta de
+                    </CardText>
+                    <CardText>
+                      Paypal
+                    </CardText>
+                  </CardTextContainer>
                 </PaymentMethod>
               </ModalPayment>
               <ModalForm>
