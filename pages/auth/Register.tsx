@@ -1,8 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, ChangeEvent, useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import GradientCanvas from '../../components/GradientCanvas/GradientCanvas';
+import 'react-phone-number-input/style.css'
+import PhoneInput, {
+  parsePhoneNumber,
+  getCountryCallingCode
+} from "react-phone-number-input";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -53,18 +58,17 @@ type FormValues = {
   confirmPassword: string;
 };
 
-
-
-
 const Register = () => {
 
   const [passwordShown_1, setPasswordShown_1] = useState(false);
   const [passwordShown_2, setPasswordShown_2] = useState(false);
 
+  const [phoneInput, setPhoneInput] = useState();
+
+
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
   };
-
 
   const togglePassword_2 = () => {
     setPasswordShown_2(!passwordShown_2);
@@ -73,6 +77,7 @@ const Register = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors }
@@ -81,19 +86,38 @@ const Register = () => {
   });
 
 
+
+
   const onSubmit: SubmitHandler<FormValues> = formData => {
+
+    var value = (document.getElementById("input_1") as HTMLInputElement).value;
+    var phoneInputValidation = ""
+    if (value !== undefined && value !== null) {
+      phoneInputValidation = value
+    }
 
     let signUpData = {
       credentials: {
         name: formData.name,
         email: formData.email,
         password: formData.password,
+        phoneInput: phoneInputValidation,
       },
     };
     signUpWithCreds(signUpData);
   }
 
 
+  /*   const handlePhoneInput = (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+  
+      console.log(newValue)
+      setPhoneNumber(newValue);
+    } */
+
+  useEffect(() => {
+    console.log(phoneInput)
+  }, [phoneInput])
 
 
   return (
@@ -120,6 +144,7 @@ const Register = () => {
             </div>
 
           </Box1>
+          <br />
           <Box1>
             <Text2>
               Nombre de Usuario
@@ -135,6 +160,7 @@ const Register = () => {
             </div>
 
           </Box1>
+          <br />
           <Box2>
             <Text2>
               Contraseña
@@ -160,6 +186,7 @@ const Register = () => {
 
             </PasswordBox>
           </Box2>
+          <br />
           <Box2>
             <Text2>
               Confirmar Contraseña
@@ -183,28 +210,28 @@ const Register = () => {
               </div>
             </PasswordBox>
           </Box2>
+          <br />
           <Box2>
             <Text2>
-              Telefono
+              Teléfono
             </Text2>
-            <PhoneSelect>
-              <option>
-                +52
-              </option>
-              <option>
-                +1
-              </option>
-            </PhoneSelect>
-            <LineIcon />
-            <InputPhone
-              placeholder="1234567890"
+            <PhoneInput
+              onCountryChange={() => setPhoneInput}
+              onChange={() => setPhoneInput}
+              limitMaxLength={true}
+              international={true}
+              defaultCountry="MX"
+              id="input_1"
             />
+
           </Box2>
+          <br />
           <AllButtons>
             <PurpleButton2 type='submit'>
               Crear Cuenta
             </PurpleButton2>
           </AllButtons>
+          <br />
           <Text3>
             ¿Ya eres parte? &nbsp;
             <LinkText>
@@ -214,7 +241,7 @@ const Register = () => {
         </form>
       </LoginBox>
       <GradientCanvas id="gradient-canvas" increasedHeight />
-    </Background>
+    </Background >
   )
 }
 export default Register;

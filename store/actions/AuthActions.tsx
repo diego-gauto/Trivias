@@ -27,6 +27,12 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         uid: user?.uid,
         name: credentials.name,
         email: credentials.email,
+        phoneNumber: credentials.phoneInput,
+        role: "user", //user, userAdmin, professor
+        plan: "free", //gonvarPlus
+        score: 0,
+        urlImage: "none yet",
+
 
       }).then(() => {
 
@@ -45,36 +51,3 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
 
 }
 
-
-export const createNewUserDoc = (
-  usrData: { uid: any; name: any; email: any; photoURL?: any; initScore?: any; }) => {
-  const {
-    uid,
-    name,
-    email,
-    photoURL = null,
-    initScore = 0
-  } = usrData;
-
-
-  console.log("b")
-
-  localStorage.setItem("email", email);
-  localStorage.setItem("username", name);
-
-
-  return setDoc(doc(db, "users", uid), {
-    name: name,
-    email: email,
-    profileImage: photoURL,
-    score: initScore
-
-  }).then((res) => {
-    console.log("setdoc")
-    console.log(res)
-  }).catch((error: any) => {
-    let newError = new Error(`Error in creating user document: ${error}`);
-    console.error(newError);
-    throw (newError);
-  })
-}

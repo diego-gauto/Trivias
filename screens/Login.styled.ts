@@ -223,7 +223,7 @@ export const ArchiveInput = styled.input`
   }
 `;
 export const PhoneSelect = styled.select`
-  color: #fff;
+  color: #C6C6C8;
   cursor:pointer;
   outline: none;
   opacity: .8;
