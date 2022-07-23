@@ -240,7 +240,7 @@ const Register = () => {
           </Text3>
         </form>
       </LoginBox>
-      <GradientCanvas id="gradient-canvas" increasedHeight />
+      <GradientCanvas id="gradient-canvas" />
     </Background >
   )
 }
