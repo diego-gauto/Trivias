@@ -1,15 +1,31 @@
-import React from 'react'
-import { Circle, CompleteCircle, CompleteDivisor, CompleteText, ContainLevel, Divisor, LevelText } from './RewardComp.styled';
 
+
+import { useMediaQuery } from "react-responsive";
+
+import {
+  Circle,
+  CompleteCircle,
+  CompleteDivisor,
+  CompleteText,
+  ContainLevel,
+  Divisor,
+  LevelText,
+} from "./RewardComp.styled";
 
 const Points = () => {
   let UserPoints = 600;
 
   if (UserPoints >= 100 && UserPoints <= 399) {
+    const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
+
     return (
       <>
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle style={{
+            width: responsive870 ? 48 : 50,
+            height: responsive870 ? 48 : 50,
+            border: '2px solid #8E2DE2'
+          }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 1 <br /> 100 puntos
           </LevelText>

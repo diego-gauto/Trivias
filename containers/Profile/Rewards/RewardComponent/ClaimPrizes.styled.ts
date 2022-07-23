@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
@@ -15,12 +14,22 @@ export const TitleClaim = styled.h1`
 `;
 export const PrizeImage = styled.div`
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  //box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  @media (max-width: 870px) {
+    width: 150px;
+  }
 `;
 export const AllPrizes = styled.div`
   display: flex;
   margin-bottom: 20px;
   gap: 60px;
+  @media (max-width: 870px) {
+    margin-left:2%;
+    margin-right:2%;
+    flex-wrap: wrap;
+    flex-flow: row-wrap;
+    width: 158px;
+  }
 `;
 export const PrizeContain = styled.div`
   display: flex;
