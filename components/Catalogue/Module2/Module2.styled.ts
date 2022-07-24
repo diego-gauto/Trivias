@@ -27,14 +27,15 @@ export const CardContainer = styled.div`
 export const Video = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 420px;
+  max-width: 300px;
+  min-width: 180px;
 `;
 export const VideoContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   position: relative;
-  min-width: 180px;
+  
 `;
 export const Background = styled(Image)`
 `;

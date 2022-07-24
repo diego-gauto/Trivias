@@ -142,9 +142,9 @@ const Purchase = () => {
                         </PayText>
                       </PaymentMethod>
                       <PaymentMethod>
-                        <PaypalIcon />
+                        <VisaIcon />
                         <PayText>
-                          Paypal Mofupiyo
+                          Visa terminada en 3990
                         </PayText>
                       </PaymentMethod>
                     </>
@@ -168,7 +168,10 @@ const Purchase = () => {
                   </NewMethodBox>
                   <NewMethodBox >
                     <NewMethodContain>
-                      <PayPal />
+                      <PayPal onClick={() => {
+                        setPayment(false),
+                          setCardInfo(false);
+                      }} />
                     </NewMethodContain>
                     <PayText2>
                       Cuenta de Paypal

@@ -26,10 +26,10 @@ export const Title = styled(ContinueText)`
 export const Cardcontent = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 450px;
+  max-width: 400px;
   @media( max-width: 1023px){
-    max-width: 320px;
-    min-width: 320px;
+    max-width: 250px;
+    min-width: 180px;
   }
 `;
 export const ImageContent = styled.div`
@@ -63,7 +63,11 @@ export const VideoInfo = styled.div`
   gap: 10px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 0 0 10px 10px;
-  max-width: 450px;
+  max-width: 400px;
+  @media( max-width: 600px){
+    max-width: 250px;
+    gap:0;
+  }
 `;
 export const TextContain = styled.div`
   display: flex;
@@ -78,7 +82,7 @@ export const Text1 = styled.p`
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media( max-width: 1023px){
-    font-size: 20px;
+    font-size: 14px;
   }
 `;
 export const Text2 = styled.span`
@@ -111,5 +115,10 @@ export const ViewCourse = styled.p`
     color: white;
     background-color: #6717CD;
     border-radius: 0 0 10px 10px;
+  }
+  @media( max-width: 1023px){
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
   }
 `;

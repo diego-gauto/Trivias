@@ -40,7 +40,7 @@ export const ModalPurchase1 = ({ show, setShow }: any) => {
           </ButtonsDiv>
         </Container>
       </Modal>
-      <ModalPurchase2 show={show2} setShow={setShow2} setShow1={setShow} />
+      <ModalPurchase2 show={show2} setShow={setShow2} />
     </ModalContain>
   )
 }
