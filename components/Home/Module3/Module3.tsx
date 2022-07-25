@@ -109,29 +109,31 @@ export const Module3 = (props: IModule3) => {
   );
 
   return (
-    <Container>
+    <Container fluid style={{ paddingLeft: 0 }}>
       <ModuleImage
         style={{
           backgroundImage: 'url(' + courseImg + ')',
           backgroundRepeat: 'no-repeat',
           height: "625px",
           width: "auto",
+          paddingLeft: 0,
+          marginLeft: 0,
         }}
       >
         <Row
-
+        
         >
           <Col>
             <Left>
-              <Row><ImageTag
+              <Row style={{ padding: 0 }}><ImageTag
                 style={{
                   backgroundImage: 'url(' + groupTag + ')',
                   backgroundRepeat: 'no-repeat',
                   height: '158px',
                   width: '100%',
-                  marginLeft: '12px',
                   marginTop: '-5px',
                   backgroundSize: '19.5% auto',
+                  padding: 0,
                 }}
 
 
@@ -141,7 +143,7 @@ export const Module3 = (props: IModule3) => {
               </Row>
               <SectionLeft02
               >
-                <Col>
+                <Col style={{ padding: 0 }}>
                   <Row>
                     <Newtag>
                       <TextNew>{button}</TextNew>
@@ -160,9 +162,9 @@ export const Module3 = (props: IModule3) => {
               <Row>
                 <SectionRight01><Text01>Lo que aprenderas en este curso...</Text01></SectionRight01>
               </Row>
-              <Row>
+              <>
                 <SectionRight02>
-                  <Row>
+                  <>
                     <SectionRight02_Wrapper>
                       <SectionRight02_01>
                         <Image src={Icon1.src}></Image>
@@ -174,8 +176,8 @@ export const Module3 = (props: IModule3) => {
                       </SectionRight02_02>
 
                     </SectionRight02_Wrapper>
-                  </Row>
-                  <Row>
+                  </>
+                  <>
                     <SectionRight02_Wrapper>
                       <SectionRight02_01>
                         <Image src={Icon2.src}></Image>
@@ -186,8 +188,8 @@ export const Module3 = (props: IModule3) => {
                         <Row><Text04> Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Text04></Row>
                       </SectionRight02_02>
                     </SectionRight02_Wrapper>
-                  </Row>
-                  <Row>
+                  </>
+                  <>
                     <SectionRight02_Wrapper>
                       <SectionRight02_01>
                         <Image src={Icon3.src}></Image>
@@ -198,13 +200,11 @@ export const Module3 = (props: IModule3) => {
                         <Row><Text04>Lorem ipsum dolor sitamet, consecteur adipiscing elit ut aliquam</Text04> </Row>
                       </SectionRight02_02>
                     </SectionRight02_Wrapper>
-                  </Row>
+                  </>
                 </SectionRight02>
-              </Row>
+              </>
 
-              <Row>
-                <SectionRight03><Text05>Desde $120.00</Text05></SectionRight03>
-              </Row>
+              <SectionRight03><Text05>Desde $120.00</Text05></SectionRight03>
 
               <Row>
                 <SectionRight04>
@@ -228,6 +228,6 @@ export const Module3 = (props: IModule3) => {
         </Row >
 
       </ModuleImage >
-    </Container >
+    </Container>
   )
 }

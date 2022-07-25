@@ -5,26 +5,33 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import 'swiper/css';
+
 SwiperCore.use([Autoplay]);
+
 export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
+
   const { isInfinite } = props;
   const { slideData } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
+
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
+
   const onMouseEnter = () => {
     if (swiperRef.current) {
       swiperRef.current.autoplay.stop();
     }
   };
+
   const onMouseLeave = () => {
     if (swiperRef.current) {
       swiperRef.current.autoplay.start();
     }
   };
+
   const settings = {
     loop: isInfinite,
     autoplay: {
@@ -35,6 +42,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     slidesPerView: 3.5,
     spaceBetween: 30,
   };
+
   return (
     <Container
       fluid
