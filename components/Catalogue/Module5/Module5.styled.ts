@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
 `;
@@ -15,8 +16,17 @@ export const Content = styled.div`
   flex-direction: column;
   width: 100%;
   position: absolute;
-  top: 110px;
+  height 430px;
+  top: 50px;
   gap: 20px;
+`;
+export const ImageContain = styled.div`
+  width: 100%;
+  height: 550px;
+  position: relative;
+  @media (max-width: 1023px) {
+    height 480px;
+  }
 `;
 export const TextContainer = styled.div`
   display: flex;
@@ -24,18 +34,31 @@ export const TextContainer = styled.div`
   align-items: center;
   padding-left: 40px;
   padding-right: 100px;
+  @media(max-width:1023px){
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding-left: 20px;
+    padding-right: 0;
+  }
 `;
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items:center;
   gap: 5px;
+  @media(max-width:1023px){
+    align-items: flex-start;
+  }
 `;
 export const Title = styled.h1`
   color: white;
   font-size: 24px;
   font-family: 'Montserrat',sans-serif;
   margin: 0;
+  @media(max-width:1023px){
+    font-size: 20px;
+  }
 `;
 export const LimitTime = styled.p`
   color: white;
@@ -50,6 +73,9 @@ export const SuscribeText = styled.p`
   font-size: 24px;
   font-family: 'Montserrat',sans-serif;
   margin: 0;
+  @media(max-width:1023px){
+    font-size: 20px;
+  }
 `;
 export const SpanText = styled.span`
   color: #E0C3FC;
@@ -61,14 +87,54 @@ export const SpanText = styled.span`
 export const CardContain = styled.div`
   display: flex;
   padding-inline: 20px;
-  width: 100%;
+
   justify-content: space-between;
   align-items: center;
+  @media(max-width:1023px){
+    width: 300px;
+    position: relative;
+    justify-content: center;
+  }
 `;
 export const Cardcontent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 380px;
+  
+  @media(max-width:1023px){
+    position: absolute;
+    top: 0;
+    max-width: 250px;
+  min-width: 200px;
+  }
+`;
+export const Cardcontent2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+  @media(max-width:1023px){
+    position: absolute;
+    top: -20px;
+    left: 0;
+    max-width: 250px;
+  min-width: 200px;
+    }
+`;
+export const Cardcontent3 = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media(max-width:1023px){
+    position: absolute;
+    top: 20px;
+    right: 0;
+    max-width: 250px;
+  min-width: 200px;
+  }
+`;
+export const RespContain = styled.div`
+  @media(max-width: 1023px){
+    display: flex;
+    justify-content: center;
+  }
 `;
 export const TextContain = styled.div`
   display: flex;
@@ -85,6 +151,7 @@ export const ButtonContain = styled.div`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
+  
   font-family: 'Montserrat', sans-serif;
   background-color: #6717CD;
   padding-block: 15px;
@@ -97,10 +164,17 @@ export const PurpleButton = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
+  @media(max-width:1023px){
+    position: absolute;
+  bottom: 20px;
+  }
 `;
 export const Divider = styled.p`
   font-size: 60px;
   color: white;
   margin: 0;
   cursor:context-menu;
+  @media(max-width:1023px){
+    display: none;
+  }
 `;

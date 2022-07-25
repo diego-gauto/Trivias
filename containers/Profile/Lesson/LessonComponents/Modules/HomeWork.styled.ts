@@ -8,6 +8,7 @@ export const HomeWorkContain = styled.div`
   @media (max-width: 1023px){
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
+    gap: 10px;
     border-radius: 10px;
   }
 `;
@@ -16,11 +17,18 @@ export const TaskTitle = styled.p`
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: 0;
+  @media (max-width: 1023px) {
+    font-size: 14px;
+  }
 `;
 export const TaskText = styled.p`
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  text-align: justify;
+  @media (max-width: 1023px) {
+    font-size: 12px;
+  }
 `;
 export const ButtonDiv = styled.div`
   display: flex;

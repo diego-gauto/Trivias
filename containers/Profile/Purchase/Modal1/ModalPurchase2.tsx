@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal } from 'react-bootstrap';
 import { ButtonsDiv2, Container, CouponContain, CouponText, DiscountApproved, DiscountText, ModalContain, PurpleButton, Title } from './ModalPurchase1.styled';
 
-export const ModalPurchase2 = ({ show, setShow, setShow1 }: any) => {
+export const ModalPurchase2 = ({ show, setShow }: any) => {
 
   const handleClose = () => setShow(false);
 
@@ -25,7 +25,7 @@ export const ModalPurchase2 = ({ show, setShow, setShow1 }: any) => {
             ¡Cupón canjeado!
           </DiscountApproved>
           <ButtonsDiv2>
-            <PurpleButton onClick={() => { setShow1(true); setShow(false) }}>
+            <PurpleButton onClick={handleClose}>
               Regresar
             </PurpleButton>
           </ButtonsDiv2>

@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AppProps } from "next/dist/shared/lib/router/router";
 import Layout from "../components/Layout";
 import "./styles.css";
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
@@ -10,5 +9,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Layout>
   );
 }
-
 export default MyApp;

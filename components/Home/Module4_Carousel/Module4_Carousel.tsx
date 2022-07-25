@@ -58,6 +58,5 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
         ))}
       </Swiper>
     </Container>
-
   )
 }

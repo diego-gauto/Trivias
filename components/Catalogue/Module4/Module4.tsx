@@ -19,7 +19,7 @@ const Module4 = () => {
           <ImageContent>
             <CardImage
               src="/images/Preview/card5.png"
-              width={450}
+              width={400}
               height={210}
             />
             <InsideContent>
@@ -50,7 +50,7 @@ const Module4 = () => {
           <ImageContent>
             <CardImage
               src="/images/Preview/card6.png"
-              width={450}
+              width={400}
               height={210}
             />
             <InsideContent>
@@ -81,7 +81,7 @@ const Module4 = () => {
           <ImageContent>
             <CardImage
               src="/images/Preview/card7.png"
-              width={450}
+              width={400}
               height={210}
             />
             <InsideContent>
