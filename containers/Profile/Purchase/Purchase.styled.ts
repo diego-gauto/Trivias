@@ -477,7 +477,6 @@ export const Input = styled.input`
   border:1px solid #6717CD;
   border-radius:20px;
   :focus{
-    // color: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
     outline: 1px solid #8E2DE2;
   }
   @media( max-width: 400px){

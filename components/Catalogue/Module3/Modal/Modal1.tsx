@@ -2,7 +2,16 @@ import Image from 'next/image';
 import React from 'react'
 import { PlayIcon, PurpleButton } from '../../Module1/Module1.styled';
 import { Progress } from '../../Module2/Module2.styled';
-import { AboutContain, BackgroundOverlay, ButtonContain, Container, ContainVideo, CourseContain, Cross, Data, Datacontain, DataSpan, Description, DropDown, EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle, ImageBack, ImageDiv, InsideContent, InsideText, LessonContain, LessonTitle, ModalBackground, ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle, Text, TextContainer, Title, Titles, TransparentButton, VideoContain } from './Modal1.styled';
+import {
+  AboutContain, BackgroundOverlay, ButtonContain,
+  Container, ContainVideo, CourseContain, Cross, Data,
+  Datacontain, DataSpan, Description, DropDown, EpisodeContain,
+  EpisodeInfo, EpisodeTime, EpisodeTitle, ImageBack, ImageDiv,
+  InsideContent, InsideText, LessonContain, LessonTitle,
+  ModalBackground, ModalCont, ModalContain, ModalMod,
+  SeasonContain, SelectDrop, SubTitle, Text, TextContainer,
+  Title, Titles, VideoContain
+} from './Modal1.styled';
 
 const Modal1 = ({ show, setShow }: any) => {
   const handleClose = () => setShow(false);
@@ -48,7 +57,12 @@ const Modal1 = ({ show, setShow }: any) => {
                 Sobre el curso:
               </Titles>
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, sem rutrum blandit convallis. Penatibus scelerisque tempus, volutpat magna venenatis, volutpat. Ut nisl urna, pharetra et ultrices. Sapien lacinia fringilla rhoncus egestas nisl aliquam. Pellentesque ornare luctus lobortis non id in vestibulum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nisi, sem rutrum blandit convallis. Penatibus scelerisque
+                tempus, volutpat magna venenatis, volutpat. Ut nisl urna,
+                pharetra et ultrices. Sapien lacinia fringilla rhoncus egestas
+                nisl aliquam. Pellentesque ornare luctus lobortis non id in
+                vestibulum.
               </Text>
             </AboutContain>
             <Datacontain>
@@ -88,10 +102,17 @@ const Modal1 = ({ show, setShow }: any) => {
               <LessonTitle>
                 Lista de lecciones
               </LessonTitle>
-              <TransparentButton>
-                Temporada 1
-                <DropDown />
-              </TransparentButton>
+              <SelectDrop>
+                <option selected>
+                  Temporada 1
+                </option>
+                <option>
+                  Temporada 2
+                </option>
+                <option>
+                  Temporada 3
+                </option>
+              </SelectDrop>
             </SeasonContain>
             <VideoContain>
               <ContainVideo>

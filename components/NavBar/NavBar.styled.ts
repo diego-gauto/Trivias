@@ -162,23 +162,53 @@ export const LogoS = styled.i`
   height: 50px;
 `;
 export const HamburgerContain = styled.div`
- 
-`;
-export const HBMenu = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   background-color: white;
+  padding-block: 20px;
+  padding-inline: 30px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
+  z-index: 10;
   top: 0;
   left: 0;
-  transition: all .5 ease;
+  @media(max-width: 424px){
+    padding: 20px;
+  }
+`;
+export const IconsContain = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Close = styled.i`
+  background-image: url(../images/Navbar/CloseIcon.png);
+  background-repeat:no-repeat;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+`;
+export const HBMenu = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   list-style: none;
+  @media(max-width: 424px){
+    padding: 10px;
+  }
 `;
 export const HBList = styled.li`
   color: black;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 20px;
-  padding: 20px;
+  font-family: 'Montserrat', sans-seriff;
+  padding-block: 20px;
   cursor: pointer;
+  @media(max-width: 424px){
+    font-size: 16px;
+  }
 `;
