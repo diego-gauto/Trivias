@@ -8,7 +8,7 @@ grid-template-areas:
 grid-template-columns: 4fr 5fr;
 height: 100vh;
 align-items: center;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   grid-template-areas:
   "right"
   "left";
@@ -18,7 +18,7 @@ align-items: center;
 `
 export const SectionB = styled(Row)  ` 
 margin-top: 35px;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   margin-top: 0;
   display: flex;
   flex-direction: column;
@@ -44,8 +44,12 @@ flex-direction: column;
 `;
 export const Left = styled.div  `
 margin: 0 5%;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
 }
 `; 
 export const BlurWindow = styled.div  `
@@ -62,7 +66,7 @@ backdrop-filter: blur(180px);
 border: 2px solid #ffffff;
 box-sizing: border-box;    
 box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   width: 94%;
   margin: 0 auto;
   top: auto;
@@ -99,8 +103,8 @@ export const BackgroundWrapper = styled.div  `
 padding-top: 40px;
 `;
 export const SectionA_01 = styled.div  `
-@media only screen and (max-width: 768px) {
-margin-top: 50px;
+@media only screen and (max-width: 1024px) {
+  margin-top: 50px;
 }
 `;
 export const SectionA_02 = styled.div  `
@@ -113,7 +117,7 @@ margin-top: 20  px
 export const SectionB_01 = styled.div  `
 margin-left: 0px;
 text-align: center;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   display: flex;
   justify-content: space-around;
   margin-bottom: 30px;
@@ -122,7 +126,7 @@ text-align: center;
 export const SectionB_02 = styled.div  `
 margin-right: 160px;
 text-align: center;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   margin-right: 0;
   display: flex;
   justify-content: space-around;
@@ -134,15 +138,15 @@ position: relative;
 margin: 0 5%;
 display: flex;
 align-items: flex-end;
-@media only screen and (max-width: 768px) {
-width: 100%;
-margin-top: 175px;
+@media only screen and (max-width: 1024px) {
+  width: 100%;
+  margin-top: 50%;
 }
 `;
 export const RightImageElement = styled.img  `
 height: auto;
 width: 100%;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
 width: 90%;
 }
 `
@@ -159,7 +163,7 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   font-size: 28px;
   margin-bottom: 0;
 }
@@ -181,7 +185,7 @@ line-height: 150%;
 }
 
 color: #FFFFFF;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
 display: none;
 }
 `;
@@ -223,7 +227,7 @@ color: #FFFFFF;
 export const IconElement = styled(Col)  `
 padding: 0;
 max-width: 200px;
-min-width: 150px;
+min-width: 170px;
 display: flex;
 justify-content: center;
 `; 
