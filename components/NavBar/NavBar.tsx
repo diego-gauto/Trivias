@@ -236,6 +236,7 @@ const NavBar = () => {
               <LogoS />
               <MenuIcon />
             </NavResponsive>
+
           </>
 
           : <></>

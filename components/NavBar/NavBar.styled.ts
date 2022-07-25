@@ -161,3 +161,24 @@ export const LogoS = styled.i`
   width: 50px;
   height: 50px;
 `;
+export const HamburgerContain = styled.div`
+ 
+`;
+export const HBMenu = styled.ul`
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all .5 ease;
+  padding: 20px;
+  list-style: none;
+`;
+export const HBList = styled.li`
+  color: black;
+  display: block;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+`;
