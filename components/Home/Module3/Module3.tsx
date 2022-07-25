@@ -28,6 +28,12 @@ import {
   Text05,
   Text06,
   TextNew,
+  ResultsSection,
+  ContentContainer,
+  RightContainer,
+  SectionRight04Container,
+  ButtonsContainer,
+  Text06Sm,
 } from "./Module3.styled";
 
 import { IModule3 } from "./IModule3";
@@ -109,40 +115,19 @@ export const Module3 = (props: IModule3) => {
   );
 
   return (
-    <Container fluid style={{ paddingLeft: 0 }}>
+    <Container fluid style={{ padding: 0 }}>
       <ModuleImage
-        style={{
-          backgroundImage: 'url(' + courseImg + ')',
-          backgroundRepeat: 'no-repeat',
-          height: "625px",
-          width: "auto",
-          paddingLeft: 0,
-          marginLeft: 0,
-        }}
-      >
-        <Row
-        
-        >
+        style={{ backgroundImage: 'url(' + courseImg + ')' }}>
+        <ContentContainer>
           <Col>
             <Left>
-              <Row style={{ padding: 0 }}><ImageTag
-                style={{
-                  backgroundImage: 'url(' + groupTag + ')',
-                  backgroundRepeat: 'no-repeat',
-                  height: '158px',
-                  width: '100%',
-                  marginTop: '-5px',
-                  backgroundSize: '19.5% auto',
-                  padding: 0,
-                }}
-
-
-              ></ImageTag></Row>
+              <Row style={{ padding: 0 }}>
+                <ImageTag style={{ backgroundImage: 'url(' + groupTag + ')' }}></ImageTag>
+              </Row>
               <Row>
                 <SectionLeft01>{/* Empty space */}</SectionLeft01>
               </Row>
-              <SectionLeft02
-              >
+              <SectionLeft02>
                 <Col style={{ padding: 0 }}>
                   <Row>
                     <Newtag>
@@ -157,12 +142,12 @@ export const Module3 = (props: IModule3) => {
               </SectionLeft02>
             </Left>
           </Col>
-          <Col style={{ background: "linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%)" }}>
+          <RightContainer>
             <Right>
               <Row>
                 <SectionRight01><Text01>Lo que aprenderas en este curso...</Text01></SectionRight01>
               </Row>
-              <>
+              <ResultsSection>
                 <SectionRight02>
                   <>
                     <SectionRight02_Wrapper>
@@ -202,30 +187,27 @@ export const Module3 = (props: IModule3) => {
                     </SectionRight02_Wrapper>
                   </>
                 </SectionRight02>
-              </>
+              </ResultsSection>
 
               <SectionRight03><Text05>Desde $120.00</Text05></SectionRight03>
 
-              <Row>
+              <SectionRight04Container>
                 <SectionRight04>
-                  <Row>
-
-                    <Col>
-                      <Button01>
-                        <Text06 style={{ marginLeft: "10px" }} >Ve un adelanto</Text06>
-                      </Button01>
-                    </Col>
-                    <Col>
-                      <Button02>
-                        <Text06>Más información</Text06>
-                      </Button02>
-                    </Col>
-                  </Row>
+                  <ButtonsContainer>
+                    <Button01>
+                      <Text06 >Ve un adelanto</Text06>
+                      <Text06Sm >Compra</Text06Sm>
+                    </Button01>
+                    <Button02>
+                      <Text06>Más información</Text06>
+                      <Text06Sm>Información</Text06Sm>
+                    </Button02>
+                  </ButtonsContainer>
                 </SectionRight04>
-              </Row>
+              </SectionRight04Container>
             </Right>
-          </Col>
-        </Row >
+          </RightContainer>
+        </ContentContainer >
 
       </ModuleImage >
     </Container>

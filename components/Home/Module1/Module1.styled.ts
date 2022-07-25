@@ -138,9 +138,12 @@ position: relative;
 margin: 0 5%;
 display: flex;
 align-items: flex-end;
+justify-content: center;
 @media only screen and (max-width: 1024px) {
-  width: 100%;
+  width: 90%;
   margin-top: 50%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 `;
 export const RightImageElement = styled.img  `
