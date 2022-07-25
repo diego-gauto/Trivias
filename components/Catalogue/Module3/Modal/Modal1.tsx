@@ -105,6 +105,7 @@ const Modal1 = ({ show, setShow }: any) => {
               <SelectDrop>
                 <option selected>
                   Temporada 1
+                  <span>4 episodios</span>
                 </option>
                 <option>
                   Temporada 2

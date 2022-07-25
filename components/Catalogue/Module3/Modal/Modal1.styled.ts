@@ -269,6 +269,9 @@ export const SelectDrop = styled.select`
     border-radius: 10px;
     color: black;
   }
+  span{
+
+  }
 `;
 export const VideoContain = styled.div`
   display: flex;
