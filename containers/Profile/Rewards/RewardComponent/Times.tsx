@@ -1,6 +1,6 @@
 
 
-import React from "react";
+
 
 import {
   Circle,
@@ -14,20 +14,9 @@ import {
 
 const Times = () => {
   let UserTime = 5;
-  const [rows, setRows] = React.useState([]);
-  React.useEffect(() => {
-    const data = localStorage.getItem("currentPosition");
-    if (data) {
-      setRows(JSON.parse(data));
-    }
-  }, []);
 
-  React.useEffect(() => {
-    localStorage.setItem("currentPosition", JSON.stringify(rows));
-  });
-
-  // const currentLevel = document.getElementById("activeLvl");
-  // currentLevel?.scrollIntoView({ inline: "center" });
+  const currentLevel = document.getElementById("activeLvl");
+  currentLevel?.scrollIntoView({ inline: "center", block: "end" });
 
   if (UserTime == 1) {
     return (

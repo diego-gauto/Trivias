@@ -1,5 +1,7 @@
 
 
+
+
 import { useMediaQuery } from "react-responsive";
 
 import {
@@ -15,8 +17,8 @@ import {
 const Points = () => {
   let UserPoints = 600;
 
-  // const currentLevel = document.getElementById("activeLvl");
-  // currentLevel?.scrollIntoView({ inline: "center" });
+  const currentLevel = document.getElementById("activeLvl");
+  currentLevel?.scrollIntoView({ inline: "center", block: "end" });
 
   if (UserPoints >= 100 && UserPoints <= 399) {
     const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
