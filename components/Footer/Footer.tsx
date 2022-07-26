@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import {
   BottomContainer,
@@ -43,9 +44,11 @@ const Footer = () => {
             <FooterText>
               Tienda Online
             </FooterText>
-            <FooterText>
-              Registrarse
-            </FooterText>
+            <Link href="/auth/Register">
+              <FooterText>
+                Registrarse
+              </FooterText>
+            </Link>
           </Column>
         </FooterGroup>
         <FooterIcons>
