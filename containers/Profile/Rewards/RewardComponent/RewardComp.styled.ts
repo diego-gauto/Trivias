@@ -65,19 +65,12 @@ export const RewardContainer = styled.div`
   gap: 3px;
   box-shadow: 0px -3px 20px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px) {
-    top: 3%;
+    top: 25px;
     margin-left: 3%;
     margin-right: 3%;
-    gap: 76px;
-    & :nth-child(4n+3) {
-      display: none;
-    }
-    & div:last-child {
-      display: none;
-    }
-    & div:nth-child(5) {
-      display: none;
-    }
+    gap: 86px;
+    justify-content: space-between;
+    overflow-x: auto;
   }
 `;
 export const LevelText = styled.p`
@@ -88,6 +81,9 @@ export const LevelText = styled.p`
   text-align:center;
   position: absolute;
   bottom: 15px;
+  @media(max-width: 1023px) {
+   width: 100%;
+  }
 `;
 export const CompleteText = styled.p`
   font-size: 14px;
@@ -98,6 +94,9 @@ export const CompleteText = styled.p`
   text-align:center;
   position: absolute;
   bottom: 15px;
+  @media(max-width: 1023px) {
+    width: 100%;
+   }
 `;
 export const Circle = styled.div`
   width: 35px;

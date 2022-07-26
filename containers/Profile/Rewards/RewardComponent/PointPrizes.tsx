@@ -1,5 +1,7 @@
 
 
+import { useState } from "react";
+
 import Image from "next/image";
 
 import {
@@ -11,18 +13,24 @@ import {
   PrizeTitle,
   TitleClaim,
 } from "./ClaimPrizes.styled";
+import Modal1 from "./Modal1/Modal1";
 
 const PointPrizes = () => {
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
   return (
     <MainContainer>
       <TitleClaim>
         Premios por reclamar
       </TitleClaim>
       <AllPrizes>
-        <PrizeContain>
-          <PrizeImage>
+        <PrizeContain >
+          <PrizeImage onClick={handleShow}>
             <Image src="/images/Rewards/reward2.png" width={250} height={250} />
           </PrizeImage>
+          <Modal1 show={show} setShow={setShow} />
           <PrizeTitle>
             Gonvar Nails Leonardo Da Vinci
           </PrizeTitle>

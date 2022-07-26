@@ -1,8 +1,22 @@
-import Image from 'next/image';
-import React from 'react'
-import { AllPrizes, MainContainer, PrizeContain, PrizeImage, PrizeInfo, PrizeTitle, TitleClaim } from './ClaimPrizes.styled';
+import React, { useState } from "react";
+
+import Image from "next/image";
+
+import {
+  AllPrizes,
+  MainContainer,
+  PrizeContain,
+  PrizeImage,
+  PrizeInfo,
+  PrizeTitle,
+  TitleClaim,
+} from "./ClaimPrizes.styled";
+import Modal1 from "./Modal1/Modal1";
 
 const TimePrizes = () => {
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
   return (
     <MainContainer>
       <TitleClaim>
@@ -10,9 +24,10 @@ const TimePrizes = () => {
       </TitleClaim>
       <AllPrizes>
         <PrizeContain>
-          <PrizeImage>
+          <PrizeImage onClick={handleShow}>
             <Image src="/images/Rewards/reward2.png" width={250} height={250} />
           </PrizeImage>
+          <Modal1 show={show} setShow={setShow} />
           <PrizeTitle>
             Gonvar Nails Leonardo Da Vinci
           </PrizeTitle>
