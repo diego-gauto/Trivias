@@ -153,6 +153,7 @@ export const SectionRight03 = styled.div  `
 margin-top: 40px;
 margin-left: 50px;
 @media only screen and (max-width: 1024px) {
+  margin: 40px 5%;
 }
 `;
 export const SectionRight04Container = styled(Row) `
@@ -243,6 +244,9 @@ line-height: 150%;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
 } 
 color: #FFFFFF;
+@media only screen and (max-width: 1024px) {
+  font-size: 20px;
+}
 `;
 export const Text06 = styled.p  ` 
 font-family: 'Montserrat';

@@ -110,9 +110,9 @@ text-align: center;
 `;
 export const TitleTextContainer = styled.div `
 display: flex;
-flex-direction: column;
+justify-content: center;
+column-gap: 2.5px;
 @media only screen and (max-width: 1024px) {
-  flex-direction: row;
   margin-top: 50px;
   > * {
     min-width: 120px;
