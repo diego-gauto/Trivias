@@ -11,10 +11,10 @@ export const CardContain = styled.div`
   display: flex;
   padding: 10px;
   gap: 20px;
-  max-width: 300px;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   ::-webkit-scrollbar{
+    display: none;
   }
 `;
 export const CardImage = styled(Image)`

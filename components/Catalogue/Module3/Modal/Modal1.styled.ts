@@ -268,6 +268,15 @@ export const SelectDrop = styled.select`
   option{
     border-radius: 10px;
     color: black;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    @media( max-width: 991px){
+      font-size: 12px;
+    }
+    &:active{
+      color:red;
+    }
   }
   span{
 

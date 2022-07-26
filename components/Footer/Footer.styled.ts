@@ -6,6 +6,7 @@ export const FooterContainer = styled.div`
   background: white;
   width: 100%;
   justify-content:space-between;
+  background-color: white;
   align-items:center;
   padding: 20px;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
@@ -42,6 +43,7 @@ export const FooterResponsive = styled.div`
   padding-top: 0;
   padding-inline: 20px;
   padding-bottom: 20px;
+  background-color: white;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   justify-content: space-between;
   @font-face{

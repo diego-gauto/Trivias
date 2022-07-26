@@ -3,6 +3,23 @@ import Modal1 from './Modal/Modal1';
 import { CardContain, Cardcontent, CardImage, ImageContent, InsideContent, InsideText, Maincontainer, Text1, Text2, Text3, TextContain, Title, VideoInfo, ViewCourse } from './Module3.styled';
 
 const Module3 = () => {
+
+  // const [rows, setRows] = React.useState([]);
+  // React.useEffect(() => {
+  //   const data = localStorage.getItem("Scroll");
+  //   if (data) {
+  //     setRows(JSON.parse(data));
+  //   }
+  // }, []);
+
+  // React.useEffect(() => {
+  //   localStorage.setItem("currentPosition", JSON.stringify(rows));
+  // });
+
+  // const scroll = document.getElementById("Scroll");
+  // scroll?.scrollIntoView({ inline: "center" });
+
+
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -13,7 +30,7 @@ const Module3 = () => {
       <Title>
         Cursos en poseción
       </Title>
-      <CardContain>
+      <CardContain id="Scroll">
         <Cardcontent>
           <ImageContent>
             <CardImage

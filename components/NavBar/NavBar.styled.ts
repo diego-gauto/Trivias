@@ -171,7 +171,7 @@ export const HamburgerContain = styled.div`
   padding-inline: 30px;
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
