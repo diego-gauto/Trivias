@@ -7,12 +7,19 @@ export const MainContainer = styled.div`
   @media (max-width: 1023px){
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
+    gap: 10px;
     border-radius: 10px;
+  }
+  @media (max-width: 600px) {
+    padding-inline: 10px;
   }
 `;
 export const CommentContain = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 1023px) {
+    gap: 5px;
+  }
 `;
 export const CommentInput = styled.input`
   color: black;
@@ -33,7 +40,6 @@ export const CommentInput = styled.input`
 `;
 export const CommentText =styled.div`
   display: flex;
-  width: 92%;
   padding-block: 12px;
   padding-inline: 15px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
@@ -43,25 +49,28 @@ export const Comment = styled.p`
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  @media (max-width: 1023px) {
+    font-size: 12px;
+  }
 `;
 export const Pp1 = styled.i`
   background-image: url(../images/Video/Comments/profile1.png);
   height: 60px;
-  width: 60px;
+  min-width: 60px;
   background-position: center;
   background-repeat: no-repeat;
 `;
 export const Pp2 = styled.i`
   background-image: url(../images/Video/Comments/profile2.png);
   height: 60px;
-  width: 60px;
+  min-width: 60px;
   background-position: center;
   background-repeat: no-repeat;
 `;
 export const Pp3 = styled.i`
   background-image: url(../images/Video/Comments/profile3.png);
   height: 60px;
-  width: 60px;
+  min-width: 60px;
   background-position: center;
   background-repeat: no-repeat;
 `;

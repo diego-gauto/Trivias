@@ -47,7 +47,10 @@ const Extra = ({ value, setValue }: any) => {
       </IconContain>
       <ExtraContain>
         <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra, cursus sapien ac magna. Consectetur amet eu tincidunt quis. Non habitasse viverra malesuada facilisi vel nunc.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Pharetra, cursus sapien ac magna. Consectetur amet eu
+          tincidunt quis. Non habitasse viverra malesuada facilisi
+          vel nunc.
         </Paragraph>
         <DownlowadContain>
           <DownloadText>

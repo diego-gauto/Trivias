@@ -1,5 +1,5 @@
 import React from 'react'
-import { Background, CardContainer, Container, ContinueText, PlayIcon, Progress, Video, VideoContain, VideoInfo, VideoTitle } from './Module2.styled';
+import { Background, CardContainer, Container, ContinueText, ImageContain, PlayIcon, PlayIconS, Progress, Video, VideoContain, VideoInfo, VideoTitle } from './Module2.styled';
 
 const Module2 = () => {
   return (
@@ -10,13 +10,16 @@ const Module2 = () => {
       <CardContainer>
         <Video>
           <VideoContain>
-            <Background
-              src="/images/Preview/card1.png"
-              width={420}
-              height={240}
-            />
+            <ImageContain>
+              <Background
+                src="/images/Preview/card1.png"
+                width={420}
+                height={240}
+              />
+            </ImageContain>
+            <PlayIconS />
             <PlayIcon />
-            <Progress style={{ width: 245 }} />
+            <Progress style={{ width: '50%' }} />
           </VideoContain>
           <VideoTitle>
             Episodio 01: Revelaciones
@@ -33,6 +36,7 @@ const Module2 = () => {
               width={420}
               height={240}
             />
+            <PlayIconS />
             <PlayIcon />
             <Progress style={{ width: '30%' }} />
           </VideoContain>

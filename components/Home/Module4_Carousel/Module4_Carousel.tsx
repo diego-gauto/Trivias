@@ -1,40 +1,62 @@
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { IModule4_Carousel } from "./IModule4_Carousel";
 import { SlideModule } from "./SlideModule/SlideModule";
-import React, { Component } from "react";
-import Slider, { Settings } from "react-slick";
+import React, { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay } from "swiper";
+import 'swiper/css';
+
+SwiperCore.use([Autoplay]);
 
 export const Module4_Carousel = (props: IModule4_Carousel) => {
+  const swiperRef = useRef<SwiperCore>();
+
   const { isInfinite } = props;
   const { slideData } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
 
-  const settings: Settings = {
-    infinite: isInfinite,
-    slidesToShow: 3.5,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 4000,
-    autoplaySpeed: 4000,
-    cssEase: "linear",
-    swipeToSlide: true,
-    pauseOnHover: true,
-    touchThreshold: 5000,
+  const onInit = (swiper: SwiperCore) => {
+    swiperRef.current = swiper;
+  };
+
+  const onMouseEnter = () => {
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.stop();
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.start();
+    }
+  };
+
+  const settings = {
+    loop: isInfinite,
+    autoplay: {
+      delay: 0,
+    },
+    speed: 7000,
+    freeMode: true,
+    slidesPerView: 3.5,
+    spaceBetween: 30,
   };
 
   return (
-    <Container fluid style={{ overflow: "hidden" }}>
-      <Slider {...settings}>
+    <Container
+      fluid
+      style={{ overflow: "hidden" }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <Swiper {...settings} onInit={onInit}>
         {slideDataArr.map((element) => (
-          <div key={element.title + "_ID"}  >
+          <SwiperSlide key={element.title + "_ID"}  >
             <SlideModule isNew={element.isNew} title={element.title} subtitle={element.subtitle} imgURL={element.imgURL}></SlideModule>
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </Container>
-
   )
 }

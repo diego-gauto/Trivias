@@ -1,24 +1,36 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { CardContainer, ContinueText } from "../Module2/Module2.styled";
+import {  ContinueText } from "../Module2/Module2.styled";
 
 export const Maincontainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
 `;
-export const CardContain = styled(CardContainer)`
-
+export const CardContain = styled.div`
+  display: flex;
+  padding: 10px;
+  gap: 20px;
+  overflow-x: scroll;
+  ::-webkit-scrollbar{
+    display: none;
+  }
 `;
 export const CardImage = styled(Image)`
-
 `;
 export const Title = styled(ContinueText)`
+  @media( max-width: 1023px){
+    font-size: 24px;
+  }
 `;
 export const Cardcontent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 450px;
+  max-width: 400px;
+  @media( max-width: 1023px){
+    max-width: 250px;
+    min-width: 180px;
+  }
 `;
 export const ImageContent = styled.div`
   display: flex;
@@ -40,13 +52,22 @@ export const InsideText = styled.p`
   font-family: 'Montserrat', sans-serif;
   color: white;
   margin: 10px;
+  @media( max-width: 1023px){
+    font-size: 10px;
+    padding-inline: 10px;
+  }
 `;
 export const VideoInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 0 0 10px 10px;
+  max-width: 400px;
+  @media( max-width: 600px){
+    max-width: 250px;
+    gap:0;
+  }
 `;
 export const TextContain = styled.div`
   display: flex;
@@ -60,16 +81,25 @@ export const Text1 = styled.p`
   font-size: 24px;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  @media( max-width: 1023px){
+    font-size: 14px;
+  }
 `;
 export const Text2 = styled.span`
   font-size: 12px;
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  @media( max-width: 1023px){
+    font-size: 10px;
+  }
 `;
 export const Text3 = styled.p`
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  @media( max-width: 1023px){
+    display: none;
+  }
 `;
 export const ViewCourse = styled.p`
   padding-top: 15px;
@@ -85,5 +115,10 @@ export const ViewCourse = styled.p`
     color: white;
     background-color: #6717CD;
     border-radius: 0 0 10px 10px;
+  }
+  @media( max-width: 1023px){
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
   }
 `;

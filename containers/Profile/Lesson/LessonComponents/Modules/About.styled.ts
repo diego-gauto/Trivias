@@ -16,6 +16,9 @@ export const TextContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   max-width: 100%;
+  @media (max-width: 374px){
+    gap: 10px;
+  }
 `;
 export const CircleContain = styled.div`
   min-width: 150px;
@@ -34,6 +37,9 @@ export const NumberText = styled.p`
   font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  @media (max-width: 1023px){
+    font-size: 32px;
+  }
 `;
 export const PointText = styled.p`
   color: #8E2DE2;
@@ -48,9 +54,16 @@ export const LessonTitle = styled.p`
   font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  @media (max-width: 1023px){
+    font-size: 14px;
+  }
 `;
 export const LessonContent = styled.p`
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  text-align: justify;
+  @media (max-width: 1023px){
+    font-size: 12px;
+  }
 `;

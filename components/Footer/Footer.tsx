@@ -6,10 +6,13 @@ import {
   Column,
   FooterContainer,
   FooterIcons,
+  FooterResponsive,
   FooterText,
   FBIcon,
   IGIcon,
   Logo2,
+  RespContainer,
+  RespContainer2,
   SocialContainer,
   WAIcon,
 } from "./Footer.styled";
@@ -61,6 +64,44 @@ const Footer = () => {
           </SocialContainer>
         </FooterIcons>
       </FooterContainer>
+      <FooterResponsive>
+        <RespContainer>
+          <Logo2 />
+          <FooterText>
+            Inicio
+          </FooterText>
+          <FooterText>
+            Tienda Online
+          </FooterText>
+          <FooterText>
+            Academia
+          </FooterText>
+          <FooterText>
+            Registrarse
+          </FooterText>
+        </RespContainer>
+        <RespContainer2>
+          <FooterText>
+            Aviso de Privacidad
+          </FooterText>
+          <FooterText>
+            Condiciones
+          </FooterText>
+          <FooterText>
+            Facturación
+          </FooterText>
+          <FooterIcons>
+            <FooterText>
+              Contactanos
+            </FooterText>
+            <SocialContainer>
+              <FBIcon />
+              <IGIcon />
+              <WAIcon />
+            </SocialContainer>
+          </FooterIcons>
+        </RespContainer2>
+      </FooterResponsive>
       <BottomContainer>
         <BottomText>
           Gonvar Nails Academy 2022

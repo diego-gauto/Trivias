@@ -13,6 +13,10 @@ export const MainContainer = styled.div`
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
   }
+  @media (max-width: 1023px) {
+    padding-block: 20px;
+    padding-inline: 10px;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -25,6 +29,9 @@ export const FirstContainer = styled.div`
   gap: 20px;
   @media (max-width: 1023px) {
     width: 100%;
+  }
+  @media (max-width: 600px) {
+    gap: 10px;
   }
 `;
 export const SecondContainer = styled.div`

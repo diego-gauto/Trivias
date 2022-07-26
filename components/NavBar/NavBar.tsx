@@ -4,6 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import {
+  Close,
+  HamburgerContain,
+  HBList,
+  HBMenu,
+  IconsContain,
   Level,
   Logo,
   LogoS,
@@ -27,6 +32,8 @@ const NavBar = () => {
 
 
   // Nav Change Color
+  const [hamburger, setHamburger] = useState(false);
+
   const [color, setColor] = useState(false)
   useEffect(() => {
     if (color == true)
@@ -253,8 +260,48 @@ const NavBar = () => {
                 </Points>
               </PointsContain>
               <LogoS />
-              <MenuIcon />
+              <MenuIcon onClick={() => { setHamburger(true) }} />
+              {
+                hamburger == true
+                &&
+                <>
+                  <HamburgerContain>
+                    <IconsContain>
+                      <LogoS />
+                      <Close onClick={() => { setHamburger(false) }} />
+                    </IconsContain>
+                    <HBMenu>
+                      <Link href="/Screens/Preview" >
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Inicio
+                        </HBList>
+                      </Link>
+                      <HBList onClick={() => { setHamburger(false) }}>
+                        Tienda
+                      </HBList>
+                      <Link href="/Screens/Preview">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Catálogo
+                        </HBList>
+                      </Link>
+                      <Link href="/Screens/Profile">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Mofupiyo
+                          < UserImage />
+                        </HBList>
+                      </Link>
+                      <Link href="/Screens/Rewards">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Centro de Recompensas
+                          <Level />
+                        </HBList>
+                      </Link>
+                    </HBMenu>
+                  </HamburgerContain>
+                </>
+              }
             </NavResponsive>
+
           </>
 
           : <></>

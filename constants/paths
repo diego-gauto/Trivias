@@ -1,0 +1,3 @@
+export const RECOVERY_PATH = "/recuperar-contrasena";
+export const SIGNIN_PATH = "/iniciar-sesion";
+export const SIGNUP_PATH = "/registro";

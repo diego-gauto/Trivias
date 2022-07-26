@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   @media (max-width: 1023px){
+    padding: 10px;
     box-shadow: none;
     gap: 0;
   }
@@ -26,18 +27,34 @@ export const IconContain = styled.div`
     padding-inline: 50px;
     justify-content: space-between;
   }
+  @media (max-width: 600px){
+    padding-inline: 30px;
+  }
+  @media (max-width: 374px){
+    padding-inline: 15px;
+  }
 `;
 export const SelectContain = styled.div`
   display: flex;
+  position: relative;
+  background-color: white;
   padding-block: 10px;
   padding-inline: 30px;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0px -6px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, 0.2);
+  @media (max-width: 600px){
+    padding-block: 5px;
+    padding-inline: 15px;
+  }
 `;
 export const UnSelected = styled.div`
   display: flex;
   padding-block: 10px;
   padding-inline: 30px;
+  @media (max-width: 600px){
+    padding-block: 5px;
+    padding-inline: 15px;
+  }
 `;
 export const Titles = styled.p`
   font-size: 16px;

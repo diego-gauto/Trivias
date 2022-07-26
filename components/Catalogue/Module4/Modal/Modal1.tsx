@@ -1,5 +1,5 @@
 import React from 'react'
-import { PurpleButton } from '../../Module1/Module1.styled';
+import { PurpleButton, TransparentButton } from '../../Module1/Module1.styled';
 import {
   AboutContain, BackgroundOverlay, ButtonContain,
   Container, CourseContain, Cross, Data, CardImage,
@@ -7,7 +7,7 @@ import {
   EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle,
   ImageBack, LessonContain, LessonTitle, ModalBackground,
   ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle,
-  Text, TextContainer, Title, Titles, TransparentButton, VideoContain, Lock, PlayIcon,
+  Text, TextContainer, Title, Titles, VideoContain, Lock, PlayIcon, InsideContent, InsideText, ContainVideo, SelectDrop,
 } from '../../Module3/Modal/Modal1.styled';
 
 const Modal1 = ({ show, setShow }: any) => {
@@ -27,6 +27,11 @@ const Modal1 = ({ show, setShow }: any) => {
                 x
               </Cross>
               <TextContainer>
+                <InsideContent>
+                  <InsideText>
+                    Nuevo
+                  </InsideText>
+                </InsideContent>
                 <Title>
                   Curso de Uñas Francesas
                 </Title>
@@ -92,16 +97,25 @@ const Modal1 = ({ show, setShow }: any) => {
               <LessonTitle>
                 Lista de lecciones
               </LessonTitle>
-              <TransparentButton>
-                Temporada 1
-                <DropDown />
-              </TransparentButton>
+              <SelectDrop>
+                <option selected>
+                  Temporada 1
+                </option>
+                <option>
+                  Temporada 2
+                </option>
+                <option>
+                  Temporada 3
+                </option>
+              </SelectDrop>
             </SeasonContain>
             <VideoContain>
-              <EpisodeContain>
-                <CardImage src="/images/Preview/card8.png" width={350} height={200} />
-                <Lock />
-              </EpisodeContain>
+              <ContainVideo>
+                <EpisodeContain>
+                  <CardImage src="/images/Preview/card8.png" width={350} height={200} />
+                  <Lock />
+                </EpisodeContain>
+              </ContainVideo>
               <EpisodeInfo>
                 <EpisodeTitle>
                   Epidosio 1: Lorem Ipsum
