@@ -26,8 +26,8 @@ const Times = () => {
     localStorage.setItem("currentPosition", JSON.stringify(rows));
   });
 
-  const currentLevel = document.getElementById("activeLvl");
-  currentLevel?.scrollIntoView({ inline: "center" });
+  // const currentLevel = document.getElementById("activeLvl");
+  // currentLevel?.scrollIntoView({ inline: "center" });
 
   if (UserTime == 1) {
     return (

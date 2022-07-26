@@ -3,14 +3,10 @@
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 
-import Image from "next/image";
-
 import {
   AddText,
   BottomInputs,
   ButtonDiv,
-  CardText,
-  CardTextContainer,
   Inputs,
   InputInfo,
   ModalCont,
@@ -18,11 +14,6 @@ import {
   ModalForm,
   ModalInput,
   ModalPay,
-  ModalPayment,
-  PaymentIcon,
-  PaymentIcon2,
-  PaymentMethod,
-  PaymentMethod2,
   PurpleButton,
   Title,
 } from "./Modal1.styled";
@@ -41,7 +32,7 @@ const Modal1 = ({ show, setShow }: any) => {
               Ingresar Nuevo Método de Pago
             </Title>
             <ModalPay>
-              <ModalPayment>
+              {/* <ModalPayment>
                 <PaymentMethod>
                   <PaymentMethod2>
                     <PaymentIcon>
@@ -73,7 +64,7 @@ const Modal1 = ({ show, setShow }: any) => {
                     </CardText>
                   </CardTextContainer>
                 </PaymentMethod>
-              </ModalPayment>
+              </ModalPayment> */}
               <ModalForm>
                 <Inputs>
                   <InputInfo>

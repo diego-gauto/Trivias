@@ -1,5 +1,3 @@
-
-
 import Rewards from "../../containers/Profile/Rewards/Rewards";
 import { MainContain } from "../../screens/Styles.styled";
 
