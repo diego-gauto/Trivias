@@ -1,6 +1,4 @@
-
-
-
+import React from "react";
 
 import {
   Circle,
@@ -14,8 +12,20 @@ import {
 
 const Times = () => {
   let UserTime = 5;
+  const [rows, setRows] = React.useState([]);
 
-  const currentLevel = document.getElementById("activeLvl");
+  React.useEffect(() => {
+    const data = localStorage.getItem("activeLvl");
+    if (data) {
+      setRows(JSON.parse(data));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("activeLvl", JSON.stringify(rows));
+  });
+
+  const currentLevel = document.querySelector("#activeLvl");
   currentLevel?.scrollIntoView({ inline: "center", block: "end" });
 
   if (UserTime == 1) {

@@ -1,8 +1,4 @@
-
-
-
-
-import { useMediaQuery } from "react-responsive";
+import React from "react";
 
 import {
   Circle,
@@ -16,21 +12,24 @@ import {
 
 const Points = () => {
   let UserPoints = 600;
+  const [rows, setRows] = React.useState([]);
 
-  const currentLevel = document.getElementById("activeLvl");
-  currentLevel?.scrollIntoView({ inline: "center", block: "end" });
+  React.useEffect(() => {
+    const data = localStorage.getItem("activeLvl");
+    if (data) {
+      setRows(JSON.parse(data));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("activeLvl", JSON.stringify(rows));
+  });
 
   if (UserPoints >= 100 && UserPoints <= 399) {
-    const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
-
     return (
       <>
         <ContainLevel>
-          <Circle id="activeLvl" style={{
-            width: responsive870 ? 48 : 50,
-            height: responsive870 ? 48 : 50,
-            border: '2px solid #8E2DE2'
-          }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 1 <br /> 100 puntos
           </LevelText>
