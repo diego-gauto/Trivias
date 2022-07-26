@@ -37,6 +37,7 @@ export const NavHome = styled.div`
 export const NavResponsive = styled.div`
   z-index: 10;
   display: none ;
+  align-items: center;
   width: 100%;
   justify-content:space-between;
   background-color:white;
