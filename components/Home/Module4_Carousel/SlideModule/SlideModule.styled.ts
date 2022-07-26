@@ -10,7 +10,8 @@ padding: 0;
 margin-left: 2.5%;
 margin-right: 2.5%;
 @media only screen and (max-width: 1024px) {
-  height: 20vh;
+  margin-bottom: 15px;
+  height: 15vh;
 }
 `;
 

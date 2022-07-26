@@ -15,7 +15,7 @@ export const  Container = styled.div`
   }
 `; 
 export const MasonryContainer = styled.div`
-padding-top: 125px:
+  padding-top: 125px;
   display:flex;
   flex-direction:column; 
   justify-content:center; 
@@ -33,33 +33,48 @@ export const MasonryBox = styled.div`
 export const MasonryTitle = styled.h1`
   font-family:'Montserrat',sans-serif; 
   font-size:36px;
+@media only screen and (max-width: 1024px) {
+  text-align: center;
+  font-size: 24px;
+}
 `; 
 export const MasonrySpan = styled.span`
   color:#0768FD; 
 `;
 export const MasonryContent = styled.div`
-  max-width:60rem;
-  margin: 0 auto;   
-  display: table;
-  columns:3; 
-  gap:20px; 
-
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+margin-top: 30px;
+margin-left: 6.5%;
+margin-right: 6.5%;
+@media only screen and (max-width: 1024px) {
+}
+`;
+export const MasonryItem = styled.div`
+width: 360px;
+margin: 0 auto;
 `;
 
 export const MasonryWindowParent = styled.div`
-
-overflow: hidden; 
+overflow: hidden;
+@media only screen and (max-width: 1024px) {
+  overflow: visible;
+}
 `;
 export const MasonryWindow = styled.div`
 height: 750px;
 width: 100%;
+margin-bottom: 20px;
 overflow-y: scroll; 
 ::-webkit-scrollbar {
   width: 0px; 
   background: transparent; /* make scrollbar transparent */
-}   
- 
- 
+}
+@media only screen and (max-width: 1024px) {
+  height: auto;
+  overflow-y: visible;
+}
 `;
 export const MasonryImage = styled.img`
 width: auto;
@@ -67,57 +82,54 @@ border-radius: 12px;
 height: 75%;
 max-height: 170px;
 `;
-export const MasonryCardLeft = styled.div`
-  display:flex;
-  flex-direction:column;
-  break-inside:avoid;
-  gap:10px; 
-  border-radius:10px; 
-  border: 1px solid #6717CD;
-  max-width:350px;
-  padding:15px;  
-  margin-bottom:20px;  
-  height: 250px; 
-  margin-left: 25px
+export const MasonryCard = styled.div`
+display:flex;
+flex-direction:column;
+break-inside:avoid;
+gap:10px;
+border-radius:10px; 
+border: 1px solid #6717CD;
+width:350px;  
+padding:15px;  
+height: 250px;
+margin-bottom:20px;
+@media only screen and (max-width: 1024px) {
+}
 `;
-export const MasonryCardRight = styled.div`
-  display:flex;
-  flex-direction:column;
-  break-inside:avoid;
-  gap:10px; 
-  border-radius:10px; 
-  border: 1px solid #6717CD;
-  max-width:350px;
-  padding:15px;  
-  margin-bottom:20px;
-  height: 250px;
-  margin-left: -25px
+export const MasonryCardLeft = styled(MasonryCard)`
 `;
-export const Col_Table = styled(Col)`
-  display:inline-block;
-  padding-top: 100px;
+export const MasonryCardRight = styled(MasonryCard)`
 `;
-export const Row_Table = styled(Row)`
-  width: 1200px;
+export const MasonryCardCentered = styled(MasonryCard)`
+margin-top: 80px;
+position: absolute;
+@media only screen and (max-width: 1024px) {
+}
 `;
-export const MasonryCardCentered = styled.div`
-  display:flex;
-  flex-direction:column;
-  break-inside:avoid;
-  gap:10px;
-  height: 250px;
-  border-radius:10px;
-  border: 1px solid #6717CD;
-  max-width:350px;  
-  padding:15px;
-  margin-bottom:20px;
+export const Col_Table = styled.div`
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+// grid-template-rows: 20px 1fr 20px;
+column-gap: 20px;
+margin-top: 100px;
+margin-left: 50px;
+margin-right: 50px;
+@media only screen and (max-width: 1024px) {
+}
+`;
+export const Row_Table = styled.div`
+@media only screen and (max-width: 1024px) {
+}
 `;
 export const MasonryCardAlignA = styled.div`
-
+position: relative;
+@media only screen and (max-width: 1024px) {
+}
 `;
 export const MasonryCardAlignB = styled.div`
 bottom: 80px; 
-position: relative;
+@media only screen and (max-width: 1024px) {
+}
 `;
 export const CardTitle = styled.h1`
   font-family:'Montserrat',sans-serif;
