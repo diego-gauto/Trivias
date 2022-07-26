@@ -39,8 +39,14 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     },
     speed: 7000,
     freeMode: true,
-    slidesPerView: 3.5,
-    spaceBetween: 30,
+    slidesPerView: 2,
+    spaceBetween: 0,
+    breakpoints: {
+      1024: {
+        slidesPerView: 3.5,
+        spaceBetween: 30,
+      }
+    }
   };
 
   return (
@@ -53,7 +59,12 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
       <Swiper {...settings} onInit={onInit}>
         {slideDataArr.map((element) => (
           <SwiperSlide key={element.title + "_ID"}  >
-            <SlideModule isNew={element.isNew} title={element.title} subtitle={element.subtitle} imgURL={element.imgURL}></SlideModule>
+            <SlideModule
+              isNew={element.isNew}
+              title={element.title}
+              subtitle={element.subtitle}
+              imgURL={element.imgURL}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
