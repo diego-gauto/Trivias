@@ -25,7 +25,7 @@ const TimePrizes = () => {
       <AllPrizes>
         <PrizeContain>
           <PrizeImage onClick={handleShow}>
-            <Image src="/images/Rewards/reward2.png" width={250} height={250} />
+            <Image src="/images/GonvarReward1.png" width={250} height={250} />
           </PrizeImage>
           <Modal1 show={show} setShow={setShow} />
           <PrizeTitle>

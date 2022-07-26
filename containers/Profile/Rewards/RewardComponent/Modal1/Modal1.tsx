@@ -19,6 +19,7 @@ import {
   ModalPayment,
   PaymentIcon,
   PurpleButton,
+  RewardText,
   Title,
 } from "./Modal1.styled";
 
@@ -31,7 +32,7 @@ const Modal1 = ({ show, setShow }: any) => {
     <>
       <ModalContain >
         <Modal show={show} onHide={handleClose} size="lg" centered>
-          <ModalCont>
+          <ModalCont style={{ height: "700px" }}>
             <Title closeButton>
               Gonvar Nails Leonardo Da Vinci
             </Title>
@@ -64,6 +65,9 @@ const Modal1 = ({ show, setShow }: any) => {
               </ModalForm>
             </ModalPay>
             <ButtonDiv>
+              <RewardText style={{ fontWeight: "700", fontSize: "16px", marginLeft: "10%" }}>
+                Recompensa por <br /> 1,100 puntos
+              </RewardText>
               <PurpleButton onClick={handleClose}>
                 Entendido
               </PurpleButton>

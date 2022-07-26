@@ -15,7 +15,7 @@ export const TitleClaim = styled.h1`
 `;
 export const PrizeImage = styled.div`
   border-radius:10px;
-  //box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   @media (max-width: 870px) {
     width: 150px;
   }

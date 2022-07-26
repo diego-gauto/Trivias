@@ -14,11 +14,14 @@ import {
   TitleClaim,
 } from "./ClaimPrizes.styled";
 import Modal1 from "./Modal1/Modal1";
+import Modal2 from "./Modal1/Modal2";
 
 const PointPrizes = () => {
 
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const handleShow1 = () => setShow1(true);
+  const handleShow2 = () => setShow2(true);
 
   return (
     <MainContainer>
@@ -27,10 +30,9 @@ const PointPrizes = () => {
       </TitleClaim>
       <AllPrizes>
         <PrizeContain >
-          <PrizeImage onClick={handleShow}>
-            <Image src="/images/Rewards/reward2.png" width={250} height={250} />
+          <PrizeImage onClick={handleShow1}>
+            <Image src="/images/GonvarReward1.png" width={150} height={150} />
           </PrizeImage>
-          <Modal1 show={show} setShow={setShow} />
           <PrizeTitle>
             Gonvar Nails Leonardo Da Vinci
           </PrizeTitle>
@@ -50,7 +52,7 @@ const PointPrizes = () => {
           </PrizeInfo>
         </PrizeContain>
         <PrizeContain>
-          <PrizeImage>
+          <PrizeImage onClick={handleShow2}>
             <Image src="/images/Rewards/reward3.png" width={250} height={250} />
           </PrizeImage>
           <PrizeTitle>
@@ -61,6 +63,8 @@ const PointPrizes = () => {
           </PrizeInfo>
         </PrizeContain>
       </AllPrizes>
+      <Modal1 show={show1} setShow={setShow1} />
+      <Modal2 show={show2} setShow={setShow2} />
     </MainContainer>
   )
 }

@@ -32,7 +32,6 @@ export const Title = styled(ModalHeader)`
   padding:10px;
   @media(max-width: 870px) {
     font-size:18px;
-    margin-bottom: 5%;
   }
 `;
 export const ModalPay = styled.div`
@@ -70,7 +69,6 @@ export const PaymentIcon = styled.div`
 
   @media(max-width: 870px) {
     margin-bottom:0;
-    margin-top:-60px;
     margin-right:-100px;
   }
 
@@ -161,21 +159,6 @@ export const AlertMsg = styled.label`
     width: 300px;
   }
 `;
-export const RewardText = styled.label`
-  font-size: 14px;
-  color: #6717CD;
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
-  margin-bottom: 3%;
-  text-align: center;
-  @media(max-width: 870px) {
-    position: absolute;
-    top: 40%;
-    left: 23%;
-  }
-`;
 export const AlertCont = styled.label`
   display: flex;
 `;
@@ -206,7 +189,7 @@ export const BottomInputs = styled.div`
 `;
 export const ButtonDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   margin-top: -60px;
   @media(max-width: 870px) {
     justify-content: center;
@@ -218,7 +201,6 @@ export const PurpleButton = styled.button`
   background-color: #6717CD;
   color: #fff;
   width: 137px;
-  height: 54px;
   padding-block: 15px;
   padding-inline: 25px;
   border-radius: 30px;

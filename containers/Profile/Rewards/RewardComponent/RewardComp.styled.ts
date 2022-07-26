@@ -7,7 +7,7 @@ export const MainContain = styled.div`
   @media(max-width: 1023px) {
     margin-top: -30px;
     justify-content: space-between;
-    z-index:999;
+    z-index: 1;
   }
 `;
 export const Container = styled.div`
