@@ -1,7 +1,8 @@
-import React from 'react'
-import { Container } from 'react-bootstrap';
-import { MainContain } from '../../screens/Styles.styled';
-import Rewards from '../../containers/Profile/Rewards/Rewards';
+
+
+import Rewards from "../../containers/Profile/Rewards/Rewards";
+import { MainContain } from "../../screens/Styles.styled";
+
 const Landings = () => {
   return (
 
