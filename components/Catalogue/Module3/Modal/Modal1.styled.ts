@@ -237,27 +237,40 @@ export const LessonTitle = styled.p`
     font-size: 16px;
   }
 `;
-export const TransparentButton = styled.button`
-  display: flex;
-  justify-content:center;
+export const SelectDrop = styled.select`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
   font-size: 16px;
   font-weight: 600;
   padding-inline: 25px;
   padding-block: 10px;
-  gap: 10px;
-  align-items: center;
-  background:transparent;
+  background: transparent;
+  position: relative;
   color: #6717CD;
   border-radius: 30px;
+  outline: none;
   border:1px solid #6717CD;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
-  }
   @media(max-width: 991px){
     font-size: 12px;
     padding-inline: 10px;
     padding-block: 5px;
+  }
+  &:after{
+    content: 'hola';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: black;
+    cursor: pointer;
+  }
+  option{
+    border-radius: 10px;
+    color: black;
+  }
+  span{
+
   }
 `;
 export const VideoContain = styled.div`

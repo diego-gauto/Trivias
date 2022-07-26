@@ -13,12 +13,23 @@ background: #6717CD;
 border-radius: 100px;
 width: 157.5px;
 height: 48.7px; 
+cursor: pointer;
+&:hover{
+  background-color: #5000b5;
+  transform:scale(1.03);
+  transition:.5s ease all;
+}
 `;
 export const Button02 = styled.div  ` 
 border: 1px solid #FFFFFF; 
 border-radius: 100px;
 width: 157.5px;
 height: 48.7px;  
+cursor: pointer;
+&:hover{
+  transform:scale(1.03);
+  transition:.5s ease all;
+}
 `;
 export const Newtag = styled.div  ` 
 border: 1px solid #FFFFFF;
@@ -37,7 +48,8 @@ export const ImageTag = styled.div  `
    
 `;
 export const SectionLeft01 = styled.div  `
- height: 290px
+ height: 290px;
+ padding: 0;
 `;
 export const SectionLeft02 = styled(Row)  `
  padding-left: 15%;
@@ -63,6 +75,7 @@ margin-left: 50px;
 `;
 export const SectionRight02_Wrapper = styled(Row)  `
 margin-bottom: 16px;
+padding-right: 0;
 `;
 export const SectionRight02_01 = styled(Col)  ` 
 margin-left: 5px;
@@ -171,7 +184,7 @@ position: relative;
 @font-face{
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
-}  
+}
 `;
 export const TextNew = styled.span  `  
 font-family: 'Raleway';

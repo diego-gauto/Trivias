@@ -81,6 +81,7 @@ export const FooterText = styled.p`
   font-size: 18px;
   font-family: 'Nunito',sans-serif;
   margin: 0;
+  cursor: pointer;
   @media(max-width: 1023px) {
     font-size: 14px;
   }

@@ -5,6 +5,7 @@ import Img3 from "./MediaSources/Icon03.png"
 import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
+import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
 import {
   BackgroundWrapper, Left, Right, SectionA_01,
@@ -12,13 +13,13 @@ import {
   SectionC, SectionA_02, LeftWrapper, Button01, Button02,
   Button01Content, Button02Content, SectionA_01Text01,
   SectionA_01Text02, SectionA_02Text01, SectionA_02Text02,
-  SectionB_Text, IconElement, IconImageWrapper, AnimatedBackground, BlurWindow, SectionB_TextALT1
+  SectionB_Text, IconElement, IconImageWrapper, BlurWindow, SectionB_TextALT1
 } from "./Module1.styled";
 
 
 export const Module1 = (props: IModule1) => {
   return (
-    <Container>
+    <Container fluid>
       <BackgroundWrapper>
         <Row>
           <LeftWrapper>
@@ -27,7 +28,7 @@ export const Module1 = (props: IModule1) => {
 
               <SectionA_01>
                 <Row>
-                  <p> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></p>
+                  <p className="ms-0"> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></p>
                 </Row>
               </SectionA_01>
               <SectionA_02>
@@ -85,9 +86,7 @@ export const Module1 = (props: IModule1) => {
                 </IconElement>
               </SectionC>
               <BlurWindow></BlurWindow>
-              <AnimatedBackground width="320" height="240" autoPlay muted loop >
-                <source src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FAnimatedColors.mp4?alt=media&token=94a7f4cc-9efb-4a74-be52-67674970e026" type="video/mp4"></source>
-              </AnimatedBackground>
+              <GradientCanvas id="gradient-canvas" />
             </Left>
 
           </LeftWrapper>
@@ -98,7 +97,6 @@ export const Module1 = (props: IModule1) => {
                   height: "auto",
                   width: "100%",
                   marginTop: "125px",
-                  marginLeft: "15px"
                 }}
                   src={Img5.src}></Image>
               </RightImage>
