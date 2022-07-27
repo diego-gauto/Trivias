@@ -3,7 +3,9 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword
 } from "firebase/auth";
-import { collection, doc, getDocs, getFirestore, query, setDoc, addDoc } from "firebase/firestore";
+import {
+  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot
+} from "firebase/firestore";
 import { db } from '../../firebase/firebaseConfig';
 import firebase from "firebase/compat/app";
 import { useAuth } from "../../hooks/useAuth";
@@ -119,16 +121,22 @@ export const accessWithAuthProvider = (provider: any) => {
       photoURL = response.user.photoURL;
       phoneNumber = response.user.phoneNumber;
 
-      return db
-        .collection("users")
-        .doc(response.user.uid)
-        .get();
+      const query_1 = query(collection(db, "users"), where("uid", "==", response.user.uid));
+      return onSnapshot(query_1, (response) => {
+
+        var doc: any;
+        response.forEach((e) => {
+          doc = e.data()
+        });
+      })
+
+
     }).then(async (doc) => {
       //If user does not exist register a new one
 
       console.log("Provider Auth : 2")
       console.log(doc)
-      if (!doc.exists) {
+      if (!doc) {
 
 
         if (photoURL == undefined || photoURL == null) {

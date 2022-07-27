@@ -44,8 +44,11 @@ const NavBar = () => {
   }, [loggedIn])
 
   useEffect(() => {
-    console.log(userData)
-    console.log(userData.role)
+    try {
+      console.log(userData)
+      console.log(userData.role)
+    } catch (error) {
+    }
   }, [userData])
 
   //firestore query from auth data
@@ -284,10 +287,10 @@ const NavBar = () => {
                   <Level />
                   <Link href="/Screens/Profile">
                     <UserText>
-                      {userData.name}  {"(Usuario WEB)"}
+                      {userData ? userData.name : "Bienvenido"}  {"(Usuario WEB)"}
                     </UserText>
                   </Link>
-                  {userData.photoURL ?
+                  {userData && userData.photoURL ?
                     < UserImage
                       style={{
                         backgroundImage: "url(" + userData.photoURL + ")"
@@ -337,8 +340,18 @@ const NavBar = () => {
                       <Link href="/Screens/Profile">
                         <HBList onClick={() => { setHamburger(false) }}>
 
-                          {userData.name}  {"(Usuario MOVIL)"}
-                          < UserImage />
+                          {userData ? userData.name : "Bienvenido"}    {"(Usuario MOVIL)"}
+                          {userData && userData.photoURL ?
+                            < UserImage
+                              style={{
+                                backgroundImage: "url(" + userData.photoURL + ")"
+                              }}
+                            > </UserImage>
+                            :
+                            < UserImage style={{
+                              backgroundImage: "url(../images/Navbar/userImage.png)"
+                            }} > </UserImage>
+                          }
                         </HBList>
                       </Link>
                       <Link href="/Screens/Rewards">
@@ -394,10 +407,20 @@ const NavBar = () => {
                   <Level />
                   <Link href="/Screens/Profile">
                     <UserText>
-                      {userData.name} {"(Cuenta Admin WEB)"}
+                      {userData ? userData.name : "Bienvenido"}   {"(Cuenta Admin WEB)"}
                     </UserText>
                   </Link>
-                  < UserImage />
+                  {userData && userData.photoURL ?
+                    < UserImage
+                      style={{
+                        backgroundImage: "url(" + userData.photoURL + ")"
+                      }}
+                    > </UserImage>
+                    :
+                    < UserImage style={{
+                      backgroundImage: "url(../images/Navbar/userImage.png)"
+                    }} > </UserImage>
+                  }
                 </UserContain>
               </NavTags>
             </NavContainer >
@@ -436,8 +459,18 @@ const NavBar = () => {
                       <Link href="/Screens/Profile">
                         <HBList onClick={() => { setHamburger(false) }}>
 
-                          {userData.name} {"(Cuenta Admin MOVIL)"}
-                          < UserImage />
+                          {userData ? userData.name : "Bienvenido"}   {"(Cuenta Admin MOVIL)"}
+                          {userData && userData.photoURL ?
+                            < UserImage
+                              style={{
+                                backgroundImage: "url(" + userData.photoURL + ")"
+                              }}
+                            > </UserImage>
+                            :
+                            < UserImage style={{
+                              backgroundImage: "url(../images/Navbar/userImage.png)"
+                            }} > </UserImage>
+                          }
                         </HBList>
                       </Link>
                       <Link href="/Screens/Rewards">
