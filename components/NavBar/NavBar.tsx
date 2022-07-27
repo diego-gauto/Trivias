@@ -4,36 +4,75 @@ import { useEffect, useState } from "react";
 import { Close, HamburgerContain, HBList, HBMenu, IconsContain, Level, Logo, LogoS, MenuIcon, NavContainer, NavHome, NavResponsive, NavTags, NavTags2, NavText, Points, PointsContain, PurpleButton, UserContain, UserImage, UserText } from "./NavBar.styled";
 import Scroll from "./scroll";
 
+import {
+  doc, getDoc,
+  collection, where, query, onSnapshot
+} from "firebase/firestore";
+import { db } from '../../firebase/firebaseConfig';
 import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
 
 
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  //declare any object in state
+  const [userData, setUserData] = useState<any>(null);
 
+  //validate if its logged in
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
-        console.log(userDataAuth)
         setLoggedIn(true)
+        console.log("Logged: Yes")
       } else {
         setLoggedIn(false)
+        console.log("Logged: No")
       }
     }, [])
+
   } catch (error) {
     console.log(error)
-
     setLoggedIn(false)
   }
 
-  /*  useEffect(() => {
-     if (userDataAuth !== null) {
-       console.log("is Logged In")
-       console.log(userDataAuth)
-     }
-   }, [loggedIn]) */
+  //Call firestore user data
+  useEffect(() => {
+    fetchDB_data()
+  }, [loggedIn])
+
+  useEffect(() => {
+    console.log(userData)
+    console.log(userData.role)
+  }, [userData])
+
+  //firestore query from auth data
+  const fetchDB_data = async () => {
+    try {
+
+      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
+      return onSnapshot(query_1, (response) => {
+
+        var userData: any;
+        response.forEach((e) => {
+          userData = e.data()
+        });
+        setUserData(userData)
+
+        if (userData.role == "admin") {
+          setIsAdmin(true)
+        }
+
+        return userData
+
+      })
+
+    } catch (error) {
+      return false
+    }
+  }
 
   // Nav Change Color
   const [hamburger, setHamburger] = useState(false);
@@ -245,7 +284,117 @@ const NavBar = () => {
                   <Level />
                   <Link href="/Screens/Profile">
                     <UserText>
-                      Mofupiyo
+                      {userData.name}  {"(Usuario WEB)"}
+                    </UserText>
+                  </Link>
+                  {userData.photoURL ?
+                    < UserImage
+                      style={{
+                        backgroundImage: "url(" + userData.photoURL + ")"
+                      }}
+                    > </UserImage>
+                    :
+                    < UserImage style={{
+                      backgroundImage: "url(../images/Navbar/userImage.png)"
+                    }} > </UserImage>
+                  }
+
+                </UserContain>
+              </NavTags>
+            </NavContainer >
+            <NavResponsive>
+              <PointsContain>
+                <Level />
+                <Points>
+                  Puntos
+                </Points>
+              </PointsContain>
+              <LogoS />
+              <MenuIcon onClick={() => { setHamburger(true) }} />
+              {
+                hamburger == true
+                &&
+                <>
+                  <HamburgerContain>
+                    <IconsContain>
+                      <LogoS />
+                      <Close onClick={() => { setHamburger(false) }} />
+                    </IconsContain>
+                    <HBMenu>
+                      <Link href="/Screens/Preview" >
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Inicio
+                        </HBList>
+                      </Link>
+                      <HBList onClick={() => { setHamburger(false) }}>
+                        Tienda
+                      </HBList>
+                      <Link href="/Screens/Preview">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Catálogo
+                        </HBList>
+                      </Link>
+                      <Link href="/Screens/Profile">
+                        <HBList onClick={() => { setHamburger(false) }}>
+
+                          {userData.name}  {"(Usuario MOVIL)"}
+                          < UserImage />
+                        </HBList>
+                      </Link>
+                      <Link href="/Screens/Rewards">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Centro de Recompensas
+                          <Level />
+                        </HBList>
+                      </Link>
+                    </HBMenu>
+                  </HamburgerContain>
+                </>
+              }
+            </NavResponsive>
+
+          </>
+
+          : <></>
+      }
+      {//vista de usuario Loggin
+        loggedIn && isAdmin
+          ?
+          <>
+            <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
+              <Link href="/Screens/Landings">
+                <Logo src="/images/logo3.png" width={130} height={70} />
+              </Link>
+              <NavTags>
+                <Link href={`/Screens/${route}`}>
+                  <NavText style={{ color: 'black' }}>
+                    Inicio
+                  </NavText>
+                </Link>
+                <NavText style={{ color: 'black' }}>
+                  Tienda
+                </NavText>
+
+                <Link href="/Screens/Purchase">
+                  <NavText style={{ color: 'black' }}>
+                    Comprar{" (Temp)"}
+                  </NavText>
+                </Link>
+                <Link href="/Screens/Lesson">
+                  <NavText style={{ color: 'black' }}>
+                    Lesson{" (Temp)"}
+                  </NavText>
+                </Link>
+                <Link href="/Screens/Preview">
+                  <NavText style={{ color: 'black' }}>
+                    Cátalogo
+                  </NavText>
+                </Link>
+                <UserContain>
+                  <Level />
+                  <Link href="/Screens/Profile">
+                    <UserText>
+                      {userData.name} {"(Cuenta Admin WEB)"}
                     </UserText>
                   </Link>
                   < UserImage />
@@ -286,7 +435,8 @@ const NavBar = () => {
                       </Link>
                       <Link href="/Screens/Profile">
                         <HBList onClick={() => { setHamburger(false) }}>
-                          Mofupiyo
+
+                          {userData.name} {"(Cuenta Admin MOVIL)"}
                           < UserImage />
                         </HBList>
                       </Link>

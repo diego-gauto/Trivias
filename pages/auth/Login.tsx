@@ -65,7 +65,6 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log("login.tsx click")
     let signUpData = {
       credentials: {
         email: formData.email,
@@ -138,7 +137,7 @@ const Login = () => {
 
           </Box2>
 
-          <AllButtons>.
+          <AllButtons>
             <PurpleButton2 type='submit'>
               Acceder
             </PurpleButton2>

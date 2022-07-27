@@ -33,7 +33,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         name: credentials.name,
         email: credentials.email,
         photoURL: "",
-
+        provider: "Webpage",
         phoneNumber: credentials.phoneNumber,
         role: "user", //user, userAdmin, professor
         plan: "free", //gonvarPlus
@@ -101,11 +101,11 @@ export const accessWithAuthProvider = (provider: any) => {
   const auth = getAuth();
 
 
-  var uid = ""
-  var displayName = ""
-  var email = ""
-  var photoURL = ""
-  var phoneNumber = ""
+  var uid: any;
+  var displayName: any;
+  var email: any;
+  var photoURL: any;
+  var phoneNumber: any;
 
   return signInWithPopup(auth, provider)
     .then(async (response) => {
@@ -113,12 +113,21 @@ export const accessWithAuthProvider = (provider: any) => {
       console.log("Provider Auth : 1")
       console.log(response)
 
+      uid = response.user.uid;
+      displayName = response.user.displayName;
+      email = response.user.email;
+      photoURL = response.user.photoURL;
+      phoneNumber = response.user.phoneNumber;
+
       return db
         .collection("users")
         .doc(response.user.uid)
         .get();
     }).then(async (doc) => {
       //If user does not exist register a new one
+
+      console.log("Provider Auth : 2")
+      console.log(doc)
       if (!doc.exists) {
 
 
@@ -132,7 +141,7 @@ export const accessWithAuthProvider = (provider: any) => {
           name: displayName,
           email: email,
           photoURL: photoURL,
-
+          provider: provider,
           phoneNumber: phoneNumber,
           role: "user", //user, userAdmin, professor
           plan: "free", //gonvarPlus
@@ -141,7 +150,7 @@ export const accessWithAuthProvider = (provider: any) => {
 
         }).then(() => {
 
-          console.log("Provider Auth : 2")
+          console.log("Provider Auth : 3")
 
         }).catch((error: any) => {
           let docCreationError = new Error(`Error creating user document: ${error}`);

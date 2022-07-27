@@ -103,7 +103,11 @@ function normalizeColor(hexCode) {
                         if (uniform.excludeFrom !== type) {
                             if ("array" === uniform.type) return uniform.value[0].getDeclaration(name, type, uniform.value.length) + `\nconst int ${name}_length = ${uniform.value.length};`;
                             if ("struct" === uniform.type) {
+                              try {
+                                
                                 let name_no_prefix = name.replace("u_", "");
+                                
+                             
                                 return name_no_prefix = 
                                   name_no_prefix.charAt(0).toUpperCase() + 
                                   name_no_prefix.slice(1), 
@@ -114,9 +118,14 @@ function normalizeColor(hexCode) {
                                   .replace(/^uniform/, ""))
                                   .join("") 
                                   + `\n} ${name}${length>0?`[${length}]`:""};`
-                            }
+                            
+                                } catch (error) {
+                                
+                                }
+                                }
                             return `uniform ${uniform.type} ${name}${length>0?`[${length}]`:""};`
-                        }
+                        
+                          }
                     }
                 }
             },
