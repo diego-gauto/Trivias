@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { db } from "../../firebase/firebaseConfig";
+import { useAuth } from "../../hooks/useAuth";
 import {
   Close,
   HamburgerContain,
@@ -27,13 +30,6 @@ import {
   UserText,
 } from "./NavBar.styled";
 import Scroll from "./scroll";
-
-import {
-  doc, getDoc,
-  collection, where, query, onSnapshot
-} from "firebase/firestore";
-import { db } from '../../firebase/firebaseConfig';
-import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
 
@@ -260,7 +256,11 @@ const NavBar = () => {
           : <></>
       }
       {//vista de usuario Loggin
-        loggedIn && !isAdmin
+        [pathname == '/Screens/Rewards' ||
+          pathname == '/Screens/Purchase' ||
+          pathname == '/Screens/Lesson' ||
+          pathname == '/Screens/Preview'] ||
+          loggedIn && !isAdmin
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>

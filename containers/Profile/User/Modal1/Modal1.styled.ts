@@ -27,8 +27,10 @@ export const Title = styled(ModalHeader)`
 export const ModalPay = styled.div`
   display:flex;
   gap: 40px;
+  margin-left: 20%;
   @media(max-width: 870px) {
     flex-direction:column;
+    margin-left: 0%;
   }
 `;
 export const CardTextContainer = styled.p`
@@ -106,7 +108,7 @@ export const ModalPayment = styled.div`
 `;
 export const ModalForm = styled.div`
   display:flex;
-  width:60%;
+  width:70%;
   border-radius: 10px;
   padding:20px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);

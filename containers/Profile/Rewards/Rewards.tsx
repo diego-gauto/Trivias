@@ -32,7 +32,7 @@ const Rewards = () => {
       <BannerContain>
         <Banner
           src="/images/Rewards/banner.png"
-          width={responsive870 ? "420" : "1400"}
+          width={responsive870 ? "420" : "1900"}
           height={responsive870 ? "272" : "450"}
         />
         <InsideContain>
