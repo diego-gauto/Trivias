@@ -21,6 +21,11 @@ import {
   LinkText,
   EyeIcon,
   InputPhone,
+
+  GoogleIcon,
+  FacebookIcon,
+  GoogleButton,
+  FacebookButton,
   LineIcon,
   PhoneSelect,
   Box2,
@@ -29,7 +34,9 @@ import {
 } from '../../screens/Login.styled'
 
 import {
-  signUpWithCreds
+  signUpWithCreds,
+
+  accessWithAuthProvider
 } from "../../store/actions/AuthActions"
 
 const formSchema = yup.object().shape({
@@ -84,6 +91,12 @@ const Register = () => {
   });
 
 
+  const handleSignUpWithAuthProvider = (authProvider: string) => {
+
+    accessWithAuthProvider(authProvider).then(() => {
+      window.location.href = "/Screens/Landings";
+    });
+  };
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
@@ -221,6 +234,26 @@ const Register = () => {
               Crear Cuenta
             </PurpleButton2>
           </AllButtons>
+          <br />
+          <AllButtons>
+
+            <GoogleButton onClick={() => {
+              handleSignUpWithAuthProvider("Google");
+            }}
+            >
+              <GoogleIcon></GoogleIcon>
+              Acceder con Google
+            </GoogleButton>
+            <FacebookButton
+              onClick={() => {
+                handleSignUpWithAuthProvider("Facebook");
+              }}
+            >
+              <FacebookIcon></FacebookIcon>
+              Acceder con Facebook
+            </FacebookButton>
+          </AllButtons>
+
           <br />
           <Text3>
             ¿Ya eres parte? &nbsp;
