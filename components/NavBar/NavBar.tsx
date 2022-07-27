@@ -13,8 +13,6 @@ import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
 
-
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   //declare any object in state
@@ -43,35 +41,30 @@ const NavBar = () => {
     fetchDB_data()
   }, [loggedIn])
 
-  useEffect(() => {
-    try {
-      console.log(userData)
-      console.log(userData.role)
-    } catch (error) {
-    }
-  }, [userData])
+
+  /*   useEffect(() => {
+      try {
+        console.log(userData)
+        console.log(userData.role)
+      } catch (error) {
+      }
+    }, [userData]) */
 
   //firestore query from auth data
   const fetchDB_data = async () => {
     try {
-
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-
         var userData: any;
         response.forEach((e) => {
           userData = e.data()
         });
         setUserData(userData)
-
         if (userData.role == "admin") {
           setIsAdmin(true)
         }
-
         return userData
-
       })
-
     } catch (error) {
       return false
     }
@@ -157,11 +150,7 @@ const NavBar = () => {
                 <NavText style={{ color: `${fontColor}` }}>
                   Tienda
                 </NavText>
-                <Link href="/Screens/Profile">
-                  <NavText style={{ color: `${fontColor}` }}>
-                    Perfil Usuario{" (Temp)"}
-                  </NavText>
-                </Link>
+
                 <Link href="/auth/Login">
                   <NavText style={{ color: `${fontColor}` }}>
                     Iniciar Sesión
@@ -212,11 +201,7 @@ const NavBar = () => {
                 <NavText style={{ color: 'black' }}>
                   Tienda
                 </NavText>
-                <Link href="/Screens/Profile">
-                  <NavText style={{ color: 'black' }}>
-                    Perfil Usuario{" (Temp)"}
-                  </NavText>
-                </Link>
+
                 <Link href="/auth/Login">
                   <NavText style={{ color: 'black' }}>
                     Iniciar Sesión
@@ -251,7 +236,7 @@ const NavBar = () => {
           : <></>
       }
       {//vista de usuario Loggin
-        loggedIn
+        loggedIn && !isAdmin
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
@@ -407,7 +392,7 @@ const NavBar = () => {
                   <Level />
                   <Link href="/Screens/Profile">
                     <UserText>
-                      {userData ? userData.name : "Bienvenido"}   {"(Cuenta Admin WEB)"}
+                      {userData ? userData.name : "Bienvenido"}   {"(Admin WEB)"}
                     </UserText>
                   </Link>
                   {userData && userData.photoURL ?
@@ -459,7 +444,7 @@ const NavBar = () => {
                       <Link href="/Screens/Profile">
                         <HBList onClick={() => { setHamburger(false) }}>
 
-                          {userData ? userData.name : "Bienvenido"}   {"(Cuenta Admin MOVIL)"}
+                          {userData ? userData.name : "Bienvenido"}   {"(Admin MOVIL)"}
                           {userData && userData.photoURL ?
                             < UserImage
                               style={{

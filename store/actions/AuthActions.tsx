@@ -36,7 +36,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         email: credentials.email,
         photoURL: "",
         provider: "Webpage",
-        phoneNumber: credentials.phoneNumber,
+        phoneNumber: credentials.phoneInput,
         role: "user", //user, userAdmin, professor
         plan: "free", //gonvarPlus
         score: 0,
