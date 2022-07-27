@@ -5,8 +5,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import GradientCanvas from '../../components/GradientCanvas/GradientCanvas';
 import 'react-phone-number-input/style.css'
 import PhoneInput, {
-  parsePhoneNumber,
-  getCountryCallingCode
 } from "react-phone-number-input";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -104,20 +102,12 @@ const Register = () => {
         phoneInput: phoneInputValidation,
       },
     };
-    signUpWithCreds(signUpData);
+    signUpWithCreds(signUpData).then(() => {
+      window.location.href = "/Screens/Landings";
+    });
   }
 
 
-  /*   const handlePhoneInput = (e: ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.target.value;
-  
-      console.log(newValue)
-      setPhoneNumber(newValue);
-    } */
-
-  useEffect(() => {
-    console.log(phoneInput)
-  }, [phoneInput])
 
 
   return (

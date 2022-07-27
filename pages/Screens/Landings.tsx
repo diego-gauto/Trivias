@@ -7,7 +7,7 @@ import { Module4_Carousel } from '../../components/Home/Module4_Carousel/Module4
 import { Module5 } from '../../components/Home/Module5/Module5';
 import { Module6 } from '../../components/Home/Module6/Module6';
 
-const Landings = () => {
+const Homepage = () => {
   return (
 
     <Container
@@ -120,4 +120,4 @@ const Landings = () => {
     </Container>
   )
 }
-export default Landings;
+export default Homepage;

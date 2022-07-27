@@ -9,17 +9,6 @@ import { IModule5 } from "./IModule5";
 export const Module5 = (props: IModule5) => {
 
 
-  /*   useEffect(
-      () => {
-        //document.getElementById("a")?.scroll({
-        window.scroll({
-          top: 1000,
-          behavior: 'smooth'
-        });
-      },
-  
-    ); */
-
   return (
     <Container style={{ paddingTop: "75px", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
       <MasonryBox>

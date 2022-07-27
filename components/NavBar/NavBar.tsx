@@ -4,13 +4,41 @@ import { useEffect, useState } from "react";
 import { Close, HamburgerContain, HBList, HBMenu, IconsContain, Level, Logo, LogoS, MenuIcon, NavContainer, NavHome, NavResponsive, NavTags, NavTags2, NavText, Points, PointsContain, PurpleButton, UserContain, UserImage, UserText } from "./NavBar.styled";
 import Scroll from "./scroll";
 
+import { useAuth } from "../../hooks/useAuth";
+
 const NavBar = () => {
 
 
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        console.log(userDataAuth)
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }, [])
+  } catch (error) {
+    console.log(error)
+
+    setLoggedIn(false)
+  }
+
+  /*  useEffect(() => {
+     if (userDataAuth !== null) {
+       console.log("is Logged In")
+       console.log(userDataAuth)
+     }
+   }, [loggedIn]) */
+
   // Nav Change Color
   const [hamburger, setHamburger] = useState(false);
-
   const [color, setColor] = useState(false)
+
   useEffect(() => {
     if (color == true)
       return HomeNav2()
@@ -69,8 +97,8 @@ const NavBar = () => {
   return (
 
     <>
-      {
-        pathname == '/Screens/Landings'
+      {//Vista del navbar dinamico de Homepage
+        pathname == '/Screens/Landings' && !loggedIn
           ?
           <>
             <NavHome style={{ background: `${colorBack}`, boxShadow: `${shadow}` }}>
@@ -124,9 +152,9 @@ const NavBar = () => {
           </>
           : <></>
       }
-      {
+      {//vista de navbar general
         pathname == '/auth/Login' ||
-          pathname == '/auth/Register'
+          pathname == '/auth/Register' && !loggedIn
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
@@ -180,12 +208,8 @@ const NavBar = () => {
 
           : <></>
       }
-      {
-        pathname == '/Screens/Profile' ||
-          pathname == '/Screens/Rewards' ||
-          pathname == '/Screens/Purchase' ||
-          pathname == '/Screens/Lesson' ||
-          pathname == '/Screens/Preview'
+      {//vista de usuario Loggin
+        loggedIn
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>

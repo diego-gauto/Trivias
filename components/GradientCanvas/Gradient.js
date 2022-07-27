@@ -42,7 +42,11 @@ function normalizeColor(hexCode) {
                         function getUniformVariableDeclarations(uniforms, type) {
                             return Object.entries(uniforms).map(([uniform, value]) => value.getDeclaration(uniform, type)).join("\n")
                         }
-                        material.uniforms = uniforms, material.uniformInstances = [];
+                        try {
+                          material.uniforms = uniforms, material.uniformInstances = [];
+                        } catch (error) {
+                          
+                        }
   
                         const prefix = "\n              precision highp float;\n            ";
                         material.vertexSource = `\n              ${prefix}\n              attribute vec4 position;\n              attribute vec2 uv;\n              attribute vec2 uvNorm;\n              ${getUniformVariableDeclarations(_miniGl.commonUniforms,"vertex")}\n              ${getUniformVariableDeclarations(uniforms,"vertex")}\n              ${vertexShaders}\n            `,
