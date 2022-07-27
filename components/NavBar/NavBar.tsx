@@ -81,7 +81,7 @@ const NavBar = () => {
     return HomeNav()
   }, [color])
 
-  const [route, setRoute] = useState("Landings");
+  const [route, setRoute] = useState("");
   const [logo, setLogo] = useState("/images/logo.png");
 
   const [shadow, setBoxShadow] = useState("");
@@ -104,7 +104,7 @@ const NavBar = () => {
     setLogo("/images/logo3.png");
     setColorBack("white");
     setFontColor("black");
-    setRoute("Landings");
+    setRoute("");
     setBoxShadow("0px 4px 4px rgba(0, 0, 0, 0.25)");
   }
   const UserNav = () => {
@@ -119,13 +119,13 @@ const NavBar = () => {
 
 
   useEffect(() => {
-    if (pathname == '/Screens/Landings') return HomeNav();
+    if (['/', ''].includes(pathname)) return HomeNav();
     if (pathname == '/auth/Login' || pathname == '/auth/Register') return LoginNav();
-    if (pathname == '/Screens/Profile' ||
-      pathname == '/Screens/Rewards' ||
-      pathname == '/Screens/Purchase' ||
-      pathname == '/Screens/Lesson' ||
-      pathname == '/Screens/Preview'
+    if (pathname == '/Profile' ||
+      pathname == '/Rewards' ||
+      pathname == '/Purchase' ||
+      pathname == '/Lesson' ||
+      pathname == '/Preview'
     ) return UserNav();
 
   }, [pathname])
@@ -133,16 +133,16 @@ const NavBar = () => {
 
     <>
       {//Vista del navbar dinamico de Homepage
-        pathname == '/Screens/Landings' && !loggedIn
+        ['/', ''].includes(pathname) && !loggedIn
           ?
           <>
             <NavHome style={{ background: `${colorBack}`, boxShadow: `${shadow}` }}>
               <Scroll color={color} setColor={setColor} pathname={pathname} />
-              <Link href="/Screens/Landings">
+              <Link href="/">
                 <Logo src={`${logo}`} width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href="/Screens/Landings">
+                <Link href="/">
                   <NavText style={{ color: `${fontColor}` }}>
                     Inicio
                   </NavText>
@@ -164,7 +164,7 @@ const NavBar = () => {
               </NavTags>
             </NavHome >
             <NavResponsive style={{ position: 'fixed' }}>
-              <Link href="/Screens/Landings">
+              <Link href="/">
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags2>
@@ -189,11 +189,11 @@ const NavBar = () => {
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
-              <Link href="/Screens/Landings">
+              <Link href="/">
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href={`/Screens/${route}`}>
+                <Link href={`/${route}`}>
                   <NavText style={{ color: 'black' }}>
                     Inicio
                   </NavText>
@@ -215,7 +215,7 @@ const NavBar = () => {
               </NavTags>
             </NavContainer >
             <NavResponsive >
-              <Link href="/Screens/Landings">
+              <Link href="/">
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags2>
@@ -240,11 +240,11 @@ const NavBar = () => {
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
-              <Link href="/Screens/Landings">
+              <Link href="/">
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href={`/Screens/${route}`}>
+                <Link href={`/${route}`}>
                   <NavText style={{ color: 'black' }}>
                     Inicio
                   </NavText>
@@ -253,24 +253,24 @@ const NavBar = () => {
                   Tienda
                 </NavText>
 
-                <Link href="/Screens/Purchase">
+                <Link href="/Purchase">
                   <NavText style={{ color: 'black' }}>
                     Comprar{" (Temp)"}
                   </NavText>
                 </Link>
-                <Link href="/Screens/Lesson">
+                <Link href="/Lesson">
                   <NavText style={{ color: 'black' }}>
                     Lesson{" (Temp)"}
                   </NavText>
                 </Link>
-                <Link href="/Screens/Preview">
+                <Link href="/Preview">
                   <NavText style={{ color: 'black' }}>
                     Cátalogo
                   </NavText>
                 </Link>
                 <UserContain>
                   <Level />
-                  <Link href="/Screens/Profile">
+                  <Link href="/Profile">
                     <UserText>
                       {userData ? userData.name : "Bienvenido"}  {"(Usuario WEB)"}
                     </UserText>
@@ -309,7 +309,7 @@ const NavBar = () => {
                       <Close onClick={() => { setHamburger(false) }} />
                     </IconsContain>
                     <HBMenu>
-                      <Link href="/Screens/Preview" >
+                      <Link href="/Preview" >
                         <HBList onClick={() => { setHamburger(false) }}>
                           Inicio
                         </HBList>
@@ -317,12 +317,12 @@ const NavBar = () => {
                       <HBList onClick={() => { setHamburger(false) }}>
                         Tienda
                       </HBList>
-                      <Link href="/Screens/Preview">
+                      <Link href="/Preview">
                         <HBList onClick={() => { setHamburger(false) }}>
                           Catálogo
                         </HBList>
                       </Link>
-                      <Link href="/Screens/Profile">
+                      <Link href="/Profile">
                         <HBList onClick={() => { setHamburger(false) }}>
 
                           {userData ? userData.name : "Bienvenido"}    {"(Usuario MOVIL)"}
@@ -339,7 +339,7 @@ const NavBar = () => {
                           }
                         </HBList>
                       </Link>
-                      <Link href="/Screens/Rewards">
+                      <Link href="/Rewards">
                         <HBList onClick={() => { setHamburger(false) }}>
                           Centro de Recompensas
                           <Level />
@@ -360,11 +360,11 @@ const NavBar = () => {
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
-              <Link href="/Screens/Landings">
+              <Link href="/">
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href={`/Screens/${route}`}>
+                <Link href={`/${route}`}>
                   <NavText style={{ color: 'black' }}>
                     Inicio
                   </NavText>
@@ -373,24 +373,24 @@ const NavBar = () => {
                   Tienda
                 </NavText>
 
-                <Link href="/Screens/Purchase">
+                <Link href="/Purchase">
                   <NavText style={{ color: 'black' }}>
                     Comprar{" (Temp)"}
                   </NavText>
                 </Link>
-                <Link href="/Screens/Lesson">
+                <Link href="/Lesson">
                   <NavText style={{ color: 'black' }}>
                     Lesson{" (Temp)"}
                   </NavText>
                 </Link>
-                <Link href="/Screens/Preview">
+                <Link href="/Preview">
                   <NavText style={{ color: 'black' }}>
                     Cátalogo
                   </NavText>
                 </Link>
                 <UserContain>
                   <Level />
-                  <Link href="/Screens/Profile">
+                  <Link href="/Profile">
                     <UserText>
                       {userData ? userData.name : "Bienvenido"}   {"(Admin WEB)"}
                     </UserText>
@@ -428,7 +428,7 @@ const NavBar = () => {
                       <Close onClick={() => { setHamburger(false) }} />
                     </IconsContain>
                     <HBMenu>
-                      <Link href="/Screens/Preview" >
+                      <Link href="/Preview" >
                         <HBList onClick={() => { setHamburger(false) }}>
                           Inicio
                         </HBList>
@@ -436,12 +436,12 @@ const NavBar = () => {
                       <HBList onClick={() => { setHamburger(false) }}>
                         Tienda
                       </HBList>
-                      <Link href="/Screens/Preview">
+                      <Link href="/Preview">
                         <HBList onClick={() => { setHamburger(false) }}>
                           Catálogo
                         </HBList>
                       </Link>
-                      <Link href="/Screens/Profile">
+                      <Link href="/Profile">
                         <HBList onClick={() => { setHamburger(false) }}>
 
                           {userData ? userData.name : "Bienvenido"}   {"(Admin MOVIL)"}
@@ -458,7 +458,7 @@ const NavBar = () => {
                           }
                         </HBList>
                       </Link>
-                      <Link href="/Screens/Rewards">
+                      <Link href="/Rewards">
                         <HBList onClick={() => { setHamburger(false) }}>
                           Centro de Recompensas
                           <Level />
