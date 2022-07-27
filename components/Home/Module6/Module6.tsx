@@ -8,9 +8,9 @@ import {
   AnimatedBackground,
   ContainerMain,
   Divisor,
-  SliderContainer,
   SliderContainerChild,
-  SliderSectionTitle
+  SliderSectionTitle,
+  SliderContainer,
 } from "./Module6.styled";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
@@ -49,8 +49,14 @@ export const Module6 = (props: IModule6) => {
     },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 3,
-    spaceBetween: 30,
+    slidesPerView: 2,
+    spaceBetween: 20,
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      }
+    }
   };
 
   return (
@@ -62,7 +68,7 @@ export const Module6 = (props: IModule6) => {
     >
 
       <ContainerMain id="MainSliderCentered">
-        <div style={{ position: "relative", bottom: "-650px", overflow: "hidden" }}>
+        <SliderContainer>
           <SliderSectionTitle>Visita nuestra tienda</SliderSectionTitle>
           <Swiper {...settings} onInit={onInit}>
             {slideDataArr.map((element) => (
@@ -74,7 +80,7 @@ export const Module6 = (props: IModule6) => {
 
 
           </Swiper>
-        </div>
+        </SliderContainer>
 
         <SliderContainerChild>
 
@@ -89,6 +95,6 @@ export const Module6 = (props: IModule6) => {
 
         </SliderContainerChild>
       </ContainerMain >
-    </Container>
+    </Container >
   )
 }

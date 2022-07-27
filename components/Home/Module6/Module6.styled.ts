@@ -8,27 +8,35 @@ background-repeat: no-repeat !important ;
 `;
  */
  
+export const SliderContainer = styled.div`
+position: relative;
+bottom: -650px;
+overflow: hidden;
+@media only screen and (max-width: 1024px) {
+  margin-top: auto;
+  bottom: -525px;
+}
+`;
 export const Divisor = styled.div  ` 
 position: absolute;
-    width: 110%; 
-    height: 270px;
-    background: white;
-    transform: rotate(-185deg); 
-    margin-left: -5%;
-    bottom: 570px;
-    z-index: 2;
-}
+width: 110%; 
+height: 270px;
+background: white;
+transform: rotate(-185deg); 
+margin-left: -5%;
+bottom: 570px;
+z-index: 2;
 `;
  
 export const ContainerMain = styled.div  ` 
 padding-bottom: 0;
-    position: inherit;
-    width: 100%;
-    margin-top: -380px;
-    z-index: -1;
-`; 
-export const SliderContainer = styled.div  `
-margin-top: 30px;
+position: inherit;
+width: 100%;
+margin-top: -380px;
+z-index: -1;
+@media only screen and (max-width: 1024px) {
+  margin-top: -450px;
+}
 `; 
 export const AnimatedBackground = styled.video  `
 width: 100%;
@@ -42,6 +50,9 @@ export const SliderContainerChild = styled.div  `
 z-index: -1;
 position: relative;
 height: 675px;
+@media only screen and (max-width: 1024px) {
+  height: 450px;
+}
 `;
 
 export const SliderSectionTitle = styled.p  `
@@ -51,4 +62,13 @@ text-transform: uppercase;
 color: #FFFFFF;
 text-align: right;
 padding-right: 20px;
+@media only screen and (max-width: 1024px) {
+  font-size: 28px;
+  margin-bottom: 25px;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-right: 0;
+}
 `

@@ -49,8 +49,10 @@ margin-top: 30px;
 margin-left: 6.5%;
 margin-right: 6.5%;
 @media only screen and (max-width: 1024px) {
-  grid-template-columns: 1fr 1fr;
-  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 400px;
 }
 `;
 export const MasonryItem = styled.div`

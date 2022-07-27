@@ -20,18 +20,7 @@ export const SlideModule = (props: ISlideModule) => {
       <ContainerMain>
         <Col>
           <Row>
-            <SlideImg
-
-              style={{
-                backgroundImage: 'url(' + imgURL + ')',
-                width: "350px",
-                height: "350px",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "95% auto",
-                padding: "0",
-                margin: "0 auto"
-              }}
-            >
+            <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
 
               {isNew ?
                 <NewTag>
