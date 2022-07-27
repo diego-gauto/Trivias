@@ -25,22 +25,25 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
       localStorage.setItem("username", credentials.name);
       localStorage.setItem("email", credentials.email);
 
-      console.log("a")
+
+      console.log("Provider Auth : 1")
 
       await addDoc(collection(db, "users"), {
         uid: user?.uid,
         name: credentials.name,
         email: credentials.email,
-        phoneNumber: credentials.phoneInput,
+        photoURL: "",
+
+        phoneNumber: credentials.phoneNumber,
         role: "user", //user, userAdmin, professor
         plan: "free", //gonvarPlus
         score: 0,
-        urlImage: "none yet",
 
 
       }).then(() => {
 
-        console.log("c")
+
+        console.log("Provider Auth : 2")
 
       }).catch((error: any) => {
         let docCreationError = new Error(`Error creating user document: ${error}`);
@@ -79,10 +82,8 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
 };
 
 
-export const accessWithAuthProvider = (provider: any, signUpData: { credentials: any; }) => {
-  const {
-    credentials,
-  } = signUpData;
+export const accessWithAuthProvider = (provider: any) => {
+
 
 
   switch (provider) {
@@ -98,46 +99,49 @@ export const accessWithAuthProvider = (provider: any, signUpData: { credentials:
       throw error;
   }
   const auth = getAuth();
-  type ProviderUserData = {
-    uid?: number;
-    displayName?: string;
-    email?: string;
-    photoURL?: string;
-  };
 
-  var providerUsrData: ProviderUserData = {};
+
+  var uid = ""
+  var displayName = ""
+  var email = ""
+  var photoURL = ""
+  var phoneNumber = ""
 
   return signInWithPopup(auth, provider)
     .then(async (response) => {
-      console.log("signInWithPopup")
+
+      console.log("Provider Auth : 1")
       console.log(response)
 
       return db
         .collection("users")
-        .doc(response.uid)
+        .doc(response.user.uid)
         .get();
     }).then(async (doc) => {
       //If user does not exist register a new one
       if (!doc.exists) {
 
 
+        if (photoURL == undefined || photoURL == null) {
+          photoURL = ""
+        }
         //Create the document in Firestore
         await addDoc(collection(db, "users"), {
 
-          uid: providerUsrData.uid,
-          name: providerUsrData.displayName,
-          email: providerUsrData.email,
-          photoURL: providerUsrData.photoURL,
+          uid: uid,
+          name: displayName,
+          email: email,
+          photoURL: photoURL,
 
+          phoneNumber: phoneNumber,
           role: "user", //user, userAdmin, professor
           plan: "free", //gonvarPlus
           score: 0,
-          urlImage: "none yet",
 
 
         }).then(() => {
 
-          console.log("c")
+          console.log("Provider Auth : 2")
 
         }).catch((error: any) => {
           let docCreationError = new Error(`Error creating user document: ${error}`);

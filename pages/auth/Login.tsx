@@ -28,7 +28,8 @@ import {
 
 
 import {
-  signInWithCreds
+  signInWithCreds,
+  accessWithAuthProvider
 } from "../../store/actions/AuthActions"
 
 const formSchema = yup.object().shape({
@@ -75,6 +76,14 @@ const Login = () => {
       window.location.href = "/Screens/Landings";
     });
   }
+
+
+  const handleSignUpWithAuthProvider = (authProvider: string) => {
+
+    accessWithAuthProvider(authProvider).then(() => {
+      window.location.href = "/Screens/Landings";
+    });
+  };
 
   return (
     <Background>
@@ -139,11 +148,18 @@ const Login = () => {
 
         <AllButtons>
 
-          <GoogleButton>
+          <GoogleButton onClick={() => {
+            handleSignUpWithAuthProvider("Google");
+          }}
+          >
             <GoogleIcon></GoogleIcon>
             Acceder con Google
           </GoogleButton>
-          <FacebookButton>
+          <FacebookButton
+            onClick={() => {
+              handleSignUpWithAuthProvider("Facebook");
+            }}
+          >
             <FacebookIcon></FacebookIcon>
             Acceder con Facebook
           </FacebookButton>
