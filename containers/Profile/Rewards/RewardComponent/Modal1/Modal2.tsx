@@ -32,7 +32,7 @@ const Modal1 = ({ show, setShow }: any) => {
       <ModalContain >
         <Modal show={show} onHide={handleClose} size="lg" centered>
           <ModalCont style={{ height: responsive870 ? "700px" : "480px" }}>
-            <Title closeButton>
+            <Title style={{ marginTop: responsive870 ? "-20px" : "", marginBottom: responsive870 ? "20px" : "" }} closeButton>
               20% en una membresía
             </Title>
             <ModalPay>
@@ -43,7 +43,7 @@ const Modal1 = ({ show, setShow }: any) => {
               </ModalPayment>
               <ModalForm>
                 <Inputs>
-                  <AlertMsg style={{ fontWeight: "700", color: "black" }}>
+                  <AlertMsg style={{ marginTop: responsive870 ? "35px" : "", fontWeight: "700", color: "black" }}>
                     Recompensa por desbloquear
                   </AlertMsg>
                   <AlertCont>
