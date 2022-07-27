@@ -32,7 +32,7 @@ const Modal1 = ({ show, setShow }: any) => {
     <>
       <ModalContain >
         <Modal show={show} onHide={handleClose} size="lg" centered>
-          <ModalCont style={{ height: "700px" }}>
+          <ModalCont >
             <Title closeButton>
               Gonvar Nails Leonardo Da Vinci
             </Title>

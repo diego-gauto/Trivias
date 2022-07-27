@@ -7,6 +7,7 @@ import Image from "next/image";
 
 import {
   AddText,
+  AlertCont,
   AlertMsg,
   ButtonDiv,
   Inputs,
@@ -21,46 +22,47 @@ import {
   Title,
 } from "./Modal1.styled";
 
-const Modal2 = ({ show, setShow }: any) => {
-  const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
+const Modal1 = ({ show, setShow }: any) => {
+
+  const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
 
   return (
     <>
       <ModalContain >
         <Modal show={show} onHide={handleClose} size="lg" centered>
-          <ModalCont style={{ gap: "80px" }}>
+          <ModalCont style={{ height: responsive870 ? "700px" : "480px" }}>
             <Title closeButton>
               20% en una membresía
             </Title>
             <ModalPay>
               <ModalPayment>
                 <PaymentIcon>
-                  <Image src="/images/Rewards/reward3.png" width={"180%"} height={"180%"} />
+                  <Image src="/images/Rewards/reward3.png" width={"250%"} height={"250%"} />
                 </PaymentIcon>
               </ModalPayment>
               <ModalForm>
                 <Inputs>
-                  <AlertMsg style={{ marginTop: "-50px", fontWeight: "700", color: "black" }}>
+                  <AlertMsg style={{ fontWeight: "700", color: "black" }}>
                     Recompensa por desbloquear
                   </AlertMsg>
-                  <AddText style={{ fontWeight: "400" }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Tellus ultrices id feugiat cursus velit.
-                    Aliquam pulvinar in orci malesuada. Pellentesque
-                    aliquam aliquam nulla sodales tortor pretium aliquet
-                    ultricies. Interdum et suspendisse nunc gravida.
+                  <AlertCont>
+                    <AddText >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Tellus ultrices id feugiat cursus velit. Aliquam pulvinar
+                      in orci malesuada. Pellentesque aliquam aliquam nulla
+                      sodales tortor pretium aliquet ultricies. Interdum et
+                      suspendisse nunc gravida.
+                    </AddText>
+                  </AlertCont>
+                  <AddText style={{ height: "50px", fontWeight: "700" }}>
+                    <br />
                   </AddText>
                 </Inputs>
               </ModalForm>
             </ModalPay>
-            <ButtonDiv>
-              <RewardText style={{
-                fontWeight: "700",
-                fontSize: "16px",
-                marginLeft: "10%",
-                top: responsive480 ? "50%" : " 60%",
-              }}>
+            <ButtonDiv >
+              <RewardText style={{ fontWeight: "700", fontSize: "16px", marginLeft: "10%", top: "320px" }}>
                 Recompensa por <br /> 2,000 puntos
               </RewardText>
               <PurpleButton onClick={handleClose}>
@@ -73,4 +75,4 @@ const Modal2 = ({ show, setShow }: any) => {
     </>
   )
 }
-export default Modal2;
+export default Modal1;

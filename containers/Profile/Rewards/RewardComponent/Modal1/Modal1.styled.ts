@@ -13,11 +13,12 @@ export const ModalContain = styled.div`
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
   }
+  width: 5000px;
 `;
 export const ModalCont = styled.div`
   display: flex;
   flex-direction:column;
-  justify-content: right;
+  justify-content: center;
   padding: 20px;
   gap: 40px;
   @media(max-width: 870px) {
@@ -32,7 +33,7 @@ export const Title = styled(ModalHeader)`
   padding:10px;
   @media(max-width: 870px) {
     font-size:18px;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
   }
 `;
 export const ModalPay = styled.div`

@@ -142,8 +142,6 @@ export const AddText = styled.label`
   font-family:'Montserrat',sans-serif;
   margin-bottom: 3%;
   @media(max-width: 870px) {
-    width: 320px;
-    height: 126px;
   }
   
 `;
