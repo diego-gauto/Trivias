@@ -124,6 +124,13 @@ export const ButtonContain = styled.div`
     gap: 10px;
     margin: 0;
   }
+  @media(max-width: 480px){
+    justify-content: space-between;
+    max-width: 100%;
+    flex-direction: row;
+    gap: 10px;
+    margin: 0;
+  }
 `;
 export const InsideText = styled.p`
   opacity:.8;
@@ -225,6 +232,10 @@ export const SeasonContain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media(max-width: 374px){
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 export const LessonTitle = styled.p`
   font-size: 24px;
@@ -235,51 +246,6 @@ export const LessonTitle = styled.p`
   }
   @media(max-width: 500px){
     font-size: 16px;
-  }
-`;
-export const SelectDrop = styled.select`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  font-size: 16px;
-  font-weight: 600;
-  padding-inline: 25px;
-  padding-block: 10px;
-  background: transparent;
-  position: relative;
-  color: #6717CD;
-  border-radius: 30px;
-  outline: none;
-  border:1px solid #6717CD;
-  @media(max-width: 991px){
-    font-size: 12px;
-    padding-inline: 10px;
-    padding-block: 5px;
-  }
-  &:after{
-    content: 'hola';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: black;
-    cursor: pointer;
-  }
-  option{
-    border-radius: 10px;
-    color: black;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    @media( max-width: 991px){
-      font-size: 12px;
-    }
-    &:active{
-      color:red;
-    }
-  }
-  span{
-
   }
 `;
 export const VideoContain = styled.div`
@@ -327,13 +293,6 @@ export const Description = styled.p`
   @media(max-width: 991px){
     display: none;
   }
-`;
-export const DropDown = styled.i`
-  background-image: url(../images/Preview/down.png);
-  height: 10px;
-  width: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
 `;
 export const CardImage = styled(Image)`
 filter: brightness(40%);

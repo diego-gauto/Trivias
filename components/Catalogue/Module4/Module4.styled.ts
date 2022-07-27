@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Viewpay = styled.p`
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-block: 15px;
   color: #6717CD;
   text-align: center;
   font-size: 16px;
@@ -12,5 +11,9 @@ export const Viewpay = styled.p`
   margin-bottom: 0;
   &:hover{
     text-decoration: underline;
+  }
+  @media( max-width: 1023px){
+    padding-block: 10px;
+    font-size: 14px;
   }
 `;

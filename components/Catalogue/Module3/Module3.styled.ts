@@ -65,7 +65,7 @@ export const VideoInfo = styled.div`
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 0 0 10px 10px;
   max-width: 400px;
-  @media( max-width: 600px){
+  @media( max-width: 1023px){
     max-width: 250px;
     gap:0;
   }
@@ -103,8 +103,7 @@ export const Text3 = styled.p`
   }
 `;
 export const ViewCourse = styled.p`
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-block: 15px;
   color: #6717CD;
   text-align: center;
   font-size: 16px;
@@ -118,8 +117,7 @@ export const ViewCourse = styled.p`
     border-radius: 0 0 10px 10px;
   }
   @media( max-width: 1023px){
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-block: 10px;
     font-size: 14px;
   }
 `;
