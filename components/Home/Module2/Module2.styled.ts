@@ -1,6 +1,27 @@
-import { Col, Row } from "react-bootstrap";
-import styled from 'styled-components';
+import { Col, Row, Image, Container } from "react-bootstrap";
+import styled from "styled-components";
  
+export const ModuleContainer = styled(Container) `
+@media only screen and (max-width: 1024px) {
+  margin: 25px auto;
+  padding: 0;
+}
+`;
+export const RibbonImage = styled(Image) `
+@media only screen and (max-width: 1024px) {
+  margin-top: -50px;
+}
+`;
+export const IconImagesContainer = styled.div `
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+align-items: end;
+row-gap: 35px;
+@media only screen and (max-width: 1024px) {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 50px;
+}
+`
 export const ImageTag = styled.div  `
  
 `;
@@ -17,6 +38,11 @@ border-radius: 10px;
   height: 500px;
   width: 1225px;   
 }
+@media only screen and (max-width: 1024px) {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 `;
 export const SectionCenteredWrapper = styled.div  `
 bottom: 395px;
@@ -26,6 +52,9 @@ justify-content: space-around;
 @media (min-width: 1800px) {
   bottom: 450px;  
 }
+@media only screen and (max-width: 1024px) {
+bottom: 0;
+}
 `;
 export const LeftImage = styled.div  `
 display: flex;
@@ -33,6 +62,9 @@ width: 95%;
 align-items: flex-end;
 justify-content: flex-start;
 margin-left: 15px;
+@media only screen and (max-width: 1024px) {
+  display: none;
+}
 `;
 
 export const RightImage = styled.div  `
@@ -41,10 +73,15 @@ width: 95%;
 margin-top: 25px;
 align-items: center;
 justify-content: flex-end;
+@media only screen and (max-width: 1024px) {
+  display: none;
 }
 `;
 export const SectionCenteredBackground = styled(Row)  `
-height: 70vh;
+height: 65vh;
+@media only screen and (max-width: 1024px) {
+  height: auto;
+}
 `;
 export const SectionCenteredTopColumn = styled(Col)  `
 height: 10px;
@@ -70,6 +107,17 @@ font-size: 14px;
 line-height: 150%;
  
 text-align: center;
+`;
+export const TitleTextContainer = styled.div `
+display: flex;
+justify-content: center;
+column-gap: 2.5px;
+@media only screen and (max-width: 1024px) {
+  margin-top: 50px;
+  > * {
+    min-width: 120px;
+  }
+}
 `;
 export const TitleCenter = styled.span  `
 font-family: 'Montserrat';

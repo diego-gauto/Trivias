@@ -13,6 +13,7 @@ interface Props {
 const AuthContext = createContext<any>(null);
 
 export const useAuth = () => {
+  //console.log(db)
   return useContext(AuthContext);
 };
 

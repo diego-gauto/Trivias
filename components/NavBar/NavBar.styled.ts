@@ -142,7 +142,6 @@ export const Level = styled.i`
   height: 50px;
 `;
 export const UserImage = styled.i`
-  background-image: url(../images/Navbar/userImage.png);
   background-repeat:no-repeat;
   width: 50px;
   height: 50px;

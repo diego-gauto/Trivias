@@ -5,8 +5,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import GradientCanvas from '../../components/GradientCanvas/GradientCanvas';
 import 'react-phone-number-input/style.css'
 import PhoneInput, {
-  parsePhoneNumber,
-  getCountryCallingCode
 } from "react-phone-number-input";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,6 +21,11 @@ import {
   LinkText,
   EyeIcon,
   InputPhone,
+
+  GoogleIcon,
+  FacebookIcon,
+  GoogleButton,
+  FacebookButton,
   LineIcon,
   PhoneSelect,
   Box2,
@@ -31,7 +34,9 @@ import {
 } from '../../screens/Login.styled'
 
 import {
-  signUpWithCreds
+  signUpWithCreds,
+
+  accessWithAuthProvider
 } from "../../store/actions/AuthActions"
 
 const formSchema = yup.object().shape({
@@ -86,6 +91,12 @@ const Register = () => {
   });
 
 
+  const handleSignUpWithAuthProvider = (authProvider: string) => {
+
+    accessWithAuthProvider(authProvider).then(() => {
+      window.location.href = "/Screens/Landings";
+    });
+  };
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
@@ -104,20 +115,12 @@ const Register = () => {
         phoneInput: phoneInputValidation,
       },
     };
-    signUpWithCreds(signUpData);
+    signUpWithCreds(signUpData).then(() => {
+      window.location.href = "/Screens/Landings";
+    });
   }
 
 
-  /*   const handlePhoneInput = (e: ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.target.value;
-  
-      console.log(newValue)
-      setPhoneNumber(newValue);
-    } */
-
-  useEffect(() => {
-    console.log(phoneInput)
-  }, [phoneInput])
 
 
   return (
@@ -231,6 +234,26 @@ const Register = () => {
               Crear Cuenta
             </PurpleButton2>
           </AllButtons>
+          <br />
+          <AllButtons>
+
+            <GoogleButton onClick={() => {
+              handleSignUpWithAuthProvider("Google");
+            }}
+            >
+              <GoogleIcon></GoogleIcon>
+              Acceder con Google
+            </GoogleButton>
+            <FacebookButton
+              onClick={() => {
+                handleSignUpWithAuthProvider("Facebook");
+              }}
+            >
+              <FacebookIcon></FacebookIcon>
+              Acceder con Facebook
+            </FacebookButton>
+          </AllButtons>
+
           <br />
           <Text3>
             ¿Ya eres parte? &nbsp;

@@ -42,7 +42,11 @@ function normalizeColor(hexCode) {
                         function getUniformVariableDeclarations(uniforms, type) {
                             return Object.entries(uniforms).map(([uniform, value]) => value.getDeclaration(uniform, type)).join("\n")
                         }
-                        material.uniforms = uniforms, material.uniformInstances = [];
+                        try {
+                          material.uniforms = uniforms, material.uniformInstances = [];
+                        } catch (error) {
+                          
+                        }
   
                         const prefix = "\n              precision highp float;\n            ";
                         material.vertexSource = `\n              ${prefix}\n              attribute vec4 position;\n              attribute vec2 uv;\n              attribute vec2 uvNorm;\n              ${getUniformVariableDeclarations(_miniGl.commonUniforms,"vertex")}\n              ${getUniformVariableDeclarations(uniforms,"vertex")}\n              ${vertexShaders}\n            `,
@@ -99,7 +103,11 @@ function normalizeColor(hexCode) {
                         if (uniform.excludeFrom !== type) {
                             if ("array" === uniform.type) return uniform.value[0].getDeclaration(name, type, uniform.value.length) + `\nconst int ${name}_length = ${uniform.value.length};`;
                             if ("struct" === uniform.type) {
+                              try {
+                                
                                 let name_no_prefix = name.replace("u_", "");
+                                
+                             
                                 return name_no_prefix = 
                                   name_no_prefix.charAt(0).toUpperCase() + 
                                   name_no_prefix.slice(1), 
@@ -110,9 +118,14 @@ function normalizeColor(hexCode) {
                                   .replace(/^uniform/, ""))
                                   .join("") 
                                   + `\n} ${name}${length>0?`[${length}]`:""};`
-                            }
+                            
+                                } catch (error) {
+                                
+                                }
+                                }
                             return `uniform ${uniform.type} ${name}${length>0?`[${length}]`:""};`
-                        }
+                        
+                          }
                     }
                 }
             },

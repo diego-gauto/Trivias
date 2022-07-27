@@ -20,130 +20,98 @@ import {
   SectionCenteredTopColumn,
   SectionCenteredWrapper,
   TitleCenter,
-  TitleCenter2
+  TitleCenter2,
+  IconImagesContainer,
+  TitleTextContainer,
+  RibbonImage,
+  ModuleContainer
 } from "./Module2.styled";
 
 export const Module2 = (props: IModule2) => {
+  const iconImagesData = [{
+    "text": "Lorem ipsum dolor sit",
+    "source": Img5.src
+  },
+  {
+    "text": "Lorem ipsum dolor sit",
+    "source": Img2.src
+  },
+  {
+    "text": "Lorem ipsum dolor sit",
+    "source": Img6.src
+  },
+  {
+    "text": "Lorem ipsum dolor sit",
+    "source": Img3.src
+  },
+  {
+    "text": "Lorem ipsum dolor sit",
+    "source": Img4.src
+  },
+  {
+    "text": "Lorem ipsum dolor sit",
+    "source": Img1.src
+  }]
+
+  const iconImages = iconImagesData.map(({ text, source }) => {
+    return (
+      <Col>
+        <Row>
+          <IconImage>
+            <Image src={source} ></Image>
+          </IconImage>
+        </Row>
+        <Row>
+          <IconText>
+            <IconText_B>
+              {text}
+            </IconText_B>
+          </IconText>
+        </Row>
+      </Col>
+    )
+  })
+
   return (
-    <Container fluid>
+    <ModuleContainer fluid>
       <SectionCenteredBackground>
         <Col style={{ paddingLeft: 0, display: "flex" }}>
-
           <LeftImage>
-            <Image src={BG3.src} style={{width: "50%"}}></Image>
+            <Image src={BG3.src} style={{ width: "50%" }}></Image>
           </LeftImage>
         </Col>
         <Col style={{ display: "flex" }}>
-
           <RightImage>
-            <Image src={BG2.src} style={{width: "50%"}}></Image>
+            <Image src={BG2.src} style={{ width: "50%" }}></Image>
           </RightImage>
         </Col>
       </SectionCenteredBackground>
       <div>
         <SectionCenteredWrapper>
           <SectionCentered>
-            <Image src={BG1.src} ></Image>
+            <RibbonImage src={BG1.src} ></RibbonImage>
             <Row>
               <Col></Col>
               <SectionCenteredTopColumn>
-                <IconText>
+                <TitleTextContainer>
                   <TitleCenter>
                     La mejor
                   </TitleCenter>
                   <TitleCenter2>
                     {" "}plataforma
                   </TitleCenter2>
-                </IconText>
+                </TitleTextContainer>
 
               </SectionCenteredTopColumn>
 
               <Col></Col>
             </Row>
-            <Row>
-              <Col>
-                <Row>
-                  <IconImage>
-                    <Image src={Img5.src} ></Image>
-                  </IconImage>
-                </Row>
-                <Row>
-                  <IconText>
-                    <IconText_B>
-                      Lorem ipsum dolor sit
-                    </IconText_B>
-                  </IconText></Row>
-              </Col>
-              <Col>
-                <Row>
-                  <IconImage>
-                    <Image src={Img2.src} ></Image>
-                  </IconImage>
-                </Row>
-                <Row>
-                  <IconText>
-                    <IconText_B>
-                      Lorem ipsum dolor sit
-                    </IconText_B>
-                  </IconText></Row>
-              </Col>
-              <Col>
-                <Row>
-                  <IconImage>
-                    <Image src={Img6.src} ></Image>
-                  </IconImage>
-                </Row>
-                <Row>
-                  <IconText>
-                    <IconText_B>
-                      Lorem ipsum dolor sit
-                    </IconText_B>
-                  </IconText></Row>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Row>
-                  <IconImage>
-                    <Image src={Img3.src} ></Image>
-                  </IconImage>
-                </Row>
-                <Row>
-                  <IconText>
-                    <IconText_B>
-                      Lorem ipsum dolor sit
-                    </IconText_B>
-                  </IconText></Row>
-              </Col>
-              <Col>
-                <Row>
-                  <IconImage>
-                    <Image src={Img4.src} ></Image>
-                  </IconImage>
-                </Row>
-                <Row>
-                  <IconText>
-                    <IconText_B>
-                      Lorem ipsum dolor sit
-                    </IconText_B>
-                  </IconText></Row>
-              </Col>
-              <Col>
-                <Row>
-                  <IconImage>
-                    <Image src={Img1.src} ></Image>
-                  </IconImage>
-                </Row>
-                <Row><IconText>
-                  <IconText_B>
-                    Lorem ipsum dolor sit
-                  </IconText_B>
-                </IconText></Row>
-              </Col>
-            </Row>
+            <IconImagesContainer>
+              {iconImages}
+            </IconImagesContainer>
           </SectionCentered>
         </SectionCenteredWrapper>
       </div>
-    </Container>
+    </ModuleContainer>
   )
 }

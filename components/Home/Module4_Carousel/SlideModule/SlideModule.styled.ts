@@ -2,10 +2,25 @@ import { Button } from "react-bootstrap";
 import styled from 'styled-components';
 
 export const SlideImg = styled.div ` 
+width: 100%;
+height: 200px;
+background-repeat: no-repeat;
+background-size: 95% auto;
+padding: 0;
+margin-left: 2.5%;
+margin-right: 2.5%;
+@media only screen and (max-width: 1024px) {
+  margin-bottom: 15px;
+  height: 15vh;
+}
 `;
 
 export const TextSectionWrapper = styled.div  `
 padding-bottom: 40px;
+@media only screen and (max-width: 1024px) {
+  display: none;
+  padding-bottom: 0;
+}
 `;
 
 export const NewTag = styled.div  `
