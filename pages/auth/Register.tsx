@@ -27,10 +27,9 @@ import {
   GoogleButton,
   FacebookButton,
   LineIcon,
-  PhoneSelect,
   Box2,
   PasswordBox,
-  TextInput_2
+  TextInput_2,
 } from '../../screens/Login.styled'
 
 import {
@@ -144,7 +143,6 @@ const Register = () => {
             </div>
 
           </Box1>
-          <br />
           <Box1>
             <Text2>
               Nombre de Usuario
@@ -160,7 +158,6 @@ const Register = () => {
             </div>
 
           </Box1>
-          <br />
           <Box2>
             <Text2>
               Contraseña
@@ -186,7 +183,6 @@ const Register = () => {
 
             </PasswordBox>
           </Box2>
-          <br />
           <Box2>
             <Text2>
               Confirmar Contraseña
@@ -210,12 +206,11 @@ const Register = () => {
               </div>
             </PasswordBox>
           </Box2>
-          <br />
           <Box2>
             <Text2>
               Teléfono
             </Text2>
-            <PhoneInput
+            <InputPhone
               onCountryChange={() => setPhoneInput}
               onChange={() => setPhoneInput}
               limitMaxLength={true}
@@ -223,15 +218,13 @@ const Register = () => {
               defaultCountry="MX"
               id="input_1"
             />
-
+            <LineIcon />
           </Box2>
-          <br />
           <AllButtons>
             <PurpleButton2 type='submit'>
               Crear Cuenta
             </PurpleButton2>
           </AllButtons>
-          <br />
           <AllButtons>
 
             <GoogleButton onClick={() => {
@@ -250,8 +243,6 @@ const Register = () => {
               Acceder con Facebook
             </FacebookButton>
           </AllButtons>
-
-          <br />
           <Text3>
             ¿Ya eres parte? &nbsp;
             <LinkText>
