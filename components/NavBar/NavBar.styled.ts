@@ -37,6 +37,7 @@ export const NavHome = styled.div`
 export const NavResponsive = styled.div`
   z-index: 10;
   display: none ;
+  align-items: center;
   width: 100%;
   justify-content:space-between;
   background-color:white;
@@ -87,7 +88,6 @@ export const NavText = styled.a`
   }
   &:active{
     font-weight: 600;
-    color:red;
   }
 `;
 export const UserText = styled.p`
@@ -169,7 +169,7 @@ export const HamburgerContain = styled.div`
   padding-inline: 30px;
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   left: 0;

@@ -3,12 +3,13 @@ import { PurpleButton, TransparentButton } from '../../Module1/Module1.styled';
 import {
   AboutContain, BackgroundOverlay, ButtonContain,
   Container, CourseContain, Cross, Data, CardImage,
-  Datacontain, DataSpan, Description, DropDown,
+  Datacontain, DataSpan, Description,
   EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle,
   ImageBack, LessonContain, LessonTitle, ModalBackground,
   ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle,
-  Text, TextContainer, Title, Titles, VideoContain, Lock, PlayIcon, InsideContent, InsideText, ContainVideo, SelectDrop,
+  Text, TextContainer, Title, Titles, VideoContain, Lock, PlayIcon, InsideContent, InsideText, ContainVideo,
 } from '../../Module3/Modal/Modal1.styled';
+import SelectModule4 from './SelectModule4';
 
 const Modal1 = ({ show, setShow }: any) => {
   const handleClose = () => setShow(false);
@@ -97,17 +98,7 @@ const Modal1 = ({ show, setShow }: any) => {
               <LessonTitle>
                 Lista de lecciones
               </LessonTitle>
-              <SelectDrop>
-                <option selected>
-                  Temporada 1
-                </option>
-                <option>
-                  Temporada 2
-                </option>
-                <option>
-                  Temporada 3
-                </option>
-              </SelectDrop>
+              <SelectModule4 />
             </SeasonContain>
             <VideoContain>
               <ContainVideo>

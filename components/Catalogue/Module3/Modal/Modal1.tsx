@@ -5,13 +5,14 @@ import { Progress } from '../../Module2/Module2.styled';
 import {
   AboutContain, BackgroundOverlay, ButtonContain,
   Container, ContainVideo, CourseContain, Cross, Data,
-  Datacontain, DataSpan, Description, DropDown, EpisodeContain,
+  Datacontain, DataSpan, Description, EpisodeContain,
   EpisodeInfo, EpisodeTime, EpisodeTitle, ImageBack, ImageDiv,
   InsideContent, InsideText, LessonContain, LessonTitle,
   ModalBackground, ModalCont, ModalContain, ModalMod,
-  SeasonContain, SelectDrop, SubTitle, Text, TextContainer,
+  SeasonContain, SubTitle, Text, TextContainer,
   Title, Titles, VideoContain
 } from './Modal1.styled';
+import Select from './Select';
 
 const Modal1 = ({ show, setShow }: any) => {
   const handleClose = () => setShow(false);
@@ -102,18 +103,7 @@ const Modal1 = ({ show, setShow }: any) => {
               <LessonTitle>
                 Lista de lecciones
               </LessonTitle>
-              <SelectDrop>
-                <option selected>
-                  Temporada 1
-                  <span>4 episodios</span>
-                </option>
-                <option>
-                  Temporada 2
-                </option>
-                <option>
-                  Temporada 3
-                </option>
-              </SelectDrop>
+              <Select />
             </SeasonContain>
             <VideoContain>
               <ContainVideo>
