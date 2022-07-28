@@ -123,14 +123,15 @@ export const accessWithAuthProvider = (provider: any) => {
       phoneNumber = response.user.phoneNumber;
 
       const query_1 = query(collection(db, "users"), where("uid", "==", response.user.uid));
-      return onSnapshot(query_1, (response) => {
 
-        response.forEach((e) => {
-          doc1 = e.data()
+      const querySnapshot = await getDocs(query_1);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        doc1 = doc.data().uid;
+      });
 
-          console.log(e.data())
-        });
-      })
+
 
     }).then(async () => {
       //If user does not exist register a new one
@@ -160,7 +161,7 @@ export const accessWithAuthProvider = (provider: any) => {
 
         }).then(() => {
 
-          console.log("Provider Auth : 3")
+          console.log("Provider Auth : 3 | Wasn´t already registered")
           return true;
 
         }).catch((error: any) => {

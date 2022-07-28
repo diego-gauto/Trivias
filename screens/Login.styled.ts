@@ -199,6 +199,7 @@ export const InputPhone = styled(PhoneInput)`
   border-radius: 30px;
   border: 1px solid white;
   .PhoneInputInput {
+    padding-left: 30px;
     border: none;
     outline: none;
     color: #fff;
