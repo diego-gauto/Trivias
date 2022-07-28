@@ -1,25 +1,23 @@
-import React from 'react'
 import {
-  LoginBox2,
-  Title,
-  Text2,
-  Box1,
-  TextInput,
-  PurpleButton2,
-  Background,
   AllButtons,
-  Text3,
-  LinkText,
-  Paragraph,
-  InputPhone,
-  InputContainer,
-  EyeIcon,
-  LineIcon,
-  PhoneSelect,
+  Background,
+  Box1,
   Box2,
-  PhoneOption,
+  EyeIcon,
+  InputContainer,
+  InputPhone,
+  LineIcon,
+  LinkText,
+  LoginBox2,
+  Paragraph,
   PasswordBox,
-} from '../../screens/Login.styled'
+  PurpleButton2,
+  Text2,
+  Text3,
+  TextInput,
+  Title,
+} from "../../screens/Login.styled";
+
 export const UserUpdate = () => {
   return (
     <Background>
@@ -71,14 +69,7 @@ export const UserUpdate = () => {
             <Text2>
               Telefono
             </Text2>
-            <PhoneSelect>
-              <PhoneOption>
-                +52
-              </PhoneOption>
-              <PhoneOption>
-                +1
-              </PhoneOption>
-            </PhoneSelect>
+
             <LineIcon />
             <InputPhone
               placeholder="1234567890"
