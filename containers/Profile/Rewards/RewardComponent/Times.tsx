@@ -1,15 +1,38 @@
-import React from 'react'
-import { Circle, CompleteCircle, CompleteDivisor, CompleteText, ContainLevel, Divisor, LevelText } from './RewardComp.styled';
+import React from "react";
 
+import {
+  Circle,
+  CompleteCircle,
+  CompleteDivisor,
+  CompleteText,
+  ContainLevel,
+  Divisor,
+  LevelText,
+} from "./RewardComp.styled";
 
 const Times = () => {
   let UserTime = 5;
+  const [rows, setRows] = React.useState([]);
+
+  React.useEffect(() => {
+    const data = localStorage.getItem("activeLvl");
+    if (data) {
+      setRows(JSON.parse(data));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("activeLvl", JSON.stringify(rows));
+  });
+
+  const currentLevel = document.querySelector("#activeLvl");
+  currentLevel?.scrollIntoView({ inline: "center", block: "end" });
 
   if (UserTime == 1) {
     return (
       <>
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 1 <br /> 1 mes
           </LevelText>
@@ -84,7 +107,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 2 <br /> 2 meses
           </LevelText>
@@ -159,7 +182,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 3 <br /> 3 meses
           </LevelText>
@@ -234,7 +257,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 4 <br /> 6 meses
           </LevelText>
@@ -309,7 +332,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 5 <br /> 9 meses
           </LevelText>
@@ -384,7 +407,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 6 <br /> 12 meses
           </LevelText>
@@ -459,7 +482,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 7 <br /> 18 meses
           </LevelText>
@@ -534,7 +557,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 8 <br /> 24 meses
           </LevelText>
@@ -609,7 +632,7 @@ const Times = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 9 <br /> 36 meses
           </LevelText>

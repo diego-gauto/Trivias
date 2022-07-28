@@ -1,6 +1,22 @@
-import React, { useState } from 'react'
-import Modal1 from './Modal/Modal1';
-import { CardContain, Cardcontent, CardImage, ImageContent, InsideContent, InsideText, Maincontainer, Text1, Text2, Text3, TextContain, Title, VideoInfo, ViewCourse } from './Module3.styled';
+import React, { useState } from "react";
+
+import Modal1 from "./Modal/Modal1";
+import {
+  Cardcontent,
+  CardContain,
+  CardImage,
+  ImageContent,
+  InsideContent,
+  InsideText,
+  Maincontainer,
+  Text1,
+  Text2,
+  Text3,
+  TextContain,
+  Title,
+  VideoInfo,
+  ViewCourse,
+} from "./Module3.styled";
 
 const Module3 = () => {
   const [show, setShow] = useState(false);

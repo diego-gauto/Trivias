@@ -1,5 +1,6 @@
-import { ModalHeader } from 'react-bootstrap';
-import styled from 'styled-components';
+import { ModalHeader } from "react-bootstrap";
+
+import styled from "styled-components";
 
 export const Modal2Contain = styled.div`
   @font-face{
@@ -15,7 +16,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction:column;
   padding: 20px;
-  gap: 40px;
+  gap: 15px;
 `;
 export const Title = styled(ModalHeader)`
   font-size:24px;
@@ -30,6 +31,9 @@ export const Membership = styled.div`
   width: 100%;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  @media(max-width: 870px) {
+    flex-direction:column;
+  }
 `;
 export const MemberText = styled.p`
   font-size: 16px;
@@ -56,18 +60,33 @@ export const PayMethod = styled.div`
   display: flex;
   justify-content:space-between;
   width: 100%;
+  @media(max-width: 870px) {
+    flex-direction:column;
+    justify-content:right;
+    & :last-child {
+      justify-content:center;
+      margin-top:5%;
+    }
+  }
 `;
 export const CardInfo = styled.div`
   display: flex;
   align-items:center;
   gap:10px;
+  @media(max-width: 870px) {
+    align-items:flex-end;
+  }
 `;
 export const CardText = styled.p`
   font-size: 14px;
   font-family:'Raleway',sans-serif;
   margin: 0;
+  @media(max-width: 870px) {
+    margin-bottom:4px;
+  }
 `;
 export const ChangeMethod = styled.p`
+  display:flex;
   color: #6717CD;
   font-size: 16px;
   font-weight: 600;
@@ -75,9 +94,9 @@ export const ChangeMethod = styled.p`
   margin: 0;
 `;
 export const VisaIcon = styled.i`
-  background-image: url(../images/Visa.png);
+  background-image: url(../images/Visa.svg);
   background-repeat:no-repeat;
-  height: 32px;
+  height: 33px;
   width: 47px;
   background-position: center;
 `;

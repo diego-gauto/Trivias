@@ -1,4 +1,5 @@
 import { ModalHeader } from "react-bootstrap";
+
 import styled from "styled-components";
 
 export const Modal3Contain = styled.div`
@@ -46,6 +47,10 @@ export const ButtonsDiv = styled.div`
   display: flex;
   justify-content:space-between;
   margin-bottom:20px;
+  @media(max-width: 870px) {
+    flex-direction:column-reverse;
+    align-items:center;
+  }
 `;
 export const PurpleButton = styled.button`
   background-color: #6717CD;
@@ -54,6 +59,10 @@ export const PurpleButton = styled.button`
   padding-block: 15px;
   padding-inline: 25px;
   border:none;
+  @media(max-width: 870px) {
+    width:133px;
+    margin:5px;
+  }
   &:hover{
     background-color: #5000b5;
     transform:scale(1.03);
@@ -67,6 +76,10 @@ export const TransparentButton = styled.button`
   padding-block: 15px;
   padding-inline: 25px;
   border:1px solid #6717CD;
+  @media(max-width: 870px) {
+    width:133px;
+    margin:5px;
+  }
   &:hover{
     transform:scale(1.03);
     transition:.5s ease all;

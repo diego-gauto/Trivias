@@ -1,8 +1,37 @@
-import Link from 'next/link';
-import React from 'react'
-import { DataTitle, RewardBox, VectorLeft, RewardTitle, VectorRight, Pointbox, Currentlvl, CompleteBar, ProgressBar1, PointsBox, UserPoints, PolygonDown, Nextlvl, RewardData, RewardImage, RewardInfo, RewardTitleBox, RewardPoints, RewardParagraph, AddPay, ArrowRight, RewardContain } from './User.styled';
+
+
+import { useMediaQuery } from "react-responsive";
+
+import Link from "next/link";
+
+import {
+  AddPay,
+  ArrowRight,
+  CompleteBar,
+  Currentlvl,
+  DataTitle,
+  Nextlvl,
+  Pointbox,
+  PointsBox,
+  PolygonDown,
+  ProgressBar1,
+  RewardBox,
+  RewardContain,
+  RewardData,
+  RewardImage,
+  RewardInfo,
+  RewardParagraph,
+  RewardPoints,
+  RewardTitle,
+  RewardTitleBox,
+  UserPoints,
+  VectorLeft,
+  VectorRight,
+} from "./User.styled";
 
 const NextReward = () => {
+  const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
+
   return (
     <RewardContain>
       <DataTitle>
@@ -22,7 +51,7 @@ const NextReward = () => {
         <CompleteBar>
           <ProgressBar1>
             <PointsBox>
-              <UserPoints>
+              <UserPoints style={{ display: responsive470 ? "none" : "" }}>
                 1,100
                 <PolygonDown />
               </UserPoints>

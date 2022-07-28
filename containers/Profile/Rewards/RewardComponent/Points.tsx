@@ -1,15 +1,35 @@
-import React from 'react'
-import { Circle, CompleteCircle, CompleteDivisor, CompleteText, ContainLevel, Divisor, LevelText } from './RewardComp.styled';
+import React from "react";
 
+import {
+  Circle,
+  CompleteCircle,
+  CompleteDivisor,
+  CompleteText,
+  ContainLevel,
+  Divisor,
+  LevelText,
+} from "./RewardComp.styled";
 
 const Points = () => {
   let UserPoints = 600;
+  const [rows, setRows] = React.useState([]);
+
+  React.useEffect(() => {
+    const data = localStorage.getItem("activeLvl");
+    if (data) {
+      setRows(JSON.parse(data));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("activeLvl", JSON.stringify(rows));
+  });
 
   if (UserPoints >= 100 && UserPoints <= 399) {
     return (
       <>
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 1 <br /> 100 puntos
           </LevelText>
@@ -84,7 +104,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 2 <br /> 400 puntos
           </LevelText>
@@ -159,7 +179,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 3 <br /> 800 puntos
           </LevelText>
@@ -234,7 +254,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 4 <br /> 1,000 puntos
           </LevelText>
@@ -309,7 +329,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 5 <br /> 2,000 puntos
           </LevelText>
@@ -384,7 +404,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 6 <br /> 3,500 puntos
           </LevelText>
@@ -459,7 +479,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 7 <br /> 4,800 puntos
           </LevelText>
@@ -534,7 +554,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 8 <br /> 6,000 puntos
           </LevelText>
@@ -609,7 +629,7 @@ const Points = () => {
         </ContainLevel>
         <Divisor style={{ backgroundColor: 'white', border: '1px solid #8E2DE2' }} />
         <ContainLevel>
-          <Circle style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
+          <Circle id="activeLvl" style={{ width: 50, height: 50, border: '2px solid #8E2DE2' }} />
           <LevelText style={{ fontSize: 16, fontWeight: 600, fontFamily: 'Montserrat', color: '#8E2DE2', bottom: 5 }}>
             Nivel 9 <br /> 8,000 puntos
           </LevelText>

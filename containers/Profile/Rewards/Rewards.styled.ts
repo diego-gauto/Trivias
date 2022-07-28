@@ -7,6 +7,10 @@ export const RewardContainer = styled.div`
   padding-inline: 20px;
   margin-top: 10px;
   width: 100%;
+  @media(max-width: 1023px) {
+    padding-inline: 0;
+    margin-top: 0;
+  }
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -44,6 +48,8 @@ export const BannerTitle = styled.h1`
   margin: 0;
   @media(max-width: 1023px) {
     font-size: 24px;
+    margin-top:-15px;
+    margin-bottom: 15px;
   }
 `;
 export const PointsText = styled.p`
@@ -54,6 +60,7 @@ export const PointsText = styled.p`
   @media(max-width: 1023px) {
     order: 2;
     font-size: 24px;
+    margin-top:-15px;
   }
 `;
 export const ProgressContain = styled.div`
@@ -72,6 +79,11 @@ export const OuterProgress = styled.div`
   padding: 10px;
   border: 1px solid #8E2DE2;
   border-radius: 50%;
+  @media(max-width: 1023px) {
+    width: 96px;
+    max-width: 96px;
+    height: 96px;
+  }
 `;
 export const InnerProgress = styled.div`
   width: 110px;
@@ -79,6 +91,10 @@ export const InnerProgress = styled.div`
   position: absolute;
   border: 1px solid #8E2DE2;
   border-radius: 50%;
+  @media(max-width: 1023px) {
+    width: 76px;
+    height: 76px;
+  }
 `;
 
 export const ProgressSvg = styled.svg`
@@ -88,10 +104,15 @@ export const ProgressSvg = styled.svg`
 `;
 export const ProgressCircle = styled.circle`
     fill: none;
+    width:76px;
     stroke: #8E2DE2;
     stroke-width: 10px;
     stroke-dasharray: 377;
     stroke-dashoffset: 190;
+    @media(max-width: 1023px) {
+      stroke-dashoffset:245 ;
+      stroke-width: 10.5px;
+    }
 `;
 export const LevelContain = styled.div`
   display: flex;
@@ -104,6 +125,9 @@ export const CurrentLevel = styled.p`
   font-family: 'Raleway', sans-serif;
   color: #E0C3FC;
   margin: 0;
+  @media(max-width: 1023px) {
+    font-size: 32px;
+  }
 `;
 export const UpNarrow = styled.div`
   background-color: #E0C3FC;
@@ -115,7 +139,12 @@ export const UpNarrow = styled.div`
     100% 90%,
     50% 30%,
      0% 90%,                    
-     0% 60%)
+     0% 60%);
+  @media(max-width: 1023px) {
+    width: 22px;
+    height: 13.5px;
+  }
+ 
 `;
 export const UpNarrow2 = styled.div`
   background-color: #E0C3FC;
@@ -127,5 +156,10 @@ export const UpNarrow2 = styled.div`
     100% 90%,
     50% 30%,
      0% 90%,                    
-     0% 60%)
+     0% 60%);
+  @media(max-width: 1023px) {
+    width: 22px;
+    height: 13.5px;
+    margin-top:-5px;
+  }
 `;

@@ -1,53 +1,58 @@
-import React from 'react'
+
+
 import {
   BottomContainer,
   BottomText,
   Column,
-  FBIcon,
   FooterContainer,
-  FooterGroup,
   FooterIcons,
   FooterResponsive,
   FooterText,
+  FBIcon,
   IGIcon,
   Logo2,
   RespContainer,
   RespContainer2,
   SocialContainer,
-  WAIcon
-} from './Footer.styled'
+  WAIcon,
+} from "./Footer.styled";
 
 const Footer = () => {
   return (
     <>
       <FooterContainer>
         <Logo2 />
-        <FooterGroup>
-          <Column>
-            <FooterText>
-              Aviso de Privacidad
-            </FooterText>
-            <FooterText>
-              Inicio
-            </FooterText>
-          </Column>
-          <Column>
-            <FooterText>
-              Academia
-            </FooterText>
-            <FooterText>
-              Condiciones
-            </FooterText>
-          </Column>
-          <Column>
-            <FooterText>
-              Tienda Online
-            </FooterText>
-            <FooterText>
-              Registrarse
-            </FooterText>
-          </Column>
-        </FooterGroup>
+        <Column>
+          <FooterText>
+            Inicio
+          </FooterText>
+        </Column>
+        <Column>
+          <FooterText>
+            Tienda Online
+          </FooterText>
+        </Column>
+        <Column>
+          <FooterText>
+            Academia
+          </FooterText>
+        </Column>
+        <Column>
+          <FooterText>
+            Registrarse
+          </FooterText>
+        </Column>
+        <Column style={{ textAlign: "right" }}>
+          <FooterText>
+            Aviso de Privacidad
+          </FooterText>
+          <FooterText>
+            Condiciones
+          </FooterText>
+          <FooterText>
+            Facturación
+          </FooterText>
+        </Column>
         <FooterIcons>
           <FooterText>
             Contactanos
@@ -99,7 +104,7 @@ const Footer = () => {
       </FooterResponsive>
       <BottomContainer>
         <BottomText>
-          Gonvar Nailts Academy 2022
+          Gonvar Nails Academy 2022
         </BottomText>
         <BottomText>
           Inowu Development 2022

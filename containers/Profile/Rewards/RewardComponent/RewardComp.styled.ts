@@ -4,6 +4,11 @@ export const MainContain = styled.div`
   display:flex;
   padding-inline: 30px;
   margin-top: 20px;
+  @media(max-width: 1023px) {
+    margin-top: -30px;
+    justify-content: space-between;
+    z-index: 1;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -11,7 +16,16 @@ export const Container = styled.div`
   padding-bottom: 30px;
   padding-inline: 25px;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0px -6px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px -6px 20px 2px rgba(0, 0, 0, .25);
+  @media(max-width: 1023px) {
+    width: 160px;
+    height: 40px;
+    margin-top:-20px;
+    background: #6717CD;
+    border-radius: 100px;
+    padding-top: 8px;
+    justify-content: center;
+  }
 `;
 export const OffContainer = styled.div`
   display: flex;
@@ -19,6 +33,15 @@ export const OffContainer = styled.div`
   padding-bottom: 30px;
   padding-inline: 25px;
   cursor:pointer;
+  @media(max-width: 1023px) {
+    width: 160px;
+    height: 40px;
+    margin-top:-20px;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+    padding-top: 8px;
+    justify-content: center;
+  }
 `;
 export const MainTitle = styled.p`
   font-size: 16px;
@@ -26,6 +49,9 @@ export const MainTitle = styled.p`
   font-family:'Montserrat', sans-serif;
   color: #6717CD;
   margin: 0;
+  @media(max-width: 1023px) {
+    color: #FFFFFF;
+  }
 `;
 export const RewardContainer = styled.div`
   display: flex;
@@ -37,7 +63,15 @@ export const RewardContainer = styled.div`
   padding-inline: 40px;
   border-radius: 10px;
   gap: 3px;
-  box-shadow: 0px -3px 20px 2px rgba(0, 0, 0, 0.3)
+  box-shadow: 0px -3px 20px 2px rgba(0, 0, 0, 0.3);
+  @media(max-width: 1023px) {
+    top: 25px;
+    margin-left: 3%;
+    margin-right: 3%;
+    gap: 86px;
+    justify-content: space-between;
+    overflow-x: auto;
+  }
 `;
 export const LevelText = styled.p`
   font-size: 14px;
@@ -47,6 +81,9 @@ export const LevelText = styled.p`
   text-align:center;
   position: absolute;
   bottom: 15px;
+  @media(max-width: 1023px) {
+   width: 100%;
+  }
 `;
 export const CompleteText = styled.p`
   font-size: 14px;
@@ -57,28 +94,45 @@ export const CompleteText = styled.p`
   text-align:center;
   position: absolute;
   bottom: 15px;
+  @media(max-width: 1023px) {
+    width: 100%;
+   }
 `;
 export const Circle = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 50%;
   border: 2px solid black;
+  @media (max-width: 870px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 export const CompleteCircle = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 50%;
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  @media (max-width: 870px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 export const Divisor = styled.div`
   background-color: black;
   width: 100px;
   height: 4px;
+  @media (max-width: 870px) {
+    display: none;
+  }
 `;
 export const CompleteDivisor = styled.div`
   background-color: #8E2DE2;
   width: 100px;
   height: 4px;
+  @media (max-width: 870px) {
+    display: none;
+  }
 `;
 export const ContainLevel = styled.div`
   display: flex;

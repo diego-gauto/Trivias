@@ -1,23 +1,32 @@
-import React from 'react'
-import PointPrizes from './PointPrizes'
-import Points from './Points'
-import { Container, MainContain, MainTitle, OffContainer, RewardContainer } from './RewardComp.styled'
+
+
+import { useMediaQuery } from "react-responsive";
+
+import PointPrizes from "./PointPrizes";
+import Points from "./Points";
+import {
+  Container,
+  MainContain,
+  MainTitle,
+  OffContainer,
+  RewardContainer,
+} from "./RewardComp.styled";
 
 const PointRewards = ({ setRewards }: any) => {
 
-
+  const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
 
   return (
     <>
       <MainContain>
         <Container>
           <MainTitle>
-            Recompensas por Puntuaje
+            {responsive870 ? "Por Puntuaje" : "Recompensas por Puntuaje"}
           </MainTitle>
         </Container>
         <OffContainer onClick={() => { setRewards(false) }}>
           <MainTitle>
-            Recompensas por tiempo
+            {responsive870 ? "Por Tiempo" : "Recompensas por Tiempo"}
           </MainTitle>
         </OffContainer>
       </MainContain>

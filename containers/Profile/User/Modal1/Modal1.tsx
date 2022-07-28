@@ -1,10 +1,26 @@
-import Image from 'next/image';
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap';
-import { AddText, BottomInputs, ButtonDiv, CardText, InputInfo, Inputs, ModalCont, ModalContain, ModalForm, ModalInput, ModalPay, ModalPayment, PaymentIcon, PaymentMethod, PurpleButton, Title } from './Modal1.styled';
+
+
+import { Modal } from "react-bootstrap";
+import { useMediaQuery } from "react-responsive";
+
+import {
+  AddText,
+  BottomInputs,
+  ButtonDiv,
+  Inputs,
+  InputInfo,
+  ModalCont,
+  ModalContain,
+  ModalForm,
+  ModalInput,
+  ModalPay,
+  PurpleButton,
+  Title,
+} from "./Modal1.styled";
 
 const Modal1 = ({ show, setShow }: any) => {
 
+  const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
 
   return (
@@ -16,23 +32,39 @@ const Modal1 = ({ show, setShow }: any) => {
               Ingresar Nuevo Método de Pago
             </Title>
             <ModalPay>
-              <ModalPayment>
+              {/* <ModalPayment>
+                <PaymentMethod>
+                  <PaymentMethod2>
+                    <PaymentIcon>
+                      <Image src="/images/McPay.svg" width={"180%"} height={"180%"} />
+                    </PaymentIcon>
+                    <PaymentIcon2>
+                      <Image src="/images/VisaPay.svg" width={"180%"} height={"180%"} />
+                    </PaymentIcon2>
+                  </PaymentMethod2>
+                  <CardTextContainer>
+                    <CardText>
+                      Tarjeta de
+                    </CardText>
+                    <CardText>
+                      Crédito/Débito
+                    </CardText>
+                  </CardTextContainer>
+                </PaymentMethod>
                 <PaymentMethod>
                   <PaymentIcon>
-                    <Image src="/images/McPay.png" width={90} height={60} />
-                    <Image src="/images/VisaPay.png" width={90} height={60} />
+                    <Image src="/images/Paypal.svg" width={"140%"} height={"140%"} />
                   </PaymentIcon>
-                  <CardText>
-                    Tarjeta de Crédito/Débito
-                  </CardText>
+                  <CardTextContainer>
+                    <CardText>
+                      Cuenta de
+                    </CardText>
+                    <CardText>
+                      Paypal
+                    </CardText>
+                  </CardTextContainer>
                 </PaymentMethod>
-                <PaymentMethod>
-                  <Image src="/images/PaypalPay.png" width={90} height={60} />
-                  <CardText>
-                    Cuenta de Paypal
-                  </CardText>
-                </PaymentMethod>
-              </ModalPayment>
+              </ModalPayment> */}
               <ModalForm>
                 <Inputs>
                   <InputInfo>

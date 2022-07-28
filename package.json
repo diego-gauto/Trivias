@@ -22,6 +22,7 @@
     "react-hook-form": "^7.33.1",
     "react-is": "^18.2.0",
     "react-masonry-css": "^1.0.16",
+    "react-responsive": "^9.0.0-beta.10",
     "react-phone-number-input": "^3.2.5",
     "react-router-dom": "^5.3.3",
     "react-slick": "^0.29.0",
@@ -39,5 +40,17 @@
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "typescript": "^4.6.3"
-  }
+  },
+  "description": "This project contains the code for the Gonvar Nails platform.",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inowu/Gonvar-Nails-Academy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Inowu/Gonvar-Nails-Academy/issues"
+  },
+  "homepage": "https://github.com/Inowu/Gonvar-Nails-Academy#readme"
 }

@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   display: flex;
@@ -81,8 +80,9 @@ export const FooterText = styled.p`
   font-size: 18px;
   font-family: 'Nunito',sans-serif;
   margin: 0;
-  @media(max-width: 1023px) {
-    font-size: 14px;
+  @media(max-width: 870px) {
+    font-size: 15px;
+    line-height: 25px;
   }
 `;
 export const FooterIcons = styled.div`
