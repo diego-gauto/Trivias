@@ -1,3 +1,4 @@
+import PhoneInput from 'react-phone-number-input';
 import styled from 'styled-components';
 
 
@@ -93,6 +94,7 @@ export const LoginBox2 = styled.div`
   backdrop-filter: blur(180px);
   backdrop-opactiy:10px;
   font-family: Montserrat;
+  position:relative;
   @media (max-width: 760px) {
     padding-inline:30px;
   }
@@ -165,8 +167,6 @@ export const TextInput = styled.input`
   }
 `; 
 export const TextInput_2 = styled.input`
-  
-
   color: #fff;
   outline: none;
   opacity: .8;
@@ -191,23 +191,39 @@ export const TextInput_2 = styled.input`
   }
 
 `;
-export const InputPhone = styled.input`
-  color: #fff;
-  outline: none;
-  opacity: .8;
-  border: 1px solid white;
-  width: 100%;
+export const InputPhone = styled(PhoneInput)`
+  flex: 1 1;
   height: 40px;
-  background:transparent;
-  box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
-  border-radius: 20px;
-  padding: 0 0 0 80px;
-  font-size: 14px;
-  ::placeholder{
-    color:#adadac;
+  background: transparent;
+  opacity: .8;
+  border-radius: 30px;
+  border: 1px solid white;
+  .PhoneInputInput {
+    border: none;
+    outline: none;
+    color: #fff;
+    min-width: 255px;
+    background: transparent;
+    @media (max-width: 420px) {
+      min-width: 80%;
+    }
+    @media (max-width: 360px) {
+      min-width: 77%;
+    }
+    @media (max-width: 330px) {
+      min-width: 75%;
+    }
   }
+  .PhoneInputCountry {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    left: 20px;
+    margin-right: var(--PhoneInputCountrySelect-marginRight);
+}
   @media (max-width: 670px) {
-    font-size: 12px;;
+    font-size: 12px;
   }
 `;
 export const ArchiveInput = styled.input`
@@ -226,34 +242,9 @@ export const ArchiveInput = styled.input`
     color:#adadac;
   }
   @media (max-width: 670px) {
-    font-size: 12px;;
-  }
-`;
-export const PhoneSelect = styled.select`
-  color: #C6C6C8;
-  cursor:pointer;
-  outline: none;
-  opacity: .8;
-  border: none;
-  min-width: 10px;
-  height: 40px;
-  position:absolute;
-  margin: 25px 0 0 -55px;
-  padding:0 0 0 15px;
-  background:transparent;
-  border-radius: 20px;
-  font-size: 14px;
-  z-index: 1;
-  @media (max-width: 670px) {
     font-size: 12px;
-    margin: 25px 0 0 -45px;
   }
 `;
-export const PhoneOption = styled.option`
-background:white;
-color:black;
-`;
-
 export const PurpleButton2 = styled.button`
   background-color: #6717CD;
   color: #fff;
@@ -340,8 +331,16 @@ export const LineIcon = styled.i`
   width: 2px;
   background-position: center;
   position: absolute;
+  top: 0;
+  left: 50px;
   margin: 29px 0 0 12px;
   opacity:.4;
+  @media (max-width: 670px) {
+    left: 45px;
+  }
+  @media (max-width: 420px) {
+    left: 40px;
+  }
 `;
 export const FolderIcon = styled.i`
   background-image: url(../images/folder.png);
