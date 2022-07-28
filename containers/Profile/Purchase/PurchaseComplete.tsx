@@ -72,7 +72,7 @@ const PurchaseComplete = () => {
         </ButtonContain>
       </CompleteContain>
       <ButtonContain>
-        <Link href="/Screens/Preview">
+        <Link href="/Preview">
           <TransparentButton>
             Regresar al Catálogo
           </TransparentButton>

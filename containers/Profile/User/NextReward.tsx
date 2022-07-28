@@ -76,7 +76,7 @@ const NextReward = () => {
           </RewardParagraph>
         </RewardInfo>
       </RewardData>
-      <Link href="/Screens/Rewards">
+      <Link href="/Rewards">
         <AddPay>
           Ir al Centro de Recompensas
           <ArrowRight />

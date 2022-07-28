@@ -94,7 +94,7 @@ const Register = () => {
   const handleSignUpWithAuthProvider = (authProvider: string) => {
 
     accessWithAuthProvider(authProvider).then(() => {
-      window.location.href = "/Screens/Landings";
+      window.location.href = "/";
     });
   };
 
@@ -116,12 +116,9 @@ const Register = () => {
       },
     };
     signUpWithCreds(signUpData).then(() => {
-      window.location.href = "/Screens/Landings";
+      window.location.href = "/";
     });
   }
-
-
-
 
   return (
     <Background>

@@ -121,10 +121,10 @@ export const accessWithAuthProvider = (provider: any) => {
       photoURL = response.user.photoURL;
       phoneNumber = response.user.phoneNumber;
 
+      var doc: any;
       const query_1 = query(collection(db, "users"), where("uid", "==", response.user.uid));
       return onSnapshot(query_1, (response) => {
 
-        var doc: any;
         response.forEach((e) => {
           doc = e.data()
         });
@@ -159,6 +159,7 @@ export const accessWithAuthProvider = (provider: any) => {
         }).then(() => {
 
           console.log("Provider Auth : 3")
+          return true;
 
         }).catch((error: any) => {
           let docCreationError = new Error(`Error creating user document: ${error}`);
