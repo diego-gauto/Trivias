@@ -1,8 +1,11 @@
 import React from 'react'
-
+import SideBar from '../SideBar';
+import { AdminContain } from '../SideBar.styled';
 const Users = () => {
   return (
-    <div>Users</div>
+    <AdminContain>
+      <SideBar />
+    </AdminContain>
   )
 }
 export default Users;

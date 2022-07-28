@@ -1,8 +1,11 @@
 import React from 'react'
-
+import SideBar from '../SideBar';
+import { AdminContain } from '../SideBar.styled';
 const Landing = () => {
   return (
-    <div>Landing</div>
+    <AdminContain>
+      <SideBar />
+    </AdminContain>
   )
 }
 export default Landing;
