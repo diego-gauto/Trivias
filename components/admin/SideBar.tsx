@@ -12,19 +12,19 @@ const SideBar = () => {
         <Text>Pagos</Text>
       </Link>
       <Link href="/admin/Courses">
-        <Text>Pagos</Text>
+        <Text>Cursos</Text>
       </Link>
       <Link href="/admin/Rewards">
-        <Text>Pagos</Text>
+        <Text>Recompensas</Text>
       </Link>
       <Link href="/admin/Landing">
-        <Text>Pagos</Text>
+        <Text>Landing</Text>
       </Link>
       <Link href="/admin/Coupons">
-        <Text>Pagos</Text>
+        <Text>Cupones</Text>
       </Link>
       <Link href="/admin/Users">
-        <Text>Pagos</Text>
+        <Text>Usuarios</Text>
       </Link>
     </Container>
   )
