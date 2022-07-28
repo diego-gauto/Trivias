@@ -40,5 +40,17 @@
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "typescript": "^4.6.3"
-  }
+  },
+  "description": "This project contains the code for the Gonvar Nails platform.",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inowu/Gonvar-Nails-Academy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Inowu/Gonvar-Nails-Academy/issues"
+  },
+  "homepage": "https://github.com/Inowu/Gonvar-Nails-Academy#readme"
 }
