@@ -379,13 +379,8 @@ const NavBar = () => {
 
           : <></>
       }
-      {//vista de usuario Loggin
-        pathname == '/Profile' ||
-          pathname == '/Rewards' ||
-          pathname == '/Purchase' ||
-          pathname == '/Lesson' ||
-          pathname == '/Preview' ||
-          loggedIn && isAdmin
+      {//vista de usuario Loggin 
+        loggedIn && isAdmin
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
