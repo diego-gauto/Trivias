@@ -159,6 +159,7 @@ export const accessWithAuthProvider = (provider: any) => {
         }).then(() => {
 
           console.log("Provider Auth : 3")
+          return true;
 
         }).catch((error: any) => {
           let docCreationError = new Error(`Error creating user document: ${error}`);
