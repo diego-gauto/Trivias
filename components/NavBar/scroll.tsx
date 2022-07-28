@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 const Scroll = ({ color, setColor, pathname }: any) => {
 
   const ChangeNav = () => {
-    if (pathname == '/Screens/Landings' && window.scrollY >= 800) {
+    if (['/', ''].includes(pathname) && window.scrollY >= 800) {
       setColor(true)
     }
     else {

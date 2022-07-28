@@ -8,7 +8,7 @@ const UserInfo = () => {
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      window.location.href = "/Screens/Landings";
+      window.location.href = "/";
     }).catch((error) => {
       console.log(error)
     });
@@ -50,7 +50,7 @@ const UserInfo = () => {
           Gonvar Plus
         </UserText>
       </UserContainer>
-      <Link href="/Screens/Landings">
+      <Link href="/">
         <LogOut
           onClick={logoutFunc}
         >

@@ -8,7 +8,7 @@ import { Module5 } from "../../components/Home/Module5/Module5";
 import { Module6 } from "../../components/Home/Module6/Module6";
 import { Module4_Carousel } from "../../components/Home/Module4_Carousel/Module4_Carousel";
 import { Container } from "react-bootstrap";
-import Landings from "../../pages/Screens/Landings";
+import Landings from "../../pages/index";
 /**
  * The home page.
  *
