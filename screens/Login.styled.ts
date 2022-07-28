@@ -331,7 +331,7 @@ width: 22.5px;
 background-position: center;
 position: absolute;
 top: 50%;
-right: 30px;
+right: 15px;
 transform: translateY(-50%);
 `;
 export const LineIcon = styled.i`
