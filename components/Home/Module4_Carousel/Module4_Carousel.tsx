@@ -52,7 +52,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   return (
     <Container
       fluid
-      style={{ overflow: "hidden" }}
+      style={{ overflow: "hidden", padding: 0 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
