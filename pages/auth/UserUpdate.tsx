@@ -15,9 +15,7 @@ import {
   InputContainer,
   EyeIcon,
   LineIcon,
-  PhoneSelect,
   Box2,
-  PhoneOption,
   PasswordBox,
 } from '../../screens/Login.styled'
 export const UserUpdate = () => {
@@ -71,14 +69,7 @@ export const UserUpdate = () => {
             <Text2>
               Telefono
             </Text2>
-            <PhoneSelect>
-              <PhoneOption>
-                +52
-              </PhoneOption>
-              <PhoneOption>
-                +1
-              </PhoneOption>
-            </PhoneSelect>
+
             <LineIcon />
             <InputPhone
               placeholder="1234567890"
