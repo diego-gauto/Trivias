@@ -88,7 +88,6 @@ export const NavText = styled.a`
   }
   &:active{
     font-weight: 600;
-    color:red;
   }
 `;
 export const UserText = styled.p`
