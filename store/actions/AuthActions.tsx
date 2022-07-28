@@ -108,6 +108,7 @@ export const accessWithAuthProvider = (provider: any) => {
   var email: any;
   var photoURL: any;
   var phoneNumber: any;
+  var doc1: any;
 
   return signInWithPopup(auth, provider)
     .then(async (response) => {
@@ -121,22 +122,23 @@ export const accessWithAuthProvider = (provider: any) => {
       photoURL = response.user.photoURL;
       phoneNumber = response.user.phoneNumber;
 
-      var doc: any;
       const query_1 = query(collection(db, "users"), where("uid", "==", response.user.uid));
       return onSnapshot(query_1, (response) => {
 
         response.forEach((e) => {
-          doc = e.data()
+          doc1 = e.data()
+
+          console.log(e.data())
         });
       })
 
-
-    }).then(async (doc) => {
+    }).then(async () => {
       //If user does not exist register a new one
 
       console.log("Provider Auth : 2")
-      console.log(doc)
-      if (!doc) {
+      console.log(doc1)
+
+      if (!doc1) {
 
 
         if (photoURL == undefined || photoURL == null) {
@@ -149,7 +151,7 @@ export const accessWithAuthProvider = (provider: any) => {
           name: displayName,
           email: email,
           photoURL: photoURL,
-          provider: provider,
+          provider: provider.providerId,
           phoneNumber: phoneNumber,
           role: "user", //user, userAdmin, professor
           plan: "free", //gonvarPlus
@@ -169,6 +171,7 @@ export const accessWithAuthProvider = (provider: any) => {
 
       } else {
 
+        console.log("Provider Auth : 3 | Was already registered")
       }
     }).catch((error) => {
       firebase.auth().signOut();
