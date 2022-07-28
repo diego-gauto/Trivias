@@ -55,7 +55,7 @@ export const LoginBox = styled.div`
   border: 1px solid #fff;
   box-sizing: border-box;
   width:100%;
-  gap:25px;
+  gap: 15px;
   max-width:515px;
   min-height:680px;
   background:transparent;
@@ -64,6 +64,13 @@ export const LoginBox = styled.div`
   backdrop-filter: blur(180px);
   backdrop-opactiy:10px;
   font-family: Montserrat;
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+  }
   @media (max-width: 530px) {
     padding-inline:20px;
   }
@@ -107,7 +114,7 @@ export const Title = styled.h1`
 
 export const Box1 = styled.div`
   display:flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   @media (max-width: 670px) {
@@ -353,7 +360,7 @@ export const AllButtons = styled.div`
   display:flex;
   justify-content:center;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   max-width:272px;
   width:100%;
 `;
@@ -369,6 +376,7 @@ export const InputContainer = styled.div`
 `;
 export const Text3 = styled.p`
   font-family: Raleway;
+  text-align: center;
   font-size: 14px;
   color: #FFFFFF;
   margin:0;
