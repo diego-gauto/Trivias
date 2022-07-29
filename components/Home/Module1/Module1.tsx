@@ -23,7 +23,7 @@ import {
 
 export const Module1 = (props: IModule1) => {
   const scrollToModule2 = () => {
-    window.scrollTo(0, window.innerHeight * 0.85 + 35)
+    window.scrollTo(0, window.innerHeight * 0.75)
   }
 
   return (
@@ -97,7 +97,7 @@ export const Module1 = (props: IModule1) => {
                 </IconElement>
               </SectionC>
               <BlurWindow></BlurWindow>
-              <GradientCanvas id="gradient-canvas" />
+              <GradientCanvas id="gradient-canvas" height="82.5%" />
             </Left>
 
           </LeftWrapper>

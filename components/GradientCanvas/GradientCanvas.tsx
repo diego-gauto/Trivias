@@ -4,7 +4,7 @@ import { IGradientCanvas } from "./IGradientCanvas"
 // @ts-expect-error
 import Gradient from "./Gradient"
 
-const GradientCanvas = ({ id, increasedHeight }: IGradientCanvas) => {
+const GradientCanvas = ({ id, increasedHeight, height }: IGradientCanvas) => {
   let gradient: any
 
   // Needs window object
@@ -18,15 +18,14 @@ const GradientCanvas = ({ id, increasedHeight }: IGradientCanvas) => {
       "--gradient-color-1": "#B31217",
       "--gradient-color-2": "#F7971E",
       "--gradient-color-3": "#56AB2F",
-      "--gradient-color-4": "#0575E6"
+      "--gradient-color-4": "#0575E6",
+      height: height || "100%"
     },
     id
   }
 
-  // @ts-expect-error
   let canvas = <Canvas {...canvasProps} />
   if (increasedHeight) {
-    // @ts-expect-error
     canvas = <CanvasIncreasedHeight {...canvasProps} />
   }
 
