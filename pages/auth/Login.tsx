@@ -72,7 +72,7 @@ const Login = () => {
       },
     };
     signInWithCreds(signUpData).then(() => {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     });
   }
 
@@ -80,7 +80,7 @@ const Login = () => {
   const handleSignUpWithAuthProvider = (authProvider: string) => {
 
     accessWithAuthProvider(authProvider).then(() => {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     });
   };
 

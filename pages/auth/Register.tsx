@@ -93,7 +93,7 @@ const Register = () => {
   const handleSignUpWithAuthProvider = (authProvider: string) => {
 
     accessWithAuthProvider(authProvider).then(() => {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     });
   };
 
@@ -115,7 +115,7 @@ const Register = () => {
       },
     };
     signUpWithCreds(signUpData).then(() => {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     });
   }
 
@@ -225,31 +225,31 @@ const Register = () => {
               Crear Cuenta
             </PurpleButton2>
           </AllButtons>
-          <AllButtons>
-
-            <GoogleButton onClick={() => {
-              handleSignUpWithAuthProvider("Google");
-            }}
-            >
-              <GoogleIcon></GoogleIcon>
-              Acceder con Google
-            </GoogleButton>
-            <FacebookButton
-              onClick={() => {
-                handleSignUpWithAuthProvider("Facebook");
-              }}
-            >
-              <FacebookIcon></FacebookIcon>
-              Acceder con Facebook
-            </FacebookButton>
-          </AllButtons>
-          <Text3>
-            ¿Ya eres parte? &nbsp;
-            <LinkText>
-              Iniciar Sesion
-            </LinkText>
-          </Text3>
         </form>
+        <AllButtons>
+
+          <GoogleButton onClick={() => {
+            handleSignUpWithAuthProvider("Google");
+          }}
+          >
+            <GoogleIcon></GoogleIcon>
+            Acceder con Google
+          </GoogleButton>
+          <FacebookButton
+            onClick={() => {
+              handleSignUpWithAuthProvider("Facebook");
+            }}
+          >
+            <FacebookIcon></FacebookIcon>
+            Acceder con Facebook
+          </FacebookButton>
+        </AllButtons>
+        <Text3>
+          ¿Ya eres parte? &nbsp;
+          <LinkText>
+            Iniciar Sesion
+          </LinkText>
+        </Text3>
       </LoginBox>
       <GradientCanvas id="gradient-canvas" />
     </Background >
