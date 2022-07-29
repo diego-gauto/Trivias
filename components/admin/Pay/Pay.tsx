@@ -1,7 +1,7 @@
 import React from 'react'
 import SideBar from '../SideBar';
-import { AdminContain } from '../SideBar.styled';
-import { PayContain, Title, TitleContain, Container, DateSelect, Table, Visa, IconContain, MasterCard, PayPal, Profile, ProfileContain } from './Pay.styled';
+import { AdminContain, Table } from '../SideBar.styled';
+import { PayContain, Title, TitleContain, Container, DateSelect, Visa, IconContain, MasterCard, PayPal, Profile, ProfileContain } from './Pay.styled';
 
 const Pay = () => {
   return (
