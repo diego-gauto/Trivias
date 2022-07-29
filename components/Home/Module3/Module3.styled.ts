@@ -77,8 +77,9 @@ padding-left: 0;
 margin-left: 0;
 margin-bottom: 30px;
 overflow: hidden;
+background-size: cover;
+background-position: center;
 @media only screen and (max-width: 1024px) {
-  background-position: center;
 }
 `;
 

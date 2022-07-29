@@ -70,17 +70,17 @@ overflow: hidden;
 }
 `;
 export const MasonryWindow = styled.div`
-height: 750px;
+height: auto;
+padding-bottom: 80px;
 width: 100%;
 margin-bottom: 20px;
-overflow-y: scroll; 
 ::-webkit-scrollbar {
   width: 0px; 
   background: transparent; /* make scrollbar transparent */
 }
 @media only screen and (max-width: 1024px) {
   height: auto;
-  overflow-y: visible;
+  padding-bottom: 0;
 }
 `;
 export const MasonryImage = styled.img`
