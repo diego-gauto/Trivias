@@ -19,4 +19,16 @@ export const Text = styled.p`
 export const AdminContain = styled.div`
   display: flex;
   width: 100%;
+  @font-face{
+    font-family:Montserrat;
+    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  @font-face{
+    font-family:Raleway;
+    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  }
+  @font-face{ 
+    font-family:Nunito;
+    src:url(../fonts/Nunito-VariableFont_wght.ttf);
+  }
 `;
