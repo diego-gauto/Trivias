@@ -16,10 +16,11 @@ export const IconImagesContainer = styled.div `
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 align-items: end;
-row-gap: 35px;
+row-gap: 75px;
 @media only screen and (max-width: 1024px) {
   grid-template-columns: 1fr 1fr;
   margin-top: 50px;
+  row-gap: 35px;
 }
 `
 export const ImageTag = styled.div  `
@@ -27,7 +28,7 @@ export const ImageTag = styled.div  `
 `;
 export const SectionCentered = styled.div  `
 background-color: white;
-height: 430.5px;
+height: 500px;
 z-index: 1;
 position: absolute;
 width: 1073.125px;
@@ -35,22 +36,23 @@ background: #FFFFFF;
 box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 @media (min-width: 1800px) {
-  height: 500px;
+  height: 550px;
   width: 1225px;   
 }
 @media only screen and (max-width: 1024px) {
   position: relative;
   width: 100%;
+  height: 430.5px;
   overflow: hidden;
 }
 `;
 export const SectionCenteredWrapper = styled.div  `
-bottom: 395px;
+bottom: 445px;
 position: relative;
 display: flex;
 justify-content: space-around;
 @media (min-width: 1800px) {
-  bottom: 450px;  
+  bottom: 500px;  
 }
 @media only screen and (max-width: 1024px) {
 bottom: 0;
