@@ -25,6 +25,7 @@ import {
 const Rewards = () => {
 
   const [rewards, setRewards] = useState(true);
+  const responsive420 = useMediaQuery({ query: "(max-width: 420px)" });
   const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
 
   return (
@@ -32,8 +33,8 @@ const Rewards = () => {
       <BannerContain>
         <Banner
           src="/images/Rewards/banner.png"
-          width={responsive870 ? "420" : "1900"}
-          height={responsive870 ? "272" : "450"}
+          width={responsive420 ? "550" : "1900"}
+          height={responsive420 ? "350" : "450"}
         />
         <InsideContain>
           <BannerTitle>
@@ -53,11 +54,11 @@ const Rewards = () => {
                   <UpNarrow2 />
                 </LevelContain>
               </InnerProgress>
-              <ProgressSvg width={responsive870 ? "96px" : "130px"} height={responsive870 ? "96px" : "130px"}>
+              <ProgressSvg width={responsive420 ? "96px" : "130px"} height={responsive420 ? "96px" : "130px"}>
                 <ProgressCircle
-                  cx={responsive870 ? "47.5" : "65"}
-                  cy={responsive870 ? "47.5" : "65"}
-                  r={responsive870 ? "42.5" : "60"}
+                  cx={responsive420 ? "47.5" : "65"}
+                  cy={responsive420 ? "47.5" : "65"}
+                  r={responsive420 ? "42.5" : "60"}
                   stroke-linecap="round" />
               </ProgressSvg>
             </OuterProgress>

@@ -1,6 +1,20 @@
-import React, { useState } from 'react'
-import Modal1 from './Modal1/Modal1';
-import { ProfilePayment, PaymentTitle, PayContainer, PaymentBox, PayBox, VisaIcon, PaymentText, DeleteContain, DeleteText, TrashIcon, PaypalIcon, AddPay } from './User.styled';
+import React, { useState } from "react";
+
+import Modal1 from "./Modal1/Modal1";
+import {
+  AddPay,
+  DeleteContain,
+  DeleteText,
+  PaymentBox,
+  PaymentText,
+  PaymentTitle,
+  PaypalIcon,
+  PayBox,
+  PayContainer,
+  ProfilePayment,
+  TrashIcon,
+  VisaIcon,
+} from "./User.styled";
 
 const PaymentMethod = () => {
 

@@ -264,10 +264,6 @@ const NavBar = () => {
           : <></>
       }
       {//vista de usuario Loggin
-        // [pathname == '/Screens/Rewards' ||
-        //   pathname == '/Screens/Purchase' ||
-        //   pathname == '/Screens/Lesson' ||
-        //   pathname == '/Screens/Preview'] ||
         loggedIn && !isAdmin
           ?
           <>
@@ -387,7 +383,12 @@ const NavBar = () => {
 
           : <></>
       }
-      {//vista de usuario Loggin 
+      {//vista de usuario Loggin
+        // pathname == '/Profile' ||
+        //   pathname == '/Rewards' ||
+        //   pathname == '/Purchase' ||
+        //   pathname == '/Lesson' ||
+        //   pathname == '/Preview' ||
         loggedIn && isAdmin
           ?
           <>

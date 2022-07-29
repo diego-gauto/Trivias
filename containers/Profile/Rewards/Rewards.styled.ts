@@ -23,6 +23,14 @@ export const RewardContainer = styled.div`
 export const Banner = styled(Image)`
   position: absolute;
   filter: brightness(50%);
+  &:@media(max-width: 870px) {
+    width: 870px;
+    height: 525px;
+  }
+  &:@media(max-width: 420px) {
+    width: 550px;
+    height: 525px;
+  }
   `;
 export const BannerContain = styled.div`
   display: flex;
@@ -109,9 +117,16 @@ export const ProgressCircle = styled.circle`
     stroke-width: 10px;
     stroke-dasharray: 377;
     stroke-dashoffset: 190;
-    @media(max-width: 1023px) {
+    @media(max-width: 420px) {
       stroke-dashoffset:245 ;
       stroke-width: 10.5px;
+    }
+    @media(max-width: 1200px) {
+      stroke-dashoffset: 245px ;
+      stroke-width: 10.5px;
+      cx: 47.5;
+      cy: 47.5;
+      r: 42.5;
     }
 `;
 export const LevelContain = styled.div`
