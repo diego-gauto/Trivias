@@ -34,7 +34,6 @@ import {
 
 import {
   signUpWithCreds,
-
   accessWithAuthProvider
 } from "../../store/actions/AuthActions"
 
@@ -66,6 +65,7 @@ const Register = () => {
 
   const [passwordShown_1, setPasswordShown_1] = useState(false);
   const [passwordShown_2, setPasswordShown_2] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [phoneInput, setPhoneInput] = useState();
 
@@ -91,15 +91,15 @@ const Register = () => {
 
 
   const handleSignUpWithAuthProvider = (authProvider: string) => {
-
+    setIsLoading(true)
     accessWithAuthProvider(authProvider).then(() => {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     });
   };
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-
+    setIsLoading(true)
     var value = (document.getElementById("input_1") as HTMLInputElement).value;
     var phoneInputValidation = ""
     if (value !== undefined && value !== null) {
@@ -115,144 +115,161 @@ const Register = () => {
       },
     };
     signUpWithCreds(signUpData).then(() => {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     });
   }
 
+
+  useEffect(() => { }, [isLoading]);
+
   return (
-    <Background>
-      <LoginBox>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Title>
-            Registrarse
-          </Title>
-          <Box1>
-            <Text2>
-              Correo electrónico
-            </Text2>
-            <TextInput
-              type="text"
-              placeholder="correo@correo.com"
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-              {...register("email")}
-            />
-            <div className="invalid-feedback">
-              {errors.email?.message}
-            </div>
+    <>
+      {!isLoading ? (
 
-          </Box1>
-          <Box1>
-            <Text2>
-              Nombre de Usuario
-            </Text2>
-            <TextInput
-              type="text"
-              placeholder="John Doe"
-              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-              {...register("name")}
-            ></TextInput>
-            <div className="invalid-feedback">
-              {errors.name?.message}
-            </div>
-
-          </Box1>
-          <Box2>
-            <Text2>
-              Contraseña
-            </Text2>
-            <PasswordBox>
-
-              <div>
-                <TextInput_2
-                  type={passwordShown_1 ? "text" : "password"}
-                  placeholder="Contraseña"
-                  className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                  {...register("password")}
-                />
-
-                <div
-                  onMouseDown={togglePassword_1}
-                  onMouseUp={togglePassword_1}
-                ><EyeIcon ></EyeIcon></div>
-              </div>
-              <div className="invalid-feedback">
-                {errors.password?.message}
-              </div>
-
-            </PasswordBox>
-          </Box2>
-          <Box2>
-            <Text2>
-              Confirmar Contraseña
-            </Text2>
-            <PasswordBox>
-              <div>
-                <TextInput_2
-                  type={passwordShown_2 ? "text" : "password"}
-                  placeholder="Confirma la contraseña"
-                  className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                  {...register("confirmPassword")}
-                />
-                <div
-                  onMouseDown={togglePassword_2}
-                  onMouseUp={togglePassword_2}
-                ><EyeIcon ></EyeIcon></div>
-              </div>
-
-              <div className="invalid-feedback">
-                {errors.confirmPassword?.message}
-              </div>
-            </PasswordBox>
-          </Box2>
-          <Box2>
-            <Text2>
-              Teléfono
-            </Text2>
-            <InputPhone
-              onCountryChange={() => setPhoneInput}
-              onChange={() => setPhoneInput}
-              limitMaxLength={true}
-              international={true}
-              defaultCountry="MX"
-              id="input_1"
-            />
-            <LineIcon />
-          </Box2>
-          <AllButtons>
-            <PurpleButton2 type='submit'>
-              Crear Cuenta
-            </PurpleButton2>
-          </AllButtons>
-          <AllButtons>
-
-            <GoogleButton onClick={() => {
-              handleSignUpWithAuthProvider("Google");
-            }}
+        <Background>
+          <LoginBox>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
             >
-              <GoogleIcon></GoogleIcon>
-              Acceder con Google
-            </GoogleButton>
-            <FacebookButton
-              onClick={() => {
-                handleSignUpWithAuthProvider("Facebook");
+              <Title>
+                Registrarse
+              </Title>
+              <Box1>
+                <Text2>
+                  Correo electrónico
+                </Text2>
+                <TextInput
+                  type="text"
+                  placeholder="correo@correo.com"
+                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                  {...register("email")}
+                />
+                <div className="invalid-feedback">
+                  {errors.email?.message}
+                </div>
+
+              </Box1>
+              <Box1>
+                <Text2>
+                  Nombre de Usuario
+                </Text2>
+                <TextInput
+                  type="text"
+                  placeholder="John Doe"
+                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                  {...register("name")}
+                ></TextInput>
+                <div className="invalid-feedback">
+                  {errors.name?.message}
+                </div>
+
+              </Box1>
+              <Box2>
+                <Text2>
+                  Contraseña
+                </Text2>
+                <PasswordBox>
+
+                  <div>
+                    <TextInput_2
+                      type={passwordShown_1 ? "text" : "password"}
+                      placeholder="Contraseña"
+                      className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                      {...register("password")}
+                    />
+
+                    <div
+                      onMouseDown={togglePassword_1}
+                      onMouseUp={togglePassword_1}
+                    ><EyeIcon ></EyeIcon></div>
+                  </div>
+                  <div className="invalid-feedback">
+                    {errors.password?.message}
+                  </div>
+
+                </PasswordBox>
+              </Box2>
+              <Box2>
+                <Text2>
+                  Confirmar Contraseña
+                </Text2>
+                <PasswordBox>
+                  <div>
+                    <TextInput_2
+                      type={passwordShown_2 ? "text" : "password"}
+                      placeholder="Confirma la contraseña"
+                      className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                      {...register("confirmPassword")}
+                    />
+                    <div
+                      onMouseDown={togglePassword_2}
+                      onMouseUp={togglePassword_2}
+                    ><EyeIcon ></EyeIcon></div>
+                  </div>
+
+                  <div className="invalid-feedback">
+                    {errors.confirmPassword?.message}
+                  </div>
+                </PasswordBox>
+              </Box2>
+              <Box2>
+                <Text2>
+                  Teléfono
+                </Text2>
+                <InputPhone
+                  onCountryChange={() => setPhoneInput}
+                  onChange={() => setPhoneInput}
+                  limitMaxLength={true}
+                  international={true}
+                  defaultCountry="MX"
+                  id="input_1"
+                />
+                <LineIcon />
+              </Box2>
+              <AllButtons>
+                <PurpleButton2 type='submit'>
+                  Crear Cuenta
+                </PurpleButton2>
+              </AllButtons>
+            </form>
+            <AllButtons>
+
+              <GoogleButton onClick={() => {
+                handleSignUpWithAuthProvider("Google");
               }}
-            >
-              <FacebookIcon></FacebookIcon>
-              Acceder con Facebook
-            </FacebookButton>
-          </AllButtons>
-          <Text3>
-            ¿Ya eres parte? &nbsp;
-            <LinkText>
-              Iniciar Sesion
-            </LinkText>
-          </Text3>
-        </form>
-      </LoginBox>
-      <GradientCanvas id="gradient-canvas" />
-    </Background >
+              >
+                <GoogleIcon></GoogleIcon>
+                Acceder con Google
+              </GoogleButton>
+              <FacebookButton
+                onClick={() => {
+                  handleSignUpWithAuthProvider("Facebook");
+                }}
+              >
+                <FacebookIcon></FacebookIcon>
+                Acceder con Facebook
+              </FacebookButton>
+            </AllButtons>
+            <Text3>
+              ¿Ya eres parte? &nbsp;
+              <LinkText>
+                Iniciar Sesion
+              </LinkText>
+            </Text3>
+          </LoginBox>
+          <GradientCanvas id="gradient-canvas" />
+        </Background >
+
+      ) : (
+
+        <Background>
+
+          <h1>{"Cargando..."} </h1>
+
+        </Background>
+      )}
+    </>
+
   )
 }
 export default Register;

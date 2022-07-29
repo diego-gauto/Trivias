@@ -153,7 +153,7 @@ const NavBar = () => {
 
     <>
       {//Vista del navbar dinamico de Homepage
-        ['/', ''].includes(pathname) && !loggedIn
+        pathname == "" || pathname == "/" && !loggedIn
           ?
           <>
             <NavHome style={{ background: `${colorBack}`, boxShadow: `${shadow}` }}>
@@ -170,7 +170,11 @@ const NavBar = () => {
                 <NavText style={{ color: `${fontColor}` }}>
                   Tienda
                 </NavText>
-
+                <Link href="/Preview">
+                  <NavText style={{ color: `${fontColor}` }}>
+                    Catálogo
+                  </NavText>
+                </Link>
                 <Link href="/auth/Login">
                   <NavText style={{ color: `${fontColor}` }}>
                     Iniciar Sesión
@@ -204,8 +208,8 @@ const NavBar = () => {
           : <></>
       }
       {//vista de navbar general
-        pathname == '/auth/Login' ||
-          pathname == '/auth/Register' && !loggedIn
+        pathname !== "/" &&
+          pathname !== "" && !loggedIn
           ?
           <>
             <NavContainer style={{ background: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
@@ -213,7 +217,7 @@ const NavBar = () => {
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href={`/${route}`}>
+                <Link href={'/'}>
                   <NavText style={{ color: 'black' }}>
                     Inicio
                   </NavText>
@@ -221,7 +225,11 @@ const NavBar = () => {
                 <NavText style={{ color: 'black' }}>
                   Tienda
                 </NavText>
-
+                <Link href="/Preview">
+                  <NavText style={{ color: `${fontColor}` }}>
+                    Catálogo
+                  </NavText>
+                </Link>
                 <Link href="/auth/Login">
                   <NavText style={{ color: 'black' }}>
                     Iniciar Sesión
@@ -276,7 +284,11 @@ const NavBar = () => {
                 <NavText style={{ color: 'black' }}>
                   Tienda
                 </NavText>
-
+                <Link href="/Preview">
+                  <NavText style={{ color: 'black' }}>
+                    Cátalogo
+                  </NavText>
+                </Link>
                 <Link href="/Purchase">
                   <NavText style={{ color: 'black' }}>
                     Comprar{" (Temp)"}
@@ -287,11 +299,7 @@ const NavBar = () => {
                     Lesson{" (Temp)"}
                   </NavText>
                 </Link>
-                <Link href="/Preview">
-                  <NavText style={{ color: 'black' }}>
-                    Cátalogo
-                  </NavText>
-                </Link>
+
                 <UserContain>
                   <Level />
                   <Link href="/Profile">
