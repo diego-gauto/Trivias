@@ -1,6 +1,28 @@
  import { Button, Row, Col } from "react-bootstrap";
-import styled from 'styled-components';
+import styled from "styled-components";
 
+export const ArrowDownContainer = styled.div `
+@keyframes bounce {
+   0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+   40% {transform: translateY(-2.5px);} 
+   60% {transform: translateY(-2.5px);} 
+}
+animation: bounce 1.75s infinite;
+width: 35px;
+position: absolute;
+bottom: 20px;
+left: 20px;
+cursor: pointer;
+@media only screen and (max-width: 1024px) {
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+}
+`;
+export const ArrowDownIcon = styled.svg `
+fill: #f9f9f9;
+`;
 export const ModuleContentWrapper = styled(Row) `
 display: grid;
 grid-template-areas:

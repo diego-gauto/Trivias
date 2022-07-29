@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import Img1 from "./MediaSources/Icon01.png"
 import Img2 from "./MediaSources/Icon02.png"
@@ -15,13 +16,25 @@ import {
   SectionA_01Text02, SectionA_02Text01, SectionA_02Text02,
   SectionB_Text, IconElement, IconImageWrapper, BlurWindow,
   SectionB_TextALT1, ModuleContentWrapper, RightWrapper,
-  RightImageElement, SectionA_01TextWrapper
+  RightImageElement, SectionA_01TextWrapper, ArrowDownIcon,
+  ArrowDownContainer,
 } from "./Module1.styled";
 
 
 export const Module1 = (props: IModule1) => {
+  useEffect(() => {
+
+  }, [])
+
+  const scrollToModule2 = () => {
+    window.scrollTo(0, window.innerHeight)
+  }
+
   return (
     <Container fluid style={{ height: "100vh" }}>
+      <ArrowDownContainer onClick={scrollToModule2}>
+        <ArrowDownIcon className="down" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" fill="none"></rect><path d="M36.63,18.37a1.37,1.37,0,0,1,2.15.37,1.7,1.7,0,0,1-.3,2.06L25.4,32.64a1.37,1.37,0,0,1-1.85,0l-13-11.84a1.71,1.71,0,0,1-.29-2.06,1.37,1.37,0,0,1,2.15-.37l12.11,11ZM24.25,31.42a.38.38,0,0,1,.46,0l-.23-.21ZM11.71,19.55s0,.06,0,0Zm25.61,0h0Z"></path></ArrowDownIcon>
+      </ArrowDownContainer>
       <BackgroundWrapper>
         <ModuleContentWrapper>
           <LeftWrapper>
