@@ -4,6 +4,7 @@ export const GeneralContain = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
+  justify-content: start;
   //padding-top: 20px;
   gap: 20px;
   background-color: #f3f3f5;
@@ -38,7 +39,7 @@ export const AddTitle = styled.div`
   height: 54px;
   left: 40px;
   top: 165px;
-  margin-left: 3%;
+  margin: 2%;
 `;
 export const GonvarText = styled.div`
   display: absolute;
@@ -79,4 +80,27 @@ export const OptionBtn = styled.div`
     color: white;
     cursor: pointer;
   }
+`;
+export const OffContainer = styled.div`
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  padding-inline: 25px;
+  cursor:pointer;
+  @media(max-width: 1023px) {
+    width: 160px;
+    height: 40px;
+    margin-top:-20px;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+    padding-top: 8px;
+    justify-content: center;
+  }
+`;
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const columnsContainer = styled.div`
+  display: flex;
 `;

@@ -1,24 +1,20 @@
-
+import { useState } from "react";
 
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
-import {
-  AddText,
-  AddTextContainer,
-  AddTitle,
-  GeneralContain,
-  GonvarText,
-  HeaderMenu,
-  OptionsContainer,
-  OptionBtn,
-} from "./Landing.styled";
+import { AddTitle, Container, GeneralContain, OptionsContainer, OptionBtn } from "./Landing.styled";
+import HeroPage from "./Tabs/HeroPage";
 
 const Landing = () => {
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
   return (
     <AdminContain>
       <SideBar />
       <GeneralContain>
-        <HeaderMenu>
+        {/* <HeaderMenu>
           <GonvarText style={{ marginLeft: "5%" }}>
             Admin User
           </GonvarText>
@@ -36,12 +32,12 @@ const Landing = () => {
               Cupones
             </AddText>
           </AddTextContainer>
-        </HeaderMenu>
+        </HeaderMenu> */}
         <AddTitle>
           HomePage
         </AddTitle>
         <OptionsContainer>
-          <OptionBtn>
+          <OptionBtn onClick={handleShow}>
             Hero Page
           </OptionBtn>
           <OptionBtn>
@@ -51,6 +47,9 @@ const Landing = () => {
             Productos <br /> Destacados
           </OptionBtn>
         </OptionsContainer>
+        <Container >
+          <HeroPage />
+        </Container>
       </GeneralContain>
     </AdminContain>
   )
