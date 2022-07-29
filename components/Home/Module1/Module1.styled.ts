@@ -1,6 +1,12 @@
- import { Button, Row, Col } from "react-bootstrap";
+ import { Button, Row, Col, Container } from "react-bootstrap";
 import styled from "styled-components";
 
+export const ModuleContainer = styled(Container) `
+height: 82.5vh;
+@media only screen and (max-width: 1024px) {
+  height: 100vh;
+}
+`;
 export const ArrowDownContainer = styled.div `
 @keyframes bounce {
    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
@@ -10,8 +16,8 @@ export const ArrowDownContainer = styled.div `
 animation: bounce 1.75s infinite;
 width: 35px;
 position: absolute;
-bottom: 20px;
-left: 20px;
+bottom: 17.5vh;
+left: 10px;
 cursor: pointer;
 @media only screen and (max-width: 1024px) {
   margin: 0 auto;
@@ -28,9 +34,10 @@ display: grid;
 grid-template-areas:
 "left right";
 grid-template-columns: 4fr 5fr;
-height: 100vh;
+height: 82.5vh;
 align-items: center;
 @media only screen and (max-width: 1024px) {
+  height: 100vh;
   grid-template-areas:
   "right"
   "left";
@@ -79,7 +86,7 @@ opacity: 0.25;
 z-index: -1; 
 background-color: #FFFFFF;
 width: 45%;
-height: 100%;
+height: 82.5%;
 position: absolute;
 top: 0;
 margin-left: -80px;
@@ -89,6 +96,7 @@ border: 2px solid #ffffff;
 box-sizing: border-box;    
 box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
 @media only screen and (max-width: 1024px) {
+  height: 100%;
   width: 94%;
   margin: 0 auto;
   top: auto;
@@ -170,7 +178,7 @@ justify-content: center;
 `;
 export const RightImageElement = styled.img  `
 height: auto;
-width: 100%;
+width: 85%;
 @media only screen and (max-width: 1024px) {
 width: 90%;
 }

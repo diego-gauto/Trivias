@@ -70,17 +70,22 @@ margin-left: 15px;
 export const RightImage = styled.div  `
 display: flex;
 width: 95%;
-margin-top: 25px;
-align-items: center;
+align-items: flex-start;
+height: 100%;
+
 justify-content: flex-end;
 @media only screen and (max-width: 1024px) {
   display: none;
 }
 `;
 export const SectionCenteredBackground = styled(Row)  `
-height: 65vh;
+padding-top: 30px;
+display: flex;
+align-items: flex-start;
+height: 100%;
 @media only screen and (max-width: 1024px) {
   height: auto;
+  padding-top: 0;
 }
 `;
 export const SectionCenteredTopColumn = styled(Col)  `

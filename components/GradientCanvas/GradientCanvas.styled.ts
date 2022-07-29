@@ -3,12 +3,15 @@ import styled from 'styled-components';
 export const Canvas = styled.canvas  `
 display: block;
 position: absolute;
-height: 100%;
+height: 82.5%;
 width: 100vw;
 top: 0;
 left: 0;
 z-index: -9999;
 max-width:100%;
+@media only screen and (max-width: 1024px) {
+  height: 100%;
+}
 `
 
 export const CanvasIncreasedHeight = styled(Canvas) `

@@ -75,12 +75,12 @@ export const Module2 = (props: IModule2) => {
   return (
     <ModuleContainer fluid>
       <SectionCenteredBackground>
-        <Col style={{ paddingLeft: 0, display: "flex" }}>
+        <Col style={{ paddingLeft: 0, display: "flex", height: "75%" }}>
           <LeftImage>
             <Image src={BG3.src} style={{ width: "50%" }}></Image>
           </LeftImage>
         </Col>
-        <Col style={{ display: "flex" }}>
+        <Col style={{ display: "flex", height: "75%" }}>
           <RightImage>
             <Image src={BG2.src} style={{ width: "50%" }}></Image>
           </RightImage>
