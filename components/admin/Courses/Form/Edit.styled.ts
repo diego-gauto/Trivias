@@ -34,6 +34,7 @@ export const TrashIcon = styled.i`
   background-repeat: no-repeat;
   height: 21px;
   width: 20px;
+  cursor: pointer;
 `;
 export const EditContain = styled.div`
   display: flex;
