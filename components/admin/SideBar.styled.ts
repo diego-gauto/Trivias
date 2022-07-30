@@ -7,7 +7,7 @@ export const Container = styled.div`
   gap: 20px;
   padding: 20px;
   width: 250px;
-  height: 100vh;
+  min-height: 100vh;
 `;
 export const Text = styled.p`
   font-size: 20px;
