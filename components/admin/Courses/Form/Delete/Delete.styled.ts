@@ -25,12 +25,6 @@ export const Title = styled.p`
   font-family:'Montserrat',sans-serif;
   margin: 0;
 `;
-export const Cross = styled.p`
-  font-size: 30px;
-  font-family:'Raleway',sans-serif;
-  margin: 0;
-  cursor: pointer;
-`;
 export const Content = styled.p`
   font-size: 14px;
   font-family:'Montserrat',sans-serif;

@@ -9,6 +9,7 @@ export const PayContain = styled.div`
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  height: fit-content;
   border-radius: 10px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);

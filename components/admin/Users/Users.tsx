@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TitleContain, Title, Container, ProfileContain, Profile, IconContain, Visa, MasterCard, PayPal } from '../Pay/Pay.styled';
+import { TitleContain, Title, Container, ProfileContain, Profile } from '../Pay/Pay.styled';
 import SideBar from '../SideBar';
 import { AdminContain, Table } from '../SideBar.styled';
 import UserInfo from './UserData/UserInfo';
@@ -31,7 +31,7 @@ const Users = () => {
               <th>Visualizar</th>
             </tr>
             {/* TABLAS */}
-            <tr>
+            <tr onClick={() => { setShowUser(!showUser) }}>
               <td style={{ fontWeight: 600 }}>
                 <ProfileContain>
                   <Profile />Mofupiyo
@@ -41,7 +41,7 @@ const Users = () => {
               <td>10/05/2022</td>
               <td >3 Activos</td>
               <td>3,000 puntos</td>
-              <td onClick={() => { setShowUser(!showUser) }}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+              <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
             </tr>
           </Table>
         </Container>

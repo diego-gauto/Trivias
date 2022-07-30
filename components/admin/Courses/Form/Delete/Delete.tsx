@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap';
-import { ButtonContain, Container, Content, Cross, PurpleButton, Title, TitleContain, TransparentButton, Trash } from './Delete.styled';
+import { CloseIcon } from '../../../Users/UserData/UserInfo.styled';
+import { ButtonContain, Container, Content, PurpleButton, Title, TitleContain, TransparentButton, Trash } from './Delete.styled';
 
 const Delete = ({ show, setShow }: any) => {
 
@@ -10,7 +11,7 @@ const Delete = ({ show, setShow }: any) => {
       <Container>
         <TitleContain>
           <Title>Eliminar Lección</Title>
-          <Cross onClick={handleClose}>x</Cross>
+          <CloseIcon onClick={handleClose} />
         </TitleContain>
         <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
         <ButtonContain>
