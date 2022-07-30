@@ -46,7 +46,7 @@ td{
     text-align: left;
     background-color: #6717CD;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     }
