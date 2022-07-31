@@ -65,6 +65,7 @@ export const SelectContain = styled.div`
 export const RadioContain = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
   gap: 5px;
   div{
     font-size: 14px;
@@ -96,50 +97,39 @@ export const TitleContain = styled.div`
   padding-inline: 40px;
 `;
 export const ActiveLbl = styled.label`
-  position: absolute;
-  top: 25%;
-  left: 4px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: white;
-  border: 1px solid #bebebe;
+  font-size: 14px;
+  font-family:'Montserrat',sans-serif;
+  font-weight: 600;
+  margin: 0;
 `;
-export const Active = styled.input`
-  width: 14px;
-  height: 14px;
-  &:hover ~ ${ActiveLbl} {
-    background: #bebebe;
-    &::after {
-      content: "";
-      display: block;
-      border-radius: 50%;
-      width: 12px;
-      height: 12px;
-      margin: 6px;
-      background: #eeeeee;
-    }
-  }
-  ${(props) =>
-    props.checked &&
-    ` 
-    &:checked + ${ActiveLbl} {
-      background: #db7290;
-      border: 1px solid #db7290;
-      &::after {
-        content: "";
-        display: block;
-        border-radius: 50%;
-        width: 12px;
-        height: 12px;
-        margin: 6px;
-        box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.1);
-        background: white;
-      }
-    }
-  `}
+export const ActiveC = styled.div`
+   position: relative;
+   display: flex;
+   width: 16px;
+   height: 16px;
+   border-radius: 50%;
+   border: 1px solid #6717CD;
+   div{
+    margin: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #6717CD;
+   }
+`;
+export const UnActiveLbl = styled.label`
+  font-size: 14px;
+  font-family:'Montserrat',sans-serif;
+  opactiy: .8;
+  margin: 0;
+`;
+export const UnActive = styled.div`
+  display: flex;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid gray;
 `;
 export const IconContain = styled.div`
   display: flex;
-  padding-left: 20px;
 `;

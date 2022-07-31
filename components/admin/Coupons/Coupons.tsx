@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TrashIcon } from '../Courses/Form/Edit.styled';
 import SideBar from '../SideBar';
 import { AdminContain, Table } from '../SideBar.styled';
-import { Active, ActiveLbl, ButtonContain, Container, CouponContain, IconContain, Input, InputContain, Label, PurpleButton, RadioContain, SelectContain, TableContain, TableTitle, TagLabel, Tags, Title, TitleContain } from './Coupons.styled';
+import { ButtonContain, ActiveC, Container, CouponContain, IconContain, Input, InputContain, Label, PurpleButton, RadioContain, SelectContain, TableContain, TableTitle, TagLabel, Tags, Title, TitleContain, ActiveLbl, UnActive, UnActiveLbl } from './Coupons.styled';
 const Coupons = () => {
 
   const [select, setSelect] = useState("percentage");
@@ -10,11 +10,7 @@ const Coupons = () => {
     const value = e.target.value;
     setSelect(value);
   };
-  const [active, setActive] = useState("");
-  const handleActive = (e: any) => {
-    const value = e.target.value;
-    setActive(value);
-  };
+  const [active, setActive] = useState(true);
 
   return (
     <AdminContain>
@@ -95,18 +91,23 @@ const Coupons = () => {
               </td>
               <td >SPRN22</td>
               <td>5%</td>
-              <td >
-                <RadioContain>
-                  <Active
-                    type="radio"
-                    name="activity"
-                    value="active"
-                    checked={active === "active"}
-                    onChange={(e) => handleActive(e)}
-                  />
-                  <ActiveLbl />
-                  <div>Activo</div>
-                </RadioContain>
+              <td style={{ cursor: "pointer" }} onClick={() => { setActive(!active) }}>
+                {
+                  active == true &&
+                  <RadioContain>
+                    <ActiveC>
+                      <div />
+                    </ActiveC>
+                    <ActiveLbl>Activo</ActiveLbl>
+                  </RadioContain>
+                }
+                {
+                  active == false &&
+                  <RadioContain>
+                    <UnActive />
+                    <UnActiveLbl>Desactivado</UnActiveLbl>
+                  </RadioContain>
+                }
               </td>
               <td>
                 <IconContain>
