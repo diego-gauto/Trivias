@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CourseFormContain, InputForm, InputContain, Label, Input, Select, InputBig, InputContain2, TagContain, TagTitle, TagDiv, Tags, TagLabel } from './CourseForm.styled';
+import { CourseFormContain, InputForm, InputContain, Label, Input, Select, InputBig, InputContain2, TagContain, TagTitle, TagLabel, IconContain, Folder, InputIcon, CaretD } from './CourseForm.styled';
 
 const CourseForm = () => {
 
@@ -21,8 +21,12 @@ const CourseForm = () => {
         </InputContain>
         <InputContain>
           <Label>Profesor(es)</Label>
-          <Select>
-          </Select>
+          <IconContain>
+            <Select>
+              <option>Darth Vader, Grand Moff Tarkin</option>
+            </Select>
+            <CaretD />
+          </IconContain>
         </InputContain>
         <InputContain>
           <Label>Duración de Suscripción (Días)</Label>
@@ -41,15 +45,22 @@ const CourseForm = () => {
         </InputContain>
         <InputContain>
           <Label>Categorías</Label>
-          <Select>
-          </Select>
+          <IconContain>
+            <Select>
+              <option>Uñas de salón</option>
+            </Select>
+            <CaretD />
+          </IconContain>
+
         </InputContain>
         <InputContain>
           <Label>Portada del Curso</Label>
-          <Input
-            placeholder="Seleccionar archivo"
-          />
-
+          <IconContain>
+            <Folder />
+            <InputIcon
+              placeholder="Seleccionar archivo"
+            />
+          </IconContain>
         </InputContain>
       </InputForm>
       {/* LINEA 3 */}
@@ -82,46 +93,47 @@ const CourseForm = () => {
         </InputContain2>
         <TagContain>
           <TagTitle>Etiquetas</TagTitle>
-          <TagDiv>
-            <Tags
+          <TagLabel >Nuevo
+            <input
               type="radio"
               name="radio"
               value="new"
               checked={select === "new"}
               onChange={(e) => handleSelectChange(e)}
             />
-            <TagLabel >Nuevo</TagLabel>
-          </TagDiv>
-          <TagDiv>
-            <Tags
+            <span></span>
+          </TagLabel>
+          <TagLabel >Popular
+            <input
               type="radio"
               name="radio"
               value="popular"
               checked={select === "popular"}
               onChange={(e) => handleSelectChange(e)}
             />
-            <TagLabel >Popular</TagLabel>
-          </TagDiv>
-          <TagDiv>
-            <Tags
+            <span></span>
+          </TagLabel>
+
+          <TagLabel >Destacado
+            <input
               type="radio"
               name="radio"
               value="outstand"
               checked={select === "outstand"}
               onChange={(e) => handleSelectChange(e)}
             />
-            <TagLabel >Destacado</TagLabel>
-          </TagDiv>
-          <TagDiv>
-            <Tags
+            <span></span>
+          </TagLabel>
+          <TagLabel >En Oferta
+            <input
               type="radio"
               name="radio"
               value="sale"
               checked={select === "sale"}
               onChange={(e) => handleSelectChange(e)}
             />
-            <TagLabel >En Oferta</TagLabel>
-          </TagDiv>
+            <span></span>
+          </TagLabel>
         </TagContain>
       </InputForm>
     </CourseFormContain>

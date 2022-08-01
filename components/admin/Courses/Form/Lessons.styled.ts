@@ -40,7 +40,7 @@ export const TitleContain =styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-export const Title = styled.p`
+export const Title = styled.h1`
   font-size: 18px;
   font-weight: 600;
   font-family:'Montserrat',sans-serif;
@@ -122,11 +122,12 @@ export const EpisodeInfo = styled.p`
   text-align: justify;
   margin: 0;
 `;
-export const EditEpisode = styled.p`
+export const EditEpisode = styled.a`
   font-size: 16px;
   font-weight: 600;
   color: #6717CD;
   padding-left: 40px;
+  text-decoration: none;
   font-family:'Montserrat',sans-serif;
   cursor: pointer;
   margin: 0;

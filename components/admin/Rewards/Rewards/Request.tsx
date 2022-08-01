@@ -28,29 +28,31 @@ const Request = ({ setPlace }: any) => {
           </SearchContain>
         </FirstContain>
         <Table id="Request">
-          <tr>
-            <th>Usuario</th>
-            <th>Puntos</th>
-            <th>Fecha de Creación</th>
-            <th>Teléfono</th>
-            <th>Desbloqueado</th>
-            <th>Tipo</th>
-            <th>Producto</th>
-          </tr>
-          {/* TABLAS */}
-          <tr>
-            <td style={{ fontWeight: 600 }}>
-              <IconContain>
-                <Profile />Mofupiyo
-              </IconContain>
-            </td>
-            <td >4,500</td>
-            <td>10/05/2022</td>
-            <td >5512345678</td>
-            <td>03/06/2022</td>
-            <td>Físico</td>
-            <td style={{ fontWeight: 600 }}>Gonvar Nails Leonardo Da Vinci</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Usuario</th>
+              <th>Puntos</th>
+              <th>Fecha de Creación</th>
+              <th>Teléfono</th>
+              <th>Desbloqueado</th>
+              <th>Tipo</th>
+              <th>Producto</th>
+            </tr>
+            {/* TABLAS */}
+            <tr>
+              <td style={{ fontWeight: 600 }}>
+                <IconContain>
+                  <Profile />Mofupiyo
+                </IconContain>
+              </td>
+              <td >4,500</td>
+              <td>10/05/2022</td>
+              <td >5512345678</td>
+              <td>03/06/2022</td>
+              <td>Físico</td>
+              <td style={{ fontWeight: 600 }}>Gonvar Nails Leonardo Da Vinci</td>
+            </tr>
+          </tbody>
         </Table>
       </Contain>
     </>

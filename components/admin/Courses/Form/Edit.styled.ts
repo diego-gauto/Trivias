@@ -52,14 +52,14 @@ export const Contain1 = styled.div`
 export const Contain2 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 85px;
   gap: 20px;
   width: 33.33%;
 `;
 export const Contain3 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 45px;
   gap: 20px;
   width: 33.33%;
 `;
@@ -88,6 +88,7 @@ export const InputSelect = styled.input`
   font-size: 14px;
   position: relative;
   font-family:'Montserrat',sans-serif;
+  width: 100%;
   padding-inline: 50px 20px;
   padding-block: 10px;
   border:1px solid #6717CD;
@@ -151,4 +152,15 @@ export const PurpleButton = styled.button`
   padding-inline: 30px;
   border-radius: 100px;
   border: none;
+`;
+export const Folder = styled.i`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 15px;
+  background-image: url(../images/admin/Rewards/folder.png);
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  z-index: 1;
 `;

@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import { TrashIcon } from '../Courses/Form/Edit.styled';
 import SideBar from '../SideBar';
 import { AdminContain, Table } from '../SideBar.styled';
-import { ButtonContain, ActiveC, Container, CouponContain, IconContain, Input, InputContain, Label, PurpleButton, RadioContain, SelectContain, TableContain, TableTitle, TagLabel, Tags, Title, TitleContain, ActiveLbl, UnActive, UnActiveLbl } from './Coupons.styled';
+import {
+  ButtonContain, ActiveC, Container, CouponContain,
+  IconContain, Input, InputContain, Label, PurpleButton,
+  RadioContain, SelectContain, TableContain, TableTitle,
+  TagLabel, Title, TitleContain, ActiveLbl, UnActive,
+  UnActiveLbl
+} from './Coupons.styled';
 const Coupons = () => {
 
   const [select, setSelect] = useState("percentage");
@@ -29,26 +35,26 @@ const Coupons = () => {
           <InputContain>
             <Label>Tipo de Descuento</Label>
             <SelectContain>
-              <RadioContain>
-                <Tags
+              <TagLabel>Porcentaje (%)
+                <input
                   type="radio"
                   name="radio"
                   value="percentage"
                   checked={select === "percentage"}
                   onChange={(e) => handleSelectChange(e)}
                 />
-                <TagLabel>Porcentaje (%)</TagLabel>
-              </RadioContain>
-              <RadioContain>
-                <Tags
+                <span></span>
+              </TagLabel>
+              <TagLabel>Absoluto ($)
+                <input
                   type="radio"
                   name="radio"
                   value="absolute"
                   checked={select === "absolute"}
                   onChange={(e) => handleSelectChange(e)}
                 />
-                <TagLabel>Absoluto ($)</TagLabel>
-              </RadioContain>
+                <span></span>
+              </TagLabel>
             </SelectContain>
           </InputContain>
           {
@@ -76,45 +82,47 @@ const Coupons = () => {
             <TableTitle>Cupones Activos</TableTitle>
           </TitleContain>
 
-          <Table id="Pagos">
-            <tr>
-              <th>Cupón</th>
-              <th>Código</th>
-              <th>Descuento</th>
-              <th>Activo</th>
-              <th></th>
-            </tr>
-            {/* TABLAS */}
-            <tr>
-              <td style={{ fontWeight: 600 }}>
-                Primavera 2022
-              </td>
-              <td >SPRN22</td>
-              <td>5%</td>
-              <td style={{ cursor: "pointer" }} onClick={() => { setActive(!active) }}>
-                {
-                  active == true &&
-                  <RadioContain>
-                    <ActiveC>
-                      <div />
-                    </ActiveC>
-                    <ActiveLbl>Activo</ActiveLbl>
-                  </RadioContain>
-                }
-                {
-                  active == false &&
-                  <RadioContain>
-                    <UnActive />
-                    <UnActiveLbl>Desactivado</UnActiveLbl>
-                  </RadioContain>
-                }
-              </td>
-              <td>
-                <IconContain>
-                  <TrashIcon />
-                </IconContain>
-              </td>
-            </tr>
+          <Table id="Coupons">
+            <tbody>
+              <tr>
+                <th>Cupón</th>
+                <th>Código</th>
+                <th>Descuento</th>
+                <th>Activo</th>
+                <th></th>
+              </tr>
+              {/* TABLAS */}
+              <tr>
+                <td style={{ fontWeight: 600 }}>
+                  Primavera 2022
+                </td>
+                <td >SPRN22</td>
+                <td>5%</td>
+                <td style={{ cursor: "pointer" }} onClick={() => { setActive(!active) }}>
+                  {
+                    active == true &&
+                    <RadioContain>
+                      <ActiveC>
+                        <div />
+                      </ActiveC>
+                      <ActiveLbl>Activo</ActiveLbl>
+                    </RadioContain>
+                  }
+                  {
+                    active == false &&
+                    <RadioContain>
+                      <UnActive />
+                      <UnActiveLbl>Desactivado</UnActiveLbl>
+                    </RadioContain>
+                  }
+                </td>
+                <td>
+                  <IconContain>
+                    <TrashIcon />
+                  </IconContain>
+                </td>
+              </tr>
+            </tbody>
           </Table>
         </TableContain>
       </CouponContain>

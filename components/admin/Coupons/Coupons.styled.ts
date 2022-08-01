@@ -72,12 +72,56 @@ export const RadioContain = styled.div`
     font-family:'Montserrat',sans-serif;
   }
 `;
-export const Tags = styled.input`
-`;
 export const TagLabel = styled.label`
   font-size: 14px;
   font-family:'Montserrat',sans-serif;
   margin: 0;
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    &:hover ~ span {
+      background: #ccc;
+    }
+    &:checked + span{
+      background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+      &::after{
+        display: block;
+      }
+    }
+  }
+  span{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border:1px solid black;
+    border-radius: 50%;
+    &::after {
+    top: 0;
+     left: 0;
+     width: 18px;
+     height: 18px;
+     border-radius: 50%;
+     background: transparent;
+     border: 2px solid white;
+     content: "";
+      position: absolute;
+      display: none;
+   }
+  }
 `;
 export const TableContain = styled.div`
   display: flex;

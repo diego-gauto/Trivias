@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap';
 import { CloseIcon } from '../UserInfo.styled';
-import { ButtonContain, Card, CardContain, CardImage, CardSubTitle, CardTitle, Container, Data, ImageContain, Info, Input, InputContain, Label, LessonText, MainCard, PurpleButton, Select, Text1, Text2, Title, TitleContain } from './Modal.styled';
+import { ButtonContain, Card, CardContain, CardImage, CardSubTitle, CardTitle, CaretD, Container, Data, IconContain, ImageContain, Info, Input, InputContain, Label, LessonText, MainCard, PurpleButton, Select, Text1, Text2, Title, TitleContain } from './Modal.styled';
 
 const Modal1 = ({ show, setShow }: any) => {
 
@@ -33,7 +33,12 @@ const Modal1 = ({ show, setShow }: any) => {
         </Data>
         <InputContain>
           <Label>Curso a añadir</Label>
-          <Select></Select>
+          <IconContain>
+            <Select>
+              <option>Elegir curso</option>
+            </Select>
+            <CaretD />
+          </IconContain>
         </InputContain>
         <MainCard>
           <Card>
