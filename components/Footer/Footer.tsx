@@ -24,10 +24,18 @@ const Footer = () => {
         <Logo2 />
         <Column>
           <FooterText>
-            Inicio
+            Aviso de Privacidad
+          </FooterText>
+          <FooterText>
+            Condiciones
           </FooterText>
         </Column>
         <Column>
+          <Link href="/">
+            <FooterText>
+              Inicio
+            </FooterText>
+          </Link>
           <FooterText>
             Tienda Online
           </FooterText>
@@ -36,22 +44,11 @@ const Footer = () => {
           <FooterText>
             Academia
           </FooterText>
-        </Column>
-        <Column>
-          <FooterText>
-            Registrarse
-          </FooterText>
-        </Column>
-        <Column style={{ textAlign: "right" }}>
-          <FooterText>
-            Aviso de Privacidad
-          </FooterText>
-          <FooterText>
-            Condiciones
-          </FooterText>
-          <FooterText>
-            Facturación
-          </FooterText>
+          <Link href="/auth/Register">
+            <FooterText>
+              Registrarse
+            </FooterText>
+          </Link>
         </Column>
         <FooterIcons>
           <FooterText>
@@ -67,18 +64,22 @@ const Footer = () => {
       <FooterResponsive>
         <RespContainer>
           <Logo2 />
-          <FooterText>
-            Inicio
-          </FooterText>
+          <Link href="/">
+            <FooterText>
+              Inicio
+            </FooterText>
+          </Link>
           <FooterText>
             Tienda Online
           </FooterText>
           <FooterText>
             Academia
           </FooterText>
-          <FooterText>
-            Registrarse
-          </FooterText>
+          <Link href="/auth/Register">
+            <FooterText>
+              Registrarse
+            </FooterText>
+          </Link>
         </RespContainer>
         <RespContainer2>
           <FooterText>

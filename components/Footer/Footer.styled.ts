@@ -78,10 +78,17 @@ export const Column = styled.div`
   flex-direction:column;
   gap:20px; 
 `;
-export const FooterText = styled.p`
+export const FooterText = styled.a`
   font-size: 18px;
   font-family: 'Nunito',sans-serif;
   margin: 0;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  &:hover{
+    color: #6717CD;
+    font-weight: 600;
+  }
   @media(max-width: 870px) {
     font-size: 15px;
     line-height: 25px;
@@ -131,21 +138,32 @@ export const SocialContainer = styled.div`
 export const FBIcon = styled.i`
   background-image: url(../images/facebook.png);
   background-repeat:no-repeat;
-  width: 30px;
-  height:30px;
+  width: 32px;
+  height:32px;
+  border-radius: 50%;
   cursor:pointer;
+  &:hover{
+    box-shadow: 0px 0px 10px 2px #6717CD;
+  }
 `;
 export const WAIcon = styled.i`
   background-image: url(../images/whatsapp.png);
   background-repeat:no-repeat;
-  width: 30px;
-  height:30px;
+  width: 31px;
+  height: 31px;
   cursor:pointer;
+  border-radius: 50%;
+  &:hover{
+    box-shadow: 0px 0px 10px 2px #6717CD;
 `;
 export const IGIcon = styled.i`
   background-image: url(../images/instragram2.png);
   background-repeat:no-repeat;
-  width: 30px;
-  height:30px;
+  width: 31px;
+  height: 31px;
   cursor:pointer;
+  border-radius: 6px;
+  &:hover{
+    box-shadow: 0px 0px 10px 2px #6717CD;
+  }
 `;
