@@ -4,8 +4,6 @@ import styled from "styled-components";
 export const RewardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-inline: 20px;
-  margin-top: 10px;
   width: 100%;
   @media(max-width: 1023px) {
     padding-inline: 0;
@@ -19,6 +17,12 @@ export const RewardContainer = styled.div`
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
   }
+`;
+export const MainContain = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-inline: 20px;
 `;
 export const Banner = styled(Image)`
   position: absolute;
@@ -144,37 +148,19 @@ export const CurrentLevel = styled.p`
     font-size: 32px;
   }
 `;
-export const UpNarrow = styled.div`
-  background-color: #E0C3FC;
-  width: 35px;
-  height: 25px;
-  border-radius:10px;
-  clip-path: polygon(50% 0%,                  
-    100% 60%,                   
-    100% 90%,
-    50% 30%,
-     0% 90%,                    
-     0% 60%);
-  @media(max-width: 1023px) {
-    width: 22px;
-    height: 13.5px;
-  }
- 
+export const Vector = styled.i`
+  background-image: url(../images/Rewards/VectorU.png);
+  background-repeat:no-repeat;
+  height: 24px;
+  width: 42px;
+  position: absolute;
+  bottom: 30px;
 `;
-export const UpNarrow2 = styled.div`
-  background-color: #E0C3FC;
-  width: 35px;
-  height: 25px;
-  border-radius:10px;
-  clip-path: polygon(50% 0%,                  
-    100% 60%,                   
-    100% 90%,
-    50% 30%,
-     0% 90%,                    
-     0% 60%);
-  @media(max-width: 1023px) {
-    width: 22px;
-    height: 13.5px;
-    margin-top:-5px;
-  }
+export const Vector2 = styled.i`
+  background-image: url(../images/Rewards/VectorU.png);
+  background-repeat:no-repeat;
+  height: 24px;
+  width: 42px;
+  position: absolute;
+  bottom: 12px;
 `;
