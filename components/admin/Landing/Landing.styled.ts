@@ -9,6 +9,103 @@ export const GeneralContain = styled.div`
   gap: 20px;
   background-color: #f3f3f5;
 `;
+export const AllEditInputs = styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+`;
+export const ColumnsContainer = styled.div`
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+`;
+export const ColumnsContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius:10px;
+  padding:20px;
+  width: 380px;
+  background: #FFFFFF;
+}
+`;
+export const EditButtons = styled.div`
+  display: flex;
+  justify-content:center;
+  margin-top: 2%;
+`;
+export const EditInput = styled.input`
+  font-size: 14px;
+  width: 330px;
+  font-family:'Montserrat',sans-serif;
+  padding: 10px;
+  border:1px solid #6717CD;
+  border-radius:20px;
+  :focus{
+    outline: 1px solid #8E2DE2;
+  }
+`;
+export const EditInput2 = styled.textarea`
+font-size: 14px;
+width: 330px;
+padding-inline: 20px;
+text-align: justify;
+overflow: hidden;
+resize: none;
+font-family:'Montserrat',sans-serif;
+padding: 10px;
+border:1px solid #6717CD;
+border-radius:20px;
+:focus{
+  outline: 1px solid #8E2DE2;
+}
+`;
+export const EditText = styled.label`
+  font-size: 14px;
+  color: #6717CD;
+  font-family:'Montserrat',sans-serif;
+`;
+export const FolderInput = styled.input`
+  background-image: url(../images/admin/Rewards/folder.png);
+  background-repeat: no-repeat;
+  background-position: 5% 50%;
+  font-size: 14px;
+  width: 330px;
+  text-indent: 40px;
+  font-family:'Montserrat',sans-serif;
+  padding: 10px;
+  border:1px solid #6717CD;
+  border-radius:20px;
+  :focus{
+    outline: 1px solid #8E2DE2;
+  }
+`;
+export const Inputs = styled.div`
+  display:flex;
+  flex-direction:column;
+`;
+export const ProfileData = styled.div`
+  padding:20px;
+`;
+export const SaveButton = styled.button`
+  padding-block: 15px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  padding-inline: 25px;
+  color: white;
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;
+  border:none;
+  border-radius: 30px;
+  background-color: #6717CD;
+  &:hover{
+    background-color: #5b02cc;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
 export const HeaderMenu = styled.div`
   display: flex;
   width: 100%;
@@ -59,13 +156,16 @@ export const OptionsContainer = styled.div`
   justify-content: center;
   gap:20px;
 `;
+export const HomePageContain = styled.div`
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+`;
 export const OptionBtn = styled.div`
   display: flex;
   width: 380px;
   justify-content: center;
   height: 112px;
-  left: 40px;
-  top: 239px;
   background: #FFFFFF;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -81,20 +181,21 @@ export const OptionBtn = styled.div`
     cursor: pointer;
   }
 `;
-export const OffContainer = styled.div`
+export const OptionBtnOn = styled.div`
   display: flex;
-  padding-top: 15px;
-  padding-bottom: 30px;
-  padding-inline: 25px;
-  cursor:pointer;
-  @media(max-width: 1023px) {
-    width: 160px;
-    height: 40px;
-    margin-top:-20px;
-    border: 1px solid #FFFFFF;
-    border-radius: 100px;
-    padding-top: 8px;
-    justify-content: center;
+  width: 380px;
+  justify-content: center;
+  height: 112px;
+  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  color: white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  align-items: center;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 24px;
+  &:hover {
+    cursor: pointer;
   }
 `;
 export const Container = styled.div`
