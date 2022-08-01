@@ -16,8 +16,12 @@ export const TitleClaim = styled.h1`
 export const PrizeImage = styled.div`
   border-radius:10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
   @media (max-width: 870px) {
     width: 150px;
+  }
+  &:hover{
+    box-shadow: 0px 0px 10px 2px #6717CD;
   }
 `;
 export const AllPrizes = styled.div`

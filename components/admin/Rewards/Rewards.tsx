@@ -20,7 +20,6 @@ import Time from "./Rewards/Time";
 const Rewards = () => {
 
   const [place, setPlace] = useState("points");
-  console.log(place)
   return (
     <AdminContain>
       <SideBar />
@@ -29,6 +28,7 @@ const Rewards = () => {
           <Banner
             src="/images/Rewards/banner.png"
             layout="fill"
+            priority
           />
         </ImageContain>
         <TitleContain>

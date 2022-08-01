@@ -12,14 +12,15 @@ import {
   InnerProgress,
   InsideContain,
   LevelContain,
+  MainContain,
   OuterProgress,
   PointsText,
   ProgressCircle,
   ProgressContain,
   ProgressSvg,
   RewardContainer,
-  UpNarrow,
-  UpNarrow2,
+  Vector,
+  Vector2
 } from "./Rewards.styled";
 
 const Rewards = () => {
@@ -30,6 +31,7 @@ const Rewards = () => {
 
   return (
     <RewardContainer>
+
       <BannerContain>
         <Banner
           src="/images/Rewards/banner.png"
@@ -50,8 +52,8 @@ const Rewards = () => {
                   <CurrentLevel>
                     5
                   </CurrentLevel>
-                  <UpNarrow />
-                  <UpNarrow2 />
+                  <Vector />
+                  <Vector2 />
                 </LevelContain>
               </InnerProgress>
               <ProgressSvg width={responsive420 ? "96px" : "130px"} height={responsive420 ? "96px" : "130px"}>
@@ -65,11 +67,13 @@ const Rewards = () => {
           </ProgressContain>
         </InsideContain>
       </BannerContain>
-      {
-        rewards
-          ? <PointRewards setRewards={setRewards} />
-          : <TimeRewards setRewards={setRewards} />
-      }
+      <MainContain>
+        {
+          rewards
+            ? <PointRewards setRewards={setRewards} />
+            : <TimeRewards setRewards={setRewards} />
+        }
+      </MainContain>
     </RewardContainer>
   )
 }

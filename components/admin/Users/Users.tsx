@@ -22,27 +22,29 @@ const Users = () => {
             </SearchContain>
           </TitleContain>
           <Table id="Users">
-            <tr>
-              <th>Usuario</th>
-              <th>Correo Electrónico</th>
-              <th>Fecha de Creación</th>
-              <th>Cursos Suscritos</th>
-              <th>Recompensas</th>
-              <th>Visualizar</th>
-            </tr>
-            {/* TABLAS */}
-            <tr onClick={() => { setShowUser(!showUser) }}>
-              <td style={{ fontWeight: 600 }}>
-                <ProfileContain>
-                  <Profile />Mofupiyo
-                </ProfileContain>
-              </td>
-              <td >mofu@mofupiyo.com</td>
-              <td>10/05/2022</td>
-              <td >3 Activos</td>
-              <td>3,000 puntos</td>
-              <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-            </tr>
+            <tbody>
+              <tr>
+                <th>Usuario</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha de Creación</th>
+                <th>Cursos Suscritos</th>
+                <th>Recompensas</th>
+                <th>Visualizar</th>
+              </tr>
+              {/* TABLAS */}
+              <tr onClick={() => { setShowUser(!showUser) }}>
+                <td style={{ fontWeight: 600 }}>
+                  <ProfileContain>
+                    <Profile />Mofupiyo
+                  </ProfileContain>
+                </td>
+                <td >mofu@mofupiyo.com</td>
+                <td>10/05/2022</td>
+                <td >3 Activos</td>
+                <td>3,000 puntos</td>
+                <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+              </tr>
+            </tbody>
           </Table>
         </Container>
         {

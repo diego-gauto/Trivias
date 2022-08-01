@@ -4,8 +4,12 @@ export const Container = styled.div`
   padding: 20px;
   display: flex;
   gap: 40px;
-  width: 1000px;
-  overflow-x: scroll;
+  width: 90%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  ::-webkit-scrollbar{
+    display: none;
+  }
 `;
 export const ItemContain = styled.div`
   display: flex;

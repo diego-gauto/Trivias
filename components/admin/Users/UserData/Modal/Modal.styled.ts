@@ -70,8 +70,11 @@ export const Select = styled.select`
   font-family:'Montserrat',sans-serif;
   padding:10px 0 10px 20px;
   border:1px solid #6717CD;
+  cursor: pointer;
   border-radius:20px;
   outline:none;
+  -webkit-appearance: none;
+  width: 100%;
 `;
 export const ButtonContain = styled.div`
   display: flex;
@@ -136,4 +139,19 @@ export const LessonText = styled.div`
   padding-inline: 20px;
   border-radius: 10px;
   border: 1px solid white;
+`;
+export const IconContain = styled.div`
+  display: flex;
+  position: relative;
+`;
+export const CaretD = styled.i`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  background-image: url(../images/admin/Courses/caret-down.png);
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 20px;
+  pointer-events: none;
 `;

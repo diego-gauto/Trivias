@@ -61,6 +61,7 @@ export const Close = styled.i`
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
+  cursor: pointer;
 `;
 export const  Contain = styled.div`
   display: flex;

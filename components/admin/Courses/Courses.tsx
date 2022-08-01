@@ -18,7 +18,8 @@ const Courses = () => {
         <Imagecontain>
           <ImageBack
             src="/images/admin/Courses/DemoBack.png"
-            layout="fill" />
+            layout="fill"
+            priority />
           <BackgroundOverlay />
         </Imagecontain>
 

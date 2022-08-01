@@ -13,10 +13,11 @@ export const MainContain = styled.div`
 export const Container = styled.div`
   display: flex;
   padding-top: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   padding-inline: 25px;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0px -6px 20px 2px rgba(0, 0, 0, .25);
+  background-color: white;
+  box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, .2);
   @media(max-width: 1023px) {
     width: 160px;
     height: 40px;
@@ -30,9 +31,9 @@ export const Container = styled.div`
 export const OffContainer = styled.div`
   display: flex;
   padding-top: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   padding-inline: 25px;
-  cursor:pointer;
+  cursor: pointer;
   @media(max-width: 1023px) {
     width: 160px;
     height: 40px;
@@ -56,6 +57,7 @@ export const MainTitle = styled.p`
 export const RewardContainer = styled.div`
   display: flex;
   align-items:center;
+  z-index: -1;
   justify-content:center;
   position: relative;
   padding-top: 30px;
@@ -63,7 +65,7 @@ export const RewardContainer = styled.div`
   padding-inline: 40px;
   border-radius: 10px;
   gap: 3px;
-  box-shadow: 0px -3px 20px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px) {
     top: 25px;
     margin-left: 3%;

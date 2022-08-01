@@ -15,7 +15,7 @@ const Delete = ({ show, setShow }: any) => {
         </TitleContain>
         <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
         <ButtonContain>
-          <TransparentButton>Cancelar</TransparentButton>
+          <TransparentButton onClick={handleClose}>Cancelar</TransparentButton>
           <PurpleButton>Eliminar<Trash /></PurpleButton>
         </ButtonContain>
       </Container>
