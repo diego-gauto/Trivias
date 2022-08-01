@@ -21,7 +21,7 @@ const Users = () => {
               <SearchInput placeholder="Buscar un Usuario" />
             </SearchContain>
           </TitleContain>
-          <Table id="Pagos">
+          <Table id="Users">
             <tr>
               <th>Usuario</th>
               <th>Correo Electrónico</th>

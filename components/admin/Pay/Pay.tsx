@@ -13,7 +13,7 @@ const Pay = () => {
             <Title>Ventas</Title>
             <DateSelect>Semana pasada</DateSelect>
           </TitleContain>
-          <Table id="Pagos">
+          <Table id="Pay">
             <tr>
               <th>Usuario</th>
               <th>Correo Electrónico</th>
