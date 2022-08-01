@@ -1,7 +1,19 @@
-import React, { useState } from 'react'
-import { InputContain, Tab, Unselect } from '../Rewards.styled';
-import EditLevel from './Modal/EditLevel';
-import { TabContain, Container, LevelContain, LevelCircle, Level, Divider, ButtonContain, TransparentButton, ContainerLevel, Grid } from './Points.styled';
+import React, { useState } from "react";
+
+import { InputContain, Tab, Unselect } from "../Rewards.styled";
+import EditLevel from "./Modal/EditLevel";
+import {
+  ButtonContain,
+  Container,
+  ContainerLevel,
+  Divider,
+  Grid,
+  Level,
+  LevelCircle,
+  LevelContain,
+  TabContain,
+  TransparentButton,
+} from "./Points.styled";
 
 const Points = ({ setPlace }: any) => {
 

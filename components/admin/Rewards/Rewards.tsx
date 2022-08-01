@@ -1,12 +1,22 @@
-import Image from 'next/image';
-import React, { useState } from 'react'
-import SideBar from '../SideBar';
-import { AdminContain } from '../SideBar.styled';
-import Prize from './Prizes/Prize';
-import { Banner, Container, ImageContain, InputContain, PriceContain, PriceTitle, RewardContain, Tab, Title, TitleContain } from './Rewards.styled';
-import Points from './Rewards/Points';
-import Request from './Rewards/Request';
-import Time from './Rewards/Time';
+import React, { useState } from "react";
+
+import SideBar from "../SideBar";
+import { AdminContain } from "../SideBar.styled";
+import Prize from "./Prizes/Prize";
+import {
+  Banner,
+  Container,
+  ImageContain,
+  PriceContain,
+  PriceTitle,
+  RewardContain,
+  Title,
+  TitleContain,
+} from "./Rewards.styled";
+import Points from "./Rewards/Points";
+import Request from "./Rewards/Request";
+import Time from "./Rewards/Time";
+
 const Rewards = () => {
 
   const [place, setPlace] = useState("points");
