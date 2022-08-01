@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MainContain = styled.div`
   display:flex;
-  padding-inline: 30px;
   margin-top: 20px;
   @media(max-width: 1023px) {
     margin-top: -30px;

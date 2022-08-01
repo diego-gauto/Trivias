@@ -20,14 +20,14 @@ import {
   ProgressSvg,
   RewardContainer,
   Vector,
-  Vector2
+  Vector2,
 } from "./Rewards.styled";
 
 const Rewards = () => {
 
   const [rewards, setRewards] = useState(true);
-  const responsive420 = useMediaQuery({ query: "(max-width: 420px)" });
-  const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
+  const responsive560 = useMediaQuery({ query: "(max-width: 560px)" });
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   return (
     <RewardContainer>
@@ -35,8 +35,8 @@ const Rewards = () => {
       <BannerContain>
         <Banner
           src="/images/Rewards/banner.png"
-          width={responsive420 ? "550" : "1900"}
-          height={responsive420 ? "350" : "450"}
+          width={responsive560 ? "750" : "1900"}
+          height={responsive560 ? "500" : "450"}
         />
         <InsideContain>
           <BannerTitle>
@@ -56,11 +56,11 @@ const Rewards = () => {
                   <Vector2 />
                 </LevelContain>
               </InnerProgress>
-              <ProgressSvg width={responsive420 ? "96px" : "130px"} height={responsive420 ? "96px" : "130px"}>
+              <ProgressSvg width={responsive560 ? "96px" : "130px"} height={responsive560 ? "96px" : "130px"}>
                 <ProgressCircle
-                  cx={responsive420 ? "47.5" : "65"}
-                  cy={responsive420 ? "47.5" : "65"}
-                  r={responsive420 ? "42.5" : "60"}
+                  cx={responsive560 ? "47.5" : "65"}
+                  cy={responsive560 ? "47.5" : "65"}
+                  r={responsive560 ? "42.5" : "60"}
                   stroke-linecap="round" />
               </ProgressSvg>
             </OuterProgress>
