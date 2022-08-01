@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
+import { IconContain } from './CourseForm.styled';
 import Delete from './Delete/Delete';
-import { Button, Container, Contain1, EditContain, Input, InputContain, Label, Title, TitleContain, TrashIcon, InputSelect, InputBig, Contain2, Contain3, HwTitle, SlideContain, TitleSlide, ButtonContain, TransparentButton, PurpleButton } from './Edit.styled';
+import { Button, Container, Contain1, EditContain, Input, InputContain, Label, Title, TitleContain, TrashIcon, InputSelect, InputBig, Contain2, Contain3, HwTitle, SlideContain, TitleSlide, ButtonContain, TransparentButton, PurpleButton, Folder } from './Edit.styled';
 
 const Edit = () => {
 
@@ -16,13 +17,17 @@ const Edit = () => {
       </TitleContain>
       <EditContain>
         <Contain1>
+
           <InputContain>
             <Label>Título de la Lección</Label>
             <Input placeholder="Epidosio 1: Lorem Ipsum" />
           </InputContain>
           <InputContain>
             <Label>Portada de la Lección</Label>
-            <InputSelect placeholder="Seleccionar archivo" />
+            <IconContain>
+              <Folder />
+              <InputSelect placeholder="Seleccionar archivo" />
+            </IconContain>
           </InputContain>
           <Image src="/images/admin/Courses/Demo/Edit.png" width={480} height={274} />
           <InputContain>
@@ -34,7 +39,10 @@ const Edit = () => {
         <Contain2>
           <InputContain>
             <Label>Material Adicional</Label>
-            <InputSelect placeholder="Seleccionar archivo" />
+            <IconContain>
+              <Folder />
+              <InputSelect placeholder="Seleccionar archivo" />
+            </IconContain>
           </InputContain>
           <InputContain>
             <Label>Puntos Acreditados</Label>
