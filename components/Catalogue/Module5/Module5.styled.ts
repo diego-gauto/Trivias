@@ -17,15 +17,18 @@ export const Content = styled.div`
   width: 100%;
   position: absolute;
   height 430px;
-  top: 50px;
+  top: 20px;
   gap: 20px;
+  @media (max-width: 1023px) {
+    gap: 40px;
+  }
 `;
 export const ImageContain = styled.div`
   width: 100%;
   height: 550px;
   position: relative;
   @media (max-width: 1023px) {
-    height 480px;
+    height: 480px;
   }
 `;
 export const TextContainer = styled.div`
@@ -87,8 +90,8 @@ export const SpanText = styled.span`
 export const CardContain = styled.div`
   display: flex;
   padding-inline: 20px;
-
-  justify-content: space-between;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
   @media(max-width:1023px){
     width: 300px;
@@ -99,18 +102,18 @@ export const CardContain = styled.div`
 export const Cardcontent = styled.div`
   display: flex;
   flex-direction: column;
-  
+  width: 400px;
   @media(max-width:1023px){
     position: absolute;
     top: 0;
     max-width: 250px;
-  min-width: 200px;
+    min-width: 200px;
   }
 `;
 export const Cardcontent2 = styled.div`
   display: flex;
   flex-direction: column;
-  
+  width: 400px;
   @media(max-width:1023px){
     position: absolute;
     top: -20px;
@@ -121,6 +124,7 @@ export const Cardcontent2 = styled.div`
 `;
 export const Cardcontent3 = styled.div`
   display: flex;
+  width: 400px;
   flex-direction: column;
   @media(max-width:1023px){
     position: absolute;
@@ -151,7 +155,6 @@ export const ButtonContain = styled.div`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  
   font-family: 'Montserrat', sans-serif;
   background-color: #6717CD;
   padding-block: 15px;
@@ -166,7 +169,10 @@ export const PurpleButton = styled.button`
   }
   @media(max-width:1023px){
     position: absolute;
-  bottom: 20px;
+    bottom: 10px;
+    font-size: 14px;
+    padding-block: 10px;
+    padding-inline: 20px;
   }
 `;
 export const Divider = styled.p`

@@ -12,31 +12,34 @@ export const ImageContain = styled.div`
   height: 600px;
   position: relative;
   @media (max-width: 1100px) {
-    height 500px;
+    height: 500px;
   }
   @media (max-width: 850px) {
-    height 400px;
+    height: 400px;
   }
   @media (max-width: 650px) {
-    height 300px;
+    height: 300px;
   }
   @media (max-width: 450px) {
-    height 200px;
+    height: 200px;
   }
 `;
 export const TextContain = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 20px;
-  top: 60px;
+  bottom: 100px;
   left: 20px;
   gap: 10px;
   position: absolute;
-  @media (max-width: 650px) {
-    top: 40px;
+  @media (max-width: 1100px) {
+    bottom: 60px;
   }
-  @media (max-width: 424px) {
-    top: 10px;
+  @media (max-width: 650px) {
+    bottom: 40px;
+  }
+  @media (max-width: 450px) {
+    bottom: 20px;
   }
 `;
 export const ButtonContain = styled.div`
@@ -45,12 +48,11 @@ export const ButtonContain = styled.div`
   gap: 10px;
   @media (max-width: 1023px) {
     flex-direction: column;
-    max-width: 190px;
+    width: fit-content;
   }
   @media (max-width: 650px) {
     flex-direction: column;
     margin-top: 0;
-    max-width: 150px;
     gap: 5px;
   }
 `;
@@ -62,13 +64,14 @@ export const Title = styled.h1`
   @media (max-width: 1023px) {
     font-size: 24px;
   }
-  @media (max-width: 424px) {
+  @media (max-width: 650px) {
     font-size: 18px;
   }
 `;
 export const SubText = styled.p`
-  width: 50%;
+  width: 60%;
   font-size: 24px;
+  text-align: justify;
   font-family: 'Montserrat', sans-serif;
   color: white;
   margin: 0;
@@ -99,12 +102,13 @@ export const Banner = styled(Image)`
     transform:scale(1.03);
     transition:.5s ease all;
   }
-  @media (max-width: 1023px) {
+  @media (max-width: 650px) {
     font-size: 12px;
     padding-block: 8px;
     padding-inline: 15px;
   }
-  @media (max-width: 424px) {
+  @media (max-width: 450px) {
+    padding-block: 4px;
     font-size: 10px;
   }
 `;
@@ -122,12 +126,13 @@ export const TransparentButton = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
-  @media (max-width: 1023px) {
+  @media (max-width: 650px) {
     font-size: 12px;
     padding-block: 10px;
     padding-inline: 15px;
   }
-  @media (max-width: 424px) {
+  @media (max-width: 450px) {
+    padding-block: 8px;
     font-size: 10px;
   }
 `;

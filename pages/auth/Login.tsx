@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import Link from "next/link";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -180,9 +181,11 @@ const Login = () => {
             </Text3>
             <Text3>
               ¿Es tu primera vez con nosotros? &nbsp;
-              <LinkText>
-                Registrate
-              </LinkText>
+              <Link href="/auth/Register">
+                <LinkText>
+                  Registrate
+                </LinkText>
+              </Link>
             </Text3>
           </LoginBox>
           <GradientCanvas id="gradient-canvas" increasedHeight />

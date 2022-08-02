@@ -39,8 +39,8 @@ export const NavResponsive = styled.div`
   display: none ;
   align-items: center;
   width: 100%;
-  justify-content:space-between;
-  background-color:white;
+  justify-content: space-between;
+  background-color: white;
   padding-block: 10px;
   padding-inline: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -51,6 +51,11 @@ export const NavResponsive = styled.div`
   @media(max-width: 1023px) {
     display: flex;
   }
+  @media(max-width: 450px) {
+    padding-block: 5px;
+    padding-inline: 10px;
+  }
+
   @font-face{
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
@@ -71,6 +76,13 @@ export const NavTags2 = styled.div`
   @media(max-width: 1023px) {
     display: flex;
   }
+  @media(max-width: 767px) {
+    gap: 20px;
+  }
+  @media(max-width: 450px) {
+    padding-left: 20px;
+    gap: 10px;
+  }
 `;
 export const Logo = styled(Image)`
   cursor:pointer;
@@ -84,10 +96,14 @@ export const NavText = styled.a`
   margin:0;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &:hover{
-    text-decoration:underline; 
-  }
-  &:active{
+    text-decoration: none;
     font-weight: 600;
+  }
+  &::active{
+    font-weight: 600;
+  }
+  @media(max-width: 1023px){
+    font-size: 16px;
   }
 `;
 export const UserText = styled.p`
@@ -123,6 +139,12 @@ export const PurpleButton = styled.button`
   @media(max-width: 1023px) {
     padding-block: 10px;
   }
+  @media(max-width: 450px) {
+    padding-block: 8px;
+    padding-inline: 12px;
+    font-size: 14px;
+  }
+  
 `;
 export const PointsContain = styled.div`
   display: flex;

@@ -1,7 +1,8 @@
 import React from 'react'
 import SideBar from '../SideBar';
 import { AdminContain, Table } from '../SideBar.styled';
-import { PayContain, Title, TitleContain, Container, DateSelect, Visa, IconContain, MasterCard, PayPal, Profile, ProfileContain, ButtonIcon, CaretD } from './Pay.styled';
+import { PayContain, Title, TitleContain, Container, DateSelect, Visa, IconContain, MasterCard, PayPal, Profile, ProfileContain, ButtonIcon } from './Pay.styled';
+import Select from './Select/Select';
 
 const Pay = () => {
   return (
@@ -12,8 +13,7 @@ const Pay = () => {
           <TitleContain>
             <Title>Ventas</Title>
             <ButtonIcon>
-              <DateSelect>Semana pasada</DateSelect>
-              <CaretD />
+              <Select />
             </ButtonIcon>
           </TitleContain>
           <Table id="Pay">
