@@ -8,6 +8,7 @@ const Module1 = () => {
         <Banner
           src="/images/Preview/fondo1.png"
           layout="fill"
+          priority
         />
       </ImageContain>
 

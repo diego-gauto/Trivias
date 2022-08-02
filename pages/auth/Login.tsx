@@ -22,7 +22,6 @@ import {
   EyeIcon,
   Box2,
   PasswordBox,
-  AnimatedBackground,
   TextInput_2
 } from '../../screens/Login.styled'
 
