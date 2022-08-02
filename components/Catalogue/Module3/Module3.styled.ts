@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
-import {  ContinueText } from "../Module2/Module2.styled";
+
+import { ContinueText } from "../Module2/Module2.styled";
 
 export const Maincontainer = styled.div`
   display: flex;
@@ -11,7 +12,8 @@ export const CardContain = styled.div`
   display: flex;
   padding: 10px;
   gap: 20px;
-  overflow-x: auto;
+  overflow: auto;
+  float: left;
   overscroll-behavior-inline: contain;
   ::-webkit-scrollbar{
     display: none;

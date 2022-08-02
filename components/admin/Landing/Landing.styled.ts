@@ -41,7 +41,8 @@ export const EditInput = styled.input`
   font-size: 14px;
   width: 330px;
   font-family:'Montserrat',sans-serif;
-  padding: 10px;
+  padding-block: 10px;
+  padding-inline: 20px;
   border:1px solid #6717CD;
   border-radius:20px;
   :focus{
@@ -56,7 +57,7 @@ text-align: justify;
 overflow: hidden;
 resize: none;
 font-family:'Montserrat',sans-serif;
-padding: 10px;
+padding: 15px;
 border:1px solid #6717CD;
 border-radius:20px;
 :focus{

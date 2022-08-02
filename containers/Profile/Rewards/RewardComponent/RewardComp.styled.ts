@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MainContain = styled.div`
   display:flex;
-  padding-inline: 30px;
   margin-top: 20px;
   @media(max-width: 1023px) {
     margin-top: -30px;
@@ -68,11 +67,12 @@ export const RewardContainer = styled.div`
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px) {
     top: 25px;
-    margin-left: 3%;
-    margin-right: 3%;
+    //margin-left: 3%;
+    //margin-right: 3%;
+    //height: 100%;
     gap: 86px;
     justify-content: space-between;
-    overflow-x: auto;
+    overflow: auto;
   }
 `;
 export const LevelText = styled.p`
@@ -124,7 +124,7 @@ export const Divisor = styled.div`
   background-color: black;
   width: 100px;
   height: 4px;
-  @media (max-width: 870px) {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;

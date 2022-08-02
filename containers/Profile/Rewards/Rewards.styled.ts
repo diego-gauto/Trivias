@@ -149,18 +149,28 @@ export const CurrentLevel = styled.p`
   }
 `;
 export const Vector = styled.i`
-  background-image: url(../images/Rewards/VectorU.png);
+  background-image: url(../images/Rewards/VectorU.svg);
   background-repeat:no-repeat;
   height: 24px;
-  width: 42px;
+  width: 32px;
   position: absolute;
   bottom: 30px;
+  @media(max-width: 1023px) {
+    height: 10px;
+    width: 30px;
+    bottom: 20px;
+  }
 `;
 export const Vector2 = styled.i`
-  background-image: url(../images/Rewards/VectorU.png);
+  background-image: url(../images/Rewards/VectorU.svg);
   background-repeat:no-repeat;
   height: 24px;
-  width: 42px;
+  width: 32px;
   position: absolute;
   bottom: 12px;
+  @media(max-width: 1023px) {
+    height: 10px;
+    width: 30px;
+    bottom: 8px;
+  }
 `;
