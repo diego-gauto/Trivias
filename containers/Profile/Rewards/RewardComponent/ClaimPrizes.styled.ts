@@ -30,8 +30,7 @@ export const AllPrizes = styled.div`
   gap: 60px;
   @media (max-width: 870px) {
     flex-wrap: wrap;
-    margin-left:2%;
-    margin-right:2%;
+    gap: 30px;
   }
 `;
 export const PrizeContain = styled.div`
