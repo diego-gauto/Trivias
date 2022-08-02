@@ -1,41 +1,39 @@
-import React, { useState, useRef, ChangeEvent, useEffect } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import React, { useEffect, useState } from "react";
+
 import { useForm, SubmitHandler } from "react-hook-form";
-import GradientCanvas from '../../components/GradientCanvas/GradientCanvas';
-import 'react-phone-number-input/style.css'
-import PhoneInput, {
-} from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  LoginBox,
-  Title,
-  Text2,
-  Box1,
-  TextInput,
-  PurpleButton2,
-  Background,
-  AllButtons,
-  Text3,
-  LinkText,
-  EyeIcon,
-  InputPhone,
+import * as yup from "yup";
 
-  GoogleIcon,
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
+import {
+  AllButtons,
+  Background,
+  Box1,
+  Box2,
+  EyeIcon,
+  FacebookButton,
   FacebookIcon,
   GoogleButton,
-  FacebookButton,
+  GoogleIcon,
+  InputPhone,
   LineIcon,
-  Box2,
+  LinkText,
+  LoaderContain,
+  LoaderImage,
+  LoginBox,
   PasswordBox,
+  PurpleButton2,
+  Text2,
+  Text3,
+  TextInput,
   TextInput_2,
-} from '../../screens/Login.styled'
-
-import {
-  signUpWithCreds,
-  accessWithAuthProvider
-} from "../../store/actions/AuthActions"
+  Title,
+} from "../../screens/Login.styled";
+import { accessWithAuthProvider, signUpWithCreds } from "../../store/actions/AuthActions";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -263,9 +261,9 @@ const Register = () => {
       ) : (
 
         <Background>
-
-          <h1>{"Cargando..."} </h1>
-
+          <LoaderImage>
+            <LoaderContain />
+          </LoaderImage>
         </Background>
       )}
     </>

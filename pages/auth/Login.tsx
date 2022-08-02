@@ -19,6 +19,8 @@ import {
   GoogleButton,
   GoogleIcon,
   LinkText,
+  LoaderContain,
+  LoaderImage,
   LoginBox,
   PasswordBox,
   ProfilePicture,
@@ -198,9 +200,9 @@ const Login = () => {
       ) : (
 
         <Background>
-
-          <h1>{"Cargando..."} </h1>
-
+          <LoaderImage>
+            <LoaderContain />
+          </LoaderImage>
         </Background>
       )}
 
