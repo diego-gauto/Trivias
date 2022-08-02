@@ -15,7 +15,7 @@ import {
   TextContain,
   TextInput,
   Title,
-} from "./ModalForgot.styled";
+} from "../../../screens/ModalForgot.styled";
 
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
@@ -37,9 +37,6 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
 
   const {
     register,
-    control,
-    handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema)
@@ -59,7 +56,7 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
         </TextContain>
         <EmailContain>
           <Text2>
-            Ingresar correo electrónico de recuperación:
+            Ingresar correo electrónico
           </Text2>
           <TextInput
             type="text"

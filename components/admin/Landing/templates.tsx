@@ -1,0 +1,47 @@
+
+const LandingObject = () => {
+
+  return (
+    {
+      title: "",
+      text: "",
+      primaryBtn: "",
+      secondaryBtn: "",
+      heroImg: "",
+      car1: "",
+      car2: "",
+      car3: "",
+      rev1: "",
+      evRev1: "",
+      rev2: "",
+      evRev2: "",
+      rev3: "",
+      evRev3: "",
+      rev4: "",
+      evRev4: "",
+      rev5: "",
+      evRev5: "",
+      rev6: "",
+      evRev6: "",
+      rev7: "",
+      evRev7: "",
+      rev8: "",
+      evRev8: "",
+      rev9: "",
+      evRev9: "",
+      product1: "",
+      price1: "",
+      product2: "",
+      price2: "",
+      product3: "",
+      price3: "",
+      product4: "",
+      price4: "",
+      product5: "",
+      price5: "",
+      product6: "",
+      price6: ""
+    }
+  );
+}
+export default LandingObject;

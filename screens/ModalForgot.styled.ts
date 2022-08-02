@@ -1,5 +1,3 @@
-import { ModalHeader } from "react-bootstrap";
-
 import styled from "styled-components";
 
 export const ForgotContain = styled.div`
@@ -25,18 +23,18 @@ export const ForgotContain = styled.div`
     width: 93%;
   }
 `;
-export const Title = styled(ModalHeader)`
-font-family: Montserrat;
-color: #fff;
-font-style: normal;
-font-size: 36px;
-justify-content: center;
-text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-font-family: Montserrat;
-@media (max-width: 670px) {
-  font-size:25px;
-  margin-top: 5%;
-}
+export const Title = styled.div`
+  font-family: Montserrat;
+  color: #fff;
+  font-style: normal;
+  font-size: 36px;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  font-family: Montserrat;
+  @media (max-width: 670px) {
+    font-size:25px;
+    margin-top: 5%;
+  }
 `;
 export const TextContain = styled.div`
   display: flex;
