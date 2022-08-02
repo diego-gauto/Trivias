@@ -96,9 +96,10 @@ export const NavText = styled.a`
   margin:0;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &:hover{
-    text-decoration:underline; 
+    text-decoration: none;
+    font-weight: 600;
   }
-  &:active{
+  &::active{
     font-weight: 600;
   }
   @media(max-width: 1023px){

@@ -226,7 +226,7 @@ const NavBar = () => {
                   Tienda
                 </NavText>
                 <Link href="/Preview">
-                  <NavText style={{ color: `${fontColor}` }}>
+                  <NavText style={{ color: 'black' }}>
                     Catálogo
                   </NavText>
                 </Link>
