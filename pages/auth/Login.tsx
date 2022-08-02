@@ -31,6 +31,7 @@ import {
   signInWithCreds,
   accessWithAuthProvider
 } from "../../store/actions/AuthActions"
+import Link from 'next/link';
 
 const formSchema = yup.object().shape({
   email: yup
@@ -180,9 +181,11 @@ const Login = () => {
             </Text3>
             <Text3>
               ¿Es tu primera vez con nosotros? &nbsp;
-              <LinkText>
-                Registrate
-              </LinkText>
+              <Link href="/auth/Register">
+                <LinkText>
+                  Registrate
+                </LinkText>
+              </Link>
             </Text3>
           </LoginBox>
           <GradientCanvas id="gradient-canvas" increasedHeight />

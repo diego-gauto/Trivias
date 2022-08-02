@@ -65,17 +65,6 @@ export const Input = styled.input`
     outline: 1px solid #8E2DE2;
   }
 `;
-export const Select = styled.select`
-  font-size: 14px;
-  font-family:'Montserrat',sans-serif;
-  padding:10px 0 10px 20px;
-  border:1px solid #6717CD;
-  cursor: pointer;
-  border-radius:20px;
-  outline:none;
-  -webkit-appearance: none;
-  width: 100%;
-`;
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: center;

@@ -79,14 +79,3 @@ export const ButtonIcon = styled.div`
   display: flex;
   position: relative;
 `;
-export const CaretD = styled.i`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 15px;
-  background-image: url(../images/admin/Courses/caret-down.png);
-  background-repeat: no-repeat;
-  height: 24px;
-  width: 20px;
-  pointer-events: none;
-`;

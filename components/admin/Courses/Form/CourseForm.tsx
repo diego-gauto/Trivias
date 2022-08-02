@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { CourseFormContain, InputForm, InputContain, Label, Input, Select, InputBig, InputContain2, TagContain, TagTitle, TagLabel, IconContain, Folder, InputIcon, CaretD } from './CourseForm.styled';
+import CategorySelect from './Select/CategorySelect';
+import ProfessorSelect from './Select/ProfessorSelect';
 
 const CourseForm = () => {
 
@@ -22,10 +24,7 @@ const CourseForm = () => {
         <InputContain>
           <Label>Profesor(es)</Label>
           <IconContain>
-            <Select>
-              <option>Darth Vader, Grand Moff Tarkin</option>
-            </Select>
-            <CaretD />
+            <ProfessorSelect />
           </IconContain>
         </InputContain>
         <InputContain>
@@ -46,10 +45,7 @@ const CourseForm = () => {
         <InputContain>
           <Label>Categorías</Label>
           <IconContain>
-            <Select>
-              <option>Uñas de salón</option>
-            </Select>
-            <CaretD />
+            <CategorySelect />
           </IconContain>
 
         </InputContain>
