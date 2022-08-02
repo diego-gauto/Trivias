@@ -1,7 +1,22 @@
-import React, { useState } from 'react'
-import { Maincontainer, CardContain, Cardcontent, ImageContent, CardImage, Text1, Text2, Text3, Title, VideoInfo, TextContain, InsideContent, InsideText } from '../Module3/Module3.styled';
-import Modal1 from './Modal/Modal1';
-import { Viewpay } from './Module4.styled';
+import React, { useState } from "react";
+
+import {
+  Cardcontent,
+  CardContain,
+  CardImage,
+  ImageContent,
+  InsideContent,
+  InsideText,
+  Maincontainer,
+  Text1,
+  Text2,
+  Text3,
+  TextContain,
+  Title,
+  VideoInfo,
+} from "../Module3/Module3.styled";
+import Modal1 from "./Modal/Modal1";
+import { Viewpay } from "./Module4.styled";
 
 const Module4 = () => {
   const [show, setShow] = useState(false);

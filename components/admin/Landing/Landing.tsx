@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-import { LandingObject } from "../Landing/src.json";
+import LandingObject from "../Landing/templates";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import {
