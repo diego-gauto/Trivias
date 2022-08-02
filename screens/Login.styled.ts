@@ -1,6 +1,6 @@
-import PhoneInput from 'react-phone-number-input';
-import styled from 'styled-components';
+import PhoneInput from "react-phone-number-input";
 
+import styled, { keyframes } from "styled-components";
 
 export const ProfilePicture = styled.i`
   background-image: url(../images/DefaultIcon.png);
@@ -34,6 +34,7 @@ export const Background = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 90vh;
+  
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -45,6 +46,38 @@ export const Background = styled.div`
   @media (max-width: 760px) {
     padding:15px;
   }
+`;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+export const LoaderContain = styled.div`
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin: 6px;
+  border-width: 9px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #6717CD transparent transparent;
+  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none running;
+`;
+export const LoaderImage = styled.div`
+  display: flex;
+  width: 80px;
+  height: 80px;
+  background-image: url(../images/logo2.png);
+  background-size: 80px;
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const LoginBox = styled.div`
