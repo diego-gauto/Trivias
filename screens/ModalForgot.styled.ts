@@ -100,9 +100,9 @@ export const PurpleButton2 = styled.button`
 `;
 export const ButtonContain = styled.div`
   display:flex;
+  margin-top: 25px;
   justify-content:center;
   width: 100%;
-  padding: 20px;
   @media (max-width: 670px) {
     padding: 15px;
   }
