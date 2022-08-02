@@ -1,36 +1,35 @@
-import React, { useState, useRef, ChangeEvent, useEffect } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import React, { useEffect, useState } from "react";
+
 import { useForm, SubmitHandler } from "react-hook-form";
-import GradientCanvas from '../../components/GradientCanvas/GradientCanvas'
+
+import * as yup from "yup";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
 import {
-  LoginBox,
-  Title,
-  Text2,
-  Box1,
-  TextInput,
-  PurpleButton2,
-  GoogleButton,
-  FacebookButton,
-  Background,
   AllButtons,
-  Text3,
-  LinkText,
-  ProfilePicture,
-  GoogleIcon,
-  FacebookIcon,
-  EyeIcon,
+  Background,
+  Box1,
   Box2,
+  EyeIcon,
+  FacebookButton,
+  FacebookIcon,
+  GoogleButton,
+  GoogleIcon,
+  LinkText,
+  LoginBox,
   PasswordBox,
-  AnimatedBackground,
-  TextInput_2
-} from '../../screens/Login.styled'
-
-
-import {
-  signInWithCreds,
-  accessWithAuthProvider
-} from "../../store/actions/AuthActions"
+  ProfilePicture,
+  PurpleButton2,
+  Text2,
+  Text3,
+  TextInput,
+  TextInput_2,
+  Title,
+} from "../../screens/Login.styled";
+import { accessWithAuthProvider, signInWithCreds } from "../../store/actions/AuthActions";
+import ModalForgot from "./Modals/ModalForgot";
 
 const formSchema = yup.object().shape({
   email: yup
@@ -79,6 +78,7 @@ const Login = () => {
     });
   }
 
+  const [showForgot, setShowForgot] = useState(false);
 
   const handleSignUpWithAuthProvider = (authProvider: string) => {
     setIsLoading(true)
@@ -174,7 +174,7 @@ const Login = () => {
             </AllButtons>
             <Text3>
               ¿Olvidaste tu contraseña? &nbsp;
-              <LinkText>
+              <LinkText onClick={() => { setShowForgot(true) }} >
                 Clic aqui
               </LinkText>
             </Text3>
@@ -186,6 +186,10 @@ const Login = () => {
             </Text3>
           </LoginBox>
           <GradientCanvas id="gradient-canvas" increasedHeight />
+          {
+            showForgot == true &&
+            <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
+          }
         </Background >
 
       ) : (
