@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   display: flex;
-  background: white;
   width: 100%;
   justify-content:space-between;
   background-color: white;
+  position: relative;
+
   align-items:center;
   padding: 20px;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
