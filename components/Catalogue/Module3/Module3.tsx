@@ -16,6 +16,8 @@ import {
   Title,
   VideoInfo,
   ViewCourse,
+  DaysLeft,
+  Band,
 } from "./Module3.styled";
 
 const Module3 = () => {
@@ -48,13 +50,17 @@ const Module3 = () => {
       </Title>
       <CardContain id="Scroll">
         <Cardcontent>
+
           <ImageContent>
+            <Band />
+            <DaysLeft>65 días</DaysLeft>
             <CardImage
               src="/images/Preview/card3.png"
               width={400}
               height={210}
             />
             <InsideContent>
+
               <InsideText>
                 Unica Lección
               </InsideText>
@@ -80,6 +86,8 @@ const Module3 = () => {
 
         <Cardcontent>
           <ImageContent>
+            <Band />
+            <DaysLeft>71 días</DaysLeft>
             <CardImage
               src="/images/Preview/card4.png"
               width={400}
