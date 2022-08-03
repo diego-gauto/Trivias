@@ -81,8 +81,13 @@ export const TextInput = styled.input`
   ::placeholder{
     color: #adadac;
   }
+  :focus {
+    background:transparent;
+    box-shadow: 0px 0px 10px 2px #6717CD;
+    border: 2px solid white;
+  }
   @media (max-width: 670px) {
-    font-size: 12px;
+    font-size: 12px;;
   }
 `; 
 export const PurpleButton2 = styled.button`
