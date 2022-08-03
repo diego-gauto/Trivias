@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Modal1 from './Modal/Modal';
-import { CloseIcon, ColumnContain, Columns, CourseContain, Courses, FirstBox, Image1, Image2, Image3, Info, Label, LastContainer, Level, Pay1, Pay2, PayContain, ProfileContain, ProfilePic, Title, TitleBox, TitleContain, TransparentButton, UserContain } from './UserInfo.styled';
+import { CloseIcon, ColumnContain, Columns, CourseContain, Courses, FirstBox, Image1, Image2, Image3, Info, Label, LastContainer, Level, Pay1, Pay2, PayContain, ProfileContain, ProfilePic, Title, TitleBox, TitleContain, TransparentButton, UserContain } from './AllUsers.styled';
 
-const UserInfo = ({ showUser, setShowUser }: any) => {
+const AllUsers = ({ showUser, setShowUser }: any) => {
 
 
   const [show, setShow] = useState(false);
@@ -85,4 +85,4 @@ const UserInfo = ({ showUser, setShowUser }: any) => {
     </UserContain>
   )
 }
-export default UserInfo;
+export default AllUsers;

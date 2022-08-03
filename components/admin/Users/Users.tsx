@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TitleContain, Title, Container, ProfileContain, Profile } from '../Pay/Pay.styled';
 import SideBar from '../SideBar';
 import { AdminContain, Table } from '../SideBar.styled';
-import UserInfo from './UserData/UserInfo';
+import AllUsers from './UserData/AllUsers';
 import { UserContain, EditIcon, SearchContain, SearchIcon, SearchInput, UserShow } from './Users.styled';
 
 const Users = () => {
@@ -49,7 +49,7 @@ const Users = () => {
         </Container>
         {
           showUser == true &&
-          <UserInfo showUser={showUser} setShowUser={setShowUser} />
+          <AllUsers showUser={showUser} setShowUser={setShowUser} />
         }
       </UserContain>
     </AdminContain >

@@ -2,7 +2,7 @@
 
 import { Modal } from "react-bootstrap";
 
-import { CloseIcon } from "../../../Users/UserData/UserInfo.styled";
+import { CloseIcon } from "../../../Users/UserData/AllUsers";
 import {
   Button,
   ButtonContain,
