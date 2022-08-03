@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap';
-import { CloseIcon } from '../../../Users/UserData/UserInfo.styled';
+import { CloseIcon } from '../../../Users/UserData/AllUsers';
 import { ModalContain, Title, ButtonContain, TitleContain, Button, LevelContain, Level, Contain, InputContain, Label, Input, Add, AddText, AddIcon, Close } from './EditLevel.styled';
 
 const EditLevel = ({ show, setShow }: any) => {
