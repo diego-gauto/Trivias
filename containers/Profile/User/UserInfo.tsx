@@ -5,9 +5,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useAuth } from "../../../hooks/useAuth";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 const UserInfo = ({ userData }: any) => {
-  useEffect(() => {
-    console.log(userData)
-  }, [userData])
+
 
 
   const logoutFunc = () => {
@@ -18,7 +16,7 @@ const UserInfo = ({ userData }: any) => {
       console.log(error)
     });
   };
-  console.log(userData);
+
   return (
     <ProfileContainer>
       <ProfileIconContain>

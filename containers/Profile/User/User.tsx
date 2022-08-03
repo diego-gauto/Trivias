@@ -40,13 +40,6 @@ const User = () => {
     fetchDB_data()
   }, [loggedIn])
 
-  useEffect(() => {
-    console.log(userData)
-  }, [userData])
-
-
-
-
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));

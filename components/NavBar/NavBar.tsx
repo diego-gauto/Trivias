@@ -309,6 +309,7 @@ const NavBar = () => {
                     < UserImage
                       style={{
                         backgroundImage: "url(" + userData.photoURL + ")"
+                        , backgroundSize: "100%"
                       }}
                     > </UserImage>
                     :
@@ -360,6 +361,7 @@ const NavBar = () => {
                             < UserImage
                               style={{
                                 backgroundImage: "url(" + userData.photoURL + ")"
+                                , backgroundSize: "100%"
                               }}
                             > </UserImage>
                             :
@@ -434,6 +436,7 @@ const NavBar = () => {
                     < UserImage
                       style={{
                         backgroundImage: "url(" + userData.photoURL + ")"
+                        , backgroundSize: "100%"
                       }}
                     > </UserImage>
                     :
@@ -484,6 +487,7 @@ const NavBar = () => {
                             < UserImage
                               style={{
                                 backgroundImage: "url(" + userData.photoURL + ")"
+                                , backgroundSize: "100%"
                               }}
                             > </UserImage>
                             :
