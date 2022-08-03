@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
-  padding-block:20px;
   display:flex;
   @font-face{
     font-family:Montserrat;
@@ -80,28 +79,41 @@ export const RewardContain = styled.div`
 `;
 export const ProfileIconContain =  styled.div`
   display:flex;
-  justify-content:center;
+  justify-content: center;
+  align-items: center;
 `;
-export const ProfileIcon = styled.i`
-  background-image: url(../images/Ellipse.png);
-  background-repeat:no-repeat;
-  height: 200px;
+export const PictureContain = styled.div`
+  display: flex;
   width: 200px;
-  background-position: center;
+  height: 200px;
+  position: relative;
+`;
+export const ProfileIcon = styled.img`
+  background-repeat:no-repeat;
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
 `;
 export const LogOutIcon = styled.i`
   background-image: url(../images/Logout.png);
   background-repeat:no-repeat;
   height: 20px;
   width: 20px;
-  background-position: center;
 `;
 export const ArrowRight = styled.i`
   background-image: url(../images/arrowr.png);
   background-repeat:no-repeat;
   height: 16px;
   width: 20px;
-  background-position: center;
+`;
+export const Level = styled.i`
+  background-image: url(../images/nivel.png);
+  background-repeat:no-repeat;
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
 export const UserContainer = styled.div`
 

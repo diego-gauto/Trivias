@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react'
-import { ProfileContainer, ProfileIconContain, ProfileIcon, UserContainer, LabelText, LogOut, LogOutIcon, UserText } from './User.styled';
+import { ProfileContainer, ProfileIconContain, ProfileIcon, UserContainer, LabelText, LogOut, LogOutIcon, UserText, PictureContain, Level } from './User.styled';
 import { getAuth, signOut } from "firebase/auth";
 import { useAuth } from "../../../hooks/useAuth";
 
-const UserInfo = () => {
+const UserInfo = ({ userData }: any) => {
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -13,17 +13,24 @@ const UserInfo = () => {
       console.log(error)
     });
   };
+  console.log(userData);
   return (
     <ProfileContainer>
       <ProfileIconContain>
-        <ProfileIcon />
+        <PictureContain>
+          {userData && userData.photoURL ?
+            <ProfileIcon src={userData.photoURL} />
+            : <ProfileIcon />
+          }
+          <Level />
+        </PictureContain>
       </ProfileIconContain>
       <UserContainer>
         <LabelText>
           Usuario
         </LabelText>
         <UserText>
-          Mofupiyo
+          {userData.name}
         </UserText>
       </UserContainer>
       <UserContainer>
@@ -31,7 +38,7 @@ const UserInfo = () => {
           Correo electrónico
         </LabelText>
         <UserText>
-          mofu@mofu.com
+          {userData.email}
         </UserText>
       </UserContainer>
       <UserContainer>
@@ -39,7 +46,7 @@ const UserInfo = () => {
           Puntos
         </LabelText>
         <UserText>
-          1,100
+          {userData.score}
         </UserText>
       </UserContainer>
       <UserContainer>
@@ -47,7 +54,7 @@ const UserInfo = () => {
           Suscripción Actual
         </LabelText>
         <UserText>
-          Gonvar Plus
+          {userData.plan}
         </UserText>
       </UserContainer>
       <Link href="/">
