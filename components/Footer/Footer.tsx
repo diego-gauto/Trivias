@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 import React from 'react'
 import {
   BottomContainer,
@@ -15,9 +16,14 @@ import {
   RespContainer2,
   SocialContainer,
   WAIcon,
+  TextFinish,
 } from "./Footer.styled";
 
+
+
 const Footer = () => {
+
+  let { pathname } = useRouter();
   return (
     <>
       <FooterContainer>
@@ -51,6 +57,12 @@ const Footer = () => {
           </Link>
         </Column>
         <FooterIcons>
+          {
+            pathname == '/Profile' &&
+            <TextFinish>
+              Terminar Suscripción
+            </TextFinish>
+          }
           <FooterText>
             Contactanos
           </FooterText>
@@ -92,6 +104,12 @@ const Footer = () => {
             Facturación
           </FooterText>
           <FooterIcons>
+            {
+              pathname == '/Profile' &&
+              <TextFinish>
+                Terminar Suscripción
+              </TextFinish>
+            }
             <FooterText>
               Contactanos
             </FooterText>

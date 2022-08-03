@@ -98,7 +98,7 @@ export const FooterText = styled.a`
 export const FooterIcons = styled.div`
   display:flex;
   flex-direction: column;
-  gap:10px;
+  gap: 5px;
   align-items: center;
   @media(max-width: 1023px) {
     margin-top: 25px;
@@ -167,4 +167,15 @@ export const IGIcon = styled.i`
   &:hover{
     box-shadow: 0px 0px 10px 2px #6717CD;
   }
+`;
+export const TextFinish = styled.p`
+  font-size: 12px;
+  font-family: 'Nunito',sans-serif;
+  font-weight: 600;
+  color: #6717CD;
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline; 
+  }
+  margin: 0;
 `;
