@@ -411,9 +411,9 @@ const NavBar = () => {
                     Comprar{" (Temp)"}
                   </NavText>
                 </Link>
-                <Link href="/Lesson">
+                <Link href="/admin/Courses">
                   <NavText style={{ color: 'black' }}>
-                    Lesson{" (Temp)"}
+                    Cursos
                   </NavText>
                 </Link>
                 <Link href="/Preview">
