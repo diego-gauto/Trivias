@@ -6,6 +6,21 @@ export const CourseFormContain = styled.div`
   gap: 20px;
   padding: 30px;
 `;
+export const ButtonContain = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+`;
+export const Button = styled.button`
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background: #6717CD;
+  border-radius: 30px;
+  color: white;
+  border: none;
+`;
 export const InputForm = styled.div`
   display: flex;
   justify-content: space-between;

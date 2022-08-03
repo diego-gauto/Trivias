@@ -3,7 +3,7 @@ import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import {
   BackgroundOverlay,
-  Button, ButtonContain, Container, CourseContain,
+  Container, CourseContain,
   ImageBack, Imagecontain, NewText, Subtitle,
   Title
 } from './Courses.styled';
@@ -27,9 +27,7 @@ const Courses = () => {
           <NewText>Nuevo</NewText>
           <Title>Curso de Uñas Francesas</Title>
           <Subtitle>Descubre un nuevo método para tus uñas este San Valentín</Subtitle>
-          <ButtonContain>
-            <Button>Guardar Cambios</Button>
-          </ButtonContain>
+
         </Container>
         {/* Form de cursos */}
         <CourseForm />

@@ -44,7 +44,7 @@ export const Option = styled.div`
     }
   }
 `;
-export const Label = styled.label`
+export const Label2 = styled.label`
   display: flex; 
   font-size: 16px;
   gap: 5px;
@@ -54,7 +54,7 @@ export const Label = styled.label`
   font-weight: 600;
   white-space: nowrap;
 `;
-export const CaretD = styled.i`
+export const CaretD2 = styled.i`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

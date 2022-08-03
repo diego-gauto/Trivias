@@ -60,18 +60,4 @@ export const Subtitle = styled.p`
   font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
-export const ButtonContain = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-`;
-export const Button = styled.button`
-  font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-  padding-block: 15px;
-  padding-inline: 25px;
-  background: #6717CD;
-  border-radius: 30px;
-  color: white;
-  border: none;
-`;
+
