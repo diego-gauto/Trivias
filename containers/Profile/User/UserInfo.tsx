@@ -1,10 +1,15 @@
 import Link from 'next/link';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ProfileContainer, ProfileIconContain, ProfileIcon, UserContainer, LabelText, LogOut, LogOutIcon, UserText, PictureContain, Level } from './User.styled';
 import { getAuth, signOut } from "firebase/auth";
 import { useAuth } from "../../../hooks/useAuth";
-
+import { DEFAULT_USER_IMG } from "../../../constants/paths";
 const UserInfo = ({ userData }: any) => {
+  useEffect(() => {
+    console.log(userData)
+  }, [userData])
+
+
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -18,9 +23,10 @@ const UserInfo = ({ userData }: any) => {
     <ProfileContainer>
       <ProfileIconContain>
         <PictureContain>
-          {userData && userData.photoURL ?
-            <ProfileIcon src={userData.photoURL} />
-            : <ProfileIcon />
+          {userData &&
+            userData.photoURL.length > 0 ?
+            <ProfileIcon src={userData.photoURL} ></ProfileIcon>
+            : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
           }
           <Level />
         </PictureContain>

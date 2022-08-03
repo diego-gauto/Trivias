@@ -39,6 +39,14 @@ const User = () => {
   useEffect(() => {
     fetchDB_data()
   }, [loggedIn])
+
+  useEffect(() => {
+    console.log(userData)
+  }, [userData])
+
+
+
+
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -58,7 +66,10 @@ const User = () => {
   return (
     <BackgroundProfile>
       {/* FIRST BOX */}
-      <UserInfo userData={userData} />
+      {//Vista del navbar dinamico de Homepage
+        userData !== null
+          ?
+          <UserInfo userData={userData} /> : <></>}
       {/* SECOND Container */}
       <SecondBox>
         <Link href="/Screens/Landings">

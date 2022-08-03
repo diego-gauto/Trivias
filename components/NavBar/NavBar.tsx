@@ -30,6 +30,7 @@ import {
 } from "./NavBar.styled";
 import Scroll from "./scroll";
 
+import { DEFAULT_USER_IMG } from "../../constants/paths";
 const NavBar = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -312,7 +313,7 @@ const NavBar = () => {
                     > </UserImage>
                     :
                     < UserImage style={{
-                      backgroundImage: "url(../images/Navbar/userImage.png)"
+                      backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
                     }} > </UserImage>
                   }
 
@@ -363,7 +364,7 @@ const NavBar = () => {
                             > </UserImage>
                             :
                             < UserImage style={{
-                              backgroundImage: "url(../images/Navbar/userImage.png)"
+                              backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
                             }} > </UserImage>
                           }
                         </HBList>
@@ -437,7 +438,7 @@ const NavBar = () => {
                     > </UserImage>
                     :
                     < UserImage style={{
-                      backgroundImage: "url(../images/Navbar/userImage.png)"
+                      backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
                     }} > </UserImage>
                   }
                 </UserContain>
@@ -487,7 +488,7 @@ const NavBar = () => {
                             > </UserImage>
                             :
                             < UserImage style={{
-                              backgroundImage: "url(../images/Navbar/userImage.png)"
+                              backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
                             }} > </UserImage>
                           }
                         </HBList>

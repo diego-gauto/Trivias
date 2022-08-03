@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal1 from './Modal/Modal';
 import { CloseIcon, ColumnContain, Columns, CourseContain, Courses, FirstBox, Image1, Image2, Image3, Info, Label, LastContainer, Level, Pay1, Pay2, PayContain, ProfileContain, ProfilePic, Title, TitleBox, TitleContain, TransparentButton, UserContain } from './UserInfo.styled';
 
-const UserInfo = ({ setShowUser, showUser }: any) => {
+const UserInfo = ({ showUser, setShowUser }: any) => {
 
 
   const [show, setShow] = useState(false);
