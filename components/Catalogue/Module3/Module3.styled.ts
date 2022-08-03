@@ -122,3 +122,25 @@ export const ViewCourse = styled.p`
     font-size: 14px;
   }
 `;
+export const DaysLeft = styled.div`
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  font-family: 'Montserrat', sans serif;
+  transform: rotate(-40deg);
+  color: white;
+  top: 30px;
+  left: 15px;
+  z-index: 2;
+`;
+export const Band = styled.i`
+  background-image: url(../images/Band.png);
+  background-repeat:no-repeat;
+  width: 132px;
+  height: 109px;
+  cursor:pointer;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 1;
+`;

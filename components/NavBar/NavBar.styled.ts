@@ -9,6 +9,7 @@ export const NavContainer = styled.div`
   background-color:transparent;
   padding-block: 10px;
   padding-inline: 20px;
+  position: relative;
   @font-face{ 
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -162,12 +163,14 @@ export const Level = styled.i`
   background-repeat:no-repeat;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 `;
 export const UserImage = styled.i`
   background-repeat:no-repeat;
   width: 50px;
   height: 50px;
-  cursor:pointer;
+  cursor: pointer;
+  border-radius: 50%;
 `;
 export const MenuIcon = styled.i`
   background-image: url(../images/Navbar/menu.png);

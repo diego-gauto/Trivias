@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {
@@ -297,10 +296,12 @@ const NavBar = () => {
                 </Link>
 
                 <UserContain>
-                  <Level />
+                  <Link href="/Rewards">
+                    <Level />
+                  </Link>
                   <Link href="/Profile">
                     <UserText>
-                      {userData ? userData.name : "Bienvenido"}  {"(Usuario WEB)"}
+                      {userData ? userData.name : "Bienvenido"}
                     </UserText>
                   </Link>
                   {userData && userData.photoURL ?
