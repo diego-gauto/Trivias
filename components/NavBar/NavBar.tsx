@@ -167,12 +167,9 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <NavText style={{ color: `${fontColor}` }}>
-                  Tienda
-                </NavText>
-                <Link href="/Preview">
+                <Link href="/Purchase">
                   <NavText style={{ color: `${fontColor}` }}>
-                    Catálogo
+                    Tienda
                   </NavText>
                 </Link>
                 <Link href="/auth/Login">
@@ -272,30 +269,16 @@ const NavBar = () => {
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href={`/${route}`}>
+                <Link href="/Preview">
                   <NavText style={{ color: 'black' }}>
                     Inicio
                   </NavText>
                 </Link>
-                <NavText style={{ color: 'black' }}>
-                  Tienda
-                </NavText>
-                <Link href="/Preview">
-                  <NavText style={{ color: 'black' }}>
-                    Cátalogo
-                  </NavText>
-                </Link>
                 <Link href="/Purchase">
                   <NavText style={{ color: 'black' }}>
-                    Comprar{" (Temp)"}
+                    Tienda
                   </NavText>
                 </Link>
-                <Link href="/Lesson">
-                  <NavText style={{ color: 'black' }}>
-                    Lesson{" (Temp)"}
-                  </NavText>
-                </Link>
-
                 <UserContain>
                   <Link href="/Rewards">
                     <Level />
