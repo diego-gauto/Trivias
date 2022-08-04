@@ -153,31 +153,20 @@ const Purchase = () => {
                 <ContainTitle>
                   Nuevo Método de Pago
                 </ContainTitle>
-                <NewMethod>
-                  <NewMethodBox onClick={() => {
-                    setPayment(false),
-                      setCardInfo(true);
-                  }}>
-                    <NewMethodContain>
-                      <MasterCard />
-                      <VisaPay />
-                    </NewMethodContain>
-                    <PayText2>
-                      Tarjeta de Crédito / Débito
-                    </PayText2>
-                  </NewMethodBox>
-                  <NewMethodBox >
-                    <NewMethodContain>
-                      <PayPal onClick={() => {
-                        setPayment(false),
-                          setCardInfo(false);
-                      }} />
-                    </NewMethodContain>
-                    <PayText2>
-                      Cuenta de Paypal
-                    </PayText2>
-                  </NewMethodBox>
-                </NewMethod>
+
+                <NewMethodBox onClick={() => {
+                  setPayment(false),
+                    setCardInfo(true);
+                }}>
+                  <NewMethodContain>
+                    <MasterCard />
+                    <VisaPay />
+                  </NewMethodContain>
+                  <PayText2>
+                    Tarjeta de Crédito / Débito
+                  </PayText2>
+                </NewMethodBox>
+
                 {
                   cardInfo == true &&
                   <ContainerCard>

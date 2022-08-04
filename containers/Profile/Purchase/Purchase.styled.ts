@@ -49,7 +49,7 @@ export const DataPayment = styled.div`
   justify-content:center;
   align-items:center;
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px){
     display: none;
   }
@@ -149,7 +149,7 @@ export const PaymentContain = styled.div`
   padding: 20px;
   width: 100%;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const PaymentMethod = styled.div`
   display: flex;
@@ -158,7 +158,7 @@ export const PaymentMethod = styled.div`
   padding-inline: 20px;
   gap: 10px;
   border-radius: 6px;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   &:hover{
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
@@ -256,7 +256,8 @@ export const NewMethodBox = styled.div`
   padding-block:30px;
   width: 220px;
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   &:active{
     border: 1px solid black;
@@ -322,7 +323,7 @@ export const PurchaseContainer = styled.div`
   padding:20px;
   border-radius: 10px;
   width: 50%;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px){
     flex: 1 500px;
     gap: 10px;
@@ -392,7 +393,7 @@ export const Card = styled.div`
   flex-direction:column;
   justify-content:center;
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const ImageContain = styled.div`
   display: flex;
@@ -457,7 +458,7 @@ export const ContainerCard = styled.div`
   padding: 20px;
   width: 100%;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const InputText = styled.label`
   width: 100%;
