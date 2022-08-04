@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "react-phone-number-input/style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -248,11 +249,13 @@ const Register = () => {
                 Acceder con Facebook
               </FacebookButton>
             </AllButtons>
-            <Text3>
+            <Text3 >
               ¿Ya eres parte? &nbsp;
-              <LinkText>
-                Iniciar Sesion
-              </LinkText>
+              <Link href="/auth/Login">
+                <LinkText >
+                  Iniciar Sesion
+                </LinkText>
+              </Link>
             </Text3>
           </LoginBox>
           <GradientCanvas id="gradient-canvas" />
