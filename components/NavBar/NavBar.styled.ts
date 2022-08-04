@@ -69,10 +69,6 @@ export const NavTags = styled.div`
   @media(max-width: 1023px) {
     display: none;
   }
-  a{
-    display: flex;
-    text-decoration: none;
-  }
 `;
 export const NavTags2 = styled.div`
   display:none;
@@ -238,5 +234,9 @@ export const HBList = styled.li`
   cursor: pointer;
   @media(max-width: 424px){
     font-size: 16px;
+  }
+  a{
+    display: flex;
+    text-decoration: none;
   }
 `;

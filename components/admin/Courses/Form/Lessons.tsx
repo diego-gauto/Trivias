@@ -47,7 +47,7 @@ const Lessons = () => {
                   et porta. Imperdiet nullam facilisis vestibulum quis
                   gravida sed aliquet consectetur orci. Netus egestas gravida
                   mollis vitae pellentesque id nisl nunc.</EpisodeInfo>
-                <Link href="/admin/Edit">
+                <Link href="/admin/EditLesson">
                   <EditEpisode>Editar Lección</EditEpisode>
                 </Link>
               </EpisodeContain>

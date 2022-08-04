@@ -87,7 +87,7 @@ const Edit = () => {
         </Contain3>
       </EditContain>
       <ButtonContain>
-        <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
+        <Link href="/admin/Edit"><TransparentButton>Regresar</TransparentButton></Link>
         <PurpleButton>Guardar</PurpleButton>
       </ButtonContain>
       <Delete setShow={setShow} show={show} />
