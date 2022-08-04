@@ -15,8 +15,8 @@ export const BackgroundProfile = styled.div`
 export const SecondBox = styled.div`
   display:flex;
   flex-direction:column;
-  padding:20px;
-  gap:20px;
+  padding: 15px;
+  gap: 15px;
   width:100%;
 `;
 export const ThirdBox = styled.div`
@@ -30,9 +30,10 @@ export const ThirdBox = styled.div`
 export const ProfileContainer =  styled.div`
   width:40%;
   background:white;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  padding: 40px;
-  display:flex;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+  padding-inline: 40px;
+  padding-block: 40px;
+  display: flex;
   flex-direction:column;
   gap:20px;
   @media (max-width: 1023px) {
@@ -44,7 +45,7 @@ export const ProfilePayment = styled.div`
   flex-direction:column;
   width:100%;
   background:white;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   border-radius:10px;
   padding:20px;
   @media (max-width: 1023px) {
@@ -54,12 +55,12 @@ export const ProfilePayment = styled.div`
 export const ProfileData = styled.div`
   display:flex;
   flex-direction:column;
-  gap:40px;
+  gap: 20px;
   width:100%;
   background:white;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   border-radius:10px;
-  padding:20px;
+  padding: 15px;
   @media (max-width: 1023px) {
     width:100%;
   }
@@ -67,12 +68,12 @@ export const ProfileData = styled.div`
 export const RewardContain = styled.div`
   display:flex;
   flex-direction:column;
-  gap:40px;
+  gap: 15px;
   width:100%;
   background:white;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   border-radius:10px;
-  padding:20px;
+  padding: 20px;
   @media (max-width: 1023px) {
     //width:100%;
   }
@@ -154,7 +155,7 @@ export const PaymentTitle = styled.h1`
 export const PaymentBox = styled.div`
   display:flex;
   width:100%;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
   padding-block:8px;
   padding-inline:10px;
   border-radius:10px;
@@ -171,9 +172,9 @@ export const PayBox = styled.div`
   align-items:center;
 `;
 export const PayContainer = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 export const VisaIcon = styled.i`
   background-image: url(../images/Visa.png);
@@ -290,7 +291,7 @@ export const Pointbox = styled.div`
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:10px;
+  gap: 20px;
 `;
 export const Currentlvl = styled.div`
   display:flex;
@@ -301,8 +302,8 @@ export const Currentlvl = styled.div`
   font-weight: 600;
   color:white;
   background-color: #6717CD;
-  height: 50px;
-  width: 50px;
+  min-height: 50px;
+  min-width: 50px;
   border-radius: 50%;
   background-position: center;
   @media (max-width: 400px) {
@@ -320,8 +321,8 @@ export const Nextlvl = styled.div`
   color:#6717CD;
   background-color: white;
   border: 1px solid #6717CD;
-  height: 50px;
-  width: 50px;
+  min-height: 50px;
+  min-width: 50px;
   border-radius: 50%;
   background-position: center;
   @media (max-width: 400px) {
@@ -331,10 +332,9 @@ export const Nextlvl = styled.div`
 `;
 export const ProgressBar1 = styled.div`
   height: 7px;
-  background-color:#6717CD;
-  width: 40%;
-  border:1px solid #6717CD;
-  position:relative;
+  background-color: #6717CD;
+  border: 1px solid #6717CD;
+  position: relative;
 `;
 export const CompleteBar = styled.div`
   display:flex;
@@ -347,25 +347,25 @@ export const CompleteBar = styled.div`
 export const PointsBox = styled.div`
   display:flex;
   flex-direction:column;
+  align-items: center;
   position: absolute;
-  right: -16px;
-  top: -35px;
+  bottom: 10px;
+  right: 0;
+  width: 0px;
 `;
 export const PolygonDown = styled.i`
   background-image: url(../images/PolygonDown.png);
   height: 9px;
   width: 12px;
   background-repeat:no-repeat;
+  left:0;
 `;
 export const UserPoints = styled.p`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   font-size: 14px;
   font-family:'Raleway',sans-serif;
-  font-weight: 400;
   color: #0000FD;
   margin:0;
+  white-space: nowrap;
 `;
 export const RewardData = styled.div`
   display:flex;
@@ -373,6 +373,7 @@ export const RewardData = styled.div`
   @media (max-width: 1023px) {
     flex-direction:column;
     padding-inline:60px;
+    align-items: center;
   }
   @media (max-width: 850px) {
     align-items:center;
@@ -414,9 +415,9 @@ export const RewardImage = styled.div`
   background-repeat: no-repeat;
   background-color:white;
   //box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  height: 215px;
+  height: 195px;
   border-radius:10px;
-  width: 290px;
+  min-width: 200px;
 `;
 export const AllEditInputs = styled.div`
   display:flex;
@@ -435,7 +436,8 @@ export const EditText = styled.label`
 export const EditInput = styled.input`
   font-size: 14px;
   font-family:'Montserrat',sans-serif;
-  padding:10px 0 10px 20px;
+  padding-inline: 20px;
+  padding-block: 8px;
   border:1px solid #6717CD;
   border-radius:20px;
   :focus{
@@ -445,7 +447,6 @@ export const EditInput = styled.input`
 export const EditButtons = styled.div`
   display:flex;
   justify-content:space-between;
-  margin-top:auto;
   @media (max-width: 1023px) {
     flex-direction:column;
     gap:10px;
@@ -453,11 +454,11 @@ export const EditButtons = styled.div`
   }
 `;
 export const SaveButton = styled.button`
-  padding-block: 15px;
+  padding-block: 10px;
   padding-inline: 25px;
   color: white;
   font-family:'Montserrat',sans-serif;
-  font-size:16px;
+  font-size: 14px;
   border:none;
   border-radius: 30px;
   background-color: #6717CD;
@@ -474,11 +475,11 @@ export const SaveButton = styled.button`
   }
 `;
 export const SubscriptionButton = styled.button`
-  padding-block: 15px;
+  padding-block: 10px;
   padding-inline: 25px;
   color: #6717CD;
   font-family:'Montserrat',sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   border: 1px solid #6717CD;
   border-radius: 30px;
