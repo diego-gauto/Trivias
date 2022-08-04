@@ -15,6 +15,7 @@ import {
   ForgotContain,
   MessageContainer,
   PurpleButton2,
+  PurpleButtonLoader,
   Text2,
   TextContain,
   TextInput,
@@ -24,6 +25,7 @@ import {
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
   const formSchema2 = yup.object().shape({
     email: yup
@@ -58,13 +60,13 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const [email, setEmail] = useState('')
   const auth = getAuth();
 
-  let sentEmail = "";
   const triggerResetEmail = async () => {
     setIsLoading(true)
     console.log("Send recovery email to: " + email);
     await sendPasswordResetEmail(auth, email);
     console.log("Password reset email sent");
-    sentEmail = "Correo enviado con éxito";
+    setIsEmailSent(true)
+    setIsLoading(false)
   }
 
   return (
@@ -95,16 +97,25 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
               onChange={e => setEmail(e.target.value)} required
             />
             <MessageContainer>
-              {sentEmail}
+              {isEmailSent && (
+                "Correo de recuperación enviado, cheque su bandeja de spam"
+              )}
               <div className="invalid-feedback">
                 {errors.email?.message}
               </div>
             </MessageContainer>
           </EmailContain>
           <ButtonContain>
-            <PurpleButton2 onClick={triggerResetEmail} type='submit'>
-              Enviar Correo
-            </PurpleButton2>
+            {!isLoading ? (
+              <PurpleButton2 onClick={triggerResetEmail} type='submit'>
+                Enviar Correo
+              </PurpleButton2>
+            ) : (
+              <PurpleButtonLoader>
+                Enviando...
+              </PurpleButtonLoader>
+            )}
+
           </ButtonContain>
           <ButtonContain>
             <CloseButton onClick={handleClose}>
