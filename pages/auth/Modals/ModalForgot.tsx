@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import * as yup from "yup";
@@ -32,22 +32,14 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
       .string()
       .email("Debe ser un email válido")
       .required("Campo requerido"),
-    password: yup.string()
-      .required('Password is required')
-      .min(6, 'La contraseña debe tener al menos 6 carácteres'),
   });
 
   type FormValues = {
     email: string;
   };
 
-  const onSubmit: SubmitHandler<FormValues> = formData => {
+  const onSubmit = async () => {
     setIsLoading(true)
-    let signUpData = {
-      credentials: {
-        email: formData.email,
-      },
-    }
   };
 
   const {
@@ -61,7 +53,6 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const auth = getAuth();
 
   const triggerResetEmail = async () => {
-    setIsLoading(true)
     console.log("Send recovery email to: " + email);
     await sendPasswordResetEmail(auth, email);
     console.log("Password reset email sent");
