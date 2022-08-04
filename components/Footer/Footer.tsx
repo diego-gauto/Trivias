@@ -47,9 +47,11 @@ const Footer = () => {
           </FooterText>
         </Column>
         <Column>
-          <FooterText>
-            Academia
-          </FooterText>
+          <Link href="/Preview">
+            <FooterText>
+              Cursos
+            </FooterText>
+          </Link>
           <Link href="/auth/Register">
             <FooterText>
               Registrarse
@@ -84,9 +86,11 @@ const Footer = () => {
           <FooterText>
             Tienda Online
           </FooterText>
-          <FooterText>
-            Academia
-          </FooterText>
+          <Link href="/Preview">
+            <FooterText>
+              Cursos
+            </FooterText>
+          </Link>
           <Link href="/auth/Register">
             <FooterText>
               Registrarse
