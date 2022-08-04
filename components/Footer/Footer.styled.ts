@@ -134,7 +134,9 @@ export const SocialContainer = styled.div`
   display: flex;
   align-items: center;
   gap:10px;
-  
+  a{
+    display: flex;
+  }
 `;
 export const FBIcon = styled.i`
   background-image: url(../images/facebook.png);
