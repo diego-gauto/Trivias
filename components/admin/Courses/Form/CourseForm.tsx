@@ -123,7 +123,7 @@ const CourseForm = () => {
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={() => { setOpen(!open) }}>
+                <Selected onClick={() => { setOpen(!open), setOpen2(false) }}>
                   {value}
                   <CaretD2 />
                 </Selected>
@@ -180,7 +180,7 @@ const CourseForm = () => {
             <IconContain>
 
               <SelectContain key={2}>
-                <Selected onClick={() => { setOpen2(!open2) }}>
+                <Selected onClick={() => { setOpen2(!open2), setOpen(false) }}>
                   {value2}
                   <CaretD2 />
                 </Selected>
