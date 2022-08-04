@@ -69,8 +69,12 @@ const Footer = () => {
             Contactanos
           </FooterText>
           <SocialContainer>
-            <FBIcon />
-            <IGIcon />
+            <a href="https://www.facebook.com/GonvarNails">
+              <FBIcon />
+            </a>
+            <a href="https://www.instagram.com/gonvarnails/">
+              <IGIcon />
+            </a>
             <WAIcon />
           </SocialContainer>
         </FooterIcons>
@@ -118,8 +122,12 @@ const Footer = () => {
               Contactanos
             </FooterText>
             <SocialContainer>
-              <FBIcon />
-              <IGIcon />
+              <a href="https://www.facebook.com/GonvarNails">
+                <FBIcon />
+              </a>
+              <a href="https://www.instagram.com/gonvarnails/">
+                <IGIcon />
+              </a>
               <WAIcon />
             </SocialContainer>
           </FooterIcons>
