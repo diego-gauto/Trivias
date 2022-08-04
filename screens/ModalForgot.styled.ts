@@ -66,6 +66,14 @@ export const Text2 = styled.label`
     font-size: 12px;
   }
 `;
+export const MessageContainer = styled.label`
+  display: flex;
+  font-family: Montserrat;
+  height: 20px;
+  font-size: 14px;
+  padding-left: 3%;
+  color: #AAFF00;
+`;
 export const TextInput = styled.input`
   color: #fff;
   outline: none;
@@ -97,6 +105,7 @@ export const PurpleButton2 = styled.button`
   width: 50%;
   border-radius: 30px;
   border:none;
+  margin: 15px;
   &:hover{
     background-color: #5000b5;
     transform:scale(1.03);
@@ -105,7 +114,7 @@ export const PurpleButton2 = styled.button`
 `;
 export const ButtonContain = styled.div`
   display:flex;
-  margin-top: 25px;
+  //margin-top: 25px;
   justify-content:center;
   width: 100%;
   @media (max-width: 670px) {

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,6 +13,7 @@ import {
   CloseButton,
   EmailContain,
   ForgotContain,
+  MessageContainer,
   PurpleButton2,
   Text2,
   TextContain,
@@ -53,14 +55,16 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema2)
   });
+  const [email, setEmail] = useState('')
+  const auth = getAuth();
 
-  function sendMail() {
-    var link = "mailto: "
-      + "&subject=" + encodeURIComponent("Recovery email")
-      + "&body=" + encodeURIComponent('This is a test email')
-      ;
-
-    window.location.href = link;
+  let sentEmail = "";
+  const triggerResetEmail = async () => {
+    setIsLoading(true)
+    console.log("Send recovery email to: " + email);
+    await sendPasswordResetEmail(auth, email);
+    console.log("Password reset email sent");
+    sentEmail = "Correo enviado con éxito";
   }
 
   return (
@@ -83,23 +87,28 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
               Ingresar correo electrónico
             </Text2>
             <TextInput
-              type="text"
               placeholder="correo@correo.com"
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               {...register("email")}
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)} required
             />
-            <div className="invalid-feedback">
-              {errors.email?.message}
-            </div>
+            <MessageContainer>
+              {sentEmail}
+              <div className="invalid-feedback">
+                {errors.email?.message}
+              </div>
+            </MessageContainer>
           </EmailContain>
           <ButtonContain>
-            <PurpleButton2 onClick={sendMail} type='submit'>
+            <PurpleButton2 onClick={triggerResetEmail} type='submit'>
               Enviar Correo
             </PurpleButton2>
           </ButtonContain>
           <ButtonContain>
             <CloseButton onClick={handleClose}>
-              Cancelar
+              Volver
             </CloseButton>
           </ButtonContain>
         </form>

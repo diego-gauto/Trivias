@@ -1,5 +1,19 @@
-import React from 'react'
-import { Background, CardContainer, Container, ContinueText, ImageContain, PlayIcon, PlayIconS, Progress, Video, VideoContain, VideoInfo, VideoTitle } from './Module2.styled';
+
+
+import {
+  Background,
+  CardContainer,
+  Container,
+  ContinueText,
+  ImageContain,
+  PlayIcon,
+  PlayIconS,
+  Progress,
+  Video,
+  VideoContain,
+  VideoInfo,
+  VideoTitle,
+} from "./Module2.styled";
 
 const Module2 = () => {
   return (
