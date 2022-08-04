@@ -61,3 +61,8 @@ export const Subtitle = styled.p`
   margin: 0;
 `;
 
+export const ButtonContain = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+`;

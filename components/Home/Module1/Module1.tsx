@@ -7,6 +7,8 @@ import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
+import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 
 import {
   BackgroundWrapper, Left, Right, SectionA_01,
@@ -25,6 +27,20 @@ export const Module1 = (props: IModule1) => {
   const scrollToModule2 = () => {
     window.scrollTo(0, window.innerHeight * 0.75)
   }
+  const landingData = collection(db, "landingPage");
+
+  getDocs(landingData)
+    .then((snapshot) => {
+      let landing = []
+      snapshot.docs.forEach((doc) => {
+        landing.push({ ...doc.data() })
+      })
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+
+
 
   return (
     <ModuleContainer fluid>
