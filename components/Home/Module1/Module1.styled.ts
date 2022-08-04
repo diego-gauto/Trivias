@@ -7,7 +7,7 @@ height: 82.5vh;
   height: 100vh;
 }
 `;
-export const ArrowDownContainer = styled.div `
+export const ArrowDownContainer = styled.div`
 @keyframes bounce {
    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
    40% {transform: translateY(-2.5px);} 

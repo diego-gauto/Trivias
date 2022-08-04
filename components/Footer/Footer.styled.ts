@@ -145,9 +145,7 @@ export const FBIcon = styled.i`
   height:32px;
   border-radius: 50%;
   cursor:pointer;
-  &:hover{
-    box-shadow: 0px 0px 10px 2px #6717CD;
-  }
+
 `;
 export const WAIcon = styled.i`
   background-image: url(../images/whatsapp.png);
@@ -156,8 +154,7 @@ export const WAIcon = styled.i`
   height: 31px;
   cursor:pointer;
   border-radius: 50%;
-  &:hover{
-    box-shadow: 0px 0px 10px 2px #6717CD;
+
 `;
 export const IGIcon = styled.i`
   background-image: url(../images/instragram2.png);
@@ -166,9 +163,7 @@ export const IGIcon = styled.i`
   height: 31px;
   cursor:pointer;
   border-radius: 6px;
-  &:hover{
-    box-shadow: 0px 0px 10px 2px #6717CD;
-  }
+
 `;
 export const TextFinish = styled.p`
   font-size: 12px;

@@ -22,7 +22,9 @@ const Lessons = () => {
             {
               open == 1 &&
               <>
-                <Button >Añadir Lección <Add /></Button>
+                <Link href="/admin/NewLesson">
+                  <Button >Añadir Lección <Add /></Button>
+                </Link>
                 <ChevU onClick={() => { setOpen(0) }} />
               </>
             }
