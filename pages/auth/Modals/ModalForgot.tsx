@@ -1,4 +1,6 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import * as yup from "yup";
 
@@ -19,8 +21,9 @@ import {
 
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const formSchema = yup.object().shape({
+  const formSchema2 = yup.object().shape({
     email: yup
       .string()
       .email("Debe ser un email válido")
@@ -32,52 +35,74 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
 
   type FormValues = {
     email: string;
-    password: string;
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = formData => {
+    setIsLoading(true)
+    let signUpData = {
+      credentials: {
+        email: formData.email,
+      },
+    }
   };
 
   const {
     register,
+    handleSubmit,
     formState: { errors }
   } = useForm<FormValues>({
-    resolver: yupResolver(formSchema)
+    resolver: yupResolver(formSchema2)
   });
+
+  function sendMail() {
+    var link = "mailto: "
+      + "&subject=" + encodeURIComponent("Recovery email")
+      + "&body=" + encodeURIComponent('This is a test email')
+      ;
+
+    window.location.href = link;
+  }
 
   return (
     <>
       <ForgotContain>
-        <Title>
-          Reestablecer contraseña
-        </Title>
-        <TextContain>
-          <AddText>
-            Le enviaremos un correo electrónico con más instrucciones
-            sobre cómo reestablecer su contraseña
-          </AddText>
-        </TextContain>
-        <EmailContain>
-          <Text2>
-            Ingresar correo electrónico
-          </Text2>
-          <TextInput
-            type="text"
-            placeholder="correo@correo.com"
-            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            {...register("email")}
-          />
-          <div className="invalid-feedback">
-            {errors.email?.message}
-          </div>
-        </EmailContain>
-        <ButtonContain>
-          <PurpleButton2 type='submit'>
-            Enviar Correo
-          </PurpleButton2>
-        </ButtonContain>
-        <ButtonContain>
-          <CloseButton type='submit' onClick={handleClose}>
-            Cancelar
-          </CloseButton>
-        </ButtonContain>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Title>
+            Reestablecer contraseña
+          </Title>
+          <TextContain>
+            <AddText>
+              Le enviaremos un correo electrónico con más instrucciones
+              sobre cómo reestablecer su contraseña
+            </AddText>
+          </TextContain>
+          <EmailContain>
+            <Text2>
+              Ingresar correo electrónico
+            </Text2>
+            <TextInput
+              type="text"
+              placeholder="correo@correo.com"
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              {...register("email")}
+            />
+            <div className="invalid-feedback">
+              {errors.email?.message}
+            </div>
+          </EmailContain>
+          <ButtonContain>
+            <PurpleButton2 onClick={sendMail} type='submit'>
+              Enviar Correo
+            </PurpleButton2>
+          </ButtonContain>
+          <ButtonContain>
+            <CloseButton onClick={handleClose}>
+              Cancelar
+            </CloseButton>
+          </ButtonContain>
+        </form>
       </ForgotContain>
     </>
   )
