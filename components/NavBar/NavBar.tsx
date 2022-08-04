@@ -167,14 +167,11 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <NavText style={{ color: `${fontColor}` }}>
-                  Tienda
-                </NavText>
-                <Link href="/Preview">
+                <a href="Https://gonvarnails.mx">
                   <NavText style={{ color: `${fontColor}` }}>
-                    Catálogo
+                    Tienda
                   </NavText>
-                </Link>
+                </a>
                 <Link href="/auth/Login">
                   <NavText style={{ color: `${fontColor}` }}>
                     Iniciar Sesión
@@ -222,9 +219,11 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <NavText style={{ color: 'black' }}>
-                  Tienda
-                </NavText>
+                <a href="Https://gonvarnails.mx">
+                  <NavText style={{ color: 'black' }}>
+                    Tienda
+                  </NavText>
+                </a>
                 <Link href="/Preview">
                   <NavText style={{ color: 'black' }}>
                     Catálogo
@@ -272,30 +271,16 @@ const NavBar = () => {
                 <Logo src="/images/logo3.png" width={130} height={70} />
               </Link>
               <NavTags>
-                <Link href={`/${route}`}>
+                <Link href="/Preview">
                   <NavText style={{ color: 'black' }}>
                     Inicio
                   </NavText>
                 </Link>
-                <NavText style={{ color: 'black' }}>
-                  Tienda
-                </NavText>
-                <Link href="/Preview">
+                <a href="Https://gonvarnails.mx">
                   <NavText style={{ color: 'black' }}>
-                    Cátalogo
+                    Tienda
                   </NavText>
-                </Link>
-                <Link href="/Purchase">
-                  <NavText style={{ color: 'black' }}>
-                    Comprar{" (Temp)"}
-                  </NavText>
-                </Link>
-                <Link href="/Lesson">
-                  <NavText style={{ color: 'black' }}>
-                    Lesson{" (Temp)"}
-                  </NavText>
-                </Link>
-
+                </a>
                 <UserContain>
                   <Link href="/Rewards">
                     <Level />
@@ -345,9 +330,11 @@ const NavBar = () => {
                           Inicio
                         </HBList>
                       </Link>
-                      <HBList onClick={() => { setHamburger(false) }}>
-                        Tienda
-                      </HBList>
+                      <a href="Https://gonvarnails.mx">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Tienda
+                        </HBList>
+                      </a>
                       <Link href="/Preview">
                         <HBList onClick={() => { setHamburger(false) }}>
                           Catálogo
@@ -406,10 +393,11 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <NavText style={{ color: 'black' }}>
-                  Tienda
-                </NavText>
-
+                <a href="Https://gonvarnails.mx">
+                  <NavText style={{ color: 'black' }}>
+                    Tienda
+                  </NavText>
+                </a>
                 <Link href="/Purchase">
                   <NavText style={{ color: 'black' }}>
                     Comprar{" (Temp)"}
@@ -471,9 +459,11 @@ const NavBar = () => {
                           Inicio
                         </HBList>
                       </Link>
-                      <HBList onClick={() => { setHamburger(false) }}>
-                        Tienda
-                      </HBList>
+                      <a href="Https://gonvarnails.mx">
+                        <HBList onClick={() => { setHamburger(false) }}>
+                          Tienda
+                        </HBList>
+                      </a>
                       <Link href="/Preview">
                         <HBList onClick={() => { setHamburger(false) }}>
                           Catálogo

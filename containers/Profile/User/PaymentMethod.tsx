@@ -43,9 +43,9 @@ const PaymentMethod = () => {
         </PaymentBox>
         <PaymentBox>
           <PayBox>
-            <PaypalIcon />
+            <VisaIcon />
             <PaymentText>
-              Paypal Mofupiyo
+              Visa terminada en 1098
             </PaymentText>
           </PayBox>
           <DeleteContain>

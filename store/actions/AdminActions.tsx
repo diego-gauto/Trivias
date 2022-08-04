@@ -10,55 +10,73 @@ import { db } from '../../firebase/firebaseConfig';
 import firebase from "firebase/compat/app";
 import { useAuth } from "../../hooks/useAuth";
 
-export const signUpWithCreds = (signUpData: { credentials: any; }) => {
+export const createCourse = (signUpData: { data: any; }) => {
   const {
-    credentials,
+    data,
+  } = signUpData;
+
+  console.log(signUpData)
+
+  return db.collection('courses').add(data)
+    .catch((error: any) => {
+      let docCreationError = new Error(`Error creating user document: ${error}`);
+      console.error(docCreationError);
+      throw (docCreationError);
+    })
+
+}
+
+/*
+  const handleChangeResolved = async (id, value) => {
+    const doc = db.collection("newsletter").doc(id);
+    // Set the "capital" field of the city 'DC'
+    try {
+      await doc.update({
+        status: value,
+      });
+      updateState(id, "status", value);
+      console.log("Document successfully updated!");
+    } catch (error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+    }
+  };
+*/
+
+/*
+ db.collection('dynamic_copies')
+      .doc('AseQzYW4e5SuvVSU4E3r')
+      .collection('modulo3')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          setModuleInfo3({
+            ...doc.data(),
+            id: doc.id,
+          });
+        });
+      });
+*/
+
+/*CREAR COLECCIONES
+export const createCourse = (signUpData: { data: any; }) => {
+  const {
+    data,
   } = signUpData;
 
   console.log(signUpData)
   //Una vez inicializado es contextual a las llamadas de firebase
-  const auth = getAuth();
-
-  return createUserWithEmailAndPassword(auth, credentials.email,
-    credentials.password)
-    .then(async (userCredential) => {
-
-      const user = userCredential.user;
-      localStorage.setItem("username", credentials.name);
-      localStorage.setItem("email", credentials.email);
-
-
-      console.log("Provider Auth : 1")
-
-      await addDoc(collection(db, "users"), {
-        uid: user?.uid,
-        name: credentials.name,
-        email: credentials.email,
-        photoURL: "",
-        provider: "Webpage",
-        phoneNumber: credentials.phoneInput,
-        role: "user", //user, userAdmin, professor
-        plan: "free", //gonvarPlus
-        score: 0,
-
-
-      }).then(() => {
-
-
-        console.log("Provider Auth : 2")
-
-      }).catch((error: any) => {
-        let docCreationError = new Error(`Error creating user document: ${error}`);
-        console.error(docCreationError);
-        throw (docCreationError);
-      })
-    }).catch((error: any) => {
-      firebase.auth().signOut();
-      console.error(error);
-      throw error;
+  
+  return db.collection('users').doc(data.uid)
+    .collection('courses').add(signUpData)
+    .catch((error: any) => {
+      let docCreationError = new Error(`Error creating user document: ${error}`);
+      console.error(docCreationError);
+      throw (docCreationError);
     })
-
 }
+*/
+
 export const signInWithCreds = (signUpData: { credentials: any; }) => {
   const {
     credentials,

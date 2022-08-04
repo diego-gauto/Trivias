@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap';
-import { CloseIcon } from '../UserInfo.styled';
+import { CloseIcon } from '../AllUsers.styled';
 import { ButtonContain, Card, CardContain, CardImage, CardSubTitle, CardTitle, CaretD, Container, Data, IconContain, ImageContain, Info, Input, InputContain, Label, LessonText, MainCard, PurpleButton, Text1, Text2, Title, TitleContain } from './Modal.styled';
 import Select from './Select/Select';
 

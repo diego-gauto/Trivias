@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import { CloseIcon } from '../../../Users/UserData/UserInfo.styled';
+import { CloseIcon } from '../../../Users/UserData/AllUsers.styled';
+
 import { Button, ButtonContain, Folder, IconContain, Input, Input2, InputBig, InputContain, Label, ModalContain, Title, TitleContain } from './Modal.styled';
 
 const Modal2 = ({ show, setShow }: any) => {

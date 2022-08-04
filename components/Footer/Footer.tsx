@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 import React from 'react'
 import {
   BottomContainer,
@@ -15,9 +16,14 @@ import {
   RespContainer2,
   SocialContainer,
   WAIcon,
+  TextFinish,
 } from "./Footer.styled";
 
+
+
 const Footer = () => {
+
+  let { pathname } = useRouter();
   return (
     <>
       <FooterContainer>
@@ -41,9 +47,11 @@ const Footer = () => {
           </FooterText>
         </Column>
         <Column>
-          <FooterText>
-            Academia
-          </FooterText>
+          <Link href="/Preview">
+            <FooterText>
+              Cursos
+            </FooterText>
+          </Link>
           <Link href="/auth/Register">
             <FooterText>
               Registrarse
@@ -51,12 +59,22 @@ const Footer = () => {
           </Link>
         </Column>
         <FooterIcons>
+          {
+            pathname == '/Profile' &&
+            <TextFinish>
+              Terminar Suscripción
+            </TextFinish>
+          }
           <FooterText>
             Contactanos
           </FooterText>
           <SocialContainer>
-            <FBIcon />
-            <IGIcon />
+            <a href="https://www.facebook.com/GonvarNails">
+              <FBIcon />
+            </a>
+            <a href="https://www.instagram.com/gonvarnails/">
+              <IGIcon />
+            </a>
             <WAIcon />
           </SocialContainer>
         </FooterIcons>
@@ -72,9 +90,11 @@ const Footer = () => {
           <FooterText>
             Tienda Online
           </FooterText>
-          <FooterText>
-            Academia
-          </FooterText>
+          <Link href="/Preview">
+            <FooterText>
+              Cursos
+            </FooterText>
+          </Link>
           <Link href="/auth/Register">
             <FooterText>
               Registrarse
@@ -92,12 +112,22 @@ const Footer = () => {
             Facturación
           </FooterText>
           <FooterIcons>
+            {
+              pathname == '/Profile' &&
+              <TextFinish>
+                Terminar Suscripción
+              </TextFinish>
+            }
             <FooterText>
               Contactanos
             </FooterText>
             <SocialContainer>
-              <FBIcon />
-              <IGIcon />
+              <a href="https://www.facebook.com/GonvarNails">
+                <FBIcon />
+              </a>
+              <a href="https://www.instagram.com/gonvarnails/">
+                <IGIcon />
+              </a>
               <WAIcon />
             </SocialContainer>
           </FooterIcons>
