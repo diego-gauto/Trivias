@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const ForgotContain = styled.div`
   position: absolute;
@@ -66,6 +66,14 @@ export const Text2 = styled.label`
     font-size: 12px;
   }
 `;
+export const MessageContainer = styled.label`
+  display: flex;
+  font-family: Montserrat;
+  height: 20px;
+  font-size: 13px;
+  padding-left: 3%;
+  color: #AAFF00;
+`;
 export const TextInput = styled.input`
   color: #fff;
   outline: none;
@@ -97,15 +105,40 @@ export const PurpleButton2 = styled.button`
   width: 50%;
   border-radius: 30px;
   border:none;
+  margin: 15px;
   &:hover{
     background-color: #5000b5;
     transform:scale(1.03);
     transition:.5s ease all;
   }
 `;
+const scale = keyframes`
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.03);
+    background-color:  #5000b5;
+  }
+`;
+export const PurpleButtonLoader = styled.div`
+display: flex;
+font-family: Montserrat;
+background-color: #6717CD;
+color: #fff;
+height: 50px;
+width: 50%;
+border-radius: 30px;
+border:none;
+margin: 15px;
+align-items: center;
+justify-content: center;
+animation: ${scale} .7s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none running;
+`;
 export const ButtonContain = styled.div`
   display:flex;
-  margin-top: 25px;
+  //margin-top: 25px;
   justify-content:center;
   width: 100%;
   @media (max-width: 670px) {
