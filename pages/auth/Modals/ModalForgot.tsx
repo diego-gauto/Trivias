@@ -108,7 +108,7 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
                 "Correo de recuperación enviado, cheque su bandeja de spam"
               )}
               {resetMessage == 2 && (
-                <MessageContainer style={{ color: "#dc3545" }}>Correo no encontrado</MessageContainer>
+                <MessageContainer style={{ fontSize: "15px", fontWeight: "bold", color: "#dc3545" }}>Correo no encontrado</MessageContainer>
               )}
               <div className="invalid-feedback">
                 {errors.email?.message}
@@ -117,7 +117,7 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
           </EmailContain>
           <ButtonContain>
             {!isLoading ? (
-              <PurpleButton2 /*onClick={triggerResetEmail}*/ type='submit'>
+              <PurpleButton2 type='submit'>
                 Enviar Correo
               </PurpleButton2>
             ) : (
