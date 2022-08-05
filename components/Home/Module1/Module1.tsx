@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import Img1 from "./MediaSources/Icon01.png"
 import Img2 from "./MediaSources/Icon02.png"
@@ -7,6 +7,8 @@ import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
+import { collection, doc, setDoc, getDocs, onSnapshot, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 
 import {
   BackgroundWrapper, Left, Right, SectionA_01,
@@ -25,6 +27,23 @@ export const Module1 = (props: IModule1) => {
   const scrollToModule2 = () => {
     window.scrollTo(0, window.innerHeight * 0.75)
   }
+
+  // onSnapshot(landingData, (snapshot) => {
+  //   let landing = []
+  //   snapshot.docs.forEach((doc) => {
+  //     landing.push({ ...doc.data() })
+  //   })
+  // })
+  // const landingRef: any = doc(db, 'landingPage', 'heroSection')
+  // const [landInfo, setLandInfo] = useState([]);
+
+  // useEffect(() => {
+  //   const getLand = async () => {
+  //     const data: any = await getDocs(landingRef);
+  //     setLandInfo(data.docs.map((doc: any) => ({ ...doc.data() })))
+  //   };
+  //   getLand();
+  // }, []);
 
   return (
     <ModuleContainer fluid>

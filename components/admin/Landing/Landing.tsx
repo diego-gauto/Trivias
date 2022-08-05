@@ -1,3 +1,4 @@
+import { addDoc } from "firebase/firestore";
 import React, { useState } from "react";
 
 import LandingObject from "../Landing/templates";
@@ -25,6 +26,12 @@ import {
 } from "./Landing.styled";
 
 const Landing = () => {
+
+  // const addLandingForm = document.querySelector()
+  // addLandingForm.addEventListener('submit', (e)=>{
+  //   e.preventDefault()
+  //   addDoc()
+  // })
 
   const [showTab, setShowTab] = useState(1);
   const [data, setData] = useState(LandingObject);

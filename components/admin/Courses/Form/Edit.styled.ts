@@ -152,6 +152,9 @@ export const PurpleButton = styled.button`
   padding-inline: 30px;
   border-radius: 100px;
   border: none;
+  &:hover{
+    background: #5b02cc;
+  }
 `;
 export const Folder = styled.i`
   position: absolute;
