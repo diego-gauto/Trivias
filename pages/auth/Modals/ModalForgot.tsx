@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import firebase from "firebase/compat/app";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,6 +26,7 @@ import {
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [resetMessage, setResetMessage] = useState(0);
   const [isEmailSent, setIsEmailSent] = useState(false);
 
   const formSchema2 = yup.object().shape({
@@ -37,9 +39,21 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   type FormValues = {
     email: string;
   };
-
+  var auth = firebase.auth();
   const onSubmit = async () => {
     setIsLoading(true)
+    auth.sendPasswordResetEmail(email)
+      .then(function () {
+        console.log("Password reset email sent");
+        setResetMessage(1)
+        //setIsEmailSent(true)
+        setIsLoading(false)
+      })
+      .catch(function (error) {
+        console.log("Email not found");
+        setIsLoading(false)
+        setResetMessage(2)
+      });
   };
 
   const {
@@ -50,15 +64,14 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
     resolver: yupResolver(formSchema2)
   });
   const [email, setEmail] = useState('')
-  const auth = getAuth();
-
-  const triggerResetEmail = async () => {
-    console.log("Send recovery email to: " + email);
-    await sendPasswordResetEmail(auth, email);
-    console.log("Password reset email sent");
-    setIsEmailSent(true)
-    setIsLoading(false)
-  }
+  //const auth = getAuth();  
+  //const triggerResetEmail = async () => {
+  //console.log("Send recovery email to: " + email);
+  // await sendPasswordResetEmail(auth, email);
+  //console.log("Password reset email sent");
+  //setIsEmailSent(true)
+  //setIsLoading(false)
+  //}
 
   return (
     <>
@@ -88,8 +101,14 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
               onChange={e => setEmail(e.target.value)} required
             />
             <MessageContainer>
-              {isEmailSent && (
+              {resetMessage == 0 && (
+                ""
+              )}
+              {resetMessage == 1 && (
                 "Correo de recuperación enviado, cheque su bandeja de spam"
+              )}
+              {resetMessage == 2 && (
+                <MessageContainer style={{ color: "#dc3545" }}>Correo no encontrado</MessageContainer>
               )}
               <div className="invalid-feedback">
                 {errors.email?.message}
@@ -98,7 +117,7 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
           </EmailContain>
           <ButtonContain>
             {!isLoading ? (
-              <PurpleButton2 onClick={triggerResetEmail} type='submit'>
+              <PurpleButton2 /*onClick={triggerResetEmail}*/ type='submit'>
                 Enviar Correo
               </PurpleButton2>
             ) : (
