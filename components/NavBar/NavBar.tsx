@@ -167,11 +167,9 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <a href="Https://gonvarnails.mx">
-                  <NavText style={{ color: `${fontColor}` }}>
-                    Tienda
-                  </NavText>
-                </a>
+                <NavText style={{ color: `${fontColor}` }} href="Https://gonvarnails.mx">
+                  Tienda
+                </NavText>
                 <Link href="/auth/Login">
                   <NavText style={{ color: `${fontColor}` }}>
                     Iniciar Sesión
@@ -219,11 +217,11 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <a href="Https://gonvarnails.mx">
-                  <NavText style={{ color: 'black' }}>
-                    Tienda
-                  </NavText>
-                </a>
+
+                <NavText style={{ color: 'black' }} href="Https://gonvarnails.mx">
+                  Tienda
+                </NavText>
+
                 <Link href="/Preview">
                   <NavText style={{ color: 'black' }}>
                     Catálogo
@@ -276,11 +274,9 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <a href="Https://gonvarnails.mx">
-                  <NavText style={{ color: 'black' }}>
-                    Tienda
-                  </NavText>
-                </a>
+                <NavText style={{ color: 'black' }} href="Https://gonvarnails.mx">
+                  Tienda
+                </NavText>
                 <UserContain>
                   <Link href="/Rewards">
                     <Level />
@@ -331,7 +327,7 @@ const NavBar = () => {
                         </HBList>
                       </Link>
                       <a href="Https://gonvarnails.mx">
-                        <HBList onClick={() => { setHamburger(false) }}>
+                        <HBList onClick={() => { setHamburger(false) }} >
                           Tienda
                         </HBList>
                       </a>
@@ -393,11 +389,11 @@ const NavBar = () => {
                     Inicio
                   </NavText>
                 </Link>
-                <a href="Https://gonvarnails.mx">
-                  <NavText style={{ color: 'black' }}>
-                    Tienda
-                  </NavText>
-                </a>
+
+                <NavText style={{ color: 'black' }} href="Https://gonvarnails.mx">
+                  Tienda
+                </NavText>
+
                 <Link href="/Purchase">
                   <NavText style={{ color: 'black' }}>
                     Comprar{" (Temp)"}

@@ -1,10 +1,10 @@
 import React from 'react'
-import Courses from '../../../components/admin/Courses/Courses';
+import CourseMain from '../../../components/admin/Courses/CourseMain';
 import { MainContain } from '../../../screens/Styles.styled';
 const CoursesView = () => {
   return (
     <MainContain>
-      <Courses />
+      <CourseMain />
     </MainContain>
   )
 }

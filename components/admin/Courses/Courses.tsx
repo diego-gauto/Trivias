@@ -1,8 +1,11 @@
+import Link from 'next/link';
 import React, { useState } from 'react'
 import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
+import { PurpleButton } from './AllCourses.styled';
 import {
   BackgroundOverlay,
+  ButtonContain,
   Container, CourseContain,
   ImageBack, Imagecontain, NewText, Subtitle,
   Title
@@ -33,6 +36,11 @@ const Courses = () => {
         <CourseForm />
         {/* Lista de lecciones */}
         <Lessons />
+        <ButtonContain>
+          <Link href="/admin/Courses">
+            <PurpleButton>Regresar</PurpleButton>
+          </Link>
+        </ButtonContain>
       </CourseContain>
     </AdminContain>
   )
