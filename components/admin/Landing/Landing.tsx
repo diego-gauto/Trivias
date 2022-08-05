@@ -28,7 +28,7 @@ import {
 const Landing = () => {
 
   // const addLandingForm = document.querySelector()
-  // addLangingForm.addEventListener('submit', (e)=>{
+  // addLandingForm.addEventListener('submit', (e)=>{
   //   e.preventDefault()
   //   addDoc()
   // })
