@@ -1,10 +1,13 @@
 
+import { useEffect, useState } from "react";
+
 import { useMediaQuery } from "react-responsive";
+
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import Link from "next/link";
 
+import { db } from "../../../firebase/firebaseConfig";
+import { useAuth } from "../../../hooks/useAuth";
 import {
   BackgroundProfile,
   LogOut,
@@ -16,7 +19,6 @@ import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
-import { useEffect, useState } from "react";
 
 const User = () => {
   const responsive470 = useMediaQuery({ query: "(max-width: 870px)" });

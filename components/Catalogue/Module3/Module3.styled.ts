@@ -24,6 +24,7 @@ export const CardImage = styled(Image)`
 export const Title = styled(ContinueText)`
   @media( max-width: 1023px){
     font-size: 24px;
+    margin-left: 10px;
   }
 `;
 export const Cardcontent = styled.div`

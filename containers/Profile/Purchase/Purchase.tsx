@@ -1,19 +1,56 @@
-import Image from 'next/image';
-import React, { useState } from 'react'
-import ModalPurchase1 from './Modal1/ModalPurchase1';
+import React, { useState } from "react";
+
+import ModalPurchase1 from "./Modal1/ModalPurchase1";
 import {
-  AlertIcon, BotContainer, ButtonContain, CirclePosition, Container, ContainerCard,
-  ContainTitle, CourseInfo, DataPayment, DataPaymentContain, Divider,
-  Division, Division2, InfoCard, Input, InputContain, InputText, MasterCard,
-  NewMethod, NewMethodBox, NewMethodContain, PastCircle, PastText, PayBox, PaymentContain,
-  PaymentMethod, PayPal, PaypalIcon, PayText, PayText2, ProcessCircle,
-  ProcessText, PurchaseContain, PurchaseData,
-  PurchaseText, PurpleButton, SubContainer, SubContainer2, Text, Text2, Text3,
+  AlertIcon,
+  BotContainer,
+  ButtonContain,
+  CirclePosition,
+  Container,
+  ContainerCard,
+  ContainTitle,
+  CourseInfo,
+  DataPayment,
+  DataPaymentContain,
+  Divider,
+  Division,
+  Division2,
+  InfoCard,
+  Input,
+  InputContain,
+  InputText,
+  MasterCard,
+  NewMethodBox,
+  NewMethodBox2,
+  NewMethodContain,
+  PastCircle,
+  PastText,
+  PaymentContain,
+  PaymentMethod,
+  PayBox,
+  PayText,
+  PayText2,
+  ProcessCircle,
+  ProcessText,
+  PurchaseContain,
+  PurchaseData,
+  PurchaseText,
+  PurpleButton,
+  PurpleBuyButton,
+  SubContainer,
+  SubContainer2,
+  Text,
+  Text2,
+  Text3,
   TextPosition,
-  Title, TransparentButton, VisaIcon, VisaIconResp, VisaPay
-} from './Purchase.styled';
-import PurchaseComplete from './PurchaseComplete';
-import PurchaseDetails from './PurchaseDetails';
+  Title,
+  TransparentButton,
+  VisaIcon,
+  VisaIconResp,
+  VisaPay,
+} from "./Purchase.styled";
+import PurchaseComplete from "./PurchaseComplete";
+import PurchaseDetails from "./PurchaseDetails";
 
 const Purchase = () => {
 
@@ -169,37 +206,43 @@ const Purchase = () => {
 
                 {
                   cardInfo == true &&
-                  <ContainerCard>
-                    <InputText>
-                      Número de la Tarjeta
-                      <Input placeholder="XXXX XXXX XXXX XXXX" />
-                    </InputText>
-                    <InputText>
-                      Nombre
-                      <Input placeholder="Nombre del Propietario" />
-                    </InputText>
-                    <InputContain>
+                  <>
+                    <NewMethodBox2 onClick={() => {
+                      setPayment(true),
+                        setCardInfo(false);
+                    }}></NewMethodBox2>
+                    <ContainerCard>
                       <InputText>
-                        Fecha de Expiración
-                        <Input placeholder="MM-YYYY" />
+                        Número de la Tarjeta
+                        <Input placeholder="XXXX XXXX XXXX XXXX" />
                       </InputText>
                       <InputText>
-                        CVV
-                        <Input placeholder="XXX" />
+                        Nombre
+                        <Input placeholder="Nombre del Propietario" />
                       </InputText>
-                    </InputContain>
-                    <BotContainer>
-                      <Text>
-                        <AlertIcon />
-                        ¿Cómo protegemos tu compra?
-                      </Text>
-                      <Text2>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Felis, velit velit, mattis scelerisque diam
-                        scelerisque vitae.
-                      </Text2>
-                    </BotContainer>
-                  </ContainerCard>
+                      <InputContain>
+                        <InputText>
+                          Fecha de Expiración
+                          <Input placeholder="MM-YYYY" />
+                        </InputText>
+                        <InputText>
+                          CVV
+                          <Input placeholder="XXX" />
+                        </InputText>
+                      </InputContain>
+                      <BotContainer>
+                        <Text>
+                          <AlertIcon />
+                          ¿Cómo protegemos tu compra?
+                        </Text>
+                        <Text2>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Felis, velit velit, mattis scelerisque diam
+                          scelerisque vitae.
+                        </Text2>
+                      </BotContainer>
+                    </ContainerCard>
+                  </>
                 }
                 <ButtonContain >
                   <TransparentButton onClick={handleShow}>
@@ -293,9 +336,9 @@ const Purchase = () => {
                   <TransparentButton onClick={Return}>
                     Regresar
                   </TransparentButton>
-                  <PurpleButton onClick={FinishPayment}>
+                  <PurpleBuyButton onClick={FinishPayment}>
                     Proceder con Compra
-                  </PurpleButton>
+                  </PurpleBuyButton>
                 </ButtonContain>
               </SubContainer2>
               <PurchaseDetails />

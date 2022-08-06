@@ -140,8 +140,9 @@ export const LogOut = styled.p`
   color: #8E2DE2;
   margin: auto auto 0 auto;
   cursor: pointer;
- @media (max-width: 850px) {
+ @media (max-width: 1023px) {
   margin-right:6px;
+  padding-top: 5%;
   }
 `;
 export const PaymentTitle = styled.h1`

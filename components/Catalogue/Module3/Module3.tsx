@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 import Modal1 from "./Modal/Modal1";
 import {
+  Band,
   Cardcontent,
   CardContain,
   CardImage,
+  DaysLeft,
   ImageContent,
   InsideContent,
   InsideText,
@@ -16,8 +18,6 @@ import {
   Title,
   VideoInfo,
   ViewCourse,
-  DaysLeft,
-  Band,
 } from "./Module3.styled";
 
 const Module3 = () => {
