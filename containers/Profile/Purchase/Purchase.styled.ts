@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import Image from "next/image";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   display:flex;
@@ -268,6 +268,19 @@ export const NewMethodBox = styled.div`
   @media(max-width: 500px){
     width: 50%;
     padding-block: 18px;
+    margin-left: 25%;
+  }
+`;
+export const NewMethodBox2 = styled.div`
+  
+  @media(max-width: 500px){
+    display: visible;
+    top: 40%;
+    height: 120px;
+    position: absolute;
+    left: 27.5%;
+    width: 45%;
+    //z-index:;
   }
 `;
 export const ButtonContain = styled.div`
@@ -313,6 +326,43 @@ export const PurpleButton = styled.button`
     font-size: 14px;
     padding-block: 10px;
     padding-inline: 15px;
+  }
+`;
+const glow = keyframes`
+  0% {
+    background-position: 0% 50%;
+    transform: scale(1);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: scale(1.05);
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
+export const PurpleBuyButton = styled.button`
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;
+  font-weight: 600;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background-color: #6717CD;
+  color: #fff;
+  border-radius: 30px;
+  border:none;
+  &:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+  @media(max-width: 1023px){
+    font-size: 14px;
+    padding-block: 10px;
+    padding-inline: 15px;
+    background: linear-gradient(135deg, #8E2DE2 0%, #6c4b91 50%, #4A00E0 100%);
+    background-size: 200% 100%;
+    animation: ${glow} 3s ease infinite ;
   }
 `;
 export const PurchaseContainer = styled.div`

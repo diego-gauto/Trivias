@@ -63,7 +63,7 @@ export const Text2 = styled.label`
   color: #fff;
   opacity: .8;
   @media (max-width: 670px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 export const MessageContainer = styled.label`
@@ -73,6 +73,10 @@ export const MessageContainer = styled.label`
   font-size: 13px;
   padding-left: 3%;
   color: #AAFF00;
+  @media (max-width: 670px) {
+    font-size: 12px;
+    height: 25px;
+  }
 `;
 export const TextInput = styled.input`
   color: #fff;
@@ -142,7 +146,7 @@ export const ButtonContain = styled.div`
   justify-content:center;
   width: 100%;
   @media (max-width: 670px) {
-    padding: 15px;
+    padding: 0px;
   }
 `;
 export const CloseButton = styled.button`
@@ -156,5 +160,8 @@ export const CloseButton = styled.button`
     background-color: #db2c1d;
     transform:scale(1.03);
     transition:.5s ease all;
+  }
+  @media (max-width: 670px) {
+    margin-bottom: 20px;
   }
 `;

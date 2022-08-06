@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styled from "styled-components";
 
 export const PreviewContain = styled.div`
@@ -25,6 +24,6 @@ export const ModuleContain = styled.div`
   gap: 40px;
   @media( max-width: 1023px){
     gap: 20px;
-    padding-inline: 10px;
+    padding-inline: 0px;
   }
 `;
