@@ -7,7 +7,7 @@ import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
-import { collection, doc, setDoc, getDocs, onSnapshot, getDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, onSnapshot, getDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 
 import {
@@ -21,29 +21,42 @@ import {
   RightImageElement, SectionA_01TextWrapper, ArrowDownIcon,
   ArrowDownContainer, ModuleContainer,
 } from "./Module1.styled";
+import { AnyObject } from "yup/lib/types";
+import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
 
 
-export const Module1 = (props: IModule1) => {
+export const Module1 = (props: any) => {
   const scrollToModule2 = () => {
     window.scrollTo(0, window.innerHeight * 0.75)
   }
+  const [landing, setLanding] = useState<any>()
+  const [loading, setLoading] = useState(true);
 
-  // onSnapshot(landingData, (snapshot) => {
-  //   let landing = []
-  //   snapshot.docs.forEach((doc) => {
-  //     landing.push({ ...doc.data() })
-  //   })
-  // })
-  // const landingRef: any = doc(db, 'landingPage', 'heroSection')
-  // const [landInfo, setLandInfo] = useState([]);
 
-  // useEffect(() => {
-  //   const getLand = async () => {
-  //     const data: any = await getDocs(landingRef);
-  //     setLandInfo(data.docs.map((doc: any) => ({ ...doc.data() })))
-  //   };
-  //   getLand();
-  // }, []);
+  const getHeroSection = async () => {
+    const heroSectionRef = doc(db, "landingPage", "heroSection")
+    const heroSectionDoc = await getDoc(heroSectionRef)
+    if (heroSectionDoc.exists()) {
+      console.log(heroSectionDoc.data())
+      setLanding(heroSectionDoc.data())
+      setLoading(false)
+    }
+  }
+  useEffect(() => {
+    getHeroSection();
+  }, []);
+
+  console.log('43')
+
+  if (loading) {
+    return (
+      <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
 
   return (
     <ModuleContainer fluid>
@@ -55,15 +68,14 @@ export const Module1 = (props: IModule1) => {
           <LeftWrapper>
 
             <Left>
-
               <SectionA_01>
                 <Row>
-                  <SectionA_01TextWrapper className="ms-0"> <SectionA_01Text01>APRENDE A APLICAR UÑAS </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></SectionA_01TextWrapper>
+                  <SectionA_01TextWrapper className="ms-0"> <SectionA_01Text01>{landing.tituloInicial} </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></SectionA_01TextWrapper>
                 </Row>
               </SectionA_01>
               <SectionA_02>
                 <Row>
-                  <p> <SectionA_02Text01>Descubre tu verdadero potencial a través nuestros <SectionA_02Text02>entrenamientos personalizados</SectionA_02Text02>
+                  <p> <SectionA_02Text01>{landing.parrafoInicial} <SectionA_02Text02>entrenamientos personalizados</SectionA_02Text02>
                     <br />
                     <br />
                     En Gonvar descubrirás la manera más fácil, rápida y divertida de convertirte en un <SectionA_02Text02>aplicador profesional. </SectionA_02Text02>
