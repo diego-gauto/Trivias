@@ -27,7 +27,7 @@ export const SecondBox = styled.div`
 export const ThirdBox = styled.div`
   display:flex;
   width:100%;
-  gap:20px;
+  gap: 10px;
   @media (max-width: 1023px) {
     flex-wrap:wrap;
   }
