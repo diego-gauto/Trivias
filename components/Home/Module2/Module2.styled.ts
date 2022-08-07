@@ -61,7 +61,7 @@ bottom: 0;
 export const LeftImage = styled.div  `
 display: flex;
 width: 95%;
-align-items: flex-end;
+align-items: flex-start;
 justify-content: flex-start;
 margin-left: 15px;
 @media only screen and (max-width: 1024px) {
@@ -84,7 +84,8 @@ export const SectionCenteredBackground = styled(Row)  `
 padding-top: 30px;
 display: flex;
 align-items: flex-start;
-height: 100%;
+
+height: 500px;
 @media only screen and (max-width: 1024px) {
   height: auto;
   padding-top: 0;
