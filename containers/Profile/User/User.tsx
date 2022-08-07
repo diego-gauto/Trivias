@@ -21,7 +21,7 @@ import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 
 const User = () => {
-  const responsive470 = useMediaQuery({ query: "(max-width: 870px)" });
+  const responsive470 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   try {
@@ -67,15 +67,6 @@ const User = () => {
           <UserInfo userData={userData} /> : <></>}
       {/* SECOND Container */}
       <SecondBox>
-        <Link href="/Screens/Landings">
-          <LogOut style={{
-            display: responsive470 ? "" : "none",
-            marginTop: "-5%",
-          }}>
-            Cerrar Sesión
-            <LogOutIcon />
-          </LogOut>
-        </Link>
         <NextReward />
         <ThirdBox>
           {/* Third Container */}
@@ -84,6 +75,15 @@ const User = () => {
           <PaymentMethod />
         </ThirdBox>
       </SecondBox>
+      <Link href="/Screens/Landings">
+        <LogOut style={{
+          display: responsive470 ? "" : "none",
+          marginTop: "-5%",
+        }}>
+          Cerrar Sesión
+          <LogOutIcon />
+        </LogOut>
+      </Link>
     </BackgroundProfile>
   )
 }

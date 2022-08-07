@@ -37,7 +37,6 @@ export const Module1 = (props: any) => {
     const heroSectionRef = doc(db, "landingPage", "heroSection")
     const heroSectionDoc = await getDoc(heroSectionRef)
     if (heroSectionDoc.exists()) {
-      console.log(heroSectionDoc.data())
       setLanding(heroSectionDoc.data())
       setLoading(false)
     }
@@ -46,7 +45,6 @@ export const Module1 = (props: any) => {
     getHeroSection();
   }, []);
 
-  console.log('43')
 
   if (loading) {
     return (

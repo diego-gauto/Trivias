@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
-  display:flex;
+  display: flex;
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -10,6 +10,11 @@ export const BackgroundProfile = styled.div`
   @font-face{
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  }
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
   }
 `;
 export const SecondBox = styled.div`
@@ -141,8 +146,9 @@ export const LogOut = styled.p`
   margin: auto auto 0 auto;
   cursor: pointer;
  @media (max-width: 1023px) {
-  margin-right:6px;
-  padding-top: 5%;
+  margin-inline: 0;
+  margin-top: 0;
+  margin-bottom: 15px;
   }
 `;
 export const PaymentTitle = styled.h1`
