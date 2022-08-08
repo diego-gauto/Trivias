@@ -15,6 +15,7 @@ import {
   MainContain,
   OuterProgress,
   PointsText,
+  ProgressBackground,
   ProgressCircle,
   ProgressContain,
   ProgressSvg,
@@ -47,20 +48,23 @@ const Rewards = () => {
               1,100 puntos
             </PointsText>
             <OuterProgress>
-              <InnerProgress>
-                <LevelContain>
-                  <CurrentLevel>
-                    5
-                  </CurrentLevel>
-                  <Vector />
-                  <Vector2 />
-                </LevelContain>
-              </InnerProgress>
-              <ProgressSvg width={responsive560 ? "96px" : "130px"} height={responsive560 ? "96px" : "130px"}>
+              <LevelContain>
+                <CurrentLevel>
+                  5
+                </CurrentLevel>
+                <Vector />
+                <Vector2 />
+              </LevelContain>
+              <ProgressSvg width={responsive560 ? "96px" : "120px"} height={responsive560 ? "96px" : "120px"}>
+                <ProgressBackground
+                  cx={responsive560 ? "47.5" : "60"}
+                  cy={responsive560 ? "47.5" : "60"}
+                  r={responsive560 ? "42.5" : "55"}
+                  stroke-linecap="round" />
                 <ProgressCircle
-                  cx={responsive560 ? "47.5" : "65"}
-                  cy={responsive560 ? "47.5" : "65"}
-                  r={responsive560 ? "42.5" : "60"}
+                  cx={responsive560 ? "47.5" : "60"}
+                  cy={responsive560 ? "47.5" : "60"}
+                  r={responsive560 ? "42.5" : "55"}
                   stroke-linecap="round" />
               </ProgressSvg>
             </OuterProgress>
