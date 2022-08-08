@@ -99,10 +99,10 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
     setIsLoading(true)
-    var value = (document.getElementById("input_1") as HTMLInputElement).value;
-    var phoneInputValidation = ""
-    if (value !== undefined && value !== null) {
-      phoneInputValidation = value
+    var input = document.getElementById("input_1") as HTMLInputElement;
+    var phoneInputValidation = "";
+    if (input !== undefined && input !== null) {
+      phoneInputValidation = input.value
     }
 
     let signUpData = {
