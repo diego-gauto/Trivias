@@ -18,6 +18,10 @@ export const RewardContainer = styled.div`
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
   }
 `;
+export const Gradient = styled.linearGradient`
+`;
+export const stop = styled.stop`
+`;
 export const MainContain = styled.div`
   display: flex;
   flex-direction: column;
@@ -84,12 +88,10 @@ export const ProgressContain = styled.div`
   }
 `;
 export const OuterProgress = styled.div`
-  width: 130px;
-  max-width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   position: relative;
   padding: 10px;
-  border: 1px solid #8E2DE2;
   border-radius: 50%;
   @media(max-width: 1023px) {
     width: 96px;
@@ -98,10 +100,9 @@ export const OuterProgress = styled.div`
   }
 `;
 export const InnerProgress = styled.div`
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   position: absolute;
-  border: 1px solid #8E2DE2;
   border-radius: 50%;
   @media(max-width: 1023px) {
     width: 76px;
@@ -113,33 +114,42 @@ export const ProgressSvg = styled.svg`
   top: 0;
   left: 0;
   position: absolute;
+  transform: rotate(-90deg);
 `;
 export const ProgressCircle = styled.circle`
     fill: none;
-    width:76px;
+    width: 76px;
     stroke: #8E2DE2;
-    stroke-width: 10px;
-    stroke-dasharray: 377;
-    stroke-dashoffset: 190;
+    stroke-width: 8px;
+    stroke-dasharray: 346;
+    stroke-dashoffset: 173;
     @media(max-width: 420px) {
       stroke-dashoffset:245 ;
       stroke-width: 10.5px;
     }
-    @media(max-width: 1200px) {
-      stroke-dashoffset: 245px ;
-      stroke-width: 10.5px;
-      cx: 47.5;
-      cy: 47.5;
-      r: 42.5;
-    }
+    // @media(max-width: 1200px) {
+    //   stroke-dashoffset: 245px ;
+    //   stroke-width: 10.5px;
+    //   cx: 47.5;
+    //   cy: 47.5;
+    //   r: 42.5;
+    // }
+`;
+export const ProgressBackground = styled.circle`
+  fill: none;
+  width:76px;
+  stroke: #808080;
+  stroke-width: 8px;
+  stroke-dasharray: 346;
+  stroke-dashoffset: 0;
 `;
 export const LevelContain = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   flex-direction: column;
 `;
 export const CurrentLevel = styled.p`
-  font-size: 35px;
+  font-size: 44px;
   font-weight: 600;
   font-family: 'Raleway', sans-serif;
   color: #E0C3FC;
@@ -150,11 +160,11 @@ export const CurrentLevel = styled.p`
 `;
 export const Vector = styled.i`
   background-image: url(../images/Rewards/VectorU.svg);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   height: 24px;
   width: 32px;
   position: absolute;
-  bottom: 30px;
+  bottom: 25px;
   @media(max-width: 1023px) {
     height: 10px;
     width: 30px;
@@ -167,7 +177,7 @@ export const Vector2 = styled.i`
   height: 24px;
   width: 32px;
   position: absolute;
-  bottom: 12px;
+  bottom: 13px;
   @media(max-width: 1023px) {
     height: 10px;
     width: 30px;

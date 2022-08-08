@@ -30,7 +30,7 @@ const PointRewards = ({ setRewards }: any) => {
           </MainTitle>
         </OffContainer>
       </MainContain>
-      <RewardContainer>
+      <RewardContainer style={{ borderRadius: "0 10px 10px 10px" }}>
         <Points />
       </RewardContainer>
       <PointPrizes />
