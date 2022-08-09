@@ -24,7 +24,7 @@ const Module1 = () => {
         /> */}
         <VideoContain>
           <video style={{ width: "100vw", }} autoPlay loop muted>
-            <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4"></source>
+            <source src="/images/Video/video1.mp4" type="video/mp4"></source>
           </video>
         </VideoContain>
       </ImageContain>
