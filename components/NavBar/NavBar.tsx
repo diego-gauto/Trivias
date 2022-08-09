@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from "react";
-
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import Link from "next/link";
-import { useRouter } from "next/router";
-
+import {
+  Close, HamburgerContain, HBList, HBMenu,
+  IconsContain, Level, Logo, LogoContain,
+  LogoS, MenuIcon, NavContainer, NavResponsive,
+  NavTags, NavText, Points, PointsContain, PurpleButton,
+  TagsResp, UserContain, UserImage
+} from './NavBar.styled';
 import { DEFAULT_USER_IMG } from "../../constants/paths";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
-import {
-  Close,
-  HamburgerContain,
-  HBList,
-  HBMenu,
-  IconsContain,
-  Level,
-  Logo,
-  LogoContain,
-  LogoS,
-  MenuIcon,
-  NavContainer,
-  NavResponsive,
-  NavTags,
-  NavText,
-  Points,
-  PointsContain,
-  PurpleButton,
-  TagsResp,
-  UserContain,
-  UserImage,
-} from "./NavBar.styled";
+import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
 
 const NavBar = () => {
 
@@ -151,7 +135,7 @@ const NavBar = () => {
               </Link>
               : <></>
         }
-        <NavText pathname={pathname} color={color} target="_blank" href="Https://gonvarnails.mx">
+        <NavText pathname={pathname} color={color} href="Https://gonvarnails.mx">
           Tienda
         </NavText>
         {
@@ -167,9 +151,7 @@ const NavBar = () => {
 
           <>
             <UserContain>
-              <Link href="/Rewards">
-                <Level />
-              </Link>
+              <UserLevel />
               <Link href="/Profile">
                 <NavText pathname={pathname} color={color}>
                   {userData ? userData.name : "Bienvenido"}
@@ -254,7 +236,7 @@ const NavBar = () => {
                         Inicio
                       </HBList>
                     </Link>
-                    <a target="_blank" href="Https://gonvarnails.mx">
+                    <a href="Https://gonvarnails.mx">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Tienda
                       </HBList>
@@ -285,7 +267,7 @@ const NavBar = () => {
                     <Link href="/Rewards">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Centro de Recompensas
-                        <Level />
+                        <UserLevel />
                       </HBList>
                     </Link>
                   </HBMenu>

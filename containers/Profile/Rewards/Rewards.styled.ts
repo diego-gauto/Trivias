@@ -103,6 +103,7 @@ export const InnerProgress = styled.div`
   width: 100px;
   height: 100px;
   position: absolute;
+
   border-radius: 50%;
   @media(max-width: 1023px) {
     width: 76px;
@@ -113,34 +114,29 @@ export const InnerProgress = styled.div`
 export const ProgressSvg = styled.svg`
   top: 0;
   left: 0;
+  stroke-dasharray: 300;
   position: absolute;
   transform: rotate(-90deg);
 `;
-export const ProgressCircle = styled.circle`
+export const ProgressCircle = styled("circle")<{progress:number}>`
     fill: none;
     width: 76px;
-    stroke: #8E2DE2;
+    stroke: url(#gradient);
     stroke-width: 8px;
     stroke-dasharray: 346;
-    stroke-dashoffset: 173;
+    stroke-dashoffset: ${props=>props.progress};
+    stroke-linecap: round;
     @media(max-width: 420px) {
       stroke-dashoffset:245 ;
       stroke-width: 10.5px;
     }
-    // @media(max-width: 1200px) {
-    //   stroke-dashoffset: 245px ;
-    //   stroke-width: 10.5px;
-    //   cx: 47.5;
-    //   cy: 47.5;
-    //   r: 42.5;
-    // }
 `;
 export const ProgressBackground = styled.circle`
   fill: none;
   width:76px;
   stroke: #808080;
-  stroke-width: 8px;
-  stroke-dasharray: 346;
+  stroke-width: 7px;
+  stroke-dasharray: 345;
   stroke-dashoffset: 0;
 `;
 export const LevelContain = styled.div`
