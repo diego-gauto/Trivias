@@ -75,7 +75,7 @@ const User = () => {
           <PaymentMethod />
         </ThirdBox>
       </SecondBox>
-      <Link href="/Screens/Landings">
+      <Link href="/">
         <LogOut style={{
           display: responsive470 ? "" : "none",
           marginTop: "-5%",
