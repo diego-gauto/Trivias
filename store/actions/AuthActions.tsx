@@ -38,7 +38,22 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         provider: "Webpage",
         phoneNumber: credentials.phoneInput,
         role: "user", //user, userAdmin, professor
-        plan: "free", //gonvarPlus
+        paymentMethods: [],
+        courses: [],
+        membership: {
+          finalDate: '',
+          level: 0,
+          method: '',
+          planId: '',
+          planName: '',
+          paymentMethod: {
+            card: '',
+            last4: '',
+            month: '',
+            year: '',
+            brand: '',
+          }
+        },
         score: 0,
 
 
@@ -59,6 +74,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
     })
 
 }
+
 export const signInWithCreds = (signUpData: { credentials: any; }) => {
   const {
     credentials,
@@ -155,7 +171,22 @@ export const accessWithAuthProvider = (provider: any) => {
           provider: provider.providerId,
           phoneNumber: phoneNumber,
           role: "user", //user, userAdmin, professor
-          plan: "free", //gonvarPlus
+          paymentMethods: [],
+          courses: [],
+          membership: {
+            finalDate: '',
+            level: 0,
+            method: '',
+            planId: '',
+            planName: '',
+            paymentMethod: {
+              card: '',
+              last4: '',
+              month: '',
+              year: '',
+              brand: '',
+            }
+          },
           score: 0,
 
 
