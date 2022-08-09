@@ -11,6 +11,7 @@ export const MainContain = styled.div`
 `;
 export const Container = styled.div`
   display: flex;
+  z-index: 2;
   padding-top: 15px;
   padding-bottom: 20px;
   padding-inline: 25px;
@@ -56,7 +57,7 @@ export const MainTitle = styled.p`
 export const RewardContainer = styled.div`
   display: flex;
   align-items:center;
-  z-index: -1;
+  z-index: 1;
   justify-content:center;
   position: relative;
   padding-top: 30px;

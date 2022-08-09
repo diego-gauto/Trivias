@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
 
+import { getAuth, signOut } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 
@@ -21,7 +22,7 @@ import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 
 const User = () => {
-  const responsive470 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   try {
@@ -56,7 +57,14 @@ const User = () => {
       return false
     }
   }
-
+  const logoutFunc = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      window.location.href = "/";
+    }).catch((error) => {
+      console.log(error)
+    });
+  };
 
   return (
     <BackgroundProfile>
@@ -76,8 +84,8 @@ const User = () => {
         </ThirdBox>
       </SecondBox>
       <Link href="/">
-        <LogOut style={{
-          display: responsive470 ? "" : "none",
+        <LogOut onClick={logoutFunc} style={{
+          display: responsive1023 ? "" : "none",
           marginTop: "-5%",
         }}>
           Cerrar Sesión

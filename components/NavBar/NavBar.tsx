@@ -1,18 +1,35 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import {
-  Close, HamburgerContain, HBList, HBMenu,
-  IconsContain, Level, Logo, LogoContain,
-  LogoS, MenuIcon, NavContainer, NavResponsive,
-  NavTags, NavText, Points, PointsContain, PurpleButton,
-  TagsResp, UserContain, UserImage
-} from './NavBar.styled';
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { DEFAULT_USER_IMG } from "../../constants/paths";
+import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
-import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
+import {
+  Close,
+  HamburgerContain,
+  HBList,
+  HBMenu,
+  IconsContain,
+  Level,
+  Logo,
+  LogoContain,
+  LogoS,
+  MenuIcon,
+  NavContainer,
+  NavResponsive,
+  NavTags,
+  NavText,
+  Points,
+  PointsContain,
+  PurpleButton,
+  TagsResp,
+  UserContain,
+  UserImage,
+} from "./NavBar.styled";
 
 const NavBar = () => {
 
@@ -135,7 +152,7 @@ const NavBar = () => {
               </Link>
               : <></>
         }
-        <NavText pathname={pathname} color={color} href="Https://gonvarnails.mx">
+        <NavText pathname={pathname} color={color} target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
         {
@@ -236,7 +253,7 @@ const NavBar = () => {
                         Inicio
                       </HBList>
                     </Link>
-                    <a href="Https://gonvarnails.mx">
+                    <a target="_blank" href="Https://gonvarnails.mx">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Tienda
                       </HBList>

@@ -1,15 +1,32 @@
-import React from 'react'
-import { Title, Banner, Container, TextContain, SubText, ButtonContain, PurpleButton, TransparentButton, PlayIcon, ImageContain } from './Module1.styled';
+
+
+import {
+  ButtonContain,
+  Container,
+  ImageContain,
+  PlayIcon,
+  PurpleButton,
+  SubText,
+  TextContain,
+  Title,
+  TransparentButton,
+  VideoContain,
+} from "./Module1.styled";
 
 const Module1 = () => {
   return (
     <Container>
       <ImageContain>
-        <Banner
+        {/* <Banner
           src="/images/Preview/fondo1.png"
           layout="fill"
           priority
-        />
+        /> */}
+        <VideoContain>
+          <video style={{ width: "100vw", }} autoPlay loop muted>
+            <source src="/images/Video/video1.mp4" type="video/mp4"></source>
+          </video>
+        </VideoContain>
       </ImageContain>
 
       <TextContain>

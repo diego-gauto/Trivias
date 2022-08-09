@@ -1,19 +1,23 @@
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
-import Img1 from "./MediaSources/Icon01.png"
-import Img2 from "./MediaSources/Icon02.png"
-import Img3 from "./MediaSources/Icon03.png"
-import Img4 from "./MediaSources/Icon04.png"
-import Img5 from "./MediaSources/Icon05.png"
-import Img6 from "./MediaSources/Icon06.png"
-import BG1 from "./MediaSources/BG01.png"
-import BG2 from "./MediaSources/BG02.png"
-import BG3 from "./MediaSources/BG03.png"
+import { Col, Image, Row } from "react-bootstrap";
+
 import { IModule2 } from "./IModule2";
+import BG1 from "./MediaSources/BG01.png";
+import BG2 from "./MediaSources/BG02.png";
+import BG3 from "./MediaSources/BG03.png";
+import Img1 from "./MediaSources/Icon01.png";
+import Img2 from "./MediaSources/Icon02.png";
+import Img3 from "./MediaSources/Icon03.png";
+import Img4 from "./MediaSources/Icon04.png";
+import Img5 from "./MediaSources/Icon05.png";
+import Img6 from "./MediaSources/Icon06.png";
 import {
   IconImage,
+  IconImagesContainer,
   IconText,
   IconText_B,
   LeftImage,
+  ModuleContainer,
+  RibbonImage,
   RightImage,
   SectionCentered,
   SectionCenteredBackground,
@@ -21,10 +25,7 @@ import {
   SectionCenteredWrapper,
   TitleCenter,
   TitleCenter2,
-  IconImagesContainer,
   TitleTextContainer,
-  RibbonImage,
-  ModuleContainer
 } from "./Module2.styled";
 
 export const Module2 = (props: IModule2) => {

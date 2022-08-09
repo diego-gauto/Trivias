@@ -185,13 +185,16 @@ export const PayText2 = styled.p`
   }
 `;
 export const VisaPay = styled.i`
-  background-image: url(../images/VisaPay.png);
+  background-image: url(../images/VisaPay.svg);
   background-repeat:no-repeat;
   height: 96px;
   width: 144px;
   background-position: center;
   @media(max-width: 500px){
-    width: 120px;
+    width: 95px;
+    height: 65px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 `;
 export const PayPal = styled.i`
@@ -347,22 +350,21 @@ export const PurpleBuyButton = styled.button`
   font-weight: 600;
   padding-block: 15px;
   padding-inline: 25px;
-  background-color: #6717CD;
+  background: linear-gradient(135deg, #8E2DE2 0%, #804FB3 25%, #6c4b91 50%, #552586 75%, #4A00E0 100%);
+  background-size: 200% 100%;
+  animation: ${glow} 2.7s ease infinite ;
   color: #fff;
   border-radius: 30px;
   border:none;
-  &:hover{
-    background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
-  }
+  // &:hover{
+  //   background-color: #5000b5;
+  //   transform:scale(1.03);
+  //   transition:.5s ease all;
+  // }
   @media(max-width: 1023px){
     font-size: 14px;
     padding-block: 10px;
     padding-inline: 15px;
-    background: linear-gradient(135deg, #8E2DE2 0%, #6c4b91 50%, #4A00E0 100%);
-    background-size: 200% 100%;
-    animation: ${glow} 3s ease infinite ;
   }
 `;
 export const PurchaseContainer = styled.div`
