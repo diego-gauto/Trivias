@@ -1,19 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React from 'react'
 import { IconContain } from './CourseForm.styled';
-import Delete from './Delete/Delete';
-import { Button, Container, Contain1, EditContain, Input, InputContain, Label, Title, TitleContain, TrashIcon, InputSelect, InputBig, Contain2, Contain3, HwTitle, SlideContain, TitleSlide, ButtonContain, TransparentButton, PurpleButton, Folder } from './Edit.styled';
+import { Container, Contain1, EditContain, Input, InputContain, Label, Title, TitleContain, InputSelect, InputBig, Contain2, Contain3, HwTitle, SlideContain, TitleSlide, ButtonContain, TransparentButton, PurpleButton, Folder } from './Edit.styled';
 
-const Edit = () => {
-
-  const [show, setShow] = useState(false);
-
+const AddLesson = () => {
   return (
     <Container>
       <TitleContain>
-        <Title>Editar Lección</Title>
-        <Button onClick={() => { setShow(true) }}>Eliminar Lección <TrashIcon /></Button>
+        <Title>Nueva Lección</Title>
       </TitleContain>
       <EditContain>
         <Contain1>
@@ -52,14 +47,14 @@ const Edit = () => {
             <Label>Material Adicional</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, consectetur 
-              adipiscing elit. Pharetra, cursus sapien ac magna. 
-              Consectetur amet eu tincidunt quis. Non habitasse viverra 
-              malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
-              adipiscing morbi mattis eget. Sed accumsan quisque mi sodales 
-              malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
-              feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
-              enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-              quisque." />
+            adipiscing elit. Pharetra, cursus sapien ac magna. 
+            Consectetur amet eu tincidunt quis. Non habitasse viverra 
+            malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
+            adipiscing morbi mattis eget. Sed accumsan quisque mi sodales 
+            malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
+            feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
+            enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
+            quisque." />
           </InputContain>
         </Contain2>
         <Contain3>
@@ -75,23 +70,22 @@ const Edit = () => {
             <Label>Descripción de la Tarea</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, consectetur 
-              adipiscing elit. Pharetra, cursus sapien ac magna. 
-              Consectetur amet eu tincidunt quis. Non habitasse viverra 
-              malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
-              adipiscing morbi mattis eget. Sed accumsan quisque mi sodales 
-              malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
-              feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
-              enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-              quisque." />
+            adipiscing elit. Pharetra, cursus sapien ac magna. 
+            Consectetur amet eu tincidunt quis. Non habitasse viverra 
+            malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
+            adipiscing morbi mattis eget. Sed accumsan quisque mi sodales 
+            malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
+            feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
+            enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
+            quisque." />
           </InputContain>
         </Contain3>
       </EditContain>
       <ButtonContain>
-        <Link href="/admin/Edit"><TransparentButton>Regresar</TransparentButton></Link>
+        <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
         <PurpleButton>Guardar</PurpleButton>
       </ButtonContain>
-      <Delete setShow={setShow} show={show} />
     </Container>
   )
 }
-export default Edit;
+export default AddLesson;

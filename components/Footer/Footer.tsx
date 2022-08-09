@@ -47,9 +47,11 @@ const Footer = () => {
           </FooterText>
         </Column>
         <Column>
-          <FooterText>
-            Academia
-          </FooterText>
+          <Link href="/Preview">
+            <FooterText>
+              Cursos
+            </FooterText>
+          </Link>
           <Link href="/auth/Register">
             <FooterText>
               Registrarse
@@ -67,8 +69,12 @@ const Footer = () => {
             Contactanos
           </FooterText>
           <SocialContainer>
-            <FBIcon />
-            <IGIcon />
+            <a href="https://www.facebook.com/GonvarNails">
+              <FBIcon />
+            </a>
+            <a href="https://www.instagram.com/gonvarnails/">
+              <IGIcon />
+            </a>
             <WAIcon />
           </SocialContainer>
         </FooterIcons>
@@ -84,9 +90,11 @@ const Footer = () => {
           <FooterText>
             Tienda Online
           </FooterText>
-          <FooterText>
-            Academia
-          </FooterText>
+          <Link href="/Preview">
+            <FooterText>
+              Cursos
+            </FooterText>
+          </Link>
           <Link href="/auth/Register">
             <FooterText>
               Registrarse
@@ -114,8 +122,12 @@ const Footer = () => {
               Contactanos
             </FooterText>
             <SocialContainer>
-              <FBIcon />
-              <IGIcon />
+              <a href="https://www.facebook.com/GonvarNails">
+                <FBIcon />
+              </a>
+              <a href="https://www.instagram.com/gonvarnails/">
+                <IGIcon />
+              </a>
               <WAIcon />
             </SocialContainer>
           </FooterIcons>

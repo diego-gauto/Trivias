@@ -1,9 +1,22 @@
-import Link from 'next/link';
-import React, { useEffect } from 'react'
-import { ProfileContainer, ProfileIconContain, ProfileIcon, UserContainer, LabelText, LogOut, LogOutIcon, UserText, PictureContain, Level } from './User.styled';
+
+
 import { getAuth, signOut } from "firebase/auth";
-import { useAuth } from "../../../hooks/useAuth";
+import Link from "next/link";
+
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
+import {
+  LabelText,
+  Level,
+  LogOut,
+  LogOutIcon,
+  PictureContain,
+  ProfileContainer,
+  ProfileIcon,
+  ProfileIconContain,
+  UserContainer,
+  UserText,
+} from "./User.styled";
+
 const UserInfo = ({ userData }: any) => {
 
 

@@ -15,7 +15,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { accessWithAuthProvider, signUpWithCreds } from "../../../../store/actions/AdminActions";
+import { createCourse } from "../../../../store/actions/AdminActions";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -85,7 +85,7 @@ const CourseForm = () => {
     }
 
     let signUpData = {
-      credentials: {
+      data: {
         courseTittle: formData.courseTittle,
         courseDuration: formData.courseDuration,
         courseSubtittle: formData.courseSubtittle,
@@ -94,12 +94,14 @@ const CourseForm = () => {
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
+        uid: "A5uQQ3JAyS8GvnnwLPdE"
       },
     };
-    console.log(signUpData)
-    /*   signUpWithCreds(signUpData).then(() => {
-        window.location.href = "/Preview";
-      }); */
+
+    createCourse(signUpData).then(() => {
+      console.log("done!")
+    });
+
   }
 
 
@@ -123,7 +125,7 @@ const CourseForm = () => {
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={() => { setOpen(!open) }}>
+                <Selected onClick={() => { setOpen(!open), setOpen2(false) }}>
                   {value}
                   <CaretD2 />
                 </Selected>
@@ -180,7 +182,7 @@ const CourseForm = () => {
             <IconContain>
 
               <SelectContain key={2}>
-                <Selected onClick={() => { setOpen2(!open2) }}>
+                <Selected onClick={() => { setOpen2(!open2), setOpen(false) }}>
                   {value2}
                   <CaretD2 />
                 </Selected>

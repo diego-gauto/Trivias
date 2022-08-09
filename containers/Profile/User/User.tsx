@@ -1,10 +1,13 @@
 
+import { useEffect, useState } from "react";
+
 import { useMediaQuery } from "react-responsive";
+
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import Link from "next/link";
 
+import { db } from "../../../firebase/firebaseConfig";
+import { useAuth } from "../../../hooks/useAuth";
 import {
   BackgroundProfile,
   LogOut,
@@ -16,10 +19,9 @@ import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
-import { useEffect, useState } from "react";
 
 const User = () => {
-  const responsive470 = useMediaQuery({ query: "(max-width: 870px)" });
+  const responsive470 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   try {
@@ -65,15 +67,6 @@ const User = () => {
           <UserInfo userData={userData} /> : <></>}
       {/* SECOND Container */}
       <SecondBox>
-        <Link href="/Screens/Landings">
-          <LogOut style={{
-            display: responsive470 ? "" : "none",
-            marginTop: "-5%",
-          }}>
-            Cerrar Sesión
-            <LogOutIcon />
-          </LogOut>
-        </Link>
         <NextReward />
         <ThirdBox>
           {/* Third Container */}
@@ -82,6 +75,15 @@ const User = () => {
           <PaymentMethod />
         </ThirdBox>
       </SecondBox>
+      <Link href="/">
+        <LogOut style={{
+          display: responsive470 ? "" : "none",
+          marginTop: "-5%",
+        }}>
+          Cerrar Sesión
+          <LogOutIcon />
+        </LogOut>
+      </Link>
     </BackgroundProfile>
   )
 }

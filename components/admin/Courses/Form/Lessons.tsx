@@ -22,7 +22,9 @@ const Lessons = () => {
             {
               open == 1 &&
               <>
-                <Button >Añadir Lección <Add /></Button>
+                <Link href="/admin/NewLesson">
+                  <Button >Añadir Lección <Add /></Button>
+                </Link>
                 <ChevU onClick={() => { setOpen(0) }} />
               </>
             }
@@ -45,7 +47,7 @@ const Lessons = () => {
                   et porta. Imperdiet nullam facilisis vestibulum quis
                   gravida sed aliquet consectetur orci. Netus egestas gravida
                   mollis vitae pellentesque id nisl nunc.</EpisodeInfo>
-                <Link href="/admin/Edit">
+                <Link href="/admin/EditLesson">
                   <EditEpisode>Editar Lección</EditEpisode>
                 </Link>
               </EpisodeContain>

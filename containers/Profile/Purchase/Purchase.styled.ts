@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import Image from "next/image";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   display:flex;
@@ -49,7 +49,7 @@ export const DataPayment = styled.div`
   justify-content:center;
   align-items:center;
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px){
     display: none;
   }
@@ -149,7 +149,7 @@ export const PaymentContain = styled.div`
   padding: 20px;
   width: 100%;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const PaymentMethod = styled.div`
   display: flex;
@@ -158,7 +158,7 @@ export const PaymentMethod = styled.div`
   padding-inline: 20px;
   gap: 10px;
   border-radius: 6px;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   &:hover{
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
@@ -256,7 +256,8 @@ export const NewMethodBox = styled.div`
   padding-block:30px;
   width: 220px;
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   &:active{
     border: 1px solid black;
@@ -267,6 +268,19 @@ export const NewMethodBox = styled.div`
   @media(max-width: 500px){
     width: 50%;
     padding-block: 18px;
+    margin-left: 25%;
+  }
+`;
+export const NewMethodBox2 = styled.div`
+  
+  @media(max-width: 500px){
+    display: visible;
+    top: 40%;
+    height: 120px;
+    position: absolute;
+    left: 27.5%;
+    width: 45%;
+    //z-index:;
   }
 `;
 export const ButtonContain = styled.div`
@@ -314,6 +328,43 @@ export const PurpleButton = styled.button`
     padding-inline: 15px;
   }
 `;
+const glow = keyframes`
+  0% {
+    background-position: 0% 50%;
+    transform: scale(1);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: scale(1.05);
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
+export const PurpleBuyButton = styled.button`
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;
+  font-weight: 600;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background-color: #6717CD;
+  color: #fff;
+  border-radius: 30px;
+  border:none;
+  &:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+  @media(max-width: 1023px){
+    font-size: 14px;
+    padding-block: 10px;
+    padding-inline: 15px;
+    background: linear-gradient(135deg, #8E2DE2 0%, #6c4b91 50%, #4A00E0 100%);
+    background-size: 200% 100%;
+    animation: ${glow} 3s ease infinite ;
+  }
+`;
 export const PurchaseContainer = styled.div`
   display:flex;
   flex-direction:column;
@@ -322,7 +373,7 @@ export const PurchaseContainer = styled.div`
   padding:20px;
   border-radius: 10px;
   width: 50%;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px){
     flex: 1 500px;
     gap: 10px;
@@ -392,7 +443,7 @@ export const Card = styled.div`
   flex-direction:column;
   justify-content:center;
   border-radius:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const ImageContain = styled.div`
   display: flex;
@@ -457,7 +508,7 @@ export const ContainerCard = styled.div`
   padding: 20px;
   width: 100%;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const InputText = styled.label`
   width: 100%;

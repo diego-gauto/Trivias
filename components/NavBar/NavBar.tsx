@@ -1,40 +1,26 @@
-import { useEffect, useState } from "react";
-
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import {
+  Close, HamburgerContain, HBList, HBMenu,
+  IconsContain, Level, Logo, LogoContain,
+  LogoS, MenuIcon, NavContainer, NavResponsive,
+  NavTags, NavText, Points, PointsContain, PurpleButton,
+  TagsResp, UserContain, UserImage
+} from './NavBar.styled';
+import { DEFAULT_USER_IMG } from "../../constants/paths";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
-import {
-  Close,
-  HamburgerContain,
-  HBList,
-  HBMenu,
-  IconsContain,
-  Level,
-  Logo,
-  LogoS,
-  MenuIcon,
-  NavContainer,
-  NavHome,
-  NavResponsive,
-  NavTags,
-  NavTags2,
-  NavText,
-  Points,
-  PointsContain,
-  PurpleButton,
-  UserContain,
-  UserImage,
-  UserText,
-} from "./NavBar.styled";
-import Scroll from "./scroll";
+import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
 
-import { DEFAULT_USER_IMG } from "../../constants/paths";
 const NavBar = () => {
+
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [hamburger, setHamburger] = useState(false);
+
   //declare any object in state
   const [userData, setUserData] = useState<any>(null);
 
@@ -60,8 +46,6 @@ const NavBar = () => {
   useEffect(() => {
     fetchDB_data()
   }, [loggedIn])
-
-
   /*   useEffect(() => {
       try {
         console.log(userData)
@@ -89,416 +73,213 @@ const NavBar = () => {
       return false
     }
   }
-
-  // Nav Change Color
-  const [hamburger, setHamburger] = useState(false);
-  const [color, setColor] = useState(false)
-
-  useEffect(() => {
-    if (color == true)
-      return HomeNav2()
-    else (color == false)
-    return HomeNav()
-  }, [color])
-
-  const [route, setRoute] = useState("");
-  const [logo, setLogo] = useState("/images/logo.png");
-
-  const [shadow, setBoxShadow] = useState("");
-  const [colorBack, setColorBack] = useState("transparent");
-  const [fontColor, setFontColor] = useState("white");
-
-  const HomeNav = () => {
-    setLogo("/images/logo.png");
-    setColorBack("transparent");
-    setFontColor("white");
-    setBoxShadow("");
-  }
-  const HomeNav2 = () => {
-    setLogo("/images/logo3.png");
-    setColorBack("white");
-    setFontColor("black");
-    setBoxShadow("0px 4px 4px rgba(0, 0, 0, 0.25)");
-  }
-  const LoginNav = () => {
-    setLogo("/images/logo3.png");
-    setColorBack("white");
-    setFontColor("black");
-    setRoute("");
-    setBoxShadow("0px 4px 4px rgba(0, 0, 0, 0.25)");
-  }
-  const UserNav = () => {
-    setLogo("/images/logo3.png");
-    setColorBack("white");
-    setFontColor("black");
-    setRoute("Preview");
-    setBoxShadow("0px 4px 4px rgba(0, 0, 0, 0.25)");
-  }
+  // COLOR NAVBAR
+  const [color, setColor] = useState<any>(0)
   const router = useRouter();
-  let { pathname } = router;
+  let { pathname }: any = router;
 
+  const ChangeNav = () => {
+    if (['/', ''].includes(pathname) && window.scrollY >= 700) {
+      setColor(1)
+    }
+    else {
+      setColor(0)
+    }
+  }
 
-  useEffect(() => {
-    if (['/', ''].includes(pathname)) return HomeNav();
-    if (pathname == '/auth/Login' || pathname == '/auth/Register') return LoginNav();
-    if (pathname == '/Profile' ||
-      pathname == '/Rewards' ||
-      pathname == '/Purchase' ||
-      pathname == '/Lesson' ||
-      pathname == '/Preview'
-    ) return UserNav();
-
-  }, [pathname])
+  useEffect(
+    () => {
+      window.addEventListener('scroll', ChangeNav);
+    },
+    [],
+  );
+  // COLOR NAVBAR
   return (
-
-    <>
-      {//Vista del navbar dinamico de Homepage
-        pathname == "" || pathname == "/" && !loggedIn
-          ?
-          <>
-            <NavHome style={{ background: `${colorBack}`, boxShadow: `${shadow}` }}>
-              <Scroll color={color} setColor={setColor} pathname={pathname} />
-              <Link href="/">
-                <Logo src={`${logo}`} width={130} height={70} />
-              </Link>
-              <NavTags>
+    <NavContainer pathname={pathname} color={color}>
+      <LogoContain>
+        {
+          pathname == "/" ?
+            <>
+              {
+                color == 1 &&
                 <Link href="/">
-                  <NavText style={{ color: `${fontColor}` }}>
-                    Inicio
-                  </NavText>
+                  <Logo src="/images/logo3.png" width={130} height={70} />
                 </Link>
-                <Link href="/Purchase">
-                  <NavText style={{ color: `${fontColor}` }}>
-                    Tienda
-                  </NavText>
-                </Link>
-                <Link href="/auth/Login">
-                  <NavText style={{ color: `${fontColor}` }}>
-                    Iniciar Sesión
-                  </NavText>
-                </Link>
-                <Link href="/auth/Register">
-                  <PurpleButton>
-                    Suscribirse Ya
-                  </PurpleButton>
-                </Link>
-              </NavTags>
-            </NavHome >
-            <NavResponsive style={{ position: 'fixed' }}>
-              <Link href="/">
-                <Logo src="/images/logo3.png" width={130} height={70} />
-              </Link>
-              <NavTags2>
-                <Link href="/auth/Login">
-                  <NavText style={{ color: '#6717CD' }}>
-                    Ingresar
-                  </NavText>
-                </Link>
-                <Link href="/auth/Register">
-                  <PurpleButton>
-                    Acceder
-                  </PurpleButton>
-                </Link>
-              </NavTags2>
-            </NavResponsive>
-          </>
-          : <></>
-      }
-      {//vista de navbar general
-        pathname !== "/" &&
-          pathname !== "" && !loggedIn
-          ?
-          <>
-            <NavContainer style={{ background: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
-              <Link href="/">
-                <Logo src="/images/logo3.png" width={130} height={70} />
-              </Link>
-              <NavTags>
-                <Link href={'/'}>
-                  <NavText style={{ color: 'black' }}>
-                    Inicio
-                  </NavText>
-                </Link>
-                <NavText style={{ color: 'black' }}>
-                  Tienda
-                </NavText>
-                <Link href="/Preview">
-                  <NavText style={{ color: 'black' }}>
-                    Catálogo
-                  </NavText>
-                </Link>
-                <Link href="/auth/Login">
-                  <NavText style={{ color: 'black' }}>
-                    Iniciar Sesión
-                  </NavText>
-                </Link>
-                <Link href="/auth/Register">
-                  <PurpleButton>
-                    Suscribirse Ya
-                  </PurpleButton>
-                </Link>
-              </NavTags>
-            </NavContainer >
-            <NavResponsive >
-              <Link href="/">
-                <Logo src="/images/logo3.png" width={130} height={70} />
-              </Link>
-              <NavTags2>
-                <Link href="/auth/Login">
-                  <NavText style={{ color: '#6717CD' }}>
-                    Ingresar
-                  </NavText>
-                </Link>
-                <Link href="/auth/Register">
-                  <PurpleButton>
-                    Acceder
-                  </PurpleButton>
-                </Link>
-              </NavTags2>
-            </NavResponsive>
-          </>
-
-          : <></>
-      }
-      {//vista de usuario Loggin
-        loggedIn && !isAdmin
-          ?
-          <>
-            <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
-              <Link href="/">
-                <Logo src="/images/logo3.png" width={130} height={70} />
-              </Link>
-              <NavTags>
-                <Link href="/Preview">
-                  <NavText style={{ color: 'black' }}>
-                    Inicio
-                  </NavText>
-                </Link>
-                <Link href="/Purchase">
-                  <NavText style={{ color: 'black' }}>
-                    Tienda
-                  </NavText>
-                </Link>
-                <UserContain>
-                  <Link href="/Rewards">
-                    <Level />
-                  </Link>
-                  <Link href="/Profile">
-                    <UserText>
-                      {userData ? userData.name : "Bienvenido"}
-                    </UserText>
-                  </Link>
-                  {userData && userData.photoURL ?
-                    < UserImage
-                      style={{
-                        backgroundImage: "url(" + userData.photoURL + ")"
-                        , backgroundSize: "100%"
-                      }}
-                    > </UserImage>
-                    :
-                    < UserImage style={{
-                      backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                    }} > </UserImage>
-                  }
-
-                </UserContain>
-              </NavTags>
-            </NavContainer >
-            <NavResponsive>
-              <PointsContain>
-                <Level />
-                <Points>
-                  Puntos
-                </Points>
-              </PointsContain>
-              <LogoS />
-              <MenuIcon onClick={() => { setHamburger(true) }} />
+              }
               {
-                hamburger == true
-                &&
-                <>
-                  <HamburgerContain>
-                    <IconsContain>
-                      <LogoS />
-                      <Close onClick={() => { setHamburger(false) }} />
-                    </IconsContain>
-                    <HBMenu>
-                      <Link href="/Preview" >
-                        <HBList onClick={() => { setHamburger(false) }}>
-                          Inicio
-                        </HBList>
-                      </Link>
+                color == 0 &&
+                <Link href="/">
+                  <Logo src="/images/logo.png" width={130} height={70} />
+                </Link>
+              }
+            </>
+            :
+            <Link href="/">
+              <Logo src="/images/logo3.png" width={130} height={70} />
+            </Link>
+        }
+      </LogoContain>
+      <NavTags>
+        {
+          loggedIn ?
+            <Link href="/Preview">
+              <NavText pathname={pathname} color={color}>
+                Inicio
+              </NavText>
+            </Link>
+            : !loggedIn ?
+              <Link href="/">
+                <NavText pathname={pathname} color={color}>
+                  Inicio
+                </NavText>
+              </Link>
+              : <></>
+        }
+        <NavText pathname={pathname} color={color} href="Https://gonvarnails.mx">
+          Tienda
+        </NavText>
+        {
+          (loggedIn && isAdmin) &&
+          <Link href="/admin/General">
+            <NavText pathname={pathname} color={color}>
+              admin
+            </NavText>
+          </Link>
+        }
+        {
+          loggedIn &&
+
+          <>
+            <UserContain>
+              <UserLevel />
+              <Link href="/Profile">
+                <NavText pathname={pathname} color={color}>
+                  {userData ? userData.name : "Bienvenido"}
+                </NavText>
+              </Link>
+              {userData && userData.photoURL ?
+                < UserImage
+                  style={{
+                    backgroundImage: "url(" + userData.photoURL + ")"
+                    , backgroundSize: "100%"
+                  }}
+                > </UserImage>
+                :
+                < UserImage style={{
+                  backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                }} > </UserImage>
+              }
+            </UserContain>
+          </>
+        }
+        {!loggedIn &&
+          <>
+            <Link href="/auth/Login">
+              <NavText pathname={pathname} color={color}>
+                Iniciar Sesión
+              </NavText>
+            </Link>
+            <Link href="/auth/Register">
+              <PurpleButton>
+                Suscribirse Ya
+              </PurpleButton>
+            </Link>
+          </>
+        }
+      </NavTags>
+      <NavResponsive>
+        {
+          !loggedIn &&
+          <>
+            <Link href="/">
+              <LogoS />
+            </Link>
+            <TagsResp>
+              <Link href="/auth/Login">
+                <a>
+                  Ingresar
+                </a>
+              </Link>
+              <Link href="/auth/Register">
+                <PurpleButton>
+                  Registrate
+                </PurpleButton>
+              </Link>
+            </TagsResp>
+          </>
+        }
+        {
+          loggedIn &&
+          <>
+            <PointsContain>
+              <Level />
+              <Points>
+                Puntos
+              </Points>
+            </PointsContain>
+            <Link href="/">
+              <LogoS />
+            </Link>
+            <MenuIcon onClick={() => { setHamburger(true) }} />
+            {
+              hamburger == true
+              &&
+              <>
+                <HamburgerContain>
+                  <IconsContain>
+                    <LogoS />
+                    <Close onClick={() => { setHamburger(false) }} />
+                  </IconsContain>
+                  <HBMenu>
+                    <Link href="/Preview" >
+                      <HBList onClick={() => { setHamburger(false) }}>
+                        Inicio
+                      </HBList>
+                    </Link>
+                    <a href="Https://gonvarnails.mx">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Tienda
                       </HBList>
-                      <Link href="/Preview">
-                        <HBList onClick={() => { setHamburger(false) }}>
-                          Catálogo
-                        </HBList>
-                      </Link>
-                      <Link href="/Profile">
-                        <HBList onClick={() => { setHamburger(false) }}>
-
-                          {userData ? userData.name : "Bienvenido"}    {"(Usuario MOVIL)"}
-                          {userData && userData.photoURL ?
-                            < UserImage
-                              style={{
-                                backgroundImage: "url(" + userData.photoURL + ")"
-                                , backgroundSize: "100%"
-                              }}
-                            > </UserImage>
-                            :
-                            < UserImage style={{
-                              backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                            }} > </UserImage>
-                          }
-                        </HBList>
-                      </Link>
-                      <Link href="/Rewards">
-                        <HBList onClick={() => { setHamburger(false) }}>
-                          Centro de Recompensas
-                          <Level />
-                        </HBList>
-                      </Link>
-                    </HBMenu>
-                  </HamburgerContain>
-                </>
-              }
-            </NavResponsive>
-
-          </>
-
-          : <></>
-      }
-      {//vista de usuario Loggin
-        // pathname == '/Profile' ||
-        //   pathname == '/Rewards' ||
-        //   pathname == '/Purchase' ||
-        //   pathname == '/Lesson' ||
-        //   pathname == '/Preview' ||
-        loggedIn && isAdmin
-          ?
-          <>
-            <NavContainer style={{ background: 'white', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
-              <Link href="/">
-                <Logo src="/images/logo3.png" width={130} height={70} />
-              </Link>
-              <NavTags>
-                <Link href={`/${route}`}>
-                  <NavText style={{ color: 'black' }}>
-                    Inicio
-                  </NavText>
-                </Link>
-                <NavText style={{ color: 'black' }}>
-                  Tienda
-                </NavText>
-
-                <Link href="/Purchase">
-                  <NavText style={{ color: 'black' }}>
-                    Comprar{" (Temp)"}
-                  </NavText>
-                </Link>
-                <Link href="/admin/Courses">
-                  <NavText style={{ color: 'black' }}>
-                    Cursos
-                  </NavText>
-                </Link>
-                <Link href="/Preview">
-                  <NavText style={{ color: 'black' }}>
-                    Cátalogo
-                  </NavText>
-                </Link>
-                <UserContain>
-                  <Level />
-                  <Link href="/Profile">
-                    <UserText>
-                      {userData ? userData.name : "Bienvenido"}   {"(Admin WEB)"}
-                    </UserText>
-                  </Link>
-                  {userData && userData.photoURL ?
-                    < UserImage
-                      style={{
-                        backgroundImage: "url(" + userData.photoURL + ")"
-                        , backgroundSize: "100%"
-                      }}
-                    > </UserImage>
-                    :
-                    < UserImage style={{
-                      backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                    }} > </UserImage>
-                  }
-                </UserContain>
-              </NavTags>
-            </NavContainer >
-            <NavResponsive>
-              <PointsContain>
-                <Level />
-                <Points>
-                  Puntos
-                </Points>
-              </PointsContain>
-              <LogoS />
-              <MenuIcon onClick={() => { setHamburger(true) }} />
-              {
-                hamburger == true
-                &&
-                <>
-                  <HamburgerContain>
-                    <IconsContain>
-                      <LogoS />
-                      <Close onClick={() => { setHamburger(false) }} />
-                    </IconsContain>
-                    <HBMenu>
-                      <Link href="/Preview" >
-                        <HBList onClick={() => { setHamburger(false) }}>
-                          Inicio
-                        </HBList>
-                      </Link>
+                    </a>
+                    <Link href="/Preview">
                       <HBList onClick={() => { setHamburger(false) }}>
-                        Tienda
+                        Catálogo
                       </HBList>
-                      <Link href="/Preview">
-                        <HBList onClick={() => { setHamburger(false) }}>
-                          Catálogo
-                        </HBList>
-                      </Link>
-                      <Link href="/Profile">
-                        <HBList onClick={() => { setHamburger(false) }}>
+                    </Link>
+                    <Link href="/Profile">
+                      <HBList onClick={() => { setHamburger(false) }}>
 
-                          {userData ? userData.name : "Bienvenido"}   {"(Admin MOVIL)"}
-                          {userData && userData.photoURL ?
-                            < UserImage
-                              style={{
-                                backgroundImage: "url(" + userData.photoURL + ")"
-                                , backgroundSize: "100%"
-                              }}
-                            > </UserImage>
-                            :
-                            < UserImage style={{
-                              backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                            }} > </UserImage>
-                          }
-                        </HBList>
-                      </Link>
-                      <Link href="/Rewards">
-                        <HBList onClick={() => { setHamburger(false) }}>
-                          Centro de Recompensas
-                          <Level />
-                        </HBList>
-                      </Link>
-                    </HBMenu>
-                  </HamburgerContain>
-                </>
-              }
-            </NavResponsive>
-
+                        {userData ? userData.name : "Bienvenido"}
+                        {userData && userData.photoURL ?
+                          < UserImage
+                            style={{
+                              backgroundImage: "url(" + userData.photoURL + ")"
+                              , backgroundSize: "100%"
+                            }}
+                          > </UserImage>
+                          :
+                          < UserImage style={{
+                            backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                          }} > </UserImage>
+                        }
+                      </HBList>
+                    </Link>
+                    <Link href="/Rewards">
+                      <HBList onClick={() => { setHamburger(false) }}>
+                        Centro de Recompensas
+                        <UserLevel />
+                      </HBList>
+                    </Link>
+                  </HBMenu>
+                </HamburgerContain>
+              </>
+            }
           </>
+        }
 
-          : <></>
-      }
-    </>
+      </NavResponsive>
+    </NavContainer>
 
   )
 }
 export default NavBar;
-

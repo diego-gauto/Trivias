@@ -1,11 +1,11 @@
 import React from 'react'
-import Courses from '../../../components/admin/Courses/Courses';
+import AddLesson from '../../../components/admin/Courses/Form/AddLesson';
 import { MainContain } from '../../../screens/Styles.styled';
-const EditView = () => {
+const AddView = () => {
   return (
     <MainContain>
-      <Courses />
+      <AddLesson />
     </MainContain>
   )
 }
-export default EditView;
+export default AddView;

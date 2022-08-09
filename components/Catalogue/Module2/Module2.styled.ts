@@ -13,6 +13,7 @@ export const ContinueText = styled.h1`
   margin: 0;
   @media( max-width: 1023px){
     font-size: 24px;
+    margin-left: 10px;
   }
 `;
 export const CardContainer = styled.div`
@@ -22,6 +23,7 @@ export const CardContainer = styled.div`
   overflow-x: scroll;
   ::-webkit-scrollbar{
     display: none;
+    width: 100%;
   }
 `;
 export const Video = styled.div`

@@ -7,7 +7,7 @@ height: 82.5vh;
   height: 100vh;
 }
 `;
-export const ArrowDownContainer = styled.div `
+export const ArrowDownContainer = styled.div`
 @keyframes bounce {
    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
    40% {transform: translateY(-2.5px);} 
@@ -170,9 +170,15 @@ display: flex;
 align-items: flex-end;
 justify-content: center;
 @media only screen and (max-width: 1024px) {
-  width: 90%;
+  width: 70%;
+  margin-top: 35%;
+  margin-left: 6%;
+  margin-right: 6%;
+}
+@media only screen and (max-width: 650px) {
+  width: 100%;
   margin-top: 50%;
-  margin-left: 5%;
+  margin-left: 3%;
   margin-right: 5%;
 }
 `;
