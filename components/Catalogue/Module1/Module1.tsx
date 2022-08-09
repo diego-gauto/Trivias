@@ -23,7 +23,7 @@ const Module1 = () => {
           priority
         /> */}
         <VideoContain>
-          <video style={{ width: "100vw", }} autoPlay loop muted>
+          <video style={{ width: "100vw", }} autoPlay loop muted playsInline >
             <source src="/images/Video/video1.mp4" type="video/mp4"></source>
           </video>
         </VideoContain>
