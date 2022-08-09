@@ -138,8 +138,8 @@ const Login = () => {
                       />
 
                       <div
-                        onMouseDown={togglePassword_1}
-                        onMouseUp={togglePassword_1}
+                        onPointerUp={togglePassword_1}
+                        onPointerDown={togglePassword_1}
                       ><EyeIcon ></EyeIcon></div>
                     </div>
                     <div className="invalid-feedback">
