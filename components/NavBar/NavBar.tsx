@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { DEFAULT_USER_IMG } from "../../constants/paths";
+import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {
@@ -29,11 +30,6 @@ import {
   UserContain,
   UserImage,
 } from "./NavBar.styled";
-
-<<<<<<< HEAD
-=======
-import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
->>>>>>> 606b158699066fc72fe5e6209b61143a63e8d9a0
 
 const NavBar = () => {
 
