@@ -98,7 +98,7 @@ const Register = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    setIsLoading(true)
+
     var value = (document.getElementById("input_1") as HTMLInputElement).value;
     var phoneInputValidation = ""
     if (value !== undefined && value !== null) {
@@ -113,6 +113,7 @@ const Register = () => {
         phoneInput: phoneInputValidation,
       },
     };
+    setIsLoading(true)
     signUpWithCreds(signUpData).then(() => {
       window.location.href = "/Preview";
     });
