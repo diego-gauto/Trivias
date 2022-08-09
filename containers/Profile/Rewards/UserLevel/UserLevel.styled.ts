@@ -35,6 +35,7 @@ export const ProgressCircle = styled("circle")<{progress:number}>`
     stroke-dasharray: 157;
     stroke-dashoffset: ${props=>props.progress};
     stroke-linecap: round;
+    
 `;
 export const ProgressBackground = styled.circle`
   fill: none;
