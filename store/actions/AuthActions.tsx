@@ -7,7 +7,9 @@ import {
   collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot
 } from "firebase/firestore";
 import { db } from '../../firebase/firebaseConfig';
+import { functions } from "../../firebase/firebaseConfig";
 import firebase from "firebase/compat/app";
+import { httpsCallable } from 'firebase/functions';
 import { useAuth } from "../../hooks/useAuth";
 
 export const signUpWithCreds = (signUpData: { credentials: any; }) => {
@@ -30,6 +32,16 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
 
       console.log("Provider Auth : 1")
 
+      const data = {
+        name: credentials.name,
+        email: credentials.email,
+      }
+
+      let stripeUser = httpsCallable(functions, 'createStripeUser');
+      await stripeUser(data).then((res: any) => {
+        console.log(res);
+      })
+
       await addDoc(collection(db, "users"), {
         uid: user?.uid,
         name: credentials.name,
@@ -38,8 +50,6 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         provider: "Webpage",
         phoneNumber: credentials.phoneInput,
         role: "user", //user, userAdmin, professor
-        paymentMethods: [],
-        courses: [],
         membership: {
           finalDate: '',
           level: 0,
