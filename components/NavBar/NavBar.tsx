@@ -30,6 +30,11 @@ import {
   UserImage,
 } from "./NavBar.styled";
 
+<<<<<<< HEAD
+=======
+import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
+>>>>>>> 606b158699066fc72fe5e6209b61143a63e8d9a0
+
 const NavBar = () => {
 
 
@@ -167,9 +172,7 @@ const NavBar = () => {
 
           <>
             <UserContain>
-              <Link href="/Rewards">
-                <Level />
-              </Link>
+              <UserLevel />
               <Link href="/Profile">
                 <NavText pathname={pathname} color={color}>
                   {userData ? userData.name : "Bienvenido"}
@@ -285,7 +288,7 @@ const NavBar = () => {
                     <Link href="/Rewards">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Centro de Recompensas
-                        <Level />
+                        <UserLevel />
                       </HBList>
                     </Link>
                   </HBMenu>
