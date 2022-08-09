@@ -130,19 +130,12 @@ export const ProgressCircle = styled("circle")<{progress:number}>`
       stroke-dashoffset:245 ;
       stroke-width: 10.5px;
     }
-    // @media(max-width: 1200px) {
-    //   stroke-dashoffset: 245px ;
-    //   stroke-width: 10.5px;
-    //   cx: 47.5;
-    //   cy: 47.5;
-    //   r: 42.5;
-    // }
 `;
 export const ProgressBackground = styled.circle`
   fill: none;
   width:76px;
   stroke: #808080;
-  stroke-width: 8px;
+  stroke-width: 7px;
   stroke-dasharray: 345;
   stroke-dashoffset: 0;
 `;

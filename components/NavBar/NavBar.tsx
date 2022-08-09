@@ -12,6 +12,7 @@ import {
 import { DEFAULT_USER_IMG } from "../../constants/paths";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
+import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
 
 const NavBar = () => {
 
@@ -150,9 +151,7 @@ const NavBar = () => {
 
           <>
             <UserContain>
-              <Link href="/Rewards">
-                <Level />
-              </Link>
+              <UserLevel />
               <Link href="/Profile">
                 <NavText pathname={pathname} color={color}>
                   {userData ? userData.name : "Bienvenido"}
@@ -268,7 +267,7 @@ const NavBar = () => {
                     <Link href="/Rewards">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Centro de Recompensas
-                        <Level />
+                        <UserLevel />
                       </HBList>
                     </Link>
                   </HBMenu>
