@@ -74,7 +74,7 @@ const UserInfo = ({ userData }: any) => {
           {userData.plan}
         </UserText>
       </UserContainer>
-      <Link href="/Screens/Landings">
+      <Link href="/">
         <LogOut
           onClick={logoutFunc}
         >
