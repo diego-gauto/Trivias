@@ -29,7 +29,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
 
 
       console.log("Provider Auth : 1")
-
+      let dateTime = new Date()
       await addDoc(collection(db, "users"), {
         uid: user?.uid,
         name: credentials.name,
@@ -40,6 +40,9 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         role: "user", //user, userAdmin, professor
         plan: "free", //gonvarPlus
         score: 0,
+        created_at: dateTime,
+        last_subscription: "",
+        active_subscription: false
 
 
       }).then(() => {
@@ -146,6 +149,8 @@ export const accessWithAuthProvider = (provider: any) => {
           photoURL = ""
         }
         //Create the document in Firestore
+
+        let dateTime = new Date()
         await addDoc(collection(db, "users"), {
 
           uid: uid,
@@ -157,6 +162,9 @@ export const accessWithAuthProvider = (provider: any) => {
           role: "user", //user, userAdmin, professor
           plan: "free", //gonvarPlus
           score: 0,
+          created_at: dateTime,
+          last_subscription: "",
+          active_subscription: false
 
 
         }).then(() => {

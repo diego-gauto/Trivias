@@ -4,7 +4,7 @@ import {
   TagContain, TagTitle, TagLabel, IconContain,
   Folder, InputIcon, CaretD,
   Button, ButtonContain,
-} from './CourseForm.styled';
+} from './CourseForm_Create.styled';
 import React, { useState } from 'react'
 import {
   Label2, Option, OptionContain,
@@ -16,6 +16,7 @@ import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createCourse } from "../../../../store/actions/AdminActions";
+
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -47,7 +48,7 @@ type FormValues = {
   coursePrice: number;
 };
 
-const CourseForm = () => {
+const CourseForm_Create = () => {
 
   const [select, setSelect] = useState("");
   const handleSelectChange = (e: any) => {
@@ -307,7 +308,7 @@ const CourseForm = () => {
           </TagLabel>
         </TagContain> */}
           <ButtonContain>
-            <Button type='submit'>Guardar Cambios</Button>
+            <Button type='submit'>Crear Curso</Button>
           </ButtonContain>
 
         </InputForm>
@@ -315,4 +316,4 @@ const CourseForm = () => {
     </CourseFormContain>
   )
 }
-export default CourseForm;
+export default CourseForm_Create;
