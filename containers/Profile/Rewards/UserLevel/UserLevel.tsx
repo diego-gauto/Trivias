@@ -72,17 +72,11 @@ const UserLevel = () => {
         <ProgressSvg
           xmlns="http://www.w3.org/2000/svg"
         >
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#8E2DE2" />
-              <stop offset="100%" stopColor="#4A00E0" />
-            </linearGradient>
-          </defs>
+
           <ProgressBackground
             cx="27px"
             cy="27px"
             r="25px"
-
           />
           <ProgressCircle
             cx="27px"

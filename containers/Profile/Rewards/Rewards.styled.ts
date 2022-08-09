@@ -124,11 +124,14 @@ export const ProgressSvg = styled.svg`
   height: 100%;
   top: 0;
   left: 0;
-  stroke-dasharray: 300;
+  stroke-dasharray: 346;
   position: absolute;
   transform: rotate(-90deg);
+  @media(max-width: 1023px) {
+    stroke-dasharray: 289;
+  }
 `;
-export const ProgressCircle = styled("circle")<{progress:number}>`
+export const ProgressCircle = styled("circle")<{progress:number,progressResp:number}>`
     fill: none;
     width: 76px;
     stroke: url(#gradient);
@@ -139,10 +142,12 @@ export const ProgressCircle = styled("circle")<{progress:number}>`
     r: 55px;
     stroke-dashoffset: ${props=>props.progress};
     stroke-linecap: round;
-    @media(max-width: 420px) {
-      cx: 60px;
-      cy:60px;
-      r: 55px;
+    @media(max-width: 1023px) {
+      stroke-dasharray: 289;
+      stroke-dashoffset: ${props=>props.progressResp};
+      cx: 50px;
+      cy:50px;
+      r: 46px;
     }
 `;
 export const ProgressBackground = styled.circle`
@@ -156,6 +161,7 @@ export const ProgressBackground = styled.circle`
   stroke-dasharray: 345;
   stroke-dashoffset: 0;
   @media(max-width: 1023px) {
+    stroke-dasharray: 289;
     cx: 50px;
     cy: 50px;
     r: 46px;
