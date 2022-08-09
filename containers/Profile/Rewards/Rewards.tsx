@@ -13,7 +13,7 @@ import {
   BannerContain,
   BannerTitle,
   CurrentLevel,
-  InnerProgress,
+  ImageContain,
   InsideContain,
   LevelContain,
   MainContain,
@@ -83,11 +83,13 @@ const Rewards = () => {
     <RewardContainer>
 
       <BannerContain>
-        <Banner
-          src="/images/Rewards/banner.png"
-          width={responsive560 ? "750" : "1900"}
-          height={responsive560 ? "500" : "450"}
-        />
+        <ImageContain>
+          <Banner
+            src="/images/Rewards/banner.png"
+            layout="fill"
+            priority
+          />
+        </ImageContain>
         <InsideContain>
           <BannerTitle>
             Centro de Recompensas
@@ -95,6 +97,10 @@ const Rewards = () => {
           <ProgressContain>
             <PointsText>
               {userData?.score}
+              &nbsp;
+              <span>
+                puntos
+              </span>
             </PointsText>
             <OuterProgress>
               <LevelContain>
@@ -114,16 +120,8 @@ const Rewards = () => {
                     <stop offset="100%" stopColor="#4A00E0" />
                   </linearGradient>
                 </defs>
-                <ProgressBackground
-                  cx={responsive560 ? "47.5" : "60"}
-                  cy={responsive560 ? "47.5" : "60"}
-                  r={responsive560 ? "42.5" : "55"}
-
-                />
+                <ProgressBackground />
                 <ProgressCircle
-                  cx={responsive560 ? "47.5" : "60"}
-                  cy={responsive560 ? "47.5" : "60"}
-                  r={responsive560 ? "42.5" : "55"}
                   progress={progress}
                 />
               </ProgressSvg>

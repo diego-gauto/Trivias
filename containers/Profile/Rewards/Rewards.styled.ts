@@ -31,15 +31,21 @@ export const MainContain = styled.div`
 export const Banner = styled(Image)`
   position: absolute;
   filter: brightness(50%);
-  &:@media(max-width: 870px) {
-    width: 870px;
-    height: 525px;
-  }
-  &:@media(max-width: 420px) {
-    width: 550px;
-    height: 525px;
-  }
   `;
+  export const ImageContain = styled.div`
+  width: 100%;
+  height: 300px;
+  position: relative;
+  @media(max-width: 600px) {
+    height: 280px;
+  }
+  @media(max-width: 450px) {
+    height: 260px;
+  }
+  @media(max-width: 400px) {
+    height: 240px;
+  }
+`;
 export const BannerContain = styled.div`
   display: flex;
   position: relative;
@@ -56,6 +62,9 @@ export const InsideContain = styled.div`
     padding-block: 30px;
     flex-direction: column;
   }
+  @media(max-width: 449px) {
+    padding-inline: 0;
+  }
 `;
 export const BannerTitle = styled.h1`
   font-size: 36px;
@@ -67,16 +76,28 @@ export const BannerTitle = styled.h1`
     margin-top:-15px;
     margin-bottom: 15px;
   }
+  @media(max-width: 449px) {
+    font-size: 20px;
+  }
 `;
 export const PointsText = styled.p`
   font-size: 36px;
   font-family: 'Montserrat', sans-serif;
   color: #E0C3FC;
   margin: 0;
+  span{
+    display: none;
+    @media(max-width: 1023px) {
+      display: revert;
+    }
+  }
   @media(max-width: 1023px) {
     order: 2;
     font-size: 24px;
     margin-top:-15px;
+  }
+  @media(max-width: 1023px) {
+    font-size: 20px;
   }
 `;
 export const ProgressContain = styled.div`
@@ -94,24 +115,13 @@ export const OuterProgress = styled.div`
   padding: 10px;
   border-radius: 50%;
   @media(max-width: 1023px) {
-    width: 96px;
-    max-width: 96px;
-    height: 96px;
+    width: 100px;
+    height: 100px;
   }
 `;
-export const InnerProgress = styled.div`
-  width: 100px;
-  height: 100px;
-  position: absolute;
-
-  border-radius: 50%;
-  @media(max-width: 1023px) {
-    width: 76px;
-    height: 76px;
-  }
-`;
-
 export const ProgressSvg = styled.svg`
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   stroke-dasharray: 300;
@@ -124,20 +134,32 @@ export const ProgressCircle = styled("circle")<{progress:number}>`
     stroke: url(#gradient);
     stroke-width: 8px;
     stroke-dasharray: 346;
+    cx: 60px;
+    cy:60px;
+    r: 55px;
     stroke-dashoffset: ${props=>props.progress};
     stroke-linecap: round;
     @media(max-width: 420px) {
-      stroke-dashoffset:245 ;
-      stroke-width: 10.5px;
+      cx: 60px;
+      cy:60px;
+      r: 55px;
     }
 `;
 export const ProgressBackground = styled.circle`
   fill: none;
   width:76px;
   stroke: #808080;
+  cx: 60px;
+  cy:60px;
+  r: 55px;
   stroke-width: 7px;
   stroke-dasharray: 345;
   stroke-dashoffset: 0;
+  @media(max-width: 1023px) {
+    cx: 50px;
+    cy: 50px;
+    r: 46px;
+  }
 `;
 export const LevelContain = styled.div`
   display: flex;
@@ -162,8 +184,6 @@ export const Vector = styled.i`
   position: absolute;
   bottom: 25px;
   @media(max-width: 1023px) {
-    height: 10px;
-    width: 30px;
     bottom: 20px;
   }
 `;
@@ -175,8 +195,6 @@ export const Vector2 = styled.i`
   position: absolute;
   bottom: 13px;
   @media(max-width: 1023px) {
-    height: 10px;
-    width: 30px;
     bottom: 8px;
   }
 `;

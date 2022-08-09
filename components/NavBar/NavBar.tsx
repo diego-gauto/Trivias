@@ -212,7 +212,7 @@ const NavBar = () => {
           loggedIn &&
           <>
             <PointsContain>
-              <Level />
+              <UserLevel />
               <Points>
                 Puntos
               </Points>
