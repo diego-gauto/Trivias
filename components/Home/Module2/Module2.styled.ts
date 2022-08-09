@@ -1,6 +1,7 @@
-import { Col, Row, Image, Container } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
+
 import styled from "styled-components";
- 
+
 export const ModuleContainer = styled(Container) `
 @media only screen and (max-width: 1024px) {
   margin: 25px auto;
@@ -35,6 +36,7 @@ width: 1073.125px;
 background: #FFFFFF;
 box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
+margin-top: -55px;
 @media (min-width: 1800px) {
   height: 550px;
   width: 1225px;   
@@ -44,6 +46,7 @@ border-radius: 10px;
   width: 100%;
   height: 430.5px;
   overflow: hidden;
+  margin-top: 0;
 }
 `;
 export const SectionCenteredWrapper = styled.div  `
