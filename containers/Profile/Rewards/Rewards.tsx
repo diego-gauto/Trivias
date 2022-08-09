@@ -9,7 +9,6 @@ import {
   BannerContain,
   BannerTitle,
   CurrentLevel,
-  InnerProgress,
   InsideContain,
   LevelContain,
   MainContain,
