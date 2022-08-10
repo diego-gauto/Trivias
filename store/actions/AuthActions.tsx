@@ -37,52 +37,45 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         email: credentials.email,
       }
 
-      let stripeUser = httpsCallable(functions, 'createStripeUser');
-      await stripeUser(data).then((res: any) => {
-        console.log(res);
-      })
-
-      await addDoc(collection(db, "users"), {
-        uid: user?.uid,
-        name: credentials.name,
-        email: credentials.email,
-        photoURL: "",
-        provider: "Webpage",
-        phoneNumber: credentials.phoneInput,
-        role: "user", //user, userAdmin, professor
-        membership: {
-          finalDate: '',
-          level: 0,
-          method: '',
-          planId: '',
-          planName: '',
-          paymentMethod: {
-            card: '',
-            last4: '',
-            month: '',
-            year: '',
-            brand: '',
-          }
-        },
-        score: 0,
-
-
-      }).then(() => {
-
-
-        console.log("Provider Auth : 2")
-
-      }).catch((error: any) => {
-        let docCreationError = new Error(`Error creating user document: ${error}`);
-        console.error(docCreationError);
-        throw (docCreationError);
+      const stripeUser = httpsCallable(functions, 'createStripeUser');
+      await stripeUser(data).then(async (res: any) => {
+        await addDoc(collection(db, "users"), {
+          uid: user?.uid,
+          name: credentials.name,
+          email: credentials.email,
+          photoURL: "",
+          provider: "Webpage",
+          phoneNumber: credentials.phoneInput,
+          role: "user", //user, userAdmin, professor
+          stripeId: res.data.id,
+          membership: {
+            finalDate: '',
+            level: 0,
+            method: '',
+            planId: '',
+            planName: '',
+            paymentMethod: {
+              card: '',
+              last4: '',
+              month: '',
+              year: '',
+              brand: '',
+            }
+          },
+          score: 0,
+        }).then(() => {
+          console.log("Provider Auth : 2")
+        }).catch((error: any) => {
+          let docCreationError = new Error(`Error creating user document: ${error}`);
+          console.error(docCreationError);
+          throw (docCreationError);
+        })
       })
     }).catch((error: any) => {
       firebase.auth().signOut();
       console.error(error);
       throw error;
     })
-
 }
 
 export const signInWithCreds = (signUpData: { credentials: any; }) => {
@@ -111,9 +104,6 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
 
 
 export const accessWithAuthProvider = (provider: any) => {
-
-
-
   switch (provider) {
     case "Google":
       provider = new firebase.auth.GoogleAuthProvider();
@@ -171,44 +161,50 @@ export const accessWithAuthProvider = (provider: any) => {
         if (photoURL == undefined || photoURL == null) {
           photoURL = ""
         }
-        //Create the document in Firestore
-        await addDoc(collection(db, "users"), {
-
-          uid: uid,
+        const data = {
           name: displayName,
           email: email,
-          photoURL: photoURL,
-          provider: provider.providerId,
-          phoneNumber: phoneNumber,
-          role: "user", //user, userAdmin, professor
-          paymentMethods: [],
-          courses: [],
-          membership: {
-            finalDate: '',
-            level: 0,
-            method: '',
-            planId: '',
-            planName: '',
-            paymentMethod: {
-              card: '',
-              last4: '',
-              month: '',
-              year: '',
-              brand: '',
-            }
-          },
-          score: 0,
+        }
+        const stripeUser = httpsCallable(functions, 'createStripeUser');
+        await stripeUser(data).then(async (res: any) => {
+
+          //Create the document in Firestore
+          await addDoc(collection(db, "users"), {
+            uid: uid,
+            name: displayName,
+            email: email,
+            photoURL: photoURL,
+            provider: provider.providerId,
+            phoneNumber: phoneNumber,
+            role: "user", //user, userAdmin, professor
+            stripeId: res.data.id,
+            membership: {
+              finalDate: '',
+              level: 0,
+              method: '',
+              planId: '',
+              planName: '',
+              paymentMethod: {
+                card: '',
+                last4: '',
+                month: '',
+                year: '',
+                brand: '',
+              }
+            },
+            score: 0,
 
 
-        }).then(() => {
+          }).then(() => {
 
-          console.log("Provider Auth : 3 | Wasn´t already registered")
-          return true;
+            console.log("Provider Auth : 3 | Wasn´t already registered")
+            return true;
 
-        }).catch((error: any) => {
-          let docCreationError = new Error(`Error creating user document: ${error}`);
-          console.error(docCreationError);
-          throw (docCreationError);
+          }).catch((error: any) => {
+            let docCreationError = new Error(`Error creating user document: ${error}`);
+            console.error(docCreationError);
+            throw (docCreationError);
+          })
         })
 
       } else {
