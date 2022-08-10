@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import {
   Close, HamburgerContain, HBList, HBMenu,
-  IconsContain, Level, Logo, LogoContain,
+  IconsContain, Logo, LogoContain,
   LogoS, MenuIcon, NavContainer, NavResponsive,
   NavTags, NavText, Points, PointsContain, PurpleButton,
   TagsResp, UserContain, UserImage
@@ -13,6 +13,7 @@ import { DEFAULT_USER_IMG } from "../../constants/paths";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
+import RespLevel from '../../containers/Profile/Rewards/UserLevel/RespLevel';
 
 const NavBar = () => {
 
@@ -135,7 +136,7 @@ const NavBar = () => {
               </Link>
               : <></>
         }
-        <NavText pathname={pathname} color={color} href="Https://gonvarnails.mx">
+        <NavText pathname={pathname} color={color} target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
         {
@@ -212,7 +213,7 @@ const NavBar = () => {
           loggedIn &&
           <>
             <PointsContain>
-              <UserLevel />
+              < RespLevel />
               <Points>
                 Puntos
               </Points>
@@ -236,7 +237,7 @@ const NavBar = () => {
                         Inicio
                       </HBList>
                     </Link>
-                    <a href="Https://gonvarnails.mx">
+                    <a href="Https://gonvarnails.mx" target="_blank">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Tienda
                       </HBList>
@@ -267,7 +268,7 @@ const NavBar = () => {
                     <Link href="/Rewards">
                       <HBList onClick={() => { setHamburger(false) }}>
                         Centro de Recompensas
-                        <UserLevel />
+                        <RespLevel />
                       </HBList>
                     </Link>
                   </HBMenu>
