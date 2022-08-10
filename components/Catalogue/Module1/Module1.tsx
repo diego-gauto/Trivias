@@ -1,4 +1,5 @@
 import ReactPlayer from "react-player";
+import { useMediaQuery } from "react-responsive";
 
 import {
   ButtonContain,
@@ -14,6 +15,7 @@ import {
 } from "./Module1.styled";
 
 const Module1 = () => {
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   return (
     <Container>
@@ -26,20 +28,18 @@ const Module1 = () => {
             playing={true}
             muted={true}
             //controls
-            width='100vw'
-            height='100%'
+            width='100%'
+            height='180%'
+            style={{ position: "absolute", top: responsive1023 ? "-95px" : "-170px", }}
           />
-          {/* <video style={{ width: "100vw", }} autoPlay loop muted playsInline >
-            <source src="https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8" type="application/x-mpegURL"></source>
-          </video> */}
         </VideoContain>
       </ImageContain>
 
       <TextContain>
-        <Title style={{ textShadow: "1px 1px 10px black" }}>
+        <Title style={{ textShadow: "1px 1px 5px black" }}>
           Curso 1: Episodio 05 “El Regreso”
         </Title>
-        <SubText style={{ textShadow: "1px 1px 10px black" }}>
+        <SubText style={{ textShadow: "1px 1px 5px black" }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus adipiscing amet, enim quis. Quis massa tempus felis id tellus nunc, eu.
         </SubText>
         <ButtonContain>

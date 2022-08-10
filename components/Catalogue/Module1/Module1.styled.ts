@@ -33,13 +33,16 @@ export const VideoContain = styled.div`
     height: 500px;
   }
   @media (max-width: 850px) {
-    height: 400px;
+    height: 370px;
   }
-  @media (max-width: 650px) {
+  @media (max-width: 670px) {
     height: 300px;
   }
+  @media (max-width: 520px) {
+    height: 245px;
+  }
   @media (max-width: 450px) {
-    height: 200px;
+    height: 220px;
   }
 `;
 export const TextContain = styled.div`
@@ -137,9 +140,10 @@ export const TransparentButton = styled.button`
   padding-block: 15px;
   padding-inline: 25px;
   background:transparent;
-  color: #fff;
+  color: #ffff;
   border-radius: 30px;
-  border:1px solid white;
+  background-color: #CDCDFF;
+  border: none;
   &:hover{
     transform:scale(1.03);
     transition:.5s ease all;
@@ -148,10 +152,14 @@ export const TransparentButton = styled.button`
     font-size: 12px;
     padding-block: 10px;
     padding-inline: 15px;
+    color: #ffff;
+    border:none;
   }
   @media (max-width: 450px) {
     padding-block: 8px;
     font-size: 10px;
+    color: #ffff;
+    border:none;
   }
 `;
 export const PlayIcon = styled.i`
