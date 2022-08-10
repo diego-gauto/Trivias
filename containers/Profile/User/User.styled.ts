@@ -502,3 +502,10 @@ export const SubscriptionButton = styled.button`
     font-size:12px;
   }
 `;
+export const LevelContain = styled.div`
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  background: transparent;
+  border-radius: 50%;
+`;

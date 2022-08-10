@@ -13,18 +13,18 @@ import TimePrizes from "./TimePrizes";
 import Times from "./Times";
 
 const TimeRewards = ({ setRewards }: any) => {
-  const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   return (
     <>
       <MainContain>
         <OffContainer onClick={() => { setRewards(true) }}>
           <MainTitle>
-            {responsive870 ? "Por Puntuaje" : "Recompensas por Puntuaje"}
+            {responsive1023 ? "Por Puntuaje" : "Recompensas por Puntuaje"}
           </MainTitle>
         </OffContainer>
         <Container>
           <MainTitle>
-            {responsive870 ? "Por Tiempo" : "Recompensas por Tiempo"}
+            {responsive1023 ? "Por Tiempo" : "Recompensas por Tiempo"}
           </MainTitle>
         </Container>
       </MainContain>

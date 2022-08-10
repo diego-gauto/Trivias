@@ -1,16 +1,5 @@
 import styled from "styled-components";
 
-export const Background = styled.div`
-  background: white;
-  opacity: .5;
-  top:0;
-  left:0;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
-`;
 export const OuterProgress = styled.div`
   cursor: pointer;
   width: 54px;
@@ -44,7 +33,7 @@ export const CurrentLevel = styled.p`
 `;
 export const ProgressCircle = styled("circle")<{progress:number}>`
     fill: none;
-    stroke: url(#gradient2);
+    stroke: url(#gradient3);
     stroke-width: 4px;
     stroke-dasharray: 157;
     stroke-dashoffset: ${props=>props.progress};

@@ -3,6 +3,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/functions";
 import 'firebase/compat/storage';
+import { getFunctions } from "firebase/functions";
 
 export const config = {
 
@@ -25,4 +26,5 @@ export function getTimestamp() {
 
 export const auth = app.auth();
 export const db = app.firestore();
+export const functions = getFunctions(app);
 

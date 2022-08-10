@@ -3,7 +3,6 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebaseConfig";
 import { useAuth } from "../../../../hooks/useAuth";
 import {
-  Background,
   CurrentLevel,
   LevelContain,
   OuterProgress,
@@ -12,10 +11,10 @@ import {
   ProgressSvg,
   Vector,
   Vector2,
-} from "./UserLevel.styled";
+} from "./RespLevel.styled";
 import Link from "next/link";
 
-const UserLevel = () => {
+const RespLevel = () => {
   const [loggedIn, setLoggedIn] = useState<any>(false);
   const [userData, setUserData] = useState<any>(null);
   try {
@@ -74,7 +73,7 @@ const UserLevel = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <linearGradient id="gradient2">
+            <linearGradient id="gradient3">
               <stop offset="0%" stopColor="#8E2DE2" />
               <stop offset="100%" stopColor="#4A00E0" />
             </linearGradient>
@@ -95,4 +94,4 @@ const UserLevel = () => {
     </Link>
   )
 }
-export default UserLevel;
+export default RespLevel;

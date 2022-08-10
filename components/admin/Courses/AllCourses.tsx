@@ -2,7 +2,20 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { ChevD, ChevU, CourseContainer, CourseContent, CourseName, Info, Label, MainContainer, Column, Text, TitleContain, ButtonContain, TransparentButton, PurpleButton } from './AllCourses.styled'
 
-export const AllCourses = () => {
+import { IAllCourses } from "./IAllCourses";
+
+export const AllCourses = (props: IAllCourses) => {
+
+  const { courseTittle } = props;
+  const { courseAbout } = props;
+  const { courseCategory } = props;
+  const { courseDuration } = props;
+  const { coursePrice } = props;
+  const { courseProfessor } = props;
+  const { coursePublishYear } = props;
+  const { courseSubtittle } = props;
+  const { index } = props;
+  const { documentID } = props;
 
   const [open, setOpen] = useState(false)
   return (
@@ -10,7 +23,7 @@ export const AllCourses = () => {
       <CourseContainer>
         <TitleContain>
           <CourseName>
-            Curso 2
+            Curso {index}
           </CourseName>
           {
             open == false &&
@@ -29,43 +42,37 @@ export const AllCourses = () => {
               <Column>
                 <Info>
                   <Label>Título del Curso</Label>
-                  <Text>Curso de Uñas Francesas</Text>
+                  <Text>{courseTittle}</Text>
                 </Info>
                 <Info>
                   <Label>Subtítulo del Curso</Label>
-                  <Text>Descubre un nuevo método para
-                    tus uñas este San Valentín</Text>
+                  <Text>{courseSubtittle} </Text>
                 </Info>
                 <Info>
                   <Label>Sobre el Curso</Label>
-                  <Text>Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Nisi, sem rutrum blandit
-                    convallis. Penatibus scelerisque tempus,
-                    volutpat magna venenatis, volutpat. Ut nisl
-                    urna, pharetra et ultrices. Sapien lacinia
-                    fringilla rhoncus egestas nisl aliquam.
-                    Pellentesque ornare luctus lobortis non id in
-                    vestibulum.</Text>
+                  <Text>
+                    {courseAbout}
+                  </Text>
                 </Info>
               </Column>
               <Column>
                 <Info>
                   <Label>Profesor(es)</Label>
-                  <Text>Darth Vader, Grand Moff Tarkin</Text>
+                  <Text> {courseProfessor} </Text>
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
-                  <Text>Uñas de salón</Text>
+                  <Text> {courseCategory} </Text>
                 </Info>
                 <Info>
                   <Label>Año de Publicación</Label>
-                  <Text>2022</Text>
+                  <Text> {coursePublishYear} </Text>
                 </Info>
               </Column>
               <Column>
                 <Info>
                   <Label>Duración de Suscripción (Días)</Label>
-                  <Text>90</Text>
+                  <Text> {courseDuration} </Text>
                 </Info>
                 <Info>
                   <Label>Portada del Curso</Label>
@@ -73,13 +80,13 @@ export const AllCourses = () => {
                 </Info>
                 <Info>
                   <Label>Precio (MXN)</Label>
-                  <Text>998</Text>
+                  <Text> {coursePrice} </Text>
                 </Info>
               </Column>
             </CourseContent>
             <ButtonContain>
               <TransparentButton onClick={() => { setOpen(false) }}>Cerrar</TransparentButton>
-              <Link href="/admin/Edit">
+              <Link href={`/admin/Edit?documentID=${documentID}`}>
                 <PurpleButton>Editar</PurpleButton>
               </Link>
             </ButtonContain>
