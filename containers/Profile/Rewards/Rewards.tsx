@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 
@@ -34,6 +34,7 @@ const Rewards = () => {
   const [rewards, setRewards] = useState(true);
   const responsive560 = useMediaQuery({ query: "(max-width: 560px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
@@ -70,7 +71,32 @@ const Rewards = () => {
       return false
     }
   }
+  const [loading, setLoading] = useState(true);
+  const levelRef = collection(db, "levelPoints")
+  const [level, setLevel] = useState<any>([]);
 
+  const getLevel = async () => {
+    const data = await getDocs(levelRef)
+    data.forEach((doc) => {
+      setLevel(doc.data())
+    })
+
+    // setLevel(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+  }
+  useEffect(() => {
+    getLevel();
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return (
+      <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
   let lastLevel: number = 100;
 
   let nextLevel: number = 400;
