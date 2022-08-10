@@ -144,10 +144,32 @@ export const NavResponsive = styled.div`
     padding-block: 5px;
     padding-inline: 10px;
   }
-
+  input.hamburger-checkbox {
+      position: absolute;
+      top: 1vh;
+      right: 2vw;
+      width: 12vw;
+      opacity: 0;
+      z-index: 15;
+      height: 6vh;
+    }
   @font-face{
     font-family:Raleway;
     src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  }
+  #openmenu:checked ~ .menu-pane {
+    transform: translateY(113%);
+  }
+  #openmenu:checked ~ .hamburger-icon span:nth-of-type(2) {
+    transform: rotate(45deg);
+    background-color: #5000b5;
+  }
+  #openmenu:checked ~ .hamburger-icon span:nth-of-type(1) {
+    transform: translate(0%, 220%) rotate(-45deg);
+    background-color: #5000b5;
+  }
+  #openmenu:checked ~ .hamburger-icon span:nth-of-type(3) {
+    opacity: 0;
   }
 `;
 export const HamburgerContain = styled.div`
@@ -156,12 +178,13 @@ export const HamburgerContain = styled.div`
   gap: 50px;
   background-color: white;
   padding-block: 20px;
+  transition: 0.4s ease-in-out;
   padding-inline: 30px;
   width: 100%;
-  height: 100vh;
-  position: fixed;
+  height: 100;
+  position: absolute;
   z-index: 10;
-  top: 0;
+  top: -450px;
   left: 0;
   @media(max-width: 424px){
     padding: 20px;
@@ -178,11 +201,19 @@ export const Close = styled.i`
   cursor: pointer;
 `;
 export const MenuIcon = styled.i`
-  background-image: url(../images/Navbar/menu.png);
-  background-repeat:no-repeat;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 30px;
   cursor: pointer;
+  span {
+    height: 5px;
+    width: 40px;
+    background-color: #5000b5;
+    display: block;
+    border-radius: 5px;
+    margin: 0px 0px 7px 0px;
+    transition: 0.7s ease-in-out;
+    transform: none;
+  }
 `;
 export const Points = styled.p`
   font-size: 12px;
@@ -197,7 +228,7 @@ export const PointsContain = styled.div`
 `;
 export const IconsContain = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
 `;
 export const TagsResp = styled.div`
