@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { collection, DocumentData, documentId, onSnapshot, query, where } from "firebase/firestore";
+import { collection, doc, DocumentData, documentId, onSnapshot, query, where } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import SideBar from '../SideBar';
@@ -13,13 +13,16 @@ import {
   ImageBack, Imagecontain, NewText, Subtitle,
   Title
 } from './Courses.styled';
-import CourseForm from './Form/CourseForm';
+import CourseForm_Update from './Form/CourseForm_Update';
 import Lessons from './Form/Lessons';
 
 
 const Courses = () => {
 
+
+  const [isLoading, setIsLoading] = useState(true);
   var courseID: any = ""
+
 
   try {
     var str: any = ""
@@ -33,73 +36,97 @@ const Courses = () => {
     courseID = "none"
   }
 
-  //declare any object in state
-  const [courses, setCourses] = useState<any>(null);
+  const [courseData, setCoursesData] = useState<any>(null);
 
-
-
-  //Call firestore user data
   useEffect(() => {
+    console.log(courseID)
+    fetchDB_data()
+  }, [courseID])
 
+  useEffect(() => {
+    if (courseData !== null) {
 
+      setIsLoading(false)
+    }
+  }, [courseData])
 
-    console.log(str)
-
-    //fetchDB_data()
-  }, [])
-
-  //firestore query from auth data
+  //firestore query from specific document in a collection with ID
   const fetchDB_data = async () => {
     try {
-      const query_1 = query(collection(db, "courses"));
-      return onSnapshot(query_1, (response) => {
+      console.log("hello")
+      return await db.collection('courses').get().then((response) => {
         var data: DocumentData = [];
-
         response.forEach((e) => {
-          var obj: any = {}
-          obj = e.data()
-          obj["documentID"] = e.id
-          data.push(obj)
+
+          if (e.id == courseID) {
+
+            var obj: any = {}
+            obj = e.data()
+            data.push(obj)
+          }
         });
-        setCourses(data)
-        console.log(data)
+        setCoursesData(data)
         return data
       })
     } catch (error) {
+      console.log(error)
       return false
     }
   }
 
 
   return (
-    <AdminContain>
-      <SideBar />
-      <CourseContain>
-        <Imagecontain>
-          <ImageBack
-            src="/images/admin/Courses/DemoBack.png"
-            layout="fill"
-            priority />
-          <BackgroundOverlay />
-        </Imagecontain>
+    <>
+      {!isLoading ? (
 
-        <Container>
-          <NewText>Nuevo</NewText>
-          <Title>Curso de Uñas Francesas</Title>
-          <Subtitle>Descubre un nuevo método para tus uñas este San Valentín</Subtitle>
+        <AdminContain>
+          <SideBar />
+          <CourseContain>
+            <Imagecontain>
+              <ImageBack
+                src="/images/admin/Courses/DemoBack.png"
+                layout="fill"
+                priority />
+              <BackgroundOverlay />
+            </Imagecontain>
 
-        </Container>
-        {/* Form de cursos */}
-        <CourseForm />
-        {/* Lista de lecciones */}
-        <Lessons />
-        <ButtonContain>
-          <Link href="/admin/Courses">
-            <PurpleButton>Regresar</PurpleButton>
-          </Link>
-        </ButtonContain>
-      </CourseContain>
-    </AdminContain>
+            <Container>
+              <NewText>Nuevo</NewText>
+              <Title>Curso de Uñas Francesas</Title>
+              <Subtitle>Descubre un nuevo método para tus uñas este San Valentín</Subtitle>
+
+            </Container>
+            {/* Form de cursos */}
+            {
+              courseData !== null
+                ?
+                <CourseForm_Update courseTittle={courseData[0].courseTittle}
+                  courseAbout={courseData[0].courseAbout}
+                  courseCategory={courseData[0].courseCategory}
+                  courseDuration={courseData[0].courseDuration}
+                  coursePrice={courseData[0].coursePrice}
+                  courseProfessor={courseData[0].courseProfessor}
+                  coursePublishYear={courseData[0].coursePublishYear}
+                  courseSubtittle={courseData[0].courseSubtittle}
+                  index={0}
+                  documentID={courseID} />
+                :
+                <></>
+            }
+
+            {/* Lista de lecciones */}
+            <Lessons />
+            <ButtonContain>
+              <Link href="/admin/Courses">
+                <PurpleButton>Regresar</PurpleButton>
+              </Link>
+            </ButtonContain>
+          </CourseContain>
+        </AdminContain>
+      ) : (
+        <></>
+      )}
+    </>
   )
 }
 export default Courses;
