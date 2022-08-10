@@ -4,9 +4,11 @@ import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
+import UserLevel from "../Rewards/UserLevel/UserLevel";
 import {
   LabelText,
   Level,
+  LevelContain,
   LogOut,
   LogOutIcon,
   PictureContain,
@@ -39,7 +41,9 @@ const UserInfo = ({ userData }: any) => {
             <ProfileIcon src={userData.photoURL} ></ProfileIcon>
             : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
           }
-          <Level />
+          <LevelContain>
+            <UserLevel />
+          </LevelContain>
         </PictureContain>
       </ProfileIconContain>
       <UserContainer>
