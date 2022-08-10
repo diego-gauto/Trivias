@@ -47,13 +47,6 @@ const NavBar = () => {
   useEffect(() => {
     fetchDB_data()
   }, [loggedIn])
-  /*   useEffect(() => {
-      try {
-        console.log(userData)
-        console.log(userData.role)
-      } catch (error) {
-      }
-    }, [userData]) */
 
   //firestore query from auth data
   const fetchDB_data = async () => {

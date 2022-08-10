@@ -17,18 +17,13 @@ CourseForm_Create
 const CourseMain = () => {
 
 
-
-  //declare any object in state
   const [courses, setCourses] = useState<any>(null);
 
 
-
-  //Call firestore user data
   useEffect(() => {
     fetchDB_data()
   }, [])
 
-  //firestore query from auth data
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "courses"));

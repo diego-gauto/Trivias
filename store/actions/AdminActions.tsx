@@ -25,6 +25,21 @@ export const createCourse = (signUpData: { data: any; }) => {
     })
 
 }
+export const updateCourse = (signUpData: { data: any; }) => {
+  const {
+    data,
+  } = signUpData;
+
+  console.log(signUpData)
+
+  return db.collection('courses').doc(data.documentID).update(data)
+    .catch((error: any) => {
+      let docCreationError = new Error(`Error updating user document: ${error}`);
+      console.error(docCreationError);
+      throw (docCreationError);
+    })
+
+}
 
 /*
   const handleChangeResolved = async (id, value) => {
