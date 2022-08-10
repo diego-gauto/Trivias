@@ -121,21 +121,11 @@ const NavBar = () => {
         }
       </LogoContain>
       <NavTags>
-        {
-          loggedIn ?
-            <Link href="/Preview">
-              <NavText pathname={pathname} color={color}>
-                Inicio
-              </NavText>
-            </Link>
-            : !loggedIn ?
-              <Link href="/">
-                <NavText pathname={pathname} color={color}>
-                  Inicio
-                </NavText>
-              </Link>
-              : <></>
-        }
+        <Link href="/Preview">
+          <NavText pathname={pathname} color={color}>
+            Inicio
+          </NavText>
+        </Link>
         <NavText pathname={pathname} color={color} target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
