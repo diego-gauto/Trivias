@@ -36,7 +36,6 @@ width: 1073.125px;
 background: #FFFFFF;
 box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
-margin-top: -55px;
 @media (min-width: 1800px) {
   height: 550px;
   width: 1225px;   
