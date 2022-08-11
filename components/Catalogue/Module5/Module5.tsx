@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link';
 import { ImageContent, CardImage, InsideContent, InsideText, Text1, Text2, Text3, VideoInfo } from '../Module3/Module3.styled';
 import { Banner2, ImageContain, CardContain, Cardcontent, Content, LimitTime, MainContainer, SpanText, SuscribeText, TextContent, Title, TextContain, TextContainer, PurpleButton, ButtonContain, Divider, RespContain, Cardcontent2, Cardcontent3 } from './Module5.styled';
 
@@ -120,9 +121,11 @@ const Module5 = () => {
           </CardContain>
         </RespContain>
         <ButtonContain>
-          <PurpleButton>
-            Adquiere Gonvar Plus
-          </PurpleButton>
+          <Link href={{ pathname: 'Purchase', query: { type: 'susbscription' } }}>
+            <PurpleButton>
+              Adquiere Gonvar Plus
+            </PurpleButton>
+          </Link>
         </ButtonContain>
       </Content>
     </MainContainer >

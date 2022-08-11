@@ -4,9 +4,15 @@ export const MainContain = styled.div`
   display:flex;
   margin-top: 20px;
   @media(max-width: 1023px) {
-    margin-top: -30px;
+    margin-top: -60px;
     justify-content: space-between;
     z-index: 1;
+  }
+  @media(max-width: 449px) {
+    margin-top: -50px;
+  }
+  @media(max-width: 400px) {
+    margin-top: -40px;
   }
 `;
 export const Container = styled.div`
@@ -19,13 +25,18 @@ export const Container = styled.div`
   background-color: white;
   box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, .2);
   @media(max-width: 1023px) {
-    width: 160px;
-    height: 40px;
-    margin-top:-20px;
-    background: #6717CD;
+    padding-inline: 20px;
+    padding-block: 12px;
     border-radius: 100px;
-    padding-top: 8px;
-    justify-content: center;
+    background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  }
+  @media(max-width: 449px) {
+    padding-inline: 15px;
+    padding-block: 8px;
+  }
+  @media(max-width: 400px) {
+    padding-inline: 15px;
+    padding-block: 4px;
   }
 `;
 export const OffContainer = styled.div`
@@ -35,13 +46,14 @@ export const OffContainer = styled.div`
   padding-inline: 25px;
   cursor: pointer;
   @media(max-width: 1023px) {
-    width: 160px;
-    height: 40px;
-    margin-top:-20px;
-    border: 1px solid #FFFFFF;
+    padding-inline: 20px;
+    padding-block: 12px;
     border-radius: 100px;
-    padding-top: 8px;
-    justify-content: center;
+    border: 1px solid #FFFFFF;
+  }
+  @media(max-width: 400px) {
+    padding-inline: 15px;
+    padding-block: 4px;
   }
 `;
 export const MainTitle = styled.p`
@@ -52,6 +64,12 @@ export const MainTitle = styled.p`
   margin: 0;
   @media(max-width: 1023px) {
     color: #FFFFFF;
+  }
+  @media(max-width: 600px) {
+    font-size: 14px;
+  }
+  @media(max-width: 449px) {
+    font-size: 12px;
   }
 `;
 export const RewardContainer = styled.div`

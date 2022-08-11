@@ -99,6 +99,8 @@ const CourseForm = () => {
     };
 
     createCourse(signUpData).then(() => {
+
+      window.location.href = "/admin/Courses";
       console.log("done!")
     });
 

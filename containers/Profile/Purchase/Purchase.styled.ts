@@ -350,22 +350,21 @@ export const PurpleBuyButton = styled.button`
   font-weight: 600;
   padding-block: 15px;
   padding-inline: 25px;
-  background-color: #6717CD;
+  background: linear-gradient(135deg, #8E2DE2 0%, #804FB3 25%, #6c4b91 50%, #552586 75%, #4A00E0 100%);
+  background-size: 200% 100%;
+  animation: ${glow} 2.7s ease infinite ;
   color: #fff;
   border-radius: 30px;
   border:none;
-  &:hover{
-    background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
-  }
+  // &:hover{
+  //   background-color: #5000b5;
+  //   transform:scale(1.03);
+  //   transition:.5s ease all;
+  // }
   @media(max-width: 1023px){
     font-size: 14px;
     padding-block: 10px;
     padding-inline: 15px;
-    background: linear-gradient(135deg, #8E2DE2 0%, #804FB3 25%, #6c4b91 50%, #552586 75%, #4A00E0 100%);
-    background-size: 200% 100%;
-    animation: ${glow} 2.7s ease infinite ;
   }
 `;
 export const PurchaseContainer = styled.div`

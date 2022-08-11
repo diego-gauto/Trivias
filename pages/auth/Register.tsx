@@ -113,6 +113,7 @@ const Register = () => {
         phoneInput: phoneInputValidation,
       },
     };
+    setIsLoading(true)
     signUpWithCreds(signUpData).then(() => {
       window.location.href = "/Preview";
     });
