@@ -76,17 +76,29 @@ const Rewards = () => {
   const [level, setLevel] = useState<any>([]);
 
   const getLevel = async () => {
+    let tempData: any = []
     const data = await getDocs(levelRef)
     data.forEach((doc) => {
-      setLevel(doc.data())
+      tempData.push({ ...doc.data(), id: doc.id })
     })
+    tempData = tempData.filter((data: any) => data.id == 'level_1')
+    setLevel(tempData[0])
 
-    // setLevel(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    // data.docs.map((doc) => {
+    //   setLevel({ ...doc.data(), id: doc.id })
+    // })
   }
+
   useEffect(() => {
     getLevel();
     setLoading(false);
+
   }, []);
+
+  useEffect(() => {
+    console.log(level)
+  }, [level])
+
 
   if (loading) {
     return (
