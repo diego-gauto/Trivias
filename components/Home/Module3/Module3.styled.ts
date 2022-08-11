@@ -1,6 +1,8 @@
  
-import styled from 'styled-components';
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+
+import styled from "styled-components";
+
 /* 
 export const ModuleImage = styled.div <{ ImgSRC: string }> `
 background-image : ${props => props.ImgSRC} !important
@@ -29,6 +31,7 @@ export const ResultsSection = styled.div `
 `;
 export const ButtonsContainer = styled.div `
 display: flex;
+gap: 20px;
 @media only screen and (max-width: 1024px) {
   justify-content: space-around;
   width: 100vw;

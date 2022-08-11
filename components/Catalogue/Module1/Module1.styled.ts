@@ -24,6 +24,13 @@ export const ImageContain = styled.div`
     height: 200px;
   }
 `;
+export const ImageContainMod1 = styled.div`
+  width: 100%;
+  height: 0;
+  position: relative;
+  top: -630px;
+  z-index: -1;
+`;
 export const VideoContain = styled.div`
   position: relative;
   overflow: hidden;
@@ -42,7 +49,7 @@ export const VideoContain = styled.div`
     height: 245px;
   }
   @media (max-width: 450px) {
-    height: 220px;
+    height: 250x;
   }
 `;
 export const TextContain = styled.div`
