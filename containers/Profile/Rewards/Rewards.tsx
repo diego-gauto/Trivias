@@ -74,6 +74,7 @@ const Rewards = () => {
   const [loading, setLoading] = useState(true);
   const levelRef = collection(db, "levelPoints")
   const [level, setLevel] = useState<any>([]);
+  const [userLevel, setUserLevel] = useState<any>([]);
 
   const getLevel = async () => {
     let tempData: any = []
@@ -81,23 +82,23 @@ const Rewards = () => {
     data.forEach((doc) => {
       tempData.push({ ...doc.data(), id: doc.id })
     })
-    tempData = tempData.filter((data: any) => data.id == 'level_1')
+    tempData = tempData.filter((data: any) => (data?.maximum >= userData?.score && data?.minimum <= userData?.score))
     setLevel(tempData[0])
 
     // data.docs.map((doc) => {
-    //   setLevel({ ...doc.data(), id: doc.id })
+    //   setUserLevel({ ...doc.data(), id: doc.id })
     // })
   }
 
   useEffect(() => {
     getLevel();
     setLoading(false);
-
   }, []);
 
   useEffect(() => {
     console.log(level)
-  }, [level])
+    console.log(userData?.score)
+  }, [level, userLevel])
 
 
   if (loading) {
@@ -109,12 +110,9 @@ const Rewards = () => {
       </Background>
     )
   }
-  let lastLevel: number = 100;
 
-  let nextLevel: number = 400;
-
-  let data: number = ((userData?.score - lastLevel) / (nextLevel - lastLevel)) * 346;
-  let dataResp: number = ((userData?.score - lastLevel) / (nextLevel - lastLevel)) * 289;
+  let data: number = ((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 346;
+  let dataResp: number = ((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 289;
 
   let progress: number = 346 - data;
   let progressResp: number = 289 - dataResp;
