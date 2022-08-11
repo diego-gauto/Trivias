@@ -35,9 +35,18 @@ const Rewards = () => {
   const responsive560 = useMediaQuery({ query: "(max-width: 560px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+
+  const [loading, setLoading] = useState(true);
+
+  const levelRef = collection(db, "levelPoints")
+
+  const [level, setLevel] = useState<any>([]);
+  const [userLevel, setUserLevel] = useState<any>([]);
+
+  const [data, setData] = useState<number>(0)
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -52,10 +61,7 @@ const Rewards = () => {
     console.log(error)
     setLoggedIn(false)
   }
-  useEffect(() => {
-    fetchDB_data()
 
-  }, [loggedIn])
 
   const fetchDB_data = async () => {
     try {
@@ -71,10 +77,6 @@ const Rewards = () => {
       return false
     }
   }
-  const [loading, setLoading] = useState(true);
-  const levelRef = collection(db, "levelPoints")
-  const [level, setLevel] = useState<any>([]);
-  const [userLevel, setUserLevel] = useState<any>([]);
 
   const getLevel = async () => {
     let tempData: any = []
@@ -84,22 +86,26 @@ const Rewards = () => {
     })
     tempData = tempData.filter((data: any) => (data?.maximum >= userData?.score && data?.minimum <= userData?.score))
     setLevel(tempData[0])
-
     // data.docs.map((doc) => {
     //   setUserLevel({ ...doc.data(), id: doc.id })
     // })
   }
 
+  let dataResp: number = ((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 289;
+
+  let progressResp: number = 289 - dataResp;
+
   useEffect(() => {
+    setData(346 - (((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 346));
     getLevel();
     setLoading(false);
-  }, []);
+    console.log(data)
+  }, [userData?.score]);
 
   useEffect(() => {
-    console.log(level)
-    console.log(userData?.score)
-  }, [level, userLevel])
+    fetchDB_data()
 
+  }, [loggedIn])
 
   if (loading) {
     return (
@@ -111,11 +117,8 @@ const Rewards = () => {
     )
   }
 
-  let data: number = ((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 346;
-  let dataResp: number = ((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 289;
 
-  let progress: number = 346 - data;
-  let progressResp: number = 289 - dataResp;
+
 
   return (
     <RewardContainer>
@@ -143,7 +146,7 @@ const Rewards = () => {
             <OuterProgress>
               <LevelContain>
                 <CurrentLevel>
-                  1
+                  {level?.name}
                 </CurrentLevel>
                 <Vector />
                 <Vector2 />
@@ -159,7 +162,7 @@ const Rewards = () => {
                 </defs>
                 <ProgressBackground />
                 <ProgressCircle
-                  progress={progress}
+                  progress={data}
                   progressResp={progressResp}
                 />
               </ProgressSvg>
