@@ -159,6 +159,18 @@ export const NavResponsive = styled.div`
   }
   #openmenu:checked ~ .menu-pane {
     transform: translateY(113%);
+    @media(max-width: 1023px){
+      transform: translateY(127%);
+    }
+    @media(max-width: 550px){
+      transform: translateY(135%);
+    }
+    @media(min-width: 425px){
+      transform: translateY(125%);
+    }
+    @media(max-width: 350px){
+      transform: translateY(145%);
+    }
   }
   #openmenu:checked ~ .hamburger-icon span:nth-of-type(2) {
     transform: rotate(45deg);
@@ -184,7 +196,7 @@ export const HamburgerContain = styled.div`
   height: 100;
   position: absolute;
   z-index: 10;
-  top: -450px;
+  top: -550px;
   left: 0;
   @media(max-width: 424px){
     padding: 20px;
