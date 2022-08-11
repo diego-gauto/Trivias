@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { Modal } from "react-bootstrap";
+
+import Image from "next/image";
 import styled from "styled-components";
 
 export const ModalContain = styled.div`
@@ -36,6 +37,15 @@ export const BackgroundOverlay = styled.div`
   left: 0;
   background: linear-gradient(360deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 39.51%);
   position: absolute;
+  @media(max-width:  670px){
+    height: 100%;
+  }
+  @media(max-width: 580px){
+    height: 101%;
+  }
+  @media(max-width: 400px){
+    height: 100%;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -149,20 +159,29 @@ export const InsideText = styled.p`
 `;
 export const CourseContain = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-top: 50px;
   padding-inline: 20px;
   gap: 20px;
   @media(max-width: 991px){
     flex-direction: column;
+    margin-top: -240px;
+    z-index: 10;
   }
-  @media(max-width: 500px){
+  @media(max-width: 850px){
+    flex-direction: column;
+    margin-top: -100px;
+    z-index: 10;
+  }
+  @media(max-width: 670px){
     padding-inline: 10px;
+    margin-top: -45px;
+    z-index: 10;
   }
-  @media(max-width: 400px){
-    margin-top: 20px;
+  @media(max-width: 520px){
+    margin-top: -5px;
   }
-  @media(max-width: 355px){
-    margin-top: 40px;
+  @media(max-width: 390px){
+    margin-top: -27px;
   }
 `;
 export const AboutContain = styled.div`
@@ -255,6 +274,28 @@ export const VideoContain = styled.div`
     flex-direction: column;
     justify-content: center;
   }
+`;
+export const ModalVideo = styled.div`
+position: relative;
+overflow: hidden;
+width: 100%;
+height: 430px;
+border-radius: 10px;
+@media (max-width: 1100px) {
+  height: 500px;
+}
+@media (max-width: 850px) {
+  height: 370px;
+}
+@media (max-width: 670px) {
+  height: 300px;
+}
+@media (max-width: 520px) {
+  height: 245px;
+}
+@media (max-width: 450px) {
+  height: 220px;
+}
 `;
 export const EpisodeContain = styled.div`
   display: flex;
