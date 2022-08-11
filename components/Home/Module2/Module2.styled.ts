@@ -110,7 +110,7 @@ margin-top: 27px;
 text-align: center;
 width: 100%; 
 `;
-export const IconText_B = styled.p  `
+export const IconText_B = styled.label  `
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 400;
