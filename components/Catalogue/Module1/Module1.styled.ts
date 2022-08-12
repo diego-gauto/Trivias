@@ -21,7 +21,7 @@ export const ImageContain = styled.div`
     height: 300px;
   }
   @media (max-width: 450px) {
-    height: 200px;
+    height: 210px;
   }
 `;
 export const ImageContainMod1 = styled.div`
@@ -37,19 +37,43 @@ export const VideoContain = styled.div`
   width: 100%;
   height: 600px;
   @media (max-width: 1100px) {
-    height: 500px;
+    height: 380px;
+    overflow: visible;
   }
   @media (max-width: 850px) {
-    height: 370px;
+    height: 340px;
+    overflow: hidden;
   }
   @media (max-width: 670px) {
-    height: 300px;
+    height: 310px;
+    overflow: visible;
   }
   @media (max-width: 520px) {
-    height: 245px;
+    height: 225px;
   }
   @media (max-width: 450px) {
     height: 250x;
+  }
+`;
+export const VideoContainMod3 = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 600px;
+  @media (max-width: 1100px) {
+    height: 425px;
+    overflow: visible;
+  }
+  @media (max-width: 850px) {
+    height: 410px;
+    overflow: visible;
+  }
+  @media (max-width: 450px) {
+    height: 367px;
+    overflow: visible;
+  }
+  @media (max-width: 380px) {
+    height: 355px;
   }
 `;
 export const TextContain = styled.div`

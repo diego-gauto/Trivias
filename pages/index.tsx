@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 
-import { ImageContainMod1, VideoContain } from "../components/Catalogue/Module1/Module1.styled";
+import { ImageContainMod1, VideoContainMod3 } from "../components/Catalogue/Module1/Module1.styled";
 import { Module1 } from "../components/Home/Module1/Module1";
 import { Module2 } from "../components/Home/Module2/Module2";
 import { Module3 } from "../components/Home/Module3/Module3";
@@ -13,7 +13,12 @@ import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
 
 const Homepage = () => {
+  const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
+  const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
+  const responsive600 = useMediaQuery({ query: "(max-width: 600px)" });
+  const responsive800 = useMediaQuery({ query: "(max-width: 800px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+
   return (
     <Container
       fluid
@@ -29,18 +34,20 @@ const Homepage = () => {
         button={"Nuevo"} title={"Curso de Uñas Francesas"}
         subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
       <ImageContainMod1>
-        <VideoContain>
+        <VideoContainMod3>
           <ReactPlayer
             className='absolute'
             url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
             playing={true}
             muted={true}
             //controls
-            width='100%'
+            width={responsive380 ? '200%' : '100%' &&
+              responsive520 ? '190%' : '100%' &&
+                responsive1023 ? '100%' : '100%'}
             height='180%'
             style={{ position: "absolute", top: responsive1023 ? "22px" : "-170px", }}
           />
-        </VideoContain>
+        </VideoContainMod3>
       </ImageContainMod1>
 
       <Module4_Carousel isInfinite={true} slideData={
