@@ -37,14 +37,23 @@ export const BackgroundOverlay = styled.div`
   left: 0;
   background: linear-gradient(360deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 39.51%);
   position: absolute;
+  @media(max-width:  1023px){
+    height: 55%;
+  }
+  @media(max-width:  850px){
+    height: 75%;
+  }
   @media(max-width:  670px){
-    height: 100%;
+    height: 90%;
   }
   @media(max-width: 580px){
     height: 101%;
   }
   @media(max-width: 400px){
-    height: 100%;
+    height: 98%;
+  }
+  @media(max-width: 375px){
+    height: 90%;
   }
 `;
 export const Container = styled.div`
