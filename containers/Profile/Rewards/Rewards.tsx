@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 
@@ -27,7 +27,6 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
-import { Progress } from "../../../components/Catalogue/Module2/Module2.styled";
 
 const Rewards = () => {
 
@@ -43,9 +42,30 @@ const Rewards = () => {
   const levelRef = collection(db, "levelPoints")
 
   const [level, setLevel] = useState<any>([]);
-  const [userLevel, setUserLevel] = useState<any>([]);
 
   const [data, setData] = useState<number>(0)
+  const [dataResp, setDataResp] = useState<number>(0)
+
+  const [unLocked, setUnLocked] = useState<any>([])
+  const [locked, setLocked] = useState<any>([])
+
+
+  const getUnLocked = async () => {
+    let tempData2: any = []
+    const data2 = await getDocs(levelRef)
+    data2.forEach((doc) => {
+      tempData2.push({ ...doc.data(), id: doc.id })
+    })
+    setUnLocked(tempData2.filter((data2: any) => data2.maximum < userData.score))
+  }
+  const getLocked = async () => {
+    let tempData3: any = []
+    const data3 = await getDocs(levelRef)
+    data3.forEach((doc) => {
+      tempData3.push({ ...doc.data(), id: doc.id })
+    })
+    setLocked(tempData3.filter((data3: any) => data3.maximum > userData.score))
+  }
 
   try {
     var userDataAuth = useAuth();
@@ -67,11 +87,12 @@ const Rewards = () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-        var userData: any;
+        var value: any;
         response.forEach((e) => {
-          userData = e.data()
+          value = e.data()
         });
-        setUserData(userData)
+
+        setUserData(value)
       })
     } catch (error) {
       return false
@@ -84,28 +105,32 @@ const Rewards = () => {
     data.forEach((doc) => {
       tempData.push({ ...doc.data(), id: doc.id })
     })
-    tempData = tempData.filter((data: any) => (data?.maximum >= userData?.score && data?.minimum <= userData?.score))
+    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score))
     setLevel(tempData[0])
-    // data.docs.map((doc) => {
-    //   setUserLevel({ ...doc.data(), id: doc.id })
-    // })
   }
 
-  let dataResp: number = ((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 289;
-
-  let progressResp: number = 289 - dataResp;
-
-  useEffect(() => {
-    setData(346 - (((userData?.score - level?.minimum) / (level?.maximum - level?.minimum)) * 346));
-    getLevel();
-    setLoading(false);
-    console.log(data)
-  }, [userData?.score]);
 
   useEffect(() => {
     fetchDB_data()
+  }, [])
 
-  }, [loggedIn])
+  useEffect(() => {
+    if (userData != null) {
+      getLevel();
+      getUnLocked();
+      getLocked();
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (userData != null && level != null) {
+      setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
+      setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      setLoading(false);
+      console.log(unLocked)
+      console.log(locked)
+    }
+  }, [level, unLocked, locked])
 
   if (loading) {
     return (
@@ -116,9 +141,6 @@ const Rewards = () => {
       </Background>
     )
   }
-
-
-
 
   return (
     <RewardContainer>
@@ -163,7 +185,7 @@ const Rewards = () => {
                 <ProgressBackground />
                 <ProgressCircle
                   progress={data}
-                  progressResp={progressResp}
+                  progressResp={dataResp}
                 />
               </ProgressSvg>
             </OuterProgress>
@@ -173,8 +195,17 @@ const Rewards = () => {
       <MainContain>
         {
           rewards
-            ? <PointRewards setRewards={setRewards} userData={userData} />
-            : <TimeRewards setRewards={setRewards} userData={userData} />
+            ? <PointRewards
+              setRewards={setRewards}
+              userData={userData}
+              level={level}
+              locked={locked}
+              unLocked={unLocked}
+            />
+            : <TimeRewards
+              setRewards={setRewards}
+              userData={userData}
+            />
         }
       </MainContain>
     </RewardContainer>
