@@ -1,5 +1,5 @@
 export interface IModule3{ 
-  courseImg : string;
+  courseImg? : string;
   button: string;
   title: string;
   subtitle: string;

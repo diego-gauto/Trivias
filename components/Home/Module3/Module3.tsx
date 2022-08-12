@@ -1,14 +1,23 @@
-import { Container, Col, Button, Image, Row } from "react-bootstrap";
-import React, { useState, useEffect } from 'react';
-import Icon1 from "./MediaSources/Icon01.png"
-import Icon2 from "./MediaSources/Icon02.png"
-import Icon3 from "./MediaSources/Icon03.png"
-import Icon4 from "./MediaSources/Icon04.png"
+import React, { useEffect, useState } from "react";
 
+import { Col, Container, Image, Row } from "react-bootstrap";
 
+import { IModule3 } from "./IModule3";
+import Icon1 from "./MediaSources/Icon01.png";
+import Icon2 from "./MediaSources/Icon02.png";
+import Icon3 from "./MediaSources/Icon03.png";
 import {
-  ImageTag, Left, ModuleImage,
+  Button01,
+  Button02,
+  ButtonsContainer,
+  ContentContainer,
+  ImageTag,
+  Left,
+  ModuleImage,
+  Newtag,
+  ResultsSection,
   Right,
+  RightContainer,
   SectionLeft01,
   SectionLeft02,
   SectionRight01,
@@ -18,25 +27,16 @@ import {
   SectionRight02_Wrapper,
   SectionRight03,
   SectionRight04,
-  Button01,
-  Button02,
-  Newtag,
-  Text02,
+  SectionRight04Container,
   Text01,
+  Text02,
   Text03,
   Text04,
   Text05,
   Text06,
-  TextNew,
-  ResultsSection,
-  ContentContainer,
-  RightContainer,
-  SectionRight04Container,
-  ButtonsContainer,
   Text06Sm,
+  TextNew,
 } from "./Module3.styled";
-
-import { IModule3 } from "./IModule3";
 
 export const Module3 = (props: IModule3) => {
   const { button } = props;
