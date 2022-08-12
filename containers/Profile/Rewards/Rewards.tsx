@@ -42,10 +42,30 @@ const Rewards = () => {
   const levelRef = collection(db, "levelPoints")
 
   const [level, setLevel] = useState<any>([]);
-  const [userLevel, setUserLevel] = useState<any>([]);
 
   const [data, setData] = useState<number>(0)
   const [dataResp, setDataResp] = useState<number>(0)
+
+  const [unLocked, setUnLocked] = useState<any>([])
+  const [locked, setLocked] = useState<any>([])
+
+
+  const getUnLocked = async () => {
+    let tempData2: any = []
+    const data2 = await getDocs(levelRef)
+    data2.forEach((doc) => {
+      tempData2.push({ ...doc.data(), id: doc.id })
+    })
+    setUnLocked(tempData2.filter((data2: any) => data2.maximum < userData.score))
+  }
+  const getLocked = async () => {
+    let tempData3: any = []
+    const data3 = await getDocs(levelRef)
+    data3.forEach((doc) => {
+      tempData3.push({ ...doc.data(), id: doc.id })
+    })
+    setLocked(tempData3.filter((data3: any) => data3.maximum > userData.score))
+  }
 
   try {
     var userDataAuth = useAuth();
@@ -86,23 +106,19 @@ const Rewards = () => {
       tempData.push({ ...doc.data(), id: doc.id })
     })
     tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score))
-
     setLevel(tempData[0])
-
-    data.docs.map((doc) => {
-      setUserLevel({ ...doc.data(), id: doc.id })
-    })
   }
 
 
   useEffect(() => {
     fetchDB_data()
-
   }, [])
 
   useEffect(() => {
     if (userData != null) {
       getLevel();
+      getUnLocked();
+      getLocked();
     }
   }, [userData]);
 
@@ -111,11 +127,10 @@ const Rewards = () => {
       setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
       setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
       setLoading(false);
+      console.log(unLocked)
+      console.log(locked)
     }
-
-  }, [level])
-
-
+  }, [level, unLocked, locked])
 
   if (loading) {
     return (
@@ -126,9 +141,6 @@ const Rewards = () => {
       </Background>
     )
   }
-
-
-
 
   return (
     <RewardContainer>
@@ -183,8 +195,17 @@ const Rewards = () => {
       <MainContain>
         {
           rewards
-            ? <PointRewards setRewards={setRewards} userData={userData} />
-            : <TimeRewards setRewards={setRewards} userData={userData} />
+            ? <PointRewards
+              setRewards={setRewards}
+              userData={userData}
+              level={level}
+              locked={locked}
+              unLocked={unLocked}
+            />
+            : <TimeRewards
+              setRewards={setRewards}
+              userData={userData}
+            />
         }
       </MainContain>
     </RewardContainer>

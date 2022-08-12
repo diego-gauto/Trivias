@@ -105,7 +105,7 @@ const NavBar = () => {
     () => {
       window.addEventListener('scroll', ChangeNav);
     },
-    [],
+    [pathname],
   );
   // COLOR NAVBAR
   return (
