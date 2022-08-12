@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../../firebase/firebaseConfig";
 import { useAuth } from "../../../../hooks/useAuth";
 import {
@@ -15,8 +15,16 @@ import {
 import Link from "next/link";
 
 const RespLevel = () => {
-  const [loggedIn, setLoggedIn] = useState<any>(false);
+
+  const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+
+  const levelRef = collection(db, "levelPoints")
+
+  const [level, setLevel] = useState<any>([]);
+
+  const [data, setData] = useState<number>(0)
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -31,40 +39,58 @@ const RespLevel = () => {
     console.log(error)
     setLoggedIn(false)
   }
-  useEffect(() => {
-    fetchDB_data()
 
-  }, [loggedIn])
 
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-        var userData: any;
+        var value: any;
         response.forEach((e) => {
-          userData = e.data()
+          value = e.data()
         });
-        setUserData(userData)
+        console.log("dsds")
+        setUserData(value)
       })
     } catch (error) {
       return false
     }
   }
 
-  let lastLevel: number = 100;
+  const getLevel = async () => {
+    let tempData: any = []
+    const data = await getDocs(levelRef)
+    data.forEach((doc) => {
+      tempData.push({ ...doc.data(), id: doc.id })
+    })
+    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score))
+    setLevel(tempData[0])
+  }
 
-  let nextLevel: number = 400;
+  useEffect(() => {
+    fetchDB_data()
 
-  let data: number = ((userData?.score - lastLevel) / (nextLevel - lastLevel)) * 157;
+  }, [loggedIn])
 
-  let progress: number = 157 - data;
+  useEffect(() => {
+    if (userData != null) {
+      getLevel();
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (userData != null && level != null) {
+      setData(157 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 157));
+    }
+
+  }, [level])
 
   return (
     <Link href="/Rewards">
       <OuterProgress>
         <LevelContain>
           <CurrentLevel>
-            1
+            {level.name}
           </CurrentLevel>
           <Vector />
           <Vector2 />
@@ -87,7 +113,8 @@ const RespLevel = () => {
             cx="27px"
             cy="27px"
             r="25px"
-            progress={progress}
+            progress={data}
+
           />
         </ProgressSvg>
       </OuterProgress>
