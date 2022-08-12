@@ -56,7 +56,7 @@ const Rewards = () => {
     data2.forEach((doc) => {
       tempData2.push({ ...doc.data(), id: doc.id })
     })
-    setUnLocked(tempData2.filter((data2: any) => data2.maximum < userData.score))
+    setUnLocked(tempData2.filter((data2: any) => data2.maximum < level.maximum))
   }
   const getLocked = async () => {
     let tempData3: any = []
@@ -64,7 +64,7 @@ const Rewards = () => {
     data3.forEach((doc) => {
       tempData3.push({ ...doc.data(), id: doc.id })
     })
-    setLocked(tempData3.filter((data3: any) => data3.maximum > userData.score))
+    setLocked(tempData3.filter((data3: any) => data3.maximum > level.maximum))
   }
 
   try {
