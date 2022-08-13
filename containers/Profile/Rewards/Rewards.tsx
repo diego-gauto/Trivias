@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs, doc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 
@@ -46,25 +46,15 @@ const Rewards = () => {
   const [data, setData] = useState<number>(0)
   const [dataResp, setDataResp] = useState<number>(0)
 
-  const [unLocked, setUnLocked] = useState<any>([])
-  const [locked, setLocked] = useState<any>([])
+  const [levels, setLevels] = useState<any>([])
 
-
-  const getUnLocked = async () => {
-    let tempData2: any = []
-    const data2 = await getDocs(levelRef)
-    data2.forEach((doc) => {
-      tempData2.push({ ...doc.data(), id: doc.id })
+  const getLevels = async (user: any) => {
+    let temp_levels: any = [];
+    const data = await getDocs(levelRef);
+    data.forEach((level) => {
+      temp_levels.push({ ...level.data(), id: level.id });
     })
-    setUnLocked(tempData2.filter((data2: any) => data2.maximum < level.maximum))
-  }
-  const getLocked = async () => {
-    let tempData3: any = []
-    const data3 = await getDocs(levelRef)
-    data3.forEach((doc) => {
-      tempData3.push({ ...doc.data(), id: doc.id })
-    })
-    setLocked(tempData3.filter((data3: any) => data3.maximum > level.maximum))
+    setLevels(temp_levels)
   }
 
   try {
@@ -78,8 +68,8 @@ const Rewards = () => {
     }, [])
 
   } catch (error) {
-    console.log(error)
-    setLoggedIn(false)
+    console.log(error);
+    setLoggedIn(false);
   }
 
 
@@ -89,10 +79,10 @@ const Rewards = () => {
       return onSnapshot(query_1, (response) => {
         var value: any;
         response.forEach((e) => {
-          value = e.data()
+          value = e.data();
         });
-
-        setUserData(value)
+        getLevels(value);
+        setUserData(value);
       })
     } catch (error) {
       return false
@@ -117,8 +107,6 @@ const Rewards = () => {
   useEffect(() => {
     if (userData != null) {
       getLevel();
-      getUnLocked();
-      getLocked();
     }
   }, [userData]);
 
@@ -127,10 +115,8 @@ const Rewards = () => {
       setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
       setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
       setLoading(false);
-      console.log(unLocked)
-      console.log(locked)
     }
-  }, [level, unLocked, locked])
+  }, [level])
 
   if (loading) {
     return (
@@ -197,14 +183,11 @@ const Rewards = () => {
           rewards
             ? <PointRewards
               setRewards={setRewards}
-              userData={userData}
               level={level}
-              locked={locked}
-              unLocked={unLocked}
+              levels={levels}
             />
             : <TimeRewards
               setRewards={setRewards}
-              userData={userData}
             />
         }
       </MainContain>
