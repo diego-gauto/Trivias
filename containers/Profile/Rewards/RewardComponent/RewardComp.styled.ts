@@ -154,6 +154,9 @@ export const CompleteDivisor = styled.div`
   @media (max-width: 870px) {
     display: none;
   }
+  &:last-child {
+    background-color: blue;
+  }
 `;
 export const ContainLevel = styled.div`
   display: flex;

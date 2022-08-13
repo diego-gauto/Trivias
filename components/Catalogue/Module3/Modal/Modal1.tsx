@@ -64,7 +64,7 @@ const Modal1 = ({ show, setShow }: any) => {
                 //controls
                 width='100%'
                 height={responsive380 ? '175%' : '180%' &&
-                  responsive520 ? '175%' : '180%' &&
+                  responsive520 ? '185%' : '180%' &&
                     responsive600 ? '150%' : '180%' &&
                       responsive800 ? '125%' : '180%' &&
                         responsive1023 ? '92%' : '180%'

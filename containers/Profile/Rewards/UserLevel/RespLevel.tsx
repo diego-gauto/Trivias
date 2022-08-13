@@ -49,7 +49,6 @@ const RespLevel = () => {
         response.forEach((e) => {
           value = e.data()
         });
-        console.log("dsds")
         setUserData(value)
       })
     } catch (error) {
