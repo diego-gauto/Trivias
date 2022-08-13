@@ -5,6 +5,7 @@ import {
 
   ContainLevel,
   Divisor,
+  LevelContainer,
   LevelText,
 } from "./RewardComp.styled";
 
@@ -14,16 +15,15 @@ const Points = ({ level, levels }: any) => {
       {
         levels.map((val: any, i: any) => {
           return (
-            <>
+            <LevelContainer key={"levels" + val.name}>
               <ContainLevel>
-                <Circle />
-                <LevelText >
+                <Circle val={val.minimum} level={level.minimum} />
+                <LevelText val={val.minimum} level={level.minimum}>
                   Nivel {val.name} <br /> {val.maximum + 1} puntos
                 </LevelText>
               </ContainLevel>
-              <Divisor />
-              {/* <Divisor val={val} i={i + 1} size={levels.length} /> */}
-            </>
+              <Divisor val={val.minimum} i={i + 1} size={levels.length} level={level.minimum} />
+            </LevelContainer>
           )
         })
       }

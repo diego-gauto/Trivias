@@ -95,7 +95,12 @@ export const RewardContainer = styled.div`
     overflow: auto;
   }
 `;
-export const LevelText = styled.p`
+export const LevelContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3px;
+`;
+export const LevelText = styled("p")<{val:any, level:any}>`
   font-size: 14px;
   font-family:'Raleway', sans-serif;
   color: black;
@@ -103,40 +108,54 @@ export const LevelText = styled.p`
   text-align:center;
   position: absolute;
   bottom: 15px;
+  ${props => (props.level == props.val) && css`
+  font-size: 16px;
+  font-weight: 600;
+  color: #6717CD;
+  bottom: 10px;
+  `}
+  ${props => (props.level > props.val) && css`
+  color: #6717CD;
+  `}
   @media(max-width: 1023px) {
    width: 100%;
   }
+  
 `;
-export const Circle = styled.div`
+export const Circle = styled("div")<{val:any, level:any}>`
   width: 35px;
   height: 35px;
   border-radius: 50%;
   border: 2px solid gray;
+  ${props => (props.level == props.val) && css`
+  width: 50px;
+  height: 50px;
+  border: 2px solid #8E2DE2;
+  `}
+  ${props => (props.level > props.val) && css`
+  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  border: none;
+  `}
   @media (max-width: 870px) {
     width: 32px;
     height: 32px;
   }
 `;
-export const Divisor = styled.div`
+export const Divisor = styled("div")<{val:any, i:any, size:any, level:any}>`
   background-color: gray;
   width: 100px;
   height: 4px;
   @media (max-width: 870px) {
     display: none;
   }
-`;
-export const CompleteDivisor = styled("div")<{val:any, i:any, size:any}>`
-  background-color: #8E2DE2;
-  width: 100px;
-  height: 4px;
-  @media (max-width: 870px) {
-    display: none;
-  }
   ${props => (props.i == props.size) && css`
-    background-color: white;
-    border: 1px solid #8E2DE2;
+  display: none;
+`}
+  ${props => (props.level > props.val) && css`
+  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
   `}
 `;
+
 export const ContainLevel = styled.div`
   display: flex;
   flex-direction: column;
