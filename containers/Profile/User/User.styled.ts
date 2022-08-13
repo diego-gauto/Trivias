@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
@@ -337,11 +337,17 @@ export const Nextlvl = styled.div`
     width: 32px;
   }
 `;
-export const ProgressBar1 = styled.div`
+export const ProgressBar1 = styled("div")<{barProgress:any, reward:boolean}>`
   height: 7px;
   background-color: #6717CD;
   border: 1px solid #6717CD;
   position: relative;
+  ${props => (props.reward == false) && css<{barProgress:any}>`
+  width: ${props=>props.barProgress}%;
+`}
+${props => (props.reward == true) && css`
+  width: 30%;
+`}
 `;
 export const CompleteBar = styled.div`
   display:flex;
