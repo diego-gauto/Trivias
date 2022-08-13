@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { validateFieldsNatively } from "@hookform/resolvers";
+import styled, { css } from "styled-components";
 
 export const MainContain = styled.div`
   display:flex;
@@ -106,57 +107,35 @@ export const LevelText = styled.p`
    width: 100%;
   }
 `;
-export const CompleteText = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  font-family:'Raleway', sans-serif;
-  color: #8E2DE2;
-  margin: 0;
-  text-align:center;
-  position: absolute;
-  bottom: 15px;
-  @media(max-width: 1023px) {
-    width: 100%;
-   }
-`;
 export const Circle = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 2px solid black;
-  @media (max-width: 870px) {
-    width: 32px;
-    height: 32px;
-  }
-`;
-export const CompleteCircle = styled.div`
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  border: 2px solid gray;
   @media (max-width: 870px) {
     width: 32px;
     height: 32px;
   }
 `;
 export const Divisor = styled.div`
-  background-color: black;
+  background-color: gray;
   width: 100px;
   height: 4px;
-  @media (max-width: 1023px) {
+  @media (max-width: 870px) {
     display: none;
   }
 `;
-export const CompleteDivisor = styled.div`
+export const CompleteDivisor = styled("div")<{val:any, i:any, size:any}>`
   background-color: #8E2DE2;
   width: 100px;
   height: 4px;
   @media (max-width: 870px) {
     display: none;
   }
-  &:last-child {
-    background-color: blue;
-  }
+  ${props => (props.i == props.size) && css`
+    background-color: white;
+    border: 1px solid #8E2DE2;
+  `}
 `;
 export const ContainLevel = styled.div`
   display: flex;
