@@ -2,7 +2,6 @@ import React from "react";
 
 import {
   Circle,
-
   ContainLevel,
   Divisor,
   LevelContainer,
@@ -22,7 +21,7 @@ const Points = ({ level, levels }: any) => {
                   Nivel {val.name} <br /> {val.maximum + 1} puntos
                 </LevelText>
               </ContainLevel>
-              <Divisor val={val.minimum} i={i + 1} size={levels.length} level={level.minimum} />
+              <Divisor val={val.minimum} i={i + 1} size={levels.length} level={level.minimum} name={level.name - 1} />
             </LevelContainer>
           )
         })
