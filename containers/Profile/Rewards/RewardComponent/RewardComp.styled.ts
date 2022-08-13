@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { validateFieldsNatively } from "@hookform/resolvers";
+import styled, { css } from "styled-components";
 
 export const MainContain = styled.div`
   display:flex;
@@ -94,7 +95,12 @@ export const RewardContainer = styled.div`
     overflow: auto;
   }
 `;
-export const LevelText = styled.p`
+export const LevelContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3px;
+`;
+export const LevelText = styled("p")<{val:any, level:any}>`
   font-size: 14px;
   font-family:'Raleway', sans-serif;
   color: black;
@@ -102,62 +108,59 @@ export const LevelText = styled.p`
   text-align:center;
   position: absolute;
   bottom: 15px;
+  ${props => (props.level == props.val) && css`
+  font-size: 16px;
+  font-weight: 600;
+  color: #6717CD;
+  bottom: 10px;
+  `}
+  ${props => (props.level > props.val) && css`
+  color: #6717CD;
+  `}
   @media(max-width: 1023px) {
    width: 100%;
   }
+  
 `;
-export const CompleteText = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  font-family:'Raleway', sans-serif;
-  color: #8E2DE2;
-  margin: 0;
-  text-align:center;
-  position: absolute;
-  bottom: 15px;
-  @media(max-width: 1023px) {
-    width: 100%;
-   }
-`;
-export const Circle = styled.div`
+export const Circle = styled("div")<{val:any, level:any}>`
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 2px solid black;
-  @media (max-width: 870px) {
-    width: 32px;
-    height: 32px;
-  }
-`;
-export const CompleteCircle = styled.div`
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+  border: 2px solid gray;
+  ${props => (props.level == props.val) && css`
+  width: 50px;
+  height: 50px;
+  border: 2px solid #8E2DE2;
+  `}
+  ${props => (props.level > props.val) && css`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  border: none;
+  `}
   @media (max-width: 870px) {
     width: 32px;
     height: 32px;
   }
 `;
-export const Divisor = styled.div`
-  background-color: black;
-  width: 100px;
-  height: 4px;
-  @media (max-width: 1023px) {
-    display: none;
-  }
-`;
-export const CompleteDivisor = styled.div`
-  background-color: #8E2DE2;
+export const Divisor = styled("div")<{val:any, i:any, size:any, level:any,name:any}>`
+  background-color: gray;
   width: 100px;
   height: 4px;
   @media (max-width: 870px) {
     display: none;
   }
-  &:last-child {
-    background-color: blue;
-  }
+  ${props => (props.i == props.size) && css`
+  display: none;
+`}
+
+  ${props => (props.level > props.val) && css<{i:any, name:any}>`
+  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+    ${props => (props.i == props.name) && css`
+    background: white;
+    border: 1px solid #8E2DE2;
+    `}
+  `}
 `;
+
 export const ContainLevel = styled.div`
   display: flex;
   flex-direction: column;
