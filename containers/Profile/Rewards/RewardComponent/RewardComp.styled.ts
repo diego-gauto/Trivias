@@ -141,7 +141,7 @@ export const Circle = styled("div")<{val:any, level:any}>`
     height: 32px;
   }
 `;
-export const Divisor = styled("div")<{val:any, i:any, size:any, level:any,name:any}>`
+export const Divisor = styled("div")<{min:any, i:any, size:any, level:any,name:any, score:any,max:any}>`
   background-color: gray;
   width: 100px;
   height: 4px;
@@ -152,12 +152,16 @@ export const Divisor = styled("div")<{val:any, i:any, size:any, level:any,name:a
   display: none;
 `}
 
-  ${props => (props.level > props.val) && css<{i:any, name:any}>`
+  ${props => (props.level > props.min) && css<{i:any, size:any,name:any,score:any,max:any}>`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-    ${props => (props.i == props.name) && css`
+    ${props => (props.i == props.name-2) && css<{i:any,name:any,score:any,max:any,size:any}>`
     background: white;
     border: 1px solid #8E2DE2;
+      ${props  => (props.score < props.max && props.i == props.size-1) && css<{i:any,name:any,score:any,max:any}>`
+      background: red;
+      `}
     `}
+
   `}
 `;
 

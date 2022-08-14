@@ -19,7 +19,7 @@ const UserLevel = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-
+  const [size, setSize] = useState(0);
   const levelRef = collection(db, "levelPoints")
 
   const [level, setLevel] = useState<any>([]);
@@ -51,22 +51,26 @@ const UserLevel = () => {
           value = e.data()
         });
         setUserData(value)
+
       })
     } catch (error) {
       return false
     }
   }
-
+  const getSize = async () => {
+    db.collection('levelPoints').get().then(snap => {
+      setSize(snap.size) // will return the collection size
+    });
+  }
   const getLevel = async () => {
     let tempData: any = []
     const data = await getDocs(levelRef)
     data.forEach((doc) => {
       tempData.push({ ...doc.data(), id: doc.id })
     })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score))
+    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == 9)
     setLevel(tempData[0])
   }
-
   useEffect(() => {
     fetchDB_data()
 
@@ -75,6 +79,7 @@ const UserLevel = () => {
   useEffect(() => {
     if (userData != null) {
       getLevel();
+      getSize();
     }
   }, [userData]);
 
@@ -82,15 +87,19 @@ const UserLevel = () => {
     if (userData != null && level != null) {
       setData(157 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 157));
     }
-
   }, [level])
+  useEffect(() => {
+    if (userData != null && size != null) {
+
+    }
+  }, [size])
 
   return (
     <Link href="/Rewards">
       <OuterProgress>
         <LevelContain>
           <CurrentLevel>
-            {level.name}
+            {level.level}
           </CurrentLevel>
           <Vector />
           <Vector2 />

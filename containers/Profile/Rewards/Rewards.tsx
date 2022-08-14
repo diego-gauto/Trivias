@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where, getDocs, doc } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 
@@ -33,13 +33,14 @@ const Rewards = () => {
   const [rewards, setRewards] = useState(true);
   const responsive560 = useMediaQuery({ query: "(max-width: 560px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-
+  const [size, setSize] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
   const [loading, setLoading] = useState(true);
 
-  const levelRef = collection(db, "levelPoints")
+  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelsRef = query(collection(db, "levelPoints"), orderBy("level"))
 
   const [level, setLevel] = useState<any>([]);
 
@@ -50,7 +51,7 @@ const Rewards = () => {
 
   const getLevels = async (user: any) => {
     let temp_levels: any = [];
-    const data = await getDocs(levelRef);
+    const data = await getDocs(levelsRef);
     data.forEach((level) => {
       temp_levels.push({ ...level.data(), id: level.id });
     })
@@ -83,6 +84,7 @@ const Rewards = () => {
         });
         getLevels(value);
         setUserData(value);
+
       })
     } catch (error) {
       return false
@@ -95,11 +97,15 @@ const Rewards = () => {
     data.forEach((doc) => {
       tempData.push({ ...doc.data(), id: doc.id })
     })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score))
+    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
     setLevel(tempData[0])
   }
 
-
+  const getSize = async () => {
+    db.collection('levelPoints').get().then(snap => {
+      setSize(snap.size) // will return the collection size
+    });
+  }
   useEffect(() => {
     fetchDB_data()
   }, [])
@@ -107,13 +113,21 @@ const Rewards = () => {
   useEffect(() => {
     if (userData != null) {
       getLevel();
+      getSize();
     }
-  }, [userData]);
+  }, [userData, size]);
 
   useEffect(() => {
     if (userData != null && level != null) {
-      setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
-      setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      if (level.maximum < userData.score) {
+        setData(0);
+        setDataResp(0);
+      } else {
+        setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
+        setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      }
+
+
       setLoading(false);
     }
   }, [level])
@@ -145,7 +159,7 @@ const Rewards = () => {
           </BannerTitle>
           <ProgressContain>
             <PointsText>
-              {userData?.score}
+              {userData.score}
               &nbsp;
               <span>
                 puntos
@@ -154,7 +168,7 @@ const Rewards = () => {
             <OuterProgress>
               <LevelContain>
                 <CurrentLevel>
-                  {level?.name}
+                  {level.level}
                 </CurrentLevel>
                 <Vector />
                 <Vector2 />
@@ -185,6 +199,7 @@ const Rewards = () => {
               setRewards={setRewards}
               level={level}
               levels={levels}
+              score={userData.score}
             />
             : <TimeRewards
               setRewards={setRewards}

@@ -9,7 +9,7 @@ import {
 } from './Purchase.styled';
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
 
-const PurchaseComplete = () => {
+const PurchaseComplete = ({ data, card }: any) => {
   return (
     <MainContainer>
       <CompleteContain>
@@ -20,10 +20,10 @@ const PurchaseComplete = () => {
           </CourseCostResp>
         </PurchaseTitle>
         <CourseId>
-          Curso 3
+          {data.type}
         </CourseId>
         <CourseName>
-          Curso de Uñas Francesas
+          {data.type}: {data.title}
         </CourseName>
         <CardContain style={{ display: "flex" }}>
           <Card>
@@ -44,32 +44,32 @@ const PurchaseComplete = () => {
           </Card>
         </CardContain>
         <BottomContain>
-          <Text4>
+          {/* <Text4>
             Descuento:
             <PurchaseData>
               90GUU4BT4398DNW20GND
             </PurchaseData>
-          </Text4>
+          </Text4> */}
           <Text4>
             Método de Pago:
             <PurchaseData>
               Tarjeta de Crédito/Débito
               <br />
-              Visa terminada en 2022
+              {card.brand} terminada en {card.last4}
             </PurchaseData>
           </Text4>
           <Text4>
             Total:
             <PurchaseData>
-              $1749.00
+              ${data.price}.00
             </PurchaseData>
           </Text4>
         </BottomContain>
-        <ButtonContain>
+        {card.type == 'curso' && <ButtonContain>
           <PurpleButton>
             Empezar Curso
           </PurpleButton>
-        </ButtonContain>
+        </ButtonContain>}
       </CompleteContain>
       <ButtonContain>
         <Link href="/Preview">

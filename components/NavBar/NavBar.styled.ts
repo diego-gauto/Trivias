@@ -232,11 +232,13 @@ export const Points = styled.p`
   font-family:'Raleway',sans-serif;
   font-weight: 600;
   margin:0;
+  position: absolute;
+  left: 60px;
 `;
 export const PointsContain = styled.div`
   display: flex;
-  gap: 5px;
   align-items: center;
+  position: relative;
 `;
 export const IconsContain = styled.div`
   display: flex;
