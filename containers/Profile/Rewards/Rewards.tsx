@@ -119,8 +119,15 @@ const Rewards = () => {
 
   useEffect(() => {
     if (userData != null && level != null) {
-      setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
-      setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      if (level.maximum < userData.score) {
+        setData(0);
+        setDataResp(0);
+      } else {
+        setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
+        setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      }
+
+
       setLoading(false);
     }
   }, [level])
