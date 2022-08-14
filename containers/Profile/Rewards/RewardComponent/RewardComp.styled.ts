@@ -154,10 +154,14 @@ export const Divisor = styled("div")<{min:any, i:any, size:any, level:any,name:a
 
   ${props => (props.level > props.min) && css<{i:any, size:any,name:any,score:any,max:any}>`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-    ${props => (props.i == props.name-2) && css<{i:any,name:any,score:any,max:any}>`
+    ${props => (props.i == props.name-2) && css<{i:any,name:any,score:any,max:any,size:any}>`
     background: white;
     border: 1px solid #8E2DE2;
+    ${props  => (props.score > props.max && props.i == props.name-2) && css<{i:any,name:any,score:any,max:any}>`
+    background: red;
     `}
+    `}
+
   `}
 `;
 
