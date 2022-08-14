@@ -20,6 +20,7 @@ import Time from "./Rewards/Time";
 const Rewards = () => {
 
   const [place, setPlace] = useState("points");
+
   return (
     <AdminContain>
       <SideBar />
@@ -35,7 +36,7 @@ const Rewards = () => {
           <Title>Centro de Recompensas</Title>
         </TitleContain>
         <Container>
-          {place == "points" && <Points setPlace={setPlace} />}
+          {place == "points" && <Points setPlace={setPlace} place={place} />}
           {place == "time" && <Time setPlace={setPlace} />}
           {place == "request" && <Request setPlace={setPlace} />}
         </Container>

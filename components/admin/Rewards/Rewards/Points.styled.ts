@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const TabContain = styled.div`
   display: flex;
@@ -7,9 +7,9 @@ export const TabContain = styled.div`
 `;
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   padding-bottom: 10px;
   padding-top: 40px;
-  flex-direction: column;
   padding-inline: 30px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -19,14 +19,18 @@ export const Container = styled.div`
 export const ContainerLevel = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 3px;
 `;
 export const LevelContain = styled.div`
   display: flex;
-  flex-direction: column;
+  position: relative;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
+`;
+export const AllLevels = styled.div`
+  display: flex;
+  gap: 3px;
+  justify-content: center;
 `;
 export const LevelCircle = styled.div`
   width: 32px;
@@ -35,24 +39,26 @@ export const LevelCircle = styled.div`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
 `;
 export const Level = styled.p`
-  display: flex;
-  flex-direction: column;
   position: absolute;
   font-size: 14px;
-  bottom: 70px;
+  top: 40px;
   font-family: 'Raleway', sans-serif;
   text-align: center;
+  white-space: nowrap;
   color: #6717CD;
   margin: 0;
   label{
     font-family: 'Raleway', sans-serif;
   }
 `;
-export const Divider = styled.div`
+export const Divider = styled("div")<{size:any, i:any}>`
   border-radius: 10px;
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-  width: 8%;
+  width: 100px;
   height: 4px;
+  ${props => (props.i == props.size) && css`
+  display: none;
+  `}
 `;
 
 export const ButtonContain = styled.div`
