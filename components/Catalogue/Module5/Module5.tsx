@@ -121,7 +121,7 @@ const Module5 = () => {
           </CardContain>
         </RespContain>
         <ButtonContain>
-          <Link href={{ pathname: 'Purchase', query: { type: 'susbscription' } }}>
+          <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
             <PurpleButton>
               Adquiere Gonvar Plus
             </PurpleButton>

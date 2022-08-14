@@ -1,5 +1,6 @@
 import Image from "next/image";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+import InputMask from 'react-input-mask';
 
 export const Container = styled.div`
   display:flex;
@@ -151,7 +152,10 @@ export const PaymentContain = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
-export const PaymentMethod = styled.div`
+export const PaymentMethod = styled("div")<{active:any}>`
+  ${props => (props.active == true) && css`
+  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+  `}
   display: flex;
   align-items: center;
   padding-block: 10px;
@@ -207,28 +211,20 @@ export const PayPal = styled.i`
     width: 120px;
   }
 `;
-export const MasterCard = styled.i`
-  background-image: url(../images/McPay.png);
+export const CardIconResp = styled("i")<{brand:any}>`
+  ${props => (props.brand == 'visa') && css`
+        background-image: url(../images/visa-icon.png);
+  `}
+  ${props => (props.brand == 'mastercard') && css`
+        background-image: url(../images/mastercard-icon.png);
+  `}
+  ${props => (props.brand == 'amex') && css`
+        background-image: url(../images/amex-icon.png);
+  `}
+  
   background-repeat:no-repeat;
-  height: 96px;
-  width: 144px;
-  background-position: center;
-  @media(max-width: 1023px){
-    display: none;
-  }
-`;
-export const VisaIcon = styled.i`
-  background-image: url(../images/Visa.png);
-  background-repeat:no-repeat;
-  height: 32px;
-  width: 47px;
-  background-position: center;
-`;
-export const VisaIconResp = styled.i`
-  background-image: url(../images/Visa.png);
-  background-repeat:no-repeat;
-  height: 32px;
-  width: 47px;
+  width: 59px;
+  height: 33px;
   background-position: center;
   @media( max-width: 1023px){
     display: none;
@@ -524,6 +520,19 @@ export const InputText = styled.label`
   }
 `;
 export const Input = styled.input`
+  font-size: 14px;
+  font-family:'Montserrat',sans-serif;
+  padding:10px 0 10px 20px;
+  border:1px solid #6717CD;
+  border-radius:20px;
+  :focus{
+    outline: 1px solid #8E2DE2;
+  }
+  @media( max-width: 400px){
+    font-size: 12px;
+  }
+`;
+export const InputCard = styled(InputMask)`
   font-size: 14px;
   font-family:'Montserrat',sans-serif;
   padding:10px 0 10px 20px;
