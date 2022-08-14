@@ -183,30 +183,32 @@ const Purchase = () => {
   }
 
   const FinishPayment = async () => {
-    const pay = httpsCallable(functions, 'payWithStripeSubscription');
-    const data = {
-      new: card.status,
-      cardId: card.cardId,
-      paymentMethod: card.paymentMethod,
-      stripeId: userData.stripeId,
-      priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk'
-    }
-    await pay(data).then((res: any) => {
-      console.log(res);
-
-      if ("raw" in res.data) {
-        if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-          alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
-        }
-      } else {
-        updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
-        if (card.status) {
-          addPaymentMethod(card, userData.id);
-        }
-        setConfirmation(false);
-        setPay(true);
+    if (plan.method == 'stripe') {
+      const pay = httpsCallable(functions, 'payWithStripeSubscription');
+      const data = {
+        new: card.status,
+        cardId: card.cardId,
+        paymentMethod: card.paymentMethod,
+        stripeId: userData.stripeId,
+        priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk'
       }
-    })
+      await pay(data).then((res: any) => {
+        console.log(res);
+
+        if ("raw" in res.data) {
+          if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
+            alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
+          }
+        } else {
+          updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
+          if (card.status) {
+            addPaymentMethod(card, userData.id);
+          }
+          setConfirmation(false);
+          setPay(true);
+        }
+      })
+    }
   }
   const handleShow = () => setShow(true);
 
