@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 
@@ -27,16 +27,37 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
-import { Progress } from "../../../components/Catalogue/Module2/Module2.styled";
 
 const Rewards = () => {
 
   const [rewards, setRewards] = useState(true);
   const responsive560 = useMediaQuery({ query: "(max-width: 560px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-
+  const [size, setSize] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+
+  const [loading, setLoading] = useState(true);
+
+  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelsRef = query(collection(db, "levelPoints"), orderBy("level"))
+
+  const [level, setLevel] = useState<any>([]);
+
+  const [data, setData] = useState<number>(0)
+  const [dataResp, setDataResp] = useState<number>(0)
+
+  const [levels, setLevels] = useState<any>([])
+
+  const getLevels = async (user: any) => {
+    let temp_levels: any = [];
+    const data = await getDocs(levelsRef);
+    data.forEach((level) => {
+      temp_levels.push({ ...level.data(), id: level.id });
+    })
+    setLevels(temp_levels)
+  }
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -48,38 +69,78 @@ const Rewards = () => {
     }, [])
 
   } catch (error) {
-    console.log(error)
-    setLoggedIn(false)
+    console.log(error);
+    setLoggedIn(false);
   }
-  useEffect(() => {
-    fetchDB_data()
 
-  }, [loggedIn])
 
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-        var userData: any;
+        var value: any;
         response.forEach((e) => {
-          userData = e.data()
+          value = e.data();
         });
-        setUserData(userData)
+        getLevels(value);
+        setUserData(value);
+
       })
     } catch (error) {
       return false
     }
   }
 
-  let lastLevel: number = 100;
+  const getLevel = async () => {
+    let tempData: any = []
+    const data = await getDocs(levelRef)
+    data.forEach((doc) => {
+      tempData.push({ ...doc.data(), id: doc.id })
+    })
+    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+    setLevel(tempData[0])
+  }
 
-  let nextLevel: number = 400;
+  const getSize = async () => {
+    db.collection('levelPoints').get().then(snap => {
+      setSize(snap.size) // will return the collection size
+    });
+  }
+  useEffect(() => {
+    fetchDB_data()
+  }, [])
 
-  let data: number = ((userData?.score - lastLevel) / (nextLevel - lastLevel)) * 346;
-  let dataResp: number = ((userData?.score - lastLevel) / (nextLevel - lastLevel)) * 289;
+  useEffect(() => {
+    if (userData != null) {
+      getLevel();
+      getSize();
+    }
+  }, [userData, size]);
 
-  let progress: number = 346 - data;
-  let progressResp: number = 289 - dataResp;
+  useEffect(() => {
+    if (userData != null && level != null) {
+      if (level.maximum < userData.score) {
+        setData(0);
+        setDataResp(0);
+      } else {
+        setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
+        setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      }
+
+
+      setLoading(false);
+    }
+  }, [level])
+
+  if (loading) {
+    return (
+      <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
 
   return (
     <RewardContainer>
@@ -98,7 +159,7 @@ const Rewards = () => {
           </BannerTitle>
           <ProgressContain>
             <PointsText>
-              {userData?.score}
+              {userData.score}
               &nbsp;
               <span>
                 puntos
@@ -107,7 +168,7 @@ const Rewards = () => {
             <OuterProgress>
               <LevelContain>
                 <CurrentLevel>
-                  1
+                  {level.level}
                 </CurrentLevel>
                 <Vector />
                 <Vector2 />
@@ -123,8 +184,8 @@ const Rewards = () => {
                 </defs>
                 <ProgressBackground />
                 <ProgressCircle
-                  progress={progress}
-                  progressResp={progressResp}
+                  progress={data}
+                  progressResp={dataResp}
                 />
               </ProgressSvg>
             </OuterProgress>
@@ -134,8 +195,15 @@ const Rewards = () => {
       <MainContain>
         {
           rewards
-            ? <PointRewards setRewards={setRewards} userData={userData} />
-            : <TimeRewards setRewards={setRewards} userData={userData} />
+            ? <PointRewards
+              setRewards={setRewards}
+              level={level}
+              levels={levels}
+              score={userData.score}
+            />
+            : <TimeRewards
+              setRewards={setRewards}
+            />
         }
       </MainContain>
     </RewardContainer>

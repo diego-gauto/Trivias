@@ -30,15 +30,16 @@ export const ImageTag = styled.div  `
 export const SectionCentered = styled.div  `
 background-color: white;
 height: 500px;
+margin-top: -55px;
 z-index: 1;
 position: absolute;
 width: 1073.125px;
 background: #FFFFFF;
 box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
-margin-top: -55px;
 @media (min-width: 1800px) {
   height: 550px;
+  top: 30px;
   width: 1225px;   
 }
 @media only screen and (max-width: 1024px) {
@@ -110,7 +111,7 @@ margin-top: 27px;
 text-align: center;
 width: 100%; 
 `;
-export const IconText_B = styled.p  `
+export const IconText_B = styled.label  `
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 400;

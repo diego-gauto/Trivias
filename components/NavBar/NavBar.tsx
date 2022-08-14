@@ -1,19 +1,33 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import {
-  Close, HamburgerContain, HBList, HBMenu,
-  IconsContain, Logo, LogoContain,
-  LogoS, MenuIcon, NavContainer, NavResponsive,
-  NavTags, NavText, Points, PointsContain, PurpleButton,
-  TagsResp, UserContain, UserImage
-} from './NavBar.styled';
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { DEFAULT_USER_IMG } from "../../constants/paths";
+import RespLevel from "../../containers/Profile/Rewards/UserLevel/RespLevel";
+import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
-import UserLevel from '../../containers/Profile/Rewards/UserLevel/UserLevel';
-import RespLevel from '../../containers/Profile/Rewards/UserLevel/RespLevel';
+import {
+  HamburgerContain,
+  HBList,
+  HBMenu,
+  Logo,
+  LogoContain,
+  LogoS,
+  MenuIcon,
+  NavContainer,
+  NavResponsive,
+  NavTags,
+  NavText,
+  Points,
+  PointsContain,
+  PurpleButton,
+  TagsResp,
+  UserContain,
+  UserImage,
+} from "./NavBar.styled";
 
 const NavBar = () => {
 
@@ -25,6 +39,12 @@ const NavBar = () => {
   //declare any object in state
   const [userData, setUserData] = useState<any>(null);
 
+  function closeHamburgerMenu() {
+    var isMenuOpen = document.getElementById("openmenu") as HTMLInputElement | null;;
+    if (isMenuOpen != null) {
+      isMenuOpen.checked = false;
+    }
+  }
   //validate if its logged in
   try {
     var userDataAuth = useAuth();
@@ -85,7 +105,7 @@ const NavBar = () => {
     () => {
       window.addEventListener('scroll', ChangeNav);
     },
-    [],
+    [pathname],
   );
   // COLOR NAVBAR
   return (
@@ -114,21 +134,11 @@ const NavBar = () => {
         }
       </LogoContain>
       <NavTags>
-        {
-          loggedIn ?
-            <Link href="/Preview">
-              <NavText pathname={pathname} color={color}>
-                Inicio
-              </NavText>
-            </Link>
-            : !loggedIn ?
-              <Link href="/">
-                <NavText pathname={pathname} color={color}>
-                  Inicio
-                </NavText>
-              </Link>
-              : <></>
-        }
+        <Link href="/Preview">
+          <NavText pathname={pathname} color={color}>
+            Inicio
+          </NavText>
+        </Link>
         <NavText pathname={pathname} color={color} target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
@@ -214,34 +224,41 @@ const NavBar = () => {
             <Link href="/">
               <LogoS />
             </Link>
-            <MenuIcon onClick={() => { setHamburger(true) }} />
+            <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input>
+            <div className="hamburger-icon">
+              <MenuIcon id="hamburger-label">
+                <span></span>
+                <span></span>
+                <span></span>
+              </MenuIcon>
+            </div>
             {
               hamburger == true
               &&
               <>
-                <HamburgerContain>
-                  <IconsContain>
+                <HamburgerContain className="menu-pane">
+                  {/* <IconsContain>
                     <LogoS />
                     <Close onClick={() => { setHamburger(false) }} />
-                  </IconsContain>
+                  </IconsContain> */}
                   <HBMenu>
                     <Link href="/Preview" >
-                      <HBList onClick={() => { setHamburger(false) }}>
+                      <HBList onClick={() => { closeHamburgerMenu() }}>
                         Inicio
                       </HBList>
                     </Link>
                     <a href="Https://gonvarnails.mx" target="_blank">
-                      <HBList onClick={() => { setHamburger(false) }}>
+                      <HBList onClick={() => { closeHamburgerMenu() }}>
                         Tienda
                       </HBList>
                     </a>
                     <Link href="/Preview">
-                      <HBList onClick={() => { setHamburger(false) }}>
+                      <HBList onClick={() => { closeHamburgerMenu() }}>
                         Catálogo
                       </HBList>
                     </Link>
                     <Link href="/Profile">
-                      <HBList onClick={() => { setHamburger(false) }}>
+                      <HBList onClick={() => { closeHamburgerMenu() }}>
 
                         {userData ? userData.name : "Bienvenido"}
                         {userData && userData.photoURL ?
@@ -259,7 +276,7 @@ const NavBar = () => {
                       </HBList>
                     </Link>
                     <Link href="/Rewards">
-                      <HBList onClick={() => { setHamburger(false) }}>
+                      <HBList onClick={() => { closeHamburgerMenu() }}>
                         Centro de Recompensas
                         <RespLevel />
                       </HBList>
