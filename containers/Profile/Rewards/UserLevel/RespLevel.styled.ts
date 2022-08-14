@@ -30,6 +30,7 @@ export const CurrentLevel = styled.p`
   color: #6717CD;
   margin: 0;
   z-index: 1;
+  line-height: 30px;
 `;
 export const ProgressCircle = styled("circle")<{progress:number}>`
     fill: none;

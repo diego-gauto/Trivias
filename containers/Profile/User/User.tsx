@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
 
 import { getAuth, signOut } from "firebase/auth";
-import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
 import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
@@ -27,11 +27,12 @@ const User = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [level, setLevel] = useState<any>([]);
-  const [current, setCurrent] = useState<any>([]);
-  const [next, setNext] = useState<any>([]);
   const [barProgress, setBarProgress] = useState(0);
+  const [size, setSize] = useState(0);
   const [loading, setLoading] = useState(true);
-  const levelRef = collection(db, "levelPoints")
+  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelsRef = query(collection(db, "levelPoints"), orderBy("level"))
+
 
   try {
     var userDataAuth = useAuth();
@@ -62,25 +63,22 @@ const User = () => {
       return false
     }
   }
+  const getSize = async () => {
+    db.collection('levelPoints').get().then(snap => {
+      setSize(snap.size) // will return the collection size
+    });
+  }
+
   const getLevel = async () => {
     let tempData: any = []
     const data = await getDocs(levelRef)
     data.forEach((doc) => {
       tempData.push({ ...doc.data(), id: doc.id })
     })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score))
+    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || (data.level == size))
     setLevel(tempData[0])
   }
-  const getPosition = async () => {
-    let tempData: any = []
-    const data = await getDocs(levelRef)
-    data.forEach((doc) => {
-      tempData.push({ ...doc.data(), id: doc.id })
-    })
-    tempData = tempData.filter((data: any) => (data.maximum == level.maximum || (data.maximum == level.minimum - 1 || data.maximum >= 99)))
-    setCurrent(tempData[0])
-    setNext(tempData[1])
-  }
+
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -91,26 +89,22 @@ const User = () => {
   };
   useEffect(() => {
     fetchDB_data()
+
   }, [loggedIn])
 
   useEffect(() => {
     if (userData != null) {
       getLevel();
-
+      getSize();
     }
-  }, [userData]);
+  }, [userData, size]);
   useEffect(() => {
     if (userData != null && level != null) {
-      getPosition();
       setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
-      console.log(barProgress)
-    }
-  }, [level])
-  useEffect(() => {
-    if (userData != null && current != null) {
       setLoading(false);
     }
-  }, [current])
+  }, [level])
+
   if (loading) {
     return (
       <Background>
@@ -129,7 +123,7 @@ const User = () => {
           <UserInfo userData={userData} /> : <></>}
       {/* SECOND Container */}
       <SecondBox>
-        <NextReward score={userData.score} nextLevel={next.name} currentLevel={current.name} barProgress={barProgress} />
+        <NextReward score={userData.score} barProgress={barProgress} level={level.level} max={level.maximum} />
         <ThirdBox>
           {/* Third Container */}
           <UserData />
