@@ -23,7 +23,7 @@ const Modal2 = ({ show, setShow }: any) => {
           <Input placeholder="1100" />
         </InputContain>
         <InputContain>
-          <Label>Puntos</Label>
+          <Label>Descripción</Label>
           <InputBig placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium aliquet ultricies. Interdum et suspendisse nunc gravida. " />
         </InputContain>
         <InputContain>
