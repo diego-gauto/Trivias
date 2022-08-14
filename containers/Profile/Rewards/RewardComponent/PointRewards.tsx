@@ -12,7 +12,7 @@ import {
   RewardContainer,
 } from "./RewardComp.styled";
 
-const PointRewards = ({ setRewards, level, levels }: any) => {
+const PointRewards = ({ setRewards, level, levels, score }: any) => {
 
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
@@ -34,6 +34,7 @@ const PointRewards = ({ setRewards, level, levels }: any) => {
         <Points
           level={level}
           levels={levels}
+          score={score}
         />
       </RewardContainer>
       <PointPrizes />

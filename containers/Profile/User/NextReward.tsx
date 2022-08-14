@@ -30,7 +30,7 @@ import {
 } from "./User.styled";
 import { useState } from "react";
 
-const NextReward = ({ currentLevel, nextLevel, score, barProgress }: any) => {
+const NextReward = ({ score, barProgress, level, max }: any) => {
   const [reward, setReward] = useState(false);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
 
@@ -60,7 +60,9 @@ const NextReward = ({ currentLevel, nextLevel, score, barProgress }: any) => {
         <>
           <Pointbox>
             <Currentlvl>
-              {currentLevel}
+              {
+                score > max ? level : level - 1
+              }
             </Currentlvl>
             <CompleteBar>
               <ProgressBar1 barProgress={barProgress} reward={reward}>
@@ -73,7 +75,9 @@ const NextReward = ({ currentLevel, nextLevel, score, barProgress }: any) => {
               </ProgressBar1>
             </CompleteBar>
             <Nextlvl>
-              {nextLevel}
+              {
+                level
+              }
             </Nextlvl>
           </Pointbox>
           <RewardData>
