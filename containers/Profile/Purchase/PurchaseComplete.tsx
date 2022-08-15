@@ -9,7 +9,9 @@ import {
 } from './Purchase.styled';
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
 
-const PurchaseComplete = ({ data, card }: any) => {
+const PurchaseComplete = ({ data, card, id }: any) => {
+  console.log(data);
+
   return (
     <MainContainer>
       <CompleteContain>
@@ -19,9 +21,6 @@ const PurchaseComplete = ({ data, card }: any) => {
             $ 2,149.00
           </CourseCostResp>
         </PurchaseTitle>
-        <CourseId>
-          {data.type}
-        </CourseId>
         <CourseName>
           {data.type}: {data.title}
         </CourseName>
@@ -65,10 +64,12 @@ const PurchaseComplete = ({ data, card }: any) => {
             </PurchaseData>
           </Text4>
         </BottomContain>
-        {card.type == 'curso' && <ButtonContain>
-          <PurpleButton>
-            Empezar Curso
-          </PurpleButton>
+        {data.type == 'course' && <ButtonContain>
+          <Link href={{ pathname: 'Lesson', query: { id: id } }}>
+            <PurpleButton>
+              Empezar Curso
+            </PurpleButton>
+          </Link>
         </ButtonContain>}
       </CompleteContain>
       <ButtonContain>

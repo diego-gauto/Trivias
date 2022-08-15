@@ -57,8 +57,8 @@ import {
 import { httpsCallable } from 'firebase/functions';
 import { functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { addPaymentMethod, getPaymentmethods, updateUserPlan } from "../../../store/actions/PaymentActions";
-
+import { addPaymentMethod, getPaymentmethods, updateUserPlan, addCourseUser } from "../../../store/actions/PaymentActions";
+import { getcourse } from "../../../store/actions/courseActions";
 
 const Purchase = () => {
   const [loggedIn, setLoggedIn] = useState<any>(false);
@@ -77,7 +77,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type } = router.query;
+  const { type, id } = router.query;
 
   const subscription = {
     price: 149.00,
@@ -123,10 +123,19 @@ const Purchase = () => {
 
   useEffect(() => {
     fetchDB_data()
+  }, [loggedIn]);
+
+  useEffect(() => {
     if (type == 'subscription') {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
+    } else {
+      getcourse(id).then((res: any) => {
+        console.log(res);
+
+        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory })
+      })
     }
-  }, [loggedIn]);
+  }, [])
 
   const setDefault = (card: any, idx: any) => {
     setCard({ ...card, brand: card.brand, last4: card.last4, paymentMethod: card.cardId });
@@ -141,10 +150,13 @@ const Purchase = () => {
   }
 
   const handleConfirm = async () => {
-    delete card.brand
-    delete card.cardId
-    delete card.last4
-    delete card.status
+    if (cardInfo) {
+      delete card.brand
+      delete card.cardId
+      delete card.last4
+      delete card.status
+      delete card.paymentMethod
+    }
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
       alert('Por favor acomplete todos los campos!')
     }
@@ -184,30 +196,60 @@ const Purchase = () => {
 
   const FinishPayment = async () => {
     if (plan.method == 'stripe') {
-      const pay = httpsCallable(functions, 'payWithStripeSubscription');
-      const data = {
-        new: card.status,
-        cardId: card.cardId,
-        paymentMethod: card.paymentMethod,
-        stripeId: userData.stripeId,
-        priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk'
-      }
-      await pay(data).then((res: any) => {
-        console.log(res);
-
-        if ("raw" in res.data) {
-          if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-            alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
-          }
-        } else {
-          updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
-          if (card.status) {
-            addPaymentMethod(card, userData.id);
-          }
-          setConfirmation(false);
-          setPay(true);
+      if (type == 'Suscripción') {
+        const pay = httpsCallable(functions, 'payWithStripeSubscription');
+        const data = {
+          new: card.status,
+          cardId: card.cardId,
+          paymentMethod: card.paymentMethod,
+          stripeId: userData.stripeId,
+          priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk'
         }
-      })
+        await pay(data).then((res: any) => {
+          console.log(res);
+
+          if ("raw" in res.data) {
+            if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
+              alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
+            }
+          } else {
+            updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
+            if (card.status) {
+              addPaymentMethod(card, userData.id);
+            }
+            setConfirmation(false);
+            setPay(true);
+          }
+        });
+      } else {
+        const data = {
+          new: card.status,
+          cardId: card.cardId,
+          paymentMethod: card.paymentMethod,
+          stripeId: userData.stripeId,
+          amount: product.price
+        }
+        const pay = httpsCallable(functions, 'payWithStripeCourse');
+        await pay(data).then((res: any) => {
+          console.log(res);
+          if ("raw" in res.data) {
+            if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
+              alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
+            }
+          } else {
+            const course = {
+              id: id,
+              duration: (new Date().getTime() / 1000) + product.duration * 86400
+            }
+            addCourseUser(course, userData.id)
+            if (card.status) {
+              addPaymentMethod(card, userData.id);
+            }
+            setConfirmation(false);
+            setPay(true);
+          }
+        })
+      }
     }
   }
   const handleShow = () => setShow(true);
@@ -493,11 +535,11 @@ const Purchase = () => {
               </SubContainer2>
             </>
           }
-          {!pay && <PurchaseDetails id={'5'} type={type} />}
+          {!pay && <PurchaseDetails data={product} type={type} />}
           {
             pay == true &&
             <>
-              <PurchaseComplete data={product} card={card} />
+              <PurchaseComplete data={product} card={card} id={id} />
             </>
           }
         </SubContainer>

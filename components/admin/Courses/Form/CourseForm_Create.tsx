@@ -37,6 +37,9 @@ const formSchema = yup.object().shape({
   coursePrice: yup
     .number()
     .required("Campo requerido"),
+  courseType: yup
+    .number()
+    .required("Campo requerido"),
 });
 
 type FormValues = {
@@ -46,6 +49,7 @@ type FormValues = {
   courseAbout: string;
   coursePublishYear: number;
   coursePrice: number;
+  courseType: string
 };
 
 const CourseForm_Create = () => {
@@ -69,8 +73,10 @@ const CourseForm_Create = () => {
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
   const [value, setValue] = useState("Darth Vader, Grand Moff Tarkin")
   const [value2, setValue2] = useState("Uñas")
+  const [value3, setValue3] = useState("Gratis")
 
 
 
@@ -95,6 +101,7 @@ const CourseForm_Create = () => {
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
+        courseType: formData.courseType,
         uid: "A5uQQ3JAyS8GvnnwLPdE"
       },
     };
@@ -157,6 +164,41 @@ const CourseForm_Create = () => {
                 }
               </SelectContain>
 
+            </IconContain>
+          </InputContain>
+          <InputContain>
+            <Label2>Membresia</Label2>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { setOpen3(!open3) }}>
+                  {value3}
+                  <CaretD2 />
+                </Selected>
+                {
+                  open3 == true &&
+                  <OptionContain>
+                    <Option onClick={() => { setValue3("Mensual"); setOpen3(false) }}>
+                      <input
+                        type="radio"
+                        id="Temporada1"
+                        name="category"
+                        value="Temporada 1"
+                      />
+                      <Label2 > Mensual</Label2>
+                    </Option>
+                    <Option onClick={() => { setValue3("Producto"); setOpen3(false) }}>
+                      <input
+                        type="radio"
+                        id="Temporada2"
+                        name="category"
+                        value="Temporada 2"
+                      />
+                      <Label2> Producto</Label2>
+                    </Option>
+                  </OptionContain>
+                }
+              </SelectContain>
             </IconContain>
           </InputContain>
           <InputContain>

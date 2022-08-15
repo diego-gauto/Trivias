@@ -37,3 +37,12 @@ export const getPaymentmethods = async (userId: any) => {
   });
   return data
 }
+
+export const addCourseUser = async (course: any, userId: any) => {
+  const docRef = await setDoc(
+    doc(db, "users", userId, "courses", course.id),
+    {
+      finalDate: course.duration
+    }
+  );
+}
