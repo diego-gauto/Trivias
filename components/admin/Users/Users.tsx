@@ -1,13 +1,34 @@
-import React, { useState } from 'react'
-import { TitleContain, Title, Container, ProfileContain, Profile } from '../Pay/Pay.styled';
-import SideBar from '../SideBar';
-import { AdminContain, Table } from '../SideBar.styled';
-import AllUsers from './UserData/AllUsers';
-import { UserContain, EditIcon, SearchContain, SearchIcon, SearchInput, UserShow } from './Users.styled';
+import React, { useEffect, useState } from "react";
+
+import { collection, getDocs, query } from "firebase/firestore";
+
+import { db } from "../../../firebase/firebaseConfig";
+import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
+import SideBar from "../SideBar";
+import { AdminContain, Table } from "../SideBar.styled";
+import AllUsers from "./UserData/AllUsers";
+import {
+  EditIcon,
+  SearchContain,
+  SearchIcon,
+  SearchInput,
+  UserContain,
+  UserShow,
+} from "./Users.styled";
 
 const Users = () => {
 
   const [showUser, setShowUser] = useState(false);
+  const [users, setUsers] = useState<any>([]);
+  const usersCollectionRef = query(collection(db, "users"));
+
+  const getUsers = async () => {
+    const data = await getDocs(usersCollectionRef);
+    setUsers(data.docs.map((doc) => ({ ...doc.data() })))
+  }
+  useEffect(() => {
+    getUsers();
+  }, [])
 
   return (
     <AdminContain>
@@ -32,18 +53,25 @@ const Users = () => {
                 <th>Visualizar</th>
               </tr>
               {/* TABLAS */}
-              <tr onClick={() => { setShowUser(!showUser) }}>
-                <td style={{ fontWeight: 600 }}>
-                  <ProfileContain>
-                    <Profile />Mofupiyo
-                  </ProfileContain>
-                </td>
-                <td >mofu@mofupiyo.com</td>
-                <td>10/05/2022</td>
-                <td >3 Activos</td>
-                <td>3,000 puntos</td>
-                <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-              </tr>
+              {
+                users.map((user: any) => {
+                  return (
+                    <tr onClick={() => { setShowUser(!showUser) }}>
+                      <td style={{ fontWeight: 600 }}>
+                        <ProfileContain>
+                          <Profile />{user.name}
+                        </ProfileContain>
+                      </td>
+                      <td >{user.email}</td>
+                      <td>{new Date(user.created_at).toString()}</td>
+                      <td >3 Activos</td>
+                      <td>{user.score} puntos</td>
+                      <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                    </tr>
+                  )
+                })
+              }
+
             </tbody>
           </Table>
         </Container>

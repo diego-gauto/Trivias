@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/router';
+
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+import { useRouter } from "next/router";
+
+import { db, functions } from "../../../firebase/firebaseConfig";
+import { useAuth } from "../../../hooks/useAuth";
+import {
+  addPaymentMethod,
+  getPaymentmethods,
+  updateUserPlan,
+} from "../../../store/actions/PaymentActions";
 import ModalPurchase1 from "./Modal1/ModalPurchase1";
 import {
   AlertIcon,
   BotContainer,
   ButtonContain,
+  CardIconResp,
   CirclePosition,
   Container,
   ContainerCard,
@@ -17,8 +29,8 @@ import {
   Division2,
   InfoCard,
   Input,
-  InputContain,
   InputCard,
+  InputContain,
   InputText,
   NewMethodBox,
   NewMethodBox2,
@@ -45,20 +57,10 @@ import {
   TextPosition,
   Title,
   TransparentButton,
-  CardIconResp,
   VisaPay,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
-import { db } from "../../../firebase/firebaseConfig";
-import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot
-} from "firebase/firestore";
-import { httpsCallable } from 'firebase/functions';
-import { functions } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../hooks/useAuth";
-import { addPaymentMethod, getPaymentmethods, updateUserPlan } from "../../../store/actions/PaymentActions";
-
 
 const Purchase = () => {
   const [loggedIn, setLoggedIn] = useState<any>(false);
