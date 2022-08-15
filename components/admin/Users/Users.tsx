@@ -20,11 +20,12 @@ const Users = () => {
 
   const [showUser, setShowUser] = useState(false);
   const [users, setUsers] = useState<any>([]);
+  const [userId, setUserId] = useState("");
   const usersCollectionRef = query(collection(db, "users"));
 
   const getUsers = async () => {
     const data = await getDocs(usersCollectionRef);
-    setUsers(data.docs.map((doc) => ({ ...doc.data() })))
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
   }
   useEffect(() => {
     getUsers();
@@ -56,14 +57,14 @@ const Users = () => {
               {
                 users.map((user: any) => {
                   return (
-                    <tr onClick={() => { setShowUser(!showUser) }}>
+                    <tr onClick={() => { setShowUser(!showUser), setUserId(user.id), console.log(userId) }}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />{user.name}
                         </ProfileContain>
                       </td>
                       <td >{user.email}</td>
-                      <td>{new Date(user.created_at).toString()}</td>
+                      <td>{new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}</td>
                       <td >3 Activos</td>
                       <td>{user.score} puntos</td>
                       <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
