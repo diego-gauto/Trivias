@@ -47,24 +47,14 @@ export const CreateIcon = styled.i`
   cursor: pointer;
   z-index: 10;
 `;
-export const D1 = styled.i`
-  background-image: url(../images/admin/Rewards/De1.png);
+export const D1 = styled("i")<{path:any}>`
+  background-image: url(${props=>props.path});
+
   background-repeat: no-repeat;
   height: 278px;
   width: 278px;
 `;
-export const D2 = styled.i`
-  background-image: url(../images/admin/Rewards/De2.png);
-  background-repeat: no-repeat;
-  height: 278px;
-  width: 278px;
-`;
-export const D3 = styled.i`
-  background-image: url(../images/admin/Rewards/De3.png);
-  background-repeat: no-repeat;
-  height: 278px;
-  width: 278px;
-`;
+
 export const NewPrize = styled.div`
   align-items: center;
   justify-content: center;

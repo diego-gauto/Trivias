@@ -157,9 +157,9 @@ export const Divisor = styled("div")<{min:any, i:any, size:any, level:any,name:a
     ${props => (props.i == props.name-2) && css<{i:any,name:any,score:any,max:any,size:any}>`
     background: white;
     border: 1px solid #8E2DE2;
-    ${props  => (props.score > props.max && props.i == props.name-2) && css<{i:any,name:any,score:any,max:any}>`
-    background: red;
-    `}
+      ${props  => (props.score < props.max && props.i == props.size-1) && css<{i:any,name:any,score:any,max:any}>`
+      background: red;
+      `}
     `}
 
   `}

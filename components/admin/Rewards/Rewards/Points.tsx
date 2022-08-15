@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { InputContain, Tab, Unselect } from "../Rewards.styled";
+import { collection, query, getDocs, orderBy } from "firebase/firestore";
+import { db } from "../../../../firebase/firebaseConfig";
 import EditLevel from "./Modal/EditLevel";
 import {
+  AllLevels,
   ButtonContain,
   Container,
   ContainerLevel,
@@ -15,9 +17,20 @@ import {
   TransparentButton,
 } from "./Points.styled";
 
-const Points = ({ setPlace }: any) => {
+const Points = ({ setPlace, place }: any) => {
 
   const [show, setShow] = useState(false);
+  const levelsRef = query(collection(db, "levelPoints"), orderBy("minimum"))
+  const [levels, setLevels] = useState<any>([])
+
+  const getLevels = async () => {
+    const data = await getDocs(levelsRef);
+    setLevels(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+  }
+  useEffect(() => {
+    getLevels();
+  }, [])
+
   return (
     <>
       <TabContain>
@@ -32,102 +45,33 @@ const Points = ({ setPlace }: any) => {
         </Unselect>
       </TabContain>
       <Container>
-        <ContainerLevel>
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 1
-              <label>
-                100 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 2
-              <label>
-                400 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 3
-              <label>
-                800 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 4
-              <label>
-                1.000 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 5
-              <label>
-                2.000 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 6
-              <label>
-                3.500 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 7
-              <label>
-                4.800 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 8
-              <label>
-                6.000 puntos
-              </label>
-            </Level>
-          </LevelContain>
-          <Divider />
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 9
-              <label>
-                8.000 puntos
-              </label>
-            </Level>
-          </LevelContain>
-        </ContainerLevel>
 
+        <AllLevels>
+          {
+            levels.map((val: any, i: any) => {
+              return (
+                <ContainerLevel key={"adminLevel" + i}>
+                  <LevelContain >
+                    <LevelCircle />
+                    <Level>
+                      Nivel {i + 1}
+                      <br />
+                      <label>
+                        {val.maximum}
+                      </label>
+                    </Level>
+
+                  </LevelContain>
+                  <Divider size={levels.length} i={i + 1} />
+                </ContainerLevel>
+              )
+            })
+          }
+        </AllLevels>
         <ButtonContain onClick={() => { setShow(true) }}>
           <TransparentButton>Editar Niveles<Grid /></TransparentButton>
         </ButtonContain>
-        <EditLevel show={show} setShow={setShow} />
+        <EditLevel show={show} setShow={setShow} levels={levels} />
       </Container>
     </>
 
