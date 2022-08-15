@@ -32,6 +32,7 @@
     "slick-carousel": "^1.8.1",
     "stripe": "^10.0.0",
     "styled-components": "^5.3.3",
+    "uuid": "^8.3.2",
     "swiper": "^8.3.1",
     "yup": "^0.32.11"
   },
@@ -39,6 +40,7 @@
     "@types/react": "18.0.1",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.8",
+    "@types/uuid": "^8.3.4",
     "@types/styled-components": "^5.1.25",
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "8.10.0",
