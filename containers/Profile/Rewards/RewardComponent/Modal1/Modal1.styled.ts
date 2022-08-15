@@ -65,10 +65,11 @@ export const CardText = styled.p`
 `;
 export const PaymentIcon = styled.div`
   display: flex;
-  margin-top:-20px;
-  margin-bottom:-20px;
-  justify-content:center;
-
+  max-width: 278px;
+  max-height: 278px;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
   @media(max-width: 870px) {
     margin-bottom:0;
     margin-top:-60px;
@@ -229,4 +230,11 @@ export const PurpleButton = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
+`;
+export const ImageReward = styled("i")<{path:any}>`
+  background-image: url(${props=>props.path});
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 260px;
+  min-width: 260px;
 `;

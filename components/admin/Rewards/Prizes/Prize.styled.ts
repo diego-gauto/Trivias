@@ -49,10 +49,9 @@ export const CreateIcon = styled.i`
 `;
 export const D1 = styled("i")<{path:any}>`
   background-image: url(${props=>props.path});
-
   background-repeat: no-repeat;
-  height: 278px;
-  width: 278px;
+  height: 260px;
+  width: 260px;
 `;
 
 export const NewPrize = styled.div`

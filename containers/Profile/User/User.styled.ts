@@ -422,15 +422,25 @@ export const RewardParagraph = styled.p`
     display:none;
   }
 `;
-export const RewardImage = styled.div`
-  background-image: url(../images/reward.png);
+export const RewardImage = styled.img`
   background-position: center;
   background-repeat: no-repeat;
-  background-color:white;
-  //box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  height: 195px;
+  background-color: white;
+  width: 100%;
+  height: auto;
   border-radius:10px;
-  min-width: 200px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+`;
+export const ImageContain = styled.div`
+  display: flex;
+  min-height: 180px;
+  min-width: 180px;
+  max-height: 200px;
+  max-width: 200px;
+  @media (max-width: 1023px) {
+    max-height: 260px;
+    max-width: 260px;
+  }
 `;
 export const AllEditInputs = styled.div`
   display:flex;

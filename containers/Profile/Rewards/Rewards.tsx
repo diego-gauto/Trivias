@@ -27,6 +27,7 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
+import { getLevel } from "../../../store/actions/RewardActions";
 
 const Rewards = () => {
 
@@ -36,27 +37,11 @@ const Rewards = () => {
   const [size, setSize] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-
   const [loading, setLoading] = useState(true);
-
-  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
-  const levelsRef = query(collection(db, "levelPoints"), orderBy("level"))
-
   const [level, setLevel] = useState<any>([]);
 
   const [data, setData] = useState<number>(0)
   const [dataResp, setDataResp] = useState<number>(0)
-
-  const [levels, setLevels] = useState<any>([])
-
-  const getLevels = async (user: any) => {
-    let temp_levels: any = [];
-    const data = await getDocs(levelsRef);
-    data.forEach((level) => {
-      temp_levels.push({ ...level.data(), id: level.id });
-    })
-    setLevels(temp_levels)
-  }
 
   try {
     var userDataAuth = useAuth();
@@ -72,8 +57,6 @@ const Rewards = () => {
     console.log(error);
     setLoggedIn(false);
   }
-
-
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -82,7 +65,6 @@ const Rewards = () => {
         response.forEach((e) => {
           value = e.data();
         });
-        getLevels(value);
         setUserData(value);
 
       })
@@ -90,29 +72,26 @@ const Rewards = () => {
       return false
     }
   }
-
-  const getLevel = async () => {
-    let tempData: any = []
-    const data = await getDocs(levelRef)
-    data.forEach((doc) => {
-      tempData.push({ ...doc.data(), id: doc.id })
-    })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
-    setLevel(tempData[0])
-  }
-
   const getSize = async () => {
     db.collection('levelPoints').get().then(snap => {
       setSize(snap.size) // will return the collection size
     });
   }
+
+  const getCurrentLevel = () => {
+    getLevel().then((res) => {
+      res = res.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+      setLevel(res[0])
+    })
+  }
+
   useEffect(() => {
     fetchDB_data()
   }, [])
 
   useEffect(() => {
     if (userData != null) {
-      getLevel();
+      getCurrentLevel();
       getSize();
     }
   }, [userData, size]);
@@ -174,7 +153,6 @@ const Rewards = () => {
                 <Vector2 />
               </LevelContain>
               <ProgressSvg
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
                   <linearGradient id="gradient">
@@ -198,7 +176,6 @@ const Rewards = () => {
             ? <PointRewards
               setRewards={setRewards}
               level={level}
-              levels={levels}
               score={userData.score}
             />
             : <TimeRewards

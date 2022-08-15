@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getLevels } from "../../../../store/actions/RewardActions";
 
 import {
   Circle,
@@ -8,7 +9,21 @@ import {
   LevelText,
 } from "./RewardComp.styled";
 
-const Points = ({ level, levels, score }: any) => {
+const Points = ({ level, score }: any) => {
+
+
+  const [levels, setLevels] = useState<any>([]);
+
+  const getAllLevels = () => {
+    getLevels().then((res) => {
+      setLevels(res);
+    })
+  }
+  useEffect(() => {
+    getAllLevels();
+
+  }, [])
+
   return (
     <>
       {
@@ -18,7 +33,7 @@ const Points = ({ level, levels, score }: any) => {
               <ContainLevel>
                 <Circle val={val.minimum} level={level.minimum} />
                 <LevelText val={val.minimum} level={level.minimum}>
-                  Nivel {val.level} <br /> {val.maximum} puntos
+                  Nivel {i + 1} <br /> {val.maximum} puntos
                 </LevelText>
               </ContainLevel>
               <Divisor min={val.minimum} i={i} size={levels.length - 1} level={level.minimum} name={level.level} score={score} max={val.maximum} />

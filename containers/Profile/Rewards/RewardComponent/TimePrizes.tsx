@@ -49,8 +49,8 @@ const TimePrizes = () => {
           </PrizeInfo>
         </PrizeContain>
       </AllPrizes>
-      <Modal1 show={show1} setShow={setShow1} />
-      <Modal2 show={show2} setShow={setShow2} />
+      {/* <Modal1 show={show1} setShow={setShow1} />
+      <Modal2 show={show2} setShow={setShow2} /> */}
     </MainContainer>
   )
 }

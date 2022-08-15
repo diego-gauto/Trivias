@@ -11,6 +11,7 @@ import {
   AlertIcon,
   AlertMsg,
   ButtonDiv,
+  ImageReward,
   Inputs,
   ModalCont,
   ModalContain,
@@ -23,7 +24,7 @@ import {
   Title,
 } from "./Modal1.styled";
 
-const Modal1 = ({ show, setShow }: any) => {
+const Modal1 = ({ show, setShow, data }: any) => {
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
@@ -34,22 +35,18 @@ const Modal1 = ({ show, setShow }: any) => {
         <Modal show={show} onHide={handleClose} size="lg" centered>
           <ModalCont >
             <Title closeButton>
-              Gonvar Nails Leonardo Da Vinci
+              {data.title}
             </Title>
             <ModalPay>
               <ModalPayment>
                 <PaymentIcon>
-                  <Image src="/images/GonvarReward1.png" width={"250%"} height={"250%"} />
+                  <ImageReward path={data.path} />
                 </PaymentIcon>
               </ModalPayment>
               <ModalForm>
                 <Inputs>
                   <AddText >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Tellus ultrices id feugiat cursus velit. Aliquam pulvinar
-                    in orci malesuada. Pellentesque aliquam aliquam nulla sodales
-                    tortor pretium aliquet ultricies. Interdum et suspendisse nunc
-                    gravida.
+                    {data.about}
                   </AddText>
                   <AlertCont>
                     <AlertIcon />
@@ -66,7 +63,7 @@ const Modal1 = ({ show, setShow }: any) => {
             </ModalPay>
             <ButtonDiv>
               <RewardText style={{ fontWeight: "700", fontSize: "16px", marginLeft: "10%" }}>
-                Recompensa por <br /> 1,100 puntos
+                Recompensa por <br /> {data.points} puntos
               </RewardText>
               <PurpleButton onClick={handleClose}>
                 Entendido
