@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link';
 import { PurpleButton, TransparentButton } from '../../Module1/Module1.styled';
 import {
   AboutContain, BackgroundOverlay, ButtonContain,
@@ -11,7 +12,7 @@ import {
 } from '../../Module3/Modal/Modal1.styled';
 import SelectModule4 from './SelectModule4';
 
-const Modal1 = ({ show, setShow }: any) => {
+const Modal1 = ({ show, setShow, course }: any) => {
   const handleClose = () => setShow(false);
   return (
     <ModalContain>
@@ -34,15 +35,17 @@ const Modal1 = ({ show, setShow }: any) => {
                   </InsideText>
                 </InsideContent>
                 <Title>
-                  Curso de Uñas Francesas
+                  Curso de {course.courseTittle}
                 </Title>
                 <SubTitle>
                   Descubre un nuevo método para tus uñas este San Valentín
                 </SubTitle>
                 <ButtonContain>
-                  <PurpleButton>
-                    Comprar - $2,149.00
-                  </PurpleButton>
+                  <Link href={{ pathname: 'Purchase', query: { type: 'course', id: course.id } }}>
+                    <PurpleButton>
+                      Comprar - ${course.coursePrice}.00
+                    </PurpleButton>
+                  </Link>
                   <TransparentButton>
                     Ver un Adelanto
                     <PlayIcon />
@@ -58,19 +61,19 @@ const Modal1 = ({ show, setShow }: any) => {
                 Sobre el curso:
               </Titles>
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, sem rutrum blandit convallis. Penatibus scelerisque tempus, volutpat magna venenatis, volutpat. Ut nisl urna, pharetra et ultrices. Sapien lacinia fringilla rhoncus egestas nisl aliquam. Pellentesque ornare luctus lobortis non id in vestibulum.
+                {course.courseAbout}
               </Text>
             </AboutContain>
             <Datacontain>
               <Data>Profesor(es):
                 <DataSpan>
-                  Darth Vader, Grand Moff Tarkin
+                  {course.courseProfessor}
                 </DataSpan>
               </Data>
               <Data>
                 Categorías:
                 <DataSpan>
-                  Uñas de salón
+                  {course.Category}
                 </DataSpan>
               </Data>
               <Data>
@@ -82,13 +85,13 @@ const Modal1 = ({ show, setShow }: any) => {
               <Data>
                 Año de publicación:
                 <DataSpan>
-                  2022
+                  {course.coursePublishYear}
                 </DataSpan>
               </Data>
               <Data>
                 Tiempo estimado:
                 <DataSpan>
-                  28 horas
+                  {course.courseDuration} horas
                 </DataSpan>
               </Data>
             </Datacontain>
