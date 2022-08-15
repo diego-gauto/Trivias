@@ -20,12 +20,12 @@ import {
 const Points = ({ setPlace, place }: any) => {
 
   const [show, setShow] = useState(false);
-  const levelsRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelsRef = query(collection(db, "levelPoints"), orderBy("minimum"))
   const [levels, setLevels] = useState<any>([])
 
   const getLevels = async () => {
     const data = await getDocs(levelsRef);
-    setLevels(data.docs.map((doc) => ({ ...doc.data() })))
+    setLevels(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
   }
   useEffect(() => {
     getLevels();
@@ -50,11 +50,11 @@ const Points = ({ setPlace, place }: any) => {
           {
             levels.map((val: any, i: any) => {
               return (
-                <ContainerLevel key={"adminLevel" + val.level}>
+                <ContainerLevel key={"adminLevel" + i}>
                   <LevelContain >
                     <LevelCircle />
                     <Level>
-                      Nivel {val.level}
+                      Nivel {i + 1}
                       <br />
                       <label>
                         {val.maximum}
@@ -71,7 +71,7 @@ const Points = ({ setPlace, place }: any) => {
         <ButtonContain onClick={() => { setShow(true) }}>
           <TransparentButton>Editar Niveles<Grid /></TransparentButton>
         </ButtonContain>
-        <EditLevel show={show} setShow={setShow} />
+        <EditLevel show={show} setShow={setShow} levels={levels} />
       </Container>
     </>
 

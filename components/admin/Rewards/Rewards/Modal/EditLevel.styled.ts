@@ -6,6 +6,22 @@ export const ModalContain = styled.div`
   gap: 20px;
   flex-direction: column;
   width: 100%;
+  height: 850px;
+  overflow-y: auto;
+  position: relative;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+
+}
+&::-webkit-scrollbar-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  ...
+}
 `;
 export const TitleContain = styled.div`
   display: flex;
@@ -24,7 +40,7 @@ export const Level = styled.p`
 `;
 export const LevelContain = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 15px;
   padding-block: 10px;
   padding-inline: 20px;
   flex-direction: column;
@@ -34,21 +50,25 @@ export const LevelContain = styled.div`
 
 export const Add = styled.div`
   display: flex;
-  padding-block: 50px;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  cursor: pointer;
+
 `;
 export const AddText = styled.p`
   display: flex;
   gap: 5px;
   font-size: 16px;
+  padding-block: 10px;
+  padding-inline: 20px;
+  border-radius: 100px;
+  border: 2px solid #6717CD;
+
   font-weight: 600;
   font-family: 'Montserrat',sans-serif;
   color: #6717CD;
   margin: 0;
+  cursor: pointer;
 `;
 export const AddIcon = styled.i`
   background-image: url(../images/admin/Rewards/add2.png);
@@ -97,10 +117,16 @@ export const ButtonContain = styled.div`
 export const Button = styled.button`
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
-  padding-block: 15px;
-  padding-inline: 25px;
+  padding-block: 8px;
+  padding-inline: 20px;
   background: #6717CD;
-  border-radius: 30px;
+  border-radius: 100px;
   color: white;
   border: none;
+  &:hover{
+    transition: .2s ease all;
+    background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+    padding-block: 10px;
+    padding-inline: 22px;
+  }
 `;
