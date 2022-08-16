@@ -1,10 +1,10 @@
-import React from 'react'
-import Users from '../../components/admin/Users/Users';
-import { MainContain } from '../../screens/Styles.styled';
+import UsersList from "../../components/admin/Users/UsersList";
+import { MainContain } from "../../screens/Styles.styled";
+
 const UsersView = () => {
   return (
     <MainContain>
-      <Users />
+      <UsersList />
     </MainContain>
   )
 }

@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
 
-import { doc, getDoc } from "firebase/firestore";
 
-import { db } from "../../../../firebase/firebaseConfig";
 import {
   CloseIcon,
   Columns,
@@ -30,35 +27,14 @@ import {
 } from "./AllUsers.styled";
 import Modal1 from "./Modal/Modal";
 
-const AllUsers = ({ users, setShowUser, userId }: any) => {
-  const [show, setShow] = useState(false);
-  const getSingleUser = async () => {
-    const docRef = doc(db, 'users', 'AtDRdV1ZUXhDjMMxXVOy');
-    try {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        //setUsers(docSnap.data().name)
-        console.log(docSnap.data().name);
-      } else {
-        console.log("Document does not exist")
-      }
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  useEffect(() => {
-    getSingleUser();
-  }, [])
-
-
+const AllUsers = ({ user, setIsVisible }: any) => {
   return (
     <UserContain>
       <TitleContain>
         <FirstBox>
           <Title>Usuario Activo</Title>
         </FirstBox>
-        <CloseIcon onClick={() => { setShowUser(false) }} />
+        <CloseIcon onClick={() => setIsVisible(false)} />
       </TitleContain>
 
       <><ProfileContain>
@@ -69,13 +45,13 @@ const AllUsers = ({ users, setShowUser, userId }: any) => {
             <Info>
               Usuario
               <Label>
-                {users}
+                {user.name}
               </Label>
             </Info>
             <Info>
               Puntos
               <Label>
-                {users}
+                {user.score}
               </Label>
             </Info>
             <Info>
@@ -89,7 +65,7 @@ const AllUsers = ({ users, setShowUser, userId }: any) => {
             <Info>
               Correo electrónico
               <Label>
-                {users}
+                {user.email}
               </Label>
             </Info>
             <Info>
@@ -114,7 +90,7 @@ const AllUsers = ({ users, setShowUser, userId }: any) => {
             <Image2 />
             <Image3 />
           </CourseContain>
-          <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton>
+          <TransparentButton /*onClick={() => { setShow(true); }}*/>Agregar Curso</TransparentButton>
         </Courses><PayContain>
           <TitleBox>
             Métodos de pago asociados
@@ -125,7 +101,7 @@ const AllUsers = ({ users, setShowUser, userId }: any) => {
           </LastContainer>
         </PayContain></>
 
-      <Modal1 show={show} setShow={setShow} />
+      <Modal1 /*show={show} setShow={setShow} */ />
     </UserContain>
   )
 }
