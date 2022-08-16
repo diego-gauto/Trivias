@@ -36,15 +36,6 @@ export const Banner = styled(Image)`
   width: 100%;
   height: 300px;
   position: relative;
-  @media(max-width: 600px) {
-    height: 280px;
-  }
-  @media(max-width: 450px) {
-    height: 260px;
-  }
-  @media(max-width: 400px) {
-    height: 240px;
-  }
 `;
 export const BannerContain = styled.div`
   display: flex;

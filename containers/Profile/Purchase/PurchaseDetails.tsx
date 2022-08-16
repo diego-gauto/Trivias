@@ -7,6 +7,7 @@ const PurchaseDetails = ({ data, type }: any) => {
     title: 'Gonvar Plus',
 
   }
+
   return (
     <PurchaseContainer>
       {type == 'course' &&
@@ -17,13 +18,10 @@ const PurchaseDetails = ({ data, type }: any) => {
               $ 2,149.00
             </CourseCostResp>
           </ContainTitle>
-          <CourseId>
-            Curso 3
-          </CourseId>
           <CourseName>
-            Curso de Uñas Francesas
+            Curso de {data.title}
             <CourseCost>
-              $ 2,149.00
+              $ {data.price}.00
             </CourseCost>
           </CourseName>
           <CardContain>
@@ -36,10 +34,10 @@ const PurchaseDetails = ({ data, type }: any) => {
               </ImageContain>
               <CourseText>
                 <TitleCourse>
-                  Curso 3: Lorem Ipsum
+                  Curso : {data.title}
                 </TitleCourse>
                 <Subtitle>
-                  Subtítulo de categoría
+                  {data.category}
                 </Subtitle>
               </CourseText>
             </Card>
@@ -52,7 +50,7 @@ const PurchaseDetails = ({ data, type }: any) => {
           </CourseInfo>
         </>
       }
-      {
+      {type == 'subscription' &&
         <>
           <ContainTitle>
             Detalles de la compra

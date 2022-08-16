@@ -1,9 +1,34 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, deleteDoc,
+  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, deleteDoc, orderBy,
 } from "firebase/firestore";
 import { db } from '../../firebase/firebaseConfig';
 import { v4 as uuidv4 } from 'uuid';
 import { getStorage, ref, getDownloadURL, uploadString, deleteObject } from "firebase/storage";
+
+
+export const getLevel = async () => {
+  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  let tempData: any = []
+  const data = await getDocs(levelRef)
+  data.forEach((doc) => {
+    tempData.push({ ...doc.data(), id: doc.id })
+  })
+  tempData.forEach((element: any, index: any) => {
+    element.level = index + 1;
+  })
+  // tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+  return tempData
+}
+export const getLevels = async () => {
+  const levelsRef = query(collection(db, "levelPoints"), orderBy("minimum"))
+  let temp_levels: any = [];
+  const data = await getDocs(levelsRef);
+  data.forEach((level) => {
+    temp_levels.push({ ...level.data(), id: level.id });
+  })
+  return temp_levels
+}
+
 export const deleteLevel = async (level: any) => {
   await deleteDoc(doc(db, "levelPoints", level.id));
 }
@@ -54,7 +79,7 @@ const uploadImage = (image: any, name: any) => {
 }
 export const getRewards = async () => {
   let data: any = []
-  const docRef = collection(db, 'rewards');
+  const docRef = query(collection(db, "rewards"), orderBy("points"));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
     data.push({ ...doc.data(), id: doc.id })

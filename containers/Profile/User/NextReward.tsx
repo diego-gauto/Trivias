@@ -10,6 +10,7 @@ import {
   CompleteBar,
   Currentlvl,
   DataTitle,
+  ImageContain,
   Nextlvl,
   Pointbox,
   PointsBox,
@@ -28,11 +29,30 @@ import {
   VectorLeft,
   VectorRight,
 } from "./User.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getRewards } from "../../../store/actions/ProfileActions";
+import Image from "next/image";
 
 const NextReward = ({ score, barProgress, level, max }: any) => {
   const [reward, setReward] = useState(false);
+  const [prize, setPrize] = useState<any>([]);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
+
+  const getNextReward = () => {
+    getRewards().then((res) => {
+      res = res.filter((data: any) => (data.points > score));
+      if (res[0] == null) {
+        setPrize([])
+      }
+      else {
+        setPrize(res[0])
+      }
+    })
+  }
+
+  useEffect(() => {
+    getNextReward();
+  }, [])
 
   return (
     <RewardContain>
@@ -81,16 +101,18 @@ const NextReward = ({ score, barProgress, level, max }: any) => {
             </Nextlvl>
           </Pointbox>
           <RewardData>
-            <RewardImage />
+            <ImageContain>
+              <RewardImage src={prize.path} />
+            </ImageContain>
             <RewardInfo>
               <RewardTitleBox>
-                2 Monómeros Gonval
+                {prize.title}
               </RewardTitleBox>
               <RewardPoints>
-                1,500 puntos
+                {prize.points} puntos
               </RewardPoints>
               <RewardParagraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci malesuada.
+                {prize.about}
               </RewardParagraph>
             </RewardInfo>
           </RewardData>
@@ -118,7 +140,7 @@ const NextReward = ({ score, barProgress, level, max }: any) => {
             </Nextlvl>
           </Pointbox>
           <RewardData>
-            <RewardImage />
+            {/* <RewardImage /> */}
             <RewardInfo>
               <RewardTitleBox>
                 20% en una membresía

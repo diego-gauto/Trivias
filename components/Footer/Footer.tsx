@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useState } from 'react'
+import ModalFinish from '../../containers/Profile/User/Modal3/ModalFinish';
 import {
   BottomContainer,
   BottomText,
@@ -22,6 +23,10 @@ import {
 
 
 const Footer = () => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true)
+  }
 
   let { pathname } = useRouter();
   return (
@@ -61,7 +66,7 @@ const Footer = () => {
         <FooterIcons>
           {
             pathname == '/Profile' &&
-            <TextFinish>
+            <TextFinish onClick={handleShow}>
               Terminar Suscripción
             </TextFinish>
           }
@@ -102,7 +107,7 @@ const Footer = () => {
           </Link>
         </RespContainer>
         <RespContainer2>
-          <FooterText>
+          <FooterText >
             Aviso de Privacidad
           </FooterText>
           <FooterText>
@@ -114,7 +119,7 @@ const Footer = () => {
           <FooterIcons>
             {
               pathname == '/Profile' &&
-              <TextFinish>
+              <TextFinish onClick={handleShow}>
                 Terminar Suscripción
               </TextFinish>
             }
@@ -141,6 +146,7 @@ const Footer = () => {
           Inowu Development 2022
         </BottomText>
       </BottomContainer>
+      <ModalFinish show={show} setShow={setShow} />
     </>
 
   )

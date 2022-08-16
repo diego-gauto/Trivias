@@ -12,7 +12,7 @@ import {
   RewardContainer,
 } from "./RewardComp.styled";
 
-const PointRewards = ({ setRewards, level, levels, score }: any) => {
+const PointRewards = ({ setRewards, level, score }: any) => {
 
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
@@ -33,7 +33,6 @@ const PointRewards = ({ setRewards, level, levels, score }: any) => {
       <RewardContainer style={{ borderRadius: responsive1023 ? "" : "0 10px 10px 10px" }}>
         <Points
           level={level}
-          levels={levels}
           score={score}
         />
       </RewardContainer>

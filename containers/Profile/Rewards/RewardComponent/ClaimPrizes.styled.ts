@@ -14,12 +14,13 @@ export const TitleClaim = styled.h1`
   margin: 0;
 `;
 export const PrizeImage = styled.div`
-  border-radius:10px;
+  display: flex;
+  max-width: 260px;
+  max-height: 260px;
+  position: relative;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
   cursor: pointer;
-  @media (max-width: 870px) {
-    width: 150px;
-  }
   &:hover{
     box-shadow: 0px 0px 10px 2px #6717CD;
   }
@@ -35,7 +36,6 @@ export const AllPrizes = styled.div`
 `;
 export const PrizeContain = styled.div`
   display: flex;
-  width: 150px;
   flex-direction: column;
   gap: 3px;
 `;
@@ -51,4 +51,11 @@ export const PrizeInfo = styled.span`
   font-size: 14px;
   font-family:'Raleway', sans-serif;
   margin: 0;
+`;
+export const ImageReward = styled("i")<{path:any}>`
+  background-image: url(${props=>props.path});
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 260px;
+  min-width: 260px;
 `;
