@@ -118,6 +118,7 @@ export const ProgressSvg = styled.svg`
   stroke-dasharray: 346;
   position: absolute;
   transform: rotate(-90deg);
+  filter: blur(0.5px);
   @media(max-width: 1023px) {
     stroke-dasharray: 289;
   }

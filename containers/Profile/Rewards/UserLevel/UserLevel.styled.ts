@@ -1,21 +1,15 @@
 import styled from "styled-components";
 
 export const Background = styled.div`
-  background: white;
-  opacity: .5;
-  top:0;
-  left:0;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
+
 `;
 export const OuterProgress = styled.div`
   width: 54px;
   height: 54px;
   position: relative;
   border-radius: 50%;
+
+
 `;
 export const ProgressSvg = styled.svg`
   width: 100%;
@@ -26,6 +20,8 @@ export const ProgressSvg = styled.svg`
   position: absolute;
   z-index: 1;
   transform: rotate(-90deg);
+  border-radius: 50%;
+  filter: blur(0.5px);
 `;
 export const LevelContain = styled.div`
   display: flex;
@@ -49,6 +45,10 @@ export const ProgressCircle = styled("circle")<{progress:number}>`
     stroke-dasharray: 157;
     stroke-dashoffset: ${props=>props.progress};
     stroke-linecap: round;
+
+    cx:27px;
+    cy:27px;
+    r:25px;
 `;
 export const ProgressBackground = styled.circle`
   fill: none;
@@ -56,6 +56,9 @@ export const ProgressBackground = styled.circle`
   stroke-width: 4px;
   stroke-dasharray: 157;
   stroke-dashoffset: 0;
+  cx:27px;
+  cy:27px;
+  r:25px;
 `;
 export const Vector = styled.i`
   background-image: url(../images/Rewards/VectorS.png);

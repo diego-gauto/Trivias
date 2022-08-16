@@ -50,6 +50,7 @@ export const CreateIcon = styled.i`
 export const D1 = styled("i")<{path:any}>`
   background-image: url(${props=>props.path});
   background-repeat: no-repeat;
+  background-position: center;
   height: 260px;
   width: 260px;
 `;

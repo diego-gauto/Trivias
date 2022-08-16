@@ -54,7 +54,7 @@ export const Level = styled.p`
 export const Divider = styled("div")<{size:any, i:any}>`
   border-radius: 10px;
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-  width: 100px;
+  width: ${props => 800/(props.size-1) }px;
   height: 4px;
   ${props => (props.i == props.size) && css`
   display: none;

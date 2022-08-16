@@ -142,6 +142,7 @@ export const AddText = styled.label`
   font-size: 14px;
   width: 417px;
   height: 84px;
+  text-align: justify;
   color: background: #000000;
   font-family:'Montserrat',sans-serif;
   margin-bottom: 3%;

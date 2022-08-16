@@ -15,6 +15,7 @@ export const ProgressSvg = styled.svg`
   stroke-dasharray: 157;
   position: absolute;
   z-index: 1;
+  filter: blur(0.5px);
   transform: rotate(-90deg);
 `;
 export const LevelContain = styled.div`
