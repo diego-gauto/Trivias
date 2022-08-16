@@ -1,10 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getInvoice } from '../../../store/actions/PaymentActions';
+import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import SideBar from '../SideBar';
 import { AdminContain, Table } from '../SideBar.styled';
-import { PayContain, Title, TitleContain, Container, DateSelect, Visa, IconContain, MasterCard, PayPal, Profile, ProfileContain, ButtonIcon } from './Pay.styled';
+import {
+  PayContain, Title, TitleContain, Container,
+  IconContain, Profile, ProfileContain,
+  ButtonIcon, Method, Imagecontain
+} from './Pay.styled';
 import Select from './Select/Select';
 
 const Pay = () => {
+  const [invoice, setInvoice] = useState([])
+  const getAllInvoice = () => {
+    getInvoice().then((res) => {
+      res.forEach((element: any) => {
+        let tempDate = new Date(element.paidAt.seconds * 1000);
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth()
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        element.amount = element.amount / 100
+      });
+      console.log(res)
+      setInvoice(res);
+    })
+  }
+  useEffect(() => {
+    getAllInvoice();
+  }, [])
+
   return (
     <AdminContain>
       <SideBar />
@@ -27,55 +52,42 @@ const Pay = () => {
                 <th>Método de Pago</th>
               </tr>
               {/* TABLAS */}
-              <tr>
-                <td>
-                  <ProfileContain>
-                    <Profile />Mofupiyo
-                  </ProfileContain>
-                </td>
-                <td>mofu@mofupiyo.com</td>
-                <td>10/05/2022</td>
-                <td style={{ fontWeight: 600 }}>$ 3,000.00</td>
-                <td>Lorem Ipsum</td>
-                <td><IconContain><Visa /></IconContain></td>
-              </tr>
-              <tr>
-                <td>
-                  <ProfileContain>
-                    <Profile />Mofupiyo
-                  </ProfileContain>
-                </td>
-                <td>mofu@mofupiyo.com</td>
-                <td>10/05/2022</td>
-                <td style={{ fontWeight: 600 }}>$ 3,000.00</td>
-                <td>Lorem Ipsum</td>
-                <td><IconContain><Visa /></IconContain></td>
-              </tr>
-              <tr>
-                <td>
-                  <ProfileContain>
-                    <Profile />Mofupiyo
-                  </ProfileContain>
-                </td>
-                <td>mofu@mofupiyo.com</td>
-                <td>10/05/2022</td>
-                <td style={{ fontWeight: 600 }}>$ 3,000.00</td>
-                <td>Lorem Ipsum</td>
-                <td><IconContain><MasterCard /></IconContain></td>
-              </tr>
-              <tr>
-                <td>
-                  <ProfileContain>
-                    <Profile />Mofupiyo
-                  </ProfileContain>
-                </td>
-                <td>mofu@mofupiyo.com</td>
-                <td>10/05/2022</td>
-                <td style={{ fontWeight: 600 }}>$ 3,000.00</td>
-                <td>Lorem Ipsum</td>
-                <td><IconContain><PayPal /></IconContain></td>
-              </tr>
+              {
+                invoice.map((invoice: any, index) => {
+                  return (
+                    <tr key={"allPayment" + index}>
+                      <td>
+                        <ProfileContain>
+                          <Imagecontain>
+                            {invoice && invoice.userImage
+                              ?
+                              < Profile
+                                src={invoice.userImage}
+                              />
+                              :
+                              <Profile
+                                src={DEFAULT_USER_IMG}
+                              />
+                            }
+                          </Imagecontain>
+                          {invoice.userName}
+                        </ProfileContain>
+                      </td>
+                      <td>{invoice.userEmail}</td>
+                      <td>{invoice.formatDate}</td>
+                      <td style={{ fontWeight: 600 }}>$ {invoice.amount}.00</td>
+                      <td>{invoice.product}</td>
+                      <td>
+                        {
+                          invoice.brand != null &&
+                          <IconContain><Method brand={invoice.brand} /></IconContain>
+                        }
 
+                      </td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </Table>
         </Container>
