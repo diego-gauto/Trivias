@@ -7,6 +7,7 @@ import { db } from "../../../../firebase/firebaseConfig";
 import { useAuth } from "../../../../hooks/useAuth";
 import { getLevel } from "../../../../store/actions/RewardActions";
 import {
+  Background,
   CurrentLevel,
   LevelContain,
   OuterProgress,
