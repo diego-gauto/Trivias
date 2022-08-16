@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PayContain = styled.div`
   display: flex;
@@ -48,32 +48,33 @@ export const IconContain = styled.div`
   justify-content: center;
   width: 48px;
 `;
-export const Profile = styled.i`
-  background-image: url(../images/admin/Profile.png);
-  background-repeat: no-repeat;
+export const Profile = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+`;
+export const Imagecontain = styled.div`
+  display: flex;
   width: 32px;
   height: 32px;
+
 `;
-export const Visa = styled.i`
-  background-image: url(../images/admin/VisaLogo.png);
+export const Method = styled("i")<{brand:any}>`
+  background-image: url(../images/admin/${props=>props.brand}.png);
   background-repeat:no-repeat;
   width: 35px;
   margin: 5px;
   height: 12px;
-`;
-export const MasterCard = styled.i`
-  background-image: url(../images/admin/Mastercard.png);
-  background-repeat:no-repeat;
+  ${props=>props.brand =="mastercard" && css`
   margin: 2px;
   width: 31px;
   height: 20px;
-`;
-export const PayPal = styled.i`
-  background-image: url(../images/admin/PayPal.png);
-  background-repeat:no-repeat;
+`}
+  ${props=>props.brand =="paypal" && css`
   margin: 2px;
   width: 16px;
   height: 20px;
+  `}
 `;
 export const ButtonIcon = styled.div`
   display: flex;

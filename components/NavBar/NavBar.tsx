@@ -167,11 +167,11 @@ const NavBar = () => {
                     backgroundImage: "url(" + userData.photoURL + ")"
                     , backgroundSize: "100%"
                   }}
-                > </UserImage>
+                />
                 :
                 < UserImage style={{
                   backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                }} > </UserImage>
+                }} />
               }
             </UserContain>
           </>
