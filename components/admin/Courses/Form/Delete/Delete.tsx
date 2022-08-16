@@ -1,7 +1,16 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap';
-import { CloseIcon } from '../../../Users/UserData/AllUsers.styled';
-import { ButtonContain, Container, Content, PurpleButton, Title, TitleContain, TransparentButton, Trash } from './Delete.styled';
+import { Modal } from "react-bootstrap";
+
+import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
+import {
+  ButtonContain,
+  Container,
+  Content,
+  PurpleButton,
+  Title,
+  TitleContain,
+  TransparentButton,
+  Trash,
+} from "./Delete.styled";
 
 const Delete = ({ show, setShow }: any) => {
 

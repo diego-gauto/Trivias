@@ -1,7 +1,17 @@
-import React from 'react'
-import { InputContain, Tab, Unselect } from '../Rewards.styled';
-import { TabContain, Container, LevelContain, LevelCircle, Level, Divider, ButtonContain, TransparentButton, ContainerLevel, Grid } from './Points.styled';
 
+
+import { InputContain, Tab, Unselect } from "../Rewards.styled";
+import {
+  ButtonContain,
+  Container,
+  ContainerLevel,
+  Grid,
+  Level,
+  LevelCircle,
+  LevelContain,
+  TabContain,
+  TransparentButton,
+} from "./Points.styled";
 
 const Time = ({ setPlace }: any) => {
   return (
@@ -28,7 +38,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -38,7 +48,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -48,7 +58,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -58,7 +68,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -68,7 +78,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -78,7 +88,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -88,7 +98,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>
@@ -98,7 +108,7 @@ const Time = ({ setPlace }: any) => {
               </label>
             </Level>
           </LevelContain>
-          <Divider />
+          {/* <Divider /> */}
           <LevelContain>
             <LevelCircle />
             <Level>

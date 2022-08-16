@@ -49,6 +49,12 @@ export const IconContain = styled.div`
   width: 48px;
 `;
 export const Profile = styled.img`
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+`;
+export const NameContainer = styled.img`
+  display: flex;
   width: 100%;
   height: auto;
   border-radius: 50%;
