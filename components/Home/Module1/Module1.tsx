@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
+import DOMPurify from "dompurify"
 import Img1 from "./MediaSources/Icon01.png"
 import Img2 from "./MediaSources/Icon02.png"
 import Img3 from "./MediaSources/Icon03.png"
@@ -7,8 +8,6 @@ import Img4 from "./MediaSources/Icon04.png"
 import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
-import { collection, doc, setDoc, getDocs, onSnapshot, getDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
 
 import {
   BackgroundWrapper, Left, Right, SectionA_01,
@@ -22,38 +21,35 @@ import {
   ArrowDownContainer, ModuleContainer,
 } from "./Module1.styled";
 import { AnyObject } from "yup/lib/types";
-import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
 
+export const Module1 = (props: IModule1) => {
+  const {
+    heroSectionData: {
+      botonPrimario,
+      botonSecundario,
+      parrafoInicial,
+      parrafoFinal,
+      primerCaracteristica,
+      segundaCaracteristica,
+      terceraCaracteristica,
+      tituloInicial,
+    }
+  } = props;
 
-export const Module1 = (props: any) => {
+  const parseTitle = (text: string) => {
+    const bold = /\*\*(.*?)\*\*/gm;
+    const html = text.replace(bold, '<span>$1</span>');
+    return <SectionA_01Text01 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
+  }
+
+  const parseText = (text: string) => {
+    const bold = /\*\*(.*?)\*\*/gm;
+    const html = text.replace(bold, '<span>$1</span>');
+    return <SectionA_02Text01 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
+  }
+
   const scrollToModule2 = () => {
     window.scrollTo(0, window.innerHeight * 0.75)
-  }
-  const [landing, setLanding] = useState<any>()
-  const [loading, setLoading] = useState(true);
-
-
-  const getHeroSection = async () => {
-    const heroSectionRef = doc(db, "landingPage", "heroSection")
-    const heroSectionDoc = await getDoc(heroSectionRef)
-    if (heroSectionDoc.exists()) {
-      setLanding(heroSectionDoc.data())
-      setLoading(false)
-    }
-  }
-  useEffect(() => {
-    getHeroSection();
-  }, []);
-
-
-  if (loading) {
-    return (
-      <Background>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background>
-    )
   }
 
   return (
@@ -68,16 +64,13 @@ export const Module1 = (props: any) => {
             <Left>
               <SectionA_01>
                 <Row>
-                  <SectionA_01TextWrapper className="ms-0"> <SectionA_01Text01>{landing.tituloInicial} </SectionA_01Text01>  <SectionA_01Text02>DESDE CERO</SectionA_01Text02></SectionA_01TextWrapper>
+                  <SectionA_01TextWrapper className="ms-0">{parseTitle(tituloInicial)}</SectionA_01TextWrapper>
                 </Row>
               </SectionA_01>
               <SectionA_02>
                 <Row>
-                  <p> <SectionA_02Text01>{landing.parrafoInicial} <SectionA_02Text02>entrenamientos personalizados</SectionA_02Text02>
-                    <br />
-                    <br />
-                    En Gonvar descubrirás la manera más fácil, rápida y divertida de convertirte en un <SectionA_02Text02>aplicador profesional. </SectionA_02Text02>
-                    Entrenamientos de primer nivel para lograr resultados extraordinarios </SectionA_02Text01></p>
+                  {parseText(parrafoInicial)}
+                  {parseText(parrafoFinal)}
                 </Row>
 
               </SectionA_02>
@@ -87,7 +80,7 @@ export const Module1 = (props: any) => {
                     <Button01>
                       <Button01Content>
                         <SectionB_Text>
-                          Comienza desde $49
+                          {botonPrimario}
                         </SectionB_Text>
                       </Button01Content>
                     </Button01>
@@ -98,7 +91,7 @@ export const Module1 = (props: any) => {
                     <Button02>
                       <Button02Content>
                         <SectionB_Text>
-                          Ve más cursos <Image src={Img1.src} ></Image>
+                          {botonSecundario} <Image src={Img1.src} ></Image>
                         </SectionB_Text>
                       </Button02Content>
                     </Button02>
@@ -110,19 +103,19 @@ export const Module1 = (props: any) => {
                   <IconImageWrapper>
 
                   </IconImageWrapper>
-                  <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img2.src}></Image>+4700 Alumnos</SectionB_Text>
+                  <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img2.src}></Image>{primerCaracteristica}</SectionB_Text>
                 </IconElement>
                 <IconElement>
                   <IconImageWrapper>
 
                   </IconImageWrapper>
-                  <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img4.src}></Image>+250 Cursos</SectionB_Text>
+                  <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img4.src}></Image>{segundaCaracteristica}</SectionB_Text>
                 </IconElement>
                 <IconElement>
 
                   <SectionB_TextALT1>
                     <Image style={{ paddingRight: "5px" }} src={Img3.src}></Image>
-                    +50 Presenciales</SectionB_TextALT1>
+                    {terceraCaracteristica}</SectionB_TextALT1>
                 </IconElement>
               </SectionC>
               <BlurWindow></BlurWindow>
