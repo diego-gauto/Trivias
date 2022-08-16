@@ -49,7 +49,7 @@ export const IconContain = styled.div`
   width: 48px;
 `;
 export const Profile = styled.img`
-  width: 100px;
+  width: 20px;
   height: auto;
   border-radius: 50%;
 `;

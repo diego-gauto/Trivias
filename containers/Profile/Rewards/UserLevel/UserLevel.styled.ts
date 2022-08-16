@@ -4,7 +4,6 @@ export const Background = styled.div`
 
 `;
 export const OuterProgress = styled.div`
-  cursor: pointer;
   width: 54px;
   height: 54px;
   position: relative;

@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import Link from "next/link";
+
 import { db } from "../../../../firebase/firebaseConfig";
 import { useAuth } from "../../../../hooks/useAuth";
+import { getLevel } from "../../../../store/actions/RewardActions";
 import {
   Background,
   CurrentLevel,
@@ -13,8 +17,6 @@ import {
   Vector,
   Vector2,
 } from "./UserLevel.styled";
-import Link from "next/link";
-import { getLevel } from "../../../../store/actions/RewardActions";
 
 const UserLevel = () => {
 
@@ -65,6 +67,7 @@ const UserLevel = () => {
       res = res.filter((data: any, index: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
 
       setLevel(res[0])
+      //console.log("USER LEVEL ACTUAL LEVEL:", level)
     })
   }
   useEffect(() => {

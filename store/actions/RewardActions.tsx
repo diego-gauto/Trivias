@@ -1,10 +1,17 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, deleteDoc, orderBy,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  updateDoc,
 } from "firebase/firestore";
-import { db } from '../../firebase/firebaseConfig';
-import { v4 as uuidv4 } from 'uuid';
-import { getStorage, ref, getDownloadURL, uploadString, deleteObject } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 
+import { db } from "../../firebase/firebaseConfig";
 
 export const getLevel = async () => {
   const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
