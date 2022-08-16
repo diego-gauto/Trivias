@@ -53,7 +53,7 @@ const User = () => {
       return onSnapshot(query_1, (response) => {
 
         response.forEach((e) => {
-          setUserData({...e.data(), id:e.id})
+          setUserData({ ...e.data(), id: e.id })
 
         });
       })

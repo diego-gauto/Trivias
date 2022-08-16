@@ -13,6 +13,9 @@ export const getLevel = async () => {
   data.forEach((doc) => {
     tempData.push({ ...doc.data(), id: doc.id })
   })
+  tempData.forEach((element: any, index: any) => {
+    element.level = index + 1;
+  })
   // tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
   return tempData
 }

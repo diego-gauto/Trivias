@@ -22,7 +22,6 @@ const UserData = ({ data }: any) => {
   }
 
   useEffect(() => {
-    console.log(data)
     setUser({ ...data })
   }, [data])
   return (

@@ -35,15 +35,21 @@ import Image from "next/image";
 
 const NextReward = ({ score, barProgress, level, max }: any) => {
   const [reward, setReward] = useState(false);
-  const [nextReward, setNextReward] = useState<any>([]);
+  const [prize, setPrize] = useState<any>([]);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
 
   const getNextReward = () => {
     getRewards().then((res) => {
-      res = res.filter((data: any) => (data.points > score))
-      setNextReward(res[0])
+      res = res.filter((data: any) => (data.points > score));
+      if (res[0] == null) {
+        setPrize([])
+      }
+      else {
+        setPrize(res[0])
+      }
     })
   }
+
   useEffect(() => {
     getNextReward();
   }, [])
@@ -96,17 +102,17 @@ const NextReward = ({ score, barProgress, level, max }: any) => {
           </Pointbox>
           <RewardData>
             <ImageContain>
-              <RewardImage src={nextReward.path} />
+              <RewardImage src={prize.path} />
             </ImageContain>
             <RewardInfo>
               <RewardTitleBox>
-                {nextReward.title}
+                {prize.title}
               </RewardTitleBox>
               <RewardPoints>
-                {nextReward.points} puntos
+                {prize.points} puntos
               </RewardPoints>
               <RewardParagraph>
-                {nextReward.about}
+                {prize.about}
               </RewardParagraph>
             </RewardInfo>
           </RewardData>
