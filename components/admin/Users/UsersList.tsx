@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
+import { collection, doc, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
+import { getSingleUser } from "../../../hooks/useAuth";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
 import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
-import AllUsers from "./UserData/UserCardData";
+import UserCardData from "./UserData/UserCardData";
 import {
   EditIcon,
   SearchContain,
@@ -16,13 +17,14 @@ import {
   UserShow,
 } from "./UsersList.styled";
 
-interface SelectedUser {
+export interface SelectedUser {
+  id: string;
   name: string;
   email: string;
   score: number;
   uid?: string;
 };
-interface AllUser {
+export interface AllUser {
   id: string;
   name: string;
   email: string;
@@ -32,15 +34,15 @@ interface AllUser {
   };
 };
 
-const Users = () => {
+const UsersList = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<AllUser | any>>([]);
-  const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "" });
+  const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "", id: "" });
   const usersCollectionRef = query(collection(db, "users"));
 
   const getUsers = async () => {
-    const data = await getDocs(usersCollectionRef);
-    setAllUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    const userData = await getDocs(usersCollectionRef);
+    setAllUsers(userData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
   }
 
   const handleClick = async (id: string) => {
@@ -51,20 +53,10 @@ const Users = () => {
     }
   }
 
-  const getSingleUser = async (id: string) => {
-    const docRef = doc(db, 'users', id);
-    try {
-      const docSnap = await getDoc(docRef);
-      return docSnap.data()
-
-    } catch {
-      return undefined;
-    }
-  }
-
   useEffect(() => {
     getUsers();
-  }, [])
+  }, [selectedUser]);
+
 
   return (
     <AdminContain>
@@ -114,10 +106,10 @@ const Users = () => {
         </Container>
         {
           isVisible == true &&
-          <AllUsers user={selectedUser} setIsVisible={setIsVisible} />
+          <UserCardData user={selectedUser} setIsVisible={setIsVisible} />
         }
       </UserContain>
     </AdminContain >
   )
 }
-export default Users;
+export default UsersList;

@@ -45,14 +45,12 @@ export const ProfilePic = styled.i`
   height: 120px;
 `;
 export const Level = styled.i`
-  background-image: url(../images/admin/Level.png);
-  background-repeat:no-repeat;
   position: absolute;
   transform: translate(-60%, 58%);
-  bottom: 10%;
+  bottom: 5%;
   right: 20%;
-  width: 48px;
-  height: 48px;
+  width: 55px;
+  height: 55px;
 `;
 export const Columns = styled.div`
   display: flex;
@@ -69,6 +67,9 @@ export const Info = styled.p`
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   margin: 0;
+  min-width: 150px;
+  max-width: 200px;
+  height: 60px;
 `;
 export const Label = styled.label`
   font-family: 'Montserrat', sans-serif;

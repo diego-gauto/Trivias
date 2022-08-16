@@ -12,7 +12,6 @@ export const Background = styled.div`
   z-index: 0;
 `;
 export const OuterProgress = styled.div`
-  cursor: pointer;
   width: 54px;
   height: 54px;
   position: relative;

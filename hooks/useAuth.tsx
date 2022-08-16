@@ -1,9 +1,10 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from '../firebase/firebaseConfig';
 
+import { db } from "../firebase/firebaseConfig";
 
 interface Props {
   children?: ReactNode
@@ -16,6 +17,16 @@ export const useAuth = () => {
   //console.log(db)
   return useContext(AuthContext);
 };
+
+export const getSingleUser = async (id: string) => {
+  //const docRef = doc(db, 'users', id);
+  try {
+    const docSnap = await getDoc(doc(db, 'users', id));
+    return docSnap.data()
+  } catch {
+    return undefined;
+  }
+}
 
 export const AuthProvider = ({ children, ...props }: Props) => {
   const [user, setUser] = useState<any>(null);
