@@ -27,6 +27,7 @@ export const SecondBox = styled.div`
 export const ThirdBox = styled.div`
   display:flex;
   width:100%;
+  min-height: 410px;
   gap: 10px;
   @media (max-width: 1023px) {
     flex-wrap:wrap;
@@ -162,7 +163,7 @@ export const PaymentTitle = styled.h1`
 export const PaymentBox = styled.div`
   display:flex;
   width:100%;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
   padding-block:8px;
   padding-inline:10px;
   border-radius:10px;
@@ -470,6 +471,7 @@ export const EditInput = styled.input`
 export const EditButtons = styled.div`
   display:flex;
   justify-content:space-between;
+  margin-top: auto;
   @media (max-width: 1023px) {
     flex-direction:column;
     gap:10px;

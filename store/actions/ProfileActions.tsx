@@ -14,3 +14,13 @@ export const getRewards = async () => {
   });
   return data
 }
+
+// export const updateUser = async (user: any, id: any) => {
+//   const docRef = doc(db, 'users', id);
+//   await updateDoc(docRef, {
+//     name: user.name,
+//     phone: user.phoneNumber,
+//     country: user.country,
+//   })
+//   return 'exito'
+// }

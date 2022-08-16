@@ -1,10 +1,30 @@
-import React, { useState } from 'react'
+import { getAuth, updateProfile } from 'firebase/auth';
+import { doc, updateDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
+import { db } from '../../../firebase/firebaseConfig';
+
 import Modal2 from './Modal2/Modal2';
 import { ProfileData, DataTitle, AllEditInputs, Inputs, EditText, EditInput, EditButtons, SubscriptionButton, SaveButton } from './User.styled';
 
-const UserData = () => {
+const UserData = ({ data }: any) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+
+  const [user, setUser] = useState<any>({ data })
+
+  const updateUser = async () => {
+
+    const docRef = doc(db, 'users', user.id);
+    await updateDoc(docRef, {
+      name: user.name,
+      phoneNumber: user.phoneNumber,
+    })
+  }
+
+  useEffect(() => {
+    console.log(data)
+    setUser({ ...data })
+  }, [data])
   return (
     <>
       <ProfileData>
@@ -16,32 +36,57 @@ const UserData = () => {
             <EditText>
               Nombre de Usuario
             </EditText>
-            <EditInput placeholder="Mofupiyo" />
+            <EditInput
+              placeholder={data.name}
+              defaultValue={data.name}
+              onChange={(e) => {
+                setUser({ ...user, name: e.target.value })
+              }}
+            />
           </Inputs>
           <Inputs>
             <EditText>
               Telefono
             </EditText>
-            <EditInput placeholder="5512345678" />
+            <EditInput
+              placeholder={data.phoneNumber == null ? 5512345678 : data.phoneNumber}
+              defaultValue={data.phoneNumber == null ? 5512345678 : data.phoneNumber}
+              onChange={(e) => {
+                setUser({ ...user, phoneNumber: e.target.value })
+              }}
+            />
           </Inputs>
           <Inputs>
             <EditText>
               País
             </EditText>
-            <EditInput placeholder="Seleccionar país" />
+            <EditInput
+              placeholder="Seleccionar país"
+              defaultValue="pais"
+              onChange={(e) => {
+                setUser({ ...user, country: e.target.value })
+              }}
+            />
           </Inputs>
-          <Inputs>
+          {/* <Inputs>
             <EditText>
               Contraseña
             </EditText>
-            <EditInput placeholder="************" />
-          </Inputs>
+            <EditInput
+              placeholder="************"
+              onChange={(e) => {
+                setUser({ ...user, title: e.target.value })
+              }}
+            />
+          </Inputs> */}
         </AllEditInputs>
         <EditButtons>
           <SubscriptionButton onClick={handleShow}>
             Cambiar Suscripción
           </SubscriptionButton>
-          <SaveButton>
+          <SaveButton onClick={() => {
+            updateUser();
+          }}>
             Guardar
           </SaveButton>
         </EditButtons>
