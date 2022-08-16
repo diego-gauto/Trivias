@@ -30,7 +30,6 @@ export const ImageTag = styled.div  `
 export const SectionCentered = styled.div  `
 background-color: white;
 height: 500px;
-margin-top: -55px;
 z-index: 1;
 position: absolute;
 width: 1073.125px;
