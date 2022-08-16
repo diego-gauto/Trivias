@@ -1,5 +1,6 @@
 
 
+import Modal1 from "./Modal/Modal";
 import {
   CloseIcon,
   Columns,
@@ -24,8 +25,7 @@ import {
   TitleContain,
   TransparentButton,
   UserContain,
-} from "./AllUsers.styled";
-import Modal1 from "./Modal/Modal";
+} from "./UsersCardData.styled";
 
 const AllUsers = ({ user, setIsVisible }: any) => {
   return (

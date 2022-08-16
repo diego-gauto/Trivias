@@ -1,8 +1,26 @@
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap';
-import { addLevel, deleteLevel, updateLevel } from '../../../../../store/actions/RewardActions';
-import { CloseIcon } from '../../../Users/UserData/AllUsers.styled';
-import { ModalContain, Title, ButtonContain, TitleContain, Button, LevelContain, Level, Contain, InputContain, Label, Input, Add, AddText, AddIcon, Close } from './EditLevel.styled';
+import React, { useState } from "react";
+
+import { Modal } from "react-bootstrap";
+
+import { addLevel, deleteLevel, updateLevel } from "../../../../../store/actions/RewardActions";
+import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
+import {
+  Add,
+  AddIcon,
+  AddText,
+  Button,
+  ButtonContain,
+  Close,
+  Contain,
+  Input,
+  InputContain,
+  Label,
+  Level,
+  LevelContain,
+  ModalContain,
+  Title,
+  TitleContain,
+} from "./EditLevel.styled";
 
 const EditLevel = ({ show, setShow, levels }: any) => {
   const handleClose = () => setShow(false);

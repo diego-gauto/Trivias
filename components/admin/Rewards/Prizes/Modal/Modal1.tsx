@@ -1,10 +1,11 @@
 
 
 import { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
-import { updateRewards } from "../../../../../store/actions/RewardActions";
 
-import { CloseIcon } from "../../../Users/UserData/AllUsers.styled";
+import { Modal } from "react-bootstrap";
+
+import { updateRewards } from "../../../../../store/actions/RewardActions";
+import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
   ButtonContain,

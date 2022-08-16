@@ -1,9 +1,23 @@
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap'
-import { addReward } from '../../../../../store/actions/RewardActions';
-import { CloseIcon } from '../../../Users/UserData/AllUsers.styled';
+import React, { useState } from "react";
 
-import { Button, ButtonContain, Folder, IconContain, Input, Input2, InputBig, InputContain, Label, ModalContain, Title, TitleContain } from './Modal.styled';
+import { Modal } from "react-bootstrap";
+
+import { addReward } from "../../../../../store/actions/RewardActions";
+import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
+import {
+  Button,
+  ButtonContain,
+  Folder,
+  IconContain,
+  Input,
+  Input2,
+  InputBig,
+  InputContain,
+  Label,
+  ModalContain,
+  Title,
+  TitleContain,
+} from "./Modal.styled";
 
 const Modal2 = ({ show, setShow }: any) => {
 

@@ -14,7 +14,7 @@ import {
   SearchInput,
   UserContain,
   UserShow,
-} from "./Users.styled";
+} from "./UsersList.styled";
 
 interface SelectedUser {
   name: string;

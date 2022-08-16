@@ -1,8 +1,32 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap';
-import { CloseIcon } from '../AllUsers.styled';
-import { ButtonContain, Card, CardContain, CardImage, CardSubTitle, CardTitle, CaretD, Container, Data, IconContain, ImageContain, Info, Input, InputContain, Label, LessonText, MainCard, PurpleButton, Text1, Text2, Title, TitleContain } from './Modal.styled';
-import Select from './Select/Select';
+
+
+import { Modal } from "react-bootstrap";
+
+import { CloseIcon } from "../UsersCardData.styled";
+import {
+  ButtonContain,
+  Card,
+  CardContain,
+  CardImage,
+  CardSubTitle,
+  CardTitle,
+  Container,
+  Data,
+  IconContain,
+  ImageContain,
+  Info,
+  Input,
+  InputContain,
+  Label,
+  LessonText,
+  MainCard,
+  PurpleButton,
+  Text1,
+  Text2,
+  Title,
+  TitleContain,
+} from "./Modal.styled";
+import Select from "./Select/Select";
 
 const Modal1 = ({ show, setShow }: any) => {
 
