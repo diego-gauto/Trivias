@@ -64,14 +64,14 @@ const AllUsers = ({ user, setIsVisible }: any) => {
           <ColumnContain>
             <Info>
               Correo electrónico
-              <Label>
+              <Label style={{ maxWidth: "200px", overflowWrap: "break-word" }}>
                 {user.email}
               </Label>
             </Info>
             <Info>
               Fecha de Creación
               <Label>
-                {/*new Date(users.created_at.seconds * 1000).toLocaleDateString("es-MX")*/}
+                {new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}
               </Label>
             </Info>
             <Info>

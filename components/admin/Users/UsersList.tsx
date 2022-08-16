@@ -95,7 +95,8 @@ const Users = () => {
                     <tr onClick={() => handleClick(user.id)}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
-                          <Profile />{user.name}
+                          <Profile />
+                          {user.name}
                         </ProfileContain>
                       </td>
                       <td >{user.email}</td>
