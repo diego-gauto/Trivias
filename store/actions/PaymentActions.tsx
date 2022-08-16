@@ -46,3 +46,15 @@ export const addCourseUser = async (course: any, userId: any) => {
     }
   );
 }
+
+
+export const addInvoice = async (invoice: any) => {
+  const docRef = await addDoc(
+    collection(db, "invoice"),
+    {
+      ...invoice
+    }
+  );
+}
+
+

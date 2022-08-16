@@ -57,7 +57,7 @@ import {
 import { httpsCallable } from 'firebase/functions';
 import { functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { addPaymentMethod, getPaymentmethods, updateUserPlan, addCourseUser } from "../../../store/actions/PaymentActions";
+import { addPaymentMethod, getPaymentmethods, updateUserPlan, addCourseUser, addInvoice } from "../../../store/actions/PaymentActions";
 import { getcourse } from "../../../store/actions/courseActions";
 
 const Purchase = () => {
@@ -195,8 +195,17 @@ const Purchase = () => {
   }
 
   const FinishPayment = async () => {
+    let invoice = {
+      amount: 0,
+      userName: userData.name,
+      userEmail: userData.email,
+      paidAt: new Date(),
+      product: product.title,
+      brand: card.brand,
+      userId: userData.id
+    }
     if (plan.method == 'stripe') {
-      if (type == 'Suscripción') {
+      if (type == 'subscription') {
         const pay = httpsCallable(functions, 'payWithStripeSubscription');
         const data = {
           new: card.status,
@@ -207,7 +216,6 @@ const Purchase = () => {
         }
         await pay(data).then((res: any) => {
           console.log(res);
-
           if ("raw" in res.data) {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
@@ -237,11 +245,13 @@ const Purchase = () => {
               alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
             }
           } else {
+            invoice.amount = res.data.amount;
             const course = {
               id: id,
               duration: (new Date().getTime() / 1000) + product.duration * 86400
             }
-            addCourseUser(course, userData.id)
+            addCourseUser(course, userData.id);
+            addInvoice(invoice);
             if (card.status) {
               addPaymentMethod(card, userData.id);
             }
