@@ -14,7 +14,7 @@ import {
   TransparentButton,
 } from "./Modal3.styled";
 
-const Modal3 = ({ show, setShow, setShow2 }: any) => {
+const ModalFinish = ({ show, setShow }: any) => {
 
   const handleClose = () => setShow(false);
 
@@ -38,7 +38,7 @@ const Modal3 = ({ show, setShow, setShow2 }: any) => {
           </Expire>
           <ButtonsDiv>
             <TransparentButton onClick={() => {
-              setShow2(true); setShow(false)
+              setShow(false)
             }}>
               Regresar
             </TransparentButton>
@@ -51,4 +51,4 @@ const Modal3 = ({ show, setShow, setShow2 }: any) => {
     </Modal3Contain>
   )
 }
-export default Modal3;
+export default ModalFinish;

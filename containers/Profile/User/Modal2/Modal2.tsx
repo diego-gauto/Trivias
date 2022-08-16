@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import { Modal } from "react-bootstrap";
+import ModalFinish from "../Modal3/ModalFinish";
 
-import Modal3 from "../Modal3/Modal3";
 import {
   ButtonsDiv,
   CardInfo,
@@ -24,8 +24,7 @@ const Modal2 = ({ show, setShow }: any) => {
 
   const handleClose = () => setShow(false);
 
-  const [show3, setShow3] = useState(false);
-  const handleShow = () => setShow3(true);
+
 
   return (
     <Modal2Contain>
@@ -63,14 +62,14 @@ const Modal2 = ({ show, setShow }: any) => {
               Terminar suscripción
             </TransparentButton> */}
             <PurpleButton onClick={() => {
-              setShow3(true); setShow(false)
+              setShow(false)
             }} >
               Aceptar
             </PurpleButton>
           </ButtonsDiv>
         </Container>
       </Modal>
-      <Modal3 show={show3} setShow={setShow3} setShow2={setShow} />
+
     </Modal2Contain>
   )
 }

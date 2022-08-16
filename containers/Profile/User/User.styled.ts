@@ -27,6 +27,7 @@ export const SecondBox = styled.div`
 export const ThirdBox = styled.div`
   display:flex;
   width:100%;
+  min-height: 410px;
   gap: 10px;
   @media (max-width: 1023px) {
     flex-wrap:wrap;
@@ -162,7 +163,7 @@ export const PaymentTitle = styled.h1`
 export const PaymentBox = styled.div`
   display:flex;
   width:100%;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
   padding-block:8px;
   padding-inline:10px;
   border-radius:10px;
@@ -422,15 +423,25 @@ export const RewardParagraph = styled.p`
     display:none;
   }
 `;
-export const RewardImage = styled.div`
-  background-image: url(../images/reward.png);
+export const RewardImage = styled.img`
   background-position: center;
   background-repeat: no-repeat;
-  background-color:white;
-  //box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  height: 195px;
+  background-color: white;
+  width: 100%;
+  height: auto;
   border-radius:10px;
-  min-width: 200px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+`;
+export const ImageContain = styled.div`
+  display: flex;
+  min-height: 180px;
+  min-width: 180px;
+  max-height: 200px;
+  max-width: 200px;
+  @media (max-width: 1023px) {
+    max-height: 260px;
+    max-width: 260px;
+  }
 `;
 export const AllEditInputs = styled.div`
   display:flex;
@@ -460,6 +471,7 @@ export const EditInput = styled.input`
 export const EditButtons = styled.div`
   display:flex;
   justify-content:space-between;
+  margin-top: auto;
   @media (max-width: 1023px) {
     flex-direction:column;
     gap:10px;

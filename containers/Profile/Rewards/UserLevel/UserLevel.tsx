@@ -14,13 +14,13 @@ import {
   Vector2,
 } from "./UserLevel.styled";
 import Link from "next/link";
+import { getLevel } from "../../../../store/actions/RewardActions";
 
 const UserLevel = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [size, setSize] = useState(0);
-  const levelRef = collection(db, "levelPoints")
 
   const [level, setLevel] = useState<any>([]);
 
@@ -40,8 +40,6 @@ const UserLevel = () => {
     console.log(error)
     setLoggedIn(false)
   }
-
-
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -62,14 +60,12 @@ const UserLevel = () => {
       setSize(snap.size) // will return the collection size
     });
   }
-  const getLevel = async () => {
-    let tempData: any = []
-    const data = await getDocs(levelRef)
-    data.forEach((doc) => {
-      tempData.push({ ...doc.data(), id: doc.id })
+  const getCurrentLevel = () => {
+    getLevel().then((res) => {
+      res = res.filter((data: any, index: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+
+      setLevel(res[0])
     })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == 9)
-    setLevel(tempData[0])
   }
   useEffect(() => {
     fetchDB_data()
@@ -78,10 +74,10 @@ const UserLevel = () => {
 
   useEffect(() => {
     if (userData != null) {
-      getLevel();
+      getCurrentLevel();
       getSize();
     }
-  }, [userData]);
+  }, [userData, size]);
 
   useEffect(() => {
     if (userData != null && level != null) {

@@ -31,8 +31,6 @@ const User = () => {
   const [size, setSize] = useState(0);
   const [loading, setLoading] = useState(true);
   const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
-  const levelsRef = query(collection(db, "levelPoints"), orderBy("level"))
-
 
   try {
     var userDataAuth = useAuth();
@@ -53,11 +51,11 @@ const User = () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-        var userData: any;
+
         response.forEach((e) => {
-          userData = e.data()
+          setUserData({ ...e.data(), id: e.id })
+
         });
-        setUserData(userData)
       })
     } catch (error) {
       return false
@@ -126,7 +124,7 @@ const User = () => {
         <NextReward score={userData.score} barProgress={barProgress} level={level.level} max={level.maximum} />
         <ThirdBox>
           {/* Third Container */}
-          <UserData />
+          <UserData data={userData} />
           {/* Fourth Container */}
           <PaymentMethod />
         </ThirdBox>

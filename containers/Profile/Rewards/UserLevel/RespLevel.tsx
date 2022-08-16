@@ -13,6 +13,7 @@ import {
   Vector2,
 } from "./RespLevel.styled";
 import Link from "next/link";
+import { getLevel } from "../../../../store/actions/RewardActions";
 
 const RespLevel = () => {
 
@@ -60,14 +61,11 @@ const RespLevel = () => {
       setSize(snap.size) // will return the collection size
     });
   }
-  const getLevel = async () => {
-    let tempData: any = []
-    const data = await getDocs(levelRef)
-    data.forEach((doc) => {
-      tempData.push({ ...doc.data(), id: doc.id })
+  const getCurrentLevel = () => {
+    getLevel().then((res) => {
+      res = res.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+      setLevel(res[0])
     })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == 9)
-    setLevel(tempData[0])
   }
 
   useEffect(() => {
@@ -76,7 +74,7 @@ const RespLevel = () => {
 
   useEffect(() => {
     if (userData != null) {
-      getLevel();
+      getCurrentLevel();
       getSize();
     }
   }, [userData, size]);
