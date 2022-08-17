@@ -15,9 +15,9 @@ import { LoaderContain, LoaderImage, Background } from "../screens/Login.styled"
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
-  const [heroSectionData, setHeroSectionData] = useState<any>();
-  const [productosDestacadosData, setProductosDestacadosData] = useState<any>();
-  const [reseniasSectionData, setReseniasSectionDoc] = useState<any>();
+  const [heroSectionData, setHeroSectionData] = useState<any>({});
+  const [productosDestacadosData, setProductosDestacadosData] = useState<any>({});
+  const [reseniasSectionData, setReseniasSectionDoc] = useState<any>({});
 
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
@@ -29,19 +29,19 @@ const Homepage = () => {
     const heroSectionRef = doc(db, "landingPage", "heroSection")
     const productosDestacadosSectionRef = doc(db, "landingPage", "productosDestacadosSection")
     const reseniasSectionRef = doc(db, "landingPage", "reseniasSection")
-    const heroSectionDoc = await getDoc(heroSectionRef)
-    const productosDestacadosSectionDoc = await getDoc(productosDestacadosSectionRef)
-    const reseniasSectionDoc = await getDoc(reseniasSectionRef)
-    if (
-      heroSectionDoc.exists()
-      && productosDestacadosSectionDoc.exists()
-      && reseniasSectionDoc.exists()
-    ) {
-      setHeroSectionData(heroSectionDoc.data())
-      setProductosDestacadosData(productosDestacadosSectionDoc.data())
-      setReseniasSectionDoc(reseniasSectionDoc.data())
-      setLoading(false)
-    }
+    const [
+      heroSectionDoc,
+      productosDestacadosSectionDoc,
+      reseniasSectionDoc,
+    ] = await Promise.all([
+      getDoc(heroSectionRef),
+      getDoc(productosDestacadosSectionRef),
+      getDoc(reseniasSectionRef),
+    ])
+    setHeroSectionData(heroSectionDoc.data() || {})
+    setProductosDestacadosData(productosDestacadosSectionDoc.data() || {})
+    setReseniasSectionDoc(reseniasSectionDoc.data() || {})
+    setLoading(false)
   }
   useEffect(() => {
     fetchLandingData()

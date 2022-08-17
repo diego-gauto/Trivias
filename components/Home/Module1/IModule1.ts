@@ -8,5 +8,6 @@ export interface IModule1{
     terceraCaracteristica: string;
     tituloInicial: string;
     parrafoFinal: string;
+    heroImage: string;
   }
 }
