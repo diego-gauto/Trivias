@@ -1,5 +1,5 @@
 import { Col, Image, Row } from "react-bootstrap";
-
+import DOMPurify from "dompurify"
 import { IModule2 } from "./IModule2";
 import BG1 from "./MediaSources/BG01.png";
 import BG2 from "./MediaSources/BG02.png";
@@ -24,35 +24,24 @@ import {
   SectionCenteredTopColumn,
   SectionCenteredWrapper,
   TitleCenter,
-  TitleCenter2,
   TitleTextContainer,
 } from "./Module2.styled";
 
 export const Module2 = (props: IModule2) => {
-  const iconImagesData = [{
-    "text": "Lorem ipsum dolor sit",
-    "source": Img5.src
-  },
-  {
-    "text": "Lorem ipsum dolor sit",
-    "source": Img2.src
-  },
-  {
-    "text": "Lorem ipsum dolor sit",
-    "source": Img6.src
-  },
-  {
-    "text": "Lorem ipsum dolor sit",
-    "source": Img3.src
-  },
-  {
-    "text": "Lorem ipsum dolor sit",
-    "source": Img4.src
-  },
-  {
-    "text": "Lorem ipsum dolor sit",
-    "source": Img1.src
-  }]
+  const {
+    featureShowcaseSectionData: { title, features }
+  } = props
+
+  const parseTitle = (text: string = "") => {
+    const bold = /\*\*(.*?)\*\*/gm;
+    const html = text.replace(bold, '<span>$1</span>');
+    return <TitleCenter dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
+  }
+
+  const featureImagesOrder = [Img5.src, Img2.src, Img6.src, Img3.src, Img4.src, Img1.src]
+  const iconImagesData = features.map((feature, i) => {
+    return { text: feature, source: featureImagesOrder[i] }
+  })
 
   const iconImages = iconImagesData.map(({ text, source }) => {
     return (
@@ -95,12 +84,7 @@ export const Module2 = (props: IModule2) => {
               <Col></Col>
               <SectionCenteredTopColumn>
                 <TitleTextContainer>
-                  <TitleCenter>
-                    La mejor
-                  </TitleCenter>
-                  <TitleCenter2>
-                    {" "}plataforma
-                  </TitleCenter2>
+                  {parseTitle(title)}
                 </TitleTextContainer>
 
               </SectionCenteredTopColumn>

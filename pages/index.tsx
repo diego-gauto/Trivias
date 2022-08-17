@@ -17,7 +17,8 @@ const Homepage = () => {
   const [loading, setLoading] = useState(true);
   const [heroSectionData, setHeroSectionData] = useState<any>({});
   const [productosDestacadosData, setProductosDestacadosData] = useState<any>({});
-  const [reseniasSectionData, setReseniasSectionDoc] = useState<any>({});
+  const [reseniasSectionData, setReseniasSectionData] = useState<any>({});
+  const [featureShowcaseSectionData, setFeatureShowcaseSectionData] = useState<any>({});
 
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
@@ -29,18 +30,22 @@ const Homepage = () => {
     const heroSectionRef = doc(db, "landingPage", "heroSection")
     const productosDestacadosSectionRef = doc(db, "landingPage", "productosDestacadosSection")
     const reseniasSectionRef = doc(db, "landingPage", "reseniasSection")
+    const featureShowcaseSectionRef = doc(db, "landingPage", "featureShowcaseSection")
     const [
       heroSectionDoc,
       productosDestacadosSectionDoc,
       reseniasSectionDoc,
+      featureShowcaseSectionDoc,
     ] = await Promise.all([
       getDoc(heroSectionRef),
       getDoc(productosDestacadosSectionRef),
       getDoc(reseniasSectionRef),
+      getDoc(featureShowcaseSectionRef),
     ])
     setHeroSectionData(heroSectionDoc.data() || {})
     setProductosDestacadosData(productosDestacadosSectionDoc.data() || {})
-    setReseniasSectionDoc(reseniasSectionDoc.data() || {})
+    setReseniasSectionData(reseniasSectionDoc.data() || {})
+    setFeatureShowcaseSectionData(featureShowcaseSectionDoc.data() || {})
     setLoading(false)
   }
   useEffect(() => {
@@ -66,7 +71,7 @@ const Homepage = () => {
         margin: "0 auto"
       }}>
       <Module1 heroSectionData={heroSectionData} />
-      <Module2 />
+      <Module2 featureShowcaseSectionData={featureShowcaseSectionData} />
       <Module3 //courseImg={"https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
         button={"Nuevo"} title={"Curso de Uñas Francesas"}
         subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
