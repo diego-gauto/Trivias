@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Container } from "./Points.styled";
 
+
 export const Contain = styled(Container)`
   gap: 0;
   padding: 0;
@@ -29,6 +30,11 @@ export const Search = styled.input`
   padding-inline: 50px 10px;
   outline: none;
 `;
+export const Profile = styled.img`
+  width: 32px;
+  height: auto;
+  border-radius: 50%;
+`;
 export const SearchIcon = styled.i`
   position: absolute;
   top: 50%;
@@ -43,4 +49,10 @@ export const IconContain = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
+`;
+export const Imagecontain = styled.div`
+  display: flex;
+  width: 32px;
+  height: 32px;
+
 `;

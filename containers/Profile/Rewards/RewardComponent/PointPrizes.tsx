@@ -19,7 +19,7 @@ import Modal1 from "./Modal1/Modal1";
 import Modal2 from "./Modal1/Modal2";
 import { getRewards } from "../../../../store/actions/RewardActions";
 
-const PointPrizes = ({ score }: any) => {
+const PointPrizes = ({ score, user }: any) => {
 
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -64,7 +64,7 @@ const PointPrizes = ({ score }: any) => {
           })
         }
       </AllPrizes>
-      <Modal1 show={show1} setShow={setShow1} data={reward} score={score} />
+      <Modal1 show={show1} setShow={setShow1} data={reward} user={user} />
       <Modal2 show={show2} setShow={setShow2} />
     </MainContainer>
   )

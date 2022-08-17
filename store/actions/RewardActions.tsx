@@ -86,7 +86,7 @@ const uploadImage = (image: any, name: any) => {
 }
 export const getRewards = async () => {
   let data: any = []
-  const docRef = query(collection(db, "rewards"), orderBy("points"));
+  const docRef = query(collection(db, "rewards"), orderBy("points", "asc"));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
     data.push({ ...doc.data(), id: doc.id })
@@ -126,4 +126,13 @@ export const addRequest = async (request: any) => {
     }
   );
   return 'exito'
+}
+export const getRequest = async () => {
+  const requestRef = query(collection(db, "requests"), orderBy("createAt"))
+  let tempData: any = []
+  const data = await getDocs(requestRef)
+  data.forEach((doc) => {
+    tempData.push({ ...doc.data(), id: doc.id })
+  })
+  return tempData
 }

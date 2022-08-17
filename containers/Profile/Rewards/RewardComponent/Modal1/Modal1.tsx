@@ -28,21 +28,20 @@ import {
 import { addRequest } from "../../../../../store/actions/RewardActions";
 import { useEffect, useState } from "react";
 
-const Modal1 = ({ show, setShow, data, score }: any) => {
+const Modal1 = ({ show, setShow, data, user }: any) => {
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
   const [request, setRequest] = useState({
-    user: "andrei",
-    points: 100,
-    createAt: 10,
-    phoneNumber: 6623,
-    unBlocked: 20,
-    type: "digital",
-    product: "Gonvar"
-
+    user: user.name,
+    userPhoto: user.photoURL,
+    points: user.score,
+    createAt: new Date(),
+    phoneNumber: user.phoneNumber,
+    type: data.type,
+    product: data.title,
+    status: false,
   })
-
   const sendRequest = async () => {
     addRequest(request).then((res: any) => {
       setRequest(res);
@@ -87,7 +86,7 @@ const Modal1 = ({ show, setShow, data, score }: any) => {
               </RewardText>
               <ButtonContain>
                 {
-                  data.points <= score &&
+                  data.points <= user.score &&
                   <TransparentButton onClick={() => {
                     sendRequest();
                   }}>
