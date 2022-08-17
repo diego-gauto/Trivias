@@ -1,9 +1,9 @@
-
-
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
-
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import { ImageContainMod1, VideoContainMod3 } from "../components/Catalogue/Module1/Module1.styled";
 import { Module1 } from "../components/Home/Module1/Module1";
 import { Module2 } from "../components/Home/Module2/Module2";
@@ -11,14 +11,51 @@ import { Module3 } from "../components/Home/Module3/Module3";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
 import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
+import { LoaderContain, LoaderImage, Background } from "../screens/Login.styled";
 
 const Homepage = () => {
+  const [loading, setLoading] = useState(true);
+  const [heroSectionData, setHeroSectionData] = useState<any>();
+  const [productosDestacadosData, setProductosDestacadosData] = useState<any>();
+  const [reseniasSectionData, setReseniasSectionDoc] = useState<any>();
+
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
   const responsive600 = useMediaQuery({ query: "(max-width: 600px)" });
   const responsive800 = useMediaQuery({ query: "(max-width: 800px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
+  const fetchLandingData = async () => {
+    const heroSectionRef = doc(db, "landingPage", "heroSection")
+    const productosDestacadosSectionRef = doc(db, "landingPage", "productosDestacadosSection")
+    const reseniasSectionRef = doc(db, "landingPage", "reseniasSection")
+    const heroSectionDoc = await getDoc(heroSectionRef)
+    const productosDestacadosSectionDoc = await getDoc(productosDestacadosSectionRef)
+    const reseniasSectionDoc = await getDoc(reseniasSectionRef)
+    if (
+      heroSectionDoc.exists()
+      && productosDestacadosSectionDoc.exists()
+      && reseniasSectionDoc.exists()
+    ) {
+      setHeroSectionData(heroSectionDoc.data())
+      setProductosDestacadosData(productosDestacadosSectionDoc.data())
+      setReseniasSectionDoc(reseniasSectionDoc.data())
+      setLoading(false)
+    }
+  }
+  useEffect(() => {
+    fetchLandingData()
+  }, []);
+
+  if (loading) {
+    return (
+      <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
   return (
     <Container
       fluid
@@ -28,7 +65,7 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      <Module1 />
+      <Module1 heroSectionData={heroSectionData} />
       <Module2 />
       <Module3 //courseImg={"https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
         button={"Nuevo"} title={"Curso de Uñas Francesas"}

@@ -1,5 +1,8 @@
 
 
+import { useState } from "react";
+
+import GetUserLevel from "./GetUserLevel";
 import Modal1 from "./Modal/Modal";
 import {
   CloseIcon,
@@ -27,7 +30,9 @@ import {
   UserContain,
 } from "./UsersCardData.styled";
 
-const AllUsers = ({ user, setIsVisible }: any) => {
+const UserCardData = ({ user, setIsVisible }: any) => {
+  const [show, setShow] = useState(false);
+
   return (
     <UserContain>
       <TitleContain>
@@ -39,7 +44,9 @@ const AllUsers = ({ user, setIsVisible }: any) => {
 
       <><ProfileContain>
         <ProfilePic />
-        <Level />
+        <Level>
+          <GetUserLevel userLevel={user} />
+        </Level>
       </ProfileContain><Columns>
           <ColumnContain>
             <Info>
@@ -64,7 +71,7 @@ const AllUsers = ({ user, setIsVisible }: any) => {
           <ColumnContain>
             <Info>
               Correo electrónico
-              <Label style={{ maxWidth: "200px", overflowWrap: "break-word" }}>
+              <Label style={{ overflowWrap: "break-word" }}>
                 {user.email}
               </Label>
             </Info>
@@ -90,7 +97,7 @@ const AllUsers = ({ user, setIsVisible }: any) => {
             <Image2 />
             <Image3 />
           </CourseContain>
-          <TransparentButton /*onClick={() => { setShow(true); }}*/>Agregar Curso</TransparentButton>
+          <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton>
         </Courses><PayContain>
           <TitleBox>
             Métodos de pago asociados
@@ -101,8 +108,8 @@ const AllUsers = ({ user, setIsVisible }: any) => {
           </LastContainer>
         </PayContain></>
 
-      <Modal1 /*show={show} setShow={setShow} */ />
+      <Modal1 show={show} setShow={setShow} />
     </UserContain>
   )
 }
-export default AllUsers;
+export default UserCardData;

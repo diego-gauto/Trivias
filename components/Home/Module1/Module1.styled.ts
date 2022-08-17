@@ -207,13 +207,16 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-bottom: 0;
 }
 `;
-export const SectionA_01Text01 = styled.span  `
+export const SectionA_01Text01 = styled.p  `
 color: #FFFFFF; 
+span {
+  color: #6717CD;
+}
 `;
 export const SectionA_01Text02 = styled.span  `
 color: #6717CD; 
 `;
-export const SectionA_02Text01 = styled.span  `
+export const SectionA_02Text01 = styled.p  `
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
@@ -222,8 +225,12 @@ line-height: 150%;
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
 }
-
 color: #FFFFFF;
+
+span {
+  font-weight: 700;
+}
+
 @media only screen and (max-width: 1024px) {
 display: none;
 }
