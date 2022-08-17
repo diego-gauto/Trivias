@@ -4,17 +4,8 @@ import React, { Component, useEffect } from "react";
 
 import { ContainerMain, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule.styled";
 
-
 export const SlideModule = (props: ISlideModule) => {
-
-
-
-  const { isNew } = props;
-  const { title } = props;
-  const { subtitle } = props;
-  const { imgURL } = props;
-
-
+  const { isNew, title, subtitle, imgURL } = props;
   return (
     <Container>
       <ContainerMain>
@@ -22,11 +13,13 @@ export const SlideModule = (props: ISlideModule) => {
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
 
-              {isNew ?
-                <NewTag>
-                  <TextNew>Nuevo</TextNew>
-                </NewTag>
-                : <></>}
+              {
+                isNew ?
+                  <NewTag>
+                    <TextNew>Nuevo</TextNew>
+                  </NewTag>
+                  : <></>
+              }
 
             </SlideImg>
           </Row>
@@ -42,6 +35,5 @@ export const SlideModule = (props: ISlideModule) => {
         </Col>
       </ContainerMain >
     </Container >
-
   )
 }
