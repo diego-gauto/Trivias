@@ -177,6 +177,7 @@ const Rewards = () => {
               setRewards={setRewards}
               level={level}
               score={userData.score}
+              user={userData}
             />
             : <TimeRewards
               setRewards={setRewards}

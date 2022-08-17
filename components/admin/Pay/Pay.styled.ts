@@ -49,7 +49,7 @@ export const IconContain = styled.div`
   width: 48px;
 `;
 export const Profile = styled.img`
-  width: 20px;
+  width: 32px;
   height: auto;
   border-radius: 50%;
 `;
@@ -63,7 +63,6 @@ export const Imagecontain = styled.div`
   display: flex;
   width: 32px;
   height: 32px;
-
 `;
 export const Method = styled("i")<{brand:any}>`
   background-image: url(../images/admin/${props=>props.brand}.png);

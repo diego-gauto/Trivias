@@ -10,6 +10,7 @@ import {
   AlertCont,
   AlertIcon,
   AlertMsg,
+  ButtonContain,
   ButtonDiv,
   ImageReward,
   Inputs,
@@ -22,13 +23,31 @@ import {
   PurpleButton,
   RewardText,
   Title,
+  TransparentButton,
 } from "./Modal1.styled";
+import { addRequest } from "../../../../../store/actions/RewardActions";
+import { useEffect, useState } from "react";
 
-const Modal1 = ({ show, setShow, data }: any) => {
+const Modal1 = ({ show, setShow, data, user }: any) => {
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
-
+  const [request, setRequest] = useState({
+    user: user.name,
+    userPhoto: user.photoURL,
+    points: user.score,
+    createAt: new Date(),
+    phoneNumber: user.phoneNumber,
+    type: data.type,
+    product: data.title,
+    status: false,
+  })
+  const sendRequest = async () => {
+    addRequest(request).then((res: any) => {
+      setRequest(res);
+      console.log(res);
+    })
+  }
   return (
     <>
       <ModalContain >
@@ -65,9 +84,19 @@ const Modal1 = ({ show, setShow, data }: any) => {
               <RewardText style={{ fontWeight: "700", fontSize: "16px", marginLeft: "10%" }}>
                 Recompensa por <br /> {data.points} puntos
               </RewardText>
-              <PurpleButton onClick={handleClose}>
-                Entendido
-              </PurpleButton>
+              <ButtonContain>
+                {
+                  data.points <= user.score &&
+                  <TransparentButton onClick={() => {
+                    sendRequest();
+                  }}>
+                    Reclamar Recompensa
+                  </TransparentButton>
+                }
+                <PurpleButton onClick={handleClose}>
+                  Entendido
+                </PurpleButton>
+              </ButtonContain>
             </ButtonDiv>
           </ModalCont>
         </Modal>

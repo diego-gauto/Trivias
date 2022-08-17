@@ -1,11 +1,34 @@
-import React from 'react'
-import { Profile } from '../../Pay/Pay.styled';
+import React, { useEffect, useState } from 'react'
+import { getRequest } from '../../../../store/actions/RewardActions';
 import { Table } from '../../SideBar.styled';
 import { InputContain, Tab, Unselect } from '../Rewards.styled';
+import { DEFAULT_USER_IMG } from "../../../../constants/paths";
 import { TabContain } from './Points.styled';
-import { Contain, FirstContain, IconContain, Search, SearchContain, SearchIcon, Title } from './Request.styled';
+import {
+  Contain, FirstContain, IconContain, Imagecontain, Profile,
+  Search, SearchContain, SearchIcon, Title
+} from './Request.styled';
 
 const Request = ({ setPlace }: any) => {
+
+  const [request, setRequest] = useState([])
+
+  const getAllRequest = () => {
+    getRequest().then((res) => {
+      res.forEach((element: any) => {
+        let tempDate = new Date(element.createAt.seconds * 1000);
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth()
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      setRequest(res);
+    })
+  }
+  useEffect(() => {
+    getAllRequest();
+  }, [])
+
   return (
     <>
       <TabContain>
@@ -34,24 +57,48 @@ const Request = ({ setPlace }: any) => {
               <th>Puntos</th>
               <th>Fecha de Creación</th>
               <th>Teléfono</th>
-              <th>Desbloqueado</th>
               <th>Tipo</th>
               <th>Producto</th>
+              <th>Estatus</th>
             </tr>
             {/* TABLAS */}
-            <tr>
-              <td style={{ fontWeight: 600 }}>
-                <IconContain>
-                  <Profile />Mofupiyo
-                </IconContain>
-              </td>
-              <td >4,500</td>
-              <td>10/05/2022</td>
-              <td >5512345678</td>
-              <td>03/06/2022</td>
-              <td>Físico</td>
-              <td style={{ fontWeight: 600 }}>Gonvar Nails Leonardo Da Vinci</td>
-            </tr>
+            {
+              request.map((request: any, index: any) => {
+                return (
+                  <tr key={"RequestAdmin" + index}>
+                    <td style={{ fontWeight: 600 }}>
+                      <IconContain >
+                        <Imagecontain>
+                          {request && request.userImage
+                            ?
+                            < Profile
+                              src={request.userImage}
+                            />
+                            :
+                            <Profile
+                              src={DEFAULT_USER_IMG}
+                            />
+                          }
+                        </Imagecontain>
+                        {request.user}
+                      </IconContain>
+                    </td>
+                    <td >{request.points}</td>
+                    <td>{request.formatDate}</td>
+                    <td >{request.phoneNumber}</td>
+                    <td>{request.type}</td>
+                    <td style={{ fontWeight: 600 }}>{request.product}</td>
+                    <td>
+                      {
+                        request.status == false
+                          ? "No entregado"
+                          : "Enviado"
+                      }
+                    </td>
+                  </tr>
+                )
+              })
+            }
           </tbody>
         </Table>
       </Contain>
