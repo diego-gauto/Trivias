@@ -36,7 +36,7 @@ const PointRewards = ({ setRewards, level, score }: any) => {
           score={score}
         />
       </RewardContainer>
-      <PointPrizes />
+      <PointPrizes score={score} />
     </>
   )
 }

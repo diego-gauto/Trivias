@@ -111,3 +111,12 @@ export const updateRewards = async (reward: any, id: any) => {
 
   return 'exito'
 }
+export const addRequest = async (request: any) => {
+  const docRef = await addDoc(
+    collection(db, "requests"),
+    {
+      ...request
+    }
+  );
+  return 'exito'
+}

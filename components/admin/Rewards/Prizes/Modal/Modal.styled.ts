@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalContain = styled.div`
+export const ModalContain = styled.form`
   display: flex;
   padding: 20px;
   gap: 20px;
