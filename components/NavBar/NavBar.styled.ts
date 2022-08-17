@@ -196,7 +196,7 @@ export const HamburgerContain = styled.div`
   height: 100;
   position: absolute;
   z-index: 10;
-  top: -550px;
+  top: -548px;
   left: 0;
   @media(max-width: 424px){
     padding: 20px;

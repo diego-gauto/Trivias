@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, doc, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { getSingleUser } from "../../../hooks/useAuth";
@@ -18,20 +18,22 @@ import {
 } from "./UsersList.styled";
 
 export interface SelectedUser {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   score: number;
   uid?: string;
 };
 export interface AllUser {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   score: number;
   created_at: {
     seconds: number;
   };
+  phoneNumber?: number;
+  role?: string;
 };
 
 const UsersList = () => {
@@ -82,9 +84,9 @@ const UsersList = () => {
               </tr>
               {/* TABLAS */}
               {
-                allUsers.map((user: any) => {
+                allUsers.map((user, index): any => {
                   return (
-                    <tr onClick={() => handleClick(user.id)}>
+                    <tr key={index} onClick={() => handleClick(user.id)}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
