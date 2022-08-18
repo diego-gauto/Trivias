@@ -41,6 +41,8 @@ const UsersList = () => {
   const [allUsers, setAllUsers] = useState<Array<AllUser | any>>([]);
   const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "", id: "" });
   const usersCollectionRef = query(collection(db, "users"));
+  const [filteredList, setFilteredList] = useState(allUsers);
+  const [isSearching, setIseSearching] = useState<boolean>();
 
   const getUsers = async () => {
     const userData = await getDocs(usersCollectionRef);
@@ -54,6 +56,14 @@ const UsersList = () => {
       setIsVisible(true);
     }
   }
+  const filterBySearch = (event: { target: { value: string; }; }) => {
+    setIseSearching(true)
+    const query = event.target.value.toLocaleLowerCase();
+    var updatedList = [...allUsers]
+    var updated = updatedList.filter(item => item.name.includes(query) || item.email.includes(query));
+    setFilteredList(updated);
+    console.log("Updated list:", updated)
+  };
 
   useEffect(() => {
     getUsers();
@@ -69,7 +79,7 @@ const UsersList = () => {
             <Title>Usuarios</Title>
             <SearchContain>
               <SearchIcon />
-              <SearchInput placeholder="Buscar un Usuario" />
+              <SearchInput placeholder="Buscar un Usuario" onChange={filterBySearch} />
             </SearchContain>
           </TitleContain>
           <Table id="Users">
@@ -83,7 +93,25 @@ const UsersList = () => {
                 <th>Visualizar</th>
               </tr>
               {/* TABLAS */}
-              {
+              {isSearching ? (
+                filteredList.map((user, index): any => {
+                  return (
+                    <tr key={index} onClick={() => handleClick(user.id)}>
+                      <td style={{ fontWeight: 600 }}>
+                        <ProfileContain>
+                          <Profile />
+                          {user.name}
+                        </ProfileContain>
+                      </td>
+                      <td >{user.email}</td>
+                      <td>{new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}</td>
+                      <td >3 Activos</td>
+                      <td>{user.score} puntos</td>
+                      <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                    </tr>
+                  )
+                })
+              ) : (
                 allUsers.map((user, index): any => {
                   return (
                     <tr key={index} onClick={() => handleClick(user.id)}>
@@ -101,7 +129,8 @@ const UsersList = () => {
                     </tr>
                   )
                 })
-              }
+              )}
+
 
             </tbody>
           </Table>
