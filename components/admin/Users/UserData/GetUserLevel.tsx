@@ -13,9 +13,16 @@ import {
 import { db } from "../../../../firebase/firebaseConfig";
 import { getLevel } from "../../../../store/actions/RewardActions";
 
+interface LevelData {
+  id: string;
+  level?: number;
+  maximum: number;
+  minimum: number;
+};
+
 const GetUserLevel = ({ userLevel }: any) => {
   const [size, setSize] = useState(0);
-  const [level, setLevel] = useState<any>([]);
+  const [level, setLevel] = useState<LevelData>({ id: "", level: 0, maximum: 0, minimum: 0 });
   const [data, setData] = useState<number>(0)
 
   const getSize = async () => {
@@ -24,19 +31,15 @@ const GetUserLevel = ({ userLevel }: any) => {
     });
   }
   const getCurrentLevel = () => {
-    getLevel().then((res) => {
-      res = res.filter((data: any) => (data.maximum >= userLevel.score && data.minimum <= userLevel.score) || data.level == size)
-      setLevel(res[0])
+    getLevel().then((res: Array<LevelData>) => {
+      const response = res.filter((data: any) => (data.maximum >= userLevel.score && data.minimum <= userLevel.score) || data.level == size)[0] ?? { id: "", level: 1, maximum: 0, minimum: 0 }
+      setLevel(response)
     })
   }
-
   useEffect(() => {
     if (userLevel != null) {
       getCurrentLevel();
       getSize();
-    }
-    return () => {
-      setLevel(0)
     }
   }, [userLevel, size]);
 
@@ -44,15 +47,7 @@ const GetUserLevel = ({ userLevel }: any) => {
     if (userLevel != null && level != null) {
       setData(157 - (((userLevel.score - level.minimum) / (level.maximum - level.minimum)) * 157));
     }
-    return () => {
-      setData(0);
-      console.log("SETTING DATA: ", data)
-    }
   }, [level])
-  // useEffect(() => {
-  //   if (userLevel != null && size != null) {
-  //   }
-  // }, [])
 
   return (
     <OuterProgress>
