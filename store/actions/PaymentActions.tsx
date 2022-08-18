@@ -22,7 +22,8 @@ export const updateUserPlan = async (plan: any, userId: any) => {
       method: plan.method,
       paymentMethod: plan.paymentMethod,
       planId: plan.id,
-      planName: plan.name
+      planName: plan.name,
+      startDate: new Date().getTime() / 1000
     }
   })
   return 'exito'
