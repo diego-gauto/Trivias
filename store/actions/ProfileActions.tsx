@@ -1,5 +1,5 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, deleteDoc, orderBy,
+  collection, doc, getDocs, query, setDoc, addDoc, deleteDoc, orderBy, updateDoc,
 } from "firebase/firestore";
 import { db } from '../../firebase/firebaseConfig';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,9 +33,7 @@ export const deletePaymentMethod = async (userId: any, card: any) => {
 export const updatePaymentMethod = async (pm: any, userId: any) => {
   const docRef = doc(db, 'users', userId);
   await updateDoc(docRef, {
-    membership: {
-      paymentMethod: pm,
-    }
+    'membership.paymentMethod': pm,
   })
   return 'exito'
 }
