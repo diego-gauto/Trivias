@@ -6,6 +6,7 @@ import {
   getDocs,
   orderBy,
   query,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
@@ -86,7 +87,7 @@ const uploadImage = (image: any, name: any) => {
 }
 export const getRewards = async () => {
   let data: any = []
-  const docRef = query(collection(db, "rewards"), orderBy("points"));
+  const docRef = query(collection(db, "rewards"), orderBy("points", "asc"));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
     data.push({ ...doc.data(), id: doc.id })
@@ -117,4 +118,50 @@ export const updateRewards = async (reward: any, id: any) => {
   })
 
   return 'exito'
+}
+export const addRequest = async (request: any) => {
+  console.log(request)
+  const docRef = await addDoc(
+    collection(db, "requests"),
+    {
+      ...request
+    }
+  );
+  return 'exito'
+}
+export const getRequest = async () => {
+  const requestRef = query(collection(db, "requests"), orderBy("createAt"))
+  let tempData: any = []
+  const data = await getDocs(requestRef)
+  data.forEach((doc) => {
+    tempData.push({ ...doc.data(), id: doc.id })
+  })
+  return tempData
+}
+export const addUserReward = async (userRewards: any, userId: any) => {
+  const docRef = await addDoc(
+    collection(db, "users", userId, "userRewards"),
+    {
+      ...userRewards
+    }
+  );
+  return 'exito'
+}
+export const addUserReward2 = async (userRewards: any, userId: any) => {
+  console.log(userRewards, userId)
+  const docRef = await setDoc(
+    doc(db, "users", userId, "rewards", userRewards.id),
+    {
+      ...userRewards
+    }
+  );
+}
+export const getUserRewards = async (userId: any) => {
+  let data: any = []
+  const docRef = collection(db, 'users', userId, "userRewards");
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data())
+  });
+  return data
 }

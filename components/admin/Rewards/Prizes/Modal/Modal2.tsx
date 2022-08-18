@@ -7,6 +7,7 @@ import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
   ButtonContain,
+  CaretD,
   Folder,
   IconContain,
   Input,
@@ -14,18 +15,26 @@ import {
   InputBig,
   InputContain,
   Label,
+  LabelSelect,
   ModalContain,
+  Option,
+  OptionContain,
+  SelectContain,
+  Selected,
   Title,
   TitleContain,
 } from "./Modal.styled";
 
 const Modal2 = ({ show, setShow }: any) => {
 
+  const [open, setOpen] = useState(false);
+
   const [reward, setReward] = useState<any>({
     title: "",
     points: "",
     about: "",
-    path: ""
+    path: "",
+    type: ""
   })
 
   const getImage = (file: any) => {
@@ -37,8 +46,10 @@ const Modal2 = ({ show, setShow }: any) => {
     };
   }
   const createReward = () => {
+    console.log(reward)
     if (Object.keys(reward).some(key => reward[key] === '')) {
       alert("Complete todos los campos")
+
     }
     else {
       addReward(reward).then((res) => {
@@ -70,6 +81,40 @@ const Modal2 = ({ show, setShow }: any) => {
               setReward({ ...reward, points: parseInt(e.target.value) })
             }} />
         </InputContain>
+        <SelectContain>
+          <Label>Tipo</Label>
+          <Selected
+            onClick={() => { setOpen(!open) }}
+          >
+            {
+              reward.type == "" ? "Elige un tipo" : reward.type
+            }
+            <CaretD />
+          </Selected>
+          {
+            open == true &&
+            <OptionContain>
+              <Option onClick={() => { setReward({ ...reward, type: "Físico" }); setOpen(false) }}>
+                <input
+                  type="radio"
+                  id="Físico"
+                  name="category"
+                  value="Físico"
+                />
+                <LabelSelect >Físico</LabelSelect>
+              </Option>
+              <Option onClick={() => { setReward({ ...reward, type: "Digital" }); setOpen(false) }}>
+                <input
+                  type="radio"
+                  id="Digital"
+                  name="category"
+                  value="Digital"
+                />
+                <LabelSelect>Digital</LabelSelect>
+              </Option>
+            </OptionContain>
+          }
+        </SelectContain>
         <InputContain>
           <Label>Descripción</Label>
           <InputBig

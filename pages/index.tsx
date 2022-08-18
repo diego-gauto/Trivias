@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { ImageContainMod1, VideoContainMod3 } from "../components/Catalogue/Module1/Module1.styled";
 import { Module1 } from "../components/Home/Module1/Module1";
@@ -15,9 +15,10 @@ import { LoaderContain, LoaderImage, Background } from "../screens/Login.styled"
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
-  const [heroSectionData, setHeroSectionData] = useState<any>();
-  const [productosDestacadosData, setProductosDestacadosData] = useState<any>();
-  const [reseniasSectionData, setReseniasSectionDoc] = useState<any>();
+  const [heroSectionData, setHeroSectionData] = useState<any>({});
+  const [reseniasSectionData, setReseniasSectionData] = useState<any>({});
+  const [featureShowcaseSectionData, setFeatureShowcaseSectionData] = useState<any>({});
+  const [productosDestacadosData, setProductosDestacadosData] = useState<Array<any>>([]);
 
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
@@ -27,22 +28,32 @@ const Homepage = () => {
 
   const fetchLandingData = async () => {
     const heroSectionRef = doc(db, "landingPage", "heroSection")
-    const productosDestacadosSectionRef = doc(db, "landingPage", "productosDestacadosSection")
     const reseniasSectionRef = doc(db, "landingPage", "reseniasSection")
-    const heroSectionDoc = await getDoc(heroSectionRef)
-    const productosDestacadosSectionDoc = await getDoc(productosDestacadosSectionRef)
-    const reseniasSectionDoc = await getDoc(reseniasSectionRef)
-    if (
-      heroSectionDoc.exists()
-      && productosDestacadosSectionDoc.exists()
-      && reseniasSectionDoc.exists()
-    ) {
-      setHeroSectionData(heroSectionDoc.data())
-      setProductosDestacadosData(productosDestacadosSectionDoc.data())
-      setReseniasSectionDoc(reseniasSectionDoc.data())
-      setLoading(false)
-    }
+    const featureShowcaseSectionRef = doc(db, "landingPage", "featureShowcaseSection")
+    const productosCollectionRef = collection(db, "landingPage", "productosDestacadosSection", "productos")
+    const [
+      heroSectionDoc,
+      reseniasSectionDoc,
+      featureShowcaseSectionDoc,
+      productosDestacadosDocs,
+    ] = await Promise.all([
+      getDoc(heroSectionRef),
+      getDoc(reseniasSectionRef),
+      getDoc(featureShowcaseSectionRef),
+      getDocs(productosCollectionRef)
+    ])
+
+    setHeroSectionData(heroSectionDoc.data() || {})
+    setReseniasSectionData(reseniasSectionDoc.data() || {})
+    setFeatureShowcaseSectionData(featureShowcaseSectionDoc.data() || {})
+    const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
+      const { nombre, precio, imgURL, clickURL } = d.data()
+      return { title: nombre, subtitle: precio, isNew: false, imgURL, clickURL }
+    })
+    setProductosDestacadosData(parsedProductosDestacadosData || [])
+    setLoading(false)
   }
+
   useEffect(() => {
     fetchLandingData()
   }, []);
@@ -66,7 +77,7 @@ const Homepage = () => {
         margin: "0 auto"
       }}>
       <Module1 heroSectionData={heroSectionData} />
-      <Module2 />
+      <Module2 featureShowcaseSectionData={featureShowcaseSectionData} />
       <Module3 //courseImg={"https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
         button={"Nuevo"} title={"Curso de Uñas Francesas"}
         subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
@@ -166,17 +177,7 @@ const Homepage = () => {
       <Module5>
       </Module5>
 
-      <Module6 slideData={
-        [
-          { isNew: false, title: "Gonvar Nails Cover B0Z14", subtitle: "Desde $ 25.25", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F1.png?alt=media&token=9492ee18-b03e-420e-b4a5-13820f15d1c2" },
-          { isNew: false, title: "Gonvar Nails Leonardo Da Vinci", subtitle: "Desde $ 12.00", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F2.png?alt=media&token=db67c8ab-3258-40ac-bf35-c2547fc6a019" },
-
-          { isNew: false, title: "Gonvar Nails Monómero", subtitle: "Desde $ 18.99", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F3.png?alt=media&token=c779235b-155c-4d94-a883-812be9398103" },
-          { isNew: false, title: "Gonvar Nails Aristoteles", subtitle: "Desde $ 20.00", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F4.png?alt=media&token=95481926-eae5-4a6b-a219-4493f0d81fca" },
-          { isNew: true, title: "Gonvar Nails Miguel Ángel", subtitle: "Desde $ 8.00", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F5.png?alt=media&token=24e34731-aa96-4ad3-8254-6f7e8f7530f5" },
-          { isNew: false, title: "Gonvar Nails Máscara 9570-A", subtitle: "Desde $ 16.50", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel2%2F6.png?alt=media&token=0cae5f47-e0ea-4c5d-9359-b404c043b278" },
-        ]
-      } />
+      <Module6 slideData={productosDestacadosData} />
     </Container>
   )
 }
