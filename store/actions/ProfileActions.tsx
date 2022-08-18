@@ -23,3 +23,19 @@ export const getRewards = async () => {
 //   })
 //   return 'exito'
 // }
+
+export const deletePaymentMethod = async (userId: any, card: any) => {
+  console.log(userId, card);
+
+  await deleteDoc(doc(db, "users", userId, 'paymentMethods', card));
+}
+
+export const updatePaymentMethod = async (pm: any, userId: any) => {
+  const docRef = doc(db, 'users', userId);
+  await updateDoc(docRef, {
+    membership: {
+      paymentMethod: pm,
+    }
+  })
+  return 'exito'
+}

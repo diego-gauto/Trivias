@@ -1,5 +1,5 @@
 import { ModalHeader } from "react-bootstrap";
-
+import InputMask from 'react-input-mask';
 import styled from "styled-components";
 
 export const ModalContain = styled.div`
@@ -140,6 +140,19 @@ export const ModalInput = styled.input`
   border-radius:20px;
   :focus{
     outline: 1px solid #8E2DE2;
+  }
+`;
+export const InputCard = styled(InputMask)`
+  font-size: 14px;
+  font-family:'Montserrat',sans-serif;
+  padding:10px 0 10px 20px;
+  border:1px solid #6717CD;
+  border-radius:20px;
+  :focus{
+    outline: 1px solid #8E2DE2;
+  }
+  @media( max-width: 400px){
+    font-size: 12px;
   }
 `;
 export const BottomInputs = styled.div`
