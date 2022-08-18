@@ -9,6 +9,7 @@ import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
   ButtonContain,
+  CaretD,
   Folder,
   IconContain,
   Input,
@@ -16,12 +17,19 @@ import {
   InputBig,
   InputContain,
   Label,
+  LabelSelect,
   ModalContain,
+  Option,
+  OptionContain,
+  SelectContain,
+  Selected,
   Title,
   TitleContain,
 } from "./Modal.styled";
 
 const Modal1 = ({ show, setShow, data }: any) => {
+
+  const [open, setOpen] = useState(false);
   const [reward, setReward] = useState<any>({ data })
   const getImage = (file: any) => {
     console.log(file)
@@ -68,10 +76,44 @@ const Modal1 = ({ show, setShow, data }: any) => {
             placeholder="1100"
             defaultValue={reward.points}
             onChange={(e) => {
-              setReward({ ...reward, points: e.target.value })
+              setReward({ ...reward, points: parseInt(e.target.value) })
             }}
           />
         </InputContain>
+        <SelectContain>
+          <Label>Tipo</Label>
+          <Selected
+            onClick={() => { setOpen(!open) }}
+          >
+            {
+              reward.type
+            }
+            <CaretD />
+          </Selected>
+          {
+            open == true &&
+            <OptionContain>
+              <Option onClick={() => { setReward({ ...reward, type: "Físico" }); setOpen(false) }}>
+                <input
+                  type="radio"
+                  id="Físico"
+                  name="category"
+                  value="Físico"
+                />
+                <LabelSelect >Físico</LabelSelect>
+              </Option>
+              <Option onClick={() => { setReward({ ...reward, type: "Digital" }); setOpen(false) }}>
+                <input
+                  type="radio"
+                  id="Digital"
+                  name="category"
+                  value="Digital"
+                />
+                <LabelSelect>Digital</LabelSelect>
+              </Option>
+            </OptionContain>
+          }
+        </SelectContain>
         <InputContain>
           <Label>Descripción</Label>
           <InputBig

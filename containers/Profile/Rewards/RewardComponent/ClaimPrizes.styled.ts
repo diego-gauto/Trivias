@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -21,9 +21,22 @@ export const PrizeImage = styled.div`
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   cursor: pointer;
+  position: relative;
   &:hover{
     box-shadow: 0px 0px 10px 2px #6717CD;
   }
+`;
+export const Overlay = styled.div<{points:any,score:any}>`
+${props=> props.points > props.score && css`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border-radius: 10px;
+  opacity: .5;
+  z-index: 10;
+`}
 `;
 export const AllPrizes = styled.div`
   display: flex;
@@ -38,6 +51,7 @@ export const PrizeContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+
 `;
 export const PrizeTitle = styled.p`
   text-align: center;

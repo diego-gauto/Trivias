@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Selected = styled.div`
   display: flex;
   cursor: pointer;

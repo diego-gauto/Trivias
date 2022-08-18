@@ -217,17 +217,32 @@ export const ButtonDiv = styled.div`
     margin-top: -125px;
   }
 `;
+export const ButtonContain = styled.div`
+  display: flex;
+  gap: 10px;
+  height: fit-content;
+`;
 export const PurpleButton = styled.button`
   background-color: #6717CD;
   color: #fff;
-  width: 137px;
-  height: 54px;
-  padding-block: 15px;
+  padding-block: 10px;
   padding-inline: 25px;
-  border-radius: 30px;
+  border-radius: 100px;
   border:none;
   &:hover{
     background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
+export const TransparentButton = styled.button`
+  background-color: white;
+  color: #6717CD;
+  padding-block: 10px;
+  padding-inline: 25px;
+  border-radius: 100px;
+  border: 1px solid #6717CD;
+  &:hover{
     transform:scale(1.03);
     transition:.5s ease all;
   }
