@@ -32,9 +32,9 @@ const PointPrizes = ({ score, user }: any) => {
       setRewards(res);
     })
   }
+
   useEffect(() => {
     getAllRewards();
-
   }, [])
 
   return (

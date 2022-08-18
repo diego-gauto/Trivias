@@ -29,7 +29,7 @@ const Points = ({ level, score }: any) => {
       {
         levels.map((val: any, i: any) => {
           return (
-            <LevelContainer key={"levels" + val.level}>
+            <LevelContainer key={"levels" + i}>
               <Divisor min={val.minimum} i={i} size={levels.length - 1} level={level.minimum} score={score} max={val.maximum} />
               <ContainLevel>
                 <Circle val={val.minimum} level={level.minimum} />

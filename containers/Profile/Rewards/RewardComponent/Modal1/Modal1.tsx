@@ -3,8 +3,6 @@
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 
-import Image from "next/image";
-
 import {
   AddText,
   AlertCont,
@@ -25,7 +23,7 @@ import {
   Title,
   TransparentButton,
 } from "./Modal1.styled";
-import { addRequest } from "../../../../../store/actions/RewardActions";
+import { addRequest, addUserReward, addUserReward2 } from "../../../../../store/actions/RewardActions";
 import { useEffect, useState } from "react";
 
 const Modal1 = ({ show, setShow, data, user }: any) => {
@@ -42,8 +40,29 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
     product: data.title,
     status: false,
   })
+
+  const AddUserRewards = async () => {
+    let tempReward = {
+      id: data.id,
+      status: false,
+      title: data.title
+    }
+    addUserReward2(tempReward, user.id).then((res: any) => {
+    });
+  }
   const sendRequest = async () => {
-    addRequest(request).then((res: any) => {
+    let tempRequest = {
+      userId: user.id,
+      user: user.name,
+      userPhoto: user.photoURL,
+      points: user.score,
+      createAt: new Date(),
+      phoneNumber: user.phoneNumber,
+      type: data.type,
+      product: data.title,
+      status: false,
+    }
+    addRequest(tempRequest).then((res: any) => {
       setRequest(res);
       console.log(res);
     })
@@ -89,6 +108,7 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
                   data.points <= user.score &&
                   <TransparentButton onClick={() => {
                     sendRequest();
+                    AddUserRewards();
                   }}>
                     Reclamar Recompensa
                   </TransparentButton>
