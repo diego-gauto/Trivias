@@ -5,7 +5,6 @@ import Img1 from "./MediaSources/Icon01.png"
 import Img2 from "./MediaSources/Icon02.png"
 import Img3 from "./MediaSources/Icon03.png"
 import Img4 from "./MediaSources/Icon04.png"
-import Img5 from "./MediaSources/Image01.png"
 import { IModule1 } from "./IModule1";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
@@ -33,16 +32,17 @@ export const Module1 = (props: IModule1) => {
       segundaCaracteristica,
       terceraCaracteristica,
       tituloInicial,
+      heroImage,
     }
   } = props;
 
-  const parseTitle = (text: string) => {
+  const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
     const html = text.replace(bold, '<span>$1</span>');
     return <SectionA_01Text01 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
   }
 
-  const parseText = (text: string) => {
+  const parseText = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
     const html = text.replace(bold, '<span>$1</span>');
     return <SectionA_02Text01 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
@@ -126,7 +126,7 @@ export const Module1 = (props: IModule1) => {
           <RightWrapper>
             <Right>
               <RightImage>
-                <RightImageElement src={Img5.src}></RightImageElement>
+                <RightImageElement src={heroImage}></RightImageElement>
               </RightImage>
             </Right>
           </RightWrapper>

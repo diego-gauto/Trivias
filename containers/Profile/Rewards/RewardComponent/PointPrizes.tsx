@@ -8,6 +8,7 @@ import {
   AllPrizes,
   ImageReward,
   MainContainer,
+  Overlay,
   PrizeContain,
   PrizeImage,
   PrizeInfo,
@@ -18,7 +19,7 @@ import Modal1 from "./Modal1/Modal1";
 import Modal2 from "./Modal1/Modal2";
 import { getRewards } from "../../../../store/actions/RewardActions";
 
-const PointPrizes = () => {
+const PointPrizes = ({ score, user }: any) => {
 
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -31,9 +32,9 @@ const PointPrizes = () => {
       setRewards(res);
     })
   }
+
   useEffect(() => {
     getAllRewards();
-
   }, [])
 
   return (
@@ -45,10 +46,11 @@ const PointPrizes = () => {
         {
           rewards.map((reward: any, index: any) => {
             return (
-              <PrizeContain key={"Prizes" + index}>
+              <PrizeContain key={"Prizes" + index} >
                 <PrizeImage onClick={() => {
                   setShow1(true), setReward(reward);
-                }}>
+                }} >
+                  <Overlay points={reward.points} score={score} />
                   <ImageReward path={reward.path} />
                 </PrizeImage>
                 <PrizeTitle>
@@ -62,7 +64,7 @@ const PointPrizes = () => {
           })
         }
       </AllPrizes>
-      <Modal1 show={show1} setShow={setShow1} data={reward} />
+      <Modal1 show={show1} setShow={setShow1} data={reward} user={user} />
       <Modal2 show={show2} setShow={setShow2} />
     </MainContainer>
   )

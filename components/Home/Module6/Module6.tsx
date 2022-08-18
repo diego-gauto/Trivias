@@ -11,6 +11,7 @@ import {
   SliderContainerChild,
   SliderSectionTitle,
   SliderContainer,
+  SliderItemLink,
 } from "./Module6.styled";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
@@ -66,33 +67,26 @@ export const Module6 = (props: IModule6) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-
       <ContainerMain id="MainSliderCentered">
         <SliderContainer>
           <SliderSectionTitle>Visita nuestra tienda</SliderSectionTitle>
           <Swiper {...settings} onInit={onInit}>
             {slideDataArr.map((element) => (
-              <SwiperSlide key={element.title + "_ID"}  >
-                <SlideModule isNew={element.isNew} title={element.title} subtitle={element.subtitle} imgURL={element.imgURL}></SlideModule>
+              <SwiperSlide key={element.title + "_ID"}>
+                <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">
+                  <SlideModule
+                    isNew={element.isNew}
+                    title={element.title}
+                    subtitle={element.subtitle}
+                    imgURL={element.imgURL}
+                  />
+                </SliderItemLink>
               </SwiperSlide>
             ))}
-
-
-
           </Swiper>
         </SliderContainer>
-
         <SliderContainerChild>
-
-          {/*
-<Divisor>
- </Divisor>
-*/}
-
-
           <GradientCanvas id="gradient-canvas2" />
-
-
         </SliderContainerChild>
       </ContainerMain >
     </Container >

@@ -27,7 +27,7 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
-import { getLevel } from "../../../store/actions/RewardActions";
+import { addUserReward, getLevel } from "../../../store/actions/RewardActions";
 
 const Rewards = () => {
 
@@ -39,6 +39,8 @@ const Rewards = () => {
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState<any>([]);
+  const [index, setIndex] = useState<number>(0);
+
 
   const [data, setData] = useState<number>(0)
   const [dataResp, setDataResp] = useState<number>(0)
@@ -61,11 +63,10 @@ const Rewards = () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-        var value: any;
+
         response.forEach((e) => {
-          value = e.data();
+          setUserData({ ...e.data(), id: e.id });
         });
-        setUserData(value);
 
       })
     } catch (error) {
@@ -80,7 +81,7 @@ const Rewards = () => {
 
   const getCurrentLevel = () => {
     getLevel().then((res) => {
-      res = res.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+      res = res.filter((data: any, index: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || index + 1 == size)
       setLevel(res[0])
     })
   }
@@ -177,6 +178,7 @@ const Rewards = () => {
               setRewards={setRewards}
               level={level}
               score={userData.score}
+              user={userData}
             />
             : <TimeRewards
               setRewards={setRewards}

@@ -130,25 +130,18 @@ column-gap: 2.5px;
   }
 }
 `;
-export const TitleCenter = styled.span  `
+export const TitleCenter = styled.p  `
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 400;
 font-size: 24px;
 line-height: 150%;
- 
 text-align: center;
-`;
-export const TitleCenter2 = styled.span  `
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 400;
-font-size: 24px;
-line-height: 150%;
- color: #6717CD;
-text-align: center;
-@font-face{
+span {
+  color: #6717CD;
+  @font-face{
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+} 
 } 
 `;

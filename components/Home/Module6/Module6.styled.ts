@@ -71,4 +71,9 @@ padding-right: 20px;
   text-align: center;
   padding-right: 0;
 }
-`
+`;
+
+export const SliderItemLink = styled.a `
+text-decoration: none;
+color: #FFF;
+`;
