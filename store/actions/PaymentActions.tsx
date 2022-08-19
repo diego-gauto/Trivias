@@ -33,7 +33,7 @@ export const getPaymentmethods = async (userId: any) => {
   const docRef = collection(db, 'users', userId, "paymentMethods");
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
-    data.push(doc.data())
+    data.push({ ...doc.data(), id: doc.id })
   });
   return data
 }

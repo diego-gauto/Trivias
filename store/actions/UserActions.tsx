@@ -1,5 +1,5 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc,
+  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, deleteDoc,
 } from "firebase/firestore";
 import { db } from '../../firebase/firebaseConfig';
 

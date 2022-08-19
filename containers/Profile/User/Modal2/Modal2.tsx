@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 import { Modal } from "react-bootstrap";
-import ModalFinish from "../Modal3/ModalFinish";
-
+import { updatePaymentMethod } from "../../../../store/actions/ProfileActions";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../firebase/firebaseConfig";
 import {
   ButtonsDiv,
   CardInfo,
+  CardIconResp,
   CardText,
   ChangeMethod,
   Container,
@@ -17,13 +19,30 @@ import {
   PurpleButton,
   RenewalText,
   Title,
-  VisaIcon,
+  NewMethod
 } from "./Modal2.styled";
 
-const Modal2 = ({ show, setShow }: any) => {
-
+const Modal2 = ({ show, setShow, data, pm }: any) => {
   const handleClose = () => setShow(false);
+  const [methods, setMethods] = useState(false);
+  let tempDate = new Date(data.membership.finalDate * 1000);
+  let tempDay = tempDate.getDate()
+  let tempMonth = tempDate.getMonth()
+  let tempYear = tempDate.getFullYear()
+  let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
 
+  const updateUserCard = async (card: any) => {
+    let info = {
+      cardId: card.cardId,
+      stripeId: data.stripeId
+    }
+    const updateCard = httpsCallable(functions, 'setDefaultPaymentMethod');
+    await updateCard(info).then(async (res: any) => {
+      updatePaymentMethod(card.cardId, data.id).then(() => {
+        window.location.reload();
+      })
+    })
+  }
 
 
   return (
@@ -38,7 +57,7 @@ const Modal2 = ({ show, setShow }: any) => {
               Gonvar Plus
             </MemberText>
             <RenewalText>
-              Renovación el 01/07/22
+              Renovación el {formatDate}
             </RenewalText>
           </Membership>
           <PaymentMethod>
@@ -47,20 +66,45 @@ const Modal2 = ({ show, setShow }: any) => {
             </MemberText>
             <PayMethod>
               <CardInfo>
-                <VisaIcon />
+                <CardIconResp brand={data.membership.brand} />
                 <CardText>
-                  Visa terminada en 1486
+                  {data.membership.brand} terminada en {data.membership.last4}
                 </CardText>
               </CardInfo>
-              <ChangeMethod>
+              <ChangeMethod onClick={() => {
+                setMethods(!methods)
+              }}>
                 Cambiar método
               </ChangeMethod>
+
             </PayMethod>
           </PaymentMethod>
+          {methods && <PaymentMethod>
+            <MemberText>
+              Métodos de Pago
+            </MemberText>
+            {pm.map((cards: any) => {
+              return (
+                <PayMethod>
+                  <CardInfo>
+                    <CardIconResp brand={cards.brand} />
+                    <CardText>
+                      {cards.brand} terminada en {cards.last4}
+                    </CardText>
+                  </CardInfo>
+                  {!cards.default ? <NewMethod onClick={() => {
+                    updateUserCard(cards)
+                  }}>
+                    Hacer predeterminada
+                  </NewMethod> : <NewMethod>
+                    Predeterminada
+                  </NewMethod>}
+
+                </PayMethod>
+              )
+            })}
+          </PaymentMethod>}
           <ButtonsDiv>
-            {/* <TransparentButton onClick={() => { setShow(false); setShow3(true) }}>
-              Terminar suscripción
-            </TransparentButton> */}
             <PurpleButton onClick={() => {
               setShow(false)
             }} >

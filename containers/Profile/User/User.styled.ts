@@ -191,6 +191,25 @@ export const VisaIcon = styled.i`
   width: 47px;
   background-position: center;
 `;
+export const CardIconResp = styled("i")<{brand:any}>`
+  ${props => (props.brand == 'visa') && css`
+        background-image: url(../images/visa-icon.png);
+  `}
+  ${props => (props.brand == 'mastercard') && css`
+        background-image: url(../images/mastercard-icon.png);
+  `}
+  ${props => (props.brand == 'amex') && css`
+        background-image: url(../images/amex-icon.png);
+  `}
+  
+  background-repeat:no-repeat;
+  width: 59px;
+  height: 33px;
+  background-position: center;
+  @media( max-width: 1023px){
+    display: none;
+  }
+`;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);
   background-repeat:no-repeat;

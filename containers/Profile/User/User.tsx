@@ -21,6 +21,7 @@ import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
+import { getPaymentmethods } from "../../../store/actions/PaymentActions";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -30,7 +31,8 @@ const User = () => {
   const [barProgress, setBarProgress] = useState(0);
   const [size, setSize] = useState(0);
   const [loading, setLoading] = useState(true);
-  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelRef = query(collection(db, "levelPoints"), orderBy("level"));
+  const [paymentMethod, setPaymentMethods] = useState<any>([]);
 
   try {
     var userDataAuth = useAuth();
@@ -49,12 +51,23 @@ const User = () => {
 
   const fetchDB_data = async () => {
     try {
+      let temp_pm: any = []
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-
         response.forEach((e) => {
-          setUserData({ ...e.data(), id: e.id })
-
+          getPaymentmethods(e.id).then((res: any) => {
+            temp_pm = res;
+            res.forEach((element: any) => {
+              if (e.data().membership.paymentMethod == element.cardId) {
+                element.default = true;
+              } else {
+                element.default = false;
+              }
+            });
+            setPaymentMethods(res);
+            temp_pm = temp_pm.filter((x: any) => x.cardId == e.data().membership.paymentMethod);
+            setUserData({ ...e.data(), id: e.id, membership: { ...e.data().membership, brand: temp_pm[0].brand, last4: temp_pm[0].last4 } });
+          })
         });
       })
     } catch (error) {
@@ -101,7 +114,7 @@ const User = () => {
       setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
       setLoading(false);
     }
-  }, [level])
+  }, [level]);
 
   if (loading) {
     return (
@@ -124,9 +137,9 @@ const User = () => {
         <NextReward score={userData.score} barProgress={barProgress} level={level.level} max={level.maximum} />
         <ThirdBox>
           {/* Third Container */}
-          <UserData data={userData} />
+          <UserData data={userData} pm={paymentMethod} />
           {/* Fourth Container */}
-          <PaymentMethod />
+          <PaymentMethod data={userData} pm={paymentMethod} />
         </ThirdBox>
       </SecondBox>
       <Link href="/">

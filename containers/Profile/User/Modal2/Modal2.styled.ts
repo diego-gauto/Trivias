@@ -1,6 +1,6 @@
 import { ModalHeader } from "react-bootstrap";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Modal2Contain = styled.div`
   @font-face{
@@ -59,6 +59,7 @@ export const PaymentMethod = styled.div`
 export const PayMethod = styled.div`
   display: flex;
   justify-content:space-between;
+  align-items:center;
   width: 100%;
   @media(max-width: 870px) {
     flex-direction:column;
@@ -85,6 +86,25 @@ export const CardText = styled.p`
     margin-bottom:4px;
   }
 `;
+export const CardIconResp = styled("i")<{brand:any}>`
+  ${props => (props.brand == 'visa') && css`
+        background-image: url(../images/visa-icon.png);
+  `}
+  ${props => (props.brand == 'mastercard') && css`
+        background-image: url(../images/mastercard-icon.png);
+  `}
+  ${props => (props.brand == 'amex') && css`
+        background-image: url(../images/amex-icon.png);
+  `}
+  
+  background-repeat:no-repeat;
+  width: 59px;
+  height: 33px;
+  background-position: center;
+  @media( max-width: 1023px){
+    display: none;
+  }
+`;
 export const ChangeMethod = styled.p`
   display:flex;
   color: #6717CD;
@@ -92,6 +112,16 @@ export const ChangeMethod = styled.p`
   font-weight: 600;
   font-family:'Raleway',sans-serif;
   margin: 0;
+  cursor:pointer;
+`;
+export const NewMethod = styled.p`
+  display:flex;
+  color: #6717CD;
+  font-size: 10px;
+  font-weight: 600;
+  font-family:'Raleway',sans-serif;
+  margin: 0;
+  cursor:pointer;
 `;
 export const VisaIcon = styled.i`
   background-image: url(../images/Visa.svg);
