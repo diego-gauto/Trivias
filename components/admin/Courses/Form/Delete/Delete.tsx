@@ -39,6 +39,7 @@ const Delete = (props: DeletePopUp) => {
     setOpenSeason(0);
     return deleteDoc(doc(db, "courses", courseID, "seasons", seasonDocId));
   }
+
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Container>
