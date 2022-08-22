@@ -6,10 +6,9 @@ import { db } from '../../../firebase/firebaseConfig';
 import Modal2 from './Modal2/Modal2';
 import { ProfileData, DataTitle, AllEditInputs, Inputs, EditText, EditInput, EditButtons, SubscriptionButton, SaveButton } from './User.styled';
 
-const UserData = ({ data }: any) => {
+const UserData = ({ data, pm }: any) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-
   const [user, setUser] = useState<any>({ data })
 
   const updateUser = async () => {
@@ -67,22 +66,11 @@ const UserData = ({ data }: any) => {
               }}
             />
           </Inputs>
-          {/* <Inputs>
-            <EditText>
-              Contraseña
-            </EditText>
-            <EditInput
-              placeholder="************"
-              onChange={(e) => {
-                setUser({ ...user, title: e.target.value })
-              }}
-            />
-          </Inputs> */}
         </AllEditInputs>
         <EditButtons>
-          <SubscriptionButton onClick={handleShow}>
+          {data.membership.level == 1 && <SubscriptionButton onClick={handleShow}>
             Cambiar Suscripción
-          </SubscriptionButton>
+          </SubscriptionButton>}
           <SaveButton onClick={() => {
             updateUser();
           }}>
@@ -90,7 +78,7 @@ const UserData = ({ data }: any) => {
           </SaveButton>
         </EditButtons>
       </ProfileData>
-      <Modal2 show={show} setShow={setShow} />
+      <Modal2 show={show} setShow={setShow} data={data} pm={pm} />
     </>
   )
 }
