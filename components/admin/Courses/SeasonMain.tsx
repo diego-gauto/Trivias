@@ -69,11 +69,6 @@ const SeasonsMain = () => {
     }
   }
 
-  const getSeasonData = async () => {
-    const querySeasons = db.collection("courses").doc(courseID).collection("seasons");
-    console.log("querySeasons: ", querySeasons);
-  }
-
   //GETS ALL SEASONS DATA
   const fetchDBSeasonData = async () => {
     try {
@@ -97,7 +92,6 @@ const SeasonsMain = () => {
   useEffect(() => {
     fetchDBSeasonData();
     fetchDB_data();
-    getSeasonData();
   }, [courseID])
 
   useEffect(() => {
