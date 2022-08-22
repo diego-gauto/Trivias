@@ -188,6 +188,10 @@ export const PayText2 = styled.p`
     display: none;
   }
 `;
+export const PaymentsContainer = styled.div`
+  display:flex;
+  gap: 10px;
+`;
 export const VisaPay = styled.i`
   background-image: url(../images/VisaPay.svg);
   background-repeat:no-repeat;

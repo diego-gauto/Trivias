@@ -37,6 +37,7 @@ import {
   InputText,
   NewMethodBox,
   NewMethodBox2,
+  PaymentsContainer,
   NewMethodContain,
   PastCircle,
   PastText,
@@ -61,6 +62,8 @@ import {
   Title,
   TransparentButton,
   VisaPay,
+  PaypalIcon,
+  PayPal,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
@@ -266,13 +269,17 @@ const Purchase = () => {
         })
       }
     }
+    if (plan.method == 'paypal') {
+
+    }
   }
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    console.log(card);
+    console.log(plan);
 
-  }, [card])
+
+  }, [card, plan])
 
   return (
     <Container>
@@ -362,7 +369,8 @@ const Purchase = () => {
               <SubContainer2>
                 {cards.length > 0 && <PaymentContain onClick={() => {
                   setPayment(true),
-                    setCardInfo(false);
+                    setCardInfo(false),
+                    setPlan({ method: 'stripe' })
                 }}>
                   <ContainTitle style={{ cursor: 'pointer' }}>
                     Métodos en tu cuenta
@@ -383,22 +391,38 @@ const Purchase = () => {
                     })
                   }
                 </PaymentContain>}
-                <ContainTitle>
-                  Nuevo Método de Pago
-                </ContainTitle>
+                <PaymentsContainer>
+                  <>
+                    <NewMethodBox onClick={() => {
+                      setPayment(false),
+                        setCardInfo(true),
+                        setPlan({ method: 'stripe' })
+                    }}>
+                      <ContainTitle>
+                        Nuevo Método de Pago
+                      </ContainTitle>
+                      <NewMethodContain>
+                        <VisaPay />
+                      </NewMethodContain>
+                      <PayText2>
+                        Tarjeta de Crédito / Débito
+                      </PayText2>
+                    </NewMethodBox>
+                  </>
+                  <NewMethodBox onClick={() => {
+                    setPayment(false),
+                      setCardInfo(false),
+                      setPlan({ method: 'paypal' })
+                  }}>
+                    <ContainTitle>
+                      Paypal
+                    </ContainTitle>
+                    <NewMethodContain>
+                      <PayPal />
+                    </NewMethodContain>
 
-                <NewMethodBox onClick={() => {
-                  setPayment(false),
-                    setCardInfo(true);
-                }}>
-                  <NewMethodContain>
-                    <VisaPay />
-                  </NewMethodContain>
-                  <PayText2>
-                    Tarjeta de Crédito / Débito
-                  </PayText2>
-                </NewMethodBox>
-
+                  </NewMethodBox>
+                </PaymentsContainer>
                 {
                   cardInfo == true &&
                   <>
