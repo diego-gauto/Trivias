@@ -20,13 +20,17 @@ import {
   PaymentIcon,
   PurpleButton,
   RewardText,
+  TextClaim,
   Title,
   TransparentButton,
 } from "./Modal1.styled";
-import { addRequest, addUserReward, addUserReward2 } from "../../../../../store/actions/RewardActions";
+import { addRequest, addUserReward, getUserRewards } from "../../../../../store/actions/RewardActions";
 import { useEffect, useState } from "react";
 
 const Modal1 = ({ show, setShow, data, user }: any) => {
+
+  const [state, setState] = useState(true);
+  const [rewards, setRewards] = useState<any>([]);
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
@@ -47,7 +51,7 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
       status: false,
       title: data.title
     }
-    addUserReward2(tempReward, user.id).then((res: any) => {
+    addUserReward(tempReward, user.id).then((res: any) => {
     });
   }
   const sendRequest = async () => {
@@ -67,6 +71,9 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
       console.log(res);
     })
   }
+  console.log(user);
+
+
   return (
     <>
       <ModalContain >
@@ -105,13 +112,20 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
               </RewardText>
               <ButtonContain>
                 {
-                  data.points <= user.score &&
-                  <TransparentButton onClick={() => {
-                    sendRequest();
-                    AddUserRewards();
-                  }}>
-                    Reclamar Recompensa
-                  </TransparentButton>
+                  (data.points <= user.score)
+                    ? <>
+                      {
+                        state == false
+                          ? <TransparentButton onClick={() => {
+                            sendRequest();
+                            AddUserRewards();
+                          }}>
+                            Reclamar Recompensa
+                          </TransparentButton>
+                          : <TextClaim>Recompensa Reclamada!</TextClaim>
+                      }
+                    </>
+                    : <></>
                 }
                 <PurpleButton onClick={handleClose}>
                   Entendido

@@ -182,6 +182,12 @@ export const RewardText = styled.label`
 export const AlertCont = styled.label`
   display: flex;
 `;
+export const TextClaim = styled.p`
+  font-size: 14px;
+  font-family: 'Raleway';
+  font-weight: 600;
+  margin: 0;
+`;
 export const AlertIcon = styled.label`
   background-image: url(../images/ExIcon.svg);
   background-repeat: no-repeat;
@@ -221,12 +227,14 @@ export const ButtonContain = styled.div`
   display: flex;
   gap: 10px;
   height: fit-content;
+  align-items: center;
 `;
 export const PurpleButton = styled.button`
   background-color: #6717CD;
   color: #fff;
   padding-block: 10px;
   padding-inline: 25px;
+  height: fit-content;
   border-radius: 100px;
   border:none;
   &:hover{

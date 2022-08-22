@@ -138,16 +138,8 @@ export const getRequest = async () => {
   })
   return tempData
 }
+
 export const addUserReward = async (userRewards: any, userId: any) => {
-  const docRef = await addDoc(
-    collection(db, "users", userId, "userRewards"),
-    {
-      ...userRewards
-    }
-  );
-  return 'exito'
-}
-export const addUserReward2 = async (userRewards: any, userId: any) => {
   console.log(userRewards, userId)
   const docRef = await setDoc(
     doc(db, "users", userId, "rewards", userRewards.id),
@@ -158,10 +150,10 @@ export const addUserReward2 = async (userRewards: any, userId: any) => {
 }
 export const getUserRewards = async (userId: any) => {
   let data: any = []
-  const docRef = collection(db, 'users', userId, "userRewards");
+  const docRef = collection(db, 'users', userId, "rewards");
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
-    data.push(doc.data())
+    data.push({ ...doc.data(), id: doc.id })
   });
   return data
 }
