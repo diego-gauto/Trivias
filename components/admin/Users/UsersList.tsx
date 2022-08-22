@@ -62,7 +62,6 @@ const UsersList = () => {
     var updatedList = [...allUsers]
     var updated = updatedList.filter(item => item.name.includes(query) || item.email.includes(query));
     setFilteredList(updated);
-    console.log("Updated list:", updated)
   };
 
   useEffect(() => {

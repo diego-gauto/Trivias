@@ -1,8 +1,30 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
-import { IconContain } from './CourseForm.styled';
-import { Container, Contain1, EditContain, Input, InputContain, Label, Title, TitleContain, InputSelect, InputBig, Contain2, Contain3, HwTitle, SlideContain, TitleSlide, ButtonContain, TransparentButton, PurpleButton, Folder } from './Edit.styled';
+
+
+import Image from "next/image";
+import Link from "next/link";
+
+import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { IconContain } from "./CourseForm.styled";
+import {
+  ButtonContain,
+  Contain1,
+  Contain2,
+  Contain3,
+  Container,
+  EditContain,
+  Folder,
+  HwTitle,
+  Input,
+  InputBig,
+  InputContain,
+  Label,
+  PurpleButton,
+  SlideContain,
+  Title,
+  TitleContain,
+  TitleSlide,
+  TransparentButton,
+} from "./Edit.styled";
 
 const AddLesson = () => {
   return (
@@ -21,7 +43,10 @@ const AddLesson = () => {
             <Label>Portada de la Lección</Label>
             <IconContain>
               <Folder />
-              <InputSelect placeholder="Seleccionar archivo" />
+              <Input2
+                type="file"
+                placeholder="Seleccionar archivo"
+              />
             </IconContain>
           </InputContain>
           <Image src="/images/admin/Courses/Demo/Edit.png" width={480} height={274} />
@@ -36,7 +61,10 @@ const AddLesson = () => {
             <Label>Material Adicional</Label>
             <IconContain>
               <Folder />
-              <InputSelect placeholder="Seleccionar archivo" />
+              <Input2
+                type="file"
+                placeholder="Seleccionar archivo"
+              />
             </IconContain>
           </InputContain>
           <InputContain>

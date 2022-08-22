@@ -1,26 +1,29 @@
 
 
 import { useEffect, useState } from "react";
+
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
-import { addPaymentMethod } from "../../../../store/actions/PaymentActions";
+
 import { httpsCallable } from "firebase/functions";
+
+import { functions } from "../../../../firebase/firebaseConfig";
+import { addPaymentMethod } from "../../../../store/actions/PaymentActions";
 import {
   AddText,
   BottomInputs,
   ButtonDiv,
   Inputs,
+  InputCard,
   InputInfo,
   ModalCont,
   ModalContain,
   ModalForm,
   ModalInput,
-  InputCard,
   ModalPay,
   PurpleButton,
   Title,
 } from "./Modal1.styled";
-import { functions } from "../../../../firebase/firebaseConfig";
 
 const Modal1 = ({ show, setShow, data }: any) => {
 
@@ -96,7 +99,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
                     <AddText>
                       Número de la Tarjeta
                     </AddText>
-                    <InputCard placeholder="XXXX XXXX XXXX XXXX" mask='9999 9999 9999 99999' maskChar="" onChange={(e: any) => {
+                    <InputCard placeholder="XXXX XXXX XXXX XXXX" mask='9999 9999 9999 99999' /*maskChar=""*/ onChange={(e: any) => {
                       setCard((card: any) => ({ ...card, number: e.target.value }));
                     }}>
                     </InputCard>
