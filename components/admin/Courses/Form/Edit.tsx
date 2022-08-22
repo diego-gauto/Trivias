@@ -115,7 +115,7 @@ const Edit = () => {
         <Link href="/admin/Edit"><TransparentButton>Regresar</TransparentButton></Link>
         <PurpleButton>Guardar</PurpleButton>
       </ButtonContain>
-      <Delete setShow={setShow} show={show} deleteMessage={deleteMessage} seasonDocId={""} courseID={""} setOpenSeason={undefined} />
+      <Delete setShow={setShow} show={show} deleteMessage={deleteMessage} seasonDocId={""} courseID={""} />
     </Container>
   )
 }

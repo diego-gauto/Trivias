@@ -21,7 +21,7 @@ interface DeletePopUp {
   deleteMessage: number,
   seasonDocId: string,
   courseID: string,
-  setOpenSeason: any,
+  setOpenSeason?: any,
 }
 
 const Delete = (props: DeletePopUp) => {
