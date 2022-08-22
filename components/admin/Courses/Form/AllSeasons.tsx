@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
+import { onSnapshot, DocumentData } from "firebase/firestore";
 import Link from "next/link";
 
+import { db } from "../../../../firebase/firebaseConfig";
 import { MainContainer } from "../AllCourses.styled";
+import { AllLeassons } from "./AllLessons";
 import Delete from "./Delete/Delete";
 import { TrashIcon } from "./Edit.styled";
 import {
@@ -11,15 +14,10 @@ import {
   ButtonContain,
   ChevD,
   ChevU,
-  Demo1,
-  EditEpisode,
   Episode,
   EpisodesContain,
   EpisodesNumber,
   EpisodeContain,
-  EpisodeInfo,
-  EpisodeTime,
-  EpisodeTitle,
   SeasonContain,
   Title,
   TitleContain,
@@ -35,9 +33,52 @@ export const AllSeasons = (props: IAllSeasons) => {
   const { documentID } = props;
   const { index } = props;
   const { courseID } = props;
+
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(0);
+  const [lessons, setLeassons] = useState<any>(null);
+
+  //GETS ALL LESSONS DATA
+  const getSeasonID = async () => {
+    try {
+      const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
+      return onSnapshot(query, (response) => {
+        var data: DocumentData = [];
+        response.forEach((e) => {
+          var obj: any = {}
+          obj = e.data()
+          obj["documentID"] = e.id
+          data.push(obj)
+        });
+        setLeassons(data)
+        return data
+      })
+    } catch (error) {
+      return false
+    }
+  }
+  // const fetchDBSeasonData = async () => {
+  //   try {
+  //     const queryLessons = db.collection("courses").doc(courseID).collection("seasons");
+  //     return onSnapshot(queryLessons, (response) => {
+  //       var data: DocumentData = [];
+  //       response.forEach((e) => {
+  //         var obj: any = {}
+  //         obj = e.data()
+  //         obj["documentID"] = e.id
+  //         data.push(obj)
+  //       });
+  //       return data
+  //     })
+  //   } catch (error) {
+  //     return false
+  //   }
+  // }
+  //useEffect(() => {
+  //fetchDBSeasonData();
+  //getSeasonID();
+  //}, [courseID])
 
   return (
     <><MainContainer>
@@ -58,63 +99,24 @@ export const AllSeasons = (props: IAllSeasons) => {
                 <ChevU onClick={() => { setOpenSeason(0); }} />
               </>}
             {openSeason != 1 &&
-              <ChevD onClick={() => { setOpenSeason(1); }} />}
+              <ChevD onClick={() => { setOpenSeason(1); getSeasonID() }} />}
           </ButtonContain>
         </TitleContain>
         {openSeason == 1 &&
           <EpisodesContain>
             <Episode>
-              <Demo1 />
               <EpisodeContain>
-                <EpisodeTitle>Epidosio 1: Lorem Ipsum</EpisodeTitle>
-                <EpisodeTime>24 minutos</EpisodeTime>
-                <EpisodeInfo>Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit. Risus nisi, sit vel cursus ac elementum,
-                  et porta. Imperdiet nullam facilisis vestibulum quis
-                  gravida sed aliquet consectetur orci. Netus egestas gravida
-                  mollis vitae pellentesque id nisl nunc.</EpisodeInfo>
-                <Link href="/admin/EditLesson">
-                  <EditEpisode>Editar Lección</EditEpisode>
-                </Link>
-              </EpisodeContain>
-            </Episode>
-            <Episode>
-              <Demo1 />
-              <EpisodeContain>
-                <EpisodeTitle>Epidosio 2: Lorem Ipsum</EpisodeTitle>
-                <EpisodeTime>31 minutos</EpisodeTime>
-                <EpisodeInfo>Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit. Risus nisi, sit vel cursus ac elementum,
-                  et porta. Imperdiet nullam facilisis vestibulum quis
-                  gravida sed aliquet consectetur orci. Netus egestas gravida
-                  mollis vitae pellentesque id nisl nunc.</EpisodeInfo>
-                <EditEpisode>Editar Lección</EditEpisode>
-              </EpisodeContain>
-            </Episode>
-            <Episode>
-              <Demo1 />
-              <EpisodeContain>
-                <EpisodeTitle>Epidosio 3: Lorem Ipsum</EpisodeTitle>
-                <EpisodeTime>12 minutos</EpisodeTime>
-                <EpisodeInfo>Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit. Risus nisi, sit vel cursus ac elementum,
-                  et porta. Imperdiet nullam facilisis vestibulum quis
-                  gravida sed aliquet consectetur orci. Netus egestas gravida
-                  mollis vitae pellentesque id nisl nunc.</EpisodeInfo>
-                <EditEpisode>Editar Lección</EditEpisode>
-              </EpisodeContain>
-            </Episode>
-            <Episode>
-              <Demo1 />
-              <EpisodeContain>
-                <EpisodeTitle>Epidosio 4: Lorem Ipsum</EpisodeTitle>
-                <EpisodeTime>25 minutos</EpisodeTime>
-                <EpisodeInfo>Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit. Risus nisi, sit vel cursus ac elementum,
-                  et porta. Imperdiet nullam facilisis vestibulum quis
-                  gravida sed aliquet consectetur orci. Netus egestas gravida
-                  mollis vitae pellentesque id nisl nunc.</EpisodeInfo>
-                <EditEpisode>Editar Lección</EditEpisode>
+                {lessons !== null &&
+                  lessons.map((e: any, i: any) => (
+                    <AllLeassons
+                      documentID={e.documentID}
+                      index={i}
+                      courseID={courseID}
+                      lessonTitle={e.lessonTitle}
+                      lessonDuration={e.lessonDuration}
+                      lessonDescription={e.lessonDescription} />
+                  ))
+                }
               </EpisodeContain>
             </Episode>
           </EpisodesContain>}
