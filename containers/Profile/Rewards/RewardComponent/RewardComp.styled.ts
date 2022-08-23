@@ -52,6 +52,10 @@ export const OffContainer = styled.div`
     border-radius: 100px;
     border: 1px solid #FFFFFF;
   }
+  @media(max-width: 449px) {
+    padding-inline: 15px;
+    padding-block: 8px;
+  }
   @media(max-width: 400px) {
     padding-inline: 15px;
     padding-block: 4px;
@@ -77,35 +81,48 @@ export const RewardContainer = styled.div`
   display: flex;
   align-items:center;
   z-index: 1;
-  justify-content:center;
   position: relative;
   padding-top: 30px;
-  padding-bottom:60px;
+  padding-bottom: 60px;
   padding-inline: 40px;
   border-radius: 10px;
   gap: 3px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.3);
   @media(max-width: 1023px) {
     top: 25px;
-    //margin-left: 3%;
-    //margin-right: 3%;
-    //height: 100%;
-    gap: 86px;
     justify-content: space-between;
-    overflow: auto;
+  }
+  @media(max-width: 380px) {
+    padding-top: 20px;
+    padding-inline: 20px;
+    padding-bottom: 55px;
   }
 `;
-export const LevelContainer = styled.div`
+export const LevelContainer = styled.div<{i:any,level:any,levels:any}>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 3px;
+  width: 100%;
+  ${props => (props.i == 0) && css`
+  width: fit-content;
+`}
+  @media(max-width: 1023px) {
+    width: 50px;
+    display: none;
+    ${props => (props.level == props.levels ||props.level == props.levels - 1||props.level == props.levels - 2) && css`
+    display: flex;
+  `}
+  }
+
 `;
 export const LevelText = styled("p")<{val:any, level:any}>`
   font-size: 14px;
   font-family:'Raleway', sans-serif;
   color: black;
   margin: 0;
-  text-align:center;
+  text-align: center;
+  white-space: nowrap;
   position: absolute;
   bottom: 15px;
   ${props => (props.level == props.val) && css`
@@ -113,14 +130,23 @@ export const LevelText = styled("p")<{val:any, level:any}>`
   font-weight: 600;
   color: #6717CD;
   bottom: 10px;
+  @media(max-width: 450px){
+    font-size: 14px;
+    bottom: 12px;
+  }
   `}
   ${props => (props.level > props.val) && css`
   color: #6717CD;
-  `}
-  @media(max-width: 1023px) {
-   width: 100%;
+  @media(max-width: 450px){
+    font-size: 12px;
+
   }
-  
+  `}
+  ${props => (props.level < props.val) && css`
+  @media(max-width: 450px){
+    font-size: 12px;
+  }
+  `}
 `;
 export const Circle = styled("div")<{val:any, level:any}>`
   width: 35px;
@@ -136,22 +162,18 @@ export const Circle = styled("div")<{val:any, level:any}>`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
   border: none;
   `}
-  @media (max-width: 870px) {
-    width: 32px;
-    height: 32px;
-  }
 `;
 export const Divisor = styled("div")<{min:any, i:any, size:any, level:any, score:any,max:any}>`
   background-color: gray;
-  width: 100px;
+  // width: ${props=> 800/props.size}px;
+  width: 100%;
   height: 4px;
-  @media (max-width: 870px) {
+  @media (max-width: 1023px) {
     display: none;
   }
   ${props => (props.i == 0) && css`
   display: none;
 `}
-
   ${props => (props.level > props.min) && css`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
   `}

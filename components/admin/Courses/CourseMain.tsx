@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { collection, DocumentData, documentId, onSnapshot, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+
+import { collection, onSnapshot, query, DocumentData } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
-import SideBar from '../SideBar';
-import { AdminContain } from '../SideBar.styled';
-import { AllCourses } from './AllCourses';
-import {
-  CourseFormContain, InputForm, InputContain,
-  Label, Input, InputBig, InputContain2,
-  IconContain, Folder, InputIcon,
-  Button, ButtonContain, Title,
-} from './CourseMain.styled';
-import
-CourseForm_Create
-  from './Form/CourseForm_Create';
+import SideBar from "../SideBar";
+import { AdminContain } from "../SideBar.styled";
+import { AllCourses } from "./AllCourses";
+import { CourseFormContain } from "./CourseMain.styled";
+import CourseForm_Create from "./Form/CourseForm_Create";
+
 const CourseMain = () => {
 
 
   const [courses, setCourses] = useState<any>(null);
-
-
-  useEffect(() => {
-    fetchDB_data()
-  }, [])
 
   const fetchDB_data = async () => {
     try {
@@ -44,7 +34,9 @@ const CourseMain = () => {
       return false
     }
   }
-
+  useEffect(() => {
+    fetchDB_data()
+  }, [])
 
   return (
     <AdminContain>

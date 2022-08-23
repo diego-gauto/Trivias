@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, doc, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { getSingleUser } from "../../../hooks/useAuth";
@@ -18,20 +18,22 @@ import {
 } from "./UsersList.styled";
 
 export interface SelectedUser {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   score: number;
   uid?: string;
 };
 export interface AllUser {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   score: number;
   created_at: {
     seconds: number;
   };
+  phoneNumber?: number;
+  role?: string;
 };
 
 const UsersList = () => {
@@ -39,6 +41,8 @@ const UsersList = () => {
   const [allUsers, setAllUsers] = useState<Array<AllUser | any>>([]);
   const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "", id: "" });
   const usersCollectionRef = query(collection(db, "users"));
+  const [filteredList, setFilteredList] = useState(allUsers);
+  const [isSearching, setIseSearching] = useState<boolean>();
 
   const getUsers = async () => {
     const userData = await getDocs(usersCollectionRef);
@@ -52,6 +56,13 @@ const UsersList = () => {
       setIsVisible(true);
     }
   }
+  const filterBySearch = (event: { target: { value: string; }; }) => {
+    setIseSearching(true)
+    const query = event.target.value.toLocaleLowerCase();
+    var updatedList = [...allUsers]
+    var updated = updatedList.filter(item => item.name.includes(query) || item.email.includes(query));
+    setFilteredList(updated);
+  };
 
   useEffect(() => {
     getUsers();
@@ -67,7 +78,7 @@ const UsersList = () => {
             <Title>Usuarios</Title>
             <SearchContain>
               <SearchIcon />
-              <SearchInput placeholder="Buscar un Usuario" />
+              <SearchInput placeholder="Buscar un Usuario" onChange={filterBySearch} />
             </SearchContain>
           </TitleContain>
           <Table id="Users">
@@ -81,10 +92,10 @@ const UsersList = () => {
                 <th>Visualizar</th>
               </tr>
               {/* TABLAS */}
-              {
-                allUsers.map((user: any) => {
+              {isSearching ? (
+                filteredList.map((user, index): any => {
                   return (
-                    <tr onClick={() => handleClick(user.id)}>
+                    <tr key={index} onClick={() => handleClick(user.id)}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
@@ -99,7 +110,26 @@ const UsersList = () => {
                     </tr>
                   )
                 })
-              }
+              ) : (
+                allUsers.map((user, index): any => {
+                  return (
+                    <tr key={index} onClick={() => handleClick(user.id)}>
+                      <td style={{ fontWeight: 600 }}>
+                        <ProfileContain>
+                          <Profile />
+                          {user.name}
+                        </ProfileContain>
+                      </td>
+                      <td >{user.email}</td>
+                      <td>{new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}</td>
+                      <td >3 Activos</td>
+                      <td>{user.score} puntos</td>
+                      <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                    </tr>
+                  )
+                })
+              )}
+
 
             </tbody>
           </Table>

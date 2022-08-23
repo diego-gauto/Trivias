@@ -1,22 +1,34 @@
-import {
-  CourseFormContain, InputForm, InputContain,
-  Label, Input, Select, InputBig, InputContain2,
-  TagContain, TagTitle, TagLabel, IconContain,
-  Folder, InputIcon, CaretD,
-  Button, ButtonContain,
-} from './CourseForm_Create.styled';
-import React, { useState } from 'react'
-import {
-  Label2, Option, OptionContain,
-  SelectContain, Selected, CaretD2
-} from './Select/SelectStyles.styled'
+import React, { useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createCourse } from "../../../../store/actions/AdminActions";
 
+import { createCourse } from "../../../../store/actions/AdminActions";
+import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
+import {
+  Button,
+  ButtonContain,
+  CourseFormContain,
+  Folder,
+  IconContain,
+  Input,
+  InputBig,
+  InputContain,
+  InputContain2,
+  InputForm,
+  Label,
+} from "./CourseForm_Create.styled";
+import {
+  CaretD2,
+  Label2,
+  Option,
+  OptionContain,
+  Selected,
+  SelectContain,
+} from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -273,7 +285,8 @@ const CourseForm_Create = () => {
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
-              <InputIcon
+              <Input2
+                type="file"
                 placeholder="Seleccionar archivo"
               />
             </IconContain>

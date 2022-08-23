@@ -17,7 +17,7 @@ import {
 } from "./ClaimPrizes.styled";
 import Modal1 from "./Modal1/Modal1";
 import Modal2 from "./Modal1/Modal2";
-import { getRewards } from "../../../../store/actions/RewardActions";
+import { getRewards, getUserRewards } from "../../../../store/actions/RewardActions";
 
 const PointPrizes = ({ score, user }: any) => {
 
@@ -29,6 +29,17 @@ const PointPrizes = ({ score, user }: any) => {
   const [reward, setReward] = useState<any>({});
   const getAllRewards = () => {
     getRewards().then((res) => {
+      getUserRewards(user.id).then((rw) => {
+
+        res.forEach((element: any) => {
+          if (rw.some((x: any) => x.id == element.id && x.status == true)) {
+            element.status = true;
+          } else {
+            element.status = false;
+          }
+
+        });
+      })
       setRewards(res);
     })
   }
@@ -51,7 +62,7 @@ const PointPrizes = ({ score, user }: any) => {
                   setShow1(true), setReward(reward);
                 }} >
                   <Overlay points={reward.points} score={score} />
-                  <ImageReward path={reward.path} />
+                  <ImageReward src={reward.path} />
                 </PrizeImage>
                 <PrizeTitle>
                   {reward.title}

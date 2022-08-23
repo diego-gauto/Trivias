@@ -1,10 +1,11 @@
-import React from 'react'
-import Courses from '../../../components/admin/Courses/Courses';
-import { MainContain } from '../../../screens/Styles.styled';
+
+import SeasonMain from "../../../components/admin/Courses/SeasonMain";
+import { MainContain } from "../../../screens/Styles.styled";
+
 const EditView = () => {
   return (
     <MainContain>
-      <Courses />
+      <SeasonMain />
     </MainContain>
   )
 }

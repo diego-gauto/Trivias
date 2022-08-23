@@ -1,28 +1,38 @@
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
-import { collection, doc, DocumentData, documentId, onSnapshot, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+
+import { collection, doc, onSnapshot, DocumentData } from "firebase/firestore";
+import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
-import SideBar from '../SideBar';
-import { AdminContain } from '../SideBar.styled';
-import { PurpleButton } from './AllCourses.styled';
+import SideBar from "../SideBar";
+import { AdminContain } from "../SideBar.styled";
+import { PurpleButton } from "./AllCourses.styled";
 import {
   BackgroundOverlay,
   ButtonContain,
-  Container, CourseContain,
-  ImageBack, Imagecontain, NewText, Subtitle,
-  Title
-} from './Courses.styled';
-import CourseForm_Update from './Form/CourseForm_Update';
-import Lessons from './Form/Lessons';
+  Container,
+  CourseContain,
+  Imagecontain,
+  ImageBack,
+  NewText,
+  Subtitle,
+  Title,
+} from "./Courses.styled";
+import { AllSeasons } from "./Form/AllSeasons";
+import CourseForm_Update from "./Form/CourseForm_Update";
+import { LessonContain, LessonTitle, NewSeason, NewSeasonContain } from "./Form/Lessons.styled";
 
-
-const Courses = () => {
-
-
+const SeasonsMain = () => {
   const [isLoading, setIsLoading] = useState(true);
-  var courseID: any = ""
+  const [courseData, setCoursesData] = useState<any>(null);
+  const [seasons, setSeasons] = useState<any>(null);
 
+
+  const createNewSeason = async () => {
+    return await db.collection("courses").doc(courseID).collection("seasons").add({});
+  }
+
+  var courseID: any = ""
 
   try {
     var str: any = ""
@@ -36,24 +46,9 @@ const Courses = () => {
     courseID = "none"
   }
 
-  const [courseData, setCoursesData] = useState<any>(null);
-
-  useEffect(() => {
-    console.log(courseID)
-    fetchDB_data()
-  }, [courseID])
-
-  useEffect(() => {
-    if (courseData !== null) {
-
-      setIsLoading(false)
-    }
-  }, [courseData])
-
   //firestore query from specific document in a collection with ID
   const fetchDB_data = async () => {
     try {
-      console.log("hello")
       return await db.collection('courses').get().then((response) => {
         var data: DocumentData = [];
         response.forEach((e) => {
@@ -74,6 +69,37 @@ const Courses = () => {
     }
   }
 
+  //GETS ALL SEASONS DATA
+  const fetchDBSeasonData = async () => {
+    try {
+      const querySeasons = db.collection("courses").doc(courseID).collection("seasons");
+      return onSnapshot(querySeasons, (response) => {
+        var data: DocumentData = [];
+
+        response.forEach((e) => {
+          var obj: any = {}
+          obj = e.data()
+          obj["documentID"] = e.id
+          data.push(obj)
+        });
+        setSeasons(data)
+        return data
+      })
+    } catch (error) {
+      return false
+    }
+  }
+  useEffect(() => {
+    fetchDBSeasonData();
+    fetchDB_data();
+  }, [courseID])
+
+  useEffect(() => {
+    if (courseData !== null) {
+
+      setIsLoading(false)
+    }
+  }, [courseData])
 
   return (
     <>
@@ -115,7 +141,26 @@ const Courses = () => {
             }
 
             {/* Lista de lecciones */}
-            <Lessons />
+            <LessonContain>
+              <LessonTitle>Lista de Lecciones</LessonTitle>
+              {seasons !== null
+                ? <>
+                  {
+                    seasons.map((e: any, i: any) => (
+                      <AllSeasons
+                        documentID={e.documentID} index={i} courseID={courseID} />
+                    ))
+                  }
+                </>
+                :
+                <>
+                  Sin temporadas...
+                </>
+              }
+              <NewSeasonContain>
+                <NewSeason onClick={createNewSeason}>+ Añadir nueva temporada</NewSeason>
+              </NewSeasonContain>
+            </LessonContain>
             <ButtonContain>
               <Link href="/admin/Courses">
                 <PurpleButton>Regresar</PurpleButton>
@@ -123,10 +168,11 @@ const Courses = () => {
             </ButtonContain>
           </CourseContain>
         </AdminContain>
+
       ) : (
         <></>
       )}
     </>
   )
 }
-export default Courses;
+export default SeasonsMain;

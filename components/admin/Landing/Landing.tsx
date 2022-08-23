@@ -1,4 +1,3 @@
-import { addDoc } from "firebase/firestore";
 import React, { useState } from "react";
 
 import LandingObject from "../Landing/templates";
@@ -111,7 +110,7 @@ const Landing = () => {
                         <EditText>
                           Hero Image
                         </EditText>
-                        <FolderInput value={data.heroImg} onChange={(e) => setData((prevState) => ({ ...prevState, heroImg: e.target.value }))} placeholder="Seleccionar archivo" />
+                        <FolderInput type="file" placeholder="Seleccionar archivo" />
                       </Inputs>
                     </AllEditInputs>
                     <AllEditInputs>
@@ -171,7 +170,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 1
                       </EditText>
-                      <FolderInput value={data.evRev1} onChange={(e) => setData((prevState) => ({ ...prevState, evRev1: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                     <Inputs>
                       <EditText>
@@ -183,7 +182,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 2
                       </EditText>
-                      <FolderInput value={data.evRev2} onChange={(e) => setData((prevState) => ({ ...prevState, evRev2: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                     <Inputs>
                       <EditText>
@@ -195,7 +194,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 3
                       </EditText>
-                      <FolderInput value={data.evRev3} onChange={(e) => setData((prevState) => ({ ...prevState, evRev3: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                   <ColumnsContainer2>
@@ -209,7 +208,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 4
                       </EditText>
-                      <FolderInput value={data.evRev4} onChange={(e) => setData((prevState) => ({ ...prevState, evRev4: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                     <Inputs>
                       <EditText>
@@ -221,7 +220,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 5
                       </EditText>
-                      <FolderInput value={data.evRev5} onChange={(e) => setData((prevState) => ({ ...prevState, evRev5: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                     <Inputs>
                       <EditText>
@@ -233,7 +232,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 6
                       </EditText>
-                      <FolderInput value={data.evRev6} onChange={(e) => setData((prevState) => ({ ...prevState, evRev6: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                   <ColumnsContainer2>
@@ -247,7 +246,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 7
                       </EditText>
-                      <FolderInput value={data.evRev7} onChange={(e) => setData((prevState) => ({ ...prevState, evRev7: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                     <Inputs>
                       <EditText>
@@ -259,7 +258,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 8
                       </EditText>
-                      <FolderInput value={data.evRev8} onChange={(e) => setData((prevState) => ({ ...prevState, evRev8: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                     <Inputs>
                       <EditText>
@@ -271,7 +270,7 @@ const Landing = () => {
                       <EditText>
                         Evidencia Reseña 9
                       </EditText>
-                      <FolderInput value={data.evRev9} onChange={(e) => setData((prevState) => ({ ...prevState, evRev9: e.target.value }))} placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                 </ColumnsContainer>
@@ -316,7 +315,7 @@ const Landing = () => {
                       <EditText>
                         Imagen del Producto
                       </EditText>
-                      <FolderInput placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                   <ColumnsContainer2>
@@ -336,7 +335,7 @@ const Landing = () => {
                       <EditText>
                         Imagen del Producto
                       </EditText>
-                      <FolderInput placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                   <ColumnsContainer2>
@@ -356,7 +355,7 @@ const Landing = () => {
                       <EditText>
                         Imagen del Producto
                       </EditText>
-                      <FolderInput placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                 </ColumnsContainer>
@@ -378,7 +377,7 @@ const Landing = () => {
                       <EditText>
                         Imagen del Producto
                       </EditText>
-                      <FolderInput placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                   <ColumnsContainer2>
@@ -398,7 +397,7 @@ const Landing = () => {
                       <EditText>
                         Imagen del Producto
                       </EditText>
-                      <FolderInput placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                   <ColumnsContainer2>
@@ -418,7 +417,7 @@ const Landing = () => {
                       <EditText>
                         Imagen del Producto
                       </EditText>
-                      <FolderInput placeholder="Seleccionar archivo" />
+                      <FolderInput type="file" placeholder="Seleccionar archivo" />
                     </Inputs>
                   </ColumnsContainer2>
                 </ColumnsContainer>

@@ -1,7 +1,23 @@
-import Link from 'next/link'
-import React, { useState } from 'react'
-import { ChevD, ChevU, CourseContainer, CourseContent, CourseName, Info, Label, MainContainer, Column, Text, TitleContain, ButtonContain, TransparentButton, PurpleButton } from './AllCourses.styled'
+import React, { useState } from "react";
 
+import Link from "next/link";
+
+import {
+  ButtonContain,
+  ChevD,
+  ChevU,
+  Column,
+  CourseContainer,
+  CourseContent,
+  CourseName,
+  Info,
+  Label,
+  MainContainer,
+  PurpleButton,
+  Text,
+  TitleContain,
+  TransparentButton,
+} from "./AllCourses.styled";
 import { IAllCourses } from "./IAllCourses";
 
 export const AllCourses = (props: IAllCourses) => {

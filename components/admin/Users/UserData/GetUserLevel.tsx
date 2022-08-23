@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { collection } from "firebase/firestore";
-
 import {
   CurrentLevel,
   LevelContain,
@@ -14,28 +12,18 @@ import {
 } from "../../../../containers/Profile/Rewards/UserLevel/UserLevel.styled";
 import { db } from "../../../../firebase/firebaseConfig";
 import { getLevel } from "../../../../store/actions/RewardActions";
-import { AllUser } from "../UsersList";
 
-const UserLevel = ({ userLevel }: any) => {
-  //const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "", id: "" });
+interface LevelData {
+  id: string;
+  level?: number;
+  maximum: number;
+  minimum: number;
+};
+
+const GetUserLevel = ({ userLevel }: any) => {
   const [size, setSize] = useState(0);
-  const [getUser, setGetUser] = useState<Array<AllUser | any>>([]);
-  const [level, setLevel] = useState<any>([]);
+  const [level, setLevel] = useState<LevelData>({ id: "", level: 0, maximum: 0, minimum: 0 });
   const [data, setData] = useState<number>(0)
-
-  // const getUserId = async () => {
-  //   const usersCollectionRef = query(collection(db, "users"));
-  //   const userData = await getDocs(usersCollectionRef);
-  //   setGetUser(userData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-  // }
-
-  // const clickUser = async (id: string) => {
-  //   const newUser: SelectedUser | any = await getSingleUser(selectedUser.id);
-  //   if (newUser?.uid) {
-  //     setSelectedUser(newUser);
-  //   }
-
-  // }
 
   const getSize = async () => {
     db.collection('levelPoints').get().then(snap => {
@@ -43,18 +31,13 @@ const UserLevel = ({ userLevel }: any) => {
     });
   }
   const getCurrentLevel = () => {
-    getLevel().then((res) => {
-      res = res.filter((data: any) => (data.maximum >= userLevel.score && data.minimum <= userLevel.score) || data.level == size)
-      setLevel(res[0])
-      console.log("SIZE LEVEL:", res)
+    getLevel().then((res: Array<LevelData>) => {
+      const response = res.filter((data: any) => (data.maximum >= userLevel.score && data.minimum <= userLevel.score) || data.level == size)[0] ?? { id: "", level: 1, maximum: 0, minimum: 0 }
+      setLevel(response)
     })
   }
-
   useEffect(() => {
     if (userLevel != null) {
-      level.Level
-      // getUserId();
-      // clickUser(selectedUser.id);
       getCurrentLevel();
       getSize();
     }
@@ -65,11 +48,6 @@ const UserLevel = ({ userLevel }: any) => {
       setData(157 - (((userLevel.score - level.minimum) / (level.maximum - level.minimum)) * 157));
     }
   }, [level])
-  useEffect(() => {
-    if (userLevel != null && size != null) {
-
-    }
-  }, [size])
 
   return (
     <OuterProgress>
@@ -104,4 +82,4 @@ const UserLevel = ({ userLevel }: any) => {
     </OuterProgress>
   )
 }
-export default UserLevel;
+export default GetUserLevel;
