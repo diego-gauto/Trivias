@@ -145,7 +145,7 @@ const Module4 = () => {
                   }}>
                     Comprar - ${course.coursePrice}.00
                   </Viewpay>}
-                  {course.courseType == 'Mensual' || course.courseType == 'Gratis' && <Viewpay onClick={() => {
+                  {(course.courseType == 'Mensual' || course.courseType == 'Gratis') && <Viewpay onClick={() => {
                     goTo(course);
                   }}>
                     Ver curso

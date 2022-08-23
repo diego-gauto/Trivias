@@ -66,7 +66,12 @@ const User = () => {
             });
             setPaymentMethods(res);
             temp_pm = temp_pm.filter((x: any) => x.cardId == e.data().membership.paymentMethod);
-            setUserData({ ...e.data(), id: e.id, membership: { ...e.data().membership, brand: temp_pm[0].brand, last4: temp_pm[0].last4 } });
+            if (temp_pm.length > 0) {
+              setUserData({ ...e.data(), id: e.id, membership: { ...e.data().membership, brand: temp_pm[0].brand, last4: temp_pm[0].last4 } });
+            } else {
+              setUserData({ ...e.data(), id: e.id });
+            }
+
           })
         });
       })

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ModalFinish from '../../containers/Profile/User/Modal3/ModalFinish';
 import {
   BottomContainer,
@@ -19,13 +19,56 @@ import {
   WAIcon,
   TextFinish,
 } from "./Footer.styled";
-
-
+import { useAuth } from "../../hooks/useAuth";
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db, functions } from "../../firebase/firebaseConfig";
+import { httpsCallable } from 'firebase/functions';
 
 const Footer = () => {
   const [show, setShow] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
   const handleShow = () => {
     setShow(true)
+  }
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }, [])
+
+  } catch (error) {
+    console.log(error)
+    setLoggedIn(false)
+  }
+
+  const fetchDB_data = async () => {
+    try {
+      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
+      return onSnapshot(query_1, (response) => {
+        response.forEach((e) => {
+          setUserData({ ...e.data(), id: e.id })
+        });
+      })
+    } catch (error) {
+      return false
+    }
+  }
+
+  useEffect(() => {
+    fetchDB_data()
+
+  }, [loggedIn])
+
+  const cancelSubscription = async () => {
+    const updateCard = httpsCallable(functions, 'cancelStripeSubscription');
+    await updateCard(userData.membership.planId).then(async (res: any) => {
+      handleShow()
+    })
   }
 
   let { pathname } = useRouter();
@@ -65,8 +108,8 @@ const Footer = () => {
         </Column>
         <FooterIcons>
           {
-            pathname == '/Profile' &&
-            <TextFinish onClick={handleShow}>
+            pathname == '/Profile' && userData?.membership.level == 1 &&
+            <TextFinish onClick={cancelSubscription}>
               Terminar Suscripción
             </TextFinish>
           }
@@ -118,8 +161,10 @@ const Footer = () => {
           </FooterText>
           <FooterIcons>
             {
-              pathname == '/Profile' &&
-              <TextFinish onClick={handleShow}>
+              pathname == '/Profile' && userData?.membership.level == 1 &&
+              <TextFinish onClick={() => {
+                cancelSubscription()
+              }}>
                 Terminar Suscripción
               </TextFinish>
             }
@@ -146,7 +191,7 @@ const Footer = () => {
           Inowu Development 2022
         </BottomText>
       </BottomContainer>
-      <ModalFinish show={show} setShow={setShow} />
+      <ModalFinish show={show} setShow={setShow} user={userData} />
     </>
 
   )

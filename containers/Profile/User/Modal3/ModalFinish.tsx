@@ -14,7 +14,14 @@ import {
   TransparentButton,
 } from "./Modal3.styled";
 
-const ModalFinish = ({ show, setShow }: any) => {
+const ModalFinish = ({ show, setShow, user }: any) => {
+  let tempDate = new Date(user.membership.finalDate * 1000);
+  let tempDay = tempDate.getDate()
+  let tempMonth = tempDate.getUTCMonth() + 1;
+  console.log(tempMonth, tempDate);
+
+  let tempYear = tempDate.getFullYear()
+  let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
 
   const handleClose = () => setShow(false);
 
@@ -34,7 +41,7 @@ const ModalFinish = ({ show, setShow }: any) => {
             </Text>
           </TextContainer>
           <Expire>
-            01/07/22
+            {formatDate}
           </Expire>
           <ButtonsDiv>
             <TransparentButton onClick={() => {
