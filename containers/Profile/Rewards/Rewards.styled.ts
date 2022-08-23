@@ -27,6 +27,9 @@ export const MainContain = styled.div`
   flex-direction: column;
   width: 100%;
   padding-inline: 20px;
+  @media(max-width: 380px) {
+    padding-inline: 10px;
+  }
 `;
 export const Banner = styled(Image)`
   position: absolute;
@@ -36,7 +39,17 @@ export const Banner = styled(Image)`
   width: 100%;
   height: 300px;
   position: relative;
+  @media(max-width: 450px) {
+    height: 280px;
+  }
+  @media(max-width: 400px) {
+    height: 260px;
+  }
+  @media(max-width: 380px) {
+    height: 240px;
+  }
 `;
+
 export const BannerContain = styled.div`
   display: flex;
   position: relative;

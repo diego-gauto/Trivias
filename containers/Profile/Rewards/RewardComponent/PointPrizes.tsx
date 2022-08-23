@@ -40,8 +40,6 @@ const PointPrizes = ({ score, user }: any) => {
 
         });
       })
-      console.log(res);
-
       setRewards(res);
     })
   }
@@ -64,7 +62,7 @@ const PointPrizes = ({ score, user }: any) => {
                   setShow1(true), setReward(reward);
                 }} >
                   <Overlay points={reward.points} score={score} />
-                  <ImageReward path={reward.path} />
+                  <ImageReward src={reward.path} />
                 </PrizeImage>
                 <PrizeTitle>
                   {reward.title}
