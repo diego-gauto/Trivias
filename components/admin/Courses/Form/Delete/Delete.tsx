@@ -44,7 +44,7 @@ const Delete = (props: DeletePopUp) => {
   const deleteLesson = () => {
     handleClose();
     const getID = db.collection("courses").doc("8y7tv733Um2nWDv8GKQn").collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").doc(lessonId);
-    return console.log("  THIS WILL BW DELETED:", getID.id)
+    return console.log("THIS WILL BW DELETED:", seasonDocId)
     // const getLessonID = db.collection("courses").doc(courseID).collection("seasons").doc(seasonDocId).collection("lessons");
     // return console.log("This will be deleted: ", getLessonID)
   }

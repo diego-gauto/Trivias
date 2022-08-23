@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { db } from "../../../../firebase/firebaseConfig";
-import { DeletePopUp } from "../Form/Delete/Delete";
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
 import {
@@ -32,16 +31,12 @@ import {
   TrashIcon,
 } from "./Edit.styled";
 
-const Edit = (props: DeletePopUp) => {
-  const { seasonDocId } = props;
-  const { courseID } = props;
-  const { lessonId } = props;
-
+const Edit = () => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
 
   const deleteSeason = () => {
-    const getLessonID = db.collection("courses").doc(courseID).collection("seasons").doc(seasonDocId).collection("lessons").doc(lessonId);
+    const getLessonID = db.collection("courses").doc().collection("seasons").doc().collection("lessons").doc();
   }
   return (
     <Container>
