@@ -42,17 +42,26 @@ export const MasonrySpan = styled.span`
   color:#0768FD; 
 `;
 export const MasonryContent = styled.div`
-margin: 0 auto;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
+pointer-events: none;
+display: flex;
+justify-content: space-between;
 margin-top: 30px;
 margin-left: 6.5%;
 margin-right: 6.5%;
 @media only screen and (max-width: 1024px) {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  max-width: 400px;
+  margin-left: 0;
+  margin-right: 0;
+}
+`;
+export const MasonryDesktop = styled.div`
+@media only screen and (max-width: 1024px) {
+  display: none;
+}
+`;
+export const MasonryMobile = styled.div`
+display: none;
+@media only screen and (max-width: 1024px) {
+  display: block;
 }
 `;
 export const MasonryItem = styled.div`
@@ -148,5 +157,5 @@ height: auto !important;
 export const DecoImageWrapper = styled.div`
 margin-left: -1510px;
 position: absolute;
-margin-top: 460px;
+margin-top: 290px;
 `;

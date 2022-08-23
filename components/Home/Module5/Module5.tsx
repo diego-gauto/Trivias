@@ -1,13 +1,32 @@
 import { Container, Col, Button, Image, Row } from "react-bootstrap";
-import React, { useState, useEffect } from 'react';
-import { CardTitle, DecoImage, DecoImageWrapper, MasonryBox, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table, MasonryItem } from './Module5.styled'
-
-
-
+import React from 'react';
+import { CardTitle, DecoImage, DecoImageWrapper, MasonryBox, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table, MasonryItem, MasonryDesktop, MasonryMobile } from './Module5.styled'
 import { IModule5 } from "./IModule5";
+import { divideArrayInChunks } from "./helpers";
+import { Module5_Carousel } from "./Module5_Carousel/Module5_Carousel";
 
 export const Module5 = (props: IModule5) => {
+  const { reviewsData } = props
 
+  const desktopChunks = divideArrayInChunks(reviewsData, 3)
+  const desktopCarousels = desktopChunks.map((chunk: Array<any>, i: number) => {
+    return (
+      <Module5_Carousel
+        slideData={chunk}
+        reverseDirection={i % 2 === 1}
+      />
+    )
+  })
+
+  const mobileChunks = divideArrayInChunks(reviewsData, 2)
+  const mobileCarousels = mobileChunks.map((chunk: Array<any>, i: number) => {
+    return (
+      <Module5_Carousel
+        slideData={chunk}
+        reverseDirection={i % 2 === 1}
+      />
+    )
+  })
 
   return (
     <Container style={{ paddingTop: "75px" }}>
@@ -22,142 +41,16 @@ export const Module5 = (props: IModule5) => {
           </MasonrySpan>
         </MasonryTitle>
       </MasonryBox>
-
-      <MasonryWindowParent>
-        <MasonryWindow id="a">
-          <MasonryContent>
-            {/* Ejemplo Masonry */}
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardLeft>
-                  <CardTitle>
-                    Luke Skywalker
-                  </CardTitle>
-                  <MasonryImage src="/images/nail1.png" />
-                </MasonryCardLeft>
-              </MasonryCardAlignB>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignA>
-                <MasonryCardCentered>
-                  <CardTitle>
-                    Han Solo
-                  </CardTitle>
-                  <MasonryImage src="/images/nail2.png" />
-                </MasonryCardCentered>
-              </MasonryCardAlignA>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardRight>
-                  <CardTitle>
-                    Obi-Wan Kenobi
-                  </CardTitle>
-                  <MasonryImage src="/images/nail3.png" />
-                </MasonryCardRight>
-              </MasonryCardAlignB>
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardLeft>
-                  <CardTitle>
-                    Luke Skywalker
-                  </CardTitle>
-                  <MasonryImage src="/images/nail2.png" />
-                </MasonryCardLeft>
-              </MasonryCardAlignB>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignA>
-                <MasonryCardCentered>
-                  <CardTitle>
-                    Han Solo
-                  </CardTitle>
-                  <MasonryImage src="/images/nail3.png" />
-                </MasonryCardCentered>
-              </MasonryCardAlignA>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardRight>
-                  <CardTitle>
-                    Obi-Wan Kenobi
-                  </CardTitle>
-                  <MasonryImage src="/images/nail1.png" />
-                </MasonryCardRight>
-              </MasonryCardAlignB>
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardLeft>
-                  <CardTitle>
-                    Luke Skywalker
-                  </CardTitle>
-                  <MasonryImage src="/images/nail3.png" />
-                </MasonryCardLeft>
-              </MasonryCardAlignB>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignA>
-                <MasonryCardCentered>
-                  <CardTitle>
-                    Han Solo
-                  </CardTitle>
-                  <MasonryImage src="/images/nail1.png" />
-                </MasonryCardCentered>
-              </MasonryCardAlignA>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardRight>
-                  <CardTitle>
-                    Obi-Wan Kenobi
-                  </CardTitle>
-                  <MasonryImage src="/images/nail3.png" />
-                </MasonryCardRight>
-              </MasonryCardAlignB>
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardLeft>
-                  <CardTitle>
-                    Luke Skywalker
-                  </CardTitle>
-                  <MasonryImage src="/images/nail2.png" />
-                </MasonryCardLeft>
-              </MasonryCardAlignB>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignA>
-                <MasonryCardCentered>
-                  <CardTitle>
-                    Han Solo
-                  </CardTitle>
-                  <MasonryImage src="/images/nail3.png" />
-                </MasonryCardCentered>
-              </MasonryCardAlignA>
-
-            </MasonryItem>
-            <MasonryItem>
-              <MasonryCardAlignB>
-                <MasonryCardRight>
-                  <CardTitle>
-                    Obi-Wan Kenobi
-                  </CardTitle>
-                  <MasonryImage src="/images/nail1.png" />
-                </MasonryCardRight>
-              </MasonryCardAlignB>
-            </MasonryItem>
-          </MasonryContent>
-        </MasonryWindow>
-      </MasonryWindowParent >
+      <MasonryDesktop>
+        <MasonryContent>
+          {desktopCarousels}
+        </MasonryContent>
+      </MasonryDesktop>
+      <MasonryMobile>
+        <MasonryContent>
+          {mobileCarousels}
+        </MasonryContent>
+      </MasonryMobile>
     </ Container >
   )
 }
