@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, doc, onSnapshot, DocumentData } from "firebase/firestore";
+import { collection, doc, onSnapshot, DocumentData, orderBy } from "firebase/firestore";
 import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
@@ -29,7 +29,16 @@ const SeasonsMain = () => {
 
 
   const createNewSeason = async () => {
-    return await db.collection("courses").doc(courseID).collection("seasons").add({});
+    if (seasons.length > 0) {
+      return await db.collection("courses").doc(courseID).collection("seasons").add({
+        season: seasons.length + 1
+      });
+    }
+    else {
+      return await db.collection("courses").doc(courseID).collection("seasons").add({
+        season: 1
+      });
+    }
   }
 
   var courseID: any = ""
@@ -72,7 +81,7 @@ const SeasonsMain = () => {
   //GETS ALL SEASONS DATA
   const fetchDBSeasonData = async () => {
     try {
-      const querySeasons = db.collection("courses").doc(courseID).collection("seasons");
+      const querySeasons = db.collection("courses").doc(courseID).collection("seasons").orderBy("season");
       return onSnapshot(querySeasons, (response) => {
         var data: DocumentData = [];
 
@@ -147,8 +156,8 @@ const SeasonsMain = () => {
                 ? <>
                   {
                     seasons.map((e: any, i: any) => (
-                      <AllSeasons
-                        documentID={e.documentID} index={i} courseID={courseID} />
+                      <AllSeasons key={"adminSeasons" + i}
+                        documentID={e.documentID} index={e.season} courseID={courseID} />
                     ))
                   }
                 </>

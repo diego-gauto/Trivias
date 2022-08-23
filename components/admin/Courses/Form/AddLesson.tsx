@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
+import { addLesson } from "../../../../store/actions/AdminActions";
+import { useRouter } from "next/router";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import {
@@ -25,8 +26,34 @@ import {
   TitleSlide,
   TransparentButton,
 } from "./Edit.styled";
+import { useState } from "react";
+
 
 const AddLesson = () => {
+  const router = useRouter()
+  const { courseId, seasonId } = router.query;
+
+  const [lesson, setLesson] = useState({
+    title: '',
+    banner: '',
+    link: '',
+    extra: [],
+    points: 0,
+    about: '',
+    homeWork: '',
+    homeWorkAbout: '',
+  })
+  const newLesson = () => {
+    addLesson(lesson, courseId, seasonId).then(() => {
+      alert(
+        "Lección Creada"
+      )
+      router.push({
+        pathname: `/admin/Edit`,
+        query: { documentID: courseId }
+      });
+    })
+  }
   return (
     <Container>
       <TitleContain>
@@ -37,7 +64,14 @@ const AddLesson = () => {
 
           <InputContain>
             <Label>Título de la Lección</Label>
-            <Input placeholder="Epidosio 1: Lorem Ipsum" />
+            <Input
+              placeholder="Epidosio 1: Lorem Ipsum"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, title: e.target.value
+                })
+              }}
+            />
           </InputContain>
           <InputContain>
             <Label>Portada de la Lección</Label>
@@ -46,13 +80,21 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+
               />
             </IconContain>
           </InputContain>
           <Image src="/images/admin/Courses/Demo/Edit.png" width={480} height={274} />
           <InputContain>
             <Label>Hipervínculo del video</Label>
-            <Input placeholder="https://www.youtube.com/watch?v=RfR2Eh3fGxA&t=218s" />
+            <Input
+              placeholder="https://www.youtube.com/watch?v=RfR2Eh3fGxA&t=218s"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, link: e.target.value
+                })
+              }}
+            />
           </InputContain>
         </Contain1>
 
@@ -69,10 +111,18 @@ const AddLesson = () => {
           </InputContain>
           <InputContain>
             <Label>Puntos Acreditados</Label>
-            <Input placeholder="200" />
+            <Input
+              type="number"
+              placeholder="200"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, points: parseInt(e.target.value)
+                })
+              }}
+            />
           </InputContain>
           <InputContain>
-            <Label>Material Adicional</Label>
+            <Label>Descripción de Lección</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
@@ -82,7 +132,13 @@ const AddLesson = () => {
             malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-            quisque." />
+            quisque."
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, about: e.target.value
+                })
+              }}
+            />
           </InputContain>
         </Contain2>
         <Contain3>
@@ -92,7 +148,14 @@ const AddLesson = () => {
           </SlideContain>
           <InputContain>
             <Label>Título de la Tarea</Label>
-            <Input placeholder="Tarea 23: Intro a uñas francesas" />
+            <Input
+              placeholder="Tarea 23: Intro a uñas francesas"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, homeWork: e.target.value
+                })
+              }}
+            />
           </InputContain>
           <InputContain>
             <Label>Descripción de la Tarea</Label>
@@ -105,13 +168,21 @@ const AddLesson = () => {
             malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-            quisque." />
+            quisque."
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, homeWorkAbout: e.target.value
+                })
+              }}
+            />
           </InputContain>
         </Contain3>
       </EditContain>
       <ButtonContain>
         <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
-        <PurpleButton>Guardar</PurpleButton>
+        <PurpleButton
+          onClick={newLesson}
+        >Guardar</PurpleButton>
       </ButtonContain>
     </Container>
   )
