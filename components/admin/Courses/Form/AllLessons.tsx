@@ -35,30 +35,6 @@ export const AllLeassons = (props: IAllSeasons) => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(0);
-  //const [lessons, setLeassons] = useState<any>(null);
-
-  // const fetchDBLessonData = async () => {
-  //   try {
-  //     const queryLessons = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
-  //     return onSnapshot(queryLessons, (response) => {
-  //       var data: DocumentData = [];
-  //       response.forEach((e) => {
-  //         var obj: any = {}
-  //         obj = e.data()
-  //         obj["documentID"] = e.id
-  //         data.push(obj)
-  //       });
-  //       setLeassons(data)
-  //       return data
-  //     })
-  //   } catch (error) {
-  //     return false
-  //   }
-  // }
-  // useEffect(() => {
-  //   console.log("LESSONS DATA: ", lessons);
-  //fetchDBLessonData();
-  //}, [courseID])
 
   return (
     <><MainContainer>

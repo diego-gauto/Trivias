@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
+import { doc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 
+import { db } from "../../../../firebase/firebaseConfig";
+import { DeletePopUp } from "../Form/Delete/Delete";
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
 import {
@@ -29,16 +32,22 @@ import {
   TrashIcon,
 } from "./Edit.styled";
 
-const Edit = () => {
+const Edit = (props: DeletePopUp) => {
+  const { seasonDocId } = props;
+  const { courseID } = props;
+  const { lessonId } = props;
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
 
+  const deleteSeason = () => {
+    const getLessonID = db.collection("courses").doc(courseID).collection("seasons").doc(seasonDocId).collection("lessons").doc(lessonId);
+  }
   return (
     <Container>
       <TitleContain>
         <Title>Editar Lección</Title>
-        <Button onClick={() => { setShow(true), setDeleteMessage(1) }}>Eliminar Lección <TrashIcon /></Button>
+        <Button onClick={() => { setShow(true), deleteSeason(), setDeleteMessage(1) }}>Eliminar Lección <TrashIcon /></Button>
       </TitleContain>
       <EditContain>
         <Contain1>

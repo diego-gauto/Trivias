@@ -15,13 +15,14 @@ import {
   Trash,
 } from "./Delete.styled";
 
-interface DeletePopUp {
+export interface DeletePopUp {
   show: boolean,
   setShow: any,
   deleteMessage: number,
   seasonDocId: string,
   courseID: string,
   setOpenSeason?: any,
+  lessonId?: string,
 }
 
 const Delete = (props: DeletePopUp) => {
@@ -31,6 +32,7 @@ const Delete = (props: DeletePopUp) => {
   const { seasonDocId } = props;
   const { courseID } = props;
   const { setOpenSeason } = props;
+  const { lessonId } = props;
 
   const handleClose = () => setShow(false);
 
@@ -38,6 +40,13 @@ const Delete = (props: DeletePopUp) => {
     handleClose();
     setOpenSeason(0);
     return deleteDoc(doc(db, "courses", courseID, "seasons", seasonDocId));
+  }
+  const deleteLesson = () => {
+    handleClose();
+    const getID = db.collection("courses").doc("8y7tv733Um2nWDv8GKQn").collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").doc(lessonId);
+    return console.log("  THIS WILL BW DELETED:", getID.id)
+    // const getLessonID = db.collection("courses").doc(courseID).collection("seasons").doc(seasonDocId).collection("lessons");
+    // return console.log("This will be deleted: ", getLessonID)
   }
 
   return (
@@ -56,7 +65,12 @@ const Delete = (props: DeletePopUp) => {
         }
         <ButtonContain>
           <TransparentButton onClick={handleClose}>Cancelar</TransparentButton>
-          <PurpleButton onClick={deleteSeason}>Eliminar<Trash /></PurpleButton>
+          {deleteMessage == 1 &&
+            <PurpleButton onClick={deleteLesson}>Eliminar<Trash /></PurpleButton>
+          }
+          {deleteMessage == 2 &&
+            <PurpleButton onClick={deleteSeason}>Eliminar<Trash /></PurpleButton>
+          }
         </ButtonContain>
       </Container>
     </Modal>

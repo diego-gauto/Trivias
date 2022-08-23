@@ -26,7 +26,7 @@ import {
 interface IAllSeasons {
   documentID: string,
   index: number,
-  courseID: string
+  courseID: string,
 }
 
 export const AllSeasons = (props: IAllSeasons) => {
@@ -58,27 +58,10 @@ export const AllSeasons = (props: IAllSeasons) => {
       return false
     }
   }
-  // const fetchDBSeasonData = async () => {
-  //   try {
-  //     const queryLessons = db.collection("courses").doc(courseID).collection("seasons");
-  //     return onSnapshot(queryLessons, (response) => {
-  //       var data: DocumentData = [];
-  //       response.forEach((e) => {
-  //         var obj: any = {}
-  //         obj = e.data()
-  //         obj["documentID"] = e.id
-  //         data.push(obj)
-  //       });
-  //       return data
-  //     })
-  //   } catch (error) {
-  //     return false
-  //   }
-  // }
-  //useEffect(() => {
-  //fetchDBSeasonData();
-  //getSeasonID();
-  //}, [courseID])
+
+  const runEpisodes = async () => {
+    const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
+  }
 
   return (
     <><MainContainer>
@@ -87,7 +70,7 @@ export const AllSeasons = (props: IAllSeasons) => {
           <Title>
             Temporada {index + 1}
             {openSeason != 1 &&
-              <EpisodesNumber>4 episodios</EpisodesNumber>}
+              <EpisodesNumber>{lessons}4 episodios</EpisodesNumber>}
           </Title>
           <ButtonContain>
             {openSeason == 1 &&
@@ -99,7 +82,7 @@ export const AllSeasons = (props: IAllSeasons) => {
                 <ChevU onClick={() => { setOpenSeason(0); }} />
               </>}
             {openSeason != 1 &&
-              <ChevD onClick={() => { setOpenSeason(1); getSeasonID() }} />}
+              <ChevD onClick={() => { setOpenSeason(1); getSeasonID(); runEpisodes() }} />}
           </ButtonContain>
         </TitleContain>
         {openSeason == 1 &&
