@@ -55,13 +55,8 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
             method: '',
             planId: '',
             planName: '',
-            paymentMethod: {
-              card: '',
-              last4: '',
-              month: '',
-              year: '',
-              brand: '',
-            }
+            paymentMethod: '',
+            startDate: 0
           },
           score: 0,
         }).then(() => {
@@ -187,13 +182,8 @@ export const accessWithAuthProvider = (provider: any) => {
               method: '',
               planId: '',
               planName: '',
-              paymentMethod: {
-                card: '',
-                last4: '',
-                month: '',
-                year: '',
-                brand: '',
-              }
+              paymentMethod: '',
+              startDate: 0
             },
             score: 0,
 
