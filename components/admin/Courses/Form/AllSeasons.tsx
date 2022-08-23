@@ -92,7 +92,7 @@ export const AllSeasons = (props: IAllSeasons) => {
           <ButtonContain>
             {openSeason == 1 &&
               <>
-                <Link href="/admin/NewLesson">
+                <Link href={{ pathname: '/admin/NewLesson', query: { courseId: courseID, seasonId: documentID } }}>
                   <Button>Añadir Lección <Add /></Button>
                 </Link>
                 <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>

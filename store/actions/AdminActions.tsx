@@ -213,3 +213,15 @@ export const accessWithAuthProvider = (provider: any) => {
 
     });
 }
+
+// Esto sera para admin courses
+
+export const addLesson = async (lesson: any, courseId: any, seasonId: any) => {
+  const docRef = await addDoc(
+    collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
+    {
+      ...lesson
+    }
+  );
+  return 'exito'
+}
