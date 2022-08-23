@@ -29,11 +29,14 @@ import { useEffect, useState } from "react";
 
 const Modal1 = ({ show, setShow, data, user }: any) => {
 
-  const [state, setState] = useState(true);
-  const [rewards, setRewards] = useState<any>([]);
-
+  const [userReward, setUserReward] = useState({
+    id: data.id,
+    status: false,
+    title: data.title
+  });
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
+
   const [request, setRequest] = useState({
     user: user.name,
     userPhoto: user.photoURL,
@@ -48,10 +51,11 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
   const AddUserRewards = async () => {
     let tempReward = {
       id: data.id,
-      status: false,
+      status: true,
       title: data.title
     }
     addUserReward(tempReward, user.id).then((res: any) => {
+      setUserReward(tempReward)
     });
   }
   const sendRequest = async () => {
@@ -71,9 +75,6 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
       console.log(res);
     })
   }
-  console.log(user);
-
-
   return (
     <>
       <ModalContain >
@@ -115,7 +116,7 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
                   (data.points <= user.score)
                     ? <>
                       {
-                        state == false
+                        (data.status == false && userReward.status == false)
                           ? <TransparentButton onClick={() => {
                             sendRequest();
                             AddUserRewards();
