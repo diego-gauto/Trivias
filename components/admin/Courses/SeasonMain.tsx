@@ -156,7 +156,7 @@ const SeasonsMain = () => {
                 ? <>
                   {
                     seasons.map((e: any, i: any) => (
-                      <AllSeasons
+                      <AllSeasons key={"adminSeasons" + i}
                         documentID={e.documentID} index={e.season} courseID={courseID} />
                     ))
                   }
