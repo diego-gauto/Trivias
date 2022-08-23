@@ -27,6 +27,7 @@ import {
   TransparentButton,
 } from "./Edit.styled";
 import { useState } from "react";
+import file from "react-player/file";
 
 
 const AddLesson = () => {
@@ -37,7 +38,7 @@ const AddLesson = () => {
     title: '',
     banner: '',
     link: '',
-    extra: [],
+    extra: [{}],
     points: 0,
     about: '',
     homeWork: '',
@@ -53,6 +54,21 @@ const AddLesson = () => {
         query: { documentID: courseId }
       });
     })
+  }
+  const getImage = (file: any) => {
+    let tempExtra: any = [];
+
+    file = Object.values(file);
+    console.log(file)
+    file.forEach((element: any) => {
+      console.log(element.name)
+      var reader = new FileReader();
+      reader.readAsDataURL(element);
+      reader.onload = (_event) => {
+        tempExtra.push({ path: reader.result })
+      }
+    });
+    setLesson({ ...lesson, extra: tempExtra })
   }
   return (
     <Container>
@@ -106,6 +122,8 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}
+                multiple
               />
             </IconContain>
           </InputContain>

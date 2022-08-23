@@ -9,21 +9,36 @@ import {
 import { db } from '../../firebase/firebaseConfig';
 import firebase from "firebase/compat/app";
 import { useAuth } from "../../hooks/useAuth";
+import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 
-export const createCourse = (signUpData: { data: any; }) => {
+export const createCourse = async (signUpData: { data: any; }) => {
   const {
     data,
   } = signUpData;
 
   console.log(signUpData)
-
+  data.reference = `${data.courseTittle}-${uuidv4()}`
+  data.coursePath = await uploadImage(data.coursePath, data.reference);
   return db.collection('courses').add(data)
+
     .catch((error: any) => {
       let docCreationError = new Error(`Error creating user document: ${error}`);
       console.error(docCreationError);
       throw (docCreationError);
     })
 
+}
+const uploadImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
 }
 export const updateCourse = (signUpData: { data: any; }) => {
   const {
@@ -217,11 +232,30 @@ export const accessWithAuthProvider = (provider: any) => {
 // Esto sera para admin courses
 
 export const addLesson = async (lesson: any, courseId: any, seasonId: any) => {
-  const docRef = await addDoc(
-    collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
-    {
-      ...lesson
-    }
-  );
+  if (lesson.extra.length > 0) {
+    lesson.extra.forEach(async (element: any, index: any) => {
+      element.reference = `${uuidv4()}`
+      element.path = await uploadImage(element.path, element.reference);
+      console.log(element)
+      if (index == lesson.extra.length - 1) {
+        const docRef = await addDoc(
+          collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
+          {
+            ...lesson
+          }
+        );
+      }
+    });
+
+  } else {
+    const docRef = await addDoc(
+      collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
+      {
+        ...lesson
+      }
+    );
+  }
+  console.log(lesson)
+
   return 'exito'
 }

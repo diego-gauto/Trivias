@@ -87,7 +87,7 @@ export const AllSeasons = (props: IAllSeasons) => {
           <Title>
             Temporada {index}
             {openSeason != 1 &&
-              <EpisodesNumber>4 episodios</EpisodesNumber>}
+              <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
           </Title>
           <ButtonContain>
             {openSeason == 1 &&
@@ -108,7 +108,7 @@ export const AllSeasons = (props: IAllSeasons) => {
               <EpisodeContain>
                 {lessons !== null &&
                   lessons.map((e: any, i: any) => (
-                    <AllLeassons
+                    <AllLeassons key={"adminSeasons" + i}
                       documentID={e.documentID}
                       index={i}
                       courseID={courseID}
