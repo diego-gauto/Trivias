@@ -20,19 +20,12 @@ export interface DeletePopUp {
   setShow: any,
   deleteMessage: number,
   seasonDocId: string,
-  courseID: string,
+  courseID: any,
   setOpenSeason?: any,
-  lessonId?: string,
+  lessonID?: any,
 }
 
-const Delete = (props: DeletePopUp) => {
-  const { show } = props;
-  const { setShow } = props;
-  const { deleteMessage } = props;
-  const { seasonDocId } = props;
-  const { courseID } = props;
-  const { setOpenSeason } = props;
-  const { lessonId } = props;
+const Delete = ({ show, setShow, deleteMessage, seasonDocId, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
 
   const handleClose = () => setShow(false);
 
@@ -43,10 +36,7 @@ const Delete = (props: DeletePopUp) => {
   }
   const deleteLesson = () => {
     handleClose();
-    const getID = db.collection("courses").doc("8y7tv733Um2nWDv8GKQn").collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").doc(lessonId);
-    return console.log("THIS WILL BW DELETED:", seasonDocId)
-    // const getLessonID = db.collection("courses").doc(courseID).collection("seasons").doc(seasonDocId).collection("lessons");
-    // return console.log("This will be deleted: ", getLessonID)
+    return console.log("THIS WILL BE DELETED:", courseID)
   }
 
   return (

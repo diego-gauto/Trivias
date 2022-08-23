@@ -29,11 +29,7 @@ interface IAllSeasons {
   courseID: string,
 }
 
-export const AllSeasons = (props: IAllSeasons) => {
-  const { documentID } = props;
-  const { index } = props;
-  const { courseID } = props;
-
+export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(0);
@@ -60,7 +56,8 @@ export const AllSeasons = (props: IAllSeasons) => {
   }
 
   const runEpisodes = async () => {
-    const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
+    console.log("THIS COURSE: ", courseID)
+    //const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
   }
 
   return (
@@ -90,14 +87,14 @@ export const AllSeasons = (props: IAllSeasons) => {
             <Episode>
               <EpisodeContain>
                 {lessons !== null &&
-                  lessons.map((e: any, i: any) => (
+                  lessons.map((item: any, i: any) => (
                     <AllLeassons
-                      documentID={e.documentID}
+                      documentID={item.documentID}
                       index={i}
                       courseID={courseID}
-                      lessonTitle={e.lessonTitle}
-                      lessonDuration={e.lessonDuration}
-                      lessonDescription={e.lessonDescription} />
+                      lessonTitle={item.lessonTitle}
+                      lessonDuration={item.lessonDuration}
+                      lessonDescription={item.lessonDescription} />
                   ))
                 }
               </EpisodeContain>

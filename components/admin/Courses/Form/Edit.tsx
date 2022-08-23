@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-import { doc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { db } from "../../../../firebase/firebaseConfig";
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
 import {
@@ -32,17 +31,16 @@ import {
 } from "./Edit.styled";
 
 const Edit = () => {
+  const routerState = useRouter().query
+
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
 
-  const deleteSeason = () => {
-    const getLessonID = db.collection("courses").doc().collection("seasons").doc().collection("lessons").doc();
-  }
   return (
     <Container>
       <TitleContain>
         <Title>Editar Lección</Title>
-        <Button onClick={() => { setShow(true), deleteSeason(), setDeleteMessage(1) }}>Eliminar Lección <TrashIcon /></Button>
+        <Button onClick={() => { setShow(true), setDeleteMessage(1) }}>Eliminar Lección <TrashIcon /></Button>
       </TitleContain>
       <EditContain>
         <Contain1>
@@ -119,7 +117,12 @@ const Edit = () => {
         <Link href="/admin/Edit"><TransparentButton>Regresar</TransparentButton></Link>
         <PurpleButton>Guardar</PurpleButton>
       </ButtonContain>
-      <Delete setShow={setShow} show={show} deleteMessage={deleteMessage} seasonDocId={""} courseID={""} />
+      <Delete setShow={setShow}
+        show={show}
+        deleteMessage={deleteMessage}
+        courseID={routerState.courseID}
+        lessonID={routerState.lessonID}
+        seasonDocId={""} />
     </Container>
   )
 }

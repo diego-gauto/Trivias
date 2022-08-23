@@ -24,17 +24,12 @@ interface IAllSeasons {
   lessonDescription: string,
 }
 
-export const AllLeassons = (props: IAllSeasons) => {
-  const { documentID } = props;
-  const { index } = props;
-  const { courseID } = props;
-  const { lessonTitle } = props;
-  const { lessonDuration } = props;
-  const { lessonDescription } = props;
+export const AllLeassons = ({ documentID, index, courseID, lessonTitle, lessonDuration, lessonDescription }: IAllSeasons) => {
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(0);
+  const [newLessonID, setNewLessonID] = useState<string>("");
 
   return (
     <><MainContainer>
@@ -45,7 +40,14 @@ export const AllLeassons = (props: IAllSeasons) => {
             <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
             <EpisodeTime>{lessonDuration} minutos</EpisodeTime>
             <EpisodeInfo>{lessonDescription}</EpisodeInfo>
-            <Link href="/admin/EditLesson">
+            <Link href={{
+              pathname: "/admin/EditLesson",
+              query: {
+                lessonID: documentID,
+                courseID: courseID,
+              }
+            }}
+            >
               <EditEpisode>Editar Lección</EditEpisode>
             </Link>
           </EpisodeContain>
@@ -56,7 +58,7 @@ export const AllLeassons = (props: IAllSeasons) => {
         deleteMessage={deleteMessage}
         seasonDocId={documentID}
         courseID={courseID}
-        setOpenSeason={setOpenSeason} />
+      />
     </MainContainer>
     </>
   )

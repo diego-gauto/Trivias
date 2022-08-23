@@ -43,7 +43,7 @@ export const AllCourses = (props: IAllCourses) => {
           </CourseName>
           {
             open == false &&
-            <ChevD onClick={() => { setOpen(true) }} />
+            <ChevD onClick={() => { setOpen(true), console.log("COURSE ID: ", documentID) }} />
           }
           {
             open == true &&

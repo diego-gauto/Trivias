@@ -92,7 +92,7 @@ const AddLesson = (props: Props) => {
     const {
       data,
     } = signUpData;
-    return await db.collection("courses").doc(courseID).collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").add(data);
+    return await db.collection("courses").doc().collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").add(data);
   }
 
   return (
