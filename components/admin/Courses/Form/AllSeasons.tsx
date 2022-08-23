@@ -85,7 +85,7 @@ export const AllSeasons = (props: IAllSeasons) => {
       <SeasonContain>
         <TitleContain>
           <Title>
-            Temporada {index + 1}
+            Temporada {index}
             {openSeason != 1 &&
               <EpisodesNumber>4 episodios</EpisodesNumber>}
           </Title>

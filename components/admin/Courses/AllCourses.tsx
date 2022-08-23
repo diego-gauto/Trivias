@@ -39,7 +39,7 @@ export const AllCourses = (props: IAllCourses) => {
       <CourseContainer>
         <TitleContain>
           <CourseName>
-            Curso {index}
+            Curso - {courseTittle}
           </CourseName>
           {
             open == false &&
