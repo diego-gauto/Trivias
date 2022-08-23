@@ -36,6 +36,7 @@ export const Module5_Carousel = (props: IModule5_Carousel) => {
       fluid
       style={{ height: "600px", overflow: "hidden", padding: "0" }}
     >
+      {/* @ts-expect-error */}
       <Swiper
         height={600}
         direction="vertical"
