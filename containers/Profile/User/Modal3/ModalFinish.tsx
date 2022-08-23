@@ -15,13 +15,21 @@ import {
 } from "./Modal3.styled";
 
 const ModalFinish = ({ show, setShow, user }: any) => {
-  let tempDate = new Date(user.membership.finalDate * 1000);
-  let tempDay = tempDate.getDate()
-  let tempMonth = tempDate.getUTCMonth() + 1;
-  console.log(tempMonth, tempDate);
+  console.log(user);
+  let tempDate;
+  let tempDay;
+  let tempMonth;
+  let tempYear;
+  let formatDate;
+  if (user) {
+    tempDate = new Date(user.membership.finalDate * 1000);
+    tempDay = tempDate.getDate()
+    tempMonth = tempDate.getUTCMonth() + 1;
+    console.log(tempMonth, tempDate);
 
-  let tempYear = tempDate.getFullYear()
-  let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    tempYear = tempDate.getFullYear()
+    formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+  }
 
   const handleClose = () => setShow(false);
 
