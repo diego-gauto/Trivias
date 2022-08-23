@@ -21,12 +21,12 @@ export const Module5_Carousel = (props: IModule5_Carousel) => {
     },
     speed: 7000,
     freeMode: true,
-    slidesPerView: 3,
-    spaceBetween: 0,
+    slidesPerView: "auto",
+    spaceBetween: 10,
     breakpoints: {
       1024: {
-        slidesPerView: 2.5,
-        spaceBetween: 30,
+        slidesPerView: "auto",
+        spaceBetween: 20,
       }
     }
   };

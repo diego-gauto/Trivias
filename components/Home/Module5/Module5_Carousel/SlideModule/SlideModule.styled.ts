@@ -11,8 +11,7 @@ margin: 0 auto;
 export const MasonryImage = styled.img`
 width: auto;
 border-radius: 12px;
-height: 75%;
-max-height: 170px;
+height: 100%;
 @media only screen and (max-width: 1024px) {
   height: auto;
 }
