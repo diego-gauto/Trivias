@@ -15,6 +15,7 @@ export const LessonTitle = styled.h1`
 export const SeasonContain = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
@@ -132,9 +133,14 @@ export const EditEpisode = styled.a`
   cursor: pointer;
   margin: 0;
 `;
-export const Demo1 = styled.i`
-  background-image: url(../images/admin/Courses/Demo/D1.png);
-  background-repeat: no-repeat;
+export const ImageContain = styled.div`
+  display: flex;
   min-width: 240px;
-  height: 137.14px;
+  height: 136px;
+  position: relative;
+img{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 `;

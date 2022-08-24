@@ -236,8 +236,11 @@ export const addLesson = async (lesson: any, courseId: any, seasonId: any) => {
     lesson.extra.forEach(async (element: any, index: any) => {
       element.reference = `${uuidv4()}`
       element.path = await uploadImage(element.path, element.reference);
+
       console.log(element)
       if (index == lesson.extra.length - 1) {
+        lesson.reference2 = `${lesson.title}-${uuidv4()}`
+        lesson.image = await uploadImage(lesson.image, lesson.reference2);
         const docRef = await addDoc(
           collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
           {

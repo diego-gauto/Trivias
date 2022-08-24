@@ -113,9 +113,11 @@ export const AllSeasons = (props: IAllSeasons) => {
                       documentID={e.documentID}
                       index={i}
                       courseID={courseID}
-                      lessonTitle={e.lessonTitle}
+                      lessonTitle={e.title}
                       lessonDuration={e.lessonDuration}
-                      lessonDescription={e.lessonDescription} />
+                      about={e.about}
+                      path={e.image}
+                    />
                   ))
                 }
               </EpisodeContain>
