@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase/firebaseConfig";
 import { ImageContainMod1, VideoContainMod3 } from "../components/Catalogue/Module1/Module1.styled";
 import { Module1 } from "../components/Home/Module1/Module1";
 import { Module2 } from "../components/Home/Module2/Module2";
@@ -12,13 +10,11 @@ import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Ca
 import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
 import { LoaderContain, LoaderImage, Background } from "../screens/Login.styled";
+import { getLandingData } from "../store/actions/LandingActions";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
-  const [heroSectionData, setHeroSectionData] = useState<any>({});
-  const [reseniasSectionData, setReseniasSectionData] = useState<any>({});
-  const [featureShowcaseSectionData, setFeatureShowcaseSectionData] = useState<any>({});
-  const [productosDestacadosData, setProductosDestacadosData] = useState<Array<any>>([]);
+  const [landingData, setLandingData] = useState<any>({});
 
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
@@ -27,30 +23,8 @@ const Homepage = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const fetchLandingData = async () => {
-    const heroSectionRef = doc(db, "landingPage", "heroSection")
-    const reseniasSectionRef = doc(db, "landingPage", "reseniasSection")
-    const featureShowcaseSectionRef = doc(db, "landingPage", "featureShowcaseSection")
-    const productosCollectionRef = collection(db, "landingPage", "productosDestacadosSection", "productos")
-    const [
-      heroSectionDoc,
-      reseniasSectionDoc,
-      featureShowcaseSectionDoc,
-      productosDestacadosDocs,
-    ] = await Promise.all([
-      getDoc(heroSectionRef),
-      getDoc(reseniasSectionRef),
-      getDoc(featureShowcaseSectionRef),
-      getDocs(productosCollectionRef)
-    ])
-
-    setHeroSectionData(heroSectionDoc.data() || {})
-    setReseniasSectionData(reseniasSectionDoc.data() || {})
-    setFeatureShowcaseSectionData(featureShowcaseSectionDoc.data() || {})
-    const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
-      const { nombre, precio, imgURL, clickURL } = d.data()
-      return { title: nombre, subtitle: precio, isNew: false, imgURL, clickURL }
-    })
-    setProductosDestacadosData(parsedProductosDestacadosData || [])
+    const landingData = await getLandingData()
+    setLandingData(landingData)
     setLoading(false)
   }
 
@@ -76,8 +50,8 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      <Module1 heroSectionData={heroSectionData} />
-      <Module2 featureShowcaseSectionData={featureShowcaseSectionData} />
+      <Module1 heroSectionData={landingData.heroSectionData} />
+      <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
       <Module3 //courseImg={"https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
         button={"Nuevo"} title={"Curso de Uñas Francesas"}
         subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
@@ -172,12 +146,8 @@ const Homepage = () => {
           { isNew: false, title: "Uñas creativas 3 B DE-8-22", subtitle: "21 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2F6.png?alt=media&token=39f7efdc-7bd4-4c2e-95ce-fe5b8d348ae5" },
         ]
       } />
-
-
-      <Module5>
-      </Module5>
-
-      <Module6 slideData={productosDestacadosData} />
+      <Module5 reviewsData={landingData.reseniasSectionData} />
+      <Module6 slideData={landingData.productosDestacadosData} />
     </Container>
   )
 }

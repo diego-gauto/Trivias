@@ -10,6 +10,7 @@ export const RewardContain = styled.div`
 export const ImageContain = styled.div`
   position: relative;
   display: flex;
+  width: 100%;
   height: 355px;
   z-index: -1;
 `;
@@ -20,6 +21,24 @@ export const TitleContain = styled.div`
   position: absolute;
   padding-block: 40px;
   padding-inline: 20px;
+`;
+export const ButtonPosition = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  input{
+    display: none;
+  }
+  button{
+    font-size: 16px;
+    font-family:'Montserrat',sans-serif;
+    background: transparent;
+    color: white;
+    padding-block: 10px;
+    padding-inline: 30px;
+    border: 1px solid white;
+    border-radius: 100px;
+  }
 `;
 export const Title = styled.h1`
   font-family: 'Montserrat';

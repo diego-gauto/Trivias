@@ -118,7 +118,10 @@ const Modal2 = ({ show, setShow }: any) => {
         <InputContain>
           <Label>Descripción</Label>
           <InputBig
-            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium aliquet ultricies. Interdum et suspendisse nunc gravida. "
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci 
+            malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium 
+            aliquet ultricies. Interdum et suspendisse nunc gravida. "
             onChange={(e: any) => {
               setReward({ ...reward, about: e.target.value })
             }}

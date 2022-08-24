@@ -65,14 +65,14 @@ export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
       <SeasonContain>
         <TitleContain>
           <Title>
-            Temporada {index + 1}
+            Temporada {index}
             {openSeason != 1 &&
-              <EpisodesNumber>{lessons}4 episodios</EpisodesNumber>}
+              <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
           </Title>
           <ButtonContain>
             {openSeason == 1 &&
               <>
-                <Link href="/admin/NewLesson">
+                <Link href={{ pathname: '/admin/NewLesson', query: { courseId: courseID, seasonId: documentID } }}>
                   <Button>Añadir Lección <Add /></Button>
                 </Link>
                 <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
@@ -87,14 +87,17 @@ export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
             <Episode>
               <EpisodeContain>
                 {lessons !== null &&
-                  lessons.map((item: any, i: any) => (
-                    <AllLeassons
-                      documentID={item.documentID}
+                  lessons.map((e: any, i: any) => (
+                    <AllLeassons key={"adminSeasons" + i}
+                      seasonID={documentID}
+                      documentID={e.documentID}
                       index={i}
                       courseID={courseID}
-                      lessonTitle={item.lessonTitle}
-                      lessonDuration={item.lessonDuration}
-                      lessonDescription={item.lessonDescription} />
+                      lessonTitle={e.title}
+                      lessonDuration={e.lessonDuration}
+                      about={e.about}
+                      path={e.image}
+                    />
                   ))
                 }
               </EpisodeContain>

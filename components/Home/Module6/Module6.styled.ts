@@ -32,7 +32,7 @@ export const ContainerMain = styled.div  `
 padding-bottom: 0;
 position: inherit;
 width: 100%;
-margin-top: -380px;
+margin-top: -475px;
 z-index: -1;
 @media only screen and (max-width: 1024px) {
   margin-top: -450px;
