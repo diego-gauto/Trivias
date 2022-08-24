@@ -281,10 +281,11 @@ const Purchase = () => {
     }
     if (plan.method == 'paypal') {
       if (type == 'subscription') {
-
+        setConfirmation(false);
+        setPay(true);
       } else {
         delete invoice.brand;
-        invoice.amount = product.price
+        invoice.amount = product.price * 100
         const course = {
           id: id,
           duration: (new Date().getTime() / 1000) + product.duration * 86400
@@ -604,14 +605,22 @@ const Purchase = () => {
                         color: "gold",
                         layout: 'horizontal',
                         shape: 'pill',
-                        height: 600
                       }}
                       createSubscription={(data, actions) => {
                         return actions.subscription.create({
                           plan_id: 'P-6P515571TU0367642MMDGG4Y'
                         })
-                      }
-                      }
+                      }}
+                      onApprove={(data: any, actions) => {
+                        let today = new Date().getTime() / 1000;
+                        let finalDate = 0;
+                        finalDate = today + 31556952;
+                        updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title }, userData.id).then(() => {
+                          setConfirmation(false);
+                          setPay(true);
+                        })
+                        return data
+                      }}
                     />}
                     {type == 'course' && <PayPalButtons
                       style={{
