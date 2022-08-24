@@ -1,3 +1,7 @@
+
+
+
+
 import { Modal } from "react-bootstrap";
 
 import { deleteDoc, doc } from "firebase/firestore";
@@ -19,24 +23,25 @@ export interface DeletePopUp {
   show: boolean,
   setShow: any,
   deleteMessage: number,
-  seasonDocId: string,
+  seasonID?: any,
   courseID: any,
   setOpenSeason?: any,
   lessonID?: any,
 }
 
-const Delete = ({ show, setShow, deleteMessage, seasonDocId, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
+const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
 
   const handleClose = () => setShow(false);
 
   const deleteSeason = () => {
     handleClose();
     setOpenSeason(0);
-    return deleteDoc(doc(db, "courses", courseID, "seasons", seasonDocId));
+    return deleteDoc(doc(db, "courses", courseID, "seasons", seasonID));
   }
   const deleteLesson = () => {
     handleClose();
-    return console.log("THIS WILL BE DELETED:", courseID)
+    window.location.href = `/admin/Edit?documentID=${courseID}`;
+    return deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID));
   }
 
   return (

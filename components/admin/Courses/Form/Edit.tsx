@@ -122,7 +122,7 @@ const Edit = () => {
         deleteMessage={deleteMessage}
         courseID={routerState.courseID}
         lessonID={routerState.lessonID}
-        seasonDocId={""} />
+        seasonID={routerState.seasonID} />
     </Container>
   )
 }

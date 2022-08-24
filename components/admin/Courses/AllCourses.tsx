@@ -20,18 +20,18 @@ import {
 } from "./AllCourses.styled";
 import { IAllCourses } from "./IAllCourses";
 
-export const AllCourses = (props: IAllCourses) => {
-
-  const { courseTittle } = props;
-  const { courseAbout } = props;
-  const { courseCategory } = props;
-  const { courseDuration } = props;
-  const { coursePrice } = props;
-  const { courseProfessor } = props;
-  const { coursePublishYear } = props;
-  const { courseSubtittle } = props;
-  const { index } = props;
-  const { documentID } = props;
+export const AllCourses = ({
+  courseTittle,
+  courseAbout,
+  courseCategory,
+  courseDuration,
+  coursePrice,
+  courseProfessor,
+  coursePublishYear,
+  courseSubtittle,
+  index,
+  documentID
+}: IAllCourses) => {
 
   const [open, setOpen] = useState(false)
   return (
@@ -43,7 +43,7 @@ export const AllCourses = (props: IAllCourses) => {
           </CourseName>
           {
             open == false &&
-            <ChevD onClick={() => { setOpen(true), console.log("COURSE ID: ", documentID) }} />
+            <ChevD onClick={() => { setOpen(true) }} />
           }
           {
             open == true &&

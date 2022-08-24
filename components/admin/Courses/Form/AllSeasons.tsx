@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { db } from "../../../../firebase/firebaseConfig";
 import { MainContainer } from "../AllCourses.styled";
-import { AllLeassons } from "./AllLessons";
+import { AllLessons } from "./AllLessons";
 import Delete from "./Delete/Delete";
 import { TrashIcon } from "./Edit.styled";
 import {
@@ -27,20 +27,27 @@ interface IAllSeasons {
   documentID: string,
   index: number,
   courseID: string,
+  seasonID: string,
+}
+interface AllLessonsProps {
+  lessonTitle: string,
+  lessonDescription: string,
+  lessonDuration?: number,
+  documentID?: string,
 }
 
-export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
+export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeasons) => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(0);
-  const [lessons, setLeassons] = useState<any>(null);
+  const [lessons, setLeassons] = useState<Array<AllLessonsProps>>([]);
 
   //GETS ALL LESSONS DATA
   const getSeasonID = async () => {
     try {
       const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
       return onSnapshot(query, (response) => {
-        var data: DocumentData = [];
+        var data: DocumentData | any = [];
         response.forEach((e) => {
           var obj: any = {}
           obj = e.data()
@@ -55,11 +62,6 @@ export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
     }
   }
 
-  const runEpisodes = async () => {
-    console.log("THIS COURSE: ", courseID)
-    //const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
-  }
-
   return (
     <><MainContainer>
       <SeasonContain>
@@ -67,19 +69,25 @@ export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
           <Title>
             Temporada {index + 1}
             {openSeason != 1 &&
-              <EpisodesNumber>{lessons}4 episodios</EpisodesNumber>}
+              <EpisodesNumber>{lessons.length} episodios</EpisodesNumber>}
           </Title>
           <ButtonContain>
             {openSeason == 1 &&
               <>
-                <Link href="/admin/NewLesson">
+                <Link href={{
+                  pathname: "/admin/NewLesson",
+                  query: {
+                    newCourseID: courseID,
+                    newSeasonID: documentID,
+                  }
+                }}>
                   <Button>Añadir Lección <Add /></Button>
                 </Link>
                 <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
                 <ChevU onClick={() => { setOpenSeason(0); }} />
               </>}
             {openSeason != 1 &&
-              <ChevD onClick={() => { setOpenSeason(1); getSeasonID(); runEpisodes() }} />}
+              <ChevD onClick={() => { setOpenSeason(1); getSeasonID() }} />}
           </ButtonContain>
         </TitleContain>
         {openSeason == 1 &&
@@ -88,13 +96,15 @@ export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
               <EpisodeContain>
                 {lessons !== null &&
                   lessons.map((item: any, i: any) => (
-                    <AllLeassons
+                    <AllLessons
+                      key={i}
                       documentID={item.documentID}
                       index={i}
                       courseID={courseID}
-                      lessonTitle={item.lessonTitle}
-                      lessonDuration={item.lessonDuration}
-                      lessonDescription={item.lessonDescription} />
+                      lessonTitle={item.title}
+                      //lessonDuration={item.lessonDuration}
+                      lessonDescription={item.about}
+                      seasonID={documentID} />
                   ))
                 }
               </EpisodeContain>
@@ -103,7 +113,7 @@ export const AllSeasons = ({ documentID, index, courseID }: IAllSeasons) => {
         <Delete setShow={setShow}
           show={show}
           deleteMessage={deleteMessage}
-          seasonDocId={documentID}
+          seasonID={documentID}
           courseID={courseID}
           setOpenSeason={setOpenSeason} />
       </SeasonContain>

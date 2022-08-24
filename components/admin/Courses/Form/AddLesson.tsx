@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -33,24 +34,26 @@ import {
 } from "./Edit.styled";
 
 const formSchema = yup.object().shape({
-  lessonDescription: yup
+  about: yup
     .string()
     .required("Campo requerido"),
-  lessonTitle: yup
+  title: yup
     .string()
     .required("Campo requerido"),
 });
 
 type NewLessonAdded = {
-  lessonDescription: string,
-  lessonTitle: string,
+  about: string,
+  title: string,
 }
-type Props = {
-  episode: string;
-};
 
-const AddLesson = (props: Props) => {
-  console.log("CONTEXT QUERY", props)
+type NewIDs = {
+  routerState: any,
+}
+
+const AddLesson = ({ routerState }: NewIDs) => {
+  routerState = useRouter().query
+
   const {
     register,
     handleSubmit,
@@ -74,13 +77,27 @@ const AddLesson = (props: Props) => {
   const onSubmit: SubmitHandler<NewLessonAdded> = formData => {
     let signUpData = {
       data: {
-        lessonDescription: formData.lessonDescription,
-        lessonTitle: formData.lessonTitle,
+        about: formData.about,
+        title: formData.title,
+        banner: "",
+        extra: [
+          {
+            path: "",
+            reference: ""
+          },
+          {
+            path: "",
+            reference: ""
+          }
+        ],
+        homeWork: "",
+        homeWorkAbout: "",
+        link: "",
+        points: "",
       },
     };
 
     createNewLesson(signUpData).then(() => {
-
       window.location.href = "/admin/Courses";
       console.log("done!")
 
@@ -92,7 +109,7 @@ const AddLesson = (props: Props) => {
     const {
       data,
     } = signUpData;
-    return await db.collection("courses").doc().collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").add(data);
+    return await db.collection("courses").doc(routerState.newCourseID).collection("seasons").doc(routerState.newSeasonID).collection("lessons").add(data);
   }
 
   return (
@@ -107,8 +124,8 @@ const AddLesson = (props: Props) => {
             <InputContain>
               <Label>Título de la Lección</Label>
               <Input placeholder="Epidosio 1: Lorem Ipsum"
-                className={`form-control ${errors.lessonTitle ? 'is-invalid' : ''}`}
-                {...register("lessonTitle")} />
+                className={`form-control ${errors.title ? 'is-invalid' : ''}`}
+                {...register("title")} />
             </InputContain>
             <InputContain>
               <Label>Portada de la Lección</Label>
@@ -154,8 +171,8 @@ const AddLesson = (props: Props) => {
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
             quisque."
-                className={`form-control ${errors.lessonDescription ? 'is-invalid' : ''}`}
-                {...register("lessonDescription")} />
+                className={`form-control ${errors.about ? 'is-invalid' : ''}`}
+                {...register("about")} />
             </InputContain>
           </Contain2>
           <Contain3>

@@ -148,7 +148,12 @@ const SeasonsMain = () => {
                   {
                     seasons.map((e: any, i: any) => (
                       <AllSeasons
-                        documentID={e.documentID} index={i} courseID={courseID} />
+                        key={i}
+                        documentID={e.documentID}
+                        index={i}
+                        courseID={courseID}
+                        seasonID={seasons}
+                      />
                     ))
                   }
                 </>

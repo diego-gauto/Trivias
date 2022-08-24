@@ -19,17 +19,16 @@ interface IAllSeasons {
   documentID: string,
   index: number,
   courseID: string,
+  seasonID: string,
   lessonTitle: string,
-  lessonDuration: number,
+  lessonDuration?: number,
   lessonDescription: string,
 }
 
-export const AllLeassons = ({ documentID, index, courseID, lessonTitle, lessonDuration, lessonDescription }: IAllSeasons) => {
+export const AllLessons = ({ documentID, index, courseID, lessonTitle, lessonDescription, seasonID }: IAllSeasons) => {
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
-  const [openSeason, setOpenSeason] = useState(0);
-  const [newLessonID, setNewLessonID] = useState<string>("");
 
   return (
     <><MainContainer>
@@ -38,13 +37,14 @@ export const AllLeassons = ({ documentID, index, courseID, lessonTitle, lessonDu
           <Demo1 />
           <EpisodeContain>
             <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
-            <EpisodeTime>{lessonDuration} minutos</EpisodeTime>
+            <EpisodeTime> 30 minutos</EpisodeTime>
             <EpisodeInfo>{lessonDescription}</EpisodeInfo>
             <Link href={{
               pathname: "/admin/EditLesson",
               query: {
                 lessonID: documentID,
                 courseID: courseID,
+                seasonID: seasonID,
               }
             }}
             >
@@ -56,7 +56,7 @@ export const AllLeassons = ({ documentID, index, courseID, lessonTitle, lessonDu
       <Delete setShow={setShow}
         show={show}
         deleteMessage={deleteMessage}
-        seasonDocId={documentID}
+        seasonID={documentID}
         courseID={courseID}
       />
     </MainContainer>
