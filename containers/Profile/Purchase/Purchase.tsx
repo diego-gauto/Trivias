@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { useRouter } from "next/router";
-
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { getcourse } from "../../../store/actions/courseActions";
@@ -75,6 +75,7 @@ const Purchase = () => {
   const [payment, setPayment] = useState(true);
   const [cardInfo, setCardInfo] = useState(false);
   const [process, setProcess] = useState(true);
+  const [paypal, setPaypal] = useState(true);
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
   const [card, setCard] = useState<any>({
@@ -190,6 +191,11 @@ const Purchase = () => {
       setProcess(false);
       setConfirmation(true);
     }
+    if (plan.method == 'paypal') {
+      setPaypal(!paypal);
+      setProcess(false);
+      setConfirmation(true);
+    }
   }
 
   const Return = () => {
@@ -198,6 +204,8 @@ const Purchase = () => {
     Object.keys(card).forEach(key => {
       card[key] = '';
     });
+    setPaypal(true)
+    setPlan({ method: '' })
     setDefaultCard(new Array(defaultCard.length).fill(false));
     setCard(card);
   }
@@ -220,7 +228,8 @@ const Purchase = () => {
           cardId: card.cardId,
           paymentMethod: card.paymentMethod,
           stripeId: userData.stripeId,
-          priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk'
+          priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk',
+          method: 'stripe'
         }
         await pay(data).then((res: any) => {
           console.log(res);
@@ -243,7 +252,8 @@ const Purchase = () => {
           cardId: card.cardId,
           paymentMethod: card.paymentMethod,
           stripeId: userData.stripeId,
-          amount: product.price
+          amount: product.price,
+          method: 'stripe'
         }
         const pay = httpsCallable(functions, 'payWithStripeCourse');
         await pay(data).then((res: any) => {
@@ -270,7 +280,20 @@ const Purchase = () => {
       }
     }
     if (plan.method == 'paypal') {
+      if (type == 'subscription') {
 
+      } else {
+        delete invoice.brand;
+        invoice.amount = product.price
+        const course = {
+          id: id,
+          duration: (new Date().getTime() / 1000) + product.duration * 86400
+        }
+        addCourseUser(course, userData.id);
+        addInvoice(invoice);
+        setConfirmation(false);
+        setPay(true);
+      }
     }
   }
   const handleShow = () => setShow(true);
@@ -567,9 +590,53 @@ const Purchase = () => {
                   <TransparentButton onClick={Return}>
                     Regresar
                   </TransparentButton>
-                  <PurpleBuyButton onClick={FinishPayment}>
+                  {paypal && <PurpleBuyButton onClick={FinishPayment}>
                     Proceder con Compra
-                  </PurpleBuyButton>
+                  </PurpleBuyButton>}
+                  {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                    "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
+                    currency: "MXN",
+                    'vault': true,
+                  }}
+                  >
+                    {type == 'subscription' && <PayPalButtons
+                      style={{
+                        color: "gold",
+                        layout: 'horizontal',
+                        shape: 'pill',
+                        height: 600
+                      }}
+                      createSubscription={(data, actions) => {
+                        return actions.subscription.create({
+                          plan_id: 'P-6P515571TU0367642MMDGG4Y'
+                        })
+                      }
+                      }
+                    />}
+                    {type == 'course' && <PayPalButtons
+                      style={{
+                        color: "gold",
+                        layout: 'horizontal',
+                        shape: 'pill',
+                      }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: product.price,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions: any) => {
+                        return actions.order.capture().then((details: any) => {
+                          FinishPayment()
+                        });
+                      }}
+                    />}
+                  </PayPalScriptProvider>}
                 </ButtonContain>
               </SubContainer2>
             </>
