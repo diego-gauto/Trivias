@@ -37,7 +37,7 @@ const Module4 = () => {
 
 
   const goTo = (data: any) => {
-    if (data.courseType == 'Mensual' && userData.menbership.level == 1 || data.paid) {
+    if (data.courseType == 'Mensual' && userData.membership.level == 1 || data.paid) {
       router.push({
         pathname: 'Lesson',
         query: { id: data.id },
@@ -49,7 +49,7 @@ const Module4 = () => {
         query: { id: data.id },
       });
     }
-    if (data.courseType == 'Mensual' && userData.menbership.level == 0) {
+    if (data.courseType == 'Mensual' && userData.membership.level == 0) {
       router.push(
         { pathname: 'Purchase', query: { type: 'subscription' } }
       )
