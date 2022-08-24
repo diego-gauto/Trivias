@@ -5,7 +5,6 @@ import Link from "next/link";
 import { MainContainer } from "../AllCourses.styled";
 import Delete from "./Delete/Delete";
 import {
-  Demo1,
   EditEpisode,
   Episode,
   EpisodesContain,
@@ -13,15 +12,18 @@ import {
   EpisodeInfo,
   EpisodeTime,
   EpisodeTitle,
+  ImageContain,
 } from "./Lessons.styled";
 
 interface IAllSeasons {
   documentID: string,
   index: number,
   courseID: string,
+  seasonID: string,
   lessonTitle: string,
   lessonDuration: number,
-  lessonDescription: string,
+  about: string,
+  path: string,
 }
 
 export const AllLeassons = (props: IAllSeasons) => {
@@ -30,7 +32,9 @@ export const AllLeassons = (props: IAllSeasons) => {
   const { courseID } = props;
   const { lessonTitle } = props;
   const { lessonDuration } = props;
-  const { lessonDescription } = props;
+  const { about } = props;
+  const { seasonID } = props;
+  const { path } = props;
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
@@ -61,27 +65,32 @@ export const AllLeassons = (props: IAllSeasons) => {
   //}, [courseID])
 
   return (
-    <><MainContainer>
-      <EpisodesContain>
-        <Episode>
-          <Demo1 />
-          <EpisodeContain>
-            <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
-            <EpisodeTime>{lessonDuration} minutos</EpisodeTime>
-            <EpisodeInfo>{lessonDescription}</EpisodeInfo>
-            <Link href="/admin/EditLesson">
-              <EditEpisode>Editar Lección</EditEpisode>
-            </Link>
-          </EpisodeContain>
-        </Episode>
-      </EpisodesContain>
-      <Delete setShow={setShow}
-        show={show}
-        deleteMessage={deleteMessage}
-        seasonDocId={documentID}
-        courseID={courseID}
-        setOpenSeason={setOpenSeason} />
-    </MainContainer>
+    <>
+      <MainContainer>
+        <EpisodesContain>
+          <Episode>
+            <ImageContain>
+              <img src={path} />
+            </ImageContain>
+            <EpisodeContain>
+              <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
+              <EpisodeTime>{lessonDuration} minutos</EpisodeTime>
+              <EpisodeInfo>{about}</EpisodeInfo>
+              <Link
+                href={{ pathname: '/admin/EditLesson', query: { courseId: courseID, seasonID: seasonID, lessonID: documentID } }}
+              >
+                <EditEpisode>Editar Lección</EditEpisode>
+              </Link>
+            </EpisodeContain>
+          </Episode>
+        </EpisodesContain>
+        <Delete setShow={setShow}
+          show={show}
+          deleteMessage={deleteMessage}
+          seasonDocId={documentID}
+          courseID={courseID}
+          setOpenSeason={setOpenSeason} />
+      </MainContainer>
     </>
   )
 }

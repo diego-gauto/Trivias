@@ -49,6 +49,17 @@ export const Contain1 = styled.div`
   gap: 20px;
   width: 33.33%;
 `;
+export const ImageContain = styled.div`
+  display: flex;
+  width: 320px;
+  height: 200px;
+  position: relative;
+img{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+`;
 export const Contain2 = styled.div`
   display: flex;
   flex-direction: column;

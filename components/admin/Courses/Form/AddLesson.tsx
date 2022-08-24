@@ -15,6 +15,7 @@ import {
   EditContain,
   Folder,
   HwTitle,
+  ImageContain,
   Input,
   InputBig,
   InputContain,
@@ -27,17 +28,18 @@ import {
   TransparentButton,
 } from "./Edit.styled";
 import { useState } from "react";
+import file from "react-player/file";
 
 
 const AddLesson = () => {
   const router = useRouter()
   const { courseId, seasonId } = router.query;
-
-  const [lesson, setLesson] = useState({
+  const [lesson, setLesson] = useState<any>({
     title: '',
     banner: '',
     link: '',
-    extra: [],
+    image: "",
+    extra: [{}],
     points: 0,
     about: '',
     homeWork: '',
@@ -53,6 +55,29 @@ const AddLesson = () => {
         query: { documentID: courseId }
       });
     })
+  }
+  const getImage = (file: any) => {
+    let tempExtra: any = [];
+
+    file = Object.values(file);
+    console.log(file)
+    file.forEach((element: any) => {
+      console.log(element.name)
+      var reader = new FileReader();
+      reader.readAsDataURL(element);
+      reader.onload = (_event) => {
+        tempExtra.push({ path: reader.result })
+      }
+    });
+    setLesson({ ...lesson, extra: tempExtra })
+  }
+  const getImage2 = (file: any) => {
+    console.log(file)
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setLesson({ ...lesson, image: reader.result })
+    };
   }
   return (
     <Container>
@@ -80,11 +105,13 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
-
+                onChange={(e) => { getImage2(e.target.files) }}
               />
             </IconContain>
           </InputContain>
-          <Image src="/images/admin/Courses/Demo/Edit.png" width={480} height={274} />
+          <ImageContain>
+            <img src={lesson.image} />
+          </ImageContain>
           <InputContain>
             <Label>Hipervínculo del video</Label>
             <Input
@@ -106,6 +133,8 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}
+                multiple
               />
             </IconContain>
           </InputContain>

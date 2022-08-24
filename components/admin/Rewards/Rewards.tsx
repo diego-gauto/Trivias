@@ -5,6 +5,7 @@ import { AdminContain } from "../SideBar.styled";
 import Prize from "./Prizes/Prize";
 import {
   Banner,
+  ButtonPosition,
   Container,
   ImageContain,
   PriceContain,
@@ -35,6 +36,14 @@ const Rewards = () => {
         <TitleContain>
           <Title>Centro de Recompensas</Title>
         </TitleContain>
+        <ButtonPosition>
+          <button>
+            Seleccionar
+          </button>
+          <input
+            type="file"
+          />
+        </ButtonPosition>
         <Container>
           {place == "points" && <Points setPlace={setPlace} place={place} />}
           {place == "time" && <Time setPlace={setPlace} />}
