@@ -67,9 +67,9 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
       <SeasonContain>
         <TitleContain>
           <Title>
-            Temporada {index + 1}
+            Temporada {index}
             {openSeason != 1 &&
-              <EpisodesNumber>{lessons.length} episodios</EpisodesNumber>}
+              <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
           </Title>
           <ButtonContain>
             {openSeason == 1 &&
@@ -96,15 +96,16 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
               <EpisodeContain>
                 {lessons !== null &&
                   lessons.map((item: any, i: any) => (
-                    <AllLessons
-                      key={i}
+                    <AllLessons key={"adminSeasons" + i}
+                      seasonID={documentID}
                       documentID={item.documentID}
                       index={i}
                       courseID={courseID}
                       lessonTitle={item.title}
-                      //lessonDuration={item.lessonDuration}
-                      lessonDescription={item.about}
-                      seasonID={documentID} />
+                      lessonDuration={item.lessonDuration}
+                      about={item.about}
+                      path={item.image}
+                    />
                   ))
                 }
               </EpisodeContain>

@@ -7,12 +7,15 @@ export const CourseContain = styled.div`
   width: 100%;
   position: relative;
 `;
-export const ImageBack = styled(Image)`
+export const ImageBack = styled.img`
+  width: 100%;
+  height: 400px;
 `;
 export const Imagecontain = styled.div`
   position: relative;
   display: flex;
-  height: 400px;
+  width: 100%;
+  height: auto;
   z-index: -1;
 `;
 export const BackgroundOverlay = styled.div`  

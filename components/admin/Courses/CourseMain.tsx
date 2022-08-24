@@ -51,7 +51,8 @@ const CourseMain = () => {
               courses.map((e: any, i: any) => (
 
 
-                <AllCourses courseTittle={e.courseTittle}
+                <AllCourses key={"courses" + i}
+                  courseTittle={e.courseTittle}
                   courseAbout={e.courseAbout}
                   courseCategory={e.courseCategory}
                   courseDuration={e.courseDuration}

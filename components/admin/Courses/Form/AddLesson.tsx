@@ -1,15 +1,14 @@
 
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
 
-import Image from "next/image";
+import file from "react-player/file";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
-import * as yup from "yup";
-
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import { db } from "../../../../firebase/firebaseConfig";
+import { addLesson } from "../../../../store/actions/AdminActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import {
@@ -21,6 +20,7 @@ import {
   EditContain,
   Folder,
   HwTitle,
+  ImageContain,
   Input,
   InputBig,
   InputContain,
@@ -33,75 +33,55 @@ import {
   TransparentButton,
 } from "./Edit.styled";
 
-const formSchema = yup.object().shape({
-  about: yup
-    .string()
-    .required("Campo requerido"),
-  title: yup
-    .string()
-    .required("Campo requerido"),
-});
-
-type NewLessonAdded = {
-  about: string,
-  title: string,
-}
-
-type NewIDs = {
-  routerState: any,
-}
-
-const AddLesson = ({ routerState }: NewIDs) => {
-  routerState = useRouter().query
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<NewLessonAdded>({
-    resolver: yupResolver(formSchema)
-  });
-
-  var courseID: any = ""
-  try {
-    var str: any = ""
-    var arr: any = []
-    str = window.location.search;
-    arr = str.split("?documentID=")
-    str = arr[1]
-    courseID = str
-
-  } catch (error) {
-    courseID = "none"
+const AddLesson = () => {
+  const router = useRouter();
+  const { courseId, seasonId } = router.query;
+  const [lesson, setLesson] = useState<any>({
+    title: '',
+    banner: '',
+    link: '',
+    image: "",
+    extra: [{}],
+    points: 0,
+    about: '',
+    homeWork: '',
+    homeWorkAbout: '',
+  })
+  const newLesson = () => {
+    addLesson(lesson, courseId, seasonId).then(() => {
+      alert(
+        "Lección Creada"
+      )
+      router.push({
+        pathname: `/admin/Edit`,
+        query: { documentID: courseId }
+      });
+    })
   }
-  const onSubmit: SubmitHandler<NewLessonAdded> = formData => {
-    let signUpData = {
-      data: {
-        about: formData.about,
-        title: formData.title,
-        banner: "",
-        extra: [
-          {
-            path: "",
-            reference: ""
-          },
-          {
-            path: "",
-            reference: ""
-          }
-        ],
-        homeWork: "",
-        homeWorkAbout: "",
-        link: "",
-        points: "",
-      },
+  const getImage = (file: any) => {
+    let tempExtra: any = [];
+
+    file = Object.values(file);
+    console.log(file)
+    file.forEach((element: any) => {
+      console.log(element.name)
+      var reader = new FileReader();
+      reader.readAsDataURL(element);
+      reader.onload = (_event) => {
+        tempExtra.push({ path: reader.result })
+      }
+    });
+    setLesson({ ...lesson, extra: tempExtra })
+  }
+  const getImage2 = (file: any) => {
+    console.log(file)
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setLesson({ ...lesson, image: reader.result })
     };
 
-    createNewLesson(signUpData).then(() => {
-      window.location.href = "/admin/Courses";
-      console.log("done!")
 
-    });
   }
 
 
@@ -109,60 +89,84 @@ const AddLesson = ({ routerState }: NewIDs) => {
     const {
       data,
     } = signUpData;
-    return await db.collection("courses").doc(routerState.newCourseID).collection("seasons").doc(routerState.newSeasonID).collection("lessons").add(data);
+    return await db.collection("courses").doc().collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").add(data);
   }
 
   return (
     <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TitleContain>
-          <Title>Nueva Lección</Title>
-        </TitleContain>
-        <EditContain>
-          <Contain1>
+      <TitleContain>
+        <Title>Nueva Lección</Title>
+      </TitleContain>
+      <EditContain>
+        <Contain1>
 
-            <InputContain>
-              <Label>Título de la Lección</Label>
-              <Input placeholder="Epidosio 1: Lorem Ipsum"
-                className={`form-control ${errors.title ? 'is-invalid' : ''}`}
-                {...register("title")} />
-            </InputContain>
-            <InputContain>
-              <Label>Portada de la Lección</Label>
-              <IconContain>
-                <Folder />
-                <Input2
-                  type="file"
-                  placeholder="Seleccionar archivo"
-                />
-              </IconContain>
-            </InputContain>
-            <Image src="/images/admin/Courses/Demo/Edit.png" width={480} height={274} />
-            <InputContain>
-              <Label>Hipervínculo del video</Label>
-              <Input placeholder="https://www.youtube.com/watch?v=RfR2Eh3fGxA&t=218s" />
-            </InputContain>
-          </Contain1>
+          <InputContain>
+            <Label>Título de la Lección</Label>
+            <Input
+              placeholder="Epidosio 1: Lorem Ipsum"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, title: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
+            <Label>Portada de la Lección</Label>
+            <IconContain>
+              <Folder />
+              <Input2
+                type="file"
+                placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage2(e.target.files) }}
+              />
+            </IconContain>
+          </InputContain>
+          <ImageContain>
+            <img src={lesson.image} />
+          </ImageContain>
+          <InputContain>
+            <Label>Hipervínculo del video</Label>
+            <Input
+              placeholder="https://www.youtube.com/watch?v=RfR2Eh3fGxA&t=218s"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, link: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+        </Contain1>
 
-          <Contain2>
-            <InputContain>
-              <Label>Material Adicional</Label>
-              <IconContain>
-                <Folder />
-                <Input2
-                  type="file"
-                  placeholder="Seleccionar archivo"
-                />
-              </IconContain>
-            </InputContain>
-            <InputContain>
-              <Label>Puntos Acreditados</Label>
-              <Input placeholder="200" />
-            </InputContain>
-            <InputContain>
-              <Label>Material Adicional</Label>
-              <InputBig
-                placeholder="Lorem ipsum dolor sit amet, consectetur 
+        <Contain2>
+          <InputContain>
+            <Label>Material Adicional</Label>
+            <IconContain>
+              <Folder />
+              <Input2
+                type="file"
+                placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}
+                multiple
+              />
+            </IconContain>
+          </InputContain>
+          <InputContain>
+            <Label>Puntos Acreditados</Label>
+            <Input
+              type="number"
+              placeholder="200"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, points: parseInt(e.target.value)
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
+            <Label>Descripción de Lección</Label>
+            <InputBig
+              placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
             malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
@@ -171,23 +175,34 @@ const AddLesson = ({ routerState }: NewIDs) => {
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
             quisque."
-                className={`form-control ${errors.about ? 'is-invalid' : ''}`}
-                {...register("about")} />
-            </InputContain>
-          </Contain2>
-          <Contain3>
-            <HwTitle>Tareas</HwTitle>
-            <SlideContain>
-              <TitleSlide>Tarea</TitleSlide>
-            </SlideContain>
-            <InputContain>
-              <Label>Título de la Tarea</Label>
-              <Input placeholder="Tarea 23: Intro a uñas francesas" />
-            </InputContain>
-            <InputContain>
-              <Label>Descripción de la Tarea</Label>
-              <InputBig
-                placeholder="Lorem ipsum dolor sit amet, consectetur 
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, about: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+        </Contain2>
+        <Contain3>
+          <HwTitle>Tareas</HwTitle>
+          <SlideContain>
+            <TitleSlide>Tarea</TitleSlide>
+          </SlideContain>
+          <InputContain>
+            <Label>Título de la Tarea</Label>
+            <Input
+              placeholder="Tarea 23: Intro a uñas francesas"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, homeWork: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
+            <Label>Descripción de la Tarea</Label>
+            <InputBig
+              placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
             malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
@@ -195,15 +210,22 @@ const AddLesson = ({ routerState }: NewIDs) => {
             malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-            quisque." />
-            </InputContain>
-          </Contain3>
-        </EditContain>
-        <ButtonContain>
-          <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
-          <PurpleButton type='submit'>Guardar</PurpleButton>
-        </ButtonContain>
-      </form>
+            quisque."
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, homeWorkAbout: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+        </Contain3>
+      </EditContain>
+      <ButtonContain>
+        <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
+        <PurpleButton
+          onClick={newLesson}
+        >Guardar</PurpleButton>
+      </ButtonContain>
     </Container>
   )
 }

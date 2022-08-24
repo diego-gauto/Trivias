@@ -5,7 +5,6 @@ import Link from "next/link";
 import { MainContainer } from "../AllCourses.styled";
 import Delete from "./Delete/Delete";
 import {
-  Demo1,
   EditEpisode,
   Episode,
   EpisodesContain,
@@ -13,6 +12,7 @@ import {
   EpisodeInfo,
   EpisodeTime,
   EpisodeTitle,
+  ImageContain,
 } from "./Lessons.styled";
 
 interface IAllSeasons {
@@ -22,10 +22,11 @@ interface IAllSeasons {
   seasonID: string,
   lessonTitle: string,
   lessonDuration?: number,
-  lessonDescription: string,
+  about: string,
+  path: string,
 }
 
-export const AllLessons = ({ documentID, index, courseID, lessonTitle, lessonDescription, seasonID }: IAllSeasons) => {
+export const AllLessons = ({ documentID, index, courseID, lessonTitle, about, seasonID, path }: IAllSeasons) => {
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
@@ -34,17 +35,18 @@ export const AllLessons = ({ documentID, index, courseID, lessonTitle, lessonDes
     <><MainContainer>
       <EpisodesContain>
         <Episode>
-          <Demo1 />
+          <ImageContain>
+            <img src={path} />
+          </ImageContain>
           <EpisodeContain>
             <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
-            <EpisodeTime> 30 minutos</EpisodeTime>
-            <EpisodeInfo>{lessonDescription}</EpisodeInfo>
+            <EpisodeTime>30 minutos</EpisodeTime>
+            <EpisodeInfo>{about}</EpisodeInfo>
             <Link href={{
               pathname: "/admin/EditLesson",
               query: {
                 lessonID: documentID,
                 courseID: courseID,
-                seasonID: seasonID,
               }
             }}
             >
