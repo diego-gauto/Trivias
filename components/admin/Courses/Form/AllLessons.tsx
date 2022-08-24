@@ -47,6 +47,7 @@ export const AllLessons = ({ documentID, index, courseID, lessonTitle, about, se
               query: {
                 lessonID: documentID,
                 courseID: courseID,
+                seasonID: seasonID,
               }
             }}
             >

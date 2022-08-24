@@ -7,7 +7,6 @@ import file from "react-player/file";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { db } from "../../../../firebase/firebaseConfig";
 import { addLesson } from "../../../../store/actions/AdminActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
@@ -35,7 +34,7 @@ import {
 
 const AddLesson = () => {
   const router = useRouter();
-  const { courseId, seasonId } = router.query;
+  const { courseID, seasonID } = router.query;
   const [lesson, setLesson] = useState<any>({
     title: '',
     banner: '',
@@ -48,13 +47,13 @@ const AddLesson = () => {
     homeWorkAbout: '',
   })
   const newLesson = () => {
-    addLesson(lesson, courseId, seasonId).then(() => {
+    addLesson(lesson, courseID, seasonID).then(() => {
       alert(
         "Lección Creada"
       )
       router.push({
         pathname: `/admin/Edit`,
-        query: { documentID: courseId }
+        query: { documentID: courseID }
       });
     })
   }
@@ -80,16 +79,6 @@ const AddLesson = () => {
     reader.onload = (_event) => {
       setLesson({ ...lesson, image: reader.result })
     };
-
-
-  }
-
-
-  const createNewLesson = async (signUpData: { data: any; }) => {
-    const {
-      data,
-    } = signUpData;
-    return await db.collection("courses").doc().collection("seasons").doc("17Kk33mvZrxPiaT6fiRL").collection("lessons").add(data);
   }
 
   return (

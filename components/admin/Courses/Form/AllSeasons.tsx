@@ -77,8 +77,8 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
                 <Link href={{
                   pathname: "/admin/NewLesson",
                   query: {
-                    newCourseID: courseID,
-                    newSeasonID: documentID,
+                    courseID: courseID,
+                    seasonID: documentID,
                   }
                 }}>
                   <Button>Añadir Lección <Add /></Button>
