@@ -109,6 +109,7 @@ export const AllSeasons = (props: IAllSeasons) => {
                 {lessons !== null &&
                   lessons.map((e: any, i: any) => (
                     <AllLeassons key={"adminSeasons" + i}
+                      seasonID={documentID}
                       documentID={e.documentID}
                       index={i}
                       courseID={courseID}

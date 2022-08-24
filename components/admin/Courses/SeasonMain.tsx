@@ -105,7 +105,6 @@ const SeasonsMain = () => {
 
   useEffect(() => {
     if (courseData !== null) {
-
       setIsLoading(false)
     }
   }, [courseData])
@@ -119,16 +118,15 @@ const SeasonsMain = () => {
           <CourseContain>
             <Imagecontain>
               <ImageBack
-                src="/images/admin/Courses/DemoBack.png"
-                layout="fill"
-                priority />
+                src={courseData[0].coursePath}
+              />
               <BackgroundOverlay />
             </Imagecontain>
 
             <Container>
               <NewText>Nuevo</NewText>
-              <Title>Curso de Uñas Francesas</Title>
-              <Subtitle>Descubre un nuevo método para tus uñas este San Valentín</Subtitle>
+              <Title>{courseData[0].courseTittle}</Title>
+              <Subtitle>{courseData[0].courseSubtittle}</Subtitle>
 
             </Container>
             {/* Form de cursos */}
