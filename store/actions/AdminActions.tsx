@@ -1,16 +1,10 @@
-import {
-  getAuth, createUserWithEmailAndPassword,
-  signInWithPopup,
-  signInWithEmailAndPassword
-} from "firebase/auth";
-import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot
-} from "firebase/firestore";
-import { db } from '../../firebase/firebaseConfig';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import firebase from "firebase/compat/app";
-import { useAuth } from "../../hooks/useAuth";
+import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+
+import { db } from "../../firebase/firebaseConfig";
 
 export const createCourse = async (signUpData: { data: any; }) => {
   const {
@@ -231,7 +225,7 @@ export const accessWithAuthProvider = (provider: any) => {
 
 // Esto sera para admin courses
 
-export const addLesson = async (lesson: any, courseId: any, seasonId: any) => {
+export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
   if (lesson.extra.length > 0) {
     lesson.extra.forEach(async (element: any, index: any) => {
       element.reference = `${uuidv4()}`
@@ -242,7 +236,7 @@ export const addLesson = async (lesson: any, courseId: any, seasonId: any) => {
         lesson.reference2 = `${lesson.title}-${uuidv4()}`
         lesson.image = await uploadImage(lesson.image, lesson.reference2);
         const docRef = await addDoc(
-          collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
+          collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
           {
             ...lesson
           }
@@ -252,13 +246,19 @@ export const addLesson = async (lesson: any, courseId: any, seasonId: any) => {
 
   } else {
     const docRef = await addDoc(
-      collection(db, "courses", courseId, "seasons", seasonId, "lessons"),
+      collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
       {
         ...lesson
       }
     );
   }
+  const docRef = await addDoc(
+    collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
+    {
+      ...lesson
+    }
+  );
   console.log(lesson)
 
-  return 'exito'
+  return docRef;
 }
