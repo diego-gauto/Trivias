@@ -614,7 +614,7 @@ const Purchase = () => {
                       onApprove={(data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
-                        finalDate = today + 31556952;
+                        finalDate = today + 2629800;
                         updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title }, userData.id).then(() => {
                           setConfirmation(false);
                           setPay(true);
