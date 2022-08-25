@@ -252,13 +252,6 @@ export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
       }
     );
   }
-  const docRef = await addDoc(
-    collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
-    {
-      ...lesson
-    }
-  );
-  console.log(lesson)
 
-  return docRef;
+  return ""
 }

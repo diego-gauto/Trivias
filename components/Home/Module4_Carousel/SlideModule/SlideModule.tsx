@@ -1,9 +1,16 @@
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
+
+
+import { Col, Container, Row } from "react-bootstrap";
+
 import { ISlideModule } from "./ISlideModule";
-import React, { Component, useEffect } from "react";
-
-import { NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule.styled";
-
+import {
+  NewTag,
+  SlideImg,
+  Text01,
+  Text02,
+  TextNew,
+  TextSectionWrapper,
+} from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
 

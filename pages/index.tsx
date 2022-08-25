@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+
 import { Container } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
+
 import { ImageContainMod1, VideoContainMod3 } from "../components/Catalogue/Module1/Module1.styled";
 import { Module1 } from "../components/Home/Module1/Module1";
 import { Module2 } from "../components/Home/Module2/Module2";
@@ -9,7 +11,7 @@ import { Module3 } from "../components/Home/Module3/Module3";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
 import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
-import { LoaderContain, LoaderImage, Background } from "../screens/Login.styled";
+import { Background, LoaderContain, LoaderImage } from "../screens/Login.styled";
 import { getLandingData } from "../store/actions/LandingActions";
 
 const Homepage = () => {

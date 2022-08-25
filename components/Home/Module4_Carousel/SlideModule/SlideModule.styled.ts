@@ -1,5 +1,6 @@
-import { Button } from "react-bootstrap";
-import styled from 'styled-components';
+
+
+import styled from "styled-components";
 
 export const SlideImg = styled.div ` 
 width: 100%;
@@ -9,7 +10,17 @@ background-size: 95% auto;
 padding: 0;
 @media only screen and (max-width: 1024px) {
   margin-bottom: 15px;
-  height: 15vh;
+  height: 60vh;
+}
+@media only screen and (max-width: 660px) {
+  margin-bottom: 15px;
+  margin-top: 0px;
+  height: 22vh;
+}
+@media only screen and (max-width: 500px) {
+  margin-bottom: 15px;
+  margin-top: 0px;
+  height: 16vh;
 }
 `;
 
