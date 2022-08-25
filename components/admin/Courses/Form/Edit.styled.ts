@@ -48,6 +48,7 @@ export const Contain1 = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 33.33%;
+  align-items: center;
 `;
 export const ImageContain = styled.div`
   display: flex;

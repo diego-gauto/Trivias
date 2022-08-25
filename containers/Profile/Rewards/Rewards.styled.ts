@@ -31,14 +31,13 @@ export const MainContain = styled.div`
     padding-inline: 10px;
   }
 `;
-export const Banner = styled(Image)`
-  position: absolute;
-  filter: brightness(50%);
-  `;
-  export const ImageContain = styled.div`
+
+export const ImageContain = styled.div`
+  display: flex;
   width: 100%;
   height: 300px;
   position: relative;
+  filter: brightness(50%);
   @media(max-width: 450px) {
     height: 280px;
   }
@@ -48,8 +47,11 @@ export const Banner = styled(Image)`
   @media(max-width: 380px) {
     height: 240px;
   }
+img{
+  width: 100%;
+  height: auto;
+}
 `;
-
 export const BannerContain = styled.div`
   display: flex;
   position: relative;

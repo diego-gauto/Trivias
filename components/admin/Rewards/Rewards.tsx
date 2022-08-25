@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getBanner, updateBanner } from "../../../store/actions/RewardActions";
 
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import Prize from "./Prizes/Prize";
 import {
-  Banner,
   ButtonPosition,
   Container,
   ImageContain,
@@ -21,28 +21,64 @@ import Time from "./Rewards/Time";
 const Rewards = () => {
 
   const [place, setPlace] = useState("points");
+  const [banner, setBanner] = useState<any>({
+    path: "",
+  })
+  const [image, setImage] = useState<any>()
 
+  const getRewardBanner = () => {
+    getBanner().then((res) => {
+      setImage(res?.path)
+      setBanner(res);
+      console.log(res);
+    })
+  }
+
+  const update = () => {
+    updateBanner(banner);
+  }
+  const getImage = (file: any) => {
+    console.log(file)
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setImage(reader.result)
+      setBanner({ ...banner, format: reader.result })
+    };
+  }
+  console.log(banner.path)
+
+  useEffect(() => {
+    console.log('hola')
+    getRewardBanner();
+  }, [])
   return (
     <AdminContain>
       <SideBar />
       <RewardContain>
         <ImageContain>
-          <Banner
-            src="/images/Rewards/banner.png"
-            layout="fill"
-            priority
-          />
+          <img src={image} />
         </ImageContain>
         <TitleContain>
-          <Title>Centro de Recompensas</Title>
+          <Title >Centro de Recompensas</Title>
         </TitleContain>
-        <ButtonPosition>
-          <button>
-            Seleccionar
-          </button>
-          <input
-            type="file"
-          />
+        <ButtonPosition >
+          <label htmlFor="input">
+            Seleccionar Imagen
+            <input
+              type="file"
+              id="input"
+              onChange={(e) => { getImage(e.target.files) }}
+            />
+          </label>
+          {
+            banner.path != ""
+              ?
+              <button onClick={() => { update() }}>
+                Guardar
+              </button>
+              : <></>
+          }
         </ButtonPosition>
         <Container>
           {place == "points" && <Points setPlace={setPlace} place={place} />}

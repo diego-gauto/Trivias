@@ -6,7 +6,7 @@ export const Container = styled.div`
   background-color: #26264a;
   gap: 20px;
   padding: 20px;
-  width: 250px;
+  min-width: 200px;
   min-height: 100vh;
 `;
 export const Text = styled.p`
@@ -18,7 +18,7 @@ export const Text = styled.p`
 `;
 export const AdminContain = styled.div`
   display: flex;
-  width: 100%;
+  width:100%;
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);

@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -156,4 +157,36 @@ export const getUserRewards = async (userId: any) => {
     data.push({ ...doc.data(), id: doc.id })
   });
   return data
+}
+
+export const getBanner = async () => {
+  let data: any = []
+  const docRef = doc(db, "rewardBanner", "banner");
+  const docSnap = await getDoc(docRef);
+
+  return data = docSnap.data()
+}
+
+const uploadBanner = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `rewards/banner/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateBanner = async (banner: any) => {
+  let tempBanner: any = JSON.parse(JSON.stringify(banner))
+  tempBanner.path = await uploadBanner(tempBanner.format, tempBanner.reference);
+  delete tempBanner.format;
+  const docRef = doc(db, 'rewardBanner', 'banner');
+  delete tempBanner.id;
+  await updateDoc(docRef, {
+    ...tempBanner
+  })
+
+  return 'exito'
 }

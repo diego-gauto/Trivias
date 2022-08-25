@@ -9,7 +9,6 @@ import TimeRewards from "./RewardComponent/TimeRewards";
 import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
 
 import {
-  Banner,
   BannerContain,
   BannerTitle,
   CurrentLevel,
@@ -27,7 +26,7 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
-import { addUserReward, getLevel } from "../../../store/actions/RewardActions";
+import { addUserReward, getBanner, getLevel } from "../../../store/actions/RewardActions";
 
 const Rewards = () => {
 
@@ -44,6 +43,7 @@ const Rewards = () => {
 
   const [data, setData] = useState<number>(0)
   const [dataResp, setDataResp] = useState<number>(0)
+  const [banner, setBanner] = useState<any>({})
 
   try {
     var userDataAuth = useAuth();
@@ -73,6 +73,13 @@ const Rewards = () => {
       return false
     }
   }
+
+  const getRewardBanner = () => {
+    getBanner().then((res) => {
+      setBanner(res);
+    })
+  }
+
   const getSize = async () => {
     db.collection('levelPoints').get().then(snap => {
       setSize(snap.size) // will return the collection size
@@ -88,6 +95,7 @@ const Rewards = () => {
 
   useEffect(() => {
     fetchDB_data()
+    getRewardBanner()
   }, [])
 
   useEffect(() => {
@@ -127,10 +135,8 @@ const Rewards = () => {
 
       <BannerContain>
         <ImageContain>
-          <Banner
-            src="/images/Rewards/banner.png"
-            layout="fill"
-            priority
+          <img
+            src={banner.path}
           />
         </ImageContain>
         <InsideContain>
