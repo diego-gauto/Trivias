@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
@@ -30,6 +31,7 @@ import {
 } from "./Edit.styled";
 
 const Edit = () => {
+  const routerState = useRouter().query
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
@@ -121,7 +123,12 @@ const Edit = () => {
         </Link>
         <PurpleButton>Guardar</PurpleButton>
       </ButtonContain>
-      <Delete setShow={setShow} show={show} deleteMessage={deleteMessage} seasonDocId={""} courseID={""} />
+      <Delete setShow={setShow}
+        show={show}
+        deleteMessage={deleteMessage}
+        courseID={routerState.courseID}
+        lessonID={routerState.lessonID}
+        seasonID={routerState.seasonID} />
     </Container>
   )
 }

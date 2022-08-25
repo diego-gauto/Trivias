@@ -1,9 +1,13 @@
 
 
-import Image from "next/image";
+import { useState } from "react";
+
+import file from "react-player/file";
+
 import Link from "next/link";
-import { addLesson } from "../../../../store/actions/AdminActions";
 import { useRouter } from "next/router";
+
+import { addLesson } from "../../../../store/actions/AdminActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import {
@@ -27,13 +31,10 @@ import {
   TitleSlide,
   TransparentButton,
 } from "./Edit.styled";
-import { useState } from "react";
-import file from "react-player/file";
-
 
 const AddLesson = () => {
-  const router = useRouter()
-  const { courseId, seasonId } = router.query;
+  const router = useRouter();
+  const { courseID, seasonID } = router.query;
   const [lesson, setLesson] = useState<any>({
     title: '',
     banner: '',
@@ -46,13 +47,13 @@ const AddLesson = () => {
     homeWorkAbout: '',
   })
   const newLesson = () => {
-    addLesson(lesson, courseId, seasonId).then(() => {
+    addLesson(lesson, courseID, seasonID).then(() => {
       alert(
         "Lección Creada"
       )
       router.push({
         pathname: `/admin/Edit`,
-        query: { documentID: courseId }
+        query: { documentID: courseID }
       });
     })
   }
@@ -79,6 +80,7 @@ const AddLesson = () => {
       setLesson({ ...lesson, image: reader.result })
     };
   }
+
   return (
     <Container>
       <TitleContain>

@@ -122,6 +122,10 @@ export const EpisodeInfo = styled.p`
   font-family:'Raleway',sans-serif;
   text-align: justify;
   margin: 0;
+  white-space: nowrap;
+  width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const EditEpisode = styled.a`
   font-size: 16px;

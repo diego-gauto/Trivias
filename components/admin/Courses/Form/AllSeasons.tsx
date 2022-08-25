@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { db } from "../../../../firebase/firebaseConfig";
 import { MainContainer } from "../AllCourses.styled";
-import { AllLeassons } from "./AllLessons";
+import { AllLessons } from "./AllLessons";
 import Delete from "./Delete/Delete";
 import { TrashIcon } from "./Edit.styled";
 import {
@@ -26,25 +26,28 @@ import {
 interface IAllSeasons {
   documentID: string,
   index: number,
-  courseID: string
+  courseID: string,
+  seasonID: string,
+}
+interface AllLessonsProps {
+  lessonTitle: string,
+  lessonDescription: string,
+  lessonDuration?: number,
+  documentID?: string,
 }
 
-export const AllSeasons = (props: IAllSeasons) => {
-  const { documentID } = props;
-  const { index } = props;
-  const { courseID } = props;
-
+export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeasons) => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(0);
-  const [lessons, setLeassons] = useState<any>(null);
+  const [lessons, setLeassons] = useState<Array<AllLessonsProps>>([]);
 
   //GETS ALL LESSONS DATA
   const getSeasonID = async () => {
     try {
       const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
       return onSnapshot(query, (response) => {
-        var data: DocumentData = [];
+        var data: DocumentData | any = [];
         response.forEach((e) => {
           var obj: any = {}
           obj = e.data()
@@ -58,27 +61,6 @@ export const AllSeasons = (props: IAllSeasons) => {
       return false
     }
   }
-  // const fetchDBSeasonData = async () => {
-  //   try {
-  //     const queryLessons = db.collection("courses").doc(courseID).collection("seasons");
-  //     return onSnapshot(queryLessons, (response) => {
-  //       var data: DocumentData = [];
-  //       response.forEach((e) => {
-  //         var obj: any = {}
-  //         obj = e.data()
-  //         obj["documentID"] = e.id
-  //         data.push(obj)
-  //       });
-  //       return data
-  //     })
-  //   } catch (error) {
-  //     return false
-  //   }
-  // }
-  //useEffect(() => {
-  //fetchDBSeasonData();
-  //getSeasonID();
-  //}, [courseID])
 
   return (
     <><MainContainer>
@@ -92,7 +74,13 @@ export const AllSeasons = (props: IAllSeasons) => {
           <ButtonContain>
             {openSeason == 1 &&
               <>
-                <Link href={{ pathname: '/admin/NewLesson', query: { courseId: courseID, seasonId: documentID } }}>
+                <Link href={{
+                  pathname: "/admin/NewLesson",
+                  query: {
+                    courseID: courseID,
+                    seasonID: documentID,
+                  }
+                }}>
                   <Button>Añadir Lección <Add /></Button>
                 </Link>
                 <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
@@ -107,16 +95,16 @@ export const AllSeasons = (props: IAllSeasons) => {
             <Episode>
               <EpisodeContain>
                 {lessons !== null &&
-                  lessons.map((e: any, i: any) => (
-                    <AllLeassons key={"adminSeasons" + i}
+                  lessons.map((item: any, i: any) => (
+                    <AllLessons key={"adminSeasons" + i}
                       seasonID={documentID}
-                      documentID={e.documentID}
+                      documentID={item.documentID}
                       index={i}
                       courseID={courseID}
-                      lessonTitle={e.title}
-                      lessonDuration={e.lessonDuration}
-                      about={e.about}
-                      path={e.image}
+                      lessonTitle={item.title}
+                      lessonDuration={item.lessonDuration}
+                      about={item.about}
+                      path={item.image}
                     />
                   ))
                 }
@@ -126,7 +114,7 @@ export const AllSeasons = (props: IAllSeasons) => {
         <Delete setShow={setShow}
           show={show}
           deleteMessage={deleteMessage}
-          seasonDocId={documentID}
+          seasonID={documentID}
           courseID={courseID}
           setOpenSeason={setOpenSeason} />
       </SeasonContain>

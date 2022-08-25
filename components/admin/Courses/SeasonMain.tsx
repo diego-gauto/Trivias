@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, doc, onSnapshot, DocumentData, orderBy } from "firebase/firestore";
+import { collection, doc, onSnapshot, orderBy, DocumentData } from "firebase/firestore";
 import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
@@ -155,7 +155,10 @@ const SeasonsMain = () => {
                   {
                     seasons.map((e: any, i: any) => (
                       <AllSeasons key={"adminSeasons" + i}
-                        documentID={e.documentID} index={e.season} courseID={courseID} />
+                        documentID={e.documentID}
+                        index={e.season}
+                        courseID={courseID}
+                        seasonID={seasons} />
                     ))
                   }
                 </>
