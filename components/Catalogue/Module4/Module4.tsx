@@ -22,12 +22,11 @@ import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { getPaidCourses } from "../../../store/actions/UserActions";
-const Module4 = () => {
+const Module4 = ({ user }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
-  const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [userCourses, setUserCourses] = useState<any>([]);
 
@@ -35,6 +34,24 @@ const Module4 = () => {
     setShow(true);
   }
 
+  useEffect(() => {
+    if (user) {
+      let date = new Date().getTime() / 1000;
+      getPaidCourses(user.id).then((paid) => {
+        setUserCourses(paid);
+        getCourses().then((response) => {
+          response.forEach((element: any) => {
+            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+              element.paid = true;
+            } else {
+              element.paid = false;
+            }
+          });
+          setCourses(response);
+        })
+      })
+    }
+  }, [user])
 
   const goTo = (data: any) => {
     if (data.courseType == 'Mensual' && userData.membership.level == 1 || data.paid) {
@@ -56,54 +73,6 @@ const Module4 = () => {
     }
     setCourse(data)
   }
-
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-      }
-    }, [])
-
-  } catch (error) {
-    console.log(error)
-    setLoggedIn(false)
-  }
-
-  const fetchDB_data = async () => {
-    try {
-      let date = new Date().getTime() / 1000;
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response: any) => {
-        response.forEach((e: any) => {
-          setUserData({ ...e.data(), id: e.id });
-          getPaidCourses(e.id).then((paid) => {
-            setUserCourses(paid);
-            getCourses().then((response) => {
-              response.forEach((element: any) => {
-                if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-                  element.paid = true;
-                } else {
-                  element.paid = false;
-                }
-              });
-              setCourses(response);
-            })
-          })
-        });
-      })
-    } catch (error) {
-      return false
-    }
-  }
-
-
-  useEffect(() => {
-    fetchDB_data()
-
-  }, [loggedIn])
 
   return (
     <Maincontainer>

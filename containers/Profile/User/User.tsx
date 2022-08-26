@@ -42,7 +42,6 @@ const User = () => {
       } else {
         setLoggedIn(false)
       }
-      console.log(new Date().getTime() / 1000);
     }, [])
 
   } catch (error) {
