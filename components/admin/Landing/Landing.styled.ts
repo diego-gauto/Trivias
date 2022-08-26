@@ -53,7 +53,6 @@ export const EditInput2 = styled.textarea`
 font-size: 14px;
 width: 330px;
 padding-inline: 20px;
-text-align: justify;
 overflow: hidden;
 resize: none;
 font-family:'Montserrat',sans-serif;
@@ -182,19 +181,9 @@ export const OptionBtn = styled.div`
     cursor: pointer;
   }
 `;
-export const OptionBtnOn = styled.div`
-  display: flex;
-  width: 380px;
-  justify-content: center;
-  height: 112px;
+export const OptionBtnOn = styled(OptionBtn)`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
   color: white;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  align-items: center;
-  text-align: center;
-  font-family: 'Nunito', sans-serif;
-  font-size: 24px;
   &:hover {
     cursor: pointer;
   }

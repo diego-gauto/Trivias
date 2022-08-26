@@ -17,6 +17,7 @@ import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
 import { IModule6 } from "./IModule6";
 import { SlideModule } from "./SlideModule/SlideModule";
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 
 SwiperCore.use([Autoplay]);
 
@@ -60,6 +61,21 @@ export const Module6 = (props: IModule6) => {
     }
   };
 
+  const sliderData = slideDataArr.map((element) => {
+    return (
+      <SwiperSlide key={element.title + "_ID"}>
+        <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">
+          <SlideModule
+            isNew={element.isNew}
+            title={element.title}
+            subtitle={element.subtitle}
+            imgURL={downloadFileWithStoragePath(element.imgURL)}
+          />
+        </SliderItemLink>
+      </SwiperSlide>
+    )
+  })
+
   return (
     <Container
       fluid
@@ -71,18 +87,7 @@ export const Module6 = (props: IModule6) => {
         <SliderContainer>
           <SliderSectionTitle>Visita nuestra tienda</SliderSectionTitle>
           <Swiper {...settings} onInit={onInit}>
-            {slideDataArr.map((element) => (
-              <SwiperSlide key={element.title + "_ID"}>
-                <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">
-                  <SlideModule
-                    isNew={element.isNew}
-                    title={element.title}
-                    subtitle={element.subtitle}
-                    imgURL={element.imgURL}
-                  />
-                </SliderItemLink>
-              </SwiperSlide>
-            ))}
+            {sliderData}
           </Swiper>
         </SliderContainer>
         <SliderContainerChild>
