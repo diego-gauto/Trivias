@@ -108,7 +108,6 @@ const SeasonsMain = () => {
       setIsLoading(false)
     }
   }, [courseData])
-
   return (
     <>
       {!isLoading ? (
@@ -133,9 +132,12 @@ const SeasonsMain = () => {
             {
               courseData !== null
                 ?
-                <CourseForm_Update courseTittle={courseData[0].courseTittle}
+                <CourseForm_Update
+                  reference={courseData[0].reference}
+                  courseTittle={courseData[0].courseTittle}
                   courseAbout={courseData[0].courseAbout}
                   courseCategory={courseData[0].courseCategory}
+                  coursePath={courseData[0].coursePath}
                   courseDuration={courseData[0].courseDuration}
                   coursePrice={courseData[0].coursePrice}
                   courseProfessor={courseData[0].courseProfessor}

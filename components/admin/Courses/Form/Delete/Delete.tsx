@@ -30,7 +30,6 @@ export interface DeletePopUp {
 }
 
 const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
-  console.log(deleteMessage)
   const handleClose = () => setShow(false);
 
   const deleteSeason = () => {
