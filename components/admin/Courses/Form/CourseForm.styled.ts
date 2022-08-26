@@ -3,8 +3,12 @@ import styled from "styled-components";
 export const CourseFormContain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   padding: 30px;
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 export const ButtonContain = styled.div`
   display: flex;
