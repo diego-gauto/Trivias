@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
@@ -14,6 +14,8 @@ import {
   EpisodeTitle,
   ImageContain,
 } from "./Lessons.styled";
+import { db } from "../../../../firebase/firebaseConfig";
+import { getDocs } from "firebase/firestore";
 
 interface IAllSeasons {
   documentID: string,
@@ -31,6 +33,7 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
 
+
   return (
     <><MainContainer>
       <EpisodesContain>
@@ -45,9 +48,9 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
             <Link href={{
               pathname: "/admin/EditLesson",
               query: {
-                lessonID: documentID,
                 courseID: courseID,
                 seasonID: seasonID,
+                lessonID: documentID,
               }
             }}
             >

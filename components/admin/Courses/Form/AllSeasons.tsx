@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { onSnapshot, DocumentData } from "firebase/firestore";
 import Link from "next/link";
@@ -61,6 +61,10 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
       return false
     }
   }
+  useEffect(() => {
+    getSeasonID()
+  }, [])
+
 
   return (
     <><MainContainer>

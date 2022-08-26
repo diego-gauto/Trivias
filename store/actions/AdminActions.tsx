@@ -1,7 +1,7 @@
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
 import { db } from "../../firebase/firebaseConfig";
@@ -34,10 +34,22 @@ const uploadImage = (image: any, name: any) => {
     });
   });
 }
-export const updateCourse = (signUpData: { data: any; }) => {
+export const updateCourse = async (signUpData: { data: any; }) => {
   const {
     data,
   } = signUpData;
+  let tempCourse: any = JSON.parse(JSON.stringify(data))
+  const storage = getStorage();
+  const desertRef = ref(storage, `rewards/${tempCourse.reference}`);
+  if ("format" in tempCourse) {
+    await deleteObject(desertRef).then(async () => {
+      tempCourse.reference = `${tempCourse.courseTittle}-${uuidv4()}`
+    }).catch((error) => {
+      console.log(error)
+    });
+    tempCourse.coursePath = await uploadImage(tempCourse.format, tempCourse.reference);
+    delete tempCourse.format;
+  }
 
   console.log(signUpData)
 
