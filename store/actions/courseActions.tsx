@@ -21,15 +21,6 @@ export const getcourse = async (id: any) => {
   console.log(docSnap.data());
   return docSnap.data();
 }
-export const getLessons = async (courseId: any, seasonId: any, lessonId: any) => {
-  let data: any = []
-  const docRef = collection(db, 'courses', courseId, "seasons", seasonId, "lessons");
-  const querySnapshot = await getDocs(docRef);
-  querySnapshot.forEach((doc) => {
-    data.push({ ...doc.data(), id: doc.id })
-  });
-  return data
-}
 
 export const getLesson = async (courseId: any, seasonId: any, lessonId: any) => {
   const docRef = doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId);
@@ -94,4 +85,30 @@ export const deleteLessonMaterial = async (material: any) => {
   }).catch((error) => {
     console.log(error)
   });
+}
+
+export const getWholeCourse = async () => {
+  let courses: any = []
+  const docRef = collection(db, 'courses');
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc: any) => {
+    courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0 });
+  })
+  for (let i = 0; i < courses.length; i++) {
+    const docRefSeasons = collection(db, 'courses', courses[i].id, "seasons");
+    const querySnapshotSeasons = await getDocs(docRefSeasons);
+    querySnapshotSeasons.forEach((season: any) => {
+      courses[i].seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+    });
+    for (let c = 0; c < courses[i].seasons.length; c++) {
+      const docRefLesson = collection(db, 'courses', courses[i]?.id, "seasons", courses[i].seasons[c].id, "lessons");
+      const querySnapshotLesson = await getDocs(docRefLesson);
+      querySnapshotLesson.forEach((lesson: any) => {
+        courses[i].totalLessons++;
+        courses[i].seasons[c].lessons.push(lesson.data());
+      });
+    }
+  }
+
+  return courses;
 }

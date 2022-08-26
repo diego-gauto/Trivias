@@ -21,7 +21,7 @@ import {
 } from "./Module3.styled";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import { useRouter } from "next/router";
-import { getCourses } from "../../../store/actions/courseActions";
+import { getCourses, getWholeCourse } from "../../../store/actions/courseActions";
 
 const Module3 = ({ user }: any) => {
 
@@ -30,16 +30,15 @@ const Module3 = ({ user }: any) => {
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userData, setUserData] = useState<any>(null);
-  const [userCourses, setUserCourses] = useState<any>([]);
 
   useEffect(() => {
     if (user) {
       let temp_courses: any = [];
       let date = new Date().getTime() / 1000;
       let temp_final_date: any;
-      getPaidCourses(user.id).then((paid) => {
-        getCourses().then((response) => {
-          response.forEach((element: any) => {
+      getPaidCourses(user.id).then((paid: any) => {
+        getWholeCourse().then((response) => {
+          response.forEach(async (element: any) => {
             if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
               element.paid = true;
               temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
@@ -47,6 +46,8 @@ const Module3 = ({ user }: any) => {
               temp_courses.push(element);
             }
           });
+          console.log(temp_courses);
+
           setCourses(temp_courses);
         })
       })
@@ -92,9 +93,12 @@ const Module3 = ({ user }: any) => {
                   height={210}
                 />
                 <InsideContent>
-                  <InsideText>
+                  {course.totalLessons > 1 && <InsideText>
+                    {course.totalLessons} Lecciones
+                  </InsideText>}
+                  {course.totalLessons == 1 && <InsideText>
                     Unica Lección
-                  </InsideText>
+                  </InsideText>}
                 </InsideContent>
               </ImageContent>
               <VideoInfo>
