@@ -21,6 +21,15 @@ export const getcourse = async (id: any) => {
   console.log(docSnap.data());
   return docSnap.data();
 }
+export const getLessons = async (courseId: any, seasonId: any, lessonId: any) => {
+  let data: any = []
+  const docRef = collection(db, 'courses', courseId, "seasons", seasonId, "lessons");
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
 
 export const getLesson = async (courseId: any, seasonId: any, lessonId: any) => {
   const docRef = doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId);
