@@ -87,7 +87,7 @@ export const deleteLessonMaterial = async (material: any) => {
   });
 }
 
-export const getWholeCourse = async () => {
+export const getWholeCourses = async () => {
   let courses: any = []
   const docRef = collection(db, 'courses');
   const querySnapshot = await getDocs(docRef);
@@ -109,6 +109,23 @@ export const getWholeCourse = async () => {
       });
     }
   }
-
   return courses;
+}
+export const getWholeCourse = async (courseId: any) => {
+  const docRef = doc(db, "courses", courseId);
+  const docSnap: any = await getDoc(docRef);
+  docSnap.data().season = [];
+  const docRefSeasons = collection(db, 'courses', docSnap.id, "seasons");
+  const querySnapshotSeasons = await getDocs(docRefSeasons);
+  querySnapshotSeasons.forEach((season: any) => {
+    docSnap.data().seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+  });
+  for (let c = 0; c < docSnap.data().seasons.length; c++) {
+    const docRefLesson = collection(db, 'courses', docSnap.id, "seasons", docSnap.data().seasons[c].id, "lessons");
+    const querySnapshotLesson = await getDocs(docRefLesson);
+    querySnapshotLesson.forEach((lesson: any) => {
+      docSnap.data().seasons[c].lessons.push(lesson.data());
+    });
+  }
+  return { ...docSnap.data(), id: docSnap.id };
 }

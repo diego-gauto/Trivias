@@ -21,7 +21,7 @@ import {
 } from "./Module3.styled";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import { useRouter } from "next/router";
-import { getCourses, getWholeCourse } from "../../../store/actions/courseActions";
+import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 
 const Module3 = ({ user }: any) => {
 
@@ -37,7 +37,7 @@ const Module3 = ({ user }: any) => {
       let date = new Date().getTime() / 1000;
       let temp_final_date: any;
       getPaidCourses(user.id).then((paid: any) => {
-        getWholeCourse().then((response) => {
+        getWholeCourses().then((response) => {
           response.forEach(async (element: any) => {
             if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
               element.paid = true;
