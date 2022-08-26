@@ -1,3 +1,7 @@
+
+
+
+
 import { Modal } from "react-bootstrap";
 
 import { deleteDoc, doc } from "firebase/firestore";
@@ -15,29 +19,31 @@ import {
   Trash,
 } from "./Delete.styled";
 
-interface DeletePopUp {
+export interface DeletePopUp {
   show: boolean,
   setShow: any,
   deleteMessage: number,
-  seasonDocId: string,
-  courseID: string,
+  seasonID?: any,
+  courseID: any,
   setOpenSeason?: any,
+  lessonID?: any,
 }
 
-const Delete = (props: DeletePopUp) => {
-  const { show } = props;
-  const { setShow } = props;
-  const { deleteMessage } = props;
-  const { seasonDocId } = props;
-  const { courseID } = props;
-  const { setOpenSeason } = props;
-
+const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
+  console.log(deleteMessage)
   const handleClose = () => setShow(false);
 
   const deleteSeason = () => {
     handleClose();
     setOpenSeason(0);
-    return deleteDoc(doc(db, "courses", courseID, "seasons", seasonDocId));
+    return deleteDoc(doc(db, "courses", courseID, "seasons", seasonID));
+  }
+  const deleteLesson = () => {
+    handleClose();
+
+    deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID)).then(() => {
+      window.location.href = `/admin/Edit?documentID=${courseID}`;
+    });
   }
 
   return (
@@ -48,15 +54,15 @@ const Delete = (props: DeletePopUp) => {
           {deleteMessage == 2 && <Title>Eliminar Temporada</Title>}
           <CloseIcon onClick={handleClose} />
         </TitleContain>
-        {deleteMessage == 1 &&
-          <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
-        }
-        {deleteMessage == 2 &&
-          <Content>¿Estas seguro de eliminar la temporada? Esta acción es irreversible.</Content>
-        }
+        <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
         <ButtonContain>
           <TransparentButton onClick={handleClose}>Cancelar</TransparentButton>
-          <PurpleButton onClick={deleteSeason}>Eliminar<Trash /></PurpleButton>
+          {deleteMessage == 1 &&
+            <PurpleButton onClick={deleteLesson}>Eliminar<Trash /></PurpleButton>
+          }
+          {deleteMessage == 2 &&
+            <PurpleButton onClick={deleteSeason}>Eliminar<Trash /></PurpleButton>
+          }
         </ButtonContain>
       </Container>
     </Modal>

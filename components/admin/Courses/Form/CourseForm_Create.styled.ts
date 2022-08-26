@@ -175,6 +175,7 @@ export const Folder = styled.i`
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
+  pointer-events: none;
 `;
 export const CaretD = styled.i`
   position: absolute;

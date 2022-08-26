@@ -1,8 +1,13 @@
 
 
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 
+import file from "react-player/file";
+
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { addLesson } from "../../../../store/actions/AdminActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import {
@@ -14,6 +19,7 @@ import {
   EditContain,
   Folder,
   HwTitle,
+  ImageContain,
   Input,
   InputBig,
   InputContain,
@@ -27,6 +33,55 @@ import {
 } from "./Edit.styled";
 
 const AddLesson = () => {
+  const router = useRouter();
+  const { courseID, seasonID } = router.query;
+  const [lesson, setLesson] = useState<any>({
+    title: '',
+    number: '',
+    banner: '',
+    link: '',
+    image: "",
+    extra: [],
+    points: 0,
+    about: '',
+    homeWork: '',
+    homeWorkAbout: '',
+  })
+  const newLesson = () => {
+    console.log(lesson)
+    addLesson(lesson, courseID, seasonID).then(() => {
+      alert(
+        "Lección Creada"
+      )
+      router.push({
+        pathname: `/admin/Edit`,
+        query: { documentID: courseID }
+      });
+    })
+  }
+  const getImage = (file: any) => {
+    let tempExtra: any = [];
+
+    file = Object.values(file);
+    console.log(file)
+    file.forEach((element: any) => {
+      console.log(element.name)
+      var reader = new FileReader();
+      reader.readAsDataURL(element);
+      reader.onload = (_event) => {
+        tempExtra.push({ path: reader.result, title: element.name })
+      }
+    });
+    setLesson({ ...lesson, extra: tempExtra })
+  }
+  const getImage2 = (file: any) => {
+    console.log(file)
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setLesson({ ...lesson, image: reader.result })
+    };
+  }
   return (
     <Container>
       <TitleContain>
@@ -34,10 +89,27 @@ const AddLesson = () => {
       </TitleContain>
       <EditContain>
         <Contain1>
-
           <InputContain>
             <Label>Título de la Lección</Label>
-            <Input placeholder="Epidosio 1: Lorem Ipsum" />
+            <Input
+              placeholder="Epidosio 1: Lorem Ipsum"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, title: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
+            <Label>Número de Lección</Label>
+            <Input
+              placeholder="1"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, number: e.target.value
+                })
+              }}
+            />
           </InputContain>
           <InputContain>
             <Label>Portada de la Lección</Label>
@@ -46,13 +118,23 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage2(e.target.files) }}
               />
             </IconContain>
           </InputContain>
-          <Image src="/images/admin/Courses/Demo/Edit.png" width={480} height={274} />
+          <ImageContain>
+            <img src={lesson.image} />
+          </ImageContain>
           <InputContain>
             <Label>Hipervínculo del video</Label>
-            <Input placeholder="https://www.youtube.com/watch?v=RfR2Eh3fGxA&t=218s" />
+            <Input
+              placeholder="https://www.youtube.com/watch?v=RfR2Eh3fGxA&t=218s"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, link: e.target.value
+                })
+              }}
+            />
           </InputContain>
         </Contain1>
 
@@ -64,15 +146,25 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}
+                multiple
               />
             </IconContain>
           </InputContain>
           <InputContain>
             <Label>Puntos Acreditados</Label>
-            <Input placeholder="200" />
+            <Input
+              type="number"
+              placeholder="200"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, points: parseInt(e.target.value)
+                })
+              }}
+            />
           </InputContain>
           <InputContain>
-            <Label>Material Adicional</Label>
+            <Label>Descripción de Lección</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
@@ -82,7 +174,13 @@ const AddLesson = () => {
             malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-            quisque." />
+            quisque."
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, about: e.target.value
+                })
+              }}
+            />
           </InputContain>
         </Contain2>
         <Contain3>
@@ -92,7 +190,14 @@ const AddLesson = () => {
           </SlideContain>
           <InputContain>
             <Label>Título de la Tarea</Label>
-            <Input placeholder="Tarea 23: Intro a uñas francesas" />
+            <Input
+              placeholder="Tarea 23: Intro a uñas francesas"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, homeWork: e.target.value
+                })
+              }}
+            />
           </InputContain>
           <InputContain>
             <Label>Descripción de la Tarea</Label>
@@ -105,13 +210,21 @@ const AddLesson = () => {
             malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-            quisque." />
+            quisque."
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, homeWorkAbout: e.target.value
+                })
+              }}
+            />
           </InputContain>
         </Contain3>
       </EditContain>
       <ButtonContain>
         <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
-        <PurpleButton>Guardar</PurpleButton>
+        <PurpleButton
+          onClick={newLesson}
+        >Guardar</PurpleButton>
       </ButtonContain>
     </Container>
   )

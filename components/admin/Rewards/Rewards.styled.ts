@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const RewardContain = styled.div`
   display: flex;
@@ -8,10 +8,15 @@ export const RewardContain = styled.div`
   position: relative;
 `;
 export const ImageContain = styled.div`
-  position: relative;
   display: flex;
-  height: 355px;
-  z-index: -1;
+  width: 100%;
+  height: 300px;
+  position: relative;
+  filter: brightness(50%);
+img{
+  width: 100%;
+  height: auto;
+}
 `;
 export const Banner = styled(Image)`
 `;
@@ -20,6 +25,40 @@ export const TitleContain = styled.div`
   position: absolute;
   padding-block: 40px;
   padding-inline: 20px;
+`;
+export const ButtonPosition = styled.div`
+
+  input{
+    display: none;
+  }
+  label{
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    font-size: 16px;
+    font-family:'Montserrat',sans-serif;
+    background: white;
+    color: #6717CD;;
+    padding-block: 10px;
+    padding-inline: 30px;
+    border: 1px solid #6717CD;;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+  button{
+    position: absolute;
+    top: 160px;
+    left: 20px;
+    font-size: 16px;
+    font-family:'Montserrat',sans-serif;
+    background: white;
+    color: #6717CD;;
+    padding-block: 10px;
+    padding-inline: 30px;
+    border: 1px solid #6717CD;;
+    border-radius: 100px;
+    cursor: pointer;
+  }
 `;
 export const Title = styled.h1`
   font-family: 'Montserrat';

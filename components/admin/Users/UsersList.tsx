@@ -47,7 +47,7 @@ const UsersList = () => {
   const getUsers = async () => {
     const userData = await getDocs(usersCollectionRef);
     setAllUsers(userData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-  }
+  };
 
   const handleClick = async (id: string) => {
     const newUser: SelectedUser | any = await getSingleUser(id);
@@ -55,7 +55,7 @@ const UsersList = () => {
       setSelectedUser(newUser);
       setIsVisible(true);
     }
-  }
+  };
   const filterBySearch = (event: { target: { value: string; }; }) => {
     setIseSearching(true)
     const query = event.target.value.toLocaleLowerCase();

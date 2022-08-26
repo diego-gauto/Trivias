@@ -20,6 +20,7 @@ export const ContainerLevel = styled.div`
   display: flex;
   align-items: center;
   gap: 3px;
+  width: 100%;
 `;
 export const LevelContain = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ export const AllLevels = styled.div`
   display: flex;
   gap: 3px;
   justify-content: center;
+
 `;
 export const LevelCircle = styled.div`
   width: 32px;
@@ -54,7 +56,7 @@ export const Level = styled.p`
 export const Divider = styled("div")<{size:any, i:any}>`
   border-radius: 10px;
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-  width: ${props => 800/(props.size-1) }px;
+  width: 100%;
   height: 4px;
   ${props => (props.i == props.size) && css`
   display: none;

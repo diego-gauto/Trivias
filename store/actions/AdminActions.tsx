@@ -1,29 +1,38 @@
-import {
-  getAuth, createUserWithEmailAndPassword,
-  signInWithPopup,
-  signInWithEmailAndPassword
-} from "firebase/auth";
-import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot
-} from "firebase/firestore";
-import { db } from '../../firebase/firebaseConfig';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import firebase from "firebase/compat/app";
-import { useAuth } from "../../hooks/useAuth";
+import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 
-export const createCourse = (signUpData: { data: any; }) => {
+import { db } from "../../firebase/firebaseConfig";
+
+export const createCourse = async (signUpData: { data: any; }) => {
   const {
     data,
   } = signUpData;
 
   console.log(signUpData)
-
+  data.reference = `${data.courseTittle}-${uuidv4()}`
+  data.coursePath = await uploadImage(data.coursePath, data.reference);
   return db.collection('courses').add(data)
+
     .catch((error: any) => {
       let docCreationError = new Error(`Error creating user document: ${error}`);
       console.error(docCreationError);
       throw (docCreationError);
     })
 
+}
+const uploadImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
 }
 export const updateCourse = (signUpData: { data: any; }) => {
   const {
@@ -213,3 +222,48 @@ export const accessWithAuthProvider = (provider: any) => {
 
     });
 }
+
+// Esto sera para admin courses
+
+const uploadImageLesson = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/lesson/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+
+export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
+  lesson.imageReference = `${lesson.title}-${uuidv4()}`
+  lesson.image = await uploadImageLesson(lesson.image, lesson.imageReference);
+  if (lesson.extra.length > 0) {
+    console.log(lesson)
+    lesson.extra.forEach(async (element: any, index: any) => {
+      element.reference = `${uuidv4()}`
+      element.path = await uploadImageLesson(element.path, element.reference);
+
+      console.log(element)
+      if (index == lesson.extra.length - 1) {
+        const docRef = await addDoc(
+          collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
+          {
+            ...lesson
+          }
+        );
+      }
+    });
+
+  } else {
+    const docRef = await addDoc(
+      collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
+      {
+        ...lesson
+      }
+    );
+  }
+}
+

@@ -85,6 +85,7 @@ const CourseForm_Create = () => {
   const [value, setValue] = useState("Darth Vader, Grand Moff Tarkin")
   const [value2, setValue2] = useState("Uñas")
   const [value3, setValue3] = useState("Gratis")
+  const [image, setImage] = useState<any>("")
 
 
 
@@ -105,11 +106,12 @@ const CourseForm_Create = () => {
       type = value3;
     }
 
-    let signUpData = {
+    let signUpData: any = {
       data: {
         courseTittle: formData.courseTittle,
         courseDuration: formData.courseDuration,
         courseSubtittle: formData.courseSubtittle,
+        coursePath: image,
         courseAbout: formData.courseAbout,
         coursePublishYear: formData.coursePublishYear,
         coursePrice: formData.coursePrice,
@@ -129,6 +131,14 @@ const CourseForm_Create = () => {
   }
 
 
+  const getImage = (file: any) => {
+    console.log(file)
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setImage(reader.result)
+    };
+  }
   return (
     <CourseFormContain>
       {/* LINEA 1 */}
@@ -288,6 +298,7 @@ const CourseForm_Create = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}
               />
             </IconContain>
           </InputContain>
