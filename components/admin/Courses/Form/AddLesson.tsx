@@ -59,7 +59,7 @@ const AddLesson = () => {
       });
     })
   }
-  const getImage = (file: any) => {
+  const getDocuments = (file: any) => {
     let tempExtra: any = [];
 
     file = Object.values(file);
@@ -74,7 +74,7 @@ const AddLesson = () => {
     });
     setLesson({ ...lesson, extra: tempExtra })
   }
-  const getImage2 = (file: any) => {
+  const getImage = (file: any) => {
     console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -118,7 +118,7 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage2(e.target.files) }}
+                onChange={(e) => { getImage(e.target.files) }}
               />
             </IconContain>
           </InputContain>
@@ -146,7 +146,7 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
+                onChange={(e) => { getDocuments(e.target.files) }}
                 multiple
               />
             </IconContain>
