@@ -1,17 +1,27 @@
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import { ISlideModule } from "./ISlideModule";
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 
 import { ContainerMain, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
   const { isNew, title, subtitle, imgURL } = props;
+  const [img, setImg] = useState("")
+
+  const awaitImg = async () => {
+    const resolvedImg = await imgURL
+    setImg(resolvedImg)
+  }
+  useEffect(() => {
+    awaitImg()
+  }, [])
+
   return (
     <Container>
       <ContainerMain>
         <Col>
           <Row>
-            <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
+            <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
 
               {
                 isNew ?

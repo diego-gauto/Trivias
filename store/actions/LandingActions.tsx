@@ -1,4 +1,5 @@
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
 import { Product } from "../../components/admin/Landing/ProductsSection/IProductsSection";
 import { db } from "../../firebase/firebaseConfig";
 
@@ -34,11 +35,11 @@ export const getLandingData = async () => {
   }
 }
 
-export const saveProductsData = (products: Product[]) => {
+export const saveProductsData = async (products: Product[]) => {
   const productsCollection = db.collection("landingPage").doc("productosDestacadosSection").collection("productos")
-  products.forEach((p) => {
+  const promises = products.map((p) => {
     const { title, subtitle, imgURL, clickURL, id } = p
-    productsCollection.doc(id).update({
+    return productsCollection.doc(id).update({
       nombre: title,
       precio: subtitle,
       isNew: false,
@@ -46,4 +47,28 @@ export const saveProductsData = (products: Product[]) => {
       clickURL
     })
   })
+  const updatedFiles = products.filter((p) => !!p.file)
+  const filePromises = updatedFiles.map(async ({ file, id }) => {
+    const result = await uploadFile(file!, `landing/productos/${id}`)
+    return productsCollection.doc(id).update({
+      imgURL: result.metadata.fullPath
+    })
+  })
+  try {
+    await Promise.all([...promises, ...filePromises])
+  } catch {
+    return false
+  }
+  return true
+}
+
+export const uploadFile = async (file: File, uploadPath: string) => {
+  const storage = getStorage()
+  const storageRef = ref(storage, uploadPath)
+  return await uploadBytes(storageRef, file)
+}
+
+export const downloadFileWithStoragePath = async (path: string) => {
+  const storage = getStorage()
+  return await getDownloadURL(ref(storage, path))
 }

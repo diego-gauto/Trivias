@@ -23,7 +23,7 @@ const ProductsSection = (props: IProductsSectionProps) => {
   const updateProductState = (e: any, key: string, i: number) => {
     const newState = [...productsData]
     // @ts-expect-error
-    newState[i][key] = e.target.value
+    newState[i][key] = key === "file" ? e.target.files[0] : e.target.value
     setProductsData(newState)
   }
   const gerProductElement = ({ clickURL, imgURL, title, subtitle }: Product, i: number) => {
@@ -63,7 +63,11 @@ const ProductsSection = (props: IProductsSectionProps) => {
           <EditText>
             Imagen del Producto
           </EditText>
-          <FolderInput type="file" placeholder="Seleccionar archivo" />
+          <FolderInput
+            onChange={(e) => updateProductState(e, "file", i)}
+            type="file"
+            placeholder="Seleccionar archivo"
+          />
         </Inputs>
       </ColumnsContainer2>
     )
@@ -78,8 +82,13 @@ const ProductsSection = (props: IProductsSectionProps) => {
       gerProductElement(product, i + 3)
     )
   })
-  const onSave = () => {
-    saveProductsData(productsData)
+  const onSave = async () => {
+    const success = await saveProductsData(productsData)
+    let alertText = "Cambios realizados correctamente"
+    if (!success) {
+      alertText = "Hubo un error"
+    }
+    alert(alertText)
   }
 
   return (

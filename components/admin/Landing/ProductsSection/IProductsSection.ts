@@ -8,4 +8,5 @@ export interface Product {
   title: string;
   subtitle: string;
   id: string;
+  file?: File
 }
