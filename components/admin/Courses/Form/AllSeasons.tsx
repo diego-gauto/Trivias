@@ -83,7 +83,11 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
                 }}>
                   <Button>Añadir Lección <Add /></Button>
                 </Link>
-                <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
+                {
+                  lessons.length == 0 &&
+                  <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
+
+                }
                 <ChevU onClick={() => { setOpenSeason(0); }} />
               </>}
             {openSeason != 1 &&
@@ -101,22 +105,22 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
                       documentID={item.documentID}
                       index={i}
                       courseID={courseID}
-                      lessonTitle={item.title}
-                      lessonDuration={item.lessonDuration}
-                      about={item.about}
-                      path={item.image}
+                      lesson={item}
                     />
                   ))
                 }
               </EpisodeContain>
             </Episode>
           </EpisodesContain>}
+
         <Delete setShow={setShow}
           show={show}
           deleteMessage={deleteMessage}
           seasonID={documentID}
           courseID={courseID}
           setOpenSeason={setOpenSeason} />
+
+
       </SeasonContain>
     </MainContainer>
     </>

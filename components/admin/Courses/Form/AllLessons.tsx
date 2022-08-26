@@ -26,7 +26,7 @@ interface IAllSeasons {
   path: string,
 }
 
-export const AllLessons = ({ documentID, index, courseID, lessonTitle, about, seasonID, path }: IAllSeasons) => {
+export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: any) => {
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
@@ -36,12 +36,12 @@ export const AllLessons = ({ documentID, index, courseID, lessonTitle, about, se
       <EpisodesContain>
         <Episode>
           <ImageContain>
-            <img src={path} />
+            <img src={lesson.image} />
           </ImageContain>
           <EpisodeContain>
-            <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
+            <EpisodeTitle>Epidosio {index + 1}: {lesson.title}</EpisodeTitle>
             <EpisodeTime>30 minutos</EpisodeTime>
-            <EpisodeInfo>{about}</EpisodeInfo>
+            <EpisodeInfo>{lesson.about}</EpisodeInfo>
             <Link href={{
               pathname: "/admin/EditLesson",
               query: {

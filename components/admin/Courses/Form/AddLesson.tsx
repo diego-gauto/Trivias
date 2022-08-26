@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import file from "react-player/file";
 
@@ -37,16 +37,18 @@ const AddLesson = () => {
   const { courseID, seasonID } = router.query;
   const [lesson, setLesson] = useState<any>({
     title: '',
+    number: '',
     banner: '',
     link: '',
     image: "",
-    extra: [{}],
+    extra: [],
     points: 0,
     about: '',
     homeWork: '',
     homeWorkAbout: '',
   })
   const newLesson = () => {
+    console.log(lesson)
     addLesson(lesson, courseID, seasonID).then(() => {
       alert(
         "Lección Creada"
@@ -67,7 +69,7 @@ const AddLesson = () => {
       var reader = new FileReader();
       reader.readAsDataURL(element);
       reader.onload = (_event) => {
-        tempExtra.push({ path: reader.result })
+        tempExtra.push({ path: reader.result, title: element.name })
       }
     });
     setLesson({ ...lesson, extra: tempExtra })
@@ -80,7 +82,6 @@ const AddLesson = () => {
       setLesson({ ...lesson, image: reader.result })
     };
   }
-
   return (
     <Container>
       <TitleContain>
@@ -88,7 +89,6 @@ const AddLesson = () => {
       </TitleContain>
       <EditContain>
         <Contain1>
-
           <InputContain>
             <Label>Título de la Lección</Label>
             <Input
@@ -96,6 +96,17 @@ const AddLesson = () => {
               onChange={(e) => {
                 setLesson({
                   ...lesson, title: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
+            <Label>Número de Lección</Label>
+            <Input
+              placeholder="1"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, number: e.target.value
                 })
               }}
             />

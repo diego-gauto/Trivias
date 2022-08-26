@@ -85,6 +85,27 @@ export const Label = styled.label`
   color: #6717CD;
   font-family: 'Montserrat',sans-serif;
 `;
+export const Extra = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border:1px solid #6717CD;
+  border-radius: 10px;
+  padding-inline: 20px;
+  padding-block: 10px;
+  p{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-family:'Montserrat',sans-serif;
+    margin: 0;
+  }
+  i{
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 600;
+  }
+`;
 export const Input = styled.input`
   font-size: 14px;
   font-family:'Montserrat',sans-serif;
@@ -125,6 +146,7 @@ export const InputBig = styled.textarea`
     outline: 1px solid #8E2DE2;
   }
 `;
+
 export const HwTitle = styled.p`
   font-size: 24px;
   font-family:'Montserrat',sans-serif;

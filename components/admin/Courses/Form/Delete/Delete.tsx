@@ -30,7 +30,7 @@ export interface DeletePopUp {
 }
 
 const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
-
+  console.log(deleteMessage)
   const handleClose = () => setShow(false);
 
   const deleteSeason = () => {
@@ -40,8 +40,10 @@ const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeaso
   }
   const deleteLesson = () => {
     handleClose();
-    window.location.href = `/admin/Edit?documentID=${courseID}`;
-    return deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID));
+
+    deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID)).then(() => {
+      window.location.href = `/admin/Edit?documentID=${courseID}`;
+    });
   }
 
   return (
@@ -52,12 +54,7 @@ const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeaso
           {deleteMessage == 2 && <Title>Eliminar Temporada</Title>}
           <CloseIcon onClick={handleClose} />
         </TitleContain>
-        {deleteMessage == 1 &&
-          <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
-        }
-        {deleteMessage == 2 &&
-          <Content>¿Estas seguro de eliminar la temporada? Esta acción es irreversible.</Content>
-        }
+        <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
         <ButtonContain>
           <TransparentButton onClick={handleClose}>Cancelar</TransparentButton>
           {deleteMessage == 1 &&

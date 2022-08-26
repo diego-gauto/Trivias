@@ -50,6 +50,15 @@ export const addLevel = async (level: any) => {
   );
   return 'exito'
 }
+export const addLevelTime = async (level: any) => {
+  const docRef = await addDoc(
+    collection(db, "levelTimes"),
+    {
+      ...level
+    }
+  );
+  return 'exito'
+}
 export const updateLevel = async (level: any, id: any) => {
 
   const docRef = doc(db, 'levelPoints', id);

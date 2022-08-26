@@ -225,16 +225,29 @@ export const accessWithAuthProvider = (provider: any) => {
 
 // Esto sera para admin courses
 
+const uploadImageLesson = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/lesson/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+
 export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
+  lesson.imageReference = `${lesson.title}-${uuidv4()}`
+  lesson.image = await uploadImageLesson(lesson.image, lesson.imageReference);
   if (lesson.extra.length > 0) {
+    console.log(lesson)
     lesson.extra.forEach(async (element: any, index: any) => {
       element.reference = `${uuidv4()}`
-      element.path = await uploadImage(element.path, element.reference);
+      element.path = await uploadImageLesson(element.path, element.reference);
 
       console.log(element)
       if (index == lesson.extra.length - 1) {
-        lesson.reference2 = `${lesson.title}-${uuidv4()}`
-        lesson.image = await uploadImage(lesson.image, lesson.reference2);
         const docRef = await addDoc(
           collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
           {
@@ -252,13 +265,5 @@ export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
       }
     );
   }
-  const docRef = await addDoc(
-    collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
-    {
-      ...lesson
-    }
-  );
-  console.log(lesson)
-
-  return docRef;
 }
+
