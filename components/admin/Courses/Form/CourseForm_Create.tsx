@@ -130,7 +130,6 @@ const CourseForm_Create = () => {
 
   }
 
-
   const getImage = (file: any) => {
     console.log(file)
     var reader = new FileReader();

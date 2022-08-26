@@ -94,6 +94,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState("Darth Vader, Grand Moff Tarkin")
   const [value2, setValue2] = useState("Uñas")
+  const [image, setImage] = useState<any>("")
 
   useEffect(() => {
     setValue2(courseCategory)
@@ -132,7 +133,14 @@ const CourseForm = (props: ICourseForm_Update) => {
     });
 
   }
-
+  const getImage = (file: any) => {
+    console.log(file)
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setImage(reader.result)
+    };
+  }
 
   return (
     <CourseFormContain>
@@ -252,6 +260,7 @@ const CourseForm = (props: ICourseForm_Update) => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}
               />
             </IconContain>
           </InputContain>
