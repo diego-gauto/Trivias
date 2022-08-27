@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import file from "react-player/file";
 
@@ -37,16 +37,18 @@ const AddLesson = () => {
   const { courseID, seasonID } = router.query;
   const [lesson, setLesson] = useState<any>({
     title: '',
+    number: '',
     banner: '',
     link: '',
     image: "",
-    extra: [{}],
+    extra: [],
     points: 0,
     about: '',
     homeWork: '',
     homeWorkAbout: '',
   })
   const newLesson = () => {
+    console.log(lesson)
     addLesson(lesson, courseID, seasonID).then(() => {
       alert(
         "Lección Creada"
@@ -57,7 +59,7 @@ const AddLesson = () => {
       });
     })
   }
-  const getImage = (file: any) => {
+  const getDocuments = (file: any) => {
     let tempExtra: any = [];
 
     file = Object.values(file);
@@ -67,12 +69,12 @@ const AddLesson = () => {
       var reader = new FileReader();
       reader.readAsDataURL(element);
       reader.onload = (_event) => {
-        tempExtra.push({ path: reader.result })
+        tempExtra.push({ path: reader.result, title: element.name })
       }
     });
     setLesson({ ...lesson, extra: tempExtra })
   }
-  const getImage2 = (file: any) => {
+  const getImage = (file: any) => {
     console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -80,7 +82,6 @@ const AddLesson = () => {
       setLesson({ ...lesson, image: reader.result })
     };
   }
-
   return (
     <Container>
       <TitleContain>
@@ -88,7 +89,6 @@ const AddLesson = () => {
       </TitleContain>
       <EditContain>
         <Contain1>
-
           <InputContain>
             <Label>Título de la Lección</Label>
             <Input
@@ -101,13 +101,24 @@ const AddLesson = () => {
             />
           </InputContain>
           <InputContain>
+            <Label>Número de Lección</Label>
+            <Input
+              placeholder="1"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, number: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
             <Label>Portada de la Lección</Label>
             <IconContain>
               <Folder />
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage2(e.target.files) }}
+                onChange={(e) => { getImage(e.target.files) }}
               />
             </IconContain>
           </InputContain>
@@ -135,7 +146,7 @@ const AddLesson = () => {
               <Input2
                 type="file"
                 placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
+                onChange={(e) => { getDocuments(e.target.files) }}
                 multiple
               />
             </IconContain>

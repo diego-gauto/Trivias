@@ -16,23 +16,26 @@ export const Container = styled.div`
   position: relative;
   gap: 70px;
 `;
-export const ContainerLevel = styled.div`
+export const ContainerLevel = styled.div<{size:any, i:any}>`
   display: flex;
   align-items: center;
   gap: 3px;
   width: 100%;
+  ${props => (props.i == props.size) && css`
+  width: 32px;
+  `}
 `;
 export const LevelContain = styled.div`
   display: flex;
   position: relative;
   align-items: center;
   gap: 3px;
+
 `;
 export const AllLevels = styled.div`
   display: flex;
   gap: 3px;
   justify-content: center;
-
 `;
 export const LevelCircle = styled.div`
   width: 32px;
@@ -44,6 +47,7 @@ export const Level = styled.p`
   position: absolute;
   font-size: 14px;
   top: 40px;
+  left: -5px;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   white-space: nowrap;

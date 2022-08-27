@@ -181,6 +181,7 @@ export const LevelContain = styled.div`
 `;
 export const CurrentLevel = styled.p`
   font-size: 44px;
+  line-height: 50px;
   font-weight: 600;
   font-family: 'Raleway', sans-serif;
   color: #E0C3FC;

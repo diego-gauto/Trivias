@@ -50,7 +50,7 @@ const Points = ({ setPlace, place }: any) => {
           {
             levels.map((val: any, i: any) => {
               return (
-                <ContainerLevel key={"adminLevel" + i}>
+                <ContainerLevel key={"adminLevel" + i} size={levels.length} i={i + 1}>
                   <LevelContain >
                     <LevelCircle />
                     <Level>

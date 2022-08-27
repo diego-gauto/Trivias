@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
@@ -14,6 +14,8 @@ import {
   EpisodeTitle,
   ImageContain,
 } from "./Lessons.styled";
+import { db } from "../../../../firebase/firebaseConfig";
+import { getDocs } from "firebase/firestore";
 
 interface IAllSeasons {
   documentID: string,
@@ -26,28 +28,29 @@ interface IAllSeasons {
   path: string,
 }
 
-export const AllLessons = ({ documentID, index, courseID, lessonTitle, about, seasonID, path }: IAllSeasons) => {
+export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: any) => {
 
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
+
 
   return (
     <><MainContainer>
       <EpisodesContain>
         <Episode>
           <ImageContain>
-            <img src={path} />
+            <img src={lesson.image} />
           </ImageContain>
           <EpisodeContain>
-            <EpisodeTitle>Epidosio {index + 1}: {lessonTitle}</EpisodeTitle>
+            <EpisodeTitle>Epidosio {index + 1}: {lesson.title}</EpisodeTitle>
             <EpisodeTime>30 minutos</EpisodeTime>
-            <EpisodeInfo>{about}</EpisodeInfo>
+            <EpisodeInfo>{lesson.about}</EpisodeInfo>
             <Link href={{
               pathname: "/admin/EditLesson",
               query: {
-                lessonID: documentID,
                 courseID: courseID,
                 seasonID: seasonID,
+                lessonID: documentID,
               }
             }}
             >

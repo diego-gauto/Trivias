@@ -98,19 +98,19 @@ export const RewardContainer = styled.div`
     padding-bottom: 55px;
   }
 `;
-export const LevelContainer = styled.div<{i:any,level:any,levels:any}>`
+export const LevelContainer = styled.div<{i:any,level:any}>`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
   width: 100%;
-  ${props => (props.i == 0) && css`
+  ${props => (props.i == 1) && css`
   width: fit-content;
 `}
   @media(max-width: 1023px) {
     width: 50px;
     display: none;
-    ${props => (props.level == props.levels ||props.level == props.levels - 1||props.level == props.levels - 2) && css`
+    ${props => (props.i == props.level || props.i ==props.level-1 || props.i == props.level + 1) && css`
     display: flex;
   `}
   }

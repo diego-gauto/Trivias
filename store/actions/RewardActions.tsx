@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 import { db } from "../../firebase/firebaseConfig";
 
 export const getLevel = async () => {
-  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelRef = query(collection(db, "levelPoints"), orderBy("minimum", "desc"))
   let tempData: any = []
   const data = await getDocs(levelRef)
   data.forEach((doc) => {
@@ -37,9 +37,21 @@ export const getLevels = async () => {
   })
   return temp_levels
 }
+export const getTimeLevels = async () => {
+  const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum"))
+  let temp_levels: any = [];
+  const data = await getDocs(levelsRef);
+  data.forEach((level) => {
+    temp_levels.push({ ...level.data(), id: level.id });
+  })
+  return temp_levels
+}
 
 export const deleteLevel = async (level: any) => {
   await deleteDoc(doc(db, "levelPoints", level.id));
+}
+export const deleteTimeLevel = async (level: any) => {
+  await deleteDoc(doc(db, "levelTimes", level.id));
 }
 export const addLevel = async (level: any) => {
   const docRef = await addDoc(
@@ -50,9 +62,27 @@ export const addLevel = async (level: any) => {
   );
   return 'exito'
 }
+export const addLevelTime = async (level: any) => {
+  const docRef = await addDoc(
+    collection(db, "levelTimes"),
+    {
+      ...level
+    }
+  );
+  return 'exito'
+}
 export const updateLevel = async (level: any, id: any) => {
 
   const docRef = doc(db, 'levelPoints', id);
+  await updateDoc(docRef, {
+    maximum: level.maximum,
+    minimum: level.minimum
+  })
+  return 'exito'
+}
+export const updateLevelTime = async (level: any, id: any) => {
+
+  const docRef = doc(db, 'levelTimes', id);
   await updateDoc(docRef, {
     maximum: level.maximum,
     minimum: level.minimum

@@ -139,7 +139,7 @@ export const EditEpisode = styled.a`
 `;
 export const ImageContain = styled.div`
   display: flex;
-  min-width: 240px;
+  width: 240px;
   height: 136px;
   position: relative;
 img{

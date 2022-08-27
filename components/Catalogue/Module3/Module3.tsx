@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Modal1 from "./Modal/Modal1";
 import {
@@ -19,105 +19,110 @@ import {
   VideoInfo,
   ViewCourse,
 } from "./Module3.styled";
+import { getPaidCourses } from "../../../store/actions/UserActions";
+import { useRouter } from "next/router";
+import { getCourses, getWholeCourse } from "../../../store/actions/courseActions";
 
-const Module3 = () => {
-
-  // const [rows, setRows] = React.useState([]);
-  // React.useEffect(() => {
-  //   const data = localStorage.getItem("Scroll");
-  //   if (data) {
-  //     setRows(JSON.parse(data));
-  //   }
-  // }, []);
-
-  // React.useEffect(() => {
-  //   localStorage.setItem("currentPosition", JSON.stringify(rows));
-  // });
-
-  // const scroll = document.getElementById("Scroll");
-  // scroll?.scrollIntoView({ inline: "center" });
-
+const Module3 = ({ user }: any) => {
 
   const [show, setShow] = useState(false);
+  const [courses, setCourses] = useState<any>([]);
+  const [course, setCourse] = useState<any>({});
+  const router = useRouter()
+  const [userData, setUserData] = useState<any>(null);
 
-  const handleShow = () => {
-    setShow(true);
+  useEffect(() => {
+    if (user) {
+      let temp_courses: any = [];
+      let date = new Date().getTime() / 1000;
+      let temp_final_date: any;
+      getPaidCourses(user.id).then((paid: any) => {
+        getWholeCourse().then((response) => {
+          response.forEach(async (element: any) => {
+            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+              element.paid = true;
+              temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
+              element.date = Math.ceil((temp_final_date.finalDate - date) / (3600 * 24));
+              temp_courses.push(element);
+            }
+          });
+          console.log(temp_courses);
+
+          setCourses(temp_courses);
+        })
+      })
+    }
+  }, [user])
+
+  const goTo = (data: any) => {
+    if (data.courseType == 'Mensual' && userData.membership.level == 1 || data.paid) {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: data.id },
+      });
+    }
+    // if (data.courseType == 'Gratis') {
+    //   router.push({
+    //     pathname: 'Lesson',
+    //     query: { id: data.id },
+    //   });
+    // }
+    // if (data.courseType == 'Mensual' && userData.membership.level == 0) {
+    //   router.push(
+    //     { pathname: 'Purchase', query: { type: 'subscription' } }
+    //   )
+    // }
+    setCourse(data)
   }
+
   return (
     <Maincontainer>
       <Title>
         Cursos en poseción
       </Title>
       <CardContain id="Scroll">
-        <Cardcontent>
-
-          <ImageContent>
-            <Band />
-            <DaysLeft>65 días</DaysLeft>
-            <CardImage
-              src="/images/Preview/card3.png"
-              width={400}
-              height={210}
-            />
-            <InsideContent>
-
-              <InsideText>
-                Unica Lección
-              </InsideText>
-            </InsideContent>
-          </ImageContent>
-          <VideoInfo>
-            <TextContain>
-              <Text1>
-                Curso 1: Lorem Ipsum
-                <Text2>
-                  Subtítulo de categoría
-                </Text2>
-              </Text1>
-              <Text3>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam est tempor, egestas mauris pulvinar.
-              </Text3>
-            </TextContain>
-            <ViewCourse onClick={handleShow}>
-              Ver el Curso
-            </ViewCourse>
-          </VideoInfo>
-        </Cardcontent>
-
-        <Cardcontent>
-          <ImageContent>
-            <Band />
-            <DaysLeft>71 días</DaysLeft>
-            <CardImage
-              src="/images/Preview/card4.png"
-              width={400}
-              height={210}
-            />
-            <InsideContent>
-              <InsideText>
-                7 Lecciones
-              </InsideText>
-            </InsideContent>
-          </ImageContent>
-          <VideoInfo>
-            <TextContain>
-              <Text1>
-                Curso 2: Lorem Ipsum
-                <Text2>
-                  Subtítulo de categoría
-                </Text2>
-              </Text1>
-              <Text3>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam est tempor, egestas mauris pulvinar.
-              </Text3>
-            </TextContain>
-            <ViewCourse>
-              Ver el Curso
-            </ViewCourse>
-          </VideoInfo>
-        </Cardcontent>
+        {courses.map((course: any) => {
+          return (
+            <Cardcontent>
+              <ImageContent>
+                <Band />
+                <DaysLeft>{course.date} días</DaysLeft>
+                <CardImage
+                  src="/images/Preview/card3.png"
+                  width={400}
+                  height={210}
+                />
+                <InsideContent>
+                  {course.totalLessons > 1 && <InsideText>
+                    {course.totalLessons} Lecciones
+                  </InsideText>}
+                  {course.totalLessons == 1 && <InsideText>
+                    Unica Lección
+                  </InsideText>}
+                </InsideContent>
+              </ImageContent>
+              <VideoInfo>
+                <TextContain>
+                  <Text1>
+                    {course.courseTittle}
+                    <Text2>
+                      {course.courseCategory}
+                    </Text2>
+                  </Text1>
+                  <Text3>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam est tempor, egestas mauris pulvinar.
+                  </Text3>
+                </TextContain>
+                <ViewCourse onClick={() => {
+                  goTo(course)
+                }}>
+                  Ver el Curso
+                </ViewCourse>
+              </VideoInfo>
+            </Cardcontent>
+          )
+        })}
       </CardContain>
-      <Modal1 setShow={setShow} show={show} />
     </Maincontainer>
   )
 }

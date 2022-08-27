@@ -21,6 +21,7 @@ import {
   Title,
   NewMethod
 } from "./Modal2.styled";
+import { PaypalIcon } from "../User.styled";
 
 const Modal2 = ({ show, setShow, data, pm }: any) => {
   const handleClose = () => setShow(false);
@@ -67,17 +68,20 @@ const Modal2 = ({ show, setShow, data, pm }: any) => {
               Método de Pago
             </MemberText>
             <PayMethod>
-              <CardInfo>
+              {data.membership.method == 'stripe' && <CardInfo>
                 <CardIconResp brand={data.membership.brand} />
                 <CardText>
                   {data.membership.brand} terminada en {data.membership.last4}
                 </CardText>
-              </CardInfo>
-              <ChangeMethod onClick={() => {
+              </CardInfo>}
+              {data.membership.method == 'paypal' && <CardInfo>
+                <PaypalIcon />
+              </CardInfo>}
+              {data.membership.method == 'stripe' && <ChangeMethod onClick={() => {
                 setMethods(!methods)
               }}>
                 Cambiar método
-              </ChangeMethod>
+              </ChangeMethod>}
 
             </PayMethod>
           </PaymentMethod>
