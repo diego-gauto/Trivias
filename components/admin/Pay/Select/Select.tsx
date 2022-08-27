@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Label, Option, OptionContain, SelectContain, Selected, CaretD } from './Select.styled'
+import React, { useState } from "react";
+
+import { CaretD, Label, Option, OptionContain, Selected, SelectContain } from "./Select.styled";
 
 const Select = () => {
   const [open, setOpen] = useState(false);

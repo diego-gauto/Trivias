@@ -28,6 +28,7 @@ export const OptionContain = styled.div`
   z-index: 1;
 `;
 export const Option = styled.div`
+border-bottom: 1px solid #8E2DE2;
   &:hover{
     background: linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);
     color:white;
@@ -38,6 +39,9 @@ export const Option = styled.div`
       border-radius: 0 0 8px 8px;
     }
   }
+  &:last-child{
+    border-bottom: none;
+  }
   input{
     &[type="radio"]{
       display: none;
@@ -46,9 +50,11 @@ export const Option = styled.div`
 `;
 export const Label2 = styled.label`
   display: flex; 
-  font-size: 16px;
+  font-size: 14px;
   gap: 5px;
   //padding-block: 10px;
+  max-width: 95%;
+  overflow: hidden;
   padding-inline: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -56,9 +62,12 @@ export const Label2 = styled.label`
 `;
 export const CaretD2 = styled.i`
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 20%;
   right: 15px;
+  // border-left: 10px solid transparent;
+  // border-right: 10px solid transparent;
+  // border-top: 13px solid black;
+  // border-radius: 3px;
   background-image: url(../images/admin/Courses/caret-down.png);
   background-repeat: no-repeat;
   height: 24px;

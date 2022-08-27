@@ -172,7 +172,7 @@ const CourseForm_Create = () => {
                         name="category"
                         value="Temporada 1"
                       />
-                      <Label2 > Darth Vader, Grand Moff Tarkin</Label2>
+                      <Label2> Darth Vader, Grand Moff Tarkin</Label2>
                     </Option>
                     <Option onClick={() => { setValue("Yoda"); setOpen(false) }}>
                       <input
@@ -233,15 +233,7 @@ const CourseForm_Create = () => {
               </SelectContain>
             </IconContain>
           </InputContain>
-          <InputContain>
-            <Label>Duración de Suscripción (Días)</Label>
-            <Input
-              placeholder="90"
-              type="number"
-              className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
-              {...register("courseDuration")}
-            />
-          </InputContain>
+
         </InputForm>
         {/* LINEA 2 */}
         <InputForm>
@@ -294,11 +286,15 @@ const CourseForm_Create = () => {
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
-              />
+              <Input2>
+                <label htmlFor="input">
+                  <input
+                    type="file"
+                    id="input"
+                    onChange={(e) => { getImage(e.target.files) }}
+                  />
+                </label>
+              </Input2>
             </IconContain>
           </InputContain>
         </InputForm>
@@ -383,9 +379,21 @@ const CourseForm_Create = () => {
             <span></span>
           </TagLabel>
         </TagContain> */}
-          <ButtonContain>
-            <Button type='submit'>Crear Curso</Button>
-          </ButtonContain>
+          <InputContain2>
+            <InputContain>
+              <Label>Duración de Suscripción (Días)</Label>
+              <Input
+                placeholder="90"
+                type="number"
+                className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
+                {...register("courseDuration")}
+              />
+            </InputContain>
+            <ButtonContain>
+              <Button type='submit'>Crear Curso</Button>
+            </ButtonContain>
+          </InputContain2>
+
 
         </InputForm>
       </form>

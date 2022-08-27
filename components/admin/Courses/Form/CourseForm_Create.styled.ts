@@ -4,7 +4,7 @@ export const CourseFormContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 30px;
+  padding: 10px;
 `;
 export const ButtonContain = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ export const ButtonContain = styled.div`
   margin-top: 20px;
 `;
 export const Button = styled.button`
+position: absolute;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
@@ -21,7 +22,10 @@ export const Button = styled.button`
   color: white;
   border: none;
   &:hover{
+    transition: all 200ms ease;
+    //transform: scale(1.02);
     background: #5b02cc;
+    font-size: 16.5px;
   }
 `;
 export const InputForm = styled.div`

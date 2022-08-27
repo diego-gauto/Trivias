@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, DocumentData } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
+import { Title } from "../General/General.styled";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import { AllCourses } from "./AllCourses";
@@ -42,6 +43,7 @@ const CourseMain = () => {
     <AdminContain>
       <SideBar />
       <CourseFormContain>
+        <Title>Crear nuevo curso</Title>
 
         <CourseForm_Create></CourseForm_Create>
 
