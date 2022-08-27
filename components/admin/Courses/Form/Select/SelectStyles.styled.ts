@@ -48,7 +48,7 @@ export const Label2 = styled.label`
   display: flex; 
   font-size: 16px;
   gap: 5px;
-  padding-block: 10px;
+  //padding-block: 10px;
   padding-inline: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;

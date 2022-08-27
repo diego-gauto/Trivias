@@ -28,6 +28,7 @@ export const InputForm = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  margin: 5px 0 0;
 `;
 export const InputContain = styled.div`
   display: flex;
