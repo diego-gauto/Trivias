@@ -1,5 +1,5 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, getDoc,
+  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, getDoc, orderBy,
 } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { db } from '../../firebase/firebaseConfig';
@@ -112,20 +112,40 @@ export const getWholeCourses = async () => {
   return courses;
 }
 export const getWholeCourse = async (courseId: any) => {
+  let seasons: any = [];
   const docRef = doc(db, "courses", courseId);
   const docSnap: any = await getDoc(docRef);
-  docSnap.data().season = [];
-  const docRefSeasons = collection(db, 'courses', docSnap.id, "seasons");
+  const docRefSeasons = query(collection(db, 'courses', courseId, "seasons"), orderBy('season'));
   const querySnapshotSeasons = await getDocs(docRefSeasons);
   querySnapshotSeasons.forEach((season: any) => {
-    docSnap.data().seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+    seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
   });
-  for (let c = 0; c < docSnap.data().seasons.length; c++) {
-    const docRefLesson = collection(db, 'courses', docSnap.id, "seasons", docSnap.data().seasons[c].id, "lessons");
+  for (let c = 0; c < seasons.length; c++) {
+    const docRefLesson = query(collection(db, 'courses', courseId, "seasons", seasons[c].id, "lessons"), orderBy('number'));
     const querySnapshotLesson = await getDocs(docRefLesson);
     querySnapshotLesson.forEach((lesson: any) => {
-      docSnap.data().seasons[c].lessons.push(lesson.data());
+      seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
     });
   }
-  return { ...docSnap.data(), id: docSnap.id };
+  return { ...docSnap.data(), id: courseId, seasons: seasons }
+}
+export const addComment = async (data: any) => {
+  const docRef = await addDoc(
+    collection(db, "comments"),
+    {
+      ...data
+    }
+  );
+  return 'exito'
+}
+
+
+export const getComments = async () => {
+  let comment: any = []
+  const docRef = query(collection(db, 'comments'), orderBy("createdAt", "desc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    comment.push({ ...doc.data(), id: doc.id });
+  });
+  return comment;
 }

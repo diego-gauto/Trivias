@@ -43,6 +43,7 @@ export const Details = styled.div`
   width: 90%;
   flex-direction: column;
   gap: 5px;
+  cursor:pointer;
 `;
 export const DetailContain = styled.div`
   display: flex;

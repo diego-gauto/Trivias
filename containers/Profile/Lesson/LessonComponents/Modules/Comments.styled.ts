@@ -38,12 +38,18 @@ export const CommentInput = styled.input`
     color: #adadac;
   }
 `;
+export const Profile = styled.img`
+  width: 48px;
+  height: auto;
+  border-radius: 50%;
+`;
 export const CommentText =styled.div`
   display: flex;
   padding-block: 12px;
   padding-inline: 15px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  width:100%;
 `;
 export const Comment = styled.p`
   font-size: 14px;
@@ -60,6 +66,7 @@ export const Pp1 = styled.i`
   background-position: center;
   background-repeat: no-repeat;
 `;
+
 export const Pp2 = styled.i`
   background-image: url(../images/Video/Comments/profile2.png);
   height: 60px;

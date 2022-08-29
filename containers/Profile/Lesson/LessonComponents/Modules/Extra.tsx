@@ -1,8 +1,9 @@
 import React from 'react'
 import { DownloadText, DownlowadContain, ExtraContain, FileIcon, Paragraph, Weight } from './Extra.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
+import Link from 'next/link';
 
-const Extra = ({ value, setValue }: any) => {
+const Extra = ({ value, setValue, data }: any) => {
   return (
     <>
       <TitleContain >
@@ -52,15 +53,23 @@ const Extra = ({ value, setValue }: any) => {
           tincidunt quis. Non habitasse viverra malesuada facilisi
           vel nunc.
         </Paragraph>
-        <DownlowadContain>
-          <DownloadText>
-            <FileIcon />
-            Fotos_ejemplos.png
-          </DownloadText>
-          <Weight>
-            3.1 MB
-          </Weight>
-        </DownlowadContain>
+        {data.extra.map((extra: any) => {
+          return (
+            <Link href={extra.path}>
+              <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                <DownlowadContain>
+                  <DownloadText>
+                    <FileIcon />
+                    {extra.title}
+                  </DownloadText>
+                  <Weight>
+                    3.1 MB
+                  </Weight>
+                </DownlowadContain>
+              </a>
+            </Link>
+          )
+        })}
 
       </ExtraContain>
     </>

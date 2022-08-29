@@ -1,8 +1,38 @@
-import React from 'react'
-import { Comment, CommentContain, CommentInput, CommentText, MainContainer, Pp1, Pp2, Pp3 } from './Comments.styled'
+import React, { useEffect, useState } from 'react'
+import { DEFAULT_USER_IMG } from '../../../../../constants/paths'
+import { addComment } from '../../../../../store/actions/courseActions'
+import { Comment, CommentContain, CommentInput, CommentText, MainContainer, Pp1, Pp2, Pp3, Profile } from './Comments.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
+const Comments = ({ value, setValue, user, data, comments }: any) => {
 
-const Comments = ({ value, setValue }: any) => {
+  const [currentComments, setCurrentComments] = useState<any>(comments);
+
+  const addLessonComment = (e: any) => {
+    let temp_comments: any = currentComments;
+    if (e.code == "Enter") {
+      let body = {
+        createdAt: new Date(),
+        userName: user.name,
+        userEmail: user.email,
+        userPhoto: user.photoURL,
+        courseId: data.courseId,
+        seasonId: data.seasonId,
+        lessonId: data.id,
+        comment: e.target.value
+      }
+      addComment(body).then(() => {
+        alert('Gracias por tus comentarios!');
+        temp_comments.unshift(body);
+        setCurrentComments([...temp_comments]);
+      })
+    }
+  }
+  useEffect(() => {
+    if (comments) {
+      setCurrentComments(comments)
+    }
+  }, [comments])
+
   return (
     <>
       <TitleContain >
@@ -53,32 +83,28 @@ const Comments = ({ value, setValue }: any) => {
       <MainContainer>
         <CommentContain>
           <Pp1 />
-          <CommentInput placeholder="¿Qué quieres decir?" />
+          <CommentInput placeholder="¿Qué quieres decir?" onKeyDown={(e: any) => {
+            addLessonComment(e)
+          }} />
         </CommentContain>
-        <CommentContain>
-          <Pp1 />
-          <CommentText>
-            <Comment>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat cras pulvinar in est gravida. Placerat elementum vitae pharetra eget dictum suspendisse tortor tellus. A egestas nisl erat amet ut cursus nullam sed. Faucibus tincidunt magna consectetur condimentum odio mauris.
-            </Comment>
-          </CommentText>
-        </CommentContain>
-        <CommentContain>
-          <Pp3 />
-          <CommentText>
-            <Comment>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat cras pulvinar in est gravida. Placerat elementum vitae pharetra eget dictum suspendisse tortor tellus. A egestas nisl erat amet ut cursus nullam sed.
-            </Comment>
-          </CommentText>
-        </CommentContain>
-        <CommentContain>
-          <Pp2 />
-          <CommentText>
-            <Comment>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat cras pulvinar in est gravida. Placerat elementum vitae pharetra eget dictum suspendisse tortor tellus. A egestas nisl erat amet ut cursus nullam sed. Faucibus tincidunt magna consectetur condimentum odio mauris.
-            </Comment>
-          </CommentText>
-        </CommentContain>
+        {currentComments.map((x: any) => {
+          return (
+            <CommentContain>
+              {comments && x.userPhoto
+                ?
+                <Profile src={x.userPhoto} />
+                :
+                <Profile
+                  src={DEFAULT_USER_IMG}
+                />}
+              <CommentText>
+                <Comment>
+                  {x.comment}
+                </Comment>
+              </CommentText>
+            </CommentContain>
+          )
+        })}
       </MainContainer>
 
     </>

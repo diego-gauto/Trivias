@@ -58,7 +58,7 @@ const Module3 = ({ user }: any) => {
     if (data.courseType == 'Mensual' && userData.membership.level == 1 || data.paid) {
       router.push({
         pathname: 'Lesson',
-        query: { id: data.id },
+        query: { id: data.id, season: 0, lesson: 0 },
       });
     }
     // if (data.courseType == 'Gratis') {

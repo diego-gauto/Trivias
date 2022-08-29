@@ -4,18 +4,108 @@ import Courses from './LessonComponents/Courses/Courses';
 import Modules from './LessonComponents/Modules/Modules';
 import CourseProgress from './LessonComponents/Progress/CourseProgress';
 import Video from './LessonComponents/Video/Video';
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
+import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
+import Link from "next/link";
+import { db } from "../../../firebase/firebaseConfig";
+import { getPaidCourses } from '../../../store/actions/UserActions';
+import { getComments, getWholeCourse } from '../../../store/actions/courseActions';
+import { useRouter } from "next/router";
+import { number } from 'yup';
 
 const Lesson = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [course, setCourse] = useState<any>();
+  const router = useRouter()
+  const [userData, setUserData] = useState<any>(null);
+  const { id, season, lesson }: any = router.query;
+  const [currentlesson, setCurrentLesson] = useState<any>({});
+  const [currentComments, setCurrentComments] = useState<any>([]);
+  const [comments, setComments] = useState<any>([]);
+
+
+  useEffect(() => {
+    if (course) {
+      let temp_lesson: any;
+      let temp_comments: any;
+      temp_lesson = course.seasons[season].lessons[lesson]
+      temp_lesson.seasonId = course.seasons[season].id
+      temp_lesson.courseId = course.id
+      setCurrentLesson(temp_lesson);
+      if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
+        temp_comments = comments.filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
+        setCurrentComments(temp_comments);
+      } else {
+        setCurrentComments([]);
+      }
+    }
+  }, [router, course]);
+
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }, [])
+  } catch (error) {
+    setLoggedIn(false)
+  }
+
+  const fetchDB_data = async () => {
+    try {
+      let date = new Date().getTime() / 1000;
+      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
+      return onSnapshot(query_1, (response) => {
+        response.forEach((e: any) => {
+          getPaidCourses(e.id).then((paid: any) => {
+            getWholeCourse(id).then((res: any) => {
+              if (res.courseType == 'Producto') {
+                if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
+                  res.paid = true;
+                } else {
+                  router.push({
+                    pathname: 'Purchase', query: { type: 'course', id: course.id }
+                  });
+                }
+              }
+              if (res.courseType == 'Mensual' && e.data().membership.level == 0) {
+                router.push(
+                  { pathname: 'Purchase', query: { type: 'subscription' } }
+                )
+              }
+              setCourse(res);
+            })
+          })
+          getComments().then((res) => {
+            setComments(res);
+          })
+          setUserData({ ...e.data(), id: e.id });
+        });
+      })
+    } catch (error) {
+      return false
+    }
+  }
+
+  useEffect(() => {
+    fetchDB_data()
+
+  }, [loggedIn])
+
   return (
     <MainContainer>
       <Container>
         <FirstContainer>
           <Video />
-          <Modules />
+          <Modules data={currentlesson} user={userData} comments={currentComments} />
         </FirstContainer>
         <SecondContainer>
           <CourseProgress />
-          <Courses />
+          <Courses id={id} course={course} />
         </SecondContainer>
 
       </Container>
