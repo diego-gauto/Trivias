@@ -1,5 +1,6 @@
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
+import { HeroData } from "../../components/admin/Landing/HeroSection/IHeroSection";
 import { Product } from "../../components/admin/Landing/ProductsSection/IProductsSection";
 import { db } from "../../firebase/firebaseConfig";
 
@@ -56,6 +57,19 @@ export const saveProductsData = async (products: Product[]) => {
   })
   try {
     await Promise.all([...promises, ...filePromises])
+  } catch {
+    return false
+  }
+  return true
+}
+
+export const saveHeroData = async (heroData: HeroData) => {
+  const heroSectionRef = doc(db, "landingPage", "heroSection")
+  try {
+    await uploadFile(heroData.heroImage, "landing/HeroImage")
+    const { heroImage, ...dataToUpdate } = heroData
+    // @ts-expect-error
+    await updateDoc(heroSectionRef, dataToUpdate)
   } catch {
     return false
   }

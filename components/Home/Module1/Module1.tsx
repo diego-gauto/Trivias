@@ -20,6 +20,7 @@ import {
   ArrowDownContainer, ModuleContainer,
 } from "./Module1.styled";
 import { AnyObject } from "yup/lib/types";
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 
 export const Module1 = (props: IModule1) => {
   const {
@@ -35,6 +36,16 @@ export const Module1 = (props: IModule1) => {
       heroImage,
     }
   } = props;
+
+  const [img, setImg] = useState("")
+
+  const awaitImg = async () => {
+    const resolvedImg = await downloadFileWithStoragePath(heroImage)
+    setImg(resolvedImg)
+  }
+  useEffect(() => {
+    awaitImg()
+  }, [])
 
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
@@ -126,7 +137,7 @@ export const Module1 = (props: IModule1) => {
           <RightWrapper>
             <Right>
               <RightImage>
-                <RightImageElement src={heroImage}></RightImageElement>
+                <RightImageElement src={img}></RightImageElement>
               </RightImage>
             </Right>
           </RightWrapper>
