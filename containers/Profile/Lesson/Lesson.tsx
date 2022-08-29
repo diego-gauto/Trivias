@@ -100,7 +100,7 @@ const Lesson = () => {
     <MainContainer>
       <Container>
         <FirstContainer>
-          <Video />
+          <Video data={currentlesson} />
           <Modules data={currentlesson} user={userData} comments={currentComments} />
         </FirstContainer>
         <SecondContainer>
