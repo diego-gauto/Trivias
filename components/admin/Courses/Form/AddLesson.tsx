@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import file from "react-player/file";
 
@@ -115,11 +115,13 @@ const AddLesson = () => {
             <Label>Portada de la Lección</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo"
+                  onChange={(e) => { getImage(e.target.files) }}>
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
           <ImageContain>
@@ -143,12 +145,13 @@ const AddLesson = () => {
             <Label>Material Adicional</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getDocuments(e.target.files) }}
-                multiple
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo"
+                  onChange={(e) => { getImage(e.target.files) }}>
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
           <InputContain>

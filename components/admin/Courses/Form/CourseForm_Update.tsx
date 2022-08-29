@@ -10,8 +10,7 @@ import { updateCourse } from "../../../../store/actions/AdminActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
-  Button,
-  ButtonContain,
+  ButtonContain2,
   CourseFormContain,
   Folder,
   IconContain,
@@ -22,6 +21,7 @@ import {
   InputForm,
   Label,
 } from "./CourseForm.styled";
+import { Button } from "./CourseForm_Create.styled";
 import {
   CaretD2,
   Label2,
@@ -263,11 +263,13 @@ const CourseForm = (props: ICourseForm_Update) => {
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo"
+                  onChange={(e) => { getImage(e.target.files) }}>
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
         </InputForm>
@@ -354,10 +356,9 @@ const CourseForm = (props: ICourseForm_Update) => {
             <span></span>
           </TagLabel>
         </TagContain> */}
-          <ButtonContain>
+          <ButtonContain2>
             <Button type='submit'>Guardar Cambios</Button>
-          </ButtonContain>
-
+          </ButtonContain2>
         </InputForm>
       </form>
     </CourseFormContain>
