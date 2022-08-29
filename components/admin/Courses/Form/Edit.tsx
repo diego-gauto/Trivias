@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import {
+  deleteLessonMaterial,
+  getLesson,
+  updateLesson,
+} from "../../../../store/actions/courseActions";
+import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
 import {
@@ -30,8 +35,6 @@ import {
   TransparentButton,
   TrashIcon,
 } from "./Edit.styled";
-import { deleteLessonMaterial, getLesson, updateLesson } from "../../../../store/actions/courseActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 
 const Edit = () => {
   const routerState = useRouter().query
@@ -122,12 +125,13 @@ const Edit = () => {
             <Label>Portada de la Lección</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
-
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo"
+                  onChange={(e) => { getImage(e.target.files) }}>
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
           <ImageContain>
@@ -150,12 +154,13 @@ const Edit = () => {
             <Label>Material Adicional</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getDocuments(e.target.files) }}
-
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo"
+                  onChange={(e) => { getImage(e.target.files) }}>
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
           {
@@ -212,7 +217,7 @@ const Edit = () => {
         <Contain3>
           <HwTitle>Tareas</HwTitle>
           <SlideContain>
-            <TitleSlide>Tarea</TitleSlide>
+            <TitleSlide style={{ marginTop: "115px", }}>Tarea</TitleSlide>
           </SlideContain>
           <InputContain>
             <Label>Título de la Tarea</Label>

@@ -38,14 +38,21 @@ export const Input = styled.input`
     outline: 1px solid #8E2DE2;
   }
 `;
-export const Input2 = styled.input`
+export const Input2 = styled.div`
   width: 100%;
   font-size: 14px;
   font-family:'Montserrat',sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
+  height: 43px;
   border:1px solid #6717CD;
   border-radius:20px;
+  input::file-selector-button {
+    display: none;
+  }
+  label{
+    color: #6717CD;
+  }
   :focus{
     outline: 1px solid #8E2DE2;
   }

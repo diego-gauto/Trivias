@@ -71,7 +71,7 @@ export const Contain2 = styled.div`
 export const Contain3 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 45px;
+  margin-top: 14px;
   gap: 20px;
   width: 33.33%;
 `;

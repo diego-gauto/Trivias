@@ -21,8 +21,8 @@ import {
   ModalContain,
   Option,
   OptionContain,
-  SelectContain,
   Selected,
+  SelectContain,
   Title,
   TitleContain,
 } from "./Modal.styled";
@@ -128,11 +128,13 @@ const Modal1 = ({ show, setShow, data }: any) => {
           <Label>Imagen del Producto</Label>
           <IconContain>
             <Folder />
-            <Input2
-              type="file"
-              placeholder="Seleccionar archivo"
-              onChange={(e) => { getImage(e.target.files) }}
-            />
+            <Input2>
+              <input
+                type="file"
+                placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}>
+              </input>
+            </Input2>
           </IconContain>
         </InputContain>
         <ButtonContain>
