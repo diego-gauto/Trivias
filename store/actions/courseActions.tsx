@@ -149,3 +149,26 @@ export const getComments = async () => {
   });
   return comment;
 }
+
+export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any, lessonId: any, user: any) => {
+  console.log(lesson);
+  let temp_lesson: any;
+  delete lesson.id
+  delete lesson.seasonId
+  delete lesson.courseId
+
+  const docRef = doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId);
+  const docSnap = await getDoc(docRef);
+  temp_lesson = docSnap.data();
+
+  temp_lesson.users.push(user.id);
+  const docRefNew = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  await updateDoc(docRefNew, {
+    ...temp_lesson
+  });
+  const docRefUser = doc(db, 'users', user.id);
+  await updateDoc(docRefUser, {
+    ...user
+  })
+  return 'success'
+}

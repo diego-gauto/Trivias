@@ -3,19 +3,20 @@ import ReactPlayer from "react-player";
 import { Title, VideoContain, VideoImage, Segment } from './Video.styled';
 import { useMediaQuery } from "react-responsive";
 import Courses from '../../LessonComponents/Courses/Courses';
+import { addUserToLesson } from '../../../../../store/actions/courseActions';
 
-const Video = ({ data, title, id, course, userId }: any) => {
+const Video = ({ data, title, id, course, user }: any) => {
   const [current, setCurrent] = useState<any>();
 
   const finishedLesson = () => {
     let temp: any = data;
-    if ("users" in data) {
-      if (temp.users.includes(userId)) {
-        console.log("user exist");
-      } else {
-        temp.users.push(userId)
-        setCurrent({ ...temp })
-      }
+    if (temp.users.includes(user.id)) {
+      console.log("user exist");
+    } else {
+      user.score = user.score + data.points;
+      addUserToLesson(data, id, data.seasonId, data.id, user);
+      temp.users.push(user.id);
+      setCurrent({ ...temp });
     }
   }
 
@@ -39,7 +40,7 @@ const Video = ({ data, title, id, course, userId }: any) => {
           onEnded={finishedLesson}
         />
       </VideoContain>
-      <Courses id={id} course={course} data={current} userId={userId} />
+      <Courses id={id} course={course} data={current} userId={user?.id} />
     </Segment>
   )
 }
