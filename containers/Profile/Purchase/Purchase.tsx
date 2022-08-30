@@ -301,8 +301,6 @@ const Purchase = () => {
 
   useEffect(() => {
     console.log(plan);
-
-
   }, [card, plan])
 
   return (

@@ -77,6 +77,14 @@ const Lesson = () => {
                   { pathname: 'Purchase', query: { type: 'subscription' } }
                 )
               }
+              res.seasons.forEach((element: any) => {
+                element.lessons.forEach((x: any) => {
+                  if ("users" in x) { }
+                  else {
+                    x.users = [];
+                  }
+                });
+              });
               setCourse(res);
             })
           })
@@ -100,14 +108,9 @@ const Lesson = () => {
     <MainContainer>
       <Container>
         <FirstContainer>
-          <Video data={currentlesson} />
+          <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} userId={userData?.id} />
           <Modules data={currentlesson} user={userData} comments={currentComments} />
         </FirstContainer>
-        <SecondContainer>
-          <CourseProgress />
-          <Courses id={id} course={course} />
-        </SecondContainer>
-
       </Container>
 
     </MainContainer>

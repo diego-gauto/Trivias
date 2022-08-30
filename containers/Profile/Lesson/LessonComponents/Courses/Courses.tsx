@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { number } from 'yup';
+import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
-const Courses = ({ id, course }: any) => {
-  const [selected, setSelected] = useState<any>([])
+const Courses = ({ id, course, data, userId }: any) => {
+  const [selected, setSelected] = useState<any>([]);
 
   useEffect(() => {
     let temp_selected: any = [];
@@ -21,6 +22,7 @@ const Courses = ({ id, course }: any) => {
   }
   return (
     <MainContainer>
+      <CourseProgress />
       {course?.seasons.map((season: any, index: any) => {
         return (
           <>
@@ -35,7 +37,7 @@ const Courses = ({ id, course }: any) => {
             </Container>
             <Divider />
             <CoursesContainer active={selected[index]}>
-              <EveryCourse id={id} season={index} lessons={season.lessons} />
+              <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userId} />
             </CoursesContainer>
           </>
         )
