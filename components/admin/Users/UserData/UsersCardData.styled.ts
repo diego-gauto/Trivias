@@ -104,6 +104,10 @@ export const TransparentButton = styled.button`
   border: 1px solid #6717CD;
   border-radius: 100px;
   width: fit-content;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const PayContain = styled.div`
   display: flex;

@@ -1,25 +1,46 @@
-import { useEffect, useState } from "react";
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
-import DOMPurify from "dompurify"
-import Img1 from "./MediaSources/Icon01.png"
-import Img2 from "./MediaSources/Icon02.png"
-import Img3 from "./MediaSources/Icon03.png"
-import Img4 from "./MediaSources/Icon04.png"
-import { IModule1 } from "./IModule1";
-import GradientCanvas from "../../GradientCanvas/GradientCanvas"
 
+
+import { Col, Image, Row } from "react-bootstrap";
+
+import DOMPurify from "dompurify";
+
+import GradientCanvas from "../../GradientCanvas/GradientCanvas";
+import { IModule1 } from "./IModule1";
+import Img1 from "./MediaSources/Icon01.png";
+import Img2 from "./MediaSources/Icon02.png";
+import Img3 from "./MediaSources/Icon03.png";
+import Img4 from "./MediaSources/Icon04.png";
 import {
-  BackgroundWrapper, Left, Right, SectionA_01,
-  RightImage, SectionB, SectionB_01, SectionB_02,
-  SectionC, SectionA_02, LeftWrapper, Button01, Button02,
-  Button01Content, Button02Content, SectionA_01Text01,
-  SectionA_01Text02, SectionA_02Text01, SectionA_02Text02,
-  SectionB_Text, IconElement, IconImageWrapper, BlurWindow,
-  SectionB_TextALT1, ModuleContentWrapper, RightWrapper,
-  RightImageElement, SectionA_01TextWrapper, ArrowDownIcon,
-  ArrowDownContainer, ModuleContainer,
+  ArrowDownContainer,
+  ArrowDownIcon,
+  BackgroundWrapper,
+  BlurWindow,
+  Button01,
+  Button01Content,
+  Button02,
+  Button02Content,
+  IconElement,
+  IconImageWrapper,
+  Left,
+  LeftWrapper,
+  ModuleContainer,
+  ModuleContentWrapper,
+  Right,
+  RightImage,
+  RightImageElement,
+  RightWrapper,
+  SectionA_01,
+  SectionA_01Text01,
+  SectionA_01TextWrapper,
+  SectionA_02,
+  SectionA_02Text01,
+  SectionB,
+  SectionB_01,
+  SectionB_02,
+  SectionB_Text,
+  SectionB_TextALT1,
+  SectionC,
 } from "./Module1.styled";
-import { AnyObject } from "yup/lib/types";
 
 export const Module1 = (props: IModule1) => {
   const {

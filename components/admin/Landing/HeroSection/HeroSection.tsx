@@ -1,4 +1,5 @@
-import React from 'react'
+
+
 import {
   AllEditInputs,
   ColumnsContainer,
@@ -12,7 +13,7 @@ import {
   ProfileData,
   SaveButton,
 } from "../Landing.styled";
-import { IHeroSectionProps } from './IHeroSection';
+import { IHeroSectionProps } from "./IHeroSection";
 
 const HeroSection = (props: IHeroSectionProps) => {
   const { heroSectionData } = props;

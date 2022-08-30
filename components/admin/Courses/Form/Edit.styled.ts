@@ -28,6 +28,10 @@ export const Button = styled.button`
   border-radius: 30px;
   padding-block: 10px;
   padding-inline: 20px;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const TrashIcon = styled.i`
   background-image: url(../images/trash.png);
@@ -176,6 +180,10 @@ export const TransparentButton = styled.button`
   padding-inline: 30px;
   border: 1px solid #6717CD;
   border-radius: 100px;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
@@ -187,7 +195,9 @@ export const PurpleButton = styled.button`
   border-radius: 100px;
   border: none;
   &:hover{
-    background: #5b02cc;
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
   }
 `;
 export const Folder = styled.i`
