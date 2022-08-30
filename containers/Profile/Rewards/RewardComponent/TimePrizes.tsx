@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 import {
   AllPrizes,
@@ -10,47 +8,71 @@ import {
   PrizeInfo,
   PrizeTitle,
   TitleClaim,
+  Overlay2,
+  ImageReward,
+
 } from "./ClaimPrizes.styled";
 import Modal1 from "./Modal1/Modal1";
 import Modal2 from "./Modal1/Modal2";
+import { getTimeRewards, getUserRewards } from "../../../../store/actions/RewardActions";
 
-const TimePrizes = () => {
+const TimePrizes = ({ score, user }: any) => {
 
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
-  const handleShow1 = () => setShow1(true);
   const handleShow2 = () => setShow2(true);
+
+  const [rewards, setRewards] = useState<any>([]);
+  const [reward, setReward] = useState<any>({});
+  const getAllRewards = () => {
+    getTimeRewards().then((res) => {
+      getUserRewards(user.id).then((rw) => {
+
+        res.forEach((element: any) => {
+          if (rw.some((x: any) => x.id == element.id && x.status == true)) {
+            element.status = true;
+          } else {
+            element.status = false;
+          }
+
+        });
+      })
+      setRewards(res);
+    })
+  }
+
+  useEffect(() => {
+    getAllRewards();
+  }, [])
+
   return (
     <MainContainer>
       <TitleClaim>
         Premios por reclamar
       </TitleClaim>
       <AllPrizes>
-        <PrizeContain>
-          <PrizeImage onClick={handleShow1}>
-            <Image src="/images/GonvarReward1.png" width={250} height={250} />
-          </PrizeImage>
-          <PrizeTitle>
-            Gonvar Nails Leonardo Da Vinci
-          </PrizeTitle>
-          <PrizeInfo>
-            7 meses
-          </PrizeInfo>
-        </PrizeContain>
-        <PrizeContain>
-          <PrizeImage onClick={handleShow2}>
-            <Image src="/images/Rewards/reward3.png" width={250} height={250} />
-          </PrizeImage>
-          <PrizeTitle>
-            20% en una membresía
-          </PrizeTitle>
-          <PrizeInfo>
-            9 meses
-          </PrizeInfo>
-        </PrizeContain>
+        {
+          rewards.map((reward: any, index: any) => {
+            return (
+              <PrizeContain key={"Prizes" + index} >
+                <PrizeImage onClick={() => {
+                  setShow2(true), setReward(reward);
+                }} >
+                  <Overlay2 points={reward.month} score={score} />
+                  <ImageReward src={reward.path} />
+                </PrizeImage>
+                <PrizeTitle>
+                  {reward.title}
+                </PrizeTitle>
+                <PrizeInfo>
+                  {reward.month} {reward.month <= 1 ? "mes" : "meses"}
+                </PrizeInfo>
+              </PrizeContain>
+            )
+          })
+        }
       </AllPrizes>
-      {/* <Modal1 show={show1} setShow={setShow1} />
-      <Modal2 show={show2} setShow={setShow2} /> */}
+      <Modal2 show={show2} setShow={setShow2} data={reward} user={user} score={score} />
     </MainContainer>
   )
 }

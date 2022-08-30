@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
-import { addReward } from "../../../../../store/actions/RewardActions";
+import { addTimeReward } from "../../../../../store/actions/RewardActions";
 import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
@@ -25,13 +25,13 @@ import {
   TitleContain,
 } from "./Modal.styled";
 
-const Modal2 = ({ show, setShow }: any) => {
+const AddTimePrize = ({ show, setShow }: any) => {
 
   const [open, setOpen] = useState(false);
 
   const [reward, setReward] = useState<any>({
     title: "",
-    points: "",
+    month: "",
     about: "",
     path: "",
     type: ""
@@ -52,7 +52,7 @@ const Modal2 = ({ show, setShow }: any) => {
 
     }
     else {
-      addReward(reward).then((res) => {
+      addTimeReward(reward).then((res) => {
         console.log(res)
       })
     }
@@ -76,10 +76,10 @@ const Modal2 = ({ show, setShow }: any) => {
           />
         </InputContain>
         <InputContain>
-          <Label>Puntos</Label>
-          <Input placeholder="1100"
+          <Label>Meses</Label>
+          <Input placeholder="7"
             onChange={(e: any) => {
-              setReward({ ...reward, points: parseInt(e.target.value) })
+              setReward({ ...reward, month: parseInt(e.target.value) })
             }} />
         </InputContain>
         <SelectContain>
@@ -120,9 +120,9 @@ const Modal2 = ({ show, setShow }: any) => {
           <Label>Descripción</Label>
           <InputBig
             placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci 
-            malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium 
-            aliquet ultricies. Interdum et suspendisse nunc gravida. "
+          Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci 
+          malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium 
+          aliquet ultricies. Interdum et suspendisse nunc gravida. "
             onChange={(e: any) => {
               setReward({ ...reward, about: e.target.value })
             }}
@@ -152,4 +152,4 @@ const Modal2 = ({ show, setShow }: any) => {
     </Modal>
   )
 }
-export default Modal2;
+export default AddTimePrize;

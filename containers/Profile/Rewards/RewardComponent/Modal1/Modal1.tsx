@@ -1,5 +1,3 @@
-
-
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 
@@ -24,8 +22,8 @@ import {
   Title,
   TransparentButton,
 } from "./Modal1.styled";
-import { addRequest, addUserReward, getUserRewards } from "../../../../../store/actions/RewardActions";
-import { useEffect, useState } from "react";
+import { addRequest, addUserReward } from "../../../../../store/actions/RewardActions";
+import { useState } from "react";
 
 const Modal1 = ({ show, setShow, data, user }: any) => {
 

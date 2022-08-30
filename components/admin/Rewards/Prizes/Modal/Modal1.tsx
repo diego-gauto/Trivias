@@ -1,10 +1,8 @@
-
-
 import { useEffect, useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
-import { updateRewards } from "../../../../../store/actions/RewardActions";
+import { deletePointPrize, updateRewards } from "../../../../../store/actions/RewardActions";
 import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
@@ -25,6 +23,7 @@ import {
   SelectContain,
   Title,
   TitleContain,
+  ButtonTransparent,
 } from "./Modal.styled";
 
 const Modal1 = ({ show, setShow, data }: any) => {
@@ -47,6 +46,9 @@ const Modal1 = ({ show, setShow, data }: any) => {
       updateRewards(reward, reward.id);
       console.log(reward)
     }
+  }
+  const deletePrize = (reward: any) => {
+    deletePointPrize(reward)
   }
   useEffect(() => {
     setReward({ ...data })
@@ -138,6 +140,10 @@ const Modal1 = ({ show, setShow, data }: any) => {
           </IconContain>
         </InputContain>
         <ButtonContain>
+          <ButtonTransparent onClick={() => {
+            deletePrize(reward)
+          }}
+          >Eliminar</ButtonTransparent>
           <Button onClick={() => {
             update()
           }}>Guardar</Button>
