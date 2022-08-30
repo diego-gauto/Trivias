@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardTitle, MasonryCard, MasonryImage, MasonryItem } from './SlideModule.styled'
 import { ISlideModule } from './ISlideModule'
 
 const SlideModule = (props: ISlideModule) => {
   const { title, imgURL } = props
+  const [img, setImg] = useState("")
+
+  const awaitImg = async () => {
+    const resolvedImg = await imgURL
+    setImg(resolvedImg)
+  }
+  useEffect(() => {
+    awaitImg()
+  }, [])
 
   return (
     <MasonryItem>
@@ -11,7 +20,7 @@ const SlideModule = (props: ISlideModule) => {
         <CardTitle>
           {title}
         </CardTitle>
-        <MasonryImage src={imgURL} />
+        <MasonryImage src={img} />
       </MasonryCard>
     </MasonryItem>
   )
