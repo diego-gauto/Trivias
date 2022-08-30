@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const RewardContain = styled.div`
   display: flex;

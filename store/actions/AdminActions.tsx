@@ -34,21 +34,21 @@ const uploadImage = (image: any, name: any) => {
     });
   });
 }
-export const updateCourse = async (signUpData: { data: any; }) => {
+export const updateCourse = async (signUpData: { data: any; }, images: any) => {
   const {
     data,
   } = signUpData;
   let tempCourse: any = JSON.parse(JSON.stringify(data))
+
   const storage = getStorage();
-  const desertRef = ref(storage, `rewards/${tempCourse.reference}`);
-  if ("format" in tempCourse) {
+  const desertRef = ref(storage, `courses/${tempCourse.reference}`);
+  if (images !== "") {
     await deleteObject(desertRef).then(async () => {
       tempCourse.reference = `${tempCourse.courseTittle}-${uuidv4()}`
     }).catch((error) => {
       console.log(error)
     });
-    tempCourse.coursePath = await uploadImage(tempCourse.format, tempCourse.reference);
-    delete tempCourse.format;
+    tempCourse.coursePath = await uploadImage(images, tempCourse.reference);
   }
 
   console.log(signUpData)
@@ -250,6 +250,7 @@ const uploadImageLesson = (image: any, name: any) => {
 }
 
 export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
+  lesson.users = {}
   lesson.imageReference = `${lesson.title}-${uuidv4()}`
   lesson.image = await uploadImageLesson(lesson.image, lesson.imageReference);
   if (lesson.extra.length > 0) {

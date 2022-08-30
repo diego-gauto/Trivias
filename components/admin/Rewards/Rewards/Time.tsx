@@ -1,10 +1,14 @@
-
-
+import React, { useState, useEffect } from "react";
 import { InputContain, Tab, Unselect } from "../Rewards.styled";
+import { collection, query, getDocs, orderBy } from "firebase/firestore";
+import { db } from "../../../../firebase/firebaseConfig";
+import EditLevel from "./Modal/EditLevel";
 import {
+  AllLevels,
   ButtonContain,
   Container,
   ContainerLevel,
+  Divider,
   Grid,
   Level,
   LevelCircle,
@@ -12,8 +16,23 @@ import {
   TabContain,
   TransparentButton,
 } from "./Points.styled";
+import EditTimeLevel from "./Modal/EditTimeLevel";
+import { getTimeLevels } from "../../../../store/actions/RewardActions";
 
 const Time = ({ setPlace }: any) => {
+  const [show, setShow] = useState(false);
+  const [levels, setLevels] = useState<any>({
+    minimum: 0,
+    maximum: 0
+  })
+  const getLevels = () => {
+    getTimeLevels().then(res => {
+      setLevels(res)
+    })
+  }
+  useEffect(() => {
+    getLevels();
+  }, [])
   return (
     <>
       <TabContain>
@@ -28,102 +47,36 @@ const Time = ({ setPlace }: any) => {
         </Unselect>
       </TabContain>
       <Container>
-        <ContainerLevel>
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 1
-              <label>
-                1 mes
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 2
-              <label>
-                2 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 3
-              <label>
-                3 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 4
-              <label>
-                6 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 5
-              <label>
-                9 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 6
-              <label>
-                12 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 7
-              <label>
-                18 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 8
-              <label>
-                24 meses
-              </label>
-            </Level>
-          </LevelContain>
-          {/* <Divider /> */}
-          <LevelContain>
-            <LevelCircle />
-            <Level>
-              Nivel 9
-              <label>
-                36 meses
-              </label>
-            </Level>
-          </LevelContain>
-        </ContainerLevel>
+        {
+          levels.length > 0 &&
+          <AllLevels>
+            {
+              levels.map((val: any, i: any) => {
+                return (
+                  <ContainerLevel key={"adminLevelTime" + i} size={levels.length} i={i + 1} >
+                    <LevelContain >
+                      <LevelCircle />
+                      <Level>
+                        Nivel {i + 1}
+                        <br />
+                        <label>
+                          {val.maximum}
+                          {val.maximum == 1 ? " mes" : " meses"}
+                        </label>
+                      </Level>
+                    </LevelContain>
+                    <Divider size={levels.length} i={i + 1} />
+                  </ContainerLevel>
+                )
+              })
+            }
+          </AllLevels>
+        }
 
-        <ButtonContain>
+        <ButtonContain onClick={() => { setShow(true) }}>
           <TransparentButton>Editar Niveles<Grid /></TransparentButton>
         </ButtonContain>
-
+        <EditTimeLevel show={show} setShow={setShow} levels={levels} />
       </Container>
     </>
 

@@ -232,10 +232,12 @@ const CourseForm = () => {
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo">
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
         </InputForm>

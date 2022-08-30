@@ -15,8 +15,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import { db } from "../../firebase/firebaseConfig";
 
+//CONSEGUIR EL NIVEL ACTUAL POR PUNTOS
+
 export const getLevel = async () => {
-  const levelRef = query(collection(db, "levelPoints"), orderBy("level"))
+  const levelRef = query(collection(db, "levelPoints"), orderBy("minimum", "desc"))
   let tempData: any = []
   const data = await getDocs(levelRef)
   data.forEach((doc) => {
@@ -28,8 +30,29 @@ export const getLevel = async () => {
   // tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
   return tempData
 }
+// RECIBIR TODOS LOS NIVELES POR PUNTOS
 export const getLevels = async () => {
   const levelsRef = query(collection(db, "levelPoints"), orderBy("minimum"))
+  let temp_levels: any = [];
+  const data = await getDocs(levelsRef);
+  data.forEach((level) => {
+    temp_levels.push({ ...level.data(), id: level.id });
+  })
+  return temp_levels
+}
+// CONSEGUIR EL NIVEL ACTUAL POR TIEMPO
+export const getTimeLevel = async () => {
+  const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum", "desc"))
+  let temp_levels: any = [];
+  const data = await getDocs(levelsRef);
+  data.forEach((level) => {
+    temp_levels.push({ ...level.data(), id: level.id });
+  })
+  return temp_levels
+}
+// CONSEGUIR LOS NIVELES POR TIEMPO
+export const getTimeLevels = async () => {
+  const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum"))
   let temp_levels: any = [];
   const data = await getDocs(levelsRef);
   data.forEach((level) => {
@@ -40,6 +63,9 @@ export const getLevels = async () => {
 
 export const deleteLevel = async (level: any) => {
   await deleteDoc(doc(db, "levelPoints", level.id));
+}
+export const deleteTimeLevel = async (level: any) => {
+  await deleteDoc(doc(db, "levelTimes", level.id));
 }
 export const addLevel = async (level: any) => {
   const docRef = await addDoc(
@@ -62,6 +88,15 @@ export const addLevelTime = async (level: any) => {
 export const updateLevel = async (level: any, id: any) => {
 
   const docRef = doc(db, 'levelPoints', id);
+  await updateDoc(docRef, {
+    maximum: level.maximum,
+    minimum: level.minimum
+  })
+  return 'exito'
+}
+export const updateLevelTime = async (level: any, id: any) => {
+
+  const docRef = doc(db, 'levelTimes', id);
   await updateDoc(docRef, {
     maximum: level.maximum,
     minimum: level.minimum

@@ -1,32 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getTimeLevels } from "../../../../store/actions/RewardActions";
 
 import {
   Circle,
   ContainLevel,
   Divisor,
   LevelText,
-} from "./RewardComp.styled";
+  LevelContainer
+} from "./Times.styled";
 
-const Times = () => {
-  let UserTime = 5;
-  const [rows, setRows] = React.useState([]);
+const Times = ({ rewards, score, level, currentLevel, levels }: any) => {
 
-  React.useEffect(() => {
-    const data = localStorage.getItem("activeLvl");
-    if (data) {
-      setRows(JSON.parse(data));
-    }
-  }, []);
-
-  React.useEffect(() => {
-    localStorage.setItem("activeLvl", JSON.stringify(rows));
-  });
-
-  const currentLevel = document.querySelector("#activeLvl");
-  currentLevel?.scrollIntoView({ inline: "center", block: "end" });
 
   return (
-    <></>
+
+    <>
+      {
+        levels.map((val: any, i: any) => {
+          return (
+            <LevelContainer key={"levels" + i} i={i + 1} level={currentLevel}>
+              <Divisor
+                min={val.minimum}
+                i={i}
+                size={levels.length - 1}
+                level={level.minimum}
+                score={score}
+                max={val.maximum}
+              />
+              <ContainLevel>
+                <Circle val={val.minimum} level={level.minimum} />
+                <LevelText val={val.minimum} level={level.minimum}>
+                  Nivel {i + 1} <br /> {val.maximum} {i == 0 ? "mes" : "meses"}
+                </LevelText>
+              </ContainLevel>
+            </LevelContainer>
+          )
+        })
+      }
+    </>
+
   )
 }
 export default Times;

@@ -3,13 +3,26 @@ import styled from "styled-components";
 export const CourseFormContain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   padding: 30px;
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+`;
+export const ButtonContain2 = styled.div`
+display: flex;
+align-items: end;
+justify-content: flex-end;
+font-size: 14px;
+font-family:'Montserrat',sans-serif;
+width: 100%;
+border-radius:20px;
 `;
 export const Button = styled.button`
   font-size: 16px;

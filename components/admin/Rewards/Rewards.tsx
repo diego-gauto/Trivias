@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getBanner, updateBanner } from "../../../store/actions/RewardActions";
 
+import { getBanner, updateBanner } from "../../../store/actions/RewardActions";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import Prize from "./Prizes/Prize";

@@ -10,8 +10,7 @@ import { updateCourse } from "../../../../store/actions/AdminActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
-  Button,
-  ButtonContain,
+  ButtonContain2,
   CourseFormContain,
   Folder,
   IconContain,
@@ -22,6 +21,7 @@ import {
   InputForm,
   Label,
 } from "./CourseForm.styled";
+import { Button } from "./CourseForm_Create.styled";
 import {
   CaretD2,
   Label2,
@@ -72,6 +72,8 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { coursePublishYear } = props;
   const { courseSubtittle } = props;
   const { documentID } = props;
+  const { coursePath } = props;
+  const { reference } = props;
 
   const [select, setSelect] = useState("");
   const handleSelectChange = (e: any) => {
@@ -94,7 +96,8 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState("Darth Vader, Grand Moff Tarkin")
   const [value2, setValue2] = useState("Uñas")
-  const [image, setImage] = useState<any>("")
+  const [image, setImage] = useState<any>(coursePath)
+  const [images, setimages] = useState<any>("")
 
   useEffect(() => {
     setValue2(courseCategory)
@@ -118,6 +121,8 @@ const CourseForm = (props: ICourseForm_Update) => {
         courseDuration: formData.courseDuration,
         courseSubtittle: formData.courseSubtittle,
         courseAbout: formData.courseAbout,
+        reference: reference,
+        coursePath: image,
         coursePublishYear: formData.coursePublishYear,
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
@@ -126,7 +131,7 @@ const CourseForm = (props: ICourseForm_Update) => {
       },
     };
 
-    updateCourse(signUpData).then(() => {
+    updateCourse(signUpData, images).then(() => {
 
       window.location.href = "/admin/Courses";
       console.log("done!")
@@ -139,6 +144,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       setImage(reader.result)
+      setimages(reader.result)
     };
   }
 
@@ -159,7 +165,7 @@ const CourseForm = (props: ICourseForm_Update) => {
             />
           </InputContain>
           <InputContain>
-            <Label2>Profesor(es)</Label2>
+            <Label>Profesor(es)</Label>
             <IconContain>
 
               <SelectContain key={1}>
@@ -257,11 +263,13 @@ const CourseForm = (props: ICourseForm_Update) => {
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
-              <Input2
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
-              />
+              <Input2>
+                <input
+                  type="file"
+                  placeholder="Seleccionar archivo"
+                  onChange={(e) => { getImage(e.target.files) }}>
+                </input>
+              </Input2>
             </IconContain>
           </InputContain>
         </InputForm>
@@ -348,10 +356,9 @@ const CourseForm = (props: ICourseForm_Update) => {
             <span></span>
           </TagLabel>
         </TagContain> */}
-          <ButtonContain>
+          <ButtonContain2>
             <Button type='submit'>Guardar Cambios</Button>
-          </ButtonContain>
-
+          </ButtonContain2>
         </InputForm>
       </form>
     </CourseFormContain>

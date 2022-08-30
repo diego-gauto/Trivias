@@ -9,7 +9,7 @@ import {
   LevelText,
 } from "./RewardComp.styled";
 
-const Points = ({ level, score }: any) => {
+const Points = ({ level, score, currentLevel }: any) => {
 
 
   const [levels, setLevels] = useState<any>([]);
@@ -28,7 +28,7 @@ const Points = ({ level, score }: any) => {
       {
         levels.map((val: any, i: any) => {
           return (
-            <LevelContainer key={"levels" + i} i={i} level={level.level} levels={val.level}>
+            <LevelContainer key={"levels" + i} i={i + 1} level={currentLevel}>
               <Divisor min={val.minimum} i={i} size={levels.length - 1} level={level.minimum} score={score} max={val.maximum} />
               <ContainLevel>
                 <Circle val={val.minimum} level={level.minimum} />
