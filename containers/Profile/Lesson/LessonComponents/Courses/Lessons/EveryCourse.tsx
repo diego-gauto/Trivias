@@ -4,7 +4,6 @@ import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, Curren
 
 const EveryCourse = ({ id, lessons, season, data, userId }: any) => {
   const router = useRouter();
-  console.log(lessons);
 
   const goTo = (lIndex: any, idx: any) => {
     router.push({

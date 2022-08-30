@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson } from '../../../../../store/actions/courseActions';
 
-const Video = ({ data, title, id, course, user }: any) => {
+const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [current, setCurrent] = useState<any>();
 
   const finishedLesson = () => {
@@ -40,7 +40,7 @@ const Video = ({ data, title, id, course, user }: any) => {
           onEnded={finishedLesson}
         />
       </VideoContain>
-      <Courses id={id} course={course} data={current} userId={user?.id} />
+      <Courses id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
     </Segment>
   )
 }
