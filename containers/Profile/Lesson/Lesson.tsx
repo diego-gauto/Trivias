@@ -98,12 +98,12 @@ const Lesson = () => {
 
   return (
     <MainContainer>
-      <Container>
+      {course && <Container>
         <FirstContainer>
           <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} />
-          <Modules data={currentlesson} user={userData} comments={currentComments} />
+          <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} />
         </FirstContainer>
-      </Container>
+      </Container>}
 
     </MainContainer>
   )

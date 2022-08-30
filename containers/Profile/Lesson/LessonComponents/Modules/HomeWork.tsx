@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { addHomework } from '../../../../../store/actions/courseActions'
 import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkContain } from './HomeWork.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
 
-const HomeWork = ({ value, setValue, data }: any) => {
+const HomeWork = ({ value, setValue, data, user, season, lesson }: any) => {
+
+  const getImage = (file: any) => {
+    let tempHomework: any = {}
+    tempHomework.userName = user.name;
+    tempHomework.userEmail = user.email;
+    tempHomework.title = data.homeWork;
+    tempHomework.about = data.homeWorkAbout;
+    tempHomework.path = '';
+    tempHomework.season = parseInt(season) + 1;
+    tempHomework.lesson = parseInt(lesson) + 1;
+    tempHomework.createdAt = new Date();
+    if (file.length > 0) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file[0]);
+      reader.onload = (_event) => {
+        tempHomework.path = reader.result;
+        addHomework(tempHomework).then(() => {
+          alert("Su tarea se subió correctamente!");
+        })
+      };
+    }
+  }
+
+  const uploadHwk = () => {
+    document.getElementById('hide')?.click()
+  }
+
   return (
     <>
       <TitleContain >
@@ -65,7 +93,8 @@ const HomeWork = ({ value, setValue, data }: any) => {
         <ButtonDiv>
           <UploadButton>
             Subir tarea
-            <UploadIcon />
+            <UploadIcon onClick={uploadHwk} />
+            <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
           </UploadButton>
         </ButtonDiv>
       </HomeWorkContain>

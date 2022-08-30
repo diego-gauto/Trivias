@@ -172,3 +172,27 @@ export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any,
   })
   return 'success'
 }
+
+const uploadImageHwk = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `homeworks/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url')
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((downloadURL) => {
+          resolve(downloadURL)
+        });
+      })
+  });
+}
+
+export const addHomework = async (data: any) => {
+  data.path = await uploadImageHwk(data.path, `${data.title}-${uuidv4()}`);
+  const docRef = await addDoc(
+    collection(db, "homeworks"),
+    {
+      ...data
+    }
+  );
+  return 'exito'
+}
