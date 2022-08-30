@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+
+
+
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import {
+  getBanner,
+  getLevel,
+  getTimeLevel,
+  getTimeLevels,
+} from "../../../store/actions/RewardActions";
 import PointRewards from "./RewardComponent/PointRewards";
 import TimeRewards from "./RewardComponent/TimeRewards";
-import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
-
 import {
   BannerContain,
   BannerTitle,
@@ -26,7 +33,6 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
-import { getBanner, getLevel, getTimeLevel, getTimeLevels } from "../../../store/actions/RewardActions";
 import { TimeProgressBackground, TimeProgressCircle, TimeSvg } from "./RewardsTime.styled";
 
 const Rewards = () => {
