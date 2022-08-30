@@ -11,7 +11,7 @@ import {
   Vector2,
 } from "../../../../containers/Profile/Rewards/UserLevel/UserLevel.styled";
 import { db } from "../../../../firebase/firebaseConfig";
-import { getLevel } from "../../../../store/actions/RewardActions";
+import { getLevels } from "../../../../store/actions/RewardActions";
 
 interface LevelData {
   id: string;
@@ -24,6 +24,7 @@ const GetUserLevel = ({ userLevel }: any) => {
   const [size, setSize] = useState(0);
   const [level, setLevel] = useState<LevelData>({ id: "", level: 0, maximum: 0, minimum: 0 });
   const [data, setData] = useState<number>(0)
+  const [currentLevel, setCurrentLevel] = useState<number>(0);
 
   const getSize = async () => {
     db.collection('levelPoints').get().then(snap => {
@@ -31,9 +32,10 @@ const GetUserLevel = ({ userLevel }: any) => {
     });
   }
   const getCurrentLevel = () => {
-    getLevel().then((res: Array<LevelData>) => {
-      const response = res.filter((data: any) => (data.maximum >= userLevel.score && data.minimum <= userLevel.score) || data.level == size)[0] ?? { id: "", level: 1, maximum: 0, minimum: 0 }
-      setLevel(response)
+    getLevels().then((res) => {
+      const response = res.filter((data: any) => (data.maximum <= userLevel.score && data.minimum <= userLevel.score) || data.level == size)
+      setLevel(response[0])
+      setCurrentLevel(response.length)
     })
   }
   useEffect(() => {
@@ -53,7 +55,7 @@ const GetUserLevel = ({ userLevel }: any) => {
     <OuterProgress>
       <LevelContain>
         <CurrentLevel>
-          {level.level}
+          {currentLevel}
         </CurrentLevel>
         <Vector />
         <Vector2 />

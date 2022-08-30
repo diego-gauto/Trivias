@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { db } from "../../../../firebase/firebaseConfig";
 import { useAuth } from "../../../../hooks/useAuth";
-import { getLevel } from "../../../../store/actions/RewardActions";
+import { getLevels } from "../../../../store/actions/RewardActions";
 import {
   Background,
   CurrentLevel,
@@ -23,6 +23,7 @@ const UserLevel = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [size, setSize] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState<number>(0);
 
   const [level, setLevel] = useState<any>([]);
 
@@ -63,11 +64,10 @@ const UserLevel = () => {
     });
   }
   const getCurrentLevel = () => {
-    getLevel().then((res) => {
-      res = res.filter((data: any, index: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
-
+    getLevels().then((res) => {
+      res = res.filter((data: any, index: any) => (data.maximum <= userData.score && data.minimum <= userData.score) || data.level == size)
       setLevel(res[0])
-      //console.log("USER LEVEL ACTUAL LEVEL:", level)
+      setCurrentLevel(res.length)
     })
   }
   useEffect(() => {
@@ -98,7 +98,7 @@ const UserLevel = () => {
       <OuterProgress>
         <LevelContain>
           <CurrentLevel>
-            {level.level}
+            {currentLevel}
           </CurrentLevel>
           <Vector />
           <Vector2 />
