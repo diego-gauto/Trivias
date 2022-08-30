@@ -26,7 +26,7 @@ import {
   Vector,
   Vector2,
 } from "./Rewards.styled";
-import { addUserReward, getBanner, getLevel } from "../../../store/actions/RewardActions";
+import { getBanner, getLevel, getTimeLevel, getTimeLevels } from "../../../store/actions/RewardActions";
 import { TimeProgressBackground, TimeProgressCircle, TimeSvg } from "./RewardsTime.styled";
 
 const Rewards = () => {
@@ -38,13 +38,23 @@ const Rewards = () => {
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState<any>([]);
   const [currentLevel, setCurrentLevel] = useState<number>(0);
-  const [timeLevel, setTimeLevel] = useState<number>(0);
-
+  const [timeScore, setTimeScore] = useState<number>(0);
+  const [timeLevel, setTimeLevel] = useState<any>(0);
+  const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
 
   const [data, setData] = useState<number>(0)
   const [dataResp, setDataResp] = useState<number>(0)
+  const [timeData, setTimeData] = useState<number>(0)
+  const [timeDataResp, setTimeDataResp] = useState<number>(0)
   const [banner, setBanner] = useState<any>({})
 
+  const [timeLevels, setTimeLevels] = useState<any>()
+
+  const getAllTimeLevels = () => {
+    getTimeLevels().then(res => {
+      setTimeLevels(res)
+    })
+  }
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -74,11 +84,10 @@ const Rewards = () => {
     }
   }
   const getDate = () => {
-    let tempToday = new Date().getTime() / 1000;
-    let tempDate: any = userData.membership?.startDate;
-    let timeLevel = (tempToday - tempDate) / 86400;
-    console.log(timeLevel)
-    setTimeLevel(timeLevel)
+    let tempToday: number = new Date().getTime() / 1000;
+    let tempDate: number = userData.membership?.startDate;
+    let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
+    setTimeScore(timeScore)
   }
 
   const getRewardBanner = () => {
@@ -101,6 +110,14 @@ const Rewards = () => {
     })
   }
 
+  const getCurrentTimeLevel = () => {
+    getTimeLevel().then((res) => {
+      res = res.filter((data: any, index: any) => data.minimum <= timeScore)
+      setTimeLevel(res[0])
+      setCurrentTimeLevel(res.length)
+    })
+  }
+
   useEffect(() => {
     fetchDB_data()
     getRewardBanner()
@@ -109,6 +126,8 @@ const Rewards = () => {
   useEffect(() => {
     if (userData != null) {
       getCurrentLevel();
+      getCurrentTimeLevel();
+      getAllTimeLevels();
       getSize();
       getDate();
     }
@@ -122,6 +141,13 @@ const Rewards = () => {
       } else {
         setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
         setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
+      }
+      if (timeLevel.maximum < timeScore) {
+        setTimeData(0);
+        setTimeDataResp(0);
+      } else {
+        setTimeData(346 - (((timeScore - timeLevel.minimum) / (timeLevel.maximum - timeLevel.minimum)) * 346));
+        setTimeDataResp(289 - (((timeScore - timeLevel.minimum) / (timeLevel.maximum - timeLevel.minimum)) * 289));
       }
       setLoading(false);
     }
@@ -185,15 +211,15 @@ const Rewards = () => {
               :
               <ProgressContain>
                 <PointsText>
-                  {userData.score}
+                  {timeScore}
                   {
-                    userData.score == 1 ? " mes" : " meses"
+                    timeScore <= 1 ? " mes" : " meses"
                   }
                 </PointsText>
                 <OuterProgress>
                   <LevelContain>
                     <CurrentLevel>
-                      {currentLevel}
+                      {currentTimeLevel}
                     </CurrentLevel>
                     <Vector />
                     <Vector2 />
@@ -208,8 +234,8 @@ const Rewards = () => {
                     </defs>
                     <TimeProgressBackground />
                     <TimeProgressCircle
-                      progress={data}
-                      progressResp={dataResp}
+                      progress={timeData}
+                      progressResp={timeDataResp}
                     />
                   </TimeSvg>
                 </OuterProgress>
@@ -228,8 +254,12 @@ const Rewards = () => {
               user={userData}
             />
             : <TimeRewards
+              rewards={rewards}
               setRewards={setRewards}
-              timeLevel={timeLevel}
+              scoreLevel={timeScore}
+              level={timeLevel}
+              currentLevel={currentTimeLevel}
+              levels={timeLevels}
             />
         }
       </MainContain>

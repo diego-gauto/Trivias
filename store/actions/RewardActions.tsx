@@ -15,6 +15,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { db } from "../../firebase/firebaseConfig";
 
+//CONSEGUIR EL NIVEL ACTUAL POR PUNTOS
+
 export const getLevel = async () => {
   const levelRef = query(collection(db, "levelPoints"), orderBy("minimum", "desc"))
   let tempData: any = []
@@ -28,6 +30,7 @@ export const getLevel = async () => {
   // tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
   return tempData
 }
+// RECIBIR TODOS LOS NIVELES POR PUNTOS
 export const getLevels = async () => {
   const levelsRef = query(collection(db, "levelPoints"), orderBy("minimum"))
   let temp_levels: any = [];
@@ -37,6 +40,17 @@ export const getLevels = async () => {
   })
   return temp_levels
 }
+// CONSEGUIR EL NIVEL ACTUAL POR TIEMPO
+export const getTimeLevel = async () => {
+  const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum", "desc"))
+  let temp_levels: any = [];
+  const data = await getDocs(levelsRef);
+  data.forEach((level) => {
+    temp_levels.push({ ...level.data(), id: level.id });
+  })
+  return temp_levels
+}
+// CONSEGUIR LOS NIVELES POR TIEMPO
 export const getTimeLevels = async () => {
   const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum"))
   let temp_levels: any = [];
