@@ -113,6 +113,7 @@ export const TransparentButton2 = styled.button`
   display: flex;
   justify-content: right;
   width: 270px;
+  height: 43px;
   font-size: 16px;
   font-weight: 600;
   font-family:'Montserrat',sans-serif;
