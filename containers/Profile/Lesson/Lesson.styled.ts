@@ -25,8 +25,8 @@ export const Container = styled.div`
 export const FirstContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
   gap: 20px;
+  width: 100%;
   @media (max-width: 1023px) {
     width: 100%;
   }

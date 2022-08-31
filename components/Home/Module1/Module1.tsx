@@ -1,9 +1,12 @@
 
 
+import { useEffect, useState } from "react";
+
 import { Col, Image, Row } from "react-bootstrap";
 
 import DOMPurify from "dompurify";
 
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas";
 import { IModule1 } from "./IModule1";
 import Img1 from "./MediaSources/Icon01.png";
@@ -56,6 +59,16 @@ export const Module1 = (props: IModule1) => {
       heroImage,
     }
   } = props;
+
+  const [img, setImg] = useState("")
+
+  const awaitImg = async () => {
+    const resolvedImg = await downloadFileWithStoragePath(heroImage)
+    setImg(resolvedImg)
+  }
+  useEffect(() => {
+    awaitImg()
+  }, [])
 
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
@@ -147,7 +160,7 @@ export const Module1 = (props: IModule1) => {
           <RightWrapper>
             <Right>
               <RightImage>
-                <RightImageElement src={heroImage}></RightImageElement>
+                <RightImageElement src={img}></RightImageElement>
               </RightImage>
             </Right>
           </RightWrapper>

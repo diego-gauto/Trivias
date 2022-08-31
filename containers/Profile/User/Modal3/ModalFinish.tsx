@@ -15,7 +15,6 @@ import {
 } from "./Modal3.styled";
 
 const ModalFinish = ({ show, setShow, user }: any) => {
-  console.log(user);
   let tempDate;
   let tempDay;
   let tempMonth;
@@ -25,8 +24,6 @@ const ModalFinish = ({ show, setShow, user }: any) => {
     tempDate = new Date(user.membership.finalDate * 1000);
     tempDay = tempDate.getDate()
     tempMonth = tempDate.getUTCMonth() + 1;
-    console.log(tempMonth, tempDate);
-
     tempYear = tempDate.getFullYear()
     formatDate = `${tempDay}/${tempMonth}/${tempYear}`
   }

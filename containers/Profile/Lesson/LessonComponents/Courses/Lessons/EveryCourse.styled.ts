@@ -43,6 +43,7 @@ export const Details = styled.div`
   width: 90%;
   flex-direction: column;
   gap: 5px;
+  cursor:pointer;
 `;
 export const DetailContain = styled.div`
   display: flex;
@@ -50,11 +51,14 @@ export const DetailContain = styled.div`
   justify-content: space-between;
 `;
 
-export const CourseLength = styled.p`
+export const CourseLength = styled.div`
   font-size: 12px;
   font-family: 'Raleway', sans-serif;
   color: gray;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 export const CoursePoints = styled.p`
   font-size: 12px;
@@ -71,6 +75,13 @@ export const DividerComplete = styled.div`
   top: 28px;
   left: 11px;
 `;
+export const DocIcon = styled.i`
+  background-image: url(../images/Video/icons/document.svg);
+  height: 14px;
+  width: 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+}`;
 export const CurrentDivider = styled.div`
   border-radius:10px;
   width: 4px;

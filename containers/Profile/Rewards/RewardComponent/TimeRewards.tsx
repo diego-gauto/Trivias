@@ -12,7 +12,7 @@ import {
 import TimePrizes from "./TimePrizes";
 import Times from "./Times";
 
-const TimeRewards = ({ rewards, setRewards, scoreLevel, level, currentLevel, levels }: any) => {
+const TimeRewards = ({ user, rewards, setRewards, score, level, currentLevel, levels }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   return (
     <>
@@ -29,9 +29,9 @@ const TimeRewards = ({ rewards, setRewards, scoreLevel, level, currentLevel, lev
         </Container>
       </MainContain>
       <RewardContainer>
-        <Times score={scoreLevel} level={level} currentLevel={currentLevel} rewards={rewards} levels={levels} />
+        <Times score={score} level={level} currentLevel={currentLevel} rewards={rewards} levels={levels} />
       </RewardContainer>
-      <TimePrizes />
+      <TimePrizes user={user} score={score} />
     </>
   )
 }

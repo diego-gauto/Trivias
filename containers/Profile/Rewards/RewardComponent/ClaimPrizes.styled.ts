@@ -18,12 +18,11 @@ export const PrizeImage = styled.div`
   width: 260px;
   height: 260px;
   position: relative;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  cursor: pointer;
   &:hover{
     box-shadow: 0px 0px 10px 2px #6717CD;
   }
+  cursor: pointer;
   @media(max-width: 620px){ 
     width: 200px;
     height: 200px;
@@ -34,6 +33,18 @@ export const PrizeImage = styled.div`
   }
 `;
 export const Overlay = styled.div<{points:any,score:any}>`
+${props=> props.points > props.score && css`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border-radius: 10px;
+  opacity: .5;
+  z-index: 10;
+`}
+`;
+export const Overlay2 = styled.div<{points:any,score:any}>`
 ${props=> props.points > props.score && css`
   position: absolute;
   display: flex;
@@ -84,4 +95,6 @@ export const ImageReward = styled.img`
   background-position: center;
   width: 100%;
   height: auto;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 `;

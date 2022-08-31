@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent } from './About.styled';
 import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
 
-const About = ({ value, setValue }: any) => {
+const About = ({ value, setValue, data }: any) => {
+
   return (
     <>
       <TitleContain>
@@ -50,7 +51,7 @@ const About = ({ value, setValue }: any) => {
       <AboutContain>
         <CircleContain>
           <NumberText>
-            +200
+            +{data.points}
           </NumberText>
           <PointText>
             Puntos al <br /> finalizar
@@ -61,14 +62,7 @@ const About = ({ value, setValue }: any) => {
             Sobre la lección
           </LessonTitle>
           <LessonContent>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pharetra, cursus sapien ac magna. Consectetur amet eu tincidunt
-            quis. Non habitasse viverra malesuada facilisi vel nunc. Mattis
-            euismod nisi, id bibendum adipiscing morbi mattis eget. Sed
-            accumsan quisque mi sodales malesuada fusce scelerisque urna.
-            Enim sit pulvinar dui ipsum feugiat. Ac enim ultrices venenatis
-            imperdiet suspendisse mattis enim. Mauris odio sit id curabitur
-            enim mi. Orci id pharetra morbi quisque.
+            {data.about}
           </LessonContent>
         </TextContainer>
       </AboutContain>

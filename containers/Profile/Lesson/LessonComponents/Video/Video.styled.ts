@@ -1,11 +1,16 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+export const Segment = styled.div`
+  display: flex;
+  gap: 20px;
+`;
 export const VideoContain = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
   gap: 20px;
+  width:70%;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   @media (max-width: 1023px){

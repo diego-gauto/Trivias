@@ -1,5 +1,5 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, getDoc,
+  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, getDoc, orderBy,
 } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { db } from '../../firebase/firebaseConfig';
@@ -87,7 +87,7 @@ export const deleteLessonMaterial = async (material: any) => {
   });
 }
 
-export const getWholeCourse = async () => {
+export const getWholeCourses = async () => {
   let courses: any = []
   const docRef = collection(db, 'courses');
   const querySnapshot = await getDocs(docRef);
@@ -109,6 +109,66 @@ export const getWholeCourse = async () => {
       });
     }
   }
-
   return courses;
+}
+export const getWholeCourse = async (courseId: any) => {
+  let seasons: any = [];
+  const docRef = doc(db, "courses", courseId);
+  const docSnap: any = await getDoc(docRef);
+  const docRefSeasons = query(collection(db, 'courses', courseId, "seasons"), orderBy('season'));
+  const querySnapshotSeasons = await getDocs(docRefSeasons);
+  querySnapshotSeasons.forEach((season: any) => {
+    seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+  });
+  for (let c = 0; c < seasons.length; c++) {
+    const docRefLesson = query(collection(db, 'courses', courseId, "seasons", seasons[c].id, "lessons"), orderBy('number'));
+    const querySnapshotLesson = await getDocs(docRefLesson);
+    querySnapshotLesson.forEach((lesson: any) => {
+      seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
+    });
+  }
+  return { ...docSnap.data(), id: courseId, seasons: seasons }
+}
+export const addComment = async (data: any) => {
+  const docRef = await addDoc(
+    collection(db, "comments"),
+    {
+      ...data
+    }
+  );
+  return 'exito'
+}
+
+
+export const getComments = async () => {
+  let comment: any = []
+  const docRef = query(collection(db, 'comments'), orderBy("createdAt", "desc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    comment.push({ ...doc.data(), id: doc.id });
+  });
+  return comment;
+}
+
+export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any, lessonId: any, user: any) => {
+  console.log(lesson);
+  let temp_lesson: any;
+  delete lesson.id
+  delete lesson.seasonId
+  delete lesson.courseId
+
+  const docRef = doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId);
+  const docSnap = await getDoc(docRef);
+  temp_lesson = docSnap.data();
+
+  temp_lesson.users.push(user.id);
+  const docRefNew = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  await updateDoc(docRefNew, {
+    ...temp_lesson
+  });
+  const docRefUser = doc(db, 'users', user.id);
+  await updateDoc(docRefUser, {
+    ...user
+  })
+  return 'success'
 }

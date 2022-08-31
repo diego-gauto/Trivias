@@ -7,7 +7,7 @@ import {
   Add,
   Container,
   CreateIcon,
-  D1,
+  Image,
   ImageContain,
   ItemContain,
   NewPrize,
@@ -39,7 +39,7 @@ const Prize = () => {
           return (
             <ItemContain key={"adminPrizes" + index}>
               <ImageContain>
-                <D1 path={reward.path} />
+                <Image src={reward.path} />
                 <CreateIcon onClick={() => { setShow(true), setReward(reward) }} />
               </ImageContain>
               <Title>{reward.title}</Title>

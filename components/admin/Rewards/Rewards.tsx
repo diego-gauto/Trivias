@@ -4,6 +4,7 @@ import { getBanner, updateBanner } from "../../../store/actions/RewardActions";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import Prize from "./Prizes/Prize";
+import TimePrize from "./Prizes/TimePrize";
 import {
   ButtonPosition,
   Container,
@@ -86,10 +87,16 @@ const Rewards = () => {
           {place == "request" && <Request setPlace={setPlace} />}
         </Container>
         {
-          (place == "points" || place == "time") &&
+          place == "points" &&
           <PriceContain>
             <PriceTitle>Precios por reclamar</PriceTitle>
             <Prize />
+          </PriceContain>
+          ||
+          place == "time" &&
+          <PriceContain>
+            <PriceTitle>Precios por reclamar</PriceTitle>
+            <TimePrize />
           </PriceContain>
         }
 
