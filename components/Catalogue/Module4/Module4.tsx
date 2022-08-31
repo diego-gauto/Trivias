@@ -50,6 +50,10 @@ const Module4 = ({ user }: any) => {
           setCourses(response);
         })
       })
+    } else {
+      getCourses().then((response) => {
+        setCourses(response);
+      })
     }
   }, [user])
 

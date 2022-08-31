@@ -10,7 +10,7 @@ export const createCourse = async (signUpData: { data: any; }) => {
   const {
     data,
   } = signUpData;
-
+  data.createdAt = new Date();
   console.log(signUpData)
   data.reference = `${data.courseTittle}-${uuidv4()}`
   data.coursePath = await uploadImage(data.coursePath, data.reference);
