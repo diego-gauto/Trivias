@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
-import { addReward } from "../../../../../store/actions/RewardActions";
+import { deleteTimePrize, updateTimeRewards } from "../../../../../store/actions/RewardActions";
 import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
@@ -23,64 +23,65 @@ import {
   SelectContain,
   Title,
   TitleContain,
+  ButtonTransparent,
 } from "./Modal.styled";
 
-const Modal2 = ({ show, setShow }: any) => {
+const EditTimePrizes = ({ show, setShow, data }: any) => {
 
   const [open, setOpen] = useState(false);
-
-  const [reward, setReward] = useState<any>({
-    title: "",
-    points: "",
-    about: "",
-    path: "",
-    type: ""
-  })
-
+  const [reward, setReward] = useState<any>({ data })
   const getImage = (file: any) => {
     console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
-      setReward({ ...reward, path: reader.result })
+      setReward({ ...reward, format: reader.result })
     };
   }
-  const createReward = () => {
-    console.log(reward)
+  const update = () => {
     if (Object.keys(reward).some(key => reward[key] === '')) {
       alert("Complete todos los campos")
-
     }
     else {
-      addReward(reward).then((res) => {
-        console.log(res)
-      })
+      updateTimeRewards(reward, reward.id);
+      console.log(reward)
     }
   }
+  const deletePrize = (reward: any) => {
+    deleteTimePrize(reward)
+  }
+  useEffect(() => {
+    setReward({ ...data })
+  }, [data])
+
   const handleClose = () => setShow(false);
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
         <TitleContain>
-          <Title>Nueva Recompensa</Title>
+          <Title>Editar Recompensa</Title>
           <CloseIcon onClick={() => { setShow(false) }} />
         </TitleContain>
         <InputContain>
           <Label>Nombre de la Recompensa</Label>
           <Input
             placeholder="Gonvar Nails Leonardo Da Vinci"
-            onChange={(e: any) => {
+            defaultValue={data.title}
+            onChange={(e) => {
               setReward({ ...reward, title: e.target.value })
             }}
           />
         </InputContain>
         <InputContain>
-          <Label>Puntos</Label>
-          <Input placeholder="1100"
-            onChange={(e: any) => {
-              setReward({ ...reward, points: parseInt(e.target.value) })
-            }} />
+          <Label>Meses</Label>
+          <Input
+            placeholder="1100"
+            defaultValue={reward.month}
+            onChange={(e) => {
+              setReward({ ...reward, month: parseInt(e.target.value) })
+            }}
+          />
         </InputContain>
         <SelectContain>
           <Label>Tipo</Label>
@@ -88,7 +89,7 @@ const Modal2 = ({ show, setShow }: any) => {
             onClick={() => { setOpen(!open) }}
           >
             {
-              reward.type == "" ? "Elige un tipo" : reward.type
+              reward.type
             }
             <CaretD />
           </Selected>
@@ -119,11 +120,9 @@ const Modal2 = ({ show, setShow }: any) => {
         <InputContain>
           <Label>Descripción</Label>
           <InputBig
-            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci 
-            malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium 
-            aliquet ultricies. Interdum et suspendisse nunc gravida. "
-            onChange={(e: any) => {
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium aliquet ultricies. Interdum et suspendisse nunc gravida. "
+            defaultValue={reward.about}
+            onChange={(e) => {
               setReward({ ...reward, about: e.target.value })
             }}
           />
@@ -142,14 +141,16 @@ const Modal2 = ({ show, setShow }: any) => {
           </IconContain>
         </InputContain>
         <ButtonContain>
-          <Button
-            onClick={() => {
-              createReward();
-            }}
-          >Guardar</Button>
+          <ButtonTransparent onClick={() => {
+            deletePrize(reward)
+          }}
+          >Eliminar</ButtonTransparent>
+          <Button onClick={() => {
+            update()
+          }}>Guardar</Button>
         </ButtonContain>
       </ModalContain>
     </Modal>
   )
 }
-export default Modal2;
+export default EditTimePrizes;

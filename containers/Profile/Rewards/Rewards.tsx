@@ -260,9 +260,10 @@ const Rewards = () => {
               user={userData}
             />
             : <TimeRewards
+              user={userData}
               rewards={rewards}
               setRewards={setRewards}
-              scoreLevel={timeScore}
+              score={timeScore}
               level={timeLevel}
               currentLevel={currentTimeLevel}
               levels={timeLevels}

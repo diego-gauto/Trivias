@@ -76,7 +76,6 @@ const PointPrizes = ({ score, user }: any) => {
         }
       </AllPrizes>
       <Modal1 show={show1} setShow={setShow1} data={reward} user={user} />
-      <Modal2 show={show2} setShow={setShow2} />
     </MainContainer>
   )
 }

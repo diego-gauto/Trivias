@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { getRewards } from '../../../../store/actions/RewardActions';
-import Modal1 from './Modal/Modal1';
-import Modal2 from './Modal/Modal2';
+import { getTimeRewards } from '../../../../store/actions/RewardActions';
+import AddTimePrize from './Modal/AddTimePrize';
+import EditTimePrizes from './Modal/EditTimePrizes';
 import { Add, Container, CreateIcon, Image, ImageContain, ItemContain, NewPrize, PrizeText, SubTitle, Title } from './Prize.styled';
 
-const Prize = () => {
+
+const TimePrize = () => {
 
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
   const [rewards, setRewards] = useState<any>([]);
   const [reward, setReward] = useState<any>({});
   const getAllRewards = () => {
-    getRewards().then((res) => {
+    getTimeRewards().then((res) => {
       setRewards(res);
     })
   }
@@ -19,32 +20,31 @@ const Prize = () => {
     getAllRewards();
 
   }, [])
-
   return (
     <Container>
       {
         rewards.map((reward: any, index: any) => {
           return (
-            <ItemContain key={"adminPrizes" + index}>
+            <ItemContain key={"adminTimePrizes" + index}>
               <ImageContain>
                 <Image src={reward.path} />
-                <CreateIcon onClick={() => { setShow(true), setReward(reward) }} />
+                <CreateIcon onClick={() => { setEdit(true), setReward(reward) }} />
               </ImageContain>
               <Title>{reward.title}</Title>
-              <SubTitle>{reward.points} puntos</SubTitle>
+              <SubTitle>{reward.month} {reward.month <= 1 ? "mes" : "meses"}</SubTitle>
             </ItemContain>
           )
         })
       }
-      <NewPrize onClick={() => { setEdit(true) }} >
+      <NewPrize onClick={() => { setShow(true) }} >
         <Add />
         <PrizeText>
           Añadir nueva recompesa
         </PrizeText>
       </NewPrize>
-      <Modal1 show={show} setShow={setShow} data={reward} />
-      <Modal2 show={edit} setShow={setEdit} />
+      <AddTimePrize show={show} setShow={setShow} />
+      <EditTimePrizes show={edit} setShow={setEdit} data={reward} />
     </Container>
   )
 }
-export default Prize;
+export default TimePrize;

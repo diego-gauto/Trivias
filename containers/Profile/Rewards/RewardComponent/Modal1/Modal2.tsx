@@ -1,15 +1,14 @@
-
-
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
-
-import Image from "next/image";
 
 import {
   AddText,
   AlertCont,
+  AlertIcon,
   AlertMsg,
+  ButtonContain,
   ButtonDiv,
+  ImageReward,
   Inputs,
   ModalCont,
   ModalContain,
@@ -19,55 +18,118 @@ import {
   PaymentIcon,
   PurpleButton,
   RewardText,
+  TextClaim,
   Title,
+  TransparentButton,
 } from "./Modal1.styled";
+import { addRequest, addUserReward } from "../../../../../store/actions/RewardActions";
+import { useState } from "react";
 
-const Modal1 = ({ show, setShow }: any) => {
+const Modal2 = ({ show, setShow, data, user, score }: any) => {
 
-  const responsive870 = useMediaQuery({ query: "(max-width: 870px)" });
+  const [userReward, setUserReward] = useState({
+    id: data.id,
+    status: false,
+    title: data.title
+  });
+  const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
 
+  const [request, setRequest] = useState({
+    user: user.name,
+    userPhoto: user.photoURL,
+    month: score,
+    createAt: new Date(),
+    phoneNumber: user.phoneNumber,
+    type: data.type,
+    product: data.title,
+    status: false,
+  })
+
+  const AddUserRewards = async () => {
+    let tempReward = {
+      id: data.id,
+      status: true,
+      title: data.title
+    }
+    addUserReward(tempReward, user.id).then((res: any) => {
+      setUserReward(tempReward)
+    });
+  }
+  const sendRequest = async () => {
+    let tempRequest = {
+      userId: user.id,
+      user: user.name,
+      userPhoto: user.photoURL,
+      month: score,
+      createAt: new Date(),
+      phoneNumber: user.phoneNumber,
+      type: data.type,
+      product: data.title,
+      status: false,
+    }
+    addRequest(tempRequest).then((res: any) => {
+      setRequest(res);
+      console.log(res);
+    })
+  }
   return (
     <>
       <ModalContain >
         <Modal show={show} onHide={handleClose} size="lg" centered>
-          <ModalCont style={{ height: responsive870 ? "700px" : "480px" }}>
-            <Title style={{ marginTop: responsive870 ? "-20px" : "", marginBottom: responsive870 ? "20px" : "" }} closeButton>
-              20% en una membresía
+          <ModalCont >
+            <Title closeButton>
+              {data.title}
             </Title>
             <ModalPay>
               <ModalPayment>
                 <PaymentIcon>
-                  <Image src="/images/Rewards/reward3.png" width={"250%"} height={"250%"} />
+                  <ImageReward path={data.path} />
                 </PaymentIcon>
               </ModalPayment>
               <ModalForm>
                 <Inputs>
-                  <AlertMsg style={{ marginTop: responsive870 ? "35px" : "", fontWeight: "700", color: "black" }}>
-                    Recompensa por desbloquear
-                  </AlertMsg>
+                  <AddText >
+                    {data.about}
+                  </AddText>
                   <AlertCont>
-                    <AddText >
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Tellus ultrices id feugiat cursus velit. Aliquam pulvinar
-                      in orci malesuada. Pellentesque aliquam aliquam nulla
-                      sodales tortor pretium aliquet ultricies. Interdum et
-                      suspendisse nunc gravida.
-                    </AddText>
+                    <AlertIcon />
+                    <AlertMsg>
+                      Este es un producto físico y requiere entrega
+                    </AlertMsg>
                   </AlertCont>
-                  <AddText style={{ height: "50px", fontWeight: "700" }}>
-                    <br />
+                  <AddText style={{ fontWeight: "700" }}>
+                    Pronto el administrador se contactará para poder organizar la
+                    entrega de la recompensa.
                   </AddText>
                 </Inputs>
               </ModalForm>
             </ModalPay>
-            <ButtonDiv >
-              <RewardText style={{ fontWeight: "700", fontSize: "16px", marginLeft: "10%", top: "320px" }}>
-                Recompensa por <br /> 2,000 puntos
+            <ButtonDiv>
+              <RewardText style={{ fontWeight: "700", fontSize: "16px", marginLeft: "10%" }}>
+                Recompensa por <br /> {data.month} puntos
               </RewardText>
-              <PurpleButton onClick={handleClose}>
-                Entendido
-              </PurpleButton>
+              <ButtonContain>
+                {
+                  (data.month <= score)
+                    ? <>
+                      {
+                        (data.status == false && userReward.status == false)
+                          ? <TransparentButton onClick={() => {
+                            sendRequest();
+                            AddUserRewards();
+                          }}>
+                            Reclamar Recompensa
+                          </TransparentButton>
+                          : <TextClaim>Recompensa Reclamada!</TextClaim>
+                      }
+                    </>
+                    : <></>
+                }
+                <PurpleButton onClick={handleClose}>
+                  Entendido
+                </PurpleButton>
+              </ButtonContain>
             </ButtonDiv>
           </ModalCont>
         </Modal>
@@ -75,4 +137,4 @@ const Modal1 = ({ show, setShow }: any) => {
     </>
   )
 }
-export default Modal1;
+export default Modal2;
