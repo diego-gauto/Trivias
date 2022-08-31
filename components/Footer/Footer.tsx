@@ -65,10 +65,23 @@ const Footer = () => {
   }, [loggedIn])
 
   const cancelSubscription = async () => {
-    const updateCard = httpsCallable(functions, 'cancelStripeSubscription');
-    await updateCard(userData.membership.planId).then(async (res: any) => {
-      handleShow()
-    })
+    if (userData.membership.method == 'stripe') {
+      const updateCard = httpsCallable(functions, 'cancelStripeSubscription');
+      await updateCard(userData.membership.planId).then(async (res: any) => {
+        handleShow()
+      })
+    } else {
+      let user = {
+        planId: userData.membership.planId,
+        id: userData.id
+      }
+      console.log(1);
+
+      const cancelPlan = httpsCallable(functions, 'cancelPaypalSubscription');
+      await cancelPlan(user).then(async (res: any) => {
+        handleShow()
+      })
+    }
   }
 
   let { pathname } = useRouter();
