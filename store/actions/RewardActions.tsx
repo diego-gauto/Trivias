@@ -267,7 +267,14 @@ export const getRequest = async () => {
   })
   return tempData
 }
+export const updateRequest = async (id: any) => {
 
+  const docRef = doc(db, 'requests', id);
+  await updateDoc(docRef, {
+    status: true
+  })
+  return 'exito'
+}
 export const addUserReward = async (userRewards: any, userId: any) => {
   console.log(userRewards, userId)
   const docRef = await setDoc(

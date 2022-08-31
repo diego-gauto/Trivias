@@ -44,6 +44,15 @@ ${props=> props.points > props.score && css`
   z-index: 10;
 `}
 `;
+export const Band = styled.i`
+  background-image: url(../images/bandComplete.png);
+  background-repeat: no-repeat;
+  height: 130px;
+  width: 155px;
+  position: absolute;
+  top:-4px;
+  left: -4px;
+`;
 export const Overlay2 = styled.div<{points:any,score:any}>`
 ${props=> props.points > props.score && css`
   position: absolute;

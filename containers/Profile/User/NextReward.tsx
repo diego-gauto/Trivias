@@ -16,6 +16,7 @@ import {
   PointsBox,
   PolygonDown,
   ProgressBar1,
+  ProgressBar2,
   RewardBox,
   RewardContain,
   RewardData,
@@ -30,12 +31,12 @@ import {
   VectorRight,
 } from "./User.styled";
 import { useEffect, useState } from "react";
-import { getRewards } from "../../../store/actions/ProfileActions";
-import Image from "next/image";
+import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 
-const NextReward = ({ score, barProgress, level, max }: any) => {
+const NextReward = ({ score, barProgress, level, max, timeScore, timeProgress, timeLevel, timeMax }: any) => {
   const [reward, setReward] = useState(false);
   const [prize, setPrize] = useState<any>([]);
+  const [timePrize, setTimePrize] = useState<any>([]);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
 
   const getNextReward = () => {
@@ -49,9 +50,21 @@ const NextReward = ({ score, barProgress, level, max }: any) => {
       }
     })
   }
+  const getNextTimeReward = () => {
+    getTimeRewards().then((res) => {
+      res = res.filter((data: any) => (data.month > timeScore));
+      if (res[0] == null) {
+        setTimePrize([])
+      }
+      else {
+        setTimePrize(res[0])
+      }
+    })
+  }
 
   useEffect(() => {
     getNextReward();
+    getNextTimeReward()
   }, [])
 
   return (
@@ -81,11 +94,11 @@ const NextReward = ({ score, barProgress, level, max }: any) => {
           <Pointbox>
             <Currentlvl>
               {
-                score > max ? level : level - 1
+                level - 1
               }
             </Currentlvl>
             <CompleteBar>
-              <ProgressBar1 barProgress={barProgress} reward={reward}>
+              <ProgressBar1 barProgress={barProgress}>
                 <PointsBox>
                   <UserPoints style={{ display: responsive470 ? "none" : "" }}>
                     {score}
@@ -123,33 +136,39 @@ const NextReward = ({ score, barProgress, level, max }: any) => {
         <>
           <Pointbox>
             <Currentlvl>
-              4
+              {timeLevel - 1}
             </Currentlvl>
             <CompleteBar>
-              <ProgressBar1 barProgress={barProgress} reward={reward}>
+              <ProgressBar2 barProgress={timeProgress}>
                 <PointsBox>
                   <UserPoints style={{ display: responsive470 ? "none" : "" }}>
-                    8 meses
+                    {
+                      timeScore <= 1 ? timeScore + " mes" : timeScore + " meses"
+                    }
                   </UserPoints>
                   <PolygonDown />
                 </PointsBox>
-              </ProgressBar1>
+              </ProgressBar2>
             </CompleteBar>
             <Nextlvl>
-              5
+              {timeLevel}
             </Nextlvl>
           </Pointbox>
           <RewardData>
-            {/* <RewardImage /> */}
+            <ImageContain>
+              <RewardImage src={timePrize.path} />
+            </ImageContain>
             <RewardInfo>
               <RewardTitleBox>
-                20% en una membresía
+                {timePrize.title}
               </RewardTitleBox>
               <RewardPoints>
-                9 meses
+                {
+                  timePrize.month <= 1 ? timePrize.month + " mes" : timePrize.month + " meses"
+                }
               </RewardPoints>
               <RewardParagraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci malesuada.
+                {timePrize.about}
               </RewardParagraph>
             </RewardInfo>
           </RewardData>
