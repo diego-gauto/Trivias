@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { saveHeroData } from '../../../../store/actions/LandingActions';
+import React, { useState } from "react";
+
+import { saveHeroData } from "../../../../store/actions/LandingActions";
 import {
   AllEditInputs,
   ColumnsContainer,
@@ -13,7 +14,7 @@ import {
   ProfileData,
   SaveButton,
 } from "../Landing.styled";
-import { IHeroSectionProps } from './IHeroSection';
+import { IHeroSectionProps } from "./IHeroSection";
 
 const HeroSection = (props: IHeroSectionProps) => {
   const { heroSectionData } = props;

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { InputContain, Tab, Unselect } from "../Rewards.styled";
-import { collection, query, getDocs, orderBy } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+
 import { db } from "../../../../firebase/firebaseConfig";
+import { InputContain, Tab, Unselect } from "../Rewards.styled";
 import EditLevel from "./Modal/EditLevel";
 import {
   AllLevels,

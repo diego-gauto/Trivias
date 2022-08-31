@@ -28,7 +28,6 @@ export const OptionContain = styled.div`
   z-index: 1;
 `;
 export const Option = styled.div`
-border-bottom: 1px solid #8E2DE2;
   &:hover{
     background: linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);
     color:white;
@@ -38,9 +37,6 @@ border-bottom: 1px solid #8E2DE2;
     &:last-child {
       border-radius: 0 0 8px 8px;
     }
-  }
-  &:last-child{
-    border-bottom: none;
   }
   input{
     &[type="radio"]{

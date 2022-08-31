@@ -29,6 +29,10 @@ export const CourseButton = styled.button`
   border: 1px solid #41417e;
   padding-block: 10px;
   padding-inline: 20px;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -63,6 +67,10 @@ export const ShareButton = styled.button`
   border: 1px solid #41417e;
   padding-block: 10px;
   padding-inline: 20px;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const BoxContain = styled.div`
   display: flex;
@@ -100,6 +108,11 @@ export const CourseContain = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+  &:hover{
+    cursor: pointer;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const InfoContain = styled.div`
   display: flex;

@@ -27,6 +27,10 @@ export const NewSeasonContain = styled.div`
   padding-inline: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  &:hover{
+    transform:scale(1.01);
+    transition:.3s ease all;
+  }
 `;
 export const NewSeason = styled.p`
   font-size: 18px;
@@ -70,6 +74,10 @@ export const Button = styled.button`
   padding-inline: 25px;
   border: 1px solid #6717CD;
   border-radius: 100px;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const Add = styled.i`
   background-image: url(../images/admin/Courses/add.png);

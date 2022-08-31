@@ -88,7 +88,11 @@ export const Button = styled.button`
   background: #6717CD;
   border-radius: 100px;
   color: white;
-  border: none;
+  border: none;&:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const ButtonTransparent = styled.button`
   font-size: 16px;

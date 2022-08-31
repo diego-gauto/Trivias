@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { getRewards } from '../../../../store/actions/RewardActions';
-import Modal1 from './Modal/Modal1';
-import Modal2 from './Modal/Modal2';
-import { Add, Container, CreateIcon, Image, ImageContain, ItemContain, NewPrize, PrizeText, SubTitle, Title } from './Prize.styled';
+import React, { useEffect, useState } from "react";
+
+import { getRewards } from "../../../../store/actions/RewardActions";
+import Modal1 from "./Modal/Modal1";
+import Modal2 from "./Modal/Modal2";
+import {
+  Add,
+  Container,
+  CreateIcon,
+  Image,
+  ImageContain,
+  ItemContain,
+  NewPrize,
+  PrizeText,
+  SubTitle,
+  Title,
+} from "./Prize.styled";
 
 const Prize = () => {
 

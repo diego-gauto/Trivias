@@ -1,7 +1,30 @@
-import React from 'react'
-import SideBar from '../SideBar';
-import { AdminContain } from '../SideBar.styled';
-import { Announcement, BodyContain, BoxContain, BoxSubTitle, BoxTitle, Container, CourseButton, CourseContain, CourseLink, CourseTitle, FirstData, GeneralContain, GonvarTitle, Icon, InfoContain, RecentCourses, ShareButton, SubText, Title, TitleBox, TitleContain } from './General.styled';
+
+
+import SideBar from "../SideBar";
+import { AdminContain } from "../SideBar.styled";
+import {
+  Announcement,
+  BodyContain,
+  BoxContain,
+  BoxSubTitle,
+  BoxTitle,
+  Container,
+  CourseButton,
+  CourseContain,
+  CourseLink,
+  CourseTitle,
+  FirstData,
+  GeneralContain,
+  GonvarTitle,
+  Icon,
+  InfoContain,
+  RecentCourses,
+  ShareButton,
+  SubText,
+  Title,
+  TitleBox,
+  TitleContain,
+} from "./General.styled";
 
 const General = () => {
   return (

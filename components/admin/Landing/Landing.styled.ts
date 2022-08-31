@@ -82,6 +82,9 @@ export const FolderInput = styled.input`
   :focus{
     outline: 1px solid #8E2DE2;
   }
+  ::file-selector-button {
+    display: none;
+  }
 `;
 export const Inputs = styled.div`
   display:flex;
@@ -101,7 +104,7 @@ export const SaveButton = styled.button`
   border-radius: 30px;
   background-color: #6717CD;
   &:hover{
-    background-color: #5b02cc;
+    background-color: #5000b5;
     transform:scale(1.03);
     transition:.5s ease all;
   }

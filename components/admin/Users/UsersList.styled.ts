@@ -16,6 +16,20 @@ export const SearchInput = styled.input`
   padding-inline: 50px 30px;
   border-radius: 30px;
 `;
+export const DownloadUserData = styled.div`
+  display: flex;
+  img{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    margin-top: 12px;
+    margin-left: 11px;
+  }
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
 export const SearchIcon = styled.i`
   background-image: url(../images/admin/search.png);
   background-repeat:no-repeat;

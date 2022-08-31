@@ -56,6 +56,11 @@ export const PurpleButton = styled.button`
   padding-inline: 30px;
   border-radius: 100px;
   border: none;
+  &:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const SelectContain = styled.div`
   display: flex;

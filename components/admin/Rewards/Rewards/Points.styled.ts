@@ -82,7 +82,11 @@ export const TransparentButton = styled.button`
   padding-inline: 30px;
   border: 1px solid #6717CD;
   border-radius: 100px;
-`;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+  `;
 export const Grid = styled.i`
   background-image: url(../images/admin/grid.png);
   background-repeat: no-repeat;
