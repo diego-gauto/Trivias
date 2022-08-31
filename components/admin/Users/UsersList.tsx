@@ -8,7 +8,9 @@ import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/
 import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
 import UserCardData from "./UserData/UserCardData";
+import { TransparentButton2 } from "./UserData/UsersCardData.styled";
 import {
+  DownloadUserData,
   EditIcon,
   SearchContain,
   SearchIcon,
@@ -59,8 +61,14 @@ const UsersList = () => {
   const filterBySearch = (event: { target: { value: string; }; }) => {
     setIseSearching(true)
     const query = event.target.value.toLocaleLowerCase();
+    console.log("IM LOWERCASE: ", allUsers)
     var updatedList = [...allUsers]
-    var updated = updatedList.filter(item => item.name.includes(query) || item.email.includes(query));
+    var updated = updatedList.filter(item =>
+      item.name.toLowerCase().includes(query) ||
+      item.email.includes(query) ||
+      item.role.includes(query) ||
+      item.score.toString().includes(query) ||
+      new Date(item.created_at.seconds * 1000).toLocaleDateString("es-MX").includes(query));
     setFilteredList(updated);
   };
 
@@ -76,6 +84,10 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios</Title>
+            <DownloadUserData>
+              <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
+              <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
+            </DownloadUserData>
             <SearchContain>
               <SearchIcon />
               <SearchInput placeholder="Buscar un Usuario" onChange={filterBySearch} />
