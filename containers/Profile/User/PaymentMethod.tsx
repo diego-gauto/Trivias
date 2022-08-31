@@ -29,7 +29,7 @@ const PaymentMethod = ({ data, pm }: any) => {
       alert('Esta tarjeta es su método de pago predeterminado, por favor de asiganar otra tarjeta como método de pago predeterminado antes de eliminar esta tarjeta!')
     } else {
       const detach = httpsCallable(functions, 'detachPaymentMethod');
-      await detach(card).then(async (res: any) => {
+      await detach(card.cardId).then(async (res: any) => {
         deletePaymentMethod(data.id, card.id).then(() => {
           window.location.reload();
         })

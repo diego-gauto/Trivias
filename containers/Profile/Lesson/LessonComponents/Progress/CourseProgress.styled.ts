@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -25,13 +25,17 @@ export const ProgressContain = styled.div`
   position: relative;
   width: 100%;
 `;
-export const ProgressBar = styled.div`
+export const ProgressBar = styled.div<{progress:any}>`
   display: flex;
   height: 10px;
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
   position: absolute;
   border-radius: 20px;
-  width: 50%;
+  width: 0%;
+  ${props => props.progress && css`
+  width: ${props.progress}%;
+  transition: 1s ease all;
+  `}
 `;
 export const ProgressBar2 = styled.div`
   display: flex;

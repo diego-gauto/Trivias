@@ -4,7 +4,7 @@ import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
-const Courses = ({ id, course, data, userId }: any) => {
+const Courses = ({ id, course, data, userId, season, lesson }: any) => {
   const [selected, setSelected] = useState<any>([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Courses = ({ id, course, data, userId }: any) => {
   }
   return (
     <MainContainer>
-      <CourseProgress />
+      <CourseProgress title={course?.courseTittle} season={season} lesson={lesson} course={course} userId={userId} />
       {course?.seasons.map((season: any, index: any) => {
         return (
           <>

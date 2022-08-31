@@ -4,7 +4,6 @@ import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, Curren
 
 const EveryCourse = ({ id, lessons, season, data, userId }: any) => {
   const router = useRouter();
-  console.log(lessons);
 
   const goTo = (lIndex: any, idx: any) => {
     router.push({
@@ -19,14 +18,14 @@ const EveryCourse = ({ id, lessons, season, data, userId }: any) => {
           <LessonContain onClick={() => {
             goTo(index, less.id)
           }}>
-            {data.id == less.id && <CurrentCircle>
+            {data?.id == less.id && <CurrentCircle>
               <DividerIncomplete />
             </CurrentCircle>
             }
-            {(data.id !== less.id && !less.users?.includes(userId)) && <IncompleteCircle>
+            {(data?.id !== less.id && !less.users?.includes(userId)) && <IncompleteCircle>
               <DividerIncomplete />
             </IncompleteCircle>}
-            {(less.users?.includes(userId) && data.id !== less.id) &&
+            {(less.users?.includes(userId) && data?.id !== less.id) &&
               <ProgressCircle>
                 <DividerComplete />
               </ProgressCircle>
