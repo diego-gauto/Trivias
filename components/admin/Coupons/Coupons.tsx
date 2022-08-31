@@ -1,14 +1,30 @@
-import React, { useState } from 'react'
-import { TrashIcon } from '../Courses/Form/Edit.styled';
-import SideBar from '../SideBar';
-import { AdminContain, Table } from '../SideBar.styled';
+import React, { useState } from "react";
+
+import { TrashIcon } from "../Courses/Form/Edit.styled";
+import SideBar from "../SideBar";
+import { AdminContain, Table } from "../SideBar.styled";
 import {
-  ButtonContain, ActiveC, Container, CouponContain,
-  IconContain, Input, InputContain, Label, PurpleButton,
-  RadioContain, SelectContain, TableContain, TableTitle,
-  TagLabel, Title, TitleContain, ActiveLbl, UnActive,
-  UnActiveLbl
-} from './Coupons.styled';
+  ActiveC,
+  ActiveLbl,
+  ButtonContain,
+  Container,
+  CouponContain,
+  IconContain,
+  Input,
+  InputContain,
+  Label,
+  PurpleButton,
+  RadioContain,
+  SelectContain,
+  TableContain,
+  TableTitle,
+  TagLabel,
+  Title,
+  TitleContain,
+  UnActive,
+  UnActiveLbl,
+} from "./Coupons.styled";
+
 const Coupons = () => {
 
   const [select, setSelect] = useState("percentage");

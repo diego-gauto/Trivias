@@ -19,11 +19,17 @@ export const ItemContain = styled.div`
 `;
 export const ImageContain = styled.div`
   display: flex;
-  max-width: 278px;
-  max-height: 278px;
+  width: 260px;
+  height: 260px;
   position: relative;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  @media(max-width: 620px){ 
+    width: 200px;
+    height: 200px;
+  }
+  @media(max-width: 560px){ 
+    width: 150px;
+    height: 150px;
+  }
 `;
 export const Title = styled.p`
   font-size: 16px;
@@ -47,12 +53,14 @@ export const CreateIcon = styled.i`
   cursor: pointer;
   z-index: 10;
 `;
-export const D1 = styled("i")<{path:any}>`
-  background-image: url(${props=>props.path});
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 260px;
-  width: 260px;
+export const Image = styled.img`
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  &:hover{
+    box-shadow: 0px 0px 10px 2px #6717CD;
+  }
 `;
 
 export const NewPrize = styled.div`

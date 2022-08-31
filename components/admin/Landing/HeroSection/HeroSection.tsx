@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from "react";
+
+import { saveHeroData } from "../../../../store/actions/LandingActions";
 import {
   AllEditInputs,
   ColumnsContainer,
@@ -12,10 +14,27 @@ import {
   ProfileData,
   SaveButton,
 } from "../Landing.styled";
-import { IHeroSectionProps } from './IHeroSection';
+import { IHeroSectionProps } from "./IHeroSection";
 
 const HeroSection = (props: IHeroSectionProps) => {
   const { heroSectionData } = props;
+  const [heroData, setHeroData] = useState(heroSectionData);
+
+  const updateState = (e: any, key: string) => {
+    const newState = { ...heroData };
+    // @ts-expect-error
+    newState[key] = key === "heroImage" ? e.target.files[0] : e.target.value;
+    setHeroData(newState);
+  }
+
+  const onSave = async () => {
+    const success = await saveHeroData(heroData)
+    let alertText = "Cambios realizados correctamente"
+    if (!success) {
+      alertText = "Hubo un error"
+    }
+    alert(alertText)
+  }
 
   return (
     <ProfileData style={{ boxShadow: "none", background: "none" }}>
@@ -26,13 +45,22 @@ const HeroSection = (props: IHeroSectionProps) => {
               <EditText>
                 Título Inicial
               </EditText>
-              <EditInput value={heroSectionData.tituloInicial} placeholder="Aprende a aplicar uñas desde Cero" />
+              <EditInput
+                onChange={(e) => updateState(e, "tituloInicial")}
+                value={heroData.tituloInicial}
+                placeholder="Aprende a aplicar uñas desde Cero"
+              />
             </Inputs>
             <Inputs>
               <EditText>
                 Párrafo inicial
               </EditText>
-              <EditInput2 value={heroSectionData.parrafoInicial} style={{ height: "210px" }} placeholder="Descubre tu verdadero potencial a través de nuestros entrenamientos personalizados. En Gonvar descubrirás la manera más fácil, rápida y divertida de convertirte en un aplicador profesional. Entrenamientos de primer nivel para lograr resultados extraordinarios." />
+              <EditInput2
+                onChange={(e) => updateState(e, "parrafoInicial")}
+                value={heroData.parrafoInicial}
+                style={{ height: "210px" }}
+                placeholder="Descubre tu verdadero potencial a través de nuestros entrenamientos personalizados. En Gonvar descubrirás la manera más fácil, rápida y divertida de convertirte en un aplicador profesional. Entrenamientos de primer nivel para lograr resultados extraordinarios."
+              />
             </Inputs>
           </AllEditInputs>
           <AllEditInputs>
@@ -40,19 +68,31 @@ const HeroSection = (props: IHeroSectionProps) => {
               <EditText>
                 Botón Primario
               </EditText>
-              <EditInput value={heroSectionData.botonPrimario} placeholder="Comienza desde $49" />
+              <EditInput
+                onChange={(e) => updateState(e, "botonPrimario")}
+                value={heroData.botonPrimario}
+                placeholder="Comienza desde $49"
+              />
             </Inputs>
             <Inputs>
               <EditText>
                 Botón Secundario
               </EditText>
-              <EditInput value={heroSectionData.botonSecundario} placeholder="Ve más cursos" />
+              <EditInput
+                onChange={(e) => updateState(e, "botonSecundario")}
+                value={heroData.botonSecundario}
+                placeholder="Ve más cursos"
+              />
             </Inputs>
             <Inputs>
               <EditText>
                 Hero Image
               </EditText>
-              <FolderInput type="file" placeholder="Seleccionar archivo" />
+              <FolderInput
+                onChange={(e) => updateState(e, "heroImage")}
+                type="file"
+                placeholder="Seleccionar archivo"
+              />
             </Inputs>
           </AllEditInputs>
           <AllEditInputs>
@@ -60,25 +100,37 @@ const HeroSection = (props: IHeroSectionProps) => {
               <EditText>
                 Característica 1
               </EditText>
-              <EditInput value={heroSectionData.primerCaracteristica} placeholder="+4700 Alumnos" />
+              <EditInput
+                onChange={(e) => updateState(e, "primerCaracteristica")}
+                value={heroData.primerCaracteristica}
+                placeholder="+4700 Alumnos"
+              />
             </Inputs>
             <Inputs>
               <EditText>
                 Característica 2
               </EditText>
-              <EditInput value={heroSectionData.segundaCaracteristica} placeholder="+250 Cursos" />
+              <EditInput
+                onChange={(e) => updateState(e, "segundaCaracteristica")}
+                value={heroData.segundaCaracteristica}
+                placeholder="+250 Cursos"
+              />
             </Inputs>
             <Inputs>
               <EditText>
                 Característica 3
               </EditText>
-              <EditInput value={heroSectionData.terceraCaracteristica} placeholder="+50 Presenciales" />
+              <EditInput
+                onChange={(e) => updateState(e, "terceraCaracteristica")}
+                value={heroData.terceraCaracteristica}
+                placeholder="+50 Presenciales"
+              />
             </Inputs>
           </AllEditInputs>
         </ColumnsContainer>
       </ColumnsContainer2>
       <EditButtons>
-        <SaveButton>
+        <SaveButton onClick={onSave}>
           Guardar
         </SaveButton>
       </EditButtons>

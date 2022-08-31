@@ -79,6 +79,11 @@ export const PurpleButton = styled.button`
   color: white;
   border: none;
   width: fit-content;
+  &:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
 `;
 export const MainCard = styled.div`
   display: flex;

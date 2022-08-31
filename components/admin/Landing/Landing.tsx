@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { getLandingData } from "../../../store/actions/LandingActions";
+import React, { useEffect, useState } from "react";
 
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { getLandingData } from "../../../store/actions/LandingActions";
 import LandingObject from "../Landing/templates";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
@@ -16,7 +17,6 @@ import {
 } from "./Landing.styled";
 import ProductsSection from "./ProductsSection/ProductsSection";
 import ReviewsSection from "./ReviewsSection/ReviewsSection";
-import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
 
 const Landing = () => {
 

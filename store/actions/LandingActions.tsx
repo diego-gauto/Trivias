@@ -1,6 +1,8 @@
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
+import { HeroData } from "../../components/admin/Landing/HeroSection/IHeroSection";
 import { Product } from "../../components/admin/Landing/ProductsSection/IProductsSection";
+import { Review } from "../../components/admin/Landing/ReviewsSection/IReviewsSection";
 import { db } from "../../firebase/firebaseConfig";
 
 export const getLandingData = async () => {
@@ -21,7 +23,7 @@ export const getLandingData = async () => {
   ])
   const parsedReseniasData = reseniasDocs.docs.map((d) => {
     const { nombre, imgURL } = d.data()
-    return { title: nombre, imgURL }
+    return { title: nombre, imgURL: downloadFileWithStoragePath(imgURL), id: d.id }
   })
   const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
     const { nombre, precio, imgURL, clickURL } = d.data()
@@ -51,6 +53,42 @@ export const saveProductsData = async (products: Product[]) => {
   const filePromises = updatedFiles.map(async ({ file, id }) => {
     const result = await uploadFile(file!, `landing/productos/${id}`)
     return productsCollection.doc(id).update({
+      imgURL: result.metadata.fullPath
+    })
+  })
+  try {
+    await Promise.all([...promises, ...filePromises])
+  } catch {
+    return false
+  }
+  return true
+}
+
+export const saveHeroData = async (heroData: HeroData) => {
+  const heroSectionRef = doc(db, "landingPage", "heroSection")
+  try {
+    await uploadFile(heroData.heroImage, "landing/HeroImage")
+    const { heroImage, ...dataToUpdate } = heroData
+    // @ts-expect-error
+    await updateDoc(heroSectionRef, dataToUpdate)
+  } catch {
+    return false
+  }
+  return true
+}
+
+export const saveReviewsData = async (reviewsData: Review[]) => {
+  const reviewsCollection = db.collection("landingPage").doc("reseniasSection").collection("resenias")
+  const promises = reviewsData.map((r) => {
+    const { title, id } = r
+    return reviewsCollection.doc(id).update({
+      nombre: title,
+    })
+  })
+  const updatedFiles = reviewsData.filter((p) => !!p.file)
+  const filePromises = updatedFiles.map(async ({ file, id }) => {
+    const result = await uploadFile(file!, `landing/resenias/${id}`)
+    return reviewsCollection.doc(id).update({
       imgURL: result.metadata.fullPath
     })
   })

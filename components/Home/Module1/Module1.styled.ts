@@ -1,7 +1,8 @@
- import { Button, Row, Col, Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+
 import styled from "styled-components";
 
-export const ModuleContainer = styled(Container) `
+ export const ModuleContainer = styled(Container) `
 height: 82.5vh;
 @media only screen and (max-width: 1024px) {
   height: 100vh;

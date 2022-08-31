@@ -22,10 +22,9 @@ position: absolute;
   color: white;
   border: none;
   &:hover{
-    transition: all 200ms ease;
-    //transform: scale(1.02);
-    background: #5b02cc;
-    font-size: 16.5px;
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
   }
 `;
 export const InputForm = styled.div`

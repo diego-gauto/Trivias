@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { getRewards } from '../../../../store/actions/RewardActions';
-import Modal1 from './Modal/Modal1';
-import Modal2 from './Modal/Modal2';
-import { Add, Container, CreateIcon, D1, ImageContain, ItemContain, NewPrize, PrizeText, SubTitle, Title } from './Prize.styled';
+import React, { useEffect, useState } from "react";
+
+import { getRewards } from "../../../../store/actions/RewardActions";
+import Modal1 from "./Modal/Modal1";
+import Modal2 from "./Modal/Modal2";
+import {
+  Add,
+  Container,
+  CreateIcon,
+  Image,
+  ImageContain,
+  ItemContain,
+  NewPrize,
+  PrizeText,
+  SubTitle,
+  Title,
+} from "./Prize.styled";
 
 const Prize = () => {
 
@@ -27,7 +39,7 @@ const Prize = () => {
           return (
             <ItemContain key={"adminPrizes" + index}>
               <ImageContain>
-                <D1 path={reward.path} />
+                <Image src={reward.path} />
                 <CreateIcon onClick={() => { setShow(true), setReward(reward) }} />
               </ImageContain>
               <Title>{reward.title}</Title>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalContain = styled.form`
+export const ModalContain = styled.div`
   display: flex;
   padding: 20px;
   gap: 20px;
@@ -78,6 +78,7 @@ export const InputBig = styled.textarea`
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: center;
+  gap: 20px;
 `;
 export const Button = styled.button`
   font-size: 16px;
@@ -87,7 +88,21 @@ export const Button = styled.button`
   background: #6717CD;
   border-radius: 100px;
   color: white;
-  border: none;
+  border: none;&:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
+export const ButtonTransparent = styled.button`
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background: white;
+  border-radius: 100px;
+  color: #6717CD;
+  border: 1px solid #6717CD;
 `;
 export const IconContain = styled.div`
   display: flex;
@@ -103,6 +118,7 @@ export const Folder = styled.i`
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
+  pointer-events: none;
 `;
 export const Selected = styled.div`
   display: flex;

@@ -44,6 +44,10 @@ export const ButtonPosition = styled.div`
     border: 1px solid #6717CD;;
     border-radius: 100px;
     cursor: pointer;
+    &:hover{
+      transform:scale(1.03);
+      transition:.5s ease all;
+    }
   }
   button{
     position: absolute;
@@ -58,6 +62,10 @@ export const ButtonPosition = styled.div`
     border: 1px solid #6717CD;;
     border-radius: 100px;
     cursor: pointer;
+    &:hover{
+      transform:scale(1.03);
+      transition:.5s ease all;
+    }
   }
 `;
 export const Title = styled.h1`

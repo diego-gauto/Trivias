@@ -104,6 +104,25 @@ export const TransparentButton = styled.button`
   border: 1px solid #6717CD;
   border-radius: 100px;
   width: fit-content;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;
+export const TransparentButton2 = styled.button`
+  display: flex;
+  justify-content: right;
+  width: 270px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family:'Montserrat',sans-serif;
+  background: transparent;
+  color: #6717CD;
+  padding-block: 10px;
+  padding-inline: 15px;
+  border: 1px solid #6717CD;
+  border-radius: 100px;
+  
 `;
 export const PayContain = styled.div`
   display: flex;
