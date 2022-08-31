@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import CsvDownloader from "react-csv-downloader";
+
 import { collection, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
@@ -73,21 +75,9 @@ const UsersList = () => {
   const downloadUsersData = () => {
     console.log("This data will be downloaded: ", filteredList);
   };
-  const columns = [{
-    id: 'first',
-    displayName: 'First column'
-  }, {
-    id: 'second',
-    displayName: 'Second column'
-  }];
+  const columns = [...filteredList];
 
-  const datas = [{
-    first: 'foo',
-    second: 'bar'
-  }, {
-    first: 'foobar',
-    second: 'foobar'
-  }];
+  const datas = [...filteredList];
 
   useEffect(() => {
     getUsers();
@@ -101,10 +91,19 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios</Title>
-            <DownloadUserData>
-              <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
-              <TransparentButton2 onClick={downloadUsersData}>Descargar lista de usuarios</TransparentButton2>
-            </DownloadUserData>
+            <CsvDownloader
+              filename="myfile2"
+              extension=".csv"
+              separator=","
+              wrapColumnChar="'"
+              columns={columns}
+              datas={datas}
+            >
+              <DownloadUserData>
+                <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
+                <TransparentButton2 onClick={downloadUsersData}>Descargar lista de usuarios</TransparentButton2>
+              </DownloadUserData>
+            </CsvDownloader>
             <SearchContain>
               <SearchIcon />
               <SearchInput placeholder="Buscar un Usuario" onChange={filterBySearch} />
