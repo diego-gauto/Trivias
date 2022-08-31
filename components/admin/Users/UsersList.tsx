@@ -61,7 +61,6 @@ const UsersList = () => {
   const filterBySearch = (event: { target: { value: string; }; }) => {
     setIseSearching(true)
     const query = event.target.value.toLocaleLowerCase();
-    console.log("IM LOWERCASE: ", allUsers)
     var updatedList = [...allUsers]
     var updated = updatedList.filter(item =>
       item.name.toLowerCase().includes(query) ||
@@ -71,6 +70,24 @@ const UsersList = () => {
       new Date(item.created_at.seconds * 1000).toLocaleDateString("es-MX").includes(query));
     setFilteredList(updated);
   };
+  const downloadUsersData = () => {
+    console.log("This data will be downloaded: ", filteredList);
+  };
+  const columns = [{
+    id: 'first',
+    displayName: 'First column'
+  }, {
+    id: 'second',
+    displayName: 'Second column'
+  }];
+
+  const datas = [{
+    first: 'foo',
+    second: 'bar'
+  }, {
+    first: 'foobar',
+    second: 'foobar'
+  }];
 
   useEffect(() => {
     getUsers();
@@ -86,7 +103,7 @@ const UsersList = () => {
             <Title>Usuarios</Title>
             <DownloadUserData>
               <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
-              <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
+              <TransparentButton2 onClick={downloadUsersData}>Descargar lista de usuarios</TransparentButton2>
             </DownloadUserData>
             <SearchContain>
               <SearchIcon />

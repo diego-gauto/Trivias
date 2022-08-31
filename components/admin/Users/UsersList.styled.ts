@@ -22,7 +22,7 @@ export const DownloadUserData = styled.div`
     position: absolute;
     width: 22px;
     height: 22px;
-    margin-top: 12px;
+    margin-top: 11px;
     margin-left: 11px;
   }
   &:hover{

@@ -119,7 +119,7 @@ export const TransparentButton2 = styled.button`
   font-family:'Montserrat',sans-serif;
   background: transparent;
   color: #6717CD;
-  padding-block: 10px;
+  padding-block: 9px;
   padding-inline: 15px;
   border: 1px solid #6717CD;
   border-radius: 100px;
