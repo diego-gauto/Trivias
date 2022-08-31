@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import {
   AllPrizes,
+  Band,
   ImageReward,
   MainContainer,
   Overlay,
@@ -16,7 +17,6 @@ import {
   TitleClaim,
 } from "./ClaimPrizes.styled";
 import Modal1 from "./Modal1/Modal1";
-import Modal2 from "./Modal1/Modal2";
 import { getRewards, getUserRewards } from "../../../../store/actions/RewardActions";
 
 const PointPrizes = ({ score, user }: any) => {
@@ -63,6 +63,10 @@ const PointPrizes = ({ score, user }: any) => {
                 }} >
                   <Overlay points={reward.points} score={score} />
                   <ImageReward src={reward.path} />
+                  {
+                    reward.status == true &&
+                    <Band />
+                  }
                 </PrizeImage>
                 <PrizeTitle>
                   {reward.title}
