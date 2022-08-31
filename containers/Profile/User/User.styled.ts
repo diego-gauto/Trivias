@@ -357,17 +357,19 @@ export const Nextlvl = styled.div`
     width: 32px;
   }
 `;
-export const ProgressBar1 = styled("div")<{barProgress:any, reward:boolean}>`
+export const ProgressBar1 = styled("div")<{barProgress:any}>`
   height: 7px;
   background-color: #6717CD;
   border: 1px solid #6717CD;
   position: relative;
-  ${props => (props.reward == false) && css<{barProgress:any}>`
   width: ${props=>props.barProgress}%;
-`}
-${props => (props.reward == true) && css`
-  width: 30%;
-`}
+`;
+export const ProgressBar2 = styled("div")<{barProgress:any}>`
+  height: 7px;
+  background-color: #6717CD;
+  border: 1px solid #6717CD;
+  position: relative;
+  width: ${props=>props.barProgress}%;
 `;
 export const CompleteBar = styled.div`
   display:flex;
