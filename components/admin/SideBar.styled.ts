@@ -53,6 +53,9 @@ td{
 tr{  
   &:hover {
   background: #d3d3d3;
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+ }
 }
   border-bottom: 1px solid gray;
   &:first-child {

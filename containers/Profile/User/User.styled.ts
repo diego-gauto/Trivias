@@ -357,17 +357,19 @@ export const Nextlvl = styled.div`
     width: 32px;
   }
 `;
-export const ProgressBar1 = styled("div")<{barProgress:any, reward:boolean}>`
+export const ProgressBar1 = styled("div")<{barProgress:any}>`
   height: 7px;
   background-color: #6717CD;
   border: 1px solid #6717CD;
   position: relative;
-  ${props => (props.reward == false) && css<{barProgress:any}>`
   width: ${props=>props.barProgress}%;
-`}
-${props => (props.reward == true) && css`
-  width: 30%;
-`}
+`;
+export const ProgressBar2 = styled("div")<{barProgress:any}>`
+  height: 7px;
+  background-color: #6717CD;
+  border: 1px solid #6717CD;
+  position: relative;
+  width: ${props=>props.barProgress}%;
 `;
 export const CompleteBar = styled.div`
   display:flex;
@@ -442,25 +444,22 @@ export const RewardParagraph = styled.p`
     display:none;
   }
 `;
-export const RewardImage = styled.img`
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: white;
-  width: 100%;
-  height: auto;
-  border-radius:10px;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-`;
 export const ImageContain = styled.div`
   display: flex;
-  min-height: 180px;
-  min-width: 180px;
-  max-height: 200px;
-  max-width: 200px;
+  width: 200px;
+  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
   @media (max-width: 1023px) {
     max-height: 260px;
     max-width: 260px;
   }
+`;
+export const RewardImage = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius:10px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const AllEditInputs = styled.div`
   display:flex;

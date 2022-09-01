@@ -14,6 +14,15 @@ export const getRewards = async () => {
   });
   return data
 }
+export const getTimeRewards = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "rewardsTime"), orderBy("month"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
 // export const updateUser = async (user: any, id: any) => {
 //   const docRef = doc(db, 'users', id);
 //   await updateDoc(docRef, {

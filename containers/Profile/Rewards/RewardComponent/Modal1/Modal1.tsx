@@ -73,6 +73,10 @@ const Modal1 = ({ show, setShow, data, user }: any) => {
       console.log(res);
     })
   }
+  console.log("-----------------------")
+  console.log("Primer " + data.status);
+  console.log("Segundo " + userReward.status);
+  console.log(data)
   return (
     <>
       <ModalContain >
