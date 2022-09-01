@@ -2,7 +2,7 @@ import router from "next/router";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
-import { getWholeCourses } from "../../../store/actions/courseActions";
+import { getViewedCourses, getWholeCourses } from "../../../store/actions/courseActions";
 
 import {
   ButtonContain,
@@ -52,7 +52,10 @@ const Module1 = ({ user }: any) => {
 
   useEffect(() => {
     if (user) {
-      setCourse({})
+      getViewedCourses(user.id).then((res) => {
+        setHistoryCourse(res);
+
+      })
     } else {
       getWholeCourses().then((response) => {
         setCourse(response[0]);
@@ -116,10 +119,10 @@ const Module1 = ({ user }: any) => {
 
         <TextContain>
           <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0].title}”
+            Curso {historyCourse.courseTittle}: Episodio 1 “{historyCourse.seasons[0]?.lessons[0].title}”
           </Title>
           <SubText style={{ textShadow: "1px 1px 5px black" }}>
-            {course.courseAbout}
+            {historyCourse.courseAbout}
           </SubText>
           <ButtonContain>
             <PurpleButton onClick={goTo}>

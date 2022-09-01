@@ -206,3 +206,12 @@ export const addHistoryCourse = async (course: any, userId: any) => {
     }
   );
 }
+export const getViewedCourses = async (userdId: any) => {
+  let courses: any = []
+  const docRef = query(collection(db, 'viewedCourses'), orderBy("viewed", "desc"), where("userId", "==", userdId));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    courses.push({ ...doc.data(), id: doc.id });
+  });
+  return courses[0];
+}
