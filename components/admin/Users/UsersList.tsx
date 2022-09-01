@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import CsvDownloader from "react-csv-downloader";
+
 import { collection, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
@@ -45,6 +47,7 @@ const UsersList = () => {
   const usersCollectionRef = query(collection(db, "users"));
   const [filteredList, setFilteredList] = useState(allUsers);
   const [isSearching, setIseSearching] = useState<boolean>();
+  const [inputValue, setInputValue] = useState<string>();
 
   const getUsers = async () => {
     const userData = await getDocs(usersCollectionRef);
@@ -58,10 +61,20 @@ const UsersList = () => {
       setIsVisible(true);
     }
   };
+  //Gets specified values from each user
+  let displayedListData = filteredList.map((user: any) => ({
+    name: user.name,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
+    score: user.score.toString()
+  }));
+  const rowData = [...displayedListData];
+
   const filterBySearch = (event: { target: { value: string; }; }) => {
-    setIseSearching(true)
+    setIseSearching(true);
     const query = event.target.value.toLocaleLowerCase();
-    console.log("IM LOWERCASE: ", allUsers)
+    setInputValue(query);
     var updatedList = [...allUsers]
     var updated = updatedList.filter(item =>
       item.name.toLowerCase().includes(query) ||
@@ -72,10 +85,21 @@ const UsersList = () => {
     setFilteredList(updated);
   };
 
+  const downloadUsersData = () => {
+    if (inputValue == null) {
+      setFilteredList(allUsers);
+      console.log("Empty input, getting all users...", rowData)
+    };
+  };
+
+
   useEffect(() => {
     getUsers();
   }, [selectedUser]);
 
+  // useEffect(() => {
+  // }, [inputValue]);
+  //console.log("users...", rowData)
 
   return (
     <AdminContain>
@@ -84,10 +108,18 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios</Title>
-            <DownloadUserData>
-              <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
-              <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
-            </DownloadUserData>
+            <CsvDownloader
+              filename="usersData"
+              extension=".csv"
+              separator=","
+              wrapColumnChar=""
+              datas={rowData}
+            >
+              <DownloadUserData>
+                <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
+                <TransparentButton2 onClick={downloadUsersData}>Descargar lista de usuarios</TransparentButton2>
+              </DownloadUserData>
+            </CsvDownloader>
             <SearchContain>
               <SearchIcon />
               <SearchInput placeholder="Buscar un Usuario" onChange={filterBySearch} />
