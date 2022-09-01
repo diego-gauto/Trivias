@@ -69,53 +69,55 @@ const Module3 = ({ user }: any) => {
 
   return (
     <Maincontainer>
-      <Title>
-        Cursos en poseción
-      </Title>
-      <CardContain id="Scroll">
-        {courses.map((course: any, index: any) => {
-          return (
-            <Cardcontent key={"card-course-" + index}>
-              <ImageContent>
-                <Band />
-                <DaysLeft>{course.date} días</DaysLeft>
-                <CardImage
-                  src="/images/Preview/card3.png"
-                  width={400}
-                  height={210}
-                />
-                <InsideContent>
-                  {course.totalLessons > 1 && <InsideText>
-                    {course.totalLessons} Lecciones
-                  </InsideText>}
-                  {course.totalLessons == 1 && <InsideText>
-                    Unica Lección
-                  </InsideText>}
-                </InsideContent>
-              </ImageContent>
-              <VideoInfo>
-                <TextContain>
-                  <Text1>
-                    {course.courseTittle}
-                    <Text2>
-                      {course.courseCategory}
-                    </Text2>
-                  </Text1>
-                  <Text3>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam est tempor, egestas mauris pulvinar.
-                  </Text3>
-                </TextContain>
-                <ViewCourse onClick={() => {
-                  goTo(course)
-                }}>
-                  Ver el Curso
-                </ViewCourse>
-              </VideoInfo>
-            </Cardcontent>
+      {courses.length > 0 && <>
+        <Title>
+          Cursos en poseción
+        </Title>
+        <CardContain id="Scroll">
+          {courses.map((course: any, index: any) => {
+            return (
+              <Cardcontent key={"card-course-" + index}>
+                <ImageContent>
+                  <Band />
+                  <DaysLeft>{course.date} días</DaysLeft>
+                  <CardImage
+                    src="/images/Preview/card3.png"
+                    width={400}
+                    height={210}
+                  />
+                  <InsideContent>
+                    {course.totalLessons > 1 && <InsideText>
+                      {course.totalLessons} Lecciones
+                    </InsideText>}
+                    {course.totalLessons == 1 && <InsideText>
+                      Unica Lección
+                    </InsideText>}
+                  </InsideContent>
+                </ImageContent>
+                <VideoInfo>
+                  <TextContain>
+                    <Text1>
+                      {course.courseTittle}
+                      <Text2>
+                        {course.courseCategory}
+                      </Text2>
+                    </Text1>
+                    <Text3>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam est tempor, egestas mauris pulvinar.
+                    </Text3>
+                  </TextContain>
+                  <ViewCourse onClick={() => {
+                    goTo(course)
+                  }}>
+                    Ver el Curso
+                  </ViewCourse>
+                </VideoInfo>
+              </Cardcontent>
 
-          )
-        })}
-      </CardContain>
+            )
+          })}
+        </CardContain>
+      </>}
     </Maincontainer>
   )
 }

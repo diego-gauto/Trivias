@@ -35,6 +35,7 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signUpWithCreds } from "../../store/actions/AuthActions";
+import { useRouter } from "next/router";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -76,7 +77,10 @@ const Register = () => {
   const togglePassword_2 = () => {
     setPasswordShown_2(!passwordShown_2);
   };
+  const router = useRouter()
+  const { trial } = router.query;
 
+  console.log(trial);
 
   const {
     register,
@@ -91,19 +95,24 @@ const Register = () => {
 
   const handleSignUpWithAuthProvider = (authProvider: string) => {
     setIsLoading(true)
-    accessWithAuthProvider(authProvider).then(() => {
+    accessWithAuthProvider(authProvider, trial).then(() => {
       window.location.href = "/Preview";
     });
   };
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
+    let tempMonth = false;
+    if (trial) {
+      tempMonth = true;
+    }
     setIsLoading(true)
     var input = document.getElementById("input_1") as HTMLInputElement;
     var phoneInputValidation = "";
     if (input !== undefined && input !== null) {
       phoneInputValidation = input.value
     }
+    // 2592000
 
     let signUpData = {
       credentials: {
@@ -111,6 +120,7 @@ const Register = () => {
         email: formData.email,
         password: formData.password,
         phoneInput: phoneInputValidation,
+        month: tempMonth
       },
     };
     setIsLoading(true)

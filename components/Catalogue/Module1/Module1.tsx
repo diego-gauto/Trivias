@@ -21,6 +21,8 @@ const Module1 = ({ user }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
+  console.log(user);
+
 
   const goTo = () => {
     if (user) {
@@ -53,8 +55,9 @@ const Module1 = ({ user }: any) => {
   useEffect(() => {
     if (user) {
       getViewedCourses(user.id).then((res) => {
-        setHistoryCourse(res);
-
+        if (res) {
+          setHistoryCourse(res);
+        }
       })
     } else {
       getWholeCourses().then((response) => {
