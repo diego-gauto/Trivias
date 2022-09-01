@@ -38,8 +38,11 @@ export const NavTags = styled.div`
     display: none;
   }
 `;
-export const Logo = styled(Image)`
-  cursor: pointer;
+export const Logo = styled.img`
+background-repeat:no-repeat;
+width: 130px;
+height: 70px;
+cursor: pointer;
 `;
 export const LogoContain = styled.div`
   display: flex;
