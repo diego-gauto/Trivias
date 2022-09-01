@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { getRequest } from '../../../../store/actions/RewardActions';
+import { getRequest, updateRequest } from '../../../../store/actions/RewardActions';
 import { Table } from '../../SideBar.styled';
 import { InputContain, Tab, Unselect } from '../Rewards.styled';
 import { DEFAULT_USER_IMG } from "../../../../constants/paths";
 import { TabContain } from './Points.styled';
 import {
   Contain, FirstContain, IconContain, Imagecontain, Profile,
-  Search, SearchContain, SearchIcon, Title
+  Search, SearchContain, SearchIcon, Title, Button
 } from './Request.styled';
 
 const Request = ({ setPlace }: any) => {
@@ -24,6 +24,9 @@ const Request = ({ setPlace }: any) => {
       });
       setRequest(res);
     })
+  }
+  const function1 = () => {
+
   }
   useEffect(() => {
     getAllRequest();
@@ -54,7 +57,7 @@ const Request = ({ setPlace }: any) => {
           <tbody>
             <tr>
               <th>Usuario</th>
-              <th>Puntos</th>
+              <th>Puntos , Meses</th>
               <th>Fecha de Creación</th>
               <th>Teléfono</th>
               <th>Tipo</th>
@@ -83,16 +86,27 @@ const Request = ({ setPlace }: any) => {
                         {request.user}
                       </IconContain>
                     </td>
-                    <td >{request.points}</td>
+                    <td >
+                      {
+                        request.points != undefined
+                        && request.points + " puntos"
+                      }
+                      {
+                        request.month != undefined
+                        && request.month + " meses"
+                      }
+                    </td>
                     <td>{request.formatDate}</td>
                     <td >{request.phoneNumber}</td>
                     <td>{request.type}</td>
                     <td style={{ fontWeight: 600 }}>{request.product}</td>
-                    <td>
+                    <td style={{ padding: 0, }}>
                       {
                         request.status == false
-                          ? "No entregado"
-                          : "Enviado"
+                          ? <Button
+                            onClick={() => { updateRequest(request.id) }}
+                            status={request.status}>No enviado</Button>
+                          : <Button status={request.status}>Enviado</Button>
                       }
                     </td>
                   </tr>
