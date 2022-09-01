@@ -89,7 +89,7 @@ export const deleteLessonMaterial = async (material: any) => {
 
 export const getWholeCourses = async () => {
   let courses: any = []
-  const docRef = collection(db, 'courses');
+  const docRef = query(collection(db, 'courses'), orderBy('createdAt', 'desc'));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc: any) => {
     courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0 });
@@ -195,4 +195,14 @@ export const addHomework = async (data: any) => {
     }
   );
   return 'exito'
+}
+export const addHistoryCourse = async (course: any, userId: any) => {
+  course.userId = userId;
+  course.viewed = new Date();
+  const docRef = await setDoc(
+    doc(db, "viewedCourses", `${course.documentID}-${userId}`),
+    {
+      ...course
+    }
+  );
 }

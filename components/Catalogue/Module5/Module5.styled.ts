@@ -114,6 +114,7 @@ export const Cardcontent2 = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
+  height:328px;
   @media(max-width:1023px){
     position: absolute;
     top: -20px;
@@ -144,6 +145,7 @@ export const TextContain = styled.div`
   display: flex;
   background: white;
   flex-direction: column;
+  height:100%;
   gap: 12px;
   padding:10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);

@@ -6,7 +6,7 @@ const CourseProgress = ({ title, season, lesson, course, userId }: any) => {
 
   const checkLecture = () => {
     let tempViewd = 0;
-    course?.seasons[season].lessons.forEach((element: any) => {
+    course?.seasons[season]?.lessons.forEach((element: any) => {
       if (element.users.includes(userId)) {
         tempViewd++;
       }
@@ -29,12 +29,12 @@ const CourseProgress = ({ title, season, lesson, course, userId }: any) => {
       </Subtitle>
       <ProgressContain>
         <ProgressBar2 />
-        <ProgressBar progress={(totalViewed * 100) / course?.seasons[season].lessons.length} />
+        <ProgressBar progress={(totalViewed * 100) / course?.seasons[season]?.lessons.length} />
       </ProgressContain>
       <SeasonContain>
         <ContainText>
           <SeasonText>
-            {Math.ceil((totalViewed * 100) / course?.seasons[season].lessons.length)}%
+            {Math.ceil((totalViewed * 100) / course?.seasons[season]?.lessons.length)}%
           </SeasonText>
           <SeasonSpan>
             temporada completada

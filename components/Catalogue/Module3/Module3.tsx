@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import Modal1 from "./Modal/Modal1";
 import {
   Band,
-  Cardcontent,
-  CardContain,
-  CardImage,
   DaysLeft,
   ImageContent,
   InsideContent,
@@ -15,17 +12,14 @@ import {
   Text2,
   Text3,
   TextContain,
-  Title,
-  VideoInfo,
   ViewCourse,
 } from "./Module3.styled";
+import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain } from "../Module4/Module4.styled";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import { useRouter } from "next/router";
 import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 
 const Module3 = ({ user }: any) => {
-
-  const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
@@ -46,8 +40,6 @@ const Module3 = ({ user }: any) => {
               temp_courses.push(element);
             }
           });
-          console.log(temp_courses);
-
           setCourses(temp_courses);
         })
       })
@@ -81,9 +73,9 @@ const Module3 = ({ user }: any) => {
         Cursos en poseción
       </Title>
       <CardContain id="Scroll">
-        {courses.map((course: any) => {
+        {courses.map((course: any, index: any) => {
           return (
-            <Cardcontent>
+            <Cardcontent key={"card-course-" + index}>
               <ImageContent>
                 <Band />
                 <DaysLeft>{course.date} días</DaysLeft>
@@ -120,6 +112,7 @@ const Module3 = ({ user }: any) => {
                 </ViewCourse>
               </VideoInfo>
             </Cardcontent>
+
           )
         })}
       </CardContain>

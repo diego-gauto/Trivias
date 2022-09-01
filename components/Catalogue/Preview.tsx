@@ -51,13 +51,13 @@ const Preview = () => {
 
   return (
     <PreviewContain>
-      <Module1 />
+      <Module1 user={userData} />
       <ModuleContain>
         {userData && <Module2 />}
         {userData && <Module3 user={userData} />}
         <Module4 user={userData} />
       </ModuleContain>
-      <Module5 />
+      <Module5 user={userData} />
     </PreviewContain>
   )
 }

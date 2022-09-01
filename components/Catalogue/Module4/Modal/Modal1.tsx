@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { PurpleButton, TransparentButton } from '../../Module1/Module1.styled';
 import {
@@ -11,9 +11,34 @@ import {
   Text, TextContainer, Title, Titles, VideoContain, Lock, PlayIcon, InsideContent, InsideText, ContainVideo,
 } from '../../Module3/Modal/Modal1.styled';
 import SelectModule4 from './SelectModule4';
+import router from 'next/router';
 
-const Modal1 = ({ show, setShow, course }: any) => {
+const Modal1 = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
+  const [lessons, setLessons] = useState<any>([])
+
+  const handleClick = (value: any) => {
+    setLessons(course.seasons[value].lessons)
+  };
+
+  const goTo = () => {
+    if (user) {
+      router.push(
+        { pathname: 'Purchase', query: { type: 'course', id: course.id } }
+      )
+    } else {
+      router.push(
+        { pathname: 'auth/Login' }
+      )
+    }
+  }
+  useEffect(() => {
+    if (Object.values(course).length > 0) {
+      setLessons(course.seasons[0].lessons)
+    }
+
+  }, [course])
+
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -41,11 +66,9 @@ const Modal1 = ({ show, setShow, course }: any) => {
                   Descubre un nuevo método para tus uñas este San Valentín
                 </SubTitle>
                 <ButtonContain>
-                  <Link href={{ pathname: 'Purchase', query: { type: 'course', id: course.id } }}>
-                    <PurpleButton>
-                      Comprar - ${course.coursePrice}.00
-                    </PurpleButton>
-                  </Link>
+                  <PurpleButton onClick={goTo}>
+                    Comprar - ${course.coursePrice}.00
+                  </PurpleButton>
                   <TransparentButton>
                     Ver un Adelanto
                     <PlayIcon />
@@ -78,9 +101,12 @@ const Modal1 = ({ show, setShow, course }: any) => {
               </Data>
               <Data>
                 Temporadas:
-                <DataSpan>
-                  3 temporadas
-                </DataSpan>
+                {course.seasons?.length == 1 && <DataSpan>
+                  1 temporada
+                </DataSpan>}
+                {course.seasons?.length > 1 && <DataSpan>
+                  {course.seasons?.length} temporadas
+                </DataSpan>}
               </Data>
               <Data>
                 Año de publicación:
@@ -101,27 +127,31 @@ const Modal1 = ({ show, setShow, course }: any) => {
               <LessonTitle>
                 Lista de lecciones
               </LessonTitle>
-              <SelectModule4 />
+              <SelectModule4 course={course} handleClick={handleClick} />
             </SeasonContain>
-            <VideoContain>
-              <ContainVideo>
-                <EpisodeContain>
-                  <CardImage src="/images/Preview/card8.png" width={350} height={200} />
-                  <Lock />
-                </EpisodeContain>
-              </ContainVideo>
-              <EpisodeInfo>
-                <EpisodeTitle>
-                  Epidosio 1: Lorem Ipsum
-                </EpisodeTitle>
-                <EpisodeTime>
-                  24 minutos
-                </EpisodeTime>
-                <Description>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus nisi, sit vel cursus ac elementum, et porta. Imperdiet nullam facilisis vestibulum quis gravida sed aliquet consectetur orci. Netus egestas gravida mollis vitae pellentesque id nisl nunc.
-                </Description>
-              </EpisodeInfo>
-            </VideoContain>
+            {lessons.map((lesson: any, index: any) => {
+              return (
+                <VideoContain>
+                  <ContainVideo>
+                    <EpisodeContain>
+                      <CardImage src="/images/Preview/card8.png" width={350} height={200} />
+                      <Lock />
+                    </EpisodeContain>
+                  </ContainVideo>
+                  <EpisodeInfo>
+                    <EpisodeTitle>
+                      Epidosio {index + 1}: {lesson.title}
+                    </EpisodeTitle>
+                    <EpisodeTime>
+                      24 minutos
+                    </EpisodeTime>
+                    <Description>
+                      {lesson.about}
+                    </Description>
+                  </EpisodeInfo>
+                </VideoContain>
+              )
+            })}
           </LessonContain>
         </ModalCont>
       </ModalMod>
