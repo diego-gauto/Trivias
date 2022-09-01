@@ -22,6 +22,7 @@ import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 import { getPaymentmethods } from "../../../store/actions/PaymentActions";
+import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -29,10 +30,13 @@ const User = () => {
   const [userData, setUserData] = useState<any>(null);
   const [level, setLevel] = useState<any>([]);
   const [barProgress, setBarProgress] = useState(0);
-  const [size, setSize] = useState(0);
+  const [timeProgress, setTimeProgress] = useState(0);
   const [loading, setLoading] = useState(true);
-  const levelRef = query(collection(db, "levelPoints"), orderBy("level"));
   const [paymentMethod, setPaymentMethods] = useState<any>([]);
+  const [currentLevel, setCurrentLevel] = useState<number>(0);
+  const [timeScore, setTimeScore] = useState<number>(0);
+  const [timeLevel, setTimeLevel] = useState<any>([]);
+  const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
 
   try {
     var userDataAuth = useAuth();
@@ -80,20 +84,29 @@ const User = () => {
       return false
     }
   }
-  const getSize = async () => {
-    db.collection('levelPoints').get().then(snap => {
-      setSize(snap.size) // will return the collection size
-    });
+  const getDate = () => {
+    let tempToday: number = new Date().getTime() / 1000;
+    let tempDate: number = userData.membership?.startDate;
+    let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
+    setTimeScore(timeScore)
   }
 
-  const getLevel = async () => {
-    let tempData: any = []
-    const data = await getDocs(levelRef)
-    data.forEach((doc) => {
-      tempData.push({ ...doc.data(), id: doc.id })
+
+
+  const getCurrentLevel = () => {
+    getLevel().then((res) => {
+      res = res.filter((data: any, index: any) => data.minimum <= userData.score)
+      setLevel(res[0])
+      setCurrentLevel(res.length)
     })
-    tempData = tempData.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || (data.level == size))
-    setLevel(tempData[0])
+  }
+
+  const getCurrentTimeLevel = () => {
+    getTimeLevel().then((res) => {
+      res = res.filter((data: any, index: any) => data.minimum <= timeScore)
+      setTimeLevel(res[0])
+      setCurrentTimeLevel(res.length)
+    })
   }
 
   const logoutFunc = () => {
@@ -111,16 +124,18 @@ const User = () => {
 
   useEffect(() => {
     if (userData != null) {
-      getLevel();
-      getSize();
+      getCurrentLevel();
+      getDate();
+      getCurrentTimeLevel();
     }
-  }, [userData, size]);
+  }, [userData]);
   useEffect(() => {
-    if (userData != null && level != null) {
+    if (userData != null && level != null && timeLevel != null) {
       setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
+      setTimeProgress(((timeScore - timeLevel.minimum) / (timeLevel.maximum - timeLevel.minimum)) * 100)
       setLoading(false);
     }
-  }, [level]);
+  }, [level, timeLevel]);
 
   if (loading) {
     return (
@@ -140,7 +155,17 @@ const User = () => {
           <UserInfo userData={userData} /> : <></>}
       {/* SECOND Container */}
       <SecondBox>
-        <NextReward score={userData.score} barProgress={barProgress} level={level.level} max={level.maximum} />
+        <NextReward
+          score={userData.score}
+          barProgress={barProgress}
+          level={currentLevel}
+          max={level.maximum}
+
+          timeScore={timeScore}
+          timeProgress={timeProgress}
+          timeLevel={currentTimeLevel}
+          timeMax={timeLevel.maximum}
+        />
         <ThirdBox>
           {/* Third Container */}
           <UserData data={userData} pm={paymentMethod} />

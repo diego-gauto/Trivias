@@ -43,9 +43,9 @@ const PaymentMethod = ({ data, pm }: any) => {
         Métodos de Pago
       </PaymentTitle>
       <PayContainer>
-        {pm.map((pm: any) => {
+        {pm.map((pm: any, index: any) => {
           return (
-            <PaymentBox>
+            <PaymentBox key={"pmUser" + index}>
               <PayBox>
                 <CardIconResp brand={pm.brand} />
                 <PaymentText>
