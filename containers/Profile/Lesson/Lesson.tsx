@@ -83,12 +83,12 @@ const Lesson = () => {
                   });
                 }
               }
-              if (res.courseType == 'Mensual' && e.data().membership.level == 0) {
+              if (res.courseType == 'Mensual' && e.data().membership.finalDate > date) {
+                addHistoryCourse(res, e.id);
+              } else {
                 router.push(
                   { pathname: 'Purchase', query: { type: 'subscription' } }
                 )
-              } else {
-                addHistoryCourse(res, e.id);
               }
               if (res.courseType == 'Gratis') {
                 addHistoryCourse(res, e.id);
