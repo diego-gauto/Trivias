@@ -26,7 +26,8 @@ const Module1 = ({ user }: any) => {
 
   const goTo = () => {
     if (user) {
-      if (course.courseType == 'Mensual' && user.membership.level == 1 || course.paid) {
+      let today = new Date().getTime() / 1000;
+      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid) {
         router.push({
           pathname: 'Lesson',
           query: { id: course.id, season: 0, lesson: 0 },
