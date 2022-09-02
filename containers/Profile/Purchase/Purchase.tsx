@@ -68,6 +68,7 @@ import {
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
+import { updateCoupon } from "../../../store/actions/CouponsActions";
 
 const Purchase = () => {
   const [loggedIn, setLoggedIn] = useState<any>(false);
@@ -283,6 +284,7 @@ const Purchase = () => {
               } else {
                 price = (price - (coupon.discount / 100) * price)
               }
+              updateCoupon(coupon, coupon.id);
             }
             invoice.amount = price * 100;
             const course = {
@@ -314,6 +316,7 @@ const Purchase = () => {
           } else {
             price = (price - (coupon.discount / 100) * price)
           }
+          updateCoupon(coupon, coupon.id);
         }
         delete invoice.brand;
         invoice.amount = price * 100
@@ -331,6 +334,8 @@ const Purchase = () => {
   const handleShow = () => setShow(true);
 
   const handleCoupons = (value: any) => {
+    // console.log(value);
+
     setCoupon(value);
   }
 
