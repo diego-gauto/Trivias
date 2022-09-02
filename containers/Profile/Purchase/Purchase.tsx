@@ -87,7 +87,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id, trial } = router.query;
+  const { type, id } = router.query;
   const [loader, setLoader] = useState<any>(false);
   const subscription = {
     price: 149.00,
