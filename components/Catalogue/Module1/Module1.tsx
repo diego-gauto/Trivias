@@ -21,10 +21,13 @@ const Module1 = ({ user }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
+  console.log(user);
+
 
   const goTo = () => {
     if (user) {
-      if (course.courseType == 'Mensual' && user.membership.level == 1 || course.paid) {
+      let today = new Date().getTime() / 1000;
+      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid) {
         router.push({
           pathname: 'Lesson',
           query: { id: course.id, season: 0, lesson: 0 },
@@ -53,8 +56,9 @@ const Module1 = ({ user }: any) => {
   useEffect(() => {
     if (user) {
       getViewedCourses(user.id).then((res) => {
-        setHistoryCourse(res);
-
+        if (res) {
+          setHistoryCourse(res);
+        }
       })
     } else {
       getWholeCourses().then((response) => {

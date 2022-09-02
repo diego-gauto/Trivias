@@ -15,6 +15,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson }: any) => {
     tempHomework.season = parseInt(season) + 1;
     tempHomework.lesson = parseInt(lesson) + 1;
     tempHomework.createdAt = new Date();
+    tempHomework.courseId = data.courseId
     if (file.length > 0) {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);

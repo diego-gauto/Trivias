@@ -37,6 +37,18 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         email: credentials.email,
       }
       let dateTime = new Date()
+      let membership: any = {
+        finalDate: '',
+        level: 0,
+        method: '',
+        planId: '',
+        planName: '',
+        paymentMethod: '',
+        startDate: 0
+      }
+      if (credentials.month) {
+        membership.finalDate = (new Date().getTime() / 1000) + 2592000;
+      }
       const stripeUser = httpsCallable(functions, 'createStripeUser');
       await stripeUser(data).then(async (res: any) => {
         await addDoc(collection(db, "users"), {
@@ -49,15 +61,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
           role: "user", //user, userAdmin, professor
           stripeId: res.data.id,
           created_at: dateTime,
-          membership: {
-            finalDate: '',
-            level: 0,
-            method: '',
-            planId: '',
-            planName: '',
-            paymentMethod: '',
-            startDate: 0
-          },
+          membership,
           score: 0,
         }).then(() => {
           console.log("Provider Auth : 2")
@@ -99,7 +103,7 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
 };
 
 
-export const accessWithAuthProvider = (provider: any) => {
+export const accessWithAuthProvider = (provider: any, trial: any) => {
   switch (provider) {
     case "Google":
       provider = new firebase.auth.GoogleAuthProvider();
@@ -162,6 +166,18 @@ export const accessWithAuthProvider = (provider: any) => {
           email: email,
         }
         let dateTime = new Date()
+        let membership: any = {
+          finalDate: '',
+          level: 0,
+          method: '',
+          planId: '',
+          planName: '',
+          paymentMethod: '',
+          startDate: 0
+        }
+        if (trial) {
+          membership.finalDate = (new Date().getTime() / 1000) + 2592000;
+        }
         const stripeUser = httpsCallable(functions, 'createStripeUser');
         await stripeUser(data).then(async (res: any) => {
 
@@ -176,15 +192,7 @@ export const accessWithAuthProvider = (provider: any) => {
             created_at: dateTime,
             role: "user", //user, userAdmin, professor
             stripeId: res.data.id,
-            membership: {
-              finalDate: '',
-              level: 0,
-              method: '',
-              planId: '',
-              planName: '',
-              paymentMethod: '',
-              startDate: 0
-            },
+            membership,
             score: 0,
 
 
