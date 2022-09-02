@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getCourses } from "../../../store/actions/courseActions";
+import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 import {
-  Cardcontent,
-  CardContain,
-  CardImage,
   ImageContent,
   InsideContent,
   InsideText,
@@ -11,23 +8,17 @@ import {
   Text1,
   Text2,
   Text3,
-  TextContain,
-  Title,
-  VideoInfo,
+  TextContain
 } from "../Module3/Module3.styled";
 import Modal1 from "./Modal/Modal1";
-import { Viewpay } from "./Module4.styled";
+import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain } from "./Module4.styled";
 import { useRouter } from 'next/router'
-import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 const Module4 = ({ user }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
-  const [userData, setUserData] = useState<any>(null);
   const [userCourses, setUserCourses] = useState<any>([]);
 
   const handleShow = () => {
@@ -39,8 +30,9 @@ const Module4 = ({ user }: any) => {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);
-        getCourses().then((response) => {
+        getWholeCourses().then((response) => {
           response.forEach((element: any) => {
+            element.courseAbout = element.courseAbout.slice(0, 100);
             if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
               element.paid = true;
             } else {
@@ -51,29 +43,40 @@ const Module4 = ({ user }: any) => {
         })
       })
     } else {
-      getCourses().then((response) => {
+      getWholeCourses().then((response) => {
+        response.forEach((element: any) => {
+          element.courseAbout = element.courseAbout.slice(0, 100);
+        });
         setCourses(response);
       })
     }
   }, [user])
 
   const goTo = (data: any) => {
-    if (data.courseType == 'Mensual' && userData.membership.level == 1 || data.paid) {
-      router.push({
-        pathname: 'Lesson',
-        query: { id: data.id },
-      });
-    }
-    if (data.courseType == 'Gratis') {
-      router.push({
-        pathname: 'Lesson',
-        query: { id: data.id },
-      });
-    }
-    if (data.courseType == 'Mensual' && userData.membership.level == 0) {
-      router.push(
-        { pathname: 'Purchase', query: { type: 'subscription' } }
-      )
+    if (user) {
+      if (data.courseType == 'Mensual' && user.membership.level == 1 || data.paid || data.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: data.id, season: 0, lesson: 0 },
+        });
+      }
+      if (data.courseType == 'Mensual' && user.membership.level == 0) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'subscription' } }
+        )
+      }
+    } else {
+      if (data.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: data.id, season: 0, lesson: 0 },
+        });
+      }
+      if (!user && data.courseType == 'Mensual') {
+        router.push(
+          { pathname: 'auth/Login' }
+        )
+      }
     }
     setCourse(data)
   }
@@ -83,21 +86,22 @@ const Module4 = ({ user }: any) => {
       <Title>
         Cursos disponibles
       </Title>
-      <CardContain>
+      <CardContain id="Scroll">
         {
-          courses.map((course: any) => {
+          courses.map((course: any, index: any) => {
             return (
-              <Cardcontent>
+              <Cardcontent key={"cardContent-" + index}>
                 <ImageContent>
                   <CardImage
                     src="/images/Preview/card5.png"
-                    width={400}
-                    height={210}
                   />
                   <InsideContent>
-                    <InsideText>
-                      24 Lecciones
-                    </InsideText>
+                    {course.totalLessons > 1 && <InsideText>
+                      {course.totalLessons} Lecciones
+                    </InsideText>}
+                    {course.totalLessons == 1 && <InsideText>
+                      Unica Lección
+                    </InsideText>}
                   </InsideContent>
                 </ImageContent>
                 <VideoInfo>
@@ -109,7 +113,7 @@ const Module4 = ({ user }: any) => {
                       </Text2>
                     </Text1>
                     <Text3>
-                      {course.courseAbout}
+                      {course.courseAbout}...
                     </Text3>
                   </TextContain>
                   {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={() => {
@@ -134,7 +138,7 @@ const Module4 = ({ user }: any) => {
           })
         }
       </CardContain>
-      <Modal1 show={show} setShow={setShow} course={course} />
+      <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </Maincontainer>
   )
 }

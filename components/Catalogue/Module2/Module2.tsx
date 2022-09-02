@@ -27,7 +27,7 @@ const Module2 = () => {
             <ImageContain>
               <Background
                 src="/images/Preview/card1.png"
-                width={420}
+                width={400}
                 height={240}
               />
             </ImageContain>
@@ -61,6 +61,7 @@ const Module2 = () => {
             Curso 2: Lorem Ipsum
           </VideoInfo>
         </Video>
+
 
       </CardContainer>
 

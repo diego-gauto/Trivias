@@ -18,6 +18,7 @@ import {
   SocialContainer,
   WAIcon,
   TextFinish,
+  LoaderContain,
 } from "./Footer.styled";
 import { useAuth } from "../../hooks/useAuth";
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
@@ -28,6 +29,8 @@ const Footer = () => {
   const [show, setShow] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const [loader, setLoader] = useState<any>(false);
+
   const handleShow = () => {
     setShow(true)
   }
@@ -65,21 +68,22 @@ const Footer = () => {
   }, [loggedIn])
 
   const cancelSubscription = async () => {
+    setLoader(true);
     if (userData.membership.method == 'stripe') {
       const updateCard = httpsCallable(functions, 'cancelStripeSubscription');
       await updateCard(userData.membership.planId).then(async (res: any) => {
         handleShow()
+        setLoader(false);
       })
     } else {
       let user = {
         planId: userData.membership.planId,
         id: userData.id
       }
-      console.log(1);
-
       const cancelPlan = httpsCallable(functions, 'cancelPaypalSubscription');
       await cancelPlan(user).then(async (res: any) => {
-        handleShow()
+        handleShow();
+        setLoader(false);
       })
     }
   }
@@ -121,11 +125,12 @@ const Footer = () => {
         </Column>
         <FooterIcons>
           {
-            pathname == '/Profile' && userData?.membership.level == 1 &&
+            (pathname == '/Profile' && userData?.membership.level == 1 && !loader) &&
             <TextFinish onClick={cancelSubscription}>
               Terminar Suscripción
             </TextFinish>
           }
+          {loader && <LoaderContain />}
           <FooterText>
             Contactanos
           </FooterText>

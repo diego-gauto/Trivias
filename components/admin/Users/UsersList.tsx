@@ -47,6 +47,7 @@ const UsersList = () => {
   const usersCollectionRef = query(collection(db, "users"));
   const [filteredList, setFilteredList] = useState(allUsers);
   const [isSearching, setIseSearching] = useState<boolean>();
+  const [inputValue, setInputValue] = useState<string>();
 
   const getUsers = async () => {
     const userData = await getDocs(usersCollectionRef);
@@ -60,9 +61,20 @@ const UsersList = () => {
       setIsVisible(true);
     }
   };
+  //Gets specified values from each user
+  let displayedListData = filteredList.map((user: any) => ({
+    name: user.name,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
+    score: user.score.toString()
+  }));
+  const rowData = [...displayedListData];
+
   const filterBySearch = (event: { target: { value: string; }; }) => {
-    setIseSearching(true)
+    setIseSearching(true);
     const query = event.target.value.toLocaleLowerCase();
+    setInputValue(query);
     var updatedList = [...allUsers]
     var updated = updatedList.filter(item =>
       item.name.toLowerCase().includes(query) ||
@@ -72,17 +84,22 @@ const UsersList = () => {
       new Date(item.created_at.seconds * 1000).toLocaleDateString("es-MX").includes(query));
     setFilteredList(updated);
   };
-  const downloadUsersData = () => {
-    console.log("This data will be downloaded: ", filteredList);
-  };
-  const columns = [...filteredList];
 
-  const datas = [...filteredList];
+  const downloadUsersData = () => {
+    if (inputValue == null) {
+      setFilteredList(allUsers);
+      console.log("Empty input, getting all users...", rowData)
+    };
+  };
+
 
   useEffect(() => {
     getUsers();
   }, [selectedUser]);
 
+  // useEffect(() => {
+  // }, [inputValue]);
+  //console.log("users...", rowData)
 
   return (
     <AdminContain>
@@ -92,12 +109,11 @@ const UsersList = () => {
           <TitleContain>
             <Title>Usuarios</Title>
             <CsvDownloader
-              filename="myfile2"
+              filename="usersData"
               extension=".csv"
               separator=","
-              wrapColumnChar="'"
-              columns={columns}
-              datas={datas}
+              wrapColumnChar=""
+              datas={rowData}
             >
               <DownloadUserData>
                 <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />

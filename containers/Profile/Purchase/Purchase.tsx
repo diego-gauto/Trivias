@@ -64,6 +64,7 @@ import {
   VisaPay,
   PaypalIcon,
   PayPal,
+  LoaderContain,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
@@ -86,8 +87,8 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id } = router.query;
-
+  const { type, id, trial } = router.query;
+  const [loader, setLoader] = useState<any>(false);
   const subscription = {
     price: 149.00,
     title: 'Gonvar Plus',
@@ -159,6 +160,7 @@ const Purchase = () => {
   }
 
   const handleConfirm = async () => {
+    setLoader(true)
     if (cardInfo) {
       delete card.brand
       delete card.cardId
@@ -168,6 +170,7 @@ const Purchase = () => {
     }
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
       alert('Por favor acomplete todos los campos!')
+      setLoader(false)
     }
     if (cardInfo && Object.values(card).every(value => value !== '')) {
       const data = {
@@ -184,18 +187,22 @@ const Purchase = () => {
           setProcess(false);
           setConfirmation(true);
         }
+        setLoader(false)
       })
     }
     if (payment && card.paymentMethod) {
       setCard({ ...card, status: false })
       setProcess(false);
       setConfirmation(true);
+      setLoader(false)
     }
     if (plan.method == 'paypal') {
+      setLoader(false);
       setPaypal(!paypal);
       setProcess(false);
       setConfirmation(true);
     }
+    setLoader(false);
   }
 
   const Return = () => {
@@ -211,6 +218,7 @@ const Purchase = () => {
   }
 
   const FinishPayment = async () => {
+    setLoader(true)
     let invoice = {
       amount: 0,
       userName: userData.name,
@@ -237,6 +245,7 @@ const Purchase = () => {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
             }
+            setLoader(false);
           } else {
             updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
             if (card.status) {
@@ -244,6 +253,7 @@ const Purchase = () => {
             }
             setConfirmation(false);
             setPay(true);
+            setLoader(false);
           }
         });
       } else {
@@ -262,6 +272,7 @@ const Purchase = () => {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
             }
+            setLoader(false);
           } else {
             invoice.amount = res.data.amount;
             const course = {
@@ -275,11 +286,13 @@ const Purchase = () => {
             }
             setConfirmation(false);
             setPay(true);
+            setLoader(false);
           }
         })
       }
     }
     if (plan.method == 'paypal') {
+      setLoader(false);
       if (type == 'subscription') {
         setConfirmation(false);
         setPay(true);
@@ -455,7 +468,7 @@ const Purchase = () => {
                     <ContainerCard>
                       <InputText>
                         Número de la Tarjeta
-                        <InputCard mask='9999 9999 9999 99999' /*maskChar="" */ placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
+                        <InputCard mask='9999 9999 9999 99999' maskChar="" placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
                           setCard((card: any) => ({ ...card, number: e.target.value }));
                         }}>
                         </InputCard>
@@ -503,9 +516,10 @@ const Purchase = () => {
                   <TransparentButton onClick={handleShow}>
                     Agregar Cupón
                   </TransparentButton>
-                  <PurpleButton onClick={handleConfirm}>
+                  {!loader && <PurpleButton onClick={handleConfirm}>
                     Continuar
-                  </PurpleButton>
+                  </PurpleButton>}
+                  {loader && <LoaderContain />}
                 </ButtonContain>
               </SubContainer2>
             </>
@@ -589,9 +603,10 @@ const Purchase = () => {
                   <TransparentButton onClick={Return}>
                     Regresar
                   </TransparentButton>
-                  {paypal && <PurpleBuyButton onClick={FinishPayment}>
+                  {(paypal && !loader) && <PurpleBuyButton onClick={FinishPayment}>
                     Proceder con Compra
                   </PurpleBuyButton>}
+                  {(paypal && loader) && <LoaderContain />}
                   {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
                     "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
                     currency: "MXN",

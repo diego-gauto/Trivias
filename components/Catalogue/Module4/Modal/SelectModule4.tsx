@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { SelectContain, Selected, DropDown, OptionContain, Input, Label, Episodes, Option } from '../../Module3/Modal/Select.styled';
 
-const SelectModule4 = () => {
+const SelectModule4 = ({ course, handleClick }: any) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("Temporada")
+  const [value, setValue] = useState("Temporada 1")
   return (
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
@@ -13,33 +13,23 @@ const SelectModule4 = () => {
       {
         open == true &&
         <OptionContain>
-          <Option onClick={() => { setValue("Temporada 1"); setOpen(false) }}>
-            <Input
-              type="radio"
-              id="Temporada1"
-              name="category"
-              value="Temporada 1"
-            />
-            <Label > Temporada 1 <Episodes>(4 episodios) </Episodes></Label>
-          </Option>
-          <Option onClick={() => { setValue("Temporada 2"); setOpen(false) }}>
-            <Input
-              type="radio"
-              id="Temporada2"
-              name="category"
-              value="Temporada 2"
-            />
-            <Label> Temporada 2<Episodes>(8 episodios)</Episodes></Label>
-          </Option>
-          <Option onClick={() => { setValue("Temporada 3"); setOpen(false) }}>
-            <Input
-              type="radio"
-              id="Temporada3"
-              name="category"
-              value="Temporada 3"
-            />
-            <Label> Temporada 3<Episodes>(10 episodios)</Episodes></Label>
-          </Option>
+          {course.seasons.map((season: any, index: any) => {
+            return (
+              <Option onClick={() => { setValue(`Temporada ${index + 1}`); setOpen(false); handleClick(index) }}>
+                <Input
+                  type="radio"
+                  id="Temporada1"
+                  name="category"
+                  value="Temporada 1"
+                />
+                <Label > Temporada {index + 1} {season.lessons.length == 1 && <Episodes>({season.lessons.length} episodio)
+                </Episodes>}
+                  {season.lessons.length > 1 && <Episodes>({season.lessons.length} episodios)
+                  </Episodes>}
+                </Label>
+              </Option>
+            )
+          })}
         </OptionContain>
       }
     </SelectContain>

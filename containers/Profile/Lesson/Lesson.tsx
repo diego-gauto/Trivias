@@ -10,7 +10,7 @@ import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase
 import Link from "next/link";
 import { db } from "../../../firebase/firebaseConfig";
 import { getPaidCourses } from '../../../store/actions/UserActions';
-import { getComments, getWholeCourse } from '../../../store/actions/courseActions';
+import { addHistoryCourse, getComments, getWholeCourse } from '../../../store/actions/courseActions';
 import { useRouter } from "next/router";
 import { number } from 'yup';
 
@@ -29,8 +29,8 @@ const Lesson = () => {
     if (course) {
       let temp_lesson: any;
       let temp_comments: any;
-      temp_lesson = course.seasons[season].lessons[lesson]
-      temp_lesson.seasonId = course.seasons[season].id
+      temp_lesson = course.seasons[season].lessons[lesson];
+      temp_lesson.seasonId = course?.seasons[season].id
       temp_lesson.courseId = course.id
       setCurrentLesson(temp_lesson);
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
@@ -48,7 +48,17 @@ const Lesson = () => {
       if (userDataAuth.user !== null) {
         setLoggedIn(true)
       } else {
-        setLoggedIn(false)
+        setLoggedIn(false);
+        getWholeCourse(id).then((res: any) => {
+          if (res.courseType == 'Gratis') {
+            setCourse(res);
+          }
+          if (res.courseType == 'Producto' || res.courseType == 'Mensuak') {
+            router.push(
+              { pathname: 'auth/Login' }
+            )
+          }
+        })
       }
     }, [])
   } catch (error) {
@@ -66,6 +76,7 @@ const Lesson = () => {
               if (res.courseType == 'Producto') {
                 if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
                   res.paid = true;
+                  addHistoryCourse(res, e.id);
                 } else {
                   router.push({
                     pathname: 'Purchase', query: { type: 'course', id: course.id }
@@ -76,6 +87,11 @@ const Lesson = () => {
                 router.push(
                   { pathname: 'Purchase', query: { type: 'subscription' } }
                 )
+              } else {
+                addHistoryCourse(res, e.id);
+              }
+              if (res.courseType == 'Gratis') {
+                addHistoryCourse(res, e.id);
               }
               setCourse(res);
             })
