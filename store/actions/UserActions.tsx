@@ -21,3 +21,14 @@ export const getHomeworks = async (userId: any) => {
   })
   return tempHomeWorks
 }
+export const addReview = async (review: any) => {
+  console.log(review)
+
+  const docRef = await addDoc(
+    collection(db, "reviewHomeWork"),
+    {
+      ...review
+    }
+  );
+  return 'exito'
+}

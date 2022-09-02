@@ -4,7 +4,7 @@ export const HWContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
 `;
 export const TitleContain = styled.div`
 display: flex;

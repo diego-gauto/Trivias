@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { getHomeworks } from '../../../store/actions/UserActions'
 import { HWContainer, Table, TitleContain } from './HomeWork.styled'
+import ModalHW from './HomeWorkModal/ModalHW';
 
 const HomeWork = ({ userId }: any) => {
+  const [show, setShow] = useState(false);
   const [homeWorks, setHomeWorks] = useState<any>([]);
+  const [data, setData] = useState([])
 
   const getAllHomeworks = () => {
     getHomeworks(userId).then((res) => {
@@ -19,7 +22,6 @@ const HomeWork = ({ userId }: any) => {
   }
   useEffect(() => {
     getAllHomeworks();
-    console.log(homeWorks)
   }, [])
 
   return (
@@ -37,16 +39,22 @@ const HomeWork = ({ userId }: any) => {
             <th>Curso (temporada, lección)</th>
             <th>Fecha</th>
             <th>Descargar Tarea</th>
+            <th>Estatus</th>
           </tr>
           {/* TABLAS */}
           {
             homeWorks.map((task: any, index: any) => {
               return (
-                <tr key={"HomeWorks " + index}>
+                <tr
+                  key={"HomeWorks " + index}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => { setShow(true); setData(task) }}
+                >
                   <td>{task.userName}</td>
                   <td>{task.userEmail}</td>
                   <td>{task.title}  ({task.season}, {task.lesson}) </td>
                   <td>{task.formatDate}</td>
+                  <td></td>
                   <td></td>
                 </tr>
               )
@@ -56,6 +64,7 @@ const HomeWork = ({ userId }: any) => {
 
         </tbody>
       </Table>
+      <ModalHW setShow={setShow} show={show} data={data} />
     </HWContainer>
   )
 }
