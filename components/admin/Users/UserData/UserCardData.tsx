@@ -84,7 +84,7 @@ const UserCardData = ({ user, setIsVisible }: any) => {
             <Info>
               Fecha de Creación
               <Label>
-                {new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}
+                {user.created_at}
               </Label>
             </Info>
             <Info>
