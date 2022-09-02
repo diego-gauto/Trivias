@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { db } from "../../../../firebase/firebaseConfig";
 import { useAuth } from "../../../../hooks/useAuth";
-import { getLevels } from "../../../../store/actions/RewardActions";
+import { getLevel } from "../../../../store/actions/RewardActions";
 import {
   Background,
   CurrentLevel,
@@ -22,7 +22,6 @@ const UserLevel = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  const [size, setSize] = useState(0);
   const [currentLevel, setCurrentLevel] = useState<number>(0);
 
   const [level, setLevel] = useState<any>([]);
@@ -58,14 +57,9 @@ const UserLevel = () => {
       return false
     }
   }
-  const getSize = async () => {
-    db.collection('levelPoints').get().then(snap => {
-      setSize(snap.size) // will return the collection size
-    });
-  }
   const getCurrentLevel = () => {
-    getLevels().then((res) => {
-      res = res.filter((data: any, index: any) => (data.maximum <= userData.score && data.minimum <= userData.score) || data.level == size)
+    getLevel().then((res) => {
+      res = res.filter((data: any, index: any) => (data.minimum <= userData.score))
       setLevel(res[0])
       setCurrentLevel(res.length)
     })
@@ -78,20 +72,14 @@ const UserLevel = () => {
   useEffect(() => {
     if (userData != null) {
       getCurrentLevel();
-      getSize();
     }
-  }, [userData, size]);
+  }, [userData]);
 
   useEffect(() => {
     if (userData != null && level != null) {
       setData(157 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 157));
     }
   }, [level])
-  useEffect(() => {
-    if (userData != null && size != null) {
-
-    }
-  }, [size])
 
   return (
     <Link href="/Rewards">
