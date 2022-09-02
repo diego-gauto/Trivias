@@ -22,6 +22,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson }: any) => {
       reader.onload = (_event) => {
         tempHomework.path = reader.result;
         addHomework(tempHomework).then(() => {
+
           alert("Su tarea se subió correctamente!");
         })
       };

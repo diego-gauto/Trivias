@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { getViewedCourses, getWholeCourses } from "../../../store/actions/courseActions";
+import { getPaidCourses } from "../../../store/actions/UserActions";
 
 import {
   ButtonContain,
@@ -21,19 +22,17 @@ const Module1 = ({ user }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
-  console.log(user);
-
 
   const goTo = () => {
     if (user) {
       let today = new Date().getTime() / 1000;
-      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid) {
+      if (historyCourse.courseType == 'Mensual' && user.membership.finalDate > today || historyCourse.paid || historyCourse.courseType == 'Gratis') {
         router.push({
           pathname: 'Lesson',
-          query: { id: course.id, season: 0, lesson: 0 },
+          query: { id: historyCourse.documentID, season: 0, lesson: 0 },
         });
       }
-      if (course.courseType == 'Mensual' && user.membership.level == 0) {
+      if (historyCourse.courseType == 'Mensual' && user.membership.level == 0) {
         router.push(
           { pathname: 'Purchase', query: { type: 'subscription' } }
         )
@@ -55,10 +54,20 @@ const Module1 = ({ user }: any) => {
 
   useEffect(() => {
     if (user) {
-      getViewedCourses(user.id).then((res) => {
-        if (res) {
-          setHistoryCourse(res);
-        }
+      let date = new Date().getTime() / 1000;
+      getPaidCourses(user.id).then((paid: any) => {
+        getViewedCourses(user.id).then((res) => {
+          if (res) {
+            console.log(res);
+
+            if (paid.some((x: any) => x.id == res.documentID && date < x.finalDate)) {
+              res.paid = true;
+            } else {
+              res.paid = false;
+            }
+            setHistoryCourse(res);
+          }
+        })
       })
     } else {
       getWholeCourses().then((response) => {
