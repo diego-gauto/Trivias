@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -29,6 +29,9 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
+import { getUsers } from "../../../../store/actions/courseActions";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../../../../firebase/firebaseConfig";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -82,10 +85,14 @@ const CourseForm_Create = () => {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-  const [value, setValue] = useState("Darth Vader, Grand Moff Tarkin")
+  const [name, setName] = useState("Seleccionar un profesor");
+  const [value, setValue] = useState()
+  const [userData, setUserData] = useState<any>([]);
   const [value2, setValue2] = useState("Uñas")
   const [value3, setValue3] = useState("Gratis")
   const [image, setImage] = useState<any>("")
+  const [price, setPrice] = useState(0)
+
 
 
 
@@ -138,6 +145,18 @@ const CourseForm_Create = () => {
       setImage(reader.result)
     };
   }
+  const getProffessors = () => {
+    getUsers().then((res) => {
+      res = res.filter((user: any, index: any) => user.role == "admin")
+      setUserData(res);
+    })
+  }
+
+  useEffect(() => {
+    getProffessors();
+  }, [])
+
+  console.log(price)
   return (
     <CourseFormContain>
       {/* LINEA 1 */}
@@ -154,35 +173,38 @@ const CourseForm_Create = () => {
             />
           </InputContain>
           <InputContain>
-            <Label2>Profesor(es)</Label2>
+            <Label>Profesor(es)</Label>
             <IconContain>
 
               <SelectContain key={1}>
                 <Selected onClick={() => { setOpen(!open), setOpen2(false) }}>
-                  {value}
+                  {name}
                   <CaretD2 />
                 </Selected>
                 {
                   open == true &&
                   <OptionContain>
-                    <Option onClick={() => { setValue("Darth Vader, Grand Moff Tarkin"); setOpen(false) }}>
-                      <input
-                        type="radio"
-                        id="Temporada1"
-                        name="category"
-                        value="Temporada 1"
-                      />
-                      <Label2> Darth Vader, Grand Moff Tarkin</Label2>
-                    </Option>
-                    <Option onClick={() => { setValue("Yoda"); setOpen(false) }}>
-                      <input
-                        type="radio"
-                        id="Temporada2"
-                        name="category"
-                        value="Temporada 2"
-                      />
-                      <Label2> Yoda</Label2>
-                    </Option>
+                    {
+                      userData.map((val: any, index: any) => {
+                        return (
+                          <Option
+                            key={"SelectProfessor" + index}
+                            onClick={() => {
+                              setName(val.name);
+                              setValue(val.id);
+                              setOpen(false)
+                            }}>
+                            <input
+                              type="radio"
+                              id="Temporada1"
+                              name="category"
+                              value="Temporada 1"
+                            />
+                            <Label2>{val.name}</Label2>
+                          </Option>
+                        )
+                      })
+                    }
                   </OptionContain>
                 }
               </SelectContain>
@@ -190,7 +212,7 @@ const CourseForm_Create = () => {
             </IconContain>
           </InputContain>
           <InputContain>
-            <Label2>Membresia</Label2>
+            <Label>Membresia</Label>
             <IconContain>
 
               <SelectContain key={3}>
@@ -325,15 +347,22 @@ const CourseForm_Create = () => {
                 {...register("coursePublishYear")}
               />
             </InputContain>
-            <InputContain>
-              <Label>Precio (MXN)</Label>
-              <Input
-                placeholder="998"
-                type="number"
-                className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
-                {...register("coursePrice")}
-              />
-            </InputContain>
+            {
+              value3 != "Gratis" &&
+              <InputContain>
+                <Label>Precio (MXN)</Label>
+                <Input
+                  placeholder="998"
+                  type="number"
+                  defaultValue={0}
+                  className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
+                  {...register("coursePrice")}
+                />
+              </InputContain>
+
+            }
+
+
           </InputContain2>
           {/* <TagContain>
           <TagTitle>Etiquetas</TagTitle>
@@ -380,15 +409,19 @@ const CourseForm_Create = () => {
           </TagLabel>
         </TagContain> */}
           <InputContain2>
-            <InputContain>
-              <Label>Duración de Suscripción (Días)</Label>
-              <Input
-                placeholder="90"
-                type="number"
-                className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
-                {...register("courseDuration")}
-              />
-            </InputContain>
+            {
+              value3 != "Gratis" &&
+              <InputContain>
+                <Label>Duración de Suscripción (Días)</Label>
+                <Input
+                  placeholder="90"
+                  type="number"
+                  defaultValue={0}
+                  className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
+                  {...register("courseDuration")}
+                />
+              </InputContain>
+            }
             <ButtonContain>
               <Button type='submit'>Crear Curso</Button>
             </ButtonContain>
