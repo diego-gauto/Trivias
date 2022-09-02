@@ -29,7 +29,6 @@ const Modal2 = ({ show, setShow, data, pm }: any) => {
   let tempDate = new Date(data.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
   let tempMonth = tempDate.getUTCMonth() + 1;
-  console.log(tempMonth, tempDate);
 
   let tempYear = tempDate.getFullYear()
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
