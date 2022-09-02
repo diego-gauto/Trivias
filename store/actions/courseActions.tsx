@@ -215,3 +215,18 @@ export const getViewedCourses = async (userdId: any) => {
   });
   return courses[0];
 }
+// export const getUsers = async () => {
+//   const docRef = doc(db, "users", role);
+//   const docSnap = await getDoc(docRef);
+//   console.log(docSnap.data());
+//   return docSnap.data();
+// }
+export const getUsers = async () => {
+  const usersRef = query(collection(db, "users"), orderBy("name"))
+  let tempUsers: any = [];
+  const data = await getDocs(usersRef);
+  data.forEach((user) => {
+    tempUsers.push({ ...user.data(), id: user.id });
+  })
+  return tempUsers
+}

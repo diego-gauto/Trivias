@@ -91,10 +91,6 @@ export const AllCourses = ({
                   <Text> {courseDuration} </Text>
                 </Info>
                 <Info>
-                  <Label>Portada del Curso</Label>
-                  <Text>Seleccionar archivo</Text>
-                </Info>
-                <Info>
                   <Label>Precio (MXN)</Label>
                   <Text> {coursePrice} </Text>
                 </Info>

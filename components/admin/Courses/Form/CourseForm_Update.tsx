@@ -94,10 +94,12 @@ const CourseForm = (props: ICourseForm_Update) => {
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
   const [value, setValue] = useState("Darth Vader, Grand Moff Tarkin")
   const [value2, setValue2] = useState("Uñas")
   const [image, setImage] = useState<any>(coursePath)
   const [images, setimages] = useState<any>("")
+  const [value3, setValue3] = useState("Gratis")
 
   useEffect(() => {
     setValue2(courseCategory)
@@ -105,7 +107,6 @@ const CourseForm = (props: ICourseForm_Update) => {
   }, []);
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log(documentID)
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -113,6 +114,10 @@ const CourseForm = (props: ICourseForm_Update) => {
     var category = ""
     if (value2 !== undefined && value2 !== null) {
       category = value2
+    }
+    var type = ""
+    if (value3 !== undefined && value3 !== null) {
+      type = value3;
     }
 
     let signUpData = {
@@ -127,6 +132,7 @@ const CourseForm = (props: ICourseForm_Update) => {
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
+        courseType: type,
         documentID: documentID,
       },
     };
@@ -312,6 +318,50 @@ const CourseForm = (props: ICourseForm_Update) => {
               />
             </InputContain>
           </InputContain2>
+          <InputContain>
+            <Label>Membresia</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { setOpen3(!open3) }}>
+                  {value3}
+                  <CaretD2 />
+                </Selected>
+                {
+                  open3 == true &&
+                  <OptionContain>
+                    <Option onClick={() => { setValue3("Gratis"); setOpen3(false) }}>
+                      <input
+                        type="radio"
+                        id="Temporada1"
+                        name="category"
+                        value="Temporada 1"
+                      />
+                      <Label2 > Gratis</Label2>
+                    </Option>
+                    <Option onClick={() => { setValue3("Mensual"); setOpen3(false) }}>
+                      <input
+                        type="radio"
+                        id="Temporada1"
+                        name="category"
+                        value="Temporada 1"
+                      />
+                      <Label2 > Mensual</Label2>
+                    </Option>
+                    <Option onClick={() => { setValue3("Producto"); setOpen3(false) }}>
+                      <input
+                        type="radio"
+                        id="Temporada2"
+                        name="category"
+                        value="Temporada 2"
+                      />
+                      <Label2> Producto</Label2>
+                    </Option>
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+          </InputContain>
           {/* <TagContain>
           <TagTitle>Etiquetas</TagTitle>
           <TagLabel >Nuevo
