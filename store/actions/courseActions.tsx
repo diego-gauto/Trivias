@@ -113,6 +113,7 @@ export const getWholeCourses = async () => {
 }
 export const getWholeCourse = async (courseId: any) => {
   let seasons: any = [];
+  let totalLessons = 0;
   const docRef = doc(db, "courses", courseId);
   const docSnap: any = await getDoc(docRef);
   const docRefSeasons = query(collection(db, 'courses', courseId, "seasons"), orderBy('season'));
@@ -124,10 +125,11 @@ export const getWholeCourse = async (courseId: any) => {
     const docRefLesson = query(collection(db, 'courses', courseId, "seasons", seasons[c].id, "lessons"), orderBy('number'));
     const querySnapshotLesson = await getDocs(docRefLesson);
     querySnapshotLesson.forEach((lesson: any) => {
+      totalLessons++;
       seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
     });
   }
-  return { ...docSnap.data(), id: courseId, seasons: seasons }
+  return { ...docSnap.data(), id: courseId, seasons: seasons, totalLessons: totalLessons }
 }
 export const addComment = async (data: any) => {
   const docRef = await addDoc(

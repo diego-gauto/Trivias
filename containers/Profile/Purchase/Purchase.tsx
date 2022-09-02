@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { getcourse } from "../../../store/actions/courseActions";
+import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
   addCourseUser,
   addInvoice,
@@ -79,6 +79,7 @@ const Purchase = () => {
   const [paypal, setPaypal] = useState(true);
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
+  const [coupon, setCoupon] = useState<any>();
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -139,10 +140,10 @@ const Purchase = () => {
     if (type == 'subscription') {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
     } else {
-      getcourse(id).then((res: any) => {
+      getWholeCourse(id).then((res: any) => {
         console.log(res);
 
-        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory })
+        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons })
       })
     }
   }, [])
@@ -226,7 +227,8 @@ const Purchase = () => {
       paidAt: new Date(),
       product: product.title,
       brand: card.brand,
-      userId: userData.id
+      userId: userData.id,
+      method: plan.method
     }
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
@@ -274,7 +276,15 @@ const Purchase = () => {
             }
             setLoader(false);
           } else {
-            invoice.amount = res.data.amount;
+            let price = res.data.amount / 100
+            if (coupon) {
+              if (coupon.type == 'amount') {
+                price = price - coupon.discount;
+              } else {
+                price = (price - (coupon.discount / 100) * price)
+              }
+            }
+            invoice.amount = price * 100;
             const course = {
               id: id,
               duration: (new Date().getTime() / 1000) + product.duration * 86400
@@ -297,8 +307,16 @@ const Purchase = () => {
         setConfirmation(false);
         setPay(true);
       } else {
+        let price = product.price
+        if (coupon) {
+          if (coupon.type == 'amount') {
+            price = price - coupon.discount;
+          } else {
+            price = (price - (coupon.discount / 100) * price)
+          }
+        }
         delete invoice.brand;
-        invoice.amount = product.price * 100
+        invoice.amount = price * 100
         const course = {
           id: id,
           duration: (new Date().getTime() / 1000) + product.duration * 86400
@@ -311,6 +329,10 @@ const Purchase = () => {
     }
   }
   const handleShow = () => setShow(true);
+
+  const handleCoupons = (value: any) => {
+    setCoupon(value);
+  }
 
   useEffect(() => {
     console.log(plan);
@@ -513,9 +535,9 @@ const Purchase = () => {
                   </>
                 }
                 <ButtonContain >
-                  <TransparentButton onClick={handleShow}>
+                  {type == 'course' && <TransparentButton onClick={handleShow}>
                     Agregar Cupón
-                  </TransparentButton>
+                  </TransparentButton>}
                   {!loader && <PurpleButton onClick={handleConfirm}>
                     Continuar
                   </PurpleButton>}
@@ -573,19 +595,32 @@ const Purchase = () => {
                         $ {product.price}.00
                       </PurchaseData>
                     </PurchaseText>
-                    {/* <PurchaseText>
+                    {coupon && <PurchaseText>
                       Descuento:
-                      <PurchaseData>
-                        - $ 400.00
-                      </PurchaseData>
-                    </PurchaseText> */}
+                      {coupon.type == 'amount' ? <PurchaseData>
+                        - $ {coupon.discount}
+                      </PurchaseData> :
+                        <PurchaseData>
+                          - {coupon.discount}%
+                        </PurchaseData>
+                      }
+                    </PurchaseText>}
                     <Divider />
-                    <PurchaseText>
+                    {!coupon ? <PurchaseText>
                       Total:
                       <PurchaseText>
                         $ {product.price}.00
                       </PurchaseText>
-                    </PurchaseText>
+                    </PurchaseText> :
+                      <PurchaseText>
+                        Total:
+                        {coupon.type == 'amount' ? <PurchaseText>
+                          $ {product.price - coupon.discount}
+                        </PurchaseText> :
+                          <PurchaseText>
+                            $ {product.price - (coupon.discount / 100) * product.price}
+                          </PurchaseText>}
+                      </PurchaseText>}
                   </PurchaseContain>
                   <BotContainer>
                     <Text>
@@ -642,11 +677,20 @@ const Purchase = () => {
                         shape: 'pill',
                       }}
                       createOrder={(data, actions) => {
+                        let price = product.price
+                        if (coupon) {
+                          if (coupon.type == 'amount') {
+                            price = price - coupon.discount;
+                          } else {
+                            price = (price - (coupon.discount / 100) * price)
+                          }
+                        }
                         return actions.order.create({
+
                           purchase_units: [
                             {
                               amount: {
-                                value: product.price,
+                                value: price,
                               },
                             },
                           ],
@@ -667,12 +711,12 @@ const Purchase = () => {
           {
             pay == true &&
             <>
-              <PurchaseComplete data={product} card={card} id={id} />
+              <PurchaseComplete data={product} card={card} id={id} coupon={coupon} />
             </>
           }
         </SubContainer>
       </PayBox>
-      <ModalPurchase1 show={show} setShow={setShow} />
+      <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} />
     </Container>
   )
 }
