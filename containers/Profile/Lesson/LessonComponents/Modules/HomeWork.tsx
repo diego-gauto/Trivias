@@ -3,7 +3,7 @@ import { addHomework } from '../../../../../store/actions/courseActions'
 import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkContain } from './HomeWork.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
 
-const HomeWork = ({ value, setValue, data, user, season, lesson }: any) => {
+const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: any) => {
 
   const getImage = (file: any) => {
     let tempHomework: any = {}
@@ -15,14 +15,17 @@ const HomeWork = ({ value, setValue, data, user, season, lesson }: any) => {
     tempHomework.season = parseInt(season) + 1;
     tempHomework.lesson = parseInt(lesson) + 1;
     tempHomework.createdAt = new Date();
-    tempHomework.courseId = data.courseId
+    tempHomework.courseId = data.courseId;
+    tempHomework.userId = user.id;
+    tempHomework.teacherId = teacherId;
+    tempHomework.status = false;
+
     if (file.length > 0) {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
         tempHomework.path = reader.result;
         addHomework(tempHomework).then(() => {
-
           alert("Su tarea se subió correctamente!");
         })
       };
