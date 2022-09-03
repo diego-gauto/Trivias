@@ -18,8 +18,6 @@ img{
   height: auto;
 }
 `;
-export const Banner = styled(Image)`
-`;
 export const TitleContain = styled.div`
   display: flex;
   position: absolute;

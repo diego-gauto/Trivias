@@ -9,8 +9,7 @@ import {
 } from './Purchase.styled';
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
 
-const PurchaseComplete = ({ data, card, id }: any) => {
-  console.log(data);
+const PurchaseComplete = ({ data, card, id, coupon }: any) => {
 
   return (
     <MainContainer>
@@ -28,16 +27,19 @@ const PurchaseComplete = ({ data, card, id }: any) => {
           <Card>
             <ImageContain>
               <CourseImage src="/images/Lukedemo.png" width={600} height={250} />
-              <NumberLesson>
-                24 Lecciones
-              </NumberLesson>
+              {data.lessons == 1 ? <NumberLesson>
+                {data.lessons} Lección
+              </NumberLesson> :
+                <NumberLesson>
+                  {data.lessons} Lecciones
+                </NumberLesson>}
             </ImageContain>
             <CourseText>
               <TitleCourse>
-                Curso 3: Lorem Ipsum
+                Curso: {data.title}
               </TitleCourse>
               <Subtitle>
-                Subtítulo de categoría
+                {data.category}
               </Subtitle>
             </CourseText>
           </Card>
@@ -57,12 +59,20 @@ const PurchaseComplete = ({ data, card, id }: any) => {
               {card.brand} terminada en {card.last4}
             </PurchaseData>
           </Text4>
-          <Text4>
+          {!coupon ? <Text4>
             Total:
             <PurchaseData>
               ${data.price}.00
             </PurchaseData>
-          </Text4>
+          </Text4> :
+            <Text4>
+              Total:
+              {coupon.type == 'amount' ? <PurchaseData>
+                ${data.price - coupon.discount}.00
+              </PurchaseData> : <PurchaseData>
+                ${data.price - (coupon.discount / 100) * data.price}.00
+              </PurchaseData>}
+            </Text4>}
         </BottomContain>
         {data.type == 'course' && <ButtonContain>
           <Link href={{ pathname: 'Lesson', query: { id: id } }}>

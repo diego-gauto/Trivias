@@ -74,7 +74,7 @@ export const AllCourses = ({
               <Column>
                 <Info>
                   <Label>Profesor(es)</Label>
-                  <Text> {courseProfessor} </Text>
+                  <Text> {courseProfessor.name} </Text>
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
@@ -89,10 +89,6 @@ export const AllCourses = ({
                 <Info>
                   <Label>Duración de Suscripción (Días)</Label>
                   <Text> {courseDuration} </Text>
-                </Info>
-                <Info>
-                  <Label>Portada del Curso</Label>
-                  <Text>Seleccionar archivo</Text>
                 </Info>
                 <Info>
                   <Label>Precio (MXN)</Label>

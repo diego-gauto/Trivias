@@ -116,7 +116,7 @@ const Edit = () => {
               defaultValue={lesson.number}
               onChange={(e) => {
                 setLesson({
-                  ...lesson, number: e.target.value
+                  ...lesson, number: parseInt(e.target.value)
                 })
               }}
             />
@@ -158,7 +158,7 @@ const Edit = () => {
                 <input
                   type="file"
                   placeholder="Seleccionar archivo"
-                  onChange={(e) => { getImage(e.target.files) }}>
+                  onChange={(e) => { getDocuments(e.target.files) }}>
                 </input>
               </Input2>
             </IconContain>
@@ -250,8 +250,12 @@ const Edit = () => {
         </Contain3>
       </EditContain>
       <ButtonContain>
-        <Link
-          href="/admin/Edit"
+        <Link href={{
+          pathname: "/admin/Edit",
+          query: {
+            documentID: routerState.courseID
+          }
+        }}
         >
           <TransparentButton>
             Regresar

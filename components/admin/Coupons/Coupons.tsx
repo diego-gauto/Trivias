@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createCoupon, deleteCoupon, getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
 
 import { TrashIcon } from "../Courses/Form/Edit.styled";
 import SideBar from "../SideBar";
@@ -32,7 +33,48 @@ const Coupons = () => {
     const value = e.target.value;
     setSelect(value);
   };
-  const [active, setActive] = useState(true);
+  const [coupon, setCoupon] = useState<any>({ name: '', code: '', type: 'porcentage', discount: '', status: true });
+  const [coupons, setCoupons] = useState<any>([]);
+
+  const addCoupon = () => {
+    if (Object.keys(coupon).some(key => coupon[key] === '')) {
+      alert('Por favor acomplete todo los espacios!');
+    }
+    if (Object.values(coupon).every(value => value !== '')) {
+      coupon.discount = parseInt(coupon.discount);
+      coupon.users = [];
+      createCoupon(coupon).then(() => {
+        alert('Coupon creado con exito!');
+        getAllCoupons();
+      })
+    }
+  }
+
+  const getAllCoupons = () => {
+    getCoupons().then((res) => {
+      setCoupons(res);
+    })
+  }
+
+  const handleActive = (i: any) => {
+    let tempCoupons = coupons;
+    tempCoupons[i].status = !tempCoupons[i].status;
+    setCoupons([...tempCoupons]);
+    updateCoupon(tempCoupons[i], tempCoupons[i].id);
+  }
+
+  const deleteThisCoupon = (coupon: any, index: any) => {
+    let tempCoupons = coupons;
+    tempCoupons.splice(index, 1);
+    deleteCoupon(coupon).then(() => {
+      alert('Cupón borrado con exito!');
+      setCoupons([...tempCoupons]);
+    })
+  }
+
+  useEffect(() => {
+    getAllCoupons();
+  }, [])
 
   return (
     <AdminContain>
@@ -42,11 +84,15 @@ const Coupons = () => {
           <Title>Añadir Cupón</Title>
           <InputContain>
             <Label>Nombre del Cupón</Label>
-            <Input placeholder="Nombre del Cupón" />
+            <Input placeholder="Nombre del Cupón" onChange={(e) => {
+              setCoupon({ ...coupon, name: e.target.value })
+            }} />
           </InputContain>
           <InputContain>
             <Label>Código del Cupón</Label>
-            <Input placeholder="XXX000" />
+            <Input placeholder="XXX000" onChange={(e) => {
+              setCoupon({ ...coupon, code: e.target.value })
+            }} />
           </InputContain>
           <InputContain>
             <Label>Tipo de Descuento</Label>
@@ -57,7 +103,7 @@ const Coupons = () => {
                   name="radio"
                   value="percentage"
                   checked={select === "percentage"}
-                  onChange={(e) => handleSelectChange(e)}
+                  onChange={(e) => { handleSelectChange(e), setCoupon({ ...coupon, type: 'porcentage', discount: '' }) }}
                 />
                 <span></span>
               </TagLabel>
@@ -67,7 +113,7 @@ const Coupons = () => {
                   name="radio"
                   value="absolute"
                   checked={select === "absolute"}
-                  onChange={(e) => handleSelectChange(e)}
+                  onChange={(e) => { handleSelectChange(e), setCoupon({ ...coupon, type: 'amount', discount: '' }) }}
                 />
                 <span></span>
               </TagLabel>
@@ -77,19 +123,23 @@ const Coupons = () => {
             select == "percentage" &&
             <InputContain>
               <Label>Descuento</Label>
-              <Input placeholder="00%" />
+              <Input placeholder="00%" onChange={(e) => {
+                setCoupon({ ...coupon, discount: e.target.value })
+              }} />
             </InputContain>
           }
           {
             select == "absolute" &&
             <InputContain>
               <Label>Descuento</Label>
-              <Input placeholder="$ 0.00" />
+              <Input placeholder="$ 0.00" onChange={(e) => {
+                setCoupon({ ...coupon, discount: e.target.value })
+              }} />
             </InputContain>
           }
 
           <ButtonContain>
-            <PurpleButton>Agregar Cupón </PurpleButton>
+            <PurpleButton onClick={addCoupon}>Agregar Cupón </PurpleButton>
           </ButtonContain>
         </Container>
 
@@ -108,36 +158,37 @@ const Coupons = () => {
                 <th></th>
               </tr>
               {/* TABLAS */}
-              <tr>
-                <td style={{ fontWeight: 600 }}>
-                  Primavera 2022
-                </td>
-                <td >SPRN22</td>
-                <td>5%</td>
-                <td style={{ cursor: "pointer" }} onClick={() => { setActive(!active) }}>
-                  {
-                    active == true &&
-                    <RadioContain>
-                      <ActiveC>
-                        <div />
-                      </ActiveC>
-                      <ActiveLbl>Activo</ActiveLbl>
-                    </RadioContain>
-                  }
-                  {
-                    active == false &&
-                    <RadioContain>
-                      <UnActive />
-                      <UnActiveLbl>Desactivado</UnActiveLbl>
-                    </RadioContain>
-                  }
-                </td>
-                <td>
-                  <IconContain>
-                    <TrashIcon />
-                  </IconContain>
-                </td>
-              </tr>
+              {coupons.map((x: any, index: any) => {
+                return (
+                  <tr key={'coupons-' + index}>
+                    <td style={{ fontWeight: 600 }}>
+                      {x.name}
+                    </td>
+                    <td >{x.code}</td>
+                    {x.type == 'porcentage' ? <td>{x.discount}%</td> : <td>${x.discount}</td>}
+                    <td style={{ cursor: "pointer" }} onClick={() => { handleActive(index) }}>
+                      {
+                        x.status ?
+                          <RadioContain>
+                            <ActiveC>
+                              <div />
+                            </ActiveC>
+                            <ActiveLbl>Activo</ActiveLbl>
+                          </RadioContain> :
+                          <RadioContain>
+                            <UnActive />
+                            <UnActiveLbl>Desactivado</UnActiveLbl>
+                          </RadioContain>
+                      }
+                    </td>
+                    <td>
+                      <IconContain>
+                        <TrashIcon onClick={() => { deleteThisCoupon(x, index) }} />
+                      </IconContain>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </Table>
         </TableContain>

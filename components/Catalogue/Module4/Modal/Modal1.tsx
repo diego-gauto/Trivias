@@ -90,7 +90,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             <Datacontain>
               <Data>Profesor(es):
                 <DataSpan>
-                  {course.courseProfessor}
+                  {course.courseProfessor?.name}
                 </DataSpan>
               </Data>
               <Data>
