@@ -45,7 +45,7 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
   //GETS ALL LESSONS DATA
   const getSeasonID = async () => {
     try {
-      const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons");
+      const query = db.collection("courses").doc(courseID).collection("seasons").doc(documentID).collection("lessons").orderBy("number");
       return onSnapshot(query, (response) => {
         var data: DocumentData | any = [];
         response.forEach((e) => {
