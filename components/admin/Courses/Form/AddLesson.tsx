@@ -34,6 +34,7 @@ import {
 
 const AddLesson = () => {
   const router = useRouter();
+  const routerState = useRouter().query
   const { courseID, seasonID } = router.query;
   const [lesson, setLesson] = useState<any>({
     title: '',
@@ -92,7 +93,7 @@ const AddLesson = () => {
           <InputContain>
             <Label>Título de la Lección</Label>
             <Input
-              placeholder="Epidosio 1: Lorem Ipsum"
+              placeholder="Lorem Ipsum"
               onChange={(e) => {
                 setLesson({
                   ...lesson, title: e.target.value
@@ -106,7 +107,7 @@ const AddLesson = () => {
               placeholder="1"
               onChange={(e) => {
                 setLesson({
-                  ...lesson, number: e.target.value
+                  ...lesson, number: parseInt(e.target.value)
                 })
               }}
             />
@@ -149,7 +150,7 @@ const AddLesson = () => {
                 <input
                   type="file"
                   placeholder="Seleccionar archivo"
-                  onChange={(e) => { getImage(e.target.files) }}>
+                  onChange={(e) => { getDocuments(e.target.files) }}>
                 </input>
               </Input2>
             </IconContain>
@@ -224,7 +225,13 @@ const AddLesson = () => {
         </Contain3>
       </EditContain>
       <ButtonContain>
-        <Link href="/admin/Courses"><TransparentButton>Regresar</TransparentButton></Link>
+        <Link href={{
+          pathname: "/admin/Edit",
+          query: {
+            documentID: routerState.courseID
+          }
+        }}
+        ><TransparentButton>Regresar</TransparentButton></Link>
         <PurpleButton
           onClick={newLesson}
         >Guardar</PurpleButton>

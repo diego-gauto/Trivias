@@ -136,6 +136,19 @@ export const UserText = styled.p`
   font-weight:600;
   margin:0;
 `;
+export const OpenTasks = styled.p`
+  font-family:'Montserrat',sans-serif;
+  font-size: 18px;
+  color: #9011FF;
+  font-weight:600;
+  margin:0;
+  cursor: pointer;
+  width: fit-content;
+  &:hover{
+    color: #600FA6;
+    text-decoration: underline;
+  }
+`;
 export const LogOut = styled.p`
   display:flex;
   align-items:center;
@@ -146,6 +159,10 @@ export const LogOut = styled.p`
   color: #8E2DE2;
   margin: auto auto 0 auto;
   cursor: pointer;
+  &:hover{
+    color: #600FA6;
+    text-decoration: underline;
+  }
  @media (max-width: 1023px) {
   margin-inline: 0;
   margin-top: 0;

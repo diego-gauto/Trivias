@@ -19,7 +19,7 @@ const RespLevel = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  const [size, setSize] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState<number>(0);
   const levelRef = collection(db, "levelPoints")
 
   const [level, setLevel] = useState<any>([]);
@@ -56,15 +56,11 @@ const RespLevel = () => {
       return false
     }
   }
-  const getSize = async () => {
-    db.collection('levelPoints').get().then(snap => {
-      setSize(snap.size) // will return the collection size
-    });
-  }
   const getCurrentLevel = () => {
     getLevel().then((res) => {
-      res = res.filter((data: any) => (data.maximum >= userData.score && data.minimum <= userData.score) || data.level == size)
+      res = res.filter((data: any) => (data.minimum <= userData.score))
       setLevel(res[0])
+      setCurrentLevel(res.length)
     })
   }
 
@@ -75,9 +71,8 @@ const RespLevel = () => {
   useEffect(() => {
     if (userData != null) {
       getCurrentLevel();
-      getSize();
     }
-  }, [userData, size]);
+  }, [userData]);
 
   useEffect(() => {
     if (userData != null && level != null) {
@@ -92,7 +87,7 @@ const RespLevel = () => {
       <OuterProgress>
         <LevelContain>
           <CurrentLevel>
-            {level.level}
+            {currentLevel}
           </CurrentLevel>
           <Vector />
           <Vector2 />

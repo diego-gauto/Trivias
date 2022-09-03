@@ -11,6 +11,7 @@ import {
   LevelContain,
   LogOut,
   LogOutIcon,
+  OpenTasks,
   PictureContain,
   ProfileContainer,
   ProfileIcon,
@@ -19,7 +20,7 @@ import {
   UserText,
 } from "./User.styled";
 
-const UserInfo = ({ userData }: any) => {
+const UserInfo = ({ userData, taskView, setTaskView }: any) => {
 
 
 
@@ -78,6 +79,23 @@ const UserInfo = ({ userData }: any) => {
           {userData.plan}
         </UserText>
       </UserContainer>
+      {
+        taskView == false &&
+        <UserContainer>
+          <OpenTasks onClick={() => { setTaskView(true) }}>
+            Ver Tareas
+          </OpenTasks>
+        </UserContainer>
+      }
+      {
+        taskView == true &&
+        <UserContainer>
+          <OpenTasks onClick={() => { setTaskView(false) }}>
+            Ver Perfil
+          </OpenTasks>
+        </UserContainer>
+      }
+
       <Link href="/">
         <LogOut
           onClick={logoutFunc}

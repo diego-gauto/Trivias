@@ -18,7 +18,7 @@ export const ButtonContain = styled.div`
 export const ButtonContain2 = styled.div`
 display: flex;
 align-items: end;
-justify-content: flex-end;
+justify-content: center;
 font-size: 14px;
 font-family:'Montserrat',sans-serif;
 width: 100%;
