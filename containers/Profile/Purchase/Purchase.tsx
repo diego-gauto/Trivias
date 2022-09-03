@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { useRouter } from "next/router";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
+import { updateCoupon } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
   addCourseUser,
@@ -35,15 +38,17 @@ import {
   InputCard,
   InputContain,
   InputText,
+  LoaderContain,
   NewMethodBox,
   NewMethodBox2,
-  PaymentsContainer,
   NewMethodContain,
   PastCircle,
   PastText,
+  PaymentsContainer,
   PaymentContain,
   PaymentMethod,
   PayBox,
+  PayPal,
   PayText,
   PayText2,
   ProcessCircle,
@@ -62,13 +67,9 @@ import {
   Title,
   TransparentButton,
   VisaPay,
-  PaypalIcon,
-  PayPal,
-  LoaderContain,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
-import { updateCoupon } from "../../../store/actions/CouponsActions";
 
 const Purchase = () => {
   const [loggedIn, setLoggedIn] = useState<any>(false);
