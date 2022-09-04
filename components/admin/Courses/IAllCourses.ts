@@ -4,7 +4,7 @@ export interface IAllCourses{
   courseCategory : string,
   courseDuration : string,
   coursePrice : string,
-  courseProfessor : string,
+  courseProfessor : any,
   coursePublishYear : string,
   courseSubtittle : string,
   courseType ?: string,

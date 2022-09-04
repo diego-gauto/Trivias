@@ -71,7 +71,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
     }
   }
   useEffect(() => {
-    console.log(card);
+
 
   }, [card])
 

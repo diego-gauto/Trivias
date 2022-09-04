@@ -113,6 +113,7 @@ export const getWholeCourses = async () => {
 }
 export const getWholeCourse = async (courseId: any) => {
   let seasons: any = [];
+  let totalLessons = 0;
   const docRef = doc(db, "courses", courseId);
   const docSnap: any = await getDoc(docRef);
   const docRefSeasons = query(collection(db, 'courses', courseId, "seasons"), orderBy('season'));
@@ -124,10 +125,11 @@ export const getWholeCourse = async (courseId: any) => {
     const docRefLesson = query(collection(db, 'courses', courseId, "seasons", seasons[c].id, "lessons"), orderBy('number'));
     const querySnapshotLesson = await getDocs(docRefLesson);
     querySnapshotLesson.forEach((lesson: any) => {
+      totalLessons++;
       seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
     });
   }
-  return { ...docSnap.data(), id: courseId, seasons: seasons }
+  return { ...docSnap.data(), id: courseId, seasons: seasons, totalLessons: totalLessons }
 }
 export const addComment = async (data: any) => {
   const docRef = await addDoc(
@@ -214,4 +216,19 @@ export const getViewedCourses = async (userdId: any) => {
     courses.push({ ...doc.data(), id: doc.id });
   });
   return courses[0];
+}
+// export const getUsers = async () => {
+//   const docRef = doc(db, "users", role);
+//   const docSnap = await getDoc(docRef);
+//   console.log(docSnap.data());
+//   return docSnap.data();
+// }
+export const getUsers = async () => {
+  const usersRef = query(collection(db, "users"), orderBy("name"))
+  let tempUsers: any = [];
+  const data = await getDocs(usersRef);
+  data.forEach((user) => {
+    tempUsers.push({ ...user.data(), id: user.id });
+  })
+  return tempUsers
 }

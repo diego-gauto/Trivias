@@ -13,14 +13,14 @@ export const ModalPurchase2 = ({ show, setShow }: any) => {
           <Title closeButton>
             Canjea un cupón
           </Title>
-          <CouponContain>
+          {/* <CouponContain>
             <CouponText>
               Gonvair Verano 2022
             </CouponText>
             <DiscountText>
               40% descuento
             </DiscountText>
-          </CouponContain>
+          </CouponContain> */}
           <DiscountApproved>
             ¡Cupón canjeado!
           </DiscountApproved>

@@ -23,6 +23,7 @@ import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 import { getPaymentmethods } from "../../../store/actions/PaymentActions";
 import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
+import HomeWork from "./HomeWork";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -37,6 +38,7 @@ const User = () => {
   const [timeScore, setTimeScore] = useState<number>(0);
   const [timeLevel, setTimeLevel] = useState<any>([]);
   const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
+  const [taskView, setTaskView] = useState(false);
 
   try {
     var userDataAuth = useAuth();
@@ -152,27 +154,42 @@ const User = () => {
       {//Vista del navbar dinamico de Homepage
         userData !== null
           ?
-          <UserInfo userData={userData} /> : <></>}
-      {/* SECOND Container */}
-      <SecondBox>
-        <NextReward
-          score={userData.score}
-          barProgress={barProgress}
-          level={currentLevel}
-          max={level.maximum}
+          <UserInfo
+            userData={userData}
+            taskView={taskView}
+            setTaskView={setTaskView}
 
-          timeScore={timeScore}
-          timeProgress={timeProgress}
-          timeLevel={currentTimeLevel}
-          timeMax={timeLevel.maximum}
-        />
-        <ThirdBox>
-          {/* Third Container */}
-          <UserData data={userData} pm={paymentMethod} />
-          {/* Fourth Container */}
-          <PaymentMethod data={userData} pm={paymentMethod} />
-        </ThirdBox>
-      </SecondBox>
+          /> : <></>}
+      {/* SECOND Container */}
+      {
+        taskView == false &&
+        <SecondBox>
+          <NextReward
+            score={userData.score}
+            barProgress={barProgress}
+            level={currentLevel}
+            max={level.maximum}
+
+            timeScore={timeScore}
+            timeProgress={timeProgress}
+            timeLevel={currentTimeLevel}
+            timeMax={timeLevel.maximum}
+          />
+          <ThirdBox>
+            {/* Third Container */}
+            <UserData data={userData} pm={paymentMethod} />
+            {/* Fourth Container */}
+            <PaymentMethod data={userData} pm={paymentMethod} />
+          </ThirdBox>
+        </SecondBox>
+      }
+      {
+        taskView == true &&
+        <SecondBox>
+          <HomeWork userId={userData.id} />
+        </SecondBox>
+      }
+
       <Link href="/">
         <LogOut onClick={logoutFunc} style={{
           display: responsive1023 ? "" : "none",
