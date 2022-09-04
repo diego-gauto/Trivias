@@ -27,24 +27,23 @@ export interface SelectedUser {
   email: string;
   score: number;
   uid?: string;
+  created_at: string;
 };
 export interface UserData {
   id?: any;
   role: string;
-  name: string;
+  name: any;
   email: string;
   phoneNumber: number;
   created_at: string;
   score: string;
 };
 export interface Users {
-  id?: any;
+  id: string;
   name: string;
   email: string;
   score: number;
-  created_at: {
-    seconds: number;
-  };
+  created_at: { seconds: number }
   phoneNumber?: number;
   role: string;
 };
@@ -54,17 +53,20 @@ const UsersList = () => {
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
-  const [users, setUsers] = useState<Array<UserData>>([]);
-  const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "", id: "" });
+  const [users, setUsers] = useState<Array<any>>([]);
+  const [selectedUser, setSelectedUser] = useState<Array<UserData>>([]);
 
   const openUserCardData = async (id: string) => {
     setIsVisible(true);
 
     const newUser: SelectedUser | any = await getSingleUser(id);
     if (newUser?.uid) {
+      newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
       setSelectedUser(newUser);
       setIsVisible(true);
     }
+    console.log("newUser", newUser)
+
   };
 
   const filterUsersByValue = (value: string): void => {
@@ -87,10 +89,11 @@ const UsersList = () => {
       const usersData = usersResponse.map((user: any) => ({
         name: user.name,
         email: user.email,
-        phoneNumber: user.phoneNumber,
+        phoneNumber: user.phoneNumber ?? "",
         created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
         score: user.score.toString(),
         role: user.role ?? "",
+        id: user.id,
       }));
       console.log("mainr", mainResponse)
       setUsers(usersData);
@@ -111,7 +114,7 @@ const UsersList = () => {
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={users}
+              datas={users.map(({ id, ...users }) => users)}
             >
               <DownloadUserData>
                 <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />

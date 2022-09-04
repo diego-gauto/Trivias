@@ -39,8 +39,8 @@ export const Input = styled.input`
   }
 `;
 export const Input2 = styled.div`
-  width: 100%;
   font-size: 14px;
+  width: 100%;
   font-family:'Montserrat',sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
@@ -49,6 +49,9 @@ export const Input2 = styled.div`
   border-radius:20px;
   input::file-selector-button {
     display: none;
+  }
+  input{
+    width: 100%;
   }
   label{
     color: #6717CD;
