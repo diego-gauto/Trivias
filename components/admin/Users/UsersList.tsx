@@ -65,8 +65,6 @@ const UsersList = () => {
       setSelectedUser(newUser);
       setIsVisible(true);
     }
-    console.log("newUser", newUser)
-
   };
 
   const filterUsersByValue = (value: string): void => {

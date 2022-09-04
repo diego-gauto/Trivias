@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { updateCourse } from "../../../../store/actions/AdminActions";
+import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
@@ -30,7 +31,6 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
-import { getUsers } from "../../../../store/actions/courseActions";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
