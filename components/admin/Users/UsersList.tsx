@@ -27,79 +27,78 @@ export interface SelectedUser {
   email: string;
   score: number;
   uid?: string;
+  created_at: string;
 };
-export interface AllUser {
-  id?: string;
+export interface UserData {
+  id?: any;
+  role: string;
+  name: any;
+  email: string;
+  phoneNumber: number;
+  created_at: string;
+  score: string;
+};
+export interface Users {
+  id: string;
   name: string;
   email: string;
   score: number;
-  created_at: {
-    seconds: number;
-  };
+  created_at: { seconds: number }
   phoneNumber?: number;
-  role?: string;
+  role: string;
 };
 
 const UsersList = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [allUsers, setAllUsers] = useState<Array<AllUser | any>>([]);
-  const [selectedUser, setSelectedUser] = useState<SelectedUser>({ name: "", score: 0, email: "", id: "" });
   const usersCollectionRef = query(collection(db, "users"));
-  const [filteredList, setFilteredList] = useState(allUsers);
-  const [isSearching, setIseSearching] = useState<boolean>();
-  const [inputValue, setInputValue] = useState<string>();
 
-  const getUsers = async () => {
-    const userData = await getDocs(usersCollectionRef);
-    setAllUsers(userData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-  };
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
+  const [users, setUsers] = useState<Array<any>>([]);
+  const [selectedUser, setSelectedUser] = useState<Array<UserData>>([]);
 
-  const handleClick = async (id: string) => {
+  const openUserCardData = async (id: string) => {
+    setIsVisible(true);
+
     const newUser: SelectedUser | any = await getSingleUser(id);
     if (newUser?.uid) {
+      newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
       setSelectedUser(newUser);
       setIsVisible(true);
     }
   };
-  //Gets specified values from each user
-  let displayedListData = filteredList.map((user: any) => ({
-    name: user.name,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
-    score: user.score.toString()
-  }));
-  const rowData = [...displayedListData];
 
-  const filterBySearch = (event: { target: { value: string; }; }) => {
-    setIseSearching(true);
-    const query = event.target.value.toLocaleLowerCase();
-    setInputValue(query);
-    var updatedList = [...allUsers]
-    var updated = updatedList.filter(item =>
+  const filterUsersByValue = (value: string): void => {
+    if (value === "") return setUsers(allUsers);
+    const query = value.toLocaleLowerCase();
+    const filteredUsers = users.filter((item) =>
       item.name.toLowerCase().includes(query) ||
       item.email.includes(query) ||
       item.role.includes(query) ||
       item.score.toString().includes(query) ||
-      new Date(item.created_at.seconds * 1000).toLocaleDateString("es-MX").includes(query));
-    setFilteredList(updated);
+      item.created_at.includes(query));
+    setUsers(filteredUsers);
   };
-
-  const downloadUsersData = () => {
-    if (inputValue == null) {
-      setFilteredList(allUsers);
-      console.log("Empty input, getting all users...", rowData)
-    };
-  };
-
 
   useEffect(() => {
-    getUsers();
-  }, [selectedUser]);
 
-  // useEffect(() => {
-  // }, [inputValue]);
-  //console.log("users...", rowData)
+    const getUsers = async (): Promise<void> => {
+      const mainResponse = await getDocs(usersCollectionRef);
+      const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      const usersData = usersResponse.map((user: any) => ({
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber ?? "",
+        created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
+        score: user.score.toString(),
+        role: user.role ?? "",
+        id: user.id,
+      }));
+      console.log("mainr", mainResponse)
+      setUsers(usersData);
+      setAllUsers(usersData);
+    }
+    getUsers();
+  }, []);
 
   return (
     <AdminContain>
@@ -113,16 +112,19 @@ const UsersList = () => {
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={rowData}
+              datas={users.map(({ id, ...users }) => users)}
             >
               <DownloadUserData>
                 <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
-                <TransparentButton2 onClick={downloadUsersData}>Descargar lista de usuarios</TransparentButton2>
+                <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
               </DownloadUserData>
             </CsvDownloader>
             <SearchContain>
               <SearchIcon />
-              <SearchInput placeholder="Buscar un Usuario" onChange={filterBySearch} />
+              <SearchInput
+                placeholder="Buscar un Usuario"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
+              />
             </SearchContain>
           </TitleContain>
           <Table id="Users">
@@ -136,10 +138,10 @@ const UsersList = () => {
                 <th>Visualizar</th>
               </tr>
               {/* TABLAS */}
-              {isSearching ? (
-                filteredList.map((user, index): any => {
+              {users.length > 0 && (
+                users.map((user, index): any => {
                   return (
-                    <tr key={index} onClick={() => handleClick(user.id)}>
+                    <tr key={index} onClick={() => openUserCardData(user.id)}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
@@ -147,25 +149,7 @@ const UsersList = () => {
                         </ProfileContain>
                       </td>
                       <td >{user.email}</td>
-                      <td>{new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}</td>
-                      <td >3 Activos</td>
-                      <td>{user.score} puntos</td>
-                      <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-                    </tr>
-                  )
-                })
-              ) : (
-                allUsers.map((user, index): any => {
-                  return (
-                    <tr key={index} onClick={() => handleClick(user.id)}>
-                      <td style={{ fontWeight: 600 }}>
-                        <ProfileContain>
-                          <Profile />
-                          {user.name}
-                        </ProfileContain>
-                      </td>
-                      <td >{user.email}</td>
-                      <td>{new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}</td>
+                      <td>{user.created_at}</td>
                       <td >3 Activos</td>
                       <td>{user.score} puntos</td>
                       <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
@@ -174,12 +158,11 @@ const UsersList = () => {
                 })
               )}
 
-
             </tbody>
           </Table>
         </Container>
         {
-          isVisible == true &&
+          isVisible === true &&
           <UserCardData user={selectedUser} setIsVisible={setIsVisible} />
         }
       </UserContain>

@@ -33,12 +33,6 @@ import {
 const UserCardData = ({ user, setIsVisible }: any) => {
   const [show, setShow] = useState(false);
 
-  const isPhoneNumberCaptured = () => {
-    if (user.phoneNumber == null || user.phoneNumber == "") {
-      return "N/A"
-    } else return user.phoneNumber
-  }
-
   return (
     <UserContain>
       <TitleContain>
@@ -84,13 +78,13 @@ const UserCardData = ({ user, setIsVisible }: any) => {
             <Info>
               Fecha de Creación
               <Label>
-                {new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX")}
+                {user.created_at}
               </Label>
             </Info>
             <Info>
               Teléfono
               <Label>
-                {isPhoneNumberCaptured()}
+                {!user.phoneNumber ? "N/A" : user.phoneNumber}
               </Label>
             </Info>
           </ColumnContain>
