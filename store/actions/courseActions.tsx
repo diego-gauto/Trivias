@@ -198,9 +198,11 @@ export const addHomework = async (data: any) => {
   );
   return 'exito'
 }
-export const addHistoryCourse = async (course: any, userId: any) => {
+export const addHistoryCourse = async (course: any, userId: any, season: any, lesson: any) => {
   course.userId = userId;
   course.viewed = new Date();
+  course.season = parseInt(season);
+  course.lesson = parseInt(lesson);
   const docRef = await setDoc(
     doc(db, "viewedCourses", `${course.documentID}-${userId}`),
     {

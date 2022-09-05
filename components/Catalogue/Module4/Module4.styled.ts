@@ -18,9 +18,6 @@ export const Viewpay = styled.p`
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 0;
-  &:hover{
-    text-decoration: underline;
-  }
   @media( max-width: 1023px){
     padding-block: 10px;
     font-size: 14px;
@@ -49,8 +46,12 @@ export const Cardcontent = styled.div`
   width:100%;
   height: 402px;
   border-radius: 10px;
+  transition: all .2s ease-in-out;
   @media( max-width: 1023px){
     height: auto;
+  }
+  &:hover{
+    transform: scale(1.02);
   }
 `;
 export const CardImage = styled.img`
