@@ -75,7 +75,7 @@ const PurchaseComplete = ({ data, card, id, coupon }: any) => {
             </Text4>}
         </BottomContain>
         {data.type == 'course' && <ButtonContain>
-          <Link href={{ pathname: 'Lesson', query: { id: id } }}>
+          <Link href={{ pathname: 'Lesson', query: { id: id, season: 0, lesson: 0 } }}>
             <PurpleButton>
               Empezar Curso
             </PurpleButton>
