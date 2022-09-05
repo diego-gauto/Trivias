@@ -1,9 +1,19 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, getDoc, orderBy,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  setDoc,
+  updateDoc,
+  where,
 } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
-import { db } from '../../firebase/firebaseConfig';
 import { v4 as uuidv4 } from "uuid";
+
+import { db } from "../../firebase/firebaseConfig";
 
 export const getCourses = async () => {
   let courses: any = []
@@ -18,14 +28,12 @@ export const getCourses = async () => {
 export const getcourse = async (id: any) => {
   const docRef = doc(db, "courses", id);
   const docSnap = await getDoc(docRef);
-  console.log(docSnap.data());
   return docSnap.data();
 }
 
 export const getLesson = async (courseId: any, seasonId: any, lessonId: any) => {
   const docRef = doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId);
   const docSnap = await getDoc(docRef);
-  console.log(docSnap.data());
   return docSnap.data();
 }
 const uploadImage = (image: any, name: any) => {
@@ -41,7 +49,6 @@ const uploadImage = (image: any, name: any) => {
   });
 }
 export const updateLesson = async (lesson: any, courseId: any, seasonId: any, lessonId: any) => {
-  console.log(lesson)
   let tempLesson: any = JSON.parse(JSON.stringify(lesson))
   if ('format' in tempLesson) {
     tempLesson.image = await uploadImage(tempLesson.format, tempLesson.imageReference);
@@ -153,7 +160,6 @@ export const getComments = async () => {
 }
 
 export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any, lessonId: any, user: any) => {
-  console.log(lesson);
   let temp_lesson: any;
   delete lesson.id
   delete lesson.seasonId
@@ -220,7 +226,6 @@ export const getViewedCourses = async (userdId: any) => {
 // export const getUsers = async () => {
 //   const docRef = doc(db, "users", role);
 //   const docSnap = await getDoc(docRef);
-//   console.log(docSnap.data());
 //   return docSnap.data();
 // }
 export const getUsers = async () => {
