@@ -99,7 +99,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
                     <AddText>
                       Número de la Tarjeta
                     </AddText>
-                    <InputCard placeholder="XXXX XXXX XXXX XXXX" mask='9999 9999 9999 99999' onChange={(e: any) => {
+                    <InputCard placeholder="XXXX XXXX XXXX XXXX" maskChar='' mask='9999 9999 9999 99999' onChange={(e: any) => {
                       setCard((card: any) => ({ ...card, number: e.target.value }));
                     }}>
                     </InputCard>
