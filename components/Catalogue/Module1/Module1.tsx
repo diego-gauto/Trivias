@@ -97,7 +97,7 @@ const Module1 = ({ user }: any) => {
 
         <TextContain>
           <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0].title}”
+            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0]?.title}”
           </Title>
           <SubText style={{ textShadow: "1px 1px 5px black" }}>
             {course.courseAbout}
