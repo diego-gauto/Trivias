@@ -90,12 +90,11 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
     .then(async (userCredential) => {
       const user = userCredential.user;
       localStorage.setItem("email", credentials.email);
+      window.location.href = "/Preview";
     })
     .catch((error: any) => {
-
       firebase.auth().signOut();
-      console.error(error);
-      throw error;
+      return error.code;
     });
 
 };
@@ -112,7 +111,7 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
     default:
       const error = new Error("Invalid or no auth provider introduced")
       console.error(error);
-      throw error;
+    // throw error;
   }
   const auth = getAuth();
 

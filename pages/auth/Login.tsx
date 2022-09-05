@@ -76,16 +76,20 @@ const Login = () => {
         password: formData.password,
       },
     };
-    signInWithCreds(signUpData).then(() => {
-      window.location.href = "/Preview";
+    signInWithCreds(signUpData).then((res) => {
+      if (res == 'auth/user-not-found') {
+        alert('El usuario ingresado no existe o ha sido eliminado');
+        setIsLoading(false);
+      }
     });
   }
 
   const [showForgot, setShowForgot] = useState(false);
 
   const handleSignUpWithAuthProvider = (authProvider: string) => {
+    let trial = false;
     setIsLoading(true)
-    accessWithAuthProvider(authProvider).then(() => {
+    accessWithAuthProvider(authProvider, trial).then((res) => {
       window.location.href = "/Preview";
     });
   };
