@@ -1,5 +1,6 @@
-import { doc, getDoc, collection, getDocs, updateDoc } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
+import { collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 import { HeroData } from "../../components/admin/Landing/HeroSection/IHeroSection";
 import { Product } from "../../components/admin/Landing/ProductsSection/IProductsSection";
 import { Review } from "../../components/admin/Landing/ReviewsSection/IReviewsSection";
@@ -69,7 +70,7 @@ export const saveHeroData = async (heroData: HeroData) => {
   try {
     await uploadFile(heroData.heroImage, "landing/HeroImage")
     const { heroImage, ...dataToUpdate } = heroData
-    // @ts-expect-error
+    // @ts -expect-error
     await updateDoc(heroSectionRef, dataToUpdate)
   } catch {
     return false
