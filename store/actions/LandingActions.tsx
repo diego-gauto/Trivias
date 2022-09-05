@@ -70,7 +70,6 @@ export const saveHeroData = async (heroData: HeroData) => {
   try {
     await uploadFile(heroData.heroImage, "landing/HeroImage")
     const { heroImage, ...dataToUpdate } = heroData
-    // @t s-expect-error
     await updateDoc(heroSectionRef, dataToUpdate)
   } catch {
     return false
