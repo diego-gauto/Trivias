@@ -21,7 +21,7 @@ import {
 } from "./User.styled";
 
 const UserInfo = ({ userData, taskView, setTaskView }: any) => {
-
+  let today = new Date().getTime() / 1000;
 
 
   const logoutFunc = () => {
@@ -71,14 +71,14 @@ const UserInfo = ({ userData, taskView, setTaskView }: any) => {
           {userData.score}
         </UserText>
       </UserContainer>
-      <UserContainer>
+      {userData.membership.finalDate > today && <UserContainer>
         <LabelText>
           Suscripción Actual
         </LabelText>
         <UserText>
-          {userData.plan}
+          Gonvar Plus Mensual
         </UserText>
-      </UserContainer>
+      </UserContainer>}
       {
         taskView == false &&
         <UserContainer>
