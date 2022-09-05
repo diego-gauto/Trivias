@@ -1,16 +1,14 @@
 import {
-  getAuth, createUserWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithEmailAndPassword
 } from "firebase/auth";
-import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot
-} from "firebase/firestore";
-import { db } from '../../firebase/firebaseConfig';
-import { functions } from "../../firebase/firebaseConfig";
 import firebase from "firebase/compat/app";
-import { httpsCallable } from 'firebase/functions';
-import { useAuth } from "../../hooks/useAuth";
+import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+
+import { db, functions } from "../../firebase/firebaseConfig";
 
 export const signUpWithCreds = (signUpData: { credentials: any; }) => {
   const {
@@ -103,7 +101,7 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
 };
 
 
-export const accessWithAuthProvider = (provider: any, trial: any) => {
+export const accessWithAuthProvider = (provider: any, trial?: any) => {
   switch (provider) {
     case "Google":
       provider = new firebase.auth.GoogleAuthProvider();

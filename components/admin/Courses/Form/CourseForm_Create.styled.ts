@@ -12,7 +12,6 @@ export const ButtonContain = styled.div`
   margin-top: 20px;
 `;
 export const Button = styled.button`
-position: absolute;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
@@ -38,6 +37,12 @@ export const InputContain = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+export const InputButtonContain= styled.div`
+display: flex;
+gap: 20px;
+flex-direction: column;
+width: 100%;
+`
 export const IconContain = styled.div`
   display: flex;
   position: relative;

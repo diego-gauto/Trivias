@@ -86,7 +86,7 @@ const CourseForm_Create = () => {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
-  const [value, setValue] = useState()
+  const [value, setValue] = useState<any>({})
   const [userData, setUserData] = useState<any>([]);
   const [value2, setValue2] = useState("Uñas")
   const [value3, setValue3] = useState("Gratis")
@@ -191,7 +191,7 @@ const CourseForm_Create = () => {
                             key={"SelectProfessor" + index}
                             onClick={() => {
                               setName(val.name);
-                              setValue(val.id);
+                              setValue({ id: val.id, name: val.name });
                               setOpen(false)
                             }}>
                             <input

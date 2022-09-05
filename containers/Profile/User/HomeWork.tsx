@@ -1,0 +1,71 @@
+import React, { useEffect, useState } from 'react'
+import { getHomeworks } from '../../../store/actions/UserActions'
+import { HWContainer, Table, TitleContain } from './HomeWork.styled'
+import ModalHW from './HomeWorkModal/ModalHW';
+
+const HomeWork = ({ userId }: any) => {
+  const [show, setShow] = useState(false);
+  const [homeWorks, setHomeWorks] = useState<any>([]);
+  const [data, setData] = useState([])
+
+  const getAllHomeworks = () => {
+    getHomeworks(userId).then((res) => {
+      res.forEach((element: any) => {
+        let tempDate = new Date(element.createdAt.seconds * 1000);
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth()
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      setHomeWorks(res);
+    })
+  }
+  useEffect(() => {
+    getAllHomeworks();
+  }, [])
+
+  return (
+    <HWContainer>
+      <TitleContain>
+        <p>
+          Tareas
+        </p>
+      </TitleContain>
+      <Table id="Pay">
+        <tbody>
+          <tr>
+            <th>Usuario</th>
+            <th>Correo Electrónico</th>
+            <th>Curso (temporada, lección)</th>
+            <th>Fecha</th>
+            <th>Descargar Tarea</th>
+            <th>Estatus</th>
+          </tr>
+          {/* TABLAS */}
+          {
+            homeWorks.map((task: any, index: any) => {
+              return (
+                <tr
+                  key={"HomeWorks " + index}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => { setShow(true); setData(task) }}
+                >
+                  <td>{task.userName}</td>
+                  <td>{task.userEmail}</td>
+                  <td>{task.title}  ({task.season}, {task.lesson}) </td>
+                  <td>{task.formatDate}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              )
+
+            })
+          }
+
+        </tbody>
+      </Table>
+      <ModalHW setShow={setShow} show={show} data={data} />
+    </HWContainer>
+  )
+}
+export default HomeWork

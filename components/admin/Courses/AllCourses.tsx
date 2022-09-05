@@ -74,7 +74,7 @@ export const AllCourses = ({
               <Column>
                 <Info>
                   <Label>Profesor(es)</Label>
-                  <Text> {courseProfessor} </Text>
+                  <Text> {courseProfessor.name} </Text>
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
