@@ -7,6 +7,7 @@ import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
   ButtonContain,
+  ButtonTransparent,
   CaretD,
   Folder,
   IconContain,
@@ -23,7 +24,6 @@ import {
   SelectContain,
   Title,
   TitleContain,
-  ButtonTransparent,
 } from "./Modal.styled";
 
 const Modal1 = ({ show, setShow, data }: any) => {
@@ -31,7 +31,6 @@ const Modal1 = ({ show, setShow, data }: any) => {
   const [open, setOpen] = useState(false);
   const [reward, setReward] = useState<any>({ data })
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -44,7 +43,6 @@ const Modal1 = ({ show, setShow, data }: any) => {
     }
     else {
       updateRewards(reward, reward.id);
-      console.log(reward)
     }
   }
   const deletePrize = (reward: any) => {

@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
+import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import {
   Button,
@@ -29,9 +30,6 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
-import { getUsers } from "../../../../store/actions/courseActions";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../../firebase/firebaseConfig";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -97,9 +95,6 @@ const CourseForm_Create = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log(1);
-
-    console.log("a")
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -130,15 +125,12 @@ const CourseForm_Create = () => {
     };
 
     createCourse(signUpData).then(() => {
-
       window.location.href = "/admin/Courses";
-      console.log("done!")
     });
 
   }
 
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -156,7 +148,6 @@ const CourseForm_Create = () => {
     getProffessors();
   }, [])
 
-  console.log(price)
   return (
     <CourseFormContain>
       {/* LINEA 1 */}

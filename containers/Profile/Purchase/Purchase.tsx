@@ -182,7 +182,6 @@ const Purchase = () => {
       }
       const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
       await addCard(data).then(async (res: any) => {
-        console.log(res);
         if ("raw" in res.data) {
           alert("Hay un error en los datos de la tarjeta!")
         } else {

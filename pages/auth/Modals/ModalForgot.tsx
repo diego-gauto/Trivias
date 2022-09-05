@@ -44,13 +44,11 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
     setIsLoading(true)
     auth.sendPasswordResetEmail(email)
       .then(function () {
-        console.log("Password reset email sent");
         setResetMessage(1)
         //setIsEmailSent(true)
         setIsLoading(false)
       })
       .catch(function (error) {
-        console.log("Email not found");
         setIsLoading(false)
         setResetMessage(2)
       });

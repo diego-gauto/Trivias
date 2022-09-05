@@ -38,7 +38,6 @@ const Modal2 = ({ show, setShow }: any) => {
   })
 
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -46,7 +45,6 @@ const Modal2 = ({ show, setShow }: any) => {
     };
   }
   const createReward = () => {
-    console.log(reward)
     if (Object.keys(reward).some(key => reward[key] === '')) {
       alert("Complete todos los campos")
 

@@ -11,7 +11,6 @@ export const createCourse = async (signUpData: { data: any; }) => {
     data,
   } = signUpData;
   data.createdAt = new Date();
-  console.log(signUpData)
   data.reference = `${data.courseTittle}-${uuidv4()}`
   data.coursePath = await uploadImage(data.coursePath, data.reference);
   return db.collection('courses').add(data)
@@ -50,8 +49,6 @@ export const updateCourse = async (signUpData: { data: any; }, images: any) => {
     });
     tempCourse.coursePath = await uploadImage(images, tempCourse.reference);
   }
-
-  console.log(signUpData)
 
   return db.collection('courses').doc(data.documentID).update(data)
     .catch((error: any) => {
@@ -118,7 +115,6 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
     credentials,
   } = signUpData;
 
-  console.log(signUpData)
   //Una vez inicializado es contextual a las llamadas de firebase
   const auth = getAuth();
 
@@ -166,10 +162,6 @@ export const accessWithAuthProvider = (provider: any) => {
 
   return signInWithPopup(auth, provider)
     .then(async (response) => {
-
-      console.log("Provider Auth : 1")
-      console.log(response)
-
       uid = response.user.uid;
       displayName = response.user.displayName;
       email = response.user.email;
@@ -181,18 +173,11 @@ export const accessWithAuthProvider = (provider: any) => {
       const querySnapshot = await getDocs(query_1);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
         doc1 = doc.data().uid;
       });
 
-
-
     }).then(async () => {
       //If user does not exist register a new one
-
-      console.log("Provider Auth : 2")
-      console.log(doc1)
-
       if (!doc1) {
 
 
@@ -214,8 +199,6 @@ export const accessWithAuthProvider = (provider: any) => {
 
 
         }).then(() => {
-
-          console.log("Provider Auth : 3 | Wasn´t already registered")
           return true;
 
         }).catch((error: any) => {
@@ -224,9 +207,6 @@ export const accessWithAuthProvider = (provider: any) => {
           throw (docCreationError);
         })
 
-      } else {
-
-        console.log("Provider Auth : 3 | Was already registered")
       }
     }).catch((error) => {
       firebase.auth().signOut();
@@ -254,12 +234,10 @@ export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
   lesson.imageReference = `${lesson.title}-${uuidv4()}`
   lesson.image = await uploadImageLesson(lesson.image, lesson.imageReference);
   if (lesson.extra.length > 0) {
-    console.log(lesson)
     lesson.extra.forEach(async (element: any, index: any) => {
       element.reference = `${uuidv4()}`
       element.path = await uploadImageLesson(element.path, element.reference);
 
-      console.log(element)
       if (index == lesson.extra.length - 1) {
         const docRef = await addDoc(
           collection(db, "courses", courseID, "seasons", seasonID, "lessons"),

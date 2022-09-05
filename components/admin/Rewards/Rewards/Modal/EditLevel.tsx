@@ -29,8 +29,6 @@ const EditLevel = ({ show, setShow, levels }: any) => {
     maximum: 0
   })
   const AddNewLevel = () => {
-    console.log(level)
-    console.log(levels)
     if (levels.some((lvl: any) =>
       lvl.minimum == level.minimum || lvl.maximum == level.maximum
     )) {
