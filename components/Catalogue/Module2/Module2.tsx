@@ -1,5 +1,6 @@
 
 
+import router from "next/router";
 import { useEffect, useState } from "react";
 import { getViewedCourses } from "../../../store/actions/courseActions";
 import {
@@ -28,6 +29,17 @@ const Module2 = ({ user }: any) => {
     }
   }, [user]);
 
+  const goTo = (course: any) => {
+    console.log(1);
+
+    if (user) {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: course.documentID, season: course.season, lesson: course.lesson },
+      });
+    }
+  }
+
   return (
     <>
       {course.length > 0 &&
@@ -48,7 +60,9 @@ const Module2 = ({ user }: any) => {
                       />
                     </ImageContain>
                     <PlayIconS />
-                    <PlayIcon />
+                    <PlayIcon onClick={() => {
+                      goTo(x)
+                    }} />
                     <Progress style={{ width: '50%' }} />
                   </VideoContain>
                   <VideoTitle>
