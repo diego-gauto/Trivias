@@ -8,7 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
 import { getUsers } from "../../../../store/actions/courseActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { ChevD, ChevU, CourseName, TitleContain } from "../AllCourses.styled";
 import {
   Button,
   ButtonContain,
@@ -81,6 +82,7 @@ const CourseForm_Create = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [openCourse, setOpenCourse] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
@@ -151,8 +153,21 @@ const CourseForm_Create = () => {
   return (
     <CourseFormContain>
       {/* LINEA 1 */}
+      <TitleContain>
+        <CourseName>
+          Crear Curso Nuevo
+        </CourseName>
+        {
+          openCourse == false &&
+          <ChevD onClick={() => { setOpenCourse(true) }} />
+        }
+        {
+          openCourse == true &&
+          <ChevU onClick={() => { setOpenCourse(false) }} />
+        }
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      </TitleContain>
+      {openCourse && <form onSubmit={handleSubmit(onSubmit)}>
         <InputForm >
           <InputContain>
             <Label>Título del Curso</Label>
@@ -420,7 +435,7 @@ const CourseForm_Create = () => {
 
 
         </InputForm>
-      </form>
+      </form>}
     </CourseFormContain>
   )
 }

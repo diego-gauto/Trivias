@@ -42,7 +42,7 @@ const CourseMain = () => {
     <AdminContain>
       <SideBar />
       <CourseFormContain>
-        <Title>Crear nuevo curso</Title>
+        {/* <Title>Crear nuevo curso</Title> */}
 
         <CourseForm_Create></CourseForm_Create>
 

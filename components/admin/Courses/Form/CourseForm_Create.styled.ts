@@ -4,7 +4,10 @@ export const CourseFormContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 10px;
+  padding: 15px;
+  box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+}
 `;
 export const ButtonContain = styled.div`
   display: flex;
