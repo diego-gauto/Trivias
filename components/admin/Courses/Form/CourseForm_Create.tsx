@@ -31,7 +31,7 @@ import {
   SelectContain,
 } from "./Select/SelectStyles.styled";
 import { getUsers } from "../../../../store/actions/courseActions";
-import { CourseName, ChevD, ChevU } from "../AllCourses.styled";
+import { CourseName } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
