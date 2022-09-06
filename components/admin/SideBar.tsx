@@ -1,6 +1,8 @@
-import Link from 'next/link';
-import React from 'react'
-import { Container, Text } from './SideBar.styled';
+
+
+import Link from "next/link";
+
+import { Container, Text } from "./SideBar.styled";
 
 const SideBar = () => {
   return (
@@ -25,6 +27,9 @@ const SideBar = () => {
       </Link>
       <Link href="/admin/Users">
         <Text>Usuarios</Text>
+      </Link>
+      <Link href="/admin/Sections">
+        <Text>Secciones</Text>
       </Link>
     </Container>
   )
