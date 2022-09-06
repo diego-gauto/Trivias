@@ -1,5 +1,7 @@
 
 
+import { useEffect, useState } from "react";
+import { getViewedCourses } from "../../../store/actions/courseActions";
 import {
   Background,
   CardContainer,
@@ -15,57 +17,54 @@ import {
   VideoTitle,
 } from "./Module2.styled";
 
-const Module2 = () => {
+const Module2 = ({ user }: any) => {
+  const [course, setCourse] = useState<any>([]);
+
+  useEffect(() => {
+    if (user) {
+      getViewedCourses(user.id).then((res: any) => {
+        setCourse(res);
+      });
+    }
+  }, [user]);
+
   return (
-    <Container>
-      <ContinueText>
-        Continua viendo
-      </ContinueText>
-      <CardContainer>
-        <Video>
-          <VideoContain>
-            <ImageContain>
-              <Background
-                src="/images/Preview/card1.png"
-                width={400}
-                height={240}
-              />
-            </ImageContain>
-            <PlayIconS />
-            <PlayIcon />
-            <Progress style={{ width: '50%' }} />
-          </VideoContain>
-          <VideoTitle>
-            Episodio 01: Revelaciones
-          </VideoTitle>
-          <VideoInfo>
-            Curso 1: Lorem Ipsum
-          </VideoInfo>
-        </Video>
+    <>
+      {course.length > 0 &&
+        <Container>
+          <ContinueText>
+            Continua viendo
+          </ContinueText>
+          <CardContainer>
+            {course.map((x: any) => {
+              return (
+                <Video>
+                  <VideoContain>
+                    <ImageContain>
+                      <Background
+                        src="/images/Preview/card1.png"
+                        width={400}
+                        height={240}
+                      />
+                    </ImageContain>
+                    <PlayIconS />
+                    <PlayIcon />
+                    <Progress style={{ width: '50%' }} />
+                  </VideoContain>
+                  <VideoTitle>
+                    Lección {x.lesson + 1}: {x.seasons[x.season].lessons[x.lesson].title}
+                  </VideoTitle>
+                  <VideoInfo>
+                    Curso: {x.courseTittle}
+                  </VideoInfo>
+                </Video>
+              )
+            })}
 
-        <Video>
-          <VideoContain>
-            <Background
-              src="/images/Preview/card2.png"
-              width={420}
-              height={240}
-            />
-            <PlayIconS />
-            <PlayIcon />
-            <Progress style={{ width: '30%' }} />
-          </VideoContain>
-          <VideoTitle>
-            Episodio 12: La Ruta de Kessel
-          </VideoTitle>
-          <VideoInfo>
-            Curso 2: Lorem Ipsum
-          </VideoInfo>
-        </Video>
-
-
-      </CardContainer>
-
-    </Container>
+          </CardContainer>
+        </Container>
+      }
+    </>
   )
 }
 export default Module2;

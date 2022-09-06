@@ -217,7 +217,7 @@ export const getViewedCourses = async (userdId: any) => {
   querySnapshot.forEach((doc) => {
     courses.push({ ...doc.data(), id: doc.id });
   });
-  return courses[0];
+  return courses;
 }
 // export const getUsers = async () => {
 //   const docRef = doc(db, "users", role);
