@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
 import {
   Button,
   ButtonContain,
@@ -32,6 +32,7 @@ import {
 import { getUsers } from "../../../../store/actions/courseActions";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebaseConfig";
+import { CourseName, ChevD, ChevU } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -83,6 +84,7 @@ const CourseForm_Create = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [openCourse, setOpenCourse] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
@@ -97,9 +99,6 @@ const CourseForm_Create = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log(1);
-
-    console.log("a")
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -160,8 +159,21 @@ const CourseForm_Create = () => {
   return (
     <CourseFormContain>
       {/* LINEA 1 */}
+      <TitleContain>
+        <CourseName>
+          Crear Curso Nuevo
+        </CourseName>
+        {
+          openCourse == false &&
+          <ChevD onClick={() => { setOpenCourse(true) }} />
+        }
+        {
+          openCourse == true &&
+          <ChevU onClick={() => { setOpenCourse(false) }} />
+        }
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      </TitleContain>
+      {openCourse && <form onSubmit={handleSubmit(onSubmit)}>
         <InputForm >
           <InputContain>
             <Label>Título del Curso</Label>
@@ -429,7 +441,7 @@ const CourseForm_Create = () => {
 
 
         </InputForm>
-      </form>
+      </form>}
     </CourseFormContain>
   )
 }
