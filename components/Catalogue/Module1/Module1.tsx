@@ -57,15 +57,13 @@ const Module1 = ({ user }: any) => {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid: any) => {
         getViewedCourses(user.id).then((res) => {
-          if (res) {
-            console.log(res);
-
-            if (paid.some((x: any) => x.id == res.documentID && date < x.finalDate)) {
-              res.paid = true;
+          if (res && res.length > 0) {
+            if (paid.some((x: any) => x.id == res[0].documentID && date < x.finalDate)) {
+              res[0].paid = true;
             } else {
-              res.paid = false;
+              res[0].paid = false;
             }
-            setHistoryCourse(res);
+            setHistoryCourse(res[0]);
           }
         })
       })
@@ -97,7 +95,7 @@ const Module1 = ({ user }: any) => {
 
         <TextContain>
           <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0].title}”
+            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0]?.title}”
           </Title>
           <SubText style={{ textShadow: "1px 1px 5px black" }}>
             {course.courseAbout}

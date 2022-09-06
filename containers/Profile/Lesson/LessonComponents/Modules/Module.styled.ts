@@ -13,6 +13,9 @@ export const MainContainer = styled.div`
     box-shadow: none;
     gap: 0;
   }
+  @media (max-width: 900px){
+    width:100%;
+  }
 `;
 export const TitleContain = styled.div`
   display: flex;

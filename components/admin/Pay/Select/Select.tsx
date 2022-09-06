@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { CaretD, Label, Option, OptionContain, Selected, SelectContain } from "./Select.styled";
 
-const Select = () => {
+const Select = ({ handleClick }: any) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Seleccionar Semana")
   return (
@@ -14,7 +14,7 @@ const Select = () => {
       {
         open == true &&
         <OptionContain>
-          <Option onClick={() => { setValue("Semana 1"); setOpen(false) }}>
+          <Option onClick={() => { setValue("Semana 1"); setOpen(false); handleClick(1) }}>
             <input
               type="radio"
               id="Temporada1"
@@ -23,7 +23,7 @@ const Select = () => {
             />
             <Label > Semana 1</Label>
           </Option>
-          <Option onClick={() => { setValue("Semana 2"); setOpen(false) }}>
+          <Option onClick={() => { setValue("Semana 2"); setOpen(false); handleClick(2) }}>
             <input
               type="radio"
               id="Temporada2"

@@ -33,6 +33,7 @@ const Lesson = () => {
       temp_lesson.seasonId = course?.seasons[season].id
       temp_lesson.courseId = course.id
       setCurrentLesson(temp_lesson);
+      addHistoryCourse(course, userData.id, season, lesson);
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
         temp_comments = comments.filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
         setCurrentComments(temp_comments);
@@ -76,7 +77,7 @@ const Lesson = () => {
               if (res.courseType == 'Producto') {
                 if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
                   res.paid = true;
-                  addHistoryCourse(res, e.id);
+                  addHistoryCourse(res, e.id, season, lesson);
                 } else {
                   router.push({
                     pathname: 'Purchase', query: { type: 'course', id: course.id }
@@ -85,7 +86,7 @@ const Lesson = () => {
               }
               if (res.courseType == 'Mensual') {
                 if (e.data().membership.finalDate > date) {
-                  addHistoryCourse(res, e.id);
+                  addHistoryCourse(res, e.id, season, lesson);
                 }
                 else {
                   router.push(
@@ -94,7 +95,7 @@ const Lesson = () => {
                 }
               }
               if (res.courseType == 'Gratis') {
-                addHistoryCourse(res, e.id);
+                addHistoryCourse(res, e.id, season, lesson);
               }
               setCourse(res);
             })
