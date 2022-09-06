@@ -11,6 +11,7 @@ import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
 import {
   AllButtons,
   Background,
+  Error,
   Box1,
   Box2,
   EyeIcon,
@@ -52,7 +53,8 @@ type FormValues = {
 const Login = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [passwordShown_1, setPasswordShown_1] = useState(false);
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -78,7 +80,8 @@ const Login = () => {
     };
     signInWithCreds(signUpData).then((res) => {
       if (res == 'auth/user-not-found') {
-        alert('El usuario ingresado no existe o ha sido eliminado');
+        setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
+        setError(true);
         setIsLoading(false);
       }
     });
@@ -153,7 +156,9 @@ const Login = () => {
                   </PasswordBox>
 
                 </Box2>
-
+                {error && <Error>
+                  {errorMsg}.
+                </Error>}
                 <AllButtons>
                   <PurpleButton2 type='submit'>
                     Acceder

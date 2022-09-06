@@ -80,8 +80,6 @@ const Register = () => {
   const router = useRouter()
   const { trial } = router.query;
 
-  console.log(trial);
-
   const {
     register,
     control,

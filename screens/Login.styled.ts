@@ -18,6 +18,10 @@ export const ProfilePicture2 = styled.i`
   border:none;
   background-repeat:no-repeat;
 `;
+export const Error = styled.p`
+  color:#db2c1d;
+  text-align:center;
+`;
 
 export const AnimatedBackground = styled.video  `
 width: auto;
