@@ -17,6 +17,9 @@ export const VideoContain = styled.div`
     gap: 10px;
     padding: 15px;
   }
+  @media (max-width: 900px){
+    width:100%;
+  }
 `;
 export const Title = styled.h1`
   font-size: 24px;

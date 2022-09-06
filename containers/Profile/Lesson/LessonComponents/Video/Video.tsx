@@ -36,7 +36,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
           playing={false}
           muted={false}
           controls
-          width={900} height={500}
+          width="100%" height="100%"
           onEnded={finishedLesson}
         />
       </VideoContain>

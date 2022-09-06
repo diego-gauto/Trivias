@@ -4,7 +4,27 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column; 
   gap: 10px;
-  width: 100%;
+  flex:1 0;
+  @media (max-width: 900px){
+    position: absolute;
+    z-index: 40;
+    padding: 10px;
+    background: white;
+    box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: none;
+  }
+`;
+export const CloseButton = styled.div`
+  color: #8E2DE2;
+  font-size: 40px;
+  font-weight: 900;
+  font-family: 'Nunito';
+  display: none;
 `;
 export const Container = styled.div`
   display: flex;
