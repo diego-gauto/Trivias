@@ -14,6 +14,14 @@ export const ButtonContain = styled.div`
   justify-content: flex-end;
   margin-top: 20px;
 `;
+export const ButtonNewCourse = styled.p`
+  margin: 0;
+  line-height: normal;
+  font-size:30px;
+  font-weight:800;
+  font-family:Nunito;
+  cursor:pointer;
+`;
 export const Button = styled.button`
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;

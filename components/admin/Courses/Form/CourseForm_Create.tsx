@@ -15,6 +15,7 @@ import {
   Folder,
   IconContain,
   Input,
+  ButtonNewCourse,
   InputBig,
   InputContain,
   InputContain2,
@@ -30,8 +31,6 @@ import {
   SelectContain,
 } from "./Select/SelectStyles.styled";
 import { getUsers } from "../../../../store/actions/courseActions";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../../firebase/firebaseConfig";
 import { CourseName, ChevD, ChevU } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
@@ -165,11 +164,11 @@ const CourseForm_Create = () => {
         </CourseName>
         {
           openCourse == false &&
-          <ChevD onClick={() => { setOpenCourse(true) }} />
+          <ButtonNewCourse onClick={() => { setOpenCourse(true) }}>+</ButtonNewCourse>
         }
         {
           openCourse == true &&
-          <ChevU onClick={() => { setOpenCourse(false) }} />
+          <ButtonNewCourse onClick={() => { setOpenCourse(false) }}>-</ButtonNewCourse>
         }
 
       </TitleContain>
