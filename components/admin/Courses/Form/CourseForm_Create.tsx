@@ -17,6 +17,7 @@ import {
   Folder,
   IconContain,
   Input,
+  ButtonNewCourse,
   InputBig,
   InputContain,
   InputContain2,
@@ -31,6 +32,8 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
+import { getUsers } from "../../../../store/actions/courseActions";
+import { CourseName } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -159,11 +162,11 @@ const CourseForm_Create = () => {
         </CourseName>
         {
           openCourse == false &&
-          <ChevD onClick={() => { setOpenCourse(true) }} />
+          <ButtonNewCourse onClick={() => { setOpenCourse(true) }}>+</ButtonNewCourse>
         }
         {
           openCourse == true &&
-          <ChevU onClick={() => { setOpenCourse(false) }} />
+          <ButtonNewCourse onClick={() => { setOpenCourse(false) }}>-</ButtonNewCourse>
         }
 
       </TitleContain>
