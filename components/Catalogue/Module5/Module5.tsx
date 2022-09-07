@@ -1,9 +1,36 @@
-import Link from 'next/link';
-import { ImageContent, InsideContent, InsideText, Text1, Text2, Text3 } from '../Module3/Module3.styled';
-import { CardImage } from "../Module4/Module4.styled";
 import React, { useEffect, useState } from "react";
+
+import Link from "next/link";
+
+import { LOGIN_PATH } from "../../../constants/paths";
 import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
-import { Banner2, ImageContain, CardContain, Cardcontent, Content, LimitTime, MainContainer, SpanText, SuscribeText, TextContent, Title, TextContain, TextContainer, PurpleButton, ButtonContain, Divider, RespContain, Cardcontent2, Cardcontent3 } from './Module5.styled';
+import {
+  ImageContent,
+  InsideContent,
+  InsideText,
+  Text1,
+  Text2,
+  Text3,
+} from "../Module3/Module3.styled";
+import { CardImage } from "../Module4/Module4.styled";
+import {
+  Banner2,
+  ButtonContain,
+  Cardcontent2,
+  CardContain,
+  Content,
+  Divider,
+  ImageContain,
+  MainContainer,
+  PurpleButton,
+  RespContain,
+  SpanText,
+  SuscribeText,
+  TextContain,
+  TextContainer,
+  TextContent,
+  Title,
+} from "./Module5.styled";
 
 const Module5 = ({ user }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -98,7 +125,7 @@ const Module5 = ({ user }: any) => {
               Adquiere Gonvar Plus
             </PurpleButton>
           </Link>}
-          {!user && <Link href={{ pathname: 'auth/Login' }}>
+          {!user && <Link href={LOGIN_PATH}>
             <PurpleButton>
               Adquiere Gonvar Plus
             </PurpleButton>
