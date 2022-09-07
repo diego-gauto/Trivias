@@ -33,7 +33,9 @@ const Lesson = () => {
       temp_lesson.seasonId = course?.seasons[season].id
       temp_lesson.courseId = course.id
       setCurrentLesson(temp_lesson);
-      addHistoryCourse(course, userData.id, season, lesson);
+      if (userData) {
+        addHistoryCourse(course, userData.id, season, lesson);
+      }
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
         temp_comments = comments.filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
         setCurrentComments(temp_comments);
