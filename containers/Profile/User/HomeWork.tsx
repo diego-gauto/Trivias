@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getHomeworks } from '../../../store/actions/UserActions'
-import { HWContainer, Table, TitleContain } from './HomeWork.styled'
+import { Button, HWContainer, Table, TitleContain } from './HomeWork.styled'
 import ModalHW from './HomeWorkModal/ModalHW';
 
 const HomeWork = ({ userId }: any) => {
@@ -20,6 +20,7 @@ const HomeWork = ({ userId }: any) => {
       setHomeWorks(res);
     })
   }
+
   useEffect(() => {
     getAllHomeworks();
   }, [])
@@ -39,7 +40,7 @@ const HomeWork = ({ userId }: any) => {
             <th>Curso (temporada, lección)</th>
             <th>Fecha</th>
             <th>Descargar Tarea</th>
-            <th>Estatus</th>
+            <th >Estatus</th>
           </tr>
           {/* TABLAS */}
           {
@@ -55,7 +56,11 @@ const HomeWork = ({ userId }: any) => {
                   <td>{task.title}  ({task.season}, {task.lesson}) </td>
                   <td>{task.formatDate}</td>
                   <td></td>
-                  <td></td>
+                  <td style={{ padding: "0" }}>{
+                    task.status == false
+                      ? <Button status={task.status}>No revisada</Button>
+                      : <Button status={task.status}>Revisada</Button>
+                  }</td>
                 </tr>
               )
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const HWContainer = styled.div`
   display: flex;
@@ -49,4 +49,19 @@ tr{
     border-bottom: none;
  }
 }
+`;
+export const Button = styled.div<{status:any}>`
+  display: flex;
+  margin: auto;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+  padding: 10px;
+  color: white;
+  background: #E70000;
+  border-radius: 100px;
+  ${props => props.status == true && css`
+  background: #33C600;
+  `}
+  cursor: pointer;
 `;

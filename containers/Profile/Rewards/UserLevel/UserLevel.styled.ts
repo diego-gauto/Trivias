@@ -10,7 +10,7 @@ export const OuterProgress = styled.div`
   border-radius: 50%;
   cursor: pointer;
   &:hover{
-    background: black;
+    box-shadow: 0px 0px 5px 2px #6717CD;
     transition: 1s ease all;
   }
 `;

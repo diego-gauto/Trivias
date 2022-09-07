@@ -13,9 +13,10 @@ export const getPaidCourses = async (userId: any) => {
   return data
 }
 export const getHomeworks = async (userId: any) => {
-  const homeWorksRef = query(collection(db, "homeworks"), orderBy("createdAt", "asc"), where("professorId", "==", userId))
+  const homeWorksRef = query(collection(db, "homeworks"), orderBy("createdAt", "asc"), where("teacherId", "==", userId))
   let tempHomeWorks: any = [];
   const data = await getDocs(homeWorksRef);
+  console.log(tempHomeWorks)
   data.forEach((homeWork) => {
     tempHomeWorks.push({ ...homeWork.data(), id: homeWork.id });
   })
@@ -31,4 +32,13 @@ export const addReview = async (review: any) => {
     }
   );
   return 'exito'
+}
+export const getUserScore = async (userId: any) => {
+  const usersRef = query(collection(db, "users"), where("id", "==", userId))
+  let tempUsers: any = [];
+  const data = await getDocs(usersRef);
+  data.forEach((user) => {
+    tempUsers.push({ ...user.data(), id: user.id });
+  })
+  return tempUsers
 }

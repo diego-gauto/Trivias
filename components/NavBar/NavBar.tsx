@@ -92,6 +92,7 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
 
+
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 700) {
       setColor(1)
@@ -100,7 +101,7 @@ const NavBar = () => {
       setColor(0)
     }
   }
-
+  console.log(router);
   useEffect(
     () => {
       window.addEventListener('scroll', ChangeNav);
@@ -135,7 +136,8 @@ const NavBar = () => {
       </LogoContain>
       <NavTags>
         <Link href="/Preview">
-          <NavText pathname={pathname} color={color}>
+          <NavText pathname={pathname} color={color}
+            style={pathname == "/Preview" ? { fontWeight: 600 } : { fontWeight: 400 }}>
             Inicio
           </NavText>
         </Link>
@@ -145,7 +147,9 @@ const NavBar = () => {
         {
           (loggedIn && isAdmin) &&
           <Link href="/admin/General">
-            <NavText pathname={pathname} color={color}>
+            <NavText pathname={pathname} color={color}
+              style={pathname == "/admin/General" ? { fontWeight: 600 } : { fontWeight: 400 }}
+            >
               admin
             </NavText>
           </Link>
@@ -157,7 +161,9 @@ const NavBar = () => {
             <UserContain>
               <UserLevel />
               <Link href="/Profile">
-                <NavText pathname={pathname} color={color}>
+                <NavText pathname={pathname} color={color}
+                  style={pathname == "/Profile" ? { fontWeight: 600 } : { fontWeight: 400 }}
+                >
                   {userData ? userData.name : "Bienvenido"}
                 </NavText>
               </Link>
