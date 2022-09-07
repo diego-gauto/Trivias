@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
 import {
   Button,
   ButtonContain,
@@ -15,6 +15,7 @@ import {
   Folder,
   IconContain,
   Input,
+  ButtonNewCourse,
   InputBig,
   InputContain,
   InputContain2,
@@ -30,8 +31,7 @@ import {
   SelectContain,
 } from "./Select/SelectStyles.styled";
 import { getUsers } from "../../../../store/actions/courseActions";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../../firebase/firebaseConfig";
+import { CourseName } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -83,6 +83,7 @@ const CourseForm_Create = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [openCourse, setOpenCourse] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
@@ -97,9 +98,6 @@ const CourseForm_Create = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log(1);
-
-    console.log("a")
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -130,15 +128,12 @@ const CourseForm_Create = () => {
     };
 
     createCourse(signUpData).then(() => {
-
       window.location.href = "/admin/Courses";
-      console.log("done!")
     });
 
   }
 
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -156,12 +151,26 @@ const CourseForm_Create = () => {
     getProffessors();
   }, [])
 
-  console.log(price)
   return (
-    <CourseFormContain>
+    <CourseFormContain onClick={() => { setOpenCourse(true) }}>
       {/* LINEA 1 */}
+      <TitleContain>
+        <CourseName>
+          Crear Curso Nuevo
+        </CourseName>
+        {
+          openCourse == false &&
+          <ButtonNewCourse>+</ButtonNewCourse>
+        }
+        {
+          openCourse == true &&
+          <ButtonNewCourse onClick={(e) => {
+            e.stopPropagation(); setOpenCourse(false)
+          }}>-</ButtonNewCourse>
+        }
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      </TitleContain>
+      {openCourse && <form onSubmit={handleSubmit(onSubmit)}>
         <InputForm >
           <InputContain>
             <Label>Título del Curso</Label>
@@ -429,7 +438,7 @@ const CourseForm_Create = () => {
 
 
         </InputForm>
-      </form>
+      </form>}
     </CourseFormContain>
   )
 }

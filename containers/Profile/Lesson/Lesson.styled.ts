@@ -5,6 +5,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width:100%;
   @font-face{
     font-family:Montserrat;
     src:url(../fonts/Montserrat-VariableFont_wght.ttf);

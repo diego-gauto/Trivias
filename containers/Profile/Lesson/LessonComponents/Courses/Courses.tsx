@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { number } from 'yup';
 import CourseProgress from '../Progress/CourseProgress';
-import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer } from './Courses.styled';
+import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
 const Courses = ({ id, course, data, userId, season, lesson }: any) => {
@@ -22,6 +22,9 @@ const Courses = ({ id, course, data, userId, season, lesson }: any) => {
   }
   return (
     <MainContainer>
+      <CloseButton>
+        x
+      </CloseButton>
       <CourseProgress title={course?.courseTittle} season={season} lesson={lesson} course={course} userId={userId} />
       {course?.seasons.map((season: any, index: any) => {
         return (

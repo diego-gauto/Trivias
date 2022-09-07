@@ -4,12 +4,24 @@ export const CourseFormContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 10px;
+  padding: 15px;
+  box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  cursor: pointer;
+}
 `;
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+`;
+export const ButtonNewCourse = styled.p`
+  margin: 0;
+  line-height: normal;
+  font-size:30px;
+  font-weight:800;
+  font-family:Nunito;
+  cursor:pointer;
 `;
 export const Button = styled.button`
   font-size: 16px;

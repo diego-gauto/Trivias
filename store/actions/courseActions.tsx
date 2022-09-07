@@ -198,9 +198,11 @@ export const addHomework = async (data: any) => {
   );
   return 'exito'
 }
-export const addHistoryCourse = async (course: any, userId: any) => {
+export const addHistoryCourse = async (course: any, userId: any, season: any, lesson: any) => {
   course.userId = userId;
   course.viewed = new Date();
+  course.season = parseInt(season);
+  course.lesson = parseInt(lesson);
   const docRef = await setDoc(
     doc(db, "viewedCourses", `${course.documentID}-${userId}`),
     {
@@ -215,7 +217,7 @@ export const getViewedCourses = async (userdId: any) => {
   querySnapshot.forEach((doc) => {
     courses.push({ ...doc.data(), id: doc.id });
   });
-  return courses[0];
+  return courses;
 }
 // export const getUsers = async () => {
 //   const docRef = doc(db, "users", role);

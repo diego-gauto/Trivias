@@ -11,24 +11,53 @@ import {
 import Select from './Select/Select';
 
 const Pay = () => {
-  const [invoice, setInvoice] = useState([])
+  let today = new Date().getTime() / 1000;
+  let weekAgo = today - 604800;
+  let twoWeeksAgo = today - 1209600;
+  const [invoice, setInvoice] = useState([]);
+  const [tempInvoice, setTempInvoice] = useState<any>([]);
+
   const getAllInvoice = () => {
+    let tempInvoice: any = [];
     getInvoice().then((res) => {
       res.forEach((element: any) => {
-        let tempDate = new Date(element.paidAt.seconds * 1000);
+        let tempDate: any = new Date(element.paidAt.seconds * 1000);
         let tempDay = tempDate.getDate()
         let tempMonth = tempDate.getMonth()
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-        element.amount = element.amount / 100
+        element.amount = element.amount / 100;
+
+        if (element.paidAt.seconds > weekAgo) {
+          tempInvoice.push(element);
+        }
       });
-      console.log(res)
+      setTempInvoice(tempInvoice);
       setInvoice(res);
     })
   }
   useEffect(() => {
     getAllInvoice();
-  }, [])
+  }, []);
+
+  const handleClick = (value: any) => {
+    let tempInvoices: any = [];
+    console.log(invoice);
+
+    invoice.forEach((element: any) => {
+      if (element.paidAt.seconds > twoWeeksAgo && value == 2) {
+        tempInvoices.push(element);
+        console.log(1);
+
+      }
+      if (element.paidAt.seconds > weekAgo && value == 1) {
+        tempInvoices.push(element);
+      }
+    });
+    console.log(tempInvoices);
+
+    setTempInvoice([...tempInvoices]);
+  }
 
   return (
     <AdminContain>
@@ -38,7 +67,7 @@ const Pay = () => {
           <TitleContain>
             <Title>Ventas</Title>
             <ButtonIcon>
-              <Select />
+              <Select handleClick={handleClick} />
             </ButtonIcon>
           </TitleContain>
           <Table id="Pay">
@@ -53,7 +82,7 @@ const Pay = () => {
               </tr>
               {/* TABLAS */}
               {
-                invoice.map((invoice: any, index) => {
+                tempInvoice.map((invoice: any, index: any) => {
                   return (
                     <tr key={"allPayment" + index}>
                       <td>
@@ -77,13 +106,15 @@ const Pay = () => {
                       <td>{invoice.formatDate}</td>
                       <td style={{ fontWeight: 600 }}>$ {invoice.amount}.00</td>
                       <td>{invoice.product}</td>
-                      <td>
+                      {invoice.method == 'stripe' ? <td>
                         {
                           invoice.brand != null &&
                           <IconContain><Method brand={invoice.brand} /></IconContain>
                         }
 
-                      </td>
+                      </td> : <td>
+                        <IconContain><Method brand={'paypal'} /></IconContain>
+                      </td>}
                     </tr>
                   )
                 })
