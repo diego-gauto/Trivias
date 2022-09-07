@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import router from "next/router";
 
+import { LOGIN_PATH } from "../../../../constants/paths";
 import { PurpleButton, TransparentButton } from "../../Module1/Module1.styled";
 import {
   AboutContain,
