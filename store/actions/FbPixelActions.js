@@ -13,7 +13,6 @@ export const completeRegistrationEvent = () => {
   return async (dispatch) => {
       dispatch({ type: "COMPLETE_REGISTRATION_EVENT_START" });
       ReactPixel.track('CompleteRegistration');
-      console.log("Registered 'CompleteRegistration' event in FB Pixel");
       dispatch({ type: "COMPLETE_REGISTRATION_EVENT_SUCCESS" });
   };
 };

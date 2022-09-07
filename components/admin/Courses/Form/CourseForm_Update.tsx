@@ -143,12 +143,10 @@ const CourseForm = (props: ICourseForm_Update) => {
     updateCourse(signUpData, images).then(() => {
 
       window.location.href = "/admin/Courses";
-      console.log("done!")
     });
 
   }
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {

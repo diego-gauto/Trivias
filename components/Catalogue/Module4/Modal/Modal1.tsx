@@ -1,17 +1,46 @@
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link';
-import { PurpleButton, TransparentButton } from '../../Module1/Module1.styled';
+import React, { useEffect, useState } from "react";
+
+import router from "next/router";
+
+import { LOGIN_PATH } from "../../../../constants/paths";
+import { PurpleButton, TransparentButton } from "../../Module1/Module1.styled";
 import {
-  AboutContain, BackgroundOverlay, ButtonContain,
-  Container, CourseContain, Cross, Data, CardImage,
-  Datacontain, DataSpan, Description,
-  EpisodeContain, EpisodeInfo, EpisodeTime, EpisodeTitle,
-  ImageBack, LessonContain, LessonTitle, ModalBackground,
-  ModalCont, ModalContain, ModalMod, SeasonContain, SubTitle,
-  Text, TextContainer, Title, Titles, VideoContain, Lock, PlayIcon, InsideContent, InsideText, ContainVideo,
-} from '../../Module3/Modal/Modal1.styled';
-import SelectModule4 from './SelectModule4';
-import router from 'next/router';
+  AboutContain,
+  BackgroundOverlay,
+  ButtonContain,
+  CardImage,
+  Container,
+  ContainVideo,
+  CourseContain,
+  Cross,
+  Data,
+  Datacontain,
+  DataSpan,
+  Description,
+  EpisodeContain,
+  EpisodeInfo,
+  EpisodeTime,
+  EpisodeTitle,
+  ImageBack,
+  InsideContent,
+  InsideText,
+  LessonContain,
+  LessonTitle,
+  Lock,
+  ModalBackground,
+  ModalCont,
+  ModalContain,
+  ModalMod,
+  PlayIcon,
+  SeasonContain,
+  SubTitle,
+  Text,
+  TextContainer,
+  Title,
+  Titles,
+  VideoContain,
+} from "../../Module3/Modal/Modal1.styled";
+import SelectModule4 from "./SelectModule4";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
@@ -27,9 +56,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
         { pathname: 'Purchase', query: { type: 'course', id: course.id } }
       )
     } else {
-      router.push(
-        { pathname: 'auth/Login' }
-      )
+      router.push(LOGIN_PATH)
     }
   }
   useEffect(() => {

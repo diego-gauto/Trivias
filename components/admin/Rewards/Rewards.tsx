@@ -31,7 +31,6 @@ const Rewards = () => {
     getBanner().then((res) => {
       setImage(res?.path)
       setBanner(res);
-      console.log(res);
     })
   }
 
@@ -39,7 +38,6 @@ const Rewards = () => {
     updateBanner(banner);
   }
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -47,10 +45,8 @@ const Rewards = () => {
       setBanner({ ...banner, format: reader.result })
     };
   }
-  console.log(banner.path)
 
   useEffect(() => {
-    console.log('hola')
     getRewardBanner();
   }, [])
   return (

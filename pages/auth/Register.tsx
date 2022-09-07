@@ -5,11 +5,13 @@ import "react-phone-number-input/style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
+import { LOGIN_PATH } from "../../constants/paths";
 import {
   AllButtons,
   Background,
@@ -35,7 +37,6 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signUpWithCreds } from "../../store/actions/AuthActions";
-import { useRouter } from "next/router";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -260,7 +261,7 @@ const Register = () => {
             </AllButtons>
             <Text3 >
               ¿Ya eres parte? &nbsp;
-              <Link href="/auth/Login">
+              <Link href={LOGIN_PATH}>
                 <LinkText >
                   Iniciar Sesion
                 </LinkText>

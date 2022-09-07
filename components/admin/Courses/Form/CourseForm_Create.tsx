@@ -7,15 +7,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
+import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { CourseName } from "../AllCourses.styled";
 import {
   Button,
   ButtonContain,
+  ButtonNewCourse,
   CourseFormContain,
   Folder,
   IconContain,
   Input,
-  ButtonNewCourse,
   InputBig,
   InputContain,
   InputContain2,
@@ -30,8 +32,6 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
-import { getUsers } from "../../../../store/actions/courseActions";
-import { CourseName } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup

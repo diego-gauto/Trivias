@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { getInvoice } from '../../../store/actions/PaymentActions';
+import React, { useEffect, useState } from "react";
+
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
-import SideBar from '../SideBar';
-import { AdminContain, Table } from '../SideBar.styled';
+import { getInvoice } from "../../../store/actions/PaymentActions";
+import SideBar from "../SideBar";
+import { AdminContain, Table } from "../SideBar.styled";
 import {
-  PayContain, Title, TitleContain, Container,
-  IconContain, Profile, ProfileContain,
-  ButtonIcon, Method, Imagecontain
-} from './Pay.styled';
-import Select from './Select/Select';
+  ButtonIcon,
+  Container,
+  IconContain,
+  Imagecontain,
+  Method,
+  PayContain,
+  Profile,
+  ProfileContain,
+  Title,
+  TitleContain,
+} from "./Pay.styled";
+import Select from "./Select/Select";
 
 const Pay = () => {
   let today = new Date().getTime() / 1000;

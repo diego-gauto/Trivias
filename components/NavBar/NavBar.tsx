@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { DEFAULT_USER_IMG } from "../../constants/paths";
+import { DEFAULT_USER_IMG, LOGIN_PATH } from "../../constants/paths";
 import RespLevel from "../../containers/Profile/Rewards/UserLevel/RespLevel";
 import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
@@ -178,7 +178,7 @@ const NavBar = () => {
         }
         {!loggedIn &&
           <>
-            <Link href="/auth/Login">
+            <Link href={LOGIN_PATH}>
               <NavText pathname={pathname} color={color}>
                 Iniciar Sesión
               </NavText>
@@ -199,7 +199,7 @@ const NavBar = () => {
               <LogoS />
             </Link>
             <TagsResp>
-              <Link href="/auth/Login">
+              <Link href={LOGIN_PATH}>
                 <a>
                   Ingresar
                 </a>
