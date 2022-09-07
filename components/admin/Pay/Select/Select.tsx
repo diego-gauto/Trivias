@@ -21,7 +21,7 @@ const Select = ({ handleClick }: any) => {
               name="category"
               value="Temporada 1"
             />
-            <Label > Semana 1</Label>
+            <Label > Semana pasada</Label>
           </Option>
           <Option onClick={() => { setValue("Semana 2"); setOpen(false); handleClick(2) }}>
             <input
@@ -30,7 +30,7 @@ const Select = ({ handleClick }: any) => {
               name="category"
               value="Temporada 2"
             />
-            <Label> Semana 2</Label>
+            <Label> Hace dos semanas</Label>
           </Option>
         </OptionContain>
       }

@@ -250,7 +250,7 @@ const uploadImageLesson = (image: any, name: any) => {
 }
 
 export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
-  lesson.users = {}
+  lesson.users = []
   lesson.imageReference = `${lesson.title}-${uuidv4()}`
   lesson.image = await uploadImageLesson(lesson.image, lesson.imageReference);
   if (lesson.extra.length > 0) {

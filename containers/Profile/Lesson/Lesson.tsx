@@ -1,18 +1,15 @@
 import React from 'react'
 import { Container, FirstContainer, MainContainer, SecondContainer } from './Lesson.styled';
-import Courses from './LessonComponents/Courses/Courses';
 import Modules from './LessonComponents/Modules/Modules';
-import CourseProgress from './LessonComponents/Progress/CourseProgress';
 import Video from './LessonComponents/Video/Video';
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
-import Link from "next/link";
 import { db } from "../../../firebase/firebaseConfig";
 import { getPaidCourses } from '../../../store/actions/UserActions';
 import { addHistoryCourse, getComments, getWholeCourse } from '../../../store/actions/courseActions';
-import { useRouter } from "next/router";
-import { number } from 'yup';
+import router, { useRouter } from "next/router";
+
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,8 +24,8 @@ const Lesson = () => {
 
   useEffect(() => {
     if (course) {
-      let temp_lesson: any;
-      let temp_comments: any;
+      let temp_lesson;
+      let temp_comments;
       temp_lesson = course.seasons[season].lessons[lesson];
       temp_lesson.seasonId = course?.seasons[season].id
       temp_lesson.courseId = course.id
@@ -56,7 +53,7 @@ const Lesson = () => {
           if (res.courseType == 'Gratis') {
             setCourse(res);
           }
-          if (res.courseType == 'Producto' || res.courseType == 'Mensuak') {
+          if (res.courseType == 'Producto' || res.courseType == 'Mensual') {
             router.push(
               { pathname: 'auth/Login' }
             )
@@ -70,6 +67,9 @@ const Lesson = () => {
 
   const fetchDB_data = async () => {
     try {
+      getComments().then((res) => {
+        setComments(res);
+      })
       let date = new Date().getTime() / 1000;
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
@@ -101,9 +101,6 @@ const Lesson = () => {
               }
               setCourse(res);
             })
-          })
-          getComments().then((res) => {
-            setComments(res);
           })
           setUserData({ ...e.data(), id: e.id });
         });
