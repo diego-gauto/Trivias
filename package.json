@@ -42,7 +42,7 @@
   "devDependencies": {
     "@types/dompurify": "^2.3.3",
     "@types/react": "18.0.1",
-    "@types/react-input-mask": "^3.0.1",
+    "@types/react-input-mask": "1.2.1 ",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.8",
     "@types/styled-components": "^5.1.26",
