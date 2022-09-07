@@ -9,10 +9,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createCourse } from "../../../../store/actions/AdminActions";
 import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
-import { ChevD, ChevU, CourseName, TitleContain } from "../AllCourses.styled";
+import { CourseName } from "../AllCourses.styled";
 import {
   Button,
   ButtonContain,
+  ButtonNewCourse,
   CourseFormContain,
   Folder,
   IconContain,
@@ -127,12 +128,15 @@ const CourseForm_Create = () => {
     };
 
     createCourse(signUpData).then(() => {
+
       window.location.href = "/admin/Courses";
+      console.log("done!")
     });
 
   }
 
   const getImage = (file: any) => {
+    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -150,6 +154,7 @@ const CourseForm_Create = () => {
     getProffessors();
   }, [])
 
+  console.log(price)
   return (
     <CourseFormContain>
       {/* LINEA 1 */}
@@ -159,11 +164,11 @@ const CourseForm_Create = () => {
         </CourseName>
         {
           openCourse == false &&
-          <ChevD onClick={() => { setOpenCourse(true) }} />
+          <ButtonNewCourse onClick={() => { setOpenCourse(true) }}>+</ButtonNewCourse>
         }
         {
           openCourse == true &&
-          <ChevU onClick={() => { setOpenCourse(false) }} />
+          <ButtonNewCourse onClick={() => { setOpenCourse(false) }}>-</ButtonNewCourse>
         }
 
       </TitleContain>
