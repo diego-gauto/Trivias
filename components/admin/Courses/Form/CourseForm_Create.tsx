@@ -128,15 +128,12 @@ const CourseForm_Create = () => {
     };
 
     createCourse(signUpData).then(() => {
-
       window.location.href = "/admin/Courses";
-      console.log("done!")
     });
 
   }
 
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -154,9 +151,8 @@ const CourseForm_Create = () => {
     getProffessors();
   }, [])
 
-  console.log(price)
   return (
-    <CourseFormContain>
+    <CourseFormContain onClick={() => { setOpenCourse(true) }}>
       {/* LINEA 1 */}
       <TitleContain>
         <CourseName>
@@ -164,11 +160,13 @@ const CourseForm_Create = () => {
         </CourseName>
         {
           openCourse == false &&
-          <ButtonNewCourse onClick={() => { setOpenCourse(true) }}>+</ButtonNewCourse>
+          <ButtonNewCourse>+</ButtonNewCourse>
         }
         {
           openCourse == true &&
-          <ButtonNewCourse onClick={() => { setOpenCourse(false) }}>-</ButtonNewCourse>
+          <ButtonNewCourse onClick={(e) => {
+            e.stopPropagation(); setOpenCourse(false)
+          }}>-</ButtonNewCourse>
         }
 
       </TitleContain>
