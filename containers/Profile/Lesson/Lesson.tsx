@@ -1,18 +1,20 @@
-import React from 'react'
-import { Container, FirstContainer, MainContainer, SecondContainer } from './Lesson.styled';
-import Courses from './LessonComponents/Courses/Courses';
-import Modules from './LessonComponents/Modules/Modules';
-import CourseProgress from './LessonComponents/Progress/CourseProgress';
-import Video from './LessonComponents/Video/Video';
-import { useEffect, useState } from "react";
-import { useAuth } from "../../../hooks/useAuth";
-import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
-import Link from "next/link";
-import { db } from "../../../firebase/firebaseConfig";
-import { getPaidCourses } from '../../../store/actions/UserActions';
-import { addHistoryCourse, getComments, getWholeCourse } from '../../../store/actions/courseActions';
+import React, { useEffect, useState } from "react";
+
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { number } from 'yup';
+
+import { LOGIN_PATH } from "../../../constants/paths";
+import { db } from "../../../firebase/firebaseConfig";
+import { useAuth } from "../../../hooks/useAuth";
+import {
+  addHistoryCourse,
+  getComments,
+  getWholeCourse,
+} from "../../../store/actions/courseActions";
+import { getPaidCourses } from "../../../store/actions/UserActions";
+import { Container, FirstContainer, MainContainer } from "./Lesson.styled";
+import Modules from "./LessonComponents/Modules/Modules";
+import Video from "./LessonComponents/Video/Video";
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -55,9 +57,7 @@ const Lesson = () => {
             setCourse(res);
           }
           if (res.courseType == 'Producto' || res.courseType == 'Mensuak') {
-            router.push(
-              { pathname: 'auth/Login' }
-            )
+            router.push(LOGIN_PATH)
           }
         })
       }

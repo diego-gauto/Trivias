@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
+
+import { useRouter } from "next/router";
+
+import { getWholeCourses } from "../../../store/actions/courseActions";
+import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
   ImageContent,
   InsideContent,
@@ -8,12 +12,11 @@ import {
   Text1,
   Text2,
   Text3,
-  TextContain
+  TextContain,
 } from "../Module3/Module3.styled";
 import Modal1 from "./Modal/Modal1";
-import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain } from "./Module4.styled";
-import { useRouter } from 'next/router'
-import { getPaidCourses } from "../../../store/actions/UserActions";
+import { Cardcontent, CardContain, CardImage, Title, VideoInfo, Viewpay } from "./Module4.styled";
+
 const Module4 = ({ user }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
@@ -74,9 +77,7 @@ const Module4 = ({ user }: any) => {
         });
       }
       if (!user && data.courseType == 'Mensual') {
-        router.push(
-          { pathname: 'auth/Login' }
-        )
+        router.push(LOGIN_PATH)
       }
     }
     setCourse(data)

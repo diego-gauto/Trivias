@@ -1,10 +1,13 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
+
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
+
+import router from "next/router";
+
+import { LOGIN_PATH } from "../../../constants/paths";
 import { getViewedCourses, getWholeCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
-
 import {
   ButtonContain,
   Container,
@@ -45,9 +48,7 @@ const Module1 = ({ user }: any) => {
         });
       }
       if (!user && (course.courseType == 'Mensual' || course.courseType == 'Producto')) {
-        router.push(
-          { pathname: 'auth/Login' }
-        )
+        router.push(LOGIN_PATH)
       }
     }
   }
