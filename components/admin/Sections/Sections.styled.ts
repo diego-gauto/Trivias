@@ -40,6 +40,28 @@ export const Container = styled.div`
   background-color: white;
   border: 1px solid #41417e;
 `;
+export const BackGround = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: #f3f3f5;
+`;
+export const AdminRoleChange = styled.div`
+display: flex;
+font-size: 20px;
+align-items: center;
+flex-direction: column;
+min-width: 342;
+width: 300px;
+height: 200px;
+padding: 15px;
+justify-content: center;
+gap: 30px;
+border-radius: 10px;
+margin-top: 85px;
+color: #41417e;
+box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+`;
 export const TitleContain = styled.div`
   display: flex;
   padding: 20px;

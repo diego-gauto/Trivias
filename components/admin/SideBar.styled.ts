@@ -39,6 +39,13 @@ td{
   padding-left: 10px;
   padding-block: 15px;
   text-align: left;
+  &:last-child{
+    color: #6717CD;
+    &:hover{
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }
   th{
     padding-left: 10px;
