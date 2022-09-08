@@ -48,6 +48,9 @@ const UserCardData = ({ user, setIsVisible, courses }: any) => {
       setPaidCourses(tempCourses);
     })
   }
+  const handleCourse = () => {
+    getUserCourses();
+  }
 
   useEffect(() => {
     getUserCourses();
@@ -131,7 +134,7 @@ const UserCardData = ({ user, setIsVisible, courses }: any) => {
             <Pay2 />
           </LastContainer>
         </PayContain></>
-      <Modal1 show={show} setShow={setShow} user={user} courses={courses} />
+      <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
     </UserContain>
   )
 }

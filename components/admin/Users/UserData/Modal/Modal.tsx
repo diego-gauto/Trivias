@@ -31,7 +31,7 @@ import {
 } from "./Modal.styled";
 import Select from "./Select/Select";
 
-const Modal1 = ({ show, setShow, user, courses }: any) => {
+const Modal1 = ({ show, setShow, user, courses, handleCourse }: any) => {
   const [course, setCourse] = useState<DocumentData>({});
   const [days, setDays] = useState<number>(0);
 
@@ -50,6 +50,7 @@ const Modal1 = ({ show, setShow, user, courses }: any) => {
         duration: (new Date().getTime() / 1000) + tempDays
       }
       addCourseUser(tempCourse, user.id).then(() => {
+        handleCourse();
         alert('Curso agregado con exito!');
         handleClose();
         setCourse({});
