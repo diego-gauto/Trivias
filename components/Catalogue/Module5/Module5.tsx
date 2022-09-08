@@ -32,24 +32,22 @@ import {
   Title,
 } from "./Module5.styled";
 
-const Module5 = ({ user }: any) => {
+const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
 
-  const getCourses = () => {
-    let temp_courses: any = [];
-    getWholeCourses().then((response) => {
-      response.forEach((element: any) => {
+  useEffect(() => {
+    if (course) {
+      let temp_courses: any = [];
+      course.forEach((element: any) => {
         if (element.courseType == 'Mensual') {
           element.courseAbout = element.courseAbout.slice(0, 50)
           temp_courses.push(element);
         }
       });
       setCourses(temp_courses);
-    })
-  }
-  useEffect(() => {
-    getCourses();
-  }, [])
+    }
+  }, [course])
+
   return (
     <MainContainer>
       <ImageContain>
