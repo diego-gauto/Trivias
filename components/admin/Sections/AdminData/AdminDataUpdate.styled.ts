@@ -45,6 +45,25 @@ export const OptionRoleContain = styled.div`
   box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
   z-index: 1;
 `;
+export const IconRoleContain = styled.div`
+  display: flex;
+  position: relative;
+  width: 150px;
+  top: -40px;
+`;
+export const SelectedRoleContain = styled.div`
+  display: flex;
+  cursor: pointer;
+  font-size: 15px;
+  padding-left: 15px;
+  width: 150px;
+  height: 30px;
+  font-family: 'Montserrat', sans-serif;
+  padding-block: 3px;
+  border-radius: 30px;
+  border: 1px solid #6717CD;
+  z-index: 5;
+`;
 export const FirstBox = styled.div`
   display: flex;
   gap: 10px;

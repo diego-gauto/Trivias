@@ -2,35 +2,54 @@
 
 import { useState } from "react";
 
+import { SubmitHandler } from "react-hook-form";
+
+import { updateRole } from "../../../../store/actions/AdminActions";
 import { SelectContain } from "../../Coupons/Coupons.styled";
-import { IconContain, InputContain } from "../../Courses/Form/CourseForm_Create.styled";
+import { Button, ButtonContain, InputContain } from "../../Courses/Form/CourseForm_Create.styled";
 import { CaretD2, Label2 } from "../../Courses/Form/Select/SelectStyles.styled";
-import { Selected } from "../../Pay/Select/Select.styled";
-import Modal1 from "../../Users/UserData/Modal/Modal";
 import {
   CloseIcon,
   Columns,
   ColumnContain,
   Courses,
   FirstBox,
+  IconRoleContain,
   Info,
   Label,
   OptionRole,
   OptionRoleContain,
   ProfileContain,
   ProfilePic,
+  SelectedRoleContain,
   Title,
   TitleContain,
   UserContain,
 } from "./AdminDataUpdate.styled";
 
-const AdminDataUpdate = ({ admin, role, setIsVisible }: any) => {
-  const [show, setShow] = useState(false);
+const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
   const [value, setValue] = useState<any>("");
-  console.log(typeof role)
 
+  const submitChanges: SubmitHandler<any> = (userValue: { newRole: any; }) => {
+    var newRole = ""
+    if (value !== undefined && value !== null) {
+      newRole = value
+    }
+
+    let adminData = {
+      data: {
+        role: userValue.newRole
+      }
+    };
+    console.log("role updated: ", adminData)
+
+    updateRole(adminData, adminID).then(() => {
+      console.log("role updated: ", adminData)
+    });
+
+  }
 
   return (
     <UserContain>
@@ -65,12 +84,12 @@ const AdminDataUpdate = ({ admin, role, setIsVisible }: any) => {
             </Info>
             <InputContain>
               <Info>Editar rol</Info>
-              <IconContain>
+              <IconRoleContain>
                 <SelectContain key={1}>
-                  <Selected onClick={() => { setOpen(true); setUpdatedRole(true) }}>
+                  <SelectedRoleContain onClick={() => { setOpen(true); setUpdatedRole(true) }}>
                     {updatedRole != true ? (role) : (value)}
                     <CaretD2 />
-                  </Selected>
+                  </SelectedRoleContain>
                   {
                     open == true &&
                     <OptionRoleContain>
@@ -95,7 +114,7 @@ const AdminDataUpdate = ({ admin, role, setIsVisible }: any) => {
                     </OptionRoleContain>
                   }
                 </SelectContain>
-              </IconContain>
+              </IconRoleContain>
             </InputContain>
           </ColumnContain>
           <ColumnContain>
@@ -117,12 +136,14 @@ const AdminDataUpdate = ({ admin, role, setIsVisible }: any) => {
                 {!admin.phoneNumber ? "N/A" : admin.phoneNumber}
               </Label>
             </Info>
+            <ButtonContain>
+              <Button onClick={submitChanges}>actualizar</Button>
+            </ButtonContain>
           </ColumnContain>
         </Columns><Courses>
         </Courses>
       </>
 
-      <Modal1 show={show} setShow={setShow} />
     </UserContain>
   )
 }

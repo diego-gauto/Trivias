@@ -23,6 +23,7 @@ const Sections = () => {
   const [users, setUsers] = useState<Array<any>>([]);
   const [isVisible, setIsVisible] = useState<boolean>();
   const [role, setRole] = useState<string>();
+  const [adminID, setAdminID] = useState<string>();
   const [selectedAdmin, setSelectedAdmin] = useState<Array<any>>([]);
 
   const editRole = async (id: string): Promise<any> => {
@@ -32,6 +33,7 @@ const Sections = () => {
     if (newUser?.uid) {
       newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
       setSelectedAdmin(newUser);
+      setAdminID(id);
       setRole(newUser.role);
       setIsVisible(true);
     }
@@ -106,7 +108,7 @@ const Sections = () => {
       </GeneralContain>
       {
         isVisible === true &&
-        <AdminDataUpdate admin={selectedAdmin} role={role} setIsVisible={setIsVisible} />
+        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} role={role} setIsVisible={setIsVisible} />
       }
     </AdminContain>
   )

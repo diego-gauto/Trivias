@@ -5,8 +5,8 @@ export const Selected = styled.div`
   cursor: pointer;
   font-size: 15px;
   padding-left: 15px;
-  width: 150px;
-  height: 30px;
+  //width: 150px;
+  //height: 30px;
   font-family: 'Montserrat', sans-serif;
   padding-block: 3px;
   border-radius: 30px;

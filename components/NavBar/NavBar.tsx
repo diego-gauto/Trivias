@@ -78,7 +78,7 @@ const NavBar = () => {
           userData = e.data()
         });
         setUserData(userData)
-        if (userData.role == "admin") {
+        if (userData.role == "admin" || userData.role == "superAdmin") {
           setIsAdmin(true)
         }
         return userData

@@ -93,7 +93,6 @@ const UsersList = () => {
         role: user.role ?? "",
         id: user.id,
       }));
-      console.log("mainr", mainResponse)
       setUsers(usersData);
       setAllUsers(usersData);
     }

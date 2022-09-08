@@ -59,6 +59,21 @@ export const updateCourse = async (signUpData: { data: any; }, images: any) => {
 
 }
 
+export const updateRole = async (adminData: { data: any; }, adminID: any) => {
+  const {
+    data,
+  } = adminData;
+
+  try {
+    return await db.collection('users').doc(adminID).update(data);
+  } catch (error) {
+    let docCreationError = new Error(`Error updating user document: ${error}`);
+    console.error(docCreationError);
+    throw (docCreationError);
+  }
+
+}
+
 /*
   const handleChangeResolved = async (id, value) => {
     const doc = db.collection("newsletter").doc(id);
