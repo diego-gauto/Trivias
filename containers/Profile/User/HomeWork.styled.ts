@@ -65,3 +65,12 @@ export const Button = styled.div<{status:any}>`
   `}
   cursor: pointer;
 `;
+export const Download = styled.div`
+  display: flex;
+  color: black;
+  text-decoration: none;
+  padding: 15px;
+  &:hover{
+    font-weight: 600;
+  }
+`;

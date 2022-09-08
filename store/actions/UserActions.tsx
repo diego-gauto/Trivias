@@ -16,14 +16,12 @@ export const getHomeworks = async (userId: any) => {
   const homeWorksRef = query(collection(db, "homeworks"), orderBy("createdAt", "asc"), where("teacherId", "==", userId))
   let tempHomeWorks: any = [];
   const data = await getDocs(homeWorksRef);
-  console.log(tempHomeWorks)
   data.forEach((homeWork) => {
     tempHomeWorks.push({ ...homeWork.data(), id: homeWork.id });
   })
   return tempHomeWorks
 }
 export const addReview = async (review: any) => {
-  console.log(review)
 
   const docRef = await addDoc(
     collection(db, "reviewHomeWork"),

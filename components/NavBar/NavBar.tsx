@@ -91,7 +91,8 @@ const NavBar = () => {
   const [color, setColor] = useState<any>(0)
   const router = useRouter();
   let { pathname }: any = router;
-
+  var position = pathname.substring(0, 6);
+  // console.log(`/admin${pathname}`)
 
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 700) {
@@ -101,7 +102,6 @@ const NavBar = () => {
       setColor(0)
     }
   }
-  console.log(router);
   useEffect(
     () => {
       window.addEventListener('scroll', ChangeNav);
@@ -148,7 +148,7 @@ const NavBar = () => {
           (loggedIn && isAdmin) &&
           <Link href="/admin/General">
             <NavText pathname={pathname} color={color}
-              style={pathname == "/admin/General" ? { fontWeight: 600 } : { fontWeight: 400 }}
+              style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: 400 }}
             >
               admin
             </NavText>
@@ -185,7 +185,9 @@ const NavBar = () => {
         {!loggedIn &&
           <>
             <Link href="/auth/Login">
-              <NavText pathname={pathname} color={color}>
+              <NavText pathname={pathname} color={color}
+                style={pathname == "/auth/Login" ? { fontWeight: 600 } : { fontWeight: 400 }}
+              >
                 Iniciar Sesión
               </NavText>
             </Link>

@@ -5,8 +5,24 @@ import { db } from '../../../../firebase/firebaseConfig';
 import { addReview, getUserScore } from '../../../../store/actions/UserActions';
 import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, InputContain, ButtonContain, SafeContained } from './ModalHW.styled';
 
-const ModalHW = ({ show, setShow, data }: any) => {
-  const [user, setUser] = useState<any>()
+interface data {
+  id: string,
+  lesson: number,
+  season: number,
+  status: boolean,
+  title: string,
+  userId: string,
+  courseId: string,
+  userEmail: string,
+  userName: string,
+}
+interface props {
+  show: boolean,
+  setShow: any,
+  data: data,
+}
+
+const ModalHW = ({ show, setShow, data }: props) => {
   const [userScore, setUserScore] = useState<number>(0)
   const [review, setReview] = useState<any>({})
   const handleClose = () => setShow(false);
@@ -20,15 +36,14 @@ const ModalHW = ({ show, setShow, data }: any) => {
       })
     }
   }
-  const updateScore = async () => {
 
-    const docRef = doc(db, 'users', user.id);
+  const updateScore = async () => {
+    const docRef = doc(db, 'users', data.userId);
     await updateDoc(docRef, {
       score: userScore + review.score
     })
   }
   const updateStatus = async () => {
-
     const docRef = doc(db, 'homeworks', data.id);
     await updateDoc(docRef, {
       status: true
@@ -36,7 +51,6 @@ const ModalHW = ({ show, setShow, data }: any) => {
   }
   const getUser = () => {
     getUserScore(data.userId).then((res) => {
-      setUser(res[0])
       setUserScore(res[0].score)
     })
   }
@@ -57,7 +71,6 @@ const ModalHW = ({ show, setShow, data }: any) => {
       })
     }
   }, [data])
-
 
   return (
     <ModContainer>
