@@ -15,8 +15,14 @@ import {
   SaveButton,
   SubscriptionButton,
 } from "./User.styled";
+import { PaymentMethodProps, UserDataProps } from "../../../interfaces/IUserData";
 
-const UserData = ({ data, pm }: any) => {
+interface props {
+  data: UserDataProps,
+  pm: any,
+}
+
+const UserData = ({ data, pm }: props) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const [user, setUser] = useState<any>({ data })
@@ -27,6 +33,7 @@ const UserData = ({ data, pm }: any) => {
     await updateDoc(docRef, {
       name: user.name,
       phoneNumber: user.phoneNumber,
+      country: user.country
     })
   }
 
@@ -57,8 +64,8 @@ const UserData = ({ data, pm }: any) => {
               Telefono
             </EditText>
             <EditInput
-              placeholder={data.phoneNumber == null ? 5512345678 : data.phoneNumber}
-              defaultValue={data.phoneNumber == null ? 5512345678 : data.phoneNumber}
+              placeholder={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
+              defaultValue={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
               onChange={(e) => {
                 setUser({ ...user, phoneNumber: e.target.value })
               }}
@@ -66,10 +73,11 @@ const UserData = ({ data, pm }: any) => {
           </Inputs>
           <Inputs>
             <EditText>
-              País
+              Escribe tu país
             </EditText>
             <EditInput
-              placeholder="Seleccionar país"
+              placeholder="Escribe tu país"
+              defaultValue={data.country}
               onChange={(e) => {
                 setUser({ ...user, country: e.target.value })
               }}
