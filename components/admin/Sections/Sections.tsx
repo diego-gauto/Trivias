@@ -8,9 +8,8 @@ import { db } from "../../../firebase/firebaseConfig";
 import { getSingleUser } from "../../../hooks/useAuth";
 import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
+import AdminDataUpdate from "./AdminData/AdminDataUpdate";
 import {
-  AdminRoleChange,
-  BackGround,
   Container,
   GeneralContain,
   GonvarTitle,
@@ -23,7 +22,8 @@ const Sections = () => {
   const usersCollectionRef = query(collection(db, "users"));
   const [users, setUsers] = useState<Array<any>>([]);
   const [isVisible, setIsVisible] = useState<boolean>();
-  const [selectedUser, setSelectedUser] = useState<Array<any>>([]);
+  const [role, setRole] = useState<string>();
+  const [selectedAdmin, setSelectedAdmin] = useState<Array<any>>([]);
 
   const editRole = async (id: string): Promise<any> => {
     setIsVisible(true);
@@ -31,8 +31,8 @@ const Sections = () => {
     const newUser: any = await getSingleUser(id);
     if (newUser?.uid) {
       newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
-      setSelectedUser(newUser);
-      console.log("selected", selectedUser)
+      setSelectedAdmin(newUser);
+      setRole(newUser.role);
       setIsVisible(true);
     }
   };
@@ -52,7 +52,9 @@ const Sections = () => {
         id: user.id,
       }));
       const getAdminUsers = usersData.filter((item) =>
-        item.role.includes("admin"));
+        item.role.includes("admin") ||
+        item.role.includes("superAdmin")
+      );
       setUsers(getAdminUsers);
     }
     getUsers();
@@ -104,19 +106,7 @@ const Sections = () => {
       </GeneralContain>
       {
         isVisible === true &&
-
-        <BackGround>
-
-          <AdminRoleChange>
-            <div>
-              user
-            </div>
-            Cambiar Rol
-            <div>superadmin: <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input></div>
-
-          </AdminRoleChange>
-
-        </BackGround>
+        <AdminDataUpdate admin={selectedAdmin} role={role} setIsVisible={setIsVisible} />
       }
     </AdminContain>
   )

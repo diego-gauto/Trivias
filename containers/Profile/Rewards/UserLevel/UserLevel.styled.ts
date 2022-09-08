@@ -10,8 +10,8 @@ export const OuterProgress = styled.div`
   border-radius: 50%;
   cursor: pointer;
   &:hover{
-    background: black;
-    transition: 1s ease all;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.25);
+    transition: .5s ease all;
   }
 `;
 export const ProgressSvg = styled.svg`
