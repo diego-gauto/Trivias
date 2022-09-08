@@ -3,7 +3,6 @@ export interface UserDataProps {
   phoneNumber: string,
   stripeId: string,
   id: string,
-  country: string,
   membership:{
     level:number,
     finalDate: number,

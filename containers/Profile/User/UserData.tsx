@@ -33,7 +33,6 @@ const UserData = ({ data, pm }: props) => {
     await updateDoc(docRef, {
       name: user.name,
       phoneNumber: user.phoneNumber,
-      country: user.country
     })
   }
 
@@ -68,18 +67,6 @@ const UserData = ({ data, pm }: props) => {
               defaultValue={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
               onChange={(e) => {
                 setUser({ ...user, phoneNumber: e.target.value })
-              }}
-            />
-          </Inputs>
-          <Inputs>
-            <EditText>
-              Escribe tu país
-            </EditText>
-            <EditInput
-              placeholder="Escribe tu país"
-              defaultValue={data.country}
-              onChange={(e) => {
-                setUser({ ...user, country: e.target.value })
               }}
             />
           </Inputs>
