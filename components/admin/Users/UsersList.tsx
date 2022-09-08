@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import CsvDownloader from "react-csv-downloader";
 
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, DocumentData, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { getSingleUser } from "../../../hooks/useAuth";
@@ -20,6 +20,7 @@ import {
   UserContain,
   UserShow,
 } from "./UsersList.styled";
+import { getWholeCourses } from "../../../store/actions/courseActions";
 
 export interface SelectedUser {
   id?: string;
@@ -54,17 +55,12 @@ const UsersList = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
-  const [selectedUser, setSelectedUser] = useState<Array<UserData>>([]);
+  const [courses, setCourses] = useState<Array<any>>([]);
+  const [selectedUser, setSelectedUser] = useState<any>({});
 
-  const openUserCardData = async (id: string) => {
+  const openUserCardData = async (user: DocumentData) => {
+    setSelectedUser(user);
     setIsVisible(true);
-
-    const newUser: SelectedUser | any = await getSingleUser(id);
-    if (newUser?.uid) {
-      newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
-      setSelectedUser(newUser);
-      setIsVisible(true);
-    }
   };
 
   const filterUsersByValue = (value: string): void => {
@@ -78,6 +74,18 @@ const UsersList = () => {
       item.created_at.includes(query));
     setUsers(filteredUsers);
   };
+
+  const getCoures = () => {
+    let tempCourses: Array<any> = [];
+    getWholeCourses().then((res) => {
+      res.forEach((element: DocumentData) => {
+        if (element.courseType == 'Producto') {
+          tempCourses.push(element)
+        }
+      });
+      setCourses(tempCourses)
+    })
+  }
 
   useEffect(() => {
 
@@ -98,6 +106,7 @@ const UsersList = () => {
       setAllUsers(usersData);
     }
     getUsers();
+    getCoures();
   }, []);
 
   return (
@@ -141,7 +150,7 @@ const UsersList = () => {
               {users.length > 0 && (
                 users.map((user, index): any => {
                   return (
-                    <tr key={index} onClick={() => openUserCardData(user.id)}>
+                    <tr key={index} onClick={() => openUserCardData(user)}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
@@ -163,7 +172,7 @@ const UsersList = () => {
         </Container>
         {
           isVisible === true &&
-          <UserCardData user={selectedUser} setIsVisible={setIsVisible} />
+          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} />
         }
       </UserContain>
     </AdminContain >
