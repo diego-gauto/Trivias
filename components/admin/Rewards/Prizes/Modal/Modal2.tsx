@@ -41,6 +41,7 @@ const Modal2 = ({ show, setShow }: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
+      console.log(file)
       setReward({ ...reward, path: reader.result })
     };
   }
@@ -134,6 +135,7 @@ const Modal2 = ({ show, setShow }: any) => {
               <input
                 type="file"
                 placeholder="Seleccionar archivo"
+                accept="image/png, image/jpg, image/jpeg"
                 onChange={(e) => { getImage(e.target.files) }}>
               </input>
             </Input2>

@@ -132,6 +132,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
               <input
                 type="file"
                 placeholder="Seleccionar archivo"
+                accept="image/png, image/jpg, image/jpeg"
                 onChange={(e) => { getImage(e.target.files) }}>
               </input>
             </Input2>
