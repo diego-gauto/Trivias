@@ -44,7 +44,6 @@ const Edit = () => {
   const [lesson, setLesson] = useState<any>({})
   const getThisLesson = () => {
     getLesson(routerState.courseID, routerState.seasonID, routerState.lessonID).then(res => {
-      console.log(res)
       setLesson(res)
     })
   }
@@ -60,9 +59,7 @@ const Edit = () => {
     let tempExtra: any = lesson.extra;
 
     file = Object.values(file);
-    console.log(file)
     file.forEach((element: any) => {
-      console.log(element.name)
       var reader = new FileReader();
       reader.readAsDataURL(element);
       reader.onload = (_event) => {
@@ -72,7 +69,6 @@ const Edit = () => {
     setLesson({ ...lesson, extra: tempExtra })
   }
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {

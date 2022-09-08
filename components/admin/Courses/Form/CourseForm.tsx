@@ -87,7 +87,6 @@ const CourseForm = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
-    console.log("a")
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -112,9 +111,7 @@ const CourseForm = () => {
     };
 
     createCourse(signUpData).then(() => {
-
       window.location.href = "/admin/Courses";
-      console.log("done!")
     });
 
   }

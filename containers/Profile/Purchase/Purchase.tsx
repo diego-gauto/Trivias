@@ -182,7 +182,6 @@ const Purchase = () => {
       }
       const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
       await addCard(data).then(async (res: any) => {
-        console.log(res);
         if ("raw" in res.data) {
           alert("Hay un error en los datos de la tarjeta!")
         } else {
@@ -497,7 +496,6 @@ const Purchase = () => {
                       <InputText>
                         Número de la Tarjeta
                         <InputCard mask='9999 9999 9999 99999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
-
                           setCard((card: any) => ({ ...card, number: e.target.value }));
 
                         }}>

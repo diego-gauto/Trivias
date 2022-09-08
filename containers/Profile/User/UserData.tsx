@@ -1,10 +1,20 @@
-import { getAuth, updateProfile } from 'firebase/auth';
-import { doc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
-import { db } from '../../../firebase/firebaseConfig';
+import React, { useEffect, useState } from "react";
 
-import Modal2 from './Modal2/Modal2';
-import { ProfileData, DataTitle, AllEditInputs, Inputs, EditText, EditInput, EditButtons, SubscriptionButton, SaveButton } from './User.styled';
+import { doc, updateDoc } from "firebase/firestore";
+
+import { db } from "../../../firebase/firebaseConfig";
+import Modal2 from "./Modal2/Modal2";
+import {
+  AllEditInputs,
+  DataTitle,
+  EditButtons,
+  EditInput,
+  EditText,
+  Inputs,
+  ProfileData,
+  SaveButton,
+  SubscriptionButton,
+} from "./User.styled";
 
 const UserData = ({ data, pm }: any) => {
   const [show, setShow] = useState(false);
@@ -60,7 +70,6 @@ const UserData = ({ data, pm }: any) => {
             </EditText>
             <EditInput
               placeholder="Seleccionar país"
-              defaultValue="pais"
               onChange={(e) => {
                 setUser({ ...user, country: e.target.value })
               }}

@@ -117,11 +117,9 @@ const uploadPointRewardsImage = (image: any, name: any) => {
 }
 
 export const addReward = async (reward: any) => {
-  console.log(reward)
   reward.reference = `${reward.title}-${uuidv4()}`
   reward.path = await uploadPointRewardsImage(reward.path, reward.reference);
 
-  console.log(reward)
   const docRef = await addDoc(
     collection(db, "rewards"),
     {
@@ -154,8 +152,6 @@ export const updateRewards = async (reward: any, id: any) => {
     tempReward.path = await uploadPointRewardsImage(tempReward.format, tempReward.reference);
     delete tempReward.format;
   }
-  console.log(tempReward)
-  console.log(id)
   const docRef = doc(db, 'rewards', id);
   delete tempReward.id;
 
@@ -189,11 +185,9 @@ const uploadTimeRewardsImage = (image: any, name: any) => {
 }
 
 export const addTimeReward = async (reward: any) => {
-  console.log(reward)
   reward.reference = `${reward.title}-${uuidv4()}`
   reward.path = await uploadTimeRewardsImage(reward.path, reward.reference);
 
-  console.log(reward)
   const docRef = await addDoc(
     collection(db, "rewardsTime"),
     {
@@ -226,8 +220,6 @@ export const updateTimeRewards = async (reward: any, id: any) => {
     tempReward.path = await uploadTimeRewardsImage(tempReward.format, tempReward.reference);
     delete tempReward.format;
   }
-  console.log(tempReward)
-  console.log(id)
   const docRef = doc(db, 'rewardsTime', id);
   delete tempReward.id;
 
@@ -249,7 +241,6 @@ export const deleteTimePrize = async (reward: any) => {
 
 }
 export const addRequest = async (request: any) => {
-  console.log(request)
   const docRef = await addDoc(
     collection(db, "requests"),
     {
@@ -276,7 +267,6 @@ export const updateRequest = async (id: any) => {
   return 'exito'
 }
 export const addUserReward = async (userRewards: any, userId: any) => {
-  console.log(userRewards, userId)
   const docRef = await setDoc(
     doc(db, "users", userId, "rewards", userRewards.id),
     {
