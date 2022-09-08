@@ -27,10 +27,10 @@ const Pay = () => {
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         element.amount = element.amount / 100;
-
-        if (element.paidAt.seconds > weekAgo) {
-          tempInvoice.push(element);
-        }
+        tempInvoice.push(element);
+        // if (element.paidAt.seconds > weekAgo) {
+        //   tempInvoice.push(element);
+        // }
       });
       setTempInvoice(tempInvoice);
       setInvoice(res);
@@ -40,24 +40,19 @@ const Pay = () => {
     getAllInvoice();
   }, []);
 
-  const handleClick = (value: any) => {
-    let tempInvoices: any = [];
-    console.log(invoice);
+  // const handleClick = (value: number) => {
+  //   let tempInvoices: any = [];
 
-    invoice.forEach((element: any) => {
-      if (element.paidAt.seconds > twoWeeksAgo && value == 2) {
-        tempInvoices.push(element);
-        console.log(1);
-
-      }
-      if (element.paidAt.seconds > weekAgo && value == 1) {
-        tempInvoices.push(element);
-      }
-    });
-    console.log(tempInvoices);
-
-    setTempInvoice([...tempInvoices]);
-  }
+  //   invoice.forEach((element: any) => {
+  //     if (element.paidAt.seconds > twoWeeksAgo && value == 2) {
+  //       tempInvoices.push(element);
+  //     }
+  //     if (element.paidAt.seconds > weekAgo && value == 1) {
+  //       tempInvoices.push(element);
+  //     }
+  //   });
+  //   setTempInvoice([...tempInvoices]);
+  // }
 
   return (
     <AdminContain>
@@ -66,9 +61,9 @@ const Pay = () => {
         <Container>
           <TitleContain>
             <Title>Ventas</Title>
-            <ButtonIcon>
+            {/* <ButtonIcon>
               <Select handleClick={handleClick} />
-            </ButtonIcon>
+            </ButtonIcon> */}
           </TitleContain>
           <Table id="Pay">
             <tbody>
@@ -82,7 +77,7 @@ const Pay = () => {
               </tr>
               {/* TABLAS */}
               {
-                tempInvoice.map((invoice: any, index: any) => {
+                tempInvoice.map((invoice: any, index: number) => {
                   return (
                     <tr key={"allPayment" + index}>
                       <td>

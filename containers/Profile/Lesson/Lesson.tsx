@@ -82,7 +82,7 @@ const Lesson = () => {
                   addHistoryCourse(res, e.id, season, lesson);
                 } else {
                   router.push({
-                    pathname: 'Purchase', query: { type: 'course', id: course.id }
+                    pathname: 'Purchase', query: { type: 'course', id: id }
                   });
                 }
               }
