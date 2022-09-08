@@ -9,16 +9,30 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
 
   const addLessonComment = (e: any) => {
     let temp_comments: any = currentComments;
+    let body: any;
     if (e.code == "Enter") {
-      let body = {
-        createdAt: new Date(),
-        userName: user.name,
-        userEmail: user.email,
-        userPhoto: user.photoURL,
-        courseId: data.courseId,
-        seasonId: data.seasonId,
-        lessonId: data.id,
-        comment: e.target.value
+      if (user) {
+        body = {
+          createdAt: new Date(),
+          userName: user.name,
+          userEmail: user.email,
+          userPhoto: user.photoURL,
+          courseId: data.courseId,
+          seasonId: data.seasonId,
+          lessonId: data.id,
+          comment: e.target.value
+        }
+      } else {
+        body = {
+          createdAt: new Date(),
+          userName: 'local',
+          userEmail: 'user@local.com',
+          userPhoto: '',
+          courseId: data.courseId,
+          seasonId: data.seasonId,
+          lessonId: data.id,
+          comment: e.target.value
+        }
       }
       addComment(body).then(() => {
         alert('Gracias por tus comentarios!');
@@ -29,7 +43,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
   }
   useEffect(() => {
     if (comments) {
-      setCurrentComments(comments)
+      setCurrentComments(comments);
     }
   }, [comments])
 
@@ -87,9 +101,9 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
             addLessonComment(e)
           }} />
         </CommentContain>
-        {currentComments.map((x: any) => {
+        {currentComments.map((x: any, index: any) => {
           return (
-            <CommentContain>
+            <CommentContain key={'comments-' + index}>
               {comments && x.userPhoto
                 ?
                 <Profile src={x.userPhoto} />

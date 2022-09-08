@@ -32,6 +32,22 @@ export const Title = styled.h1`
     font-size: 16px;
   }
 `;
+export const TitleContain = styled.div`
+  display: flex;
+  gap:10px;
+  align-items:center;
+`;
 export const VideoImage = styled(Image)`
   
+`;
+
+export const MenuIcon = styled.i`
+  background-image: url(../images/hamburger.png);
+  height: 16px;
+  width: 30px;
+  cursor: pointer;
+  display: none;
+  @media( max-width: 700px){
+    display: block;
+  }
 `;

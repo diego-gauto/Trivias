@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
-import { Title, VideoContain, VideoImage, Segment } from './Video.styled';
-import { useMediaQuery } from "react-responsive";
+import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from './Video.styled';
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson } from '../../../../../store/actions/courseActions';
 
 const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [current, setCurrent] = useState<any>();
-
+  const [menu, setMenu] = useState<boolean>(false);
   const finishedLesson = () => {
     let temp: any = data;
-    if (temp.users.includes(user.id)) {
-      console.log("user exist");
-    } else {
-      user.score = user.score + data.points;
-      addUserToLesson(data, id, data.seasonId, data.id, user);
-      temp.users.push(user.id);
-      setCurrent({ ...temp });
+    if (user) {
+      if (temp.users.includes(user.id)) {
+        console.log("user exist");
+      } else {
+        user.score = user.score + data.points;
+        addUserToLesson(data, id, data.seasonId, data.id, user);
+        temp.users.push(user.id);
+        setCurrent({ ...temp });
+      }
     }
   }
 
@@ -24,12 +25,19 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
     setCurrent(data)
   }, [data])
 
+  const handleClick = (value: boolean) => {
+    setMenu(value);
+  }
+
   return (
     <Segment>
       <VideoContain>
-        <Title>
-          Bienvenida y presentación del curso {title}
-        </Title>
+        <TitleContain>
+          <Title>
+            Bienvenida y presentación del curso {title}
+          </Title>
+          <MenuIcon onClick={() => { setMenu(!menu) }} />
+        </TitleContain>
         <ReactPlayer
           className='absolute'
           url={data.link}
@@ -40,7 +48,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
           onEnded={finishedLesson}
         />
       </VideoContain>
-      <Courses id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
+      <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
     </Segment>
   )
 }
