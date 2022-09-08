@@ -80,6 +80,12 @@ export const Method = styled("i")<{brand:any}>`
   width: 16px;
   height: 20px;
   `}
+  ${props=>props.brand == 'stripe' && css`
+  background-position: center;
+  margin: 2px;
+  width: 100%;
+  height: 20px;
+  `}
 `;
 export const ButtonIcon = styled.div`
   display: flex;

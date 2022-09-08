@@ -103,8 +103,9 @@ const Pay = () => {
                       <td>{invoice.product}</td>
                       {invoice.method == 'stripe' ? <td>
                         {
-                          invoice.brand != null &&
-                          <IconContain><Method brand={invoice.brand} /></IconContain>
+                          invoice.brand != null ?
+                            <IconContain><Method brand={invoice.brand} /></IconContain> :
+                            <IconContain><Method brand={'stripe'} /></IconContain>
                         }
 
                       </td> : <td>
