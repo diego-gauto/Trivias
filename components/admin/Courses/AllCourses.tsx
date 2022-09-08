@@ -14,6 +14,7 @@ import {
   Label,
   MainContainer,
   PurpleButton,
+  RedButton,
   Text,
   TitleContain,
   TransparentButton,
@@ -101,6 +102,7 @@ export const AllCourses = ({
               <Link href={`/admin/Edit?documentID=${documentID}`}>
                 <PurpleButton>Editar</PurpleButton>
               </Link>
+              <RedButton>Eliminar</RedButton>
             </ButtonContain>
           </>
         }
