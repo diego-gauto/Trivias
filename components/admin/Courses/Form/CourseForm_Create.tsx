@@ -7,15 +7,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
+import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
+import { CourseName } from "../AllCourses.styled";
 import {
   Button,
   ButtonContain,
+  ButtonNewCourse,
   CourseFormContain,
   Folder,
   IconContain,
   Input,
-  ButtonNewCourse,
   InputBig,
   InputContain,
   InputContain2,
@@ -30,8 +32,6 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
-import { getUsers } from "../../../../store/actions/courseActions";
-import { CourseName } from "../AllCourses.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup
@@ -128,15 +128,12 @@ const CourseForm_Create = () => {
     };
 
     createCourse(signUpData).then(() => {
-
       window.location.href = "/admin/Courses";
-      console.log("done!")
     });
 
   }
 
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
@@ -154,9 +151,8 @@ const CourseForm_Create = () => {
     getProffessors();
   }, [])
 
-  console.log(price)
   return (
-    <CourseFormContain>
+    <CourseFormContain onClick={() => { setOpenCourse(true) }}>
       {/* LINEA 1 */}
       <TitleContain>
         <CourseName>
@@ -164,11 +160,13 @@ const CourseForm_Create = () => {
         </CourseName>
         {
           openCourse == false &&
-          <ButtonNewCourse onClick={() => { setOpenCourse(true) }}>+</ButtonNewCourse>
+          <ButtonNewCourse>+</ButtonNewCourse>
         }
         {
           openCourse == true &&
-          <ButtonNewCourse onClick={() => { setOpenCourse(false) }}>-</ButtonNewCourse>
+          <ButtonNewCourse onClick={(e) => {
+            e.stopPropagation(); setOpenCourse(false)
+          }}>-</ButtonNewCourse>
         }
 
       </TitleContain>

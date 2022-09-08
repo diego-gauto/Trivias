@@ -28,7 +28,6 @@ const CourseMain = () => {
           data.push(obj)
         });
         setCourses(data)
-        console.log(data)
         return data
       })
     } catch (error) {

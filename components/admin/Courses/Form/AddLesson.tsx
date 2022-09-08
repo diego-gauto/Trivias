@@ -49,7 +49,6 @@ const AddLesson = () => {
     homeWorkAbout: '',
   })
   const newLesson = () => {
-    console.log(lesson)
     addLesson(lesson, courseID, seasonID).then(() => {
       alert(
         "Lección Creada"
@@ -64,9 +63,7 @@ const AddLesson = () => {
     let tempExtra: any = [];
 
     file = Object.values(file);
-    console.log(file)
     file.forEach((element: any) => {
-      console.log(element.name)
       var reader = new FileReader();
       reader.readAsDataURL(element);
       reader.onload = (_event) => {
@@ -76,7 +73,6 @@ const AddLesson = () => {
     setLesson({ ...lesson, extra: tempExtra })
   }
   const getImage = (file: any) => {
-    console.log(file)
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {

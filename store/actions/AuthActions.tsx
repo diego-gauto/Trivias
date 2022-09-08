@@ -206,7 +206,6 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
         })
 
       } else {
-
         console.log("Provider Auth : 3 | Was already registered")
       }
     }).catch((error) => {
