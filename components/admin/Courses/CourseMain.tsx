@@ -9,30 +9,18 @@ import { AdminContain } from "../SideBar.styled";
 import { AllCourses } from "./AllCourses";
 import { CourseFormContain } from "./CourseMain.styled";
 import CourseForm_Create from "./Form/CourseForm_Create";
+import { getWholeCourses } from "../../../store/actions/courseActions";
 
 const CourseMain = () => {
 
 
   const [courses, setCourses] = useState<any>(null);
 
-  const fetchDB_data = async () => {
-    try {
-      const query_1 = query(collection(db, "courses"));
-      return onSnapshot(query_1, (response) => {
-        var data: DocumentData = [];
-
-        response.forEach((e) => {
-          var obj: any = {}
-          obj = e.data()
-          obj["documentID"] = e.id
-          data.push(obj)
-        });
-        setCourses(data)
-        return data
-      })
-    } catch (error) {
-      return false
-    }
+  const fetchDB_data = () => {
+    getWholeCourses().then((res) => {
+      setCourses(res);
+      return res;
+    })
   }
   useEffect(() => {
     fetchDB_data()
@@ -42,28 +30,13 @@ const CourseMain = () => {
     <AdminContain>
       <SideBar />
       <CourseFormContain>
-        {/* <Title>Crear nuevo curso</Title> */}
-
         <CourseForm_Create></CourseForm_Create>
-
         {courses !== null
           ? <>
             {
               courses.map((e: any, i: any) => (
-
-
                 <AllCourses key={"courses" + i}
-                  courseTittle={e.courseTittle}
-                  courseAbout={e.courseAbout}
-                  courseCategory={e.courseCategory}
-                  courseDuration={e.courseDuration}
-                  coursePrice={e.coursePrice}
-                  courseProfessor={e.courseProfessor}
-                  coursePublishYear={e.coursePublishYear}
-                  courseSubtittle={e.courseSubtittle}
-                  index={i}
-                  documentID={e.documentID} />
-
+                  course={e} />
               ))
             }
           </>
