@@ -95,13 +95,13 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
         <TaskText>
           {data.homeWorkAbout}
         </TaskText>
-        <ButtonDiv>
+        {user && <ButtonDiv>
           <UploadButton>
             Subir tarea
             <UploadIcon onClick={uploadHwk} />
             <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
           </UploadButton>
-        </ButtonDiv>
+        </ButtonDiv>}
       </HomeWorkContain>
     </>
 

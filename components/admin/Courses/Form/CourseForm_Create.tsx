@@ -152,7 +152,7 @@ const CourseForm_Create = () => {
   }, [])
 
   return (
-    <CourseFormContain onClick={() => { setOpenCourse(true) }}>
+    <CourseFormContain onClick={() => { setOpenCourse(!openCourse) }}>
       {/* LINEA 1 */}
       <TitleContain>
         <CourseName>
@@ -165,28 +165,28 @@ const CourseForm_Create = () => {
         {
           openCourse == true &&
           <ButtonNewCourse onClick={(e) => {
-            e.stopPropagation(); setOpenCourse(false)
+            setOpenCourse(false)
           }}>-</ButtonNewCourse>
         }
 
       </TitleContain>
       {openCourse && <form onSubmit={handleSubmit(onSubmit)}>
         <InputForm >
-          <InputContain>
+          <InputContain >
             <Label>Título del Curso</Label>
             <Input
               placeholder="Curso de Uñas Francesas"
               type="text"
               className={`form-control ${errors.courseTittle ? 'is-invalid' : ''}`}
-              {...register("courseTittle")}
+              {...register("courseTittle")} onClick={(e) => { e.stopPropagation(); }}
             />
           </InputContain>
-          <InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Profesor(es)</Label>
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={() => { setOpen(!open), setOpen2(false) }}>
+                <Selected onClick={(e) => { setOpen(!open), setOpen2(false) }}>
                   {name}
                   <CaretD2 />
                 </Selected>
@@ -220,7 +220,7 @@ const CourseForm_Create = () => {
 
             </IconContain>
           </InputContain>
-          <InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Membresia</Label>
             <IconContain>
 
@@ -268,7 +268,7 @@ const CourseForm_Create = () => {
         </InputForm>
         {/* LINEA 2 */}
         <InputForm>
-          <InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Subtítulo del Curso</Label>
             <Input
               placeholder="Descubre un nuevo método para tus uñas este San Valentín"
@@ -277,7 +277,7 @@ const CourseForm_Create = () => {
               {...register("courseSubtittle")}
             />
           </InputContain>
-          <InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Categorías</Label>
             <IconContain>
 
@@ -313,7 +313,7 @@ const CourseForm_Create = () => {
             </IconContain>
 
           </InputContain>
-          <InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
@@ -331,7 +331,7 @@ const CourseForm_Create = () => {
         </InputForm>
         {/* LINEA 3 */}
         <InputForm>
-          <InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Sobre el Curso</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, 
@@ -346,7 +346,7 @@ const CourseForm_Create = () => {
               {...register("courseAbout")}
             />
           </InputContain>
-          <InputContain2>
+          <InputContain2 onClick={(e) => { e.stopPropagation(); }}>
             <InputContain>
               <Label>Año de Publicación</Label>
               <Input
@@ -420,7 +420,7 @@ const CourseForm_Create = () => {
           <InputContain2>
             {
               value3 != "Gratis" &&
-              <InputContain>
+              <InputContain onClick={(e) => { e.stopPropagation(); }}>
                 <Label>Duración de Suscripción (Días)</Label>
                 <Input
                   placeholder="90"
@@ -431,8 +431,8 @@ const CourseForm_Create = () => {
                 />
               </InputContain>
             }
-            <ButtonContain>
-              <Button type='submit'>Crear Curso</Button>
+            <ButtonContain >
+              <Button type='submit' onClick={(e) => { e.stopPropagation(); }}>Crear Curso</Button>
             </ButtonContain>
           </InputContain2>
 

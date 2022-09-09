@@ -1,7 +1,9 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
+  DocumentData,
   getDoc,
   getDocs,
   orderBy,
@@ -112,7 +114,7 @@ export const getWholeCourses = async () => {
       const querySnapshotLesson = await getDocs(docRefLesson);
       querySnapshotLesson.forEach((lesson: any) => {
         courses[i].totalLessons++;
-        courses[i].seasons[c].lessons.push(lesson.data());
+        courses[i].seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
       });
     }
   }
@@ -238,4 +240,20 @@ export const getUsers = async () => {
     tempUsers.push({ ...user.data(), id: user.id });
   })
   return tempUsers
+}
+export const deleteWholeCourse = async (course: DocumentData) => {
+  if (course.seasons.length == 0) {
+    await deleteDoc(doc(db, "courses", course.id));
+  }
+  for (let s = 0; s < course.seasons.length; s++) {
+    for (let l = 0; l < course.seasons[s].lessons.length; l++) {
+      await deleteDoc(doc(db, "courses", course.id, "seasons", course.seasons[s].id, "lessons", course.seasons[s].lessons[l].id));
+      if (l == course.seasons[s].lessons.length - 1) {
+        await deleteDoc(doc(db, "courses", course.id, "seasons", course.seasons[s].id));
+      }
+    }
+    if (s == course.seasons.length - 1) {
+      await deleteDoc(doc(db, "courses", course.id));
+    }
+  }
 }

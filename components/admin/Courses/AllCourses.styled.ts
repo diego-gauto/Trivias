@@ -98,3 +98,18 @@ export const PurpleButton = styled.button`
     transition:.5s ease all;
   }
 `;
+export const RedButton = styled.button`
+  font-size: 16px;
+  font-family:'Montserrat',sans-serif;
+  background: #dc3545;
+  color: white;
+  padding-block: 10px;
+  padding-inline: 30px;
+  border-radius: 100px;
+  border: none;
+  &:hover{
+    background-color: #842029;
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+`;

@@ -186,7 +186,7 @@ const User = () => {
       {
         taskView == true &&
         <SecondBox>
-          <HomeWork userId={userData.id} />
+          <HomeWork userId={userData.id} user={userData} />
         </SecondBox>
       }
 

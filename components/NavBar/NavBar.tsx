@@ -91,6 +91,8 @@ const NavBar = () => {
   const [color, setColor] = useState<any>(0)
   const router = useRouter();
   let { pathname }: any = router;
+  var position = pathname.substring(0, 6);
+  // console.log(`/admin${pathname}`)
 
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 700) {
@@ -100,7 +102,6 @@ const NavBar = () => {
       setColor(0)
     }
   }
-
   useEffect(
     () => {
       window.addEventListener('scroll', ChangeNav);
@@ -135,7 +136,8 @@ const NavBar = () => {
       </LogoContain>
       <NavTags>
         <Link href="/Preview">
-          <NavText pathname={pathname} color={color}>
+          <NavText pathname={pathname} color={color}
+            style={pathname == "/Preview" ? { fontWeight: 600 } : { fontWeight: 400 }}>
             Inicio
           </NavText>
         </Link>
@@ -145,7 +147,9 @@ const NavBar = () => {
         {
           (loggedIn && isAdmin) &&
           <Link href="/admin/General">
-            <NavText pathname={pathname} color={color}>
+            <NavText pathname={pathname} color={color}
+              style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: 400 }}
+            >
               admin
             </NavText>
           </Link>
@@ -157,7 +161,9 @@ const NavBar = () => {
             <UserContain>
               <UserLevel />
               <Link href="/Profile">
-                <NavText pathname={pathname} color={color}>
+                <NavText pathname={pathname} color={color}
+                  style={pathname == "/Profile" ? { fontWeight: 600 } : { fontWeight: 400 }}
+                >
                   {userData ? userData.name : "Bienvenido"}
                 </NavText>
               </Link>
@@ -179,7 +185,10 @@ const NavBar = () => {
         {!loggedIn &&
           <>
             <Link href={LOGIN_PATH}>
-              <NavText pathname={pathname} color={color}>
+              <NavText pathname={pathname} color={color}
+                style={pathname == LOGIN_PATH ? { fontWeight: 600 } : { fontWeight: 400 }}
+              >
+
                 Iniciar Sesión
               </NavText>
             </Link>

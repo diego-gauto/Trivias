@@ -29,8 +29,8 @@ const Lesson = () => {
 
   useEffect(() => {
     if (course) {
-      let temp_lesson: any;
-      let temp_comments: any;
+      let temp_lesson;
+      let temp_comments;
       temp_lesson = course.seasons[season].lessons[lesson];
       temp_lesson.seasonId = course?.seasons[season].id
       temp_lesson.courseId = course.id
@@ -70,6 +70,9 @@ const Lesson = () => {
 
   const fetchDB_data = async () => {
     try {
+      getComments().then((res) => {
+        setComments(res);
+      })
       let date = new Date().getTime() / 1000;
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
@@ -82,7 +85,7 @@ const Lesson = () => {
                   addHistoryCourse(res, e.id, season, lesson);
                 } else {
                   router.push({
-                    pathname: 'Purchase', query: { type: 'course', id: course.id }
+                    pathname: 'Purchase', query: { type: 'course', id: id }
                   });
                 }
               }
@@ -101,9 +104,6 @@ const Lesson = () => {
               }
               setCourse(res);
             })
-          })
-          getComments().then((res) => {
-            setComments(res);
           })
           setUserData({ ...e.data(), id: e.id });
         });

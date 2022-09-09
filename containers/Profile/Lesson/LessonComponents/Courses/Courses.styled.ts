@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const MainContainer = styled.div`
+export const MainContainer = styled.div<{open:any}>`
   display: flex;
   flex-direction: column; 
   gap: 10px;
@@ -14,17 +14,27 @@ export const MainContainer = styled.div`
     border-radius: 10px;
     width: 100%;
     top: 0;
-    left: 0;
+    right: -100%;
+    transition: 1s ease all;
     height: 100%;
-    display: none;
   }
+  ${props => props.open == true && css`
+    right:0 !important;
+    transition: 1s ease all;
+  `}
 `;
 export const CloseButton = styled.div`
   color: #8E2DE2;
   font-size: 40px;
   font-weight: 900;
   font-family: 'Nunito';
+  line-height: 100%;
+  cursor: pointer;
   display: none;
+  @media (max-width: 900px){
+    display: block;
+  }
+}
 `;
 export const Container = styled.div`
   display: flex;
