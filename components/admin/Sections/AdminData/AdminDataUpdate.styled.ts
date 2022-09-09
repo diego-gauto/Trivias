@@ -15,7 +15,6 @@ export const TitleContain = styled.div`
   align-items: center;
 `;
 export const OptionRole = styled.div`
-
   &:hover{
     background: linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);
     color:white;
@@ -30,6 +29,26 @@ export const OptionRole = styled.div`
     &[type="radio"]{
       display: none;
     }
+  }
+`;
+export const ButtonRoleContain = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+export const UpdateButton = styled.button`
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding-inline: 25px;
+  background: #6717CD;
+  border-radius: 35px;
+  height: 30px;
+  color: white;
+  border: none;
+  &:hover{
+    background-color: #5000b5;
+    transform:scale(1.03);
+    transition:.5s ease all;
   }
 `;
 export const OptionRoleContain = styled.div`
