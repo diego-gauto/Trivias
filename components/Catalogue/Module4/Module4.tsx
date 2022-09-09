@@ -36,6 +36,8 @@ const Module4 = ({ user, allCourses }: any) => {
         setUserCourses(paid);
         allCourses.forEach((element: any) => {
           element.courseAbout = element.courseAbout.slice(0, 100);
+          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+          element.courseTittle = element.courseTittle.slice(0, 15);
           if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
             element.paid = true;
           } else {
@@ -106,9 +108,9 @@ const Module4 = ({ user, allCourses }: any) => {
                 <VideoInfo>
                   <TextContain>
                     <Text1>
-                      Curso: {course.courseTittle}
+                      Curso: {course.courseTittle}...
                       <Text2>
-                        {course.courseSubtittle}
+                        {course.courseSubtittle}...
                       </Text2>
                     </Text1>
                     <Text3>
