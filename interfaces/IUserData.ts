@@ -1,4 +1,4 @@
-export interface UserDataProps {
+export interface IUserDataProps {
   name:string,
   phoneNumber: string,
   stripeId: string,
@@ -10,8 +10,4 @@ export interface UserDataProps {
     brand: string,
     last4: number,
   }
-
-}
-export interface PaymentMethodProps {
-
 }

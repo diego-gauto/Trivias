@@ -22,12 +22,12 @@ import {
   NewMethod
 } from "./Modal2.styled";
 import { PaypalIcon } from "../User.styled";
-import { PaymentMethodProps, UserDataProps } from "../../../../interfaces/IUserData";
+import { IUserDataProps } from "../../../../interfaces/IUserData";
 
 interface props {
   show: boolean,
   setShow: any,
-  data: UserDataProps,
+  data: IUserDataProps,
   pm: any,
 }
 
