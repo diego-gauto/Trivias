@@ -15,10 +15,10 @@ import {
   SaveButton,
   SubscriptionButton,
 } from "./User.styled";
-import { PaymentMethodProps, UserDataProps } from "../../../interfaces/IUserData";
+import { IUserDataProps } from "../../../interfaces/IUserData";
 
 interface props {
-  data: UserDataProps,
+  data: IUserDataProps,
   pm: any,
 }
 
