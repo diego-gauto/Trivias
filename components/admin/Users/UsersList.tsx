@@ -21,6 +21,7 @@ import {
   UserShow,
 } from "./UsersList.styled";
 import { getWholeCourses } from "../../../store/actions/courseActions";
+import { getPaidCourses } from "../../../store/actions/UserActions";
 
 export interface SelectedUser {
   id?: string;
@@ -38,6 +39,7 @@ export interface UserData {
   phoneNumber: number;
   created_at: string;
   score: string;
+  courses: number;
 };
 export interface Users {
   id: string;
@@ -92,7 +94,8 @@ const UsersList = () => {
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
       const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      const usersData = usersResponse.map((user: any) => ({
+
+      const usersData = [...usersResponse].map((user: any) => ({
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber ?? "",
@@ -100,8 +103,20 @@ const UsersList = () => {
         score: user.score.toString(),
         role: user.role ?? "",
         id: user.id,
+        courses: 0
       }));
-      console.log("mainr", mainResponse)
+
+      let today: any = new Date().getTime() / 1000;
+      usersData.forEach((user: any) => {
+        getPaidCourses(user.id).then((res) => {
+          res.forEach((element: DocumentData) => {
+            if (element.finalDate > today) {
+              user.courses++;
+            }
+          });
+        })
+      })
+
       setUsers(usersData);
       setAllUsers(usersData);
     }
@@ -159,7 +174,8 @@ const UsersList = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{user.created_at}</td>
-                      <td >3 Activos</td>
+                      {user.courses > 1 ? <td >{user.courses} Activos</td> :
+                        <td >{user.courses} Activo</td>}
                       <td>{user.score} puntos</td>
                       <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
                     </tr>

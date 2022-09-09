@@ -2,6 +2,7 @@
 
 import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { getPaymentmethods } from "../../../../store/actions/PaymentActions";
 import { getPaidCourses } from "../../../../store/actions/UserActions";
 
 import GetUserLevel from "./GetUserLevel";
@@ -30,11 +31,13 @@ import {
   TitleContain,
   TransparentButton,
   UserContain,
+  CardIconResp,
 } from "./UsersCardData.styled";
 
 const UserCardData = ({ user, setIsVisible, courses }: any) => {
   const [show, setShow] = useState(false);
   const [paidCourses, setPaidCourses] = useState<Array<any>>([]);
+  const [paymentMethod, setPaymentMethods] = useState<Array<any>>([]);
 
   const getUserCourses = () => {
     let tempCourses: Array<any> = [];
@@ -51,9 +54,15 @@ const UserCardData = ({ user, setIsVisible, courses }: any) => {
   const handleCourse = () => {
     getUserCourses();
   }
+  const getAllPaymentMethods = () => {
+    getPaymentmethods(user.id).then((res) => {
+      setPaymentMethods(res);
+    })
+  }
 
   useEffect(() => {
     getUserCourses();
+    getAllPaymentMethods();
   }, [user])
 
   return (
@@ -129,10 +138,16 @@ const UserCardData = ({ user, setIsVisible, courses }: any) => {
           <TitleBox>
             Métodos de pago asociados
           </TitleBox>
-          <LastContainer>
-            <Pay1 />
-            <Pay2 />
-          </LastContainer>
+          {paymentMethod.length > 0 ? <LastContainer>
+            {paymentMethod.map((x) => {
+              return (
+                <CardIconResp brand={x.brand} />
+              )
+            })}
+          </LastContainer> :
+            <LastContainer>
+              Sin métodos de pago...
+            </LastContainer>}
         </PayContain></>
       <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
     </UserContain>
