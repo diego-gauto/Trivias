@@ -7,7 +7,7 @@ import Module4 from "./Module4/Module4";
 import Module5 from "./Module5/Module5";
 import { ModuleContain, PreviewContain } from "./Preview.styled";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
-import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs, orderBy, DocumentData } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
@@ -48,8 +48,14 @@ const Preview = () => {
   }
 
   const getCourses = () => {
+    let tempCourses: Array<any> = [];
     getWholeCourses().then((response) => {
-      setCourses(response);
+      response.forEach((element: DocumentData) => {
+        if (element.seasons.length > 0) {
+          tempCourses.push(element);
+        }
+      });
+      setCourses(tempCourses);
       setIsLoading(false);
     })
   }
