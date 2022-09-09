@@ -31,7 +31,7 @@ const Sections = () => {
 
     const newUser: any = await getSingleUser(id);
     if (newUser?.uid) {
-      newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
+      //newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
       setSelectedAdmin(newUser);
       setAdminID(id);
       setRole(newUser.role);

@@ -58,8 +58,6 @@ width: 100%;
 export const IconContain = styled.div`
   display: flex;
   position: relative;
-  //width: 150px;
-  //top: -40px;
 `;
 export const InputContain2 = styled.div`
   display: flex;
