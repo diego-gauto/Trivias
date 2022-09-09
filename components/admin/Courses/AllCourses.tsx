@@ -29,9 +29,11 @@ export const AllCourses = ({
 
   const [open, setOpen] = useState(false);
   const deleteCourse = (element: any) => {
-    deleteWholeCourse(element).then(() => {
-      window.location.reload();
-    })
+    if (window.confirm("Desea borrar este curso?")) {
+      deleteWholeCourse(element).then(() => {
+        window.location.reload();
+      })
+    }
   }
 
   return (
