@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const UserContain = styled.div`
   display: flex;
@@ -165,4 +165,24 @@ export const Pay2 = styled.i`
   background-position: center;
   width: 95px;
   height: 66px;
+`;
+
+export const CardIconResp = styled("i")<{brand:any}>`
+  ${props => (props.brand == 'visa') && css`
+        background-image: url(../images/visa-icon.png);
+  `}
+  ${props => (props.brand == 'mastercard') && css`
+        background-image: url(../images/mastercard-icon.png);
+  `}
+  ${props => (props.brand == 'amex') && css`
+        background-image: url(../images/amex-icon.png);
+  `}
+  background-repeat:no-repeat;
+  background-size: contain;
+  width: 95px;
+  height: 66px;
+  background-position: center;
+  @media( max-width: 1023px){
+    display: none;
+  }
 `;

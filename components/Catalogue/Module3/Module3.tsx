@@ -19,7 +19,7 @@ import { getPaidCourses } from "../../../store/actions/UserActions";
 import { useRouter } from "next/router";
 import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 
-const Module3 = ({ user }: any) => {
+const Module3 = ({ user, allCourses }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
@@ -31,17 +31,15 @@ const Module3 = ({ user }: any) => {
       let date = new Date().getTime() / 1000;
       let temp_final_date: any;
       getPaidCourses(user.id).then((paid: any) => {
-        getWholeCourses().then((response) => {
-          response.forEach(async (element: any) => {
-            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-              element.paid = true;
-              temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
-              element.date = Math.ceil((temp_final_date.finalDate - date) / (3600 * 24));
-              temp_courses.push(element);
-            }
-          });
-          setCourses(temp_courses);
-        })
+        allCourses.forEach(async (element: any) => {
+          if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+            element.paid = true;
+            temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
+            element.date = Math.ceil((temp_final_date.finalDate - date) / (3600 * 24));
+            temp_courses.push(element);
+          }
+        });
+        setCourses(temp_courses);
       })
     }
   }, [user])

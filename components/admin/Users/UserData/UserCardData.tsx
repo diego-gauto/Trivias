@@ -1,6 +1,9 @@
 
 
-import { useState } from "react";
+import { DocumentData } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { getPaymentmethods } from "../../../../store/actions/PaymentActions";
+import { getPaidCourses } from "../../../../store/actions/UserActions";
 
 import GetUserLevel from "./GetUserLevel";
 import Modal1 from "./Modal/Modal";
@@ -28,10 +31,39 @@ import {
   TitleContain,
   TransparentButton,
   UserContain,
+  CardIconResp,
 } from "./UsersCardData.styled";
 
-const UserCardData = ({ user, setIsVisible }: any) => {
+const UserCardData = ({ user, setIsVisible, courses }: any) => {
   const [show, setShow] = useState(false);
+  const [paidCourses, setPaidCourses] = useState<Array<any>>([]);
+  const [paymentMethod, setPaymentMethods] = useState<Array<any>>([]);
+
+  const getUserCourses = () => {
+    let tempCourses: Array<any> = [];
+    getPaidCourses(user.id).then((res) => {
+      let today: any = new Date().getTime() / 1000;
+      res.forEach((element: DocumentData) => {
+        if (element.finalDate > today) {
+          tempCourses.push(element);
+        }
+      });
+      setPaidCourses(tempCourses);
+    })
+  }
+  const handleCourse = () => {
+    getUserCourses();
+  }
+  const getAllPaymentMethods = () => {
+    getPaymentmethods(user.id).then((res) => {
+      setPaymentMethods(res);
+    })
+  }
+
+  useEffect(() => {
+    getUserCourses();
+    getAllPaymentMethods();
+  }, [user])
 
   return (
     <UserContain>
@@ -92,23 +124,32 @@ const UserCardData = ({ user, setIsVisible }: any) => {
           <TitleBox>
             Cursos Activos
           </TitleBox>
-          <CourseContain>
-            <Image1 />
-            <Image2 />
-            <Image3 />
-          </CourseContain>
+          {paidCourses.length > 0 ? <CourseContain>
+            {paidCourses.map((x) => {
+              return (
+                <Image1 />
+              )
+            })}
+          </CourseContain> : <CourseContain>
+            Sin cursos...
+          </CourseContain>}
           <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton>
         </Courses><PayContain>
           <TitleBox>
             Métodos de pago asociados
           </TitleBox>
-          <LastContainer>
-            <Pay1 />
-            <Pay2 />
-          </LastContainer>
+          {paymentMethod.length > 0 ? <LastContainer>
+            {paymentMethod.map((x) => {
+              return (
+                <CardIconResp brand={x.brand} />
+              )
+            })}
+          </LastContainer> :
+            <LastContainer>
+              Sin métodos de pago...
+            </LastContainer>}
         </PayContain></>
-
-      <Modal1 show={show} setShow={setShow} />
+      <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
     </UserContain>
   )
 }
