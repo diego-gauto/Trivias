@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import CsvDownloader from "react-csv-downloader";
 
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query, DocumentData } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
-import { getSingleUser } from "../../../hooks/useAuth";
+import { getWholeCourses } from "../../../store/actions/courseActions";
+import { getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
 import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
@@ -37,6 +38,7 @@ export interface UserData {
   phoneNumber: number;
   created_at: string;
   score: string;
+  courses: number;
 };
 export interface Users {
   id: string;
@@ -54,17 +56,12 @@ const UsersList = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
-  const [selectedUser, setSelectedUser] = useState<Array<UserData>>([]);
+  const [courses, setCourses] = useState<Array<any>>([]);
+  const [selectedUser, setSelectedUser] = useState<any>({});
 
-  const openUserCardData = async (id: string) => {
+  const openUserCardData = async (user: DocumentData) => {
+    setSelectedUser(user);
     setIsVisible(true);
-
-    const newUser: SelectedUser | any = await getSingleUser(id);
-    if (newUser?.uid) {
-      newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
-      setSelectedUser(newUser);
-      setIsVisible(true);
-    }
   };
 
   const filterUsersByValue = (value: string): void => {
@@ -79,12 +76,25 @@ const UsersList = () => {
     setUsers(filteredUsers);
   };
 
+  const getCoures = () => {
+    let tempCourses: Array<any> = [];
+    getWholeCourses().then((res) => {
+      res.forEach((element: DocumentData) => {
+        if (element.courseType == 'Producto') {
+          tempCourses.push(element)
+        }
+      });
+      setCourses(tempCourses)
+    })
+  }
+
   useEffect(() => {
 
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
       const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      const usersData = usersResponse.map((user: any) => ({
+
+      const usersData = [...usersResponse].map((user: any) => ({
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber ?? "",
@@ -92,11 +102,25 @@ const UsersList = () => {
         score: user.score.toString(),
         role: user.role ?? "",
         id: user.id,
+        courses: 0
       }));
+
+      let today: any = new Date().getTime() / 1000;
+      usersData.forEach((user: any) => {
+        getPaidCourses(user.id).then((res) => {
+          res.forEach((element: DocumentData) => {
+            if (element.finalDate > today) {
+              user.courses++;
+            }
+          });
+        })
+      })
+
       setUsers(usersData);
       setAllUsers(usersData);
     }
     getUsers();
+    getCoures();
   }, []);
 
   return (
@@ -140,7 +164,7 @@ const UsersList = () => {
               {users.length > 0 && (
                 users.map((user, index): any => {
                   return (
-                    <tr key={index} onClick={() => openUserCardData(user.id)}>
+                    <tr key={index} onClick={() => openUserCardData(user)}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
@@ -149,7 +173,8 @@ const UsersList = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{user.created_at}</td>
-                      <td >3 Activos</td>
+                      {user.courses > 1 ? <td >{user.courses} Activos</td> :
+                        <td >{user.courses} Activo</td>}
                       <td>{user.score} puntos</td>
                       <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
                     </tr>
@@ -162,7 +187,7 @@ const UsersList = () => {
         </Container>
         {
           isVisible === true &&
-          <UserCardData user={selectedUser} setIsVisible={setIsVisible} />
+          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} />
         }
       </UserContain>
     </AdminContain >

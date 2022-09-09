@@ -7,6 +7,7 @@
 /functions/*
 !/functions/package.json
 !/functions/package-lock.json
+!functions/*.js
 
 # testing
 /coverage

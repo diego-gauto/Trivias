@@ -21,7 +21,7 @@ import {
   VideoContain,
 } from "./Module1.styled";
 
-const Module1 = ({ user }: any) => {
+const Module1 = ({ user, allCourses }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
@@ -69,9 +69,7 @@ const Module1 = ({ user }: any) => {
         })
       })
     } else {
-      getWholeCourses().then((response) => {
-        setCourse(response[0]);
-      })
+      setCourse(allCourses);
     }
   }, [user])
 
