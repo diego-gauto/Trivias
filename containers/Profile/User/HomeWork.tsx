@@ -1,12 +1,13 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getHomeworks } from '../../../store/actions/UserActions'
-import { HWContainer, Table, TitleContain } from './HomeWork.styled'
+import { Button, Download, HWContainer, Table, TitleContain } from './HomeWork.styled'
 import ModalHW from './HomeWorkModal/ModalHW';
 
-const HomeWork = ({ userId }: any) => {
+const HomeWork = ({ userId, user }: any) => {
   const [show, setShow] = useState(false);
   const [homeWorks, setHomeWorks] = useState<any>([]);
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any>([])
 
   const getAllHomeworks = () => {
     getHomeworks(userId).then((res) => {
@@ -20,6 +21,7 @@ const HomeWork = ({ userId }: any) => {
       setHomeWorks(res);
     })
   }
+
   useEffect(() => {
     getAllHomeworks();
   }, [])
@@ -28,7 +30,7 @@ const HomeWork = ({ userId }: any) => {
     <HWContainer>
       <TitleContain>
         <p>
-          Tareas
+          {user.role == "admin" ? "Tareas de Profesores" : "Tareas"}
         </p>
       </TitleContain>
       <Table id="Pay">
@@ -39,7 +41,7 @@ const HomeWork = ({ userId }: any) => {
             <th>Curso (temporada, lección)</th>
             <th>Fecha</th>
             <th>Descargar Tarea</th>
-            <th>Estatus</th>
+            <th >Estatus</th>
           </tr>
           {/* TABLAS */}
           {
@@ -48,14 +50,35 @@ const HomeWork = ({ userId }: any) => {
                 <tr
                   key={"HomeWorks " + index}
                   style={{ cursor: "pointer" }}
-                  onClick={() => { setShow(true); setData(task) }}
                 >
-                  <td>{task.userName}</td>
-                  <td>{task.userEmail}</td>
-                  <td>{task.title}  ({task.season}, {task.lesson}) </td>
-                  <td>{task.formatDate}</td>
-                  <td></td>
-                  <td></td>
+                  <td
+                    onClick={() => { setShow(true); setData(task) }}
+                  >{task.userName}</td>
+                  <td
+                    onClick={() => { setShow(true); setData(task) }}
+                  >{task.userEmail}</td>
+                  <td
+                    onClick={() => { setShow(true); setData(task) }}
+                  >{task.title}  ({task.season}, {task.lesson}) </td>
+                  <td
+                    onClick={() => { setShow(true); setData(task) }}
+                  >{task.formatDate}</td>
+                  <td style={{ padding: "0" }}>
+                    <Link href={task.path}>
+                      <a target="_blank" style={{ textDecoration: "none" }}>
+                        <Download>
+                          Descargar Tarea
+                        </Download>
+                      </a>
+                    </Link>
+                  </td>
+                  <td style={{ padding: "0" }}
+                    onClick={() => { setShow(true); setData(task) }}
+                  >{
+                      task.status == false
+                        ? <Button status={task.status}>No revisada</Button>
+                        : <Button status={task.status}>Revisada</Button>
+                    }</td>
                 </tr>
               )
 

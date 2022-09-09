@@ -55,17 +55,14 @@ export const NavText = styled("a")<{pathname: any, color: any}>`
   text-decoration: none;
   font-size: 18px;
   font-family:'Montserrat',sans-serif;
-  cursor:pointer;
-  margin:0;
+  cursor: pointer;
+  margin: 0;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &:hover{
     color: black;
-    text-decoration: none;
-    font-weight: 600;
+    text-decoration: underline;
   }
-  &::active{
-    font-weight: 600;
-  }
+
   @media(max-width: 1023px){
     font-size: 16px;
   }
