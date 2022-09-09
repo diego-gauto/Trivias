@@ -15,7 +15,7 @@ const PurchaseDetails = ({ data, type }: any) => {
           <ContainTitle>
             Detalles de la compra
             <CourseCostResp>
-              $ 2,149.00
+              $ {data.price}.00
             </CourseCostResp>
           </ContainTitle>
           <CourseName>
