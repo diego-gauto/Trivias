@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
 import { getWholeCourses } from "../../../store/actions/courseActions";
@@ -18,7 +18,7 @@ import {
 import Modal1 from "./Modal/Modal1";
 import { Cardcontent, CardContain, CardImage, Title, VideoInfo, Viewpay } from "./Module4.styled";
 
-const Module4 = ({ user }: any) => {
+const Module4 = ({ user, allCourses }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
@@ -34,25 +34,21 @@ const Module4 = ({ user }: any) => {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);
-        getWholeCourses().then((response) => {
-          response.forEach((element: any) => {
-            element.courseAbout = element.courseAbout.slice(0, 100);
-            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-              element.paid = true;
-            } else {
-              element.paid = false;
-            }
-          });
-          setCourses(response);
-        })
+        allCourses.forEach((element: any) => {
+          element.courseAbout = element.courseAbout.slice(0, 100);
+          if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+            element.paid = true;
+          } else {
+            element.paid = false;
+          }
+        });
+        setCourses(allCourses);
       })
     } else {
-      getWholeCourses().then((response) => {
-        response.forEach((element: any) => {
-          element.courseAbout = element.courseAbout.slice(0, 100);
-        });
-        setCourses(response);
-      })
+      allCourses.forEach((element: any) => {
+        element.courseAbout = element.courseAbout.slice(0, 100);
+      });
+      setCourses(allCourses);
     }
   }, [user])
 

@@ -1,7 +1,8 @@
+import { DocumentData } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { Label, Option, OptionContain, SelectContain, Selected, CaretD } from './Select.styled'
 
-const Select = () => {
+const Select = ({ courses, handleClick }: any) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Elegir Curso")
   return (
@@ -13,24 +14,19 @@ const Select = () => {
       {
         open == true &&
         <OptionContain>
-          <Option onClick={() => { setValue("Curso 1"); setOpen(false) }}>
-            <input
-              type="radio"
-              id="Temporada1"
-              name="category"
-              value="Temporada 1"
-            />
-            <Label > Curso 1</Label>
-          </Option>
-          <Option onClick={() => { setValue("Curso 2"); setOpen(false) }}>
-            <input
-              type="radio"
-              id="Temporada2"
-              name="category"
-              value="Temporada 2"
-            />
-            <Label> Curso 2</Label>
-          </Option>
+          {courses.map((x: DocumentData) => {
+            return (
+              <Option onClick={() => { setValue(x.courseTittle); setOpen(false); handleClick(x) }}>
+                <input
+                  type="radio"
+                  id="Temporada1"
+                  name="category"
+                  value="Temporada 1"
+                />
+                <Label > Curso {x.courseTittle}</Label>
+              </Option>
+            )
+          })}
         </OptionContain>
       }
     </SelectContain>

@@ -30,8 +30,6 @@ const Module2 = ({ user }: any) => {
   }, [user]);
 
   const goTo = (course: any) => {
-    console.log(1);
-
     if (user) {
       router.push({
         pathname: 'Lesson',
