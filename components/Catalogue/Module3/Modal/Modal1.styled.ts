@@ -347,6 +347,8 @@ export const Description = styled.p`
 export const CardImage = styled(Image)`
 filter: brightness(40%);
 `;
+export const CardImageUnlock = styled(Image)`
+`;
 export const Lock = styled.i`
   position: absolute;
   background-repeat: no-repeat;

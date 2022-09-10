@@ -16,9 +16,20 @@ const PurchaseComplete = ({ data, card, id, coupon }: any) => {
       <CompleteContain>
         <PurchaseTitle>
           ¡Compra Exitosa!
-          <CourseCostResp>
-            $ 2,149.00
-          </CourseCostResp>
+          {!coupon ?
+            <CourseCostResp>
+              ${data.price}.00
+            </CourseCostResp> :
+            <>
+              {coupon.type == 'amount' ?
+                <CourseCostResp>
+                  ${data.price - coupon.discount}.00
+                </CourseCostResp>
+                : <CourseCostResp>
+                  ${data.price - (coupon.discount / 100) * data.price}.00
+                </CourseCostResp>}
+            </>
+          }
         </PurchaseTitle>
         <CourseName>
           {data.type}: {data.title}
