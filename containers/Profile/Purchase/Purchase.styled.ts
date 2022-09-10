@@ -271,7 +271,6 @@ export const NewMethodBox = styled.div`
   @media(max-width: 500px){
     width: 50%;
     padding-block: 18px;
-    margin-left: 25%;
   }
 `;
 export const NewMethodBox2 = styled.div`
