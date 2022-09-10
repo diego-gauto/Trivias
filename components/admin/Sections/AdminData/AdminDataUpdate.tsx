@@ -57,7 +57,6 @@ const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
     submitChanges();
   }, [value]);
 
-
   return (
     <UserContain>
       <TitleContain>
@@ -151,7 +150,7 @@ const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
             }
           </ColumnContain>
         </Columns>
-        <RoleEdit show={show} setShow={setShow} />
+        <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} />
       </>
 
     </UserContain>

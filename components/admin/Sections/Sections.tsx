@@ -34,7 +34,6 @@ const Sections = () => {
       //newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
       setSelectedAdmin(newUser);
       setAdminID(id);
-      setRole(newUser.role);
       setIsVisible(true);
     }
   };
@@ -60,7 +59,7 @@ const Sections = () => {
       setUsers(getAdminUsers);
     }
     getUsers();
-  }, []);
+  }, [isVisible]);
 
   return (
     <AdminContain>
