@@ -62,7 +62,7 @@ export const SelectedRoleContain = styled.div`
     list-style-type: none;
   }
   input{
-    z-index: -1;
+    //z-index: -1;
   }
 `;
 export const Info = styled.div`

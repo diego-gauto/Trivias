@@ -27,28 +27,41 @@ import {
 } from "./AdminDataUpdate.styled";
 import RoleEdit from "./RoleEdit";
 
-type RoleValues = {
-  role: string;
-  admin: object;
-  setIsVisible: boolean;
-  adminID: string
+export type IAdminType = {
+  general: boolean;
+  pay: boolean;
+  courses: boolean;
+  rewards: boolean;
+  landing: boolean;
+  coupons: boolean;
+  users: boolean;
+  superAdmin: boolean;
 };
 
-const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
+const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: any) => {
   const [show, setShow] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
-
+  const [currentRole, setCurrentRole] = useState<boolean>();
+  const [adminType, setAdminType] = useState<IAdminType>({ general: false, pay: false, courses: false, rewards: false, landing: false, coupons: false, users: false, superAdmin: false });
   useEffect(() => {
     const submitChanges = () => {
       //admin.created_at = new Date(admin.created_at.seconds * 1000).toLocaleDateString("es-MX");
       if (!value) return;
-      var newRole = ""
-      newRole = value
+      var newRole = "";
+      newRole = value;
+      var newAdminType = { ...adminType };
+      if (value == "superAdmin") {
+        newAdminType.superAdmin = true;
+        setAdminType(newAdminType)
+      };
       let adminData = { ...admin };
       adminData.role = newRole;
+      adminData.adminType = newAdminType;
+
       if (value == admin.role) return;
+
       updateRole(adminData, adminID).then(() => {
         alert("Rol actualizado correctamente")
         setIsVisible(false)
@@ -56,6 +69,12 @@ const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
     }
     submitChanges();
   }, [value]);
+
+  useEffect(() => {
+    setUpdatedRole(false);
+    if (!admin.adminType) return;
+    setCurrentRole(admin.adminType.superAdmin);
+  }, [admin]);
 
   return (
     <UserContain>
@@ -94,7 +113,7 @@ const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
               <IconRoleContain>
                 <SelectContain key={1}>
                   <SelectedRoleContain onClick={() => { setOpen(true); setUpdatedRole(true) }}>
-                    {updatedRole != true ? (role) : (value)}
+                    {updatedRole != true ? (admin.role) : (value)}
                     <CaretD2 />
                   </SelectedRoleContain>
                   {
@@ -143,14 +162,14 @@ const AdminDataUpdate = ({ admin, role, setIsVisible, adminID }: any) => {
                 {!admin.phoneNumber ? "N/A" : admin.phoneNumber}
               </Label>
             </Info>
-            {admin.role != "superAdmin" &&
+            {!currentRole &&
               <ButtonRoleContain>
                 <UpdateButton onClick={() => { setShow(true); }}>Editar acceso</UpdateButton>
               </ButtonRoleContain>
             }
           </ColumnContain>
         </Columns>
-        <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} />
+        <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} adminType={adminType} role={role} />
       </>
 
     </UserContain>

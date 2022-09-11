@@ -35,6 +35,7 @@ const Sections = () => {
       setSelectedAdmin(newUser);
       setAdminID(id);
       setIsVisible(true);
+      setRole(newUser.adminType);
     }
   };
 
@@ -107,7 +108,7 @@ const Sections = () => {
       </GeneralContain>
       {
         isVisible === true &&
-        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} role={role} setIsVisible={setIsVisible} />
+        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} />
       }
     </AdminContain>
   )

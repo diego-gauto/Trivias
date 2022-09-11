@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
-import { collection, query } from "firebase/firestore";
-
-import { db } from "../../../../firebase/firebaseConfig";
 import { ButtonRoleContain, CloseIcon, UpdateButton } from "./AdminDataUpdate.styled";
 import {
   Info,
@@ -19,76 +16,40 @@ import {
   TitleContain,
 } from "./RoleEdit.styled";
 
-const RoleEdit = ({ show, setShow, adminID, admin }: any) => {
-  const usersCollectionRef = query(collection(db, "users"));
+type CheckBoxNames = {
+  general: boolean;
+  pay: boolean;
+  courses: boolean;
+  rewards: boolean;
+  landing: boolean;
+  coupons: boolean;
+  users: boolean;
+  superAdmin?: boolean;
+};
+
+type CheckBoxValues = {
+  name: string;
+  checked: boolean
+};
+
+const RoleEdit = ({ show, setShow, admin, adminType, role }: any) => {
   const handleClose = () => setShow(false);
 
-  const [generalChk, setGeneralChk] = useState<boolean>(false);
-  const [payChk, setPayChk] = useState<boolean>(false);
-  const [coursesChk, setCoursesChk] = useState<boolean>(false);
-  const [landingChk, setLandinChk] = useState<boolean>(false);
-  const [couponsChk, setCouponsChk] = useState<boolean>(false);
-  const [usersChk, setUsersChk] = useState<boolean>(false);
-  const [rewardsChk, setRewardsChk] = useState<boolean>(false);
-  const [adminType, setAdminType] = useState<Array<string>>([]);
+  const [state, setState] = useState<any>({ ...role });
 
-  const generalChange = () => {
-    if (generalChk == true) {
-      setGeneralChk(false);
-    } else setGeneralChk(true);
+  const handleChange = (e: { target: CheckBoxValues }) => {
+    const value = e.target.checked;
+    setState({
+      ...state,
+      [e.target.name]: value
+    });
   };
-  const payChange = () => {
-    if (payChk == true) {
-      setPayChk(false);
-    } else setPayChk(true);
-  };
-  const coursesChange = () => {
-    if (coursesChk == true) {
-      setCoursesChk(false);
-    } else setCoursesChk(true);
-  };
-  const rewardsChange = () => {
-    if (rewardsChk == true) {
-      setRewardsChk(false);
-    } else setRewardsChk(true);
-  };
-  const landingChange = () => {
-    if (landingChk == true) {
-      setLandinChk(false);
-    } else setLandinChk(true);
-  };
-  const couponsChange = () => {
-    if (couponsChk == true) {
-      setCouponsChk(false);
-    } else setCouponsChk(true);
-  };
-  const usersChange = () => {
-    if (usersChk == true) {
-      setUsersChk(false);
-    } else setUsersChk(true);
-  };
-
   useEffect(() => {
-    const loadAdminType = async (): Promise<void> => {
-      //if (admin.adminType.superAdmin == true) return;
-
-      var newAdminType = [""];
-      newAdminType = [...adminType];
-
-      //admin.created_at = new Date(admin.created_at.seconds * 1000).toLocaleDateString("es-MX");
-      // if (!value) return;
-      // var newRole = ""
-      // newRole = value
-      // let adminData = { ...admin };
-      // adminData.role = newRole;
-      // if (value == admin.role) return;
-      // updateRole(adminData, adminID).then(() => {
-      //   alert("Rol actualizado correctamente")
-      //   setIsVisible(false)
-      // });
-    }
-    loadAdminType();
-  }, [adminID]);
+    if (role == undefined) return;
+    console.log("mounted adminType1", role.coupons);
+    setState(role);
+    //console.log("mounted adminType2", state);
+  }, [admin]);
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -101,33 +62,33 @@ const RoleEdit = ({ show, setShow, adminID, admin }: any) => {
           <SectionOptions>
             <Info>Secciones a las que tiene acceso</Info>
             <SelectedRoleContain>
-              <RowContain onClick={generalChange} >
+              <RowContain >
                 <li>General</li>
-                <input type="checkbox" id="generalBox" checked={generalChk} />
+                <input type="checkbox" name="general" checked={state.general} onChange={handleChange} />
               </RowContain>
-              <RowContain onClick={payChange}>
+              <RowContain>
                 <li>Pagos</li>
-                <input type="checkbox" checked={payChk} />
+                <input type="checkbox" name="pay" checked={state.pay} onChange={handleChange} />
               </RowContain>
-              <RowContain onClick={coursesChange}>
+              <RowContain>
                 <li>Cursos</li>
-                <input type="checkbox" checked={coursesChk} />
+                <input type="checkbox" name="courses" checked={state.courses} onChange={handleChange} />
               </RowContain>
-              <RowContain onClick={rewardsChange} >
+              <RowContain>
                 <li>Recompensas</li>
-                <input type="checkbox" checked={rewardsChk} />
+                <input type="checkbox" name="rewards" checked={state.rewards} onChange={handleChange} />
               </RowContain>
-              <RowContain onClick={landingChange} >
+              <RowContain>
                 <li>Landing</li>
-                <input type="checkbox" checked={landingChk} />
+                <input type="checkbox" name="landing" checked={state.landing} onChange={handleChange} />
               </RowContain>
-              <RowContain onClick={couponsChange} >
+              <RowContain>
                 <li>Cupones</li>
-                <input type="checkbox" checked={couponsChk} />
+                <input type="checkbox" name="coupons" checked={state.coupons} onChange={handleChange} />
               </RowContain>
-              <RowContain onClick={usersChange} >
+              <RowContain>
                 <li>Usuarios</li>
-                <input type="checkbox" checked={usersChk} />
+                <input type="checkbox" name="users" checked={state.users} onChange={handleChange} />
               </RowContain>
             </SelectedRoleContain>
           </SectionOptions>
