@@ -17,7 +17,7 @@ export const ModalPurchase1 = ({ show, setShow, handleCoupons, userId }: any) =>
 
   const checkCoupon = () => {
     let coupon;
-    coupon = coupons.filter((x: any) => x.code == code);
+    coupon = coupons.filter((x: any) => x.code == code && x.status);
     if (coupon.length > 0) {
       if (coupon[0].users.includes(userId)) {
         alert("Este cupón ya ha sido canjeado")

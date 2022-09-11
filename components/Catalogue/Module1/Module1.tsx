@@ -20,11 +20,13 @@ import {
   TransparentButton,
   VideoContain,
 } from "./Module1.styled";
+import Modal from "./modal/modal";
 
 const Module1 = ({ user, allCourses }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
+  const [show, setShow] = useState(false);
 
   const goTo = () => {
     if (user) {
@@ -51,6 +53,10 @@ const Module1 = ({ user, allCourses }: any) => {
         router.push(LOGIN_PATH)
       }
     }
+  }
+
+  const handleShow = () => {
+    setShow(true);
   }
 
   useEffect(() => {
@@ -139,12 +145,13 @@ const Module1 = ({ user, allCourses }: any) => {
               Reproducir
               <PlayIcon />
             </PurpleButton>
-            <TransparentButton>
+            <TransparentButton onClick={handleShow}>
               Más información
             </TransparentButton>
           </ButtonContain>
         </TextContain>
       </>}
+      <Modal show={show} setShow={setShow} course={historyCourse} user={user} />
     </Container>
   )
 }

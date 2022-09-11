@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import router from "next/router";
 
 import { LOGIN_PATH } from "../../../../constants/paths";
-import { PurpleButton, TransparentButton } from "../../Module1/Module1.styled";
+import { PlayIcon, PurpleButton } from "../../Module1/Module1.styled";
 import {
   AboutContain,
   BackgroundOverlay,
   ButtonContain,
-  CardImage,
+  CardImageUnlock,
   Container,
   ContainVideo,
   CourseContain,
@@ -22,16 +22,12 @@ import {
   EpisodeTime,
   EpisodeTitle,
   ImageBack,
-  InsideContent,
-  InsideText,
   LessonContain,
   LessonTitle,
-  Lock,
   ModalBackground,
   ModalCont,
   ModalContain,
   ModalMod,
-  PlayIcon,
   SeasonContain,
   SubTitle,
   Text,
@@ -40,9 +36,9 @@ import {
   Titles,
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
-import SelectModule4 from "./SelectModule4";
+import SelectModule4 from "../../Module4/Modal/SelectModule4";
 
-const Modal1 = ({ show, setShow, course, user }: any) => {
+const Modal = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([])
 
@@ -89,12 +85,9 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 </SubTitle>
                 <ButtonContain>
                   <PurpleButton onClick={goTo}>
-                    Comprar - ${course.coursePrice}.00
-                  </PurpleButton>
-                  <TransparentButton>
-                    Ver un Adelanto
+                    Reproducir
                     <PlayIcon />
-                  </TransparentButton>
+                  </PurpleButton>
                 </ButtonContain>
               </TextContainer>
             </Container>
@@ -156,8 +149,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <VideoContain>
                   <ContainVideo>
                     <EpisodeContain>
-                      <CardImage src="/images/Preview/card8.png" width={350} height={200} />
-                      <Lock />
+                      <CardImageUnlock src="/images/Preview/card8.png" width={350} height={200} />
                     </EpisodeContain>
                   </ContainVideo>
                   <EpisodeInfo>
@@ -180,4 +172,4 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     </ModalContain>
   )
 }
-export default Modal1;
+export default Modal;
