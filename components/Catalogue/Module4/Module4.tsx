@@ -94,7 +94,7 @@ const Module4 = ({ user, allCourses }: any) => {
               <Cardcontent key={"cardContent-" + index}>
                 <ImageContent>
                   <CardImage
-                    src="/images/Preview/card5.png"
+                    src={course.path}
                   />
                   <InsideContent>
                     {course.totalLessons > 1 && <InsideText>
