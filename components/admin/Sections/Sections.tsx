@@ -38,7 +38,6 @@ const Sections = () => {
       setRole(newUser.adminType);
     }
   };
-
   useEffect(() => {
 
     const getUsers = async (): Promise<void> => {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
+import { updateRole } from "../../../../store/actions/AdminActions";
 import { ButtonRoleContain, CloseIcon, UpdateButton } from "./AdminDataUpdate.styled";
 import {
   Info,
@@ -32,9 +33,8 @@ type CheckBoxValues = {
   checked: boolean
 };
 
-const RoleEdit = ({ show, setShow, admin, adminType, role }: any) => {
+const RoleEdit = ({ show, setShow, admin, adminID, role }: any) => {
   const handleClose = () => setShow(false);
-
   const [state, setState] = useState<any>({ ...role });
 
   const handleChange = (e: { target: CheckBoxValues }) => {
@@ -44,11 +44,22 @@ const RoleEdit = ({ show, setShow, admin, adminType, role }: any) => {
       [e.target.name]: value
     });
   };
+
+  const updateAdminType = () => {
+    if (JSON.stringify(state) === JSON.stringify(role)) return;
+    var newAdminType = { ...state };
+    let adminData = { ...admin };
+    adminData.adminType = newAdminType;
+
+    updateRole(adminData, adminID).then(() => {
+      alert("Acceso actualizado correctamente");
+      setShow(false);
+    });
+  };
+
   useEffect(() => {
+    console.log("mounted RoleEdit", role);
     if (role == undefined) return;
-    console.log("mounted adminType1", role.coupons);
-    setState(role);
-    //console.log("mounted adminType2", state);
   }, [admin]);
 
   return (
@@ -64,7 +75,7 @@ const RoleEdit = ({ show, setShow, admin, adminType, role }: any) => {
             <SelectedRoleContain>
               <RowContain >
                 <li>General</li>
-                <input type="checkbox" name="general" checked={state.general} onChange={handleChange} />
+                <input type="checkbox" name="general" checked={state.general} onChange={handleChange} defaultValue={"checked"} />
               </RowContain>
               <RowContain>
                 <li>Pagos</li>
@@ -94,7 +105,7 @@ const RoleEdit = ({ show, setShow, admin, adminType, role }: any) => {
           </SectionOptions>
         </OptionsContain>
         <ButtonRoleContain>
-          <UpdateButton>Guardar cambios</UpdateButton>
+          <UpdateButton onClick={updateAdminType}>Guardar cambios</UpdateButton>
         </ButtonRoleContain>
       </ModalContain>
     </Modal>

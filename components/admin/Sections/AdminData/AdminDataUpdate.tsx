@@ -45,6 +45,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: any) => {
   const [value, setValue] = useState<string>("");
   const [currentRole, setCurrentRole] = useState<boolean>();
   const [adminType, setAdminType] = useState<IAdminType>({ general: false, pay: false, courses: false, rewards: false, landing: false, coupons: false, users: false, superAdmin: false });
+
   useEffect(() => {
     const submitChanges = () => {
       //admin.created_at = new Date(admin.created_at.seconds * 1000).toLocaleDateString("es-MX");
@@ -169,7 +170,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: any) => {
             }
           </ColumnContain>
         </Columns>
-        <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} adminType={adminType} role={role} />
+        <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} />
       </>
 
     </UserContain>
