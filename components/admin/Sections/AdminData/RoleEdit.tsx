@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
@@ -25,7 +25,7 @@ type CheckBoxNames = {
   landing: boolean;
   coupons: boolean;
   users: boolean;
-  superAdmin?: boolean;
+  superAdmin: boolean;
 };
 
 type CheckBoxValues = {
@@ -35,7 +35,7 @@ type CheckBoxValues = {
 
 const RoleEdit = ({ show, setShow, admin, adminID, role }: any) => {
   const handleClose = () => setShow(false);
-  const [state, setState] = useState<any>({ ...role });
+  const [state, setState] = useState<CheckBoxNames>({ ...role });
 
   const handleChange = (e: { target: CheckBoxValues }) => {
     const value = e.target.checked;
@@ -47,20 +47,14 @@ const RoleEdit = ({ show, setShow, admin, adminID, role }: any) => {
 
   const updateAdminType = () => {
     if (JSON.stringify(state) === JSON.stringify(role)) return;
-    var newAdminType = { ...state };
     let adminData = { ...admin };
-    adminData.adminType = newAdminType;
+    adminData.adminType = { ...state };
 
     updateRole(adminData, adminID).then(() => {
       alert("Acceso actualizado correctamente");
       setShow(false);
     });
   };
-
-  useEffect(() => {
-    console.log("mounted RoleEdit", role);
-    if (role == undefined) return;
-  }, [admin]);
 
   return (
     <Modal show={show} onHide={handleClose} centered>

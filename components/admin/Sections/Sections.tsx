@@ -18,15 +18,38 @@ import {
   TitleContain,
 } from "./Sections.styled";
 
+export type INewUser = {
+  name?: string,
+  email?: string,
+  phoneNumber?: number,
+  created_at?: {
+    seconds: number,
+    nanoseconds: number
+  },
+  score?: string,
+  role?: string,
+  id?: string,
+  adminType?: {
+    general: boolean;
+    pay: boolean;
+    courses: boolean;
+    rewards: boolean;
+    landing: boolean;
+    coupons: boolean;
+    users: boolean;
+    superAdmin: boolean;
+  }
+};
+
 const Sections = () => {
   const usersCollectionRef = query(collection(db, "users"));
   const [users, setUsers] = useState<Array<any>>([]);
-  const [isVisible, setIsVisible] = useState<boolean>();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [role, setRole] = useState<string>();
   const [adminID, setAdminID] = useState<string>();
   const [selectedAdmin, setSelectedAdmin] = useState<Array<any>>([]);
 
-  const editRole = async (id: string): Promise<any> => {
+  const editRole = async (id: string): Promise<void> => {
     setIsVisible(true);
 
     const newUser: any = await getSingleUser(id);
@@ -39,6 +62,7 @@ const Sections = () => {
     }
   };
   useEffect(() => {
+    if (!users) return;
 
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
@@ -51,15 +75,13 @@ const Sections = () => {
         score: user.score.toString(),
         role: user.role ?? "",
         id: user.id,
+        adminType: user.adminType
       }));
-      const getAdminUsers = usersData.filter((item) =>
-        item.role.includes("admin") ||
-        item.role.includes("superAdmin")
-      );
+      const getAdminUsers = usersData.filter((item) => item.role.includes("admin"));
       setUsers(getAdminUsers);
     }
     getUsers();
-  }, [isVisible]);
+  }, [isVisible, role]);
 
   return (
     <AdminContain>
@@ -91,7 +113,7 @@ const Sections = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{user.created_at}</td>
-                      <td>{user.role}</td>
+                      {user.adminType.superAdmin ? (<td>superAdmin</td>) : (<td>admin</td>)}
                       <td >Editar</td>
                     </tr>
                   )
@@ -106,7 +128,7 @@ const Sections = () => {
 
       </GeneralContain>
       {
-        isVisible === true &&
+        isVisible &&
         <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} />
       }
     </AdminContain>
