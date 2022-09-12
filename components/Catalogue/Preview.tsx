@@ -79,7 +79,7 @@ const Preview = () => {
         <PreviewContain>
           <Module1 user={userData} allCourses={courses[0]} />
           <ModuleContain>
-            {userData && <Module2 user={userData} />}
+            {userData && <Module2 user={userData} allCourses={courses} />}
             {userData && <Module3 user={userData} allCourses={courses} />}
             <Module4 user={userData} allCourses={courses} />
           </ModuleContain>

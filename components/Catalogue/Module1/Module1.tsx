@@ -77,6 +77,8 @@ const Module1 = ({ user, allCourses }: any) => {
         })
       })
     } else {
+      allCourses.lesson = 0;
+      allCourses.season = 0;
       setHistoryCourse(allCourses);
     }
   }, [user])
@@ -89,7 +91,7 @@ const Module1 = ({ user, allCourses }: any) => {
           <VideoContain>
             <ReactPlayer
               className='absolute'
-              url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
+              url={historyCourse.seasons[historyCourse.season].lessons[historyCourse.lesson].link}
               playing={true}
               muted={true}
               //controls

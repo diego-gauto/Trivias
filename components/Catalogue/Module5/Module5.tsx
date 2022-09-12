@@ -81,7 +81,7 @@ const Module5 = ({ user, course }: any) => {
                   <Cardcontent2>
                     <ImageContent>
                       <CardImage
-                        src="/images/Preview/card3.png"
+                        src={course.coursePath}
                         width={400}
                         height={210}
                       />
