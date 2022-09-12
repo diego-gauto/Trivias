@@ -1,4 +1,4 @@
-export interface HomeWorkModal {
+export interface IHomeWorkModal {
   id: string,
   lesson: number,
   season: number,

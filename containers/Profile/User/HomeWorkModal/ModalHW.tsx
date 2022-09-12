@@ -2,14 +2,14 @@ import { doc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import { db } from '../../../../firebase/firebaseConfig';
-import { HomeWorkModal } from '../../../../interfaces/IHOMEWORKS';
+import { IHomeWorkModal } from '../../../../interfaces/IHomeWorks';
 import { addReview, getUserScore } from '../../../../store/actions/UserActions';
 import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, InputContain, ButtonContain, SafeContained } from './ModalHW.styled';
 
 interface props {
   show: boolean,
   setShow: any,
-  data: HomeWorkModal,
+  data: IHomeWorkModal,
 }
 
 const ModalHW = ({ show, setShow, data }: props) => {
