@@ -3,10 +3,12 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
+  UserCredential
 } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
+import { PREVIEW, SIGNUP_PAST_USER_PATH } from "../../constants/paths";
 
 import { db, functions } from "../../firebase/firebaseConfig";
 
@@ -15,7 +17,6 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
     credentials,
   } = signUpData;
 
-  console.log(signUpData)
   //Una vez inicializado es contextual a las llamadas de firebase
   const auth = getAuth();
 
@@ -26,9 +27,6 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
       const user = userCredential.user;
       localStorage.setItem("username", credentials.name);
       localStorage.setItem("email", credentials.email);
-
-
-      console.log("Provider Auth : 1")
 
       const data = {
         name: credentials.name,
@@ -69,6 +67,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
           throw (docCreationError);
         })
       })
+      return PREVIEW;
     }).catch((error: any) => {
       firebase.auth().signOut();
       console.error(error);
@@ -76,27 +75,40 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
     })
 }
 
-export const signInWithCreds = (signUpData: { credentials: any; }) => {
+const hasCurrentUser = async (email: string) => {
+  const user = await db.collection('users').where("email", "==", email).limit(1).get();
+  return !!user.docs[0];
+}
+
+const hasPastUser = async (email: string) => {
+  const pastUser = await db.collection('pastUsers').where("email", "==", email).limit(1).get();
+  return !!pastUser.docs[0];
+}
+
+export const signInWithCreds = async (signUpData: { credentials: any; }) => {
   const {
     credentials,
   } = signUpData;
 
-  console.log(signUpData)
+  const hasCurrentUserVar = await hasCurrentUser(credentials.email);
+  const hasPastUserVar = await hasPastUser(credentials.email);
+
+  if (!hasCurrentUserVar && hasPastUserVar) {
+    localStorage.setItem("pastUserEmail", credentials.email);
+    return SIGNUP_PAST_USER_PATH;
+  }
+
   //Una vez inicializado es contextual a las llamadas de firebase
   const auth = getAuth();
 
-  return signInWithEmailAndPassword(auth, credentials.email,
-    credentials.password)
-    .then(async (userCredential) => {
-      const user = userCredential.user;
-      localStorage.setItem("email", credentials.email);
-      window.location.href = "/Preview";
-    })
-    .catch((error: any) => {
-      firebase.auth().signOut();
-      return error.code;
-    });
-
+  try {
+    await signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+    localStorage.setItem("email", credentials.email);
+    return PREVIEW;
+  } catch (err: any) {
+    firebase.auth().signOut();
+    return err.code;
+  }
 };
 
 
@@ -125,15 +137,19 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
 
   return signInWithPopup(auth, provider)
     .then(async (response) => {
-
-      console.log("Provider Auth : 1")
-      console.log(response)
-
       uid = response.user.uid;
       displayName = response.user.displayName;
       email = response.user.email;
       photoURL = response.user.photoURL;
       phoneNumber = response.user.phoneNumber;
+
+      const hasCurrentUserVar = await hasCurrentUser(email);
+      const hasPastUserVar = await hasPastUser(email);
+
+      if (!hasCurrentUserVar && hasPastUserVar) {
+        localStorage.setItem("pastUserEmail", email);
+        return SIGNUP_PAST_USER_PATH;
+      }
 
       const query_1 = query(collection(db, "users"), where("uid", "==", response.user.uid));
 
@@ -143,18 +159,14 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
         console.log(doc.id, " => ", doc.data());
         doc1 = doc.data().uid;
       });
-
-
-
-    }).then(async () => {
+      return;
+    }).then(async (redirectURL) => {
       //If user does not exist register a new one
-
-      console.log("Provider Auth : 2")
-      console.log(doc1)
+      if (redirectURL) {
+        return redirectURL;
+      }
 
       if (!doc1) {
-
-
         if (photoURL == undefined || photoURL == null) {
           photoURL = ""
         }
@@ -208,9 +220,10 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
       } else {
         console.log("Provider Auth : 3 | Was already registered")
       }
+      return PREVIEW;
     }).catch((error) => {
       firebase.auth().signOut();
       console.error(error);
-
+      throw error;
     });
 }
