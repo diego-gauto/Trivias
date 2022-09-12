@@ -71,7 +71,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
         <ModalCont>
           <ModalBackground>
-            <ImageBack src="/images/Preview/modalf2.png"
+            <ImageBack src={course.coursePath}
               width={1000}
               height={600}
             />
@@ -156,7 +156,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <VideoContain>
                   <ContainVideo>
                     <EpisodeContain>
-                      <CardImage src="/images/Preview/card8.png" width={350} height={200} />
+                      <CardImage src={lesson.image} width={350} height={200} />
                       <Lock />
                     </EpisodeContain>
                   </ContainVideo>

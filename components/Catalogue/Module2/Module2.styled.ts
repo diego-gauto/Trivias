@@ -44,7 +44,8 @@ export const VideoContain = styled.div`
   position: relative;
   
 `;
-export const Background = styled(Image)`
+export const Background = styled.img`
+  border-radius:10px;
 `;
 export const PlayIcon = styled.i`
   position: absolute;
