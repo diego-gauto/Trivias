@@ -78,11 +78,6 @@ const Modal1 = ({ show, setShow }: any) => {
                 x
               </Cross>
               <TextContainer>
-                <InsideContent>
-                  <InsideText>
-                    Nuevo
-                  </InsideText>
-                </InsideContent>
                 <Title>
                   Curso de Uñas Francesas
                 </Title>

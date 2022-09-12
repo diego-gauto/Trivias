@@ -11,6 +11,7 @@ export const ContinueText = styled.h1`
   font-size: 36px;
   font-family:'Montserrat',sans-serif;
   margin: 0;
+  padding-left:10px;
   @media( max-width: 1023px){
     font-size: 24px;
     margin-left: 10px;
@@ -43,7 +44,8 @@ export const VideoContain = styled.div`
   position: relative;
   
 `;
-export const Background = styled(Image)`
+export const Background = styled.img`
+  border-radius:10px;
 `;
 export const PlayIcon = styled.i`
   position: absolute;

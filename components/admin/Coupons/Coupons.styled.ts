@@ -64,7 +64,7 @@ export const PurpleButton = styled.button`
 `;
 export const SelectContain = styled.div`
   display: flex;
-  margin-top: 10px;
+  margin-top: 5px;
   gap: 40px;
 `;
 export const RadioContain = styled.div`

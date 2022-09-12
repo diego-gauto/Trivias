@@ -37,6 +37,7 @@ export const updateCourse = async (signUpData: { data: any; }, images: any) => {
   const {
     data,
   } = signUpData;
+
   let tempCourse: any = JSON.parse(JSON.stringify(data))
 
   const storage = getStorage();
@@ -49,13 +50,26 @@ export const updateCourse = async (signUpData: { data: any; }, images: any) => {
     });
     tempCourse.coursePath = await uploadImage(images, tempCourse.reference);
   }
-
-  return db.collection('courses').doc(data.documentID).update(data)
+  return db.collection('courses').doc(data.documentID).update(tempCourse)
     .catch((error: any) => {
       let docCreationError = new Error(`Error updating user document: ${error}`);
       console.error(docCreationError);
       throw (docCreationError);
     })
+
+}
+
+export const updateRole = async (adminData: { data: object; }, adminID: string) => {
+  const {
+    data,
+  } = adminData;
+  try {
+    return await db.collection('users').doc(adminID).update(adminData);
+  } catch (error) {
+    let docCreationError = new Error(`Error updating user document: ${error}`);
+    console.error(docCreationError);
+    throw (docCreationError);
+  }
 
 }
 

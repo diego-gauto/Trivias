@@ -210,6 +210,7 @@ const Purchase = () => {
   const Return = () => {
     setProcess(true);
     setConfirmation(false);
+    setCoupon({});
     Object.keys(card).forEach(key => {
       card[key] = '';
     });
@@ -334,8 +335,6 @@ const Purchase = () => {
   const handleShow = () => setShow(true);
 
   const handleCoupons = (value: any) => {
-    // console.log(value);
-
     setCoupon(value);
   }
 

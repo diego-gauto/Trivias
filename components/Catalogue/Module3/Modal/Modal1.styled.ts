@@ -125,7 +125,8 @@ export const SubTitle = styled.p`
     font-size: 14px;
   }
 `;
-export const ImageBack = styled(Image)`
+export const ImageBack = styled.img`
+  width:100%;
 `;
 export const ImageDiv = styled.div`
   position: absolute;
@@ -344,8 +345,12 @@ export const Description = styled.p`
     display: none;
   }
 `;
-export const CardImage = styled(Image)`
+export const CardImage = styled.img`
 filter: brightness(40%);
+border-radius:10px;
+`;
+export const CardImageUnlock = styled.img`
+  border-radius:10px;
 `;
 export const Lock = styled.i`
   position: absolute;

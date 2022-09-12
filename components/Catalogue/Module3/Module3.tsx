@@ -83,7 +83,7 @@ const Module3 = ({ user, allCourses }: any) => {
                   <Band />
                   <DaysLeft>{course.date} días</DaysLeft>
                   <CardImage
-                    src="/images/Preview/card3.png"
+                    src={course.coursePath}
                     width={400}
                     height={210}
                   />

@@ -3,11 +3,10 @@ import styled from "styled-components";
 export const Selected = styled.div`
   display: flex;
   cursor: pointer;
-  font-size: 16px;
-  padding-left: 20px;
-  width: 260px;
+  font-size: 15px;
+  padding-left: 15px;
   font-family: 'Montserrat', sans-serif;
-  padding-block: 10px;
+  padding-block: 3px;
   border-radius: 30px;
   border: 1px solid #6717CD;
   z-index: 5;

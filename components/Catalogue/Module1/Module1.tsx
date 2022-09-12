@@ -20,11 +20,13 @@ import {
   TransparentButton,
   VideoContain,
 } from "./Module1.styled";
+import Modal from "./modal/modal";
 
 const Module1 = ({ user, allCourses }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
+  const [show, setShow] = useState(false);
 
   const goTo = () => {
     if (user) {
@@ -53,8 +55,14 @@ const Module1 = ({ user, allCourses }: any) => {
     }
   }
 
+  const handleShow = () => {
+    setShow(true);
+  }
+
   useEffect(() => {
     if (user) {
+      console.log(1);
+
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid: any) => {
         getViewedCourses(user.id).then((res) => {
@@ -69,54 +77,21 @@ const Module1 = ({ user, allCourses }: any) => {
         })
       })
     } else {
-      setCourse(allCourses);
+      allCourses.lesson = 0;
+      allCourses.season = 0;
+      setHistoryCourse(allCourses);
     }
   }, [user])
 
   return (
     <Container>
-      {(Object.values(course).length > 0 && !user) && <>
+      {(Object.values(historyCourse).length > 0) && <>
         <ImageContain>
 
           <VideoContain>
             <ReactPlayer
               className='absolute'
-              url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
-              playing={true}
-              muted={true}
-              //controls
-              width='100%'
-              height='180%'
-              style={{ position: "absolute", top: responsive1023 ? "-95px" : "-170px", }}
-            />
-          </VideoContain>
-        </ImageContain>
-
-        <TextContain>
-          <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0]?.title}”
-          </Title>
-          <SubText style={{ textShadow: "1px 1px 5px black" }}>
-            {course.courseAbout}...
-          </SubText>
-          <ButtonContain>
-            <PurpleButton onClick={goTo}>
-              Reproducir
-              <PlayIcon />
-            </PurpleButton>
-            <TransparentButton>
-              Más información
-            </TransparentButton>
-          </ButtonContain>
-        </TextContain>
-      </>}
-      {(Object.values(historyCourse).length > 0 && user) && <>
-        <ImageContain>
-
-          <VideoContain>
-            <ReactPlayer
-              className='absolute'
-              url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
+              url={historyCourse.seasons[historyCourse.season].lessons[historyCourse.lesson].link}
               playing={true}
               muted={true}
               //controls
@@ -139,12 +114,13 @@ const Module1 = ({ user, allCourses }: any) => {
               Reproducir
               <PlayIcon />
             </PurpleButton>
-            <TransparentButton>
+            <TransparentButton onClick={handleShow}>
               Más información
             </TransparentButton>
           </ButtonContain>
         </TextContain>
       </>}
+      <Modal show={show} setShow={setShow} course={historyCourse} user={user} />
     </Container>
   )
 }
