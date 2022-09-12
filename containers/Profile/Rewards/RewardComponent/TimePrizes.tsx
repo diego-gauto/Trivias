@@ -24,6 +24,19 @@ const TimePrizes = ({ score, user }: any) => {
 
   const [rewards, setRewards] = useState<any>([]);
   const [reward, setReward] = useState<any>({});
+  const container: any = document.getElementById("container");
+
+  container?.addEventListener("wheel", function (e: any) {
+    if (e.deltaY > 0) {
+      container.scrollLeft += 50;
+      e.preventDefault();
+    }
+    else {
+      container.scrollLeft -= 50;
+      e.preventDefault();
+    }
+  });
+
   const getAllRewards = () => {
     getTimeRewards().then((res) => {
       getUserRewards(user.id).then((rw) => {
@@ -50,7 +63,7 @@ const TimePrizes = ({ score, user }: any) => {
       <TitleClaim>
         Premios por reclamar
       </TitleClaim>
-      <AllPrizes>
+      <AllPrizes id="container">
         {
           rewards.map((reward: any, index: any) => {
             return (

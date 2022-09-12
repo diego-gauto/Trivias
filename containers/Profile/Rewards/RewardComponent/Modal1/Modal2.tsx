@@ -84,7 +84,7 @@ const Modal2 = ({ show, setShow, data, user, score }: any) => {
             <ModalPay>
               <ModalPayment>
                 <PaymentIcon>
-                  <ImageReward path={data.path} />
+                  <ImageReward src={data.path} />
                 </PaymentIcon>
               </ModalPayment>
               <ModalForm>
