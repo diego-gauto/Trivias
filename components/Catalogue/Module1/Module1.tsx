@@ -61,6 +61,8 @@ const Module1 = ({ user, allCourses }: any) => {
 
   useEffect(() => {
     if (user) {
+      console.log(1);
+
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid: any) => {
         getViewedCourses(user.id).then((res) => {
@@ -75,48 +77,13 @@ const Module1 = ({ user, allCourses }: any) => {
         })
       })
     } else {
-      setCourse(allCourses);
+      setHistoryCourse(allCourses);
     }
   }, [user])
 
   return (
     <Container>
-      {(Object.values(course).length > 0 && !user) && <>
-        <ImageContain>
-
-          <VideoContain>
-            <ReactPlayer
-              className='absolute'
-              url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
-              playing={true}
-              muted={true}
-              //controls
-              width='100%'
-              height='180%'
-              style={{ position: "absolute", top: responsive1023 ? "-95px" : "-170px", }}
-            />
-          </VideoContain>
-        </ImageContain>
-
-        <TextContain>
-          <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {course.courseTittle}: Episodio 1 “{course.seasons[0]?.lessons[0]?.title}”
-          </Title>
-          <SubText style={{ textShadow: "1px 1px 5px black" }}>
-            {course.courseAbout}...
-          </SubText>
-          <ButtonContain>
-            <PurpleButton onClick={goTo}>
-              Reproducir
-              <PlayIcon />
-            </PurpleButton>
-            <TransparentButton>
-              Más información
-            </TransparentButton>
-          </ButtonContain>
-        </TextContain>
-      </>}
-      {(Object.values(historyCourse).length > 0 && user) && <>
+      {(Object.values(historyCourse).length > 0) && <>
         <ImageContain>
 
           <VideoContain>
