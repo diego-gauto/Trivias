@@ -64,7 +64,7 @@ const UserData = ({ data, pm }: props) => {
             </EditText>
             <EditInput
               placeholder={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
-              defaultValue={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
+              defaultValue={data.phoneNumber}
               onChange={(e) => {
                 setUser({ ...user, phoneNumber: e.target.value })
               }}
