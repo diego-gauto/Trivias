@@ -23,7 +23,6 @@ import React, { useState } from 'react';
 import "react-phone-number-input/style.css";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
 import { SIGNUP_PATH } from "../../constants/paths";
 import * as yup from "yup";
@@ -54,8 +53,6 @@ type FormValues = {
 };
 
 const RegisterPastUser = () => {
-  const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -85,7 +82,7 @@ const RegisterPastUser = () => {
       },
     };
     const redirectURL = await signUpWithCreds(signUpData);
-    router.push(redirectURL);
+    window.location.href = redirectURL;
   }
 
   if (isLoading) {

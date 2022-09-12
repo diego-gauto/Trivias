@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import Link from "next/link";
@@ -51,8 +50,6 @@ type FormValues = {
 };
 
 const Login = () => {
-  const router = useRouter()
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -63,9 +60,7 @@ const Login = () => {
 
   const {
     register,
-    control,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema)
@@ -85,7 +80,7 @@ const Login = () => {
       setError(true);
       setIsLoading(false);
     } else {
-      router.push(redirectURL);
+      window.location.href = redirectURL;
     }
   }
 
@@ -95,7 +90,7 @@ const Login = () => {
     let trial = false;
     setIsLoading(true)
     const redirectURL = await accessWithAuthProvider(authProvider, trial);
-    router.push(redirectURL);
+    window.location.href = redirectURL;
   };
 
 
