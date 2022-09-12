@@ -8,9 +8,8 @@ import { db } from "../../../firebase/firebaseConfig";
 import { getSingleUser } from "../../../hooks/useAuth";
 import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
+import AdminDataUpdate from "./AdminData/AdminDataUpdate";
 import {
-  AdminRoleChange,
-  BackGround,
   Container,
   GeneralContain,
   GonvarTitle,
@@ -19,25 +18,51 @@ import {
   TitleContain,
 } from "./Sections.styled";
 
+export type INewUser = {
+  name?: string,
+  email?: string,
+  phoneNumber?: number,
+  created_at?: {
+    seconds: number,
+    nanoseconds: number
+  },
+  score?: string,
+  role?: string,
+  id?: string,
+  adminType?: {
+    general: boolean;
+    pay: boolean;
+    courses: boolean;
+    rewards: boolean;
+    landing: boolean;
+    coupons: boolean;
+    users: boolean;
+    superAdmin: boolean;
+  }
+};
+
 const Sections = () => {
   const usersCollectionRef = query(collection(db, "users"));
   const [users, setUsers] = useState<Array<any>>([]);
-  const [isVisible, setIsVisible] = useState<boolean>();
-  const [selectedUser, setSelectedUser] = useState<Array<any>>([]);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [role, setRole] = useState<string>();
+  const [adminID, setAdminID] = useState<string>();
+  const [selectedAdmin, setSelectedAdmin] = useState<Array<any>>([]);
 
-  const editRole = async (id: string): Promise<any> => {
+  const editRole = async (id: string): Promise<void> => {
     setIsVisible(true);
 
     const newUser: any = await getSingleUser(id);
     if (newUser?.uid) {
-      newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
-      setSelectedUser(newUser);
-      console.log("selected", selectedUser)
+      //newUser.created_at = new Date(newUser.created_at.seconds * 1000).toLocaleDateString("es-MX");
+      setSelectedAdmin(newUser);
+      setAdminID(id);
       setIsVisible(true);
+      setRole(newUser.adminType);
     }
   };
-
   useEffect(() => {
+    if (!users) return;
 
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
@@ -50,13 +75,13 @@ const Sections = () => {
         score: user.score.toString(),
         role: user.role ?? "",
         id: user.id,
+        adminType: user.adminType
       }));
-      const getAdminUsers = usersData.filter((item) =>
-        item.role.includes("admin"));
+      const getAdminUsers = usersData.filter((item) => item.role.includes("admin"));
       setUsers(getAdminUsers);
     }
     getUsers();
-  }, []);
+  }, [isVisible, role]);
 
   return (
     <AdminContain>
@@ -88,7 +113,7 @@ const Sections = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{user.created_at}</td>
-                      <td>{user.role}</td>
+                      {user.adminType.superAdmin ? (<td>superAdmin</td>) : (<td>admin</td>)}
                       <td >Editar</td>
                     </tr>
                   )
@@ -103,20 +128,8 @@ const Sections = () => {
 
       </GeneralContain>
       {
-        isVisible === true &&
-
-        <BackGround>
-
-          <AdminRoleChange>
-            <div>
-              user
-            </div>
-            Cambiar Rol
-            <div>superadmin: <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input></div>
-
-          </AdminRoleChange>
-
-        </BackGround>
+        isVisible &&
+        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} />
       }
     </AdminContain>
   )

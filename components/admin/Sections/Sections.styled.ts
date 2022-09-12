@@ -38,7 +38,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  border: 1px solid #41417e;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
 `;
 export const BackGround = styled.div`
   display: flex;
@@ -66,7 +67,6 @@ export const TitleContain = styled.div`
   display: flex;
   padding: 20px;
   justify-content: space-between;
-  border: 1px solid #41417e;
 `;
 export const BodyContain = styled.div`
   display: flex;

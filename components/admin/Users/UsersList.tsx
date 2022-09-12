@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import CsvDownloader from "react-csv-downloader";
 
-import { collection, DocumentData, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query, DocumentData } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
-import { getSingleUser } from "../../../hooks/useAuth";
+import { getWholeCourses } from "../../../store/actions/courseActions";
+import { getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
 import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
@@ -20,8 +21,6 @@ import {
   UserContain,
   UserShow,
 } from "./UsersList.styled";
-import { getWholeCourses } from "../../../store/actions/courseActions";
-import { getPaidCourses } from "../../../store/actions/UserActions";
 
 export interface SelectedUser {
   id?: string;
