@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import Link from "next/link";
@@ -51,7 +50,6 @@ type FormValues = {
 };
 
 const Login = () => {
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -62,15 +60,13 @@ const Login = () => {
 
   const {
     register,
-    control,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema)
   });
 
-  const onSubmit: SubmitHandler<FormValues> = formData => {
+  const onSubmit: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
     let signUpData = {
       credentials: {
@@ -78,23 +74,23 @@ const Login = () => {
         password: formData.password,
       },
     };
-    signInWithCreds(signUpData).then((res) => {
-      if (res == 'auth/user-not-found') {
-        setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
-        setError(true);
-        setIsLoading(false);
-      }
-    });
+    const redirectURL = await signInWithCreds(signUpData);
+    if (redirectURL == 'auth/user-not-found') {
+      setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
+      setError(true);
+      setIsLoading(false);
+    } else {
+      window.location.href = redirectURL;
+    }
   }
 
   const [showForgot, setShowForgot] = useState(false);
 
-  const handleSignUpWithAuthProvider = (authProvider: string) => {
+  const handleSignUpWithAuthProvider = async (authProvider: string) => {
     let trial = false;
     setIsLoading(true)
-    accessWithAuthProvider(authProvider, trial).then((res) => {
-      window.location.href = "/Preview";
-    });
+    const redirectURL = await accessWithAuthProvider(authProvider, trial);
+    window.location.href = redirectURL;
   };
 
 
