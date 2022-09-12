@@ -1,9 +1,9 @@
 export interface IUserDataProps {
   name:string,
   phoneNumber: string,
-  stripeId: string,
+  stripeId: string, //CUSTOMER ID FROM STRIPE
   id: string,
-  membership:{
+  membership:{      //OBJECT PLAN GONVAR
     level:number,
     finalDate: number,
     method: string,
