@@ -41,7 +41,6 @@ const Modal2 = ({ show, setShow, handleClick }: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
-      console.log(file)
       setReward({ ...reward, path: reader.result })
     };
   }
