@@ -25,7 +25,7 @@ import {
   TitleContain,
 } from "./Modal.styled";
 
-const Modal2 = ({ show, setShow }: any) => {
+const Modal2 = ({ show, setShow, handleClick }: any) => {
 
   const [open, setOpen] = useState(false);
 
@@ -50,8 +50,14 @@ const Modal2 = ({ show, setShow }: any) => {
 
     }
     else {
+      let tempReward = {
+        ...reward,
+        id: "",
+      }
+      alert("Recompensa Creada")
       addReward(reward).then((res) => {
-        console.log(res)
+        tempReward.id = res;
+        handleClick(tempReward);
       })
     }
   }
@@ -134,6 +140,7 @@ const Modal2 = ({ show, setShow }: any) => {
               <input
                 type="file"
                 placeholder="Seleccionar archivo"
+                accept="image/png, image/jpg, image/jpeg"
                 onChange={(e) => { getImage(e.target.files) }}>
               </input>
             </Input2>
@@ -142,6 +149,7 @@ const Modal2 = ({ show, setShow }: any) => {
         <ButtonContain>
           <Button
             onClick={() => {
+              setShow(false);
               createReward();
             }}
           >Guardar</Button>

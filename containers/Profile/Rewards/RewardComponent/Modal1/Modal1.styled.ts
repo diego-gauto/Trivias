@@ -65,10 +65,9 @@ export const CardText = styled.p`
 `;
 export const PaymentIcon = styled.div`
   display: flex;
-  max-width: 278px;
-  max-height: 278px;
+  width: 260px;
+  height: 260px;
   position: relative;
-  border-radius: 10px;
   cursor: pointer;
   @media(max-width: 870px) {
     margin-bottom:0;
@@ -255,10 +254,8 @@ export const TransparentButton = styled.button`
     transition:.5s ease all;
   }
 `;
-export const ImageReward = styled("i")<{path:any}>`
-  background-image: url(${props=>props.path});
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 260px;
-  min-width: 260px;
+export const ImageReward = styled("img")`
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 `;

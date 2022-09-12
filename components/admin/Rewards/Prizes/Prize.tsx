@@ -28,9 +28,16 @@ const Prize = () => {
     })
   }
   useEffect(() => {
+
     getAllRewards();
 
   }, [])
+
+  const handleClick = (value: any) => {
+    let tempRewards = rewards;
+    tempRewards.push(value)
+    setRewards([...tempRewards])
+  }
 
   return (
     <Container>
@@ -55,7 +62,7 @@ const Prize = () => {
         </PrizeText>
       </NewPrize>
       <Modal1 show={show} setShow={setShow} data={reward} />
-      <Modal2 show={edit} setShow={setEdit} />
+      <Modal2 show={edit} setShow={setEdit} handleClick={handleClick} />
     </Container>
   )
 }

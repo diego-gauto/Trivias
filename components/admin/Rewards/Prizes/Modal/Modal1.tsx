@@ -42,7 +42,10 @@ const Modal1 = ({ show, setShow, data }: any) => {
       alert("Complete todos los campos")
     }
     else {
-      updateRewards(reward, reward.id);
+      updateRewards(reward, reward.id).then(() => {
+        alert("Recompensa Actualizada")
+        window.location.reload();
+      });
     }
   }
   const deletePrize = (reward: any) => {
@@ -132,6 +135,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
               <input
                 type="file"
                 placeholder="Seleccionar archivo"
+                accept="image/png, image/jpg, image/jpeg"
                 onChange={(e) => { getImage(e.target.files) }}>
               </input>
             </Input2>
@@ -143,6 +147,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
           }}
           >Eliminar</ButtonTransparent>
           <Button onClick={() => {
+            setShow(false);
             update()
           }}>Guardar</Button>
         </ButtonContain>

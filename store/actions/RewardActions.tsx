@@ -126,7 +126,8 @@ export const addReward = async (reward: any) => {
       ...reward
     }
   );
-  return 'exito'
+
+  return docRef.id
 }
 
 export const getRewards = async () => {

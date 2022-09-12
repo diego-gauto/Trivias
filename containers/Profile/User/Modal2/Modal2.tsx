@@ -22,8 +22,16 @@ import {
   NewMethod
 } from "./Modal2.styled";
 import { PaypalIcon } from "../User.styled";
+import { IUserDataProps } from "../../../../interfaces/IUserData";
 
-const Modal2 = ({ show, setShow, data, pm }: any) => {
+interface props {
+  show: boolean,
+  setShow: any,
+  data: IUserDataProps,
+  pm: any,
+}
+
+const Modal2 = ({ show, setShow, data, pm }: props) => {
   const handleClose = () => setShow(false);
   const [methods, setMethods] = useState(false);
   let tempDate = new Date(data.membership.finalDate * 1000);

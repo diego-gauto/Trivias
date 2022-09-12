@@ -67,8 +67,7 @@ const Register = () => {
   const [passwordShown_1, setPasswordShown_1] = useState(false);
   const [passwordShown_2, setPasswordShown_2] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [phoneInput, setPhoneInput] = useState();
+  const [phoneInput, setPhoneInput] = useState<string>("");
 
 
   const togglePassword_1 = () => {
@@ -102,23 +101,22 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
     let tempMonth = false;
+    let tempPhoneInput = phoneInput;
     if (trial) {
       tempMonth = true;
     }
     setIsLoading(true)
     var input = document.getElementById("input_1") as HTMLInputElement;
-    var phoneInputValidation = "";
-    if (input !== undefined && input !== null) {
-      phoneInputValidation = input.value
+    if (!tempPhoneInput) {
+      tempPhoneInput = ""
     }
     // 2592000
-
     let signUpData = {
       credentials: {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        phoneInput: phoneInputValidation,
+        phoneInput: tempPhoneInput,
         month: tempMonth
       },
     };
@@ -127,8 +125,6 @@ const Register = () => {
       window.location.href = "/Preview";
     });
   }
-
-
   useEffect(() => { }, [isLoading]);
 
   return (
@@ -226,8 +222,7 @@ const Register = () => {
                   Teléfono
                 </Text2>
                 <InputPhone
-                  onCountryChange={() => setPhoneInput}
-                  onChange={() => setPhoneInput}
+                  onChange={(e: any) => { setPhoneInput(e) }}
                   limitMaxLength={true}
                   international={true}
                   defaultCountry="MX"

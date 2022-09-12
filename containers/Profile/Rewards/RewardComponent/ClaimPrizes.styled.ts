@@ -69,8 +69,15 @@ export const AllPrizes = styled.div`
   display: flex;
   margin-bottom: 20px;
   gap: 60px;
-  @media (max-width: 870px) {
+  padding: 20px;
+
+  overflow-x: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 877px) {
     flex-wrap: wrap;
+    margin-inline: 50px;
     gap: 30px;
     justify-content: center;
   }

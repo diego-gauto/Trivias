@@ -15,8 +15,14 @@ import {
   SaveButton,
   SubscriptionButton,
 } from "./User.styled";
+import { IUserDataProps } from "../../../interfaces/IUserData";
 
-const UserData = ({ data, pm }: any) => {
+interface props {
+  data: IUserDataProps,
+  pm: any,
+}
+
+const UserData = ({ data, pm }: props) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const [user, setUser] = useState<any>({ data })
@@ -57,21 +63,10 @@ const UserData = ({ data, pm }: any) => {
               Telefono
             </EditText>
             <EditInput
-              placeholder={data.phoneNumber == null ? 5512345678 : data.phoneNumber}
-              defaultValue={data.phoneNumber == null ? 5512345678 : data.phoneNumber}
+              placeholder={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
+              defaultValue={data.phoneNumber}
               onChange={(e) => {
                 setUser({ ...user, phoneNumber: e.target.value })
-              }}
-            />
-          </Inputs>
-          <Inputs>
-            <EditText>
-              País
-            </EditText>
-            <EditInput
-              placeholder="Seleccionar país"
-              onChange={(e) => {
-                setUser({ ...user, country: e.target.value })
               }}
             />
           </Inputs>
