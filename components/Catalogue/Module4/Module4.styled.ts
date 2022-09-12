@@ -56,6 +56,10 @@ export const Cardcontent = styled.div`
 `;
 export const CardImage = styled.img`
   width: -webkit-fill-available;
+  max-height:209px;
+  @media( max-width: 1023px){
+    max-height:171px;
+  }
 `;
 export const VideoInfo = styled.div`
   display: flex;
