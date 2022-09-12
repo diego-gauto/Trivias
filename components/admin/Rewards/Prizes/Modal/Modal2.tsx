@@ -25,7 +25,7 @@ import {
   TitleContain,
 } from "./Modal.styled";
 
-const Modal2 = ({ show, setShow }: any) => {
+const Modal2 = ({ show, setShow, handleClick }: any) => {
 
   const [open, setOpen] = useState(false);
 
@@ -51,8 +51,14 @@ const Modal2 = ({ show, setShow }: any) => {
 
     }
     else {
+      let tempReward = {
+        ...reward,
+        id: "",
+      }
+      alert("Recompensa Creada")
       addReward(reward).then((res) => {
-        console.log(res)
+        tempReward.id = res;
+        handleClick(tempReward);
       })
     }
   }
@@ -144,6 +150,7 @@ const Modal2 = ({ show, setShow }: any) => {
         <ButtonContain>
           <Button
             onClick={() => {
+              setShow(false);
               createReward();
             }}
           >Guardar</Button>
