@@ -137,7 +137,7 @@ const NavBar = () => {
       <NavTags>
         <Link href="/Preview">
           <NavText pathname={pathname} color={color}
-            style={pathname == "/Preview" ? { fontWeight: 600 } : { fontWeight: 400 }}>
+            style={pathname == "/Preview" ? { fontWeight: 600 } : { fontWeight: '' }}>
             Inicio
           </NavText>
         </Link>
@@ -148,7 +148,7 @@ const NavBar = () => {
           (loggedIn && isAdmin) &&
           <Link href="/admin/General">
             <NavText pathname={pathname} color={color}
-              style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: 400 }}
+              style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: '' }}
             >
               admin
             </NavText>
@@ -162,7 +162,7 @@ const NavBar = () => {
               <UserLevel />
               <Link href="/Profile">
                 <NavText pathname={pathname} color={color}
-                  style={pathname == "/Profile" ? { fontWeight: 600 } : { fontWeight: 400 }}
+                  style={pathname == "/Profile" ? { fontWeight: 600 } : { fontWeight: '' }}
                 >
                   {userData ? userData.name : "Bienvenido"}
                 </NavText>
@@ -186,7 +186,7 @@ const NavBar = () => {
           <>
             <Link href={LOGIN_PATH}>
               <NavText pathname={pathname} color={color}
-                style={pathname == LOGIN_PATH ? { fontWeight: 600 } : { fontWeight: 400 }}
+                style={pathname == LOGIN_PATH ? { fontWeight: 600 } : { fontWeight: '' }}
               >
 
                 Iniciar Sesión
