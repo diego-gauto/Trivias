@@ -18,7 +18,8 @@ animation: bounce 1.75s infinite;
 width: 35px;
 position: absolute;
 bottom: 17.5vh;
-left: 10px;
+left: 50%;
+transform: translateX(-50%);
 cursor: pointer;
 @media only screen and (max-width: 1024px) {
   margin: 0 auto;
@@ -249,9 +250,10 @@ color: #FFFFFF;
 `;
 export const SectionB_Text = styled.span  `
 font-style: normal; 
-font-weight: 600;
+font-weight: 400;
 font-size: 18px;
 line-height: 150%;
+cursor: pointer;
 @font-face{
   font-family:Montserrat;
   src:url(../fonts/Montserrat-VariableFont_wght.ttf);

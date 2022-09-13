@@ -44,6 +44,7 @@ import {
   SectionB_TextALT1,
   SectionC,
 } from "./Module1.styled";
+import Link from "next/link";
 
 export const Module1 = (props: IModule1) => {
   const {
@@ -124,9 +125,11 @@ export const Module1 = (props: IModule1) => {
                   <SectionB_02>
                     <Button02>
                       <Button02Content>
-                        <SectionB_Text>
-                          {botonSecundario} <Image src={Img1.src} ></Image>
-                        </SectionB_Text>
+                        <Link href="/Preview">
+                          <SectionB_Text>
+                            {botonSecundario} <Image src={Img1.src} ></Image>
+                          </SectionB_Text>
+                        </Link>
                       </Button02Content>
                     </Button02>
                   </SectionB_02>
