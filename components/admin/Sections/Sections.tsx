@@ -65,6 +65,16 @@ const Sections = () => {
     if (!users) return;
 
     const getUsers = async (): Promise<void> => {
+      const createAdminType = {
+        general: true,
+        pay: false,
+        courses: false,
+        rewards: false,
+        landing: false,
+        coupons: false,
+        users: false,
+        superAdmin: false
+      };
       const mainResponse = await getDocs(usersCollectionRef);
       const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       const usersData = usersResponse.map((user: any) => ({
@@ -75,7 +85,7 @@ const Sections = () => {
         score: user.score.toString(),
         role: user.role ?? "",
         id: user.id,
-        adminType: user.adminType
+        adminType: user.adminType ?? createAdminType,
       }));
       const getAdminUsers = usersData.filter((item) => item.role.includes("admin"));
       setUsers(getAdminUsers);
@@ -106,17 +116,21 @@ const Sections = () => {
               {/* TABLAS */}
               {users.length > 0 ? (
                 users.map((user, index): any => {
-                  return (
-                    <tr key={index} onClick={() => editRole(user.id)}>
-                      <td >
-                        {user.name}
-                      </td>
-                      <td >{user.email}</td>
-                      <td>{user.created_at}</td>
-                      {user.adminType.superAdmin ? (<td>superAdmin</td>) : (<td>admin</td>)}
-                      <td >Editar</td>
-                    </tr>
-                  )
+                  {
+                    if (user.adminType)
+
+                      return (
+                        <tr key={index} onClick={() => editRole(user.id)}>
+                          <td >
+                            {user.name}
+                          </td>
+                          <td >{user.email}</td>
+                          <td>{user.created_at}</td>
+                          {user.adminType.superAdmin ? (<td>superAdmin</td>) : (<td>admin</td>)}
+                          {user.adminType.superAdmin ? (<td >Visualizar</td>) : (<td >Editar</td>)}
+                        </tr>
+                      )
+                  }
                 })
               ) : (
                 <td>Sin administradores</td>

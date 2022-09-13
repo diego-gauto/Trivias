@@ -129,6 +129,7 @@ export const ColumnContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 180px;
 `;
 export const Info = styled.p`
   display: flex;
@@ -136,8 +137,7 @@ export const Info = styled.p`
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   margin: 0;
-  min-width: 150px;
-  max-width: 200px;
+  width: 180px;
   height: 60px;
 `;
 export const Label = styled.label`
