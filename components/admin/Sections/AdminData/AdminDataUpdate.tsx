@@ -62,10 +62,6 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
   const [value, setValue] = useState<string>("");
   const [currentRole, setCurrentRole] = useState<boolean>();
 
-  const closeMenu = () => {
-    if (open) setOpen(false);
-  };
-
   useEffect(() => {
     const submitChanges = () => {
       if (!value) return;
@@ -135,7 +131,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
                 {admin.adminType &&
                   <IconRoleContain>
                     <SelectContain key={1}>
-                      <SelectedRoleContain onClick={() => { setOpen(true); closeMenu() }}>
+                      <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
                         {!updatedRole && <>{admin.adminType.superAdmin ? ("superAdmin") : ("admin")}</>}
                         {updatedRole && value}
                         <CaretD2 />
@@ -143,16 +139,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
                       {
                         open &&
                         <OptionRoleContain>
-                          <OptionRole onClick={() => { setValue("admin"); setUpdatedRole(true); setOpen(false) }}>
-                            <input
-                              type="radio"
-                              id="Temporada1"
-                              name="category"
-                              value="Rol admin"
-                            />
-                            <Label2 >admin</Label2>
-                          </OptionRole>
-                          <OptionRole onClick={() => { setValue("superAdmin"); setOpen(false) }}>
+                          <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) setValue("superAdmin"); setOpen(false) }}>
                             <input
                               type="radio"
                               id="Temporada2"
@@ -190,7 +177,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
               </Label>
             </Info>
             {!currentRole &&
-              <ButtonRoleContain>
+              <ButtonRoleContain style={{ marginTop: "22px" }}>
                 <UpdateButton onClick={() => { setShow(true); }}>Editar acceso</UpdateButton>
               </ButtonRoleContain>
             }
@@ -200,7 +187,6 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
           <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} />
         }
       </>
-
     </UserContain>
   )
 }

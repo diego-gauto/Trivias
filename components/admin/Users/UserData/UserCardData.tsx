@@ -1,13 +1,15 @@
 
 
-import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
+
+import { DocumentData } from "firebase/firestore";
+
 import { getPaymentmethods } from "../../../../store/actions/PaymentActions";
 import { getPaidCourses } from "../../../../store/actions/UserActions";
-
 import GetUserLevel from "./GetUserLevel";
 import Modal1 from "./Modal/Modal";
 import {
+  CardIconResp,
   CloseIcon,
   Columns,
   ColumnContain,
@@ -15,14 +17,10 @@ import {
   CourseContain,
   FirstBox,
   Image1,
-  Image2,
-  Image3,
   Info,
   Label,
   LastContainer,
   Level,
-  Pay1,
-  Pay2,
   PayContain,
   ProfileContain,
   ProfilePic,
@@ -31,7 +29,6 @@ import {
   TitleContain,
   TransparentButton,
   UserContain,
-  CardIconResp,
 } from "./UsersCardData.styled";
 
 const UserCardData = ({ user, setIsVisible, courses }: any) => {
@@ -148,7 +145,8 @@ const UserCardData = ({ user, setIsVisible, courses }: any) => {
             <LastContainer>
               Sin métodos de pago...
             </LastContainer>}
-        </PayContain></>
+        </PayContain>
+        <TransparentButton>Agregar días de suscripción</TransparentButton></>
       <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
     </UserContain>
   )
