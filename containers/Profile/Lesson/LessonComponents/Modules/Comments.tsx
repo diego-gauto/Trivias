@@ -68,7 +68,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
           Tareas
         </Titles>
 
-        <PositionTitle>
+        <PositionTitle position={value}>
           Comentarios
         </PositionTitle>
 

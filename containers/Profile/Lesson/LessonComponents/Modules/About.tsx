@@ -3,11 +3,12 @@ import { AboutContain, CircleContain, NumberText, PointText, TextContainer, Less
 import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
 
 const About = ({ value, setValue, data }: any) => {
+  console.log(value);
 
   return (
     <>
       <TitleContain>
-        <PositionTitle>
+        <PositionTitle position={value}>
           Acerca de
         </PositionTitle>
         <Titles onClick={() => {

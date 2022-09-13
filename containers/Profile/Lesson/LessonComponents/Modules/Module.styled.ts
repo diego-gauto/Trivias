@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -62,22 +62,32 @@ export const UnSelected = styled.div`
 `;
 export const Titles = styled.p`
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   font-family: 'Montserrat', sans-serif;
   color: #6717CD;
   margin: 0;
   cursor: pointer;
 `;
-export const PositionTitle = styled.p`
+export const PositionTitle = styled.p<{position:any}>`
   font-size: 16px;
-  font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   color: #6717CD;
   margin: 0;
   @media (max-width: 1023px){
     display: none;
   }
-
+  ${props => props.position == 1 && css`
+      font-weight:700;
+  `}
+  ${props => props.position == 2 && css`
+      font-weight:700;
+  `}
+  ${props => props.position == 3 && css`
+      font-weight:700;
+  `}
+  ${props => props.position == 4 && css`
+  font-weight:700;
+`}
 `;
 export const ListIcon = styled.i`
   -webkit-mask-image: url(../images/Video/icons/list2.png);

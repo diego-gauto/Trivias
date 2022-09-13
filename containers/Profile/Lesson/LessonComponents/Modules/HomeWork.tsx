@@ -55,7 +55,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
         <BookIcon onClick={() => {
           setValue(2)
         }} />
-        <PositionTitle >
+        <PositionTitle position={value}>
           Tareas
         </PositionTitle>
         <ChatboxIcon />
@@ -96,9 +96,9 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
           {data.homeWorkAbout}
         </TaskText>
         {user && <ButtonDiv>
-          <UploadButton>
+          <UploadButton onClick={uploadHwk}>
             Subir tarea
-            <UploadIcon onClick={uploadHwk} />
+            <UploadIcon />
             <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
           </UploadButton>
         </ButtonDiv>}
