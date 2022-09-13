@@ -60,7 +60,7 @@ export const NavText = styled("a")<{pathname: any, color: any}>`
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &:hover{
     color: black;
-    text-decoration: underline;
+    font-weight: 600;
   }
 
   @media(max-width: 1023px){
