@@ -24,19 +24,23 @@ import {
   PurpleButton,
   Title,
 } from "./Modal1.styled";
+import { LoaderContain } from "../User.styled";
 
-const Modal1 = ({ show, setShow, data }: any) => {
+const Modal1 = ({ show, setShow, data, handleClick }: any) => {
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => setShow(false);
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
+  const [loader, setLoader] = useState<any>(false);
 
   const addNewCard = async () => {
-    let temp_new = {}
+    let temp_new = {};
+    setLoader(!loader);
     if (Object.keys(card).some(key => card[key] === '')) {
-      alert('Por favor acomplete todos los campos!')
+      alert('Por favor acomplete todos los campos!');
+      setLoader(false);
     } else {
       const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
       const info = {
@@ -47,6 +51,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
         if ("raw" in res.data) {
           alert("Hay un error en los datos de la tarjeta!");
           setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+          setLoader(false);
         } else {
           temp_new = {
             cardId: res.data.id,
@@ -64,7 +69,9 @@ const Modal1 = ({ show, setShow, data }: any) => {
           }
           const attach = httpsCallable(functions, 'attachPaymentMethodStripe');
           await attach(newCard).then((res) => {
-            window.location.reload();
+            setLoader(false);
+            handleClick(true);
+            setShow(false);
           })
         }
       })
@@ -142,11 +149,14 @@ const Modal1 = ({ show, setShow, data }: any) => {
               </ModalForm>
             </ModalPay>
             <ButtonDiv>
-              <PurpleButton onClick={() => {
+              {!loader ? <PurpleButton onClick={() => {
                 addNewCard();
               }}>
                 Agregar Método
-              </PurpleButton>
+              </PurpleButton> :
+                <LoaderContain />
+              }
+
             </ButtonDiv>
           </ModalCont>
         </Modal>

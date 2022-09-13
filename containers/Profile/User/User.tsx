@@ -139,6 +139,10 @@ const User = () => {
     }
   }, [level, timeLevel]);
 
+  const handleClick = (value: boolean) => {
+    fetchDB_data();
+  }
+
   if (loading) {
     return (
       <Background>
@@ -179,7 +183,7 @@ const User = () => {
             {/* Third Container */}
             <UserData data={userData} pm={paymentMethod} />
             {/* Fourth Container */}
-            <PaymentMethod data={userData} pm={paymentMethod} />
+            <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
           </ThirdBox>
         </SecondBox>
       }
