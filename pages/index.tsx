@@ -65,8 +65,8 @@ const Homepage = () => {
             playing={true}
             muted={true}
             //controls
-            width={responsive380 ? '200%' : '100%' &&
-              responsive520 ? '190%' : '100%' &&
+            width={responsive380 ? '100%' : '100%' &&
+              responsive520 ? '100%' : '100%' &&
                 responsive1023 ? '100%' : '100%'}
             height='180%'
             style={{ position: "absolute", top: responsive1023 ? "22px" : "-170px", }}
