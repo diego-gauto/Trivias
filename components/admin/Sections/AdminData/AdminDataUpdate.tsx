@@ -27,7 +27,7 @@ import {
 } from "./AdminDataUpdate.styled";
 import RoleEdit from "./RoleEdit";
 
-type IAdminType = {
+type AdminType = {
   general: boolean;
   pay: boolean;
   courses: boolean;
@@ -38,20 +38,33 @@ type IAdminType = {
   superAdmin: boolean;
 };
 
-type IProps = {
+type Props = {
   admin: any;
   setIsVisible: (open: boolean) => void;
   adminID: any;
   role: any;
 };
 
-const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: IProps) => {
+const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
+  const [adminType, setAdminType] = useState<AdminType>({
+    general: true,
+    pay: false,
+    courses: false,
+    rewards: false,
+    landing: false,
+    coupons: false,
+    users: false,
+    superAdmin: false
+  });
   const [show, setShow] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const [currentRole, setCurrentRole] = useState<boolean>();
-  const [adminType, setAdminType] = useState<IAdminType>({ general: false, pay: false, courses: false, rewards: false, landing: false, coupons: false, users: false, superAdmin: false });
+
+  const closeMenu = () => {
+    if (open) setOpen(false);
+  };
 
   useEffect(() => {
     const submitChanges = () => {
@@ -68,13 +81,18 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: IProps) => {
 
       updateRole(adminData, adminID).then(() => {
         alert("Rol actualizado correctamente")
-        setIsVisible(false);
+        window.location.reload();
       });
     }
     submitChanges();
   }, [value]);
 
   useEffect(() => {
+    setOpen(false);
+    if ("adminType" in admin) {
+    } else {
+      admin.adminType = adminType;
+    }
     if (!admin.adminType) return;
     setCurrentRole(admin.adminType.superAdmin);
   }, [admin, show]);
@@ -111,42 +129,44 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: IProps) => {
                 Gonvar Plus
               </Label>
             </Info>
-            <InputContain>
-              <Info>Cambiar rol</Info>
-              {admin.adminType &&
-                <IconRoleContain>
-                  <SelectContain key={1}>
-                    <SelectedRoleContain onClick={() => { setOpen(true); setUpdatedRole(true) }}>
-                      {!updatedRole && <>{admin.adminType.superAdmin ? ("superAdmin") : ("admin")}</>}
-                      {updatedRole && value}
-                      <CaretD2 />
-                    </SelectedRoleContain>
-                    {
-                      open &&
-                      <OptionRoleContain>
-                        <OptionRole onClick={() => { setValue("admin"); setOpen(false) }}>
-                          <input
-                            type="radio"
-                            id="Temporada1"
-                            name="category"
-                            value="Rol admin"
-                          />
-                          <Label2 >admin</Label2>
-                        </OptionRole>
-                        <OptionRole onClick={() => { setValue("superAdmin"); setOpen(false) }}>
-                          <input
-                            type="radio"
-                            id="Temporada2"
-                            name="category"
-                            value="Rol superAdmin"
-                          />
-                          <Label2>superAdmin</Label2>
-                        </OptionRole>
-                      </OptionRoleContain>
-                    }
-                  </SelectContain>
-                </IconRoleContain>}
-            </InputContain>
+            {!currentRole &&
+              <InputContain>
+                <Info>Cambiar rol</Info>
+                {admin.adminType &&
+                  <IconRoleContain>
+                    <SelectContain key={1}>
+                      <SelectedRoleContain onClick={() => { setOpen(true); closeMenu() }}>
+                        {!updatedRole && <>{admin.adminType.superAdmin ? ("superAdmin") : ("admin")}</>}
+                        {updatedRole && value}
+                        <CaretD2 />
+                      </SelectedRoleContain>
+                      {
+                        open &&
+                        <OptionRoleContain>
+                          <OptionRole onClick={() => { setValue("admin"); setUpdatedRole(true); setOpen(false) }}>
+                            <input
+                              type="radio"
+                              id="Temporada1"
+                              name="category"
+                              value="Rol admin"
+                            />
+                            <Label2 >admin</Label2>
+                          </OptionRole>
+                          <OptionRole onClick={() => { setValue("superAdmin"); setOpen(false) }}>
+                            <input
+                              type="radio"
+                              id="Temporada2"
+                              name="category"
+                              value="Rol superAdmin"
+                            />
+                            <Label2>superAdmin</Label2>
+                          </OptionRole>
+                        </OptionRoleContain>
+                      }
+                    </SelectContain>
+                  </IconRoleContain>}
+              </InputContain>
+            }
           </ColumnContain>
           <ColumnContain>
             <Info>

@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
+import _ from "lodash";
+
 import { updateRole } from "../../../../store/actions/AdminActions";
 import { ButtonRoleContain, CloseIcon, UpdateButton } from "./AdminDataUpdate.styled";
 import {
@@ -35,7 +37,7 @@ type CheckBoxValues = {
 
 const RoleEdit = ({ show, setShow, admin, adminID, role }: any) => {
   const handleClose = () => setShow(false);
-  const [state, setState] = useState<CheckBoxNames>({ ...role });
+  const [state, setState] = useState<CheckBoxNames>(role);
 
   const handleChange = (e: { target: CheckBoxValues }) => {
     const value = e.target.checked;
@@ -46,13 +48,13 @@ const RoleEdit = ({ show, setShow, admin, adminID, role }: any) => {
   };
 
   const updateAdminType = () => {
-    if (JSON.stringify(state) === JSON.stringify(role)) return;
+    if (_.isEqual(state, role)) return;
     let adminData = { ...admin };
     adminData.adminType = { ...state };
 
     updateRole(adminData, adminID).then(() => {
       alert("Acceso actualizado correctamente");
-      setShow(false);
+      window.location.reload();
     });
   };
 
