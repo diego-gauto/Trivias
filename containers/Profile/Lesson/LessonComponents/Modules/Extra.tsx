@@ -12,7 +12,7 @@ const Extra = ({ value, setValue, data }: any) => {
         }}>
           Acerca de
         </Titles>
-        <PositionTitle >
+        <PositionTitle position={value}>
           Material Extra
         </PositionTitle>
         <Titles onClick={() => {

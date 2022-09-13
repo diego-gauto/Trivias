@@ -15,9 +15,11 @@ import { getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, FirstContainer, MainContainer } from "./Lesson.styled";
 import Modules from "./LessonComponents/Modules/Modules";
 import Video from "./LessonComponents/Video/Video";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState<any>();
   const router = useRouter()
   const [userData, setUserData] = useState<any>(null);
@@ -44,6 +46,7 @@ const Lesson = () => {
       } else {
         setCurrentComments([]);
       }
+      setIsLoading(false);
     }
   }, [router, course]);
 
@@ -107,7 +110,7 @@ const Lesson = () => {
           })
           setUserData({ ...e.data(), id: e.id });
         });
-      })
+      });
     } catch (error) {
       return false
     }
@@ -119,15 +122,22 @@ const Lesson = () => {
   }, [loggedIn])
 
   return (
-    <MainContainer>
-      {course && <Container>
-        <FirstContainer>
-          <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} />
-          <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherId={course.courseProfessor.id} />
-        </FirstContainer>
-      </Container>}
+    <>
+      {isLoading ? <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background> :
+        <MainContainer>
+          {course && <Container>
+            <FirstContainer>
+              <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} />
+              <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherId={course.courseProfessor.id} />
+            </FirstContainer>
+          </Container>}
 
-    </MainContainer>
+        </MainContainer>}
+    </>
   )
 }
 export default Lesson;

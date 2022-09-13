@@ -35,6 +35,9 @@ export const DownlowadContain = styled.div`
   @media (max-width: 400px){
     padding: 5px;
   }
+  &:hover{
+    box-shadow: 0px 0px 10px 2px rgb(102 21 113 / 31%);
+  }
 `;
 export const FileIcon = styled.i`
   background-image: url(../images/Video/ExtraMaterial/file.png);
