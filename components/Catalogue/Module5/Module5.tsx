@@ -5,21 +5,19 @@ import Link from "next/link";
 import { LOGIN_PATH } from "../../../constants/paths";
 import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 import {
-  ImageContent,
   InsideContent,
   InsideText,
   Text1,
   Text2,
   Text3,
 } from "../Module3/Module3.styled";
-import { CardImage } from "../Module4/Module4.styled";
+import { CardImage, Viewpay } from "../Module4/Module4.styled";
 import {
   Banner2,
   ButtonContain,
   Cardcontent2,
   CardContain,
   Content,
-  Divider,
   ImageContain,
   MainContainer,
   PurpleButton,
@@ -30,11 +28,14 @@ import {
   TextContainer,
   TextContent,
   Title,
+  ImageContent,
 } from "./Module5.styled";
+import { useRouter } from "next/router";
 
 const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let today = new Date().getTime() / 1000;
+  const router = useRouter();
 
   useEffect(() => {
     if (course) {
@@ -48,6 +49,23 @@ const Module5 = ({ user, course }: any) => {
       setCourses(temp_courses);
     }
   }, [course])
+
+  const goTo = (data: any) => {
+    if (user) {
+      let today = new Date().getTime() / 1000;
+      if (data.courseType == 'Mensual' && user.membership.finalDate > today) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: data.id, season: 0, lesson: 0 },
+        });
+      }
+      if (data.courseType == 'Mensual' && user.membership.finalDate < today) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'subscription' } }
+        )
+      }
+    }
+  }
 
   return (
     <MainContainer>
@@ -83,8 +101,7 @@ const Module5 = ({ user, course }: any) => {
                     <ImageContent>
                       <CardImage
                         src={course.coursePath}
-                        width={400}
-                        height={210}
+                        height="100%"
                       />
                       <InsideContent>
                         {course.totalLessons > 1 && <InsideText>
@@ -105,14 +122,11 @@ const Module5 = ({ user, course }: any) => {
                       <Text3>
                         {course.courseAbout}...
                       </Text3>
+                      {(user && user.membership.finalDate > today) && <Viewpay onClick={() => { goTo(course) }}>
+                        Ver curso
+                      </Viewpay>}
                     </TextContain>
                   </Cardcontent2>
-                  {(index == 0 && courses.length > 1) && < Divider >
-                    +
-                  </Divider>}
-                  {(index == 1 && courses.length > 2) && < Divider >
-                    +
-                  </Divider>}
                 </>
               )
             })}

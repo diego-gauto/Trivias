@@ -16,7 +16,7 @@ import {
   TextContain,
 } from "../Module3/Module3.styled";
 import Modal1 from "./Modal/Modal1";
-import { Cardcontent, CardContain, CardImage, Title, VideoInfo, Viewpay } from "./Module4.styled";
+import { Cardcontent, CardContain, CardImage, Title, VideoInfo, Viewpay, ScrollContainer } from "./Module4.styled";
 
 const Module4 = ({ user, allCourses }: any) => {
   const [show, setShow] = useState(false);
@@ -87,58 +87,60 @@ const Module4 = ({ user, allCourses }: any) => {
       <Title>
         Cursos disponibles
       </Title>
-      <CardContain id="Scroll">
-        {
-          courses.map((course: any, index: any) => {
-            return (
-              <Cardcontent key={"cardContent-" + index}>
-                <ImageContent>
-                  <CardImage
-                    src={course.coursePath}
-                  />
-                  <InsideContent>
-                    {course.totalLessons > 1 && <InsideText>
-                      {course.totalLessons} Lecciones
-                    </InsideText>}
-                    {course.totalLessons == 1 && <InsideText>
-                      Unica Lección
-                    </InsideText>}
-                  </InsideContent>
-                </ImageContent>
-                <VideoInfo>
-                  <TextContain>
-                    <Text1>
-                      Curso: {course.courseTittle}...
-                      <Text2>
-                        {course.courseSubtittle}...
-                      </Text2>
-                    </Text1>
-                    <Text3>
-                      {course.courseAbout}...
-                    </Text3>
-                  </TextContain>
-                  {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={() => {
-                    handleShow(),
-                      setCourse(course)
-                  }}>
-                    Comprar - ${course.coursePrice}.00
-                  </Viewpay>}
-                  {(course.courseType == 'Mensual' || course.courseType == 'Gratis') && <Viewpay onClick={() => {
-                    goTo(course);
-                  }}>
-                    Ver curso
-                  </Viewpay>}
-                  {course.courseType == 'Producto' && course.paid && <Viewpay onClick={() => {
-                    goTo(course);
-                  }}>
-                    Ver curso
-                  </Viewpay>}
-                </VideoInfo>
-              </Cardcontent>
-            )
-          })
-        }
-      </CardContain>
+      <ScrollContainer>
+        <CardContain>
+          {
+            courses.map((course: any, index: any) => {
+              return (
+                <Cardcontent key={"cardContent-" + index}>
+                  <ImageContent>
+                    <CardImage
+                      src={course.coursePath}
+                    />
+                    <InsideContent>
+                      {course.totalLessons > 1 && <InsideText>
+                        {course.totalLessons} Lecciones
+                      </InsideText>}
+                      {course.totalLessons == 1 && <InsideText>
+                        Unica Lección
+                      </InsideText>}
+                    </InsideContent>
+                  </ImageContent>
+                  <VideoInfo>
+                    <TextContain>
+                      <Text1>
+                        Curso: {course.courseTittle}...
+                        <Text2>
+                          {course.courseSubtittle}...
+                        </Text2>
+                      </Text1>
+                      <Text3>
+                        {course.courseAbout}...
+                      </Text3>
+                    </TextContain>
+                    {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={() => {
+                      handleShow(),
+                        setCourse(course)
+                    }}>
+                      Comprar - ${course.coursePrice}.00
+                    </Viewpay>}
+                    {(course.courseType == 'Mensual' || course.courseType == 'Gratis') && <Viewpay onClick={() => {
+                      goTo(course);
+                    }}>
+                      Ver curso
+                    </Viewpay>}
+                    {course.courseType == 'Producto' && course.paid && <Viewpay onClick={() => {
+                      goTo(course);
+                    }}>
+                      Ver curso
+                    </Viewpay>}
+                  </VideoInfo>
+                </Cardcontent>
+              )
+            })
+          }
+        </CardContain>
+      </ScrollContainer>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </Maincontainer>
   )

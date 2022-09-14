@@ -31,19 +31,23 @@ export const Video = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 420px;
-  min-width: 350px;
+  @media( max-width: 700px){
+  width: 180px;
+  height: 102.86px;
+  }
 `;
 export const VideoContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   position: relative;
-  
+  height: 100%;
 `;
 export const Background = styled.img`
   border-radius:10px;
-  @media( max-width: 700px){
+  @media( max-width: 600px){
     width:100%;
+    height: 100%;
   }
 `;
 export const PlayIcon = styled.i`
@@ -64,6 +68,7 @@ export const ImageContain = styled.div`
   display: flex;
   width: 100%;
   min-width: 180px;
+  height: 100%;
 `;
 export const PlayIconS = styled.i`
   display: none;
