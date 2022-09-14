@@ -18,12 +18,7 @@ export const OptionRole = styled.div`
   &:hover{
     background: linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);
     color:white;
-    &:first-child {
-      border-radius: 10px 10px 0 0;
-    }
-    &:last-child {
-      border-radius: 0 0 8px 8px;
-    }
+    border-radius: 10px 10px 8px 8px;
   }
   input{
     &[type="radio"]{
@@ -32,24 +27,21 @@ export const OptionRole = styled.div`
   }
 `;
 export const ButtonRoleContain = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+display: flex;
+justify-content: center;
 `;
 export const UpdateButton = styled.button`
-  font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-  padding-inline: 25px;
-  background: #6717CD;
-  border-radius: 35px;
-  height: 30px;
-  color: white;
-  border: none;
-  &:hover{
-    background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
-  }
+background-color: #6717CD;
+color: #fff;
+padding-block: 10px;
+padding-inline: 25px;
+border-radius: 30px;
+border:none;
+&:hover{
+  background-color: #5000b5;
+  transform:scale(1.03);
+  transition:.5s ease all;
+}
 `;
 export const OptionRoleContain = styled.div`
   display: flex;
@@ -57,7 +49,7 @@ export const OptionRoleContain = styled.div`
   background: white;
   color: black;
   right:0;
-  top: 40px;
+  top: 50px;
   width: 150px;
   position: absolute;
   border-radius: 10px;
@@ -76,9 +68,9 @@ export const SelectedRoleContain = styled.div`
   font-size: 15px;
   padding-left: 15px;
   width: 150px;
-  height: 30px;
+  height: 44px;
   font-family: 'Montserrat', sans-serif;
-  padding-block: 3px;
+  padding-block: 10px;
   border-radius: 30px;
   border: 1px solid #6717CD;
   z-index: 5;

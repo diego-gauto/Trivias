@@ -49,7 +49,7 @@ export const Label2 = styled.label`
   display: flex; 
   font-size: 14px;
   gap: 5px;
-  //padding-block: 10px;
+  padding-block: 5px;
   max-width: 95%;
   overflow: hidden;
   padding-inline: 20px;
@@ -59,12 +59,8 @@ export const Label2 = styled.label`
 `;
 export const CaretD2 = styled.i`
   position: absolute;
-  top: 20%;
+  top: 28%;
   right: 15px;
-  // border-left: 10px solid transparent;
-  // border-right: 10px solid transparent;
-  // border-top: 13px solid black;
-  // border-radius: 3px;
   background-image: url(../images/admin/Courses/caret-down.png);
   background-repeat: no-repeat;
   height: 24px;
