@@ -48,6 +48,7 @@ export const Cardcontent = styled.div`
   border-radius: 10px;
   transition: all .2s ease-in-out;
   @media( max-width: 1023px){
+    min-width: 300px;
     height: auto;
   }
   &:hover{
@@ -55,10 +56,10 @@ export const Cardcontent = styled.div`
   }
 `;
 export const CardImage = styled.img`
-  width: -webkit-fill-available;
+  width: 100%;
   max-height:209px;
   @media( max-width: 1023px){
-    max-height:171px;
+    height:171px;
   }
 `;
 export const VideoInfo = styled.div`
