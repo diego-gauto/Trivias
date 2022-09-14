@@ -88,7 +88,7 @@ export const CoursesContainer = styled.div<{active:any}>`
   }
   transition: 1s ease all;
   ${props => props.active == true && css`
-    height:100%;
+    height:auto;
     max-height:1000px;
     transition: 1s ease all;
   `}

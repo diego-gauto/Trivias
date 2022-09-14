@@ -170,11 +170,12 @@ export const TransparentButton = styled.button`
   font-weight: 600;
   padding-block: 15px;
   padding-inline: 25px;
-  background:transparent;
-  color: #ffff;
+  color: #6717CD;
   border-radius: 30px;
-  background-color: #CDCDFF;
-  border: none;
+  display: flex;
+  gap: 10px;
+  background:none;
+  border: #6717CD 2px solid;
   &:hover{
     transform:scale(1.03);
     transition:.5s ease all;
@@ -183,14 +184,12 @@ export const TransparentButton = styled.button`
     font-size: 12px;
     padding-block: 10px;
     padding-inline: 15px;
-    color: #ffff;
-    border:none;
+    color: #6717CD;
   }
   @media (max-width: 450px) {
     padding-block: 8px;
     font-size: 10px;
-    color: #ffff;
-    border:none;
+    color: #6717CD;
   }
 `;
 export const PlayIcon = styled.i`
