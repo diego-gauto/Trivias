@@ -34,6 +34,7 @@ import {
 
 const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
+  let today = new Date().getTime() / 1000;
 
   useEffect(() => {
     if (course) {
@@ -117,7 +118,7 @@ const Module5 = ({ user, course }: any) => {
             })}
           </CardContain>
         </RespContain>
-        <ButtonContain>
+        {user.membership.finalDate < today && <ButtonContain>
           {user && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
             <PurpleButton>
               Adquiere Gonvar Plus
@@ -128,7 +129,7 @@ const Module5 = ({ user, course }: any) => {
               Adquiere Gonvar Plus
             </PurpleButton>
           </Link>}
-        </ButtonContain>
+        </ButtonContain>}
       </Content>
     </MainContainer >
   )

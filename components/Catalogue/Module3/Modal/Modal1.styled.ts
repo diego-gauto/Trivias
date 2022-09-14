@@ -366,7 +366,7 @@ export const Lock = styled.i`
 `;
 export const PlayIcon = styled.i`
   background-repeat: no-repeat;
-  background-image: url(../images/Preview/play3.png);
+  background-image: url(../images/Preview/rigthArrow.svg);
   height: 20px;
   width: 20px;
   background-position: center;
