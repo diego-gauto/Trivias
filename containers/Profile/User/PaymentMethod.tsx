@@ -71,7 +71,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
             })
             }
           </PayContainer> :
-            <p>Sin metodos de pago...</p>}
+            <p>Sin métodos de pago...</p>}
         </>
       }
       <AddPay onClick={handleShow}>

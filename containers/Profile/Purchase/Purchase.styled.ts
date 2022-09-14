@@ -143,7 +143,23 @@ export const ContainTitle = styled.h1`
     font-size: 14px;
   }
 `;
-export const PaymentContain = styled.div`
+export const PaymentContain = styled.div<{active:any}>`
+  display:flex;
+  flex-direction:column;
+  gap: 15px;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+  &:hover{
+    box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
+    cursor:pointer;
+  }
+  ${props => (props.active == true) && css`
+  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+  `}
+`;
+export const PaymentDetail = styled.div`
   display:flex;
   flex-direction:column;
   gap: 15px;
@@ -252,7 +268,7 @@ export const NewMethod = styled.div`
   width:100%;
   justify-content: center;
 `;
-export const NewMethodBox = styled.div`
+export const NewMethodBox = styled.div<{active:any,plan:any}>`
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -272,6 +288,33 @@ export const NewMethodBox = styled.div`
     width: 50%;
     padding-block: 18px;
   }
+  ${props => (props.active == true && props.plan == 'stripe') && css`
+  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+  `}
+`;
+export const NewMethodBoxPaypal = styled.div<{plan:any}>`
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-block:30px;
+  width: 220px;
+  border-radius:10px;
+  width: 100%;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  &:active{
+    border: 1px solid black;
+  }
+  &:hover{
+    box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
+  }
+  @media(max-width: 500px){
+    width: 50%;
+    padding-block: 18px;
+  }
+  ${props => (props.plan == 'paypal') && css`
+  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+  `}
 `;
 export const NewMethodBox2 = styled.div`
   
@@ -647,7 +690,7 @@ to {
   transform: rotate(360deg);
 }
 `;
-export const LoaderContain = styled.div`
+export const LoaderContainSpinner = styled.div`
 box-sizing: border-box;
 display: block;
 width: 30px;
