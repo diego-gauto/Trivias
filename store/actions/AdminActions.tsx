@@ -13,7 +13,11 @@ export const createCourse = async (signUpData: { data: any; }) => {
   data.createdAt = new Date();
   data.reference = `${data.courseTittle}-${uuidv4()}`
   data.coursePath = await uploadImage(data.coursePath, data.reference);
-  return db.collection('courses').add(data)
+  return db.collection('courses').add(data).then((res) => {
+    db.collection('courses').doc(res.id).update({
+      documentID: res.id
+    });
+  })
 
     .catch((error: any) => {
       let docCreationError = new Error(`Error creating user document: ${error}`);
