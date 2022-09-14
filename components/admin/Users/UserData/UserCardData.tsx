@@ -31,7 +31,13 @@ import {
   UserContain,
 } from "./UsersCardData.styled";
 
-const UserCardData = ({ user, setIsVisible, courses }: any) => {
+type CardData = {
+  user: any;
+  setIsVisible: (open: boolean) => void;
+  courses: Array<any>;
+};
+
+const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
   const [show, setShow] = useState(false);
   const [paidCourses, setPaidCourses] = useState<Array<any>>([]);
   const [paymentMethod, setPaymentMethods] = useState<Array<any>>([]);
