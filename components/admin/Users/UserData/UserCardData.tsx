@@ -8,6 +8,7 @@ import { getPaymentmethods } from "../../../../store/actions/PaymentActions";
 import { getPaidCourses } from "../../../../store/actions/UserActions";
 import GetUserLevel from "./GetUserLevel";
 import Modal1 from "./Modal/Modal";
+import ModalAddDays from "./Modal/ModalAddDays";
 import {
   CardIconResp,
   CloseIcon,
@@ -39,6 +40,7 @@ type CardData = {
 
 const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
   const [show, setShow] = useState(false);
+  const [showAddDays, setShowAddDays] = useState(false);
   const [paidCourses, setPaidCourses] = useState<Array<any>>([]);
   const [paymentMethod, setPaymentMethods] = useState<Array<any>>([]);
 
@@ -152,8 +154,9 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
               Sin métodos de pago...
             </LastContainer>}
         </PayContain>
-        <TransparentButton>Agregar días de suscripción</TransparentButton></>
+        <TransparentButton onClick={() => { setShowAddDays(true); }}>Agregar días de suscripción</TransparentButton></>
       <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
+      <ModalAddDays show={showAddDays} setShow={setShowAddDays} />
     </UserContain>
   )
 }
