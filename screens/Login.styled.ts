@@ -51,6 +51,16 @@ export const Background = styled.div`
     padding:15px;
   }
 `;
+export const Body = styled.div`
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+margin: 0;
+padding: 0;
+`;
+export const ChildrenContain = styled.div`
+flex-grow: 1;
+`;
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
