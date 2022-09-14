@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { Background, LoaderContain, LoaderImage } from "../screens/Login.styled";
+import {
+  Background,
+  Body,
+  ChildrenContain,
+  LoaderContain,
+  LoaderImage,
+} from "../screens/Login.styled";
 import Footer from "./Footer/Footer";
 import NavBar from "./NavBar/NavBar";
 
@@ -17,9 +23,13 @@ const Layout = ({ children }: any) => {
     <>
       {!isLoading ? (
         <>
-          <NavBar />
-          {children}
-          <Footer />
+          <Body>
+            <NavBar />
+            <ChildrenContain>
+              {children}
+            </ChildrenContain>
+            <Footer />
+          </Body>
         </>
 
       ) : (

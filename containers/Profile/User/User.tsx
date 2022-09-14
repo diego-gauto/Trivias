@@ -2,14 +2,16 @@
 import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
-import { LoaderContain, LoaderImage, Background } from "../../../screens/Login.styled";
 
 import { getAuth, signOut } from "firebase/auth";
-import { collection, onSnapshot, query, where, getDocs, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { getPaymentmethods } from "../../../store/actions/PaymentActions";
+import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
 import {
   BackgroundProfile,
   LogOut,
@@ -17,13 +19,11 @@ import {
   SecondBox,
   ThirdBox,
 } from "../../Profile/User/User.styled";
+import HomeWork from "./HomeWork";
 import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
-import { getPaymentmethods } from "../../../store/actions/PaymentActions";
-import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
-import HomeWork from "./HomeWork";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });

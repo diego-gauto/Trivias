@@ -1,7 +1,13 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
-import ModalFinish from '../../containers/Profile/User/Modal3/ModalFinish';
+import React, { useEffect, useState } from "react";
+
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import ModalFinish from "../../containers/Profile/User/Modal3/ModalFinish";
+import { db, functions } from "../../firebase/firebaseConfig";
+import { useAuth } from "../../hooks/useAuth";
 import {
   BottomContainer,
   BottomText,
@@ -12,18 +18,14 @@ import {
   FooterText,
   FBIcon,
   IGIcon,
+  LoaderContain,
   Logo2,
   RespContainer,
   RespContainer2,
   SocialContainer,
-  WAIcon,
   TextFinish,
-  LoaderContain,
+  WAIcon,
 } from "./Footer.styled";
-import { useAuth } from "../../hooks/useAuth";
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { db, functions } from "../../firebase/firebaseConfig";
-import { httpsCallable } from 'firebase/functions';
 
 const Footer = () => {
   const [show, setShow] = useState(false);
