@@ -32,10 +32,6 @@ export const Video = styled.div`
   flex-direction: column;
   max-width: 420px;
   min-width: 350px;
-  @media( max-width: 1023px){
-    max-width: 350px;
-    min-width: 200px;
-  }
 `;
 export const VideoContain = styled.div`
   display: flex;
@@ -46,6 +42,9 @@ export const VideoContain = styled.div`
 `;
 export const Background = styled.img`
   border-radius:10px;
+  @media( max-width: 700px){
+    width:100%;
+  }
 `;
 export const PlayIcon = styled.i`
   position: absolute;

@@ -118,8 +118,8 @@ const Module5 = ({ user, course }: any) => {
             })}
           </CardContain>
         </RespContain>
-        {user.membership.finalDate < today && <ButtonContain>
-          {user && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
+        {<ButtonContain>
+          {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
             <PurpleButton>
               Adquiere Gonvar Plus
             </PurpleButton>
