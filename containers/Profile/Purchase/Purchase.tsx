@@ -38,7 +38,7 @@ import {
   InputCard,
   InputContain,
   InputText,
-  LoaderContain,
+  LoaderContainSpinner,
   NewMethodBox,
   NewMethodBox2,
   NewMethodContain,
@@ -67,15 +67,19 @@ import {
   Title,
   TransparentButton,
   VisaPay,
+  PaymentDetail,
+  NewMethodBoxPaypal,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 
 const Purchase = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
   const [userData, setUserData] = useState<any>(null);
   const [show, setShow] = useState(false);
-  const [payment, setPayment] = useState(true);
+  const [payment, setPayment] = useState(false);
   const [cardInfo, setCardInfo] = useState(false);
   const [process, setProcess] = useState(true);
   const [paypal, setPaypal] = useState(true);
@@ -109,8 +113,7 @@ const Purchase = () => {
     }, [])
 
   } catch (error) {
-    console.log(error)
-    setLoggedIn(false)
+    setLoggedIn(false);
   }
 
   const fetchDB_data = async () => {
@@ -128,6 +131,7 @@ const Purchase = () => {
           })
           setUserData({ ...e.data(), id: e.id })
         });
+        setIsLoading(false);
       })
     } catch (error) {
       return false
@@ -143,8 +147,6 @@ const Purchase = () => {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
     } else {
       getWholeCourse(id).then((res: any) => {
-        console.log(res);
-
         setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons })
       })
     }
@@ -159,11 +161,16 @@ const Purchase = () => {
         defaultCard[index] = false
       }
     });
-    setDefaultCard(defaultCard)
+    setDefaultCard(defaultCard);
   }
 
   const handleConfirm = async () => {
-    setLoader(true)
+    console.log(coupon);
+
+    setLoader(true);
+    if ((!cardInfo && !payment && plan.method !== 'paypal') || (!cardInfo && payment && !card.paymentMethod)) {
+      alert("Por favor seleccione un método de pago!");
+    }
     if (cardInfo) {
       delete card.brand
       delete card.cardId
@@ -193,10 +200,10 @@ const Purchase = () => {
       })
     }
     if (payment && card.paymentMethod) {
-      setCard({ ...card, status: false })
+      setCard({ ...card, status: false });
       setProcess(false);
       setConfirmation(true);
-      setLoader(false)
+      setLoader(false);
     }
     if (plan.method == 'paypal') {
       setLoader(false);
@@ -210,7 +217,7 @@ const Purchase = () => {
   const Return = () => {
     setProcess(true);
     setConfirmation(false);
-    setCoupon({});
+    setCoupon(null);
     Object.keys(card).forEach(key => {
       card[key] = '';
     });
@@ -244,7 +251,6 @@ const Purchase = () => {
           method: 'stripe'
         }
         await pay(data).then((res: any) => {
-          console.log(res);
           if ("raw" in res.data) {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
@@ -271,7 +277,6 @@ const Purchase = () => {
         }
         const pay = httpsCallable(functions, 'payWithStripeCourse');
         await pay(data).then((res: any) => {
-          console.log(res);
           if ("raw" in res.data) {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
@@ -343,188 +348,299 @@ const Purchase = () => {
   }, [card, plan])
 
   return (
-    <Container>
-      <Title>
-        Proceso de Pago
-      </Title>
-      <PayBox>
-        <DataPayment>
-          {
-            process == true
-              ? <>
-                <DataPaymentContain>
-                  <CirclePosition />
-                  <TextPosition>
-                    Datos de pago
-                  </TextPosition>
-                </DataPaymentContain>
-                <Division />
-                <DataPaymentContain>
-                  <ProcessCircle />
-                  <ProcessText>
-                    Confirmacion
-                  </ProcessText>
-                </DataPaymentContain>
-                <Division />
-                <DataPaymentContain>
-                  <ProcessCircle />
-                  <ProcessText>
-                    Compra exitosa
-                  </ProcessText>
-                </DataPaymentContain>
-              </>
-              : confirmation == true ?
-                <>
-                  <DataPaymentContain>
-                    <PastCircle />
-                    <PastText>
-                      Datos de pago
-                    </PastText>
-                  </DataPaymentContain>
-                  <Division2 />
-                  <DataPaymentContain>
-                    <CirclePosition />
-                    <TextPosition>
-                      Confirmacion
-                    </TextPosition>
-                  </DataPaymentContain>
-                  <Division />
-                  <DataPaymentContain>
-                    <ProcessCircle />
-                    <ProcessText>
-                      Compra exitosa
-                    </ProcessText>
-                  </DataPaymentContain>
-                </>
-                : pay == true ?
-                  <>
-                    <DataPaymentContain>
-                      <PastCircle />
-                      <PastText>
-                        Datos de pago
-                      </PastText>
-                    </DataPaymentContain>
-                    <Division2 />
-                    <DataPaymentContain>
-                      <PastCircle />
-                      <PastText>
-                        Confirmacion
-                      </PastText>
-                    </DataPaymentContain>
-                    <Division2 />
+    <>
+      {isLoading ? <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background> :
+        <Container>
+          <Title>
+            Proceso de Pago
+          </Title>
+          <PayBox>
+            <DataPayment>
+              {
+                process == true
+                  ? <>
                     <DataPaymentContain>
                       <CirclePosition />
                       <TextPosition>
-                        Compra exitosa
+                        Datos de pago
                       </TextPosition>
                     </DataPaymentContain>
+                    <Division />
+                    <DataPaymentContain>
+                      <ProcessCircle />
+                      <ProcessText>
+                        Confirmacion
+                      </ProcessText>
+                    </DataPaymentContain>
+                    <Division />
+                    <DataPaymentContain>
+                      <ProcessCircle />
+                      <ProcessText>
+                        Compra exitosa
+                      </ProcessText>
+                    </DataPaymentContain>
                   </>
-                  : <></>
-          }
+                  : confirmation == true ?
+                    <>
+                      <DataPaymentContain>
+                        <PastCircle />
+                        <PastText>
+                          Datos de pago
+                        </PastText>
+                      </DataPaymentContain>
+                      <Division2 />
+                      <DataPaymentContain>
+                        <CirclePosition />
+                        <TextPosition>
+                          Confirmacion
+                        </TextPosition>
+                      </DataPaymentContain>
+                      <Division />
+                      <DataPaymentContain>
+                        <ProcessCircle />
+                        <ProcessText>
+                          Compra exitosa
+                        </ProcessText>
+                      </DataPaymentContain>
+                    </>
+                    : pay == true ?
+                      <>
+                        <DataPaymentContain>
+                          <PastCircle />
+                          <PastText>
+                            Datos de pago
+                          </PastText>
+                        </DataPaymentContain>
+                        <Division2 />
+                        <DataPaymentContain>
+                          <PastCircle />
+                          <PastText>
+                            Confirmacion
+                          </PastText>
+                        </DataPaymentContain>
+                        <Division2 />
+                        <DataPaymentContain>
+                          <CirclePosition />
+                          <TextPosition>
+                            Compra exitosa
+                          </TextPosition>
+                        </DataPaymentContain>
+                      </>
+                      : <></>
+              }
 
-        </DataPayment>
-        <SubContainer>
-          {
-            process == true &&
-            <>
-              <SubContainer2>
-                {cards.length > 0 && <PaymentContain onClick={() => {
-                  setPayment(true),
-                    setCardInfo(false),
-                    setPlan({ method: 'stripe' })
-                }}>
-                  <ContainTitle style={{ cursor: 'pointer' }}>
-                    Métodos en tu cuenta
-                  </ContainTitle>
-                  {
-                    payment === true &&
-                    cards.map((card, index) => {
-                      return (
-                        <PaymentMethod active={defaultCard[index]} onClick={() => {
-                          setDefault(card, index)
-                        }}>
-                          <CardIconResp brand={card.brand} />
-                          <PayText>
-                            {card.brand} terminada en {card.last4}
-                          </PayText>
-                        </PaymentMethod>
-                      )
-                    })
-                  }
-                </PaymentContain>}
-                <PaymentsContainer>
-                  <>
-                    <NewMethodBox onClick={() => {
-                      setPayment(false),
-                        setCardInfo(true),
+            </DataPayment>
+            <SubContainer>
+              {
+                process == true &&
+                <>
+                  <SubContainer2>
+                    {cards.length > 0 && <PaymentContain active={payment} onClick={() => {
+                      setPayment(true),
+                        setCardInfo(false),
                         setPlan({ method: 'stripe' })
                     }}>
-                      <ContainTitle>
-                        Nuevo Método de Pago
+                      <ContainTitle style={{ cursor: 'pointer' }}>
+                        Métodos en tu cuenta
                       </ContainTitle>
-                      <NewMethodContain>
-                        <VisaPay />
-                      </NewMethodContain>
-                      <PayText2>
-                        Tarjeta de Crédito / Débito
-                      </PayText2>
-                    </NewMethodBox>
-                  </>
-                  <NewMethodBox onClick={() => {
-                    setPayment(false),
-                      setCardInfo(false),
-                      setPlan({ method: 'paypal' })
-                  }}>
-                    <ContainTitle>
-                      Paypal
-                    </ContainTitle>
-                    <NewMethodContain>
-                      <PayPal />
-                    </NewMethodContain>
-
-                  </NewMethodBox>
-                </PaymentsContainer>
-                {
-                  cardInfo == true &&
-                  <>
-                    <NewMethodBox2 onClick={() => {
-                      setPayment(true),
-                        setCardInfo(false);
-                    }}></NewMethodBox2>
-                    <ContainerCard>
-                      <InputText>
-                        Número de la Tarjeta
-                        <InputCard mask='9999 9999 9999 99999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
-                          setCard((card: any) => ({ ...card, number: e.target.value }));
-
+                      {
+                        payment === true &&
+                        cards.map((card, index) => {
+                          return (
+                            <PaymentMethod active={defaultCard[index]} onClick={() => {
+                              setDefault(card, index)
+                            }}>
+                              <CardIconResp brand={card.brand} />
+                              <PayText>
+                                {card.brand} terminada en {card.last4}
+                              </PayText>
+                            </PaymentMethod>
+                          )
+                        })
+                      }
+                    </PaymentContain>}
+                    <PaymentsContainer>
+                      <>
+                        <NewMethodBox active={cardInfo} plan={plan.method} onClick={() => {
+                          setPayment(false),
+                            setCardInfo(true),
+                            setPlan({ method: 'stripe' })
                         }}>
-                        </InputCard>
-                      </InputText>
-                      <InputText>
-                        Nombre
-                        <Input placeholder="Nombre del Propietario" onChange={(e) => {
-                          setCard((card: any) => ({ ...card, holder: e.target.value }));
-                        }} />
-                      </InputText>
-                      <InputContain>
-                        <InputText>
-                          Fecha de Expiración
+                          <ContainTitle>
+                            Nuevo Método de Pago
+                          </ContainTitle>
+                          <NewMethodContain>
+                            <VisaPay />
+                          </NewMethodContain>
+                          <PayText2>
+                            Tarjeta de Crédito / Débito
+                          </PayText2>
+                        </NewMethodBox>
+                      </>
+                      <NewMethodBoxPaypal plan={plan.method} onClick={() => {
+                        setPayment(false),
+                          setCardInfo(false),
+                          setPlan({ method: 'paypal' })
+                      }}>
+                        <ContainTitle>
+                          Paypal
+                        </ContainTitle>
+                        <NewMethodContain>
+                          <PayPal />
+                        </NewMethodContain>
+
+                      </NewMethodBoxPaypal>
+                    </PaymentsContainer>
+                    {
+                      cardInfo == true &&
+                      <>
+                        <NewMethodBox2 onClick={() => {
+                          setPayment(true),
+                            setCardInfo(false);
+                        }}></NewMethodBox2>
+                        <ContainerCard>
+                          <InputText>
+                            Número de la Tarjeta
+                            <InputCard mask='9999 9999 9999 99999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
+                              setCard((card: any) => ({ ...card, number: e.target.value }));
+
+                            }}>
+                            </InputCard>
+                          </InputText>
+                          <InputText>
+                            Nombre
+                            <Input placeholder="Nombre del Propietario" onChange={(e) => {
+                              setCard((card: any) => ({ ...card, holder: e.target.value }));
+                            }} />
+                          </InputText>
                           <InputContain>
-                            <Input maxLength={2} placeholder="MM" onChange={(e) => {
-                              setCard((card: any) => ({ ...card, exp_month: e.target.value }));
-                            }} />
-                            <Input maxLength={4} placeholder="YYYY" onChange={(e) => {
-                              setCard((card: any) => ({ ...card, exp_year: e.target.value }));
-                            }} />
+                            <InputText>
+                              Fecha de Expiración
+                              <InputContain>
+                                <Input maxLength={2} placeholder="MM" onChange={(e) => {
+                                  setCard((card: any) => ({ ...card, exp_month: e.target.value }));
+                                }} />
+                                <Input maxLength={4} placeholder="YYYY" onChange={(e) => {
+                                  setCard((card: any) => ({ ...card, exp_year: e.target.value }));
+                                }} />
+                              </InputContain>
+                            </InputText>
+                            <InputText>
+                              CVV
+                              <Input type="password" maxLength={4} placeholder="XXX" onChange={(e) => {
+                                setCard((card: any) => ({ ...card, cvc: e.target.value }));
+                              }} />
+                            </InputText>
                           </InputContain>
-                        </InputText>
-                        <InputText>
-                          CVV
-                          <Input type="password" maxLength={4} placeholder="XXX" onChange={(e) => {
-                            setCard((card: any) => ({ ...card, cvc: e.target.value }));
-                          }} />
-                        </InputText>
-                      </InputContain>
+                          <BotContainer>
+                            <Text>
+                              <AlertIcon />
+                              ¿Cómo protegemos tu compra?
+                            </Text>
+                            <Text2>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing
+                              elit. Felis, velit velit, mattis scelerisque diam
+                              scelerisque vitae.
+                            </Text2>
+                          </BotContainer>
+                        </ContainerCard>
+                      </>
+                    }
+                    <ButtonContain >
+                      {type == 'course' && <TransparentButton onClick={handleShow}>
+                        Agregar Cupón
+                      </TransparentButton>}
+                      {!loader && <PurpleButton onClick={handleConfirm}>
+                        Continuar
+                      </PurpleButton>}
+                      {loader && <LoaderContainSpinner />}
+                    </ButtonContain>
+                  </SubContainer2>
+                </>
+              }
+              {
+                confirmation == true &&
+                <>
+                  <SubContainer2>
+                    <PaymentDetail >
+                      <ContainTitle >
+                        Confirmar detalles
+                      </ContainTitle>
+                      <CourseInfo>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Turpis tellus fames velit at eget ut lacinia. Bibendum cras enim
+                        mus fermentum malesuada tincidunt vivamus. Ipsum est urna elit
+                        pharetra sed amet, rhoncus sapien. Quisque sit ac nulla dui rhoncus
+                        nisi, a ac. Posuere vulputate nunc nulla ut in. Magna pretium vulputate
+                        id quam.
+                      </CourseInfo>
+                      <PurchaseText>
+                        Compra:
+                        <PurchaseData style={{ color: "#6717CD" }}>
+                          {product.type}: {product.title}
+                        </PurchaseData>
+                      </PurchaseText>
+                      <PurchaseText>
+                        Método de Pago:
+                        <InfoCard>
+                          <CardIconResp brand={card.brand} />
+                          {plan.method == 'stripe' ? <PurchaseData>
+                            Tarjeta de Crédito/Débito
+                            <br />
+                            {card.brand} terminada en {card.last4}
+                          </PurchaseData> :
+                            <PurchaseData>
+                              Paypal
+                            </PurchaseData>}
+                        </InfoCard>
+                      </PurchaseText>
+                      <PurchaseText>
+                        Duración de Alquiler:
+                        <PurchaseData>
+                          {product.duration}
+                        </PurchaseData>
+                      </PurchaseText>
+                      <Text3>
+                        Compra
+                      </Text3>
+                      <PurchaseContain>
+                        <PurchaseText>
+                          Compra:
+                          <PurchaseData>
+                            $ {product.price}.00
+                          </PurchaseData>
+                        </PurchaseText>
+                        {coupon && <PurchaseText>
+                          Descuento:
+                          {coupon.type == 'amount' ? <PurchaseData>
+                            - $ {coupon.discount}
+                          </PurchaseData> :
+                            <PurchaseData>
+                              - {coupon.discount}%
+                            </PurchaseData>
+                          }
+                        </PurchaseText>}
+                        <Divider />
+                        {!coupon ? <PurchaseText>
+                          Total:
+                          <PurchaseText>
+                            $ {product.price}.00
+                          </PurchaseText>
+                        </PurchaseText> :
+                          <PurchaseText>
+                            Total:
+                            {coupon.type == 'amount' ? <PurchaseText>
+                              $ {product.price - coupon.discount}
+                            </PurchaseText> :
+                              <PurchaseText>
+                                $ {product.price - (coupon.discount / 100) * product.price}
+                              </PurchaseText>}
+                          </PurchaseText>}
+                      </PurchaseContain>
                       <BotContainer>
                         <Text>
                           <AlertIcon />
@@ -536,193 +652,92 @@ const Purchase = () => {
                           scelerisque vitae.
                         </Text2>
                       </BotContainer>
-                    </ContainerCard>
-                  </>
-                }
-                <ButtonContain >
-                  {type == 'course' && <TransparentButton onClick={handleShow}>
-                    Agregar Cupón
-                  </TransparentButton>}
-                  {!loader && <PurpleButton onClick={handleConfirm}>
-                    Continuar
-                  </PurpleButton>}
-                  {loader && <LoaderContain />}
-                </ButtonContain>
-              </SubContainer2>
-            </>
-          }
-          {
-            confirmation == true &&
-            <>
-              <SubContainer2>
-                <PaymentContain >
-                  <ContainTitle >
-                    Confirmar detalles
-                  </ContainTitle>
-                  <CourseInfo>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Turpis tellus fames velit at eget ut lacinia. Bibendum cras enim
-                    mus fermentum malesuada tincidunt vivamus. Ipsum est urna elit
-                    pharetra sed amet, rhoncus sapien. Quisque sit ac nulla dui rhoncus
-                    nisi, a ac. Posuere vulputate nunc nulla ut in. Magna pretium vulputate
-                    id quam.
-                  </CourseInfo>
-                  <PurchaseText>
-                    Compra:
-                    <PurchaseData style={{ color: "#6717CD" }}>
-                      {product.type}: {product.title}
-                    </PurchaseData>
-                  </PurchaseText>
-                  <PurchaseText>
-                    Método de Pago:
-                    <InfoCard>
-                      <CardIconResp brand={card.brand} />
-                      <PurchaseData>
-                        Tarjeta de Crédito/Débito
-                        <br />
-                        {card.brand} terminada en {card.last4}
-                      </PurchaseData>
-                    </InfoCard>
-                  </PurchaseText>
-                  <PurchaseText>
-                    Duración de Alquiler:
-                    <PurchaseData>
-                      {product.duration}
-                    </PurchaseData>
-                  </PurchaseText>
-                  <Text3>
-                    Compra
-                  </Text3>
-                  <PurchaseContain>
-                    <PurchaseText>
-                      Compra:
-                      <PurchaseData>
-                        $ {product.price}.00
-                      </PurchaseData>
-                    </PurchaseText>
-                    {coupon && <PurchaseText>
-                      Descuento:
-                      {coupon.type == 'amount' ? <PurchaseData>
-                        - $ {coupon.discount}
-                      </PurchaseData> :
-                        <PurchaseData>
-                          - {coupon.discount}%
-                        </PurchaseData>
-                      }
-                    </PurchaseText>}
-                    <Divider />
-                    {!coupon ? <PurchaseText>
-                      Total:
-                      <PurchaseText>
-                        $ {product.price}.00
-                      </PurchaseText>
-                    </PurchaseText> :
-                      <PurchaseText>
-                        Total:
-                        {coupon.type == 'amount' ? <PurchaseText>
-                          $ {product.price - coupon.discount}
-                        </PurchaseText> :
-                          <PurchaseText>
-                            $ {product.price - (coupon.discount / 100) * product.price}
-                          </PurchaseText>}
-                      </PurchaseText>}
-                  </PurchaseContain>
-                  <BotContainer>
-                    <Text>
-                      <AlertIcon />
-                      ¿Cómo protegemos tu compra?
-                    </Text>
-                    <Text2>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Felis, velit velit, mattis scelerisque diam
-                      scelerisque vitae.
-                    </Text2>
-                  </BotContainer>
-                </PaymentContain>
-                <ButtonContain >
-                  <TransparentButton onClick={Return}>
-                    Regresar
-                  </TransparentButton>
-                  {(paypal && !loader) && <PurpleBuyButton onClick={FinishPayment}>
-                    Proceder con Compra
-                  </PurpleBuyButton>}
-                  {(paypal && loader) && <LoaderContain />}
-                  {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
-                    "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
-                    currency: "MXN",
-                    'vault': true,
-                  }}
-                  >
-                    {type == 'subscription' && <PayPalButtons
-                      style={{
-                        color: "gold",
-                        layout: 'horizontal',
-                        shape: 'pill',
+                    </PaymentDetail>
+                    <ButtonContain >
+                      <TransparentButton onClick={Return}>
+                        Regresar
+                      </TransparentButton>
+                      {(paypal && !loader) && <PurpleBuyButton onClick={FinishPayment}>
+                        Proceder con Compra
+                      </PurpleBuyButton>}
+                      {(paypal && loader) && <LoaderContainSpinner />}
+                      {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                        "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
+                        currency: "MXN",
+                        'vault': true,
                       }}
-                      createSubscription={(data, actions) => {
-                        return actions.subscription.create({
-                          plan_id: 'P-6P515571TU0367642MMDGG4Y'
-                        })
-                      }}
-                      onApprove={(data: any, actions) => {
-                        let today = new Date().getTime() / 1000;
-                        let finalDate = 0;
-                        finalDate = today + 2629800;
-                        updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title }, userData.id).then(() => {
-                          setConfirmation(false);
-                          setPay(true);
-                        })
-                        return data
-                      }}
-                    />}
-                    {type == 'course' && <PayPalButtons
-                      style={{
-                        color: "gold",
-                        layout: 'horizontal',
-                        shape: 'pill',
-                      }}
-                      createOrder={(data, actions) => {
-                        let price = product.price
-                        if (coupon) {
-                          if (coupon.type == 'amount') {
-                            price = price - coupon.discount;
-                          } else {
-                            price = (price - (coupon.discount / 100) * price)
-                          }
-                        }
-                        return actions.order.create({
+                      >
+                        {type == 'subscription' && <PayPalButtons
+                          style={{
+                            color: "gold",
+                            layout: 'horizontal',
+                            shape: 'pill',
+                          }}
+                          createSubscription={(data, actions) => {
+                            return actions.subscription.create({
+                              plan_id: 'P-6P515571TU0367642MMDGG4Y'
+                            })
+                          }}
+                          onApprove={(data: any, actions) => {
+                            let today = new Date().getTime() / 1000;
+                            let finalDate = 0;
+                            finalDate = today + 2629800;
+                            updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title }, userData.id).then(() => {
+                              setConfirmation(false);
+                              setPay(true);
+                            })
+                            return data
+                          }}
+                        />}
+                        {type == 'course' && <PayPalButtons
+                          style={{
+                            color: "gold",
+                            layout: 'horizontal',
+                            shape: 'pill',
+                          }}
+                          createOrder={(data, actions) => {
+                            let price = product.price
+                            if (coupon) {
+                              if (coupon.type == 'amount') {
+                                price = price - coupon.discount;
+                              } else {
+                                price = (price - (coupon.discount / 100) * price)
+                              }
+                            }
+                            return actions.order.create({
 
-                          purchase_units: [
-                            {
-                              amount: {
-                                value: price,
-                              },
-                            },
-                          ],
-                        });
-                      }}
-                      onApprove={(data, actions: any) => {
-                        return actions.order.capture().then((details: any) => {
-                          FinishPayment()
-                        });
-                      }}
-                    />}
-                  </PayPalScriptProvider>}
-                </ButtonContain>
-              </SubContainer2>
-            </>
-          }
-          {!pay && <PurchaseDetails data={product} type={type} />}
-          {
-            pay == true &&
-            <>
-              <PurchaseComplete data={product} card={card} id={id} coupon={coupon} />
-            </>
-          }
-        </SubContainer>
-      </PayBox>
-      <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} />
-    </Container>
+                              purchase_units: [
+                                {
+                                  amount: {
+                                    value: price,
+                                  },
+                                },
+                              ],
+                            });
+                          }}
+                          onApprove={(data, actions: any) => {
+                            return actions.order.capture().then((details: any) => {
+                              FinishPayment()
+                            });
+                          }}
+                        />}
+                      </PayPalScriptProvider>}
+                    </ButtonContain>
+                  </SubContainer2>
+                </>
+              }
+              {!pay && <PurchaseDetails data={product} type={type} />}
+              {
+                pay == true &&
+                <>
+                  <PurchaseComplete data={product} card={card} id={id} coupon={coupon} plan={plan} />
+                </>
+              }
+            </SubContainer>
+          </PayBox>
+          <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} />
+        </Container>}
+    </>
   )
 }
 export default Purchase;

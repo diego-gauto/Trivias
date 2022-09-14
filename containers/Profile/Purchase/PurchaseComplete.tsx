@@ -9,7 +9,7 @@ import {
 } from './Purchase.styled';
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
 
-const PurchaseComplete = ({ data, card, id, coupon }: any) => {
+const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
 
   return (
     <MainContainer>
@@ -47,7 +47,7 @@ const PurchaseComplete = ({ data, card, id, coupon }: any) => {
             </ImageContain>
             <CourseText>
               <TitleCourse>
-                Curso: {data.title}
+                {data.title}
               </TitleCourse>
               <Subtitle>
                 {data.category}
@@ -64,11 +64,14 @@ const PurchaseComplete = ({ data, card, id, coupon }: any) => {
           </Text4> */}
           <Text4>
             Método de Pago:
-            <PurchaseData>
+            {plan.method == 'stripe' ? <PurchaseData>
               Tarjeta de Crédito/Débito
               <br />
               {card.brand} terminada en {card.last4}
-            </PurchaseData>
+            </PurchaseData> :
+              <PurchaseData>
+                Paypal
+              </PurchaseData>}
           </Text4>
           {!coupon ? <Text4>
             Total:
