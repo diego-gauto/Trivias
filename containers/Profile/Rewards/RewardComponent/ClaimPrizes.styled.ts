@@ -6,6 +6,9 @@ export const MainContainer = styled.div`
   gap: 20px;
   margin-top: 40px;
   margin-left: 12px;
+  @media(max-width: 620px){
+    margin-left: 0px;
+  }
 `;
 export const TitleClaim = styled.h1`
   font-size: 18px;
@@ -71,14 +74,14 @@ export const AllPrizes = styled.div`
   gap: 60px;
   padding: 20px;
 
-  overflow-x: auto;
+  overflow: auto;
   ::-webkit-scrollbar {
     display: none;
   }
   @media (max-width: 877px) {
+    padding-inline: 0px;
     flex-wrap: wrap;
-    margin-inline: 50px;
-    gap: 30px;
+    gap: 10px;
     justify-content: center;
   }
 `;

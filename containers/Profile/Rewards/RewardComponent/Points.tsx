@@ -16,6 +16,8 @@ const Points = ({ level, score, currentLevel }: any) => {
 
   const getAllLevels = () => {
     getLevels().then((res) => {
+      console.log(res);
+
       setLevels(res);
     })
   }
@@ -28,7 +30,7 @@ const Points = ({ level, score, currentLevel }: any) => {
       {
         levels.map((val: any, i: any) => {
           return (
-            <LevelContainer key={"levels" + i} i={i + 1} level={currentLevel}>
+            <LevelContainer key={"levels" + i} i={i} level={currentLevel}>
               <Divisor min={val.minimum} i={i} size={levels.length - 1} level={level.minimum} score={score} max={val.maximum} />
               <ContainLevel>
                 <Circle val={val.minimum} level={level.minimum} />

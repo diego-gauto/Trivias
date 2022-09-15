@@ -112,8 +112,6 @@ const User = () => {
 
     getTimeLevel().then((res) => {
       res = res.filter((data: any, index: any) => data.minimum <= timeScore);
-      console.log(res);
-
       setTimeLevel(res[0])
       setCurrentTimeLevel(res.length)
     })

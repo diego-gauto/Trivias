@@ -92,8 +92,10 @@ const Rewards = () => {
   const getDate = () => {
     let tempToday: number = new Date().getTime() / 1000;
     let tempDate: number = userData.membership?.startDate;
-    let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
-    setTimeScore(timeScore)
+    let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
+    if (tempDate == 0) {
+      timeScore = 0;
+    }
   }
 
   const getRewardBanner = () => {
@@ -219,7 +221,7 @@ const Rewards = () => {
                 <PointsText>
                   {timeScore}
                   {
-                    timeScore <= 1 ? " mes" : " meses"
+                    timeScore <= 1 ? " día" : " días"
                   }
                 </PointsText>
                 <OuterProgress>
