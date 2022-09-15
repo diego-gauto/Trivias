@@ -10,9 +10,10 @@ interface props {
   show: boolean,
   setShow: any,
   data: IHomeWorkModal,
+  user: any
 }
 
-const ModalHW = ({ show, setShow, data }: props) => {
+const ModalHW = ({ show, setShow, data, user }: props) => {
   const [userScore, setUserScore] = useState<number>(0)
   const [review, setReview] = useState<any>({})
   const handleClose = () => setShow(false);
@@ -124,12 +125,13 @@ const ModalHW = ({ show, setShow, data }: props) => {
                   placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing 
               elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar 
               in orci malesuada."
+                  defaultValue={data.about}
                   onChange={(e: any) => {
                     setReview({ ...review, description: e.target.value })
                   }}
                 />
               </InputContain>
-              <ButtonContain>
+              {user.role == 'admin' && <ButtonContain>
                 <button onClick={() => {
                   createReview(),
                     updateScore(),
@@ -137,7 +139,7 @@ const ModalHW = ({ show, setShow, data }: props) => {
                 }}>
                   Guardar
                 </button>
-              </ButtonContain>
+              </ButtonContain>}
             </DataContain>
           }
           {
