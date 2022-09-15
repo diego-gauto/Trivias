@@ -29,6 +29,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signUpWithCreds } from "../../store/actions/AuthActions";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../firebase/firebaseConfig";
+import Stripe from 'stripe';
+import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -73,6 +77,9 @@ const RegisterPastUser = () => {
       return;
     }
     setIsLoading(true)
+    const getStripeUserData = httpsCallable<{ customerEmail: string }, Stripe.Subscription>(functions, "getStripeUserData");
+    const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
+
     const signUpData = {
       credentials: {
         name: formData.name,
@@ -80,7 +87,18 @@ const RegisterPastUser = () => {
         password: formData.password,
         phoneInput: phoneNumber,
       },
+      membership: {
+        finalDate: stripeUserData.current_period_end,
+        level: 1,
+        method: MEMBERSHIP_METHOD_DEFAULT,
+        paymentMethod: "",
+        // @ts-expect-error
+        planId: stripeUserData.plan.id,
+        planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
+        startDate: stripeUserData.current_period_start,
+      }
     };
+
     const redirectURL = await signUpWithCreds(signUpData);
     window.location.href = redirectURL;
   }
