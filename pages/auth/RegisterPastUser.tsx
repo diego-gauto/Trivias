@@ -33,6 +33,7 @@ import { httpsCallable } from "firebase/functions";
 import { functions } from "../../firebase/firebaseConfig";
 import Stripe from 'stripe';
 import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
+import { IMembership } from "../../store/types/AuthActionTypes";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -77,17 +78,20 @@ const RegisterPastUser = () => {
       return;
     }
     setIsLoading(true)
-    const getStripeUserData = httpsCallable<{ customerEmail: string }, Stripe.Subscription>(functions, "getStripeUserData");
+    const getStripeUserData = httpsCallable<{ customerEmail: string }, Stripe.Subscription | null>(functions, "getStripeUserData");
     const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
 
-    const signUpData = {
+    const signUpData: { credentials: object; membership?: IMembership } = {
       credentials: {
         name: formData.name,
         email: localStorage.getItem("pastUserEmail"),
         password: formData.password,
         phoneInput: phoneNumber,
       },
-      membership: {
+    };
+
+    if (!!stripeUserData) {
+      signUpData.membership = {
         finalDate: stripeUserData.current_period_end,
         level: 1,
         method: MEMBERSHIP_METHOD_DEFAULT,
@@ -97,7 +101,7 @@ const RegisterPastUser = () => {
         planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
         startDate: stripeUserData.current_period_start,
       }
-    };
+    }
 
     const redirectURL = await signUpWithCreds(signUpData);
     window.location.href = redirectURL;
