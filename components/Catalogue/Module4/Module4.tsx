@@ -63,9 +63,14 @@ const Module4 = ({ user, allCourses }: any) => {
           query: { id: data.id, season: 0, lesson: 0 },
         });
       }
-      if (data.courseType == 'Mensual' && user.membership.level == 0) {
+      if (data.courseType == 'Mensual' && user.membership.finalDate < today) {
         router.push(
           { pathname: 'Purchase', query: { type: 'subscription' } }
+        )
+      }
+      if (data.courseType == 'Producto' && !data.paid) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: data.id } }
         )
       }
     } else {
@@ -75,7 +80,7 @@ const Module4 = ({ user, allCourses }: any) => {
           query: { id: data.id, season: 0, lesson: 0 },
         });
       }
-      if (!user && data.courseType == 'Mensual') {
+      if (!user && data.courseType !== 'Gratis') {
         router.push(LOGIN_PATH)
       }
     }
@@ -92,7 +97,10 @@ const Module4 = ({ user, allCourses }: any) => {
           {
             courses.map((course: any, index: any) => {
               return (
-                <Cardcontent key={"cardContent-" + index}>
+                <Cardcontent key={"cardContent-" + index} onClick={() => {
+                  handleShow();
+                  setCourse(course);
+                }}>
                   <ImageContent>
                     <CardImage
                       src={course.coursePath}
@@ -118,13 +126,14 @@ const Module4 = ({ user, allCourses }: any) => {
                         {course.courseAbout}...
                       </Text3>
                     </TextContain>
-                    {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={() => {
-                      handleShow(),
-                        setCourse(course)
+                    {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={(e) => {
+                      e.stopPropagation();
+                      goTo(course);
                     }}>
                       Comprar - ${course.coursePrice}.00
                     </Viewpay>}
-                    {(course.courseType == 'Mensual' || course.courseType == 'Gratis') && <Viewpay onClick={() => {
+                    {(course.courseType == 'Mensual' || course.courseType == 'Gratis') && <Viewpay onClick={(e) => {
+                      e.stopPropagation();
                       goTo(course);
                     }}>
                       Ver curso

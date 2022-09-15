@@ -14,7 +14,6 @@ export const ContinueText = styled.h1`
   padding-left:10px;
   @media( max-width: 1023px){
     font-size: 24px;
-    margin-left: 10px;
   }
 `;
 export const CardContainer = styled.div`
@@ -31,6 +30,7 @@ export const Video = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 420px;
+  cursor: pointer;
   @media( max-width: 700px){
   width: 180px;
   height: 102.86px;

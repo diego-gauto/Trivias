@@ -94,9 +94,7 @@ export const CardContain = styled.div`
   align-items: center;
   width: fit-content;
   @media(max-width:1023px){
-    width: 300px;
-    position: relative;
-    justify-content: center;
+    padding-inline: 10px;
   }
 `;
 export const Cardcontent = styled.div`
@@ -116,12 +114,10 @@ export const Cardcontent2 = styled.div`
   width: 412px;
   height: 328px;
   @media(max-width:1023px){
-    position: absolute;
-    top: -20px;
-    left: 0;
-    max-width: 250px;
-  min-width: 200px;
-    }
+    min-width: 300px;
+    height: auto;
+    width: auto;  
+  }
 `;
 export const Cardcontent3 = styled.div`
   display: flex;
@@ -140,10 +136,10 @@ export const RespContain = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-  @media(max-width: 1023px){
-    display: flex;
-    justify-content: center;
-  }
+  // @media(max-width: 1023px){
+  //   display: flex;
+  //   justify-content: center;
+  // }
 `;
 export const TextContain = styled.div`
   display: flex;
@@ -185,5 +181,7 @@ export const ImageContent = styled.div`
   display: flex;
   position: relative;
   height: 189px;
-  width:
+  @media(max-width:1023px){
+    height: auto;
+  }
 `;
