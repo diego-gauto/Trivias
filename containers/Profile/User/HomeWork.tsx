@@ -10,7 +10,7 @@ const HomeWork = ({ userId, user }: any) => {
   const [data, setData] = useState<any>([])
 
   const getAllHomeworks = () => {
-    getHomeworks(userId).then((res) => {
+    getHomeworks(userId, user.role).then((res) => {
       res.forEach((element: any) => {
         let tempDate = new Date(element.createdAt.seconds * 1000);
         let tempDay = tempDate.getDate()
@@ -87,7 +87,7 @@ const HomeWork = ({ userId, user }: any) => {
 
         </tbody>
       </Table>
-      <ModalHW setShow={setShow} show={show} data={data} />
+      <ModalHW setShow={setShow} show={show} data={data} user={user} />
     </HWContainer>
   )
 }

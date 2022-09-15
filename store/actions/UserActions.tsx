@@ -12,8 +12,15 @@ export const getPaidCourses = async (userId: any) => {
   });
   return data
 }
-export const getHomeworks = async (userId: any) => {
-  const homeWorksRef = query(collection(db, "homeworks"), orderBy("createdAt", "asc"), where("teacherId", "==", userId))
+export const getHomeworks = async (userId: string, role: string) => {
+  let tempRole = '';
+  if (role == 'admin') {
+    tempRole = 'teacherId'
+  }
+  if (role == 'user') {
+    tempRole = 'userId'
+  }
+  const homeWorksRef = query(collection(db, "homeworks"), orderBy("createdAt", "asc"), where(`${tempRole}`, "==", userId))
   let tempHomeWorks: any = [];
   const data = await getDocs(homeWorksRef);
   data.forEach((homeWork) => {
@@ -22,7 +29,6 @@ export const getHomeworks = async (userId: any) => {
   return tempHomeWorks
 }
 export const addReview = async (review: any) => {
-
   const docRef = await addDoc(
     collection(db, "reviewHomeWork"),
     {
