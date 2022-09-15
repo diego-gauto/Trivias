@@ -5,8 +5,7 @@ export const Title = styled(ContinueText)`
   padding:10px;
   @media( max-width: 1023px){
     font-size: 24px;
-    margin-left: 10px;
-  }
+    }
 `;
 
 export const Viewpay = styled.p`
@@ -51,6 +50,7 @@ export const Cardcontent = styled.div`
   width: 452px;
   height: 402px;
   border-radius: 10px;
+  cursor: pointer;
   transition: all .2s ease-in-out;
   @media( max-width: 600px){
     min-width: 300px;

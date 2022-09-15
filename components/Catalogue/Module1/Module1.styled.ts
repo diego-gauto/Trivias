@@ -88,6 +88,7 @@ export const TextContain = styled.div`
     bottom: 60px;
   }
   @media (max-width: 650px) {
+    left: 10px;
     bottom: 40px;
   }
   @media (max-width: 450px) {

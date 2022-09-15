@@ -52,13 +52,36 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
 
   const goTo = () => {
     if (user) {
-      router.push(
-        { pathname: 'Purchase', query: { type: 'course', id: course.id } }
-      )
+      let today = new Date().getTime() / 1000;
+      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: 0, lesson: 0 },
+        });
+      }
+      if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'subscription' } }
+        )
+      }
+      if (course.courseType == 'Producto' && !course.paid) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: course.id } }
+        )
+      }
     } else {
-      router.push(LOGIN_PATH)
+      if (course.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: 0, lesson: 0 },
+        });
+      }
+      if (!user && course.courseType !== 'Gratis') {
+        router.push(LOGIN_PATH)
+      }
     }
   }
+
   useEffect(() => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0].lessons)
@@ -88,9 +111,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   Descubre un nuevo método para tus uñas este San Valentín
                 </SubTitle>
                 <ButtonContain>
-                  <PurpleButton onClick={goTo}>
+                  {course.courseType == 'Producto' ? <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
-                  </PurpleButton>
+                  </PurpleButton> :
+                    <PurpleButton onClick={goTo}>
+                      Ver curso
+                    </PurpleButton>}
                   <TransparentButton>
                     Ver un Adelanto
                     <PlayIcon />
