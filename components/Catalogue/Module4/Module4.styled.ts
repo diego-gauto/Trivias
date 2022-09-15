@@ -28,6 +28,12 @@ export const Maincontainer = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
+export const ScrollContainer = styled.div`
+  overflow: auto;
+  ::-webkit-scrollbar{
+    display: none;
+  }
+`;
 export const CardContain = styled.div`
   display: flex;
   padding: 10px;
@@ -42,23 +48,24 @@ export const CardContain = styled.div`
 export const Cardcontent = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 452px;
-  width:100%;
+  width: 452px;
   height: 402px;
   border-radius: 10px;
   transition: all .2s ease-in-out;
-  @media( max-width: 1023px){
+  @media( max-width: 600px){
+    min-width: 300px;
     height: auto;
+    width: min-content;
   }
   &:hover{
     transform: scale(1.02);
   }
 `;
 export const CardImage = styled.img`
-  width: -webkit-fill-available;
+  width: 100%;
   max-height:209px;
-  @media( max-width: 1023px){
-    max-height:171px;
+  @media( max-width: 600px){
+    height: 163px;
   }
 `;
 export const VideoInfo = styled.div`

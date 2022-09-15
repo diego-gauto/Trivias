@@ -16,7 +16,6 @@ export const Content = styled.div`
   flex-direction: column;
   width: 100%;
   position: absolute;
-  height 430px;
   top: 20px;
   gap: 20px;
   @media (max-width: 1023px) {
@@ -93,6 +92,7 @@ export const CardContain = styled.div`
   justify-content: space-between;
   gap: 20px;
   align-items: center;
+  width: fit-content;
   @media(max-width:1023px){
     width: 300px;
     position: relative;
@@ -113,8 +113,8 @@ export const Cardcontent = styled.div`
 export const Cardcontent2 = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height:328px;
+  width: 412px;
+  height: 328px;
   @media(max-width:1023px){
     position: absolute;
     top: -20px;
@@ -136,6 +136,10 @@ export const Cardcontent3 = styled.div`
   }
 `;
 export const RespContain = styled.div`
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   @media(max-width: 1023px){
     display: flex;
     justify-content: center;
@@ -145,7 +149,7 @@ export const TextContain = styled.div`
   display: flex;
   background: white;
   flex-direction: column;
-  height:100%;
+  height:139px;
   gap: 12px;
   padding:10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
@@ -177,12 +181,9 @@ export const PurpleButton = styled.button`
     padding-inline: 20px;
   }
 `;
-export const Divider = styled.p`
-  font-size: 60px;
-  color: white;
-  margin: 0;
-  cursor:context-menu;
-  @media(max-width:1023px){
-    display: none;
-  }
+export const ImageContent = styled.div`
+  display: flex;
+  position: relative;
+  height: 189px;
+  width:
 `;

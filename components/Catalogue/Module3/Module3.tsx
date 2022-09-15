@@ -14,7 +14,7 @@ import {
   TextContain,
   ViewCourse,
 } from "./Module3.styled";
-import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain } from "../Module4/Module4.styled";
+import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain, ScrollContainer } from "../Module4/Module4.styled";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import { useRouter } from "next/router";
 import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
@@ -75,50 +75,52 @@ const Module3 = ({ user, allCourses }: any) => {
         <Title>
           Cursos en poseción
         </Title>
-        <CardContain id="Scroll">
-          {courses.map((course: any, index: any) => {
-            return (
-              <Cardcontent key={"card-course-" + index}>
-                <ImageContent>
-                  <Band />
-                  <DaysLeft>{course.date} días</DaysLeft>
-                  <CardImage
-                    src={course.coursePath}
-                    width={400}
-                    height={210}
-                  />
-                  <InsideContent>
-                    {course.totalLessons > 1 && <InsideText>
-                      {course.totalLessons} Lecciones
-                    </InsideText>}
-                    {course.totalLessons == 1 && <InsideText>
-                      Unica Lección
-                    </InsideText>}
-                  </InsideContent>
-                </ImageContent>
-                <VideoInfo>
-                  <TextContain>
-                    <Text1>
-                      {course.courseTittle}...
-                      <Text2>
-                        {course.courseCategory}
-                      </Text2>
-                    </Text1>
-                    <Text3>
-                      {course.courseAbout}...
-                    </Text3>
-                  </TextContain>
-                  <ViewCourse onClick={() => {
-                    goTo(course)
-                  }}>
-                    Ver el Curso
-                  </ViewCourse>
-                </VideoInfo>
-              </Cardcontent>
+        <ScrollContainer>
+          <CardContain id="Scroll">
+            {courses.map((course: any, index: any) => {
+              return (
+                <Cardcontent key={"card-course-" + index}>
+                  <ImageContent>
+                    <Band />
+                    <DaysLeft>{course.date} días</DaysLeft>
+                    <CardImage
+                      src={course.coursePath}
+                      width={400}
+                      height={210}
+                    />
+                    <InsideContent>
+                      {course.totalLessons > 1 && <InsideText>
+                        {course.totalLessons} Lecciones
+                      </InsideText>}
+                      {course.totalLessons == 1 && <InsideText>
+                        Unica Lección
+                      </InsideText>}
+                    </InsideContent>
+                  </ImageContent>
+                  <VideoInfo>
+                    <TextContain>
+                      <Text1>
+                        {course.courseTittle}...
+                        <Text2>
+                          {course.courseCategory}
+                        </Text2>
+                      </Text1>
+                      <Text3>
+                        {course.courseAbout}...
+                      </Text3>
+                    </TextContain>
+                    <ViewCourse onClick={() => {
+                      goTo(course)
+                    }}>
+                      Ver el Curso
+                    </ViewCourse>
+                  </VideoInfo>
+                </Cardcontent>
 
-            )
-          })}
-        </CardContain>
+              )
+            })}
+          </CardContain>
+        </ScrollContainer>
       </>}
     </Maincontainer>
   )

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { collection, doc, onSnapshot, orderBy, DocumentData } from "firebase/firestore";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { db } from "../../../firebase/firebaseConfig";
 import SideBar from "../SideBar";
@@ -26,7 +27,8 @@ const SeasonsMain = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseData, setCoursesData] = useState<any>(null);
   const [seasons, setSeasons] = useState<any>(null);
-
+  const router = useRouter()
+  const { type, id } = router.query;
 
   const createNewSeason = async () => {
     if (seasons.length > 0) {
@@ -61,14 +63,17 @@ const SeasonsMain = () => {
       return await db.collection('courses').get().then((response) => {
         var data: DocumentData = [];
         response.forEach((e) => {
-
           if (e.id == courseID) {
+            console.log(1);
+            console.log(e.data());
 
             var obj: any = {}
             obj = e.data()
             data.push(obj)
           }
         });
+        console.log(data);
+
         setCoursesData(data)
         return data
       })
