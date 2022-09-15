@@ -102,7 +102,8 @@ const UsersList = () => {
         score: user.score.toString(),
         role: user.role ?? "",
         id: user.id,
-        courses: 0
+        courses: 0,
+        membership: user.membership
       }));
 
       let today: any = new Date().getTime() / 1000;
