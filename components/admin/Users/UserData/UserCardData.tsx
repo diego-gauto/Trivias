@@ -156,7 +156,7 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
         </PayContain>
         <TransparentButton onClick={() => { setShowAddDays(true); }}>Agregar días de suscripción</TransparentButton></>
       <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
-      <ModalAddDays show={showAddDays} setShow={setShowAddDays} />
+      <ModalAddDays show={showAddDays} setShow={setShowAddDays} user={user} />
     </UserContain>
   )
 }

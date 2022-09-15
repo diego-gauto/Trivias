@@ -40,3 +40,11 @@ export const getUserScore = async (userId: any) => {
   })
   return tempUsers
 }
+
+export const updateUserPlan = async (days: number, userId: string) => {
+  const docRef = doc(db, 'users', userId);
+  await updateDoc(docRef, {
+    'membership.finalDate': days,
+  })
+  return 'exito'
+}
