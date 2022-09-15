@@ -143,7 +143,7 @@ const NextReward = ({ score, barProgress, level, max, timeScore, timeProgress, t
                 <PointsBox>
                   <UserPoints style={{ display: responsive470 ? "none" : "" }}>
                     {
-                      timeScore <= 1 ? timeScore + " mes" : timeScore + " meses"
+                      timeScore <= 1 ? timeScore + " día" : timeScore + " días"
                     }
                   </UserPoints>
                   <PolygonDown />

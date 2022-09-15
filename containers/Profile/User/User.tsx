@@ -89,7 +89,11 @@ const User = () => {
   const getDate = () => {
     let tempToday: number = new Date().getTime() / 1000;
     let tempDate: number = userData.membership?.startDate;
-    let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
+    // let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
+    let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
+    if (tempDate == 0) {
+      timeScore = 0;
+    }
     setTimeScore(timeScore)
   }
 
@@ -104,8 +108,12 @@ const User = () => {
   }
 
   const getCurrentTimeLevel = () => {
+    console.log(timeScore);
+
     getTimeLevel().then((res) => {
-      res = res.filter((data: any, index: any) => data.minimum <= timeScore)
+      res = res.filter((data: any, index: any) => data.minimum <= timeScore);
+      console.log(res);
+
       setTimeLevel(res[0])
       setCurrentTimeLevel(res.length)
     })
