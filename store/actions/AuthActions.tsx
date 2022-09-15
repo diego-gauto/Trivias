@@ -11,8 +11,9 @@ import { httpsCallable } from "firebase/functions";
 import { PREVIEW, SIGNUP_PAST_USER_PATH } from "../../constants/paths";
 
 import { db, functions } from "../../firebase/firebaseConfig";
+import { IMembership } from "../types/AuthActionTypes";
 
-export const signUpWithCreds = (signUpData: { credentials: any; }) => {
+export const signUpWithCreds = (signUpData: { credentials: any; membership?: IMembership }) => {
   const {
     credentials,
   } = signUpData;
@@ -33,14 +34,15 @@ export const signUpWithCreds = (signUpData: { credentials: any; }) => {
         email: credentials.email,
       }
       let dateTime = new Date()
-      let membership: any = {
-        finalDate: '',
+      const membership: IMembership = {
+        finalDate: 0,
         level: 0,
         method: '',
         planId: '',
         planName: '',
         paymentMethod: '',
-        startDate: 0
+        startDate: 0,
+        ...signUpData.membership
       }
       if (credentials.month) {
         membership.finalDate = (new Date().getTime() / 1000) + 2592000;
