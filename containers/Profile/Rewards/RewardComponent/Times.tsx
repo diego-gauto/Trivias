@@ -18,7 +18,7 @@ const Times = ({ rewards, score, level, currentLevel, levels }: any) => {
       {
         levels.map((val: any, i: any) => {
           return (
-            <LevelContainer key={"levels" + i} i={i + 1} level={currentLevel}>
+            <LevelContainer key={"levels" + i} i={i} level={currentLevel}>
               <Divisor
                 min={val.minimum}
                 i={i}
@@ -30,7 +30,7 @@ const Times = ({ rewards, score, level, currentLevel, levels }: any) => {
               <ContainLevel>
                 <Circle val={val.minimum} level={level.minimum} />
                 <LevelText val={val.minimum} level={level.minimum}>
-                  Nivel {i + 1} <br /> {val.maximum} {i == 0 ? "mes" : "meses"}
+                  Nivel {i + 1} <br /> {val.maximum} {i == 0 ? "día" : "días"}
                 </LevelText>
               </ContainLevel>
             </LevelContainer>

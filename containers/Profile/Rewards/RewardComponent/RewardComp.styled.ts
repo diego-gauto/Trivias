@@ -104,13 +104,13 @@ export const LevelContainer = styled.div<{i:any,level:any}>`
   justify-content: center;
   gap: 3px;
   width: 100%;
-  ${props => (props.i == 1) && css`
+  ${props => (props.i == 0) && css`
   width: fit-content;
 `}
   @media(max-width: 1023px) {
     width: 50px;
     display: none;
-    ${props => (props.i == props.level || props.i ==props.level-1 || props.i == props.level + 1) && css`
+    ${props => (props.i == props.level || props.i == props.level-1 || props.i == props.level +1) && css`
     display: flex;
   `}
   }
