@@ -1,3 +1,20 @@
+import React, { useState } from "react";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+
+import { httpsCallable } from "firebase/functions";
+import Link from "next/link";
+import Stripe from "stripe";
+import * as yup from "yup";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
+import { SIGNUP_PATH } from "../../constants/paths";
+import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
+import { functions } from "../../firebase/firebaseConfig";
 import {
   AllButtons,
   Background,
@@ -15,24 +32,11 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import {
-  RegisterPastUserBox,
   FormInput,
-  RegisterButton
+  RegisterButton,
+  RegisterPastUserBox,
 } from "../../screens/RegisterPastUser.styled";
-import React, { useState } from 'react';
-import "react-phone-number-input/style.css";
-import { isValidPhoneNumber } from "react-phone-number-input";
-import Link from "next/link";
-import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
-import { SIGNUP_PATH } from "../../constants/paths";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { signUpWithCreds } from "../../store/actions/AuthActions";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../firebase/firebaseConfig";
-import Stripe from 'stripe';
-import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
 import { IMembership } from "../../store/types/AuthActionTypes";
 
 const formSchema = yup.object().shape({
@@ -201,6 +205,7 @@ const RegisterPastUser = () => {
               limitMaxLength
               international
               defaultCountry="MX"
+              countryCallingCodeEditable={false}
               id="input_1"
               className={`form-control ${phoneNumberError && 'is-invalid'}`}
             />
