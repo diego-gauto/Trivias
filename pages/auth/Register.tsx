@@ -225,6 +225,7 @@ const Register = () => {
                   onChange={(e: any) => { setPhoneInput(e) }}
                   limitMaxLength={true}
                   international={true}
+                  countryCallingCodeEditable={false}
                   defaultCountry="MX"
                   id="input_1"
                 />
