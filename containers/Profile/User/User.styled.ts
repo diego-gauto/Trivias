@@ -36,6 +36,7 @@ export const ThirdBox = styled.div`
 `;
 export const ProfileContainer =  styled.div`
   width:40%;
+  height: 882px;
   background:white;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   padding-inline: 40px;
