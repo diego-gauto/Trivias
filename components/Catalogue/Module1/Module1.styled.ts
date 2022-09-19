@@ -81,7 +81,7 @@ export const TextContain = styled.div`
   flex-direction: column;
   padding-right: 20px;
   bottom: 100px;
-  left: 30px;
+  left: 20px;
   gap: 10px;
   position: absolute;
   @media (max-width: 1100px) {

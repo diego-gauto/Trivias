@@ -77,19 +77,22 @@ const Module5 = ({ user, course }: any) => {
       </ImageContain>
       <Content>
         <TextContainer>
-          <Title>
+          {(!user || (user && user.membership.finalDate < today)) ? <Title>
             Conoce nuestra suscripción
-          </Title>
+          </Title> :
+            <Title>
+              Disfruta de tu suscripción Gonvar Plus
+            </Title>}
           <TextContent>
             {/* <LimitTime>
               Tiempo ilimitado por $89.99 al mes
             </LimitTime> */}
-            <SuscribeText>
+            {(!user || (user && user.membership.finalDate < today)) && <SuscribeText>
               Suscríbete a
               <SpanText>
                 Gonvar Plus
               </SpanText>
-            </SuscribeText>
+            </SuscribeText>}
           </TextContent>
         </TextContainer>
         <RespContain>

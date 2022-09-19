@@ -88,7 +88,7 @@ export const SpanText = styled.span`
 
 export const CardContain = styled.div`
   display: flex;
-  padding-inline: 30px;
+  padding-inline: 20px;
   justify-content: space-between;
   gap: 20px;
   align-items: center;
