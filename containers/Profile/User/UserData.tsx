@@ -6,16 +6,19 @@ import { db } from "../../../firebase/firebaseConfig";
 import Modal2 from "./Modal2/Modal2";
 import {
   AllEditInputs,
+  Box2,
   DataTitle,
   EditButtons,
   EditInput,
   EditText,
+  InputPhone,
   Inputs,
   ProfileData,
   SaveButton,
   SubscriptionButton,
 } from "./User.styled";
 import { IUserDataProps } from "../../../interfaces/IUserData";
+import PhoneInput from "react-phone-number-input";
 
 interface props {
   data: IUserDataProps,
@@ -62,13 +65,18 @@ const UserData = ({ data, pm }: props) => {
             <EditText>
               Telefono
             </EditText>
-            <EditInput
-              placeholder={data.phoneNumber == null ? "5512345678" : data.phoneNumber}
-              defaultValue={data.phoneNumber}
-              onChange={(e) => {
-                setUser({ ...user, phoneNumber: e.target.value })
-              }}
-            />
+            <Box2>
+              <InputPhone
+                value={data.phoneNumber}
+                limitMaxLength={true}
+                international={true}
+                countryCallingCodeEditable={false}
+                onChange={(e: any) => {
+                  setUser({ ...user, phoneNumber: e })
+                }}
+              />
+            </Box2>
+
           </Inputs>
         </AllEditInputs>
         <EditButtons>
