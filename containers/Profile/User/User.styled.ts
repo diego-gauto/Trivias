@@ -1,3 +1,4 @@
+import PhoneInput from "react-phone-number-input";
 import styled, { css, keyframes } from "styled-components";
 
 export const BackgroundProfile = styled.div`
@@ -35,6 +36,7 @@ export const ThirdBox = styled.div`
 `;
 export const ProfileContainer =  styled.div`
   width:40%;
+  height: 882px;
   background:white;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   padding-inline: 40px;
@@ -583,4 +585,49 @@ border-style: solid;
 border-radius: 50%;
 border-color: #6717CD transparent transparent;
 animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none running;
+`;
+export const InputPhone = styled(PhoneInput)`
+
+  select{
+    position: absolute;
+    width: 40px;
+    height: 27px;
+    z-index: 1;
+    background: transparent;
+    color:transparent;
+    outline: none;
+    border:none;
+    option{
+      color:black;
+    }
+  }
+  .PhoneInputInput {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 200px;
+    left: 80px;
+    border:none;
+    outline: none;
+    @media (max-width: 400px) {
+      width: 120px;
+      font-size: 14px;
+    }
+  }
+  .PhoneInputCountry {
+    position: absolute;
+    width: 40px;
+    left: 30px;
+    align-items: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+`;
+export const Box2 = styled.div`
+  position: relative;
+  width: 100%;
+  border-radius: 100px;
+  border: 1px solid #6717CD;
+  height: 40px;
+
 `;

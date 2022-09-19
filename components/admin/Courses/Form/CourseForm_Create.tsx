@@ -6,6 +6,7 @@ import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { createCourse } from "../../../../store/actions/AdminActions";
 import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
@@ -87,17 +88,19 @@ const CourseForm_Create = () => {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
-  const [value, setValue] = useState<any>({})
+  const [value, setValue] = useState<any>({});
   const [userData, setUserData] = useState<any>([]);
-  const [value2, setValue2] = useState("Uñas")
-  const [value3, setValue3] = useState("Gratis")
-  const [image, setImage] = useState<any>("")
-  const [price, setPrice] = useState(0)
+  const [value2, setValue2] = useState("Uñas");
+  const [value3, setValue3] = useState("Gratis");
+  const [image, setImage] = useState<any>("");
+  const [price, setPrice] = useState(0);
+  const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
 
 
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
+    setCreatingNewCourse(true)
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -128,6 +131,8 @@ const CourseForm_Create = () => {
     };
 
     createCourse(signUpData).then(() => {
+      alert("Curso creado correctamente");
+      setCreatingNewCourse(false);
       window.location.href = "/admin/Courses";
     });
 
@@ -432,7 +437,11 @@ const CourseForm_Create = () => {
               </InputContain>
             }
             <ButtonContain >
-              <Button type='submit' onClick={(e) => { e.stopPropagation(); }}>Crear Curso</Button>
+              {!creatingNewCourse ?
+                <Button type='submit' onClick={(e) => { e.stopPropagation() }}>Crear Curso</Button>
+                :
+                <LoaderContain />
+              }
             </ButtonContain>
           </InputContain2>
 
