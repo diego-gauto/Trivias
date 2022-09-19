@@ -35,6 +35,9 @@ export const Video = styled.div`
   width: 180px;
   height: 102.86px;
   }
+  &:hover{
+    transform: scale(1.02);
+  }
 `;
 export const VideoContain = styled.div`
   display: flex;
