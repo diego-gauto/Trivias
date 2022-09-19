@@ -35,7 +35,15 @@ type CheckBoxValues = {
   checked: boolean
 };
 
-const RoleEdit = ({ show, setShow, admin, adminID, role }: any) => {
+type RoleProps = {
+  admin: any;
+  setShow: (open: boolean) => void;
+  adminID: any;
+  role: any;
+  show: boolean;
+};
+
+const RoleEdit = ({ show, setShow, admin, adminID, role }: RoleProps) => {
   const handleClose = () => setShow(false);
   const [state, setState] = useState<CheckBoxNames>(role);
 

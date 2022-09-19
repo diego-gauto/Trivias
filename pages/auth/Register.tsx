@@ -227,7 +227,6 @@ const Register = () => {
                   international={true}
                   countryCallingCodeEditable={false}
                   defaultCountry="MX"
-                  countryCallingCodeEditable={false}
                   id="input_1"
                 />
                 <LineIcon />
