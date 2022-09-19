@@ -43,14 +43,14 @@ const Module1 = ({ user, allCourses }: any) => {
         )
       }
     } else {
-      if (course.courseType == 'Gratis') {
+      if (historyCourse.courseType == 'Gratis') {
         router.push({
           pathname: 'Lesson',
-          query: { id: course.id, season: 0, lesson: 0 },
+          query: { id: historyCourse.id, season: 0, lesson: 0 },
         });
       }
-      if (!user && (course.courseType == 'Mensual' || course.courseType == 'Producto')) {
-        router.push(LOGIN_PATH)
+      if (!user && (historyCourse.courseType == 'Mensual' || historyCourse.courseType == 'Producto')) {
+        router.push(LOGIN_PATH);
       }
     }
   }
@@ -61,8 +61,6 @@ const Module1 = ({ user, allCourses }: any) => {
 
   useEffect(() => {
     if (user) {
-      console.log(1);
-
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid: any) => {
         getViewedCourses(user.id).then((res) => {

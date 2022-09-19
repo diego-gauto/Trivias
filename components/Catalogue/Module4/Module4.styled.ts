@@ -9,7 +9,7 @@ export const Title = styled(ContinueText)`
 `;
 
 export const Viewpay = styled.p`
-  padding-block-end: 25px;
+  padding-block: 15px;
   color: #6717CD;
   text-align: center;
   font-size: 16px;
@@ -20,6 +20,11 @@ export const Viewpay = styled.p`
   @media( max-width: 1023px){
     padding-block: 10px;
     font-size: 14px;
+  }
+  &:hover{
+    color: white;
+    background-color: #6717CD;
+    border-radius: 0 0 10px 10px;
   }
 `;
 export const Maincontainer = styled.div`

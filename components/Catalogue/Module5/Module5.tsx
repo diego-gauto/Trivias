@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { LOGIN_PATH } from "../../../constants/paths";
-import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 import {
   InsideContent,
   InsideText,
