@@ -88,6 +88,7 @@ const CourseForm_Create = () => {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
+  const [free, setFree] = useState(0)
   const [value, setValue] = useState<any>({});
   const [userData, setUserData] = useState<any>([]);
   const [value2, setValue2] = useState("Uñas");
@@ -117,12 +118,12 @@ const CourseForm_Create = () => {
     let signUpData: any = {
       data: {
         courseTittle: formData.courseTittle,
-        courseDuration: formData.courseDuration,
+        courseDuration: formData.courseDuration * free,
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
         coursePublishYear: formData.coursePublishYear,
-        coursePrice: formData.coursePrice,
+        coursePrice: formData.coursePrice * free,
         courseProfessor: professor,
         courseCategory: category,
         courseType: type,
@@ -237,7 +238,7 @@ const CourseForm_Create = () => {
                 {
                   open3 == true &&
                   <OptionContain>
-                    <Option onClick={() => { setValue3("Gratis"); setOpen3(false) }}>
+                    <Option onClick={() => { setValue3("Gratis"); setOpen3(false); setFree(0) }}>
                       <input
                         type="radio"
                         id="Temporada1"
@@ -246,7 +247,7 @@ const CourseForm_Create = () => {
                       />
                       <Label2 > Gratis</Label2>
                     </Option>
-                    <Option onClick={() => { setValue3("Mensual"); setOpen3(false) }}>
+                    <Option onClick={() => { setValue3("Mensual"); setOpen3(false); setFree(1) }}>
                       <input
                         type="radio"
                         id="Temporada1"
@@ -255,12 +256,12 @@ const CourseForm_Create = () => {
                       />
                       <Label2 > Mensual</Label2>
                     </Option>
-                    <Option onClick={() => { setValue3("Producto"); setOpen3(false) }}>
+                    <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
                       <input
                         type="radio"
                         id="Temporada2"
                         name="category"
-                        value="Temporada 2"
+                        value="Temporada 1"
                       />
                       <Label2> Producto</Label2>
                     </Option>
