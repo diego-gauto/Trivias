@@ -6,7 +6,7 @@ export const LevelContainer = styled.div<{i:any,level:any}>`
   justify-content: center;
   gap: 3px;
   width: 100%;
-  ${props => (props.i == 1) && css`
+  ${props => (props.i == 0) && css`
   width: fit-content;
 `}
   @media(max-width: 1023px) {
