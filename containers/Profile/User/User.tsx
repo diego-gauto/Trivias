@@ -91,6 +91,7 @@ const User = () => {
     let tempDate: number = userData.membership?.startDate;
     // let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
     let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
+
     if (tempDate == 0) {
       timeScore = 0;
     }
@@ -108,7 +109,6 @@ const User = () => {
   }
 
   const getCurrentTimeLevel = () => {
-    console.log(timeScore);
 
     getTimeLevel().then((res) => {
       res = res.filter((data: any, index: any) => data.minimum <= timeScore);
@@ -148,7 +148,6 @@ const User = () => {
   const handleClick = (value: boolean) => {
     fetchDB_data();
   }
-
   if (loading) {
     return (
       <Background>
