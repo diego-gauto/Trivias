@@ -127,6 +127,7 @@ export const SubTitle = styled.p`
 `;
 export const ImageBack = styled.img`
   width:100%;
+  border-radius: 10px 10px 0 0;
 `;
 export const ImageDiv = styled.div`
   position: absolute;

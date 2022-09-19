@@ -82,7 +82,8 @@ export const AllPrizes = styled.div`
     padding-inline: 0px;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center;
+    overflow: initial;
+    justify-content: space-between;
   }
 `;
 export const PrizeContain = styled.div`

@@ -22,6 +22,11 @@ import {
 
 const UserInfo = ({ userData, taskView, setTaskView }: any) => {
   let today = new Date().getTime() / 1000;
+  let tempDate = new Date(userData.membership.finalDate * 1000);
+  let tempDay = tempDate.getDate()
+  let tempMonth = tempDate.getUTCMonth() + 1;
+  let tempYear = tempDate.getFullYear()
+  let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
 
 
   const logoutFunc = () => {
@@ -77,6 +82,14 @@ const UserInfo = ({ userData, taskView, setTaskView }: any) => {
         </LabelText>
         <UserText>
           Gonvar Plus Mensual
+        </UserText>
+      </UserContainer>}
+      {userData.membership.finalDate > today && <UserContainer>
+        <LabelText>
+          Próximo cargo
+        </LabelText>
+        <UserText>
+          {formatDate}
         </UserText>
       </UserContainer>}
       {

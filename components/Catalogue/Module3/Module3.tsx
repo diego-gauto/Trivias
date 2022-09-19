@@ -17,7 +17,6 @@ import {
 import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain, ScrollContainer } from "../Module4/Module4.styled";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import { useRouter } from "next/router";
-import { getCourses, getWholeCourses } from "../../../store/actions/courseActions";
 
 const Module3 = ({ user, allCourses }: any) => {
   const [courses, setCourses] = useState<any>([]);
