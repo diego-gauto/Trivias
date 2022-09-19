@@ -147,6 +147,7 @@ const SeasonsMain = () => {
                   courseProfessor={courseData[0].courseProfessor}
                   coursePublishYear={courseData[0].coursePublishYear}
                   courseSubtittle={courseData[0].courseSubtittle}
+                  courseType={courseData[0].courseType}
                   index={0}
                   documentID={courseID} />
                 :

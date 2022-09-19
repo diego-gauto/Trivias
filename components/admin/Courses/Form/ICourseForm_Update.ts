@@ -3,6 +3,7 @@ export interface ICourseForm_Update{
   courseAbout : string,
   courseCategory : string,
   courseDuration : string,
+  courseType: string,
   coursePath: string,
   coursePrice : string,
   courseProfessor : any,

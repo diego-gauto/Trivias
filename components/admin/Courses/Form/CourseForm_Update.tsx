@@ -58,6 +58,7 @@ type FormValues = {
   courseDuration: number;
   courseSubtittle: string;
   courseAbout: string;
+  courseType: string;
   coursePublishYear: number;
   coursePrice: number;
 };
@@ -70,6 +71,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { courseDuration } = props;
   const { coursePrice } = props;
   const { courseProfessor } = props;
+  const { courseType } = props;
   const { coursePublishYear } = props;
   const { courseSubtittle } = props;
   const { documentID } = props;
@@ -98,10 +100,11 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState(courseProfessor.name);
   const [value, setValue] = useState<any>({})
+  const [free, setFree] = useState(courseType == "Gratis" ? 0 : 1)
   const [value2, setValue2] = useState("Uñas")
   const [image, setImage] = useState<any>(coursePath)
   const [images, setimages] = useState<any>("")
-  const [value3, setValue3] = useState("Gratis")
+  const [value3, setValue3] = useState(courseType)
   const [userData, setUserData] = useState<any>([]);
 
   useEffect(() => {
@@ -126,13 +129,13 @@ const CourseForm = (props: ICourseForm_Update) => {
     let signUpData = {
       data: {
         courseTittle: formData.courseTittle,
-        courseDuration: formData.courseDuration,
+        courseDuration: formData.courseDuration * free,
         courseSubtittle: formData.courseSubtittle,
         courseAbout: formData.courseAbout,
         reference: reference,
         coursePath: image,
         coursePublishYear: formData.coursePublishYear,
-        coursePrice: formData.coursePrice,
+        coursePrice: formData.coursePrice * free,
         courseProfessor: professor,
         courseCategory: category,
         courseType: type,
@@ -220,16 +223,20 @@ const CourseForm = (props: ICourseForm_Update) => {
 
             </IconContain>
           </InputContain>
-          <InputContain>
-            <Label>Duración de Suscripción (Días)</Label>
-            <Input
-              placeholder="90"
-              defaultValue={courseDuration}
-              type="number"
-              className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
-              {...register("courseDuration")}
-            />
-          </InputContain>
+          {
+            free != 0 &&
+            <InputContain>
+              <Label>Duración de Suscripción (Días)</Label>
+              <Input
+                placeholder="90"
+                defaultValue={courseDuration}
+                type="number"
+                className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
+                {...register("courseDuration")}
+              />
+            </InputContain>
+          }
+
         </InputForm>
         {/* LINEA 2 */}
         <InputForm>
@@ -321,16 +328,20 @@ const CourseForm = (props: ICourseForm_Update) => {
                 {...register("coursePublishYear")}
               />
             </InputContain>
-            <InputContain>
-              <Label>Precio (MXN)</Label>
-              <Input
-                placeholder="998"
-                type="number"
-                defaultValue={coursePrice}
-                className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
-                {...register("coursePrice")}
-              />
-            </InputContain>
+            {
+              free != 0 &&
+              <InputContain>
+                <Label>Precio (MXN)</Label>
+                <Input
+                  placeholder="998"
+                  type="number"
+                  defaultValue={coursePrice}
+                  className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
+                  {...register("coursePrice")}
+                />
+              </InputContain>
+            }
+
           </InputContain2>
           <InputButtonContain>
 
@@ -346,7 +357,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                   {
                     open3 == true &&
                     <OptionContain>
-                      <Option onClick={() => { setValue3("Gratis"); setOpen3(false) }}>
+                      <Option onClick={() => { setValue3("Gratis"); setOpen3(false); setFree(0) }}>
                         <input
                           type="radio"
                           id="Temporada1"
@@ -355,7 +366,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                         />
                         <Label2 > Gratis</Label2>
                       </Option>
-                      <Option onClick={() => { setValue3("Mensual"); setOpen3(false) }}>
+                      <Option onClick={() => { setValue3("Mensual"); setOpen3(false); setFree(1) }}>
                         <input
                           type="radio"
                           id="Temporada1"
@@ -364,7 +375,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                         />
                         <Label2 > Mensual</Label2>
                       </Option>
-                      <Option onClick={() => { setValue3("Producto"); setOpen3(false) }}>
+                      <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
                         <input
                           type="radio"
                           id="Temporada2"
