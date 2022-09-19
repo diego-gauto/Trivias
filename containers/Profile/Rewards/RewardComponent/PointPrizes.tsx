@@ -18,7 +18,7 @@ import {
 } from "./ClaimPrizes.styled";
 import Modal1 from "./Modal1/Modal1";
 import { getRewards, getUserRewards } from "../../../../store/actions/RewardActions";
-import { useMediaQuery } from "react-responsive";
+
 
 const PointPrizes = ({ score, user }: any) => {
 
