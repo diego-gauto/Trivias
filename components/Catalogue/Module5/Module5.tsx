@@ -11,7 +11,7 @@ import {
   Text2,
   Text3,
 } from "../Module3/Module3.styled";
-import { CardImage, Viewpay } from "../Module4/Module4.styled";
+import { CardImage, VideoInfo, Viewpay } from "../Module4/Module4.styled";
 import {
   Banner2,
   ButtonContain,
@@ -115,20 +115,22 @@ const Module5 = ({ user, course }: any) => {
                         </InsideText>}
                       </InsideContent>
                     </ImageContent>
-                    <TextContain>
-                      <Text1>
-                        Curso: {course.courseTittle}
-                        <Text2>
-                          {course.courseCategory}
-                        </Text2>
-                      </Text1>
-                      <Text3>
-                        {course.courseAbout}...
-                      </Text3>
+                    <VideoInfo>
+                      <TextContain>
+                        <Text1>
+                          Curso: {course.courseTittle}
+                          <Text2>
+                            {course.courseSubtittle}...
+                          </Text2>
+                        </Text1>
+                        <Text3>
+                          {course.courseAbout}...
+                        </Text3>
+                      </TextContain>
                       {(user && user.membership.finalDate > today) && <Viewpay onClick={() => { goTo(course) }}>
                         Ver curso
                       </Viewpay>}
-                    </TextContain>
+                    </VideoInfo>
                   </Cardcontent2>
                 </>
               )

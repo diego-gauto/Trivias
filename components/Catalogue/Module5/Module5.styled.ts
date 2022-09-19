@@ -27,7 +27,7 @@ export const ImageContain = styled.div`
   height: 550px;
   position: relative;
   @media (max-width: 1023px) {
-    height: 480px;
+    height: 570px;
   }
 `;
 export const TextContainer = styled.div`
@@ -111,8 +111,8 @@ export const Cardcontent = styled.div`
 export const Cardcontent2 = styled.div`
   display: flex;
   flex-direction: column;
-  width: 412px;
-  height: 328px;
+  width: 452px;
+  height: 402px;
   @media(max-width:1023px){
     min-width: 300px;
     height: auto;
@@ -136,19 +136,12 @@ export const RespContain = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-  // @media(max-width: 1023px){
-  //   display: flex;
-  //   justify-content: center;
-  // }
 `;
 export const TextContain = styled.div`
   display: flex;
-  background: white;
   flex-direction: column;
-  height:139px;
   gap: 12px;
   padding:10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius:0 0 10px 10px;
 `;
 export const ButtonContain = styled.div`
@@ -170,7 +163,6 @@ export const PurpleButton = styled.button`
     transition:.5s ease all;
   }
   @media(max-width:1023px){
-    position: absolute;
     bottom: 10px;
     font-size: 14px;
     padding-block: 10px;
@@ -180,7 +172,7 @@ export const PurpleButton = styled.button`
 export const ImageContent = styled.div`
   display: flex;
   position: relative;
-  height: 189px;
+  height: 209px;
   @media(max-width:1023px){
     height: auto;
   }

@@ -64,6 +64,7 @@ export const Cardcontent = styled.div`
 export const CardImage = styled.img`
   width: 100%;
   max-height:209px;
+  border-radius: 10px 10px 0px 0px;
   @media( max-width: 600px){
     height: 163px;
   }
@@ -75,4 +76,5 @@ export const VideoInfo = styled.div`
   justify-content:space-between;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 0 0 10px 10px;
+  background: white;
 `;

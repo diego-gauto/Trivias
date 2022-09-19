@@ -24,6 +24,7 @@ const Module4 = ({ user, allCourses }: any) => {
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
+  let today = new Date().getTime() / 1000;
 
   const handleShow = () => {
     setShow(true);
@@ -132,7 +133,13 @@ const Module4 = ({ user, allCourses }: any) => {
                     }}>
                       Comprar - ${course.coursePrice}.00
                     </Viewpay>}
-                    {(course.courseType == 'Mensual' || course.courseType == 'Gratis') && <Viewpay onClick={(e) => {
+                    {((course.courseType == 'Mensual' && user && user.membership.finalDate < today) || (course.courseType == 'Mensual' && !user)) && <Viewpay onClick={(e) => {
+                      e.stopPropagation();
+                      goTo(course);
+                    }}>
+                      Comprar Gonvar Plus
+                    </Viewpay>}
+                    {(course.courseType == 'Gratis' || (user && course.courseType == 'Mensual' && user.membership.finalDate > today)) && <Viewpay onClick={(e) => {
                       e.stopPropagation();
                       goTo(course);
                     }}>
