@@ -505,7 +505,7 @@ const Purchase = () => {
                         <ContainerCard>
                           <InputText>
                             Número de la Tarjeta
-                            <InputCard mask='9999 9999 9999 99999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
+                            <InputCard mask='9999 9999 9999 9999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
                               setCard((card: any) => ({ ...card, number: e.target.value }));
 
                             }}>
