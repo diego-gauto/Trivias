@@ -77,7 +77,7 @@ export const Divider = styled.div`
   height: 1.5px;
   background: black;
 `;
-export const CoursesContainer = styled.div<{active:any}>`
+export const CoursesContainer = styled.div<{active:boolean}>`
   height: 0px;
   display: flex;
   flex-direction: column;

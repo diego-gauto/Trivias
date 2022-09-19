@@ -12,7 +12,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
   useEffect(() => {
     let temp_selected: any = [];
     course?.seasons.forEach((element: any) => {
-      temp_selected.push(false)
+      temp_selected.push(true)
     });
     setSelected(temp_selected)
   }, [course])
@@ -32,7 +32,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
         x
       </CloseButton>
       <CourseProgress title={course?.courseTittle} season={season} lesson={lesson} course={course} userId={userId} />
-      {course?.seasons.map((season: any, index: any) => {
+      {course?.seasons.map((season: any, index: number) => {
         return (
           <>
             <Container onClick={() => { toggleHandler(index) }}>
