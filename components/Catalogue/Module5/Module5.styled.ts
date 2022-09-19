@@ -24,10 +24,10 @@ export const Content = styled.div`
 `;
 export const ImageContain = styled.div`
   width: 100%;
-  height: 550px;
+  height: 590px;
   position: relative;
   @media (max-width: 1023px) {
-    height: 570px;
+    height: 500px;
   }
 `;
 export const TextContainer = styled.div`
