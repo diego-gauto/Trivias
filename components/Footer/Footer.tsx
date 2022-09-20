@@ -208,7 +208,7 @@ const Footer = () => {
           Gonvar Nails Academy 2022
         </BottomText>
         <BottomText>
-          Inowu Development 2022
+          Gonvar©️ | Todos los derechos reservados
         </BottomText>
       </BottomContainer>
       <ModalFinish show={show} setShow={setShow} user={userData} />

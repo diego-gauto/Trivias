@@ -24,7 +24,7 @@ const Module2 = ({ user, allCourses }: any) => {
 
   useEffect(() => {
     if (user) {
-      let tempCourses = [];
+      let tempCourses: any = [];
       getViewedCourses(user.id).then((res: any) => {
         res.forEach((element: DocumentData) => {
           let tempCourse;
@@ -41,9 +41,10 @@ const Module2 = ({ user, allCourses }: any) => {
               });
             });
             element.progress = viewed * 100 / element.totalLessons;
+            tempCourse.push(element)
           }
         });
-        setCourse(res);
+        setCourse(tempCourses);
       });
     }
   }, [user]);

@@ -41,6 +41,7 @@ import {
 export const Module3 = (props: IModule3) => {
   const { button } = props;
   const { title } = props;
+  const { price } = props;
   const { subtitle } = props;
   const { type } = props;
   const { faved } = props;
@@ -189,7 +190,7 @@ export const Module3 = (props: IModule3) => {
                 </SectionRight02>
               </ResultsSection>
 
-              <SectionRight03><Text05>Desde $120.00</Text05></SectionRight03>
+              <SectionRight03><Text05>Desde ${price}.00</Text05></SectionRight03>
 
               <SectionRight04Container>
                 <SectionRight04>
