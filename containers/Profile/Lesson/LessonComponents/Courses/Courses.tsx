@@ -26,12 +26,14 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
     temp[index] = !temp[index];
     setSelected(temp)
   }
+
+
   return (
     <MainContainer open={open}>
       <CloseButton onClick={() => { setOpen(!open); handleClick(false) }}>
         x
       </CloseButton>
-      <CourseProgress title={course?.courseTittle} season={season} lesson={lesson} course={course} userId={userId} />
+      <CourseProgress title={course?.courseTittle} season={season} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />
       {course?.seasons.map((season: any, index: number) => {
         return (
           <>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ContainText, MainContainer, ProgressBar, ProgressBar2, ProgressContain, SeasonContain, SeasonSpan, SeasonText, Subtitle, TitleCourse } from './CourseProgress.styled';
 
-const CourseProgress = ({ title, season, lesson, course, userId }: any) => {
+const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any) => {
   const [totalViewed, setTotalViewed] = useState(0)
 
   const checkLecture = () => {
@@ -17,7 +17,7 @@ const CourseProgress = ({ title, season, lesson, course, userId }: any) => {
     if (course) {
       checkLecture()
     }
-  }, [course])
+  }, [refresh])
 
   return (
     <MainContainer>
