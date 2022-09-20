@@ -12,11 +12,13 @@ import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Ca
 import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
 import { Background, LoaderContain, LoaderImage } from "../screens/Login.styled";
+import { getWholeCourse } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
   const [landingData, setLandingData] = useState<any>({});
+  const [courseData, setCourseData] = useState<any>({});
 
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
@@ -25,13 +27,15 @@ const Homepage = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const fetchLandingData = async () => {
-    const landingData = await getLandingData()
-    setLandingData(landingData)
-    setLoading(false)
+    const landingData = await getLandingData();
+    setLandingData(landingData);
+    const courseData = await getWholeCourse('JXI9UgR59IV92Zrt1QgI');
+    setCourseData(courseData);
+    setLoading(false);
   }
 
   useEffect(() => {
-    fetchLandingData()
+    fetchLandingData();
   }, []);
 
   if (loading) {
@@ -55,13 +59,13 @@ const Homepage = () => {
       <Module1 heroSectionData={landingData.heroSectionData} />
       <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
       <Module3 //courseImg={"https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
-        button={"Nuevo"} title={"Curso de Uñas Francesas"}
-        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
+        button={"Nuevo"} title={courseData.courseTittle}
+        subtitle={courseData.courseSubtittle} type={5} faved={true} price={149} />
       <ImageContainMod1>
         <VideoContainMod3>
           <ReactPlayer
             className='absolute'
-            url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
+            url={courseData.lessons[0].link}
             playing={true}
             muted={true}
             //controls
@@ -75,19 +79,16 @@ const Homepage = () => {
       </ImageContainMod1>
 
       <Module4_Carousel isInfinite={true} slideData={
-        [
-          { isNew: true, title: "Manicure Avanzado", subtitle: "27 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2F1.png?alt=media&token=a6f5a42e-8e74-4ba8-93a6-74313c90051c" },
-          { isNew: false, title: "Uñas creativas", subtitle: "12 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2F2.png?alt=media&token=b8a911ef-f7fa-4cd5-9b60-13b2b5884819" },
-          { isNew: false, title: "Introducción a la Manicure", subtitle: "10 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2F3.png?alt=media&token=6cc72119-4384-43f8-9a8c-868761fa68a5" },
-          { isNew: true, title: "Introducción a la Manicure 2", subtitle: "5 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2F4.png?alt=media&token=26c1e8ed-18ad-4056-968c-067cf2abfa6e" },
-          { isNew: false, title: "Uñas creativas 2", subtitle: "9 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2F6.png?alt=media&token=5eaf8124-4c7b-4692-8ebb-cfe876b5b26f" },
-          { isNew: false, title: "Uñas creativas 3", subtitle: "13 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet1%2F5.png?alt=media&token=32a8d142-d0f0-4224-84a1-a1ca7fa53b70" },
-        ]
+        courseData.lessons.map((lesson: any) => {
+          return (
+            { isNew: true, title: lesson.title, subtitle: "", imgURL: lesson.image }
+          )
+        })
       } />
 
       <Module3 courseImg={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet2%2FFondo.png?alt=media&token=7f3aafb7-e5d1-4a5f-8719-9be60295c0e0"}
         button={"Nuevo"} title={"Curso de Uñas Francesas 2"}
-        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={4} faved={false} />
+        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={4} faved={false} price={149} />
 
 
       <Module4_Carousel isInfinite={true} slideData={
@@ -103,7 +104,7 @@ const Homepage = () => {
 
       <Module3 courseImg={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet3%2FFondo.png?alt=media&token=7c92538e-0d0b-4ab7-98a0-59ef77241c24"}
         button={"Nuevo"} title={"Curso de Uñas Francesas 3"}
-        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={3} faved={true} />
+        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={3} faved={true} price={149} />
 
 
       <Module4_Carousel isInfinite={true} slideData={
@@ -119,7 +120,7 @@ const Homepage = () => {
 
       <Module3 courseImg={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet4%2FFondo.png?alt=media&token=6fbc5361-ad7c-46c8-9390-0c76d6b14d39"}
         button={"Nuevo"} title={"Curso de Uñas Francesas 4"}
-        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={2} faved={true} />
+        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={2} faved={true} price={149} />
 
 
       <Module4_Carousel isInfinite={true} slideData={
@@ -135,7 +136,7 @@ const Homepage = () => {
 
       <Module3 courseImg={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet5%2FFondo.png?alt=media&token=94ed7b55-ef41-406d-a276-28b5326eb2a5"}
         button={"Nuevo"} title={"Curso de Uñas Francesas 5"}
-        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={1} faved={false} />
+        subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={1} faved={false} price={149} />
 
 
       <Module4_Carousel isInfinite={true} slideData={
