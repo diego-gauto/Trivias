@@ -41,7 +41,7 @@ const Module2 = ({ user, allCourses }: any) => {
               });
             });
             element.progress = viewed * 100 / element.totalLessons;
-            tempCourse.push(element)
+            tempCourses.push(element)
           }
         });
         setCourse(tempCourses);

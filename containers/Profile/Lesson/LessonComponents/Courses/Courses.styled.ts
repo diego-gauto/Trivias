@@ -4,9 +4,11 @@ export const MainContainer = styled.div<{open:any}>`
   display: flex;
   flex-direction: column; 
   gap: 10px;
-  flex:1 0;
+  position: absolute;
+  right: 20px;
+  width: 28%;
   @media (max-width: 900px){
-    position: absolute;
+    position: fixed;
     z-index: 40;
     padding: 10px;
     background: white;
