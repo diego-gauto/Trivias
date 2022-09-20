@@ -1,4 +1,5 @@
 import PhoneInput from "react-phone-number-input";
+
 import styled, { css, keyframes } from "styled-components";
 
 export const BackgroundProfile = styled.div`
@@ -36,7 +37,7 @@ export const ThirdBox = styled.div`
 `;
 export const ProfileContainer =  styled.div`
   width:40%;
-  height: 882px;
+  height:100vh;
   background:white;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   padding-inline: 40px;

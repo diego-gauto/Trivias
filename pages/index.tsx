@@ -54,7 +54,7 @@ const Homepage = () => {
       }}>
       <Module1 heroSectionData={landingData.heroSectionData} />
       <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
-      <Module3 //courseImg={"https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
+      <Module3
         button={"Nuevo"} title={"Curso de Uñas Francesas"}
         subtitle={"Descubre un nuevo métodos para tus este San Valentín"} type={5} faved={true} />
       <ImageContainMod1>
@@ -64,7 +64,6 @@ const Homepage = () => {
             url='https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8'
             playing={true}
             muted={true}
-            //controls
             width={responsive380 ? '100%' : '100%' &&
               responsive520 ? '100%' : '100%' &&
                 responsive1023 ? '100%' : '100%'}
