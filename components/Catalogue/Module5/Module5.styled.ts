@@ -29,6 +29,9 @@ export const ImageContain = styled.div`
   @media (max-width: 1023px) {
     height: 500px;
   }
+  @media (max-width: 1023px) {
+    height: 400px;
+  }
 `;
 export const TextContainer = styled.div`
   display: flex;
@@ -114,9 +117,9 @@ export const Cardcontent2 = styled.div`
   width: 452px;
   height: 402px;
   @media(max-width:1023px){
-    min-width: 300px;
+    min-width: 180px;
     height: auto;
-    width: auto;  
+    width: min-content;  
   }
 `;
 export const Cardcontent3 = styled.div`
@@ -143,6 +146,10 @@ export const TextContain = styled.div`
   gap: 12px;
   padding:10px;
   border-radius:0 0 10px 10px;
+  @media(max-width: 600px){
+    display: none;
+  }
+  height: 120px;
 `;
 export const ButtonContain = styled.div`
   display: flex;

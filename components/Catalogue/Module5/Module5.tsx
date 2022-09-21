@@ -63,6 +63,8 @@ const Module5 = ({ user, course }: any) => {
           { pathname: 'Purchase', query: { type: 'subscription' } }
         )
       }
+    } else {
+      router.push(LOGIN_PATH);
     }
   }
 
@@ -128,6 +130,9 @@ const Module5 = ({ user, course }: any) => {
                       </TextContain>
                       {(user && user.membership.finalDate > today) && <Viewpay onClick={() => { goTo(course) }}>
                         Ver curso
+                      </Viewpay>}
+                      {(!user || user.membership.finalDate < today) && <Viewpay onClick={() => { goTo(course) }}>
+                        Comprar Gonvar Plus
                       </Viewpay>}
                     </VideoInfo>
                   </Cardcontent2>
