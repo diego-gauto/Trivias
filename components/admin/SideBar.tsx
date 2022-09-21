@@ -6,6 +6,7 @@ import Link from "next/link";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import { Container, Text } from "./SideBar.styled";
+import router from "next/router";
 
 const SideBar = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
@@ -16,9 +17,13 @@ const SideBar = () => {
   const [isLanding, setIsLanding] = useState<boolean>();
   const [isCoupons, setIsCoupons] = useState<boolean>();
   const [isUsers, setIsUsers] = useState<boolean>();
-
   try {
     var userDataAuth = useAuth();
+    if (!userDataAuth.user) {
+      router.push({
+        pathname: '/Preview',
+      });
+    }
     useEffect(() => {
       const fetchDB_data = async () => {
         try {
@@ -26,6 +31,11 @@ const SideBar = () => {
           return onSnapshot(query_1, (response) => {
             var adminData: any;
             response.forEach((e) => {
+              if (e.data().role == "user") {
+                router.push({
+                  pathname: '/Preview',
+                });
+              }
               adminData = e.data()
             });
             setIsGeneral(adminData.adminType.general);
@@ -48,7 +58,6 @@ const SideBar = () => {
     }, [])
 
   } catch (error) {
-    console.log(error)
   }
 
   return (
