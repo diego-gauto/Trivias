@@ -58,7 +58,7 @@ export const Cardcontent = styled.div`
   cursor: pointer;
   transition: all .2s ease-in-out;
   @media( max-width: 600px){
-    min-width: 300px;
+    min-width: 180px;
     height: auto;
     width: min-content;
   }
@@ -71,7 +71,7 @@ export const CardImage = styled.img`
   max-height:209px;
   border-radius: 10px 10px 0px 0px;
   @media( max-width: 600px){
-    height: 163px;
+    height: 120px;
   }
 `;
 export const VideoInfo = styled.div`
