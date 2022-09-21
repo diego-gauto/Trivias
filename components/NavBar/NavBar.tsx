@@ -51,15 +51,12 @@ const NavBar = () => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         setLoggedIn(true)
-        console.log("Logged: Yes")
       } else {
         setLoggedIn(false)
-        console.log("Logged: No")
       }
     }, [])
 
   } catch (error) {
-    console.log(error)
     setLoggedIn(false)
   }
 
@@ -186,9 +183,8 @@ const NavBar = () => {
           <>
             <Link href={LOGIN_PATH}>
               <NavText pathname={pathname} color={color}
-                style={pathname == LOGIN_PATH ? { fontWeight: 600 } : { fontWeight: '' }}
+                style={pathname == "/auth/Login" || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600 } : { fontWeight: '' }}
               >
-
                 Iniciar Sesión
               </NavText>
             </Link>
