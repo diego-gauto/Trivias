@@ -44,7 +44,6 @@ export const CardContain = styled.div`
   gap: 20px;
   overflow: auto;
   float: left;
-  overscroll-behavior-inline: contain;
   ::-webkit-scrollbar{
     display: none;
   }
@@ -57,9 +56,12 @@ export const Cardcontent = styled.div`
   border-radius: 10px;
   cursor: pointer;
   transition: all .2s ease-in-out;
+  @media( max-width: 1023px){
+    height: auto;
+    width: 360px;
+  }
   @media( max-width: 600px){
     min-width: 180px;
-    height: auto;
     width: min-content;
   }
   &:hover{
@@ -70,7 +72,7 @@ export const CardImage = styled.img`
   width: 100%;
   max-height:209px;
   border-radius: 10px 10px 0px 0px;
-  @media( max-width: 600px){
+  @media( max-width: 1023px){
     height: 120px;
   }
 `;

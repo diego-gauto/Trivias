@@ -50,6 +50,8 @@ const Module4 = ({ user, allCourses }: any) => {
     } else {
       allCourses.forEach((element: any) => {
         element.courseAbout = element.courseAbout.slice(0, 100);
+        element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+        element.courseTittle = element.courseTittle.slice(0, 15);
       });
       setCourses(allCourses);
     }

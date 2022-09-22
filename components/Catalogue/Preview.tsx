@@ -51,7 +51,7 @@ const Preview = () => {
     let tempCourses: Array<any> = [];
     getWholeCourses().then((response) => {
       response.forEach((element: DocumentData) => {
-        if (element.seasons.length > 0) {
+        if (element.totalLessons > 0) {
           tempCourses.push(element);
         }
       });
