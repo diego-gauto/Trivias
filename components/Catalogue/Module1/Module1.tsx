@@ -42,6 +42,11 @@ const Module1 = ({ user, allCourses }: any) => {
           { pathname: 'Purchase', query: { type: 'subscription' } }
         )
       }
+      if (historyCourse.courseType == 'Producto' && !historyCourse.paid) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: historyCourse.documentID } }
+        )
+      }
     } else {
       if (historyCourse.courseType == 'Gratis') {
         router.push({

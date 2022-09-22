@@ -48,11 +48,33 @@ const Modal = ({ show, setShow, course, user }: any) => {
 
   const goTo = () => {
     if (user) {
-      router.push(
-        { pathname: 'Purchase', query: { type: 'course', id: course.id } }
-      )
+      let today = new Date().getTime() / 1000;
+      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.documentID, season: 0, lesson: 0 },
+        });
+      }
+      if (course.courseType == 'Mensual' && user.membership.level == 0) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'subscription' } }
+        )
+      }
+      if (course.courseType == 'Producto' && !course.paid) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: course.documentID } }
+        )
+      }
     } else {
-      router.push(LOGIN_PATH)
+      if (course.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: 0, lesson: 0 },
+        });
+      }
+      if (!user && (course.courseType == 'Mensual' || course.courseType == 'Producto')) {
+        router.push(LOGIN_PATH);
+      }
     }
   }
   useEffect(() => {
