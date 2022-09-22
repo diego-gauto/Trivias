@@ -27,9 +27,9 @@ export const ImageContain = styled.div`
   height: 590px;
   position: relative;
   @media (max-width: 1023px) {
-    height: 500px;
+    height: 520px;
   }
-  @media (max-width: 1023px) {
+  @media (max-width: 600px) {
     height: 400px;
   }
 `;
