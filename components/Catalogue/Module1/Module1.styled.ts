@@ -41,10 +41,6 @@ export const VideoContain = styled.div`
     overflow: visible;
   }
   @media (max-width: 850px) {
-    height: 340px;
-    overflow: hidden;
-  }
-  @media (max-width: 670px) {
     height: 310px;
     overflow: visible;
   }

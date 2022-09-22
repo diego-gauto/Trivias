@@ -48,7 +48,7 @@ export const VideoContain = styled.div`
 `;
 export const Background = styled.img`
   border-radius:10px;
-  @media( max-width: 600px){
+  @media( max-width: 700px){
     width:100%;
     height: 100%;
   }
