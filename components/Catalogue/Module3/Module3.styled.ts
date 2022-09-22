@@ -37,6 +37,9 @@ export const TextContain = styled.div`
   flex-direction: column;
   gap: 12px;
   padding:10px;
+  @media( max-width: 600px){
+    display: none;
+  }
 `;
 export const Text1 = styled.p`
   display: flex;

@@ -17,6 +17,7 @@ export const MainContainer = styled.div`
 export const CommentContain = styled.div`
   display: flex;
   gap: 20px;
+  align-items: center;
   @media (max-width: 1023px) {
     gap: 5px;
   }
@@ -24,7 +25,7 @@ export const CommentContain = styled.div`
 export const CommentInput = styled.input`
   color: black;
   max-height: 50px;
-  padding-inline: 20px;
+  padding: 20px;
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
   outline: none;
@@ -80,4 +81,24 @@ export const Pp3 = styled.i`
   min-width: 60px;
   background-position: center;
   background-repeat: no-repeat;
+`;
+export const Button = styled.button`
+  display: flex;
+  gap: 10px;
+  font-family:'Montserrat',sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background: transparent;
+  color: #6717CD;
+  border-radius: 30px;
+  border:1px solid #6717CD;
+  &:hover{
+    transform:scale(1.03);
+    transition:.5s ease all;
+  }
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;

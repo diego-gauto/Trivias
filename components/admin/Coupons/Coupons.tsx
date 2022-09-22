@@ -46,6 +46,7 @@ const Coupons = () => {
       createCoupon(coupon).then(() => {
         alert('Coupon creado con exito!');
         getAllCoupons();
+        setCoupon({ name: '', code: '', type: 'porcentage', discount: '', status: true })
       })
     }
   }
@@ -84,13 +85,13 @@ const Coupons = () => {
           <Title>Añadir Cupón</Title>
           <InputContain>
             <Label>Nombre del Cupón</Label>
-            <Input placeholder="Nombre del Cupón" onChange={(e) => {
+            <Input placeholder="Nombre del Cupón" value={coupon.name} onChange={(e) => {
               setCoupon({ ...coupon, name: e.target.value })
             }} />
           </InputContain>
           <InputContain>
             <Label>Código del Cupón</Label>
-            <Input placeholder="XXX000" onChange={(e) => {
+            <Input placeholder="XXX000" value={coupon.code} onChange={(e) => {
               setCoupon({ ...coupon, code: e.target.value })
             }} />
           </InputContain>
@@ -123,7 +124,7 @@ const Coupons = () => {
             select == "percentage" &&
             <InputContain>
               <Label>Descuento</Label>
-              <Input placeholder="00%" onChange={(e) => {
+              <Input placeholder="00%" value={coupon.discount} onChange={(e) => {
                 setCoupon({ ...coupon, discount: e.target.value })
               }} />
             </InputContain>
@@ -132,7 +133,7 @@ const Coupons = () => {
             select == "absolute" &&
             <InputContain>
               <Label>Descuento</Label>
-              <Input placeholder="$ 0.00" onChange={(e) => {
+              <Input placeholder="$ 0.00" value={coupon.discount} onChange={(e) => {
                 setCoupon({ ...coupon, discount: e.target.value })
               }} />
             </InputContain>

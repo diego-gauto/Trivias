@@ -5,8 +5,10 @@ import styled from "styled-components";
 export const SlideImg = styled.div ` 
 width: 100%;
 height: 200px;
+border-radius: 10px;
 background-repeat: no-repeat;
-background-size: 95% auto;
+background-position: center;
+background-size: 100% auto;
 padding: 0;
 @media only screen and (max-width: 1024px) {
   margin-bottom: 15px;
@@ -16,6 +18,7 @@ padding: 0;
   margin-bottom: 15px;
   margin-top: 0px;
   height: 22vh;
+  background-size: 95% auto;
 }
 @media only screen and (max-width: 500px) {
   margin-bottom: 15px;

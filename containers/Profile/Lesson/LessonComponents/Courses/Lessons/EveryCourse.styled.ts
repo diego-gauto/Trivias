@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const LessonContain = styled.div`
   display: flex;
@@ -27,10 +27,13 @@ export const IncompleteCircle = styled.div`
   border-radius: 50%;
   border: 2px solid gray;
 `;
-export const CourseTitle = styled.p`
+export const CourseTitle = styled.p<{active:boolean}>`
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  ${props => props.active == true && css`
+    font-weight: 800;
+  `}
 `;
 export const CurrentCourse = styled.p`
   font-size: 14px;

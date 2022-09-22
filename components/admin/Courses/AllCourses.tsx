@@ -38,14 +38,14 @@ export const AllCourses = ({
 
   return (
     <MainContainer>
-      <CourseContainer>
+      <CourseContainer onClick={() => { setOpen(!open) }}>
         <TitleContain>
           <CourseName>
             Curso - {course.courseTittle}
           </CourseName>
           {
             open == false &&
-            <ChevD onClick={() => { setOpen(true) }} />
+            <ChevD />
           }
           {
             open == true &&

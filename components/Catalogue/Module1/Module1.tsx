@@ -42,6 +42,11 @@ const Module1 = ({ user, allCourses }: any) => {
           { pathname: 'Purchase', query: { type: 'subscription' } }
         )
       }
+      if (historyCourse.courseType == 'Producto' && !historyCourse.paid) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: historyCourse.documentID } }
+        )
+      }
     } else {
       if (historyCourse.courseType == 'Gratis') {
         router.push({
@@ -89,7 +94,7 @@ const Module1 = ({ user, allCourses }: any) => {
           <VideoContain>
             <ReactPlayer
               className='absolute'
-              url={historyCourse.seasons[historyCourse.season].lessons[historyCourse.lesson].link}
+              url={historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson].link}
               playing={true}
               muted={true}
               //controls

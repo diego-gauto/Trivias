@@ -13,6 +13,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
 
   const { isInfinite } = props;
   const { slideData } = props;
+
   let slideDataArr = [];
   slideDataArr = slideData;
 

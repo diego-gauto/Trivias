@@ -40,6 +40,7 @@ const formSchema = yup.object().shape({
     .required("Campo requerido"),
   courseDuration: yup
     .number()
+    .default(0)
     .required("Campo requerido"),
   courseSubtittle: yup
     .string()
@@ -52,6 +53,7 @@ const formSchema = yup.object().shape({
     .required("Campo requerido"),
   coursePrice: yup
     .number()
+    .default(0)
     .required("Campo requerido"),
 });
 
@@ -115,15 +117,20 @@ const CourseForm_Create = () => {
       type = value3;
     }
 
+    if (type == "Gratis") {
+      formData.courseDuration = 0;
+      formData.coursePrice = 0;
+    }
+
     let signUpData: any = {
       data: {
         courseTittle: formData.courseTittle,
-        courseDuration: formData.courseDuration * free,
+        courseDuration: formData.courseDuration,
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
         coursePublishYear: formData.coursePublishYear,
-        coursePrice: formData.coursePrice * free,
+        coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
         courseType: type,
@@ -131,11 +138,16 @@ const CourseForm_Create = () => {
       },
     };
 
-    createCourse(signUpData).then(() => {
-      alert("Curso creado correctamente");
+    if (image) {
+      createCourse(signUpData).then(() => {
+        alert("Curso creado correctamente");
+        setCreatingNewCourse(false);
+        window.location.href = "/admin/Courses";
+      });
+    } else {
+      alert("Por favor agregue una imagen");
       setCreatingNewCourse(false);
-      window.location.href = "/admin/Courses";
-    });
+    }
 
   }
 
@@ -232,7 +244,7 @@ const CourseForm_Create = () => {
 
               <SelectContain key={3}>
                 <Selected onClick={() => { setOpen3(!open3) }}>
-                  {value3}
+                  {value3 == "Mensual" ? "Gonvar +" : value3}
                   <CaretD2 />
                 </Selected>
                 {
@@ -254,7 +266,7 @@ const CourseForm_Create = () => {
                         name="category"
                         value="Temporada 1"
                       />
-                      <Label2 > Mensual</Label2>
+                      <Label2 > "Gonvar +"</Label2>
                     </Option>
                     <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
                       <input
