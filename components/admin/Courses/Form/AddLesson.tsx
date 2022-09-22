@@ -57,8 +57,6 @@ const AddLesson = () => {
       lesson.homeWork == '' ||
       lesson.homeWorkAbout == '') {
       alert("Por favor complete todo los campos!");
-      console.log(lesson);
-
     } else {
       addLesson(lesson, courseID, seasonID).then(() => {
         alert(
