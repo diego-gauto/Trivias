@@ -61,7 +61,7 @@ const Lesson = () => {
           if (res.courseType == 'Gratis') {
             setCourse(res);
           }
-          if (res.courseType == 'Producto' || res.courseType == 'Mensuak') {
+          if (res.courseType == 'Producto' || res.courseType == 'Mensual') {
             router.push(LOGIN_PATH)
           }
         })
