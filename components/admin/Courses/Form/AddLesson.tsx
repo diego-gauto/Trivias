@@ -49,15 +49,25 @@ const AddLesson = () => {
     homeWorkAbout: '',
   })
   const newLesson = () => {
-    addLesson(lesson, courseID, seasonID).then(() => {
-      alert(
-        "Lección Creada"
-      )
-      router.push({
-        pathname: `/admin/Edit`,
-        query: { documentID: courseID }
-      });
-    })
+    if (lesson.title == '' ||
+      lesson.number == '' ||
+      lesson.link == '' ||
+      lesson.image == '' ||
+      lesson.about == '' ||
+      lesson.homeWork == '' ||
+      lesson.homeWorkAbout == '') {
+      alert("Por favor complete todo los campos!");
+    } else {
+      addLesson(lesson, courseID, seasonID).then(() => {
+        alert(
+          "Lección Creada"
+        )
+        router.push({
+          pathname: `/admin/Edit`,
+          query: { documentID: courseID }
+        });
+      })
+    }
   }
   const getDocuments = (file: any) => {
     let tempExtra: any = [];
@@ -156,6 +166,7 @@ const AddLesson = () => {
             <Input
               type="number"
               placeholder="200"
+              defaultValue={0}
               onChange={(e) => {
                 setLesson({
                   ...lesson, points: parseInt(e.target.value)
