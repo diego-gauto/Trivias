@@ -31,16 +31,16 @@ const Module2 = ({ user, allCourses }: any) => {
           if (allCourses.some((x: any) => x.id == element.documentID)) {
             tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
             element.coursePath = tempCourse[0].coursePath
-            element.progress = 0;
-            let viewed = 0;
-            element.seasons.forEach((season: any) => {
-              season.lessons.forEach((lesson: any) => {
-                if (lesson.users.includes(user.id)) {
-                  viewed++;
-                }
-              });
-            });
-            element.progress = viewed * 100 / element.totalLessons;
+            // element.progress = 0;
+            // let viewed = 0;
+            // element.seasons.forEach((season: any) => {
+            //   season.lessons.forEach((lesson: any) => {
+            //     if (lesson.users.includes(user.id)) {
+            //       viewed++;
+            //     }
+            //   });
+            // });
+            // element.progress = viewed * 100 / element.totalLessons;
             tempCourses.push(element)
           }
         });

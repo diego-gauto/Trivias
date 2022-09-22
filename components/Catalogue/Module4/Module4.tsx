@@ -137,7 +137,7 @@ const Module4 = ({ user, allCourses }: any) => {
                       e.stopPropagation();
                       goTo(course);
                     }}>
-                      Comprar Gonvar Plus
+                      Comprar Gonvar+
                     </Viewpay>}
                     {(course.courseType == 'Gratis' || (user && course.courseType == 'Mensual' && user.membership.finalDate > today)) && <Viewpay onClick={(e) => {
                       e.stopPropagation();
