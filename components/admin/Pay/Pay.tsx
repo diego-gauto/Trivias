@@ -1,3 +1,4 @@
+import { DocumentData } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
@@ -28,11 +29,11 @@ const Pay = () => {
   const getAllInvoice = () => {
     let tempInvoice: any = [];
     getInvoice().then((res) => {
-      res.forEach((element: any) => {
+      res.forEach((element: DocumentData) => {
         let tempDate: any = new Date(element.paidAt.seconds * 1000);
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth()
-        let tempYear = tempDate.getFullYear()
+        let tempDay = tempDate.getDate();
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear();
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         element.amount = element.amount / 100;
         tempInvoice.push(element);

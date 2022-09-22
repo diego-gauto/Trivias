@@ -266,7 +266,7 @@ const CourseForm_Create = () => {
                         name="category"
                         value="Temporada 1"
                       />
-                      <Label2 > "Gonvar +"</Label2>
+                      <Label2 > Gonvar +</Label2>
                     </Option>
                     <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
                       <input
