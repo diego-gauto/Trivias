@@ -82,7 +82,7 @@ const Module5 = ({ user, course }: any) => {
             Conoce nuestra suscripción
           </Title> :
             <Title>
-              Disfruta de tu suscripción Gonvar Plus
+              Disfruta de tu suscripción Gonvar+
             </Title>}
           <TextContent>
             {/* <LimitTime>
@@ -91,7 +91,7 @@ const Module5 = ({ user, course }: any) => {
             {(!user || (user && user.membership.finalDate < today)) && <SuscribeText>
               Suscríbete a
               <SpanText>
-                Gonvar Plus
+                Gonvar+
               </SpanText>
             </SuscribeText>}
           </TextContent>
@@ -132,7 +132,7 @@ const Module5 = ({ user, course }: any) => {
                         Ver curso
                       </Viewpay>}
                       {(!user || user.membership.finalDate < today) && <Viewpay onClick={() => { goTo(course) }}>
-                        Comprar Gonvar Plus
+                        Comprar Gonvar+
                       </Viewpay>}
                     </VideoInfo>
                   </Cardcontent2>
@@ -144,12 +144,12 @@ const Module5 = ({ user, course }: any) => {
         {<ButtonContain>
           {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
             <PurpleButton>
-              Adquiere Gonvar Plus
+              Adquiere Gonvar+
             </PurpleButton>
           </Link>}
           {!user && <Link href={LOGIN_PATH}>
             <PurpleButton>
-              Adquiere Gonvar Plus
+              Adquiere Gonvar+
             </PurpleButton>
           </Link>}
         </ButtonContain>}
