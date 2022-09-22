@@ -48,6 +48,9 @@ export const ProfileContainer =  styled.div`
   @media (max-width: 1023px) {
     display:none
   }
+  @media (min-width: 1600px) {
+    height: 100vh;
+  }
 `;
 export const ProfilePayment = styled.div`
   display:flex;

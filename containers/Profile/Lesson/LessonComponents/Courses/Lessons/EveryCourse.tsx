@@ -31,7 +31,7 @@ const EveryCourse = ({ id, lessons, season, data, userId }: any) => {
               </ProgressCircle>
             }
             <Details>
-              <CourseTitle>
+              <CourseTitle active={data?.id == less.id}>
                 {index + 1}: {less.title}.
                 <br></br>
                 <br></br>

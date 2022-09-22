@@ -4,5 +4,6 @@ export interface IModule3{
   title: string;
   subtitle: string;
   type: number;
+  price: number;
   faved: boolean;
 }
