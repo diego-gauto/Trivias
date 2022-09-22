@@ -12,6 +12,7 @@ export const CourseContainer = styled.div`
   padding: 15px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  cursor: pointer;
 `;
 export const CourseName = styled.p`
   font-size: 24px;
