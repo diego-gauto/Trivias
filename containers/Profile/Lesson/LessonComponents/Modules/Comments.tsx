@@ -3,6 +3,7 @@ import { DEFAULT_USER_IMG } from '../../../../../constants/paths'
 import { addComment } from '../../../../../store/actions/courseActions'
 import { Button, Comment, CommentContain, CommentInput, CommentText, MainContainer, Pp1, Pp2, Pp3, Profile } from './Comments.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
+import { FaPlus } from 'react-icons/fa';
 const Comments = ({ value, setValue, user, data, comments }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>(comments);
@@ -100,7 +101,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <CommentContain>
           <Pp1 />
           <CommentInput value={comment} placeholder="¿Qué quieres decir?" onChange={(e) => { setComment(e.target.value) }} />
-          <Button onClick={addLessonComment}>Subir</Button>
+          <Button onClick={addLessonComment}><FaPlus></FaPlus></Button>
         </CommentContain>
         {currentComments.map((x: any, index: any) => {
           return (
