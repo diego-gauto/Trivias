@@ -35,13 +35,16 @@ import {
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
+  free: yup.number(),
   courseTittle: yup
     .string()
     .required("Campo requerido"),
   courseDuration: yup
     .number()
-    .default(0)
-    .required("Campo requerido"),
+    .when('free', {
+      is: 1,
+      then: yup.string().required('Must enter email address'),
+    }),
   courseSubtittle: yup
     .string()
     .required("Campo requerido"),
@@ -53,8 +56,10 @@ const formSchema = yup.object().shape({
     .required("Campo requerido"),
   coursePrice: yup
     .number()
-    .default(0)
-    .required("Campo requerido"),
+    .when('free', {
+      is: 1,
+      then: yup.string().required('Must enter email address'),
+    }),
 });
 
 type FormValues = {
@@ -84,7 +89,6 @@ const CourseForm_Create = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema)
   });
-
   const [open, setOpen] = useState(false);
   const [openCourse, setOpenCourse] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -97,12 +101,14 @@ const CourseForm_Create = () => {
   const [value3, setValue3] = useState("Gratis");
   const [image, setImage] = useState<any>("");
   const [price, setPrice] = useState(0);
+  const [missing, setMissing] = useState(false)
   const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
 
 
 
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
+
     setCreatingNewCourse(true)
     var professor = ""
     if (value !== undefined && value !== null) {
@@ -116,21 +122,21 @@ const CourseForm_Create = () => {
     if (value3 !== undefined && value3 !== null) {
       type = value3;
     }
-
-    if (type == "Gratis") {
+    if (formData.courseDuration === undefined) {
       formData.courseDuration = 0;
+    }
+    if (formData.coursePrice === undefined) {
       formData.coursePrice = 0;
     }
-
     let signUpData: any = {
       data: {
         courseTittle: formData.courseTittle,
-        courseDuration: formData.courseDuration,
+        courseDuration: formData.courseDuration * free + 0,
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
         coursePublishYear: formData.coursePublishYear,
-        coursePrice: formData.coursePrice,
+        coursePrice: formData.coursePrice * free + 0,
         courseProfessor: professor,
         courseCategory: category,
         courseType: type,
@@ -150,7 +156,6 @@ const CourseForm_Create = () => {
     }
 
   }
-
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -164,9 +169,13 @@ const CourseForm_Create = () => {
       setUserData(res);
     })
   }
-
+  if (Object.keys(errors).length > 0 && missing == true) {
+    alert(`Falta lo siguiente: \n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio" : ""}`);
+    setMissing(false)
+  }
   useEffect(() => {
     getProffessors();
+
   }, [])
 
   return (
@@ -254,7 +263,6 @@ const CourseForm_Create = () => {
                       <input
                         type="radio"
                         id="Temporada1"
-                        name="category"
                         value="Temporada 1"
                       />
                       <Label2 > Gratis</Label2>
@@ -263,7 +271,6 @@ const CourseForm_Create = () => {
                       <input
                         type="radio"
                         id="Temporada1"
-                        name="category"
                         value="Temporada 1"
                       />
                       <Label2 > "Gonvar +"</Label2>
@@ -271,8 +278,7 @@ const CourseForm_Create = () => {
                     <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
                       <input
                         type="radio"
-                        id="Temporada2"
-                        name="category"
+                        id="Temporada1"
                         value="Temporada 1"
                       />
                       <Label2> Producto</Label2>
@@ -451,7 +457,7 @@ const CourseForm_Create = () => {
             }
             <ButtonContain >
               {!creatingNewCourse ?
-                <Button type='submit' onClick={(e) => { e.stopPropagation() }}>Crear Curso</Button>
+                <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
                 :
                 <LoaderContain />
               }
