@@ -73,6 +73,7 @@ import {
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { FaCheck } from 'react-icons/fa';
 
 const Purchase = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -551,8 +552,11 @@ const Purchase = () => {
                       </>
                     }
                     <ButtonContain >
-                      {type == 'course' && <TransparentButton onClick={handleShow}>
+                      {(type == 'course' && !coupon) && <TransparentButton onClick={handleShow}>
                         Agregar Cupón
+                      </TransparentButton>}
+                      {coupon && <TransparentButton style={{ cursor: "auto" }}>
+                        Cupón agregado <FaCheck></FaCheck>
                       </TransparentButton>}
                       {!loader && <PurpleButton onClick={handleConfirm}>
                         Continuar
