@@ -7,6 +7,7 @@ import { addUserToLesson, updateLessonProgress } from '../../../../../store/acti
 const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
+  const [viewed, setViewed] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
   const finishedLesson = () => {
     let temp: any = data;
@@ -35,10 +36,31 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   }
   const handleProgress = (seconds: number) => {
     let progress = (seconds * 100) / duration;
-    if (!("progress" in course.seasons[season].lessons[lesson])) {
-      course.seasons[season].lessons[lesson].progress = 0;
+    if (user) {
+      if (!("progress" in course.seasons[season].lessons[lesson])) {
+        course.seasons[season].lessons[lesson].progress = [];
+      }
+      if (!course.seasons[season].lessons[lesson].progress.some((e: any) => e.id == user.id)) {
+        course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds })
+      } else {
+        let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
+        course.seasons[season].lessons[lesson].progress[index] = { id: user.id, time: progress, seconds: seconds }
+      }
+      updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
     }
-    updateLessonProgress(progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+  }
+
+  const handleViewed = () => {
+    if (("progress" in course.seasons[season].lessons[lesson])) {
+      let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
+      if (index == -1) {
+        return 0
+      } else {
+        return course.seasons[season].lessons[lesson].progress[index].seconds
+      }
+    } else {
+      return 0
+    }
   }
 
   return (
@@ -52,6 +74,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
         </TitleContain>
         <ReactPlayer
           className='absolute'
+          ref={p => p?.seekTo(handleViewed())}
           url={data.link}
           playing={false}
           muted={false}
