@@ -1,3 +1,4 @@
+import { DocumentData } from 'firebase/firestore';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getHomeworks } from '../../../store/actions/UserActions'
@@ -7,7 +8,8 @@ import ModalHW from './HomeWorkModal/ModalHW';
 const HomeWork = ({ userId, user }: any) => {
   const [show, setShow] = useState(false);
   const [homeWorks, setHomeWorks] = useState<any>([]);
-  const [data, setData] = useState<any>([])
+  const [data, setData] = useState<any>([]);
+  const [id, setId] = useState("");
 
   const getAllHomeworks = () => {
     getHomeworks(userId, user.role).then((res) => {
@@ -20,6 +22,13 @@ const HomeWork = ({ userId, user }: any) => {
       });
       setHomeWorks(res);
     })
+  }
+
+  const handleClick = (value: any) => {
+    let index;
+    index = homeWorks.findIndex((x: any) => x.id == id);
+    homeWorks[index].status = true;
+    setHomeWorks([...homeWorks])
   }
 
   useEffect(() => {
@@ -73,7 +82,7 @@ const HomeWork = ({ userId, user }: any) => {
                     </Link>
                   </td>
                   <td style={{ padding: "0" }}
-                    onClick={() => { setShow(true); setData(task) }}
+                    onClick={() => { setShow(true); setData(task); setId(task.id) }}
                   >{
                       task.status == false
                         ? <Button status={task.status}>No revisada</Button>
@@ -81,13 +90,11 @@ const HomeWork = ({ userId, user }: any) => {
                     }</td>
                 </tr>
               )
-
             })
           }
-
         </tbody>
       </Table>
-      <ModalHW setShow={setShow} show={show} data={data} user={user} />
+      <ModalHW setShow={setShow} show={show} data={data} user={user} handleClick={handleClick} />
     </HWContainer>
   )
 }

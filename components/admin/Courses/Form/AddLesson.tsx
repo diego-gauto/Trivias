@@ -31,7 +31,14 @@ import {
   TitleSlide,
   TransparentButton,
 } from "./Edit.styled";
-
+import {
+  CaretD2,
+  Label2,
+  Option,
+  OptionContain,
+  Selected,
+  SelectContain,
+} from "./Select/SelectStyles.styled";
 const AddLesson = () => {
   const router = useRouter();
   const routerState = useRouter().query
@@ -47,26 +54,48 @@ const AddLesson = () => {
     about: '',
     homeWork: '',
     homeWorkAbout: '',
-  })
+  });
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(false);
   const newLesson = () => {
-    if (lesson.title == '' ||
-      lesson.number == '' ||
-      lesson.link == '' ||
-      lesson.image == '' ||
-      lesson.about == '' ||
-      lesson.homeWork == '' ||
-      lesson.homeWorkAbout == '') {
-      alert("Por favor complete todo los campos!");
+    if (!value) {
+      if (lesson.title == '' ||
+        lesson.number == '' ||
+        lesson.link == '' ||
+        lesson.image == '' ||
+        lesson.about == '') {
+        alert("Por favor complete todo los campos!");
+      } else {
+        lesson.homeworkAvailable = false;
+        addLesson(lesson, courseID, seasonID).then(() => {
+          alert(
+            "Lección Creada"
+          )
+          router.push({
+            pathname: `/admin/Edit`,
+            query: { documentID: courseID }
+          });
+        })
+      }
     } else {
-      addLesson(lesson, courseID, seasonID).then(() => {
-        alert(
-          "Lección Creada"
-        )
-        router.push({
-          pathname: `/admin/Edit`,
-          query: { documentID: courseID }
-        });
-      })
+      if (lesson.title == '' ||
+        lesson.number == '' ||
+        lesson.link == '' ||
+        lesson.image == '' ||
+        lesson.about == '' || lesson.homeWork == '' || lesson.homeWorkAbout == '') {
+        alert("Por favor complete todo los campos!");
+      } else {
+        lesson.homeworkAvailable = true;
+        addLesson(lesson, courseID, seasonID).then(() => {
+          alert(
+            "Lección Creada"
+          )
+          router.push({
+            pathname: `/admin/Edit`,
+            query: { documentID: courseID }
+          });
+        })
+      }
     }
   }
   const getDocuments = (file: any) => {
@@ -196,24 +225,55 @@ const AddLesson = () => {
         </Contain2>
         <Contain3>
           <HwTitle>Tareas</HwTitle>
-          <SlideContain>
-            <TitleSlide>Tarea</TitleSlide>
-          </SlideContain>
-          <InputContain>
-            <Label>Título de la Tarea</Label>
-            <Input
-              placeholder="Tarea 23: Intro a uñas francesas"
-              onChange={(e) => {
-                setLesson({
-                  ...lesson, homeWork: e.target.value
-                })
-              }}
-            />
-          </InputContain>
-          <InputContain>
-            <Label>Descripción de la Tarea</Label>
-            <InputBig
-              placeholder="Lorem ipsum dolor sit amet, consectetur 
+          <Label>Agregar Tarea</Label>
+          <SelectContain key={3}>
+            <Selected onClick={() => { setOpen(!open) }}>
+              {!value ? 'No' : 'Si'}
+              <CaretD2 />
+            </Selected>
+            {
+              open == true &&
+              <OptionContain>
+                <Option onClick={() => { setValue(true); setOpen(false); }}>
+                  <input
+                    type="radio"
+                    id="Temporada1"
+                    name="category"
+                    value="Temporada 1"
+                  />
+                  <Label2 > Si</Label2>
+                </Option>
+                <Option onClick={() => { setValue(false); setOpen(false); }}>
+                  <input
+                    type="radio"
+                    id="Temporada1"
+                    name="category"
+                    value="Temporada 1"
+                  />
+                  <Label2 > No</Label2>
+                </Option>
+              </OptionContain>
+            }
+          </SelectContain>
+          {value && <>
+            <SlideContain>
+              <TitleSlide>Tarea</TitleSlide>
+            </SlideContain>
+            <InputContain>
+              <Label>Título de la Tarea</Label>
+              <Input
+                placeholder="Tarea 23: Intro a uñas francesas"
+                onChange={(e) => {
+                  setLesson({
+                    ...lesson, homeWork: e.target.value
+                  })
+                }}
+              />
+            </InputContain>
+            <InputContain>
+              <Label>Descripción de la Tarea</Label>
+              <InputBig
+                placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
             malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
@@ -222,13 +282,14 @@ const AddLesson = () => {
             feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
             enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
             quisque."
-              onChange={(e) => {
-                setLesson({
-                  ...lesson, homeWorkAbout: e.target.value
-                })
-              }}
-            />
-          </InputContain>
+                onChange={(e) => {
+                  setLesson({
+                    ...lesson, homeWorkAbout: e.target.value
+                  })
+                }}
+              />
+            </InputContain>
+          </>}
         </Contain3>
       </EditContain>
       <ButtonContain>

@@ -198,10 +198,16 @@ const uploadImageHwk = (image: any, name: any) => {
   });
 }
 
-export const addHomework = async (data: any) => {
+export const getHomework = async (lessonId: string, userId: string) => {
+  const docRef = doc(db, "homeworks", `${lessonId}-${userId}`);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+
+export const addHomework = async (data: any, userId: string) => {
   data.path = await uploadImageHwk(data.path, `${data.title}-${uuidv4()}`);
-  const docRef = await addDoc(
-    collection(db, "homeworks"),
+  const docRef = await setDoc(
+    doc(db, "homeworks", `${data.lessonId}-${userId}`),
     {
       ...data
     }
