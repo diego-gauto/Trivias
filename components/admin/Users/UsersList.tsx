@@ -54,7 +54,7 @@ export interface Users {
 
 const UsersList = () => {
   const usersCollectionRef = query(collection(db, "users"));
-  const [value, setValue] = useState<number>(0)
+  const [filterValue, setFilterValue] = useState<number>(0)
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
@@ -81,12 +81,30 @@ const UsersList = () => {
 
   const filter = (value: number) => {
     let tempUsers = users;
-    if (value == 0) {
-
-    }
+    if (value == 0) { };
     if (value == 1) {
       [...tempUsers] = users.sort((a: any, b: any) => {
         return b.score - a.score;
+      })
+    }
+    if (value == 2) {
+      [...tempUsers] = users.sort((a: any, b: any) => {
+        return b.membership - a.membership;
+      })
+    }
+    if (value == 3) {
+      [...tempUsers] = users.sort((a: any, b: any) => {
+        return a.name > b.name ? 1 : -1;
+      })
+    }
+    if (value == 4) {
+      [...tempUsers] = users.sort((a: any, b: any) => {
+        return b.courses - a.courses;
+      })
+    }
+    if (value == 5) {
+      [...tempUsers] = users.sort((a: any, b: any) => {
+        return b.created_at - a.courses;
       })
     }
     setUsers(tempUsers);
@@ -161,10 +179,12 @@ const UsersList = () => {
             </CsvDownloader>
             <FilterContain>
               <Select>
-                <select defaultValue={value} onChange={(e: any) => { filter(e.target.value); }}>
+                <select defaultValue={filterValue} onChange={(e: any) => { filter(e.target.value); }}>
                   <option value={0}>Todos</option>
                   <option value={1}>Puntos</option>
                   <option value={2}>Suscripción</option>
+                  <option value={3}>Nombre</option>
+                  <option value={4}>Cursos</option>
                 </select>
               </Select>
               <SearchContain>
