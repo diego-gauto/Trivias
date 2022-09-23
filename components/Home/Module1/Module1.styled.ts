@@ -37,19 +37,22 @@ grid-template-areas:
 "left right";
 grid-template-columns: 4fr 5fr;
 height: 82.5vh;
-align-items: center;
 @media only screen and (max-width: 1024px) {
   height: 100vh;
   grid-template-areas:
   "right"
   "left";
   grid-template-columns: 1fr;
-  grid-template-rows: 22.5% 77.5%;
+  grid-template-rows: 35% 65%;
 }
-`
+`;
 export const SectionB = styled(Row)  ` 
 margin-top: 35px;
 @media only screen and (max-width: 1024px) {
+  flex-direction: row;
+  margin-top: 0;
+}
+@media only screen and (max-width: 650px) {
   margin-top: 0;
   display: flex;
   flex-direction: column;
@@ -58,29 +61,48 @@ margin-top: 35px;
 export const SectionC = styled(Row)  ` 
 margin-top: 30px;
 display: flex;
-justify-content: space-between;
-flex-wrap: wrap;
 justify-content: space-around;
+flex-wrap: wrap;
 row-gap: 2.5%;
+@media only screen and (max-width: 1024px) {
+  margin-top: 15px;
+}
 `;
 export const LeftWrapper = styled(Col)  `
 grid-area: left;
 display: flex;
-align-items: flex-end;
+align-items: center;
+@media only screen and (max-width: 1024px) {
+ align-items: flex-start;
+ margin-top: 15px;
+}
+@media only screen and (max-width: 650px) {
+  align-items: center;
+  margin-top: -40px;
+ }
+@media only screen and (max-width: 375px) {
+  align-items: flex-start;
+  margin-top: 35px;
+ }
 `;
 export const RightWrapper = styled(Col) `
 grid-area: right;
 display: flex;
-flex-direction: column;
+align-items: center;
 `;
 export const Left = styled.div  `
 margin: 0 5%;
 @media only screen and (max-width: 1024px) {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
+}
+@media only screen and (max-width: 650px) {
+  gap: 20px;
+}
+@media only screen and (max-width: 375px) {
+  gap: 5px;
 }
 `; 
 export const BlurWindow = styled.div  `
@@ -98,17 +120,14 @@ border: 2px solid #ffffff;
 box-sizing: border-box;    
 box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
 @media only screen and (max-width: 1024px) {
-  height: 100%;
   width: 94%;
   margin: 0 auto;
   top: auto;
   bottom: 1.5%;
   left: 3%;
-  height: 50%;
+  height: 50vh;
 }
 `; 
-export const Right = styled.div  ` 
-`;
 export const Button01 = styled.div  ` 
 background: #6717CD;
 border-radius: 100px;
@@ -133,15 +152,14 @@ export const Button01Content = styled.div  `
 //background: #CEEFDA;
 export const BackgroundWrapper = styled.div  `
 padding-top: 40px;
-`;
-export const SectionA_01 = styled.div  `
 @media only screen and (max-width: 1024px) {
-  margin-top: 50px;
+  padding-top: 64px;
 }
 `;
+export const SectionA_01 = styled.div  `
+`;
 export const SectionA_02 = styled.div  `
-margin-top: 20px;
-width: 90%;  
+width: 90%; 
 `;
 export const SectionA_03 = styled.div  `
 margin-top: 20  px
@@ -152,7 +170,6 @@ text-align: center;
 @media only screen and (max-width: 1024px) {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 30px;
 }
 `;
 export const SectionB_02 = styled.div  `
@@ -165,33 +182,19 @@ text-align: center;
 }
 `;
 export const RightImage = styled.div  `
-height: auto;
-position: relative;
-margin: 0 5%;
+margin: 0 10%;
 display: flex;
-align-items: flex-end;
 justify-content: center;
-@media only screen and (max-width: 1024px) {
-  width: 70%;
-  margin-top: 35%;
-  margin-left: 6%;
-  margin-right: 6%;
-}
-@media only screen and (max-width: 650px) {
-  width: 100%;
-  margin-top: 50%;
-  margin-left: 3%;
-  margin-right: 5%;
-}
 `;
 export const RightImageElement = styled.img  `
 height: auto;
-width: 85%;
+width: 110%;
 @media only screen and (max-width: 1024px) {
-width: 90%;
+  width: 50%;
 }
-`
-export const IconImageWrapper = styled.div  `
+@media only screen and (max-width: 650px) {
+  width: 110%;
+}
 `;
 export const SectionA_01TextWrapper = styled.p  `
 font-style: normal;
