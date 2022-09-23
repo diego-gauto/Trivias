@@ -30,17 +30,10 @@ const Module2 = ({ user, allCourses }: any) => {
           let tempCourse;
           if (allCourses.some((x: any) => x.id == element.documentID)) {
             tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
-            element.coursePath = tempCourse[0].coursePath
-            // element.progress = 0;
-            // let viewed = 0;
-            // element.seasons.forEach((season: any) => {
-            //   season.lessons.forEach((lesson: any) => {
-            //     if (lesson.users.includes(user.id)) {
-            //       viewed++;
-            //     }
-            //   });
-            // });
-            // element.progress = viewed * 100 / element.totalLessons;
+            element.coursePath = tempCourse[0].coursePath;
+            if (("progress" in tempCourse[0].seasons[element.season].lessons[element.lesson])) {
+              element.progress = tempCourse[0].seasons[element.season].lessons[element.lesson].progress
+            }
             tempCourses.push(element)
           }
         });
