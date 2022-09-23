@@ -15,7 +15,7 @@ interface props {
 
 const ModalHW = ({ show, setShow, data, user }: props) => {
   const [userScore, setUserScore] = useState<number>(0)
-  const [review, setReview] = useState<any>({})
+  const [review, setReview] = useState<any>({ score: 0 })
   const handleClose = () => setShow(false);
 
   const createReview = () => {
@@ -39,6 +39,7 @@ const ModalHW = ({ show, setShow, data, user }: props) => {
     await updateDoc(docRef, {
       status: true
     })
+    setShow(false)
   }
   const getUser = () => {
     getUserScore(data.userId).then((res) => {
@@ -54,11 +55,13 @@ const ModalHW = ({ show, setShow, data, user }: props) => {
   useEffect(() => {
     if (data) {
       setReview({
+        score: 0,
         id: data.courseId,
         title: data.title,
         lesson: data.lesson,
         season: data.season,
         userEmail: data.userEmail,
+        aproved: data.aproved
       })
     }
   }, [data])
@@ -110,7 +113,7 @@ const ModalHW = ({ show, setShow, data, user }: props) => {
                   Puntos
                 </label>
                 <input
-                  defaultValue={0}
+                  defaultValue={review.score}
                   placeholder="0"
                   onChange={(e: any) => {
                     setReview({ ...review, score: parseInt(e.target.value) })
