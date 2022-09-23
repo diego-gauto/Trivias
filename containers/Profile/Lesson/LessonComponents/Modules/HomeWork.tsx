@@ -21,7 +21,8 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
         }
       }
     })
-  }, [])
+  }, [data])
+
 
   if (!data.homeworkAvailable) {
     setValue(1)

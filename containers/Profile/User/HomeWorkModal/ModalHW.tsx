@@ -10,22 +10,19 @@ interface props {
   show: boolean,
   setShow: any,
   data: IHomeWorkModal,
-  user: any
+  user: any,
+  handleClick: any
 }
 
-const ModalHW = ({ show, setShow, data, user }: props) => {
+const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
   const [userScore, setUserScore] = useState<number>(0)
+  const [value, setValue] = useState<number>(0)
   const [review, setReview] = useState<any>({ score: 0 })
   const handleClose = () => setShow(false);
 
   const createReview = () => {
-    if (Object.keys(review).some(key => review[key] === '')) {
-      alert("Complete todos los campos")
-    }
-    else {
-      addReview(review).then((res) => {
-      })
-    }
+    addReview(review).then((res) => {
+    })
   }
 
   const updateScore = async () => {
@@ -35,14 +32,20 @@ const ModalHW = ({ show, setShow, data, user }: props) => {
     })
   }
   const updateStatus = async () => {
+    let tempAproved = review.aproved
+    if (value == 1) {
+      tempAproved = true;
+    }
     const docRef = doc(db, 'homeworks', data.id);
     await updateDoc(docRef, {
-      status: true
+      status: true,
+      aproved: tempAproved
     })
-    setShow(false)
+    handleClick();
+    setValue(0);
   }
   const getUser = () => {
-    getUserScore(data.userId).then((res) => {
+    getUserScore(data.userId).then((res: any) => {
       setUserScore(res[0].score)
     })
   }
@@ -120,6 +123,17 @@ const ModalHW = ({ show, setShow, data, user }: props) => {
                   }}
                 />
               </InputContain>
+              {user.role == 'admin' && <InputContain>
+                <label>
+                  Tarea Aprobada
+                </label>
+                <select defaultValue={0} onChange={(e: any) => {
+                  setValue(e.target.value)
+                }}>
+                  <option value={1}>Si</option>
+                  <option value={0}>No</option>
+                </select>
+              </InputContain>}
               <InputContain>
                 <label>
                   Comentario
