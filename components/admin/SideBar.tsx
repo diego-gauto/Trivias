@@ -21,7 +21,7 @@ const SideBar = () => {
     var userDataAuth = useAuth();
     if (!userDataAuth.user) {
       router.push({
-        pathname: '/Preview',
+        pathname: '/',
       });
     }
     useEffect(() => {

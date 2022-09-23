@@ -34,6 +34,22 @@ export const ButtonDiv = styled.div`
   display: flex;
   justify-content: center;
 `;
+export const ReviewButton = styled.button`
+  cursor: auto !important;
+  display: flex;
+  gap: 10px;
+  font-family:'Montserrat',sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background: transparent;
+  color: #6717CD;
+  border: none;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
 export const UploadButton = styled.button`
   display: flex;
   gap: 10px;

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
 import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from './Video.styled';
 import Courses from '../../LessonComponents/Courses/Courses';
-import { addUserToLesson } from '../../../../../store/actions/courseActions';
+import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
 
 const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [current, setCurrent] = useState<any>();
+  const [duration, setDuration] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
   const finishedLesson = () => {
     let temp: any = data;
@@ -29,6 +30,17 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
     setMenu(value);
   }
 
+  const handleDuration = (duration: number) => {
+    setDuration(duration);
+  }
+  const handleProgress = (seconds: number) => {
+    let progress = (seconds * 100) / duration;
+    if (!("progress" in course.seasons[season].lessons[lesson])) {
+      course.seasons[season].lessons[lesson].progress = 0;
+    }
+    updateLessonProgress(progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+  }
+
   return (
     <Segment>
       <VideoContain>
@@ -46,6 +58,12 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
           controls
           width="100%" height="100%"
           onEnded={finishedLesson}
+          onDuration={(duration) =>
+            handleDuration(duration)
+          }
+          onProgress={(state) => {
+            handleProgress(state.playedSeconds)
+          }}
         />
       </VideoContain>
       <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />

@@ -60,7 +60,7 @@ export const addInvoice = async (invoice: any) => {
 
 export const getInvoice = async () => {
   let data: any = []
-  const docRef = query(collection(db, "invoice"), orderBy("paidAt"));
+  const docRef = query(collection(db, "invoice"), orderBy("paidAt", "desc"));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
     data.push(doc.data())

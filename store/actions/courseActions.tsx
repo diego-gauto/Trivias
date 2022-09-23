@@ -104,13 +104,13 @@ export const getWholeCourses = async () => {
     courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0 });
   })
   for (let i = 0; i < courses.length; i++) {
-    const docRefSeasons = collection(db, 'courses', courses[i].id, "seasons");
+    const docRefSeasons = query(collection(db, 'courses', courses[i].id, "seasons"), orderBy('season'));
     const querySnapshotSeasons = await getDocs(docRefSeasons);
     querySnapshotSeasons.forEach((season: any) => {
       courses[i].seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
     });
     for (let c = 0; c < courses[i].seasons.length; c++) {
-      const docRefLesson = collection(db, 'courses', courses[i]?.id, "seasons", courses[i].seasons[c].id, "lessons");
+      const docRefLesson = query(collection(db, 'courses', courses[i]?.id, "seasons", courses[i].seasons[c].id, "lessons"), orderBy('number'));
       const querySnapshotLesson = await getDocs(docRefLesson);
       querySnapshotLesson.forEach((lesson: any) => {
         courses[i].totalLessons++;
@@ -198,10 +198,16 @@ const uploadImageHwk = (image: any, name: any) => {
   });
 }
 
-export const addHomework = async (data: any) => {
+export const getHomework = async (lessonId: string, userId: string) => {
+  const docRef = doc(db, "homeworks", `${lessonId}-${userId}`);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+
+export const addHomework = async (data: any, userId: string) => {
   data.path = await uploadImageHwk(data.path, `${data.title}-${uuidv4()}`);
-  const docRef = await addDoc(
-    collection(db, "homeworks"),
+  const docRef = await setDoc(
+    doc(db, "homeworks", `${data.lessonId}-${userId}`),
     {
       ...data
     }
@@ -258,4 +264,12 @@ export const deleteWholeCourse = async (course: DocumentData) => {
       await deleteDoc(doc(db, "courses", course.id));
     }
   }
+}
+
+export const updateLessonProgress = async (progress: any, courseId: any, seasonId: any, lessonId: any) => {
+  const docRef = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  await updateDoc(docRef, {
+    progress: progress
+  })
+  return 'exito'
 }

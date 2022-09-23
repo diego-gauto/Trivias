@@ -7,14 +7,31 @@ export const UserContain = styled.div`
   height: -webkit-fill-available;
   gap: 20px;
 `;
+export const FilterContain = styled.div`
+  display: flex;
+`;
+
+export const Select = styled.div`
+  display: flex;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  border: 1px solid #6717CD;
+  border-right: none;
+  border-radius: 10px 0px 0px 10px;
+  select{
+    border: none;
+    outline: none;
+    border-radius: 10px 0px 0px 10px;
+  }
+`;
 export const SearchInput = styled.input`
   font-family: 'Montserrat';
   font-size: 14px;
   border: 1px solid #6717CD;
+  border-radius: 0px 10px 10px 0px;
   outline: none;
   padding-block: 10px;
   padding-inline: 50px 30px;
-  border-radius: 30px;
 `;
 export const DownloadUserData = styled.div`
   display: flex;
