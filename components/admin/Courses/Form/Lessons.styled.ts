@@ -19,6 +19,7 @@ export const SeasonContain = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `;
 export const NewSeasonContain = styled.div`
   display: flex;
