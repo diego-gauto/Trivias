@@ -130,12 +130,12 @@ const Modal = ({ show, setShow, course, user }: any) => {
                   {course.courseProfessor?.name}
                 </DataSpan>
               </Data>
-              <Data>
+              {/* <Data>
                 Categorías:
                 <DataSpan>
                   {course.Category}
                 </DataSpan>
-              </Data>
+              </Data> */}
               <Data>
                 Temporadas:
                 {course.seasons?.length == 1 && <DataSpan>
