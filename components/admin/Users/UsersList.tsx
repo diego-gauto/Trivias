@@ -15,9 +15,11 @@ import { TransparentButton2 } from "./UserData/UsersCardData.styled";
 import {
   DownloadUserData,
   EditIcon,
+  FilterContain,
   SearchContain,
   SearchIcon,
   SearchInput,
+  Select,
   UserContain,
   UserShow,
 } from "./UsersList.styled";
@@ -52,10 +54,11 @@ export interface Users {
 
 const UsersList = () => {
   const usersCollectionRef = query(collection(db, "users"));
-
+  const [value, setValue] = useState<number>(0)
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
+  const [usersBackup, setUsersBackup] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
 
@@ -75,6 +78,19 @@ const UsersList = () => {
       item.created_at.includes(query));
     setUsers(filteredUsers);
   };
+
+  const filter = (value: number) => {
+    let tempUsers = users;
+    if (value == 0) {
+
+    }
+    if (value == 1) {
+      [...tempUsers] = users.sort((a: any, b: any) => {
+        return b.score - a.score;
+      })
+    }
+    setUsers(tempUsers);
+  }
 
   const getCoures = () => {
     let tempCourses: Array<any> = [];
@@ -116,8 +132,8 @@ const UsersList = () => {
           });
         })
       })
-
       setUsers(usersData);
+      setUsersBackup(usersData);
       setAllUsers(usersData);
     }
     getUsers();
@@ -143,13 +159,22 @@ const UsersList = () => {
                 <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
               </DownloadUserData>
             </CsvDownloader>
-            <SearchContain>
-              <SearchIcon />
-              <SearchInput
-                placeholder="Buscar un Usuario"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
-              />
-            </SearchContain>
+            <FilterContain>
+              <Select>
+                <select defaultValue={value} onChange={(e: any) => { filter(e.target.value); }}>
+                  <option value={0}>Todos</option>
+                  <option value={1}>Puntos</option>
+                  <option value={2}>Suscripción</option>
+                </select>
+              </Select>
+              <SearchContain>
+                <SearchIcon />
+                <SearchInput
+                  placeholder="Buscar un Usuario"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
+                />
+              </SearchContain>
+            </FilterContain>
           </TitleContain>
           <Table id="Users">
             <tbody>
