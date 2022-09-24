@@ -29,7 +29,7 @@ const Homepage = () => {
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
     setLandingData(landingData);
-    const courseData = await getWholeCourse('JXI9UgR59IV92Zrt1QgI');
+    const courseData = await getWholeCourse('dvns4pbd0ZHjFqR9VMks');
     setCourseData(courseData);
     setLoading(false);
   }
