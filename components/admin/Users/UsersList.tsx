@@ -81,32 +81,32 @@ const UsersList = () => {
 
   const filter = (value: number) => {
     let tempUsers = users;
-    if (value == 0) { };
+    if (value == 0) { filterUsersByValue("") };
     if (value == 1) {
       [...tempUsers] = users.sort((a: any, b: any) => {
         return b.score - a.score;
       })
-    }
+    };
     if (value == 2) {
-      [...tempUsers] = users.sort((a: any, b: any) => {
-        return b.membership - a.membership;
-      })
-    }
+      let today = new Date().getTime() / 1000;
+      [...tempUsers] = users.filter((item) => (
+        item.membership.finalDate > today
+      ))
+    };
     if (value == 3) {
       [...tempUsers] = users.sort((a: any, b: any) => {
         return a.name > b.name ? 1 : -1;
       })
-    }
+    };
     if (value == 4) {
-      [...tempUsers] = users.sort((a: any, b: any) => {
-        return b.courses - a.courses;
-      })
-    }
+      [...tempUsers] = users.filter((item) =>
+        item.courses)
+    };
     if (value == 5) {
       [...tempUsers] = users.sort((a: any, b: any) => {
-        return b.created_at - a.courses;
+        return b.created_at - a.created_at;
       })
-    }
+    };
     setUsers(tempUsers);
   }
 
@@ -170,7 +170,7 @@ const UsersList = () => {
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={users.map(({ id, ...users }) => users)}
+              datas={users.map(({ id, membership, ...users }) => users)}
             >
               <DownloadUserData>
                 <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
