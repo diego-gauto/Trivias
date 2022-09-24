@@ -49,9 +49,9 @@ const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
               <TitleCourse>
                 {data.title}
               </TitleCourse>
-              <Subtitle>
+              {/* <Subtitle>
                 {data.category}
-              </Subtitle>
+              </Subtitle> */}
             </CourseText>
           </Card>
         </CardContain>
