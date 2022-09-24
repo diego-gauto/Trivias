@@ -250,7 +250,7 @@ const CourseForm = (props: ICourseForm_Update) => {
               {...register("courseSubtittle")}
             />
           </InputContain>
-          <InputContain>
+          {/* <InputContain>
             <Label>Categorías</Label>
             <IconContain>
 
@@ -285,7 +285,7 @@ const CourseForm = (props: ICourseForm_Update) => {
               </SelectContain>
             </IconContain>
 
-          </InputContain>
+          </InputContain> */}
           <InputContain>
             <Label>Portada del Curso</Label>
             <IconContain>
