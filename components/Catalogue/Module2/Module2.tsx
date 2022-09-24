@@ -32,7 +32,8 @@ const Module2 = ({ user, allCourses }: any) => {
             tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
             element.coursePath = tempCourse[0].coursePath;
             if (("progress" in tempCourse[0].seasons[element.season].lessons[element.lesson])) {
-              element.progress = tempCourse[0].seasons[element.season].lessons[element.lesson].progress
+              element.progress = tempCourse[0].seasons[element.season].lessons[element.lesson].progress.filter((x: any) => x.id == user.id)
+              element.progress = element.progress[0]?.time
             }
             tempCourses.push(element)
           }
