@@ -71,7 +71,7 @@ export const saveHeroData = async (heroData: HeroData) => {
   try {
     const image = await uploadFile(heroData.heroImage, "landing/HeroImage")
     heroData.heroImage = image.metadata.fullPath
-    console.log(heroData);
+    const { heroImage, ...dataToUpdate } = heroData
     // @ts -expect-error
     await updateDoc(heroSectionRef, dataToUpdate)
   } catch {
