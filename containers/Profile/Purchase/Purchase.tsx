@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { Col, Form } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
@@ -39,7 +40,6 @@ import {
   InfoCard,
   Input,
   InputCard,
-  InputContain,
   InputText,
   LoaderContainSpinner,
   NewMethodBox,
@@ -63,6 +63,7 @@ import {
   PurchaseText,
   PurpleButton,
   PurpleBuyButton,
+  RowCard,
   SubContainer,
   SubContainer2,
   Text,
@@ -519,25 +520,32 @@ const Purchase = () => {
                               setCard((card: any) => ({ ...card, holder: e.target.value }));
                             }} />
                           </InputText>
-                          <InputContain>
-                            <InputText>
-                              Fecha de Expiración
-                              <InputContain>
-                                <Input maxLength={2} placeholder="MM" onChange={(e) => {
+                          <RowCard>
+                            <Col md={4}>
+                              <Form.Group>
+                                <Form.Label font>Fecha de expiración</Form.Label>
+                                <Form.Control type="text" placeholder="MM" maxLength={2} onChange={(e) => {
                                   setCard((card: any) => ({ ...card, exp_month: e.target.value }));
                                 }} />
-                                <Input maxLength={4} placeholder="YYYY" onChange={(e) => {
+                              </Form.Group>
+                            </Col>
+                            <Col md={4}>
+                              <Form.Group>
+                                <Form.Label>&nbsp;</Form.Label>
+                                <Form.Control type="text" placeholder="YYYY" maxLength={4} onChange={(e) => {
                                   setCard((card: any) => ({ ...card, exp_year: e.target.value }));
                                 }} />
-                              </InputContain>
-                            </InputText>
-                            <InputText>
-                              CVV
-                              <Input type="password" maxLength={4} placeholder="XXX" onChange={(e) => {
-                                setCard((card: any) => ({ ...card, cvc: e.target.value }));
-                              }} />
-                            </InputText>
-                          </InputContain>
+                              </Form.Group>
+                            </Col>
+                            <Col md={4}>
+                              <Form.Group>
+                                <Form.Label>CVV</Form.Label>
+                                <Form.Control type="text" placeholder="123" maxLength={3} onChange={(e) => {
+                                  setCard((card: any) => ({ ...card, cvc: e.target.value }));
+                                }} />
+                              </Form.Group>
+                            </Col>
+                          </RowCard>
                           <BotContainer>
                             <Text>
                               <AlertIcon />
