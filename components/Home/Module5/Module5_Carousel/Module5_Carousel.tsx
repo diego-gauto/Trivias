@@ -16,7 +16,7 @@ export const Module5_Carousel = (props: IModule5_Carousel) => {
   const settings = {
     loop: true,
     autoplay: {
-      delay: 0,
+      delay: 2000,
       reverseDirection
     },
     speed: 7000,
