@@ -685,6 +685,7 @@ const Purchase = () => {
                             color: "gold",
                             layout: 'horizontal',
                             shape: 'pill',
+                            height: 50,
                           }}
                           createSubscription={(data, actions) => {
                             return actions.subscription.create({

@@ -144,6 +144,11 @@ export const Cardcontent3 = styled.div`
 `;
 export const RespContain = styled.div`
   overflow: auto;
+  height: 430px;
+  display: flex;
+  @media(max-width: 1023px){
+    height: auto;
+  }
   ::-webkit-scrollbar {
     display: none;
   }

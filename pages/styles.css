@@ -1,3 +1,7 @@
 .swiper-wrapper {
   transition-timing-function: linear;
 }
+.form-control:focus{
+    outline: none !important;
+    border:2px solid #6717CD !important;
+}

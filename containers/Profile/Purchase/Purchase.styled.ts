@@ -141,8 +141,9 @@ export const ContainTitle = styled.h1`
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
   margin:0;
-  @media(max-width: 400px){
+  @media(max-width: 600px){
     font-size: 14px;
+    text-align: center;
   }
 `;
 export const PaymentContain = styled.div<{active:any}>`
@@ -286,9 +287,10 @@ export const NewMethodBox = styled.div<{active:any,plan:any}>`
   &:hover{
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
-  @media(max-width: 500px){
+  @media(max-width: 600px){
     width: 50%;
     padding-block: 18px;
+    justify-content: space-between;
   }
   ${props => (props.active == true && props.plan == 'stripe') && css`
   box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
@@ -310,9 +312,10 @@ export const NewMethodBoxPaypal = styled.div<{plan:any}>`
   &:hover{
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
-  @media(max-width: 500px){
+  @media(max-width: 600px){
     width: 50%;
     padding-block: 18px;
+    justify-content: space-between;
   }
   ${props => (props.plan == 'paypal') && css`
   box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
@@ -338,7 +341,7 @@ export const TransparentButton = styled.button`
   font-family:'Montserrat',sans-serif;
   font-size:16px;
   font-weight: 600;
-  padding-block: 15px;
+  height: 50px;
   padding-inline: 25px;
   background:transparent;
   color: #6717CD;
@@ -363,6 +366,7 @@ export const PurpleButton = styled.button`
   background-color: #6717CD;
   color: #fff;
   border-radius: 30px;
+  margin-left: auto;
   border:none;
   &:hover{
     background-color: #5000b5;
@@ -603,8 +607,9 @@ export const Input = styled.input`
   padding:10px 0 10px 20px;
   border:1px solid #6717CD;
   border-radius:20px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border:2px solid #6717CD;
   }
   @media( max-width: 400px){
     font-size: 12px;
@@ -616,8 +621,9 @@ export const InputCard = styled(InputMask)`
   padding:10px 0 10px 20px;
   border:1px solid #6717CD;
   border-radius:20px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border:2px solid #6717CD;
   }
   @media( max-width: 400px){
     font-size: 12px;
