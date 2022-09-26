@@ -224,41 +224,39 @@ const AddLesson = () => {
           </InputContain>
         </Contain2>
         <Contain3>
-          <HwTitle>Tareas</HwTitle>
-          <Label>Agregar Tarea</Label>
-          <SelectContain key={3}>
-            <Selected onClick={() => { setOpen(!open) }}>
-              {!value ? 'No' : 'Si'}
-              <CaretD2 />
-            </Selected>
-            {
-              open == true &&
-              <OptionContain>
-                <Option onClick={() => { setValue(true); setOpen(false); }}>
-                  <input
-                    type="radio"
-                    id="Temporada1"
-                    name="category"
-                    value="Temporada 1"
-                  />
-                  <Label2 > Si</Label2>
-                </Option>
-                <Option onClick={() => { setValue(false); setOpen(false); }}>
-                  <input
-                    type="radio"
-                    id="Temporada1"
-                    name="category"
-                    value="Temporada 1"
-                  />
-                  <Label2 > No</Label2>
-                </Option>
-              </OptionContain>
-            }
-          </SelectContain>
+          <InputContain>
+            <Label>Agregar Tarea</Label>
+            <SelectContain key={3}>
+              <Selected onClick={() => { setOpen(!open) }}>
+                {!value ? 'No' : 'Si'}
+                <CaretD2 />
+              </Selected>
+              {
+                open == true &&
+                <OptionContain>
+                  <Option onClick={() => { setValue(true); setOpen(false); }}>
+                    <input
+                      type="radio"
+                      id="Temporada1"
+                      name="category"
+                      value="Temporada 1"
+                    />
+                    <Label2 > Si</Label2>
+                  </Option>
+                  <Option onClick={() => { setValue(false); setOpen(false); }}>
+                    <input
+                      type="radio"
+                      id="Temporada1"
+                      name="category"
+                      value="Temporada 1"
+                    />
+                    <Label2 > No</Label2>
+                  </Option>
+                </OptionContain>
+              }
+            </SelectContain>
+          </InputContain>
           {value && <>
-            <SlideContain>
-              <TitleSlide>Tarea</TitleSlide>
-            </SlideContain>
             <InputContain>
               <Label>Título de la Tarea</Label>
               <Input

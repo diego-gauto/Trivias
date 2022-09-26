@@ -68,14 +68,12 @@ img{
 export const Contain2 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 85px;
   gap: 20px;
   width: 33.33%;
 `;
 export const Contain3 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 45px;
   gap: 20px;
   width: 33.33%;
 `;

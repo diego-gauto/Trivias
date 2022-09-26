@@ -48,9 +48,6 @@ const formSchema = yup.object().shape({
   courseAbout: yup
     .string()
     .required("Campo requerido"),
-  coursePublishYear: yup
-    .number()
-    .required("Campo requerido"),
   coursePrice: yup
     .number()
     .default(0)
@@ -129,7 +126,6 @@ const CourseForm_Create = () => {
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
-        coursePublishYear: formData.coursePublishYear,
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
@@ -366,7 +362,7 @@ const CourseForm_Create = () => {
           </InputContain>
           <InputContain2 onClick={(e) => { e.stopPropagation(); }}>
             {
-              value3 != "Gratis" &&
+              (value3 == "Producto") &&
               <InputContain>
                 <Label>Precio (MXN)</Label>
                 <Input
@@ -428,7 +424,7 @@ const CourseForm_Create = () => {
         </TagContain> */}
           <InputContain2>
             {
-              value3 != "Gratis" &&
+              value3 == "Producto" &&
               <InputContain onClick={(e) => { e.stopPropagation(); }}>
                 <Label>Duración de Suscripción (Días)</Label>
                 <Input
