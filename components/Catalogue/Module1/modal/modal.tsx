@@ -55,7 +55,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
           query: { id: course.documentID, season: 0, lesson: 0 },
         });
       }
-      if (course.courseType == 'Mensual' && user.membership.level == 0) {
+      if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
         router.push(
           { pathname: 'Purchase', query: { type: 'subscription' } }
         )

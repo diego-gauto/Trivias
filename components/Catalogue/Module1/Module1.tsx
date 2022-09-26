@@ -37,7 +37,7 @@ const Module1 = ({ user, allCourses }: any) => {
           query: { id: historyCourse.documentID, season: 0, lesson: 0 },
         });
       }
-      if (historyCourse.courseType == 'Mensual' && user.membership.level == 0) {
+      if (historyCourse.courseType == 'Mensual' && user.membership.finalDate < today) {
         router.push(
           { pathname: 'Purchase', query: { type: 'subscription' } }
         )
