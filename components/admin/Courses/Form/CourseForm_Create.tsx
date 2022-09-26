@@ -362,7 +362,7 @@ const CourseForm_Create = () => {
           </InputContain>
           <InputContain2 onClick={(e) => { e.stopPropagation(); }}>
             {
-              value3 != "Gratis" &&
+              (value3 == "Producto") &&
               <InputContain>
                 <Label>Precio (MXN)</Label>
                 <Input
@@ -424,7 +424,7 @@ const CourseForm_Create = () => {
         </TagContain> */}
           <InputContain2>
             {
-              value3 != "Gratis" &&
+              value3 == "Producto" &&
               <InputContain onClick={(e) => { e.stopPropagation(); }}>
                 <Label>Duración de Suscripción (Días)</Label>
                 <Input
