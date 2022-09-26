@@ -17,6 +17,10 @@ export const ModalMod = styled(Modal)`
   .modal-content {
     border-radius: 12px !important;
   }
+  @media (min-width: 992px){
+    .modal-lg, .modal-xl {
+        --bs-modal-width: 66%;
+    }}
   `;
 export const ModalCont = styled.div`
   display: flex;
@@ -37,24 +41,6 @@ export const BackgroundOverlay = styled.div`
   left: 0;
   background: linear-gradient(360deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 39.51%);
   position: absolute;
-  @media(max-width:  1023px){
-    height: 55%;
-  }
-  @media(max-width:  850px){
-    height: 75%;
-  }
-  @media(max-width:  670px){
-    height: 90%;
-  }
-  @media(max-width: 580px){
-    height: 101%;
-  }
-  @media(max-width: 400px){
-    height: 98%;
-  }
-  @media(max-width: 375px){
-    height: 90%;
-  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -128,6 +114,9 @@ export const SubTitle = styled.p`
 export const ImageBack = styled.img`
   width:100%;
   border-radius: 10px 10px 0 0;
+  @media(max-width: 1023px){
+    height: auto;
+  }
 `;
 export const ImageDiv = styled.div`
   position: absolute;
@@ -190,9 +179,6 @@ export const CourseContain = styled.div`
   }
   @media(max-width: 520px){
     margin-top: -5px;
-  }
-  @media(max-width: 390px){
-    margin-top: -27px;
   }
 `;
 export const AboutContain = styled.div`
@@ -349,6 +335,9 @@ export const Description = styled.p`
 export const CardImage = styled.img`
 filter: brightness(40%);
 border-radius:10px;
+@media(max-width: 400px){
+  width: 100%;
+}
 `;
 export const CardImageUnlock = styled.img`
   border-radius:10px;

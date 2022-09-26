@@ -31,6 +31,7 @@ export const Video = styled.div`
   flex-direction: column;
   max-width: 420px;
   cursor: pointer;
+  transition: all .2s ease-in-out;
   @media( max-width: 700px){
   width: 180px;
   height: 120px;
