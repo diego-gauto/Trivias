@@ -23,8 +23,6 @@ import {
   EpisodeInfo,
   EpisodeTime,
   EpisodeTitle,
-  InsideContent,
-  InsideText,
   LessonContain,
   LessonTitle,
   ModalBackground,
@@ -124,12 +122,6 @@ const Modal1 = ({ show, setShow }: any) => {
                 Temporadas:
                 <DataSpan>
                   3 temporadas
-                </DataSpan>
-              </Data>
-              <Data>
-                Año de publicación:
-                <DataSpan>
-                  2022
                 </DataSpan>
               </Data>
               <Data>

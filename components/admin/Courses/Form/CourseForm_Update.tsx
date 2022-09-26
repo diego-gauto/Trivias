@@ -318,16 +318,6 @@ const CourseForm = (props: ICourseForm_Update) => {
             />
           </InputContain>
           <InputContain2>
-            <InputContain>
-              <Label>Año de Publicación</Label>
-              <Input
-                placeholder="2022"
-                type="number"
-                defaultValue={coursePublishYear}
-                className={`form-control ${errors.coursePublishYear ? 'is-invalid' : ''}`}
-                {...register("coursePublishYear")}
-              />
-            </InputContain>
             {
               free != 0 &&
               <InputContain>

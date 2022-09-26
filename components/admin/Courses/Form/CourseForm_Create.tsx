@@ -365,15 +365,6 @@ const CourseForm_Create = () => {
             />
           </InputContain>
           <InputContain2 onClick={(e) => { e.stopPropagation(); }}>
-            <InputContain>
-              <Label>Año de Publicación</Label>
-              <Input
-                placeholder="2022"
-                type="number"
-                className={`form-control ${errors.coursePublishYear ? 'is-invalid' : ''}`}
-                {...register("coursePublishYear")}
-              />
-            </InputContain>
             {
               value3 != "Gratis" &&
               <InputContain>
