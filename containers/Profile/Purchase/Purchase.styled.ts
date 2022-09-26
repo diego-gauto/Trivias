@@ -603,8 +603,9 @@ export const Input = styled.input`
   padding:10px 0 10px 20px;
   border:1px solid #6717CD;
   border-radius:20px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border:2px solid #6717CD;
   }
   @media( max-width: 400px){
     font-size: 12px;
@@ -616,8 +617,9 @@ export const InputCard = styled(InputMask)`
   padding:10px 0 10px 20px;
   border:1px solid #6717CD;
   border-radius:20px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border:2px solid #6717CD;
   }
   @media( max-width: 400px){
     font-size: 12px;
