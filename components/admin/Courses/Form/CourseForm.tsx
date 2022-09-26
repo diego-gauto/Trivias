@@ -257,15 +257,6 @@ const CourseForm = () => {
           </InputContain>
           <InputContain2>
             <InputContain>
-              <Label>Año de Publicación</Label>
-              <Input
-                placeholder="2022"
-                type="number"
-                className={`form-control ${errors.coursePublishYear ? 'is-invalid' : ''}`}
-                {...register("coursePublishYear")}
-              />
-            </InputContain>
-            <InputContain>
               <Label>Precio (MXN)</Label>
               <Input
                 placeholder="998"

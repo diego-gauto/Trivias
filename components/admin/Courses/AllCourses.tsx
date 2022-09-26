@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
 
+import { deleteWholeCourse } from "../../../store/actions/courseActions";
 import {
   ButtonContain,
   ChevD,
@@ -19,9 +21,6 @@ import {
   TitleContain,
   TransparentButton,
 } from "./AllCourses.styled";
-import { IAllCourses } from "./IAllCourses";
-import { deleteWholeCourse } from "../../../store/actions/courseActions";
-import { DocumentData } from "firebase/firestore";
 
 export const AllCourses = ({
   course
@@ -81,10 +80,6 @@ export const AllCourses = ({
                 <Info>
                   <Label>Categorías</Label>
                   <Text> {course.courseCategory} </Text>
-                </Info>
-                <Info>
-                  <Label>Año de Publicación</Label>
-                  <Text> {course.coursePublishYear} </Text>
                 </Info>
               </Column>
               <Column>

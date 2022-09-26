@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
-import {
-  InsideContent,
-  InsideText,
-  Text1,
-  Text2,
-  Text3,
-} from "../Module3/Module3.styled";
+import { InsideContent, InsideText, Text1, Text2, Text3 } from "../Module3/Module3.styled";
 import { CardImage, VideoInfo, Viewpay } from "../Module4/Module4.styled";
 import {
   Banner2,
@@ -18,6 +13,7 @@ import {
   CardContain,
   Content,
   ImageContain,
+  ImageContent,
   MainContainer,
   PurpleButton,
   RespContain,
@@ -27,9 +23,7 @@ import {
   TextContainer,
   TextContent,
   Title,
-  ImageContent,
 } from "./Module5.styled";
-import { useRouter } from "next/router";
 
 const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -121,7 +115,7 @@ const Module5 = ({ user, course }: any) => {
                     <VideoInfo>
                       <TextContain>
                         <Text1>
-                          Curso: {course.courseTittle}
+                          {course.courseTittle}
                           <Text2>
                             {course.courseSubtittle}...
                           </Text2>
