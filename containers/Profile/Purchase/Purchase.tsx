@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { FaCheck } from "react-icons/fa";
+
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { useRouter } from "next/router";
@@ -8,6 +10,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { updateCoupon } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
@@ -41,11 +44,13 @@ import {
   LoaderContainSpinner,
   NewMethodBox,
   NewMethodBox2,
+  NewMethodBoxPaypal,
   NewMethodContain,
   PastCircle,
   PastText,
   PaymentsContainer,
   PaymentContain,
+  PaymentDetail,
   PaymentMethod,
   PayBox,
   PayPal,
@@ -67,13 +72,9 @@ import {
   Title,
   TransparentButton,
   VisaPay,
-  PaymentDetail,
-  NewMethodBoxPaypal,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { FaCheck } from 'react-icons/fa';
 
 const Purchase = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -374,7 +375,7 @@ const Purchase = () => {
                     <DataPaymentContain>
                       <ProcessCircle />
                       <ProcessText>
-                        Confirmacion
+                        Confirmación
                       </ProcessText>
                     </DataPaymentContain>
                     <Division />
@@ -397,7 +398,7 @@ const Purchase = () => {
                       <DataPaymentContain>
                         <CirclePosition />
                         <TextPosition>
-                          Confirmacion
+                          Confirmación
                         </TextPosition>
                       </DataPaymentContain>
                       <Division />
@@ -420,7 +421,7 @@ const Purchase = () => {
                         <DataPaymentContain>
                           <PastCircle />
                           <PastText>
-                            Confirmacion
+                            Confirmación
                           </PastText>
                         </DataPaymentContain>
                         <Division2 />
