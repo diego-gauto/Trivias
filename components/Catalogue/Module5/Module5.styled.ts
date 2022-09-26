@@ -116,10 +116,18 @@ export const Cardcontent2 = styled.div`
   flex-direction: column;
   width: 452px;
   height: 402px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  &:hover{
+    transform: scale(1.02);
+  }
   @media(max-width:1023px){
-    min-width: 180px;
     height: auto;
-    width: min-content;  
+    width: 360px;
+  }
+  @media(max-width:600px){
+    min-width: 180px;
+    width: min-content;
   }
 `;
 export const Cardcontent3 = styled.div`
@@ -149,7 +157,6 @@ export const TextContain = styled.div`
   @media(max-width: 600px){
     display: none;
   }
-  height: 120px;
 `;
 export const ButtonContain = styled.div`
   display: flex;

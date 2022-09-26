@@ -22,8 +22,6 @@ import {
   EpisodeTime,
   EpisodeTitle,
   ImageBack,
-  InsideContent,
-  InsideText,
   LessonContain,
   LessonTitle,
   Lock,
