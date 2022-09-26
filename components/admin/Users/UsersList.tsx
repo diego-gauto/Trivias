@@ -41,6 +41,15 @@ export interface UserData {
   created_at: string;
   score: string;
   courses: number;
+  membership: {
+    finalDate: number;
+    level: number;
+    method: string;
+    paymentMethod: string;
+    planId: string;
+    planName: string;
+    startDate: number;
+  };
 };
 export interface Users {
   id: string;
@@ -58,7 +67,7 @@ const UsersList = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
-  const [usersBackup, setUsersBackup] = useState<Array<any>>([]);
+  const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
 
@@ -68,9 +77,9 @@ const UsersList = () => {
   };
 
   const filterUsersByValue = (value: string): void => {
-    if (value === "") return setUsers(allUsers);
+    if (value === "") return setUsers(usersFilter);
     const query = value.toLocaleLowerCase();
-    const filteredUsers = users.filter((item) =>
+    const filteredUsers = usersFilter.filter((item) =>
       item.name.toLowerCase().includes(query) ||
       item.email.includes(query) ||
       item.role.includes(query) ||
@@ -81,33 +90,29 @@ const UsersList = () => {
 
   const filter = (value: number) => {
     let tempUsers = users;
-    if (value == 0) { filterUsersByValue("") };
+    if (value == 0) { setUsersFilter(allUsers); return setUsers(allUsers) };
     if (value == 1) {
-      [...tempUsers] = users.sort((a: any, b: any) => {
+      [...tempUsers] = allUsers.sort((a: any, b: any) => {
         return b.score - a.score;
       })
     };
     if (value == 2) {
       let today = new Date().getTime() / 1000;
-      [...tempUsers] = users.filter((item) => (
+      [...tempUsers] = allUsers.filter((item) => (
         item.membership.finalDate > today
       ))
     };
     if (value == 3) {
-      [...tempUsers] = users.sort((a: any, b: any) => {
-        return a.name > b.name ? 1 : -1;
+      [...tempUsers] = allUsers.sort((a: any, b: any) => {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
       })
     };
     if (value == 4) {
-      [...tempUsers] = users.filter((item) =>
+      [...tempUsers] = allUsers.filter((item) =>
         item.courses)
     };
-    if (value == 5) {
-      [...tempUsers] = users.sort((a: any, b: any) => {
-        return b.created_at - a.created_at;
-      })
-    };
     setUsers(tempUsers);
+    setUsersFilter(tempUsers);
   }
 
   const getCoures = () => {
@@ -151,7 +156,7 @@ const UsersList = () => {
         })
       })
       setUsers(usersData);
-      setUsersBackup(usersData);
+      setUsersFilter(usersData);
       setAllUsers(usersData);
     }
     getUsers();
@@ -179,7 +184,7 @@ const UsersList = () => {
             </CsvDownloader>
             <FilterContain>
               <Select>
-                <select defaultValue={filterValue} onChange={(e: any) => { filter(e.target.value); }}>
+                <select defaultValue={filterValue} onChange={(e: any) => { setUsers(allUsers); filter(e.target.value) }}>
                   <option value={0}>Todos</option>
                   <option value={1}>Puntos</option>
                   <option value={2}>Suscripción</option>
