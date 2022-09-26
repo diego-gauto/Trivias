@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import router, { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
-import { getWholeCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
   ImageContent,
@@ -16,7 +15,15 @@ import {
   TextContain,
 } from "../Module3/Module3.styled";
 import Modal1 from "./Modal/Modal1";
-import { Cardcontent, CardContain, CardImage, Title, VideoInfo, Viewpay, ScrollContainer } from "./Module4.styled";
+import {
+  Cardcontent,
+  CardContain,
+  CardImage,
+  ScrollContainer,
+  Title,
+  VideoInfo,
+  Viewpay,
+} from "./Module4.styled";
 
 const Module4 = ({ user, allCourses }: any) => {
   const [show, setShow] = useState(false);
@@ -120,7 +127,7 @@ const Module4 = ({ user, allCourses }: any) => {
                   <VideoInfo>
                     <TextContain>
                       <Text1>
-                        Curso: {course.courseTittle}...
+                        {course.courseTittle}...
                         <Text2>
                           {course.courseSubtittle}...
                         </Text2>

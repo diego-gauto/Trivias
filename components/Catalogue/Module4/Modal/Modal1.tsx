@@ -22,8 +22,6 @@ import {
   EpisodeTime,
   EpisodeTitle,
   ImageBack,
-  InsideContent,
-  InsideText,
   LessonContain,
   LessonTitle,
   Lock,
@@ -155,12 +153,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 {course.seasons?.length > 1 && <DataSpan>
                   {course.seasons?.length} temporadas
                 </DataSpan>}
-              </Data>
-              <Data>
-                Año de publicación:
-                <DataSpan>
-                  {course.coursePublishYear}
-                </DataSpan>
               </Data>
               <Data>
                 Tiempo estimado:

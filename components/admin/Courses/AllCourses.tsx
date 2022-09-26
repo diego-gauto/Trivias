@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
-
+import { LoaderContain } from "../../../containers/Profile/User/User.styled";
+import { deleteWholeCourse } from "../../../store/actions/courseActions";
 import {
   ButtonContain,
   ChevD,
@@ -19,19 +21,20 @@ import {
   TitleContain,
   TransparentButton,
 } from "./AllCourses.styled";
-import { IAllCourses } from "./IAllCourses";
-import { deleteWholeCourse } from "../../../store/actions/courseActions";
-import { DocumentData } from "firebase/firestore";
 
 export const AllCourses = ({
   course
 }: DocumentData) => {
 
   const [open, setOpen] = useState(false);
+  const [IsDeleting, setIsDeleting] = useState<boolean>(false);
+
   const deleteCourse = (element: any) => {
+    setIsDeleting(true);
     if (window.confirm("Desea borrar este curso?")) {
       deleteWholeCourse(element).then(() => {
         window.location.reload();
+        setIsDeleting(false);
       })
     }
   }
@@ -82,10 +85,6 @@ export const AllCourses = ({
                   <Label>Categorías</Label>
                   <Text> {course.courseCategory} </Text>
                 </Info>
-                <Info>
-                  <Label>Año de Publicación</Label>
-                  <Text> {course.coursePublishYear} </Text>
-                </Info>
               </Column>
               <Column>
                 <Info>
@@ -103,9 +102,11 @@ export const AllCourses = ({
               <Link href={`/admin/Edit?documentID=${course.documentID}`}>
                 <PurpleButton>Editar</PurpleButton>
               </Link>
-              <RedButton onClick={() => {
-                deleteCourse(course)
-              }}>Eliminar</RedButton>
+              {!IsDeleting ? <RedButton onClick={(e) => {
+                deleteCourse(course);
+                e.stopPropagation();
+              }}>Eliminar</RedButton> :
+                <LoaderContain />}
             </ButtonContain>
           </>
         }

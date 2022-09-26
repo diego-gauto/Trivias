@@ -146,12 +146,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
                 </DataSpan>}
               </Data>
               <Data>
-                Año de publicación:
-                <DataSpan>
-                  {course.coursePublishYear}
-                </DataSpan>
-              </Data>
-              <Data>
                 Tiempo estimado:
                 <DataSpan>
                   {course.courseDuration} horas

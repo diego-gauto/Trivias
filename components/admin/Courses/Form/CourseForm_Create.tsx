@@ -51,9 +51,6 @@ const formSchema = yup.object().shape({
   courseAbout: yup
     .string()
     .required("Campo requerido"),
-  coursePublishYear: yup
-    .number()
-    .required("Campo requerido"),
   coursePrice: yup
     .number()
     .when('free', {
@@ -371,17 +368,8 @@ const CourseForm_Create = () => {
             />
           </InputContain>
           <InputContain2 onClick={(e) => { e.stopPropagation(); }}>
-            <InputContain>
-              <Label>Año de Publicación</Label>
-              <Input
-                placeholder="2022"
-                type="number"
-                className={`form-control ${errors.coursePublishYear ? 'is-invalid' : ''}`}
-                {...register("coursePublishYear")}
-              />
-            </InputContain>
             {
-              value3 != "Gratis" &&
+              (value3 == "Producto") &&
               <InputContain>
                 <Label>Precio (MXN)</Label>
                 <Input
@@ -443,7 +431,7 @@ const CourseForm_Create = () => {
         </TagContain> */}
           <InputContain2>
             {
-              value3 != "Gratis" &&
+              value3 == "Producto" &&
               <InputContain onClick={(e) => { e.stopPropagation(); }}>
                 <Label>Duración de Suscripción (Días)</Label>
                 <Input

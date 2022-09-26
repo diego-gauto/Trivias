@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { updateCourse } from "../../../../store/actions/AdminActions";
 import { getUsers } from "../../../../store/actions/courseActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
@@ -45,9 +45,6 @@ const formSchema = yup.object().shape({
   courseAbout: yup
     .string()
     .required("Campo requerido"),
-  coursePublishYear: yup
-    .number()
-    .required("Campo requerido"),
   coursePrice: yup
     .number()
     .required("Campo requerido"),
@@ -78,6 +75,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { coursePath } = props;
   const { reference } = props;
 
+  const [IsUpdating, setIsUpdating] = useState<boolean>(false);
   const [select, setSelect] = useState("");
   const handleSelectChange = (e: any) => {
     const value = e.target.value;
@@ -113,6 +111,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   }, []);
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
+    setIsUpdating(true);
     var professor = ""
     if (value !== undefined && value !== null) {
       professor = value
@@ -134,7 +133,6 @@ const CourseForm = (props: ICourseForm_Update) => {
         courseAbout: formData.courseAbout,
         reference: reference,
         coursePath: image,
-        coursePublishYear: formData.coursePublishYear,
         coursePrice: formData.coursePrice * free,
         courseProfessor: professor,
         courseCategory: category,
@@ -144,8 +142,8 @@ const CourseForm = (props: ICourseForm_Update) => {
     };
 
     updateCourse(signUpData, images).then(() => {
-
       window.location.href = "/admin/Courses";
+      setIsUpdating(false);
     });
 
   }
@@ -318,16 +316,6 @@ const CourseForm = (props: ICourseForm_Update) => {
             />
           </InputContain>
           <InputContain2>
-            <InputContain>
-              <Label>Año de Publicación</Label>
-              <Input
-                placeholder="2022"
-                type="number"
-                defaultValue={coursePublishYear}
-                className={`form-control ${errors.coursePublishYear ? 'is-invalid' : ''}`}
-                {...register("coursePublishYear")}
-              />
-            </InputContain>
             {
               free != 0 &&
               <InputContain>
@@ -435,7 +423,9 @@ const CourseForm = (props: ICourseForm_Update) => {
           </TagLabel>
         </TagContain> */}
             <ButtonContain2>
-              <Button type='submit'>Guardar Cambios</Button>
+              {!IsUpdating ? <Button type='submit'>Guardar Cambios</Button>
+                :
+                <LoaderContain />}
             </ButtonContain2>
           </InputButtonContain>
         </InputForm>

@@ -1,6 +1,8 @@
+import { Row } from "react-bootstrap";
+import InputMask from "react-input-mask";
+
 import Image from "next/image";
 import styled, { css, keyframes } from "styled-components";
-import InputMask from 'react-input-mask';
 
 export const Container = styled.div`
   display:flex;
@@ -565,6 +567,36 @@ export const InputText = styled.label`
     font-size: 12px;
   }
 `;
+
+export const RowCard = styled(Row)`
+  font-size: 14px;
+  color: #6717CD;
+  font-family:'Montserrat',sans-serif;
+  label {
+    margin-bottom: 0;
+  }
+ input.form-control{
+    border: 1px solid #6717CD;
+    border-radius: 20px;
+    padding:10px 0px 10px 20px;
+    font-size: 14px;
+    font-weight: 300;
+    font-family:'Raleway',sans-serif;
+ }
+ input.form-control:focus{
+  outline: 1px solid #8E2DE2;
+ }
+ input.form-control::placeholder{
+  color: #000 !important;
+  opacity: 0;
+ }
+ @media(max-width: 767px){
+   .col-md-4:nth-child(2){
+    margin-top: -14px;
+    }
+  }
+`;
+
 export const Input = styled.input`
   font-size: 14px;
   font-family:'Montserrat',sans-serif;
