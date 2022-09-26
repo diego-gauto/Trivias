@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-import Modal1 from "./Modal/Modal1";
+import { useRouter } from "next/router";
+
+import { getPaidCourses } from "../../../store/actions/UserActions";
+import {
+  Cardcontent,
+  CardContain,
+  CardImage,
+  ScrollContainer,
+  Title,
+  VideoInfo,
+} from "../Module4/Module4.styled";
 import {
   Band,
   DaysLeft,
@@ -14,9 +24,6 @@ import {
   TextContain,
   ViewCourse,
 } from "./Module3.styled";
-import { Title, CardImage, Viewpay, Cardcontent, VideoInfo, CardContain, ScrollContainer } from "../Module4/Module4.styled";
-import { getPaidCourses } from "../../../store/actions/UserActions";
-import { useRouter } from "next/router";
 
 const Module3 = ({ user, allCourses }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -72,7 +79,7 @@ const Module3 = ({ user, allCourses }: any) => {
     <Maincontainer>
       {courses.length > 0 && <>
         <Title>
-          Cursos en poseción
+          Tus Cursos
         </Title>
         <ScrollContainer>
           <CardContain id="Scroll">
