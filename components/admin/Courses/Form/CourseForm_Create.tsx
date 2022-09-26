@@ -295,7 +295,7 @@ const CourseForm_Create = () => {
               {...register("courseSubtittle")}
             />
           </InputContain>
-          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+          {/* <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Categorías</Label>
             <IconContain>
 
@@ -330,7 +330,7 @@ const CourseForm_Create = () => {
               </SelectContain>
             </IconContain>
 
-          </InputContain>
+          </InputContain> */}
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Portada del Curso</Label>
             <IconContain>

@@ -4,6 +4,7 @@ import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, E
 import Link from 'next/link';
 
 const Extra = ({ value, setValue, data }: any) => {
+
   return (
     <>
       <TitleContain >
@@ -15,11 +16,11 @@ const Extra = ({ value, setValue, data }: any) => {
         <PositionTitle position={value}>
           Material Extra
         </PositionTitle>
-        <Titles onClick={() => {
+        {data.homeworkAvailable && <Titles onClick={() => {
           setValue(3)
         }}>
           Tareas
-        </Titles>
+        </Titles>}
         <Titles onClick={() => {
           setValue(4)
         }}>

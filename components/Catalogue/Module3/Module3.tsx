@@ -108,7 +108,7 @@ const Module3 = ({ user, allCourses }: any) => {
                       <Text1>
                         {course.courseTittle}...
                         <Text2>
-                          {course.courseCategory}
+                          {course.courseSubtittle}...
                         </Text2>
                       </Text1>
                       <Text3>

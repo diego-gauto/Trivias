@@ -8,6 +8,14 @@ import {
   getLesson,
   updateLesson,
 } from "../../../../store/actions/courseActions";
+import {
+  CaretD2,
+  Label2,
+  Option,
+  OptionContain,
+  Selected,
+  SelectContain,
+} from "./Select/SelectStyles.styled";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
@@ -42,12 +50,19 @@ const Edit = () => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [lesson, setLesson] = useState<any>({})
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(false);
+
   const getThisLesson = () => {
-    getLesson(routerState.courseID, routerState.seasonID, routerState.lessonID).then(res => {
+    getLesson(routerState.courseID, routerState.seasonID, routerState.lessonID).then((res: any) => {
       setLesson(res)
+      if ("homeworkAvailable" in res) {
+        setValue(res.homeworkAvailable)
+      }
     })
   }
   const updateThisLesson = async () => {
+    lesson.homeworkAvailable = value;
     await updateLesson(lesson, routerState.courseID, routerState.seasonID, routerState.lessonID).then(() => {
       router.push({
         pathname: `/admin/Edit`,
@@ -212,23 +227,53 @@ const Edit = () => {
         </Contain2>
         <Contain3>
           <HwTitle>Tareas</HwTitle>
-          <SlideContain>
-            <TitleSlide style={{ marginTop: "115px", }}>Tarea</TitleSlide>
-          </SlideContain>
-          <InputContain>
-            <Label>Título de la Tarea</Label>
-            <Input
-              placeholder="Tarea 23: Intro a uñas francesas"
-              defaultValue={lesson.homeWork}
-              onChange={(e: any) => {
-                setLesson({ ...lesson, homeWork: e.target.value })
-              }}
-            />
-          </InputContain>
-          <InputContain>
-            <Label>Descripción de la Tarea</Label>
-            <InputBig
-              placeholder="Lorem ipsum dolor sit amet, consectetur 
+          <SelectContain key={3}>
+            <Selected onClick={() => { setOpen(!open) }}>
+              {!value ? 'No' : 'Si'}
+              <CaretD2 />
+            </Selected>
+            {
+              open == true &&
+              <OptionContain>
+                <Option onClick={() => { setValue(true); setOpen(false); }}>
+                  <input
+                    type="radio"
+                    id="Temporada1"
+                    name="category"
+                    value="Temporada 1"
+                  />
+                  <Label2 > Si</Label2>
+                </Option>
+                <Option onClick={() => { setValue(false); setOpen(false); }}>
+                  <input
+                    type="radio"
+                    id="Temporada1"
+                    name="category"
+                    value="Temporada 1"
+                  />
+                  <Label2 > No</Label2>
+                </Option>
+              </OptionContain>
+            }
+          </SelectContain>
+          {value && <>
+            <SlideContain>
+              <TitleSlide style={{ marginTop: "115px", }}>Tarea</TitleSlide>
+            </SlideContain>
+            <InputContain>
+              <Label>Título de la Tarea</Label>
+              <Input
+                placeholder="Tarea 23: Intro a uñas francesas"
+                defaultValue={lesson.homeWork}
+                onChange={(e: any) => {
+                  setLesson({ ...lesson, homeWork: e.target.value })
+                }}
+              />
+            </InputContain>
+            <InputContain>
+              <Label>Descripción de la Tarea</Label>
+              <InputBig
+                placeholder="Lorem ipsum dolor sit amet, consectetur 
               adipiscing elit. Pharetra, cursus sapien ac magna. 
               Consectetur amet eu tincidunt quis. Non habitasse viverra 
               malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
@@ -237,12 +282,12 @@ const Edit = () => {
               feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
               enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
               quisque."
-              defaultValue={lesson.homeWorkAbout}
-              onChange={(e: any) => {
-                setLesson({ ...lesson, homeWorkAbout: e.target.value })
-              }}
-            />
-          </InputContain>
+                defaultValue={lesson.homeWorkAbout}
+                onChange={(e: any) => {
+                  setLesson({ ...lesson, homeWorkAbout: e.target.value })
+                }}
+              />
+            </InputContain></>}
         </Contain3>
       </EditContain>
       <ButtonContain>

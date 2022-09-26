@@ -15,11 +15,11 @@ const About = ({ value, setValue, data }: any) => {
         }}>
           Material Extra
         </Titles>
-        <Titles onClick={() => {
+        {data.homeworkAvailable && <Titles onClick={() => {
           setValue(3)
         }}>
           Tareas
-        </Titles>
+        </Titles>}
         <Titles onClick={() => {
           setValue(4)
         }}>

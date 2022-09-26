@@ -36,9 +36,9 @@ const PurchaseDetails = ({ data, type }: any) => {
                 <TitleCourse>
                   Curso : {data.title}
                 </TitleCourse>
-                <Subtitle>
+                {/* <Subtitle>
                   {data.category}
-                </Subtitle>
+                </Subtitle> */}
               </CourseText>
             </Card>
           </CardContain>

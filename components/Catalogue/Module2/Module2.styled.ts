@@ -33,7 +33,7 @@ export const Video = styled.div`
   cursor: pointer;
   @media( max-width: 700px){
   width: 180px;
-  height: 102.86px;
+  height: 120px;
   }
   &:hover{
     transform: scale(1.02);
