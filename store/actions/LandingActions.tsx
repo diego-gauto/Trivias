@@ -66,10 +66,12 @@ export const saveProductsData = async (products: Product[]) => {
 }
 
 export const saveHeroData = async (heroData: HeroData) => {
-  const heroSectionRef = doc(db, "landingPage", "heroSection")
+  const heroSectionRef = doc(db, "landingPage", "heroSection");
+  console.log(heroData);
   try {
-    await uploadFile(heroData.heroImage, "landing/HeroImage")
-    const { heroImage, ...dataToUpdate } = heroData
+    const image = await uploadFile(heroData.heroImage, "landing/HeroImage")
+    heroData.heroImage = image.metadata.fullPath
+    console.log(heroData);
     // @ts -expect-error
     await updateDoc(heroSectionRef, dataToUpdate)
   } catch {

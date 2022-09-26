@@ -48,9 +48,6 @@ const formSchema = yup.object().shape({
   courseAbout: yup
     .string()
     .required("Campo requerido"),
-  coursePublishYear: yup
-    .number()
-    .required("Campo requerido"),
   coursePrice: yup
     .number()
     .default(0)
@@ -129,7 +126,6 @@ const CourseForm_Create = () => {
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
-        coursePublishYear: formData.coursePublishYear,
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
