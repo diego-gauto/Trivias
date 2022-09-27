@@ -99,6 +99,7 @@ export const RewardModal = (props: IRewardModalProps) => {
     } else if (reward.points && reward.points === 1) {
       return `${reward.points} punto`;
     }
+    return ""
   }
 
   const getRewardButtonCopy = () => {
@@ -125,6 +126,7 @@ export const RewardModal = (props: IRewardModalProps) => {
         }
       }
     }
+    return ""
   }
 
   return (
