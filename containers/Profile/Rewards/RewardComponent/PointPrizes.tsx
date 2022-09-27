@@ -18,9 +18,7 @@ import {
 } from "./ClaimPrizes.styled";
 
 const PointPrizes = ({ score, user }: any) => {
-
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
 
   const [rewards, setRewards] = useState<any>([]);
   const [reward, setReward] = useState<any>({});
@@ -91,7 +89,7 @@ const PointPrizes = ({ score, user }: any) => {
           })
         }
       </AllPrizes>
-      <RewardModal show={show} setShow={setShow} reward={reward} user={user} />
+      <RewardModal show={show} setShow={setShow} reward={reward} user={user} score={score} isTimeReward={false} />
     </MainContainer>
   )
 }
