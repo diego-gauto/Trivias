@@ -20,6 +20,10 @@ export const RewardModalContainer = styled(Modal)`
   .modal-body {
     font-family: Raleway;
   }
+  .pending {
+    font-size: 14px;
+    font-weight: 700;
+  }
   .about {
     font-size: 14px;
   }
@@ -45,7 +49,7 @@ export const RewardModalContainer = styled(Modal)`
     background: #FFFFFF;
     color: #6717CD; 
     margin-right: 10px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
   }
   .close-btn {
     background: #6717CD;

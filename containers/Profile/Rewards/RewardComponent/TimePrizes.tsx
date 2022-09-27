@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react";
 
+import { RewardModal } from "../../../../components/Rewards/RewardModal";
+import { IReward } from "../../../../interfaces/IReward";
+import { getTimeRewards, getUserRewards } from "../../../../store/actions/RewardActions";
 import {
   AllPrizes,
+  ImageReward,
   MainContainer,
+  Overlay2,
   PrizeContain,
   PrizeImage,
   PrizeInfo,
   PrizeTitle,
   TitleClaim,
-  Overlay2,
-  ImageReward,
-
 } from "./ClaimPrizes.styled";
-import Modal1 from "./Modal1/Modal1";
-import Modal2 from "./Modal1/Modal2";
-import { getTimeRewards, getUserRewards } from "../../../../store/actions/RewardActions";
 
 const TimePrizes = ({ score, user }: any) => {
-
-  const [show1, setShow1] = useState(false);
-  const [show2, setShow2] = useState(false);
-  const handleShow2 = () => setShow2(true);
+  const [show, setShow] = useState(false);
 
   const [rewards, setRewards] = useState<any>([]);
   const [reward, setReward] = useState<any>({});
-  const container: any = document.getElementById("container");
+
+  // const container: any = document.getElementById("container");
 
   // container?.addEventListener("wheel", function (e: any) {
   //   if (e.deltaY > 0) {
@@ -65,11 +62,11 @@ const TimePrizes = ({ score, user }: any) => {
       </TitleClaim>
       <AllPrizes id="container">
         {
-          rewards.map((reward: any, index: any) => {
+          rewards.map((reward: IReward, index: any) => {
             return (
               <PrizeContain key={"Prizes" + index} >
                 <PrizeImage onClick={() => {
-                  setShow2(true), setReward(reward);
+                  setShow(true), setReward(reward);
                 }} >
                   <Overlay2 points={reward.month} score={score} />
                   <ImageReward src={reward.path} />
@@ -78,14 +75,14 @@ const TimePrizes = ({ score, user }: any) => {
                   {reward.title}
                 </PrizeTitle>
                 <PrizeInfo>
-                  {reward.month} {reward.month <= 1 ? "mes" : "meses"}
+                  {reward.month} {reward.month && reward.month <= 1 ? "mes" : "meses"}
                 </PrizeInfo>
               </PrizeContain>
             )
           })
         }
       </AllPrizes>
-      <Modal2 show={show2} setShow={setShow2} data={reward} user={user} score={score} />
+      <RewardModal show={show} setShow={setShow} reward={reward} user={user} score={score} isTimeReward={true} />
     </MainContainer>
   )
 }
