@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getLevels } from "../../../../store/actions/RewardActions";
 
-import {
-  Circle,
-  ContainLevel,
-  Divisor,
-  LevelContainer,
-  LevelText,
-} from "./RewardComp.styled";
+import { getLevels } from "../../../../store/actions/RewardActions";
+import { Circle, ContainLevel, Divisor, LevelContainer, LevelText } from "./RewardComp.styled";
 
 const Points = ({ level, score, currentLevel }: any) => {
 
@@ -16,8 +10,6 @@ const Points = ({ level, score, currentLevel }: any) => {
 
   const getAllLevels = () => {
     getLevels().then((res) => {
-      console.log(res);
-
       setLevels(res);
     })
   }
