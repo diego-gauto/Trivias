@@ -8,12 +8,16 @@ import {
 import firebase from "firebase/compat/app";
 import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
+import Stripe from "stripe";
 import { PREVIEW, SIGNUP_PAST_USER_PATH } from "../../constants/paths";
 
 import { db, functions } from "../../firebase/firebaseConfig";
 import { IMembership } from "../types/AuthActionTypes";
 
-export const signUpWithCreds = (signUpData: { credentials: any; membership?: IMembership }) => {
+export const signUpWithCreds = (
+  signUpData: { credentials: any; membership?: IMembership },
+  paymentMethods: Stripe.PaymentMethod[] | undefined = undefined
+) => {
   const {
     credentials,
   } = signUpData;
@@ -40,7 +44,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; membership?: IMe
         method: '',
         planId: '',
         planName: '',
-        paymentMethod: '',
+        paymentMethod: [],
         startDate: 0,
         ...signUpData.membership
       }
@@ -49,7 +53,7 @@ export const signUpWithCreds = (signUpData: { credentials: any; membership?: IMe
       }
       const stripeUser = httpsCallable(functions, 'createStripeUser');
       await stripeUser(data).then(async (res: any) => {
-        await addDoc(collection(db, "users"), {
+        return await addDoc(collection(db, "users"), {
           uid: user?.uid,
           name: credentials.name,
           email: credentials.email,
@@ -61,8 +65,21 @@ export const signUpWithCreds = (signUpData: { credentials: any; membership?: IMe
           created_at: dateTime,
           membership,
           score: 0,
-        }).then(() => {
+        }).then((newUser) => {
           console.log("Provider Auth : 2")
+          if (!!paymentMethods && paymentMethods.length !== 0) {
+            const newUserPaymentMethodsCollection = db.collection("users").doc(newUser.id).collection("paymentMethods");
+            Promise.all(paymentMethods.map((pm) => {
+              const pm_data = {
+                brand: pm.card?.brand,
+                cardId: pm.id,
+                exp_month: pm.card?.exp_month,
+                exp_year: pm.card?.exp_year,
+                last4: pm.card?.last4,
+              }
+              newUserPaymentMethodsCollection.add(pm_data);
+            }));
+          }
         }).catch((error: any) => {
           let docCreationError = new Error(`Error creating user document: ${error}`);
           console.error(docCreationError);

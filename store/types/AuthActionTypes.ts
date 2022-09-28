@@ -4,6 +4,6 @@ export interface IMembership {
   method: string;
   planId: string;
   planName: string;
-  paymentMethod: string;
+  paymentMethod: string[];
   startDate: number;
 }
