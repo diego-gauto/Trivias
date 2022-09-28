@@ -38,14 +38,9 @@ import {
   TextNew,
 } from "./Module3.styled";
 
+// TODO: Borrar componente cuando esté lista la landing page (queda depreciado con el nuevo: CourseModule)
 export const Module3 = (props: IModule3) => {
-  const { button } = props;
-  const { title } = props;
-  const { price } = props;
-  const { subtitle } = props;
-  const { type } = props;
-  const { faved } = props;
-  const { courseImg } = props;
+  const { button, title, price, subtitle, type, faved, courseImg } = props;
 
   const [groupTag, setGroupTag] = useState("");
   const [isFaved, setIsFaved] = useState(faved);
@@ -114,7 +109,6 @@ export const Module3 = (props: IModule3) => {
     },
     [],
   );
-
   return (
     <Container fluid style={{ padding: 0 }}>
       <ModuleImage
