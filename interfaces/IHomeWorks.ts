@@ -9,5 +9,6 @@ export interface IHomeWorkModal {
   userEmail: string,
   userName: string,
   about?: string,
-  aproved: boolean
+  aproved: boolean,
+  lessonId: string
 }

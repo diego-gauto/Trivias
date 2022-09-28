@@ -165,7 +165,6 @@ export const getComments = async () => {
 
 export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any, lessonId: any, user: any) => {
   let temp_lesson: any;
-  delete lesson.id
   delete lesson.seasonId
   delete lesson.courseId
 
@@ -266,8 +265,32 @@ export const deleteWholeCourse = async (course: DocumentData) => {
   }
 }
 
-export const updateLessonProgress = async (progress: any, courseId: any, seasonId: any, lessonId: any) => {
+export const updateLessonProgress = async (userId: string, time: any, seconds: any, courseId: any, seasonId: any, lessonId: any) => {
   const docRef = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  const docSnap: any = await getDoc(docRef);
+  let tempProgress = []
+  tempProgress = docSnap.data().progress;
+  if (!("progress" in docSnap.data())) {
+    tempProgress = [];
+  }
+  if (!tempProgress.some((x: any) => x.id == userId)) {
+    tempProgress.push({ id: userId, status: false, seconds: seconds, time: time })
+  } else {
+    let index = docSnap.data().progress.findIndex((x: any) => x.id == userId);
+    tempProgress[index].seconds = seconds;
+    tempProgress[index].time = time;
+  }
+
+  await updateDoc(docRef, {
+    progress: tempProgress
+  })
+  return 'exito'
+}
+
+export const updateProgressStatus = async (progress: any, courseId: any, seasonId: any, lessonId: any) => {
+  const docRef = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  const docSnap: any = await getDoc(docRef);
+
   await updateDoc(docRef, {
     progress: progress
   })

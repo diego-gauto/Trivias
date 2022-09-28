@@ -19,6 +19,8 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
         if (res.status && !res.aproved) {
           setStatus("")
         }
+      } else {
+        setStatus("")
       }
     })
   }, [data])
@@ -34,12 +36,13 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
     tempHomework.userEmail = user.email;
     tempHomework.title = data.homeWork;
     tempHomework.path = '';
-    tempHomework.season = parseInt(season) + 1;
-    tempHomework.lesson = parseInt(lesson) + 1;
+    tempHomework.season = parseInt(season);
+    tempHomework.lesson = parseInt(lesson);
     tempHomework.createdAt = new Date();
     tempHomework.courseId = data.courseId;
     tempHomework.userId = user.id;
     tempHomework.lessonId = data.id;
+    tempHomework.seasonId = ""
     tempHomework.aproved = false
     tempHomework.comment = ""
     tempHomework.teacherId = teacherId;

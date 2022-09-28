@@ -9,8 +9,9 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
+
   const finishedLesson = () => {
-    let temp: any = data;
+    let temp: any = { ...data };
     if (user) {
       if (temp.users.includes(user.id)) {
         console.log("user exist");
@@ -41,12 +42,15 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
         course.seasons[season].lessons[lesson].progress = [];
       }
       if (!course.seasons[season].lessons[lesson].progress.some((e: any) => e.id == user.id)) {
-        course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds })
+        course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds, status: false })
       } else {
         let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-        course.seasons[season].lessons[lesson].progress[index] = { id: user.id, time: progress, seconds: seconds }
+        course.seasons[season].lessons[lesson].progress[index].seconds = seconds;
+        course.seasons[season].lessons[lesson].progress[index].time = progress;
       }
-      updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+
+      // updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+      updateLessonProgress(user.id, progress, seconds, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
     }
   }
 
