@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import Image from "next/image";
-
+import { RewardModal } from "../../../../components/Rewards/RewardModal";
+import { getRewards, getUserRewards } from "../../../../store/actions/RewardActions";
 import {
   AllPrizes,
   Band,
@@ -16,15 +16,9 @@ import {
   PrizeTitle,
   TitleClaim,
 } from "./ClaimPrizes.styled";
-import Modal1 from "./Modal1/Modal1";
-import { getRewards, getUserRewards } from "../../../../store/actions/RewardActions";
-
 
 const PointPrizes = ({ score, user }: any) => {
-
-  const [show1, setShow1] = useState(false);
-  const [show2, setShow2] = useState(false);
-  const handleShow2 = () => setShow2(true);
+  const [show, setShow] = useState(false);
 
   const [rewards, setRewards] = useState<any>([]);
   const [reward, setReward] = useState<any>({});
@@ -75,7 +69,7 @@ const PointPrizes = ({ score, user }: any) => {
             return (
               <PrizeContain key={"Prizes" + index} >
                 <PrizeImage onClick={() => {
-                  setShow1(true), setReward(reward);
+                  setShow(true), setReward(reward);
                 }} >
                   <Overlay points={reward.points} score={score} />
                   <ImageReward src={reward.path} />
@@ -95,7 +89,7 @@ const PointPrizes = ({ score, user }: any) => {
           })
         }
       </AllPrizes>
-      <Modal1 show={show1} setShow={setShow1} data={reward} user={user} />
+      <RewardModal show={show} setShow={setShow} reward={reward} user={user} score={score} isTimeReward={false} />
     </MainContainer>
   )
 }

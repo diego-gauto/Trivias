@@ -68,7 +68,6 @@ const Homepage = () => {
             url={courseData.lessons[0].link}
             playing={true}
             muted={true}
-            //controls
             width={responsive380 ? '100%' : '100%' &&
               responsive520 ? '100%' : '100%' &&
                 responsive1023 ? '100%' : '100%'}

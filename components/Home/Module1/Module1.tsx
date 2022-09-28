@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 
 import DOMPurify from "dompurify";
+import Link from "next/link";
 
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas";
@@ -23,12 +24,10 @@ import {
   Button02,
   Button02Content,
   IconElement,
-  IconImageWrapper,
   Left,
   LeftWrapper,
   ModuleContainer,
   ModuleContentWrapper,
-  Right,
   RightImage,
   RightImageElement,
   RightWrapper,
@@ -44,7 +43,6 @@ import {
   SectionB_TextALT1,
   SectionC,
 } from "./Module1.styled";
-import Link from "next/link";
 
 export const Module1 = (props: IModule1) => {
   const {
@@ -137,15 +135,9 @@ export const Module1 = (props: IModule1) => {
               </SectionB>
               <SectionC>
                 <IconElement>
-                  <IconImageWrapper>
-
-                  </IconImageWrapper>
                   <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img2.src}></Image>{primerCaracteristica}</SectionB_Text>
                 </IconElement>
                 <IconElement>
-                  <IconImageWrapper>
-
-                  </IconImageWrapper>
                   <SectionB_Text><Image style={{ paddingRight: "5px" }} src={Img4.src}></Image>{segundaCaracteristica}</SectionB_Text>
                 </IconElement>
                 <IconElement>
@@ -161,11 +153,9 @@ export const Module1 = (props: IModule1) => {
 
           </LeftWrapper>
           <RightWrapper>
-            <Right>
-              <RightImage>
-                <RightImageElement src={img}></RightImageElement>
-              </RightImage>
-            </Right>
+            <RightImage>
+              <RightImageElement src={img}></RightImageElement>
+            </RightImage>
           </RightWrapper>
         </ModuleContentWrapper>
       </BackgroundWrapper >

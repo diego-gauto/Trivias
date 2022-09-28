@@ -38,6 +38,7 @@ import {
 } from "../../screens/RegisterPastUser.styled";
 import { signUpWithCreds } from "../../store/actions/AuthActions";
 import { IMembership } from "../../store/types/AuthActionTypes";
+import { IStripeUserData } from "../../interfaces/IStripeUserData";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -82,7 +83,7 @@ const RegisterPastUser = () => {
       return;
     }
     setIsLoading(true)
-    const getStripeUserData = httpsCallable<{ customerEmail: string }, Stripe.Subscription | null>(functions, "getStripeUserData");
+    const getStripeUserData = httpsCallable<{ customerEmail: string }, IStripeUserData | null>(functions, "getStripeUserData");
     const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
 
     const signUpData: { credentials: object; membership?: IMembership } = {
@@ -99,7 +100,7 @@ const RegisterPastUser = () => {
         finalDate: stripeUserData.current_period_end,
         level: 1,
         method: MEMBERSHIP_METHOD_DEFAULT,
-        paymentMethod: "",
+        paymentMethod: stripeUserData.paymentMethods.map((pm) => pm.id),
         // @ts-expect-error
         planId: stripeUserData.plan.id,
         planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
@@ -107,7 +108,7 @@ const RegisterPastUser = () => {
       }
     }
 
-    const redirectURL = await signUpWithCreds(signUpData);
+    const redirectURL = await signUpWithCreds(signUpData, stripeUserData?.paymentMethods);
     window.location.href = redirectURL;
   }
 
