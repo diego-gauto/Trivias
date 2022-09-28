@@ -15,6 +15,7 @@ export const Select = styled.div`
   display: flex;
   font-family: 'Montserrat';
   font-size: 14px;
+  font-weight: 600;
   border: 1px solid #6717CD;
   border-right: none;
   border-radius: 10px 0px 0px 10px;
@@ -22,6 +23,10 @@ export const Select = styled.div`
     border: none;
     outline: none;
     border-radius: 10px 0px 0px 10px;
+  }
+  option{
+    font-size: 14px;
+    font-weight: 600;
   }
 `;
 export const SearchInput = styled.input`
@@ -37,10 +42,9 @@ export const DownloadUserData = styled.div`
   display: flex;
   img{
     position: absolute;
-    width: 22px;
-    height: 22px;
-    margin-top: 11px;
-    margin-left: 11px;
+    width: 15px;
+    margin-top: 14px;
+    margin-left: 7px;
   }
   &:hover{
     transform:scale(1.03);
