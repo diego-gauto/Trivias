@@ -38,7 +38,7 @@ import {
 } from "../../screens/RegisterPastUser.styled";
 import { signUpWithCreds } from "../../store/actions/AuthActions";
 import { IMembership } from "../../store/types/AuthActionTypes";
-import { IStripeUserData } from "./interfaces/IStripeUserData";
+import { IStripeUserData } from "../../interfaces/IStripeUserData";
 
 const formSchema = yup.object().shape({
   name: yup
