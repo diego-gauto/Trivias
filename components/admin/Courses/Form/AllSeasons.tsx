@@ -39,7 +39,7 @@ interface AllLessonsProps {
 export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeasons) => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
-  const [openSeason, setOpenSeason] = useState(0);
+  const [openSeason, setOpenSeason] = useState(false);
   const [lessons, setLeassons] = useState<Array<AllLessonsProps>>([]);
 
   //GETS ALL LESSONS DATA
@@ -68,15 +68,15 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
 
   return (
     <><MainContainer>
-      <SeasonContain onClick={() => { setOpenSeason(1); getSeasonID() }}>
+      <SeasonContain onClick={() => { setOpenSeason(!openSeason); getSeasonID() }}>
         <TitleContain>
-          <Title onClick={(e) => { e.stopPropagation(); }}>
+          <Title >
             Temporada {index}
-            {openSeason != 1 &&
+            {!openSeason &&
               <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
           </Title>
           <ButtonContain>
-            {openSeason == 1 &&
+            {openSeason &&
               <>
                 <Link href={{
                   pathname: "/admin/NewLesson",
@@ -85,20 +85,20 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
                     seasonID: documentID,
                   }
                 }}>
-                  <Button onClick={(e) => { e.stopPropagation(); }}>Añadir Lección <Add /></Button>
+                  <Button>Añadir Lección <Add /></Button>
                 </Link>
                 {
                   lessons.length == 0 &&
                   <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
 
                 }
-                <ChevU onClick={(e) => { e.stopPropagation(); setOpenSeason(0); }} />
+                <ChevU />
               </>}
-            {openSeason != 1 &&
+            {!openSeason &&
               <ChevD />}
           </ButtonContain>
         </TitleContain>
-        {openSeason == 1 &&
+        {openSeason &&
           <EpisodesContain>
             <Episode>
               <EpisodeContain>
