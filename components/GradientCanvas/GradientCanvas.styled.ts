@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Canvas = styled.canvas  `
 display: block;
@@ -10,6 +10,9 @@ z-index: -9999;
 max-width:100%;
 @media only screen and (max-width: 1024px) {
   height: 100% !important;
+}
+@media only screen and (min-height: 600px) {
+  height: 130% !important;
 }
 `
 
