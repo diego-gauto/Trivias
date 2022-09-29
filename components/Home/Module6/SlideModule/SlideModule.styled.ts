@@ -12,7 +12,7 @@ margin: 0 auto;
 background-position: center;
 display: flex;
 align-items: flex-start;
-border-radius: 30px;
+border-radius: 20px;
 @media only screen and (max-width: 1024px) {
   height: 180px;
 }
