@@ -88,13 +88,13 @@ const Module1 = ({ user, allCourses }: any) => {
 
   return (
     <Container>
-      {(Object.values(historyCourse).length > 0) && <>
+      {(historyCourse.seasons && historyCourse.seasons.length > 0) && <>
         <ImageContain>
 
           <VideoContain>
             <ReactPlayer
               className='absolute'
-              url={historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson].link}
+              url={historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link}
               playing={true}
               muted={true}
               //controls
@@ -107,7 +107,7 @@ const Module1 = ({ user, allCourses }: any) => {
 
         <TextContain>
           <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {historyCourse.courseTittle}: Episodio 1 “{historyCourse.seasons[0]?.lessons[0].title}”
+            Curso {historyCourse.courseTittle}: Episodio 1 “{historyCourse.seasons[0]?.lessons[0]?.title}”
           </Title>
           <SubText style={{ textShadow: "1px 1px 5px black" }}>
             {historyCourse.courseAbout}

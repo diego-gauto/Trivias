@@ -68,7 +68,7 @@ const HomeWork = ({ userId, user }: any) => {
                   >{task.userEmail}</td>
                   <td
                     onClick={() => { setShow(true); setData(task) }}
-                  >{task.title}  ({task.season}, {task.lesson}) </td>
+                  >{task.title}  ({task.season + 1}, {task.lesson + 1}) </td>
                   <td
                     onClick={() => { setShow(true); setData(task) }}
                   >{task.formatDate}</td>

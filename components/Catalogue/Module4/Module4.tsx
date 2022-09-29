@@ -107,60 +107,62 @@ const Module4 = ({ user, allCourses }: any) => {
           {
             courses.map((course: any, index: any) => {
               return (
-                <Cardcontent key={"cardContent-" + index} onClick={() => {
-                  handleShow();
-                  setCourse(course);
-                }}>
-                  <ImageContent>
-                    <CardImage
-                      src={course.coursePath}
-                    />
-                    <InsideContent>
-                      {course.totalLessons > 1 && <InsideText>
-                        {course.totalLessons} Lecciones
-                      </InsideText>}
-                      {course.totalLessons == 1 && <InsideText>
-                        Unica Lección
-                      </InsideText>}
-                    </InsideContent>
-                  </ImageContent>
-                  <VideoInfo>
-                    <TextContain>
-                      <Text1>
-                        {course.courseTittle}...
-                        <Text2>
-                          {course.courseSubtittle}...
-                        </Text2>
-                      </Text1>
-                      <Text3>
-                        {course.courseAbout}...
-                      </Text3>
-                    </TextContain>
-                    {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={(e) => {
-                      e.stopPropagation();
-                      goTo(course);
-                    }}>
-                      Comprar - ${course.coursePrice}.00
-                    </Viewpay>}
-                    {((course.courseType == 'Mensual' && user && user.membership.finalDate < today) || (course.courseType == 'Mensual' && !user)) && <Viewpay onClick={(e) => {
-                      e.stopPropagation();
-                      goTo(course);
-                    }}>
-                      Comprar Gonvar+
-                    </Viewpay>}
-                    {(course.courseType == 'Gratis' || (user && course.courseType == 'Mensual' && user.membership.finalDate > today)) && <Viewpay onClick={(e) => {
-                      e.stopPropagation();
-                      goTo(course);
-                    }}>
-                      Ver curso
-                    </Viewpay>}
-                    {course.courseType == 'Producto' && course.paid && <Viewpay onClick={() => {
-                      goTo(course);
-                    }}>
-                      Ver curso
-                    </Viewpay>}
-                  </VideoInfo>
-                </Cardcontent>
+                <>
+                  {<Cardcontent key={"cardContent-" + index} onClick={() => {
+                    handleShow();
+                    setCourse(course);
+                  }}>
+                    <ImageContent>
+                      <CardImage
+                        src={course.coursePath}
+                      />
+                      <InsideContent>
+                        {course.totalLessons > 1 && <InsideText>
+                          {course.totalLessons} Lecciones
+                        </InsideText>}
+                        {course.totalLessons == 1 && <InsideText>
+                          Unica Lección
+                        </InsideText>}
+                      </InsideContent>
+                    </ImageContent>
+                    <VideoInfo>
+                      <TextContain>
+                        <Text1>
+                          {course.courseTittle}...
+                          <Text2>
+                            {course.courseSubtittle}...
+                          </Text2>
+                        </Text1>
+                        <Text3>
+                          {course.courseAbout}...
+                        </Text3>
+                      </TextContain>
+                      {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={(e) => {
+                        e.stopPropagation();
+                        goTo(course);
+                      }}>
+                        Comprar - ${course.coursePrice}.00
+                      </Viewpay>}
+                      {((course.courseType == 'Mensual' && user && user.membership.finalDate < today) || (course.courseType == 'Mensual' && !user)) && <Viewpay onClick={(e) => {
+                        e.stopPropagation();
+                        goTo(course);
+                      }}>
+                        Comprar Gonvar+
+                      </Viewpay>}
+                      {(course.courseType == 'Gratis' || (user && course.courseType == 'Mensual' && user.membership.finalDate > today)) && <Viewpay onClick={(e) => {
+                        e.stopPropagation();
+                        goTo(course);
+                      }}>
+                        Ver curso
+                      </Viewpay>}
+                      {course.courseType == 'Producto' && course.paid && <Viewpay onClick={() => {
+                        goTo(course);
+                      }}>
+                        Ver curso
+                      </Viewpay>}
+                    </VideoInfo>
+                  </Cardcontent>}
+                </>
               )
             })
           }

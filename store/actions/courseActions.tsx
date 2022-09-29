@@ -98,26 +98,58 @@ export const deleteLessonMaterial = async (material: any) => {
 
 export const getWholeCourses = async () => {
   let courses: any = []
+  let tempCourses: any = []
   const docRef = query(collection(db, 'courses'), orderBy('createdAt', 'desc'));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc: any) => {
     courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0 });
   })
-  for (let i = 0; i < courses.length; i++) {
-    const docRefSeasons = query(collection(db, 'courses', courses[i].id, "seasons"), orderBy('season'));
+
+  // courses.forEach(async (element: any, index: number) => {
+  //   const docRefSeasons = query(collection(db, 'courses', element.id, "seasons"), orderBy('season'));
+  //   const querySnapshotSeasons = await getDocs(docRefSeasons);
+  //   querySnapshotSeasons.forEach((season: any) => {
+  //     element.seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+  //   });
+  //   element.seasons.forEach(async (season: any) => {
+  //     const docRefLesson = query(collection(db, 'courses', element?.id, "seasons", season.id, "lessons"), orderBy('number'));
+  //     const querySnapshotLesson = await getDocs(docRefLesson);
+  //     querySnapshotLesson.forEach((lesson: any) => {
+  //       element.totalLessons++;
+  //       season.lessons.push({ ...lesson.data(), id: lesson.id });
+  //     });
+  //   });
+  // });
+  await Promise.all(courses.map(async (course: any) => {
+    const docRefSeasons = query(collection(db, 'courses', course.id, "seasons"), orderBy('season'));
     const querySnapshotSeasons = await getDocs(docRefSeasons);
     querySnapshotSeasons.forEach((season: any) => {
-      courses[i].seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+      course.seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
     });
-    for (let c = 0; c < courses[i].seasons.length; c++) {
-      const docRefLesson = query(collection(db, 'courses', courses[i]?.id, "seasons", courses[i].seasons[c].id, "lessons"), orderBy('number'));
+    await Promise.all(course.seasons.map(async (season: any) => {
+      const docRefLesson = query(collection(db, 'courses', course?.id, "seasons", season.id, "lessons"), orderBy('number'));
       const querySnapshotLesson = await getDocs(docRefLesson);
       querySnapshotLesson.forEach((lesson: any) => {
-        courses[i].totalLessons++;
-        courses[i].seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
+        course.totalLessons++;
+        season.lessons.push({ ...lesson.data(), id: lesson.id });
       });
-    }
-  }
+    }))
+  }))
+  // for (let i = 0; i < courses.length; i++) {
+  //   const docRefSeasons = query(collection(db, 'courses', courses[i].id, "seasons"), orderBy('season'));
+  //   const querySnapshotSeasons = await getDocs(docRefSeasons);
+  //   querySnapshotSeasons.forEach((season: any) => {
+  //     courses[i].seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+  //   });
+  //   for (let c = 0; c < courses[i].seasons.length; c++) {
+  //     const docRefLesson = query(collection(db, 'courses', courses[i]?.id, "seasons", courses[i].seasons[c].id, "lessons"), orderBy('number'));
+  //     const querySnapshotLesson = await getDocs(docRefLesson);
+  //     querySnapshotLesson.forEach((lesson: any) => {
+  //       courses[i].totalLessons++;
+  //       courses[i].seasons[c].lessons.push({ ...lesson.data(), id: lesson.id });
+  //     });
+  //   }
+  // }
   return courses;
 }
 export const getWholeCourse = async (courseId: any) => {
@@ -165,7 +197,6 @@ export const getComments = async () => {
 
 export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any, lessonId: any, user: any) => {
   let temp_lesson: any;
-  delete lesson.id
   delete lesson.seasonId
   delete lesson.courseId
 
@@ -266,8 +297,32 @@ export const deleteWholeCourse = async (course: DocumentData) => {
   }
 }
 
-export const updateLessonProgress = async (progress: any, courseId: any, seasonId: any, lessonId: any) => {
+export const updateLessonProgress = async (userId: string, time: any, seconds: any, courseId: any, seasonId: any, lessonId: any) => {
   const docRef = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  const docSnap: any = await getDoc(docRef);
+  let tempProgress = []
+  tempProgress = docSnap.data().progress;
+  if (!("progress" in docSnap.data())) {
+    tempProgress = [];
+  }
+  if (!tempProgress.some((x: any) => x.id == userId)) {
+    tempProgress.push({ id: userId, status: false, seconds: seconds, time: time })
+  } else {
+    let index = docSnap.data().progress.findIndex((x: any) => x.id == userId);
+    tempProgress[index].seconds = seconds;
+    tempProgress[index].time = time;
+  }
+
+  await updateDoc(docRef, {
+    progress: tempProgress
+  })
+  return 'exito'
+}
+
+export const updateProgressStatus = async (progress: any, courseId: any, seasonId: any, lessonId: any) => {
+  const docRef = doc(db, 'courses', courseId, 'seasons', seasonId, 'lessons', lessonId);
+  const docSnap: any = await getDoc(docRef);
+
   await updateDoc(docRef, {
     progress: progress
   })

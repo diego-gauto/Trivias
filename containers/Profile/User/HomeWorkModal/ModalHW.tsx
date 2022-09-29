@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import { db } from '../../../../firebase/firebaseConfig';
 import { IHomeWorkModal } from '../../../../interfaces/IHomeWorks';
+import { getWholeCourse, updateProgressStatus } from '../../../../store/actions/courseActions';
 import { addReview, getUserScore } from '../../../../store/actions/UserActions';
 import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, InputContain, ButtonContain, SafeContained } from './ModalHW.styled';
 
@@ -24,6 +25,7 @@ const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
     addReview(review).then((res) => {
     })
   }
+  console.log(data);
 
   const updateScore = async () => {
     const docRef = doc(db, 'users', data.userId);
@@ -36,6 +38,14 @@ const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
     if (value == 1) {
       tempAproved = true;
     }
+    if (tempAproved) {
+      getWholeCourse(data.courseId).then((res) => {
+        let tempIndex = res.seasons[data.season].lessons[data.lesson].progress.findIndex((x: any) => x.id == data.userId);
+        res.seasons[data.season].lessons[data.lesson].progress[tempIndex].status = true;
+        updateProgressStatus(res.seasons[data.season].lessons[data.lesson].progress, data.courseId, res.seasons[data.season].id, data.lessonId)
+      })
+    }
+
     const docRef = doc(db, 'homeworks', data.id);
     await updateDoc(docRef, {
       status: true,
@@ -100,7 +110,7 @@ const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
                   Temporada
                 </Text>
                 <Text2>
-                  {data.season}
+                  {data.season + 1}
                 </Text2>
               </ItemContain>
               <ItemContain>
@@ -108,7 +118,7 @@ const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
                   Lección
                 </Text>
                 <Text2>
-                  {data.lesson}
+                  {data.lesson + 1}
                 </Text2>
               </ItemContain>
               <InputContain>

@@ -48,7 +48,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
             </Container>
             <Divider />
             <CoursesContainer active={selected[index]}>
-              <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userId} />
+              <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userId} course={course} />
             </CoursesContainer>
           </>
         )

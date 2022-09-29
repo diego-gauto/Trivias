@@ -53,7 +53,18 @@ export const InputContain = styled.div`
     :focus{
       outline: 1px solid #8E2DE2;
     }
-
+  }
+  select{
+    font-size: 14px;
+    font-family:'Montserrat',sans-serif;
+    padding-inline: 20px;
+    padding-block: 10px;
+    width: 100%;
+    border:1px solid #6717CD;
+    border-radius:20px;
+    :focus{
+      outline: 1px solid #8E2DE2;
+    }
   }
   textarea{
     font-size: 14px;

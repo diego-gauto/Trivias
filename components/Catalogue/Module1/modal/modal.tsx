@@ -79,7 +79,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
   }
   useEffect(() => {
     if (Object.values(course).length > 0) {
-      setLessons(course.seasons[0].lessons)
+      setLessons(course.seasons[0]?.lessons)
     }
 
   }, [course])
@@ -160,7 +160,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
               </LessonTitle>
               <SelectModule4 course={course} handleClick={handleClick} />
             </SeasonContain>
-            {lessons.map((lesson: any, index: any) => {
+            {lessons?.map((lesson: any, index: any) => {
               return (
                 <VideoContain>
                   <ContainVideo>
