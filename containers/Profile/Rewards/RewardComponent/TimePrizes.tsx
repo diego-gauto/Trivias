@@ -17,22 +17,8 @@ import {
 
 const TimePrizes = ({ score, user }: any) => {
   const [show, setShow] = useState(false);
-
   const [rewards, setRewards] = useState<any>([]);
   const [reward, setReward] = useState<any>({});
-
-  // const container: any = document.getElementById("container");
-
-  // container?.addEventListener("wheel", function (e: any) {
-  //   if (e.deltaY > 0) {
-  //     container.scrollLeft += 50;
-  //     e.preventDefault();
-  //   }
-  //   else {
-  //     container.scrollLeft -= 50;
-  //     e.preventDefault();
-  //   }
-  // });
 
   const getAllRewards = () => {
     getTimeRewards().then((res: any) => {

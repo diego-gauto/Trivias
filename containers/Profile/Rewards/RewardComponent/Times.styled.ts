@@ -1,14 +1,14 @@
 import styled, { css } from "styled-components";
 
-export const LevelContainer = styled.div<{i:any,level:any}>`
+export const LevelContainer = styled.div<{i:any,level:any,size:any}>`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
   width: 100%;
-  ${props => (props.i == 0) && css`
+  ${props => (props.i == props.size) && css`
   width: fit-content;
-`}
+  `}
   @media(max-width: 1023px) {
     width: 50px;
     display: none;
@@ -73,13 +73,13 @@ export const Divisor = styled("div")<{min:any, i:any, size:any, level:any, score
   @media (max-width: 1023px) {
     display: none;
   }
-  ${props => (props.i == 0) && css`
+  ${props => (props.i == props.size) && css`
   display: none;
-`}
-  ${props => (props.level > props.min) && css`
+  `}
+  ${props => (props.i < props.level) && css`
   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
   `}
-  ${props => (props.score >= props.min && props.score < props.max) && css`
+  ${props => (props.level == props.i) && css`
   background: white;
   border: 1px solid #8E2DE2;
   `}
