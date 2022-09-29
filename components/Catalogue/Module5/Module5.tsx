@@ -97,7 +97,7 @@ const Module5 = ({ user, course }: any) => {
             {courses.map((course: any, index: any) => {
               return (
                 < >
-                  <Cardcontent2>
+                  {< Cardcontent2 >
                     <ImageContent>
                       <CardImage
                         src={course.coursePath}
@@ -131,7 +131,7 @@ const Module5 = ({ user, course }: any) => {
                         Comprar Gonvar+
                       </Viewpay>}
                     </VideoInfo>
-                  </Cardcontent2>
+                  </Cardcontent2>}
                 </>
               )
             })}

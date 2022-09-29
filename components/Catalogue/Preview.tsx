@@ -11,7 +11,7 @@ import { collection, onSnapshot, query, where, getDocs, orderBy, DocumentData } 
 import { db } from "../../firebase/firebaseConfig";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { getWholeCourses } from "../../store/actions/courseActions";
+import { getCourses, getWholeCourses } from "../../store/actions/courseActions";
 
 
 const Preview = () => {
@@ -47,12 +47,12 @@ const Preview = () => {
     }
   }
 
-  const getCourses = () => {
+  const getCourses = async () => {
     let tempCourses: Array<any> = [];
     getWholeCourses().then((response) => {
-      response.forEach((element: DocumentData) => {
+      response.forEach((element: any) => {
         if (element.totalLessons > 0) {
-          tempCourses.push(element);
+          tempCourses.push(element)
         }
       });
       setCourses(tempCourses);
@@ -66,7 +66,6 @@ const Preview = () => {
 
   useEffect(() => {
     fetchDB_data()
-
   }, [loggedIn])
 
   return (
