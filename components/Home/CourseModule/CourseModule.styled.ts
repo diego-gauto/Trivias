@@ -64,7 +64,7 @@ export const CardContainer = styled(Card) `
     padding-left: 150px;
   }
   .second-col {
-    padding-top: 120px;
+    padding-top: 30px;
   }
   button:first-of-type {
     margin-right: 10px;
@@ -77,7 +77,7 @@ export const CardContainer = styled(Card) `
     margin-top: 20px;
     padding-left: 50px;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 784px) {
     .card-title{
       font-size: 26px;
     }

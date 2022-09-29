@@ -70,7 +70,7 @@ export const CardContainer = styled(Card) `
     margin-top: 20px;
     padding-left: 50px;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 784px) {
     .card-title{
       font-size: 26px;
     }
