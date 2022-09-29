@@ -10,6 +10,7 @@ background-repeat: no-repeat;
 background-position: center;
 background-size: 100% auto;
 padding: 0;
+border-radius: 20px;
 @media only screen and (max-width: 1024px) {
   margin-bottom: 15px;
   height: 60vh;

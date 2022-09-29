@@ -14,6 +14,7 @@ border-radius: 12px;
 height: 100%;
 @media only screen and (max-width: 1024px) {
   height: auto;
+  width: 100%;
 }
 `;
 
