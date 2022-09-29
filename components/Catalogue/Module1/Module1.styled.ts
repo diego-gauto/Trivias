@@ -14,15 +14,6 @@ export const ImageContain = styled.div`
   @media (max-width: 1000px) {
     height: auto;
   }
-  // @media (max-width: 850px) {
-  //   height: 400px;
-  // }
-  // @media (max-width: 650px) {
-  //   height: 300px;
-  // }
-  // @media (max-width: 450px) {
-  //   height: 210px;
-  // }
 `;
 export const ImageContainMod1 = styled.div`
   width: 100%;
@@ -39,16 +30,6 @@ export const VideoContain = styled.div`
   @media (max-width: 1000px) {
     height: auto;
   }
-  // @media (max-width: 850px) {
-  //   height: 310px;
-  //   overflow: visible;
-  // }
-  // @media (max-width: 520px) {
-  //   height: 225px;
-  // }
-  // @media (max-width: 450px) {
-  //   height: 250x;
-  // }
 `;
 export const VideoContainMod3 = styled.div`
   position: relative;
