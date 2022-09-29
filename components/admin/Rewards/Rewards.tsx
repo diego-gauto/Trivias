@@ -85,13 +85,13 @@ const Rewards = () => {
         {
           place == "points" &&
           <PriceContain>
-            <PriceTitle>Precios por reclamar</PriceTitle>
+            <PriceTitle>Premios por reclamar</PriceTitle>
             <Prize />
           </PriceContain>
           ||
           place == "time" &&
           <PriceContain>
-            <PriceTitle>Precios por reclamar</PriceTitle>
+            <PriceTitle>Premios por reclamar</PriceTitle>
             <TimePrize />
           </PriceContain>
         }

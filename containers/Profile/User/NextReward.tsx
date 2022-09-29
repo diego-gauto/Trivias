@@ -32,8 +32,9 @@ import {
 } from "./User.styled";
 import { useEffect, useState } from "react";
 import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
+import { getTimeLevel } from "../../../store/actions/RewardActions";
 
-const NextReward = ({ score, barProgress, level, max, timeScore, timeProgress, timeLevel, timeMax }: any) => {
+const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel }: any) => {
   const [reward, setReward] = useState(false);
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
@@ -50,22 +51,24 @@ const NextReward = ({ score, barProgress, level, max, timeScore, timeProgress, t
       }
     })
   }
-  const getNextTimeReward = () => {
-    getTimeRewards().then((res) => {
-      res = res.filter((data: any) => (data.month > timeScore));
-      if (res[0] == null) {
-        setTimePrize([])
-      }
-      else {
-        setTimePrize(res[0])
-      }
+  const getNextTimeReward = async () => {
+    getTimeRewards().then(async (res) => {
+      const timeLevels = await getTimeLevel()
+      let tempRewards: any;
+      tempRewards = res.filter((data: any) => (data.month >= timeLevels[timeIndex]?.minimum && data.month < timeLevels[timeIndex].maximum));
+      setTimePrize(tempRewards[0]);
     })
   }
 
   useEffect(() => {
     getNextReward();
-    getNextTimeReward()
   }, [])
+
+  useEffect(() => {
+    if (timeLevel) {
+      getNextTimeReward()
+    }
+  }, [timeLevel])
 
   return (
     <RewardContain>
@@ -136,7 +139,7 @@ const NextReward = ({ score, barProgress, level, max, timeScore, timeProgress, t
         <>
           <Pointbox>
             <Currentlvl>
-              {timeLevel - 1}
+              {timeLevel}
             </Currentlvl>
             <CompleteBar>
               <ProgressBar2 barProgress={timeProgress}>
@@ -149,7 +152,7 @@ const NextReward = ({ score, barProgress, level, max, timeScore, timeProgress, t
               </ProgressBar2>
             </CompleteBar>
             <Nextlvl>
-              {timeLevel}
+              {timeLevel + 1}
             </Nextlvl>
           </Pointbox>
           <RewardData>

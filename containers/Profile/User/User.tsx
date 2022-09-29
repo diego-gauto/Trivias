@@ -109,11 +109,22 @@ const User = () => {
   }
 
   const getCurrentTimeLevel = () => {
-
-    getTimeLevel().then((res) => {
-      res = res.filter((data: any, index: any) => data.minimum <= timeScore);
-      setTimeLevel(res[0])
-      setCurrentTimeLevel(res.length)
+    getTimeLevel().then(async (res) => {
+      await Promise.all(res.map(async (element: any) => {
+        element.minMonth = element.minimum * 30;
+        element.maxMonth = element.maximum * 30;
+      }))
+      let tempIndex = 0;
+      let tempLevels: any = [];
+      tempLevels = res.filter((data: any, index: any) => timeScore >= data.minMonth && timeScore < data.maxMonth);
+      if (tempLevels.length > 0) {
+        tempIndex = res.findIndex((x: any) =>
+          x.id == tempLevels[0]?.id)
+        tempLevels[0].level = tempIndex + 1;
+        tempLevels[0].index = tempIndex;
+        setTimeLevel(tempLevels[0]);
+        setCurrentTimeLevel(res.length)
+      }
     })
   }
 
@@ -140,7 +151,7 @@ const User = () => {
   useEffect(() => {
     if (userData != null && level != null && timeLevel != null) {
       setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
-      setTimeProgress(((timeScore - timeLevel.minimum) / (timeLevel.maximum - timeLevel.minimum)) * 100)
+      setTimeProgress(((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 100)
       setLoading(false);
     }
   }, [level, timeLevel]);
@@ -181,8 +192,8 @@ const User = () => {
 
             timeScore={timeScore}
             timeProgress={timeProgress}
-            timeLevel={currentTimeLevel}
-            timeMax={timeLevel.maximum}
+            timeLevel={timeLevel.level}
+            timeIndex={timeLevel.index}
           />
           <ThirdBox>
             {/* Third Container */}
