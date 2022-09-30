@@ -33,6 +33,7 @@ import {
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signInWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const formSchema = yup.object().shape({
   email: yup
@@ -139,11 +140,9 @@ const Login = () => {
                         className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                         {...register("password")}
                       />
-
                       <div
-                        onPointerUp={togglePassword_1}
-                        onPointerDown={togglePassword_1}
-                      ><EyeIcon ></EyeIcon></div>
+                        onClick={togglePassword_1}
+                      >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                     </div>
                     <div className="invalid-feedback">
                       {errors.password?.message}
