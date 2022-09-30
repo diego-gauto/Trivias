@@ -7,7 +7,7 @@ export const PurpleButton = (props: IPurpleButtonProps) => {
   const { text, onClick } = props;
 
   return (
-    <PurpleButtonContainer>
+    <PurpleButtonContainer onClick={onClick}>
       {text}
     </PurpleButtonContainer>
   )
