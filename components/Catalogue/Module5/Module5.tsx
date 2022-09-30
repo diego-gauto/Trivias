@@ -24,11 +24,18 @@ import {
   TextContent,
   Title,
 } from "./Module5.styled";
+import Modal1 from "../Module4/Modal/Modal1";
 
 const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [course_1, setCourse] = useState<any>({});
+
+  const handleShow = () => {
+    setShow(true);
+  }
 
   useEffect(() => {
     if (course) {
@@ -97,7 +104,10 @@ const Module5 = ({ user, course }: any) => {
             {courses.map((course: any, index: any) => {
               return (
                 < >
-                  {< Cardcontent2 >
+                  {< Cardcontent2 onClick={() => {
+                    handleShow();
+                    setCourse(course);
+                  }}>
                     <ImageContent>
                       <CardImage
                         src={course.coursePath}
@@ -124,10 +134,10 @@ const Module5 = ({ user, course }: any) => {
                           {course.courseAbout}...
                         </Text3>
                       </TextContain>
-                      {(user && user.membership.finalDate > today) && <Viewpay onClick={() => { goTo(course) }}>
+                      {(user && user.membership.finalDate > today) && <Viewpay onClick={(e) => { e.stopPropagation(); goTo(course); }}>
                         Ver curso
                       </Viewpay>}
-                      {(!user || user.membership.finalDate < today) && <Viewpay onClick={() => { goTo(course) }}>
+                      {(!user || user.membership.finalDate < today) && <Viewpay onClick={(e) => { e.stopPropagation(); goTo(course); }}>
                         Comprar Gonvar+
                       </Viewpay>}
                     </VideoInfo>
@@ -150,6 +160,7 @@ const Module5 = ({ user, course }: any) => {
           </Link>}
         </ButtonContain>}
       </Content>
+      <Modal1 show={show} setShow={setShow} course={course_1} user={user} />
     </MainContainer >
   )
 }
