@@ -41,6 +41,10 @@ import {
 import SelectModule4 from "./SelectModule4";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
+
+  console.log(course);
+
+
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([])
 
