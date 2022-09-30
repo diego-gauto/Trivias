@@ -55,12 +55,16 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   }
 
   const handleViewed = () => {
-    if (("progress" in course.seasons[season].lessons[lesson])) {
-      let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-      if (index == -1) {
-        return 0
+    if (user) {
+      if (("progress" in course.seasons[season].lessons[lesson])) {
+        let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
+        if (index == -1) {
+          return 0
+        } else {
+          return course.seasons[season].lessons[lesson].progress[index].seconds
+        }
       } else {
-        return course.seasons[season].lessons[lesson].progress[index].seconds
+        return 0
       }
     } else {
       return 0
