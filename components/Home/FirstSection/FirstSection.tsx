@@ -22,6 +22,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
   const router = useRouter();
 
   const responsiveXl = useMediaQuery({ query: "(min-width: 991px) and (max-width: 1200px)" });
+  const responsiveHeight700 = useMediaQuery({ query: "(max-height: 772px)" });
   const responsive991 = useMediaQuery({ query: "(max-width: 991px)" });
 
   const scrollToModule2 = () => {
@@ -52,7 +53,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
               <Image src={Img1.src} onClick={() => router.push("/Preview")} />
             </Col>
           </Row>
-          {!responsiveXl && <Row className="features mt-5">
+          {!responsiveXl && !responsiveHeight700 && <Row className="features mt-5">
             <Col xs={6} sm={6} md={6} lg={6} xl={4} className="text-center">
               <Feature title={data.primerCaracteristica} image={Img2.src} />
             </Col>

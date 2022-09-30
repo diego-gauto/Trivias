@@ -1,10 +1,13 @@
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
+import React, { useRef } from "react";
+
+import { Container } from "react-bootstrap";
+
+import SwiperCore, { Autoplay } from "swiper";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import { IModule4_Carousel } from "./IModule4_Carousel";
 import { SlideModule } from "./SlideModule/SlideModule";
-import React, { useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay } from "swiper";
-import 'swiper/css';
 
 SwiperCore.use([Autoplay]);
 
@@ -53,7 +56,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   return (
     <Container
       fluid
-      style={{ overflow: "hidden", padding: 0 }}
+      style={{ overflow: "hidden", padding: 1 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
