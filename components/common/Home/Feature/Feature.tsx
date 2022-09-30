@@ -1,7 +1,3 @@
-
-
-
-
 import { Navbar } from "react-bootstrap";
 
 import { IFeatureProps } from "./IFeatureProps";
@@ -11,7 +7,7 @@ export const Feature = (props: IFeatureProps) => {
   return (
     <Navbar.Brand className="justify-content-center">
       <img
-        alt=""
+        alt="icono"
         src={image}
         className="d-inline-block align-top "
       />

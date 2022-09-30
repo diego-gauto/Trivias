@@ -40,16 +40,8 @@ import styled from "styled-components";
     }
   }
   @media only screen and (max-width: 768px) {
-    .left-side {
-      // margin-left: 20px;
-    }
     h1 {
       font-size: 40px;
-    }
-  }
-  @media only screen and (max-width: 576px) {
-    .left-side {
-      // margin-left: 40px;
     }
   }
  `;
@@ -87,14 +79,14 @@ export const BlurDiv = styled.div  `
 `;
 
 export const ArrowDownContainer = styled.div`
-@keyframes bounce {
-   0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-   40% {transform: translateY(-2.5px);} 
-   60% {transform: translateY(-2.5px);} 
-}
-animation: bounce 1.75s infinite;
-cursor: pointer;
-@media only screen and (max-width: 1024px) {
-  margin-top: 20px;
-}
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+    40% {transform: translateY(-2.5px);} 
+    60% {transform: translateY(-2.5px);} 
+  }
+  animation: bounce 1.75s infinite;
+  cursor: pointer;
+  @media only screen and (max-width: 1024px) {
+    margin-top: 20px;
+  }
 `;
