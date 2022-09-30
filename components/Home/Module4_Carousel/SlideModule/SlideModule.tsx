@@ -23,7 +23,7 @@ export const SlideModule = (props: ISlideModule) => {
 
 
   return (
-    <Container>
+    <Container className="mt-4">
       <Col>
         <Row>
           <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
