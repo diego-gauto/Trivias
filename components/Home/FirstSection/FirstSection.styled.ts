@@ -44,6 +44,12 @@ import styled from "styled-components";
       font-size: 40px;
     }
   }
+  @media only screen and (max-width: 576px) {
+    .button-group .col-12:nth-child(2) {
+      margin-top: 20px;
+      margin-left: 10px;
+    }
+  }
  `;
 
 export const BlurDiv = styled.div  `
@@ -57,7 +63,7 @@ export const BlurDiv = styled.div  `
   left: 0;
   @media only screen and (max-width: 1200px) {
     width: 48%;
-    height: 85%;
+    height: 90%;
   }
   @media only screen and (max-width: 991px) {
     width: 90%;
