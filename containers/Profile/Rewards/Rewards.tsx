@@ -138,6 +138,21 @@ const Rewards = () => {
         setTimeData(346 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 346));
         setTimeDataResp(289 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 289));
       } else {
+        tempLevels = res.filter((data: any, index: any) => timeScore > data.maxMonth);
+        const lastItem: any = [...tempLevels].pop();
+        tempIndex = res.findIndex((x: any) =>
+          x.id == lastItem?.id);
+        if (lastItem) {
+          lastItem.level = tempIndex + 1;
+          lastItem.index = tempIndex;
+          setTimeLevel(lastItem);
+          setTimeData(346 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 346));
+          setTimeDataResp(289 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 289));
+        }
+      }
+      if (res[0].minMonth > timeScore) {
+        tempLevels.level = 0;
+        setTimeLevel(tempLevels);
         setTimeData(0);
         setTimeDataResp(0);
       }
