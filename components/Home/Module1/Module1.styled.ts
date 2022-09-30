@@ -22,10 +22,10 @@ left: 50%;
 transform: translateX(-50%);
 cursor: pointer;
 @media only screen and (max-width: 1024px) {
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  bottom: -5px;
+  bottom: 15vh;
+}
+@media only screen and (max-width: 768px) {
+  bottom: 13.5vh;
 }
 `;
 export const ArrowDownIcon = styled.svg `
@@ -234,10 +234,6 @@ color: #FFFFFF;
 
 span {
   font-weight: 700;
-}
-
-@media only screen and (max-width: 1024px) {
-display: none;
 }
 `;
 export const SectionA_02Text02 = styled.span  `

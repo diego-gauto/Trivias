@@ -11,7 +11,7 @@ max-width:100%;
 @media only screen and (max-width: 1024px) {
   height: 100% !important;
 }
-@media only screen and (min-height: 600px) {
+@media only screen and (min-height: 600px) and (max-width: 600px) {
   height: 130% !important;
 }
 `
