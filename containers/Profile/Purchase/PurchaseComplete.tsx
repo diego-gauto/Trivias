@@ -32,18 +32,15 @@ const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
           }
         </PurchaseTitle>
         <CourseName>
-          {data.type}: {data.title}
+          {data.type == 'course' ? `Curso: ${data.title}` : `${data.type} ${data.title}`}
         </CourseName>
         <CardContain style={{ display: "flex" }}>
           <Card>
             <ImageContain>
               <CourseImage src="/images/Lukedemo.png" width={600} height={250} />
-              {data.lessons == 1 ? <NumberLesson>
-                {data.lessons} Lección
-              </NumberLesson> :
-                <NumberLesson>
-                  {data.lessons} Lecciones
-                </NumberLesson>}
+              {data.type == "course" && <NumberLesson>
+                {data.lessons == 0 ? `${data.lessons} Lección` : `${data.lessons} Lecciones`}
+              </NumberLesson>}
             </ImageContain>
             <CourseText>
               <TitleCourse>
