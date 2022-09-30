@@ -5,6 +5,7 @@ export interface IHeroSectionProps {
 export interface HeroData {
   tituloInicial: string;
   parrafoInicial: string;
+  parrafoFinal?: string;
   botonPrimario: string;
   botonSecundario: string;
   primerCaracteristica: string;
