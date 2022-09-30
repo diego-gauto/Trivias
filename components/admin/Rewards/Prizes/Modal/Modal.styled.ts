@@ -34,8 +34,9 @@ export const Input = styled.input`
   padding-block: 10px;
   border:1px solid #6717CD;
   border-radius: 100px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border: 2px solid #8E2DE2;
   }
 `;
 export const Input2 = styled.div`
@@ -56,8 +57,9 @@ export const Input2 = styled.div`
   label{
     color: #6717CD;
   }
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border: 2px solid #8E2DE2;
   }
 `;
 export const InputBig = styled.textarea`
@@ -72,8 +74,9 @@ export const InputBig = styled.textarea`
   border-radius: 10px;
   overflow: hidden;
   resize: none;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border: 2px solid #8E2DE2;
   }
 ::placeholder{
 }

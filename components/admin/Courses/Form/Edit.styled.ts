@@ -115,8 +115,9 @@ export const Input = styled.input`
   padding-block: 10px;
   border:1px solid #6717CD;
   border-radius:20px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border: 2px solid #8E2DE2;
   }
 `;
 export const InputSelect = styled.input`
@@ -144,8 +145,9 @@ export const InputBig = styled.textarea`
   border-radius: 10px;
   overflow: hidden;
   resize: none;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border: 2px solid #8E2DE2;
   }
 `;
 
