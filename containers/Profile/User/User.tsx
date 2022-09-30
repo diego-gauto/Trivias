@@ -124,6 +124,21 @@ const User = () => {
         tempLevels[0].index = tempIndex;
         setTimeLevel(tempLevels[0]);
         setCurrentTimeLevel(res.length)
+      } else {
+        tempLevels = res.filter((data: any, index: any) => timeScore > data.maxMonth);
+        const lastItem: any = [...tempLevels].pop();
+        tempIndex = res.findIndex((x: any) =>
+          x.id == lastItem?.id);
+        if (lastItem) {
+          lastItem.level = tempIndex + 1;
+          lastItem.index = tempIndex;
+          setTimeLevel(lastItem);
+        }
+      }
+
+      if (res[0].minMonth > timeScore) {
+        tempLevels.level = 0;
+        setTimeLevel(tempLevels)
       }
     })
   }
@@ -192,7 +207,7 @@ const User = () => {
 
             timeScore={timeScore}
             timeProgress={timeProgress}
-            timeLevel={timeLevel.level}
+            timeLevel={timeLevel?.level}
             timeIndex={timeLevel.index}
           />
           <ThirdBox>

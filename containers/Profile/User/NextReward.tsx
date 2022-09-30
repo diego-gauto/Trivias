@@ -155,7 +155,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
               {timeLevel + 1}
             </Nextlvl>
           </Pointbox>
-          <RewardData>
+          {timeLevel > 0 ? <RewardData>
             <ImageContain>
               <RewardImage src={timePrize.path} />
             </ImageContain>
@@ -172,7 +172,8 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                 {timePrize.about}
               </RewardParagraph>
             </RewardInfo>
-          </RewardData>
+          </RewardData> :
+            <p>No hay premios en este nivel...</p>}
         </>
       }
 
