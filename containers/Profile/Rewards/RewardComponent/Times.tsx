@@ -10,9 +10,6 @@ import {
 } from "./Times.styled";
 
 const Times = ({ rewards, score, level, currentLevel, levels }: any) => {
-
-  console.log(level);
-
   return (
 
     <>
