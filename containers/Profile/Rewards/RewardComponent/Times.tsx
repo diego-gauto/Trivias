@@ -10,29 +10,27 @@ import {
 } from "./Times.styled";
 
 const Times = ({ rewards, score, level, currentLevel, levels }: any) => {
-
-
   return (
 
     <>
       {
         levels.map((val: any, i: any) => {
           return (
-            <LevelContainer key={"levels" + i} i={i} level={currentLevel}>
+            <LevelContainer key={"levels" + i} i={i} level={currentLevel} size={levels.length - 1}>
+              <ContainLevel>
+                <Circle val={i} level={level.index} />
+                <LevelText val={i} level={level.index}>
+                  Nivel {i + 1} <br /> {val.minimum} {i == 0 ? "mes" : "meses"}
+                </LevelText>
+              </ContainLevel>
               <Divisor
                 min={val.minimum}
                 i={i}
                 size={levels.length - 1}
-                level={level.minimum}
+                level={level.index}
                 score={score}
                 max={val.maximum}
               />
-              <ContainLevel>
-                <Circle val={val.minimum} level={level.minimum} />
-                <LevelText val={val.minimum} level={level.minimum}>
-                  Nivel {i + 1} <br /> {val.maximum} {i == 0 ? "día" : "días"}
-                </LevelText>
-              </ContainLevel>
             </LevelContainer>
           )
         })

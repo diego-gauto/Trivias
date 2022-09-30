@@ -104,7 +104,7 @@ export const RewardModal = (props: IRewardModalProps) => {
 
   const getRewardButtonCopy = () => {
     if (isTimeReward) {
-      if (reward.month <= score) {
+      if (reward.month * 30 < score) {
         if (reward.status === false && userReward.status == false) {
           return <Button className="claim-btn" onClick={() => {
             sendTimeRequest();

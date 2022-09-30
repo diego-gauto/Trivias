@@ -57,7 +57,7 @@ export const Band = styled.i`
   left: -4px;
 `;
 export const Overlay2 = styled.div<{points:any,score:any}>`
-${props=> props.points > props.score && css`
+${props=> props.points*30 > props.score && css`
   position: absolute;
   display: flex;
   width: 100%;

@@ -37,10 +37,9 @@ const EditTimeLevel = ({ show, setShow, levels }: any) => {
       alert("Verifique que el minimo o maximo no exista")
     }
     else {
-      addLevelTime(level)
-      router.push({
-        pathname: `/admin/Rewards`
-      });
+      addLevelTime(level).then(() => {
+        window.location.reload()
+      })
     }
   }
 

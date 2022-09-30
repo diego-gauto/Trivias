@@ -60,8 +60,8 @@ const Time = ({ setPlace }: any) => {
                         Nivel {i + 1}
                         <br />
                         <label>
-                          {val.maximum}
-                          {val.maximum == 1 ? " mes" : " meses"}
+                          {val.minimum}
+                          {val.minimum == 1 ? " mes" : " meses"}
                         </label>
                       </Level>
                     </LevelContain>

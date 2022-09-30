@@ -45,8 +45,9 @@ export const EditInput = styled.input`
   padding-inline: 20px;
   border:1px solid #6717CD;
   border-radius:20px;
+  outline: none;
   :focus{
-    outline: 1px solid #8E2DE2;
+    border: 2px solid #8E2DE2;
   }
 `;
 export const EditInput2 = styled.textarea`
@@ -59,9 +60,10 @@ font-family:'Montserrat',sans-serif;
 padding: 15px;
 border:1px solid #6717CD;
 border-radius:20px;
-:focus{
-  outline: 1px solid #8E2DE2;
-}
+outline: none;
+  :focus{
+    border: 2px solid #8E2DE2;
+  }
 `;
 export const EditText = styled.label`
   font-size: 14px;

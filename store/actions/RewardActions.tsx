@@ -42,7 +42,7 @@ export const getLevels = async () => {
 }
 // CONSEGUIR EL NIVEL ACTUAL POR TIEMPO
 export const getTimeLevel = async () => {
-  const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum", "desc"))
+  const levelsRef = query(collection(db, "levelTimes"), orderBy("minimum", "asc"))
   let temp_levels: any = [];
   const data = await getDocs(levelsRef);
   data.forEach((level) => {
