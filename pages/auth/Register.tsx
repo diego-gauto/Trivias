@@ -36,6 +36,7 @@ import {
   TextInput_2,
   Title,
 } from "../../screens/Login.styled";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { accessWithAuthProvider, signUpWithCreds } from "../../store/actions/AuthActions";
 
 const formSchema = yup.object().shape({
@@ -184,9 +185,8 @@ const Register = () => {
                     />
 
                     <div
-                      onMouseDown={togglePassword_1}
-                      onMouseUp={togglePassword_1}
-                    ><EyeIcon ></EyeIcon></div>
+                      onClick={togglePassword_1}
+                    >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                   </div>
                   <div className="invalid-feedback">
                     {errors.password?.message}
@@ -207,9 +207,8 @@ const Register = () => {
                       {...register("confirmPassword")}
                     />
                     <div
-                      onMouseDown={togglePassword_2}
-                      onMouseUp={togglePassword_2}
-                    ><EyeIcon ></EyeIcon></div>
+                      onClick={togglePassword_2}
+                    >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                   </div>
 
                   <div className="invalid-feedback">

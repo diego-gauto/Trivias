@@ -181,6 +181,12 @@ export const Box2 = styled.div`
 `;
 export const PasswordBox = styled.div`
   position:relative;
+  svg{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   @media (max-width: 670px) {
     width: 100%;
     max-width: 320px;

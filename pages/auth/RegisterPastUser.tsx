@@ -39,6 +39,7 @@ import {
 import { signUpWithCreds } from "../../store/actions/AuthActions";
 import { IMembership } from "../../store/types/AuthActionTypes";
 import { IStripeUserData } from "../../interfaces/IStripeUserData";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -162,11 +163,8 @@ const RegisterPastUser = () => {
                   {...register("password")}
                 />
                 <div
-                  onMouseDown={() => setShowPassword(!showPassword)}
-                  onMouseUp={() => setShowPassword(!showPassword)}
-                >
-                  <EyeIcon />
-                </div>
+                  onClick={() => { setShowPassword(!showPassword) }}
+                >{showPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
               </div>
               <div className="invalid-feedback" style={{ display: "block" }}>
                 {errors.password?.message}
@@ -186,11 +184,8 @@ const RegisterPastUser = () => {
                   {...register("confirmPassword")}
                 />
                 <div
-                  onMouseDown={() => setShowConfirmPassword(!showConfirmPassword)}
-                  onMouseUp={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  <EyeIcon />
-                </div>
+                  onClick={() => { setShowConfirmPassword(!showConfirmPassword) }}
+                >{showConfirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
               </div>
               <div className="invalid-feedback" style={{ display: "block" }}>
                 {errors.confirmPassword?.message}
