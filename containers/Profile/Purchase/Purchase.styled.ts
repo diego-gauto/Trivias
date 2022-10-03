@@ -500,6 +500,7 @@ export const Card = styled.div`
 `;
 export const ImageContain = styled.div`
   display: flex;
+  align-self: center;
   position: relative;
 `;
 export const NumberLesson = styled.div`

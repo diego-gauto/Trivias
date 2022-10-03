@@ -140,7 +140,7 @@ const Login = () => {
                         className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                         {...register("password")}
                       />
-                      <div
+                      <div style={{ 'cursor': 'pointer' }}
                         onClick={togglePassword_1}
                       >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                     </div>

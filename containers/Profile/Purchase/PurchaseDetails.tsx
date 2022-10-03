@@ -6,6 +6,7 @@ const PurchaseDetails = ({ data, type }: any) => {
     price: 149.00,
     title: 'Gonvar Plus',
   }
+  console.log(data);
 
   return (
     <PurchaseContainer>
@@ -60,6 +61,9 @@ const PurchaseDetails = ({ data, type }: any) => {
               $ {subscription.price}.00
             </CourseCost>
           </CourseName>
+          <ImageContain>
+            <CourseImage src="/images/Preview/HeroImage" width={600} height={250} />
+          </ImageContain>
           <CourseInfo>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis tellus fames velit at eget ut lacinia. Bibendum cras enim mus fermentum malesuada tincidunt vivamus. Ipsum est urna elit pharetra sed amet, rhoncus sapien. Quisque sit ac nulla dui rhoncus nisi, a ac. Posuere vulputate nunc nulla ut in. Magna pretium vulputate id quam.
             <br />

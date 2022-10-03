@@ -15,9 +15,7 @@ export const InsideContent = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
-  @media( max-width: 1023px){
-    display: none;
-  }
+  display: none;
 `;
 export const InsideText = styled.p`
   opacity:.8;
