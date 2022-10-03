@@ -76,6 +76,7 @@ export const signUpWithCreds = (
                 exp_month: pm.card?.exp_month,
                 exp_year: pm.card?.exp_year,
                 last4: pm.card?.last4,
+                holder: credentials.name,
               }
               newUserPaymentMethodsCollection.add(pm_data);
             }));
