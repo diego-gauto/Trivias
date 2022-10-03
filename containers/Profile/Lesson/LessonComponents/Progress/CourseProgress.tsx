@@ -22,7 +22,7 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
   return (
     <MainContainer>
       <TitleCourse>
-        Cursos de {title}
+        {title}
       </TitleCourse>
       <Subtitle>
         Temporada {parseInt(season) + 1}: Episodio {parseInt(lesson) + 1}

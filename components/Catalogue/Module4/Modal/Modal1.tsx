@@ -107,11 +107,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               </Cross>
               <TextContainer>
                 <Title>
-                  Curso de {course.courseTittle}
+                  {course.courseTittle}
                 </Title>
-                <SubTitle>
-                  Descubre un nuevo método para tus uñas este San Valentín
-                </SubTitle>
                 <ButtonContain>
                   {course.courseType == 'Producto' ? <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
@@ -119,10 +116,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <PurpleButton onClick={goTo}>
                       Ver curso
                     </PurpleButton>}
-                  <TransparentButton>
+                  {/* <TransparentButton>
                     Ver un Adelanto
                     <PlayIcon />
-                  </TransparentButton>
+                  </TransparentButton> */}
                 </ButtonContain>
               </TextContainer>
             </Container>
@@ -184,7 +181,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   </ContainVideo>
                   <EpisodeInfo>
                     <EpisodeTitle>
-                      Epidosio {index + 1}: {lesson.title}
+                      {index + 1}: {lesson.title}
                     </EpisodeTitle>
                     <EpisodeTime>
                       24 minutos

@@ -49,14 +49,14 @@ const About = ({ value, setValue, data }: any) => {
         </UnSelected>
       </IconContain>
       <AboutContain>
-        <CircleContain>
-          <NumberText>
+        {data.points > 0 && <CircleContain>
+          {<NumberText>
             +{data.points}
-          </NumberText>
+          </NumberText>}
           <PointText>
             Puntos al <br /> finalizar
           </PointText>
-        </CircleContain>
+        </CircleContain>}
         <TextContainer>
           <LessonTitle>
             Sobre la lección

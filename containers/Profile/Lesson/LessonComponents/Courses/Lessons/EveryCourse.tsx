@@ -59,9 +59,9 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
             5 minutos
             {less.extra.length > 0 && <DocIcon></DocIcon>}
           </CourseLength>
-          <CoursePoints>
+          {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>
+          </CoursePoints>}
         </DetailContain>
       </Details>)
     }
@@ -95,9 +95,9 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
             5 minutos
             {less.extra.length > 0 && <DocIcon></DocIcon>}
           </CourseLength>
-          <CoursePoints>
+          {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>
+          </CoursePoints>}
         </DetailContain>
       </Details>)
     }
@@ -112,9 +112,9 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
           5 minutos
           {less.extra.length > 0 && <DocIcon></DocIcon>}
         </CourseLength>
-        <CoursePoints>
+        {less.points > 0 && <CoursePoints>
           +{less.points} puntos
-        </CoursePoints>
+        </CoursePoints>}
       </DetailContain>
     </Details>)
   }

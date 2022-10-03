@@ -76,7 +76,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
       <VideoContain>
         <TitleContain>
           <Title>
-            Bienvenida y presentación del curso {title}
+            {title}
           </Title>
           <MenuIcon onClick={() => { setMenu(!menu) }} />
         </TitleContain>
