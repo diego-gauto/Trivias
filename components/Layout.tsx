@@ -23,7 +23,7 @@ const Layout = ({ children }: any) => {
     <>
       {!isLoading ? (
         <>
-          <Body>
+          <Body style={{ overflowX: "hidden" }}>
             <NavBar />
             <ChildrenContain>
               {children}

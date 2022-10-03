@@ -143,7 +143,7 @@ const NavBar = () => {
         </NavText>
         {
           (loggedIn && isAdmin) &&
-          <Link href="/admin/General">
+          <Link href="/admin/Courses">
             <NavText pathname={pathname} color={color}
               style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: '' }}
             >
@@ -183,7 +183,7 @@ const NavBar = () => {
           <>
             <Link href={LOGIN_PATH}>
               <NavText pathname={pathname} color={color}
-                style={pathname == "/auth/Login" || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600 } : { fontWeight: '' }}
+                style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600 } : { fontWeight: '' }}
               >
                 Iniciar Sesión
               </NavText>

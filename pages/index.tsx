@@ -61,8 +61,7 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      {<FirstSectionContainer />}
-      {/* TODO: Remove component after PO's validation:  <Module1 heroSectionData={landingData.heroSectionData} /> */}
+      <FirstSectionContainer />
       <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
@@ -74,30 +73,6 @@ const Homepage = () => {
         })
       } />
       {/* Nails Master Module Card */}
-
-      {/* SEP Module Card */}
-      {/* <CourseModuleContainer courseId="trY3l4ytjrNbCXXnTBew" /> */}
-
-      {/* Dry's Manicure Module Card */}
-
-      {/* Experts Escultural Module Card */}
-
-      {/* <ImageContainMod1>
-        <VideoContainMod3>
-          <ReactPlayer
-            className='absolute'
-            url={courseData.lessons[0].link}
-            playing={true}
-            muted={true}
-            width={responsive380 ? '100%' : '100%' &&
-              responsive520 ? '100%' : '100%' &&
-                responsive1023 ? '100%' : '100%'}
-            height='180%'
-            style={{ position: "absolute", top: responsive1023 ? "22px" : "-170px", }}
-          />
-        </VideoContainMod3>
-      </ImageContainMod1> */}
-
       <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} />
 
       <Module4_Carousel isInfinite={true} slideData={
@@ -110,6 +85,12 @@ const Homepage = () => {
           { isNew: true, title: "Uñas creativas 3 B", subtitle: "13 Lecciones", imgURL: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/DevAssets%2FSlideCarousel%2FSet2%2F6.png?alt=media&token=6f3b04b9-67d7-4390-a9f8-bd0381664c5b" },
         ]
       } />
+      {/* SEP Module Card */}
+      {/* <CourseModuleContainer courseId="trY3l4ytjrNbCXXnTBew" /> */}
+
+      {/* Dry's Manicure Module Card */}
+
+      {/* Experts Escultural Module Card */}
 
       <CourseModuleContainer courseId={SEP_COURSE_ID} />
 

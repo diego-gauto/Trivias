@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, onSnapshot, query, DocumentData } from "firebase/firestore";
-
-import { db } from "../../../firebase/firebaseConfig";
-import { Title } from "../General/General.styled";
+import { getWholeCourses } from "../../../store/actions/courseActions";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import { AllCourses } from "./AllCourses";
 import { CourseFormContain } from "./CourseMain.styled";
 import CourseForm_Create from "./Form/CourseForm_Create";
-import { getWholeCourses } from "../../../store/actions/courseActions";
 
 const CourseMain = () => {
-
-
   const [courses, setCourses] = useState<any>(null);
 
   const fetchDB_data = () => {

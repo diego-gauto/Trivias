@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
 import { InsideContent, InsideText, Text1, Text2, Text3 } from "../Module3/Module3.styled";
+import Modal1 from "../Module4/Modal/Modal1";
 import { CardImage, VideoInfo, Viewpay } from "../Module4/Module4.styled";
 import {
   Banner2,
@@ -24,7 +25,6 @@ import {
   TextContent,
   Title,
 } from "./Module5.styled";
-import Modal1 from "../Module4/Modal/Modal1";
 
 const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -75,7 +75,7 @@ const Module5 = ({ user, course }: any) => {
     <MainContainer>
       <ImageContain>
         <Banner2
-          src="/images/Preview/fondo2.png"
+          src="/images/Preview/HeroImage"
           layout='fill'
         />
       </ImageContain>
