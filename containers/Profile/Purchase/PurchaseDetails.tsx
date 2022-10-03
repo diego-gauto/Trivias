@@ -54,6 +54,9 @@ const PurchaseDetails = ({ data, type }: any) => {
         <>
           <ContainTitle>
             Detalles de la compra
+            <CourseCostResp>
+              $ {data.price}.00
+            </CourseCostResp>
           </ContainTitle>
           <CourseName>
             Subscripción {subscription.title}
@@ -62,13 +65,10 @@ const PurchaseDetails = ({ data, type }: any) => {
             </CourseCost>
           </CourseName>
           <ImageContain>
-            <CourseImage src="/images/Preview/HeroImage" width={600} height={250} />
+            <CourseImage src="/images/Preview/HeroImage" width={600} height={250} style={{ borderRadius: '10px' }} />
           </ImageContain>
           <CourseInfo>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis tellus fames velit at eget ut lacinia. Bibendum cras enim mus fermentum malesuada tincidunt vivamus. Ipsum est urna elit pharetra sed amet, rhoncus sapien. Quisque sit ac nulla dui rhoncus nisi, a ac. Posuere vulputate nunc nulla ut in. Magna pretium vulputate id quam.
-            <br />
-            <br />
-            Sapien purus interdum nisi, egestas scelerisque. Nascetur mattis viverra vitae, tempor. In diam, risus cras feugiat est suspendisse nisl eu, fringilla.
+            Ahora puedes aprender decenas de cursos y clases de uñas por $149/mes. Al suscribirte podrás aprender desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: Mano alzada, Stamping, uñas exprés, 3D y más.
           </CourseInfo>
         </>
       }
