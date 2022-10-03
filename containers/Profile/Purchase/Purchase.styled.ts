@@ -520,7 +520,7 @@ export const CourseText = styled.div`
   flex-direction:column;
   padding: 20px;
 `;
-export const CourseImage = styled(Image)`
+export const CourseImage = styled.img`
   border-radius: 10px 10px 0 0;
 `;
 export const TitleCourse = styled.p`

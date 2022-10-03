@@ -5,7 +5,6 @@ const PurchaseDetails = ({ data, type }: any) => {
   const subscription = {
     price: 149.00,
     title: 'Gonvar Plus',
-
   }
 
   return (
@@ -27,14 +26,14 @@ const PurchaseDetails = ({ data, type }: any) => {
           <CardContain>
             <Card>
               <ImageContain>
-                <CourseImage src="/images/Lukedemo.png" width={600} height={250} />
+                <CourseImage src={data.img} width={600} height={250} />
                 <NumberLesson>
-                  24 Lecciones
+                  {data.lessons > 0 ? `${data.lessons} Lecciones` : `${data.lessons} Lección`}
                 </NumberLesson>
               </ImageContain>
               <CourseText>
                 <TitleCourse>
-                  Curso : {data.title}
+                  {data.title}
                 </TitleCourse>
                 {/* <Subtitle>
                   {data.category}
