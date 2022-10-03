@@ -183,7 +183,7 @@ const NavBar = () => {
           <>
             <Link href={LOGIN_PATH}>
               <NavText pathname={pathname} color={color}
-                style={pathname == "/auth/Login" || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600 } : { fontWeight: '' }}
+                style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600 } : { fontWeight: '' }}
               >
                 Iniciar Sesión
               </NavText>

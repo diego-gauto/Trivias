@@ -46,11 +46,13 @@ export const FirstSection = (props: IFirstSectionProps) => {
           </div>}
           <Row className="button-group">
             <Col xs={12} sm={6} md={6} lg={7}>
-              <PurpleButton text={data.botonPrimario} />
+              <PurpleButton text={data.botonPrimario} onClick={() => router.push("/auth/Register")} />
             </Col>
             <Col xs={12} sm={6} md={6} lg={5} >
-              {data.botonSecundario}
-              <Image src={Img1.src} onClick={() => router.push("/Preview")} />
+              <a onClick={() => router.push("/Preview")}>
+                {data.botonSecundario}
+                <Image src={Img1.src} />
+              </a>
             </Col>
           </Row>
           {!responsiveXl && !responsiveHeight700 && <Row className="features mt-5">

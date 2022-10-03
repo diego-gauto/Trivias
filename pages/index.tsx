@@ -61,7 +61,7 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      {<FirstSectionContainer />}
+      <FirstSectionContainer />
       <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
