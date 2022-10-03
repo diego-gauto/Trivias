@@ -4,6 +4,9 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 
+import { useRouter } from "next/router";
+
+import { PREVIEW_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
@@ -14,6 +17,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
 
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
+  const router = useRouter();
 
   return (
     <CardContainer className="card-container">
@@ -39,8 +43,8 @@ export const CourseModule = (props: ICourseModuleProps) => {
             <Card.Text className="price">
               Desde ${data.coursePrice}.00
             </Card.Text>}
-          <PurpleButton text={responsive768 ? "Comprar" : "Ve un adelanto"} />
-          <WhiteButton text={responsive768 ? "Información" : "Más información"} />
+          <PurpleButton text={responsive768 ? "Comprar" : "Ve un adelanto"} onClick={() => router.push(PREVIEW_PATH)} />
+          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
         </Col>
         {responsive768 && <Card.Text className="mobile-price">
           Desde ${data.coursePrice}.00
