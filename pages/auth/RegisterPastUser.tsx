@@ -162,7 +162,7 @@ const RegisterPastUser = () => {
                   className={`form-control ${errors.password && 'is-invalid'}`}
                   {...register("password")}
                 />
-                <div
+                <div style={{ 'cursor': 'pointer' }}
                   onClick={() => { setShowPassword(!showPassword) }}
                 >{showPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
               </div>
@@ -183,7 +183,7 @@ const RegisterPastUser = () => {
                   className={`form-control ${errors.confirmPassword && 'is-invalid'}`}
                   {...register("confirmPassword")}
                 />
-                <div
+                <div style={{ 'cursor': 'pointer' }}
                   onClick={() => { setShowConfirmPassword(!showConfirmPassword) }}
                 >{showConfirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
               </div>
