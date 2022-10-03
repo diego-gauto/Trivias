@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
+import router from "next/router";
 
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import { Container, Text } from "./SideBar.styled";
-import router from "next/router";
 
 const SideBar = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
-  const [isGeneral, setIsGeneral] = useState<boolean>();
   const [isPay, setIsPay] = useState<boolean>();
   const [isCourses, setIsCourses] = useState<boolean>();
   const [isRewards, setIsRewards] = useState<boolean>();
@@ -38,7 +37,6 @@ const SideBar = () => {
               }
               adminData = e.data()
             });
-            setIsGeneral(adminData.adminType.general);
             setIsPay(adminData.adminType.pay);
             setIsCourses(adminData.adminType.courses);
             setIsRewards(adminData.adminType.rewards);
@@ -64,12 +62,9 @@ const SideBar = () => {
 
     <Container>
       {isSuperAdmin &&
-        <>
-          <Link href="/admin/General">
-            <Text>General</Text>
-          </Link><Link href="/admin/Pago">
-            <Text>Pagos</Text>
-          </Link><Link href="/admin/Courses">
+        <><Link href="/admin/Pago">
+          <Text>Pagos</Text>
+        </Link><Link href="/admin/Courses">
             <Text>Cursos</Text>
           </Link><Link href="/admin/Rewards">
             <Text>Recompensas</Text>
@@ -86,11 +81,6 @@ const SideBar = () => {
       }
       {!isSuperAdmin &&
         <>
-          {isGeneral &&
-            <Link href="/admin/General">
-              <Text>General</Text>
-            </Link>
-          }
           {isPay &&
             <Link href="/admin/Pago">
               <Text>Pagos</Text>

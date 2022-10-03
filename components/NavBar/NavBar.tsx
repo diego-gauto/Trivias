@@ -143,7 +143,7 @@ const NavBar = () => {
         </NavText>
         {
           (loggedIn && isAdmin) &&
-          <Link href="/admin/General">
+          <Link href="/admin/Courses">
             <NavText pathname={pathname} color={color}
               style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: '' }}
             >
