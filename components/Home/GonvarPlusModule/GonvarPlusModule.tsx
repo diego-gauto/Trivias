@@ -4,13 +4,16 @@ import { Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 
+import { useRouter } from "next/router";
+
+import { SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { CardContainer } from "./GonvarPlusModule.styled";
 
 export const GonvarPlusModule = () => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
-
+  const router = useRouter();
 
   return (
     <CardContainer className="card-container">
@@ -37,7 +40,7 @@ export const GonvarPlusModule = () => {
             <Card.Text className="price">
               Desde $149.00
             </Card.Text>}
-          <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} />
+          <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => router.push(SIGNUP_PATH)} />
           {/* <WhiteButton text={responsive768 ? "Información" : "Más información"} /> */}
         </Col>
         {responsive768 && <Card.Text className="mobile-price">

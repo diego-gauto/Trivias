@@ -17,13 +17,14 @@ import {
 import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
 import { FirstSectionContainer } from "../containers/Home/FirstSectionContainer/FirstSectionContainer";
 import { Background, LoaderContain, LoaderImage } from "../screens/Login.styled";
-import { getWholeCourse } from "../store/actions/courseActions";
+import { getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
   const [landingData, setLandingData] = useState<any>({});
   const [courseData, setCourseData] = useState<any>({});
+  const [courses, setCourses] = useState<any>({});
 
   const responsive380 = useMediaQuery({ query: "(max-width: 390px)" });
   const responsive520 = useMediaQuery({ query: "(max-width: 520px)" });
@@ -38,6 +39,22 @@ const Homepage = () => {
     setCourseData(courseData);
     setLoading(false);
   }
+
+  const getCourses = async () => {
+    let tempCourses: Array<any> = [];
+    getWholeCourses().then((response) => {
+      response.forEach((element: any) => {
+        if (element.totalLessons > 0) {
+          tempCourses.push(element)
+        }
+      });
+      setCourses(tempCourses);
+    })
+  }
+
+  useEffect(() => {
+    getCourses();
+  }, [])
 
   useEffect(() => {
     fetchLandingData();
@@ -65,13 +82,16 @@ const Homepage = () => {
       <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
-      <Module4_Carousel isInfinite={true} slideData={
-        courseData.lessons.map((lesson: any) => {
-          return (
-            { isNew: true, title: lesson.title, subtitle: "", imgURL: lesson.image }
-          )
-        })
-      } />
+      {courses &&
+        <Module4_Carousel isInfinite={true} slideData={
+          courses.map((course: any) => {
+            return (
+              { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath }
+            )
+          })
+        } />
+      }
+
       {/* Nails Master Module Card */}
       <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} />
 
