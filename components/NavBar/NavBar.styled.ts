@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styled, { css } from "styled-components";
 
 export const NavContainer = styled("div")<{pathname: any, color: any}>` 
@@ -271,7 +270,6 @@ export const TagsResp = styled.div`
   &:hover{
     color: black;
     text-decoration: none;
-    font-weight: 600;
   }
   &::active{
     font-weight: 600;
