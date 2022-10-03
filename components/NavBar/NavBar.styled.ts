@@ -115,6 +115,7 @@ export const UserImage = styled.i`
   height: 50px;
   cursor: pointer;
   border-radius: 50%;
+  background-size: contain;
 `;
 export const LogoS = styled.i`
   background-image: url(../images/Navbar/LogoSmall.png);
