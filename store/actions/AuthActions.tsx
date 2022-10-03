@@ -3,14 +3,13 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
-  UserCredential
 } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import Stripe from "stripe";
-import { PREVIEW, SIGNUP_PAST_USER_PATH } from "../../constants/paths";
 
+import { PREVIEW_PATH, SIGNUP_PAST_USER_PATH } from "../../constants/paths";
 import { db, functions } from "../../firebase/firebaseConfig";
 import { IMembership } from "../types/AuthActionTypes";
 
@@ -87,7 +86,7 @@ export const signUpWithCreds = (
           throw (docCreationError);
         })
       })
-      return PREVIEW;
+      return PREVIEW_PATH;
     }).catch((error: any) => {
       firebase.auth().signOut();
       console.error(error);
@@ -124,7 +123,7 @@ export const signInWithCreds = async (signUpData: { credentials: any; }) => {
   try {
     await signInWithEmailAndPassword(auth, credentials.email, credentials.password)
     localStorage.setItem("email", credentials.email);
-    return PREVIEW;
+    return PREVIEW_PATH;
   } catch (err: any) {
     firebase.auth().signOut();
     return err.code;
@@ -240,7 +239,7 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
       } else {
         console.log("Provider Auth : 3 | Was already registered")
       }
-      return PREVIEW;
+      return PREVIEW_PATH;
     }).catch((error) => {
       firebase.auth().signOut();
       console.error(error);
