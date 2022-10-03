@@ -494,6 +494,9 @@ export const Card = styled.div`
   justify-content:center;
   border-radius:10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+  @media(max-width: 1300px){
+    width: 100%;
+  }
 `;
 export const ImageContain = styled.div`
   display: flex;
@@ -522,6 +525,9 @@ export const CourseText = styled.div`
 `;
 export const CourseImage = styled.img`
   border-radius: 10px 10px 0 0;
+  @media(max-width: 1300px){
+    width: 100%;
+  }
 `;
 export const TitleCourse = styled.p`
   font-size: 24px;
