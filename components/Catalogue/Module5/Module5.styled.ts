@@ -143,7 +143,8 @@ export const Cardcontent3 = styled.div`
   }
 `;
 export const RespContain = styled.div`
-  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
   height: 430px;
   display: flex;
   @media(max-width: 1023px){
