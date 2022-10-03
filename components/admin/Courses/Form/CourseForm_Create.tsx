@@ -132,7 +132,6 @@ const CourseForm_Create = () => {
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
-        coursePublishYear: formData.coursePublishYear,
         coursePrice: formData.coursePrice * free + 0,
         courseProfessor: professor,
         courseCategory: category,

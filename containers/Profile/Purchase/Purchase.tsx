@@ -150,7 +150,7 @@ const Purchase = () => {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
     } else {
       getWholeCourse(id).then((res: any) => {
-        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons })
+        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
       })
     }
   }, [])
@@ -594,7 +594,7 @@ const Purchase = () => {
                       <PurchaseText>
                         Compra:
                         <PurchaseData style={{ color: "#6717CD" }}>
-                          {product.type}: {product.title}
+                          {product.title}
                         </PurchaseData>
                       </PurchaseText>
                       <PurchaseText>

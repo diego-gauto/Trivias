@@ -10,6 +10,7 @@ import {
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
 
 const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
+  console.log(data);
 
   return (
     <MainContainer>
@@ -37,7 +38,7 @@ const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
         <CardContain style={{ display: "flex" }}>
           <Card>
             <ImageContain>
-              <CourseImage src="/images/Lukedemo.png" width={600} height={250} />
+              <CourseImage src={data.type == "course" ? data.img : "/images/Preview/HeroImage"} width={600} height={250} />
               {data.type == "course" && <NumberLesson>
                 {data.lessons == 0 ? `${data.lessons} Lección` : `${data.lessons} Lecciones`}
               </NumberLesson>}
