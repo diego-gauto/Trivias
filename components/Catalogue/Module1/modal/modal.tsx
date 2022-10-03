@@ -102,9 +102,9 @@ const Modal = ({ show, setShow, course, user }: any) => {
                 <Title>
                   Curso de {course.courseTittle}
                 </Title>
-                <SubTitle>
+                {/* <SubTitle>
                   Descubre un nuevo método para tus uñas este San Valentín
-                </SubTitle>
+                </SubTitle> */}
                 <ButtonContain>
                   <PurpleButton onClick={goTo}>
                     Reproducir
@@ -170,7 +170,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
                   </ContainVideo>
                   <EpisodeInfo>
                     <EpisodeTitle>
-                      Epidosio {index + 1}: {lesson.title}
+                      {index + 1}: {lesson.title}
                     </EpisodeTitle>
                     <EpisodeTime>
                       24 minutos
