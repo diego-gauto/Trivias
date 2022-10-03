@@ -15,6 +15,8 @@ import { ICourseModuleProps } from "./ICourseModuleProps";
 export const CourseModule = (props: ICourseModuleProps) => {
   const { data } = props;
 
+  console.log(data)
+
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
@@ -23,7 +25,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
     <CardContainer className="card-container">
       <div className="video">
         <ReactPlayer
-          url="https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"
+          url={data.lessons.length > 0 ? data.lessons[0].link : "https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
           muted={true}
           playing={true}
           width="100%"
