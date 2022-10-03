@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "react-phone-number-input/style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,7 +18,6 @@ import {
   Background,
   Box1,
   Box2,
-  EyeIcon,
   FacebookButton,
   FacebookIcon,
   GoogleButton,
@@ -36,7 +36,6 @@ import {
   TextInput_2,
   Title,
 } from "../../screens/Login.styled";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { accessWithAuthProvider, signUpWithCreds } from "../../store/actions/AuthActions";
 
 const formSchema = yup.object().shape({
@@ -95,7 +94,7 @@ const Register = () => {
   const handleSignUpWithAuthProvider = (authProvider: string) => {
     setIsLoading(true)
     accessWithAuthProvider(authProvider, trial).then(() => {
-      window.location.href = "/Preview";
+      window.location.href = "/Purchase?type=subscription";
     });
   };
 
@@ -123,7 +122,7 @@ const Register = () => {
     };
     setIsLoading(true)
     signUpWithCreds(signUpData).then(() => {
-      window.location.href = "/Preview";
+      window.location.href = "/Purchase?type=subscription";
     });
   }
   useEffect(() => { }, [isLoading]);
