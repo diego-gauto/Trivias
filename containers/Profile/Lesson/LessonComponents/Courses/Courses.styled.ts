@@ -1,13 +1,15 @@
 import styled, { css } from "styled-components";
 
-export const MainContainer = styled.div<{open:any}>`
+export const MainContainer = styled.div<{ open: any }>`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 10px;
+  height: 100vh;
+  overflow: auto;
   position: absolute;
   right: 20px;
   width: 28%;
-  @media (max-width: 900px){
+  @media (max-width: 900px) {
     position: fixed;
     z-index: 40;
     padding: 10px;
@@ -20,10 +22,12 @@ export const MainContainer = styled.div<{open:any}>`
     transition: 1s ease all;
     height: 100%;
   }
-  ${props => props.open == true && css`
-    right:0 !important;
-    transition: 1s ease all;
-  `}
+  ${(props) =>
+    props.open == true &&
+    css`
+      right: 0 !important;
+      transition: 1s ease all;
+    `}
 `;
 export const CloseButton = styled.div`
   color: #8E2DE2;
@@ -48,17 +52,17 @@ export const Title = styled.h1`
   align-items: center;
   font-size: 18px;
   font-weight: 600;
-  font-family:'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin: 0;
 `;
 export const Episode = styled.p`
   font-size: 14px;
-  font-family:'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   cursor: pointer;
   margin: 0;
 `;
-export const UploadIcon = styled.i<{active:any}>`
+export const UploadIcon = styled.i<{ active: any }>`
   background-image: url(../images/Video/DownNarrow.png);
   height: 14px;
   width: 14px;
@@ -68,9 +72,11 @@ export const UploadIcon = styled.i<{active:any}>`
   transition: .5s ease all;
 
 }
-${props => props.active == true && css`
-transform: rotate(0deg);
-transition: .5s ease all;
+${(props) =>
+  props.active == true &&
+  css`
+    transform: rotate(0deg);
+    transition: 0.5s ease all;
   `}
 `;
 export const Divider = styled.div`
@@ -79,19 +85,25 @@ export const Divider = styled.div`
   height: 1.5px;
   background: black;
 `;
-export const CoursesContainer = styled.div<{active:boolean}>`
+export const CoursesContainer = styled.div<{ active: boolean }>`
   height: 0px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: scroll;
-  ::-webkit-scrollbar{
+  ::-webkit-scrollbar {
     display: none;
   }
   transition: 1s ease all;
-  ${props => props.active == true && css`
-    height:auto;
-    max-height:1000px;
-    transition: 1s ease all;
-  `}
+  ${(props) =>
+    props.active == true &&
+    css`
+      height: auto;
+      max-height: 3000px;
+      transition: 1s ease all;
+    `}
+  ${(props) =>
+    props.active == false &&
+    css`
+      overflow: auto;
+    `}
 `;
