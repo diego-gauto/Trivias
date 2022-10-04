@@ -4,7 +4,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
     gap: 10px;
@@ -19,7 +19,7 @@ export const CommentContain = styled.div`
   gap: 20px;
   align-items: center;
   @media (max-width: 1023px) {
-    gap: 5px;
+    gap: 10px;
   }
 `;
 export const CommentInput = styled.input`
@@ -27,15 +27,15 @@ export const CommentInput = styled.input`
   max-height: 50px;
   padding: 20px;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   outline: none;
-  opacity: .8;
+  opacity: 0.8;
   border: none;
   width: 100%;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 14px;
-  ::placeholder{
+  ::placeholder {
     color: #adadac;
   }
 `;
@@ -43,18 +43,21 @@ export const Profile = styled.img`
   width: 48px;
   height: auto;
   border-radius: 50%;
+  @media (max-width: 1023px) {
+    width: 32px;
+  }
 `;
-export const CommentText =styled.div`
+export const CommentText = styled.div`
   display: flex;
   padding-block: 12px;
   padding-inline: 15px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  width:100%;
+  width: 100%;
 `;
 export const Comment = styled.p`
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 12px;
@@ -85,17 +88,18 @@ export const Pp3 = styled.i`
 export const Button = styled.button`
   display: flex;
   gap: 10px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-weight: 600;
   padding-block: 15px;
-  padding-inline: 25px;
+  font-size: 12px;
+  // padding-inline: 25px;
   background: transparent;
-  color: #6717CD;
+  color: #6717cd;
   border-radius: 30px;
-  border:1px solid #6717CD;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  border: 1px solid #6717cd;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
