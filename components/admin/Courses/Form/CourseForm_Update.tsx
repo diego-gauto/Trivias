@@ -142,7 +142,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     };
 
     updateCourse(signUpData, images).then(() => {
-      window.location.href = "/admin/Courses";
+      window.location.href = `/admin/Edit?documentID=${signUpData.data.documentID}`;
       setIsUpdating(false);
     });
 
