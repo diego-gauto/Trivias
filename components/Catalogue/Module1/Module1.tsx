@@ -34,7 +34,7 @@ const Module1 = ({ user, allCourses }: any) => {
       if (historyCourse.courseType == 'Mensual' && user.membership.finalDate > today || historyCourse.paid || historyCourse.courseType == 'Gratis') {
         router.push({
           pathname: 'Lesson',
-          query: { id: historyCourse.documentID, season: 0, lesson: 0 },
+          query: { id: historyCourse.documentID, season: historyCourse.season, lesson: historyCourse.lesson },
         });
       }
       if (historyCourse.courseType == 'Mensual' && user.membership.finalDate < today) {
@@ -107,7 +107,7 @@ const Module1 = ({ user, allCourses }: any) => {
 
         <TextContain>
           <Title style={{ textShadow: "1px 1px 5px black" }}>
-            Curso {historyCourse.courseTittle}: Episodio 1 “{historyCourse.seasons[0]?.lessons[0]?.title}”
+            Curso {historyCourse.courseTittle}: “{historyCourse.seasons[historyCourse.season]?.lessons[historyCourse.lesson]?.title}”
           </Title>
           <SubText style={{ textShadow: "1px 1px 5px black" }}>
             {historyCourse.courseAbout}
