@@ -8,7 +8,6 @@ import {
   AboutContain,
   BackgroundOverlay,
   ButtonContain,
-  CardImage,
   Container,
   ContainVideo,
   CourseContain,
@@ -29,9 +28,7 @@ import {
   ModalCont,
   ModalContain,
   ModalMod,
-  PlayIcon,
   SeasonContain,
-  SubTitle,
   Text,
   TextContainer,
   Title,
@@ -39,16 +36,16 @@ import {
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
 import SelectModule4 from "./SelectModule4";
+import ReactPlayer from "react-player";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
 
-  console.log(course);
-
-
   const handleClose = () => setShow(false);
-  const [lessons, setLessons] = useState<any>([])
-
+  const [lessons, setLessons] = useState<any>([]);
+  const [time, setTime] = useState<any>(0)
+  const playerRef = React.useRef(null);
   const handleClick = (value: any) => {
+    setTime(15)
     setLessons(course.seasons[value].lessons)
   };
 
@@ -86,10 +83,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
 
   useEffect(() => {
     if (Object.values(course).length > 0) {
-      setLessons(course.seasons[0].lessons)
+      setLessons(course.seasons[0].lessons);
     }
+  }, [course]);
 
-  }, [course])
 
   return (
     <ModalContain>
@@ -175,7 +172,14 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <VideoContain>
                   <ContainVideo>
                     <EpisodeContain>
-                      <CardImage src={lesson.image} width={350} height={200} />
+                      {/* {lessons && <ReactPlayer
+                        ref={p => p?.seekTo(time)}
+                        url={lesson.link}
+                        playing={false}
+                        muted={false}
+                        width="100%" height="100%">
+                      </ReactPlayer>} */}
+
                       <Lock />
                     </EpisodeContain>
                   </ContainVideo>
@@ -196,7 +200,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
           </LessonContain>
         </ModalCont>
       </ModalMod>
-    </ModalContain>
+    </ModalContain >
   )
 }
 export default Modal1;
