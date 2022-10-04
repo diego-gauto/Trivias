@@ -90,18 +90,24 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <SelectContain>
           <ChatboxIcon />
         </SelectContain>
-        <UnSelected>
+        {/* <UnSelected>
           <EaselIcon
             onClick={() => {
               setValue(2)
             }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
+        </UnSelected> */}
       </IconContain>
       <MainContainer>
         <CommentContain>
-          <Pp1 />
+          {comments && user.userPhoto
+            ?
+            <Profile src={user.userPhoto} />
+            :
+            <Profile
+              src={DEFAULT_USER_IMG}
+            />}
           <CommentInput value={comment} placeholder="¿Qué quieres decir?" onChange={(e) => { setComment(e.target.value) }} />
-          <Button onClick={addLessonComment}><FaPlus></FaPlus></Button>
+          <Button onClick={addLessonComment}>Comentar</Button>
         </CommentContain>
         {currentComments.map((x: any, index: any) => {
           return (

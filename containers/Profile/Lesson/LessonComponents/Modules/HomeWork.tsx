@@ -111,11 +111,11 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
             setValue(4)
           }} style={{ backgroundColor: 'gray' }} />
         </UnSelected>
-        <UnSelected>
+        {/* <UnSelected>
           <EaselIcon onClick={() => {
             setValue(2)
           }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
+        </UnSelected> */}
       </IconContain>
       <HomeWorkContain>
         <TaskTitle>

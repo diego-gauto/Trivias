@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from './Video.styled';
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
+import { EaselIcon } from '../Modules/Module.styled';
 
 const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [current, setCurrent] = useState<any>();
@@ -78,7 +79,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
           <Title>
             {title}
           </Title>
-          <MenuIcon onClick={() => { setMenu(!menu) }} />
+          <EaselIcon onClick={() => { setMenu(!menu) }} />
         </TitleContain>
         <ReactPlayer
           className='absolute'
