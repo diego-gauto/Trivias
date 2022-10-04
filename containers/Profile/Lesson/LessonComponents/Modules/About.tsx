@@ -31,11 +31,11 @@ const About = ({ value, setValue, data }: any) => {
           {/* <WhiteDivide /> */}
           <ListIcon />
         </SelectContain>
-        <UnSelected>
+        {data.homeworkAvailable && <UnSelected>
           <BookIcon onClick={() => {
             setValue(3)
           }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
+        </UnSelected>}
         <UnSelected>
           <ChatboxIcon onClick={() => {
             setValue(4)

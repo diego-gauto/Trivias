@@ -82,11 +82,11 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
             setValue(1)
           }} style={{ backgroundColor: 'gray' }} />
         </UnSelected>
-        <UnSelected>
+        {data.homeworkAvailable && <UnSelected>
           <BookIcon onClick={() => {
             setValue(3)
           }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
+        </UnSelected>}
         <SelectContain>
           <ChatboxIcon />
         </SelectContain>

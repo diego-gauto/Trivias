@@ -98,7 +98,4 @@ export const Button = styled.button`
     transform:scale(1.03);
     transition:.5s ease all;
   }
-  @media (max-width: 1023px) {
-    display: none;
-  }
 `;
