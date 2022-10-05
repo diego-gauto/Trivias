@@ -190,7 +190,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
                           setIsPlaying(true);
                           setTimeout(() => {
                             setIsPlaying(false)
-                          }, 100)
+                          }, 2000)
                         }
                         }
                         width="100%" height="100%">
