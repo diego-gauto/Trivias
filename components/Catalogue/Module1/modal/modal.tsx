@@ -37,10 +37,12 @@ import {
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
 import SelectModule4 from "../../Module4/Modal/SelectModule4";
+import ReactPlayer from "react-player";
 
 const Modal = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([])
+  const [isPlaying, setIsPlaying] = useState<any>(true);
 
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons)
@@ -178,7 +180,21 @@ const Modal = ({ show, setShow, course, user }: any) => {
                 <VideoContain>
                   <ContainVideo>
                     <EpisodeContain>
-                      <CardImageUnlock src={lesson.image} width={350} height={200} />
+                      {/* <CardImageUnlock src={lesson.image} width={350} height={200} /> */}
+                      {lessons && <ReactPlayer
+                        ref={p => p?.seekTo(15)}
+                        url={lesson.link}
+                        playing={isPlaying}
+                        muted={true}
+                        onDuration={(duration) => {
+                          setIsPlaying(true);
+                          setTimeout(() => {
+                            setIsPlaying(false)
+                          }, 100)
+                        }
+                        }
+                        width="100%" height="100%">
+                      </ReactPlayer>}
                     </EpisodeContain>
                   </ContainVideo>
                   <EpisodeInfo>
