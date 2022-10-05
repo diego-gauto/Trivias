@@ -29,9 +29,7 @@ import {
   ModalCont,
   ModalContain,
   ModalMod,
-  PlayIcon,
   SeasonContain,
-  SubTitle,
   Text,
   TextContainer,
   Title,
@@ -39,16 +37,16 @@ import {
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
 import SelectModule4 from "./SelectModule4";
+import ReactPlayer from "react-player";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
 
-  console.log(course);
-
-
   const handleClose = () => setShow(false);
-  const [lessons, setLessons] = useState<any>([])
-
+  const [lessons, setLessons] = useState<any>([]);
+  const [time, setTime] = useState<any>(0)
+  const playerRef = React.useRef(null);
   const handleClick = (value: any) => {
+    setTime(15)
     setLessons(course.seasons[value].lessons)
   };
 
@@ -86,11 +84,22 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
 
   useEffect(() => {
     if (Object.values(course).length > 0) {
-      setLessons(course.seasons[0].lessons)
+      setLessons(course.seasons[0].lessons);
     }
+  }, [course]);
 
-  }, [course])
-
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -110,7 +119,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {course.courseTittle}
                 </Title>
                 <ButtonContain>
-                  {course.courseType == 'Producto' ? <PurpleButton onClick={goTo}>
+                  {(course.courseType == 'Producto' && !course.paid) ? <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
                   </PurpleButton> :
                     <PurpleButton onClick={goTo}>
@@ -158,7 +167,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               <Data>
                 Tiempo estimado:
                 <DataSpan>
-                  {course.courseDuration} horas
+                  {course.totalDuration}
                 </DataSpan>
               </Data>
             </Datacontain>
@@ -175,6 +184,13 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <VideoContain>
                   <ContainVideo>
                     <EpisodeContain>
+                      {/* {lessons && <ReactPlayer
+                        ref={p => p?.seekTo(time)}
+                        url={lesson.link}
+                        playing={false}
+                        muted={false}
+                        width="100%" height="100%">
+                      </ReactPlayer>} */}
                       <CardImage src={lesson.image} width={350} height={200} />
                       <Lock />
                     </EpisodeContain>
@@ -184,7 +200,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                       {index + 1}: {lesson.title}
                     </EpisodeTitle>
                     <EpisodeTime>
-                      24 minutos
+                      {hms(lesson.duration)}
                     </EpisodeTime>
                     <Description>
                       {lesson.about}
@@ -196,7 +212,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
           </LessonContain>
         </ModalCont>
       </ModalMod>
-    </ModalContain>
+    </ModalContain >
   )
 }
 export default Modal1;

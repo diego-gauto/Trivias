@@ -43,6 +43,7 @@ import {
   TransparentButton,
   TrashIcon,
 } from "./Edit.styled";
+import ReactPlayer from "react-player";
 
 const Edit = () => {
   const routerState = useRouter().query
@@ -309,6 +310,17 @@ const Edit = () => {
         courseID={routerState.courseID}
         lessonID={routerState.lessonID}
         seasonID={routerState.seasonID} />
+      {lesson.link && <ReactPlayer hidden
+        url={lesson.link}
+        onError={e => {
+          alert("El formato del video es incorrecto!");
+          setLesson({ ...lesson, duration: 0 })
+        }
+        }
+        onDuration={(duration) =>
+          setLesson({ ...lesson, duration: duration })
+        }
+      ></ReactPlayer>}
     </Container>
   )
 }

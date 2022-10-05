@@ -4,42 +4,48 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const ModalContain = styled.div`
-  @font-face{
-    font-family:Montserrat;
-    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face{
-    font-family:Raleway;
-    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway-VariableFont_wght.ttf);
   }
 `;
 export const ModalMod = styled(Modal)`
   .modal-content {
     border-radius: 12px !important;
   }
-  @media (min-width: 992px){
-    .modal-lg, .modal-xl {
-        --bs-modal-width: 66%;
-    }}
-  `;
+  @media (min-width: 992px) {
+    .modal-lg,
+    .modal-xl {
+      --bs-modal-width: 66%;
+    }
+  }
+`;
 export const ModalCont = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  @media(max-width:500px){
+  @media (max-width: 500px) {
     gap: 0;
   }
 `;
-export const ModalBackground = styled.div`  
+export const ModalBackground = styled.div`
   display: flex;
   position: relative;
 `;
-export const BackgroundOverlay = styled.div`  
+export const BackgroundOverlay = styled.div`
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background: linear-gradient(360deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 39.51%);
+  background: linear-gradient(
+    360deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0) 39.51%
+  );
   position: absolute;
 `;
 export const Container = styled.div`
@@ -49,14 +55,14 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 220px;
   position: absolute;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     gap: 40px;
   }
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     gap: 20px;
     padding-inline: 10px;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     gap: 0px;
   }
 `;
@@ -65,56 +71,55 @@ export const TextContainer = styled.div`
   width: 100%;
   flex-direction: column;
   gap: 2px;
-  
 `;
 export const Cross = styled.p`
   display: flex;
   color: white;
   justify-content: flex-end;
   font-size: 36px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin: 0;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     font-size: 24px;
   }
 `;
 export const Title = styled.h1`
   font-size: 36px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
-  text-shadow: -.5px 2px 8px black;
+  text-shadow: -0.5px 2px 8px black;
   margin: 0;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     font-size: 24px;
   }
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     font-size: 20px;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 18px;
   }
 `;
 export const SubTitle = styled.p`
   font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
-  text-shadow: -.5px 2px 8px black;
+  text-shadow: -0.5px 2px 8px black;
   margin: 0;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     font-size: 20px;
   }
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     font-size: 16px;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 14px;
   }
 `;
 export const ImageBack = styled.img`
-  width:100%;
+  width: 100%;
   border-radius: 10px 10px 0 0;
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     height: auto;
   }
 `;
@@ -128,13 +133,13 @@ export const ButtonContain = styled.div`
   display: flex;
   margin-top: 20px;
   gap: 20px;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     max-width: 150px;
     flex-direction: column;
     gap: 10px;
     margin: 0;
   }
-  @media(max-width: 480px){
+  @media (max-width: 480px) {
     justify-content: space-between;
     max-width: 100%;
     flex-direction: row;
@@ -143,16 +148,16 @@ export const ButtonContain = styled.div`
   }
 `;
 export const InsideText = styled.p`
-  opacity:.8;
+  opacity: 0.8;
   border: 1px solid white;
   border-radius: 12px;
   padding-block: 3px;
   padding-inline: 20px;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
   margin: 10px;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     font-size: 10px;
     padding-inline: 15px;
   }
@@ -162,22 +167,22 @@ export const CourseContain = styled.div`
   margin-top: 50px;
   padding-inline: 20px;
   gap: 20px;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     flex-direction: column;
     margin-top: -240px;
     z-index: 10;
   }
-  @media(max-width: 850px){
+  @media (max-width: 850px) {
     flex-direction: column;
     margin-top: -100px;
     z-index: 10;
   }
-  @media(max-width: 670px){
+  @media (max-width: 670px) {
     padding-inline: 10px;
     margin-top: -45px;
     z-index: 10;
   }
-  @media(max-width: 520px){
+  @media (max-width: 520px) {
     margin-top: -5px;
   }
 `;
@@ -185,7 +190,7 @@ export const AboutContain = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     width: 100%;
   }
 `;
@@ -193,24 +198,24 @@ export const Datacontain = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     width: 100%;
   }
 `;
 export const Titles = styled.p`
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     font-size: 12px;
   }
 `;
 export const Text = styled.p`
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     font-size: 10px;
   }
 `;
@@ -219,18 +224,18 @@ export const Data = styled.p`
   gap: 10px;
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     font-size: 10px;
   }
 `;
 export const DataSpan = styled.span`
   font-size: 14px;
   font-weight: 400;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     font-size: 10px;
   }
 `;
@@ -240,7 +245,7 @@ export const LessonContain = styled.div`
   gap: 30px;
   padding-block: 20px;
   padding-inline: 20px;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     padding-inline: 10px;
   }
 `;
@@ -248,56 +253,59 @@ export const SeasonContain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media(max-width: 374px){
+  @media (max-width: 374px) {
     flex-direction: column;
     gap: 10px;
   }
 `;
 export const LessonTitle = styled.p`
   font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     font-size: 20px;
   }
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     font-size: 16px;
   }
 `;
 export const VideoContain = styled.div`
   display: flex;
   gap: 20px;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     flex-direction: column;
     justify-content: center;
   }
 `;
 export const ModalVideo = styled.div`
-position: relative;
-overflow: hidden;
-width: 100%;
-height: 430px;
-border-radius: 10px;
-@media (max-width: 1100px) {
-  height: 500px;
-}
-@media (max-width: 850px) {
-  height: 370px;
-}
-@media (max-width: 670px) {
-  height: 300px;
-}
-@media (max-width: 520px) {
-  height: 245px;
-}
-@media (max-width: 450px) {
-  height: 220px;
-}
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 430px;
+  border-radius: 10px;
+  @media (max-width: 1100px) {
+    height: 500px;
+  }
+  @media (max-width: 850px) {
+    height: 370px;
+  }
+  @media (max-width: 670px) {
+    height: 300px;
+  }
+  @media (max-width: 520px) {
+    height: 245px;
+  }
+  @media (max-width: 450px) {
+    height: 220px;
+  }
 `;
 export const EpisodeContain = styled.div`
   display: flex;
   position: relative;
   width: 350px;
+  video {
+    border-radius: 10px;
+  }
 `;
 export const ContainVideo = styled.div`
   display: flex;
@@ -307,40 +315,40 @@ export const EpisodeInfo = styled.div`
   display: flex;
   width: 50%;
   flex-direction: column;
-  gap:5px;
-  @media(max-width: 991px){
+  gap: 5px;
+  @media (max-width: 991px) {
     width: 100%;
   }
 `;
 export const EpisodeTitle = styled.p`
   font-size: 16px;
   font-weight: 600;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const EpisodeTime = styled.p`
   font-size: 12px;
   color: gray;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
 `;
 export const Description = styled.p`
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     display: none;
   }
 `;
 export const CardImage = styled.img`
-filter: brightness(40%);
-border-radius:10px;
-@media(max-width: 400px){
-  width: 100%;
-}
+  filter: brightness(40%);
+  border-radius: 10px;
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 `;
 export const CardImageUnlock = styled.img`
-  border-radius:10px;
+  border-radius: 10px;
 `;
 export const Lock = styled.i`
   position: absolute;
