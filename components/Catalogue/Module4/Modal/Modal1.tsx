@@ -24,6 +24,7 @@ import {
   ImageBack,
   LessonContain,
   LessonTitle,
+  LoaderContain,
   Lock,
   ModalBackground,
   ModalCont,
@@ -183,6 +184,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   <ContainVideo>
                     <EpisodeContain>
                       {lessons && <ReactPlayer
+                        style={{ 'opacity': isPlaying ? 0 : 1 }}
                         ref={p => p?.seekTo(15)}
                         url={lesson.link}
                         playing={isPlaying}
@@ -196,7 +198,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         }
                         width="100%" height="100%">
                       </ReactPlayer>}
-                      <Lock />
+                      {isPlaying && <LoaderContain />}
+                      {/* <Lock /> */}
                     </EpisodeContain>
                   </ContainVideo>
                   <EpisodeInfo>

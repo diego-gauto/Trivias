@@ -8,7 +8,6 @@ import {
   AboutContain,
   BackgroundOverlay,
   ButtonContain,
-  CardImageUnlock,
   Container,
   ContainVideo,
   CourseContain,
@@ -24,12 +23,12 @@ import {
   ImageBack,
   LessonContain,
   LessonTitle,
+  LoaderContain,
   ModalBackground,
   ModalCont,
   ModalContain,
   ModalMod,
   SeasonContain,
-  SubTitle,
   Text,
   TextContainer,
   Title,
@@ -181,7 +180,8 @@ const Modal = ({ show, setShow, course, user }: any) => {
                   <ContainVideo>
                     <EpisodeContain>
                       {/* <CardImageUnlock src={lesson.image} width={350} height={200} /> */}
-                      {lessons && <ReactPlayer
+                      <ReactPlayer
+                        style={{ 'opacity': isPlaying ? 0 : 1 }}
                         ref={p => p?.seekTo(15)}
                         url={lesson.link}
                         playing={isPlaying}
@@ -194,7 +194,8 @@ const Modal = ({ show, setShow, course, user }: any) => {
                         }
                         }
                         width="100%" height="100%">
-                      </ReactPlayer>}
+                      </ReactPlayer>
+                      {isPlaying && <LoaderContain />}
                     </EpisodeContain>
                   </ContainVideo>
                   <EpisodeInfo>

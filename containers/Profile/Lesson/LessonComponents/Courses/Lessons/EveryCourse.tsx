@@ -89,6 +89,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
     if (season == 0 && index == 0 ||
       season == 0 && index > 0 && lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status ||
       season == 0 && index > 0 && !lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] ||
+      // (season == 0 && index > 0 && !lessons[index - 1].homeworkAvailable) && (season == 0 && index > 0 && !lessons[index].homeworkAvailable) ||
       season > 0 && index == 0 && tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status ||
       season > 0 && index == 0 && !tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
       season > 0 && index > 0 && lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status ||
