@@ -24,11 +24,13 @@ import {
   TextContain,
   ViewCourse,
 } from "./Module3.styled";
+import Modal1 from "../Module4/Modal/Modal1";
 
 const Module3 = ({ user, allCourses }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
+  const [show, setShow] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
@@ -85,7 +87,10 @@ const Module3 = ({ user, allCourses }: any) => {
           <CardContain id="Scroll">
             {courses.map((course: any, index: any) => {
               return (
-                <Cardcontent key={"card-course-" + index}>
+                <Cardcontent key={"card-course-" + index} onClick={() => {
+                  setShow(true);
+                  setCourse(course);
+                }}>
                   <ImageContent>
                     <Band />
                     <DaysLeft>{course.date} días</DaysLeft>
@@ -115,7 +120,8 @@ const Module3 = ({ user, allCourses }: any) => {
                         {course.courseAbout}...
                       </Text3>
                     </TextContain>
-                    <ViewCourse onClick={() => {
+                    <ViewCourse onClick={(e) => {
+                      e.stopPropagation();
                       goTo(course)
                     }}>
                       Ver el Curso
@@ -128,6 +134,7 @@ const Module3 = ({ user, allCourses }: any) => {
           </CardContain>
         </ScrollContainer>
       </>}
+      <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </Maincontainer>
   )
 }
