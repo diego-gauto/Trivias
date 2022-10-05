@@ -81,8 +81,21 @@ const Modal = ({ show, setShow, course, user }: any) => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0]?.lessons)
     }
-
   }, [course])
+
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
+  console.log(course);
 
   return (
     <ModalContain>
@@ -148,7 +161,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
               <Data>
                 Tiempo estimado:
                 <DataSpan>
-                  {course.courseDuration} horas
+                  {hms(course.totalDuration)}
                 </DataSpan>
               </Data>
             </Datacontain>
@@ -173,7 +186,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
                       {index + 1}: {lesson.title}
                     </EpisodeTitle>
                     <EpisodeTime>
-                      24 minutos
+                      {hms(lesson.duration)}
                     </EpisodeTime>
                     <Description>
                       {lesson.about}

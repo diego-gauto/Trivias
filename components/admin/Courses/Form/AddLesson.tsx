@@ -39,12 +39,15 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
+import ReactPlayer from "react-player";
+import { set } from "react-hook-form";
 const AddLesson = () => {
   const router = useRouter();
   const routerState = useRouter().query
   const { courseID, seasonID } = router.query;
   const [lesson, setLesson] = useState<any>({
     title: '',
+    duration: 0,
     number: '',
     banner: '',
     link: '',
@@ -57,6 +60,7 @@ const AddLesson = () => {
   });
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(false);
+
   const newLesson = () => {
     if (!value) {
       if (lesson.title == '' ||
@@ -302,7 +306,19 @@ const AddLesson = () => {
           onClick={newLesson}
         >Guardar</PurpleButton>
       </ButtonContain>
+      {lesson.link && <ReactPlayer hidden
+        url={lesson.link}
+        onError={e => {
+          alert("El formato del video es incorrecto!");
+          setLesson({ ...lesson, duration: 0 })
+        }
+        }
+        onDuration={(duration) =>
+          setLesson({ ...lesson, duration: duration })
+        }
+      ></ReactPlayer>}
     </Container>
+
   )
 }
 export default AddLesson;

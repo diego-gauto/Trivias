@@ -47,11 +47,25 @@ const Preview = () => {
     }
   }
 
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
+
   const getCourses = async () => {
     let tempCourses: Array<any> = [];
     getWholeCourses().then((response) => {
       response.forEach((element: any) => {
         if (element.totalLessons > 0) {
+          element.totalDuration = hms(element.totalDuration)
           tempCourses.push(element)
         }
       });

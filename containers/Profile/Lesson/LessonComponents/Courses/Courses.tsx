@@ -43,7 +43,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
                 <UploadIcon active={selected[index]} />
               </Title>
               <Episode>
-                {season.lessons.length} episodios
+                {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
               </Episode>
             </Container>
             <Divider />

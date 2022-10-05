@@ -25,7 +25,7 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
         {title}
       </TitleCourse>
       <Subtitle>
-        Temporada {parseInt(season) + 1}: Episodio {parseInt(lesson) + 1}
+        Temporada {parseInt(season) + 1}: Lección {parseInt(lesson) + 1}
       </Subtitle>
       <ProgressContain>
         <ProgressBar2 />

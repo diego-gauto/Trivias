@@ -5,6 +5,18 @@ import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, Curren
 const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
   const router = useRouter();
 
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
   const goTo = (lIndex: any, less: any) => {
     let tempIndex;
     let lastIndex;
@@ -56,7 +68,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
         </CourseTitle>
         <DetailContain>
           <CourseLength>
-            5 minutos
+            {hms(less.duration)}
             {less.extra.length > 0 && <DocIcon></DocIcon>}
           </CourseLength>
           {less.points > 0 && <CoursePoints>
@@ -92,7 +104,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
         </CourseTitle>
         <DetailContain>
           <CourseLength>
-            5 minutos
+            {hms(less.duration)}
             {less.extra.length > 0 && <DocIcon></DocIcon>}
           </CourseLength>
           {less.points > 0 && <CoursePoints>
@@ -109,7 +121,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       </CourseTitle>
       <DetailContain>
         <CourseLength>
-          5 minutos
+          {hms(less.duration)}
           {less.extra.length > 0 && <DocIcon></DocIcon>}
         </CourseLength>
         {less.points > 0 && <CoursePoints>
