@@ -6,6 +6,7 @@ import {
   DocumentData,
   getDoc,
   getDocs,
+  onSnapshot,
   orderBy,
   query,
   setDoc,
@@ -198,11 +199,11 @@ export const addComment = async (data: any) => {
 
 export const getComments = async () => {
   let comment: any = []
-  const docRef = query(collection(db, 'comments'), orderBy("createdAt", "desc"));
-  const querySnapshot = await getDocs(docRef);
-  querySnapshot.forEach((doc) => {
-    comment.push({ ...doc.data(), id: doc.id });
-  });
+  onSnapshot(query(collection(db, 'comments'), orderBy("createdAt", "desc")), (doc) => {
+    doc.docChanges().map((x) => {
+      comment.push({ ...x.doc.data(), id: x.doc.id })
+    });
+  })
   return comment;
 }
 
