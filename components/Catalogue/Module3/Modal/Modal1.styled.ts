@@ -1,7 +1,5 @@
 import { Modal } from "react-bootstrap";
-
-import Image from "next/image";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const ModalContain = styled.div`
   @font-face {
@@ -368,4 +366,30 @@ export const PlayIcon = styled.i`
   height: 20px;
   width: 20px;
   background-position: center;
+`;
+
+const rotate = keyframes`
+from {
+  transform: rotate(0deg);
+}
+
+to {
+  transform: rotate(360deg);
+}
+`;
+export const LoaderContain = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  align-self: center;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-width: 9px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #6717cd transparent transparent;
+  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
+    running;
 `;
