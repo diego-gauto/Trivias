@@ -43,10 +43,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
 
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([]);
-  const [time, setTime] = useState<any>(0)
-  const playerRef = React.useRef(null);
+  const [isPlaying, setIsPlaying] = useState<any>(true);
   const handleClick = (value: any) => {
-    setTime(15)
     setLessons(course.seasons[value].lessons)
   };
 
@@ -184,14 +182,20 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <VideoContain>
                   <ContainVideo>
                     <EpisodeContain>
-                      {/* {lessons && <ReactPlayer
-                        ref={p => p?.seekTo(time)}
+                      {lessons && <ReactPlayer
+                        ref={p => p?.seekTo(15)}
                         url={lesson.link}
-                        playing={false}
-                        muted={false}
+                        playing={isPlaying}
+                        muted={true}
+                        onDuration={(duration) => {
+                          setIsPlaying(true);
+                          setTimeout(() => {
+                            setIsPlaying(false)
+                          }, 100)
+                        }
+                        }
                         width="100%" height="100%">
-                      </ReactPlayer>} */}
-                      <CardImage src={lesson.image} width={350} height={200} />
+                      </ReactPlayer>}
                       <Lock />
                     </EpisodeContain>
                   </ContainVideo>
