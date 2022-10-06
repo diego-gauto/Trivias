@@ -1,50 +1,27 @@
-
-
-import { Col, Container, Row } from "react-bootstrap";
+import { Image, Row } from "react-bootstrap";
 
 import { ISlideModule } from "./ISlideModule";
-import {
-  NewTag,
-  SlideImg,
-  Text01,
-  Text02,
-  TextNew,
-  TextSectionWrapper,
-} from "./SlideModule.styled";
+import { SlideModuleContainer, Text01, Text02, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
-
-
-
-  const { isNew } = props;
-  const { title } = props;
-  const { subtitle } = props;
-  const { imgURL } = props;
-
+  const { imgURL, title, subtitle, duration } = props;
 
   return (
-    <Container className="mt-4">
-      <Col>
+    <SlideModuleContainer>
+      <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
+      <TextSectionWrapper>
         <Row>
-          <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
-            {isNew ?
-              <NewTag>
-                <TextNew>Nuevo</TextNew>
-              </NewTag>
-              : <></>}
-          </SlideImg>
+          <Text01>{title} </Text01>
         </Row>
-
-        <TextSectionWrapper>
+        <Row>
+          <Text02>{subtitle} </Text02>
+        </Row>
+        {duration &&
           <Row>
-            <Text01>{title} </Text01>
+            <Text02 style={{ color: "gray" }}>{Math.round(+duration)} minutos</Text02>
           </Row>
-          <Row>
-            <Text02>{subtitle} </Text02>
-          </Row>
-        </TextSectionWrapper>
-      </Col>
-    </Container >
-
+        }
+      </TextSectionWrapper>
+    </SlideModuleContainer>
   )
 }

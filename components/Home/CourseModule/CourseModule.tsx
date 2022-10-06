@@ -15,8 +15,6 @@ import { ICourseModuleProps } from "./ICourseModuleProps";
 export const CourseModule = (props: ICourseModuleProps) => {
   const { data } = props;
 
-  console.log(data)
-
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
@@ -30,6 +28,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
           playing={true}
           width="100%"
           height={responsive576 ? "523px" : "600px"}
+          playsInline
         />
       </div>
       <Row>

@@ -14,8 +14,7 @@ SwiperCore.use([Autoplay]);
 export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
 
-  const { isInfinite } = props;
-  const { slideData } = props;
+  const { isInfinite, slideData } = props;
 
   let slideDataArr = [];
   slideDataArr = slideData;
@@ -48,7 +47,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     breakpoints: {
       1024: {
         slidesPerView: 3.5,
-        spaceBetween: 30,
+        spaceBetween: 0,
       }
     }
   };
@@ -56,22 +55,23 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   return (
     <Container
       fluid
-      style={{ overflow: "hidden", padding: 1 }}
+      style={{ overflow: "hidden", padding: 0, margin: 0 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <Swiper {...settings} onInit={onInit}>
-        {slideDataArr.map((element) => (
-          <SwiperSlide key={element.title + "_ID"}  >
+        {slideDataArr.slice(0, 12).map((element, idx) => (
+          <SwiperSlide key={idx}>
             <SlideModule
               isNew={element.isNew}
               title={element.title}
               subtitle={element.subtitle}
               imgURL={element.imgURL}
+              duration={element.duration}
             />
           </SwiperSlide>
         ))}
       </Swiper>
-    </Container>
+    </Container >
   )
 }
