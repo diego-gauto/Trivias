@@ -102,7 +102,7 @@ const Homepage = () => {
         <Module4_Carousel isInfinite={true} slideData={
           courseNailsData.lessons.map((lesson: any) => {
             return (
-              { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image }
+              { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, duration: lesson.duration }
             )
           })
         } />
@@ -114,7 +114,7 @@ const Homepage = () => {
         <Module4_Carousel isInfinite={true} slideData={
           courseSEPData.lessons.map((lesson: any) => {
             return (
-              { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image }
+              { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, duration: lesson.duration }
             )
           })
         } />
@@ -136,11 +136,12 @@ const Homepage = () => {
       <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} />
       {courses &&
         <Module4_Carousel isInfinite={true} slideData={
-          courses.map((course: any) => {
-            return (
-              { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath }
-            )
-          })
+          courses.
+            map((course: any) => {
+              return (
+                { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath }
+              )
+            })
         } />
       }
 

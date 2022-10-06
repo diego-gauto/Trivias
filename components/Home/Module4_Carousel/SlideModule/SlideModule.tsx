@@ -4,12 +4,11 @@ import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text02, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
-  const { imgURL, title, subtitle, isNew } = props;
+  const { imgURL, title, subtitle, duration } = props;
 
   return (
     <SlideModuleContainer>
-      <Image src={imgURL} fluid />
-
+      <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
       <TextSectionWrapper>
         <Row>
           <Text01>{title} </Text01>
@@ -17,7 +16,12 @@ export const SlideModule = (props: ISlideModule) => {
         <Row>
           <Text02>{subtitle} </Text02>
         </Row>
+        {duration &&
+          <Row>
+            <Text02 style={{ color: "gray" }}>{Math.round(+duration)} minutos</Text02>
+          </Row>
+        }
       </TextSectionWrapper>
-    </SlideModuleContainer >
+    </SlideModuleContainer>
   )
 }

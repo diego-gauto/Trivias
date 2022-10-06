@@ -60,17 +60,18 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
       onMouseLeave={onMouseLeave}
     >
       <Swiper {...settings} onInit={onInit}>
-        {slideDataArr.map((element) => (
-          <SwiperSlide key={element.title + "_ID"}  >
+        {slideDataArr.slice(0, 12).map((element, idx) => (
+          <SwiperSlide key={idx}>
             <SlideModule
               isNew={element.isNew}
               title={element.title}
               subtitle={element.subtitle}
               imgURL={element.imgURL}
+              duration={element.duration}
             />
           </SwiperSlide>
         ))}
       </Swiper>
-    </Container>
+    </Container >
   )
 }
