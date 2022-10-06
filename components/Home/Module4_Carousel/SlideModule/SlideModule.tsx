@@ -1,28 +1,21 @@
-import { Row } from "react-bootstrap";
+import { Image, Row } from "react-bootstrap";
 
 import { ISlideModule } from "./ISlideModule";
-import {
-  NewTag,
-  SlideImg,
-  SlideModuleContainer,
-  Text01,
-  Text02,
-  TextNew,
-  TextSectionWrapper,
-} from "./SlideModule.styled";
+import { SlideModuleContainer, Text01, Text02, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
   const { imgURL, title, subtitle, isNew } = props;
 
   return (
     <SlideModuleContainer>
-      <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
+      {/* <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
         {isNew ?
           <NewTag>
             <TextNew>Nuevo</TextNew>
           </NewTag>
           : <></>}
-      </SlideImg>
+      </SlideImg> */}
+      <Image src={imgURL} fluid />
 
       <TextSectionWrapper>
         <Row>

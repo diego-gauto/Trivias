@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 export const SlideModuleContainer = styled(Container)`
   padding: 0;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   padding-right: 10px;
 `;
 
@@ -13,34 +14,35 @@ export const SlideImg = styled.div`
   background-size: 100% auto;
   background-repeat: no-repeat;
   height: 27vh;
-  @media only screen and (min-height: 500px) {
-    height: 42vh;
-  }
-  @media only screen and (min-height: 600px) {
-    height: 38vh;
-  }
-  @media only screen and (min-height: 700px) {
-    height: 34vh;
-  }
-  @media only screen and (min-height: 800px) and (max-height: 850px) {
-    height: 24vh;
-  }
-  @media only screen and (max-width: 1024px) {
-    background-size: 72% auto;
-    margin-bottom: 15px;
-    height: 28vh;
-  }
-  @media only screen and (max-width: 660px) {
-    margin-bottom: 15px;
-    margin-top: 0px;
-    height: 25vh;
-    background-size: 95% auto;
-  }
-  @media only screen and (max-width: 500px) {
-    margin-bottom: 15px;
-    margin-top: 0px;
-    height: 18vh;
-  }
+  // @media only screen and (max-height: 1980px) {
+  //   height: 40vh;
+  // }
+  // @media only screen and (min-height: 600px) {
+  //   height: 36vh;
+  // }
+  // @media only screen and (min-height: 700px) {
+  //   height: 32vh;
+  // }
+  // @media only screen and (min-height: 800px) and (max-height: 850px) {
+  //   background-size: 85% auto;
+  //   height: 21vh;
+  // }
+  // @media only screen and (max-width: 1024px) {
+  //   background-size: 72% auto;
+  //   margin-bottom: 15px;
+  //   height: 26vh;
+  // }
+  // @media only screen and (max-width: 660px) {
+  //   margin-bottom: 15px;
+  //   margin-top: 0px;
+  //   height: 23vh;
+  //   background-size: 95% auto;
+  // }
+  // @media only screen and (max-width: 500px) {
+  //   margin-bottom: 15px;
+  //   margin-top: 0px;
+  //   height: 16vh;
+  // }
 `;
 
 export const TextSectionWrapper = styled.div`
