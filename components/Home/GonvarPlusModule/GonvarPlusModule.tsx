@@ -24,6 +24,7 @@ export const GonvarPlusModule = () => {
           muted={true}
           playing={true}
           width="100%"
+          playsInline
           height={responsive576 ? "523px" : "600px"}
         />
       </div>

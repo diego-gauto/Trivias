@@ -8,13 +8,6 @@ export const SlideModule = (props: ISlideModule) => {
 
   return (
     <SlideModuleContainer>
-      {/* <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
-        {isNew ?
-          <NewTag>
-            <TextNew>Nuevo</TextNew>
-          </NewTag>
-          : <></>}
-      </SlideImg> */}
       <Image src={imgURL} fluid />
 
       <TextSectionWrapper>

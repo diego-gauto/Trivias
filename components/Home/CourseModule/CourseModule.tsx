@@ -28,6 +28,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
           playing={true}
           width="100%"
           height={responsive576 ? "523px" : "600px"}
+          playsInline
         />
       </div>
       <Row>
