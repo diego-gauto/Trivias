@@ -134,7 +134,6 @@ const Module3 = ({ user, allCourses }: any) => {
           </CardContain>
         </ScrollContainer>
       </>}
-      <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </Maincontainer>
   )
 }

@@ -198,7 +198,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         }
                         width="100%" height="100%">
                       </ReactPlayer>}
-                      {isPlaying && <LoaderContain />}
+                      {isPlaying &&
+                        <div className="skeleton-product">
+                          <div className="grey-field" style={{ 'width': '60%' }}>Lorem Ipsum</div>
+                          <div className="grey-field" style={{ 'width': '75%' }}>orem Ipsum orem Ipsum</div>
+                          <div className="grey-field" style={{ 'width': '85%' }}>orem Ipsum orem Ipsum</div>
+                          <div className="grey-field" style={{ 'width': '65%' }}>orem Ipsum orem Ipsum</div>
+                          <div className="grey-field" style={{ 'width': '80%' }}>orem Ipsum orem Ipsum</div>
+                        </div>
+                      }
                       {/* <Lock /> */}
                     </EpisodeContain>
                   </ContainVideo>
