@@ -20,7 +20,7 @@ export const GonvarPlusModule = () => {
       <div className="video"
       >
         <ReactPlayer
-          url="https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"
+          url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
           muted={true}
           playing={true}
           width="100%"
