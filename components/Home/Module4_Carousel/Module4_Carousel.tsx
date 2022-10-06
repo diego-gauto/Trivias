@@ -14,8 +14,7 @@ SwiperCore.use([Autoplay]);
 export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
 
-  const { isInfinite } = props;
-  const { slideData } = props;
+  const { isInfinite, slideData } = props;
 
   let slideDataArr = [];
   slideDataArr = slideData;
