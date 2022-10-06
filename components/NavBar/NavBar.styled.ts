@@ -122,7 +122,9 @@ export const UserImage = styled.i`
   background-size: contain;
 `;
 export const LogoS = styled.i`
-  background-image: url(../images/Navbar/LogoSmall.png);
+  background-size: contain;
+  background-position: center;
+  background-image: url(../images/Navbar/Logo.svg);
   background-repeat: no-repeat;
   width: 50px;
   height: 50px;
