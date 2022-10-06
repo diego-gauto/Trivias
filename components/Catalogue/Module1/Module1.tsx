@@ -106,10 +106,10 @@ const Module1 = ({ user, allCourses }: any) => {
         </ImageContain>
 
         <TextContain>
-          <Title style={{ textShadow: "1px 1px 5px black" }}>
+          <Title>
             Curso {historyCourse.courseTittle}: “{historyCourse.seasons[historyCourse.season]?.lessons[historyCourse.lesson]?.title}”
           </Title>
-          <SubText style={{ textShadow: "1px 1px 5px black" }}>
+          <SubText>
             {historyCourse.courseAbout}
           </SubText>
           <ButtonContain>

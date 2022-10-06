@@ -86,7 +86,6 @@ export const Title = styled.h1`
   font-size: 36px;
   font-family: "Montserrat", sans-serif;
   color: white;
-  text-shadow: -0.5px 2px 8px black;
   margin: 0;
   @media (max-width: 991px) {
     font-size: 24px;
@@ -102,7 +101,6 @@ export const SubTitle = styled.p`
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
   color: white;
-  text-shadow: -0.5px 2px 8px black;
   margin: 0;
   @media (max-width: 991px) {
     font-size: 20px;

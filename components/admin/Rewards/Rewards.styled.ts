@@ -13,10 +13,10 @@ export const ImageContain = styled.div`
   height: 300px;
   position: relative;
   filter: brightness(50%);
-img{
-  width: 100%;
-  height: auto;
-}
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 export const TitleContain = styled.div`
   display: flex;
@@ -25,52 +25,50 @@ export const TitleContain = styled.div`
   padding-inline: 20px;
 `;
 export const ButtonPosition = styled.div`
-
-  input{
+  input {
     display: none;
   }
-  label{
+  label {
     position: absolute;
     top: 100px;
     left: 20px;
     font-size: 16px;
-    font-family:'Montserrat',sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: white;
-    color: #6717CD;;
+    color: #6717cd;
     padding-block: 10px;
     padding-inline: 30px;
-    border: 1px solid #6717CD;;
+    border: 1px solid #6717cd;
     border-radius: 100px;
     cursor: pointer;
-    &:hover{
-      transform:scale(1.03);
-      transition:.5s ease all;
+    &:hover {
+      transform: scale(1.03);
+      transition: 0.5s ease all;
     }
   }
-  button{
+  button {
     position: absolute;
     top: 160px;
     left: 20px;
     font-size: 16px;
-    font-family:'Montserrat',sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: white;
-    color: #6717CD;;
+    color: #6717cd;
     padding-block: 10px;
     padding-inline: 30px;
-    border: 1px solid #6717CD;;
+    border: 1px solid #6717cd;
     border-radius: 100px;
     cursor: pointer;
-    &:hover{
-      transform:scale(1.03);
-      transition:.5s ease all;
+    &:hover {
+      transform: scale(1.03);
+      transition: 0.5s ease all;
     }
   }
 `;
 export const Title = styled.h1`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   color: white;
   font-size: 36px;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const Container = styled.div`
   display: flex;
@@ -98,10 +96,10 @@ export const Unselect = styled.div`
   cursor: pointer;
 `;
 export const Tab = styled.p`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 16px;
   font-weight: 600;
-  color: #6717CD;
+  color: #6717cd;
   margin: 0;
 `;
 export const PriceContain = styled.div`
@@ -113,7 +111,7 @@ export const PriceContain = styled.div`
   padding-inline: 40px;
 `;
 export const PriceTitle = styled.p`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 600;
   font-size: 18px;
   margin: 0;
