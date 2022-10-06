@@ -365,14 +365,14 @@ export const TransparentButton = styled.button`
   }
 `;
 export const GoogleIcon = styled.i`
-  background-image: url(../images/logo-google.png);
+  background-image: url(../images/google.svg);
   height: 21px;
   width: 21px;
   border-style: none;
   background-position: center;
 `;
 export const FacebookIcon = styled.i`
-  background-image: url(../images/logo-facebook.png);
+  background-image: url(../images/facebook.svg);
   height: 21px;
   width: 21px;
   background-position: center;

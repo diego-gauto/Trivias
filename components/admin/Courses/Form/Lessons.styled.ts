@@ -8,7 +8,7 @@ export const LessonContain = styled.div`
 `;
 export const LessonTitle = styled.h1`
   font-size: 24px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 
@@ -28,20 +28,20 @@ export const NewSeasonContain = styled.div`
   padding-inline: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  &:hover{
-    transform:scale(1.01);
-    transition:.3s ease all;
+  &:hover {
+    transform: scale(1.01);
+    transition: 0.3s ease all;
   }
 `;
 export const NewSeason = styled.p`
   font-size: 18px;
   font-weight: 600;
-  font-family:'Montserrat',sans-serif;
-  color: #6717CD;
+  font-family: "Montserrat", sans-serif;
+  color: #6717cd;
   cursor: pointer;
   margin: 0;
 `;
-export const TitleContain =styled.div`
+export const TitleContain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,13 +49,13 @@ export const TitleContain =styled.div`
 export const Title = styled.h1`
   font-size: 18px;
   font-weight: 600;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const EpisodesNumber = styled.p`
   font-size: 14px;
-  opacity: .9;
-  font-family:'Raleway',sans-serif;
+  opacity: 0.9;
+  font-family: "Raleway", sans-serif;
   margin: 0;
 `;
 export const ButtonContain = styled.div`
@@ -68,34 +68,37 @@ export const Button = styled.button`
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: transparent;
-  color: #6717CD;
+  color: #6717cd;
   padding-block: 10px;
   padding-inline: 25px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 100px;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const Add = styled.i`
-  background-image: url(../images/admin/Courses/add.png);
+  background-image: url(../images/admin/Courses/plus.svg);
+  background-position: center;
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
 `;
 export const ChevU = styled.i`
-  background-image: url(../images/admin/Courses/chevUp.png);
+  background-image: url(../images/Video/icons/arrowUp.svg);
   background-repeat: no-repeat;
+  background-position: center;
   width: 24px;
   height: 24px;
   cursor: pointer;
 `;
 export const ChevD = styled.i`
-  background-image: url(../images/admin/Courses/chevDown.png);
+  background-image: url(../images/Video/icons/arrowDown.svg);
   background-repeat: no-repeat;
+  background-position: center;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -117,18 +120,18 @@ export const EpisodeContain = styled.div`
 export const EpisodeTitle = styled.p`
   font-size: 16px;
   font-weight: 600;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const EpisodeTime = styled.p`
   font-size: 12px;
-  font-family:'Raleway',sans-serif;
-  opactiy: .8;
+  font-family: "Raleway", sans-serif;
+  opactiy: 0.8;
   margin: 0;
 `;
 export const EpisodeInfo = styled.p`
   font-size: 14px;
-  font-family:'Raleway',sans-serif;
+  font-family: "Raleway", sans-serif;
   text-align: justify;
   margin: 0;
   white-space: nowrap;
@@ -139,10 +142,10 @@ export const EpisodeInfo = styled.p`
 export const EditEpisode = styled.a`
   font-size: 16px;
   font-weight: 600;
-  color: #6717CD;
+  color: #6717cd;
   padding-left: 40px;
   text-decoration: none;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin: 0;
 `;
@@ -151,9 +154,9 @@ export const ImageContain = styled.div`
   width: 240px;
   height: 136px;
   position: relative;
-img{
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
 `;

@@ -16,21 +16,22 @@ export const Container = styled.div`
   position: relative;
   gap: 70px;
 `;
-export const ContainerLevel = styled.div<{size:any, i:any}>`
+export const ContainerLevel = styled.div<{ size: any; i: any }>`
   display: flex;
   align-items: center;
   gap: 3px;
   width: 100%;
-  ${props => (props.i == props.size) && css`
-  width: 32px;
-  `}
+  ${(props) =>
+    props.i == props.size &&
+    css`
+      width: 32px;
+    `}
 `;
 export const LevelContain = styled.div`
   display: flex;
   position: relative;
   align-items: center;
   gap: 3px;
-
 `;
 export const AllLevels = styled.div`
   display: flex;
@@ -41,30 +42,32 @@ export const LevelCircle = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
 `;
 export const Level = styled.p`
   position: absolute;
   font-size: 14px;
   top: 40px;
   left: -5px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   text-align: center;
   white-space: nowrap;
-  color: #6717CD;
+  color: #6717cd;
   margin: 0;
-  label{
-    font-family: 'Raleway', sans-serif;
+  label {
+    font-family: "Raleway", sans-serif;
   }
 `;
-export const Divider = styled("div")<{size:any, i:any}>`
+export const Divider = styled("div")<{ size: any; i: any }>`
   border-radius: 10px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
   width: 100%;
   height: 4px;
-  ${props => (props.i == props.size) && css`
-  display: none;
-  `}
+  ${(props) =>
+    props.i == props.size &&
+    css`
+      display: none;
+    `}
 `;
 
 export const ButtonContain = styled.div`
@@ -75,20 +78,21 @@ export const TransparentButton = styled.button`
   display: flex;
   gap: 10px;
   font-size: 16px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: transparent;
-  color: #6717CD;
+  color: #6717cd;
   padding-block: 10px;
   padding-inline: 30px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 100px;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
-  `;
+`;
 export const Grid = styled.i`
-  background-image: url(../images/admin/grid.png);
+  background-image: url(../images/admin/squares.svg);
+  background-position: center;
   background-repeat: no-repeat;
   height: 21px;
   width: 21px;

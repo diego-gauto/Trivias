@@ -141,7 +141,7 @@ export const SocialContainer = styled.div`
   }
 `;
 export const FBIcon = styled.i`
-  background-image: url(../images/facebook.png);
+  background-image: url(../images/fb.svg);
   background-repeat: no-repeat;
   width: 32px;
   height: 32px;
@@ -149,7 +149,7 @@ export const FBIcon = styled.i`
   cursor: pointer;
 `;
 export const WAIcon = styled.i`
-  background-image: url(../images/whatsapp.png);
+  background-image: url(../images/whatsapp.svg);
   background-repeat: no-repeat;
   width: 31px;
   height: 31px;
@@ -157,7 +157,7 @@ export const WAIcon = styled.i`
   border-radius: 50%;
 `;
 export const IGIcon = styled.i`
-  background-image: url(../images/instragram2.png);
+  background-image: url(../images/instagram.svg);
   background-repeat: no-repeat;
   width: 31px;
   height: 31px;

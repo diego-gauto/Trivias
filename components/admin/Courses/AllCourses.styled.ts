@@ -16,7 +16,7 @@ export const CourseContainer = styled.div`
 `;
 export const CourseName = styled.p`
   font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const TitleContain = styled.div`
@@ -26,15 +26,17 @@ export const TitleContain = styled.div`
   justify-content: space-between;
 `;
 export const ChevU = styled.i`
-  background-image: url(../images/admin/Courses/chevUp.png);
+  background-image: url(../images/Video/icons/arrowUp.svg);
   background-repeat: no-repeat;
+  background-position: center;
   width: 24px;
   height: 24px;
   cursor: pointer;
 `;
 export const ChevD = styled.i`
-  background-image: url(../images/admin/Courses/chevDown.png);
+  background-image: url(../images/Video/icons/arrowDown.svg);
   background-repeat: no-repeat;
+  background-position: center;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -54,15 +56,15 @@ export const Info = styled.div`
 `;
 export const Text = styled.p`
   font-size: 14px;
-  font-family:'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   text-align: justify;
 `;
 export const Label = styled.label`
   font-size: 16px;
-  color: #6717CD;
+  color: #6717cd;
   font-weight: 600;
-  font-family:'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const ButtonContain = styled.div`
@@ -72,45 +74,45 @@ export const ButtonContain = styled.div`
 `;
 export const TransparentButton = styled.button`
   font-size: 16px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: transparent;
-  color: #6717CD;
+  color: #6717cd;
   padding-block: 10px;
   padding-inline: 30px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 100px;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  font-family:'Montserrat',sans-serif;
-  background: #6717CD;
+  font-family: "Montserrat", sans-serif;
+  background: #6717cd;
   color: white;
   padding-block: 10px;
   padding-inline: 30px;
   border-radius: 100px;
   border: none;
-  &:hover{
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const RedButton = styled.button`
   font-size: 16px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: #dc3545;
   color: white;
   padding-block: 10px;
   padding-inline: 30px;
   border-radius: 100px;
   border: none;
-  &:hover{
+  &:hover {
     background-color: #842029;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;

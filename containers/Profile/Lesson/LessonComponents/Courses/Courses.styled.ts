@@ -63,7 +63,7 @@ export const Episode = styled.p`
   margin: 0;
 `;
 export const UploadIcon = styled.i<{ active: any }>`
-  background-image: url(../images/Video/DownNarrow.png);
+  background-image: url(../images/Video/icons/arrowDown.svg);
   height: 14px;
   width: 14px;
   background-position: center;

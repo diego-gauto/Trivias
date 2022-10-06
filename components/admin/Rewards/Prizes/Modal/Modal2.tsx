@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 
 import { addReward } from "../../../../../store/actions/RewardActions";
+import { CaretD2 } from "../../../Courses/Form/Select/SelectStyles.styled";
 import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
@@ -94,7 +95,7 @@ const Modal2 = ({ show, setShow, handleClick }: any) => {
             {
               reward.type == "" ? "Elige un tipo" : reward.type
             }
-            <CaretD />
+            <CaretD2 />
           </Selected>
           {
             open == true &&

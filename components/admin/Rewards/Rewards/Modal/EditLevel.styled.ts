@@ -29,13 +29,13 @@ export const TitleContain = styled.div`
 `;
 export const Title = styled.p`
   font-size: 24px;
-  font-family: 'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const Level = styled.p`
   font-size: 16px;
   font-weight: 600;
-  font-family: 'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const LevelContain = styled.div`
@@ -53,7 +53,6 @@ export const Add = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-
 `;
 export const AddText = styled.p`
   display: flex;
@@ -62,53 +61,55 @@ export const AddText = styled.p`
   padding-block: 10px;
   padding-inline: 20px;
   border-radius: 100px;
-  border: 2px solid #6717CD;
+  border: 2px solid #6717cd;
 
   font-weight: 600;
-  font-family: 'Montserrat',sans-serif;
-  color: #6717CD;
+  font-family: "Montserrat", sans-serif;
+  color: #6717cd;
   margin: 0;
   cursor: pointer;
 `;
 export const AddIcon = styled.i`
-  background-image: url(../images/admin/Rewards/add2.png);
+  background-image: url(../images/admin/Courses/plus.svg);
+  background-position: center;
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
 `;
 export const Close = styled.i`
-  background-image: url(../images/admin/Rewards/close.png);
+  background-image: url(../images/admin/close.svg);
+  background-position: center;
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
   cursor: pointer;
 `;
-export const  Contain = styled.div`
+export const Contain = styled.div`
   display: flex;
   gap: 30px;
 `;
 export const InputContain = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   position: relative;
   width: 100%;
 `;
 export const Label = styled.label`
   font-size: 14px;
-  color: #6717CD;
-  font-family: 'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
   width: 100%;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
-  border:1px solid #6717CD;
-  border-radius:20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
   outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  :focus {
+    border: 2px solid #8e2de2;
   }
 `;
 export const ButtonContain = styled.div`
@@ -117,16 +118,16 @@ export const ButtonContain = styled.div`
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 8px;
   padding-inline: 20px;
-  background: #6717CD;
+  background: #6717cd;
   border-radius: 100px;
   color: white;
   border: none;
-  &:hover{
-    transition: .2s ease all;
-    background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  &:hover {
+    transition: 0.2s ease all;
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
     padding-block: 10px;
     padding-inline: 22px;
   }

@@ -13,73 +13,73 @@ export const TitleContain = styled.div`
 `;
 export const Title = styled.p`
   font-size: 24px;
-  font-family: 'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const InputContain = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   position: relative;
   width: 100%;
 `;
 export const Label = styled.label`
   font-size: 14px;
-  color: #6717CD;
-  font-family: 'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
-  border:1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 100px;
   outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  :focus {
+    border: 2px solid #8e2de2;
   }
 `;
 export const Input2 = styled.div`
   font-size: 14px;
   width: 100%;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
   height: 43px;
-  border:1px solid #6717CD;
-  border-radius:20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
   input::file-selector-button {
     display: none;
   }
-  input{
+  input {
     width: 100%;
   }
-  label{
-    color: #6717CD;
+  label {
+    color: #6717cd;
   }
   outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  :focus {
+    border: 2px solid #8e2de2;
   }
 `;
 export const InputBig = styled.textarea`
   font-size: 12px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-align: justify;
   padding-block: 10px;
-  width:100%;
-  height:100px;
+  width: 100%;
+  height: 100px;
   padding-inline: 20px;
-  border:1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 10px;
   overflow: hidden;
   resize: none;
   outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  :focus {
+    border: 2px solid #8e2de2;
   }
-::placeholder{
-}
+  ::placeholder {
+  }
 `;
 export const ButtonContain = styled.div`
   display: flex;
@@ -88,27 +88,28 @@ export const ButtonContain = styled.div`
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
-  background: #6717CD;
+  background: #6717cd;
   border-radius: 100px;
   color: white;
-  border: none;&:hover{
+  border: none;
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const ButtonTransparent = styled.button`
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: white;
   border-radius: 100px;
-  color: #6717CD;
-  border: 1px solid #6717CD;
+  color: #6717cd;
+  border: 1px solid #6717cd;
 `;
 export const IconContain = styled.div`
   display: flex;
@@ -120,7 +121,7 @@ export const Folder = styled.i`
   top: 50%;
   transform: translateY(-50%);
   left: 15px;
-  background-image: url(../images/admin/Rewards/folder.png);
+  background-image: url(../images/admin/Rewards/folder.svg);
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
@@ -132,10 +133,10 @@ export const Selected = styled.div`
   font-size: 16px;
   padding-left: 20px;
   width: 100%;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 10px;
   border-radius: 100px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   z-index: 5;
 `;
 export const SelectContain = styled.div`
@@ -148,7 +149,7 @@ export const OptionContain = styled.div`
   background: white;
   width: 100%;
   color: black;
-  right:0;
+  right: 0;
   position: absolute;
   border-radius: 10px;
   box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
@@ -156,9 +157,9 @@ export const OptionContain = styled.div`
 `;
 export const Option = styled.div`
   width: 100%;
-  &:hover{
-    background: linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);
-    color:white;
+  &:hover {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    color: white;
     &:first-child {
       border-radius: 10px 10px 0 0;
     }
@@ -166,19 +167,19 @@ export const Option = styled.div`
       border-radius: 0 0 8px 8px;
     }
   }
-  input{
-    &[type="radio"]{
+  input {
+    &[type="radio"] {
       display: none;
     }
   }
 `;
 export const LabelSelect = styled.label`
-  display: flex; 
+  display: flex;
   font-size: 16px;
   gap: 5px;
   padding-block: 10px;
   padding-inline: 20px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   white-space: nowrap;
 `;

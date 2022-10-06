@@ -13,26 +13,26 @@ export const FilterContain = styled.div`
 
 export const Select = styled.div`
   display: flex;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 14px;
   font-weight: 600;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-right: none;
   border-radius: 10px 0px 0px 10px;
-  select{
+  select {
     border: none;
     outline: none;
     border-radius: 10px 0px 0px 10px;
   }
-  option{
+  option {
     font-size: 14px;
     font-weight: 600;
   }
 `;
 export const SearchInput = styled.input`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 14px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 0px 10px 10px 0px;
   outline: none;
   padding-block: 10px;
@@ -40,20 +40,20 @@ export const SearchInput = styled.input`
 `;
 export const DownloadUserData = styled.div`
   display: flex;
-  img{
+  img {
     position: absolute;
     width: 15px;
     margin-top: 14px;
     margin-left: 7px;
   }
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const SearchIcon = styled.i`
   background-image: url(../images/admin/search.png);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   width: 24px;
   height: 24px;
   position: absolute;
@@ -62,8 +62,8 @@ export const SearchIcon = styled.i`
   left: 15px;
 `;
 export const EditIcon = styled.i`
-  background-image: url(../images/admin/create.png);
-  background-repeat:no-repeat;
+  background-image: url(../images/admin/create.svg);
+  background-repeat: no-repeat;
   width: 24px;
   height: 24px;
 `;
@@ -76,7 +76,7 @@ export const UserShow = styled.p`
   cursor: pointer;
   gap: 2px;
   align-items: center;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-size: 14px;
   margin: 0;
 `;

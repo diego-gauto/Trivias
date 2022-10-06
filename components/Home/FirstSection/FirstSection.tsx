@@ -11,11 +11,12 @@ import { Feature } from "../../common/Home/Feature/Feature";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas";
 import Img1 from "../Module1/MediaSources/Icon01.png";
-import Img2 from "../Module1/MediaSources/Icon02.png";
-import Img3 from "../Module1/MediaSources/Icon03.png";
-import Img4 from "../Module1/MediaSources/Icon04.png";
+import Img2 from "../Module1/MediaSources/Icon02.svg";
+import Img3 from "../Module1/MediaSources/Icon03.svg";
+import Img4 from "../Module1/MediaSources/Icon04.svg";
 import { ArrowDownContainer, BlurDiv, FirstSectionContainer } from "./FirstSection.styled";
 import { IFirstSectionProps } from "./IFirstSectionProps";
+import { FaArrowRight } from "react-icons/fa";
 
 export const FirstSection = (props: IFirstSectionProps) => {
   const { data, img } = props;
@@ -51,7 +52,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
             <Col xs={12} sm={6} md={6} lg={5} >
               <a onClick={() => router.push("/Preview")}>
                 {data.botonSecundario}
-                <Image src={Img1.src} />
+                <FaArrowRight></FaArrowRight>
               </a>
             </Col>
           </Row>
