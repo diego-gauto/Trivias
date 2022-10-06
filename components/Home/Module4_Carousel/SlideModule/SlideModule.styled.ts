@@ -1,31 +1,50 @@
+import { Container } from "react-bootstrap";
+
 import styled from "styled-components";
 
+export const SlideModuleContainer = styled(Container)`
+  padding: 0;
+  margin-top: 20px;
+  padding-right: 10px;
+`;
+
 export const SlideImg = styled.div`
-  width: 95%;
-  height: 200px;
-  background-repeat: no-repeat;
   background-position: center;
   background-size: 100% auto;
-  padding: 0;
+  background-repeat: no-repeat;
+  height: 27vh;
+  @media only screen and (min-height: 500px) {
+    height: 42vh;
+  }
+  @media only screen and (min-height: 600px) {
+    height: 38vh;
+  }
+  @media only screen and (min-height: 700px) {
+    height: 34vh;
+  }
+  @media only screen and (min-height: 800px) and (max-height: 850px) {
+    height: 24vh;
+  }
   @media only screen and (max-width: 1024px) {
+    background-size: 72% auto;
     margin-bottom: 15px;
-    height: 60vh;
+    height: 28vh;
   }
   @media only screen and (max-width: 660px) {
     margin-bottom: 15px;
     margin-top: 0px;
-    height: 22vh;
+    height: 25vh;
     background-size: 95% auto;
   }
   @media only screen and (max-width: 500px) {
     margin-bottom: 15px;
     margin-top: 0px;
-    height: 16vh;
+    height: 18vh;
   }
 `;
 
 export const TextSectionWrapper = styled.div`
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   @media only screen and (max-width: 1024px) {
     display: none;
     padding-bottom: 0;

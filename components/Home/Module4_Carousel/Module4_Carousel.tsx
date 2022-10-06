@@ -47,7 +47,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     breakpoints: {
       1024: {
         slidesPerView: 3.5,
-        spaceBetween: 30,
+        spaceBetween: 0,
       }
     }
   };
@@ -55,7 +55,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   return (
     <Container
       fluid
-      style={{ overflow: "hidden", padding: 1 }}
+      style={{ overflow: "hidden", padding: 0, margin: 0 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

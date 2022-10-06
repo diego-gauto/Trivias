@@ -1,11 +1,10 @@
-
-
-import { Col, Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 import { ISlideModule } from "./ISlideModule";
 import {
   NewTag,
   SlideImg,
+  SlideModuleContainer,
   Text01,
   Text02,
   TextNew,
@@ -13,38 +12,26 @@ import {
 } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
-
-
-
-  const { isNew } = props;
-  const { title } = props;
-  const { subtitle } = props;
-  const { imgURL } = props;
-
+  const { imgURL, title, subtitle, isNew } = props;
 
   return (
-    <Container className="mt-4">
-      <Col>
+    <SlideModuleContainer>
+      <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
+        {isNew ?
+          <NewTag>
+            <TextNew>Nuevo</TextNew>
+          </NewTag>
+          : <></>}
+      </SlideImg>
+
+      <TextSectionWrapper>
         <Row>
-          <SlideImg style={{ backgroundImage: 'url(' + imgURL + ')' }}>
-            {isNew ?
-              <NewTag>
-                <TextNew>Nuevo</TextNew>
-              </NewTag>
-              : <></>}
-          </SlideImg>
+          <Text01>{title} </Text01>
         </Row>
-
-        <TextSectionWrapper>
-          <Row>
-            <Text01>{title} </Text01>
-          </Row>
-          <Row>
-            <Text02>{subtitle} </Text02>
-          </Row>
-        </TextSectionWrapper>
-      </Col>
-    </Container >
-
+        <Row>
+          <Text02>{subtitle} </Text02>
+        </Row>
+      </TextSectionWrapper>
+    </SlideModuleContainer >
   )
 }
