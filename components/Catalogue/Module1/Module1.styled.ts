@@ -60,7 +60,7 @@ export const ButtonContain = styled.div`
 `;
 export const Title = styled.h1`
   font-size: 36px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
   margin: 0;
   @media (max-width: 1023px) {
@@ -74,7 +74,7 @@ export const SubText = styled.p`
   width: 60%;
   font-size: 24px;
   text-align: justify;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
   margin: 0;
   @media (max-width: 1023px) {
@@ -84,25 +84,25 @@ export const SubText = styled.p`
 export const Banner = styled(Image)`
   width: 100%;
   postion: absolute;
-  `;
-  export const PurpleButton = styled.button`
+`;
+export const PurpleButton = styled.button`
   display: flex;
   gap: 5px;
-  align-items:center;
+  align-items: center;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   justify-content: center;
   padding-block: 15px;
   padding-inline: 25px;
-  background-color: #6717CD;
+  background-color: #6717cd;
   color: #fff;
   border-radius: 30px;
-  border:none;
-  &:hover{
+  border: none;
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
   @media (max-width: 650px) {
     font-size: 12px;
@@ -116,34 +116,35 @@ export const Banner = styled(Image)`
 `;
 export const TransparentButton = styled.button`
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   padding-block: 15px;
   padding-inline: 25px;
-  color: #6717CD;
+  color: #6717cd;
   border-radius: 30px;
   display: flex;
   gap: 10px;
-  background:none;
-  border: #6717CD 2px solid;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  background: none;
+  border: #6717cd 2px solid;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
   @media (max-width: 650px) {
     font-size: 12px;
     padding-block: 10px;
     padding-inline: 15px;
-    color: #6717CD;
+    color: #6717cd;
   }
   @media (max-width: 450px) {
     padding-block: 8px;
     font-size: 10px;
-    color: #6717CD;
+    color: #6717cd;
   }
 `;
 export const PlayIcon = styled.i`
-  background-image: url(../images/Preview/play.png);
+  background-repeat: no-repeat;
+  background-image: url(../images/Preview/fillArrow.svg);
   height: 24px;
   width: 18px;
   background-position: center;

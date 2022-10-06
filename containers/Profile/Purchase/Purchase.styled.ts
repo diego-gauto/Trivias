@@ -5,176 +5,180 @@ import Image from "next/image";
 import styled, { css, keyframes } from "styled-components";
 
 export const Container = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  background-color:white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: white;
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding-block:10px;
-  padding-inline:60px;
-  @font-face{
-    font-family:Montserrat;
-    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  padding-block: 10px;
+  padding-inline: 60px;
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face{
-    font-family:Raleway;
-    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway-VariableFont_wght.ttf);
   }
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     padding-inline: 20px;
   }
 `;
 export const Title = styled.h1`
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 36px;
   font-weight: 400;
-  margin:0;
-  @media(max-width: 1023px){
-    display:none;
+  margin: 0;
+  @media (max-width: 1023px) {
+    display: none;
   }
 `;
 export const PayBox = styled.div`
-  display:flex;
+  display: flex;
   align-items: center;
-  flex-direction:column;
+  flex-direction: column;
   gap: 20px;
   width: 100%;
 `;
 export const DataPayment = styled.div`
-  display:flex;
-  width:100%;
-  padding-block:30px;
-  padding-inline:30px;
-  position:relative;
-  gap:5px;
-  justify-content:center;
-  align-items:center;
-  border-radius:10px;
+  display: flex;
+  width: 100%;
+  padding-block: 30px;
+  padding-inline: 30px;
+  position: relative;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const DataPaymentContain = styled.div`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export const ProcessText = styled.p`
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
-  position:absolute;
-  text-align:center;
-  margin:0;
-  bottom:0px;
+  position: absolute;
+  text-align: center;
+  margin: 0;
+  bottom: 0px;
 `;
 export const ProcessCircle = styled.div`
-  width:32px;
-  height:32px;
-  border:1px solid gray;
-  border-radius:25px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid gray;
+  border-radius: 25px;
 `;
 export const Division = styled.div`
-  width:200px;
-  height:4px;
-  background:gray;
+  width: 200px;
+  height: 4px;
+  background: gray;
 `;
 export const TextPosition = styled.p`
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-weight: 600;
-  position:absolute;
-  color: #6717CD;
-  text-align:center;
-  margin:0;
-  bottom:0px;
+  position: absolute;
+  color: #6717cd;
+  text-align: center;
+  margin: 0;
+  bottom: 0px;
 `;
 export const CirclePosition = styled.div`
   width: 50px;
   height: 50px;
-  border: 1px solid #6717CD;
-  border-radius:25px;
+  border: 1px solid #6717cd;
+  border-radius: 25px;
 `;
 export const Division2 = styled.div`
-  width:200px;
-  height:4px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
 `;
 export const PastText = styled.p`
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
-  position:absolute;
-  color: #6717CD;
-  text-align:center;
-  margin:0;
-  bottom:0px;
+  position: absolute;
+  color: #6717cd;
+  text-align: center;
+  margin: 0;
+  bottom: 0px;
 `;
 export const PastCircle = styled.div`
-  width:32px;
-  height:32px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-  border-radius:25px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+  border-radius: 25px;
 `;
 export const SubContainer = styled.div`
-  display:flex;
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap:20px;
-  width:100%;
+  gap: 20px;
+  width: 100%;
 `;
 export const SubContainer2 = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  width:50%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 50%;
   flex: 1 480px;
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     gap: 20px;
   }
 `;
 export const ContainTitle = styled.h1`
   display: flex;
   justify-content: space-between;
-  font-weight:600;
+  font-weight: 600;
   font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
-  @media(max-width: 600px){
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  @media (max-width: 600px) {
     font-size: 14px;
     text-align: center;
   }
 `;
-export const PaymentContain = styled.div<{active:any}>`
-  display:flex;
-  flex-direction:column;
+export const PaymentContain = styled.div<{ active: any }>`
+  display: flex;
+  flex-direction: column;
   gap: 15px;
   padding: 20px;
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-  &:hover{
+  &:hover {
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
-    cursor:pointer;
+    cursor: pointer;
   }
-  ${props => (props.active == true) && css`
-  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
-  `}
+  ${(props) =>
+    props.active == true &&
+    css`
+      box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+    `}
 `;
 export const PaymentDetail = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
   padding: 20px;
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
-export const PaymentMethod = styled("div")<{active:any}>`
-  ${props => (props.active == true) && css`
-  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
-  `}
+export const PaymentMethod = styled("div")<{ active: any }>`
+  ${(props) =>
+    props.active == true &&
+    css`
+      box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+    `}
   display: flex;
   align-items: center;
   padding-block: 10px;
@@ -183,17 +187,17 @@ export const PaymentMethod = styled("div")<{active:any}>`
   border-radius: 6px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  &:hover{
+  &:hover {
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
 `;
 export const PayText = styled.p`
   text-align: center;
-  font-weight:600;
+  font-weight: 600;
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  @media (max-width: 1023px) {
     font-size: 12px;
   }
 `;
@@ -201,23 +205,23 @@ export const PayText2 = styled.p`
   text-align: center;
   font-weight: 600;
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const PaymentsContainer = styled.div`
-  display:flex;
+  display: flex;
   gap: 10px;
 `;
 export const VisaPay = styled.i`
   background-image: url(../images/VisaPay.svg);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   height: 96px;
   width: 144px;
   background-position: center;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     width: 95px;
     height: 65px;
     margin-top: 15px;
@@ -226,104 +230,114 @@ export const VisaPay = styled.i`
 `;
 export const PayPal = styled.i`
   background-image: url(../images/PaypalPay.png);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   height: 96px;
   width: 144px;
   background-position: center;
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     width: 120px;
   }
 `;
-export const CardIconResp = styled("i")<{brand:any}>`
-  ${props => (props.brand == 'visa') && css`
-        background-image: url(../images/visa-icon.png);
-  `}
-  ${props => (props.brand == 'mastercard') && css`
-        background-image: url(../images/mastercard-icon.png);
-  `}
-  ${props => (props.brand == 'amex') && css`
-        background-image: url(../images/amex-icon.png);
-  `}
+export const CardIconResp = styled("i")<{ brand: any }>`
+  ${(props) =>
+    props.brand == "visa" &&
+    css`
+      background-image: url(../images/visa-icon.png);
+    `}
+  ${(props) =>
+    props.brand == "mastercard" &&
+    css`
+      background-image: url(../images/mastercard-icon.png);
+    `}
+  ${(props) =>
+    props.brand == "amex" &&
+    css`
+      background-image: url(../images/amex-icon.png);
+    `}
   
   background-repeat:no-repeat;
   width: 59px;
   height: 33px;
   background-position: center;
-  @media( max-width: 1023px){
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   height: 32px;
   width: 47px;
   background-position: center;
 `;
 export const NewMethodContain = styled.div`
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   width: 100%;
 `;
 export const NewMethod = styled.div`
-  display:flex;
-  gap:20px;
-  width:100%;
+  display: flex;
+  gap: 20px;
+  width: 100%;
   justify-content: center;
 `;
-export const NewMethodBox = styled.div<{active:any,plan:any}>`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding-block:30px;
+export const NewMethodBox = styled.div<{ active: any; plan: any }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 30px;
   width: 220px;
-  border-radius:10px;
+  border-radius: 10px;
   width: 100%;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  &:active{
+  &:active {
     border: 1px solid black;
   }
-  &:hover{
+  &:hover {
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
-  @media(max-width: 600px){
+  @media (max-width: 600px) {
     width: 50%;
     padding-block: 18px;
     justify-content: space-between;
   }
-  ${props => (props.active == true && props.plan == 'stripe') && css`
-  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
-  `}
+  ${(props) =>
+    props.active == true &&
+    props.plan == "stripe" &&
+    css`
+      box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+    `}
 `;
-export const NewMethodBoxPaypal = styled.div<{plan:any}>`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding-block:30px;
+export const NewMethodBoxPaypal = styled.div<{ plan: any }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 30px;
   width: 220px;
-  border-radius:10px;
+  border-radius: 10px;
   width: 100%;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  &:active{
+  &:active {
     border: 1px solid black;
   }
-  &:hover{
+  &:hover {
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
-  @media(max-width: 600px){
+  @media (max-width: 600px) {
     width: 50%;
     padding-block: 18px;
     justify-content: space-between;
   }
-  ${props => (props.plan == 'paypal') && css`
-  box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
-  `}
+  ${(props) =>
+    props.plan == "paypal" &&
+    css`
+      box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
+    `}
 `;
 export const NewMethodBox2 = styled.div`
-  
-  @media(max-width: 500px){
+  @media (max-width: 500px) {
     display: visible;
     top: 40%;
     height: 120px;
@@ -334,46 +348,46 @@ export const NewMethodBox2 = styled.div`
   }
 `;
 export const ButtonContain = styled.div`
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 export const TransparentButton = styled.button`
-  font-family:'Montserrat',sans-serif;
-  font-size:16px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
   font-weight: 600;
   height: 50px;
   padding-inline: 25px;
-  background:transparent;
-  color: #6717CD;
+  background: transparent;
+  color: #6717cd;
   border-radius: 30px;
-  border:1px solid #6717CD;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  border: 1px solid #6717cd;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 14px;
     padding-block: 10px;
     padding-inline: 15px;
   }
 `;
 export const PurpleButton = styled.button`
-  font-family:'Montserrat',sans-serif;
-  font-size:16px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
   font-weight: 600;
   padding-block: 15px;
   padding-inline: 25px;
-  background-color: #6717CD;
+  background-color: #6717cd;
   color: #fff;
   border-radius: 30px;
   margin-left: auto;
-  border:none;
-  &:hover{
+  border: none;
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 14px;
     padding-block: 10px;
     padding-inline: 15px;
@@ -393,38 +407,45 @@ const glow = keyframes`
   }
 `;
 export const PurpleBuyButton = styled.button`
-  font-family:'Montserrat',sans-serif;
-  font-size:16px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
   font-weight: 600;
   padding-block: 15px;
   padding-inline: 25px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #804FB3 25%, #6c4b91 50%, #552586 75%, #4A00E0 100%);
+  background: linear-gradient(
+    135deg,
+    #8e2de2 0%,
+    #804fb3 25%,
+    #6c4b91 50%,
+    #552586 75%,
+    #4a00e0 100%
+  );
   background-size: 200% 100%;
-  animation: ${glow} 2.7s ease infinite ;
+  animation: ${glow} 2.7s ease infinite;
   color: #fff;
   border-radius: 30px;
-  border:none;
+  border: none;
   // &:hover{
   //   background-color: #5000b5;
   //   transform:scale(1.03);
   //   transition:.5s ease all;
   // }
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     font-size: 14px;
     padding-block: 10px;
     padding-inline: 15px;
   }
 `;
 export const PurchaseContainer = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   flex: 1 403.5px;
   gap: 20px;
-  padding:20px;
+  padding: 20px;
   border-radius: 10px;
   width: 50%;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     flex: 1 500px;
     gap: 10px;
     margin-bottom: 10px;
@@ -433,68 +454,68 @@ export const PurchaseContainer = styled.div`
 `;
 export const CourseId = styled.p`
   font-size: 14px;
-  font-family:'Raleway',sans-serif;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+  @media (max-width: 1023px) {
     font-size: 12px;
   }
 `;
 export const CourseName = styled.h1`
   font-size: 24px;
   font-weight: 600;
-  font-family:'Montserrat',sans-serif;
-  display:flex;
-  justify-content:space-between;
-  margin:0;
-  @media(max-width: 1115px){
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  @media (max-width: 1115px) {
     font-size: 18px;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 14px;
   }
 `;
 export const CourseCost = styled.span`
-  color: #6717CD;
+  color: #6717cd;
   font-size: 24px;
-  font-family:'Montserrat',sans-serif;
-  @media(max-width: 1115px){
+  font-family: "Montserrat", sans-serif;
+  @media (max-width: 1115px) {
     font-size: 20px;
   }
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const CourseCostResp = styled.span`
   display: none;
-  color: #6717CD;
+  color: #6717cd;
   font-size: 20px;
   font-weight: 600;
-  font-family:'Montserrat',sans-serif;
-  @media(max-width: 1023px){
+  font-family: "Montserrat", sans-serif;
+  @media (max-width: 1023px) {
     display: flex;
     font-size: 18px;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 14px;
   }
 `;
 export const CardContain = styled.div`
-  display:flex;
-  justify-content:center;
-  padding-inline:20px;
-  @media(max-width: 1023px){
+  display: flex;
+  justify-content: center;
+  padding-inline: 20px;
+  @media (max-width: 1023px) {
     display: none;
     padding-inline: 5px;
   }
 `;
 export const Card = styled.div`
-  display:flex;
+  display: flex;
   position: relative;
-  flex-direction:column;
-  justify-content:center;
-  border-radius:10px;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-  @media(max-width: 1300px){
+  @media (max-width: 1300px) {
     width: 100%;
   }
 `;
@@ -509,58 +530,58 @@ export const NumberLesson = styled.div`
   right: 10px;
   display: flex;
   font-size: 14px;
-  font-family:'Raleway',sans-serif;
+  font-family: "Raleway", sans-serif;
   color: white;
   padding-block: 5px;
   padding-inline: 10px;
   border: 1px solid white;
   border-radius: 10px;
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     font-size: 10px;
   }
 `;
 export const CourseText = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
 `;
 export const CourseImage = styled.img`
   border-radius: 10px 10px 0 0;
-  @media(max-width: 1300px){
+  @media (max-width: 1300px) {
     width: 100%;
   }
 `;
 export const TitleCourse = styled.p`
   font-size: 24px;
-  font-family:'Montserrat',sans-serif;
-  font-weight:600;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  @media (max-width: 1023px) {
     font-size: 20px;
   }
-  @media(max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 16px;
   }
 `;
 export const Subtitle = styled.p`
   font-size: 12px;
-  font-family:'Raleway',sans-serif;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+  @media (max-width: 1023px) {
     font-size: 10px;
   }
 `;
 export const CourseInfo = styled.p`
   font-size: 14px;
-  font-family:'Raleway',sans-serif;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const ContainerCard = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
   padding: 20px;
   width: 100%;
@@ -572,67 +593,67 @@ export const InputText = styled.label`
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  color: #6717CD;
-  font-family:'Montserrat',sans-serif;
-  @media( max-width: 400px){
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
+  @media (max-width: 400px) {
     font-size: 12px;
   }
 `;
 
 export const RowCard = styled(Row)`
   font-size: 14px;
-  color: #6717CD;
-  font-family:'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
   label {
     margin-bottom: 0;
   }
- input.form-control{
-    border: 1px solid #6717CD;
+  input.form-control {
+    border: 1px solid #6717cd;
     border-radius: 20px;
-    padding:10px 0px 10px 20px;
+    padding: 10px 0px 10px 20px;
     font-size: 14px;
     font-weight: 300;
-    font-family:'Raleway',sans-serif;
- }
- input.form-control:focus{
-  outline: 1px solid #8E2DE2;
- }
- input.form-control::placeholder{
-  color: #000 !important;
-  opacity: 0;
- }
- @media(max-width: 767px){
-   .col-md-4:nth-child(2){
-    margin-top: -14px;
+    font-family: "Raleway", sans-serif;
+  }
+  input.form-control:focus {
+    outline: 1px solid #8e2de2;
+  }
+  input.form-control::placeholder {
+    color: #000 !important;
+    opacity: 0;
+  }
+  @media (max-width: 767px) {
+    .col-md-4:nth-child(2) {
+      margin-top: -14px;
     }
   }
 `;
 
 export const Input = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
-  padding:10px 0 10px 20px;
-  border:1px solid #6717CD;
-  border-radius:20px;
+  font-family: "Montserrat", sans-serif;
+  padding: 10px 0 10px 20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
   outline: none;
-  :focus{
-    border:2px solid #6717CD;
+  :focus {
+    border: 2px solid #6717cd;
   }
-  @media( max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 12px;
   }
 `;
 export const InputCard = styled(InputMask)`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
-  padding:10px 0 10px 20px;
-  border:1px solid #6717CD;
-  border-radius:20px;
+  font-family: "Montserrat", sans-serif;
+  padding: 10px 0 10px 20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
   outline: none;
-  :focus{
-    border:2px solid #6717CD;
+  :focus {
+    border: 2px solid #6717cd;
   }
-  @media( max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 12px;
   }
 `;
@@ -640,14 +661,14 @@ export const InputContain = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  @media(max-width: 1023px){
+  @media (max-width: 1023px) {
     flex-direction: column;
     gap: 15px;
   }
 `;
 export const AlertIcon = styled.i`
-  background-image: url(../images/alert-circle.png);
-  background-repeat:no-repeat;
+  background-image: url(../images/tip.svg);
+  background-repeat: no-repeat;
   height: 20px;
   width: 20px;
   background-position: center;
@@ -657,27 +678,27 @@ export const Text = styled.p`
   align-items: center;
   gap: 5px;
   font-size: 14px;
-  color: #6717CD;
-  font-family:'Raleyway',sans-serif;
-  font-weight:600;
-  margin:0;
-  @media(max-width: 600px){
+  color: #6717cd;
+  font-family: "Raleyway", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  @media (max-width: 600px) {
     font-size: 10px;
   }
 `;
 export const Text2 = styled.p`
   font-size: 14px;
-  font-family:'Raleyway',sans-serif;
-  font-weight:600;
-  margin:0;
-  @media(max-width: 600px){
+  font-family: "Raleyway", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  @media (max-width: 600px) {
     font-size: 10px;
   }
 `;
 export const Text3 = styled.p`
   font-size: 18px;
-  font-family:'Montserrat',sans-serif;
-  margin:0;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
 `;
 export const BotContainer = styled.div`
   display: flex;
@@ -690,30 +711,30 @@ export const PurchaseText = styled.p`
   align-items: center;
   justify-content: space-between;
   font-size: 14px;
-  font-family:'Raleyway',sans-serif;
-  font-weight:600;
-  margin:0;
-  @media( max-width: 400px){
+  font-family: "Raleyway", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  @media (max-width: 400px) {
     font-size: 10px;
   }
 `;
 export const PurchaseData = styled.span`
   align-items: center;
   font-size: 14px;
-  font-family:'Raleyway',sans-serif;
-  font-weight:400;
-  margin:0;
-  @media(max-width: 1023px){
+  font-family: "Raleyway", sans-serif;
+  font-weight: 400;
+  margin: 0;
+  @media (max-width: 1023px) {
     font-size: 12px;
   }
-  @media( max-width: 400px){
+  @media (max-width: 400px) {
     font-size: 10px;
   }
-  `;
+`;
 export const InfoCard = styled.div`
   display: flex;
   gap: 5px;
-  align-items:center;
+  align-items: center;
 `;
 export const PurchaseContain = styled.div`
   display: flex;
@@ -736,14 +757,15 @@ to {
 }
 `;
 export const LoaderContainSpinner = styled.div`
-box-sizing: border-box;
-display: block;
-width: 30px;
-height: 30px;
-margin: 6px;
-border-width: 9px;
-border-style: solid;
-border-radius: 50%;
-border-color: #6717CD transparent transparent;
-animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none running;
+  box-sizing: border-box;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 6px;
+  border-width: 9px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #6717cd transparent transparent;
+  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
+    running;
 `;

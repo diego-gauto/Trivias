@@ -85,7 +85,7 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
                     seasonID: documentID,
                   }
                 }}>
-                  <Button>Añadir Lección <Add /></Button>
+                  <Button>Añadir Lección<Add /></Button>
                 </Link>
                 {
                   lessons.length == 0 &&

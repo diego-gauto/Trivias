@@ -10,9 +10,9 @@ export const GeneralContain = styled.div`
   background-color: #f3f3f5;
 `;
 export const AllEditInputs = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 export const ColumnsContainer = styled.div`
   display: flex;
@@ -34,81 +34,81 @@ export const ColumnsContainer2 = styled.div`
 `;
 export const EditButtons = styled.div`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   margin-top: 2%;
 `;
 export const EditInput = styled.input`
   font-size: 14px;
   width: 330px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 10px;
   padding-inline: 20px;
-  border:1px solid #6717CD;
-  border-radius:20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
   outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  :focus {
+    border: 2px solid #8e2de2;
   }
 `;
 export const EditInput2 = styled.textarea`
-font-size: 14px;
-width: 330px;
-padding-inline: 20px;
-overflow: hidden;
-resize: none;
-font-family:'Montserrat',sans-serif;
-padding: 15px;
-border:1px solid #6717CD;
-border-radius:20px;
-outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  font-size: 14px;
+  width: 330px;
+  padding-inline: 20px;
+  overflow: hidden;
+  resize: none;
+  font-family: "Montserrat", sans-serif;
+  padding: 15px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  outline: none;
+  :focus {
+    border: 2px solid #8e2de2;
   }
 `;
 export const EditText = styled.label`
   font-size: 14px;
-  color: #6717CD;
-  font-family:'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
 `;
 export const FolderInput = styled.input`
-  background-image: url(../images/admin/Rewards/folder.png);
+  background-image: url(../images/admin/Rewards/folder.svg);
   background-repeat: no-repeat;
   background-position: 5% 50%;
   font-size: 14px;
   width: 330px;
   text-indent: 40px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding: 10px;
-  border:1px solid #6717CD;
-  border-radius:20px;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
   ::file-selector-button {
     display: none;
   }
 `;
 export const Inputs = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 `;
 export const ProfileData = styled.div`
-  padding:20px;
+  padding: 20px;
 `;
 export const SaveButton = styled.button`
   padding-block: 15px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   padding-inline: 25px;
   color: white;
-  font-family:'Montserrat',sans-serif;
-  font-size:16px;
-  border:none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  border: none;
   border-radius: 30px;
-  background-color: #6717CD;
-  &:hover{
+  background-color: #6717cd;
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const HeaderMenu = styled.div`
@@ -118,11 +118,11 @@ export const HeaderMenu = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-inline: 0px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const AddText = styled.div`
-  ont-family: 'Nunito', sans-serif;
+  ont-family: "Nunito", sans-serif;
   font-size: 18px;
 `;
 export const AddTextContainer = styled.div`
@@ -133,7 +133,7 @@ export const AddTextContainer = styled.div`
   margin-right: 5%;
 `;
 export const AddTitle = styled.div`
-  ont-family: 'Nunito', sans-serif;
+  ont-family: "Nunito", sans-serif;
   font-weight: 400;
   font-size: 36px;
   display: flex;
@@ -150,7 +150,7 @@ export const GonvarText = styled.div`
   height: 24px;
   left: 31px;
   top: 103px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -159,11 +159,11 @@ export const GonvarText = styled.div`
 export const OptionsContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap:20px;
+  gap: 20px;
 `;
 export const HomePageContain = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
 `;
 export const OptionBtn = styled.div`
@@ -171,23 +171,23 @@ export const OptionBtn = styled.div`
   width: 380px;
   justify-content: center;
   height: 112px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   align-items: center;
   text-align: center;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 24px;
   &:hover {
-    background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-    transform:scale(1.03);
-    transition:.5s ease all;
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    transform: scale(1.03);
+    transition: 0.5s ease all;
     color: white;
     cursor: pointer;
   }
 `;
 export const OptionBtnOn = styled(OptionBtn)`
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
   color: white;
   &:hover {
     cursor: pointer;

@@ -4,12 +4,12 @@ import { IModule2 } from "./IModule2";
 import BG1 from "./MediaSources/BG01.png";
 import BG2 from "./MediaSources/BG02.png";
 import BG3 from "./MediaSources/BG03.png";
-import Img1 from "./MediaSources/Icon01.png";
-import Img2 from "./MediaSources/Icon02.png";
-import Img3 from "./MediaSources/Icon03.png";
-import Img4 from "./MediaSources/Icon04.png";
-import Img5 from "./MediaSources/Icon05.png";
-import Img6 from "./MediaSources/Icon06.png";
+import Img1 from "./MediaSources/Icon01.svg";
+import Img2 from "./MediaSources/Icon02.svg";
+import Img3 from "./MediaSources/Icon03.svg";
+import Img4 from "./MediaSources/Icon04.svg";
+import Img5 from "./MediaSources/Icon05.svg";
+import Img6 from "./MediaSources/Icon06.svg";
 import {
   IconImage,
   IconImagesContainer,

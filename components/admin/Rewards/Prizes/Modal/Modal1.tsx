@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 
 import { deletePointPrize, updateRewards } from "../../../../../store/actions/RewardActions";
+import { CaretD2 } from "../../../Courses/Form/Select/SelectStyles.styled";
 import { CloseIcon } from "../../../Users/UserData/UsersCardData.styled";
 import {
   Button,
@@ -91,7 +92,7 @@ const Modal1 = ({ show, setShow, data }: any) => {
             {
               reward.type
             }
-            <CaretD />
+            <CaretD2 style={{ 'top': 'auto' }} />
           </Selected>
           {
             open == true &&

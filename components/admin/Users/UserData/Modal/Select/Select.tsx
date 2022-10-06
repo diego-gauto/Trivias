@@ -1,5 +1,6 @@
 import { DocumentData } from 'firebase/firestore';
 import React, { useState } from 'react'
+import { CaretD2 } from '../../../../Courses/Form/Select/SelectStyles.styled';
 import { Label, Option, OptionContain, SelectContain, Selected, CaretD } from './Select.styled'
 
 const Select = ({ courses, handleClick }: any) => {
@@ -9,7 +10,7 @@ const Select = ({ courses, handleClick }: any) => {
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
         {value}
-        <CaretD />
+        <CaretD2 />
       </Selected>
       {
         open == true &&
