@@ -22,11 +22,18 @@ import {
 import { AllSeasons } from "./Form/AllSeasons";
 import CourseForm_Update from "./Form/CourseForm_Update";
 import { LessonContain, LessonTitle, NewSeason, NewSeasonContain } from "./Form/Lessons.styled";
+import SeasonEditModal from "./Form/SeasonEditModal";
+
+interface ISeasonEditModalData {
+  seasonID: string;
+  currentName: string;
+}
 
 const SeasonsMain = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseData, setCoursesData] = useState<any>(null);
   const [seasons, setSeasons] = useState<any>(null);
+  const [seasonEditModalData, setSeasonEditModalData] = useState<ISeasonEditModalData>();
   const router = useRouter()
   const { type, id } = router.query;
 
@@ -117,6 +124,14 @@ const SeasonsMain = () => {
       {!isLoading ? (
 
         <AdminContain>
+          {seasonEditModalData?.seasonID && (
+            <SeasonEditModal
+              courseID={courseID}
+              seasonID={seasonEditModalData?.seasonID}
+              currentName={seasonEditModalData?.currentName}
+              onClose={() => setSeasonEditModalData(undefined)}
+            />
+          )}
           <SideBar />
           <CourseContain>
             <Imagecontain>
@@ -162,11 +177,15 @@ const SeasonsMain = () => {
                 ? <>
                   {
                     seasons.map((e: any, i: any) => (
-                      <AllSeasons key={"adminSeasons" + i}
+                      <AllSeasons
+                        setSeasonEditModalData={setSeasonEditModalData}
+                        key={"adminSeasons" + i}
                         documentID={e.documentID}
                         index={e.season}
                         courseID={courseID}
-                        seasonID={seasons} />
+                        seasonID={seasons}
+                        name={e.name || `Temporada ${e.season}`}
+                      />
                     ))
                   }
                 </>

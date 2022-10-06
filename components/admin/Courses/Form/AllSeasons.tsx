@@ -21,6 +21,7 @@ import {
   SeasonContain,
   Title,
   TitleContain,
+  TitleEdit,
 } from "./Lessons.styled";
 
 interface IAllSeasons {
@@ -28,6 +29,8 @@ interface IAllSeasons {
   index: number,
   courseID: string,
   seasonID: string,
+  setSeasonEditModalData: Function,
+  name: string,
 }
 interface AllLessonsProps {
   lessonTitle: string,
@@ -36,7 +39,14 @@ interface AllLessonsProps {
   documentID?: string,
 }
 
-export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeasons) => {
+export const AllSeasons = ({
+  documentID,
+  index,
+  courseID,
+  seasonID,
+  setSeasonEditModalData,
+  name,
+}: IAllSeasons) => {
   const [show, setShow] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(0);
   const [openSeason, setOpenSeason] = useState(false);
@@ -65,16 +75,27 @@ export const AllSeasons = ({ documentID, index, courseID, seasonID }: IAllSeason
     getSeasonID()
   }, [])
 
+  const onSeasonEditClick = () => {
+    setSeasonEditModalData({ seasonID: documentID, currentName: name });
+  };
+
 
   return (
     <><MainContainer>
       <SeasonContain onClick={() => { setOpenSeason(!openSeason); getSeasonID() }}>
         <TitleContain>
-          <Title >
-            Temporada {index}
-            {!openSeason &&
-              <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
-          </Title>
+          <TitleEdit>
+            <Title>
+              {name}
+              {!openSeason &&
+                <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
+            </Title>
+            <Button
+              onClick={onSeasonEditClick}
+            >
+              Editar
+            </Button>
+          </TitleEdit>
           <ButtonContain>
             {openSeason &&
               <>
