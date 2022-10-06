@@ -5,3 +5,32 @@
     outline: none !important;
     border:2px solid #6717CD !important;
 }
+
+.skeleton-product {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+  pointer-events: none !important;
+  width: 100%;
+}
+.skeleton-product .grey-field {
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-iteration-count: 20;
+    color: transparent !important;
+    border-radius: 3px;
+    max-width: initial;
+  }
+
+@keyframes blink {
+  0% {
+    background-color: #3035417c;
+  }
+  50% {
+    background-color:#3035413a;
+  }
+  100% {
+    background-color: #3035417c;
+  }
+}

@@ -167,22 +167,21 @@ export const CourseContain = styled.div`
   gap: 20px;
   @media (max-width: 991px) {
     flex-direction: column;
-    margin-top: -240px;
     z-index: 10;
   }
-  @media (max-width: 850px) {
-    flex-direction: column;
-    margin-top: -100px;
-    z-index: 10;
-  }
-  @media (max-width: 670px) {
-    padding-inline: 10px;
-    margin-top: -45px;
-    z-index: 10;
-  }
-  @media (max-width: 520px) {
-    margin-top: -5px;
-  }
+  // @media (max-width: 850px) {
+  //   flex-direction: column;
+  //   margin-top: -100px;
+  //   z-index: 10;
+  // }
+  // @media (max-width: 670px) {
+  //   padding-inline: 10px;
+  //   margin-top: -45px;
+  //   z-index: 10;
+  // }
+  // @media (max-width: 520px) {
+  //   margin-top: -5px;
+  // }
 `;
 export const AboutContain = styled.div`
   display: flex;
