@@ -115,19 +115,19 @@ const NavBar = () => {
               {
                 color == 1 &&
                 <Link href="/">
-                  <Logo src="/images/logo3.png" />
+                  <Logo src="/images/Navbar/logo.svg" />
                 </Link>
               }
               {
                 color == 0 &&
                 <Link href="/">
-                  <Logo src="/images/logo.png" />
+                  <Logo src="/images/Navbar/WhiteLogo.svg" />
                 </Link>
               }
             </>
             :
             <Link href="/">
-              <Logo src="/images/logo3.png" />
+              <Logo src="/images/Navbar/logo.svg" />
             </Link>
         }
       </LogoContain>

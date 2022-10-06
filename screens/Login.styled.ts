@@ -7,30 +7,30 @@ export const ProfilePicture = styled.i`
   height: 106px;
   width: 98px;
   background-position: center;
-  border:none;
-  background-repeat:no-repeat;
+  border: none;
+  background-repeat: no-repeat;
 `;
 export const ProfilePicture2 = styled.i`
   background-image: url(../images/DefaultIcon.png);
   height: 140px;
   width: 140px;
   background-position: center;
-  border:none;
-  background-repeat:no-repeat;
+  border: none;
+  background-repeat: no-repeat;
 `;
 export const Error = styled.p`
-  color:#db2c1d;
-  text-align:center;
+  color: #db2c1d;
+  text-align: center;
 `;
 
-export const AnimatedBackground = styled.video  `
-width: auto;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    z-index: -2;
-    margin-left: -80px;
-`; 
+export const AnimatedBackground = styled.video`
+  width: auto;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: -2;
+  margin-left: -80px;
+`;
 
 export const Background = styled.div`
   display: flex;
@@ -38,28 +38,28 @@ export const Background = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 90vh;
-  
-  @font-face{
-    font-family:Montserrat;
-    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face{
-    font-family:Raleway;
-    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway-VariableFont_wght.ttf);
   }
   @media (max-width: 760px) {
-    padding:15px;
+    padding: 15px;
   }
 `;
 export const Body = styled.div`
-display: flex;
-flex-direction: column;
-min-height: 100vh;
-margin: 0;
-padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 `;
 export const ChildrenContain = styled.div`
-flex-grow: 1;
+  flex-grow: 1;
 `;
 const rotate = keyframes`
   from {
@@ -80,8 +80,9 @@ export const LoaderContain = styled.div`
   border-width: 9px;
   border-style: solid;
   border-radius: 50%;
-  border-color: #6717CD transparent transparent;
-  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none running;
+  border-color: #6717cd transparent transparent;
+  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
+    running;
 `;
 export const LoaderImage = styled.div`
   display: flex;
@@ -95,24 +96,24 @@ export const LoaderImage = styled.div`
 `;
 
 export const LoginBox = styled.div`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding-inline:90px;
-  padding-block:40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 90px;
+  padding-block: 40px;
   border: 1px solid #fff;
   box-sizing: border-box;
-  width:100%;
+  width: 100%;
   gap: 15px;
-  max-width:515px;
-  min-height:680px;
-  background:transparent;
+  max-width: 515px;
+  min-height: 680px;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 10px;
   backdrop-filter: blur(180px);
-  backdrop-opactiy:10px;
+  backdrop-opactiy: 10px;
   font-family: Montserrat;
-  form{
+  form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,33 +121,32 @@ export const LoginBox = styled.div`
     gap: 15px;
   }
   @media (max-width: 530px) {
-    padding-inline:20px;
+    padding-inline: 20px;
   }
 `;
 export const LoginBox2 = styled.div`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding-inline:70px;
-  padding-block:40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 70px;
+  padding-block: 40px;
   border: 1px solid #fff;
   box-sizing: border-box;
-  width:100%;
-  gap:25px;
-  max-width:727px;
-  min-height:680px;
-  background:transparent;
+  width: 100%;
+  gap: 25px;
+  max-width: 727px;
+  min-height: 680px;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 10px;
   backdrop-filter: blur(180px);
-  backdrop-opactiy:10px;
+  backdrop-opactiy: 10px;
   font-family: Montserrat;
-  position:relative;
+  position: relative;
   @media (max-width: 760px) {
-    padding-inline:30px;
+    padding-inline: 30px;
   }
 `;
-
 
 export const Title = styled.h1`
   font-family: Montserrat;
@@ -154,15 +154,14 @@ export const Title = styled.h1`
   font-style: normal;
   font-size: 36px;
   text-align: center;
-  text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   font-family: Montserrat;
   @media (max-width: 670px) {
-    font-size:30px;
+    font-size: 30px;
   }
 `;
 
 export const Box1 = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
@@ -172,16 +171,16 @@ export const Box1 = styled.div`
   }
 `;
 export const Box2 = styled.div`
-  position:relative;
-  width:100%;
+  position: relative;
+  width: 100%;
   @media (max-width: 670px) {
     width: 100%;
     max-width: 320px;
   }
 `;
 export const PasswordBox = styled.div`
-  position:relative;
-  svg{
+  position: relative;
+  svg {
     position: absolute;
     right: 15px;
     top: 50%;
@@ -191,11 +190,11 @@ export const PasswordBox = styled.div`
     width: 100%;
     max-width: 320px;
   }
-  `;
+`;
 export const Text2 = styled.label`
   font-size: 14px;
   color: #fff;
-  opacity: .8;
+  opacity: 0.8;
   @media (max-width: 670px) {
     font-size: 12px;
   }
@@ -203,35 +202,35 @@ export const Text2 = styled.label`
 export const TextInput = styled.input`
   color: #fff;
   outline: none;
-  opacity: .8;
+  opacity: 0.8;
   border: 1px solid white;
   width: 100%;
   height: 40px;
-  background:transparent;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 20px;
   padding: 0 0 0 20px;
   font-size: 14px;
-  ::placeholder{
+  ::placeholder {
     color: #adadac;
   }
   :focus {
-    background:transparent;
-    box-shadow: 0px 0px 10px 2px #6717CD;
+    background: transparent;
+    box-shadow: 0px 0px 10px 2px #6717cd;
     border: 2px solid white;
   }
   @media (max-width: 670px) {
-    font-size: 12px;;
+    font-size: 12px;
   }
-`; 
+`;
 export const TextInput_2 = styled.input`
   color: #fff;
   outline: none;
-  opacity: .8;
+  opacity: 0.8;
   border: 1px solid white;
   width: 100%;
   height: 40px;
-  background:transparent;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 20px;
   padding: 0 0 0 20px;
@@ -240,16 +239,16 @@ export const TextInput_2 = styled.input`
   > i {
     display: none !important;
   }
-  
-  ::placeholder{
+
+  ::placeholder {
     color: #adadac;
   }
   @media (max-width: 670px) {
-    font-size: 12px;;
+    font-size: 12px;
   }
   :focus {
-    background:transparent;
-    box-shadow: 0px 0px 10px 2px #6717CD;
+    background: transparent;
+    box-shadow: 0px 0px 10px 2px #6717cd;
     border: 2px solid white;
   }
 `;
@@ -257,7 +256,7 @@ export const InputPhone = styled(PhoneInput)`
   flex: 1 1;
   height: 40px;
   background: transparent;
-  opacity: .8;
+  opacity: 0.8;
   border-radius: 30px;
   border: 1px solid white;
   .PhoneInputInput {
@@ -284,7 +283,7 @@ export const InputPhone = styled(PhoneInput)`
     align-items: center;
     left: 20px;
     margin-right: var(--PhoneInputCountrySelect-marginRight);
-}
+  }
   @media (max-width: 670px) {
     font-size: 12px;
   }
@@ -292,84 +291,84 @@ export const InputPhone = styled(PhoneInput)`
 export const ArchiveInput = styled.input`
   color: #fff;
   outline: none;
-  opacity: .8;
+  opacity: 0.8;
   border: 1px solid white;
   width: 100%;
   height: 40px;
-  background:transparent;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 20px;
   padding: 0 0 0 50px;
   font-size: 14px;
-  ::placeholder{
-    color:#adadac;
+  ::placeholder {
+    color: #adadac;
   }
   @media (max-width: 670px) {
     font-size: 12px;
   }
 `;
 export const PurpleButton2 = styled.button`
-  background-color: #6717CD;
+  background-color: #6717cd;
   color: #fff;
   height: 50px;
   border-radius: 30px;
-  border:none;
-  &:hover{
+  border: none;
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const GoogleButton = styled.button`
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   background-color: #de5246;
   color: #fff;
   height: 50px;
-  width:100%;
+  width: 100%;
   border-radius: 30px;
-  border:none;
-  &:hover{
+  border: none;
+  &:hover {
     background-color: #db2c1d;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const FacebookButton = styled.button`
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   background-color: #0768fd;
   color: #fff;
   height: 50px;
-  width:100%;
+  width: 100%;
   border-radius: 30px;
-  border:none;
-  &:hover{
+  border: none;
+  &:hover {
     background-color: #0755fd;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const TransparentButton = styled.button`
-  background:transparent;
+  background: transparent;
   color: #fff;
   height: 50px;
   border-radius: 30px;
-  border:1px solid white;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  border: 1px solid white;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const GoogleIcon = styled.i`
   background-image: url(../images/logo-google.png);
   height: 21px;
   width: 21px;
-  border-style:none;
+  border-style: none;
   background-position: center;
 `;
 export const FacebookIcon = styled.i`
@@ -379,14 +378,14 @@ export const FacebookIcon = styled.i`
   background-position: center;
 `;
 export const EyeIcon = styled.i`
-background-image: url(../images/eye.png);
-height: 15px;
-width: 22.5px;
-background-position: center;
-position: absolute;
-top: 50%;
-right: 15px;
-transform: translateY(-50%);
+  background-image: url(../images/eye.png);
+  height: 15px;
+  width: 22.5px;
+  background-position: center;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
 `;
 export const LineIcon = styled.i`
   background-image: url(../images/Line-2.png);
@@ -397,7 +396,7 @@ export const LineIcon = styled.i`
   top: 0;
   left: 50px;
   margin: 29px 0 0 12px;
-  opacity:.4;
+  opacity: 0.4;
   @media (max-width: 670px) {
     left: 45px;
   }
@@ -413,36 +412,36 @@ export const FolderIcon = styled.i`
   left: 20px;
   background-position: center;
   position: absolute;
-  opacity:.8;
-  cursor:pointer;
+  opacity: 0.8;
+  cursor: pointer;
   z-index: 1;
 `;
 
 export const AllButtons = styled.div`
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 15px;
-  max-width:272px;
-  width:100%;
+  max-width: 272px;
+  width: 100%;
 `;
 export const Paragraph = styled.div`
-  text-align:center;
-  gap:5px;
+  text-align: center;
+  gap: 5px;
 `;
 export const InputContainer = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  margin-bottom:20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 20px;
 `;
 export const Text3 = styled.p`
   font-family: Raleway;
   text-align: center;
   font-size: 14px;
-  color: #FFFFFF;
-  margin:0;
-  opacity: .8;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0.8;
   @media (max-width: 670px) {
     font-size: 10px;
   }
@@ -456,5 +455,5 @@ export const LinkText = styled.span`
   @media (max-width: 670px) {
     font-size: 10px;
   }
-  cursor:pointer;
+  cursor: pointer;
 `;

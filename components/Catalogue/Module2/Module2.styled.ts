@@ -9,10 +9,10 @@ export const Container = styled.div`
 `;
 export const ContinueText = styled.h1`
   font-size: 36px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
-  padding-left:10px;
-  @media( max-width: 1023px){
+  padding-left: 10px;
+  @media (max-width: 1023px) {
     font-size: 24px;
   }
 `;
@@ -21,7 +21,7 @@ export const CardContainer = styled.div`
   padding: 10px;
   gap: 20px;
   overflow-x: scroll;
-  ::-webkit-scrollbar{
+  ::-webkit-scrollbar {
     display: none;
     width: 100%;
   }
@@ -31,12 +31,12 @@ export const Video = styled.div`
   flex-direction: column;
   max-width: 420px;
   cursor: pointer;
-  transition: all .2s ease-in-out;
-  @media( max-width: 700px){
-  width: 180px;
-  height: 120px;
+  transition: all 0.2s ease-in-out;
+  @media (max-width: 700px) {
+    width: 180px;
+    height: 120px;
   }
-  &:hover{
+  &:hover {
     transform: scale(1.02);
   }
 `;
@@ -48,9 +48,9 @@ export const VideoContain = styled.div`
   height: 100%;
 `;
 export const Background = styled.img`
-  border-radius:10px;
-  @media( max-width: 700px){
-    width:100%;
+  border-radius: 10px;
+  @media (max-width: 700px) {
+    width: 100%;
     height: 100%;
   }
 `;
@@ -64,7 +64,7 @@ export const PlayIcon = styled.i`
   width: 76px;
   background-position: center;
   cursor: pointer;
-  @media( max-width: 700px){
+  @media (max-width: 700px) {
     display: none;
   }
 `;
@@ -85,7 +85,7 @@ export const PlayIconS = styled.i`
   transform: translate(-50%, -50%);
   background-position: center;
   cursor: pointer;
-  @media( max-width: 700px){
+  @media (max-width: 700px) {
     display: flex;
   }
 `;
@@ -94,23 +94,24 @@ export const Progress = styled.div`
   bottom: 0;
   display: flex;
   height: 12px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
   border-radius: 0px 10px 10px 10px;
 `;
 export const VideoTitle = styled.p`
   font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin-top: 10px;
   margin-bottom: 0;
-  @media( max-width: 1023px){
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const VideoInfo = styled.p`
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  @media( max-width: 1023px){
+  color: gray;
+  @media (max-width: 1023px) {
     display: none;
   }
 `;

@@ -3,18 +3,18 @@ import styled, { keyframes } from "styled-components";
 export const ForgotContain = styled.div`
   position: absolute;
   padding-inline: 20px;
-  padding-block:20px;
+  padding-block: 20px;
   border: 1px solid #fff;
   box-sizing: border-box;
-  width:100%;
+  width: 100%;
   gap: 15px;
-  max-width:600px;
-  min-height:500px;
-  background:transparent;
+  max-width: 600px;
+  min-height: 500px;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 10px;
   backdrop-filter: blur(40px);
-  backdrop-opactiy:10px;
+  backdrop-opactiy: 10px;
   font-family: Montserrat;
   @media (max-width: 530px) {
     padding-inline: 5px;
@@ -29,10 +29,9 @@ export const Title = styled.div`
   font-style: normal;
   font-size: 36px;
   text-align: center;
-  text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   font-family: Montserrat;
   @media (max-width: 670px) {
-    font-size:25px;
+    font-size: 25px;
     margin-top: 5%;
   }
 `;
@@ -48,7 +47,7 @@ export const TextContain = styled.div`
   }
 `;
 export const EmailContain = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   padding-inline: 70px;
@@ -61,7 +60,7 @@ export const EmailContain = styled.div`
 export const Text2 = styled.label`
   font-size: 14px;
   color: #fff;
-  opacity: .8;
+  opacity: 0.8;
   @media (max-width: 670px) {
     font-size: 14px;
   }
@@ -72,7 +71,7 @@ export const MessageContainer = styled.label`
   height: 20px;
   font-size: 13px;
   padding-left: 3%;
-  color: #AAFF00;
+  color: #aaff00;
   @media (max-width: 670px) {
     font-size: 12px;
     height: 25px;
@@ -81,39 +80,39 @@ export const MessageContainer = styled.label`
 export const TextInput = styled.input`
   color: #fff;
   outline: none;
-  opacity: .8;
+  opacity: 0.8;
   border: 1px solid white;
   width: 100%;
   height: 40px;
-  background:transparent;
+  background: transparent;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 20px;
   padding: 0 0 0 20px;
   font-size: 14px;
-  ::placeholder{
+  ::placeholder {
     color: #adadac;
   }
   :focus {
-    background:transparent;
-    box-shadow: 0px 0px 10px 2px #6717CD;
+    background: transparent;
+    box-shadow: 0px 0px 10px 2px #6717cd;
     border: 2px solid white;
   }
   @media (max-width: 670px) {
-    font-size: 12px;;
+    font-size: 12px;
   }
-`; 
+`;
 export const PurpleButton2 = styled.button`
-  background-color: #6717CD;
+  background-color: #6717cd;
   color: #fff;
   height: 50px;
   width: 50%;
   border-radius: 30px;
-  border:none;
+  border: none;
   margin: 15px;
-  &:hover{
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 const scale = keyframes`
@@ -127,23 +126,24 @@ const scale = keyframes`
   }
 `;
 export const PurpleButtonLoader = styled.div`
-display: flex;
-font-family: Montserrat;
-background-color: #6717CD;
-color: #fff;
-height: 50px;
-width: 50%;
-border-radius: 30px;
-border:none;
-margin: 15px;
-align-items: center;
-justify-content: center;
-animation: ${scale} .7s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none running;
+  display: flex;
+  font-family: Montserrat;
+  background-color: #6717cd;
+  color: #fff;
+  height: 50px;
+  width: 50%;
+  border-radius: 30px;
+  border: none;
+  margin: 15px;
+  align-items: center;
+  justify-content: center;
+  animation: ${scale} 0.7s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
+    running;
 `;
 export const ButtonContain = styled.div`
-  display:flex;
+  display: flex;
   //margin-top: 25px;
-  justify-content:center;
+  justify-content: center;
   width: 100%;
   @media (max-width: 670px) {
     padding: 0px;
@@ -155,11 +155,11 @@ export const CloseButton = styled.button`
   height: 50px;
   width: 50%;
   border-radius: 30px;
-  border:none;
-  &:hover{
+  border: none;
+  &:hover {
     background-color: #db2c1d;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
   @media (max-width: 670px) {
     margin-bottom: 20px;
