@@ -16,7 +16,7 @@ export const CourseContainer = styled.div`
 `;
 export const CourseName = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
   margin: 0;
 `;
 export const TitleContain = styled.div`

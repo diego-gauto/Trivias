@@ -66,7 +66,6 @@ export const ButtonPosition = styled.div`
   }
 `;
 export const Title = styled.h1`
-  font-family: "Montserrat";
   color: white;
   font-size: 36px;
 `;
