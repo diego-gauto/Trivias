@@ -2,15 +2,14 @@
 
 import { DocumentData } from "firebase/firestore";
 import router from "next/router";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getViewedCourses } from "../../../store/actions/courseActions";
-import { RespContain } from "../Module5/Module5.styled";
+import { CardImage } from "../Module4/Module4.styled";
+import { ImageContent, RespContain } from "../Module5/Module5.styled";
 import {
-  Background,
   CardContainer,
   Container,
   ContinueText,
-  ImageContain,
   PlayIcon,
   PlayIconS,
   Progress,
@@ -22,8 +21,16 @@ import {
 
 const Module2 = ({ user, allCourses }: any) => {
   const [course, setCourse] = useState<any>([]);
-  const [width, setWidth] = useState<any>(0);
-  const ref = useRef(null);
+
+  const handleWidth = () => {
+    let cardWidth: any = document.getElementById('card-container-1')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow-1');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  }
   useEffect(() => {
     if (user) {
       let tempCourses: any = [];
@@ -41,6 +48,7 @@ const Module2 = ({ user, allCourses }: any) => {
           }
         });
         setCourse(tempCourses);
+        handleWidth();
       });
     }
   }, [user]);
@@ -54,24 +62,8 @@ const Module2 = ({ user, allCourses }: any) => {
     }
   }
   window.addEventListener('resize', function (event) {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
+    handleWidth();
   },);
-
-  useLayoutEffect(() => {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
-  }, [])
 
   return (
     <>
@@ -81,20 +73,18 @@ const Module2 = ({ user, allCourses }: any) => {
             Continua viendo
           </ContinueText>
           <RespContain>
-            <CardContainer id="card-container">
+            <CardContainer id="card-container-1">
               {course.map((x: any) => {
                 return (
                   <Video onClick={() => {
                     goTo(x)
                   }}>
                     <VideoContain>
-                      <ImageContain>
-                        <Background
+                      <ImageContent>
+                        <CardImage
                           src={x.coursePath}
-                          width={400}
-                          height={240}
                         />
-                      </ImageContain>
+                      </ImageContent>
                       <PlayIconS />
                       <PlayIcon />
                       <Progress style={{ width: `${x.progress}%` }} />
@@ -108,7 +98,7 @@ const Module2 = ({ user, allCourses }: any) => {
                   </Video>
                 )
               })}
-              <div id="shadow" className="right-shadow"></div>
+              <div id="shadow-1" className="right-shadow"></div>
             </CardContainer>
           </RespContain>
         </Container>

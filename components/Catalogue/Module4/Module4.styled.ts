@@ -45,47 +45,39 @@ export const CardContain = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-  .right-shadow {
-    height: 402px;
-  }
   @media (max-width: 1023px) {
     .right-shadow {
       right: 0;
-      height: 217px;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 1023px) {
     .right-shadow {
-      height: 161px;
+      height: 120px;
     }
   }
 `;
 export const Cardcontent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 452px;
-  height: 402px;
   border-radius: 10px;
   cursor: pointer;
+  max-width: 420px;
   transition: all 0.2s ease-in-out;
   @media (max-width: 1023px) {
-    height: auto;
-    width: 360px;
-  }
-  @media (max-width: 600px) {
-    min-width: 180px;
-    width: min-content;
+    width: 180px;
+    height: 120px;
   }
   &:hover {
     transform: scale(1.02);
   }
 `;
 export const CardImage = styled.img`
-  width: 100%;
-  max-height: 209px;
-  border-radius: 10px 10px 0px 0px;
+  max-height: 240px;
+  width: 400px;
+  border-radius: 10px;
   @media (max-width: 1023px) {
     height: 120px;
+    width: 100%;
   }
 `;
 export const VideoInfo = styled.div`

@@ -95,17 +95,16 @@ export const CardContain = styled.div`
     padding-inline: 10px;
   }
   .right-shadow {
-    height: 402px;
+    display: none;
   }
   @media (max-width: 1023px) {
     .right-shadow {
       right: 0;
-      height: 217px;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 1023px) {
     .right-shadow {
-      height: 161px;
+      height: 120px;
     }
   }
 `;
@@ -123,8 +122,6 @@ export const Cardcontent = styled.div`
 export const Cardcontent2 = styled.div`
   display: flex;
   flex-direction: column;
-  width: 452px;
-  height: 402px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover {

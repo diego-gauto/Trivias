@@ -20,15 +20,12 @@ export const CardContainer = styled.div`
   padding: 20px;
   padding-block: 5px;
   gap: 10px;
-  .right-shadow {
-    display: none;
-  }
   @media (max-width: 1023px) {
     .right-shadow {
       right: 0;
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: 1023px) {
     .right-shadow {
       height: 120px;
     }
@@ -40,7 +37,7 @@ export const Video = styled.div`
   max-width: 420px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  @media (max-width: 700px) {
+  @media (max-width: 1023px) {
     width: 180px;
     height: 120px;
   }

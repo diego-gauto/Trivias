@@ -4,25 +4,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
-import { InsideContent, InsideText, Text1, Text2, Text3 } from "../Module3/Module3.styled";
 import Modal1 from "../Module4/Modal/Modal1";
-import { CardImage, VideoInfo, Viewpay } from "../Module4/Module4.styled";
+import { Cardcontent, CardImage } from "../Module4/Module4.styled";
 import {
-  Banner2,
   ButtonContain,
   Cardcontent2,
   CardContain,
   Content,
-  ImageContain,
   ImageContent,
   MainContainer,
   PurpleButton,
   RespContain,
-  SpanText,
-  SuscribeText,
-  TextContain,
-  TextContainer,
-  TextContent,
   Title,
 } from "./Module5.styled";
 
@@ -35,6 +27,15 @@ const Module5 = ({ user, course }: any) => {
 
   const handleShow = () => {
     setShow(true);
+  }
+  const handleWidth = () => {
+    let cardWidth: any = document.getElementById('card-container-3')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow-3');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
   }
 
   useEffect(() => {
@@ -49,6 +50,9 @@ const Module5 = ({ user, course }: any) => {
         }
       });
       setCourses(temp_courses);
+      setTimeout(() => {
+        handleWidth();
+      }, 500);
     }
   }, [course])
 
@@ -72,24 +76,8 @@ const Module5 = ({ user, course }: any) => {
   }
 
   window.addEventListener('resize', function (event) {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
+    handleWidth();
   },);
-
-  useLayoutEffect(() => {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
-  }, [])
 
   return (
     <MainContainer>
@@ -98,52 +86,24 @@ const Module5 = ({ user, course }: any) => {
           Incluido con Gonvar+
         </Title>
         <RespContain>
-          <CardContain id="card-container">
+          <CardContain id="card-container-3">
             {courses.map((course: any, index: any) => {
               return (
                 < >
-                  {< Cardcontent2 onClick={() => {
+                  {<Cardcontent key={"cardContent-" + index} onClick={() => {
                     handleShow();
                     setCourse(course);
                   }}>
                     <ImageContent>
                       <CardImage
                         src={course.coursePath}
-                        height="100%"
                       />
-                      <InsideContent>
-                        {course.totalLessons > 1 && <InsideText>
-                          {course.totalLessons} Lecciones
-                        </InsideText>}
-                        {course.totalLessons == 1 && <InsideText>
-                          Unica Lección
-                        </InsideText>}
-                      </InsideContent>
                     </ImageContent>
-                    <VideoInfo>
-                      <TextContain>
-                        <Text1>
-                          {course.courseTittle}
-                          <Text2>
-                            {course.courseSubtittle}...
-                          </Text2>
-                        </Text1>
-                        <Text3>
-                          {course.courseAbout}...
-                        </Text3>
-                      </TextContain>
-                      {(user && user.membership.finalDate > today) && <Viewpay onClick={(e) => { e.stopPropagation(); goTo(course); }}>
-                        Ver curso
-                      </Viewpay>}
-                      {(!user || user.membership.finalDate < today) && <Viewpay onClick={(e) => { e.stopPropagation(); goTo(course); }}>
-                        Comprar Gonvar+
-                      </Viewpay>}
-                    </VideoInfo>
-                  </Cardcontent2>}
+                  </Cardcontent>}
                 </>
               )
             })}
-            <div id="shadow" className="right-shadow"></div>
+            <div id="shadow-3" className="right-shadow"></div>
           </CardContain>
         </RespContain>
         {<ButtonContain>
