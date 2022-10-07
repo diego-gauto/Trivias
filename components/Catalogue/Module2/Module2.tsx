@@ -2,8 +2,9 @@
 
 import { DocumentData } from "firebase/firestore";
 import router from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getViewedCourses } from "../../../store/actions/courseActions";
+import { RespContain } from "../Module5/Module5.styled";
 import {
   Background,
   CardContainer,
@@ -13,7 +14,6 @@ import {
   PlayIcon,
   PlayIconS,
   Progress,
-  Shadow,
   Video,
   VideoContain,
   VideoInfo,
@@ -22,7 +22,8 @@ import {
 
 const Module2 = ({ user, allCourses }: any) => {
   const [course, setCourse] = useState<any>([]);
-
+  const [width, setWidth] = useState<any>(0);
+  const ref = useRef(null);
   useEffect(() => {
     if (user) {
       let tempCourses: any = [];
@@ -52,6 +53,25 @@ const Module2 = ({ user, allCourses }: any) => {
       });
     }
   }
+  window.addEventListener('resize', function (event) {
+    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  },);
+
+  useLayoutEffect(() => {
+    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  }, [])
 
   return (
     <>
@@ -60,35 +80,37 @@ const Module2 = ({ user, allCourses }: any) => {
           <ContinueText>
             Continua viendo
           </ContinueText>
-          <CardContainer>
-            {course.map((x: any) => {
-              return (
-                <Video onClick={() => {
-                  goTo(x)
-                }}>
-                  <VideoContain>
-                    <ImageContain>
-                      <Background
-                        src={x.coursePath}
-                        width={400}
-                        height={240}
-                      />
-                    </ImageContain>
-                    <PlayIconS />
-                    <PlayIcon />
-                    <Progress style={{ width: `${x.progress}%` }} />
-                  </VideoContain>
-                  <VideoTitle>
-                    Lección {x.lesson + 1}: {x.seasons[x.season].lessons[x.lesson].title}
-                  </VideoTitle>
-                  <VideoInfo>
-                    Curso: {x.courseTittle}
-                  </VideoInfo>
-                </Video>
-              )
-            })}
-            {/* <div className="right-shadow"></div> */}
-          </CardContainer>
+          <RespContain>
+            <CardContainer id="card-container">
+              {course.map((x: any) => {
+                return (
+                  <Video onClick={() => {
+                    goTo(x)
+                  }}>
+                    <VideoContain>
+                      <ImageContain>
+                        <Background
+                          src={x.coursePath}
+                          width={400}
+                          height={240}
+                        />
+                      </ImageContain>
+                      <PlayIconS />
+                      <PlayIcon />
+                      <Progress style={{ width: `${x.progress}%` }} />
+                    </VideoContain>
+                    <VideoTitle>
+                      Lección {x.lesson + 1}: {x.seasons[x.season].lessons[x.lesson].title}
+                    </VideoTitle>
+                    <VideoInfo>
+                      Curso: {x.courseTittle}
+                    </VideoInfo>
+                  </Video>
+                )
+              })}
+              <div id="shadow" className="right-shadow"></div>
+            </CardContainer>
+          </RespContain>
         </Container>
       }
     </>
