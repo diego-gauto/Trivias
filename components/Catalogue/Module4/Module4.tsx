@@ -166,7 +166,7 @@ const Module4 = ({ user, allCourses }: any) => {
               )
             })
           }
-          <div className="right-shadow"></div>
+          {/* <div className="right-shadow"></div> */}
         </CardContain>
       </ScrollContainer>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />

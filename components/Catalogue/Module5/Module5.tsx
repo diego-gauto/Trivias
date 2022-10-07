@@ -123,7 +123,7 @@ const Module5 = ({ user, course }: any) => {
                 </>
               )
             })}
-            <div className="right-shadow"></div>
+            {/* <div className="right-shadow"></div> */}
           </CardContain>
         </RespContain>
         {<ButtonContain>

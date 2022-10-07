@@ -42,3 +42,9 @@
     background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(0,0,0,1) 100%);
     min-width: 50px;
 }
+p,h1,h2,h3,h4,h5,h6,a,span,button,input,textarea,select{
+  font-family: "Montserrat", sans-serif !important;
+}
+h1,th{
+      font-weight: bold !important;
+}

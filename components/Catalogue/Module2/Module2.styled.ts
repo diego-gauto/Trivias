@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 export const ContinueText = styled.h1`
-  font-size: 36px;
+  font-size: 24px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
   padding-left: 20px;
@@ -24,16 +24,6 @@ export const CardContainer = styled.div`
   ::-webkit-scrollbar {
     display: none;
     width: 100%;
-  }
-  @media (max-width: 1023px) {
-    .right-shadow {
-      right: 0;
-    }
-  }
-  @media (max-width: 700px) {
-    .right-shadow {
-      height: 120px;
-    }
   }
 `;
 export const Video = styled.div`
@@ -109,7 +99,7 @@ export const Progress = styled.div`
 `;
 export const VideoTitle = styled.p`
   font-size: 18px;
-  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
   margin-top: 10px;
   margin-bottom: 0;
   @media (max-width: 1023px) {
@@ -118,10 +108,22 @@ export const VideoTitle = styled.p`
 `;
 export const VideoInfo = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-weight: 500;
   margin: 0;
   color: gray;
   @media (max-width: 1023px) {
     display: none;
+  }
+`;
+export const Shadow = styled.div<{ length: any }>`
+  @media (max-width: 1023px) {
+    .right-shadow {
+      right: 0;
+    }
+  }
+  @media (max-width: 700px) {
+    .right-shadow {
+      height: 120px;
+    }
   }
 `;

@@ -48,14 +48,14 @@ export const TitleContain = styled.div`
 `;
 export const Title = styled.h1`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500 !important;
   font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const EpisodesNumber = styled.p`
+  font-weight: normal;
   font-size: 14px;
   opacity: 0.9;
-  font-family: "Raleway", sans-serif;
   margin: 0;
 `;
 export const ButtonContain = styled.div`

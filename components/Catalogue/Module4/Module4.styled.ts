@@ -2,9 +2,7 @@ import styled from "styled-components";
 import { ContinueText } from "../Module2/Module2.styled";
 
 export const Title = styled(ContinueText)`
-  @media (max-width: 1023px) {
-    font-size: 24px;
-  }
+  font-size: 24px;
 `;
 
 export const Viewpay = styled.p`
