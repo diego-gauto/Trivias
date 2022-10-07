@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import router from "next/router";
 
 import { LOGIN_PATH } from "../../../../constants/paths";
-import { PurpleButton, TransparentButton } from "../../Module1/Module1.styled";
+import { PurpleButton } from "../../Module1/Module1.styled";
 import {
   AboutContain,
   BackgroundOverlay,
   ButtonContain,
-  CardImage,
   Container,
   ContainVideo,
   CourseContain,
@@ -24,8 +23,6 @@ import {
   ImageBack,
   LessonContain,
   LessonTitle,
-  LoaderContain,
-  Lock,
   ModalBackground,
   ModalCont,
   ModalContain,
@@ -45,13 +42,14 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState<any>(true);
+  let today = new Date().getTime() / 1000;
+
   const handleClick = (value: any) => {
-    setLessons(course.seasons[value].lessons)
+    setLessons(course.seasons[value].lessons);
   };
 
   const goTo = () => {
     if (user) {
-      let today = new Date().getTime() / 1000;
       if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
         router.push({
           pathname: 'Lesson',
@@ -118,16 +116,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {course.courseTittle}
                 </Title>
                 <ButtonContain>
-                  {(course.courseType == 'Producto' && !course.paid) ? <PurpleButton onClick={goTo}>
+                  {(course.courseType == 'Producto' && !course.paid) && <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
-                  </PurpleButton> :
-                    <PurpleButton onClick={goTo}>
-                      Ver curso
-                    </PurpleButton>}
-                  {/* <TransparentButton>
-                    Ver un Adelanto
-                    <PlayIcon />
-                  </TransparentButton> */}
+                  </PurpleButton>}
+                  {(course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') && <PurpleButton onClick={goTo}>
+                    Ver curso
+                  </PurpleButton>}
+                  {(course.courseType == 'Mensual' && user.membership.finalDate < today) && <PurpleButton onClick={goTo}>
+                    Comprar Gonvar +
+                  </PurpleButton>}
                 </ButtonContain>
               </TextContainer>
             </Container>

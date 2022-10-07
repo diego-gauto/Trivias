@@ -9,22 +9,14 @@ import {
   CardImage,
   ScrollContainer,
   Title,
-  VideoInfo,
 } from "../Module4/Module4.styled";
 import {
   Band,
   DaysLeft,
-  ImageContent,
-  InsideContent,
-  InsideText,
   Maincontainer,
-  Text1,
-  Text2,
-  Text3,
-  TextContain,
-  ViewCourse,
 } from "./Module3.styled";
 import Modal1 from "../Module4/Modal/Modal1";
+import { ImageContent } from "../Module5/Module5.styled";
 
 const Module3 = ({ user, allCourses }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -76,25 +68,25 @@ const Module3 = ({ user, allCourses }: any) => {
     // }
     setCourse(data)
   }
-  window.addEventListener('resize', function (event) {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
-  },);
+  // window.addEventListener('resize', function (event) {
+  //   let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+  //   let cardStyle: any = document.getElementById('shadow');
+  //   if (window.innerWidth < cardWidth) {
+  //     cardStyle.style.display = 'flex';
+  //   } else {
+  //     cardStyle.style.display = 'none';
+  //   }
+  // },);
 
-  useLayoutEffect(() => {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
-  }, [])
+  // useLayoutEffect(() => {
+  //   let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+  //   let cardStyle: any = document.getElementById('shadow');
+  //   if (window.innerWidth < cardWidth) {
+  //     cardStyle.style.display = 'flex';
+  //   } else {
+  //     cardStyle.style.display = 'none';
+  //   }
+  // }, [])
 
   return (
     <Maincontainer>
@@ -107,45 +99,15 @@ const Module3 = ({ user, allCourses }: any) => {
             {courses.map((course: any, index: any) => {
               return (
                 <Cardcontent key={"card-course-" + index} onClick={() => {
-                  setShow(true);
-                  setCourse(course);
+                  goTo(course)
                 }}>
                   <ImageContent>
                     <Band />
                     <DaysLeft>{course.date} días</DaysLeft>
                     <CardImage
                       src={course.coursePath}
-                      width={400}
-                      height={210}
                     />
-                    <InsideContent>
-                      {course.totalLessons > 1 && <InsideText>
-                        {course.totalLessons} Lecciones
-                      </InsideText>}
-                      {course.totalLessons == 1 && <InsideText>
-                        Unica Lección
-                      </InsideText>}
-                    </InsideContent>
                   </ImageContent>
-                  <VideoInfo>
-                    <TextContain>
-                      <Text1>
-                        {course.courseTittle}...
-                        <Text2>
-                          {course.courseSubtittle}...
-                        </Text2>
-                      </Text1>
-                      <Text3>
-                        {course.courseAbout}...
-                      </Text3>
-                    </TextContain>
-                    <ViewCourse onClick={(e) => {
-                      e.stopPropagation();
-                      goTo(course)
-                    }}>
-                      Ver el Curso
-                    </ViewCourse>
-                  </VideoInfo>
                 </Cardcontent>
 
               )

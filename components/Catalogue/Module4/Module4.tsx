@@ -5,14 +5,7 @@ import router, { useRouter } from "next/router";
 import { LOGIN_PATH } from "../../../constants/paths";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
-  ImageContent,
-  InsideContent,
-  InsideText,
   Maincontainer,
-  Text1,
-  Text2,
-  Text3,
-  TextContain,
 } from "../Module3/Module3.styled";
 import Modal1 from "./Modal/Modal1";
 import {
@@ -21,9 +14,8 @@ import {
   CardImage,
   ScrollContainer,
   Title,
-  VideoInfo,
-  Viewpay,
 } from "./Module4.styled";
+import { ImageContent } from "../Module5/Module5.styled";
 
 const Module4 = ({ user, allCourses }: any) => {
   const [show, setShow] = useState(false);
@@ -35,6 +27,16 @@ const Module4 = ({ user, allCourses }: any) => {
 
   const handleShow = () => {
     setShow(true);
+  }
+
+  const handleWidth = () => {
+    let cardWidth: any = document.getElementById('card-container-2')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow-2');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
   }
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const Module4 = ({ user, allCourses }: any) => {
           }
         });
         setCourses(allCourses);
+        handleWidth();
       })
     } else {
       allCourses.forEach((element: any) => {
@@ -61,6 +64,9 @@ const Module4 = ({ user, allCourses }: any) => {
         element.courseTittle = element.courseTittle.slice(0, 15);
       });
       setCourses(allCourses);
+      setTimeout(() => {
+        handleWidth();
+      }, 500);
     }
   }, [user])
 
@@ -97,24 +103,8 @@ const Module4 = ({ user, allCourses }: any) => {
     setCourse(data)
   }
   window.addEventListener('resize', function (event) {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
+    handleWidth();
   },);
-
-  useLayoutEffect(() => {
-    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
-  }, [])
 
   return (
     <Maincontainer>
@@ -122,7 +112,7 @@ const Module4 = ({ user, allCourses }: any) => {
         Cursos disponibles
       </Title>
       <ScrollContainer>
-        <CardContain id="card-container">
+        <CardContain id="card-container-2">
           {
             courses.map((course: any, index: any) => {
               return (
@@ -135,57 +125,13 @@ const Module4 = ({ user, allCourses }: any) => {
                       <CardImage
                         src={course.coursePath}
                       />
-                      <InsideContent>
-                        {course.totalLessons > 1 && <InsideText>
-                          {course.totalLessons} Lecciones
-                        </InsideText>}
-                        {course.totalLessons == 1 && <InsideText>
-                          Unica Lección
-                        </InsideText>}
-                      </InsideContent>
                     </ImageContent>
-                    <VideoInfo>
-                      <TextContain>
-                        <Text1>
-                          {course.courseTittle}...
-                          <Text2>
-                            {course.courseSubtittle}...
-                          </Text2>
-                        </Text1>
-                        <Text3>
-                          {course.courseAbout}...
-                        </Text3>
-                      </TextContain>
-                      {course.courseType == 'Producto' && !course.paid && <Viewpay onClick={(e) => {
-                        e.stopPropagation();
-                        goTo(course);
-                      }}>
-                        Comprar - ${course.coursePrice}.00
-                      </Viewpay>}
-                      {((course.courseType == 'Mensual' && user && user.membership.finalDate < today) || (course.courseType == 'Mensual' && !user)) && <Viewpay onClick={(e) => {
-                        e.stopPropagation();
-                        goTo(course);
-                      }}>
-                        Comprar Gonvar+
-                      </Viewpay>}
-                      {(course.courseType == 'Gratis' || (user && course.courseType == 'Mensual' && user.membership.finalDate > today)) && <Viewpay onClick={(e) => {
-                        e.stopPropagation();
-                        goTo(course);
-                      }}>
-                        Ver curso
-                      </Viewpay>}
-                      {course.courseType == 'Producto' && course.paid && <Viewpay onClick={() => {
-                        goTo(course);
-                      }}>
-                        Ver curso
-                      </Viewpay>}
-                    </VideoInfo>
                   </Cardcontent>}
                 </>
               )
             })
           }
-          <div id="shadow" className="right-shadow"></div>
+          <div id="shadow-2" className="right-shadow"></div>
         </CardContain>
       </ScrollContainer>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
