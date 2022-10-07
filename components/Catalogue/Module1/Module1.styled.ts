@@ -28,7 +28,7 @@ export const VideoContain = styled.div`
 export const TextContain = styled.div`
   display: flex;
   flex-direction: column;
-  padding-right: 20px;
+  padding-right: 30px;
   bottom: 100px;
   left: 20px;
   gap: 10px;

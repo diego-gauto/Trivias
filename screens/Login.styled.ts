@@ -107,7 +107,7 @@ export const LoginBox = styled.div`
   gap: 15px;
   max-width: 515px;
   min-height: 680px;
-  background: transparent;
+  background: #92616154;
   box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
   border-radius: 10px;
   backdrop-filter: blur(180px);
@@ -212,12 +212,13 @@ export const TextInput = styled.input`
   padding: 0 0 0 20px;
   font-size: 14px;
   ::placeholder {
-    color: #adadac;
+    color: #fff;
   }
   :focus {
     background: transparent;
     box-shadow: 0px 0px 10px 2px #6717cd;
     border: 2px solid white;
+    color: #fff;
   }
   @media (max-width: 670px) {
     font-size: 12px;
@@ -241,7 +242,7 @@ export const TextInput_2 = styled.input`
   }
 
   ::placeholder {
-    color: #adadac;
+    color: #fff;
   }
   @media (max-width: 670px) {
     font-size: 12px;
@@ -250,6 +251,7 @@ export const TextInput_2 = styled.input`
     background: transparent;
     box-shadow: 0px 0px 10px 2px #6717cd;
     border: 2px solid white;
+    color: #fff;
   }
 `;
 export const InputPhone = styled(PhoneInput)`

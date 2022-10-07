@@ -73,32 +73,10 @@ const Module5 = ({ user, course }: any) => {
 
   return (
     <MainContainer>
-      <ImageContain>
-        <Banner2
-          src="/images/Preview/HeroImage"
-          layout='fill'
-        />
-      </ImageContain>
       <Content>
-        <TextContainer>
-          {(!user || (user && user.membership.finalDate < today)) ? <Title>
-            Conoce nuestra suscripción
-          </Title> :
-            <Title>
-              Disfruta de tu suscripción Gonvar+
-            </Title>}
-          <TextContent>
-            {/* <LimitTime>
-              Tiempo ilimitado por $89.99 al mes
-            </LimitTime> */}
-            {(!user || (user && user.membership.finalDate < today)) && <SuscribeText>
-              Suscríbete a
-              <SpanText>
-                Gonvar+
-              </SpanText>
-            </SuscribeText>}
-          </TextContent>
-        </TextContainer>
+        <Title>
+          Incluido con Gonvar+
+        </Title>
         <RespContain>
           <CardContain>
             {courses.map((course: any, index: any) => {
@@ -145,6 +123,7 @@ const Module5 = ({ user, course }: any) => {
                 </>
               )
             })}
+            <div className="right-shadow"></div>
           </CardContain>
         </RespContain>
         {<ButtonContain>

@@ -5,25 +5,35 @@ export const Container = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 10px;
 `;
 export const ContinueText = styled.h1`
   font-size: 36px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  padding-left: 10px;
+  padding-left: 20px;
   @media (max-width: 1023px) {
     font-size: 24px;
   }
 `;
 export const CardContainer = styled.div`
   display: flex;
-  padding: 10px;
-  gap: 20px;
+  padding: 20px;
+  padding-block: 5px;
+  gap: 10px;
   overflow-x: scroll;
   ::-webkit-scrollbar {
     display: none;
     width: 100%;
+  }
+  @media (max-width: 1023px) {
+    .right-shadow {
+      right: 0;
+    }
+  }
+  @media (max-width: 700px) {
+    .right-shadow {
+      height: 120px;
+    }
   }
 `;
 export const Video = styled.div`
