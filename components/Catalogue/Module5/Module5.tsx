@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -71,6 +71,26 @@ const Module5 = ({ user, course }: any) => {
     }
   }
 
+  window.addEventListener('resize', function (event) {
+    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  },);
+
+  useLayoutEffect(() => {
+    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  }, [])
+
   return (
     <MainContainer>
       <Content>
@@ -78,7 +98,7 @@ const Module5 = ({ user, course }: any) => {
           Incluido con Gonvar+
         </Title>
         <RespContain>
-          <CardContain>
+          <CardContain id="card-container">
             {courses.map((course: any, index: any) => {
               return (
                 < >
@@ -123,7 +143,7 @@ const Module5 = ({ user, course }: any) => {
                 </>
               )
             })}
-            {/* <div className="right-shadow"></div> */}
+            <div id="shadow" className="right-shadow"></div>
           </CardContain>
         </RespContain>
         {<ButtonContain>

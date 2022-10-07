@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import router, { useRouter } from "next/router";
 
@@ -96,6 +96,25 @@ const Module4 = ({ user, allCourses }: any) => {
     }
     setCourse(data)
   }
+  window.addEventListener('resize', function (event) {
+    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  },);
+
+  useLayoutEffect(() => {
+    let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
+    let cardStyle: any = document.getElementById('shadow');
+    if (window.innerWidth < cardWidth) {
+      cardStyle.style.display = 'flex';
+    } else {
+      cardStyle.style.display = 'none';
+    }
+  }, [])
 
   return (
     <Maincontainer>
@@ -103,7 +122,7 @@ const Module4 = ({ user, allCourses }: any) => {
         Cursos disponibles
       </Title>
       <ScrollContainer>
-        <CardContain>
+        <CardContain id="card-container">
           {
             courses.map((course: any, index: any) => {
               return (
@@ -166,7 +185,7 @@ const Module4 = ({ user, allCourses }: any) => {
               )
             })
           }
-          {/* <div className="right-shadow"></div> */}
+          <div id="shadow" className="right-shadow"></div>
         </CardContain>
       </ScrollContainer>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />

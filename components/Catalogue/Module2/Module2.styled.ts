@@ -20,10 +20,18 @@ export const CardContainer = styled.div`
   padding: 20px;
   padding-block: 5px;
   gap: 10px;
-  overflow-x: scroll;
-  ::-webkit-scrollbar {
+  .right-shadow {
     display: none;
-    width: 100%;
+  }
+  @media (max-width: 1023px) {
+    .right-shadow {
+      right: 0;
+    }
+  }
+  @media (max-width: 700px) {
+    .right-shadow {
+      height: 120px;
+    }
   }
 `;
 export const Video = styled.div`
@@ -113,17 +121,5 @@ export const VideoInfo = styled.p`
   color: gray;
   @media (max-width: 1023px) {
     display: none;
-  }
-`;
-export const Shadow = styled.div<{ length: any }>`
-  @media (max-width: 1023px) {
-    .right-shadow {
-      right: 0;
-    }
-  }
-  @media (max-width: 700px) {
-    .right-shadow {
-      height: 120px;
-    }
   }
 `;
