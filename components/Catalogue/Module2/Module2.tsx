@@ -13,6 +13,7 @@ import {
   PlayIcon,
   PlayIconS,
   Progress,
+  Shadow,
   Video,
   VideoContain,
   VideoInfo,
@@ -86,7 +87,7 @@ const Module2 = ({ user, allCourses }: any) => {
                 </Video>
               )
             })}
-            <div className="right-shadow"></div>
+            {/* <div className="right-shadow"></div> */}
           </CardContainer>
         </Container>
       }

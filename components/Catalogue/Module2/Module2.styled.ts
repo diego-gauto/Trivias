@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -24,16 +24,6 @@ export const CardContainer = styled.div`
   ::-webkit-scrollbar {
     display: none;
     width: 100%;
-  }
-  @media (max-width: 1023px) {
-    .right-shadow {
-      right: 0;
-    }
-  }
-  @media (max-width: 700px) {
-    .right-shadow {
-      height: 120px;
-    }
   }
 `;
 export const Video = styled.div`
@@ -123,5 +113,17 @@ export const VideoInfo = styled.p`
   color: gray;
   @media (max-width: 1023px) {
     display: none;
+  }
+`;
+export const Shadow = styled.div<{ length: any }>`
+  @media (max-width: 1023px) {
+    .right-shadow {
+      right: 0;
+    }
+  }
+  @media (max-width: 700px) {
+    .right-shadow {
+      height: 120px;
+    }
   }
 `;
