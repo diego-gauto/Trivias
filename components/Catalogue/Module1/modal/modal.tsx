@@ -96,7 +96,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
     }
     return result;
   }
-  console.log(course);
 
   return (
     <ModalContain>
