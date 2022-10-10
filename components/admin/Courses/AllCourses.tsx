@@ -85,6 +85,10 @@ export const AllCourses = ({
                   <Label>Categorías</Label>
                   <Text> {course.courseCategory} </Text>
                 </Info>
+                <Info>
+                  <Label>Tareas</Label>
+                  <Text> {course.courseHomeWork == false ? "Flexible" : "Obligatorio"} </Text>
+                </Info>
               </Column>
               <Column>
                 <Info>

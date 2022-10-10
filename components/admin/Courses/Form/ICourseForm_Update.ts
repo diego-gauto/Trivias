@@ -1,15 +1,16 @@
-export interface ICourseForm_Update{
-  courseTittle : string,
-  courseAbout : string,
-  courseCategory : string,
-  courseDuration : string,
-  courseType: string,
-  coursePath: string,
-  coursePrice : string,
-  courseProfessor : any,
-  coursePublishYear : string,
-  courseSubtittle : string,
-  index : number,
-  documentID : string,
-  reference: string,
+export interface ICourseForm_Update {
+  courseTittle: string;
+  courseAbout: string;
+  courseCategory: string;
+  courseDuration: string;
+  courseType: string;
+  coursePath: string;
+  coursePrice: string;
+  courseProfessor: any;
+  coursePublishYear: string;
+  courseHomeWork: boolean;
+  courseSubtittle: string;
+  index: number;
+  documentID: string;
+  reference: string;
 }
