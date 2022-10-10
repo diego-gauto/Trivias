@@ -33,12 +33,16 @@ import {
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
+  free: yup.number(),
   courseTittle: yup
     .string()
     .required("Campo requerido"),
   courseDuration: yup
     .number()
-    .required("Campo requerido"),
+    .when('free', {
+      is: 1,
+      then: yup.string().required('Must enter email address'),
+    }),
   courseSubtittle: yup
     .string()
     .required("Campo requerido"),
@@ -47,7 +51,10 @@ const formSchema = yup.object().shape({
     .required("Campo requerido"),
   coursePrice: yup
     .number()
-    .required("Campo requerido"),
+    .when('free', {
+      is: 1,
+      then: yup.string().required('Must enter email address'),
+    }),
 });
 
 type FormValues = {
@@ -56,6 +63,7 @@ type FormValues = {
   courseSubtittle: string;
   courseAbout: string;
   courseType: string;
+  courseHomeWork: boolean;
   coursePublishYear: number;
   coursePrice: number;
 };
@@ -69,6 +77,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { coursePrice } = props;
   const { courseProfessor } = props;
   const { courseType } = props;
+  const { courseHomeWork } = props;
   const { coursePublishYear } = props;
   const { courseSubtittle } = props;
   const { documentID } = props;
@@ -98,6 +107,8 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [open3, setOpen3] = useState(false);
   const [name, setName] = useState(courseProfessor.name);
   const [value, setValue] = useState<any>({})
+  const [openHw, setOpenHw] = useState(false);
+  const [homeWork, setHomeWork] = useState(courseHomeWork);
   const [free, setFree] = useState(courseType == "Gratis" ? 0 : 1)
   const [value2, setValue2] = useState("Uñas")
   const [image, setImage] = useState<any>(coursePath)
@@ -128,15 +139,16 @@ const CourseForm = (props: ICourseForm_Update) => {
     let signUpData = {
       data: {
         courseTittle: formData.courseTittle,
-        courseDuration: formData.courseDuration * free,
+        courseDuration: formData.courseDuration,
         courseSubtittle: formData.courseSubtittle,
         courseAbout: formData.courseAbout,
         reference: reference,
         coursePath: image,
-        coursePrice: formData.coursePrice * free,
+        coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
         courseType: type,
+        courseHomeWork: homeWork,
         documentID: documentID,
       },
     };
@@ -221,19 +233,52 @@ const CourseForm = (props: ICourseForm_Update) => {
 
             </IconContain>
           </InputContain>
-          {
-            free != 0 &&
-            <InputContain>
-              <Label>Duración de Suscripción (Días)</Label>
-              <Input
-                placeholder="90"
-                defaultValue={courseDuration}
-                type="number"
-                className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
-                {...register("courseDuration")}
-              />
-            </InputContain>
-          }
+          <InputContain>
+            <Label>Membresia</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { setOpen3(!open3) }}>
+                  {value3 == "Mensual" ? "Gonvar +" : value3}
+                  <CaretD2 />
+                </Selected>
+                {
+                  open3 == true &&
+                  <OptionContain>
+                    <Option onClick={() => { setValue3("Gratis"); setOpen3(false); setFree(0) }}>
+                      <input
+                        type="radio"
+                        id="Temporada1"
+                        name="category"
+                        value="Temporada 1"
+                      />
+                      <Label2 > Gratis</Label2>
+                    </Option>
+                    <Option onClick={() => { setValue3("Mensual"); setOpen3(false); setFree(0) }}>
+                      <input
+                        type="radio"
+                        id="Temporada1"
+                        name="category"
+                        value="Temporada 1"
+                      />
+                      <Label2 > Gonvar +</Label2>
+                    </Option>
+                    <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
+                      <input
+                        type="radio"
+                        id="Temporada2"
+                        name="category"
+                        value="Temporada 2"
+                      />
+                      <Label2> Producto</Label2>
+                    </Option>
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+
+          </InputContain>
+
 
         </InputForm>
         {/* LINEA 2 */}
@@ -247,6 +292,42 @@ const CourseForm = (props: ICourseForm_Update) => {
               className={`form-control ${errors.courseSubtittle ? 'is-invalid' : ''}`}
               {...register("courseSubtittle")}
             />
+          </InputContain>
+
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Tarea</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { setOpenHw(!openHw) }}>
+                  {
+                    homeWork == false ? "Flexible" : "Obligatorio"
+                  }
+                  <CaretD2 />
+                </Selected>
+                {
+                  openHw == true &&
+                  <OptionContain>
+                    <Option onClick={() => { setOpenHw(false), setHomeWork(false) }}>
+                      <input
+                        type="radio"
+                        id="HomeWork"
+                        value="homework 1"
+                      />
+                      <Label2 > Flexible</Label2>
+                    </Option>
+                    <Option onClick={() => { setOpenHw(false), setHomeWork(true) }}>
+                      <input
+                        type="radio"
+                        id="HomeWork"
+                        value="homework 1"
+                      />
+                      <Label2 >Obligatorio</Label2>
+                    </Option>
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
           </InputContain>
           {/* <InputContain>
             <Label>Categorías</Label>
@@ -316,68 +397,37 @@ const CourseForm = (props: ICourseForm_Update) => {
             />
           </InputContain>
           <InputContain2>
+
             {
               free != 0 &&
-              <InputContain>
-                <Label>Precio (MXN)</Label>
-                <Input
-                  placeholder="998"
-                  type="number"
-                  defaultValue={coursePrice}
-                  className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
-                  {...register("coursePrice")}
-                />
-              </InputContain>
+              <>
+                <InputContain>
+                  <Label>Precio (MXN)</Label>
+                  <Input
+                    placeholder="998"
+                    type="number"
+                    defaultValue={coursePrice}
+                    className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
+                    {...register("coursePrice")}
+                  />
+                </InputContain>
+                <InputContain>
+                  <Label>Duración de Suscripción (Días)</Label>
+                  <Input
+                    placeholder="90"
+                    defaultValue={courseDuration}
+                    type="number"
+                    className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
+                    {...register("courseDuration")}
+                  />
+                </InputContain>
+              </>
             }
 
           </InputContain2>
           <InputButtonContain>
 
-            <InputContain>
-              <Label>Membresia</Label>
-              <IconContain>
 
-                <SelectContain key={3}>
-                  <Selected onClick={() => { setOpen3(!open3) }}>
-                    {value3 == "Mensual" ? "Gonvar +" : value3}
-                    <CaretD2 />
-                  </Selected>
-                  {
-                    open3 == true &&
-                    <OptionContain>
-                      <Option onClick={() => { setValue3("Gratis"); setOpen3(false); setFree(0) }}>
-                        <input
-                          type="radio"
-                          id="Temporada1"
-                          name="category"
-                          value="Temporada 1"
-                        />
-                        <Label2 > Gratis</Label2>
-                      </Option>
-                      <Option onClick={() => { setValue3("Mensual"); setOpen3(false); setFree(1) }}>
-                        <input
-                          type="radio"
-                          id="Temporada1"
-                          name="category"
-                          value="Temporada 1"
-                        />
-                        <Label2 > Gonvar +</Label2>
-                      </Option>
-                      <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
-                        <input
-                          type="radio"
-                          id="Temporada2"
-                          name="category"
-                          value="Temporada 2"
-                        />
-                        <Label2> Producto</Label2>
-                      </Option>
-                    </OptionContain>
-                  }
-                </SelectContain>
-              </IconContain>
-
-            </InputContain>
             {/* <TagContain>
           <TagTitle>Etiquetas</TagTitle>
           <TagLabel >Nuevo
