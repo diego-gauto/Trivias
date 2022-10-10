@@ -144,6 +144,7 @@ const SeasonsMain = () => {
                   coursePath={courseData[0].coursePath}
                   courseDuration={courseData[0].courseDuration}
                   coursePrice={courseData[0].coursePrice}
+                  courseHomeWork={courseData[0].courseHomeWork}
                   courseProfessor={courseData[0].courseProfessor}
                   coursePublishYear={courseData[0].coursePublishYear}
                   courseSubtittle={courseData[0].courseSubtittle}
