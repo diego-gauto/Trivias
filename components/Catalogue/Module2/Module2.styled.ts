@@ -1,16 +1,29 @@
 import Image from "next/image";
 import styled, { css } from "styled-components";
+import { Container } from "react-bootstrap";
 
-export const Container = styled.div`
+export const ContainerS = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
 `;
+export const SlideModuleContainer = styled(Container)`
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+`;
+
 export const ContinueText = styled.h1`
   font-size: 24px;
+  padding-left: 10px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  padding-left: 20px;
   @media (max-width: 1023px) {
     font-size: 24px;
   }

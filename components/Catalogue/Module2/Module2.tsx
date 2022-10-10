@@ -1,35 +1,37 @@
 
 
 import { DocumentData } from "firebase/firestore";
+import { Image, Row } from "react-bootstrap";
 import router from "next/router";
 import { useEffect, useRef, useState } from "react";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css/scrollbar';
 import { getViewedCourses } from "../../../store/actions/courseActions";
-import { CardImage } from "../Module4/Module4.styled";
-import { ImageContent, RespContain } from "../Module5/Module5.styled";
+import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 import {
-  CardContainer,
-  Container,
   ContinueText,
-  PlayIcon,
-  PlayIconS,
-  Progress,
-  Video,
-  VideoContain,
-  VideoInfo,
-  VideoTitle,
+  SlideModuleContainer,
 } from "./Module2.styled";
+import { Container } from "react-bootstrap";
+SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module2 = ({ user, allCourses }: any) => {
   const [course, setCourse] = useState<any>([]);
+  const swiperRef = useRef<SwiperCore>();
+
+  const onInit = (swiper: SwiperCore) => {
+    swiperRef.current = swiper;
+  };
 
   const handleWidth = () => {
-    let cardWidth: any = document.getElementById('card-container-1')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow-1');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
+    // let cardWidth: any = document.getElementById('card-container-1')?.offsetWidth;
+    // let cardStyle: any = document.getElementById('shadow-1');
+    // if (window.innerWidth < cardWidth) {
+    //   cardStyle.style.display = 'flex';
+    // } else {
+    //   cardStyle.style.display = 'none';
+    // }
   }
   useEffect(() => {
     if (user) {
@@ -53,56 +55,39 @@ const Module2 = ({ user, allCourses }: any) => {
     }
   }, [user]);
 
-  const goTo = (course: any) => {
-    if (user) {
-      router.push({
-        pathname: 'Lesson',
-        query: { id: course.documentID, season: course.season, lesson: course.lesson },
-      });
-    }
-  }
   window.addEventListener('resize', function (event) {
     handleWidth();
   },);
-
+  const settings = {
+    mousewheel: true,
+    slidesPerView: 2,
+    freeMode: true,
+    spaceBetween: 0,
+    breakpoints: {
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 0,
+      }
+    }
+  };
   return (
     <>
-      {course.length > 0 &&
-        <Container>
-          <ContinueText>
-            Continua viendo
-          </ContinueText>
-          <RespContain>
-            <CardContainer id="card-container-1">
-              {course.map((x: any) => {
-                return (
-                  <Video onClick={() => {
-                    goTo(x)
-                  }}>
-                    <VideoContain>
-                      <ImageContent>
-                        <CardImage
-                          src={x.coursePath}
-                        />
-                      </ImageContent>
-                      <PlayIconS />
-                      <PlayIcon />
-                      <Progress style={{ width: `${x.progress}%` }} />
-                    </VideoContain>
-                    <VideoTitle>
-                      Lección {x.lesson + 1}: {x.seasons[x.season].lessons[x.lesson].title}
-                    </VideoTitle>
-                    <VideoInfo>
-                      Curso: {x.courseTittle}
-                    </VideoInfo>
-                  </Video>
-                )
-              })}
-              <div id="shadow-1" className="right-shadow"></div>
-            </CardContainer>
-          </RespContain>
-        </Container>
-      }
+      {course.length > 0 && <Container fluid
+        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
+        <ContinueText>
+          Continua viendo
+        </ContinueText>
+        <Swiper id="card-container-1" {...settings} onInit={onInit}>
+          {course.map((element: any, idx: any) => (
+            <SwiperSlide key={idx}>
+              <SlideModuleContainer>
+                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+              </SlideModuleContainer>
+            </SwiperSlide>
+          ))}
+          <div id="shadow-1" className="right-shadow"></div>
+        </Swiper>
+      </Container>}
     </>
   )
 }

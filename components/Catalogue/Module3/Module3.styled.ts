@@ -93,18 +93,18 @@ export const DaysLeft = styled.div`
   font-family: "Montserrat", sans serif;
   transform: rotate(-40deg);
   color: white;
-  top: 30px;
+  top: 25px;
   left: 15px;
   z-index: 2;
 `;
 export const Band = styled.i`
   background-image: url(../images/Band.png);
   background-repeat: no-repeat;
-  width: 132px;
-  height: 109px;
+  width: 140px;
+  height: 110px;
   cursor: pointer;
   position: absolute;
-  top: -5px;
-  left: -5px;
+  top: -10px;
+  left: -20px;
   z-index: 1;
 `;
