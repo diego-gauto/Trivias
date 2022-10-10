@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
+import { Image, Row } from "react-bootstrap";
 
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
@@ -18,13 +19,26 @@ import {
 import Modal1 from "../Module4/Modal/Modal1";
 import { ImageContent } from "../Module5/Module5.styled";
 
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css/scrollbar';
+import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
+
+import { Container } from "react-bootstrap";
+import { SlideModuleContainer } from "../Module2/Module2.styled";
+SwiperCore.use([Scrollbar, Mousewheel]);
+
 const Module3 = ({ user, allCourses }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [show, setShow] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const swiperRef = useRef<SwiperCore>();
 
+  const onInit = (swiper: SwiperCore) => {
+    swiperRef.current = swiper;
+  };
   useEffect(() => {
     if (user) {
       let temp_courses: any = [];
@@ -68,52 +82,44 @@ const Module3 = ({ user, allCourses }: any) => {
     // }
     setCourse(data)
   }
-  // window.addEventListener('resize', function (event) {
-  //   let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-  //   let cardStyle: any = document.getElementById('shadow');
-  //   if (window.innerWidth < cardWidth) {
-  //     cardStyle.style.display = 'flex';
-  //   } else {
-  //     cardStyle.style.display = 'none';
-  //   }
-  // },);
-
-  // useLayoutEffect(() => {
-  //   let cardWidth: any = document.getElementById('card-container')?.offsetWidth;
-  //   let cardStyle: any = document.getElementById('shadow');
-  //   if (window.innerWidth < cardWidth) {
-  //     cardStyle.style.display = 'flex';
-  //   } else {
-  //     cardStyle.style.display = 'none';
-  //   }
-  // }, [])
+  const settings = {
+    mousewheel: true,
+    slidesPerView: 2,
+    freeMode: true,
+    spaceBetween: 0,
+    breakpoints: {
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 0,
+      }
+    }
+  };
 
   return (
     <Maincontainer>
       {courses.length > 0 && <>
-        <Title>
-          Tus Cursos
-        </Title>
-        <ScrollContainer>
-          <CardContain id="Scroll">
-            {courses.map((course: any, index: any) => {
-              return (
-                <Cardcontent key={"card-course-" + index} onClick={() => {
-                  goTo(course)
-                }}>
+        <Container fluid
+          style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
+          <Title>
+            Tus Cursos
+          </Title>
+          <Swiper {...settings} onInit={onInit} id="card-container-3">
+            {courses.map((element: any, idx: any) => (
+              <SwiperSlide key={idx} onClick={() => {
+                goTo(element)
+              }}>
+                <SlideModuleContainer>
                   <ImageContent>
                     <Band />
                     <DaysLeft>{course.date} días</DaysLeft>
-                    <CardImage
-                      src={course.coursePath}
-                    />
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
                   </ImageContent>
-                </Cardcontent>
-
-              )
-            })}
-          </CardContain>
-        </ScrollContainer>
+                </SlideModuleContainer>
+              </SwiperSlide>
+            ))}
+            <div id="shadow-2" className="right-shadow"></div>
+          </Swiper>
+        </Container>
       </>}
     </Maincontainer>
   )

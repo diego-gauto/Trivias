@@ -1,22 +1,26 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Image, Row } from "react-bootstrap";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
 import Modal1 from "../Module4/Modal/Modal1";
-import { Cardcontent, CardImage } from "../Module4/Module4.styled";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css/scrollbar';
+import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
+
+import { Container } from "react-bootstrap";
+SwiperCore.use([Scrollbar, Mousewheel]);
+
 import {
   ButtonContain,
-  Cardcontent2,
-  CardContain,
-  Content,
-  ImageContent,
   MainContainer,
   PurpleButton,
-  RespContain,
   Title,
 } from "./Module5.styled";
+import { SlideModuleContainer } from "../Module2/Module2.styled";
 
 const Module5 = ({ user, course }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -24,18 +28,22 @@ const Module5 = ({ user, course }: any) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
+  const swiperRef = useRef<SwiperCore>();
 
+  const onInit = (swiper: SwiperCore) => {
+    swiperRef.current = swiper;
+  };
   const handleShow = () => {
     setShow(true);
   }
   const handleWidth = () => {
-    let cardWidth: any = document.getElementById('card-container-3')?.offsetWidth;
-    let cardStyle: any = document.getElementById('shadow-3');
-    if (window.innerWidth < cardWidth) {
-      cardStyle.style.display = 'flex';
-    } else {
-      cardStyle.style.display = 'none';
-    }
+    // let cardWidth: any = document.getElementById('card-container-3')?.offsetWidth;
+    // let cardStyle: any = document.getElementById('shadow-3');
+    // if (window.innerWidth < cardWidth) {
+    //   cardStyle.style.display = 'flex';
+    // } else {
+    //   cardStyle.style.display = 'none';
+    // }
   }
 
   useEffect(() => {
@@ -78,34 +86,38 @@ const Module5 = ({ user, course }: any) => {
   window.addEventListener('resize', function (event) {
     handleWidth();
   },);
-
+  const settings = {
+    mousewheel: true,
+    slidesPerView: 2,
+    freeMode: true,
+    spaceBetween: 0,
+    breakpoints: {
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 0,
+      }
+    }
+  };
   return (
-    <MainContainer>
-      <Content>
+    <MainContainer fluid>
+      <Container fluid
+        style={{ overflow: "hidden", padding: 0, margin: 0 }}>
         <Title>
           Incluido con Gonvar+
         </Title>
-        <RespContain>
-          <CardContain id="card-container-3">
-            {courses.map((course: any, index: any) => {
-              return (
-                < >
-                  {<Cardcontent key={"cardContent-" + index} onClick={() => {
-                    handleShow();
-                    setCourse(course);
-                  }}>
-                    <ImageContent>
-                      <CardImage
-                        src={course.coursePath}
-                      />
-                    </ImageContent>
-                  </Cardcontent>}
-                </>
-              )
-            })}
-            <div id="shadow-3" className="right-shadow"></div>
-          </CardContain>
-        </RespContain>
+        <Swiper {...settings} onInit={onInit} id="card-container-3">
+          {courses.map((element: any, idx: any) => (
+            <SwiperSlide key={idx} onClick={() => {
+              handleShow();
+              setCourse(element);
+            }}>
+              <SlideModuleContainer>
+                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+              </SlideModuleContainer>
+            </SwiperSlide>
+          ))}
+          <div id="shadow-3" className="right-shadow"></div>
+        </Swiper>
         {<ButtonContain>
           {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
             <PurpleButton>
@@ -118,9 +130,9 @@ const Module5 = ({ user, course }: any) => {
             </PurpleButton>
           </Link>}
         </ButtonContain>}
-      </Content>
+      </Container>
       <Modal1 show={show} setShow={setShow} course={course_1} user={user} />
-    </MainContainer >
+    </MainContainer>
   )
 }
 export default Module5;

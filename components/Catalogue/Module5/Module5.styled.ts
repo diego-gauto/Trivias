@@ -1,12 +1,17 @@
 import Image from "next/image";
+import { Container } from "react-bootstrap";
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
-  display: flex;
-  margin-block-end: 40px;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
+export const MainContainer = styled(Container)`
+  margin-top: -40px !important;
+  padding-bottom: 40px !important;
+  padding-inline: 20px;
+  margin: 0;
+  @media (max-width: 1023px) {
+    padding-inline: 10px;
+    margin-top: -20px !important;
+    padding-bottom: 20px !important;
+  }
 `;
 export const Banner2 = styled(Image)`
   filter: brightness(40%);
@@ -50,7 +55,7 @@ export const TextContent = styled.div`
 `;
 export const Title = styled.h1`
   color: #6717cd;
-  padding-left: 20px;
+  padding-left: 10px;
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
@@ -197,7 +202,6 @@ export const PurpleButton = styled.button`
 export const ImageContent = styled.div`
   display: flex;
   position: relative;
-  height: 209px;
   @media (max-width: 1023px) {
     height: auto;
   }
