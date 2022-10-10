@@ -200,6 +200,7 @@ export const PurpleButton = styled.button`
   }
 `;
 export const ImageContent = styled.div`
+  overflow: hidden;
   display: flex;
   position: relative;
   @media (max-width: 1023px) {
