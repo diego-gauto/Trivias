@@ -83,7 +83,9 @@ const Module3 = ({ user, allCourses }: any) => {
     setCourse(data)
   }
   const settings = {
-    mousewheel: true,
+    mousewheel: {
+      forceToAxis: true
+    },
     slidesPerView: 2,
     freeMode: true,
     spaceBetween: 0,

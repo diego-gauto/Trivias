@@ -23,9 +23,9 @@ const Homepage = () => {
   const [loading, setLoading] = useState(true);
   const [landingData, setLandingData] = useState<any>({});
   const [courseData, setCourseData] = useState<any>({});
-  const [courses, setCourses] = useState<any>({});
-  const [courseNailsData, setCourseNailsData] = useState<any>({});
-  const [courseSEPData, setCourseSEPData] = useState<any>({});
+  const [courses, setCourses] = useState<any>([]);
+  const [courseNailsData, setCourseNailsData] = useState<any>([]);
+  const [courseSEPData, setCourseSEPData] = useState<any>([]);
 
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
@@ -59,15 +59,6 @@ const Homepage = () => {
     fetchLandingData();
   }, []);
 
-  if (loading) {
-    return (
-      <Background>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background>
-    )
-  }
   return (
     <Container
       fluid
@@ -77,71 +68,45 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      <FirstSectionContainer />
-      <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
+      <FirstSectionContainer loading={loading} />
+      <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} loading={loading} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
       {courses &&
-        <Module4_Carousel isInfinite={true} slideData={
-          courses.filter((course: any) =>
-            course.documentID !== NAILS_MASTER_COURSE_ID
-            && course.documentID !== EXPERTS_ESCULTURAL_COURSE_ID
-            && course.documentID !== DRY_MANICURE_COURSE_ID
-            && course.documentID !== SEP_COURSE_ID
-          ).map((course: any) => {
-            return (
-              { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath }
-            )
-          })
+        <Module4_Carousel type={'subscription'} isInfinite={true} slideData={
+          courses
         } />
       }
 
       {/* Nails Master Module Card */}
       <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} />
       {courseNailsData &&
-        <Module4_Carousel isInfinite={true} slideData={
-          courseNailsData.lessons.map((lesson: any) => {
-            return (
-              { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, duration: lesson.duration }
-            )
-          })
+        <Module4_Carousel type={"product"} isInfinite={true} slideData={
+          courseNailsData.lessons
         } />
       }
 
       {/* SEP Module Card */}
       <CourseModuleContainer courseId={SEP_COURSE_ID} />
       {courseSEPData &&
-        <Module4_Carousel isInfinite={true} slideData={
-          courseSEPData.lessons.map((lesson: any) => {
-            return (
-              { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, duration: lesson.duration }
-            )
-          })
+        <Module4_Carousel type={"product"} isInfinite={true} slideData={
+          courseSEPData.lessons
         } />
       }
 
       {/* Dry's Manicure Module Card */}
       <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} />
       {courses &&
-        <Module4_Carousel isInfinite={true} slideData={
-          courses.map((course: any) => {
-            return (
-              { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath }
-            )
-          })
+        <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
+          courses
         } />
       }
 
       {/* Experts Escultural Module Card */}
       <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} />
       {courses &&
-        <Module4_Carousel isInfinite={true} slideData={
-          courses.
-            map((course: any) => {
-              return (
-                { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath }
-              )
-            })
+        <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
+          courses
         } />
       }
 

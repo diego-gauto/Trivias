@@ -1,7 +1,7 @@
 export interface ISlideModule {
   isNew: boolean;
-  title: string;
+  title?: string;
   subtitle: string;
-  imgURL: string;
+  imgURL?: string;
   duration?: string;
 }

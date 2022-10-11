@@ -42,8 +42,8 @@ export const Module5_Carousel = (props: IModule5_Carousel) => {
         direction="vertical"
         {...settings}
       >
-        {slideDataArr.map(({ title, imgURL }) => (
-          <SwiperSlide key={title + "_ID"}  >
+        {slideDataArr.map(({ title, imgURL }, index) => (
+          <SwiperSlide key={title + "_ID" + index}  >
             <SlideModule
               title={title}
               imgURL={imgURL}

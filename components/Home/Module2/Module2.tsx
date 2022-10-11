@@ -27,35 +27,38 @@ import {
   TitleTextContainer,
 } from "./Module2.styled";
 
-export const Module2 = (props: IModule2) => {
-  const {
-    featureShowcaseSectionData: { title, features }
-  } = props
-
+export const Module2 = ({ featureShowcaseSectionData, loading }: any) => {
+  let iconImagesData;
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
     const html = text.replace(bold, '<span>$1</span>');
     return <TitleCenter dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
   }
-
   const featureImagesOrder = [Img5.src, Img2.src, Img6.src, Img3.src, Img4.src, Img1.src]
-  const iconImagesData = features.map((feature, i) => {
-    return { text: feature, source: featureImagesOrder[i] }
-  })
+  if (featureShowcaseSectionData) {
+    iconImagesData = featureShowcaseSectionData.features?.map((feature: any, i: number) => {
+      return { text: feature, source: featureImagesOrder[i] }
+    })
+  }
 
-  const iconImages = iconImagesData.map(({ text, source }) => {
+  const iconImages = iconImagesData?.map((x: any, index: number) => {
     return (
-      <Col>
+      <Col key={x.text + index}>
         <Row>
+
           <IconImage>
-            <Image src={source} ></Image>
+            <div className="grey-field">
+              <Image src={x.source} ></Image>
+            </div>
           </IconImage>
         </Row>
         <Row>
           <IconText>
-            <IconText_B>
-              {text}
-            </IconText_B>
+            <div className="grey-field" style={{ maxWidth: "fit-content", margin: 'auto' }}>
+              <IconText_B>
+                {x.text}
+              </IconText_B>
+            </div>
           </IconText>
         </Row>
       </Col>
@@ -79,21 +82,25 @@ export const Module2 = (props: IModule2) => {
       <div>
         <SectionCenteredWrapper>
           <SectionCentered>
-            <RibbonImage src={BG1.src} ></RibbonImage>
-            <Row>
-              <Col></Col>
-              <SectionCenteredTopColumn>
-                <TitleTextContainer>
-                  {parseTitle(title)}
-                </TitleTextContainer>
+            <div className={loading ? "skeleton-product" : ''} style={{ 'width': '100%' }}>
+              <RibbonImage src={BG1.src} ></RibbonImage>
+              <Row>
+                <Col></Col>
+                <SectionCenteredTopColumn>
+                  <div className="grey-field">
+                    <TitleTextContainer>
+                      {parseTitle(featureShowcaseSectionData?.title)}
+                    </TitleTextContainer>
+                  </div>
 
-              </SectionCenteredTopColumn>
+                </SectionCenteredTopColumn>
 
-              <Col></Col>
-            </Row>
-            <IconImagesContainer>
-              {iconImages}
-            </IconImagesContainer>
+                <Col></Col>
+              </Row>
+              <IconImagesContainer>
+                {iconImages}
+              </IconImagesContainer>
+            </div>
           </SectionCentered>
         </SectionCenteredWrapper>
       </div>

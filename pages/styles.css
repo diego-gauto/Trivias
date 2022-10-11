@@ -12,7 +12,6 @@
   flex-direction: column;
   gap: 1.5px;
   pointer-events: none !important;
-  width: 100%;
 }
 .skeleton-product .grey-field {
     animation-name: blink;
@@ -21,7 +20,11 @@
     color: transparent !important;
     border-radius: 3px;
     max-width: initial;
+    z-index: 5000;
   }
+.skeleton-product .grey-field > *{
+  opacity: 0;
+}
 
 @keyframes blink {
   0% {

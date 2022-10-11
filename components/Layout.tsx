@@ -20,26 +20,33 @@ const Layout = ({ children }: any) => {
   }, []);
 
   return (
-    <>
-      {!isLoading ? (
-        <>
-          <Body style={{ overflowX: "hidden" }}>
-            <NavBar />
-            <ChildrenContain>
-              {children}
-            </ChildrenContain>
-            <Footer />
-          </Body>
-        </>
+    <Body style={{ overflowX: "hidden" }}>
+      <NavBar />
+      <ChildrenContain>
+        {children}
+      </ChildrenContain>
+      <Footer />
+    </Body>
+    // <>
+    //   {!isLoading ? (
+    //     <>
+    //       <Body style={{ overflowX: "hidden" }}>
+    //         <NavBar />
+    //         <ChildrenContain>
+    //           {children}
+    //         </ChildrenContain>
+    //         <Footer />
+    //       </Body>
+    //     </>
 
-      ) : (
-        <Background>
-          <LoaderImage>
-            <LoaderContain />
-          </LoaderImage>
-        </Background>
-      )}
-    </>
+    //   ) : (
+    //     <Background>
+    //       <LoaderImage>
+    //         <LoaderContain />
+    //       </LoaderImage>
+    //     </Background>
+    //   )}
+    // </>
   )
 
 }

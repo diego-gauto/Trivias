@@ -5,4 +5,6 @@ export interface IFirstSectionProps {
   data: HeroData;
   // Image to display in second column
   img: string;
+  //Loader
+  loading: boolean;
 }

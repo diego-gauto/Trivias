@@ -9,6 +9,9 @@ export const FirstSectionContainer = styled(Container)`
   font-family: Montserrat, sans-serif;
   .left-side {
   }
+  .skeleton-product {
+    position: relative;
+  }
   h1 {
     font-size: 48px;
     font-style: normal;

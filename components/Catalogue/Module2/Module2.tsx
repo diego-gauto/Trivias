@@ -59,7 +59,9 @@ const Module2 = ({ user, allCourses }: any) => {
     handleWidth();
   },);
   const settings = {
-    mousewheel: true,
+    mousewheel: {
+      forceToAxis: true
+    },
     slidesPerView: 2,
     freeMode: true,
     spaceBetween: 0,

@@ -1,32 +1,37 @@
 import { Container, Col, Button, Image, Row } from "react-bootstrap";
 import React from 'react';
-import { CardTitle, DecoImage, DecoImageWrapper, MasonryBox, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryContent, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table, MasonryItem, MasonryDesktop, MasonryMobile } from './Module5.styled'
+import { CardTitle, DecoImage, DecoImageWrapper, MasonryBox, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table, MasonryItem, MasonryDesktop, MasonryMobile, MasonryContent } from './Module5.styled'
 import { IModule5 } from "./IModule5";
 import { divideArrayInChunks } from "./helpers";
 import { Module5_Carousel } from "./Module5_Carousel/Module5_Carousel";
 
 export const Module5 = (props: IModule5) => {
   const { reviewsData } = props
+  let desktopCarousels;
+  let mobileCarousels;
+  if (reviewsData) {
+    const desktopChunks = divideArrayInChunks(reviewsData, 3)
+    desktopCarousels = desktopChunks.map((chunk: Array<any>, i: number) => {
+      return (
+        <Module5_Carousel
+          key={'chunk_1' + i}
+          slideData={chunk}
+          reverseDirection={i % 2 === 1}
+        />
+      )
+    })
 
-  const desktopChunks = divideArrayInChunks(reviewsData, 3)
-  const desktopCarousels = desktopChunks.map((chunk: Array<any>, i: number) => {
-    return (
-      <Module5_Carousel
-        slideData={chunk}
-        reverseDirection={i % 2 === 1}
-      />
-    )
-  })
-
-  const mobileChunks = divideArrayInChunks(reviewsData, 2)
-  const mobileCarousels = mobileChunks.map((chunk: Array<any>, i: number) => {
-    return (
-      <Module5_Carousel
-        slideData={chunk}
-        reverseDirection={i % 2 === 1}
-      />
-    )
-  })
+    const mobileChunks = divideArrayInChunks(reviewsData, 2)
+    mobileCarousels = mobileChunks.map((chunk: Array<any>, i: number) => {
+      return (
+        <Module5_Carousel
+          key={'chunk_2' + i}
+          slideData={chunk}
+          reverseDirection={i % 2 === 1}
+        />
+      )
+    })
+  }
 
   return (
     <Container style={{ paddingTop: "75px" }}>
