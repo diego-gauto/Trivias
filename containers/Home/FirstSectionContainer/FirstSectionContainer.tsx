@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FirstSection } from "../../../components/Home/FirstSection/FirstSection";
 import { downloadFileWithStoragePath, getLandingData } from "../../../store/actions/LandingActions";
 
-export const FirstSectionContainer = ({ loading }: any) => {
+export const FirstSectionContainer = () => {
   const [sectionData, setSectionData] = useState<any>();
   const [landingImg, setLandingImg] = useState("")
 
@@ -24,6 +24,6 @@ export const FirstSectionContainer = ({ loading }: any) => {
   }, [sectionData])
 
   return (
-    <FirstSection data={sectionData} img={landingImg} loading={loading} />
+    <FirstSection data={sectionData} img={landingImg} />
   )
 }

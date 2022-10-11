@@ -14,7 +14,7 @@ import { IFirstSectionProps } from "./IFirstSectionProps";
 import { FaArrowRight } from "react-icons/fa";
 
 export const FirstSection = (props: IFirstSectionProps) => {
-  const { data, img, loading } = props;
+  const { data, img } = props;
   const router = useRouter();
   const responsiveXl = useMediaQuery({ query: "(min-width: 991px) and (max-width: 1200px)" });
   const responsiveHeight700 = useMediaQuery({ query: "(max-height: 772px)" });
@@ -29,7 +29,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
       <GradientCanvas id="gradient-canvas" height="83vh" />
       <Row>
         {responsive991 && <Col sm={12} lg={6} className="right-side">
-          <div className={(loading) ? "skeleton-product" : ""}>
+          <div className={(!img) ? "skeleton-product" : ""}>
 
           </div>
           <div className="grey-field">
@@ -37,7 +37,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
           </div>
         </Col>}
         <BlurDiv />
-        <Col sm={12} lg={6} className={"left-side" && (loading) ? " skeleton-product" : ""}>
+        <Col sm={12} lg={6} className={"left-side" && (!img) ? " skeleton-product" : ""}>
           <div className="grey-field">
             <h1>{parseTitle(data?.tituloInicial)}</h1>
           </div>
@@ -83,7 +83,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
           </Row>}
         </Col>
         {!responsive991 && <Col sm={12} lg={6} className="right-side">
-          <div className={loading ? "skeleton-product" : ""}>
+          <div className={!img ? "skeleton-product" : ""}>
             <div className="grey-field">
               <Image src={img} fluid />
             </div>
