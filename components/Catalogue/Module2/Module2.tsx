@@ -11,6 +11,7 @@ import { getViewedCourses } from "../../../store/actions/courseActions";
 import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 import {
   ContinueText,
+  Progress,
   SlideModuleContainer,
 } from "./Module2.styled";
 import { Container } from "react-bootstrap";
@@ -51,6 +52,8 @@ const Module2 = ({ user, allCourses }: any) => {
             tempCourses.push(element)
           }
         });
+        console.log(tempCourses);
+
         setCourses(tempCourses);
         handleWidth();
       });
@@ -120,6 +123,7 @@ const Module2 = ({ user, allCourses }: any) => {
             }}>
               <SlideModuleContainer>
                 <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                <Progress style={{ 'width': `${element.progress}%` }}></Progress>
               </SlideModuleContainer>
             </SwiperSlide>
           ))}
