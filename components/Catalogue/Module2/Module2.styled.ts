@@ -10,7 +10,7 @@ export const ContainerS = styled.div`
 export const SlideModuleContainer = styled(Container)`
   padding: 0;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   padding-left: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -109,7 +109,7 @@ export const PlayIconS = styled.i`
 `;
 export const Progress = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   display: flex;
   height: 12px;
   background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);

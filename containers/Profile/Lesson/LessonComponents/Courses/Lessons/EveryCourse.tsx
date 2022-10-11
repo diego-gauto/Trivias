@@ -21,8 +21,8 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
-    if (course.courseType == "Gratis") {
-      router.push({
+    if (course.courseType == "Gratis" || !course.courseHomeWork) {
+      return router.push({
         pathname: 'Lesson',
         query: { id: id, season: season, lesson: lIndex },
       })
@@ -51,13 +51,14 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
         });
       }
     }
-    conditionalDiv(less, lIndex)
+    conditionalDiv(less, lIndex);
+    return 'okey';
   }
   const conditionalDiv = (less: any, index: number) => {
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
-    if (course.courseType == "Gratis") {
+    if (course.courseType == "Gratis" || !course.courseHomeWork) {
       return (<Details style={{ cursor: 'pointer' }} onClick={() => {
         goTo(index, less)
       }}>
