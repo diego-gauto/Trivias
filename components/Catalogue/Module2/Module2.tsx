@@ -14,11 +14,13 @@ import {
   SlideModuleContainer,
 } from "./Module2.styled";
 import { Container } from "react-bootstrap";
+import { LOGIN_PATH } from "../../../constants/paths";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module2 = ({ user, allCourses }: any) => {
-  const [course, setCourse] = useState<any>([]);
+  const [courses, setCourses] = useState<any>([]);
   const swiperRef = useRef<SwiperCore>();
+  let today = new Date().getTime() / 1000;
 
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
@@ -49,7 +51,7 @@ const Module2 = ({ user, allCourses }: any) => {
             tempCourses.push(element)
           }
         });
-        setCourse(tempCourses);
+        setCourses(tempCourses);
         handleWidth();
       });
     }
@@ -72,16 +74,50 @@ const Module2 = ({ user, allCourses }: any) => {
       }
     }
   };
+
+  const goTo = (course: any) => {
+    if (user) {
+      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.documentID, season: 0, lesson: 0 },
+        });
+      }
+      if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'subscription' } }
+        )
+      }
+      if (course.courseType == 'Producto' && !course.paid) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: course.documentID } }
+        )
+      }
+    } else {
+      if (course.courseType == 'Gratis') {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.documentID, season: 0, lesson: 0 },
+        });
+      }
+      if (!user && course.courseType !== 'Gratis') {
+        router.push(LOGIN_PATH)
+      }
+    }
+  }
+
   return (
     <>
-      {course.length > 0 && <Container fluid
+      {courses.length > 0 && <Container fluid
         style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
         <ContinueText>
           Continua viendo
         </ContinueText>
         <Swiper id="card-container-1" {...settings} onInit={onInit}>
-          {course.map((element: any, idx: any) => (
-            <SwiperSlide key={idx}>
+          {courses.map((element: any, idx: any) => (
+            <SwiperSlide key={idx} onClick={() => {
+              goTo(element)
+            }}>
               <SlideModuleContainer>
                 <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
               </SlideModuleContainer>
