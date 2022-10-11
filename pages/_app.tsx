@@ -3,7 +3,7 @@ import { AppProps } from "next/dist/shared/lib/router/router";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import "./styles.css";
-import { useAuth, AuthProvider } from "../hooks/useAuth";
+import { AuthProvider } from "../hooks/useAuth";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

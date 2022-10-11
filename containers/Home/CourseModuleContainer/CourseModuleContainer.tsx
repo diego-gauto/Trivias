@@ -1,7 +1,4 @@
-
-
 import { useEffect, useState } from "react";
-
 import { CourseModule } from "../../../components/Home/CourseModule/CourseModule";
 import { ICourse } from "../../../interfaces/ICourse";
 import { getWholeCourse } from "../../../store/actions/courseActions";

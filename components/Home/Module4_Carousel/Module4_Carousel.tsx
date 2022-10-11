@@ -6,10 +6,8 @@ import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { DRY_MANICURE_COURSE_ID, EXPERTS_ESCULTURAL_COURSE_ID, NAILS_MASTER_COURSE_ID, SEP_COURSE_ID } from "../../../constants/gonvar";
-
 import { IModule4_Carousel } from "./IModule4_Carousel";
 import { SlideModule } from "./SlideModule/SlideModule";
-
 SwiperCore.use([Autoplay]);
 
 export const Module4_Carousel = (props: IModule4_Carousel) => {

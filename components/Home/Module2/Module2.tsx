@@ -1,6 +1,5 @@
 import { Col, Image, Row } from "react-bootstrap";
 import DOMPurify from "dompurify"
-import { IModule2 } from "./IModule2";
 import BG1 from "./MediaSources/BG01.png";
 import BG2 from "./MediaSources/BG02.png";
 import BG3 from "./MediaSources/BG03.png";

@@ -1,8 +1,6 @@
 export interface IModule4_Carousel {
   isInfinite: boolean;
-
   slideData: SlideObj[];
-
   type: string;
 }
 interface SlideObj {

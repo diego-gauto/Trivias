@@ -1,13 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-
 import styled from "styled-components";
-
-/* 
-export const ModuleImage = styled.div <{ ImgSRC: string }> `
-background-image : ${props => props.ImgSRC} !important
-background-repeat: no-repeat !important ;
-`;
- */
 
 export const RightContainer = styled(Col)`
   background: linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%);

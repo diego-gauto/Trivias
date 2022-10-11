@@ -1,9 +1,4 @@
-
-
-
-
 import Landings from "../../pages/index";
-
 /**
  * The home page.
  *

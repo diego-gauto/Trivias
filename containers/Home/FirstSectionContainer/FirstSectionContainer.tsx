@@ -1,7 +1,4 @@
-
-
 import { useEffect, useState } from "react";
-
 import { FirstSection } from "../../../components/Home/FirstSection/FirstSection";
 import { downloadFileWithStoragePath, getLandingData } from "../../../store/actions/LandingActions";
 
@@ -17,7 +14,6 @@ export const FirstSectionContainer = ({ loading }: any) => {
     fetchLandingData();
   }, []);
 
-
   const awaitImg = async () => {
     const resolvedImg = await downloadFileWithStoragePath(sectionData.heroImage)
     setLandingImg(resolvedImg)
@@ -26,7 +22,6 @@ export const FirstSectionContainer = ({ loading }: any) => {
   useEffect(() => {
     sectionData && awaitImg()
   }, [sectionData])
-
 
   return (
     <FirstSection data={sectionData} img={landingImg} loading={loading} />
