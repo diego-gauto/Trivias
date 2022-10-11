@@ -2,9 +2,7 @@ import { Card, Col, Image, Row } from "react-bootstrap";
 import { isIOS, isSafari } from "react-device-detect";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
-
 import { useRouter } from "next/router";
-
 import { SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { CardContainer } from "./GonvarPlusModule.styled";

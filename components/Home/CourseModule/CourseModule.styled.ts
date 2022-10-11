@@ -1,8 +1,7 @@
 import { Card } from "react-bootstrap";
-
 import styled from "styled-components";
 
-export const CardContainer = styled(Card) `
+export const CardContainer = styled(Card)`
   border: 0;
   border-radius: 0;
   color: #fff;
@@ -19,7 +18,7 @@ export const CardContainer = styled(Card) `
   }
   .video::before {
     background: linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%);
-    content: '';
+    content: "";
     position: absolute;
     z-index: 0;
     top: 0;
@@ -41,16 +40,17 @@ export const CardContainer = styled(Card) `
     font-size: 14px;
     margin-bottom: 10px;
     cursor: default;
-    &:active, &:focus{
+    &:active,
+    &:focus {
       border-color: #fff;
     }
   }
-  .card-title{
+  .card-title {
     font-size: 36px;
     font-weight: 400;
     margin-bottom: 20px;
   }
-  .card-subtitle{
+  .card-subtitle {
     font-size: 24px;
     font-weight: 300;
     margin-bottom: 20px;
@@ -69,19 +69,20 @@ export const CardContainer = styled(Card) `
   button:first-of-type {
     margin-right: 10px;
   }
-  .price, .mobile-price{
+  .price,
+  .mobile-price {
     font-size: 24px;
     font-weight: 700;
   }
-  .mobile-price{
+  .mobile-price {
     margin-top: 20px;
     padding-left: 50px;
   }
   @media only screen and (max-width: 784px) {
-    .card-title{
+    .card-title {
       font-size: 26px;
     }
-    .card-subtitle{
+    .card-subtitle {
       font-size: 16px;
     }
     .price {
@@ -90,12 +91,13 @@ export const CardContainer = styled(Card) `
     .row {
       bottom: 50px;
     }
-    .first-col, .second-col{
+    .first-col,
+    .second-col {
       padding-left: 50px;
     }
     .video::before {
       background: linear-gradient(0deg, #000000 9%, rgba(0, 0, 0, 0) 100%);
-      content: '';
+      content: "";
       position: absolute;
       z-index: 0;
       top: 0;

@@ -1,11 +1,7 @@
-
-
 import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
-
 import { useRouter } from "next/router";
-
 import { PREVIEW_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
@@ -14,7 +10,6 @@ import { ICourseModuleProps } from "./ICourseModuleProps";
 
 export const CourseModule = (props: ICourseModuleProps) => {
   const { data } = props;
-
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();

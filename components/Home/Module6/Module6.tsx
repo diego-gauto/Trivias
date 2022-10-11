@@ -1,49 +1,38 @@
-import { Container, Col, Button, Image, Row } from "react-bootstrap";
-import React, { useState, useEffect, useRef } from 'react';
+import { Container } from "react-bootstrap";
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import 'swiper/css';
-import Masonry from 'react-masonry-css'
 import {
-  AnimatedBackground,
   ContainerMain,
-  Divisor,
   SliderContainerChild,
   SliderSectionTitle,
   SliderContainer,
   SliderItemLink,
 } from "./Module6.styled";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas"
-
 import { IModule6 } from "./IModule6";
 import { SlideModule } from "./SlideModule/SlideModule";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
-
 SwiperCore.use([Autoplay]);
-
 export const Module6 = (props: IModule6) => {
   const swiperRef = useRef<SwiperCore>();
-
   const { slideData } = props;
   var slideDataArr = [];
   slideDataArr = slideData;
-
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
-
   const onMouseEnter = () => {
     if (swiperRef.current) {
       swiperRef.current.autoplay.stop();
     }
   };
-
   const onMouseLeave = () => {
     if (swiperRef.current) {
       swiperRef.current.autoplay.start();
     }
   };
-
   const settings = {
     loop: true,
     autoplay: {
@@ -60,7 +49,6 @@ export const Module6 = (props: IModule6) => {
       }
     }
   };
-
   const sliderData = slideDataArr?.map((element) => {
     return (
       <SwiperSlide key={element.title + "_ID"}>
@@ -75,7 +63,6 @@ export const Module6 = (props: IModule6) => {
       </SwiperSlide>
     )
   })
-
   return (
     <Container
       fluid

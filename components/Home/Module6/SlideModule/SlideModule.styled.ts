@@ -34,12 +34,6 @@ export const NewTag = styled.div`
   position: relative;
 `;
 export const ContainerMain = styled.div``;
-/*
-
-div:hover {
-  background-color: #FF1493;
-}
- */
 export const TextNew = styled.span`
   font-family: "Raleway";
   font-style: normal;
@@ -62,11 +56,8 @@ export const Text01 = styled.span`
   font-weight: 700;
   font-size: 18px;
   line-height: 150%;
-
   text-align: center;
-
   color: #ffffff;
-
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -82,11 +73,7 @@ export const Text02 = styled.span`
   font-weight: 100;
   font-size: 14px;
   line-height: 150%;
-
-  /* identical to box height, or 21px */
-
   color: #ffffff;
-
   @font-face {
     font-family: Raleway;
     src: url(../fonts/Raleway-VariableFont_wght.ttf);

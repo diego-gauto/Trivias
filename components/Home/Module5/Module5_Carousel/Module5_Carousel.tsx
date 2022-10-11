@@ -1,7 +1,7 @@
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { IModule5_Carousel } from "./IModule5_Carousel";
 import SlideModule from "./SlideModule/SlideModule";
-import React, { useRef } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import 'swiper/css';

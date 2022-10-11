@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-
 import { Container } from "react-bootstrap";
-
 import { GonvarPlusModule } from "../components/Home/GonvarPlusModule/GonvarPlusModule";
 import { Module2 } from "../components/Home/Module2/Module2";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
@@ -15,8 +13,7 @@ import {
 } from "../constants/gonvar";
 import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
 import { FirstSectionContainer } from "../containers/Home/FirstSectionContainer/FirstSectionContainer";
-import { Background, LoaderContain, LoaderImage } from "../screens/Login.styled";
-import { getCourses, getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
+import { getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 
 const Homepage = () => {
@@ -38,7 +35,6 @@ const Homepage = () => {
     setCourseSEPData(courseSEPData);
     setLoading(false);
   }
-
   const getCourses = async () => {
     let tempCourses: Array<any> = [];
     getWholeCourses().then((response) => {
@@ -68,8 +64,8 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      <FirstSectionContainer loading={loading} />
-      <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} loading={loading} />
+      <FirstSectionContainer />
+      <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
       {courses &&
@@ -77,7 +73,6 @@ const Homepage = () => {
           courses
         } />
       }
-
       {/* Nails Master Module Card */}
       <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} />
       {courseNailsData &&
@@ -85,7 +80,6 @@ const Homepage = () => {
           courseNailsData.lessons
         } />
       }
-
       {/* SEP Module Card */}
       <CourseModuleContainer courseId={SEP_COURSE_ID} />
       {courseSEPData &&
@@ -93,7 +87,6 @@ const Homepage = () => {
           courseSEPData.lessons
         } />
       }
-
       {/* Dry's Manicure Module Card */}
       <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} />
       {courses &&
@@ -101,7 +94,6 @@ const Homepage = () => {
           courses
         } />
       }
-
       {/* Experts Escultural Module Card */}
       <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} />
       {courses &&
@@ -109,7 +101,6 @@ const Homepage = () => {
           courses
         } />
       }
-
       <Module5 reviewsData={landingData.reseniasSectionData} />
       <Module6 slideData={landingData.productosDestacadosData} />
     </Container>

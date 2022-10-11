@@ -1,7 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
-
 import { appConfig } from "../utils/appConfig";
-
 /**
  * Document class
  * @class
@@ -15,7 +13,6 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
         </Head>
-
         <body>
           <Main />
           <NextScript />
@@ -24,5 +21,4 @@ class MyDocument extends Document {
     );
   }
 }
-
 export default MyDocument;

@@ -1,6 +1,6 @@
-import { Container, Col, Button, Image, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import React from 'react';
-import { CardTitle, DecoImage, DecoImageWrapper, MasonryBox, MasonryCardAlignA, MasonryCardAlignB, MasonryCardCentered, MasonryCardLeft, MasonryCardRight, MasonryContainer, MasonryImage, MasonrySpan, MasonryTitle, MasonryWindow, MasonryWindowParent, Row_Table, MasonryItem, MasonryDesktop, MasonryMobile, MasonryContent } from './Module5.styled'
+import { DecoImage, DecoImageWrapper, MasonryBox, MasonrySpan, MasonryTitle, MasonryDesktop, MasonryMobile, MasonryContent } from './Module5.styled'
 import { IModule5 } from "./IModule5";
 import { divideArrayInChunks } from "./helpers";
 import { Module5_Carousel } from "./Module5_Carousel/Module5_Carousel";

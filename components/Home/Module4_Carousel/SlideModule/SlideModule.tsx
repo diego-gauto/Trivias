@@ -1,5 +1,4 @@
 import { Image, Row } from "react-bootstrap";
-
 import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text02, TextSectionWrapper } from "./SlideModule.styled";
 

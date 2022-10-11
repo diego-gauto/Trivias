@@ -1,16 +1,11 @@
-
-
 import { Col, Image, Row } from "react-bootstrap";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
-
 import { useRouter } from "next/router";
-
 import { parseText, parseTitle } from "../../../utils/parse";
 import { Feature } from "../../common/Home/Feature/Feature";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import GradientCanvas from "../../GradientCanvas/GradientCanvas";
-import Img1 from "../Module1/MediaSources/Icon01.png";
 import Img2 from "../Module1/MediaSources/Icon02.svg";
 import Img3 from "../Module1/MediaSources/Icon03.svg";
 import Img4 from "../Module1/MediaSources/Icon04.svg";
@@ -19,9 +14,8 @@ import { IFirstSectionProps } from "./IFirstSectionProps";
 import { FaArrowRight } from "react-icons/fa";
 
 export const FirstSection = (props: IFirstSectionProps) => {
-  const { data, img, loading } = props;
+  const { data, img } = props;
   const router = useRouter();
-
   const responsiveXl = useMediaQuery({ query: "(min-width: 991px) and (max-width: 1200px)" });
   const responsiveHeight700 = useMediaQuery({ query: "(max-height: 772px)" });
   const responsive991 = useMediaQuery({ query: "(max-width: 991px)" });
@@ -30,13 +24,12 @@ export const FirstSection = (props: IFirstSectionProps) => {
     window.scrollTo(0, window.innerHeight * 0.75)
   }
 
-
   return (
     <FirstSectionContainer>
       <GradientCanvas id="gradient-canvas" height="83vh" />
       <Row>
         {responsive991 && <Col sm={12} lg={6} className="right-side">
-          <div className={(loading) ? "skeleton-product" : ""}>
+          <div className={(!img) ? "skeleton-product" : ""}>
 
           </div>
           <div className="grey-field">
@@ -44,7 +37,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
           </div>
         </Col>}
         <BlurDiv />
-        <Col sm={12} lg={6} className={"left-side" && (loading) ? " skeleton-product" : ""}>
+        <Col sm={12} lg={6} className={"left-side" && (!img) ? " skeleton-product" : ""}>
           <div className="grey-field">
             <h1>{parseTitle(data?.tituloInicial)}</h1>
           </div>
@@ -90,7 +83,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
           </Row>}
         </Col>
         {!responsive991 && <Col sm={12} lg={6} className="right-side">
-          <div className={loading ? "skeleton-product" : ""}>
+          <div className={!img ? "skeleton-product" : ""}>
             <div className="grey-field">
               <Image src={img} fluid />
             </div>

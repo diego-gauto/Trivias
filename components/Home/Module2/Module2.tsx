@@ -1,6 +1,5 @@
 import { Col, Image, Row } from "react-bootstrap";
 import DOMPurify from "dompurify"
-import { IModule2 } from "./IModule2";
 import BG1 from "./MediaSources/BG01.png";
 import BG2 from "./MediaSources/BG02.png";
 import BG3 from "./MediaSources/BG03.png";
@@ -26,26 +25,31 @@ import {
   TitleCenter,
   TitleTextContainer,
 } from "./Module2.styled";
+import { useEffect, useState } from "react";
 
-export const Module2 = ({ featureShowcaseSectionData, loading }: any) => {
-  let iconImagesData;
+export const Module2 = ({ featureShowcaseSectionData }: any) => {
+  const [iconImagesData, setIconImagesData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
     const html = text.replace(bold, '<span>$1</span>');
     return <TitleCenter dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
   }
-  const featureImagesOrder = [Img5.src, Img2.src, Img6.src, Img3.src, Img4.src, Img1.src]
-  if (featureShowcaseSectionData) {
-    iconImagesData = featureShowcaseSectionData.features?.map((feature: any, i: number) => {
-      return { text: feature, source: featureImagesOrder[i] }
-    })
-  }
+  const featureImagesOrder = [Img5.src, Img2.src, Img6.src, Img3.src, Img4.src, Img1.src];
+
+  useEffect(() => {
+    if (featureShowcaseSectionData) {
+      setIconImagesData(featureShowcaseSectionData.features?.map((feature: any, i: number) => {
+        return { text: feature, source: featureImagesOrder[i] }
+      }))
+      setLoading(false)
+    }
+  }, [featureShowcaseSectionData])
 
   const iconImages = iconImagesData?.map((x: any, index: number) => {
     return (
       <Col key={x.text + index}>
         <Row>
-
           <IconImage>
             <div className="grey-field">
               <Image src={x.source} ></Image>
