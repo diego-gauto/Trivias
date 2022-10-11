@@ -90,14 +90,15 @@ const CourseForm_Create = () => {
   const [openCourse, setOpenCourse] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [openHw, setOpenHw] = useState(false);
   const [name, setName] = useState("Seleccionar un profesor");
+  const [homeWork, setHomeWork] = useState(false);
   const [free, setFree] = useState(0)
   const [value, setValue] = useState<any>({});
   const [userData, setUserData] = useState<any>([]);
   const [value2, setValue2] = useState("Uñas");
   const [value3, setValue3] = useState("Gratis");
   const [image, setImage] = useState<any>("");
-  const [price, setPrice] = useState(0);
   const [missing, setMissing] = useState(false)
   const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
 
@@ -136,6 +137,7 @@ const CourseForm_Create = () => {
         courseProfessor: professor,
         courseCategory: category,
         courseType: type,
+        courseHomeWork: homeWork,
         uid: "A5uQQ3JAyS8GvnnwLPdE"
       },
     };
@@ -173,7 +175,6 @@ const CourseForm_Create = () => {
     getProffessors();
 
   }, [])
-
   return (
     <CourseFormContain onClick={() => { setOpenCourse(!openCourse) }}>
       {/* LINEA 1 */}
@@ -297,6 +298,42 @@ const CourseForm_Create = () => {
               {...register("courseSubtittle")}
             />
           </InputContain>
+
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Tarea</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { setOpenHw(!openHw) }}>
+                  {
+                    homeWork == false ? "Flexible" : "Obligatorio"
+                  }
+                  <CaretD2 />
+                </Selected>
+                {
+                  openHw == true &&
+                  <OptionContain>
+                    <Option onClick={() => { setOpenHw(false), setHomeWork(false) }}>
+                      <input
+                        type="radio"
+                        id="HomeWork"
+                        value="homework 1"
+                      />
+                      <Label2 > Flexible</Label2>
+                    </Option>
+                    <Option onClick={() => { setOpenHw(false), setHomeWork(true) }}>
+                      <input
+                        type="radio"
+                        id="HomeWork"
+                        value="homework 1"
+                      />
+                      <Label2 >Obligatorio</Label2>
+                    </Option>
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+          </InputContain>
           {/* <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Categorías</Label>
             <IconContain>
@@ -369,19 +406,31 @@ const CourseForm_Create = () => {
           <InputContain2 onClick={(e) => { e.stopPropagation(); }}>
             {
               (value3 == "Producto") &&
-              <InputContain>
-                <Label>Precio (MXN)</Label>
-                <Input
-                  placeholder="998"
-                  type="number"
-                  defaultValue={0}
-                  className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
-                  {...register("coursePrice")}
-                />
-              </InputContain>
+              <>
 
+                <InputContain>
+                  <Label>Precio (MXN)</Label>
+                  <Input
+                    placeholder="998"
+                    type="number"
+                    defaultValue={0}
+                    className={`form-control ${errors.coursePrice ? 'is-invalid' : ''}`}
+                    {...register("coursePrice")}
+                  />
+                </InputContain>
+
+                <InputContain onClick={(e) => { e.stopPropagation(); }}>
+                  <Label>Duración de Suscripción (Días)</Label>
+                  <Input
+                    placeholder="90"
+                    type="number"
+                    defaultValue={0}
+                    className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
+                    {...register("courseDuration")}
+                  />
+                </InputContain>
+              </>
             }
-
 
           </InputContain2>
           {/* <TagContain>
@@ -429,19 +478,7 @@ const CourseForm_Create = () => {
           </TagLabel>
         </TagContain> */}
           <InputContain2>
-            {
-              value3 == "Producto" &&
-              <InputContain onClick={(e) => { e.stopPropagation(); }}>
-                <Label>Duración de Suscripción (Días)</Label>
-                <Input
-                  placeholder="90"
-                  type="number"
-                  defaultValue={0}
-                  className={`form-control ${errors.courseDuration ? 'is-invalid' : ''}`}
-                  {...register("courseDuration")}
-                />
-              </InputContain>
-            }
+
             <ButtonContain >
               {!creatingNewCourse ?
                 <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
