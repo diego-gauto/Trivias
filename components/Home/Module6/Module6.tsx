@@ -61,7 +61,7 @@ export const Module6 = (props: IModule6) => {
     }
   };
 
-  const sliderData = slideDataArr.map((element) => {
+  const sliderData = slideDataArr?.map((element) => {
     return (
       <SwiperSlide key={element.title + "_ID"}>
         <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">

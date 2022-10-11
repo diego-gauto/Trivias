@@ -196,7 +196,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         width="100%" height="100%">
                       </ReactPlayer>}
                       {isPlaying &&
-                        <div className="skeleton-product">
+                        <div className="skeleton-product" style={{ 'width': '100%' }}>
                           <div className="grey-field" style={{ 'width': '60%' }}>Lorem Ipsum</div>
                           <div className="grey-field" style={{ 'width': '75%' }}>orem Ipsum orem Ipsum</div>
                           <div className="grey-field" style={{ 'width': '85%' }}>orem Ipsum orem Ipsum</div>

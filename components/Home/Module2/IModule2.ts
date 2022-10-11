@@ -1,6 +1,4 @@
-export interface IModule2{
-  featureShowcaseSectionData: {
-    title: string;
-    features: Array<string>;
-  }
+export interface IModule2 {
+  title: string;
+  features: Array<string>;
 }
