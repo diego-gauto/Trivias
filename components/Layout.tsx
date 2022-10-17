@@ -15,11 +15,16 @@ const Layout = ({ children }: any) => {
 
   return (
     <Body style={{ overflowX: "hidden" }}>
-      <NavBar />
-      <ChildrenContain>
+      {/* <NavBar /> */}
+      {/* <ChildrenContain>
         {children}
       </ChildrenContain>
-      <Footer />
+      <Footer /> */}
+      <div className="cs-container">
+        <h1>
+          COMING SOON...
+        </h1>
+      </div>
     </Body>
   )
 

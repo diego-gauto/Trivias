@@ -51,3 +51,15 @@ p,h1,h2,h3,h4,h5,h6,a,span,button,input,textarea,select{
 h1,th{
       font-weight: bold !important;
 }
+
+/*******Coming Soon content****/
+.cs-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.cs-container h1{
+  color: rgb(103, 23, 205);
+  font-size: 90px;
+}
