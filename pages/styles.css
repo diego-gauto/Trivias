@@ -54,12 +54,48 @@ h1,th{
 
 /*******Coming Soon content****/
 .cs-container{
+  height: 100vh;
+}
+.cs-container .background-img{
+  filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.cs-container .content{
+  position: absolute;
+  flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  gap: 50px;
 }
-.cs-container h1{
-  color: rgb(103, 23, 205);
+.cs-container .content h1{
+  color: #fff;
   font-size: 90px;
+}
+.cs-container .content .social-container{
+  display: flex;
+  gap: 20px;
+}
+.cs-container .content .social-container .circles{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+  color: white;
+}
+@media screen and (max-width:850px){
+  .cs-container .content h1{
+  color: #fff;
+  font-size: 30px;
+}
 }
