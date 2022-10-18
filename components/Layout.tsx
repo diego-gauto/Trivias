@@ -25,7 +25,7 @@ const Layout = ({ children }: any) => {
       <div className="cs-container">
         <img className="background-img" src="/images/coming-soon-bg.png" alt="" />
         <div className="content">
-          <h1>PRÓXIMAMENTE...</h1>
+          <h1>PRÓXIMAMENTE</h1>
           <Logo src="/images/Navbar/logo.svg" />
           <div className="social-container">
             <a href="https://www.facebook.com/GonvarNails" className="circles">
