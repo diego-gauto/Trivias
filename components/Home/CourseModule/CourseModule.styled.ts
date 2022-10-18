@@ -17,7 +17,6 @@ export const CardContainer = styled(Card)`
     object-fit: cover;
   }
   .video::before {
-    background: linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%);
     content: "";
     position: absolute;
     z-index: 0;
@@ -96,7 +95,6 @@ export const CardContainer = styled(Card)`
       padding-left: 50px;
     }
     .video::before {
-      background: linear-gradient(0deg, #000000 9%, rgba(0, 0, 0, 0) 100%);
       content: "";
       position: absolute;
       z-index: 0;

@@ -91,7 +91,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
         </Col>}
         <Col className="text-center mt-2">
           <ArrowDownContainer onClick={scrollToModule2}>
-            <RiArrowDownSLine size={30} />
+            <RiArrowDownSLine size={60} />
           </ArrowDownContainer>
         </Col>
       </Row>
