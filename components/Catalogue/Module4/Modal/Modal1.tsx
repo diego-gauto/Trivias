@@ -119,10 +119,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {(course.courseType == 'Producto' && !course.paid) && <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
                   </PurpleButton>}
-                  {(course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') && <PurpleButton onClick={goTo}>
+                  {(user && course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') && <PurpleButton onClick={goTo}>
                     Ver curso
                   </PurpleButton>}
-                  {(course.courseType == 'Mensual' && user.membership.finalDate < today) && <PurpleButton onClick={goTo}>
+                  {(user && course.courseType == 'Mensual' && user.membership.finalDate < today || !user && course.courseType == 'Mensual') && <PurpleButton onClick={goTo}>
                     Comprar Gonvar +
                   </PurpleButton>}
                 </ButtonContain>

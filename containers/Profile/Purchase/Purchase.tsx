@@ -524,7 +524,7 @@ const Purchase = () => {
                             <Col md={4}>
                               <Form.Group>
                                 <Form.Label font>Fecha de expiración</Form.Label>
-                                <Form.Control type="text" placeholder="MM" maxLength={2} onChange={(e) => {
+                                <Form.Control type="text" placeholder="MM" onChange={(e) => {
                                   setCard((card: any) => ({ ...card, exp_month: e.target.value }));
                                 }} />
                               </Form.Group>
