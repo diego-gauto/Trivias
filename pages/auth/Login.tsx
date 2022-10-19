@@ -80,7 +80,21 @@ const Login = () => {
       setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
       setError(true);
       setIsLoading(false);
-    } else {
+    }
+    if (redirectURL == 'auth/wrong-password') {
+      setErrorMsg('El correo o la contraseña es incorrecta!');
+      setError(true);
+      setIsLoading(false);
+    }
+    if (redirectURL == "auth/email-already-exists") {
+      setErrorMsg('El correo ingresado ya existe!');
+      setError(true);
+      setIsLoading(false);
+    }
+    if (redirectURL == "/Preview") {
+      window.location.href = redirectURL;
+    }
+    if (redirectURL == "/auth/RegisterPastUser") {
       window.location.href = redirectURL;
     }
   }
