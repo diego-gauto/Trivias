@@ -69,17 +69,6 @@ const Module3 = ({ user, allCourses }: any) => {
         query: { id: data.id, season: 0, lesson: 0 },
       });
     }
-    // if (data.courseType == 'Gratis') {
-    //   router.push({
-    //     pathname: 'Lesson',
-    //     query: { id: data.id },
-    //   });
-    // }
-    // if (data.courseType == 'Mensual' && userData.membership.level == 0) {
-    //   router.push(
-    //     { pathname: 'Purchase', query: { type: 'subscription' } }
-    //   )
-    // }
     setCourse(data)
   }
   const settings = {
@@ -92,6 +81,10 @@ const Module3 = ({ user, allCourses }: any) => {
     breakpoints: {
       1024: {
         slidesPerView: 5,
+        spaceBetween: 0,
+      },
+      300: {
+        slidesPerView: 2.25,
         spaceBetween: 0,
       }
     }

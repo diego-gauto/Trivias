@@ -36,15 +36,6 @@ const Module5 = ({ user, course }: any) => {
   const handleShow = () => {
     setShow(true);
   }
-  const handleWidth = () => {
-    // let cardWidth: any = document.getElementById('card-container-3')?.offsetWidth;
-    // let cardStyle: any = document.getElementById('shadow-3');
-    // if (window.innerWidth < cardWidth) {
-    //   cardStyle.style.display = 'flex';
-    // } else {
-    //   cardStyle.style.display = 'none';
-    // }
-  }
 
   useEffect(() => {
     if (course) {
@@ -59,7 +50,7 @@ const Module5 = ({ user, course }: any) => {
       });
       setCourses(temp_courses);
       setTimeout(() => {
-        handleWidth();
+
       }, 500);
     }
   }, [course])
@@ -83,9 +74,6 @@ const Module5 = ({ user, course }: any) => {
     }
   }
 
-  window.addEventListener('resize', function (event) {
-    handleWidth();
-  },);
   const settings = {
     mousewheel: {
       forceToAxis: true
@@ -96,6 +84,10 @@ const Module5 = ({ user, course }: any) => {
     breakpoints: {
       1024: {
         slidesPerView: 5,
+        spaceBetween: 0,
+      },
+      300: {
+        slidesPerView: 2.25,
         spaceBetween: 0,
       }
     }
