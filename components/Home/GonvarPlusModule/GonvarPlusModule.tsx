@@ -5,7 +5,9 @@ import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
 import { SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
+import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
+import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 
 export const GonvarPlusModule = () => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
@@ -42,7 +44,7 @@ export const GonvarPlusModule = () => {
               Desde $149.00
             </Card.Text>}
           <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => router.push(SIGNUP_PATH)} />
-          {/* <WhiteButton text={responsive768 ? "Información" : "Más información"} /> */}
+          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
         </Col>
         {responsive768 && <Card.Text className="mobile-price">
           Desde $149.00
