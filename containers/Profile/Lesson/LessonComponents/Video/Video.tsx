@@ -17,7 +17,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
       if (temp.users.includes(user.id)) {
         console.log("user exist");
       } else {
-        user.score = user.score + data.points;
+        user.score = parseInt(user.score) + parseInt(data.points);
         addUserToLesson(data, id, data.seasonId, data.id, user);
         temp.users.push(user.id);
         setCurrent({ ...temp });
