@@ -52,6 +52,11 @@ export const Title = styled.h1`
   font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
+export const TitleEdit = styled.div`
+  width: 50%;
+  display: flex;
+  column-gap: 18px;
+`;
 export const EpisodesNumber = styled.p`
   font-weight: normal;
   font-size: 14px;
