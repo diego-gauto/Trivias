@@ -25,27 +25,22 @@ const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
     addReview(review).then((res) => {
     })
   }
-  console.log(data);
-
-  const updateScore = async () => {
-    const docRef = doc(db, 'users', data.userId);
-    await updateDoc(docRef, {
-      score: userScore + review.score
-    })
-  }
   const updateStatus = async () => {
     let tempAproved = review.aproved
     if (value == 1) {
       tempAproved = true;
     }
     if (tempAproved) {
+      const docRef = doc(db, 'users', data.userId);
+      await updateDoc(docRef, {
+        score: userScore + review.score
+      })
       getWholeCourse(data.courseId).then((res) => {
         let tempIndex = res.seasons[data.season].lessons[data.lesson].progress.findIndex((x: any) => x.id == data.userId);
         res.seasons[data.season].lessons[data.lesson].progress[tempIndex].status = true;
         updateProgressStatus(res.seasons[data.season].lessons[data.lesson].progress, data.courseId, res.seasons[data.season].id, data.lessonId)
       })
     }
-
     const docRef = doc(db, 'homeworks', data.id);
     await updateDoc(docRef, {
       status: true,
@@ -161,7 +156,6 @@ const ModalHW = ({ show, setShow, data, user, handleClick }: props) => {
               {user.role == 'admin' && <ButtonContain>
                 <button onClick={() => {
                   createReview(),
-                    updateScore(),
                     updateStatus()
                 }}>
                   Guardar
