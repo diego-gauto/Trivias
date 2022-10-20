@@ -18,9 +18,10 @@ import { Container } from "react-bootstrap";
 import { LOGIN_PATH } from "../../../constants/paths";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module2 = ({ user, allCourses }: any) => {
+const Module2 = ({ user, allCourses, isLoading, setSecondLoad }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const swiperRef = useRef<SwiperCore>();
+  const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
 
   const onInit = (swiper: SwiperCore) => {
@@ -37,26 +38,34 @@ const Module2 = ({ user, allCourses }: any) => {
     // }
   }
   useEffect(() => {
-    if (user) {
-      let tempCourses: any = [];
-      getViewedCourses(user.id).then((res: any) => {
-        res.forEach((element: DocumentData) => {
-          let tempCourse;
-          if (allCourses.some((x: any) => x.id == element.documentID)) {
-            tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
-            element.coursePath = tempCourse[0].coursePath;
-            if (("progress" in tempCourse[0].seasons[element.season].lessons[element.lesson])) {
-              element.progress = tempCourse[0].seasons[element.season].lessons[element.lesson].progress.filter((x: any) => x.id == user.id)
-              element.progress = element.progress[0]?.time
+    if (!isLoading) {
+      if (user) {
+        let tempCourses: any = [];
+        getViewedCourses(user.id).then((res: any) => {
+          res.forEach((element: DocumentData) => {
+            let tempCourse;
+            if (allCourses.some((x: any) => x.id == element.documentID)) {
+              tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
+              element.coursePath = tempCourse[0].coursePath;
+              if (("progress" in tempCourse[0].seasons[element.season].lessons[element.lesson])) {
+                element.progress = tempCourse[0].seasons[element.season].lessons[element.lesson].progress.filter((x: any) => x.id == user.id)
+                element.progress = element.progress[0]?.time
+              }
+              tempCourses.push(element)
             }
-            tempCourses.push(element)
-          }
+          });
+          setCourses(tempCourses);
+          handleWidth();
+          setTimeout(() => {
+            setLoading(false);
+          }, 200);
+          setTimeout(() => {
+            setSecondLoad(false);
+          }, 400);
         });
-        setCourses(tempCourses);
-        handleWidth();
-      });
+      }
     }
-  }, [user]);
+  }, [user, isLoading]);
 
   window.addEventListener('resize', function (event) {
     handleWidth();
@@ -115,22 +124,26 @@ const Module2 = ({ user, allCourses }: any) => {
     <>
       {courses.length > 0 && <Container fluid
         style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
-        <ContinueText>
-          Continua viendo
-        </ContinueText>
-        <Swiper id="card-container-1" {...settings} onInit={onInit}>
-          {courses.map((element: any, idx: any) => (
-            <SwiperSlide key={idx} onClick={() => {
-              goTo(element)
-            }}>
-              <SlideModuleContainer>
-                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-                <Progress style={{ 'width': `${element.progress}%` }}></Progress>
-              </SlideModuleContainer>
-            </SwiperSlide>
-          ))}
-          <div id="shadow-1" className="right-shadow"></div>
-        </Swiper>
+        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <ContinueText>
+              Continua viendo
+            </ContinueText>
+          </div>
+          <Swiper id="card-container-1" {...settings} onInit={onInit}>
+            {courses.map((element: any, idx: any) => (
+              <SwiperSlide key={idx} onClick={() => {
+                goTo(element)
+              }}>
+                <SlideModuleContainer>
+                  <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                  <Progress style={{ 'width': `${element.progress}%` }}></Progress>
+                </SlideModuleContainer>
+              </SwiperSlide>
+            ))}
+            <div id="shadow-1" className="right-shadow"></div>
+          </Swiper>
+        </div>
       </Container>}
     </>
   )

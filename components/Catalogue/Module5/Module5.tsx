@@ -22,12 +22,13 @@ import {
 } from "./Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 
-const Module5 = ({ user, course }: any) => {
+const Module5 = ({ user, course, isLoading }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
+  const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
 
   const onInit = (swiper: SwiperCore) => {
@@ -38,22 +39,24 @@ const Module5 = ({ user, course }: any) => {
   }
 
   useEffect(() => {
-    if (course) {
-      let temp_courses: any = [];
-      course.forEach((element: any) => {
-        if (element.courseType == 'Mensual') {
-          element.courseAbout = element.courseAbout.slice(0, 50);
-          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-          element.courseTittle = element.courseTittle.slice(0, 15);
-          temp_courses.push(element);
-        }
-      });
-      setCourses(temp_courses);
-      setTimeout(() => {
-
-      }, 500);
+    if (!isLoading) {
+      if (course) {
+        let temp_courses: any = [];
+        course.forEach((element: any) => {
+          if (element.courseType == 'Mensual') {
+            element.courseAbout = element.courseAbout.slice(0, 50);
+            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+            element.courseTittle = element.courseTittle.slice(0, 15);
+            temp_courses.push(element);
+          }
+        });
+        setCourses(temp_courses);
+        setTimeout(() => {
+          setLoading(false);
+        }, 200);
+      }
     }
-  }, [course])
+  }, [course, isLoading])
 
   const goTo = (data: any) => {
     if (user) {
@@ -94,38 +97,48 @@ const Module5 = ({ user, course }: any) => {
   };
   return (
     <MainContainer fluid>
-      <Container fluid
-        style={{ overflow: "hidden", padding: 0, margin: 0 }}>
-        <Title>
-          Incluido con Gonvar+
-        </Title>
-        <Swiper {...settings} onInit={onInit} id="card-container-3">
-          {courses.map((element: any, idx: any) => (
-            <SwiperSlide key={idx} onClick={() => {
-              handleShow();
-              setCourse(element);
-            }}>
-              <SlideModuleContainer>
-                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-              </SlideModuleContainer>
-            </SwiperSlide>
-          ))}
-          <div id="shadow-3" className="right-shadow"></div>
-        </Swiper>
-        {<ButtonContain>
-          {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
-            <PurpleButton>
-              Adquiere Gonvar+
-            </PurpleButton>
-          </Link>}
-          {!user && <Link href={LOGIN_PATH}>
-            <PurpleButton>
-              Adquiere Gonvar+
-            </PurpleButton>
-          </Link>}
-        </ButtonContain>}
-      </Container>
-      <Modal1 show={show} setShow={setShow} course={course_1} user={user} />
+      <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
+        <Container fluid
+          style={{ overflow: "hidden", padding: 0, margin: 0 }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <Title>
+              Incluido con Gonvar+
+            </Title>
+          </div>
+          <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+            <Swiper {...settings} onInit={onInit} id="card-container-3">
+              {courses.map((element: any, idx: any) => (
+                <SwiperSlide key={idx} onClick={() => {
+                  handleShow();
+                  setCourse(element);
+                }}>
+                  <SlideModuleContainer>
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                  </SlideModuleContainer>
+                </SwiperSlide>
+              ))}
+              <div id="shadow-3" className="right-shadow"></div>
+            </Swiper>
+          </div>
+          {<ButtonContain>
+            {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
+              <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+                <PurpleButton>
+                  Adquiere Gonvar+
+                </PurpleButton>
+              </div>
+            </Link>}
+            {!user && <Link href={LOGIN_PATH}>
+              <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+                <PurpleButton>
+                  Adquiere Gonvar+
+                </PurpleButton>
+              </div>
+            </Link>}
+          </ButtonContain>}
+        </Container>
+        <Modal1 show={show} setShow={setShow} course={course_1} user={user} />
+      </div>
     </MainContainer>
   )
 }

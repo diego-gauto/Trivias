@@ -28,38 +28,47 @@ import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module3 = ({ user, allCourses }: any) => {
+const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [show, setShow] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
 
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
   useEffect(() => {
-    if (user) {
-      let temp_courses: any = [];
-      let date = new Date().getTime() / 1000;
-      let temp_final_date: any;
-      getPaidCourses(user.id).then((paid: any) => {
-        allCourses.forEach(async (element: any) => {
-          if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-            element.paid = true;
-            element.courseAbout = element.courseAbout.slice(0, 100);
-            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-            element.courseTittle = element.courseTittle.slice(0, 15);
-            temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
-            element.date = Math.ceil((temp_final_date.finalDate - date) / (3600 * 24));
-            temp_courses.push(element);
-          }
-        });
-        setCourses(temp_courses);
-      })
+    if (!isLoading) {
+      if (user) {
+        let temp_courses: any = [];
+        let date = new Date().getTime() / 1000;
+        let temp_final_date: any;
+        getPaidCourses(user.id).then((paid: any) => {
+          allCourses.forEach(async (element: any) => {
+            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+              element.paid = true;
+              element.courseAbout = element.courseAbout.slice(0, 100);
+              element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+              element.courseTittle = element.courseTittle.slice(0, 15);
+              temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
+              element.date = Math.ceil((temp_final_date.finalDate - date) / (3600 * 24));
+              temp_courses.push(element);
+            }
+          });
+          setCourses(temp_courses);
+          setTimeout(() => {
+            setLoading(false);
+          }, 200);
+          setTimeout(() => {
+            setThirdLoad(false);
+          }, 400);
+        })
+      }
     }
-  }, [user])
+  }, [user, isLoading])
 
   const goTo = (data: any) => {
     let today = new Date().getTime() / 1000;
@@ -92,30 +101,34 @@ const Module3 = ({ user, allCourses }: any) => {
 
   return (
     <Maincontainer>
-      {courses.length > 0 && <>
+      {courses.length > 0 && <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
         <Container fluid
           style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
-          <Title>
-            Tus Cursos
-          </Title>
-          <Swiper {...settings} onInit={onInit} id="card-container-3">
-            {courses.map((element: any, idx: any) => (
-              <SwiperSlide key={idx} onClick={() => {
-                goTo(element)
-              }}>
-                <SlideModuleContainer>
-                  <ImageContent>
-                    <Band />
-                    <DaysLeft>{course.date} días</DaysLeft>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-                  </ImageContent>
-                </SlideModuleContainer>
-              </SwiperSlide>
-            ))}
-            <div id="shadow-2" className="right-shadow"></div>
-          </Swiper>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <Title>
+              Tus Cursos
+            </Title>
+          </div>
+          <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+            <Swiper {...settings} onInit={onInit} id="card-container-3">
+              {courses.map((element: any, idx: any) => (
+                <SwiperSlide key={idx} onClick={() => {
+                  goTo(element)
+                }}>
+                  <SlideModuleContainer>
+                    <ImageContent>
+                      <Band />
+                      <DaysLeft>{course.date} días</DaysLeft>
+                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                    </ImageContent>
+                  </SlideModuleContainer>
+                </SwiperSlide>
+              ))}
+              <div id="shadow-2" className="right-shadow"></div>
+            </Swiper>
+          </div>
         </Container>
-      </>}
+      </div>}
     </Maincontainer>
   )
 }

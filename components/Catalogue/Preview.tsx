@@ -19,6 +19,10 @@ const Preview = () => {
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [secondLoad, setSecondLoad] = useState(true);
+  const [thirdLoad, setThirdLoad] = useState(true);
+  const [fourthLoad, setFourthLoad] = useState(true);
 
   try {
     var userDataAuth = useAuth();
@@ -84,20 +88,35 @@ const Preview = () => {
 
   return (
     <>
-      {isLoading ? <Background>
+      {/* <Background>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
-      </Background> :
-        <PreviewContain>
-          <Module1 user={userData} allCourses={courses[0]} />
+      </Background> : */}
+      <PreviewContain>
+        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} setFirstLoad={setFirstLoad} />
+        {
+          !firstLoad &&
           <ModuleContain>
-            {userData && <Module2 user={userData} allCourses={courses} />}
-            {userData && <Module3 user={userData} allCourses={courses} />}
-            <Module4 user={userData} allCourses={courses} />
+            {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} setSecondLoad={setSecondLoad} />}
+            {
+              !secondLoad &&
+              <>
+                {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} setThirdLoad={setThirdLoad} />}
+                {
+                  !thirdLoad &&
+                  <Module4 user={userData} allCourses={courses} isLoading={isLoading} firstLoad={firstLoad} setFourthLoad={setFourthLoad} />
+                }
+              </>
+            }
           </ModuleContain>
-          <Module5 user={userData} course={courses} />
-        </PreviewContain>}
+        }
+        {
+          (!firstLoad && !secondLoad && !thirdLoad && !fourthLoad) &&
+          <Module5 user={userData} course={courses} isLoading={isLoading} />
+
+        }
+      </PreviewContain>
     </>
   )
 }

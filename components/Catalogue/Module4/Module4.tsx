@@ -17,12 +17,13 @@ import { MainContainer } from "../Module5/Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module4 = ({ user, allCourses }: any) => {
+const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
   const swiperRef = useRef<SwiperCore>();
 
@@ -44,35 +45,44 @@ const Module4 = ({ user, allCourses }: any) => {
   }
 
   useEffect(() => {
-    if (user) {
-      let date = new Date().getTime() / 1000;
-      getPaidCourses(user.id).then((paid) => {
-        setUserCourses(paid);
+    if (!isLoading) {
+      if (user) {
+        let date = new Date().getTime() / 1000;
+        getPaidCourses(user.id).then((paid) => {
+          setUserCourses(paid);
+          allCourses.forEach((element: any) => {
+            element.courseAbout = element.courseAbout.slice(0, 100);
+            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+            element.courseTittle = element.courseTittle.slice(0, 15);
+            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+              element.paid = true;
+            } else {
+              element.paid = false;
+            }
+          });
+          setCourses(allCourses);
+          handleWidth();
+          setTimeout(() => {
+            setLoading(false);
+          }, 300);
+          setTimeout(() => {
+            setFourthLoad(false);
+          }, 400);
+        })
+      } else {
         allCourses.forEach((element: any) => {
           element.courseAbout = element.courseAbout.slice(0, 100);
           element.courseSubtittle = element.courseSubtittle.slice(0, 30);
           element.courseTittle = element.courseTittle.slice(0, 15);
-          if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-            element.paid = true;
-          } else {
-            element.paid = false;
-          }
         });
         setCourses(allCourses);
-        handleWidth();
-      })
-    } else {
-      allCourses.forEach((element: any) => {
-        element.courseAbout = element.courseAbout.slice(0, 100);
-        element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-        element.courseTittle = element.courseTittle.slice(0, 15);
-      });
-      setCourses(allCourses);
-      setTimeout(() => {
-        handleWidth();
-      }, 500);
+        setTimeout(() => {
+          handleWidth();
+        }, 200);
+      }
     }
-  }, [user])
+
+  }, [user, isLoading])
 
   window.addEventListener('resize', function (event) {
     handleWidth();
@@ -99,22 +109,30 @@ const Module4 = ({ user, allCourses }: any) => {
     <>
       <Container fluid
         style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
-        <Title>
-          Cursos disponibles
-        </Title>
-        <Swiper {...settings} onInit={onInit} id="card-container-3">
-          {courses.map((element: any, idx: any) => (
-            <SwiperSlide key={idx} onClick={() => {
-              handleShow();
-              setCourse(element);
-            }}>
-              <SlideModuleContainer>
-                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-              </SlideModuleContainer>
-            </SwiperSlide>
-          ))}
-          <div id="shadow-2" className="right-shadow"></div>
-        </Swiper>
+        {courses.length > 0 && <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <Title>
+              Cursos disponibles
+            </Title>
+          </div>
+          <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+            <Swiper {...settings} onInit={onInit} id="card-container-3">
+              {courses.map((element: any, idx: any) => (
+
+                <SwiperSlide key={idx} onClick={() => {
+                  handleShow();
+                  setCourse(element);
+                }}>
+                  <SlideModuleContainer>
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                  </SlideModuleContainer>
+                </SwiperSlide>
+
+              ))}
+              <div id="shadow-2" className="right-shadow"></div>
+            </Swiper>
+          </div>
+        </div>}
       </Container>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </>
