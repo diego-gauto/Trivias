@@ -49,9 +49,10 @@ export const BackgroundOverlay = styled.div`
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
+  justify-content: space-between;
   padding-inline: 20px;
   flex-direction: column;
-  gap: 220px;
   position: absolute;
   @media (max-width: 991px) {
     gap: 40px;
@@ -67,6 +68,7 @@ export const Container = styled.div`
 export const TextContainer = styled.div`
   display: flex;
   width: 100%;
+  bottom: 40px;
   flex-direction: column;
   gap: 2px;
 `;
