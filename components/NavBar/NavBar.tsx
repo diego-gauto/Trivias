@@ -253,11 +253,11 @@ const NavBar = () => {
                         Tienda
                       </HBList>
                     </a>
-                    <Link href="/Preview">
+                    {/* <Link href="/Preview">
                       <HBList onClick={() => { closeHamburgerMenu() }}>
                         Catálogo
                       </HBList>
-                    </Link>
+                    </Link> */}
                     <Link href="/Profile">
                       <HBList onClick={() => { closeHamburgerMenu() }}>
 
