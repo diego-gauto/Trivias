@@ -39,25 +39,25 @@ const PointPrizes = ({ score, user }: any) => {
 
   const getAllRewards = () => {
     getRewards().then((res) => {
-      getUserRewards(user.id).then((rw) => {
+      getUserRewards(user.id).then(async (rw) => {
 
-        res.forEach((element: any) => {
+        await Promise.all(res.map(async (element: any) => {
           if (rw.some((x: any) => x.id == element.id && x.status == true)) {
             element.status = true;
           } else {
             element.status = false;
           }
 
-        });
+        }))
+        setRewards(res);
       })
-      setRewards(res);
     })
   }
 
   useEffect(() => {
     getAllRewards();
   }, [])
-
+  console.log(rewards)
   return (
     <MainContainer>
       <TitleClaim>
@@ -74,7 +74,7 @@ const PointPrizes = ({ score, user }: any) => {
                   <Overlay points={reward.points} score={score} />
                   <ImageReward src={reward.path} />
                   {
-                    reward.status == true &&
+                    reward.status &&
                     <Band />
                   }
                 </PrizeImage>
