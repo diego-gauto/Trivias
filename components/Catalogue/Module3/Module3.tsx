@@ -58,6 +58,7 @@ const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
               temp_courses.push(element);
             }
           });
+
           setCourses(temp_courses);
           setTimeout(() => {
             setLoading(false);
@@ -109,24 +110,24 @@ const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
               Tus Cursos
             </Title>
           </div>
-          <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
-            <Swiper {...settings} onInit={onInit} id="card-container-3">
-              {courses.map((element: any, idx: any) => (
-                <SwiperSlide key={idx} onClick={() => {
-                  goTo(element)
-                }}>
-                  <SlideModuleContainer>
-                    <ImageContent>
-                      <Band />
-                      <DaysLeft>{course.date} días</DaysLeft>
-                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-                    </ImageContent>
-                  </SlideModuleContainer>
-                </SwiperSlide>
-              ))}
-              <div id="shadow-2" className="right-shadow"></div>
-            </Swiper>
-          </div>
+          {/* <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}> */}
+          <Swiper {...settings} onInit={onInit} id="card-container-3">
+            {courses.map((element: any, idx: any) => (
+              <SwiperSlide key={idx} onClick={() => {
+                goTo(element)
+              }}>
+                <SlideModuleContainer>
+                  <ImageContent>
+                    <Band />
+                    <DaysLeft>{element.date} días</DaysLeft>
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                  </ImageContent>
+                </SlideModuleContainer>
+              </SwiperSlide>
+            ))}
+            <div id="shadow-2" className="right-shadow"></div>
+          </Swiper>
+          {/* </div> */}
         </Container>
       </div>}
     </Maincontainer>
