@@ -88,6 +88,10 @@ const Module4 = ({ user, allCourses }: any) => {
       1024: {
         slidesPerView: 5,
         spaceBetween: 0,
+      },
+      300: {
+        slidesPerView: 2.25,
+        spaceBetween: 0,
       }
     }
   };

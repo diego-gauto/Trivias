@@ -2,7 +2,6 @@ import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 
 export const RightContainer = styled(Col)`
-  background: linear-gradient(270deg, #000000 9%, rgba(0, 0, 0, 0) 100%);
   @media only screen and (max-width: 1024px) {
     background: none;
   }
@@ -10,7 +9,6 @@ export const RightContainer = styled(Col)`
 export const ContentContainer = styled(Row)`
   mix-blend-mode: normal;
   @media only screen and (max-width: 1024px) {
-    background: linear-gradient(0deg, #000000 9%, rgba(0, 0, 0, 0) 100%);
     display: flex;
     flex-direction: column;
   }

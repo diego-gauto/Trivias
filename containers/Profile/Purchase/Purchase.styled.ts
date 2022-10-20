@@ -587,6 +587,15 @@ export const ContainerCard = styled.div`
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+  .row-costum {
+    display: flex;
+    gap: 2%;
+  }
+  .row-costum label {
+    width: 32%;
+    justify-content: flex-end;
+    padding-right: 0;
+  }
 `;
 export const InputText = styled.label`
   width: 100%;

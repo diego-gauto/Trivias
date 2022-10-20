@@ -11,7 +11,6 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
   const addLessonComment = () => {
     let temp_comments: any = currentComments;
     let body: any;
-
     if (comment) {
       if (user) {
         body = {
@@ -105,7 +104,14 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
             <Profile
               src={DEFAULT_USER_IMG}
             />}
-          <CommentInput value={comment} placeholder="¿Qué quieres decir?" onChange={(e) => { setComment(e.target.value) }} />
+          <CommentInput value={comment} placeholder="¿Qué quieres decir?" onChange={(e: any) => {
+            setComment(e.target.value)
+          }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                addLessonComment()
+              }
+            }} />
           <Button style={{ color: !comment ? 'gray' : '#6717cd', 'borderColor': !comment ? 'gray' : '#6717cd' }} onClick={addLessonComment}>Comentar</Button>
         </CommentContain>
         {currentComments.map((x: any, index: any) => {

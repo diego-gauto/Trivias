@@ -52,8 +52,6 @@ const Module2 = ({ user, allCourses }: any) => {
             tempCourses.push(element)
           }
         });
-        console.log(tempCourses);
-
         setCourses(tempCourses);
         handleWidth();
       });
@@ -74,6 +72,10 @@ const Module2 = ({ user, allCourses }: any) => {
       1024: {
         slidesPerView: 5,
         spaceBetween: 0,
+      },
+      300: {
+        slidesPerView: 2.25,
+        spaceBetween: 0,
       }
     }
   };
@@ -83,7 +85,7 @@ const Module2 = ({ user, allCourses }: any) => {
       if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
         router.push({
           pathname: 'Lesson',
-          query: { id: course.documentID, season: 0, lesson: 0 },
+          query: { id: course.documentID, season: course.season, lesson: course.lesson },
         });
       }
       if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
