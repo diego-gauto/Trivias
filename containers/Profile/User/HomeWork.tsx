@@ -16,7 +16,7 @@ const HomeWork = ({ userId, user }: any) => {
       res.forEach((element: any) => {
         let tempDate = new Date(element.createdAt.seconds * 1000);
         let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth()
+        let tempMonth = tempDate.getMonth() + 1;
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
