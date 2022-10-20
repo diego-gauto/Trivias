@@ -12,6 +12,7 @@ import { db } from "../../firebase/firebaseConfig";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { getCourses, getWholeCourses } from "../../store/actions/courseActions";
+import Module6 from "./Module6/Module6";
 
 
 const Preview = () => {
@@ -23,7 +24,7 @@ const Preview = () => {
   const [secondLoad, setSecondLoad] = useState(true);
   const [thirdLoad, setThirdLoad] = useState(true);
   const [fourthLoad, setFourthLoad] = useState(true);
-
+  const [fifthLoad, setFifthLoad] = useState(true);
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -105,8 +106,11 @@ const Preview = () => {
                 {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} setThirdLoad={setThirdLoad} />}
                 {
                   !thirdLoad &&
-                  <Module4 user={userData} allCourses={courses} isLoading={isLoading} firstLoad={firstLoad} setFourthLoad={setFourthLoad} />
+                  <Module4 user={userData} allCourses={courses} isLoading={isLoading} setFourthLoad={setFourthLoad} />
                 }
+
+                <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFifthLoad={setFifthLoad} />
+
               </>
             }
           </ModuleContain>
