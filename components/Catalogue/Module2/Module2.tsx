@@ -54,6 +54,7 @@ const Module2 = ({ user, allCourses, isLoading, setSecondLoad }: any) => {
               tempCourses.push(element)
             }
           });
+
           setCourses(tempCourses);
           handleWidth();
           setTimeout(() => {

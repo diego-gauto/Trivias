@@ -67,7 +67,6 @@ const Module1 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
   useEffect(() => {
     if (!isLoading) {
       if (user) {
-        console.log('hola')
         let date = new Date().getTime() / 1000;
         getPaidCourses(user.id).then((paid: any) => {
           getViewedCourses(user.id).then((res) => {
@@ -78,14 +77,14 @@ const Module1 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
                 res[0].paid = false;
               }
               setHistoryCourse(res[0]);
-              setTimeout(() => {
-                setLoading(false);
-              }, 500);
-              setTimeout(() => {
-                setFirstLoad(false);
-              }, 800);
 
             }
+            setTimeout(() => {
+              setLoading(false);
+            }, 500);
+            setTimeout(() => {
+              setFirstLoad(false);
+            }, 800);
           })
         })
       } else {
