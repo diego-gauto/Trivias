@@ -137,7 +137,7 @@ const Module2 = ({ user, allCourses, isLoading, setSecondLoad }: any) => {
               }}>
                 <SlideModuleContainer>
                   <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-                  <Progress style={{ 'width': `${element.progress}%` }}></Progress>
+                  <Progress style={{ 'width': `calc(${element.progress}% - 10px)` }}></Progress>
                 </SlideModuleContainer>
               </SwiperSlide>
             ))}
