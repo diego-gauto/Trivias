@@ -1,7 +1,7 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import router, { useRouter } from "next/router";
-import { Image, Row } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { Image } from "react-bootstrap";
 
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import Modal1 from "../Module4/Modal/Modal1";
@@ -13,18 +13,18 @@ import 'swiper/css/scrollbar';
 import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
-import { MainContainer } from "../Module5/Module5.styled";
+import { useMediaQuery } from 'react-responsive';
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module6 = ({ user, allCourses, isLoading, setFifthLoad }: any) => {
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  let today = new Date().getTime() / 1000;
   const swiperRef = useRef<SwiperCore>();
 
   const onInit = (swiper: SwiperCore) => {
@@ -64,8 +64,6 @@ const Module6 = ({ user, allCourses, isLoading, setFifthLoad }: any) => {
               temp_courses.push(element);
             }
           });
-          console.log(temp_courses);
-
           setCourses(temp_courses);
           handleWidth();
           setTimeout(() => {
@@ -118,7 +116,7 @@ const Module6 = ({ user, allCourses, isLoading, setFifthLoad }: any) => {
   return (
     <>
       <Container fluid
-        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px', marginTop: "-40px" }}>
+        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px', marginTop: responsive1023 ? "-20px" : "-40px", }}>
         {courses.length > 0 && <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
             <Title>
