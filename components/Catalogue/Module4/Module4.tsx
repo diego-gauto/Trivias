@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Image, Row } from "react-bootstrap";
 
 import { getPaidCourses } from "../../../store/actions/UserActions";
@@ -13,7 +13,6 @@ import 'swiper/css/scrollbar';
 import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
-import { MainContainer } from "../Module5/Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
@@ -24,7 +23,6 @@ const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  let today = new Date().getTime() / 1000;
   const swiperRef = useRef<SwiperCore>();
 
   const onInit = (swiper: SwiperCore) => {
@@ -34,59 +32,39 @@ const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
     setShow(true);
   }
 
-  const handleWidth = () => {
-    // let cardWidth: any = document.getElementById('card-container-2')?.offsetWidth;
-    // let cardStyle: any = document.getElementById('shadow-2');
-    // if (window.innerWidth < cardWidth) {
-    //   cardStyle.style.display = 'flex';
-    // } else {
-    //   cardStyle.style.display = 'none';
-    // }
-  }
-
   useEffect(() => {
-    if (!isLoading) {
-      if (user) {
-        let date = new Date().getTime() / 1000;
-        getPaidCourses(user.id).then((paid) => {
-          setUserCourses(paid);
-          allCourses.forEach((element: any) => {
-            element.courseAbout = element.courseAbout.slice(0, 100);
-            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-            element.courseTittle = element.courseTittle.slice(0, 15);
-            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-              element.paid = true;
-            } else {
-              element.paid = false;
-            }
-          });
-          setCourses(allCourses);
-          handleWidth();
-          setTimeout(() => {
-            setLoading(false);
-          }, 300);
-          setTimeout(() => {
-            setFourthLoad(false);
-          }, 400);
-        })
-      } else {
+    if (user) {
+      let date = new Date().getTime() / 1000;
+      getPaidCourses(user.id).then((paid) => {
+        setUserCourses(paid);
         allCourses.forEach((element: any) => {
           element.courseAbout = element.courseAbout.slice(0, 100);
           element.courseSubtittle = element.courseSubtittle.slice(0, 30);
           element.courseTittle = element.courseTittle.slice(0, 15);
+          if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+            element.paid = true;
+          } else {
+            element.paid = false;
+          }
         });
         setCourses(allCourses);
         setTimeout(() => {
-          handleWidth();
-        }, 200);
-      }
+          setLoading(false);
+        }, 3500);
+      })
+    } else {
+      allCourses.forEach((element: any) => {
+        element.courseAbout = element.courseAbout.slice(0, 100);
+        element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+        element.courseTittle = element.courseTittle.slice(0, 15);
+      });
+      setCourses(allCourses);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3500);
     }
-
   }, [user, isLoading])
 
-  window.addEventListener('resize', function (event) {
-    handleWidth();
-  },);
   const settings = {
     mousewheel: {
       forceToAxis: true
@@ -105,17 +83,18 @@ const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
       }
     }
   };
+
   return (
     <>
-      <Container fluid
-        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
-        {courses.length > 0 && <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
-          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-            <Title>
-              Cursos disponibles
-            </Title>
-          </div>
-          <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+      <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
+        {courses.length > 0 && <>
+          <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+            <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+              <Title>
+                Cursos disponibles
+              </Title>
+            </div>
+
             <Swiper {...settings} onInit={onInit} id="card-container-3">
               {courses.map((element: any, idx: any) => (
 
@@ -123,16 +102,19 @@ const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
                   handleShow();
                   setCourse(element);
                 }}>
-                  <SlideModuleContainer>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-                  </SlideModuleContainer>
+                  <div className="grey-field" style={{ width: "calc(100% - 10px)" }}>
+                    <SlideModuleContainer>
+                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                    </SlideModuleContainer>
+                  </div>
                 </SwiperSlide>
 
               ))}
               <div id="shadow-2" className="right-shadow"></div>
             </Swiper>
+
           </div>
-        </div>}
+        </>}
       </Container>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </>

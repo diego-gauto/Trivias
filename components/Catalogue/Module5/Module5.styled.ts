@@ -177,9 +177,9 @@ export const TextContain = styled.div`
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: center;
-  margin-block-start: 40px;
+  margin-block: 40px;
   @media (max-width: 1023px) {
-    margin-block-start: 20px;
+    margin-block: 20px;
   }
 `;
 export const PurpleButton = styled.button`

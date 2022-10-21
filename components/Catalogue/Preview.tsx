@@ -95,31 +95,14 @@ const Preview = () => {
         </LoaderImage>
       </Background> : */}
       <PreviewContain>
-        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} setFirstLoad={setFirstLoad} />
-        {
-          !firstLoad &&
-          <ModuleContain>
-            {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} setSecondLoad={setSecondLoad} />}
-            {
-              !secondLoad &&
-              <>
-                {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} setThirdLoad={setThirdLoad} />}
-                {
-                  !thirdLoad &&
-                  <Module4 user={userData} allCourses={courses} isLoading={isLoading} setFourthLoad={setFourthLoad} />
-                }
-
-                <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFifthLoad={setFifthLoad} />
-
-              </>
-            }
-          </ModuleContain>
-        }
-        {
-          (!firstLoad && !secondLoad && !thirdLoad && !fourthLoad) &&
-          <Module5 user={userData} course={courses} isLoading={isLoading} />
-
-        }
+        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} />
+        <ModuleContain>
+          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} />}
+          {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} />}
+          <Module4 user={userData} allCourses={courses} isLoading={isLoading} />
+          <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} />
+          <Module5 user={userData} course={courses} isLoading={isLoading} firstLoad={firstLoad} />
+        </ModuleContain>
       </PreviewContain>
     </>
   )

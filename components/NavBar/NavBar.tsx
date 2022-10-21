@@ -61,7 +61,6 @@ const NavBar = () => {
   useEffect(() => {
     fetchDB_data()
   }, [loggedIn])
-  console.log(hamburger)
   //firestore query from auth data
   const fetchDB_data = async () => {
     try {
@@ -86,7 +85,6 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
-  // console.log(`/admin${pathname}`)
 
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 700) {

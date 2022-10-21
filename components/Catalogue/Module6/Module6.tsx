@@ -17,7 +17,7 @@ import { useMediaQuery } from 'react-responsive';
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module6 = ({ user, allCourses, isLoading, setFifthLoad }: any) => {
+const Module6 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
@@ -33,68 +33,46 @@ const Module6 = ({ user, allCourses, isLoading, setFifthLoad }: any) => {
   const handleShow = () => {
     setShow(true);
   }
-
-  const handleWidth = () => {
-    // let cardWidth: any = document.getElementById('card-container-2')?.offsetWidth;
-    // let cardStyle: any = document.getElementById('shadow-2');
-    // if (window.innerWidth < cardWidth) {
-    //   cardStyle.style.display = 'flex';
-    // } else {
-    //   cardStyle.style.display = 'none';
-    // }
-  }
-
   useEffect(() => {
-    if (!isLoading) {
-      let temp_courses: any = [];
-      if (user) {
-        let date = new Date().getTime() / 1000;
-        getPaidCourses(user.id).then((paid) => {
-          setUserCourses(paid);
-          allCourses.forEach((element: any) => {
-            if (element.courseType == 'Producto') {
-              element.courseAbout = element.courseAbout.slice(0, 100);
-              element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-              element.courseTittle = element.courseTittle.slice(0, 15);
-              if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
-                element.paid = true;
-              } else {
-                element.paid = false;
-              }
-              temp_courses.push(element);
-            }
-          });
-          setCourses(temp_courses);
-          handleWidth();
-          setTimeout(() => {
-            setLoading(false);
-          }, 300);
-          setTimeout(() => {
-            setFifthLoad(false);
-          }, 400);
-        })
-      } else {
+    let temp_courses: any = [];
+    if (user) {
+      let date = new Date().getTime() / 1000;
+      getPaidCourses(user.id).then((paid) => {
+        setUserCourses(paid);
         allCourses.forEach((element: any) => {
           if (element.courseType == 'Producto') {
             element.courseAbout = element.courseAbout.slice(0, 100);
             element.courseSubtittle = element.courseSubtittle.slice(0, 30);
             element.courseTittle = element.courseTittle.slice(0, 15);
+            if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
+              element.paid = true;
+            } else {
+              element.paid = false;
+            }
             temp_courses.push(element);
-
           }
         });
         setCourses(temp_courses);
         setTimeout(() => {
-          handleWidth();
-        }, 200);
-      }
+          setLoading(false);
+        }, 4000);
+      })
+    } else {
+      allCourses.forEach((element: any) => {
+        if (element.courseType == 'Producto') {
+          element.courseAbout = element.courseAbout.slice(0, 100);
+          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
+          element.courseTittle = element.courseTittle.slice(0, 15);
+          temp_courses.push(element);
+        }
+      });
+      setCourses(temp_courses);
+      setTimeout(() => {
+        setLoading(false);
+      }, 4000);
     }
-
   }, [user, isLoading])
 
-  window.addEventListener('resize', function (event) {
-    handleWidth();
-  },);
   const settings = {
     mousewheel: {
       forceToAxis: true
@@ -114,36 +92,37 @@ const Module6 = ({ user, allCourses, isLoading, setFifthLoad }: any) => {
     }
   };
   return (
-    <>
-      <Container fluid
-        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px', marginTop: responsive1023 ? "-20px" : "-40px", }}>
-        {courses.length > 0 && <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
+    <Container fluid
+      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px', marginTop: responsive1023 ? "-20px" : "-40px", }}>
+      {courses.length > 0 && <>
+        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
             <Title>
               Productos Individuales
             </Title>
           </div>
-          <div className="grey-field" style={{ position: "relative" }}>
-            <Swiper {...settings} onInit={onInit} id="card-container-3">
-              {courses.map((element: any, idx: any) => (
+          <Swiper {...settings} onInit={onInit} id="card-container-3">
+            {courses.map((element: any, idx: any) => (
 
-                <SwiperSlide key={idx} onClick={() => {
-                  handleShow();
-                  setCourse(element);
-                }}>
+              <SwiperSlide key={idx} onClick={() => {
+                handleShow();
+                setCourse(element);
+              }}>
+                <div className="grey-field" style={{ width: "calc(100% - 10px)" }}>
                   <SlideModuleContainer>
                     <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
                   </SlideModuleContainer>
-                </SwiperSlide>
+                </div>
+              </SwiperSlide>
 
-              ))}
-              <div id="shadow-2" className="right-shadow"></div>
-            </Swiper>
-          </div>
-        </div>}
-      </Container>
+            ))}
+            <div id="shadow-2" className="right-shadow"></div>
+          </Swiper>
+        </div>
+      </>}
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
-    </>
+    </Container>
+
   )
 }
 export default Module6;

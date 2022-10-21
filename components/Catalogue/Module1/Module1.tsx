@@ -22,7 +22,7 @@ import {
 } from "./Module1.styled";
 import Modal from "./modal/modal";
 
-const Module1 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
+const Module1 = ({ user, allCourses, isLoading, }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
@@ -77,27 +77,26 @@ const Module1 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
                 res[0].paid = false;
               }
               setHistoryCourse(res[0]);
-
             }
             setTimeout(() => {
               setLoading(false);
             }, 500);
-            setTimeout(() => {
-              setFirstLoad(false);
-            }, 800);
           })
         })
       } else {
         allCourses.lesson = 0;
         allCourses.season = 0;
         setHistoryCourse(allCourses);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     }
   }, [user, isLoading])
   return (
     <Container>
       {(historyCourse.seasons && historyCourse.seasons.length > 0) && <>
-        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%' }}>
+        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <ImageContain>
             <VideoContain>
               <ReactPlayer
@@ -142,7 +141,7 @@ const Module1 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
 
       </>}
       <Modal show={show} setShow={setShow} course={historyCourse} user={user} />
-    </Container>
+    </Container >
   )
 }
 export default Module1;
