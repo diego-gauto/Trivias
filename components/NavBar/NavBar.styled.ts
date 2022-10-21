@@ -191,7 +191,7 @@ export const NavResponsive = styled.div`
     opacity: 0;
   }
 `;
-export const HamburgerContain = styled.div`
+export const HamburgerContain = styled.div<{ hamburger: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -200,17 +200,22 @@ export const HamburgerContain = styled.div`
   transition: 0.4s ease-in-out;
   padding-inline: 30px;
   width: 100%;
-  height: 100;
   position: absolute;
   z-index: 10;
   top: -548px;
   left: 0;
+
   @media (max-width: 424px) {
     padding: 20px;
   }
   @media (max-width: 350px) {
     padding: 10px;
   }
+  ${(props) =>
+    props.hamburger &&
+    css`
+      top: 0;
+    `}
 `;
 export const Close = styled.i`
   background-image: url(../images/Navbar/CloseIcon.png);

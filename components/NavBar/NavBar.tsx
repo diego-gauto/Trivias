@@ -64,7 +64,7 @@ const NavBar = () => {
   useEffect(() => {
     fetchDB_data()
   }, [loggedIn])
-
+  console.log(hamburger)
   //firestore query from auth data
   const fetchDB_data = async () => {
     try {
@@ -229,8 +229,8 @@ const NavBar = () => {
             <Link href="/">
               <LogoS />
             </Link>
-            <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input>
-            <div className="hamburger-icon">
+            {/* <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input> */}
+            <div className="hamburger-icon" onClick={() => { setHamburger(!hamburger) }} style={{ zIndex: 2000 }}>
               <MenuIcon id="hamburger-label">
                 <span></span>
                 <span></span>
@@ -238,10 +238,8 @@ const NavBar = () => {
               </MenuIcon>
             </div>
             {
-              hamburger == true
-              &&
               <>
-                <HamburgerContain className="menu-pane">
+                <HamburgerContain className="menu-pane" hamburger={hamburger}>
                   <HBMenu>
                     <Link href="/Preview" >
                       <HBList onClick={() => { closeHamburgerMenu() }}>
