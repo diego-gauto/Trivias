@@ -551,6 +551,9 @@ export const CourseImage = styled.img`
   @media (max-width: 1300px) {
     width: 100%;
   }
+  @media (max-width: 600px) {
+    height: auto;
+  }
 `;
 export const TitleCourse = styled.p`
   font-size: 24px;
