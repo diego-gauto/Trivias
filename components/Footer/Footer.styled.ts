@@ -28,7 +28,7 @@ export const Logo2 = styled.i`
   background-image: url(../images/Navbar/Logo.svg);
   background-repeat: no-repeat;
   width: 100px;
-  height: 80px;
+  height: 100px;
   cursor: pointer;
 `;
 export const FooterGroup = styled.div`

@@ -26,6 +26,7 @@ import {
   TextFinish,
   WAIcon,
 } from "./Footer.styled";
+import Image from "next/image";
 
 const Footer = () => {
   const [show, setShow] = useState(false);
@@ -94,7 +95,8 @@ const Footer = () => {
   return (
     <>
       <FooterContainer>
-        <Logo2 />
+        {/* <Logo2 /> */}
+        <Image src="/images/Navbar/Logo.svg" width={100} height={100} />
         <Column>
           <FooterText>
             Aviso de Privacidad
@@ -149,7 +151,9 @@ const Footer = () => {
       </FooterContainer>
       <FooterResponsive>
         <RespContainer>
-          <Logo2 />
+          {/* <Logo2 /> */}
+          <Image src="/images/Navbar/Logo.svg" width={80} height={80} />
+          <Image src="/images/LogoResponsiveFooter.svg" width={80} height={80} />
           <Link href="/">
             <FooterText>
               Inicio
