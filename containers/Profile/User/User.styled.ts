@@ -197,6 +197,10 @@ export const PaymentBox = styled.div`
     padding-block: 10px;
     padding-inline: 10px;
   }
+  @media (max-width: 350px) {
+    padding-block: 5px;
+    padding-inline: 5px;
+  }
 `;
 export const PayBox = styled.div`
   display: flex;
@@ -236,9 +240,6 @@ export const CardIconResp = styled("i")<{ brand: any }>`
   width: 59px;
   height: 33px;
   background-position: center;
-  @media (max-width: 1023px) {
-    display: none;
-  }
 `;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);

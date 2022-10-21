@@ -190,6 +190,10 @@ export const PaymentMethod = styled("div")<{ active: any }>`
   &:hover {
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
+  @media (max-width: 340px) {
+    padding-block: 7px;
+    padding-inline: 12px;
+  }
 `;
 export const PayText = styled.p`
   text-align: center;
@@ -259,9 +263,6 @@ export const CardIconResp = styled("i")<{ brand: any }>`
   width: 59px;
   height: 33px;
   background-position: center;
-  @media (max-width: 1023px) {
-    display: none;
-  }
 `;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);
