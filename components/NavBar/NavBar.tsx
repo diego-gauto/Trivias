@@ -40,10 +40,7 @@ const NavBar = () => {
   const [userData, setUserData] = useState<any>(null);
 
   function closeHamburgerMenu() {
-    var isMenuOpen = document.getElementById("openmenu") as HTMLInputElement | null;;
-    if (isMenuOpen != null) {
-      isMenuOpen.checked = false;
-    }
+    setHamburger(false)
   }
   //validate if its logged in
   try {
