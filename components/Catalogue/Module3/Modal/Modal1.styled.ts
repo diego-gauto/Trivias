@@ -307,6 +307,9 @@ export const EpisodeContain = styled.div`
 export const ContainVideo = styled.div`
   display: flex;
   justify-content: center;
+  @media (max-width: 991px) {
+    order: 2;
+  }
 `;
 export const EpisodeInfo = styled.div`
   display: flex;
