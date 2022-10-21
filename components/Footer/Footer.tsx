@@ -151,7 +151,7 @@ const Footer = () => {
       </FooterContainer>
       <FooterResponsive>
         <RespContainer>
-          {/* <Logo2 /> */}
+          <Logo2 />
           <Image src="/images/Navbar/Logo.svg" width={80} height={80} />
           <Image src="/images/LogoResponsiveFooter.svg" width={80} height={80} />
           <Link href="/">

@@ -27,6 +27,7 @@ export const Logo2 = styled.i`
   background-position: center;
   background-image: url(../images/Navbar/Logo.svg);
   background-repeat: no-repeat;
+  image-rendering: pixelated;
   width: 100px;
   height: 100px;
   cursor: pointer;
