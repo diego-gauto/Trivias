@@ -85,6 +85,7 @@ export const GonvarPlusModule = () => {
               forceVideo: true,
               hlsVersion: '0.12.4',
               attributes: {
+                preload: "auto",
                 disablePictureInPicture: true
               }
             }
