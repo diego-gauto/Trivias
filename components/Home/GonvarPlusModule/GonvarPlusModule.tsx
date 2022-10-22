@@ -17,7 +17,22 @@ export const GonvarPlusModule = () => {
   const router = useRouter();
   let player: any;
 
+
+  const doVideoStuff = () => {
+    //@ts-ignore
+    player = window.player = videojs('video');
+    player.src({
+      src: "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8",
+      type: 'application/x-mpegURL',
+    });
+
+    player.on('loadedmetadata', () => {
+      player.play();
+    });
+  }
+
   useEffect(() => {
+    doVideoStuff()
   }, [])
 
   return (
@@ -26,15 +41,25 @@ export const GonvarPlusModule = () => {
         {isSafari && isIOS ? (
           <Image src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/courses%2FDise%C3%B1o%20y%20decoraci%C3%B3n%203D-db0763ae-9541-4943-aaca-056ab49cdba3?alt=media&token=7657f788-5c0f-4be4-b659-f93fe691f586" fluid />
         ) : (
-          <ReactPlayer
-            url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
-            controls={false}
-            muted={true}
-            playing={true}
-            width="100%"
-            playsInline={true}
-            height={responsive576 ? "523px" : "600px"}
-          />
+          <video
+            id="video"
+            className="video-js vjs-16-9"
+            data-setup='{"autoplay": true,"muted": true, "preload": "auto","loop":true}'
+          >
+            <source
+              src="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+              type="application/x-mpegURL"
+            />
+          </video>
+          // <ReactPlayer
+          //   url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+          //   controls={false}
+          //   muted={true}
+          //   playing={true}
+          //   width="100%"
+          //   playsInline={true}
+          //   height={responsive576 ? "523px" : "600px"}
+          // />
         )}
       </div>
       <Row>
