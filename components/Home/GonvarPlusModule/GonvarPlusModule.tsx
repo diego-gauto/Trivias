@@ -76,12 +76,13 @@ export const GonvarPlusModule = () => {
           url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
           muted={true}
           playing={true}
+          controls={true}
           width="100%"
           playsInline={true}
           height={responsive576 ? "523px" : "600px"}
           config={{
             file: {
-              forceHLS: true,
+              forceHLS: !isSafari,
               forceVideo: true,
               hlsVersion: '0.12.4',
               attributes: {
