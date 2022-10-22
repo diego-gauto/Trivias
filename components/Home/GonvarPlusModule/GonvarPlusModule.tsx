@@ -20,11 +20,18 @@ export const GonvarPlusModule = () => {
 
   const doVideoStuff = () => {
     //@ts-ignore
-    player = window.player = videojs('video');
-    player.src({
-      src: "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8",
-      type: 'application/x-mpegURL',
-    });
+    player = window.player = videojs('video', {
+      html5: {
+        hls: {
+          overrideNative: false
+        }
+      }
+    }),
+      player.src({
+        src: "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8",
+        type: 'application/x-mpegURL',
+        withCredentials: false
+      });
 
     player.on('loadedmetadata', () => {
       player.play();
