@@ -22,7 +22,6 @@ export const GonvarPlusModule = () => {
 
 
   const doVideoStuff = () => {
-    // //@ts-ignore
     // player = window.player = videojs('video', {
     //   html5: {
     //     hls: {
@@ -39,6 +38,7 @@ export const GonvarPlusModule = () => {
     // player.on('loadedmetadata', () => {
     //   player.play();
     // });
+    //@ts-ignore
     var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
     var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
     if (Hls.isSupported()) {
