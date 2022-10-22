@@ -16,6 +16,8 @@ export const GonvarPlusModule = () => {
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
   let player: any;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+
 
 
   const doVideoStuff = () => {
@@ -77,6 +79,16 @@ export const GonvarPlusModule = () => {
           width="100%"
           playsInline={true}
           height={responsive576 ? "523px" : "600px"}
+          config={{
+            file: {
+              forceHLS: !isSafari,
+              forceVideo: true,
+              hlsVersion: '0.12.4',
+              attributes: {
+                disablePictureInPicture: true
+              }
+            }
+          }}
         />
       </div>
       <Row>
