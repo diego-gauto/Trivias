@@ -81,12 +81,11 @@ export const GonvarPlusModule = () => {
           height={responsive576 ? "523px" : "600px"}
           config={{
             file: {
-              forceHLS: !isSafari,
+              forceHLS: true,
               forceVideo: true,
               hlsVersion: '0.12.4',
               attributes: {
                 preload: "auto",
-                disablePictureInPicture: true
               }
             }
           }}
