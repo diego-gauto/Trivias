@@ -7,24 +7,38 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
+import { useEffect } from "react";
+declare let Hls: any
 
 export const CourseModule = (props: ICourseModuleProps) => {
-  const { data } = props;
+  const { data, num } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
 
+  const doVideoStuff = () => {
+    //@ts-ignore
+    var video: HTMLMediaElement = document.getElementById(`video-${num}`) as HTMLMediaElement;
+    var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+
+    } else {
+      video.src = `${videoSrc}`
+    }
+
+  }
+  useEffect(() => {
+    doVideoStuff()
+  }, [])
+
   return (
     <CardContainer className="card-container">
       <div className="video">
-        <ReactPlayer
-          url={data.lessons.length > 0 ? data.lessons[0].link : "https://cadefivideo.com.mx/media/2022/JUNIO/COMPLIANCE/master.m3u8"}
-          muted={true}
-          playing={true}
-          width="100%"
-          height={responsive576 ? "523px" : "600px"}
-          playsInline
-        />
+        <video id={`video-${num}`} muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+        ></video>
       </div>
       <Row>
         <Col sm={12} md={7} className="first-col">

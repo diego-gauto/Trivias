@@ -5,7 +5,7 @@ import { getWholeCourse } from "../../../store/actions/courseActions";
 import { ICourseModuleContainerProps } from "./ICourseModuleContainerProps";
 
 export const CourseModuleContainer = (props: ICourseModuleContainerProps) => {
-  const { courseId } = props;
+  const { courseId, num } = props;
   const [courseData, setCourseData] = useState<ICourse>();
 
   useEffect(() => {
@@ -17,6 +17,6 @@ export const CourseModuleContainer = (props: ICourseModuleContainerProps) => {
   }, []);
 
   return courseData ? (
-    <CourseModule data={courseData} />
+    <CourseModule data={courseData} num={num} />
   ) : <></>;
 }

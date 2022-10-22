@@ -9,35 +9,14 @@ import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect } from "react";
-declare let videojs: any;
 declare let Hls: any
 
 export const GonvarPlusModule = () => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
-  let player: any;
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
-
-
 
   const doVideoStuff = () => {
-    // player = window.player = videojs('video', {
-    //   html5: {
-    //     hls: {
-    //       overrideNative: false
-    //     }
-    //   }
-    // }),
-    //   player.src({
-    //     src: "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8",
-    //     type: 'application/x-mpegURL',
-    //     withCredentials: false
-    //   });
-
-    // player.on('loadedmetadata', () => {
-    //   player.play();
-    // });
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
     var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
@@ -61,7 +40,8 @@ export const GonvarPlusModule = () => {
   return (
     <CardContainer className="card-container">
       <div className="video">
-        <video id="video" controls muted autoPlay playsInline preload="auto"></video>
+        <video id="video" muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+        ></video>
       </div>
       <Row>
         <Col sm={12} md={7} className="first-col">
