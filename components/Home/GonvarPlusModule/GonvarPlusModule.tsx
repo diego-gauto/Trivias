@@ -50,7 +50,6 @@ export const GonvarPlusModule = () => {
     }
 
   }
-
   useEffect(() => {
     doVideoStuff()
   }, [])
@@ -58,7 +57,7 @@ export const GonvarPlusModule = () => {
   return (
     <CardContainer className="card-container">
       <div className="video">
-        <video id="video" controls muted autoPlay></video>
+        <video id="video" controls muted autoPlay playsInline preload="auto"></video>
       </div>
       <Row>
         <Col sm={12} md={7} className="first-col">
