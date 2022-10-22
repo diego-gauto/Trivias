@@ -45,7 +45,7 @@ export const GonvarPlusModule = () => {
   return (
     <CardContainer className="card-container">
       <div className="video">
-        {isSafari && isIOS ? (
+        {/* {isSafari && isIOS ? (
           <Image src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/courses%2FDise%C3%B1o%20y%20decoraci%C3%B3n%203D-db0763ae-9541-4943-aaca-056ab49cdba3?alt=media&token=7657f788-5c0f-4be4-b659-f93fe691f586" fluid />
         ) : (
           //       <video
@@ -69,7 +69,15 @@ export const GonvarPlusModule = () => {
             playsInline={true}
             height={responsive576 ? "523px" : "600px"}
           />
-        )}
+        )} */}
+        <ReactPlayer
+          url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+          muted={true}
+          playing={true}
+          width="100%"
+          playsInline={true}
+          height={responsive576 ? "523px" : "600px"}
+        />
       </div>
       <Row>
         <Col sm={12} md={7} className="first-col">
