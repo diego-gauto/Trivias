@@ -36,6 +36,9 @@ const UserData = ({ data, pm }: props) => {
     await updateDoc(docRef, {
       name: user.name,
       phoneNumber: user.phoneNumber,
+    }).then(() => {
+      alert("Información actualizada");
+      window.location.reload();
     })
   }
 
