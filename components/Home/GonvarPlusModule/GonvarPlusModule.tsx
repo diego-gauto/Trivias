@@ -42,9 +42,13 @@ export const GonvarPlusModule = () => {
     var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
     var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
     if (Hls.isSupported()) {
+      console.log('okey');
+
       var hls = new Hls();
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
+      console.log(hls);
+
     } else {
       video.src = `${videoSrc}`
     }
