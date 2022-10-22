@@ -8,11 +8,17 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
+import { useEffect } from "react";
+declare let videojs: any;
 
 export const GonvarPlusModule = () => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
+  let player: any;
+
+  useEffect(() => {
+  }, [])
 
   return (
     <CardContainer className="card-container">
@@ -21,8 +27,7 @@ export const GonvarPlusModule = () => {
           <Image src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/courses%2FDise%C3%B1o%20y%20decoraci%C3%B3n%203D-db0763ae-9541-4943-aaca-056ab49cdba3?alt=media&token=7657f788-5c0f-4be4-b659-f93fe691f586" fluid />
         ) : (
           <ReactPlayer
-            // url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
-            url="https://vimeo.com/762723722"
+            url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
             controls={false}
             muted={true}
             playing={true}
