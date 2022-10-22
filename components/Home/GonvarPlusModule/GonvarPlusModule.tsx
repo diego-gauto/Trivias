@@ -21,7 +21,9 @@ export const GonvarPlusModule = () => {
           <Image src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/courses%2FDise%C3%B1o%20y%20decoraci%C3%B3n%203D-db0763ae-9541-4943-aaca-056ab49cdba3?alt=media&token=7657f788-5c0f-4be4-b659-f93fe691f586" fluid />
         ) : (
           <ReactPlayer
-            url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+            // url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+            url="https://vimeo.com/762723722"
+            controls={false}
             muted={true}
             playing={true}
             width="100%"
