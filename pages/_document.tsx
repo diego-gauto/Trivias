@@ -14,6 +14,7 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
           <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
           <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet"></link>
+          <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script>
         </Head>
         <body>
           <Main />
