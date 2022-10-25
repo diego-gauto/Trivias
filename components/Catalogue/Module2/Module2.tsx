@@ -8,7 +8,7 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css/scrollbar';
 import { getViewedCourses } from "../../../store/actions/courseActions";
-import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
+import SwiperCore, { Mousewheel, Scrollbar, EffectFlip } from "swiper";
 import {
   ContinueText,
   Progress,
@@ -16,7 +16,8 @@ import {
 } from "./Module2.styled";
 import { Container } from "react-bootstrap";
 import { LOGIN_PATH } from "../../../constants/paths";
-SwiperCore.use([Scrollbar, Mousewheel]);
+import "swiper/css/effect-flip";
+SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
 const Module2 = ({ user, allCourses, isLoading }: any) => {
   const [courses, setCourses] = useState<any>([]);

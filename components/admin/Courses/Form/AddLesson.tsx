@@ -1,9 +1,6 @@
 
 
-import { useState } from "react";
-
-import file from "react-player/file";
-
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -18,17 +15,14 @@ import {
   Container,
   EditContain,
   Folder,
-  HwTitle,
   ImageContain,
   Input,
   InputBig,
   InputContain,
   Label,
   PurpleButton,
-  SlideContain,
   Title,
   TitleContain,
-  TitleSlide,
   TransparentButton,
 } from "./Edit.styled";
 import {
@@ -40,7 +34,11 @@ import {
   SelectContain,
 } from "./Select/SelectStyles.styled";
 import ReactPlayer from "react-player";
-import { set } from "react-hook-form";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+import 'react-quill/dist/quill.snow.css';
+
 const AddLesson = () => {
   const router = useRouter();
   const routerState = useRouter().query
@@ -60,6 +58,43 @@ const AddLesson = () => {
   });
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(false);
+  const [quill, setQuill] = useState("");
+  const modules = {
+    toolbar: {
+      container: [
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [{ size: ["small", false, "large", "huge"] }, {
+          color: [
+            "red",
+            "blue"
+          ]
+        }],
+        [
+          { list: "ordered" },
+          { list: "bullet" },
+          { indent: "-1" },
+          { indent: "+1" },
+          { align: [] }
+        ],
+        ["clean"]
+      ],
+    },
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "size",
+    "color",
+    "list",
+    "bullet",
+    "indent",
+    "align"
+  ];
 
   const newLesson = () => {
     if (!value) {
@@ -86,7 +121,7 @@ const AddLesson = () => {
         lesson.number == '' ||
         lesson.link == '' ||
         lesson.image == '' ||
-        lesson.about == '' || lesson.homeWork == '' || lesson.homeWorkAbout == '') {
+        lesson.about == '' || lesson.homeWork == '' || quill == '') {
         alert("Por favor complete todo los campos!");
       } else {
         lesson.homeworkAvailable = true;
@@ -122,6 +157,7 @@ const AddLesson = () => {
       setLesson({ ...lesson, image: reader.result })
     };
   }
+
   return (
     <Container>
       <TitleContain>
@@ -260,7 +296,7 @@ const AddLesson = () => {
               }
             </SelectContain>
           </InputContain>
-          {value && <>
+          {value && (<>
             <InputContain>
               <Label>Título de la Tarea</Label>
               <Input
@@ -274,24 +310,19 @@ const AddLesson = () => {
             </InputContain>
             <InputContain>
               <Label>Descripción de la Tarea</Label>
-              <InputBig
-                placeholder="Lorem ipsum dolor sit amet, consectetur 
+              <ReactQuill placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
             malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
-            adipiscing morbi mattis eget. Sed accumsan quisque mi sodales 
-            malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
-            feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
-            enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-            quisque."
-                onChange={(e) => {
-                  setLesson({
-                    ...lesson, homeWorkAbout: e.target.value
+            adipiscing morbi mattis eget." id="quill" theme="snow"
+                formats={formats} modules={modules}
+                defaultValue="" onChange={(content, delta, source, editor) => {
+                  setQuill(editor.getText()); setLesson({
+                    ...lesson, homeWorkAbout: content
                   })
-                }}
-              />
+                }} />
             </InputContain>
-          </>}
+          </>)}
         </Contain3>
       </EditContain>
       <ButtonContain>

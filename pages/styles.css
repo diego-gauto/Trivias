@@ -99,3 +99,15 @@ h1,th{
   font-size: 30px;
 }
 }
+.quill{
+  min-height: 156px;
+}
+.ql-toolbar{
+  border: 1px solid #6717cd !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+.ql-container{
+  border-top: none !important;
+  border: 1px solid #6717cd !important;
+  border-radius: 0 0 10px 10px;
+}
