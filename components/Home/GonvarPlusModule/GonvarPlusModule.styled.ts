@@ -6,6 +6,9 @@ export const CardContainer = styled(Card)`
   border-radius: 0;
   color: #fff;
   font-family: "Montserrat", sans-seriff;
+  .video video::-webkit-media-controls-start-playback-button {
+    display: none;
+  }
   .video {
     position: relative;
   }
