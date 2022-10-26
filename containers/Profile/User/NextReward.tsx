@@ -18,6 +18,8 @@ import {
   ProgressBar1,
   ProgressBar2,
   RewardBox,
+  RewardCenterLink,
+  RewardCenterLinkNoReward,
   RewardContain,
   RewardData,
   RewardImage,
@@ -69,6 +71,24 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
       getNextTimeReward()
     }
   }, [timeLevel])
+
+  const rewardCenter = (
+    <Link href="/Rewards">
+      <RewardCenterLink>
+        Ir al Centro de Recompensas
+        <ArrowRight />
+      </RewardCenterLink>
+    </Link>
+  )
+
+  const rewardCenterNoReward = (
+    <Link href="/Rewards">
+      <RewardCenterLinkNoReward>
+        Ir al Centro de Recompensas
+        <ArrowRight />
+      </RewardCenterLinkNoReward>
+    </Link>
+  )
 
   return (
     <RewardContain>
@@ -130,6 +150,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
               <RewardParagraph>
                 {prize.about}
               </RewardParagraph>
+              {rewardCenter}
             </RewardInfo>
           </RewardData>
         </>
@@ -171,18 +192,16 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
               <RewardParagraph>
                 {timePrize.about}
               </RewardParagraph>
+              {rewardCenter}
             </RewardInfo>
           </RewardData> :
-            <p>No hay premios en este nivel...</p>}
+            <>
+              <p>No hay premios en este nivel...</p>
+              {rewardCenterNoReward}
+            </>
+          }
         </>
       }
-
-      <Link href="/Rewards">
-        <AddPay>
-          Ir al Centro de Recompensas
-          <ArrowRight />
-        </AddPay>
-      </Link>
     </RewardContain>
   )
 }

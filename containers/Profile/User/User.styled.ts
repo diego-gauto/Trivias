@@ -4,6 +4,7 @@ import styled, { css, keyframes } from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
+  height: calc(100vh - 82.5px);
   display: flex;
   @font-face {
     font-family: Montserrat;
@@ -30,7 +31,6 @@ export const SecondBox = styled.div`
 export const ThirdBox = styled.div`
   display: flex;
   width: 100%;
-  min-height: 410px;
   height: 100%;
   gap: 10px;
   @media (max-width: 1023px) {
@@ -82,13 +82,13 @@ export const ProfileData = styled.div`
 export const RewardContain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 7.5px;
   height: 100%;
   width: 100%;
   background: white;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   @media (max-width: 1023px) {
     //width:100%;
   }
@@ -301,6 +301,14 @@ export const AddPay = styled.p`
     margin-top: 25px;
   }
 `;
+
+export const RewardCenterLink = styled(AddPay)`
+  justify-content: flex-start;
+  margin-left: 25%;
+`;
+
+export const RewardCenterLinkNoReward = styled(AddPay)``;
+
 export const RewardBox = styled.div`
   display: flex;
   justify-content: center;
