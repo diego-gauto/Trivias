@@ -11,7 +11,6 @@ export const SlideModuleContainer = styled(Container)`
   padding: 0;
   margin-top: 10px;
   margin-bottom: 0px;
-  padding-left: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover {
@@ -21,7 +20,6 @@ export const SlideModuleContainer = styled(Container)`
 
 export const ContinueText = styled.h1`
   font-size: 24px;
-  padding-left: 10px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
@@ -108,8 +106,8 @@ export const PlayIconS = styled.i`
   }
 `;
 export const Progress = styled.div`
-  position: absolute;
-  bottom: 0px;
+  position: relative;
+  bottom: 12px;
   display: flex;
   height: 12px;
   background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
