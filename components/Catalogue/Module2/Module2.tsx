@@ -17,6 +17,7 @@ import {
 import { Container } from "react-bootstrap";
 import { LOGIN_PATH } from "../../../constants/paths";
 import "swiper/css/effect-flip";
+import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
 const Module2 = ({ user, allCourses, isLoading }: any) => {
@@ -24,6 +25,8 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
   const swiperRef = useRef<SwiperCore>();
   const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
@@ -57,6 +60,7 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
     mousewheel: {
       forceToAxis: true
     },
+    speed: 200,
     slidesPerView: 2,
     freeMode: true,
     spaceBetween: 0,
@@ -102,9 +106,13 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
       }
     }
   }
-
+  onresize = (event) => {
+    setInnerWidth(window.innerWidth)
+  };
   return (
-    <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
+    <Container fluid style={{
+      overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px"
+    }}>
       {(courses.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
@@ -112,23 +120,21 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
               Continua viendo
             </ContinueText>
           </div>
-          <Swiper id="card-container-1" {...settings} onInit={onInit}>
-            {courses.map((element: any, idx: any) => (
-              <SwiperSlide key={idx} onClick={() => {
-                goTo(element)
-              }}>
-                <div className="grey-field" style={{ width: "calc(100% - 10px)" }}>
-                  <SlideModuleContainer>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
+            <div style={{ display: "flex" }}>
+              {courses.map((element: any, idx: any) => (
+                <div className="grey-field" style={{ width: "100%" }}>
+                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                     <Progress style={{ 'width': `calc(${element.progress}% - 10px)` }}></Progress>
                   </SlideModuleContainer>
                 </div>
-              </SwiperSlide>
-            ))}
-            <div id="shadow-1" className="right-shadow"></div>
-          </Swiper>
+              ))}
+            </div>
+          </div>
         </div>
-      </>}
+      </>
+      }
     </Container >
   )
 }

@@ -92,7 +92,7 @@ const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <Container fluid
-            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
+            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '20px' }}>
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
                 Tus Cursos
