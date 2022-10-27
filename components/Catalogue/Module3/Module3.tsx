@@ -15,7 +15,6 @@ import {
 import { ImageContent } from "../Module5/Module5.styled";
 
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css/scrollbar';
 import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
@@ -24,13 +23,11 @@ import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
+const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [loading, setLoading] = useState(true);
-  const swiperRef = useRef<SwiperCore>();
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   useEffect(() => {
@@ -69,9 +66,6 @@ const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
     setCourse(data)
   }
 
-  onresize = (event) => {
-    setInnerWidth(window.innerWidth)
-  };
   return (
     <Maincontainer>
       {courses.length > 0 && <>
