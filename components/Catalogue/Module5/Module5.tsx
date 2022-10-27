@@ -20,8 +20,9 @@ import {
   Title,
 } from "./Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
+import { useMediaQuery } from "react-responsive";
 
-const Module5 = ({ user, course, isLoading, firstLoad }: any) => {
+const Module5 = ({ user, course, isLoading }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const router = useRouter();
@@ -29,10 +30,9 @@ const Module5 = ({ user, course, isLoading, firstLoad }: any) => {
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
   const handleShow = () => {
     setShow(true);
   }
@@ -55,28 +55,13 @@ const Module5 = ({ user, course, isLoading, firstLoad }: any) => {
     }
   }, [course, isLoading])
 
-  const settings = {
-    mousewheel: {
-      forceToAxis: true
-    },
-    slidesPerView: 2,
-    freeMode: true,
-    spaceBetween: 0,
-    breakpoints: {
-      1024: {
-        slidesPerView: 5,
-        spaceBetween: 0,
-      },
-      300: {
-        slidesPerView: 2.25,
-        spaceBetween: 0,
-      }
-    }
+  onresize = (event) => {
+    setInnerWidth(window.innerWidth)
   };
 
   return (
     <Container fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
+      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px" }}>
       {(courses.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
@@ -84,21 +69,22 @@ const Module5 = ({ user, course, isLoading, firstLoad }: any) => {
               Incluido con Gonvar+
             </Title>
           </div>
-          <Swiper {...settings} onInit={onInit} id="card-container-3">
-            {courses.map((element: any, idx: any) => (
-              <SwiperSlide key={idx} onClick={() => {
-                handleShow();
-                setCourse(element);
-              }}>
-                <div className="grey-field" style={{ width: "calc(100% - 10px)" }}>
-                  <SlideModuleContainer>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
+            <div style={{ display: "flex" }}>
+              {courses.map((element: any, idx: any) => (
+                <div className="grey-field" key={idx} onClick={() => {
+                  handleShow();
+                  setCourse(element);
+                }}>
+                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
+                    <SlideModuleContainer>
+                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
+                    </SlideModuleContainer>
                   </SlideModuleContainer>
                 </div>
-              </SwiperSlide>
-            ))}
-            <div id="shadow-3" className="right-shadow"></div>
-          </Swiper>
+              ))}
+            </div>
+          </div>
           {
             <ButtonContain>
               {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>

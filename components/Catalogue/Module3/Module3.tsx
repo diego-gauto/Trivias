@@ -21,6 +21,7 @@ import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
+import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
@@ -29,10 +30,9 @@ const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
   const router = useRouter()
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
   useEffect(() => {
     if (user) {
       let temp_courses: any = [];
@@ -68,55 +68,36 @@ const Module3 = ({ user, allCourses, isLoading, setThirdLoad }: any) => {
     }
     setCourse(data)
   }
-  const settings = {
-    mousewheel: {
-      forceToAxis: true
-    },
-    slidesPerView: 2,
-    freeMode: true,
-    spaceBetween: 0,
-    breakpoints: {
-      1024: {
-        slidesPerView: 5,
-        spaceBetween: 0,
-      },
-      300: {
-        slidesPerView: 2.25,
-        spaceBetween: 0,
-      }
-    }
-  };
 
+  onresize = (event) => {
+    setInnerWidth(window.innerWidth)
+  };
   return (
     <Maincontainer>
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <Container fluid
-            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '20px' }}>
+            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px" }}>
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
                 Tus Cursos
               </Title>
             </div>
-            <Swiper {...settings} onInit={onInit} id="card-container-3">
-              {courses.map((element: any, idx: any) => (
-                <SwiperSlide key={idx} onClick={() => {
-                  goTo(element)
-                }}>
-                  <div className="grey-field" style={{ width: "calc(100% - 10px)" }}>
-                    <SlideModuleContainer>
+            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
+              <div style={{ display: "flex" }}>
+                {courses.map((element: any, idx: any) => (
+                  <div className="grey-field" key={idx} onClick={() => { goTo(element) }}>
+                    < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                       <ImageContent>
                         <Band />
                         <DaysLeft>{element.date} días</DaysLeft>
-                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
+                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                       </ImageContent>
                     </SlideModuleContainer>
                   </div>
-                </SwiperSlide>
-              ))}
-              <div id="shadow-2" className="right-shadow"></div>
-            </Swiper>
-            {/* </div> */}
+                ))}
+              </div>
+            </div>
           </Container>
         </div>
       </>}

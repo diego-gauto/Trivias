@@ -21,10 +21,8 @@ const Preview = () => {
   const [courses, setCourses] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [secondLoad, setSecondLoad] = useState(true);
-  const [thirdLoad, setThirdLoad] = useState(true);
-  const [fourthLoad, setFourthLoad] = useState(true);
-  const [fifthLoad, setFifthLoad] = useState(true);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -89,11 +87,6 @@ const Preview = () => {
 
   return (
     <>
-      {/* <Background>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background> : */}
       <PreviewContain>
         <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} />
         <ModuleContain>
@@ -101,7 +94,7 @@ const Preview = () => {
           {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} />}
           <Module4 user={userData} allCourses={courses} isLoading={isLoading} />
           <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} />
-          <Module5 user={userData} course={courses} isLoading={isLoading} firstLoad={firstLoad} />
+          <Module5 user={userData} course={courses} isLoading={isLoading} firstLoad={firstLoad} innerWidth={innerWidth} />
         </ModuleContain>
       </PreviewContain>
     </>

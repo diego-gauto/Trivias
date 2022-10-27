@@ -106,6 +106,7 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
       }
     }
   }
+
   onresize = (event) => {
     setInnerWidth(window.innerWidth)
   };
@@ -123,7 +124,7 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
           <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
             <div style={{ display: "flex" }}>
               {courses.map((element: any, idx: any) => (
-                <div className="grey-field" style={{ width: "100%" }}>
+                <div key={idx} className="grey-field" onClick={() => { goTo(element) }}>
                   < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                     <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                     <Progress style={{ 'width': `calc(${element.progress}% - 10px)` }}></Progress>
