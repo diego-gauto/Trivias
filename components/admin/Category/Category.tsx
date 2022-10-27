@@ -13,7 +13,6 @@ const Category = () => {
   const [newCategory, setNewCategory] = useState<boolean>(false);
   const [edit, setEdit] = useState<number>();
   const [categories, setCategories] = useState<any>([]);
-  const [updatedata, setUpdatedata] = useState<any>({})
   const [category, setCategory] = useState<any>({
     name: ""
   });
@@ -24,7 +23,7 @@ const Category = () => {
     else {
       addCategory(category).then((res) => {
         alert("Categoría Agregada con Exito")
-        window.location.reload();
+        getAllCategories();
       })
     }
   }
@@ -35,16 +34,18 @@ const Category = () => {
     })
   }
   const Delete = (val: any) => {
-    deleteCategory(val).then(() => {
-      alert("Categoría: " + val.name + " eliminada con éxito")
-      window.location.reload();
-    })
+    if (window.confirm("Desea borrar esta categoría: " + val.name)) {
+      deleteCategory(val).then(() => {
+        getAllCategories();
+        // alert("Categoría: " + val.name + " eliminada con éxito")
+      })
+    }
   }
   const update = (val: any) => {
     console.log(val)
     updateCategory(val, val.id).then(() => {
       alert("Categoría actualizada")
-      window.location.reload();
+      getAllCategories();
     })
   }
   useEffect(() => {

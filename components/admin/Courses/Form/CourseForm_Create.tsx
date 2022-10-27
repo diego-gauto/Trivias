@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { CourseName } from "../AllCourses.styled";
 import {
@@ -32,6 +32,7 @@ import {
   OptionContain,
   Selected,
   SelectContain,
+  OptionCat,
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
@@ -86,25 +87,39 @@ const CourseForm_Create = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema)
   });
-  const [open, setOpen] = useState(false);
   const [openCourse, setOpenCourse] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [open3, setOpen3] = useState(false);
-  const [openHw, setOpenHw] = useState(false);
+  const [categories, setCategories] = useState<any>([]);
+  const [openProfessor, setOpenProfessor] = useState<boolean>(false);
+  const [openCategory, setOpenCategory] = useState<boolean>(false);
+  const [openMembership, setOpenMembership] = useState<boolean>(false);
+  const [openHw, setOpenHw] = useState<boolean>(false);
   const [name, setName] = useState("Seleccionar un profesor");
   const [homeWork, setHomeWork] = useState(false);
   const [free, setFree] = useState(0)
   const [value, setValue] = useState<any>({});
   const [userData, setUserData] = useState<any>([]);
-  const [value2, setValue2] = useState("Uñas");
+  const [value2, setValue2] = useState<any>([]);
   const [value3, setValue3] = useState("Gratis");
   const [image, setImage] = useState<any>("");
   const [missing, setMissing] = useState(false)
   const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
 
 
-
-
+  const addCategories = (val: any, index: any) => {
+    let tempCategories = value2
+    let tempIndex = 0;
+    console.log(index)
+    if (tempCategories.includes(val)) {
+      tempIndex = tempCategories.findIndex((x: any) =>
+        x == val
+      )
+      tempCategories.splice(tempIndex, 1);
+    }
+    else {
+      tempCategories.push(val)
+    }
+    setValue2([...tempCategories])
+  }
   const onSubmit: SubmitHandler<FormValues> = formData => {
 
     setCreatingNewCourse(true)
@@ -167,13 +182,43 @@ const CourseForm_Create = () => {
       setUserData(res);
     })
   }
+  const getAllCategories = () => {
+    getCategory().then((res) => {
+      setCategories(res);
+      return res;
+    })
+  }
   if (Object.keys(errors).length > 0 && missing == true) {
     alert(`Falta lo siguiente: \n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio" : ""}`);
     setMissing(false)
   }
+  const handleOpenHomeWork = () => {
+    setOpenHw(!openHw);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+  }
+  const handleOpenProfessor = () => {
+    setOpenHw(false);
+    setOpenProfessor(!openProfessor);
+    setOpenCategory(false);
+    setOpenMembership(false);
+  }
+  const handleOpenCategory = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(!openCategory);
+    setOpenMembership(false);
+  }
+  const handleOpenMembership = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(!openMembership);
+  }
   useEffect(() => {
     getProffessors();
-
+    getAllCategories();
   }, [])
   return (
     <CourseFormContain onClick={() => { setOpenCourse(!openCourse) }}>
@@ -210,22 +255,22 @@ const CourseForm_Create = () => {
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={(e) => { setOpen(!open), setOpen2(false) }}>
+                <Selected onClick={(e) => { handleOpenProfessor() }}>
                   {name}
                   <CaretD2 />
                 </Selected>
                 {
-                  open == true &&
+                  openProfessor == true &&
                   <OptionContain>
                     {
                       userData.map((val: any, index: any) => {
                         return (
                           <Option
-                            key={"SelectProfessor" + index}
+                            key={"SelectProfessor " + index}
                             onClick={() => {
                               setName(val.name);
                               setValue({ id: val.id, name: val.name });
-                              setOpen(false)
+                              setOpenProfessor(false)
                             }}>
                             <input
                               type="radio"
@@ -249,14 +294,14 @@ const CourseForm_Create = () => {
             <IconContain>
 
               <SelectContain key={3}>
-                <Selected onClick={() => { setOpen3(!open3) }}>
+                <Selected onClick={() => { handleOpenMembership() }}>
                   {value3 == "Mensual" ? "Gonvar +" : value3}
                   <CaretD2 />
                 </Selected>
                 {
-                  open3 == true &&
+                  openMembership == true &&
                   <OptionContain>
-                    <Option onClick={() => { setValue3("Gratis"); setOpen3(false); setFree(0) }}>
+                    <Option onClick={() => { setValue3("Gratis"); setOpenMembership(false); setFree(0) }}>
                       <input
                         type="radio"
                         id="Temporada1"
@@ -264,7 +309,7 @@ const CourseForm_Create = () => {
                       />
                       <Label2 > Gratis</Label2>
                     </Option>
-                    <Option onClick={() => { setValue3("Mensual"); setOpen3(false); setFree(1) }}>
+                    <Option onClick={() => { setValue3("Mensual"); setOpenMembership(false); setFree(1) }}>
                       <input
                         type="radio"
                         id="Temporada1"
@@ -272,7 +317,7 @@ const CourseForm_Create = () => {
                       />
                       <Label2 > Gonvar +</Label2>
                     </Option>
-                    <Option onClick={() => { setValue3("Producto"); setOpen3(false); setFree(1) }}>
+                    <Option onClick={() => { setValue3("Producto"); setOpenMembership(false); setFree(1) }}>
                       <input
                         type="radio"
                         id="Temporada1"
@@ -304,7 +349,7 @@ const CourseForm_Create = () => {
             <IconContain>
 
               <SelectContain key={3}>
-                <Selected onClick={() => { setOpenHw(!openHw) }}>
+                <Selected onClick={() => { handleOpenHomeWork() }}>
                   {
                     homeWork == false ? "Flexible" : "Obligatorio"
                   }
@@ -334,42 +379,6 @@ const CourseForm_Create = () => {
               </SelectContain>
             </IconContain>
           </InputContain>
-          {/* <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Categorías</Label>
-            <IconContain>
-
-              <SelectContain key={2}>
-                <Selected onClick={() => { setOpen2(!open2), setOpen(false) }}>
-                  {value2}
-                  <CaretD2 />
-                </Selected>
-                {
-                  open2 == true &&
-                  <OptionContain>
-                    <Option onClick={() => { setValue2("Uñas de salón"); setOpen2(false) }}>
-                      <input
-                        type="radio"
-                        id="Temporada1"
-                        name="category"
-                        value="Temporada 1"
-                      />
-                      <Label2 > Uñas de salón</Label2>
-                    </Option>
-                    <Option onClick={() => { setValue2("Uñas francesas"); setOpen2(false) }}>
-                      <input
-                        type="radio"
-                        id="Temporada2"
-                        name="category"
-                        value="Temporada 2"
-                      />
-                      <Label2> Uñas francesas</Label2>
-                    </Option>
-                  </OptionContain>
-                }
-              </SelectContain>
-            </IconContain>
-
-          </InputContain> */}
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Portada del Curso</Label>
             <IconContain>
@@ -480,6 +489,45 @@ const CourseForm_Create = () => {
           <InputContain2>
 
             <ButtonContain >
+              <InputContain onClick={(e) => { e.stopPropagation(); }}>
+                <Label>Categorías</Label>
+                <IconContain>
+
+                  <SelectContain key={2}>
+                    <Selected onClick={() => { handleOpenCategory() }}>
+                      {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
+                      <CaretD2 />
+                    </Selected>
+                    {
+                      openCategory == true &&
+                      <OptionContain>
+                        {
+                          categories.map((val: any, index: any) => {
+                            return (
+                              <OptionCat
+                                category={val.name}
+                                marked={value2}
+                                key={"SelectCategory" + index}
+                                onClick={() => {
+                                  addCategories(val.name, index)
+                                }}>
+                                <input
+                                  type="radio"
+                                  id="category"
+                                  name="category"
+                                  value="Category"
+                                />
+                                <Label2>{val.name}</Label2>
+                              </OptionCat>
+                            )
+                          })
+                        }
+                      </OptionContain>
+                    }
+                  </SelectContain>
+                </IconContain>
+
+              </InputContain>
               {!creatingNewCourse ?
                 <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
                 :

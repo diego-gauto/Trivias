@@ -83,7 +83,11 @@ export const AllCourses = ({
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
-                  <Text> {course.courseCategory} </Text>
+                  <Text> {
+                    course.courseCategory.length > 1
+                      ? course.courseCategory + ' '
+                      : course.courseCategory
+                  } </Text>
                 </Info>
                 <Info>
                   <Label>Tareas</Label>
