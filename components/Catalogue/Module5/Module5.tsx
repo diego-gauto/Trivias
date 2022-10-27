@@ -22,7 +22,7 @@ import {
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
 
-const Module5 = ({ user, course, isLoading }: any) => {
+const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const router = useRouter();
@@ -30,7 +30,6 @@ const Module5 = ({ user, course, isLoading }: any) => {
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const handleShow = () => {
@@ -54,10 +53,6 @@ const Module5 = ({ user, course, isLoading }: any) => {
       }, 4500);
     }
   }, [course, isLoading])
-
-  onresize = (event) => {
-    setInnerWidth(window.innerWidth)
-  };
 
   return (
     <Container fluid

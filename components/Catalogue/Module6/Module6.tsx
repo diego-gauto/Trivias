@@ -17,7 +17,7 @@ import { useMediaQuery } from 'react-responsive';
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module6 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
+const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
@@ -26,7 +26,6 @@ const Module6 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
@@ -73,10 +72,6 @@ const Module6 = ({ user, allCourses, isLoading, setFirstLoad }: any) => {
       }, 4000);
     }
   }, [user, isLoading])
-
-  onresize = (event) => {
-    setInnerWidth(window.innerWidth)
-  };
 
   const settings = {
     mousewheel: {

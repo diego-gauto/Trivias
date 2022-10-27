@@ -20,17 +20,12 @@ import "swiper/css/effect-flip";
 import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
-const Module2 = ({ user, allCourses, isLoading }: any) => {
+const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const swiperRef = useRef<SwiperCore>();
   const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
 
   useEffect(() => {
     if (user) {
@@ -55,26 +50,6 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
       });
     }
   }, [user, isLoading]);
-
-  const settings = {
-    mousewheel: {
-      forceToAxis: true
-    },
-    speed: 200,
-    slidesPerView: 2,
-    freeMode: true,
-    spaceBetween: 0,
-    breakpoints: {
-      1024: {
-        slidesPerView: 5,
-        spaceBetween: 0,
-      },
-      300: {
-        slidesPerView: 2.25,
-        spaceBetween: 0,
-      }
-    }
-  };
 
   const goTo = (course: any) => {
     if (user) {
@@ -107,9 +82,6 @@ const Module2 = ({ user, allCourses, isLoading }: any) => {
     }
   }
 
-  onresize = (event) => {
-    setInnerWidth(window.innerWidth)
-  };
   return (
     <Container fluid style={{
       overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px"

@@ -85,15 +85,18 @@ const Preview = () => {
     fetchDB_data()
   }, [loggedIn])
 
+  window.addEventListener("resize", () => {
+    setInnerWidth(window.innerWidth)
+  });
   return (
     <>
       <PreviewContain>
         <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} />
         <ModuleContain>
-          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} />}
-          {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} />}
-          <Module4 user={userData} allCourses={courses} isLoading={isLoading} />
-          <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} />
+          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
+          {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
+          <Module4 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />
+          <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} innerWidth={innerWidth} />
           <Module5 user={userData} course={courses} isLoading={isLoading} firstLoad={firstLoad} innerWidth={innerWidth} />
         </ModuleContain>
       </PreviewContain>

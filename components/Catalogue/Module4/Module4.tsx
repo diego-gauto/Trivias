@@ -17,15 +17,13 @@ import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
+const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const swiperRef = useRef<SwiperCore>();
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const handleShow = () => {
@@ -64,9 +62,6 @@ const Module4 = ({ user, allCourses, isLoading, setFourthLoad }: any) => {
       }, 3500);
     }
   }, [user, isLoading])
-  onresize = (event) => {
-    setInnerWidth(window.innerWidth)
-  };
 
   return (
     <>
