@@ -4,7 +4,6 @@ export const PayContain = styled.div`
   display: flex;
   width: 100%;
   padding: 40px;
-  height: -webkit-fill-available;
 `;
 export const Container = styled.div`
   display: flex;
@@ -21,7 +20,7 @@ export const TitleContain = styled.div`
   padding: 20px;
 `;
 export const Title = styled.h1`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 24px;
   margin: 0;
 `;
@@ -33,7 +32,7 @@ export const DateSelect = styled.div`
   background-color: white;
   min-width: 200px;
   border-radius: 30px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
 `;
 export const ProfileContain = styled.div`
   display: flex;
@@ -43,7 +42,7 @@ export const ProfileContain = styled.div`
 export const IconContain = styled.div`
   display: flex;
   align-items: center;
-  border: 2.64589px solid #D9D9D9;
+  border: 2.64589px solid #d9d9d9;
   border-radius: 5px;
   justify-content: center;
   width: 48px;
@@ -64,28 +63,34 @@ export const Imagecontain = styled.div`
   width: 32px;
   height: 32px;
 `;
-export const Method = styled("i")<{brand:any}>`
-  background-image: url(../images/admin/${props=>props.brand}.png);
-  background-repeat:no-repeat;
+export const Method = styled("i")<{ brand: any }>`
+  background-image: url(../images/admin/${(props) => props.brand}.png);
+  background-repeat: no-repeat;
   width: 35px;
   margin: 5px;
   height: 12px;
-  ${props=>props.brand =="mastercard" && css`
-  margin: 2px;
-  width: 31px;
-  height: 20px;
-`}
-  ${props=>props.brand =="paypal" && css`
-  margin: 2px;
-  width: 16px;
-  height: 20px;
-  `}
-  ${props=>props.brand == 'stripe' && css`
-  background-position: center;
-  margin: 2px;
-  width: 100%;
-  height: 20px;
-  `}
+  ${(props) =>
+    props.brand == "mastercard" &&
+    css`
+      margin: 2px;
+      width: 31px;
+      height: 20px;
+    `}
+  ${(props) =>
+    props.brand == "paypal" &&
+    css`
+      margin: 2px;
+      width: 16px;
+      height: 20px;
+    `}
+  ${(props) =>
+    props.brand == "stripe" &&
+    css`
+      background-position: center;
+      margin: 2px;
+      width: 100%;
+      height: 20px;
+    `}
 `;
 export const ButtonIcon = styled.div`
   display: flex;
