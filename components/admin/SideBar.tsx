@@ -12,6 +12,7 @@ const SideBar = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
   const [isPay, setIsPay] = useState<boolean>();
   const [isCourses, setIsCourses] = useState<boolean>();
+  const [isCategory, setIsCategory] = useState<boolean>();
   const [isRewards, setIsRewards] = useState<boolean>();
   const [isLanding, setIsLanding] = useState<boolean>();
   const [isCoupons, setIsCoupons] = useState<boolean>();
@@ -42,6 +43,7 @@ const SideBar = () => {
             setIsRewards(adminData.adminType.rewards);
             setIsLanding(adminData.adminType.landing);
             setIsCoupons(adminData.adminType.coupons);
+            setIsCategory(adminData.adminType.category);
             setIsUsers(adminData.adminType.users);
             if (adminData.adminType.superAdmin) {
               setIsSuperAdmin(true)
@@ -66,6 +68,8 @@ const SideBar = () => {
           <Text>Pagos</Text>
         </Link><Link href="/admin/Courses">
             <Text>Cursos</Text>
+          </Link><Link href="/admin/CourseAttributes">
+            <Text>Categorias</Text>
           </Link><Link href="/admin/Rewards">
             <Text>Recompensas</Text>
           </Link><Link href="/admin/Landing">
@@ -89,6 +93,11 @@ const SideBar = () => {
           {isCourses &&
             <Link href="/admin/Courses">
               <Text>Cursos</Text>
+            </Link>
+          }
+          {isCategory &&
+            <Link href="/admin/Courses">
+              <Text>Categorias</Text>
             </Link>
           }
           {isRewards &&

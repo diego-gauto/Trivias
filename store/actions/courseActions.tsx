@@ -340,3 +340,33 @@ export const updateProgressStatus = async (progress: any, courseId: any, seasonI
   })
   return 'exito'
 }
+
+export const addCategory = async (category: any) => {
+  const docRef = await addDoc(
+    collection(db, "category"),
+    {
+      ...category
+    }
+  );
+  return 'exito'
+}
+export const getCategory = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "category"), orderBy("name", "asc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
+export const deleteCategory = async (category: any) => {
+  await deleteDoc(doc(db, "category", category.id));
+}
+export const updateCategory = async (category: any, id: any) => {
+  console.log(category)
+  const docRef = doc(db, 'category', id);
+  await updateDoc(docRef, {
+    name: category.name
+  })
+  return 'exito'
+}
