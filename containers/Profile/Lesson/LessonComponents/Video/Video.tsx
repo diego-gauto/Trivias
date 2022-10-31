@@ -4,6 +4,7 @@ import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
 import { EaselIcon } from '../Modules/Module.styled';
+declare let Hls: any
 
 const Video = ({ data, title, id, course, user, season, lesson }: any) => {
   const [current, setCurrent] = useState<any>();
@@ -72,6 +73,22 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
     }
   }
 
+  // const doVideoStuff = () => {
+  //   //@ts-ignore
+  //   var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
+  //   var videoSrc = data.link;
+  //   if (Hls.isSupported()) {
+  //     var hls = new Hls();
+  //     hls.loadSource(videoSrc);
+  //     hls.attachMedia(video);
+  //   } else {
+  //     video.src = `${videoSrc}`
+  //   }
+  // }
+  // useEffect(() => {
+  //   doVideoStuff()
+  // }, [])
+
   return (
     <Segment>
       <VideoContain>
@@ -80,6 +97,8 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
             {title}
           </Title>
           <EaselIcon onClick={() => { setMenu(!menu) }} />
+          {/* <video id="video" controls playsInline preload="auto" width="100%"
+          ></video> */}
         </TitleContain>
         <ReactPlayer
           className='absolute'

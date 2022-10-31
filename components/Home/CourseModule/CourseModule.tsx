@@ -20,6 +20,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById(`video-${num}`) as HTMLMediaElement;
     var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
+    videoSrc = videoSrc.slice(0, -11) + "stream_0" + videoSrc.slice(-5);
     if (Hls.isSupported()) {
       var hls = new Hls();
       hls.loadSource(videoSrc);
