@@ -234,7 +234,7 @@ const NavBar = () => {
             </div>
             {
               <>
-                <HamburgerContain className="menu-pane" hamburger={hamburger}>
+                <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
                   <HBMenu>
                     <Link href="/Preview" >
                       <HBList onClick={() => { closeHamburgerMenu() }}>
