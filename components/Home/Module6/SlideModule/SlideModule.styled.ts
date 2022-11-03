@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const SlideImg = styled.div`
   width: 350px;
   height: 350px;
-  background-repeat: no-repeat;
   background-size: 95% auto;
   padding: 0;
   margin: 0 auto;
   background-position: center;
   display: flex;
   align-items: flex-start;
-  border-radius: 20px;
+  border-radius: 10px;
   @media only screen and (max-width: 1024px) {
     height: 180px;
   }
