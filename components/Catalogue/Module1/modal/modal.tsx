@@ -81,6 +81,10 @@ const Modal = ({ show, setShow, course, user }: any) => {
   useEffect(() => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0]?.lessons)
+      setIsPlaying(true);
+      setTimeout(() => {
+        setIsPlaying(false)
+      }, 2000)
     }
   }, [course])
 
@@ -143,12 +147,12 @@ const Modal = ({ show, setShow, course, user }: any) => {
                   {course.courseProfessor?.name}
                 </DataSpan>
               </Data>
-              {/* <Data>
+              <Data>
                 Categorías:
                 <DataSpan>
-                  {course.Category}
+                  {course.courseCategory > 1 ? course.courseCategory + '' : course.courseCategory}
                 </DataSpan>
-              </Data> */}
+              </Data>
               <Data>
                 Temporadas:
                 {course.seasons?.length == 1 && <DataSpan>
@@ -177,32 +181,10 @@ const Modal = ({ show, setShow, course, user }: any) => {
               return (
                 <VideoContain>
                   <ContainVideo>
-                    <EpisodeContain>
-                      {/* <CardImageUnlock src={lesson.image} width={350} height={200} /> */}
-                      <ReactPlayer
-                        style={{ 'opacity': isPlaying ? 0 : 1 }}
-                        ref={p => p?.seekTo(15)}
-                        url={lesson.link}
-                        playing={isPlaying}
-                        muted={true}
-                        onDuration={(duration) => {
-                          setIsPlaying(true);
-                          setTimeout(() => {
-                            setIsPlaying(false)
-                          }, 2000)
-                        }
-                        }
-                        width="100%" height="100%">
-                      </ReactPlayer>
-                      {isPlaying &&
-                        <div className="skeleton-product" style={{ 'width': '100%' }}>
-                          <div className="grey-field" style={{ 'width': '60%' }}>Lorem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '75%' }}>orem Ipsum orem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '85%' }}>orem Ipsum orem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '65%' }}>orem Ipsum orem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '80%' }}>orem Ipsum orem Ipsum</div>
-                        </div>
-                      }
+                    <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
+                      <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
+                        <img src={lesson.image} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                      </div>
                     </EpisodeContain>
                   </ContainVideo>
                   <EpisodeInfo>

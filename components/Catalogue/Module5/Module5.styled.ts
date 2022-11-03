@@ -55,12 +55,10 @@ export const TextContent = styled.div`
 `;
 export const Title = styled.h1`
   color: #6717cd;
-  padding-left: 10px;
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
-    padding-left: 10px;
     font-size: 24px;
   }
 `;
@@ -177,6 +175,10 @@ export const TextContain = styled.div`
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: center;
+  margin-block: 40px;
+  @media (max-width: 1023px) {
+    margin-block: 20px;
+  }
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;

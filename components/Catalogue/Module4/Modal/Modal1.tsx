@@ -82,6 +82,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   useEffect(() => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0].lessons);
+      setIsPlaying(true);
+      setTimeout(() => {
+        setIsPlaying(false)
+      }, 2000)
     }
   }, [course]);
 
@@ -119,10 +123,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {(course.courseType == 'Producto' && !course.paid) && <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
                   </PurpleButton>}
-                  {(course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') && <PurpleButton onClick={goTo}>
+                  {(user && course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') && <PurpleButton onClick={goTo}>
                     Ver curso
                   </PurpleButton>}
-                  {(course.courseType == 'Mensual' && user.membership.finalDate < today) && <PurpleButton onClick={goTo}>
+                  {(user && course.courseType == 'Mensual' && user.membership.finalDate < today || !user && course.courseType == 'Mensual') && <PurpleButton onClick={goTo}>
                     Comprar Gonvar +
                   </PurpleButton>}
                 </ButtonContain>
@@ -145,12 +149,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {course.courseProfessor?.name}
                 </DataSpan>
               </Data>
-              {/* <Data>
+              <Data>
                 Categorías:
                 <DataSpan>
-                  {course.Category}
+                  {course.courseCategory > 1 ? course.courseCategory + '' : course.courseCategory}
                 </DataSpan>
-              </Data> */}
+              </Data>
               <Data>
                 Temporadas:
                 {course.seasons?.length == 1 && <DataSpan>
@@ -179,32 +183,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               return (
                 <VideoContain>
                   <ContainVideo>
-                    <EpisodeContain>
-                      {lessons && <ReactPlayer
-                        style={{ 'opacity': isPlaying ? 0 : 1 }}
-                        ref={p => p?.seekTo(15)}
-                        url={lesson.link}
-                        playing={isPlaying}
-                        muted={true}
-                        onDuration={(duration) => {
-                          setIsPlaying(true);
-                          setTimeout(() => {
-                            setIsPlaying(false)
-                          }, 2000)
-                        }
-                        }
-                        width="100%" height="100%">
-                      </ReactPlayer>}
-                      {isPlaying &&
-                        <div className="skeleton-product" style={{ 'width': '100%' }}>
-                          <div className="grey-field" style={{ 'width': '60%' }}>Lorem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '75%' }}>orem Ipsum orem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '85%' }}>orem Ipsum orem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '65%' }}>orem Ipsum orem Ipsum</div>
-                          <div className="grey-field" style={{ 'width': '80%' }}>orem Ipsum orem Ipsum</div>
-                        </div>
-                      }
-                      {/* <Lock /> */}
+                    <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
+                      <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
+                        <img src={lesson.image} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                      </div>
                     </EpisodeContain>
                   </ContainVideo>
                   <EpisodeInfo>

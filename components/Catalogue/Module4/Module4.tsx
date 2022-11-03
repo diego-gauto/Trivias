@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Image, Row } from "react-bootstrap";
 
 import { getPaidCourses } from "../../../store/actions/UserActions";
@@ -13,34 +13,21 @@ import 'swiper/css/scrollbar';
 import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
-import { MainContainer } from "../Module5/Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
+import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
-const Module4 = ({ user, allCourses }: any) => {
+const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
-  let today = new Date().getTime() / 1000;
-  const swiperRef = useRef<SwiperCore>();
+  const [loading, setLoading] = useState(true);
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
   const handleShow = () => {
     setShow(true);
-  }
-
-  const handleWidth = () => {
-    // let cardWidth: any = document.getElementById('card-container-2')?.offsetWidth;
-    // let cardStyle: any = document.getElementById('shadow-2');
-    // if (window.innerWidth < cardWidth) {
-    //   cardStyle.style.display = 'flex';
-    // } else {
-    //   cardStyle.style.display = 'none';
-    // }
   }
 
   useEffect(() => {
@@ -59,7 +46,9 @@ const Module4 = ({ user, allCourses }: any) => {
           }
         });
         setCourses(allCourses);
-        handleWidth();
+        setTimeout(() => {
+          setLoading(false);
+        }, 3500);
       })
     } else {
       allCourses.forEach((element: any) => {
@@ -69,48 +58,39 @@ const Module4 = ({ user, allCourses }: any) => {
       });
       setCourses(allCourses);
       setTimeout(() => {
-        handleWidth();
-      }, 500);
+        setLoading(false);
+      }, 3500);
     }
-  }, [user])
+  }, [user, isLoading])
 
-  window.addEventListener('resize', function (event) {
-    handleWidth();
-  },);
-  const settings = {
-    mousewheel: {
-      forceToAxis: true
-    },
-    slidesPerView: 2,
-    freeMode: true,
-    spaceBetween: 0,
-    breakpoints: {
-      1024: {
-        slidesPerView: 5,
-        spaceBetween: 0,
-      }
-    }
-  };
   return (
     <>
-      <Container fluid
-        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
-        <Title>
-          Cursos disponibles
-        </Title>
-        <Swiper {...settings} onInit={onInit} id="card-container-3">
-          {courses.map((element: any, idx: any) => (
-            <SwiperSlide key={idx} onClick={() => {
-              handleShow();
-              setCourse(element);
-            }}>
-              <SlideModuleContainer>
-                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-              </SlideModuleContainer>
-            </SwiperSlide>
-          ))}
-          <div id="shadow-2" className="right-shadow"></div>
-        </Swiper>
+      <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px" }}>
+        {courses.length > 0 && <>
+          <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+            <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+              <Title>
+                Cursos disponibles
+              </Title>
+            </div>
+            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
+              <div style={{ display: "flex" }}>
+                {courses.map((element: any, idx: any) => (
+                  <div className="grey-field" key={idx} onClick={() => {
+                    handleShow();
+                    setCourse(element);
+                  }}>
+                    < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
+                      <SlideModuleContainer>
+                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
+                      </SlideModuleContainer>
+                    </SlideModuleContainer>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>}
       </Container>
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </>

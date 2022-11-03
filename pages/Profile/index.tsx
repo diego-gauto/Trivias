@@ -12,7 +12,6 @@ const Landings = () => {
         maxWidth: "100% !important",
       }}>
       <User></User>
-
     </MainContain>
   )
 }

@@ -29,21 +29,21 @@ import {
   EditContain,
   Extra,
   Folder,
-  HwTitle,
   ImageContain,
   Input,
   InputBig,
   InputContain,
   Label,
   PurpleButton,
-  SlideContain,
   Title,
   TitleContain,
-  TitleSlide,
   TransparentButton,
   TrashIcon,
 } from "./Edit.styled";
 import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+import 'react-quill/dist/quill.snow.css';
 
 const Edit = () => {
   const routerState = useRouter().query
@@ -53,12 +53,51 @@ const Edit = () => {
   const [lesson, setLesson] = useState<any>({})
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(false);
+  const [quill, setQuill] = useState("");
+
+  const modules = {
+    toolbar: {
+      container: [
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [{ size: ["small", false, "large", "huge"] }, {
+          color: [
+            "red",
+            "blue"
+          ]
+        }],
+        [
+          { list: "ordered" },
+          { list: "bullet" },
+          { indent: "-1" },
+          { indent: "+1" },
+          { align: [] }
+        ],
+        ["clean"]
+      ],
+    },
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "size",
+    "color",
+    "list",
+    "bullet",
+    "indent",
+    "align"
+  ];
 
   const getThisLesson = () => {
     getLesson(routerState.courseID, routerState.seasonID, routerState.lessonID).then((res: any) => {
       setLesson(res)
       if ("homeworkAvailable" in res) {
         setValue(res.homeworkAvailable)
+        setQuill(res.homeWorkAbout)
       }
     })
   }
@@ -272,21 +311,17 @@ const Edit = () => {
             </InputContain>
             <InputContain>
               <Label>Descripción de la Tarea</Label>
-              <InputBig
-                placeholder="Lorem ipsum dolor sit amet, consectetur 
-              adipiscing elit. Pharetra, cursus sapien ac magna. 
-              Consectetur amet eu tincidunt quis. Non habitasse viverra 
-              malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
-              adipiscing morbi mattis eget. Sed accumsan quisque mi sodales 
-              malesuada fusce scelerisque urna. Enim sit pulvinar dui ipsum 
-              feugiat. Ac enim ultrices venenatis imperdiet suspendisse mattis 
-              enim. Mauris odio sit id curabitur enim mi. Orci id pharetra morbi 
-              quisque."
-                defaultValue={lesson.homeWorkAbout}
-                onChange={(e: any) => {
-                  setLesson({ ...lesson, homeWorkAbout: e.target.value })
-                }}
-              />
+              <ReactQuill placeholder="Lorem ipsum dolor sit amet, consectetur 
+            adipiscing elit. Pharetra, cursus sapien ac magna. 
+            Consectetur amet eu tincidunt quis. Non habitasse viverra 
+            malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
+            adipiscing morbi mattis eget." id="quill" theme="snow"
+                formats={formats} modules={modules}
+                defaultValue={lesson.homeWorkAbout} onChange={(content, delta, source, editor) => {
+                  setQuill(editor.getText()); setLesson({
+                    ...lesson, homeWorkAbout: content
+                  })
+                }} />
             </InputContain></>}
         </Contain3>
       </EditContain>

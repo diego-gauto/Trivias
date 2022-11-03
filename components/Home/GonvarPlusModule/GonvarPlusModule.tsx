@@ -5,28 +5,39 @@ import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
 import { SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
+import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
+import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
+import { useEffect } from "react";
+declare let Hls: any
 
 export const GonvarPlusModule = () => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
 
+  const doVideoStuff = () => {
+    //@ts-ignore
+    var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
+    var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
+    videoSrc = videoSrc.slice(0, -11) + "stream_0" + videoSrc.slice(-5);
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else {
+      video.src = `${videoSrc}`
+    }
+  }
+  useEffect(() => {
+    doVideoStuff()
+  }, [])
+
   return (
     <CardContainer className="card-container">
       <div className="video">
-        {isSafari && isIOS ? (
-          <Image src="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/courses%2FDise%C3%B1o%20y%20decoraci%C3%B3n%203D-db0763ae-9541-4943-aaca-056ab49cdba3?alt=media&token=7657f788-5c0f-4be4-b659-f93fe691f586" fluid />
-        ) : (
-          <ReactPlayer
-            url="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
-            muted={true}
-            playing={true}
-            width="100%"
-            playsInline={true}
-            height={responsive576 ? "523px" : "600px"}
-          />
-        )}
+        <video id="video" loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+        ></video>
       </div>
       <Row>
         <Col sm={12} md={7} className="first-col">
@@ -42,7 +53,7 @@ export const GonvarPlusModule = () => {
               Desde $149.00
             </Card.Text>}
           <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => router.push(SIGNUP_PATH)} />
-          {/* <WhiteButton text={responsive768 ? "Información" : "Más información"} /> */}
+          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
         </Col>
         {responsive768 && <Card.Text className="mobile-price">
           Desde $149.00

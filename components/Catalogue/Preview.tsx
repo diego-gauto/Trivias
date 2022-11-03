@@ -12,6 +12,7 @@ import { db } from "../../firebase/firebaseConfig";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { getCourses, getWholeCourses } from "../../store/actions/courseActions";
+import Module6 from "./Module6/Module6";
 
 
 const Preview = () => {
@@ -19,6 +20,8 @@ const Preview = () => {
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
   try {
     var userDataAuth = useAuth();
@@ -82,22 +85,21 @@ const Preview = () => {
     fetchDB_data()
   }, [loggedIn])
 
+  window.addEventListener("resize", () => {
+    setInnerWidth(window.innerWidth)
+  });
   return (
     <>
-      {isLoading ? <Background>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background> :
-        <PreviewContain>
-          <Module1 user={userData} allCourses={courses[0]} />
-          <ModuleContain>
-            {userData && <Module2 user={userData} allCourses={courses} />}
-            {userData && <Module3 user={userData} allCourses={courses} />}
-            <Module4 user={userData} allCourses={courses} />
-          </ModuleContain>
-          <Module5 user={userData} course={courses} />
-        </PreviewContain>}
+      <PreviewContain>
+        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} />
+        <ModuleContain>
+          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
+          {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
+          <Module4 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />
+          <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} innerWidth={innerWidth} />
+          <Module5 user={userData} course={courses} isLoading={isLoading} firstLoad={firstLoad} innerWidth={innerWidth} />
+        </ModuleContain>
+      </PreviewContain>
     </>
   )
 }

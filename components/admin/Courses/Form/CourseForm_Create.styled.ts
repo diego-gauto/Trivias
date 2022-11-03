@@ -12,30 +12,31 @@ export const CourseFormContain = styled.div`
 `;
 export const ButtonContain = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   justify-content: flex-end;
-  margin-top: 20px;
 `;
 export const ButtonNewCourse = styled.p`
   margin: 0;
   line-height: normal;
-  font-size:30px;
-  font-weight:800;
-  font-family:Nunito;
-  cursor:pointer;
+  font-size: 30px;
+  font-weight: 800;
+  font-family: Nunito;
+  cursor: pointer;
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
-  background: #6717CD;
+  background: #6717cd;
   border-radius: 30px;
   color: white;
   border: none;
-  &:hover{
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const InputForm = styled.div`
@@ -49,12 +50,12 @@ export const InputContain = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-export const InputButtonContain= styled.div`
-display: flex;
-gap: 20px;
-flex-direction: column;
-width: 100%;
-`
+export const InputButtonContain = styled.div`
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  width: 100%;
+`;
 export const IconContain = styled.div`
   display: flex;
   position: relative;
@@ -62,7 +63,7 @@ export const IconContain = styled.div`
 export const InputContain2 = styled.div`
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
   gap: 20px;
 `;
 export const TagContain = styled.div`
@@ -73,71 +74,71 @@ export const TagContain = styled.div`
 `;
 export const Label = styled.label`
   font-size: 14px;
-  color: #6717CD;
-  font-family: 'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   width: 100%;
-  border:1px solid #6717CD;
-  border-radius:20px;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
 `;
 export const InputIcon = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
   width: 100%;
-  border:1px solid #6717CD;
-  border-radius:20px;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
 `;
 export const InputBig = styled.textarea`
   font-size: 12px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-align: justify;
   padding-block: 10px;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   padding-inline: 20px;
-  border:1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 10px;
   overflow: hidden;
   resize: none;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
-::placeholder{
-}
+  ::placeholder {
+  }
 `;
 export const Select = styled.select`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   width: 100%;
-  padding:10px 0 10px 20px;
-  border:1px solid #6717CD;
-  border-radius:20px;
-  outline:none;
+  padding: 10px 0 10px 20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  outline: none;
   cursor: pointer;
   -webkit-appearance: none;
 `;
 export const TagTitle = styled.p`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
-  color: #6717CD;
+  font-family: "Montserrat", sans-serif;
+  color: #6717cd;
   margin: 0;
 `;
 export const TagLabel = styled.label`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   display: block;
   position: relative;
@@ -148,21 +149,21 @@ export const TagLabel = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  input{
+  input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     &:hover ~ span {
       background: #ccc;
     }
-    &:checked + span{
-      background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-      &::after{
+    &:checked + span {
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      &::after {
         display: block;
       }
     }
   }
-  span{
+  span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -170,22 +171,21 @@ export const TagLabel = styled.label`
     height: 20px;
     width: 20px;
     background-color: white;
-    border:1px solid black;
+    border: 1px solid black;
     border-radius: 50%;
     &::after {
-    top: 0;
-     left: 0;
-     width: 18px;
-     height: 18px;
-     border-radius: 50%;
-     background: transparent;
-     border: 2px solid white;
-     content: "";
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: transparent;
+      border: 2px solid white;
+      content: "";
       position: absolute;
       display: none;
-   }
+    }
   }
-
 `;
 export const Folder = styled.i`
   position: absolute;

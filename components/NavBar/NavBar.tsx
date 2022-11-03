@@ -40,10 +40,7 @@ const NavBar = () => {
   const [userData, setUserData] = useState<any>(null);
 
   function closeHamburgerMenu() {
-    var isMenuOpen = document.getElementById("openmenu") as HTMLInputElement | null;;
-    if (isMenuOpen != null) {
-      isMenuOpen.checked = false;
-    }
+    setHamburger(false)
   }
   //validate if its logged in
   try {
@@ -64,7 +61,6 @@ const NavBar = () => {
   useEffect(() => {
     fetchDB_data()
   }, [loggedIn])
-
   //firestore query from auth data
   const fetchDB_data = async () => {
     try {
@@ -89,7 +85,6 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
-  // console.log(`/admin${pathname}`)
 
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 700) {
@@ -229,8 +224,8 @@ const NavBar = () => {
             <Link href="/">
               <LogoS />
             </Link>
-            <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input>
-            <div className="hamburger-icon">
+            {/* <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input> */}
+            <div className="hamburger-icon" onClick={() => { setHamburger(!hamburger) }} style={{ zIndex: 2000 }}>
               <MenuIcon id="hamburger-label">
                 <span></span>
                 <span></span>
@@ -238,10 +233,8 @@ const NavBar = () => {
               </MenuIcon>
             </div>
             {
-              hamburger == true
-              &&
               <>
-                <HamburgerContain className="menu-pane">
+                <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
                   <HBMenu>
                     <Link href="/Preview" >
                       <HBList onClick={() => { closeHamburgerMenu() }}>
@@ -253,11 +246,11 @@ const NavBar = () => {
                         Tienda
                       </HBList>
                     </a>
-                    <Link href="/Preview">
+                    {/* <Link href="/Preview">
                       <HBList onClick={() => { closeHamburgerMenu() }}>
                         Catálogo
                       </HBList>
-                    </Link>
+                    </Link> */}
                     <Link href="/Profile">
                       <HBList onClick={() => { closeHamburgerMenu() }}>
 

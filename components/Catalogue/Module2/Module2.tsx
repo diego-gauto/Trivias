@@ -8,7 +8,7 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css/scrollbar';
 import { getViewedCourses } from "../../../store/actions/courseActions";
-import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
+import SwiperCore, { Mousewheel, Scrollbar, EffectFlip } from "swiper";
 import {
   ContinueText,
   Progress,
@@ -16,26 +16,17 @@ import {
 } from "./Module2.styled";
 import { Container } from "react-bootstrap";
 import { LOGIN_PATH } from "../../../constants/paths";
-SwiperCore.use([Scrollbar, Mousewheel]);
+import "swiper/css/effect-flip";
+import { useMediaQuery } from "react-responsive";
+SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
-const Module2 = ({ user, allCourses }: any) => {
+const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
   const swiperRef = useRef<SwiperCore>();
+  const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
-
-  const handleWidth = () => {
-    // let cardWidth: any = document.getElementById('card-container-1')?.offsetWidth;
-    // let cardStyle: any = document.getElementById('shadow-1');
-    // if (window.innerWidth < cardWidth) {
-    //   cardStyle.style.display = 'flex';
-    // } else {
-    //   cardStyle.style.display = 'none';
-    // }
-  }
   useEffect(() => {
     if (user) {
       let tempCourses: any = [];
@@ -52,38 +43,20 @@ const Module2 = ({ user, allCourses }: any) => {
             tempCourses.push(element)
           }
         });
-        console.log(tempCourses);
-
         setCourses(tempCourses);
-        handleWidth();
+        setTimeout(() => {
+          setLoading(false)
+        }, 1500);
       });
     }
-  }, [user]);
-
-  window.addEventListener('resize', function (event) {
-    handleWidth();
-  },);
-  const settings = {
-    mousewheel: {
-      forceToAxis: true
-    },
-    slidesPerView: 2,
-    freeMode: true,
-    spaceBetween: 0,
-    breakpoints: {
-      1024: {
-        slidesPerView: 5,
-        spaceBetween: 0,
-      }
-    }
-  };
+  }, [user, isLoading]);
 
   const goTo = (course: any) => {
     if (user) {
       if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
         router.push({
           pathname: 'Lesson',
-          query: { id: course.documentID, season: 0, lesson: 0 },
+          query: { id: course.documentID, season: course.season, lesson: course.lesson },
         });
       }
       if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
@@ -110,27 +83,32 @@ const Module2 = ({ user, allCourses }: any) => {
   }
 
   return (
-    <>
-      {courses.length > 0 && <Container fluid
-        style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: '10px' }}>
-        <ContinueText>
-          Continua viendo
-        </ContinueText>
-        <Swiper id="card-container-1" {...settings} onInit={onInit}>
-          {courses.map((element: any, idx: any) => (
-            <SwiperSlide key={idx} onClick={() => {
-              goTo(element)
-            }}>
-              <SlideModuleContainer>
-                <Image src={element.coursePath} fluid style={{ borderRadius: "10px" }} />
-                <Progress style={{ 'width': `${element.progress}%` }}></Progress>
-              </SlideModuleContainer>
-            </SwiperSlide>
-          ))}
-          <div id="shadow-1" className="right-shadow"></div>
-        </Swiper>
-      </Container>}
-    </>
+    <Container fluid style={{
+      overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px"
+    }}>
+      {(courses.length > 0) && <>
+        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <ContinueText>
+              Continua viendo
+            </ContinueText>
+          </div>
+          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
+            <div style={{ display: "flex" }}>
+              {courses.map((element: any, idx: any) => (
+                <div key={idx} className="grey-field" onClick={() => { goTo(element) }}>
+                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
+                    <Progress style={{ 'width': `calc(${element.progress}% - 10px)` }}></Progress>
+                  </SlideModuleContainer>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </>
+      }
+    </Container >
   )
 }
 export default Module2;

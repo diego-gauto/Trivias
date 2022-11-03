@@ -74,28 +74,28 @@ const Homepage = () => {
         } />
       }
       {/* Nails Master Module Card */}
-      <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} />
+      <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} num={1} />
       {courseNailsData &&
         <Module4_Carousel type={"product"} isInfinite={true} slideData={
           courseNailsData.lessons
         } />
       }
       {/* SEP Module Card */}
-      <CourseModuleContainer courseId={SEP_COURSE_ID} />
+      <CourseModuleContainer courseId={SEP_COURSE_ID} num={2} />
       {courseSEPData &&
         <Module4_Carousel type={"product"} isInfinite={true} slideData={
           courseSEPData.lessons
         } />
       }
       {/* Dry's Manicure Module Card */}
-      <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} />
+      <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} num={3} />
       {courses &&
         <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
           courses
         } />
       }
       {/* Experts Escultural Module Card */}
-      <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} />
+      <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} num={4} />
       {courses &&
         <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
           courses

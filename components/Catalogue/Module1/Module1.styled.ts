@@ -6,6 +6,9 @@ export const Container = styled.div`
   width: 100%;
   justify-content: center;
   position: relative;
+  .skeleton-product {
+    background: grey;
+  }
 `;
 export const ImageContain = styled.div`
   width: 100%;

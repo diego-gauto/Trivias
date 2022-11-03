@@ -96,9 +96,15 @@ export const DaysLeft = styled.div`
   top: 25px;
   left: 15px;
   z-index: 2;
+  @media (max-width: 1023px) {
+    top: 8px;
+    left: 0px;
+    z-index: 2;
+    font-size: 12px;
+  }
 `;
 export const Band = styled.i`
-  background-image: url(../images/Band.png);
+  background-image: url(../images/band.png);
   background-repeat: no-repeat;
   width: 140px;
   height: 110px;
@@ -107,4 +113,12 @@ export const Band = styled.i`
   top: -10px;
   left: -20px;
   z-index: 1;
+  @media (max-width: 1023px) {
+    background-image: none;
+    top: -33px;
+    left: 0;
+    width: 27px;
+    rotate: 45deg;
+    background: #6717cd;
+  }
 `;

@@ -190,6 +190,10 @@ export const PaymentMethod = styled("div")<{ active: any }>`
   &:hover {
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
   }
+  @media (max-width: 340px) {
+    padding-block: 7px;
+    padding-inline: 12px;
+  }
 `;
 export const PayText = styled.p`
   text-align: center;
@@ -259,9 +263,6 @@ export const CardIconResp = styled("i")<{ brand: any }>`
   width: 59px;
   height: 33px;
   background-position: center;
-  @media (max-width: 1023px) {
-    display: none;
-  }
 `;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);
@@ -550,6 +551,9 @@ export const CourseImage = styled.img`
   @media (max-width: 1300px) {
     width: 100%;
   }
+  @media (max-width: 600px) {
+    height: auto;
+  }
 `;
 export const TitleCourse = styled.p`
   font-size: 24px;
@@ -587,6 +591,15 @@ export const ContainerCard = styled.div`
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+  .row-costum {
+    display: flex;
+    gap: 2%;
+  }
+  .row-costum label {
+    width: 32%;
+    justify-content: flex-end;
+    padding-right: 0;
+  }
 `;
 export const InputText = styled.label`
   width: 100%;

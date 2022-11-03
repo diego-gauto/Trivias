@@ -121,8 +121,8 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
         <TaskTitle>
           Tarea: {data.homeWork}
         </TaskTitle>
-        <TaskText>
-          {data.homeWorkAbout}
+        <TaskText dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }}>
+
         </TaskText>
         {(user) && <ButtonDiv>
           {status == "" && <UploadButton onClick={uploadHwk}>

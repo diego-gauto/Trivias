@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Selected = styled.div`
   display: flex;
@@ -44,6 +44,35 @@ export const Option = styled.div`
       display: none;
     }
   }
+`;
+export const OptionCat = styled.div<{ category: string; marked: string }>`
+  &:hover {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    color: white;
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+  }
+  input {
+    &[type="radio"] {
+      display: none;
+    }
+  }
+  ${(props) =>
+    props.marked.includes(props.category) &&
+    css`
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      color: white;
+      &:first-child {
+        border-radius: 10px 10px 0 0;
+      }
+      &:last-child {
+        border-radius: 0 0 8px 8px;
+      }
+    `}
 `;
 export const Label2 = styled.label`
   display: flex;

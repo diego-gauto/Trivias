@@ -16,7 +16,7 @@ const HomeWork = ({ userId, user }: any) => {
       res.forEach((element: any) => {
         let tempDate = new Date(element.createdAt.seconds * 1000);
         let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth()
+        let tempMonth = tempDate.getMonth() + 1;
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
@@ -24,7 +24,7 @@ const HomeWork = ({ userId, user }: any) => {
     })
   }
 
-  const handleClick = (value: any) => {
+  const handleClick = () => {
     let index;
     index = homeWorks.findIndex((x: any) => x.id == id);
     homeWorks[index].status = true;
@@ -59,20 +59,20 @@ const HomeWork = ({ userId, user }: any) => {
                 <tr
                   key={"HomeWorks " + index}
                   style={{ cursor: "pointer" }}
+                  onClick={() => { setShow(true); setData(task); setId(task.id) }}
                 >
                   <td
-                    onClick={() => { setShow(true); setData(task) }}
                   >{task.userName}</td>
                   <td
-                    onClick={() => { setShow(true); setData(task) }}
+
                   >{task.userEmail}</td>
                   <td
-                    onClick={() => { setShow(true); setData(task) }}
+
                   >{task.title}  ({task.season + 1}, {task.lesson + 1}) </td>
                   <td
-                    onClick={() => { setShow(true); setData(task) }}
+
                   >{task.formatDate}</td>
-                  <td style={{ padding: "0" }}>
+                  <td style={{ padding: "0" }} onClick={(e: any) => { e.stopPropagation(); setShow(false) }}>
                     <Link href={task.path}>
                       <a target="_blank" style={{ textDecoration: "none" }}>
                         <Download>
@@ -82,7 +82,7 @@ const HomeWork = ({ userId, user }: any) => {
                     </Link>
                   </td>
                   <td style={{ padding: "0" }}
-                    onClick={() => { setShow(true); setData(task); setId(task.id) }}
+
                   >{
                       task.status == false
                         ? <Button status={task.status}>No revisada</Button>
