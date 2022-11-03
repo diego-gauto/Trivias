@@ -16,6 +16,7 @@ export const BackgroundProfile = styled.div`
   }
   @media (max-width: 1023px) {
     flex-direction: column;
+    height: auto;
     gap: 40px;
     align-items: center;
   }

@@ -38,7 +38,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
   return (
     <CardContainer className="card-container">
       <div className="video">
-        <video id={`video-${num}`} muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+        <video id={`video-${num}`} loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
         ></video>
       </div>
       <Row>

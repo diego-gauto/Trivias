@@ -36,7 +36,7 @@ export const GonvarPlusModule = () => {
   return (
     <CardContainer className="card-container">
       <div className="video">
-        <video id="video" muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+        <video id="video" loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
         ></video>
       </div>
       <Row>
