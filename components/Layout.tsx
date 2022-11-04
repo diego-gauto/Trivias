@@ -15,6 +15,7 @@ const Layout = ({ children }: any) => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
 
+
   return (
     <Body style={{ overflowX: "hidden" }}>
       <NavBar />
