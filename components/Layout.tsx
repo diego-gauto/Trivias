@@ -14,8 +14,6 @@ const Layout = ({ children }: any) => {
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
-
-
   return (
     <Body style={{ overflowX: "hidden" }}>
       <NavBar />
