@@ -93,7 +93,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
               Continua viendo
             </ContinueText>
           </div>
-          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
+          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
             <div style={{ display: "flex" }}>
               {courses.map((element: any, idx: any) => (
                 <div key={idx} className="grey-field" onClick={() => { goTo(element) }}>
