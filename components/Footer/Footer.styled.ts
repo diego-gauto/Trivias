@@ -88,9 +88,9 @@ export const FooterText = styled.a`
   cursor: pointer;
   color: black;
   text-decoration: none;
+  font-weight: 600;
   &:hover {
     color: #6717cd;
-    font-weight: 600;
   }
   @media (max-width: 870px) {
     font-size: 15px;
