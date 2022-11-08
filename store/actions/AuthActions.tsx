@@ -55,6 +55,7 @@ export const signUpWithCreds = (
         return await addDoc(collection(db, "users"), {
           uid: user?.uid,
           name: credentials.name,
+          lastName: credentials.lastName,
           email: credentials.email,
           photoURL: "",
           provider: "Webpage",

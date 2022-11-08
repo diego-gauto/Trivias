@@ -43,6 +43,10 @@ const formSchema = yup.object().shape({
     .string()
     .min(6, "El nombre debe ser de al menos 6 caracteres")
     .required("Campo requerido"),
+  lastName: yup
+    .string()
+    .min(3, "El nombre debe ser de al menos 3 caracteres")
+    .required("Campo requerido"),
   email: yup
     .string()
     .email("Debe ser un email válido")
@@ -57,6 +61,7 @@ const formSchema = yup.object().shape({
 
 type FormValues = {
   name: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -114,6 +119,7 @@ const Register = () => {
     let signUpData = {
       credentials: {
         name: formData.name,
+        lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
         phoneInput: tempPhoneInput,
@@ -156,16 +162,31 @@ const Register = () => {
               </Box1>
               <Box1>
                 <Text2>
-                  Nombre de Usuario
+                  Nombre
                 </Text2>
                 <TextInput
                   type="text"
-                  placeholder="John Doe"
+                  placeholder="John"
                   className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                   {...register("name")}
                 ></TextInput>
                 <div className="invalid-feedback">
                   {errors.name?.message}
+                </div>
+
+              </Box1>
+              <Box1>
+                <Text2>
+                  Apellido
+                </Text2>
+                <TextInput
+                  type="text"
+                  placeholder="Doe"
+                  className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
+                  {...register("lastName")}
+                ></TextInput>
+                <div className="invalid-feedback">
+                  {errors.lastName?.message}
                 </div>
 
               </Box1>

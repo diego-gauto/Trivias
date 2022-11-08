@@ -57,7 +57,7 @@ const UserInfo = ({ userData, taskView, setTaskView }: any) => {
           Usuario
         </LabelText>
         <UserText>
-          {userData.name}
+          {userData.name} {userData.lastName}
         </UserText>
       </UserContainer>
       <UserContainer>

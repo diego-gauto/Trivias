@@ -35,6 +35,7 @@ const UserData = ({ data, pm }: props) => {
     const docRef = doc(db, 'users', user.id);
     await updateDoc(docRef, {
       name: user.name,
+      lastName: user.lastName,
       phoneNumber: user.phoneNumber,
     }).then(() => {
       alert("Información actualizada");
@@ -54,13 +55,25 @@ const UserData = ({ data, pm }: props) => {
         <AllEditInputs>
           <Inputs>
             <EditText>
-              Nombre de Usuario
+              Nombre
             </EditText>
             <EditInput
               placeholder={data.name}
               defaultValue={data.name}
               onChange={(e) => {
                 setUser({ ...user, name: e.target.value })
+              }}
+            />
+          </Inputs>
+          <Inputs>
+            <EditText>
+              Apellido
+            </EditText>
+            <EditInput
+              placeholder={data.lastName}
+              defaultValue={data.lastName}
+              onChange={(e) => {
+                setUser({ ...user, lastName: e.target.value })
               }}
             />
           </Inputs>
