@@ -110,7 +110,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [name, setName] = useState(courseProfessor.name);
   const [value, setValue] = useState<any>({})
   const [homeWork, setHomeWork] = useState(courseHomeWork);
-  const [free, setFree] = useState(courseType == "Gratis" ? 0 : 1)
+  const [free, setFree] = useState(courseType === "Producto" ? 1 : 0)
   const [value2, setValue2] = useState<any>([])
   const [image, setImage] = useState<any>(coursePath)
   const [images, setimages] = useState<any>("")
@@ -137,7 +137,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setValue(courseProfessor)
   }, []);
 
-
+  console.log(free);
   const onSubmit: SubmitHandler<FormValues> = formData => {
     setIsUpdating(true);
     var professor = ""
