@@ -21,6 +21,7 @@ export const ProfilePicture2 = styled.i`
 export const Error = styled.p`
   color: #db2c1d;
   text-align: center;
+  font-weight: 600;
 `;
 
 export const AnimatedBackground = styled.video`

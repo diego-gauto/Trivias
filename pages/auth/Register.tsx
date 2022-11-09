@@ -16,6 +16,7 @@ import { LOGIN_PATH } from "../../constants/paths";
 import {
   AllButtons,
   Background,
+  Error,
   Box1,
   Box2,
   FacebookButton,
@@ -36,12 +37,13 @@ import {
   TextInput_2,
   Title,
 } from "../../screens/Login.styled";
-import { accessWithAuthProvider, signUpWithCreds } from "../../store/actions/AuthActions";
+import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds } from "../../store/actions/AuthActions";
+import { fetchSignInMethodsForEmail } from "firebase/auth";
 
 const formSchema = yup.object().shape({
   name: yup
     .string()
-    .min(6, "El nombre debe ser de al menos 6 caracteres")
+    .min(3, "El nombre debe ser de al menos 3 caracteres")
     .required("Campo requerido"),
   lastName: yup
     .string()
@@ -72,6 +74,8 @@ const Register = () => {
   const [passwordShown_1, setPasswordShown_1] = useState(false);
   const [passwordShown_2, setPasswordShown_2] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [registerLoad, setRegisterLoad] = useState(false);
   const [phoneInput, setPhoneInput] = useState<string>("");
 
@@ -105,13 +109,13 @@ const Register = () => {
   };
 
 
-  const onSubmit: SubmitHandler<FormValues> = formData => {
+
+  const onSubmit: SubmitHandler<FormValues> = async formData => {
     let tempMonth = false;
     let tempPhoneInput = phoneInput;
     if (trial) {
       tempMonth = true;
     }
-    setIsLoading(true)
     var input = document.getElementById("input_1") as HTMLInputElement;
     if (!tempPhoneInput) {
       tempPhoneInput = ""
@@ -127,10 +131,19 @@ const Register = () => {
         month: tempMonth
       },
     };
-    setIsLoading(true)
-    signUpWithCreds(signUpData).then(() => {
-      window.location.href = "/Purchase?type=subscription";
-    });
+    const redirectURL = await signUpCreds(signUpData);
+    console.log(redirectURL)
+    if (redirectURL == "/auth/RegisterPastUser") {
+      setErrorMsg('El correo ingresado ya existe!');
+      setError(true);
+      setIsLoading(false);
+    }
+    else {
+      setIsLoading(true)
+      signUpWithCreds(signUpData).then(() => {
+        window.location.href = "/Purchase?type=subscription";
+      });
+    }
   }
   useEffect(() => {
     setTimeout(() => {
@@ -156,7 +169,7 @@ const Register = () => {
                   <Title>
                     Registrarse
                   </Title>
-                  <Box1>
+                  <Box1 style={{}}>
                     <Text2>
                       Correo electrónico
                     </Text2>
@@ -169,7 +182,9 @@ const Register = () => {
                     <div className="invalid-feedback">
                       {errors.email?.message}
                     </div>
-
+                    {error && <Error style={{ marginBottom: 0, marginTop: 10 }}>
+                      {errorMsg}.
+                    </Error>}
                   </Box1>
                   <Box1>
                     <Text2>

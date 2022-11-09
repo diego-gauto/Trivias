@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -120,13 +121,31 @@ export const signInWithCreds = async (signUpData: { credentials: any; }) => {
 
   //Una vez inicializado es contextual a las llamadas de firebase
   const auth = getAuth();
-
   try {
     await signInWithEmailAndPassword(auth, credentials.email, credentials.password)
     localStorage.setItem("email", credentials.email);
     return PREVIEW_PATH;
   } catch (err: any) {
     firebase.auth().signOut();
+    return err.code;
+  }
+};
+export const signUpCreds = async (signUpData: { credentials: any; }) => {
+  const {
+    credentials,
+  } = signUpData;
+  console.log(credentials.email)
+  const hasCurrentUserVar = await hasCurrentUser(credentials.email);
+  if (hasCurrentUserVar) {
+    localStorage.setItem("pastUserEmail", credentials.email);
+    return SIGNUP_PAST_USER_PATH;
+  }
+  const auth = getAuth();
+  try {
+    await signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+    localStorage.setItem("email", credentials.email);
+    return PREVIEW_PATH;
+  } catch (err: any) {
     return err.code;
   }
 };
