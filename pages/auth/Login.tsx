@@ -51,7 +51,8 @@ type FormValues = {
 };
 
 const Login = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loginLoader, setLoginLoader] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [passwordShown_1, setPasswordShown_1] = useState(false);
@@ -109,7 +110,14 @@ const Login = () => {
   };
 
 
-  useEffect(() => { }, [isLoading]);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 200);
+    setTimeout(() => {
+      setLoginLoader(true)
+    }, 500);
+  }, [isLoading])
 
   return (
 
@@ -117,98 +125,102 @@ const Login = () => {
       {!isLoading ? (
         <Background>
           {
-            showForgot == false &&
-            <LoginBox>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <ProfilePicture />
-                <Title>
-                  Iniciar Sesión
-                </Title>
-                <Box1>
-                  <Text2>
-                    Correo electrónico
-                  </Text2>
-                  <TextInput
-                    type="text"
-                    placeholder="correo@correo.com"
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    {...register("email")}
-                  />
-                  <div className="invalid-feedback">
-                    {errors.email?.message}
-                  </div>
-
-                </Box1>
-                <Box2>
-                  <Text2>
-                    Contraseña
-                  </Text2>
-                  <PasswordBox>
-
-                    <div>
-                      <TextInput_2
-                        type={passwordShown_1 ? "text" : "password"}
-                        placeholder="Contraseña"
-                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                        {...register("password")}
-                      />
-                      <div style={{ 'cursor': 'pointer' }}
-                        onClick={togglePassword_1}
-                      >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                    </div>
+            (showForgot == false && loginLoader) ?
+              <LoginBox>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <ProfilePicture />
+                  <Title>
+                    Iniciar Sesión
+                  </Title>
+                  <Box1>
+                    <Text2>
+                      Correo electrónico
+                    </Text2>
+                    <TextInput
+                      type="text"
+                      placeholder="correo@correo.com"
+                      className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                      {...register("email")}
+                    />
                     <div className="invalid-feedback">
-                      {errors.password?.message}
+                      {errors.email?.message}
                     </div>
 
-                  </PasswordBox>
+                  </Box1>
+                  <Box2>
+                    <Text2>
+                      Contraseña
+                    </Text2>
+                    <PasswordBox>
 
-                </Box2>
-                {error && <Error>
-                  {errorMsg}.
-                </Error>}
+                      <div>
+                        <TextInput_2
+                          type={passwordShown_1 ? "text" : "password"}
+                          placeholder="Contraseña"
+                          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                          {...register("password")}
+                        />
+                        <div style={{ 'cursor': 'pointer' }}
+                          onClick={togglePassword_1}
+                        >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                      </div>
+                      <div className="invalid-feedback">
+                        {errors.password?.message}
+                      </div>
+
+                    </PasswordBox>
+
+                  </Box2>
+                  {error && <Error>
+                    {errorMsg}.
+                  </Error>}
+                  <AllButtons>
+                    <PurpleButton2 type='submit'>
+                      Acceder
+                    </PurpleButton2>
+                  </AllButtons>
+
+                </form>
+
                 <AllButtons>
-                  <PurpleButton2 type='submit'>
-                    Acceder
-                  </PurpleButton2>
-                </AllButtons>
 
-              </form>
-
-              <AllButtons>
-
-                <GoogleButton onClick={() => {
-                  handleSignUpWithAuthProvider("Google");
-                }}
-                >
-                  <GoogleIcon></GoogleIcon>
-                  Acceder con Google
-                </GoogleButton>
-                <FacebookButton
-                  onClick={() => {
-                    handleSignUpWithAuthProvider("Facebook");
+                  <GoogleButton onClick={() => {
+                    handleSignUpWithAuthProvider("Google");
                   }}
-                >
-                  <FacebookIcon></FacebookIcon>
-                  Acceder con Facebook
-                </FacebookButton>
-              </AllButtons>
-              <Text3>
-                ¿Olvidaste tu contraseña? &nbsp;
-                <LinkText onClick={() => { setShowForgot(true) }} >
-                  Clic aqui
-                </LinkText>
-              </Text3>
-              <Text3>
-                ¿Es tu primera vez con nosotros? &nbsp;
-                <Link href="/auth/Register">
-                  <LinkText>
-                    Registrate
+                  >
+                    <GoogleIcon></GoogleIcon>
+                    Acceder con Google
+                  </GoogleButton>
+                  <FacebookButton
+                    onClick={() => {
+                      handleSignUpWithAuthProvider("Facebook");
+                    }}
+                  >
+                    <FacebookIcon></FacebookIcon>
+                    Acceder con Facebook
+                  </FacebookButton>
+                </AllButtons>
+                <Text3>
+                  ¿Olvidaste tu contraseña? &nbsp;
+                  <LinkText onClick={() => { setShowForgot(true) }} >
+                    Clic aqui
                   </LinkText>
-                </Link>
-              </Text3>
-            </LoginBox>
+                </Text3>
+                <Text3>
+                  ¿Es tu primera vez con nosotros? &nbsp;
+                  <Link href="/auth/Register">
+                    <LinkText>
+                      Registrate
+                    </LinkText>
+                  </Link>
+                </Text3>
+              </LoginBox>
+              :
+              <LoaderImage>
+                <LoaderContain />
+              </LoaderImage>
           }
 
           <GradientCanvas id="gradient-canvas" increasedHeight />
