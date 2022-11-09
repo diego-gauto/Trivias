@@ -34,6 +34,7 @@ import {
 import { accessWithAuthProvider, signInWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useAuth } from "../../hooks/useAuth";
 
 const formSchema = yup.object().shape({
   email: yup
@@ -56,10 +57,23 @@ const Login = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [passwordShown_1, setPasswordShown_1] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
   };
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }, [])
 
+  } catch (error) {
+    setLoggedIn(false)
+  }
   const {
     register,
     handleSubmit,
@@ -111,12 +125,17 @@ const Login = () => {
 
 
   useEffect(() => {
+    if (loggedIn) {
+      setIsLoading(true)
+      window.location.href = "/Preview";
+    }
     setTimeout(() => {
       setIsLoading(false)
     }, 200);
     setTimeout(() => {
       setLoginLoader(true)
     }, 500);
+
   }, [isLoading])
 
   return (
@@ -174,7 +193,7 @@ const Login = () => {
 
                   </Box2>
                   {error && <Error>
-                    {errorMsg}.
+                    {errorMsg}
                   </Error>}
                   <AllButtons>
                     <PurpleButton2 type='submit'>

@@ -39,6 +39,7 @@ import {
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds } from "../../store/actions/AuthActions";
 import { fetchSignInMethodsForEmail } from "firebase/auth";
+import { useAuth } from "../../hooks/useAuth";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -78,7 +79,7 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [registerLoad, setRegisterLoad] = useState(false);
   const [phoneInput, setPhoneInput] = useState<string>("");
-
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -87,6 +88,19 @@ const Register = () => {
   const togglePassword_2 = () => {
     setPasswordShown_2(!passwordShown_2);
   };
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }, [])
+
+  } catch (error) {
+    setLoggedIn(false)
+  }
   const router = useRouter()
   const { trial } = router.query;
 
@@ -146,6 +160,10 @@ const Register = () => {
     }
   }
   useEffect(() => {
+    if (loggedIn) {
+      setIsLoading(true)
+      window.location.href = "/Preview";
+    }
     setTimeout(() => {
       setIsLoading(false)
     }, 200);

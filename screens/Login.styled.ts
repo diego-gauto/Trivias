@@ -19,9 +19,10 @@ export const ProfilePicture2 = styled.i`
   background-repeat: no-repeat;
 `;
 export const Error = styled.p`
-  color: #db2c1d;
+  color: white;
   text-align: center;
   font-weight: 600;
+  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 `;
 
 export const AnimatedBackground = styled.video`
