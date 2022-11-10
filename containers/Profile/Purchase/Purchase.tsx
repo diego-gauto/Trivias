@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
 
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, DocumentData, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
@@ -76,6 +76,7 @@ import {
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
+import { getPaidCourses } from "../../../store/actions/UserActions";
 
 const Purchase = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -104,7 +105,6 @@ const Purchase = () => {
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
-
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -133,6 +133,7 @@ const Purchase = () => {
             setDefaultCard(temp_cards)
           })
           setUserData({ ...e.data(), id: e.id })
+
         });
         setIsLoading(false);
       })
@@ -140,9 +141,23 @@ const Purchase = () => {
       return false
     }
   }
-
+  const getUserCourses = (user: any) => {
+    getPaidCourses(user).then((res) => {
+      res = res.filter((course: any, index: any) => course.id == router.query.id)
+      if (res[0] == null) {
+        res[0] = []
+      }
+      else {
+        if (res[0].id == router.query.id) {
+          window.location.href = "/Preview";
+        }
+      }
+    })
+  }
   useEffect(() => {
-    fetchDB_data()
+
+    fetchDB_data();
+
   }, [loggedIn]);
 
   useEffect(() => {
@@ -349,7 +364,15 @@ const Purchase = () => {
   useEffect(() => {
     console.log(plan);
   }, [card, plan])
-
+  useEffect(() => {
+    console.log(router.query.type)
+    if (router.query.type == "subscription" && userData?.membership.planName == "Gonvar Plus") {
+      window.location.href = "/Preview";
+    }
+    if (userData !== null) {
+      getUserCourses(userData.id);
+    }
+  }, [isLoading])
   return (
     <>
       {isLoading ? <Background>
