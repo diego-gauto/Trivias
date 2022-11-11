@@ -184,7 +184,7 @@ const Purchase = () => {
 
   const handleConfirm = async () => {
     console.log(coupon);
-
+    console.log('pos entra')
     setLoader(true);
     if ((!cardInfo && !payment && plan.method !== 'paypal') || (!cardInfo && payment && !card.paymentMethod)) {
       alert("Por favor seleccione un método de pago!");
@@ -258,6 +258,7 @@ const Purchase = () => {
       method: plan.method
     }
     if (plan.method == 'stripe') {
+      console.log('entro al metodo')
       if (type == 'subscription') {
         const pay = httpsCallable(functions, 'payWithStripeSubscription');
         const data = {
@@ -271,8 +272,20 @@ const Purchase = () => {
         await pay(data).then((res: any) => {
           if ("raw" in res.data) {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
+              alert(
+                res.data.raw.code == "card_declined" && (
+                  res.data.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+                  res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+                  res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+                  res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+                ) ||
+                res.data.raw.code == "expired_card" && "Tarjeta expirada" ||
+                res.data.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+                res.data.raw.code == "processing_error" && "Error de proceso" ||
+                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
+              )
             }
+            console.log('entro al error')
             setLoader(false);
           } else {
             updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
@@ -297,8 +310,20 @@ const Purchase = () => {
         await pay(data).then((res: any) => {
           if ("raw" in res.data) {
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              alert("Su tarjeta ha sido declinada, por favor de contactar con su banco, gracias!")
+              alert(
+                res.data.raw.code == "card_declined" && (
+                  res.data.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+                  res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+                  res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+                  res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+                ) ||
+                res.data.raw.code == "expired_card" && "Tarjeta expirada" ||
+                res.data.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+                res.data.raw.code == "processing_error" && "Error de proceso" ||
+                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
+              )
             }
+            console.log('entro al pagocurso')
             setLoader(false);
           } else {
             let price = res.data.amount / 100
@@ -320,6 +345,7 @@ const Purchase = () => {
             if (card.status) {
               addPaymentMethod(card, userData.id);
             }
+            console.log('entro al final')
             setConfirmation(false);
             setPay(true);
             setLoader(false);
