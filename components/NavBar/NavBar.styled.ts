@@ -60,9 +60,11 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin: 0;
+  font-weight: 500;
   &:hover {
     color: black;
-    font-weight: 600;
+    opacity: 0.6;
+    transition: 0.1s ease all;
   }
 
   @media (max-width: 1023px) {

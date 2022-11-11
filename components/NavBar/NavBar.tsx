@@ -128,19 +128,19 @@ const NavBar = () => {
       </LogoContain>
       <NavTags>
         <Link href="/Preview">
-          <NavText pathname={pathname} color={color}
-            style={pathname == "/Preview" ? { fontWeight: 600 } : { fontWeight: '' }}>
+          <NavText pathname={pathname} color={color} title="Inicio"
+            style={pathname == "/Preview" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Inicio
           </NavText>
         </Link>
-        <NavText pathname={pathname} color={color} target="_blank" href="Https://gonvarnails.mx">
+        <NavText pathname={pathname} color={color} title="Tienda" target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
         {
           (loggedIn && isAdmin) &&
           <Link href="/admin/Courses">
-            <NavText pathname={pathname} color={color}
-              style={position == "/admin" ? { fontWeight: 600 } : { fontWeight: '' }}
+            <NavText pathname={pathname} color={color} title="Admin"
+              style={position == "/admin" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
             >
               admin
             </NavText>
@@ -153,8 +153,8 @@ const NavBar = () => {
             <UserContain>
               <UserLevel />
               <Link href="/Profile">
-                <NavText pathname={pathname} color={color}
-                  style={pathname == "/Profile" ? { fontWeight: 600 } : { fontWeight: '' }}
+                <NavText pathname={pathname} color={color} title="Perfil"
+                  style={pathname == "/Profile" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
                 >
                   {userData ? userData.name : "Bienvenido"}
                 </NavText>
@@ -177,8 +177,8 @@ const NavBar = () => {
         {!loggedIn &&
           <>
             <Link href={LOGIN_PATH}>
-              <NavText pathname={pathname} color={color}
-                style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600 } : { fontWeight: '' }}
+              <NavText pathname={pathname} color={color} title="Iniciar Sesion"
+                style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
               >
                 Iniciar Sesión
               </NavText>
@@ -200,7 +200,7 @@ const NavBar = () => {
             </Link>
             <TagsResp>
               <Link href={LOGIN_PATH}>
-                <a>
+                <a title="Ingresar">
                   Ingresar
                 </a>
               </Link>
