@@ -78,7 +78,6 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      <FirstSectionContainer />
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
