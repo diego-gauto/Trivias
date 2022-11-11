@@ -137,7 +137,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
                   <Col>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
                     onClick={() => router.push("/auth/Register")} /></Col>
-                  <Col> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Register")} /></Col>
+                  <Col> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></Col>
 
 
                 </Row>
