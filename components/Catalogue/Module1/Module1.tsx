@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 
 import router from "next/router";
 
-import { LOGIN_PATH } from "../../../constants/paths";
+import { LOGIN_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { getViewedCourses, getWholeCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
@@ -55,7 +55,7 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
         });
       }
       if (!user && (historyCourse.courseType == 'Mensual' || historyCourse.courseType == 'Producto')) {
-        router.push(LOGIN_PATH);
+        router.push(SIGNUP_PATH);
       }
     }
   }
@@ -104,6 +104,7 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
                 url={historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(-5)}
                 playing={true}
                 muted={true}
+                loop={true}
                 //controls
                 width='100%'
                 height='180%'
