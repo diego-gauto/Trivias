@@ -28,19 +28,19 @@ left: 0%;
 background-repeat: no-repeat;
 
     @media only screen and (max-width: 1980px) {  
-    top: 120%;
+    top: 45%;
     }
     @media only screen and (max-width: 1720px) {
-      top: 115%;
+      top: 40%;
     }
     @media only screen and (max-width: 1600px) {
-      top: 115%;
+      top: 40%;
     }
     @media only screen and (max-width: 1440px) {
-      top: 110%;
+      top: 32.5%;
     }
     @media only screen and (max-width: 1280px) {
-      top: 110%;
+      top: 30%;
     }
 background-position-x: 115%;
   @media only screen and (max-widt|h: 1024px) {
@@ -58,7 +58,7 @@ background-color: #EDE7F2;
 background-size: 100%;
 position: absolute;
 display: block;
-top: 83%;
+top: 0%;
 left: 0;
   @media only screen and (max-widt|h: 1024px) {
     margin: 25px auto;
