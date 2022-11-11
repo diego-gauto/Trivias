@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^2.3.3",
+    "@types/node": "^18.11.9",
     "@types/react": "18.0.1",
     "@types/react-input-mask": "1.2.1 ",
     "@types/react-router-dom": "^5.3.3",

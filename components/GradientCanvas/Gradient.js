@@ -123,8 +123,13 @@ function normalizeColor(hexCode) {
                                 
                                 }
                                 }
-                            return `uniform ${uniform.type} ${name}${length>0?`[${length}]`:""};`
+                                try {
+                                  return `uniform ${uniform.type} ${name}${length>0?`[${length}]`:""};`
                         
+                                } catch (error) {
+                                  
+                                }
+                            
                           }
                     }
                 }
