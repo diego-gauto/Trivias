@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const ModuleContainer = styled(Container)`
 height: 100%;  
-margin-bottom: 0%  ;
+margin-bottom: 1%  ;
 display: block;
   @media only screen and (max-width: 1280px) {
     top: 125%;
@@ -23,7 +23,7 @@ height: 100%;
 position: absolute;
 display: block;
 background-size: 85%;
-top: 125%;
+top: 48.5%;
 left: 0%;
 background-repeat: no-repeat;
 
