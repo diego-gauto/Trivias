@@ -52,7 +52,7 @@ background-position-x: 115%;
   
 export const ModuleContainerBG2alt =  styled.div` 
 width: 100%;
-height: 100%;
+height: 110%;
 background-repeat: no-repeat;
 background-color: #EDE7F2;
 background-size: 100%;
