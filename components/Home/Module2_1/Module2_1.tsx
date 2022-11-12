@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 
 import BG1 from "./MediaSources/mujeres_gonvar.png";
 import BG2 from "./MediaSources/bgSection1.png";
+import BG3 from "./MediaSources/bgSection1_c1.png";
+import BG4 from "./MediaSources/bgSection1_c2.png";
 
 import { useRouter } from "next/router";
-import { FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
+import { FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile, ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
 import {
   TitleCenter, ModuleContainer,
   LeftImage,
@@ -108,8 +110,13 @@ export const Module2_1 = (props: IModule2_1) => {
           <Row>
             <RightImage_Mobile>
 
-              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${BG2.src})`, backgroundSize: "100%" }}></ModuleContainerBG2alt_Mobile>
-              <ModuleContainerBG1alt_Mobile style={{ backgroundImage: `url(${BG1.src})` }}></ModuleContainerBG1alt_Mobile>
+              {/*  <ModuleContainerBGColor_Mobile ></ModuleContainerBGColor_Mobile> */}
+
+              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${BG3.src})`, backgroundSize: "100%" }}>
+                <ModuleContainerBG3alt_Mobile style={{ backgroundImage: `url(${BG4.src})`, backgroundSize: "100%" }}></ModuleContainerBG3alt_Mobile>
+                <ModuleContainerBG1alt_Mobile style={{ backgroundImage: `url(${BG1.src})` }}></ModuleContainerBG1alt_Mobile>
+              </ModuleContainerBG2alt_Mobile>
+
 
 
             </RightImage_Mobile>
@@ -137,7 +144,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
                   <Col>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
                     onClick={() => router.push("/auth/Register")} /></Col>
-                  <Col> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></Col>
+                  <Col style={{ marginLeft: "33.3%" }}> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></Col>
 
 
                 </Row>

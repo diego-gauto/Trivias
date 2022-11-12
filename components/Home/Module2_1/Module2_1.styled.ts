@@ -249,51 +249,95 @@ display: none;
 
 export const ModuleContainerBG1alt_Mobile =  styled.div` 
 width: 100%; 
-height: 100%;
+height: 45%;
 position: absolute;
 display: block;
 background-size: 85%;
-top: 125%;
+top: 45%; 
 left: 0%;
 background-repeat: no-repeat;
-
-    @media only screen and (max-width: 1980px) {  
-    top: 120%;
-    }
-    @media only screen and (max-width: 1720px) {
-      top: 115%;
-    }
-    @media only screen and (max-width: 1600px) {
-      top: 115%;
-    }
-    @media only screen and (max-width: 1440px) {
-      top: 110%;
-    }
-    @media only screen and (max-width: 1280px) {
-      top: 110%;
-    }
 background-position-x: 115%;
-  @media only screen and (max-widt|h: 1024px) {
+
+@media only screen and (max-width: 1024px) {
     margin: 25px auto;
     padding: 0;
+    top: 55%;
   }
 `;
  
   
 export const ModuleContainerBG2alt_Mobile =  styled.div` 
 width: 100%;
-height: 100%;
-background-repeat: no-repeat;
-background-color: #EDE7F2;
-background-size: 100%;
+height: 80%;
+background-repeat: no-repeat; 
 position: absolute;
 display: block;
-top: 83%;
+
+background-color: #EDE7F2;
+top: 70px;
 left: 0;
   @media only screen and (max-widt|h: 1024px) {
     margin: 25px auto;
     padding: 0;
   }
+
+  @media only screen and (max-width: 1024px) {
+    height: 95%;
+  } 
+  @media only screen and (max-width: 840px) {
+    height: 90%;
+  } 
+  @media only screen and (max-width: 770px) {
+    height: 82%;
+  } 
+  @media only screen and (max-width: 580px) {
+    height: 82%;
+  } 
+  @media only screen and (max-width: 490px) {
+    height: 102.5%;
+  } 
+`;
+  
+  
+export const ModuleContainerBGColor_Mobile =  styled.div` 
+width: 100%;
+height: 680px;
+position: absolute;
+background-color: #EDE7F2;
+  
+`;
+  
+  
+export const ModuleContainerBG3alt_Mobile =  styled.div` 
+width: 100%;
+height: 40%;
+background-repeat: no-repeat; 
+position: absolute;
+display: block;
+top: 40%; 
+
+left: 0;
+  @media only screen and (max-widt|h: 1024px) {
+    margin: 25px auto;
+    padding: 0;
+  }
+
+  
+  @media only screen and (max-width: 1024px) {
+    top: 40%; 
+  } 
+  @media only screen and (max-width: 840px) {
+    top: 40%; 
+  } 
+  @media only screen and (max-width: 770px) {
+    top: 37.5%; 
+  } 
+  @media only screen and (max-width: 580px) {
+    top: 45%; 
+  } 
+  @media only screen and (max-width: 490px) {
+    top: 47.5%; 
+  } 
 `;
   
 
@@ -366,6 +410,11 @@ margin-top: 10%;
   @media only screen and (max-width: 1024px) {
     margin: 25px auto;
     padding: 0;
+    margin-bottom: 52.5%;
+  }
+  @media only screen and (max-width: 490px) {
+ 
+    margin-bottom: 42.5%;
   }
 `;
 
@@ -376,9 +425,7 @@ export const RightImage_Mobile = styled.div`
   height: 100%;
 
   justify-content: flex-end;
-  @media only screen and (max-width: 1024px) {
-    display: none;
-  }
+  
 `;
 export const TittleContainer_Mobile = styled.div`
 width: 100%;
