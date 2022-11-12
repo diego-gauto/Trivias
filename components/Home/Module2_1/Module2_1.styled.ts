@@ -291,7 +291,7 @@ left: 0;
     height: 82%;
   } 
   @media only screen and (max-width: 580px) {
-    height: 105%;
+    height: 82%;
   } 
   @media only screen and (max-width: 490px) {
     height: 102.5%;
@@ -411,6 +411,10 @@ margin-top: 10%;
     margin: 25px auto;
     padding: 0;
     margin-bottom: 52.5%;
+  }
+  @media only screen and (max-width: 490px) {
+ 
+    margin-bottom: 42.5%;
   }
 `;
 
