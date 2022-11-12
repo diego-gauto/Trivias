@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import router from "next/router";
 
 import { LOGIN_PATH, SIGNUP_PATH } from "../../../constants/paths";
-import { getViewedCourses, getWholeCourses } from "../../../store/actions/courseActions";
+import { getViewedCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
   ButtonContain,
@@ -78,6 +78,11 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
               }
               setHistoryCourse(res[0]);
             }
+            else {
+              allCourses.lesson = 0;
+              allCourses.season = 0;
+              setHistoryCourse(allCourses);
+            }
             setTimeout(() => {
               setLoading(false);
             }, 500);
@@ -139,7 +144,6 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
             </ButtonContain>
           </TextContain>
         </div>
-
       </>}
       <Modal show={show} setShow={setShow} course={historyCourse} user={user} />
     </Container >
