@@ -88,12 +88,12 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <SelectContain>
           <ChatboxIcon />
         </SelectContain>
-        {/* <UnSelected>
+        <UnSelected>
           <EaselIcon
             onClick={() => {
               setValue(2)
             }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
+        </UnSelected>
       </IconContain>
       <MainContainer>
         <CommentContain>

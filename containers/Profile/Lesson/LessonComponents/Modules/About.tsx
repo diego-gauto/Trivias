@@ -41,12 +41,12 @@ const About = ({ value, setValue, data }: any) => {
             setValue(4)
           }} style={{ backgroundColor: 'gray' }} />
         </UnSelected>
-        {/* <UnSelected>
+        <UnSelected>
           <EaselIcon
             onClick={() => {
               setValue(2)
             }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
+        </UnSelected>
       </IconContain>
       <AboutContain>
         {data.points > 0 && <CircleContain>
