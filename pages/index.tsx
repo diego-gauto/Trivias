@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { GonvarPlusModule } from "../components/Home/GonvarPlusModule/GonvarPlusModule";
 import { Module2 } from "../components/Home/Module2/Module2";
+import { Module2_1 } from "../components/Home/Module2_1/Module2_1";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
 import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
@@ -23,6 +24,7 @@ const Homepage = () => {
   const [courses, setCourses] = useState<any>([]);
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
   const [courseSEPData, setCourseSEPData] = useState<any>([]);
+
 
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
@@ -47,6 +49,18 @@ const Homepage = () => {
     })
   }
 
+  var obj_1: any =
+  {
+    "tituloInicial": "hola",
+    "parrafoInicial": "hola",
+    "parrafoFinal": "hola",
+    "botonPrimario": "hola",
+    "botonSecundario": "hola",
+    "primerCaracteristica": "hola",
+    "segundaCaracteristica": "hola",
+    "terceraCaracteristica": "hola",
+  };
+
   useEffect(() => {
     getCourses();
   }, [])
@@ -64,8 +78,7 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto"
       }}>
-      <FirstSectionContainer />
-      <Module2 featureShowcaseSectionData={landingData.featureShowcaseSectionData} />
+      <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
       {courses &&
