@@ -30,6 +30,10 @@ width: 240px; margin-top: 60px;
   @media only screen and (max-width: 576px) {
     font-size: 18px;
   }
+  @media only screen and (max-width: 490px) {
+    width: 180px;
+    font-size: 10px;
+  }
 `
 export const Text1 = styled.span `
   font-size: 18px;
