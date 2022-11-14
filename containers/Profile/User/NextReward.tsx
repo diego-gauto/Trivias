@@ -150,9 +150,11 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
               <RewardParagraph>
                 {prize.about}
               </RewardParagraph>
-              {rewardCenter}
+
             </RewardInfo>
+
           </RewardData>
+          {rewardCenter}
         </>
       }
       {
