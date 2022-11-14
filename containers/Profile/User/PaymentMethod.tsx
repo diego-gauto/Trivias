@@ -32,7 +32,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
       setLoader(false);
     } else {
       const detach = httpsCallable(functions, 'detachPaymentMethod');
-      await detach(card.cardId).then(async (res: any) => {
+      detach(card.cardId).then(async (res: any) => {
         deletePaymentMethod(data.id, card.id).then(() => {
           setLoader(false);
           handleClick(true);
