@@ -183,8 +183,6 @@ const Purchase = () => {
   }
 
   const handleConfirm = async () => {
-    console.log(coupon);
-    console.log('pos entra')
     setLoader(true);
     if ((!cardInfo && !payment && plan.method !== 'paypal') || (!cardInfo && payment && !card.paymentMethod)) {
       alert("Por favor seleccione un método de pago!");
@@ -258,7 +256,6 @@ const Purchase = () => {
       method: plan.method
     }
     if (plan.method == 'stripe') {
-      console.log('entro al metodo')
       if (type == 'subscription') {
         const pay = httpsCallable(functions, 'payWithStripeSubscription');
         const data = {
@@ -285,7 +282,6 @@ const Purchase = () => {
                 res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
               )
             }
-            console.log('entro al error')
             setLoader(false);
           } else {
             updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
@@ -323,7 +319,6 @@ const Purchase = () => {
                 res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
               )
             }
-            console.log('entro al pagocurso')
             setLoader(false);
           } else {
             let price = res.data.amount / 100
@@ -345,7 +340,6 @@ const Purchase = () => {
             if (card.status) {
               addPaymentMethod(card, userData.id);
             }
-            console.log('entro al final')
             setConfirmation(false);
             setPay(true);
             setLoader(false);
@@ -388,10 +382,8 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    console.log(plan);
   }, [card, plan])
   useEffect(() => {
-    console.log(router.query.type)
     if (router.query.type == "subscription" && userData?.membership.planName == "Gonvar Plus") {
       window.location.href = "/Preview";
     }
@@ -503,7 +495,7 @@ const Purchase = () => {
                         payment === true &&
                         cards.map((card, index) => {
                           return (
-                            <PaymentMethod active={defaultCard[index]} onClick={() => {
+                            <PaymentMethod key={"cards " + index} active={defaultCard[index]} onClick={() => {
                               setDefault(card, index)
                             }}>
                               <CardIconResp brand={card.brand} />

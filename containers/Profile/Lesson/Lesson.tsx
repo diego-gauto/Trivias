@@ -46,7 +46,6 @@ const Lesson = () => {
       } else {
         setCurrentComments([]);
       }
-      setIsLoading(false);
     }
   }, [router, course]);
 
@@ -86,6 +85,7 @@ const Lesson = () => {
                 if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
                   res.paid = true;
                   addHistoryCourse(res, e.id, season, lesson);
+                  setIsLoading(false);
                 } else {
                   router.push({
                     pathname: 'Purchase', query: { type: 'course', id: id }
@@ -95,6 +95,7 @@ const Lesson = () => {
               if (res.courseType == 'Mensual') {
                 if (e.data().membership.finalDate > date) {
                   addHistoryCourse(res, e.id, season, lesson);
+                  setIsLoading(false);
                 }
                 else {
                   router.push(
@@ -104,6 +105,7 @@ const Lesson = () => {
               }
               if (res.courseType == 'Gratis') {
                 addHistoryCourse(res, e.id, season, lesson);
+                setIsLoading(false);
               }
               setCourse(res);
             })

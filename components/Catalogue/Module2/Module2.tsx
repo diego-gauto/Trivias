@@ -81,7 +81,6 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       }
     }
   }
-
   return (
     <Container fluid style={{
       overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px"
@@ -99,7 +98,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                 <div key={idx} className="grey-field" onClick={() => { goTo(element) }}>
                   < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                     <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-                    <Progress style={{ 'width': `calc(${element.progress}% - 10px)` }}></Progress>
+                    <Progress style={element.progress == null ? { 'width': 0 } : { 'width': `calc(${element.progress}% - 10px)` }}></Progress>
                   </SlideModuleContainer>
                 </div>
               ))}
