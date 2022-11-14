@@ -55,15 +55,17 @@ const Lesson = () => {
       if (userDataAuth.user !== null) {
         setLoggedIn(true)
       } else {
-        setLoggedIn(false);
-        getWholeCourse(id).then((res: any) => {
-          if (res.courseType == 'Gratis') {
-            setCourse(res);
-          }
-          if (res.courseType == 'Producto' || res.courseType == 'Mensual') {
-            router.push(LOGIN_PATH)
-          }
-        })
+        router.push(LOGIN_PATH)
+        // setLoggedIn(false);
+        // getWholeCourse(id).then((res: any) => {
+        //   if (res.courseType == 'Gratis') {
+        //     setCourse(res);
+        //     setIsLoading(false);
+        //   }
+        //   if (res.courseType == 'Producto' || res.courseType == 'Mensual') {
+        //     router.push(LOGIN_PATH)
+        //   }
+        // })
       }
     }, [])
   } catch (error) {
