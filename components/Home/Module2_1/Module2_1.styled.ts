@@ -298,7 +298,22 @@ left: 0;
   } 
 `;
   
+
+
   
+export const ColContainerLeft =  styled(Col)` 
+@media only screen and (max-width: 490px) {
+  margin-left: 25% !important;
+} 
+  
+`;
+export const ColContainerRight =  styled(Col)` 
+@media only screen and (max-width: 490px) {
+  margin-left: 25% !important;
+} 
+  
+`;
+
 export const ModuleContainerBGColor_Mobile =  styled.div` 
 width: 100%;
 height: 680px;

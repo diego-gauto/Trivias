@@ -11,7 +11,7 @@ import BG3 from "./MediaSources/bgSection1_c1.png";
 import BG4 from "./MediaSources/bgSection1_c2.png";
 
 import { useRouter } from "next/router";
-import { FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile, ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
+import { ColContainerLeft, ColContainerRight, FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile, ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
 import {
   TitleCenter, ModuleContainer,
   LeftImage,
@@ -142,9 +142,9 @@ export const Module2_1 = (props: IModule2_1) => {
 
                 <Row xs={12} sm={6} md={6} lg={7}>
 
-                  <Col>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
-                    onClick={() => router.push("/auth/Register")} /></Col>
-                  <Col style={{ marginLeft: "33.3%" }}> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></Col>
+                  <ColContainerLeft>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
+                    onClick={() => router.push("/auth/Register")} /></ColContainerLeft>
+                  <ColContainerRight style={{ marginLeft: "33.3%" }}> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></ColContainerRight>
 
 
                 </Row>

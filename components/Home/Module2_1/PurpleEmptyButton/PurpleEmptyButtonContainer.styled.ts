@@ -35,6 +35,9 @@ width: 240px;
   @media only screen and (max-width: 576px) {
     font-size: 18px;
   }
+  @media only screen and (max-width: 490px) {
+    width: 180px;
+  }
 `
 
 export const Text1 = styled.div `
