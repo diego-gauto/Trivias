@@ -301,8 +301,11 @@ export const AddPay = styled.p`
 `;
 
 export const RewardCenterLink = styled(AddPay)`
-  justify-content: flex-start;
-  margin-left: 25%;
+  justify-content: center;
+  white-space: nowrap;
+  @media (max-width: 350px) {
+    font-size: 12px;
+  }
 `;
 
 export const RewardCenterLinkNoReward = styled(AddPay)``;
@@ -450,6 +453,9 @@ export const RewardData = styled.div`
   }
   @media (max-width: 850px) {
     align-items: center;
+  }
+  @media (max-width: 450px) {
+    padding-inline: 0;
   }
 `;
 export const RewardInfo = styled.div`
