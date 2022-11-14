@@ -113,7 +113,7 @@ const Login = () => {
       window.location.href = redirectURL;
     }
   }
-
+  console.log(isLoading)
   const [showForgot, setShowForgot] = useState(false);
 
   const handleSignUpWithAuthProvider = async (authProvider: string) => {
@@ -129,14 +129,19 @@ const Login = () => {
       setIsLoading(true)
       window.location.href = "/Preview";
     }
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 200);
+    console.log('hola')
     setTimeout(() => {
       setLoginLoader(true)
     }, 500);
 
   }, [isLoading])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 200);
+  }, [])
+
 
   return (
 
