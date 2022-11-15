@@ -179,7 +179,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
             </SeasonContain>
             {lessons?.map((lesson: any, index: any) => {
               return (
-                <VideoContain>
+                <VideoContain key={"lesson " + index}>
                   <ContainVideo>
                     <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
                       <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
