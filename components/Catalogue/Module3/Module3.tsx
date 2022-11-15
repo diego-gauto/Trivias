@@ -80,7 +80,7 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
             <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
               <div style={{ display: "flex" }}>
                 {courses.map((element: any, idx: any) => (
-                  <div className="grey-field" key={idx} onClick={() => { goTo(element) }}>
+                  <div className="grey-field" key={"mod3 " + idx} onClick={() => { goTo(element) }}>
                     < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                       <ImageContent>
                         <Band />

@@ -3,7 +3,7 @@
 import { DocumentData } from "firebase/firestore";
 import { Image, Row } from "react-bootstrap";
 import router from "next/router";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css/scrollbar';
@@ -81,13 +81,16 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       }
     }
   }
+
+
   return (
     <Container fluid style={{
       overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px"
-    }}>
+    }}
+    >
       {(courses.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
-          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content", paddingLeft: 20 }}>
             <ContinueText>
               Continua viendo
             </ContinueText>
@@ -95,7 +98,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
           <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
             <div style={{ display: "flex" }}>
               {courses.map((element: any, idx: any) => (
-                <div key={idx} className="grey-field" onClick={() => { goTo(element) }}>
+                <div key={"Mod2 " + idx} className="grey-field" onClick={() => { goTo(element) }}>
                   < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                     <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                     <Progress style={element.progress == null ? { 'width': 0 } : { 'width': `calc(${element.progress}% - 10px)` }}></Progress>

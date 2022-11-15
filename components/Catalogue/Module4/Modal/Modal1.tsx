@@ -101,6 +101,37 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     }
     return result;
   }
+  var xDown: any = null;
+  var yDown: any = null;
+  document.addEventListener('touchstart', handleTouchStart, false);
+  document.addEventListener('touchmove', handleTouchMove, false);
+  function getTouches(evt: any) {
+    return evt.touches ||             // browser API
+      evt.originalEvent.touches; // jQuery
+  }
+  function handleTouchStart(evt: any) {
+    const firstTouch = getTouches(evt)[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+  };
+  function handleTouchMove(evt: any) {
+    if (!xDown || !yDown) {
+      return;
+    }
+    var xUp = evt.touches[0].clientX;
+    var yUp = evt.touches[0].clientY;
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+    console.log(yDiff)
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+      if (xDiff > 0) {
+      }
+    } else {
+      if (yDiff < -250) {
+        handleClose()
+      }
+    }
+  };
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -181,7 +212,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             </SeasonContain>
             {lessons.map((lesson: any, index: any) => {
               return (
-                <VideoContain>
+                <VideoContain key={"lesson " + index}>
                   <ContainVideo>
                     <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
                       <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>

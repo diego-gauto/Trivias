@@ -104,7 +104,7 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
           <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
             <div style={{ display: "flex" }}>
               {courses.map((element: any, idx: any) => (
-                <div className="grey-field" key={idx} onClick={() => {
+                <div className="grey-field" key={"mod6 " + idx} onClick={() => {
                   handleShow();
                   setCourse(element);
                 }}>
