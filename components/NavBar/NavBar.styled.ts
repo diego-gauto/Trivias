@@ -5,7 +5,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  background-color: white;
+  background-color: #3F1168;
   padding-block: 10px;
   padding-inline: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -18,17 +18,17 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     props.pathname == "/" &&
     css`
       position: fixed;
-      background-color: transparent;
+      background-color: #DAD3E5;
       box-shadow: none;
     `}
   ${(props) =>
     props.color == 1 &&
     css`
-      background-color: white;
+      background-color: #3F1168;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     `}
     @media(max-width: 1023px) {
-    background-color: white;
+    background-color: #3F1168;
     padding-block: 0;
     padding-inline: 0;
   }
@@ -49,20 +49,25 @@ export const Logo = styled.img`
 `;
 export const LogoContain = styled.div`
   display: flex;
+  
   @media (max-width: 1023px) {
     display: none;
   }
 `;
 export const NavText = styled("a")<{ pathname: any; color: any }>`
-  color: black;
+  color: white;
   text-decoration: none;
   font-size: 18px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
   cursor: pointer;
   margin: 0;
   font-weight: 500;
   &:hover {
-    color: black;
+    color: white;
     opacity: 0.6;
     transition: 0.1s ease all;
   }
@@ -74,7 +79,40 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
     props.color == 0 &&
     props.pathname == "/" &&
     css`
+      color: #3F1168;
+      &:hover {
+        color: #3F1168;
+      }
+    `}
+`;
+
+export const ShopDeco = styled("div")<{   color: any }>`
+  color: white;
+  border: 1px solid #3F1168;
+  border-radius: 100px;
+  
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  margin: 0;
+  font-weight: 500;
+  &:hover {
+    color: white;
+    opacity: 0.6;
+    transition: 0.1s ease all;
+  }
+
+  @media (max-width: 1023px) {
+    font-size: 16px;
+  }
+  ${(props) =>
+    props.color == 1 && 
+    css`
       color: white;
+      
+      border: 1px solid white;
       &:hover {
         color: white;
       }

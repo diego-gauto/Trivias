@@ -5,6 +5,7 @@ import styled from "styled-components";
 export const ModuleContainer = styled(Container)`
 height: 100%;  
 margin-bottom: 1%  ;
+padding-top: 90px;
 display: block;
   @media only screen and (max-width: 1280px) {
     top: 125%;
@@ -23,24 +24,24 @@ height: 100%;
 position: absolute;
 display: block;
 background-size: 85%;
-top: 48.5%;
+top: 58.5%;
 left: 0%;
 background-repeat: no-repeat;
 
     @media only screen and (max-width: 1980px) {  
-    top: 45%;
+    top: 55%;
     }
     @media only screen and (max-width: 1720px) {
-      top: 40%;
+      top: 50%;
     }
     @media only screen and (max-width: 1600px) {
-      top: 40%;
+      top: 52%;
     }
     @media only screen and (max-width: 1440px) {
-      top: 32.5%;
+      top: 42.5%;
     }
     @media only screen and (max-width: 1280px) {
-      top: 30%;
+      top: 40%;
     }
 background-position-x: 115%;
   @media only screen and (max-widt|h: 1024px) {
@@ -60,6 +61,7 @@ position: absolute;
 display: block;
 top: 0%;
 left: 0;
+margin-top: 90px;
   @media only screen and (max-widt|h: 1024px) {
     margin: 25px auto;
     padding: 0;
@@ -278,23 +280,28 @@ top: 70px;
 left: 0;
   @media only screen and (max-widt|h: 1024px) {
     margin: 25px auto;
-    padding: 0;
+    padding: 0; 
   }
 
   @media only screen and (max-width: 1024px) {
-    height: 95%;
+    height: 95%; 
   } 
   @media only screen and (max-width: 840px) {
     height: 90%;
+     
   } 
   @media only screen and (max-width: 770px) {
     height: 82%;
+     
   } 
   @media only screen and (max-width: 580px) {
     height: 82%;
+     
   } 
   @media only screen and (max-width: 490px) {
     height: 102.5%;
+    
+    margin-top: 0px;
   } 
 `;
   
