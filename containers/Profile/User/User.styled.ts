@@ -636,7 +636,7 @@ export const InputPhone = styled(PhoneInput)`
     border: none;
     outline: none;
     @media (max-width: 400px) {
-      width: 120px;
+      width: 150px;
       font-size: 14px;
     }
   }
