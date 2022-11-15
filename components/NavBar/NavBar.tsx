@@ -24,6 +24,7 @@ import {
   Points,
   PointsContain,
   PurpleButton,
+  ShopDeco,
   TagsResp,
   UserContain,
   UserImage,
@@ -87,7 +88,7 @@ const NavBar = () => {
   var position = pathname.substring(0, 6);
 
   const ChangeNav = () => {
-    if (['/', ''].includes(pathname) && window.scrollY >= 700) {
+    if (['/', ''].includes(pathname) && window.scrollY >= 900) {
       setColor(1)
     }
     else {
@@ -108,34 +109,48 @@ const NavBar = () => {
           pathname == "/" ?
             <>
               {
-                color == 1 &&
+                color == 0 &&
                 <Link href="/">
-                  <Logo src="/images/Navbar/logo.svg" />
+                  <Logo style={{
+                    width: "auto", height: "66.6%",
+                    paddingTop: "15px", paddingLeft: "70px"
+                  }} src="/images/Navbar/NavbarLogo.png" />
                 </Link>
               }
               {
-                color == 0 &&
+                color == 1 &&
                 <Link href="/">
-                  <Logo src="/images/Navbar/WhiteLogo.svg" />
+                  <Logo style={{
+                    width: "auto", height: "66.6%",
+                    paddingTop: "15px", paddingLeft: "70px"
+                  }} src="/images/Navbar/NavbarLogo2.png" />
                 </Link>
               }
             </>
             :
             <Link href="/">
-              <Logo src="/images/Navbar/logo.svg" />
+              <Logo style={{
+                width: "auto", height: "66.6%",
+                paddingTop: "15px", paddingLeft: "70px"
+              }} src="/images/Navbar/NavbarLogo.png" />
             </Link>
         }
       </LogoContain>
       <NavTags>
         <Link href="/Preview">
+
           <NavText pathname={pathname} color={color} title="Inicio"
             style={pathname == "/Preview" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Inicio
           </NavText>
+
         </Link>
+
+
         <NavText pathname={pathname} color={color} title="Tienda" target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
+
         {
           (loggedIn && isAdmin) &&
           <Link href="/admin/Courses">
@@ -177,11 +192,15 @@ const NavBar = () => {
         {!loggedIn &&
           <>
             <Link href={LOGIN_PATH}>
-              <NavText pathname={pathname} color={color} title="Iniciar Sesion"
-                style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
-              >
-                Iniciar Sesión
-              </NavText>
+
+
+              <ShopDeco color={color}>
+                <NavText pathname={pathname} color={color} title="Iniciar Sesion"
+                  style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
+                >
+                  Iniciar Sesión
+                </NavText>
+              </ShopDeco>
             </Link>
             <Link href="/auth/Register">
               <PurpleButton>
