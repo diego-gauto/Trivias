@@ -127,7 +127,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
       if (xDiff > 0) {
       }
     } else {
-      if (yDiff < -350) {
+      if (yDiff < -300) {
         handleClose()
       }
     }

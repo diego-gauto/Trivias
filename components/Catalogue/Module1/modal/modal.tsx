@@ -136,14 +136,11 @@ const Modal = ({ show, setShow, course, user }: any) => {
         /* down swipe */
         console.log('arriba')
       }
-      if (yDiff < -350) {
+      if (yDiff < -300) {
         /* up swipe */
         handleClose()
       }
     }
-    /* reset values */
-    xDown = null;
-    yDown = null;
   };
 
   return (
