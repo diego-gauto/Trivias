@@ -136,7 +136,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
         /* down swipe */
         console.log('arriba')
       }
-      if (yDiff < -300) {
+      if (yDiff < -250) {
         /* up swipe */
         handleClose()
       }
