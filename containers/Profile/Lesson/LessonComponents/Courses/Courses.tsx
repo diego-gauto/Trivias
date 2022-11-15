@@ -19,6 +19,8 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
 
   useEffect(() => {
     setOpen(menu)
+    console.log(menu);
+
   }, [menu])
 
   const toggleHandler = (index: any) => {
@@ -47,7 +49,9 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
               </Episode>
             </Container>
             <Divider />
-            <CoursesContainer active={selected[index]}>
+            <CoursesContainer active={selected[index]} onClick={() => {
+              setOpen(!open); handleClick(false)
+            }}>
               <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userId} course={course} />
             </CoursesContainer>
           </>
