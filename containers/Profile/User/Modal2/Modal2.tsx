@@ -21,7 +21,7 @@ import {
   Title,
   NewMethod
 } from "./Modal2.styled";
-import { PaypalIcon } from "../User.styled";
+import { LoaderContain, PaypalIcon } from "../User.styled";
 import { IUserDataProps } from "../../../../interfaces/IUserData";
 
 interface props {
@@ -34,6 +34,7 @@ interface props {
 const Modal2 = ({ show, setShow, data, pm }: props) => {
   const handleClose = () => setShow(false);
   const [methods, setMethods] = useState(false);
+  const [loader, setLoader] = useState<any>(false);
   let tempDate = new Date(data.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
   let tempMonth = tempDate.getUTCMonth() + 1;
@@ -42,6 +43,7 @@ const Modal2 = ({ show, setShow, data, pm }: props) => {
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
 
   const updateUserCard = async (card: any) => {
+    setLoader(!loader);
     let info = {
       cardId: card.cardId,
       stripeId: data.stripeId
@@ -49,6 +51,7 @@ const Modal2 = ({ show, setShow, data, pm }: props) => {
     const updateCard = httpsCallable(functions, 'setDefaultPaymentMethod');
     await updateCard(info).then(async (res: any) => {
       updatePaymentMethod(card.cardId, data.id).then(() => {
+        setLoader(!loader);
         window.location.reload();
       })
     })
@@ -96,7 +99,7 @@ const Modal2 = ({ show, setShow, data, pm }: props) => {
             <MemberText>
               Métodos de Pago
             </MemberText>
-            {pm.map((cards: any) => {
+            {!loader && pm.map((cards: any) => {
               return (
                 <PayMethod>
                   <CardInfo>
@@ -105,6 +108,7 @@ const Modal2 = ({ show, setShow, data, pm }: props) => {
                       {cards.brand} terminada en {cards.last4}
                     </CardText>
                   </CardInfo>
+
                   {!cards.default ? <NewMethod onClick={() => {
                     updateUserCard(cards)
                   }}>
@@ -116,6 +120,7 @@ const Modal2 = ({ show, setShow, data, pm }: props) => {
                 </PayMethod>
               )
             })}
+            {loader && <LoaderContain />}
           </PaymentMethod>}
           <ButtonsDiv>
             <PurpleButton onClick={() => {
