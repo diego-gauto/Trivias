@@ -232,6 +232,28 @@ export const VisaPay = styled.i`
     margin-bottom: 15px;
   }
 `;
+export const VisaLogo = styled.i`
+  background-image: url(../images/visa-icon.png);
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 100%;
+  background-position: center;
+`;
+export const MastercardLogo = styled.i`
+  background-image: url(../images/mastercard-icon.png);
+  // background-image: url(../images/amex-icon.png);
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 100%;
+  background-position: center;
+`;
+export const AmexLogo = styled.i`
+  background-image: url(../images/amex-icon.png);
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 100%;
+  background-position: center;
+`;
 export const PayPal = styled.i`
   background-image: url(../images/PaypalPay.png);
   background-repeat: no-repeat;

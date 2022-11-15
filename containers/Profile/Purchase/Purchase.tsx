@@ -73,6 +73,9 @@ import {
   Title,
   TransparentButton,
   VisaPay,
+  VisaLogo,
+  MastercardLogo,
+  AmexLogo,
 } from "./Purchase.styled";
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
@@ -147,13 +150,14 @@ const Purchase = () => {
       if (res[0] == null) {
         res[0] = []
       }
-      else {
-        if (res[0].id == router.query.id) {
-          window.location.href = "/Preview";
-        }
-      }
+      // else {
+      //   if (res[0].id == router.query.id) {
+      //     window.location.href = "/Preview";
+      //   }
+      // }
     })
   }
+
   useEffect(() => {
 
     fetchDB_data();
@@ -382,9 +386,12 @@ const Purchase = () => {
   }
 
   useEffect(() => {
+    console.log(card.number);
+
   }, [card, plan])
+
   useEffect(() => {
-    if (router.query.type == "subscription" && userData?.membership.planName == "Gonvar Plus") {
+    if (router.query.type == "subscription" && userData?.membership.level == 1) {
       window.location.href = "/Preview";
     }
     if (userData !== null) {
@@ -549,11 +556,20 @@ const Purchase = () => {
                         <ContainerCard>
                           <InputText>
                             Número de la Tarjeta
-                            <InputCard mask='9999 9999 9999 9999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
-                              setCard((card: any) => ({ ...card, number: e.target.value }));
+                            <div style={{ display: "flex", alignItems: "centerx" }}>
+                              <InputCard style={{ flexGrow: 1 }} mask='9999 9999 9999 9999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
+                                setCard((card: any) => ({ ...card, number: e.target.value }));
 
-                            }}>
-                            </InputCard>
+                              }}>
+                              </InputCard>
+                              {(card.number.startsWith("49") || card.number.startsWith("44") || card.number.startsWith("47") || card.number.startsWith("42")
+                                || card.number.startsWith("45") || card.number.startsWith("48"))
+                                && <VisaLogo></VisaLogo>}
+                              {(card.number.startsWith("51"))
+                                && <MastercardLogo></MastercardLogo>}
+                              {(card.number.startsWith("34"))
+                                && <AmexLogo></AmexLogo>}
+                            </div>
                           </InputText>
                           <InputText>
                             Nombre
