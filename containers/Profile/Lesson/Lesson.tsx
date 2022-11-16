@@ -30,6 +30,7 @@ const Lesson = () => {
 
 
   useEffect(() => {
+    let date = new Date().getTime() / 1000;
     if (course) {
       let temp_lesson;
       let temp_comments;
@@ -38,7 +39,19 @@ const Lesson = () => {
       temp_lesson.courseId = course.id
       setCurrentLesson(temp_lesson);
       if (userData) {
-        addHistoryCourse(course, userData.id, season, lesson);
+        if (course.courseType == 'Gratis') {
+          addHistoryCourse(course, userData.id, season, lesson);
+        }
+        if (course.courseType == 'Mensual' && userData.membership.finalDate > date) {
+          addHistoryCourse(course, userData.id, season, lesson);
+        }
+        if (course.courseType == 'Producto') {
+          getPaidCourses(userData.id).then((paid: any) => {
+            if (paid.some((x: any) => x.id == course.id && date < x.finalDate)) {
+              addHistoryCourse(course, userData.id, season, lesson);
+            }
+          })
+        }
       }
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
         temp_comments = [...comments].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
@@ -56,16 +69,6 @@ const Lesson = () => {
         setLoggedIn(true)
       } else {
         router.push(LOGIN_PATH)
-        // setLoggedIn(false);
-        // getWholeCourse(id).then((res: any) => {
-        //   if (res.courseType == 'Gratis') {
-        //     setCourse(res);
-        //     setIsLoading(false);
-        //   }
-        //   if (res.courseType == 'Producto' || res.courseType == 'Mensual') {
-        //     router.push(LOGIN_PATH)
-        //   }
-        // })
       }
     }, [])
   } catch (error) {
