@@ -20,7 +20,7 @@ export const BackgroundProfile = styled.div`
     gap: 40px;
     align-items: center;
   }
-  @media (max-height: 776px) {
+  @media (max-height: 881px) {
     height: 100%;
   }
 `;
