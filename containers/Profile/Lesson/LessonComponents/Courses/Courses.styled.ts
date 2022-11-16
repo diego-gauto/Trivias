@@ -4,11 +4,14 @@ export const MainContainer = styled.div<{ open: any }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 100vh;
-  overflow: auto;
   position: absolute;
   right: 20px;
   width: 28%;
+  overflow: auto;
+  max-height: 75vh;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   @media (max-width: 900px) {
     position: fixed;
     z-index: 40;
@@ -28,6 +31,11 @@ export const MainContainer = styled.div<{ open: any }>`
       right: 0 !important;
       transition: 1s ease all;
     `}
+`;
+export const SeasonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 export const CloseButton = styled.div`
   color: #8E2DE2;
@@ -90,16 +98,27 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+
   transition: 1s ease all;
   ${(props) =>
     props.active == true &&
     css`
       height: auto;
-      max-height: 3000px;
+      max-height: 70vh;
       transition: 1s ease all;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 6px;
+        height: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+      ...
+    }
     `}
   ${(props) =>
     props.active == false &&

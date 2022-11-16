@@ -137,7 +137,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
     <>
       {lessons.map((less: any, index: any) => {
         return (
-          <LessonContain>
+          <LessonContain key={"All lesson " + index}>
             {data?.id == less.id && <CurrentCircle>
               <DividerIncomplete />
             </CurrentCircle>

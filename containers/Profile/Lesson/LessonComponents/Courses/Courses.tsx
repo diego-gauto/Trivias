@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { number } from 'yup';
 import CourseProgress from '../Progress/CourseProgress';
-import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton } from './Courses.styled';
+import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
 const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }: any) => {
@@ -38,7 +38,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
       <CourseProgress title={course?.courseTittle} season={season} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />
       {course?.seasons.map((season: any, index: number) => {
         return (
-          <>
+          <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }}>
               <Title>
                 Temporada {index + 1}
@@ -54,7 +54,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
             }}>
               <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userId} course={course} />
             </CoursesContainer>
-          </>
+          </SeasonContainer>
         )
       })}
 
