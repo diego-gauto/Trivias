@@ -10,7 +10,7 @@ import BG2 from "./MediaSources/bgSection1.png";
 import BG3 from "./MediaSources/bgSection1_c1.png";
 import BG4 from "./MediaSources/bgSection1_c2.png";
 import BG5 from "./MediaSources/mobileBG1.png";
-import BG6 from "./MediaSources/mobileBG2.png";
+import Background6 from "./MediaSources/mobileBG2.png";
 import BG7 from "./MediaSources/mujeres_gonvar2.png";
 
 import { useRouter } from "next/router";
@@ -115,7 +115,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
               {/*  <ModuleContainerBGColor_Mobile ></ModuleContainerBGColor_Mobile> */}
 
-              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${BG6.src})`, backgroundSize: "100%" }}>
+              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${Background6.src})`, backgroundSize: "100%" }}>
                 <ModuleContainerBG3alt_Mobile style={{ backgroundImage: `url(${BG5.src})`, backgroundSize: "100%" }}></ModuleContainerBG3alt_Mobile>
                 <ModuleContainerBG1alt_Mobile style={{ backgroundImage: `url(${BG7.src})` }}></ModuleContainerBG1alt_Mobile>
               </ModuleContainerBG2alt_Mobile>
