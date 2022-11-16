@@ -48,6 +48,7 @@ background-position-x: 115%;
     margin: 25px auto;
     padding: 0;
   }
+  
 `;
  
   
@@ -233,7 +234,7 @@ export const ModuleContainer_Mobile = styled(Container)`
 height: 100%;  
 margin-bottom: 0%  ;
 display: none;
- 
+padding-top: 125px;
   @media only screen and (max-width: 1280px) {
     top: 125%;
     margin-bottom: 2.5%  ;
@@ -244,7 +245,22 @@ display: none;
     margin: 25px auto;
     padding: 0;   
     display: block;
-  }
+    
+margin-bottom: 360px;
+  } 
+  
+  @media only screen and (max-width: 840px) { 
+  margin-bottom: 340px;
+  } 
+  @media only screen and (max-width: 770px) {
+    margin-bottom: 280px;
+  } 
+  @media only screen and (max-width: 580px) {
+    margin-bottom: 280px;
+  } 
+  @media only screen and (max-width: 490px) {
+    margin-bottom: 190px;
+  } 
 `;
  
 
@@ -254,17 +270,36 @@ width: 100%;
 height: 45%;
 position: absolute;
 display: block;
-background-size: 85%;
+background-size: 100%; 
 top: 45%; 
 left: 0%;
-background-repeat: no-repeat;
-background-position-x: 115%;
-
-@media only screen and (max-width: 1024px) {
+background-repeat: no-repeat; 
+ 
+  @media only screen and (max-width: 1024px) {
     margin: 25px auto;
     padding: 0;
-    top: 55%;
-  }
+    top: 58%;
+  } 
+  @media only screen and (max-width: 840px) {
+    top: 65%;
+    
+  } 
+  @media only screen and (max-width: 770px) {
+   
+    top: 70%;
+  } 
+  @media only screen and (max-width: 580px) {
+     
+    top: 67%;
+  } 
+  @media only screen and (max-width: 490px) {
+     
+    top: 60%;
+  } 
+  @media only screen and (max-width: 390px) {
+     
+    top: 87%;
+  } 
 `;
  
   
@@ -273,10 +308,11 @@ width: 100%;
 height: 80%;
 background-repeat: no-repeat; 
 position: absolute;
-display: block;
-
+display: block; 
 background-color: #EDE7F2;
 top: 70px;
+
+margin-top: -150px;
 left: 0;
   @media only screen and (max-widt|h: 1024px) {
     margin: 25px auto;
@@ -284,41 +320,80 @@ left: 0;
   }
 
   @media only screen and (max-width: 1024px) {
-    height: 95%; 
+    height: 145%; 
+    
+    margin-top: -150px;
   } 
   @media only screen and (max-width: 840px) {
-    height: 90%;
+    height: 130%;
      
+    margin-top: -110px;
   } 
   @media only screen and (max-width: 770px) {
-    height: 82%;
-     
+    height: 120%;
+    margin-top: -100px;
   } 
   @media only screen and (max-width: 580px) {
-    height: 82%;
+    height: 110%;
+    margin-top: -60px;
      
   } 
   @media only screen and (max-width: 490px) {
-    height: 102.5%;
+    height: 100%;
     
-    margin-top: 0px;
+    margin-top: -42px;
+    
   } 
 `;
   
 
 
   
-export const ColContainerLeft =  styled(Col)` 
+export const ColContainerLeft =  styled(Col)`  
+@media only screen and (max-width: 1024px) {
+  margin-left: -66.6% !important;
+} 
+@media only screen and (max-width: 840px) {
+  margin-left: -33.3% !important;
+} 
+@media only screen and (max-width: 770px) {
+  margin-left: -33.3% !important;
+} 
+@media only screen and (max-width: 580px) { 
+  margin-left: -33.3% !important;
+} 
 @media only screen and (max-width: 490px) {
-  margin-left: 25% !important;
+   margin-left: 33.3% !important;
+  
+} 
+@media only screen and (max-width: 390px) {
+   margin-left: 0% !important;
+  
 } 
   
 `;
 export const ColContainerRight =  styled(Col)` 
-@media only screen and (max-width: 490px) {
-  margin-left: 25% !important;
+ 
+@media only screen and (max-width: 1024px) {
+  margin-left: 100% !important;
 } 
+@media only screen and (max-width: 840px) {
+  margin-left: 66.6% !important;
+} 
+@media only screen and (max-width: 770px) {
+  margin-left: 66.6% !important;
+} 
+@media only screen and (max-width: 580px) { 
+  margin-left: 66.6% !important;
+} 
+@media only screen and (max-width: 490px) {
+  margin-left: 15% !important;
   
+} 
+@media only screen and (max-width: 390px) {
+  margin-left: 0% !important;
+  
+} 
 `;
 
 export const ModuleContainerBGColor_Mobile =  styled.div` 
@@ -328,6 +403,32 @@ position: absolute;
 background-color: #EDE7F2;
   
 `;
+export const ButtonsContainerMobile =  styled.div` 
+display: flex;
+position: relative;
+  
+  
+@media only screen and (max-width: 1024px) {
+  left: 20%;
+} 
+@media only screen and (max-width: 840px) {
+ 
+left: 10%;
+} 
+@media only screen and (max-width: 770px) {
+  
+left: 10%;
+} 
+@media only screen and (max-width: 580px) {
+left: 0%;
+} 
+@media only screen and (max-width: 490px) {
+left: -33.3%;
+} 
+@media only screen and (max-width: 390px) {
+display: contents;
+} 
+`;
   
   
 export const ModuleContainerBG3alt_Mobile =  styled.div` 
@@ -336,7 +437,7 @@ height: 40%;
 background-repeat: no-repeat; 
 position: absolute;
 display: block;
-top: 40%; 
+top: 50%; 
 
 left: 0;
   @media only screen and (max-widt|h: 1024px) {
@@ -346,20 +447,28 @@ left: 0;
 
   
   @media only screen and (max-width: 1024px) {
-    top: 40%; 
+    top: 42.5%; 
+    
+    left: 7.5%;
+    background-size: 85% !important;
   } 
   @media only screen and (max-width: 840px) {
-    top: 40%; 
+    top: 50%;  
   } 
   @media only screen and (max-width: 770px) {
-    top: 37.5%; 
+    top: 55%;  
   } 
   @media only screen and (max-width: 580px) {
-    top: 45%; 
+    top: 52.5%;  
   } 
   @media only screen and (max-width: 490px) {
-    top: 47.5%; 
+    top: 50%;  
   } 
+  
+  @media only screen and (max-width: 390px) {
+    top: 76%;  
+  } 
+  
 `;
   
 
@@ -419,7 +528,7 @@ bottom: 0;
 width: 85%;
  left: -30%;
 margin-top: 30%;
-   
+text-align: center;
   @media only screen and (max-width: 1720px) {
 margin-top: 10%;
  left: -15%; 
@@ -433,9 +542,22 @@ margin-top: 10%;
     margin: 25px auto;
     padding: 0;
     margin-bottom: 52.5%;
+    left: 0%;
+  }
+  @media only screen and (max-width: 840px) {
+  
+    margin-bottom: 42.5%;
+  }
+  @media only screen and (max-width: 770px) {
+    
+    margin-bottom: 42.5%;
+  }
+  @media only screen and (max-width: 580px) {
+   
+    margin-bottom: 42.5%;
   }
   @media only screen and (max-width: 490px) {
- 
+    
     margin-bottom: 42.5%;
   }
 `;

@@ -191,7 +191,7 @@ const NavBar = () => {
             </UserContain>
           </>
         }
-        {loggedIn &&
+        {!loggedIn &&
           <>
             <Link href={LOGIN_PATH}>
 
@@ -214,7 +214,7 @@ const NavBar = () => {
       </NavTags>
       <NavResponsive>
         {
-          loggedIn &&
+          !loggedIn &&
           <>
             <Link href="/">
               <LogoS />
@@ -234,7 +234,7 @@ const NavBar = () => {
           </>
         }
         {
-          !loggedIn &&
+          loggedIn &&
           <>
             <div id="hola" style={{
               display: "flex",

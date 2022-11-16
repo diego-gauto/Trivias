@@ -9,9 +9,12 @@ import BG1 from "./MediaSources/mujeres_gonvar.png";
 import BG2 from "./MediaSources/bgSection1.png";
 import BG3 from "./MediaSources/bgSection1_c1.png";
 import BG4 from "./MediaSources/bgSection1_c2.png";
+import BG5 from "./MediaSources/mobileBG1.png";
+import Background6 from "./MediaSources/mobileBG2.png";
+import BG7 from "./MediaSources/mujeres_gonvar2.png";
 
 import { useRouter } from "next/router";
-import { ColContainerLeft, ColContainerRight, FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile, ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
+import { ButtonsContainerMobile, ColContainerLeft, ColContainerRight, FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile, ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
 import {
   TitleCenter, ModuleContainer,
   LeftImage,
@@ -54,7 +57,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
   return (
     <>
-      <ModuleContainer id="tag1">
+      <ModuleContainer id="webView">
         <FirstSectionContainer >
           <Row >
             <Col style={{ zIndex: "1" }}>
@@ -105,16 +108,16 @@ export const Module2_1 = (props: IModule2_1) => {
         </FirstSectionContainer >
 
       </ModuleContainer >
-      <ModuleContainer_Mobile id="tag2">
+      <ModuleContainer_Mobile id="mobileView">
         <FirstSectionContainer_Mobile >
           <Row>
             <RightImage_Mobile>
 
               {/*  <ModuleContainerBGColor_Mobile ></ModuleContainerBGColor_Mobile> */}
 
-              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${BG3.src})`, backgroundSize: "100%" }}>
-                <ModuleContainerBG3alt_Mobile style={{ backgroundImage: `url(${BG4.src})`, backgroundSize: "100%" }}></ModuleContainerBG3alt_Mobile>
-                <ModuleContainerBG1alt_Mobile style={{ backgroundImage: `url(${BG1.src})` }}></ModuleContainerBG1alt_Mobile>
+              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${Background6.src})`, backgroundSize: "100%" }}>
+                <ModuleContainerBG3alt_Mobile style={{ backgroundImage: `url(${BG5.src})`, backgroundSize: "100%" }}></ModuleContainerBG3alt_Mobile>
+                <ModuleContainerBG1alt_Mobile style={{ backgroundImage: `url(${BG7.src})` }}></ModuleContainerBG1alt_Mobile>
               </ModuleContainerBG2alt_Mobile>
 
 
@@ -122,9 +125,9 @@ export const Module2_1 = (props: IModule2_1) => {
             </RightImage_Mobile>
           </Row>
           <Row >
-            <Col style={{ zIndex: "1" }}>
+            <Col style={{ zIndex: "1", paddingTop: "120px" }}>
 
-              <LeftImage_Mobile   >
+              <LeftImage_Mobile id="textMobile" >
                 <Row xs={12} sm={6} md={6} lg={7}>
                   <TittleContainer_Mobile  >
                     <Tittle_Mobile  >Aprende a aplicar uñas desde cero</Tittle_Mobile>
@@ -141,11 +144,11 @@ export const Module2_1 = (props: IModule2_1) => {
                 </Row>
 
                 <Row xs={12} sm={6} md={6} lg={7}>
-
-                  <ColContainerLeft>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
-                    onClick={() => router.push("/auth/Register")} /></ColContainerLeft>
-                  <ColContainerRight style={{ marginLeft: "33.3%" }}> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></ColContainerRight>
-
+                  <ButtonsContainerMobile>
+                    <ColContainerLeft>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
+                      onClick={() => router.push("/auth/Register")} /></ColContainerLeft>
+                    <ColContainerRight style={{ marginLeft: "33.3%" }}> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></ColContainerRight>
+                  </ButtonsContainerMobile>
 
                 </Row>
 
