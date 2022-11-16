@@ -16,6 +16,7 @@ import {
   Logo,
   LogoContain,
   LogoS,
+  LogoS_2,
   MenuIcon,
   NavContainer,
   NavResponsive,
@@ -26,6 +27,7 @@ import {
   PurpleButton,
   ShopDeco,
   TagsResp,
+  TextA,
   UserContain,
   UserImage,
 } from "./NavBar.styled";
@@ -189,7 +191,7 @@ const NavBar = () => {
             </UserContain>
           </>
         }
-        {!loggedIn &&
+        {loggedIn &&
           <>
             <Link href={LOGIN_PATH}>
 
@@ -212,45 +214,56 @@ const NavBar = () => {
       </NavTags>
       <NavResponsive>
         {
-          !loggedIn &&
+          loggedIn &&
           <>
             <Link href="/">
               <LogoS />
             </Link>
             <TagsResp>
               <Link href={LOGIN_PATH}>
-                <a title="Ingresar">
+                <TextA title="Ingresar">
                   Ingresar
-                </a>
+                </TextA>
               </Link>
               <Link href="/auth/Register">
                 <PurpleButton>
-                  Registrate
+                  Regístrate
                 </PurpleButton>
               </Link>
             </TagsResp>
           </>
         }
         {
-          loggedIn &&
+          !loggedIn &&
           <>
+            <div id="hola" style={{
+              display: "flex",
+              width: "auto",
+              height: "100%",
+              marginLeft: "35px"
+            }}>
+              <div className="hamburger-icon" onClick={() => { setHamburger(!hamburger) }}
+                style={{ zIndex: 2000, paddingTop: "13.5px" }}>
+                <MenuIcon id="hamburger-label">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </MenuIcon>
+              </div>
+
+              <Link href="/">
+                <LogoS_2 />
+              </Link>
+            </div>
+
             <PointsContain>
               < RespLevel />
               <Points>
                 Puntos
               </Points>
             </PointsContain>
-            <Link href="/">
-              <LogoS />
-            </Link>
             {/* <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input> */}
-            <div className="hamburger-icon" onClick={() => { setHamburger(!hamburger) }} style={{ zIndex: 2000 }}>
-              <MenuIcon id="hamburger-label">
-                <span></span>
-                <span></span>
-                <span></span>
-              </MenuIcon>
-            </div>
+
             {
               <>
                 <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>

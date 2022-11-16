@@ -28,10 +28,13 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     `}
     @media(max-width: 1023px) {
-    background-color: #3F1168;
+    background-color: #DAD3E5;
     padding-block: 0;
     padding-inline: 0;
+    padding-top: 60px;
   }
+ 
+  
 `;
 export const NavTags = styled.div`
   display: flex;
@@ -119,21 +122,26 @@ export const ShopDeco = styled("div")<{   color: any }>`
     `}
 `;
 export const PurpleButton = styled.button`
-  background-color: #6717cd;
+  background-color: #942CED;
   color: #fff;
   padding-block: 15px;
   padding-inline: 25px;
-  font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+   
+  font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
   border-radius: 25px;
   border: none;
   &:hover {
-    background-color: #5000b5;
+    background-color: #3F1168;
     transform: scale(1.03);
     transition: 0.5s ease all;
   }
   @media (max-width: 1023px) {
-    padding-block: 10px;
+    padding-block: 7.5px;
   }
   @media (max-width: 450px) {
     padding-block: 8px;
@@ -164,21 +172,45 @@ export const UserImage = styled.i`
 export const LogoS = styled.i`
   background-size: contain;
   background-position: center;
-  background-image: url(../images/Navbar/Logo.svg);
+  background-image: url(../images/Navbar/NavbarLogo.png);
   background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
+  margin-left: 35px;
   cursor: pointer;
+  width: 110px;
+height: 100%
+`;
+export const LogoS_2 = styled.i`
+  background-size: contain;
+  background-position: center;
+  
+  margin-left: 35px;
+  background-image: url(../images/Navbar/NavbarLogo.png);
+  background-repeat: no-repeat; 
+  cursor: pointer;
+  width: 110px;
+height: 100%
+`;
+export const TextA = styled.a`
+color: #3F1168 !important;
+margin-right: 15px;
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
 `;
 export const NavResponsive = styled.div`
+
   z-index: 10;
   display: none;
   align-items: center;
   width: 100%;
   padding-block: 10px;
+  padding-bottom: 25px;
+  padding-right: 40px !important;
   padding-inline: 20px;
   justify-content: space-between;
-  background-color: white;
+  background-color: #DAD3E5;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   @font-face {
     font-family: Montserrat;
@@ -271,12 +303,13 @@ export const MenuIcon = styled.i`
   span {
     height: 5px;
     width: 40px;
-    background-color: #5000b5;
+    background-color: #411369;
     display: block;
     border-radius: 5px;
     margin: 0px 0px 7px 0px;
     transition: 0.7s ease-in-out;
     transform: none;
+    
   }
 `;
 export const Points = styled.p`
@@ -290,6 +323,7 @@ export const Points = styled.p`
 export const PointsContain = styled.div`
   display: flex;
   align-items: center;
+  padding-right: 75px;
   position: relative;
 `;
 export const IconsContain = styled.div`
