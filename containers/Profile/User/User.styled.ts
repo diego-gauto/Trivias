@@ -20,6 +20,9 @@ export const BackgroundProfile = styled.div`
     gap: 40px;
     align-items: center;
   }
+  @media (max-height: 776px) {
+    height: 100%;
+  }
 `;
 export const SecondBox = styled.div`
   display: flex;
@@ -40,7 +43,6 @@ export const ThirdBox = styled.div`
 `;
 export const ProfileContainer = styled.div`
   width: 40%;
-  height: 100%;
   background: white;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
   padding-inline: 40px;
