@@ -30,6 +30,7 @@ import {
   TextInput,
   TextInput_2,
   Title,
+  LoginBackground,
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signInWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
@@ -147,10 +148,18 @@ const Login = () => {
 
     <>
       {!isLoading ? (
-        <Background>
+        <LoginBackground>
+          <div className="left-side">
+            <img className="imgUpperHand" src="../images/mano2.png" alt="" />
+            <p>¡Es un placer <br />
+              <span>tenerte de<br /> vuelta!</span>
+            </p>
+            <img className="imgBottomHand" src="../images/mano1.png" alt="" />
+          </div>
           {
             (showForgot == false && loginLoader) ?
               <LoginBox>
+
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                 >
@@ -247,12 +256,12 @@ const Login = () => {
               </LoaderImage>
           }
 
-          <GradientCanvas id="gradient-canvas" increasedHeight />
+          {/* <GradientCanvas id="gradient-canvas" increasedHeight /> */}
           {
             showForgot == true &&
             <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
           }
-        </Background >
+        </LoginBackground >
 
       ) : (
 
