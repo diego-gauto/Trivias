@@ -244,6 +244,7 @@ export const LessonContain = styled.div`
   padding-inline: 20px;
   @media (max-width: 500px) {
     padding-inline: 10px;
+    gap: 15px;
   }
 `;
 export const SeasonContain = styled.div`
@@ -270,8 +271,10 @@ export const VideoContain = styled.div`
   display: flex;
   gap: 20px;
   @media (max-width: 991px) {
-    flex-direction: column;
-    justify-content: center;
+    gap: 15px;
+  }
+  @media (max-width: 450px) {
+    gap: 8px;
   }
 `;
 export const ModalVideo = styled.div`
@@ -303,12 +306,24 @@ export const EpisodeContain = styled.div`
   video {
     border-radius: 10px;
   }
+  @media (max-width: 1023px) {
+    width: 160px;
+    height: 90px;
+  }
+  @media (max-width: 450px) {
+    width: 110px;
+    height: 70px;
+  }
+`;
+export const ContainerVideo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `;
 export const ContainVideo = styled.div`
   display: flex;
   justify-content: center;
   @media (max-width: 991px) {
-    order: 2;
   }
 `;
 export const EpisodeInfo = styled.div`
@@ -325,19 +340,34 @@ export const EpisodeTitle = styled.p`
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
   margin: 0;
+  @media (max-width: 450px) {
+    font-size: 12px;
+  }
 `;
 export const EpisodeTime = styled.p`
   font-size: 12px;
   color: gray;
   font-family: "Raleway", sans-serif;
   margin: 0;
+  @media (max-width: 450px) {
+    font-size: 10px;
+  }
 `;
 export const Description = styled.p`
   font-size: 14px;
   font-family: "Raleway", sans-serif;
   margin: 0;
-  @media (max-width: 991px) {
+  @media (max-width: 450px) {
     display: none;
+  }
+`;
+export const DescriptionResp = styled.p`
+  font-size: 11px;
+  display: none;
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+  @media (max-width: 450px) {
+    display: flex;
   }
 `;
 export const CardImage = styled.img`

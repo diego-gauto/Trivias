@@ -9,6 +9,7 @@ import {
   BackgroundOverlay,
   ButtonContain,
   Container,
+  ContainerVideo,
   ContainVideo,
   CourseContain,
   Cross,
@@ -16,6 +17,7 @@ import {
   Datacontain,
   DataSpan,
   Description,
+  DescriptionResp,
   EpisodeContain,
   EpisodeInfo,
   EpisodeTime,
@@ -212,26 +214,31 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             </SeasonContain>
             {lessons.map((lesson: any, index: any) => {
               return (
-                <VideoContain key={"lesson " + index}>
-                  <ContainVideo>
-                    <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
-                      <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
-                        <img src={lesson.image} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
-                      </div>
-                    </EpisodeContain>
-                  </ContainVideo>
-                  <EpisodeInfo>
-                    <EpisodeTitle>
-                      {index + 1}: {lesson.title}
-                    </EpisodeTitle>
-                    <EpisodeTime>
-                      {hms(lesson.duration)}
-                    </EpisodeTime>
-                    <Description>
-                      {lesson.about}
-                    </Description>
-                  </EpisodeInfo>
-                </VideoContain>
+                <ContainerVideo>
+                  <VideoContain key={"lesson " + index}>
+                    <ContainVideo>
+                      <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
+                        <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
+                          <img src={lesson.image} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                        </div>
+                      </EpisodeContain>
+                    </ContainVideo>
+                    <EpisodeInfo>
+                      <EpisodeTitle>
+                        {index + 1}: {lesson.title}
+                      </EpisodeTitle>
+                      <EpisodeTime>
+                        {hms(lesson.duration)}
+                      </EpisodeTime>
+                      <Description>
+                        {lesson.about}
+                      </Description>
+                    </EpisodeInfo>
+                  </VideoContain>
+                  <DescriptionResp>
+                    {lesson.about}
+                  </DescriptionResp>
+                </ContainerVideo>
               )
             })}
           </LessonContain>
