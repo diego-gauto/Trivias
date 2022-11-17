@@ -158,98 +158,149 @@ const Login = () => {
           </div>
           {
             (showForgot == false && loginLoader) ?
-              <LoginBox>
-
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <ProfilePicture />
+              <div className="right-side">
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <Title>
-                    Iniciar Sesión
+                    Inicia sesión
                   </Title>
-                  <Box1>
-                    <Text2>
-                      Correo electrónico
-                    </Text2>
-                    <TextInput
-                      type="text"
-                      placeholder="correo@correo.com"
-                      className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                      {...register("email")}
-                    />
-                    <div className="invalid-feedback">
-                      {errors.email?.message}
+                  <div className="box">
+                    <div className="form-row">
+                      <div className="form-input">
+                        <label>Correo electrónico</label>
+                        <input
+                          type="text"
+                          placeholder="correo@correo.com"
+                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                          {...register("email")}
+                        />
+                      </div>
                     </div>
-
-                  </Box1>
-                  <Box2>
-                    <Text2>
-                      Contraseña
-                    </Text2>
-                    <PasswordBox>
-
-                      <div>
-                        <TextInput_2
-                          type={passwordShown_1 ? "text" : "password"}
+                    <div className="form-row">
+                      <div className="form-input">
+                        <label>Contraseña</label>
+                        <input type={passwordShown_1 ? "text" : "password"}
                           placeholder="Contraseña"
                           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                          {...register("password")}
-                        />
-                        <div style={{ 'cursor': 'pointer' }}
+                          {...register("password")} />
+                        <div className="eye"
                           onClick={togglePassword_1}
                         >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                       </div>
-                      <div className="invalid-feedback">
-                        {errors.password?.message}
-                      </div>
-
-                    </PasswordBox>
-
-                  </Box2>
-                  {error && <Error>
-                    {errorMsg}
-                  </Error>}
-                  <AllButtons>
-                    <PurpleButton2 type='submit'>
-                      Acceder
-                    </PurpleButton2>
-                  </AllButtons>
-
+                    </div>
+                  </div>
+                  <PurpleButton2 type='submit'>
+                    Ingresar
+                  </PurpleButton2>
+                  <div className="social-media-container">
+                    <div className="info">
+                      <p>O regístrate usando <br />
+                        tu cuenta de <span>Google</span> <br />
+                        o de <span>Facebook</span>
+                      </p>
+                    </div>
+                    <div className="socials">
+                      <img src="../images/googleLogin.png" onClick={() => {
+                        handleSignUpWithAuthProvider("Google");
+                      }} alt="" />
+                      <img src="../images/facebookLogin.png" onClick={() => {
+                        handleSignUpWithAuthProvider("Facebook");
+                      }} alt="" />
+                    </div>
+                    <p className="terms">Al registrarte, aceptas los <span>términos, <br />
+                      condiciones y políticas de Gonvar</span></p>
+                  </div>
                 </form>
+              </div>
+              // <LoginBox>
 
-                <AllButtons>
+              //   <form
+              //     onSubmit={handleSubmit(onSubmit)}
+              //   >
+              //     <ProfilePicture />
+              //     <Title>
+              //       Iniciar Sesión
+              //     </Title>
+              //     <Box1>
+              //       <Text2>
+              //         Correo electrónico
+              //       </Text2>
+              //       <TextInput
+              //         type="text"
+              //         placeholder="correo@correo.com"
+              //         className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              //         {...register("email")}
+              //       />
+              //       <div className="invalid-feedback">
+              //         {errors.email?.message}
+              //       </div>
+              //     </Box1>
+              //     <Box2>
+              //       <Text2>
+              //         Contraseña
+              //       </Text2>
+              //       <PasswordBox>
+              //         <div>
+              //           <TextInput_2
+              //             type={passwordShown_1 ? "text" : "password"}
+              //             placeholder="Contraseña"
+              //             className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+              //             {...register("password")}
+              //           />
+              //           <div style={{ 'cursor': 'pointer' }}
+              //             onClick={togglePassword_1}
+              //           >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+              //         </div>
+              //         <div className="invalid-feedback">
+              //           {errors.password?.message}
+              //         </div>
 
-                  <GoogleButton onClick={() => {
-                    handleSignUpWithAuthProvider("Google");
-                  }}
-                  >
-                    <GoogleIcon></GoogleIcon>
-                    Acceder con Google
-                  </GoogleButton>
-                  <FacebookButton
-                    onClick={() => {
-                      handleSignUpWithAuthProvider("Facebook");
-                    }}
-                  >
-                    <FacebookIcon></FacebookIcon>
-                    Acceder con Facebook
-                  </FacebookButton>
-                </AllButtons>
-                <Text3>
-                  ¿Olvidaste tu contraseña? &nbsp;
-                  <LinkText onClick={() => { setShowForgot(true) }} >
-                    Clic aqui
-                  </LinkText>
-                </Text3>
-                <Text3>
-                  ¿Es tu primera vez con nosotros? &nbsp;
-                  <Link href="/auth/Register">
-                    <LinkText>
-                      Registrate
-                    </LinkText>
-                  </Link>
-                </Text3>
-              </LoginBox>
+              //       </PasswordBox>
+
+              //     </Box2>
+              //     {error && <Error>
+              //       {errorMsg}
+              //     </Error>}
+              //     <AllButtons>
+              //       <PurpleButton2 type='submit'>
+              //         Acceder
+              //       </PurpleButton2>
+              //     </AllButtons>
+
+              //   </form>
+
+              //   <AllButtons>
+
+              //     <GoogleButton onClick={() => {
+              //       handleSignUpWithAuthProvider("Google");
+              //     }}
+              //     >
+              //       <GoogleIcon></GoogleIcon>
+              //       Acceder con Google
+              //     </GoogleButton>
+              //     <FacebookButton
+              //       onClick={() => {
+              //         handleSignUpWithAuthProvider("Facebook");
+              //       }}
+              //     >
+              //       <FacebookIcon></FacebookIcon>
+              //       Acceder con Facebook
+              //     </FacebookButton>
+              //   </AllButtons>
+              //   <Text3>
+              //     ¿Olvidaste tu contraseña? &nbsp;
+              //     <LinkText onClick={() => { setShowForgot(true) }} >
+              //       Clic aqui
+              //     </LinkText>
+              //   </Text3>
+              //   <Text3>
+              //     ¿Es tu primera vez con nosotros? &nbsp;
+              //     <Link href="/auth/Register">
+              //       <LinkText>
+              //         Registrate
+              //       </LinkText>
+              //     </Link>
+              //   </Text3>
+              // </LoginBox>
               :
               <LoaderImage>
                 <LoaderContain />

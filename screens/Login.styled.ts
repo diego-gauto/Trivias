@@ -169,6 +169,7 @@ export const LoginBackground = styled.div`
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
   .left-side {
+    order: 1;
     position: relative;
     background-color: #e096e2;
     width: 60%;
@@ -200,7 +201,10 @@ export const LoginBackground = styled.div`
   }
   .right-side {
     width: 40%;
-    background-color: #dcb7f1;
+    background-color: #e096e2;
+    position: relative;
+    order: 2;
+    backdrop-filter: blur(10px);
     form {
       max-width: 400px;
       margin: auto;
