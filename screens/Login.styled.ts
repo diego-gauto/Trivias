@@ -2,6 +2,218 @@ import PhoneInput from "react-phone-number-input";
 
 import styled, { keyframes } from "styled-components";
 
+/**** new style ****/
+export const BackgroundLoader = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+`;
+export const Background = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  .left-side {
+    position: relative;
+    background-color: #d4a2f1;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    p {
+      padding-block: 40px;
+      font-size: 60px;
+      color: #3f1168;
+      font-weight: 700;
+      line-height: 60px;
+      span {
+        color: #942ced;
+      }
+    }
+    img {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  .right-side {
+    width: 40%;
+    background-color: #dcb7f1;
+    form {
+      max-width: 400px;
+      margin: auto;
+      height: 100%;
+      display: flex;
+      padding-block: 40px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      p,
+      h1 {
+        margin: 0;
+      }
+      .sub-section {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        width: 100%;
+        .subtitle {
+          color: #3f1168;
+          font-size: 21px;
+          font-weight: 500;
+        }
+        .login {
+          color: #942ced;
+          cursor: pointer;
+          font-size: 21px;
+          font-weight: 700;
+        }
+      }
+      .box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .form-row {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 100%;
+          gap: 20px;
+          .form-input {
+            flex-grow: 1;
+            position: relative;
+            .eye {
+              cursor: pointer;
+              position: absolute;
+              bottom: 8px;
+              right: 15px;
+            }
+            label {
+              color: #3f1168;
+              font-size: 21px;
+              font-weight: 700;
+              font-family: Montserrat, sans-serif;
+              margin-bottom: 5px;
+            }
+            input {
+              background: transparent;
+              border: 1px solid #942ced;
+              border-radius: 20px;
+              color: #3f1168;
+              padding-left: 25px;
+              &::placeholder {
+                color: #6611c2;
+              }
+              &:focus {
+                background: transparent;
+              }
+            }
+          }
+        }
+      }
+      .social-media-container {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 20px;
+        justify-content: center;
+        width: 100%;
+        .info {
+          width: 50%;
+          padding-right: 10px;
+          border-right: 1.5px solid #3f1168;
+          p {
+            color: #3f1168;
+            font-size: 18px;
+            line-height: initial;
+            span {
+              font-weight: bold;
+            }
+          }
+        }
+        .socials {
+          display: flex;
+          width: 50%;
+          align-items: center;
+          gap: 20px;
+          padding-left: 20px;
+          img {
+            cursor: pointer;
+            width: 50px;
+            height: fit-content;
+          }
+        }
+        .terms {
+          font-size: 14px;
+          color: #74549e;
+          line-height: initial;
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const Title = styled.h1`
+  font-family: Montserrat;
+  color: #402466;
+  font-size: 35px;
+  @media (max-width: 670px) {
+    font-size: 30px;
+  }
+`;
+
+export const InputPhone = styled(PhoneInput)`
+  flex: 1 1;
+  height: 40px;
+  background: transparent;
+  opacity: 0.8;
+  border-radius: 30px;
+  border: 1px solid #942ced;
+  input {
+    border: none !important;
+  }
+  .PhoneInputInput {
+    padding-left: 30px;
+    border: none;
+    outline: none;
+    color: #fff;
+    min-width: 255px;
+    background: transparent;
+    @media (max-width: 420px) {
+      min-width: 80%;
+    }
+    @media (max-width: 360px) {
+      min-width: 77%;
+    }
+    @media (max-width: 330px) {
+      min-width: 75%;
+    }
+  }
+  .PhoneInputCountry {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    left: 20px;
+    margin-right: var(--PhoneInputCountrySelect-marginRight);
+    .PhoneInputCountrySelectArrow {
+      color: #942ced;
+      opacity: unset;
+    }
+  }
+  @media (max-width: 670px) {
+    font-size: 12px;
+  }
+`;
+
 export const ProfilePicture = styled.i`
   background-image: url(../images/DefaultIcon.png);
   height: 106px;
@@ -32,26 +244,6 @@ export const AnimatedBackground = styled.video`
   top: 0;
   z-index: -2;
   margin-left: -80px;
-`;
-
-export const Background = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 90vh;
-
-  @font-face {
-    font-family: Montserrat;
-    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
-  }
-  @font-face {
-    font-family: Raleway;
-    src: url(../fonts/Raleway-VariableFont_wght.ttf);
-  }
-  @media (max-width: 760px) {
-    padding: 15px;
-  }
 `;
 export const Body = styled.div`
   display: flex;
@@ -149,19 +341,6 @@ export const LoginBox2 = styled.div`
     padding-inline: 30px;
   }
 `;
-
-export const Title = styled.h1`
-  font-family: Montserrat;
-  color: #fff;
-  font-style: normal;
-  font-size: 36px;
-  text-align: center;
-  font-family: Montserrat;
-  @media (max-width: 670px) {
-    font-size: 30px;
-  }
-`;
-
 export const Box1 = styled.div`
   display: flex;
   flex-direction: column;
@@ -256,42 +435,7 @@ export const TextInput_2 = styled.input`
     color: #fff;
   }
 `;
-export const InputPhone = styled(PhoneInput)`
-  flex: 1 1;
-  height: 40px;
-  background: transparent;
-  opacity: 0.8;
-  border-radius: 30px;
-  border: 1px solid white;
-  .PhoneInputInput {
-    padding-left: 30px;
-    border: none;
-    outline: none;
-    color: #fff;
-    min-width: 255px;
-    background: transparent;
-    @media (max-width: 420px) {
-      min-width: 80%;
-    }
-    @media (max-width: 360px) {
-      min-width: 77%;
-    }
-    @media (max-width: 330px) {
-      min-width: 75%;
-    }
-  }
-  .PhoneInputCountry {
-    position: relative;
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    left: 20px;
-    margin-right: var(--PhoneInputCountrySelect-marginRight);
-  }
-  @media (max-width: 670px) {
-    font-size: 12px;
-  }
-`;
+
 export const ArchiveInput = styled.input`
   color: #fff;
   outline: none;
@@ -312,11 +456,14 @@ export const ArchiveInput = styled.input`
   }
 `;
 export const PurpleButton2 = styled.button`
-  background-color: #6717cd;
+  background-color: #942ced;
   color: #fff;
-  height: 50px;
+  font-size: 16px;
+  padding: 5px 20px;
   border-radius: 30px;
   border: none;
+  font-weight: 700;
+  font-family: Montserrat, sans-serif;
   &:hover {
     background-color: #5000b5;
     transform: scale(1.03);

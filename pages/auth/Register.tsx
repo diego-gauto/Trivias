@@ -36,6 +36,7 @@ import {
   TextInput,
   TextInput_2,
   Title,
+  BackgroundLoader,
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds } from "../../store/actions/AuthActions";
 import { fetchSignInMethodsForEmail } from "firebase/auth";
@@ -88,6 +89,7 @@ const Register = () => {
   const togglePassword_2 = () => {
     setPasswordShown_2(!passwordShown_2);
   };
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -125,6 +127,7 @@ const Register = () => {
 
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
+    setIsLoading(true)
     let tempMonth = false;
     let tempPhoneInput = phoneInput;
     if (trial) {
@@ -146,39 +149,138 @@ const Register = () => {
       },
     };
     const redirectURL = await signUpCreds(signUpData);
-    console.log(redirectURL)
     if (redirectURL == "/auth/RegisterPastUser") {
       setErrorMsg('El correo ingresado ya existe!');
       setError(true);
       setIsLoading(false);
     }
     else {
-      setIsLoading(true)
       signUpWithCreds(signUpData).then(() => {
         window.location.href = "/Purchase?type=subscription";
       });
     }
   }
+
   useEffect(() => {
     if (loggedIn) {
-      setIsLoading(true)
       window.location.href = "/Preview";
+    } else {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
     }
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 200);
-    setTimeout(() => {
-      setRegisterLoad(true)
-    }, 500);
-  }, [isLoading])
+  }, [loggedIn])
 
 
   return (
     <>
       {!isLoading ? (
-
         <Background>
-          {
+          <div className="left-side">
+            <p>¡Te damos la bienvenida <br />
+              <span>a nuestra comunidad!</span>
+            </p>
+            <img src="../images/personasRegister.png" alt="" />
+          </div>
+          <div className="right-side">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Title>
+                Regístrate
+              </Title>
+              <div className="sub-section">
+                <p className="subtitle">¿Ya tienes una cuenta?</p>
+                <Link href={LOGIN_PATH}>
+                  <p className="login">Inicia sesión</p>
+                </Link>
+              </div>
+              <div className="box">
+                <div className="form-row">
+                  <div className="form-input">
+                    <label>Nombre</label>
+                    <input type="text"
+                      placeholder="Mariana"
+                      className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                      {...register("name")} />
+                  </div>
+                  <div className="form-input">
+                    <label>Apellido</label>
+                    <input type="text"
+                      placeholder="Gómez"
+                      className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
+                      {...register("lastName")} />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-input">
+                    <label>Correo electrónico</label>
+                    <input type="text"
+                      placeholder="correo@dominio.com"
+                      className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                      {...register("email")} />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-input">
+                    <label>Contraseña</label>
+                    <input type={passwordShown_1 ? "text" : "password"}
+                      placeholder="Crea una contraseña"
+                      className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                      {...register("password")} />
+                    <div className="eye"
+                      onClick={togglePassword_1}
+                    >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-input">
+                    <label>Confirmar Contraseña</label>
+                    <input type={passwordShown_2 ? "text" : "password"}
+                      placeholder="Confirma la contraseña"
+                      className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                      {...register("confirmPassword")} />
+                    <div className="eye"
+                      onClick={togglePassword_2}
+                    >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-input">
+                    <label>WhatsApp</label>
+                    <InputPhone
+                      onChange={(e: any) => { setPhoneInput(e) }}
+                      limitMaxLength={true}
+                      international={true}
+                      countryCallingCodeEditable={false}
+                      defaultCountry="MX"
+                      id="input_1"
+                    />
+                  </div>
+                </div>
+              </div>
+              <PurpleButton2 type='submit'>
+                Crear Cuenta
+              </PurpleButton2>
+              <div className="social-media-container">
+                <div className="info">
+                  <p>O regístrate usando <br />
+                    tu cuenta de <span>Google</span> <br />
+                    o de <span>Facebook</span>
+                  </p>
+                </div>
+                <div className="socials">
+                  <img src="../images/googleLogin.png" onClick={() => {
+                    handleSignUpWithAuthProvider("Google");
+                  }} alt="" />
+                  <img src="../images/facebookLogin.png" onClick={() => {
+                    handleSignUpWithAuthProvider("Facebook");
+                  }} alt="" />
+                </div>
+                <p className="terms">Al registrarte, aceptas los <span>términos, <br />
+                  condiciones y políticas de Gonvar</span></p>
+              </div>
+            </form>
+          </div>
+          {/* {
             registerLoad ?
               <LoginBox>
                 <form
@@ -331,17 +433,15 @@ const Register = () => {
               <LoaderImage>
                 <LoaderContain />
               </LoaderImage>
-          }
-
-          <GradientCanvas id="gradient-canvas" />
+          } */}
         </Background >
 
       ) : (
-        <Background>
+        <BackgroundLoader>
           <LoaderImage>
             <LoaderContain />
           </LoaderImage>
-        </Background>
+        </BackgroundLoader>
       )}
     </>
 
