@@ -190,7 +190,7 @@ export const LoginBackground = styled.div`
       position: absolute;
       width: 600px;
       top: -70px;
-      right: -50px;
+      right: -120px;
     }
     .imgBottomHand {
       position: absolute;
@@ -201,10 +201,9 @@ export const LoginBackground = styled.div`
   }
   .right-side {
     width: 40%;
-    background-color: #e096e2;
+    background-color: rgba(206, 91, 196, 0.5);
     position: relative;
     order: 2;
-    backdrop-filter: blur(10px);
     form {
       max-width: 400px;
       margin: auto;
@@ -215,6 +214,26 @@ export const LoginBackground = styled.div`
       align-items: center;
       justify-content: center;
       gap: 30px;
+      .title-contain {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .subtext {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .first-sub {
+          color: #402466;
+        }
+        .second-sub {
+          color: #9731ec;
+        }
+        p {
+          text-align: center;
+          font-weight: bold;
+        }
+      }
       p,
       h1 {
         margin: 0;
@@ -240,6 +259,7 @@ export const LoginBackground = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
+        width: 90%;
         .form-row {
           display: flex;
           align-items: baseline;
@@ -285,13 +305,14 @@ export const LoginBackground = styled.div`
         justify-content: center;
         width: 100%;
         .info {
-          width: 50%;
+          width: 55%;
           padding-right: 10px;
           border-right: 1.5px solid #3f1168;
           p {
             color: #3f1168;
             font-size: 18px;
             line-height: initial;
+            white-space: nowrap;
             span {
               font-weight: bold;
             }
@@ -299,7 +320,7 @@ export const LoginBackground = styled.div`
         }
         .socials {
           display: flex;
-          width: 50%;
+          width: 45%;
           align-items: center;
           gap: 20px;
           padding-left: 20px;
@@ -324,9 +345,11 @@ export const LoginBackground = styled.div`
 
 export const Title = styled.h1`
   font-family: Montserrat;
-  color: #402466;
+  color: #401269;
   font-size: 35px;
-  @media (max-width: 670px) {
+  font-weight: bold;
+  text-align: center;
+  font @media (max-width: 670px) {
     font-size: 30px;
   }
 `;
@@ -617,7 +640,7 @@ export const ArchiveInput = styled.input`
   }
 `;
 export const PurpleButton2 = styled.button`
-  background-color: #942ced;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #fff;
   font-size: 16px;
   padding: 5px 20px;

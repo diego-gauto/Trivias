@@ -160,9 +160,19 @@ const Login = () => {
             (showForgot == false && loginLoader) ?
               <div className="right-side">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Title>
-                    Inicia sesión
-                  </Title>
+                  <div className="title-contain">
+                    <Title>
+                      Inicia sesión
+                    </Title>
+                    <div className="subtext">
+                      <p className="first-sub">
+                        ¡Te damos la bienvenida a <br />nuestra nueva plataforma!
+                      </p>
+                      <p className="second-sub">
+                        Siempre estamos mejorando para ti.
+                      </p>
+                    </div>
+                  </div>
                   <div className="box">
                     <div className="form-row">
                       <div className="form-input">
@@ -193,7 +203,7 @@ const Login = () => {
                   </PurpleButton2>
                   <div className="social-media-container">
                     <div className="info">
-                      <p>O regístrate usando <br />
+                      <p>O inicia sesión usando <br />
                         tu cuenta de <span>Google</span> <br />
                         o de <span>Facebook</span>
                       </p>
@@ -206,7 +216,7 @@ const Login = () => {
                         handleSignUpWithAuthProvider("Facebook");
                       }} alt="" />
                     </div>
-                    <p className="terms">Al registrarte, aceptas los <span>términos, <br />
+                    <p className="terms">Al iniciar sesión, aceptas los <span>términos, <br />
                       condiciones y políticas de Gonvar</span></p>
                   </div>
                 </form>
