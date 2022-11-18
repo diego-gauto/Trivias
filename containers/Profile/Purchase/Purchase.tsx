@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Col, Form, Row } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
+import InputMask from "react-input-mask";
 
 import { collection, DocumentData, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
@@ -11,7 +12,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { Background, BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { updateCoupon } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
@@ -89,7 +90,7 @@ const Purchase = () => {
   const [payment, setPayment] = useState(false);
   const [cardInfo, setCardInfo] = useState(false);
   const [process, setProcess] = useState(true);
-  const [paypal, setPaypal] = useState(true);
+  const [paypal, setPaypal] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
   const [coupon, setCoupon] = useState<any>();
@@ -108,6 +109,7 @@ const Purchase = () => {
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -386,7 +388,7 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    console.log(card.number);
+    console.log(card);
 
   }, [card, plan])
 
@@ -398,18 +400,179 @@ const Purchase = () => {
       getUserCourses(userData.id);
     }
   }, [isLoading])
+
   return (
     <>
-      {isLoading ? <Background>
+      {isLoading ? <BackgroundLoader>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
-      </Background> :
+      </BackgroundLoader> :
         <Container>
-          <Title>
-            Proceso de Pago
-          </Title>
-          <PayBox>
+          <div className="purchase-container">
+            <div className="left-section">
+              <Title>
+                ¡Empieza de inmediato <br />
+                <span>a impulsar tu aprendizaje!</span>
+              </Title>
+              <p>Únete a miles de personas que ya eligieron <br />
+                elevar la calidad de sus servicios de belleza <br />
+                <span>sin descuidar sus compromisos ni sus familias.</span>
+              </p>
+              <p className="title">Ya puedes realizar tu compra, <span>Mariana</span></p>
+              <div className="payment-methods">
+                <div className="stripe">
+                  <div className="option">
+                    <input type="radio" checked={cardInfo} onClick={() => {
+                      setPayment(false),
+                        setCardInfo(!cardInfo),
+                        setPlan({ method: 'stripe' })
+                    }} />
+                    <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
+                  </div>
+                  <div className="option">
+                    <input type="radio" checked={payment} onClick={() => {
+                      setPayment(!payment),
+                        setCardInfo(false),
+                        setPlan({ method: 'stripe' })
+                    }} />
+                    <p>Pagaré con <span>tarjetas guardadas</span></p>
+                  </div>
+                  <div className="form-row">
+                    <label>Número de tarjeta</label>
+                    <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
+                      setCard((card: any) => ({ ...card, number: e.target.value }));
+                    }} />
+                    <div className="form-row">
+                      <label>Nombre</label>
+                      <input type="text" placeholder="Nombre del Propietario" onChange={(e) => {
+                        setCard((card: any) => ({ ...card, holder: e.target.value }));
+                      }} />
+                    </div>
+                  </div>
+                  <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                    <div className="form-row">
+                      <label>Fecha de expiración</label>
+                      <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                        <select className="short" onChange={(e) => {
+                          setCard((card: any) => ({ ...card, exp_month: e.target.value }));
+                        }}>
+                          <option value="">Mes</option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                        <select className="short" onChange={(e) => {
+                          setCard((card: any) => ({ ...card, exp_year: e.target.value }));
+                        }}>
+                          <option value="">Año</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                          <option value="31">31</option>
+                          <option value="32">32</option>
+                          <option value="33">33</option>
+                          <option value="34">34</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <label>CVV</label>
+                      <input className="short" type="password" placeholder="∗∗∗" maxLength={4} onChange={(e) => {
+                        setCard((card: any) => ({ ...card, cvc: e.target.value }));
+                      }} />
+                    </div>
+                  </div>
+                  <button onClick={handleConfirm}>Confirmar compra</button>
+                </div>
+                <div className="paypal">
+                  {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                    "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
+                    currency: "MXN",
+                    'vault': true,
+                  }}
+                  >
+                    {type == 'subscription' && <PayPalButtons
+                      style={{
+                        color: "blue",
+                        layout: 'horizontal',
+                        shape: 'pill',
+                        height: 50,
+
+                      }}
+                      createSubscription={(data, actions) => {
+                        return actions.subscription.create({
+                          plan_id: 'P-6P515571TU0367642MMDGG4Y'
+                        })
+                      }}
+                      onApprove={(data: any, actions) => {
+                        let today = new Date().getTime() / 1000;
+                        let finalDate = 0;
+                        finalDate = today + 2629800;
+                        updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title, method: "paypal" }, userData.id).then(() => {
+                          setConfirmation(false);
+                          setPay(true);
+                        })
+                        return data
+                      }}
+                    />}
+                    {type == 'course' && <PayPalButtons
+                      style={{
+                        color: "blue",
+                        layout: 'horizontal',
+                        shape: 'pill',
+                        height: 50,
+                      }}
+                      createOrder={(data, actions) => {
+                        let price = product.price
+                        if (coupon) {
+                          if (coupon.type == 'amount') {
+                            price = price - coupon.discount;
+                          } else {
+                            price = (price - (coupon.discount / 100) * price)
+                          }
+                        }
+                        return actions.order.create({
+
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: price,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions: any) => {
+                        return actions.order.capture().then((details: any) => {
+                          FinishPayment()
+                        });
+                      }}
+                    />}
+                  </PayPalScriptProvider>}
+                </div>
+              </div>
+            </div>
+            <div className="right-section">
+
+            </div>
+          </div>
+          {/* <PayBox>
             <DataPayment>
               {
                 process == true
@@ -597,37 +760,6 @@ const Purchase = () => {
                               }} />
                             </InputText>
                           </div>
-
-                          {/* <Row>
-                            <RowCard>
-                              <Col md={4}>
-                                <Form.Group>
-                                  <Form.Label font>Fecha de expiración</Form.Label>
-                                  <Form.Control type="text" placeholder="MM" onChange={(e) => {
-                                    setCard((card: any) => ({ ...card, exp_month: e.target.value }));
-                                  }} />
-                                </Form.Group>
-                              </Col>
-                              <Col md={4}>
-                                <Form.Group>
-                                  <Form.Label>&nbsp;</Form.Label>
-                                  <Form.Control type="text" placeholder="YYYY" maxLength={4} onChange={(e) => {
-                                    setCard((card: any) => ({ ...card, exp_year: e.target.value }));
-                                  }} />
-                                </Form.Group>
-                              </Col>
-                            </RowCard>
-                            <RowCard>
-                              <Col md={4}>
-                                <Form.Group>
-                                  <Form.Label>CVV</Form.Label>
-                                  <Form.Control type="text" placeholder="123" maxLength={3} onChange={(e) => {
-                                    setCard((card: any) => ({ ...card, cvc: e.target.value }));
-                                  }} />
-                                </Form.Group>
-                              </Col>
-                            </RowCard>
-                          </Row> */}
                           <BotContainer>
                             <Text>
                               <AlertIcon />
@@ -830,8 +962,8 @@ const Purchase = () => {
                 </>
               }
             </SubContainer>
-          </PayBox>
-          <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} />
+          </PayBox> */}
+          {/* <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} /> */}
         </Container>}
     </>
   )

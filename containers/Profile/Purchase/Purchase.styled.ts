@@ -4,23 +4,120 @@ import InputMask from "react-input-mask";
 import Image from "next/image";
 import styled, { css, keyframes } from "styled-components";
 
+/*** ReDo screen styles */
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 25px;
-  background-color: white;
+  background-color: #ede7f2;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-block: 10px;
+  min-height: 100vh;
   padding-inline: 60px;
+  padding-block: 40px;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face {
-    font-family: Raleway;
-    src: url(../fonts/Raleway-VariableFont_wght.ttf);
+  p {
+    color: #3f1168;
+    font-size: 24px;
+    margin: 0;
+    span {
+      color: #d244d1;
+      font-weight: bold;
+    }
+  }
+  label {
+    color: #3f1168;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .title {
+      font-size: 40px;
+      font-weight: bold;
+      color: #3f1168;
+      span {
+        color: #d244d1;
+      }
+    }
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: auto;
+      .stripe {
+        border: 2px solid #cdc7d8;
+        padding-block: 20px;
+        padding-inline: 40px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        input[type="radio"] {
+          accent-color: #9900ed;
+          width: 25px;
+          height: 20px;
+        }
+
+        .option {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          p {
+            span {
+              color: #3f1168 !important;
+              font-weight: bold;
+            }
+          }
+        }
+
+        .form-row {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          input {
+            border: 1px solid #942ced;
+            outline: none;
+            background: none;
+            border-radius: 20px;
+            padding-inline: 10px;
+            font-size: 20px;
+            color: #942ced;
+            &::placeholder {
+              color: #942ced;
+            }
+            &:focus {
+              border: 2px solid #3f1168;
+            }
+          }
+          .short {
+            border: 1px solid #942ced;
+            padding-inline: 10px;
+            font-size: 20px;
+            color: #942ced;
+            outline: none;
+            width: 90px;
+            height: 34px;
+            background: none;
+            border-radius: 20px;
+          }
+        }
+
+        button {
+          background: #942ced;
+          border: 1px solid black;
+          border-radius: 20px;
+          color: white;
+          font-weight: bold;
+          margin: auto;
+          margin-top: 10px;
+          padding: 5px 20px;
+        }
+      }
+    }
   }
   @media (max-width: 1023px) {
     padding-inline: 20px;
@@ -28,13 +125,19 @@ export const Container = styled.div`
 `;
 export const Title = styled.h1`
   font-family: "Montserrat", sans-serif;
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 60px;
+  font-weight: 700;
+  color: #3f1168;
+  line-height: 60px;
+  span {
+    color: #942ced;
+  }
   margin: 0;
   @media (max-width: 1023px) {
     display: none;
   }
 `;
+
 export const PayBox = styled.div`
   display: flex;
   align-items: center;

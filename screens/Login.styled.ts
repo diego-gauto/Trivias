@@ -38,7 +38,7 @@ export const Background = styled.div`
       position: absolute;
       width: 100%;
       bottom: 0;
-      right: 0;
+      right: -10%;
     }
   }
   .right-side {
@@ -102,16 +102,19 @@ export const Background = styled.div`
               margin-bottom: 5px;
             }
             input {
-              background: transparent;
+              background: rgb(218 211 229 / 40%);
               border: 1px solid #942ced;
               border-radius: 20px;
               color: #3f1168;
+              font-size: 19px;
+              font-weight: 700;
               padding-left: 25px;
+              &:valid {
+                background-color: #dad4e6;
+              }
               &::placeholder {
                 color: #6611c2;
-              }
-              &:focus {
-                background: transparent;
+                font-weight: 400;
               }
             }
           }
@@ -334,8 +337,14 @@ export const InputPhone = styled(PhoneInput)`
   opacity: 0.8;
   border-radius: 30px;
   border: 1px solid #942ced;
+  background: rgb(218 211 229 / 40%);
   input {
+    background: none !important;
     border: none !important;
+    &::placeholder {
+      color: #6611c2;
+      font-weight: 400 !important;
+    }
   }
   .PhoneInputInput {
     padding-left: 30px;

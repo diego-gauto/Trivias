@@ -114,3 +114,6 @@ h1,th{
 .scroll-container::-webkit-scrollbar {
   display: none;
 }
+.paypal-button.paypal-button-shape-pill{
+    background: #009CDE;
+}

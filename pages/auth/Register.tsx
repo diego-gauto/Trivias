@@ -198,6 +198,7 @@ const Register = () => {
                   <div className="form-input">
                     <label>Nombre</label>
                     <input type="text"
+                      required
                       placeholder="Mariana"
                       className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                       {...register("name")} />
@@ -205,6 +206,7 @@ const Register = () => {
                   <div className="form-input">
                     <label>Apellido</label>
                     <input type="text"
+                      required
                       placeholder="Gómez"
                       className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                       {...register("lastName")} />
@@ -214,6 +216,7 @@ const Register = () => {
                   <div className="form-input">
                     <label>Correo electrónico</label>
                     <input type="text"
+                      required
                       placeholder="correo@dominio.com"
                       className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                       {...register("email")} />
@@ -224,6 +227,7 @@ const Register = () => {
                     <label>Contraseña</label>
                     <input type={passwordShown_1 ? "text" : "password"}
                       placeholder="Crea una contraseña"
+                      required
                       className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                       {...register("password")} />
                     <div className="eye"
@@ -236,6 +240,7 @@ const Register = () => {
                     <label>Confirmar Contraseña</label>
                     <input type={passwordShown_2 ? "text" : "password"}
                       placeholder="Confirma la contraseña"
+                      required
                       className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
                       {...register("confirmPassword")} />
                     <div className="eye"

@@ -9,7 +9,7 @@ import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { Background, BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getPaymentmethods } from "../../../store/actions/PaymentActions";
 import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
 import {
@@ -176,11 +176,11 @@ const User = () => {
   }
   if (loading) {
     return (
-      <Background>
+      <BackgroundLoader>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
-      </Background>
+      </BackgroundLoader>
     )
   }
   return (
