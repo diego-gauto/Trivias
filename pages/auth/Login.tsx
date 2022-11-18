@@ -176,8 +176,9 @@ const Login = () => {
                   <div className="box">
                     <div className="form-row">
                       <div className="form-input">
-                        <label>Correo electrónico</label>
+                        <label>Correo <span>electrónico</span></label>
                         <input
+                          required
                           type="text"
                           placeholder="correo@correo.com"
                           className={`form-control ${errors.email ? 'is-invalid' : ''}`}
@@ -188,7 +189,9 @@ const Login = () => {
                     <div className="form-row">
                       <div className="form-input">
                         <label>Contraseña</label>
-                        <input type={passwordShown_1 ? "text" : "password"}
+                        <input
+                          required
+                          type={passwordShown_1 ? "text" : "password"}
                           placeholder="Contraseña"
                           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                           {...register("password")} />

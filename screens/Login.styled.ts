@@ -110,7 +110,7 @@ export const Background = styled.div`
               font-weight: 700;
               padding-left: 25px;
               &:valid {
-                background-color: #dad4e6;
+                background-color: #ebe1f0;
               }
               &::placeholder {
                 color: #6611c2;
@@ -285,17 +285,25 @@ export const LoginBackground = styled.div`
               font-family: Montserrat, sans-serif;
               margin-bottom: 5px;
             }
+            span {
+              font-weight: 400;
+            }
             input {
-              background: transparent;
+              background: #e7c9eb;
               border: 1px solid #942ced;
               border-radius: 20px;
               color: #3f1168;
               padding-left: 25px;
+              font-weight: bold;
+              &:valid {
+                background-color: #ebe1f0;
+              }
               &::placeholder {
                 color: #6611c2;
+                font-weight: 400;
               }
               &:focus {
-                background: transparent;
+                background: #ebe1f0;
               }
             }
           }
