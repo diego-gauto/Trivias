@@ -342,7 +342,6 @@ export const LoginBackground = styled.div`
     }
   }
 `;
-
 export const Title = styled.h1`
   font-family: Montserrat;
   color: #401269;

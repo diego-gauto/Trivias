@@ -326,11 +326,11 @@ const Login = () => {
 
       ) : (
 
-        <Background>
+        <LoginBackground style={{ justifyContent: "center", alignItems: "center" }}>
           <LoaderImage>
             <LoaderContain />
           </LoaderImage>
-        </Background>
+        </LoginBackground>
       )}
 
     </>
