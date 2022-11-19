@@ -70,7 +70,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
           <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
-                Cursos disponibles - test02
+                Cursos disponibles
               </Title>
             </div>
             <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
