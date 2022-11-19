@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { Col, Form, Row } from "react-bootstrap";
-import { FaCheck } from "react-icons/fa";
 import InputMask from "react-input-mask";
 
 import { collection, DocumentData, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import router, { useRouter } from "next/router";
+import { FaCheck, FaArrowRight } from 'react-icons/fa';
+import { AiFillLock } from 'react-icons/ai';
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
@@ -87,6 +88,7 @@ const Purchase = () => {
   const [loggedIn, setLoggedIn] = useState<any>(false);
   const [userData, setUserData] = useState<any>(null);
   const [show, setShow] = useState(false);
+  const [step2, setStep2] = useState(false);
   const [payment, setPayment] = useState(false);
   const [cardInfo, setCardInfo] = useState(false);
   const [process, setProcess] = useState(true);
@@ -411,15 +413,39 @@ const Purchase = () => {
         <Container>
           <div className="purchase-container">
             <div className="left-section">
-              <Title>
-                ¡Empieza de inmediato <br />
-                <span>a impulsar tu aprendizaje!</span>
-              </Title>
-              <p>Únete a miles de personas que ya eligieron <br />
-                elevar la calidad de sus servicios de belleza <br />
-                <span>sin descuidar sus compromisos ni sus familias.</span>
-              </p>
-              <p className="title">Ya puedes realizar tu compra, <span>Mariana</span></p>
+              <div className="steps">
+                <div className="circle">
+                  <FaCheck style={{ color: "white" }}></FaCheck>
+                </div>
+                <div className="line" style={{ backgroundColor: step2 ? '#9900ed' : 'none', border: step2 ? "none" : "" }}></div>
+                {step2 ? <div className="circle">
+                  <FaCheck style={{ color: "white" }}></FaCheck>
+                </div> :
+                  <div className="circle-no-fill">
+                  </div>}
+                <div className="left-info">
+                  <p>Paso 1</p>
+                  <div className="rect"></div>
+                  <p className="lower">Configuración <br />
+                    de la cuenta</p>
+                </div>
+                <div className="right-info">
+                  <p>Paso 2</p>
+                  <div className="rect"></div>
+                  <p className="lower">Proceso <br />
+                    de pago</p>
+                </div>
+              </div>
+              <p className="title">Ya puedes realizar tu compra, <span>Mariana!</span></p>
+              <div className="security-info">
+                <div className="top">
+                  <AiFillLock></AiFillLock>
+                  <p>Pago <span>100% seguro</span></p>
+                </div>
+                <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
+                  Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
+              </div>
+              <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
                 <div className="stripe">
                   <div className="option">
@@ -569,7 +595,37 @@ const Purchase = () => {
               </div>
             </div>
             <div className="right-section">
-
+              <div className="box">
+                <p className="title">¿Qué estás adquiriendo?</p>
+                <p className="subtitle">PRODUCTOS</p>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
+                  <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p>
+                </div>
+                <div className="info">
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
+                    Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
+                    stamping, uñas exprés, 3D <span>y muchos más.</span></p>
+                  <img src="../images/purchase/chica_banner.png" alt="" />
+                </div>
+                <div className="coupon-container">
+                  <img src="../images/purchase/coupon.png" alt="" />
+                  <a>Haz click aquí</a>
+                  <p>si cuentas con un <br />
+                    código de descuento.</p>
+                  <div className="coupon">
+                    <input type="text" placeholder="gonvarbuenfin22" />
+                    <button><FaArrowRight style={{ color: "white" }}></FaArrowRight></button>
+                  </div>
+                  <div className="line"></div>
+                </div>
+                <div className="price-container">
+                  <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
+                  <p className="total">$ 149 <span>MXN</span></p>
+                </div>
+                <div className="bg"></div>
+                <img className="image" src="../images/purchase/neworange.png" alt="" />
+              </div>
             </div>
           </div>
           {/* <PayBox>
