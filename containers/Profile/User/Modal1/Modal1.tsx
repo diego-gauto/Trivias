@@ -88,6 +88,7 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
   useEffect(() => {
     if (show) {
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       Object.keys(card).forEach(key => {
         card[key] = '';
       });
