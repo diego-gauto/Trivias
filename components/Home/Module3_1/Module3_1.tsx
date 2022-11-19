@@ -23,8 +23,24 @@ import {
   Subtittle_1,
   Subtittle_2,
   Tittle,
-  UlElement
+  UlElement,
+
+
+  ColorContainerMobile,
+  Column_1Mobile,
+  Column_2Mobile,
+  Column_3Mobile,
+  LiElementMobile,
+  ListTextMobile,
+  ModuleContainerMobile,
+  ModuleContainerBG1Mobile,
+  ModuleContainerBG2Mobile,
+  Subtittle_1Mobile,
+  Subtittle_2Mobile,
+  TittleMobile,
+  UlElementMobile,
 } from "./Module3_1.styled";
+import { ModuleContainer_Mobile } from "../Module2_1/Module2_1.styled";
 
 // TODO: Borrar componente cuando esté lista la landing page (queda depreciado con el nuevo: CourseModule)
 export const Module3_1 = (props: IModule3) => {
@@ -39,8 +55,8 @@ export const Module3_1 = (props: IModule3) => {
   return (
 
     <>
-      <ModuleContainer>
-        <ColorContainer id="colorBg">
+      <ModuleContainer id="webView">
+        <ColorContainer>
           <Row>
             <Col>
               <Column_1>
@@ -86,6 +102,54 @@ export const Module3_1 = (props: IModule3) => {
           </Row>
         </ColorContainer>
       </ModuleContainer >
+
+      <ModuleContainerMobile id="mobileView">
+        <ColorContainerMobile>
+          <Row>
+            <Col>
+              <Column_1Mobile>
+                <UlElementMobile >
+                  <LiElementMobile>
+                    <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon1.src})`, backgroundSize: "100%" }} />
+                    <ListTextMobile><Subtittle_1Mobile>Aprendizaje </Subtittle_1Mobile> <Subtittle_2Mobile> 24/7</Subtittle_2Mobile></ListTextMobile>
+                  </LiElementMobile>
+                  <LiElementMobile>
+                    <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon2.src})`, backgroundSize: "75%", backgroundPositionX: "7.5px" }} />
+                    <ListTextMobile><Subtittle_1Mobile> Reconocimiento y </Subtittle_1Mobile> <Subtittle_2Mobile> certicados</Subtittle_2Mobile></ListTextMobile>
+                  </LiElementMobile>
+                  <LiElementMobile>
+                    <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon3.src})`, backgroundSize: "100%" }} />
+                    <ListTextMobile><Subtittle_1Mobile>Revision de prácticas</Subtittle_1Mobile></ListTextMobile>
+                  </LiElementMobile>
+                </UlElementMobile>
+              </Column_1Mobile>
+            </Col>
+            <Col>
+              <Column_2Mobile><TittleMobile>¿Qué te ofrece Gonvar?</TittleMobile></Column_2Mobile>
+              <ModuleContainerBG2Mobile style={{ backgroundImage: `url(${Hand.src})`, backgroundSize: "contain" }} />
+
+            </Col>
+            <Col>
+              <Column_3Mobile>
+                <UlElementMobile >
+                  <LiElementMobile>
+                    <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon4.src})`, backgroundSize: "100%" }} />
+                    <ListTextMobile><Subtittle_1Mobile> Asesorías </Subtittle_1Mobile><Subtittle_2Mobile> ilimitadas</Subtittle_2Mobile></ListTextMobile>
+                  </LiElementMobile>
+                  <LiElementMobile>
+                    <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon5.src})`, backgroundSize: "100%" }} />
+                    <ListTextMobile><Subtittle_1Mobile> Niveles básicos y avanzados</Subtittle_1Mobile></ListTextMobile>
+                  </LiElementMobile>
+                  <LiElementMobile>
+                    <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon6.src})`, backgroundSize: "100%" }} />
+                    <ListTextMobile><Subtittle_1Mobile>Intructores </Subtittle_1Mobile> <Subtittle_2Mobile> internacionales </Subtittle_2Mobile></ListTextMobile>
+                  </LiElementMobile>
+                </UlElementMobile>
+              </Column_3Mobile>
+            </Col>
+          </Row>
+        </ColorContainerMobile>
+      </ModuleContainerMobile >
     </>
 
   )
