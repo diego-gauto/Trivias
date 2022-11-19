@@ -176,18 +176,21 @@ const NavBar = () => {
                   {userData ? userData.name : "Bienvenido"}
                 </NavText>
               </Link>
-              {userData && userData.photoURL ?
-                < UserImage
-                  style={{
-                    backgroundImage: "url(" + userData.photoURL + ")"
-                    , backgroundSize: "100%"
-                  }}
-                />
-                :
-                < UserImage style={{
-                  backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                }} />
-              }
+              <Link href="/Profile">
+                {userData && userData.photoURL ?
+
+                  < UserImage
+                    style={{
+                      backgroundImage: "url(" + userData.photoURL + ")"
+                      , backgroundSize: "100%"
+                    }}
+                  />
+                  :
+                  < UserImage style={{
+                    backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                  }} />
+                }
+              </Link>
             </UserContain>
           </>
         }

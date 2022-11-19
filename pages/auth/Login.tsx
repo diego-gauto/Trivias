@@ -1,43 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-import Link from "next/link";
 import * as yup from "yup";
-
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
+import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../firebase/firebaseConfig";
 import {
-  AllButtons,
-  Background,
-  Error,
-  Box1,
-  Box2,
-  EyeIcon,
-  FacebookButton,
-  FacebookIcon,
-  GoogleButton,
-  GoogleIcon,
-  LinkText,
   LoaderContain,
   LoaderImage,
-  LoginBox,
-  PasswordBox,
-  ProfilePicture,
   PurpleButton2,
-  Text2,
-  Text3,
-  TextInput,
-  TextInput_2,
   Title,
   LoginBackground,
 } from "../../screens/Login.styled";
-import { accessWithAuthProvider, signInWithCreds } from "../../store/actions/AuthActions";
+import { accessWithAuthProvider, getPastUser, signInWithCreds, signUpWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../hooks/useAuth";
-
+import { IMembership } from "../../store/types/AuthActionTypes";
+import { IStripeUserData } from "../../interfaces/IStripeUserData";
 const formSchema = yup.object().shape({
+  pastUSerScreen: yup.boolean(),
   email: yup
     .string()
     .email("Debe ser un email válido")
@@ -45,11 +27,18 @@ const formSchema = yup.object().shape({
   password: yup.string()
     .required('Password is required')
     .min(6, 'La contraseña debe tener al menos 6 carácteres'),
+  confirmPassword: yup
+    .string()
+    .when('pastUserScreen', {
+      is: true,
+      then: yup.string()
+    })
+    .oneOf([yup.ref("password"), null], "La contraseña no coincide"),
 });
-
 type FormValues = {
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
 const Login = () => {
@@ -58,9 +47,19 @@ const Login = () => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [passwordShown_1, setPasswordShown_1] = useState(false);
+  const [passwordShown_2, setPasswordShown_2] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [pastUserScreen, setPastUserScreen] = useState(false);
+  const [pastUser, setPastUser] = useState<any>({})
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
+  };
+  const togglePassword_2 = () => {
+    setPasswordShown_2(!passwordShown_2);
+  };
+  const toggleConfirmPassword = () => {
+    setConfirmPassword(!confirmPassword);
   };
   try {
     var userDataAuth = useAuth();
@@ -92,6 +91,7 @@ const Login = () => {
       },
     };
     const redirectURL = await signInWithCreds(signUpData);
+    console.log(redirectURL)
     if (redirectURL == 'auth/user-not-found') {
       setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
       setError(true);
@@ -111,10 +111,41 @@ const Login = () => {
       window.location.href = redirectURL;
     }
     if (redirectURL == "/auth/RegisterPastUser") {
-      window.location.href = redirectURL;
+      setPastUserScreen(true);
+      getPastUser(formData.email).then((res) => {
+        setPastUser(res[0]);
+      }).then(() => { setIsLoading(false); })
     }
   }
-  console.log(isLoading)
+  const onSubmit2: SubmitHandler<FormValues> = async formData => {
+    setIsLoading(true)
+    const getStripeUserData = httpsCallable<{ customerEmail: string }, IStripeUserData | null>(functions, "getStripeUserData");
+    const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
+    const signUpData: { credentials: object; membership?: IMembership } = {
+      credentials: {
+        name: pastUser.firstName,
+        lastName: pastUser.lastName,
+        email: pastUser.email,
+        password: formData.password,
+        phoneInput: "+52" + pastUser.whatsapp,
+      },
+    };
+    if (!!stripeUserData) {
+      signUpData.membership = {
+        finalDate: stripeUserData.current_period_end,
+        level: 1,
+        method: MEMBERSHIP_METHOD_DEFAULT,
+        paymentMethod: stripeUserData.paymentMethods.map((pm) => pm.id),
+        // @ts-expect-error
+        planId: stripeUserData.plan.id,
+        planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
+        startDate: stripeUserData.current_period_start,
+      }
+    }
+
+    const redirectURL = await signUpWithCreds(signUpData, stripeUserData?.paymentMethods);
+    window.location.href = redirectURL;
+  }
   const [showForgot, setShowForgot] = useState(false);
 
   const handleSignUpWithAuthProvider = async (authProvider: string) => {
@@ -130,7 +161,6 @@ const Login = () => {
       setIsLoading(true)
       window.location.href = "/Preview";
     }
-    console.log('hola')
     setTimeout(() => {
       setLoginLoader(true)
     }, 500);
@@ -159,7 +189,11 @@ const Login = () => {
           {
             (showForgot == false && loginLoader) ?
               <div className="right-side">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={
+                  !pastUserScreen ?
+                    handleSubmit(onSubmit)
+                    : handleSubmit(onSubmit2)
+                }>
                   <div className="title-contain">
                     <Title>
                       Inicia sesión
@@ -173,37 +207,106 @@ const Login = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="box">
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label>Correo electrónico</label>
-                        <input
-                          type="text"
-                          placeholder="correo@correo.com"
-                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                          {...register("email")}
-                        />
+                  {
+                    !pastUserScreen ?
+                      <div className="box">
+                        <div className="form-row">
+                          <div className="form-input">
+                            <label>Correo <span>electrónico</span></label>
+                            <input
+                              required
+                              type="text"
+                              placeholder="correo@correo.com"
+                              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                              {...register("email")}
+                            />
+                          </div>
+                        </div>
+                        <div className="form-row">
+                          <div className="form-input">
+                            <label>Contraseña</label>
+                            <input
+                              required
+                              type={passwordShown_1 ? "text" : "password"}
+                              placeholder="Contraseña"
+                              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                              {...register("password")} />
+                            <div className="eye"
+                              onClick={togglePassword_1}
+                            >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                          </div>
+                          <div className="invalid-feedback">
+                            {errors.password?.message}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label>Contraseña</label>
-                        <input type={passwordShown_1 ? "text" : "password"}
-                          placeholder="Contraseña"
-                          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                          {...register("password")} />
-                        <div className="eye"
-                          onClick={togglePassword_1}
-                        >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                      :
+                      <div className="box">
+                        <div className="form-row">
+                          <div className="form-input">
+                            <label>Correo <span>electrónico</span></label>
+                            <input
+                              required
+                              type="text"
+                              value={pastUser.email}
+                              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                              {...register("email")}
+                            />
+                          </div>
+                        </div>
+                        <div className="line"></div>
+                        <p className="first-paragraph">
+                          Vemos que ya eres parte de <br />la comunidad de Gonvar.
+                        </p>
+                        <p className="second-paragraph">
+                          Para acceder a tu contenido debes crear una contraseña.
+                          <span>
+                            &nbsp; Puedes usar la misma de antes<br /> o pensar en una nueva.
+                          </span>
+                        </p>
+                        <div className="form-row">
+                          <div className="form-input">
+                            <label style={{ fontWeight: 400 }}>Contraseña</label>
+                            <input
+                              required
+                              type={passwordShown_2 ? "text" : "password"}
+                              placeholder="Contraseña"
+                              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                              {...register("password")} />
+                            <div className="eye"
+                              onClick={togglePassword_2}
+                            >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                          </div>
+
+                        </div>
+                        <div className="invalid-feedback" style={{ display: "block" }}>
+                          {errors.password?.message}
+                        </div>
+                        <div className="form-row">
+                          <div className="form-input">
+                            <label>Confirmar <span>Contraseña</span></label>
+                            <input
+                              required
+                              type={confirmPassword ? "text" : "password"}
+                              placeholder="Contraseña"
+                              className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                              {...register("confirmPassword")} />
+                            <div className="eye"
+                              onClick={toggleConfirmPassword}
+                            >{confirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                          </div>
+                        </div>
+                        <div className="invalid-feedback" style={{ display: "block" }}>
+                          {errors.confirmPassword?.message}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                  }
                   <PurpleButton2 type='submit'>
                     Ingresar
                   </PurpleButton2>
                   <div className="social-media-container">
                     <div className="info">
-                      <p>O inicia sesión usando <br />
+                      <p style={{ textAlign: "end" }}>O inicia sesión usando <br />
                         tu cuenta de <span>Google</span> <br />
                         o de <span>Facebook</span>
                       </p>
