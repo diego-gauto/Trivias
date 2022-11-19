@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { GonvarPlusModule } from "../components/Home/GonvarPlusModule/GonvarPlusModule";
 import { Module2 } from "../components/Home/Module2/Module2";
 import { Module2_1 } from "../components/Home/Module2_1/Module2_1";
+import { Module3_1 } from "../components/Home/Module3_1/Module3_1";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
 import { Module5 } from "../components/Home/Module5/Module5";
 import { Module6 } from "../components/Home/Module6/Module6";
@@ -79,6 +80,7 @@ const Homepage = () => {
         margin: "0 auto"
       }}>
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
+      <Module3_1 />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule />
       {courses &&
