@@ -75,7 +75,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
         </>
       }
       <AddPay onClick={handleShow}>
-        Añadir método de pago -test
+        Añadir método de pago
       </AddPay>
       <Modal1 show={show} setShow={setShow} data={data} handleClick={handleClick} />
     </ProfilePayment>

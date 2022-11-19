@@ -31,6 +31,7 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
   const handleClose = () => {
     setShow(false);
+    document.body.style.position = "relative";
   }
 
   const [card, setCard] = useState<any>({
@@ -74,7 +75,7 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
           await attach(newCard).then((res) => {
             setLoader(false);
             handleClick(true);
-            setShow(false);
+            handleClose();
           })
         }
       })
