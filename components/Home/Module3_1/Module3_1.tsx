@@ -9,6 +9,7 @@ import Icon3 from "./MediaSources/Icon3.png";
 import Icon4 from "./MediaSources/Icon4.png";
 import Icon5 from "./MediaSources/Icon5.png";
 import Icon6 from "./MediaSources/Icon6.png";
+import Hand from "./MediaSources/Hand.png";
 import {
   ColorContainer,
   Column_1,
@@ -18,6 +19,7 @@ import {
   ListText,
   ModuleContainer,
   ModuleContainerBG1,
+  ModuleContainerBG2,
   Subtittle_1,
   Subtittle_2,
   Tittle,
@@ -38,7 +40,7 @@ export const Module3_1 = (props: IModule3) => {
 
     <>
       <ModuleContainer>
-        <ColorContainer>
+        <ColorContainer id="colorBg">
           <Row>
             <Col>
               <Column_1>
@@ -60,6 +62,8 @@ export const Module3_1 = (props: IModule3) => {
             </Col>
             <Col>
               <Column_2><Tittle>¿Qué te ofrece Gonvar?</Tittle></Column_2>
+              <ModuleContainerBG2 style={{ backgroundImage: `url(${Hand.src})`, backgroundSize: "contain" }} />
+
             </Col>
             <Col>
               <Column_3>

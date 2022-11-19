@@ -41,7 +41,7 @@ background-repeat: no-repeat;
       top: 42.5%;
     }
     @media only screen and (max-width: 1280px) {
-      top: 40%;
+      top: 45%;
     }
 background-position-x: 115%;
   @media only screen and (max-widt|h: 1024px) {
