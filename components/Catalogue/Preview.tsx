@@ -85,9 +85,15 @@ const Preview = () => {
     fetchDB_data()
   }, [loggedIn])
 
-  window.addEventListener("resize", () => {
-    setInnerWidth(window.innerWidth)
-  });
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      console.log('test')
+      setInnerWidth(window.innerWidth)
+    });
+  }, [window.innerWidth])
+
+
+
   return (
     <>
       <PreviewContain>

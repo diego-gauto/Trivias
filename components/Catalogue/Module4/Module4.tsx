@@ -70,7 +70,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
           <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
-                Cursos disponibles - prueba
+                Cursos disponibles - test01
               </Title>
             </div>
             <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
@@ -82,7 +82,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                   }}>
                     < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                       <SlideModuleContainer>
-                        <img src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
+                        <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                       </SlideModuleContainer>
                     </SlideModuleContainer>
                   </div>
