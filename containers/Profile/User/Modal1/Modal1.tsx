@@ -29,7 +29,10 @@ import { LoaderContain } from "../User.styled";
 const Modal1 = ({ show, setShow, data, handleClick }: any) => {
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  }
+
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -84,6 +87,7 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
 
   useEffect(() => {
     if (show) {
+      document.body.style.overflow = "hidden";
       Object.keys(card).forEach(key => {
         card[key] = '';
       });
