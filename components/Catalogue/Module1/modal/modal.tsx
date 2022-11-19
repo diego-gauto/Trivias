@@ -124,7 +124,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
 
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
-    console.log(yDiff)
     if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
       if (xDiff > 0) {
         /* right swipe */
@@ -134,7 +133,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
     } else {
       if (yDiff > 0) {
         /* down swipe */
-        console.log('arriba')
       }
       if (yDiff < -250) {
         /* up swipe */
