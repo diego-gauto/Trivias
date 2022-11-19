@@ -82,7 +82,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                   }}>
                     < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                       <SlideModuleContainer>
-                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
+                        <img src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                       </SlideModuleContainer>
                     </SlideModuleContainer>
                   </div>
