@@ -266,3 +266,12 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
       throw error;
     });
 }
+export const getPastUser = async (email: string) => {
+  const usersRef = query(collection(db, "pastUsers"), where("email", "==", email))
+  let tempUsers: any = [];
+  const data = await getDocs(usersRef);
+  data.forEach((user) => {
+    tempUsers.push({ ...user.data(), id: user.id });
+  })
+  return tempUsers
+}

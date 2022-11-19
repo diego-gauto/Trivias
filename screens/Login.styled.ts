@@ -130,6 +130,7 @@ export const Background = styled.div`
           width: 50%;
           padding-right: 10px;
           border-right: 1.5px solid #3f1168;
+
           p {
             color: #3f1168;
             font-size: 18px;
@@ -191,7 +192,7 @@ export const LoginBackground = styled.div`
     }
     .imgUpperHand {
       position: absolute;
-      width: 600px;
+      width: 700px;
       top: -70px;
       right: -120px;
     }
@@ -217,6 +218,10 @@ export const LoginBackground = styled.div`
       align-items: center;
       justify-content: center;
       gap: 30px;
+      .line {
+        width: 100%;
+        border-bottom: 2px solid #734390;
+      }
       .title-contain {
         display: flex;
         flex-direction: column;
@@ -234,6 +239,21 @@ export const LoginBackground = styled.div`
         }
         p {
           text-align: center;
+          font-weight: bold;
+        }
+      }
+      .first-paragraph {
+        color: #9731ec;
+        font-weight: bold;
+        text-align: center;
+        font-size: 14px;
+      }
+      .second-paragraph {
+        color: #402466;
+        text-align: center;
+        font-size: 14px;
+
+        span {
           font-weight: bold;
         }
       }
@@ -297,6 +317,7 @@ export const LoginBackground = styled.div`
               font-weight: bold;
               &:valid {
                 background-color: #ebe1f0;
+                color: #402466;
               }
               &::placeholder {
                 color: #6611c2;
@@ -356,7 +377,7 @@ export const LoginBackground = styled.div`
 export const Title = styled.h1`
   font-family: Montserrat;
   color: #401269;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   font @media (max-width: 670px) {
