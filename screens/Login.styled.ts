@@ -83,8 +83,19 @@ export const Background = styled.div`
           display: flex;
           align-items: baseline;
           justify-content: space-between;
+          position: relative;
           width: 100%;
           gap: 20px;
+          .error {
+            color: red;
+            position: absolute;
+            transform: translateX(50%);
+            bottom: -20px;
+            right: 50%;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: bold;
+          }
           .form-input {
             flex-grow: 1;
             position: relative;

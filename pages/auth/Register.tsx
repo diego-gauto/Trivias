@@ -41,6 +41,7 @@ import {
 import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds } from "../../store/actions/AuthActions";
 import { fetchSignInMethodsForEmail } from "firebase/auth";
 import { useAuth } from "../../hooks/useAuth";
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -78,9 +79,12 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [errorPhone, setErrorPhone] = useState<boolean>(false);
+  const [errorPhoneMsg, setErrorPhoneMsg] = useState<string>("");
   const [registerLoad, setRegisterLoad] = useState(false);
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [phoneValidation, setPhoneValidation] = useState(false);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -124,41 +128,86 @@ const Register = () => {
     });
   };
 
-
-
+  const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
+  console.log(phoneCode)
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
-    let tempMonth = false;
-    let tempPhoneInput = phoneInput;
-    if (trial) {
-      tempMonth = true;
-    }
-    var input = document.getElementById("input_1") as HTMLInputElement;
-    if (!tempPhoneInput) {
-      tempPhoneInput = ""
-    }
-    // 2592000
-    let signUpData = {
-      credentials: {
-        name: formData.name,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-        phoneInput: tempPhoneInput,
-        month: tempMonth
-      },
-    };
-    const redirectURL = await signUpCreds(signUpData);
-    if (redirectURL == "/auth/RegisterPastUser") {
-      setErrorMsg('El correo ingresado ya existe!');
-      setError(true);
-      setIsLoading(false);
+    if (phoneCode == '+52') {
+      if (isValidPhoneNumber(phoneInput)) {
+        console.log('se logro')
+        let tempMonth = false;
+        let tempPhoneInput = phoneInput;
+        if (trial) {
+          tempMonth = true;
+        }
+        var input = document.getElementById("input_1") as HTMLInputElement;
+        if (!tempPhoneInput) {
+          tempPhoneInput = ""
+        }
+        // 2592000
+        let signUpData = {
+          credentials: {
+            name: formData.name,
+            lastName: formData.lastName,
+            email: formData.email,
+            password: formData.password,
+            phoneInput: tempPhoneInput,
+            month: tempMonth
+          },
+        };
+        const redirectURL = await signUpCreds(signUpData);
+        if (redirectURL == "/auth/RegisterPastUser") {
+          setErrorMsg('El correo ingresado ya existe!');
+          setError(true);
+          setIsLoading(false);
+        }
+        else {
+          signUpWithCreds(signUpData).then(() => {
+            window.location.href = "/Purchase?type=subscription";
+          });
+        }
+      }
+      else {
+        setErrorPhone(true);
+        setErrorPhoneMsg("Número de teléfono Invalido");
+        setIsLoading(false);
+      }
     }
     else {
-      signUpWithCreds(signUpData).then(() => {
-        window.location.href = "/Purchase?type=subscription";
-      });
+      let tempMonth = false;
+      let tempPhoneInput = phoneInput;
+      if (trial) {
+        tempMonth = true;
+      }
+      var input = document.getElementById("input_1") as HTMLInputElement;
+      if (!tempPhoneInput) {
+        tempPhoneInput = ""
+      }
+      // 2592000
+      let signUpData = {
+        credentials: {
+          name: formData.name,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+          phoneInput: tempPhoneInput,
+          month: tempMonth
+        },
+      };
+      const redirectURL = await signUpCreds(signUpData);
+      if (redirectURL == "/auth/RegisterPastUser") {
+        setErrorMsg('El correo ingresado ya existe!');
+        setError(true);
+        setIsLoading(false);
+      }
+      else {
+        signUpWithCreds(signUpData).then(() => {
+          window.location.href = "/Purchase?type=subscription";
+        });
+      }
     }
+
+
   }
 
   useEffect(() => {
@@ -170,6 +219,7 @@ const Register = () => {
       }, 500);
     }
   }, [loggedIn])
+
 
 
   return (
@@ -255,12 +305,20 @@ const Register = () => {
                       onChange={(e: any) => { setPhoneInput(e) }}
                       limitMaxLength={true}
                       international={true}
+                      // value={phoneCode}
                       countryCallingCodeEditable={false}
                       defaultCountry="MX"
                       id="input_1"
                     />
                   </div>
+                  {
+                    errorPhone &&
+                    <div className="error">
+                      {errorPhoneMsg}
+                    </div>
+                  }
                 </div>
+
               </div>
               <PurpleButton2 type='submit'>
                 Crear Cuenta
