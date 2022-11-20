@@ -53,7 +53,7 @@ font-size: 32px;
 @media only screen and (max-width: 1280px) {
   font-size: 28px;
 }
-@media only screen and (max-widt|h: 1028px) {
+@media only screen and (max-width: 1028px) {
   font-size: 24px;
 }
 
@@ -195,27 +195,31 @@ position: relative;
 //--------------------------------------------
 
 export const ModuleContainerMobile = styled(Container)`  
-height: 600px;
+height: 900px;
 width: 100%;
 max-width: 100%;
 padding: 0;
-top: -50px;
+top: -150px;
 position: relative;
-display: none !important;
-@media only screen and (max-width: 1720px) {
-margin-top: 0px;
-top: -35px;
-position: relative;
-    }
+display: none !important; 
     @media only screen and (max-width: 1028px) {
       display: block !important;
          }
+
+@media only screen and (max-width: 490px) {
+ 
+  height: 600px;
+}   
+@media only screen and (max-width: 390px) {
+
+  height: 530px;
+} 
 `;
 
 
 export const ColorContainerMobile =  styled.div` 
-background-color: #E2A6E5;
-height: 110%;
+background-color: #E1B2E4;
+height: 140%;
 width: auto;
 position: relative;
 
@@ -230,43 +234,75 @@ position: relative;
 }
 `;
 
-export const Column_1Mobile =  styled.div` 
+export const Row_1Mobile =  styled.div` 
 left: 25%;
 position: relative;
 top: 70%;
+margin-top: 75px;
+
+@media only screen and (max-width: 1024px) {
+ 
+}
+@media only screen and (max-width: 840px) {  
+} 
+@media only screen and (max-width: 770px) {
+
+} 
+@media only screen and (max-width: 580px) {
+  left: 15%;
+} 
+@media only screen and (max-width: 490px) {
+  left: 10%;
+} 
 `;
 
-export const Column_2Mobile =  styled.div` 
+export const Row_2Mobile =  styled.div` 
 left: 0%;
 position: relative;
 top: 20%;
 text-align: center;
 `;
 
-export const Column_3Mobile =  styled.div` 
-left: -10%;
+export const Row_3Mobile =  styled.div` 
+left: 0;
 position: relative;
-top:  70%;
+top: -110px;
+height: 270px;
+width: 100%;
+
+@media only screen and (max-width: 490px) {
+ 
+height: 190px;
+}   
+@media only screen and (max-width: 390px) {
+
+  height: 170px;
+} 
+
 `;
   
-export const TittleMobile =  styled.h3` 
-color: #3F1168;
+export const TittleMobile =  styled.h3`  
+display: inline-block;
+background: linear-gradient( to right, #942CED, #D244D1 );
+margin-bottom: 0px;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent; 
+
+
+
 font-size: 38px;
 font-family: "Montserrat-ExtraBold" !important;
 @font-face {
   font-family: Montserrat-ExtraBold;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
-
-@media only screen and (max-width: 1440px) { 
-font-size: 32px;
-}
-@media only screen and (max-width: 1280px) {
-  font-size: 28px;
-}
-@media only screen and (max-widt|h: 1028px) {
+ 
+@media only screen and (max-width: 1024px) {
+  font-size: 32px;
+} 
+@media only screen and (max-width: 490px) {
   font-size: 24px;
-}
+} 
 
 `;
   
@@ -289,6 +325,10 @@ font-size: 22px;
   font-size: 14px;
 }
 
+@media only screen and (max-width: 490px) {
+  font-size: 12px;
+} 
+
 `;
   
 export const Subtittle_2Mobile =  styled.span` 
@@ -310,12 +350,22 @@ font-size: 22px;
   font-size: 14px;
 }
 
+@media only screen and (max-width: 490px) {
+  font-size: 12px;
+} 
+
 `;
 export const UlElementMobile =  styled.ul` 
 list-style-type: none !important;
 `;
 export const LiElementMobile =  styled.li` 
 padding-bottom: 50px;
+@media only screen and (max-width: 490px) {
+  padding-bottom: 30px;
+} 
+@media only screen and (max-width: 390px) {
+  padding-bottom: 25px;
+} 
 `;
   
 
@@ -332,10 +382,14 @@ display: block;
   height: 50px;
 }
  
-@media only screen and (max-widt|h: 1028px) {
+@media only screen and (max-width: 1028px) {
   width: 40px;
   height: 40px;
 }
+@media only screen and (max-width: 490px) {
+  width: 30px;
+  height: 30px;
+} 
 `;
 export const ModuleContainerBG2Mobile =  styled.div` 
 width: 100%;
@@ -380,7 +434,12 @@ margin-left: 100px;
   margin-left: 75px;
 }
  
-@media only screen and (max-widt|h: 1028px) {
+@media only screen and (max-width: 1028px) {
   margin-left: 70px;
 }
+
+@media only screen and (max-width: 490px) {
+  margin-left: 45px;
+} 
+
 `;

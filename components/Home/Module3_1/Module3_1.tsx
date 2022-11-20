@@ -27,9 +27,6 @@ import {
 
 
   ColorContainerMobile,
-  Column_1Mobile,
-  Column_2Mobile,
-  Column_3Mobile,
   LiElementMobile,
   ListTextMobile,
   ModuleContainerMobile,
@@ -39,6 +36,9 @@ import {
   Subtittle_2Mobile,
   TittleMobile,
   UlElementMobile,
+  Row_1Mobile,
+  Row_2Mobile,
+  Row_3Mobile,
 } from "./Module3_1.styled";
 import { ModuleContainer_Mobile } from "../Module2_1/Module2_1.styled";
 
@@ -105,9 +105,12 @@ export const Module3_1 = (props: IModule3) => {
 
       <ModuleContainerMobile id="mobileView">
         <ColorContainerMobile>
-          <Row>
-            <Col>
-              <Column_1Mobile>
+          <Col>
+            <Row>
+              <Row_2Mobile><TittleMobile>¿Qué te ofrece Gonvar?</TittleMobile></Row_2Mobile>
+            </Row>
+            <Row>
+              <Row_1Mobile>
                 <UlElementMobile >
                   <LiElementMobile>
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon1.src})`, backgroundSize: "100%" }} />
@@ -121,17 +124,6 @@ export const Module3_1 = (props: IModule3) => {
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon3.src})`, backgroundSize: "100%" }} />
                     <ListTextMobile><Subtittle_1Mobile>Revision de prácticas</Subtittle_1Mobile></ListTextMobile>
                   </LiElementMobile>
-                </UlElementMobile>
-              </Column_1Mobile>
-            </Col>
-            <Col>
-              <Column_2Mobile><TittleMobile>¿Qué te ofrece Gonvar?</TittleMobile></Column_2Mobile>
-              <ModuleContainerBG2Mobile style={{ backgroundImage: `url(${Hand.src})`, backgroundSize: "contain" }} />
-
-            </Col>
-            <Col>
-              <Column_3Mobile>
-                <UlElementMobile >
                   <LiElementMobile>
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon4.src})`, backgroundSize: "100%" }} />
                     <ListTextMobile><Subtittle_1Mobile> Asesorías </Subtittle_1Mobile><Subtittle_2Mobile> ilimitadas</Subtittle_2Mobile></ListTextMobile>
@@ -145,9 +137,14 @@ export const Module3_1 = (props: IModule3) => {
                     <ListTextMobile><Subtittle_1Mobile>Intructores </Subtittle_1Mobile> <Subtittle_2Mobile> internacionales </Subtittle_2Mobile></ListTextMobile>
                   </LiElementMobile>
                 </UlElementMobile>
-              </Column_3Mobile>
-            </Col>
-          </Row>
+              </Row_1Mobile>
+            </Row>
+            <Row>
+              <Row_3Mobile>
+                <ModuleContainerBG2Mobile style={{ backgroundImage: `url(${Hand.src})`, backgroundSize: "contain" }} />
+              </Row_3Mobile>
+            </Row>
+          </Col>
         </ColorContainerMobile>
       </ModuleContainerMobile >
     </>
