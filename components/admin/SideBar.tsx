@@ -80,7 +80,10 @@ const SideBar = () => {
             <Text>Usuarios</Text>
           </Link><Link href="/admin/Sections">
             <Text>Secciones</Text>
+          </Link><Link href="/admin/HomeWork">
+            <Text>Tareas</Text>
           </Link>
+
         </>
       }
       {!isSuperAdmin &&

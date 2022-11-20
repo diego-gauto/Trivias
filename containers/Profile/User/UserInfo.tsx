@@ -93,22 +93,20 @@ const UserInfo = ({ userData, taskView, setTaskView }: any) => {
         </UserText>
       </UserContainer>}
       {
-        taskView == false &&
+        userData.role == "user" &&
         <UserContainer>
-          <OpenTasks onClick={() => { setTaskView(true) }}>
-            Ver Tareas
-          </OpenTasks>
+          {
+            !taskView ?
+              <OpenTasks onClick={() => { setTaskView(true) }}>
+                Ver Tareas
+              </OpenTasks>
+              :
+              <OpenTasks onClick={() => { setTaskView(false) }}>
+                Ver Perfil
+              </OpenTasks>
+          }
         </UserContainer>
       }
-      {
-        taskView == true &&
-        <UserContainer>
-          <OpenTasks onClick={() => { setTaskView(false) }}>
-            Ver Perfil
-          </OpenTasks>
-        </UserContainer>
-      }
-
       <Link href="/">
         <LogOut
           onClick={logoutFunc}
