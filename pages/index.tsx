@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { GonvarPlusModule } from "../components/Home/GonvarPlusModule/GonvarPlusModule";
-import { Module2 } from "../components/Home/Module2/Module2";
 import { Module2_1 } from "../components/Home/Module2_1/Module2_1";
 import { Module3_1 } from "../components/Home/Module3_1/Module3_1";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
-import { Module5 } from "../components/Home/Module5/Module5";
+import { Module5_1 } from "../components/Home/Module5_1/Module5_1";
 import { Module6 } from "../components/Home/Module6/Module6";
 import {
   DRY_MANICURE_COURSE_ID,
@@ -14,7 +13,6 @@ import {
   SEP_COURSE_ID,
 } from "../constants/gonvar";
 import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
-import { FirstSectionContainer } from "../containers/Home/FirstSectionContainer/FirstSectionContainer";
 import { getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 
@@ -116,7 +114,7 @@ const Homepage = () => {
           courses
         } />
       }
-      <Module5 reviewsData={landingData.reseniasSectionData} />
+      <Module5_1 slideData={landingData.productosDestacadosData} />
       <Module6 slideData={landingData.productosDestacadosData} />
     </Container>
   )
