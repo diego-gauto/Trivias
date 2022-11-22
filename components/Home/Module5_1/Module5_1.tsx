@@ -21,8 +21,8 @@ import IMG1 from "./MediaSources/Lineas.png";
 import IMG2 from "./MediaSources/Personas.png";
 
 import { IModule5_1 } from "./IModule5_1";
-import { SlideModule } from "./SlideModule/SlideModule";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
+import { SlideModule_1 } from "./SlideModule_1/SlideModule_1";
 SwiperCore.use([Autoplay]);
 
 export const Module5_1 = (props: IModule5_1) => {
@@ -63,7 +63,7 @@ export const Module5_1 = (props: IModule5_1) => {
     return (
       <SwiperSlide key={element.title + "_ID"}>
         <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">
-          <SlideModule
+          <SlideModule_1
             isNew={element.isNew}
             title={element.title}
             subtitle={element.subtitle}

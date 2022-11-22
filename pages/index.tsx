@@ -68,6 +68,7 @@ const Homepage = () => {
     fetchLandingData();
   }, []);
 
+
   return (
     <Container
       fluid
