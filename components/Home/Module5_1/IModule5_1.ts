@@ -8,5 +8,5 @@ interface SlideObj {
   imgURL: string;
   usrImgURL: string;
   usrFacebookURL: string;
-  date: Date;
+  convertedDate: Date;
 }

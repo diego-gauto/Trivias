@@ -64,11 +64,11 @@ export const Module5_1 = (props: IModule5_1) => {
 
     return (
       <SwiperSlide key={element.username + "_ID"}>
-        <SliderItemLink href={element.usrFacebookURL} target="_blank" rel="noopener noreferrer">
+        <SliderItemLink >
           <SlideModule_1
             isNew={element.isNew}
             descripcion={element.descripcion}
-            date={element.date}
+            datePublication={element.convertedDate}
             usrFacebookURL={element.usrFacebookURL}
             username={element.username}
             imgURL={downloadFileWithStoragePath(element.imgURL)}
