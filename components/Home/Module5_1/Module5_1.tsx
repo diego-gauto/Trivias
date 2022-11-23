@@ -34,6 +34,7 @@ export const Module5_1 = (props: IModule5_1) => {
     swiperRef.current = swiper;
   };
   const onMouseEnter = () => {
+    console.log(swiperRef.current)
     if (swiperRef.current) {
       swiperRef.current.autoplay.stop();
     }
@@ -60,14 +61,19 @@ export const Module5_1 = (props: IModule5_1) => {
     }
   };
   const sliderData = slideDataArr?.map((element) => {
+
+
     return (
-      <SwiperSlide key={element.title + "_ID"}>
-        <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">
+      <SwiperSlide key={element.username + "_ID"}>
+        <SliderItemLink href={element.usrFacebookURL} target="_blank" rel="noopener noreferrer">
           <SlideModule_1
             isNew={element.isNew}
-            title={element.title}
-            subtitle={element.subtitle}
+            descripcion={element.descripcion}
+            date={element.date}
+            usrFacebookURL={element.usrFacebookURL}
+            username={element.username}
             imgURL={downloadFileWithStoragePath(element.imgURL)}
+            usrImgURL={downloadFileWithStoragePath(element.usrImgURL)}
           />
         </SliderItemLink>
       </SwiperSlide>

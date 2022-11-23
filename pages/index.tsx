@@ -115,7 +115,7 @@ const Homepage = () => {
           courses
         } />
       }
-      <Module5_1 slideData={landingData.productosDestacadosData} />
+      <Module5_1 slideData={landingData.experienciasSectionData} />
       <Module6 slideData={landingData.productosDestacadosData} />
     </Container>
   )

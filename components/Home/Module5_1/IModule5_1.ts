@@ -3,9 +3,10 @@ export interface IModule5_1 {
 }
 interface SlideObj {
   isNew: boolean;
-  title: string;
-  subtitle: string;
+  username: string;
+  descripcion: string;
   imgURL: string;
-  clickURL: string;
-  id: string;
+  usrImgURL: string;
+  usrFacebookURL: string;
+  date: Date;
 }

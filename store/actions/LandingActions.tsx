@@ -10,21 +10,29 @@ export const getLandingData = async () => {
   const heroSectionRef = doc(db, "landingPage", "heroSection")
   const featureShowcaseSectionRef = doc(db, "landingPage", "featureShowcaseSection")
   const reseniasCollectionRef = collection(db, "landingPage", "reseniasSection", "resenias")
+  const experienciasCollectionRef = collection(db, "landingPage", "experienciasUsuario", "resenias")
   const productosCollectionRef = collection(db, "landingPage", "productosDestacadosSection", "productos")
   const [
     heroSectionDoc,
     featureShowcaseSectionDoc,
     reseniasDocs,
+    experienciasDocs,
     productosDestacadosDocs,
   ] = await Promise.all([
     getDoc(heroSectionRef),
     getDoc(featureShowcaseSectionRef),
     getDocs(reseniasCollectionRef),
-    getDocs(productosCollectionRef)
+
+    getDocs(experienciasCollectionRef),
+    getDocs(productosCollectionRef),
   ])
   const parsedReseniasData = reseniasDocs.docs.map((d) => {
     const { nombre, imgURL } = d.data()
     return { title: nombre, imgURL: downloadFileWithStoragePath(imgURL), id: d.id }
+  })
+  const parsedExperienciasData = experienciasDocs.docs.map((d) => {
+    const { descripcion, username, imgURL, isNew, date, usrImgURL, usrFacebookURL } = d.data()
+    return { descripcion, username, imgURL, isNew, date, usrImgURL, usrFacebookURL }
   })
   const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
     const { nombre, precio, imgURL, clickURL } = d.data()
@@ -34,6 +42,7 @@ export const getLandingData = async () => {
     heroSectionData: heroSectionDoc.data() || {},
     featureShowcaseSectionData: featureShowcaseSectionDoc.data() || {},
     reseniasSectionData: parsedReseniasData || [],
+    experienciasSectionData: parsedExperienciasData || [],
     productosDestacadosData: parsedProductosDestacadosData || []
   }
 }
@@ -110,6 +119,12 @@ export const uploadFile = async (file: File, uploadPath: string) => {
 }
 
 export const downloadFileWithStoragePath = async (path: string) => {
-  const storage = getStorage()
-  return await getDownloadURL(ref(storage, path))
+  try {
+
+    const storage = getStorage()
+    return await getDownloadURL(ref(storage, path))
+  } catch (error) {
+
+  }
+  return ""
 }

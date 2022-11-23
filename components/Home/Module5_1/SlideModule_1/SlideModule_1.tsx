@@ -3,18 +3,30 @@ import { ISlideModule_1 } from "./ISlideModule_1";
 import React, { Component, useEffect, useState } from "react";
 
 import { ContainerMain, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule_1.styled";
+import { title } from "process";
 
 export const SlideModule_1 = (props: ISlideModule_1) => {
-  const { isNew, title, subtitle, imgURL } = props;
+
+  const {
+    isNew,
+    descripcion,
+    usrFacebookURL,
+    date,
+    imgURL,
+    usrImgURL,
+    username,
+  } = props;
   const [img, setImg] = useState("")
 
   const awaitImg = async () => {
     const resolvedImg = await imgURL
     setImg(resolvedImg)
   }
+
   useEffect(() => {
     awaitImg()
   }, [])
+
 
   return (
     <Container>
@@ -36,10 +48,10 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
           <TextSectionWrapper>
             <Row>
-              <Text01>{title} </Text01>
+              <Text01>{username} </Text01>
             </Row>
             <Row>
-              <Text02>{subtitle} </Text02>
+              <Text02>{descripcion} </Text02>
             </Row>
           </TextSectionWrapper>
         </Col>
