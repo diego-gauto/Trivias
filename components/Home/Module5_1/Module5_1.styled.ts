@@ -88,7 +88,7 @@ export const SliderContainerChild = styled.div`
 export const SliderSectionTitle = styled.p` 
   font-size: 48px; 
   color: #ffffff; 
-  bottom: 95px;
+  bottom: 45px;
   position: relative;
   text-align: center;
   padding-right: 0;

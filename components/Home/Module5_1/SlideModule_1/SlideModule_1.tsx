@@ -2,8 +2,10 @@ import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import { ISlideModule_1 } from "./ISlideModule_1";
 import React, { Component, useEffect, useState } from "react";
 
-import { ContainerMain, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule_1.styled";
+import { ContainerMain, DisabledFilter, NewTag, ShadowLayer, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule_1.styled";
 import { title } from "process";
+
+import IMG1 from "../MediaSources/filtroGris.png";
 
 export const SlideModule_1 = (props: ISlideModule_1) => {
 
@@ -17,11 +19,19 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
     username,
   } = props;
   const [img, setImg] = useState("")
+  const [disabled, setDisabled] = useState(true);
 
   const awaitImg = async () => {
     const resolvedImg = await imgURL
     setImg(resolvedImg)
   }
+
+  const onMouseEnter = () => {
+    setDisabled(false)
+  };
+  const onMouseLeave = () => {
+    setDisabled(true)
+  };
 
   useEffect(() => {
     awaitImg()
@@ -30,7 +40,15 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
   return (
     <Container>
-      <ContainerMain>
+      <ContainerMain
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}>
+
+        <ShadowLayer>
+        </ShadowLayer>
+        <DisabledFilter
+          style={{ backgroundImage: `url(${IMG1.src})` }}>
+        </DisabledFilter>
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
@@ -46,13 +64,14 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
             </SlideImg>
           </Row>
 
-          <TextSectionWrapper>
-            <Row>
-              <Text01>{username} </Text01>
-            </Row>
+          <TextSectionWrapper id="expandable">
             <Row>
               <Text02>{descripcion} </Text02>
             </Row>
+            <Row>
+              <Text01>{username} </Text01>
+            </Row>
+
           </TextSectionWrapper>
         </Col>
       </ContainerMain >

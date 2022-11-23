@@ -34,7 +34,6 @@ export const Module5_1 = (props: IModule5_1) => {
     swiperRef.current = swiper;
   };
   const onMouseEnter = () => {
-    console.log(swiperRef.current)
     if (swiperRef.current) {
       swiperRef.current.autoplay.stop();
     }
@@ -94,7 +93,7 @@ export const Module5_1 = (props: IModule5_1) => {
             <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
           </SliderSectionTitle>
-          <Swiper {...settings} onInit={onInit}>
+          <Swiper style={{ paddingTop: "50px" }} {...settings} onInit={onInit}>
             {sliderData}
           </Swiper>
         </SliderContainer>
