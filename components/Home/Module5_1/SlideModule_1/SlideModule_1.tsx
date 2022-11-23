@@ -2,7 +2,7 @@ import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import { ISlideModule_1 } from "./ISlideModule_1";
 import React, { Component, useEffect, useState } from "react";
 
-import { ContainerMain, DisabledFilter, NewTag, ShadowLayer, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule_1.styled";
+import { ContainerMain, DisabledMask, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper, UsernameSectionWrapper } from "./SlideModule_1.styled";
 import { title } from "process";
 
 import IMG1 from "../MediaSources/filtroGris.png";
@@ -40,15 +40,14 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
   return (
     <Container>
+      <DisabledMask>
+
+      </DisabledMask>
       <ContainerMain
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}>
 
-        <ShadowLayer>
-        </ShadowLayer>
-        <DisabledFilter
-          style={{ backgroundImage: `url(${IMG1.src})` }}>
-        </DisabledFilter>
+
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
@@ -68,11 +67,14 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
             <Row>
               <Text02>{descripcion} </Text02>
             </Row>
+
+          </TextSectionWrapper>
+          <UsernameSectionWrapper>
+
             <Row>
               <Text01>{username} </Text01>
             </Row>
-
-          </TextSectionWrapper>
+          </UsernameSectionWrapper>
         </Col>
       </ContainerMain >
     </Container >

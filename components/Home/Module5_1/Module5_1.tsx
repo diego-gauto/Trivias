@@ -93,7 +93,7 @@ export const Module5_1 = (props: IModule5_1) => {
             <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
           </SliderSectionTitle>
-          <Swiper style={{ paddingTop: "50px" }} {...settings} onInit={onInit}>
+          <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
             {sliderData}
           </Swiper>
         </SliderContainer>
