@@ -13,6 +13,7 @@ import {
   SEP_COURSE_ID,
 } from "../constants/gonvar";
 import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
+import { useAuth } from "../hooks/useAuth";
 import { getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 
@@ -23,7 +24,21 @@ const Homepage = () => {
   const [courses, setCourses] = useState<any>([]);
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
   const [courseSEPData, setCourseSEPData] = useState<any>([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }, [])
+
+  } catch (error) {
+    setLoggedIn(false)
+  }
 
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
@@ -81,7 +96,7 @@ const Homepage = () => {
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}
-      <GonvarPlusModule />
+      <GonvarPlusModule loggedIn={loggedIn} />
       {courses &&
         <Module4_Carousel type={'subscription'} isInfinite={true} slideData={
           courses
