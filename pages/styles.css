@@ -117,3 +117,6 @@ h1,th{
 .paypal-button.paypal-button-shape-pill{
     background: #009CDE;
 }
+.modal-content{
+  border-radius: 30px;
+}
