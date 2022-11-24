@@ -193,6 +193,9 @@ const UsersList = () => {
                 </select>
               </Select>
               <SearchContain>
+                <div className="hidden">
+
+                </div>
                 <SearchIcon />
                 <SearchInput
                   placeholder="Buscar un Usuario"

@@ -81,6 +81,15 @@ export const EditIcon = styled.i`
 export const SearchContain = styled.div`
   display: flex;
   position: relative;
+  .hidden {
+    width: 30px;
+    height: 20px;
+    background: white;
+    position: absolute;
+    right: 27px;
+    top: 10px;
+    z-index: 1;
+  }
 `;
 export const UserShow = styled.p`
   display: flex;

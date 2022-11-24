@@ -275,3 +275,10 @@ export const getPastUser = async (email: string) => {
   })
   return tempUsers
 }
+
+export const deleteSelectedUser = async (email: string) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  console.log(user);
+
+}
