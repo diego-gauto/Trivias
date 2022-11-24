@@ -465,12 +465,12 @@ display: contents;
 export const ModuleContainerBG3alt_Mobile =  styled.div` 
 width: 100%;
 height: 40%;
-background-repeat: no-repeat; 
-position: absolute;
-display: block;
-top: 50%; 
-
+background-repeat: no-repeat;
+position: relative;
+top: 50%;
 left: 0;
+background-position-x: 50%;
+ 
   @media only screen and (max-widt|h: 1024px) {
     margin: 25px auto;
     padding: 0;
@@ -479,8 +479,7 @@ left: 0;
   
   @media only screen and (max-width: 1024px) {
     top: 50%; 
-    
-    left: 7.5%;
+     
     background-size: 85% !important;
   } 
   @media only screen and (max-width: 840px) {
