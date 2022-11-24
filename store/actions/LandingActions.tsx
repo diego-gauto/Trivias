@@ -32,7 +32,8 @@ export const getLandingData = async () => {
   })
   const parsedExperienciasData = experienciasDocs.docs.map((d) => {
     const { descripcion, username, imgURL, isNew, date, usrImgURL, usrFacebookURL } = d.data()
-    return { descripcion, username, imgURL, isNew, date, usrImgURL, usrFacebookURL }
+    var convertedDate = new Date(date.toDate())
+    return { descripcion, username, imgURL, isNew, convertedDate, usrImgURL, usrFacebookURL }
   })
   const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
     const { nombre, precio, imgURL, clickURL } = d.data()

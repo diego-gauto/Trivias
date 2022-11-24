@@ -14,7 +14,21 @@ import {
   People,
   BgColor,
   PeopleContainer,
+  GeneralContainer,
 } from "./Module5_1.styled";
+import {
+  ContainerMainMobile,
+  SliderSectionTitleMobile,
+  SliderContainerMobile,
+  SliderItemLinkMobile,
+  TittleAMobile,
+  TittleBMobile,
+  LinesMobile,
+  PeopleMobile,
+  BgColorMobile,
+  PeopleContainerMobile,
+  GeneralContainerMobile,
+} from "./Module5_1Mobile.styled";
 
 
 import IMG1 from "./MediaSources/Lineas.png";
@@ -59,16 +73,26 @@ export const Module5_1 = (props: IModule5_1) => {
       }
     }
   };
+  const settingsMobile = {
+    loop: true,
+    autoplay: {
+      delay: 0,
+    },
+    speed: 4000,
+    freeMode: true,
+    slidesPerView: 3,
+    spaceBetween: 120,
+  };
   const sliderData = slideDataArr?.map((element) => {
 
 
     return (
       <SwiperSlide key={element.username + "_ID"}>
-        <SliderItemLink href={element.usrFacebookURL} target="_blank" rel="noopener noreferrer">
+        <SliderItemLink >
           <SlideModule_1
             isNew={element.isNew}
             descripcion={element.descripcion}
-            date={element.date}
+            datePublication={element.convertedDate}
             usrFacebookURL={element.usrFacebookURL}
             username={element.username}
             imgURL={downloadFileWithStoragePath(element.imgURL)}
@@ -79,30 +103,59 @@ export const Module5_1 = (props: IModule5_1) => {
     )
   })
   return (
-    <Container
-      fluid
-      style={{ padding: 0 }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <ContainerMain id="ExperiencesContainer">
-        <SliderContainer>
+    <>
+      <GeneralContainer
+        fluid
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave} id="WebView"
+      >
+        <ContainerMain  >
+          <SliderContainer>
 
-          <Lines style={{ backgroundImage: `url(${IMG1.src})` }}></Lines>
-          <SliderSectionTitle>
-            <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
+            <Lines style={{ backgroundImage: `url(${IMG1.src})` }}></Lines>
+            <SliderSectionTitle>
+              <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
-          </SliderSectionTitle>
-          <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
-            {sliderData}
-          </Swiper>
-        </SliderContainer>
+            </SliderSectionTitle>
+            <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
+              {sliderData}
+            </Swiper>
+          </SliderContainer>
 
-        <PeopleContainer>
-          <People style={{ backgroundImage: `url(${IMG2.src})` }}></People>
-          <BgColor id="Bgcolor"></BgColor>
-        </PeopleContainer>
-      </ContainerMain >
-    </Container >
+          <PeopleContainer>
+            <People style={{ backgroundImage: `url(${IMG2.src})` }}>
+            </People>
+            <BgColor  ></BgColor>
+          </PeopleContainer>
+        </ContainerMain >
+      </GeneralContainer >
+
+      <GeneralContainerMobile
+        fluid
+        style={{ padding: 0 }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave} id="MobileView"
+      >
+        <ContainerMainMobile  >
+          <SliderContainerMobile>
+
+            <LinesMobile style={{ backgroundImage: `url(${IMG1.src})` }}></LinesMobile>
+            <SliderSectionTitleMobile>
+              <TittleAMobile>Experiencias de nuestras </TittleAMobile><TittleBMobile> #AlumnasGonvar</TittleBMobile>
+
+            </SliderSectionTitleMobile>
+            <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobile} onInit={onInit}>
+              {sliderData}
+            </Swiper>
+          </SliderContainerMobile>
+
+          <PeopleContainerMobile>
+            <PeopleMobile style={{ backgroundImage: `url(${IMG2.src})` }}>
+            </PeopleMobile>
+            <BgColorMobile  ></BgColorMobile>
+          </PeopleContainerMobile>
+        </ContainerMainMobile >
+      </GeneralContainerMobile >
+    </>
   )
 }

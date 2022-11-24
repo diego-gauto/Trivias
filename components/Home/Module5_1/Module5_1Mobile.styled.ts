@@ -1,22 +1,22 @@
 import styled from "styled-components";
 import { Col, Container, Image, Row } from "react-bootstrap"; 
 
-export const SliderContainer = styled.div`
+export const SliderContainerMobile = styled.div`
   position: relative; 
   overflow: hidden;
   
 `;
-export const GeneralContainer = styled(Container)`
+export const GeneralContainerMobile = styled(Container)`
   padding: 0;
-  display: block;
+  display: none;
   @media only screen and (max-width: 1028px) { 
-    display: none;
+    display: block;
   
   }
 `;
 
 
-export const People = styled.div`
+export const PeopleMobile = styled.div`
 background-size: 60%;
 height: 470px;
 background-repeat: no-repeat;
@@ -43,7 +43,7 @@ z-index:1;
 
 }
 `;
-export const PeopleContainer = styled.div` 
+export const PeopleContainerMobile = styled.div` 
 height: 470px;
 
 @media only screen and (max-width: 1720px) {
@@ -61,7 +61,7 @@ height: 470px;
 }
 
 `;
-export const Lines = styled.div`
+export const LinesMobile = styled.div`
 background-size: 100%;
 height: 300px;
 background-repeat: no-repeat;
@@ -69,7 +69,7 @@ background-repeat: no-repeat;
   height: 180px;
 }
 `;
-export const BgColor = styled.div`
+export const BgColorMobile = styled.div`
 background-color: #EDE7F2;
 height: 300px;
 top: -300px; 
@@ -96,7 +96,7 @@ position: relative;
 }
 
 `;
-export const TittleA = styled.span` 
+export const TittleAMobile = styled.span` 
 color: #3F1168;
 font-size: 38px;
 font-family: "Montserrat-ExtraBold" !important;
@@ -105,7 +105,7 @@ font-family: "Montserrat-ExtraBold" !important;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
 `;
-export const TittleB = styled.span` 
+export const TittleBMobile = styled.span` 
 color: #A733E4;
 font-size: 38px;
 font-family: "Montserrat-ExtraBold" !important;
@@ -114,7 +114,7 @@ font-family: "Montserrat-ExtraBold" !important;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
 `;
-export const Divisor = styled.div`
+export const DivisorMobile = styled.div`
   position: absolute;
   width: 110%;
   height: 270px;
@@ -127,7 +127,7 @@ export const Divisor = styled.div`
 
 
 
-export const ContainerMain = styled.div`
+export const ContainerMainMobile = styled.div`
 background-color: #E5B6E9;
 height: 1200px;
 margin-top: 0;
@@ -146,7 +146,7 @@ margin-bottom: 0%;
   }
   
 `;
-export const AnimatedBackground = styled.video`
+export const AnimatedBackgroundMobile = styled.video`
   width: 100%;
   height: auto;
   transform: rotate(0deg);
@@ -154,7 +154,7 @@ export const AnimatedBackground = styled.video`
   z-index: -2;
   bottom: 0%;
 `;
-export const SliderContainerChild = styled.div`
+export const SliderContainerChildMobile = styled.div`
   z-index: -1;
   position: relative;
   height: 675px;
@@ -162,7 +162,7 @@ export const SliderContainerChild = styled.div`
     height: 450px;
   }
 `;
-export const SliderSectionTitle = styled.p` 
+export const SliderSectionTitleMobile = styled.p` 
   font-size: 48px; 
   color: #ffffff; 
   bottom: 45px;
@@ -180,7 +180,7 @@ export const SliderSectionTitle = styled.p`
   }
 `;
 
-export const SliderItemLink = styled.a`
+export const SliderItemLinkMobile = styled.a`
   text-decoration: none;
   color: #fff;
 `;

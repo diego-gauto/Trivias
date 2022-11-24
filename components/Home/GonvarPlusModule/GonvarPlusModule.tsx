@@ -11,7 +11,7 @@ import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect } from "react";
 declare let Hls: any
 
-export const GonvarPlusModule = () => {
+export const GonvarPlusModule = ({ loggedIn }: any) => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
@@ -52,7 +52,11 @@ export const GonvarPlusModule = () => {
             <Card.Text className="price">
               Desde $149.00
             </Card.Text>}
-          <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => router.push(SIGNUP_PATH)} />
+          <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
+            loggedIn
+              ? router.push("/Purchase?type=subscription")
+              : router.push(SIGNUP_PATH)
+          }} />
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
         </Col>
         {responsive768 && <Card.Text className="mobile-price">

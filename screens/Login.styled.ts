@@ -179,6 +179,9 @@ export const LoginBackground = styled.div`
   display: flex;
   width: 100%;
   min-height: 90vh;
+  @media (max-width: 1023px) {
+    flex-direction: column;
+  }
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -190,28 +193,61 @@ export const LoginBackground = styled.div`
     width: 60%;
     display: flex;
     justify-content: flex-end;
+    @media (max-width: 1023px) {
+      width: 100%;
+      justify-content: center;
+    }
     p {
-      padding-top: 400px;
-      padding-inline: 50px;
-      font-size: 56px;
+      padding-top: 350px;
+      padding-right: 30px;
+      font-size: 40px;
       color: #3f1168;
       font-weight: 700;
-      line-height: 60px;
+      line-height: 45px;
       span {
         color: #942ced;
+      }
+      @media (max-width: 1250px) {
+        padding-top: 300px;
+      }
+      @media (max-width: 1120px) {
+        padding-right: 10px;
+      }
+      @media (max-width: 1023px) {
+        padding-top: 50px;
+        text-align: center;
+        font-size: 36px;
+        padding-bottom: 20px;
+      }
+      @media (max-width: 400px) {
+        font-size: 30px;
+        line-height: 30px;
       }
     }
     .imgUpperHand {
       position: absolute;
-      width: 700px;
+      width: 650px;
       top: -70px;
       right: -120px;
+      @media (max-width: 1400px) {
+        width: 76%;
+        right: -100px;
+      }
+      @media (max-width: 1023px) {
+        display: none;
+      }
     }
     .imgBottomHand {
       position: absolute;
-      width: 600px;
+      width: 550px;
       bottom: -110px;
       left: 0;
+      @media (max-width: 1400px) {
+        width: 64%;
+      }
+      @media (max-width: 1023px) {
+        display: none;
+      }
     }
   }
   .right-side {
@@ -219,6 +255,9 @@ export const LoginBackground = styled.div`
     background-color: rgba(206, 91, 196, 0.5);
     position: relative;
     order: 2;
+    @media (max-width: 1023px) {
+      width: 100%;
+    }
     form {
       max-width: 400px;
       margin: auto;
@@ -229,6 +268,17 @@ export const LoginBackground = styled.div`
       align-items: center;
       justify-content: center;
       gap: 30px;
+      .forgotText {
+        font-size: 12px;
+        color: #402466;
+        @media (max-width: 400px) {
+          font-size: 10px;
+        }
+        span {
+          cursor: pointer;
+          font-weight: bold;
+        }
+      }
       .line {
         width: 100%;
         border-bottom: 2px solid #734390;
@@ -242,8 +292,13 @@ export const LoginBackground = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
+        font-size: 16px;
+        @media (max-width: 400px) {
+          font-size: 14px;
+        }
         .first-sub {
           color: #402466;
+          line-height: 20px;
         }
         .second-sub {
           color: #9731ec;
@@ -266,6 +321,9 @@ export const LoginBackground = styled.div`
 
         span {
           font-weight: bold;
+        }
+        @media (max-width: 400px) {
+          font-size: 12px;
         }
       }
       p,
@@ -293,7 +351,10 @@ export const LoginBackground = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
-        width: 90%;
+        width: 320px;
+        @media (max-width: 400px) {
+          width: 280px;
+        }
         .form-row {
           display: flex;
           align-items: baseline;
@@ -311,10 +372,16 @@ export const LoginBackground = styled.div`
             }
             label {
               color: #3f1168;
-              font-size: 21px;
+              font-size: 18px;
               font-weight: 700;
               font-family: Montserrat, sans-serif;
               margin-bottom: 5px;
+              @media (max-width: 1023px) {
+                font-size: 16px;
+              }
+              @media (max-width: 400px) {
+                font-size: 14px;
+              }
             }
             span {
               font-weight: 400;
@@ -326,6 +393,10 @@ export const LoginBackground = styled.div`
               color: #3f1168;
               padding-left: 25px;
               font-weight: bold;
+              line-height: 10px;
+              @media (max-width: 400px) {
+                font-size: 14px;
+              }
               &:valid {
                 background-color: #ebe1f0;
                 color: #402466;
@@ -339,6 +410,17 @@ export const LoginBackground = styled.div`
               }
             }
           }
+        }
+      }
+      .registerText {
+        color: #402466;
+        font-weight: bold;
+        span {
+          color: #9731ec;
+          cursor: pointer;
+        }
+        @media (max-width: 400px) {
+          font-size: 14px;
         }
       }
       .social-media-container {
@@ -359,6 +441,9 @@ export const LoginBackground = styled.div`
             span {
               font-weight: bold;
             }
+            @media (max-width: 1023px) {
+              font-size: 14px;
+            }
           }
         }
         .socials {
@@ -367,6 +452,10 @@ export const LoginBackground = styled.div`
           align-items: center;
           gap: 20px;
           padding-left: 20px;
+          @media (max-width: 400px) {
+            gap: 10px;
+            padding-left: 10px;
+          }
           img {
             cursor: pointer;
             width: 50px;
@@ -377,6 +466,7 @@ export const LoginBackground = styled.div`
           font-size: 14px;
           color: #74549e;
           line-height: initial;
+          text-align: center;
           span {
             font-weight: bold;
           }

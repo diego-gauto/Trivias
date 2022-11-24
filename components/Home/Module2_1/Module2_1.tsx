@@ -14,7 +14,15 @@ import Background6 from "./MediaSources/mobileBG2.png";
 import BG7 from "./MediaSources/mujeres_gonvar2.png";
 
 import { useRouter } from "next/router";
-import { ButtonsContainerMobile, ColContainerLeft, ColContainerRight, FirstSectionContainer, FirstSectionContainer_Mobile, ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt, ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile, ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile, TittleContainer, TittleContainer_Mobile } from "../Module2_1/Module2_1.styled";
+import {
+  ButtonsContainerMobile, ColContainerLeft,
+  ColContainerRight, ConnectorColor, FirstSectionContainer, FirstSectionContainer_Mobile,
+  ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt,
+  ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile,
+  ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile,
+  TittleContainer, TittleContainer_Mobile
+}
+  from "../Module2_1/Module2_1.styled";
 import {
   TitleCenter, ModuleContainer,
   LeftImage,
@@ -98,7 +106,7 @@ export const Module2_1 = (props: IModule2_1) => {
               <RightImage>
 
                 <ModuleContainerBG2alt style={{ backgroundImage: `url(${BG2.src})`, backgroundSize: "100%" }}></ModuleContainerBG2alt>
-                <ModuleContainerBG1alt style={{ backgroundImage: `url(${BG1.src})` }}></ModuleContainerBG1alt>
+                <ModuleContainerBG1alt id="mujeresGonvar" style={{ backgroundImage: `url(${BG1.src})` }}></ModuleContainerBG1alt>
 
 
               </RightImage>
@@ -107,6 +115,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
         </FirstSectionContainer >
 
+        <ConnectorColor></ConnectorColor>
       </ModuleContainer >
       <ModuleContainer_Mobile id="mobileView">
         <FirstSectionContainer_Mobile >

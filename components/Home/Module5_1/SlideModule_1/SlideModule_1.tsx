@@ -2,10 +2,16 @@ import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import { ISlideModule_1 } from "./ISlideModule_1";
 import React, { Component, useEffect, useState } from "react";
 
-import { ContainerMain, DisabledMask, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper, UsernameSectionWrapper } from "./SlideModule_1.styled";
+import {
+  ContainerMain, DisabledMask, FacebookButton, NewTag, SlideImg,
+  Text01, Text02, DateText, TextNew, TextSectionWrapper, UserImage,
+  UsernameSectionWrapper,
+  UserDataContainer,
+  GeneralContainer
+} from "./SlideModule_1.styled";
 import { title } from "process";
 
-import IMG1 from "../MediaSources/filtroGris.png";
+import IMG1 from "../MediaSources/facebookIcon.png";
 
 export const SlideModule_1 = (props: ISlideModule_1) => {
 
@@ -13,45 +19,39 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
     isNew,
     descripcion,
     usrFacebookURL,
-    date,
+    datePublication,
     imgURL,
     usrImgURL,
     username,
   } = props;
   const [img, setImg] = useState("")
-  const [disabled, setDisabled] = useState(true);
+  const [imgUsr, setImgUsr] = useState("")
 
   const awaitImg = async () => {
     const resolvedImg = await imgURL
     setImg(resolvedImg)
   }
+  const awaitImgUsr = async () => {
+    const resolvedImg = await usrImgURL
+    setImgUsr(resolvedImg)
+  }
 
-  const onMouseEnter = () => {
-    setDisabled(false)
-  };
-  const onMouseLeave = () => {
-    setDisabled(true)
-  };
 
   useEffect(() => {
     awaitImg()
+    awaitImgUsr()
   }, [])
 
 
+
   return (
-    <Container>
+    <GeneralContainer>
       <DisabledMask>
-
       </DisabledMask>
-      <ContainerMain
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}>
-
-
+      <ContainerMain >
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
-
               {
                 isNew ?
                   <NewTag>
@@ -62,21 +62,35 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
             </SlideImg>
           </Row>
-
-          <TextSectionWrapper id="expandable">
-            <Row>
-              <Text02>{descripcion} </Text02>
-            </Row>
-
+          <TextSectionWrapper >
+            <Text02>{descripcion} </Text02>
           </TextSectionWrapper>
           <UsernameSectionWrapper>
-
-            <Row>
-              <Text01>{username} </Text01>
-            </Row>
+            <Col>
+              <UserImage style={{ backgroundImage: 'url(' + imgUsr + ')' }}>
+              </UserImage>
+            </Col>
+            <Col>
+              <UserDataContainer>
+                <Text01  >{username} </Text01>
+                {
+                  datePublication ? <DateText   > {
+                    datePublication.toISOString().split('T')[0]?.toString()} </DateText>
+                    : <></>
+                }
+              </UserDataContainer>
+            </Col>
+            <Col>
+              <FacebookButton style={{ backgroundImage: `url(${IMG1.src})` }}
+              >
+                <a href={usrFacebookURL}
+                  target="_blank"
+                  style={{ height: "100%", display: "block" }}></a>
+              </FacebookButton>
+            </Col>
           </UsernameSectionWrapper>
         </Col>
       </ContainerMain >
-    </Container >
+    </GeneralContainer >
   )
 }

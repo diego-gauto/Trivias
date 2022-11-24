@@ -18,6 +18,10 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../hooks/useAuth";
 import { IMembership } from "../../store/types/AuthActionTypes";
 import { IStripeUserData } from "../../interfaces/IStripeUserData";
+import { useMediaQuery } from "react-responsive";
+import Link from "next/link";
+import { SIGNUP_PATH } from "../../constants/paths";
+
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
   email: yup
@@ -52,6 +56,7 @@ const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [pastUserScreen, setPastUserScreen] = useState(false);
   const [pastUser, setPastUser] = useState<any>({})
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
   };
@@ -182,7 +187,7 @@ const Login = () => {
           <div className="left-side">
             <img className="imgUpperHand" src="../images/mano2.png" alt="" />
             <p>¡Es un placer <br />
-              <span>tenerte de<br /> vuelta!</span>
+              <span>tenerte de {!responsive1023 && <br />} vuelta!</span>
             </p>
             <img className="imgBottomHand" src="../images/mano1.png" alt="" />
           </div>
@@ -195,7 +200,7 @@ const Login = () => {
                     : handleSubmit(onSubmit2)
                 }>
                   <div className="title-contain">
-                    <Title>
+                    <Title style={{ fontSize: 26 }}>
                       Inicia sesión
                     </Title>
                     <div className="subtext">
@@ -239,6 +244,13 @@ const Login = () => {
                             {errors.password?.message}
                           </div>
                         </div>
+                        {
+                          responsive1023 &&
+                          <p className="forgotText">
+                            ¿Olvidaste tu contraseña?
+                            <span onClick={() => { setShowForgot(true) }}>&nbsp;Click aquí</span>
+                          </p>
+                        }
                       </div>
                       :
                       <div className="box">
@@ -299,11 +311,23 @@ const Login = () => {
                         <div className="invalid-feedback" style={{ display: "block" }}>
                           {errors.confirmPassword?.message}
                         </div>
+
                       </div>
                   }
+
                   <PurpleButton2 type='submit'>
                     Ingresar
                   </PurpleButton2>
+                  {
+                    responsive1023 &&
+                    <p className="registerText">
+                      ¿No tienes una cuenta?
+                      <Link href={SIGNUP_PATH}>
+                        <span>&nbsp;Regístrate</span>
+                      </Link>
+                    </p>
+                  }
+
                   <div className="social-media-container">
                     <div className="info">
                       <p style={{ textAlign: "end" }}>O inicia sesión usando <br />
