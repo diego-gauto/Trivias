@@ -8,8 +8,8 @@ margin-bottom: 1%  ;
 padding-top: 90px;
 display: block;
   @media only screen and (max-width: 1280px) {
-    top: 125%;
-    margin-bottom: 2.5%  ;
+    
+    margin-bottom: 14.5%  ;
   }
  
   @media only screen and (max-width: 1024px) {
