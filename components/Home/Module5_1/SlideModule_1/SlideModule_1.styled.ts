@@ -133,6 +133,16 @@ height: 0px;
 opacity: 0;
 }
 
+@media only screen and (max-width: 1600px) {
+  width: 290px;
+}
+
+`; 
+export const GeneralContainer = styled.div`
+width: 383px;
+@media only screen and (max-width: 1600px) {
+  width: 290px;
+}
 `; 
 
 export const TextNew = styled.span`

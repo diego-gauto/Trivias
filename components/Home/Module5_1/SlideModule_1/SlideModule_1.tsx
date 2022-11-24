@@ -6,7 +6,8 @@ import {
   ContainerMain, DisabledMask, FacebookButton, NewTag, SlideImg,
   Text01, Text02, DateText, TextNew, TextSectionWrapper, UserImage,
   UsernameSectionWrapper,
-  UserDataContainer
+  UserDataContainer,
+  GeneralContainer
 } from "./SlideModule_1.styled";
 import { title } from "process";
 
@@ -44,7 +45,7 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
 
   return (
-    <Container>
+    <GeneralContainer>
       <DisabledMask>
       </DisabledMask>
       <ContainerMain >
@@ -90,6 +91,6 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
           </UsernameSectionWrapper>
         </Col>
       </ContainerMain >
-    </Container >
+    </GeneralContainer >
   )
 }
