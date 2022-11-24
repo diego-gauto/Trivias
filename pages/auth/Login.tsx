@@ -248,9 +248,7 @@ const Login = () => {
                           responsive1023 &&
                           <p className="forgotText">
                             ¿Olvidaste tu contraseña?
-                            <Link href={SIGNUP_PATH}>
-                              <span>&nbsp;Click aquí</span>
-                            </Link>
+                            <span onClick={() => { setShowForgot(true) }}>&nbsp;Click aquí</span>
                           </p>
                         }
                       </div>

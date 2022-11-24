@@ -463,6 +463,7 @@ export const LoginBackground = styled.div`
           font-size: 14px;
           color: #74549e;
           line-height: initial;
+          text-align: center;
           span {
             font-weight: bold;
           }
