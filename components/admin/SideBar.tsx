@@ -65,23 +65,23 @@ const SideBar = () => {
     <Container>
       {isSuperAdmin &&
         <><Link href="/admin/Pago">
-          <Text>Pagos</Text>
+          <Text>Payments</Text>
         </Link><Link href="/admin/Courses">
-            <Text>Cursos</Text>
+            <Text>Courses</Text>
           </Link><Link href="/admin/CourseAttributes">
-            <Text>Categorias</Text>
+            <Text>Categories</Text>
           </Link><Link href="/admin/Rewards">
-            <Text>Recompensas</Text>
+            <Text>Rewards</Text>
           </Link><Link href="/admin/Landing">
             <Text>Landing</Text>
           </Link><Link href="/admin/Coupons">
-            <Text>Cupones</Text>
+            <Text>Coupons</Text>
           </Link><Link href="/admin/Users">
-            <Text>Usuarios</Text>
+            <Text>Users</Text>
           </Link><Link href="/admin/Sections">
-            <Text>Secciones</Text>
+            <Text>Assignments</Text>
           </Link><Link href="/admin/HomeWork">
-            <Text>Tareas</Text>
+            <Text>Homeworks</Text>
           </Link>
 
         </>
