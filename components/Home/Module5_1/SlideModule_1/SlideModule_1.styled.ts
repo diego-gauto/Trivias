@@ -61,7 +61,6 @@ background-color: #F4E3BA;
 border-radius: 50px;
 margin: 0 auto;
 position: absolute;
-z-index: 1;
 bottom: 0%;
 text-align: center;
 overflow: hidden;
@@ -71,11 +70,10 @@ height: 100px;
  
 export const FacebookButton = styled.div`
 position: absolute;
-z-index: 1;
-bottom: 25%;
+bottom: 32.5%;
 background-repeat: no-repeat;
-width: 50px;
-height: 50px;
+width: 40px;
+height: 40px;
 right: 10%;
 background-color: white;
 border-radius: 50px;
@@ -83,16 +81,14 @@ background-size: 105%;
 `;
 export const UserImage = styled.div`
 
-background-color: #F4E3BA;
 border-radius: 50px;
-margin: 0 auto;
 position: absolute;
-z-index: 1;
-bottom: 0%;
-text-align: center;
-overflow: hidden;
-width: 382px;
-height: 100px;
+bottom: 15%;
+width: 70px;
+height: 70px;
+background-size: 100%;
+background-repeat: no-repeat;
+left: 6.5%;
 `;
 
 
@@ -111,22 +107,33 @@ transform: scale(1.1);
 }
 
 `;
+ 
+export const UserDataContainer = styled.div`
+height: 10px !important;
+display: block;
+width: 100%;
+position: relative;
+padding-top: 7.5%;
+
+`;
 export const DisabledMask = styled.div`
 height: 480px; 
-margin-top: -1px;
-transition: all .2s ease-in-out;  
+margin-top: 0px;
+transition: all .3s ease-in-out;  
   background-color: rgba(239, 233, 243, 0.6);
 width: 383px;
 border-radius: 45px;
 position: absolute; 
 opacity: 1;
-&:hover {  
+margin-left: 0px;
+
+&:hover {   
 background-color: transparent; 
 height: 0px; 
 opacity: 0;
 }
 
-`;
+`; 
 
 export const TextNew = styled.span`
   font-family: "Raleway";
@@ -148,9 +155,12 @@ export const Text01 = styled.span`
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 150%;
-  color: #ffffff;
+  color: #6B4E2F;
+  text-align: left; 
+position: relative;
+   left: 0%;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -187,14 +197,20 @@ padding-right: 20px;
 
 export const DateText = styled.p`
 
-background-color: #F4E3BA;
-border-radius: 50px;
-margin: 0 auto;
-position: absolute;
-z-index: 1;
-bottom: 0%;
-text-align: center;
-overflow: hidden;
-width: 382px;
-height: 100px;
+color: #AC8C57;
+padding-left: 120px;
+padding-right: 120px;
+font-family: "Montserrat";
+font-style: normal;
+font-weight: 700;
+font-size: 12px;
+line-height: 150%;
+text-align: left;
+@font-face {
+  font-family: Montserrat;
+  src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+@media only screen and (max-width: 1024px) {
+  font-size: 16px;
+}
 `;

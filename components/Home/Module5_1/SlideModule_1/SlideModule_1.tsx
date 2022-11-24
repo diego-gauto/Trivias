@@ -5,7 +5,8 @@ import React, { Component, useEffect, useState } from "react";
 import {
   ContainerMain, DisabledMask, FacebookButton, NewTag, SlideImg,
   Text01, Text02, DateText, TextNew, TextSectionWrapper, UserImage,
-  UsernameSectionWrapper
+  UsernameSectionWrapper,
+  UserDataContainer
 } from "./SlideModule_1.styled";
 import { title } from "process";
 
@@ -30,7 +31,7 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
     setImg(resolvedImg)
   }
   const awaitImgUsr = async () => {
-    const resolvedImg = await usrFacebookURL
+    const resolvedImg = await usrImgURL
     setImgUsr(resolvedImg)
   }
 
@@ -45,15 +46,11 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
   return (
     <Container>
       <DisabledMask>
-
       </DisabledMask>
       <ContainerMain >
-
-
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
-
               {
                 isNew ?
                   <NewTag>
@@ -64,34 +61,30 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
             </SlideImg>
           </Row>
-
           <TextSectionWrapper >
-
             <Text02>{descripcion} </Text02>
-
-
           </TextSectionWrapper>
           <UsernameSectionWrapper>
             <Col>
               <UserImage style={{ backgroundImage: 'url(' + imgUsr + ')' }}>
-
               </UserImage>
             </Col>
             <Col>
-              <Row>
-                <Text01 id="1">{username} </Text01>
-              </Row>
-              <Row>
+              <UserDataContainer>
+                <Text01  >{username} </Text01>
                 {
-                  datePublication ? <DateText id="2" > {
-                    datePublication.toString()} </DateText>
+                  datePublication ? <DateText   > {
+                    datePublication.toISOString().split('T')[0]?.toString()} </DateText>
                     : <></>
                 }
-
-              </Row>
+              </UserDataContainer>
             </Col>
             <Col>
-              <FacebookButton style={{ backgroundImage: `url(${IMG1.src})` }}>
+              <FacebookButton style={{ backgroundImage: `url(${IMG1.src})` }}
+              >
+                <a href={usrFacebookURL}
+                  target="_blank"
+                  style={{ height: "100%", display: "block" }}></a>
               </FacebookButton>
             </Col>
           </UsernameSectionWrapper>
