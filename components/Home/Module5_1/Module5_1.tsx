@@ -99,7 +99,8 @@ export const Module5_1 = (props: IModule5_1) => {
         </SliderContainer>
 
         <PeopleContainer>
-          <People style={{ backgroundImage: `url(${IMG2.src})` }}></People>
+          <People style={{ backgroundImage: `url(${IMG2.src})` }}>
+          </People>
           <BgColor id="Bgcolor"></BgColor>
         </PeopleContainer>
       </ContainerMain >

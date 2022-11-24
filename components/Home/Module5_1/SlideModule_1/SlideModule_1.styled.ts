@@ -11,6 +11,11 @@ export const SlideImg = styled.div`
   background-position: center;
   display: flex;
   align-items: flex-start; 
+  @media only screen and (max-width: 1600px) {
+
+    width: 290px;
+    }
+
   @media only screen and (max-width: 1024px) {
     height: 180px;
   }
@@ -66,6 +71,11 @@ text-align: center;
 overflow: hidden;
 width: 382px;
 height: 100px;
+
+@media only screen and (max-width: 1600px) {
+
+width: 290px;
+}
 `;
  
 export const FacebookButton = styled.div`
@@ -175,6 +185,17 @@ position: relative;
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+
+  @media only screen and (max-width: 1600px) { 
+    font-size: 14px;
+    width: 90px;
+position: relative;
+display: block;
+left: 37.5%;
+text-align: center;
+      }
+ 
+
   @media only screen and (max-width: 1024px) {
     font-size: 16px;
   }
@@ -203,6 +224,10 @@ padding-right: 20px;
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+
+  @media only screen and (max-width: 1600px) { 
+  font-size: 13px;
+    }
 `;
 
 export const DateText = styled.p`
@@ -220,6 +245,14 @@ text-align: left;
   font-family: Montserrat;
   src: url(../fonts/Montserrat-VariableFont_wght.ttf);
 }
+@media only screen and (max-width: 1600px) { 
+  font-size: 12px;
+  width: 90px;
+position: relative;
+display: block;
+left: 0%;
+    }
+
 @media only screen and (max-width: 1024px) {
   font-size: 16px;
 }

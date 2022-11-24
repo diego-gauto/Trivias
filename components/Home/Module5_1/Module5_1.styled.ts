@@ -5,28 +5,84 @@ export const SliderContainer = styled.div`
   
 `;
 export const People = styled.div`
-background-size: 50%;
-height: 410px;
+background-size: 60%;
+height: 470px;
 background-repeat: no-repeat;
-width: 100%;
-z-index: 1;
+width: 100%; 
 position: relative;
 background-position-x: 50%;
+z-index:1;
+@media only screen and (max-width: 1980px) {
+  height: 470px;
+}
+@media only screen and (max-width: 1720px) {
+  height: 410px;
+}
+@media only screen and (max-width: 1600px) {
+  height: 360px;
+}
+@media only screen and (max-width: 1440px) {
+  height: 300px;
+}
+
+
+@media only screen and (max-width: 1028px) { 
+  height: 270px;
+
+}
 `;
 export const PeopleContainer = styled.div` 
-height: 410px; 
+height: 470px;
+
+@media only screen and (max-width: 1720px) {
+  height: 405;
+}
+@media only screen and (max-width: 1600px) {
+  height: 360px;
+}
+@media only screen and (max-width: 1440px) {
+  height: 300px;
+  margin-top: 5%;
+}
+@media only screen and (max-width: 1028px) {
+  margin-top: 8%;
+}
+
 `;
 export const Lines = styled.div`
 background-size: 100%;
-height: 180px;
+height: 300px;
 background-repeat: no-repeat;
+@media only screen and (max-width: 1980px) {
+  height: 180px;
+}
 `;
 export const BgColor = styled.div`
 background-color: #EDE7F2;
 height: 300px;
-top: -70%;
-display: block;
+top: -300px; 
 position: relative;
+
+@media only screen and (max-width: 1980px) {
+  top: -59.6%;
+  height: 280px;
+} 
+@media only screen and (max-width: 1720px) {
+  top: -51%;
+  height: 240px;
+}
+@media only screen and (max-width: 1600px) {
+  height: 240px;
+  top: -66.6%;
+}
+@media only screen and (max-width: 1440px) {
+  top: -60%;
+  height: 180px;
+}
+@media only screen and (max-width: 1280px) {
+  
+}
+
 `;
 export const TittleA = styled.span` 
 color: #3F1168;
@@ -63,10 +119,14 @@ export const ContainerMain = styled.div`
 background-color: #E5B6E9;
 height: 1120px;
 margin-top: 0;
-
-  padding-bottom: 0;
+margin-bottom: 5%;
   position: inherit;
   width: 100%;  
+
+  @media only screen and (max-width: 1600px) {
+    
+margin-bottom: 0%;
+  }
   
 `;
 export const AnimatedBackground = styled.video`
