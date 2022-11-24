@@ -322,6 +322,9 @@ export const LoginBackground = styled.div`
         span {
           font-weight: bold;
         }
+        @media (max-width: 400px) {
+          font-size: 12px;
+        }
       }
       p,
       h1 {
