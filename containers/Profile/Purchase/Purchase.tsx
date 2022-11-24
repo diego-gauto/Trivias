@@ -14,7 +14,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, BackgroundLoader, LoaderContain, LoaderImage, PurpleButton2 } from "../../../screens/Login.styled";
-import { updateCoupon } from "../../../store/actions/CouponsActions";
+import { getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
   addCourseUser,
@@ -99,6 +99,8 @@ const Purchase = () => {
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
   const [coupon, setCoupon] = useState<any>();
+  const [coupons, setCoupons] = useState<any>([]);
+  const [code, setCode] = useState('');
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -179,11 +181,15 @@ const Purchase = () => {
   }, [loggedIn]);
 
   useEffect(() => {
+    getAllCoupons();
+    setPaypal(!paypal)
     if (type == 'subscription') {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
+      setPaypal(false);
     } else {
       getWholeCourse(id).then((res: any) => {
         setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
+        setPaypal(false);
       })
     }
   }, [])
@@ -230,8 +236,6 @@ const Purchase = () => {
           // alert("Hay un error en los datos de la tarjeta!")
         } else {
           setCard({ ...card, cardId: res.data.id, brand: res.data.card.brand, last4: res.data.card.last4, status: true })
-          setProcess(false);
-          setConfirmation(true);
         }
         setLoader(false)
       })
@@ -245,27 +249,12 @@ const Purchase = () => {
     if (plan.method == 'paypal') {
       setLoader(false);
       setPaypal(!paypal);
-      setProcess(false);
-      setConfirmation(true);
     }
     setLoader(false);
   }
 
-  const Return = () => {
-    setProcess(true);
-    setConfirmation(false);
-    setCoupon(null);
-    Object.keys(card).forEach(key => {
-      card[key] = '';
-    });
-    setPaypal(true)
-    setPlan({ method: '' })
-    setDefaultCard(new Array(defaultCard.length).fill(false));
-    setCard(card);
-  }
-
   const FinishPayment = async () => {
-    setLoader(true)
+    console.log(card);
     let invoice = {
       amount: 0,
       userName: userData.name,
@@ -401,10 +390,36 @@ const Purchase = () => {
   const handleCoupons = (value: any) => {
     setCoupon(value);
   }
+  const getAllCoupons = () => {
+    getCoupons().then((res: any) => {
+      setCoupons(res);
+    })
+  }
+
+  const checkCoupon = () => {
+    let coupon;
+    setPaypal(true)
+    coupon = coupons.filter((x: any) => x.code == code && x.status);
+    if (coupon.length > 0) {
+      if (coupon[0].users.includes(userData?.id)) {
+        alert("Este cupón ya ha sido canjeado");
+        setCode('');
+      } else {
+        coupon[0].users.push(userData?.id);
+        handleCoupons({ ...coupon[0] });
+        setCode('');
+      }
+    } else {
+      alert('Este cupón no existe!');
+      handleCoupons(null);
+      setCode('');
+    }
+    setTimeout(() => {
+      setPaypal(false)
+    }, 500);
+  }
 
   useEffect(() => {
-    console.log(card);
-
   }, [card, plan])
 
   useEffect(() => {
@@ -615,7 +630,8 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p>
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                    <p className="title">Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
@@ -623,20 +639,23 @@ const Purchase = () => {
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
                 </div>
-                <div className="coupon-container">
+                {type == "course" && <div className="coupon-container">
                   <img src="../images/purchase/coupon.png" alt="" />
                   <a>Haz click aquí</a>
                   <p>si cuentas con un <br />
                     código de descuento.</p>
                   <div className="coupon">
-                    <input type="text" placeholder="gonvarbuenfin22" />
-                    <button><FaArrowRight style={{ color: "white" }}></FaArrowRight></button>
+                    <input type="text" placeholder="gonvarbuenfin22" value={code} onChange={(e) => { setCode(e.target.value) }} />
+                    <button onClick={checkCoupon}><FaArrowRight style={{ color: "white" }}></FaArrowRight></button>
                   </div>
                   <div className="line"></div>
-                </div>
+                </div>}
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
-                  <p className="total">$ 149 <span>MXN</span></p>
+                  {type == "subscription" && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
+                  {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
+                    (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
                 </div>
                 <div className="bg"></div>
                 <img className="image" src="../images/purchase/neworange.png" alt="" />

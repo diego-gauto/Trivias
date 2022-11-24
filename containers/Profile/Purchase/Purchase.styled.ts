@@ -153,7 +153,7 @@ export const Container = styled.div`
         margin-top: auto;
         .total {
           text-align: end;
-          font-size: 45px;
+          font-size: 38px;
           font-weight: bold;
           color: #e55c00;
           span {
