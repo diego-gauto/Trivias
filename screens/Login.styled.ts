@@ -97,6 +97,7 @@ export const Background = styled.div`
             font-weight: bold;
           }
           .form-input {
+            width: 100%;
             flex-grow: 1;
             position: relative;
             .eye {
@@ -552,11 +553,18 @@ export const ProfilePicture2 = styled.i`
   border: none;
   background-repeat: no-repeat;
 `;
-export const Error = styled.p`
-  color: white;
-  text-align: center;
-  font-weight: 600;
-  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+export const Error = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  p {
+    color: red;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+
+    margin: 0;
+  }
 `;
 
 export const AnimatedBackground = styled.video`

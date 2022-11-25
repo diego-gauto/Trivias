@@ -85,6 +85,7 @@ const Register = () => {
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [phoneValidation, setPhoneValidation] = useState(false);
+  const [phone, setphone] = useState("")
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -129,9 +130,9 @@ const Register = () => {
   };
 
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
-  console.log(phoneCode)
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
+    setphone(phoneInput)
     if (phoneCode == '+52') {
       if (isValidPhoneNumber(phoneInput)) {
         console.log('se logro')
@@ -212,7 +213,7 @@ const Register = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      window.location.href = "/";
+      window.location.href = "/Preview";
     } else {
       setTimeout(() => {
         setIsLoading(false)
@@ -225,7 +226,7 @@ const Register = () => {
   return (
     <>
       {!isLoading ? (
-        <Background>
+        <Background >
           <div className="left-side">
             <p>¡Te damos la bienvenida <br />
               <span>a nuestra comunidad!</span>
@@ -262,7 +263,7 @@ const Register = () => {
                       {...register("lastName")} />
                   </div>
                 </div>
-                <div className="form-row">
+                <div className="form-row" style={error ? { flexDirection: "column", gap: 2 } : {}}>
                   <div className="form-input">
                     <label>Correo electrónico</label>
                     <input type="text"
@@ -271,6 +272,11 @@ const Register = () => {
                       className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                       {...register("email")} />
                   </div>
+                  {error && <Error>
+                    <p>
+                      {errorMsg}.
+                    </p>
+                  </Error>}
                 </div>
                 <div className="form-row">
                   <div className="form-input">
@@ -305,7 +311,7 @@ const Register = () => {
                       onChange={(e: any) => { setPhoneInput(e) }}
                       limitMaxLength={true}
                       international={true}
-                      // value={phoneCode}
+                      value={phone}
                       countryCallingCodeEditable={false}
                       defaultCountry="MX"
                       id="input_1"
