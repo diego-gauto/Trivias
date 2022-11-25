@@ -7,14 +7,19 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
-import { useEffect } from "react";
+import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
+import { useEffect, useState } from "react";
 declare let Hls: any
 
 export const CourseModule = (props: ICourseModuleProps) => {
-  const { data, num } = props;
+  const { data, num, user, loggedIn } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const router = useRouter();
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+  }
 
   const doVideoStuff = () => {
     //@ts-ignore
@@ -55,12 +60,18 @@ export const CourseModule = (props: ICourseModuleProps) => {
               Desde ${data.coursePrice}.00
             </Card.Text>}
           <PurpleButton text={responsive768 ? "Comprar" : "Ve un adelanto"} onClick={() => router.push(PREVIEW_PATH)} />
-          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
+          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
+            loggedIn
+              ? handleShow()
+              : router.push(PREVIEW_PATH)
+          }
+          } />
         </Col>
         {responsive768 && <Card.Text className="mobile-price">
           Desde ${data.coursePrice}.00
         </Card.Text>}
       </Row>
+      <Modal1 show={show} setShow={setShow} course={data} user={user} />
     </CardContainer>
   )
 }

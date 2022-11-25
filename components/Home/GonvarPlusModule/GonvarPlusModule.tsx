@@ -8,12 +8,20 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
+import { useFormState } from "react-hook-form";
 declare let Hls: any
 
-export const GonvarPlusModule = ({ loggedIn }: any) => {
+export const GonvarPlusModule = ({ loggedIn, user }: any) => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
+  const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState<any>([]);
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+  }
   const router = useRouter();
 
   const doVideoStuff = () => {
@@ -29,6 +37,7 @@ export const GonvarPlusModule = ({ loggedIn }: any) => {
       video.src = `${videoSrc}`
     }
   }
+
   useEffect(() => {
     doVideoStuff()
   }, [])
@@ -63,6 +72,7 @@ export const GonvarPlusModule = ({ loggedIn }: any) => {
           Desde $149.00
         </Card.Text>}
       </Row>
+      {/* <Modal1 show={show} setShow={setShow} course={course} user={user} /> */}
     </CardContainer>
   )
 }
