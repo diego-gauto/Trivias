@@ -64,8 +64,8 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     spaceBetween: 0,
     breakpoints: {
       1024: {
-        slidesPerView: 3.5,
-        spaceBetween: 0,
+        slidesPerView: 5,
+        spaceBetween: 10,
       }
     }
   };
@@ -73,10 +73,15 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   return (
     <Container
       fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0 }}
+      style={{ overflow: "hidden", padding: 0, margin: 0, backgroundColor: "#ede7f2", paddingTop: 40 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
+      {type == 'subscription' ? <h1 style={{ color: "#3F1168", paddingLeft: "80px", fontSize: "30px" }}>Cursos incluidos en <span
+        style={{ color: "#A733E4" }}>Gonvar+</span></h1> :
+        <h1 style={{ color: "#3F1168", paddingLeft: "80px", fontSize: "30px" }}>Lecciones de <span
+          style={{ color: "#A733E4" }}>Nails Master 2.0</span></h1>
+      }
       <Swiper {...settings} onInit={onInit}>
         {slideDataArr?.slice(0, 12).map((element, idx) => (
           <SwiperSlide key={idx}>

@@ -82,10 +82,9 @@ export const TextNew = styled.span`
 export const Text01 = styled.span`
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 18px;
-  line-height: 150%;
-  color: #000000;
+  color: #3f1168;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -100,7 +99,7 @@ export const Text02 = styled.span`
 
   /* identical to box height, or 21px */
 
-  color: #000000;
+  color: #a733e4;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);

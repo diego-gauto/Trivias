@@ -2,9 +2,10 @@ import { Card } from "react-bootstrap";
 import styled from "styled-components";
 
 export const CardContainer = styled(Card)`
+  background: #ede7f2;
   border: 0;
   border-radius: 0;
-  color: #fff;
+  color: #ede7f2;
   font-family: "Montserrat", sans-seriff;
   .video {
     position: relative;
@@ -31,22 +32,22 @@ export const CardContainer = styled(Card)`
     position: absolute;
   }
   .new-btn {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
+    background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+    color: #ede7f2;
+    border: none;
     padding: 4px 18px;
     border-radius: 10px;
     font-size: 14px;
     margin-bottom: 10px;
     cursor: default;
-    &:active,
-    &:focus {
-      border-color: #fff;
+    font-weight: 500;
+    span {
+      font-weight: 300;
     }
   }
   .card-title {
     font-size: 36px;
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 20px;
   }
   .card-subtitle {
@@ -64,14 +65,23 @@ export const CardContainer = styled(Card)`
   }
   .second-col {
     padding-top: 30px;
+    text-align: center;
   }
   button:first-of-type {
     margin-right: 10px;
   }
   .price,
   .mobile-price {
+    color: #ff9b00;
     font-size: 24px;
     font-weight: 700;
+    span {
+      color: #ede7f2;
+    }
+    .lower {
+      font-size: 18px;
+      font-weight: 300;
+    }
   }
   .mobile-price {
     margin-top: 20px;

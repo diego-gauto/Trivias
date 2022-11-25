@@ -4,9 +4,11 @@ import styled from "styled-components";
 
 export const WhiteButtonContainer = styled(Button)`
   font-family: "Montserrat";
-  border: 1px solid #ffffff;
+  border: 1.5px solid #ffffff;
   border-radius: 100px;
   color: #fff;
+  max-width: 200px;
+  font-weight: 600;
   background: transparent;
   padding: 15px 25px;
   &:hover {
