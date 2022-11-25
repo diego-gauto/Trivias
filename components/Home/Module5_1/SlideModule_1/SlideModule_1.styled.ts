@@ -48,6 +48,10 @@ transition: all .2s ease-in-out;
 height: 360px;
 bottom: 240px !important; 
 }
+&:active {  
+height: 360px;
+bottom: 240px !important; 
+}
 
   @media only screen and (max-width: 1024px) {
     margin-top: 32px;
@@ -162,6 +166,9 @@ border-radius: 50px;
 &:hover { 
 transform: scale(1.1);  
 }
+&:active { 
+transform: scale(1.1);  
+}
 
   @media only screen and (max-width: 840px) {
     width: 100%; 
@@ -205,6 +212,11 @@ opacity: 1;
 margin-left: 0px;
 
 &:hover {   
+background-color: transparent; 
+height: 0px; 
+opacity: 0;
+}
+&:active {   
 background-color: transparent; 
 height: 0px; 
 opacity: 0;

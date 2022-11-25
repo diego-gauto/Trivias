@@ -102,7 +102,7 @@ export const Module5_1 = (props: IModule5_1) => {
   const settingsMobileMoreReduced = {
     loop: true,
     autoplay: {
-      delay: 2500,
+      delay: 2000,
     },
     centeredSlides: true,
     speed: 250,
