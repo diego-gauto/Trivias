@@ -164,7 +164,7 @@ const Login = () => {
   useEffect(() => {
     if (loggedIn) {
       setIsLoading(true)
-      window.location.href = "/Preview";
+      window.location.href = "/";
     }
     setTimeout(() => {
       setLoginLoader(true)

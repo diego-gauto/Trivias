@@ -212,7 +212,7 @@ const Register = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      window.location.href = "/Preview";
+      window.location.href = "/";
     } else {
       setTimeout(() => {
         setIsLoading(false)
