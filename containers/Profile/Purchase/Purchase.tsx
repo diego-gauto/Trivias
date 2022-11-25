@@ -254,7 +254,6 @@ const Purchase = () => {
   }
 
   const FinishPayment = async () => {
-    console.log(card);
     let invoice = {
       amount: 0,
       userName: userData.name,
@@ -420,6 +419,10 @@ const Purchase = () => {
   }
 
   useEffect(() => {
+    if (card.cardId) {
+      FinishPayment();
+    }
+
   }, [card, plan])
 
   useEffect(() => {
