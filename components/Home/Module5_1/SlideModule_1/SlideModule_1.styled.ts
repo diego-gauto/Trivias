@@ -128,11 +128,12 @@ background-color: white;
 border-radius: 50px;
 background-size: 105%;
 
-@media only screen and (max-width: 840px) {
+@media only screen and (max-width: 1028px) {
   
 width: 30px;
 height: 30px;
 }
+ 
 `;
 export const UserImage = styled.div`
 
@@ -184,10 +185,18 @@ export const UserDataContainer = styled.div`
 height: 10px !important;
 display: block;
 width: 100%;
-position: relative;
+position: relative; 
+
 padding-top: 7.5%;
 
+@media only screen and (max-width: 1028px) {
+
+  padding-top: 10%;
+  left: -20px;
+}
 @media only screen and (max-width: 840px) {
+  
+  left: 0px;
   padding-top: 5%;
   padding-right: 33.3%;
 }
