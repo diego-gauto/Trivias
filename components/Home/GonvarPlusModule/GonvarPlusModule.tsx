@@ -44,35 +44,49 @@ export const GonvarPlusModule = ({ loggedIn, user }: any) => {
 
   return (
     <CardContainer className="card-container">
-      <div className="video">
-        <video id="video" loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
-        ></video>
-      </div>
-      <Row>
-        <Col sm={12} md={7} className="first-col">
-          {/* <Button className="new-btn">Nuevo</Button> */}
-          <Card.Title>Gonvar+</Card.Title>
-          <Card.Subtitle>
-            Adquiere ya Gonvar+ para acceder a todo nuestro contenido.
-          </Card.Subtitle>
-        </Col>
-        <Col sm={12} md={5} className="second-col">
-          {!responsive768 &&
-            <Card.Text className="price">
+      <div className="course-container">
+        <div className="info">
+          <div className="top">
+            <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
+            <p>Gonvar+</p>
+            <button>Suscripción mensual</button>
+          </div>
+          <div className="middle">
+            <h1>Empieza a cursar <br /> cientos de clases <br /> sobre uñas y belleza <br /> <span>en línea</span> </h1>
+            <p>Diferentes niveles de dificultad <br />
+              e instructores internacionales.
+            </p>
+          </div>
+          <h1 className="price">Sólo $149 <span>MXN/mes</span></h1>
+        </div>
+        <div className="video">
+          <video id="video" loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+          ></video>
+          <Row>
+            {/* <Col sm={12} md={7} className="first-col">
+              <Card.Title>Gonvar+</Card.Title>
+              <Card.Subtitle>
+                Adquiere ya Gonvar+ para acceder a todo nuestro contenido.
+              </Card.Subtitle>
+            </Col> */}
+            <Col sm={12} md={5} className="second-col">
+              {/* {!responsive768 &&
+                <Card.Text className="price">
+                  Desde $149.00
+                </Card.Text>} */}
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
+                loggedIn
+                  ? router.push("/Purchase?type=subscription")
+                  : router.push(SIGNUP_PATH)
+              }} />
+              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
+            </Col>
+            {/* {responsive768 && <Card.Text className="mobile-price">
               Desde $149.00
-            </Card.Text>}
-          <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
-            loggedIn
-              ? router.push("/Purchase?type=subscription")
-              : router.push(SIGNUP_PATH)
-          }} />
-          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
-        </Col>
-        {responsive768 && <Card.Text className="mobile-price">
-          Desde $149.00
-        </Card.Text>}
-      </Row>
-      {/* <Modal1 show={show} setShow={setShow} course={course} user={user} /> */}
+            </Card.Text>} */}
+          </Row>
+        </div>
+      </div>
     </CardContainer>
   )
 }

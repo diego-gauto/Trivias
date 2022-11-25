@@ -7,6 +7,8 @@ import styled, { css, keyframes } from "styled-components";
 /*** ReDo screen styles */
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 100px;
   background-color: #ede7f2;
   width: 100%;
   min-height: 100vh;
@@ -34,6 +36,13 @@ export const Container = styled.div`
     font-weight: bold;
     font-size: 24px;
   }
+  .purchase-info {
+    p {
+      text-align: center;
+      color: #9b8faa;
+      font-size: 17px;
+    }
+  }
   .purchase-container {
     display: flex;
     width: 100%;
@@ -42,6 +51,8 @@ export const Container = styled.div`
   .right-section {
     .box {
       position: relative;
+      height: 100%;
+      max-height: 800px;
       max-width: 500px;
       display: flex;
       flex-direction: column;
@@ -139,9 +150,10 @@ export const Container = styled.div`
       }
 
       .price-container {
+        margin-top: auto;
         .total {
           text-align: end;
-          font-size: 45px;
+          font-size: 38px;
           font-weight: bold;
           color: #e55c00;
           span {
@@ -152,8 +164,9 @@ export const Container = styled.div`
       }
       .bg {
         background: #ffdd67;
-        width: 50%;
-        height: 15px;
+        width: 45%;
+        border-top-right-radius: 100%;
+        height: 250px;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -289,6 +302,12 @@ export const Container = styled.div`
       gap: 20px;
       max-width: 600px;
       margin: auto;
+      .paypal {
+        i {
+          color: #009cde;
+          font-size: 14px;
+        }
+      }
       .stripe {
         border: 2px solid #cdc7d8;
         padding-block: 20px;
@@ -348,8 +367,8 @@ export const Container = styled.div`
         }
 
         button {
-          background: #942ced;
-          border: 1px solid black;
+          background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+          border: none;
           border-radius: 20px;
           color: white;
           font-weight: bold;
@@ -1140,7 +1159,7 @@ export const LoaderContainSpinner = styled.div`
   display: block;
   width: 30px;
   height: 30px;
-  margin: 6px;
+  margin: auto;
   border-width: 9px;
   border-style: solid;
   border-radius: 50%;

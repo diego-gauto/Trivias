@@ -4,7 +4,7 @@ export const UserContain = styled.div`
   display: flex;
   width: 100%;
   padding: 40px;
-  height: -webkit-fill-available;
+  height: auto;
   gap: 20px;
 `;
 export const FilterContain = styled.div`
@@ -40,11 +40,22 @@ export const SearchInput = styled.input`
 `;
 export const DownloadUserData = styled.div`
   display: flex;
+  height: 43px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  background: transparent;
+  color: #6717cd;
+  padding-block: 9px;
+  padding-inline: 15px;
+  border: 1px solid #6717cd;
+  border-radius: 100px;
   img {
-    position: absolute;
+    height: auto;
     width: 15px;
-    margin-top: 14px;
-    margin-left: 7px;
+  }
+  p {
+    margin: 0;
   }
   &:hover {
     transform: scale(1.03);
@@ -70,6 +81,15 @@ export const EditIcon = styled.i`
 export const SearchContain = styled.div`
   display: flex;
   position: relative;
+  .hidden {
+    width: 30px;
+    height: 20px;
+    background: white;
+    position: absolute;
+    right: 27px;
+    top: 10px;
+    z-index: 1;
+  }
 `;
 export const UserShow = styled.p`
   display: flex;

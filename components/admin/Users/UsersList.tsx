@@ -179,7 +179,7 @@ const UsersList = () => {
             >
               <DownloadUserData>
                 <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
-                <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
+                <p>Descargar lista de usuarios</p>
               </DownloadUserData>
             </CsvDownloader>
             <FilterContain>
@@ -193,9 +193,13 @@ const UsersList = () => {
                 </select>
               </Select>
               <SearchContain>
+                <div className="hidden">
+
+                </div>
                 <SearchIcon />
                 <SearchInput
                   placeholder="Buscar un Usuario"
+                  type={"text"}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
                 />
               </SearchContain>

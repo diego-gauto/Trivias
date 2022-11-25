@@ -125,26 +125,26 @@ const Homepage = () => {
         } />
       }
       {/* SEP Module Card */}
-      <CourseModuleContainer courseId={SEP_COURSE_ID} num={2} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courseId={SEP_COURSE_ID} num={2} />
       {courseSEPData &&
         <Module4_Carousel type={"product"} isInfinite={true} slideData={
           courseSEPData.lessons
         } />
-      }
+      } */}
       {/* Dry's Manicure Module Card */}
-      <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} num={3} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} num={3} />
       {courses &&
         <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
           courses
         } />
-      }
+      } */}
       {/* Experts Escultural Module Card */}
-      <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} num={4} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} num={4} />
       {courses &&
         <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
           courses
         } />
-      }
+      } */}
       <Module5_1 slideData={landingData.experienciasSectionData} />
       <Module6 slideData={landingData.productosDestacadosData} />
     </Container>

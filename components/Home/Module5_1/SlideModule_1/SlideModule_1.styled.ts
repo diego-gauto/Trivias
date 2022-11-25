@@ -11,8 +11,19 @@ export const SlideImg = styled.div`
   background-position: center;
   display: flex;
   align-items: flex-start; 
+  @media only screen and (max-width: 1600px) {
+
+    width: 290px;
+    }
+
   @media only screen and (max-width: 1024px) {
-    height: 180px;
+    height: 320px;
+  }
+  @media only screen and (max-width: 770px) {
+    width: 250px;
+  }
+  @media only screen and (max-width: 580px) {
+    width: 290px;
   }
 `;
 
@@ -37,10 +48,28 @@ transition: all .2s ease-in-out;
 height: 360px;
 bottom: 240px !important; 
 }
+&:active {  
+height: 360px;
+bottom: 240px !important; 
+}
 
   @media only screen and (max-width: 1024px) {
-    margin-bottom: 75px;
+    margin-top: 32px;
+    height: 205px;
+    margin-bottom: 0;
   }
+  @media only screen and (max-width: 840px) {
+    width: 110%;
+    margin-top: 0px;
+    height: 210px;
+  }
+  @media only screen and (max-width: 770px) {
+    width: 102%;
+  }
+  @media only screen and (max-width: 580px) {
+    width: 106%;
+  }
+
 `;
 
 export const NewTag = styled.div`
@@ -66,6 +95,26 @@ text-align: center;
 overflow: hidden;
 width: 382px;
 height: 100px;
+
+@media only screen and (max-width: 1600px) {
+
+width: 290px;
+}
+
+@media only screen and (max-width: 840px) {
+  height: 80px;
+  width: 284px;
+  bottom: -5%;
+}
+@media only screen and (max-width: 770px) {
+  width: 250px;
+  
+}
+@media only screen and (max-width: 580px) {
+  width: 290px;
+  
+}
+
 `;
  
 export const FacebookButton = styled.div`
@@ -78,6 +127,13 @@ right: 10%;
 background-color: white;
 border-radius: 50px;
 background-size: 105%;
+
+@media only screen and (max-width: 1028px) {
+  
+width: 30px;
+height: 30px;
+}
+ 
 `;
 export const UserImage = styled.div`
 
@@ -89,6 +145,12 @@ height: 70px;
 background-size: 100%;
 background-repeat: no-repeat;
 left: 6.5%;
+
+@media only screen and (max-width: 840px) { 
+width: 50px;
+height: 50px;
+}
+
 `;
 
 
@@ -105,6 +167,17 @@ border-radius: 50px;
 &:hover { 
 transform: scale(1.1);  
 }
+&:active { 
+transform: scale(1.1);  
+}
+
+  @media only screen and (max-width: 840px) {
+    width: 100%; 
+      height: 420px;
+}
+  @media only screen and (max-width: 770px) {
+    width: 95%;
+}
 
 `;
  
@@ -112,9 +185,29 @@ export const UserDataContainer = styled.div`
 height: 10px !important;
 display: block;
 width: 100%;
-position: relative;
+position: relative; 
+
 padding-top: 7.5%;
 
+@media only screen and (max-width: 1028px) {
+
+  padding-top: 10%;
+  left: -20px;
+}
+@media only screen and (max-width: 840px) {
+  
+  left: 0px;
+  padding-top: 5%;
+  padding-right: 33.3%;
+}
+@media only screen and (max-width: 770px) {
+  padding-top: 10%;
+  padding-right: 30%;
+}
+@media only screen and (max-width: 580px) {
+  padding-top: 7.5%;
+  padding-right: 25%;
+}
 `;
 export const DisabledMask = styled.div`
 height: 480px; 
@@ -132,10 +225,28 @@ background-color: transparent;
 height: 0px; 
 opacity: 0;
 }
+&:active {   
+background-color: transparent; 
+height: 0px; 
+opacity: 0;
+}
 
 @media only screen and (max-width: 1600px) {
   width: 290px;
 }
+@media only screen and (max-width: 840px) {
+  height: 430px;
+width: 284px;
+}
+@media only screen and (max-width: 770px) {
+  height: 430px; 
+width: 250px;
+}
+@media only screen and (max-width: 580px) {
+  width: 290px;
+  
+}
+
 
 `; 
 export const GeneralContainer = styled.div`
@@ -143,6 +254,19 @@ width: 383px;
 @media only screen and (max-width: 1600px) {
   width: 290px;
 }
+@media only screen and (max-width: 840px) {
+  width: 260px;
+}
+@media only screen and (max-width: 580px) {
+  width: 290px;
+}
+@media only screen and (max-width: 460px) {
+  margin-left: 20%;
+}
+@media only screen and (max-width: 390px) {
+  margin-left: 12.5%;
+}
+
 `; 
 
 export const TextNew = styled.span`
@@ -175,9 +299,31 @@ position: relative;
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+
+  @media only screen and (max-width: 1600px) { 
+    font-size: 14px;
+    width: 90px;
+position: relative;
+display: block;
+left: 37.5%;
+text-align: center;
+      }
+ 
+
   @media only screen and (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 13px;
+    width: 140px; 
   }
+  @media only screen and (max-width: 770px) {
+    
+  font-size: 11px;
+  width: 125px;
+  }
+
+  @media only screen and (max-width: 580px) { 
+    font-size: 13px;
+      }
+
 `;
 export const Text02 = styled.p`
 text-align: left !important;
@@ -203,6 +349,11 @@ padding-right: 20px;
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+
+  @media only screen and (max-width: 1600px) { 
+  font-size: 13px;
+    }
+  
 `;
 
 export const DateText = styled.p`
@@ -220,7 +371,24 @@ text-align: left;
   font-family: Montserrat;
   src: url(../fonts/Montserrat-VariableFont_wght.ttf);
 }
+@media only screen and (max-width: 1600px) { 
+  font-size: 12px;
+  width: 90px;
+position: relative;
+display: block;
+left: 0%;
+    }
+
+ 
+
 @media only screen and (max-width: 1024px) {
-  font-size: 16px;
+  font-size: 11px;
 }
+@media only screen and (max-width: 840px) {
+padding-left: 50%;
+}
+
+@media only screen and (max-width: 580px) { 
+  font-size: 12px;
+    }
 `;

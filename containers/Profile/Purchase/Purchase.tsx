@@ -13,8 +13,8 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { Background, BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { updateCoupon } from "../../../store/actions/CouponsActions";
+import { Background, BackgroundLoader, LoaderContain, LoaderImage, PurpleButton2 } from "../../../screens/Login.styled";
+import { getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
   addCourseUser,
@@ -82,12 +82,15 @@ import {
 import PurchaseComplete from "./PurchaseComplete";
 import PurchaseDetails from "./PurchaseDetails";
 import { getPaidCourses } from "../../../store/actions/UserActions";
+import ModalError from "./Modal1/ModalError";
 
 const Purchase = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
   const [userData, setUserData] = useState<any>(null);
   const [show, setShow] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [step2, setStep2] = useState(false);
   const [payment, setPayment] = useState(false);
   const [cardInfo, setCardInfo] = useState(false);
@@ -96,6 +99,8 @@ const Purchase = () => {
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
   const [coupon, setCoupon] = useState<any>();
+  const [coupons, setCoupons] = useState<any>([]);
+  const [code, setCode] = useState('');
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -140,9 +145,16 @@ const Purchase = () => {
             setDefaultCard(temp_cards)
           })
           setUserData({ ...e.data(), id: e.id })
-
+          if (type == 'subscription') {
+            setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
+          } else {
+            getWholeCourse(id).then((res: any) => {
+              setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
+            })
+          }
         });
         setIsLoading(false);
+        // setPaypal(true);
       })
     } catch (error) {
       return false
@@ -169,11 +181,15 @@ const Purchase = () => {
   }, [loggedIn]);
 
   useEffect(() => {
+    getAllCoupons();
+    setPaypal(!paypal)
     if (type == 'subscription') {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
+      setPaypal(false);
     } else {
       getWholeCourse(id).then((res: any) => {
         setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
+        setPaypal(false);
       })
     }
   }, [])
@@ -193,7 +209,8 @@ const Purchase = () => {
   const handleConfirm = async () => {
     setLoader(true);
     if ((!cardInfo && !payment && plan.method !== 'paypal') || (!cardInfo && payment && !card.paymentMethod)) {
-      alert("Por favor seleccione un método de pago!");
+      setError(true);
+      setErrorMsg("Por favor seleccione un método de pago!")
     }
     if (cardInfo) {
       delete card.brand
@@ -203,7 +220,8 @@ const Purchase = () => {
       delete card.paymentMethod
     }
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
-      alert('Por favor acomplete todos los campos!')
+      setError(true);
+      // alert('Por favor acomplete todos los campos!')
       setLoader(false)
     }
     if (cardInfo && Object.values(card).every(value => value !== '')) {
@@ -214,11 +232,10 @@ const Purchase = () => {
       const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
       await addCard(data).then(async (res: any) => {
         if ("raw" in res.data) {
-          alert("Hay un error en los datos de la tarjeta!")
+          setError(true);
+          // alert("Hay un error en los datos de la tarjeta!")
         } else {
           setCard({ ...card, cardId: res.data.id, brand: res.data.card.brand, last4: res.data.card.last4, status: true })
-          setProcess(false);
-          setConfirmation(true);
         }
         setLoader(false)
       })
@@ -232,27 +249,11 @@ const Purchase = () => {
     if (plan.method == 'paypal') {
       setLoader(false);
       setPaypal(!paypal);
-      setProcess(false);
-      setConfirmation(true);
     }
     setLoader(false);
   }
 
-  const Return = () => {
-    setProcess(true);
-    setConfirmation(false);
-    setCoupon(null);
-    Object.keys(card).forEach(key => {
-      card[key] = '';
-    });
-    setPaypal(true)
-    setPlan({ method: '' })
-    setDefaultCard(new Array(defaultCard.length).fill(false));
-    setCard(card);
-  }
-
   const FinishPayment = async () => {
-    setLoader(true)
     let invoice = {
       amount: 0,
       userName: userData.name,
@@ -388,9 +389,39 @@ const Purchase = () => {
   const handleCoupons = (value: any) => {
     setCoupon(value);
   }
+  const getAllCoupons = () => {
+    getCoupons().then((res: any) => {
+      setCoupons(res);
+    })
+  }
+
+  const checkCoupon = () => {
+    let coupon;
+    setPaypal(true)
+    coupon = coupons.filter((x: any) => x.code == code && x.status);
+    if (coupon.length > 0) {
+      if (coupon[0].users.includes(userData?.id)) {
+        alert("Este cupón ya ha sido canjeado");
+        setCode('');
+      } else {
+        coupon[0].users.push(userData?.id);
+        handleCoupons({ ...coupon[0] });
+        setCode('');
+      }
+    } else {
+      alert('Este cupón no existe!');
+      handleCoupons(null);
+      setCode('');
+    }
+    setTimeout(() => {
+      setPaypal(false)
+    }, 500);
+  }
 
   useEffect(() => {
-    console.log(card);
+    if (card.cardId) {
+      FinishPayment();
+    }
 
   }, [card, plan])
 
@@ -524,7 +555,8 @@ const Purchase = () => {
                       }} />
                     </div>
                   </div>
-                  <button onClick={handleConfirm}>Confirmar compra</button>
+                  {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
+                  {loader && <LoaderContainSpinner />}
                 </div>
                 <div className="paypal">
                   {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
@@ -565,7 +597,7 @@ const Purchase = () => {
                         height: 50,
                       }}
                       createOrder={(data, actions) => {
-                        let price = product.price
+                        let price = product.price;
                         if (coupon) {
                           if (coupon.type == 'amount') {
                             price = price - coupon.discount;
@@ -591,6 +623,7 @@ const Purchase = () => {
                       }}
                     />}
                   </PayPalScriptProvider>}
+                  <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>
               </div>
             </div>
@@ -600,7 +633,8 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p>
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                    <p className="title">Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
@@ -608,25 +642,40 @@ const Purchase = () => {
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
                 </div>
-                <div className="coupon-container">
+                {type == "course" && <div className="coupon-container">
                   <img src="../images/purchase/coupon.png" alt="" />
                   <a>Haz click aquí</a>
                   <p>si cuentas con un <br />
                     código de descuento.</p>
                   <div className="coupon">
-                    <input type="text" placeholder="gonvarbuenfin22" />
-                    <button><FaArrowRight style={{ color: "white" }}></FaArrowRight></button>
+                    <input type="text" placeholder="gonvarbuenfin22" value={code} onChange={(e) => { setCode(e.target.value) }} />
+                    <button onClick={checkCoupon}><FaArrowRight style={{ color: "white" }}></FaArrowRight></button>
                   </div>
                   <div className="line"></div>
-                </div>
+                </div>}
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
-                  <p className="total">$ 149 <span>MXN</span></p>
+                  {type == "subscription" && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
+                  {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
+                    (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
                 </div>
                 <div className="bg"></div>
                 <img className="image" src="../images/purchase/neworange.png" alt="" />
               </div>
             </div>
+          </div>
+          <div className="purchase-info">
+            <p>Los precios están sujetos a cambios sin previo aviso. Los códigos de descuento no son acumulables. <br />
+              Al adquirir tu suscripción <b>Gonvar+</b>, obtienes acceso ilimitado a todos los cursos incluidos en la membresía
+              para verlos todas las veces que desees durante el tiempo que cubra tu pago. <br />
+              Cuentas con acceso a la comunidad exclusiva de <b>Gonvar</b> donde podrás intercambiar experiencias con
+              los instructores. <br />
+              La suscripción mensual <b>Gonvar+</b> es autorrenovable, por lo que el siguiente cobro se llevará a cabo exactamente
+              un mes después de la inscripción inicial. <br />
+              Al cancelar la renovación de la membresía, tu plan actual seguirá disponible hasta que termine el mes de
+              duración. <b>Puedes cancelar en cualquier momento.</b> <br />
+              Al confirmar tu compra, aceptas <b>los términos, condiciones y políticas de Gonvar.</b></p>
           </div>
           {/* <PayBox>
             <DataPayment>
@@ -1020,6 +1069,7 @@ const Purchase = () => {
             </SubContainer>
           </PayBox> */}
           {/* <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} /> */}
+          <ModalError error={error} setError={setError} errorMsg={errorMsg}></ModalError>
         </Container>}
     </>
   )

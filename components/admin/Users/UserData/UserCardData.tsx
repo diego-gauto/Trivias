@@ -31,6 +31,7 @@ import {
   TransparentButton,
   UserContain,
 } from "./UsersCardData.styled";
+import { deleteSelectedUser } from "../../../../store/actions/AuthActions";
 
 type CardData = {
   user: any;
@@ -63,6 +64,10 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
     getPaymentmethods(user.id).then((res) => {
       setPaymentMethods(res);
     })
+  }
+
+  const deleteUser = () => {
+    deleteSelectedUser("q")
   }
 
   useEffect(() => {
@@ -154,7 +159,9 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
               Sin métodos de pago...
             </LastContainer>}
         </PayContain>
-        <TransparentButton onClick={() => { setShowAddDays(true); }}>Agregar días de suscripción</TransparentButton></>
+        <TransparentButton onClick={() => { setShowAddDays(true); }}>Agregar días de suscripción</TransparentButton>
+        <TransparentButton onClick={() => { deleteUser() }}>Eliminar usuario</TransparentButton>
+      </>
       <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
       <ModalAddDays show={showAddDays} setShow={setShowAddDays} user={user} />
     </UserContain>
