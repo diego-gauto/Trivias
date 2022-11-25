@@ -347,6 +347,10 @@ const Login = () => {
                       condiciones y políticas de Gonvar</span></p>
                   </div>
                 </form>
+                <div className="imgResp">
+                  <img className="imgRight" src="../images/mano2.png" alt="" />
+                  <img className="imgLeft" src="../images/mano1.png" alt="" />
+                </div>
               </div>
               // <LoginBox>
 

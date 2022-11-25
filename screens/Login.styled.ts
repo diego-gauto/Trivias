@@ -339,6 +339,7 @@ export const LoginBackground = styled.div`
     order: 2;
     @media (max-width: 1023px) {
       width: 100%;
+      z-index: -2;
     }
     form {
       max-width: 400px;
@@ -552,6 +553,34 @@ export const LoginBackground = styled.div`
           span {
             font-weight: bold;
           }
+        }
+      }
+    }
+    .imgResp {
+      display: none;
+      position: relative;
+      height: 250px;
+      @media (max-width: 1023px) {
+        display: flex;
+      }
+      .imgLeft {
+        position: absolute;
+        bottom: -70px;
+        left: -30px;
+        width: 40%;
+        min-width: 230px;
+        @media (max-width: 450px) {
+        }
+        z-index: -1;
+      }
+      .imgRight {
+        right: -80px;
+        position: absolute;
+        width: 40%;
+        transform: rotate(90deg);
+        min-width: 250px;
+        @media (max-width: 600px) {
+          right: -60px;
         }
       }
     }
