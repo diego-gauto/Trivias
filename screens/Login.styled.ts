@@ -14,16 +14,24 @@ export const Background = styled.div`
   display: flex;
   width: 100%;
   min-height: 90vh;
+  @media (max-width: 1023px) {
+    flex-direction: column;
+  }
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+
   .left-side {
     position: relative;
     background-color: #d4a2f1;
     width: 60%;
     display: flex;
     justify-content: center;
+    @media (max-width: 1023px) {
+      width: 100%;
+      justify-content: center;
+    }
     p {
       padding-block: 40px;
       font-size: 60px;
@@ -33,17 +41,41 @@ export const Background = styled.div`
       span {
         color: #942ced;
       }
+      @media (max-width: 1023px) {
+        font-size: 40px;
+        text-align: center;
+        line-height: 45px;
+        padding-top: 50px;
+        padding-bottom: 20px;
+        margin: 0;
+        font-weight: 800;
+      }
+      @media (max-width: 600px) {
+        font-size: 30px;
+        line-height: 30px;
+      }
+      @media (max-width: 450px) {
+        font-size: 24px;
+      }
     }
     img {
       position: absolute;
       width: 100%;
       bottom: 0;
       right: -10%;
+      @media (max-width: 1023px) {
+        display: none;
+      }
     }
   }
+ 
   .right-side {
     width: 40%;
     background-color: #dcb7f1;
+    padding-inline: 10px;
+    @media (max-width: 1023px) {
+      width: 100%;
+    }
     form {
       max-width: 400px;
       margin: auto;
@@ -67,12 +99,24 @@ export const Background = styled.div`
           color: #3f1168;
           font-size: 21px;
           font-weight: 500;
+          @media (max-width: 1023px) {
+            font-size: 18px;
+          }
+          @media (max-width: 450px) {
+            font-size: 14px;
+          }
         }
         .login {
           color: #942ced;
           cursor: pointer;
           font-size: 21px;
           font-weight: 700;
+          @media (max-width: 1023px) {
+            font-size: 18px;
+          }
+          @media (max-width: 450px) {
+            font-size: 14px;
+          }
         }
       }
       .box {
@@ -112,6 +156,12 @@ export const Background = styled.div`
               font-weight: 700;
               font-family: Montserrat, sans-serif;
               margin-bottom: 5px;
+              @media (max-width: 1023px) {
+                font-size: 16px;
+              }
+              @media (max-width: 450px) {
+                font-size: 14px;
+              }
             }
             input {
               background: rgb(218 211 229 / 40%);
@@ -121,6 +171,12 @@ export const Background = styled.div`
               font-size: 19px;
               font-weight: 700;
               padding-left: 25px;
+              @media (max-width: 1023px) {
+                font-size: 18px;
+              }
+              @media (max-width: 450px) {
+                font-size: 14px;
+              }
               &:valid {
                 background-color: #ebe1f0;
               }
@@ -132,6 +188,7 @@ export const Background = styled.div`
           }
         }
       }
+      
       .social-media-container {
         display: flex;
         flex-wrap: wrap;
@@ -139,25 +196,32 @@ export const Background = styled.div`
         justify-content: center;
         width: 100%;
         .info {
-          width: 50%;
+          width: 55%;
           padding-right: 10px;
           border-right: 1.5px solid #3f1168;
-
           p {
             color: #3f1168;
             font-size: 18px;
             line-height: initial;
+            white-space: nowrap;
             span {
               font-weight: bold;
+            }
+            @media (max-width: 1023px) {
+              font-size: 14px;
             }
           }
         }
         .socials {
           display: flex;
-          width: 50%;
+          width: 45%;
           align-items: center;
           gap: 20px;
           padding-left: 20px;
+          @media (max-width: 400px) {
+            gap: 10px;
+            padding-left: 10px;
+          }
           img {
             cursor: pointer;
             width: 50px;
@@ -168,11 +232,28 @@ export const Background = styled.div`
           font-size: 14px;
           color: #74549e;
           line-height: initial;
+          text-align: center;
           span {
             font-weight: bold;
           }
         }
       }
+    }
+    .imgResp{
+      display: none;
+      position: relative;
+      height: 300px;
+      @media (max-width: 1023px) {
+        display: flex;
+      }
+      img {
+        left: 50%;
+        transform: translateX(-50%);
+        @media (max-width: 1023px) {
+          position: absolute;
+         width: 575px;
+         bottom: 0;
+        }
     }
   }
 `;

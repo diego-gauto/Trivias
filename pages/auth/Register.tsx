@@ -348,6 +348,9 @@ const Register = () => {
                   condiciones y políticas de Gonvar</span></p>
               </div>
             </form>
+            <div className="imgResp">
+              <img src="../images/personasRegister.png" alt="" />
+            </div>
           </div>
           {/* {
             registerLoad ?
