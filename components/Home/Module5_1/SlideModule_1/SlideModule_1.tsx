@@ -72,7 +72,7 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
             </Col>
             <Col>
               <UserDataContainer>
-                <Text01  >{username} </Text01>
+                <Text01   >{username} </Text01>
                 {
                   datePublication ? <DateText   > {
                     datePublication.toISOString().split('T')[0]?.toString()} </DateText>

@@ -28,12 +28,18 @@ import {
   BgColorMobile,
   PeopleContainerMobile,
   GeneralContainerMobile,
+  SwiperContainer,
+  SwiperContainerReduced,
+  SwiperContainerMoreReduced,
 } from "./Module5_1Mobile.styled";
 
 
 import IMG1 from "./MediaSources/Lineas.png";
 import IMG2 from "./MediaSources/Personas.png";
+import IMG3 from "./MediaSources/LineMobile.png";
 
+import "swiper/css/navigation";
+//import { Navigation } from "swiper";
 import { IModule5_1 } from "./IModule5_1";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { SlideModule_1 } from "./SlideModule_1/SlideModule_1";
@@ -83,6 +89,28 @@ export const Module5_1 = (props: IModule5_1) => {
     slidesPerView: 3,
     spaceBetween: 120,
   };
+  const settingsMobileReduced = {
+    loop: true,
+    autoplay: {
+      delay: 0,
+    },
+    speed: 4000,
+    freeMode: true,
+    slidesPerView: 1.5,
+    spaceBetween: 5,
+  };
+  const settingsMobileMoreReduced = {
+    loop: true,
+    autoplay: {
+      delay: 2000,
+    },
+    centeredSlides: true,
+    speed: 250,
+    freeMode: true,
+    spaceBetween: 70,
+
+    //navigation: true,
+  };
   const sliderData = slideDataArr?.map((element) => {
 
 
@@ -102,6 +130,7 @@ export const Module5_1 = (props: IModule5_1) => {
       </SwiperSlide>
     )
   })
+
   return (
     <>
       <GeneralContainer
@@ -139,14 +168,35 @@ export const Module5_1 = (props: IModule5_1) => {
         <ContainerMainMobile  >
           <SliderContainerMobile>
 
-            <LinesMobile style={{ backgroundImage: `url(${IMG1.src})` }}></LinesMobile>
+            <LinesMobile style={{ backgroundImage: `url(${IMG3.src})` }}></LinesMobile>
             <SliderSectionTitleMobile>
               <TittleAMobile>Experiencias de nuestras </TittleAMobile><TittleBMobile> #AlumnasGonvar</TittleBMobile>
 
             </SliderSectionTitleMobile>
-            <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobile} onInit={onInit}>
-              {sliderData}
-            </Swiper>
+
+            <SwiperContainer>
+              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobile} onInit={onInit}>
+                {sliderData}
+              </Swiper>
+            </SwiperContainer>
+            <SwiperContainerReduced>
+              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobileReduced} onInit={onInit}>
+                {sliderData}
+              </Swiper>
+            </SwiperContainerReduced>
+            <SwiperContainerMoreReduced>
+              <Swiper style={{
+                paddingTop: "50px",
+                paddingBottom: "50px"
+              }}
+                {...settingsMobileMoreReduced} onInit={onInit}
+              /* 
+            navigation={true}
+            modules={[Navigation]} */
+              >
+                {sliderData}
+              </Swiper>
+            </SwiperContainerMoreReduced>
           </SliderContainerMobile>
 
           <PeopleContainerMobile>

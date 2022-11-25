@@ -1,10 +1,49 @@
 import styled from "styled-components";
 import { Col, Container, Image, Row } from "react-bootstrap"; 
 
+/*
+@media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 840px) {
+  }
+  @media only screen and (max-width: 770px) {
+  }
+  @media only screen and (max-width: 580px) {
+  }
+  @media only screen and (max-width: 490px) {
+  }
+@media only screen and (max-width: 390px) {
+  }
+   */
+
 export const SliderContainerMobile = styled.div`
   position: relative; 
-  overflow: hidden;
-  
+  overflow: hidden; 
+
+`;
+export const SwiperContainer = styled.div` 
+  display:block;
+  @media only screen and (max-width: 580px) {
+    display:none;
+  }
+
+`;
+export const SwiperContainerReduced = styled.div` 
+  display:none;
+  @media only screen and (max-width: 580px) {
+    display:block;
+  }
+  @media only screen and (max-width: 460px) {
+    display:none;
+  }
+
+`;
+export const SwiperContainerMoreReduced = styled.div` 
+  display:none;
+  @media only screen and (max-width: 460px) {
+    display:block;
+  }
+
 `;
 export const GeneralContainerMobile = styled(Container)`
   padding: 0;
@@ -17,47 +56,51 @@ export const GeneralContainerMobile = styled(Container)`
 
 
 export const PeopleMobile = styled.div`
-background-size: 60%;
-height: 470px;
+background-size: 100%;
+height: 490px;
 background-repeat: no-repeat;
 width: 100%; 
 position: relative;
 background-position-x: 50%;
-z-index:1;
-@media only screen and (max-width: 1980px) {
-  height: 470px;
+z-index:1; 
+ 
+@media only screen and (max-width: 840px) {
+  height: 390px;
 }
-@media only screen and (max-width: 1720px) {
-  height: 410px;
+@media only screen and (max-width: 770px) {
+  height: 365px;
 }
-@media only screen and (max-width: 1600px) {
-  height: 360px;
-}
-@media only screen and (max-width: 1440px) {
-  height: 300px;
-}
-
-
-@media only screen and (max-width: 1028px) { 
+@media only screen and (max-width: 580px) {
   height: 270px;
-
 }
+@media only screen and (max-width: 490px) {
+  
+  height: 230px;
+}
+@media only screen and (max-width: 390px) {
+  
+  height: 186px;
+}
+
 `;
 export const PeopleContainerMobile = styled.div` 
-height: 470px;
-
-@media only screen and (max-width: 1720px) {
-  height: 405;
+margin-top: 2.5%;
+height: 488px;
+ 
+@media only screen and (max-width: 840px) {
+  height: 390px;
 }
-@media only screen and (max-width: 1600px) {
-  height: 360px;
+@media only screen and (max-width: 770px) {
+  height: 365px;
 }
-@media only screen and (max-width: 1440px) {
-  height: 300px;
-  margin-top: 5%;
+@media only screen and (max-width: 580px) {
+  height: 270px;
 }
-@media only screen and (max-width: 1028px) {
-  margin-top: 8%;
+@media only screen and (max-width: 490px) {
+  height: 230px;
+}
+@media only screen and (max-width: 390px) {
+  height: 187px;
 }
 
 `;
@@ -71,29 +114,28 @@ background-repeat: no-repeat;
 `;
 export const BgColorMobile = styled.div`
 background-color: #EDE7F2;
-height: 300px;
-top: -300px; 
 position: relative;
 
-@media only screen and (max-width: 1980px) {
-  top: -59.6%;
-  height: 280px;
-} 
-@media only screen and (max-width: 1720px) {
-  top: -51%;
-  height: 240px;
+top: -58%;
+height: 57.5%;
+
+ 
+ 
+@media only screen and (max-width: 840px) {
+  top: -55%;
+  height: 55%;
 }
-@media only screen and (max-width: 1600px) {
-  height: 240px;
-  top: -66.6%;
+ 
+@media only screen and (max-width: 580px) {
+  height: 50%;
+  top: -50%;
 }
-@media only screen and (max-width: 1440px) {
-  top: -60%;
-  height: 180px;
+ 
+@media only screen and (max-width: 460px) {
+  height: 50%;
+  top: -55%;
 }
-@media only screen and (max-width: 1280px) {
-  
-}
+ 
 
 `;
 export const TittleAMobile = styled.span` 
@@ -104,6 +146,14 @@ font-family: "Montserrat-ExtraBold" !important;
   font-family: Montserrat-ExtraBold;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
+
+  @media only screen and (max-width: 580px) {
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 460px) {
+    font-size: 24px;
+  }
+
 `;
 export const TittleBMobile = styled.span` 
 color: #A733E4;
@@ -113,6 +163,13 @@ font-family: "Montserrat-ExtraBold" !important;
   font-family: Montserrat-ExtraBold;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
+
+  @media only screen and (max-width: 580px) {
+    font-size: 30px;
+  } @media only screen and (max-width: 460px) {
+    font-size: 24px;
+  }
+
 `;
 export const DivisorMobile = styled.div`
   position: absolute;
@@ -128,22 +185,38 @@ export const DivisorMobile = styled.div`
 
 
 export const ContainerMainMobile = styled.div`
-background-color: #E5B6E9;
-height: 1200px;
+background-color: #E5B6E9; 
 margin-top: 0;
-margin-bottom: 6.5%;
+
+
+height: 1120px; 
+margin-bottom: 20%;
+
   position: inherit;
   width: 100%;  
 
-  @media only screen and (max-width: 1980px) {
-    
-height: 1120px;
-margin-bottom: 5%;
+  @media only screen and (max-width: 840px) { 
+    margin-bottom: 15%;
   }
-  @media only screen and (max-width: 1600px) {
-    
-margin-bottom: 0%;
+  @media only screen and (max-width: 770px) { 
+    margin-bottom: 12.5%;
   }
+  @media only screen and (max-width: 580px) { 
+  margin-bottom: 0%;
+  height: 1070px;
+  }
+  @media only screen and (max-width: 490px) { 
+    height: 1060px;
+    margin-bottom: 7.5%;
+  }
+  @media only screen and (max-width: 490px) { 
+    height: 980px;
+    margin-bottom: 0;
+  }
+  @media only screen and (max-width: 390px) { 
+    height: 930px;
+  }
+  
   
 `;
 export const AnimatedBackgroundMobile = styled.video`
@@ -165,19 +238,24 @@ export const SliderContainerChildMobile = styled.div`
 export const SliderSectionTitleMobile = styled.p` 
   font-size: 48px; 
   color: #ffffff; 
-  bottom: 45px;
+  bottom: 70px;
   position: relative;
   text-align: center;
   padding-right: 0;
   @media only screen and (max-width: 1024px) {
     font-size: 28px;
     margin-bottom: 25px;
-    max-width: 250px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     padding-right: 0;
   }
+
+  @media only screen and (max-width: 580px) {
+    margin-bottom: 0; 
+  }
+
 `;
 
 export const SliderItemLinkMobile = styled.a`
