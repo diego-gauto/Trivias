@@ -56,7 +56,9 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const settings = {
     loop: isInfinite,
     autoplay: {
-      delay: 0,
+      delay: 100,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
     },
     speed: 7000,
     freeMode: true,
@@ -83,7 +85,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
           style={{ color: "#A733E4" }}>Nails Master 2.0</span></h1>
       }
       <Swiper {...settings} onInit={onInit}>
-        {slideDataArr?.slice(0, 12).map((element, idx) => (
+        {slideDataArr?.map((element, idx) => (
           <SwiperSlide key={idx}>
             <SlideModule
               isNew={element.isNew}

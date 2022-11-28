@@ -178,7 +178,7 @@ const UsersList = () => {
               datas={users.map(({ id, membership, ...users }) => users)}
             >
               <DownloadUserData>
-                <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
+                {/* <img src="https://img.icons8.com/ios/50/000000/export-excel.png" /> */}
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
             </CsvDownloader>

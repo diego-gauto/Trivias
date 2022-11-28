@@ -442,6 +442,9 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
+          <div className="static-modal">
+
+          </div>
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
