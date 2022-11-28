@@ -56,11 +56,10 @@ export const CourseModule = (props: ICourseModuleProps) => {
           </Card.Subtitle>
         </Col>
         <Col sm={12} md={5} className="second-col">
-          {!responsive768 &&
-            <Card.Text className="price">
-              Curso individual <br />
-              <span>por ${data.coursePrice}</span> <span className="lower">MXN</span>
-            </Card.Text>}
+          <Card.Text className="price">
+            Curso individual <br />
+            <span>por ${data.coursePrice}</span> <span className="lower">MXN</span>
+          </Card.Text>
           <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => router.push(PREVIEW_PATH)} />
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
             loggedIn
@@ -69,9 +68,6 @@ export const CourseModule = (props: ICourseModuleProps) => {
           }
           } />
         </Col>
-        {responsive768 && <Card.Text className="mobile-price">
-          Desde ${data.coursePrice}.00
-        </Card.Text>}
       </Row>
       <Modal1 show={show} setShow={setShow} course={data} user={user} />
     </CardContainer>

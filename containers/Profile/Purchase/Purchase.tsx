@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Link from "next/link";
 import { Col, Form, Row } from "react-bootstrap";
 import InputMask from "react-input-mask";
 
@@ -85,6 +85,7 @@ import { getPaidCourses } from "../../../store/actions/UserActions";
 import ModalError from "./Modal1/ModalError";
 
 const Purchase = () => {
+  const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
   const [userData, setUserData] = useState<any>(null);
@@ -137,6 +138,7 @@ const Purchase = () => {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
         response.forEach((e) => {
+          setUser(e.data().name);
           getPaymentmethods(e.id).then((res) => {
             setCards(res);
             res.forEach((element: any) => {
@@ -422,7 +424,9 @@ const Purchase = () => {
     if (card.cardId) {
       FinishPayment();
     }
-
+    if (plan.method == "paypal" && type == "course") {
+      FinishPayment();
+    }
   }, [card, plan])
 
   useEffect(() => {
@@ -442,9 +446,21 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          <div className="static-modal">
+          {pay && <div className="static-modal">
+            <div className="modal-costum">
+              <h1>¡Grandes noticias, <span>{user}!</span></h1>
+              <p><span>¡Tu compra ha sido exitosa!</span> Enviamos el <br />
+                recibo de pago a tu correo electrónico. <br /> <br />
 
-          </div>
+                Ahora formas parte de la comunidad Gonvar+. <br />
+                <b>¡No esperes más y comienza a aprender!</b></p>
+
+              <button className="full">
+                <Link href="/Preview">Ver los cursos</Link>
+              </button>
+              <button>Ver el recibo del pedido</button>
+            </div>
+          </div>}
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
@@ -470,7 +486,7 @@ const Purchase = () => {
                     de pago</p>
                 </div>
               </div>
-              <p className="title">Ya puedes realizar tu compra, <span>Mariana!</span></p>
+              <p className="title">Ya puedes realizar tu compra, <span>{user}!</span></p>
               <div className="security-info">
                 <div className="top">
                   <AiFillLock></AiFillLock>
@@ -561,7 +577,9 @@ const Purchase = () => {
                   {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                   {loader && <LoaderContainSpinner />}
                 </div>
-                <div className="paypal">
+                <div className="paypal" onClick={() => {
+
+                }}>
                   {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
                     "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
                     currency: "MXN",
@@ -577,6 +595,7 @@ const Purchase = () => {
 
                       }}
                       createSubscription={(data, actions) => {
+                        setPlan({ method: "paypal" })
                         return actions.subscription.create({
                           plan_id: 'P-6P515571TU0367642MMDGG4Y'
                         })
@@ -621,7 +640,7 @@ const Purchase = () => {
                       }}
                       onApprove={(data, actions: any) => {
                         return actions.order.capture().then((details: any) => {
-                          FinishPayment()
+                          setPlan({ method: "paypal" })
                         });
                       }}
                     />}
@@ -634,10 +653,10 @@ const Purchase = () => {
               <div className="box">
                 <p className="title">¿Qué estás adquiriendo?</p>
                 <p className="subtitle">PRODUCTOS</p>
-                <div style={{ display: "flex", gap: "10px" }}>
+                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
                   {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
-                    <p className="title">Curso <span>{product.title}</span></p>}
+                    <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
@@ -827,7 +846,7 @@ const Purchase = () => {
                         <ContainerCard>
                           <InputText>
                             Número de la Tarjeta
-                            <div style={{ display: "flex", alignItems: "centerx" }}>
+                            <div style={{ display: "flex", alignItems: "initialx" }}>
                               <InputCard style={{ flexGrow: 1 }} mask='9999 9999 9999 9999' maskChar={null} placeholder="XXXX XXXX XXXX XXXX" onChange={(e: any) => {
                                 setCard((card: any) => ({ ...card, number: e.target.value }));
 

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 
 import { Container } from "react-bootstrap";
+import { useMediaQuery } from "react-responsive";
 
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
@@ -12,6 +13,7 @@ SwiperCore.use([Autoplay]);
 
 export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
+  const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
 
   const { isInfinite, slideData, type } = props;
   let slideDataArr = [];
@@ -79,9 +81,9 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {type == 'subscription' ? <h1 style={{ color: "#3F1168", paddingLeft: "80px", fontSize: "30px" }}>Cursos incluidos en <span
+      {type == 'subscription' ? <h1 style={{ color: "#3F1168", fontSize: "30px", paddingLeft: responsive768 ? '20px' : '80px' }}>Cursos incluidos en <span
         style={{ color: "#A733E4" }}>Gonvar+</span></h1> :
-        <h1 style={{ color: "#3F1168", paddingLeft: "80px", fontSize: "30px" }}>Lecciones de <span
+        <h1 style={{ color: "#3F1168", paddingLeft: responsive768 ? '20px' : '80px', fontSize: "30px" }}>Lecciones de <span
           style={{ color: "#A733E4" }}>Nails Master 2.0</span></h1>
       }
       <Swiper {...settings} onInit={onInit}>

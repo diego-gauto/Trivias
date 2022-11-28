@@ -16,6 +16,7 @@ import { ICourse } from "../../../interfaces/ICourse";
 declare let Hls: any
 
 export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
+  const responsive1140 = useMediaQuery({ query: "(max-width: 1140px)" });
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
@@ -60,22 +61,8 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
             </p>
           </div>
           <h1 className="price">Sólo $149 <span>MXN/mes</span></h1>
-        </div>
-        <div className="video">
-          <video id="video" loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
-          ></video>
-          <Row>
-            {/* <Col sm={12} md={7} className="first-col">
-              <Card.Title>Gonvar+</Card.Title>
-              <Card.Subtitle>
-                Adquiere ya Gonvar+ para acceder a todo nuestro contenido.
-              </Card.Subtitle>
-            </Col> */}
+          {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              {/* {!responsive768 &&
-                <Card.Text className="price">
-                  Desde $149.00
-                </Card.Text>} */}
               <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
                 loggedIn
                   ? router.push("/Purchase?type=subscription")
@@ -88,11 +75,28 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }
               } />
             </Col>
-            {/* {responsive768 && <Card.Text className="mobile-price">
-              Desde $149.00
-            </Card.Text>} */}
             <Modal1 show={show} setShow={setShow} course={courseId} user={user} />
-          </Row>
+          </Row>}
+        </div>
+        <div className="video">
+          <video id="video" loop muted autoPlay playsInline preload="auto" width="100%" height={responsive576 ? "523px" : "600px"}
+          ></video>
+          {!responsive1140 && <Row>
+            <Col sm={12} md={5} className="second-col">
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
+                loggedIn
+                  ? router.push("/Purchase?type=subscription")
+                  : router.push(SIGNUP_PATH)
+              }} />
+              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
+                loggedIn
+                  ? handleShow()
+                  : router.push(PREVIEW_PATH)
+              }
+              } />
+            </Col>
+            <Modal1 show={show} setShow={setShow} course={courseId} user={user} />
+          </Row>}
         </div>
       </div>
     </CardContainer>
