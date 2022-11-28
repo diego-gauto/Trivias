@@ -11,8 +11,11 @@ import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {
   HamburgerContain,
+  HamburgerMenu,
   HBList,
   HBMenu,
+  IngresarOptionsList,
+  FloatingMenuItem,
   Logo,
   LogoContain,
   LogoS,
@@ -30,6 +33,7 @@ import {
   TextA,
   UserContain,
   UserImage,
+  HamburgerMenuOptionsList,
 } from "./NavBar.styled";
 
 const NavBar = () => {
@@ -39,8 +43,21 @@ const NavBar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [hamburger, setHamburger] = useState(false);
 
+  const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
+  const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
+
   //declare any object in state
   const [userData, setUserData] = useState<any>(null);
+
+  const toggleIngresarOptionsMenu = () => {
+    setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
+    setNewHamburgerMenuIsOpen(false);
+  }
+
+  const toggleNewHamburgerMenuIsOpen = () => {
+    setNewHamburgerMenuIsOpen(!newHamburgerMenuIsOpen);
+    setIngresarOpetionsMenuIsOpen(false);
+  }
 
   function closeHamburgerMenu() {
     setHamburger(false)
@@ -223,16 +240,33 @@ const NavBar = () => {
               <LogoS />
             </Link>
             <TagsResp>
-              <Link href={LOGIN_PATH}>
-                <TextA title="Ingresar">
+              <div style={{ margin: "auto 20px" }}>
+                <PurpleButton onClick={toggleIngresarOptionsMenu}>
                   Ingresar
-                </TextA>
-              </Link>
-              <Link href="/auth/Register">
-                <PurpleButton>
-                  Regístrate
                 </PurpleButton>
-              </Link>
+              </div>
+              <IngresarOptionsList isOpen={ingresarOptionsMenuIsOpen}>
+                <FloatingMenuItem>
+                  Iniciar sesión
+                </FloatingMenuItem>
+                <FloatingMenuItem>
+                  Regístrate
+                </FloatingMenuItem>
+              </IngresarOptionsList>
+              <div>
+                <HamburgerMenu
+                  src="/images/Navbar/menu2.png"
+                  onClick={toggleNewHamburgerMenuIsOpen}
+                />
+                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
+                  <FloatingMenuItem>
+                    Inicio
+                  </FloatingMenuItem>
+                  <FloatingMenuItem>
+                    Tienda
+                  </FloatingMenuItem>
+                </HamburgerMenuOptionsList>
+              </div>
             </TagsResp>
           </>
         }
@@ -318,7 +352,7 @@ const NavBar = () => {
         }
 
       </NavResponsive>
-    </NavContainer>
+    </NavContainer >
 
   )
 }
