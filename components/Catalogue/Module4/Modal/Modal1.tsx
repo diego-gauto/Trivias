@@ -124,7 +124,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     var yUp = evt.touches[0].clientY;
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
-    console.log(yDiff)
     if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
       if (xDiff > 0) {
       }

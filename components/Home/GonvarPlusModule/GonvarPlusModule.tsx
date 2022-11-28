@@ -92,8 +92,8 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
                 loggedIn
                   ? handleShow()
                   : router.push(PREVIEW_PATH)
-              }
-              } />
+              }}
+              />
             </Col>
             <Modal1 show={show} setShow={setShow} course={courseId} user={user} />
           </Row>}
