@@ -12,6 +12,7 @@ import {
   EXPERTS_ESCULTURAL_COURSE_ID,
   NAILS_MASTER_COURSE_ID,
   SEP_COURSE_ID,
+  GONVAR_PLUS_COURSE_ID,
 } from "../constants/gonvar";
 import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
 import { db } from "../firebase/firebaseConfig";
@@ -25,6 +26,7 @@ const Homepage = () => {
   const [courseData, setCourseData] = useState<any>({});
   const [courses, setCourses] = useState<any>([]);
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
+  const [courseGonvarPlus, setCourseGonvarPlus] = useState<any>([]);
   const [courseSEPData, setCourseSEPData] = useState<any>([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
@@ -59,6 +61,8 @@ const Homepage = () => {
     setLandingData(landingData);
     const courseData = await getWholeCourse('dvns4pbd0ZHjFqR9VMks');
     setCourseData(courseData);
+    const courseGonvarPlus = await getWholeCourse(GONVAR_PLUS_COURSE_ID);
+    setCourseGonvarPlus(courseGonvarPlus);
     const courseNailsData = await getWholeCourse(NAILS_MASTER_COURSE_ID);
     setCourseNailsData(courseNailsData);
     const courseSEPData = await getWholeCourse(SEP_COURSE_ID);
@@ -111,7 +115,7 @@ const Homepage = () => {
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}
-      <GonvarPlusModule loggedIn={loggedIn} user={userData} />
+      <GonvarPlusModule loggedIn={loggedIn} user={userData} courseId={courseGonvarPlus} />
       {courses &&
         <Module4_Carousel type={'subscription'} isInfinite={true} slideData={
           courses

@@ -11,9 +11,11 @@ import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
 import { useFormState } from "react-hook-form";
+import { getWholeCourse } from "../../../store/actions/courseActions";
+import { ICourse } from "../../../interfaces/ICourse";
 declare let Hls: any
 
-export const GonvarPlusModule = ({ loggedIn, user }: any) => {
+export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
@@ -79,11 +81,17 @@ export const GonvarPlusModule = ({ loggedIn, user }: any) => {
                   ? router.push("/Purchase?type=subscription")
                   : router.push(SIGNUP_PATH)
               }} />
-              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => router.push(PREVIEW_PATH)} />
+              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
+                loggedIn
+                  ? handleShow()
+                  : router.push(PREVIEW_PATH)
+              }
+              } />
             </Col>
             {/* {responsive768 && <Card.Text className="mobile-price">
               Desde $149.00
             </Card.Text>} */}
+            <Modal1 show={show} setShow={setShow} course={courseId} user={user} />
           </Row>
         </div>
       </div>
