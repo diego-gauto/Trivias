@@ -126,3 +126,14 @@ input::-webkit-contacts-auto-fill-button {
 input[type="text"]::-webkit-credentials-auto-fill-button {
 	display: none;
 }
+.swiper .swiper-pagination .swiper-pagination-bullet {
+  background: #3F1168;
+  opacity: 1;
+}
+.swiper .swiper-pagination{
+  top: 10px;
+  height: fit-content;
+}
+.swiper .swiper-pagination .swiper-pagination-bullet-active{
+  background: #E55C00;
+}
