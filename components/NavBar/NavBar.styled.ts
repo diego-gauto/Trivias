@@ -92,28 +92,47 @@ export const HamburgerMenu = styled.img`
 `;
 
 export const FloatingMenu = styled("ul")<{ isOpen: boolean }>`
-  display: none;
+  max-height: 0;
+  padding: 0;
+  transition: 0.05s linear;
+  & li {
+    display: none;
+  }
   ${(props) =>
     props.isOpen &&
     css`
-      display: block;
+      max-height: 500%;
+      & li {
+        display: block;
+      }
     `}
   list-style-type: none;
   margin: 0;
   position: absolute;
   background-color: #dad3e5;
   border-radius: 0 0 15% 15%;
-`;
-
-export const IngresarOptionsList = styled(FloatingMenu)`
-  padding: 15px 17.5px 20px 17.5px;
   top: 110px;
 `;
 
-export const HamburgerMenuOptionsList = styled(FloatingMenu)`
-  padding: 15px 25px 20px 25px;
-  top: 110px;
+export const IngresarOptionsList = styled(FloatingMenu)<{ isOpen: boolean }>`
+  width: 130px;
+  ${(props) =>
+    props.isOpen &&
+    css`
+      padding: 15px 0px 20px 0px;
+    `}
+`;
+
+export const HamburgerMenuOptionsList = styled(FloatingMenu)<{
+  isOpen: boolean;
+}>`
+  width: 100px;
   right: 3%;
+  ${(props) =>
+    props.isOpen &&
+    css`
+      padding: 15px 0px 20px 0px;
+    `}
 `;
 
 export const FloatingMenuItem = styled.li`
