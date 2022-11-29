@@ -22,6 +22,7 @@ import { IStripeUserData } from "../../interfaces/IStripeUserData";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
+import ErrorModal from "../../components/Error/ErrorModal";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -58,6 +59,7 @@ const Login = () => {
   const [pastUserScreen, setPastUserScreen] = useState(false);
   const [pastUser, setPastUser] = useState<any>({})
   const [authLoader, setAuthLoader] = useState(false);
+  const [show, setShow] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -103,16 +105,19 @@ const Login = () => {
       setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
       setError(true);
       setAuthLoader(false);
+      setShow(true);
     }
     if (redirectURL == 'auth/wrong-password') {
       setErrorMsg('El correo o la contraseña es incorrecta!');
       setError(true);
       setAuthLoader(false);
+      setShow(true);
     }
     if (redirectURL == "auth/email-already-exists") {
       setErrorMsg('El correo ingresado ya existe!');
       setError(true);
       setAuthLoader(false);
+      setShow(true);
     }
     if (redirectURL == "/Preview") {
       setIsLoading(true);
@@ -509,7 +514,7 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
-
+      <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
   )
 }

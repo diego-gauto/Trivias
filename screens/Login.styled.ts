@@ -339,7 +339,6 @@ export const LoginBackground = styled.div`
     order: 2;
     @media (max-width: 1023px) {
       width: 100%;
-      z-index: -2;
     }
     form {
       max-width: 400px;
@@ -573,7 +572,6 @@ export const LoginBackground = styled.div`
         min-width: 230px;
         @media (max-width: 450px) {
         }
-        z-index: -1;
       }
       .imgRight {
         right: -80px;
