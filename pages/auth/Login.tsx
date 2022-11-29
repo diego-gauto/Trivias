@@ -168,14 +168,14 @@ const Login = () => {
     }
     setTimeout(() => {
       setLoginLoader(true)
-    }, 500);
+    }, 200);
 
   }, [isLoading])
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
-    }, 200);
+    }, 300);
   }, [])
 
 
