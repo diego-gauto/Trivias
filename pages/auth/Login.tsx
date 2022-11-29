@@ -11,6 +11,7 @@ import {
   PurpleButton2,
   Title,
   LoginBackground,
+  Error,
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, getPastUser, signInWithCreds, signUpWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
@@ -56,6 +57,7 @@ const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [pastUserScreen, setPastUserScreen] = useState(false);
   const [pastUser, setPastUser] = useState<any>({})
+  const [authLoader, setAuthLoader] = useState(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -88,7 +90,7 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
-    setIsLoading(true)
+    setAuthLoader(true)
     let signUpData = {
       credentials: {
         email: formData.email,
@@ -100,26 +102,27 @@ const Login = () => {
     if (redirectURL == 'auth/user-not-found') {
       setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
       setError(true);
-      setIsLoading(false);
+      setAuthLoader(false);
     }
     if (redirectURL == 'auth/wrong-password') {
       setErrorMsg('El correo o la contraseña es incorrecta!');
       setError(true);
-      setIsLoading(false);
+      setAuthLoader(false);
     }
     if (redirectURL == "auth/email-already-exists") {
       setErrorMsg('El correo ingresado ya existe!');
       setError(true);
-      setIsLoading(false);
+      setAuthLoader(false);
     }
     if (redirectURL == "/Preview") {
+      setIsLoading(true);
       window.location.href = redirectURL;
     }
     if (redirectURL == "/auth/RegisterPastUser") {
       setPastUserScreen(true);
       getPastUser(formData.email).then((res) => {
         setPastUser(res[0]);
-      }).then(() => { setIsLoading(false); })
+      }).then(() => { setAuthLoader(false); })
     }
   }
   const onSubmit2: SubmitHandler<FormValues> = async formData => {
@@ -226,6 +229,14 @@ const Login = () => {
                               {...register("email")}
                             />
                           </div>
+                          {
+                            errors.email &&
+                            <Error>
+                              <p>
+                                {errors.email?.message}
+                              </p>
+                            </Error>
+                          }
                         </div>
                         <div className="form-row">
                           <div className="form-input">
@@ -240,10 +251,20 @@ const Login = () => {
                               onClick={togglePassword_1}
                             >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                           </div>
-                          <div className="invalid-feedback">
-                            {errors.password?.message}
-                          </div>
+                          {
+                            errors.password &&
+                            <Error>
+                              <p>
+                                {errors.password?.message}
+                              </p>
+                            </Error>
+                          }
                         </div>
+                        {error && <Error>
+                          <p>
+                            {errorMsg}
+                          </p>
+                        </Error>}
                         {
                           responsive1023 &&
                           <p className="forgotText">
@@ -251,6 +272,7 @@ const Login = () => {
                             <span onClick={() => { setShowForgot(true) }}>&nbsp;Click aquí</span>
                           </p>
                         }
+
                       </div>
                       :
                       <div className="box">
@@ -265,6 +287,14 @@ const Login = () => {
                               {...register("email")}
                             />
                           </div>
+                          {
+                            errors.email &&
+                            <Error>
+                              <p>
+                                {errors.email?.message}
+                              </p>
+                            </Error>
+                          }
                         </div>
                         <div className="line"></div>
                         <p className="first-paragraph">
@@ -289,10 +319,14 @@ const Login = () => {
                               onClick={togglePassword_2}
                             >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                           </div>
-
-                        </div>
-                        <div className="invalid-feedback" style={{ display: "block" }}>
-                          {errors.password?.message}
+                          {
+                            errors.password &&
+                            <Error>
+                              <p>
+                                {errors.password?.message}
+                              </p>
+                            </Error>
+                          }
                         </div>
                         <div className="form-row">
                           <div className="form-input">
@@ -307,17 +341,29 @@ const Login = () => {
                               onClick={toggleConfirmPassword}
                             >{confirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                           </div>
+                          {
+                            errors.confirmPassword &&
+                            <Error>
+                              <p>
+                                {errors.confirmPassword?.message}
+                              </p>
+                            </Error>
+                          }
                         </div>
-                        <div className="invalid-feedback" style={{ display: "block" }}>
-                          {errors.confirmPassword?.message}
-                        </div>
-
                       </div>
                   }
+                  {
+                    !authLoader
+                      ?
+                      <PurpleButton2 type='submit'>
+                        Ingresar
+                      </PurpleButton2>
+                      :
+                      <LoaderImage>
+                        <LoaderContain />
+                      </LoaderImage>
+                  }
 
-                  <PurpleButton2 type='submit'>
-                    Ingresar
-                  </PurpleButton2>
                   {
                     responsive1023 &&
                     <p className="registerText">

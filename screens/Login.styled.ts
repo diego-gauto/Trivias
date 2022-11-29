@@ -440,13 +440,15 @@ export const LoginBackground = styled.div`
         }
         .form-row {
           display: flex;
+          flex-direction: column;
           align-items: baseline;
           justify-content: space-between;
           width: 100%;
-          gap: 20px;
+          gap: 5px;
           .form-input {
             flex-grow: 1;
             position: relative;
+            width: 100%;
             .eye {
               cursor: pointer;
               position: absolute;
