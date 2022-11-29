@@ -573,14 +573,32 @@ export const LoginBackground = styled.div`
         @media (max-width: 450px) {
         }
       }
-      .imgRight {
-        right: -80px;
+      .rightArm {
         position: absolute;
-        width: 40%;
-        transform: rotate(90deg);
-        min-width: 250px;
-        @media (max-width: 600px) {
-          right: -60px;
+        top: -45px;
+        right: 0;
+        .circle {
+          top: 0;
+          right: -180px;
+          position: absolute;
+          border-radius: 50%;
+          display: flex;
+          width: 300px;
+          height: 300px;
+          background: linear-gradient(180deg, #942ced 0%, #cf43d2 100%);
+          @media (max-width: 600px) {
+            right: -160px;
+          }
+        }
+        .imgRight {
+          right: -80px;
+          position: absolute;
+          width: 40%;
+          transform: rotate(-25deg);
+          min-width: 250px;
+          @media (max-width: 600px) {
+            right: -60px;
+          }
         }
       }
     }
