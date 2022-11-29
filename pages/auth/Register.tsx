@@ -85,6 +85,7 @@ const Register = () => {
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [phoneValidation, setPhoneValidation] = useState(false);
+  const [authLoader, setAuthLoader] = useState(false);
   const [phone, setphone] = useState("")
 
   const togglePassword_1 = () => {
@@ -131,7 +132,7 @@ const Register = () => {
 
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
   const onSubmit: SubmitHandler<FormValues> = async formData => {
-    setIsLoading(true)
+    setAuthLoader(true)
     setphone(phoneInput)
     if (phoneCode == '+52') {
       if (isValidPhoneNumber(phoneInput)) {
@@ -160,9 +161,10 @@ const Register = () => {
         if (redirectURL == "/auth/RegisterPastUser") {
           setErrorMsg('El correo ingresado ya existe!');
           setError(true);
-          setIsLoading(false);
+          setAuthLoader(false);
         }
         else {
+          setIsLoading(true)
           signUpWithCreds(signUpData).then(() => {
             window.location.href = "/Purchase?type=subscription";
           });
@@ -171,7 +173,7 @@ const Register = () => {
       else {
         setErrorPhone(true);
         setErrorPhoneMsg("Número de teléfono Invalido");
-        setIsLoading(false);
+        setAuthLoader(false);
       }
     }
     else {
@@ -253,6 +255,14 @@ const Register = () => {
                       placeholder="Mariana"
                       className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                       {...register("name")} />
+                    {
+                      errors.name &&
+                      <Error>
+                        <p>
+                          {errors.name?.message}
+                        </p>
+                      </Error>
+                    }
                   </div>
                   <div className="form-input">
                     <label>Apellido</label>
@@ -261,6 +271,14 @@ const Register = () => {
                       placeholder="Gómez"
                       className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                       {...register("lastName")} />
+                    {
+                      errors.lastName &&
+                      <Error>
+                        <p>
+                          {errors.lastName?.message}
+                        </p>
+                      </Error>
+                    }
                   </div>
                 </div>
                 <div className="form-row" style={error ? { flexDirection: "column", gap: 2 } : {}}>
@@ -271,6 +289,14 @@ const Register = () => {
                       placeholder="correo@dominio.com"
                       className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                       {...register("email")} />
+                    {
+                      errors.email &&
+                      <Error>
+                        <p>
+                          {errors.email?.message}
+                        </p>
+                      </Error>
+                    }
                   </div>
                   {error && <Error>
                     <p>
@@ -278,7 +304,7 @@ const Register = () => {
                     </p>
                   </Error>}
                 </div>
-                <div className="form-row">
+                <div className="form-row" style={errors.password && { flexDirection: "column", gap: 5 }}>
                   <div className="form-input">
                     <label>Contraseña</label>
                     <input type={passwordShown_1 ? "text" : "password"}
@@ -289,9 +315,18 @@ const Register = () => {
                     <div className="eye"
                       onClick={togglePassword_1}
                     >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+
                   </div>
+                  {
+                    errors.password &&
+                    <Error>
+                      <p>
+                        {errors.password?.message}
+                      </p>
+                    </Error>
+                  }
                 </div>
-                <div className="form-row">
+                <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
                   <div className="form-input">
                     <label>Confirmar Contraseña</label>
                     <input type={passwordShown_2 ? "text" : "password"}
@@ -303,6 +338,14 @@ const Register = () => {
                       onClick={togglePassword_2}
                     >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
                   </div>
+                  {
+                    errors.confirmPassword &&
+                    <Error>
+                      <p>
+                        {errors.confirmPassword?.message}
+                      </p>
+                    </Error>
+                  }
                 </div>
                 <div className="form-row">
                   <div className="form-input">
@@ -326,9 +369,18 @@ const Register = () => {
                 </div>
 
               </div>
-              <PurpleButton2 type='submit'>
-                Crear Cuenta
-              </PurpleButton2>
+              {
+                !authLoader
+                  ?
+                  <PurpleButton2 type='submit'>
+                    Crear Cuenta
+                  </PurpleButton2>
+                  :
+                  <LoaderImage>
+                    <LoaderContain />
+                  </LoaderImage>
+              }
+
               <div className="social-media-container">
                 <div className="info">
                   <p>O regístrate usando <br />
