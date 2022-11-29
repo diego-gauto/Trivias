@@ -30,6 +30,14 @@ export const CardContainer = styled(Card)`
     bottom: 50px;
     width: 100%;
     position: absolute;
+    @media only screen and (max-width: 1140px) {
+      margin: auto;
+      text-align: center;
+      .first-col,
+      .second-col {
+        padding: 0;
+      }
+    }
   }
   .new-btn {
     background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
@@ -103,6 +111,9 @@ export const CardContainer = styled(Card)`
     .first-col,
     .second-col {
       padding-left: 50px;
+      button {
+        width: 170px;
+      }
     }
     .video::before {
       content: "";

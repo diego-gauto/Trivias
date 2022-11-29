@@ -7,7 +7,7 @@ export const WhiteButton = (props: IWhiteButtonProps) => {
   const { text, onClick } = props;
 
   return (
-    <WhiteButtonContainer onClick={onClick}>
+    <WhiteButtonContainer id="white-btn" onClick={onClick}>
       {text}
     </WhiteButtonContainer>
   )

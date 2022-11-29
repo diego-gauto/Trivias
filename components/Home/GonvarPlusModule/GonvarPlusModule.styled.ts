@@ -11,12 +11,37 @@ export const CardContainer = styled(Card)`
     display: flex;
     justify-content: space-between;
     gap: 80px;
+    @media only screen and (max-width: 1140px) {
+      flex-direction: column;
+      gap: 0;
+      align-items: center;
+      text-align: center;
+    }
     .info {
       padding-left: 80px;
       padding-block: 100px;
       display: flex;
       flex-direction: column;
       gap: 30px;
+      @media only screen and (max-width: 1140px) {
+        padding-left: 0;
+        .top {
+          padding: 15px;
+          justify-content: center;
+          button {
+            font-size: 14px !important;
+            margin-left: 0 !important;
+          }
+        }
+        .middle {
+          h1 {
+            font-size: 32px !important;
+          }
+          p {
+            font-size: 20px !important;
+          }
+        }
+      }
       p,
       h1 {
         margin: 0;
@@ -93,6 +118,16 @@ export const CardContainer = styled(Card)`
     width: 100%;
     position: absolute;
     left: 40px;
+    @media only screen and (max-width: 1140px) {
+      position: initial;
+      margin: auto;
+      .second-col {
+        gap: 0;
+        width: auto;
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
   }
   .new-btn {
     background: transparent;
@@ -153,7 +188,9 @@ export const CardContainer = styled(Card)`
     }
     .first-col,
     .second-col {
-      padding-left: 50px;
+      button {
+        width: 170px;
+      }
     }
     .video::before {
       content: "";

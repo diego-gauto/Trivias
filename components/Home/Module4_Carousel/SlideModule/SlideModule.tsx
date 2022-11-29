@@ -15,11 +15,11 @@ export const SlideModule = (props: ISlideModule) => {
         <Row>
           <Text02>{subtitle} </Text02>
         </Row>
-        {duration &&
+        {/* {duration &&
           <Row>
             <Text02>{Math.round(+duration)} minutos</Text02>
           </Row>
-        }
+        } */}
       </TextSectionWrapper>
     </SlideModuleContainer>
   )

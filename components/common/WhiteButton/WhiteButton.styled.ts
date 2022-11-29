@@ -21,9 +21,4 @@ export const WhiteButtonContainer = styled(Button)`
   @media only screen and (max-width: 576px) {
     font-size: 18px;
   }
-  &:focus {
-    background-color: inherit !important;
-    border-color: #ffffff !important;
-    outline: none !important;
-  }
 `;

@@ -225,7 +225,7 @@ export const Background = styled.div`
           img {
             cursor: pointer;
             width: 50px;
-            height: fit-content;
+            height: auto;
           }
         }
         .terms {

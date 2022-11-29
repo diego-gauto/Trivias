@@ -26,9 +26,48 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [loading, setLoading] = useState(true);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
+
   const handleShow = () => {
     setShow(true);
   }
+
+  const ele: any = document.querySelector('.scollx')
+
+  const mouseDownHandler = (e: any) => {
+
+    pos = {
+      // The current scroll
+      left: ele?.scrollLeft,
+      top: ele?.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseMoveHandler = (e: any) => {
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    const dy = e.clientY - pos.y;
+
+    console.log(1);
+
+    // Scroll the element
+    ele.scrollTop = pos.top - dy;
+    ele.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+
+    ele.style.cursor = 'grab';
+    ele.style.removeProperty('user-select');
+  };
 
   useEffect(() => {
     if (user) {
@@ -73,8 +112,10 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                 Cursos disponibles
               </Title>
             </div>
-            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
-              <div style={{ display: "flex" }}>
+            <div id="scroll" className="scroll-container" style={{ overflow: "auto", overflowY: "hidden", paddingBlockEnd: "10px" }}
+            >
+              {/* onMouseDown={(e) => { mouseDownHandler(e) }} */}
+              <div className="scollx" style={{ display: "flex" }} >
                 {courses.map((element: any, idx: any) => (
                   <div className="grey-field" key={"mod4 " + idx} onClick={() => {
                     handleShow();
