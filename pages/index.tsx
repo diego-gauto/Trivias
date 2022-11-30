@@ -6,6 +6,7 @@ import { Module2_1 } from "../components/Home/Module2_1/Module2_1";
 import { Module3_1 } from "../components/Home/Module3_1/Module3_1";
 import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
 import { Module5_1 } from "../components/Home/Module5_1/Module5_1";
+import { Module6_1 } from "../components/Home/Module6_1/Module6_1";
 import { Module6 } from "../components/Home/Module6/Module6";
 import {
   DRY_MANICURE_COURSE_ID,
@@ -150,6 +151,7 @@ const Homepage = () => {
         } />
       } */}
       <Module5_1 slideData={landingData.experienciasSectionData} />
+      <Module6_1 slideData={landingData.productosDestacadosData} />
       <Module6 slideData={landingData.productosDestacadosData} />
     </Container>
   )
