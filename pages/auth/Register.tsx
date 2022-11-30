@@ -42,6 +42,7 @@ import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds }
 import { fetchSignInMethodsForEmail } from "firebase/auth";
 import { useAuth } from "../../hooks/useAuth";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import ErrorModal from "../../components/Error/ErrorModal";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -87,6 +88,7 @@ const Register = () => {
   const [phoneValidation, setPhoneValidation] = useState(false);
   const [authLoader, setAuthLoader] = useState(false);
   const [phone, setphone] = useState("")
+  const [show, setShow] = useState<any>(false);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -162,6 +164,7 @@ const Register = () => {
           setErrorMsg('El correo ingresado ya existe!');
           setError(true);
           setAuthLoader(false);
+          setShow(true);
         }
         else {
           setIsLoading(true)
@@ -567,6 +570,7 @@ const Register = () => {
           </LoaderImage>
         </BackgroundLoader>
       )}
+      <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
 
   )
