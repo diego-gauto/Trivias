@@ -31,7 +31,33 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-
+  const slider3 = document.querySelector('.scroll-container3') as HTMLElement | null;
+  useEffect(() => {
+    if (!loading) {
+      let isDown = false;
+      let startX: any;
+      let scrollLeft: any;
+      slider3?.addEventListener('mousedown', (e: any) => {
+        isDown = true;
+        startX = e.pageX - slider3.offsetLeft;
+        scrollLeft = slider3.scrollLeft;
+      });
+      slider3?.addEventListener('mouseleave', () => {
+        isDown = false;
+      });
+      slider3?.addEventListener('mouseup', () => {
+        isDown = false;
+      });
+      slider3?.addEventListener('mousemove', (e) => {
+        if (isDown) {
+          e.preventDefault();
+          const x: any = e.pageX - slider3.offsetLeft;
+          const walk: any = (x - startX) * 3;
+          slider3.scrollLeft = scrollLeft - walk;
+        }
+      });
+    }
+  }, [isLoading])
   const handleShow = () => {
     setShow(true);
   }
@@ -64,7 +90,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
               Incluido con Gonvar+
             </Title>
           </div>
-          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
+          <div id="scroll-container3" className="scroll-container3" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
             <div style={{ display: "flex" }}>
               {courses.map((element: any, idx: any) => (
                 <div className="grey-field" key={"mod5 " + idx} onClick={() => {

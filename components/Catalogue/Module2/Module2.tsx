@@ -26,7 +26,33 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-
+  const slider = document.querySelector('.scroll-container') as HTMLElement | null;
+  useEffect(() => {
+    if (!loading) {
+      let isDown = false;
+      let startX: any;
+      let scrollLeft: any;
+      slider?.addEventListener('mousedown', (e: any) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+      slider?.addEventListener('mouseleave', () => {
+        isDown = false;
+      });
+      slider?.addEventListener('mouseup', () => {
+        isDown = false;
+      });
+      slider?.addEventListener('mousemove', (e) => {
+        if (isDown) {
+          e.preventDefault();
+          const x: any = e.pageX - slider.offsetLeft;
+          const walk: any = (x - startX) * 3;
+          slider.scrollLeft = scrollLeft - walk;
+        }
+      });
+    }
+  }, [isLoading])
   useEffect(() => {
     if (user) {
       let tempCourses: any = [];
@@ -95,11 +121,11 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
               Continua viendo
             </ContinueText>
           </div>
-          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
+          <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
             <div style={{ display: "flex" }}>
               {courses.map((element: any, idx: any) => (
-                <div key={"Mod2 " + idx} className="grey-field" onClick={() => { goTo(element) }}>
-                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
+                <div key={"Mod2 " + idx} id="grey-field" className="grey-field" onClick={() => { goTo(element) }}>
+                  < SlideModuleContainer style={{ cursor: "grab", flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
                     <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
                     <Progress style={element.progress == null ? { 'width': 0 } : { 'width': `calc(${element.progress}% - 10px)` }}></Progress>
                   </SlideModuleContainer>
