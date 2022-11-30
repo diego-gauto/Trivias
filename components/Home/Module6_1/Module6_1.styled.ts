@@ -94,8 +94,202 @@ export const Divisor = styled.div`
   bottom: 570px;
   z-index: 2;
 `;
+export const MoreText = styled.div`
+position: absolute;
+width: 15%;
+bottom: 18%;
+z-index: 1;
+right: 8%;
+
+text-align: right;
+font-size: 24px;
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+`;
+export const MoreText_1 = styled.div`
+  width: 110%;
+  bottom: 570px; 
+  color: #A73AE5;
+  
+  margin-bottom: 5px;
+  transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: scale(1.1);  
+}
+`;
+export const MoreText_2 = styled.div`
+  width: 110%;
+  bottom: 570px; 
+  
+  margin-bottom: 5px;
+  transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: scale(1.1);  
+}
+  color: #D244D1;
+`;
+export const MoreText_3 = styled.div`
+  width: 110%;
+  bottom: 570px; 
+  color: #E88807;
+  margin-bottom: 5px;
+  transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: scale(1.1);  
+}
+`;
+
+export const FooterAText = styled.div`
+position: absolute;
+width: 25%;
+bottom: -8%;
+z-index: 1;
+left: 5%;
+
+text-align: left;
+font-size: 20px;
+font-family: "MONTSERRAT-MEDIUM" !important;
+@font-face {
+  font-family: MONTSERRAT-MEDIUM;
+  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+}
+`;
+export const FooterAText_1 = styled.div`
+  width: 110%;  
+  padding-bottom: 38px;
+
+  color: #EDE7F2;
+  overflow: hidden; 
+  
+transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform:translate(30px); 
+}
+  
+`;
+export const FooterAText_2 = styled.div`
+  width: 110%;  
+  padding-bottom: 38px;
+
+  
+  color: #EDE7F2;
+  overflow: hidden; 
+  
+transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform:translate(30px); 
+}
+`;
+export const FooterAText_3 = styled.div`
+  width: 110%;  
+  padding-bottom: 38px;
+
+  color: #EDE7F2;
+  overflow: hidden; 
+  
+transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: translate(30px);
+}
+`;
 
 
+export const FooterAIcons = styled.div`
+position: absolute;
+height: 248px;
+width: 70px;
+bottom: -8%;
+z-index: 1;
+right: 5%;
+
+text-align: left;
+font-size: 24px;
+font-family: "MONTSERRAT-MEDIUM" !important;
+@font-face {
+  font-family: MONTSERRAT-MEDIUM;
+  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+}
+`;
+export const FooterAIcons_1 = styled.div`
+background-repeat: no-repeat;
+color: #EDE7F2;
+background-size: 42.5%;
+height: 100%;
+background-position-x: 33.3%;
+  
+`; 
+
+export const FooterBIcons = styled.div`
+position: absolute;
+height: 248px;
+width: 70px;
+bottom: -8%;
+z-index: 1;
+right: 10%;
+
+text-align: left;
+font-size: 24px;
+font-family: "MONTSERRAT-MEDIUM" !important;
+@font-face {
+  font-family: MONTSERRAT-MEDIUM;
+  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+}
+`;
+export const FooterBIcons_1 = styled.div`
+  width: 50px;
+  height: 50px;
+  background-size: 90%;  
+  margin-bottom: 12px;
+margin-left: 20%;
+  background-repeat: no-repeat;
+  color: #EDE7F2;
+  
+`; 
+export const FooterBIcons_2 = styled.div`
+  width: 50px;
+  height: 50px;
+  background-size: 90%;  
+  margin-bottom: 12px;
+margin-left: 20%;
+  background-repeat: no-repeat;
+  color: #EDE7F2;
+  
+`; 
+export const FooterBIcons_3 = styled.div`
+  width: 50px;
+  height: 50px;
+  background-size: 90%;  
+  margin-bottom: 12px;
+margin-left: 20%;
+  background-repeat: no-repeat;
+  color: #EDE7F2;
+  
+`; 
+export const FooterBIcons_4 = styled.div`
+  width: 50px;
+  height: 50px;
+  background-size: 90%;  
+  margin-bottom: 12px;
+margin-left: 20%;
+  background-repeat: no-repeat;
+  color: #EDE7F2;
+  
+`; 
 
 export const ContainerMain = styled.div`
 background-color: #FFFFFF;
@@ -125,6 +319,16 @@ height: 1120px;
   } 
   
 `;
+export const FooterEnding = styled.div`
+background-color: #29282C;
+position: relative;
+width: 100%;
+height: 240px;
+bottom: 0%;
+ padding: 0 ;
+ margin: 0 ;
+ display: flex;
+`;
 export const Line = styled.div`
 background-color: #DBD0E5;
 position: absolute;
@@ -134,22 +338,69 @@ top: 20%;
 right: 1%;
   
 `;
-export const AnimatedBackground = styled.video`
-  width: 100%;
-  height: auto;
-  transform: rotate(0deg);
-  position: absolute;
-  z-index: -2;
-  bottom: 0%;
+export const LeftFooterContent = styled.div`
+
+width: 25%; 
 `;
-export const SliderContainerChild = styled.div`
-  z-index: -1;
-  position: relative;
-  height: 675px;
-  @media only screen and (max-width: 1024px) {
-    height: 450px;
-  }
+export const CenterFooterContent = styled.div`
+
+width: 75%;
 `;
+export const FooterEndText1 = styled.span`
+color: #EDE7F2;
+font-weight: 100;
+font-size: 24px;
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+  
+`;
+export const FooterEndText2 = styled.span`
+color: #EDE7F2;
+font-weight: 100;
+font-size: 24px;
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+  
+`;
+export const FooterEndText3 = styled.span`
+color: #EDE7F2;
+font-size: 24px;
+font-weight: 100;
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+  
+`;
+export const GonvarFooterLogo = styled.div`
+width: 260px;
+height: 100px;
+background-size: 100%;
+background-repeat: no-repeat;
+left: 25%;
+position: relative;
+top: 20%;
+`;
+export const SeparingLine = styled.div`
+background-color: white;
+width: 2px;
+height: 50px;
+margin: 20px;
+`;
+export const FooterTextLine = styled.table`
+top: 15%;
+position: relative;
+`;
+ 
+ 
+ 
 export const SliderSectionTitle = styled.p` 
 margin-top: 120px;
   font-size: 48px; 
