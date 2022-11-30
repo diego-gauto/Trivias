@@ -111,8 +111,17 @@ h1,th{
   border: 1px solid #6717cd !important;
   border-radius: 0 0 10px 10px;
 }
-.scroll-container::-webkit-scrollbar {
-  display: none;
+@media screen and (max-width:1000px){
+.scroll-container::-webkit-scrollbar{
+  display: none !important;
+}
+}
+.scroll-container::-webkit-scrollbar{
+  display: block;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #6717cd;
+  border-radius: 10px;
 }
 .paypal-button.paypal-button-shape-pill{
     background: #009CDE;

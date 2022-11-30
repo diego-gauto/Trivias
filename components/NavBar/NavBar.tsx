@@ -4,15 +4,18 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { DEFAULT_USER_IMG, LOGIN_PATH } from "../../constants/paths";
+import { DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, SIGNUP_PATH } from "../../constants/paths";
 import RespLevel from "../../containers/Profile/Rewards/UserLevel/RespLevel";
 import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {
   HamburgerContain,
+  HamburgerMenu,
   HBList,
   HBMenu,
+  IngresarOptionsList,
+  FloatingMenuItem,
   Logo,
   LogoContain,
   LogoS,
@@ -30,6 +33,7 @@ import {
   TextA,
   UserContain,
   UserImage,
+  HamburgerMenuOptionsList,
 } from "./NavBar.styled";
 
 const NavBar = () => {
@@ -39,8 +43,21 @@ const NavBar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [hamburger, setHamburger] = useState(false);
 
+  const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
+  const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
+
   //declare any object in state
   const [userData, setUserData] = useState<any>(null);
+
+  const toggleIngresarOptionsMenu = () => {
+    setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
+    setNewHamburgerMenuIsOpen(false);
+  }
+
+  const toggleNewHamburgerMenuIsOpen = () => {
+    setNewHamburgerMenuIsOpen(!newHamburgerMenuIsOpen);
+    setIngresarOpetionsMenuIsOpen(false);
+  }
 
   function closeHamburgerMenu() {
     setHamburger(false)
@@ -223,16 +240,41 @@ const NavBar = () => {
               <LogoS />
             </Link>
             <TagsResp>
-              <Link href={LOGIN_PATH}>
-                <TextA title="Ingresar">
+              <div style={{ margin: "auto 20px" }}>
+                <PurpleButton onClick={toggleIngresarOptionsMenu}>
                   Ingresar
-                </TextA>
-              </Link>
-              <Link href="/auth/Register">
-                <PurpleButton>
-                  Regístrate
                 </PurpleButton>
-              </Link>
+              </div>
+              <IngresarOptionsList isOpen={ingresarOptionsMenuIsOpen}>
+                <Link href={LOGIN_PATH}>
+                  <FloatingMenuItem>
+                    Iniciar sesión
+                  </FloatingMenuItem>
+                </Link>
+                <Link href={SIGNUP_PATH}>
+                  <FloatingMenuItem>
+                    Regístrate
+                  </FloatingMenuItem>
+                </Link>
+              </IngresarOptionsList>
+              <div>
+                <HamburgerMenu
+                  src="/images/Navbar/menu2.png"
+                  onClick={toggleNewHamburgerMenuIsOpen}
+                />
+                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
+                  <Link href={PREVIEW_PATH}>
+                    <FloatingMenuItem>
+                      Inicio
+                    </FloatingMenuItem>
+                  </Link>
+                  <a href="https://gonvarnails.mx/" target="_blank">
+                    <FloatingMenuItem>
+                      Tienda
+                    </FloatingMenuItem>
+                  </a>
+                </HamburgerMenuOptionsList>
+              </div>
             </TagsResp>
           </>
         }
@@ -318,7 +360,7 @@ const NavBar = () => {
         }
 
       </NavResponsive>
-    </NavContainer>
+    </NavContainer >
 
   )
 }

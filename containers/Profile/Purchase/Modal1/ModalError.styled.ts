@@ -96,7 +96,6 @@ export const Container = styled.div`
   }
   @media (max-width: 424px) {
     gap: 20px;
-    padding: 10px;
   }
 `;
 export const ButtonsDiv = styled.div`

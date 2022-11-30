@@ -5,7 +5,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  background-color: #3F1168;
+  background-color: #3f1168;
   padding-block: 10px;
   padding-inline: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -18,23 +18,21 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     props.pathname == "/" &&
     css`
       position: fixed;
-      background-color: #DAD3E5;
+      background-color: #dad3e5;
       box-shadow: none;
     `}
   ${(props) =>
     props.color == 1 &&
     css`
-      background-color: #3F1168;
+      background-color: #3f1168;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     `}
     @media(max-width: 1023px) {
-    background-color: #DAD3E5;
+    background-color: #dad3e5;
     padding-block: 0;
     padding-inline: 0;
     padding-top: 60px;
   }
- 
-  
 `;
 export const NavTags = styled.div`
   display: flex;
@@ -52,7 +50,7 @@ export const Logo = styled.img`
 `;
 export const LogoContain = styled.div`
   display: flex;
-  
+
   @media (max-width: 1023px) {
     display: none;
   }
@@ -62,10 +60,10 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
   text-decoration: none;
   font-size: 18px;
   font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
+  @font-face {
+    font-family: MONTSERRAT-BOLD;
+    src: url(../fonts/MONTSERRAT-BOLD.ttf);
+  }
   cursor: pointer;
   margin: 0;
   font-weight: 500;
@@ -82,18 +80,78 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
     props.color == 0 &&
     props.pathname == "/" &&
     css`
-      color: #3F1168;
+      color: #3f1168;
       &:hover {
-        color: #3F1168;
+        color: #3f1168;
       }
     `}
 `;
 
-export const ShopDeco = styled("div")<{   color: any }>`
+export const HamburgerMenu = styled.img`
+  height: 37px;
+`;
+
+export const FloatingMenu = styled("ul")<{ isOpen: boolean }>`
+  max-height: 0;
+  padding: 0;
+  transition: 0.05s linear;
+  & li {
+    display: none;
+  }
+  ${(props) =>
+    props.isOpen &&
+    css`
+      max-height: 500%;
+      & li {
+        display: block;
+      }
+    `}
+  list-style-type: none;
+  margin: 0;
+  position: absolute;
+  background-color: #dad3e5;
+  border-radius: 0 0 15% 15%;
+  top: 110px;
+`;
+
+export const IngresarOptionsList = styled(FloatingMenu)<{ isOpen: boolean }>`
+  width: 130px;
+  ${(props) =>
+    props.isOpen &&
+    css`
+      padding: 15px 0px 20px 0px;
+    `}
+`;
+
+export const HamburgerMenuOptionsList = styled(FloatingMenu)<{
+  isOpen: boolean;
+}>`
+  width: 100px;
+  right: 3%;
+  ${(props) =>
+    props.isOpen &&
+    css`
+      padding: 15px 0px 20px 0px;
+    `}
+`;
+
+export const FloatingMenuItem = styled.li`
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+
+  font-family: "MONTSERRAT-BOLD" !important;
+  @font-face {
+    font-family: MONTSERRAT-BOLD;
+    src: url(../fonts/MONTSERRAT-BOLD.ttf);
+  }
+`;
+
+export const ShopDeco = styled("div")<{ color: any }>`
   color: white;
-  border: 1px solid #3F1168;
+  border: 1px solid #3f1168;
   border-radius: 100px;
-  
+
   padding: 10px 20px;
   text-decoration: none;
   font-size: 18px;
@@ -111,10 +169,10 @@ export const ShopDeco = styled("div")<{   color: any }>`
     font-size: 16px;
   }
   ${(props) =>
-    props.color == 1 && 
+    props.color == 1 &&
     css`
       color: white;
-      
+
       border: 1px solid white;
       &:hover {
         color: white;
@@ -122,21 +180,21 @@ export const ShopDeco = styled("div")<{   color: any }>`
     `}
 `;
 export const PurpleButton = styled.button`
-  background-color: #942CED;
+  background-color: #942ced;
   color: #fff;
   padding-block: 15px;
   padding-inline: 25px;
   font-size: 12px;
-   
+
   font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
+  @font-face {
+    font-family: MONTSERRAT-BOLD;
+    src: url(../fonts/MONTSERRAT-BOLD.ttf);
+  }
   border-radius: 25px;
   border: none;
   &:hover {
-    background-color: #3F1168;
+    background-color: #3f1168;
     transform: scale(1.03);
     transition: 0.5s ease all;
   }
@@ -177,30 +235,29 @@ export const LogoS = styled.i`
   margin-left: 35px;
   cursor: pointer;
   width: 110px;
-height: 100%
+  height: 100%;
 `;
 export const LogoS_2 = styled.i`
   background-size: contain;
   background-position: center;
-  
+
   margin-left: 35px;
   background-image: url(../images/Navbar/NavbarLogo.png);
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   cursor: pointer;
   width: 110px;
-height: 100%
+  height: 100%;
 `;
 export const TextA = styled.a`
-color: #3F1168 !important;
-margin-right: 15px;
-font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
+  color: #3f1168 !important;
+  margin-right: 15px;
+  font-family: "MONTSERRAT-BOLD" !important;
+  @font-face {
+    font-family: MONTSERRAT-BOLD;
+    src: url(../fonts/MONTSERRAT-BOLD.ttf);
+  }
 `;
 export const NavResponsive = styled.div`
-
   z-index: 10;
   display: none;
   align-items: center;
@@ -210,8 +267,7 @@ export const NavResponsive = styled.div`
   padding-right: 40px !important;
   padding-inline: 20px;
   justify-content: space-between;
-  background-color: #DAD3E5;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #dad3e5;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -222,6 +278,7 @@ export const NavResponsive = styled.div`
   @media (max-width: 450px) {
     padding-block: 5px;
     padding-inline: 10px;
+    padding-bottom: 15px;
   }
   input.hamburger-checkbox {
     position: absolute;
@@ -309,7 +366,6 @@ export const MenuIcon = styled.i`
     margin: 0px 0px 7px 0px;
     transition: 0.7s ease-in-out;
     transform: none;
-    
   }
 `;
 export const Points = styled.p`
@@ -332,18 +388,16 @@ export const IconsContain = styled.div`
   align-items: center;
 `;
 export const TagsResp = styled.div`
-  display: none;
-  gap: 40px;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
   @media (max-width: 1023px) {
     display: flex;
   }
   @media (max-width: 767px) {
-    gap: 20px;
   }
   @media (max-width: 450px) {
-    padding-left: 20px;
-    gap: 10px;
+    height: 37px;
   }
   a {
     color: black;

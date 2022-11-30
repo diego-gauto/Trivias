@@ -726,8 +726,10 @@ const Purchase = () => {
                         stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                       <img src="../images/purchase/chica_banner.png" alt="" />
                     </div>
-                    {/* <div className="bg"></div>
-                    <img className="image" src="../images/purchase/neworange.png" alt="" /> */}
+                    <p className="terms">Al confirmar tu compra, aceptas los <br />
+                      <span>términos, condiciones y políticas de Gonvar</span></p>
+                    <div className="bg"></div>
+                    <img className="hand" src="../images/purchase/neworange.png" alt="" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
