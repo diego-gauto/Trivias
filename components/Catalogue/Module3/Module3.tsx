@@ -29,6 +29,37 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const router = useRouter()
   const [loading, setLoading] = useState(true);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const slider = document.querySelector('.scroll-container6') as HTMLElement;
+
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
+    pos = {
+      // The current scroll
+      left: slider.scrollLeft,
+      top: slider.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+    console.log(pos);
+
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseMoveHandler = function (e: any) {
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    slider.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
 
   useEffect(() => {
     if (user) {

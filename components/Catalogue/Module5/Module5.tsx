@@ -31,33 +31,37 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef<SwiperCore>();
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  const slider3 = document.querySelector('.scroll-container3') as HTMLElement | null;
-  useEffect(() => {
-    if (!loading) {
-      let isDown = false;
-      let startX: any;
-      let scrollLeft: any;
-      slider3?.addEventListener('mousedown', (e: any) => {
-        isDown = true;
-        startX = e.pageX - slider3.offsetLeft;
-        scrollLeft = slider3.scrollLeft;
-      });
-      slider3?.addEventListener('mouseleave', () => {
-        isDown = false;
-      });
-      slider3?.addEventListener('mouseup', () => {
-        isDown = false;
-      });
-      slider3?.addEventListener('mousemove', (e) => {
-        if (isDown) {
-          e.preventDefault();
-          const x: any = e.pageX - slider3.offsetLeft;
-          const walk: any = (x - startX) * 3;
-          slider3.scrollLeft = scrollLeft - walk;
-        }
-      });
-    }
-  }, [isLoading])
+  const slider = document.querySelector('.scroll-container3') as HTMLElement;
+
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
+    pos = {
+      // The current scroll
+      left: slider.scrollLeft,
+      top: slider.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+    console.log(pos);
+
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseMoveHandler = function (e: any) {
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    slider.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
   const handleShow = () => {
     setShow(true);
   }
@@ -91,7 +95,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
             </Title>
           </div>
           <div id="scroll-container3" className="scroll-container3" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div className="grey-field" key={"mod5 " + idx} onClick={() => {
                   handleShow();

@@ -25,75 +25,41 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  const slider2 = document.querySelector('.scroll-container2') as HTMLElement | null;
-  useEffect(() => {
-    if (!loading) {
-      let isDown = false;
-      let startX: any;
-      let scrollLeft: any;
-      slider2?.addEventListener('mousedown', (e: any) => {
-        isDown = true;
-        startX = e.pageX - slider2.offsetLeft;
-        scrollLeft = slider2.scrollLeft;
-      });
-      slider2?.addEventListener('mouseleave', () => {
-        isDown = false;
-      });
-      slider2?.addEventListener('mouseup', () => {
-        isDown = false;
-      });
-      slider2?.addEventListener('mousemove', (e) => {
-        if (isDown) {
-          e.preventDefault();
-          const x: any = e.pageX - slider2.offsetLeft;
-          const walk: any = (x - startX) * 3;
-          slider2.scrollLeft = scrollLeft - walk;
-        }
-      });
-    }
-  }, [isLoading])
+  const slider = document.querySelector('.scroll-container2') as HTMLElement;
+
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-  const handleShow = () => {
-    setShow(true);
-  }
-
-  const ele: any = document.querySelector('.scollx')
-
-  const mouseDownHandler = (e: any) => {
-
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
     pos = {
       // The current scroll
-      left: ele?.scrollLeft,
-      top: ele?.scrollTop,
+      left: slider.scrollLeft,
+      top: slider.scrollTop,
       // Get the current mouse position
       x: e.clientX,
       y: e.clientY,
     };
+    console.log(pos);
+
 
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
-  const mouseMoveHandler = (e: any) => {
+  const mouseMoveHandler = function (e: any) {
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
-    const dy = e.clientY - pos.y;
-
-    console.log(1);
-
-    // Scroll the element
-    ele.scrollTop = pos.top - dy;
-    ele.scrollLeft = pos.left - dx;
+    slider.scrollLeft = pos.left - dx;
   };
 
   const mouseUpHandler = function () {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
-
-    ele.style.cursor = 'grab';
-    ele.style.removeProperty('user-select');
   };
+
+  const handleShow = () => {
+    setShow(true);
+  }
 
   useEffect(() => {
     if (user) {
@@ -138,10 +104,9 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                 Cursos disponibles
               </Title>
             </div>
-            <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "auto", overflowY: "hidden", paddingBlockEnd: "10px" }}
+            <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}
             >
-              {/* onMouseDown={(e) => { mouseDownHandler(e) }} */}
-              <div className="scollx" style={{ display: "flex" }} >
+              <div className="scollx" style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
                 {courses.map((element: any, idx: any) => (
                   <div className="grey-field" key={"mod4 " + idx} onClick={() => {
                     handleShow();

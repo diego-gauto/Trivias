@@ -117,12 +117,24 @@ h1,th{
 }
 }
 .scroll-container::-webkit-scrollbar{
-  display: block;
+  display: none;
 }
-.scroll-container::-webkit-scrollbar-thumb {
+.scroll-container3::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container2::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container4::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container5::-webkit-scrollbar{
+  display: none;
+}
+/* .scroll-container::-webkit-scrollbar-thumb {
   background: #6717cd;
   border-radius: 10px;
-}
+} */
 .paypal-button.paypal-button-shape-pill{
     background: #009CDE;
 }
