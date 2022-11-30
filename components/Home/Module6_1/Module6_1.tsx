@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
@@ -17,6 +17,30 @@ import {
   GeneralContainer,
   ContainerMain2,
   Line,
+  MoreText,
+  MoreText_1,
+  MoreText_2,
+  MoreText_3,
+  FooterAText,
+  FooterAText_1,
+  FooterAText_2,
+  FooterAText_3,
+  FooterAIcons,
+  FooterAIcons_1,
+  FooterBIcons,
+  FooterBIcons_1,
+  FooterBIcons_2,
+  FooterBIcons_3,
+  FooterBIcons_4,
+  FooterEnding,
+  FooterEndText1,
+  FooterEndText2,
+  FooterEndText3,
+  GonvarFooterLogo,
+  SeparingLine,
+  CenterFooterContent,
+  LeftFooterContent,
+  FooterTextLine,
 } from "./Module6_1.styled";
 import {
   ContainerMainMobile,
@@ -37,6 +61,12 @@ import {
 
 
 import IMG1 from "./MediaSources/FondoPina.png";
+import IMG2 from "./MediaSources/Contactenos.png";
+import IMG3 from "./MediaSources/LogosFooter1.png";
+import IMG4 from "./MediaSources/LogosFooter2.png";
+import IMG5 from "./MediaSources/LogosFooter3.png";
+import IMG6 from "./MediaSources/LogosFooter4.png";
+import IMG7 from "./MediaSources/GonvarFooter.png";
 
 import "swiper/css/navigation";
 //import { Navigation } from "swiper";
@@ -163,11 +193,59 @@ export const Module6_1 = (props: IModule6_1) => {
             <BgColor  ></BgColor>
           </PeopleContainer>
 
+          <MoreText>
+            <MoreText_1>Trabaja con nosotros</MoreText_1>
+            <MoreText_2>Cursos</MoreText_2>
+            <MoreText_3>Tienda</MoreText_3>
+          </MoreText>
+
+          <FooterAText >
+            <FooterAText_1>Aviso de privacidad</FooterAText_1>
+            <FooterAText_2>Términos y condiciones</FooterAText_2>
+            <FooterAText_3>Políticas de cancelación</FooterAText_3>
+          </FooterAText>
+
+          <FooterAIcons >
+            <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
+          </FooterAIcons>
+
+          <FooterBIcons >
+            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
+            <FooterBIcons_2 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_2>
+            <FooterBIcons_3 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_3>
+            <FooterBIcons_4 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_4>
+          </FooterBIcons>
+
+
+          <FooterEnding id="FooterEnding">
+
+
+            <LeftFooterContent>
+              <GonvarFooterLogo style={{ backgroundImage: `url(${IMG7.src})` }}></GonvarFooterLogo>
+
+            </LeftFooterContent>
+
+            <CenterFooterContent>
+              <FooterTextLine>
+                <tr>
+                  <th><FooterEndText1>Copyright © Gonvar Technologies SAPI de CV </FooterEndText1></th>
+                  <th><SeparingLine> </SeparingLine></th>
+                  <th><FooterEndText2> 2022 </FooterEndText2></th>
+                  <th><SeparingLine> </SeparingLine></th>
+                  <th><FooterEndText3> Todos los derechos reservados </FooterEndText3></th>
+                </tr>
+              </FooterTextLine>
+
+
+            </CenterFooterContent>
+
+
+          </FooterEnding>
         </ContainerMain >
 
         <ContainerMain2  ></ContainerMain2>
       </GeneralContainer >
-
+      {/************************************************** */}
       <GeneralContainerMobile
         fluid
         style={{ padding: 0 }}
