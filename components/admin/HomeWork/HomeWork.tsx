@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+import { getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks } from '../../../store/actions/UserActions';
 import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
@@ -12,31 +13,55 @@ const HomeWork = () => {
   const [homeWorks, setHomeWorks] = useState<any>([]);
   const [data, setData] = useState<any>([]);
   const [id, setId] = useState("");
+  const [professor, setProfessor] = useState<any>([]);
+  const [professorFilter, setProfessorFilter] = useState("");
 
   const getHomeworks = () => {
-    getAllHomeWorks().then((res) => {
-      res.forEach((element: any) => {
-        let tempDate = new Date(element.createdAt.seconds * 1000);
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-      });
-      setHomeWorks(res);
-      console.log(homeWorks)
+    if (professorFilter != "") {
+      getAllHomeWorks().then((res) => {
+        res.forEach((element: any) => {
+          let tempDate = new Date(element.createdAt.seconds * 1000);
+          let tempDay = tempDate.getDate()
+          let tempMonth = tempDate.getMonth() + 1;
+          let tempYear = tempDate.getFullYear()
+          element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        });
+        res = res.filter((element: any, index: any) => element.teacherId == professorFilter)
+        setHomeWorks(res);
+      })
+    }
+    else {
+      getAllHomeWorks().then((res) => {
+        res.forEach((element: any) => {
+          let tempDate = new Date(element.createdAt.seconds * 1000);
+          let tempDay = tempDate.getDate()
+          let tempMonth = tempDate.getMonth() + 1;
+          let tempYear = tempDate.getFullYear()
+          element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        });
+        setHomeWorks(res);
+      })
+    }
+  }
+  const getProffessors = () => {
+    getUsers().then((res) => {
+      res = res.filter((user: any, index: any) => user.role == "admin")
+      setProfessor(res);
     })
   }
-
   const handleClick = () => {
     let index;
     index = homeWorks.findIndex((x: any) => x.id == id);
     homeWorks[index].status = true;
     setHomeWorks([...homeWorks])
   }
-
+  useEffect(() => {
+    getProffessors();
+  }, [])
   useEffect(() => {
     getHomeworks();
-  }, [])
+  }, [professorFilter])
+
   return (
     <AdminContain>
       <SideBar />
@@ -44,8 +69,24 @@ const HomeWork = () => {
         <Container>
           <TitleContain>
             <p>
-              Tareas de Profesores
+              Tareas
             </p>
+            <select onChange={(e) => {
+              setProfessorFilter(e.target.value);
+            }}>
+              {
+                professor.map((professor: any, index: any) => {
+                  return (
+                    <option
+                      key={index + "professor select"}
+                      value={professor.id}
+                    >
+                      {professor.name}
+                    </option>
+                  )
+                })
+              }
+            </select>
           </TitleContain>
           <Table id="Pay">
             <tbody>

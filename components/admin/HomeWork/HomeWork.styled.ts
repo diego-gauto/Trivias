@@ -7,12 +7,23 @@ export const HWContainer = styled.div`
 `;
 export const TitleContain = styled.div`
   display: flex;
+  justify-content: space-between;
   padding: 20px;
   p {
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
     font-weight: 600;
     margin: 0;
+  }
+  select {
+    padding: 10px;
+    border: 2px solid #6717cd;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    option {
+      font-size: 14px;
+    }
   }
 `;
 export const Container = styled.div`
