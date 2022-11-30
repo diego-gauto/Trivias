@@ -52,7 +52,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
           <div className="top">
             <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
             <p>Gonvar+</p>
-            <button>Suscripción mensual</button>
+            <button style={{ cursor: "initial" }}>Suscripción mensual</button>
           </div>
           <div className="middle">
             <h1>Empieza a cursar <br /> cientos de clases <br /> sobre uñas y belleza <br /> <span>en línea</span> </h1>
