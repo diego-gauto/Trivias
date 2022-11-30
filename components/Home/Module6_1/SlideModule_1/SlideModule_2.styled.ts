@@ -4,7 +4,7 @@ export const SlideImg = styled.div`
   width: 382px;
   border-radius: 45px; 
   height: 350px;
-  
+  background-repeat: no-repeat;
   background-size: 95% auto;
   padding: 0;
   margin: 0px 15px 0px 12px;
@@ -116,11 +116,6 @@ width: 290px;
 }
 
 `;
- 
- 
- 
-
-
  
 export const ContainerMain = styled.div`
 height: 480px;
@@ -284,6 +279,41 @@ export const Text03 = styled.span`
   text-align: center; 
 position: relative;
    left: 37.5%; 
+
+  @media only screen and (max-width: 1600px) { 
+    font-size: 14px;
+    width: 90px;
+position: relative;
+display: block; 
+text-align: center;
+      }
+ 
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 13px;
+    width: 140px; 
+  }
+  @media only screen and (max-width: 770px) {
+    
+  font-size: 11px;
+  width: 125px;
+  }
+
+  @media only screen and (max-width: 580px) { 
+    font-size: 13px;
+      }
+
+`;
+
+export const Text04 = styled.span`  
+  
+  font-family: Sans-Serif; 
+  font-size: 16px;
+  line-height: 150%;
+  color: #3F1168;
+  text-align: center; 
+position: relative;
+   left: 40%; 
 
   @media only screen and (max-width: 1600px) { 
     font-size: 14px;

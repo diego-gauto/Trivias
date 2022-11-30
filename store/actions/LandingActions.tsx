@@ -36,9 +36,9 @@ export const getLandingData = async () => {
     return { descripcion, username, imgURL, isNew, convertedDate, usrImgURL, usrFacebookURL }
   })
   const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
-    const { nombre, precio, compraRapida, imgURL, clickURL, currency,
+    const { nombre, precio, compraRapida, imgURL, isNew, clickURL, currency,
       disponible } = d.data()
-    return { title: nombre, precio, compraRapida, currency, disponible, isNew: false, imgURL, clickURL, id: d.id }
+    return { title: nombre, precio, compraRapida, currency, disponible, isNew, imgURL, clickURL, id: d.id }
   })
   return {
     heroSectionData: heroSectionDoc.data() || {},

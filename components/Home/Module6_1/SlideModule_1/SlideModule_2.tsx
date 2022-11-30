@@ -9,6 +9,7 @@ import {
   UserDataContainer,
   GeneralContainer,
   Text03,
+  Text04,
 } from "./SlideModule_2.styled";
 import { title } from "process";
 
@@ -60,7 +61,15 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
             <UserDataContainer>
 
               <Text02>{title} </Text02>
-              <Text01   >{precio} </Text01> <Text03   >{currency} </Text03>
+              {
+                disponible ? <>
+                  <Text01   >$ {precio} </Text01> <Text03   >{currency} </Text03>
+                </>
+                  :
+                  <>
+                    <Text04   >Agotado</Text04>
+                  </>
+              }
 
 
             </UserDataContainer>
