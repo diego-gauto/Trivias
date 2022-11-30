@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { DEFAULT_USER_IMG, LOGIN_PATH } from "../../constants/paths";
+import { DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, SIGNUP_PATH } from "../../constants/paths";
 import RespLevel from "../../containers/Profile/Rewards/UserLevel/RespLevel";
 import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
@@ -246,12 +246,16 @@ const NavBar = () => {
                 </PurpleButton>
               </div>
               <IngresarOptionsList isOpen={ingresarOptionsMenuIsOpen}>
-                <FloatingMenuItem>
-                  Iniciar sesión
-                </FloatingMenuItem>
-                <FloatingMenuItem>
-                  Regístrate
-                </FloatingMenuItem>
+                <Link href={LOGIN_PATH}>
+                  <FloatingMenuItem>
+                    Iniciar sesión
+                  </FloatingMenuItem>
+                </Link>
+                <Link href={SIGNUP_PATH}>
+                  <FloatingMenuItem>
+                    Regístrate
+                  </FloatingMenuItem>
+                </Link>
               </IngresarOptionsList>
               <div>
                 <HamburgerMenu
@@ -259,12 +263,16 @@ const NavBar = () => {
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
-                  <FloatingMenuItem>
-                    Inicio
-                  </FloatingMenuItem>
-                  <FloatingMenuItem>
-                    Tienda
-                  </FloatingMenuItem>
+                  <Link href={PREVIEW_PATH}>
+                    <FloatingMenuItem>
+                      Inicio
+                    </FloatingMenuItem>
+                  </Link>
+                  <a href="https://gonvarnails.mx/" target="_blank">
+                    <FloatingMenuItem>
+                      Tienda
+                    </FloatingMenuItem>
+                  </a>
                 </HamburgerMenuOptionsList>
               </div>
             </TagsResp>
