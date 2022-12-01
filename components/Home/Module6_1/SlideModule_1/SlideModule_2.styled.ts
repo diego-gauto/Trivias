@@ -1,5 +1,40 @@
 import styled from "styled-components";
 
+export const CompraRapida = styled.div`
+font-weight: 100;
+background: linear-gradient(to right,#942CED,#D244D1 );
+top: 50%;
+position: relative;
+left: 20%;
+font-size: 24px;
+border-radius: 50px;
+padding: 15px 20px 15px;
+color: #E5DFE9; 
+
+
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+
+transition: all .2s ease-in-out;  
+    
+&:hover {    
+transform: scale(1.1);   
+}
+
+@media only screen and (max-width: 1600px) {
+  left: 10%;
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+}
+@media only screen and (max-width: 1030px) {
+}
+`;
+
 export const SlideImg = styled.div`
   width: 382px;
   border-radius: 45px; 
@@ -27,50 +62,7 @@ export const SlideImg = styled.div`
   }
 `;
 
-export const TextSectionWrapper = styled.div` 
-  
-
-background-color: #EDE7F2;
-border-radius: 50px;
-width: 100%;
-margin: 0 auto;
-position: relative;
-height: 230px;
-bottom: 110px;
-top: -20%; 
-
-text-align: center;
-overflow: hidden; 
-  
-transition: all .2s ease-in-out;  
-    
-&:hover {  
-height: 360px;
-bottom: 240px !important; 
-}
-&:active {  
-height: 360px;
-bottom: 240px !important; 
-}
-
-  @media only screen and (max-width: 1024px) {
-    margin-top: 32px;
-    height: 205px;
-    margin-bottom: 0;
-  }
-  @media only screen and (max-width: 840px) {
-    width: 110%;
-    margin-top: 0px;
-    height: 210px;
-  }
-  @media only screen and (max-width: 770px) {
-    width: 102%;
-  }
-  @media only screen and (max-width: 580px) {
-    width: 106%;
-  }
-
-`;
+ 
 
 export const NewTag = styled.div`
   top: calc(25px + 3%);
@@ -84,38 +76,7 @@ export const NewTag = styled.div`
   z-index: 1;
 `;
  
-export const UsernameSectionWrapper = styled.div`
-
-background-color: #F4E3BA;
-border-radius: 50px;
-margin: 0 auto;
-position: absolute;
-bottom: 0%;
-text-align: center;
-overflow: hidden;
-width: 382px;
-height: 100px;
-
-@media only screen and (max-width: 1600px) {
-
-width: 290px;
-}
-
-@media only screen and (max-width: 840px) {
-  height: 80px;
-  width: 284px;
-  bottom: -5%;
-}
-@media only screen and (max-width: 770px) {
-  width: 250px;
-  
-}
-@media only screen and (max-width: 580px) {
-  width: 290px;
-  
-}
-
-`;
+ 
  
 export const ContainerMain = styled.div`
 height: 480px;

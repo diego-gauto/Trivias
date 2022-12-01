@@ -4,17 +4,13 @@ import React, { Component, useEffect, useState } from "react";
 
 import {
   ContainerMain, NewTag, SlideImg,
-  Text01, Text02, TextNew, TextSectionWrapper,
-  UsernameSectionWrapper,
+  Text01, Text02, TextNew,
   UserDataContainer,
   GeneralContainer,
   Text03,
   Text04,
+  CompraRapida,
 } from "./SlideModule_2.styled";
-import { title } from "process";
-
-import IMG1 from "../MediaSources/facebookIcon.png";
-import { CompraRapida } from "../Module6_1.styled";
 
 export const SlideModule_1 = (props: ISlideModule_2) => {
 

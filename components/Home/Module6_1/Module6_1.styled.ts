@@ -27,8 +27,15 @@ z-index:1;
 background-color: white;
 `;
 export const PeopleContainer = styled.div` 
-height: 70%;
+height: 100%;
  
+@media only screen and (max-width: 1980px) {
+  height: 70%;
+}
+
+@media only screen and (max-width: 1980px) {
+  height: 70%;
+}
 @media only screen and (max-width: 1980px) {
   height: 70%;
 }
@@ -49,14 +56,7 @@ height: 70%;
 }
 
 `;
-export const Lines = styled.div`
-background-size: 100%;
-height: 300px;
-background-repeat: no-repeat;
-@media only screen and (max-width: 1980px) {
-  height: 180px;
-}
-`;
+ 
 export const BgColor = styled.div`
 background-color: #EDE7F2;
 height: 300px;
@@ -102,22 +102,14 @@ font-family: "Montserrat-ExtraBold" !important;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
 `;
-export const Divisor = styled.div`
-  position: absolute;
-  width: 110%;
-  height: 270px;
-  background: white;
-  transform: rotate(-185deg);
-  margin-left: -5%;
-  bottom: 570px;
-  z-index: 2;
-`;
+ 
 export const MoreText = styled.div`
 position: absolute;
-width: 15%;
-bottom: 18%;
+width: 15%; 
 z-index: 1;
 right: 8%;
+
+bottom: 5%;
 
 @media only screen and (max-width: 1440px) {
   font-size: 18px;
@@ -184,7 +176,7 @@ z-index: 1;
 left: 5%;
 
 font-size: 20px;
-bottom: -15%;
+bottom: -27.5%;
 @media only screen and (max-width: 1980px) {
   
 bottom: -15%;
@@ -312,7 +304,7 @@ z-index: 1;
 right: 5%;
 
 
-bottom: -15%;
+bottom: -27.5%;
 @media only screen and (max-width: 1980px) {
   
 bottom: -15%;
@@ -377,7 +369,7 @@ width: 70px;
 z-index: 1;
 right: 10%;
 
-bottom: -15%;
+bottom: -27.5%;
 @media only screen and (max-width: 1980px) {
   
 bottom: -15%;
@@ -433,74 +425,7 @@ margin-left: 20%;
     height: 18px;
   }
   
-`; 
-export const FooterBIcons_2 = styled.div`
-width: 50px;
-height: 50px;
-background-size: 90%;  
-margin-bottom: 12px;
-margin-left: 20%;
-background-repeat: no-repeat; 
-
-@media only screen and (max-width: 1440px) {
-  width: 30px;
-  height: 30px;
-}
-@media only screen and (max-width: 1280px) {
-  width: 25px;
-  height: 25px;
-}
-@media only screen and (max-width: 1030px) {
-  width: 18px;
-  height: 18px;
-}
-
-`; 
-export const FooterBIcons_3 = styled.div`
-width: 50px;
-height: 50px;
-background-size: 90%;  
-margin-bottom: 12px;
-margin-left: 20%;
-background-repeat: no-repeat; 
-
-@media only screen and (max-width: 1440px) {
-  width: 30px;
-  height: 30px;
-}
-@media only screen and (max-width: 1280px) {
-  width: 25px;
-  height: 25px;
-}
-@media only screen and (max-width: 1030px) {
-  width: 18px;
-  height: 18px;
-}
-
-`; 
-export const FooterBIcons_4 = styled.div`
-width: 50px;
-height: 50px;
-background-size: 90%;  
-margin-bottom: 12px;
-margin-left: 20%;
-background-repeat: no-repeat; 
-
-@media only screen and (max-width: 1440px) {
-  width: 30px;
-  height: 30px;
-}
-@media only screen and (max-width: 1280px) {
-  width: 25px;
-  height: 25px;
-}
-@media only screen and (max-width: 1030px) {
-  width: 18px;
-  height: 18px;
-}
-
-`; 
-
+`;  
 export const ContainerMain = styled.div`
 background-color: #FFFFFF;
 
@@ -530,30 +455,39 @@ height: 1120px;
   
 `;
 export const FooterEnding = styled.div`
-background-color: #29282C;
-position: relative;
-width: 100%;
-height: 300px;
-bottom: 0%;
+background-color: #29282C; 
  padding: 0 ;
  margin: 0 ;
  display: flex;
 
+ position: absolute;
+width: 100%;
+height: 45%;
+bottom: -75%;
+z-index: 2;
+
  @media only screen and (max-width: 1980px) {
-  
-height: 300px;
+  bottom: -42%;
+  height: 25%;
 }
 @media only screen and (max-width: 1720px) {
-  
-height: 240px;
+  bottom: -35%; 
 }
 @media only screen and (max-width: 1600px) {
+  bottom: -30%; 
 }
 @media only screen and (max-width: 1440px) {
+  bottom: -18%; 
+  
+  height: 20%;
 }
 @media only screen and (max-width: 1280px) {
+  bottom: -7.5%;
+  height: 15%;
 }
 @media only screen and (max-width: 1030px) {
+  bottom: 0%;
+  height: 17.5%;
 }
 `;
 export const Line = styled.div`
@@ -633,30 +567,6 @@ margin: 20px;
 }
 @media only screen and (max-width: 1030px) {
   height: 20px;
-}
-`;
-export const CompraRapida = styled.div`
-font-weight: 100;
-background: linear-gradient(to right,#942CED,#D244D1 );
-top: 50%;
-position: relative;
-left: 20%;
-font-size: 24px;
-border-radius: 50px;
-padding: 15px 20px 15px;
-color: #E5DFE9; 
-
-
-font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
-
-transition: all .2s ease-in-out;  
-    
-&:hover {    
-transform: scale(1.1);   
 }
 `;
 export const FooterTextLine = styled.table`

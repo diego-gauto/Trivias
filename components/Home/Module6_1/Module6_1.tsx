@@ -10,7 +10,6 @@ import {
   SliderItemLink,
   TittleA,
   TittleB,
-  Lines,
   People,
   BgColor,
   PeopleContainer,
@@ -29,9 +28,6 @@ import {
   FooterAIcons_1,
   FooterBIcons,
   FooterBIcons_1,
-  FooterBIcons_2,
-  FooterBIcons_3,
-  FooterBIcons_4,
   FooterEnding,
   FooterEndText1,
   GonvarFooterLogo,
@@ -98,12 +94,17 @@ export const Module6_1 = (props: IModule6_1) => {
     },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 2,
+    slidesPerView: 4,
     spaceBetween: 20,
     breakpoints: {
-      1024: {
+
+      1028: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      1280: {
         slidesPerView: 4,
-        spaceBetween: 30,
+        spaceBetween: 20,
       }
     }
   };
@@ -209,13 +210,13 @@ export const Module6_1 = (props: IModule6_1) => {
 
           <FooterBIcons >
             <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
-            <FooterBIcons_2 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_2>
-            <FooterBIcons_3 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_3>
-            <FooterBIcons_4 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_4>
+            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
+            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
+            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
           </FooterBIcons>
 
 
-          <FooterEnding id="FooterEnding">
+          <FooterEnding>
 
 
             <LeftFooterContent>
