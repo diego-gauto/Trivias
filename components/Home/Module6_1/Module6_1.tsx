@@ -37,24 +37,43 @@ import {
   FooterTextLine,
 } from "./Module6_1.styled";
 import {
-  ContainerMainMobile,
-  SliderSectionTitleMobile,
-  SliderContainerMobile,
-  SliderItemLinkMobile,
-  TittleAMobile,
-  TittleBMobile,
-  LinesMobile,
-  PeopleMobile,
   BgColorMobile,
-  PeopleContainerMobile,
+  CenterFooterContentMobile,
+  ContainerMain2Mobile,
+  ContainerMainMobile,
+  FooterAIconsMobile,
+  FooterAIcons_1Mobile,
+  FooterATextMobile,
+  FooterAText_1Mobile,
+  FooterAText_2Mobile,
+  FooterAText_3Mobile,
+  FooterBIconsMobile,
+  FooterBIcons_1Mobile,
+  FooterEndingMobile,
+  FooterEndText1Mobile,
+  FooterTextLineMobile,
   GeneralContainerMobile,
+  GonvarFooterLogoMobile,
+  LeftFooterContentMobile,
+  MoreTextMobile,
+  MoreText_1Mobile,
+  MoreText_2Mobile,
+  MoreText_3Mobile,
+  PeopleContainerMobile,
+  PeopleMobile,
+  SeparingLineMobile,
+  SliderContainerMobile,
+  SliderSectionTitleMobile,
   SwiperContainer,
-  SwiperContainerReduced,
   SwiperContainerMoreReduced,
+  SwiperContainerReduced,
+  TittleAMobile,
+  TittleBMobile
 } from "./Module6_1Mobile.styled";
 
 
 import IMG1 from "./MediaSources/FondoPina.png";
+import IMG8 from "./MediaSources/FondoPina2.png";
 import IMG2 from "./MediaSources/Contactenos.png";
 import IMG3 from "./MediaSources/LogosFooter1.png";
 import IMG4 from "./MediaSources/LogosFooter2.png";
@@ -255,25 +274,22 @@ export const Module6_1 = (props: IModule6_1) => {
           <SliderContainerMobile>
 
             <SliderSectionTitleMobile>
-              <TittleAMobile>Experiencias de nuestras </TittleAMobile><TittleBMobile> #AlumnasGonvar</TittleBMobile>
+              <TittleAMobile>Visita nuestra </TittleAMobile><TittleBMobile> tienda</TittleBMobile>
 
             </SliderSectionTitleMobile>
 
             <SwiperContainer>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobile} onInit={onInit}>
+              <Swiper style={{}} {...settingsMobile} onInit={onInit}>
                 {sliderData}
               </Swiper>
             </SwiperContainer>
             <SwiperContainerReduced>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobileReduced} onInit={onInit}>
+              <Swiper style={{}} {...settingsMobileReduced} onInit={onInit}>
                 {sliderData}
               </Swiper>
             </SwiperContainerReduced>
             <SwiperContainerMoreReduced>
-              <Swiper style={{
-                paddingTop: "50px",
-                paddingBottom: "50px"
-              }}
+              <Swiper style={{}}
                 {...settingsMobileMoreReduced} onInit={onInit}
               /* 
             navigation={true}
@@ -285,11 +301,63 @@ export const Module6_1 = (props: IModule6_1) => {
           </SliderContainerMobile>
 
           <PeopleContainerMobile>
-            <PeopleMobile style={{ backgroundImage: `url(${IMG1.src})` }}>
+            <PeopleMobile style={{ backgroundImage: `url(${IMG8.src})` }}>
             </PeopleMobile>
             <BgColorMobile  ></BgColorMobile>
           </PeopleContainerMobile>
+
+
+          <MoreTextMobile>
+            <MoreText_1Mobile>Trabaja con nosotros</MoreText_1Mobile>
+            <MoreText_2Mobile>Cursos</MoreText_2Mobile>
+            <MoreText_3Mobile>Tienda</MoreText_3Mobile>
+          </MoreTextMobile>
+
+          <FooterATextMobile >
+            <FooterAText_1Mobile>Aviso de privacidad</FooterAText_1Mobile>
+            <FooterAText_2Mobile>Términos y condiciones</FooterAText_2Mobile>
+            <FooterAText_3Mobile>Políticas de cancelación</FooterAText_3Mobile>
+          </FooterATextMobile>
+
+          <FooterAIconsMobile >
+            <FooterAIcons_1Mobile style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1Mobile>
+          </FooterAIconsMobile>
+
+          <FooterBIconsMobile >
+            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1Mobile>
+            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1Mobile>
+            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1Mobile>
+            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1Mobile>
+          </FooterBIconsMobile>
+
+
+          <FooterEndingMobile>
+
+
+            <LeftFooterContentMobile>
+              <GonvarFooterLogoMobile style={{ backgroundImage: `url(${IMG7.src})` }}></GonvarFooterLogoMobile>
+
+            </LeftFooterContentMobile>
+
+            <CenterFooterContentMobile>
+              <FooterTextLineMobile>
+                <tr>
+                  <th><FooterEndText1Mobile>Copyright © Gonvar Technologies SAPI de CV </FooterEndText1Mobile></th>
+                  <th><SeparingLineMobile> </SeparingLineMobile></th>
+                  <th><FooterEndText1Mobile> 2022 </FooterEndText1Mobile></th>
+                  <th><SeparingLineMobile> </SeparingLineMobile></th>
+                  <th><FooterEndText1Mobile> Todos los derechos reservados </FooterEndText1Mobile></th>
+                </tr>
+              </FooterTextLineMobile>
+
+
+            </CenterFooterContentMobile>
+
+
+          </FooterEndingMobile>
         </ContainerMainMobile >
+
+        <ContainerMain2Mobile  ></ContainerMain2Mobile>
       </GeneralContainerMobile >
     </>
   )
