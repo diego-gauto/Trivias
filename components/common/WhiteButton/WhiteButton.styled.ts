@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const WhiteButtonContainer = styled(Button)`
   font-family: "Montserrat";
@@ -17,6 +17,10 @@ export const WhiteButtonContainer = styled(Button)`
   }
   @media only screen and (max-width: 992px) {
     font-size: 16px;
+    &:hover {
+      background-color: transparent;
+      border-color: white;
+    }
   }
   @media only screen and (max-width: 576px) {
     font-size: 18px;

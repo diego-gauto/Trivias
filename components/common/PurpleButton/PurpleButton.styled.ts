@@ -20,6 +20,9 @@ export const PurpleButtonContainer = styled(Button)`
     background-color: #5000b5;
   }
   @media only screen and (max-width: 992px) {
+    &:hover {
+      transform: scale(1);
+    }
     font-size: 16px;
   }
   @media only screen and (max-width: 576px) {
