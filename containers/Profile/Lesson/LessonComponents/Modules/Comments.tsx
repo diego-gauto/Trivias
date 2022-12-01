@@ -57,11 +57,11 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
           Acerca de
         </Titles>
 
-        <Titles onClick={() => {
+        {/* <Titles onClick={() => {
           setValue(2)
         }}>
           Material Extra
-        </Titles>
+        </Titles> */}
 
         {data.homeworkAvailable && <Titles onClick={() => {
           setValue(3)
@@ -88,12 +88,12 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <SelectContain>
           <ChatboxIcon />
         </SelectContain>
-        <UnSelected>
+        {/* <UnSelected>
           <EaselIcon
             onClick={() => {
               setValue(2)
             }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
+        </UnSelected> */}
       </IconContain>
       <MainContainer>
         <CommentContain>

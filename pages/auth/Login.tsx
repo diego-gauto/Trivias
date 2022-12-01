@@ -220,6 +220,13 @@ const Login = () => {
                       </p>
                     </div>
                   </div>
+                  <p className="registerText">
+                    ¿No tienes una cuenta?
+                    <Link href={SIGNUP_PATH}>
+                      <span>&nbsp;Regístrate</span>
+                    </Link>
+                  </p>
+
                   {
                     !pastUserScreen ?
                       <div className="box">
@@ -367,16 +374,6 @@ const Login = () => {
                       <LoaderImage>
                         <LoaderContain />
                       </LoaderImage>
-                  }
-
-                  {
-                    responsive1023 &&
-                    <p className="registerText">
-                      ¿No tienes una cuenta?
-                      <Link href={SIGNUP_PATH}>
-                        <span>&nbsp;Regístrate</span>
-                      </Link>
-                    </p>
                   }
 
                   <div className="social-media-container">

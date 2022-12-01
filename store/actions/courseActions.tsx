@@ -27,7 +27,15 @@ export const getCourses = async () => {
   });
   return courses;
 }
-
+export const getSeason = async (courseId: any) => {
+  let courses: any = []
+  const docRef = query(collection(db, 'courses', courseId, 'seasons'), orderBy('name'));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    courses.push({ ...doc.data(), id: doc.id });
+  });
+  return courses;
+}
 export const getcourse = async (id: any) => {
   const docRef = doc(db, "courses", id);
   const docSnap = await getDoc(docRef);

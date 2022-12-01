@@ -76,11 +76,11 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
         <ListIcon onClick={() => {
           setValue(1)
         }} />
-        <Titles onClick={() => {
+        {/* <Titles onClick={() => {
           setValue(2)
         }}>
           Material Extra
-        </Titles>
+        </Titles> */}
         <BookIcon onClick={() => {
           setValue(2)
         }} />

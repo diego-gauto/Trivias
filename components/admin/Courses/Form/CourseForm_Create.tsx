@@ -49,6 +49,12 @@ const formSchema = yup.object().shape({
   courseSubtittle: yup
     .string()
     .required("Campo requerido"),
+  coursePhrase: yup
+    .string()
+    .required("Campo requerido"),
+  courseMaterial: yup
+    .string()
+    .required("Campo requerido"),
   courseAbout: yup
     .string()
     .required("Campo requerido"),
@@ -67,6 +73,8 @@ type FormValues = {
   courseAbout: string;
   coursePublishYear: number;
   coursePrice: number;
+  coursePhrase: string;
+  courseMaterial: string;
 };
 
 const CourseForm_Create = () => {
@@ -93,6 +101,7 @@ const CourseForm_Create = () => {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
   const [openMembership, setOpenMembership] = useState<boolean>(false);
   const [openHw, setOpenHw] = useState<boolean>(false);
+  const [openLevel, setOpenLevel] = useState<boolean>(false);
   const [name, setName] = useState("Seleccionar un profesor");
   const [homeWork, setHomeWork] = useState(false);
   const [free, setFree] = useState(0)
@@ -100,6 +109,7 @@ const CourseForm_Create = () => {
   const [userData, setUserData] = useState<any>([]);
   const [value2, setValue2] = useState<any>([]);
   const [value3, setValue3] = useState("Gratis");
+  const [difficultyValue, setDifficultyValue] = useState("");
   const [image, setImage] = useState<any>("");
   const [missing, setMissing] = useState(false)
   const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
@@ -135,6 +145,10 @@ const CourseForm_Create = () => {
     if (value3 !== undefined && value3 !== null) {
       type = value3;
     }
+    var difficultyLevel = ""
+    if (difficultyValue !== undefined && difficultyValue !== null) {
+      difficultyLevel = difficultyValue
+    }
     if (formData.courseDuration === undefined) {
       formData.courseDuration = 0;
     }
@@ -151,8 +165,11 @@ const CourseForm_Create = () => {
         coursePrice: formData.coursePrice * free + 0,
         courseProfessor: professor,
         courseCategory: category,
+        courseDifficulty: difficultyLevel,
         courseType: type,
         courseHomeWork: homeWork,
+        coursePhrase: formData.coursePhrase,
+        courseMaterial: formData.courseMaterial,
         uid: "A5uQQ3JAyS8GvnnwLPdE"
       },
     };
@@ -189,7 +206,9 @@ const CourseForm_Create = () => {
     })
   }
   if (Object.keys(errors).length > 0 && missing == true) {
-    alert(`Falta lo siguiente: \n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio" : ""}`);
+    alert(`Falta lo siguiente:\n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio\n" : ""}${errors.coursePhrase ? "-Frase descriptiva\n" : ""}${errors.courseMaterial ? "-Materiales\n" : ""}
+    
+    `);
     setMissing(false)
   }
   const handleOpenHomeWork = () => {
@@ -197,25 +216,43 @@ const CourseForm_Create = () => {
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(false);
+    setOpenLevel(false);
   }
   const handleOpenProfessor = () => {
     setOpenHw(false);
     setOpenProfessor(!openProfessor);
     setOpenCategory(false);
     setOpenMembership(false);
+    setOpenLevel(false);
   }
   const handleOpenCategory = () => {
     setOpenHw(false);
     setOpenProfessor(false);
     setOpenCategory(!openCategory);
     setOpenMembership(false);
+    setOpenLevel(false);
   }
   const handleOpenMembership = () => {
     setOpenHw(false);
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(!openMembership);
+    setOpenLevel(false);
   }
+  const handleOpenLevel = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(!openLevel);
+  }
+  const difficulty = [
+    "Muy Fácil",
+    "Fácil",
+    "Intermedio",
+    "Avanzado",
+    "Máster",
+  ]
   useEffect(() => {
     getProffessors();
     getAllCategories();
@@ -396,6 +433,61 @@ const CourseForm_Create = () => {
           </InputContain>
         </InputForm>
         {/* LINEA 3 */}
+        <InputForm>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Frase descriptiva icónica</Label>
+            <Input
+              placeholder="Frase descriptiva"
+              type="text"
+              className={`form-control ${errors.coursePhrase ? 'is-invalid' : ''}`}
+              {...register("coursePhrase")}
+            />
+          </InputContain>
+
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Nivel de Dificultad</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { handleOpenLevel() }}>
+                  {
+                    difficultyValue == "" ? "Seleccione una Dificultad" : difficultyValue
+                  }
+                  <CaretD2 />
+                </Selected>
+                {
+                  openLevel == true &&
+                  <OptionContain>
+                    {
+                      difficulty.map((val) => {
+                        return (
+                          <Option onClick={() => { setOpenLevel(false), setDifficultyValue(val) }} key={"difficulty " + val}>
+                            <input
+                              type="radio"
+                              id="difficulty"
+                              value="difficulty"
+                            />
+                            <Label2 > {val}</Label2>
+                          </Option>
+                        )
+                      })
+                    }
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+          </InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Materiales</Label>
+            <Input
+              placeholder="Todas las herramientas y materiales que se requieren en el curso"
+              type="text"
+              className={`form-control ${errors.courseMaterial ? 'is-invalid' : ''}`}
+              {...register("courseMaterial")}
+            />
+          </InputContain>
+        </InputForm>
+        {/* LINEA 4 */}
         <InputForm>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Sobre el Curso</Label>

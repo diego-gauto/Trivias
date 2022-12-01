@@ -75,6 +75,10 @@ export const AllCourses = ({
                     {course.courseAbout}
                   </Text>
                 </Info>
+                <Info>
+                  <Label>Frase Descriptiva</Label>
+                  <Text>{course.coursePhrase}</Text>
+                </Info>
               </Column>
               <Column>
                 <Info>
@@ -93,8 +97,20 @@ export const AllCourses = ({
                   <Label>Tareas</Label>
                   <Text> {course.courseHomeWork == false ? "Flexible" : "Obligatorio"} </Text>
                 </Info>
+                <Info>
+                  <Label>Materiales del curso</Label>
+                  <Text>{course.courseMaterial}</Text>
+                </Info>
               </Column>
               <Column>
+                <Info>
+                  <Label>Dificultad del curso</Label>
+                  <Text>{course.courseDifficulty}</Text>
+                </Info>
+                <Info>
+                  <Label>Membresía</Label>
+                  <Text>{course.courseType}</Text>
+                </Info>
                 <Info>
                   <Label>Duración de Suscripción (Días)</Label>
                   <Text> {course.courseDuration} </Text>

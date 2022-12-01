@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import React, { useState } from 'react'
-import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent } from './About.styled';
+import { DownloadText, DownlowadContain, ExtraContain, FileIcon, Paragraph, Weight } from './Extra.styled'
+import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent, ObjectiveContainer } from './About.styled';
 import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
 
 const About = ({ value, setValue, data }: any) => {
@@ -10,11 +12,11 @@ const About = ({ value, setValue, data }: any) => {
         <PositionTitle position={value}>
           Acerca de
         </PositionTitle>
-        <Titles onClick={() => {
+        {/* <Titles onClick={() => {
           setValue(2)
         }}>
           Material Extra
-        </Titles>
+        </Titles> */}
         {data.homeworkAvailable && <Titles onClick={() => {
           setValue(3)
         }}>
@@ -41,12 +43,12 @@ const About = ({ value, setValue, data }: any) => {
             setValue(4)
           }} style={{ backgroundColor: 'gray' }} />
         </UnSelected>
-        <UnSelected>
+        {/* <UnSelected>
           <EaselIcon
             onClick={() => {
               setValue(2)
             }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
+        </UnSelected> */}
       </IconContain>
       <AboutContain>
         {data.points > 0 && <CircleContain>
@@ -64,8 +66,45 @@ const About = ({ value, setValue, data }: any) => {
           <LessonContent>
             {data.about}
           </LessonContent>
+          {data.extra?.map((extra: any, index: any) => {
+            return (
+              <div key={"About " + index}>
+                <Link href={extra.path}>
+                  <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                    <DownlowadContain>
+                      <DownloadText>
+                        <FileIcon />
+                        {extra.title}
+                      </DownloadText>
+                      <Weight>
+                        3.1 MB
+                      </Weight>
+                    </DownlowadContain>
+                  </a>
+                </Link>
+              </div>
+            )
+          })}
         </TextContainer>
       </AboutContain>
+      {
+        data.objective != undefined
+          ?
+          <ObjectiveContainer >
+            <div className="title">
+              <p>
+                Objetivos
+              </p>
+            </div>
+            <div className="content">
+              <p>
+                {data.objective}
+              </p>
+            </div>
+          </ObjectiveContainer>
+          : ""
+      }
+
     </>
   )
 }

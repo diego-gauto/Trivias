@@ -4,21 +4,21 @@ export const ExtraContain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
     border-radius: 10px;
   }
-  @media (max-width: 400px){
+  @media (max-width: 400px) {
     padding: 15px;
   }
 `;
 export const Paragraph = styled.p`
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   text-align: justify;
   margin: 0;
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     font-size: 12px;
   }
 `;
@@ -29,13 +29,14 @@ export const DownlowadContain = styled.div`
   padding: 22px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  @media (max-width: 1023px){
+  width: 100%;
+  @media (max-width: 1023px) {
     padding: 10px;
   }
-  @media (max-width: 400px){
+  @media (max-width: 400px) {
     padding: 5px;
   }
-  &:hover{
+  &:hover {
     box-shadow: 0px 0px 10px 2px rgb(102 21 113 / 31%);
   }
 `;
@@ -52,10 +53,10 @@ export const DownloadText = styled.p`
   gap: 10px;
   font-size: 18px;
   font-weight: 600;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin: 0;
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     font-size: 14px;
   }
 `;
@@ -63,9 +64,9 @@ export const Weight = styled.p`
   font-size: 18px;
   color: gray;
   font-weight: 600;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     font-size: 14px;
   }
 `;

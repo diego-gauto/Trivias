@@ -264,6 +264,20 @@ const Edit = () => {
               }}
             />
           </InputContain>
+          <InputContain>
+            <Label>Objetivos</Label>
+            <InputBig style={{ height: 100 }}
+              placeholder="Lorem ipsum dolor sit amet, consectetur 
+            adipiscing elit. Pharetra, cursus sapien ac magna. 
+            Consectetur amet eu tincidunt quis."
+              defaultValue={lesson.objective}
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, objective: e.target.value
+                })
+              }}
+            />
+          </InputContain>
         </Contain2>
         <Contain3>
           <InputContain>
