@@ -15,7 +15,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: #ede7f2;
-  border-radius: 30px !important;
+  border-radius: 40px !important;
   button {
     background: #3f1168;
     position: absolute;
@@ -32,7 +32,8 @@ export const Container = styled.div`
   .bottom-section {
     background: #d2aff1;
     padding: 20px;
-    border-radius: 30px !important;
+    padding-block: 40px;
+    border-radius: 40px !important;
     h1 {
       font-size: 28px;
       font-weight: bold;
@@ -47,14 +48,14 @@ export const Container = styled.div`
       }
     }
     p {
-      font-size: 16px;
+      font-size: 17px;
       color: #3f1168;
       line-height: initial;
       text-align: center;
       margin: 0;
       span {
         color: #942ced;
-        font-weight: 500;
+        font-weight: bold;
       }
       .opacity {
         color: inherit;
@@ -64,9 +65,11 @@ export const Container = styled.div`
   }
   .top-section {
     padding: 20px;
-    border-radius: 30px !important;
+    padding-block: 40px;
+    border-radius: 40px !important;
     h1 {
-      font-size: 28px;
+      text-align: center;
+      font-size: 37px;
       font-weight: bold;
       color: #3f1168;
       border: none;
@@ -79,16 +82,17 @@ export const Container = styled.div`
       }
     }
     p {
-      font-size: 16px;
+      font-size: 17px;
       color: #3f1168;
       line-height: initial;
       text-align: center;
       margin: 0;
       span {
         color: #942ced;
-        font-weight: 500;
+        font-weight: bold;
       }
       .opacity {
+        font-weight: 400;
         color: inherit;
         opacity: 0.5;
       }

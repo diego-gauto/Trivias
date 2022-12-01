@@ -93,7 +93,8 @@ export const Background = styled.div`
       .sub-section {
         display: flex;
         align-items: baseline;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 10px;
         width: 100%;
         .subtitle {
           color: #3f1168;
