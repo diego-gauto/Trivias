@@ -2,6 +2,21 @@ import styled from "styled-components";
 import { Col, Container, Image, Row } from "react-bootstrap"; 
 
 /*
+@media only screen and (max-width: 1980px) {
+}
+@media only screen and (max-width: 1720px) {
+}
+@media only screen and (max-width: 1600px) {
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+}
+@media only screen and (max-width: 1028px) {
+}
+ */
+
+/*
 @media only screen and (max-width: 1024px) {
   }
   @media only screen and (max-width: 840px) {

@@ -14,6 +14,7 @@ import {
 import { title } from "process";
 
 import IMG1 from "../MediaSources/facebookIcon.png";
+import { CompraRapida } from "../Module6_1.styled";
 
 export const SlideModule_1 = (props: ISlideModule_2) => {
 
@@ -56,7 +57,11 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
                   </NewTag>
                   : <></>
               }
-
+              {
+                compraRapida ?
+                  <CompraRapida>Compra rápida</CompraRapida>
+                  : <></>
+              }
             </SlideImg>
             <UserDataContainer>
 

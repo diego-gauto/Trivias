@@ -27,8 +27,26 @@ z-index:1;
 background-color: white;
 `;
 export const PeopleContainer = styled.div` 
-height: 62%;
+height: 70%;
  
+@media only screen and (max-width: 1980px) {
+  height: 70%;
+}
+@media only screen and (max-width: 1720px) {
+  height: 62%;
+}
+@media only screen and (max-width: 1600px) {
+  height: 58%;
+}
+@media only screen and (max-width: 1440px) {
+  height: 50%;
+}
+@media only screen and (max-width: 1280px) {
+  height: 45%;
+}
+@media only screen and (max-width: 1030px) {
+  height: 35%;
+}
 
 `;
 export const Lines = styled.div`
@@ -101,6 +119,17 @@ bottom: 18%;
 z-index: 1;
 right: 8%;
 
+@media only screen and (max-width: 1440px) {
+  font-size: 18px;
+bottom: 25%;
+}
+ 
+@media only screen and (max-width: 1030px) {
+  font-size: 14px;
+  bottom: 30%;
+}
+
+
 text-align: right;
 font-size: 24px;
 font-family: "MONTSERRAT-BOLD" !important;
@@ -151,9 +180,34 @@ transform: scale(1.1);
 export const FooterAText = styled.div`
 position: absolute;
 width: 25%;
-bottom: -8%;
 z-index: 1;
 left: 5%;
+
+bottom: -15%;
+@media only screen and (max-width: 1980px) {
+  
+bottom: -15%;
+}
+@media only screen and (max-width: 1720px) {
+  
+bottom: -8%;
+}
+@media only screen and (max-width: 1600px) {
+  
+bottom: -5%;
+}
+@media only screen and (max-width: 1440px) {
+  
+bottom: 2.5%;
+}
+@media only screen and (max-width: 1280px) {
+  
+bottom: 5%;
+}
+@media only screen and (max-width: 1030px) {
+  
+bottom: 10%;
+}
 
 text-align: left;
 font-size: 20px;
@@ -213,9 +267,35 @@ export const FooterAIcons = styled.div`
 position: absolute;
 height: 248px;
 width: 70px;
-bottom: -8%;
 z-index: 1;
 right: 5%;
+
+
+bottom: -15%;
+@media only screen and (max-width: 1980px) {
+  
+bottom: -15%;
+}
+@media only screen and (max-width: 1720px) {
+  
+bottom: -8%;
+}
+@media only screen and (max-width: 1600px) {
+  
+bottom: -5%;
+}
+@media only screen and (max-width: 1440px) {
+  
+  bottom: -2%;
+  }
+  @media only screen and (max-width: 1280px) {
+    
+  bottom: 2%;
+  }
+  @media only screen and (max-width: 1030px) {
+    
+  bottom: 8%;
+  }
 
 text-align: left;
 font-size: 24px;
@@ -231,16 +311,57 @@ color: #EDE7F2;
 background-size: 42.5%;
 height: 100%;
 background-position-x: 33.3%;
+
+@media only screen and (max-width: 1440px) {
+  
+background-size: 28%;
+}
+ 
+@media only screen and (max-width: 1280px) {
+  
+background-size: 25%;
+}
+@media only screen and (max-width: 1030px) {
+  
+background-size: 20%;
+}
+
   
 `; 
 
 export const FooterBIcons = styled.div`
 position: absolute;
 height: 248px;
-width: 70px;
-bottom: -8%;
+width: 70px; 
 z-index: 1;
 right: 10%;
+
+bottom: -15%;
+@media only screen and (max-width: 1980px) {
+  
+bottom: -15%;
+}
+@media only screen and (max-width: 1720px) {
+  
+bottom: -8%;
+}
+@media only screen and (max-width: 1600px) {
+  
+bottom: -5%;
+}
+@media only screen and (max-width: 1440px) {
+  
+bottom: -2%;
+}
+@media only screen and (max-width: 1280px) {
+  
+bottom: 2%;
+}
+@media only screen and (max-width: 1030px) {
+  
+bottom: 8%;
+}
+
 
 text-align: left;
 font-size: 24px;
@@ -256,39 +377,87 @@ export const FooterBIcons_1 = styled.div`
   background-size: 90%;  
   margin-bottom: 12px;
 margin-left: 20%;
-  background-repeat: no-repeat;
-  color: #EDE7F2;
+  background-repeat: no-repeat; 
+
+  @media only screen and (max-width: 1440px) {
+    width: 30px;
+    height: 30px;
+  }
+  @media only screen and (max-width: 1280px) {
+    width: 25px;
+    height: 25px;
+  }
+  @media only screen and (max-width: 1030px) {
+    width: 18px;
+    height: 18px;
+  }
   
 `; 
 export const FooterBIcons_2 = styled.div`
-  width: 50px;
-  height: 50px;
-  background-size: 90%;  
-  margin-bottom: 12px;
+width: 50px;
+height: 50px;
+background-size: 90%;  
+margin-bottom: 12px;
 margin-left: 20%;
-  background-repeat: no-repeat;
-  color: #EDE7F2;
-  
+background-repeat: no-repeat; 
+
+@media only screen and (max-width: 1440px) {
+  width: 30px;
+  height: 30px;
+}
+@media only screen and (max-width: 1280px) {
+  width: 25px;
+  height: 25px;
+}
+@media only screen and (max-width: 1030px) {
+  width: 18px;
+  height: 18px;
+}
+
 `; 
 export const FooterBIcons_3 = styled.div`
-  width: 50px;
-  height: 50px;
-  background-size: 90%;  
-  margin-bottom: 12px;
+width: 50px;
+height: 50px;
+background-size: 90%;  
+margin-bottom: 12px;
 margin-left: 20%;
-  background-repeat: no-repeat;
-  color: #EDE7F2;
-  
+background-repeat: no-repeat; 
+
+@media only screen and (max-width: 1440px) {
+  width: 30px;
+  height: 30px;
+}
+@media only screen and (max-width: 1280px) {
+  width: 25px;
+  height: 25px;
+}
+@media only screen and (max-width: 1030px) {
+  width: 18px;
+  height: 18px;
+}
+
 `; 
 export const FooterBIcons_4 = styled.div`
-  width: 50px;
-  height: 50px;
-  background-size: 90%;  
-  margin-bottom: 12px;
+width: 50px;
+height: 50px;
+background-size: 90%;  
+margin-bottom: 12px;
 margin-left: 20%;
-  background-repeat: no-repeat;
-  color: #EDE7F2;
-  
+background-repeat: no-repeat; 
+
+@media only screen and (max-width: 1440px) {
+  width: 30px;
+  height: 30px;
+}
+@media only screen and (max-width: 1280px) {
+  width: 25px;
+  height: 25px;
+}
+@media only screen and (max-width: 1030px) {
+  width: 18px;
+  height: 18px;
+}
+
 `; 
 
 export const ContainerMain = styled.div`
@@ -323,11 +492,28 @@ export const FooterEnding = styled.div`
 background-color: #29282C;
 position: relative;
 width: 100%;
-height: 240px;
+height: 300px;
 bottom: 0%;
  padding: 0 ;
  margin: 0 ;
  display: flex;
+
+ @media only screen and (max-width: 1980px) {
+  
+height: 300px;
+}
+@media only screen and (max-width: 1720px) {
+  
+height: 240px;
+}
+@media only screen and (max-width: 1600px) {
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+}
+@media only screen and (max-width: 1030px) {
+}
 `;
 export const Line = styled.div`
 background-color: #DBD0E5;
@@ -393,6 +579,30 @@ background-color: white;
 width: 2px;
 height: 50px;
 margin: 20px;
+`;
+export const CompraRapida = styled.div`
+font-weight: 100;
+background: linear-gradient(to right,#942CED,#D244D1 );
+top: 50%;
+position: relative;
+left: 20%;
+font-size: 24px;
+border-radius: 50px;
+padding: 15px 20px 15px;
+color: #E5DFE9; 
+
+
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+
+transition: all .2s ease-in-out;  
+    
+&:hover {    
+transform: scale(1.1);   
+}
 `;
 export const FooterTextLine = styled.table`
 top: 15%;
