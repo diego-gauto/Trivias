@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { SelectContain, Selected, DropDown, OptionContain, Input, Label, Episodes, Option } from '../../Module3/Modal/Select.styled';
 
-const SelectModule4 = ({ course, handleClick }: any) => {
+const SelectModule4 = ({ course, handleClick, seasons }: any) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("Temporada 1")
+  const [value, setValue] = useState(seasons[0]?.name)
   return (
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
-        {value}
+        {value == undefined ? "Temporada 1" : value}
         <DropDown />
       </Selected>
       {
@@ -15,14 +15,21 @@ const SelectModule4 = ({ course, handleClick }: any) => {
         <OptionContain>
           {course.seasons.map((season: any, index: any) => {
             return (
-              <Option onClick={() => { setValue(`Temporada ${index + 1}`); setOpen(false); handleClick(index) }}>
+              <Option key={index + "season courses"} onClick={() => {
+                seasons[index]?.name == undefined
+                  ? setValue(`Temporada ${index + 1}`)
+                  : setValue(`${seasons[index].name}`)
+                  ;
+                setOpen(false);
+                handleClick(index)
+              }}>
                 <Input
                   type="radio"
                   id="Temporada1"
                   name="category"
                   value="Temporada 1"
                 />
-                <Label > Temporada {index + 1} {season.lessons.length == 1 && <Episodes>({season.lessons.length} episodio)
+                <Label > {seasons[index]?.name == undefined ? `Temporada ${index + 1}` : seasons[index].name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} episodio)
                 </Episodes>}
                   {season.lessons.length > 1 && <Episodes>({season.lessons.length} episodios)
                   </Episodes>}

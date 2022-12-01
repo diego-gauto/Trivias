@@ -33,13 +33,12 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     e.preventDefault();
     pos = {
       // The current scroll
-      left: slider.scrollLeft,
-      top: slider.scrollTop,
+      left: slider?.scrollLeft,
+      top: slider?.scrollTop,
       // Get the current mouse position
       x: e.clientX,
       y: e.clientY,
     };
-    console.log(pos);
 
 
     document.addEventListener('mousemove', mouseMoveHandler);
@@ -60,6 +59,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const handleShow = () => {
     setShow(true);
   }
+
 
   useEffect(() => {
     if (user) {

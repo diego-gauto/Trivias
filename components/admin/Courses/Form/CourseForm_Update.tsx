@@ -133,7 +133,6 @@ const CourseForm = (props: ICourseForm_Update) => {
   const addCategories = (val: any, index: any) => {
     let tempCategories = value2
     let tempIndex = 0;
-    console.log(index)
     if (tempCategories.includes(val)) {
       tempIndex = tempCategories.findIndex((x: any) =>
         x == val
