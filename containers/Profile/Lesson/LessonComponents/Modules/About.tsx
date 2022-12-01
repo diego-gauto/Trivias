@@ -87,18 +87,24 @@ const About = ({ value, setValue, data }: any) => {
           })}
         </TextContainer>
       </AboutContain>
-      <ObjectiveContainer >
-        <div className="title">
-          <p>
-            Objetivos
-          </p>
-        </div>
-        <div className="content">
-          <p>
-            {data.objective}
-          </p>
-        </div>
-      </ObjectiveContainer>
+      {
+        data.objective != undefined
+          ?
+          <ObjectiveContainer >
+            <div className="title">
+              <p>
+                Objetivos
+              </p>
+            </div>
+            <div className="content">
+              <p>
+                {data.objective}
+              </p>
+            </div>
+          </ObjectiveContainer>
+          : ""
+      }
+
     </>
   )
 }
