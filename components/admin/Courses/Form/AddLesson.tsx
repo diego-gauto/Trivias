@@ -38,6 +38,8 @@ import dynamic from "next/dynamic";
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css';
+import { LoaderImage } from "../../../../screens/Login.styled";
+import { LoaderContain } from "../../../Footer/Footer.styled";
 
 const AddLesson = () => {
   const router = useRouter();
@@ -55,8 +57,10 @@ const AddLesson = () => {
     about: '',
     homeWork: '',
     homeWorkAbout: '',
+    objective: '',
   });
   const [open, setOpen] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [value, setValue] = useState(false);
   const [quill, setQuill] = useState("");
   const modules = {
@@ -97,16 +101,21 @@ const AddLesson = () => {
   ];
 
   const newLesson = () => {
+    setLoader(true);
     if (!value) {
       if (lesson.title == '' ||
         lesson.number == '' ||
         lesson.link == '' ||
         lesson.image == '' ||
-        lesson.about == '') {
+        lesson.objective == '' ||
+        lesson.about == ''
+      ) {
+        setLoader(false);
         alert("Por favor complete todo los campos!");
       } else {
         lesson.homeworkAvailable = false;
         addLesson(lesson, courseID, seasonID).then(() => {
+          setLoader(false);
           alert(
             "Lección Creada"
           )
@@ -121,11 +130,16 @@ const AddLesson = () => {
         lesson.number == '' ||
         lesson.link == '' ||
         lesson.image == '' ||
-        lesson.about == '' || lesson.homeWork == '' || quill == '') {
+        lesson.about == '' ||
+        lesson.homeWork == '' ||
+        lesson.objective == '' ||
+        quill == '') {
+        setLoader(false);
         alert("Por favor complete todo los campos!");
       } else {
         lesson.homeworkAvailable = true;
         addLesson(lesson, courseID, seasonID).then(() => {
+          setLoader(false);
           alert(
             "Lección Creada"
           )
@@ -262,6 +276,19 @@ const AddLesson = () => {
               }}
             />
           </InputContain>
+          <InputContain>
+            <Label>Objetivos</Label>
+            <InputBig style={{ height: 100 }}
+              placeholder="Lorem ipsum dolor sit amet, consectetur 
+            adipiscing elit. Pharetra, cursus sapien ac magna. 
+            Consectetur amet eu tincidunt quis."
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, objective: e.target.value
+                })
+              }}
+            />
+          </InputContain>
         </Contain2>
         <Contain3>
           <InputContain>
@@ -333,9 +360,18 @@ const AddLesson = () => {
           }
         }}
         ><TransparentButton>Regresar</TransparentButton></Link>
-        <PurpleButton
-          onClick={newLesson}
-        >Guardar</PurpleButton>
+        {
+          !loader
+            ?
+            <PurpleButton
+              onClick={newLesson}
+            >Guardar</PurpleButton>
+            :
+            <LoaderImage>
+              <LoaderContain />
+            </LoaderImage>
+        }
+
       </ButtonContain>
       {lesson.link && <ReactPlayer hidden
         url={lesson.link}

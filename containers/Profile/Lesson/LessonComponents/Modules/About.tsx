@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { DownloadText, DownlowadContain, ExtraContain, FileIcon, Paragraph, Weight } from './Extra.styled'
-import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent } from './About.styled';
+import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent, ObjectiveContainer } from './About.styled';
 import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
 
 const About = ({ value, setValue, data }: any) => {
@@ -66,26 +66,39 @@ const About = ({ value, setValue, data }: any) => {
           <LessonContent>
             {data.about}
           </LessonContent>
-          {data.extra?.map((extra: any) => {
+          {data.extra?.map((extra: any, index: any) => {
             return (
-              <Link href={extra.path}>
-                <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
-                  <DownlowadContain>
-                    <DownloadText>
-                      <FileIcon />
-                      {extra.title}
-                    </DownloadText>
-                    <Weight>
-                      3.1 MB
-                    </Weight>
-                  </DownlowadContain>
-                </a>
-              </Link>
+              <div key={"About " + index}>
+                <Link href={extra.path}>
+                  <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                    <DownlowadContain>
+                      <DownloadText>
+                        <FileIcon />
+                        {extra.title}
+                      </DownloadText>
+                      <Weight>
+                        3.1 MB
+                      </Weight>
+                    </DownlowadContain>
+                  </a>
+                </Link>
+              </div>
             )
           })}
         </TextContainer>
-
       </AboutContain>
+      <ObjectiveContainer >
+        <div className="title">
+          <p>
+            Objetivos
+          </p>
+        </div>
+        <div className="content">
+          <p>
+            {data.objective}
+          </p>
+        </div>
+      </ObjectiveContainer>
     </>
   )
 }

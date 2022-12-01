@@ -68,3 +68,32 @@ export const LessonContent = styled.p`
     font-size: 12px;
   }
 `;
+export const ObjectiveContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  padding: 15px;
+  gap: 10px;
+  p {
+    margin: 0;
+  }
+  .title {
+    p {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      @media (max-width: 1023px) {
+        font-size: 16px;
+      }
+    }
+  }
+  .content {
+    p {
+      font-size: 16px;
+      @media (max-width: 1023px) {
+        font-size: 12px;
+      }
+    }
+  }
+`;
