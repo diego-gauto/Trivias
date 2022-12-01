@@ -60,6 +60,7 @@ export const SwiperContainerMoreReduced = styled.div`
   }
 
 `;
+ 
 export const GeneralContainerMobile = styled(Container)`
   padding: 0;
   display: none;
@@ -71,86 +72,46 @@ export const GeneralContainerMobile = styled(Container)`
 
 
 export const PeopleMobile = styled.div`
-background-size: 100%;
-height: 490px;
+background-size: 100%;  
+height: 100%;
 background-repeat: no-repeat;
 width: 100%; 
 position: relative;
 background-position-x: 50%;
 z-index:1; 
- 
-@media only screen and (max-width: 840px) {
-  height: 390px;
-}
-@media only screen and (max-width: 770px) {
-  height: 365px;
-}
-@media only screen and (max-width: 580px) {
-  height: 270px;
-}
-@media only screen and (max-width: 490px) {
-  
-  height: 230px;
-}
-@media only screen and (max-width: 390px) {
-  
-  height: 186px;
-}
-
+background-color: white;
 `;
 export const PeopleContainerMobile = styled.div` 
-margin-top: 2.5%;
-height: 488px;
  
-@media only screen and (max-width: 840px) {
-  height: 390px;
-}
-@media only screen and (max-width: 770px) {
-  height: 365px;
-}
-@media only screen and (max-width: 580px) {
-  height: 270px;
-}
-@media only screen and (max-width: 490px) {
-  height: 230px;
-}
-@media only screen and (max-width: 390px) {
-  height: 187px;
-}
+height: 75%;
 
 `;
-export const LinesMobile = styled.div`
-background-size: 100%;
-height: 300px;
-background-repeat: no-repeat;
-@media only screen and (max-width: 1980px) {
-  height: 180px;
-}
-`;
+ 
 export const BgColorMobile = styled.div`
 background-color: #EDE7F2;
+height: 300px;
+top: -300px; 
 position: relative;
 
-top: -58%;
-height: 57.5%;
-
- 
- 
-@media only screen and (max-width: 840px) {
-  top: -55%;
-  height: 55%;
+@media only screen and (max-width: 1980px) {
+  top: -59.6%;
+  height: 280px;
+} 
+@media only screen and (max-width: 1720px) {
+  top: -51%;
+  height: 240px;
 }
- 
-@media only screen and (max-width: 580px) {
-  height: 50%;
-  top: -50%;
+@media only screen and (max-width: 1600px) {
+  height: 240px;
+  top: -66.6%;
 }
- 
-@media only screen and (max-width: 460px) {
-  height: 50%;
-  top: -55%;
+@media only screen and (max-width: 1440px) {
+  top: -60%;
+  height: 180px;
 }
- 
+@media only screen and (max-width: 1280px) {
+  
+}
 
 `;
 export const TittleAMobile = styled.span` 
@@ -161,14 +122,6 @@ font-family: "Montserrat-ExtraBold" !important;
   font-family: Montserrat-ExtraBold;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
-
-  @media only screen and (max-width: 580px) {
-    font-size: 30px;
-  }
-  @media only screen and (max-width: 460px) {
-    font-size: 24px;
-  }
-
 `;
 export const TittleBMobile = styled.span` 
 color: #A733E4;
@@ -178,99 +131,398 @@ font-family: "Montserrat-ExtraBold" !important;
   font-family: Montserrat-ExtraBold;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
 }
-
-  @media only screen and (max-width: 580px) {
-    font-size: 30px;
-  } @media only screen and (max-width: 460px) {
-    font-size: 24px;
-  }
-
 `;
-export const DivisorMobile = styled.div`
-  position: absolute;
+ 
+export const MoreTextMobile = styled.div`
+position: absolute;
+width: 15%; 
+z-index: 1; 
+font-size: 14px;
+bottom: -12.5%;
+left: 5%; 
+text-align: left; 
+
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+`;
+export const MoreText_1Mobile = styled.div`
   width: 110%;
-  height: 270px;
-  background: white;
-  transform: rotate(-185deg);
-  margin-left: -5%;
-  bottom: 570px;
-  z-index: 2;
+  bottom: 570px; 
+  color: #EDE7F2;
+  
+  margin-bottom: 5px;
+  transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: scale(1.1);  
+}
+`;
+export const MoreText_2Mobile = styled.div`
+  width: 110%;
+  bottom: 570px; 
+  
+  margin-bottom: 5px;
+  transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: scale(1.1);  
+}
+  color: #EDE7F2;
+`;
+export const MoreText_3Mobile = styled.div`
+  width: 110%;
+  bottom: 570px; 
+  color: #EDE7F2;
+  margin-bottom: 5px;
+  transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: scale(1.1);  
+}
+`;
+
+export const FooterATextMobile = styled.div`
+position: absolute;
+width: 25%;
+z-index: 1;
+left: 5%; 
+
+font-size: 12px;
+bottom: -20%;
+
+text-align: left;
+font-family: "MONTSERRAT-MEDIUM" !important;
+@font-face {
+  font-family: MONTSERRAT-MEDIUM;
+  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+}
+`;
+export const FooterAText_1Mobile = styled.div`
+  width: 110%;  
+  padding-bottom: 38px;
+
+  color: #EDE7F2;
+  overflow: hidden; 
+  
+transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform:translate(30px); 
+}
+
+@media only screen and (max-width: 1440px) {
+  
+padding-bottom: 20px;
+}
+@media only screen and (max-width: 1280px) {
+  
+padding-bottom: 18px;
+}
+@media only screen and (max-width: 1030px) {
+  
+padding-bottom: 10px;
+}
+
+ 
+  
+`;
+export const FooterAText_2Mobile = styled.div`
+  width: 110%;  
+  padding-bottom: 38px;
+
+  
+  color: #EDE7F2;
+  overflow: hidden; 
+  
+transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform:translate(30px); 
+}
+@media only screen and (max-width: 1440px) {
+  
+padding-bottom: 20px;
+}
+@media only screen and (max-width: 1280px) {
+  
+padding-bottom: 18px;
+}
+@media only screen and (max-width: 1030px) {
+  
+padding-bottom: 10px;
+}
+`;
+export const FooterAText_3Mobile = styled.div`
+  width: 110%;  
+  padding-bottom: 38px;
+
+  color: #EDE7F2;
+  overflow: hidden; 
+  
+transition: all .2s ease-in-out;  
+    
+&:hover {  
+
+transform: translate(30px);
+}
+@media only screen and (max-width: 1440px) {
+  
+padding-bottom: 20px;
+}
+@media only screen and (max-width: 1280px) {
+  
+padding-bottom: 18px;
+}
+@media only screen and (max-width: 1030px) {
+  
+padding-bottom: 10px;
+}
 `;
 
 
+export const FooterAIconsMobile = styled.div`
+position: absolute;
+height: 248px;
+width: 70px;
+z-index: 1;
+right: 5%;
 
+
+bottom: -25%;
+
+text-align: left;
+font-size: 24px;
+font-family: "MONTSERRAT-MEDIUM" !important;
+@font-face {
+  font-family: MONTSERRAT-MEDIUM;
+  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+}
+`;
+export const FooterAIcons_1Mobile = styled.div`
+background-repeat: no-repeat;
+color: #EDE7F2;
+background-size: 42.5%;
+height: 100%;
+background-position-x: 33.3%;
+
+@media only screen and (max-width: 1440px) {
+  
+background-size: 28%;
+}
+ 
+@media only screen and (max-width: 1280px) {
+  
+background-size: 25%;
+}
+@media only screen and (max-width: 1030px) {
+  
+background-size: 20%;
+}
+
+  
+`; 
+
+export const FooterBIconsMobile = styled.div`
+position: absolute;
+height: 248px;
+width: 70px; 
+z-index: 1;
+right: 10%;
+
+bottom: -25%;
+
+
+text-align: left;
+font-size: 24px;
+font-family: "MONTSERRAT-MEDIUM" !important;
+@font-face {
+  font-family: MONTSERRAT-MEDIUM;
+  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+}
+`;
+export const FooterBIcons_1Mobile = styled.div`
+  width: 50px;
+  height: 50px;
+  background-size: 90%;  
+  margin-bottom: 12px;
+margin-left: 20%;
+  background-repeat: no-repeat; 
+
+  @media only screen and (max-width: 1440px) {
+    width: 30px;
+    height: 30px;
+  }
+  @media only screen and (max-width: 1280px) {
+    width: 25px;
+    height: 25px;
+  }
+  @media only screen and (max-width: 1030px) {
+    width: 18px;
+    height: 18px;
+  }
+  
+`;  
 export const ContainerMainMobile = styled.div`
-background-color: #E5B6E9; 
+background-color: #FFFFFF;
+
+border-top-left-radius: 50px 50px;
+border-top-right-radius: 50px 50px;
+ 
+width: 100%;
+z-index: 2;
+position: absolute;
+height: 1400px;
 margin-top: 0;
+margin-bottom: 6.5%;  
+ 
+`;
+export const ContainerMain2Mobile = styled.div`
+background-color: #EDE7F2; 
 
-
-height: 1120px; 
-margin-bottom: 20%;
-
-  position: inherit;
+  position: relative;
   width: 100%;  
 
-  @media only screen and (max-width: 840px) { 
-    margin-bottom: 15%;
-  }
-  @media only screen and (max-width: 770px) { 
-    margin-bottom: 12.5%;
-  }
-  @media only screen and (max-width: 580px) { 
-  margin-bottom: 0%;
-  height: 1070px;
-  }
-  @media only screen and (max-width: 490px) { 
-    height: 1060px;
-    margin-bottom: 7.5%;
-  }
-  @media only screen and (max-width: 490px) { 
-    height: 980px;
-    margin-bottom: 0;
-  }
-  @media only screen and (max-width: 390px) { 
-    height: 930px;
-  }
-  
+  height: 300px;
+  margin-bottom: 0;
+
+  @media only screen and (max-width: 1980px) { 
+height: 1120px; 
+  } 
   
 `;
-export const AnimatedBackgroundMobile = styled.video`
-  width: 100%;
-  height: auto;
-  transform: rotate(0deg);
-  position: absolute;
-  z-index: -2;
-  bottom: 0%;
+export const FooterEndingMobile = styled.div`
+background-color: #29282C; 
+ padding: 0 ;
+ margin: 0 ;
+ display: flex;
+
+ position: absolute;
+width: 100%; 
+z-index: 2;
+bottom: -37.5%;
+height: 15%;
+ 
 `;
-export const SliderContainerChildMobile = styled.div`
-  z-index: -1;
-  position: relative;
-  height: 675px;
-  @media only screen and (max-width: 1024px) {
-    height: 450px;
-  }
+export const LineMobile = styled.div`
+background-color: #DBD0E5;
+position: absolute;
+width: 2.5px;
+height: 145px;
+top: 20%;
+right: 1%;
+  
 `;
+export const LeftFooterContentMobile = styled.div`
+
+width: 25%; 
+`;
+export const CenterFooterContentMobile = styled.div`
+
+width: 75%;
+`;
+export const FooterEndText1Mobile = styled.span`
+color: #EDE7F2;
+font-weight: 100;
+font-size: 24px;
+font-family: "MONTSERRAT-BOLD" !important;
+@font-face {
+  font-family: MONTSERRAT-BOLD;
+  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+}
+  
+
+@media only screen and (max-width: 1600px) {
+  
+font-size: 18px;
+}
+ 
+@media only screen and (max-width: 1280px) {
+  
+font-size: 12px;
+}
+@media only screen and (max-width: 1030px) {
+}
+`;
+ 
+export const GonvarFooterLogoMobile = styled.div`
+width: 260px;
+height: 100px;
+background-size: 100%;
+background-repeat: no-repeat;
+left: 25%;
+position: relative;
+top: 20%;
+
+@media only screen and (max-width: 1600px) {
+  width: 200px;
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+  width: 160px;
+}
+@media only screen and (max-width: 1030px) {
+  width: 150px;
+}
+
+`;
+export const SeparingLineMobile = styled.div`
+background-color: white;
+width: 2px;
+height: 50px;
+margin: 20px;
+
+@media only screen and (max-width: 1440px) {
+  height: 35px;
+}
+@media only screen and (max-width: 1280px) {
+  height: 25px;
+}
+@media only screen and (max-width: 1030px) {
+  height: 20px;
+}
+`;
+export const FooterTextLineMobile = styled.table`
+top: 15%;
+position: relative;
+
+@media only screen and (max-width: 1600px) {
+  left: 0%;
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+  left: 15%;
+}
+@media only screen and (max-width: 1030px) {
+  left: 5%;
+}
+
+`;
+ 
+ 
+ 
 export const SliderSectionTitleMobile = styled.p` 
-  font-size: 48px; 
+margin-top: 120px; 
   color: #ffffff; 
-  bottom: 70px;
-  position: relative;
-  text-align: center;
-  padding-right: 0;
-  @media only screen and (max-width: 1024px) {
-    font-size: 28px;
-    margin-bottom: 25px;
-    max-width: 100%;
+  bottom: 45px;
+  position: relative; 
+
+  font-size: 24px;
+    margin-bottom: 25px; 
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     padding-right: 0;
-  }
-
-  @media only screen and (max-width: 580px) {
-    margin-bottom: 0; 
-  }
-
+  max-width: 50%; 
 `;
 
 export const SliderItemLinkMobile = styled.a`
