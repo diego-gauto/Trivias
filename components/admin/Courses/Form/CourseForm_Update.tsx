@@ -47,6 +47,12 @@ const formSchema = yup.object().shape({
   courseSubtittle: yup
     .string()
     .required("Campo requerido"),
+  coursePhrase: yup
+    .string()
+    .required("Campo requerido"),
+  courseMaterial: yup
+    .string()
+    .required("Campo requerido"),
   courseAbout: yup
     .string()
     .required("Campo requerido"),
@@ -67,6 +73,8 @@ type FormValues = {
   courseHomeWork: boolean;
   coursePublishYear: number;
   coursePrice: number;
+  coursePhrase: string;
+  courseMaterial: string;
 };
 
 const CourseForm = (props: ICourseForm_Update) => {
@@ -81,6 +89,9 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { courseHomeWork } = props;
   const { coursePublishYear } = props;
   const { courseSubtittle } = props;
+  const { coursePhrase } = props;
+  const { courseMaterial } = props;
+  const { courseDifficulty } = props;
   const { documentID } = props;
   const { coursePath } = props;
   const { reference } = props;
@@ -116,6 +127,8 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [images, setimages] = useState<any>("")
   const [value3, setValue3] = useState(courseType)
   const [userData, setUserData] = useState<any>([]);
+  const [difficultyValue, setDifficultyValue] = useState(courseDifficulty);
+  const [openLevel, setOpenLevel] = useState<boolean>(false);
 
   const addCategories = (val: any, index: any) => {
     let tempCategories = value2
@@ -137,7 +150,6 @@ const CourseForm = (props: ICourseForm_Update) => {
     setValue(courseProfessor)
   }, []);
 
-  console.log(free);
   const onSubmit: SubmitHandler<FormValues> = formData => {
     setIsUpdating(true);
     var professor = ""
@@ -152,7 +164,10 @@ const CourseForm = (props: ICourseForm_Update) => {
     if (value3 !== undefined && value3 !== null) {
       type = value3;
     }
-
+    var difficultyLevel = ""
+    if (difficultyValue !== undefined && difficultyValue !== null) {
+      difficultyLevel = difficultyValue
+    }
     let signUpData = {
       data: {
         courseTittle: formData.courseTittle,
@@ -164,8 +179,11 @@ const CourseForm = (props: ICourseForm_Update) => {
         coursePrice: formData.coursePrice,
         courseProfessor: professor,
         courseCategory: category,
+        courseDifficulty: difficultyLevel,
         courseType: type,
         courseHomeWork: homeWork,
+        coursePhrase: formData.coursePhrase,
+        courseMaterial: formData.courseMaterial,
         documentID: documentID,
       },
     };
@@ -201,26 +219,43 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(false);
+    setOpenLevel(false);
   }
   const handleOpenProfessor = () => {
     setOpenHw(false);
     setOpenProfessor(!openProfessor);
     setOpenCategory(false);
     setOpenMembership(false);
+    setOpenLevel(false);
   }
   const handleOpenCategory = () => {
     setOpenHw(false);
     setOpenProfessor(false);
     setOpenCategory(!openCategory);
     setOpenMembership(false);
+    setOpenLevel(false);
   }
   const handleOpenMembership = () => {
     setOpenHw(false);
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(!openMembership);
+    setOpenLevel(false);
   }
-
+  const handleOpenLevel = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(!openLevel);
+  }
+  const difficulty = [
+    "Muy Fácil",
+    "Fácil",
+    "Intermedio",
+    "Avanzado",
+    "Máster",
+  ]
   useEffect(() => {
     getProffessors();
     getAllCategories();
@@ -427,7 +462,64 @@ const CourseForm = (props: ICourseForm_Update) => {
             </IconContain>
           </InputContain>
         </InputForm>
-        {/* LINEA 3 */}
+        {/* Linea 3 */}
+        <InputForm>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Frase descriptiva icónica</Label>
+            <Input
+              placeholder="Frase descriptiva"
+              type="text"
+              defaultValue={coursePhrase}
+              className={`form-control ${errors.coursePhrase ? 'is-invalid' : ''}`}
+              {...register("coursePhrase")}
+            />
+          </InputContain>
+
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Nivel de Dificultad</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { handleOpenLevel() }}>
+                  {
+                    difficultyValue == "" ? "Seleccione una Dificultad" : difficultyValue
+                  }
+                  <CaretD2 />
+                </Selected>
+                {
+                  openLevel == true &&
+                  <OptionContain>
+                    {
+                      difficulty.map((val) => {
+                        return (
+                          <Option onClick={() => { setOpenLevel(false), setDifficultyValue(val) }} key={"difficulty " + val}>
+                            <input
+                              type="radio"
+                              id="difficulty"
+                              value="difficulty"
+                            />
+                            <Label2 > {val}</Label2>
+                          </Option>
+                        )
+                      })
+                    }
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+          </InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Materiales</Label>
+            <Input
+              placeholder="Todas las herramientas y materiales que se requieren en el curso"
+              type="text"
+              defaultValue={courseMaterial}
+              className={`form-control ${errors.courseMaterial ? 'is-invalid' : ''}`}
+              {...register("courseMaterial")}
+            />
+          </InputContain>
+        </InputForm>
+        {/* LINEA 4 */}
         <InputForm>
           <InputContain>
             <Label>Sobre el Curso</Label>
