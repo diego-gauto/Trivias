@@ -183,6 +183,7 @@ width: 25%;
 z-index: 1;
 left: 5%;
 
+font-size: 20px;
 bottom: -15%;
 @media only screen and (max-width: 1980px) {
   
@@ -198,19 +199,20 @@ bottom: -5%;
 }
 @media only screen and (max-width: 1440px) {
   
-bottom: 2.5%;
+font-size: 15px;
+bottom: 5%;
 }
 @media only screen and (max-width: 1280px) {
   
-bottom: 5%;
+bottom: 10%;
 }
 @media only screen and (max-width: 1030px) {
   
-bottom: 10%;
+font-size: 12px;
+bottom: 18.5%;
 }
 
 text-align: left;
-font-size: 20px;
 font-family: "MONTSERRAT-MEDIUM" !important;
 @font-face {
   font-family: MONTSERRAT-MEDIUM;
@@ -230,6 +232,21 @@ transition: all .2s ease-in-out;
 
 transform:translate(30px); 
 }
+
+@media only screen and (max-width: 1440px) {
+  
+padding-bottom: 20px;
+}
+@media only screen and (max-width: 1280px) {
+  
+padding-bottom: 18px;
+}
+@media only screen and (max-width: 1030px) {
+  
+padding-bottom: 10px;
+}
+
+ 
   
 `;
 export const FooterAText_2 = styled.div`
@@ -246,6 +263,18 @@ transition: all .2s ease-in-out;
 
 transform:translate(30px); 
 }
+@media only screen and (max-width: 1440px) {
+  
+padding-bottom: 20px;
+}
+@media only screen and (max-width: 1280px) {
+  
+padding-bottom: 18px;
+}
+@media only screen and (max-width: 1030px) {
+  
+padding-bottom: 10px;
+}
 `;
 export const FooterAText_3 = styled.div`
   width: 110%;  
@@ -259,6 +288,18 @@ transition: all .2s ease-in-out;
 &:hover {  
 
 transform: translate(30px);
+}
+@media only screen and (max-width: 1440px) {
+  
+padding-bottom: 20px;
+}
+@media only screen and (max-width: 1280px) {
+  
+padding-bottom: 18px;
+}
+@media only screen and (max-width: 1030px) {
+  
+padding-bottom: 10px;
 }
 `;
 
@@ -542,29 +583,20 @@ font-family: "MONTSERRAT-BOLD" !important;
   src: url(../fonts/MONTSERRAT-BOLD.ttf);
 }
   
-`;
-export const FooterEndText2 = styled.span`
-color: #EDE7F2;
-font-weight: 100;
-font-size: 24px;
-font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
+
+@media only screen and (max-width: 1600px) {
   
-`;
-export const FooterEndText3 = styled.span`
-color: #EDE7F2;
-font-size: 24px;
-font-weight: 100;
-font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
+font-size: 18px;
 }
+ 
+@media only screen and (max-width: 1280px) {
   
+font-size: 12px;
+}
+@media only screen and (max-width: 1030px) {
+}
 `;
+ 
 export const GonvarFooterLogo = styled.div`
 width: 260px;
 height: 100px;
@@ -573,12 +605,35 @@ background-repeat: no-repeat;
 left: 25%;
 position: relative;
 top: 20%;
+
+@media only screen and (max-width: 1600px) {
+  width: 200px;
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+  width: 160px;
+}
+@media only screen and (max-width: 1030px) {
+  width: 150px;
+}
+
 `;
 export const SeparingLine = styled.div`
 background-color: white;
 width: 2px;
 height: 50px;
 margin: 20px;
+
+@media only screen and (max-width: 1440px) {
+  height: 35px;
+}
+@media only screen and (max-width: 1280px) {
+  height: 25px;
+}
+@media only screen and (max-width: 1030px) {
+  height: 20px;
+}
 `;
 export const CompraRapida = styled.div`
 font-weight: 100;
@@ -607,6 +662,19 @@ transform: scale(1.1);
 export const FooterTextLine = styled.table`
 top: 15%;
 position: relative;
+
+@media only screen and (max-width: 1600px) {
+  left: 0%;
+}
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1280px) {
+  left: 15%;
+}
+@media only screen and (max-width: 1030px) {
+  left: 5%;
+}
+
 `;
  
  

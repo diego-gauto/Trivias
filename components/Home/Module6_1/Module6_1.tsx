@@ -34,8 +34,6 @@ import {
   FooterBIcons_4,
   FooterEnding,
   FooterEndText1,
-  FooterEndText2,
-  FooterEndText3,
   GonvarFooterLogo,
   SeparingLine,
   CenterFooterContent,
@@ -230,9 +228,9 @@ export const Module6_1 = (props: IModule6_1) => {
                 <tr>
                   <th><FooterEndText1>Copyright © Gonvar Technologies SAPI de CV </FooterEndText1></th>
                   <th><SeparingLine> </SeparingLine></th>
-                  <th><FooterEndText2> 2022 </FooterEndText2></th>
+                  <th><FooterEndText1> 2022 </FooterEndText1></th>
                   <th><SeparingLine> </SeparingLine></th>
-                  <th><FooterEndText3> Todos los derechos reservados </FooterEndText3></th>
+                  <th><FooterEndText1> Todos los derechos reservados </FooterEndText1></th>
                 </tr>
               </FooterTextLine>
 
