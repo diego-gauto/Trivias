@@ -21,6 +21,10 @@ export const WhiteButtonContainer = styled(Button)`
       background-color: transparent;
       border-color: white;
     }
+    &:active {
+      background-color: #6717cd;
+      border-color: transparent;
+    }
   }
   @media only screen and (max-width: 576px) {
     font-size: 18px;

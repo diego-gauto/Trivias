@@ -23,6 +23,12 @@ export const PurpleButtonContainer = styled(Button)`
     &:hover {
       transform: scale(1);
     }
+    &:active {
+      transform: scale(1.03);
+      -webkit-transition: 0.5s ease all;
+      transition: 0.5s ease all;
+      background-color: #5000b5;
+    }
     font-size: 16px;
   }
   @media only screen and (max-width: 576px) {
