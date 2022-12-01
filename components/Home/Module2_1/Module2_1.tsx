@@ -44,7 +44,7 @@ import { IModule2_1 } from "./IModule2_1";
 
 export const Module2_1 = (props: IModule2_1) => {
   const [iconImagesData, setIconImagesData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
     const html = text.replace(bold, '<span>$1</span>');
@@ -59,6 +59,9 @@ export const Module2_1 = (props: IModule2_1) => {
 
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 3000);
 
   }, [data]);
 
@@ -106,7 +109,7 @@ export const Module2_1 = (props: IModule2_1) => {
               <RightImage>
 
                 <ModuleContainerBG2alt style={{ backgroundImage: `url(${BG2.src})`, backgroundSize: "100%" }}></ModuleContainerBG2alt>
-                <ModuleContainerBG1alt id="mujeresGonvar" style={{ backgroundImage: `url(${BG1.src})` }}></ModuleContainerBG1alt>
+                <ModuleContainerBG1alt id="mujeresGonvar" style={{ backgroundImage: `url(${BG1.src})`, opacity: `${loading ? 1 : 0}` }}></ModuleContainerBG1alt>
 
 
               </RightImage>
