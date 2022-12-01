@@ -130,8 +130,8 @@ const Lesson = () => {
 
   return (
     <>
-      {isLoading ? <Background>
-        <LoaderImage>
+      {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>
+        <LoaderImage >
           <LoaderContain />
         </LoaderImage>
       </Background> :
