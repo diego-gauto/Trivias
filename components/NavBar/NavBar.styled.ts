@@ -31,7 +31,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     background-color: #dad3e5;
     padding-block: 0;
     padding-inline: 0;
-    padding-top: 60px;
+    // padding-top: 60px;
   }
 `;
 export const NavTags = styled.div`
@@ -111,7 +111,7 @@ export const FloatingMenu = styled("ul")<{ isOpen: boolean }>`
   position: absolute;
   background-color: #dad3e5;
   border-radius: 0 0 15% 15%;
-  top: 110px;
+  top: 50px;
 `;
 
 export const IngresarOptionsList = styled(FloatingMenu)<{ isOpen: boolean }>`
@@ -263,7 +263,7 @@ export const NavResponsive = styled.div`
   align-items: center;
   width: 100%;
   padding-block: 10px;
-  padding-bottom: 25px;
+  // padding-bottom: 25px;
   padding-right: 40px !important;
   padding-inline: 20px;
   justify-content: space-between;
@@ -276,9 +276,9 @@ export const NavResponsive = styled.div`
     display: flex;
   }
   @media (max-width: 450px) {
-    padding-block: 5px;
+    // padding-block: 5px;
     padding-inline: 10px;
-    padding-bottom: 15px;
+    // padding-bottom: 15px;
   }
   input.hamburger-checkbox {
     position: absolute;
