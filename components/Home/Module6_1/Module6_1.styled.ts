@@ -110,6 +110,9 @@ z-index: 1;
 right: 8%;
 
 bottom: 5%;
+@media only screen and (max-width: 1980px) { 
+bottom: 15%;
+}
 
 @media only screen and (max-width: 1440px) {
   font-size: 18px;
