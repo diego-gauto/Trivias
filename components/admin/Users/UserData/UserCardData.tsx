@@ -32,6 +32,7 @@ import {
   UserContain,
 } from "./UsersCardData.styled";
 import { deleteSelectedUser } from "../../../../store/actions/AuthActions";
+import ErrorModal from "../../../Error/ErrorModal";
 
 type CardData = {
   user: any;
@@ -44,6 +45,8 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
   const [showAddDays, setShowAddDays] = useState(false);
   const [paidCourses, setPaidCourses] = useState<Array<any>>([]);
   const [paymentMethod, setPaymentMethods] = useState<Array<any>>([]);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const getUserCourses = () => {
     let tempCourses: Array<any> = [];
@@ -67,7 +70,7 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
   }
 
   const deleteUser = () => {
-    deleteSelectedUser("q")
+    setError(true);
   }
 
   useEffect(() => {
@@ -164,6 +167,7 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
       </>
       <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
       <ModalAddDays show={showAddDays} setShow={setShowAddDays} user={user} />
+      <ErrorModal show={error} setShow={setError} error={"Lo sentimos, esta acción solo se puede realizar manualmente desde Firebase, gracias!"}></ErrorModal>
     </UserContain>
   )
 }

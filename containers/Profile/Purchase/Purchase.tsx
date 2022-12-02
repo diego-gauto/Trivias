@@ -37,6 +37,7 @@ import {
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import ModalError from "./Modal1/ModalError";
 import { SlideModule } from "../../../components/Home/Module4_Carousel/SlideModule/SlideModule";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const Purchase = () => {
   const swiperRef = useRef<SwiperCore>();
@@ -46,7 +47,8 @@ const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
   const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [couponError, setCouponError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<any>("");
   const [step2, setStep2] = useState(false);
   const [payment, setPayment] = useState(false);
   const [cardInfo, setCardInfo] = useState(false);
@@ -201,6 +203,7 @@ const Purchase = () => {
       await addCard(data).then(async (res: any) => {
         if ("raw" in res.data) {
           setError(true);
+          setErrorMsg("Hay un error en los datos de la tarjeta!")
           // alert("Hay un error en los datos de la tarjeta!")
         } else {
           setCard({ ...card, cardId: res.data.id, brand: res.data.card.brand, last4: res.data.card.last4, status: true })
@@ -245,19 +248,19 @@ const Purchase = () => {
         }
         await pay(data).then((res: any) => {
           if ("raw" in res.data) {
+            setCard({ ...card, cardId: "" })
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              alert(
-                res.data.raw.code == "card_declined" && (
-                  res.data.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                  res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                  res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                  res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-                ) ||
+              setError(true);
+              setErrorMsg(res.data.raw.code == "card_declined" && (
+                res.data.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+                res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+                res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+                res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              ) ||
                 res.data.raw.code == "expired_card" && "Tarjeta expirada" ||
                 res.data.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
                 res.data.raw.code == "processing_error" && "Error de proceso" ||
-                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
-              )
+                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
             }
             setLoader(false);
           } else {
@@ -282,19 +285,19 @@ const Purchase = () => {
         const pay = httpsCallable(functions, 'payWithStripeCourse');
         await pay(data).then((res: any) => {
           if ("raw" in res.data) {
+            setCard({ ...card, cardId: "" })
             if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              alert(
-                res.data.raw.code == "card_declined" && (
-                  res.data.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                  res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                  res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                  res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-                ) ||
+              setError(true);
+              setErrorMsg(res.data.raw.code == "card_declined" && (
+                res.data.raw.decline_code == "generic_decline" && "Puede ser un error en el método de pago o porque no cumple con ciertos requisitos de seguridad" ||
+                res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+                res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+                res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              ) ||
                 res.data.raw.code == "expired_card" && "Tarjeta expirada" ||
                 res.data.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
                 res.data.raw.code == "processing_error" && "Error de proceso" ||
-                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
-              )
+                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
             }
             setLoader(false);
           } else {
@@ -369,7 +372,8 @@ const Purchase = () => {
     coupon = coupons.filter((x: any) => x.code == code && x.status);
     if (coupon.length > 0) {
       if (coupon[0].users.includes(userData?.id)) {
-        alert("Este cupón ya ha sido canjeado");
+        setCouponError(true);
+        setErrorMsg("Este cupón ya ha sido canjeado")
         setCode('');
       } else {
         coupon[0].users.push(userData?.id);
@@ -377,7 +381,8 @@ const Purchase = () => {
         setCode('');
       }
     } else {
-      alert('Este cupón no existe!');
+      setCouponError(true);
+      setErrorMsg('Este cupón no existe!')
       handleCoupons(null);
       setCode('');
     }
@@ -388,6 +393,8 @@ const Purchase = () => {
 
   useEffect(() => {
     if (card.cardId) {
+      console.log(1);
+
       FinishPayment();
     }
     if (plan.method == "paypal" && type == "course") {
@@ -472,14 +479,14 @@ const Purchase = () => {
                     }} />
                     <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
                   </div>
-                  <div className="option">
+                  {/* <div className="option">
                     <input type="radio" checked={payment} onClick={() => {
                       setPayment(!payment),
                         setCardInfo(false),
                         setPlan({ method: 'stripe' })
                     }} />
                     <p>Pagaré con <span>tarjetas guardadas</span></p>
-                  </div>
+                  </div> */}
                   <div className="form-row">
                     <label>Número de tarjeta</label>
                     <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
@@ -905,6 +912,7 @@ const Purchase = () => {
           </div>
           {/* <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} /> */}
           <ModalError error={error} setError={setError} errorMsg={errorMsg}></ModalError>
+          <ErrorModal show={couponError} setShow={setCouponError} error={errorMsg}></ErrorModal>
         </Container>}
     </>
   )

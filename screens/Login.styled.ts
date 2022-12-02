@@ -85,7 +85,7 @@ export const Background = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
       p,
       h1 {
         margin: 0;
@@ -350,7 +350,7 @@ export const LoginBackground = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
       .forgotText {
         font-size: 12px;
         color: #402466;

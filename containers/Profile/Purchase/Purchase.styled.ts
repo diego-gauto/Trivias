@@ -541,13 +541,13 @@ export const Container = styled.div`
         justify-content: center;
         width: 30px;
         height: 30px;
-        border: 1.5px solid #3f1168;
+        border: 1.5px solid #9900ed;
         border-radius: 50%;
       }
       .line {
         z-index: 1;
         width: 250px;
-        border: 1.5px solid #3f1168;
+        border: 1.5px solid #9900ed;
         border-left: none;
         border-right: 1px solid #ede7f2;
         height: 5px;
@@ -834,7 +834,7 @@ export const Container = styled.div`
               grid-gap: 10px;
               p {
                 color: #8161aa;
-                font-size: 14px;
+                font-size: 20px;
                 span {
                   color: #8161aa;
                   font-weight: bold;
@@ -842,7 +842,7 @@ export const Container = styled.div`
               }
               img {
                 height: auto;
-                width: 60%;
+                width: 80%;
                 border-radius: 10px;
               }
             }

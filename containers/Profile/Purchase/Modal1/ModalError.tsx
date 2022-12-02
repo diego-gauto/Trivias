@@ -14,9 +14,10 @@ export const ModalError = ({ error, setError, errorMsg }: any) => {
             <h1>
               ¡Oh, no! <span>Tenemos un problema</span>
             </h1>
-            <p><span>Tu pago ha sido rechazado.</span> Puede ser un error en el método de <br />
+            <p><span>Tu pago ha sido rechazado.</span> {errorMsg}.
+              {/* Puede ser un error en el método de <br />
               pago o porque no cumple con ciertos requisitos de seguridad <br />
-              <span className='opacity'>(saldo insuficiente o un movimiento inusual).</span>
+              <span className='opacity'>(saldo insuficiente o un movimiento inusual).</span> */}
             </p>
           </div>
           <div className='bottom-section'>
