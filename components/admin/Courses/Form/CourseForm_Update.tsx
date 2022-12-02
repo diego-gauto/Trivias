@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { updateCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getMaterial, getUsers } from "../../../../store/actions/courseActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
@@ -31,6 +31,7 @@ import {
   Selected,
   SelectContain,
   OptionCat,
+  OptionMat,
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
@@ -48,9 +49,6 @@ const formSchema = yup.object().shape({
     .string()
     .required("Campo requerido"),
   coursePhrase: yup
-    .string()
-    .required("Campo requerido"),
-  courseMaterial: yup
     .string()
     .required("Campo requerido"),
   courseAbout: yup
@@ -74,7 +72,6 @@ type FormValues = {
   coursePublishYear: number;
   coursePrice: number;
   coursePhrase: string;
-  courseMaterial: string;
 };
 
 const CourseForm = (props: ICourseForm_Update) => {
@@ -116,6 +113,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [openProfessor, setOpenProfessor] = useState<boolean>(false);
   const [openCategory, setOpenCategory] = useState<boolean>(false);
   const [openMembership, setOpenMembership] = useState<boolean>(false);
+  const [openMaterial, setOpenMaterial] = useState<boolean>(false);
   const [openHw, setOpenHw] = useState<boolean>(false);
   const [categories, setCategories] = useState<any>([]);
   const [name, setName] = useState(courseProfessor.name);
@@ -124,6 +122,8 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [free, setFree] = useState(courseType === "Producto" ? 1 : 0)
   const [value2, setValue2] = useState<any>([])
   const [image, setImage] = useState<any>(coursePath)
+  const [material, setMaterial] = useState<any>([]);
+  const [materials, setMaterials] = useState<any>([]);
   const [images, setimages] = useState<any>("")
   const [value3, setValue3] = useState(courseType)
   const [userData, setUserData] = useState<any>([]);
@@ -144,7 +144,22 @@ const CourseForm = (props: ICourseForm_Update) => {
     }
     setValue2([...tempCategories])
   }
+  const addMaterial = (val: any, index: any) => {
+    let tempMaterial = material
+    let tempIndex = 0;
+    if (tempMaterial.includes(val)) {
+      tempIndex = tempMaterial.findIndex((x: any) =>
+        x == val
+      )
+      tempMaterial.splice(tempIndex, 1);
+    }
+    else {
+      tempMaterial.push(val)
+    }
+    setMaterial([...tempMaterial])
+  }
   useEffect(() => {
+    setMaterial(courseMaterial)
     setValue2(courseCategory)
     setValue(courseProfessor)
   }, []);
@@ -158,6 +173,10 @@ const CourseForm = (props: ICourseForm_Update) => {
     var category = ""
     if (value2 !== undefined && value2 !== null) {
       category = value2
+    }
+    var materials = ""
+    if (material !== undefined && material !== null) {
+      materials = material
     }
     var type = ""
     if (value3 !== undefined && value3 !== null) {
@@ -182,7 +201,7 @@ const CourseForm = (props: ICourseForm_Update) => {
         courseType: type,
         courseHomeWork: homeWork,
         coursePhrase: formData.coursePhrase,
-        courseMaterial: formData.courseMaterial,
+        courseMaterial: materials,
         documentID: documentID,
       },
     };
@@ -213,12 +232,19 @@ const CourseForm = (props: ICourseForm_Update) => {
       return res;
     })
   }
+  const getAllMaterials = () => {
+    getMaterial().then((res) => {
+      setMaterials(res);
+      return res;
+    })
+  }
   const handleOpenHomeWork = () => {
     setOpenHw(!openHw);
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(false);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenProfessor = () => {
     setOpenHw(false);
@@ -226,6 +252,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenCategory(false);
     setOpenMembership(false);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenCategory = () => {
     setOpenHw(false);
@@ -233,6 +260,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenCategory(!openCategory);
     setOpenMembership(false);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenMembership = () => {
     setOpenHw(false);
@@ -240,6 +268,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenCategory(false);
     setOpenMembership(!openMembership);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenLevel = () => {
     setOpenHw(false);
@@ -247,6 +276,15 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenCategory(false);
     setOpenMembership(false);
     setOpenLevel(!openLevel);
+    setOpenMaterial(false);
+  }
+  const handleOpenMaterial = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(!openMaterial);
   }
   const difficulty = [
     "Muy Fácil",
@@ -258,6 +296,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   useEffect(() => {
     getProffessors();
     getAllCategories();
+    getAllMaterials();
   }, [])
 
   return (
@@ -508,14 +547,42 @@ const CourseForm = (props: ICourseForm_Update) => {
             </IconContain>
           </InputContain>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Materiales</Label>
-            <Input
-              placeholder="Todas las herramientas y materiales que se requieren en el curso"
-              type="text"
-              defaultValue={courseMaterial}
-              className={`form-control ${errors.courseMaterial ? 'is-invalid' : ''}`}
-              {...register("courseMaterial")}
-            />
+            <Label>Material</Label>
+            <IconContain>
+              <SelectContain key={2}>
+                <Selected onClick={() => { handleOpenMaterial() }}>
+                  {material?.length == 0 ? "Seleccione un material" : material.length > 1 ? material + " " : material}
+                  <CaretD2 />
+                </Selected>
+                {
+                  openMaterial == true &&
+                  <OptionContain>
+                    {
+                      materials.map((val: any, index: any) => {
+                        return (
+                          <OptionMat
+                            material={val.name}
+                            marked={value2}
+                            key={"SelectMaterials " + index}
+                            onClick={() => {
+                              addMaterial(val.name, index)
+                            }}>
+                            <input
+                              type="radio"
+                              id="material"
+                              name="material"
+                              value="material"
+                            />
+                            <Label2>{val.name}</Label2>
+                          </OptionMat>
+                        )
+                      })
+                    }
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+
           </InputContain>
         </InputForm>
         {/* LINEA 4 */}

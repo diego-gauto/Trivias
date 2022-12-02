@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getMaterial, getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { CourseName } from "../AllCourses.styled";
 import {
@@ -52,9 +52,6 @@ const formSchema = yup.object().shape({
   coursePhrase: yup
     .string()
     .required("Campo requerido"),
-  courseMaterial: yup
-    .string()
-    .required("Campo requerido"),
   courseAbout: yup
     .string()
     .required("Campo requerido"),
@@ -74,7 +71,6 @@ type FormValues = {
   coursePublishYear: number;
   coursePrice: number;
   coursePhrase: string;
-  courseMaterial: string;
 };
 
 const CourseForm_Create = () => {
@@ -100,6 +96,7 @@ const CourseForm_Create = () => {
   const [openProfessor, setOpenProfessor] = useState<boolean>(false);
   const [openCategory, setOpenCategory] = useState<boolean>(false);
   const [openMembership, setOpenMembership] = useState<boolean>(false);
+  const [openMaterial, setOpenMaterial] = useState<boolean>(false);
   const [openHw, setOpenHw] = useState<boolean>(false);
   const [openLevel, setOpenLevel] = useState<boolean>(false);
   const [name, setName] = useState("Seleccionar un profesor");
@@ -108,6 +105,8 @@ const CourseForm_Create = () => {
   const [value, setValue] = useState<any>({});
   const [userData, setUserData] = useState<any>([]);
   const [value2, setValue2] = useState<any>([]);
+  const [material, setMaterial] = useState<any>([]);
+  const [materials, setMaterials] = useState<any>([]);
   const [value3, setValue3] = useState("Gratis");
   const [difficultyValue, setDifficultyValue] = useState("");
   const [image, setImage] = useState<any>("");
@@ -118,7 +117,6 @@ const CourseForm_Create = () => {
   const addCategories = (val: any, index: any) => {
     let tempCategories = value2
     let tempIndex = 0;
-    console.log(index)
     if (tempCategories.includes(val)) {
       tempIndex = tempCategories.findIndex((x: any) =>
         x == val
@@ -130,6 +128,20 @@ const CourseForm_Create = () => {
     }
     setValue2([...tempCategories])
   }
+  const addMaterial = (val: any, index: any) => {
+    let tempMaterial = material
+    let tempIndex = 0;
+    if (tempMaterial.includes(val)) {
+      tempIndex = tempMaterial.findIndex((x: any) =>
+        x == val
+      )
+      tempMaterial.splice(tempIndex, 1);
+    }
+    else {
+      tempMaterial.push(val)
+    }
+    setMaterial([...tempMaterial])
+  }
   const onSubmit: SubmitHandler<FormValues> = formData => {
 
     setCreatingNewCourse(true)
@@ -140,6 +152,10 @@ const CourseForm_Create = () => {
     var category = ""
     if (value2 !== undefined && value2 !== null) {
       category = value2
+    }
+    var materials = ""
+    if (material !== undefined && material !== null) {
+      materials = material
     }
     var type = ""
     if (value3 !== undefined && value3 !== null) {
@@ -169,7 +185,7 @@ const CourseForm_Create = () => {
         courseType: type,
         courseHomeWork: homeWork,
         coursePhrase: formData.coursePhrase,
-        courseMaterial: formData.courseMaterial,
+        courseMaterial: materials,
         uid: "A5uQQ3JAyS8GvnnwLPdE"
       },
     };
@@ -205,9 +221,14 @@ const CourseForm_Create = () => {
       return res;
     })
   }
+  const getAllMaterials = () => {
+    getMaterial().then((res) => {
+      setMaterials(res);
+      return res;
+    })
+  }
   if (Object.keys(errors).length > 0 && missing == true) {
-    alert(`Falta lo siguiente:\n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio\n" : ""}${errors.coursePhrase ? "-Frase descriptiva\n" : ""}${errors.courseMaterial ? "-Materiales\n" : ""}
-    
+    alert(`Falta lo siguiente:\n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio\n" : ""}${errors.coursePhrase ? "-Frase descriptiva\n" : ""}
     `);
     setMissing(false)
   }
@@ -217,6 +238,7 @@ const CourseForm_Create = () => {
     setOpenCategory(false);
     setOpenMembership(false);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenProfessor = () => {
     setOpenHw(false);
@@ -224,6 +246,7 @@ const CourseForm_Create = () => {
     setOpenCategory(false);
     setOpenMembership(false);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenCategory = () => {
     setOpenHw(false);
@@ -231,6 +254,7 @@ const CourseForm_Create = () => {
     setOpenCategory(!openCategory);
     setOpenMembership(false);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenMembership = () => {
     setOpenHw(false);
@@ -238,6 +262,7 @@ const CourseForm_Create = () => {
     setOpenCategory(false);
     setOpenMembership(!openMembership);
     setOpenLevel(false);
+    setOpenMaterial(false);
   }
   const handleOpenLevel = () => {
     setOpenHw(false);
@@ -245,7 +270,17 @@ const CourseForm_Create = () => {
     setOpenCategory(false);
     setOpenMembership(false);
     setOpenLevel(!openLevel);
+    setOpenMaterial(false);
   }
+  const handleOpenMaterial = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(!openMaterial);
+  }
+
   const difficulty = [
     "Muy Fácil",
     "Fácil",
@@ -256,6 +291,7 @@ const CourseForm_Create = () => {
   useEffect(() => {
     getProffessors();
     getAllCategories();
+    getAllMaterials();
   }, [])
   return (
     <CourseFormContain onClick={() => { setOpenCourse(!openCourse) }}>
@@ -478,13 +514,43 @@ const CourseForm_Create = () => {
             </IconContain>
           </InputContain>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Materiales</Label>
-            <Input
-              placeholder="Todas las herramientas y materiales que se requieren en el curso"
-              type="text"
-              className={`form-control ${errors.courseMaterial ? 'is-invalid' : ''}`}
-              {...register("courseMaterial")}
-            />
+            <Label>Material</Label>
+            <IconContain>
+
+              <SelectContain key={2}>
+                <Selected onClick={() => { handleOpenMaterial() }}>
+                  {material.length == 0 ? "Seleccione un material" : material.length > 1 ? material + " " : material}
+                  <CaretD2 />
+                </Selected>
+                {
+                  openMaterial == true &&
+                  <OptionContain>
+                    {
+                      materials.map((val: any, index: any) => {
+                        return (
+                          <OptionCat
+                            category={val.name}
+                            marked={value2}
+                            key={"SelectCategory" + index}
+                            onClick={() => {
+                              addMaterial(val.name, index)
+                            }}>
+                            <input
+                              type="radio"
+                              id="category"
+                              name="category"
+                              value="Category"
+                            />
+                            <Label2>{val.name}</Label2>
+                          </OptionCat>
+                        )
+                      })
+                    }
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+
           </InputContain>
         </InputForm>
         {/* LINEA 4 */}
