@@ -281,6 +281,18 @@ const Edit = () => {
         </Contain2>
         <Contain3>
           <InputContain>
+            <Label>Frase descriptiva</Label>
+            <Input
+              placeholder="Frase descriptiva"
+              defaultValue={lesson.description}
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, description: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
             <Label>Agregar Tarea</Label>
             <SelectContain key={3}>
               <Selected onClick={() => { setOpen(!open) }}>

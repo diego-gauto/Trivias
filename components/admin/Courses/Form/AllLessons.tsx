@@ -44,7 +44,7 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
           <EpisodeContain>
             <EpisodeTitle>Epidosio {lesson.number}: {lesson.title}</EpisodeTitle>
             <EpisodeTime>30 minutos</EpisodeTime>
-            <EpisodeInfo>{lesson.about}</EpisodeInfo>
+            <EpisodeInfo>{lesson.description}</EpisodeInfo>
             <Link href={{
               pathname: "/admin/EditLesson",
               query: {

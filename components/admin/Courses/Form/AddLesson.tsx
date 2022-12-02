@@ -58,6 +58,7 @@ const AddLesson = () => {
     homeWork: '',
     homeWorkAbout: '',
     objective: '',
+    description: '',
   });
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -108,6 +109,7 @@ const AddLesson = () => {
         lesson.link == '' ||
         lesson.image == '' ||
         lesson.objective == '' ||
+        lesson.description == '' ||
         lesson.about == ''
       ) {
         setLoader(false);
@@ -133,6 +135,7 @@ const AddLesson = () => {
         lesson.about == '' ||
         lesson.homeWork == '' ||
         lesson.objective == '' ||
+        lesson.description == '' ||
         quill == '') {
         setLoader(false);
         alert("Por favor complete todo los campos!");
@@ -292,6 +295,17 @@ const AddLesson = () => {
         </Contain2>
         <Contain3>
           <InputContain>
+            <Label>Frase descriptiva</Label>
+            <Input
+              placeholder="Frase descriptiva"
+              onChange={(e) => {
+                setLesson({
+                  ...lesson, description: e.target.value
+                })
+              }}
+            />
+          </InputContain>
+          <InputContain>
             <Label>Agregar Tarea</Label>
             <SelectContain key={3}>
               <Selected onClick={() => { setOpen(!open) }}>
@@ -367,9 +381,7 @@ const AddLesson = () => {
               onClick={newLesson}
             >Guardar</PurpleButton>
             :
-            <LoaderImage>
-              <LoaderContain />
-            </LoaderImage>
+            <LoaderContain />
         }
 
       </ButtonContain>
