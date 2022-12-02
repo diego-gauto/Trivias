@@ -134,7 +134,7 @@ export const Module6_1 = (props: IModule6_1) => {
     },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 3,
+    slidesPerView: 2.5,
     spaceBetween: 120,
   };
   const settingsMobileReduced = {

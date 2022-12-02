@@ -135,11 +135,11 @@ font-family: "Montserrat-ExtraBold" !important;
  
 export const MoreTextMobile = styled.div`
 position: absolute;
-width: 15%; 
+width: 33%; 
 z-index: 1; 
-font-size: 14px;
+font-size: 20px;
 bottom: -12.5%;
-left: 5%; 
+left: 15%; 
 text-align: left; 
 
 font-family: "MONTSERRAT-BOLD" !important;
@@ -191,9 +191,9 @@ export const FooterATextMobile = styled.div`
 position: absolute;
 width: 25%;
 z-index: 1;
-left: 5%; 
+left: 15%; 
 
-font-size: 12px;
+font-size: 14px;
 bottom: -20%;
 
 text-align: left;
@@ -293,10 +293,10 @@ position: absolute;
 height: 248px;
 width: 70px;
 z-index: 1;
-right: 5%;
+right: 7.5%;
 
 
-bottom: -25%;
+bottom: -22.5%;
 
 text-align: left;
 font-size: 24px;
@@ -309,25 +309,11 @@ font-family: "MONTSERRAT-MEDIUM" !important;
 export const FooterAIcons_1Mobile = styled.div`
 background-repeat: no-repeat;
 color: #EDE7F2;
-background-size: 42.5%;
+background-size: 37%;
 height: 100%;
 background-position-x: 33.3%;
 
-@media only screen and (max-width: 1440px) {
-  
-background-size: 28%;
-}
- 
-@media only screen and (max-width: 1280px) {
-  
-background-size: 25%;
-}
-@media only screen and (max-width: 1030px) {
-  
-background-size: 20%;
-}
 
-  
 `; 
 
 export const FooterBIconsMobile = styled.div`
@@ -335,9 +321,8 @@ position: absolute;
 height: 248px;
 width: 70px; 
 z-index: 1;
-right: 10%;
-
-bottom: -25%;
+right: 15%;
+bottom: -22.5%;
 
 
 text-align: left;
@@ -349,25 +334,13 @@ font-family: "MONTSERRAT-MEDIUM" !important;
 }
 `;
 export const FooterBIcons_1Mobile = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background-size: 90%;  
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 margin-left: 20%;
   background-repeat: no-repeat; 
-
-  @media only screen and (max-width: 1440px) {
-    width: 30px;
-    height: 30px;
-  }
-  @media only screen and (max-width: 1280px) {
-    width: 25px;
-    height: 25px;
-  }
-  @media only screen and (max-width: 1030px) {
-    width: 18px;
-    height: 18px;
-  }
+ 
   
 `;  
 export const ContainerMainMobile = styled.div`
@@ -402,7 +375,7 @@ export const FooterEndingMobile = styled.div`
 background-color: #29282C; 
  padding: 0 ;
  margin: 0 ;
- display: flex;
+ display: inline;
 
  position: absolute;
 width: 100%; 
@@ -421,74 +394,46 @@ right: 1%;
   
 `;
 export const LeftFooterContentMobile = styled.div`
-
-width: 25%; 
+width: 100%;
+left: 0%;
+position: relative;
 `;
 export const CenterFooterContentMobile = styled.div`
-
-width: 75%;
+width: 80%;
+left: 10%;
+position: relative;
 `;
 export const FooterEndText1Mobile = styled.span`
 color: #EDE7F2;
 font-weight: 100;
-font-size: 24px;
+font-size: 16px;
 font-family: "MONTSERRAT-BOLD" !important;
 @font-face {
   font-family: MONTSERRAT-BOLD;
   src: url(../fonts/MONTSERRAT-BOLD.ttf);
 }
-  
-
-@media only screen and (max-width: 1600px) {
-  
-font-size: 18px;
-}
- 
-@media only screen and (max-width: 1280px) {
-  
-font-size: 12px;
-}
-@media only screen and (max-width: 1030px) {
-}
+   
 `;
  
 export const GonvarFooterLogoMobile = styled.div`
-width: 260px;
-height: 100px;
+width: 150px;
+height: 35px;
 background-size: 100%;
 background-repeat: no-repeat;
-left: 25%;
+left: 40%;
 position: relative;
 top: 20%;
-
-@media only screen and (max-width: 1600px) {
-  width: 200px;
-}
-@media only screen and (max-width: 1440px) {
-}
-@media only screen and (max-width: 1280px) {
-  width: 160px;
-}
-@media only screen and (max-width: 1030px) {
-  width: 150px;
-}
+margin-top: 5%;
+margin-bottom: 2.5%;
+ 
 
 `;
 export const SeparingLineMobile = styled.div`
 background-color: white;
 width: 2px;
-height: 50px;
+height: 45px;
 margin: 20px;
-
-@media only screen and (max-width: 1440px) {
-  height: 35px;
-}
-@media only screen and (max-width: 1280px) {
-  height: 25px;
-}
-@media only screen and (max-width: 1030px) {
-  height: 20px;
-}
+ 
 `;
 export const FooterTextLineMobile = styled.table`
 top: 15%;
