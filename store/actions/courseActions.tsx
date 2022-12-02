@@ -378,3 +378,33 @@ export const updateCategory = async (category: any, id: any) => {
   })
   return 'exito'
 }
+
+// "CREAR MATERIALES"
+export const addMaterial = async (material: any) => {
+  const docRef = await addDoc(
+    collection(db, "material"),
+    {
+      ...material
+    }
+  );
+  return 'exito'
+}
+export const getMaterial = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "material"), orderBy("name", "asc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
+export const deleteMaterial = async (material: any) => {
+  await deleteDoc(doc(db, "material", material.id));
+}
+export const updateMaterial = async (material: any, id: any) => {
+  const docRef = doc(db, 'material', id);
+  await updateDoc(docRef, {
+    name: material.name
+  })
+  return 'exito'
+}

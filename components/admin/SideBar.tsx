@@ -70,6 +70,8 @@ const SideBar = () => {
             <Text>Courses</Text>
           </Link><Link href="/admin/CourseAttributes">
             <Text>Categories</Text>
+          </Link><Link href="/admin/Materials">
+            <Text>Materials</Text>
           </Link><Link href="/admin/Rewards">
             <Text>Rewards</Text>
           </Link><Link href="/admin/Landing">
