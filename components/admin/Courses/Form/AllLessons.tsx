@@ -16,7 +16,18 @@ import {
 } from "./Lessons.styled";
 import { db } from "../../../../firebase/firebaseConfig";
 import { getDocs } from "firebase/firestore";
-
+const hms = (totalSeconds: any) => {
+  if (typeof totalSeconds == 'string') return totalSeconds
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  let result = `${minutes
+    .toString()
+    .padStart(1, '0')} min`;
+  if (!!hours) {
+    result = `${hours.toString()} hr ${minutes} min`;
+  }
+  return result;
+}
 interface IAllSeasons {
   documentID: string,
   index: number,
@@ -43,7 +54,7 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
           </ImageContain>
           <EpisodeContain>
             <EpisodeTitle>Epidosio {lesson.number}: {lesson.title}</EpisodeTitle>
-            <EpisodeTime>30 minutos</EpisodeTime>
+            <EpisodeTime>{hms(lesson.duration)}</EpisodeTime>
             <EpisodeInfo>{lesson.description}</EpisodeInfo>
             <Link href={{
               pathname: "/admin/EditLesson",

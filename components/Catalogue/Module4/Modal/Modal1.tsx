@@ -241,12 +241,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         {hms(lesson.duration)}
                       </EpisodeTime>
                       <Description>
-                        {lesson.about}
+                        {lesson.description}
                       </Description>
                     </EpisodeInfo>
                   </VideoContain>
                   <DescriptionResp>
-                    {lesson.about}
+                    {lesson.description}
                   </DescriptionResp>
                 </ContainerVideo>
               )
