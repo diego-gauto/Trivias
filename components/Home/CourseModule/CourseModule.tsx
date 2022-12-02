@@ -2,13 +2,14 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { PREVIEW_PATH } from "../../../constants/paths";
+import { PREVIEW_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
 import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
 import { useEffect, useState } from "react";
+import { NAILS_MASTER_COURSE_ID } from "../../../constants/gonvar";
 declare let Hls: any
 
 export const CourseModule = (props: ICourseModuleProps) => {
@@ -60,7 +61,14 @@ export const CourseModule = (props: ICourseModuleProps) => {
             Curso individual <br />
             <span>por ${data.coursePrice}</span> <span className="lower">MXN</span>
           </Card.Text>
-          <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => router.push(PREVIEW_PATH)} />
+          <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => {
+            loggedIn
+              ? router.push(
+                { pathname: 'Purchase', query: { type: 'course', id: NAILS_MASTER_COURSE_ID } }
+              )
+              : router.push(SIGNUP_PATH)
+          }
+          } />
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
             loggedIn
               ? handleShow()
