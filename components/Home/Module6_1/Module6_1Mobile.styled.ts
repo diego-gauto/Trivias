@@ -84,6 +84,22 @@ background-color: white;
 export const PeopleContainerMobile = styled.div` 
  
 height: 75%;
+ 
+@media only screen and (max-width: 840px) {
+  
+height: 65%;
+}
+@media only screen and (max-width: 770px) {
+  height: 58%;
+}
+@media only screen and (max-width: 580px) {
+  height: 44%;
+}
+@media only screen and (max-width: 490px) {
+}
+@media only screen and (max-width: 390px) {
+  height: 29%;
+}
 
 `;
  
@@ -117,6 +133,17 @@ position: relative;
 export const TittleAMobile = styled.span` 
 color: #3F1168;
 font-size: 38px;
+
+ 
+@media only screen and (max-width: 580px) {
+  font-size: 32px;
+}
+@media only screen and (max-width: 490px) {
+}
+@media only screen and (max-width: 390px) {
+
+}
+
 font-family: "Montserrat-ExtraBold" !important;
 @font-face {
   font-family: Montserrat-ExtraBold;
@@ -127,6 +154,15 @@ export const TittleBMobile = styled.span`
 color: #A733E4;
 font-size: 38px;
 font-family: "Montserrat-ExtraBold" !important;
+@media only screen and (max-width: 580px) {
+  font-size: 32px;
+}
+@media only screen and (max-width: 490px) {
+}
+@media only screen and (max-width: 390px) {
+
+}
+
 @font-face {
   font-family: Montserrat-ExtraBold;
   src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -141,6 +177,29 @@ font-size: 20px;
 bottom: -12.5%;
 left: 15%; 
 text-align: left; 
+
+@media only screen and (max-width: 840px) {
+  
+bottom: -2.5%;
+}
+@media only screen and (max-width: 770px) {
+  font-size: 12px;
+  bottom: 2.5%;
+}
+@media only screen and (max-width: 580px) {
+  font-size: 11px;
+  bottom: 13%;
+}
+@media only screen and (max-width: 490px) {
+  left:10%;
+  bottom: 18.5%;
+}
+@media only screen and (max-width: 390px) {
+  font-size: 9px;
+  bottom: 25.5%;
+  left: 5%;
+}
+
 
 font-family: "MONTSERRAT-BOLD" !important;
 @font-face {
@@ -195,6 +254,30 @@ left: 15%;
 
 font-size: 14px;
 bottom: -20%;
+
+
+
+@media only screen and (max-width: 840px) {
+  
+  bottom: -10%;
+  }
+  @media only screen and (max-width: 770px) {
+    font-size: 10px;
+    bottom: -3.5%;
+  }
+  @media only screen and (max-width: 580px) {
+    font-size: 9px;
+    bottom: 12.5%;
+    left: 40%;
+  }
+  @media only screen and (max-width: 490px) {
+    bottom: 18%;
+  }
+  @media only screen and (max-width: 390px) {
+    font-size: 8px;
+    bottom: 25%;
+  }
+  
 
 text-align: left;
 font-family: "MONTSERRAT-MEDIUM" !important;
@@ -300,6 +383,25 @@ bottom: -22.5%;
 
 text-align: left;
 font-size: 24px;
+
+@media only screen and (max-width: 840px) {
+  
+  bottom: -12.5%;
+  }
+  @media only screen and (max-width: 770px) {
+    bottom: -10%;
+  }
+  @media only screen and (max-width: 580px) {
+    bottom: 2%;
+  }
+  @media only screen and (max-width: 490px) {
+    bottom: 7.5%;
+  }
+  @media only screen and (max-width: 390px) {
+    bottom: 12.5%;
+    
+right: 5%;
+  }
 font-family: "MONTSERRAT-MEDIUM" !important;
 @font-face {
   font-family: MONTSERRAT-MEDIUM;
@@ -312,6 +414,18 @@ color: #EDE7F2;
 background-size: 37%;
 height: 100%;
 background-position-x: 33.3%;
+
+ 
+@media only screen and (max-width: 770px) {
+  background-size: 20%;
+}
+@media only screen and (max-width: 580px) {
+}
+@media only screen and (max-width: 490px) {
+}
+@media only screen and (max-width: 390px) {
+  background-size: 12%;
+}
 
 
 `; 
@@ -327,6 +441,26 @@ bottom: -22.5%;
 
 text-align: left;
 font-size: 24px;
+
+@media only screen and (max-width: 840px) {
+  
+  bottom: -12.5%;
+  }
+  @media only screen and (max-width: 770px) {
+    bottom: -10%;
+  }
+  @media only screen and (max-width: 580px) {
+    bottom: 2%;
+  }
+  @media only screen and (max-width: 490px) {
+    bottom: 7.5%;
+  }
+  @media only screen and (max-width: 390px) {
+    bottom: 12.5%;
+    
+right: 10%;
+  }
+
 font-family: "MONTSERRAT-MEDIUM" !important;
 @font-face {
   font-family: MONTSERRAT-MEDIUM;
@@ -341,6 +475,23 @@ export const FooterBIcons_1Mobile = styled.div`
 margin-left: 20%;
   background-repeat: no-repeat; 
  
+  
+  @media only screen and (max-width: 770px) {
+    width: 20px;
+  height: 20px;
+  }
+  @media only screen and (max-width: 580px) {
+    width: 16px;
+    height: 16px;
+  }
+  @media only screen and (max-width: 490px) {
+  }
+@media only screen and (max-width: 390px) {
+  width: 14px;
+  height: 14px;
+  margin-bottom: 8px;
+}
+
   
 `;  
 export const ContainerMainMobile = styled.div`
@@ -383,6 +534,25 @@ z-index: 2;
 bottom: -37.5%;
 height: 15%;
  
+@media only screen and (max-width: 840px) {
+  bottom: -28%;
+}
+@media only screen and (max-width: 770px) {
+  bottom: -20%;
+}
+@media only screen and (max-width: 580px) {
+  height: 20%;
+  bottom: -10%;
+}
+@media only screen and (max-width: 490px) {
+  
+  bottom: -5%;
+}
+@media only screen and (max-width: 390px) {
+  height: 25%;
+  bottom: -1%;
+}
+ 
 `;
 export const LineMobile = styled.div`
 background-color: #DBD0E5;
@@ -407,6 +577,21 @@ export const FooterEndText1Mobile = styled.span`
 color: #EDE7F2;
 font-weight: 100;
 font-size: 16px;
+
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 840px) {
+}
+@media only screen and (max-width: 770px) {
+}
+@media only screen and (max-width: 580px) {
+}
+@media only screen and (max-width: 490px) {
+}
+@media only screen and (max-width: 390px) {
+  font-size: 10px;
+}
+
 font-family: "MONTSERRAT-BOLD" !important;
 @font-face {
   font-family: MONTSERRAT-BOLD;
@@ -426,6 +611,20 @@ top: 20%;
 margin-top: 5%;
 margin-bottom: 2.5%;
  
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 840px) {
+}
+@media only screen and (max-width: 770px) {
+}
+@media only screen and (max-width: 580px) {
+  left: 33.3%;
+}
+@media only screen and (max-width: 490px) {
+}
+@media only screen and (max-width: 390px) {
+  left: 30%;
+}
 
 `;
 export const SeparingLineMobile = styled.div`
@@ -468,6 +667,11 @@ margin-top: 120px;
     text-align: center;
     padding-right: 0;
   max-width: 50%; 
+
+  @media only screen and (max-width: 390px) {
+    max-width: 75%;
+  }
+  
 `;
 
 export const SliderItemLinkMobile = styled.a`
