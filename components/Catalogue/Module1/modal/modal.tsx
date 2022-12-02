@@ -37,15 +37,22 @@ import {
 } from "../../Module3/Modal/Modal1.styled";
 import SelectModule4 from "../../Module4/Modal/SelectModule4";
 import ReactPlayer from "react-player";
+import { getSeason } from "../../../../store/actions/courseActions";
 
 const Modal = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([])
   const [isPlaying, setIsPlaying] = useState<any>(true);
+  const [seasons, setSeasons] = useState<any>([]);
 
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons)
   };
+  const getCurrentSeason = () => {
+    getSeason(course.id).then((res) => {
+      setSeasons(res);
+    })
+  }
 
   const goTo = () => {
     if (user) {
@@ -80,7 +87,8 @@ const Modal = ({ show, setShow, course, user }: any) => {
   }
   useEffect(() => {
     if (Object.values(course).length > 0) {
-      setLessons(course.seasons[0]?.lessons)
+      setLessons(course.seasons[0]?.lessons);
+      getCurrentSeason();
       setIsPlaying(true);
       setTimeout(() => {
         setIsPlaying(false)
@@ -215,7 +223,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
               <LessonTitle>
                 Lista de lecciones
               </LessonTitle>
-              <SelectModule4 course={course} handleClick={handleClick} />
+              <SelectModule4 course={course} handleClick={handleClick} seasons={seasons} />
             </SeasonContain>
             {lessons?.map((lesson: any, index: any) => {
               return (
