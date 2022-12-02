@@ -20,6 +20,7 @@ import { db } from "../firebase/firebaseConfig";
 import { useAuth } from "../hooks/useAuth";
 import { getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
+import Footer from "../components/Footer/Footer";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
@@ -152,6 +153,7 @@ const Homepage = () => {
       } */}
       <Module5_1 slideData={landingData.experienciasSectionData} />
       <Module6_1 slideData={landingData.productosDestacadosData} />
+      {/* <Footer /> */}
     </Container>
   )
 }
