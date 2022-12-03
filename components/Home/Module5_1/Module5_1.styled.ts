@@ -17,29 +17,42 @@ export const GeneralContainer = styled(Container)`
 
 
 export const People = styled.div`
-background-size: 60%;
-height: 470px;
+background-size: 35%;
+height: 400px;
 background-repeat: no-repeat;
 width: 100%; 
 position: relative;
 background-position-x: 50%;
 z-index:1;
 @media only screen and (max-width: 1980px) {
-  height: 470px;
+  height: 370px;
+
+  background-size: 42.5%;
 }
 @media only screen and (max-width: 1720px) {
+  
+  background-size: 45%;
   height: 410px;
 }
 @media only screen and (max-width: 1600px) {
-  height: 360px;
+  
+  background-size: 50%;
+  height: 280px;
 }
 @media only screen and (max-width: 1440px) {
+  
+  background-size: 30%;
   height: 300px;
 }
 
 
+@media only screen and (max-width: 1280px) {  
+  background-size: 38%;
+
+}
 @media only screen and (max-width: 1028px) { 
   height: 270px;
+   
 
 }
 `;

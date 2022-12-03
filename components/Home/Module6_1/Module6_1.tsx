@@ -192,6 +192,7 @@ export const Module6_1 = (props: IModule6_1) => {
         fluid
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave} id="WebView"
+        style={{ height: "200px" }}
       >
         <ContainerMain  >
           <SliderContainer>
@@ -235,7 +236,7 @@ export const Module6_1 = (props: IModule6_1) => {
           </FooterBIcons>
 
 
-          {/* <FooterEnding>
+          <FooterEnding>
 
 
             <LeftFooterContent>
@@ -258,7 +259,7 @@ export const Module6_1 = (props: IModule6_1) => {
             </CenterFooterContent>
 
 
-          </FooterEnding> */}
+          </FooterEnding>
         </ContainerMain >
 
         <ContainerMain2  ></ContainerMain2>
@@ -331,7 +332,7 @@ export const Module6_1 = (props: IModule6_1) => {
           </FooterBIconsMobile>
 
 
-          {/* <FooterEndingMobile>
+          <FooterEndingMobile>
 
 
             <LeftFooterContentMobile>
@@ -354,7 +355,7 @@ export const Module6_1 = (props: IModule6_1) => {
             </CenterFooterContentMobile>
 
 
-          </FooterEndingMobile> */}
+          </FooterEndingMobile>
         </ContainerMainMobile >
 
         <ContainerMain2Mobile  ></ContainerMain2Mobile>
