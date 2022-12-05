@@ -57,29 +57,40 @@ export const GeneralContainerMobile = styled(Container)`
 
 export const PeopleMobile = styled.div`
 background-size: 100%;
-height: 490px;
+height: 105%;
 background-repeat: no-repeat;
 width: 100%; 
 position: relative;
 background-position-x: 50%;
 z-index:1; 
  
-@media only screen and (max-width: 840px) {
-  height: 390px;
+top: -5%;
+@media only screen and (max-width: 950px) {
+  
+}
+@media only screen and (max-width: 870px) {
+  
+   
 }
 @media only screen and (max-width: 770px) {
-  height: 365px;
+  top: 2.5%;
+}
+@media only screen and (max-width: 640px) {
+  top: 5%;
 }
 @media only screen and (max-width: 580px) {
-  height: 270px;
+  top: 7.5%;
+}
+@media only screen and (max-width: 520px) {
+  top: 4%;
 }
 @media only screen and (max-width: 490px) {
+  top: -18%;
   
-  height: 230px;
 }
 @media only screen and (max-width: 390px) {
+   
   
-  height: 186px;
 }
 
 `;

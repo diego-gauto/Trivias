@@ -36,6 +36,7 @@ import {
 
 import IMG1 from "./MediaSources/Lineas.png";
 import IMG2 from "./MediaSources/Personas.png";
+import IMG4 from "./MediaSources/Personas2.png";
 import IMG3 from "./MediaSources/LineMobile.png";
 
 import "swiper/css/navigation";
@@ -200,7 +201,7 @@ export const Module5_1 = (props: IModule5_1) => {
           </SliderContainerMobile>
 
           <PeopleContainerMobile>
-            <PeopleMobile style={{ backgroundImage: `url(${IMG2.src})` }}>
+            <PeopleMobile style={{ backgroundImage: `url(${IMG4.src})` }}>
             </PeopleMobile>
             <BgColorMobile  ></BgColorMobile>
           </PeopleContainerMobile>
