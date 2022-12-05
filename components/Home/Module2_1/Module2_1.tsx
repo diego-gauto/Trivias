@@ -40,11 +40,14 @@ import {
   Subtittle2_Mobile,
 } from "../Module2_1/Module2_1.styled";
 import { IModule2_1 } from "./IModule2_1";
+import { useMediaQuery } from "react-responsive";
 
 
 export const Module2_1 = (props: IModule2_1) => {
   const [iconImagesData, setIconImagesData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const responsive1280 = useMediaQuery({ query: "(max-width: 1280px)" });
+  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
     const html = text.replace(bold, '<span>$1</span>');
@@ -73,7 +76,7 @@ export const Module2_1 = (props: IModule2_1) => {
           <Row >
             <Col style={{ zIndex: "1" }}>
 
-              <LeftImage   >
+              <LeftImage >
                 <Row xs={12} sm={6} md={6} lg={7}>
                   <TittleContainer  >
                     <Tittle  >Aprende a aplicar uñas desde cero</Tittle>
@@ -118,7 +121,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
         </FirstSectionContainer >
 
-        <ConnectorColor></ConnectorColor>
+        {/* <ConnectorColor></ConnectorColor> */}
       </ModuleContainer >
       <ModuleContainer_Mobile id="mobileView">
         <FirstSectionContainer_Mobile >
@@ -137,7 +140,7 @@ export const Module2_1 = (props: IModule2_1) => {
             </RightImage_Mobile>
           </Row>
           <Row >
-            <Col style={{ zIndex: "1", paddingTop: "120px" }}>
+            <Col style={{ zIndex: "1", paddingTop: "55px", marginBottom: `${responsive500 ? "60px" : ""}` }}>
 
               <LeftImage_Mobile id="textMobile" >
                 <Row xs={12} sm={6} md={6} lg={7}>
