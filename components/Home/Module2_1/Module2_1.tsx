@@ -46,7 +46,7 @@ import { useMediaQuery } from "react-responsive";
 export const Module2_1 = (props: IModule2_1) => {
   const [iconImagesData, setIconImagesData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const responsive1280 = useMediaQuery({ query: "(max-width: 1280px)" });
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const parseTitle = (text: string = "") => {
     const bold = /\*\*(.*?)\*\*/gm;
@@ -71,8 +71,29 @@ export const Module2_1 = (props: IModule2_1) => {
 
   return (
     <>
-      <ModuleContainer id="webView">
-        <FirstSectionContainer >
+      <ModuleContainer fluid id="webView">
+        {responsive1023 && <img className="bg-responsive" src="../images/Landing/mobileBG2.png" alt="" />}
+        <img className="background" src="../images/Landing/bgSection1.png" alt="" />
+        <img className="women" src="../images/Landing/mujeres_gonvar-min.png" alt="" />
+        <div className="left-side">
+          {!responsive1023 && <Tittle>Aprende a <br /> aplicar uñas <br /> desde cero</Tittle>}
+          {responsive1023 && <Tittle>Aprende a aplicar <br /> uñas desde cero</Tittle>}
+          {!responsive1023 && <Subtittle1  >Somos la plataforma de <br /> aprendizaje en línea que <br />
+            te permite disfrutar de <br /> cientos de clases sobre uñas <br />
+            <span>y más servicios de belleza.</span>
+          </Subtittle1>}
+          {responsive1023 && <Subtittle1  >Somos la plataforma de aprendizaje en línea <br />
+            que te permite disfrutar de cientos de clases <br />
+            sobre uñas <span>y más servicios de belleza.</span>
+          </Subtittle1>}
+          <div className="buttons">
+            <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
+              onClick={() => router.push("/auth/Register")} />
+            <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Register")} />
+          </div>
+        </div>
+        {responsive1023 && <img className="women-second" src="../images/Landing/infoWomen.png" alt="" />}
+        {/* <FirstSectionContainer >
           <Row >
             <Col style={{ zIndex: "1" }}>
 
@@ -119,16 +140,14 @@ export const Module2_1 = (props: IModule2_1) => {
             </Col>
           </Row>
 
-        </FirstSectionContainer >
+        </FirstSectionContainer > */}
 
-        {/* <ConnectorColor></ConnectorColor> */}
       </ModuleContainer >
-      <ModuleContainer_Mobile id="mobileView">
+      {/* <ModuleContainer_Mobile id="mobileView">
         <FirstSectionContainer_Mobile >
           <Row>
             <RightImage_Mobile>
 
-              {/*  <ModuleContainerBGColor_Mobile ></ModuleContainerBGColor_Mobile> */}
 
               <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${Background6.src})`, backgroundSize: "100%" }}>
                 <ModuleContainerBG3alt_Mobile style={{ backgroundImage: `url(${BG5.src})`, backgroundSize: "100%" }}></ModuleContainerBG3alt_Mobile>
@@ -178,7 +197,7 @@ export const Module2_1 = (props: IModule2_1) => {
 
         </FirstSectionContainer_Mobile >
 
-      </ModuleContainer_Mobile >
+      </ModuleContainer_Mobile > */}
     </>
   )
 }

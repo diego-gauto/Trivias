@@ -3,22 +3,62 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import styled from "styled-components";
 
 export const ModuleContainer = styled(Container)`
-  height: 100%;
-  margin-bottom: 1%;
-  padding-top: 90px;
-  display: block;
-  @media only screen and (max-width: 1280px) {
-    margin-bottom: 100px;
-    max-width: 1200px;
+  background-color: rgb(237, 231, 242);
+  position: relative;
+  margin-top: 90px;
+  padding-inline: 0;
+  @media only screen and (max-width: 1023px) {
+    margin-top: 74px;
   }
-
-  @media only screen and (max-width: 1024px) {
-    margin: 25px auto;
-    display: none;
+  .background {
+    width: 100%;
+    aspect-ratio: auto;
+    @media only screen and (max-width: 1023px) {
+      display: none;
+    }
   }
-  // @media only screen and (min-width: 992px) {
-  //   max-width: 1100px;
-  // }
+  .bg-responsive {
+    width: 100%;
+  }
+  .women-second {
+    width: 100%;
+    margin-top: 40px;
+  }
+  .women {
+    position: absolute;
+    right: -60px;
+    bottom: 0;
+    width: 88%;
+    @media only screen and (max-width: 1023px) {
+      display: none;
+    }
+  }
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      @media only screen and (max-width: 1023px) {
+        flex-direction: row;
+        padding: 10px;
+      }
+    }
+    @media only screen and (max-width: 1023px) {
+      position: relative;
+      left: 0;
+      top: 0;
+      transform: none;
+      align-items: center;
+      text-align: center;
+    }
+  }
 `;
 
 export const ModuleContainerBG1alt = styled.div`
@@ -218,6 +258,9 @@ export const Tittle = styled.span`
     font-size: 42px;
     line-height: 48px;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 36px;
+  }
 `;
 export const Subtittles = styled.div`
   width: 50%;
@@ -239,6 +282,10 @@ export const Subtittle1 = styled.span`
   }
   @media only screen and (max-width: 420px) {
     font-size: 10px;
+  }
+  span {
+    font-family: "MONTSERRAT-BOLD" !important;
+    color: #d24dd3;
   }
 `;
 export const Subtittle2 = styled.span`
