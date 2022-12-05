@@ -59,8 +59,6 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     loop: isInfinite,
     autoplay: {
       delay: 100,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true,
     },
     speed: 7000,
     freeMode: true,

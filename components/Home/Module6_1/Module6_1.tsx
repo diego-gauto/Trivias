@@ -192,6 +192,7 @@ export const Module6_1 = (props: IModule6_1) => {
         fluid
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave} id="WebView"
+        style={{ height: "200px" }}
       >
         <ContainerMain  >
           <SliderContainer>

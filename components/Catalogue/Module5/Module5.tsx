@@ -29,6 +29,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
+  const [mouse, setMouse] = useState(false);
   const swiperRef = useRef<SwiperCore>();
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const slider = document.querySelector('.scroll-container3') as HTMLElement;
@@ -45,9 +46,6 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
       x: e.clientX,
       y: e.clientY,
     };
-    console.log(pos);
-
-
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
@@ -63,7 +61,9 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
     document.removeEventListener('mouseup', mouseUpHandler);
   };
   const handleShow = () => {
-    setShow(true);
+    if (!mouse) {
+      setShow(true);
+    }
   }
 
   useEffect(() => {
@@ -94,10 +94,14 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
               Incluido con Gonvar+
             </Title>
           </div>
-          <div id="scroll-container3" className="scroll-container3" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
+          <div id="scroll-container3" className="scroll-container3" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}
+          // onScroll={() => {
+          //   setMouse(true)
+          // }}
+          >
             <div style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
-                <div className="grey-field" key={"mod5 " + idx} onClick={() => {
+                <div className="grey-field" key={"mod5 " + idx} onClick={(e) => {
                   handleShow();
                   setCourse(element);
                 }}>
