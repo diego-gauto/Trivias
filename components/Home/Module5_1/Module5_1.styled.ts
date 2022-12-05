@@ -17,41 +17,78 @@ export const GeneralContainer = styled(Container)`
 
 
 export const People = styled.div`
-background-size: 35%;
-height: 400px;
+ 
 background-repeat: no-repeat;
 width: 100%; 
 position: relative;
 background-position-x: 50%;
-z-index:1;
-@media only screen and (max-width: 1980px) {
-  height: 370px;
+z-index:1; 
 
-  background-size: 42.5%;
-}
-@media only screen and (max-width: 1720px) {
-  
-  background-size: 45%;
-  height: 410px;
-}
-@media only screen and (max-width: 1600px) {
-  
-  background-size: 50%;
+background-size: 25%;
+  top: 23%;
+  height: 310px;
+
+@media only screen and (max-width: 2400px) {
+  background-size: 25%;
+  top: 23%;
   height: 280px;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 2100px) {
   
-  background-size: 30%;
-  height: 300px;
+  top: 26%;
+}
+@media only screen and (max-width: 1980px) {
+  background-size: 32%;
+  top: 16%;
+}
+@media only screen and (max-width: 1840px) {
+  background-size: 34%;
+  top: 15%;
+}
+
+@media only screen and (max-width: 1720px) {
+  background-size: 35%;
+  top: 19%;
+}
+@media only screen and (max-width: 1600px) {
+  background-size: 37.5%;
+top: -3%;
+}
+@media only screen and (max-width: 1520px) {
+  background-size: 38%;
+top: 0%;
+}
+@media only screen and (max-width: 1440px) {
+  background-size: 40%;
+  top: 1%;
+  
+}
+@media only screen and (max-width: 1360px) {
+  background-size: 45%;
+  top: -5%;
 }
 
 
 @media only screen and (max-width: 1280px) {  
-  background-size: 38%;
+  background-size: 50%;
+  top: -8%;
 
 }
+@media only screen and (max-width: 1200px) {  
+   
+  top: -4%;
+
+}
+@media only screen and (max-width: 1150px) {  
+  
+  background-size: 55%;
+  top: -8%;
+}
+@media only screen and (max-width: 1080px) {  
+  background-size: 60%;
+top: -7.5%;
+}
 @media only screen and (max-width: 1028px) { 
-  height: 270px;
    
 
 }
@@ -60,17 +97,15 @@ export const PeopleContainer = styled.div`
 height: 470px;
 
 @media only screen and (max-width: 1720px) {
-  height: 405;
+  height: 405px;
 }
 @media only screen and (max-width: 1600px) {
   height: 360px;
 }
 @media only screen and (max-width: 1440px) {
-  height: 300px;
-  margin-top: 5%;
+  height: 300px; 
 }
-@media only screen and (max-width: 1028px) {
-  margin-top: 8%;
+@media only screen and (max-width: 1028px) { 
 }
 
 `;
@@ -84,25 +119,34 @@ background-repeat: no-repeat;
 `;
 export const BgColor = styled.div`
 background-color: #EDE7F2;
-height: 300px;
-top: -300px; 
+height: 270px;
+top: -20%;
 position: relative;
 
+@media only screen and (max-width: 2400px) {
+  height: 270px;
+top: -12%;
+}
+
 @media only screen and (max-width: 1980px) {
-  top: -59.6%;
-  height: 280px;
+  top: -35%;
+  height: 260px;
 } 
 @media only screen and (max-width: 1720px) {
-  top: -51%;
-  height: 240px;
+  top: -36%; 
+}
+@media only screen and (max-width: 1680px) {
+  top: -32%;
 }
 @media only screen and (max-width: 1600px) {
-  height: 240px;
-  top: -66.6%;
+  top: -50%;
+}
+@media only screen and (max-width: 1520px) {
+  top: -55%;
 }
 @media only screen and (max-width: 1440px) {
-  top: -60%;
-  height: 180px;
+  top: -70%;
+  height: 100%;
 }
 @media only screen and (max-width: 1280px) {
   
