@@ -75,7 +75,7 @@ export const Module5_1 = (props: IModule5_1) => {
     breakpoints: {
       1024: {
         slidesPerView: 4,
-        spaceBetween: 30,
+        spaceBetween: 80,
       }
     }
   };
@@ -115,7 +115,7 @@ export const Module5_1 = (props: IModule5_1) => {
 
 
     return (
-      <SwiperSlide key={element.username + "_ID"}>
+      <SwiperSlide key={element.username + "_ID"} >
         <SliderItemLink >
           <SlideModule_1
             isNew={element.isNew}
@@ -135,8 +135,7 @@ export const Module5_1 = (props: IModule5_1) => {
     <>
       <GeneralContainer
         fluid
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="WebView"
+        id="WebView"
       >
         <ContainerMain  >
           <SliderContainer>
@@ -146,9 +145,12 @@ export const Module5_1 = (props: IModule5_1) => {
               <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
             </SliderSectionTitle>
-            <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
-              {sliderData}
-            </Swiper>
+            <div onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}>
+              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
+                {sliderData}
+              </Swiper>
+            </div>
           </SliderContainer>
 
           <PeopleContainer>
@@ -159,53 +161,7 @@ export const Module5_1 = (props: IModule5_1) => {
         </ContainerMain >
       </GeneralContainer >
 
-      <GeneralContainerMobile
-        fluid
-        style={{ padding: 0 }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="MobileView"
-      >
-        <ContainerMainMobile  >
-          <SliderContainerMobile>
 
-            <LinesMobile style={{ backgroundImage: `url(${IMG3.src})` }}></LinesMobile>
-            <SliderSectionTitleMobile>
-              <TittleAMobile>Experiencias de nuestras </TittleAMobile><TittleBMobile> #AlumnasGonvar</TittleBMobile>
-
-            </SliderSectionTitleMobile>
-
-            <SwiperContainer>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobile} onInit={onInit}>
-                {sliderData}
-              </Swiper>
-            </SwiperContainer>
-            <SwiperContainerReduced>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobileReduced} onInit={onInit}>
-                {sliderData}
-              </Swiper>
-            </SwiperContainerReduced>
-            <SwiperContainerMoreReduced>
-              <Swiper style={{
-                paddingTop: "50px",
-                paddingBottom: "50px"
-              }}
-                {...settingsMobileMoreReduced} onInit={onInit}
-              /* 
-            navigation={true}
-            modules={[Navigation]} */
-              >
-                {sliderData}
-              </Swiper>
-            </SwiperContainerMoreReduced>
-          </SliderContainerMobile>
-
-          <PeopleContainerMobile>
-            <PeopleMobile style={{ backgroundImage: `url(${IMG2.src})` }}>
-            </PeopleMobile>
-            <BgColorMobile  ></BgColorMobile>
-          </PeopleContainerMobile>
-        </ContainerMainMobile >
-      </GeneralContainerMobile >
     </>
   )
 }
