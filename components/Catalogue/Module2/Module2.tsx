@@ -48,6 +48,8 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
 
   const mouseMoveHandler = function (e: any) {
+    console.log(e);
+
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;

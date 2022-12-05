@@ -51,14 +51,19 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   };
 
   const mouseMoveHandler = function (e: any) {
+    // setMouse(true)
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;
   };
 
   const mouseUpHandler = function () {
+
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
+    // setTimeout(() => {
+    //   setMouse(false)
+    // }, 100);
   };
   const handleShow = () => {
     if (!mouse) {
