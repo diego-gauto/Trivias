@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import 'swiper/css';
@@ -46,27 +46,50 @@ import { SlideModule_1 } from "./SlideModule_1/SlideModule_1";
 SwiperCore.use([Autoplay]);
 
 export const Module5_1 = (props: IModule5_1) => {
+
+  const [swiperPaused, setSwiperPaused] = useState(false);
+
+
   const swiperRef = useRef<SwiperCore>();
   const { slideData } = props;
   var slideDataArr = [];
   slideDataArr = slideData;
+
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
   const onMouseEnter = () => {
     if (swiperRef.current) {
-      swiperRef.current.autoplay.stop();
+      var a = swiperRef.current
+      a.autoplay.stop();
+      a.slideToClosest(1, true);
+      setSwiperPaused(true);
     }
   };
   const onMouseLeave = () => {
+
     if (swiperRef.current) {
-      swiperRef.current.autoplay.start();
+      var a = swiperRef.current
+      a.autoplay.start();
+      setSwiperPaused(false);
+
+      a.slideToClosest(7000, true);
     }
   };
+
+  useEffect(() => {
+
+  }, [swiperPaused])
+
   const settings = {
     loop: true,
+
+    centeredSlides: true,
     autoplay: {
       delay: 0,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+      waitForTransition: true,
     },
     speed: 4000,
     freeMode: true,
@@ -79,10 +102,17 @@ export const Module5_1 = (props: IModule5_1) => {
       }
     }
   };
+
+
+
   const settingsMobile = {
     loop: true,
+    centeredSlides: true,
     autoplay: {
       delay: 0,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+      waitForTransition: true,
     },
     speed: 4000,
     freeMode: true,
@@ -91,8 +121,12 @@ export const Module5_1 = (props: IModule5_1) => {
   };
   const settingsMobileReduced = {
     loop: true,
+    centeredSlides: true,
     autoplay: {
       delay: 0,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+      waitForTransition: true,
     },
     speed: 4000,
     freeMode: true,
@@ -101,10 +135,13 @@ export const Module5_1 = (props: IModule5_1) => {
   };
   const settingsMobileMoreReduced = {
     loop: true,
+    centeredSlides: true,
     autoplay: {
       delay: 2000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+      waitForTransition: true,
     },
-    centeredSlides: true,
     speed: 250,
     freeMode: true,
     spaceBetween: 70,
@@ -125,28 +162,38 @@ export const Module5_1 = (props: IModule5_1) => {
             username={element.username}
             imgURL={downloadFileWithStoragePath(element.imgURL)}
             usrImgURL={downloadFileWithStoragePath(element.usrImgURL)}
+
+
           />
         </SliderItemLink>
       </SwiperSlide>
     )
   })
 
+  const SwiperRef1 = useRef<SwiperCore>()
   return (
     <>
       <GeneralContainer
         fluid
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="WebView"
+
+        id="WebView"
       >
         <ContainerMain  >
-          <SliderContainer>
+          <SliderContainer key={"5c"}
+
+
+          >
 
             <Lines style={{ backgroundImage: `url(${IMG1.src})` }}></Lines>
             <SliderSectionTitle>
               <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
             </SliderSectionTitle>
-            <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
+            <Swiper
+
+              key={"5"}
+              style={{ paddingTop: "50px", paddingBottom: "50px" }}
+              {...settings} onInit={onInit}>
               {sliderData}
             </Swiper>
           </SliderContainer>
