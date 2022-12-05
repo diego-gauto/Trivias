@@ -3,16 +3,9 @@ import styled from "styled-components";
 
 export const ColorContainer = styled.div`
   background-color: #e2a6e5;
-  height: 110%;
+  height: 100%;
   width: auto;
   position: relative;
-
-  @media only screen and (max-width: 1440px) {
-    padding-top: 75px;
-  }
-  @media only screen and (max-width: 1280px) {
-    padding-top: 85px;
-  }
   @media only screen and (max-width: 1028px) {
     padding-top: 55px;
   }
@@ -124,35 +117,12 @@ export const ModuleContainerBG1 = styled.div`
 `;
 export const ModuleContainerBG2 = styled.div`
   width: 100%;
-  height: 170%;
+  height: 70%;
   background-repeat: no-repeat;
-  position: relative;
+  position: absolute;
   display: block;
-  top: 35%;
   background-position-x: 50%;
-
-  @media only screen and (max-width: 1980px) {
-  }
-  @media only screen and (max-width: 1720px) {
-    height: 165%;
-    top: 35%;
-  }
-  @media only screen and (max-width: 1600px) {
-    height: 125%;
-    top: 30%;
-  }
-  @media only screen and (max-width: 1440px) {
-    height: 160%;
-    top: 35%;
-  }
-  @media only screen and (max-width: 1280px) {
-    height: 160%;
-    top: 45%;
-  }
-  @media only screen and (max-width: 1028px) {
-    height: 145%;
-    top: 45%;
-  }
+  bottom: 0;
 `;
 export const ListText = styled.div`
   display: block;

@@ -78,8 +78,6 @@ export const Module3_1 = (props: IModule3) => {
             </Col>
             <Col>
               <Column_2><Tittle>¿Qué te ofrece Gonvar?</Tittle></Column_2>
-              <ModuleContainerBG2 style={{ backgroundImage: `url(${Hand.src})`, backgroundSize: "contain" }} />
-
             </Col>
             <Col>
               <Column_3>
@@ -100,6 +98,7 @@ export const Module3_1 = (props: IModule3) => {
               </Column_3>
             </Col>
           </Row>
+          <ModuleContainerBG2 style={{ backgroundImage: `url(${Hand.src})`, backgroundSize: "contain" }} />
         </ColorContainer>
       </ModuleContainer >
 
