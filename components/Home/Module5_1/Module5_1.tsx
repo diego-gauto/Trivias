@@ -71,50 +71,25 @@ export const Module5_1 = (props: IModule5_1) => {
     },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 2,
+    slidesPerView: 1,
     spaceBetween: 20,
     breakpoints: {
-      1024: {
+      1250: {
         slidesPerView: 4,
+        spaceBetween: 30,
+      },
+      850: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      550: {
+        slidesPerView: 2,
         spaceBetween: 30,
       }
     }
   };
-  const settingsMobile = {
-    loop: true,
-    autoplay: {
-      delay: 0,
-    },
-    speed: 4000,
-    freeMode: true,
-    slidesPerView: 3,
-    spaceBetween: 120,
-  };
-  const settingsMobileReduced = {
-    loop: true,
-    autoplay: {
-      delay: 0,
-    },
-    speed: 4000,
-    freeMode: true,
-    slidesPerView: 1.5,
-    spaceBetween: 5,
-  };
-  const settingsMobileMoreReduced = {
-    loop: true,
-    autoplay: {
-      delay: 2000,
-    },
-    centeredSlides: true,
-    speed: 250,
-    freeMode: true,
-    spaceBetween: 70,
 
-    //navigation: true,
-  };
   const sliderData = slideDataArr?.map((element) => {
-
-
     return (
       <SwiperSlide key={element.username + "_ID"}>
         <SliderItemLink >
@@ -161,7 +136,7 @@ export const Module5_1 = (props: IModule5_1) => {
         </ContainerMain >
       </GeneralContainer >
 
-      <GeneralContainerMobile
+      {/* <GeneralContainerMobile
         fluid
         style={{ padding: 0 }}
         onMouseEnter={onMouseEnter}
@@ -192,9 +167,6 @@ export const Module5_1 = (props: IModule5_1) => {
                 paddingBottom: "50px"
               }}
                 {...settingsMobileMoreReduced} onInit={onInit}
-              /* 
-            navigation={true}
-            modules={[Navigation]} */
               >
                 {sliderData}
               </Swiper>
@@ -207,7 +179,7 @@ export const Module5_1 = (props: IModule5_1) => {
             <BgColorMobile  ></BgColorMobile>
           </PeopleContainerMobile>
         </ContainerMainMobile >
-      </GeneralContainerMobile >
+      </GeneralContainerMobile > */}
     </>
   )
 }

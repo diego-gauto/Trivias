@@ -7,7 +7,7 @@ import {
   Text01, Text02, DateText, TextNew, TextSectionWrapper, UserImage,
   UsernameSectionWrapper,
   UserDataContainer,
-  GeneralContainer
+  GeneralContainer,
 } from "./SlideModule_1.styled";
 import { title } from "process";
 
@@ -66,28 +66,22 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
             <Text02>{descripcion} </Text02>
           </TextSectionWrapper>
           <UsernameSectionWrapper>
-            <Col>
-              <UserImage style={{ backgroundImage: 'url(' + imgUsr + ')' }}>
-              </UserImage>
-            </Col>
-            <Col>
-              <UserDataContainer>
-                <Text01   >{username} </Text01>
-                {
-                  datePublication ? <DateText   > {
-                    datePublication.toISOString().split('T')[0]?.toString()} </DateText>
-                    : <></>
-                }
-              </UserDataContainer>
-            </Col>
-            <Col>
-              <FacebookButton style={{ backgroundImage: `url(${IMG1.src})` }}
-              >
-                <a href={usrFacebookURL}
-                  target="_blank"
-                  style={{ height: "100%", display: "block" }}></a>
-              </FacebookButton>
-            </Col>
+            <UserImage style={{ backgroundImage: 'url(' + imgUsr + ')' }}>
+            </UserImage>
+            <UserDataContainer>
+              <Text01   >{username} </Text01>
+              {
+                datePublication ? <DateText   > {
+                  datePublication.toISOString().split('T')[0]?.toString()} </DateText>
+                  : <></>
+              }
+            </UserDataContainer>
+            <FacebookButton style={{ backgroundImage: `url(${IMG1.src})` }}
+            >
+              <a href={usrFacebookURL}
+                target="_blank"
+                style={{ height: "100%", display: "block" }}></a>
+            </FacebookButton>
           </UsernameSectionWrapper>
         </Col>
       </ContainerMain >
