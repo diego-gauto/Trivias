@@ -1,0 +1,95 @@
+import { Modal } from "react-bootstrap";
+import styled, { keyframes } from "styled-components";
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: #ede7f2;
+  border-radius: 40px !important;
+  button {
+    background: #3f1168;
+    position: absolute;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+  }
+  .bottom-section {
+    background: #d2aff1;
+    padding: 20px;
+    padding-block: 40px;
+    border-radius: 40px !important;
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #3f1168;
+      border: none;
+      padding: 0;
+      span {
+        color: #cc1854;
+      }
+      @media (max-width: 424px) {
+        font-size: 20px;
+      }
+    }
+    p {
+      font-size: 17px;
+      color: #3f1168;
+      line-height: initial;
+      text-align: center;
+      margin: 0;
+      span {
+        color: #942ced;
+        font-weight: bold;
+      }
+      .opacity {
+        color: inherit;
+        opacity: 0.5;
+      }
+    }
+  }
+  .top-section {
+    padding: 20px;
+    padding-block: 40px;
+    border-radius: 40px !important;
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 37px;
+      font-weight: bold;
+      color: #3f1168;
+      border: none;
+      padding: 0;
+      span {
+        color: #cc1854;
+      }
+      @media (max-width: 424px) {
+        font-size: 20px;
+      }
+    }
+    p {
+      font-size: 17px;
+      color: #3f1168;
+      line-height: initial;
+      text-align: center;
+      margin: 0;
+      span {
+        color: #942ced;
+        font-weight: bold;
+      }
+      .opacity {
+        font-weight: 400;
+        color: inherit;
+        opacity: 0.5;
+      }
+    }
+  }
+  @media (max-width: 424px) {
+    gap: 20px;
+  }
+`;

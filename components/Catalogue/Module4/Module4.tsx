@@ -15,10 +15,12 @@ import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
+import ModalMaterials from "./Modal/ModalMaterials";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
+  const [material, setMaterial] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()

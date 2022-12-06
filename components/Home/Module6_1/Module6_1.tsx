@@ -190,8 +190,7 @@ export const Module6_1 = (props: IModule6_1) => {
     <>
       <GeneralContainer
         fluid
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="WebView"
+        id="WebView"
         style={{ height: "200px" }}
       >
         <ContainerMain  >
@@ -201,9 +200,12 @@ export const Module6_1 = (props: IModule6_1) => {
               <TittleA>Visita nuestra </TittleA><TittleB> tienda</TittleB>
 
             </SliderSectionTitle>
-            <Swiper  {...settings} onInit={onInit}>
-              {sliderData}
-            </Swiper>
+            <div onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}>
+              <Swiper  {...settings} onInit={onInit}>
+                {sliderData}
+              </Swiper>
+            </div>
           </SliderContainer>
 
           <PeopleContainer>

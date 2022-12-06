@@ -39,9 +39,10 @@ import {
 import SelectModule4 from "./SelectModule4";
 import ReactPlayer from "react-player";
 import { getSeason } from "../../../../store/actions/courseActions";
+import ModalMaterials from "./ModalMaterials";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
-
+  const [material, setMaterial] = useState(false);
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState<any>(true);
@@ -51,6 +52,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons);
   };
+  const handleShow = () => {
+    setMaterial(true);
+  }
+
   const getCurrentSeason = () => {
     getSeason(course.id).then((res) => {
       setSeasons(res);
@@ -141,6 +146,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
       }
     }
   };
+
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -156,9 +162,9 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 x
               </Cross>
               <TextContainer>
-                <Title>
+                {/* <Title>
                   {course.courseTittle}
-                </Title>
+                </Title> */}
                 <ButtonContain>
                   {(course.courseType == 'Producto' && !course.paid) && <PurpleButton onClick={goTo}>
                     Comprar - ${course.coursePrice}.00
@@ -177,11 +183,24 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
           <CourseContain>
             <AboutContain>
               <Titles>
-                Sobre el curso:
+                Título del curso:
+              </Titles>
+              <Text>
+                {course.courseTittle}
+              </Text>
+              <Titles>
+                Objetivos:
               </Titles>
               <Text>
                 {course.courseAbout}
               </Text>
+              <Titles>
+                Descripción:
+              </Titles>
+              <Text>
+                {course.coursePhrase}
+              </Text>
+              <button onClick={handleShow}>Materiales</button>
             </AboutContain>
             <Datacontain>
               <Data>Profesor(es):
@@ -254,6 +273,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
           </LessonContain>
         </ModalCont>
       </ModalMod>
+      <ModalMaterials show={material} setShow={setMaterial} materials={course.courseMaterial}></ModalMaterials>
     </ModalContain >
   )
 }

@@ -135,9 +135,7 @@ export const Module5_1 = (props: IModule5_1) => {
   return (
     <>
       <GeneralContainer
-        fluid
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="WebView"
+        fluid id="WebView"
       >
         <ContainerMain  >
           <SliderContainer>
@@ -147,9 +145,12 @@ export const Module5_1 = (props: IModule5_1) => {
               <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
             </SliderSectionTitle>
-            <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
-              {sliderData}
-            </Swiper>
+            <div onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}>
+              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
+                {sliderData}
+              </Swiper>
+            </div>
           </SliderContainer>
 
           <PeopleContainer>

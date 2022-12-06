@@ -158,6 +158,9 @@ input[type="text"]::-webkit-credentials-auto-fill-button {
 .swiper .swiper-pagination .swiper-pagination-bullet-active{
   background: #E55C00;
 }
- .custom-dialog {
+.custom-dialog {
     max-width: 700px;
+  }
+.custom-dialog-material {
+    background: white;
   }
