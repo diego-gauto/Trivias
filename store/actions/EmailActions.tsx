@@ -37,7 +37,7 @@ export const SendSingleEmail = async (
 
   const firebaseFunction = httpsCallable(functions, 'ActiveCampaign_Send');
   const a = await firebaseFunction(data).then(async (res: any) => {
-    console.log(res)
+    console.log(res["data"])
     return res
   }).catch((error: any) => {
     console.log(error)
