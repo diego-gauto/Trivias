@@ -113,11 +113,11 @@ export const Module6_1 = (props: IModule6_1) => {
     },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 4,
+    slidesPerView: 2,
     spaceBetween: 20,
     breakpoints: {
 
-      1028: {
+      800: {
         slidesPerView: 3,
         spaceBetween: 20,
       },
@@ -127,41 +127,8 @@ export const Module6_1 = (props: IModule6_1) => {
       }
     }
   };
-  const settingsMobile = {
-    loop: true,
-    autoplay: {
-      delay: 0,
-    },
-    speed: 4000,
-    freeMode: true,
-    slidesPerView: 2,
-    spaceBetween: 120,
-  };
-  const settingsMobileReduced = {
-    loop: true,
-    autoplay: {
-      delay: 0,
-    },
-    speed: 4000,
-    freeMode: true,
-    slidesPerView: 1.5,
-    spaceBetween: 5,
-  };
-  const settingsMobileMoreReduced = {
-    loop: true,
-    autoplay: {
-      delay: 2000,
-    },
-    centeredSlides: true,
-    speed: 250,
-    freeMode: true,
-    spaceBetween: 70,
 
-    //navigation: true,
-  };
   const sliderData = slideDataArr?.map((element) => {
-
-
     return (
       <>
         <SwiperSlide key={element.id + "_ID"}>
@@ -267,11 +234,10 @@ export const Module6_1 = (props: IModule6_1) => {
         <ContainerMain2  ></ContainerMain2>
       </GeneralContainer >
       {/************************************************** */}
-      <GeneralContainerMobile
+      {/* <GeneralContainerMobile
         fluid
         style={{ padding: 0 }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="MobileView"
+        id="MobileView"
       >
         <ContainerMainMobile  >
           <SliderContainerMobile>
@@ -294,9 +260,6 @@ export const Module6_1 = (props: IModule6_1) => {
             <SwiperContainerMoreReduced>
               <Swiper style={{}}
                 {...settingsMobileMoreReduced} onInit={onInit}
-              /* 
-            navigation={true}
-            modules={[Navigation]} */
               >
                 {sliderData}
               </Swiper>
@@ -361,7 +324,7 @@ export const Module6_1 = (props: IModule6_1) => {
         </ContainerMainMobile >
 
         <ContainerMain2Mobile  ></ContainerMain2Mobile>
-      </GeneralContainerMobile >
+      </GeneralContainerMobile > */}
     </>
   )
 }

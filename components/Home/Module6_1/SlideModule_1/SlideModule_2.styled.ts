@@ -53,10 +53,7 @@ export const SlideImg = styled.div`
     height: 320px;
   }
   @media only screen and (max-width: 770px) {
-    width: 250px;
-  }
-  @media only screen and (max-width: 580px) {
-    width: 290px;
+    width: 200px;
   }
 `;
 
