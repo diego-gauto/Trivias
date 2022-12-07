@@ -29,9 +29,9 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
                   name="category"
                   value="Temporada 1"
                 />
-                <Label > {seasons[index]?.name == undefined ? `Temporada ${index + 1}` : seasons[index].name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} episodio)
+                <Label > {seasons[index]?.name == undefined ? `Temporada ${index + 1}` : seasons[index].name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} lección)
                 </Episodes>}
-                  {season.lessons.length > 1 && <Episodes>({season.lessons.length} episodios)
+                  {season.lessons.length > 1 && <Episodes>({season.lessons.length} lecciónes)
                   </Episodes>}
                 </Label>
               </Option>

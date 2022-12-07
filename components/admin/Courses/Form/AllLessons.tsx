@@ -53,7 +53,7 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
             <img src={lesson.image} />
           </ImageContain>
           <EpisodeContain>
-            <EpisodeTitle>Epidosio {lesson.number}: {lesson.title}</EpisodeTitle>
+            <EpisodeTitle>Lección {lesson.number}: {lesson.title}</EpisodeTitle>
             <EpisodeTime>{hms(lesson.duration)}</EpisodeTime>
             <EpisodeInfo>{lesson.description}</EpisodeInfo>
             <Link href={{
