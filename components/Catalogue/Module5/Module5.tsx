@@ -26,10 +26,10 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const router = useRouter();
+  let [counter, setCounter] = useState<any>(0);
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  const [mouse, setMouse] = useState(false);
   const swiperRef = useRef<SwiperCore>();
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const slider = document.querySelector('.scroll-container3') as HTMLElement;
@@ -51,24 +51,22 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   };
 
   const mouseMoveHandler = function (e: any) {
-    // setMouse(true)
+    setCounter(counter++);
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;
   };
 
   const mouseUpHandler = function () {
-
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
-    // setTimeout(() => {
-    //   setMouse(false)
-    // }, 100);
   };
+
   const handleShow = () => {
-    if (!mouse) {
+    if (counter < 2) {
       setShow(true);
     }
+    setCounter(0)
   }
 
   useEffect(() => {
@@ -104,7 +102,8 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
           //   setMouse(true)
           // }}
           >
-            <div style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
+            <div style={{ display: "flex" }} onMouseDown={
+              mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div className="grey-field" key={"mod5 " + idx} onClick={(e) => {
                   handleShow();

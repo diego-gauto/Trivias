@@ -21,6 +21,7 @@ SwiperCore.use([Scrollbar, Mousewheel]);
 const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [material, setMaterial] = useState(false);
+  let [counter, setCounter] = useState<any>(0);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
@@ -48,6 +49,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
 
   const mouseMoveHandler = function (e: any) {
+    setCounter(counter++);
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;
@@ -59,9 +61,11 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
 
   const handleShow = () => {
-    setShow(true);
+    if (counter < 2) {
+      setShow(true);
+    }
+    setCounter(0)
   }
-
 
   useEffect(() => {
     if (user) {

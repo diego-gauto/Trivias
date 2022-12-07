@@ -23,6 +23,7 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
     imgURL,
     usrImgURL,
     username,
+    index
   } = props;
   const [img, setImg] = useState("")
   const [imgUsr, setImgUsr] = useState("")
@@ -45,10 +46,15 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
 
   return (
-    <GeneralContainer>
+    <GeneralContainer onMouseOver={(e) => {
+
+      console.log(document.getElementById("general" + index)?.offsetLeft)
+    }} onMouseLeave={() => {
+      console.log(2)
+    }}>
       <DisabledMask>
       </DisabledMask>
-      <ContainerMain >
+      <ContainerMain id={"general" + index}>
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>

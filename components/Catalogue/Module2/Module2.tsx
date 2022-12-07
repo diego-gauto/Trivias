@@ -22,6 +22,7 @@ SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
 const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
+  let [counter, setCounter] = useState<any>(0);
   const swiperRef = useRef<SwiperCore>();
   const [loading, setLoading] = useState(true);
   let today = new Date().getTime() / 1000;
@@ -48,8 +49,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
 
   const mouseMoveHandler = function (e: any) {
-    console.log(e);
-
+    setCounter(counter++);
     // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;
@@ -85,34 +85,38 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   }, [user, isLoading]);
 
   const goTo = (course: any) => {
-    if (user) {
-      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: course.documentID, season: course.season, lesson: course.lesson },
-        });
-      }
-      if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
-        router.push(
-          { pathname: 'Purchase', query: { type: 'subscription' } }
-        )
-      }
-      if (course.courseType == 'Producto' && !course.paid) {
-        router.push(
-          { pathname: 'Purchase', query: { type: 'course', id: course.documentID } }
-        )
-      }
-    } else {
-      if (course.courseType == 'Gratis') {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: course.documentID, season: 0, lesson: 0 },
-        });
-      }
-      if (!user && course.courseType !== 'Gratis') {
-        router.push(LOGIN_PATH)
+    if (counter < 2) {
+      if (user) {
+        if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
+          router.push({
+            pathname: 'Lesson',
+            query: { id: course.documentID, season: course.season, lesson: course.lesson },
+          });
+        }
+        if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
+          router.push(
+            { pathname: 'Purchase', query: { type: 'subscription' } }
+          )
+        }
+        if (course.courseType == 'Producto' && !course.paid) {
+          router.push(
+            { pathname: 'Purchase', query: { type: 'course', id: course.documentID } }
+          )
+        }
+      } else {
+        if (course.courseType == 'Gratis') {
+          router.push({
+            pathname: 'Lesson',
+            query: { id: course.documentID, season: 0, lesson: 0 },
+          });
+        }
+        if (!user && course.courseType !== 'Gratis') {
+          router.push(LOGIN_PATH)
+        }
       }
     }
+    setCounter(0)
+
   }
 
 

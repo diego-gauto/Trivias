@@ -89,11 +89,12 @@ export const Module5_1 = (props: IModule5_1) => {
     }
   };
 
-  const sliderData = slideDataArr?.map((element) => {
+  const sliderData = slideDataArr?.map((element, index) => {
     return (
       <SwiperSlide key={element.username + "_ID"}>
         <SliderItemLink >
           <SlideModule_1
+            index={index}
             isNew={element.isNew}
             descripcion={element.descripcion}
             datePublication={element.convertedDate}
