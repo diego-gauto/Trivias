@@ -38,12 +38,14 @@ import {
 import SelectModule4 from "../../Module4/Modal/SelectModule4";
 import ReactPlayer from "react-player";
 import { getSeason } from "../../../../store/actions/courseActions";
+import ModalMaterials from "../../Module4/Modal/ModalMaterials";
 
 const Modal = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([])
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
+  const [material, setMaterial] = useState(false);
 
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons)
@@ -52,6 +54,9 @@ const Modal = ({ show, setShow, course, user }: any) => {
     getSeason(course.id).then((res) => {
       setSeasons(res);
     })
+  }
+  const handleShow = () => {
+    setMaterial(true);
   }
 
   const goTo = () => {
@@ -164,12 +169,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
                 x
               </Cross>
               <TextContainer>
-                <Title>
-                  Curso de {course.courseTittle}
-                </Title>
-                {/* <SubTitle>
-                  Descubre un nuevo método para tus uñas este San Valentín
-                </SubTitle> */}
                 <ButtonContain>
                   <PurpleButton onClick={goTo}>
                     Reproducir
@@ -183,14 +182,27 @@ const Modal = ({ show, setShow, course, user }: any) => {
           <CourseContain>
             <AboutContain>
               <Titles>
-                Sobre el curso:
+                Título del curso:
+              </Titles>
+              <Text>
+                {course.courseTittle}
+              </Text>
+              <Titles>
+                Objetivos:
               </Titles>
               <Text>
                 {course.courseAbout}
               </Text>
+              <Titles>
+                Descripción:
+              </Titles>
+              <Text>
+                {course.coursePhrase}
+              </Text>
+              <button onClick={handleShow}>Materiales</button>
             </AboutContain>
             <Datacontain>
-              <Data>Profesor(es):
+              <Data>Instructor(es):
                 <DataSpan>
                   {course.courseProfessor?.name}
                 </DataSpan>
@@ -202,12 +214,12 @@ const Modal = ({ show, setShow, course, user }: any) => {
                 </DataSpan>
               </Data>
               <Data>
-                Temporadas:
+                Módulos:
                 {course.seasons?.length == 1 && <DataSpan>
-                  1 temporada
+                  1 módulo
                 </DataSpan>}
                 {course.seasons?.length > 1 && <DataSpan>
-                  {course.seasons?.length} temporadas
+                  {course.seasons?.length} módulos
                 </DataSpan>}
               </Data>
               <Data>
@@ -252,6 +264,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
           </LessonContain>
         </ModalCont>
       </ModalMod>
+      <ModalMaterials show={material} setShow={setMaterial} materials={course.courseMaterial}></ModalMaterials>
     </ModalContain>
   )
 }
