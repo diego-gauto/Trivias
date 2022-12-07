@@ -82,7 +82,7 @@ export const AllCourses = ({
               </Column>
               <Column>
                 <Info>
-                  <Label>Profesor(es)</Label>
+                  <Label>Instructor(es)</Label>
                   <Text> {course.courseProfessor.name} </Text>
                 </Info>
                 <Info>

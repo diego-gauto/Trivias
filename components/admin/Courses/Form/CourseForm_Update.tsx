@@ -316,7 +316,7 @@ const CourseForm = (props: ICourseForm_Update) => {
             />
           </InputContain>
           <InputContain>
-            <Label>Profesor(es)</Label>
+            <Label>Instructor(es)</Label>
             <IconContain>
 
               <SelectContain key={1}>

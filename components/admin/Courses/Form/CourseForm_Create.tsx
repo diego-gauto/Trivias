@@ -324,7 +324,7 @@ const CourseForm_Create = () => {
             />
           </InputContain>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Profesor(es)</Label>
+            <Label>Instructor(es)</Label>
             <IconContain>
 
               <SelectContain key={1}>

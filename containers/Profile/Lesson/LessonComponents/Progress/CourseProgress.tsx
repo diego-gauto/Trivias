@@ -25,7 +25,7 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
         {title}
       </TitleCourse>
       <Subtitle>
-        Temporada {parseInt(season) + 1}: Lección {parseInt(lesson) + 1}
+        Módulo {parseInt(season) + 1}: Lección {parseInt(lesson) + 1}
       </Subtitle>
       <ProgressContain>
         <ProgressBar2 />
@@ -37,7 +37,7 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
             {Math.ceil((totalViewed * 100) / course?.seasons[season]?.lessons.length)}%
           </SeasonText>
           <SeasonSpan>
-            temporada completada
+            módulo completado
           </SeasonSpan>
         </ContainText>
         {/* <ContainText>

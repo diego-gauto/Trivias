@@ -203,7 +203,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               <button onClick={handleShow}>Materiales</button>
             </AboutContain>
             <Datacontain>
-              <Data>Profesor(es):
+              <Data>Instructor(es):
                 <DataSpan>
                   {course.courseProfessor?.name}
                 </DataSpan>
@@ -215,12 +215,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 </DataSpan>
               </Data>
               <Data>
-                Temporadas:
+                Módulos:
                 {course.seasons?.length == 1 && <DataSpan>
-                  1 temporada
+                  1 módulo
                 </DataSpan>}
                 {course.seasons?.length > 1 && <DataSpan>
-                  {course.seasons?.length} temporadas
+                  {course.seasons?.length} módulos
                 </DataSpan>}
               </Data>
               <Data>

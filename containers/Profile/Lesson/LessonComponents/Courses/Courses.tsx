@@ -41,7 +41,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }}>
               <Title>
-                Temporada {index + 1}
+                Módulo {index + 1}
                 <UploadIcon active={selected[index]} />
               </Title>
               <Episode>
