@@ -16,7 +16,8 @@
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0",
     "papaparse": "^5.3.2",
-    "stripe": "^10.7.0"
+    "stripe": "^10.7.0",
+    "activecampaign": "^1.2.5"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
