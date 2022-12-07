@@ -7,6 +7,9 @@ import { getWholeCourse, updateProgressStatus } from '../../../../store/actions/
 import { addReview, getUserScore } from '../../../../store/actions/UserActions';
 import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, InputContain, ButtonContain, SafeContained } from './HomeWorkModal.styled';
 
+
+import { SendSingleEmail } from "../../../../store/actions/EmailActions";
+
 interface props {
   show: boolean,
   setShow: any,
@@ -42,9 +45,23 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       })
     }
     const docRef = doc(db, 'homeworks', data.id);
-    await updateDoc(docRef, {
-      status: true,
-      aproved: tempAproved
+    /*  await updateDoc(docRef, {
+       status: true,
+       aproved: tempAproved
+     }) */
+
+    let emailData = {
+
+      text: "hello",
+      text2: 2,
+
+    };
+
+    await SendSingleEmail(
+      emailData
+
+    ).then((e) => {
+      console.log(e)
     })
     handleClick();
     setValue(0);
