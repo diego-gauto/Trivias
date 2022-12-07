@@ -105,17 +105,17 @@ export const MoreText = styled.div`
 
   bottom: -7%;
   @media only screen and (max-width: 1980px) {
-    bottom: 15%;
+    bottom: 5%;
   }
 
   @media only screen and (max-width: 1440px) {
     font-size: 18px;
-    bottom: 25%;
+    bottom: 17.5%;
   }
 
   @media only screen and (max-width: 1030px) {
     font-size: 14px;
-    bottom: 30%;
+    bottom: 26.5%;
   }
 
   text-align: right;

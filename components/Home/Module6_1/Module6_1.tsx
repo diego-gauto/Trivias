@@ -275,7 +275,6 @@ export const Module6_1 = (props: IModule6_1) => {
             <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1Mobile>
             <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1Mobile>
           </FooterBIconsMobile>
-          <Footer />
         </ContainerMainMobile >
 
         <ContainerMain2Mobile  ></ContainerMain2Mobile>
