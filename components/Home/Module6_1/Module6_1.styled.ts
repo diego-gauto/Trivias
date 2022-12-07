@@ -8,10 +8,13 @@ export const SliderContainer = styled.div`
 export const GeneralContainer = styled(Container)`
   padding: 0;
   display: block;
+  @media only screen and (max-width: 1028px) {
+    display: none;
+  }
 `;
 
 export const People = styled.div`
-  background-size: 100%;
+  background-size: 100vw;
   height: 100%;
   background-repeat: no-repeat;
   width: 100%;
@@ -100,7 +103,7 @@ export const MoreText = styled.div`
   z-index: 1;
   right: 8%;
 
-  bottom: 5%;
+  bottom: -7%;
   @media only screen and (max-width: 1980px) {
     bottom: 15%;
   }
@@ -166,26 +169,26 @@ export const FooterAText = styled.div`
   left: 5%;
 
   font-size: 20px;
-  bottom: -27.5%;
+  bottom: -42%;
   @media only screen and (max-width: 1980px) {
-    bottom: -15%;
+    bottom: -20%;
   }
   @media only screen and (max-width: 1720px) {
-    bottom: -8%;
+    bottom: -13%;
   }
   @media only screen and (max-width: 1600px) {
-    bottom: -5%;
+    bottom: -9%;
   }
   @media only screen and (max-width: 1440px) {
     font-size: 15px;
-    bottom: 5%;
+    bottom: 0%;
   }
   @media only screen and (max-width: 1280px) {
-    bottom: 10%;
+    bottom: 5%;
   }
   @media only screen and (max-width: 1030px) {
     font-size: 12px;
-    bottom: 18.5%;
+    bottom: 14.5%;
   }
 
   text-align: left;
@@ -270,24 +273,24 @@ export const FooterAIcons = styled.div`
   z-index: 1;
   right: 5%;
 
-  bottom: -27.5%;
+  bottom: -42%;
   @media only screen and (max-width: 1980px) {
-    bottom: -15%;
+    bottom: -20%;
   }
   @media only screen and (max-width: 1720px) {
-    bottom: -8%;
+    bottom: -13.5%;
   }
   @media only screen and (max-width: 1600px) {
-    bottom: -5%;
+    bottom: -10%;
   }
   @media only screen and (max-width: 1440px) {
-    bottom: -2%;
+    bottom: -7%;
   }
   @media only screen and (max-width: 1280px) {
-    bottom: 2%;
+    bottom: -3.5%;
   }
   @media only screen and (max-width: 1030px) {
-    bottom: 8%;
+    bottom: 3.25%;
   }
 
   text-align: left;
@@ -324,24 +327,24 @@ export const FooterBIcons = styled.div`
   z-index: 1;
   right: 10%;
 
-  bottom: -27.5%;
+  bottom: -42%;
   @media only screen and (max-width: 1980px) {
-    bottom: -15%;
+    bottom: -20%;
   }
   @media only screen and (max-width: 1720px) {
-    bottom: -8%;
+    bottom: -13.5%;
   }
   @media only screen and (max-width: 1600px) {
-    bottom: -5%;
+    bottom: -10%;
   }
   @media only screen and (max-width: 1440px) {
-    bottom: -2%;
+    bottom: -7%;
   }
   @media only screen and (max-width: 1280px) {
-    bottom: 2%;
+    bottom: -3.5%;
   }
   @media only screen and (max-width: 1030px) {
-    bottom: 8%;
+    bottom: 3.25%;
   }
 
   text-align: left;
@@ -382,8 +385,8 @@ export const ContainerMain = styled.div`
   width: 100%;
   z-index: 2;
   position: absolute;
-  height: 1400px;
-  margin-top: 2.5%;
+  height: 1312px;
+  margin-top: 0;
   margin-bottom: 6.5%;
 `;
 export const ContainerMain2 = styled.div`
@@ -439,11 +442,9 @@ export const Line = styled.div`
   background-color: #dbd0e5;
   position: absolute;
   width: 2.5px;
-  height: 100px;
-  top: 50%;
-  transition: 2s ease all;
-  transform: translateY(-50%);
-  right: 0px;
+  height: 145px;
+  top: 20%;
+  right: 1%;
 `;
 export const LeftFooterContent = styled.div`
   width: 25%;
