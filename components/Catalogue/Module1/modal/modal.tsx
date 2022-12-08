@@ -39,6 +39,7 @@ import SelectModule4 from "../../Module4/Modal/SelectModule4";
 import ReactPlayer from "react-player";
 import { getSeason } from "../../../../store/actions/courseActions";
 import ModalMaterials from "../../Module4/Modal/ModalMaterials";
+import { useMediaQuery } from "react-responsive";
 
 const Modal = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
@@ -46,6 +47,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
   const [material, setMaterial] = useState(false);
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons)
@@ -188,18 +190,18 @@ const Modal = ({ show, setShow, course, user }: any) => {
                 {course.courseTittle}
               </Text>
               <Titles>
-                Objetivos:
-              </Titles>
-              <Text>
-                {course.courseAbout}
-              </Text>
-              <Titles>
                 Descripción:
               </Titles>
               <Text>
                 {course.coursePhrase}
               </Text>
-              <button onClick={handleShow}>Materiales</button>
+              <Titles>
+                Objetivos:
+              </Titles>
+              <Text>
+                {course.courseAbout}
+              </Text>
+              {!responsive1023 && <button onClick={handleShow}>Materiales</button>}
             </AboutContain>
             <Datacontain>
               <Data>Instructor(es):
@@ -228,6 +230,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
                   {hms(course.totalDuration)}
                 </DataSpan>
               </Data>
+              {responsive1023 && <button onClick={handleShow}>Materiales</button>}
             </Datacontain>
           </CourseContain>
           <LessonContain>

@@ -70,7 +70,7 @@ export const AllCourses = ({
                   <Text>{course.courseSubtittle} </Text>
                 </Info>
                 <Info>
-                  <Label>Sobre el Curso</Label>
+                  <Label>Objetivos</Label>
                   <Text>
                     {course.courseAbout}
                   </Text>

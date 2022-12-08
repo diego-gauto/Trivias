@@ -209,6 +209,20 @@ export const Datacontain = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
+  button {
+    padding: 5px;
+    border: none;
+    margin-top: 10px;
+    width: fit-content;
+    border-radius: 10px;
+    background: #a733e4;
+    color: white;
+    transition: 0.5s ease all;
+    &:hover {
+      transition: 0.5s ease all;
+      transform: scale(1.1);
+    }
+  }
   @media (max-width: 991px) {
     width: 100%;
   }

@@ -556,7 +556,7 @@ const CourseForm_Create = () => {
         {/* LINEA 4 */}
         <InputForm>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Sobre el Curso</Label>
+            <Label>Objetivos</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, 
           consectetur adipiscing elit. Nisi, sem rutrum 

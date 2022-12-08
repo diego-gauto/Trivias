@@ -588,7 +588,7 @@ const CourseForm = (props: ICourseForm_Update) => {
         {/* LINEA 4 */}
         <InputForm>
           <InputContain>
-            <Label>Sobre el Curso</Label>
+            <Label>Objetivos</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, 
           consectetur adipiscing elit. Nisi, sem rutrum 
