@@ -29,6 +29,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
     })
   }
   const updateStatus = async () => {
+
     let tempAproved = review.aproved
     if (value == 1) {
       tempAproved = true;
@@ -45,26 +46,30 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       })
     }
     const docRef = doc(db, 'homeworks', data.id);
-    /*  await updateDoc(docRef, {
-       status: true,
-       aproved: tempAproved
-     }) */
-
-    let emailData = {
-
-      text: "hello",
-      text2: 2,
-
-    };
-
-    await SendSingleEmail(
-      emailData
-
-    ).then((e) => {
-      console.log(e)
+    await updateDoc(docRef, {
+      status: true,
+      aproved: tempAproved
     })
+
+
     handleClick();
     setValue(0);
+
+    /*  let emailData = {
+ 
+       text: "hello",
+       text2: 2,
+ 
+     };
+ 
+     await SendSingleEmail(
+       emailData
+ 
+     ).then((e) => {
+       console.log(e)
+     }) */
+
+
   }
   const getUser = () => {
     getUserScore(data.userId).then((res: any) => {

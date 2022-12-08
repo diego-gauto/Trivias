@@ -32,17 +32,25 @@ export const SendSingleEmail = async (
   const data = {
     text: emailData.text,
     text2: emailData.text2,
+    accessToken: "",
   }
 
 
   const firebaseFunction = httpsCallable(functions, 'ActiveCampaign_Send');
-  const a = await firebaseFunction(data).then(async (res: any) => {
-    console.log(res["data"])
-    return res
+  const getAccessOAuth2Token = httpsCallable(functions, 'GetAccessToken');
+
+  return await getAccessOAuth2Token().then(async (e: any) => {
+    data.accessToken = e.data.token
+    console.log(e.data.token)
+    return await firebaseFunction(data).then(async (e: any) => {
+
+      console.log(e)
+      return e
+    })
+
+
   }).catch((error: any) => {
     console.log(error)
   })
-  return a;
-
 
 }
