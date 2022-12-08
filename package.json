@@ -43,7 +43,7 @@
     "slick-carousel": "^1.8.1",
     "stripe": "^10.0.0",
     "styled-components": "^5.3.3",
-    "swiper": "^8.3.1",
+    "swiper": "^8.4.5",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },

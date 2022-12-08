@@ -55,9 +55,7 @@ export const Module5_1 = (props: IModule5_1) => {
     swiperRef.current = swiper;
   };
   const onMouseEnter = () => {
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.stop();
-    }
+    swiperRef?.current?.autoplay.stop();
   };
   const onMouseLeave = () => {
     if (swiperRef.current) {
@@ -68,6 +66,8 @@ export const Module5_1 = (props: IModule5_1) => {
     loop: true,
     autoplay: {
       delay: 0,
+      waitForTransition: false,
+      pauseOnMouseEnter: true
     },
     speed: 4000,
     freeMode: true,
@@ -91,7 +91,14 @@ export const Module5_1 = (props: IModule5_1) => {
 
   const sliderData = slideDataArr?.map((element, index) => {
     return (
-      <SwiperSlide key={element.username + "_ID"}>
+      <SwiperSlide id={"slide" + index} key={element.username + "_ID"} onMouseEnter={(e) => {
+        // onMouseEnter();
+      }}
+        onMouseLeave={onMouseLeave}
+      // onPointerEnter={() => {
+      //   console.log(document.getElementById("slide" + index));
+      // }}
+      >
         <SliderItemLink >
           <SlideModule_1
             index={index}
@@ -121,8 +128,7 @@ export const Module5_1 = (props: IModule5_1) => {
               <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
             </SliderSectionTitle>
-            <div onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}>
+            <div>
               <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
                 {sliderData}
               </Swiper>

@@ -11,6 +11,7 @@ import {
   Text04,
   CompraRapida,
 } from "./SlideModule_2.styled";
+import { Line } from "../Module6_1.styled";
 
 export const SlideModule_1 = (props: ISlideModule_2) => {
 
@@ -41,43 +42,35 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
 
 
   return (
-    <GeneralContainer>
-      <ContainerMain id="shop-container">
-        <Col>
-          <Row>
-            <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
-              {
-                isNew ?
-                  <NewTag>
-                    <TextNew>Nuevo</TextNew>
-                  </NewTag>
-                  : <></>
-              }
-              {
-                compraRapida ?
-                  <CompraRapida>Compra rápida</CompraRapida>
-                  : <></>
-              }
-            </SlideImg>
-            <UserDataContainer>
+    <ContainerMain id="shop-container">
+      <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
+        {
+          isNew ?
+            <NewTag>
+              <TextNew>Nuevo</TextNew>
+            </NewTag>
+            : <></>
+        }
+        {
+          compraRapida ?
+            <CompraRapida>Compra rápida</CompraRapida>
+            : <></>
+        }
+        <Line></Line>
+      </SlideImg>
+      <UserDataContainer>
 
-              <Text02>{title} </Text02>
-              {
-                disponible ? <>
-                  <Text01   >$ {precio} </Text01> <Text03   >{currency} </Text03>
-                </>
-                  :
-                  <>
-                    <Text04   >Agotado</Text04>
-                  </>
-              }
-
-
-            </UserDataContainer>
-          </Row>
-
-        </Col>
-      </ContainerMain >
-    </GeneralContainer >
+        <Text02>{title} </Text02>
+        {
+          disponible ? <>
+            <Text01   >$ {precio} </Text01> <Text03   >{currency} </Text03>
+          </>
+            :
+            <>
+              <Text04   >Agotado</Text04>
+            </>
+        }
+      </UserDataContainer>
+    </ContainerMain >
   )
 }

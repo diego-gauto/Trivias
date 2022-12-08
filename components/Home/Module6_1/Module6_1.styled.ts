@@ -439,9 +439,11 @@ export const Line = styled.div`
   background-color: #dbd0e5;
   position: absolute;
   width: 2.5px;
-  height: 145px;
-  top: 20%;
-  right: 1%;
+  height: 100px;
+  top: 50%;
+  transition: 2s ease all;
+  transform: translateY(-50%);
+  right: 0px;
 `;
 export const LeftFooterContent = styled.div`
   width: 25%;
@@ -535,7 +537,6 @@ export const SliderSectionTitle = styled.p`
   @media only screen and (max-width: 1024px) {
     font-size: 28px;
     margin-bottom: 25px;
-    max-width: 250px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;

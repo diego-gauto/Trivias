@@ -46,12 +46,7 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
 
 
   return (
-    <GeneralContainer onMouseOver={(e) => {
-
-      console.log(document.getElementById("general" + index)?.offsetLeft)
-    }} onMouseLeave={() => {
-      console.log(2)
-    }}>
+    <GeneralContainer >
       <DisabledMask>
       </DisabledMask>
       <ContainerMain id={"general" + index}>

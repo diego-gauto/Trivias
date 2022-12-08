@@ -110,11 +110,13 @@ export const ContainerMain = styled.div`
   transition: all 0.2s ease-in-out;
   width: 100%;
   border-radius: 50px;
+  z-index: 2;
   .row {
     width: 100%;
     margin: 0;
   }
   &:hover {
+    z-index: 1;
     transform: scale(1.1);
   }
   &:active {

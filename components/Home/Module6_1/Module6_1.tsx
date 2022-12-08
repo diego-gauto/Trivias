@@ -102,18 +102,18 @@ export const Module6_1 = (props: IModule6_1) => {
     }
   };
   const onMouseLeave = () => {
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.start();
-    }
+    // if (swiperRef.current) {
+    //   swiperRef.current.autoplay.start();
+    // }
   };
   const settings = {
     loop: true,
-    autoplay: {
-      delay: 0,
-    },
+    // autoplay: {
+    //   delay: 0,
+    // },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 2,
+    slidesPerView: 1,
     spaceBetween: 20,
     breakpoints: {
 
@@ -123,6 +123,10 @@ export const Module6_1 = (props: IModule6_1) => {
       },
       1280: {
         slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      450: {
+        slidesPerView: 20,
         spaceBetween: 20,
       }
     }
@@ -145,8 +149,6 @@ export const Module6_1 = (props: IModule6_1) => {
               imgURL={downloadFileWithStoragePath(element.imgURL)}
             />
           </SliderItemLink>
-
-          <Line id="line"></Line>
         </SwiperSlide>
 
       </>
@@ -169,7 +171,7 @@ export const Module6_1 = (props: IModule6_1) => {
             </SliderSectionTitle>
             <div onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}>
-              <Swiper  {...settings} onInit={onInit}>
+              <Swiper  {...settings} onInit={onInit} style={{ paddingBottom: "50px" }}>
                 {sliderData}
               </Swiper>
             </div>
