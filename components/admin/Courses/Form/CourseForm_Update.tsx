@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { updateCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getMaterial, getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getMaterial, getTeacher, getUsers } from "../../../../store/actions/courseActions";
 import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
@@ -32,6 +32,7 @@ import {
   SelectContain,
   OptionCat,
   OptionMat,
+  OptionProfessor,
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
@@ -118,6 +119,8 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [categories, setCategories] = useState<any>([]);
   const [name, setName] = useState(courseProfessor.name);
   const [value, setValue] = useState<any>({})
+  const [professors, setProfessors] = useState<any>([]);
+  const [professor, setProfessor] = useState<any>([]);
   const [homeWork, setHomeWork] = useState(courseHomeWork);
   const [free, setFree] = useState(courseType === "Producto" ? 1 : 0)
   const [value2, setValue2] = useState<any>([])
@@ -158,6 +161,20 @@ const CourseForm = (props: ICourseForm_Update) => {
     }
     setMaterial([...tempMaterial])
   }
+  // const addProfessors = ({val,id}:any, index: any) => {
+  //   let tempProfessor = professor
+  //   let tempIndex = 0;
+  //   if (tempProfessor.includes(val)) {
+  //     tempIndex = tempProfessor.findIndex((x: any) =>
+  //       x == val
+  //     )
+  //     tempProfessor.splice(tempIndex, 1);
+  //   }
+  //   else {
+  //     tempProfessor.push(val)
+  //   }
+  //   setProfessor([...tempProfessor])
+  // }
   useEffect(() => {
     setMaterial(courseMaterial)
     setValue2(courseCategory)
@@ -166,9 +183,9 @@ const CourseForm = (props: ICourseForm_Update) => {
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
     setIsUpdating(true);
-    var professor = ""
-    if (value !== undefined && value !== null) {
-      professor = value
+    var professors = ""
+    if (professor !== undefined && professor !== null) {
+      professors = professor
     }
     var category = ""
     if (value2 !== undefined && value2 !== null) {
@@ -195,7 +212,7 @@ const CourseForm = (props: ICourseForm_Update) => {
         reference: reference,
         coursePath: image,
         coursePrice: formData.coursePrice,
-        courseProfessor: professor,
+        courseProfessor: professors,
         courseCategory: category,
         courseDifficulty: difficultyLevel,
         courseType: type,
@@ -221,9 +238,9 @@ const CourseForm = (props: ICourseForm_Update) => {
     };
   }
   const getProffessors = () => {
-    getUsers().then((res) => {
-      res = res.filter((user: any, index: any) => user.role == "admin")
-      setUserData(res);
+    getTeacher().then((res) => {
+      setProfessors(res);
+      return res;
     })
   }
   const getAllCategories = () => {
@@ -328,23 +345,24 @@ const CourseForm = (props: ICourseForm_Update) => {
                   openProfessor == true &&
                   <OptionContain>
                     {
-                      userData.map((val: any, index: any) => {
+                      professors.map((val: any, index: any) => {
                         return (
-                          <Option
-                            key={"SelectProfessor" + index}
+                          <OptionProfessor
+                            professor={val.name}
+                            marked={professor}
+                            key={"SelectProfessor " + index}
                             onClick={() => {
                               setName(val.name);
-                              setValue({ id: val.id, name: val.name });
-                              setOpenProfessor(false)
+                              setProfessor({ id: val.id, name: val.name });
                             }}>
                             <input
                               type="radio"
-                              id="Temporada1"
-                              name="category"
-                              value="Temporada 1"
+                              id="professor"
+                              name="professor"
+                              value="professor"
                             />
                             <Label2>{val.name}</Label2>
-                          </Option>
+                          </OptionProfessor>
                         )
                       })
                     }

@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getMaterial, getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getMaterial, getTeacher, getUsers } from "../../../../store/actions/courseActions";
 import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { CourseName } from "../AllCourses.styled";
 import {
@@ -33,6 +33,7 @@ import {
   Selected,
   SelectContain,
   OptionCat,
+  OptionProfessor,
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
@@ -103,7 +104,8 @@ const CourseForm_Create = () => {
   const [homeWork, setHomeWork] = useState(false);
   const [free, setFree] = useState(0)
   const [value, setValue] = useState<any>({});
-  const [userData, setUserData] = useState<any>([]);
+  const [professors, setProfessors] = useState<any>([]);
+  const [professor, setProfessor] = useState<any>([]);
   const [value2, setValue2] = useState<any>([]);
   const [material, setMaterial] = useState<any>([]);
   const [materials, setMaterials] = useState<any>([]);
@@ -142,12 +144,26 @@ const CourseForm_Create = () => {
     }
     setMaterial([...tempMaterial])
   }
+  // const addProfessors = ({val,id}:any, index: any) => {
+  //   let tempProfessor = professor
+  //   let tempIndex = 0;
+  //   if (tempProfessor.includes(val)) {
+  //     tempIndex = tempProfessor.findIndex((x: any) =>
+  //       x == val
+  //     )
+  //     tempProfessor.splice(tempIndex, 1);
+  //   }
+  //   else {
+  //     tempProfessor.push(val)
+  //   }
+  //   setProfessor([...tempProfessor])
+  // }
   const onSubmit: SubmitHandler<FormValues> = formData => {
 
     setCreatingNewCourse(true)
-    var professor = ""
-    if (value !== undefined && value !== null) {
-      professor = value
+    var professors = ""
+    if (professor !== undefined && professor !== null) {
+      professors = professor
     }
     var category = ""
     if (value2 !== undefined && value2 !== null) {
@@ -179,7 +195,7 @@ const CourseForm_Create = () => {
         coursePath: image,
         courseAbout: formData.courseAbout,
         coursePrice: formData.coursePrice * free + 0,
-        courseProfessor: professor,
+        courseProfessor: professors,
         courseCategory: category,
         courseDifficulty: difficultyLevel,
         courseType: type,
@@ -210,9 +226,9 @@ const CourseForm_Create = () => {
     };
   }
   const getProffessors = () => {
-    getUsers().then((res) => {
-      res = res.filter((user: any, index: any) => user.role == "admin")
-      setUserData(res);
+    getTeacher().then((res) => {
+      setProfessors(res);
+      return res;
     })
   }
   const getAllCategories = () => {
@@ -336,23 +352,24 @@ const CourseForm_Create = () => {
                   openProfessor == true &&
                   <OptionContain>
                     {
-                      userData.map((val: any, index: any) => {
+                      professors.map((val: any, index: any) => {
                         return (
-                          <Option
+                          <OptionProfessor
+                            professor={val.name}
+                            marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
                               setName(val.name);
-                              setValue({ id: val.id, name: val.name });
-                              setOpenProfessor(false)
+                              setProfessor({ id: val.id, name: val.name });
                             }}>
                             <input
                               type="radio"
-                              id="Temporada1"
-                              name="category"
-                              value="Temporada 1"
+                              id="professor"
+                              name="professor"
+                              value="professor"
                             />
                             <Label2>{val.name}</Label2>
-                          </Option>
+                          </OptionProfessor>
                         )
                       })
                     }

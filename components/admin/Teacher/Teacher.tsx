@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addMaterial, deleteMaterial, getMaterial, updateMaterial } from '../../../store/actions/courseActions';
+import { addTeacher, deleteTeacher, getTeacher, updateTeacher } from '../../../store/actions/courseActions';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import Delete from '../Courses/Form/Delete/Delete';
@@ -12,100 +12,111 @@ import {
   FormContain, Input, InputContain, Label,
   Title, TitleContain
 } from '../Category/Category.styled';
+import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 
 
-const Materials = () => {
-  const [newMaterial, setNewMaterial] = useState<boolean>(false);
+const Teacher = () => {
+  const [newTeacher, setNewTeacher] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [edit, setEdit] = useState<number>();
-  const [materials, setMaterials] = useState<any>([]);
-  const [material, setMaterial] = useState<any>({
+  const [teachers, setTeachers] = useState<any>([]);
+  const [teacher, setTeacher] = useState<any>({
     name: ""
   });
-  const createMaterial = () => {
-    if (Object.keys(material).some(key => material[key] === '')) {
+  const createTeacher = () => {
+    setLoading(true);
+    if (Object.keys(teacher).some(key => teacher[key] === '')) {
       alert("Complete todos los campos")
+      setLoading(false);
     }
     else {
-      addMaterial(material).then((res) => {
-        alert("Material agregado con Exito")
-        getAllMaterials();
+      addTeacher(teacher).then((res) => {
+        alert("Profesor agregado con Exito")
+        getAllteachers();
+        setLoading(false);
       })
     }
   }
-  const getAllMaterials = () => {
-    getMaterial().then((res) => {
-      setMaterials(res);
+  const getAllteachers = () => {
+    getTeacher().then((res) => {
+      setTeachers(res);
       return res;
     })
   }
   const Delete = (val: any) => {
-    if (window.confirm("Desea borrar este Material: " + val.name)) {
-      deleteMaterial(val).then(() => {
-        getAllMaterials();
+    if (window.confirm("Desea borrar este Profesor: " + val.name)) {
+      deleteTeacher(val).then(() => {
+        getAllteachers();
         // alert("Categoría: " + val.name + " eliminada con éxito")
       })
     }
   }
   const update = (val: any) => {
     console.log(val)
-    updateMaterial(val, val.id).then(() => {
-      alert("Material actualizado")
-      getAllMaterials();
+    updateTeacher(val, val.id).then(() => {
+      alert("Profesor actualizado")
+      getAllteachers();
     })
   }
   useEffect(() => {
-    getAllMaterials();
+    getAllteachers();
   }, [])
   return (
     <AdminContain>
       <SideBar />
       <CourseFormContain>
         <CategoryContain >
-          <TitleContain onClick={() => { setNewMaterial(!newMaterial) }}>
+          <TitleContain onClick={() => { setNewTeacher(!newTeacher) }}>
             <Title >
-              Crear Material
+              Crear Profesor
             </Title>
             {
-              !newMaterial &&
+              !newTeacher &&
               <ButtonNewCourse>+</ButtonNewCourse>
             }
             {
-              newMaterial &&
+              newTeacher &&
               <ButtonNewCourse onClick={(e) => {
-                setNewMaterial(false)
+                setNewTeacher(false)
               }}>-</ButtonNewCourse>
             }
           </TitleContain>
           {
-            newMaterial &&
+            newTeacher &&
             <FormContain>
               <InputContain>
-                <Label>Nombre del Material</Label>
+                <Label>Nombre del Profesor</Label>
                 <Input
-                  placeholder="Material"
+                  placeholder="Nombre del profesor"
                   onChange={(e: any) => {
-                    setMaterial({ ...material, name: e.target.value })
+                    setTeacher({ ...teacher, name: e.target.value })
                   }}
                 />
               </InputContain>
               <ButtonContain>
-                <Button
-                  onClick={() => {
-                    createMaterial();
-                  }}
-                >Guardar</Button>
+                {
+                  !loading ?
+                    <Button
+                      onClick={() => {
+                        createTeacher();
+                      }}
+                    >Guardar</Button>
+                    :
+                    <LoaderContain />
+                }
+
               </ButtonContain>
             </FormContain>
           }
         </CategoryContain>
         <CategoryContain>
           <Title>
-            Materiales
+            Profesores
           </Title>
-          {materials !== null
+          {teachers !== null
             ? <>
               {
-                materials.map((val: any, i: any) => {
+                teachers.map((val: any, i: any) => {
                   return (
                     <CatContain key={"Categorias " + i}>
                       <EditCat>
@@ -120,7 +131,7 @@ const Materials = () => {
                               <Input
                                 placeholder={"Editar nombre de: " + val.name}
                                 onChange={(e: any) => {
-                                  materials[i].name = e.target.value
+                                  teachers[i].name = e.target.value
                                 }}
                               />
                             </InputContain>
@@ -130,6 +141,8 @@ const Materials = () => {
                                   update(val);
                                 }}
                               >Editar</Button>
+
+
                             </ButtonContain>
                           </FormContain>
                         }
@@ -146,7 +159,7 @@ const Materials = () => {
               }
             </>
             :
-            <> Sin Materiales...
+            <> Sin Profesores...
             </>
           }
         </CategoryContain>
@@ -154,4 +167,4 @@ const Materials = () => {
     </AdminContain>
   )
 }
-export default Materials;
+export default Teacher;

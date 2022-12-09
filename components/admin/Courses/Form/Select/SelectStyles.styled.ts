@@ -74,6 +74,38 @@ export const OptionCat = styled.div<{ category: string; marked: string }>`
       }
     `}
 `;
+export const OptionProfessor = styled.div<{
+  professor: string;
+  marked: string;
+}>`
+  &:hover {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    color: white;
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+  }
+  input {
+    &[type="radio"] {
+      display: none;
+    }
+  }
+  ${(props) =>
+    props.marked.includes(props.professor) &&
+    css`
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      color: white;
+      &:first-child {
+        border-radius: 10px 10px 0 0;
+      }
+      &:last-child {
+        border-radius: 0 0 8px 8px;
+      }
+    `}
+`;
 export const OptionMat = styled.div<{ material: string; marked: string }>`
   &:hover {
     background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);

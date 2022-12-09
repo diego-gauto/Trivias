@@ -84,7 +84,10 @@ const SideBar = () => {
             <Text>Assignments</Text>
           </Link><Link href="/admin/HomeWork">
             <Text>Homeworks</Text>
+          </Link><Link href="/admin/Teacher">
+            <Text>Professors</Text>
           </Link>
+
 
         </>
       }

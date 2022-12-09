@@ -408,3 +408,32 @@ export const updateMaterial = async (material: any, id: any) => {
   })
   return 'exito'
 }
+// "CREAR PROFESOR"
+export const addTeacher = async (professor: any) => {
+  const docRef = await addDoc(
+    collection(db, "professor"),
+    {
+      ...professor
+    }
+  );
+  return 'exito'
+}
+export const getTeacher = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "professor"), orderBy("name", "asc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
+export const deleteTeacher = async (professor: any) => {
+  await deleteDoc(doc(db, "professor", professor.id));
+}
+export const updateTeacher = async (professor: any, id: any) => {
+  const docRef = doc(db, 'professor', id);
+  await updateDoc(docRef, {
+    name: professor.name
+  })
+  return 'exito'
+}
