@@ -4,7 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
-/functions
+/functions/*
+!/functions/package.json
+!/functions/package-lock.json
+!functions/*.js
 
 # testing
 /coverage
