@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { onSnapshot, DocumentData } from "firebase/firestore";
 import Link from "next/link";
-
 import { db } from "../../../../firebase/firebaseConfig";
 import { MainContainer } from "../AllCourses.styled";
 import { AllLessons } from "./AllLessons";
@@ -31,6 +30,7 @@ interface IAllSeasons {
   seasonID: string,
   setSeasonEditModalData: Function,
   name: string,
+  change: boolean
 }
 interface AllLessonsProps {
   lessonTitle: string,
@@ -40,6 +40,7 @@ interface AllLessonsProps {
 }
 
 export const AllSeasons = ({
+  change,
   documentID,
   index,
   courseID,
@@ -71,17 +72,17 @@ export const AllSeasons = ({
       return false
     }
   }
+
   useEffect(() => {
     getSeasonID()
-  }, [])
-
+  }, [change])
   const onSeasonEditClick = () => {
     setSeasonEditModalData({ seasonID: documentID, currentName: name });
   };
 
 
   return (
-    <><MainContainer>
+    <><MainContainer id={"target" + index} >
       <SeasonContain onClick={() => { setOpenSeason(!openSeason); getSeasonID() }}>
         <TitleContain>
           <TitleEdit>

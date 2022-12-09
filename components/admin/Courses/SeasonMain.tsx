@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { collection, doc, onSnapshot, orderBy, DocumentData } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import { db } from "../../../firebase/firebaseConfig";
 import SideBar from "../SideBar";
@@ -23,6 +24,7 @@ import { AllSeasons } from "./Form/AllSeasons";
 import CourseForm_Update from "./Form/CourseForm_Update";
 import { LessonContain, LessonTitle, NewSeason, NewSeasonContain } from "./Form/Lessons.styled";
 import SeasonEditModal from "./Form/SeasonEditModal";
+import { editSeasonIndex } from "../../../store/actions/AdminActions";
 
 interface ISeasonEditModalData {
   seasonID: string;
@@ -33,6 +35,7 @@ const SeasonsMain = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseData, setCoursesData] = useState<any>(null);
   const [seasons, setSeasons] = useState<any>(null);
+  const [change, setChange] = useState<any>(false);
   const [seasonEditModalData, setSeasonEditModalData] = useState<ISeasonEditModalData>();
   const router = useRouter()
   const { type, id } = router.query;
@@ -119,6 +122,21 @@ const SeasonsMain = () => {
       setIsLoading(false)
     }
   }, [courseData])
+
+  const onDragEnd = ({ destination, source }: any) => {
+    // dropped outside the list
+    if (!destination) return;
+    const result = seasons;
+    const [removed] = result.splice(source.index, 1);
+    result.splice(destination.index, 0, removed);
+    result.forEach((element: any, index: number) => {
+      editSeasonIndex(courseID, element.documentID, index + 1)
+    });
+
+    setSeasons(result);
+    setChange(!change);
+  };
+
   return (
     <>
       {!isLoading ? (
@@ -178,19 +196,44 @@ const SeasonsMain = () => {
               <LessonTitle>Lista de Lecciones</LessonTitle>
               {seasons !== null
                 ? <>
-                  {
-                    seasons.map((e: any, i: any) => (
-                      <AllSeasons
-                        setSeasonEditModalData={setSeasonEditModalData}
-                        key={"adminSeasons" + i}
-                        documentID={e.documentID}
-                        index={e.season}
-                        courseID={courseID}
-                        seasonID={seasons}
-                        name={e.name || `Temporada ${e.season}`}
-                      />
-                    ))
-                  }
+                  <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="droppable-list" >
+                      {(provided) => (
+                        <div ref={provided.innerRef} {...provided.droppableProps} style={{ display: "flex", flexDirection: "column", gap: "10px", minHeight: 96 * seasons.length }}>
+                          {
+                            seasons.map((e: any, i: any) => {
+                              return (
+                                <Draggable draggableId={`season-` + i} index={i} key={"season-item-" + i}>
+                                  {(provided, snapshot) => (
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      className={(snapshot.isDragging ? "dragging" : "")}
+                                    >
+                                      <AllSeasons
+                                        change={change}
+                                        setSeasonEditModalData={setSeasonEditModalData}
+                                        key={"adminSeasons" + i}
+                                        documentID={e.documentID}
+                                        index={e.season}
+                                        courseID={courseID}
+                                        seasonID={seasons}
+                                        name={e.name || `Temporada ${e.season}`}
+
+                                      />
+                                    </div>
+                                  )}
+                                </Draggable>
+
+                              )
+                            })
+                          }
+                        </div>
+                      )}
+
+                    </Droppable>
+                  </DragDropContext>
                 </>
                 :
                 <>
