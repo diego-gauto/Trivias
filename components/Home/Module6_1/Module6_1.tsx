@@ -102,9 +102,9 @@ export const Module6_1 = (props: IModule6_1) => {
     }
   };
   const onMouseLeave = () => {
-    // if (swiperRef.current) {
-    //   swiperRef.current.autoplay.start();
-    // }
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.start();
+    }
   };
   const settings = {
     loop: true,
