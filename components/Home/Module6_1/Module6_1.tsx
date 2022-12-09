@@ -108,9 +108,9 @@ export const Module6_1 = (props: IModule6_1) => {
   };
   const settings = {
     loop: true,
-    // autoplay: {
-    //   delay: 0,
-    // },
+    autoplay: {
+      delay: 0,
+    },
     speed: 4000,
     freeMode: true,
     slidesPerView: 1,

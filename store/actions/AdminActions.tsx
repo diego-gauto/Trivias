@@ -280,3 +280,6 @@ export const editSeasonName = async (courseID: string, seasonID: string, seasonN
   return await db.collection('courses').doc(courseID).collection("seasons").doc(seasonID).update({ name: seasonName });
 }
 
+export const editSeasonIndex = async (courseID: string, seasonID: any, index: number) => {
+  return await db.collection('courses').doc(courseID).collection("seasons").doc(seasonID).update({ season: index });
+}
