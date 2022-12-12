@@ -19,6 +19,12 @@ export const PurpleModule2ButtonContainer = styled(Button)`
   }
   @media only screen and (max-width: 1023px) {
     width: auto;
+    &:hover {
+    }
+    &:active {
+      background-image: linear-gradient(to right, #6717cd, #6717cd);
+      background-color: #6717cd;
+    }
   }
 `;
 export const Text1 = styled.span`
