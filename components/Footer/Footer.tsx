@@ -106,58 +106,6 @@ const Footer = () => {
           <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
           <p>Todos los derechos reservados</p>
         </div>
-        {/* 
-      <Column>
-        <FooterText>
-          Aviso de Privacidad
-        </FooterText>
-        <FooterText>
-          Condiciones
-        </FooterText>
-      </Column>
-      <Column>
-        <Link href="/">
-          <FooterText>
-            Inicio
-          </FooterText>
-        </Link>
-        <FooterText>
-          Tienda Online
-        </FooterText>
-      </Column>
-      <Column>
-        <Link href="/Preview">
-          <FooterText>
-            Cursos
-          </FooterText>
-        </Link>
-        <Link href="/auth/Register">
-          <FooterText>
-            Registrarse
-          </FooterText>
-        </Link>
-      </Column>
-      <FooterIcons>
-        {
-          (pathname == '/Profile' && userData?.membership.level == 1 && !loader) &&
-          <TextFinish onClick={cancelSubscription}>
-            Terminar Suscripción
-          </TextFinish>
-        }
-        {loader && <LoaderContain />}
-        <FooterText>
-          Contactanos
-        </FooterText>
-        <SocialContainer>
-          <a href="https://www.facebook.com/GonvarNails">
-            <FBIcon />
-          </a>
-          <a href="https://www.instagram.com/gonvarnails/">
-            <IGIcon />
-          </a>
-          <WAIcon />
-        </SocialContainer>
-      </FooterIcons> */}
       </FooterContainer>
       <ModalFinish show={show} setShow={setShow} user={userData} />
     </>

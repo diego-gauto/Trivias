@@ -35,12 +35,17 @@ export const FooterContainer = styled.div`
     @media only screen and (max-width: 1250px) {
       flex-direction: column;
       align-items: center;
+      font-size: 16px;
+    }
+    @media only screen and (max-width: 1250px) {
+      font-size: 11px !important;
     }
   }
 
   @media only screen and (max-width: 1250px) {
     flex-direction: column;
     align-items: center;
+    padding-inline: 0;
   }
 `;
 export const Logo2 = styled.i`
