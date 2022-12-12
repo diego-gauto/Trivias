@@ -76,22 +76,7 @@ export const PeopleMobile = styled.div`
   background-color: white;
 `;
 export const PeopleContainerMobile = styled.div`
-  height: 75%;
-
-  @media only screen and (max-width: 840px) {
-    height: 65%;
-  }
-  @media only screen and (max-width: 770px) {
-    height: 58%;
-  }
-  @media only screen and (max-width: 580px) {
-    height: 44%;
-  }
-  @media only screen and (max-width: 490px) {
-  }
-  @media only screen and (max-width: 390px) {
-    height: 29%;
-  }
+  height: 420px;
 `;
 
 export const BgColorMobile = styled.div`
@@ -161,31 +146,16 @@ export const MoreTextMobile = styled.div`
   z-index: 1;
   font-size: 20px;
   bottom: -12.5%;
-  left: 15%;
+  left: 10%;
   text-align: left;
 
-  @media only screen and (max-width: 940px) {
-    bottom: -7.5%;
-  }
-  @media only screen and (max-width: 840px) {
-    bottom: -2.5%;
-  }
   @media only screen and (max-width: 770px) {
-    font-size: 12px;
-    bottom: 2.5%;
-  }
-  @media only screen and (max-width: 580px) {
-    font-size: 11px;
-    bottom: 13%;
-  }
-  @media only screen and (max-width: 490px) {
-    left: 10%;
-    bottom: 18.5%;
+    font-size: 9px;
+    bottom: 4.75%;
   }
   @media only screen and (max-width: 390px) {
     font-size: 9px;
-    bottom: 25.5%;
-    left: 5%;
+    bottom: 6%;
   }
 
   font-family: "MONTSERRAT-BOLD" !important;
@@ -234,32 +204,18 @@ export const FooterATextMobile = styled.div`
   position: absolute;
   width: 25%;
   z-index: 1;
-  left: 15%;
+  left: 10%;
 
   font-size: 14px;
   bottom: -20%;
 
-  @media only screen and (max-width: 940px) {
-    bottom: -15%;
-  }
-  @media only screen and (max-width: 840px) {
-    bottom: -10%;
-  }
   @media only screen and (max-width: 770px) {
     font-size: 10px;
-    bottom: -3.5%;
-  }
-  @media only screen and (max-width: 580px) {
-    font-size: 9px;
-    bottom: 12.5%;
-    left: 40%;
-  }
-  @media only screen and (max-width: 490px) {
-    bottom: 18%;
+    bottom: 5%;
   }
   @media only screen and (max-width: 390px) {
     font-size: 8px;
-    bottom: 25%;
+    bottom: 1.25%;
   }
 
   text-align: left;
@@ -289,7 +245,7 @@ export const FooterAText_1Mobile = styled.div`
     padding-bottom: 18px;
   }
   @media only screen and (max-width: 1030px) {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
 `;
 export const FooterAText_2Mobile = styled.div`
@@ -311,7 +267,7 @@ export const FooterAText_2Mobile = styled.div`
     padding-bottom: 18px;
   }
   @media only screen and (max-width: 1030px) {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
 `;
 export const FooterAText_3Mobile = styled.div`
@@ -333,14 +289,14 @@ export const FooterAText_3Mobile = styled.div`
     padding-bottom: 18px;
   }
   @media only screen and (max-width: 1030px) {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
 `;
 
 export const FooterAIconsMobile = styled.div`
   position: absolute;
-  height: 248px;
-  width: 70px;
+  height: 100px;
+  width: 100px;
   z-index: 1;
   right: 7.5%;
 
@@ -349,23 +305,11 @@ export const FooterAIconsMobile = styled.div`
   text-align: left;
   font-size: 24px;
 
-  @media only screen and (max-width: 940px) {
-    bottom: -17.5%;
-  }
-  @media only screen and (max-width: 840px) {
-    bottom: -12.5%;
-  }
   @media only screen and (max-width: 770px) {
-    bottom: -10%;
-  }
-  @media only screen and (max-width: 580px) {
-    bottom: 2%;
-  }
-  @media only screen and (max-width: 490px) {
-    bottom: 7.5%;
+    bottom: 1%;
   }
   @media only screen and (max-width: 390px) {
-    bottom: 12.5%;
+    bottom: 1%;
 
     right: 5%;
   }
@@ -396,7 +340,7 @@ export const FooterAIcons_1Mobile = styled.div`
 
 export const FooterBIconsMobile = styled.div`
   position: absolute;
-  height: 248px;
+  height: 100px;
   width: 70px;
   z-index: 1;
   right: 15%;
@@ -405,25 +349,13 @@ export const FooterBIconsMobile = styled.div`
   text-align: left;
   font-size: 24px;
 
-  @media only screen and (max-width: 940px) {
-    bottom: -17.5%;
-  }
-  @media only screen and (max-width: 840px) {
-    bottom: -12.5%;
-  }
   @media only screen and (max-width: 770px) {
-    bottom: -10%;
-  }
-  @media only screen and (max-width: 580px) {
-    bottom: 2%;
-  }
-  @media only screen and (max-width: 490px) {
-    bottom: 7.5%;
+    bottom: 0.5%;
   }
   @media only screen and (max-width: 390px) {
-    bottom: 12.5%;
+    bottom: 0.5%;
 
-    right: 10%;
+    right: 15%;
   }
 
   font-family: "MONTSERRAT-MEDIUM" !important;
@@ -465,21 +397,20 @@ export const ContainerMainMobile = styled.div`
   width: 100%;
   z-index: 2;
   position: absolute;
-  height: 1090px;
   margin-top: 0;
-  margin-bottom: 6.5%;
 `;
 export const ContainerMain2Mobile = styled.div`
-  background-color: #ede7f2;
-
   position: relative;
   width: 100%;
 
   height: 300px;
   margin-bottom: 0;
 
-  @media only screen and (max-width: 1980px) {
+  @media only screen and (max-width: 770px) {
     height: 1120px;
+  }
+  @media only screen and (max-width: 390px) {
+    height: 1075px;
   }
 `;
 export const FooterEndingMobile = styled.div`
