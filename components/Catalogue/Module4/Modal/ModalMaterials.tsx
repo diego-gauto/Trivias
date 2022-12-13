@@ -13,9 +13,9 @@ export const ModalMaterials = ({ show, setShow, materials }: any) => {
           <h1>
             Materiales
           </h1>
-          {materials?.map((material: any) => {
+          {materials?.map((material: any, index: any) => {
             return (
-              <p>{material}</p>
+              <p key={"Materiales " + index}>{material}</p>
             )
           })}
         </div>

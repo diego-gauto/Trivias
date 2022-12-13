@@ -207,7 +207,16 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             <Datacontain>
               <Data>Instructor(es):
                 <DataSpan>
-                  {course.courseProfessor?.name}
+                  {
+                    course.courseProfessor?.map((val: any, index: any) => {
+                      return (
+                        <React.Fragment key={'Show Professors ' + index}>
+                          {val.name}
+                          <br />
+                        </React.Fragment>
+                      )
+                    })
+                  }
                 </DataSpan>
               </Data>
               <Data>

@@ -35,6 +35,7 @@ import {
   OptionCat,
   OptionProfessor,
 } from "./Select/SelectStyles.styled";
+import image from "next/image";
 
 const formSchema = yup.object().shape({
   free: yup.number(),
@@ -144,20 +145,21 @@ const CourseForm_Create = () => {
     }
     setMaterial([...tempMaterial])
   }
-  // const addProfessors = ({val,id}:any, index: any) => {
-  //   let tempProfessor = professor
-  //   let tempIndex = 0;
-  //   if (tempProfessor.includes(val)) {
-  //     tempIndex = tempProfessor.findIndex((x: any) =>
-  //       x == val
-  //     )
-  //     tempProfessor.splice(tempIndex, 1);
-  //   }
-  //   else {
-  //     tempProfessor.push(val)
-  //   }
-  //   setProfessor([...tempProfessor])
-  // }
+  const addProfessors = (val: any, index: any) => {
+
+    let tempProfessor = professor
+    let tempIndex = 0;
+    if (tempProfessor.some((e: any) => e.name === val.name)) {
+      tempIndex = tempProfessor.findIndex((x: any) =>
+        x == val
+      )
+      tempProfessor.splice(tempIndex, 1);
+    }
+    else {
+      tempProfessor.push(val)
+    }
+    setProfessor([...tempProfessor])
+  }
   const onSubmit: SubmitHandler<FormValues> = formData => {
 
     setCreatingNewCourse(true)
@@ -344,8 +346,19 @@ const CourseForm_Create = () => {
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={(e) => { handleOpenProfessor() }}>
-                  {name}
+                <Selected onClick={(e) => { handleOpenProfessor() }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
+                  {
+                    professor.length === 0
+                      ? "Seleccione un professor"
+                      : professor.map((val: any, index: any) => {
+                        return (
+                          <React.Fragment key={'Select Professors ' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        )
+                      })
+                  }
                   <CaretD2 />
                 </Selected>
                 {
@@ -359,8 +372,7 @@ const CourseForm_Create = () => {
                             marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              setName(val.name);
-                              setProfessor({ id: val.id, name: val.name });
+                              addProfessors({ id: val.id, name: val.name }, index);
                             }}>
                             <input
                               type="radio"

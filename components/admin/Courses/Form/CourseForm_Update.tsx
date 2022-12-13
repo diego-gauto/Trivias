@@ -117,10 +117,9 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [openMaterial, setOpenMaterial] = useState<boolean>(false);
   const [openHw, setOpenHw] = useState<boolean>(false);
   const [categories, setCategories] = useState<any>([]);
-  const [name, setName] = useState(courseProfessor.name);
   const [value, setValue] = useState<any>({})
   const [professors, setProfessors] = useState<any>([]);
-  const [professor, setProfessor] = useState<any>([]);
+  const [professor, setProfessor] = useState<any>(courseProfessor);
   const [homeWork, setHomeWork] = useState(courseHomeWork);
   const [free, setFree] = useState(courseType === "Producto" ? 1 : 0)
   const [value2, setValue2] = useState<any>([])
@@ -161,20 +160,22 @@ const CourseForm = (props: ICourseForm_Update) => {
     }
     setMaterial([...tempMaterial])
   }
-  // const addProfessors = ({val,id}:any, index: any) => {
-  //   let tempProfessor = professor
-  //   let tempIndex = 0;
-  //   if (tempProfessor.includes(val)) {
-  //     tempIndex = tempProfessor.findIndex((x: any) =>
-  //       x == val
-  //     )
-  //     tempProfessor.splice(tempIndex, 1);
-  //   }
-  //   else {
-  //     tempProfessor.push(val)
-  //   }
-  //   setProfessor([...tempProfessor])
-  // }
+  const addProfessors = (val: any, index: any) => {
+
+    let tempProfessor = professor
+    let tempIndex = 0;
+    if (tempProfessor.some((e: any) => e.name === val.name)) {
+      tempIndex = tempProfessor.findIndex((x: any) =>
+        x == val
+      )
+      tempProfessor.splice(tempIndex, 1);
+    }
+    else {
+      tempProfessor.push(val)
+    }
+    console.log(professor)
+    setProfessor([...tempProfessor])
+  }
   useEffect(() => {
     setMaterial(courseMaterial)
     setValue2(courseCategory)
@@ -337,8 +338,19 @@ const CourseForm = (props: ICourseForm_Update) => {
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={() => { handleOpenProfessor() }}>
-                  {name}
+                <Selected onClick={(e) => { handleOpenProfessor() }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
+                  {
+                    professor.length === 0
+                      ? "Seleccione un professor"
+                      : professor.map((val: any, index: any) => {
+                        return (
+                          <React.Fragment key={'Update Professors ' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        )
+                      })
+                  }
                   <CaretD2 />
                 </Selected>
                 {
@@ -352,8 +364,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                             marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              setName(val.name);
-                              setProfessor({ id: val.id, name: val.name });
+                              addProfessors({ id: val.id, name: val.name }, index);
                             }}>
                             <input
                               type="radio"

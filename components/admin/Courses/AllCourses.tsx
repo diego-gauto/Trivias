@@ -83,7 +83,18 @@ export const AllCourses = ({
               <Column>
                 <Info>
                   <Label>Instructor(es)</Label>
-                  <Text> {course.courseProfessor.name} </Text>
+                  <Text>
+                    {
+                      course.courseProfessor.map((val: any, index: any) => {
+                        return (
+                          <React.Fragment key={'Show Professors ' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        )
+                      })
+                    }
+                  </Text>
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
