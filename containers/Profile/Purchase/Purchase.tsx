@@ -468,7 +468,7 @@ const Purchase = () => {
                 <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
                   Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
               </div>
-              <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
+              <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
                 <div className="stripe">
                   <div className="option">
