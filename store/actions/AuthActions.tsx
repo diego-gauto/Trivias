@@ -134,8 +134,8 @@ export const signUpCreds = async (signUpData: { credentials: any; }) => {
   const {
     credentials,
   } = signUpData;
-  console.log(credentials.email)
   const hasCurrentUserVar = await hasCurrentUser(credentials.email);
+
   if (hasCurrentUserVar) {
     localStorage.setItem("pastUserEmail", credentials.email);
     return SIGNUP_PAST_USER_PATH;
@@ -146,6 +146,7 @@ export const signUpCreds = async (signUpData: { credentials: any; }) => {
     localStorage.setItem("email", credentials.email);
     return PREVIEW_PATH;
   } catch (err: any) {
+    firebase.auth().signOut();
     return err.code;
   }
 };
