@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { getUsers } from '../../../store/actions/courseActions';
+import { getTeacher, getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks } from '../../../store/actions/UserActions';
+import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
+import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import { Button, Container, Download, HWContainer, Table, TitleContain } from './HomeWork.styled'
@@ -14,10 +16,12 @@ const HomeWork = () => {
   const [data, setData] = useState<any>([]);
   const [id, setId] = useState("");
   const [professor, setProfessor] = useState<any>([]);
-  const [professorFilter, setProfessorFilter] = useState("");
-
+  const [openSelect, setOpenSelect] = useState(false)
+  const [professorFilter, setProfessorFilter] = useState<any>("");
+  console.log(professorFilter)
   const getHomeworks = () => {
     if (professorFilter != "") {
+
       getAllHomeWorks().then((res) => {
         res.forEach((element: any) => {
           let tempDate = new Date(element.createdAt.seconds * 1000);
@@ -26,7 +30,11 @@ const HomeWork = () => {
           let tempYear = tempDate.getFullYear()
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
-        res = res.filter((element: any, index: any) => element.teacherId == professorFilter)
+        console.log(res)
+        res = res.filter((element: any, index: any) => {
+          return element.teacherCreds[0].id === professorFilter.id
+        })
+        console.log(res)
         setHomeWorks(res);
       })
     }
@@ -43,10 +51,10 @@ const HomeWork = () => {
       })
     }
   }
-  const getProffessors = () => {
-    getUsers().then((res) => {
-      res = res.filter((user: any, index: any) => user.role == "admin")
+  const getAllteachers = () => {
+    getTeacher().then((res) => {
       setProfessor(res);
+      return res;
     })
   }
   const handleClick = () => {
@@ -56,7 +64,7 @@ const HomeWork = () => {
     setHomeWorks([...homeWorks])
   }
   useEffect(() => {
-    getProffessors();
+    getAllteachers();
   }, [])
   useEffect(() => {
     getHomeworks();
@@ -71,22 +79,38 @@ const HomeWork = () => {
             <p>
               Tareas
             </p>
-            <select onChange={(e) => {
-              setProfessorFilter(e.target.value);
-            }}>
+            <SelectContain key={1}>
+              <Selected onClick={(e) => { setOpenSelect(!openSelect) }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
+                {
+                  professorFilter ? professorFilter.name : "Seleccione un professor"
+                }
+                <CaretD2 style={{ top: "18%" }} />
+              </Selected>
               {
-                professor.map((professor: any, index: any) => {
-                  return (
-                    <option
-                      key={index + "professor select"}
-                      value={professor.id}
-                    >
-                      {professor.name}
-                    </option>
-                  )
-                })
+                openSelect == true &&
+                <OptionContain>
+                  {
+                    professor.map((val: any, index: any) => {
+                      return (
+                        <Option
+                          key={"Professor " + index}
+                          onClick={() => {
+                            setProfessorFilter(val);
+                          }}>
+                          <input
+                            type="radio"
+                            id="professor"
+                            name="professor"
+                            value="professor"
+                          />
+                          <Label2>{val.name}</Label2>
+                        </Option>
+                      )
+                    })
+                  }
+                </OptionContain>
               }
-            </select>
+            </SelectContain>
           </TitleContain>
           <Table id="Pay">
             <tbody>
