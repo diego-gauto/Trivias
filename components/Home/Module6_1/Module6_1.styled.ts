@@ -383,7 +383,7 @@ export const ContainerMain = styled.div`
   z-index: 2;
   position: absolute;
   height: 1400px;
-  margin-top: 0;
+  margin-top: 2.5%;
   margin-bottom: 6.5%;
 `;
 export const ContainerMain2 = styled.div`

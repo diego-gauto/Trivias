@@ -19,62 +19,64 @@ export const People = styled.div`
 
   background-size: 25%;
   top: 23%;
-  height: 310px;
+  height: 420px;
 
   @media only screen and (max-width: 2400px) {
-    background-size: 25%;
-    top: 23%;
-    height: 280px;
+    background-size: 37%;
+    top: 7%;
   }
   @media only screen and (max-width: 2100px) {
-    top: 26%;
+    background-size: 42%;
+    top: 2.5%;
   }
   @media only screen and (max-width: 1980px) {
-    background-size: 32%;
-    top: 16%;
+    background-size: 45%;
+    top: 0%;
   }
   @media only screen and (max-width: 1840px) {
-    background-size: 34%;
-    top: 15%;
+    background-size: 47%;
+    top: 0%;
   }
 
   @media only screen and (max-width: 1720px) {
-    background-size: 35%;
-    top: 19%;
+    background-size: 51%;
+top: -2%;
   }
   @media only screen and (max-width: 1600px) {
-    background-size: 37.5%;
-    top: -3%;
+    background-size: 44%;
+    top: -5%;
   }
   @media only screen and (max-width: 1520px) {
-    background-size: 38%;
-    top: 0%;
+    background-size: 49%;
+    top: -10%;
   }
   @media only screen and (max-width: 1440px) {
-    background-size: 40%;
-    top: 1%;
+    background-size: 50%;
+    top: -10%;
   }
   @media only screen and (max-width: 1360px) {
-    background-size: 45%;
-    top: -5%;
+    background-size: 53%;
+    top: -12%;
   }
 
   @media only screen and (max-width: 1280px) {
-    background-size: 50%;
+    background-size: 54%;
     top: -8%;
   }
   @media only screen and (max-width: 1200px) {
-    top: -4%;
+    background-size: 59%;
+    top: -10%;
   }
   @media only screen and (max-width: 1150px) {
-    background-size: 55%;
+    background-size: 60%;
     top: -8%;
   }
   @media only screen and (max-width: 1080px) {
-    background-size: 60%;
+    background-size: 64%;
     top: -7.5%;
   }
   @media only screen and (max-width: 1028px) {
+    background-size: 66%;
   }
 `;
 export const PeopleContainer = styled.div`
@@ -102,36 +104,46 @@ export const Lines = styled.div`
 `;
 export const BgColor = styled.div`
   background-color: #ede7f2;
-  height: 270px;
-  top: -20%;
+  height: 250px; 
   position: relative;
 
   @media only screen and (max-width: 2400px) {
-    height: 270px;
-    top: -12%;
+   
+    top: -55%;
+  }
+  @media only screen and (max-width: 2100px) {
+   
+    top: -62%;
   }
 
   @media only screen and (max-width: 1980px) {
-    top: -35%;
-    height: 260px;
+    top: -60%;
   }
   @media only screen and (max-width: 1720px) {
-    top: -36%;
-  }
-  @media only screen and (max-width: 1680px) {
-    top: -32%;
-  }
-  @media only screen and (max-width: 1600px) {
-    top: -50%;
-  }
-  @media only screen and (max-width: 1520px) {
-    top: -55%;
-  }
-  @media only screen and (max-width: 1440px) {
     top: -70%;
-    height: 100%;
   }
-  @media only screen and (max-width: 1280px) {
+ 
+  @media only screen and (max-width: 1600px) {
+    
+    height: 190px;
+    top: -90%;
+  }
+ 
+  @media only screen and (max-width: 1440px) {
+    top: -110%; 
+  }
+  @media only screen and (max-width: 1200px) {
+    top: -115%; 
+    height: 210px;
+  }
+  @media only screen and (max-width: 1150px) {
+    top: -110%; 
+  }
+  @media only screen and (max-width: 1080px) {
+    top: -107%; 
+  }
+  @media only screen and (max-width: 1028px) {
+    top: -110%; 
   }
 `;
 export const TittleA = styled.span`

@@ -20,12 +20,10 @@ const EditUserModal = ({ show, setShow, user }: any) => {
       phoneNumber: update.phoneNumber,
       score: update.score,
     }).then(() => {
-      alert("Información actualizada");
       setUpdating(false);
-      window.location.reload();
+      handleClose();
     })
   }
-  console.log(update)
   useEffect(() => {
     setUpdate({ ...user })
   }, [user])
@@ -47,7 +45,7 @@ const EditUserModal = ({ show, setShow, user }: any) => {
                 placeholder={user.name}
                 defaultValue={user.name}
                 onChange={(e) => {
-                  setUpdate({ ...user, name: e.target.value })
+                  setUpdate({ ...update, name: e.target.value })
                 }}
               />
             </div>
@@ -59,7 +57,7 @@ const EditUserModal = ({ show, setShow, user }: any) => {
                 placeholder={user.lastName}
                 defaultValue={user.lastName}
                 onChange={(e) => {
-                  setUpdate({ ...user, lastName: e.target.value })
+                  setUpdate({ ...update, lastName: e.target.value })
                 }}
               />
             </div>
@@ -73,7 +71,7 @@ const EditUserModal = ({ show, setShow, user }: any) => {
                 placeholder={user.score}
                 defaultValue={user.score}
                 onChange={(e) => {
-                  setUpdate({ ...user, score: parseInt(e.target.value) })
+                  setUpdate({ ...update, score: parseInt(e.target.value) })
                 }}
               />
             </div>
@@ -85,7 +83,7 @@ const EditUserModal = ({ show, setShow, user }: any) => {
                 placeholder={user.phoneNumber}
                 defaultValue={user.phoneNumber}
                 onChange={(e) => {
-                  setUpdate({ ...user, phoneNumber: e.target.value })
+                  setUpdate({ ...update, phoneNumber: e.target.value })
                 }}
               />
             </div>
