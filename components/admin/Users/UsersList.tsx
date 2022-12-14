@@ -131,7 +131,6 @@ const UsersList = () => {
   }
 
   useEffect(() => {
-
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
       const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -165,7 +164,7 @@ const UsersList = () => {
     }
     getUsers();
     getCoures();
-  }, []);
+  }, [show]);
 
   return (
     <AdminContain>
