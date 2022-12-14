@@ -6,7 +6,7 @@ import { addUserToLesson, updateLessonProgress } from '../../../../../store/acti
 import { EaselIcon } from '../Modules/Module.styled';
 declare let Hls: any
 
-const Video = ({ data, title, id, course, user, season, lesson }: any) => {
+const Video = ({ data, title, id, course, user, season, lesson, handleComplete }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
@@ -22,6 +22,7 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
         addUserToLesson(data, id, data.seasonId, data.id, user);
         temp.users.push(user.id);
         setCurrent({ ...temp });
+        handleComplete()
       }
     }
   }

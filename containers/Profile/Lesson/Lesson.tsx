@@ -27,9 +27,13 @@ const Lesson = () => {
   const [currentlesson, setCurrentLesson] = useState<any>({});
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
-
+  const [certficate, setCertificate] = useState<any>(false);
 
   useEffect(() => {
+    checkCourse()
+  }, [router, course]);
+
+  const checkCourse = () => {
     let date = new Date().getTime() / 1000;
     if (course) {
       let temp_lesson;
@@ -52,6 +56,16 @@ const Lesson = () => {
             }
           })
         }
+        let viewed = 0;
+        course.lessons.forEach((element: any) => {
+          if (element.users.includes(userData.id)) {
+            viewed++;
+          }
+        });
+        if (course.lessons.length == viewed) {
+          setCertificate(true)
+        }
+
       }
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
         temp_comments = [...comments].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
@@ -60,7 +74,11 @@ const Lesson = () => {
         setCurrentComments([]);
       }
     }
-  }, [router, course]);
+  }
+
+  const handleComplete = () => {
+    checkCourse()
+  }
 
   try {
     var userDataAuth = useAuth();
@@ -136,9 +154,12 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
+          {certficate && <div>
+            <p>Muchas felicidades por acompletar el curso, tu certificado ya esta disponible!</p>
+          </div>}
           {course && <Container>
             <FirstContainer>
-              <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} />
+              <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
               <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
             </FirstContainer>
           </Container>}

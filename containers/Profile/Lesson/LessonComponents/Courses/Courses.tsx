@@ -19,8 +19,6 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
 
   useEffect(() => {
     setOpen(menu)
-    console.log(menu);
-
   }, [menu])
 
   const toggleHandler = (index: any) => {
