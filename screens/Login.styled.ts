@@ -918,7 +918,7 @@ export const PurpleButton2 = styled.button`
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #fff;
   font-size: 16px;
-  padding: 5px 20px;
+  padding: 8px 25px;
   border-radius: 30px;
   border: none;
   font-weight: 700;

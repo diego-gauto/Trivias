@@ -138,7 +138,6 @@ const Register = () => {
     setphone(phoneInput)
     if (phoneCode == '+52') {
       if (isValidPhoneNumber(phoneInput)) {
-        console.log('se logro')
         let tempMonth = false;
         let tempPhoneInput = phoneInput;
         if (trial) {
@@ -160,13 +159,21 @@ const Register = () => {
           },
         };
         const redirectURL = await signUpCreds(signUpData);
+        console.log(redirectURL);
+
         if (redirectURL == "/auth/RegisterPastUser") {
           setErrorMsg('El correo ingresado ya existe!');
           setError(true);
           setAuthLoader(false);
           setShow(true);
         }
-        else {
+        if (redirectURL == "auth/wrong-password") {
+          setErrorMsg('El correo ingresado ya existe!');
+          setAuthLoader(false);
+          setError(true);
+          setIsLoading(false);
+        }
+        if (redirectURL == "/Preview") {
           setIsLoading(true)
           signUpWithCreds(signUpData).then(() => {
             window.location.href = "/Purchase?type=subscription";
@@ -201,12 +208,21 @@ const Register = () => {
         },
       };
       const redirectURL = await signUpCreds(signUpData);
+
       if (redirectURL == "/auth/RegisterPastUser") {
         setErrorMsg('El correo ingresado ya existe!');
         setError(true);
         setIsLoading(false);
+        setAuthLoader(false);
       }
-      else {
+      if (redirectURL == "auth/wrong-password") {
+        setErrorMsg('El correo ingresado ya existe!');
+        setAuthLoader(false);
+        setError(true);
+        setIsLoading(false);
+      }
+      if (redirectURL == "/Preview") {
+        setIsLoading(true)
         signUpWithCreds(signUpData).then(() => {
           window.location.href = "/Purchase?type=subscription";
         });

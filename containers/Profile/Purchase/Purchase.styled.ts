@@ -245,6 +245,9 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 30px;
+    .cards{
+      width: 350px;
+    }
     .steps {
       margin: auto;
       display: flex;
