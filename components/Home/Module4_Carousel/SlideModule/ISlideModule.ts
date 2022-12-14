@@ -3,5 +3,7 @@ export interface ISlideModule {
   title?: string;
   subtitle: string;
   imgURL?: string;
-  duration?: string;
+  number?: any;
+  type?: string;
+  level?: string;
 }

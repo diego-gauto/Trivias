@@ -27,13 +27,13 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
         && course.documentID !== SEP_COURSE_ID
       ).map((course: any) => {
         return (
-          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, duration: '' }
+          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty }
         )
       })
     } else {
       slideDataArr = slideDataArr.map((lesson: any) => {
         return (
-          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, duration: lesson.duration }
+          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "" }
         )
       })
     }
@@ -88,11 +88,13 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
         {slideDataArr?.map((element, idx) => (
           <SwiperSlide key={idx}>
             <SlideModule
+              type={type}
               isNew={element.isNew}
               title={element.title}
               subtitle={""}
+              level={element.level}
               imgURL={element.imgURL}
-              duration={element.duration}
+              number={element.number}
             />
           </SwiperSlide>
         ))}

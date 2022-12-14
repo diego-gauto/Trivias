@@ -66,6 +66,8 @@ const Homepage = () => {
     const courseGonvarPlus = await getWholeCourse(GONVAR_PLUS_COURSE_ID);
     setCourseGonvarPlus(courseGonvarPlus);
     const courseNailsData = await getWholeCourse(NAILS_MASTER_COURSE_ID);
+    console.log(courseNailsData);
+
     setCourseNailsData(courseNailsData);
     const courseSEPData = await getWholeCourse(SEP_COURSE_ID);
     setCourseSEPData(courseSEPData);

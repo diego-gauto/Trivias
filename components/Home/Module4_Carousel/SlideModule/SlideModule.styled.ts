@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SlideModuleContainer = styled(Container)`
   padding: 0;
@@ -90,18 +90,74 @@ export const Text01 = styled.span`
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
 `;
+export const Text01_p = styled.span`
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 18px;
+  color: #a733e4;
+  span {
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+`;
 export const Text02 = styled.span`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-
-  /* identical to box height, or 21px */
-
   color: #a733e4;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+`;
+export const Text02_p = styled.span`
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 18px;
+  color: #3f1168;
+  span {
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+`;
+export const Text03 = styled.span<{ level: any }>`
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  font-family: "Raleway";
+  display: flex;
+  align-items: center;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  span {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+  }
+  ${(props) =>
+    (props.level == "Muy Fácil" || props.level == "Fácil") &&
+    css`
+      color: #6678f8;
+    `}
+  ${(props) =>
+    (props.level == "Avanzado" || props.level == "Máster") &&
+    css`
+      color: #ef1155;
+    `}
+  ${(props) =>
+    props.level == "Intermedio" &&
+    css`
+      color: #12a071;
+    `}
 `;

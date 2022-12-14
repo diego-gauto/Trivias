@@ -8,6 +8,7 @@ interface SlideObj {
   image?: string;
   title: string;
   subtitle: string;
+  level?: string;
   imgURL?: string;
-  duration?: string;
+  number?: any;
 }
