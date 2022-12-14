@@ -18,10 +18,12 @@ const HomeWork = () => {
   const [professor, setProfessor] = useState<any>([]);
   const [openSelect, setOpenSelect] = useState(false)
   const [professorFilter, setProfessorFilter] = useState<any>("");
-  console.log(professorFilter)
-  const getHomeworks = () => {
-    if (professorFilter != "") {
+  const [professorLength, setProfessorLength] = useState<any>(0);
 
+  const getHomeworks = () => {
+    let tempFilter: any = [];
+    if (professorFilter != "") {
+      setHomeWorks([]);
       getAllHomeWorks().then((res) => {
         res.forEach((element: any) => {
           let tempDate = new Date(element.createdAt.seconds * 1000);
@@ -30,12 +32,15 @@ const HomeWork = () => {
           let tempYear = tempDate.getFullYear()
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
-        console.log(res)
-        res = res.filter((element: any, index: any) => {
-          return element.teacherCreds[0].id === professorFilter.id
+
+        res.filter((element: any, index: any) => {
+          element.teacherCreds.map((val: any) => {
+            if (val.id === professorFilter.id) {
+              tempFilter.push(element);
+            }
+          })
         })
-        console.log(res)
-        setHomeWorks(res);
+        setHomeWorks(tempFilter);
       })
     }
     else {
@@ -86,9 +91,23 @@ const HomeWork = () => {
                 }
                 <CaretD2 style={{ top: "18%" }} />
               </Selected>
+
               {
                 openSelect == true &&
+
                 <OptionContain>
+                  <Option
+                    onClick={() => {
+                      setProfessorFilter("");
+                    }}>
+                    <input
+                      type="radio"
+                      id="professor"
+                      name="professor"
+                      value=""
+                    />
+                    <Label2>Ver Todas</Label2>
+                  </Option>
                   {
                     professor.map((val: any, index: any) => {
                       return (
@@ -108,6 +127,7 @@ const HomeWork = () => {
                       )
                     })
                   }
+
                 </OptionContain>
               }
             </SelectContain>
