@@ -23,6 +23,7 @@ import {
   UserContain,
   UserShow,
 } from "./UsersList.styled";
+import EditUserModal from "./EditUserModal";
 
 export interface SelectedUser {
   id?: string;
@@ -70,6 +71,8 @@ const UsersList = () => {
   const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
+  const [show, setShow] = useState<boolean>(false);
+  const [user, setUser] = useState<any>([]);
 
   const openUserCardData = async (user: DocumentData) => {
     setSelectedUser(user);
@@ -136,6 +139,7 @@ const UsersList = () => {
       const usersData = [...usersResponse].map((user: any) => ({
         name: user.name,
         email: user.email,
+        lastName: user.lastName,
         phoneNumber: user.phoneNumber ?? "",
         created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
         score: user.score.toString(),
@@ -214,12 +218,13 @@ const UsersList = () => {
                 <th>Cursos Suscritos</th>
                 <th>Recompensas</th>
                 <th>Visualizar</th>
+                <th>Editar</th>
               </tr>
               {/* TABLAS */}
               {users.length > 0 && (
                 users.map((user, index): any => {
                   return (
-                    <tr key={index} onClick={() => openUserCardData(user)}>
+                    <tr key={index}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
@@ -231,7 +236,8 @@ const UsersList = () => {
                       {user.courses > 1 ? <td >{user.courses} Activos</td> :
                         <td >{user.courses} Activo</td>}
                       <td>{user.score} puntos</td>
-                      <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                      <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                      <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
                     </tr>
                   )
                 })
@@ -245,6 +251,7 @@ const UsersList = () => {
           <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} />
         }
       </UserContain>
+      <EditUserModal show={show} setShow={setShow} user={user} />
     </AdminContain >
   )
 }

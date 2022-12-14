@@ -1,7 +1,7 @@
 import React from 'react'
 import { ErrorContainer, ModalContainer } from './ErrorModal.styled';
 
-const ErrorModal = ({ setShow, show, error }: any) => {
+const ErrorModal = ({ setShow, show, error, user }: any) => {
 
   const handleClose = () => setShow(false);
   return (
