@@ -4,7 +4,7 @@ import { addHomework, getHomework } from '../../../../../store/actions/courseAct
 import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkContain, ReviewButton } from './HomeWork.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
 
-const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: any) => {
+const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }: any) => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
   if (!data.homeworkAvailable) {
     setValue(1)
   }
-
   const getImage = (file: any) => {
     let tempHomework: any = {}
     tempHomework.userName = user.name;
@@ -45,7 +44,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherId }: an
     tempHomework.seasonId = ""
     tempHomework.aproved = false
     tempHomework.comment = ""
-    tempHomework.teacherId = teacherId;
+    tempHomework.teacherCreds = teacherCreds;
     tempHomework.status = false;
 
     if (file.length > 0) {

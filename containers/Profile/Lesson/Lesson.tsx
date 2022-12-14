@@ -139,7 +139,7 @@ const Lesson = () => {
           {course && <Container>
             <FirstContainer>
               <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} />
-              <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherId={course.courseProfessor.id} />
+              <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
             </FirstContainer>
           </Container>}
 
