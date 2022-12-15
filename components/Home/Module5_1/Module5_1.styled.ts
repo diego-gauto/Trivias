@@ -16,12 +16,12 @@ export const People = styled.div`
   position: relative;
   background-position-x: 50%;
   z-index: 1;
-
-  background-size: 25%;
-  top: 23%;
-  height: 420px;
+  background-size: 29%;
+top: -5%;
+height: 520px;
 
   @media only screen and (max-width: 2400px) {
+  height: 420px;
     background-size: 37%;
     top: 7%;
   }
@@ -104,11 +104,12 @@ export const Lines = styled.div`
 `;
 export const BgColor = styled.div`
   background-color: #ede7f2;
-  height: 250px; 
+  height: 380px; 
   position: relative;
-
+  top: -66%;
   @media only screen and (max-width: 2400px) {
    
+  height: 250px; 
     top: -55%;
   }
   @media only screen and (max-width: 2100px) {
