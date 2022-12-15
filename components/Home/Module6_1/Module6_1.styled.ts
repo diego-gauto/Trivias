@@ -105,7 +105,7 @@ export const MoreText = styled.div`
 
   bottom: -7%;
   @media only screen and (max-width: 1980px) {
-    bottom: 5%;
+    bottom: 17.5%;
   }
 
   @media only screen and (max-width: 1440px) {
@@ -171,20 +171,11 @@ export const FooterAText = styled.div`
   font-size: 20px;
   bottom: -42%;
   @media only screen and (max-width: 1980px) {
-    bottom: -20%;
-  }
-  @media only screen and (max-width: 1720px) {
-    bottom: -13%;
-  }
-  @media only screen and (max-width: 1600px) {
-    bottom: -9%;
+    bottom: -5%;
   }
   @media only screen and (max-width: 1440px) {
     font-size: 15px;
     bottom: 0%;
-  }
-  @media only screen and (max-width: 1280px) {
-    bottom: 5%;
   }
   @media only screen and (max-width: 1030px) {
     font-size: 12px;
@@ -275,19 +266,10 @@ export const FooterAIcons = styled.div`
 
   bottom: -42%;
   @media only screen and (max-width: 1980px) {
-    bottom: -20%;
-  }
-  @media only screen and (max-width: 1720px) {
-    bottom: -13.5%;
-  }
-  @media only screen and (max-width: 1600px) {
-    bottom: -10%;
+    bottom: -6.5%;
   }
   @media only screen and (max-width: 1440px) {
     bottom: -7%;
-  }
-  @media only screen and (max-width: 1280px) {
-    bottom: -3.5%;
   }
   @media only screen and (max-width: 1030px) {
     bottom: 3.25%;
@@ -329,19 +311,10 @@ export const FooterBIcons = styled.div`
 
   bottom: -42%;
   @media only screen and (max-width: 1980px) {
-    bottom: -20%;
-  }
-  @media only screen and (max-width: 1720px) {
-    bottom: -13.5%;
-  }
-  @media only screen and (max-width: 1600px) {
-    bottom: -10%;
+    bottom: -6.5%;
   }
   @media only screen and (max-width: 1440px) {
     bottom: -7%;
-  }
-  @media only screen and (max-width: 1280px) {
-    bottom: -3.5%;
   }
   @media only screen and (max-width: 1030px) {
     bottom: 3.25%;
