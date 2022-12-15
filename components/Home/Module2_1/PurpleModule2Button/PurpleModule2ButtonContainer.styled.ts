@@ -20,6 +20,8 @@ export const PurpleModule2ButtonContainer = styled(Button)`
   @media only screen and (max-width: 1023px) {
     width: auto;
     &:hover {
+      border-color: transparent;
+      background-image: linear-gradient(to right, #942ced, #d244d1);
     }
     &:active {
       background-image: linear-gradient(to right, #6717cd, #6717cd);
