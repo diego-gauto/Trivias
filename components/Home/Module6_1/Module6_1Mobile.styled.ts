@@ -66,7 +66,7 @@ export const GeneralContainerMobile = styled(Container)`
 `;
 
 export const PeopleMobile = styled.div`
-  background-size: 100vw;
+  background-size: 100%;
   height: 100%;
   background-repeat: no-repeat;
   width: 100%;
@@ -76,7 +76,13 @@ export const PeopleMobile = styled.div`
   background-color: white;
 `;
 export const PeopleContainerMobile = styled.div`
-  height: 420px;
+  height: 408px;
+  @media only screen and (max-width: 770px) {
+    height: 450px;
+  }
+  @media only screen and (max-width: 390px) {
+    height: 408px;
+  }
 `;
 
 export const BgColorMobile = styled.div`
@@ -151,11 +157,11 @@ export const MoreTextMobile = styled.div`
 
   @media only screen and (max-width: 770px) {
     font-size: 9px;
-    bottom: 4.75%;
+    bottom: 17%;
   }
   @media only screen and (max-width: 390px) {
     font-size: 9px;
-    bottom: 6%;
+    bottom: 14%;
   }
 
   font-family: "MONTSERRAT-BOLD" !important;
@@ -210,12 +216,12 @@ export const FooterATextMobile = styled.div`
   bottom: -20%;
 
   @media only screen and (max-width: 770px) {
-    font-size: 10px;
-    bottom: 5%;
+    font-size: 9px;
+    bottom: 2.5%;
   }
   @media only screen and (max-width: 390px) {
     font-size: 8px;
-    bottom: 1.25%;
+    bottom: 0.5%;
   }
 
   text-align: left;
@@ -298,7 +304,7 @@ export const FooterAIconsMobile = styled.div`
   height: 100px;
   width: 100px;
   z-index: 1;
-  right: 7.5%;
+  right: 0%;
 
   bottom: -22.5%;
 
@@ -306,12 +312,14 @@ export const FooterAIconsMobile = styled.div`
   font-size: 24px;
 
   @media only screen and (max-width: 770px) {
-    bottom: 1%;
+    height: 120px;
+    width: 75px;
+    bottom: 2%;
   }
   @media only screen and (max-width: 390px) {
-    bottom: 1%;
-
-    right: 5%;
+    height: 100px;
+    width: 105px;
+    bottom: 3%;
   }
   font-family: "MONTSERRAT-MEDIUM" !important;
   @font-face {
@@ -343,19 +351,19 @@ export const FooterBIconsMobile = styled.div`
   height: 100px;
   width: 70px;
   z-index: 1;
-  right: 15%;
+  right: 10%;
   bottom: -22.5%;
 
   text-align: left;
   font-size: 24px;
 
+  @media only screen and (max-width: 840px) {
+  }
   @media only screen and (max-width: 770px) {
-    bottom: 0.5%;
+    bottom: 5%;
   }
   @media only screen and (max-width: 390px) {
     bottom: 0.5%;
-
-    right: 15%;
   }
 
   font-family: "MONTSERRAT-MEDIUM" !important;
@@ -403,14 +411,13 @@ export const ContainerMain2Mobile = styled.div`
   position: relative;
   width: 100%;
 
-  height: 300px;
+  height: 408px;
   margin-bottom: 0;
-
   @media only screen and (max-width: 770px) {
-    height: 1120px;
+    height: 450px;
   }
   @media only screen and (max-width: 390px) {
-    height: 1075px;
+    height: 408px;
   }
 `;
 export const FooterEndingMobile = styled.div`

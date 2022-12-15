@@ -214,13 +214,13 @@ export const Module6_1 = (props: IModule6_1) => {
         <ContainerMain2  ></ContainerMain2>
       </GeneralContainer >
       {/************************************************** */}
-      {/* <GeneralContainerMobile
+      <GeneralContainerMobile
         fluid
         style={{ padding: 0 }}
         id="MobileView"
       >
         <ContainerMainMobile  >
-          <SliderContainerMobile>
+          {/* <SliderContainerMobile>
 
             <SliderSectionTitleMobile>
               <TittleAMobile>Visita nuestra </TittleAMobile><TittleBMobile> tienda</TittleBMobile>
@@ -245,6 +245,7 @@ export const Module6_1 = (props: IModule6_1) => {
               </Swiper>
             </SwiperContainerMoreReduced>
           </SliderContainerMobile>
+          */}
 
           <PeopleContainerMobile>
             <PeopleMobile style={{ backgroundImage: `url(${IMG8.src})` }}>
@@ -278,7 +279,7 @@ export const Module6_1 = (props: IModule6_1) => {
         </ContainerMainMobile >
 
         <ContainerMain2Mobile  ></ContainerMain2Mobile>
-      </GeneralContainerMobile > */}
+      </GeneralContainerMobile >
     </>
   )
 }
