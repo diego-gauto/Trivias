@@ -104,7 +104,7 @@ export const Lines = styled.div`
 `;
 export const BgColor = styled.div`
   background-color: #ede7f2;
-  height: 380px; 
+  height: 280px; 
   position: relative;
   top: -66%;
   @media only screen and (max-width: 2400px) {

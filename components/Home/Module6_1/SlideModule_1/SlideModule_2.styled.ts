@@ -2,15 +2,18 @@ import styled from "styled-components";
 
 export const CompraRapida = styled.div`
   font-weight: 100;
-  background: linear-gradient(to right, #942ced, #d244d1);
   top: 50%;
+  
+  background: linear-gradient(to right, transparent, transparent);
+  color: transparent;
+
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 27.5%; 
   font-size: 24px;
   border-radius: 50px;
   padding: 15px 20px 15px;
-  color: #e5dfe9;
+
+  display: block;
 
   font-family: "MONTSERRAT-BOLD" !important;
   @font-face {
@@ -19,6 +22,14 @@ export const CompraRapida = styled.div`
   }
   @media only screen and (max-width: 800px) {
     font-size: 14px;
+  }
+
+  &:hover { 
+     
+    transition: 0.5s ease all;
+    transform: scale(1.1);
+    color: #e5dfe9;
+  background: linear-gradient(to right, #942ced, #d244d1);
   }
 `;
 

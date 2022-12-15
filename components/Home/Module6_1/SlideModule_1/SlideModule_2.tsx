@@ -51,11 +51,12 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
             </NewTag>
             : <></>
         }
-        {
+        {/*  {
           compraRapida ?
             <CompraRapida>Compra rápida</CompraRapida>
             : <></>
-        }
+        } */}
+        <CompraRapida>Compra rápida</CompraRapida>
         <Line></Line>
       </SlideImg>
       <UserDataContainer>
