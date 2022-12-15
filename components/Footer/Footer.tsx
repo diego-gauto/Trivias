@@ -26,6 +26,7 @@ import {
   TextFinish,
   WAIcon,
 } from "./Footer.styled";
+import { FooterContainerMobile } from "./FooterMobile.styled";
 
 const Footer = () => {
   const [show, setShow] = useState(false);
@@ -107,6 +108,13 @@ const Footer = () => {
           <p>Todos los derechos reservados</p>
         </div>
       </FooterContainer>
+      <FooterContainerMobile>
+        <img src="/images/Footer/logo.png" alt="" />
+        <div className="right-section">
+          <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
+          <p>Todos los derechos reservados</p>
+        </div>
+      </FooterContainerMobile>
       <ModalFinish show={show} setShow={setShow} user={userData} />
     </>
 
