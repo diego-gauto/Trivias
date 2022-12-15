@@ -22,8 +22,8 @@ const Lesson = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState<any>();
   const router = useRouter()
-  const [userData, setUserData] = useState<any>(null);
   const { id, season, lesson }: any = router.query;
+  const [userData, setUserData] = useState<any>(null);
   const [currentlesson, setCurrentLesson] = useState<any>({});
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
@@ -146,6 +146,13 @@ const Lesson = () => {
 
   }, [loggedIn])
 
+  const goTo = () => {
+    router.push({
+      pathname: `/Certificates`,
+      query: { name: userData.name, title: course.courseTittle }
+    });
+  }
+
   return (
     <>
       {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>
@@ -154,8 +161,9 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
-          {certficate && <div>
+          {certficate && <div className="certificate-container">
             <p>Muchas felicidades por acompletar el curso, tu certificado ya esta disponible!</p>
+            <button onClick={() => { goTo() }}>Certificado</button>
           </div>}
           {course && <Container>
             <FirstContainer>
@@ -163,7 +171,6 @@ const Lesson = () => {
               <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
             </FirstContainer>
           </Container>}
-
         </MainContainer>}
     </>
   )
