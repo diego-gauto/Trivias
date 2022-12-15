@@ -41,7 +41,9 @@ export const FooterContainer = styled.div`
       font-size: 11px !important;
     }
   }
-
+  @media only screen and (max-width: 1028px) {
+    display: none;
+  }
   @media only screen and (max-width: 1250px) {
     flex-direction: column;
     align-items: center;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Col, Container, Image, Row } from "react-bootstrap"; 
+import { Col, Container, Image, Row } from "react-bootstrap";
 
 /*
 @media only screen and (max-width: 1980px) {
@@ -32,467 +32,357 @@ import { Col, Container, Image, Row } from "react-bootstrap";
    */
 
 export const SliderContainerMobile = styled.div`
-  position: relative; 
-  overflow: hidden; 
-
+  position: relative;
+  overflow: hidden;
 `;
-export const SwiperContainer = styled.div` 
-  display:block;
+export const SwiperContainer = styled.div`
+  display: block;
   @media only screen and (max-width: 580px) {
-    display:none;
+    display: none;
   }
-
 `;
-export const SwiperContainerReduced = styled.div` 
-  display:none;
+export const SwiperContainerReduced = styled.div`
+  display: none;
   @media only screen and (max-width: 580px) {
-    display:block;
+    display: block;
   }
   @media only screen and (max-width: 460px) {
-    display:none;
+    display: none;
   }
-
 `;
-export const SwiperContainerMoreReduced = styled.div` 
-  display:none;
+export const SwiperContainerMoreReduced = styled.div`
+  display: none;
   @media only screen and (max-width: 460px) {
-    display:block;
+    display: block;
   }
-
 `;
- 
+
 export const GeneralContainerMobile = styled(Container)`
   padding: 0;
   display: none;
-  @media only screen and (max-width: 1028px) { 
+  @media only screen and (max-width: 1028px) {
     display: block;
-  
   }
 `;
 
-
 export const PeopleMobile = styled.div`
-background-size: 100%;  
-height: 100%;
-background-repeat: no-repeat;
-width: 100%; 
-position: relative;
-background-position-x: 50%;
-z-index:1; 
-background-color: white;
+  background-size: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+  background-position-x: 50%;
+  z-index: 1;
+  background-color: white;
 `;
-export const PeopleContainerMobile = styled.div` 
- 
-height: 75%;
- 
-@media only screen and (max-width: 840px) {
-  
-height: 65%;
-}
-@media only screen and (max-width: 770px) {
-  height: 58%;
-}
-@media only screen and (max-width: 580px) {
-  height: 44%;
-}
-@media only screen and (max-width: 490px) {
-}
-@media only screen and (max-width: 390px) {
-  height: 29%;
-}
+export const PeopleContainerMobile = styled.div`
+  height: 408px;
+  @media only screen and (max-width: 770px) {
+    height: 450px;
+  }
+  @media only screen and (max-width: 390px) {
+    height: 408px;
+  }
+`;
 
-`;
- 
 export const BgColorMobile = styled.div`
-background-color: #EDE7F2;
-height: 300px;
-top: -300px; 
-position: relative;
+  background-color: #ede7f2;
+  height: 300px;
+  top: -300px;
+  position: relative;
 
-@media only screen and (max-width: 1980px) {
-  top: -59.6%;
-  height: 280px;
-} 
-@media only screen and (max-width: 1720px) {
-  top: -51%;
-  height: 240px;
-}
-@media only screen and (max-width: 1600px) {
-  height: 240px;
-  top: -66.6%;
-}
-@media only screen and (max-width: 1440px) {
-  top: -60%;
-  height: 180px;
-}
-@media only screen and (max-width: 1280px) {
-  
-}
-
+  @media only screen and (max-width: 1980px) {
+    top: -59.6%;
+    height: 280px;
+  }
+  @media only screen and (max-width: 1720px) {
+    top: -51%;
+    height: 240px;
+  }
+  @media only screen and (max-width: 1600px) {
+    height: 240px;
+    top: -66.6%;
+  }
+  @media only screen and (max-width: 1440px) {
+    top: -60%;
+    height: 180px;
+  }
+  @media only screen and (max-width: 1280px) {
+  }
 `;
-export const TittleAMobile = styled.span` 
-color: #3F1168;
-font-size: 38px;
+export const TittleAMobile = styled.span`
+  color: #3f1168;
+  font-size: 38px;
 
- 
-@media only screen and (max-width: 580px) {
-  font-size: 32px;
-}
-@media only screen and (max-width: 490px) {
-}
-@media only screen and (max-width: 390px) {
+  @media only screen and (max-width: 580px) {
+    font-size: 32px;
+  }
+  @media only screen and (max-width: 490px) {
+  }
+  @media only screen and (max-width: 390px) {
+  }
 
-}
-
-font-family: "Montserrat-ExtraBold" !important;
-@font-face {
-  font-family: Montserrat-ExtraBold;
-  src: url(../fonts/Montserrat-ExtraBold.ttf);
-}
+  font-family: "Montserrat-ExtraBold" !important;
+  @font-face {
+    font-family: Montserrat-ExtraBold;
+    src: url(../fonts/Montserrat-ExtraBold.ttf);
+  }
 `;
-export const TittleBMobile = styled.span` 
-color: #A733E4;
-font-size: 38px;
-font-family: "Montserrat-ExtraBold" !important;
-@media only screen and (max-width: 580px) {
-  font-size: 32px;
-}
-@media only screen and (max-width: 490px) {
-}
-@media only screen and (max-width: 390px) {
+export const TittleBMobile = styled.span`
+  color: #a733e4;
+  font-size: 38px;
+  font-family: "Montserrat-ExtraBold" !important;
+  @media only screen and (max-width: 580px) {
+    font-size: 32px;
+  }
+  @media only screen and (max-width: 490px) {
+  }
+  @media only screen and (max-width: 390px) {
+  }
 
-}
-
-@font-face {
-  font-family: Montserrat-ExtraBold;
-  src: url(../fonts/Montserrat-ExtraBold.ttf);
-}
+  @font-face {
+    font-family: Montserrat-ExtraBold;
+    src: url(../fonts/Montserrat-ExtraBold.ttf);
+  }
 `;
- 
+
 export const MoreTextMobile = styled.div`
-position: absolute;
-width: 33%; 
-z-index: 1; 
-font-size: 20px;
-bottom: -12.5%;
-left: 15%; 
-text-align: left; 
+  position: absolute;
+  width: 33%;
+  z-index: 1;
+  font-size: 20px;
+  bottom: -12.5%;
+  left: 10%;
+  text-align: left;
 
-@media only screen and (max-width: 940px) {
-  
-bottom: -7.5%;
-}
-@media only screen and (max-width: 840px) {
-  
-bottom: -2.5%;
-}
-@media only screen and (max-width: 770px) {
-  font-size: 12px;
-  bottom: 2.5%;
-}
-@media only screen and (max-width: 580px) {
-  font-size: 11px;
-  bottom: 13%;
-}
-@media only screen and (max-width: 490px) {
-  left:10%;
-  bottom: 18.5%;
-}
-@media only screen and (max-width: 390px) {
-  font-size: 9px;
-  bottom: 25.5%;
-  left: 5%;
-}
+  @media only screen and (max-width: 770px) {
+    font-size: 9px;
+    bottom: 17%;
+  }
+  @media only screen and (max-width: 390px) {
+    font-size: 9px;
+    bottom: 14%;
+  }
 
-
-font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
+  font-family: "MONTSERRAT-BOLD" !important;
+  @font-face {
+    font-family: MONTSERRAT-BOLD;
+    src: url(../fonts/MONTSERRAT-BOLD.ttf);
+  }
 `;
 export const MoreText_1Mobile = styled.div`
   width: 110%;
-  bottom: 570px; 
-  color: #EDE7F2;
-  
-  margin-bottom: 5px;
-  transition: all .2s ease-in-out;  
-    
-&:hover {  
+  bottom: 570px;
+  color: #ede7f2;
 
-transform: scale(1.1);  
-}
+  margin-bottom: 5px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 export const MoreText_2Mobile = styled.div`
   width: 110%;
-  bottom: 570px; 
-  
-  margin-bottom: 5px;
-  transition: all .2s ease-in-out;  
-    
-&:hover {  
+  bottom: 570px;
 
-transform: scale(1.1);  
-}
-  color: #EDE7F2;
+  margin-bottom: 5px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+  color: #ede7f2;
 `;
 export const MoreText_3Mobile = styled.div`
   width: 110%;
-  bottom: 570px; 
-  color: #EDE7F2;
+  bottom: 570px;
+  color: #ede7f2;
   margin-bottom: 5px;
-  transition: all .2s ease-in-out;  
-    
-&:hover {  
+  transition: all 0.2s ease-in-out;
 
-transform: scale(1.1);  
-}
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const FooterATextMobile = styled.div`
-position: absolute;
-width: 25%;
-z-index: 1;
-left: 15%; 
+  position: absolute;
+  width: 25%;
+  z-index: 1;
+  left: 10%;
 
-font-size: 14px;
-bottom: -20%;
+  font-size: 14px;
+  bottom: -20%;
 
-
-
-@media only screen and (max-width: 940px) {
-  
-  bottom: -15%;
-  }
-@media only screen and (max-width: 840px) {
-  
-  bottom: -10%;
-  }
   @media only screen and (max-width: 770px) {
-    font-size: 10px;
-    bottom: -3.5%;
-  }
-  @media only screen and (max-width: 580px) {
     font-size: 9px;
-    bottom: 12.5%;
-    left: 40%;
-  }
-  @media only screen and (max-width: 490px) {
-    bottom: 18%;
+    bottom: 2.5%;
   }
   @media only screen and (max-width: 390px) {
     font-size: 8px;
-    bottom: 25%;
+    bottom: 0.5%;
   }
-  
 
-text-align: left;
-font-family: "MONTSERRAT-MEDIUM" !important;
-@font-face {
-  font-family: MONTSERRAT-MEDIUM;
-  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
-}
+  text-align: left;
+  font-family: "MONTSERRAT-MEDIUM" !important;
+  @font-face {
+    font-family: MONTSERRAT-MEDIUM;
+    src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+  }
 `;
 export const FooterAText_1Mobile = styled.div`
-  width: 110%;  
+  width: 110%;
   padding-bottom: 38px;
 
-  color: #EDE7F2;
-  overflow: hidden; 
-  
-transition: all .2s ease-in-out;  
-    
-&:hover {  
+  color: #ede7f2;
+  overflow: hidden;
 
-transform:translate(30px); 
-}
+  transition: all 0.2s ease-in-out;
 
-@media only screen and (max-width: 1440px) {
-  
-padding-bottom: 20px;
-}
-@media only screen and (max-width: 1280px) {
-  
-padding-bottom: 18px;
-}
-@media only screen and (max-width: 1030px) {
-  
-padding-bottom: 10px;
-}
+  &:hover {
+    transform: translate(30px);
+  }
 
- 
-  
+  @media only screen and (max-width: 1440px) {
+    padding-bottom: 20px;
+  }
+  @media only screen and (max-width: 1280px) {
+    padding-bottom: 18px;
+  }
+  @media only screen and (max-width: 1030px) {
+    padding-bottom: 5px;
+  }
 `;
 export const FooterAText_2Mobile = styled.div`
-  width: 110%;  
+  width: 110%;
   padding-bottom: 38px;
 
-  
-  color: #EDE7F2;
-  overflow: hidden; 
-  
-transition: all .2s ease-in-out;  
-    
-&:hover {  
+  color: #ede7f2;
+  overflow: hidden;
 
-transform:translate(30px); 
-}
-@media only screen and (max-width: 1440px) {
-  
-padding-bottom: 20px;
-}
-@media only screen and (max-width: 1280px) {
-  
-padding-bottom: 18px;
-}
-@media only screen and (max-width: 1030px) {
-  
-padding-bottom: 10px;
-}
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translate(30px);
+  }
+  @media only screen and (max-width: 1440px) {
+    padding-bottom: 20px;
+  }
+  @media only screen and (max-width: 1280px) {
+    padding-bottom: 18px;
+  }
+  @media only screen and (max-width: 1030px) {
+    padding-bottom: 5px;
+  }
 `;
 export const FooterAText_3Mobile = styled.div`
-  width: 110%;  
+  width: 110%;
   padding-bottom: 38px;
 
-  color: #EDE7F2;
-  overflow: hidden; 
-  
-transition: all .2s ease-in-out;  
-    
-&:hover {  
+  color: #ede7f2;
+  overflow: hidden;
 
-transform: translate(30px);
-}
-@media only screen and (max-width: 1440px) {
-  
-padding-bottom: 20px;
-}
-@media only screen and (max-width: 1280px) {
-  
-padding-bottom: 18px;
-}
-@media only screen and (max-width: 1030px) {
-  
-padding-bottom: 10px;
-}
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translate(30px);
+  }
+  @media only screen and (max-width: 1440px) {
+    padding-bottom: 20px;
+  }
+  @media only screen and (max-width: 1280px) {
+    padding-bottom: 18px;
+  }
+  @media only screen and (max-width: 1030px) {
+    padding-bottom: 5px;
+  }
 `;
-
 
 export const FooterAIconsMobile = styled.div`
-position: absolute;
-height: 248px;
-width: 70px;
-z-index: 1;
-right: 7.5%;
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  z-index: 1;
+  right: 0%;
 
+  bottom: -22.5%;
 
-bottom: -22.5%;
+  text-align: left;
+  font-size: 24px;
 
-text-align: left;
-font-size: 24px;
-
-@media only screen and (max-width: 940px) {
-  bottom: -17.5%;
-  }
-@media only screen and (max-width: 840px) {
-  
-  bottom: -12.5%;
-  }
   @media only screen and (max-width: 770px) {
-    bottom: -10%;
-  }
-  @media only screen and (max-width: 580px) {
+    height: 120px;
+    width: 75px;
     bottom: 2%;
   }
-  @media only screen and (max-width: 490px) {
-    bottom: 7.5%;
-  }
   @media only screen and (max-width: 390px) {
-    bottom: 12.5%;
-    
-right: 5%;
+    height: 100px;
+    width: 105px;
+    bottom: 3%;
   }
-font-family: "MONTSERRAT-MEDIUM" !important;
-@font-face {
-  font-family: MONTSERRAT-MEDIUM;
-  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
-}
+  font-family: "MONTSERRAT-MEDIUM" !important;
+  @font-face {
+    font-family: MONTSERRAT-MEDIUM;
+    src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+  }
 `;
 export const FooterAIcons_1Mobile = styled.div`
-background-repeat: no-repeat;
-color: #EDE7F2;
-background-size: 37%;
-height: 100%;
-background-position-x: 33.3%;
+  background-repeat: no-repeat;
+  color: #ede7f2;
+  background-size: 37%;
+  height: 100%;
+  background-position-x: 33.3%;
 
- 
-@media only screen and (max-width: 770px) {
-  background-size: 20%;
-}
-@media only screen and (max-width: 580px) {
-}
-@media only screen and (max-width: 490px) {
-}
-@media only screen and (max-width: 390px) {
-  background-size: 12%;
-}
-
-
-`; 
-
-export const FooterBIconsMobile = styled.div`
-position: absolute;
-height: 248px;
-width: 70px; 
-z-index: 1;
-right: 15%;
-bottom: -22.5%;
-
-
-text-align: left;
-font-size: 24px;
-
-@media only screen and (max-width: 940px) {
-  bottom: -17.5%;
-  }
-@media only screen and (max-width: 840px) {
-  
-  bottom: -12.5%;
-  }
   @media only screen and (max-width: 770px) {
-    bottom: -10%;
+    background-size: 20%;
   }
   @media only screen and (max-width: 580px) {
-    bottom: 2%;
   }
   @media only screen and (max-width: 490px) {
-    bottom: 7.5%;
   }
   @media only screen and (max-width: 390px) {
-    bottom: 12.5%;
-    
-right: 10%;
+    background-size: 12%;
+  }
+`;
+
+export const FooterBIconsMobile = styled.div`
+  position: absolute;
+  height: 100px;
+  width: 70px;
+  z-index: 1;
+  right: 10%;
+  bottom: -22.5%;
+
+  text-align: left;
+  font-size: 24px;
+
+  @media only screen and (max-width: 840px) {
+  }
+  @media only screen and (max-width: 770px) {
+    bottom: 5%;
+  }
+  @media only screen and (max-width: 390px) {
+    bottom: 0.5%;
   }
 
-font-family: "MONTSERRAT-MEDIUM" !important;
-@font-face {
-  font-family: MONTSERRAT-MEDIUM;
-  src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
-}
+  font-family: "MONTSERRAT-MEDIUM" !important;
+  @font-face {
+    font-family: MONTSERRAT-MEDIUM;
+    src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
+  }
 `;
 export const FooterBIcons_1Mobile = styled.div`
   width: 40px;
   height: 40px;
-  background-size: 90%;  
+  background-size: 90%;
   margin-bottom: 15px;
-margin-left: 20%;
-  background-repeat: no-repeat; 
- 
-  
+  margin-left: 20%;
+  background-repeat: no-repeat;
+
   @media only screen and (max-width: 770px) {
     width: 20px;
-  height: 20px;
+    height: 20px;
   }
   @media only screen and (max-width: 580px) {
     width: 16px;
@@ -500,197 +390,181 @@ margin-left: 20%;
   }
   @media only screen and (max-width: 490px) {
   }
-@media only screen and (max-width: 390px) {
-  width: 14px;
-  height: 14px;
-  margin-bottom: 8px;
-}
-
-  
-`;  
+  @media only screen and (max-width: 390px) {
+    width: 14px;
+    height: 14px;
+    margin-bottom: 8px;
+  }
+`;
 export const ContainerMainMobile = styled.div`
-background-color: #FFFFFF;
+  background-color: #ffffff;
 
-border-top-left-radius: 50px 50px;
-border-top-right-radius: 50px 50px;
- 
-width: 100%;
-z-index: 2;
-position: absolute;
-height: 1400px;
-margin-top: 0;
-margin-bottom: 6.5%;  
- 
+  border-top-left-radius: 50px 50px;
+  border-top-right-radius: 50px 50px;
+
+  width: 100%;
+  z-index: 2;
+  position: absolute;
+  margin-top: 0;
 `;
 export const ContainerMain2Mobile = styled.div`
-background-color: #EDE7F2; 
-
   position: relative;
-  width: 100%;  
+  width: 100%;
 
-  height: 300px;
+  height: 408px;
   margin-bottom: 0;
-
-  @media only screen and (max-width: 1980px) { 
-height: 1120px; 
-  } 
-  
+  @media only screen and (max-width: 770px) {
+    height: 450px;
+  }
+  @media only screen and (max-width: 390px) {
+    height: 408px;
+  }
 `;
 export const FooterEndingMobile = styled.div`
-background-color: #29282C; 
- padding: 0 ;
- margin: 0 ;
- display: inline;
+  background-color: #29282c;
+  padding: 0;
+  margin: 0;
+  display: inline;
 
- position: absolute;
-width: 100%; 
-z-index: 2;
-bottom: -37.5%;
-height: 15%;
- 
-@media only screen and (max-width: 940px) {
-  bottom: -38%;
-height: 22%;
-}
- 
-@media only screen and (max-width: 840px) {
-  bottom: -28%;
-}
-@media only screen and (max-width: 770px) {
-  bottom: -20%;
-}
-@media only screen and (max-width: 580px) {
-  height: 20%;
-  bottom: -10%;
-}
-@media only screen and (max-width: 490px) {
-  
-  bottom: -5%;
-}
-@media only screen and (max-width: 390px) {
-  height: 25%;
-  bottom: -1%;
-}
- 
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  bottom: -37.5%;
+  height: 15%;
+
+  @media only screen and (max-width: 940px) {
+    bottom: -38%;
+    height: 22%;
+  }
+
+  @media only screen and (max-width: 840px) {
+    bottom: -28%;
+  }
+  @media only screen and (max-width: 770px) {
+    bottom: -20%;
+  }
+  @media only screen and (max-width: 580px) {
+    height: 20%;
+    bottom: -10%;
+  }
+  @media only screen and (max-width: 490px) {
+    bottom: -5%;
+  }
+  @media only screen and (max-width: 390px) {
+    height: 25%;
+    bottom: -1%;
+  }
 `;
 export const LineMobile = styled.div`
-background-color: #DBD0E5;
-position: absolute;
-width: 2.5px;
-height: 145px;
-top: 20%;
-right: 1%;
-  
+  background-color: #dbd0e5;
+  position: absolute;
+  width: 2.5px;
+  height: 145px;
+  top: 20%;
+  right: 1%;
 `;
 export const LeftFooterContentMobile = styled.div`
-width: 100%;
-left: 0%;
-position: relative;
+  width: 100%;
+  left: 0%;
+  position: relative;
 `;
 export const CenterFooterContentMobile = styled.div`
-width: 80%;
-left: 10%;
-position: relative;
+  width: 80%;
+  left: 10%;
+  position: relative;
 `;
 export const FooterEndText1Mobile = styled.span`
-color: #EDE7F2;
-font-weight: 100;
-font-size: 16px;
+  color: #ede7f2;
+  font-weight: 100;
+  font-size: 16px;
 
-@media only screen and (max-width: 1024px) {
-}
-@media only screen and (max-width: 840px) {
-}
-@media only screen and (max-width: 770px) {
-}
-@media only screen and (max-width: 580px) {
-}
-@media only screen and (max-width: 490px) {
-}
-@media only screen and (max-width: 390px) {
-  font-size: 10px;
-}
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 840px) {
+  }
+  @media only screen and (max-width: 770px) {
+  }
+  @media only screen and (max-width: 580px) {
+  }
+  @media only screen and (max-width: 490px) {
+  }
+  @media only screen and (max-width: 390px) {
+    font-size: 10px;
+  }
 
-font-family: "MONTSERRAT-BOLD" !important;
-@font-face {
-  font-family: MONTSERRAT-BOLD;
-  src: url(../fonts/MONTSERRAT-BOLD.ttf);
-}
-   
+  font-family: "MONTSERRAT-BOLD" !important;
+  @font-face {
+    font-family: MONTSERRAT-BOLD;
+    src: url(../fonts/MONTSERRAT-BOLD.ttf);
+  }
 `;
- 
-export const GonvarFooterLogoMobile = styled.div`
-width: 150px;
-height: 35px;
-background-size: 100%;
-background-repeat: no-repeat;
-left: 40%;
-position: relative;
-top: 20%;
-margin-top: 5%;
-margin-bottom: 2.5%;
- 
-@media only screen and (max-width: 1024px) {
-}
-@media only screen and (max-width: 840px) {
-}
-@media only screen and (max-width: 770px) {
-}
-@media only screen and (max-width: 580px) {
-  left: 33.3%;
-}
-@media only screen and (max-width: 490px) {
-}
-@media only screen and (max-width: 390px) {
-  left: 30%;
-}
 
+export const GonvarFooterLogoMobile = styled.div`
+  width: 150px;
+  height: 35px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  left: 40%;
+  position: relative;
+  top: 20%;
+  margin-top: 5%;
+  margin-bottom: 2.5%;
+
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 840px) {
+  }
+  @media only screen and (max-width: 770px) {
+  }
+  @media only screen and (max-width: 580px) {
+    left: 33.3%;
+  }
+  @media only screen and (max-width: 490px) {
+  }
+  @media only screen and (max-width: 390px) {
+    left: 30%;
+  }
 `;
 export const SeparingLineMobile = styled.div`
-background-color: white;
-width: 2px;
-height: 45px;
-margin: 20px;
- 
+  background-color: white;
+  width: 2px;
+  height: 45px;
+  margin: 20px;
 `;
 export const FooterTextLineMobile = styled.table`
-top: 15%;
-position: relative;
+  top: 15%;
+  position: relative;
 
-@media only screen and (max-width: 1600px) {
-  left: 0%;
-}
-@media only screen and (max-width: 1440px) {
-}
-@media only screen and (max-width: 1280px) {
-  left: 15%;
-}
-@media only screen and (max-width: 1030px) {
-  left: 5%;
-}
-
+  @media only screen and (max-width: 1600px) {
+    left: 0%;
+  }
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1280px) {
+    left: 15%;
+  }
+  @media only screen and (max-width: 1030px) {
+    left: 5%;
+  }
 `;
- 
- 
- 
-export const SliderSectionTitleMobile = styled.p` 
-margin-top: 120px; 
-  color: #ffffff; 
+
+export const SliderSectionTitleMobile = styled.p`
+  margin-top: 120px;
+  color: #ffffff;
   bottom: 45px;
-  position: relative; 
+  position: relative;
 
   font-size: 24px;
-    margin-bottom: 25px; 
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding-right: 0;
-  max-width: 50%; 
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-right: 0;
+  max-width: 50%;
 
   @media only screen and (max-width: 390px) {
     max-width: 75%;
   }
-  
 `;
 
 export const SliderItemLinkMobile = styled.a`

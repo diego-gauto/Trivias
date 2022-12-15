@@ -86,6 +86,7 @@ import "swiper/css/navigation";
 import { IModule6_1 } from "./IModule6_1";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { SlideModule_1 } from "./SlideModule_1/SlideModule_2";
+import Footer from "../../Footer/Footer";
 SwiperCore.use([Autoplay]);
 
 export const Module6_1 = (props: IModule6_1) => {
@@ -162,7 +163,7 @@ export const Module6_1 = (props: IModule6_1) => {
         id="WebView"
         style={{ height: "200px" }}
       >
-        <ContainerMain  >
+        <ContainerMain>
           <SliderContainer>
 
             <SliderSectionTitle>
@@ -207,42 +208,19 @@ export const Module6_1 = (props: IModule6_1) => {
           </FooterBIcons>
 
 
-          <FooterEnding>
-
-
-            <LeftFooterContent>
-              <GonvarFooterLogo style={{ backgroundImage: `url(${IMG7.src})` }}></GonvarFooterLogo>
-
-            </LeftFooterContent>
-
-            <CenterFooterContent>
-              <FooterTextLine>
-                <tr>
-                  <th><FooterEndText1>Copyright © Gonvar Technologies SAPI de CV </FooterEndText1></th>
-                  <th><SeparingLine> </SeparingLine></th>
-                  <th><FooterEndText1> 2022 </FooterEndText1></th>
-                  <th><SeparingLine> </SeparingLine></th>
-                  <th><FooterEndText1> Todos los derechos reservados </FooterEndText1></th>
-                </tr>
-              </FooterTextLine>
-
-
-            </CenterFooterContent>
-
-
-          </FooterEnding>
+          <Footer />
         </ContainerMain >
 
         <ContainerMain2  ></ContainerMain2>
       </GeneralContainer >
       {/************************************************** */}
-      {/* <GeneralContainerMobile
+      <GeneralContainerMobile
         fluid
         style={{ padding: 0 }}
         id="MobileView"
       >
         <ContainerMainMobile  >
-          <SliderContainerMobile>
+          {/* <SliderContainerMobile>
 
             <SliderSectionTitleMobile>
               <TittleAMobile>Visita nuestra </TittleAMobile><TittleBMobile> tienda</TittleBMobile>
@@ -267,6 +245,7 @@ export const Module6_1 = (props: IModule6_1) => {
               </Swiper>
             </SwiperContainerMoreReduced>
           </SliderContainerMobile>
+          */}
 
           <PeopleContainerMobile>
             <PeopleMobile style={{ backgroundImage: `url(${IMG8.src})` }}>
@@ -297,36 +276,10 @@ export const Module6_1 = (props: IModule6_1) => {
             <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1Mobile>
             <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1Mobile>
           </FooterBIconsMobile>
-
-
-          <FooterEndingMobile>
-
-
-            <LeftFooterContentMobile>
-              <GonvarFooterLogoMobile style={{ backgroundImage: `url(${IMG7.src})` }}></GonvarFooterLogoMobile>
-
-            </LeftFooterContentMobile>
-
-            <CenterFooterContentMobile>
-              <FooterTextLineMobile>
-                <tr>
-                  <th><FooterEndText1Mobile>Copyright © Gonvar Technologies SAPI de CV </FooterEndText1Mobile></th>
-                  <th><SeparingLineMobile> </SeparingLineMobile></th>
-                  <th><FooterEndText1Mobile> 2022 </FooterEndText1Mobile></th>
-                  <th><SeparingLineMobile> </SeparingLineMobile></th>
-                  <th><FooterEndText1Mobile> Todos los derechos reservados </FooterEndText1Mobile></th>
-                </tr>
-              </FooterTextLineMobile>
-
-
-            </CenterFooterContentMobile>
-
-
-          </FooterEndingMobile>
         </ContainerMainMobile >
 
         <ContainerMain2Mobile  ></ContainerMain2Mobile>
-      </GeneralContainerMobile > */}
+      </GeneralContainerMobile >
     </>
   )
 }
