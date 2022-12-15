@@ -17,6 +17,18 @@ export const PurpleEmptyButtonContainer = styled(Button)`
   @media only screen and (max-width: 1400px) {
     width: 180px;
   }
+  @media only screen and (max-width: 1023px) {
+    background: #ede7f2;
+    &:hover {
+      background: #ede7f2;
+      border: 1px solid #3f1168;
+      color: #3f1168;
+    }
+    &:active {
+      background-color: #6717cd;
+      border-color: transparent;
+    }
+  }
 `;
 
 export const Text1 = styled.div`
