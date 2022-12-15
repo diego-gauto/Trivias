@@ -16,12 +16,12 @@ export const People = styled.div`
   position: relative;
   background-position-x: 50%;
   z-index: 1;
-
-  background-size: 27%;
-  top: 23%;
-  height: 550px;
+  background-size: 29%;
+top: -5%;
+height: 520px;
 
   @media only screen and (max-width: 2400px) {
+  height: 420px;
     background-size: 37%;
     top: 7%;
   }
@@ -40,7 +40,7 @@ export const People = styled.div`
 
   @media only screen and (max-width: 1720px) {
     background-size: 51%;
-    top: -2%;
+top: -2%;
   }
   @media only screen and (max-width: 1600px) {
     background-size: 44%;
@@ -104,13 +104,16 @@ export const Lines = styled.div`
 `;
 export const BgColor = styled.div`
   background-color: #ede7f2;
-  height: 250px;
+  height: 380px; 
   position: relative;
-
+  top: -66%;
   @media only screen and (max-width: 2400px) {
+   
+  height: 250px; 
     top: -55%;
   }
   @media only screen and (max-width: 2100px) {
+   
     top: -62%;
   }
 
@@ -120,27 +123,28 @@ export const BgColor = styled.div`
   @media only screen and (max-width: 1720px) {
     top: -70%;
   }
-
+ 
   @media only screen and (max-width: 1600px) {
+    
     height: 190px;
     top: -90%;
   }
-
+ 
   @media only screen and (max-width: 1440px) {
-    top: -110%;
+    top: -110%; 
   }
   @media only screen and (max-width: 1200px) {
-    top: -115%;
+    top: -115%; 
     height: 210px;
   }
   @media only screen and (max-width: 1150px) {
-    top: -110%;
+    top: -110%; 
   }
   @media only screen and (max-width: 1080px) {
-    top: -107%;
+    top: -107%; 
   }
   @media only screen and (max-width: 1028px) {
-    top: -110%;
+    top: -110%; 
   }
 `;
 export const TittleA = styled.span`
