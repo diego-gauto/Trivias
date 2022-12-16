@@ -68,10 +68,6 @@ const SideBar = () => {
           <Text>Payments</Text>
         </Link><Link href="/admin/Courses">
             <Text>Courses</Text>
-          </Link><Link href="/admin/CourseAttributes">
-            <Text>Categories</Text>
-          </Link><Link href="/admin/Materials">
-            <Text>Materials</Text>
           </Link><Link href="/admin/Rewards">
             <Text>Rewards</Text>
           </Link><Link href="/admin/Landing">
@@ -84,11 +80,7 @@ const SideBar = () => {
             <Text>Assignments</Text>
           </Link><Link href="/admin/HomeWork">
             <Text>Homeworks</Text>
-          </Link><Link href="/admin/Teacher">
-            <Text>Professors</Text>
           </Link>
-
-
         </>
       }
       {!isSuperAdmin &&

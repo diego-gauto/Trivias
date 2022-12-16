@@ -25,6 +25,7 @@ import CourseForm_Update from "./Form/CourseForm_Update";
 import { LessonContain, LessonTitle, NewSeason, NewSeasonContain } from "./Form/Lessons.styled";
 import SeasonEditModal from "./Form/SeasonEditModal";
 import { editSeasonIndex } from "../../../store/actions/AdminActions";
+import Modules from "./Form/Modules";
 
 interface ISeasonEditModalData {
   seasonID: string;
@@ -190,6 +191,8 @@ const SeasonsMain = () => {
                 :
                 <></>
             }
+            {/* Botones Agregar profesor, categoria , materiales */}
+            <Modules />
 
             {/* Lista de lecciones */}
             <LessonContain>
