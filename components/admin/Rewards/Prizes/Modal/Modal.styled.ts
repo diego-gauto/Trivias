@@ -10,6 +10,7 @@ export const ModalContain = styled.div`
 export const TitleContain = styled.div`
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `;
 export const Title = styled.p`
   font-size: 24px;

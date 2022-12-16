@@ -90,6 +90,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { coursePhrase } = props;
   const { courseMaterial } = props;
   const { courseDifficulty } = props;
+  const { courseCertificateColor } = props;
   const { documentID } = props;
   const { coursePath } = props;
   const { reference } = props;
@@ -131,6 +132,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [userData, setUserData] = useState<any>([]);
   const [difficultyValue, setDifficultyValue] = useState(courseDifficulty);
   const [openLevel, setOpenLevel] = useState<boolean>(false);
+  const [colorRGB, setColorRGB] = useState(courseCertificateColor);
 
   const addCategories = (val: any, index: any) => {
     let tempCategories = value2
@@ -206,6 +208,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     }
     let signUpData = {
       data: {
+        courseCertificateColor: colorRGB,
         courseTittle: formData.courseTittle,
         courseDuration: formData.courseDuration,
         courseSubtittle: formData.courseSubtittle,
@@ -660,10 +663,7 @@ const CourseForm = (props: ICourseForm_Update) => {
             }
 
           </InputContain2>
-          <InputButtonContain>
-
-
-            {/* <TagContain>
+          {/* <TagContain>
           <TagTitle>Etiquetas</TagTitle>
           <TagLabel >Nuevo
             <input
@@ -707,51 +707,65 @@ const CourseForm = (props: ICourseForm_Update) => {
             <span></span>
           </TagLabel>
         </TagContain> */}
-            <ButtonContain2>
-              <InputContain onClick={(e) => { e.stopPropagation(); }}>
-                <Label>Categorías</Label>
-                <IconContain>
-
-                  <SelectContain key={2}>
-                    <Selected onClick={() => { handleOpenCategory() }}>
-                      {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
-                      <CaretD2 />
-                    </Selected>
-                    {
-                      openCategory == true &&
-                      <OptionContain>
-                        {
-                          categories.map((val: any, index: any) => {
-                            return (
-                              <OptionCat
-                                category={val.name}
-                                marked={value2}
-                                key={"SelectCategory" + index}
-                                onClick={() => {
-                                  addCategories(val.name, index)
-                                }}>
-                                <input
-                                  type="radio"
-                                  id="category"
-                                  name="category"
-                                  value="Category"
-                                />
-                                <Label2>{val.name}</Label2>
-                              </OptionCat>
-                            )
-                          })
-                        }
-                      </OptionContain>
-                    }
-                  </SelectContain>
-                </IconContain>
-
-              </InputContain>
-              {!IsUpdating ? <Button type='submit'>Guardar Cambios</Button>
-                :
-                <LoaderContain />}
-            </ButtonContain2>
-          </InputButtonContain>
+          <InputContain2>
+            <InputContain onClick={(e) => { e.stopPropagation(); }}>
+              <Label>Categorías</Label>
+              <IconContain>
+                <SelectContain key={2}>
+                  <Selected onClick={() => { handleOpenCategory() }}>
+                    {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
+                    <CaretD2 />
+                  </Selected>
+                  {
+                    openCategory == true &&
+                    <OptionContain>
+                      {
+                        categories.map((val: any, index: any) => {
+                          return (
+                            <OptionCat
+                              category={val.name}
+                              marked={value2}
+                              key={"SelectCategory" + index}
+                              onClick={() => {
+                                addCategories(val.name, index)
+                              }}>
+                              <input
+                                type="radio"
+                                id="category"
+                                name="category"
+                                value="Category"
+                              />
+                              <Label2>{val.name}</Label2>
+                            </OptionCat>
+                          )
+                        })
+                      }
+                    </OptionContain>
+                  }
+                </SelectContain>
+              </IconContain>
+            </InputContain>
+            <InputContain onClick={(e) => { e.stopPropagation(); }}>
+              <Label>Color</Label>
+              <Input style={{ height: 43 }}
+                placeholder="90"
+                type="color"
+                defaultValue={colorRGB}
+                onChange={(e) => {
+                  setColorRGB(e.target.value)
+                }}
+              />
+            </InputContain>
+          </InputContain2>
+        </InputForm>
+        <InputForm >
+          <ButtonContain2 style={{ alignItems: "center" }}>
+            {!IsUpdating ?
+              <Button type='submit'>Guardar Cambios</Button>
+              :
+              <LoaderContain />
+            }
+          </ButtonContain2>
         </InputForm>
       </form>
     </CourseFormContain>

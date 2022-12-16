@@ -13,7 +13,6 @@ export const CourseContainer = styled.div`
   padding: 15px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  cursor: pointer;
 `;
 export const CourseName = styled.p`
   font-size: 24px;
@@ -25,6 +24,7 @@ export const TitleContain = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 `;
 export const ChevU = styled.i`
   background-image: url(../images/Video/icons/arrowUp.svg);
@@ -54,6 +54,12 @@ export const Column = styled.div`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
+  .circle {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+  }
 `;
 export const Text = styled.p`
   font-size: 14px;

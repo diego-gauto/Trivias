@@ -115,6 +115,7 @@ const CourseForm_Create = () => {
   const [image, setImage] = useState<any>("");
   const [missing, setMissing] = useState(false)
   const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
+  const [colorRGB, setColorRGB] = useState("#ffffff");
 
 
   const addCategories = (val: any, index: any) => {
@@ -191,6 +192,7 @@ const CourseForm_Create = () => {
     }
     let signUpData: any = {
       data: {
+        courseCertificateColor: colorRGB,
         courseTittle: formData.courseTittle,
         courseDuration: formData.courseDuration * free + 0,
         courseSubtittle: formData.courseSubtittle,
@@ -312,9 +314,9 @@ const CourseForm_Create = () => {
     getAllMaterials();
   }, [])
   return (
-    <CourseFormContain onClick={() => { setOpenCourse(!openCourse) }}>
+    <CourseFormContain >
       {/* LINEA 1 */}
-      <TitleContain>
+      <TitleContain onClick={() => { setOpenCourse(!openCourse) }}>
         <CourseName>
           Crear Curso Nuevo
         </CourseName>
@@ -603,7 +605,6 @@ const CourseForm_Create = () => {
             {
               (value3 == "Producto") &&
               <>
-
                 <InputContain>
                   <Label>Precio (MXN)</Label>
                   <Input
@@ -674,56 +675,63 @@ const CourseForm_Create = () => {
           </TagLabel>
         </TagContain> */}
           <InputContain2>
-
-            <ButtonContain >
-              <InputContain onClick={(e) => { e.stopPropagation(); }}>
-                <Label>Categorías</Label>
-                <IconContain>
-
-                  <SelectContain key={2}>
-                    <Selected onClick={() => { handleOpenCategory() }}>
-                      {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
-                      <CaretD2 />
-                    </Selected>
-                    {
-                      openCategory == true &&
-                      <OptionContain>
-                        {
-                          categories.map((val: any, index: any) => {
-                            return (
-                              <OptionCat
-                                category={val.name}
-                                marked={value2}
-                                key={"SelectCategory" + index}
-                                onClick={() => {
-                                  addCategories(val.name, index)
-                                }}>
-                                <input
-                                  type="radio"
-                                  id="category"
-                                  name="category"
-                                  value="Category"
-                                />
-                                <Label2>{val.name}</Label2>
-                              </OptionCat>
-                            )
-                          })
-                        }
-                      </OptionContain>
-                    }
-                  </SelectContain>
-                </IconContain>
-
-              </InputContain>
-              {!creatingNewCourse ?
-                <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
-                :
-                <LoaderContain />
-              }
-            </ButtonContain>
+            <InputContain onClick={(e) => { e.stopPropagation(); }}>
+              <Label>Categorías</Label>
+              <IconContain>
+                <SelectContain key={2}>
+                  <Selected onClick={() => { handleOpenCategory() }}>
+                    {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
+                    <CaretD2 />
+                  </Selected>
+                  {
+                    openCategory == true &&
+                    <OptionContain>
+                      {
+                        categories.map((val: any, index: any) => {
+                          return (
+                            <OptionCat
+                              category={val.name}
+                              marked={value2}
+                              key={"SelectCategory" + index}
+                              onClick={() => {
+                                addCategories(val.name, index)
+                              }}>
+                              <input
+                                type="radio"
+                                id="category"
+                                name="category"
+                                value="Category"
+                              />
+                              <Label2>{val.name}</Label2>
+                            </OptionCat>
+                          )
+                        })
+                      }
+                    </OptionContain>
+                  }
+                </SelectContain>
+              </IconContain>
+            </InputContain>
+            <InputContain onClick={(e) => { e.stopPropagation(); }}>
+              <Label>Color</Label>
+              <Input style={{ height: 43 }}
+                placeholder="90"
+                type="color"
+                onChange={(e) => {
+                  setColorRGB(e.target.value)
+                }}
+              />
+            </InputContain>
           </InputContain2>
-
-
+        </InputForm>
+        <InputForm style={{ justifyContent: "center" }}>
+          <ButtonContain >
+            {!creatingNewCourse ?
+              <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
+              :
+              <LoaderContain />
+            }
+          </ButtonContain>
         </InputForm>
       </form>}
     </CourseFormContain>

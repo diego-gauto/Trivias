@@ -41,8 +41,8 @@ export const AllCourses = ({
 
   return (
     <MainContainer>
-      <CourseContainer onClick={() => { setOpen(!open) }}>
-        <TitleContain>
+      <CourseContainer >
+        <TitleContain onClick={() => { setOpen(!open) }}>
           <CourseName>
             Curso - {course.courseTittle}
           </CourseName>
@@ -78,6 +78,15 @@ export const AllCourses = ({
                 <Info>
                   <Label>Frase Descriptiva</Label>
                   <Text>{course.coursePhrase}</Text>
+                </Info>
+                <Info>
+                  <Label>Color del certificado</Label>
+                  {
+                    course.courseCertificateColor ?
+                      <div className="circle" style={{ backgroundColor: course.courseCertificateColor }}></div>
+                      :
+                      <Text>No hay color</Text>
+                  }
                 </Info>
               </Column>
               <Column>
