@@ -134,6 +134,9 @@ export const Label2 = styled.label`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   white-space: nowrap;
+  &:hover {
+    color: white;
+  }
 `;
 export const CaretD2 = styled.i`
   position: absolute;
