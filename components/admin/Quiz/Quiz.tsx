@@ -69,6 +69,11 @@ const Quiz = () => {
   useEffect(() => {
   }, [quill])
 
+  const addAnswer = (index: number) => {
+    let tempQuiz: any = quiz;
+    let inpAnswer: any = document.getElementById("answer" + index)
+  }
+
   return (
     <QuizContainer>
       <TitleContain>
@@ -160,6 +165,7 @@ const Quiz = () => {
                   <div className="questions">
                     <p className="question-title">Pregunta {index + 1}:</p>
                     <div className="button-contain">
+                      <input type="text" id={"answer" + index} placeholder="Respuesta" />
                       <button className="button-add">
                         Agregar Respuesta
                       </button>
@@ -171,6 +177,11 @@ const Quiz = () => {
                     </div>
                   </div>
                   <p dangerouslySetInnerHTML={{ __html: question.question }} />
+                  {question.answers.map((answer: any) => {
+                    return (
+                      <p>{answer}</p>
+                    )
+                  })}
                 </div>
               )
             })

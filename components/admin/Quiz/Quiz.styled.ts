@@ -106,6 +106,16 @@ export const QuestionContainer = styled.div`
       .button-contain {
         display: flex;
         gap: 20px;
+        input {
+          font-size: 14px;
+          padding-inline: 20px;
+          padding-block: 10px;
+          border: 1px solid #6717cd;
+          border-radius: 30px;
+          :focus {
+            outline: 1px solid #8e2de2;
+          }
+        }
         .button-add {
           font-size: 16px;
           font-family: "Montserrat", sans-serif;
