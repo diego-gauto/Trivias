@@ -188,13 +188,13 @@ const User = () => {
       {/* FIRST BOX */}
       {//Vista del navbar dinamico de Homepage
         userData !== null
-          ?
-          <UserInfo
-            userData={userData}
-            taskView={taskView}
-            setTaskView={setTaskView}
+        &&
+        <UserInfo
+          userData={userData}
+          taskView={taskView}
+          setTaskView={setTaskView}
 
-          /> : <></>}
+        />}
       {/* SECOND Container */}
       {
         taskView == false &&
