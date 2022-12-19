@@ -50,23 +50,45 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
       <EpisodesContain>
         <Episode>
           <ImageContain>
-            <img src={lesson.image} />
+            <img src={lesson.image ? lesson.image : "/images/admin/Courses/Quiz.PNG"} />
           </ImageContain>
           <EpisodeContain>
-            <EpisodeTitle>Lección {lesson.number}: {lesson.title}</EpisodeTitle>
-            <EpisodeTime>{hms(lesson.duration)}</EpisodeTime>
+            {"mandatory" in lesson
+              ? <EpisodeTitle>Quiz: {lesson.title}</EpisodeTitle>
+
+              : <EpisodeTitle>Lección {lesson.number}: {lesson.title}</EpisodeTitle>
+
+            }{!("mandatory" in lesson) &&
+              <EpisodeTime>{hms(lesson.duration)}</EpisodeTime>
+            }
             <EpisodeInfo>{lesson.description}</EpisodeInfo>
-            <Link href={{
-              pathname: "/admin/EditLesson",
-              query: {
-                courseID: courseID,
-                seasonID: seasonID,
-                lessonID: documentID,
-              }
-            }}
-            >
-              <EditEpisode>Editar Lección</EditEpisode>
-            </Link>
+            {
+              "mandatory" in lesson
+                ?
+                <Link href={{
+                  pathname: "/admin/Quiz",
+                  query: {
+                    courseID: courseID,
+                    seasonID: seasonID,
+                    lessonID: documentID,
+                  }
+                }}
+                >
+                  <EditEpisode>Editar Quiz</EditEpisode>
+                </Link>
+                : <Link href={{
+                  pathname: "/admin/EditLesson",
+                  query: {
+                    courseID: courseID,
+                    seasonID: seasonID,
+                    lessonID: documentID,
+                  }
+                }}
+                >
+                  <EditEpisode>Editar Lección</EditEpisode>
+                </Link>
+            }
+
           </EpisodeContain>
         </Episode>
       </EpisodesContain>
