@@ -74,9 +74,9 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
       let temp_courses: any = [];
       course.forEach((element: any) => {
         if (element.courseType == 'Mensual') {
-          element.courseAbout = element.courseAbout.slice(0, 50);
-          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-          element.courseTittle = element.courseTittle.slice(0, 15);
+          element.courseAbout = element.courseAbout
+          element.courseSubtittle = element.courseSubtittle
+          element.courseTittle = element.courseTittle
           temp_courses.push(element);
         }
       });
