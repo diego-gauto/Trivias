@@ -42,43 +42,44 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
   }
 
   return (
-    <ProfilePayment>
-      <PaymentTitle>
-        Métodos de Pago
-      </PaymentTitle>
-      {loader ? <LoaderContain /> :
-        <>
-          {pm.length > 0 ? <PayContainer>
-            {pm.map((pm: any, index: any) => {
-              return (
-                <PaymentBox key={"pmUser" + index}>
-                  <PayBox>
-                    <CardIconResp brand={pm.brand} />
-                    <PaymentText>
-                      {pm.brand} terminada en {pm.last4}
-                    </PaymentText>
-                  </PayBox>
-                  <DeleteContain onClick={() => {
-                    detachPayment(pm)
-                  }}>
-                    <DeleteText>
-                      Eliminar método
-                    </DeleteText>
-                    <TrashIcon />
-                  </DeleteContain>
-                </PaymentBox>
-              )
-            })
-            }
-          </PayContainer> :
-            <p>Sin métodos de pago...</p>}
-        </>
-      }
-      <AddPay onClick={handleShow}>
-        Añadir método de pago
-      </AddPay>
-      <Modal1 show={show} setShow={setShow} data={data} handleClick={handleClick} />
-    </ProfilePayment>
+    // <ProfilePayment>
+    //   <PaymentTitle>
+    //     Métodos de Pago
+    //   </PaymentTitle>
+    //   {loader ? <LoaderContain /> :
+    //     <>
+    //       {pm.length > 0 ? <PayContainer>
+    //         {pm.map((pm: any, index: any) => {
+    //           return (
+    //             <PaymentBox key={"pmUser" + index}>
+    //               <PayBox>
+    //                 <CardIconResp brand={pm.brand} />
+    //                 <PaymentText>
+    //                   {pm.brand} terminada en {pm.last4}
+    //                 </PaymentText>
+    //               </PayBox>
+    //               <DeleteContain onClick={() => {
+    //                 detachPayment(pm)
+    //               }}>
+    //                 <DeleteText>
+    //                   Eliminar método
+    //                 </DeleteText>
+    //                 <TrashIcon />
+    //               </DeleteContain>
+    //             </PaymentBox>
+    //           )
+    //         })
+    //         }
+    //       </PayContainer> :
+    //         <p>Sin métodos de pago...</p>}
+    //     </>
+    //   }
+    //   <AddPay onClick={handleShow}>
+    //     Añadir método de pago
+    //   </AddPay>
+    //   <Modal1 show={show} setShow={setShow} data={data} handleClick={handleClick} />
+    // </ProfilePayment>
+    <></>
   )
 }
 export default PaymentMethod;

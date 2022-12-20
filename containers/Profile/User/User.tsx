@@ -185,7 +185,7 @@ const User = () => {
   }
   return (
     <BackgroundProfile>
-      {/* FIRST BOX */}
+      {/* FIRST CONTAINER */}
       {//Vista del navbar dinamico de Homepage
         userData !== null
         &&
@@ -194,7 +194,8 @@ const User = () => {
           taskView={taskView}
           setTaskView={setTaskView}
 
-        />}
+        />
+      }
       {/* SECOND Container */}
       {
         taskView == false &&
@@ -225,7 +226,7 @@ const User = () => {
         </SecondBox>
       }
 
-      <Link href="/">
+      {/* <Link href="/">
         <LogOut onClick={logoutFunc} style={{
           display: responsive1023 ? "" : "none",
           marginTop: "-5%",
@@ -233,7 +234,7 @@ const User = () => {
           Cerrar Sesión
           <LogOutIcon />
         </LogOut>
-      </Link>
+      </Link> */}
     </BackgroundProfile>
   )
 }

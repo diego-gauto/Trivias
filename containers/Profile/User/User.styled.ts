@@ -6,6 +6,7 @@ export const BackgroundProfile = styled.div`
   width: 100%;
   height: calc(100vh - 82.5px);
   display: flex;
+  background-color: #ede7f2;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -29,7 +30,7 @@ export const SecondBox = styled.div`
   flex-direction: column;
   padding: 15px;
   gap: 15px;
-  width: 100%;
+  width: 70%;
   height: 100%;
 `;
 export const ThirdBox = styled.div`
@@ -657,4 +658,48 @@ export const Box2 = styled.div`
   border-radius: 100px;
   border: 1px solid #6717cd;
   height: 40px;
+`;
+export const ProfileMainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+  width: 30%;
+  .first-text {
+    text-align: center;
+    p {
+      color: #451d71;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 15px;
+    }
+    span {
+      font-size: 16px;
+      color: #fc8c07;
+    }
+  }
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 300px;
+    p {
+      margin: 0;
+    }
+    .user-info-up {
+      background-color: #dad3e5;
+      padding-inline: 20px;
+      padding-bottom: 20px;
+      border-radius: 10px 10px 0 0;
+      .name-text {
+        font-size: 18px;
+      }
+    }
+    .user-info-down {
+      background-color: #3f1168;
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+    }
+  }
 `;

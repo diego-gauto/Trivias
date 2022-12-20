@@ -91,120 +91,121 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
   )
 
   return (
-    <RewardContain>
-      <DataTitle>
-        Siguiente Recompensa...
-      </DataTitle>
-      <RewardBox>
-        <VectorLeft onClick={() => { setReward(!reward) }} />
-        {
-          reward == false &&
-          <RewardTitle>
-            Recompensas por puntuaje
-          </RewardTitle>
-        }
-        {
-          reward == true &&
-          <RewardTitle>
-            Recompensas por tiempo
-          </RewardTitle>
-        }
-        <VectorRight onClick={() => { setReward(!reward) }} />
-      </RewardBox>
-      {
-        reward == false &&
-        <>
-          <Pointbox>
-            <Currentlvl>
-              {
-                level - 1
-              }
-            </Currentlvl>
-            <CompleteBar>
-              <ProgressBar1 barProgress={barProgress}>
-                <PointsBox>
-                  <UserPoints style={{ display: responsive470 ? "none" : "" }}>
-                    {score}
-                  </UserPoints>
-                  <PolygonDown />
-                </PointsBox>
-              </ProgressBar1>
-            </CompleteBar>
-            <Nextlvl>
-              {
-                level
-              }
-            </Nextlvl>
-          </Pointbox>
-          <RewardData>
-            <ImageContain>
-              <RewardImage src={prize.path} />
-            </ImageContain>
-            <RewardInfo>
-              <RewardTitleBox>
-                {prize.title}
-              </RewardTitleBox>
-              <RewardPoints>
-                {prize.points} puntos
-              </RewardPoints>
-              <RewardParagraph>
-                {prize.about}
-              </RewardParagraph>
+    // <RewardContain>
+    //   <DataTitle>
+    //     Siguiente Recompensa...
+    //   </DataTitle>
+    //   <RewardBox>
+    //     <VectorLeft onClick={() => { setReward(!reward) }} />
+    //     {
+    //       reward == false &&
+    //       <RewardTitle>
+    //         Recompensas por puntuaje
+    //       </RewardTitle>
+    //     }
+    //     {
+    //       reward == true &&
+    //       <RewardTitle>
+    //         Recompensas por tiempo
+    //       </RewardTitle>
+    //     }
+    //     <VectorRight onClick={() => { setReward(!reward) }} />
+    //   </RewardBox>
+    //   {
+    //     reward == false &&
+    //     <>
+    //       <Pointbox>
+    //         <Currentlvl>
+    //           {
+    //             level - 1
+    //           }
+    //         </Currentlvl>
+    //         <CompleteBar>
+    //           <ProgressBar1 barProgress={barProgress}>
+    //             <PointsBox>
+    //               <UserPoints style={{ display: responsive470 ? "none" : "" }}>
+    //                 {score}
+    //               </UserPoints>
+    //               <PolygonDown />
+    //             </PointsBox>
+    //           </ProgressBar1>
+    //         </CompleteBar>
+    //         <Nextlvl>
+    //           {
+    //             level
+    //           }
+    //         </Nextlvl>
+    //       </Pointbox>
+    //       <RewardData>
+    //         <ImageContain>
+    //           <RewardImage src={prize.path} />
+    //         </ImageContain>
+    //         <RewardInfo>
+    //           <RewardTitleBox>
+    //             {prize.title}
+    //           </RewardTitleBox>
+    //           <RewardPoints>
+    //             {prize.points} puntos
+    //           </RewardPoints>
+    //           <RewardParagraph>
+    //             {prize.about}
+    //           </RewardParagraph>
 
-            </RewardInfo>
+    //         </RewardInfo>
 
-          </RewardData>
-          {rewardCenter}
-        </>
-      }
-      {
-        reward == true &&
-        <>
-          <Pointbox>
-            <Currentlvl>
-              {timeLevel}
-            </Currentlvl>
-            <CompleteBar>
-              <ProgressBar2 barProgress={timeProgress}>
-                <PointsBox>
-                  <UserPoints style={{ display: responsive470 ? "none" : "" }}>
+    //       </RewardData>
+    //       {rewardCenter}
+    //     </>
+    //   }
+    //   {
+    //     reward == true &&
+    //     <>
+    //       <Pointbox>
+    //         <Currentlvl>
+    //           {timeLevel}
+    //         </Currentlvl>
+    //         <CompleteBar>
+    //           <ProgressBar2 barProgress={timeProgress}>
+    //             <PointsBox>
+    //               <UserPoints style={{ display: responsive470 ? "none" : "" }}>
 
-                  </UserPoints>
-                  <PolygonDown />
-                </PointsBox>
-              </ProgressBar2>
-            </CompleteBar>
-            <Nextlvl>
-              {timeLevel + 1}
-            </Nextlvl>
-          </Pointbox>
-          {timeLevel > 0 ? <RewardData>
-            <ImageContain>
-              <RewardImage src={timePrize.path} />
-            </ImageContain>
-            <RewardInfo>
-              <RewardTitleBox>
-                {timePrize.title}
-              </RewardTitleBox>
-              <RewardPoints>
-                {
-                  timePrize.month <= 1 ? timePrize.month + " mes" : timePrize.month + " meses"
-                }
-              </RewardPoints>
-              <RewardParagraph>
-                {timePrize.about}
-              </RewardParagraph>
-              {rewardCenter}
-            </RewardInfo>
-          </RewardData> :
-            <>
-              <p>No hay premios en este nivel...</p>
-              {rewardCenterNoReward}
-            </>
-          }
-        </>
-      }
-    </RewardContain>
+    //               </UserPoints>
+    //               <PolygonDown />
+    //             </PointsBox>
+    //           </ProgressBar2>
+    //         </CompleteBar>
+    //         <Nextlvl>
+    //           {timeLevel + 1}
+    //         </Nextlvl>
+    //       </Pointbox>
+    //       {timeLevel > 0 ? <RewardData>
+    //         <ImageContain>
+    //           <RewardImage src={timePrize.path} />
+    //         </ImageContain>
+    //         <RewardInfo>
+    //           <RewardTitleBox>
+    //             {timePrize.title}
+    //           </RewardTitleBox>
+    //           <RewardPoints>
+    //             {
+    //               timePrize.month <= 1 ? timePrize.month + " mes" : timePrize.month + " meses"
+    //             }
+    //           </RewardPoints>
+    //           <RewardParagraph>
+    //             {timePrize.about}
+    //           </RewardParagraph>
+    //           {rewardCenter}
+    //         </RewardInfo>
+    //       </RewardData> :
+    //         <>
+    //           <p>No hay premios en este nivel...</p>
+    //           {rewardCenterNoReward}
+    //         </>
+    //       }
+    //     </>
+    //   }
+    // </RewardContain>
+    <></>
   )
 }
 export default NextReward;
