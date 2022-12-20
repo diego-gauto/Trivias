@@ -62,16 +62,16 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       return (<Details style={{ cursor: 'pointer' }} onClick={() => {
         goTo(index, less)
       }}>
-        <CourseTitle active={data?.id == less.id}>
-          {index + 1}: {less.title}.
+        {<CourseTitle active={data?.id == less.id}>
+          {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
           <br></br>
           <br></br>
-        </CourseTitle>
+        </CourseTitle>}
         <DetailContain>
-          <CourseLength>
+          {!("mandatory" in less) && <CourseLength>
             {hms(less.duration)}
             {less.extra.length > 0 && <DocIcon></DocIcon>}
-          </CourseLength>
+          </CourseLength>}
           {less.points > 0 && <CoursePoints>
             +{less.points} puntos
           </CoursePoints>}
@@ -99,11 +99,11 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       return (<Details style={{ cursor: 'pointer' }} onClick={() => {
         goTo(index, less)
       }}>
-        <CourseTitle active={data?.id == less.id}>
-          {index + 1}: {less.title}.
+        {<CourseTitle active={data?.id == less.id}>
+          {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
           <br></br>
           <br></br>
-        </CourseTitle>
+        </CourseTitle>}
         <DetailContain>
           <CourseLength>
             {hms(less.duration)}
@@ -117,7 +117,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
     }
     return (<Details style={{ 'background': '#d6d4d499', borderRadius: '5px', cursor: 'auto' }}>
       <CourseTitle active={data?.id == less.id}>
-        {index + 1}: {less.title}.
+        {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
         <br></br>
         <br></br>
       </CourseTitle>
