@@ -437,3 +437,8 @@ export const updateTeacher = async (professor: any, id: any) => {
   })
   return 'exito'
 }
+export const deleteQuiz = async (courseId: any, seasonId: any, lessonId: any) => {
+  await deleteDoc(doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId)).then(() => {
+    return "200"
+  })
+}

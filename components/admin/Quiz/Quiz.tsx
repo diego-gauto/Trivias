@@ -10,7 +10,8 @@ import { addQuiz, editQuiz, getQuiz } from '../../../store/actions/AdminActions'
 import { useRouter } from 'next/router';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { deleteDoc, doc } from 'firebase/firestore';
-import { db } from "../../../firebase/firebaseConfig";
+import { db } from '../../../firebase/firebaseConfig';
+import { deleteQuiz } from '../../../store/actions/courseActions';
 const Quiz = () => {
   const router = useRouter();
   const { courseID, seasonID, lessonID } = router.query;
@@ -109,7 +110,6 @@ const Quiz = () => {
   const submit = () => {
     setLoader(true);
     quiz.mandatory = mandatory;
-    console.log(quiz);
     if (!lessonID) {
       if (quiz.title == '' ||
         quiz.number == '' ||
@@ -155,13 +155,14 @@ const Quiz = () => {
         })
       }
     }
-
   }
-  const deleteQuiz = () => {
-    deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID)).then(() => {
+
+  const deleteActualQuiz = () => {
+    deleteQuiz(courseID, seasonID, lessonID).then(() => {
       window.location.href = `/admin/Edit?documentID=${courseID}`;
     });
   }
+
   const getQuizes = () => {
     getQuiz(courseID, seasonID, lessonID).then((res: any) => {
       setMandatory(res.mandatory)
@@ -192,7 +193,7 @@ const Quiz = () => {
             <div className='button-container'>
               <button className='button-save' onClick={submit}>{!lessonID ? "Guardar" : "Editar"} Cambios</button>
               {lessonID &&
-                <button className="button-delete" onClick={deleteQuiz}> Eliminar Quiz</button>
+                <button className="button-delete" onClick={deleteActualQuiz}> Eliminar Quiz</button>
               }
             </div>
             : <LoaderContain />
