@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import firebase from "firebase/compat/app";
-import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
@@ -283,7 +283,17 @@ export const addQuiz = async (quiz: any, courseID: any, seasonID: any) => {
       ...quiz
     }
   );
-
+}
+export const getQuiz = async (courseID: any, seasonID: any, lessonID: any) => {
+  const docRef = await doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+export const editQuiz = async (quiz: any, courseID: any, seasonID: any, lessonID: any) => {
+  return await db.collection('courses').
+    doc(courseID).collection("seasons").
+    doc(seasonID).collection("lessons").
+    doc(lessonID).update(quiz);
 }
 export const editSeasonName = async (courseID: string, seasonID: string, seasonName: string) => {
   return await db.collection('courses').doc(courseID).collection("seasons").doc(seasonID).update({ name: seasonName });

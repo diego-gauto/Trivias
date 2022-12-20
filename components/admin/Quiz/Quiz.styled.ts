@@ -7,19 +7,39 @@ export const QuizContainer = styled.div`
   padding: 40px;
   width: 100%;
   font-family: "Montserrat", sans-serif;
-  .button-save {
-    font-size: 16px;
-    font-family: "Montserrat", sans-serif;
-    background: #6717cd;
-    color: white;
-    padding-block: 10px;
-    padding-inline: 30px;
-    border-radius: 100px;
-    border: none;
-    &:hover {
-      background-color: #5000b5;
-      transform: scale(1.03);
-      transition: 0.5s ease all;
+  .button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .button-save {
+      font-size: 16px;
+      font-family: "Montserrat", sans-serif;
+      background: #6717cd;
+      color: white;
+      padding-block: 10px;
+      padding-inline: 15px;
+      border-radius: 100px;
+      border: none;
+      &:hover {
+        background-color: #5000b5;
+        transform: scale(1.03);
+        transition: 0.5s ease all;
+      }
+    }
+    .button-delete {
+      font-size: 16px;
+      font-family: "Montserrat", sans-serif;
+      background: #e34141;
+      color: white;
+      padding-block: 10px;
+      padding-inline: 15px;
+      border-radius: 100px;
+      border: none;
+      &:hover {
+        transform: scale(1.03);
+        transition: 0.5s ease all;
+        background: #cd0606;
+      }
     }
   }
 `;
