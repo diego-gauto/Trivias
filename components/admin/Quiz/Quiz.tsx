@@ -6,12 +6,14 @@ import { Container, FormContainer, InputContainer, QuestionContainer, QuizContai
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import { addQuiz } from '../../../store/actions/AdminActions';
+import { addQuiz, editQuiz, getQuiz } from '../../../store/actions/AdminActions';
 import { useRouter } from 'next/router';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from "../../../firebase/firebaseConfig";
 const Quiz = () => {
   const router = useRouter();
-  const { courseID, seasonID } = router.query;
+  const { courseID, seasonID, lessonID } = router.query;
   const [mandatory, setMandatory] = useState<boolean>(false)
   const [openSelect, setOpenSelect] = useState<boolean>(false)
   const [loader, setLoader] = useState(false);
@@ -23,8 +25,8 @@ const Quiz = () => {
   const [quiz, setQuiz] = useState<any>({
     questions: [],
     number: '',
-    passingGrade: 0,
-    points: 0,
+    passingGrade: '',
+    points: '',
     title: '',
   });
   const modules = {
@@ -108,33 +110,91 @@ const Quiz = () => {
     setLoader(true);
     quiz.mandatory = mandatory;
     console.log(quiz);
-    if (quiz.title == '' ||
-      quiz.number == '' ||
-      quiz.passingGrade == '' ||
-      quiz.points == '') {
-      setLoader(false);
-      alert("Por favor complete todo los campos!");
-    } else {
-      addQuiz(quiz, courseID, seasonID).then(() => {
-        alert(
-          "Quiz Creado"
-        )
+    if (!lessonID) {
+      if (quiz.title == '' ||
+        quiz.number == '' ||
+        quiz.passingGrade == '' ||
+        quiz.points == '') {
         setLoader(false);
-        router.push({
-          pathname: `/admin/Edit`,
-          query: { documentID: courseID }
-        });
-      })
+        alert("Por favor complete todo los campos!");
+      } else {
+        addQuiz(quiz, courseID, seasonID).then(() => {
+          alert(
+            "Quiz Creado"
+          )
+          setLoader(false);
+          router.push({
+            pathname: `/admin/Edit`,
+            query: { documentID: courseID }
+          });
+        })
+      }
+    }
+    else {
+      if (quiz.title == '' ||
+        quiz.number == '' ||
+        quiz.passingGrade == '' ||
+        quiz.points == '' ||
+        !quiz.number ||
+        !quiz.passingGrade ||
+        !quiz.points
+      ) {
+        setLoader(false);
+        alert("Por favor complete todo los campos!");
+      } else {
+        setLoader(false);
+        editQuiz(quiz, courseID, seasonID, lessonID).then(() => {
+          alert(
+            "Quiz Editado"
+          )
+          setLoader(false);
+          router.push({
+            pathname: `/admin/Edit`,
+            query: { documentID: courseID }
+          });
+        })
+      }
     }
 
   }
+  const deleteQuiz = () => {
+    deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID)).then(() => {
+      window.location.href = `/admin/Edit?documentID=${courseID}`;
+    });
+  }
+  const getQuizes = () => {
+    getQuiz(courseID, seasonID, lessonID).then((res: any) => {
+      setMandatory(res.mandatory)
+      console.log(res)
+      setQuiz(res)
+    })
+
+  }
+  useEffect(() => {
+    if (lessonID) {
+      getQuizes();
+    }
+
+  }, [])
+
   return (
     <QuizContainer>
       <TitleContain>
-        <Title>Nuevo Quiz</Title>
+        {
+          !lessonID
+            ? <Title>Nuevo Quiz</Title>
+            : <Title>Editar Quiz</Title>
+        }
+
         {
           !loader
-            ? <button className='button-save' onClick={submit}>Guardar Cambios</button>
+            ?
+            <div className='button-container'>
+              <button className='button-save' onClick={submit}>{!lessonID ? "Guardar" : "Editar"} Cambios</button>
+              {lessonID &&
+                <button className="button-delete" onClick={deleteQuiz}> Eliminar Quiz</button>
+              }
+            </div>
             : <LoaderContain />
         }
 
@@ -146,6 +206,7 @@ const Quiz = () => {
             </label>
             <input
               placeholder="2"
+              defaultValue={quiz.number}
               onChange={(e: any) => {
                 setQuiz({
                   ...quiz, number: parseFloat(e.target.value)
@@ -157,6 +218,7 @@ const Quiz = () => {
             <label>Nombre del Quiz</label>
             <input
               placeholder="Nombre del Quiz"
+              defaultValue={quiz.title}
               onChange={(e: any) => {
                 setQuiz({
                   ...quiz, title: e.target.value
@@ -168,6 +230,7 @@ const Quiz = () => {
             <label>Calificación Aprobatoria</label>
             <input
               placeholder="70"
+              defaultValue={quiz.passingGrade}
               onChange={(e: any) => {
                 setQuiz({
                   ...quiz, passingGrade: parseInt(e.target.value)
@@ -211,6 +274,7 @@ const Quiz = () => {
             <label>Puntos</label>
             <input
               placeholder="100"
+              defaultValue={quiz.points}
               onChange={(e: any) => {
                 setQuiz({
                   ...quiz, points: parseInt(e.target.value)
