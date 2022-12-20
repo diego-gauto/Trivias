@@ -147,12 +147,11 @@ const CourseForm_Create = () => {
     setMaterial([...tempMaterial])
   }
   const addProfessors = (val: any, index: any) => {
-
     let tempProfessor = professor
     let tempIndex = 0;
     if (tempProfessor.some((e: any) => e.name === val.name)) {
       tempIndex = tempProfessor.findIndex((x: any) =>
-        x == val
+        x.name == val.name
       )
       tempProfessor.splice(tempIndex, 1);
     }
