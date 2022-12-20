@@ -260,17 +260,21 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <ContainVideo>
                       <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
                         <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
-                          <img src={lesson.image} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                          <img src={lesson.image ? lesson.image : "/images/admin/Courses/Quiz.PNG"} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
                         </div>
                       </EpisodeContain>
                     </ContainVideo>
                     <EpisodeInfo>
-                      <EpisodeTitle>
-                        {index + 1}: {lesson.title}
-                      </EpisodeTitle>
-                      <EpisodeTime>
-                        {hms(lesson.duration)}
-                      </EpisodeTime>
+                      {"mandatory" in lesson ? <EpisodeTitle>
+                        Quiz: {lesson.title}
+                      </EpisodeTitle> :
+                        <EpisodeTitle>
+                          {lesson.number}: {lesson.title}
+                        </EpisodeTitle>}
+                      {!("mandatory" in lesson) &&
+                        <EpisodeTime>
+                          {hms(lesson.duration)}
+                        </EpisodeTime>}
                       <Description>
                         {lesson.description}
                       </Description>
