@@ -1,8 +1,11 @@
-import { DocumentData } from 'firebase/firestore'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { addHomework, getHomework } from '../../../../../store/actions/courseActions'
+import { DownlowadContain, DownloadText, FileIcon, Weight, Pdf } from './Extra.styled'
 import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkContain, ReviewButton } from './HomeWork.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
+import { BiDownload } from "react-icons/bi";
+import { BsFileArrowUp } from "react-icons/bs";
 
 const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }: any) => {
   const [status, setStatus] = useState("");
@@ -104,24 +107,65 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         </UnSelected>
       </IconContain>
       <HomeWorkContain>
-        <TaskTitle>
-          Material de apoyo
-        </TaskTitle>
-        {/* <TaskText dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }}>
-        </TaskText> */}
-        {/* {(user) && <ButtonDiv>
-          {status == "" && <UploadButton onClick={uploadHwk}>
-            Subir tarea
-            <UploadIcon />
-            <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
-          </UploadButton>}
-          {status == "pending" && <ReviewButton onClick={uploadHwk}>
-            En Revisión
-          </ReviewButton>}
-          {status == "aproved" && <ReviewButton onClick={uploadHwk}>
-            Tarea Aprobada
-          </ReviewButton>}
-        </ButtonDiv>} */}
+        <div className='left'>
+          <TaskTitle>
+            Material de apoyo
+          </TaskTitle>
+          <ol type="a">
+            {data.extra.map((extra: any) => {
+              return (
+                <Link href={extra.path}>
+                  <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                    <DownlowadContain>
+                      <DownloadText>
+                        <li>{extra.title.slice(0, -4)}</li>
+                      </DownloadText>
+                      <Pdf><BiDownload></BiDownload> Descargar Pdf</Pdf>
+                    </DownlowadContain>
+                  </a>
+                </Link>
+              )
+            })}
+          </ol>
+        </div>
+        <div className='middle'></div>
+        <div className='right'>
+          <TaskTitle style={{ color: "#f78803" }}>
+            Sube aquí tus prácticas <br />
+            <span>
+              Da click en el botón correspondiente <br />
+              y sube tu tarea manualmente.
+            </span>
+          </TaskTitle>
+          <div className='upload-info'>
+            <p className='title'>Tamaño máximo: <b>5 Mb</b></p>
+            <p className='title'>Formatos permitidos:</p>
+            <div className='files'>
+              <p>PNG</p>
+              <div className='line'></div>
+              <p>JPG</p>
+              <div className='line'></div>
+              <p>DOC</p>
+              <div className='line'></div>
+              <p>DOCX</p>
+              <div className='line'></div>
+              <p>PPT</p>
+              <div className='line'></div>
+              <p>PPTX</p>
+              <div className='line'></div>
+              <p>PDF</p>
+            </div>
+          </div>
+          <div className='line'></div>
+          <div className='upload-container'>
+            <p>a. Módulo {parseInt(season) + 1} - Lección {parseInt(lesson) + 1}</p>
+            <p>Tarea: <span>{data.homeWork}</span></p>
+            <div className='homework'>
+              <BsFileArrowUp></BsFileArrowUp>
+              Subir Tarea
+            </div>
+          </div>
+        </div>
       </HomeWorkContain>
     </>
 

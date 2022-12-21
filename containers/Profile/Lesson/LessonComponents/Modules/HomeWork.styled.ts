@@ -2,14 +2,92 @@ import styled from "styled-components";
 
 export const HomeWorkContain = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 2%;
+  .left {
+    width: 48%;
+  }
+  .middle {
+    background: #d4cedc;
+    width: 1.5px;
+    height: 100%;
+  }
+  .right {
+    width: 48%;
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .upload-info {
+      .title {
+        font-weight: 600;
+        b {
+          color: rgb(247, 136, 3);
+        }
+      }
+      p {
+        color: #3f1168;
+        margin: 0;
+      }
+      .files {
+        display: flex;
+        justify-content: space-between;
+        .line {
+          width: 1px;
+          height: auto;
+          background: #8e2de2;
+        }
+      }
+    }
+    .line {
+      width: 100%;
+      height: 1.5px;
+      background: #d4cedc;
+    }
+    .upload-container {
+      p {
+        margin: 0;
+        font-weight: 600;
+        color: #3f1168;
+        span {
+          font-weight: 500;
+        }
+      }
+      .homework {
+        margin-top: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        font-weight: 500;
+        opacity: 0.7;
+        color: #8e5fc1;
+        svg {
+          font-size: 22px;
+        }
+        &:hover {
+          opacity: 1;
+          color: #8e2de2;
+          font-weight: 600;
+          transition: 0.5s ease all;
+        }
+      }
+    }
+  }
+  ol {
+    margin-top: 20px;
+    padding-left: 1.5rem;
+  }
 `;
 export const TaskTitle = styled.p`
   font-size: 18px;
   font-weight: 600;
   color: #f8a44c;
   margin: 0;
+  line-height: normal;
+  span {
+    font-weight: 500;
+  }
   @media (max-width: 1023px) {
     font-size: 14px;
   }
