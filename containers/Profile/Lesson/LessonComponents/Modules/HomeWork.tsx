@@ -25,10 +25,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
     })
   }, [data])
 
-
-  if (!data.homeworkAvailable) {
-    setValue(1)
-  }
   const getImage = (file: any) => {
     let tempHomework: any = {}
     tempHomework.userName = user.name;
@@ -70,21 +66,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         <Titles onClick={() => {
           setValue(1)
         }}>
-          Acerca de
+          Acerca del curso
         </Titles>
         <ListIcon onClick={() => {
           setValue(1)
         }} />
-        {/* <Titles onClick={() => {
-          setValue(2)
-        }}>
-          Material Extra
-        </Titles> */}
         <BookIcon onClick={() => {
           setValue(2)
         }} />
-        {data.homeworkAvailable && <PositionTitle position={value}>
-          Tareas
+        {<PositionTitle position={value}>
+          Materiales y tareas
         </PositionTitle>}
         <ChatboxIcon />
         <Titles onClick={() => {
@@ -95,6 +86,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         <EaselIcon onClick={() => {
           setValue(4)
         }} />
+        <div className='line'></div>
       </TitleContain>
       <IconContain>
         <UnSelected>
@@ -110,15 +102,10 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
             setValue(4)
           }} style={{ backgroundColor: 'gray' }} />
         </UnSelected>
-        {/* <UnSelected>
-          <EaselIcon onClick={() => {
-            setValue(2)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
       </IconContain>
       <HomeWorkContain>
         <TaskTitle>
-          Tarea: {data.homeWork}
+          Material de apoyo
         </TaskTitle>
         <TaskText dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }}>
 

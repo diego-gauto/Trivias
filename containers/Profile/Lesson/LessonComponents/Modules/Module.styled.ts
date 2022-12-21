@@ -5,21 +5,22 @@ export const MainContainer = styled.div`
   flex-direction: column;
   width: 70%;
   gap: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  @media (max-width: 1023px) {
-    padding: 10px;
-    box-shadow: none;
-    gap: 0;
-  }
-  @media (max-width: 900px) {
-    width: 100%;
-  }
+  padding-block: 30px;
+  padding-inline: 60px;
+  background: #ede7f2;
 `;
 export const TitleContain = styled.div`
+  position: relative;
   display: flex;
   gap: 50px;
+  padding-bottom: 30px;
+  .line {
+    position: absolute;
+    background: #d4cedc;
+    height: 1.5px;
+    width: 100%;
+    bottom: 0;
+  }
   @media (max-width: 1023px) {
     display: none;
   }
@@ -61,16 +62,18 @@ export const UnSelected = styled.div`
 `;
 export const Titles = styled.p`
   font-size: 16px;
-  font-weight: 400;
   font-family: "Montserrat", sans-serif;
-  color: #6717cd;
+  color: #8e2de2;
+  font-weight: 500;
+  opacity: 0.7;
   margin: 0;
   cursor: pointer;
 `;
 export const PositionTitle = styled.p<{ position: any }>`
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
-  color: #6717cd;
+  color: #8e2de2;
+  opacity: 0.7;
   margin: 0;
   @media (max-width: 1023px) {
     display: none;
@@ -79,21 +82,25 @@ export const PositionTitle = styled.p<{ position: any }>`
     props.position == 1 &&
     css`
       font-weight: 700;
+      opacity: 1;
     `}
   ${(props) =>
     props.position == 2 &&
     css`
       font-weight: 700;
+      opacity: 1;
     `}
   ${(props) =>
     props.position == 3 &&
     css`
       font-weight: 700;
+      opacity: 1;
     `}
   ${(props) =>
     props.position == 4 &&
     css`
       font-weight: 700;
+      opacity: 1;
     `}
 `;
 export const ListIcon = styled.i`

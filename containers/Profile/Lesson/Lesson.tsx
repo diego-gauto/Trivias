@@ -39,8 +39,10 @@ const Lesson = () => {
       let temp_lesson;
       let temp_comments;
       temp_lesson = course.seasons[season].lessons[lesson];
-      temp_lesson.seasonId = course?.seasons[season].id
-      temp_lesson.courseId = course.id
+      temp_lesson.seasonId = course?.seasons[season].id;
+      temp_lesson.courseId = course.id;
+      temp_lesson.courseTitle = course?.courseTittle;
+      temp_lesson.teachers = course?.courseProfessor;
       setCurrentLesson(temp_lesson);
       if (userData) {
         if (course.courseType == 'Gratis') {

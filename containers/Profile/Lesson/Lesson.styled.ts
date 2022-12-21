@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -44,7 +43,6 @@ export const Container = styled.div`
 export const FirstContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   width: 100%;
   @media (max-width: 1023px) {
     width: 100%;

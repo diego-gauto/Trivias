@@ -3,15 +3,75 @@ import styled, { css } from "styled-components";
 export const MainContainer = styled.div<{ open: any }>`
   display: flex;
   flex-direction: column;
-  gap: 10px;
   position: absolute;
-  right: 20px;
-  width: 28%;
-  overflow: auto;
-  max-height: 75vh;
+  right: 0;
+  width: 30%;
   ::-webkit-scrollbar {
     display: none;
   }
+  .course-info {
+    background: #f8e4cc;
+    padding-left: 40px;
+    padding-block: 15px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    p {
+      font-size: 14px;
+      color: #3f1168;
+      margin: 0;
+      span {
+        font-weight: bold;
+      }
+    }
+    .level-container {
+      display: flex;
+      gap: 5px;
+    }
+  }
+  /******/
+  .course-progress {
+    position: relative;
+    background: #f8e494;
+    padding-left: 40px;
+    padding-block: 15px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      b {
+        font-weight: 700;
+        color: #942ced;
+      }
+      span {
+        font-weight: 400;
+        color: #942ced;
+      }
+    }
+    p {
+      font-size: 14px;
+      color: #3f1168;
+      margin: 0;
+      span {
+        font-weight: bold;
+      }
+    }
+    .certificate-label {
+      display: flex;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      background: #6717cd;
+      text-align: center;
+      p {
+        color: #fff;
+        margin: auto;
+        font-size: 12px;
+      }
+    }
+  }
+
   @media (max-width: 900px) {
     position: fixed;
     z-index: 40;

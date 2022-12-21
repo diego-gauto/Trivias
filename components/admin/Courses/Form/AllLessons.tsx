@@ -57,11 +57,11 @@ export const AllLessons = ({ documentID, index, courseID, seasonID, lesson }: an
               ? <EpisodeTitle>Quiz: {lesson.title}</EpisodeTitle>
 
               : <EpisodeTitle>Lección {lesson.number}: {lesson.title}</EpisodeTitle>
-
-            }{!("mandatory" in lesson) &&
-              <EpisodeTime>{hms(lesson.duration)}</EpisodeTime>
             }
             <EpisodeInfo>{lesson.description}</EpisodeInfo>
+            {!("mandatory" in lesson) &&
+              <EpisodeTime>{hms(lesson.duration)}</EpisodeTime>
+            }
             {
               "mandatory" in lesson
                 ?

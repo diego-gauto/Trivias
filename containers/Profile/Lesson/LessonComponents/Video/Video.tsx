@@ -74,49 +74,50 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete }
     }
   }
 
-  // const doVideoStuff = () => {
-  //   //@ts-ignore
-  //   var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
-  //   var videoSrc = data.link;
-  //   if (Hls.isSupported()) {
-  //     var hls = new Hls();
-  //     hls.loadSource(videoSrc);
-  //     hls.attachMedia(video);
-  //   } else {
-  //     video.src = `${videoSrc}`
-  //   }
-  // }
-  // useEffect(() => {
-  //   doVideoStuff()
-  // }, [])
-
   return (
     <Segment>
       <VideoContain>
-        <TitleContain>
-          <Title>
-            {title}
-          </Title>
-          <EaselIcon onClick={() => { setMenu(!menu) }} />
-          {/* <video id="video" controls playsInline preload="auto" width="100%"
-          ></video> */}
-        </TitleContain>
-        <ReactPlayer
-          className='absolute'
-          ref={p => p?.seekTo(handleViewed())}
-          url={data.link}
-          playing={true}
-          muted={false}
-          controls
-          width="100%" height="100%"
-          onEnded={finishedLesson}
-          onDuration={(duration) =>
-            handleDuration(duration)
-          }
-          onProgress={(state) => {
-            handleProgress(state.playedSeconds)
-          }}
-        />
+        {"mandatory" in course.seasons[season].lessons[lesson] ?
+          <div className='quiz-container'>
+            <Title>
+              Quiz: {course.seasons[season].lessons[lesson].title}
+            </Title>
+            {course.seasons[season].lessons[lesson].questions.map((question: any, index: number) => {
+              return (
+                <div className='question-container'>
+                  <div className='question'>
+                    <p>{index + 1}.</p>
+                    <p dangerouslySetInnerHTML={{ __html: question.question }}></p>
+                  </div>
+                  <div className='answers'>
+                    {question.answers.map((answer: any) => {
+                      return (
+                        <p></p>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          :
+          <ReactPlayer
+            className='absolute'
+            ref={p => p?.seekTo(handleViewed())}
+            url={data.link}
+            playing={true}
+            muted={false}
+            controls
+            width="100%" height="100%"
+            onEnded={finishedLesson}
+            onDuration={(duration) =>
+              handleDuration(duration)
+            }
+            onProgress={(state) => {
+              handleProgress(state.playedSeconds)
+            }}
+          />
+        }
       </VideoContain>
       <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
     </Segment>

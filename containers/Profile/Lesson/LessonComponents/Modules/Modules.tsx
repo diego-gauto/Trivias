@@ -13,7 +13,7 @@ const Modules = ({ data, user, comments, season, lesson, teacherCreds }: any) =>
     <MainContainer>
       {
         position === 1
-          ? <About value={position} setValue={setPosition} data={data} /> :
+          ? <About value={position} setValue={setPosition} data={data} teacherCreds={teacherCreds} /> :
           // position === 2
           //   ? <Extra value={position} setValue={setPosition} data={data} /> :
           position === 3

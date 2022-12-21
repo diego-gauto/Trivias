@@ -1,32 +1,26 @@
 import Link from 'next/link';
 import React, { useState } from 'react'
-import { DownloadText, DownlowadContain, ExtraContain, FileIcon, Paragraph, Weight } from './Extra.styled'
 import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent, ObjectiveContainer } from './About.styled';
 import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
 
-const About = ({ value, setValue, data }: any) => {
-
+const About = ({ value, setValue, data, teacherCreds }: any) => {
   return (
     <>
       <TitleContain>
         <PositionTitle position={value}>
-          Acerca de
+          Acerca del curso
         </PositionTitle>
-        {/* <Titles onClick={() => {
-          setValue(2)
-        }}>
-          Material Extra
-        </Titles> */}
-        {data.homeworkAvailable && <Titles onClick={() => {
+        <Titles onClick={() => {
           setValue(3)
         }}>
-          Tareas
-        </Titles>}
+          Materiales y tareas
+        </Titles>
         <Titles onClick={() => {
           setValue(4)
         }}>
           Comentarios
         </Titles>
+        <div className='line'></div>
       </TitleContain>
       <IconContain>
         <SelectContain>
@@ -43,68 +37,37 @@ const About = ({ value, setValue, data }: any) => {
             setValue(4)
           }} style={{ backgroundColor: 'gray' }} />
         </UnSelected>
-        {/* <UnSelected>
-          <EaselIcon
-            onClick={() => {
-              setValue(2)
-            }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
       </IconContain>
       <AboutContain>
-        {data.points > 0 && <CircleContain>
-          {<NumberText>
-            +{data.points}
-          </NumberText>}
-          <PointText>
-            Puntos al <br /> finalizar
-          </PointText>
-        </CircleContain>}
         <TextContainer>
           <LessonTitle>
-            Sobre la lección
+            {data.courseTitle}, <span>de {teacherCreds[0].name}</span>
           </LessonTitle>
           <LessonContent>
-            {data.about}
+            <p className='title'>Objetivo principal</p>
+            <p>En esta clase de nivel básico aprenderás cómo realizar el efecto humo.</p>
+            <p className='title'>Especificaciones</p>
+            <p>A través de este curso, aprenderás todas las habilidades que necesitas para ayudar a
+              las empresas a brindar la experiencia de usuario adecuada para sus productos.
+              Todas las técnicas incluidas en en el curso son estándares de la industria probados y
+              comprobados, que te equiparán con el mejor conocimiento para comenzar tu nuevo
+              camino profesional.</p>
           </LessonContent>
-          {data.extra?.map((extra: any, index: any) => {
-            return (
-              <div key={"About " + index}>
-                <Link href={extra.path}>
-                  <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
-                    <DownlowadContain>
-                      <DownloadText>
-                        <FileIcon />
-                        {extra.title}
-                      </DownloadText>
-                      <Weight>
-                        3.1 MB
-                      </Weight>
-                    </DownlowadContain>
-                  </a>
-                </Link>
-              </div>
-            )
-          })}
         </TextContainer>
+        <div className='teacher-container'>
+          <img src="/images/teachers/Brenda_instructora.jpg" alt="" />
+          <p className='title'>Conoce a <br />
+            <span>tu instructora</span>
+          </p>
+          <p>Mi nombre es Raquel
+            Hernández y soy
+            aplicadora de uñas
+            profesional
+            especializada en
+            crear e impulsar
+            productos de alto</p>
+        </div>
       </AboutContain>
-      {
-        data.objective != undefined
-          ?
-          <ObjectiveContainer >
-            <div className="title">
-              <p>
-                Objetivos
-              </p>
-            </div>
-            <div className="content">
-              <p>
-                {data.objective}
-              </p>
-            </div>
-          </ObjectiveContainer>
-          : ""
-      }
-
     </>
   )
 }

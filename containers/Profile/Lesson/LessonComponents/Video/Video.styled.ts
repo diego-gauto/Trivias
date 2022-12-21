@@ -3,21 +3,33 @@ import styled from "styled-components";
 
 export const Segment = styled.div`
   display: flex;
-  gap: 20px;
 `;
 export const VideoContain = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
   width: 70%;
-  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  min-height: 400px;
   @media (max-width: 1023px) {
     gap: 10px;
     padding: 15px;
   }
   @media (max-width: 900px) {
     width: 100%;
+  }
+  .quiz-container {
+    .question-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .question {
+        display: flex;
+        gap: 10px;
+        p {
+          margin: 0;
+        }
+      }
+    }
   }
 `;
 export const Title = styled.h1`
