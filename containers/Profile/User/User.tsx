@@ -39,6 +39,7 @@ const User = () => {
   const [timeLevel, setTimeLevel] = useState<any>([]);
   const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
   const [taskView, setTaskView] = useState(false);
+  const [nameUpperCase, setNameUpperCase] = useState<string>("");
 
   try {
     var userDataAuth = useAuth();
@@ -107,7 +108,6 @@ const User = () => {
       setCurrentLevel(res.length)
     })
   }
-
   const getCurrentTimeLevel = () => {
     getTimeLevel().then(async (res) => {
       await Promise.all(res.map(async (element: any) => {
@@ -142,7 +142,6 @@ const User = () => {
       }
     })
   }
-
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -161,6 +160,7 @@ const User = () => {
       getCurrentLevel();
       getDate();
       getCurrentTimeLevel();
+      setNameUpperCase(userData.name.toUpperCase())
     }
   }, [userData]);
   useEffect(() => {
@@ -193,13 +193,21 @@ const User = () => {
           userData={userData}
           taskView={taskView}
           setTaskView={setTaskView}
-
+          nextLevel={level.maximum}
         />
       }
       {/* SECOND Container */}
       {
         taskView == false &&
         <SecondBox>
+          <div className="title-contain">
+            <p className="first-text">
+              PERFIL DE <span>{nameUpperCase}</span>
+            </p>
+            <p className="second-text">
+              ¡Dale seguimiento<span> a tu aprendizaje!</span>
+            </p>
+          </div>
           <NextReward
             score={userData.score}
             barProgress={barProgress}

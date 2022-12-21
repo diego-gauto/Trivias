@@ -1,8 +1,6 @@
-
-
 import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
-
+import { MdModeEditOutline } from "react-icons/md";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import UserLevel from "../Rewards/UserLevel/UserLevel";
 import {
@@ -21,7 +19,7 @@ import {
   ProfileMainContainer
 } from "./User.styled";
 
-const UserInfo = ({ userData, taskView, setTaskView }: any) => {
+const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -29,7 +27,10 @@ const UserInfo = ({ userData, taskView, setTaskView }: any) => {
   let tempYear = tempDate.getFullYear()
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
 
+  const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
 
+  const numFor = Intl.NumberFormat('en-US');
+  const nextLevel_format = numFor.format(nextLevel);
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -119,16 +120,55 @@ const UserInfo = ({ userData, taskView, setTaskView }: any) => {
     // </ProfileContainer>
     <ProfileMainContainer>
       <div className="first-text">
-        <p >Siguiente <br />recompensa<br /><span>{userData.score} puntos</span></p>
+        <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
       </div>
       <div className="profile-container">
+        <PictureContain>
+          {userData &&
+            userData.photoURL.length > 0 ?
+            <ProfileIcon src={userData.photoURL} ></ProfileIcon>
+            : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
+          }
+        </PictureContain>
         <div className="user-info-up">
-          d
+          <p className="name-text">
+            {userData.name}<br /><span>{userData.lastName}</span>
+          </p>
+          <div className="data-contain">
+            <p className="points">{userData.score} puntos</p>
+            <p className="months">16 meses de aprendizaje</p>
+            <p className="certificates">14 certificados</p>
+          </div>
         </div>
         <div className="user-info-down">
-          d
+          <div className="data-container">
+            <p className="email">
+              Correo electrónico
+            </p>
+            <p className="email-user">
+              {userData.email}
+            </p>
+          </div>
+          <div className="data-container">
+            <p className="email">
+              Whatsapp
+            </p>
+            <p className="email-user">
+              {userData.phoneNumber}
+            </p>
+          </div>
+          <div className="data-container">
+            <p className="password">
+              Contraseña
+            </p>
+            <p className="password-user">
+              **********
+            </p>
+          </div>
         </div>
       </div>
+      <button className="btn-edit"><MdModeEditOutline />Editar Perfil</button>
+      <button className="btn-logout">Cerrar sesión</button>
     </ProfileMainContainer>
   )
 }

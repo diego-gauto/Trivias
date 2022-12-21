@@ -1,9 +1,5 @@
-
-
 import { useMediaQuery } from "react-responsive";
-
 import Link from "next/link";
-
 import {
   AddPay,
   ArrowRight,
@@ -21,6 +17,7 @@ import {
   RewardCenterLink,
   RewardCenterLinkNoReward,
   RewardContain,
+  RewardContainer,
   RewardData,
   RewardImage,
   RewardInfo,
@@ -28,6 +25,8 @@ import {
   RewardPoints,
   RewardTitle,
   RewardTitleBox,
+  SecondContainer,
+  SubscriptionContainer,
   UserPoints,
   VectorLeft,
   VectorRight,
@@ -35,9 +34,11 @@ import {
 import { useEffect, useState } from "react";
 import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
+import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
+import { FaAward } from "react-icons/fa";
 
 const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel }: any) => {
-  const [reward, setReward] = useState(false);
+  const [reward, setReward] = useState<any>(0);
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
@@ -61,11 +62,9 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
       setTimePrize(tempRewards[0]);
     })
   }
-
   useEffect(() => {
     getNextReward();
   }, [])
-
   useEffect(() => {
     if (timeLevel) {
       getNextTimeReward()
@@ -91,6 +90,94 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
   )
 
   return (
+    <SecondContainer>
+      <RewardContainer reward={reward}>
+        <div className="main-container">
+          <div className="reward-title-contain">
+            <p>
+              Centro de recompensas
+            </p>
+          </div>
+          <div>
+
+          </div>
+          <div className="reward-conditions">
+
+            <div className="point-container" onClick={() => { setReward(0) }}>
+              <p>Recompensas<br />
+                obtenidas<br />
+                <span> por puntaje</span></p>
+              <div className="bottom-contain">
+                <p className="point-number">
+                  08
+
+                </p>
+                <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
+              </div>
+            </div>
+            <div className="time-container" onClick={() => { setReward(1) }}>
+              <p>Beneficios<br />
+                obtenidos<br />
+                <span> por tiempo</span></p>
+              <div className="bottom-contain">
+                <p className="time-number">
+                  12
+                </p>
+                <AiOutlineHourglass style={reward == 1 ? { color: "white" } : { color: "#942cec" }} />
+              </div>
+            </div>
+            <div className="certificates-container" onClick={() => { setReward(2) }}>
+              <p>Certificados<br />
+                <span>acumulados</span></p>
+              <div className="bottom-contain">
+                <p className="certificate-number">
+                  06
+                </p>
+                <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
+              </div>
+            </div>
+
+          </div>
+          <div className="extra-info">
+            1
+          </div>
+        </div>
+        <button>Ir al Centro de Recompensas</button>
+      </RewardContainer>
+      <SubscriptionContainer>
+        <div className="first-section">
+          <p className="main-title">
+            Suscripción
+          </p>
+          <div className="subscription-content">
+            <p className="text-1">
+              Suscripción actual
+            </p>
+            <div className="subscription-info">
+              <p >
+                Gonvar+<br />
+                <span className="span">Suscripción mensual</span>
+              </p>
+            </div>
+            <p className="text-1">
+              Próximo cargo
+            </p>
+            <div className="subscription-info">
+              <p >
+                <span className="span">11/07/2022</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="second-section">
+          <p className="first-text">PROXIMAMENTE</p>
+          <p className="second-text">Refiere amigos</p>
+          <p className="third-text">Obtén premios para ti<br />
+            y para ellos.</p>
+        </div>
+      </SubscriptionContainer>
+    </SecondContainer>
+
     // <RewardContain>
     //   <DataTitle>
     //     Siguiente Recompensa...
@@ -205,7 +292,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
     //     </>
     //   }
     // </RewardContain>
-    <></>
+
   )
 }
 export default NextReward;
