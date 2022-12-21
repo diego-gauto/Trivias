@@ -8,6 +8,9 @@ export const SliderContainer = styled.div`
 export const GeneralContainer = styled(Container)`
   padding: 0;
   display: block;
+  @media only screen and (max-width: 1028px) {
+    display: none;
+  }
 `;
 
 export const People = styled.div`
@@ -17,11 +20,11 @@ export const People = styled.div`
   background-position-x: 50%;
   z-index: 1;
   background-size: 29%;
-top: -5%;
-height: 520px;
+  top: -5%;
+  height: 520px;
 
   @media only screen and (max-width: 2400px) {
-  height: 420px;
+    height: 420px;
     background-size: 37%;
     top: 7%;
   }
@@ -40,7 +43,7 @@ height: 520px;
 
   @media only screen and (max-width: 1720px) {
     background-size: 51%;
-top: -2%;
+    top: -2%;
   }
   @media only screen and (max-width: 1600px) {
     background-size: 44%;
@@ -104,16 +107,14 @@ export const Lines = styled.div`
 `;
 export const BgColor = styled.div`
   background-color: #ede7f2;
-  height: 280px; 
+  height: 280px;
   position: relative;
   top: -66%;
   @media only screen and (max-width: 2400px) {
-   
-  height: 250px; 
+    height: 250px;
     top: -55%;
   }
   @media only screen and (max-width: 2100px) {
-   
     top: -62%;
   }
 
@@ -123,28 +124,27 @@ export const BgColor = styled.div`
   @media only screen and (max-width: 1720px) {
     top: -70%;
   }
- 
+
   @media only screen and (max-width: 1600px) {
-    
     height: 190px;
     top: -90%;
   }
- 
+
   @media only screen and (max-width: 1440px) {
-    top: -110%; 
+    top: -110%;
   }
   @media only screen and (max-width: 1200px) {
-    top: -115%; 
+    top: -115%;
     height: 210px;
   }
   @media only screen and (max-width: 1150px) {
-    top: -110%; 
+    top: -110%;
   }
   @media only screen and (max-width: 1080px) {
-    top: -107%; 
+    top: -107%;
   }
   @media only screen and (max-width: 1028px) {
-    top: -110%; 
+    top: -110%;
   }
 `;
 export const TittleA = styled.span`
