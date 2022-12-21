@@ -107,10 +107,9 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         <TaskTitle>
           Material de apoyo
         </TaskTitle>
-        <TaskText dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }}>
-
-        </TaskText>
-        {(user) && <ButtonDiv>
+        {/* <TaskText dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }}>
+        </TaskText> */}
+        {/* {(user) && <ButtonDiv>
           {status == "" && <UploadButton onClick={uploadHwk}>
             Subir tarea
             <UploadIcon />
@@ -122,7 +121,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
           {status == "aproved" && <ReviewButton onClick={uploadHwk}>
             Tarea Aprobada
           </ReviewButton>}
-        </ButtonDiv>}
+        </ButtonDiv>} */}
       </HomeWorkContain>
     </>
 
