@@ -122,7 +122,6 @@ const Edit = () => {
         setLesson({ ...lesson, extra: tempExtra })
       }
     });
-    console.log(tempExtra);
 
   }
   const getImage = (file: any) => {
