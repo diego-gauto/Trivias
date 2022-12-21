@@ -3,14 +3,13 @@ import { Title, TitleContain } from '../Courses/Form/Edit.styled';
 import { MdDelete } from 'react-icons/md';
 import { CaretD2, Label2, Option, OptionContain, SelectContain, Selected } from '../Courses/Form/Select/SelectStyles.styled';
 import { Container, FormContainer, InputContainer, QuestionContainer, QuizContainer } from './Quiz.styled';
+import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
 import { addQuiz, editQuiz, getQuiz } from '../../../store/actions/AdminActions';
 import { useRouter } from 'next/router';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
-import { deleteDoc, doc } from 'firebase/firestore';
-import { db } from "../../../firebase/firebaseConfig";
+import { deleteQuiz } from '../../../store/actions/courseActions';
 const Quiz = () => {
   const router = useRouter();
   const { courseID, seasonID, lessonID } = router.query;
@@ -109,7 +108,6 @@ const Quiz = () => {
   const submit = () => {
     setLoader(true);
     quiz.mandatory = mandatory;
-    console.log(quiz);
     if (!lessonID) {
       if (quiz.title == '' ||
         quiz.number == '' ||
@@ -155,13 +153,14 @@ const Quiz = () => {
         })
       }
     }
-
   }
-  const deleteQuiz = () => {
-    deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID)).then(() => {
+
+  const deleteActualQuiz = () => {
+    deleteQuiz(courseID, seasonID, lessonID).then(() => {
       window.location.href = `/admin/Edit?documentID=${courseID}`;
     });
   }
+
   const getQuizes = () => {
     getQuiz(courseID, seasonID, lessonID).then((res: any) => {
       setMandatory(res.mandatory)
@@ -192,7 +191,7 @@ const Quiz = () => {
             <div className='button-container'>
               <button className='button-save' onClick={submit}>{!lessonID ? "Guardar" : "Editar"} Cambios</button>
               {lessonID &&
-                <button className="button-delete" onClick={deleteQuiz}> Eliminar Quiz</button>
+                <button className="button-delete" onClick={deleteActualQuiz}> Eliminar Quiz</button>
               }
             </div>
             : <LoaderContain />
@@ -294,7 +293,7 @@ const Quiz = () => {
                 placeholder="Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
-            malesuada facilisi vel nunc." id="quill" theme="snow"
+            malesuada facilisi vel nunc." theme="snow" id='quill'
                 formats={formats} modules={modules}
                 defaultValue="" onChange={(content, delta, source, editor) => {
                   setQuill(editor.getText()); setQuestion({

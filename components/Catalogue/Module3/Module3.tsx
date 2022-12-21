@@ -70,9 +70,9 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
         allCourses.forEach(async (element: any) => {
           if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
             element.paid = true;
-            element.courseAbout = element.courseAbout.slice(0, 100);
-            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-            element.courseTittle = element.courseTittle.slice(0, 15);
+            element.courseAbout = element.courseAbout
+            element.courseSubtittle = element.courseSubtittle
+            element.courseTittle = element.courseTittle
             temp_final_date = paid.find((courePaid: any) => courePaid.id == element.id);
             element.date = Math.ceil((temp_final_date.finalDate - date) / (3600 * 24));
             temp_courses.push(element);

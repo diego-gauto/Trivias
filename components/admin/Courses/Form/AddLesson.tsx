@@ -355,7 +355,7 @@ const AddLesson = () => {
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
             malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
-            adipiscing morbi mattis eget." id="quill" theme="snow"
+            adipiscing morbi mattis eget." theme="snow" id="quill"
                 formats={formats} modules={modules}
                 defaultValue="" onChange={(content, delta, source, editor) => {
                   setQuill(editor.getText()); setLesson({

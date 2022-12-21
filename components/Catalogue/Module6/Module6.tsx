@@ -68,9 +68,9 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
         setUserCourses(paid);
         allCourses.forEach((element: any) => {
           if (element.courseType == 'Producto') {
-            element.courseAbout = element.courseAbout.slice(0, 100);
-            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-            element.courseTittle = element.courseTittle.slice(0, 15);
+            element.courseAbout = element.courseAbout
+            element.courseSubtittle = element.courseSubtittle
+            element.courseTittle = element.courseTittle
             if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
               element.paid = true;
             } else {
@@ -87,9 +87,9 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     } else {
       allCourses.forEach((element: any) => {
         if (element.courseType == 'Producto') {
-          element.courseAbout = element.courseAbout.slice(0, 100);
-          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-          element.courseTittle = element.courseTittle.slice(0, 15);
+          element.courseAbout = element.courseAbout
+          element.courseSubtittle = element.courseSubtittle
+          element.courseTittle = element.courseTittle
           temp_courses.push(element);
         }
       });

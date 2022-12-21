@@ -535,9 +535,8 @@ const CourseForm = (props: ICourseForm_Update) => {
         <InputForm>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
             <Label>Frase descriptiva icónica</Label>
-            <Input
+            <InputBig
               placeholder="Frase descriptiva"
-              type="text"
               defaultValue={coursePhrase}
               className={`form-control ${errors.coursePhrase ? 'is-invalid' : ''}`}
               {...register("coursePhrase")}
@@ -581,7 +580,7 @@ const CourseForm = (props: ICourseForm_Update) => {
             <Label>Material</Label>
             <IconContain>
               <SelectContain key={2}>
-                <Selected onClick={() => { handleOpenMaterial() }}>
+                <Selected onClick={() => { handleOpenMaterial() }} style={{ height: "auto" }}>
                   {material?.length == 0 ? "Seleccione un material" : material.length > 1 ? material + " " : material}
                   <CaretD2 />
                 </Selected>
@@ -711,7 +710,7 @@ const CourseForm = (props: ICourseForm_Update) => {
               <Label>Categorías</Label>
               <IconContain>
                 <SelectContain key={2}>
-                  <Selected onClick={() => { handleOpenCategory() }}>
+                  <Selected onClick={() => { handleOpenCategory() }} style={{ height: "auto" }}>
                     {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
                     <CaretD2 />
                   </Selected>
