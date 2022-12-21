@@ -157,14 +157,24 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
             </div>
           </div>
           <div className='line'></div>
-          <div className='upload-container'>
+          {data.homeworkAvailable ? <div className='upload-container'>
             <p>a. Módulo {parseInt(season) + 1} - Lección {parseInt(lesson) + 1}</p>
             <p>Tarea: <span>{data.homeWork}</span></p>
-            <div className='homework'>
+            {status == "" && <div className='homework' onClick={uploadHwk}>
               <BsFileArrowUp></BsFileArrowUp>
               Subir Tarea
-            </div>
-          </div>
+              <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
+            </div>}
+            {status == "pending" && <div className='homework'>
+              <BsFileArrowUp></BsFileArrowUp>
+              En Revisión
+            </div>}
+            {status == "aproved" && <div className='homework'>
+              <BsFileArrowUp></BsFileArrowUp>
+              Tarea Aprobada
+            </div>}
+          </div> :
+            <p>Lección sin tarea...</p>}
         </div>
       </HomeWorkContain>
     </>
