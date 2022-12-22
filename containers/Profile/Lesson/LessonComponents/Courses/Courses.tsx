@@ -45,7 +45,6 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
       {/* <CloseButton onClick={() => { setOpen(!open); handleClick(false) }}>
         x
       </CloseButton> */}
-      {/* <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} /> */}
       <div className='course-info'>
         <p className='title'>{course?.courseTittle}</p>
         <p>Un curso de <span>{course?.courseProfessor[0].name}</span></p>
@@ -68,17 +67,18 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
       </div>
       {course?.seasons.map((season: any, index: number) => {
         return (
+
           <SeasonContainer key={"course seasons " + index}>
-            <Container onClick={() => { toggleHandler(index) }}>
-              <Title>
-                Módulo {index + 1}
-                <UploadIcon active={selected[index]} />
-              </Title>
-              <Episode>
-                {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
-              </Episode>
+            <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
+              <div className='module'>
+                <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />
+                <p className='title'>Módulo {index + 1}</p>
+                <Episode>
+                  {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
+                </Episode>
+              </div>
+              <UploadIcon active={selected[index]} />
             </Container>
-            <Divider />
             <CoursesContainer active={selected[index]} onClick={() => {
               setOpen(!open); handleClick(false)
             }}>
@@ -87,7 +87,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           </SeasonContainer>
         )
       })}
-
+      <div className='bg'></div>
     </MainContainer>
   )
 }

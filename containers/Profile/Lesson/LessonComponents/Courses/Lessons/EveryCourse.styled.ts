@@ -5,40 +5,50 @@ export const LessonContain = styled.div`
   width: 100%;
   gap: 15px;
   position: relative;
+  background: #dad3e5;
+  align-items: baseline;
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 `;
 export const ProgressCircle = styled.div`
+  position: relative;
   display: flex;
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
 `;
 export const CurrentCircle = styled.div`
+  position: relative;
   display: flex;
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 2px solid #8E2DE2;
+  border: 2px solid #8e2de2;
 `;
 export const IncompleteCircle = styled.div`
+  position: relative;
   display: flex;
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   border: 2px solid gray;
 `;
-export const CourseTitle = styled.p<{active:boolean}>`
+export const CourseTitle = styled.p<{ active: boolean }>`
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
-  ${props => props.active == true && css`
-    font-weight: 800;
-  `}
+  ${(props) =>
+    props.active == true &&
+    css`
+      font-weight: 800;
+    `}
 `;
 export const CurrentCourse = styled.p`
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: 0;
 `;
 export const Details = styled.div`
@@ -46,17 +56,17 @@ export const Details = styled.div`
   width: 90%;
   flex-direction: column;
   gap: 5px;
-  cursor:pointer;
+  cursor: pointer;
 `;
 export const DetailContain = styled.div`
   display: flex;
-  width:100%;
+  width: 100%;
   justify-content: space-between;
 `;
 
 export const CourseLength = styled.div`
   font-size: 12px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   color: gray;
   margin: 0;
   display: flex;
@@ -65,18 +75,20 @@ export const CourseLength = styled.div`
 `;
 export const CoursePoints = styled.p`
   font-size: 12px;
-  font-family: 'Raleway', sans-serif;
-  color: #8E2DE2;
+  font-family: "Raleway", sans-serif;
+  color: #8e2de2;
   margin: 0;
 `;
 export const DividerComplete = styled.div`
-  border-radius:10px;
-  width: 4px;
-  height: 44px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  border-radius: 10px;
+  width: 2px;
+  height: 65px;
+  z-index: 1;
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
   position: absolute;
-  top: 28px;
-  left: 11px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 export const DocIcon = styled.i`
   background-image: url(../images/Video/icons/document.svg);
@@ -86,20 +98,22 @@ export const DocIcon = styled.i`
   background-repeat: no-repeat;
 }`;
 export const CurrentDivider = styled.div`
-  border-radius:10px;
-  width: 4px;
+  border-radius: 10px;
+  width: 2px;
   height: 44px;
-  border: 1px solid #8E2DE2;
+  border: 1px solid #8e2de2;
   position: absolute;
   top: 28px;
   left: 11px;
 `;
 export const DividerIncomplete = styled.div`
-  border-radius:10px;
-  width: 4px;
-  height: 44px;
+  border-radius: 10px;
+  width: 2px;
+  height: 64px;
+  z-index: 1;
   background: gray;
   position: absolute;
-  top: 28px;
-  left: 11px;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
 `;

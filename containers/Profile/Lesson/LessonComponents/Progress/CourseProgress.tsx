@@ -40,15 +40,8 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
             módulo completado
           </SeasonSpan>
         </ContainText>
-        {/* <ContainText>
-          <SeasonText>
-            1/3
-          </SeasonText>
-          <SeasonSpan>
-            temporada completada
-          </SeasonSpan>
-        </ContainText> */}
       </SeasonContain>
+
     </MainContainer>
   )
 }

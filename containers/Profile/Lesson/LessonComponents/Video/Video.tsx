@@ -4,9 +4,10 @@ import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
 import { EaselIcon } from '../Modules/Module.styled';
+import Modules from '../Modules/Modules';
 declare let Hls: any
 
-const Video = ({ data, title, id, course, user, season, lesson, handleComplete }: any) => {
+const Video = ({ data, title, id, course, user, season, lesson, handleComplete, comments }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
@@ -118,6 +119,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete }
             }}
           />
         }
+        <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
       </VideoContain>
       <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
     </Segment>

@@ -64,17 +64,15 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       }}>
         {<CourseTitle active={data?.id == less.id}>
           {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
-          <br></br>
-          <br></br>
         </CourseTitle>}
         <DetailContain>
           {!("mandatory" in less) && <CourseLength>
             {hms(less.duration)}
-            {less.extra.length > 0 && <DocIcon></DocIcon>}
+            {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>}
-          {less.points > 0 && <CoursePoints>
+          {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>}
+          </CoursePoints>} */}
         </DetailContain>
       </Details>)
     }
@@ -101,17 +99,15 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       }}>
         {<CourseTitle active={data?.id == less.id}>
           {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
-          <br></br>
-          <br></br>
         </CourseTitle>}
         <DetailContain>
           <CourseLength>
             {hms(less.duration)}
-            {less.extra.length > 0 && <DocIcon></DocIcon>}
+            {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>
-          {less.points > 0 && <CoursePoints>
+          {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>}
+          </CoursePoints>} */}
         </DetailContain>
       </Details>)
     }
@@ -124,7 +120,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       <DetailContain>
         <CourseLength>
           {hms(less.duration)}
-          {less.extra.length > 0 && <DocIcon></DocIcon>}
+          {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
         </CourseLength>
         {less.points > 0 && <CoursePoints>
           +{less.points} puntos

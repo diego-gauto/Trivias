@@ -53,7 +53,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
     setLessons(course.seasons[value].lessons)
   };
   const getCurrentSeason = () => {
-    getSeason(course.id).then((res) => {
+    getSeason(course.documentID).then((res) => {
       setSeasons(res);
     })
   }
@@ -95,7 +95,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
   useEffect(() => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0]?.lessons);
-      getCurrentSeason();
+      // getCurrentSeason();
       setIsPlaying(true);
       setTimeout(() => {
         setIsPlaying(false)
