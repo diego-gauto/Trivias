@@ -59,10 +59,13 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
         <p className='title'>Tu progreso <br />
           <b>{count} de {course?.lessons.length}</b> <span>lecciones.</span>
         </p>
-        <div className='certificate-label'>
-          <p>Acaba el curso <br />
-            para obtener <br />
-            tu certificado.</p>
+        <div className='certificate-box'>
+          <div className='half'></div>
+          <div className='certificate-label'>
+            <p>Acaba el curso <br />
+              para obtener <br />
+              tu certificado.</p>
+          </div>
         </div>
       </div>
       {course?.seasons.map((season: any, index: number) => {
@@ -71,11 +74,13 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
               <div className='module'>
-                <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />
-                <p className='title'>Módulo {index + 1}</p>
-                <Episode>
-                  {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
-                </Episode>
+                {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />}
+                <div>
+                  <p className='title'>Módulo {index + 1}</p>
+                  <Episode>
+                    {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
+                  </Episode>
+                </div>
               </div>
               <UploadIcon active={selected[index]} />
             </Container>

@@ -109,7 +109,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
             playing={true}
             muted={false}
             controls
-            width="100%" height="100%"
+            width="100%" height="auto"
             onEnded={finishedLesson}
             onDuration={(duration) =>
               handleDuration(duration)

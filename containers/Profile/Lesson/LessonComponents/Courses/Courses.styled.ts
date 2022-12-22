@@ -60,18 +60,30 @@ export const MainContainer = styled.div<{ open: any }>`
         font-weight: bold;
       }
     }
-    .certificate-label {
-      display: flex;
+    .certificate-box {
       position: absolute;
       right: 0;
       bottom: 0;
       height: 100%;
-      background: #6717cd;
-      text-align: center;
-      p {
-        color: #fff;
-        margin: auto;
-        font-size: 12px;
+      display: flex;
+      .half {
+        width: 40px;
+        height: 100%;
+        background: #6717cd;
+        clip-path: circle(40px at right);
+      }
+      .certificate-label {
+        padding-right: 20px;
+        display: flex;
+        height: 100%;
+        background: #6717cd;
+        text-align: center;
+        p {
+          font-weight: 500;
+          color: #fff;
+          margin: auto;
+          font-size: 12px;
+        }
       }
     }
   }
@@ -121,7 +133,15 @@ export const Container = styled.div<{ active: any }>`
   background: #e8ddf2;
   padding: 20px 10px 20px 40px;
   cursor: pointer;
+  i {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+  }
   .module {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     p {
       margin: 0;
       color: #3f1168;
@@ -194,6 +214,7 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: column;
   transition: 1s ease all;
+  background: #e8ddf2;
   ${(props) =>
     props.active == true &&
     css`

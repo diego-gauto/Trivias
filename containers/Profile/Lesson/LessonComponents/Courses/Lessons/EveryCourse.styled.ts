@@ -6,10 +6,12 @@ export const LessonContain = styled.div`
   gap: 15px;
   position: relative;
   background: #dad3e5;
+  height: 100px;
   align-items: baseline;
   padding-left: 30px;
   padding-top: 20px;
   padding-bottom: 10px;
+  cursor: pointer;
 `;
 export const ProgressCircle = styled.div`
   position: relative;
@@ -17,7 +19,7 @@ export const ProgressCircle = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+  background: #3f1168;
 `;
 export const CurrentCircle = styled.div`
   position: relative;
@@ -25,7 +27,7 @@ export const CurrentCircle = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2px solid #8e2de2;
+  border: 2px solid #3f1168;
 `;
 export const IncompleteCircle = styled.div`
   position: relative;
@@ -39,6 +41,7 @@ export const CourseTitle = styled.p<{ active: boolean }>`
   font-size: 14px;
   font-family: "Raleway", sans-serif;
   margin: 0;
+  color: #3f1168;
   ${(props) =>
     props.active == true &&
     css`
@@ -67,7 +70,7 @@ export const DetailContain = styled.div`
 export const CourseLength = styled.div`
   font-size: 12px;
   font-family: "Raleway", sans-serif;
-  color: gray;
+  color: #3f1168;
   margin: 0;
   display: flex;
   align-items: center;
@@ -76,15 +79,15 @@ export const CourseLength = styled.div`
 export const CoursePoints = styled.p`
   font-size: 12px;
   font-family: "Raleway", sans-serif;
-  color: #8e2de2;
+  color: #3f1168;
   margin: 0;
 `;
 export const DividerComplete = styled.div`
   border-radius: 10px;
   width: 2px;
-  height: 65px;
+  height: 90px;
   z-index: 1;
-  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+  background: #3f1168;
   position: absolute;
   top: 100%;
   left: 50%;
@@ -109,7 +112,7 @@ export const CurrentDivider = styled.div`
 export const DividerIncomplete = styled.div`
   border-radius: 10px;
   width: 2px;
-  height: 64px;
+  height: 90px;
   z-index: 1;
   background: gray;
   position: absolute;

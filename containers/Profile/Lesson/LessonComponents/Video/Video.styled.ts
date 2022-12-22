@@ -10,6 +10,9 @@ export const VideoContain = styled.div`
   width: 70%;
   border-radius: 10px;
   min-height: 400px;
+  .absolute {
+    max-height: 570px;
+  }
   @media (max-width: 1023px) {
     gap: 10px;
     padding: 15px;
