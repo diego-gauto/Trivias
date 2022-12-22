@@ -4,7 +4,6 @@ import styled, { css, keyframes } from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
-  height: calc(100vh - 82.5px);
   display: flex;
   background-color: #ede7f2;
   @font-face {
@@ -17,7 +16,6 @@ export const BackgroundProfile = styled.div`
   }
   @media (max-width: 1023px) {
     flex-direction: column;
-    height: auto;
     gap: 40px;
     align-items: center;
   }
@@ -32,7 +30,7 @@ export const SecondBox = styled.div`
   gap: 40px;
   width: 70%;
   height: 100%;
-  margin-top: 60px;
+  margin-top: 38px;
   .title-contain {
     display: flex;
     flex-direction: column;
@@ -43,6 +41,7 @@ export const SecondBox = styled.div`
     .first-text {
       font-size: 36px;
       color: #3f1168;
+      letter-spacing: 5px;
       span {
         font-weight: 600;
         color: #d244d1;
@@ -60,9 +59,7 @@ export const SecondBox = styled.div`
 `;
 export const ThirdBox = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
-  gap: 10px;
+  gap: 50px;
   @media (max-width: 1023px) {
     flex-wrap: wrap;
   }
@@ -672,19 +669,35 @@ export const Box2 = styled.div`
   border: 1px solid #6717cd;
   height: 40px;
 `;
-export const ProfileMainContainer = styled.div`
+export const ProfileMainContainer = styled.div<{
+  startEdit: any;
+  password: any;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
-  gap: 40px;
+  padding-top: 20px;
+  gap: 50px;
   width: 30%;
+  .crown {
+    position: absolute;
+    font-size: 40px;
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #ffb715;
+  }
   button {
     font-size: 14px;
     font-weight: bold;
     border-radius: 100px;
     padding-block: 5px;
     width: 150px;
+    &:hover {
+      transform: scale(1.03);
+      transition: 1s ease all;
+    }
   }
   .first-text {
     text-align: center;
@@ -704,7 +717,7 @@ export const ProfileMainContainer = styled.div`
     margin-top: 80px;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 320px;
     p {
       margin: 0;
     }
@@ -712,11 +725,35 @@ export const ProfileMainContainer = styled.div`
       display: flex;
       flex-direction: column;
       gap: 10px;
-      background-color: #dad3e5;
+      background-color: ${(props) =>
+        props.startEdit == false ? "#dad3e5" : "#e4b6e8"};
       padding-top: 150px;
-      padding-inline: 50px;
+      padding-inline: 40px;
       padding-bottom: 20px;
       border-radius: 20px 20px 0 0;
+      .input-contain {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label {
+          font-size: 18px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+          color: #441a6f;
+        }
+        input {
+          padding-inline: 20px;
+          padding-block: 5px;
+          font-size: 14px;
+          color: #933edc;
+          font-weight: 800;
+          border-radius: 100px;
+          border: 1px solid #933edc;
+          :focus {
+            outline: 1px solid #8e2de2;
+          }
+        }
+      }
       .name-text {
         text-align: center;
         font-size: 24px;
@@ -759,13 +796,21 @@ export const ProfileMainContainer = styled.div`
       gap: 15px;
       background-color: #3f1168;
       padding: 30px;
-      padding-inline: 50px;
-      border-radius: 0 0 20px 20px;
+      padding-inline: 40px;
+      border-radius: ${(props) =>
+        props.password == false ? "0 0 20px 20px" : "0 0 0 0"};
       p {
         margin: 0;
       }
       .data-container {
         line-height: 15px;
+        .password-edit {
+          width: 100%;
+          background-color: transparent;
+          border: 1px solid #ffa42c;
+          color: #ffa42c;
+          padding-block: 8px;
+        }
         .email {
           color: white;
           font-size: 12px;
@@ -786,6 +831,43 @@ export const ProfileMainContainer = styled.div`
         }
       }
     }
+    .edit-contain {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background-color: #f5e2ac;
+      padding: 25px;
+      border-radius: 0 0 20px 20px;
+      .input-contain {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label {
+          font-size: 18px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+          color: #441a6f;
+        }
+        input {
+          padding-inline: 20px;
+          padding-block: 5px;
+          font-size: 14px;
+          color: #933edc;
+          font-weight: 800;
+          border-radius: 100px;
+          border: 1px solid #933edc;
+          background: #f1e4ce;
+          :focus {
+            outline: 1px solid #8e2de2;
+          }
+          ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #933edc;
+            font-weight: 500;
+          }
+        }
+      }
+    }
   }
   .btn-edit {
     display: flex;
@@ -802,14 +884,55 @@ export const ProfileMainContainer = styled.div`
     border: 1px solid #441a6f;
   }
 `;
-export const PictureContain = styled.div`
+export const PictureContain = styled.div<{ progress: number; reward: any }>`
   display: flex;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   position: absolute;
-  top: -75px;
+  top: -100px;
   left: 50%;
   transform: translateX(-50%);
+  .circle-level {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 250px;
+    height: 250px;
+    svg {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      stroke-dasharray: 755;
+      z-index: 1;
+      transform: rotate(-90deg);
+      border-radius: 50%;
+    }
+    .progress-circle {
+      fill: none;
+      stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
+        ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
+      stroke-width: 12px;
+      stroke-dasharray: 755;
+      stroke-dashoffset: ${(props) => props.progress};
+      stroke-linecap: round;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+    }
+    .progress-background {
+      fill: none;
+      stroke: #3f1168;
+      stroke-width: 12px;
+      stroke-dasharray: 755;
+      stroke-dashoffset: 0;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+    }
+  }
 `;
 export const ProfileIcon = styled.img`
   background-repeat: no-repeat;
@@ -824,7 +947,7 @@ export const SecondContainer = styled.div`
 export const RewardContainer = styled.div<{ reward: any }>`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: space-between;
   width: 60%;
   .main-container {
     display: flex;
@@ -845,7 +968,6 @@ export const RewardContainer = styled.div<{ reward: any }>`
         color: #942cec;
       }
     }
-
     .reward-conditions {
       background-color: #de94e1;
       display: flex;
@@ -967,8 +1089,24 @@ export const RewardContainer = styled.div<{ reward: any }>`
     }
   }
   button {
-    padding-block: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding-block: 15px;
     border-radius: 100px;
+    border: none;
+    background: #3f1168;
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+    span {
+      color: #ffdd67;
+    }
+    &:hover {
+      transform: scale(1.03);
+      transition: 1s ease all;
+    }
   }
 `;
 export const SubscriptionContainer = styled.div`
@@ -1040,6 +1178,154 @@ export const SubscriptionContainer = styled.div`
       color: #3f1168;
       font-weight: 600;
       line-height: 20px;
+    }
+  }
+`;
+
+export const UserDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+`;
+export const HistoryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 40%;
+  background-color: #dad3e5;
+  padding: 30px;
+  border-radius: 20px;
+  height: fit-content;
+  p {
+    margin: 0;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #942ced;
+  }
+  .history-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #942ced;
+    .history-data {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: 100%;
+      .history-info {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p {
+          font-size: 14px;
+          font-weight: 600;
+          color: #3f1479;
+        }
+        .second-info {
+          width: 84px;
+        }
+      }
+      .line {
+        border-radius: 100px;
+        width: 100%;
+        height: 1px;
+        background-color: #3f1479;
+      }
+    }
+  }
+  .dots {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    .option-dot {
+      cursor: pointer;
+      display: flex;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+    }
+  }
+`;
+export const PaymentMethodContainer = styled.div`
+  p {
+    margin: 0;
+  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 60%;
+  background-color: #d2aff0;
+  padding: 30px;
+  border-radius: 20px;
+  font-family: "Montserrat", sans-serif;
+  .title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #942ced;
+  }
+  .card-contain {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .card {
+      align-items: center;
+      width: 100%;
+      border-radius: 100px;
+      display: flex;
+      flex-direction: row;
+      gap: 3%;
+      background-color: #3f1168;
+      padding-block: 5px;
+      padding-inline: 20px;
+      .text-card {
+        font-size: 16px;
+        color: white;
+      }
+      .last-digits {
+        color: white;
+        font-weight: 600;
+      }
+      .last-4 {
+        font-weight: 600;
+        color: #ffdd67;
+      }
+    }
+    .circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 45px;
+      min-height: 45px;
+      border-radius: 50%;
+      border: 2px solid #942ced;
+      font-size: 20px;
+      color: #942ced;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.03);
+        transition: 1s ease all;
+      }
+    }
+  }
+  .bottom-contain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #942ced;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    p {
+      font-size: 16px;
+      span {
+        font-weight: 600;
+      }
     }
   }
 `;

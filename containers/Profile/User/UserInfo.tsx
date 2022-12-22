@@ -1,5 +1,7 @@
 import { getAuth, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { AiFillCrown } from "react-icons/ai";
 import { MdModeEditOutline } from "react-icons/md";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import UserLevel from "../Rewards/UserLevel/UserLevel";
@@ -16,10 +18,12 @@ import {
   ProfileIconContain,
   UserContainer,
   UserText,
-  ProfileMainContainer
+  ProfileMainContainer,
+  InputPhone,
+  Box2
 } from "./User.styled";
 
-const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
+const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -27,6 +31,8 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
   let tempYear = tempDate.getFullYear()
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
 
+  const [startEdit, setStartEdit] = useState(false);
+  const [editPassword, setEditPassword] = useState(false);
   const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
 
   const numFor = Intl.NumberFormat('en-US');
@@ -39,8 +45,171 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
       console.log(error)
     });
   };
-
   return (
+    <ProfileMainContainer startEdit={startEdit} password={editPassword}>
+      <div className="first-text">
+        <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
+      </div>
+      <div className="profile-container">
+        <div className="crown">
+          <AiFillCrown />
+        </div>
+        <PictureContain progress={data} reward={reward}>
+          {userData &&
+            userData.photoURL.length > 0 ?
+            <ProfileIcon src={userData.photoURL} ></ProfileIcon>
+            : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
+          }
+          <div className="circle-level">
+            <svg xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gradientLevel">
+                  <stop offset="0%" stopColor="#f88d21" />
+                  <stop offset="100%" stopColor="#972dec" />
+                </linearGradient>
+              </defs>
+              <defs>
+                <linearGradient id="gradientCertificate">
+                  <stop offset="0%" stopColor="#0997fe" />
+                  <stop offset="100%" stopColor="#9108ee" />
+                </linearGradient>
+              </defs>
+              <circle className="progress-background"
+              />
+              <circle className="progress-circle" />
+            </svg>
+          </div>
+        </PictureContain>
+        {
+          !startEdit
+            ?
+            <div className="user-info-up">
+              <p className="name-text">
+                {userData.name}<br /><span>{userData.lastName}</span>
+              </p>
+              <div className="data-contain">
+                <p className="points">{userData.score} puntos</p>
+                <p className="months">16 meses de aprendizaje</p>
+                <p className="certificates">14 certificados</p>
+              </div>
+            </div>
+            :
+            <div className="user-info-up">
+              <div className="input-contain">
+                <label>
+                  Nombre
+                </label>
+                <input
+                  defaultValue={userData.name}
+                />
+              </div>
+              <div className="input-contain">
+                <label>
+                  Apellido
+                </label>
+                <input
+                  defaultValue={userData.lastName}
+                />
+              </div>
+
+            </div>
+        }
+
+        <div className="user-info-down">
+          <div className="data-container">
+            <p className="email">
+              Correo electrónico
+            </p>
+            <p className="email-user">
+              {userData.email}
+            </p>
+          </div>
+          <div className="data-container">
+            <p className="email">
+              Whatsapp
+            </p>
+            {
+              !startEdit
+                ?
+                <p className="email-user">
+                  {userData.phoneNumber}
+                </p>
+                :
+                <Box2>
+                  <InputPhone
+                    value={data.phoneNumber}
+                    limitMaxLength={true}
+                    international={true}
+                    countryCallingCodeEditable={false}
+                  // onChange={(e: any) => {
+                  //   setUser({ ...user, phoneNumber: e })
+                  // }}
+                  />
+                </Box2>
+            }
+          </div>
+          <div className="data-container">
+            {
+              !startEdit
+                ?
+                <>
+                  <p className="password">
+                    Contraseña
+                  </p>
+                  <p className="password-user">
+                    **********
+                  </p>
+                </>
+                :
+                <button
+                  onClick={() => { setEditPassword(!editPassword) }}
+                  className="password-edit"
+                >
+                  Crear nueva contraseña
+                </button>
+            }
+          </div>
+        </div>
+        {
+          editPassword &&
+          <div className="edit-contain">
+            <div className="input-contain">
+              <label>
+                Contraseña actual
+              </label>
+              <input
+                placeholder="Crea una contraseña"
+              />
+            </div>
+            <div className="input-contain">
+              <label>
+                Nueva contraseña
+              </label>
+              <input
+                placeholder="Crea una contraseña"
+              />
+            </div>
+            <div className="input-contain">
+              <label>
+                Confirmar nueva contraseña
+              </label>
+              <input
+                placeholder="Confirma tu contraseña"
+              />
+            </div>
+          </div>
+        }
+
+      </div>
+      <button
+        className="btn-edit"
+        onClick={() => { setStartEdit(!startEdit) }}
+      >
+        <MdModeEditOutline />
+        Editar Perfil
+      </button>
+      <button className="btn-logout">Cerrar sesión</button>
+    </ProfileMainContainer>
     // <ProfileContainer>
     //   <ProfileIconContain>
     //     <PictureContain>
@@ -118,58 +287,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
     //     </LogOut>
     //   </Link>
     // </ProfileContainer>
-    <ProfileMainContainer>
-      <div className="first-text">
-        <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
-      </div>
-      <div className="profile-container">
-        <PictureContain>
-          {userData &&
-            userData.photoURL.length > 0 ?
-            <ProfileIcon src={userData.photoURL} ></ProfileIcon>
-            : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
-          }
-        </PictureContain>
-        <div className="user-info-up">
-          <p className="name-text">
-            {userData.name}<br /><span>{userData.lastName}</span>
-          </p>
-          <div className="data-contain">
-            <p className="points">{userData.score} puntos</p>
-            <p className="months">16 meses de aprendizaje</p>
-            <p className="certificates">14 certificados</p>
-          </div>
-        </div>
-        <div className="user-info-down">
-          <div className="data-container">
-            <p className="email">
-              Correo electrónico
-            </p>
-            <p className="email-user">
-              {userData.email}
-            </p>
-          </div>
-          <div className="data-container">
-            <p className="email">
-              Whatsapp
-            </p>
-            <p className="email-user">
-              {userData.phoneNumber}
-            </p>
-          </div>
-          <div className="data-container">
-            <p className="password">
-              Contraseña
-            </p>
-            <p className="password-user">
-              **********
-            </p>
-          </div>
-        </div>
-      </div>
-      <button className="btn-edit"><MdModeEditOutline />Editar Perfil</button>
-      <button className="btn-logout">Cerrar sesión</button>
-    </ProfileMainContainer>
   )
 }
 export default UserInfo;

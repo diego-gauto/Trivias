@@ -24,6 +24,7 @@ import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
+import { History } from "./History";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -40,6 +41,8 @@ const User = () => {
   const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
   const [taskView, setTaskView] = useState(false);
   const [nameUpperCase, setNameUpperCase] = useState<string>("");
+  const [data, setData] = useState<number>(0)
+  const [reward, setReward] = useState<any>(0);
 
   try {
     var userDataAuth = useAuth();
@@ -167,6 +170,7 @@ const User = () => {
     if (userData != null && level != null && timeLevel != null) {
       setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
       setTimeProgress(((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 100)
+      setData(755 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 755));
       setLoading(false);
     }
   }, [level, timeLevel]);
@@ -194,6 +198,8 @@ const User = () => {
           taskView={taskView}
           setTaskView={setTaskView}
           nextLevel={level.maximum}
+          data={data}
+          reward={reward}
         />
       }
       {/* SECOND Container */}
@@ -213,7 +219,8 @@ const User = () => {
             barProgress={barProgress}
             level={currentLevel}
             max={level.maximum}
-
+            reward={reward}
+            setReward={setReward}
             timeScore={timeScore}
             timeProgress={timeProgress}
             timeLevel={timeLevel?.level}
@@ -221,9 +228,10 @@ const User = () => {
           />
           <ThirdBox>
             {/* Third Container */}
-            <UserData data={userData} pm={paymentMethod} />
-            {/* Fourth Container */}
             <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
+            {/* Fourth Container */}
+            {/* <UserData data={userData} pm={paymentMethod} /> */}
+            <History />
           </ThirdBox>
         </SecondBox>
       }

@@ -35,10 +35,9 @@ import { useEffect, useState } from "react";
 import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
-import { FaAward } from "react-icons/fa";
+import { FaArrowRight, FaAward } from "react-icons/fa";
 
-const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel }: any) => {
-  const [reward, setReward] = useState<any>(0);
+const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward }: any) => {
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
@@ -115,7 +114,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                 <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
               </div>
             </div>
-            <div className="time-container" onClick={() => { setReward(1) }}>
+            <div className="time-container">
               <p>Beneficios<br />
                 obtenidos<br />
                 <span> por tiempo</span></p>
@@ -142,7 +141,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
             1
           </div>
         </div>
-        <button>Ir al Centro de Recompensas</button>
+        <button>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
       </RewardContainer>
       <SubscriptionContainer>
         <div className="first-section">

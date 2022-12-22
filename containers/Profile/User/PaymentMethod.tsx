@@ -13,11 +13,13 @@ import {
   ProfilePayment,
   TrashIcon,
   LoaderContain,
+  PaymentMethodContainer,
 } from "./User.styled";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../firebase/firebaseConfig";
 import { deletePaymentMethod } from "../../../store/actions/ProfileActions";
-
+import { MdModeEdit } from "react-icons/md";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const PaymentMethod = ({ data, pm, handleClick }: any) => {
 
@@ -42,6 +44,36 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
   }
 
   return (
+    <PaymentMethodContainer>
+      <div className="title">
+        Métodos de pago
+      </div>
+      {loader ? <LoaderContain /> :
+        <>
+          {pm.length > 0 ? <>
+            {pm.map((pm: any, index: any) => {
+              return (
+                <div className="card-contain" key={"pmUser" + index}>
+                  <div className="card">
+                    <CardIconResp brand={pm.brand} />
+                    <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
+                  </div>
+                  <div className="circle">
+                    <MdModeEdit />
+                  </div>
+                </div>
+              )
+            })
+            }
+          </> :
+            <p>Sin métodos de pago...</p>}
+        </>
+      }
+      <div className="bottom-contain">
+        <AiOutlinePlus />
+        <p>Agregar nueva <span>tarjeta de crédito o débito</span> </p>
+      </div>
+    </PaymentMethodContainer>
     // <ProfilePayment>
     //   <PaymentTitle>
     //     Métodos de Pago
@@ -79,7 +111,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
     //   </AddPay>
     //   <Modal1 show={show} setShow={setShow} data={data} handleClick={handleClick} />
     // </ProfilePayment>
-    <></>
   )
 }
 export default PaymentMethod;

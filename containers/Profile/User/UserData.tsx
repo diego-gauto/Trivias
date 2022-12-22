@@ -16,6 +16,7 @@ import {
   ProfileData,
   SaveButton,
   SubscriptionButton,
+  UserDataContainer,
 } from "./User.styled";
 import { IUserDataProps } from "../../../interfaces/IUserData";
 import PhoneInput from "react-phone-number-input";
@@ -47,6 +48,7 @@ const UserData = ({ data, pm }: props) => {
     setUser({ ...data })
   }, [data])
   return (
+    <></>
     // <ProfileData>
     //   <DataTitle>
     //     Datos de la Cuenta
@@ -106,7 +108,7 @@ const UserData = ({ data, pm }: props) => {
     //   </EditButtons>
     //   <Modal2 show={show} setShow={setShow} data={data} pm={pm} />
     // </ProfileData>
-    <></>
+
   )
 }
 export default UserData;
