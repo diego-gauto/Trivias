@@ -22,6 +22,8 @@ import {
   InputPhone,
   Box2
 } from "./User.styled";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 
 const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: any) => {
   let today = new Date().getTime() / 1000;
@@ -30,7 +32,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
   let tempMonth = tempDate.getUTCMonth() + 1;
   let tempYear = tempDate.getFullYear()
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-
+  const [user, setUser] = useState<any>({ userData })
   const [startEdit, setStartEdit] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
@@ -45,6 +47,19 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
       console.log(error)
     });
   };
+  const updateUser = async () => {
+    const docRef = doc(db, 'users', user.id);
+    await updateDoc(docRef, {
+      name: user.name,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+    }).then(() => {
+      setStartEdit(false);
+    })
+  }
+  useEffect(() => {
+    setUser({ ...userData })
+  }, [userData])
   return (
     <ProfileMainContainer startEdit={startEdit} password={editPassword}>
       <div className="first-text">
@@ -100,7 +115,11 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                   Nombre
                 </label>
                 <input
+                  placeholder={userData.name}
                   defaultValue={userData.name}
+                  onChange={(e) => {
+                    setUser({ ...user, name: e.target.value })
+                  }}
                 />
               </div>
               <div className="input-contain">
@@ -108,7 +127,11 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                   Apellido
                 </label>
                 <input
+                  placeholder={userData.lastName}
                   defaultValue={userData.lastName}
+                  onChange={(e) => {
+                    setUser({ ...user, lastName: e.target.value })
+                  }}
                 />
               </div>
 
@@ -137,13 +160,13 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                 :
                 <Box2>
                   <InputPhone
-                    value={data.phoneNumber}
+                    value={userData.phoneNumber}
                     limitMaxLength={true}
                     international={true}
                     countryCallingCodeEditable={false}
-                  // onChange={(e: any) => {
-                  //   setUser({ ...user, phoneNumber: e })
-                  // }}
+                    onChange={(e: any) => {
+                      setUser({ ...user, phoneNumber: e })
+                    }}
                   />
                 </Box2>
             }
@@ -201,13 +224,25 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
         }
 
       </div>
-      <button
-        className="btn-edit"
-        onClick={() => { setStartEdit(!startEdit) }}
-      >
-        <MdModeEditOutline />
-        Editar Perfil
-      </button>
+      {
+        !startEdit
+          ?
+          <button
+            className="btn-edit"
+            onClick={() => { setStartEdit(true) }}
+          >
+            <MdModeEditOutline />
+            Editar Perfil
+          </button>
+          :
+          <button
+            className="btn-edit"
+            onClick={() => { updateUser() }}
+          >
+            Guardar Cambios
+          </button>
+      }
+
       <button className="btn-logout">Cerrar sesión</button>
     </ProfileMainContainer>
     // <ProfileContainer>

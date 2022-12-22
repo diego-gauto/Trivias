@@ -724,12 +724,12 @@ export const ProfileMainContainer = styled.div<{
     .user-info-up {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
       background-color: ${(props) =>
         props.startEdit == false ? "#dad3e5" : "#e4b6e8"};
-      padding-top: 150px;
+      padding-top: 160px;
       padding-inline: 40px;
-      padding-bottom: 20px;
+      padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
       .input-contain {
         display: flex;
@@ -756,8 +756,8 @@ export const ProfileMainContainer = styled.div<{
       }
       .name-text {
         text-align: center;
-        font-size: 24px;
-        line-height: 25px;
+        font-size: 36px;
+        line-height: 30px;
         font-weight: 800;
         color: #441a6f;
         span {
@@ -767,9 +767,10 @@ export const ProfileMainContainer = styled.div<{
       .data-contain {
         display: flex;
         flex-direction: column;
+        gap: 2px;
         p {
           margin: 0;
-          font-size: 14px;
+          font-size: 18px;
           font-weight: 800;
           width: fit-content;
         }
@@ -817,17 +818,17 @@ export const ProfileMainContainer = styled.div<{
         }
         .email-user {
           color: white;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 700;
         }
         .password {
           color: #e08510;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 700;
         }
         .password-user {
           color: #e8c567;
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }
@@ -914,7 +915,7 @@ export const PictureContain = styled.div<{ progress: number; reward: any }>`
       fill: none;
       stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
         ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
-      stroke-width: 12px;
+      stroke-width: 20px;
       stroke-dasharray: 755;
       stroke-dashoffset: ${(props) => props.progress};
       stroke-linecap: round;
@@ -925,7 +926,7 @@ export const PictureContain = styled.div<{ progress: number; reward: any }>`
     .progress-background {
       fill: none;
       stroke: #3f1168;
-      stroke-width: 12px;
+      stroke-width: 18px;
       stroke-dasharray: 755;
       stroke-dashoffset: 0;
       cx: 125px;
@@ -997,6 +998,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
         width: 33.33%;
         padding-block: 15px;
         padding-inline: 25px;
+        border-radius: 20px;
         ${(props) =>
           props.reward == 0 &&
           css`

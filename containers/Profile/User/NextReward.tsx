@@ -141,7 +141,9 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
             1
           </div>
         </div>
-        <button>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+        <Link href="/Rewards">
+          <button>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+        </Link>
       </RewardContainer>
       <SubscriptionContainer>
         <div className="first-section">
