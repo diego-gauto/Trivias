@@ -1250,81 +1250,255 @@ export const HistoryContainer = styled.div`
     }
   }
 `;
-export const PaymentMethodContainer = styled.div`
+export const PaymentMethodContainer = styled.div<{ add: any }>`
+  width: 60%;
   p {
     margin: 0;
   }
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 60%;
-  background-color: #d2aff0;
-  padding: 30px;
-  border-radius: 20px;
-  font-family: "Montserrat", sans-serif;
-  .title {
-    font-size: 24px;
-    font-weight: 800;
-    color: #942ced;
-  }
-  .card-contain {
+  .main-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    .card {
-      align-items: center;
-      width: 100%;
-      border-radius: 100px;
-      display: flex;
-      flex-direction: row;
-      gap: 3%;
-      background-color: #3f1168;
-      padding-block: 5px;
-      padding-inline: 20px;
-      .text-card {
-        font-size: 16px;
-        color: white;
-      }
-      .last-digits {
-        color: white;
-        font-weight: 600;
-      }
-      .last-4 {
-        font-weight: 600;
-        color: #ffdd67;
-      }
-    }
-    .circle {
+    flex-direction: column;
+    gap: 15px;
+    background-color: #d2aff0;
+    padding: 30px;
+    border-radius: ${(props) =>
+      props.add == false ? "20px" : "20px 20px 0 0"};
+    font-family: "Montserrat", sans-serif;
+    .edit-button {
       display: flex;
       justify-content: center;
+      button {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #942ced;
+        border-radius: 100px;
+        padding-block: 5px;
+        padding-inline: 30px;
+        border: none;
+        &:hover {
+          transform: scale(1.03);
+          transition: 1s ease all;
+        }
+      }
+    }
+    .edit-mode {
+      display: flex;
       align-items: center;
-      min-width: 45px;
-      min-height: 45px;
-      border-radius: 50%;
-      border: 2px solid #942ced;
-      font-size: 20px;
+      gap: 10px;
+      .info {
+        p {
+          font-size: 16px;
+          font-weight: 600;
+          color: #3f1168;
+        }
+        input {
+          width: 100%;
+          border-radius: 100px;
+          border: 1px solid #942ced;
+          background: transparent;
+          color: #942ced;
+          padding-block: 5px;
+          padding-inline: 20px;
+          :focus {
+            outline: 2px solid #942ced;
+          }
+          ::placeholder {
+            color: #942ced;
+            opacity: 0.7;
+          }
+        }
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .date {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .inputs {
+            display: flex;
+            gap: 20px;
+          }
+        }
+        .date-inputs {
+          width: 90px;
+        }
+      }
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 800;
       color: #942ced;
+      margin-bottom: 10px;
+    }
+    .card-contain {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .card {
+        align-items: center;
+        width: 100%;
+        border-radius: 100px;
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+        background-color: #3f1168;
+        padding-block: 5px;
+        padding-inline: 20px;
+        .separate {
+          position: absolute;
+          display: flex;
+          height: 46px;
+          left: 90px;
+          width: 1px;
+          background-color: #942ced;
+          line-height: 0px;
+        }
+        input {
+          width: fit-content;
+          background: transparent;
+          color: white;
+          padding-block: 5px;
+          padding-left: 20px;
+          border: none;
+          color: #942ced;
+          font-weight: 600;
+          :focus {
+            outline: none;
+          }
+          ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #942ced;
+            opacity: 0.7;
+          }
+        }
+        .text-card {
+          font-size: 16px;
+          color: white;
+        }
+        .last-digits {
+          color: white;
+          font-weight: 600;
+        }
+        .last-4 {
+          font-weight: 600;
+          color: #ffdd67;
+        }
+      }
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 45px;
+        min-height: 45px;
+        border-radius: 50%;
+        border: 2px solid #942ced;
+        font-size: 20px;
+        color: #942ced;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.03);
+          transition: 1s ease all;
+        }
+      }
+    }
+    .bottom-contain {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #942ced;
+      font-size: 20px;
+      font-weight: 500;
       cursor: pointer;
-      &:hover {
-        transform: scale(1.03);
-        transition: 1s ease all;
+      margin-top: 20px;
+      p {
+        font-size: 16px;
+        span {
+          font-weight: 600;
+        }
       }
     }
   }
-  .bottom-contain {
+
+  .new-card {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: #942ced;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 20px;
-    p {
+    flex-direction: column;
+    gap: 30px;
+    padding-block: 30px;
+    padding-inline: 10%;
+    background-color: #942ced;
+    border-radius: 0 0 20px 20px;
+    .button-contain {
+      display: flex;
+      justify-content: center;
+      button {
+        font-size: 16px;
+        font-weight: bold;
+        color: #942ced;
+        border-radius: 100px;
+        padding-block: 5px;
+        padding-inline: 30px;
+        border: none;
+        &:hover {
+          transform: scale(1.03);
+          transition: 1s ease all;
+        }
+      }
+    }
+    .main-title {
       font-size: 16px;
+      color: #ffdd69;
       span {
         font-weight: 600;
+      }
+    }
+    .container-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      p {
+        color: white;
+        font-weight: 600;
+      }
+      input {
+        width: 100%;
+        border-radius: 100px;
+        border: 1px solid white;
+        background: transparent;
+        color: white;
+        padding-block: 5px;
+        padding-inline: 20px;
+        :focus {
+          outline: 2px solid white;
+        }
+        ::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: white;
+          opacity: 0.7;
+        }
+      }
+      .card-input {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .info {
+        display: flex;
+        justify-content: space-between;
+        .date {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .inputs {
+            display: flex;
+            gap: 20px;
+          }
+        }
+        .date-inputs {
+          width: 90px;
+        }
       }
     }
   }
