@@ -9,14 +9,6 @@ export const MainContainer = styled.div`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face {
-    font-family: Raleway;
-    src: url(../fonts/Raleway-VariableFont_wght.ttf);
-  }
-  @media (max-width: 1023px) {
-    padding-block: 20px;
-    padding-inline: 10px;
-  }
   .certificate-container {
     display: flex;
     gap: 20px;

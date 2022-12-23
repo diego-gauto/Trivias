@@ -12,6 +12,11 @@ export const LessonContain = styled.div`
   padding-top: 20px;
   padding-bottom: 10px;
   cursor: pointer;
+  @media (max-width: 1124px) {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    box-shadow: none !important;
+  }
 `;
 export const ProgressCircle = styled.div`
   position: relative;

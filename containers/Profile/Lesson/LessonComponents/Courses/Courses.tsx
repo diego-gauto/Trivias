@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { number } from 'yup';
+import { useMediaQuery } from 'react-responsive';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
@@ -10,7 +10,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
-
+  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
 
   useEffect(() => {
     let temp_selected: any = [];
@@ -42,9 +42,6 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
 
   return (
     <MainContainer open={open}>
-      {/* <CloseButton onClick={() => { setOpen(!open); handleClick(false) }}>
-        x
-      </CloseButton> */}
       <div className='course-info'>
         <p className='title'>{course?.courseTittle}</p>
         <p>Un curso de <span>{course?.courseProfessor[0].name}</span></p>
@@ -68,9 +65,11 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           </div>
         </div>
       </div>
-      {course?.seasons.map((season: any, index: number) => {
+      <div className='certificate-responsive'>
+        <p>Acaba el curso para obtener tu certificado.</p>
+      </div>
+      {!responsive1124 && course?.seasons.map((season: any, index: number) => {
         return (
-
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
               <div className='module'>

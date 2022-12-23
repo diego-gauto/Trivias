@@ -66,21 +66,6 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         </PositionTitle>
         <div className='line'></div>
       </TitleContain>
-      <IconContain>
-        <UnSelected>
-          <ListIcon onClick={() => {
-            setValue(1)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        {data.homeworkAvailable && <UnSelected>
-          <BookIcon onClick={() => {
-            setValue(3)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>}
-        <SelectContain>
-          <ChatboxIcon />
-        </SelectContain>
-      </IconContain>
       <MainContainer>
         <CommentContain>
           {comments && user.userPhoto

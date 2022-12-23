@@ -12,6 +12,9 @@ export const MainContainer = styled.div<{ open: any }>`
     background: #e8ddf2;
     width: 100%;
     height: 100%;
+    @media (max-width: 1124px) {
+      display: none;
+    }
   }
   .course-info {
     background: #f8e4cc;
@@ -87,26 +90,42 @@ export const MainContainer = styled.div<{ open: any }>`
       }
     }
   }
-
-  @media (max-width: 900px) {
-    position: fixed;
-    z-index: 40;
-    padding: 10px;
-    background: white;
-    box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
-    border-radius: 10px;
-    width: 100%;
-    top: 0;
-    right: -100%;
-    transition: 1s ease all;
-    height: 100%;
-  }
   ${(props) =>
     props.open == true &&
     css`
       right: 0 !important;
       transition: 1s ease all;
     `}
+  .certificate-responsive {
+    display: none;
+  }
+  @media (max-width: 1124px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    .course-info,
+    .course-progress {
+      padding-left: 20px;
+      width: 50%;
+      .certificate-box {
+        display: none;
+      }
+    }
+    .certificate-responsive {
+      display: flex;
+      background: #6717cd;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      p {
+        margin: 0;
+        color: white;
+        font-weight: 500;
+      }
+    }
+  }
 `;
 export const SeasonContainer = styled.div`
   display: flex;

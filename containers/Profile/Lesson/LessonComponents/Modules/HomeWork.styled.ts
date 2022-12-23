@@ -78,6 +78,21 @@ export const HomeWorkContain = styled.div`
     margin-top: 20px;
     padding-left: 1.5rem;
   }
+  @media (max-width: 1124px) {
+    flex-direction: column;
+    .left {
+      width: 100%;
+    }
+    .middle {
+      width: 100%;
+      height: 1.5px;
+    }
+    .right {
+      width: 100%;
+      padding: 0;
+      padding-top: 40px;
+    }
+  }
 `;
 export const TaskTitle = styled.p`
   font-size: 18px;

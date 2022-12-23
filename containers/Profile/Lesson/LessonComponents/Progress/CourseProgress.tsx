@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { ContainText, MainContainer, ProgressBar, ProgressBar2, ProgressContain, SeasonContain, SeasonSpan, SeasonText, Subtitle, TitleCourse } from './CourseProgress.styled';
 import { Progress, Space } from 'antd';
 const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any) => {
   const [totalViewed, setTotalViewed] = useState(0)

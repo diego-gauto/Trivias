@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
-import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from './Video.styled';
+import { Title, VideoContain, Segment } from './Video.styled';
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
-import { EaselIcon } from '../Modules/Module.styled';
 import Modules from '../Modules/Modules';
+import { SeasonContainer, Episode, CoursesContainer, Container, UploadIcon } from '../Courses/Courses.styled';
+import EveryCourse from '../Courses/Lessons/EveryCourse';
+import CourseProgress from '../Progress/CourseProgress';
+import { useMediaQuery } from 'react-responsive';
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 declare let Hls: any
 
 const Video = ({ data, title, id, course, user, season, lesson, handleComplete, comments }: any) => {
@@ -12,6 +16,12 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
+  const [active, setActive] = useState(false);
+
+  const [selected, setSelected] = useState<any>([]);
+  const [open, setOpen] = useState(false);
+  const [count, setCount] = useState(0);
+  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
 
   const finishedLesson = () => {
     let temp: any = { ...data };
@@ -75,6 +85,33 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     }
   }
 
+  useEffect(() => {
+    let temp_selected: any = [];
+    course?.seasons.forEach((element: any) => {
+      temp_selected.push(false)
+    });
+    setSelected(temp_selected);
+
+    let viewed = 0;
+    course.lessons.forEach((element: any) => {
+      if (element.users.includes(user.id)) {
+        viewed++;
+      }
+    });
+    setCount(viewed)
+
+  }, [course])
+
+  useEffect(() => {
+    setOpen(menu)
+  }, [menu])
+
+  const toggleHandler = (index: any) => {
+    let temp = [...selected]
+    temp[index] = !temp[index];
+    setSelected(temp)
+  }
+
   return (
     <Segment>
       <VideoContain>
@@ -109,7 +146,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
             playing={true}
             muted={false}
             controls
-            width="100%" height="auto"
+            width="100%" height="100%"
             onEnded={finishedLesson}
             onDuration={(duration) =>
               handleDuration(duration)
@@ -119,6 +156,44 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
             }}
           />
         }
+        {
+          responsive1124 && <div className='module-selector'>
+            <div className='select' onClick={() => { setActive(!active) }}>
+              <p>Módulos</p>
+              <MdOutlineKeyboardArrowDown />
+            </div>
+            <div className='list' style={{ height: active ? "auto" : 0, paddingBlock: active ? "15px" : "0" }}>
+              {course?.seasons.map((season: any, index: number) => {
+                return (
+                  <p>{index + 1}</p>
+                )
+              })}
+            </div>
+          </div>
+        }
+        {responsive1124 && course?.seasons.map((season: any, index: number) => {
+          return (
+            index == viewed && <SeasonContainer key={"course seasons " + index}>
+              <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
+                <div className='module'>
+                  {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={user.id} refresh={toggleHandler} />}
+                  <div>
+                    <p className='title'>Módulo {index + 1}</p>
+                    <Episode>
+                      {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
+                    </Episode>
+                  </div>
+                </div>
+                {!responsive1124 && <UploadIcon active={selected[index]} />}
+              </Container>
+              <CoursesContainer active={selected[index]} onClick={() => {
+                setOpen(!open); handleClick(false)
+              }}>
+                <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={user.id} course={course} />
+              </CoursesContainer>
+            </SeasonContainer>
+          )
+        })}
         <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
       </VideoContain>
       <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
