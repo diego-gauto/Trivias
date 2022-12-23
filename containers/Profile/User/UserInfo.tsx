@@ -159,6 +159,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                 </p>
                 :
                 <Box2>
+                  <div className="separate" style={{ left: 55 }} />
                   <InputPhone
                     value={userData.phoneNumber}
                     limitMaxLength={true}

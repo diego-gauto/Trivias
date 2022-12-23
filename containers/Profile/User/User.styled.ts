@@ -27,6 +27,9 @@ export const SecondBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+  @media (max-width: 1280px) {
+    padding-left: 0;
+  }
   gap: 40px;
   width: 70%;
   height: 100%;
@@ -42,6 +45,9 @@ export const SecondBox = styled.div`
       font-size: 36px;
       color: #3f1168;
       letter-spacing: 5px;
+      @media (max-width: 1200px) {
+        font-size: 30px;
+      }
       span {
         font-weight: 600;
         color: #d244d1;
@@ -51,6 +57,9 @@ export const SecondBox = styled.div`
       color: #3f1168;
       font-size: 42px;
       font-weight: 800;
+      @media (max-width: 1200px) {
+        font-size: 35px;
+      }
       span {
         color: #942ced;
       }
@@ -60,8 +69,11 @@ export const SecondBox = styled.div`
 export const ThirdBox = styled.div`
   display: flex;
   gap: 50px;
-  @media (max-width: 1023px) {
-    flex-wrap: wrap;
+  @media (max-width: 1380px) {
+    gap: 30px;
+  }
+  @media (max-width: 1080px) {
+    gap: 15px;
   }
 `;
 export const ProfileContainer = styled.div`
@@ -226,7 +238,7 @@ export const PayContainer = styled.div`
 export const VisaIcon = styled.i`
   background-image: url(../images/Visa.png);
   background-repeat: no-repeat;
-  height: 32px;
+  height: 30px;
   width: 47px;
   background-position: center;
 `;
@@ -248,8 +260,8 @@ export const CardIconResp = styled("i")<{ brand: any }>`
     `}
   
   background-repeat:no-repeat;
-  width: 59px;
-  height: 33px;
+  min-width: 59px;
+  min-height: 33px;
   background-position: center;
 `;
 export const PaypalIcon = styled.i`
@@ -644,8 +656,10 @@ export const InputPhone = styled(PhoneInput)`
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
-    width: 200px;
-    left: 80px;
+    width: 180px;
+    background: transparent;
+    color: white;
+    left: 65px;
     border: none;
     outline: none;
     @media (max-width: 400px) {
@@ -655,8 +669,8 @@ export const InputPhone = styled(PhoneInput)`
   }
   .PhoneInputCountry {
     position: absolute;
-    width: 40px;
-    left: 30px;
+    width: 30px;
+    left: 15px;
     align-items: center;
     top: 50%;
     transform: translateY(-50%);
@@ -665,9 +679,18 @@ export const InputPhone = styled(PhoneInput)`
 export const Box2 = styled.div`
   position: relative;
   width: 100%;
+  height: 35px;
+  border: 1px solid white;
   border-radius: 100px;
-  border: 1px solid #6717cd;
-  height: 40px;
+  background-color: #691eaa;
+  .separate {
+    position: absolute;
+    display: flex;
+    height: 33px;
+    width: 1px;
+    background-color: white;
+    line-height: 0px;
+  }
 `;
 export const ProfileMainContainer = styled.div<{
   startEdit: any;
@@ -717,7 +740,6 @@ export const ProfileMainContainer = styled.div<{
     margin-top: 80px;
     display: flex;
     flex-direction: column;
-    width: 320px;
     p {
       margin: 0;
     }
@@ -731,6 +753,12 @@ export const ProfileMainContainer = styled.div<{
       padding-inline: 40px;
       padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
+      @media (max-width: 1280px) {
+        padding-inline: 30px;
+      }
+      @media (max-width: 1200px) {
+        padding-inline: 20px;
+      }
       .input-contain {
         display: flex;
         flex-direction: column;
@@ -798,6 +826,12 @@ export const ProfileMainContainer = styled.div<{
       background-color: #3f1168;
       padding: 30px;
       padding-inline: 40px;
+      @media (max-width: 1280px) {
+        padding-inline: 30px;
+      }
+      @media (max-width: 1200px) {
+        padding-inline: 20px;
+      }
       border-radius: ${(props) =>
         props.password == false ? "0 0 20px 20px" : "0 0 0 0"};
       p {
@@ -805,6 +839,9 @@ export const ProfileMainContainer = styled.div<{
       }
       .data-container {
         line-height: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
         .password-edit {
           width: 100%;
           background-color: transparent;
@@ -814,7 +851,7 @@ export const ProfileMainContainer = styled.div<{
         }
         .email {
           color: white;
-          font-size: 12px;
+          font-size: 14px;
         }
         .email-user {
           color: white;
@@ -944,20 +981,26 @@ export const ProfileIcon = styled.img`
 export const SecondContainer = styled.div`
   display: flex;
   gap: 50px;
+  @media (max-width: 1380px) {
+    gap: 30px;
+  }
+  @media (max-width: 1080px) {
+    gap: 15px;
+  }
 `;
 export const RewardContainer = styled.div<{ reward: any }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 60%;
+  min-width: 60%;
+  @media (max-width: 1200px) {
+    min-width: 420px;
+  }
   .main-container {
     display: flex;
     flex-direction: column;
     background-color: #e4b6e8;
     border-radius: 20px;
-    .extra-info {
-      padding: 30px;
-    }
     .reward-title-contain {
       width: 100%;
       padding: 20px;
@@ -969,93 +1012,149 @@ export const RewardContainer = styled.div<{ reward: any }>`
         color: #942cec;
       }
     }
-    .reward-conditions {
-      background-color: #de94e1;
-      display: flex;
-      border-radius: 20px 20px 0 0;
-      p {
-        margin: 0;
-        font-weight: 600;
-      }
-      span {
-        font-weight: 800;
-      }
-      .bottom-contain {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: #942cec;
-        font-size: 40px;
-      }
-
-      .point-container {
-        cursor: pointer;
+    .reward-containers {
+      border-radius: 20px;
+      ${(props) =>
+        props.reward == 0 &&
+        css`
+          background: linear-gradient(135deg, #9a2fea 10%, #fd8608 100%);
+        `}
+      ${(props) =>
+        props.reward == 2 &&
+        css`
+          background: linear-gradient(60deg, #8f0bee 10%, #059cfe 100%);
+        `}
+      .extra-info {
+        padding-block: 25px;
         display: flex;
         justify-content: center;
-        flex-direction: column;
-        gap: 20px;
-        background-color: #e6c4ea;
-        width: 33.33%;
-        padding-block: 15px;
-        padding-inline: 25px;
-        border-radius: 20px;
-        ${(props) =>
-          props.reward == 0 &&
-          css`
-            background: linear-gradient(135deg, #9a2fea 0%, #fd8608 100%);
-            border-radius: 20px 20px 0 0;
-          `}
         p {
-          color: #3f1168;
-          line-height: 18px;
+          margin: 0;
+          color: white;
+          font-weight: 600;
+          @media (max-width: 1200px) {
+            font-size: 14px;
+          }
+          span {
+            color: #fedd67;
+          }
+        }
+      }
+      .reward-conditions {
+        display: flex;
+        border-radius: 20px 20px 0 0;
+        p {
+          margin: 0;
+          font-weight: 600;
+        }
+        span {
+          font-weight: 800;
+        }
+        .bottom-contain {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: #942cec;
+          font-size: 40px;
+        }
+        .point-container {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+          width: 33.33%;
+          padding-block: 15px;
+          padding-inline: 25px;
+          @media (max-width: 1200px) {
+            padding-inline: 15px;
+          }
           ${(props) =>
             props.reward == 0 &&
             css`
-              color: white;
+              border-radius: 20px 20px 0 0;
             `}
-        }
+          ${(props) =>
+            props.reward != 0 &&
+            css`
+              background-color: #e6c4ea;
+            `}
+          p {
+            color: #3f1168;
+            line-height: 18px;
+            @media (max-width: 1200px) {
+              font-size: 14px;
+            }
+            ${(props) =>
+              props.reward == 0 &&
+              css`
+                color: white;
+              `}
+          }
 
-        .point-number {
-          color: #942cec;
-          font-size: 36px;
+          .point-number {
+            color: #942cec;
+            font-size: 36px;
+            @media (max-width: 1200px) {
+              font-size: 30px;
+            }
+            ${(props) =>
+              props.reward == 0 &&
+              css`
+                color: white;
+              `}
+          }
+          .point-data {
+            width: 565.05px;
+          }
+        }
+        .time-container {
+          height: fit-content;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+          background-color: #de94e1;
+          padding-block: 15px;
+          padding-inline: 25px;
+          width: 33.34%;
+          @media (max-width: 1200px) {
+            padding-inline: 15px;
+          }
           ${(props) =>
             props.reward == 0 &&
             css`
-              color: white;
+              border-radius: 0 0 0 20px;
             `}
-        }
-        .point-data {
-          width: 565.05px;
-        }
-      }
-      .time-container {
-        height: fit-content;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        gap: 20px;
-        background-color: #de94e1;
-        padding-block: 15px;
-        padding-inline: 25px;
-        width: 33.34%;
-        p {
-          color: #3f1168;
-          line-height: 18px;
           ${(props) =>
-            props.reward == 1 &&
+            props.reward == 2 &&
             css`
-              color: white;
+              border-radius: 0 0 20px 0;
             `}
-        }
-        .time-number {
-          color: #942cec;
-          font-size: 36px;
-          ${(props) =>
-            props.reward == 1 &&
-            css`
-              color: white;
-            `}
+          p {
+            color: #3f1168;
+            line-height: 18px;
+            @media (max-width: 1200px) {
+              font-size: 14px;
+            }
+            ${(props) =>
+              props.reward == 1 &&
+              css`
+                color: white;
+              `}
+          }
+          .time-number {
+            color: #942cec;
+            font-size: 36px;
+            ${(props) =>
+              props.reward == 1 &&
+              css`
+                color: white;
+              `}
+            @media (max-width: 1200px) {
+              font-size: 30px;
+            }
+          }
         }
       }
       .certificates-container {
@@ -1064,14 +1163,23 @@ export const RewardContainer = styled.div<{ reward: any }>`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        background-color: #e6c4ea;
         padding-block: 15px;
-
         padding-inline: 25px;
         width: 33.33%;
+        @media (max-width: 1200px) {
+          padding-inline: 15px;
+        }
+        ${(props) =>
+          props.reward != 2 &&
+          css`
+            background-color: #e6c4ea;
+          `}
         p {
           color: #3f1168;
           line-height: 18px;
+          @media (max-width: 1200px) {
+            font-size: 14px;
+          }
           ${(props) =>
             props.reward == 2 &&
             css`
@@ -1086,6 +1194,9 @@ export const RewardContainer = styled.div<{ reward: any }>`
             css`
               color: white;
             `}
+          @media (max-width: 1200px) {
+            font-size: 30px;
+          }
         }
       }
     }
@@ -1115,6 +1226,10 @@ export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
+  @media (max-width: 1200px) {
+    min-width: 260px;
+  }
+  min-width: 320px;
   .first-section {
     display: flex;
     flex-direction: column;
@@ -1122,15 +1237,25 @@ export const SubscriptionContainer = styled.div`
     border-radius: 20px 20px 0 0;
     background-color: #f2e4c8;
     height: 65%;
-    padding: 30px;
+    padding-block: 20px;
+    padding-inline: 30px;
+    @media (max-width: 1200px) {
+      padding-inline: 20px;
+    }
     p {
       font-size: 16px;
       color: #942ced;
       font-weight: 600;
       margin: 0;
+      @media (max-width: 1200px) {
+        font-size: 14px;
+      }
     }
     .main-title {
       font-size: 26px;
+      @media (max-width: 1200px) {
+        font-size: 22px;
+      }
     }
     .subscription-content {
       display: flex;
@@ -1147,6 +1272,9 @@ export const SubscriptionContainer = styled.div`
           .span {
             color: #3f1168;
           }
+          @media (max-width: 1200px) {
+            font-size: 16px;
+          }
         }
       }
     }
@@ -1160,6 +1288,9 @@ export const SubscriptionContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
+    @media (max-width: 1200px) {
+      padding-inline: 20px;
+    }
     p {
       margin: 0;
     }
@@ -1174,12 +1305,18 @@ export const SubscriptionContainer = styled.div`
       color: #942ced;
       line-height: 25px;
       font-weight: 600;
+      @media (max-width: 1200px) {
+        font-size: 26px;
+      }
     }
     .third-text {
       font-size: 18px;
       color: #3f1168;
       font-weight: 600;
       line-height: 20px;
+      @media (max-width: 1200px) {
+        font-size: 16px;
+      }
     }
   }
 `;
@@ -1194,11 +1331,16 @@ export const HistoryContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  min-width: 320px;
   width: 40%;
   background-color: #dad3e5;
-  padding: 30px;
+  padding: 20px;
   border-radius: 20px;
   height: fit-content;
+  @media (max-width: 1200px) {
+    min-width: 260px;
+    padding-inline: 15px;
+  }
   p {
     margin: 0;
   }
@@ -1206,6 +1348,9 @@ export const HistoryContainer = styled.div`
     font-size: 24px;
     font-weight: 800;
     color: #942ced;
+    @media (max-width: 1200px) {
+      font-size: 22px;
+    }
   }
   .history-content {
     display: flex;
@@ -1226,9 +1371,15 @@ export const HistoryContainer = styled.div`
           font-size: 14px;
           font-weight: 600;
           color: #3f1479;
+          @media (max-width: 1200px) {
+            font-size: 12px;
+          }
         }
         .second-info {
           width: 84px;
+          @media (max-width: 1200px) {
+            width: 70px;
+          }
         }
       }
       .line {
@@ -1253,7 +1404,11 @@ export const HistoryContainer = styled.div`
   }
 `;
 export const PaymentMethodContainer = styled.div<{ add: any }>`
-  width: 60%;
+  min-width: 60%;
+  @media (max-width: 1200px) {
+    min-width: 420px;
+    max-width: 420px;
+  }
   p {
     margin: 0;
   }
@@ -1266,6 +1421,9 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
     border-radius: ${(props) =>
       props.add == false ? "20px" : "20px 20px 0 0"};
     font-family: "Montserrat", sans-serif;
+    @media (max-width: 1260px) {
+      padding: 20px;
+    }
     .edit-button {
       display: flex;
       justify-content: center;
@@ -1347,6 +1505,9 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         background-color: #3f1168;
         padding-block: 5px;
         padding-inline: 20px;
+        @media (max-width: 1300) {
+          padding-right: 10px;
+        }
         .separate {
           position: absolute;
           display: flex;
@@ -1375,8 +1536,11 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
           }
         }
         .text-card {
-          font-size: 16px;
+          font-size: 14px;
           color: white;
+          @media (max-width: 1300) {
+            font-size: 12px;
+          }
         }
         .last-digits {
           color: white;
@@ -1428,9 +1592,12 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
     flex-direction: column;
     gap: 30px;
     padding-block: 30px;
-    padding-inline: 10%;
+    padding-inline: 25px;
     background-color: #942ced;
     border-radius: 0 0 20px 20px;
+    @media (max-width: 1260px) {
+      padding: 20px;
+    }
     .button-contain {
       display: flex;
       justify-content: center;
