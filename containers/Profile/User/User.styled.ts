@@ -746,16 +746,61 @@ export const ProfileMainContainer = styled.div<{
       display: flex;
       width: 80%;
       order: 2;
+      justify-content: space-between;
+      padding-inline: 50px;
+    }
+    @media (max-width: 750px) {
+      padding-inline: 0;
+    }
+    @media (max-width: 600px) {
+      width: 90%;
+    }
+    @media (max-width: 400px) {
+      width: 95%;
     }
     p {
       color: #451d71;
       font-size: 14px;
       font-weight: bold;
       line-height: 15px;
+      @media (max-width: 1023px) {
+        font-size: 20px;
+        line-height: 20px;
+      }
+      @media (max-width: 750px) {
+        font-size: 16px;
+        line-height: 16px;
+      }
+      @media (max-width: 400px) {
+        font-size: 14px;
+        line-height: 14px;
+      }
     }
     span {
       font-size: 16px;
       color: #fc8c07;
+      @media (max-width: 1023px) {
+        font-size: 30px;
+        line-height: 50px;
+      }
+      @media (max-width: 750px) {
+        font-size: 24px;
+        line-height: 40px;
+      }
+      @media (max-width: 400px) {
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+    .main-text {
+      display: flex;
+      align-items: center;
+    }
+    .responsive-picture {
+      display: none;
+      @media (max-width: 1023px) {
+        display: flex;
+      }
     }
   }
   .profile-container {
@@ -983,10 +1028,14 @@ export const PictureContain = styled.div<{ progress: number; reward: any }>`
   left: 50%;
   transform: translateX(-50%);
   @media (max-width: 1023px) {
-    position: static;
+    position: relative;
     top: 0;
     left: 0;
     transform: none;
+  }
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 150px;
   }
   .circle-level {
     position: absolute;
@@ -996,6 +1045,10 @@ export const PictureContain = styled.div<{ progress: number; reward: any }>`
     display: flex;
     width: 250px;
     height: 250px;
+    @media (max-width: 600px) {
+      width: 170px;
+      height: 170px;
+    }
     svg {
       width: 100%;
       height: 100%;

@@ -65,10 +65,10 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
   return (
     <ProfileMainContainer startEdit={startEdit} password={editPassword}>
       <div className="first-text">
-        <div>
+        <div className="main-text">
           <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
         </div>
-        <div>
+        <div className="responsive-picture">
           <div className="crown">
             <AiFillCrown />
           </div>
