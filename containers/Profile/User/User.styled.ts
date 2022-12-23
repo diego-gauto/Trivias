@@ -4,7 +4,6 @@ import styled, { css, keyframes } from "styled-components";
 
 export const BackgroundProfile = styled.div`
   width: 100%;
-  height: calc(100vh - 82.5px);
   display: flex;
   background-color: #ede7f2;
   @font-face {
@@ -17,7 +16,6 @@ export const BackgroundProfile = styled.div`
   }
   @media (max-width: 1023px) {
     flex-direction: column;
-    height: auto;
     gap: 40px;
     align-items: center;
   }
@@ -29,13 +27,25 @@ export const SecondBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+  @media (max-width: 1280px) {
+    padding-left: 0;
+  }
   gap: 40px;
   width: 70%;
   height: 100%;
-  margin-top: 60px;
+  margin-top: 38px;
+  @media (max-width: 1023px) {
+    margin-top: 0;
+    width: 100%;
+    gap: 30px;
+    padding: 0;
+  }
   .title-contain {
     display: flex;
     flex-direction: column;
+    @media (max-width: 1023px) {
+      display: none;
+    }
     p {
       margin: 0;
       line-height: 60px;
@@ -43,6 +53,10 @@ export const SecondBox = styled.div`
     .first-text {
       font-size: 36px;
       color: #3f1168;
+      letter-spacing: 5px;
+      @media (max-width: 1200px) {
+        font-size: 30px;
+      }
       span {
         font-weight: 600;
         color: #d244d1;
@@ -52,6 +66,9 @@ export const SecondBox = styled.div`
       color: #3f1168;
       font-size: 42px;
       font-weight: 800;
+      @media (max-width: 1200px) {
+        font-size: 35px;
+      }
       span {
         color: #942ced;
       }
@@ -60,11 +77,18 @@ export const SecondBox = styled.div`
 `;
 export const ThirdBox = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
-  gap: 10px;
+  gap: 50px;
+  @media (max-width: 1380px) {
+    gap: 30px;
+  }
+  @media (max-width: 1080px) {
+    gap: 15px;
+  }
   @media (max-width: 1023px) {
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
   }
 `;
 export const ProfileContainer = styled.div`
@@ -229,7 +253,7 @@ export const PayContainer = styled.div`
 export const VisaIcon = styled.i`
   background-image: url(../images/Visa.png);
   background-repeat: no-repeat;
-  height: 32px;
+  height: 30px;
   width: 47px;
   background-position: center;
 `;
@@ -251,8 +275,8 @@ export const CardIconResp = styled("i")<{ brand: any }>`
     `}
   
   background-repeat:no-repeat;
-  width: 59px;
-  height: 33px;
+  min-width: 59px;
+  min-height: 33px;
   background-position: center;
 `;
 export const PaypalIcon = styled.i`
@@ -647,8 +671,10 @@ export const InputPhone = styled(PhoneInput)`
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
-    width: 200px;
-    left: 80px;
+    width: 180px;
+    background: transparent;
+    color: white;
+    left: 65px;
     border: none;
     outline: none;
     @media (max-width: 400px) {
@@ -658,8 +684,8 @@ export const InputPhone = styled(PhoneInput)`
   }
   .PhoneInputCountry {
     position: absolute;
-    width: 40px;
-    left: 30px;
+    width: 30px;
+    left: 15px;
     align-items: center;
     top: 50%;
     transform: translateY(-50%);
@@ -668,35 +694,113 @@ export const InputPhone = styled(PhoneInput)`
 export const Box2 = styled.div`
   position: relative;
   width: 100%;
+  height: 35px;
+  border: 1px solid white;
   border-radius: 100px;
-  border: 1px solid #6717cd;
-  height: 40px;
+  background-color: #691eaa;
+  .separate {
+    position: absolute;
+    display: flex;
+    height: 33px;
+    width: 1px;
+    background-color: white;
+    line-height: 0px;
+  }
 `;
-export const ProfileMainContainer = styled.div`
+export const ProfileMainContainer = styled.div<{
+  startEdit: any;
+  password: any;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
-  gap: 40px;
+  padding-top: 20px;
+  gap: 50px;
   width: 30%;
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
+  .crown {
+    position: absolute;
+    font-size: 40px;
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #ffb715;
+  }
   button {
     font-size: 14px;
     font-weight: bold;
     border-radius: 100px;
     padding-block: 5px;
     width: 150px;
+    &:hover {
+      transform: scale(1.03);
+      transition: 1s ease all;
+    }
   }
   .first-text {
     text-align: center;
+    @media (max-width: 1023px) {
+      display: flex;
+      width: 80%;
+      order: 2;
+      justify-content: space-between;
+      padding-inline: 50px;
+    }
+    @media (max-width: 750px) {
+      padding-inline: 0;
+    }
+    @media (max-width: 600px) {
+      width: 90%;
+    }
+    @media (max-width: 400px) {
+      width: 95%;
+    }
     p {
       color: #451d71;
       font-size: 14px;
       font-weight: bold;
       line-height: 15px;
+      @media (max-width: 1023px) {
+        font-size: 20px;
+        line-height: 20px;
+      }
+      @media (max-width: 750px) {
+        font-size: 16px;
+        line-height: 16px;
+      }
+      @media (max-width: 400px) {
+        font-size: 14px;
+        line-height: 14px;
+      }
     }
     span {
       font-size: 16px;
       color: #fc8c07;
+      @media (max-width: 1023px) {
+        font-size: 30px;
+        line-height: 50px;
+      }
+      @media (max-width: 750px) {
+        font-size: 24px;
+        line-height: 40px;
+      }
+      @media (max-width: 400px) {
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+    .main-text {
+      display: flex;
+      align-items: center;
+    }
+    .responsive-picture {
+      display: none;
+      @media (max-width: 1023px) {
+        display: flex;
+      }
     }
   }
   .profile-container {
@@ -704,35 +808,81 @@ export const ProfileMainContainer = styled.div`
     margin-top: 80px;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    @media (max-width: 1023px) {
+      flex-direction: row;
+      margin-top: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    .picture-container {
+    }
     p {
       margin: 0;
     }
     .user-info-up {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      background-color: #dad3e5;
-      padding-top: 150px;
-      padding-inline: 50px;
-      padding-bottom: 20px;
+      gap: 20px;
+      background-color: ${(props) =>
+        props.startEdit == false ? "#dad3e5" : "#e4b6e8"};
+      padding-top: 160px;
+      padding-inline: 40px;
+      padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
+      @media (max-width: 1280px) {
+        padding-inline: 30px;
+      }
+      @media (max-width: 1200px) {
+        padding-inline: 20px;
+      }
+      @media (max-width: 1023px) {
+        min-width: 40%;
+        padding-top: 40px;
+        border-radius: 20px 0 0 20px;
+      }
+      .input-contain {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label {
+          font-size: 18px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+          color: #441a6f;
+        }
+        input {
+          padding-inline: 20px;
+          padding-block: 5px;
+          font-size: 14px;
+          color: #933edc;
+          font-weight: 800;
+          border-radius: 100px;
+          border: 1px solid #933edc;
+          :focus {
+            outline: 1px solid #8e2de2;
+          }
+        }
+      }
       .name-text {
         text-align: center;
-        font-size: 24px;
-        line-height: 25px;
+        font-size: 36px;
+        line-height: 30px;
         font-weight: 800;
         color: #441a6f;
         span {
           color: #933edc;
         }
+        @media (max-width: 1023px) {
+          text-align: start;
+        }
       }
       .data-contain {
         display: flex;
         flex-direction: column;
+        gap: 2px;
         p {
           margin: 0;
-          font-size: 14px;
+          font-size: 18px;
           font-weight: 800;
           width: fit-content;
         }
@@ -759,57 +909,179 @@ export const ProfileMainContainer = styled.div`
       gap: 15px;
       background-color: #3f1168;
       padding: 30px;
-      padding-inline: 50px;
-      border-radius: 0 0 20px 20px;
+      padding-inline: 40px;
+      @media (max-width: 1280px) {
+        padding-inline: 30px;
+      }
+      @media (max-width: 1200px) {
+        padding-inline: 20px;
+      }
+      @media (max-width: 1023px) {
+        border-radius: 0 20px 20px 0;
+        min-width: 40%;
+      }
+      border-radius: ${(props) =>
+        props.password == false ? "0 0 20px 20px" : "0 0 0 0"};
       p {
         margin: 0;
       }
       .data-container {
         line-height: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .password-edit {
+          width: 100%;
+          background-color: transparent;
+          border: 1px solid #ffa42c;
+          color: #ffa42c;
+          padding-block: 8px;
+        }
         .email {
           color: white;
-          font-size: 12px;
+          font-size: 14px;
         }
         .email-user {
           color: white;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 700;
         }
         .password {
           color: #e08510;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 700;
         }
         .password-user {
           color: #e8c567;
+          font-size: 16px;
+        }
+      }
+    }
+    .edit-contain {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background-color: #f5e2ac;
+      padding: 25px;
+      border-radius: 0 0 20px 20px;
+      .input-contain {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label {
+          font-size: 18px;
+          font-weight: 600;
+          font-family: "Montserrat", sans-serif;
+          color: #441a6f;
+        }
+        input {
+          padding-inline: 20px;
+          padding-block: 5px;
           font-size: 14px;
+          color: #933edc;
+          font-weight: 800;
+          border-radius: 100px;
+          border: 1px solid #933edc;
+          background: #f1e4ce;
+          :focus {
+            outline: 1px solid #8e2de2;
+          }
+          ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #933edc;
+            font-weight: 500;
+          }
         }
       }
     }
   }
-  .btn-edit {
+  .btn-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    background-color: #933edc;
-    color: white;
-    font-weight: 500;
-    border: none;
-  }
-  .btn-logout {
-    color: #441a6f;
-    border: 1px solid #441a6f;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 15px;
+    @media (max-width: 1023px) {
+      display: none;
+    }
+    .btn-edit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background-color: #933edc;
+      color: white;
+      font-weight: 500;
+      border: none;
+    }
+    .btn-logout {
+      color: #441a6f;
+      border: 1px solid #441a6f;
+    }
   }
 `;
-export const PictureContain = styled.div`
+export const PictureContain = styled.div<{ progress: number; reward: any }>`
   display: flex;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   position: absolute;
-  top: -75px;
+  top: -100px;
   left: 50%;
   transform: translateX(-50%);
+  @media (max-width: 1023px) {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 150px;
+  }
+  .circle-level {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 250px;
+    height: 250px;
+    @media (max-width: 600px) {
+      width: 170px;
+      height: 170px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      stroke-dasharray: 755;
+      z-index: 1;
+      transform: rotate(-90deg);
+      border-radius: 50%;
+    }
+    .progress-circle {
+      fill: none;
+      stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
+        ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
+      stroke-width: 20px;
+      stroke-dasharray: 755;
+      stroke-dashoffset: ${(props) => props.progress};
+      stroke-linecap: round;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+    }
+    .progress-background {
+      fill: none;
+      stroke: #3f1168;
+      stroke-width: 18px;
+      stroke-dasharray: 755;
+      stroke-dashoffset: 0;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+    }
+  }
 `;
 export const ProfileIcon = styled.img`
   background-repeat: no-repeat;
@@ -820,20 +1092,36 @@ export const ProfileIcon = styled.img`
 export const SecondContainer = styled.div`
   display: flex;
   gap: 50px;
+  @media (max-width: 1380px) {
+    gap: 30px;
+  }
+  @media (max-width: 1080px) {
+    gap: 15px;
+  }
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
 `;
 export const RewardContainer = styled.div<{ reward: any }>`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 60%;
+  justify-content: space-between;
+  min-width: 60%;
+  @media (max-width: 1200px) {
+    min-width: 420px;
+  }
+  @media (max-width: 1023px) {
+    width: 80%;
+    gap: 20px;
+    min-width: 300px;
+  }
   .main-container {
     display: flex;
     flex-direction: column;
     background-color: #e4b6e8;
     border-radius: 20px;
-    .extra-info {
-      padding: 30px;
-    }
     .reward-title-contain {
       width: 100%;
       padding: 20px;
@@ -845,93 +1133,149 @@ export const RewardContainer = styled.div<{ reward: any }>`
         color: #942cec;
       }
     }
-
-    .reward-conditions {
-      background-color: #de94e1;
-      display: flex;
-      border-radius: 20px 20px 0 0;
-      p {
-        margin: 0;
-        font-weight: 600;
-      }
-      span {
-        font-weight: 800;
-      }
-      .bottom-contain {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: #942cec;
-        font-size: 40px;
-      }
-
-      .point-container {
-        cursor: pointer;
+    .reward-containers {
+      border-radius: 20px;
+      ${(props) =>
+        props.reward == 0 &&
+        css`
+          background: linear-gradient(135deg, #9a2fea 10%, #fd8608 100%);
+        `}
+      ${(props) =>
+        props.reward == 2 &&
+        css`
+          background: linear-gradient(60deg, #8f0bee 10%, #059cfe 100%);
+        `}
+      .extra-info {
+        padding-block: 25px;
         display: flex;
         justify-content: center;
-        flex-direction: column;
-        gap: 20px;
-        background-color: #e6c4ea;
-        width: 33.33%;
-        padding-block: 15px;
-        padding-inline: 25px;
-        ${(props) =>
-          props.reward == 0 &&
-          css`
-            background: linear-gradient(135deg, #9a2fea 0%, #fd8608 100%);
-            border-radius: 20px 20px 0 0;
-          `}
         p {
-          color: #3f1168;
-          line-height: 18px;
+          margin: 0;
+          color: white;
+          font-weight: 600;
+          @media (max-width: 1200px) {
+            font-size: 14px;
+          }
+          span {
+            color: #fedd67;
+          }
+        }
+      }
+      .reward-conditions {
+        display: flex;
+        border-radius: 20px 20px 0 0;
+        p {
+          margin: 0;
+          font-weight: 600;
+        }
+        span {
+          font-weight: 800;
+        }
+        .bottom-contain {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: #942cec;
+          font-size: 40px;
+        }
+        .point-container {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+          width: 33.33%;
+          padding-block: 15px;
+          padding-inline: 25px;
+          @media (max-width: 1200px) {
+            padding-inline: 15px;
+          }
           ${(props) =>
             props.reward == 0 &&
             css`
-              color: white;
+              border-radius: 20px 20px 0 0;
             `}
-        }
+          ${(props) =>
+            props.reward != 0 &&
+            css`
+              background-color: #e6c4ea;
+            `}
+          p {
+            color: #3f1168;
+            line-height: 18px;
+            @media (max-width: 1200px) {
+              font-size: 14px;
+            }
+            ${(props) =>
+              props.reward == 0 &&
+              css`
+                color: white;
+              `}
+          }
 
-        .point-number {
-          color: #942cec;
-          font-size: 36px;
+          .point-number {
+            color: #942cec;
+            font-size: 36px;
+            @media (max-width: 1200px) {
+              font-size: 30px;
+            }
+            ${(props) =>
+              props.reward == 0 &&
+              css`
+                color: white;
+              `}
+          }
+          .point-data {
+            width: 565.05px;
+          }
+        }
+        .time-container {
+          height: fit-content;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+          background-color: #de94e1;
+          padding-block: 15px;
+          padding-inline: 25px;
+          width: 33.34%;
+          @media (max-width: 1200px) {
+            padding-inline: 15px;
+          }
           ${(props) =>
             props.reward == 0 &&
             css`
-              color: white;
+              border-radius: 0 0 0 20px;
             `}
-        }
-        .point-data {
-          width: 565.05px;
-        }
-      }
-      .time-container {
-        height: fit-content;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        gap: 20px;
-        background-color: #de94e1;
-        padding-block: 15px;
-        padding-inline: 25px;
-        width: 33.34%;
-        p {
-          color: #3f1168;
-          line-height: 18px;
           ${(props) =>
-            props.reward == 1 &&
+            props.reward == 2 &&
             css`
-              color: white;
+              border-radius: 0 0 20px 0;
             `}
-        }
-        .time-number {
-          color: #942cec;
-          font-size: 36px;
-          ${(props) =>
-            props.reward == 1 &&
-            css`
-              color: white;
-            `}
+          p {
+            color: #3f1168;
+            line-height: 18px;
+            @media (max-width: 1200px) {
+              font-size: 14px;
+            }
+            ${(props) =>
+              props.reward == 1 &&
+              css`
+                color: white;
+              `}
+          }
+          .time-number {
+            color: #942cec;
+            font-size: 36px;
+            ${(props) =>
+              props.reward == 1 &&
+              css`
+                color: white;
+              `}
+            @media (max-width: 1200px) {
+              font-size: 30px;
+            }
+          }
         }
       }
       .certificates-container {
@@ -940,14 +1284,23 @@ export const RewardContainer = styled.div<{ reward: any }>`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        background-color: #e6c4ea;
         padding-block: 15px;
-
         padding-inline: 25px;
         width: 33.33%;
+        @media (max-width: 1200px) {
+          padding-inline: 15px;
+        }
+        ${(props) =>
+          props.reward != 2 &&
+          css`
+            background-color: #e6c4ea;
+          `}
         p {
           color: #3f1168;
           line-height: 18px;
+          @media (max-width: 1200px) {
+            font-size: 14px;
+          }
           ${(props) =>
             props.reward == 2 &&
             css`
@@ -962,19 +1315,46 @@ export const RewardContainer = styled.div<{ reward: any }>`
             css`
               color: white;
             `}
+          @media (max-width: 1200px) {
+            font-size: 30px;
+          }
         }
       }
     }
   }
   button {
-    padding-block: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding-block: 15px;
     border-radius: 100px;
+    border: none;
+    background: #3f1168;
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+    span {
+      color: #ffdd67;
+    }
+    &:hover {
+      transform: scale(1.03);
+      transition: 1s ease all;
+    }
   }
 `;
 export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
+  @media (max-width: 1200px) {
+    min-width: 260px;
+  }
+  @media (max-width: 1023px) {
+    width: 80%;
+    min-width: 300px;
+  }
+  min-width: 320px;
   .first-section {
     display: flex;
     flex-direction: column;
@@ -982,15 +1362,28 @@ export const SubscriptionContainer = styled.div`
     border-radius: 20px 20px 0 0;
     background-color: #f2e4c8;
     height: 65%;
-    padding: 30px;
+    padding-block: 20px;
+    padding-inline: 30px;
+    @media (max-width: 1200px) {
+      padding-inline: 20px;
+    }
+    @media (max-width: 1023px) {
+      padding-left: 10%;
+    }
     p {
       font-size: 16px;
       color: #942ced;
       font-weight: 600;
       margin: 0;
+      @media (max-width: 1200px) {
+        font-size: 14px;
+      }
     }
     .main-title {
       font-size: 26px;
+      @media (max-width: 1200px) {
+        font-size: 22px;
+      }
     }
     .subscription-content {
       display: flex;
@@ -1007,6 +1400,9 @@ export const SubscriptionContainer = styled.div`
           .span {
             color: #3f1168;
           }
+          @media (max-width: 1200px) {
+            font-size: 16px;
+          }
         }
       }
     }
@@ -1020,6 +1416,12 @@ export const SubscriptionContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
+    @media (max-width: 1200px) {
+      padding-inline: 20px;
+    }
+    @media (max-width: 1023px) {
+      padding-left: 10%;
+    }
     p {
       margin: 0;
     }
@@ -1034,12 +1436,379 @@ export const SubscriptionContainer = styled.div`
       color: #942ced;
       line-height: 25px;
       font-weight: 600;
+      @media (max-width: 1200px) {
+        font-size: 26px;
+      }
     }
     .third-text {
       font-size: 18px;
       color: #3f1168;
       font-weight: 600;
       line-height: 20px;
+      @media (max-width: 1200px) {
+        font-size: 16px;
+      }
+    }
+  }
+`;
+
+export const UserDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+`;
+export const HistoryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  min-width: 320px;
+  width: 40%;
+  background-color: #dad3e5;
+  padding: 20px;
+  border-radius: 20px;
+  height: fit-content;
+  @media (max-width: 1200px) {
+    min-width: 260px;
+    padding-inline: 15px;
+  }
+  @media (max-width: 1023px) {
+    width: 100%;
+    border-radius: 0;
+  }
+  p {
+    margin: 0;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #942ced;
+    @media (max-width: 1200px) {
+      font-size: 22px;
+    }
+  }
+  .history-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #942ced;
+    .history-data {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: 100%;
+      .history-info {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p {
+          font-size: 14px;
+          font-weight: 600;
+          color: #3f1479;
+          @media (max-width: 1200px) {
+            font-size: 12px;
+          }
+        }
+        .second-info {
+          width: 84px;
+          @media (max-width: 1200px) {
+            width: 70px;
+          }
+        }
+      }
+      .line {
+        border-radius: 100px;
+        width: 100%;
+        height: 1px;
+        background-color: #3f1479;
+      }
+    }
+  }
+  .dots {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    .option-dot {
+      cursor: pointer;
+      display: flex;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+    }
+  }
+`;
+export const PaymentMethodContainer = styled.div<{ add: any }>`
+  min-width: 60%;
+  @media (max-width: 1200px) {
+    min-width: 420px;
+    max-width: 420px;
+  }
+  @media (max-width: 1023px) {
+    width: 80%;
+    min-width: 300px;
+    max-width: 800px;
+  }
+  p {
+    margin: 0;
+  }
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #d2aff0;
+    padding: 30px;
+    border-radius: ${(props) =>
+      props.add == false ? "20px" : "20px 20px 0 0"};
+    font-family: "Montserrat", sans-serif;
+    @media (max-width: 1260px) {
+      padding: 20px;
+    }
+    .edit-button {
+      display: flex;
+      justify-content: center;
+      button {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #942ced;
+        border-radius: 100px;
+        padding-block: 5px;
+        padding-inline: 30px;
+        border: none;
+        &:hover {
+          transform: scale(1.03);
+          transition: 1s ease all;
+        }
+      }
+    }
+    .edit-mode {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .info {
+        p {
+          font-size: 16px;
+          font-weight: 600;
+          color: #3f1168;
+        }
+        input {
+          width: 100%;
+          border-radius: 100px;
+          border: 1px solid #942ced;
+          background: transparent;
+          color: #942ced;
+          padding-block: 5px;
+          padding-inline: 20px;
+          :focus {
+            outline: 2px solid #942ced;
+          }
+          ::placeholder {
+            color: #942ced;
+            opacity: 0.7;
+          }
+        }
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .date {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .inputs {
+            display: flex;
+            gap: 20px;
+          }
+        }
+        .date-inputs {
+          width: 90px;
+        }
+      }
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #942ced;
+      margin-bottom: 10px;
+    }
+    .card-contain {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .card {
+        align-items: center;
+        width: 100%;
+        border-radius: 100px;
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+        background-color: #3f1168;
+        padding-block: 5px;
+        padding-inline: 20px;
+        @media (max-width: 1300) {
+          padding-right: 10px;
+        }
+        .separate {
+          position: absolute;
+          display: flex;
+          height: 46px;
+          left: 90px;
+          width: 1px;
+          background-color: #942ced;
+          line-height: 0px;
+        }
+        input {
+          width: fit-content;
+          background: transparent;
+          color: white;
+          padding-block: 5px;
+          padding-left: 20px;
+          border: none;
+          color: #942ced;
+          font-weight: 600;
+          :focus {
+            outline: none;
+          }
+          ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #942ced;
+            opacity: 0.7;
+          }
+        }
+        .text-card {
+          font-size: 14px;
+          color: white;
+          @media (max-width: 1300) {
+            font-size: 12px;
+          }
+        }
+        .last-digits {
+          color: white;
+          font-weight: 600;
+        }
+        .last-4 {
+          font-weight: 600;
+          color: #ffdd67;
+        }
+      }
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 45px;
+        min-height: 45px;
+        border-radius: 50%;
+        border: 2px solid #942ced;
+        font-size: 20px;
+        color: #942ced;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.03);
+          transition: 1s ease all;
+        }
+      }
+    }
+    .bottom-contain {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #942ced;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 20px;
+      p {
+        font-size: 16px;
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .new-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-block: 30px;
+    padding-inline: 25px;
+    background-color: #942ced;
+    border-radius: 0 0 20px 20px;
+    @media (max-width: 1260px) {
+      padding: 20px;
+    }
+    .button-contain {
+      display: flex;
+      justify-content: center;
+      button {
+        font-size: 16px;
+        font-weight: bold;
+        color: #942ced;
+        border-radius: 100px;
+        padding-block: 5px;
+        padding-inline: 30px;
+        border: none;
+        &:hover {
+          transform: scale(1.03);
+          transition: 1s ease all;
+        }
+      }
+    }
+    .main-title {
+      font-size: 16px;
+      color: #ffdd69;
+      span {
+        font-weight: 600;
+      }
+    }
+    .container-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      p {
+        color: white;
+        font-weight: 600;
+      }
+      input {
+        width: 100%;
+        border-radius: 100px;
+        border: 1px solid white;
+        background: transparent;
+        color: white;
+        padding-block: 5px;
+        padding-inline: 20px;
+        :focus {
+          outline: 2px solid white;
+        }
+        ::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: white;
+          opacity: 0.7;
+        }
+      }
+      .card-input {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .info {
+        display: flex;
+        justify-content: space-between;
+        .date {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .inputs {
+            display: flex;
+            gap: 20px;
+          }
+        }
+        .date-inputs {
+          width: 90px;
+        }
+      }
     }
   }
 `;
