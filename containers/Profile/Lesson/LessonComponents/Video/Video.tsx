@@ -130,7 +130,10 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
                   <div className='answers'>
                     {question.answers.map((answer: any) => {
                       return (
-                        <p></p>
+                        <div style={{ display: "flex" }}>
+                          <p>{answer.answer}</p>
+                          <input type="radio" name="" id="" />
+                        </div>
                       )
                     })}
                   </div>

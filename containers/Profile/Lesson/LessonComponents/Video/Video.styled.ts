@@ -20,6 +20,7 @@ export const VideoContain = styled.div`
     }
   }
   .quiz-container {
+    padding: 60px;
     .question-container {
       display: flex;
       flex-direction: column;

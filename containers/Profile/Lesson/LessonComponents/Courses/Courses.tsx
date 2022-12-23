@@ -44,7 +44,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
     <MainContainer open={open}>
       <div className='course-info'>
         <p className='title'>{course?.courseTittle}</p>
-        <p>Un curso de <span>{course?.courseProfessor[0].name}</span></p>
+        <p>Un curso de <span>{course?.courseProfessor[0]?.name}</span></p>
         <div className='level-container'>
           {(course?.courseDifficulty == "Muy Fácil" || course?.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
           {(course?.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}

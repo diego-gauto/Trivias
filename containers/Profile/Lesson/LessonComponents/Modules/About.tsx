@@ -25,7 +25,7 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
       <AboutContain>
         <TextContainer>
           <LessonTitle>
-            {data.courseTitle}, <span>de {teacherCreds[0].name}</span>
+            {data.courseTitle}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>
