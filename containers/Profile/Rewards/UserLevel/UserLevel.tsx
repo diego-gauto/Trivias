@@ -102,7 +102,6 @@ const UserLevel = () => {
               </linearGradient>
             </defs>
             <ProgressBackground
-
             />
             <ProgressCircle
               progress={data}
