@@ -34,9 +34,18 @@ export const SecondBox = styled.div`
   width: 70%;
   height: 100%;
   margin-top: 38px;
+  @media (max-width: 1023px) {
+    margin-top: 0;
+    width: 100%;
+    gap: 30px;
+    padding: 0;
+  }
   .title-contain {
     display: flex;
     flex-direction: column;
+    @media (max-width: 1023px) {
+      display: none;
+    }
     p {
       margin: 0;
       line-height: 60px;
@@ -74,6 +83,12 @@ export const ThirdBox = styled.div`
   }
   @media (max-width: 1080px) {
     gap: 15px;
+  }
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
   }
 `;
 export const ProfileContainer = styled.div`
@@ -702,6 +717,9 @@ export const ProfileMainContainer = styled.div<{
   padding-top: 20px;
   gap: 50px;
   width: 30%;
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
   .crown {
     position: absolute;
     font-size: 40px;
@@ -724,6 +742,11 @@ export const ProfileMainContainer = styled.div<{
   }
   .first-text {
     text-align: center;
+    @media (max-width: 1023px) {
+      display: flex;
+      width: 80%;
+      order: 2;
+    }
     p {
       color: #451d71;
       font-size: 14px;
@@ -740,6 +763,14 @@ export const ProfileMainContainer = styled.div<{
     margin-top: 80px;
     display: flex;
     flex-direction: column;
+    @media (max-width: 1023px) {
+      flex-direction: row;
+      margin-top: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    .picture-container {
+    }
     p {
       margin: 0;
     }
@@ -758,6 +789,11 @@ export const ProfileMainContainer = styled.div<{
       }
       @media (max-width: 1200px) {
         padding-inline: 20px;
+      }
+      @media (max-width: 1023px) {
+        min-width: 40%;
+        padding-top: 40px;
+        border-radius: 20px 0 0 20px;
       }
       .input-contain {
         display: flex;
@@ -790,6 +826,9 @@ export const ProfileMainContainer = styled.div<{
         color: #441a6f;
         span {
           color: #933edc;
+        }
+        @media (max-width: 1023px) {
+          text-align: start;
         }
       }
       .data-contain {
@@ -831,6 +870,10 @@ export const ProfileMainContainer = styled.div<{
       }
       @media (max-width: 1200px) {
         padding-inline: 20px;
+      }
+      @media (max-width: 1023px) {
+        border-radius: 0 20px 20px 0;
+        min-width: 40%;
       }
       border-radius: ${(props) =>
         props.password == false ? "0 0 20px 20px" : "0 0 0 0"};
@@ -907,19 +950,28 @@ export const ProfileMainContainer = styled.div<{
       }
     }
   }
-  .btn-edit {
+  .btn-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    background-color: #933edc;
-    color: white;
-    font-weight: 500;
-    border: none;
-  }
-  .btn-logout {
-    color: #441a6f;
-    border: 1px solid #441a6f;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 15px;
+    @media (max-width: 1023px) {
+      display: none;
+    }
+    .btn-edit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background-color: #933edc;
+      color: white;
+      font-weight: 500;
+      border: none;
+    }
+    .btn-logout {
+      color: #441a6f;
+      border: 1px solid #441a6f;
+    }
   }
 `;
 export const PictureContain = styled.div<{ progress: number; reward: any }>`
@@ -930,6 +982,12 @@ export const PictureContain = styled.div<{ progress: number; reward: any }>`
   top: -100px;
   left: 50%;
   transform: translateX(-50%);
+  @media (max-width: 1023px) {
+    position: static;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
   .circle-level {
     position: absolute;
     top: 50%;
@@ -987,6 +1045,11 @@ export const SecondContainer = styled.div`
   @media (max-width: 1080px) {
     gap: 15px;
   }
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
 `;
 export const RewardContainer = styled.div<{ reward: any }>`
   display: flex;
@@ -995,6 +1058,11 @@ export const RewardContainer = styled.div<{ reward: any }>`
   min-width: 60%;
   @media (max-width: 1200px) {
     min-width: 420px;
+  }
+  @media (max-width: 1023px) {
+    width: 80%;
+    gap: 20px;
+    min-width: 300px;
   }
   .main-container {
     display: flex;
@@ -1229,6 +1297,10 @@ export const SubscriptionContainer = styled.div`
   @media (max-width: 1200px) {
     min-width: 260px;
   }
+  @media (max-width: 1023px) {
+    width: 80%;
+    min-width: 300px;
+  }
   min-width: 320px;
   .first-section {
     display: flex;
@@ -1241,6 +1313,9 @@ export const SubscriptionContainer = styled.div`
     padding-inline: 30px;
     @media (max-width: 1200px) {
       padding-inline: 20px;
+    }
+    @media (max-width: 1023px) {
+      padding-left: 10%;
     }
     p {
       font-size: 16px;
@@ -1291,6 +1366,9 @@ export const SubscriptionContainer = styled.div`
     @media (max-width: 1200px) {
       padding-inline: 20px;
     }
+    @media (max-width: 1023px) {
+      padding-left: 10%;
+    }
     p {
       margin: 0;
     }
@@ -1340,6 +1418,10 @@ export const HistoryContainer = styled.div`
   @media (max-width: 1200px) {
     min-width: 260px;
     padding-inline: 15px;
+  }
+  @media (max-width: 1023px) {
+    width: 100%;
+    border-radius: 0;
   }
   p {
     margin: 0;
@@ -1408,6 +1490,11 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
   @media (max-width: 1200px) {
     min-width: 420px;
     max-width: 420px;
+  }
+  @media (max-width: 1023px) {
+    width: 80%;
+    min-width: 300px;
+    max-width: 800px;
   }
   p {
     margin: 0;

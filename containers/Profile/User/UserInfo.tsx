@@ -24,6 +24,7 @@ import {
 } from "./User.styled";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
+import { useMediaQuery } from "react-responsive";
 
 const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: any) => {
   let today = new Date().getTime() / 1000;
@@ -36,9 +37,10 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
   const [startEdit, setStartEdit] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
-
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const numFor = Intl.NumberFormat('en-US');
   const nextLevel_format = numFor.format(nextLevel);
+  const points_format = numFor.format(userData.score);
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -63,38 +65,77 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
   return (
     <ProfileMainContainer startEdit={startEdit} password={editPassword}>
       <div className="first-text">
-        <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
+        <div>
+          <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
+        </div>
+        <div>
+          <div className="crown">
+            <AiFillCrown />
+          </div>
+          <PictureContain progress={data} reward={reward}>
+            {userData &&
+              userData.photoURL.length > 0 ?
+              <ProfileIcon src={userData.photoURL} ></ProfileIcon>
+              : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
+            }
+            <div className="circle-level">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="gradientLevel">
+                    <stop offset="0%" stopColor="#f88d21" />
+                    <stop offset="100%" stopColor="#972dec" />
+                  </linearGradient>
+                </defs>
+                <defs>
+                  <linearGradient id="gradientCertificate">
+                    <stop offset="0%" stopColor="#0997fe" />
+                    <stop offset="100%" stopColor="#9108ee" />
+                  </linearGradient>
+                </defs>
+                <circle className="progress-background"
+                />
+                <circle className="progress-circle" />
+              </svg>
+            </div>
+          </PictureContain>
+        </div>
       </div>
       <div className="profile-container">
-        <div className="crown">
-          <AiFillCrown />
-        </div>
-        <PictureContain progress={data} reward={reward}>
-          {userData &&
-            userData.photoURL.length > 0 ?
-            <ProfileIcon src={userData.photoURL} ></ProfileIcon>
-            : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
-          }
-          <div className="circle-level">
-            <svg xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="gradientLevel">
-                  <stop offset="0%" stopColor="#f88d21" />
-                  <stop offset="100%" stopColor="#972dec" />
-                </linearGradient>
-              </defs>
-              <defs>
-                <linearGradient id="gradientCertificate">
-                  <stop offset="0%" stopColor="#0997fe" />
-                  <stop offset="100%" stopColor="#9108ee" />
-                </linearGradient>
-              </defs>
-              <circle className="progress-background"
-              />
-              <circle className="progress-circle" />
-            </svg>
-          </div>
-        </PictureContain>
+        {
+          !responsive1023 &&
+          <>
+            <div className="crown">
+              <AiFillCrown />
+            </div>
+            <PictureContain progress={data} reward={reward}>
+              {userData &&
+                userData.photoURL.length > 0 ?
+                <ProfileIcon src={userData.photoURL} ></ProfileIcon>
+                : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
+              }
+              <div className="circle-level">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="gradientLevel">
+                      <stop offset="0%" stopColor="#f88d21" />
+                      <stop offset="100%" stopColor="#972dec" />
+                    </linearGradient>
+                  </defs>
+                  <defs>
+                    <linearGradient id="gradientCertificate">
+                      <stop offset="0%" stopColor="#0997fe" />
+                      <stop offset="100%" stopColor="#9108ee" />
+                    </linearGradient>
+                  </defs>
+                  <circle className="progress-background"
+                  />
+                  <circle className="progress-circle" />
+                </svg>
+              </div>
+            </PictureContain>
+          </>
+        }
+
         {
           !startEdit
             ?
@@ -103,7 +144,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                 {userData.name}<br /><span>{userData.lastName}</span>
               </p>
               <div className="data-contain">
-                <p className="points">{userData.score} puntos</p>
+                <p className="points">{points_format} puntos</p>
                 <p className="months">16 meses de aprendizaje</p>
                 <p className="certificates">14 certificados</p>
               </div>
@@ -225,26 +266,28 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
         }
 
       </div>
-      {
-        !startEdit
-          ?
-          <button
-            className="btn-edit"
-            onClick={() => { setStartEdit(true) }}
-          >
-            <MdModeEditOutline />
-            Editar Perfil
-          </button>
-          :
-          <button
-            className="btn-edit"
-            onClick={() => { updateUser() }}
-          >
-            Guardar Cambios
-          </button>
-      }
+      <div className="btn-container">
+        {
+          !startEdit
+            ?
+            <button
+              className="btn-edit"
+              onClick={() => { setStartEdit(true) }}
+            >
+              <MdModeEditOutline />
+              Editar Perfil
+            </button>
+            :
+            <button
+              className="btn-edit"
+              onClick={() => { updateUser() }}
+            >
+              Guardar Cambios
+            </button>
+        }
 
-      <button className="btn-logout">Cerrar sesión</button>
+        <button className="btn-logout">Cerrar sesión</button>
+      </div>
     </ProfileMainContainer>
     // <ProfileContainer>
     //   <ProfileIconContain>

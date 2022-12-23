@@ -56,8 +56,8 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
             {pm.length > 0 ? <>
               {pm.map((pm: any, index: any) => {
                 return (
-                  <>
-                    <div className="card-contain" key={"pmUser" + index}>
+                  <React.Fragment key={"pmUser " + index}>
+                    <div className="card-contain" >
                       <div className="card"
                         style={editCard == index + 1 ? { backgroundColor: "transparent", border: "1px solid #942ced" } : {}}>
                         <CardIconResp brand={pm.brand} />
@@ -117,7 +117,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
                         </div>
                       </div>
                     }
-                  </>
+                  </React.Fragment>
                 )
               })
               }
