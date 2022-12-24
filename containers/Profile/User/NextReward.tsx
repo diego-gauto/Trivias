@@ -109,7 +109,6 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                 <div className="bottom-contain">
                   <p className="point-number">
                     08
-
                   </p>
                   <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
                 </div>

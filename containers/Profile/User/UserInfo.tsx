@@ -26,7 +26,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useMediaQuery } from "react-responsive";
 
-const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: any) => {
+const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023 }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -37,7 +37,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
   const [startEdit, setStartEdit] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
-  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const numFor = Intl.NumberFormat('en-US');
   const nextLevel_format = numFor.format(nextLevel);
   const points_format = numFor.format(userData.score);
@@ -69,10 +68,10 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
           <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
         </div>
         <div className="responsive-picture">
-          <div className="crown">
-            <AiFillCrown />
-          </div>
-          <PictureContain progress={data} reward={reward}>
+          <PictureContain progress={data} reward={reward} progressResp={dataResp}>
+            <div className="crown">
+              <AiFillCrown />
+            </div>
             {userData &&
               userData.photoURL.length > 0 ?
               <ProfileIcon src={userData.photoURL} ></ProfileIcon>
@@ -107,7 +106,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
             <div className="crown">
               <AiFillCrown />
             </div>
-            <PictureContain progress={data} reward={reward}>
+            <PictureContain progress={data} reward={reward} progressResp={dataResp}>
               {userData &&
                 userData.photoURL.length > 0 ?
                 <ProfileIcon src={userData.photoURL} ></ProfileIcon>
@@ -200,7 +199,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                 </p>
                 :
                 <Box2>
-                  <div className="separate" style={{ left: 55 }} />
+                  <div className="separate" />
                   <InputPhone
                     value={userData.phoneNumber}
                     limitMaxLength={true}
@@ -224,6 +223,18 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward }: 
                   <p className="password-user">
                     **********
                   </p>
+                  {
+                    responsive1023 &&
+                    <div className="btn-edit-container">
+                      <button
+                        className="btn-edit"
+                        onClick={() => { setStartEdit(true) }}
+                      >
+                        <MdModeEditOutline />
+                        Editar Perfil
+                      </button>
+                    </div>
+                  }
                 </>
                 :
                 <button

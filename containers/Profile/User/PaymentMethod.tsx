@@ -20,6 +20,7 @@ import { functions } from "../../../firebase/firebaseConfig";
 import { deletePaymentMethod } from "../../../store/actions/ProfileActions";
 import { MdModeEdit } from "react-icons/md";
 import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { FaTrashAlt } from "react-icons/fa";
 
 const PaymentMethod = ({ data, pm, handleClick }: any) => {
 
@@ -44,7 +45,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
       })
     }
   }
-
   return (
     <PaymentMethodContainer add={addPayment}>
       <div className="main-container">
@@ -58,35 +58,16 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
                 return (
                   <React.Fragment key={"pmUser " + index}>
                     <div className="card-contain" >
-                      <div className="card"
-                        style={editCard == index + 1 ? { backgroundColor: "transparent", border: "1px solid #942ced" } : {}}>
+                      <div className="card">
                         <CardIconResp brand={pm.brand} />
-                        {
-                          editCard == index + 1
-                            ?
-                            <>
-                              <div className="separate" />
-                              <input
-                                placeholder="**** **** **** ****"
-                              />
-                            </>
-
-                            : <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
-                        }
+                        <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
                       </div>
-                      {
-                        editCard == index + 1
-                          ?
-                          <div className="circle" onClick={() => { setEditCard(0) }}>
-                            <AiOutlineClose />
-                          </div>
-                          :
-                          <div className="circle" onClick={() => { setEditCard(index + 1) }}>
-                            <MdModeEdit />
-                          </div>
-                      }
+                      <div className="circle" onClick={() => { setEditCard(index) }}>
+                        <  FaTrashAlt />
+                      </div>
+
                     </div>
-                    {
+                    {/* {
                       editCard == index + 1 &&
                       <div className="edit-mode">
                         <div className="info"
@@ -116,7 +97,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
                           </div>
                         </div>
                       </div>
-                    }
+                    } */}
                   </React.Fragment>
                 )
               })
@@ -124,10 +105,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
             </> :
               <p>Sin métodos de pago...</p>}
           </>
-        }
-        {
-          editCard != 0 &&
-          <div className="edit-button"><button>Guardar</button></div>
         }
         <div className="bottom-contain" onClick={() => { setAddPayment(!addPayment) }}>
           {
