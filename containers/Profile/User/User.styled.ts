@@ -1,3 +1,4 @@
+import ReactInputMask from "react-input-mask";
 import PhoneInput from "react-phone-number-input";
 
 import styled, { css, keyframes } from "styled-components";
@@ -691,7 +692,7 @@ export const LoaderContain = styled.div`
   border-width: 9px;
   border-style: solid;
   border-radius: 50%;
-  border-color: #6717cd transparent transparent;
+  border-color: white transparent transparent;
   animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
     running;
 `;
@@ -900,6 +901,7 @@ export const ProfileMainContainer = styled.div<{
       padding-inline: 40px;
       padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
+
       @media (max-width: 1280px) {
         padding-inline: 30px;
       }
@@ -916,6 +918,22 @@ export const ProfileMainContainer = styled.div<{
         padding-inline: 10px;
         justify-content: space-around;
         min-width: 45%;
+      }
+      .btn-edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background-color: transparent;
+        color: #441a6f;
+        font-weight: 600;
+        border: 1px solid #441a6f;
+        @media (max-width: 600px) {
+          font-size: 14px;
+        }
+        @media (max-width: 450px) {
+          font-size: 12px;
+        }
       }
       .input-contain {
         display: flex;
@@ -1031,6 +1049,7 @@ export const ProfileMainContainer = styled.div<{
       @media (max-width: 1023px) {
         border-radius: 0 20px 20px 0;
         min-width: 40%;
+        display: ${(props) => props.password == true && "none"};
       }
       @media (max-width: 600px) {
         padding-block: 30px;
@@ -1162,6 +1181,18 @@ export const ProfileMainContainer = styled.div<{
       background-color: #f5e2ac;
       padding: 25px;
       border-radius: 0 0 20px 20px;
+      @media (max-width: 1023px) {
+        min-width: 40%;
+        border-radius: 0 20px 20px 0;
+      }
+      @media (max-width: 600px) {
+        min-width: 45%;
+        padding: 15px;
+      }
+      @media (max-width: 400px) {
+        min-width: 200px;
+        padding: 10px;
+      }
       .input-contain {
         display: flex;
         flex-direction: column;
@@ -1171,6 +1202,15 @@ export const ProfileMainContainer = styled.div<{
           font-weight: 600;
           font-family: "Montserrat", sans-serif;
           color: #441a6f;
+          @media (max-width: 800px) {
+            font-size: 16px;
+          }
+          @media (max-width: 600px) {
+            font-size: 14px;
+          }
+          @media (max-width: 450px) {
+            font-size: 12px;
+          }
         }
         input {
           padding-inline: 20px;
@@ -1183,6 +1223,12 @@ export const ProfileMainContainer = styled.div<{
           background: #f1e4ce;
           :focus {
             outline: 1px solid #8e2de2;
+          }
+          @media (max-width: 600px) {
+            font-size: 12px;
+          }
+          @media (max-width: 450px) {
+            font-size: 10px;
           }
           ::placeholder {
             /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -1272,6 +1318,10 @@ export const PictureContain = styled.div<{
       cx: 125px;
       cy: 125px;
       r: 120px;
+      @media (max-width: 1023px) {
+        stroke: ${(props) => props.reward == 0 && "url(#gradientLevelResp)"}
+          ${(props) => props.reward == 2 && "url(#gradientCertificateResp)"};
+      }
       @media (max-width: 480px) {
         stroke-width: 10px;
         stroke-dashoffset: ${(props) => props.progressResp};
@@ -2225,5 +2275,19 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         }
       }
     }
+  }
+`;
+export const InputCard = styled(ReactInputMask)`
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  padding: 10px 0 10px 20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  outline: none;
+  :focus {
+    border: 2px solid #8e2de2;
+  }
+  @media (max-width: 400px) {
+    font-size: 12px;
   }
 `;

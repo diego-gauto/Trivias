@@ -40,6 +40,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const numFor = Intl.NumberFormat('en-US');
   const nextLevel_format = numFor.format(nextLevel);
   const points_format = numFor.format(userData.score);
+
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -80,13 +81,13 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             <div className="circle-level">
               <svg xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                  <linearGradient id="gradientLevel">
+                  <linearGradient id="gradientLevelResp">
                     <stop offset="0%" stopColor="#f88d21" />
                     <stop offset="100%" stopColor="#972dec" />
                   </linearGradient>
                 </defs>
                 <defs>
-                  <linearGradient id="gradientCertificate">
+                  <linearGradient id="gradientCertificateResp">
                     <stop offset="0%" stopColor="#0997fe" />
                     <stop offset="100%" stopColor="#9108ee" />
                   </linearGradient>
@@ -120,12 +121,14 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                       <stop offset="100%" stopColor="#972dec" />
                     </linearGradient>
                   </defs>
+
                   <defs>
                     <linearGradient id="gradientCertificate">
                       <stop offset="0%" stopColor="#0997fe" />
                       <stop offset="100%" stopColor="#9108ee" />
                     </linearGradient>
                   </defs>
+
                   <circle className="progress-background"
                   />
                   <circle className="progress-circle" />
@@ -149,7 +152,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
               </div>
             </div>
             :
-            <div className="user-info-up">
+            <div className="user-info-up" style={responsive1023 == true ? { gap: 2, paddingTop: 20 } : {}}>
               <div className="input-contain">
                 <label>
                   Nombre
@@ -174,6 +177,17 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                   }}
                 />
               </div>
+              {
+                responsive1023 &&
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+                  <button
+                    className="btn-edit"
+                    onClick={() => { updateUser() }}
+                  >
+                    Guardar Cambios
+                  </button>
+                </div>
+              }
 
             </div>
         }
@@ -297,7 +311,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             </button>
         }
 
-        <button className="btn-logout">Cerrar sesión</button>
+        <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
       </div>
     </ProfileMainContainer>
     // <ProfileContainer>
