@@ -1,8 +1,8 @@
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AiFillCrown } from "react-icons/ai";
-import { MdModeEditOutline } from "react-icons/md";
+import { AiFillCrown, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { MdEdit, MdModeEditOutline } from "react-icons/md";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import UserLevel from "../Rewards/UserLevel/UserLevel";
 import {
@@ -25,6 +25,7 @@ import {
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useMediaQuery } from "react-responsive";
+import { exitCode } from "process";
 
 const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023 }: any) => {
   let today = new Date().getTime() / 1000;
@@ -34,15 +35,47 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   let tempYear = tempDate.getFullYear()
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
   const [user, setUser] = useState<any>({ userData })
+  const [password, setPassword] = useState<any>("")
+  const [confirmPassword, setConfirmPassword] = useState<any>("")
   const [startEdit, setStartEdit] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
-  const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [incorrectPassword, setIncorrectPassword] = useState(false);
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const numFor = Intl.NumberFormat('en-US');
   const nextLevel_format = numFor.format(nextLevel);
   const points_format = numFor.format(userData.score);
+  const auth = getAuth();
+  const userPass: any = auth.currentUser;
 
+  const changePassword = async () => {
+
+    if (await signInWithEmailAndPassword(auth, user.email, user.password)) {
+      console.log('entro')
+    }
+    if (password == "") {
+    }
+    else {
+      if (password == confirmPassword) {
+        updatePassword(userPass, password).then(() => {
+          setErrorPassword(false);
+          setEditPassword(false);
+          setStartEdit(false);
+          return 'exito'
+        }).catch((error) => {
+          return error
+        });
+      }
+      else {
+        setErrorPassword(true)
+      }
+    }
+  }
   const logoutFunc = () => {
-    const auth = getAuth();
     signOut(auth).then(() => {
       window.location.href = "/";
     }).catch((error) => {
@@ -56,7 +89,13 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
     }).then(() => {
-      setStartEdit(false);
+      if (errorPassword) {
+        setStartEdit(false);
+      }
+      if (password == "") {
+        setEditPassword(false);
+        setStartEdit(false);
+      }
     })
   }
   useEffect(() => {
@@ -73,10 +112,23 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             <div className="crown">
               <AiFillCrown />
             </div>
-            {userData &&
-              userData.photoURL.length > 0 ?
-              <ProfileIcon src={userData.photoURL} ></ProfileIcon>
-              : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
+            <ProfileIcon
+              edit={startEdit}
+              src={(userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG} >
+            </ProfileIcon>
+            {
+              startEdit &&
+              <div className="edit">
+                <div className="edit-icon">
+                  <MdEdit />
+                  {/* <div className="background2" /> */}
+                </div>
+                <div className="message">
+                  <p>
+                    Cambiar imagen
+                  </p>
+                </div>
+              </div>
             }
             <div className="circle-level">
               <svg xmlns="http://www.w3.org/2000/svg">
@@ -108,10 +160,23 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
               <AiFillCrown />
             </div>
             <PictureContain progress={data} reward={reward} progressResp={dataResp}>
-              {userData &&
-                userData.photoURL.length > 0 ?
-                <ProfileIcon src={userData.photoURL} ></ProfileIcon>
-                : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
+              <ProfileIcon
+                edit={startEdit}
+                src={(userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG} >
+              </ProfileIcon>
+              {
+                startEdit &&
+                <div className="edit">
+                  <div className="edit-icon">
+                    <MdEdit />
+                    {/* <div className="background2" /> */}
+                  </div>
+                  <div className="message">
+                    <p>
+                      Cambiar imagen
+                    </p>
+                  </div>
+                </div>
               }
               <div className="circle-level">
                 <svg xmlns="http://www.w3.org/2000/svg">
@@ -263,29 +328,63 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
         {
           editPassword &&
           <div className="edit-contain">
-            <div className="input-contain">
+            {/* <div className="input-contain">
               <label>
                 Contraseña actual
               </label>
               <input
                 placeholder="Crea una contraseña"
               />
-            </div>
+              <div className="eye" onClick={()=>{setShowCurrentPassword(true)}}>
+
+              </div>
+            </div> */}
             <div className="input-contain">
               <label>
                 Nueva contraseña
               </label>
-              <input
-                placeholder="Crea una contraseña"
-              />
+              <div className="input-password">
+                <input
+                  value={password}
+                  type={showNewPassword ? "text" : "password"}
+                  onChange={(e: any) => { setPassword(e.target.value) }}
+                  placeholder="Crea una contraseña"
+                />
+                <div className="eye" onClick={() => { setShowNewPassword(!showNewPassword) }}>
+                  {
+                    showNewPassword
+                      ? <AiOutlineEye />
+                      : <AiOutlineEyeInvisible />
+                  }
+                </div>
+              </div>
             </div>
             <div className="input-contain">
               <label>
                 Confirmar nueva contraseña
               </label>
-              <input
-                placeholder="Confirma tu contraseña"
-              />
+              <div className="input-password">
+                <input
+                  value={confirmPassword}
+                  type={showConfirmPassword ? "text" : "password"}
+                  onChange={(e: any) => { setConfirmPassword(e.target.value) }}
+                  placeholder="Confirma tu contraseña"
+                ></input>
+                <div className="eye" onClick={() => { setShowConfirmPassword(!showConfirmPassword) }}>
+                  {
+                    showConfirmPassword
+                      ? <AiOutlineEye />
+                      : <AiOutlineEyeInvisible />
+                  }
+                </div>
+              </div>
+              {
+                errorPassword &&
+                <div className="error">
+                  La contraseña no coincide
+                </div>
+              }
+
             </div>
           </div>
         }
@@ -305,7 +404,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             :
             <button
               className="btn-edit"
-              onClick={() => { updateUser() }}
+              onClick={() => { updateUser(); changePassword() }}
             >
               Guardar Cambios
             </button>

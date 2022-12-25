@@ -146,14 +146,14 @@ const User = () => {
       }
     })
   }
-  const logoutFunc = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      window.location.href = "/";
-    }).catch((error) => {
-      console.log(error)
-    });
-  };
+  // const logoutFunc = () => {
+  //   const auth = getAuth();
+  //   signOut(auth).then(() => {
+  //     window.location.href = "/";
+  //   }).catch((error) => {
+  //     console.log(error)
+  //   });
+  // };
   useEffect(() => {
     fetchDB_data()
 

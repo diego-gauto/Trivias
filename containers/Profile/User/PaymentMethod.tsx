@@ -12,23 +12,27 @@ import {
   PayContainer,
   ProfilePayment,
   TrashIcon,
-  LoaderContain,
   PaymentMethodContainer,
   InputCard,
+  WhiteLoader,
+  LoaderContain,
 } from "./User.styled";
 import { httpsCallable } from "firebase/functions";
-import { functions } from "../../../firebase/firebaseConfig";
+import { db, functions } from "../../../firebase/firebaseConfig";
 import { deletePaymentMethod } from "../../../store/actions/ProfileActions";
 import { MdModeEdit } from "react-icons/md";
-import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import { addPaymentMethod } from "../../../store/actions/PaymentActions";
+import { updateDoc, doc } from "firebase/firestore";
 
 const PaymentMethod = ({ data, pm, handleClick }: any) => {
 
   const [show, setShow] = useState(false);
+  const [user, setUser] = useState<any>({ data })
   const handleShow = () => setShow(true);
   const [loader, setLoader] = useState<any>(false);
+  const [deleteLoad, setDeleteLoad] = useState<any>(false);
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [editCard, setEditCard] = useState(0);
   const [card, setCard] = useState<any>({
@@ -60,7 +64,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
             cvc: card.cvc,
             holder: card.holder,
             exp_month: parseInt(card.exp_month),
-            exp_year: parseInt(card.exp_year)
+            exp_year: parseInt(card.exp_year),
           }
           addPaymentMethod(temp_new, data.id);
           let newCard = {
@@ -81,20 +85,41 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
   }, [card])
 
   const detachPayment = async (card: any) => {
-    setLoader(!loader);
+    setDeleteLoad(!loader);
     if (data.membership.paymentMethod == card.cardId) {
       alert('Esta tarjeta es su método de pago predeterminado, por favor de asiganar otra tarjeta como método de pago predeterminado antes de eliminar esta tarjeta!')
-      setLoader(false);
+      setDeleteLoad(false);
     } else {
       const detach = httpsCallable(functions, 'detachPaymentMethod');
       detach(card.cardId).then(async (res: any) => {
         deletePaymentMethod(data.id, card.id).then(() => {
-          setLoader(false);
+          setDeleteLoad(false);
           handleClick(true);
         })
       })
     }
   }
+  const changeDefault = async (pm: any) => {
+    let tempData: any = data.membership;
+    console.log(tempData)
+    if (window.confirm("¿Desea cambiar su método de pago predeterminado?")) {
+      const docRef = doc(db, 'users', user.id);
+      await updateDoc(docRef, {
+        membership: {
+          paymentMethod: pm.cardId,
+          finalDate: 0,
+          level: 0,
+          method: '',
+          planId: '',
+          planName: '',
+          startDate: 0
+        }
+      })
+    }
+  }
+  useEffect(() => {
+    setUser({ ...data })
+  }, [data])
   return (
     <PaymentMethodContainer add={addPayment}>
       <div className="main-container">
@@ -102,59 +127,81 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
           Métodos de pago
         </div>
 
-        <>
-          {pm.length > 0 ? <>
-            {pm.map((pm: any, index: any) => {
-              return (
-                <React.Fragment key={"pmUser " + index}>
-                  <div className="card-contain" >
-                    <div className="card">
-                      <CardIconResp brand={pm.brand} />
-                      <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
-                    </div>
-                    <div className="circle" onClick={() => { setEditCard(index) }}>
-                      <  FaTrashAlt />
-                    </div>
-
-                  </div>
-                  {/* {
-                      editCard == index + 1 &&
-                      <div className="edit-mode">
-                        <div className="info"
-                          style={{ paddingRight: 60 }}
+        {
+          !deleteLoad
+            ?
+            <>
+              {pm.length > 0 ? <>
+                {pm.map((pm: any, index: any) => {
+                  return (
+                    <React.Fragment key={"pmUser " + index}>
+                      <div className="card-contain" >
+                        <div
+                          className="card"
+                          onClick={() => data.membership.paymentMethod != pm.cardId && changeDefault(pm)}
                         >
-                          <div className="date">
-                            <p>
-                              Fecha de expiración
-                            </p>
-                            <div className="inputs">
-                              <input
-                                placeholder="Mes"
-                                className="date-inputs"
-                              />
-                              <input
-                                placeholder="Año"
-                                className="date-inputs"
-                              />
-                            </div>
-                          </div>
-                          <div className="date">
-                            <p>CVV</p>
-                            <input
-                              placeholder="***"
-                              className="date-inputs"
-                            />
-                          </div>
+                          <CardIconResp brand={pm.brand} />
+                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
+                          {
+                            data.membership.paymentMethod == pm.cardId
+                              ?
+                              <div className="star">
+                                <AiFillStar />
+                              </div>
+                              :
+                              <div className="star" >
+                                <AiOutlineStar />
+                              </div>
+                          }
                         </div>
+                        <div className="circle" onClick={() => {
+                          detachPayment(pm)
+                        }}>
+                          <  FaTrashAlt />
+                        </div>
+
                       </div>
-                    } */}
-                </React.Fragment>
-              )
-            })
-            }
-          </> :
-            <p>Sin métodos de pago...</p>}
-        </>
+                      {/* {
+              editCard == index + 1 &&
+              <div className="edit-mode">
+                <div className="info"
+                  style={{ paddingRight: 60 }}
+                >
+                  <div className="date">
+                    <p>
+                      Fecha de expiración
+                    </p>
+                    <div className="inputs">
+                      <input
+                        placeholder="Mes"
+                        className="date-inputs"
+                      />
+                      <input
+                        placeholder="Año"
+                        className="date-inputs"
+                      />
+                    </div>
+                  </div>
+                  <div className="date">
+                    <p>CVV</p>
+                    <input
+                      placeholder="***"
+                      className="date-inputs"
+                    />
+                  </div>
+                </div>
+              </div>
+            } */}
+                    </React.Fragment>
+                  )
+                })
+                }
+              </> :
+                <p>Sin métodos de pago...</p>}
+            </>
+            : <LoaderContain />
+        }
+
 
         <div className="bottom-contain" onClick={() => { setAddPayment(!addPayment) }}>
           {
@@ -226,7 +273,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
               }}>
                 <button>Guardar</button>
               </div>
-              : <LoaderContain />
+              : <WhiteLoader />
           }
 
         </div>

@@ -682,7 +682,7 @@ to {
   transform: rotate(360deg);
 }
 `;
-export const LoaderContain = styled.div`
+export const WhiteLoader = styled.div`
   box-sizing: border-box;
   align-self: center;
   display: block;
@@ -693,6 +693,20 @@ export const LoaderContain = styled.div`
   border-style: solid;
   border-radius: 50%;
   border-color: white transparent transparent;
+  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
+    running;
+`;
+export const LoaderContain = styled.div`
+  box-sizing: border-box;
+  align-self: center;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 6px;
+  border-width: 9px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #6717cd transparent transparent;
   animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
     running;
 `;
@@ -1196,7 +1210,61 @@ export const ProfileMainContainer = styled.div<{
       .input-contain {
         display: flex;
         flex-direction: column;
+        width: 100%;
+        position: relative;
         gap: 5px;
+        .error {
+          font-size: 14px;
+          position: absolute;
+          bottom: -20px;
+          color: red;
+          font-weight: 600;
+          left: 50%;
+          transform: translateX(-50%);
+          white-space: nowrap;
+        }
+        .input-password {
+          display: flex;
+          width: 100%;
+          position: relative;
+          .eye {
+            font-size: 25px;
+            position: absolute;
+            right: 10px;
+            top: 40%;
+            transform: translateY(-50%);
+            color: #933edc;
+            cursor: pointer;
+            @media (max-width: 450px) {
+              font-size: 20px;
+            }
+          }
+          input {
+            width: 100%;
+            padding-inline: 20px;
+            padding-block: 5px;
+            font-size: 14px;
+            color: #933edc;
+            font-weight: 800;
+            border-radius: 100px;
+            border: 1px solid #933edc;
+            background: #f1e4ce;
+            :focus {
+              outline: 1px solid #8e2de2;
+            }
+            @media (max-width: 600px) {
+              font-size: 12px;
+            }
+            @media (max-width: 450px) {
+              font-size: 10px;
+            }
+            ::placeholder {
+              /* Chrome, Firefox, Opera, Safari 10.1+ */
+              color: #933edc;
+              font-weight: 500;
+            }
+          }
+        }
         label {
           font-size: 18px;
           font-weight: 600;
@@ -1210,30 +1278,6 @@ export const ProfileMainContainer = styled.div<{
           }
           @media (max-width: 450px) {
             font-size: 12px;
-          }
-        }
-        input {
-          padding-inline: 20px;
-          padding-block: 5px;
-          font-size: 14px;
-          color: #933edc;
-          font-weight: 800;
-          border-radius: 100px;
-          border: 1px solid #933edc;
-          background: #f1e4ce;
-          :focus {
-            outline: 1px solid #8e2de2;
-          }
-          @media (max-width: 600px) {
-            font-size: 12px;
-          }
-          @media (max-width: 450px) {
-            font-size: 10px;
-          }
-          ::placeholder {
-            /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: #933edc;
-            font-weight: 500;
           }
         }
       }
@@ -1284,6 +1328,57 @@ export const PictureContain = styled.div<{
   @media (max-width: 480px) {
     width: 135px;
     height: 135px;
+  }
+  .edit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    cursor: pointer;
+    .edit-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 40px;
+      width: 70px;
+      height: 70px;
+      border: 2px solid white;
+      border-radius: 50%;
+      @media (max-width: 480px) {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+      }
+    }
+    .message {
+      top: 20px;
+      left: 55px;
+      position: absolute;
+      padding-inline: 10px;
+      padding-block: 5px;
+      background-color: #dad3e5;
+      border-radius: 100px;
+      box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+      @media (max-width: 480px) {
+        font-size: 8px;
+        top: 12px;
+        left: 40px;
+        padding-inline: 6px;
+        padding-block: 2px;
+      }
+      p {
+        font-size: 10px;
+        margin: 0;
+        white-space: nowrap;
+        color: #3f1168;
+        font-weight: 600;
+        @media (max-width: 480px) {
+          font-size: 7px;
+        }
+      }
+    }
   }
   .circle-level {
     position: absolute;
@@ -1350,11 +1445,19 @@ export const PictureContain = styled.div<{
     }
   }
 `;
-export const ProfileIcon = styled.img`
+export const ProfileIcon = styled.img<{ edit: any }>`
   background-repeat: no-repeat;
   border-radius: 50%;
   width: 100%;
   height: auto;
+  ${(props) =>
+    props.edit == true &&
+    css`
+      z-index: 2;
+      cursor: pointer;
+      filter: invert(27%) sepia(64%) saturate(2944%) hue-rotate(259deg)
+        brightness(90%) contrast(90%);
+    `}
 `;
 export const SecondContainer = styled.div`
   display: flex;
@@ -2051,16 +2154,21 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         border-radius: 100px;
         display: flex;
         flex-direction: row;
-        gap: 3%;
+        justify-content: space-between;
         background-color: #3f1168;
         padding-block: 5px;
         padding-inline: 20px;
+        cursor: pointer;
         @media (max-width: 1300) {
           padding-right: 10px;
         }
         &:hover {
           transform: scale(1.03);
           transition: 0.2s ease all;
+        }
+        .star {
+          color: yellow;
+          font-size: 18px;
         }
         .separate {
           position: absolute;
