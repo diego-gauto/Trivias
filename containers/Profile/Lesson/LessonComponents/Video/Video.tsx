@@ -22,6 +22,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
+  const [quiz, setQuiz] = useState<any>([]);
 
   const finishedLesson = () => {
     let temp: any = { ...data };
@@ -40,6 +41,16 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
 
   useEffect(() => {
     setCurrent(data)
+    setQuiz([])
+    if ("mandatory" in data && data) {
+      let tempQuiz: any = []
+      data.questions.forEach((element: any) => {
+        if (tempQuiz.length <= data.questions.length) {
+          tempQuiz.push([])
+        }
+      });
+      setQuiz(tempQuiz)
+    }
   }, [data])
 
   const handleClick = (value: boolean) => {
@@ -99,7 +110,6 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
       }
     });
     setCount(viewed)
-
   }, [course])
 
   useEffect(() => {
@@ -110,6 +120,49 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     let temp = [...selected]
     temp[index] = !temp[index];
     setSelected(temp)
+  }
+
+  const chooseAnswer = (indQ: number, indA: number) => {
+    course.seasons[season].lessons[lesson].questions[indQ].answers.forEach((element: any, index: number) => {
+      if (indA == index) {
+        let actual = document.getElementById("q" + indQ + "a" + index) as HTMLInputElement;
+        actual.checked = true;
+        quiz[indQ] = indA
+      } else {
+        let other = document.getElementById("q" + indQ + "a" + index) as HTMLInputElement;
+        other.checked = false;
+      }
+    });
+    setQuiz(quiz);
+  }
+
+  const submit = () => {
+    let temp: any = { ...data };
+    if (user) {
+      if (temp.users.includes(user.id)) {
+        console.log("user exist");
+      } else {
+        const correct = 100 / data.questions.length;
+        let tempPoints = 0;
+        data.questions.forEach((element: any, indQ: number) => {
+          element.answers.forEach((answer: any, indA: number) => {
+            if (quiz[indQ] == indA && answer.status) {
+              tempPoints = tempPoints + correct
+            }
+          });
+        });
+        if (tempPoints >= data.passingGrade) {
+          alert("aprobado")
+          user.score = parseInt(user.score) + parseInt(data.points);
+          addUserToLesson(data, id, data.seasonId, data.id, user);
+          temp.users.push(user.id);
+          setCurrent({ ...temp });
+          handleComplete()
+        } else {
+          alert("reprobado")
+        }
+      }
+    }
   }
 
   return (
@@ -128,11 +181,13 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
                     <p dangerouslySetInnerHTML={{ __html: question.question }}></p>
                   </div>
                   <div className='answers'>
-                    {question.answers.map((answer: any) => {
+                    {question.answers.map((answer: any, ind: number) => {
                       return (
                         <div style={{ display: "flex" }}>
                           <p>{answer.answer}</p>
-                          <input type="radio" name="" id="" />
+                          <input type="radio" id={"q" + index + "a" + ind} onChange={() => {
+                            chooseAnswer(index, ind)
+                          }} />
                         </div>
                       )
                     })}
@@ -140,6 +195,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
                 </div>
               )
             })}
+            <button onClick={submit}>Responder</button>
           </div>
           :
           <ReactPlayer

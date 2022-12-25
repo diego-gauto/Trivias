@@ -145,7 +145,7 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
             </IncompleteCircle>}
             {(less.users?.includes(userId) && data?.id !== less.id) &&
               <ProgressCircle>
-                {1 !== lessons.length && <DividerComplete />}
+                {(index !== (lessons.length - 1)) && <DividerComplete />}
               </ProgressCircle>
             }
             {conditionalDiv(less, index)}
