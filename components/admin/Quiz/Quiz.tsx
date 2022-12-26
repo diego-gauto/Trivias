@@ -340,10 +340,6 @@ const Quiz = () => {
                           onClick={() => { changeStatus(index, ind) }}
                         />
                         <p> {ind + 1 + ": "}</p>
-                        {/* <input
-                          defaultValue={answer.answer}
-                          // onChange={(e) => { setQuiz({ ...quiz, questions: quiz.questions[index].answers[ind] }) }}
-                        /> */}
                         <p>{answer.answer}</p>
                         <MdDelete
                           className="trash" style={{ cursor: "pointer", fontSize: 20 }}
