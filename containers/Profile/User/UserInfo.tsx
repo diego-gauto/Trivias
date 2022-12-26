@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { AiFillCrown, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
@@ -41,6 +41,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const [editPassword, setEditPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [incorrectPassword, setIncorrectPassword] = useState(false);
+  const [image, setImage] = useState<any>();
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -75,6 +76,20 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
       }
     }
   }
+  const hiddenFileInput: any = React.useRef(null);
+  const changeImage = (e: any) => {
+    hiddenFileInput.current.click();
+  }
+  const getUserImg = (file: any) => {
+    var reader: any = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event: any) => {
+      setImage(reader.result)
+      setUser({ ...user, photoUrl: reader.result });
+    };
+  }
+
+
   const logoutFunc = () => {
     signOut(auth).then(() => {
       window.location.href = "/";
@@ -98,7 +113,9 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
       }
     })
   }
+  console.log(image)
   useEffect(() => {
+    setImage(userData.photoURL)
     setUser({ ...userData })
   }, [userData])
   return (
@@ -112,13 +129,22 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             <div className="crown">
               <AiFillCrown />
             </div>
+
             <ProfileIcon
+              onClick={changeImage}
               edit={startEdit}
-              src={(userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG} >
+              src={(userData && image?.length > 0) ? image : DEFAULT_USER_IMG} >
             </ProfileIcon>
+            <input
+              className="picture"
+              type="file"
+              ref={hiddenFileInput}
+              accept="image/png, image/jpg, image/jpeg"
+              onChange={(e) => { getUserImg(e.target.files) }}
+            />
             {
               startEdit &&
-              <div className="edit">
+              <div className="edit" onClick={changeImage}>
                 <div className="edit-icon">
                   <MdEdit />
                   {/* <div className="background2" /> */}
@@ -161,12 +187,16 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             </div>
             <PictureContain progress={data} reward={reward} progressResp={dataResp}>
               <ProfileIcon
+                onClick={changeImage}
                 edit={startEdit}
-                src={(userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG} >
+                src={(userData && image?.length > 0) ? image : DEFAULT_USER_IMG} >
               </ProfileIcon>
               {
                 startEdit &&
-                <div className="edit">
+                <div
+                  className="edit"
+                  onClick={changeImage}
+                >
                   <div className="edit-icon">
                     <MdEdit />
                     {/* <div className="background2" /> */}

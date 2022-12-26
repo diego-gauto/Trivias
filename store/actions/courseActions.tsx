@@ -409,14 +409,27 @@ export const updateMaterial = async (material: any, id: any) => {
   return 'exito'
 }
 // "CREAR PROFESOR"
+const uploadProfessorImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professorPicture/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
 export const addTeacher = async (professor: any) => {
+  professor.reference = `${professor.name}-${uuidv4()}`
+  professor.path = await uploadProfessorImage(professor.path, professor.reference);
   const docRef = await addDoc(
     collection(db, "professor"),
     {
       ...professor
     }
   );
-  return 'exito'
+  return docRef.id
 }
 export const getTeacher = async () => {
   let data: any = []
@@ -428,13 +441,35 @@ export const getTeacher = async () => {
   return data
 }
 export const deleteTeacher = async (professor: any) => {
-  await deleteDoc(doc(db, "professor", professor.id));
+  const storage = getStorage();
+  const desertRef = ref(storage, `professorPicture/${professor.reference}`);
+  await deleteObject(desertRef).then(async () => {
+    await deleteDoc(doc(db, "professor", professor.id));
+  }).catch((error) => {
+    console.log(error)
+  });
 }
 export const updateTeacher = async (professor: any, id: any) => {
+  let tempProfessor: any = JSON.parse(JSON.stringify(professor))
+  const storage = getStorage();
+  const desertRef = ref(storage, `professorPicture/${tempProfessor.reference}`);
+  console.log(tempProfessor)
+  if ("format" in tempProfessor) {
+    console.log('format')
+    await deleteObject(desertRef).then(async () => {
+      tempProfessor.reference = `${tempProfessor.name}-${uuidv4()}`
+    }).catch((error) => {
+      console.log(error)
+    });
+    tempProfessor.path = await uploadProfessorImage(tempProfessor.format, tempProfessor.reference);
+    delete tempProfessor.format;
+  }
   const docRef = doc(db, 'professor', id);
+  delete tempProfessor.id;
   await updateDoc(docRef, {
-    name: professor.name
+    ...tempProfessor
   })
+
   return 'exito'
 }
 export const deleteQuiz = async (courseId: any, seasonId: any, lessonId: any) => {

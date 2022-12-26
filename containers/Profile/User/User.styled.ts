@@ -1329,6 +1329,12 @@ export const PictureContain = styled.div<{
     width: 135px;
     height: 135px;
   }
+  .picture {
+    display: none;
+    input::file-selector-button {
+      display: none;
+    }
+  }
   .edit {
     position: absolute;
     top: 50%;
