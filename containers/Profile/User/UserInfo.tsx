@@ -26,6 +26,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { useMediaQuery } from "react-responsive";
 import { exitCode } from "process";
+import { updateProfileImage } from "../../../store/actions/UserActions";
 
 const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023 }: any) => {
   let today = new Date().getTime() / 1000;
@@ -40,8 +41,8 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const [startEdit, setStartEdit] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
-  const [incorrectPassword, setIncorrectPassword] = useState(false);
-  const [image, setImage] = useState<any>();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [image, setImage] = useState<string>("");
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -54,27 +55,14 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const userPass: any = auth.currentUser;
 
   const changePassword = async () => {
-
-    if (await signInWithEmailAndPassword(auth, user.email, user.password)) {
-      console.log('entro')
-    }
-    if (password == "") {
-    }
-    else {
-      if (password == confirmPassword) {
-        updatePassword(userPass, password).then(() => {
-          setErrorPassword(false);
-          setEditPassword(false);
-          setStartEdit(false);
-          return 'exito'
-        }).catch((error) => {
-          return error
-        });
-      }
-      else {
-        setErrorPassword(true)
-      }
-    }
+    updatePassword(userPass, password).then(() => {
+      setErrorPassword(false);
+      setEditPassword(false);
+      setStartEdit(false);
+      return 'exito'
+    }).catch((error) => {
+      return error
+    });
   }
   const hiddenFileInput: any = React.useRef(null);
   const changeImage = (e: any) => {
@@ -85,11 +73,9 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     reader.readAsDataURL(file[0]);
     reader.onload = (_event: any) => {
       setImage(reader.result)
-      setUser({ ...user, photoUrl: reader.result });
+      setUser({ ...user, format: reader.result });
     };
   }
-
-
   const logoutFunc = () => {
     signOut(auth).then(() => {
       window.location.href = "/";
@@ -104,18 +90,41 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
     }).then(() => {
-      if (errorPassword) {
-        setStartEdit(false);
+      if (editPassword) {
+        if (!errorPassword) {
+          setEditPassword(false);
+          setStartEdit(false);
+        }
       }
-      if (password == "") {
-        setEditPassword(false);
+      else {
         setStartEdit(false);
       }
     })
   }
-  console.log(image)
+  const handleUpdateData = () => {
+    updateUser();
+    if (editPassword) {
+      if (password == confirmPassword) {
+        if (password.length >= 6) {
+          changePassword();
+        }
+        else {
+          setErrorPassword(true);
+          setErrorMsg("La contraseña debe tener al menos 6 carácteres");
+        }
+      }
+      else {
+        setErrorPassword(true);
+        setErrorMsg("La contraseña no coincide");
+      }
+    }
+    if (image !== "") {
+      updateProfileImage(user, user.id).then(() => {
+        setImage("");
+      })
+    }
+  }
   useEffect(() => {
-    setImage(userData.photoURL)
     setUser({ ...userData })
   }, [userData])
   return (
@@ -133,7 +142,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             <ProfileIcon
               onClick={changeImage}
               edit={startEdit}
-              src={(userData && image?.length > 0) ? image : DEFAULT_USER_IMG} >
+              src={(startEdit == true && image !== "") ? image : ((userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG)} >
             </ProfileIcon>
             <input
               className="picture"
@@ -189,7 +198,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
               <ProfileIcon
                 onClick={changeImage}
                 edit={startEdit}
-                src={(userData && image?.length > 0) ? image : DEFAULT_USER_IMG} >
+                src={(startEdit == true && image !== "") ? image : ((userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG)} >
               </ProfileIcon>
               {
                 startEdit &&
@@ -277,7 +286,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                 <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
                   <button
                     className="btn-edit"
-                    onClick={() => { updateUser() }}
+                    onClick={handleUpdateData}
                   >
                     Guardar Cambios
                   </button>
@@ -326,12 +335,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
               !startEdit
                 ?
                 <>
-                  <p className="password">
-                    Contraseña
-                  </p>
-                  <p className="password-user">
-                    **********
-                  </p>
                   {
                     responsive1023 &&
                     <div className="btn-edit-container">
@@ -411,7 +414,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
               {
                 errorPassword &&
                 <div className="error">
-                  La contraseña no coincide
+                  {errorMsg}
                 </div>
               }
 
@@ -434,7 +437,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             :
             <button
               className="btn-edit"
-              onClick={() => { updateUser(); changePassword() }}
+              onClick={handleUpdateData}
             >
               Guardar Cambios
             </button>
