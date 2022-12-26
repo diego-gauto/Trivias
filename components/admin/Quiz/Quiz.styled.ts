@@ -161,6 +161,12 @@ export const QuestionContainer = styled.div`
     p {
       margin: 0;
     }
+    .quill {
+      min-height: 0;
+      .ql-container {
+        height: auto;
+      }
+    }
     .questions {
       display: flex;
       width: 100%;
