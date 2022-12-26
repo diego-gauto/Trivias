@@ -19,7 +19,7 @@ import {
 } from "./User.styled";
 import { httpsCallable } from "firebase/functions";
 import { db, functions } from "../../../firebase/firebaseConfig";
-import { deletePaymentMethod } from "../../../store/actions/ProfileActions";
+import { deletePaymentMethod, updatePaymentMethod } from "../../../store/actions/ProfileActions";
 import { MdModeEdit } from "react-icons/md";
 import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
@@ -83,7 +83,19 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
   useEffect(() => {
 
   }, [card])
-
+  const updateUserCard = async (card: any) => {
+    setLoader(!loader);
+    let info = {
+      cardId: card.cardId,
+      stripeId: data.stripeId
+    }
+    const updateCard = httpsCallable(functions, 'setDefaultPaymentMethod');
+    await updateCard(info).then(async (res: any) => {
+      updatePaymentMethod(card.cardId, data.id).then(() => {
+        setLoader(!loader);
+      })
+    })
+  }
   const detachPayment = async (card: any) => {
     setDeleteLoad(!loader);
     if (data.membership.paymentMethod == card.cardId) {
@@ -96,24 +108,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
           setDeleteLoad(false);
           handleClick(true);
         })
-      })
-    }
-  }
-  const changeDefault = async (pm: any) => {
-    let tempData: any = data.membership;
-    console.log(tempData)
-    if (window.confirm("¿Desea cambiar su método de pago predeterminado?")) {
-      const docRef = doc(db, 'users', user.id);
-      await updateDoc(docRef, {
-        membership: {
-          paymentMethod: pm.cardId,
-          finalDate: 0,
-          level: 0,
-          method: '',
-          planId: '',
-          planName: '',
-          startDate: 0
-        }
       })
     }
   }
@@ -138,7 +132,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
                       <div className="card-contain" >
                         <div
                           className="card"
-                          onClick={() => data.membership.paymentMethod != pm.cardId && changeDefault(pm)}
+                          onClick={() => data.membership.paymentMethod != pm.cardId && updateUserCard(pm)}
                         >
                           <CardIconResp brand={pm.brand} />
                           <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
