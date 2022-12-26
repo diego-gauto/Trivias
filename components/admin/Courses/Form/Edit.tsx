@@ -110,18 +110,19 @@ const Edit = () => {
       });
     })
   }
+
   const getDocuments = (file: any) => {
     let tempExtra: any = lesson.extra;
-
     file = Object.values(file);
     file.forEach((element: any) => {
       var reader = new FileReader();
       reader.readAsDataURL(element);
       reader.onload = (_event) => {
         tempExtra.push({ path: reader.result, format: reader.result, title: element.name })
+        setLesson({ ...lesson, extra: tempExtra })
       }
     });
-    setLesson({ ...lesson, extra: tempExtra })
+
   }
   const getImage = (file: any) => {
     var reader = new FileReader();
@@ -224,7 +225,7 @@ const Edit = () => {
                     return (
                       <p
                         key={"Lesson Extra Material" + index}
-                      >{val.reference} <i
+                      >{val.title} <i
                         onClick={() => {
                           deleteImage(val, index)
                         }}

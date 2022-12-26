@@ -39,8 +39,10 @@ const Lesson = () => {
       let temp_lesson;
       let temp_comments;
       temp_lesson = course.seasons[season].lessons[lesson];
-      temp_lesson.seasonId = course?.seasons[season].id
-      temp_lesson.courseId = course.id
+      temp_lesson.seasonId = course?.seasons[season].id;
+      temp_lesson.courseId = course.id;
+      temp_lesson.courseTitle = course?.courseTittle;
+      temp_lesson.teachers = course?.courseProfessor;
       setCurrentLesson(temp_lesson);
       if (userData) {
         if (course.courseType == 'Gratis') {
@@ -167,8 +169,7 @@ const Lesson = () => {
           </div>}
           {course && <Container>
             <FirstContainer>
-              <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-              <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
+              <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer>
           </Container>}
         </MainContainer>}

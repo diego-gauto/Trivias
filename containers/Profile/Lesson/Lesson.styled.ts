@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -9,14 +8,6 @@ export const MainContainer = styled.div`
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
-  }
-  @font-face {
-    font-family: Raleway;
-    src: url(../fonts/Raleway-VariableFont_wght.ttf);
-  }
-  @media (max-width: 1023px) {
-    padding-block: 20px;
-    padding-inline: 10px;
   }
   .certificate-container {
     display: flex;
@@ -44,7 +35,6 @@ export const Container = styled.div`
 export const FirstContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   width: 100%;
   @media (max-width: 1023px) {
     width: 100%;

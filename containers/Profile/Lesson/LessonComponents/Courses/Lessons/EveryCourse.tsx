@@ -63,18 +63,16 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
         goTo(index, less)
       }}>
         {<CourseTitle active={data?.id == less.id}>
-          {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
-          <br></br>
-          <br></br>
+          {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
         </CourseTitle>}
         <DetailContain>
           {!("mandatory" in less) && <CourseLength>
             {hms(less.duration)}
-            {less.extra.length > 0 && <DocIcon></DocIcon>}
+            {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>}
-          {less.points > 0 && <CoursePoints>
+          {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>}
+          </CoursePoints>} */}
         </DetailContain>
       </Details>)
     }
@@ -100,31 +98,27 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
         goTo(index, less)
       }}>
         {<CourseTitle active={data?.id == less.id}>
-          {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
-          <br></br>
-          <br></br>
+          {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
         </CourseTitle>}
         <DetailContain>
           <CourseLength>
             {hms(less.duration)}
-            {less.extra.length > 0 && <DocIcon></DocIcon>}
+            {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>
-          {less.points > 0 && <CoursePoints>
+          {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>}
+          </CoursePoints>} */}
         </DetailContain>
       </Details>)
     }
     return (<Details style={{ 'background': '#d6d4d499', borderRadius: '5px', cursor: 'auto' }}>
       <CourseTitle active={data?.id == less.id}>
-        {"mandatory" in less ? "Quiz" : less.number}: {less.title}.
-        <br></br>
-        <br></br>
+        {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
       </CourseTitle>
       <DetailContain>
         <CourseLength>
           {hms(less.duration)}
-          {less.extra.length > 0 && <DocIcon></DocIcon>}
+          {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
         </CourseLength>
         {less.points > 0 && <CoursePoints>
           +{less.points} puntos
@@ -137,17 +131,21 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
     <>
       {lessons.map((less: any, index: any) => {
         return (
-          <LessonContain key={"All lesson " + index}>
+          <LessonContain key={"All lesson " + index} style={{
+            borderBottomRightRadius: index == lessons.length - 1 ? "35px" : 0,
+            borderBottomLeftRadius: index == lessons.length - 1 ? "35px" : 0,
+            boxShadow: index == lessons.length - 1 ? "0px 10px 20px -7px rgb(0 0 0 / 35%)" : "none"
+          }}>
             {data?.id == less.id && <CurrentCircle>
-              <DividerIncomplete />
+              {index !== (lessons.length - 1) && <DividerIncomplete />}
             </CurrentCircle>
             }
             {(data?.id !== less.id && !less.users?.includes(userId)) && <IncompleteCircle>
-              <DividerIncomplete />
+              {index !== (lessons.length - 1) && <DividerIncomplete />}
             </IncompleteCircle>}
             {(less.users?.includes(userId) && data?.id !== less.id) &&
               <ProgressCircle>
-                <DividerComplete />
+                {(index !== (lessons.length - 1)) && <DividerComplete />}
               </ProgressCircle>
             }
             {conditionalDiv(less, index)}

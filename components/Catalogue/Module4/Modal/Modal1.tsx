@@ -99,7 +99,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0].lessons);
       setIsPlaying(true);
-      getCurrentSeason();
+      // getCurrentSeason();
       setTimeout(() => {
         setIsPlaying(false)
       }, 2000)
@@ -271,13 +271,13 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         <EpisodeTitle>
                           {lesson.number}: {lesson.title}
                         </EpisodeTitle>}
+                      <Description>
+                        {lesson.description}
+                      </Description>
                       {!("mandatory" in lesson) &&
                         <EpisodeTime>
                           {hms(lesson.duration)}
                         </EpisodeTime>}
-                      <Description>
-                        {lesson.description}
-                      </Description>
                     </EpisodeInfo>
                   </VideoContain>
                   <DescriptionResp>

@@ -20,7 +20,7 @@ import {
   ContainerMainMobile,
   SliderSectionTitleMobile,
   SliderContainerMobile,
-  SliderItemLinkMobile,
+
   TittleAMobile,
   TittleBMobile,
   LinesMobile,
@@ -29,8 +29,6 @@ import {
   PeopleContainerMobile,
   GeneralContainerMobile,
   SwiperContainer,
-  SwiperContainerReduced,
-  SwiperContainerMoreReduced,
 } from "./Module5_1Mobile.styled";
 
 
@@ -44,30 +42,41 @@ import "swiper/css/navigation";
 import { IModule5_1 } from "./IModule5_1";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { SlideModule_1 } from "./SlideModule_1/SlideModule_1";
+import { ref } from "yup";
+import swiper from "swiper";
 SwiperCore.use([Autoplay]);
 
 export const Module5_1 = (props: IModule5_1) => {
-  const swiperRef = useRef<SwiperCore>();
+
+  const swiperRef2 = useRef<any>(null)
+
   const { slideData } = props;
   var slideDataArr = [];
   slideDataArr = slideData;
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
+
   const onMouseEnter = () => {
-    swiperRef?.current?.autoplay.stop();
+    try {
+
+      swiperRef2?.current?.swiper.autoplay.stop();
+    } catch (error) {
+
+    }
+
   };
   const onMouseLeave = () => {
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.start();
+    try {
+
+      swiperRef2?.current?.swiper.autoplay.start();
+    } catch (error) {
+
     }
+
   };
   const settings = {
     loop: true,
+
     autoplay: {
       delay: 0,
-      waitForTransition: false,
-      pauseOnMouseEnter: true
     },
     speed: 4000,
     freeMode: true,
@@ -76,7 +85,7 @@ export const Module5_1 = (props: IModule5_1) => {
     breakpoints: {
       1250: {
         slidesPerView: 4,
-        spaceBetween: 30,
+        spaceBetween: 50,
       },
       850: {
         slidesPerView: 3,
@@ -84,17 +93,19 @@ export const Module5_1 = (props: IModule5_1) => {
       },
       550: {
         slidesPerView: 2,
-        spaceBetween: 30,
+        spaceBetween: 15,
+      },
+      460: {
+        slidesPerView: 1,
+        spaceBetween: 15,
       }
     }
   };
 
   const sliderData = slideDataArr?.map((element, index) => {
     return (
-      <SwiperSlide id={"slide" + index} key={element.username + "_ID"} onMouseEnter={(e) => {
-        // onMouseEnter();
-      }}
-        onMouseLeave={onMouseLeave}
+      <SwiperSlide id={"slide" + index} key={element.username + "_ID"}
+
       // onPointerEnter={() => {
       //   console.log(document.getElementById("slide" + index));
       // }}
@@ -128,8 +139,12 @@ export const Module5_1 = (props: IModule5_1) => {
               <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
 
             </SliderSectionTitle>
-            <div>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settings} onInit={onInit}>
+            <div
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}>
+              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }}
+                {...settings}
+                ref={swiperRef2}>
                 {sliderData}
               </Swiper>
             </div>
@@ -143,11 +158,9 @@ export const Module5_1 = (props: IModule5_1) => {
         </ContainerMain >
       </GeneralContainer >
 
-      {/* <GeneralContainerMobile
+      <GeneralContainerMobile
         fluid
-        style={{ padding: 0 }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave} id="MobileView"
+        style={{ padding: 0 }} id="MobileView"
       >
         <ContainerMainMobile  >
           <SliderContainerMobile>
@@ -158,26 +171,16 @@ export const Module5_1 = (props: IModule5_1) => {
 
             </SliderSectionTitleMobile>
 
-            <SwiperContainer>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobile} onInit={onInit}>
-                {sliderData}
-              </Swiper>
-            </SwiperContainer>
-            <SwiperContainerReduced>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }} {...settingsMobileReduced} onInit={onInit}>
-                {sliderData}
-              </Swiper>
-            </SwiperContainerReduced>
-            <SwiperContainerMoreReduced>
-              <Swiper style={{
-                paddingTop: "50px",
-                paddingBottom: "50px"
-              }}
-                {...settingsMobileMoreReduced} onInit={onInit}
+            <SwiperContainer
+
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}>
+              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }}
+                {...settings}
               >
                 {sliderData}
               </Swiper>
-            </SwiperContainerMoreReduced>
+            </SwiperContainer>
           </SliderContainerMobile>
 
           <PeopleContainerMobile>
@@ -186,7 +189,7 @@ export const Module5_1 = (props: IModule5_1) => {
             <BgColorMobile  ></BgColorMobile>
           </PeopleContainerMobile>
         </ContainerMainMobile >
-      </GeneralContainerMobile > */}
+      </GeneralContainerMobile >
     </>
   )
 }

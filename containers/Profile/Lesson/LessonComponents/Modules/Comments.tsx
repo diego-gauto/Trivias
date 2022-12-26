@@ -54,47 +54,18 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <Titles onClick={() => {
           setValue(1)
         }}>
-          Acerca de
+          Acerca del curso
         </Titles>
-
-        {/* <Titles onClick={() => {
-          setValue(2)
-        }}>
-          Material Extra
-        </Titles> */}
-
-        {data.homeworkAvailable && <Titles onClick={() => {
+        {<Titles onClick={() => {
           setValue(3)
         }}>
-          Tareas
+          Materiales y tareas
         </Titles>}
-
         <PositionTitle position={value}>
           Comentarios
         </PositionTitle>
-
+        <div className='line'></div>
       </TitleContain>
-      <IconContain>
-        <UnSelected>
-          <ListIcon onClick={() => {
-            setValue(1)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        {data.homeworkAvailable && <UnSelected>
-          <BookIcon onClick={() => {
-            setValue(3)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>}
-        <SelectContain>
-          <ChatboxIcon />
-        </SelectContain>
-        {/* <UnSelected>
-          <EaselIcon
-            onClick={() => {
-              setValue(2)
-            }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
-      </IconContain>
       <MainContainer>
         <CommentContain>
           {comments && user.userPhoto

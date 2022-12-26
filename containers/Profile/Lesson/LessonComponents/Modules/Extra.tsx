@@ -27,26 +27,6 @@ const Extra = ({ value, setValue, data }: any) => {
           Comentarios
         </Titles>
       </TitleContain>
-      <IconContain>
-        <UnSelected>
-          <ListIcon onClick={() => {
-            setValue(1)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        {data.homeworkAvailable && <UnSelected>
-          <BookIcon onClick={() => {
-            setValue(3)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>}
-        <UnSelected>
-          <ChatboxIcon onClick={() => {
-            setValue(4)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        <SelectContain>
-          <EaselIcon />
-        </SelectContain>
-      </IconContain>
       <ExtraContain>
         <Paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
