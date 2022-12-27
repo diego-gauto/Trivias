@@ -8,6 +8,9 @@ export const SliderContainer = styled.div`
 export const GeneralContainer = styled(Container)`
   padding: 0;
   display: block;
+  padding-top: 16%;
+
+  height: 1640px;
   @media only screen and (max-width: 1028px) {
     display: none;
   }
