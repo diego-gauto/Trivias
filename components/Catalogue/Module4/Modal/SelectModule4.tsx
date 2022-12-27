@@ -7,7 +7,7 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
   return (
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
-        {value == undefined ? "Temporada 1" : value}
+        {value == undefined ? "Módulo 1" : value}
         <DropDown />
       </Selected>
       {
@@ -17,7 +17,7 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
             return (
               <Option key={index + "season courses"} onClick={() => {
                 seasons[index]?.name == undefined
-                  ? setValue(`Temporada ${index + 1}`)
+                  ? setValue(`Módulo ${index + 1}`)
                   : setValue(`${seasons[index].name}`)
                   ;
                 setOpen(false);
@@ -29,7 +29,7 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
                   name="category"
                   value="Temporada 1"
                 />
-                <Label > {seasons[index]?.name == undefined ? `Temporada ${index + 1}` : seasons[index].name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} lección)
+                <Label > {seasons[index]?.name == undefined ? `Módulo ${index + 1}` : seasons[index].name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} lección)
                 </Episodes>}
                   {season.lessons.length > 1 && <Episodes>({season.lessons.length} lecciónes)
                   </Episodes>}

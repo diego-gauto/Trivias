@@ -87,7 +87,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
             Material de apoyo
           </TaskTitle>
           <ol type="a">
-            {data.extra.map((extra: any) => {
+            {data?.extra?.map((extra: any) => {
               return (
                 <Link href={extra.path}>
                   <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
