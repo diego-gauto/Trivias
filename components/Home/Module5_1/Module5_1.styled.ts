@@ -54,8 +54,9 @@ export const People = styled.div`
     top: -10%;
   }
   @media only screen and (max-width: 1440px) {
-    background-size: 50%;
-    top: -10%;
+    top: 0%;
+    height: 100%;
+    background-size: 75%;
   }
   @media only screen and (max-width: 1360px) {
     background-size: 53%;
@@ -92,7 +93,7 @@ export const PeopleContainer = styled.div`
     height: 360px;
   }
   @media only screen and (max-width: 1440px) {
-    height: 300px;
+    height: 500px;
   }
   @media only screen and (max-width: 1028px) {
   }
@@ -131,7 +132,8 @@ export const BgColor = styled.div`
   }
 
   @media only screen and (max-width: 1440px) {
-    top: -110%;
+    top: -50%;
+    height: 50%;
   }
   @media only screen and (max-width: 1200px) {
     top: -115%;

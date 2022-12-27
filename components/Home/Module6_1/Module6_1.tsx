@@ -161,7 +161,6 @@ export const Module6_1 = (props: IModule6_1) => {
       <GeneralContainer
         fluid
         id="WebView"
-        style={{ height: "200px" }}
       >
         <ContainerMain>
           <SliderContainer>
