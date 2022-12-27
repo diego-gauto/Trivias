@@ -84,7 +84,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
 
   }, [card])
   const updateUserCard = async (card: any) => {
-    setLoader(!loader);
+    setDeleteLoad(true);
     let info = {
       cardId: card.cardId,
       stripeId: data.stripeId
@@ -92,7 +92,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
     const updateCard = httpsCallable(functions, 'setDefaultPaymentMethod');
     await updateCard(info).then(async (res: any) => {
       updatePaymentMethod(card.cardId, data.id).then(() => {
-        setLoader(!loader);
+        setDeleteLoad(false);
       })
     })
   }

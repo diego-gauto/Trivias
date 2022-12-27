@@ -16,6 +16,14 @@ export const SlideModuleContainer = styled(Container)`
   &:hover {
     transform: scale(1.02);
   }
+  @media only screen and (max-width: 992px) {
+    &:hover {
+      transform: scale(1);
+    }
+    &:active {
+      transform: scale(1.02);
+    }
+  }
 `;
 
 export const ContinueText = styled.h1`
