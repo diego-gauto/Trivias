@@ -164,7 +164,6 @@ const Quiz = () => {
   const getQuizes = () => {
     getQuiz(courseID, seasonID, lessonID).then((res: any) => {
       setMandatory(res.mandatory)
-      console.log(res)
       setQuiz(res)
     })
 
@@ -176,6 +175,11 @@ const Quiz = () => {
 
   }, [])
 
+  const editQuestion = (index: number, content: any) => {
+    let tempQuiz = quiz;
+    tempQuiz.questions[index].question = content;
+  }
+
   return (
     <QuizContainer>
       <TitleContain>
@@ -184,7 +188,6 @@ const Quiz = () => {
             ? <Title>Nuevo Quiz</Title>
             : <Title>Editar Quiz</Title>
         }
-
         {
           !loader
             ?
@@ -327,6 +330,15 @@ const Quiz = () => {
                     </div>
                   </div>
                   <p dangerouslySetInnerHTML={{ __html: question.question }} />
+                  <ReactQuill
+                    placeholder="Lorem ipsum dolor sit amet, consectetur 
+            adipiscing elit. Pharetra, cursus sapien ac magna. 
+            Consectetur amet eu tincidunt quis. Non habitasse viverra 
+            malesuada facilisi vel nunc." theme="snow" id='quill'
+                    formats={formats} modules={modules}
+                    defaultValue={question.question} onChange={(content, delta, source, editor) => {
+                      editQuestion(index, content)
+                    }} />
                   {
                     question.answers.length > 0 &&
                     <p className="question-title" style={{ fontWeight: "bold" }}>Respuestas</p>
@@ -340,10 +352,6 @@ const Quiz = () => {
                           onClick={() => { changeStatus(index, ind) }}
                         />
                         <p> {ind + 1 + ": "}</p>
-                        {/* <input
-                          defaultValue={answer.answer}
-                          // onChange={(e) => { setQuiz({ ...quiz, questions: quiz.questions[index].answers[ind] }) }}
-                        /> */}
                         <p>{answer.answer}</p>
                         <MdDelete
                           className="trash" style={{ cursor: "pointer", fontSize: 20 }}

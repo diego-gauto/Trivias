@@ -3,43 +3,23 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "react-phone-number-input/style.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
-
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
 import { LOGIN_PATH } from "../../constants/paths";
 import {
-  AllButtons,
   Background,
   Error,
-  Box1,
-  Box2,
-  FacebookButton,
-  FacebookIcon,
-  GoogleButton,
-  GoogleIcon,
   InputPhone,
-  LineIcon,
-  LinkText,
   LoaderContain,
   LoaderImage,
-  LoginBox,
-  PasswordBox,
   PurpleButton2,
-  Text2,
-  Text3,
-  TextInput,
-  TextInput_2,
   Title,
   BackgroundLoader,
 } from "../../screens/Login.styled";
 import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds } from "../../store/actions/AuthActions";
-import { fetchSignInMethodsForEmail } from "firebase/auth";
 import { useAuth } from "../../hooks/useAuth";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import ErrorModal from "../../components/Error/ErrorModal";

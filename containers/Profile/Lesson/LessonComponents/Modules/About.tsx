@@ -22,26 +22,10 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
         </Titles>
         <div className='line'></div>
       </TitleContain>
-      <IconContain>
-        <SelectContain>
-          {/* <WhiteDivide /> */}
-          <ListIcon />
-        </SelectContain>
-        {data.homeworkAvailable && <UnSelected>
-          <BookIcon onClick={() => {
-            setValue(3)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>}
-        <UnSelected>
-          <ChatboxIcon onClick={() => {
-            setValue(4)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-      </IconContain>
       <AboutContain>
         <TextContainer>
           <LessonTitle>
-            {data.courseTitle}, <span>de {teacherCreds[0].name}</span>
+            {data.courseTitle}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>

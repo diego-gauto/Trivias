@@ -24,6 +24,7 @@ import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
+import { History } from "./History";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -40,6 +41,9 @@ const User = () => {
   const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
   const [taskView, setTaskView] = useState(false);
   const [nameUpperCase, setNameUpperCase] = useState<string>("");
+  const [data, setData] = useState<number>(0)
+  const [dataResp, setDataResp] = useState<number>(0)
+  const [reward, setReward] = useState<any>(0);
 
   try {
     var userDataAuth = useAuth();
@@ -142,14 +146,14 @@ const User = () => {
       }
     })
   }
-  const logoutFunc = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      window.location.href = "/";
-    }).catch((error) => {
-      console.log(error)
-    });
-  };
+  // const logoutFunc = () => {
+  //   const auth = getAuth();
+  //   signOut(auth).then(() => {
+  //     window.location.href = "/";
+  //   }).catch((error) => {
+  //     console.log(error)
+  //   });
+  // };
   useEffect(() => {
     fetchDB_data()
 
@@ -167,6 +171,8 @@ const User = () => {
     if (userData != null && level != null && timeLevel != null) {
       setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
       setTimeProgress(((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 100)
+      setData(755 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 755));
+      setDataResp(502 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 502));
       setLoading(false);
     }
   }, [level, timeLevel]);
@@ -186,7 +192,20 @@ const User = () => {
   return (
     <BackgroundProfile>
       {/* FIRST CONTAINER */}
+      {
+        responsive1023 &&
+        < div className="title-contain">
+          <p className="first-text">
+            PERFIL DE <span>{nameUpperCase}</span>
+          </p>
+          <p className="second-text">
+            ¡Dale seguimiento<br /><span> a tu aprendizaje!</span>
+          </p>
+        </div>
+      }
+
       {//Vista del navbar dinamico de Homepage
+
         userData !== null
         &&
         <UserInfo
@@ -194,46 +213,42 @@ const User = () => {
           taskView={taskView}
           setTaskView={setTaskView}
           nextLevel={level.maximum}
+          data={data}
+          dataResp={dataResp}
+          reward={reward}
+          responsive1023={responsive1023}
         />
       }
       {/* SECOND Container */}
-      {
-        taskView == false &&
-        <SecondBox>
-          <div className="title-contain">
-            <p className="first-text">
-              PERFIL DE <span>{nameUpperCase}</span>
-            </p>
-            <p className="second-text">
-              ¡Dale seguimiento<span> a tu aprendizaje!</span>
-            </p>
-          </div>
-          <NextReward
-            score={userData.score}
-            barProgress={barProgress}
-            level={currentLevel}
-            max={level.maximum}
-
-            timeScore={timeScore}
-            timeProgress={timeProgress}
-            timeLevel={timeLevel?.level}
-            timeIndex={timeLevel.index}
-          />
-          <ThirdBox>
-            {/* Third Container */}
-            <UserData data={userData} pm={paymentMethod} />
-            {/* Fourth Container */}
-            <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
-          </ThirdBox>
-        </SecondBox>
-      }
-      {
-        taskView == true &&
-        <SecondBox>
-          <HomeWork userId={userData.id} user={userData} />
-        </SecondBox>
-      }
-
+      <SecondBox>
+        <div className="title-contain">
+          <p className="first-text">
+            PERFIL DE <span>{nameUpperCase}</span>
+          </p>
+          <p className="second-text">
+            ¡Dale seguimiento<span> a tu aprendizaje!</span>
+          </p>
+        </div>
+        <NextReward
+          score={userData.score}
+          barProgress={barProgress}
+          level={currentLevel}
+          max={level.maximum}
+          reward={reward}
+          setReward={setReward}
+          timeScore={timeScore}
+          timeProgress={timeProgress}
+          timeLevel={timeLevel?.level}
+          timeIndex={timeLevel.index}
+        />
+        <ThirdBox>
+          {/* Third Container */}
+          <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
+          {/* Fourth Container */}
+          {/* <UserData data={userData} pm={paymentMethod} /> */}
+          <History />
+        </ThirdBox>
+      </SecondBox>
       {/* <Link href="/">
         <LogOut onClick={logoutFunc} style={{
           display: responsive1023 ? "" : "none",
@@ -243,7 +258,7 @@ const User = () => {
           <LogOutIcon />
         </LogOut>
       </Link> */}
-    </BackgroundProfile>
+    </BackgroundProfile >
   )
 }
 export default User;

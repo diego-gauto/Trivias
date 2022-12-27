@@ -13,16 +13,38 @@ import {
   Title, TitleContain
 } from '../Category/Category.styled';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
+import file from 'react-player/file';
 
 
 const Teacher = () => {
   const [newTeacher, setNewTeacher] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [edit, setEdit] = useState<number>();
+  const [edit, setEdit] = useState<number>(-1);
   const [teachers, setTeachers] = useState<any>([]);
+  const [editImage, setEditImage] = useState<any>("");
+  const [addImage, setAddImage] = useState<any>("");
   const [teacher, setTeacher] = useState<any>({
-    name: ""
+    name: "",
+    about: "",
+    path: ""
   });
+  const getImage = (file: any) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setAddImage(reader.result)
+      setTeacher({ ...teacher, path: reader.result })
+    };
+  }
+  const changeImage = (file: any) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setEditImage(reader.result)
+      setTeacher({ ...teacher, format: reader.result })
+    };
+  }
+  console.log(teacher)
   const createTeacher = () => {
     setLoading(true);
     if (Object.keys(teacher).some(key => teacher[key] === '')) {
@@ -51,11 +73,16 @@ const Teacher = () => {
       })
     }
   }
-  const update = (val: any) => {
-    console.log(val)
-    updateTeacher(val, val.id).then(() => {
+  const update = (val: any, valFormat: any) => {
+    let tempVal: any = {
+      format: valFormat,
+      ...val
+    };
+    updateTeacher(tempVal, val.id).then(() => {
+      setEdit(-1);
       alert("Profesor actualizado")
       getAllteachers();
+      delete teacher.format;
     })
   }
   useEffect(() => {
@@ -66,9 +93,9 @@ const Teacher = () => {
       <SideBar />
       <CourseFormContain>
         <CategoryContain >
-          <TitleContain onClick={() => { setNewTeacher(!newTeacher) }}>
+          <TitleContain onClick={() => { setNewTeacher(!newTeacher); setEdit(-1); setEditImage("") }}>
             <Title >
-              Crear Profesor
+              Crear Instructor
             </Title>
             {
               !newTeacher &&
@@ -83,16 +110,41 @@ const Teacher = () => {
           </TitleContain>
           {
             newTeacher &&
-            <FormContain>
-              <InputContain>
-                <Label>Nombre del Profesor</Label>
-                <Input
-                  placeholder="Nombre del profesor"
-                  onChange={(e: any) => {
-                    setTeacher({ ...teacher, name: e.target.value })
-                  }}
-                />
-              </InputContain>
+            <FormContain style={{ flexDirection: "column" }}>
+              <div className="inputs">
+                <InputContain>
+                  <Label>Nombre del Instructor</Label>
+                  <Input
+                    placeholder="Nombre del instructor"
+                    onChange={(e: any) => {
+                      setTeacher({ ...teacher, name: e.target.value })
+                    }}
+                  />
+                </InputContain>
+                <InputContain>
+                  <Label>Descripción del Instructor</Label>
+                  <Input
+                    placeholder="Descripción del instructor"
+                    onChange={(e: any) => {
+                      setTeacher({ ...teacher, about: e.target.value })
+                    }}
+                  />
+                </InputContain>
+                <InputContain
+                >
+                  <Label>Foto del Instructor</Label>
+                  <Input
+                    type="file"
+                    accept="image/png, image/jpg, image/jpeg"
+                    onChange={(e) => { getImage(e.target.files) }}
+                  />
+                </InputContain>
+              </div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                {
+                  addImage !== "" && <img src={addImage} />
+                }
+              </div>
               <ButtonContain>
                 {
                   !loading ?
@@ -111,7 +163,7 @@ const Teacher = () => {
         </CategoryContain>
         <CategoryContain>
           <Title>
-            Profesores
+            Instructores
           </Title>
           {teachers !== null
             ? <>
@@ -123,34 +175,63 @@ const Teacher = () => {
                         <CatText>
                           {val.name}
                         </CatText>
+                        <div>
+                          {
+                            edit == i &&
+                            <FormContain style={{ flexDirection: "column" }}>
+                              <InputContain style={{ width: 500 }}>
+                                <Input
+                                  defaultValue={val.name}
+                                  placeholder={"Editar nombre de: " + val.name}
+                                  onChange={(e: any) => {
+                                    teachers[i].name = e.target.value
+                                  }}
+                                />
+                              </InputContain>
+                              <InputContain style={{ width: 500 }}>
+                                <Input
+                                  defaultValue={val.about == undefined ? "Nueva descripción" : val.about}
+                                  placeholder={val.about == undefined ? "Agregar descripción" : "Editar descripción: " + val.about}
+                                  onChange={(e: any) => {
+                                    teachers[i].about = e.target.value
+                                  }}
+                                />
+                              </InputContain>
+                              <InputContain
+                                style={{ width: 500 }}>
+                                <Input
+                                  type="file"
+                                  accept="image/png, image/jpg, image/jpeg"
+                                  onChange={(e) => { changeImage(e.target.files) }}
+                                />
+                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                  {
+                                    (teachers[i].path && editImage == "") ? <img src={teachers[i].path} />
+                                      :
+                                      <>
+                                        {
+                                          editImage !== "" && <img src={editImage} />
+                                        }
+                                      </>
+                                  }
+                                </div>
+                              </InputContain>
+                              <ButtonContain >
+                                <Button
+                                  onClick={() => {
+                                    update(val, teacher.format);
+                                  }}
+                                >Editar</Button>
+                              </ButtonContain>
+                            </FormContain>
+                          }
+                        </div>
 
-                        {
-                          edit == i &&
-                          <FormContain>
-                            <InputContain style={{ width: 500 }}>
-                              <Input
-                                placeholder={"Editar nombre de: " + val.name}
-                                onChange={(e: any) => {
-                                  teachers[i].name = e.target.value
-                                }}
-                              />
-                            </InputContain>
-                            <ButtonContain>
-                              <Button
-                                onClick={() => {
-                                  update(val);
-                                }}
-                              >Editar</Button>
-
-
-                            </ButtonContain>
-                          </FormContain>
-                        }
                       </EditCat>
                       <CatData>
-                        <EditIcon onClick={() => { setEdit(i) }} />
+                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); setEditImage(""); setNewTeacher(false) }} />
                         <CloseIcon onClick={() => {
-                          Delete(val);
+                          Delete(val); setEdit(-1);
                         }} />
                       </CatData>
                     </CatContain>
@@ -164,7 +245,7 @@ const Teacher = () => {
           }
         </CategoryContain>
       </CourseFormContain>
-    </AdminContain>
+    </AdminContain >
   )
 }
 export default Teacher;

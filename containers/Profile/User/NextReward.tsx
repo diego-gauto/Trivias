@@ -35,10 +35,9 @@ import { useEffect, useState } from "react";
 import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
-import { FaAward } from "react-icons/fa";
+import { FaArrowRight, FaAward } from "react-icons/fa";
 
-const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel }: any) => {
-  const [reward, setReward] = useState<any>(0);
+const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward }: any) => {
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
   const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
@@ -101,48 +100,61 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
           <div>
 
           </div>
-          <div className="reward-conditions">
-
-            <div className="point-container" onClick={() => { setReward(0) }}>
-              <p>Recompensas<br />
-                obtenidas<br />
-                <span> por puntaje</span></p>
-              <div className="bottom-contain">
-                <p className="point-number">
-                  08
-
-                </p>
-                <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
+          <div className="reward-containers">
+            <div className="reward-conditions">
+              <div className="point-container" onClick={() => { setReward(0) }}>
+                <p>Recompensas<br />
+                  obtenidas<br />
+                  <span> por puntaje</span></p>
+                <div className="bottom-contain">
+                  <p className="point-number">
+                    08
+                  </p>
+                  <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
+                </div>
+              </div>
+              <div className="time-container">
+                <p>Beneficios<br />
+                  obtenidos<br />
+                  <span> por tiempo</span></p>
+                <div className="bottom-contain">
+                  <p className="time-number">
+                    12
+                  </p>
+                  <AiOutlineHourglass style={reward == 1 ? { color: "white" } : { color: "#942cec" }} />
+                </div>
+              </div>
+              <div className="certificates-container" onClick={() => { setReward(2) }}>
+                <p>Certificados<br />
+                  <span>acumulados</span></p>
+                <div className="bottom-contain">
+                  <p className="certificate-number">
+                    06
+                  </p>
+                  <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
+                </div>
               </div>
             </div>
-            <div className="time-container" onClick={() => { setReward(1) }}>
-              <p>Beneficios<br />
-                obtenidos<br />
-                <span> por tiempo</span></p>
-              <div className="bottom-contain">
-                <p className="time-number">
-                  12
+            <div className="extra-info">
+              {
+                reward == 0 &&
+                <p>
+                  Siguiente recompensa <span>2 Monómeros Gonvar</span>
                 </p>
-                <AiOutlineHourglass style={reward == 1 ? { color: "white" } : { color: "#942cec" }} />
-              </div>
-            </div>
-            <div className="certificates-container" onClick={() => { setReward(2) }}>
-              <p>Certificados<br />
-                <span>acumulados</span></p>
-              <div className="bottom-contain">
-                <p className="certificate-number">
-                  06
+              }
+              {
+                reward == 2 &&
+                <p>
+                  Certificado más próximo<span> One Stroke Básico</span>
                 </p>
-                <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
-              </div>
+              }
             </div>
-
           </div>
-          <div className="extra-info">
-            1
-          </div>
+
         </div>
-        <button>Ir al Centro de Recompensas</button>
+        <Link href="/Rewards">
+          <button>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+        </Link>
       </RewardContainer>
       <SubscriptionContainer>
         <div className="first-section">

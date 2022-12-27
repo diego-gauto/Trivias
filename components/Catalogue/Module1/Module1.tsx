@@ -106,11 +106,14 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
             <VideoContain>
               <ReactPlayer
                 className='absolute'
-                url={historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(-5)}
+                url={
+                  historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link ?
+                    historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(-5) :
+                    historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson - 1]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson - 1]?.link.slice(-5)
+                }
                 playing={true}
                 muted={true}
                 loop={true}
-                //controls
                 width='100%'
                 height='180%'
                 style={{ position: "absolute", top: responsive1023 ? "-95px" : "-170px", }}

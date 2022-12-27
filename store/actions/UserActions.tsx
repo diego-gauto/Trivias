@@ -1,8 +1,9 @@
 import {
   collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, deleteDoc, orderBy,
 } from "firebase/firestore";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { db } from '../../firebase/firebaseConfig';
-
+import { v4 as uuidv4 } from "uuid";
 export const getPaidCourses = async (userId: any) => {
   let data: any = []
   const docRef = collection(db, 'users', userId, "courses");
@@ -60,6 +61,26 @@ export const updateUserPlan = async (days: number, userId: string) => {
   const docRef = doc(db, 'users', userId);
   await updateDoc(docRef, {
     'membership.finalDate': days,
+  })
+  return 'exito'
+}
+const uploadUserImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `profilePicture/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateProfileImage = async (user: any, id: any) => {
+  let tempUser: any = JSON.parse(JSON.stringify(user))
+  tempUser.photoURL = await uploadUserImage(tempUser.format, id);
+  const docRef = doc(db, 'users', id);
+  await updateDoc(docRef, {
+    photoURL: tempUser.photoURL,
   })
   return 'exito'
 }

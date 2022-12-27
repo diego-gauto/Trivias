@@ -1,6 +1,8 @@
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { MdModeEditOutline } from "react-icons/md";
+import { AiFillCrown, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { MdEdit, MdModeEditOutline } from "react-icons/md";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import UserLevel from "../Rewards/UserLevel/UserLevel";
 import {
@@ -16,31 +18,434 @@ import {
   ProfileIconContain,
   UserContainer,
   UserText,
-  ProfileMainContainer
+  ProfileMainContainer,
+  InputPhone,
+  Box2
 } from "./User.styled";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
+import { useMediaQuery } from "react-responsive";
+import { exitCode } from "process";
+import { updateProfileImage } from "../../../store/actions/UserActions";
 
-const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
+const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023 }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
   let tempMonth = tempDate.getUTCMonth() + 1;
   let tempYear = tempDate.getFullYear()
   let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+  const [user, setUser] = useState<any>({ userData })
+  const [password, setPassword] = useState<any>("")
+  const [confirmPassword, setConfirmPassword] = useState<any>("")
+  const [startEdit, setStartEdit] = useState(false);
+  const [editPassword, setEditPassword] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [image, setImage] = useState<string>("");
 
-  const phoneCode = userData.phoneNumber != null && userData.phoneNumber.slice(0, 3);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const numFor = Intl.NumberFormat('en-US');
   const nextLevel_format = numFor.format(nextLevel);
+  const points_format = numFor.format(userData.score);
+  const auth = getAuth();
+  const userPass: any = auth.currentUser;
+
+  const changePassword = async () => {
+    updatePassword(userPass, password).then(() => {
+      setErrorPassword(false);
+      setEditPassword(false);
+      setStartEdit(false);
+      return 'exito'
+    }).catch((error) => {
+      return error
+    });
+  }
+  const hiddenFileInput: any = React.useRef(null);
+  const changeImage = (e: any) => {
+    hiddenFileInput.current.click();
+  }
+  const getUserImg = (file: any) => {
+    var reader: any = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event: any) => {
+      setImage(reader.result)
+      setUser({ ...user, format: reader.result });
+    };
+  }
   const logoutFunc = () => {
-    const auth = getAuth();
     signOut(auth).then(() => {
       window.location.href = "/";
     }).catch((error) => {
       console.log(error)
     });
   };
-
+  const updateUser = async () => {
+    const docRef = doc(db, 'users', user.id);
+    await updateDoc(docRef, {
+      name: user.name,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+    }).then(() => {
+      if (editPassword) {
+        if (!errorPassword) {
+          setEditPassword(false);
+          setStartEdit(false);
+        }
+      }
+      else {
+        setStartEdit(false);
+      }
+    })
+  }
+  const handleUpdateData = () => {
+    updateUser();
+    if (editPassword) {
+      if (password == confirmPassword) {
+        if (password.length >= 6) {
+          changePassword();
+        }
+        else {
+          setErrorPassword(true);
+          setErrorMsg("La contraseña debe tener al menos 6 carácteres");
+        }
+      }
+      else {
+        setErrorPassword(true);
+        setErrorMsg("La contraseña no coincide");
+      }
+    }
+    if (image !== "") {
+      updateProfileImage(user, user.id).then(() => {
+        setImage("");
+      })
+    }
+  }
+  useEffect(() => {
+    setUser({ ...userData })
+  }, [userData])
   return (
+    <ProfileMainContainer startEdit={startEdit} password={editPassword}>
+      <div className="first-text">
+        <div className="main-text">
+          <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
+        </div>
+        <div className="responsive-picture">
+          <PictureContain progress={data} reward={reward} progressResp={dataResp}>
+            <div className="crown">
+              <AiFillCrown />
+            </div>
+
+            <ProfileIcon
+              onClick={changeImage}
+              edit={startEdit}
+              src={(startEdit == true && image !== "") ? image : ((userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG)} >
+            </ProfileIcon>
+            <input
+              className="picture"
+              type="file"
+              ref={hiddenFileInput}
+              accept="image/png, image/jpg, image/jpeg"
+              onChange={(e) => { getUserImg(e.target.files) }}
+            />
+            {
+              startEdit &&
+              <div className="edit" onClick={changeImage}>
+                <div className="edit-icon">
+                  <MdEdit />
+                  {/* <div className="background2" /> */}
+                </div>
+                <div className="message">
+                  <p>
+                    Cambiar imagen
+                  </p>
+                </div>
+              </div>
+            }
+            <div className="circle-level">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="gradientLevelResp">
+                    <stop offset="0%" stopColor="#f88d21" />
+                    <stop offset="100%" stopColor="#972dec" />
+                  </linearGradient>
+                </defs>
+                <defs>
+                  <linearGradient id="gradientCertificateResp">
+                    <stop offset="0%" stopColor="#0997fe" />
+                    <stop offset="100%" stopColor="#9108ee" />
+                  </linearGradient>
+                </defs>
+                <circle className="progress-background"
+                />
+                <circle className="progress-circle" />
+              </svg>
+            </div>
+          </PictureContain>
+        </div>
+      </div>
+      <div className="profile-container">
+        {
+          !responsive1023 &&
+          <>
+            <div className="crown">
+              <AiFillCrown />
+            </div>
+            <PictureContain progress={data} reward={reward} progressResp={dataResp}>
+              <ProfileIcon
+                onClick={changeImage}
+                edit={startEdit}
+                src={(startEdit == true && image !== "") ? image : ((userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG)} >
+              </ProfileIcon>
+              {
+                startEdit &&
+                <div
+                  className="edit"
+                  onClick={changeImage}
+                >
+                  <div className="edit-icon">
+                    <MdEdit />
+                    {/* <div className="background2" /> */}
+                  </div>
+                  <div className="message">
+                    <p>
+                      Cambiar imagen
+                    </p>
+                  </div>
+                </div>
+              }
+              <div className="circle-level">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="gradientLevel">
+                      <stop offset="0%" stopColor="#f88d21" />
+                      <stop offset="100%" stopColor="#972dec" />
+                    </linearGradient>
+                  </defs>
+
+                  <defs>
+                    <linearGradient id="gradientCertificate">
+                      <stop offset="0%" stopColor="#0997fe" />
+                      <stop offset="100%" stopColor="#9108ee" />
+                    </linearGradient>
+                  </defs>
+
+                  <circle className="progress-background"
+                  />
+                  <circle className="progress-circle" />
+                </svg>
+              </div>
+            </PictureContain>
+          </>
+        }
+
+        {
+          !startEdit
+            ?
+            <div className="user-info-up">
+              <p className="name-text">
+                {userData.name}<br /><span>{userData.lastName}</span>
+              </p>
+              <div className="data-contain">
+                <p className="points">{points_format} puntos</p>
+                <p className="months">16 meses de aprendizaje</p>
+                <p className="certificates">14 certificados</p>
+              </div>
+            </div>
+            :
+            <div className="user-info-up" style={responsive1023 == true ? { gap: 2, paddingTop: 20 } : {}}>
+              <div className="input-contain">
+                <label>
+                  Nombre
+                </label>
+                <input
+                  placeholder={userData.name}
+                  defaultValue={userData.name}
+                  onChange={(e) => {
+                    setUser({ ...user, name: e.target.value })
+                  }}
+                />
+              </div>
+              <div className="input-contain">
+                <label>
+                  Apellido
+                </label>
+                <input
+                  placeholder={userData.lastName}
+                  defaultValue={userData.lastName}
+                  onChange={(e) => {
+                    setUser({ ...user, lastName: e.target.value })
+                  }}
+                />
+              </div>
+              {
+                responsive1023 &&
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+                  <button
+                    className="btn-edit"
+                    onClick={handleUpdateData}
+                  >
+                    Guardar Cambios
+                  </button>
+                </div>
+              }
+
+            </div>
+        }
+
+        <div className="user-info-down">
+          <div className="data-container">
+            <p className="email">
+              Correo electrónico
+            </p>
+            <p className="email-user">
+              {userData.email}
+            </p>
+          </div>
+          <div className="data-container">
+            <p className="email">
+              Whatsapp
+            </p>
+            {
+              !startEdit
+                ?
+                <p className="email-user">
+                  {userData.phoneNumber}
+                </p>
+                :
+                <Box2>
+                  <div className="separate" />
+                  <InputPhone
+                    value={userData.phoneNumber}
+                    limitMaxLength={true}
+                    international={true}
+                    countryCallingCodeEditable={false}
+                    onChange={(e: any) => {
+                      setUser({ ...user, phoneNumber: e })
+                    }}
+                  />
+                </Box2>
+            }
+          </div>
+          <div className="data-container">
+            {
+              !startEdit
+                ?
+                <>
+                  {
+                    responsive1023 &&
+                    <div className="btn-edit-container">
+                      <button
+                        className="btn-edit"
+                        onClick={() => { setStartEdit(true) }}
+                      >
+                        <MdModeEditOutline />
+                        Editar Perfil
+                      </button>
+                    </div>
+                  }
+                </>
+                :
+                <button
+                  onClick={() => { setEditPassword(!editPassword) }}
+                  className="password-edit"
+                >
+                  Crear nueva contraseña
+                </button>
+            }
+          </div>
+        </div>
+        {
+          editPassword &&
+          <div className="edit-contain">
+            {/* <div className="input-contain">
+              <label>
+                Contraseña actual
+              </label>
+              <input
+                placeholder="Crea una contraseña"
+              />
+              <div className="eye" onClick={()=>{setShowCurrentPassword(true)}}>
+
+              </div>
+            </div> */}
+            <div className="input-contain">
+              <label>
+                Nueva contraseña
+              </label>
+              <div className="input-password">
+                <input
+                  value={password}
+                  type={showNewPassword ? "text" : "password"}
+                  onChange={(e: any) => { setPassword(e.target.value) }}
+                  placeholder="Crea una contraseña"
+                />
+                <div className="eye" onClick={() => { setShowNewPassword(!showNewPassword) }}>
+                  {
+                    showNewPassword
+                      ? <AiOutlineEye />
+                      : <AiOutlineEyeInvisible />
+                  }
+                </div>
+              </div>
+            </div>
+            <div className="input-contain">
+              <label>
+                Confirmar nueva contraseña
+              </label>
+              <div className="input-password">
+                <input
+                  value={confirmPassword}
+                  type={showConfirmPassword ? "text" : "password"}
+                  onChange={(e: any) => { setConfirmPassword(e.target.value) }}
+                  placeholder="Confirma tu contraseña"
+                ></input>
+                <div className="eye" onClick={() => { setShowConfirmPassword(!showConfirmPassword) }}>
+                  {
+                    showConfirmPassword
+                      ? <AiOutlineEye />
+                      : <AiOutlineEyeInvisible />
+                  }
+                </div>
+              </div>
+              {
+                errorPassword &&
+                <div className="error">
+                  {errorMsg}
+                </div>
+              }
+
+            </div>
+          </div>
+        }
+
+      </div>
+      <div className="btn-container">
+        {
+          !startEdit
+            ?
+            <button
+              className="btn-edit"
+              onClick={() => { setStartEdit(true) }}
+            >
+              <MdModeEditOutline />
+              Editar Perfil
+            </button>
+            :
+            <button
+              className="btn-edit"
+              onClick={handleUpdateData}
+            >
+              Guardar Cambios
+            </button>
+        }
+
+        <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
+      </div>
+    </ProfileMainContainer>
     // <ProfileContainer>
     //   <ProfileIconContain>
     //     <PictureContain>
@@ -118,58 +523,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel }: any) => {
     //     </LogOut>
     //   </Link>
     // </ProfileContainer>
-    <ProfileMainContainer>
-      <div className="first-text">
-        <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
-      </div>
-      <div className="profile-container">
-        <PictureContain>
-          {userData &&
-            userData.photoURL.length > 0 ?
-            <ProfileIcon src={userData.photoURL} ></ProfileIcon>
-            : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
-          }
-        </PictureContain>
-        <div className="user-info-up">
-          <p className="name-text">
-            {userData.name}<br /><span>{userData.lastName}</span>
-          </p>
-          <div className="data-contain">
-            <p className="points">{userData.score} puntos</p>
-            <p className="months">16 meses de aprendizaje</p>
-            <p className="certificates">14 certificados</p>
-          </div>
-        </div>
-        <div className="user-info-down">
-          <div className="data-container">
-            <p className="email">
-              Correo electrónico
-            </p>
-            <p className="email-user">
-              {userData.email}
-            </p>
-          </div>
-          <div className="data-container">
-            <p className="email">
-              Whatsapp
-            </p>
-            <p className="email-user">
-              {userData.phoneNumber}
-            </p>
-          </div>
-          <div className="data-container">
-            <p className="password">
-              Contraseña
-            </p>
-            <p className="password-user">
-              **********
-            </p>
-          </div>
-        </div>
-      </div>
-      <button className="btn-edit"><MdModeEditOutline />Editar Perfil</button>
-      <button className="btn-logout">Cerrar sesión</button>
-    </ProfileMainContainer>
   )
 }
 export default UserInfo;

@@ -71,41 +71,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         }}>
           Acerca del curso
         </Titles>
-        <ListIcon onClick={() => {
-          setValue(1)
-        }} />
-        <BookIcon onClick={() => {
-          setValue(2)
-        }} />
         {<PositionTitle position={value}>
           Materiales y tareas
         </PositionTitle>}
-        <ChatboxIcon />
         <Titles onClick={() => {
           setValue(4)
         }}>
           Comentarios
         </Titles>
-        <EaselIcon onClick={() => {
-          setValue(4)
-        }} />
         <div className='line'></div>
       </TitleContain>
-      <IconContain>
-        <UnSelected>
-          <ListIcon onClick={() => {
-            setValue(1)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        <SelectContain>
-          <BookIcon />
-        </SelectContain>
-        <UnSelected>
-          <ChatboxIcon onClick={() => {
-            setValue(4)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-      </IconContain>
       <HomeWorkContain>
         <div className='left'>
           <TaskTitle>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { number } from 'yup';
+import { useMediaQuery } from 'react-responsive';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
@@ -10,7 +10,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
-
+  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
 
   useEffect(() => {
     let temp_selected: any = [];
@@ -42,13 +42,9 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
 
   return (
     <MainContainer open={open}>
-      {/* <CloseButton onClick={() => { setOpen(!open); handleClick(false) }}>
-        x
-      </CloseButton> */}
-      {/* <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} /> */}
       <div className='course-info'>
         <p className='title'>{course?.courseTittle}</p>
-        <p>Un curso de <span>{course?.courseProfessor[0].name}</span></p>
+        <p>Un curso de <span>{course?.courseProfessor[0]?.name}</span></p>
         <div className='level-container'>
           {(course?.courseDifficulty == "Muy Fácil" || course?.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
           {(course?.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
@@ -60,25 +56,33 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
         <p className='title'>Tu progreso <br />
           <b>{count} de {course?.lessons.length}</b> <span>lecciones.</span>
         </p>
-        <div className='certificate-label'>
-          <p>Acaba el curso <br />
-            para obtener <br />
-            tu certificado.</p>
+        <div className='certificate-box'>
+          <div className='half'></div>
+          <div className='certificate-label'>
+            <p>Acaba el curso <br />
+              para obtener <br />
+              tu certificado.</p>
+          </div>
         </div>
       </div>
-      {course?.seasons.map((season: any, index: number) => {
+      <div className='certificate-responsive'>
+        <p>Acaba el curso para obtener tu certificado.</p>
+      </div>
+      {!responsive1124 && course?.seasons.map((season: any, index: number) => {
         return (
           <SeasonContainer key={"course seasons " + index}>
-            <Container onClick={() => { toggleHandler(index) }}>
-              <Title>
-                Módulo {index + 1}
-                <UploadIcon active={selected[index]} />
-              </Title>
-              <Episode>
-                {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
-              </Episode>
+            <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
+              <div className='module'>
+                {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />}
+                <div>
+                  <p className='title'>Módulo {index + 1}</p>
+                  <Episode>
+                    {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
+                  </Episode>
+                </div>
+              </div>
+              <UploadIcon active={selected[index]} />
             </Container>
-            <Divider />
             <CoursesContainer active={selected[index]} onClick={() => {
               setOpen(!open); handleClick(false)
             }}>
@@ -87,7 +91,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           </SeasonContainer>
         )
       })}
-
+      <div className='bg'></div>
     </MainContainer>
   )
 }

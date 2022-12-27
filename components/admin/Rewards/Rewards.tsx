@@ -45,7 +45,6 @@ const Rewards = () => {
       setBanner({ ...banner, format: reader.result })
     };
   }
-
   useEffect(() => {
     getRewardBanner();
   }, [])

@@ -169,8 +169,7 @@ const Lesson = () => {
           </div>}
           {course && <Container>
             <FirstContainer>
-              <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-              <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
+              <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer>
           </Container>}
         </MainContainer>}

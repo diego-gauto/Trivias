@@ -3,11 +3,18 @@ import styled, { css } from "styled-components";
 export const MainContainer = styled.div<{ open: any }>`
   display: flex;
   flex-direction: column;
-  position: absolute;
   right: 0;
   width: 30%;
   ::-webkit-scrollbar {
     display: none;
+  }
+  .bg {
+    background: #e8ddf2;
+    width: 100%;
+    height: 100%;
+    @media (max-width: 1124px) {
+      display: none;
+    }
   }
   .course-info {
     background: #f8e4cc;
@@ -56,34 +63,32 @@ export const MainContainer = styled.div<{ open: any }>`
         font-weight: bold;
       }
     }
-    .certificate-label {
-      display: flex;
+    .certificate-box {
       position: absolute;
       right: 0;
       bottom: 0;
       height: 100%;
-      background: #6717cd;
-      text-align: center;
-      p {
-        color: #fff;
-        margin: auto;
-        font-size: 12px;
+      display: flex;
+      .half {
+        width: 40px;
+        height: 100%;
+        background: #6717cd;
+        clip-path: circle(40px at right);
+      }
+      .certificate-label {
+        padding-right: 20px;
+        display: flex;
+        height: 100%;
+        background: #6717cd;
+        text-align: center;
+        p {
+          font-weight: 500;
+          color: #fff;
+          margin: auto;
+          font-size: 12px;
+        }
       }
     }
-  }
-
-  @media (max-width: 900px) {
-    position: fixed;
-    z-index: 40;
-    padding: 10px;
-    background: white;
-    box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
-    border-radius: 10px;
-    width: 100%;
-    top: 0;
-    right: -100%;
-    transition: 1s ease all;
-    height: 100%;
   }
   ${(props) =>
     props.open == true &&
@@ -91,11 +96,40 @@ export const MainContainer = styled.div<{ open: any }>`
       right: 0 !important;
       transition: 1s ease all;
     `}
+  .certificate-responsive {
+    display: none;
+  }
+  @media (max-width: 1124px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    .course-info,
+    .course-progress {
+      padding-left: 20px;
+      width: 50%;
+      .certificate-box {
+        display: none;
+      }
+    }
+    .certificate-responsive {
+      display: flex;
+      background: #6717cd;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      p {
+        margin: 0;
+        color: white;
+        font-weight: 500;
+      }
+    }
+  }
 `;
 export const SeasonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
 `;
 export const CloseButton = styled.div`
   color: #8E2DE2;
@@ -110,9 +144,49 @@ export const CloseButton = styled.div`
   }
 }
 `;
-export const Container = styled.div`
+export const Container = styled.div<{ active: any }>`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px -11px 10px -10px rgb(0 0 0 / 20%) inset;
+  background: #e8ddf2;
+  padding: 20px 10px 20px 40px;
+  cursor: pointer;
+  i {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+  }
+  .module {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    p {
+      margin: 0;
+      color: #3f1168;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .title {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  ${(props) =>
+    props.active == true &&
+    css`
+      transition: 0.5s ease all;
+      background: #ede7f2;
+      box-shadow: none;
+      .module {
+        p {
+          color: #d244d1;
+        }
+        .title {
+          color: #942ced;
+        }
+      }
+    `}
 `;
 export const Title = styled.h1`
   display: flex;
@@ -129,6 +203,7 @@ export const Episode = styled.p`
   font-family: "Raleway", sans-serif;
   cursor: pointer;
   margin: 0;
+  font-weight: 500 !important;
 `;
 export const UploadIcon = styled.i<{ active: any }>`
   background-image: url(../images/Video/icons/arrowDown.svg);
@@ -136,14 +211,14 @@ export const UploadIcon = styled.i<{ active: any }>`
   width: 14px;
   background-position: center;
   background-repeat: no-repeat;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   transition: .5s ease all;
 
 }
 ${(props) =>
   props.active == true &&
   css`
-    transform: rotate(0deg);
+    transform: rotate(180deg);
     transition: 0.5s ease all;
   `}
 `;
@@ -157,28 +232,26 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
   height: 0px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
   transition: 1s ease all;
+  background: #e8ddf2;
   ${(props) =>
     props.active == true &&
     css`
       height: auto;
-      max-height: 70vh;
+      max-height: 100%;
       transition: 1s ease all;
-      overflow: auto;
-      &::-webkit-scrollbar {
-        width: 6px;
-        height: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-      -webkit-appearance: none;
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-      ...
-    }
+      //   &::-webkit-scrollbar {
+      //     width: 6px;
+      //     height: 10px;
+      // }
+      // &::-webkit-scrollbar-thumb {
+      //   -webkit-appearance: none;
+      //   width: 10px;
+      //   height: 10px;
+      //   border-radius: 10px;
+      //   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+      //   ...
+      // }
     `}
   ${(props) =>
     props.active == false &&

@@ -3,11 +3,14 @@ import styled, { css } from "styled-components";
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
   gap: 30px;
+  height: 100%;
   padding-block: 30px;
   padding-inline: 60px;
   background: #ede7f2;
+  @media (max-width: 1124px) {
+    padding-inline: 30px;
+  }
 `;
 export const TitleContain = styled.div`
   position: relative;
@@ -21,8 +24,12 @@ export const TitleContain = styled.div`
     width: 100%;
     bottom: 0;
   }
-  @media (max-width: 1023px) {
-    display: none;
+  @media (max-width: 1124px) {
+    gap: 0;
+    justify-content: space-between;
+    p {
+      font-size: 12px;
+    }
   }
 `;
 export const IconContain = styled.div`
@@ -75,9 +82,6 @@ export const PositionTitle = styled.p<{ position: any }>`
   color: #8e2de2;
   opacity: 0.7;
   margin: 0;
-  @media (max-width: 1023px) {
-    display: none;
-  }
   ${(props) =>
     props.position == 1 &&
     css`
