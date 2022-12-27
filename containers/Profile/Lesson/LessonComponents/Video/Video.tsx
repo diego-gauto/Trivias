@@ -144,16 +144,19 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
       } else {
         const correct = 100 / data.questions.length;
         let tempPoints = 0;
+        const score = parseInt(data.points) / data.questions.length;
+        let tempScore = 0;
         data.questions.forEach((element: any, indQ: number) => {
           element.answers.forEach((answer: any, indA: number) => {
             if (quiz[indQ] == indA && answer.status) {
               tempPoints = tempPoints + correct
+              tempScore = tempScore + score;
             }
           });
         });
         if (tempPoints >= data.passingGrade) {
           alert("aprobado")
-          user.score = parseInt(user.score) + parseInt(data.points);
+          user.score = parseInt(user.score) + tempScore;
           addUserToLesson(data, id, data.seasonId, data.id, user);
           temp.users.push(user.id);
           setCurrent({ ...temp });

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Col, Form, Row } from "react-bootstrap";
 import InputMask from "react-input-mask";
 
 import { collection, DocumentData, onSnapshot, query, where } from "firebase/firestore";
@@ -29,14 +28,12 @@ import {
   getPaymentmethods,
   updateUserPlan,
 } from "../../../store/actions/PaymentActions";
-import ModalPurchase1 from "./Modal1/ModalPurchase1";
 import {
   Container,
   LoaderContainSpinner,
 } from "./Purchase.styled";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import ModalError from "./Modal1/ModalError";
-import { SlideModule } from "../../../components/Home/Module4_Carousel/SlideModule/SlideModule";
 import ErrorModal from "../../../components/Error/ErrorModal";
 
 const Purchase = () => {

@@ -4,6 +4,11 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
+  .line-m {
+    background: #d4cedc;
+    height: 1.5px;
+    width: 100%;
+  }
   @media (max-width: 1023px) {
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
@@ -13,30 +18,119 @@ export const MainContainer = styled.div`
   @media (max-width: 600px) {
     padding-inline: 10px;
   }
+  .comment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      p {
+        text-transform: capitalize;
+        color: #74549c;
+        margin: 0;
+        font-weight: 600;
+        span {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+    .middle {
+      p {
+        font-weight: 500;
+        color: #74549c;
+        margin: 0;
+      }
+    }
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        margin: 0;
+      }
+      .left {
+        display: flex;
+        gap: 80px;
+        .like {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #fa3838;
+          svg {
+            cursor: pointer;
+            font-size: 22px;
+          }
+          p {
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+        button {
+          font-size: 18px;
+          color: #3f1168;
+          font-weight: 700;
+          border: none;
+          background: none;
+        }
+      }
+      .report {
+        font-size: 18px;
+        color: #74549c;
+        font-weight: 600;
+        border: none;
+        background: none;
+      }
+    }
+  }
 `;
 export const CommentContain = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 20px;
-  align-items: center;
+  .comments-info {
+    display: flex;
+    gap: 20px;
+    .line {
+      width: 1.5px;
+      height: auto;
+      background: #d4cedc;
+    }
+    .title {
+      color: #f8a44c;
+    }
+    p {
+      color: #74549c;
+      margin: 0;
+      font-weight: 600;
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+  .comment {
+    display: flex;
+    gap: 10px;
+  }
   @media (max-width: 1023px) {
     gap: 10px;
   }
 `;
 export const CommentInput = styled.input`
-  color: black;
-  max-height: 50px;
-  padding: 20px;
-  font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  background: none;
+  color: #8e2de2;
+  padding-inline: 20px;
   outline: none;
-  opacity: 0.8;
-  border: none;
-  width: 100%;
-  box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
-  border-radius: 10px;
-  font-size: 14px;
+  border: 1px solid #8e2de2;
+  width: 80%;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
   ::placeholder {
-    color: #adadac;
+    color: #8e2de2;
   }
 `;
 export const Profile = styled.img`
