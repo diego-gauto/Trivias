@@ -24,6 +24,7 @@ import {
   UserShow,
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
+import { getInvoice } from "../../../store/actions/PaymentActions";
 
 export interface SelectedUser {
   id?: string;
@@ -129,8 +130,14 @@ const UsersList = () => {
       setCourses(tempCourses)
     })
   }
-
   useEffect(() => {
+    let tempInvoice: any = [];
+    getInvoice().then((res) => {
+      res.forEach((element: DocumentData) => {
+        element.amount = element.amount / 100;
+        tempInvoice.push(element);
+      });
+    })
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
       const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -147,9 +154,14 @@ const UsersList = () => {
         courses: 0,
         membership: user.membership
       }));
-
       let today: any = new Date().getTime() / 1000;
       usersData.forEach((user: any) => {
+        user.total = 0;
+        tempInvoice.forEach((element: any) => {
+          if (element.userEmail == user.email) {
+            user.total = user.total + element.amount;
+          }
+        });
         getPaidCourses(user.id).then((res) => {
           res.forEach((element: DocumentData) => {
             if (element.finalDate > today) {
@@ -215,7 +227,8 @@ const UsersList = () => {
                 <th>Correo Electrónico</th>
                 <th>Fecha de Creación</th>
                 <th>Cursos Suscritos</th>
-                <th>Recompensas</th>
+                <th>Amount spent</th>
+                {/* <th>Recompensas</th> */}
                 <th>Visualizar</th>
                 <th>Editar</th>
               </tr>
@@ -234,7 +247,8 @@ const UsersList = () => {
                       <td>{user.created_at}</td>
                       {user.courses > 1 ? <td >{user.courses} Activos</td> :
                         <td >{user.courses} Activo</td>}
-                      <td>{user.score} puntos</td>
+                      <td>MXN${user.total}</td>
+                      {/* <td>{user.score} puntos</td> */}
                       <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
                       <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
                     </tr>
