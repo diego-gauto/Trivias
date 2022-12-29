@@ -1,22 +1,28 @@
 import React, { useState } from 'react'
 import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
 import { PositionTitle, TitleContain, Titles } from './Module.styled';
+import { BsPlayBtn } from 'react-icons/bs';
+import { SlNotebook } from 'react-icons/sl';
+import { TfiCommentAlt } from 'react-icons/tfi';
 
 const About = ({ value, setValue, data, teacherCreds }: any) => {
   return (
     <>
       <TitleContain>
         <PositionTitle position={value}>
+          <BsPlayBtn></BsPlayBtn>
           Acerca del curso
         </PositionTitle>
         <Titles onClick={() => {
           setValue(3)
         }}>
+          <SlNotebook></SlNotebook>
           Materiales y tareas
         </Titles>
         <Titles onClick={() => {
           setValue(4)
         }}>
+          <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </Titles>
         <div className='line'></div>

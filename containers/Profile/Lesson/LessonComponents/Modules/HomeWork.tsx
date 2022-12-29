@@ -6,6 +6,9 @@ import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkConta
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
 import { BiDownload } from "react-icons/bi";
 import { BsFileArrowUp } from "react-icons/bs";
+import { BsPlayBtn } from 'react-icons/bs';
+import { SlNotebook } from 'react-icons/sl';
+import { TfiCommentAlt } from 'react-icons/tfi';
 
 const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }: any) => {
   const [status, setStatus] = useState("");
@@ -69,14 +72,17 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         <Titles onClick={() => {
           setValue(1)
         }}>
+          <BsPlayBtn></BsPlayBtn>
           Acerca del curso
         </Titles>
         {<PositionTitle position={value}>
+          <SlNotebook></SlNotebook>
           Materiales y tareas
         </PositionTitle>}
         <Titles onClick={() => {
           setValue(4)
         }}>
+          <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </Titles>
         <div className='line'></div>

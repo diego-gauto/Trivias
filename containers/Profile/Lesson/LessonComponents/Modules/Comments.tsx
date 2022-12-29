@@ -4,6 +4,10 @@ import { addComment } from '../../../../../store/actions/courseActions'
 import { Button, Comment, CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
 import { TitleContain, PositionTitle, Titles } from './Module.styled'
 import { FiHeart } from 'react-icons/fi';
+import { BsPlayBtn } from 'react-icons/bs';
+import { SlNotebook } from 'react-icons/sl';
+import { TfiCommentAlt } from 'react-icons/tfi';
+
 const Comments = ({ value, setValue, user, data, comments }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>(comments);
@@ -55,14 +59,17 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <Titles onClick={() => {
           setValue(1)
         }}>
+          <BsPlayBtn></BsPlayBtn>
           Acerca del curso
         </Titles>
         {<Titles onClick={() => {
           setValue(3)
         }}>
+          <SlNotebook></SlNotebook>
           Materiales y tareas
         </Titles>}
         <PositionTitle position={value}>
+          <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </PositionTitle>
         <div className='line'></div>

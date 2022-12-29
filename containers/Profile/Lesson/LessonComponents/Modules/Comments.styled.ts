@@ -10,7 +10,6 @@ export const MainContainer = styled.div`
     width: 100%;
   }
   @media (max-width: 1023px) {
-    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
     gap: 10px;
     border-radius: 10px;

@@ -4,11 +4,10 @@ import { Title, VideoContain, Segment } from './Video.styled';
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
 import Modules from '../Modules/Modules';
-import { SeasonContainer, Episode, CoursesContainer, Container, UploadIcon } from '../Courses/Courses.styled';
-import EveryCourse from '../Courses/Lessons/EveryCourse';
-import CourseProgress from '../Progress/CourseProgress';
 import { useMediaQuery } from 'react-responsive';
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+
 declare let Hls: any
 
 const Video = ({ data, title, id, course, user, season, lesson, handleComplete, comments }: any) => {
@@ -171,6 +170,15 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
   return (
     <Segment>
       <VideoContain>
+        <div className='nav-course'>
+          <img src="/images/Navbar/NavbarLogo2.png" alt="" />
+          {!menu ? <GiHamburgerMenu onClick={() => {
+            setMenu(!menu)
+          }}></GiHamburgerMenu> :
+            <AiOutlineClose onClick={() => {
+              setMenu(!menu)
+            }}></AiOutlineClose>}
+        </div>
         {"mandatory" in course.seasons[season].lessons[lesson] ?
           <div className='quiz-container'>
             <Title>
@@ -220,32 +228,10 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
         }
         {
           responsive1124 && <div className='module-selector'>
-
+            <p>{course.courseTittle}</p>
+            <p><span>Un curso de</span> {course.courseProfessor[0].name}</p>
           </div>
         }
-        {/* {responsive1124 && course?.seasons.map((season: any, index: number) => {
-          return (
-            index == viewed && <SeasonContainer key={"course seasons " + index}>
-              <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
-                <div className='module'>
-                  {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={user.id} refresh={toggleHandler} />}
-                  <div>
-                    <p className='title'>Módulo {index + 1}</p>
-                    <Episode>
-                      {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
-                    </Episode>
-                  </div>
-                </div>
-                {!responsive1124 && <UploadIcon active={selected[index]} />}
-              </Container>
-              <CoursesContainer active={selected[index]} onClick={() => {
-                setOpen(!open); handleClick(false)
-              }}>
-                <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={user.id} course={course} />
-              </CoursesContainer>
-            </SeasonContainer>
-          )
-        })} */}
         <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
       </VideoContain>
       <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />

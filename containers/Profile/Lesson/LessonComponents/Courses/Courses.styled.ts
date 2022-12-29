@@ -100,6 +100,10 @@ export const MainContainer = styled.div<{ open: any }>`
     display: none;
   }
   @media (max-width: 1124px) {
+    transition: 1s ease all;
+    position: absolute;
+    top: 64px;
+    right: -100%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -135,6 +139,7 @@ export const MainContainer = styled.div<{ open: any }>`
 export const SeasonContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 export const CloseButton = styled.div`
   color: #8E2DE2;

@@ -68,7 +68,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
       <div className='certificate-responsive'>
         <p>Acaba el curso para obtener tu certificado.</p>
       </div>
-      {!responsive1124 && course?.seasons.map((season: any, index: number) => {
+      {course?.seasons.map((season: any, index: number) => {
         return (
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>

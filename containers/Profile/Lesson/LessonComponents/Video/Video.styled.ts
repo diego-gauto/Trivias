@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Segment = styled.div`
   display: flex;
+  position: relative;
   @media (max-width: 1124px) {
     flex-direction: column-reverse;
   }
@@ -13,6 +14,24 @@ export const VideoContain = styled.div`
   width: 70%;
   border-radius: 10px;
   min-height: 400px;
+  .nav-course {
+    display: none;
+    background: #411369;
+    padding-block: 20px;
+    justify-content: space-between;
+    padding-inline: 40px;
+    align-items: center;
+    img {
+      width: 80px;
+    }
+    svg {
+      color: #ede7f2;
+      font-size: 24px;
+    }
+    @media (max-width: 1124px) {
+      display: flex;
+    }
+  }
   .absolute {
     max-height: 570px;
     @media (max-width: 1450px) {
@@ -38,44 +57,11 @@ export const VideoContain = styled.div`
     background: #e8ddf2;
     padding: 20px 40px;
     padding-bottom: 0;
-    .select {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 130px;
-      border-radius: 20px;
-      margin-left: auto;
-      padding: 5px 15px;
-      background: linear-gradient(
-          to right,
-          rgb(148, 44, 237),
-          rgb(210, 68, 209)
-        )
-        transparent;
-      p {
-        color: white;
-        margin: 0;
-      }
-      svg {
-        color: white;
-        font-size: 18px;
-      }
-    }
-    .list {
-      position: absolute;
-      right: 60px;
-      width: 50px;
-      background: #d244d1;
-      flex-direction: column;
-      text-align: center;
-      border-bottom-left-radius: 27px;
-      border-bottom-right-radius: 27px;
-      p {
-        font-size: 12px;
-        font-weight: 700;
-        color: white;
-        margin: 0;
+    p {
+      color: #411369;
+      font-weight: 700;
+      span {
+        font-weight: 500;
       }
     }
   }

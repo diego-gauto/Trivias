@@ -163,10 +163,10 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
-          {certficate && <div className="certificate-container">
+          {/* {certficate && <div className="certificate-container">
             <p>Muchas felicidades por acompletar el curso, tu certificado ya esta disponible!</p>
             <button onClick={() => { goTo() }}>Certificado</button>
-          </div>}
+          </div>} */}
           {course && <Container>
             <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
