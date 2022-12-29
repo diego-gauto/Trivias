@@ -130,11 +130,9 @@ export const PeopleContainer = styled.div`
     height: 106%;
   }
   @media only screen and (max-width: 1980px) {
-    height: 96%;
+    height: 77%;
   }
-  @media only screen and (max-width: 1980px) {
-    height: 84%;
-  }
+  
   @media only screen and (max-width: 1840px) {
     height: 66%;
   }
