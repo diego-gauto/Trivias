@@ -59,7 +59,7 @@ export const NewTag = styled.div`
   width: 79px;
   height: 29px;
   text-align: center;
-  position: relative;
+  position: absolute;
   z-index: 1;
 `;
 
