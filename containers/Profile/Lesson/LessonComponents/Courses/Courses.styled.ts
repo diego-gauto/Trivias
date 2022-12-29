@@ -112,6 +112,11 @@ export const MainContainer = styled.div<{ open: any }>`
         display: none;
       }
     }
+    .course-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .certificate-responsive {
       display: flex;
       background: #6717cd;

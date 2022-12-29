@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import React, { useState } from 'react'
-import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent, ObjectiveContainer } from './About.styled';
-import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
+import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
+import { PositionTitle, TitleContain, Titles } from './Module.styled';
 
 const About = ({ value, setValue, data, teacherCreds }: any) => {
   return (
