@@ -7,10 +7,29 @@ export const SliderContainer = styled.div`
 `;
 export const GeneralContainer = styled(Container)`
   padding: 0;
-  display: block;
-  padding-top: 16%;
-
+  display: block;  
+  padding-top: 17%;
   height: 1640px;
+  @media only screen and (max-width: 1980px) {
+   
+  padding-top: 10%;
+  }
+  @media only screen and (max-width: 1980px) {
+   
+  padding-top: 10%;
+  }
+  @media only screen and (max-width: 1840px) {
+   
+  padding-top: 8%;
+  }
+  @media only screen and (max-width: 1720px) {
+   
+  padding-top: 6%;
+  }
+  @media only screen and (max-width: 1719px) {
+   
+  padding-top: 16%;
+  }
   @media only screen and (max-width: 1028px) {
     display: none;
   }
