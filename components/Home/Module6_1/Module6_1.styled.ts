@@ -15,38 +15,50 @@ export const GeneralContainer = styled(Container)`
   display: block;  
   padding-top: 17%; 
   height: 2195px;
-  margin-bottom: 9%;
+  margin-bottom: 18%;
 
   @media only screen and (max-width: 2100px) {
-    margin-bottom: 6%;
+    margin-bottom: 14%;
   }
   @media only screen and (max-width: 1980px) {
-    margin-bottom: 0%;
-  padding-top: 10%;
+    margin-bottom: 4%;
+    height: 1880px; 
+    
+  padding-top: 6%;
   }
    
   @media only screen and (max-width: 1840px) {
-    height: 1840px;
-     margin-bottom: 16%;
+    height: 1575px;
+    margin-bottom: 9%;
   padding-top: 8%;
   }
   @media only screen and (max-width: 1720px) {
    
-    margin-bottom: 15%;
+    margin-bottom: 17%;
   padding-top: 6%;
   }
   @media only screen and (max-width: 1600px) {
    
-    margin-bottom: 13%; 
+    margin-bottom: 9%; 
+  }
+  @media only screen and (max-width: 1520px) {
+    margin-bottom: 7%;
+    height: 1520px;
   }
   
+  
   @media only screen and (max-width: 1440px) {
-   
+    margin-bottom: 12%;
+    height: 1440px;
   padding-top: 3.5%;
   }
-  @media only screen and (max-width: 1380px) {
-   
+  @media only screen and (max-width: 1360px) {
+    height: 1230px;
+    margin-bottom: 23%;
   padding-top: 2%;
+  }
+  @media only screen and (max-width: 1280px) { 
+    margin-bottom: 13%; 
   }
   @media only screen and (max-width: 1028px) {
     display: none;
@@ -54,10 +66,7 @@ export const GeneralContainer = styled(Container)`
 `;
 
 export const People = styled.div`
-@media only screen and (max-width: 1380px) {
-   
-  background-size: 100%;
-  }
+
   height: 100%;
   background-repeat: no-repeat;
   width: 100%;
@@ -65,12 +74,82 @@ export const People = styled.div`
   background-position-x: 50%;
   z-index: 1;
   background-color: white;
+  background-size: 100%;
+
+  @media only screen and (max-width: 1720px) {
+    background-size: 125%;
+    }
+  @media only screen and (max-width: 1600px) {
+    background-size: 137%;
+    }
+  @media only screen and (max-width: 1520px) {
+   
+    background-size: 115%;
+    }
+  @media only screen and (max-width: 1440px) {
+   
+    background-size: 125%;
+    }
+  @media only screen and (max-width: 1380px) {
+    
+    }
+  @media only screen and (max-width: 1280px) {
+     
+    background-size: 110%;
+    }
+  @media only screen and (max-width: 1200px) {
+     
+    background-size: 120%;
+    }
+  @media only screen and (max-width: 1150px) {
+     
+    background-size: 125%;
+    }
+  @media only screen and (max-width: 1080px) {
+     
+    background-size: 132%;
+    }
+  @media only screen and (max-width: 1030px) {
+     
+    background-size: 138%;
+    }
 `;
 export const PeopleContainer = styled.div`
   height: 100%;
 
+  @media only screen and (max-width: 2400px) {
+    height: 117%;
+  }
+  @media only screen and (max-width: 2100px) {
+    height: 110%;
+  }
   @media only screen and (max-width: 1980px) {
     height: 100%;
+  }
+  @media only screen and (max-width: 1980px) {
+    height: 88%;
+  }
+  @media only screen and (max-width: 1840px) {
+    height: 70%;
+  }
+  @media only screen and (max-width: 1720px) {
+    height: 82%;
+  }
+  @media only screen and (max-width: 1600px) {
+    height: 75%;
+  }
+
+  @media only screen and (max-width: 1520px) {
+    height: 68%;
+  }
+  @media only screen and (max-width: 1440px) {
+    height: 70%;
+  }
+  @media only screen and (max-width: 1360px) {
+    height: 66%;
+  }
+  @media only screen and (max-width: 1280px) {
+    height: 55%;
   }
   
 `;
@@ -396,8 +475,10 @@ export const ContainerMain = styled.div`
   z-index: 2;
   position: absolute;
   height: 1312px;
-  margin-top: 0;
-  margin-bottom: 6.5%;
+  margin-top: 0; 
+
+  @media only screen and (max-width: 1440px) { 
+  }
 `;
 export const ContainerMain2 = styled.div`
   background-color: #ede7f2;
