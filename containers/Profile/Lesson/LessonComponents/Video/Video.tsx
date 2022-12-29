@@ -220,20 +220,10 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
         }
         {
           responsive1124 && <div className='module-selector'>
-            <div className='select' onClick={() => { setActive(!active) }}>
-              <p>Módulos</p>
-              <MdOutlineKeyboardArrowDown />
-            </div>
-            <div className='list' style={{ height: active ? "auto" : 0, paddingBlock: active ? "15px" : "0" }}>
-              {course?.seasons.map((season: any, index: number) => {
-                return (
-                  <p>{index + 1}</p>
-                )
-              })}
-            </div>
+
           </div>
         }
-        {responsive1124 && course?.seasons.map((season: any, index: number) => {
+        {/* {responsive1124 && course?.seasons.map((season: any, index: number) => {
           return (
             index == viewed && <SeasonContainer key={"course seasons " + index}>
               <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
@@ -255,7 +245,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
               </CoursesContainer>
             </SeasonContainer>
           )
-        })}
+        })} */}
         <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
       </VideoContain>
       <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />

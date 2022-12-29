@@ -80,6 +80,7 @@ export const PositionTitle = styled.p<{ position: any }>`
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
   color: #8e2de2;
+  text-shadow: 0px 0px 12px rgb(142 45 226 / 80%);
   opacity: 0.7;
   margin: 0;
   ${(props) =>
