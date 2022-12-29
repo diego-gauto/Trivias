@@ -35,6 +35,8 @@ import {
   CenterFooterContent,
   LeftFooterContent,
   FooterTextLine,
+  PineappleTextContainer,
+  FooterComplement,
 } from "./Module6_1.styled";
 import {
   BgColorMobile,
@@ -183,31 +185,32 @@ export const Module6_1 = (props: IModule6_1) => {
             <BgColor  ></BgColor>
           </PeopleContainer>
 
-          <MoreText>
-            <MoreText_1>Trabaja con nosotros</MoreText_1>
-            <MoreText_2>Cursos</MoreText_2>
-            <MoreText_3>Tienda</MoreText_3>
-          </MoreText>
+          <PineappleTextContainer>
+            <MoreText>
+              <MoreText_1>Trabaja con nosotros</MoreText_1>
+              <MoreText_2>Cursos</MoreText_2>
+              <MoreText_3>Tienda</MoreText_3>
+            </MoreText>
 
-          <FooterAText >
-            <FooterAText_1>Aviso de privacidad</FooterAText_1>
-            <FooterAText_2>Términos y condiciones</FooterAText_2>
-            <FooterAText_3>Políticas de cancelación</FooterAText_3>
-          </FooterAText>
+            <FooterAText >
+              <FooterAText_1>Aviso de privacidad</FooterAText_1>
+              <FooterAText_2>Términos y condiciones</FooterAText_2>
+              <FooterAText_3>Políticas de cancelación</FooterAText_3>
+            </FooterAText>
 
-          <FooterAIcons >
-            <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
-          </FooterAIcons>
+            <FooterAIcons >
+              <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
+            </FooterAIcons>
 
-          <FooterBIcons >
-            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
-            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
-            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
-            <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
-          </FooterBIcons>
+            <FooterBIcons >
+              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
+              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
+              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
+              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
+            </FooterBIcons>
 
+          </PineappleTextContainer>
 
-          <Footer />
         </ContainerMain >
 
         <ContainerMain2  ></ContainerMain2>
