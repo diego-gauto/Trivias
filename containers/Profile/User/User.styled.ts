@@ -801,6 +801,7 @@ export const ProfileMainContainer = styled.div<{
   width: 30%;
   @media (max-width: 1023px) {
     width: 100%;
+    flex-direction: column-reverse;
   }
   .crown {
     position: absolute;
@@ -831,6 +832,9 @@ export const ProfileMainContainer = styled.div<{
   .first-text {
     text-align: center;
     @media (max-width: 1023px) {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
       display: flex;
       width: 80%;
       order: 2;

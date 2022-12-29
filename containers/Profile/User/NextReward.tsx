@@ -40,7 +40,7 @@ import { FaArrowRight, FaAward } from "react-icons/fa";
 const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward }: any) => {
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
-  const responsive470 = useMediaQuery({ query: "(max-width: 470px)" });
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const getNextReward = () => {
     getRewards().then((res) => {
@@ -184,7 +184,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
         <div className="second-section">
           <p className="first-text">PROXIMAMENTE</p>
           <p className="second-text">Refiere amigos</p>
-          <p className="third-text">Obtén premios para ti<br />
+          <p className="third-text">Obtén premios para ti{!responsive1023 && <br />}
             y para ellos.</p>
         </div>
       </SubscriptionContainer>
