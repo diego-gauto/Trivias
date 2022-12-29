@@ -5,30 +5,48 @@ export const SliderContainer = styled.div`
   position: relative;
   overflow: hidden;
 `;
+export const PineappleTextContainer = styled.div`
+top: -10%;
+display: block;
+position: relative;
+`;
 export const GeneralContainer = styled(Container)`
   padding: 0;
   display: block;  
-  padding-top: 17%;
-  height: 1640px;
-  @media only screen and (max-width: 1980px) {
-   
-  padding-top: 10%;
+  padding-top: 17%; 
+  height: 2195px;
+  margin-bottom: 9%;
+
+  @media only screen and (max-width: 2100px) {
+    margin-bottom: 6%;
   }
   @media only screen and (max-width: 1980px) {
-   
+    margin-bottom: 0%;
   padding-top: 10%;
   }
+   
   @media only screen and (max-width: 1840px) {
-   
+    height: 1840px;
+     margin-bottom: 16%;
   padding-top: 8%;
   }
   @media only screen and (max-width: 1720px) {
    
+    margin-bottom: 15%;
   padding-top: 6%;
   }
-  @media only screen and (max-width: 1719px) {
+  @media only screen and (max-width: 1600px) {
    
-  padding-top: 16%;
+    margin-bottom: 13%; 
+  }
+  
+  @media only screen and (max-width: 1440px) {
+   
+  padding-top: 3.5%;
+  }
+  @media only screen and (max-width: 1380px) {
+   
+  padding-top: 2%;
   }
   @media only screen and (max-width: 1028px) {
     display: none;
@@ -36,7 +54,10 @@ export const GeneralContainer = styled(Container)`
 `;
 
 export const People = styled.div`
-  background-size: 100vw;
+@media only screen and (max-width: 1380px) {
+   
+  background-size: 100%;
+  }
   height: 100%;
   background-repeat: no-repeat;
   width: 100%;
@@ -49,30 +70,9 @@ export const PeopleContainer = styled.div`
   height: 100%;
 
   @media only screen and (max-width: 1980px) {
-    height: 70%;
+    height: 100%;
   }
-
-  @media only screen and (max-width: 1980px) {
-    height: 70%;
-  }
-  @media only screen and (max-width: 1980px) {
-    height: 70%;
-  }
-  @media only screen and (max-width: 1720px) {
-    height: 62%;
-  }
-  @media only screen and (max-width: 1600px) {
-    height: 58%;
-  }
-  @media only screen and (max-width: 1440px) {
-    height: 50%;
-  }
-  @media only screen and (max-width: 1280px) {
-    height: 45%;
-  }
-  @media only screen and (max-width: 1030px) {
-    height: 35%;
-  }
+  
 `;
 
 export const BgColor = styled.div`
@@ -120,29 +120,36 @@ export const TittleB = styled.span`
 `;
 
 export const MoreText = styled.div`
-  position: absolute;
-  width: 15%;
-  z-index: 1;
-  right: 8%;
+position: absolute;
+width: 15%;
+z-index: 1;
+right: 8%;
+bottom: 0;
+text-align: right;
+font-size: 32px;
+font-family: "MONTSERRAT-BOLD" !important;
+margin-bottom: 20%;
 
-  bottom: -7%;
-  @media only screen and (max-width: 1980px) {
-    bottom: 17.5%;
+  @media only screen and (max-width: 1980px) { 
+    
+margin-bottom: 22.5%;
+font-size: 24px;
   }
 
+  @media only screen and (max-width: 1840px) {
+    margin-bottom: 25%;
+  }
+  @media only screen and (max-width: 1720px) {
+    font-size: 18px;    margin-bottom: 30%;
+  }
   @media only screen and (max-width: 1440px) {
-    font-size: 18px;
-    bottom: 17.5%;
+    
   }
 
   @media only screen and (max-width: 1030px) {
-    font-size: 14px;
-    bottom: 26.5%;
+    font-size: 14px; 
   }
-
-  text-align: right;
-  font-size: 24px;
-  font-family: "MONTSERRAT-BOLD" !important;
+ 
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
@@ -190,11 +197,19 @@ export const FooterAText = styled.div`
   z-index: 1;
   left: 5%;
 
-  font-size: 20px;
+  font-size: 32px;
   bottom: -42%;
   @media only screen and (max-width: 1980px) {
+    
+  font-size: 28px;
     bottom: -5%;
   }
+  @media only screen and (max-width: 1720px) {
+    
+  font-size: 22px;
+    bottom: -5%;
+  }
+  
   @media only screen and (max-width: 1440px) {
     font-size: 15px;
     bottom: 0%;
