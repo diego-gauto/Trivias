@@ -114,8 +114,10 @@ const Homepage = () => {
         width: "100%",
         padding: "0",
         maxWidth: "100% !important",
-        margin: "0 auto"
-      }}>
+        margin: "0 auto",
+        backgroundColor: "#29282c",
+        paddingBottom: "7%",
+      }} id="landing">
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}

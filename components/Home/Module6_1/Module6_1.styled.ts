@@ -10,6 +10,12 @@ top: -10%;
 display: block;
 position: relative;
 `;
+export const FooterComplement = styled.div`
+height: 100px;
+background-color: #29282c;
+position: sticky;
+bottom: 0%;
+`;
 export const GeneralContainer = styled(Container)`
   padding: 0;
   display: block;  
@@ -118,38 +124,38 @@ export const PeopleContainer = styled.div`
   height: 100%;
 
   @media only screen and (max-width: 2400px) {
-    height: 117%;
+    height: 113%;
   }
   @media only screen and (max-width: 2100px) {
-    height: 110%;
+    height: 106%;
   }
   @media only screen and (max-width: 1980px) {
-    height: 100%;
+    height: 96%;
   }
   @media only screen and (max-width: 1980px) {
-    height: 88%;
+    height: 84%;
   }
   @media only screen and (max-width: 1840px) {
-    height: 70%;
+    height: 66%;
   }
   @media only screen and (max-width: 1720px) {
-    height: 82%;
+    height: 78%;
   }
   @media only screen and (max-width: 1600px) {
-    height: 75%;
+    height: 71%;
   }
 
   @media only screen and (max-width: 1520px) {
-    height: 68%;
+    height: 64%;
   }
   @media only screen and (max-width: 1440px) {
-    height: 70%;
-  }
-  @media only screen and (max-width: 1360px) {
     height: 66%;
   }
+  @media only screen and (max-width: 1360px) {
+    height: 62%;
+  }
   @media only screen and (max-width: 1280px) {
-    height: 55%;
+    height: 51%;
   }
   
 `;

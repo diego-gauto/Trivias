@@ -36,6 +36,7 @@ import {
   LeftFooterContent,
   FooterTextLine,
   PineappleTextContainer,
+  FooterComplement,
 } from "./Module6_1.styled";
 import {
   BgColorMobile,
@@ -209,6 +210,7 @@ export const Module6_1 = (props: IModule6_1) => {
             </FooterBIcons>
 
           </PineappleTextContainer>
+
         </ContainerMain >
 
         <ContainerMain2  ></ContainerMain2>
