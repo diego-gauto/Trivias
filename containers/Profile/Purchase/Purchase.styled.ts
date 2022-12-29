@@ -653,23 +653,98 @@ export const Container = styled.div`
 
     .slider-container{
         background: rgb(148 44 237 / 30%);
-        border-radius: 20px 20px 0px 0;
         .terms{
           text-align: center;
           color: #74549E;
-          font-size: 20px;
+          font-size: 14px;
           span{
             font-weight: 600;
             color: #74549E;
           }
         }
-        .swiper{
-          .pay-slide{
+        .bottom{
+          position: relative;
+          overflow: hidden;
+          background: #d8acf4;
+          padding-top: 40px;
+        }
+        .box {
+            margin: auto;
+            position: relative;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 20px;
+            padding: 40px 20px;
+            .title {
+              text-align: center;
+              font-size: 30px;
+              font-weight: bold;
+              color: #3f1168;
+              span {
+                color: #942ced;
+              }
+              sub {
+                font-style: italic;
+                font-size: 14px;
+                color: #6611c2;
+                font-weight: 400;
+              }
+            }
+            .subtitle {
+              color: #6611c2;
+              font-size: 20px;
+              font-weight: 500;
+              font: small-caption;
+              letter-spacing: 2px;
+            }
+            .info {
+              display: grid;
+              grid-template-columns: auto;
+              grid-gap: 40px;
+              p {
+                color: #8161aa;
+                font-size: 20px;
+                span {
+                  color: #8161aa;
+                  font-weight: bold;
+                }
+              }
+              img {
+                height: auto;
+                width: 80%;
+                border-radius: 10px;
+              }
+            }
+          }
+          .hand{
+            position: relative;
+            z-index: 1;
+            display: flex;
+            width: 400px;
+          }
+          .bg{
+            height: 400px;
+            border-radius: 50%;
+            position: absolute;
+            background: #FFDD67;
+            bottom: -200px;
+            width: 100%;
+            max-width: 400px;
+            z-index: 0;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+        .pay-slide{
+            background: #d8acf4;
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             .title {
+              text-align: center;
               font-size: 28px;
               font-weight: bold;
               color: #3f1168;
@@ -798,77 +873,6 @@ export const Container = styled.div`
             }
 
           }
-
-          .box {
-            padding-bottom: 0 !important;
-            margin: auto;
-            position: relative;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            border-radius: 20px;
-            padding: 40px 20px;
-            .title {
-              text-align: start;
-              font-size: 20px;
-              font-weight: bold;
-              color: #3f1168;
-              span {
-                color: #942ced;
-              }
-              sub {
-                font-style: italic;
-                font-size: 14px;
-                color: #6611c2;
-                font-weight: 400;
-              }
-            }
-            .subtitle {
-              color: #6611c2;
-              font-size: 20px;
-              font-weight: 500;
-              font: small-caption;
-              letter-spacing: 2px;
-            }
-            .info {
-              display: grid;
-              grid-template-columns: auto;
-              grid-gap: 10px;
-              p {
-                color: #8161aa;
-                font-size: 20px;
-                span {
-                  color: #8161aa;
-                  font-weight: bold;
-                }
-              }
-              img {
-                height: auto;
-                width: 80%;
-                border-radius: 10px;
-              }
-            }
-          }
-          .hand{
-            position: relative;
-            z-index: 1;
-            display: flex;
-            width: 400px;
-          }
-          .bg{
-            height: 400px;
-            border-radius: 50%;
-            position: absolute;
-            background: #FFDD67;
-            bottom: -200px;
-            width: 100%;
-            max-width: 400px;
-            z-index: 0;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-    }
     // .bottom{
     //   position: relative;
     //   img{

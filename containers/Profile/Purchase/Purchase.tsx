@@ -390,8 +390,6 @@ const Purchase = () => {
 
   useEffect(() => {
     if (card.cardId) {
-      console.log(1);
-
       FinishPayment();
     }
     if (plan.method == "paypal" && type == "course") {
@@ -714,197 +712,193 @@ const Purchase = () => {
               </div>
             </div>
             <div className="slider-container">
-              <Swiper {...settings} onInit={onInit}>
-                <SwiperSlide>
-                  <div className="box">
-                    <p className="title">¿Qué estás adquiriendo?</p>
-                    <p className="subtitle">PRODUCTOS</p>
-                    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                      <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                      {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
-                        <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
+              <div className="pay-slide">
+                <p className="title">Ya puedes realizar <br /> tu compra, <span>{user}!</span></p>
+                <div className="info-container">
+                  <div className="security-info">
+                    <div className="top">
+                      <AiFillLock></AiFillLock>
+                      <p>Pago <span>100% seguro</span></p>
                     </div>
-                    <div className="info">
-                      <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
-                        Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
-                        stamping, uñas exprés, 3D <span>y muchos más.</span></p>
-                      <img src="../images/purchase/chica_banner.png" alt="" />
-                    </div>
-                    <p className="terms">Al confirmar tu compra, aceptas los <br />
-                      <span>términos, condiciones y políticas de Gonvar</span></p>
-                    <div className="bg"></div>
-                    <img className="hand" src="../images/purchase/neworange.png" alt="" />
+                    <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
+                      Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="pay-slide">
-                    <p className="title">Ya puedes realizar <br /> tu compra, <span>{user}!</span></p>
-                    <div className="info-container">
-                      <div className="security-info">
-                        <div className="top">
-                          <AiFillLock></AiFillLock>
-                          <p>Pago <span>100% seguro</span></p>
-                        </div>
-                        <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
-                          Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
-                      </div>
-                      <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
+                  <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
+                </div>
+                <div className="payment-methods">
+                  <div className="stripe">
+                    <div className="option">
+                      <input type="radio" checked={cardInfo} onClick={() => {
+                        setPayment(false),
+                          setCardInfo(!cardInfo),
+                          setPlan({ method: 'stripe' })
+                      }} />
+                      <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
                     </div>
-                    <div className="payment-methods">
-                      <div className="stripe">
-                        <div className="option">
-                          <input type="radio" checked={cardInfo} onClick={() => {
-                            setPayment(false),
-                              setCardInfo(!cardInfo),
-                              setPlan({ method: 'stripe' })
-                          }} />
-                          <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
-                        </div>
-                        <div className="option">
-                          <input type="radio" checked={payment} onClick={() => {
-                            setPayment(!payment),
-                              setCardInfo(false),
-                              setPlan({ method: 'stripe' })
-                          }} />
-                          <p>Pagaré con <span>tarjetas guardadas</span></p>
-                        </div>
-                        <div className="form-row">
-                          <label>Número de tarjeta</label>
-                          <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
-                            setCard((card: any) => ({ ...card, number: e.target.value }));
-                          }} />
-                          <div className="form-row">
-                            <label>Nombre</label>
-                            <input type="text" placeholder="Nombre del Propietario" onChange={(e) => {
-                              setCard((card: any) => ({ ...card, holder: e.target.value }));
-                            }} />
-                          </div>
-                        </div>
+                    {/* <div className="option">
+                      <input type="radio" checked={payment} onClick={() => {
+                        setPayment(!payment),
+                          setCardInfo(false),
+                          setPlan({ method: 'stripe' })
+                      }} />
+                      <p>Pagaré con <span>tarjetas guardadas</span></p>
+                    </div> */}
+                    <div className="form-row">
+                      <label>Número de tarjeta</label>
+                      <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
+                        setCard((card: any) => ({ ...card, number: e.target.value }));
+                      }} />
+                      <div className="form-row">
+                        <label>Nombre</label>
+                        <input type="text" placeholder="Nombre del Propietario" onChange={(e) => {
+                          setCard((card: any) => ({ ...card, holder: e.target.value }));
+                        }} />
+                      </div>
+                    </div>
+                    <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                      <div className="form-row">
+                        <label>Fecha de expiración</label>
                         <div style={{ "display": "flex", "justifyContent": "space-between" }}>
-                          <div className="form-row">
-                            <label>Fecha de expiración</label>
-                            <div style={{ "display": "flex", "justifyContent": "space-between" }}>
-                              <select className="short" onChange={(e) => {
-                                setCard((card: any) => ({ ...card, exp_month: e.target.value }));
-                              }}>
-                                <option value="">Mes</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                              </select>
-                              <select className="short" onChange={(e) => {
-                                setCard((card: any) => ({ ...card, exp_year: e.target.value }));
-                              }}>
-                                <option value="">Año</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
-                                <option value="32">32</option>
-                                <option value="33">33</option>
-                                <option value="34">34</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="form-row">
-                            <label>CVV</label>
-                            <input className="short" type="password" placeholder="∗∗∗" maxLength={4} onChange={(e) => {
-                              setCard((card: any) => ({ ...card, cvc: e.target.value }));
-                            }} />
-                          </div>
+                          <select className="short" onChange={(e) => {
+                            setCard((card: any) => ({ ...card, exp_month: e.target.value }));
+                          }}>
+                            <option value="">Mes</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                          <select className="short" onChange={(e) => {
+                            setCard((card: any) => ({ ...card, exp_year: e.target.value }));
+                          }}>
+                            <option value="">Año</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                          </select>
                         </div>
-                        {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
-                        {loader && <LoaderContainSpinner />}
                       </div>
-                      <div className="paypal" onClick={() => {
-
-                      }}>
-                        {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
-                          "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
-                          currency: "MXN",
-                          'vault': true,
-                        }}
-                        >
-                          {type == 'subscription' && <PayPalButtons
-                            style={{
-                              color: "blue",
-                              layout: 'horizontal',
-                              shape: 'pill',
-                              height: 50,
-
-                            }}
-                            createSubscription={(data, actions) => {
-                              setPlan({ method: "paypal" })
-                              return actions.subscription.create({
-                                plan_id: 'P-6P515571TU0367642MMDGG4Y'
-                              })
-                            }}
-                            onApprove={(data: any, actions) => {
-                              let today = new Date().getTime() / 1000;
-                              let finalDate = 0;
-                              finalDate = today + 2629800;
-                              updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title, method: "paypal" }, userData.id).then(() => {
-                                setConfirmation(false);
-                                setPay(true);
-                              })
-                              return data
-                            }}
-                          />}
-                          {type == 'course' && <PayPalButtons
-                            style={{
-                              color: "blue",
-                              layout: 'horizontal',
-                              shape: 'pill',
-                              height: 50,
-                            }}
-                            createOrder={(data, actions) => {
-                              let price = product.price;
-                              if (coupon) {
-                                if (coupon.type == 'amount') {
-                                  price = price - coupon.discount;
-                                } else {
-                                  price = (price - (coupon.discount / 100) * price)
-                                }
-                              }
-                              return actions.order.create({
-
-                                purchase_units: [
-                                  {
-                                    amount: {
-                                      value: price,
-                                    },
-                                  },
-                                ],
-                              });
-                            }}
-                            onApprove={(data, actions: any) => {
-                              return actions.order.capture().then((details: any) => {
-                                setPlan({ method: "paypal" })
-                              });
-                            }}
-                          />}
-                        </PayPalScriptProvider>}
-                        <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
+                      <div className="form-row">
+                        <label>CVV</label>
+                        <input className="short" type="password" placeholder="∗∗∗" maxLength={4} onChange={(e) => {
+                          setCard((card: any) => ({ ...card, cvc: e.target.value }));
+                        }} />
                       </div>
                     </div>
+                    {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
+                    {loader && <LoaderContainSpinner />}
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                  <div className="paypal" onClick={() => {
+
+                  }}>
+                    {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                      "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
+                      currency: "MXN",
+                      'vault': true,
+                    }}
+                    >
+                      {type == 'subscription' && <PayPalButtons
+                        style={{
+                          color: "blue",
+                          layout: 'horizontal',
+                          shape: 'pill',
+                          height: 50,
+
+                        }}
+                        createSubscription={(data, actions) => {
+                          setPlan({ method: "paypal" })
+                          return actions.subscription.create({
+                            plan_id: 'P-6P515571TU0367642MMDGG4Y'
+                          })
+                        }}
+                        onApprove={(data: any, actions) => {
+                          let today = new Date().getTime() / 1000;
+                          let finalDate = 0;
+                          finalDate = today + 2629800;
+                          updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title, method: "paypal" }, userData.id).then(() => {
+                            setConfirmation(false);
+                            setPay(true);
+                          })
+                          return data
+                        }}
+                      />}
+                      {type == 'course' && <PayPalButtons
+                        style={{
+                          color: "blue",
+                          layout: 'horizontal',
+                          shape: 'pill',
+                          height: 50,
+                        }}
+                        createOrder={(data, actions) => {
+                          let price = product.price;
+                          if (coupon) {
+                            if (coupon.type == 'amount') {
+                              price = price - coupon.discount;
+                            } else {
+                              price = (price - (coupon.discount / 100) * price)
+                            }
+                          }
+                          return actions.order.create({
+
+                            purchase_units: [
+                              {
+                                amount: {
+                                  value: price,
+                                },
+                              },
+                            ],
+                          });
+                        }}
+                        onApprove={(data, actions: any) => {
+                          return actions.order.capture().then((details: any) => {
+                            setPlan({ method: "paypal" })
+                          });
+                        }}
+                      />}
+                    </PayPalScriptProvider>}
+                    <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
+                  </div>
+                </div>
+              </div>
+              <div className="box">
+                <p className="title">¿Qué estás adquiriendo?</p>
+                <p className="subtitle">PRODUCTOS</p>
+                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                  <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                    <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
+                </div>
+                <div className="info">
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
+                    Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
+                    stamping, uñas exprés, 3D <span>y muchos más.</span></p>
+                  <img src="../images/purchase/chica_banner.png" alt="" />
+                </div>
+              </div>
+              <div className="bottom">
+                <p className="terms">Al confirmar tu compra, aceptas los <br />
+                  <span>términos, condiciones y políticas de Gonvar</span></p>
+                <div className="bg"></div>
+                <img className="hand" src="../images/purchase/neworange.png" alt="" />
+              </div>
             </div>
           </div>
           {/* <ModalPurchase1 show={show} setShow={setShow} handleCoupons={handleCoupons} userId={userData?.id} /> */}
