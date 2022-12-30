@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FooterContainerMobile = styled.div`
+  z-index: 2;
   display: none;
   width: 100%;
   background-color: #29282c;
