@@ -37,10 +37,12 @@ import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
 
-const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward }: any) => {
+const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward, user }: any) => {
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  let date = new Date().getTime() / 1000;
+  const [formatDate, setFormatDate] = useState("")
 
   const getNextReward = () => {
     getRewards().then((res) => {
@@ -63,6 +65,12 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
   }
   useEffect(() => {
     getNextReward();
+    let tempDate = new Date((user.membership.finalDate) * 1000);
+    let tempDay = tempDate.getDate();
+    let tempMonth = tempDate.getMonth() + 1;
+    let tempYear = tempDate.getFullYear();
+    setFormatDate(`${tempDay}/${tempMonth}/${tempYear}`);
+
   }, [])
   useEffect(() => {
     if (timeLevel) {
@@ -166,18 +174,20 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
               Suscripción actual
             </p>
             <div className="subscription-info">
-              <p >
+              {user.membership.finalDate > date ? <p >
                 Gonvar+<br />
                 <span className="span">Suscripción mensual</span>
-              </p>
+              </p> :
+                <p>Sin subscripción</p>}
             </div>
             <p className="text-1">
               Próximo cargo
             </p>
             <div className="subscription-info">
-              <p >
-                <span className="span">11/07/2022</span>
-              </p>
+              {user.membership.finalDate > date ? <p >
+                <span className="span">{formatDate}</span>
+              </p> :
+                <p><span className="span">s/f</span></p>}
             </div>
           </div>
         </div>

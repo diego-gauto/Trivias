@@ -234,6 +234,7 @@ const User = () => {
           barProgress={barProgress}
           level={currentLevel}
           max={level.maximum}
+          user={userData}
           reward={reward}
           setReward={setReward}
           timeScore={timeScore}

@@ -11,8 +11,6 @@ export const History = (user: any) => {
   const [allOptions, setAllOptions] = useState([])
 
   const handleLeft = () => {
-    console.log(option);
-
     if (option == 0) {
       setOption(allOptions.length - 1)
     }
