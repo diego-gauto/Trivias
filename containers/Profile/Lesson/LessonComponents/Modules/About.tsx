@@ -1,11 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
 import { PositionTitle, TitleContain, Titles } from './Module.styled';
 import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
+import { getTeacherCourse } from '../../../../../store/actions/courseActions';
 
 const About = ({ value, setValue, data, teacherCreds }: any) => {
+
+  const [teacher, setTeacher] = useState<any>([])
+
+  useEffect(() => {
+    console.log(teacherCreds);
+
+    if (teacherCreds.length > 0) {
+      getTeacherCourse(teacherCreds[0].name).then((res: any) => {
+        setTeacher(res[0])
+      })
+    }
+  }, [])
+
   return (
     <>
       <TitleContain>
@@ -46,15 +60,9 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
         <div className='teacher-container'>
           <img src="/images/teachers/Brenda_instructora.jpg" alt="" />
           <p className='title'>Conoce a <br />
-            <span>tu instructora</span>
+            <span>tu instructor</span>
           </p>
-          <p>Mi nombre es Raquel
-            Hernández y soy
-            aplicadora de uñas
-            profesional
-            especializada en
-            crear e impulsar
-            productos de alto</p>
+          <p>{teacher.about}</p>
         </div>
       </AboutContain>
     </>

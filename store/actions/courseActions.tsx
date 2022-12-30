@@ -477,3 +477,13 @@ export const deleteQuiz = async (courseId: any, seasonId: any, lessonId: any) =>
     return "200"
   })
 }
+
+export const getTeacherCourse = async (name: string) => {
+  let data: any = []
+  const docRef = query(collection(db, "professor"), where("name", "==", name));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
