@@ -230,7 +230,9 @@ const Purchase = () => {
       product: product.title,
       brand: card.brand,
       userId: userData.id,
-      method: plan.method
+      method: plan.method,
+      type: type,
+      finalDate: 0
     }
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
@@ -308,6 +310,7 @@ const Purchase = () => {
               updateCoupon(coupon, coupon.id);
             }
             invoice.amount = price * 100;
+            invoice.finalDate = (new Date().getTime() / 1000) + product.duration * 86400;
             const course = {
               id: id,
               duration: (new Date().getTime() / 1000) + product.duration * 86400
@@ -340,7 +343,8 @@ const Purchase = () => {
           updateCoupon(coupon, coupon.id);
         }
         delete invoice.brand;
-        invoice.amount = price * 100
+        invoice.amount = price * 100;
+        invoice.finalDate = (new Date().getTime() / 1000) + product.duration * 86400;
         const course = {
           id: id,
           duration: (new Date().getTime() / 1000) + product.duration * 86400

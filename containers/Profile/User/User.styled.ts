@@ -2015,6 +2015,7 @@ export const HistoryContainer = styled.div`
         }
         .second-info {
           width: 84px;
+          word-break: break-all;
           @media (max-width: 1200px) {
             width: 70px;
           }

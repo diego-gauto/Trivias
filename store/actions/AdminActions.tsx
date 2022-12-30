@@ -154,8 +154,6 @@ export const signInWithCreds = (signUpData: { credentials: any; }) => {
 
 export const accessWithAuthProvider = (provider: any) => {
 
-
-
   switch (provider) {
     case "Google":
       provider = new firebase.auth.GoogleAuthProvider();

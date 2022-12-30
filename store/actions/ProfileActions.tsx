@@ -1,5 +1,5 @@
 import {
-  collection, doc, getDocs, query, setDoc, addDoc, deleteDoc, orderBy, updateDoc,
+  collection, doc, getDocs, query, setDoc, addDoc, deleteDoc, orderBy, updateDoc, where,
 } from "firebase/firestore";
 import { db } from '../../firebase/firebaseConfig';
 import { v4 as uuidv4 } from 'uuid';
@@ -45,4 +45,14 @@ export const updatePaymentMethod = async (pm: any, userId: any) => {
     'membership.paymentMethod': pm,
   })
   return 'exito'
+}
+
+export const getUserInvoices = async (email: string) => {
+  let data: any = []
+  const docRef = query(collection(db, "invoice"), where("userEmail", "==", email), orderBy("paidAt", "desc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
 }

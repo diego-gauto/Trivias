@@ -246,7 +246,7 @@ const User = () => {
           <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
           {/* Fourth Container */}
           {/* <UserData data={userData} pm={paymentMethod} /> */}
-          <History />
+          <History user={userData} />
         </ThirdBox>
       </SecondBox>
       {/* <Link href="/">
