@@ -7,6 +7,21 @@ export const SlideModuleContainer = styled(Container)`
   margin-top: 10px;
   margin-bottom: 10px;
   padding-right: 10px;
+  .hover {
+    &:hover {
+      transform: scale(1.03);
+      transition: 0.5s ease all;
+    }
+    @media only screen and (max-width: 1023px) {
+      &:hover {
+        transform: scale(1);
+      }
+      &:active {
+        transform: scale(1.03);
+        transition: 0.5s ease all;
+      }
+    }
+  }
 `;
 
 export const SlideImg = styled.div`
