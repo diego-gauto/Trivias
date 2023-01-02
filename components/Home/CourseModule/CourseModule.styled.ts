@@ -43,10 +43,10 @@ export const CardContainer = styled(Card)`
     background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
     color: #ede7f2;
     border: none;
-    padding: 4px 18px;
-    border-radius: 10px;
+    padding: 7px 18px;
+    border-radius: 12px;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: default;
     font-weight: 500;
     span {
@@ -56,7 +56,7 @@ export const CardContainer = styled(Card)`
   .card-title {
     font-size: 36px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   .card-subtitle {
     font-size: 24px;
@@ -69,9 +69,17 @@ export const CardContainer = styled(Card)`
     line-height: 1.3em;
   }
   .first-col {
-    padding-left: 150px;
+    padding-left: 80px;
+    .level {
+      width: fit-content;
+      position: relative;
+      bottom: 0px;
+      margin-bottom: 20px;
+      flex-wrap: nowrap;
+    }
   }
   .second-col {
+    align-self: center;
     padding-top: 30px;
     text-align: center;
   }
