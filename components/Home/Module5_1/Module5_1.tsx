@@ -93,7 +93,7 @@ export const Module5_1 = (props: IModule5_1) => {
       },
       550: {
         slidesPerView: 2,
-        spaceBetween: 15,
+        spaceBetween: 30,
       },
       460: {
         slidesPerView: 1,

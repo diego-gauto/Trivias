@@ -4,7 +4,7 @@ export interface IModule2_1 {
   data: SectionData;
   // Image to display in second column
   img: string;
-
+  user: any;
 }
 
 export interface SectionData {
@@ -15,6 +15,5 @@ export interface SectionData {
   botonSecundario: string;
   primerCaracteristica: string;
   segundaCaracteristica: string;
-  terceraCaracteristica: string; 
+  terceraCaracteristica: string;
 }
-

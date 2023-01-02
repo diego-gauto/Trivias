@@ -10,6 +10,7 @@ import { ICourseModuleProps } from "./ICourseModuleProps";
 import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
 import { useEffect, useState } from "react";
 import { NAILS_MASTER_COURSE_ID } from "../../../constants/gonvar";
+import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
 declare let Hls: any
 
 export const CourseModule = (props: ICourseModuleProps) => {
@@ -48,9 +49,15 @@ export const CourseModule = (props: ICourseModuleProps) => {
         ></video>
       </div>
       <Row>
-        <Col sm={12} md={7} className="first-col">
+        <Col sm={12} md={5} className="first-col">
           <Button className="new-btn">NAILS <span>ACADEMY</span></Button>
           <Card.Title>{data.courseTittle}</Card.Title>
+          <Row className="level">
+            {(data.courseDifficulty == "Muy Fácil" || data.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+            {(data.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+            {(data.courseDifficulty == "Avanzado" || data.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+            <Text03 style={{ padding: 0 }} level={data.courseDifficulty}><span>{data.courseDifficulty}</span></Text03>
+          </Row>
           <Card.Subtitle>
             Aprende desde cero a aplicar <br />
             uñas acrílicas en técnica de Tips.

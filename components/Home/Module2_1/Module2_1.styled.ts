@@ -1,14 +1,19 @@
 import { Col, Container, Image, Row } from "react-bootstrap";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ModuleContainer = styled(Container)`
+export const ModuleContainer = styled(Container)<{ user: any }>`
   background-color: rgb(237, 231, 242);
   position: relative;
   margin-top: 90px;
   padding-inline: 0;
   @media only screen and (max-width: 1023px) {
     margin-top: 74px;
+    ${(props) =>
+      !props.user &&
+      css`
+        margin-top: 57px;
+      `}
   }
   .background {
     width: 100%;

@@ -12,10 +12,11 @@ export interface ICourse {
   coursePrice: number;
   courseProfessor: any;
   coursePublishYear: number;
+  courseDifficulty: string;
   courseSubtittle: string;
   courseTittle: string;
   courseType: string;
-  createdAt:any; 
+  createdAt: any;
   lessons: any;
   reference: string;
   seasons: any;

@@ -118,7 +118,7 @@ const Homepage = () => {
         backgroundColor: "#29282c",
         paddingBottom: "7%",
       }} id="landing">
-      <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} />
+      <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} user={userData} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule loggedIn={loggedIn} user={userData} courseId={courseGonvarPlus} />
