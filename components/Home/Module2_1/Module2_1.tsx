@@ -1,50 +1,21 @@
-import { Col, Image, Row } from "react-bootstrap";
 import DOMPurify from "dompurify"
 
 import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
 import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
 import { useEffect, useState } from "react";
 
-import BG1 from "./MediaSources/mujeres_gonvar.png";
-import BG2 from "./MediaSources/bgSection1.png";
-import BG3 from "./MediaSources/bgSection1_c1.png";
-import BG4 from "./MediaSources/bgSection1_c2.png";
-import BG5 from "./MediaSources/mobileBG1.png";
-import Background6 from "./MediaSources/mobileBG2.png";
-import BG7 from "./MediaSources/mujeres_gonvar2.png";
-
 import { useRouter } from "next/router";
 import {
-  ButtonsContainerMobile, ColContainerLeft,
-  ColContainerRight, ConnectorColor, FirstSectionContainer, FirstSectionContainer_Mobile,
-  ModuleContainerBG1alt, ModuleContainerBG1alt_Mobile, ModuleContainerBG2alt,
-  ModuleContainerBG2alt_Mobile, ModuleContainerBG3alt_Mobile,
-  ModuleContainerBGColor_Mobile, Subtittles, Subtittles_Mobile,
-  TittleContainer, TittleContainer_Mobile
-}
-  from "../Module2_1/Module2_1.styled";
-import {
   TitleCenter, ModuleContainer,
-  LeftImage,
-  RightImage,
   Tittle,
   Subtittle1,
-  Subtittle2,
-
-  ModuleContainer_Mobile,
-  TitleCenter_Mobile,
-  LeftImage_Mobile,
-  RightImage_Mobile,
-  Tittle_Mobile,
-  Subtittle1_Mobile,
-  Subtittle2_Mobile,
 } from "../Module2_1/Module2_1.styled";
 import { IModule2_1 } from "./IModule2_1";
 import { useMediaQuery } from "react-responsive";
 
 
 export const Module2_1 = (props: IModule2_1) => {
-  const [iconImagesData, setIconImagesData] = useState([]);
+  const { data, img, user } = props;
   const [loading, setLoading] = useState(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
@@ -55,7 +26,6 @@ export const Module2_1 = (props: IModule2_1) => {
   }
   const router = useRouter();
 
-  const { data, img } = props;
   const scrollToModule2 = () => {
     window.scrollTo(0, window.innerHeight * 0.75)
   }
@@ -68,10 +38,9 @@ export const Module2_1 = (props: IModule2_1) => {
 
   }, [data]);
 
-
   return (
     <>
-      <ModuleContainer fluid id="webView">
+      <ModuleContainer fluid id="webView" user={user}>
         {responsive1023 && <img className="bg-responsive" src="../images/Landing/mobileBG2.png" alt="" />}
         <img className="background" src="../images/Landing/bgSection1.png" alt="" />
         <img className="women" src="../images/Landing/mujeres_gonvar-min.png" alt="" />
