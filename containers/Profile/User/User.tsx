@@ -104,7 +104,6 @@ const User = () => {
   }
 
 
-
   const getCurrentLevel = () => {
     getLevel().then((res) => {
       res = res.filter((data: any, index: any) => data.minimum <= userData.score)

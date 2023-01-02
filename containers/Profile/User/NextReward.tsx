@@ -39,14 +39,20 @@ import { FaArrowRight, FaAward } from "react-icons/fa";
 
 const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward, user }: any) => {
   const [prize, setPrize] = useState<any>([]);
+  const [prizeSize, setPrizeSize] = useState<any>(0);
   const [timePrize, setTimePrize] = useState<any>([]);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
 
   const getNextReward = () => {
+    let tempSize: any = [];
     getRewards().then((res) => {
+      tempSize = res.filter((data: any) => (data.points < score));
       res = res.filter((data: any) => (data.points > score));
+      if (tempSize) {
+        setPrizeSize(tempSize.length);
+      }
       if (res[0] == null) {
         setPrize([])
       }
@@ -116,7 +122,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                   <span> por puntaje</span></p>
                 <div className="bottom-contain">
                   <p className="point-number">
-                    08
+                    {prizeSize >= 9 ? prizeSize : "0" + prizeSize}
                   </p>
                   <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
@@ -147,7 +153,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
               {
                 reward == 0 &&
                 <p>
-                  Siguiente recompensa <span>2 Monómeros Gonvar</span>
+                  Siguiente recompensa <span>{prize.title}</span>
                 </p>
               }
               {
