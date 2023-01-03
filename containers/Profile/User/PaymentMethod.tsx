@@ -134,7 +134,17 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
                           className="card"
                           onClick={() => data.membership.paymentMethod != pm.cardId && updateUserCard(pm)}
                         >
-                          <CardIconResp brand={pm.brand} />
+                          <CardIconResp>
+                            {
+                              pm.brand == "visa" &&
+                              <img src="/images/profile/visaLogo.png" />
+                            }
+                            {
+                              pm.brand == "mastercard" &&
+                              <img src="/images/profile/masterCardLogo.png" />
+                            }
+                          </CardIconResp>
+                          {/* <CardIconResp brand={pm.brand} /> */}
                           <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
                           {
                             data.membership.paymentMethod == pm.cardId
@@ -155,37 +165,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
                         </div>
 
                       </div>
-                      {/* {
-              editCard == index + 1 &&
-              <div className="edit-mode">
-                <div className="info"
-                  style={{ paddingRight: 60 }}
-                >
-                  <div className="date">
-                    <p>
-                      Fecha de expiración
-                    </p>
-                    <div className="inputs">
-                      <input
-                        placeholder="Mes"
-                        className="date-inputs"
-                      />
-                      <input
-                        placeholder="Año"
-                        className="date-inputs"
-                      />
-                    </div>
-                  </div>
-                  <div className="date">
-                    <p>CVV</p>
-                    <input
-                      placeholder="***"
-                      className="date-inputs"
-                    />
-                  </div>
-                </div>
-              </div>
-            } */}
                     </React.Fragment>
                   )
                 })
@@ -274,43 +253,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
       }
 
     </PaymentMethodContainer>
-    // <ProfilePayment>
-    //   <PaymentTitle>
-    //     Métodos de Pago
-    //   </PaymentTitle>
-    //   {loader ? <LoaderContain /> :
-    //     <>
-    //       {pm.length > 0 ? <PayContainer>
-    //         {pm.map((pm: any, index: any) => {
-    //           return (
-    //             <PaymentBox key={"pmUser" + index}>
-    //               <PayBox>
-    //                 <CardIconResp brand={pm.brand} />
-    //                 <PaymentText>
-    //                   {pm.brand} terminada en {pm.last4}
-    //                 </PaymentText>
-    //               </PayBox>
-    //               <DeleteContain onClick={() => {
-    //                 detachPayment(pm)
-    //               }}>
-    //                 <DeleteText>
-    //                   Eliminar método
-    //                 </DeleteText>
-    //                 <TrashIcon />
-    //               </DeleteContain>
-    //             </PaymentBox>
-    //           )
-    //         })
-    //         }
-    //       </PayContainer> :
-    //         <p>Sin métodos de pago...</p>}
-    //     </>
-    //   }
-    //   <AddPay onClick={handleShow}>
-    //     Añadir método de pago
-    //   </AddPay>
-    //   <Modal1 show={show} setShow={setShow} data={data} handleClick={handleClick} />
-    // </ProfilePayment>
   )
 }
 export default PaymentMethod;

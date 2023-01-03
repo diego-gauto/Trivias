@@ -1,41 +1,19 @@
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import {
-  AddPay,
   ArrowRight,
-  CompleteBar,
-  Currentlvl,
-  DataTitle,
-  ImageContain,
-  Nextlvl,
-  Pointbox,
-  PointsBox,
-  PolygonDown,
-  ProgressBar1,
-  ProgressBar2,
-  RewardBox,
   RewardCenterLink,
   RewardCenterLinkNoReward,
-  RewardContain,
   RewardContainer,
-  RewardData,
-  RewardImage,
-  RewardInfo,
-  RewardParagraph,
-  RewardPoints,
-  RewardTitle,
-  RewardTitleBox,
   SecondContainer,
   SubscriptionContainer,
-  UserPoints,
-  VectorLeft,
-  VectorRight,
 } from "./User.styled";
 import { useEffect, useState } from "react";
 import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
+const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward, user }: any) => {
   const [prize, setPrize] = useState<any>([]);
@@ -200,127 +178,14 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
         <div className="second-section">
           <p className="first-text">PROXIMAMENTE</p>
           <p className="second-text">Refiere amigos</p>
-          <p className="third-text">Obtén premios para ti{!responsive1023 && <br />}
+          <p className="third-text">Obtén premios para ti {!responsive1023 && <br />}
             y para ellos.</p>
+        </div>
+        <div className="img-hand">
+          <img src={handImage} />
         </div>
       </SubscriptionContainer>
     </SecondContainer>
-
-    // <RewardContain>
-    //   <DataTitle>
-    //     Siguiente Recompensa...
-    //   </DataTitle>
-    //   <RewardBox>
-    //     <VectorLeft onClick={() => { setReward(!reward) }} />
-    //     {
-    //       reward == false &&
-    //       <RewardTitle>
-    //         Recompensas por puntuaje
-    //       </RewardTitle>
-    //     }
-    //     {
-    //       reward == true &&
-    //       <RewardTitle>
-    //         Recompensas por tiempo
-    //       </RewardTitle>
-    //     }
-    //     <VectorRight onClick={() => { setReward(!reward) }} />
-    //   </RewardBox>
-    //   {
-    //     reward == false &&
-    //     <>
-    //       <Pointbox>
-    //         <Currentlvl>
-    //           {
-    //             level - 1
-    //           }
-    //         </Currentlvl>
-    //         <CompleteBar>
-    //           <ProgressBar1 barProgress={barProgress}>
-    //             <PointsBox>
-    //               <UserPoints style={{ display: responsive470 ? "none" : "" }}>
-    //                 {score}
-    //               </UserPoints>
-    //               <PolygonDown />
-    //             </PointsBox>
-    //           </ProgressBar1>
-    //         </CompleteBar>
-    //         <Nextlvl>
-    //           {
-    //             level
-    //           }
-    //         </Nextlvl>
-    //       </Pointbox>
-    //       <RewardData>
-    //         <ImageContain>
-    //           <RewardImage src={prize.path} />
-    //         </ImageContain>
-    //         <RewardInfo>
-    //           <RewardTitleBox>
-    //             {prize.title}
-    //           </RewardTitleBox>
-    //           <RewardPoints>
-    //             {prize.points} puntos
-    //           </RewardPoints>
-    //           <RewardParagraph>
-    //             {prize.about}
-    //           </RewardParagraph>
-
-    //         </RewardInfo>
-
-    //       </RewardData>
-    //       {rewardCenter}
-    //     </>
-    //   }
-    //   {
-    //     reward == true &&
-    //     <>
-    //       <Pointbox>
-    //         <Currentlvl>
-    //           {timeLevel}
-    //         </Currentlvl>
-    //         <CompleteBar>
-    //           <ProgressBar2 barProgress={timeProgress}>
-    //             <PointsBox>
-    //               <UserPoints style={{ display: responsive470 ? "none" : "" }}>
-
-    //               </UserPoints>
-    //               <PolygonDown />
-    //             </PointsBox>
-    //           </ProgressBar2>
-    //         </CompleteBar>
-    //         <Nextlvl>
-    //           {timeLevel + 1}
-    //         </Nextlvl>
-    //       </Pointbox>
-    //       {timeLevel > 0 ? <RewardData>
-    //         <ImageContain>
-    //           <RewardImage src={timePrize.path} />
-    //         </ImageContain>
-    //         <RewardInfo>
-    //           <RewardTitleBox>
-    //             {timePrize.title}
-    //           </RewardTitleBox>
-    //           <RewardPoints>
-    //             {
-    //               timePrize.month <= 1 ? timePrize.month + " mes" : timePrize.month + " meses"
-    //             }
-    //           </RewardPoints>
-    //           <RewardParagraph>
-    //             {timePrize.about}
-    //           </RewardParagraph>
-    //           {rewardCenter}
-    //         </RewardInfo>
-    //       </RewardData> :
-    //         <>
-    //           <p>No hay premios en este nivel...</p>
-    //           {rewardCenterNoReward}
-    //         </>
-    //       }
-    //     </>
-    //   }
-    // </RewardContain>
-
   )
 }
 export default NextReward;

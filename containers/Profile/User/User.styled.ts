@@ -300,27 +300,17 @@ export const VisaIcon = styled.i`
   width: 47px;
   background-position: center;
 `;
-export const CardIconResp = styled("i")<{ brand: any }>`
-  ${(props) =>
-    props.brand == "visa" &&
-    css`
-      background-image: url(../images/visa-icon.png);
-    `}
-  ${(props) =>
-    props.brand == "mastercard" &&
-    css`
-      background-image: url(../images/mastercard-icon.png);
-    `}
-  ${(props) =>
-    props.brand == "amex" &&
-    css`
-      background-image: url(../images/amex-icon.png);
-    `}
-  
-  background-repeat:no-repeat;
-  min-width: 59px;
-  min-height: 33px;
-  background-position: center;
+export const CardIconResp = styled.div`
+  width: fit-content;
+  img {
+    width: 50px;
+    @media (max-width: 750px) {
+      width: 40px;
+    }
+    @media (max-width: 650px) {
+      width: 35px;
+    }
+  }
 `;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);
@@ -1527,6 +1517,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
   flex-direction: column;
   justify-content: space-between;
   min-width: 60%;
+  gap: 10px;
   @media (max-width: 1200px) {
     min-width: 420px;
   }
@@ -1870,6 +1861,41 @@ export const RewardContainer = styled.div<{ reward: any }>`
 export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
+  .img-hand {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    @media (max-width: 1500px) {
+      width: 100px;
+    }
+    @media (max-width: 1150px) {
+      width: 90px;
+    }
+    @media (max-width: 1065px) {
+      width: 80px;
+    }
+    @media (max-width: 1023px) {
+      width: 140px;
+    }
+    @media (max-width: 600px) {
+      width: 120px;
+    }
+    img {
+      width: 120px;
+      @media (max-width: 1500px) {
+        width: 100px;
+      }
+      @media (max-width: 1023px) {
+        width: 160px;
+        right: 20px;
+      }
+      @media (max-width: 600px) {
+        width: 130px;
+      }
+    }
+  }
   width: 40%;
   @media (max-width: 1200px) {
     min-width: 260px;
@@ -1959,21 +1985,40 @@ export const SubscriptionContainer = styled.div`
       width: fit-content;
     }
     .second-text {
-      font-size: 30px;
+      font-size: 26px;
       color: #942ced;
       line-height: 25px;
       font-weight: 600;
-      @media (max-width: 1200px) {
-        font-size: 26px;
+      @media (max-width: 1150px) {
+        font-size: 24px;
+      }
+      @media (max-width: 1065px) {
+        font-size: 22px;
+      }
+      @media (max-width: 1023px) {
+        font-size: 30px;
+      }
+      @media (max-width: 600px) {
+        font-size: 24px;
       }
     }
     .third-text {
-      font-size: 18px;
+      font-size: 16px;
       color: #3f1168;
       font-weight: 600;
       line-height: 20px;
-      @media (max-width: 1200px) {
-        font-size: 16px;
+      @media (max-width: 1150px) {
+        font-size: 14px;
+      }
+      @media (max-width: 1065px) {
+        font-size: 12px;
+      }
+      @media (max-width: 1023px) {
+        font-size: 18px;
+      }
+      @media (max-width: 600px) {
+        width: 200px;
+        font-size: 14px;
       }
     }
   }
@@ -2222,6 +2267,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         width: 100%;
         border-radius: 100px;
         display: flex;
+        gap: 10px;
         flex-direction: row;
         justify-content: space-between;
         background-color: #3f1168;
