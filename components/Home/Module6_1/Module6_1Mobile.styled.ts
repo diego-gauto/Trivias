@@ -147,46 +147,32 @@ export const TittleBMobile = styled.span`
 `;
 
 export const MoreTextMobile = styled.div`
-  position: absolute;
-  width: 33%;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
   z-index: 1;
   font-size: 20px;
-  bottom: -12.5%;
-  left: 10%;
   text-align: left;
-
-  @media only screen and (max-width: 770px) {
-    font-size: 9px;
-    bottom: 17%;
-  }
-  @media only screen and (max-width: 390px) {
-    font-size: 9px;
-    bottom: 14%;
-  }
-
   font-family: "MONTSERRAT-BOLD" !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
   }
+  @media only screen and (max-width: 1023px) {
+    display: flex;
+  }
+  @media only screen and (max-width: 500px) {
+    font-size: 16px;
+  }
 `;
 export const MoreText_1Mobile = styled.div`
-  width: 110%;
-  bottom: 570px;
   color: #ede7f2;
-
-  margin-bottom: 5px;
   transition: all 0.2s ease-in-out;
-
   &:hover {
     transform: scale(1.1);
   }
 `;
 export const MoreText_2Mobile = styled.div`
-  width: 110%;
-  bottom: 570px;
-
-  margin-bottom: 5px;
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -195,10 +181,7 @@ export const MoreText_2Mobile = styled.div`
   color: #ede7f2;
 `;
 export const MoreText_3Mobile = styled.div`
-  width: 110%;
-  bottom: 570px;
   color: #ede7f2;
-  margin-bottom: 5px;
   transition: all 0.2s ease-in-out;
 
   &:hover {
