@@ -80,7 +80,7 @@ export const Module5_1 = (props: IModule5_1) => {
     },
     speed: 4000,
     freeMode: true,
-    slidesPerView: 1,
+    slidesPerView: 1.2,
     spaceBetween: 20,
     breakpoints: {
       1250: {
@@ -91,13 +91,13 @@ export const Module5_1 = (props: IModule5_1) => {
         slidesPerView: 3,
         spaceBetween: 30,
       },
-      550: {
-        slidesPerView: 2,
+      // 550: {
+      //   slidesPerView: 2,
+      //   spaceBetween: 30,
+      // },
+      420: {
+        slidesPerView: 1.5,
         spaceBetween: 30,
-      },
-      460: {
-        slidesPerView: 1,
-        spaceBetween: 15,
       }
     }
   };

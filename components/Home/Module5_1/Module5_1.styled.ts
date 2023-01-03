@@ -18,29 +18,25 @@ export const People = styled.div`
   width: 100%;
   position: relative;
   background-position-x: 50%;
-  z-index: 1; 
+  z-index: 1;
 
   top: 0%;
-    height: 100%; 
-    background-size: 81%;
+  height: 100%;
+  background-size: 81%;
 
   @media only screen and (max-width: 2400px) {
-     
   }
   @media only screen and (max-width: 2100px) {
     top: 0%;
-    height: 100%; 
+    height: 100%;
     background-size: 81%;
   }
   @media only screen and (max-width: 1980px) {
-    
   }
   @media only screen and (max-width: 1840px) {
-    
   }
 
   @media only screen and (max-width: 1720px) {
-   
   }
   @media only screen and (max-width: 1600px) {
     top: 0%;
@@ -48,44 +44,34 @@ export const People = styled.div`
     background-size: 75%;
   }
   @media only screen and (max-width: 1520px) {
-    
   }
-
 
   @media only screen and (max-width: 1440px) {
-    
   }
   @media only screen and (max-width: 1360px) {
-    
   }
 
   @media only screen and (max-width: 1280px) {
-     
     background-size: 80%;
   }
   @media only screen and (max-width: 1200px) {
-    
     background-size: 85%;
   }
   @media only screen and (max-width: 1150px) {
-    
   }
   @media only screen and (max-width: 1080px) {
-     
     background-size: 88%;
   }
   @media only screen and (max-width: 1029px) {
-      
   }
 `;
 export const PeopleContainer = styled.div`
-height: 940px;
+  height: 940px;
 
   @media only screen and (max-width: 2100px) {
     height: 800px;
   }
   @media only screen and (max-width: 1600px) {
-    
   }
   @media only screen and (max-width: 1440px) {
     height: 500px;
@@ -105,28 +91,23 @@ export const BgColor = styled.div`
   background-color: #ede7f2;
   height: 600px;
   position: relative;
-  
+
   @media only screen and (max-width: 2400px) {
-     
-  top: -68%;
+    top: -68%;
   }
   @media only screen and (max-width: 2100px) {
-     
-  top: -66%;
+    top: -66%;
   }
 
   @media only screen and (max-width: 1980px) {
-    
   }
   @media only screen and (max-width: 1720px) {
-    height: 440px; 
-    
+    height: 440px;
   }
- 
 
   @media only screen and (max-width: 1600px) {
     height: 380px;
-    top: -66%; 
+    top: -66%;
   }
 
   @media only screen and (max-width: 1440px) {
@@ -134,16 +115,12 @@ export const BgColor = styled.div`
     height: 57%;
   }
   @media only screen and (max-width: 1200px) {
-     
   }
   @media only screen and (max-width: 1150px) {
-     
   }
   @media only screen and (max-width: 1080px) {
-    
   }
   @media only screen and (max-width: 1028px) {
-     
   }
 `;
 export const TittleA = styled.span`

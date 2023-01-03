@@ -22,9 +22,9 @@ export const SliderContainerMobile = styled.div`
 `;
 export const SwiperContainer = styled.div`
   display: block;
-  @media only screen and (max-width: 580px) {
-    display: none;
-  }
+  // @media only screen and (max-width: 580px) {
+  //   display: none;
+  // }
 `;
 export const GeneralContainerMobile = styled(Container)`
   padding: 0;
