@@ -29,8 +29,9 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useMediaQuery } from "react-responsive";
 import { exitCode } from "process";
 import { updateProfileImage } from "../../../store/actions/UserActions";
+import { GiStarShuriken } from "react-icons/gi";
 
-const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023 }: any) => {
+const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023, starPosition }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -55,7 +56,9 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const points_format = numFor.format(userData.score);
   const auth = getAuth();
   const userPass: any = auth.currentUser;
-
+  const handImage = "/images/profile/hand.png"
+  const starsImage = "/images/profile/stars.png"
+  const crownImage = "/images/profile/crown.png"
   const changePassword = async () => {
     updatePassword(userPass, password).then(() => {
       setErrorPassword(false);
@@ -145,15 +148,15 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     setUser({ ...userData })
   }, [userData])
   return (
-    <ProfileMainContainer startEdit={startEdit} password={editPassword}>
+    <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition}>
       <div className="first-text">
         <div className="main-text">
           <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
         </div>
         <div className="responsive-picture">
-          <PictureContain progress={data} reward={reward} progressResp={dataResp}>
-            {/* <ProfileText>
-              {
+          <PictureContain progress={data} reward={reward} progressResp={dataResp} >
+            <ProfileText>
+              {/* {
                 curveText.map((val, index) => {
                   return (
                     <CurveText
@@ -172,10 +175,17 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                     </CurveText>
                   )
                 })
-              }
-            </ProfileText> */}
+              } */}
+            </ProfileText>
+
+            {/* {
+              starPosition !== 0 &&
+              <div className="stars">
+                <img src={starsImage} />
+              </div>
+            } */}
             <div className="crown">
-              <AiFillCrown />
+              <img src={crownImage} />
             </div>
             <ProfileIcon
               onClick={changeImage}
@@ -230,7 +240,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
           !responsive1023 &&
           <>
             <div className="crown">
-              <AiFillCrown />
+              <img src={crownImage} />
             </div>
             <PictureContain progress={data} reward={reward} progressResp={dataResp}>
               <ProfileIcon

@@ -38,6 +38,7 @@ const User = () => {
   const [currentLevel, setCurrentLevel] = useState<number>(0);
   const [timeScore, setTimeScore] = useState<number>(0);
   const [timeLevel, setTimeLevel] = useState<any>([]);
+  const [starPosition, setStarPosition] = useState(0);
   const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
   const [taskView, setTaskView] = useState(false);
   const [nameUpperCase, setNameUpperCase] = useState<string>("");
@@ -172,10 +173,10 @@ const User = () => {
       setTimeProgress(((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 100)
       setData(755 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 755));
       setDataResp(502 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 502));
+      setStarPosition((userData.score - level.minimum) / (level.maximum - level.minimum));
       setLoading(false);
     }
   }, [level, timeLevel]);
-
   const handleClick = (value: boolean) => {
     fetchDB_data();
   }
@@ -216,6 +217,7 @@ const User = () => {
           dataResp={dataResp}
           reward={reward}
           responsive1023={responsive1023}
+          starPosition={starPosition}
         />
       }
       {/* SECOND Container */}

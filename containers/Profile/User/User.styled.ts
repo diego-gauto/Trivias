@@ -792,6 +792,7 @@ export const Box2 = styled.div`
 export const ProfileMainContainer = styled.div<{
   startEdit: any;
   password: any;
+  star: any;
 }>`
   display: flex;
   flex-direction: column;
@@ -816,6 +817,28 @@ export const ProfileMainContainer = styled.div<{
     }
     @media (max-width: 480px) {
       top: -53px;
+    }
+    img {
+      width: 50px;
+      @media (max-width: 480px) {
+        width: 38px;
+      }
+    }
+  }
+  .stars {
+    z-index: 3;
+    position: absolute;
+    ${(props) =>
+      0 <= props.star &&
+      props.star <= 0.25 &&
+      css`
+        top: "${props.star}px";
+      `}
+    img {
+      width: 50px;
+      @media (max-width: 480px) {
+        width: 38px;
+      }
     }
   }
   button {
