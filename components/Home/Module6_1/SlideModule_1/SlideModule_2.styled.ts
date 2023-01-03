@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const CompraRapida = styled.div`
   font-weight: 100;
   top: 50%;
-  
+  cursor: pointer;
   background: linear-gradient(to right, transparent, transparent);
   color: transparent;
 
   position: relative;
-  left: 27.5%; 
+  left: 27.5%;
   font-size: 24px;
   border-radius: 50px;
   padding: 15px 20px 15px;
@@ -24,12 +24,11 @@ export const CompraRapida = styled.div`
     font-size: 14px;
   }
 
-  &:hover { 
-     
+  &:hover {
     transition: 0.5s ease all;
     transform: scale(1.1);
     color: #e5dfe9;
-  background: linear-gradient(to right, #942ced, #d244d1);
+    background: linear-gradient(to right, #942ced, #d244d1);
   }
 `;
 
