@@ -13,6 +13,9 @@ export const PineappleTextContainer = styled.div`
   justify-content: space-between;
   padding-inline: 50px;
   align-items: center;
+  @media only screen and (max-width: 1023px) {
+    padding-block: 30px;
+  }
 `;
 export const FooterComplement = styled.div`
   height: 100px;
@@ -116,6 +119,10 @@ export const PeopleContainer = styled.div`
   height: 400px;
   background: #fff;
   position: relative;
+  .lines {
+    width: 100%;
+    height: 100%;
+  }
   .pineApple {
     height: 600px;
     position: absolute;
@@ -124,7 +131,40 @@ export const PeopleContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
     img {
+      position: relative;
+      z-index: 2;
       height: 100%;
+    }
+    .yellow {
+      background: #ffdd68;
+      position: absolute;
+      top: 130px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 430px;
+      height: 430px;
+      z-index: 1;
+      border-radius: 50%;
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    height: 600px;
+    .lines {
+      object-fit: cover;
+    }
+    .pineApple {
+      bottom: 0;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    height: 450px;
+    .pineApple {
+      height: 450px;
+      .yellow {
+        top: 95px;
+        width: 330px;
+        height: 330px;
+      }
     }
   }
 `;
@@ -152,42 +192,24 @@ export const MoreText = styled.div`
   position: absolute;
   width: 15%;
   z-index: 1;
-  right: 8%;
+  right: 50px;
   bottom: 0;
   text-align: right;
-  font-size: 32px;
+  font-size: 18px;
   font-family: "MONTSERRAT-BOLD" !important;
-  margin-bottom: 20%;
-
-  @media only screen and (max-width: 1980px) {
-    margin-bottom: 22.5%;
-    font-size: 24px;
-  }
-
-  @media only screen and (max-width: 1840px) {
-    margin-bottom: 25%;
-  }
-  @media only screen and (max-width: 1720px) {
-    font-size: 18px;
-    margin-bottom: 30%;
-  }
-  @media only screen and (max-width: 1440px) {
-  }
-
-  @media only screen and (max-width: 1030px) {
-    font-size: 14px;
-  }
-
+  margin-bottom: 3%;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
   }
+  @media only screen and (max-width: 1023px) {
+    display: none;
+  }
 `;
 export const MoreText_1 = styled.div`
-  width: 110%;
+  cursor: pointer;
   bottom: 570px;
   color: #a73ae5;
-
   margin-bottom: 5px;
   transition: all 0.2s ease-in-out;
 
@@ -196,9 +218,8 @@ export const MoreText_1 = styled.div`
   }
 `;
 export const MoreText_2 = styled.div`
-  width: 110%;
+  cursor: pointer;
   bottom: 570px;
-
   margin-bottom: 5px;
   transition: all 0.2s ease-in-out;
 
@@ -208,7 +229,7 @@ export const MoreText_2 = styled.div`
   color: #d244d1;
 `;
 export const MoreText_3 = styled.div`
-  width: 110%;
+  cursor: pointer;
   bottom: 570px;
   color: #e88807;
   margin-bottom: 5px;
@@ -220,7 +241,6 @@ export const MoreText_3 = styled.div`
 `;
 
 export const FooterAText = styled.div`
-  width: 25%;
   z-index: 1;
   font-size: 32px;
   display: flex;
@@ -242,6 +262,7 @@ export const FooterAText = styled.div`
   @media only screen and (max-width: 1030px) {
     font-size: 12px;
     bottom: 14.5%;
+    gap: 10px;
   }
 
   text-align: left;
@@ -317,6 +338,9 @@ export const FooterAIcons_1 = styled.div`
   background-size: contain;
   width: 100%;
   height: auto;
+  @media only screen and (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export const FooterBIcons = styled.div`
@@ -331,6 +355,19 @@ export const FooterBIcons = styled.div`
     flex-direction: column;
     gap: 10px;
   }
+  .responsive-img {
+    display: none;
+  }
+  @media only screen and (max-width: 1023px) {
+    height: 100%;
+    .content {
+      justify-content: space-between;
+    }
+    .responsive-img {
+      display: block;
+      height: auto;
+    }
+  }
 `;
 export const FooterBIcons_1 = styled.div`
   cursor: pointer;
@@ -343,14 +380,6 @@ export const FooterBIcons_1 = styled.div`
   @media only screen and (max-width: 1440px) {
     width: 30px;
     height: 30px;
-  }
-  @media only screen and (max-width: 1280px) {
-    width: 25px;
-    height: 25px;
-  }
-  @media only screen and (max-width: 1030px) {
-    width: 18px;
-    height: 18px;
   }
 `;
 export const ContainerMain = styled.div`

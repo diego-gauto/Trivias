@@ -83,11 +83,9 @@ import IMG6 from "./MediaSources/LogosFooter4.png";
 import IMG7 from "./MediaSources/GonvarFooter.png";
 
 import "swiper/css/navigation";
-//import { Navigation } from "swiper";
 import { IModule6_1 } from "./IModule6_1";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { SlideModule_1 } from "./SlideModule_1/SlideModule_2";
-import Footer from "../../Footer/Footer";
 SwiperCore.use([Autoplay]);
 
 export const Module6_1 = (props: IModule6_1) => {
@@ -172,24 +170,30 @@ export const Module6_1 = (props: IModule6_1) => {
             </SliderSectionTitle>
             <div onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}>
-              <Swiper  {...settings} onInit={onInit} style={{ paddingBottom: "50px" }}>
+              <Swiper  {...settings} onInit={onInit} >
                 {sliderData}
               </Swiper>
             </div>
           </SliderContainer>
           <PeopleContainer>
+            <img className="lines" src="../images/Landing/lines.png" alt="" />
             <div className="pineApple">
               <img src="../images/Landing/pineapple.png" alt="" />
               <div className="yellow"></div>
             </div>
-            {/* <MoreText>
+            <MoreText>
               <MoreText_1>Trabaja con nosotros</MoreText_1>
               <MoreText_2>Cursos</MoreText_2>
               <MoreText_3>Tienda</MoreText_3>
-            </MoreText> */}
+            </MoreText>
           </PeopleContainer>
           <PineappleTextContainer>
             <FooterAText >
+              <MoreTextMobile>
+                <MoreText_1Mobile>Trabaja con nosotros</MoreText_1Mobile>
+                <MoreText_2Mobile>Cursos</MoreText_2Mobile>
+                <MoreText_3Mobile>Tienda</MoreText_3Mobile>
+              </MoreTextMobile>
               <FooterAText_1>Aviso de privacidad</FooterAText_1>
               <FooterAText_2>Términos y condiciones</FooterAText_2>
               <FooterAText_3>Políticas de cancelación</FooterAText_3>
@@ -202,50 +206,11 @@ export const Module6_1 = (props: IModule6_1) => {
                 <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
               </div>
               <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
+              <img className="responsive-img" src={IMG2.src} alt="" />
             </FooterBIcons>
           </PineappleTextContainer>
         </ContainerMain >
       </GeneralContainer >
-      {/************************************************** */}
-      {/* <GeneralContainerMobile
-        fluid
-        style={{ padding: 0 }}
-        id="MobileView"
-      >
-        <ContainerMainMobile  >
-          <PeopleContainerMobile>
-            <PeopleMobile style={{ backgroundImage: `url(${IMG8.src})` }}>
-            </PeopleMobile>
-            <BgColorMobile  ></BgColorMobile>
-          </PeopleContainerMobile>
-
-
-          <MoreTextMobile>
-            <MoreText_1Mobile>Trabaja con nosotros</MoreText_1Mobile>
-            <MoreText_2Mobile>Cursos</MoreText_2Mobile>
-            <MoreText_3Mobile>Tienda</MoreText_3Mobile>
-          </MoreTextMobile>
-
-          <FooterATextMobile >
-            <FooterAText_1Mobile>Aviso de privacidad</FooterAText_1Mobile>
-            <FooterAText_2Mobile>Términos y condiciones</FooterAText_2Mobile>
-            <FooterAText_3Mobile>Políticas de cancelación</FooterAText_3Mobile>
-          </FooterATextMobile>
-
-          <FooterAIconsMobile >
-            <FooterAIcons_1Mobile style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1Mobile>
-          </FooterAIconsMobile>
-
-          <FooterBIconsMobile >
-            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1Mobile>
-            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1Mobile>
-            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1Mobile>
-            <FooterBIcons_1Mobile style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1Mobile>
-          </FooterBIconsMobile>
-        </ContainerMainMobile >
-
-        <ContainerMain2Mobile  ></ContainerMain2Mobile>
-      </GeneralContainerMobile > */}
     </>
   )
 }
