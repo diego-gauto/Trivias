@@ -169,23 +169,10 @@ export const MoreText_3 = styled.div`
 
 export const FooterAText = styled.div`
   z-index: 1;
-  font-size: 32px;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  @media only screen and (max-width: 1980px) {
-    font-size: 28px;
-    bottom: -5%;
-  }
-  @media only screen and (max-width: 1720px) {
-    font-size: 22px;
-    bottom: -5%;
-  }
-
-  @media only screen and (max-width: 1440px) {
-    font-size: 15px;
-    bottom: 0%;
-  }
   @media only screen and (max-width: 1030px) {
     font-size: 12px;
     bottom: 14.5%;
@@ -298,16 +285,11 @@ export const FooterBIcons = styled.div`
 `;
 export const FooterBIcons_1 = styled.div`
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background-size: 90%;
   margin-left: 20%;
   background-repeat: no-repeat;
-
-  @media only screen and (max-width: 1440px) {
-    width: 30px;
-    height: 30px;
-  }
 `;
 export const ContainerMain = styled.div`
   background-color: #ffffff;
