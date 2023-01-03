@@ -300,27 +300,17 @@ export const VisaIcon = styled.i`
   width: 47px;
   background-position: center;
 `;
-export const CardIconResp = styled("i")<{ brand: any }>`
-  ${(props) =>
-    props.brand == "visa" &&
-    css`
-      background-image: url(../images/visa-icon.png);
-    `}
-  ${(props) =>
-    props.brand == "mastercard" &&
-    css`
-      background-image: url(../images/mastercard-icon.png);
-    `}
-  ${(props) =>
-    props.brand == "amex" &&
-    css`
-      background-image: url(../images/amex-icon.png);
-    `}
-  
-  background-repeat:no-repeat;
-  min-width: 59px;
-  min-height: 33px;
-  background-position: center;
+export const CardIconResp = styled.div`
+  width: fit-content;
+  img {
+    width: 50px;
+    @media (max-width: 750px) {
+      width: 40px;
+    }
+    @media (max-width: 650px) {
+      width: 35px;
+    }
+  }
 `;
 export const PaypalIcon = styled.i`
   background-image: url(../images/Paypal.png);
@@ -2277,6 +2267,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         width: 100%;
         border-radius: 100px;
         display: flex;
+        gap: 10px;
         flex-direction: row;
         justify-content: space-between;
         background-color: #3f1168;
