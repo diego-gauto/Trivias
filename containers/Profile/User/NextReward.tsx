@@ -1,41 +1,19 @@
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import {
-  AddPay,
   ArrowRight,
-  CompleteBar,
-  Currentlvl,
-  DataTitle,
-  ImageContain,
-  Nextlvl,
-  Pointbox,
-  PointsBox,
-  PolygonDown,
-  ProgressBar1,
-  ProgressBar2,
-  RewardBox,
   RewardCenterLink,
   RewardCenterLinkNoReward,
-  RewardContain,
   RewardContainer,
-  RewardData,
-  RewardImage,
-  RewardInfo,
-  RewardParagraph,
-  RewardPoints,
-  RewardTitle,
-  RewardTitleBox,
   SecondContainer,
   SubscriptionContainer,
-  UserPoints,
-  VectorLeft,
-  VectorRight,
 } from "./User.styled";
 import { useEffect, useState } from "react";
 import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
+const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward, user }: any) => {
   const [prize, setPrize] = useState<any>([]);
@@ -200,8 +178,11 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
         <div className="second-section">
           <p className="first-text">PROXIMAMENTE</p>
           <p className="second-text">Refiere amigos</p>
-          <p className="third-text">Obtén premios para ti{!responsive1023 && <br />}
+          <p className="third-text">Obtén premios para ti {!responsive1023 && <br />}
             y para ellos.</p>
+        </div>
+        <div className="img-hand">
+          <img src={handImage} />
         </div>
       </SubscriptionContainer>
     </SecondContainer>

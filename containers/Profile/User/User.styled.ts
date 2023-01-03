@@ -1527,6 +1527,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
   flex-direction: column;
   justify-content: space-between;
   min-width: 60%;
+  gap: 10px;
   @media (max-width: 1200px) {
     min-width: 420px;
   }
@@ -1870,6 +1871,41 @@ export const RewardContainer = styled.div<{ reward: any }>`
 export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
+  .img-hand {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    @media (max-width: 1500px) {
+      width: 100px;
+    }
+    @media (max-width: 1150px) {
+      width: 90px;
+    }
+    @media (max-width: 1065px) {
+      width: 80px;
+    }
+    @media (max-width: 1023px) {
+      width: 140px;
+    }
+    @media (max-width: 600px) {
+      width: 120px;
+    }
+    img {
+      width: 120px;
+      @media (max-width: 1500px) {
+        width: 100px;
+      }
+      @media (max-width: 1023px) {
+        width: 160px;
+        right: 20px;
+      }
+      @media (max-width: 600px) {
+        width: 130px;
+      }
+    }
+  }
   width: 40%;
   @media (max-width: 1200px) {
     min-width: 260px;
@@ -1959,21 +1995,40 @@ export const SubscriptionContainer = styled.div`
       width: fit-content;
     }
     .second-text {
-      font-size: 30px;
+      font-size: 26px;
       color: #942ced;
       line-height: 25px;
       font-weight: 600;
-      @media (max-width: 1200px) {
-        font-size: 26px;
+      @media (max-width: 1150px) {
+        font-size: 24px;
+      }
+      @media (max-width: 1065px) {
+        font-size: 22px;
+      }
+      @media (max-width: 1023px) {
+        font-size: 30px;
+      }
+      @media (max-width: 600px) {
+        font-size: 24px;
       }
     }
     .third-text {
-      font-size: 18px;
+      font-size: 16px;
       color: #3f1168;
       font-weight: 600;
       line-height: 20px;
-      @media (max-width: 1200px) {
-        font-size: 16px;
+      @media (max-width: 1150px) {
+        font-size: 14px;
+      }
+      @media (max-width: 1065px) {
+        font-size: 12px;
+      }
+      @media (max-width: 1023px) {
+        font-size: 18px;
+      }
+      @media (max-width: 600px) {
+        width: 200px;
+        font-size: 14px;
       }
     }
   }

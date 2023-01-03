@@ -56,7 +56,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const points_format = numFor.format(userData.score);
   const auth = getAuth();
   const userPass: any = auth.currentUser;
-  const handImage = "/images/profile/hand.png"
   const starsImage = "/images/profile/stars.png"
   const crownImage = "/images/profile/crown.png"
   const changePassword = async () => {
