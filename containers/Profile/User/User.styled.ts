@@ -1438,6 +1438,7 @@ export const PictureContain = styled.div<{
     .progress-circle {
       fill: none;
       stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
+        ${(props) => props.reward == 1 && "url(#gradientTime)"}
         ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
       stroke-width: 20px;
       stroke-dasharray: 755;
@@ -1448,6 +1449,7 @@ export const PictureContain = styled.div<{
       r: 120px;
       @media (max-width: 1023px) {
         stroke: ${(props) => props.reward == 0 && "url(#gradientLevelResp)"}
+          ${(props) => props.reward == 1 && "url(#gradientTimeResp)"}
           ${(props) => props.reward == 2 && "url(#gradientCertificateResp)"};
       }
       @media (max-width: 480px) {
@@ -1572,6 +1574,11 @@ export const RewardContainer = styled.div<{ reward: any }>`
           background: linear-gradient(135deg, #9a2fea 10%, #fd8608 100%);
         `}
       ${(props) =>
+        props.reward == 1 &&
+        css`
+          background: linear-gradient(135deg, #9a2fea 10%, #1beb00 100%);
+        `}
+      ${(props) =>
         props.reward == 2 &&
         css`
           background: linear-gradient(60deg, #8f0bee 10%, #059cfe 100%);
@@ -1642,6 +1649,11 @@ export const RewardContainer = styled.div<{ reward: any }>`
               border-radius: 20px 20px 0 0;
             `}
           ${(props) =>
+            props.reward == 1 &&
+            css`
+              border-radius: 0 0 20px 0;
+            `}
+          ${(props) =>
             props.reward != 0 &&
             css`
               background-color: #e6c4ea;
@@ -1694,12 +1706,17 @@ export const RewardContainer = styled.div<{ reward: any }>`
           align-items: center;
           flex-direction: column;
           gap: 20px;
-          background-color: #de94e1;
           padding-block: 15px;
           width: 33.34%;
+          cursor: pointer;
           @media (max-width: 700px) {
             gap: 10px;
           }
+          ${(props) =>
+            props.reward != 1 &&
+            css`
+              background-color: #de94e1;
+            `}
           ${(props) =>
             props.reward == 0 &&
             css`
@@ -1773,6 +1790,11 @@ export const RewardContainer = styled.div<{ reward: any }>`
           props.reward != 2 &&
           css`
             background-color: #e6c4ea;
+          `}
+        ${(props) =>
+          props.reward == 1 &&
+          css`
+            border-radius: 0 0 0 20px;
           `}
         p {
           color: #3f1168;

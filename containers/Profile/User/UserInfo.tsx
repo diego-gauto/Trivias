@@ -222,11 +222,18 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                   </linearGradient>
                 </defs>
                 <defs>
+                  <linearGradient id="gradientTimeResp">
+                    <stop offset="0%" stopColor="#1beb00" />
+                    <stop offset="100%" stopColor="#972dec" />
+                  </linearGradient>
+                </defs>
+                <defs>
                   <linearGradient id="gradientCertificateResp">
                     <stop offset="0%" stopColor="#0997fe" />
                     <stop offset="100%" stopColor="#9108ee" />
                   </linearGradient>
                 </defs>
+
                 <circle className="progress-background"
                 />
                 <circle className="progress-circle" />
@@ -273,7 +280,12 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                       <stop offset="100%" stopColor="#972dec" />
                     </linearGradient>
                   </defs>
-
+                  <defs>
+                    <linearGradient id="gradientTime">
+                      <stop offset="0%" stopColor="#1beb00" />
+                      <stop offset="100%" stopColor="#972dec" />
+                    </linearGradient>
+                  </defs>
                   <defs>
                     <linearGradient id="gradientCertificate">
                       <stop offset="0%" stopColor="#0997fe" />
