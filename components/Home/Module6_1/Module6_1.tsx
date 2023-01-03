@@ -11,7 +11,6 @@ import {
   TittleA,
   TittleB,
   People,
-  BgColor,
   PeopleContainer,
   GeneralContainer,
   ContainerMain2,
@@ -129,7 +128,7 @@ export const Module6_1 = (props: IModule6_1) => {
         spaceBetween: 20,
       },
       450: {
-        slidesPerView: 20,
+        slidesPerView: 2,
         spaceBetween: 20,
       }
     }
@@ -178,77 +177,42 @@ export const Module6_1 = (props: IModule6_1) => {
               </Swiper>
             </div>
           </SliderContainer>
-
           <PeopleContainer>
-            <People style={{ backgroundImage: `url(${IMG1.src})` }}>
-            </People>
-            <BgColor  ></BgColor>
-          </PeopleContainer>
-
-          <PineappleTextContainer>
-            <MoreText>
+            <div className="pineApple">
+              <img src="../images/Landing/pineapple.png" alt="" />
+              <div className="yellow"></div>
+            </div>
+            {/* <MoreText>
               <MoreText_1>Trabaja con nosotros</MoreText_1>
               <MoreText_2>Cursos</MoreText_2>
               <MoreText_3>Tienda</MoreText_3>
-            </MoreText>
-
+            </MoreText> */}
+          </PeopleContainer>
+          <PineappleTextContainer>
             <FooterAText >
               <FooterAText_1>Aviso de privacidad</FooterAText_1>
               <FooterAText_2>Términos y condiciones</FooterAText_2>
               <FooterAText_3>Políticas de cancelación</FooterAText_3>
             </FooterAText>
-
-            <FooterAIcons >
-              <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
-            </FooterAIcons>
-
             <FooterBIcons >
-              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
-              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
-              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
-              <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
+              <div className="content">
+                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
+                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
+                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
+                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
+              </div>
+              <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
             </FooterBIcons>
-
           </PineappleTextContainer>
-
         </ContainerMain >
-
-        <ContainerMain2  ></ContainerMain2>
       </GeneralContainer >
       {/************************************************** */}
-      <GeneralContainerMobile
+      {/* <GeneralContainerMobile
         fluid
         style={{ padding: 0 }}
         id="MobileView"
       >
         <ContainerMainMobile  >
-          {/* <SliderContainerMobile>
-
-            <SliderSectionTitleMobile>
-              <TittleAMobile>Visita nuestra </TittleAMobile><TittleBMobile> tienda</TittleBMobile>
-
-            </SliderSectionTitleMobile>
-
-            <SwiperContainer>
-              <Swiper style={{}} {...settingsMobile} onInit={onInit}>
-                {sliderData}
-              </Swiper>
-            </SwiperContainer>
-            <SwiperContainerReduced>
-              <Swiper style={{}} {...settingsMobileReduced} onInit={onInit}>
-                {sliderData}
-              </Swiper>
-            </SwiperContainerReduced>
-            <SwiperContainerMoreReduced>
-              <Swiper style={{}}
-                {...settingsMobileMoreReduced} onInit={onInit}
-              >
-                {sliderData}
-              </Swiper>
-            </SwiperContainerMoreReduced>
-          </SliderContainerMobile>
-          */}
-
           <PeopleContainerMobile>
             <PeopleMobile style={{ backgroundImage: `url(${IMG8.src})` }}>
             </PeopleMobile>
@@ -281,7 +245,7 @@ export const Module6_1 = (props: IModule6_1) => {
         </ContainerMainMobile >
 
         <ContainerMain2Mobile  ></ContainerMain2Mobile>
-      </GeneralContainerMobile >
+      </GeneralContainerMobile > */}
     </>
   )
 }
