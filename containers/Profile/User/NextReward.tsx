@@ -127,7 +127,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                   <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
               </div>
-              <div className="time-container">
+              <div className="time-container" onClick={() => { setReward(1) }}>
                 <p>Beneficios<br />
                   obtenidos<br />
                   <span> por tiempo</span></p>
@@ -151,7 +151,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
             </div>
             <div className="extra-info">
               {
-                reward == 0 &&
+                (reward == 0 || reward == 1) &&
                 <p>
                   Siguiente recompensa <span>{prize.title}</span>
                 </p>
