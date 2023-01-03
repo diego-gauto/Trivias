@@ -26,94 +26,21 @@ export const FooterComplement = styled.div`
 export const GeneralContainer = styled(Container)`
   padding: 0;
   display: block;
-  padding-top: 17%;
-  // height: 2195px;
-  // margin-bottom: 18%;
-
-  // @media only screen and (max-width: 2100px) {
-  //   margin-bottom: 14%;
-  // }
-  // @media only screen and (max-width: 1980px) {
-  //   margin-bottom: 4%;
-  //   height: 1880px;
-
-  //   padding-top: 6%;
-  // }
-
-  // @media only screen and (max-width: 1840px) {
-  //   height: 1575px;
-  //   margin-bottom: 9%;
-  //   padding-top: 8%;
-  // }
-  // @media only screen and (max-width: 1720px) {
-  //   margin-bottom: 17%;
-  //   padding-top: 6%;
-  // }
-  // @media only screen and (max-width: 1600px) {
-  //   margin-bottom: 9%;
-  // }
-  // @media only screen and (max-width: 1520px) {
-  //   margin-bottom: 7%;
-  //   height: 1520px;
-  // }
-
-  // @media only screen and (max-width: 1440px) {
-  //   margin-bottom: 12%;
-  //   height: 1440px;
-  //   padding-top: 3.5%;
-  // }
-  // @media only screen and (max-width: 1360px) {
-  //   height: 1230px;
-  //   margin-bottom: 23%;
-  //   padding-top: 2%;
-  // }
-  // @media only screen and (max-width: 1280px) {
-  //   margin-bottom: 13%;
-  // }
-  // @media only screen and (max-width: 1028px) {
-  //   display: none;
-  // }
+  position: relative;
+  margin-top: 250px;
 `;
 
 export const People = styled.div`
-  height: 100%;
-  background-repeat: no-repeat;
+  background-image: url(/_next/static/media/Personas.898b7799.png);
+  height: 500px;
+  position: absolute;
+  top: -480px;
+  background-size: contain;
   width: 100%;
-  position: relative;
+  background-repeat: no-repeat;
   background-position-x: 50%;
+  background-position: bottom;
   z-index: 1;
-  background-color: white;
-  background-size: 100%;
-
-  @media only screen and (max-width: 1720px) {
-    background-size: 125%;
-  }
-  @media only screen and (max-width: 1600px) {
-    background-size: 137%;
-  }
-  @media only screen and (max-width: 1520px) {
-    background-size: 115%;
-  }
-  @media only screen and (max-width: 1440px) {
-    background-size: 125%;
-  }
-  @media only screen and (max-width: 1380px) {
-  }
-  @media only screen and (max-width: 1280px) {
-    background-size: 110%;
-  }
-  @media only screen and (max-width: 1200px) {
-    background-size: 120%;
-  }
-  @media only screen and (max-width: 1150px) {
-    background-size: 125%;
-  }
-  @media only screen and (max-width: 1080px) {
-    background-size: 132%;
-  }
-  @media only screen and (max-width: 1030px) {
-    background-size: 138%;
-  }
 `;
 export const PeopleContainer = styled.div`
   height: 400px;
@@ -384,9 +311,9 @@ export const FooterBIcons_1 = styled.div`
 `;
 export const ContainerMain = styled.div`
   background-color: #ffffff;
-
-  border-top-left-radius: 50px 50px;
-  border-top-right-radius: 50px 50px;
+  position: relative;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 
   width: 100%;
   z-index: 2;
@@ -534,7 +461,6 @@ export const SliderSectionTitle = styled.p`
   margin-top: 120px;
   font-size: 48px;
   color: #ffffff;
-  bottom: 45px;
   position: relative;
   text-align: center;
   padding-right: 0;

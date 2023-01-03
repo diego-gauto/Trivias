@@ -73,7 +73,7 @@ import {
 } from "./Module6_1Mobile.styled";
 
 
-import IMG1 from "./MediaSources/FondoPina.png";
+import IMG1 from "./MediaSources/Personas.png";
 import IMG8 from "./MediaSources/FondoPina2.png";
 import IMG2 from "./MediaSources/Contactenos.png";
 import IMG3 from "./MediaSources/LogosFooter1.png";
@@ -161,6 +161,8 @@ export const Module6_1 = (props: IModule6_1) => {
         fluid
         id="WebView"
       >
+        <People style={{ backgroundImage: `url(${IMG1.src})` }}>
+        </People>
         <ContainerMain>
           <SliderContainer>
 
