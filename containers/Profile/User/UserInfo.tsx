@@ -20,7 +20,9 @@ import {
   UserText,
   ProfileMainContainer,
   InputPhone,
-  Box2
+  Box2,
+  ProfileText,
+  CurveText
 } from "./User.styled";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
@@ -43,11 +45,11 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [image, setImage] = useState<string>("");
-
+  const [curveText, setCurveText] = useState([]);
+  const [curveScore, setCurveScore] = useState([]);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const numFor = Intl.NumberFormat('en-US');
   const nextLevel_format = numFor.format(nextLevel);
   const points_format = numFor.format(userData.score);
@@ -124,7 +126,22 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
       })
     }
   }
+  const getCurvedText = () => {
+    let text = "Puntaje actual";
+    let tempCurve: any = [];
+    for (let i: number = 1; i <= text.length; i++) {
+      tempCurve.push(text.slice(i - 1, i))
+    }
+    let scoreText = `${points_format} puntos`;
+    let tempScoreCurve: any = [];
+    for (let i: number = 1; i <= scoreText.length; i++) {
+      tempScoreCurve.push(scoreText.slice(i - 1, i))
+    }
+    setCurveText(tempCurve)
+    setCurveScore(tempScoreCurve)
+  }
   useEffect(() => {
+    getCurvedText();
     setUser({ ...userData })
   }, [userData])
   return (
@@ -135,10 +152,31 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
         </div>
         <div className="responsive-picture">
           <PictureContain progress={data} reward={reward} progressResp={dataResp}>
+            {/* <ProfileText>
+              {
+                curveText.map((val, index) => {
+                  return (
+                    <CurveText
+                      style={{ fontWeight: 500, fontSize: 14, transform: `rotate(-${((index + 1) * 2) + 45}deg)`, bottom: index == 0 ? -20 : (index * 7) - 20, right: index == 0 ? 10 : 10 - (index * 4) }}>
+                      {val}
+                    </CurveText>
+                  )
+                })
+              }
+              {
+                curveScore.map((val, index) => {
+                  return (
+                    <CurveText
+                      style={{ fontSize: 14, transform: `rotate(-${((index + 1) * 2) + 45}deg)`, bottom: index == 0 ? -40 : (index * 7) - 40, right: index == 0 ? 0 : 0 - (index * 4) }}>
+                      {val}
+                    </CurveText>
+                  )
+                })
+              }
+            </ProfileText> */}
             <div className="crown">
               <AiFillCrown />
             </div>
-
             <ProfileIcon
               onClick={changeImage}
               edit={startEdit}

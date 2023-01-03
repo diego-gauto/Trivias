@@ -1455,6 +1455,19 @@ export const PictureContain = styled.div<{
     }
   }
 `;
+export const ProfileText = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  p {
+    margin: 0;
+  }
+`;
+export const CurveText = styled.p`
+  position: absolute;
+`;
 export const ProfileIcon = styled.img<{ edit: any }>`
   background-repeat: no-repeat;
   border-radius: 50%;
