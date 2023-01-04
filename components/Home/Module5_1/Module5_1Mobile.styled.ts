@@ -163,33 +163,9 @@ export const ContainerMainMobile = styled.div`
   background-color: #e5b6e9;
   margin-top: 0;
 
-  height: 1120px;
-  margin-bottom: 20%;
-
+  height: 1020px;
   position: inherit;
   width: 100%;
-
-  @media only screen and (max-width: 840px) {
-    margin-bottom: 15%;
-  }
-  @media only screen and (max-width: 770px) {
-    margin-bottom: 12.5%;
-  }
-  @media only screen and (max-width: 580px) {
-    margin-bottom: 0%;
-    height: 1070px;
-  }
-  @media only screen and (max-width: 490px) {
-    height: 1060px;
-    margin-bottom: 7.5%;
-  }
-  @media only screen and (max-width: 490px) {
-    height: 980px;
-    margin-bottom: 0;
-  }
-  @media only screen and (max-width: 390px) {
-    height: 930px;
-  }
 `;
 export const AnimatedBackgroundMobile = styled.video`
   width: 100%;

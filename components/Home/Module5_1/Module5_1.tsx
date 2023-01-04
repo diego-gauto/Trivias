@@ -33,7 +33,6 @@ import {
 
 
 import IMG1 from "./MediaSources/Lineas.png";
-import IMG2 from "./MediaSources/Personas.png";
 import IMG4 from "./MediaSources/Personas2.png";
 import IMG3 from "./MediaSources/LineMobile.png";
 
@@ -149,12 +148,6 @@ export const Module5_1 = (props: IModule5_1) => {
               </Swiper>
             </div>
           </SliderContainer>
-
-          <PeopleContainer>
-            <People style={{ backgroundImage: `url(${IMG2.src})` }}>
-            </People>
-            <BgColor  ></BgColor>
-          </PeopleContainer>
         </ContainerMain >
       </GeneralContainer >
 
@@ -182,12 +175,6 @@ export const Module5_1 = (props: IModule5_1) => {
               </Swiper>
             </SwiperContainer>
           </SliderContainerMobile>
-
-          <PeopleContainerMobile>
-            <PeopleMobile style={{ backgroundImage: `url(${IMG4.src})` }}>
-            </PeopleMobile>
-            <BgColorMobile  ></BgColorMobile>
-          </PeopleContainerMobile>
         </ContainerMainMobile >
       </GeneralContainerMobile >
     </>
