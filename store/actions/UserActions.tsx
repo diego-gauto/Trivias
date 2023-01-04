@@ -84,3 +84,21 @@ export const updateProfileImage = async (user: any, id: any) => {
   })
   return 'exito'
 }
+
+export const addUserCertificate = async (certificate: any, id: any) => {
+  const docRef = doc(db, 'users', id);
+  await updateDoc(docRef, {
+    certificates: certificate,
+  })
+  return 'exito'
+}
+
+export const getUser = async (id: string) => {
+  let data: any = []
+  const docRef = query(collection(db, "users"), where("uid", "==", id));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}

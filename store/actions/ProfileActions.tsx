@@ -34,8 +34,6 @@ export const getTimeRewards = async () => {
 // }
 
 export const deletePaymentMethod = async (userId: any, card: any) => {
-  console.log(userId, card);
-
   await deleteDoc(doc(db, "users", userId, 'paymentMethods', card));
 }
 

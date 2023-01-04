@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
-
+import uuid from 'react-uuid';
 import { LOGIN_PATH } from "../../../constants/paths";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
@@ -11,9 +11,8 @@ import {
   getComments,
   getWholeCourse,
 } from "../../../store/actions/courseActions";
-import { getPaidCourses } from "../../../store/actions/UserActions";
+import { addUserCertificate, getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, FirstContainer, MainContainer } from "./Lesson.styled";
-import Modules from "./LessonComponents/Modules/Modules";
 import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 
@@ -65,9 +64,21 @@ const Lesson = () => {
           }
         });
         if (course.lessons.length == viewed) {
-          setCertificate(true)
+          setCertificate(true);
+          let tempCertificate = userData.certificates;
+          if (tempCertificate) {
+            if (tempCertificate.find((x: any) => x.courseId == course.id)) {
+              return;
+            } else {
+              tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id });
+              addUserCertificate(tempCertificate, userData.id);
+            }
+          } else {
+            tempCertificate = []
+            tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id });
+            addUserCertificate(tempCertificate, userData.id);
+          }
         }
-
       }
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
         temp_comments = [...comments].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
@@ -151,7 +162,14 @@ const Lesson = () => {
   const goTo = () => {
     router.push({
       pathname: `/Certificates`,
-      query: { name: userData.name, title: course.courseTittle }
+      query: {
+        name: userData.name,
+        title: course.courseTittle,
+        professor: course.courseProfessor[0].name,
+        id: userData.uid,
+        color: course.courseCertificateColor,
+        courseId: course.id
+      }
     });
   }
 
@@ -163,10 +181,10 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
-          {/* {certficate && <div className="certificate-container">
+          {certficate && <div className="certificate-container">
             <p>Muchas felicidades por acompletar el curso, tu certificado ya esta disponible!</p>
             <button onClick={() => { goTo() }}>Certificado</button>
-          </div>} */}
+          </div>}
           {course && <Container>
             <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />

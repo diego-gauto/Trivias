@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react'
+import Certificate from '../../containers/Certificate/Certificate';
 import { MainContain } from '../../screens/Styles.styled';
 const CertificatesScreen = () => {
   const router = useRouter()
@@ -7,8 +8,7 @@ const CertificatesScreen = () => {
 
   return (
     <MainContain>
-      <div>{name}</div>
-      <div>{title}</div>
+      <Certificate></Certificate>
     </MainContain>
   )
 }
