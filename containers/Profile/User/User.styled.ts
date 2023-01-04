@@ -1181,6 +1181,8 @@ export const ProfileText = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
+  width: 200px;
+  z-index: 5;
   bottom: 0;
   right: 0;
   p {
