@@ -420,8 +420,21 @@ const uploadProfessorImage = (image: any, name: any) => {
     });
   });
 }
+const uploadSignImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professorSign/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
 export const addTeacher = async (professor: any) => {
   professor.reference = `${professor.name}-${uuidv4()}`
+  professor.referenceSign = `${professor.name}-${uuidv4()}`
+  professor.sign = await uploadSignImage(professor.sign, professor.referenceSign);
   professor.path = await uploadProfessorImage(professor.path, professor.reference);
   const docRef = await addDoc(
     collection(db, "professor"),
@@ -443,8 +456,13 @@ export const getTeacher = async () => {
 export const deleteTeacher = async (professor: any) => {
   const storage = getStorage();
   const desertRef = ref(storage, `professorPicture/${professor.reference}`);
+  const desertRefSign = ref(storage, `professorSign/${professor.referenceSign}`);
   await deleteObject(desertRef).then(async () => {
-    await deleteDoc(doc(db, "professor", professor.id));
+    await deleteObject(desertRefSign).then(async () => {
+      await deleteDoc(doc(db, "professor", professor.id));
+    }).catch((error) => {
+      console.log(error)
+    })
   }).catch((error) => {
     console.log(error)
   });
@@ -453,9 +471,9 @@ export const updateTeacher = async (professor: any, id: any) => {
   let tempProfessor: any = JSON.parse(JSON.stringify(professor))
   const storage = getStorage();
   const desertRef = ref(storage, `professorPicture/${tempProfessor.reference}`);
+  const desertRefSign = ref(storage, `professorSign/${professor.referenceSign}`);
   console.log(tempProfessor)
   if ("format" in tempProfessor) {
-    console.log('format')
     await deleteObject(desertRef).then(async () => {
       tempProfessor.reference = `${tempProfessor.name}-${uuidv4()}`
     }).catch((error) => {
@@ -463,6 +481,15 @@ export const updateTeacher = async (professor: any, id: any) => {
     });
     tempProfessor.path = await uploadProfessorImage(tempProfessor.format, tempProfessor.reference);
     delete tempProfessor.format;
+  }
+  if ("formatSign" in tempProfessor) {
+    await deleteObject(desertRefSign).then(async () => {
+      tempProfessor.referenceSign = `${tempProfessor.name}-${uuidv4()}`
+    }).catch((error) => {
+      console.log(error)
+    });
+    tempProfessor.sign = await uploadSignImage(tempProfessor.formatSign, tempProfessor.referenceSign);
+    delete tempProfessor.formatSign;
   }
   const docRef = doc(db, 'professor', id);
   delete tempProfessor.id;

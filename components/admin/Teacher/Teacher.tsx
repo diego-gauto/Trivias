@@ -22,12 +22,23 @@ const Teacher = () => {
   const [edit, setEdit] = useState<number>(-1);
   const [teachers, setTeachers] = useState<any>([]);
   const [editImage, setEditImage] = useState<any>("");
+  const [editSignImage, setEditSignImage] = useState<any>("");
   const [addImage, setAddImage] = useState<any>("");
+  const [addSign, setAddSign] = useState<any>("");
   const [teacher, setTeacher] = useState<any>({
     name: "",
     about: "",
-    path: ""
+    path: "",
+    sign: ""
   });
+  const getSign = (file: any) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setAddSign(reader.result)
+      setTeacher({ ...teacher, sign: reader.result })
+    };
+  }
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -44,7 +55,14 @@ const Teacher = () => {
       setTeacher({ ...teacher, format: reader.result })
     };
   }
-  console.log(teacher)
+  const changeSign = (file: any) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setEditSignImage(reader.result)
+      setTeacher({ ...teacher, formatSign: reader.result })
+    };
+  }
   const createTeacher = () => {
     setLoading(true);
     if (Object.keys(teacher).some(key => teacher[key] === '')) {
@@ -69,13 +87,13 @@ const Teacher = () => {
     if (window.confirm("Desea borrar este Profesor: " + val.name)) {
       deleteTeacher(val).then(() => {
         getAllteachers();
-        // alert("Categoría: " + val.name + " eliminada con éxito")
       })
     }
   }
-  const update = (val: any, valFormat: any) => {
+  const update = (val: any, valFormat: any, valFormatSign: any) => {
     let tempVal: any = {
       format: valFormat,
+      formatSign: valFormatSign,
       ...val
     };
     updateTeacher(tempVal, val.id).then(() => {
@@ -83,6 +101,7 @@ const Teacher = () => {
       alert("Profesor actualizado")
       getAllteachers();
       delete teacher.format;
+      delete teacher.formatSign;
     })
   }
   useEffect(() => {
@@ -130,8 +149,9 @@ const Teacher = () => {
                     }}
                   />
                 </InputContain>
-                <InputContain
-                >
+              </div>
+              <div className="inputs">
+                <InputContain>
                   <Label>Foto del Instructor</Label>
                   <Input
                     type="file"
@@ -139,10 +159,21 @@ const Teacher = () => {
                     onChange={(e) => { getImage(e.target.files) }}
                   />
                 </InputContain>
+                <InputContain>
+                  <Label>Firma de instructor</Label>
+                  <Input
+                    type="file"
+                    accept="image/png, image/jpg, image/jpeg"
+                    onChange={(e) => { getSign(e.target.files) }}
+                  />
+                </InputContain>
               </div>
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 10 }}>
                 {
                   addImage !== "" && <img src={addImage} />
+                }
+                {
+                  addSign !== "" && <img src={addSign} style={{ height: 40 }} />
                 }
               </div>
               <ButtonContain>
@@ -180,6 +211,7 @@ const Teacher = () => {
                             edit == i &&
                             <FormContain style={{ flexDirection: "column" }}>
                               <InputContain style={{ width: 500 }}>
+                                <Label>Nombre del Instructor</Label>
                                 <Input
                                   defaultValue={val.name}
                                   placeholder={"Editar nombre de: " + val.name}
@@ -189,6 +221,7 @@ const Teacher = () => {
                                 />
                               </InputContain>
                               <InputContain style={{ width: 500 }}>
+                                <Label>Descripción del Instructor</Label>
                                 <Input
                                   defaultValue={val.about == undefined ? "Nueva descripción" : val.about}
                                   placeholder={val.about == undefined ? "Agregar descripción" : "Editar descripción: " + val.about}
@@ -198,7 +231,8 @@ const Teacher = () => {
                                 />
                               </InputContain>
                               <InputContain
-                                style={{ width: 500 }}>
+                                style={{ width: 500, gap: 10 }}>
+                                <Label>Foto del Instructor</Label>
                                 <Input
                                   type="file"
                                   accept="image/png, image/jpg, image/jpeg"
@@ -216,10 +250,30 @@ const Teacher = () => {
                                   }
                                 </div>
                               </InputContain>
+                              <InputContain
+                                style={{ width: 500, gap: 10 }}>
+                                <Label>Firma</Label>
+                                <Input
+                                  type="file"
+                                  accept="image/png, image/jpg, image/jpeg"
+                                  onChange={(e) => { changeSign(e.target.files) }}
+                                />
+                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                  {
+                                    (teachers[i].sign && editSignImage == "") ? <img src={teachers[i].sign} style={{ height: 40 }} />
+                                      :
+                                      <>
+                                        {
+                                          editSignImage !== "" && <img src={editSignImage} />
+                                        }
+                                      </>
+                                  }
+                                </div>
+                              </InputContain>
                               <ButtonContain >
                                 <Button
                                   onClick={() => {
-                                    update(val, teacher.format);
+                                    update(val, teacher.format, teacher.formatSign);
                                   }}
                                 >Editar</Button>
                               </ButtonContain>
@@ -229,7 +283,7 @@ const Teacher = () => {
 
                       </EditCat>
                       <CatData>
-                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); setEditImage(""); setNewTeacher(false) }} />
+                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); setEditImage(""); setNewTeacher(false); setEditSignImage("") }} />
                         <CloseIcon onClick={() => {
                           Delete(val); setEdit(-1);
                         }} />
