@@ -806,14 +806,8 @@ export const ProfileMainContainer = styled.div<{
     @media (max-width: 1023px) {
       top: -60px;
     }
-    @media (max-width: 480px) {
-      top: -53px;
-    }
     img {
       width: 50px;
-      @media (max-width: 480px) {
-        width: 38px;
-      }
     }
   }
   .stars {
@@ -822,7 +816,6 @@ export const ProfileMainContainer = styled.div<{
     transform: rotate(-170deg);
     width: 40px;
     height: 40px;
-    border: 1px solid red;
     ${(props) =>
       0 <= props.star &&
       props.star < 0.125 &&
@@ -930,10 +923,6 @@ export const ProfileMainContainer = styled.div<{
         font-size: 16px;
         line-height: 16px;
       }
-      @media (max-width: 450px) {
-        font-size: 12px;
-        line-height: 12px;
-      }
     }
     span {
       font-size: 16px;
@@ -945,10 +934,6 @@ export const ProfileMainContainer = styled.div<{
       @media (max-width: 750px) {
         font-size: 24px;
         line-height: 40px;
-      }
-      @media (max-width: 450px) {
-        font-size: 18px;
-        line-height: 30px;
       }
     }
     .main-text {
@@ -1398,10 +1383,6 @@ export const PictureContain = styled.div<{
     left: 0;
     transform: none;
   }
-  @media (max-width: 480px) {
-    width: 135px;
-    height: 135px;
-  }
   .picture {
     display: none;
     input::file-selector-button {
@@ -1425,11 +1406,6 @@ export const PictureContain = styled.div<{
       height: 70px;
       border: 2px solid white;
       border-radius: 50%;
-      @media (max-width: 480px) {
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-      }
     }
     .message {
       top: 20px;
@@ -1440,22 +1416,12 @@ export const PictureContain = styled.div<{
       background-color: #dad3e5;
       border-radius: 100px;
       box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
-      @media (max-width: 480px) {
-        font-size: 8px;
-        top: 12px;
-        left: 40px;
-        padding-inline: 6px;
-        padding-block: 2px;
-      }
       p {
         font-size: 10px;
         margin: 0;
         white-space: nowrap;
         color: #3f1168;
         font-weight: 600;
-        @media (max-width: 480px) {
-          font-size: 7px;
-        }
       }
     }
   }
@@ -1467,10 +1433,6 @@ export const PictureContain = styled.div<{
     display: flex;
     width: 250px;
     height: 250px;
-    @media (max-width: 480px) {
-      width: 170px;
-      height: 170px;
-    }
     svg {
       width: 100%;
       height: 100%;
@@ -1498,14 +1460,6 @@ export const PictureContain = styled.div<{
           ${(props) => props.reward == 1 && "url(#gradientTimeResp)"}
           ${(props) => props.reward == 2 && "url(#gradientCertificateResp)"};
       }
-      @media (max-width: 480px) {
-        stroke-width: 10px;
-        stroke-dashoffset: ${(props) => props.progressResp};
-        stroke-dasharray: 502;
-        cx: 85px;
-        cy: 85px;
-        r: 80px;
-      }
     }
     .progress-background {
       fill: none;
@@ -1516,13 +1470,6 @@ export const PictureContain = styled.div<{
       cx: 125px;
       cy: 125px;
       r: 120px;
-      @media (max-width: 480px) {
-        stroke-width: 10px;
-        stroke-dasharray: 502;
-        cx: 85px;
-        cy: 85px;
-        r: 80px;
-      }
     }
   }
 `;

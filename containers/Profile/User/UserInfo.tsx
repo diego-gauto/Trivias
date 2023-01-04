@@ -144,7 +144,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     setCurveScore(tempScoreCurve)
   }
   const getStarCoordinates = () => {
-    console.log(starPosition);
     let tempFormula: number = 0;
     if (0 <= starPosition && starPosition < .125) {
       tempFormula = (starPosition * 100) / .125 / 100;
@@ -174,43 +173,43 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   }
   const [top, setTop] = useState(-30)
   const [left, setLeft] = useState(120)
-  useEffect(() => {
-    setTimeout(() => {
-      let tempFormula: number = 0;
-      if (top == 10 && left == -10) {
-        setTop(-30)
-        setLeft(120)
-      }
-      if (top == -30 && left == 120) {
-        setTop(20)
-        setLeft(170)
-      }
-      if (top == 20 && left == 170) {
-        setTop(80)
-        setLeft(200)
-      }
-      if (top == 80 && left == 200) {
-        setTop(150)
-        setLeft(170)
-      }
-      if (top == 150 && left == 170) {
-        setTop(200)
-        setLeft(80)
-      }
-      if (top == 200 && left == 80) {
-        setTop(150)
-        setLeft(-10)
-      }
-      if (top == 150 && left == -10) {
-        setTop(80)
-        setLeft(-40)
-      }
-      if (top == 80 && left == -40) {
-        setTop(10)
-        setLeft(-10)
-      }
-    }, 500)
-  }, [top, left])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     let tempFormula: number = 0;
+  //     if (top == 10 && left == -10) {
+  //       setTop(-30)
+  //       setLeft(120)
+  //     }
+  //     if (top == -30 && left == 120) {
+  //       setTop(20)
+  //       setLeft(170)
+  //     }
+  //     if (top == 20 && left == 170) {
+  //       setTop(80)
+  //       setLeft(200)
+  //     }
+  //     if (top == 80 && left == 200) {
+  //       setTop(150)
+  //       setLeft(170)
+  //     }
+  //     if (top == 150 && left == 170) {
+  //       setTop(200)
+  //       setLeft(80)
+  //     }
+  //     if (top == 200 && left == 80) {
+  //       setTop(150)
+  //       setLeft(-10)
+  //     }
+  //     if (top == 150 && left == -10) {
+  //       setTop(80)
+  //       setLeft(-40)
+  //     }
+  //     if (top == 80 && left == -40) {
+  //       setTop(10)
+  //       setLeft(-10)
+  //     }
+  //   }, 500)
+  // }, [top, left])
 
   const Positions = () => {
 
@@ -251,12 +250,12 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                 })
               } */}
             </ProfileText>
-            {/* {
+            {
               starPosition !== 0 &&
-              <div className="stars" style={{ top: top, left: left }}>
+              <div className="stars">
                 <img src={starsImage} />
               </div>
-            } */}
+            }
             <div className="crown">
               <img src={crownImage} />
             </div>
