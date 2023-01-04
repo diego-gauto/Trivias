@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Modal1 from "./Modal1/Modal1";
 import {
-  AddPay,
-  DeleteContain,
-  DeleteText,
-  PaymentBox,
-  PaymentText,
-  PaymentTitle,
   CardIconResp,
-  PayBox,
-  PayContainer,
-  ProfilePayment,
-  TrashIcon,
   PaymentMethodContainer,
   InputCard,
   WhiteLoader,
   LoaderContain,
 } from "./User.styled";
 import { httpsCallable } from "firebase/functions";
-import { db, functions } from "../../../firebase/firebaseConfig";
+import { functions } from "../../../firebase/firebaseConfig";
 import { deletePaymentMethod, updatePaymentMethod } from "../../../store/actions/ProfileActions";
-import { MdModeEdit } from "react-icons/md";
 import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import { addPaymentMethod } from "../../../store/actions/PaymentActions";
-import { updateDoc, doc } from "firebase/firestore";
 
 const PaymentMethod = ({ data, pm, handleClick }: any) => {
 

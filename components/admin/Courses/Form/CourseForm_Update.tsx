@@ -33,6 +33,7 @@ import {
   OptionCat,
   OptionMat,
   OptionProfessor,
+  OptionColor,
 } from "./Select/SelectStyles.styled";
 
 const formSchema = yup.object().shape({
@@ -117,6 +118,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [openMembership, setOpenMembership] = useState<boolean>(false);
   const [openMaterial, setOpenMaterial] = useState<boolean>(false);
   const [openHw, setOpenHw] = useState<boolean>(false);
+  const [openColor, setOpenColor] = useState<boolean>(false);
   const [categories, setCategories] = useState<any>([]);
   const [value, setValue] = useState<any>({})
   const [professors, setProfessors] = useState<any>([]);
@@ -133,7 +135,9 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [difficultyValue, setDifficultyValue] = useState(courseDifficulty);
   const [openLevel, setOpenLevel] = useState<boolean>(false);
   const [colorRGB, setColorRGB] = useState(courseCertificateColor);
-
+  const color = ([
+    "azul", "amarillo", "morado", "naranja", "rosa", "verde"
+  ]);
   const addCategories = (val: any, index: any) => {
     let tempCategories = value2
     let tempIndex = 0;
@@ -265,6 +269,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenMembership(false);
     setOpenLevel(false);
     setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenProfessor = () => {
     setOpenHw(false);
@@ -273,6 +278,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenMembership(false);
     setOpenLevel(false);
     setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenCategory = () => {
     setOpenHw(false);
@@ -281,6 +287,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenMembership(false);
     setOpenLevel(false);
     setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenMembership = () => {
     setOpenHw(false);
@@ -289,6 +296,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenMembership(!openMembership);
     setOpenLevel(false);
     setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenLevel = () => {
     setOpenHw(false);
@@ -297,6 +305,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenMembership(false);
     setOpenLevel(!openLevel);
     setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenMaterial = () => {
     setOpenHw(false);
@@ -305,6 +314,16 @@ const CourseForm = (props: ICourseForm_Update) => {
     setOpenMembership(false);
     setOpenLevel(false);
     setOpenMaterial(!openMaterial);
+    setOpenColor(false);
+  }
+  const handleOpenColor = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(false);
+    setOpenColor(!openColor);
   }
   const difficulty = [
     "Muy Fácil",
@@ -745,14 +764,37 @@ const CourseForm = (props: ICourseForm_Update) => {
             </InputContain>
             <InputContain onClick={(e) => { e.stopPropagation(); }}>
               <Label>Color</Label>
-              <Input style={{ height: 43 }}
-                placeholder="90"
-                type="color"
-                defaultValue={colorRGB}
-                onChange={(e) => {
-                  setColorRGB(e.target.value)
-                }}
-              />
+              <IconContain>
+                <SelectContain key={2}>
+                  <Selected onClick={() => { handleOpenColor() }} style={{ height: "auto" }}>
+                    {colorRGB == "" ? "Seleccione un color" : colorRGB}
+                    <CaretD2 />
+                  </Selected>
+                  {
+                    openColor == true &&
+                    <OptionContain>
+                      {
+                        color.map((val: any, index: any) => {
+                          return (
+                            <OptionColor
+                              color={val}
+                              onClick={() => { setOpenColor(false), setColorRGB(val) }}
+                              key={"SelectColor " + index}>
+                              <input
+                                type="radio"
+                                id="color"
+                                name="color"
+                                value="color"
+                              />
+                              <Label2>{val}</Label2>
+                            </OptionColor>
+                          )
+                        })
+                      }
+                    </OptionContain>
+                  }
+                </SelectContain>
+              </IconContain>
             </InputContain>
           </InputContain2>
         </InputForm>

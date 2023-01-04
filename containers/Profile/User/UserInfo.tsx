@@ -1,23 +1,11 @@
-import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
+import { getAuth, signOut, updatePassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { AiFillCrown, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
-import UserLevel from "../Rewards/UserLevel/UserLevel";
 import {
-  LabelText,
-  Level,
-  LevelContain,
-  LogOut,
-  LogOutIcon,
-  OpenTasks,
   PictureContain,
-  ProfileContainer,
   ProfileIcon,
-  ProfileIconContain,
-  UserContainer,
-  UserText,
   ProfileMainContainer,
   InputPhone,
   Box2,
@@ -26,10 +14,7 @@ import {
 } from "./User.styled";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
-import { useMediaQuery } from "react-responsive";
-import { exitCode } from "process";
 import { updateProfileImage } from "../../../store/actions/UserActions";
-import { GiStarShuriken } from "react-icons/gi";
 
 const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023, starPosition }: any) => {
   let today = new Date().getTime() / 1000;
@@ -46,10 +31,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [image, setImage] = useState<string>("");
-  const [curveText, setCurveText] = useState([]);
-  const [curveScore, setCurveScore] = useState([]);
   const [starCoordinates, setStarCoordinates] = useState(0);
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const numFor = Intl.NumberFormat('en-US');
@@ -129,81 +111,34 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
       })
     }
   }
-  const getCurvedText = () => {
-    let text = "Puntaje actual";
-    let tempCurve: any = [];
-    for (let i: number = 1; i <= text.length; i++) {
-      tempCurve.push(text.slice(i - 1, i))
-    }
-    let scoreText = `${points_format} puntos`;
-    let tempScoreCurve: any = [];
-    for (let i: number = 1; i <= scoreText.length; i++) {
-      tempScoreCurve.push(scoreText.slice(i - 1, i))
-    }
-    setCurveText(tempCurve)
-    setCurveScore(tempScoreCurve)
-  }
   const getStarCoordinates = () => {
-    // console.log(starPosition);
-    // let tempFormula: number = 0;
-    // if (0 <= starPosition && starPosition < .25) {
-    //   tempFormula = (starPosition * 100) / .25 / 100;
-    // }
-    // if (.25 <= starPosition && starPosition < .5) {
-    //   tempFormula = (starPosition * 100) / .5 / 100;
-    // }
-    // if (.5 <= starPosition && starPosition < .75) {
-    //   tempFormula = (starPosition * 100) / .75 / 100;
-    // }
-    // if (.75 <= starPosition && starPosition < 1) {
-    //   tempFormula = (starPosition * 100) / 1 / 100;
-    // }
-    // setStarCoordinates(tempFormula);
+    let tempFormula: number = 0;
+    if (0 <= starPosition && starPosition < .125) {
+      tempFormula = (starPosition * 100) / .125 / 100;
+    }
+    if (.125 <= starPosition && starPosition < .25) {
+      tempFormula = (starPosition * 100) / .25 / 100;
+    }
+    if (.25 <= starPosition && starPosition < .375) {
+      tempFormula = (starPosition * 100) / .375 / 100;
+    }
+    if (.375 <= starPosition && starPosition < .5) {
+      tempFormula = (starPosition * 100) / .5 / 100;
+    }
+    if (.5 <= starPosition && starPosition < .625) {
+      tempFormula = (starPosition * 100) / .625 / 100;
+    }
+    if (.625 <= starPosition && starPosition < .75) {
+      tempFormula = (starPosition * 100) / .75 / 100;
+    }
+    if (.75 <= starPosition && starPosition < .875) {
+      tempFormula = (starPosition * 100) / .875 / 100;
+    }
+    if (.875 <= starPosition && starPosition < 1) {
+      tempFormula = (starPosition * 100) / 1 / 100;
+    }
+    setStarCoordinates(tempFormula);
   }
-  const [top, setTop] = useState(0)
-  const [left, setLeft] = useState(100)
-  const [degree, setDegree] = useState(1)
-  useEffect(() => {
-    setTimeout(() => {
-      let tempFormula: number = 0;
-
-      if (0 <= top && top < 100 && 100 <= left && left < 200) {
-        setTop(top + 1)
-        setLeft(left + 1)
-        setDegree(degree + 1.2)
-      }
-      if (100 <= top && top < 200 && 100 <= left && left < 200) {
-        setTop(top + 1)
-        setLeft(left - 1)
-        setDegree(degree + 1.2)
-      }
-      if (100 <= top && top < 200 && 0 <= left && left < 100) {
-        setTop(top - 1)
-        setLeft(left - 1)
-        setDegree(degree + 1.2)
-      }
-      if (0 <= top && top < 100 && 0 <= left && left < 100) {
-        setTop(top - 1)
-        setLeft(left + 1)
-        setDegree(degree + 1.2)
-      }
-      if (top == 200) {
-        setTop(199)
-      }
-      if (left == 200) {
-        setLeft(199)
-      }
-      if (top == -1) {
-        setTop(0)
-      }
-      if (left == -1) {
-        setLeft(0)
-      }
-      if (degree >= 361) {
-        setDegree(1)
-      }
-    }, 10)
-  }, [top, left])
 
   const Positions = () => {
 
@@ -211,7 +146,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   useEffect(() => {
     Positions();
     getStarCoordinates();
-    getCurvedText();
     setUser({ ...userData })
   }, [userData])
   return (
@@ -223,34 +157,31 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
         <div className="responsive-picture">
           <PictureContain progress={data} reward={reward} progressResp={dataResp} >
             <ProfileText>
-              {/* {
-                curveText.map((val, index) => {
-                  return (
-                    <CurveText
-                      style={{ fontWeight: 500, fontSize: 14, transform: `rotate(-${((index + 1) * 2) + 45}deg)`, bottom: index == 0 ? -20 : (index * 7) - 20, right: index == 0 ? 10 : 10 - (index * 4) }}>
-                      {val}
-                    </CurveText>
-                  )
-                })
-              }
-              {
-                curveScore.map((val, index) => {
-                  return (
-                    <CurveText
-                      style={{ fontSize: 14, transform: `rotate(-${((index + 1) * 2) + 45}deg)`, bottom: index == 0 ? -40 : (index * 7) - 40, right: index == 0 ? 0 : 0 - (index * 4) }}>
-                      {val}
-                    </CurveText>
-                  )
-                })
-              } */}
+              {/* <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  id="MyPath"
+                  fill="none"
+                  d="M10,90 Q90,90 90,45 Q90,10 50,10 Q10,10 10,40 Q10,70 45,70 Q70,70 75,50" />
+                <text>
+                  <textPath href="#MyPath">Puntaje actual</textPath>
+                </text>
+              </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  id="MyPath"
+                  fill="none"
+                  d="M10,90 Q90,90 90,45 Q90,10 50,10 Q10,10 10,40 Q10,70 45,70 Q70,70 75,50" />
+                <text>
+                  <textPath href="#MyPath">Puntaje actual</textPath>
+                </text>
+              </svg> */}
             </ProfileText>
-
-            {/* {
+            {
               starPosition !== 0 &&
-              <div className="stars" style={{ top: top, left: left }}>
-                <img src={starsImage} style={{ transform: `rotate(${degree}deg)` }} />
+              <div className="stars">
+                <img src={starsImage} />
               </div>
-            } */}
+            }
             <div className="crown">
               <img src={crownImage} />
             </div>
@@ -488,17 +419,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
         {
           editPassword &&
           <div className="edit-contain">
-            {/* <div className="input-contain">
-              <label>
-                Contraseña actual
-              </label>
-              <input
-                placeholder="Crea una contraseña"
-              />
-              <div className="eye" onClick={()=>{setShowCurrentPassword(true)}}>
-
-              </div>
-            </div> */}
             <div className="input-contain">
               <label>
                 Nueva contraseña

@@ -18,6 +18,7 @@ import {
   PurpleButton,
   RedButton,
   Text,
+  TextColor,
   TitleContain,
   TransparentButton,
 } from "./AllCourses.styled";
@@ -82,10 +83,12 @@ export const AllCourses = ({
                 <Info>
                   <Label>Color del certificado</Label>
                   {
-                    course.courseCertificateColor ?
-                      <div className="circle" style={{ backgroundColor: course.courseCertificateColor }}></div>
-                      :
+                    course.courseCertificateColor == "" ?
                       <Text>No hay color</Text>
+                      :
+                      <>
+                        <TextColor color={course.courseCertificateColor}>{course.courseCertificateColor}</TextColor>
+                      </>
                   }
                 </Info>
               </Column>
