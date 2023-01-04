@@ -70,7 +70,6 @@ export const History = (user: any) => {
       });
 
       tempInvoice = tempInvoice.slice(0, 5);
-      console.log(tempInvoice);
       tempInvoice.forEach((element: any, index: number) => {
         tempOption.push(index);
       });

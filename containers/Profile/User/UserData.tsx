@@ -42,7 +42,6 @@ const UserData = ({ data, pm }: props) => {
       window.location.reload();
     })
   }
-  console.log(user)
   useEffect(() => {
     setUser({ ...data })
   }, [data])

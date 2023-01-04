@@ -48,6 +48,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const [image, setImage] = useState<string>("");
   const [curveText, setCurveText] = useState([]);
   const [curveScore, setCurveScore] = useState([]);
+  const [starCoordinates, setStarCoordinates] = useState(0);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -142,12 +143,79 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     setCurveText(tempCurve)
     setCurveScore(tempScoreCurve)
   }
+  const getStarCoordinates = () => {
+    // console.log(starPosition);
+    // let tempFormula: number = 0;
+    // if (0 <= starPosition && starPosition < .25) {
+    //   tempFormula = (starPosition * 100) / .25 / 100;
+    // }
+    // if (.25 <= starPosition && starPosition < .5) {
+    //   tempFormula = (starPosition * 100) / .5 / 100;
+    // }
+    // if (.5 <= starPosition && starPosition < .75) {
+    //   tempFormula = (starPosition * 100) / .75 / 100;
+    // }
+    // if (.75 <= starPosition && starPosition < 1) {
+    //   tempFormula = (starPosition * 100) / 1 / 100;
+    // }
+    // setStarCoordinates(tempFormula);
+  }
+  const [top, setTop] = useState(0)
+  const [left, setLeft] = useState(100)
+  const [degree, setDegree] = useState(1)
   useEffect(() => {
+    setTimeout(() => {
+      let tempFormula: number = 0;
+
+      if (0 <= top && top < 100 && 100 <= left && left < 200) {
+        setTop(top + 1)
+        setLeft(left + 1)
+        setDegree(degree + 1.2)
+      }
+      if (100 <= top && top < 200 && 100 <= left && left < 200) {
+        setTop(top + 1)
+        setLeft(left - 1)
+        setDegree(degree + 1.2)
+      }
+      if (100 <= top && top < 200 && 0 <= left && left < 100) {
+        setTop(top - 1)
+        setLeft(left - 1)
+        setDegree(degree + 1.2)
+      }
+      if (0 <= top && top < 100 && 0 <= left && left < 100) {
+        setTop(top - 1)
+        setLeft(left + 1)
+        setDegree(degree + 1.2)
+      }
+      if (top == 200) {
+        setTop(199)
+      }
+      if (left == 200) {
+        setLeft(199)
+      }
+      if (top == -1) {
+        setTop(0)
+      }
+      if (left == -1) {
+        setLeft(0)
+      }
+      if (degree >= 361) {
+        setDegree(1)
+      }
+    }, 10)
+  }, [top, left])
+
+  const Positions = () => {
+
+  }
+  useEffect(() => {
+    Positions();
+    getStarCoordinates();
     getCurvedText();
     setUser({ ...userData })
   }, [userData])
   return (
-    <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition}>
+    <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition} coordinates={starCoordinates}>
       <div className="first-text">
         <div className="main-text">
           <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
@@ -179,8 +247,8 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
 
             {/* {
               starPosition !== 0 &&
-              <div className="stars">
-                <img src={starsImage} />
+              <div className="stars" style={{ top: top, left: left }}>
+                <img src={starsImage} style={{ transform: `rotate(${degree}deg)` }} />
               </div>
             } */}
             <div className="crown">
@@ -505,83 +573,6 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
         <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
       </div>
     </ProfileMainContainer>
-    // <ProfileContainer>
-    //   <ProfileIconContain>
-    //     <PictureContain>
-    //       {userData &&
-    //         userData.photoURL.length > 0 ?
-    //         <ProfileIcon src={userData.photoURL} ></ProfileIcon>
-    //         : <ProfileIcon src={DEFAULT_USER_IMG} ></ProfileIcon>
-    //       }
-    //       <LevelContain>
-    //         <UserLevel />
-    //       </LevelContain>
-    //     </PictureContain>
-    //   </ProfileIconContain>
-    //   <UserContainer>
-    //     <LabelText>
-    //       Usuario
-    //     </LabelText>
-    //     <UserText>
-    //       {userData.name} {userData.lastName}
-    //     </UserText>
-    //   </UserContainer>
-    //   <UserContainer>
-    //     <LabelText>
-    //       Correo electrónico
-    //     </LabelText>
-    //     <UserText>
-    //       {userData.email}
-    //     </UserText>
-    //   </UserContainer>
-    //   <UserContainer>
-    //     <LabelText>
-    //       Puntos
-    //     </LabelText>
-    //     <UserText>
-    //       {userData.score}
-    //     </UserText>
-    //   </UserContainer>
-    //   {userData.membership.finalDate > today && <UserContainer>
-    //     <LabelText>
-    //       Suscripción Actual
-    //     </LabelText>
-    //     <UserText>
-    //       Gonvar Plus Mensual
-    //     </UserText>
-    //   </UserContainer>}
-    //   {userData.membership.finalDate > today && <UserContainer>
-    //     <LabelText>
-    //       Próximo cargo
-    //     </LabelText>
-    //     <UserText>
-    //       {formatDate}
-    //     </UserText>
-    //   </UserContainer>}
-    //   {
-    //     userData.role == "user" &&
-    //     <UserContainer>
-    //       {
-    //         !taskView ?
-    //           <OpenTasks onClick={() => { setTaskView(true) }}>
-    //             Ver Tareas
-    //           </OpenTasks>
-    //           :
-    //           <OpenTasks onClick={() => { setTaskView(false) }}>
-    //             Ver Perfil
-    //           </OpenTasks>
-    //       }
-    //     </UserContainer>
-    //   }
-    //   <Link href="/">
-    //     <LogOut
-    //       onClick={logoutFunc}
-    //     >
-    //       Cerrar Sesión
-    //       <LogOutIcon />
-    //     </LogOut>
-    //   </Link>
-    // </ProfileContainer>
   )
 }
 export default UserInfo;

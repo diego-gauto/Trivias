@@ -783,6 +783,7 @@ export const ProfileMainContainer = styled.div<{
   startEdit: any;
   password: any;
   star: any;
+  coordinates: number;
 }>`
   display: flex;
   flex-direction: column;
@@ -818,16 +819,42 @@ export const ProfileMainContainer = styled.div<{
   .stars {
     z-index: 3;
     position: absolute;
+    transform: rotate(-170deg);
+    width: 40px;
+    height: 40px;
     ${(props) =>
       0 <= props.star &&
-      props.star <= 0.25 &&
+      props.star < 0.25 &&
       css`
-        top: "${props.star}px";
+        top: ${100 * props.coordinates}px;
+        left: ${100 + 100 * props.coordinates}px;
+      `}
+    ${(props) =>
+      0.25 <= props.star &&
+      props.star < 0.5 &&
+      css`
+        top: ${100 + 100 * props.coordinates}px;
+        left: ${200 - 100 * props.coordinates}px;
+      `}
+    ${(props) =>
+      0.5 <= props.star &&
+      props.star < 0.75 &&
+      css`
+        top: ${200 - 100 * props.coordinates}px;
+        left: ${100 - 100 * props.coordinates}px;
+      `}
+      ${(props) =>
+      0.75 <= props.star &&
+      props.star <= 1 &&
+      css`
+        top: ${100 - 100 * props.coordinates}px;
+        left: ${100 * props.coordinates}px;
       `}
     img {
-      width: 50px;
+      // transform: rotate(${(props) => props.star * 360}deg);
+      width: 40px;
       @media (max-width: 480px) {
-        width: 38px;
+        width: 30px;
       }
     }
   }
