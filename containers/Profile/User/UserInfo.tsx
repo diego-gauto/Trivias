@@ -1,23 +1,11 @@
-import { getAuth, signInWithEmailAndPassword, signOut, updatePassword } from "firebase/auth";
+import { getAuth, signOut, updatePassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { AiFillCrown, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
-import UserLevel from "../Rewards/UserLevel/UserLevel";
 import {
-  LabelText,
-  Level,
-  LevelContain,
-  LogOut,
-  LogOutIcon,
-  OpenTasks,
   PictureContain,
-  ProfileContainer,
   ProfileIcon,
-  ProfileIconContain,
-  UserContainer,
-  UserText,
   ProfileMainContainer,
   InputPhone,
   Box2,
@@ -26,10 +14,7 @@ import {
 } from "./User.styled";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
-import { useMediaQuery } from "react-responsive";
-import { exitCode } from "process";
 import { updateProfileImage } from "../../../store/actions/UserActions";
-import { GiStarShuriken } from "react-icons/gi";
 
 const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023, starPosition }: any) => {
   let today = new Date().getTime() / 1000;
@@ -233,7 +218,9 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                 curveText.map((val, index) => {
                   return (
                     <CurveText
-                      style={{ fontWeight: 500, fontSize: 14, transform: `rotate(-${((index + 1) * 2) + 45}deg)`, bottom: index == 0 ? -20 : (index * 7) - 20, right: index == 0 ? 10 : 10 - (index * 4) }}>
+                      index={index}
+                      key={"curveText" + index}
+                    >
                       {val}
                     </CurveText>
                   )
@@ -243,7 +230,9 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                 curveScore.map((val, index) => {
                   return (
                     <CurveText
-                      style={{ fontSize: 14, transform: `rotate(-${((index + 1) * 2) + 45}deg)`, bottom: index == 0 ? -40 : (index * 7) - 40, right: index == 0 ? 0 : 0 - (index * 4) }}>
+                      index={index}
+                      key={"scoreText" + index}
+                    >
                       {val}
                     </CurveText>
                   )

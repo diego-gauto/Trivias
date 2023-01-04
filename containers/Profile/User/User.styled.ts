@@ -134,31 +134,6 @@ export const ThirdBox = styled.div`
     width: 100%;
   }
 `;
-export const ProfileContainer = styled.div`
-  width: 40%;
-  background: white;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-  padding-inline: 40px;
-  padding-block: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  @media (max-width: 1023px) {
-    display: none;
-  }
-`;
-export const ProfilePayment = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: white;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  padding: 20px;
-  @media (max-width: 1023px) {
-    order: 3;
-  }
-`;
 export const ProfileData = styled.div`
   display: flex;
   flex-direction: column;
@@ -186,11 +161,6 @@ export const RewardContain = styled.div`
     //width:100%;
   }
 `;
-export const ProfileIconContain = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 export const LogOutIcon = styled.i`
   background-image: url(../images/logout.svg);
   background-repeat: no-repeat;
@@ -212,31 +182,6 @@ export const Level = styled.i`
   bottom: 0;
   right: 0;
 `;
-export const UserContainer = styled.div``;
-export const LabelText = styled.label`
-  font-family: "Raleway", sans-serif;
-  font-size: 14px;
-`;
-export const UserText = styled.p`
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
-  color: #8e2de2;
-  font-weight: 600;
-  margin: 0;
-`;
-export const OpenTasks = styled.p`
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
-  color: #9011ff;
-  font-weight: 600;
-  margin: 0;
-  cursor: pointer;
-  width: fit-content;
-  &:hover {
-    color: #600fa6;
-    text-decoration: underline;
-  }
-`;
 export const LogOut = styled.p`
   display: flex;
   align-items: center;
@@ -257,48 +202,10 @@ export const LogOut = styled.p`
     margin-bottom: 15px;
   }
 `;
-export const PaymentTitle = styled.h1`
-  font-family: "Montserrat", sans-serif;
-  font-size: 24px;
-  margin-bottom: 20px;
-  @media (max-width: 1023px) {
-    font-size: 20px;
-  }
-`;
-export const PaymentBox = styled.div`
-  display: flex;
-  width: 100%;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
-  padding-block: 8px;
-  padding-inline: 10px;
-  border-radius: 10px;
-  justify-content: space-between;
-  align-items: center;
-  @media (max-width: 510px) {
-    padding-block: 10px;
-    padding-inline: 10px;
-  }
-  @media (max-width: 350px) {
-    padding-block: 5px;
-    padding-inline: 5px;
-  }
-`;
-export const PayBox = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-`;
 export const PayContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-`;
-export const VisaIcon = styled.i`
-  background-image: url(../images/Visa.png);
-  background-repeat: no-repeat;
-  height: 30px;
-  width: 47px;
-  background-position: center;
 `;
 export const CardIconResp = styled.div`
   width: fit-content;
@@ -325,33 +232,6 @@ export const TrashIcon = styled.i`
   height: 21px;
   width: 18px;
   background-position: center;
-`;
-export const PaymentText = styled.p`
-  font-size: 14px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  margin: 0;
-  @media (max-width: 510px) {
-    font-size: 12px;
-  }
-`;
-export const DeleteContain = styled.div`
-  display: flex;
-  gap: 5px;
-  cursor: pointer;
-`;
-export const DeleteText = styled.p`
-  font-size: 12px;
-  font-family: "Raleway", sans-serif;
-  font-weight: 400;
-  color: #6717cd;
-  margin: 0;
-  &:hover {
-    font-weight: 600;
-  }
-  @media (max-width: 1280px) {
-    display: none;
-  }
 `;
 export const AddPay = styled.p`
   display: flex;
@@ -383,182 +263,12 @@ export const RewardCenterLink = styled(AddPay)`
 
 export const RewardCenterLinkNoReward = styled(AddPay)``;
 
-export const RewardBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-  @media (max-width: 400px) {
-    gap: 5px;
-  }
-`;
 export const DataTitle = styled.h1`
   font-family: "Montserrat", sans-serif;
   font-size: 24px;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 20px;
-  }
-`;
-export const VectorLeft = styled.i`
-  background-image: url(../images/rigthPurpleArrow.svg);
-  background-repeat: no-repeat;
-  rotate: 180deg;
-  height: 22px;
-  width: 18px;
-  background-position: center;
-  cursor: pointer;
-`;
-export const VectorRight = styled.i`
-  background-image: url(../images/rigthPurpleArrow.svg);
-  background-repeat: no-repeat;
-  height: 22px;
-  width: 18px;
-  background-position: center;
-  cursor: pointer;
-`;
-export const RewardTitle = styled.p`
-  font-size: 18px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-  @media (max-width: 400px) {
-    font-size: 14px;
-  }
-`;
-export const Pointbox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-export const Currentlvl = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  color: white;
-  background-color: #6717cd;
-  min-height: 50px;
-  min-width: 50px;
-  border-radius: 50%;
-  background-position: center;
-  @media (max-width: 400px) {
-    height: 32px;
-    width: 32px;
-  }
-`;
-export const Nextlvl = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  color: #6717cd;
-  background-color: white;
-  border: 1px solid #6717cd;
-  min-height: 50px;
-  min-width: 50px;
-  border-radius: 50%;
-  background-position: center;
-  @media (max-width: 400px) {
-    height: 32px;
-    width: 32px;
-  }
-`;
-export const ProgressBar1 = styled("div")<{ barProgress: any }>`
-  height: 7px;
-  background-color: #6717cd;
-  border: 1px solid #6717cd;
-  position: relative;
-  width: ${(props) => props.barProgress}%;
-`;
-export const ProgressBar2 = styled("div")<{ barProgress: any }>`
-  height: 7px;
-  background-color: #6717cd;
-  border: 1px solid #6717cd;
-  position: relative;
-  width: ${(props) => props.barProgress}%;
-`;
-export const CompleteBar = styled.div`
-  display: flex;
-  width: 100%;
-  height: 8px;
-  max-width: 186px;
-  border-radius: 5px;
-  border: 1px solid #6717cd;
-`;
-export const PointsBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  bottom: 10px;
-  right: 0;
-  width: 0px;
-`;
-export const PolygonDown = styled.i`
-  background-image: url(../images/arrowDownPurple.svg);
-  height: 9px;
-  width: 12px;
-  background-repeat: no-repeat;
-  left: 0;
-`;
-export const UserPoints = styled.p`
-  font-size: 14px;
-  font-family: "Raleway", sans-serif;
-  color: #0000fd;
-  margin: 0;
-  white-space: nowrap;
-`;
-export const RewardData = styled.div`
-  display: flex;
-  gap: 20px;
-  @media (max-width: 1023px) {
-    flex-direction: column;
-    padding-inline: 60px;
-    align-items: center;
-  }
-  @media (max-width: 850px) {
-    align-items: center;
-  }
-  @media (max-width: 450px) {
-    padding-inline: 0;
-  }
-`;
-export const RewardInfo = styled.div`
-  display: flex;
-  margin-top: 10px;
-  flex-direction: column;
-  width: 100%;
-  gap: 15px;
-  @media (max-width: 1023px) {
-    text-align: center;
-  }
-`;
-export const RewardTitleBox = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  margin: 0;
-`;
-export const RewardPoints = styled.p`
-  font-size: 12px;
-  opacity: 0.7;
-  font-family: "Raleway", sans-serif;
-  margin: 0;
-`;
-export const RewardParagraph = styled.p`
-  font-size: 12px;
-  font-family: "Raleway", sans-serif;
-  margin: 0;
-  @media (max-width: 1023px) {
-    display: none;
   }
 `;
 export const ImageContain = styled.div`
@@ -571,12 +281,6 @@ export const ImageContain = styled.div`
     max-height: 260px;
     max-width: 260px;
   }
-`;
-export const RewardImage = styled.img`
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const AllEditInputs = styled.div`
   display: flex;
@@ -1483,7 +1187,7 @@ export const ProfileText = styled.div`
     margin: 0;
   }
 `;
-export const CurveText = styled.p`
+export const CurveText = styled.h1<{ index: number }>`
   position: absolute;
 `;
 export const ProfileIcon = styled.img<{ edit: any }>`
