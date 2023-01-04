@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -63,9 +63,46 @@ export const Info = styled.div`
 `;
 export const Text = styled.p`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
   margin: 0;
   text-align: justify;
+`;
+export const TextColor = styled.p<{ color: string }>`
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 10px;
+  color: white;
+  margin: 0;
+  text-align: justify;
+  ${(props) =>
+    props.color == "azul" &&
+    css`
+      background-color: #6778f9;
+    `}
+  ${(props) =>
+    props.color == "amarillo" &&
+    css`
+      background-color: #e2a12d;
+    `}
+    ${(props) =>
+    props.color == "morado" &&
+    css`
+      background-color: #9900ee;
+    `}
+    ${(props) =>
+    props.color == "naranja" &&
+    css`
+      background-color: #f04a18;
+    `}
+    ${(props) =>
+    props.color == "rosa" &&
+    css`
+      background-color: #d445d3;
+    `}
+    ${(props) =>
+    props.color == "verde" &&
+    css`
+      background-color: #03bc80;
+    `}
 `;
 export const Label = styled.label`
   font-size: 16px;

@@ -822,33 +822,62 @@ export const ProfileMainContainer = styled.div<{
     transform: rotate(-170deg);
     width: 40px;
     height: 40px;
+    border: 1px solid red;
     ${(props) =>
       0 <= props.star &&
+      props.star < 0.125 &&
+      css`
+        top: ${50 * props.coordinates - 30}px;
+        left: ${120 + 50 * props.coordinates}px;
+      `}
+    ${(props) =>
+      0.125 <= props.star &&
       props.star < 0.25 &&
       css`
-        top: ${100 * props.coordinates}px;
-        left: ${100 + 100 * props.coordinates}px;
+        top: ${20 + 60 * props.coordinates}px;
+        left: ${170 + 30 * props.coordinates}px;
       `}
     ${(props) =>
       0.25 <= props.star &&
+      props.star < 0.375 &&
+      css`
+        top: ${80 + 70 * props.coordinates}px;
+        left: ${200 - 30 * props.coordinates}px;
+      `}
+      ${(props) =>
+      0.375 <= props.star &&
       props.star < 0.5 &&
       css`
-        top: ${100 + 100 * props.coordinates}px;
-        left: ${200 - 100 * props.coordinates}px;
+        top: ${150 + 50 * props.coordinates}px;
+        left: ${170 - 90 * props.coordinates}px;
       `}
     ${(props) =>
       0.5 <= props.star &&
-      props.star < 0.75 &&
+      props.star < 0.625 &&
       css`
-        top: ${200 - 100 * props.coordinates}px;
-        left: ${100 - 100 * props.coordinates}px;
+        top: ${200 - 50 * props.coordinates}px;
+        left: ${80 - 90 * props.coordinates}px;
       `}
       ${(props) =>
+      0.625 <= props.star &&
+      props.star < 0.75 &&
+      css`
+        top: ${150 - 70 * props.coordinates}px;
+        left: ${-30 * props.coordinates - 10}px;
+      `}
+        ${(props) =>
       0.75 <= props.star &&
+      props.star <= 0.875 &&
+      css`
+        top: ${80 - 70 * props.coordinates}px;
+        left: ${-30 * props.coordinates - 40}px;
+      `}
+      ${(props) =>
+      0.875 <= props.star &&
       props.star <= 1 &&
       css`
-        top: ${100 - 100 * props.coordinates}px;
-        left: ${100 * props.coordinates}px;
+        top: ${10 - 40 * props.coordinates}px;
+        left: ${130 * props.coordinates - 10}px;
       `}
     img {
       // transform: rotate(${(props) => props.star * 360}deg);

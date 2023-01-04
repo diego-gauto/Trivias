@@ -144,65 +144,72 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     setCurveScore(tempScoreCurve)
   }
   const getStarCoordinates = () => {
-    // console.log(starPosition);
-    // let tempFormula: number = 0;
-    // if (0 <= starPosition && starPosition < .25) {
-    //   tempFormula = (starPosition * 100) / .25 / 100;
-    // }
-    // if (.25 <= starPosition && starPosition < .5) {
-    //   tempFormula = (starPosition * 100) / .5 / 100;
-    // }
-    // if (.5 <= starPosition && starPosition < .75) {
-    //   tempFormula = (starPosition * 100) / .75 / 100;
-    // }
-    // if (.75 <= starPosition && starPosition < 1) {
-    //   tempFormula = (starPosition * 100) / 1 / 100;
-    // }
-    // setStarCoordinates(tempFormula);
+    console.log(starPosition);
+    let tempFormula: number = 0;
+    if (0 <= starPosition && starPosition < .125) {
+      tempFormula = (starPosition * 100) / .125 / 100;
+    }
+    if (.125 <= starPosition && starPosition < .25) {
+      tempFormula = (starPosition * 100) / .25 / 100;
+    }
+    if (.25 <= starPosition && starPosition < .375) {
+      tempFormula = (starPosition * 100) / .375 / 100;
+    }
+    if (.375 <= starPosition && starPosition < .5) {
+      tempFormula = (starPosition * 100) / .5 / 100;
+    }
+    if (.5 <= starPosition && starPosition < .625) {
+      tempFormula = (starPosition * 100) / .625 / 100;
+    }
+    if (.625 <= starPosition && starPosition < .75) {
+      tempFormula = (starPosition * 100) / .75 / 100;
+    }
+    if (.75 <= starPosition && starPosition < .875) {
+      tempFormula = (starPosition * 100) / .875 / 100;
+    }
+    if (.875 <= starPosition && starPosition < 1) {
+      tempFormula = (starPosition * 100) / 1 / 100;
+    }
+    setStarCoordinates(tempFormula);
   }
-  const [top, setTop] = useState(0)
-  const [left, setLeft] = useState(100)
-  const [degree, setDegree] = useState(1)
+  const [top, setTop] = useState(-30)
+  const [left, setLeft] = useState(120)
   useEffect(() => {
     setTimeout(() => {
       let tempFormula: number = 0;
-
-      if (0 <= top && top < 100 && 100 <= left && left < 200) {
-        setTop(top + 1)
-        setLeft(left + 1)
-        setDegree(degree + 1.2)
+      if (top == 10 && left == -10) {
+        setTop(-30)
+        setLeft(120)
       }
-      if (100 <= top && top < 200 && 100 <= left && left < 200) {
-        setTop(top + 1)
-        setLeft(left - 1)
-        setDegree(degree + 1.2)
+      if (top == -30 && left == 120) {
+        setTop(20)
+        setLeft(170)
       }
-      if (100 <= top && top < 200 && 0 <= left && left < 100) {
-        setTop(top - 1)
-        setLeft(left - 1)
-        setDegree(degree + 1.2)
+      if (top == 20 && left == 170) {
+        setTop(80)
+        setLeft(200)
       }
-      if (0 <= top && top < 100 && 0 <= left && left < 100) {
-        setTop(top - 1)
-        setLeft(left + 1)
-        setDegree(degree + 1.2)
+      if (top == 80 && left == 200) {
+        setTop(150)
+        setLeft(170)
       }
-      if (top == 200) {
-        setTop(199)
+      if (top == 150 && left == 170) {
+        setTop(200)
+        setLeft(80)
       }
-      if (left == 200) {
-        setLeft(199)
+      if (top == 200 && left == 80) {
+        setTop(150)
+        setLeft(-10)
       }
-      if (top == -1) {
-        setTop(0)
+      if (top == 150 && left == -10) {
+        setTop(80)
+        setLeft(-40)
       }
-      if (left == -1) {
-        setLeft(0)
+      if (top == 80 && left == -40) {
+        setTop(10)
+        setLeft(-10)
       }
-      if (degree >= 361) {
-        setDegree(1)
-      }
-    }, 10)
+    }, 500)
   }, [top, left])
 
   const Positions = () => {
@@ -244,11 +251,10 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
                 })
               } */}
             </ProfileText>
-
             {/* {
               starPosition !== 0 &&
               <div className="stars" style={{ top: top, left: left }}>
-                <img src={starsImage} style={{ transform: `rotate(${degree}deg)` }} />
+                <img src={starsImage} />
               </div>
             } */}
             <div className="crown">
