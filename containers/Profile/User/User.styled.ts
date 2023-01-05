@@ -1280,7 +1280,12 @@ export const RewardContainer = styled.div<{ reward: any }>`
       ${(props) =>
         props.reward == 0 &&
         css`
-          background: linear-gradient(135deg, #9a2fea 10%, #fd8608 100%);
+          background: linear-gradient(
+            135deg,
+            #9a2fea 10%,
+            #d244d1 50%,
+            #fd8608 100%
+          );
         `}
       ${(props) =>
         props.reward == 1 &&

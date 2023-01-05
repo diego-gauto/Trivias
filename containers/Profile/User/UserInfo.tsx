@@ -318,6 +318,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                   <defs>
                     <linearGradient id="gradientLevel">
                       <stop offset="0%" stopColor="#f88d21" />
+                      <stop offset="50%" stopColor="#d244d1" />
                       <stop offset="100%" stopColor="#972dec" />
                     </linearGradient>
                   </defs>
