@@ -514,3 +514,15 @@ export const getTeacherCourse = async (name: string) => {
   });
   return data
 }
+
+const uploadCertificate = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `certificates/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
