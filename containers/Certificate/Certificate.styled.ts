@@ -6,8 +6,36 @@ export const MainContainer = styled.div<{ color: any }>`
     position: relative;
     margin-block: 4rem;
     aspect-ratio: 859 / 616;
-    ${(props) => props.color && css``}
-    background-image: url("../images/Certificates/cert-blue.jpg");
+    ${(props) =>
+      props.color == "azul" &&
+      css`
+        background-image: url("../images/Certificates/cert-blue.jpg");
+      `}
+    ${(props) =>
+      props.color == "amarillo" &&
+      css`
+        background-image: url("../images/Certificates/cert-yellow.jpg");
+      `}
+       ${(props) =>
+      props.color == "morado" &&
+      css`
+        background-image: url("../images/Certificates/cert-purple.jpg");
+      `}
+       ${(props) =>
+      props.color == "naranja" &&
+      css`
+        background-image: url("../images/Certificates/cert-orange.jpg");
+      `}
+       ${(props) =>
+      props.color == "rosa" &&
+      css`
+        background-image: url("../images/Certificates/cert-pink.jpg");
+      `}
+       ${(props) =>
+      props.color == "verde" &&
+      css`
+        background-image: url("../images/Certificates/cert-green.jpg");
+      `}
     background-repeat: no-repeat;
     background-size: 100%;
     min-width: 850px;
@@ -71,7 +99,7 @@ export const MainContainer = styled.div<{ color: any }>`
 
   @media (max-width: 800px) {
     .certificate {
-      transform: scale(0.5) translate(-37%);
+      transform: scale(0.5);
     }
   }
 `;
