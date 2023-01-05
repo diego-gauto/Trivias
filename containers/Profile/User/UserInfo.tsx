@@ -157,24 +157,29 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
         <div className="responsive-picture">
           <PictureContain progress={data} reward={reward} progressResp={dataResp} >
             <ProfileText>
-              {/* <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                 <path
                   id="MyPath"
                   fill="none"
-                  d="M10,90 Q90,90 90,45 Q90,10 50,10 Q10,10 10,40 Q10,70 45,70 Q70,70 75,50" />
+                  d="M60,130 Q 200,0 0,-200" />
                 <text>
-                  <textPath href="#MyPath">Puntaje actual</textPath>
+                  <textPath href="#MyPath"
+                    style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
                 </text>
               </svg>
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            </ProfileText>
+            <ProfileText style={{ bottom: -60, right: -120 }} >
+              <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  id="MyPath"
+                  id="scorePath"
                   fill="none"
-                  d="M10,90 Q90,90 90,45 Q90,10 50,10 Q10,10 10,40 Q10,70 45,70 Q70,70 75,50" />
+                  d="M60,130 Q 200,0 0,-200" />
                 <text>
-                  <textPath href="#MyPath">Puntaje actual</textPath>
+                  <textPath href="#scorePath"
+                    style={{ fontSize: 14, fontWeight: 700, fontFamily: "Montserrat" }}>
+                    {points_format} puntos</textPath>
                 </text>
-              </svg> */}
+              </svg>
             </ProfileText>
             {
               starPosition !== 0 &&
