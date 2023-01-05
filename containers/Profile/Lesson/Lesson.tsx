@@ -75,7 +75,7 @@ const Lesson = () => {
             }
           } else {
             tempCertificate = []
-            tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id });
+            tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id, courseTitle: course.courseTittle });
             addUserCertificate(tempCertificate, userData.id);
           }
         }
