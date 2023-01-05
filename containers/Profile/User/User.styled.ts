@@ -577,7 +577,7 @@ export const ProfileMainContainer = styled.div<{
         left: ${130 * props.coordinates - 10}px;
       `}
     img {
-      // transform: rotate(${(props) => props.star * 360}deg);
+      transform: rotate(${(props) => props.star * 360}deg);
       width: 40px;
       @media (max-width: 480px) {
         width: 30px;
@@ -1072,7 +1072,7 @@ export const ProfileMainContainer = styled.div<{
 export const PictureContain = styled.div<{
   progress: number;
   reward: any;
-  progressResp: number;
+  timeProgress: number;
 }>`
   display: flex;
   width: 200px;
@@ -1154,7 +1154,16 @@ export const PictureContain = styled.div<{
         ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
       stroke-width: 20px;
       stroke-dasharray: 755;
-      stroke-dashoffset: ${(props) => props.progress};
+      ${(props) =>
+        props.reward == 0 &&
+        css<{ progress: number }>`
+          stroke-dashoffset: ${(props) => props.progress};
+        `}
+      ${(props) =>
+        props.reward == 1 &&
+        css<{ timeProgress: number }>`
+          stroke-dashoffset: ${(props) => props.timeProgress};
+        `}
       stroke-linecap: round;
       cx: 125px;
       cy: 125px;

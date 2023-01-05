@@ -31,7 +31,6 @@ const User = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [level, setLevel] = useState<any>([]);
-  const [barProgress, setBarProgress] = useState(0);
   const [timeProgress, setTimeProgress] = useState(0);
   const [loading, setLoading] = useState(true);
   const [paymentMethod, setPaymentMethods] = useState<any>([]);
@@ -43,8 +42,9 @@ const User = () => {
   const [taskView, setTaskView] = useState(false);
   const [nameUpperCase, setNameUpperCase] = useState<string>("");
   const [data, setData] = useState<number>(0)
-  const [dataResp, setDataResp] = useState<number>(0)
   const [reward, setReward] = useState<any>(0);
+  const [prize, setPrize] = useState<any>([]);
+  const [timePrize, setTimePrize] = useState<any>([]);
 
   try {
     var userDataAuth = useAuth();
@@ -169,14 +169,30 @@ const User = () => {
   }, [userData]);
   useEffect(() => {
     if (userData != null && level != null && timeLevel != null) {
-      setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
-      setTimeProgress(((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 100)
+      if (timeScore == 0) {
+        setTimeProgress(0)
+      }
+      else {
+        setTimeProgress(755 - (((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 755))
+      }
+      if (reward == 0) {
+        setStarPosition((userData.score - level.minimum) / (level.maximum - level.minimum));
+      }
+      if (reward == 1) {
+        if (timeScore == 0) {
+          setStarPosition(0);
+        }
+        else {
+          setStarPosition((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth));
+        }
+      }
+      if (reward == 2) {
+        setStarPosition(0)
+      }
       setData(755 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 755));
-      setDataResp(502 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 502));
-      setStarPosition((userData.score - level.minimum) / (level.maximum - level.minimum));
       setLoading(false);
     }
-  }, [level, timeLevel]);
+  }, [level, timeLevel, reward]);
   const handleClick = (value: boolean) => {
     fetchDB_data();
   }
@@ -210,14 +226,14 @@ const User = () => {
         &&
         <UserInfo
           userData={userData}
-          taskView={taskView}
-          setTaskView={setTaskView}
-          nextLevel={level.maximum}
+          nextReward={prize}
+          nextTimeReward={timePrize}
           data={data}
-          dataResp={dataResp}
+          timeProgress={timeProgress}
           reward={reward}
           responsive1023={responsive1023}
           starPosition={starPosition}
+          timeLevel={timeLevel}
         />
       }
       {/* SECOND Container */}
@@ -232,16 +248,15 @@ const User = () => {
         </div>
         <NextReward
           score={userData.score}
-          barProgress={barProgress}
-          level={currentLevel}
-          max={level.maximum}
           user={userData}
           reward={reward}
           setReward={setReward}
-          timeScore={timeScore}
-          timeProgress={timeProgress}
           timeLevel={timeLevel?.level}
           timeIndex={timeLevel.index}
+          prize={prize}
+          setPrize={setPrize}
+          timePrize={timePrize}
+          setTimePrize={setTimePrize}
         />
         <ThirdBox>
           {/* Third Container */}

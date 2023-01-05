@@ -16,7 +16,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { updateProfileImage } from "../../../store/actions/UserActions";
 
-const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, dataResp, responsive1023, starPosition }: any) => {
+const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -35,7 +35,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const numFor = Intl.NumberFormat('en-US');
-  const nextLevel_format = numFor.format(nextLevel);
+  const nextLevel_format = numFor.format(nextReward.points);
   const points_format = numFor.format(userData.score);
   const auth = getAuth();
   const userPass: any = auth.currentUser;
@@ -140,11 +140,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     setStarCoordinates(tempFormula);
   }
 
-  const Positions = () => {
-
-  }
   useEffect(() => {
-    Positions();
     getStarCoordinates();
     setUser({ ...userData })
   }, [userData])
@@ -152,32 +148,74 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
     <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition} coordinates={starCoordinates}>
       <div className="first-text">
         <div className="main-text">
-          <p >Siguiente <br />recompensa<br /><span>{nextLevel_format} puntos</span></p>
+          <p >
+            {
+              (reward == 0 || reward == 1) && <>Siguiente<br />recompensa</>
+            }
+            {
+              reward == 2 && <>Último<br />certficado</>
+            }
+            <br />
+            {
+              reward == 0 ?
+                <span>{nextLevel_format} puntos</span>
+                :
+                reward == 1 ?
+                  <span>
+                    {nextTimeReward.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin suscripción"}
+                  </span>
+                  :
+                  reward == 2 &&
+                  <span>
+                    {userData.certificates ? userData.certificates[userData.certificates.length - 1].courseTitle : "Sin certificado"}
+                  </span>
+            }
+          </p>
         </div>
         <div className="responsive-picture">
-          <PictureContain progress={data} reward={reward} progressResp={dataResp} >
-            <ProfileText>
+          <PictureContain progress={data} reward={reward} timeProgress={timeProgress} >
+            <ProfileText style={{ transform: "rotate(-5deg)" }}>
               <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                 <path
                   id="MyPath"
                   fill="none"
                   d="M60,130 Q 200,0 0,-200" />
-                <text>
-                  <textPath href="#MyPath"
-                    style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
-                </text>
+                {
+                  reward != 2 &&
+                  <text>
+                    <textPath href="#MyPath" fill="#3f1168"
+                      style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
+                  </text>
+                }
+
               </svg>
             </ProfileText>
-            <ProfileText style={{ bottom: -60, right: -120 }} >
+            <ProfileText
+              style={reward == 0
+                ? { bottom: -54, right: -122, transform: "rotate(-5deg)" }
+                : reward == 1 ? timeLevel.level == 0
+                  ? { bottom: -67, right: -116, transform: "rotate(1deg)" }
+                  : { bottom: -27, right: -131, transform: "rotate(-13deg)" }
+                  : {}
+              }>
               <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                 <path
                   id="scorePath"
                   fill="none"
-                  d="M60,130 Q 200,0 0,-200" />
+                  d="M65,130 Q 200,0 0,-500" />
                 <text>
-                  <textPath href="#scorePath"
+                  <textPath href="#scorePath" fill="#3f1168"
                     style={{ fontSize: 14, fontWeight: 700, fontFamily: "Montserrat" }}>
-                    {points_format} puntos</textPath>
+                    {
+                      reward == 0 && `${points_format} puntos`
+                    }
+                    {
+                      reward == 1 ?
+                        timeLevel.level == 0 ? "Sin Suscripción "
+                          : `${timeLevel.minimum}${timeLevel.minimum > 1 ? " meses" : " mes"}`
+                        : ""
+                    }
+                  </textPath>
                 </text>
               </svg>
             </ProfileText>
@@ -252,7 +290,7 @@ const UserInfo = ({ userData, taskView, setTaskView, nextLevel, data, reward, da
             <div className="crown">
               <img src={crownImage} />
             </div>
-            <PictureContain progress={data} reward={reward} progressResp={dataResp}>
+            <PictureContain progress={data} reward={reward} timeProgress={timeProgress}>
               <ProfileIcon
                 onClick={changeImage}
                 edit={startEdit}

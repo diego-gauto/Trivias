@@ -15,10 +15,9 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLevel, reward, setReward, user }: any) => {
-  const [prize, setPrize] = useState<any>([]);
+const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, prize, setPrize, timePrize, setTimePrize }: any) => {
   const [prizeSize, setPrizeSize] = useState<any>(0);
-  const [timePrize, setTimePrize] = useState<any>([]);
+  const [timePrizeSize, setTimePrizeSize] = useState<any>(0);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
@@ -26,7 +25,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
   const getNextReward = () => {
     let tempSize: any = [];
     getRewards().then((res) => {
-      tempSize = res.filter((data: any) => (data.points < score));
+      tempSize = res.filter((data: any) => (data.points <= score));
       res = res.filter((data: any) => (data.points > score));
       if (tempSize) {
         setPrizeSize(tempSize.length);
@@ -40,11 +39,18 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
     })
   }
   const getNextTimeReward = async () => {
+    let tempSize: any = [];
+    let tempReward: any = [];
     getTimeRewards().then(async (res) => {
+      tempSize = res.filter((data: any) => (data.month <= timeLevel))
+      tempReward = res.filter((data: any) => (data.month > timeLevel));
+      if (tempSize) {
+        setTimePrizeSize(tempSize.length);
+      }
       const timeLevels = await getTimeLevel()
       let tempRewards: any;
       tempRewards = res.filter((data: any) => (data.month >= timeLevels[timeIndex]?.minimum && data.month < timeLevels[timeIndex].maximum));
-      setTimePrize(tempRewards[0]);
+      setTimePrize(tempReward[0]);
     })
   }
   useEffect(() => {
@@ -100,7 +106,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                   <span> por puntaje</span></p>
                 <div className="bottom-contain">
                   <p className="point-number">
-                    {prizeSize >= 9 ? prizeSize : "0" + prizeSize}
+                    {prizeSize > 9 ? prizeSize : prizeSize != 0 ? "0" + prizeSize : 0}
                   </p>
                   <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
@@ -111,7 +117,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                   <span> por tiempo</span></p>
                 <div className="bottom-contain">
                   <p className="time-number">
-                    12
+                    {timePrizeSize > 9 ? timePrizeSize : timePrizeSize != 0 ? "0" + timePrizeSize : 0}
                   </p>
                   <AiOutlineHourglass style={reward == 1 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
@@ -121,7 +127,7 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
                   <span>acumulados</span></p>
                 <div className="bottom-contain">
                   <p className="certificate-number">
-                    06
+                    {user.certificates?.length > 0 ? (user.certificates.length > 9 ? user.certificates.length : "0" + user.certificates.length) : 0}
                   </p>
                   <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
@@ -129,15 +135,31 @@ const NextReward = ({ score, barProgress, level, timeIndex, timeProgress, timeLe
             </div>
             <div className="extra-info">
               {
-                (reward == 0 || reward == 1) &&
+                reward == 0 &&
                 <p>
-                  Siguiente recompensa <span>{prize.title}</span>
+                  {
+                    prize.length <= 0 ? <>Sin<span> Recompensa</span></> : "Siguiente Recompensa"
+                  }
+                  <span> {prize.title}</span>
+                </p>
+              }
+              {
+                reward == 1 &&
+                <p>
+                  {
+                    timePrize.length <= 0 ? <>Sin<span> Recompensa</span></> : "Siguiente Recompensa"
+                  }
+                  <span> {timePrize.title}</span>
                 </p>
               }
               {
                 reward == 2 &&
-                <p>
-                  Certificado más próximo<span> One Stroke Básico</span>
+                <p style={{ textAlign: "center" }}>
+                  {
+                    user.certificates ?
+                      <> Ultimo certificado completado<span> {user.certificates[user.certificates.length - 1].courseTitle}</span></>
+                      : <>Sin <span>Certificados</span></>
+                  }
                 </p>
               }
             </div>
