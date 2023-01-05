@@ -1183,8 +1183,8 @@ export const ProfileText = styled.div`
   position: absolute;
   width: 200px;
   z-index: 5;
-  bottom: 0;
-  right: 0;
+  bottom: -50px;
+  right: -100px;
   p {
     margin: 0;
   }
