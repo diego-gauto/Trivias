@@ -21,7 +21,7 @@ export const SlideModuleContainer = styled(Container)`
       button {
         z-index: 5;
         position: absolute;
-        border-radius: 20px;
+        border-radius: 15px;
         padding-block: 10px;
         padding-inline: 20px;
         border: none;
@@ -33,10 +33,25 @@ export const SlideModuleContainer = styled(Container)`
         margin: 0;
         white-space: nowrap;
         cursor: pointer;
+        @media (max-width: 600px) {
+          font-size: 14px;
+          padding-block: 7px;
+          border-radius: 10px;
+          padding-inline: 15px;
+        }
+        @media (max-width: 400px) {
+          font-size: 10px;
+          padding-block: 5px;
+          border-radius: 8px;
+          padding-inline: 10px;
+        }
       }
       &:hover {
         opacity: 1;
         transition: 0.3s ease all;
+      }
+      @media (max-width: 1023px) {
+        display: none;
       }
     }
     &:hover {
@@ -48,12 +63,16 @@ export const SlideModuleContainer = styled(Container)`
       }
     }
     @media only screen and (max-width: 1023px) {
+      background-color: transparent;
       &:hover {
         transform: scale(1);
+        img {
+          opacity: 1;
+        }
       }
       &:active {
         transform: scale(1.03);
-        transition: 0.5s ease all;
+        transition: 0.3s ease all;
       }
     }
   }
