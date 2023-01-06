@@ -1345,7 +1345,95 @@ export const RewardContainer = styled.div<{ reward: any }>`
             font-size: 26px;
           }
         }
+        .point-container::before {
+          content: "";
+          position: absolute;
+          background-color: transparent;
+          border-top-left-radius: 21px;
+          height: 42px;
+          width: 24px;
+          ${(props) =>
+            props.reward == 0 &&
+            css`
+              top: -9px;
+              right: 7px;
+              transform: rotate(90deg);
+              box-shadow: 0 -25px 0 0 #de94e1;
+            `}
+          ${(props) =>
+            props.reward == 1 &&
+            css`
+              bottom: -42px;
+              left: 0;
+              transform: rotate(0deg);
+              box-shadow: 0 -25px 0 0 #e6c4ea;
+            `}
+          ${(props) =>
+            props.reward == 2 &&
+            css`
+              top: 144px;
+              left: 0;
+              box-shadow: 0 -25px 0 0 #e6c4ea;
+              @media (max-width: 1200px) {
+                top: 134px;
+              }
+              @media (max-width: 1023px) {
+                top: 140px;
+              }
+              @media (max-width: 700px) {
+                top: 124px;
+              }
+              @media (max-width: 480px) {
+                top: 108px;
+              }
+            `}
+        }
+        .certificates-container::before {
+          content: "";
+          position: absolute;
+          background-color: transparent;
+          border-top-left-radius: 21px;
+          height: 44px;
+          width: 24px;
+          ${(props) =>
+            props.reward == 0 &&
+            css`
+              top: 144px;
+              right: 0px;
+              transform: rotate(180deg) scaleY(-1);
+              box-shadow: 0 -25px 0 0 #e6c4ea;
+              @media (max-width: 1200px) {
+                top: 134px;
+              }
+              @media (max-width: 1023px) {
+                top: 140px;
+              }
+              @media (max-width: 700px) {
+                top: 124px;
+              }
+              @media (max-width: 480px) {
+                top: 108px;
+              }
+            `}
+          ${(props) =>
+            props.reward == 1 &&
+            css`
+              bottom: -44px;
+              right: 0;
+              transform: rotate(180deg) scaleY(-1);
+              box-shadow: 0 -25px 0 0 #e6c4ea;
+            `}
+          ${(props) =>
+            props.reward == 2 &&
+            css`
+              top: -10px;
+              left: 10px;
+              transform: rotate(90deg) scaleY(-1);
+              box-shadow: 0 -25px 0 0 #de94e1;
+            `}
+        }
         .point-container {
+          position: relative;
           cursor: pointer;
           display: flex;
           justify-content: center;
@@ -1414,6 +1502,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
           }
         }
         .time-container {
+          position: relative;
           height: fit-content;
           display: flex;
           justify-content: center;
@@ -1480,6 +1569,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
         }
       }
       .certificates-container {
+        position: relative;
         cursor: pointer;
         height: 144px;
         display: flex;
