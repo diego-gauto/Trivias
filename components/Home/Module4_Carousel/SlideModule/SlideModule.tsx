@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useState } from "react";
 import { Image, Row } from "react-bootstrap";
 import { number } from "yup";
 import { ISlideModule } from "./ISlideModule";
@@ -6,10 +8,18 @@ import { SlideModuleContainer, Text01, Text01_p, Text02, Text02_p, Text03, TextS
 export const SlideModule = (props: ISlideModule) => {
   const { imgURL, title, subtitle, number, type, level } = props;
 
+  const sendTo = () => {
+
+  }
   return (
     <SlideModuleContainer>
       <div className="hover">
         <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
+        <div className="text-overlay">
+          <button onClick={sendTo}>
+            Más información
+          </button>
+        </div>
       </div>
       {type == "subscription" ? <TextSectionWrapper>
         <Row>

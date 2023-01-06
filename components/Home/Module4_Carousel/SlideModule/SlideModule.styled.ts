@@ -8,9 +8,44 @@ export const SlideModuleContainer = styled(Container)`
   margin-bottom: 10px;
   padding-right: 10px;
   .hover {
+    position: relative;
+    background-color: black;
+    border-radius: 10px;
+    .text-overlay {
+      top: 0;
+      left: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      button {
+        z-index: 5;
+        position: absolute;
+        border-radius: 20px;
+        padding-block: 10px;
+        padding-inline: 20px;
+        border: none;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #3f1168;
+        font-weight: 800;
+        margin: 0;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      &:hover {
+        opacity: 1;
+        transition: 0.3s ease all;
+      }
+    }
     &:hover {
       transform: scale(1.03);
-      transition: 0.5s ease all;
+      transition: 0.3s ease all;
+      img {
+        opacity: 0.5;
+        transition: 0.3s ease all;
+      }
     }
     @media only screen and (max-width: 1023px) {
       &:hover {
