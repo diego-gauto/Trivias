@@ -1388,6 +1388,36 @@ export const RewardContainer = styled.div<{ reward: any }>`
               }
             `}
         }
+
+        ${(props) =>
+          props.reward == 1 &&
+          css`
+            .time-container::before {
+              content: "";
+              position: absolute;
+              background-color: transparent;
+              border-top-left-radius: 21px;
+              height: 42px;
+              width: 24px;
+              top: -9px;
+              left: 9px;
+              transform: rotate(90deg) scaleY(-1);
+              box-shadow: 0 -25px 0 0 #e6c4ea;
+            }
+            .time-container::after {
+              content: "";
+              position: absolute;
+              background-color: transparent;
+              border-top-left-radius: 21px;
+              height: 42px;
+              width: 24px;
+              top: -9px;
+              right: 9px;
+              transform: rotate(90deg) scaleY(1);
+              box-shadow: 0 -25px 0 0 #e6c4ea;
+            }
+          `}
+
         .certificates-container::before {
           content: "";
           position: absolute;
