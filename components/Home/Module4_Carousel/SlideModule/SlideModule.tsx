@@ -8,7 +8,9 @@ export const SlideModule = (props: ISlideModule) => {
 
   return (
     <SlideModuleContainer>
-      <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
+      <div className="hover">
+        <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
+      </div>
       {type == "subscription" ? <TextSectionWrapper>
         <Row>
           <Text01_p>{title}</Text01_p>
