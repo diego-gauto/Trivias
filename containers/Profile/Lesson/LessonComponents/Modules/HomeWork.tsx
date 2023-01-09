@@ -77,7 +77,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         </Titles>
         {<PositionTitle position={value}>
           <SlNotebook></SlNotebook>
-          Materiales y tareas
+          Evaluación
         </PositionTitle>}
         <Titles onClick={() => {
           setValue(4)
@@ -88,7 +88,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         <div className='line'></div>
       </TitleContain>
       <HomeWorkContain>
-        <div className='left'>
+        {/* <div className='left'>
           <TaskTitle>
             Material de apoyo
           </TaskTitle>
@@ -108,8 +108,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
               )
             })}
           </ol>
-        </div>
-        <div className='middle'></div>
+        </div> */}
         <div className='right'>
           <TaskTitle style={{ color: "#f78803" }}>
             Sube aquí tus prácticas <br />

@@ -13,7 +13,6 @@ export const HomeWorkContain = styled.div`
   }
   .right {
     width: 48%;
-    padding-left: 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -31,20 +31,25 @@ const Certificate = () => {
   }
 
   const downloadCertficate = () => {
-    // var svgElements = document.body.querySelectorAll('svg');
-    // svgElements.forEach(function (item: any) {
-    //   item.setAttribute("width", item.getBoundingClientRect().width);
-    //   item.setAttribute("height", item.getBoundingClientRect().height);
-    // });
     window.scroll(0, 0);
-    let DATA: any = document.getElementById('aa');
-    console.log(DATA);
-    DATA.classList.add('print');
-    html2canvas(DATA).then((canvas) => {
-      console.log(canvas);
-      var imgData = canvas.toDataURL('image/jpeg', 1.0);
-      console.log(imgData);
+    let DATA: any = document.getElementById('certificate');
 
+    let svgElement: any = document.getElementById('qr');
+    var svgData = new XMLSerializer().serializeToString(svgElement);
+    let img = document.createElement("img")
+    // img.src = 'data:image/svg+xml,' + encodeURIComponent(svgData);
+    // console.log(encodeURIComponent(svgData));
+    const canvas: any = document.createElement('canvas');
+
+    canvas.width = svgElement.clientWidth;
+    canvas.height = svgElement.clientHeight;
+    canvas.getContext('2d').drawImage(img, 0, 0, svgElement.clientWidth, svgElement.clientHeight);
+    console.log(canvas.toDataURL('image/jpeg', 1.0));
+    DATA.classList.add('print');
+    img.src = canvas.toDataURL('image/jpeg', 1.0)
+    DATA.appendChild(img)
+    html2canvas(DATA).then((canvas) => {
+      var imgData = canvas.toDataURL('image/jpeg', 1.0);
       // //Get the original size of canvas/image
       // var img_w = canvas.width;
       // var img_h = canvas.height;
@@ -56,7 +61,7 @@ const Certificate = () => {
       // var doc = new jsPDF('l', 'mm', [doc_w, doc_h]);
 
       // //set image height similar to doc size
-      // doc.addImage(imgData, 'PNG', 0, 0, doc_w, doc_h);
+      // doc.addImage(imgData, 'JPG', 0, 0, doc_w, doc_h);
       // DATA.classList.remove('print');
       // doc.save('Certificado-Gonvar.pdf');
     });
@@ -83,11 +88,11 @@ const Certificate = () => {
           <QRCode
             id="qr"
             size={256}
-            style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }}
+            style={{ height: "80px", width: "80px", position: "absolute", top: "50px" }}
             value={window.location.href}
-            viewBox={`0 0 256px 256px`}
+            viewBox={`0 0 256 256`}
           />
-          <MdDelete id="aa" width={100}></MdDelete>
+          {/* <img id="img" src="/images/teachers/Brenda_instructora.jpg" style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "5px0" }} alt="" /> */}
         </div>
       </div>
       <button onClick={downloadCertficate}>Descargar</button>

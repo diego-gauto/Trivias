@@ -115,6 +115,7 @@ export const LessonContent = styled.div`
     font-weight: 700;
     font-size: 18px;
   }
+
   @media (max-width: 1023px) {
     font-size: 12px;
   }

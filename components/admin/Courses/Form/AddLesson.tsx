@@ -59,6 +59,7 @@ const AddLesson = () => {
     homeWorkAbout: '',
     objective: '',
     description: '',
+    quiz: {}
   });
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
