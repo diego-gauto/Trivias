@@ -101,15 +101,6 @@ export const AllSeasons = ({
             {openSeason &&
               <>
                 <Link href={{
-                  pathname: "/admin/Quiz",
-                  query: {
-                    courseID: courseID,
-                    seasonID: documentID,
-                  }
-                }}>
-                  <Button>Añadir Quiz<Add /></Button>
-                </Link>
-                <Link href={{
                   pathname: "/admin/NewLesson",
                   query: {
                     courseID: courseID,

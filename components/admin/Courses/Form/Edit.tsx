@@ -76,6 +76,7 @@ const Edit = () => {
     passingGrade: '',
     points: '',
     title: '',
+    folio: ''
   });
 
   const modules = {
@@ -223,55 +224,6 @@ const Edit = () => {
     tempQuiz.questions[index].answers.splice(ind, 1)
     console.log({ ...tempQuiz })
     setQuiz({ ...tempQuiz })
-  }
-  const submit = () => {
-    setLoader(true);
-    quiz.mandatory = mandatory;
-    if (!lessonID) {
-      if (quiz.title == '' ||
-        quiz.number == '' ||
-        quiz.passingGrade == '' ||
-        quiz.points == '') {
-        setLoader(false);
-        alert("Por favor complete todo los campos!");
-      } else {
-        addQuiz(quiz, courseID, seasonID).then(() => {
-          alert(
-            "Quiz Creado"
-          )
-          setLoader(false);
-          router.push({
-            pathname: `/admin/Edit`,
-            query: { documentID: courseID }
-          });
-        })
-      }
-    }
-    else {
-      if (quiz.title == '' ||
-        quiz.number == '' ||
-        quiz.passingGrade == '' ||
-        quiz.points == '' ||
-        !quiz.number ||
-        !quiz.passingGrade ||
-        !quiz.points
-      ) {
-        setLoader(false);
-        alert("Por favor complete todo los campos!");
-      } else {
-        setLoader(false);
-        editQuiz(quiz, courseID, seasonID, lessonID).then(() => {
-          alert(
-            "Quiz Editado"
-          )
-          setLoader(false);
-          router.push({
-            pathname: `/admin/Edit`,
-            query: { documentID: courseID }
-          });
-        })
-      }
-    }
   }
 
   const deleteActualQuiz = () => {
