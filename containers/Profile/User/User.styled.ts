@@ -506,7 +506,6 @@ export const ProfileMainContainer = styled.div<{
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    color: #ffb715;
     @media (max-width: 1023px) {
       top: -60px;
     }
