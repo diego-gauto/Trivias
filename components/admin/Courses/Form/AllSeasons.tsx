@@ -111,9 +111,10 @@ export const AllSeasons = ({
                 </Link>
                 {
                   lessons.length == 0 &&
-                  <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
-
+                  <></>
                 }
+                <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
+
                 <ChevU />
               </>}
             {!openSeason &&
@@ -144,8 +145,9 @@ export const AllSeasons = ({
           deleteMessage={deleteMessage}
           seasonID={documentID}
           courseID={courseID}
-          setOpenSeason={setOpenSeason} />
-
+          setOpenSeason={setOpenSeason}
+          lessons={lessons}
+        />
 
       </SeasonContain>
     </MainContainer>

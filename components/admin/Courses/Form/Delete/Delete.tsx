@@ -27,15 +27,21 @@ export interface DeletePopUp {
   courseID: any,
   setOpenSeason?: any,
   lessonID?: any,
+  lessons?: any,
 }
 
-const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeason, lessonID }: DeletePopUp) => {
+const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeason, lessonID, lessons }: DeletePopUp) => {
   const handleClose = () => setShow(false);
-
   const deleteSeason = () => {
-    handleClose();
     setOpenSeason(0);
+    if (lessons.length > 0) {
+      for (let i: number = 0; i < lessons.length; i++) {
+        let tempLessonID: string = lessons[i].documentID;
+        deleteDoc(doc(db, "courses", courseID, "seasons", seasonID, "lessons", tempLessonID))
+      }
+    }
     return deleteDoc(doc(db, "courses", courseID, "seasons", seasonID));
+
   }
   const deleteLesson = () => {
     handleClose();
@@ -53,7 +59,7 @@ const Delete = ({ show, setShow, deleteMessage, seasonID, courseID, setOpenSeaso
           {deleteMessage == 2 && <Title>Eliminar Temporada</Title>}
           <CloseIcon onClick={handleClose} />
         </TitleContain>
-        <Content>¿Estas seguro de eliminar la lección? Esta acción es irreversible.</Content>
+        <Content>¿Estas seguro de eliminar la {deleteMessage == 1 && "lección"}{deleteMessage == 2 && "temporada"}? Esta acción es irreversible.</Content>
         <ButtonContain>
           <TransparentButton onClick={handleClose}>Cancelar</TransparentButton>
           {deleteMessage == 1 &&

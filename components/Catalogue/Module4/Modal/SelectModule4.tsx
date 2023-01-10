@@ -4,6 +4,7 @@ import { SelectContain, Selected, DropDown, OptionContain, Input, Label, Episode
 const SelectModule4 = ({ course, handleClick, seasons }: any) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(seasons[0]?.name)
+
   return (
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>

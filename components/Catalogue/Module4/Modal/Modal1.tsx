@@ -57,12 +57,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const handleShow = () => {
     setMaterial(true);
   }
-
   const getCurrentSeason = () => {
     getSeason(course.id).then((res) => {
       setSeasons(res);
     })
   }
+
   const goTo = () => {
     if (user) {
       if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
@@ -99,7 +99,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0].lessons);
       setIsPlaying(true);
-      // getCurrentSeason();
+      getCurrentSeason();
       setTimeout(() => {
         setIsPlaying(false)
       }, 2000)
