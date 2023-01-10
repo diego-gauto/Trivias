@@ -6,4 +6,5 @@ export interface ISlideModule {
   number?: any;
   type?: string;
   level?: string;
+  professor?: any;
 }

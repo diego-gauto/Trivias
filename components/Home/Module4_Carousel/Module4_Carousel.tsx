@@ -27,18 +27,17 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
         && course.documentID !== SEP_COURSE_ID
       ).map((course: any) => {
         return (
-          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty }
+          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty, professor: course.courseProfessor[0] }
         )
       })
     } else {
       slideDataArr = slideDataArr.map((lesson: any) => {
         return (
-          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "" }
+          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "" }
         )
       })
     }
   }
-
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
@@ -95,6 +94,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
               level={element.level}
               imgURL={element.imgURL}
               number={element.number}
+              professor={element.professor}
             />
           </SwiperSlide>
         ))}
