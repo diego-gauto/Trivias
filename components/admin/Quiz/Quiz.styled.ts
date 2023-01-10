@@ -4,7 +4,6 @@ export const QuizContainer = styled.div`
   display: flex;
   flex-direction: Column;
   gap: 20px;
-  padding: 40px;
   width: 100%;
   font-family: "Montserrat", sans-serif;
   .button-container {
@@ -48,12 +47,10 @@ export const FormContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
-  padding: 20px;
   border-radius: 10px;
   flex-direction: column;
 `;
-export const Container = styled.div`
+export const Content = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
@@ -123,7 +120,7 @@ export const QuestionContainer = styled.div`
   .question-content {
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+    width: 50%;
     border-radius: 10px;
     padding: 10px;
     .answers {

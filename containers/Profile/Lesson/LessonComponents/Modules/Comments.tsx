@@ -66,7 +66,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
           setValue(3)
         }}>
           <SlNotebook></SlNotebook>
-          Materiales y tareas
+          Evaluación
         </Titles>}
         <PositionTitle position={value}>
           <TfiCommentAlt></TfiCommentAlt>

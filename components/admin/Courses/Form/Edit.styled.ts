@@ -42,10 +42,50 @@ export const TrashIcon = styled.i`
 `;
 export const EditContain = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 20px;
   gap: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  .top {
+    display: flex;
+    gap: 10px;
+  }
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .toggle {
+      cursor: pointer;
+      display: flex;
+      border: 1px solid #6717cd;
+      width: fit-content;
+      border-radius: 10px;
+      .left,
+      .right {
+        padding: 10px;
+      }
+      .left {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      .right {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+    .homework-container {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .quill {
+        .ql-container {
+          height: 80px;
+        }
+      }
+    }
+  }
 `;
 export const Contain1 = styled.div`
   display: flex;

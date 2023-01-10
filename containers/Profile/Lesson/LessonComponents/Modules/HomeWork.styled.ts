@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const HomeWorkContain = styled.div`
   display: flex;
@@ -11,9 +11,29 @@ export const HomeWorkContain = styled.div`
     width: 1.5px;
     height: 100%;
   }
+  .quiz {
+    width: 100%;
+    p {
+      margin: 0;
+    }
+    .question-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .question-title {
+        display: flex;
+        gap: 10px;
+      }
+      .answers {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-inline: 20px;
+      }
+    }
+  }
   .right {
     width: 48%;
-    padding-left: 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -94,6 +114,36 @@ export const HomeWorkContain = styled.div`
     }
   }
 `;
+
+export const Answer = styled.div<{
+  veryfy: boolean;
+  correct: boolean;
+}>`
+  width: 200px;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    background: black;
+    color: white;
+  }
+  ${(props) =>
+    props.veryfy &&
+    props.correct &&
+    css`
+      background: #1fc41f !important;
+      color: #fff !important;
+    `}
+  ${(props) =>
+    props.veryfy &&
+    !props.correct &&
+    css`
+      background: #c41f40 !important;
+      color: #fff !important;
+    `}
+`;
+
 export const TaskTitle = styled.p`
   font-size: 18px;
   font-weight: 600;

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link';
 import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
 import { PositionTitle, TitleContain, Titles } from './Module.styled';
 import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { getTeacherCourse } from '../../../../../store/actions/courseActions';
+import { BiDownload } from 'react-icons/bi';
+import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
 
 const About = ({ value, setValue, data, teacherCreds }: any) => {
 
@@ -31,7 +34,7 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
           setValue(3)
         }}>
           <SlNotebook></SlNotebook>
-          Materiales y tareas
+          Evaluación
         </Titles>
         <Titles onClick={() => {
           setValue(4)
@@ -55,6 +58,23 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
               Todas las técnicas incluidas en en el curso son estándares de la industria probados y
               comprobados, que te equiparán con el mejor conocimiento para comenzar tu nuevo
               camino profesional.</p>
+            <p className='title'>Material de apoyo</p>
+            <ol type="a">
+              {data?.extra?.map((extra: any) => {
+                return (
+                  <Link href={extra.path}>
+                    <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                      <DownlowadContain>
+                        <DownloadText>
+                          <li>{extra.title.slice(0, -4)}</li>
+                        </DownloadText>
+                        <Pdf><BiDownload></BiDownload> Descargar Pdf</Pdf>
+                      </DownlowadContain>
+                    </a>
+                  </Link>
+                )
+              })}
+            </ol>
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Title, TitleContain } from '../Courses/Form/Edit.styled';
 import { MdDelete } from 'react-icons/md';
 import { CaretD2, Label2, Option, OptionContain, SelectContain, Selected } from '../Courses/Form/Select/SelectStyles.styled';
-import { Container, FormContainer, InputContainer, QuestionContainer, QuizContainer } from './Quiz.styled';
+import { Content, FormContainer, InputContainer, QuestionContainer, QuizContainer } from './Quiz.styled';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css';
@@ -202,7 +202,7 @@ const Quiz = () => {
 
       </TitleContain>
       <FormContainer>
-        <Container>
+        <Content>
           <InputContainer>
             <label>Número de Lección
             </label>
@@ -284,7 +284,7 @@ const Quiz = () => {
               }}
             />
           </InputContainer>
-        </Container>
+        </Content>
         <QuestionContainer>
           <p className="title">
             Preguntas
