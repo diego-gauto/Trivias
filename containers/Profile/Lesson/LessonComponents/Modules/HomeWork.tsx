@@ -168,6 +168,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
     }
   }
 
+  const finish = () => {
+    setStep(0);
+    setIndex(0);
+    setVerify(false);
+    setProgress(next);
+    setPoints(0);
+    setGrade(0);
+    setCounter(0);
+  }
+
   return (
     <>
       <TitleContain >
@@ -348,7 +358,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                   </div>
                   <div className='quiz-bar-points'>100 pts</div>
                 </div>
-                <button onClick={() => { setStep(0) }}>FINALIZAR</button>
+                <button onClick={() => { finish() }}>FINALIZAR</button>
               </div>
             }
           </div>}

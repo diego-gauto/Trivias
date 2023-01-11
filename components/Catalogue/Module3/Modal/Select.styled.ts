@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
 export const DropDown = styled.i`
-  top: 50%;
-  right: 20px;
-  transform: translateY(-40%);
   pointer-events: none;
   background-image: url(../images/Preview/purpleArrowDown.svg);
-  position: absolute;
   height: 10px;
   width: 16px;
   background-position: center;
@@ -17,7 +13,9 @@ export const Selected = styled.div`
   cursor: pointer;
   font-size: 16px;
   justify-content: center;
-  width: 260px;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 10px;
   font-family: "Montserrat", sans-serif;
   padding-block: 10px;
   color: #6717cd;
