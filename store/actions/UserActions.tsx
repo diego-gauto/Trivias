@@ -102,3 +102,10 @@ export const getUser = async (id: string) => {
   });
   return data
 }
+
+
+export const updateUser = async (user: any, id: any) => {
+  const docRef = doc(db, 'users', id);
+  await updateDoc(docRef, user)
+  return 'exito'
+}
