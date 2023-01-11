@@ -10,9 +10,6 @@ import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
-import { useFormState } from "react-hook-form";
-import { getWholeCourse } from "../../../store/actions/courseActions";
-import { ICourse } from "../../../interfaces/ICourse";
 declare let Hls: any
 
 export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {

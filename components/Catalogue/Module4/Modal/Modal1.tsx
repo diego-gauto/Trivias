@@ -118,6 +118,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     }
     return result;
   }
+
   var xDown: any = null;
   var yDown: any = null;
   document.addEventListener('touchstart', handleTouchStart, false);
@@ -148,6 +149,9 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
       }
     }
   };
+
+  console.log(course);
+
 
   return (
     <ModalContain>

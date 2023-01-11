@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
-import uuid from 'react-uuid';
 import { LOGIN_PATH } from "../../../constants/paths";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";

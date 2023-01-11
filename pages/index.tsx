@@ -64,10 +64,10 @@ const Homepage = () => {
     const courseData = await getWholeCourse('dvns4pbd0ZHjFqR9VMks');
     setCourseData(courseData);
     const courseGonvarPlus = await getWholeCourse(GONVAR_PLUS_COURSE_ID);
+    courseGonvarPlus.totalDuration = hms(courseGonvarPlus.totalDuration)
     setCourseGonvarPlus(courseGonvarPlus);
     const courseNailsData = await getWholeCourse(NAILS_MASTER_COURSE_ID);
-    console.log(courseNailsData);
-
+    courseNailsData.totalDuration = hms(courseNailsData.totalDuration)
     setCourseNailsData(courseNailsData);
     const courseSEPData = await getWholeCourse(SEP_COURSE_ID);
     setCourseSEPData(courseSEPData);
@@ -105,6 +105,19 @@ const Homepage = () => {
     fetchLandingData();
     fetchDB_data();
   }, []);
+
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
 
 
   return (

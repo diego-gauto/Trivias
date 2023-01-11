@@ -15,7 +15,6 @@ import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
-import ModalMaterials from "./Modal/ModalMaterials";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
@@ -73,6 +72,8 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);
         allCourses.forEach((element: any) => {
+          console.log(element);
+
           element.courseAbout = element.courseAbout
           element.courseSubtittle = element.courseSubtittle
           element.courseTittle = element.courseTittle;
