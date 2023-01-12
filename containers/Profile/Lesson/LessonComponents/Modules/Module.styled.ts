@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
   padding-inline: 60px;
   background: #ede7f2;
   @media (max-width: 1124px) {
-    padding-inline: 30px;
+    padding-inline: 20px;
   }
 `;
 export const TitleContain = styled.div`

@@ -22,9 +22,18 @@ export const HomeWorkContain = styled.div`
       gap: 40px;
       padding-inline: 40px;
       padding-block: 20px;
+      @media (max-width: 500px) {
+        padding-inline: 0px;
+      }
       .top {
         display: flex;
         justify-content: space-between;
+        @media (max-width: 500px) {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 20px;
+        }
         .title {
           font-size: 28px;
           font-weight: 700;
@@ -80,6 +89,9 @@ export const HomeWorkContain = styled.div`
         .quiz-bar-container {
           display: flex;
           gap: 40px;
+          @media (max-width: 500px) {
+            gap: 20px;
+          }
           .quiz-bar {
             position: relative;
             flex: 1;
@@ -152,6 +164,9 @@ export const HomeWorkContain = styled.div`
       flex-direction: column;
       gap: 10px;
       padding-inline: 20px;
+      @media (max-width: 500px) {
+        padding-inline: 0px;
+      }
       button {
         background: linear-gradient(270deg, #8527e1 0.52%, #8627e2 100%);
         border-radius: 20px;
@@ -179,7 +194,12 @@ export const HomeWorkContain = styled.div`
         gap: 10px;
         justify-content: space-between;
         padding: 10px 30px;
+        flex-wrap: wrap;
+        @media (max-width: 500px) {
+          padding-inline: 0px;
+        }
         .title {
+          word-break: break-all;
           font-weight: 700;
           font-size: 28px;
         }
@@ -205,6 +225,12 @@ export const HomeWorkContain = styled.div`
         grid-template-columns: auto auto;
         gap: 20px;
         padding-inline: 30px;
+        @media (max-width: 1000px) {
+          grid-template: none;
+        }
+        @media (max-width: 500px) {
+          padding-inline: 0px;
+        }
       }
     }
     .done-container {
@@ -212,6 +238,9 @@ export const HomeWorkContain = styled.div`
       flex-direction: column;
       gap: 30px;
       padding-inline: 20px;
+      @media (max-width: 500px) {
+        padding-inline: 0px;
+      }
       button {
         display: flex;
         align-items: center;
@@ -242,6 +271,11 @@ export const HomeWorkContain = styled.div`
         padding-inline: 60px;
         display: flex;
         justify-content: space-between;
+        @media (max-width: 820px) {
+          padding-inline: 0px;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
         .left {
           font-weight: 400;
           font-size: 20px;
@@ -274,6 +308,10 @@ export const HomeWorkContain = styled.div`
         gap: 40px;
         margin-top: 40px;
         padding-inline: 60px;
+        @media (max-width: 820px) {
+          padding-inline: 0px;
+          gap: 20px;
+        }
         .quiz-bar {
           position: relative;
           flex: 1;

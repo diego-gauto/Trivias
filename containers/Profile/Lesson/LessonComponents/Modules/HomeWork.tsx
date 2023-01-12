@@ -343,7 +343,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 </div>
                 <div className='quiz-results'>
                   <div className="left">
-                    <p className='title'>FELICIDADES !!!</p>
+                    <p className='title'>{points >= data.quiz.passingGrade ? "FELICIDADES !!!" : "SIGUE INTENTANDO"}</p>
                     <p>{points >= data.quiz.passingGrade ? "Aprobaste el quiz" : "No aprobaste la evaluación"} {data.quiz?.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
                   </div>
                   <div className="right">
