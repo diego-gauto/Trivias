@@ -37,6 +37,7 @@ import ReactPlayer from "react-player";
 import dynamic from "next/dynamic";
 import uuid from 'react-uuid';
 
+
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css';
 import { LoaderContain } from "../../../Footer/Footer.styled";
@@ -78,6 +79,7 @@ const AddLesson = () => {
     passingGrade: '',
     points: '',
     title: '',
+    folio: uuid()
   });
   const modules = {
     toolbar: {

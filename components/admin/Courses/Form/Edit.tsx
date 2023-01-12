@@ -142,6 +142,9 @@ const Edit = () => {
     } else {
       lesson.homeworkAvailable = false;
       lesson.quiz = quiz;
+      if (!lesson.quiz.folio) {
+        lesson.quiz.folio = uuid();
+      }
     }
     await updateLesson(lesson, routerState.courseID, routerState.seasonID, routerState.lessonID).then(() => {
       router.push({
@@ -230,6 +233,7 @@ const Edit = () => {
     setQuizLoader(true);
     let tempQuiz = JSON.parse(JSON.stringify(quiz));
     tempQuiz.points = '';
+    tempQuiz.folio = '';
     tempQuiz.title = '';
     tempQuiz.passingGrade = '';
     tempQuiz.questions = [];

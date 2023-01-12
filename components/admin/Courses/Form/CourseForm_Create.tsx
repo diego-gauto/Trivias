@@ -163,6 +163,7 @@ const CourseForm_Create = () => {
     }
     setProfessor([...tempProfessor])
   }
+
   const onSubmit: SubmitHandler<FormValues> = formData => {
 
     setCreatingNewCourse(true)
@@ -222,8 +223,8 @@ const CourseForm_Create = () => {
       alert("Por favor agregue una imagen");
       setCreatingNewCourse(false);
     }
-
   }
+
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -330,6 +331,7 @@ const CourseForm_Create = () => {
     getAllCategories();
     getAllMaterials();
   }, [])
+
   return (
     <CourseFormContain >
       {/* LINEA 1 */}

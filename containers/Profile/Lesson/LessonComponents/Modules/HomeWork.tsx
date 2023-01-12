@@ -27,9 +27,9 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
 
   useEffect(() => {
     let tempAnswers: any = [];
-    setNext(100 / data.quiz.questions.length);
-    setProgress(100 / data.quiz.questions.length)
-    data.quiz.questions.forEach((element: any) => {
+    setNext(100 / data.quiz?.questions.length);
+    setProgress(100 / data.quiz?.questions.length)
+    data.quiz?.questions.forEach((element: any) => {
       tempAnswers.push([]);
     });
     setAnswers(tempAnswers);
@@ -176,6 +176,11 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
     setPoints(0);
     setGrade(0);
     setCounter(0);
+    let tempAnswers: any = [];
+    data.quiz.questions.forEach((element: any) => {
+      tempAnswers.push([]);
+    });
+    setAnswers(tempAnswers);
   }
 
   return (
@@ -250,37 +255,45 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
           <div className='quiz'>
             {step == 0 && <div className='quiz-info'>
               <div className='top'>
-                <p className='title'>{data.quiz.title}</p>
-                <div className='circle'>
+                {data.quiz?.title && <p className='title'>{data.quiz.title}</p>}
+                {(!data.quiz?.title && user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) &&
+                  <p>
+                    Ahorita no hay un quiz disponible, su calificación anterior fue: {user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}
+                  </p>}
+                {(!data.quiz?.title && !user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) &&
+                  <p> Ahorita no hay un quiz disponible!
+                  </p>}
+                {data.quiz?.title && <div className='circle'>
                   <p className='points'>{data.quiz.questions.length}</p>
                   <p className='sub'>PREGUNTAS</p>
-                </div>
+                </div>}
               </div>
               <div className='bottom'>
-                <div className='quiz-bar-container'>
-                  <div className='quiz-bar'>
-                    {user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
-                      && <div className='quiz-bar-progress'
-                        style={{ width: `${user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
+                {(data.quiz?.title) &&
+                  <div className='quiz-bar-container'>
+                    <div className='quiz-bar'>
+                      {user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
+                        && <div className='quiz-bar-progress'
+                          style={{ width: `${user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
+                          <div className='line'>
+                            <p className='max'>{user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
+                          </div>
+                        </div>}
+                      <div className='passing-grade' style={{ left: `calc(${data.quiz.passingGrade}% - 58px)` }}>
+                        <p style={{
+                          color: user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) ? "#FFB800" : "#8628e2"
+                        }}
+                        >{data.quiz?.passingGrade} pts</p>
                         <div className='line'>
-                          <p className='max'>{user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
+                          <p className='minimum'>MINIMO</p>
                         </div>
-                      </div>}
-                    <div className='passing-grade' style={{ left: `calc(${data.quiz.passingGrade}% - 58px)` }}>
-                      <p style={{
-                        color: user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) ? "#FFB800" : "#8628e2"
-                      }}
-                      >{data.quiz.passingGrade} pts</p>
-                      <div className='line'>
-                        <p className='minimum'>MINIMO</p>
                       </div>
                     </div>
-                  </div>
-                  <div className='quiz-bar-points'>100 pts</div>
-                </div>
-                {!user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
+                    <div className='quiz-bar-points'>100 pts</div>
+                  </div>}
+                {(!user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) && data.quiz?.questions.length > 0)
                   && <button onClick={() => { setStep(1) }}>Comenzar quiz</button>}
-                {user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) &&
+                {(user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) && data.quiz?.questions.length > 0) &&
                   <button onClick={() => { setStep(1) }}><BsArrowRepeat /> Repetir quiz</button>}
               </div>
             </div>}
@@ -330,11 +343,11 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 <div className='quiz-results'>
                   <div className="left">
                     <p className='title'>FELICIDADES !!!</p>
-                    <p>Aprobaste el quiz {data.quiz.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
+                    <p>Aprobaste el quiz {data.quiz?.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
                   </div>
                   <div className="right">
                     <p className='porcent'>{points}%</p>
-                    <p>{counter}/{data.quiz.questions.length} Correctas</p>
+                    <p>{counter}/{data.quiz?.questions.length} Correctas</p>
                   </div>
                 </div>
                 <div className='quiz-bar-container'>
