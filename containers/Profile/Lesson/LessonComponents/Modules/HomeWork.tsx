@@ -159,7 +159,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
       }
       if (user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) {
         let tempIndex = user.quizzes.findIndex((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson);
-        user.quizzes[tempIndex].grade = points;
+        // user.quizzes[tempIndex].grade = points;
       } else {
         user.score = user.score + grade;
         user.quizzes.push({ courseId: data.courseId, grade: points, lesson: parseInt(lesson), season: parseInt(season), folio: "" });
@@ -276,7 +276,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                         && <div className='quiz-bar-progress'
                           style={{ width: `${user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
                           <div className='line'>
-                            <p className='max'>{user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
+                            <p className='max'>{Math.floor(user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade)} pts</p>
                           </div>
                         </div>}
                       <div className='passing-grade' style={{ left: `calc(${data.quiz.passingGrade}% - 58px)` }}>
@@ -306,7 +306,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 <p className='title' dangerouslySetInnerHTML={{ __html: data.quiz.questions[index].question }}></p>
                 <div className='grade'>
                   <div className="circle">
-                    {points}
+                    {Math.floor(points)}
                   </div>
                   <p>PUNTAJE</p>
                 </div>
@@ -344,10 +344,10 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 <div className='quiz-results'>
                   <div className="left">
                     <p className='title'>FELICIDADES !!!</p>
-                    <p>Aprobaste el quiz {data.quiz?.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
+                    <p>{points >= data.quiz.passingGrade ? "Aprobaste el quiz" : "No aprobaste la evaluación"} {data.quiz?.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
                   </div>
                   <div className="right">
-                    <p className='porcent'>{points}%</p>
+                    <p className='porcent'>{Math.floor(points)}%</p>
                     <p>{counter}/{data.quiz?.questions.length} Correctas</p>
                   </div>
                 </div>
@@ -357,7 +357,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                       && <div className='quiz-bar-progress'
                         style={{ width: `${user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
                         <div className='line'>
-                          <p className='max'>{user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
+                          <p className='max'>{Math.floor(user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade)} pts</p>
                         </div>
                       </div>}
                     <div className='passing-grade' style={{ left: `calc(${data.quiz.passingGrade}% - 58px)` }}>

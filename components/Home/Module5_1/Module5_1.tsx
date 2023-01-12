@@ -83,17 +83,13 @@ export const Module5_1 = (props: IModule5_1) => {
     spaceBetween: 20,
     breakpoints: {
       1250: {
-        slidesPerView: 4,
+        slidesPerView: 3.75,
         spaceBetween: 50,
       },
       850: {
         slidesPerView: 3,
         spaceBetween: 30,
       },
-      // 550: {
-      //   slidesPerView: 2,
-      //   spaceBetween: 30,
-      // },
       420: {
         slidesPerView: 1.5,
         spaceBetween: 30,
