@@ -256,11 +256,11 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
             {step == 0 && <div className='quiz-info'>
               <div className='top'>
                 {data.quiz?.title && <p className='title'>{data.quiz.title}</p>}
-                {(!data.quiz?.title && user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) &&
+                {(!data.quiz?.title && user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) &&
                   <p>
                     Ahorita no hay un quiz disponible, su calificación anterior fue: {user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}
                   </p>}
-                {(!data.quiz?.title && !user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) &&
+                {(!data.quiz?.title && !user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)) &&
                   <p> Ahorita no hay un quiz disponible!
                   </p>}
                 {data.quiz?.title && <div className='circle'>
@@ -272,16 +272,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 {(data.quiz?.title) &&
                   <div className='quiz-bar-container'>
                     <div className='quiz-bar'>
-                      {user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
+                      {user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
                         && <div className='quiz-bar-progress'
-                          style={{ width: `${user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
+                          style={{ width: `${user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
                           <div className='line'>
-                            <p className='max'>{user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
+                            <p className='max'>{user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
                           </div>
                         </div>}
                       <div className='passing-grade' style={{ left: `calc(${data.quiz.passingGrade}% - 58px)` }}>
                         <p style={{
-                          color: user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) ? "#FFB800" : "#8628e2"
+                          color: user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) ? "#FFB800" : "#8628e2"
                         }}
                         >{data.quiz?.passingGrade} pts</p>
                         <div className='line'>
@@ -291,8 +291,9 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                     </div>
                     <div className='quiz-bar-points'>100 pts</div>
                   </div>}
-                {(!user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) && data.quiz?.questions.length > 0)
+                {(!user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) && data.quiz?.questions.length > 0)
                   && <button onClick={() => { setStep(1) }}>Comenzar quiz</button>}
+
                 {(user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) && data.quiz?.questions.length > 0) &&
                   <button onClick={() => { setStep(1) }}><BsArrowRepeat /> Repetir quiz</button>}
               </div>
@@ -352,16 +353,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 </div>
                 <div className='quiz-bar-container'>
                   <div className='quiz-bar'>
-                    {user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
+                    {user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson)
                       && <div className='quiz-bar-progress'
-                        style={{ width: `${user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
+                        style={{ width: `${user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade}%` }}>
                         <div className='line'>
-                          <p className='max'>{user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
+                          <p className='max'>{user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson).grade} pts</p>
                         </div>
                       </div>}
                     <div className='passing-grade' style={{ left: `calc(${data.quiz.passingGrade}% - 58px)` }}>
                       <p style={{
-                        color: user.quizzes.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) ? "#FFB800" : "#8628e2"
+                        color: user.quizzes?.find((x: any) => x.courseId == data.courseId && x.season == season && x.lesson == lesson) ? "#FFB800" : "#8628e2"
                       }}
                       >{data.quiz.passingGrade} pts</p>
                       <div className='line'>
