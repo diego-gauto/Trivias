@@ -160,7 +160,7 @@ const NavBar = () => {
 
           <NavText pathname={pathname} color={color} title="Inicio"
             style={pathname == "/Preview" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
-            Inicio
+            Cursos
           </NavText>
 
         </Link>
@@ -265,7 +265,7 @@ const NavBar = () => {
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
                   <Link href={PREVIEW_PATH}>
                     <FloatingMenuItem>
-                      Inicio
+                      Cursos
                     </FloatingMenuItem>
                   </Link>
                   <a href="https://gonvarnails.mx/" target="_blank">
@@ -315,7 +315,7 @@ const NavBar = () => {
                   <HBMenu>
                     <Link href="/Preview" >
                       <HBList onClick={() => { closeHamburgerMenu() }}>
-                        Inicio
+                        Cursos
                       </HBList>
                     </Link>
                     <a href="Https://gonvarnails.mx" target="_blank">

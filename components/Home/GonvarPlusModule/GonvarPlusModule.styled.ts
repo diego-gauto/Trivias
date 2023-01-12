@@ -10,7 +10,6 @@ export const CardContainer = styled(Card)`
   .course-container {
     display: flex;
     justify-content: space-between;
-    gap: 80px;
     @media only screen and (max-width: 1140px) {
       flex-direction: column;
       gap: 0;
@@ -23,6 +22,7 @@ export const CardContainer = styled(Card)`
       display: flex;
       flex-direction: column;
       gap: 30px;
+      flex: 0 35%;
       @media only screen and (max-width: 1140px) {
         padding-left: 0;
         .top {
@@ -61,13 +61,17 @@ export const CardContainer = styled(Card)`
           border: 1.5px solid #3f1168;
           background: none;
           border-radius: 20px;
+          @media only screen and (max-width: 1345px) {
+            font-size: 12px;
+            width: max-content;
+          }
         }
       }
 
       .middle {
         h1 {
           color: #3f1168;
-          font-size: 40px;
+          font-size: 32px;
           span {
             color: #a733e4;
           }
@@ -75,12 +79,12 @@ export const CardContainer = styled(Card)`
         p {
           padding-top: 10px;
           color: #3f1168;
-          font-size: 24px;
+          font-size: 18px;
           line-height: initial;
         }
       }
       .price {
-        font-size: 35px;
+        font-size: 32px;
         color: #ff9b00;
         span {
           font-size: 20px;
