@@ -6,9 +6,9 @@ export const CompraRapida = styled.div`
   cursor: pointer;
   background: linear-gradient(to right, transparent, transparent);
   color: transparent;
-
+  transform: translateX(-50%);
   position: relative;
-  left: 27.5%;
+  left: 50%;
   font-size: 24px;
   border-radius: 50px;
   padding: 15px 20px 15px;
@@ -26,7 +26,7 @@ export const CompraRapida = styled.div`
 
   &:hover {
     transition: 0.5s ease all;
-    transform: scale(1.1);
+    transform: translateX(-50%) scale(1.05);
     color: #e5dfe9;
     background: linear-gradient(to right, #942ced, #d244d1);
   }
