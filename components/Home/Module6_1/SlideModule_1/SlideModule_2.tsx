@@ -12,6 +12,7 @@ import {
   CompraRapida,
 } from "./SlideModule_2.styled";
 import { Line } from "../Module6_1.styled";
+import Link from "next/link";
 
 export const SlideModule_1 = (props: ISlideModule_2) => {
 
@@ -56,7 +57,9 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
             <CompraRapida>Compra rápida</CompraRapida>
             : <></>
         } */}
-        <CompraRapida>Compra rápida</CompraRapida>
+        <Link href={clickURL} >
+          <CompraRapida>Compra rápida</CompraRapida>
+        </Link>
         <Line></Line>
       </SlideImg>
       <UserDataContainer>

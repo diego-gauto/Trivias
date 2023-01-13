@@ -84,7 +84,7 @@ export const CardContainer = styled(Card)`
         }
       }
       .price {
-        font-size: 32px;
+        font-size: 28px;
         color: #ff9b00;
         span {
           font-size: 20px;
