@@ -5,10 +5,10 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  background-color: #3f1168;
-  padding-block: 10px;
-  padding-inline: 20px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #dad3e5;
+  padding-block: 5px;
+  padding-inline: 70px;
+  // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   @font-face {
     font-family: Montserrat;
@@ -46,7 +46,11 @@ export const Logo = styled.img`
   background-repeat: no-repeat;
   width: 130px;
   height: 70px;
+  padding-left: 0;
   cursor: pointer;
+  @media (max-width: 1023px) {
+    padding-left: 70px;
+  }
 `;
 export const LogoContain = styled.div`
   display: flex;
@@ -58,15 +62,16 @@ export const LogoContain = styled.div`
 export const NavText = styled("a")<{ pathname: any; color: any }>`
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "MONTSERRAT-BOLD" !important;
+  position: relative;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
   }
   cursor: pointer;
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
   &:hover {
     color: white;
     opacity: 0.6;
@@ -74,8 +79,17 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
   }
 
   @media (max-width: 1023px) {
-    font-size: 16px;
+    font-size: 14px;
   }
+  ${(props) =>
+    props.pathname !== "/" &&
+    css`
+      color: #3f1168;
+      &:hover {
+        color: #3f1168;
+        opacity: 1;
+      }
+    `}
   ${(props) =>
     props.color == 0 &&
     props.pathname == "/" &&
@@ -210,7 +224,71 @@ export const PurpleButton = styled.button`
 export const UserContain = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 40px;
+  .bell-contain {
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      .hover-text {
+        opacity: 1;
+        transition: 0.2s ease all;
+      }
+    }
+    .bell {
+      font-size: 26px;
+      color: #3f1168;
+    }
+    .notifications {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      top: -3px;
+      right: 2px;
+    }
+  }
+  .rewards-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    &:hover {
+      .hover-text {
+        opacity: 1;
+        transition: 0.2s ease all;
+      }
+    }
+    background: linear-gradient(59deg, #9a2fea 10%, #d244d1 40%, #fd8608 100%);
+    cursor: pointer;
+    .inside {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      background-color: #dad3e5;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+    }
+  }
+`;
+export const HoverText = styled.p`
+  font-size: 12px;
+  position: absolute;
+  border-radius: 100px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  font-style: normal;
+  top: 40px;
+  right: 50%;
+  font-weight: 600;
+  color: #3f1168;
+  transform: translateX(50%);
+  margin: 0;
+  background-color: #dad3e5;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  opacity: 0;
 `;
 export const Level = styled.i`
   background-image: url(../images/Navbar/lvl.png);
@@ -221,11 +299,18 @@ export const Level = styled.i`
 `;
 export const UserImage = styled.i`
   background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
   border-radius: 50%;
   background-size: contain;
+  position: relative;
+  &:hover {
+    .hover-text {
+      opacity: 1;
+      transition: 0.2s ease all;
+    }
+  }
 `;
 export const LogoS = styled.i`
   background-size: contain;

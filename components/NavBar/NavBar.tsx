@@ -34,7 +34,9 @@ import {
   UserContain,
   UserImage,
   HamburgerMenuOptionsList,
+  HoverText,
 } from "./NavBar.styled";
+import { SlBell } from "react-icons/sl";
 
 const NavBar = () => {
 
@@ -132,7 +134,7 @@ const NavBar = () => {
                 <Link href="/">
                   <Logo style={{
                     width: "auto", height: "66.6%",
-                    paddingTop: "15px", paddingLeft: "70px"
+                    paddingTop: "15px"
                   }} src="/images/Navbar/NavbarLogo.png" />
                 </Link>
               }
@@ -141,7 +143,7 @@ const NavBar = () => {
                 <Link href="/">
                   <Logo style={{
                     width: "auto", height: "66.6%",
-                    paddingTop: "15px", paddingLeft: "70px"
+                    paddingTop: "15px"
                   }} src="/images/Navbar/NavbarLogo2.png" />
                 </Link>
               }
@@ -150,7 +152,7 @@ const NavBar = () => {
             <Link href="/">
               <Logo style={{
                 width: "auto", height: "66.6%",
-                paddingTop: "15px", paddingLeft: "70px"
+                paddingTop: "15px"
               }} src="/images/Navbar/NavbarLogo.png" />
             </Link>
         }
@@ -185,14 +187,25 @@ const NavBar = () => {
 
           <>
             <UserContain>
-              <UserLevel />
-              <Link href="/Profile">
+              {/* <UserLevel /> */}
+              {/* <Link href="/Profile">
                 <NavText pathname={pathname} color={color} title="Perfil"
                   style={pathname == "/Profile" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
                 >
                   {userData ? userData.name : "Bienvenido"}
                 </NavText>
+              </Link> */}
+              <Link href="/Rewards">
+                <div className="rewards-circle">
+                  <div className="inside" />
+                  <HoverText className="hover-text">Recompensas</HoverText>
+                </div>
               </Link>
+              <div className="bell-contain">
+                <SlBell className="bell" />
+                <div className="notifications" />
+                <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
+              </div>
               <Link href="/Profile">
                 {userData && userData.photoURL ?
 
@@ -201,12 +214,13 @@ const NavBar = () => {
                       backgroundImage: "url(" + userData.photoURL + ")"
                       , backgroundSize: "100%"
                     }}
-                  />
+                  ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
                   :
                   < UserImage style={{
                     backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                  }} />
+                  }} ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
                 }
+
               </Link>
             </UserContain>
           </>
@@ -309,53 +323,52 @@ const NavBar = () => {
             </PointsContain>
             {/* <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input> */}
 
-            {
-              <>
-                <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
-                  <HBMenu>
-                    <Link href="/Preview" >
-                      <HBList onClick={() => { closeHamburgerMenu() }}>
-                        Cursos
-                      </HBList>
-                    </Link>
-                    <a href="Https://gonvarnails.mx" target="_blank">
-                      <HBList onClick={() => { closeHamburgerMenu() }}>
-                        Tienda
-                      </HBList>
-                    </a>
-                    {/* <Link href="/Preview">
+            <>
+              <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
+                <HBMenu>
+                  <Link href="/Preview" >
+                    <HBList onClick={() => { closeHamburgerMenu() }}>
+                      Cursos
+                    </HBList>
+                  </Link>
+                  <a href="Https://gonvarnails.mx" target="_blank">
+                    <HBList onClick={() => { closeHamburgerMenu() }}>
+                      Tienda
+                    </HBList>
+                  </a>
+                  {/* <Link href="/Preview">
                       <HBList onClick={() => { closeHamburgerMenu() }}>
                         Catálogo
                       </HBList>
                     </Link> */}
-                    <Link href="/Profile">
-                      <HBList onClick={() => { closeHamburgerMenu() }}>
+                  <Link href="/Profile">
+                    <HBList onClick={() => { closeHamburgerMenu() }}>
 
-                        {userData ? userData.name : "Bienvenido"}
-                        {userData && userData.photoURL ?
-                          < UserImage
-                            style={{
-                              backgroundImage: "url(" + userData.photoURL + ")"
-                              , backgroundSize: "100%"
-                            }}
-                          > </UserImage>
-                          :
-                          < UserImage style={{
-                            backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                          }} > </UserImage>
-                        }
-                      </HBList>
-                    </Link>
-                    <Link href="/Rewards">
-                      <HBList onClick={() => { closeHamburgerMenu() }}>
-                        Centro de Recompensas
-                        <RespLevel />
-                      </HBList>
-                    </Link>
-                  </HBMenu>
-                </HamburgerContain>
-              </>
-            }
+                      {userData ? userData.name : "Bienvenido"}
+                      {userData && userData.photoURL ?
+                        < UserImage
+                          style={{
+                            backgroundImage: "url(" + userData.photoURL + ")"
+                            , backgroundSize: "100%"
+                          }}
+                        > </UserImage>
+                        :
+                        < UserImage style={{
+                          backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                        }} > </UserImage>
+                      }
+                    </HBList>
+                  </Link>
+                  <Link href="/Rewards">
+                    <HBList onClick={() => { closeHamburgerMenu() }}>
+                      Centro de Recompensas
+                      <RespLevel />
+                    </HBList>
+                  </Link>
+                </HBMenu>
+              </HamburgerContain>
+            </>
+
           </>
         }
 
