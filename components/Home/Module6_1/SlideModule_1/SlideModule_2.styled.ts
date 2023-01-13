@@ -9,12 +9,10 @@ export const CompraRapida = styled.div`
   transform: translateX(-50%);
   position: relative;
   left: 50%;
-  font-size: 24px;
+  font-size: 16px;
   border-radius: 50px;
   padding: 15px 20px 15px;
-
   display: block;
-
   font-family: "MONTSERRAT-BOLD" !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
@@ -26,7 +24,7 @@ export const CompraRapida = styled.div`
 
   &:hover {
     transition: 0.5s ease all;
-    transform: translateX(-50%) scale(1.05);
+    transform: translateX(-50%);
     color: #e5dfe9;
     background: linear-gradient(to right, #942ced, #d244d1);
   }
