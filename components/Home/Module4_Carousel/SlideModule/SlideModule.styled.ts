@@ -21,7 +21,7 @@ export const SlideModuleContainer = styled(Container)`
       button {
         z-index: 5;
         position: absolute;
-        border-radius: 15px;
+        border-radius: 100px;
         padding-block: 10px;
         padding-inline: 20px;
         border: none;
