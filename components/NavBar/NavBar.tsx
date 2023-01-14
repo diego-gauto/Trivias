@@ -159,19 +159,14 @@ const NavBar = () => {
       </LogoContain>
       <NavTags>
         <Link href="/Preview">
-
           <NavText pathname={pathname} color={color} title="Inicio"
             style={pathname == "/Preview" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Cursos
           </NavText>
-
         </Link>
-
-
         <NavText pathname={pathname} color={color} title="Tienda" target="_blank" href="Https://gonvarnails.mx">
           Tienda
         </NavText>
-
         {
           (loggedIn && isAdmin) &&
           <Link href="/admin/Courses">
@@ -184,52 +179,38 @@ const NavBar = () => {
         }
         {
           loggedIn &&
-
-          <>
-            <UserContain>
-              {/* <UserLevel /> */}
-              {/* <Link href="/Profile">
-                <NavText pathname={pathname} color={color} title="Perfil"
-                  style={pathname == "/Profile" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
-                >
-                  {userData ? userData.name : "Bienvenido"}
-                </NavText>
-              </Link> */}
-              <Link href="/Rewards">
-                <div className="rewards-circle">
-                  <div className="inside" />
-                  <HoverText className="hover-text">Recompensas</HoverText>
-                </div>
-              </Link>
-              <div className="bell-contain">
-                <SlBell className="bell" />
-                <div className="notifications" />
-                <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
+          <UserContain pathname={pathname} color={color}>
+            <Link href="/Rewards">
+              <div className="rewards-circle">
+                <div className="inside" />
+                <HoverText className="hover-text">Recompensas</HoverText>
               </div>
-              <Link href="/Profile">
-                {userData && userData.photoURL ?
+            </Link>
+            <div className="bell-contain">
+              <SlBell className="bell" />
+              <div className="notifications" />
+              <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
+            </div>
+            <Link href="/Profile">
+              {userData && userData.photoURL ?
 
-                  < UserImage
-                    style={{
-                      backgroundImage: "url(" + userData.photoURL + ")"
-                      , backgroundSize: "100%"
-                    }}
-                  ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
-                  :
-                  < UserImage style={{
-                    backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                  }} ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
-                }
-
-              </Link>
-            </UserContain>
-          </>
+                < UserImage
+                  style={{
+                    backgroundImage: "url(" + userData.photoURL + ")"
+                    , backgroundSize: "100%"
+                  }}
+                ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
+                :
+                < UserImage style={{
+                  backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                }} ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
+              }
+            </Link>
+          </UserContain>
         }
         {!loggedIn &&
           <>
             <Link href={LOGIN_PATH}>
-
-
               <ShopDeco color={color}>
                 <NavText pathname={pathname} color={color} title="Iniciar Sesion"
                   style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
@@ -301,74 +282,72 @@ const NavBar = () => {
               height: "100%",
               marginLeft: "35px"
             }}>
-              <div className="hamburger-icon" onClick={() => { setHamburger(!hamburger) }}
-                style={{ zIndex: 2000, paddingTop: "13.5px" }}>
-                <MenuIcon id="hamburger-label">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </MenuIcon>
-              </div>
-
               <Link href="/">
                 <LogoS_2 />
               </Link>
             </div>
-
-            <PointsContain>
-              < RespLevel />
-              <Points>
-                Puntos
-              </Points>
-            </PointsContain>
-            {/* <input onClick={() => { setHamburger(true) }} type="checkbox" id="openmenu" className="hamburger-checkbox"></input> */}
-
-            <>
-              <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
-                <HBMenu>
-                  <Link href="/Preview" >
-                    <HBList onClick={() => { closeHamburgerMenu() }}>
-                      Cursos
-                    </HBList>
-                  </Link>
-                  <a href="Https://gonvarnails.mx" target="_blank">
-                    <HBList onClick={() => { closeHamburgerMenu() }}>
-                      Tienda
-                    </HBList>
-                  </a>
-                  {/* <Link href="/Preview">
-                      <HBList onClick={() => { closeHamburgerMenu() }}>
-                        Catálogo
-                      </HBList>
-                    </Link> */}
-                  <Link href="/Profile">
-                    <HBList onClick={() => { closeHamburgerMenu() }}>
-
-                      {userData ? userData.name : "Bienvenido"}
-                      {userData && userData.photoURL ?
-                        < UserImage
-                          style={{
-                            backgroundImage: "url(" + userData.photoURL + ")"
-                            , backgroundSize: "100%"
-                          }}
-                        > </UserImage>
-                        :
-                        < UserImage style={{
-                          backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                        }} > </UserImage>
-                      }
-                    </HBList>
-                  </Link>
-                  <Link href="/Rewards">
-                    <HBList onClick={() => { closeHamburgerMenu() }}>
-                      Centro de Recompensas
-                      <RespLevel />
-                    </HBList>
-                  </Link>
-                </HBMenu>
-              </HamburgerContain>
-            </>
-
+            <UserContain pathname={pathname} color={color}>
+              <Link href="/Rewards">
+                <div className="rewards-circle">
+                  <div className="inside" />
+                </div>
+              </Link>
+              <div className="bell-contain">
+                <SlBell className="bell" />
+                <div className="notifications" />
+              </div>
+              <Link href="/Profile">
+                {userData && userData.photoURL ?
+                  < UserImage
+                    style={{
+                      backgroundImage: "url(" + userData.photoURL + ")"
+                      , backgroundSize: "100%"
+                    }}
+                  />
+                  :
+                  < UserImage style={{
+                    backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                  }} />
+                }
+              </Link>
+            </UserContain>
+            {/* <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
+              <HBMenu>
+                <Link href="/Preview" >
+                  <HBList onClick={() => { closeHamburgerMenu() }}>
+                    Cursos
+                  </HBList>
+                </Link>
+                <a href="Https://gonvarnails.mx" target="_blank">
+                  <HBList onClick={() => { closeHamburgerMenu() }}>
+                    Tienda
+                  </HBList>
+                </a>
+                <Link href="/Profile">
+                  <HBList onClick={() => { closeHamburgerMenu() }}>
+                    {userData ? userData.name : "Bienvenido"}
+                    {userData && userData.photoURL ?
+                      < UserImage
+                        style={{
+                          backgroundImage: "url(" + userData.photoURL + ")"
+                          , backgroundSize: "100%"
+                        }}
+                      > </UserImage>
+                      :
+                      < UserImage style={{
+                        backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                      }} > </UserImage>
+                    }
+                  </HBList>
+                </Link>
+                <Link href="/Rewards">
+                  <HBList onClick={() => { closeHamburgerMenu() }}>
+                    Centro de Recompensas
+                    <RespLevel />
+                  </HBList>
+                </Link>
+              </HBMenu>
+            </HamburgerContain> */}
           </>
         }
 

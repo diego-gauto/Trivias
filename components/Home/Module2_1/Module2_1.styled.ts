@@ -5,10 +5,10 @@ import styled, { css } from "styled-components";
 export const ModuleContainer = styled(Container)<{ user: any }>`
   background-color: rgb(237, 231, 242);
   position: relative;
-  margin-top: 90px;
+  margin-top: 84px;
   padding-inline: 0;
   @media only screen and (max-width: 1023px) {
-    margin-top: 74px;
+    margin-top: 55px;
     ${(props) =>
       !props.user &&
       css`

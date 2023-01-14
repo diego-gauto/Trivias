@@ -29,7 +29,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     `}
     @media(max-width: 1023px) {
     background-color: #dad3e5;
-    padding-block: 0;
+    padding-block: 10px;
     padding-inline: 0;
     // padding-top: 60px;
   }
@@ -221,7 +221,7 @@ export const PurpleButton = styled.button`
     font-size: 14px;
   }
 `;
-export const UserContain = styled.div`
+export const UserContain = styled.div<{ pathname: any; color: any }>`
   display: flex;
   align-items: center;
   gap: 40px;
@@ -237,12 +237,17 @@ export const UserContain = styled.div`
     .bell {
       font-size: 26px;
       color: #3f1168;
+      ${(props) =>
+        props.color == 1 &&
+        css`
+          color: white;
+        `}
     }
     .notifications {
       width: 11px;
       height: 11px;
       border-radius: 50%;
-      background-color: red;
+      background-color: #e21047;
       position: absolute;
       top: -3px;
       right: 2px;
@@ -270,6 +275,11 @@ export const UserContain = styled.div`
       top: 50%;
       right: 50%;
       transform: translate(50%, -50%);
+      ${(props) =>
+        props.color == 1 &&
+        css`
+          background-color: #3f1168;
+        `}
     }
   }
 `;
