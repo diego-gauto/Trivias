@@ -44,6 +44,14 @@ export const SlideImg = styled.div`
   @media only screen and (max-width: 1024px) {
     height: 320px;
   }
+  &:hover {
+    .compra {
+      transition: 0.5s ease all;
+      transform: translateX(-50%);
+      background: linear-gradient(to right, transparent, transparent);
+      color: transparent;
+    }
+  }
 `;
 
 export const NewTag = styled.div`

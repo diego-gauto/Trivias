@@ -58,7 +58,7 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
             : <></>
         } */}
         <Link href={clickURL} >
-          <CompraRapida>Compra rápida</CompraRapida>
+          <CompraRapida className="compra">Compra rápida</CompraRapida>
         </Link>
         <Line></Line>
       </SlideImg>
