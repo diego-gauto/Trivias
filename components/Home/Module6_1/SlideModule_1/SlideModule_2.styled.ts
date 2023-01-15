@@ -48,8 +48,8 @@ export const SlideImg = styled.div`
     .compra {
       transition: 0.5s ease all;
       transform: translateX(-50%);
-      background: linear-gradient(to right, transparent, transparent);
-      color: transparent;
+      color: #e5dfe9;
+      background: linear-gradient(to right, #942ced, #d244d1);
     }
   }
 `;
