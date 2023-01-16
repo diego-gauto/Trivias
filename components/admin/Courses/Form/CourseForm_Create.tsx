@@ -228,9 +228,13 @@ const CourseForm_Create = () => {
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
-    reader.onload = (_event) => {
-      setImage(reader.result)
-    };
+    if (file[0].size == 573779 || file[0].size == 48830) {
+      reader.onload = (_event) => {
+        setImage(reader.result)
+      };
+    } else {
+      alert("La imagen debe tener una resolución de 1520 × 840 px  ó 760 × 420 px")
+    }
   }
   const getProffessors = () => {
     getTeacher().then((res) => {

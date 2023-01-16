@@ -229,7 +229,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
         {
           responsive1124 && <div className='module-selector'>
             <p>{course.courseTittle}</p>
-            <p><span>Un curso de</span> {course.courseProfessor[0].name}</p>
+            <p><span>Un curso de</span> {course.courseProfessor[0]?.name}</p>
           </div>
         }
         <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
