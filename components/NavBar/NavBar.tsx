@@ -20,23 +20,20 @@ import {
   LogoContain,
   LogoS,
   LogoS_2,
-  MenuIcon,
   NavContainer,
   NavResponsive,
   NavTags,
   NavText,
-  Points,
-  PointsContain,
   PurpleButton,
   ShopDeco,
   TagsResp,
-  TextA,
   UserContain,
   UserImage,
   HamburgerMenuOptionsList,
   HoverText,
 } from "./NavBar.styled";
 import { SlBell } from "react-icons/sl";
+import { getAuth, signOut } from "firebase/auth";
 
 const NavBar = () => {
 
@@ -102,6 +99,14 @@ const NavBar = () => {
       return false
     }
   }
+  const logoutFunc = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      window.location.href = "/";
+    }).catch((error) => {
+      console.log(error)
+    });
+  };
   // COLOR NAVBAR
   const [color, setColor] = useState<any>(0)
   const router = useRouter();
@@ -257,7 +262,7 @@ const NavBar = () => {
                   src="/images/Navbar/menu2.png"
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
-                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
+                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
                   <Link href={PREVIEW_PATH}>
                     <FloatingMenuItem>
                       Cursos
@@ -296,25 +301,34 @@ const NavBar = () => {
                 <SlBell className="bell" />
                 <div className="notifications" />
               </div>
-              <Link href="/Profile">
+              <>
                 {userData && userData.photoURL ?
-                  < UserImage
+                  < UserImage onClick={() => { setHamburger(!hamburger) }}
+
                     style={{
                       backgroundImage: "url(" + userData.photoURL + ")"
                       , backgroundSize: "100%"
                     }}
                   />
                   :
-                  < UserImage style={{
-                    backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                  }} />
+                  < UserImage
+                    onClick={() => { setHamburger(!hamburger) }}
+
+                    style={{
+                      backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
+                    }} />
                 }
-              </Link>
+              </>
             </UserContain>
-            {/* <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
-              <HBMenu>
+            <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
+              <HBMenu className="menu-hamburger">
+                <Link href="/Profile" >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Profile" ? { fontWeight: 600 } : {}}>
+                    Mi Perfil
+                  </HBList>
+                </Link>
                 <Link href="/Preview" >
-                  <HBList onClick={() => { closeHamburgerMenu() }}>
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Preview" ? { fontWeight: 600 } : {}}>
                     Cursos
                   </HBList>
                 </Link>
@@ -323,31 +337,11 @@ const NavBar = () => {
                     Tienda
                   </HBList>
                 </a>
-                <Link href="/Profile">
-                  <HBList onClick={() => { closeHamburgerMenu() }}>
-                    {userData ? userData.name : "Bienvenido"}
-                    {userData && userData.photoURL ?
-                      < UserImage
-                        style={{
-                          backgroundImage: "url(" + userData.photoURL + ")"
-                          , backgroundSize: "100%"
-                        }}
-                      > </UserImage>
-                      :
-                      < UserImage style={{
-                        backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                      }} > </UserImage>
-                    }
-                  </HBList>
-                </Link>
-                <Link href="/Rewards">
-                  <HBList onClick={() => { closeHamburgerMenu() }}>
-                    Centro de Recompensas
-                    <RespLevel />
-                  </HBList>
-                </Link>
+                <HBList onClick={() => { closeHamburgerMenu(), logoutFunc() }}>
+                  Cerrar Sesion
+                </HBList>
               </HBMenu>
-            </HamburgerContain> */}
+            </HamburgerContain>
           </>
         }
 

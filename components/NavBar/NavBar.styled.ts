@@ -125,7 +125,7 @@ export const FloatingMenu = styled("ul")<{ isOpen: boolean }>`
   position: absolute;
   background-color: #dad3e5;
   border-radius: 0 0 15% 15%;
-  top: 50px;
+  top: 65px;
 `;
 
 export const IngresarOptionsList = styled(FloatingMenu)<{ isOpen: boolean }>`
@@ -153,7 +153,6 @@ export const FloatingMenuItem = styled.li`
   text-align: center;
   font-size: 14px;
   margin-top: 10px;
-
   font-family: "MONTSERRAT-BOLD" !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
@@ -267,8 +266,8 @@ export const UserContain = styled.div<{ pathname: any; color: any }>`
     background: linear-gradient(59deg, #9a2fea 10%, #d244d1 40%, #fd8608 100%);
     cursor: pointer;
     .inside {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       position: absolute;
       background-color: #dad3e5;
@@ -416,29 +415,32 @@ export const NavResponsive = styled.div`
   }
 `;
 export const HamburgerContain = styled.div<{ hamburger: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  background-color: white;
-  padding-block: 20px;
+  background-color: #d244d1;
   transition: 0.4s ease-in-out;
-  padding-inline: 30px;
-  width: 100%;
   position: absolute;
-  z-index: 10;
-  top: -548px;
-  left: 0;
-
+  border-radius: 0 0 30px 30px;
+  z-index: 2;
+  top: 75px;
+  right: 0;
+  height: 0;
+  pointer-events: none;
+  box-shadow: inset 0 7px 9px -7px rgba(0, 0, 0, 0.4);
+  .menu-hamburger {
+    opacity: 0;
+  }
   @media (max-width: 424px) {
-    padding: 20px;
   }
   @media (max-width: 350px) {
-    padding: 10px;
   }
   ${(props) =>
     props.hamburger &&
     css`
-      top: 0;
+      pointer-events: auto;
+      height: 136px;
+      .menu-hamburger {
+        transition: 0.5s ease-in-out;
+        opacity: 1;
+      }
     `}
 `;
 export const Close = styled.i`
@@ -516,6 +518,7 @@ export const HBMenu = styled.ul`
   align-items: center;
   padding: 20px;
   list-style: none;
+  margin: 0;
   @media (max-width: 424px) {
     padding: 10px;
   }
@@ -524,26 +527,19 @@ export const HBMenu = styled.ul`
   }
 `;
 export const HBList = styled.li`
-  color: black;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-family: "Montserrat", sans-seriff;
-  padding-block: 20px;
+  color: white;
   cursor: pointer;
+  gap: 10px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-seriff;
   @media (max-width: 424px) {
-    font-size: 16px;
+    font-size: 14px;
   }
   @media (max-width: 350px) {
-    font-size: 14px;
+    font-size: 12px;
   }
   a {
     display: flex;
     text-decoration: none;
-  }
-  &:hover {
-    text-decoration: none;
-    font-weight: 600;
   }
 `;
