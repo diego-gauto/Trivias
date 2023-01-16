@@ -37,6 +37,9 @@ export const VideoContain = styled.div`
     @media (max-width: 1450px) {
       height: auto !important;
     }
+    video {
+      object-fit: cover;
+    }
   }
   .quiz-container {
     padding: 60px;
