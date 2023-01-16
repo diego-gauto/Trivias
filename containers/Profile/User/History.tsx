@@ -5,7 +5,7 @@ import { getInvoice } from '../../../store/actions/PaymentActions';
 import { getUserInvoices } from '../../../store/actions/ProfileActions';
 import { HistoryContainer } from './User.styled'
 
-export const History = (user: any) => {
+export const History = ({ user, addPayment }: any) => {
   const [option, setOption] = useState(0);
   const [invoices, setInvoices] = useState<any>([])
   const [allOptions, setAllOptions] = useState([])
@@ -30,7 +30,7 @@ export const History = (user: any) => {
   const getAllInvoice = () => {
     let tempInvoice: any = [];
     let tempOption: any = []
-    getUserInvoices(user.user.email).then((res) => {
+    getUserInvoices(user.email).then((res) => {
       res.forEach((element: DocumentData) => {
         let tempDate: any = new Date(element.paidAt.seconds * 1000);
         let tempDay = tempDate.getDate();
@@ -81,10 +81,8 @@ export const History = (user: any) => {
   useEffect(() => {
     getAllInvoice();
   }, []);
-
-
   return (
-    <HistoryContainer>
+    <HistoryContainer addPayment={addPayment}>
       <div className='title'>
         Historial de pedidos
       </div>

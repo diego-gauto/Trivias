@@ -45,7 +45,11 @@ const User = () => {
   const [reward, setReward] = useState<any>(0);
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
+  const [addPayment, setAddPayment] = useState<boolean>(false);
 
+  const newCard = () => {
+    setAddPayment(!addPayment)
+  }
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -260,10 +264,10 @@ const User = () => {
         />
         <ThirdBox>
           {/* Third Container */}
-          <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
+          <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} newCard={newCard} addPayment={addPayment} />
           {/* Fourth Container */}
           {/* <UserData data={userData} pm={paymentMethod} /> */}
-          <History user={userData} />
+          <History user={userData} addPayment={addPayment} />
         </ThirdBox>
       </SecondBox>
       {/* <Link href="/">

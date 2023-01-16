@@ -11,7 +11,10 @@ export const BackgroundProfile = styled.div`
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    width: 82%;
+    width: 100%;
+    @media (max-width: 1023px) {
+      width: 82%;
+    }
     @media (max-width: 700px) {
       width: 95%;
     }
@@ -492,10 +495,11 @@ export const ProfileMainContainer = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 50px;
   gap: 50px;
   width: 30%;
   @media (max-width: 1023px) {
+    padding-top: 20px;
     width: 100%;
     flex-direction: column-reverse;
   }
@@ -672,7 +676,7 @@ export const ProfileMainContainer = styled.div<{
       gap: 20px;
       background-color: ${(props) =>
         props.startEdit == false ? "#dad3e5" : "#e4b6e8"};
-      padding-top: 160px;
+      padding-top: 180px;
       padding-inline: 40px;
       padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
@@ -813,7 +817,7 @@ export const ProfileMainContainer = styled.div<{
       flex-direction: column;
       gap: 15px;
       background-color: #3f1168;
-      padding: 30px;
+      padding-block: 40px;
       padding-inline: 40px;
       @media (max-width: 1280px) {
         padding-inline: 30px;
@@ -824,6 +828,7 @@ export const ProfileMainContainer = styled.div<{
       @media (max-width: 1023px) {
         border-radius: 0 20px 20px 0;
         min-width: 40%;
+        padding: 30px;
         display: ${(props) => props.password == true && "none"};
       }
       @media (max-width: 600px) {
@@ -954,9 +959,11 @@ export const ProfileMainContainer = styled.div<{
       flex-direction: column;
       gap: 5px;
       background-color: #f5e2ac;
-      padding: 25px;
+      padding-block: 40px;
+      padding-inline: 25px;
       border-radius: 0 0 20px 20px;
       @media (max-width: 1023px) {
+        padding: 25px;
         min-width: 40%;
         border-radius: 0 20px 20px 0;
       }
@@ -977,12 +984,21 @@ export const ProfileMainContainer = styled.div<{
         .error {
           font-size: 14px;
           position: absolute;
-          bottom: -20px;
+          bottom: -40px;
           color: red;
           font-weight: 600;
+          text-align: center;
+          width: 200px;
+          white-space: break-spaces;
           left: 50%;
           transform: translateX(-50%);
           white-space: nowrap;
+          @media (max-width: 1023px) {
+            bottom: -50px;
+          }
+          @media (max-width: 450px) {
+            font-size: 12px;
+          }
         }
         .input-password {
           display: flex;
@@ -1027,17 +1043,14 @@ export const ProfileMainContainer = styled.div<{
           }
         }
         label {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
           font-family: "Montserrat", sans-serif;
           color: #441a6f;
           @media (max-width: 800px) {
-            font-size: 16px;
-          }
-          @media (max-width: 600px) {
             font-size: 14px;
           }
-          @media (max-width: 450px) {
+          @media (max-width: 600px) {
             font-size: 12px;
           }
         }
@@ -1234,7 +1247,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
   flex-direction: column;
   justify-content: space-between;
   min-width: 60%;
-  gap: 10px;
+  gap: 20px;
   @media (max-width: 1200px) {
     min-width: 420px;
   }
@@ -1871,7 +1884,7 @@ export const UserDataContainer = styled.div`
   flex-direction: column;
   width: 40%;
 `;
-export const HistoryContainer = styled.div`
+export const HistoryContainer = styled.div<{ addPayment: any }>`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1881,7 +1894,14 @@ export const HistoryContainer = styled.div`
   background-color: #dad3e5;
   padding: 20px;
   border-radius: 20px;
-  height: fit-content;
+  ${(props) =>
+    props.addPayment == true &&
+    css`
+      height: fit-content;
+      .dots {
+        margin-top: 20px;
+      }
+    `}
   @media (max-width: 1200px) {
     min-width: 260px;
     padding-inline: 15px;
@@ -1985,8 +2005,13 @@ export const HistoryContainer = styled.div`
   }
   .dots {
     display: flex;
-    margin-top: 20px;
+    margin-top: auto;
     gap: 10px;
+    ${(props) =>
+      props.addPayment == true &&
+      css`
+        margin-top: 20px;
+      `}
     .option-dot {
       cursor: pointer;
       display: flex;
@@ -2019,6 +2044,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
   }
   .main-container {
     display: flex;
+    height: 374px;
     flex-direction: column;
     gap: 15px;
     background-color: #d2aff0;
@@ -2028,6 +2054,12 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
     font-family: "Montserrat", sans-serif;
     @media (max-width: 1260px) {
       padding: 20px;
+    }
+    @media (max-width: 1200px) {
+      height: 341px;
+    }
+    @media (max-width: 1023px) {
+      height: fit-content;
     }
     @media (max-width: 600px) {
       padding-block: 20px;
@@ -2051,54 +2083,14 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         }
       }
     }
-    // .edit-mode {
-    //   display: flex;
-    //   align-items: center;
-    //   gap: 10px;
-    //   .info {
-    //     p {
-    //       font-size: 16px;
-    //       font-weight: 600;
-    //       color: #3f1168;
-    //     }
-    //     input {
-    //       width: 100%;
-    //       border-radius: 100px;
-    //       border: 1px solid #942ced;
-    //       background: transparent;
-    //       color: #942ced;
-    //       padding-block: 5px;
-    //       padding-inline: 20px;
-    //       :focus {
-    //         outline: 2px solid #942ced;
-    //       }
-    //       ::placeholder {
-    //         color: #942ced;
-    //         opacity: 0.7;
-    //       }
-    //     }
-    //     display: flex;
-    //     width: 100%;
-    //     justify-content: space-between;
-    //     .date {
-    //       display: flex;
-    //       flex-direction: column;
-    //       gap: 10px;
-    //       .inputs {
-    //         display: flex;
-    //         gap: 20px;
-    //       }
-    //     }
-    //     .date-inputs {
-    //       width: 90px;
-    //     }
-    //   }
-    // }
     .title {
       font-size: 24px;
       font-weight: 800;
       color: #942ced;
       margin-bottom: 10px;
+      @media (max-width: 1023px) {
+        text-align: center;
+      }
     }
     .card-contain {
       display: flex;
@@ -2210,7 +2202,10 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
       font-size: 20px;
       font-weight: 500;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: auto;
+      @media (max-width: 1023px) {
+        margin-top: 20px;
+      }
       @media (max-width: 480px) {
         gap: 5px;
         font-size: 16px;

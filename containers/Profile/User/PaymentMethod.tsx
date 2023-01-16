@@ -13,15 +13,13 @@ import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineSta
 import { FaTrashAlt } from "react-icons/fa";
 import { addPaymentMethod } from "../../../store/actions/PaymentActions";
 
-const PaymentMethod = ({ data, pm, handleClick }: any) => {
+const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
 
   const [show, setShow] = useState(false);
   const [user, setUser] = useState<any>({ data })
   const handleShow = () => setShow(true);
   const [loader, setLoader] = useState<any>(false);
   const [deleteLoad, setDeleteLoad] = useState<any>(false);
-  const [addPayment, setAddPayment] = useState<boolean>(false);
-  const [editCard, setEditCard] = useState(0);
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -107,7 +105,6 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
         <div className="title">
           Métodos de pago
         </div>
-
         {
           !deleteLoad
             ?
@@ -163,7 +160,7 @@ const PaymentMethod = ({ data, pm, handleClick }: any) => {
         }
 
 
-        <div className="bottom-contain" onClick={() => { setAddPayment(!addPayment) }}>
+        <div className="bottom-contain" onClick={newCard}>
           {
             !addPayment
               ? <AiOutlinePlus />
