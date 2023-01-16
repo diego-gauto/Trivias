@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SlideImg = styled.div`
-  border-radius: 45px;
+  border-radius: 40px;
   height: 350px;
   background-size: 100% auto;
   padding: 0;
@@ -18,12 +18,12 @@ export const SlideImg = styled.div`
 
 export const TextSectionWrapper = styled.div`
   background-color: #ede7f2;
-  border-radius: 50px;
+  border-radius: 40px;
   width: 100%;
   margin: 0 auto;
   position: relative;
-  height: 230px;
-  bottom: 110px;
+  height: 200px;
+  bottom: 170px;
   top: -20%;
 
   text-align: center;
@@ -32,11 +32,11 @@ export const TextSectionWrapper = styled.div`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    height: 360px;
+    height: 260px;
     bottom: 240px !important;
   }
   &:active {
-    height: 360px;
+    height: 260px;
     bottom: 240px !important;
   }
 
@@ -65,7 +65,7 @@ export const NewTag = styled.div`
 
 export const UsernameSectionWrapper = styled.div`
   background-color: #f4e3ba;
-  border-radius: 50px;
+  border-radius: 40px;
   margin: 0 auto;
   position: absolute;
   bottom: 0%;
@@ -104,12 +104,12 @@ export const UserImage = styled.div`
 `;
 
 export const ContainerMain = styled.div`
-  height: 480px;
+  height: 400px;
   background-color: #ede7f2;
   box-shadow: -8px 8px 10px 0px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
   width: 100%;
-  border-radius: 50px;
+  border-radius: 40px;
   z-index: 2;
   .row {
     width: 100%;
@@ -129,12 +129,12 @@ export const UserDataContainer = styled.div`
   position: relative;
 `;
 export const DisabledMask = styled.div`
-  height: 480px;
+  height: 400px;
   margin-top: 0px;
   transition: all 0.3s ease-in-out;
   background-color: rgba(239, 233, 243, 0.6);
   width: 100%;
-  border-radius: 45px;
+  border-radius: 40px;
   position: absolute;
   opacity: 1;
   margin-left: 0px;
@@ -170,9 +170,8 @@ export const TextNew = styled.span`
 `;
 export const Text01 = styled.span`
   font-family: "Montserrat";
-  font-style: normal;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   color: #6b4e2f;
   text-align: left;
   position: relative;
