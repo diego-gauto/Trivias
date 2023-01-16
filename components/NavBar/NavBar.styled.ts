@@ -312,7 +312,7 @@ export const UserImage = styled.i`
   height: 35px;
   cursor: pointer;
   border-radius: 50%;
-  background-size: contain;
+  background-size: cover;
   position: relative;
   &:hover {
     .hover-text {

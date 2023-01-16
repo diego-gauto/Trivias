@@ -202,7 +202,6 @@ const NavBar = () => {
                 < UserImage
                   style={{
                     backgroundImage: "url(" + userData.photoURL + ")"
-                    , backgroundSize: "100%"
                   }}
                 ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
                 :
