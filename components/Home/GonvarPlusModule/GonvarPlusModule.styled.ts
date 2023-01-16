@@ -61,9 +61,10 @@ export const CardContainer = styled(Card)`
           border: 1.5px solid #3f1168;
           background: none;
           border-radius: 20px;
-          @media only screen and (max-width: 1345px) {
-            font-size: 12px;
+          @media only screen and (max-width: 1366px) {
+            font-size: 14px;
             width: max-content;
+            margin-left: 20px;
           }
         }
       }
