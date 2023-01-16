@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { saveProductsData } from '../../../../store/actions/LandingActions';
+import React, { useEffect, useState } from 'react'
+import { downloadFileWithStoragePath, saveProductsData } from '../../../../store/actions/LandingActions';
 import { divideArrayInChunks } from '../../../Home/Module5/helpers';
 import {
   ColumnsContainer,
@@ -18,6 +18,8 @@ const ProductsSection = (props: IProductsSectionProps) => {
   const { productsSectionData } = props;
   const [productsData, setProductsData] = useState(productsSectionData)
 
+
+
   const chunk1 = productsData.slice(0, 3)
   const chunk2 = productsData.slice(3, 6)
   const updateProductState = (e: any, key: string, i: number) => {
@@ -26,7 +28,27 @@ const ProductsSection = (props: IProductsSectionProps) => {
     newState[i][key] = key === "file" ? e.target.files[0] : e.target.value
     setProductsData(newState)
   }
-  const gerProductElement = ({ clickURL, imgURL, title, subtitle }: Product, i: number) => {
+
+  useEffect(() => {
+    productsData.forEach((element) => {
+      downloadFileWithStoragePath(element.imgURL).then((res: any) => {
+        element.url = res
+      })
+    })
+    setProductsData(productsData);
+  }, [])
+
+  const getImage = (file: any, i: number) => {
+    let tempProduct: any = productsData;
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      tempProduct[i].url = reader.result;
+      setProductsData(tempProduct)
+    };
+  }
+
+  const gerProductElement = ({ clickURL, imgURL, title, subtitle, precio, url }: Product, i: number) => {
     return (
       <ColumnsContainer2>
         <Inputs>
@@ -45,7 +67,7 @@ const ProductsSection = (props: IProductsSectionProps) => {
           </EditText>
           <EditInput
             onChange={(e) => updateProductState(e, "subtitle", i)}
-            value={subtitle}
+            value={precio}
             placeholder="Desde $ 12.00"
           />
         </Inputs>
@@ -64,11 +86,12 @@ const ProductsSection = (props: IProductsSectionProps) => {
             Imagen del Producto
           </EditText>
           <FolderInput
-            onChange={(e) => updateProductState(e, "file", i)}
+            onChange={(e) => { updateProductState(e, "file", i); getImage(e.target.files, i) }}
             type="file"
             placeholder="Seleccionar archivo"
           />
         </Inputs>
+        <img src={url} alt="" />
       </ColumnsContainer2>
     )
   }

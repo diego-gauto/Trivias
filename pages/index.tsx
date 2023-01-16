@@ -30,6 +30,8 @@ const Homepage = () => {
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
   const [courseGonvarPlus, setCourseGonvarPlus] = useState<any>([]);
   const [courseSEPData, setCourseSEPData] = useState<any>([]);
+  const [courseDryData, setCourseDryData] = useState<any>([]);
+  const [courseExpData, setCourseExpData] = useState<any>([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
@@ -70,7 +72,14 @@ const Homepage = () => {
     courseNailsData.totalDuration = hms(courseNailsData.totalDuration)
     setCourseNailsData(courseNailsData);
     const courseSEPData = await getWholeCourse(SEP_COURSE_ID);
+    courseSEPData.totalDuration = hms(courseSEPData.totalDuration)
     setCourseSEPData(courseSEPData);
+    const courseDryData = await getWholeCourse(DRY_MANICURE_COURSE_ID);
+    courseDryData.totalDuration = hms(courseDryData.totalDuration)
+    setCourseDryData(courseDryData);
+    const courseExpData = await getWholeCourse(EXPERTS_ESCULTURAL_COURSE_ID);
+    courseExpData.totalDuration = hms(courseExpData.totalDuration)
+    setCourseExpData(courseExpData);
     setLoading(false);
   }
   const getCourses = async () => {
@@ -135,36 +144,36 @@ const Homepage = () => {
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule loggedIn={loggedIn} user={userData} courseId={courseGonvarPlus} />
       {courses &&
-        <Module4_Carousel type={'subscription'} isInfinite={true} slideData={
+        <Module4_Carousel type={'subscription'} isInfinite={true} title={courseGonvarPlus.courseTittle} slideData={
           courses
         } />
       }
       {/* Nails Master Module Card */}
       <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} num={1} loggedIn={loggedIn} user={userData} />
       {courseNailsData &&
-        <Module4_Carousel type={"product"} isInfinite={true} slideData={
+        <Module4_Carousel type={"product"} isInfinite={true} title={courseNailsData.courseTittle} slideData={
           courseNailsData.lessons
         } />
       }
       {/* SEP Module Card */}
       <CourseModuleContainer courseId={SEP_COURSE_ID} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&
-        <Module4_Carousel type={"product"} isInfinite={true} slideData={
+        <Module4_Carousel type={"product"} isInfinite={true} title={courseSEPData.courseTittle} slideData={
           courseSEPData.lessons
         } />
       }
       {/* Dry's Manicure Module Card */}
       <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} num={3} loggedIn={loggedIn} user={userData} />
       {courses &&
-        <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
-          courses
+        <Module4_Carousel type={"product"} isInfinite={true} title={courseDryData.courseTittle} slideData={
+          courseDryData.lessons
         } />
       }
       {/* Experts Escultural Module Card */}
       <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} num={4} loggedIn={loggedIn} user={userData} />
       {courses &&
-        <Module4_Carousel type={"subscription"} isInfinite={true} slideData={
-          courses
+        <Module4_Carousel type={"product"} isInfinite={true} title={courseExpData.courseTittle} slideData={
+          courseExpData.lessons
         } />
       }
       <Module5_1 slideData={landingData.experienciasSectionData} />

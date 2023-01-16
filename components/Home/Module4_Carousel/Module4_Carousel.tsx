@@ -15,7 +15,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
 
-  const { isInfinite, slideData, type } = props;
+  const { isInfinite, slideData, type, title } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
   if (slideDataArr) {
@@ -81,7 +81,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
       {type == 'subscription' ? <h1 style={{ color: "#3F1168", fontSize: "30px", paddingLeft: responsive768 ? '20px' : '80px' }}>Cursos incluidos en <span
         style={{ color: "#A733E4" }}>Gonvar+</span></h1> :
         <h1 style={{ color: "#3F1168", paddingLeft: responsive768 ? '20px' : '80px', fontSize: "30px" }}>Lecciones de <span
-          style={{ color: "#A733E4" }}>Nails Master 2.0</span></h1>
+          style={{ color: "#A733E4" }}>{title}</span></h1>
       }
       <Swiper {...settings} onInit={onInit}>
         {slideDataArr?.map((element, idx) => (

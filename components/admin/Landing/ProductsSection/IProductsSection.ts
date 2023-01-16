@@ -7,6 +7,8 @@ export interface Product {
   imgURL: string;
   title: string;
   subtitle: string;
+  precio: number;
   id: string;
-  file?: File
+  file?: File;
+  url: string;
 }
