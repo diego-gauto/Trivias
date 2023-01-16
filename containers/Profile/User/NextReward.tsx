@@ -5,7 +5,7 @@ import {
   RewardCenterLink,
   RewardCenterLinkNoReward,
   RewardContainer,
-  SecondContainer,
+  ThirdBox,
   SubscriptionContainer,
 } from "./User.styled";
 import { useEffect, useState } from "react";
@@ -87,7 +87,7 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
   )
 
   return (
-    <SecondContainer>
+    <ThirdBox>
       <RewardContainer reward={reward}>
         <div className="main-container">
           <div className="reward-title-contain">
@@ -207,7 +207,7 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
           <img src={handImage} />
         </div>
       </SubscriptionContainer>
-    </SecondContainer>
+    </ThirdBox>
   )
 }
 export default NextReward;

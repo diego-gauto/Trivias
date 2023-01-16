@@ -124,8 +124,12 @@ export const SecondBox = styled.div`
 export const ThirdBox = styled.div`
   display: flex;
   gap: 50px;
+  padding-right: 30px;
   @media (max-width: 1380px) {
     gap: 30px;
+  }
+  @media (max-width: 1200px) {
+    padding-right: 0;
   }
   @media (max-width: 1080px) {
     gap: 15px;
@@ -1226,21 +1230,6 @@ export const ProfileIcon = styled.img<{ edit: any }>`
       filter: invert(27%) sepia(64%) saturate(2944%) hue-rotate(259deg)
         brightness(90%) contrast(90%);
     `}
-`;
-export const SecondContainer = styled.div`
-  display: flex;
-  gap: 50px;
-  @media (max-width: 1380px) {
-    gap: 30px;
-  }
-  @media (max-width: 1080px) {
-    gap: 15px;
-  }
-  @media (max-width: 1023px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
 `;
 export const RewardContainer = styled.div<{ reward: any }>`
   display: flex;

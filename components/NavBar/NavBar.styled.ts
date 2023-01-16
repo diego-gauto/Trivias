@@ -87,7 +87,7 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
       color: #3f1168;
       &:hover {
         color: #3f1168;
-        opacity: 1;
+        opacity: 0.6;
       }
     `}
   ${(props) =>
