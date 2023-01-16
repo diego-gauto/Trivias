@@ -13,9 +13,10 @@ export const MainContainer = styled.div`
     display: flex;
     gap: 20px;
     align-items: center;
+    width: 100%;
     p {
       margin: 0;
-      color: #d24dd3;
+      color: #fff;
       font-weight: 500;
       font-style: italic;
     }
@@ -23,8 +24,14 @@ export const MainContainer = styled.div`
       background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
       color: #fff;
       border: none;
-      border-radius: 20px;
+      width: 100%;
       padding: 5px 15px;
+      p {
+        animation-name: scale;
+        animation-duration: 1.2s;
+        animation-iteration-count: infinite;
+        // transform: scale(1.1);
+      }
     }
   }
 `;

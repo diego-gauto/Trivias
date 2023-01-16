@@ -163,19 +163,19 @@ const Homepage = () => {
         } />
       }
       {/* Dry's Manicure Module Card */}
-      <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} num={3} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courseId={DRY_MANICURE_COURSE_ID} num={3} loggedIn={loggedIn} user={userData} />
       {courses &&
         <Module4_Carousel type={"product"} isInfinite={true} title={courseDryData.courseTittle} slideData={
           courseDryData.lessons
         } />
-      }
+      } */}
       {/* Experts Escultural Module Card */}
-      <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} num={4} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courseId={EXPERTS_ESCULTURAL_COURSE_ID} num={4} loggedIn={loggedIn} user={userData} />
       {courses &&
         <Module4_Carousel type={"product"} isInfinite={true} title={courseExpData.courseTittle} slideData={
           courseExpData.lessons
         } />
-      }
+      } */}
       <Module5_1 slideData={landingData.experienciasSectionData} />
       <Module6_1 slideData={landingData.productosDestacadosData} />
       {/* <Footer /> */}

@@ -158,19 +158,6 @@ const Lesson = () => {
 
   }, [loggedIn])
 
-  const goTo = () => {
-    router.push({
-      pathname: `/Certificates`,
-      query: {
-        name: userData.name,
-        title: course.courseTittle,
-        professor: course.courseProfessor[0].name,
-        id: userData.uid,
-        color: course.courseCertificateColor,
-        courseId: course.id
-      }
-    });
-  }
 
   return (
     <>
@@ -180,10 +167,6 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
-          {certficate && <div className="certificate-container">
-            <p>Muchas felicidades por acompletar el curso, tu certificado ya esta disponible!</p>
-            <button onClick={() => { goTo() }}>Certificado</button>
-          </div>}
           {course && <Container>
             <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />

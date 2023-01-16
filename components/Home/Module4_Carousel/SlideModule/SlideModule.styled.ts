@@ -162,7 +162,7 @@ export const Text01 = styled.span`
 export const Text01_p = styled.span`
   font-family: "Montserrat";
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
   color: #a733e4;
   span {
     font-weight: 500;
@@ -171,9 +171,9 @@ export const Text01_p = styled.span`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @media only screen AND (min-width: 1000px) AND (max-width: 1300px) {
-    font-size: 14px;
-  }
+  // @media only screen AND (min-width: 1000px) AND (max-width: 1366px) {
+  //   font-size: 14px;
+  // }
 `;
 export const Text02 = styled.span`
   font-family: "Raleway";
@@ -190,7 +190,7 @@ export const Text02 = styled.span`
 export const Text02_p = styled.span`
   font-family: "Montserrat";
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
   color: #3f1168;
   span {
     font-weight: 500;
@@ -199,9 +199,9 @@ export const Text02_p = styled.span`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @media only screen AND (min-width: 1000px) AND (max-width: 1300px) {
-    font-size: 14px;
-  }
+  // @media only screen AND (min-width: 1000px) AND (max-width: 1300px) {
+  //   font-size: 14px;
+  // }
 `;
 export const Text03 = styled.span<{ level: any }>`
   @font-face {
