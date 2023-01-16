@@ -117,7 +117,7 @@ const Landing = () => {
               }
             </OptionsContainer>
             {showTab == 1 && <HeroSection heroSectionData={data.heroSectionData} />}
-            {showTab == 2 && <ReviewsSection reviewsSectionData={data.reseniasSectionData} />}
+            {showTab == 2 && <ReviewsSection reviewsSectionData={data.experienciasSectionData} />}
             {showTab == 3 && <ProductsSection productsSectionData={data.productosDestacadosData} />}
           </HomePageContain>
         </Container>

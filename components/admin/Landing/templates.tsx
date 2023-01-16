@@ -67,6 +67,7 @@ const LandingObject = () => {
         {
           "title": "",
           "subtitle": "",
+          "price": 0,
           "isNew": "",
           "imgURL": "",
           "clickURL": ""
@@ -74,6 +75,7 @@ const LandingObject = () => {
         {
           "title": "",
           "subtitle": "",
+          "price": 0,
           "isNew": "",
           "imgURL": "",
           "clickURL": ""
@@ -81,6 +83,7 @@ const LandingObject = () => {
         {
           "title": "",
           "subtitle": "",
+          "price": 0,
           "isNew": "",
           "imgURL": "",
           "clickURL": ""
@@ -88,6 +91,7 @@ const LandingObject = () => {
         {
           "title": "",
           "subtitle": "",
+          "price": 0,
           "isNew": "",
           "imgURL": "",
           "clickURL": ""
@@ -95,6 +99,7 @@ const LandingObject = () => {
         {
           "title": "",
           "subtitle": "",
+          "price": 0,
           "isNew": "",
           "imgURL": "",
           "clickURL": ""
@@ -102,6 +107,7 @@ const LandingObject = () => {
         {
           "title": "",
           "subtitle": "",
+          "price": 0,
           "isNew": "",
           "imgURL": "",
           "clickURL": ""
