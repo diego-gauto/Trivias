@@ -69,23 +69,23 @@ export const UsernameSectionWrapper = styled.div`
   margin: 0 auto;
   position: absolute;
   bottom: 0%;
-  text-align: center;
   overflow: hidden;
   width: 100%;
   height: 100px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  padding-inline: 20px;
+  gap: 20px;
 `;
 
 export const FacebookButton = styled.div`
   background-repeat: no-repeat;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-color: white;
   border-radius: 50px;
   background-size: 105%;
-
+  margin-left: auto;
   @media only screen and (max-width: 1028px) {
     width: 30px;
     height: 30px;
@@ -98,8 +98,8 @@ export const UserImage = styled.div`
   background-size: 100%;
   background-repeat: no-repeat;
   @media only screen and (max-width: 840px) {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 `;
 
@@ -180,13 +180,13 @@ export const Text01 = styled.span`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 export const Text02 = styled.p`
   text-align: left !important;
   font-family: "Montserrat";
-  padding-left: 20px;
-  padding-right: 20px;
-
   width: 80%;
   margin-left: 10%;
   position: relative;

@@ -37,6 +37,16 @@
     background-color: #3035417c;
   }
 }
+
+
+@keyframes scale {
+  0% {
+    transform: scale(1.0)
+  }
+  100% {
+    transform:scale(1.1)
+  }
+}
 .right-shadow{
     width: 100px;
     height: 209px;

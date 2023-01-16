@@ -1,3 +1,4 @@
+import router from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
@@ -5,13 +6,13 @@ import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
-const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }: any) => {
+const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick }: any) => {
 
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
-
+  const [certficate, setCertificate] = useState<any>(false);
   useEffect(() => {
     let temp_selected: any = [];
     course?.seasons.forEach((element: any) => {
@@ -21,13 +22,16 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
 
     let viewed = 0;
     course.lessons.forEach((element: any) => {
-      if (element.users.includes(userId)) {
+      if (element.users.includes(userData?.id)) {
         viewed++;
       }
     });
+    if (course.lessons.length == viewed) {
+      setCertificate(true)
+    }
     setCount(viewed)
 
-  }, [course])
+  }, [course, data])
 
   useEffect(() => {
     setOpen(menu)
@@ -37,6 +41,20 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
     let temp = [...selected]
     temp[index] = !temp[index];
     setSelected(temp)
+  }
+
+  const goTo = () => {
+    router.push({
+      pathname: `/Certificates`,
+      query: {
+        name: userData.name,
+        title: course.courseTittle,
+        professor: course.courseProfessor[0].name,
+        id: userData.uid,
+        color: course.courseCertificateColor,
+        courseId: course.id
+      }
+    });
   }
 
 
@@ -52,6 +70,11 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           <Text03 style={{ padding: 0 }} level={course?.courseDifficulty}><span>{course?.courseDifficulty}</span></Text03>
         </div>
       </div>
+      {(certficate && !responsive1124) && <div className="certificate-container">
+        <button onClick={() => { goTo() }}>
+          <p>Obtener certificado</p>
+        </button>
+      </div>}
       <div className='course-progress'>
         <p className='title'>Tu progreso <br />
           <b>{count} de {course?.lessons.length}</b> <span>lecciones.</span>
@@ -65,6 +88,11 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           </div>
         </div>
       </div>
+      {(certficate && responsive1124) && <div className="certificate-container">
+        <button onClick={() => { goTo() }}>
+          <p>Obtener certificado</p>
+        </button>
+      </div>}
       <div className='certificate-responsive'>
         <p>Acaba el curso para obtener tu certificado.</p>
       </div>
@@ -73,7 +101,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
               <div className='module'>
-                {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userId} refresh={toggleHandler} />}
+                {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userData?.id} refresh={toggleHandler} />}
                 <div>
                   <p className='title'>Módulo {index + 1}</p>
                   <Episode>
@@ -86,7 +114,7 @@ const Courses = ({ id, course, data, userId, season, lesson, menu, handleClick }
             <CoursesContainer active={selected[index]} onClick={() => {
               setOpen(!open); handleClick(false)
             }}>
-              <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userId} course={course} />
+              <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userData?.id} course={course} />
             </CoursesContainer>
           </SeasonContainer>
         )
