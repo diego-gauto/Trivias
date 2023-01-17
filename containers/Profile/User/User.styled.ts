@@ -123,8 +123,11 @@ export const SecondBox = styled.div`
 `;
 export const ThirdBox = styled.div`
   display: flex;
-  gap: 50px;
   padding-right: 30px;
+  gap: 8%;
+  @media (max-width: 1500px) {
+    gap: 50px;
+  }
   @media (max-width: 1380px) {
     gap: 30px;
   }
