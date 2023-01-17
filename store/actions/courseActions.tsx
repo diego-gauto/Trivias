@@ -204,6 +204,38 @@ export const addComment = async (data: any) => {
   return 'exito'
 }
 
+export const getNextCertificate = async () => {
+  let courses: any = []
+  const docRef = query(collection(db, 'courses'), orderBy('createdAt', 'desc'));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc: any) => {
+    courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0, totalDuration: 0, lessons: [] });
+  })
+  await Promise.all(courses.map(async (course: any) => {
+    const docRefSeasons = query(collection(db, 'courses', course.id, "seasons"), orderBy('season'));
+    const querySnapshotSeasons = await getDocs(docRefSeasons);
+    querySnapshotSeasons.forEach((season: any) => {
+      course.seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+    });
+    await Promise.all(course.seasons.map(async (season: any) => {
+      const docRefLesson = query(collection(db, 'courses', course?.id, "seasons", season.id, "lessons"), orderBy('number'));
+      const querySnapshotLesson = await getDocs(docRefLesson);
+      querySnapshotLesson.forEach((lesson: any) => {
+        var newobj = Object.assign({}, lesson.data());
+        if (!("duration" in lesson.data())) {
+          newobj["duration"] = 0;
+        }
+        if (course.lessons) {
+          course.lessons.push({ ...newobj, id: lesson.id });
+        }
+        course.totalDuration = course.totalDuration + newobj.duration;
+        course.totalLessons++;
+        season.lessons.push({ ...newobj, id: lesson.id });
+      });
+    }))
+  }))
+  return courses;
+}
 
 export const getComments = async () => {
   let comment: any = []
