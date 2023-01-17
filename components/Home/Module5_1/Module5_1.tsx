@@ -86,8 +86,24 @@ export const Module5_1 = (props: IModule5_1) => {
         slidesPerView: 4.5,
         spaceBetween: 30,
       },
+      1000: {
+        slidesPerView: 3.5,
+        spaceBetween: 30,
+      },
       850: {
+        slidesPerView: 3.15,
+        spaceBetween: 30,
+      },
+      800: {
         slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      650: {
+        slidesPerView: 2.5,
+        spaceBetween: 30,
+      },
+      550: {
+        slidesPerView: 2.0,
         spaceBetween: 30,
       },
       420: {
