@@ -13,13 +13,11 @@ import { getRewards, getTimeRewards } from "../../../store/actions/ProfileAction
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
-import { getWholeCourses, getNextCertificate } from "../../../store/actions/courseActions";
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, prize, setPrize, timePrize, setTimePrize }: any) => {
+const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, prize, setPrize, timePrize, setTimePrize, nextCertificate }: any) => {
   const [prizeSize, setPrizeSize] = useState<any>(0);
   const [timePrizeSize, setTimePrizeSize] = useState<any>(0);
-  const [certCounter, setCertCounter] = useState(0);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
@@ -88,29 +86,6 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
     </Link>
   )
 
-  const getAllCourses = () => {
-    getNextCertificate().then((res: any) => {
-      // for (let i: number = 0; i < res.length; i++) {
-      //   for (let j: number = 0; j < res[i].lessons.length; j++) {
-
-      //   }
-      // }
-      res.map((course: any) => {
-        course.lessons.map((lessons: any) => {
-          lessons.users.map((users: any) => {
-            if (user.id == users) {
-              setCertCounter(certCounter + 1);
-            }
-          })
-        })
-      })
-      // console.log(res[0].lessons[0].users[0])
-    })
-  }
-  console.log(certCounter)
-  useEffect(() => {
-    getAllCourses();
-  }, []);
 
   return (
     <ThirdBox>
@@ -173,17 +148,17 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
                 reward == 1 &&
                 <p>
                   {
-                    timePrize.length <= 0 ? <>Sin<span> Recompensa</span></> : "Siguiente Recompensa"
+                    timePrize?.length <= 0 ? <>Sin<span> Recompensa</span></> : "Siguiente Recompensa"
                   }
-                  <span> {timePrize.title}</span>
+                  <span> {timePrize?.title}</span>
                 </p>
               }
               {
                 reward == 2 &&
                 <p style={{ textAlign: "center" }}>
                   {
-                    user.certificates ?
-                      <> Ultimo certificado completado<span> {user.certificates[user.certificates.length - 1].courseTitle}</span></>
+                    nextCertificate ?
+                      <> Certificado más próximo<span> {nextCertificate.name}</span></>
                       : <>Sin <span>Certificados</span></>
                   }
                 </p>

@@ -16,7 +16,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { updateProfileImage } from "../../../store/actions/UserActions";
 
-const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel }: any) => {
+const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -152,9 +152,6 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
             {
               (reward == 0 || reward == 1) && <>Siguiente<br />recompensa</>
             }
-            {
-              reward == 2 && <>Último<br />certficado</>
-            }
             <br />
             {
               reward == 0 ?
@@ -162,13 +159,19 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                 :
                 reward == 1 ?
                   <span>
-                    {nextTimeReward.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin suscripción"}
+                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin suscripción"}
                   </span>
-                  :
-                  reward == 2 &&
-                  <span>
-                    {userData.certificates ? userData.certificates[userData.certificates.length - 1].courseTitle : "Sin certificado"}
-                  </span>
+                  : <></>
+            }
+            {
+              reward == 2 &&
+              <>
+                <span style={{ color: "#0057e2" }}>
+                  Estás a {nextCertificate.lessonsLeft} lecciones
+                </span>
+                <br /> de un nuevo <br /> certificado
+              </>
+
             }
           </p>
         </div>

@@ -25,6 +25,7 @@ import PaymentMethod from "./PaymentMethod";
 import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 import { History } from "./History";
+import { getNextCertificate } from "../../../store/actions/courseActions";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -46,6 +47,7 @@ const User = () => {
   const [prize, setPrize] = useState<any>([]);
   const [timePrize, setTimePrize] = useState<any>([]);
   const [addPayment, setAddPayment] = useState<boolean>(false);
+  const [nextCertificate, setNextCertificate] = useState([]);
 
   const newCard = () => {
     setAddPayment(!addPayment)
@@ -150,6 +152,38 @@ const User = () => {
       }
     })
   }
+  const getNextCertificates = () => {
+    let counter: number = 0;
+    let totalLessons: number = 0;
+    let average: number = 0;
+    let arrCourse: any = [];
+    let maximum: any = 0;
+    getNextCertificate().then((res: any) => {
+      res.map((course: any) => {
+        course.lessons.map((lesson: any) => {
+          lesson.users.map((userID: any) => {
+            if (userData.id === userID) {
+              counter = counter + 1;
+            }
+          })
+        })
+        totalLessons = course.lessons.length;
+        average = counter / totalLessons;
+        totalLessons = totalLessons - counter;
+        if (average == 1) {
+          counter = 0;
+        }
+        if (counter > 0) {
+          arrCourse.push({ total: average, name: course.courseTittle, lessonsLeft: totalLessons })
+          counter = 0;
+        }
+      })
+      maximum = Math.max(...arrCourse.map((val: any) => val.total));
+      arrCourse = arrCourse.filter((val: any) => val.total == maximum);
+      setNextCertificate(arrCourse[0]);
+    })
+  }
+  console.log(nextCertificate)
   // const logoutFunc = () => {
   //   const auth = getAuth();
   //   signOut(auth).then(() => {
@@ -168,6 +202,7 @@ const User = () => {
       getCurrentLevel();
       getDate();
       getCurrentTimeLevel();
+      getNextCertificates();
       setNameUpperCase(userData.name.toUpperCase())
     }
   }, [userData]);
@@ -238,6 +273,7 @@ const User = () => {
           responsive1023={responsive1023}
           starPosition={starPosition}
           timeLevel={timeLevel}
+          nextCertificate={nextCertificate}
         />
       }
       {/* SECOND Container */}
@@ -261,6 +297,7 @@ const User = () => {
           setPrize={setPrize}
           timePrize={timePrize}
           setTimePrize={setTimePrize}
+          nextCertificate={nextCertificate}
         />
         <ThirdBox>
           {/* Third Container */}

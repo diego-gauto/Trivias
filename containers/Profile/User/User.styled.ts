@@ -680,7 +680,7 @@ export const ProfileMainContainer = styled.div<{
       gap: 20px;
       background-color: ${(props) =>
         props.startEdit == false ? "#dad3e5" : "#e4b6e8"};
-      padding-top: 180px;
+      padding-top: 160px;
       padding-inline: 40px;
       padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
@@ -1300,6 +1300,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
         `}
       .extra-info {
         padding-block: 25px;
+        padding-inline: 10px;
         display: flex;
         justify-content: center;
         p {
