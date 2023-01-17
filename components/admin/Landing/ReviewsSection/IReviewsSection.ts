@@ -5,6 +5,10 @@ export interface IReviewsSectionProps {
 export interface Review {
   title: string;
   imgURL: string;
+  tempImg: string;
+  file?: any;
   id: string;
-  file?: File;
+  userFile?: any;
+  usrImgURL: string;
+  tempUserImg: string;
 }

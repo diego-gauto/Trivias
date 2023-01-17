@@ -20,12 +20,6 @@ import ReviewsSection from "./ReviewsSection/ReviewsSection";
 
 const Landing = () => {
 
-  // const addLandingForm = document.querySelector()
-  // addLandingForm.addEventListener('submit', (e)=>{
-  //   e.preventDefault()
-  //   addDoc()
-  // })
-
   const [showTab, setShowTab] = useState(1);
   const [data, setData] = useState<any>(LandingObject);
   const [loading, setLoading] = useState(true);
@@ -54,25 +48,6 @@ const Landing = () => {
     <AdminContain>
       <SideBar />
       <GeneralContain>
-        {/* <HeaderMenu>
-          <GonvarText style={{ marginLeft: "5%" }}>
-            Admin User
-          </GonvarText>
-          <AddTextContainer>
-            <AddText style={{ fontWeight: "800" }}>
-              Textos Dinámicos
-            </AddText>
-            <AddText>
-              Usuarios
-            </AddText>
-            <AddText>
-              Ventas
-            </AddText>
-            <AddText>
-              Cupones
-            </AddText>
-          </AddTextContainer>
-        </HeaderMenu> */}
         <AddTitle>
           HomePage
         </AddTitle>
