@@ -48,6 +48,7 @@ const User = () => {
   const [timePrize, setTimePrize] = useState<any>([]);
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [nextCertificate, setNextCertificate] = useState([]);
+  const [certificateProgress, setCertificateProgress] = useState(0);
 
   const newCard = () => {
     setAddPayment(!addPayment)
@@ -155,6 +156,7 @@ const User = () => {
   const getNextCertificates = () => {
     let counter: number = 0;
     let totalLessons: number = 0;
+    let maxTtotalLessons: number = 0;
     let average: number = 0;
     let arrCourse: any = [];
     let maximum: any = 0;
@@ -167,14 +169,14 @@ const User = () => {
             }
           })
         })
-        totalLessons = course.lessons.length;
-        average = counter / totalLessons;
-        totalLessons = totalLessons - counter;
+        maxTtotalLessons = course.lessons.length;
+        average = counter / maxTtotalLessons;
+        totalLessons = maxTtotalLessons - counter;
         if (average == 1) {
           counter = 0;
         }
         if (counter > 0) {
-          arrCourse.push({ total: average, name: course.courseTittle, lessonsLeft: totalLessons })
+          arrCourse.push({ total: average, name: course.courseTittle, lessonsLeft: totalLessons, maxLessons: maxTtotalLessons })
           counter = 0;
         }
       })
@@ -183,7 +185,12 @@ const User = () => {
       setNextCertificate(arrCourse[0]);
     })
   }
-  console.log(nextCertificate)
+  const certificateProgressBar = () => {
+    let tempProgress: number = 0;
+    let totalLessonsLeft: any = nextCertificate;
+    tempProgress = ((totalLessonsLeft.lessonsLeft) / totalLessonsLeft.maxLessons) * 755;
+    setCertificateProgress(tempProgress);
+  }
   // const logoutFunc = () => {
   //   const auth = getAuth();
   //   signOut(auth).then(() => {
@@ -196,7 +203,6 @@ const User = () => {
     fetchDB_data()
 
   }, [loggedIn])
-
   useEffect(() => {
     if (userData != null) {
       getCurrentLevel();
@@ -207,7 +213,8 @@ const User = () => {
     }
   }, [userData]);
   useEffect(() => {
-    if (userData != null && level != null && timeLevel != null) {
+    if (userData !== null && level !== null && timeLevel !== null && nextCertificate !== null) {
+      certificateProgressBar();
       if (timeScore == 0) {
         setTimeProgress(0)
       }
@@ -231,7 +238,7 @@ const User = () => {
       setData(755 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 755));
       setLoading(false);
     }
-  }, [level, timeLevel, reward]);
+  }, [level, timeLevel, reward, nextCertificate]);
   const handleClick = (value: boolean) => {
     fetchDB_data();
   }
@@ -274,6 +281,7 @@ const User = () => {
           starPosition={starPosition}
           timeLevel={timeLevel}
           nextCertificate={nextCertificate}
+          certificateProgress={certificateProgress}
         />
       }
       {/* SECOND Container */}

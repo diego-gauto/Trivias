@@ -1089,6 +1089,7 @@ export const PictureContain = styled.div<{
   progress: number;
   reward: any;
   timeProgress: number;
+  certificateProgress: number;
 }>`
   display: flex;
   width: 200px;
@@ -1179,6 +1180,11 @@ export const PictureContain = styled.div<{
         props.reward == 1 &&
         css<{ timeProgress: number }>`
           stroke-dashoffset: ${(props) => props.timeProgress};
+        `}
+        ${(props) =>
+        props.reward == 2 &&
+        css<{ certificateProgress: number }>`
+          stroke-dashoffset: ${(props) => props.certificateProgress};
         `}
       stroke-linecap: round;
       cx: 125px;

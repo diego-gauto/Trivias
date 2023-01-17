@@ -48,7 +48,7 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
         setTimePrizeSize(tempSize.length);
       }
       const timeLevels = await getTimeLevel()
-      let tempRewards: any;
+      let tempRewards: any = [];
       tempRewards = res.filter((data: any) => (data.month >= timeLevels[timeIndex]?.minimum && data.month < timeLevels[timeIndex].maximum));
       setTimePrize(tempReward[0]);
     })
@@ -85,7 +85,6 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
       </RewardCenterLinkNoReward>
     </Link>
   )
-
 
   return (
     <ThirdBox>
@@ -148,9 +147,13 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
                 reward == 1 &&
                 <p>
                   {
-                    timePrize?.length <= 0 ? <>Sin<span> Recompensa</span></> : "Siguiente Recompensa"
+                    !timeLevel
+                      ? <>Sin<span> Recompensa</span></>
+                      :
+                      timePrize
+                        ? <>Siguiente Recompensa<span>{timePrize?.title}</span></>
+                        : <>Sin<span> Recompensa</span></>
                   }
-                  <span> {timePrize?.title}</span>
                 </p>
               }
               {

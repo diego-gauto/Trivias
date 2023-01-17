@@ -16,7 +16,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { updateProfileImage } from "../../../store/actions/UserActions";
 
-const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate }: any) => {
+const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
   let tempDate = new Date(userData.membership.finalDate * 1000);
   let tempDay = tempDate.getDate()
@@ -150,9 +150,8 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
         <div className="main-text">
           <p >
             {
-              (reward == 0 || reward == 1) && <>Siguiente<br />recompensa</>
+              (reward == 0 || reward == 1) && <>Siguiente<br />recompensa            <br /></>
             }
-            <br />
             {
               reward == 0 ?
                 <span>{nextLevel_format} puntos</span>
@@ -171,12 +170,11 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                 </span>
                 <br /> de un nuevo <br /> certificado
               </>
-
             }
           </p>
         </div>
         <div className="responsive-picture">
-          <PictureContain progress={data} reward={reward} timeProgress={timeProgress} >
+          <PictureContain progress={data} reward={reward} timeProgress={timeProgress} certificateProgress={certificateProgress}>
             <ProfileText style={{ transform: "rotate(-5deg)" }}>
               <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -293,7 +291,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
             <div className="crown">
               <img src={crownImage} />
             </div>
-            <PictureContain progress={data} reward={reward} timeProgress={timeProgress}>
+            <PictureContain progress={data} reward={reward} timeProgress={timeProgress} certificateProgress={certificateProgress}>
               <ProfileIcon
                 onClick={changeImage}
                 edit={startEdit}
