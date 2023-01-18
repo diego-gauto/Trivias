@@ -21,7 +21,13 @@ export const PreviewContain = styled.div`
 export const ModuleContain = styled.div`
   display: flex;
   flex-direction: Column;
-  gap: 20px;
+  gap: 40px;
+  .line {
+    margin-left: 20px;
+    height: 1px;
+    width: auto;
+    background: #00000033;
+  }
   @media (max-width: 1023px) {
     gap: 20px;
     padding-inline: 0px;

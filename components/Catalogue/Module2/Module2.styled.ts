@@ -7,13 +7,14 @@ export const ContainerS = styled.div`
   width: 100%;
   flex-direction: column;
 `;
-export const SlideModuleContainer = styled(Container)`
+export const SlideModuleContainer = styled(Container)<{ level: any }>`
   padding: 0;
   margin-top: 10px;
   margin-bottom: 0px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   .title {
+    line-height: initial;
     padding-right: 10px;
     color: #a733e4;
     font-weight: 700;
@@ -21,6 +22,7 @@ export const SlideModuleContainer = styled(Container)`
     font-size: 14px;
   }
   .sub {
+    line-height: initial;
     padding-right: 10px;
     color: #3f1168;
     margin: 0;
@@ -29,8 +31,65 @@ export const SlideModuleContainer = styled(Container)`
       font-size: 14px;
     }
   }
+  .modules {
+    font-size: 12px;
+    margin: 0;
+    ${(props) =>
+      (props.level == "Muy Fácil" || props.level == "Fácil") &&
+      css`
+        color: #6678f8;
+      `}
+    ${(props) =>
+      (props.level == "Avanzado" || props.level == "Máster") &&
+      css`
+        color: #ef1155;
+      `}
+    ${(props) =>
+      props.level == "Intermedio" &&
+      css`
+        color: #12a071;
+      `}
+  }
+  .price {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #12a071;
+  }
+  .level-container {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    img {
+      width: 17px !important;
+    }
+    p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+    ${(props) =>
+      (props.level == "Muy Fácil" || props.level == "Fácil") &&
+      css`
+        color: #6678f8;
+      `}
+    ${(props) =>
+      (props.level == "Avanzado" || props.level == "Máster") &&
+      css`
+        color: #ef1155;
+      `}
+    ${(props) =>
+      props.level == "Intermedio" &&
+      css`
+        color: #12a071;
+      `}
+  }
   &:hover {
     transform: scale(1.1);
+    img {
+      box-shadow: 5px 7px 11px -7px rgb(0 0 0 / 75%);
+    }
   }
   @media only screen and (max-width: 992px) {
     &:hover {
@@ -47,6 +106,7 @@ export const ContinueText = styled.h1`
   font-family: "Montserrat", sans-serif;
   color: #3f1168;
   margin: 0;
+  padding-left: 20px;
   @media (max-width: 1023px) {
     font-size: 24px;
   }

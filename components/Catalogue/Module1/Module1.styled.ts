@@ -35,17 +35,30 @@ export const TextContain = styled.div`
   flex-direction: column;
   backdrop-filter: blur(60px);
   height: 100%;
-  width: 30%;
+  width: calc(30% + 60px);
   padding-left: 60px;
   justify-content: center;
   bottom: 0px;
   left: 0px;
   gap: 10px;
 `;
+
+export const Gradient = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.016) 97%
+  );
+`;
 export const ButtonContain = styled.div`
   display: flex;
   margin-top: 20px;
-  gap: 10px;
+  gap: 20px;
   @media (max-width: 1023px) {
     flex-direction: column;
     width: fit-content;
@@ -80,7 +93,7 @@ export const Banner = styled(Image)`
   postion: absolute;
 `;
 export const PurpleButton = styled.button`
-  height: 45px;
+  height: 40px;
   display: flex;
   gap: 5px;
   align-items: center;
@@ -88,12 +101,14 @@ export const PurpleButton = styled.button`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   justify-content: center;
-  padding-block: 10px;
   padding-inline: 15px;
   background: linear-gradient(135deg, #952ced 22%, #ca41d4 80%);
   color: #fff;
   border-radius: 30px;
   border: none;
+  svg {
+    transform: rotate(90deg);
+  }
   &:hover {
     background-color: #5000b5;
     transform: scale(1.03);
@@ -114,11 +129,11 @@ export const PurpleButton = styled.button`
 `;
 export const TransparentButton = styled.button`
   align-items: center;
-  height: 45px;
+  width: max-content;
+  height: 40px;
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
-  padding-block: 10px;
   padding-inline: 15px;
   color: #fff;
   border-radius: 30px;

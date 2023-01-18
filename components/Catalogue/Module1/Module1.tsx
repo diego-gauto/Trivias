@@ -11,6 +11,7 @@ import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
   ButtonContain,
   Container,
+  Gradient,
   ImageContain,
   PlayIcon,
   PurpleButton,
@@ -21,6 +22,7 @@ import {
   VideoContain,
 } from "./Module1.styled";
 import Modal from "./modal/modal";
+import { BsTriangle } from "react-icons/bs";
 
 const Module1 = ({ user, allCourses, isLoading, }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -122,7 +124,6 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
               />
             </VideoContain>
           </ImageContain>
-
           <TextContain>
             <div className="grey-field">
               {/* <Title>
@@ -140,8 +141,8 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
             <ButtonContain>
               <div className="grey-field" style={{ maxWidth: "fit-content" }}>
                 <PurpleButton onClick={goTo}>
+                  <BsTriangle />
                   Reproducir
-                  <PlayIcon />
                 </PurpleButton>
               </div>
               <div className="grey-field" style={{ maxWidth: "fit-content" }}>
@@ -151,6 +152,7 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
               </div>
             </ButtonContain>
           </TextContain>
+          <Gradient></Gradient>
         </div>
       </>}
       <Modal show={show} setShow={setShow} course={historyCourse} user={user} />
