@@ -120,12 +120,12 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
   return (
     <Container fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px", marginTop: responsive1023 ? "-20px" : "-40px", }}>
+      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "60px" }}>
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
             <Title>
-              Productos Individuales
+              Cursos especiales <span>de pago individual</span>
             </Title>
           </div>
           <div className="scroll-container5" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
@@ -135,10 +135,10 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                   handleShow();
                   setCourse(element);
                 }}>
-                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
-                    <SlideModuleContainer>
-                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-                    </SlideModuleContainer>
+                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
+                    <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                    <p className="title">{element.courseTittle}</p>
+                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
                   </SlideModuleContainer>
                 </div>
               ))}

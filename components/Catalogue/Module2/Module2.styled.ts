@@ -13,8 +13,24 @@ export const SlideModuleContainer = styled(Container)`
   margin-bottom: 0px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  .title {
+    padding-right: 10px;
+    color: #a733e4;
+    font-weight: 700;
+    margin: 0;
+    font-size: 14px;
+  }
+  .sub {
+    padding-right: 10px;
+    color: #3f1168;
+    margin: 0;
+    span {
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.1);
   }
   @media only screen and (max-width: 992px) {
     &:hover {
@@ -29,6 +45,7 @@ export const SlideModuleContainer = styled(Container)`
 export const ContinueText = styled.h1`
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
+  color: #3f1168;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 24px;

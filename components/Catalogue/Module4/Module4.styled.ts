@@ -3,6 +3,10 @@ import { ContinueText } from "../Module2/Module2.styled";
 
 export const Title = styled(ContinueText)`
   font-size: 24px;
+  color: #3f1168;
+  span {
+    color: #a733e4;
+  }
 `;
 
 export const Viewpay = styled.p`
