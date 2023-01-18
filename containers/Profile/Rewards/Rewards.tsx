@@ -17,7 +17,7 @@ import PointRewards from "./RewardComponent/PointRewards";
 import TimeRewards from "./RewardComponent/TimeRewards";
 import {
   BannerContain,
-  BannerTitle,
+  TitleContainer,
   CurrentLevel,
   ImageContain,
   InsideContain,
@@ -30,8 +30,7 @@ import {
   ProgressContain,
   ProgressSvg,
   RewardContainer,
-  Vector,
-  Vector2,
+  RewardsTitle,
 } from "./Rewards.styled";
 import { TimeProgressBackground, TimeProgressCircle, TimeSvg } from "./RewardsTime.styled";
 
@@ -199,104 +198,17 @@ const Rewards = () => {
 
   return (
     <RewardContainer>
-
-      <BannerContain>
-        <ImageContain>
-          <img
-            src={banner.path}
-          />
-        </ImageContain>
-        <InsideContain>
-          <BannerTitle>
-            Centro de Recompensas
-          </BannerTitle>
-          {
-            rewards
-              ?
-              <ProgressContain>
-                <PointsText>
-                  {userData.score} puntos
-                </PointsText>
-                <OuterProgress>
-                  <LevelContain>
-                    <CurrentLevel>
-                      {currentLevel}
-                    </CurrentLevel>
-                    <Vector />
-                    <Vector2 />
-                  </LevelContain>
-                  <ProgressSvg
-                  >
-                    <defs>
-                      <linearGradient id="gradient">
-                        <stop offset="0%" stopColor="#8E2DE2" />
-                        <stop offset="100%" stopColor="#4A00E0" />
-                      </linearGradient>
-                    </defs>
-                    <ProgressBackground />
-                    <ProgressCircle
-                      progress={data}
-                      progressResp={dataResp}
-                    />
-                  </ProgressSvg>
-                </OuterProgress>
-              </ProgressContain>
-              :
-              <ProgressContain>
-                <PointsText>
-                  {Math.floor((timeScore / 30))}
-                  {
-                    Math.floor((timeScore / 30)) == 1 ? " mes" : " meses"
-                  }
-                </PointsText>
-                <OuterProgress>
-                  <LevelContain>
-                    <CurrentLevel>
-                      {timeLevel ? timeLevel.level : 0}
-                    </CurrentLevel>
-                    <Vector />
-                    <Vector2 />
-                  </LevelContain>
-                  <TimeSvg
-                  >
-                    <defs>
-                      <linearGradient id="gradientTimeLevel">
-                        <stop offset="0%" stopColor="#8E2DE2" />
-                        <stop offset="100%" stopColor="#4A00E0" />
-                      </linearGradient>
-                    </defs>
-                    <TimeProgressBackground />
-                    <TimeProgressCircle
-                      progress={timeData}
-                      progressResp={timeDataResp}
-                    />
-                  </TimeSvg>
-                </OuterProgress>
-              </ProgressContain>
-          }
-        </InsideContain>
-      </BannerContain>
-      <MainContain>
-        {
-          rewards
-            ? <PointRewards
-              setRewards={setRewards}
-              level={level}
-              currentLevel={currentLevel}
-              score={userData.score}
-              user={userData}
-            />
-            : <TimeRewards
-              user={userData}
-              rewards={rewards}
-              setRewards={setRewards}
-              score={timeScore}
-              level={timeLevel}
-              currentLevel={currentTimeLevel}
-              levels={timeLevels}
-            />
-        }
-      </MainContain>
+      <TitleContainer>
+        <div className="rewards-circle">
+          <div className="inside" />
+        </div>
+        <p className="title">CENTRO DE <span>RECOMPENSAS</span></p>
+      </TitleContainer>
+      <RewardsTitle>
+        <p className="main-text">
+          ¡Haz hecho un gran trabajo <br />hasta ahora,<span> {userData.name}!</span>
+        </p>
+      </RewardsTitle>
     </RewardContainer>
   )
 }
