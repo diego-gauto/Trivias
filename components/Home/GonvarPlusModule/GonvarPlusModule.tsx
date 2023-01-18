@@ -10,6 +10,7 @@ import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
+import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
 declare let Hls: any
 
 export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
@@ -72,7 +73,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }
               } />
             </Col>
-            <Modal1 show={show} setShow={setShow} course={courseId} user={user} />
+            <ModalGonvarPlus show={show} setShow={setShow} course={courseId} user={user} />
           </Row>}
         </div>
         <div className="video">
@@ -92,7 +93,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }}
               />
             </Col>
-            <Modal1 show={show} setShow={setShow} course={courseId} user={user} />
+            <ModalGonvarPlus show={show} setShow={setShow} course={courseId} user={user} />
           </Row>}
         </div>
       </div>
