@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SelectContain, Selected, DropDown, OptionContain, Input, Label, Episodes, Option } from '../../Module3/Modal/Select.styled';
 
 const SelectModule4 = ({ course, handleClick, seasons }: any) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(seasons[0]?.name)
+  const [value, setValue] = useState(course.seasons[0]?.name)
+
+  useEffect(() => {
+    course.seasons.forEach((element: any) => {
+      seasons.forEach((season: any) => {
+        if (element.seasons == season.season) {
+          element.name = season.name
+        }
+      });
+    });
+  }, [])
 
   return (
     <SelectContain>
@@ -17,9 +27,9 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
           {course.seasons.map((season: any, index: any) => {
             return (
               <Option key={index + "season courses"} onClick={() => {
-                seasons[index]?.name == undefined
+                season?.name == undefined
                   ? setValue(`Módulo ${index + 1}`)
-                  : setValue(`${seasons[index].name}`)
+                  : setValue(`${season.name}`)
                   ;
                 setOpen(false);
                 handleClick(index)
@@ -30,7 +40,7 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
                   name="category"
                   value="Temporada 1"
                 />
-                <Label > {seasons[index]?.name == undefined ? `Módulo ${index + 1}` : seasons[index].name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} lección)
+                <Label > {season?.name == undefined ? `Módulo ${index + 1}` : season.name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} lección)
                 </Episodes>}
                   {season.lessons.length > 1 && <Episodes>({season.lessons.length} lecciónes)
                   </Episodes>}
