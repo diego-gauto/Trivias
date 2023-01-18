@@ -41,6 +41,18 @@ export const TextContain = styled.div`
   bottom: 0px;
   left: 0px;
   gap: 10px;
+  .top {
+    display: flex;
+    gap: 10px;
+    color: #3f1168;
+    align-items: center;
+    margin-bottom: 20px;
+    p {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
 `;
 
 export const Gradient = styled.div`
@@ -58,7 +70,7 @@ export const Gradient = styled.div`
 export const ButtonContain = styled.div`
   display: flex;
   margin-top: 20px;
-  gap: 20px;
+  gap: 30px;
   @media (max-width: 1023px) {
     flex-direction: column;
     width: fit-content;
