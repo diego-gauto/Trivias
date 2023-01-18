@@ -120,30 +120,35 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
   return (
     <Container fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px", marginTop: responsive1023 ? "-20px" : "-40px", }}>
+      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px" }}>
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
             <Title>
-              Productos Individuales
+              Cursos especiales <span>de pago individual</span>
             </Title>
           </div>
-          <div className="scroll-container5" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
+          <div className="scroll-container5" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}>
             <div style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div className="grey-field" key={"mod6 " + idx} onClick={() => {
                   handleShow();
                   setCourse(element);
                 }}>
-                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
-                    <SlideModuleContainer>
-                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-                    </SlideModuleContainer>
+                  < SlideModuleContainer
+                    level={element.courseDifficulty}
+                    style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
+                    <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                    <p className="title">{element.courseTittle}</p>
+                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <p className="modules" style={{ color: "#12a071" }}>{element.seasons.length} Módulos</p>
+                    <p className="price">$ {element.coursePrice.toLocaleString('en-US')}.°° MXN</p>
                   </SlideModuleContainer>
                 </div>
               ))}
             </div>
           </div>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
         </div>
       </>}
       <Modal1 show={show} setShow={setShow} course={course} user={user} />

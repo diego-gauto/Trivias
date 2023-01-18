@@ -102,37 +102,45 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   }, [user, isLoading])
 
   return (
-    <>
-      <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px" }}>
-        {courses.length > 0 && <>
-          <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
-            <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-              <Title>
-                Cursos disponibles
-              </Title>
-            </div>
-            <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}
-            >
-              <div className="scollx" style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
-                {courses.map((element: any, idx: any) => (
-                  <div className="grey-field" key={"mod4 " + idx} onClick={() => {
-                    handleShow();
-                    setCourse(element);
-                  }}>
-                    < SlideModuleContainer style={{ cursor: "grab", flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
-
-                      <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-
-                    </SlideModuleContainer>
-                  </div>
-                ))}
-              </div>
+    <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px" }}>
+      {courses.length > 0 && <>
+        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <Title>
+              Cursos disponibles
+            </Title>
+          </div>
+          <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}
+          >
+            <div className="scollx" style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
+              {courses.map((element: any, idx: any) => (
+                <div className="grey-field" key={"mod4 " + idx} onClick={() => {
+                  handleShow();
+                  setCourse(element);
+                }}>
+                  < SlideModuleContainer
+                    level={element.courseDifficulty}
+                    style={{ cursor: "grab", flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
+                    <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                    <p className="title">{element.courseTittle}</p>
+                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <p className="modules">{element.seasons.length} Módulos</p>
+                    <div className="level-container">
+                      {(element.courseDifficulty == "Muy Fácil" || element.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                      {(element.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                      {(element.courseDifficulty == "Avanzado" || element.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                      <p>{element.courseDifficulty}</p>
+                    </div>
+                  </SlideModuleContainer>
+                </div>
+              ))}
             </div>
           </div>
-        </>}
-      </Container>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
+        </div>
+      </>}
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
-    </>
+    </Container>
   )
 }
 export default Module4;

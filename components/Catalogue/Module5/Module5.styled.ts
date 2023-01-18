@@ -54,10 +54,14 @@ export const TextContent = styled.div`
   }
 `;
 export const Title = styled.h1`
-  color: #6717cd;
+  color: #3f1168;
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
+  padding-left: 20px;
+  span {
+    color: #a733e4;
+  }
   @media (max-width: 1023px) {
     font-size: 24px;
   }

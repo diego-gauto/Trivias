@@ -1,11 +1,10 @@
 
 
 import { DocumentData } from "firebase/firestore";
-import { Image, Row } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css/scrollbar';
 import { getViewedCourses } from "../../../store/actions/courseActions";
 import SwiperCore, { Mousewheel, Scrollbar, EffectFlip } from "swiper";
@@ -123,29 +122,41 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
 
   return (
     <Container fluid style={{
-      overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px"
+      overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px"
     }}
     >
       {(courses.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
-          <div className="grey-field" style={{ maxWidth: "fit-content", paddingLeft: 20 }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
             <ContinueText>
               Continua viendo
             </ContinueText>
           </div>
-          <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
+          <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}>
             <div style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
-                <div key={"Mod2 " + idx} id="grey-field" className="grey-field" onClick={() => { goTo(element) }}
-                >
-                  < SlideModuleContainer style={{ cursor: "grab", flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-                    <Progress style={element.progress == null ? { 'width': 0 } : { 'width': `calc(${element.progress}% - 10px)` }}></Progress>
+                <div key={"Mod2 " + idx} id="grey-field" className="grey-field" onClick={() => { goTo(element) }}>
+                  < SlideModuleContainer
+                    level={element.courseDifficulty}
+                    style={{ cursor: "grab", flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}
+                  >
+                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                    <Progress style={element.progress == null ? { 'width': 0 } : { 'width': `calc(${element.progress}% - 20px)` }}></Progress>
+                    <p className="title">{element.courseTittle}</p>
+                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <p className="modules">{element.seasons.length} Módulos</p>
+                    <div className="level-container">
+                      {(element.courseDifficulty == "Muy Fácil" || element.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                      {(element.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                      {(element.courseDifficulty == "Avanzado" || element.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                      <p>{element.courseDifficulty}</p>
+                    </div>
                   </SlideModuleContainer>
                 </div>
               ))}
             </div>
           </div>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
         </div>
       </>
       }

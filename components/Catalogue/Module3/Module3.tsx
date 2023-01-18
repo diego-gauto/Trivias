@@ -102,27 +102,39 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <Container fluid
-            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px" }}>
+            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px" }}>
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
                 Tus Cursos
               </Title>
             </div>
-            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}>
+            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}>
               <div style={{ display: "flex" }}>
                 {courses.map((element: any, idx: any) => (
                   <div className="grey-field" key={"mod3 " + idx} onClick={() => { goTo(element) }}>
-                    < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
+                    < SlideModuleContainer
+                      level={element.courseDifficulty}
+                      style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
                       <ImageContent>
                         <Band />
                         <DaysLeft>{element.date} días</DaysLeft>
-                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
+                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
                       </ImageContent>
+                      <p className="title">{element.courseTittle}</p>
+                      <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                      <p className="modules">{element.seasons.length} Módulos</p>
+                      <div className="level-container">
+                        {(element.courseDifficulty == "Muy Fácil" || element.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                        {(element.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                        {(element.courseDifficulty == "Avanzado" || element.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                        <p>{element.courseDifficulty}</p>
+                      </div>
                     </SlideModuleContainer>
                   </div>
                 ))}
               </div>
             </div>
+            <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
           </Container>
         </div>
       </>}
