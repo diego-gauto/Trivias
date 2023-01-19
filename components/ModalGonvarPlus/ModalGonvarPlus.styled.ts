@@ -273,9 +273,12 @@ export const Middlecontainer = styled.div`
   }
 `;
 export const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background-color: #ede7f2;
   padding-block: 220px 40px;
-  padding-inline: 40px;
+  padding-inline: 30px;
   border-radius: 0 0 20px 20px;
   p {
     margin: 0;
@@ -286,6 +289,49 @@ export const BottomContainer = styled.div`
     color: #3f1168;
     span {
       color: #d244d1;
+    }
+  }
+  .courses {
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-text {
+    display: flex;
+    justify-content: center;
+    .text-1 {
+      text-align: center;
+      font-size: 10px;
+      font-weight: 500;
+      color: gray;
+      span {
+        font-weight: 800;
+      }
+    }
+  }
+`;
+export const CoursesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  img {
+    width: 130px;
+    border-radius: 10px;
+  }
+  .course-info {
+    display: flex;
+    flex-direction: column;
+    .course-name {
+      color: #a733e4;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .course-professor {
+      color: #3f1168;
+      font-size: 10px;
+      font-weight: 500;
+      span {
+        font-weight: 800;
+      }
     }
   }
 `;

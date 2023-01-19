@@ -2,14 +2,17 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
-import { BackgroundContainer, BottomContainer, Middlecontainer } from './ModalGonvarPlus.styled';
+import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer } from './ModalGonvarPlus.styled';
 
 
-export const ModalGonvarPlus = ({ show, setShow }: any) => {
+export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
   const handleClose = () => setShow(false);
+
+  const arrCourse = [0, 1, 2, 3, 4]
+  console.log(course)
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
       <BackgroundContainer>
@@ -169,6 +172,42 @@ export const ModalGonvarPlus = ({ show, setShow }: any) => {
         <p className="main-text">
           Algunos cursos incluidos en <span>Gonvar+</span>
         </p>
+        <div className="courses">
+          {
+            arrCourse.map(() => {
+              return (
+                <CoursesContainer>
+                  <img src={course.coursePath} />
+                  <div className="course-info">
+                    <p className="course-name">
+                      Aplicación Básica de Acrílico
+
+                    </p>
+                    {/* <p className="course-name">
+                      {course.courseTittle}
+                    </p>
+                    {
+                      course.courseProfessor.length > 0 &&
+                      <p className="course-professor">
+                        de <span>{course.courseProfessor[0]}</span>
+                      </p>
+                    } */}
+                    <p className="course-professor">
+                      de <span> Paulina García</span>
+                    </p>
+                  </div>
+                </CoursesContainer>
+              )
+            })
+          }
+        </div>
+        <div className="footer-text">
+          <p className="text-1">
+            ª Costo promedio al adquirirlo de forma individual.<br />
+            ¹ Primer mes en <span>Gonvar+</span> 10% dto.; 3 meses 20% dto.; 6 meses 40% dto.<br />
+            ² Costo por cada boleto para participar en la rifa.
+          </p>
+        </div>
       </BottomContainer>
     </Modal>
   )
