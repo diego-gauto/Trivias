@@ -11,6 +11,7 @@ import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
 import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
+import { getCourses } from "../../../store/actions/courseActions";
 declare let Hls: any
 
 export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
@@ -38,9 +39,18 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
       video.src = `${videoSrc}`
     }
   }
+  const getFiveCourses = () => {
+    let tempCourses: any = [];
+    getCourses().then((res) => {
+      console.log(res);
+      tempCourses = res.filter((val: any) => { val })
+      console.log(tempCourses);
+    });
+  }
 
   useEffect(() => {
     doVideoStuff()
+    getFiveCourses();
   }, [])
   return (
     <CardContainer className="card-container">

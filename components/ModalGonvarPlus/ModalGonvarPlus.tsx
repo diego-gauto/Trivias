@@ -13,21 +13,8 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const [AllCourses, setAllCourses] = useState([]);
   const handleClose = () => setShow(false);
   const arrCourse = [0, 1, 2, 3, 4]
-  // const getFiveCourses = () => {
-  //   let temp5Courses: any = [];
-  //   course.map((val: any, index: any) => {
-  //     if (val.courseType == "Mensual") {
-  //       if (index <= 4) {
-  //         temp5Courses.push(val)
-  //       }
-  //     }
-  //   })
 
-  //   console.log(temp5Courses.length)
-  // }
-  useEffect(() => {
-    // getFiveCourses();
-  }, [])
+
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
       <BackgroundContainer>

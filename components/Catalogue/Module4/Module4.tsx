@@ -72,8 +72,6 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);
         allCourses.forEach((element: any) => {
-          console.log(element);
-
           element.courseAbout = element.courseAbout
           element.courseSubtittle = element.courseSubtittle
           element.courseTittle = element.courseTittle;

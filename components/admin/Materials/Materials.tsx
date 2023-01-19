@@ -47,7 +47,6 @@ const Materials = () => {
     }
   }
   const update = (val: any) => {
-    console.log(val)
     updateMaterial(val, val.id).then(() => {
       alert("Material actualizado")
       getAllMaterials();

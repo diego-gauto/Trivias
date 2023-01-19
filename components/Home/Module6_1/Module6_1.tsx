@@ -134,24 +134,21 @@ export const Module6_1 = (props: IModule6_1) => {
 
   const sliderData = slideDataArr?.map((element) => {
     return (
-      <>
-        <SwiperSlide key={element.id + "_ID"}>
-          <SliderItemLink >
-            <SlideModule_1
-              isNew={element.isNew}
-              title={element.title}
-              precio={element.precio}
-              clickURL={element.clickURL}
-              disponible={element.disponible}
-              currency={element.currency}
-              compraRapida={element.compraRapida}
-              id={element.id}
-              imgURL={downloadFileWithStoragePath(element.imgURL)}
-            />
-          </SliderItemLink>
-        </SwiperSlide>
-
-      </>
+      <SwiperSlide key={element.id + "_ID"}>
+        <SliderItemLink >
+          <SlideModule_1
+            isNew={element.isNew}
+            title={element.title}
+            precio={element.precio}
+            clickURL={element.clickURL}
+            disponible={element.disponible}
+            currency={element.currency}
+            compraRapida={element.compraRapida}
+            id={element.id}
+            imgURL={downloadFileWithStoragePath(element.imgURL)}
+          />
+        </SliderItemLink>
+      </SwiperSlide>
     )
   })
 

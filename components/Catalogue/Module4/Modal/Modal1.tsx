@@ -150,8 +150,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     }
   };
 
-  console.log(course);
-
 
   return (
     <ModalContain>
