@@ -51,7 +51,6 @@ const AddTimePrize = ({ show, setShow }: any) => {
     }
     else {
       addTimeReward(reward).then((res) => {
-        console.log(res)
       })
     }
   }
