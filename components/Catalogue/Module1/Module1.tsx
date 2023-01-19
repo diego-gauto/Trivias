@@ -126,9 +126,10 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
           </ImageContain>
           <TextContain>
             <div className="grey-field">
-              {/* <Title>
-                {historyCourse.courseTittle}: “{historyCourse.seasons[historyCourse.season]?.lessons[historyCourse.lesson]?.title}”
-              </Title> */}
+              <div className="top">
+                <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
+                <p>Gonvar+</p>
+              </div>
               <Title>
                 {historyCourse.courseTittle}
               </Title>

@@ -9,7 +9,7 @@ export const ContainerS = styled.div`
 `;
 export const SlideModuleContainer = styled(Container)<{ level: any }>`
   padding: 0;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 0px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
