@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { BackgroundContainer, BottomContainer, Middlecontainer } from './ModalGonvarPlus.styled';
 
@@ -58,6 +59,109 @@ export const ModalGonvarPlus = ({ show, setShow }: any) => {
           </p>
           <div className="bottom-container">
             <button className="start-button">Comenzar ahora</button>
+            <div className="left-text">
+              <p className="text">
+                <span className="span1">*</span> Costo ordinario sin suscripción <br />
+                <span className="span2">$32,299 MXN</span>
+              </p>
+            </div>
+          </div>
+          <div className="cards">
+            <div className="card-container">
+              <p className="index">1</p>
+              <div className="card-content">
+                <div className="divider" />
+                <div className="info-texts">
+                  <p className="first-text">
+                    Más de 25 cursos y
+                    300 clases deuñas y belleza
+                    en línea
+                  </p>
+                  <p className="second-text">
+                    Con instructores
+                    profesionales,
+                    niveles desde
+                    básicos a
+                    avanzados, incluye
+                    reconocimientos y
+                    certificados.
+                  </p>
+                </div>
+                <p className="price-text">
+                  $30,000 MXN <span> ª</span>
+                </p>
+              </div>
+            </div>
+            <div className="card-container">
+              <p className="index second-index">2</p>
+              <div className="card-content">
+                <div className="divider second-divide" />
+                <p className="first-text">
+                  Revisión de
+                  prácticas y
+                  asesorías
+                  ilimitadas
+                </p>
+                <p className="price-text">
+                  $1,500 MXN <span> ª</span>
+                </p>
+                <BiPlusMedical className="plus-icon" />
+                <p className="first-text">
+                  40% de
+                  descuento en
+                  productos
+                  Gonvar
+                  <span className="span-small"> ¹</span>
+                </p>
+              </div>
+            </div>
+            <div className="card-container">
+              <p className="index third-index">3</p>
+              <div className="card-content">
+                <div className="divider third-divide" />
+                <div className="info-texts">
+                  <p className="first-text">
+                    Un Mini Kit
+                    con diferentes
+                    productos
+                    cada dos
+                    meses
+                  </p>
+                  <p className="second-text">
+                    Acrílicos, geles,
+                    monómeros,
+                    adherentes,
+                    decoración y más.
+                  </p>
+                </div>
+                <p className="price-text">
+                  $650 MXN<span> ª</span>
+                </p>
+              </div>
+            </div>
+            <div className="card-container">
+              <p className="index fourth-index">4</p>
+              <div className="card-content">
+                <div className="divider fourth-divide" />
+                <div className="info-texts">
+                  <p className="first-text">
+                    Rifa trimestral
+                    donde podrás
+                    ganar hasta <span>$20,000 MXN</span> en premios.
+                  </p>
+                  <p className="second-text">
+                    Por cada mes
+                    inscrito en
+                    Gonvar+ recibes
+                    un boleto
+                    adicional.
+                  </p>
+                </div>
+                <p className="price-text">
+                  $149 MXN <span> ª</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </Middlecontainer>

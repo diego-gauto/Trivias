@@ -21,7 +21,7 @@ export const BackgroundContainer = styled.div`
     width: 300px;
     position: absolute;
     bottom: 0;
-    right: -60px;
+    right: -70px;
   }
   .upper-contain {
     display: flex;
@@ -117,12 +117,14 @@ export const Middlecontainer = styled.div`
   p {
     margin: 0;
   }
-  padding: 40px;
+  padding-block: 30px 200px;
+  padding-inline: 30px;
   .main-title {
     display: flex;
     flex-direction: column;
     gap: 20px;
     justify-content: center;
+    position: relative;
     .text-title {
       font-size: 16px;
       font-weight: 500;
@@ -148,16 +150,131 @@ export const Middlecontainer = styled.div`
       justify-content: center;
       position: relative;
       .start-button {
+        padding-block: 10px;
+        padding-inline: 20px;
+        border-radius: 100px;
         color: white;
         border: none;
-        background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        background: linear-gradient(135deg, #942ced 0%, #cc42d4 100%);
+      }
+      .left-text {
+        position: absolute;
+        right: 0;
+
+        .text {
+          text-align: end;
+          font-size: 12px;
+          font-weight: 600;
+          color: #3f1168;
+          line-height: 14px;
+          .span1 {
+            color: #ff9b00;
+          }
+          .span2 {
+            font-size: 14px;
+            font-weight: 800;
+          }
+        }
+      }
+    }
+    .cards {
+      width: 100%;
+      top: 158px;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      .card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        .index {
+          font-size: 24px;
+          font-weight: 800;
+          color: #9900ed;
+        }
+        .second-index {
+          color: #d244d1;
+        }
+        .third-index {
+          color: #ff9b00;
+        }
+        .fourth-index {
+          color: #6678f8;
+        }
+        .card-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 330px;
+          background-color: white;
+          padding: 20px;
+          position: relative;
+          border-radius: 0 0 20px 20px;
+          max-width: 160px;
+          .divider {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: #9900ed;
+            position: absolute;
+          }
+          .second-divide {
+            background-color: #d244d1;
+          }
+          .third-divide {
+            background-color: #ff9b00;
+          }
+          .fourth-divide {
+            background-color: #6678f8;
+          }
+          .info-texts {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+          }
+          .first-text {
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: 800;
+            color: #3f1168;
+            span {
+              color: #ff9b00;
+            }
+            .span-small {
+              font-size: 14px;
+            }
+          }
+          .second-text {
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 14px;
+            color: #3f1168;
+          }
+          .plus-icon {
+            color: #d244d1;
+            font-size: 20px;
+            margin-inline: auto;
+          }
+          .price-text {
+            font-size: 15px;
+            line-height: 18px;
+            text-align: center;
+            color: #a733e4;
+            font-weight: 600;
+            span {
+              color: #ff9b00;
+            }
+          }
+        }
       }
     }
   }
 `;
 export const BottomContainer = styled.div`
   background-color: #ede7f2;
-  padding-block: 200px 40px;
+  padding-block: 220px 40px;
   padding-inline: 40px;
   border-radius: 0 0 20px 20px;
   p {
