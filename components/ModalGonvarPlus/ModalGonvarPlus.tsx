@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
@@ -10,9 +10,24 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
+  const [AllCourses, setAllCourses] = useState([]);
   const handleClose = () => setShow(false);
-  console.log(course)
   const arrCourse = [0, 1, 2, 3, 4]
+  // const getFiveCourses = () => {
+  //   let temp5Courses: any = [];
+  //   course.map((val: any, index: any) => {
+  //     if (val.courseType == "Mensual") {
+  //       if (index <= 4) {
+  //         temp5Courses.push(val)
+  //       }
+  //     }
+  //   })
+
+  //   console.log(temp5Courses.length)
+  // }
+  useEffect(() => {
+    // getFiveCourses();
+  }, [])
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
       <BackgroundContainer>

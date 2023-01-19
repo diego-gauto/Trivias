@@ -324,6 +324,7 @@ export const CoursesContainer = styled.div`
   max-width: 130px;
   img {
     width: 130px;
+    height: 72px;
     border-radius: 10px;
   }
   .course-info {
