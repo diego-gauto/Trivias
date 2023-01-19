@@ -320,7 +320,8 @@ export const BottomContainer = styled.div`
 export const CoursesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
+  max-width: 130px;
   img {
     width: 130px;
     border-radius: 10px;

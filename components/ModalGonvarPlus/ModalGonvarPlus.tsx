@@ -11,9 +11,8 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
   const handleClose = () => setShow(false);
-
-  const arrCourse = [0, 1, 2, 3, 4]
   console.log(course)
+  const arrCourse = [0, 1, 2, 3, 4]
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
       <BackgroundContainer>
@@ -176,27 +175,20 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         </p>
         <div className="courses">
           {
-            arrCourse.map(() => {
+            arrCourse.map((val: any, index: any) => {
               return (
-                <CoursesContainer>
-                  <img src={course.coursePath} />
+                <CoursesContainer key={"Course data " + index}>
+                  <img src={course[index + 2]?.coursePath} />
                   <div className="course-info">
                     <p className="course-name">
-                      Aplicación Básica de Acrílico
-
-                    </p>
-                    {/* <p className="course-name">
-                      {course.courseTittle}
+                      {course[index + 2]?.courseTittle}
                     </p>
                     {
-                      course.courseProfessor.length > 0 &&
+                      course[index + 2]?.courseProfessor.length > 0 &&
                       <p className="course-professor">
-                        de <span>{course.courseProfessor[0]}</span>
+                        de <span>{course[index + 2]?.courseProfessor[0].name}</span>
                       </p>
-                    } */}
-                    <p className="course-professor">
-                      de <span> Paulina García</span>
-                    </p>
+                    }
                   </div>
                 </CoursesContainer>
               )
@@ -211,6 +203,6 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
           </p>
         </div>
       </BottomContainer>
-    </Modal>
+    </Modal >
   )
 }

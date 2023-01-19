@@ -403,7 +403,6 @@ export const deleteCategory = async (category: any) => {
   await deleteDoc(doc(db, "category", category.id));
 }
 export const updateCategory = async (category: any, id: any) => {
-  console.log(category)
   const docRef = doc(db, 'category', id);
   await updateDoc(docRef, {
     name: category.name
@@ -504,7 +503,6 @@ export const updateTeacher = async (professor: any, id: any) => {
   const storage = getStorage();
   const desertRef = ref(storage, `professorPicture/${tempProfessor.reference}`);
   const desertRefSign = ref(storage, `professorSign/${professor.referenceSign}`);
-  console.log(tempProfessor)
   if ("format" in tempProfessor) {
     await deleteObject(desertRef).then(async () => {
       tempProfessor.reference = `${tempProfessor.name}-${uuidv4()}`

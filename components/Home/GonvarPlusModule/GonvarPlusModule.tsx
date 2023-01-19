@@ -42,7 +42,6 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
   useEffect(() => {
     doVideoStuff()
   }, [])
-
   return (
     <CardContainer className="card-container">
       <div className="course-container">

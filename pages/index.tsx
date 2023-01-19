@@ -67,7 +67,7 @@ const Homepage = () => {
     setCourseData(courseData);
     const courseGonvarPlus = await getWholeCourse(GONVAR_PLUS_COURSE_ID);
     courseGonvarPlus.totalDuration = hms(courseGonvarPlus.totalDuration)
-    setCourseGonvarPlus(courseGonvarPlus);
+    setCourseGonvarPlus([courseGonvarPlus]);
     const courseNailsData = await getWholeCourse(NAILS_MASTER_COURSE_ID);
     courseNailsData.totalDuration = hms(courseNailsData.totalDuration)
     setCourseNailsData(courseNailsData);
@@ -128,7 +128,6 @@ const Homepage = () => {
     return result;
   }
 
-
   return (
     <Container
       fluid
@@ -142,7 +141,7 @@ const Homepage = () => {
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} user={userData} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}
-      <GonvarPlusModule loggedIn={loggedIn} user={userData} courseId={courseGonvarPlus} />
+      <GonvarPlusModule loggedIn={loggedIn} user={userData} courseId={courses} />
       {courses &&
         <Module4_Carousel type={'subscription'} isInfinite={true} title={courseGonvarPlus.courseTittle} slideData={
           courses
