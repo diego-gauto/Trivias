@@ -182,8 +182,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             <div className="right">
               <div className="top">
                 <div className="rating">
-                  <p>1</p>
-                  <Rating allowHover={false} readonly={true} ratingValue={20 * 3.5}
+                  <p>{course.courseRating ? (course.courseRating / 20) : 0}</p>
+                  <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>

@@ -284,6 +284,10 @@ export const CourseContain = styled.div<{ level: any }>`
         gap: 10px;
         padding-right: 30px;
         border-right: 1px solid #80808063;
+        p {
+          font-size: 28px;
+          font-weight: 600;
+        }
         svg {
           font-size: 25px;
         }

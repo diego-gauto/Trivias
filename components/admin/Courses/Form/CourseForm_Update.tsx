@@ -56,6 +56,9 @@ const formSchema = yup.object().shape({
   courseAbout: yup
     .string()
     .required("Campo requerido"),
+  courseRating: yup
+    .number()
+    .required("Campo requerido"),
   coursePrice: yup
     .number()
     .when('free', {
@@ -74,6 +77,7 @@ type FormValues = {
   coursePublishYear: number;
   coursePrice: number;
   coursePhrase: string;
+  courseRating: number;
 };
 
 const CourseForm = (props: ICourseForm_Update) => {
@@ -86,7 +90,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { courseProfessor } = props;
   const { courseType } = props;
   const { courseHomeWork } = props;
-  const { coursePublishYear } = props;
+  const { courseRating } = props;
   const { courseSubtittle } = props;
   const { coursePhrase } = props;
   const { courseMaterial } = props;
@@ -209,8 +213,10 @@ const CourseForm = (props: ICourseForm_Update) => {
     if (difficultyValue !== undefined && difficultyValue !== null) {
       difficultyLevel = difficultyValue
     }
+
     let signUpData = {
       data: {
+        courseRating: formData.courseRating * 20,
         courseCertificateColor: colorRGB,
         courseTittle: formData.courseTittle,
         courseDuration: formData.courseDuration,
@@ -229,7 +235,6 @@ const CourseForm = (props: ICourseForm_Update) => {
         documentID: documentID,
       },
     };
-
     updateCourse(signUpData, images).then(() => {
       window.location.href = `/admin/Edit?documentID=${signUpData.data.documentID}`;
       setIsUpdating(false);
@@ -802,6 +807,18 @@ const CourseForm = (props: ICourseForm_Update) => {
             </InputContain>
           </InputContain2>
         </InputForm>
+        <InputForm>
+        </InputForm>
+        <InputContain>
+          <Label>Rating del curso (1 - 5)</Label>
+          <Input
+            placeholder="0"
+            defaultValue={courseRating / 20}
+            type="text"
+            className={`form-control ${errors.courseRating ? 'is-invalid' : 0}`}
+            {...register("courseRating")}
+          />
+        </InputContain>
         <InputForm >
           <ButtonContain2 style={{ alignItems: "center" }}>
             {!IsUpdating ?

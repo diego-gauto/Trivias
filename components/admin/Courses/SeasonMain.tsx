@@ -174,6 +174,7 @@ const SeasonsMain = () => {
                   reference={courseData[0].reference}
                   courseTittle={courseData[0].courseTittle}
                   courseAbout={courseData[0].courseAbout}
+                  courseRating={courseData[0].courseRating}
                   courseCategory={courseData[0].courseCategory}
                   coursePath={courseData[0].coursePath}
                   courseDuration={courseData[0].courseDuration}

@@ -13,6 +13,7 @@ export interface ICourseForm_Update {
   coursePhrase: string;
   courseMaterial: string;
   courseDifficulty: string;
+  courseRating: number;
   courseCertificateColor: string;
   index: number;
   documentID: string;
