@@ -7,6 +7,14 @@ export const BackgroundContainer = styled.div`
   p {
     margin: 0;
   }
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    color: #3f1168;
+    cursor: pointer;
+  }
   .img-background {
     width: 100%;
     height: auto;

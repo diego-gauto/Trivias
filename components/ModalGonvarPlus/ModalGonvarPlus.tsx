@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
+import { TfiClose } from 'react-icons/tfi';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer } from './ModalGonvarPlus.styled';
 
 
@@ -19,6 +20,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         <img className="img-background" src={backgroundImage} />
         <img className="img-hand-phone" src={phoneImage} />
         <img className="img-hand-paint" src={handPaintImage} />
+        <TfiClose className="close" onClick={handleClose} />
         <div className="upper-contain">
           <div className="first-container">
             <div className="text-contain">
