@@ -15,13 +15,17 @@ export const Selected = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding-inline: 10px;
+  padding-inline: 15px;
+  font-weight: 600;
   font-family: "Montserrat", sans-serif;
-  padding-block: 10px;
-  color: #6717cd;
+  padding-block: 5px;
+  color: #942ced;
   border-radius: 30px;
-  border: 1px solid #6717cd;
+  border: 1px solid #942ced;
   z-index: 5;
+  svg {
+    font-size: 22px;
+  }
   @media (max-width: 991px) {
     font-size: 14px;
     padding-block: 8px;

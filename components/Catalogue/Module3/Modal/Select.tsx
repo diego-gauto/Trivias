@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Input, Label, Option, OptionContain, SelectContain, Selected, DropDown, Episodes } from './Select.styled'
-
+import { IoIosArrowDown } from "react-icons/io";
 const Select = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Temporada")
@@ -8,7 +8,7 @@ const Select = () => {
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
         {value}
-        <DropDown />
+        <IoIosArrowDown />
       </Selected>
       {
         open == true &&

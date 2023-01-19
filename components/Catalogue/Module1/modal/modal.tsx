@@ -5,17 +5,13 @@ import router from "next/router";
 import { LOGIN_PATH } from "../../../../constants/paths";
 import { PlayIcon, PurpleButton } from "../../Module1/Module1.styled";
 import {
-  AboutContain,
-  BackgroundOverlay,
-  ButtonContain,
   Container,
+  ContainerVideo,
   ContainVideo,
   CourseContain,
   Cross,
-  Data,
-  Datacontain,
-  DataSpan,
   Description,
+  DescriptionResp,
   EpisodeContain,
   EpisodeInfo,
   EpisodeTime,
@@ -23,23 +19,20 @@ import {
   ImageBack,
   LessonContain,
   LessonTitle,
-  LoaderContain,
   ModalBackground,
   ModalCont,
   ModalContain,
   ModalMod,
   SeasonContain,
-  Text,
   TextContainer,
-  Title,
-  Titles,
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
 import SelectModule4 from "../../Module4/Modal/SelectModule4";
-import ReactPlayer from "react-player";
 import { getSeason } from "../../../../store/actions/courseActions";
 import ModalMaterials from "../../Module4/Modal/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
+import { Rating } from 'react-simple-star-rating'
+import { AiFillStar } from "react-icons/ai";
 
 const Modal = ({ show, setShow, course, user }: any) => {
   const handleClose = () => setShow(false);
@@ -165,103 +158,96 @@ const Modal = ({ show, setShow, course, user }: any) => {
               width={1000}
               height={600}
             />
-            <BackgroundOverlay />
             <Container>
-              <Cross onClick={handleClose}>
-                x
-              </Cross>
+              <div className="top">
+                <div className="tag">NAILS <span>ACADEMY</span></div>
+                <Cross onClick={handleClose}>
+                  x
+                </Cross>
+              </div>
               <TextContainer>
-                <ButtonContain>
-                  <PurpleButton onClick={goTo}>
-                    Reproducir
-                    <PlayIcon />
-                  </PurpleButton>
-                </ButtonContain>
+                <p className="course">CURSO</p>
+                <p className="title">{course.courseTittle}</p>
+                {course.courseType == "Producto" && <p className="price">por ${course.coursePrice?.toLocaleString('en-US')} <span>MXN</span></p>}
+                <PurpleButton onClick={goTo}>
+                  Reproducir
+                </PurpleButton>
               </TextContainer>
             </Container>
           </ModalBackground>
-
-          <CourseContain>
-            <AboutContain>
-              <Titles>
-                Título del curso:
-              </Titles>
-              <Text>
-                {course.courseTittle}
-              </Text>
-              <Titles>
-                Descripción:
-              </Titles>
-              <Text>
-                {course.coursePhrase}
-              </Text>
-              <Titles>
-                Objetivos:
-              </Titles>
-              <Text>
-                {course.courseAbout}
-              </Text>
-              {!responsive1023 && <button onClick={handleShow}>Materiales</button>}
-            </AboutContain>
-            <Datacontain>
-              <Data>Instructor(es):
-                <DataSpan>
-                  {course.courseProfessor?.name}
-                </DataSpan>
-              </Data>
-              <Data>
-                Categorías:
-                <DataSpan>
-                  {course.courseCategory > 1 ? course.courseCategory + '' : course.courseCategory}
-                </DataSpan>
-              </Data>
-              <Data>
-                Módulos:
-                {course.seasons?.length == 1 && <DataSpan>
-                  1 módulo
-                </DataSpan>}
-                {course.seasons?.length > 1 && <DataSpan>
-                  {course.seasons?.length} módulos
-                </DataSpan>}
-              </Data>
-              <Data>
-                Tiempo estimado:
-                <DataSpan>
-                  {hms(course.totalDuration)}
-                </DataSpan>
-              </Data>
-              {responsive1023 && <button onClick={handleShow}>Materiales</button>}
-            </Datacontain>
+          <CourseContain level={course.courseDifficulty}>
+            <div className="left">
+              <p>{course.courseTittle}.</p>
+              <div className="level-container">
+                {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                <p>{course.courseDifficulty}</p>
+              </div>
+              <p className="time">Duración estimada</p>
+              <p className="duration">{hms(course.totalDuration)}</p>
+              <button onClick={handleShow}>Materiales</button>
+            </div>
+            <div className="right">
+              <div className="top">
+                <div className="rating">
+                  <p>1</p>
+                  <Rating allowHover={false} readonly={true} ratingValue={20 * 3.5}
+                    emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
+                    fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
+                </div>
+                <div className="professor-container">
+                  <img src="/images/teachers/iker.jpg" alt="" />
+                  <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
+                    <span className="name">Iker Robles García</span></p>
+                </div>
+              </div>
+              <div className="bottom">
+                <p>{course.courseAbout}</p>
+              </div>
+            </div>
           </CourseContain>
           <LessonContain>
             <SeasonContain>
               <LessonTitle>
-                Lista de lecciones
+                Lista de <span>lecciones</span>
               </LessonTitle>
-              <SelectModule4 course={course} handleClick={handleClick} seasons={seasons} />
+              {
+                !isPlaying &&
+                <SelectModule4 course={course} handleClick={handleClick} seasons={seasons} />
+              }
             </SeasonContain>
-            {lessons?.map((lesson: any, index: any) => {
+            {lessons.map((lesson: any, index: any) => {
               return (
-                <VideoContain key={"lesson " + index}>
-                  <ContainVideo>
-                    <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
-                      <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
-                        <img src={lesson.image} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
-                      </div>
-                    </EpisodeContain>
-                  </ContainVideo>
-                  <EpisodeInfo>
-                    <EpisodeTitle>
-                      {index + 1}: {lesson.title}
-                    </EpisodeTitle>
-                    <EpisodeTime>
-                      {hms(lesson.duration)}
-                    </EpisodeTime>
-                    <Description>
-                      {lesson.about}
-                    </Description>
-                  </EpisodeInfo>
-                </VideoContain>
+                <ContainerVideo key={"lesson " + index}>
+                  <VideoContain >
+                    <ContainVideo>
+                      <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
+                        <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
+                          <img src={lesson.image ? lesson.image : "/images/admin/Courses/Quiz.PNG"} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                        </div>
+                      </EpisodeContain>
+                    </ContainVideo>
+                    <EpisodeInfo>
+                      {"mandatory" in lesson ? <EpisodeTitle>
+                        Quiz: {lesson.title}
+                      </EpisodeTitle> :
+                        <EpisodeTitle>
+                          Lección {index + 1}
+                        </EpisodeTitle>}
+                      <Description>
+                        {lesson.title}
+                      </Description>
+                      {!("mandatory" in lesson) &&
+                        <EpisodeTime>
+                          {hms(lesson.duration)}.
+                        </EpisodeTime>}
+                    </EpisodeInfo>
+                  </VideoContain>
+                  <DescriptionResp>
+                    {lesson.description}
+                  </DescriptionResp>
+                </ContainerVideo>
               )
             })}
           </LessonContain>

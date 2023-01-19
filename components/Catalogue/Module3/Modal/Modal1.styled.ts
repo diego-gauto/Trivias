@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const ModalContain = styled.div`
   @font-face {
@@ -12,9 +12,9 @@ export const ModalContain = styled.div`
   }
 `;
 export const ModalMod = styled(Modal)`
-  .modal-content {
-    border-radius: 12px !important;
-  }
+  // .modal-content {
+  //   border-radius: 0px !important;
+  // }
   @media (min-width: 992px) {
     .modal-lg,
     .modal-xl {
@@ -25,10 +25,6 @@ export const ModalMod = styled(Modal)`
 export const ModalCont = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  @media (max-width: 500px) {
-    gap: 0;
-  }
 `;
 export const ModalBackground = styled.div`
   display: flex;
@@ -54,6 +50,26 @@ export const Container = styled.div`
   padding-inline: 20px;
   flex-direction: column;
   position: absolute;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-block-start: 10px;
+    .tag {
+      background: linear-gradient(135deg, #952ced 22%, #ca41d4 80%);
+      color: #fff;
+      border-radius: 30px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 4px 10px;
+      letter-spacing: 2px;
+      span {
+        font-weight: 100;
+        color: #ffffffa8;
+      }
+    }
+  }
   @media (max-width: 991px) {
     gap: 40px;
   }
@@ -71,10 +87,35 @@ export const TextContainer = styled.div`
   bottom: 40px;
   flex-direction: column;
   gap: 2px;
+  align-items: center;
+  padding-block-end: 40px;
+  p {
+    color: white;
+    margin: 0;
+    line-height: initial;
+  }
+  .course {
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 6px;
+  }
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .price {
+    color: #ff9b00;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  button {
+    margin-block-start: 30px;
+    padding-inline: 20px;
+  }
 `;
 export const Cross = styled.p`
   display: flex;
-  color: white;
+  color: #3f1168;
   justify-content: flex-end;
   font-size: 36px;
   font-family: "Montserrat", sans-serif;
@@ -116,7 +157,6 @@ export const SubTitle = styled.p`
 `;
 export const ImageBack = styled.img`
   width: 100%;
-  border-radius: 10px 10px 0 0;
   @media (max-width: 1023px) {
     height: auto;
   }
@@ -129,7 +169,6 @@ export const InsideContent = styled.div`
 `;
 export const ButtonContain = styled.div`
   display: flex;
-  margin-top: 20px;
   gap: 20px;
   @media (max-width: 991px) {
     max-width: 150px;
@@ -160,28 +199,120 @@ export const InsideText = styled.p`
     padding-inline: 15px;
   }
 `;
-export const CourseContain = styled.div`
+export const CourseContain = styled.div<{ level: any }>`
   display: flex;
-  margin-top: 50px;
-  padding-inline: 20px;
+  padding: 40px;
   gap: 20px;
+  background: #ede7f2;
+  p {
+    margin: 0;
+    color: #3f1168;
+    font-weight: 500;
+    line-height: initial;
+  }
+  .left {
+    flex: 0 35%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #80808063;
+    padding-right: 20px;
+    .level-container {
+      margin-block-start: 10px;
+      margin-block-end: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      img {
+        width: 17px !important;
+      }
+      p {
+        color: inherit;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+      }
+      ${(props) =>
+        (props.level == "Muy Fácil" || props.level == "Fácil") &&
+        css`
+          color: #6678f8;
+        `}
+      ${(props) =>
+        (props.level == "Avanzado" || props.level == "Máster") &&
+        css`
+          color: #ef1155;
+        `}
+    ${(props) =>
+        props.level == "Intermedio" &&
+        css`
+          color: #12a071;
+        `}
+    }
+    .time {
+      color: #a733e4;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .duration {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    button {
+      border: 1px solid #ff9b00;
+      border-radius: 20px;
+      color: #ff9b00;
+      background: none;
+      font-size: 12px;
+      font-weight: 700;
+      width: fit-content;
+      padding: 5px 20px;
+      margin-block-start: 15px;
+    }
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .top {
+      display: flex;
+      gap: 30px;
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-right: 30px;
+        border-right: 1px solid #80808063;
+        svg {
+          font-size: 25px;
+        }
+      }
+      .professor-container {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        p {
+          font-size: 12px;
+          letter-spacing: 2px;
+          span {
+            font-weight: 600;
+          }
+          .name {
+            font-size: 16px;
+          }
+        }
+        img {
+          width: 70px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
   @media (max-width: 991px) {
     flex-direction: column;
     z-index: 10;
   }
-  // @media (max-width: 850px) {
-  //   flex-direction: column;
-  //   margin-top: -100px;
-  //   z-index: 10;
-  // }
-  // @media (max-width: 670px) {
-  //   padding-inline: 10px;
-  //   margin-top: -45px;
-  //   z-index: 10;
-  // }
-  // @media (max-width: 520px) {
-  //   margin-top: -5px;
-  // }
 `;
 export const AboutContain = styled.div`
   display: flex;
@@ -265,15 +396,15 @@ export const DataSpan = styled.span`
   }
 `;
 export const LessonContain = styled.div`
+  background: #e7e1ee;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-block: 20px;
-  padding-inline: 20px;
-  @media (max-width: 500px) {
-    padding-inline: 10px;
-    gap: 15px;
-  }
+  padding-block: 40px;
+  padding-left: 40px;
+  padding-right: 80px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
 `;
 export const SeasonContain = styled.div`
   display: flex;
@@ -288,11 +419,10 @@ export const LessonTitle = styled.p`
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  @media (max-width: 991px) {
-    font-size: 20px;
-  }
-  @media (max-width: 500px) {
-    font-size: 16px;
+  font-weight: 600;
+  color: #3f1168;
+  span {
+    color: #a733e4;
   }
 `;
 export const VideoContain = styled.div`
@@ -330,17 +460,9 @@ export const ModalVideo = styled.div`
 export const EpisodeContain = styled.div`
   display: flex;
   position: relative;
-  width: 350px;
-  video {
-    border-radius: 10px;
-  }
-  @media (max-width: 1023px) {
-    width: 160px;
-    height: 90px;
-  }
-  @media (max-width: 450px) {
-    width: 110px;
-    height: 70px;
+  width: 250px;
+  img {
+    border-radius: 20px;
   }
 `;
 export const ContainerVideo = styled.div`
@@ -356,38 +478,27 @@ export const ContainVideo = styled.div`
 `;
 export const EpisodeInfo = styled.div`
   display: flex;
-  width: 50%;
   flex-direction: column;
-  gap: 5px;
-  @media (max-width: 991px) {
-    width: 100%;
-  }
+  line-height: initial;
+  color: #3f1168;
+  font-weight: 500;
+  font-size: 18px;
+  justify-content: center;
 `;
 export const EpisodeTitle = styled.p`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  @media (max-width: 450px) {
-    font-size: 12px;
-  }
 `;
 export const EpisodeTime = styled.p`
-  font-size: 12px;
-  color: gray;
   font-family: "Raleway", sans-serif;
   margin: 0;
-  @media (max-width: 450px) {
-    font-size: 10px;
-  }
 `;
 export const Description = styled.p`
-  font-size: 14px;
+  font-size: 18px;
   font-family: "Raleway", sans-serif;
   margin: 0;
-  @media (max-width: 450px) {
-    display: none;
-  }
 `;
 export const DescriptionResp = styled.p`
   font-size: 11px;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SelectContain, Selected, DropDown, OptionContain, Input, Label, Episodes, Option } from '../../Module3/Modal/Select.styled';
+import { IoIosArrowDown } from "react-icons/io";
 
 const SelectModule4 = ({ course, handleClick, seasons }: any) => {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
         {value == undefined ? "Módulo 1" : value}
-        <DropDown />
+        <IoIosArrowDown />
       </Selected>
       {
         open == true &&

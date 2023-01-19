@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
-
 import router from "next/router";
 
 import { LOGIN_PATH } from "../../../../constants/paths";
 import { PurpleButton } from "../../Module1/Module1.styled";
 import {
-  AboutContain,
-  BackgroundOverlay,
-  ButtonContain,
   Container,
   ContainerVideo,
   ContainVideo,
   CourseContain,
   Cross,
-  Data,
-  Datacontain,
-  DataSpan,
   Description,
   DescriptionResp,
   EpisodeContain,
@@ -30,17 +23,15 @@ import {
   ModalContain,
   ModalMod,
   SeasonContain,
-  Text,
   TextContainer,
-  Title,
-  Titles,
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
 import SelectModule4 from "./SelectModule4";
-import ReactPlayer from "react-player";
 import { getSeason } from "../../../../store/actions/courseActions";
 import ModalMaterials from "./ModalMaterials";
 import { useMediaQuery } from "react-responsive";
+import { Rating } from 'react-simple-star-rating'
+import { AiFillStar } from "react-icons/ai";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
   const [material, setMaterial] = useState(false);
@@ -48,7 +39,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const [lessons, setLessons] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
-  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  // const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let today = new Date().getTime() / 1000;
 
   const handleClick = (value: any) => {
@@ -95,7 +86,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   }
 
   useEffect(() => {
-
     if (Object.values(course).length > 0) {
       setLessons(course.seasons[0].lessons);
       setIsPlaying(true);
@@ -150,9 +140,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     }
   };
 
-  console.log(course);
-
-
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -162,95 +149,59 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               width={1000}
               height={600}
             />
-            <BackgroundOverlay />
             <Container>
-              <Cross onClick={handleClose}>
-                x
-              </Cross>
+              <div className="top">
+                <div className="tag">NAILS <span>ACADEMY</span></div>
+                <Cross onClick={handleClose}>
+                  x
+                </Cross>
+              </div>
               <TextContainer>
-                {/* <Title>
-                  {course.courseTittle}
-                </Title> */}
-                <ButtonContain>
-                  {(course.courseType == 'Producto' && !course.paid) && <PurpleButton onClick={goTo}>
-                    Comprar - ${course.coursePrice}.00
-                  </PurpleButton>}
-                  {(user && course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') && <PurpleButton onClick={goTo}>
-                    Ver curso
-                  </PurpleButton>}
-                  {(user && course.courseType == 'Mensual' && user.membership.finalDate < today || !user && course.courseType == 'Mensual') && <PurpleButton onClick={goTo}>
-                    Comprar Gonvar +
-                  </PurpleButton>}
-                </ButtonContain>
+                <p className="course">CURSO</p>
+                <p className="title">{course.courseTittle}</p>
+                {course.courseType == "Producto" && <p className="price">por ${course.coursePrice?.toLocaleString('en-US')} <span>MXN</span></p>}
+                <PurpleButton onClick={goTo}>
+                  Comenzar ahora
+                </PurpleButton>
               </TextContainer>
             </Container>
           </ModalBackground>
-
-          <CourseContain>
-            <AboutContain>
-              <Titles>
-                Título del curso:
-              </Titles>
-              <Text>
-                {course.courseTittle}
-              </Text>
-              <Titles>
-                Descripción:
-              </Titles>
-              <Text>
-                {course.coursePhrase}
-              </Text>
-              <Titles>
-                Objetivos:
-              </Titles>
-              <Text>
-                {course.courseAbout}
-              </Text>
-              {!responsive1023 && <button onClick={handleShow}>Materiales</button>}
-            </AboutContain>
-            <Datacontain>
-              <Data>Instructor(es):
-                <DataSpan>
-                  {
-                    course.courseProfessor?.map((val: any, index: any) => {
-                      return (
-                        <React.Fragment key={'Show Professors ' + index}>
-                          {val.name}
-                          <br />
-                        </React.Fragment>
-                      )
-                    })
-                  }
-                </DataSpan>
-              </Data>
-              <Data>
-                Categorías:
-                <DataSpan>
-                  {course.courseCategory > 1 ? course.courseCategory + '' : course.courseCategory}
-                </DataSpan>
-              </Data>
-              <Data>
-                Módulos:
-                {course.seasons?.length == 1 && <DataSpan>
-                  1 módulo
-                </DataSpan>}
-                {course.seasons?.length > 1 && <DataSpan>
-                  {course.seasons?.length} módulos
-                </DataSpan>}
-              </Data>
-              <Data>
-                Tiempo estimado:
-                <DataSpan>
-                  {course.totalDuration}
-                </DataSpan>
-              </Data>
-              {responsive1023 && <button onClick={handleShow}>Materiales</button>}
-            </Datacontain>
+          <CourseContain level={course.courseDifficulty}>
+            <div className="left">
+              <p>{course.courseTittle}.</p>
+              <div className="level-container">
+                {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                <p>{course.courseDifficulty}</p>
+              </div>
+              <p className="time">Duración estimada</p>
+              <p className="duration">{hms(course.totalDuration)}</p>
+              <button onClick={handleShow}>Materiales</button>
+            </div>
+            <div className="right">
+              <div className="top">
+                <div className="rating">
+                  <p>1</p>
+                  <Rating allowHover={false} readonly={true} ratingValue={20 * 3.5}
+                    emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
+                    fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
+                </div>
+                <div className="professor-container">
+                  <img src="/images/teachers/iker.jpg" alt="" />
+                  <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
+                    <span className="name">Iker Robles García</span></p>
+                </div>
+              </div>
+              <div className="bottom">
+                <p>{course.courseAbout}</p>
+              </div>
+            </div>
           </CourseContain>
           <LessonContain>
             <SeasonContain>
               <LessonTitle>
-                Lista de lecciones
+                Lista de <span>lecciones</span>
               </LessonTitle>
               {
                 !isPlaying &&
@@ -273,14 +224,14 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         Quiz: {lesson.title}
                       </EpisodeTitle> :
                         <EpisodeTitle>
-                          {lesson.number}: {lesson.title}
+                          Lección {index + 1}
                         </EpisodeTitle>}
                       <Description>
-                        {lesson.description}
+                        {lesson.title}
                       </Description>
                       {!("mandatory" in lesson) &&
                         <EpisodeTime>
-                          {hms(lesson.duration)}
+                          {hms(lesson.duration)}.
                         </EpisodeTime>}
                     </EpisodeInfo>
                   </VideoContain>
