@@ -6,6 +6,7 @@ import {
   DocumentData,
   getDoc,
   getDocs,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -22,6 +23,16 @@ export const getCourses = async () => {
   let courses: any = []
   const docRef = collection(db, 'courses');
   const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    courses.push({ ...doc.data(), id: doc.id });
+  });
+  return courses;
+}
+export const getFiveCourses = async () => {
+  let courses: any = []
+  const docRef = collection(db, 'courses');
+  const q = query(docRef, where("courseType", "==", "Mensual"), orderBy("createdAt", "desc"), limit(5));
+  const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     courses.push({ ...doc.data(), id: doc.id });
   });

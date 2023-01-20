@@ -9,9 +9,8 @@ import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
-import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
 import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
-import { getCourses } from "../../../store/actions/courseActions";
+import { getFiveCourses } from "../../../store/actions/courseActions";
 declare let Hls: any
 
 export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
@@ -39,18 +38,16 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
       video.src = `${videoSrc}`
     }
   }
-  const getFiveCourses = () => {
+  const getCourses = () => {
     let tempCourses: any = [];
-    getCourses().then((res) => {
-      console.log(res);
-      tempCourses = res.filter((val: any) => { val })
-      console.log(tempCourses);
+    getFiveCourses().then((res: any) => {
+      setCourses(res);
     });
   }
 
   useEffect(() => {
     doVideoStuff()
-    getFiveCourses();
+    getCourses();
   }, [])
   return (
     <CardContainer className="card-container">
@@ -82,7 +79,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }
               } />
             </Col>
-            <ModalGonvarPlus show={show} setShow={setShow} course={courseId} user={user} />
+            <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
           </Row>}
         </div>
         <div className="video">
@@ -102,7 +99,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }}
               />
             </Col>
-            <ModalGonvarPlus show={show} setShow={setShow} course={courseId} user={user} />
+            <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
           </Row>}
         </div>
       </div>
