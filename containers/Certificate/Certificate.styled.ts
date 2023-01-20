@@ -2,9 +2,19 @@ import styled, { css } from "styled-components";
 
 export const MainContainer = styled.div<{ color: any }>`
   display: flex;
+  flex-direction: column;
+  button {
+    border: none;
+    color: white;
+    border-radius: 20px;
+    width: 200px;
+    margin: 40px auto;
+    font-size: 24px;
+    background: #6610f2;
+  }
   .certificate {
     position: relative;
-    margin-block: 4rem;
+    margin-block-start: 4rem;
     aspect-ratio: 859 / 616;
     ${(props) =>
       props.color == "azul" &&
