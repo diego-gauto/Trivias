@@ -144,6 +144,13 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
     getStarCoordinates();
     setUser({ ...userData })
   }, [userData])
+
+  const format = (date: number) => {
+    let tempDate = Math.ceil((today - date) / (3600 * 24)) / 30;
+    tempDate = Math.floor(tempDate);
+    return tempDate;
+  }
+
   return (
     <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition} coordinates={starCoordinates}>
       <div className="first-text">
@@ -354,8 +361,8 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               </p>
               <div className="data-contain">
                 <p className="points">{points_format} puntos</p>
-                <p className="months">16 meses de aprendizaje</p>
-                <p className="certificates">14 certificados</p>
+                <p className="months">{format(userData.created_at.seconds)} meses de aprendizaje</p>
+                <p className="certificates">{userData.certificates?.length} certificados</p>
               </div>
             </div>
             :
