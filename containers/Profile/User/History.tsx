@@ -96,7 +96,7 @@ export const History = ({ user, addPayment }: any) => {
           <div className='line' />
           <div className='history-info'>
             <p>Producto</p>
-            <p className='second-info'>{invoices[option]?.product}</p>
+            <p className='second-info' style={{ wordBreak: "break-word" }}>{invoices[option]?.product}</p>
           </div>
           <div className='line' />
           <div className='history-info'>

@@ -9,10 +9,13 @@ import {
   SubscriptionContainer,
 } from "./User.styled";
 import { useEffect, useState } from "react";
-import { getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
+import { cancelSub, getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../firebase/firebaseConfig";
+import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, prize, setPrize, timePrize, setTimePrize, nextCertificate }: any) => {
@@ -21,6 +24,12 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
+  const [loader, setLoader] = useState<any>(false);
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true)
+  }
+
 
   const getNextReward = () => {
     let tempSize: any = [];
@@ -67,6 +76,29 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
       getNextTimeReward()
     }
   }, [timeLevel])
+
+
+  const cancelSubscription = async () => {
+    setLoader(true);
+    if (user.membership.method == 'stripe') {
+      const updateCard = httpsCallable(functions, 'cancelStripeSubscription');
+      await updateCard(user.membership.planId).then(async (res: any) => {
+        handleShow()
+        setLoader(false);
+      })
+    } else {
+      let userPlan: any = {
+        planId: user.membership.planId,
+        id: user.id
+      }
+      const cancelPlan = httpsCallable(functions, 'cancelPaypalSubscription');
+      await cancelPlan(userPlan).then(async (res: any) => {
+        handleShow();
+        setLoader(false);
+      })
+    }
+    cancelSub(user.id);
+  }
 
   const rewardCenter = (
     <Link href="/Rewards">
@@ -199,6 +231,8 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
               </p> :
                 <p><span className="span">s/f</span></p>}
             </div>
+            {(!loader && user.membership.level > 0) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
+            {loader && <LoaderContainSpinner />}
           </div>
         </div>
         <div className="second-section">

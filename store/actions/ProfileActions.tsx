@@ -54,3 +54,11 @@ export const getUserInvoices = async (email: string) => {
   });
   return data
 }
+
+export const cancelSub = async (userId: any) => {
+  const docRef = doc(db, 'users', userId);
+  await updateDoc(docRef, {
+    'membership.level': 0,
+  })
+  return 'exito'
+}

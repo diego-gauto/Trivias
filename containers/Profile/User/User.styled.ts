@@ -1716,6 +1716,13 @@ export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  button {
+    margin-bottom: 20px;
+    background: #3f1168;
+    border: none;
+    color: #f2e4c8;
+    border-radius: 20px;
+  }
   .img-hand {
     position: absolute;
     bottom: 0;

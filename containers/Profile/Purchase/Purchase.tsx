@@ -188,7 +188,6 @@ const Purchase = () => {
     }
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
       setError(true);
-      // alert('Por favor acomplete todos los campos!')
       setLoader(false)
     }
     if (cardInfo && Object.values(card).every(value => value !== '')) {
@@ -201,24 +200,20 @@ const Purchase = () => {
         if ("raw" in res.data) {
           setError(true);
           setErrorMsg("Hay un error en los datos de la tarjeta!")
-          // alert("Hay un error en los datos de la tarjeta!")
+          setLoader(false);
         } else {
           setCard({ ...card, cardId: res.data.id, brand: res.data.card.brand, last4: res.data.card.last4, status: true })
         }
-        setLoader(false)
       })
     }
     if (payment && card.paymentMethod) {
       setCard({ ...card, status: false });
       setProcess(false);
       setConfirmation(true);
-      setLoader(false);
     }
     if (plan.method == 'paypal') {
-      setLoader(false);
       setPaypal(!paypal);
     }
-    setLoader(false);
   }
 
   const FinishPayment = async () => {
@@ -263,13 +258,13 @@ const Purchase = () => {
             }
             setLoader(false);
           } else {
+            setPay(true);
+            setLoader(false);
             updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
             if (card.status) {
               addPaymentMethod(card, userData.id);
             }
             setConfirmation(false);
-            setPay(true);
-            setLoader(false);
           }
         });
       } else {
@@ -418,7 +413,7 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          {pay && <div className="static-modal">
+          {(pay && !loader) && <div className="static-modal">
             <div className="modal-costum">
               <h1>¡Grandes noticias, <span>{user}!</span></h1>
               <p><span>¡Tu compra ha sido exitosa!</span> Enviamos el <br />
@@ -547,7 +542,7 @@ const Purchase = () => {
                     </div>
                   </div>
                   {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
-                  {loader && <LoaderContainSpinner />}
+                  {(loader) && <LoaderContainSpinner />}
                 </div>
                 <div className="paypal" onClick={() => {
 
