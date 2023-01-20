@@ -177,18 +177,18 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         </p>
         <div className="courses">
           {
-            arrCourse.map((val: any, index: any) => {
+            course.map((val: any, index: any) => {
               return (
                 <CoursesContainer key={"Course data " + index}>
-                  <img src={course[index + 2]?.coursePath} />
+                  <img src={val.coursePath} />
                   <div className="course-info">
                     <p className="course-name">
-                      {course[index + 2]?.courseTittle}
+                      {val.courseTittle}
                     </p>
                     {
-                      course[index + 2]?.courseProfessor.length > 0 &&
+                      val.courseProfessor.length > 0 &&
                       <p className="course-professor">
-                        de <span>{course[index + 2]?.courseProfessor[0].name}</span>
+                        de <span>{val.courseProfessor[0].name}</span>
                       </p>
                     }
                   </div>
