@@ -108,8 +108,6 @@ export const MainContainer = styled.div<{ color: any }>`
   }
 
   @media (max-width: 800px) {
-    .certificate {
-      transform: scale(0.5);
-    }
+    overflow: auto;
   }
 `;
