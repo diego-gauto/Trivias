@@ -63,8 +63,8 @@ export const Gradient = styled.div`
   left: 0;
   background: linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0.016) 97%
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.016) 90%
   );
 `;
 export const ButtonContain = styled.div`

@@ -2050,7 +2050,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
   }
   .main-container {
     display: flex;
-    height: 374px;
+    min-height: 374px;
     flex-direction: column;
     gap: 15px;
     background-color: #d2aff0;
