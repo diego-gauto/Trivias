@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const RewardContainer = styled.div`
   display: flex;
@@ -25,10 +25,11 @@ export const RewardContainer = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 15px;
   padding-left: 80px;
   .title{
-    font-size: 24px;
+    font-size: 36px;
     color: #3f1168;
     letter-spacing: 4px;
     span{
@@ -36,8 +37,8 @@ export const TitleContainer = styled.div`
     }
   }
   .rewards-circle {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     position: relative;
     &:hover {
@@ -49,8 +50,8 @@ export const TitleContainer = styled.div`
     background: linear-gradient(59deg, #9a2fea 10%, #d244d1 40%, #fd8608 100%);
     cursor: pointer;
     .inside {
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       position: absolute;
       background-color: #dad3e5;
@@ -63,14 +64,103 @@ export const TitleContainer = styled.div`
 `;
 export const RewardsTitle = styled.div`
   display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-right: 30%;
+  gap: 40px;
   align-items: center;
-  justify-content: center;
   .main-text {
+    margin-top: 40px;
     color: #3f1168;
-    font-size: 36px;
+    line-height: 44px;
+    font-size: 40px;
     font-weight: 800;
+    text-align: center;
     span {
       color: #942ced;
+    }
+  }
+  .sub-paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .second-text {
+      color: #3f1168;
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      .span-color {
+        color: #d244d1;
+        font-weight: 600;
+      }
+      .span-weight {
+        font-weight: 800;
+      }
+    }
+  }
+`;
+export const RewardCardContainer = styled.div<{
+  reward: any;
+  progress: any;
+  timeProgress: any;
+  certificateProgress: any;
+}>`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
+  border-radius: 300px 0 0 300px;
+  padding: 20px;
+  .circle-level {
+    display: flex;
+    width: 250px;
+    height: 250px;
+    svg {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      stroke-dasharray: 755;
+      z-index: 1;
+      transform: rotate(-90deg);
+      border-radius: 50%;
+    }
+    .progress-circle {
+      fill: none;
+      stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
+        ${(props) => props.reward == 1 && "url(#gradientTime)"}
+        ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
+      stroke-width: 40px;
+      stroke-dasharray: 755;
+      ${(props) =>
+        props.reward == 0 &&
+        css<{ progress: number }>`
+          stroke-dashoffset: ${(props) => props.progress};
+        `}
+      ${(props) =>
+        props.reward == 1 &&
+        css<{ timeProgress: number }>`
+          stroke-dashoffset: ${(props) => props.timeProgress};
+        `}
+        ${(props) =>
+        props.reward == 2 &&
+        css<{ certificateProgress: number }>`
+          stroke-dashoffset: ${(props) => props.certificateProgress};
+        `}
+      stroke-linecap: round;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+    }
+    .progress-background {
+      fill: none;
+      stroke: #3f1168;
+      stroke-width: 38px;
+      stroke-dasharray: 755;
+      stroke-dashoffset: 0;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
     }
   }
 `;
