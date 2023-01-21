@@ -52,8 +52,10 @@ const Rewards = () => {
   const [timeData, setTimeData] = useState<number>(0)
   const [timeDataResp, setTimeDataResp] = useState<number>(0)
   const [banner, setBanner] = useState<any>({})
-  const [selectReward, setSelectReward] = useState(0);
   const [timeLevels, setTimeLevels] = useState<any>()
+  //REDISENIO
+  const [selectReward, setSelectReward] = useState(0);
+  const crownImage = "/images/profile/crown.png"
 
   const getAllTimeLevels = () => {
     getTimeLevels().then(res => {
@@ -223,33 +225,21 @@ const Rewards = () => {
         </div>
         <RewardCardContainer
           reward={selectReward}
-          progress={300}
-          timeProgress={300}
-          certificateProgress={300}
+          progress={380}
+          timeProgress={380}
+          certificateProgress={380}
         >
 
           <div className="circle-level">
+            <img src={crownImage} className="crown" />
+            <p className="points"> 08</p>
             <svg xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="gradientLevel">
-                  <stop offset="0%" stopColor="#f88d21" />
-                  <stop offset="50%" stopColor="#d244d1" />
-                  <stop offset="100%" stopColor="#972dec" />
+                <linearGradient id="gradient">
+                  <stop offset="0%" stopColor="#902be7" />
+                  <stop offset="100%" stopColor="#451371" />
                 </linearGradient>
               </defs>
-              <defs>
-                <linearGradient id="gradientTime">
-                  <stop offset="0%" stopColor="#1beb00" />
-                  <stop offset="100%" stopColor="#972dec" />
-                </linearGradient>
-              </defs>
-              <defs>
-                <linearGradient id="gradientCertificate">
-                  <stop offset="0%" stopColor="#0997fe" />
-                  <stop offset="100%" stopColor="#9108ee" />
-                </linearGradient>
-              </defs>
-
               <circle className="progress-background"
               />
               <circle className="progress-circle" />

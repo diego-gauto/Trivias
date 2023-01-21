@@ -110,11 +110,30 @@ export const RewardCardContainer = styled.div<{
   right: 0;
   background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
   border-radius: 300px 0 0 300px;
-  padding: 20px;
+  padding: 40px;
   .circle-level {
     display: flex;
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
+    position: relative;
+    .crown {
+      position: absolute;
+      font-size: 40px;
+      width: 62px;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .points {
+      font-size: 68px;
+      font-weight: 600;
+      position: absolute;
+      color: #ede7f2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     svg {
       width: 100%;
       height: 100%;
@@ -127,11 +146,9 @@ export const RewardCardContainer = styled.div<{
     }
     .progress-circle {
       fill: none;
-      stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
-        ${(props) => props.reward == 1 && "url(#gradientTime)"}
-        ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
-      stroke-width: 40px;
-      stroke-dasharray: 755;
+      stroke: url(#gradient);
+      stroke-width: 34px;
+      stroke-dasharray: 565;
       ${(props) =>
         props.reward == 0 &&
         css<{ progress: number }>`
@@ -148,19 +165,19 @@ export const RewardCardContainer = styled.div<{
           stroke-dashoffset: ${(props) => props.certificateProgress};
         `}
       stroke-linecap: round;
-      cx: 125px;
-      cy: 125px;
-      r: 120px;
+      cx: 110px;
+      cy: 110px;
+      r: 90px;
     }
     .progress-background {
       fill: none;
-      stroke: #3f1168;
-      stroke-width: 38px;
-      stroke-dasharray: 755;
+      stroke: #ede7f2;
+      stroke-width: 32px;
+      stroke-dasharray: 565;
       stroke-dashoffset: 0;
-      cx: 125px;
-      cy: 125px;
-      r: 120px;
+      cx: 110px;
+      cy: 110px;
+      r: 90px;
     }
   }
 `;
