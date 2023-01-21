@@ -104,14 +104,95 @@ export const RewardCardContainer = styled.div<{
   progress: any;
   timeProgress: any;
   certificateProgress: any;
+  type: any;
 }>`
   display: flex;
   position: absolute;
-  top: 0;
-  right: 0;
-  background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
+  padding-left: 40px;
+  ${(props) =>
+    props.type == 0 &&
+    css`
+      top: 0;
+      right: 0;
+      background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
+      z-index: 10;
+    `}
+  ${(props) =>
+    props.type == 1 &&
+    css`
+      top: 155px;
+      right: -80px;
+      background: linear-gradient(135deg, #10c576 50%, #9a2fea 100%);
+      z-index: 8;
+      transform: scale(0.8);
+      &:hover {
+        transform: scale(1);
+        top: 155px;
+        right: 0;
+        z-index: 50;
+      }
+    `}
+  ${(props) =>
+    props.type == 2 &&
+    css<{ type: any }>`
+      top: 280px;
+      right: -160px;
+      background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
+      z-index: 6;
+      transform: scale(0.6);
+      &:hover {
+        .contain-1 {
+          z-index: 15;
+        }
+        transform: scale(1);
+        top: 280px;
+        right: 0;
+        z-index: 50;
+      }
+    `}
   border-radius: 300px 0 0 300px;
-  padding: 40px;
+  align-items: center;
+  gap: 20px;
+  .next-reward{
+    display: flex;
+    padding-block: 40px;
+    padding-inline: 40px 30px;
+    background-color: #3f1168;
+    border-radius: 300px 0 0 300px;
+    .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      .icon-rewards{
+        font-size: 50px;
+        color: #fedd67;
+      }
+      .next-reward-title{
+        color:#ede7f2;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 500;
+        span{
+          color: #fedd67;
+          font-weight: 600;
+        }         
+      }
+      .next-reward-points{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26px;
+        background: linear-gradient(to right, #e68a0d, #ffac0d,#e68a0d);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        span{
+          font-size: 24px;
+          font-weight: 800;
+        }
+      }
+    }
+  }
   .circle-level {
     display: flex;
     width: 220px;
@@ -183,13 +264,19 @@ export const RewardCardContainer = styled.div<{
   }
   .card-title {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     .title-contain{
       display: flex;
       flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      .icon{
+        font-size: 45px;
+        color: #fedd67;
+      }
     }
     .texts {
       font-size: 20px;
@@ -203,6 +290,7 @@ export const RewardCardContainer = styled.div<{
       }
       .sub {
         color: #3f1168;
+        font-weight: 800;
       }
 
   }

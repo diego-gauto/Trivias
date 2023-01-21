@@ -34,6 +34,8 @@ import {
   RewardCardContainer,
 } from "./Rewards.styled";
 import { TimeProgressBackground, TimeProgressCircle, TimeSvg } from "./RewardsTime.styled";
+import { AiOutlineStar } from "react-icons/ai";
+import { FaPrescriptionBottleAlt } from "react-icons/fa";
 
 const Rewards = () => {
 
@@ -54,6 +56,7 @@ const Rewards = () => {
   const [banner, setBanner] = useState<any>({})
   const [timeLevels, setTimeLevels] = useState<any>()
   //REDISENIO
+  const rewardsType = [0, 1, 2];
   const [selectReward, setSelectReward] = useState(0);
   const crownImage = "/images/profile/crown.png"
 
@@ -223,40 +226,65 @@ const Rewards = () => {
             <span className="span-weight">para descubrir nuevos premios.</span>
           </p>
         </div>
-        <RewardCardContainer
-          reward={selectReward}
-          progress={380}
-          timeProgress={380}
-          certificateProgress={380}
-        >
-          <div className="circle-level">
-            <img src={crownImage} className="crown" />
-            <p className="points"> 08</p>
-            <svg xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="gradient">
-                  <stop offset="0%" stopColor="#902be7" />
-                  <stop offset="100%" stopColor="#451371" />
-                </linearGradient>
-              </defs>
-              <circle className="progress-background"
-              />
-              <circle className="progress-circle" />
-            </svg>
-          </div>
-          <div className="card-title">
-            <div className="title-contain">
-              <p className="texts">
-                <span className="main">RECOMPENSAS</span><br />
-                por puntaje
-              </p>
-            </div>
-            <p className="texts">
-              <span className="sub">2300 puntos </span>
-              <br />en total
-            </p>
-          </div >
-        </RewardCardContainer>
+        {
+          rewardsType.map((val: any) => {
+            return (
+              <RewardCardContainer
+                reward={selectReward}
+                progress={380}
+                timeProgress={380}
+                certificateProgress={380}
+                type={val}
+                className={`contain-${val}`}
+              >
+                <div className="circle-level">
+                  <img src={crownImage} className="crown" />
+                  <p className="points"> 08</p>
+                  <svg xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="gradient">
+                        <stop offset="0%" stopColor="#902be7" />
+                        <stop offset="100%" stopColor="#451371" />
+                      </linearGradient>
+                    </defs>
+                    <circle className="progress-background"
+                    />
+                    <circle className="progress-circle" />
+                  </svg>
+                </div>
+                <div className="card-title">
+                  <div className="title-contain">
+                    <AiOutlineStar className="icon" />
+                    <p className="texts">
+                      <span className="main">RECOMPENSAS</span><br />
+                      por puntaje
+                    </p>
+                  </div>
+                  <p className="texts">
+                    <span className="sub">2300 puntos </span>
+                    <br />en total
+                  </p>
+                </div >
+                <div className="next-reward">
+                  <div className="container">
+                    <div className="icon-rewards">
+                      <FaPrescriptionBottleAlt />
+                      <FaPrescriptionBottleAlt />
+                    </div>
+                    <p className="next-reward-title">
+                      Siguiente recompensa <br />
+                      <span>2 monómeros Gonvar</span>
+                    </p>
+                    <p className="next-reward-points">
+                      al reunir<br />
+                      <span>3000 puntos</span>
+                    </p>
+                  </div>
+                </div>
+              </RewardCardContainer>
+            )
+          })
+        }
       </RewardsTitle>
     </RewardContainer>
   )
