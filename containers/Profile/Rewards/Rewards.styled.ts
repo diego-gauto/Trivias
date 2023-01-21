@@ -105,6 +105,7 @@ export const RewardCardContainer = styled.div<{
   timeProgress: any;
   certificateProgress: any;
 }>`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
@@ -160,10 +161,10 @@ export const RewardCardContainer = styled.div<{
           stroke-dashoffset: ${(props) => props.timeProgress};
         `}
         ${(props) =>
-        props.reward == 2 &&
-        css<{ certificateProgress: number }>`
-          stroke-dashoffset: ${(props) => props.certificateProgress};
-        `}
+          props.reward == 2 &&
+          css<{ certificateProgress: number }>`
+            stroke-dashoffset: ${(props) => props.certificateProgress};
+          `}
       stroke-linecap: round;
       cx: 110px;
       cy: 110px;
@@ -179,6 +180,31 @@ export const RewardCardContainer = styled.div<{
       cy: 110px;
       r: 90px;
     }
+  }
+  .card-title {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .title-contain{
+      display: flex;
+      flex-direction: column;
+    }
+    .texts {
+      font-size: 20px;
+      text-align: center;
+      color: #ede7f2;
+      font-weight: 600;
+      line-height: 20px;
+      .main{
+        color: #fedd67;
+        letter-spacing: 1px;
+      }
+      .sub {
+        color: #3f1168;
+      }
+
   }
 `;
 export const Gradient = styled.linearGradient``;

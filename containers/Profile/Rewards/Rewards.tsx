@@ -229,7 +229,6 @@ const Rewards = () => {
           timeProgress={380}
           certificateProgress={380}
         >
-
           <div className="circle-level">
             <img src={crownImage} className="crown" />
             <p className="points"> 08</p>
@@ -245,6 +244,18 @@ const Rewards = () => {
               <circle className="progress-circle" />
             </svg>
           </div>
+          <div className="card-title">
+            <div className="title-contain">
+              <p className="texts">
+                <span className="main">RECOMPENSAS</span><br />
+                por puntaje
+              </p>
+            </div>
+            <p className="texts">
+              <span className="sub">2300 puntos </span>
+              <br />en total
+            </p>
+          </div >
         </RewardCardContainer>
       </RewardsTitle>
     </RewardContainer>
