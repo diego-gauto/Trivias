@@ -246,12 +246,12 @@ const NavBar = () => {
               </div>
               <IngresarOptionsList isOpen={ingresarOptionsMenuIsOpen}>
                 <Link href={LOGIN_PATH}>
-                  <FloatingMenuItem>
+                  <FloatingMenuItem onClick={toggleIngresarOptionsMenu}>
                     Iniciar sesión
                   </FloatingMenuItem>
                 </Link>
                 <Link href={SIGNUP_PATH}>
-                  <FloatingMenuItem>
+                  <FloatingMenuItem onClick={toggleIngresarOptionsMenu}>
                     Regístrate
                   </FloatingMenuItem>
                 </Link>
@@ -263,12 +263,12 @@ const NavBar = () => {
                 />
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
                   <Link href={PREVIEW_PATH}>
-                    <FloatingMenuItem>
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Cursos
                     </FloatingMenuItem>
                   </Link>
                   <a href="https://gonvarnails.mx/" target="_blank">
-                    <FloatingMenuItem>
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Tienda
                     </FloatingMenuItem>
                   </a>
