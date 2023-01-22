@@ -109,46 +109,69 @@ export const RewardCardContainer = styled.div<{
   display: flex;
   position: absolute;
   padding-left: 40px;
+ cursor: pointer;
   ${(props) =>
     props.type == 0 &&
-    css`
+    css<{ reward: any }>`
       top: 0;
       right: 0;
       background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
-      z-index: 10;
+      z-index: 12;
+      transition: 0.5s ease all;
+      ${(props) =>
+        props.reward == 1 &&
+        css`
+          transform: scale(0.8);
+          transition: 1s ease all;
+          right: -80px;
+          z-index: 9;
+        `}
+      ${(props) =>
+        props.reward == 2 &&
+        css`
+          transform: scale(0.6);
+          transition: 1s ease all;
+          right: -160px;
+          z-index: 7;
+        `}
     `}
   ${(props) =>
     props.type == 1 &&
-    css`
+    css<{ reward: any }>`
       top: 155px;
       right: -80px;
       background: linear-gradient(135deg, #10c576 50%, #9a2fea 100%);
       z-index: 8;
       transform: scale(0.8);
-      &:hover {
-        transform: scale(1);
-        top: 155px;
-        right: 0;
-        z-index: 50;
-      }
+      transition: 0.5s ease all;
+      ${(props) =>
+        props.reward == 1 &&
+        css`
+          transform: scale(1);
+          transition: 1s ease all;
+          top: 155px;
+          right: 0;
+          z-index: 12;
+        `}
     `}
   ${(props) =>
     props.type == 2 &&
-    css<{ type: any }>`
+    css<{ reward: any }>`
       top: 280px;
       right: -160px;
       background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
-      z-index: 6;
+      z-index: 7;
       transform: scale(0.6);
-      &:hover {
-        .contain-1 {
-          z-index: 15;
-        }
-        transform: scale(1);
-        top: 280px;
-        right: 0;
-        z-index: 50;
-      }
+      transition: 0.5s ease all;
+      ${(props) =>
+        props.reward == 2 &&
+        css`
+          transition: 1s ease all;
+          transform: scale(1);
+          top: 280px;
+          right: 0;
+          z-index: 12;
+        `}
     `}
   border-radius: 300px 0 0 300px;
   align-items: center;

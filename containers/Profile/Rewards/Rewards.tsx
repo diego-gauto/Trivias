@@ -60,6 +60,14 @@ const Rewards = () => {
   const [selectReward, setSelectReward] = useState(0);
   const crownImage = "/images/profile/crown.png"
 
+  const changeRewardPosition = (index: number) => {
+    if (index == selectReward) {
+      setSelectReward(0)
+    }
+    else {
+      setSelectReward(index)
+    }
+  }
   const getAllTimeLevels = () => {
     getTimeLevels().then(res => {
       setTimeLevels(res)
@@ -227,15 +235,17 @@ const Rewards = () => {
           </p>
         </div>
         {
-          rewardsType.map((val: any) => {
+          rewardsType.map((val: any, index: any) => {
             return (
               <RewardCardContainer
+                key={"RewardsCard " + index}
                 reward={selectReward}
                 progress={380}
                 timeProgress={380}
                 certificateProgress={380}
                 type={val}
                 className={`contain-${val}`}
+                onClick={() => changeRewardPosition(index)}
               >
                 <div className="circle-level">
                   <img src={crownImage} className="crown" />
