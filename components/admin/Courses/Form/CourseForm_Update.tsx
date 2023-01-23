@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { updateCourse } from "../../../../store/actions/AdminActions";
 import { getCategory, getMaterial, getTeacher, getUsers } from "../../../../store/actions/courseActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
   ButtonContain2,
@@ -35,6 +34,7 @@ import {
   OptionProfessor,
   OptionColor,
 } from "./Select/SelectStyles.styled";
+import { Input2 } from "../../Rewards/Modals/AddReward.styled";
 
 const formSchema = yup.object().shape({
   free: yup.number(),
