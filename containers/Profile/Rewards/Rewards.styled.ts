@@ -69,6 +69,30 @@ export const RewardsTitle = styled.div`
   padding-right: 30%;
   gap: 40px;
   align-items: center;
+  .hand-container {
+    position: absolute;
+    top: 170px;
+    left: 0;
+    width: 125px;
+    height: 230px;
+    border-radius: 0 250px 250px 0;
+    background-color: #ffdd67;
+    @media (max-width: 1350px) {
+      width: 92px;
+      height: 200px;
+      border-radius: 0 190px 190px 0;
+    }
+    img {
+      top: -140px;
+      position: absolute;
+      left: 0;
+      width: 400px;
+      @media (max-width: 1350px) {
+        width: 300px;
+        top: -80px;
+      }
+    }
+  }
   .main-text {
     margin-top: 40px;
     color: #3f1168;
@@ -76,6 +100,12 @@ export const RewardsTitle = styled.div`
     font-size: 40px;
     font-weight: 800;
     text-align: center;
+    @media (max-width: 1500px) {
+      font-size: 36px;
+    }
+    @media (max-width: 1300px) {
+      font-size: 32px;
+    }
     span {
       color: #942ced;
     }
@@ -89,6 +119,12 @@ export const RewardsTitle = styled.div`
       font-size: 20px;
       font-weight: 500;
       text-align: center;
+      @media (max-width: 1500px) {
+        font-size: 18px;
+      }
+      @media (max-width: 1300px) {
+        font-size: 16px;
+      }
       .span-color {
         color: #d244d1;
         font-weight: 600;
@@ -117,60 +153,153 @@ export const RewardCardContainer = styled.div<{
       right: 0;
       background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
       z-index: 12;
-      transition: 0.5s ease all;
+      transition: 0.3s ease all;
+      box-shadow: 65px 15px 40px -15px black;
+      transform-origin: top right;
+      @media (max-width: 1500px) {
+        transform: scale(0.85);
+      }
+      @media (max-width: 1300px) {
+        transform: scale(0.75);
+      }
+      @media (max-width: 1150px) {
+        transform: scale(0.65);
+      }
       ${(props) =>
         props.reward == 1 &&
         css`
           transform: scale(0.8);
-          transition: 1s ease all;
-          right: -80px;
+          transition: 0.5s ease all;
           z-index: 9;
+          @media (max-width: 1500px) {
+            transform: scale(0.7);
+          }
+          @media (max-width: 1300px) {
+            transform: scale(0.62);
+          }
+          @media (max-width: 1150px) {
+            transform: scale(0.55);
+          }
         `}
       ${(props) =>
         props.reward == 2 &&
         css`
           transform: scale(0.6);
-          transition: 1s ease all;
-          right: -160px;
+          transition: 0.5s ease all;
           z-index: 7;
+          @media (max-width: 1500px) {
+            transform: scale(0.6);
+          }
+          @media (max-width: 1300px) {
+            transform: scale(0.52);
+          }
+          @media (max-width: 1150px) {
+            transform: scale(0.45);
+          }
         `}
     `}
   ${(props) =>
     props.type == 1 &&
     css<{ reward: any }>`
-      top: 155px;
-      right: -80px;
+      top: 185px;
+      right: 0;
       background: linear-gradient(135deg, #10c576 50%, #9a2fea 100%);
       z-index: 8;
       transform: scale(0.8);
-      transition: 0.5s ease all;
+      transition: 0.3s ease all;
+      box-shadow: 65px 15px 40px -15px black;
+      transform-origin: top right;
+      @media (max-width: 1500px) {
+        transform: scale(0.7);
+        top: 155px;
+      }
+      @media (max-width: 1300px) {
+        top: 135px;
+        transform: scale(0.62);
+      }
+      @media (max-width: 1150px) {
+        top: 115px;
+        transform: scale(0.55);
+      }
       ${(props) =>
         props.reward == 1 &&
         css`
           transform: scale(1);
-          transition: 1s ease all;
-          top: 155px;
+          transition: 0.5s ease all;
+          top: 125px;
           right: 0;
           z-index: 12;
+          box-shadow: 65px -15px 40px -15px black, 204px 15px 40px -15px black;
+          @media (max-width: 1500px) {
+            transform: scale(0.85);
+            top: 110px;
+          }
+          @media (max-width: 1300px) {
+            transform: scale(0.75);
+            top: 100px;
+          }
+          @media (max-width: 1150px) {
+            top: 90px;
+            transform: scale(0.65);
+          }
+        `}
+      ${(props) =>
+        props.reward == 2 &&
+        css`
+          box-shadow: 65px -15px 40px -15px black;
+          top: 120px;
+          @media (max-width: 1500px) {
+            top: 115px;
+          }
+          @media (max-width: 1300px) {
+            top: 100px;
+          }
+          @media (max-width: 1150px) {
+          }
         `}
     `}
   ${(props) =>
     props.type == 2 &&
     css<{ reward: any }>`
-      top: 280px;
-      right: -160px;
+      top: 340px;
+      right: 0;
       background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
       z-index: 7;
       transform: scale(0.6);
-      transition: 0.5s ease all;
+      transition: 0.3s ease all;
+      transform-origin: top right;
+      @media (max-width: 1500px) {
+        top: 280px;
+        transform: scale(0.6);
+      }
+      @media (max-width: 1300px) {
+        top: 250px;
+        transform: scale(0.52);
+      }
+      @media (max-width: 1150px) {
+        top: 215px;
+        transform: scale(0.45);
+      }
       ${(props) =>
         props.reward == 2 &&
         css`
-          transition: 1s ease all;
+          transition: 0.5s ease all;
           transform: scale(1);
           top: 280px;
           right: 0;
           z-index: 12;
+          box-shadow: 65px -15px 40px -15px black;
+          @media (max-width: 1500px) {
+            top: 245px;
+            transform: scale(0.85);
+          }
+          @media (max-width: 1300px) {
+            top: 220px;
+            transform: scale(0.75);
+          }
+          @media (max-width: 1150px) {
+            transform: scale(0.65);
+          }
         `}
     `}
   border-radius: 300px 0 0 300px;
