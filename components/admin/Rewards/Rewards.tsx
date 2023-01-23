@@ -1,101 +1,58 @@
 import React, { useEffect, useState } from "react";
+import { FiEdit } from "react-icons/fi";
 
-import { getBanner, updateBanner } from "../../../store/actions/RewardActions";
+import { getBanner, getRewards, updateBanner } from "../../../store/actions/RewardActions";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
-import Prize from "./Prizes/Prize";
-import TimePrize from "./Prizes/TimePrize";
+import AddReward from "./Modals/AddReward";
+import EditReward from "./Modals/EditReward";
+
 import {
-  ButtonPosition,
-  Container,
-  ImageContain,
-  PriceContain,
-  PriceTitle,
+  Reward,
   RewardContain,
-  Title,
-  TitleContain,
 } from "./Rewards.styled";
-import Points from "./Rewards/Points";
-import Request from "./Rewards/Request";
-import Time from "./Rewards/Time";
 
 const Rewards = () => {
+  const [show, setShow] = useState(false);
+  const [rewards, setRewards] = useState([]);
+  const [reward, setReward] = useState<any>({});
+  const [edit, setEdit] = useState(false);
 
-  const [place, setPlace] = useState("points");
-  const [banner, setBanner] = useState<any>({
-    path: "",
-  })
-  const [image, setImage] = useState<any>()
+  useEffect(() => {
+    getRewards().then((res) => {
+      setRewards(res);
+    })
+  }, []);
 
-  const getRewardBanner = () => {
-    getBanner().then((res) => {
-      setImage(res?.path)
-      setBanner(res);
+  const handleEvent = () => {
+    getRewards().then((res) => {
+      setRewards(res);
     })
   }
 
-  const update = () => {
-    updateBanner(banner);
-  }
-  const getImage = (file: any) => {
-    var reader = new FileReader();
-    reader.readAsDataURL(file[0]);
-    reader.onload = (_event) => {
-      setImage(reader.result)
-      setBanner({ ...banner, format: reader.result })
-    };
-  }
-  useEffect(() => {
-    getRewardBanner();
-  }, [])
   return (
     <AdminContain>
       <SideBar />
       <RewardContain>
-        <ImageContain>
-          <img src={image} />
-        </ImageContain>
-        <TitleContain>
-          <Title >Centro de Recompensas</Title>
-        </TitleContain>
-        <ButtonPosition >
-          <label htmlFor="input">
-            Seleccionar Imagen
-            <input
-              type="file"
-              id="input"
-              onChange={(e) => { getImage(e.target.files) }}
-            />
-          </label>
-          {
-            banner.path != ""
-              ?
-              <button onClick={() => { update() }}>
-                Guardar
-              </button>
-              : <></>
-          }
-        </ButtonPosition>
-        <Container>
-          {place == "points" && <Points setPlace={setPlace} place={place} />}
-          {place == "time" && <Time setPlace={setPlace} />}
-          {place == "request" && <Request setPlace={setPlace} />}
-        </Container>
-        {
-          place == "points" &&
-          <PriceContain>
-            <PriceTitle>Premios por reclamar</PriceTitle>
-            <Prize />
-          </PriceContain>
-          ||
-          place == "time" &&
-          <PriceContain>
-            <PriceTitle>Premios por reclamar</PriceTitle>
-            <TimePrize />
-          </PriceContain>
-        }
-
+        <p className="title">Recompensas Gonvar</p>
+        <button className="add" onClick={() => { setShow(true) }}>Agregar Recompensa</button>
+        <div className="rewards">
+          {rewards.map((reward: any) => {
+            return (
+              <Reward type={reward.type}>
+                <FiEdit></FiEdit>
+                <img src={reward.path} alt="" onClick={() => { setReward(reward); setEdit(true) }} />
+                <p className="title">{reward.title}</p>
+                {reward.type == "points" && <p>{reward.points} Puntos</p>}
+                {reward.type == "months" && <p>{reward.months} Meses</p>}
+                {reward.type == "certificates" && <p>{reward.certificates} Certificados</p>}
+              </Reward>
+            )
+          })}
+        </div>
       </RewardContain>
+      <AddReward show={show} setShow={setShow} handleEvent={handleEvent}></AddReward>
+      <EditReward show={edit} setShow={setEdit} handleEvent={handleEvent} data={reward}></EditReward>
     </AdminContain>
   )
 }

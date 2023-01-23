@@ -1,117 +1,73 @@
-import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const RewardContain = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   position: relative;
-`;
-export const ImageContain = styled.div`
-  display: flex;
-  width: 100%;
-  height: 300px;
-  position: relative;
-  filter: brightness(50%);
-  img {
-    width: 100%;
-    height: auto;
-  }
-`;
-export const TitleContain = styled.div`
-  display: flex;
-  position: absolute;
-  padding-block: 40px;
-  padding-inline: 20px;
-`;
-export const ButtonPosition = styled.div`
-  input {
-    display: none;
-  }
-  label {
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    font-size: 16px;
-    font-family: "Montserrat", sans-serif;
-    background: white;
-    color: #6717cd;
-    padding-block: 10px;
-    padding-inline: 30px;
-    border: 1px solid #6717cd;
-    border-radius: 100px;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.03);
-      transition: 0.5s ease all;
-    }
-  }
-  button {
-    position: absolute;
-    top: 160px;
-    left: 20px;
-    font-size: 16px;
-    font-family: "Montserrat", sans-serif;
-    background: white;
-    color: #6717cd;
-    padding-block: 10px;
-    padding-inline: 30px;
-    border: 1px solid #6717cd;
-    border-radius: 100px;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.03);
-      transition: 0.5s ease all;
-    }
-  }
-`;
-export const Title = styled.h1`
-  color: white;
-  font-size: 36px;
-`;
-export const Container = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding-block: 20px;
-  padding-inline: 40px;
-`;
-export const InputContain = styled.div`
-  display: flex;
-  justify-content: center;
-  position: relative;
-  background: white;
   padding: 20px;
-  width: 100%;
-  box-shadow: 0px -6px 6px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 10px 10px 0 0;
-  z-index: 2;
-`;
-export const Unselect = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
-  cursor: pointer;
-`;
-export const Tab = styled.p`
-  font-family: "Montserrat";
-  font-size: 16px;
-  font-weight: 600;
-  color: #6717cd;
-  margin: 0;
-`;
-export const PriceContain = styled.div`
-  display: flex;
-  flex-direction: column;
   gap: 20px;
-  margin-block: 20px;
-  flex-direction: column;
-  padding-inline: 40px;
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .add {
+    border: none;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 10px;
+    background: #6717cd;
+    font-weight: 600;
+    color: #fff;
+  }
+  .rewards {
+    display: flex;
+    gap: 20px;
+    p {
+      margin: 0;
+    }
+  }
 `;
-export const PriceTitle = styled.p`
-  font-family: "Montserrat";
-  font-weight: 600;
-  font-size: 18px;
-  margin: 0;
+export const Reward = styled.div<{ type: any }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  color: white;
+  padding-bottom: 10px;
+  position: relative;
+  ${(props) =>
+    props.type == "points" &&
+    css`
+      background: linear-gradient(135deg, #fd8608 30%, #9a2fea 100%);
+    `}
+  ${(props) =>
+    props.type == "months" &&
+    css`
+      background: linear-gradient(135deg, #10c576 50%, #9a2fea 100%);
+    `}
+ ${(props) =>
+    props.type == "certificates" &&
+    css`
+      background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
+    `}
+  svg {
+    font-size: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  img {
+    cursor: pointer;
+    width: 260px;
+    box-shadow: rgb(0 0 0 / 25%) 0px 0px 20px 2px;
+    border-radius: 10px;
+    &:hover {
+      box-shadow: rgb(103 23 205) 0px 0px 10px 2px;
+    }
+  }
+  .title {
+    font-weight: 600;
+  }
 `;
