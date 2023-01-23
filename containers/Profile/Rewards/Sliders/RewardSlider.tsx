@@ -8,9 +8,9 @@ SwiperCore.use([Autoplay]);
 const RewardSlider = (props: reward_slider) => {
   const swiperRef = useRef<SwiperCore>();
 
-  const { isInfinite, slideData, type } = props;
+  const { isInfinite, rewards } = props;
   let slideDataArr = [];
-  slideDataArr = slideData;
+  slideDataArr = rewards;
   if (slideDataArr) {
 
   }

@@ -10,6 +10,7 @@ import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.s
 import {
   getBanner,
   getLevel,
+  getRewards,
   getTimeLevel,
   getTimeLevels,
 } from "../../../store/actions/RewardActions";
@@ -21,11 +22,11 @@ import {
 } from "./Rewards.styled";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
-import RewardSlider from "./Sliders/rewardSlider";
+import RewardSlider from "./Sliders/RewardSlider";
 
 const Rewards = () => {
 
-  const [rewards, setRewards] = useState(true);
+  const [rewards, setRewards] = useState<any>(true);
   const [size, setSize] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
@@ -48,8 +49,10 @@ const Rewards = () => {
     }
   }
 
-  const getRewards = () => {
-
+  const getAllRewards = () => {
+    getRewards().then((res) => {
+      setRewards(res);
+    })
   }
   try {
     var userDataAuth = useAuth();
@@ -91,7 +94,7 @@ const Rewards = () => {
 
   useEffect(() => {
     fetchDB_data()
-    getRewards();
+    getAllRewards();
   }, [])
 
   useEffect(() => {
@@ -207,7 +210,7 @@ const Rewards = () => {
           })
         }
       </RewardsTitle>
-      {/* <RewardSlider  isInfinite={true} type ="points" slideData={rewards}/> */}
+      <RewardSlider isInfinite={true} rewards={rewards} />
     </RewardContainer>
   )
 }

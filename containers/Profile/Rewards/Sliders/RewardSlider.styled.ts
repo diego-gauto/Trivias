@@ -1,14 +1,13 @@
 export interface reward_slider {
   isInfinite: boolean;
-  slideData: SlideObj[];
-  type: string;
+  rewards: SlideObj[];
 }
 interface SlideObj {
-  isNew: boolean;
-  image?: string;
+  about: string;
+  id: string;
+  months: 2;
+  path?: string;
   title: string;
-  subtitle: string;
-  level?: string;
-  imgURL?: string;
-  number?: any;
+  productType: string;
+  type: string;
 }
