@@ -13,29 +13,15 @@ import {
   getTimeLevel,
   getTimeLevels,
 } from "../../../store/actions/RewardActions";
-import PointRewards from "./RewardComponent/PointRewards";
-import TimeRewards from "./RewardComponent/TimeRewards";
 import {
-  BannerContain,
   TitleContainer,
-  CurrentLevel,
-  ImageContain,
-  InsideContain,
-  LevelContain,
-  MainContain,
-  OuterProgress,
-  PointsText,
-  ProgressBackground,
-  ProgressCircle,
-  ProgressContain,
-  ProgressSvg,
   RewardContainer,
   RewardsTitle,
   RewardCardContainer,
 } from "./Rewards.styled";
-import { TimeProgressBackground, TimeProgressCircle, TimeSvg } from "./RewardsTime.styled";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
+import RewardSlider from "./Sliders/rewardSlider";
 
 const Rewards = () => {
 
@@ -45,20 +31,13 @@ const Rewards = () => {
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState<any>([]);
-  const [currentLevel, setCurrentLevel] = useState<number>(0);
   const [timeScore, setTimeScore] = useState<number>(0);
-  const [timeLevel, setTimeLevel] = useState<any>(0);
-  const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
-  const [data, setData] = useState<number>(0)
-  const [dataResp, setDataResp] = useState<number>(0)
-  const [timeData, setTimeData] = useState<number>(0)
-  const [timeDataResp, setTimeDataResp] = useState<number>(0)
-  const [banner, setBanner] = useState<any>({})
-  const [timeLevels, setTimeLevels] = useState<any>()
+
   //REDISENIO
   const rewardsType = [0, 1, 2];
   const [selectReward, setSelectReward] = useState(0);
   const crownImage = "/images/profile/crown.png"
+  const handStarImage = "/images/Rewards/handStar.png"
 
   const changeRewardPosition = (index: number) => {
     if (index == selectReward) {
@@ -68,10 +47,9 @@ const Rewards = () => {
       setSelectReward(index)
     }
   }
-  const getAllTimeLevels = () => {
-    getTimeLevels().then(res => {
-      setTimeLevels(res)
-    })
+
+  const getRewards = () => {
+
   }
   try {
     var userDataAuth = useAuth();
@@ -95,7 +73,7 @@ const Rewards = () => {
         response.forEach((e: any) => {
           setUserData({ ...e.data(), id: e.id });
         });
-
+        setLoading(false);
       })
     } catch (error) {
       return false
@@ -111,90 +89,20 @@ const Rewards = () => {
     setTimeScore(timeScore)
   }
 
-  const getRewardBanner = () => {
-    getBanner().then((res) => {
-      setBanner(res);
-    })
-  }
-
-  const getSize = async () => {
-    db.collection('levelPoints').get().then(snap => {
-      setSize(snap.size) // will return the collection size
-    });
-  }
-
-  const getCurrentLevel = () => {
-    getLevel().then((res) => {
-      res = res.filter((data: any, index: any) => data.minimum <= userData.score)
-      setLevel(res[0])
-      setCurrentLevel(res.length)
-    })
-  }
-
-  const getCurrentTimeLevel = () => {
-    getTimeLevel().then(async (res) => {
-      await Promise.all(res.map(async (element: any) => {
-        element.minMonth = element.minimum * 30;
-        element.maxMonth = element.maximum * 30;
-      }))
-      let tempIndex = 0;
-      let tempLevels: any = [];
-      tempLevels = res.filter((data: any, index: any) => timeScore >= data.minMonth && timeScore < data.maxMonth);
-      if (tempLevels.length > 0) {
-        tempIndex = res.findIndex((x: any) =>
-          x.id == tempLevels[0]?.id)
-        tempLevels[0].level = tempIndex + 1;
-        tempLevels[0].index = tempIndex;
-        setTimeLevel(tempLevels[0]);
-        setCurrentTimeLevel(res.length);
-        setTimeData(346 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 346));
-        setTimeDataResp(289 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 289));
-      } else {
-        tempLevels = res.filter((data: any, index: any) => timeScore > data.maxMonth);
-        const lastItem: any = [...tempLevels].pop();
-        tempIndex = res.findIndex((x: any) =>
-          x.id == lastItem?.id);
-        if (lastItem) {
-          lastItem.level = tempIndex + 1;
-          lastItem.index = tempIndex;
-          setTimeLevel(lastItem);
-          setTimeData(346 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 346));
-          setTimeDataResp(289 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 289));
-        }
-      }
-      if (res[0].minMonth > timeScore) {
-        tempLevels.level = 0;
-        setTimeLevel(tempLevels);
-        setTimeData(0);
-        setTimeDataResp(0);
-      }
-    })
-  }
-
   useEffect(() => {
     fetchDB_data()
-    getRewardBanner()
+    getRewards();
   }, [])
 
   useEffect(() => {
     if (userData != null) {
-      getCurrentLevel();
-      getCurrentTimeLevel();
-      getAllTimeLevels();
-      getSize();
       getDate();
     }
   }, [userData, size]);
 
   useEffect(() => {
     if (userData != null && level != null) {
-      if (level.maximum < userData.score) {
-        setData(0);
-        setDataResp(0);
-      } else {
-        setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
-        setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
-      }
+
       setLoading(false);
     }
   }, [level])
@@ -222,6 +130,9 @@ const Rewards = () => {
         <p className="title">CENTRO DE <span>RECOMPENSAS</span></p>
       </TitleContainer>
       <RewardsTitle>
+        <div className="hand-container">
+          <img src={handStarImage} />
+        </div>
         <p className="main-text">
           ¡Haz hecho<br /> un gran trabajo <br />hasta ahora,<br /><span> {userData.name}!</span>
         </p>
@@ -296,6 +207,7 @@ const Rewards = () => {
           })
         }
       </RewardsTitle>
+      {/* <RewardSlider  isInfinite={true} type ="points" slideData={rewards}/> */}
     </RewardContainer>
   )
 }
