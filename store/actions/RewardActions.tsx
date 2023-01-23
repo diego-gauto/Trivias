@@ -164,11 +164,11 @@ export const updateRewards = async (reward: any, id: any) => {
   return 'exito'
 }
 
-export const deletePointPrize = async (reward: any) => {
+export const deleteProduct = async (reward: any) => {
   const storage = getStorage();
-  const desertRef = ref(storage, `rewards/points/${reward.reference}`);
+  const desertRef = ref(storage, `rewards/${reward.reference}`);
   await deleteObject(desertRef).then(async () => {
-    await deleteDoc(doc(db, "rewards", reward.id));
+    await deleteDoc(doc(db, "allRewards", reward.id));
     return 'success'
   }).catch((error) => {
     console.log(error)

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { addReward, deleteTimePrize, updateRewards } from "../../../../store/actions/RewardActions";
+import { deleteProduct, updateRewards } from "../../../../store/actions/RewardActions";
 import { CloseIcon } from "../../Category/Category.styled";
 
 import {
   Button,
   ButtonContain,
+  ButtonTransparent,
   Folder,
   IconContain,
   Input,
@@ -32,15 +33,17 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     };
   }
   const editReward = () => {
-    console.log(reward);
-
-    // updateRewards(reward, reward.id).then(() => {
-    //   handleClose();
-    //   handleEvent();
-    // })
+    reward.productType = productType;
+    updateRewards(reward, reward.id).then(() => {
+      handleClose();
+      handleEvent();
+    })
   }
-  const deletePrize = (reward: any) => {
-    deleteTimePrize(reward)
+  const deleteReward = (reward: any) => {
+    deleteProduct(reward).then(() => {
+      handleClose();
+      handleEvent();
+    })
   }
 
   useEffect(() => {
@@ -133,6 +136,10 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
           </IconContain>
         </InputContain>
         <ButtonContain>
+          <ButtonTransparent onClick={() => {
+            deleteReward(reward)
+          }}
+          >Eliminar</ButtonTransparent>
           <Button
             onClick={() => {
               editReward();
