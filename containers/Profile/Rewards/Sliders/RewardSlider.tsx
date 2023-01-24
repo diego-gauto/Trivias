@@ -9,20 +9,18 @@ SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
   const swiperRef = useRef<SwiperCore>();
-  const [slider, setSlider] = useState([]);
   const { rewards, isInfinite, title } = props;
-  const getSlider = () => {
-    let allSlider: any = [];
-    let slideMonths: any = [];
-    let slideCertificates: any = [];
 
-    rewards.map((val) => {
-      if (val.type == title) {
-        allSlider.push(val);
-      }
-    })
-    setSlider(allSlider)
-  }
+  let allSlider: any = [];
+  let slideMonths: any = [];
+  let slideCertificates: any = [];
+
+  rewards.map((val) => {
+    if (val.type == title) {
+      allSlider.push(val);
+    }
+  })
+
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
@@ -55,9 +53,7 @@ const RewardSlider = (props: reward_slider) => {
       }
     }
   };
-  useEffect(() => {
-    getSlider();
-  }, [])
+
   return (
     <Container
       fluid
@@ -66,12 +62,12 @@ const RewardSlider = (props: reward_slider) => {
       onMouseLeave={onMouseLeave}
     >
       {
-        slider?.length > 0 ?
+        allSlider?.length > 0 ?
           <Swiper {...settings} onInit={onInit}>
             {
-              slider?.map((element, idx) => {
+              allSlider?.map((element: any, idx: any) => {
                 return (
-                  <SwiperSlide key={idx}>
+                  <SwiperSlide key={"sliderReward" + idx}>
                     <RewardModuleSlider
                       rewards={element}
                     // type={type}
