@@ -11,7 +11,6 @@ import { AiFillLock } from 'react-icons/ai';
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
 SwiperCore.use([Autoplay, Pagination]);
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
@@ -66,23 +65,13 @@ const Purchase = () => {
   const router = useRouter()
   const { type, id } = router.query;
   const [loader, setLoader] = useState<any>(false);
+  const style: any = { color: "gold" };
 
   const subscription = {
     price: 149.00,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
-
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
-  };
-
-  const settings = {
-    slidesPerView: 1,
-    spaceBetween: 0,
-    pagination: true
-  };
-
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -556,6 +545,7 @@ const Purchase = () => {
                     {type == 'subscription' && <PayPalButtons
                       style={{
                         color: "blue",
+                        tagline: false,
                         layout: 'horizontal',
                         shape: 'pill',
                         height: 50,
@@ -581,6 +571,7 @@ const Purchase = () => {
                     {type == 'course' && <PayPalButtons
                       style={{
                         color: "blue",
+                        tagline: false,
                         layout: 'horizontal',
                         shape: 'pill',
                         height: 50,
@@ -820,7 +811,7 @@ const Purchase = () => {
                           layout: 'horizontal',
                           shape: 'pill',
                           height: 50,
-
+                          tagline: false
                         }}
                         createSubscription={(data, actions) => {
                           setPlan({ method: "paypal" })
@@ -841,10 +832,11 @@ const Purchase = () => {
                       />}
                       {type == 'course' && <PayPalButtons
                         style={{
-                          color: "blue",
+                          color: "gold",
                           layout: 'horizontal',
                           shape: 'pill',
                           height: 50,
+                          tagline: false
                         }}
                         createOrder={(data, actions) => {
                           let price = product.price;

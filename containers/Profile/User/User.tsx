@@ -188,17 +188,10 @@ const User = () => {
   const certificateProgressBar = () => {
     let tempProgress: number = 0;
     let totalLessonsLeft: any = nextCertificate;
-    tempProgress = ((totalLessonsLeft.lessonsLeft) / totalLessonsLeft.maxLessons) * 755;
+    tempProgress = ((totalLessonsLeft?.lessonsLeft) / totalLessonsLeft?.maxLessons) * 755;
     setCertificateProgress(tempProgress);
   }
-  // const logoutFunc = () => {
-  //   const auth = getAuth();
-  //   signOut(auth).then(() => {
-  //     window.location.href = "/";
-  //   }).catch((error) => {
-  //     console.log(error)
-  //   });
-  // };
+
   useEffect(() => {
     fetchDB_data()
 

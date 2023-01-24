@@ -76,12 +76,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
               : router.push(SIGNUP_PATH)
           }
           } />
-          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
-            loggedIn
-              ? handleShow()
-              : router.push(PREVIEW_PATH)
-          }
-          } />
+          <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
         </Col>
       </Row>
       <Modal1 show={show} setShow={setShow} course={data} user={user} />

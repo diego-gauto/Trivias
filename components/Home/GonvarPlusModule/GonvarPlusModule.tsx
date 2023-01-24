@@ -72,12 +72,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
                   ? router.push("/Purchase?type=subscription")
                   : router.push(SIGNUP_PATH)
               }} />
-              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
-                loggedIn
-                  ? handleShow()
-                  : router.push(PREVIEW_PATH)
-              }
-              } />
+              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
             <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
           </Row>}
@@ -92,12 +87,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
                   ? router.push("/Purchase?type=subscription")
                   : router.push(SIGNUP_PATH)
               }} />
-              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => {
-                loggedIn
-                  ? handleShow()
-                  : router.push(PREVIEW_PATH)
-              }}
-              />
+              <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
             <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
           </Row>}
