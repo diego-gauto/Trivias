@@ -152,7 +152,7 @@ export const RewardCardContainer = styled.div<{
       right: 0;
       background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
       z-index: 12;
-      transition: 0.3s ease all;
+      transition: 0.1s ease all;
       box-shadow: 65px 15px 40px -15px black;
       transform-origin: top right;
       @media (max-width: 1500px) {
@@ -168,7 +168,7 @@ export const RewardCardContainer = styled.div<{
         props.reward == 1 &&
         css`
           transform: scale(0.8);
-          transition: 0.5s ease all;
+          transition: 0.1s ease all;
           z-index: 9;
           @media (max-width: 1500px) {
             transform: scale(0.7);
@@ -184,7 +184,7 @@ export const RewardCardContainer = styled.div<{
         props.reward == 2 &&
         css`
           transform: scale(0.6);
-          transition: 0.5s ease all;
+          transition: 0.1s ease all;
           z-index: 7;
           @media (max-width: 1500px) {
             transform: scale(0.6);
@@ -224,7 +224,7 @@ export const RewardCardContainer = styled.div<{
         props.reward == 1 &&
         css`
           transform: scale(1);
-          transition: 0.5s ease all;
+          transition: 0.1s ease all;
           top: 125px;
           right: 0;
           z-index: 12;
@@ -265,7 +265,7 @@ export const RewardCardContainer = styled.div<{
       background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
       z-index: 7;
       transform: scale(0.6);
-      transition: 0.3s ease all;
+      transition: 0.1s ease all;
       transform-origin: top right;
       @media (max-width: 1500px) {
         top: 280px;
@@ -282,7 +282,7 @@ export const RewardCardContainer = styled.div<{
       ${(props) =>
         props.reward == 2 &&
         css`
-          transition: 0.5s ease all;
+          transition: 0.1s ease all;
           transform: scale(1);
           top: 280px;
           right: 0;
@@ -450,7 +450,6 @@ export const AllSlider = styled.div`
   margin-top: 100px;
   padding-left: 20px;
   display: flex;
-  flex-direction: column;
   gap: 20px;
   .slide-container {
     display: flex;

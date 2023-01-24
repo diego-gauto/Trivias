@@ -12,7 +12,7 @@ const RewardSlider = (props: reward_slider) => {
   let [counter, setCounter] = useState<any>(0);
   const { rewards, isInfinite, title, innerWidth } = props;
 
-  const slider = document.querySelector('.scroll-container') as HTMLElement;
+  const slider = document.querySelector('.scroll-container8') as HTMLElement;
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
   const mouseDownHandler = function (e: any) {
@@ -25,6 +25,7 @@ const RewardSlider = (props: reward_slider) => {
       x: e.clientX,
       y: e.clientY,
     };
+    console.log(pos)
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
@@ -42,30 +43,31 @@ const RewardSlider = (props: reward_slider) => {
   };
 
   return (
-    <div className="slide-container">
-      {
-        rewards.map((reward: any, index: number) => {
-          return (
-            <SlideContainer
-              style={{ width: (innerWidth - 40) / 5 }}
-              id="scroll-container" className="scroll-container"
-              onMouseDown={mouseDownHandler}
-            >
-              <div className="text-container">
-                <p className="title-text">
-                  <span>Recompensa bloqueada</span><br />
-                  hasta llegar a {reward.points} puntos
-                </p>
-              </div>
-              <img src={reward?.path} className="image-container" />
+    <div id="scroll-container8" style={{ overflow: "scroll", overflowY: "hidden" }}>
+      <div className="slide-container" onMouseDown={mouseDownHandler}>
+        {
+          rewards.map((reward: any, index: number) => {
+            return (
+              <SlideContainer
+                style={{ width: (innerWidth - 40) / 5 }}
+                className="scroll-container"
+              >
+                <div className="text-container">
+                  <p className="title-text">
+                    <span>Recompensa bloqueada</span><br />
+                    hasta llegar a {reward.points} puntos
+                  </p>
+                </div>
+                <img src={reward?.path} className="image-container" />
 
-              <div className="text-container">
-                {reward.about}
-              </div>
-            </SlideContainer>
-          )
-        })
-      }
+                <div className="text-container">
+                  {reward.about}
+                </div>
+              </SlideContainer>
+            )
+          })
+        }
+      </div>
     </div>
   )
 }
