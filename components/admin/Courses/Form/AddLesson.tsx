@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { addLesson } from "../../../../store/actions/AdminActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import {
   ButtonContain,
@@ -43,6 +42,7 @@ import 'react-quill/dist/quill.snow.css';
 import { LoaderContain } from "../../../Footer/Footer.styled";
 import { MdDelete } from "react-icons/md";
 import { QuizContainer, FormContainer, InputContainer, QuestionContainer, Content } from "../../Quiz/Quiz.styled";
+import { Input2 } from "../../Rewards/Modals/AddReward.styled";
 
 
 const AddLesson = () => {

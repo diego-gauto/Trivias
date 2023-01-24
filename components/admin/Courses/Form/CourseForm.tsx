@@ -7,7 +7,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import {
   Button,
   ButtonContain,
@@ -29,6 +28,7 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
+import { Input2 } from "../../Rewards/Modals/AddReward.styled";
 
 const formSchema = yup.object().shape({
   courseTittle: yup

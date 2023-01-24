@@ -17,7 +17,6 @@ import {
   Selected,
   SelectContain,
 } from "./Select/SelectStyles.styled";
-import { Input2 } from "../../Rewards/Prizes/Modal/Modal.styled";
 import { IconContain } from "./CourseForm.styled";
 import Delete from "./Delete/Delete";
 import {
@@ -51,6 +50,7 @@ import { LoaderContain } from "../../../Footer/Footer.styled";
 import { QuizContainer, FormContainer, InputContainer, QuestionContainer, Content } from "../../Quiz/Quiz.styled";
 import { BackgroundLoader, LoaderImage } from "../../../../screens/Login.styled";
 import uuid from 'react-uuid';
+import { Input2 } from "../../Rewards/Modals/AddReward.styled";
 
 const Edit = () => {
   const routerState = useRouter().query
