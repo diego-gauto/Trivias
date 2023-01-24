@@ -19,6 +19,7 @@ import {
   RewardContainer,
   RewardsTitle,
   RewardCardContainer,
+  AllSlider,
 } from "./Rewards.styled";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
@@ -26,7 +27,7 @@ import RewardSlider from "./Sliders/RewardSlider";
 
 const Rewards = () => {
 
-  const [rewards, setRewards] = useState<any>(true);
+  const [rewards, setRewards] = useState<any>([]);
   const [size, setSize] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
@@ -36,6 +37,14 @@ const Rewards = () => {
 
   //REDISENIO
   const rewardsType = [0, 1, 2];
+  const allSlider = [
+    { type: "points" },
+    // { type: "claim-points" },
+    // { type: "months" },
+    // { type: "claim-months" },
+    // { type: "certificates" },
+    // { type: "claim-certificates" }
+  ]
   const [selectReward, setSelectReward] = useState(0);
   const crownImage = "/images/profile/crown.png"
   const handStarImage = "/images/Rewards/handStar.png"
@@ -48,7 +57,6 @@ const Rewards = () => {
       setSelectReward(index)
     }
   }
-
   const getAllRewards = () => {
     getRewards().then((res) => {
       setRewards(res);
@@ -210,7 +218,15 @@ const Rewards = () => {
           })
         }
       </RewardsTitle>
-      <RewardSlider isInfinite={true} rewards={rewards} />
+      <AllSlider>
+        {
+          allSlider.map((val: any, index: any) => {
+            return (
+              <RewardSlider isInfinite={true} rewards={rewards} title={val.type} key={"Slider Rewards " + index} />
+            )
+          })
+        }
+      </AllSlider>
     </RewardContainer>
   )
 }

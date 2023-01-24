@@ -447,6 +447,11 @@ export const RewardCardContainer = styled.div<{
 
   }
 `;
+export const AllSlider = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 export const Gradient = styled.linearGradient``;
 export const stop = styled.stop``;
 export const MainContain = styled.div`

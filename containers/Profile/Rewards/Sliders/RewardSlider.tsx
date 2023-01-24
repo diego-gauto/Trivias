@@ -1,18 +1,27 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
+import { Container } from 'react-bootstrap';
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import RewardModuleSlider from './RewardModuleSlider';
 import { reward_slider } from "./RewardSlider.styled";
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
   const swiperRef = useRef<SwiperCore>();
+  const [slider, setSlider] = useState([]);
+  const { rewards, isInfinite, title } = props;
+  const getSlider = () => {
+    let allSlider: any = [];
+    let slideMonths: any = [];
+    let slideCertificates: any = [];
 
-  const { isInfinite, rewards } = props;
-  let slideDataArr = [];
-  slideDataArr = rewards;
-  if (slideDataArr) {
-
+    rewards.map((val) => {
+      if (val.type == title) {
+        allSlider.push(val);
+      }
+    })
+    setSlider(allSlider)
   }
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
@@ -46,24 +55,43 @@ const RewardSlider = (props: reward_slider) => {
       }
     }
   };
-
+  useEffect(() => {
+    getSlider();
+  }, [])
   return (
-    <Swiper {...settings} onInit={onInit}>
-      {slideDataArr?.map((element, idx) => (
-        <SwiperSlide key={idx}>
-          {/* <SlideModule
-          type={type}
-          isNew={element.isNew}
-          title={element.title}
-          subtitle={""}
-          level={element.level}
-          imgURL={element.imgURL}
-          number={element.number}
-          professor={element.professor}
-        /> */}
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <Container
+      fluid
+      style={{ overflow: "hidden", padding: 0, margin: 0, backgroundColor: "#ede7f2", paddingTop: 40 }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {
+        slider?.length > 0 ?
+          <Swiper {...settings} onInit={onInit}>
+            {
+              slider?.map((element, idx) => {
+                return (
+                  <SwiperSlide key={idx}>
+                    <RewardModuleSlider
+                      rewards={element}
+                    // type={type}
+                    // isNew={element.isNew}
+                    // title={element.title}
+                    // subtitle={""}
+                    // level={element.level}
+                    // imgURL={element.imgURL}
+                    // number={element.number}
+                    // professor={element.professor}
+                    />
+                  </SwiperSlide>
+                )
+              })
+            }
+          </Swiper>
+          : <p>hola</p>
+      }
+    </Container>
+
   )
 }
 export default RewardSlider;

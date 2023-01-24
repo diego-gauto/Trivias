@@ -1,7 +1,5 @@
-export interface reward_slider {
+export interface reward_info {
   rewards: SlideObj[];
-  isInfinite: boolean;
-  title: string;
 }
 interface SlideObj {
   id: string;
