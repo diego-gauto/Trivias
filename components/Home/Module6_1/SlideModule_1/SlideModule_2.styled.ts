@@ -67,6 +67,7 @@ export const NewTag = styled.div`
 `;
 
 export const ContainerMain = styled.div`
+  padding-block: 20px;
   margin-inline: 15px;
   transition: all 0.2s ease-in-out;
   width: 100%;

@@ -252,7 +252,7 @@ export const addRequest = async (request: any) => {
   return 'exito'
 }
 export const getRequest = async () => {
-  const requestRef = query(collection(db, "requests"), orderBy("createAt"))
+  const requestRef = query(collection(db, "requests"), orderBy("createAt", "desc"))
   let tempData: any = []
   const data = await getDocs(requestRef)
   data.forEach((doc) => {
@@ -260,6 +260,7 @@ export const getRequest = async () => {
   })
   return tempData
 }
+
 export const updateRequest = async (id: any) => {
 
   const docRef = doc(db, 'requests', id);
@@ -268,6 +269,7 @@ export const updateRequest = async (id: any) => {
   })
   return 'exito'
 }
+
 export const addUserReward = async (userRewards: any, userId: any) => {
   const docRef = await setDoc(
     doc(db, "users", userId, "rewards", userRewards.id),

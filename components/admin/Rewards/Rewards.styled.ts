@@ -27,6 +27,35 @@ export const RewardContain = styled.div`
       margin: 0;
     }
   }
+  .request-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    .row-titles {
+      display: flex;
+      background: #6717cd;
+      color: #fff;
+      font-weight: 600;
+      p {
+        padding: 10px;
+        flex: 0 25%;
+        margin: 0;
+      }
+    }
+    .tr {
+      display: flex;
+      border-bottom: 1px solid gray;
+      * {
+        padding: 10px;
+        flex: 0 25%;
+        margin: 0;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
 `;
 export const Reward = styled.div<{ type: any }>`
   display: flex;
