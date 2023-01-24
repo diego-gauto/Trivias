@@ -7,7 +7,6 @@ export const RewardContainer = styled.div`
   gap: 50px;
   width: 100%;
   background-color: #ede7f2;
-  height: 100vh;
   padding-top: 70px;
   p {
     margin: 0;
@@ -448,9 +447,15 @@ export const RewardCardContainer = styled.div<{
   }
 `;
 export const AllSlider = styled.div`
+  margin-top: 100px;
+  padding-left: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  .slide-container {
+    display: flex;
+    gap: 20px;
+  }
 `;
 export const Gradient = styled.linearGradient``;
 export const stop = styled.stop``;

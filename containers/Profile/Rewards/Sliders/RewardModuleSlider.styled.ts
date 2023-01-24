@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const SlideContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   p {
     margin: 0;
@@ -18,5 +19,6 @@ export const SlideContainer = styled.div`
     }
   }
   .image-container {
+    width: 85%;
   }
 `;

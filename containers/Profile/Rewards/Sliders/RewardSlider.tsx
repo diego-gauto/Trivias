@@ -3,91 +3,70 @@ import { Container } from 'react-bootstrap';
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import RewardModuleSlider from './RewardModuleSlider';
-import { reward_slider } from "./RewardSlider.styled";
+import { SlideContainer } from './RewardModuleSlider.styled';
+import { reward_slider } from "./IRewardSlider";
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
   const swiperRef = useRef<SwiperCore>();
-  const { rewards, isInfinite, title } = props;
+  let [counter, setCounter] = useState<any>(0);
+  const { rewards, isInfinite, title, innerWidth } = props;
 
-  let allSlider: any = [];
-  let slideMonths: any = [];
-  let slideCertificates: any = [];
+  const slider = document.querySelector('.scroll-container') as HTMLElement;
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-  rewards.map((val) => {
-    if (val.type == title) {
-      allSlider.push(val);
-    }
-  })
-
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
+    pos = {
+      // The current scroll
+      left: slider.scrollLeft,
+      top: slider.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
   };
 
-  const onMouseEnter = () => {
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.stop();
-    }
+  const mouseMoveHandler = function (e: any) {
+    setCounter(counter++);
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    slider.scrollLeft = pos.left - dx;
   };
 
-  const onMouseLeave = () => {
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.start();
-    }
-  };
-
-  const settings = {
-    loop: isInfinite,
-    autoplay: {
-      delay: 100,
-    },
-    speed: 7000,
-    freeMode: true,
-    slidesPerView: 2,
-    spaceBetween: 0,
-    breakpoints: {
-      1024: {
-        slidesPerView: 5,
-        spaceBetween: 10,
-      }
-    }
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
   };
 
   return (
-    <Container
-      fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0, backgroundColor: "#ede7f2", paddingTop: 40 }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <div className="slide-container">
       {
-        allSlider?.length > 0 ?
-          <Swiper {...settings} onInit={onInit}>
-            {
-              allSlider?.map((element: any, idx: any) => {
-                return (
-                  <SwiperSlide key={"sliderReward" + idx}>
-                    <RewardModuleSlider
-                      rewards={element}
-                    // type={type}
-                    // isNew={element.isNew}
-                    // title={element.title}
-                    // subtitle={""}
-                    // level={element.level}
-                    // imgURL={element.imgURL}
-                    // number={element.number}
-                    // professor={element.professor}
-                    />
-                  </SwiperSlide>
-                )
-              })
-            }
-          </Swiper>
-          : <p>hola</p>
-      }
-    </Container>
+        rewards.map((reward: any, index: number) => {
+          return (
+            <SlideContainer
+              style={{ width: (innerWidth - 40) / 5 }}
+              id="scroll-container" className="scroll-container"
+              onMouseDown={mouseDownHandler}
+            >
+              <div className="text-container">
+                <p className="title-text">
+                  <span>Recompensa bloqueada</span><br />
+                  hasta llegar a {reward.points} puntos
+                </p>
+              </div>
+              <img src={reward?.path} className="image-container" />
 
+              <div className="text-container">
+                {reward.about}
+              </div>
+            </SlideContainer>
+          )
+        })
+      }
+    </div>
   )
 }
 export default RewardSlider;

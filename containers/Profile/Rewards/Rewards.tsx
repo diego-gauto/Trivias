@@ -34,6 +34,7 @@ const Rewards = () => {
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState<any>([]);
   const [timeScore, setTimeScore] = useState<number>(0);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
   //REDISENIO
   const rewardsType = [0, 1, 2];
@@ -100,6 +101,10 @@ const Rewards = () => {
     setTimeScore(timeScore)
   }
 
+
+  window.addEventListener("resize", () => {
+    setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
+  });
   useEffect(() => {
     fetchDB_data()
     getAllRewards();
@@ -113,10 +118,11 @@ const Rewards = () => {
 
   useEffect(() => {
     if (userData != null && level != null) {
-
       setLoading(false);
     }
   }, [level])
+
+
 
   if (loading) {
     return (
@@ -128,10 +134,6 @@ const Rewards = () => {
     )
   }
   /////// REDISENIO
-
-
-
-
   return (
     <RewardContainer>
       <TitleContainer>
@@ -222,7 +224,7 @@ const Rewards = () => {
         {
           allSlider.map((val: any, index: any) => {
             return (
-              <RewardSlider isInfinite={true} rewards={rewards} title={val.type} key={"Slider Rewards " + index} />
+              <RewardSlider isInfinite={true} rewards={rewards} title={val.type} key={"Slider Rewards " + index} innerWidth={innerWidth} />
             )
           })
         }
