@@ -116,6 +116,7 @@ const Register = () => {
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setAuthLoader(true)
     setphone(phoneInput)
+
     if (phoneCode == '+52') {
       if (isValidPhoneNumber(phoneInput)) {
         let tempMonth = false;
@@ -139,8 +140,6 @@ const Register = () => {
           },
         };
         const redirectURL = await signUpCreds(signUpData);
-        console.log(redirectURL);
-
         if (redirectURL == "/auth/RegisterPastUser") {
           setErrorMsg('El correo ingresado ya existe!');
           setError(true);
@@ -152,6 +151,13 @@ const Register = () => {
           setAuthLoader(false);
           setError(true);
           setIsLoading(false);
+        }
+
+        if (redirectURL == "auth/user-not-found") {
+          setIsLoading(true)
+          signUpWithCreds(signUpData).then(() => {
+            window.location.href = "/Purchase?type=subscription";
+          });
         }
         if (redirectURL == "/Preview") {
           setIsLoading(true)
@@ -172,7 +178,6 @@ const Register = () => {
       if (trial) {
         tempMonth = true;
       }
-      var input = document.getElementById("input_1") as HTMLInputElement;
       if (!tempPhoneInput) {
         tempPhoneInput = ""
       }
@@ -188,6 +193,12 @@ const Register = () => {
         },
       };
       const redirectURL = await signUpCreds(signUpData);
+      if (redirectURL == "auth/user-not-found") {
+        setIsLoading(true)
+        signUpWithCreds(signUpData).then(() => {
+          window.location.href = "/Purchase?type=subscription";
+        });
+      }
 
       if (redirectURL == "/auth/RegisterPastUser") {
         setErrorMsg('El correo ingresado ya existe!');

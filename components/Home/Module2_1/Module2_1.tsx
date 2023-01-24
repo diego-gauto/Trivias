@@ -1,12 +1,10 @@
-import DOMPurify from "dompurify"
-
 import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
 import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import {
-  TitleCenter, ModuleContainer,
+  ModuleContainer,
   Tittle,
   Subtittle1,
 } from "../Module2_1/Module2_1.styled";
@@ -18,18 +16,7 @@ export const Module2_1 = (props: IModule2_1) => {
   const { data, img, user } = props;
   const [loading, setLoading] = useState(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
-  const parseTitle = (text: string = "") => {
-    const bold = /\*\*(.*?)\*\*/gm;
-    const html = text.replace(bold, '<span>$1</span>');
-    return <TitleCenter dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;
-  }
   const router = useRouter();
-
-  const scrollToModule2 = () => {
-    window.scrollTo(0, window.innerHeight * 0.75)
-  }
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,6 +24,16 @@ export const Module2_1 = (props: IModule2_1) => {
     }, 3000);
 
   }, [data]);
+
+  const goToPreview = () => {
+    if (user) {
+      router.push("/auth/Register")
+    } else {
+      router.push("/Preview")
+    }
+  }
+
+
 
   return (
     <>
@@ -58,115 +55,12 @@ export const Module2_1 = (props: IModule2_1) => {
           <div className="buttons">
             <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
               onClick={() => router.push("/auth/Register")} />
-            <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Register")} />
+            <PurpleEmptyButton text={"Ver cursos"} onClick={() => { goToPreview() }} />
           </div>
         </div>
         {responsive1023 && <img className="women-second" src="../images/Landing/infoWomen.png" alt="" />}
-        {/* <FirstSectionContainer >
-          <Row >
-            <Col style={{ zIndex: "1" }}>
-
-              <LeftImage >
-                <Row xs={12} sm={6} md={6} lg={7}>
-                  <TittleContainer  >
-                    <Tittle  >Aprende a aplicar uñas desde cero</Tittle>
-                  </TittleContainer>
-                </Row>
-                <Row xs={12} sm={6} md={6} lg={7}>
-                  <Subtittles  >
-                    <Subtittle1  >Somos la plataforma de aprendizaje en línea que
-                      te permite disfrutar de cientos de clases sobre uñas</Subtittle1>
-
-                    <Subtittle2> y más servicios de belleza.</Subtittle2>
-
-                  </Subtittles>
-                </Row>
-
-                <Row xs={12} sm={6} md={6} lg={7}>
-
-                  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
-                    onClick={() => router.push("/auth/Register")} />
-
-                </Row>
-                <Row xs={12} sm={6} md={6} lg={7}>
-
-                  <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Register")} />
-
-                </Row>
-
-              </LeftImage>
-            </Col>
-
-            <Col>
-
-              <RightImage>
-
-                <ModuleContainerBG2alt style={{ backgroundImage: `url(${BG2.src})`, backgroundSize: "100%" }}></ModuleContainerBG2alt>
-                <ModuleContainerBG1alt id="mujeresGonvar" style={{ backgroundImage: `url(${BG1.src})`, opacity: `${loading ? 1 : 0}` }}></ModuleContainerBG1alt>
-
-
-              </RightImage>
-            </Col>
-          </Row>
-
-        </FirstSectionContainer > */}
 
       </ModuleContainer >
-      {/* <ModuleContainer_Mobile id="mobileView">
-        <FirstSectionContainer_Mobile >
-          <Row>
-            <RightImage_Mobile>
-
-
-              <ModuleContainerBG2alt_Mobile style={{ backgroundImage: `url(${Background6.src})`, backgroundSize: "100%" }}>
-                <ModuleContainerBG3alt_Mobile style={{ backgroundImage: `url(${BG5.src})`, backgroundSize: "100%" }}></ModuleContainerBG3alt_Mobile>
-                <ModuleContainerBG1alt_Mobile style={{ backgroundImage: `url(${BG7.src})` }}></ModuleContainerBG1alt_Mobile>
-              </ModuleContainerBG2alt_Mobile>
-
-
-
-            </RightImage_Mobile>
-          </Row>
-          <Row >
-            <Col style={{ zIndex: "1", paddingTop: "55px", marginBottom: `${responsive500 ? "60px" : ""}` }}>
-
-              <LeftImage_Mobile id="textMobile" >
-                <Row xs={12} sm={6} md={6} lg={7}>
-                  <TittleContainer_Mobile  >
-                    <Tittle_Mobile  >Aprende a aplicar uñas desde cero</Tittle_Mobile>
-                  </TittleContainer_Mobile>
-                </Row>
-                <Row xs={12} sm={6} md={6} lg={7}>
-                  <Subtittles_Mobile  >
-                    <Subtittle1_Mobile  >Somos la plataforma de aprendizaje en línea que
-                      te permite disfrutar de cientos de clases sobre uñas</Subtittle1_Mobile>
-
-                    <Subtittle2_Mobile> y más servicios de belleza.</Subtittle2_Mobile>
-
-                  </Subtittles_Mobile>
-                </Row>
-
-                <Row xs={12} sm={6} md={6} lg={7}>
-                  <ButtonsContainerMobile>
-                    <ColContainerLeft>  <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
-                      onClick={() => router.push("/auth/Register")} /></ColContainerLeft>
-                    <ColContainerRight style={{ marginLeft: "33.3%" }}> <PurpleEmptyButton text={"Ver cursos"} onClick={() => router.push("/auth/Preview")} /></ColContainerRight>
-                  </ButtonsContainerMobile>
-
-                </Row>
-
-              </LeftImage_Mobile>
-            </Col>
-
-
-
-
-
-          </Row>
-
-        </FirstSectionContainer_Mobile >
-
-      </ModuleContainer_Mobile > */}
     </>
   )
 }

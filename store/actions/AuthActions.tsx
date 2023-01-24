@@ -135,7 +135,6 @@ export const signUpCreds = async (signUpData: { credentials: any; }) => {
     credentials,
   } = signUpData;
   const hasCurrentUserVar = await hasCurrentUser(credentials.email);
-
   if (hasCurrentUserVar) {
     localStorage.setItem("pastUserEmail", credentials.email);
     return SIGNUP_PAST_USER_PATH;
