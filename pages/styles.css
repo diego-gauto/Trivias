@@ -177,3 +177,6 @@ input[type="text"]::-webkit-credentials-auto-fill-button {
 .ant-space .ant-progress-text{
   color: #3F1168 !important;
 }
+.paypal .paypal-buttons .buttons-container .paypal-button-container .paypal-button-tagline{
+  display: none;
+}
