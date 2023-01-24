@@ -83,18 +83,19 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   }
   const detachPayment = async (card: any) => {
     setDeleteLoad(!loader);
-    if (data.membership.paymentMethod == card.cardId) {
-      alert('Esta tarjeta es su método de pago predeterminado, por favor de asiganar otra tarjeta como método de pago predeterminado antes de eliminar esta tarjeta!')
-      setDeleteLoad(false);
-    } else {
-      const detach = httpsCallable(functions, 'detachPaymentMethod');
-      detach(card.cardId).then(async (res: any) => {
-        deletePaymentMethod(data.id, card.id).then(() => {
-          setDeleteLoad(false);
-          handleClick(true);
-        })
+    const detach = httpsCallable(functions, 'detachPaymentMethod');
+    detach(card.cardId).then(async (res: any) => {
+      deletePaymentMethod(data.id, card.id).then(() => {
+        setDeleteLoad(false);
+        handleClick(true);
       })
-    }
+    })
+    // if (data.membership.paymentMethod == card.cardId) {
+    //   alert('Esta tarjeta es su método de pago predeterminado, por favor de asiganar otra tarjeta como método de pago predeterminado antes de eliminar esta tarjeta!')
+    //   setDeleteLoad(false);
+    // } else {
+
+    // }
   }
   useEffect(() => {
     setUser({ ...data })
