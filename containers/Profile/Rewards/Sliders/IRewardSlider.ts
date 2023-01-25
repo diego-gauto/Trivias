@@ -1,8 +1,8 @@
 export interface reward_slider {
   rewards: SlideObj[];
-  isInfinite: boolean;
   title: string;
   innerWidth: number;
+  indexSlider: number;
 }
 interface SlideObj {
   id: string;

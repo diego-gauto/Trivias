@@ -40,7 +40,7 @@ const Rewards = () => {
   const rewardsType = [0, 1, 2];
   const allSlider = [
     { type: "points" },
-    // { type: "claim-points" },
+    { type: "claim-points" },
     // { type: "months" },
     // { type: "claim-months" },
     // { type: "certificates" },
@@ -224,7 +224,13 @@ const Rewards = () => {
         {
           allSlider.map((val: any, index: any) => {
             return (
-              <RewardSlider isInfinite={true} rewards={rewards} title={val.type} key={"Slider Rewards " + index} innerWidth={innerWidth} />
+              <RewardSlider
+                rewards={rewards}
+                title={val.type}
+                key={"Slider Rewards " + index}
+                innerWidth={innerWidth}
+                indexSlider={index}
+              />
             )
           })
         }

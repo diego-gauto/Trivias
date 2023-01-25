@@ -141,6 +141,9 @@ h1,th{
 .scroll-container5::-webkit-scrollbar{
   display: none;
 }
+.scroll::-webkit-scrollbar{
+  display: none;
+}
 /* .scroll-container::-webkit-scrollbar-thumb {
   background: #6717cd;
   border-radius: 10px;
