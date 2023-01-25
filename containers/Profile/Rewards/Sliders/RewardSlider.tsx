@@ -8,11 +8,11 @@ import { reward_slider } from "./IRewardSlider";
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
-  const swiperRef = useRef<SwiperCore>();
+
   let [counter, setCounter] = useState<any>(0);
   const { rewards, isInfinite, title, innerWidth } = props;
 
-  const slider = document.querySelector('.scroll-container8') as HTMLElement;
+  const slider = document.querySelector('.scroll-container') as HTMLElement;
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
   const mouseDownHandler = function (e: any) {
@@ -43,13 +43,13 @@ const RewardSlider = (props: reward_slider) => {
   };
 
   return (
-    <div id="scroll-container8" style={{ overflow: "scroll", overflowY: "hidden" }}>
+    <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
       <div className="slide-container" onMouseDown={mouseDownHandler}>
         {
           rewards.map((reward: any, index: number) => {
             return (
               <SlideContainer
-                style={{ width: (innerWidth - 40) / 5 }}
+                style={{ flexShrink: 0, width: (innerWidth - 40) / 5 }}
                 className="scroll-container"
               >
                 <div className="text-container">

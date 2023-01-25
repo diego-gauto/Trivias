@@ -394,6 +394,17 @@ const Purchase = () => {
     }
   }, [isLoading])
 
+
+  const test = async () => {
+    const test = httpsCallable(functions, 'sendReceipt');
+    let data = {
+      email: "kevinhm53@gmail.com"
+    }
+    await test(data).then(async (res: any) => {
+      console.log("success");
+    })
+  }
+
   return (
     <>
       {isLoading ? <BackgroundLoader>
@@ -604,6 +615,7 @@ const Purchase = () => {
                     />}
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
+                  <button onClick={test}>test</button>
                 </div>
               </div>
             </div>

@@ -449,7 +449,7 @@ export const RewardCardContainer = styled.div<{
 export const AllSlider = styled.div`
   margin-top: 100px;
   padding-left: 20px;
-  display: flex;
+
   gap: 20px;
   .slide-container {
     display: flex;
