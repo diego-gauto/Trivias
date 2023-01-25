@@ -6,7 +6,7 @@ export const RewardContainer = styled.div`
   flex-direction: column;
   gap: 50px;
   width: 100%;
-  background-color: #ede7f2;
+  background: linear-gradient(180deg, #ede7f2 10%, #cfc0dc 100%);
   padding-top: 70px;
   p {
     margin: 0;

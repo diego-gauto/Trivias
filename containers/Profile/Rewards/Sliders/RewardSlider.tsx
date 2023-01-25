@@ -25,7 +25,6 @@ const RewardSlider = (props: reward_slider) => {
       x: e.clientX,
       y: e.clientY,
     };
-    console.log(pos)
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
@@ -51,6 +50,7 @@ const RewardSlider = (props: reward_slider) => {
               <SlideContainer
                 style={{ flexShrink: 0, width: (innerWidth - 40) / 5 }}
                 className="scroll-container"
+                key={index + "Slider"}
               >
                 <div className="text-container">
                   <p className="title-text">
@@ -61,8 +61,11 @@ const RewardSlider = (props: reward_slider) => {
                 <img src={reward?.path} className="image-container" />
 
                 <div className="text-container">
-                  {reward.about}
+                  <p className="about-text">
+                    {reward.about}
+                  </p>
                 </div>
+
               </SlideContainer>
             )
           })
