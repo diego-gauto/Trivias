@@ -143,21 +143,21 @@ const Homepage = () => {
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule loggedIn={loggedIn} user={userData} courseId={courses} />
       {courses &&
-        <Module4_Carousel type={'subscription'} isInfinite={true} title={courseGonvarPlus.courseTittle} slideData={
+        <Module4_Carousel user={userData} course={courseGonvarPlus} type={'subscription'} isInfinite={true} title={courseGonvarPlus.courseTittle} slideData={
           courses
         } />
       }
       {/* Nails Master Module Card */}
       <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} num={1} loggedIn={loggedIn} user={userData} />
       {courseNailsData &&
-        <Module4_Carousel type={"product"} isInfinite={true} title={courseNailsData.courseTittle} slideData={
+        <Module4_Carousel user={userData} course={courseNailsData} type={"product"} isInfinite={true} title={courseNailsData.courseTittle} slideData={
           courseNailsData.lessons
         } />
       }
       {/* SEP Module Card */}
       <CourseModuleContainer courseId={SEP_COURSE_ID} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&
-        <Module4_Carousel type={"product"} isInfinite={true} title={courseSEPData.courseTittle} slideData={
+        <Module4_Carousel user={userData} course={courseSEPData} type={"product"} isInfinite={true} title={courseSEPData.courseTittle} slideData={
           courseSEPData.lessons
         } />
       }

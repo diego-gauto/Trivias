@@ -2,22 +2,24 @@ import Link from "next/link";
 import { useState } from "react";
 import { Image, Row } from "react-bootstrap";
 import { number } from "yup";
+import Modal1 from "../../../Catalogue/Module4/Modal/Modal1";
 import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text01_p, Text02, Text02_p, Text03, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
-  const { imgURL, title, subtitle, number, type, level, professor } = props;
+  const { imgURL, title, subtitle, number, type, level, professor, user, course } = props;
+  const [show, setShow] = useState(false);
   const sendTo = () => {
-
+    setShow(true);
   }
   return (
     <SlideModuleContainer>
       <div className="hover">
         <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
         <div className="text-overlay">
-          <button onClick={sendTo}>
+          {type == "subscription" && <button onClick={sendTo}>
             Más información
-          </button>
+          </button>}
         </div>
       </div>
       {type == "subscription" ? <TextSectionWrapper>
@@ -49,6 +51,7 @@ export const SlideModule = (props: ISlideModule) => {
             <Text02_p><span>de</span> default</Text02_p>
           </Row> */}
         </TextSectionWrapper>}
+      <Modal1 show={show} setShow={setShow} course={course} user={user} />
     </SlideModuleContainer>
   )
 }

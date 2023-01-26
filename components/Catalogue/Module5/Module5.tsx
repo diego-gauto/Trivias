@@ -6,14 +6,8 @@ import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
 import Modal1 from "../Module4/Modal/Modal1";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css/scrollbar';
-import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
-SwiperCore.use([Scrollbar, Mousewheel]);
-
 import {
   ButtonContain,
   PurpleButton,
@@ -30,7 +24,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  const swiperRef = useRef<SwiperCore>();
+
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const slider = document.querySelector('.scroll-container3') as HTMLElement;
 
