@@ -203,11 +203,22 @@ export const RewardsTitle = styled.div`
     position: absolute;
     top: 0;
     right: 0;
+    transform-origin: top right;
+    @media (max-width: 1500px) {
+      transform: scale(0.85);
+    }
+    @media (max-width: 1300px) {
+      transform: scale(0.75);
+    }
+    @media (max-width: 1150px) {
+      transform: scale(0.65);
+    }
     @media (max-width: 1023px) {
       top: 285px;
     }
     @media (max-width: 550px) {
       top: 240px;
+      transform: scale(0.42);
     }
   }
 `;
@@ -224,188 +235,70 @@ export const RewardCardContainer = styled.div<{
  cursor: pointer;
  transition: 0.25s ease all;
   ${(props) =>
-    props.type == 0 &&
+    props.type == "points" &&
     css<{ reward: any }>`
       top: 0;
       right: 0;
       background: linear-gradient(135deg, #fd8608 10%, #9a2fea 100%);
       z-index: 12;
-
       box-shadow: 65px 15px 40px -15px black;
       transform-origin: top right;
-      @media (max-width: 1500px) {
-        transform: scale(0.85);
-      }
-      @media (max-width: 1300px) {
-        transform: scale(0.75);
-      }
-      @media (max-width: 1150px) {
-        transform: scale(0.65);
-      }
-      @media (max-width: 550px) {
-        transform: scale(0.42);
-      }
       ${(props) =>
-        props.reward == 1 &&
+        props.reward == "months" &&
         css`
           transform: scale(0.8);
-
           z-index: 9;
-          @media (max-width: 1500px) {
-            transform: scale(0.7);
-          }
-          @media (max-width: 1300px) {
-            transform: scale(0.62);
-          }
-          @media (max-width: 1150px) {
-            transform: scale(0.55);
-          }
-          @media (max-width: 550px) {
-            transform: scale(0.36);
-          }
         `}
       ${(props) =>
-        props.reward == 2 &&
+        props.reward == "certificates" &&
         css`
           transform: scale(0.6);
-
           z-index: 7;
-          @media (max-width: 1500px) {
-            transform: scale(0.6);
-          }
-          @media (max-width: 1300px) {
-            transform: scale(0.52);
-          }
-          @media (max-width: 1150px) {
-            transform: scale(0.45);
-          }
-          @media (max-width: 550px) {
-            transform: scale(0.3);
-          }
         `}
     `}
   ${(props) =>
-    props.type == 1 &&
+    props.type == "months" &&
     css<{ reward: any }>`
       top: 185px;
       right: 0;
       background: linear-gradient(135deg, #10c576 50%, #9a2fea 100%);
       z-index: 8;
       transform: scale(0.8);
-
       box-shadow: 65px 15px 40px -15px black;
       transform-origin: top right;
-      @media (max-width: 1500px) {
-        transform: scale(0.7);
-        top: 155px;
-      }
-      @media (max-width: 1300px) {
-        top: 135px;
-        transform: scale(0.62);
-      }
-      @media (max-width: 1150px) {
-        top: 115px;
-        transform: scale(0.55);
-      }
-      @media (max-width: 550px) {
-        top: 80px;
-        transform: scale(0.36);
-      }
       ${(props) =>
-        props.reward == 1 &&
+        props.reward == "months" &&
         css`
           transform: scale(1);
-
           top: 125px;
           right: 0;
           z-index: 12;
           box-shadow: 65px -15px 40px -15px black, 204px 15px 40px -15px black;
-          @media (max-width: 1500px) {
-            transform: scale(0.85);
-            top: 110px;
-          }
-          @media (max-width: 1300px) {
-            transform: scale(0.75);
-            top: 100px;
-          }
-          @media (max-width: 1150px) {
-            top: 90px;
-            transform: scale(0.65);
-          }
-          @media (max-width: 550px) {
-            top: 70px;
-            transform: scale(0.42);
-          }
         `}
       ${(props) =>
-        props.reward == 2 &&
+        props.reward == "certificates" &&
         css`
           box-shadow: 65px -15px 40px -15px black;
-          top: 120px;
-          @media (max-width: 1500px) {
-            top: 115px;
-          }
-          @media (max-width: 1300px) {
-            top: 100px;
-          }
-          @media (max-width: 1150px) {
-            top: 85px;
-          }
-          @media (max-width: 1150px) {
-            top: 60px;
-          }
+          top: 100px;
         `}
     `}
   ${(props) =>
-    props.type == 2 &&
+    props.type == "certificates" &&
     css<{ reward: any }>`
       top: 340px;
       right: 0;
       background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
       z-index: 7;
       transform: scale(0.6);
-
       transform-origin: top right;
-      @media (max-width: 1500px) {
-        top: 280px;
-        transform: scale(0.6);
-      }
-      @media (max-width: 1300px) {
-        top: 250px;
-        transform: scale(0.52);
-      }
-      @media (max-width: 1150px) {
-        top: 215px;
-        transform: scale(0.45);
-      }
-      @media (max-width: 550px) {
-        top: 150px;
-        transform: scale(0.3);
-      }
       ${(props) =>
-        props.reward == 2 &&
+        props.reward == "certificates" &&
         css`
           transform: scale(1);
-          top: 280px;
+          top: 235px;
           right: 0;
           z-index: 12;
           box-shadow: 65px -15px 40px -15px black;
-          @media (max-width: 1500px) {
-            top: 245px;
-            transform: scale(0.85);
-          }
-          @media (max-width: 1300px) {
-            top: 220px;
-            transform: scale(0.75);
-          }
-          @media (max-width: 1150px) {
-            top: 185px;
-            transform: scale(0.65);
-          }
-          @media (max-width: 550px) {
-            top: 130px;
-            transform: scale(0.42);
-          }
         `}
     `}
   border-radius: 300px 0 0 300px;
@@ -497,17 +390,17 @@ export const RewardCardContainer = styled.div<{
       stroke-width: 34px;
       stroke-dasharray: 565;
       ${(props) =>
-        props.reward == 0 &&
+        props.reward == "points" &&
         css<{ progress: number }>`
           stroke-dashoffset: ${(props) => props.progress};
         `}
       ${(props) =>
-        props.reward == 1 &&
+        props.reward == "months" &&
         css<{ timeProgress: number }>`
           stroke-dashoffset: ${(props) => props.timeProgress};
         `}
         ${(props) =>
-          props.reward == 2 &&
+          props.reward == "certificates" &&
           css<{ certificateProgress: number }>`
             stroke-dashoffset: ${(props) => props.certificateProgress};
           `}
@@ -563,10 +456,10 @@ export const RewardCardContainer = styled.div<{
 export const AllSlider = styled.div`
   margin-top: 50px;
   @media (max-width: 1023px) {
-    margin-top: 370px;
+    margin-top: 350px;
   }
   @media (max-width: 550px) {
-    margin-top: 250px;
+    margin-top: 220px;
   }
   h1 {
     padding-left: 20px;
