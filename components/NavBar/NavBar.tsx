@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, SIGNUP_PATH } from "../../constants/paths";
-import RespLevel from "../../containers/Profile/Rewards/UserLevel/RespLevel";
-import UserLevel from "../../containers/Profile/Rewards/UserLevel/UserLevel";
 import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {

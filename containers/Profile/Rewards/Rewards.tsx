@@ -34,13 +34,14 @@ const Rewards = () => {
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState<any>([]);
   const [timeScore, setTimeScore] = useState<number>(0);
+  const [rewardTexts, setrewardTexts] = useState([]);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-
+  const [rewardsTypes, setrewardsTypes] = useState([]);
   //REDISENIO
   const rewardsType = [
     "points",
     "months",
-    "certificates"
+    "certificates",
   ];
   const allSlider = [
     { type: "points" },
@@ -64,7 +65,15 @@ const Rewards = () => {
   const getAllRewards = () => {
     getRewards().then((res) => {
       setRewards(res);
+      getNextRewards(res);
+      getRewardTexts();
     })
+  }
+  const getNextRewards = (rewards: any) => {
+    console.log(userData.score)
+  }
+  const getRewardTexts = () => {
+
   }
   try {
     var userDataAuth = useAuth();
@@ -110,14 +119,14 @@ const Rewards = () => {
   });
   useEffect(() => {
     fetchDB_data()
-    getAllRewards();
+
   }, [])
 
   useEffect(() => {
     if (userData != null) {
-      getDate();
+      getAllRewards();
     }
-  }, [userData, size]);
+  }, [userData]);
 
   useEffect(() => {
     if (userData != null && level != null) {
