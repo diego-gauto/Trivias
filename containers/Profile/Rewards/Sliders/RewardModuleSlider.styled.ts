@@ -8,7 +8,6 @@ export const SlideContainer = styled.div<{ type: string; innerWidth: number }>`
   position: relative;
   flex-shrink: 0;
   width: ${(props) => (props.innerWidth - 40) / 5}px;
-  
   @media (max-width: 1023px) {
     gap: 10px;
   }
@@ -86,4 +85,16 @@ export const SlideContainer = styled.div<{ type: string; innerWidth: number }>`
 `;
 export const BackgroundSlide = styled.div<{ type: string }>`
   padding-top: 20px;
+  .un-claimed {
+    padding: 30px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #3f1168;
+    @media (max-width: 550px) {
+      font-size: 14px;
+    }
+    @media (max-width: 400px) {
+      font-size: 10px;
+    }
+  }
 `;

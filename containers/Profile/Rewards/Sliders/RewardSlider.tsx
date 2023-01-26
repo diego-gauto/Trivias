@@ -103,38 +103,44 @@ const RewardSlider = (props: reward_slider) => {
       <h1>
         Recompensas {texts.header}
       </h1>
-      <div id="scroll-container" className={`scroll-container-${indexSlider} scroll`} style={{ overflow: "scroll", overflowY: "hidden" }}>
-        <div className="slide-container" onMouseDown={mouseDownHandler}>
-          {
-            slides.map((reward: any, index: number) => {
-              return (
-                <SlideContainer
-                  innerWidth={innerWidth}
-                  className="scroll-container"
-                  key={index + "Slider"}
-                  type={type}
-                >
-                  <div className="text-container">
-                    <p className="title-text">
-                      <span>{texts.title}</span><br />
-                      {texts.scoreText} {reward.points && reward.points + " puntos"}
-                      {reward.months ? (reward.months == 1 ? reward.months + " mes" : reward.months + " meses") : ""}
-                      {reward.certificates ? (reward.certificates == 1 ? reward.certificates + " certificado" : reward.certificates + " certificados") : ""}
-                    </p>
-                  </div>
-                  <img src={reward?.path} className="image-container" />
-                  <div className="text-container">
-                    <p className="about-text">
-                      {reward.about}
-                    </p>
-                  </div>
+      {
+        slides.length > 0
+          ?
+          <div id="scroll-container" className={`scroll-container-${indexSlider} scroll`} style={{ overflow: "scroll", overflowY: "hidden" }}>
+            <div className="slide-container" onMouseDown={mouseDownHandler}>
+              {
+                slides.map((reward: any, index: number) => {
+                  return (
+                    <SlideContainer
+                      innerWidth={innerWidth}
+                      className="scroll-container"
+                      key={index + "Slider"}
+                      type={type}
+                    >
+                      <div className="text-container">
+                        <p className="title-text">
+                          <span>{texts.title}</span><br />
+                          {texts.scoreText} {reward.points && reward.points + " puntos"}
+                          {reward.months ? (reward.months == 1 ? reward.months + " mes" : reward.months + " meses") : ""}
+                          {reward.certificates ? (reward.certificates == 1 ? reward.certificates + " certificado" : reward.certificates + " certificados") : ""}
+                        </p>
+                      </div>
+                      <img src={reward?.path} className="image-container" />
+                      <div className="text-container">
+                        <p className="about-text">
+                          {reward.about}
+                        </p>
+                      </div>
 
-                </SlideContainer>
-              )
-            })
-          }
-        </div>
-      </div>
+                    </SlideContainer>
+                  )
+                })
+              }
+            </div>
+          </div>
+          : <p className="un-claimed">Sin Recompensas Reclamadas...</p>
+      }
+
     </BackgroundSlide>
   )
 }

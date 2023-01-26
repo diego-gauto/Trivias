@@ -28,21 +28,12 @@ import RewardSlider from "./Sliders/RewardSlider";
 const Rewards = () => {
 
   const [rewards, setRewards] = useState<any>([]);
-  const [size, setSize] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState<any>([]);
-  const [timeScore, setTimeScore] = useState<number>(0);
-  const [rewardTexts, setrewardTexts] = useState([]);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  const [rewardsTypes, setrewardsTypes] = useState([]);
-  //REDISENIO
-  const rewardsType = [
-    "points",
-    "months",
-    "certificates",
-  ];
+  const [rewardsTypes, setRewardsTypes] = useState([]);
   const allSlider = [
     { type: "points" },
     { type: "claim-points" },
@@ -66,14 +57,30 @@ const Rewards = () => {
     getRewards().then((res) => {
       setRewards(res);
       getNextRewards(res);
-      getRewardTexts();
     })
   }
   const getNextRewards = (rewards: any) => {
-    console.log(userData.score)
+
   }
   const getRewardTexts = () => {
-
+    let arrayRewards: any = [
+      {
+        type: "points",
+        scoreType: "puntaje",
+        score: userData.score,
+      },
+      {
+        type: "months",
+        scoreType: "meses",
+        score: "",
+      },
+      {
+        type: "certificates",
+        scoreType: "certificados",
+        score: "",
+      },
+    ];
+    setRewardsTypes(arrayRewards)
   }
   try {
     var userDataAuth = useAuth();
@@ -103,16 +110,6 @@ const Rewards = () => {
       return false
     }
   }
-  const getDate = () => {
-    let tempToday: number = new Date().getTime() / 1000;
-    let tempDate: number = userData.membership?.startDate;
-    let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
-    if (tempDate == 0) {
-      timeScore = 0;
-    }
-    setTimeScore(timeScore)
-  }
-
 
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
@@ -125,6 +122,8 @@ const Rewards = () => {
   useEffect(() => {
     if (userData != null) {
       getAllRewards();
+      getRewardTexts();
+      console.log(userData)
     }
   }, [userData]);
 
@@ -172,7 +171,7 @@ const Rewards = () => {
         </div>
         <div className="reward-card-container">
           {
-            rewardsType.map((val: any, index: any) => {
+            rewardsTypes.map((val: any, index: any) => {
               return (
                 <RewardCardContainer
                   key={"RewardsCard " + index}
@@ -180,8 +179,8 @@ const Rewards = () => {
                   progress={380}
                   timeProgress={380}
                   certificateProgress={380}
-                  type={val}
-                  onClick={() => changeRewardPosition(val)}
+                  type={val.type}
+                  onClick={() => changeRewardPosition(val.type)}
                 >
                   <div className="circle-level">
                     <img src={crownImage} className="crown" />
@@ -203,11 +202,13 @@ const Rewards = () => {
                       <AiOutlineStar className="icon" />
                       <p className="texts">
                         <span className="main">RECOMPENSAS</span><br />
-                        por puntaje
+                        por {val.scoreType}
                       </p>
                     </div>
                     <p className="texts">
-                      <span className="sub">2300 puntos </span>
+                      <span className="sub">
+                        {val.type == "points" && val.score + " puntos"}
+                      </span>
                       <br />en total
                     </p>
                   </div >
