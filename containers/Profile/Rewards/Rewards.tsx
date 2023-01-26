@@ -37,7 +37,11 @@ const Rewards = () => {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
   //REDISENIO
-  const rewardsType = [0, 1, 2];
+  const rewardsType = [
+    "points",
+    "months",
+    "certificates"
+  ];
   const allSlider = [
     { type: "points" },
     { type: "claim-points" },
@@ -45,16 +49,16 @@ const Rewards = () => {
     { type: "claim-months" },
     { type: "certificates" }
   ]
-  const [selectReward, setSelectReward] = useState(0);
+  const [selectReward, setSelectReward] = useState("points");
   const crownImage = "/images/profile/crown.png"
   const handStarImage = "/images/Rewards/handStar.png"
 
-  const changeRewardPosition = (index: number) => {
-    if (index == selectReward) {
-      setSelectReward(0)
+  const changeRewardPosition = (val: string) => {
+    if (val == selectReward) {
+      setSelectReward("points")
     }
     else {
-      setSelectReward(index)
+      setSelectReward(val)
     }
   }
   const getAllRewards = () => {
@@ -168,8 +172,7 @@ const Rewards = () => {
                   timeProgress={380}
                   certificateProgress={380}
                   type={val}
-                  className={`contain-${val}`}
-                  onClick={() => changeRewardPosition(index)}
+                  onClick={() => changeRewardPosition(val)}
                 >
                   <div className="circle-level">
                     <img src={crownImage} className="crown" />
