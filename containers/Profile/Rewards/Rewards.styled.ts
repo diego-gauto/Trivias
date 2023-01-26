@@ -454,7 +454,10 @@ export const RewardCardContainer = styled.div<{
   }
 `;
 export const AllSlider = styled.div`
-  margin-top: 50px;
+  margin-top: 90px;
+  @media (max-width: 1500px) {
+    margin-top: 50px;
+  }
   @media (max-width: 1023px) {
     margin-top: 350px;
   }
