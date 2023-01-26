@@ -1,23 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import InputMask from "react-input-mask";
 
-import { collection, DocumentData, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { FaCheck, FaArrowRight } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
-
-import SwiperCore, { Autoplay, Pagination } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-SwiperCore.use([Autoplay, Pagination]);
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { Background, BackgroundLoader, LoaderContain, LoaderImage, PurpleButton2 } from "../../../screens/Login.styled";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
@@ -36,7 +31,6 @@ import ModalError from "./Modal1/ModalError";
 import ErrorModal from "../../../components/Error/ErrorModal";
 
 const Purchase = () => {
-  const swiperRef = useRef<SwiperCore>();
   const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
@@ -65,7 +59,6 @@ const Purchase = () => {
   const router = useRouter()
   const { type, id } = router.query;
   const [loader, setLoader] = useState<any>(false);
-  const style: any = { color: "gold" };
 
   const subscription = {
     price: 149.00,
@@ -143,8 +136,8 @@ const Purchase = () => {
     }
   }, [])
 
-  const setDefault = (card: any, idx: any) => {
-    setCard({ ...card, brand: card.brand, last4: card.last4, paymentMethod: card.cardId });
+  const setDefault = (idx: any) => {
+    setCard({ ...card, brand: cards[idx].brand, last4: cards[idx].last4, paymentMethod: cards[idx].cardId });
     defaultCard.forEach((element: any, index: any) => {
       if (index == idx) {
         defaultCard[index] = true
@@ -159,7 +152,8 @@ const Purchase = () => {
     setLoader(true);
     if ((!cardInfo && !payment && plan.method !== 'paypal') || (!cardInfo && payment && !card.paymentMethod)) {
       setError(true);
-      setErrorMsg("Por favor seleccione un método de pago!")
+      setErrorMsg("Por favor seleccione un método de pago!");
+      setLoader(false);
     }
     if (cardInfo) {
       delete card.brand
@@ -192,6 +186,7 @@ const Purchase = () => {
       setCard({ ...card, status: false });
       setProcess(false);
       setConfirmation(true);
+      FinishPayment();
     }
     if (plan.method == 'paypal') {
       setPaypal(!paypal);
@@ -199,6 +194,8 @@ const Purchase = () => {
   }
 
   const FinishPayment = async () => {
+    console.log(card);
+
     let invoice = {
       amount: 0,
       userName: userData.name,
@@ -258,6 +255,8 @@ const Purchase = () => {
           amount: product.price,
           method: 'stripe'
         }
+        console.log(data);
+
         const pay = httpsCallable(functions, 'payWithStripeCourse');
         await pay(data).then((res: any) => {
           if ("raw" in res.data) {
@@ -475,21 +474,34 @@ const Purchase = () => {
                 <div className="stripe">
                   <div className="option">
                     <input type="radio" checked={cardInfo} onClick={() => {
-                      setPayment(false),
-                        setCardInfo(!cardInfo),
-                        setPlan({ method: 'stripe' })
+                      setPayment(false);
+                      setCardInfo(!cardInfo);
+                      setPlan({ method: 'stripe' });
+                      delete card.paymentMethod;
+                      setCard({ ...card, cardId: "" })
                     }} />
                     <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
                   </div>
-                  {/* <div className="option">
+                  <div className="option">
                     <input type="radio" checked={payment} onClick={() => {
                       setPayment(!payment),
                         setCardInfo(false),
                         setPlan({ method: 'stripe' })
+                      setCard({ ...card, cardId: "" })
                     }} />
                     <p>Pagaré con <span>tarjetas guardadas</span></p>
-                  </div> */}
-                  <div className="form-row">
+                  </div>
+                  {payment && <select className="cards" onChange={(e) => {
+                    setDefault(e.target.value)
+                  }}>
+                    <option value="">--</option>
+                    {cards.map((x: any, idC: number) => {
+                      return (
+                        <option value={idC}>{x.last4}</option>
+                      )
+                    })}
+                  </select>}
+                  {!payment && !card.paymentMethod && <div className="form-row">
                     <label>Número de tarjeta</label>
                     <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
                       setCard((card: any) => ({ ...card, number: e.target.value }));
@@ -500,7 +512,7 @@ const Purchase = () => {
                         setCard((card: any) => ({ ...card, holder: e.target.value }));
                       }} />
                     </div>
-                  </div>
+                  </div>}
                   <div style={{ "display": "flex", "justifyContent": "space-between" }}>
                     <div className="form-row">
                       <label>Fecha de expiración</label>

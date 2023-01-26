@@ -33,7 +33,6 @@ export const VideoContain = styled.div`
     }
   }
   .absolute {
-    max-height: 570px;
     @media (max-width: 1450px) {
       height: auto !important;
     }

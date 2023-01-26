@@ -181,7 +181,6 @@ export const Module6_1 = (props: IModule6_1) => {
               <div className="yellow"></div>
             </div>
             <MoreText>
-              <MoreText_1>Trabaja con nosotros</MoreText_1>
               <MoreText_2>Cursos</MoreText_2>
               <MoreText_3>Tienda</MoreText_3>
             </MoreText>
@@ -189,13 +188,13 @@ export const Module6_1 = (props: IModule6_1) => {
           <PineappleTextContainer>
             <FooterAText >
               <MoreTextMobile>
-                <MoreText_1Mobile>Trabaja con nosotros</MoreText_1Mobile>
                 <MoreText_2Mobile>Cursos</MoreText_2Mobile>
                 <MoreText_3Mobile>Tienda</MoreText_3Mobile>
               </MoreTextMobile>
               <FooterAText_1>Aviso de privacidad</FooterAText_1>
               <FooterAText_2>Términos y condiciones</FooterAText_2>
               <FooterAText_3>Políticas de cancelación</FooterAText_3>
+              <FooterAText_3>Trabaja con nosotros</FooterAText_3>
             </FooterAText>
             <FooterBIcons >
               <div className="content">

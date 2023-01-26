@@ -379,6 +379,18 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        .cards{
+          border: 1px solid #942ced;
+          outline: none;
+          background: none;
+          border-radius: 20px;
+          padding-inline: 10px;
+          font-size: 20px;
+          color: #942ced;
+          height: 34px;
+        }
+
         input[type="radio"] {
           accent-color: #9900ed;
           width: 25px;
