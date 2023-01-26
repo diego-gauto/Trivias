@@ -87,7 +87,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
 
   useEffect(() => {
     if (Object.values(course).length > 0) {
-      setLessons(course.seasons[0].lessons);
+      setLessons(course?.seasons[0]?.lessons);
       setIsPlaying(true);
       getCurrentSeason();
       setTimeout(() => {

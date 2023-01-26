@@ -3,6 +3,8 @@ export interface IModule4_Carousel {
   slideData: SlideObj[];
   type: string;
   title: string;
+  user?: any;
+  course: any;
 }
 interface SlideObj {
   isNew: boolean;

@@ -8,14 +8,10 @@ import Modal1 from "./Modal/Modal1";
 import {
   Title,
 } from "./Module4.styled";
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css/scrollbar';
-import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
-SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);

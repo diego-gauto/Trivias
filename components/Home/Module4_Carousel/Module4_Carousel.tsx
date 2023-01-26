@@ -15,7 +15,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
 
-  const { isInfinite, slideData, type, title } = props;
+  const { isInfinite, slideData, type, title, user, course } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
   if (slideDataArr) {
@@ -27,13 +27,13 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
         && course.documentID !== SEP_COURSE_ID
       ).map((course: any) => {
         return (
-          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty, professor: course.courseProfessor[0] }
+          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty, professor: course.courseProfessor[0], data: course }
         )
       })
     } else {
       slideDataArr = slideDataArr.map((lesson: any) => {
         return (
-          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "" }
+          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "", data: "" }
         )
       })
     }
@@ -95,6 +95,8 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
               imgURL={element.imgURL}
               number={element.number}
               professor={element.professor}
+              user={user}
+              course={element.data}
             />
           </SwiperSlide>
         ))}
