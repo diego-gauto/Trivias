@@ -56,6 +56,7 @@ export const addInvoice = async (invoice: any) => {
       ...invoice
     }
   );
+  return docRef.id;
 }
 
 export const getInvoice = async () => {

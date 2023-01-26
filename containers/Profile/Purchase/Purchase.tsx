@@ -122,18 +122,11 @@ const Purchase = () => {
       if (res[0] == null) {
         res[0] = []
       }
-      // else {
-      //   if (res[0].id == router.query.id) {
-      //     window.location.href = "/Preview";
-      //   }
-      // }
     })
   }
 
   useEffect(() => {
-
     fetchDB_data();
-
   }, [loggedIn]);
 
   useEffect(() => {
@@ -300,7 +293,20 @@ const Purchase = () => {
               duration: (new Date().getTime() / 1000) + product.duration * 86400
             }
             addCourseUser(course, userData.id);
-            addInvoice(invoice);
+            addInvoice(invoice).then(async (res) => {
+              let receipt = {
+                type: type,
+                name: userData.name,
+                product: product.title,
+                total: product.price,
+                start: new Date().toLocaleDateString(),
+                end: new Date(((new Date().getTime() / 1000) + product.duration * 86400) * 1000).toLocaleDateString(),
+                id: res,
+                email: userData.email
+              }
+              const mail = httpsCallable(functions, 'sendReceipt');
+              await mail(receipt)
+            })
             if (card.status) {
               addPaymentMethod(card, userData.id);
             }
@@ -334,7 +340,20 @@ const Purchase = () => {
           duration: (new Date().getTime() / 1000) + product.duration * 86400
         }
         addCourseUser(course, userData.id);
-        addInvoice(invoice);
+        addInvoice(invoice).then(async (res) => {
+          let receipt = {
+            type: type,
+            name: userData.name,
+            product: product.title,
+            total: product.price,
+            start: new Date().toLocaleDateString(),
+            end: new Date(((new Date().getTime() / 1000) + product.duration * 86400) * 1000).toLocaleDateString(),
+            id: res,
+            email: userData.email
+          }
+          const mail = httpsCallable(functions, 'sendReceipt');
+          await mail(receipt)
+        })
         setConfirmation(false);
         setPay(true);
       }
@@ -393,17 +412,6 @@ const Purchase = () => {
       getUserCourses(userData.id);
     }
   }, [isLoading])
-
-
-  const test = async () => {
-    const test = httpsCallable(functions, 'sendReceipt');
-    let data = {
-      email: "kevinhm53@gmail.com"
-    }
-    await test(data).then(async (res: any) => {
-      console.log("success");
-    })
-  }
 
   return (
     <>
@@ -615,7 +623,6 @@ const Purchase = () => {
                     />}
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
-                  <button onClick={test}>test</button>
                 </div>
               </div>
             </div>

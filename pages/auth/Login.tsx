@@ -403,103 +403,11 @@ const Login = () => {
                   <img className="imgLeft" src="../images/mano1.png" alt="" />
                 </div>
               </div>
-              // <LoginBox>
-
-              //   <form
-              //     onSubmit={handleSubmit(onSubmit)}
-              //   >
-              //     <ProfilePicture />
-              //     <Title>
-              //       Iniciar Sesión
-              //     </Title>
-              //     <Box1>
-              //       <Text2>
-              //         Correo electrónico
-              //       </Text2>
-              //       <TextInput
-              //         type="text"
-              //         placeholder="correo@correo.com"
-              //         className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-              //         {...register("email")}
-              //       />
-              //       <div className="invalid-feedback">
-              //         {errors.email?.message}
-              //       </div>
-              //     </Box1>
-              //     <Box2>
-              //       <Text2>
-              //         Contraseña
-              //       </Text2>
-              //       <PasswordBox>
-              //         <div>
-              //           <TextInput_2
-              //             type={passwordShown_1 ? "text" : "password"}
-              //             placeholder="Contraseña"
-              //             className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-              //             {...register("password")}
-              //           />
-              //           <div style={{ 'cursor': 'pointer' }}
-              //             onClick={togglePassword_1}
-              //           >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-              //         </div>
-              //         <div className="invalid-feedback">
-              //           {errors.password?.message}
-              //         </div>
-
-              //       </PasswordBox>
-
-              //     </Box2>
-              //     {error && <Error>
-              //       {errorMsg}
-              //     </Error>}
-              //     <AllButtons>
-              //       <PurpleButton2 type='submit'>
-              //         Acceder
-              //       </PurpleButton2>
-              //     </AllButtons>
-
-              //   </form>
-
-              //   <AllButtons>
-
-              //     <GoogleButton onClick={() => {
-              //       handleSignUpWithAuthProvider("Google");
-              //     }}
-              //     >
-              //       <GoogleIcon></GoogleIcon>
-              //       Acceder con Google
-              //     </GoogleButton>
-              //     <FacebookButton
-              //       onClick={() => {
-              //         handleSignUpWithAuthProvider("Facebook");
-              //       }}
-              //     >
-              //       <FacebookIcon></FacebookIcon>
-              //       Acceder con Facebook
-              //     </FacebookButton>
-              //   </AllButtons>
-              //   <Text3>
-              //     ¿Olvidaste tu contraseña? &nbsp;
-              //     <LinkText onClick={() => { setShowForgot(true) }} >
-              //       Clic aqui
-              //     </LinkText>
-              //   </Text3>
-              //   <Text3>
-              //     ¿Es tu primera vez con nosotros? &nbsp;
-              //     <Link href="/auth/Register">
-              //       <LinkText>
-              //         Registrate
-              //       </LinkText>
-              //     </Link>
-              //   </Text3>
-              // </LoginBox>
               :
               <LoaderImage>
                 <LoaderContain />
               </LoaderImage>
           }
-
-          {/* <GradientCanvas id="gradient-canvas" increasedHeight /> */}
           {
             showForgot == true &&
             <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
