@@ -109,7 +109,7 @@ const RewardSlider = (props: reward_slider) => {
             slides.map((reward: any, index: number) => {
               return (
                 <SlideContainer
-                  style={{ flexShrink: 0, width: (innerWidth - 40) / 5 }}
+                  innerWidth={innerWidth}
                   className="scroll-container"
                   key={index + "Slider"}
                   type={type}

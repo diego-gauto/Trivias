@@ -1,21 +1,39 @@
 import styled, { css } from "styled-components";
 
-export const SlideContainer = styled.div<{ type: string }>`
+export const SlideContainer = styled.div<{ type: string; innerWidth: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   position: relative;
-  p {
+  flex-shrink: 0;
+  width: ${(props) => (props.innerWidth - 40) / 5}px;
+  
+  @media (max-width: 1023px) {
+    gap: 10px;
+  }
+  @media (max-width: 750px) {
+    width: ${(props) => (props.innerWidth - 40) / 3}px;
+  }
+  @media (max-width: 450px) {
+    width: ${(props) => (props.innerWidth - 100) / 2}px;
+  }
+  p {a
     margin: 0;
   }
   .text-container {
     text-align: center;
     font-size: 12px;
+    @media (max-width: 1023px) {
+      font-size: 10px;
+    }
     .title-text {
       font-weight: 600;
       color: #3f1168;
       line-height: 15px;
+      @media (max-width: 1023px) {
+        line-height: 12px;
+      }
       span {
         font-weight: 800;
         ${(props) =>
@@ -29,10 +47,10 @@ export const SlideContainer = styled.div<{ type: string }>`
             color: #1bb87f;
           `}
           ${(props) =>
-          props.type == "certificates" &&
-          css`
-            color: #524af5;
-          `}
+            props.type == "certificates" &&
+            css`
+              color: #524af5;
+            `}
       }
     }
     .about-text {
@@ -41,6 +59,9 @@ export const SlideContainer = styled.div<{ type: string }>`
       background: linear-gradient(to right, #42126c, #922cea);
       -webkit-text-fill-color: transparent;
       -webkit-background-clip: text;
+      @media (max-width: 1023px) {
+        line-height: 10px;
+      }
     }
   }
   .image-container {

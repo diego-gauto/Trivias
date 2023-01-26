@@ -8,6 +8,10 @@ export const RewardContainer = styled.div`
   width: 100%;
   background: linear-gradient(180deg, #ede7f2 10%, #cfc0dc 100%);
   padding-top: 70px;
+  @media (max-width: 1023px) {
+    padding-top: 35px;
+    gap: 20px;
+  }
   p {
     margin: 0;
   }
@@ -26,11 +30,30 @@ export const TitleContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 15px;
-  padding-left: 80px;
+  @media (max-width: 1023px) {
+    gap: 10px;
+  }
+  @media (max-width: 450px) {
+    gap: 5px;
+  }
   .title{
     font-size: 36px;
     color: #3f1168;
     letter-spacing: 4px;
+    @media (max-width: 1023px) {
+      font-size: 28px;
+      letter-spacing: 3px;
+    }
+    @media (max-width: 550px) {
+      font-size: 24px;
+    }
+    @media (max-width: 500px) {
+      font-size: 20px;
+    }
+    @media (max-width: 400px) {
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
     span{
       font-weight: 600;
     }
@@ -40,6 +63,14 @@ export const TitleContainer = styled.div`
     height: 40px;
     border-radius: 50%;
     position: relative;
+    @media (max-width: 1023px) {
+      width: 30px;
+      height: 30px;
+    }
+    @media (max-width: 550px) {
+      width: 20px;
+      height: 20px;
+    }
     &:hover {
       .hover-text {
         opacity: 1;
@@ -57,6 +88,14 @@ export const TitleContainer = styled.div`
       top: 50%;
       right: 50%;
       transform: translate(50%, -50%);
+      @media (max-width: 1023px) {
+        width: 18px;
+        height: 18px;
+      }
+      @media (max-width: 550px) {
+        width: 10px;
+        height: 10px;
+      }
     }
   }
   .
@@ -68,6 +107,10 @@ export const RewardsTitle = styled.div`
   padding-right: 30%;
   gap: 40px;
   align-items: center;
+  @media (max-width: 1023px) {
+    padding-right: 0;
+    gap: 20px;
+  }
   .hand-container {
     position: absolute;
     top: 170px;
@@ -80,6 +123,12 @@ export const RewardsTitle = styled.div`
       width: 92px;
       height: 200px;
       border-radius: 0 190px 190px 0;
+    }
+    @media (max-width: 1023px) {
+      top: 400px;
+    }
+    @media (max-width: 800px) {
+      display: none;
     }
     img {
       top: -140px;
@@ -105,6 +154,16 @@ export const RewardsTitle = styled.div`
     @media (max-width: 1300px) {
       font-size: 32px;
     }
+    @media (max-width: 1023px) {
+      font-size: 26px;
+      line-height: 36px;
+      margin: 0;
+    }
+    @media (max-width: 550px) {
+      font-size: 22px;
+      line-height: 28px;
+      margin: 0;
+    }
     span {
       color: #942ced;
     }
@@ -124,6 +183,12 @@ export const RewardsTitle = styled.div`
       @media (max-width: 1300px) {
         font-size: 16px;
       }
+      @media (max-width: 1023px) {
+        font-size: 14px;
+      }
+      @media (max-width: 550px) {
+        font-size: 12px;
+      }
       .span-color {
         color: #d244d1;
         font-weight: 600;
@@ -131,6 +196,18 @@ export const RewardsTitle = styled.div`
       .span-weight {
         font-weight: 800;
       }
+    }
+  }
+  .reward-card-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    @media (max-width: 1023px) {
+      top: 285px;
+    }
+    @media (max-width: 550px) {
+      top: 240px;
     }
   }
 `;
@@ -165,6 +242,9 @@ export const RewardCardContainer = styled.div<{
       @media (max-width: 1150px) {
         transform: scale(0.65);
       }
+      @media (max-width: 550px) {
+        transform: scale(0.42);
+      }
       ${(props) =>
         props.reward == 1 &&
         css`
@@ -179,6 +259,9 @@ export const RewardCardContainer = styled.div<{
           }
           @media (max-width: 1150px) {
             transform: scale(0.55);
+          }
+          @media (max-width: 550px) {
+            transform: scale(0.36);
           }
         `}
       ${(props) =>
@@ -195,6 +278,9 @@ export const RewardCardContainer = styled.div<{
           }
           @media (max-width: 1150px) {
             transform: scale(0.45);
+          }
+          @media (max-width: 550px) {
+            transform: scale(0.3);
           }
         `}
     `}
@@ -221,6 +307,10 @@ export const RewardCardContainer = styled.div<{
         top: 115px;
         transform: scale(0.55);
       }
+      @media (max-width: 550px) {
+        top: 80px;
+        transform: scale(0.36);
+      }
       ${(props) =>
         props.reward == 1 &&
         css`
@@ -242,6 +332,10 @@ export const RewardCardContainer = styled.div<{
             top: 90px;
             transform: scale(0.65);
           }
+          @media (max-width: 550px) {
+            top: 70px;
+            transform: scale(0.42);
+          }
         `}
       ${(props) =>
         props.reward == 2 &&
@@ -255,6 +349,10 @@ export const RewardCardContainer = styled.div<{
             top: 100px;
           }
           @media (max-width: 1150px) {
+            top: 85px;
+          }
+          @media (max-width: 1150px) {
+            top: 60px;
           }
         `}
     `}
@@ -280,6 +378,10 @@ export const RewardCardContainer = styled.div<{
         top: 215px;
         transform: scale(0.45);
       }
+      @media (max-width: 550px) {
+        top: 150px;
+        transform: scale(0.3);
+      }
       ${(props) =>
         props.reward == 2 &&
         css`
@@ -297,19 +399,31 @@ export const RewardCardContainer = styled.div<{
             transform: scale(0.75);
           }
           @media (max-width: 1150px) {
+            top: 185px;
             transform: scale(0.65);
+          }
+          @media (max-width: 550px) {
+            top: 130px;
+            transform: scale(0.42);
           }
         `}
     `}
   border-radius: 300px 0 0 300px;
   align-items: center;
   gap: 20px;
+  @media (max-width: 550px) {
+    gap: 10px;
+  }
   .next-reward{
     display: flex;
     padding-block: 40px;
     padding-inline: 40px 30px;
     background-color: #3f1168;
     border-radius: 300px 0 0 300px;
+    white-space: nowrap;
+    @media (max-width: 550px) {
+      padding-inline: 40px 5px;
+    }
     .container{
       display: flex;
       flex-direction: column;
@@ -448,10 +562,22 @@ export const RewardCardContainer = styled.div<{
 `;
 export const AllSlider = styled.div`
   margin-top: 50px;
+  @media (max-width: 1023px) {
+    margin-top: 370px;
+  }
+  @media (max-width: 550px) {
+    margin-top: 250px;
+  }
   h1 {
     padding-left: 20px;
     font-size: 20px;
     color: #3f1168;
+    @media (max-width: 450px) {
+      font-size: 16px;
+    }
+    @media (max-width: 390px) {
+      font-size: 14px;
+    }
   }
   gap: 20px;
   .slide-container {
