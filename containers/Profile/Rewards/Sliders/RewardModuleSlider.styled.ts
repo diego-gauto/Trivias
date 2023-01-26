@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const SlideContainer = styled.div`
+export const SlideContainer = styled.div<{ type: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   position: relative;
   p {
     margin: 0;
@@ -15,12 +15,28 @@ export const SlideContainer = styled.div`
     .title-text {
       font-weight: 600;
       color: #3f1168;
+      line-height: 15px;
       span {
         font-weight: 800;
-        color: #f77c26;
+        ${(props) =>
+          (props.type == "points" || props.type == "claim-points") &&
+          css`
+            color: #dd5900;
+          `}
+        ${(props) =>
+          (props.type == "months" || props.type == "claim-months") &&
+          css`
+            color: #1bb87f;
+          `}
+          ${(props) =>
+          props.type == "certificates" &&
+          css`
+            color: #524af5;
+          `}
       }
     }
     .about-text {
+      line-height: 12px;
       font-weight: 600;
       background: linear-gradient(to right, #42126c, #922cea);
       -webkit-text-fill-color: transparent;
@@ -46,4 +62,7 @@ export const SlideContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+`;
+export const BackgroundSlide = styled.div<{ type: string }>`
+  padding-top: 20px;
 `;

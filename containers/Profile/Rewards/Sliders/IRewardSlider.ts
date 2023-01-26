@@ -1,6 +1,8 @@
 export interface reward_slider {
+  user: any;
+  score: number;
   rewards: SlideObj[];
-  title: string;
+  type: string;
   innerWidth: number;
   indexSlider: number;
 }

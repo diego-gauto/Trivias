@@ -1,27 +1,71 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap';
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { SlideContainer } from './RewardModuleSlider.styled';
+import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
-import { title } from 'process';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
 
   let [counter, setCounter] = useState<any>(0);
-  const { rewards, title, innerWidth, indexSlider } = props;
+  const { score, rewards, type, innerWidth, indexSlider } = props;
+  const [slides, setSlides] = useState([]);
+  const [texts, setTexts] = useState<any>({
+    header: "",
+    title: "",
+  })
 
   const slider = document.querySelector(`.scroll-container-${indexSlider}`) as HTMLElement;
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
   const getSliders = () => {
-    let slideBlock: any = []
-    if (rewards) {
-      slideBlock = rewards
-      console.log(slideBlock)
+    let slides: any = [];
+    if (type == "points") {
+      slides = rewards.filter((val: any) => (val.type == "points"));
+      slides.sort((a: any, b: any) => a.points - b.points)
+      setTexts({
+        header: "por Puntos Bloqueadas",
+        title: "Recompensa bloqueda",
+        scoreText: "hasta llegar a",
+      })
     }
+    if (type == "claim-points") {
+      slides = rewards.filter((val: any) => (val.type == "points" && score >= val.points));
+      slides.sort((a: any, b: any) => a.points - b.points)
+      setTexts({
+        header: "por Puntos Reclamadas",
+        title: "Recompensa desbloqueda",
+        scoreText: "desde los",
+      })
+    }
+    if (type == "months") {
+      slides = rewards.filter((val: any) => (val.type == "months"));
+      slides.sort((a: any, b: any) => a.months - b.months)
+      setTexts({
+        header: "por Meses Bloqueadas",
+        title: "Beneficio bloqueado",
+        scoreText: "hasta cumplir",
+      })
+    }
+    if (type == "claim-months") {
+      slides = rewards.filter((val: any) => (val.type == "months"));
+      slides.sort((a: any, b: any) => a.months - b.months)
+      setTexts({
+        header: "por Meses Reclamadas",
+        title: "Beneficio desbloqueado",
+        scoreText: "al cumplir",
+      })
+    }
+    if (type == "certificates") {
+      slides = rewards.filter((val: any) => (val.type == "certificates"));
+      slides.sort((a: any, b: any) => a.certificates - b.certificates)
+      setTexts({
+        header: "por Certificados",
+        title: "Beneficio bloqueado",
+        scoreText: "al completar",
+      })
+    }
+    setSlides(slides)
   }
 
   const mouseDownHandler = function (e: any) {
@@ -55,28 +99,27 @@ const RewardSlider = (props: reward_slider) => {
   }, [rewards])
 
   return (
-    <div className="background-color">
+    <BackgroundSlide type={type}>
       <h1>
-        Recompensas
-        {title == "points" ? " Bloqueadas " :
-          title == "claim-points" ? " Reclamadas" :
-            ""
-        }
+        Recompensas {texts.header}
       </h1>
       <div id="scroll-container" className={`scroll-container-${indexSlider} scroll`} style={{ overflow: "scroll", overflowY: "hidden" }}>
         <div className="slide-container" onMouseDown={mouseDownHandler}>
           {
-            rewards.map((reward: any, index: number) => {
+            slides.map((reward: any, index: number) => {
               return (
                 <SlideContainer
                   style={{ flexShrink: 0, width: (innerWidth - 40) / 5 }}
                   className="scroll-container"
                   key={index + "Slider"}
+                  type={type}
                 >
                   <div className="text-container">
                     <p className="title-text">
-                      <span>Recompensa bloqueada</span><br />
-                      hasta llegar a {reward.points} puntos
+                      <span>{texts.title}</span><br />
+                      {texts.scoreText} {reward.points && reward.points + " puntos"}
+                      {reward.months ? (reward.months == 1 ? reward.months + " mes" : reward.months + " meses") : ""}
+                      {reward.certificates ? (reward.certificates == 1 ? reward.certificates + " certificado" : reward.certificates + " certificados") : ""}
                     </p>
                   </div>
                   <img src={reward?.path} className="image-container" />
@@ -92,7 +135,7 @@ const RewardSlider = (props: reward_slider) => {
           }
         </div>
       </div>
-    </div>
+    </BackgroundSlide>
   )
 }
 export default RewardSlider;

@@ -41,10 +41,9 @@ const Rewards = () => {
   const allSlider = [
     { type: "points" },
     { type: "claim-points" },
-    // { type: "months" },
-    // { type: "claim-months" },
-    // { type: "certificates" },
-    // { type: "claim-certificates" }
+    { type: "months" },
+    { type: "claim-months" },
+    { type: "certificates" }
   ]
   const [selectReward, setSelectReward] = useState(0);
   const crownImage = "/images/profile/crown.png"
@@ -225,9 +224,11 @@ const Rewards = () => {
           allSlider.map((val: any, index: any) => {
             return (
               <RewardSlider
-                rewards={rewards}
-                title={val.type}
                 key={"Slider Rewards " + index}
+                user={userData}
+                score={userData.score}
+                rewards={rewards}
+                type={val.type}
                 innerWidth={innerWidth}
                 indexSlider={index}
               />
