@@ -242,6 +242,14 @@ export const UserContain = styled.div<{ pathname: any; color: any }>`
     .bell {
       font-size: 26px;
       color: #3f1168;
+      ${(props) =>
+        props.color == 1 &&
+        css`
+          color: #dad3e5;
+          @media (max-width: 1023px) {
+            color: #3f1168;
+          }
+        `}
     }
     .notifications {
       width: 11px;
@@ -275,6 +283,14 @@ export const UserContain = styled.div<{ pathname: any; color: any }>`
       top: 50%;
       right: 50%;
       transform: translate(50%, -50%);
+      ${(props) =>
+        props.color == 1 &&
+        css`
+          background-color: #3f1168;
+          @media (max-width: 1023px) {
+            background-color: #dad3e5;
+          }
+        `}
     }
   }
 `;

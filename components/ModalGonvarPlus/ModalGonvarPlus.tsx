@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
@@ -13,7 +13,11 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const [AllCourses, setAllCourses] = useState([]);
   const handleClose = () => setShow(false);
   const arrCourse = [0, 1, 2, 3, 4]
+  const ref = useRef<any>(null);
 
+  const handleClick = () => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
@@ -48,7 +52,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
               </span>
             </p>
           </div>
-          <div className="second-container">
+          <div className="second-container" onClick={handleClick}>
             <p className="text">
               VER MAS
             </p>
@@ -56,7 +60,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
           </div>
         </div>
       </BackgroundContainer>
-      <Middlecontainer>
+      <Middlecontainer ref={ref}>
         <div className="main-title">
           <p className="text-title">
             Obtén acceso inmediato<span> a todos los siguientes artículos </span><span className="span2">*</span><br />

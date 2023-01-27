@@ -104,6 +104,12 @@ export const BackgroundContainer = styled.div`
       align-items: center;
       cursor: pointer;
       width: fit-content;
+      &:hover {
+        .chevron-down {
+          transition: 1s ease all;
+          transform: scale(1.2);
+        }
+      }
       .text {
         font-size: 14px;
         line-height: 18px;
