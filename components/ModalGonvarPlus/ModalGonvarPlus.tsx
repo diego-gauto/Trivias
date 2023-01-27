@@ -18,7 +18,6 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
       <BackgroundContainer>

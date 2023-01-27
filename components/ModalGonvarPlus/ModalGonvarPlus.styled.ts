@@ -14,6 +14,10 @@ export const BackgroundContainer = styled.div`
     font-size: 20px;
     color: #3f1168;
     cursor: pointer;
+    z-index: 5;
+    @media (max-width: 991px) {
+      font-size: 18px;
+    }
   }
   .img-background {
     width: 100%;
@@ -24,12 +28,27 @@ export const BackgroundContainer = styled.div`
     position: absolute;
     bottom: 0;
     left: -90px;
+    @media (max-width: 991px) {
+      width: 195px;
+    }
+    @media (max-width: 550px) {
+      width: 140px;
+      left: -35px;
+    }
   }
   .img-hand-paint {
     width: 300px;
+    right: -70px;
     position: absolute;
     bottom: 0;
-    right: -70px;
+    @media (max-width: 991px) {
+      width: 210px;
+      right: -65px;
+    }
+    @media (max-width: 550px) {
+      width: 160px;
+      right: -35px;
+    }
   }
   .upper-contain {
     display: flex;
@@ -41,6 +60,10 @@ export const BackgroundContainer = styled.div`
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
+    @media (max-width: 991px) {
+      top: 15px;
+      gap: 10px;
+    }
     .first-container {
       display: flex;
       gap: 30px;
@@ -49,6 +72,12 @@ export const BackgroundContainer = styled.div`
           font-size: 20px;
           font-weight: 600;
           color: #3f1168;
+          @media (max-width: 991px) {
+            font-size: 18px;
+          }
+          @media (max-width: 550px) {
+            font-size: 16px;
+          }
         }
       }
       .subs-text {
@@ -61,6 +90,12 @@ export const BackgroundContainer = styled.div`
         border: 1px solid #3f1168;
         padding-inline: 8px;
         border-radius: 100px;
+        @media (max-width: 991px) {
+          font-size: 12px;
+        }
+        @media (max-width: 550px) {
+          font-size: 10px;
+        }
       }
     }
     .second-container {
@@ -70,6 +105,13 @@ export const BackgroundContainer = styled.div`
         font-weight: 500;
         letter-spacing: 3px;
         text-shadow: 0px 1px 4px black;
+        @media (max-width: 991px) {
+          font-size: 16px;
+          letter-spacing: 2px;
+        }
+        @media (max-width: 550px) {
+          font-size: 13px;
+        }
         span {
           font-weight: 800;
         }
@@ -85,6 +127,10 @@ export const BackgroundContainer = styled.div`
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
+    @media (max-width: 991px) {
+      bottom: 5px;
+      gap: 10px;
+    }
     .first-container {
       display: flex;
       .text {
@@ -93,6 +139,12 @@ export const BackgroundContainer = styled.div`
         color: #3f1168;
         line-height: 16px;
         text-align: center;
+        @media (max-width: 991px) {
+          font-size: 14px;
+        }
+        @media (max-width: 550px) {
+          font-size: 12px;
+        }
         span {
           font-weight: 800;
         }
@@ -117,11 +169,25 @@ export const BackgroundContainer = styled.div`
         color: white;
         font-weight: 500;
         text-shadow: 0px 1px 7px black;
+        @media (max-width: 991px) {
+          font-size: 12px;
+          line-height: 14px;
+        }
+        @media (max-width: 550px) {
+          font-size: 10px;
+          line-height: 12px;
+        }
       }
       .chevron-down {
         font-size: 20px;
         color: white;
         filter: drop-shadow(0 0 5px black);
+        @media (max-width: 991px) {
+          font-size: 18px;
+        }
+        @media (max-width: 550px) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -133,6 +199,9 @@ export const Middlecontainer = styled.div`
   }
   padding-block: 30px 200px;
   padding-inline: 30px;
+  @media (max-width: 550px) {
+    padding-inline: 0;
+  }
   .main-title {
     display: flex;
     flex-direction: column;
@@ -144,6 +213,12 @@ export const Middlecontainer = styled.div`
       font-weight: 500;
       color: #3f1168;
       text-align: center;
+      @media (max-width: 991px) {
+        font-size: 13px;
+      }
+      @media (max-width: 550px) {
+        font-size: 10px;
+      }
       span {
         font-weight: 800;
       }
@@ -153,9 +228,18 @@ export const Middlecontainer = styled.div`
       .span3 {
         color: #ff9b00;
         font-size: 24px;
+        @media (max-width: 991px) {
+          font-size: 20px;
+        }
+        @media (max-width: 550px) {
+          font-size: 18px;
+        }
         span {
           font-size: 14px;
           font-weight: 500px;
+          @media (max-width: 550px) {
+            font-size: 12px;
+          }
         }
       }
     }
@@ -170,23 +254,47 @@ export const Middlecontainer = styled.div`
         color: white;
         border: none;
         background: linear-gradient(135deg, #942ced 0%, #cc42d4 100%);
+        @media (max-width: 991px) {
+          font-size: 14px;
+        }
+        @media (max-width: 550px) {
+          font-size: 12px;
+          padding-block: 5px;
+          padding-inline: 10px;
+        }
       }
       .left-text {
         position: absolute;
         right: 0;
-
+        @media (max-width: 991px) {
+          bottom: 35px;
+        }
+        @media (max-width: 550px) {
+          bottom: 20px;
+          padding-right: 20px;
+        }
         .text {
           text-align: end;
           font-size: 12px;
           font-weight: 600;
           color: #3f1168;
           line-height: 14px;
+          @media (max-width: 991px) {
+            font-size: 10px;
+            line-height: 12px;
+          }
+          @media (max-width: 550px) {
+            font-size: 8px;
+          }
           .span1 {
             color: #ff9b00;
           }
           .span2 {
             font-size: 14px;
             font-weight: 800;
+            @media (max-width: 991px) {
+              font-size: 12px;
+            }
           }
         }
       }
@@ -197,6 +305,10 @@ export const Middlecontainer = styled.div`
       position: absolute;
       display: flex;
       justify-content: space-between;
+      @media (max-width: 550px) {
+        top: 120px;
+        padding-inline: 10px;
+      }
       .card-container {
         display: flex;
         flex-direction: column;
@@ -206,6 +318,9 @@ export const Middlecontainer = styled.div`
           font-size: 24px;
           font-weight: 800;
           color: #9900ed;
+          @media (max-width: 991px) {
+            font-size: 20px;
+          }
         }
         .second-index {
           color: #d244d1;
@@ -226,6 +341,12 @@ export const Middlecontainer = styled.div`
           position: relative;
           border-radius: 0 0 20px 20px;
           max-width: 160px;
+          @media (max-width: 991px) {
+            padding-block: 15px;
+            padding-inline: 10px;
+            max-width: 100px;
+            height: 270px;
+          }
           .divider {
             top: 0;
             left: 0;
@@ -253,6 +374,14 @@ export const Middlecontainer = styled.div`
             line-height: 20px;
             font-weight: 800;
             color: #3f1168;
+            @media (max-width: 991px) {
+              font-size: 10px;
+              line-height: 16px;
+            }
+            // @media (max-width: 550px) {
+            //   font-size: 9px;
+            //   line-height: 14px;
+            // }
             span {
               color: #ff9b00;
             }
@@ -265,11 +394,18 @@ export const Middlecontainer = styled.div`
             font-weight: 500;
             line-height: 14px;
             color: #3f1168;
+            @media (max-width: 991px) {
+              font-size: 8px;
+              line-height: 12px;
+            }
           }
           .plus-icon {
             color: #d244d1;
             font-size: 20px;
             margin-inline: auto;
+            @media (max-width: 991px) {
+              font-size: 16px;
+            }
           }
           .price-text {
             font-size: 15px;
@@ -277,6 +413,9 @@ export const Middlecontainer = styled.div`
             text-align: center;
             color: #a733e4;
             font-weight: 600;
+            @media (max-width: 991px) {
+              font-size: 12px;
+            }
             span {
               color: #ff9b00;
             }
@@ -294,6 +433,9 @@ export const BottomContainer = styled.div`
   padding-block: 220px 40px;
   padding-inline: 30px;
   border-radius: 0 0 20px 20px;
+  @media (max-width: 991px) {
+    padding-block: 180px 40px;
+  }
   p {
     margin: 0;
   }
@@ -307,7 +449,8 @@ export const BottomContainer = styled.div`
   }
   .courses {
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+    overflow: hidden;
   }
   .footer-text {
     display: flex;
@@ -317,6 +460,9 @@ export const BottomContainer = styled.div`
       font-size: 10px;
       font-weight: 500;
       color: gray;
+      @media (max-width: 991px) {
+        font-size: 8px;
+      }
       span {
         font-weight: 800;
       }
@@ -340,11 +486,17 @@ export const CoursesContainer = styled.div`
       color: #a733e4;
       font-size: 10px;
       font-weight: 600;
+      @media (max-width: 991px) {
+        font-size: 8px;
+      }
     }
     .course-professor {
       color: #3f1168;
       font-size: 10px;
       font-weight: 500;
+      @media (max-width: 991px) {
+        font-size: 8px;
+      }
       span {
         font-weight: 800;
       }

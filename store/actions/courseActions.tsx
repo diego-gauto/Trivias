@@ -31,7 +31,7 @@ export const getCourses = async () => {
 export const getFiveCourses = async () => {
   let courses: any = []
   const docRef = collection(db, 'courses');
-  const q = query(docRef, where("courseType", "==", "Mensual"), orderBy("createdAt", "desc"), limit(5));
+  const q = query(docRef, where("courseType", "==", "Mensual"), orderBy("createdAt", "desc"));
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     courses.push({ ...doc.data(), id: doc.id });
