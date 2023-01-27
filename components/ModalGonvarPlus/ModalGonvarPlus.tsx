@@ -14,12 +14,14 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setShow(false);
   const ref = useRef<any>(null);
-  const slider = document.querySelector(".scroll-container") as HTMLElement;
+
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  let slider: any;
   const mouseDownHandler = function (e: any) {
+    slider = document.querySelector(".scroll-container") as HTMLElement;
     e.preventDefault();
     pos = {
       // The current scroll
