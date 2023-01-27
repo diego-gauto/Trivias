@@ -224,6 +224,12 @@ export const UserContain = styled.div<{ pathname: any; color: any }>`
   display: flex;
   align-items: center;
   gap: 40px;
+  @media (max-width: 1023px) {
+    gap: 30px;
+  }
+  @media (max-width: 400px) {
+    gap: 20px;
+  }
   .bell-contain {
     position: relative;
     cursor: pointer;
@@ -331,6 +337,9 @@ export const LogoS_2 = styled.i`
   cursor: pointer;
   width: 110px;
   height: 100%;
+  @media (max-width: 600px) {
+    margin-left: 0;
+  }
 `;
 export const TextA = styled.a`
   color: #3f1168 !important;
@@ -361,6 +370,7 @@ export const NavResponsive = styled.div`
   }
   @media (max-width: 450px) {
     // padding-block: 5px;
+    padding-right: 20px !important;
     padding-inline: 10px;
     // padding-bottom: 15px;
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useMediaQuery } from "react-responsive";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -35,7 +35,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 const NavBar = () => {
 
-
+  const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [hamburger, setHamburger] = useState(false);
@@ -282,7 +282,7 @@ const NavBar = () => {
               display: "flex",
               width: "auto",
               height: "100%",
-              marginLeft: "35px"
+              marginLeft: !responsive400 ? "35px" : "20px"
             }}>
               <Link href="/">
                 <LogoS_2 />
