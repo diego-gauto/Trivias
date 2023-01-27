@@ -26,11 +26,13 @@ const Rewards = () => {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [rewardsTypes, setRewardsTypes] = useState([]);
   const allSlider = [
-    { type: "points" },
     { type: "claim-points" },
-    { type: "months" },
+    { type: "points" },
     { type: "claim-months" },
-    { type: "certificates" }
+    { type: "months" },
+    { type: "claim-certificates" },
+    { type: "certificates" },
+
   ]
   const [selectReward, setSelectReward] = useState("points");
   const crownImage = "/images/profile/crown.png"

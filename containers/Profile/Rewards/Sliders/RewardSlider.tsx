@@ -3,6 +3,7 @@ import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
+import slider from 'antd/es/slider';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -10,70 +11,83 @@ const RewardSlider = (props: reward_slider) => {
   let [counter, setCounter] = useState<any>(0);
   const { score, rewards, type, innerWidth, indexSlider } = props;
   const [slides, setSlides] = useState([]);
+  const [openRewardInfo, setOpenRewardInfo] = useState<any>()
   const [texts, setTexts] = useState<any>({
     header: "",
     title: "",
   })
 
-  const slider = document.querySelector(`.scroll-container-${indexSlider}`) as HTMLElement;
   let pos = { top: 0, left: 0, x: 0, y: 0 };
-
   const getSliders = () => {
     let slides: any = [];
-    if (type == "points") {
-      slides = rewards.filter((val: any) => (val.type == "points"));
-      slides.sort((a: any, b: any) => a.points - b.points)
-      setTexts({
-        header: "por Puntos Bloqueadas",
-        title: "Recompensa bloqueda",
-        scoreText: "hasta llegar a",
-      })
-    }
     if (type == "claim-points") {
       slides = rewards.filter((val: any) => (val.type == "points" && score >= val.points));
       slides.sort((a: any, b: any) => a.points - b.points)
       setTexts({
-        header: "por Puntos Reclamadas",
+        header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
         scoreText: "desde los",
       })
     }
-    if (type == "months") {
-      slides = rewards.filter((val: any) => (val.type == "months"));
-      slides.sort((a: any, b: any) => a.months - b.months)
+    if (type == "points") {
+      slides = rewards.filter((val: any) => (val.type == "points"));
+      slides.sort((a: any, b: any) => a.points - b.points)
       setTexts({
-        header: "por Meses Bloqueadas",
-        title: "Beneficio bloqueado",
-        scoreText: "hasta cumplir",
+        header: "Recompensas por desbloquear",
+        title: "Recompensa bloqueda",
+        scoreText: "hasta llegar a",
       })
     }
     if (type == "claim-months") {
       slides = rewards.filter((val: any) => (val.type == "months"));
       slides.sort((a: any, b: any) => a.months - b.months)
       setTexts({
-        header: "por Meses Reclamadas",
+        header: "Beneficios Acumulados",
         title: "Beneficio desbloqueado",
-        scoreText: "al cumplir",
+        scoreText: "por cumplir",
+      })
+    }
+    if (type == "months") {
+      slides = rewards.filter((val: any) => (val.type == "months"));
+      slides.sort((a: any, b: any) => a.months - b.months)
+      setTexts({
+        header: "Beneficios por desbloquear",
+        title: "Beneficio bloqueado",
+        scoreText: "hasta cumplir",
+      })
+    }
+    if (type == "claim-certificates") {
+      slides = rewards.filter((val: any) => (val.type == "certificates"));
+      slides.sort((a: any, b: any) => a.certificates - b.certificates)
+      setTexts({
+        header: "Certificados por desbloquear",
+        title: "Beneficio bloqueado",
+        scoreText: "al completar",
       })
     }
     if (type == "certificates") {
       slides = rewards.filter((val: any) => (val.type == "certificates"));
       slides.sort((a: any, b: any) => a.certificates - b.certificates)
       setTexts({
-        header: "por Certificados",
-        title: "Beneficio bloqueado",
-        scoreText: "al completar",
+        header: "Certificados Acumulados",
+        title: "Beneficio desbloqueado",
+        scoreText: "por completar",
       })
     }
     setSlides(slides)
   }
 
+  const showRewardData = (index: any) => {
+    setOpenRewardInfo(index);
+  }
+  let slider: any;
   const mouseDownHandler = function (e: any) {
+    slider = document.querySelector(`.scroll-container-${indexSlider}`) as HTMLElement;
     e.preventDefault();
     pos = {
       // The current scroll
-      left: slider.scrollLeft,
-      top: slider.scrollTop,
+      left: slider?.scrollLeft,
+      top: slider?.scrollTop,
       // Get the current mouse position
       x: e.clientX,
       y: e.clientY,
@@ -101,12 +115,12 @@ const RewardSlider = (props: reward_slider) => {
   return (
     <BackgroundSlide type={type}>
       <h1>
-        Recompensas {texts.header}
+        {texts.header}
       </h1>
       {
         slides.length > 0
           ?
-          <div id="scroll-container" className={`scroll-container-${indexSlider} scroll`} style={{ overflow: "scroll", overflowY: "hidden" }}>
+          <div className={`scroll-container-${indexSlider} scroll`} style={{ overflow: "scroll", overflowY: "hidden" }}>
             <div className="slide-container" onMouseDown={mouseDownHandler}>
               {
                 slides.map((reward: any, index: number) => {
@@ -125,13 +139,38 @@ const RewardSlider = (props: reward_slider) => {
                           {reward.certificates ? (reward.certificates == 1 ? reward.certificates + " certificado" : reward.certificates + " certificados") : ""}
                         </p>
                       </div>
-                      <img src={reward?.path} className="image-container" />
-                      <div className="text-container">
-                        <p className="about-text">
-                          {reward.title}
-                        </p>
-                      </div>
+                      <div className='img-complete'>
+                        <img src={reward?.path} className="image-container" />
+                        <div className="btn-contain">
+                          {
+                            (type == "claim-months" || type == "claim-points" || type == "claim-certificates") &&
+                            <button className="btn-info">
+                              <p className='text'>
+                                Hacer pedido
+                              </p>
+                            </button>
+                          }
+                          {
+                            (type == "months" || type == "points" || type == "certificates") &&
+                            <button className="btn-info" onClick={() => showRewardData(index)}>
+                              <p className='text' >
+                                Más información
+                              </p>
+                            </button>
+                          }
 
+                        </div>
+                      </div>
+                      {
+                        openRewardInfo == index
+                          ? <></>
+                          :
+                          <div className="text-container">
+                            <p className="about-text">
+                              {reward.title}
+                            </p>
+                          </div>
+                      }
                     </SlideContainer>
                   )
                 })

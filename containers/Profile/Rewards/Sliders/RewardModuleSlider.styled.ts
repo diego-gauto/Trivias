@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const SlideContainer = styled.div<{ type: string; innerWidth: number }>`
+export const SlideContainer = styled.div<{
+  type: string;
+  innerWidth: number;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,7 +49,8 @@ export const SlideContainer = styled.div<{ type: string; innerWidth: number }>`
             color: #1bb87f;
           `}
           ${(props) =>
-            props.type == "certificates" &&
+            (props.type == "certificates" ||
+              props.type == "claim-certificates") &&
             css`
               color: #524af5;
             `}
@@ -63,15 +67,58 @@ export const SlideContainer = styled.div<{ type: string; innerWidth: number }>`
       }
     }
   }
-  .image-container {
+  .img-complete{
     width: 85%;
     min-height: 55%;
     max-height: 55%;
+    position: relative;
     cursor: pointer;
+    .image-container {
+      width: 100%;
+      height: 100%;
+    }
+    .btn-contain{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      .btn-info{
+        white-space: nowrap;
+        padding-block: 5px;
+        padding-inline: 12px;
+        border-radius: 100px;
+        border: none;
+        z-index: 3;
+        .text{
+          font-size: 14px;
+          font-weight: 600;
+          background: linear-gradient(to right, #942ced, #d144d1);
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          @media(max-width: 1023px){
+            font-size: 10px;
+          }
+          @media(max-width: 750px){
+            font-size: 14px;
+          }
+          @media(max-width: 500px){
+            font-size: 10px;
+          }
+        }
+      }
+
+    }
     &:hover {
-      opacity: 0.5;
+      .image-container{
+        opacity: 0.5;
+      }
+      .btn-contain{
+        opacity: 1;
+      }
     }
   }
+
   .info {
     font-size: 12px;
     padding: 10px;
