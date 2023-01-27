@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
-import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer } from './ModalGonvarPlus.styled';
+import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
 
 
 export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
@@ -11,15 +11,42 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
   const [AllCourses, setAllCourses] = useState([]);
+  let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setShow(false);
   const arrCourse = [0, 1, 2, 3, 4]
   const ref = useRef<any>(null);
-
+  const slider = document.querySelector(".scroll-container") as HTMLElement;
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
+    pos = {
+      // The current scroll
+      left: slider.scrollLeft,
+      top: slider.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseMoveHandler = function (e: any) {
+    setCounter(counter++);
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    slider.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
   return (
-    <Modal show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0 }}>
+    <ModalContainer show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
       <BackgroundContainer>
         <img className="img-background" src={backgroundImage} />
         <img className="img-hand-phone" src={phoneImage} />
@@ -76,99 +103,103 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
             </div>
           </div>
           <div className="cards">
-            <div className="card-container">
-              <p className="index">1</p>
-              <div className="card-content">
-                <div className="divider" />
-                <div className="info-texts">
-                  <p className="first-text">
-                    Más de 25 cursos y
-                    300 clases deuñas y belleza
-                    en línea
-                  </p>
-                  <p className="second-text">
-                    Con instructores
-                    profesionales,
-                    niveles desde
-                    básicos a
-                    avanzados, incluye
-                    reconocimientos y
-                    certificados.
+            <div className="cards-position">
+              <div className="card-container">
+                <p className="index">1</p>
+                <div className="card-content">
+                  <div className="divider" />
+                  <div className="info-texts">
+                    <p className="first-text">
+                      Más de 25 cursos y
+                      300 clases deuñas y belleza
+                      en línea
+                    </p>
+                    <p className="second-text">
+                      Con instructores
+                      profesionales,
+                      niveles desde
+                      básicos a
+                      avanzados, incluye
+                      reconocimientos y
+                      certificados.
+                    </p>
+                  </div>
+                  <p className="price-text">
+                    $30,000 MXN <span> ª</span>
                   </p>
                 </div>
-                <p className="price-text">
-                  $30,000 MXN <span> ª</span>
-                </p>
               </div>
-            </div>
-            <div className="card-container">
-              <p className="index second-index">2</p>
-              <div className="card-content">
-                <div className="divider second-divide" />
-                <p className="first-text">
-                  Revisión de
-                  prácticas y
-                  asesorías
-                  ilimitadas
-                </p>
-                <p className="price-text">
-                  $1,500 MXN <span> ª</span>
-                </p>
-                <BiPlusMedical className="plus-icon" />
-                <p className="first-text">
-                  40% de
-                  descuento en
-                  productos
-                  Gonvar
-                  <span className="span-small"> ¹</span>
-                </p>
-              </div>
-            </div>
-            <div className="card-container">
-              <p className="index third-index">3</p>
-              <div className="card-content">
-                <div className="divider third-divide" />
-                <div className="info-texts">
+              <div className="card-container">
+                <p className="index second-index">2</p>
+                <div className="card-content">
+                  <div className="divider second-divide" />
                   <p className="first-text">
-                    Un Mini Kit
-                    con diferentes
+                    Revisión de
+                    prácticas y
+                    asesorías
+                    ilimitadas
+                  </p>
+                  <p className="price-text">
+                    $1,500 MXN <span> ª</span>
+                  </p>
+                  <BiPlusMedical className="plus-icon" />
+                  <p className="first-text">
+                    40% de
+                    descuento en
                     productos
-                    cada dos
-                    meses
-                  </p>
-                  <p className="second-text">
-                    Acrílicos, geles,
-                    monómeros,
-                    adherentes,
-                    decoración y más.
+                    Gonvar
+                    <span className="span-small"> ¹</span>
                   </p>
                 </div>
-                <p className="price-text">
-                  $650 MXN<span> ª</span>
-                </p>
               </div>
             </div>
-            <div className="card-container">
-              <p className="index fourth-index">4</p>
-              <div className="card-content">
-                <div className="divider fourth-divide" />
-                <div className="info-texts">
-                  <p className="first-text">
-                    Rifa trimestral
-                    donde podrás
-                    ganar hasta <span>$20,000 MXN</span> en premios.
-                  </p>
-                  <p className="second-text">
-                    Por cada mes
-                    inscrito en
-                    Gonvar+ recibes
-                    un boleto
-                    adicional.
+            <div className="cards-position">
+              <div className="card-container">
+                <p className="index third-index">3</p>
+                <div className="card-content">
+                  <div className="divider third-divide" />
+                  <div className="info-texts">
+                    <p className="first-text">
+                      Un Mini Kit
+                      con diferentes
+                      productos
+                      cada dos
+                      meses
+                    </p>
+                    <p className="second-text">
+                      Acrílicos, geles,
+                      monómeros,
+                      adherentes,
+                      decoración y más.
+                    </p>
+                  </div>
+                  <p className="price-text">
+                    $650 MXN<span> ª</span>
                   </p>
                 </div>
-                <p className="price-text">
-                  $149 MXN <span> ª</span>
-                </p>
+              </div>
+              <div className="card-container">
+                <p className="index fourth-index">4</p>
+                <div className="card-content">
+                  <div className="divider fourth-divide" />
+                  <div className="info-texts">
+                    <p className="first-text">
+                      Rifa trimestral
+                      donde podrás
+                      ganar hasta <span>$20,000 MXN</span> en premios.
+                    </p>
+                    <p className="second-text">
+                      Por cada mes
+                      inscrito en
+                      Gonvar+ recibes
+                      un boleto
+                      adicional.
+                    </p>
+                  </div>
+                  <p className="price-text">
+                    $149 MXN <span> ª</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -178,27 +209,29 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         <p className="main-text">
           Algunos cursos incluidos en <span>Gonvar+</span>
         </p>
-        <div className="courses">
-          {
-            course.map((val: any, index: any) => {
-              return (
-                <CoursesContainer key={"Course data " + index}>
-                  <img src={val.coursePath} />
-                  <div className="course-info">
-                    <p className="course-name">
-                      {val.courseTittle}
-                    </p>
-                    {
-                      val.courseProfessor.length > 0 &&
-                      <p className="course-professor">
-                        de <span>{val.courseProfessor[0].name}</span>
+        <div className="courses scroll-container" id="scroll-container">
+          <div className='courses-2' onMouseDown={mouseDownHandler}>
+            {
+              course.map((val: any, index: any) => {
+                return (
+                  <CoursesContainer key={"Course data " + index}>
+                    <img src={val.coursePath} />
+                    <div className="course-info">
+                      <p className="course-name">
+                        {val.courseTittle}
                       </p>
-                    }
-                  </div>
-                </CoursesContainer>
-              )
-            })
-          }
+                      {
+                        val.courseProfessor.length > 0 &&
+                        <p className="course-professor">
+                          de <span>{val.courseProfessor[0].name}</span>
+                        </p>
+                      }
+                    </div>
+                  </CoursesContainer>
+                )
+              })
+            }
+          </div>
         </div>
         <div className="footer-text">
           <p className="text-1">
@@ -208,6 +241,6 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
           </p>
         </div>
       </BottomContainer>
-    </Modal >
+    </ModalContainer >
   )
 }

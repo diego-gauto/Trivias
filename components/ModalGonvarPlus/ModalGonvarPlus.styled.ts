@@ -1,5 +1,10 @@
+import { Modal } from "react-bootstrap";
 import styled from "styled-components";
 
+export const ModalContainer = styled(Modal)`
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+`;
 export const BackgroundContainer = styled.div`
   display: flex;
   width: 100%;
@@ -35,6 +40,14 @@ export const BackgroundContainer = styled.div`
       width: 140px;
       left: -35px;
     }
+    @media (max-width: 450px) {
+      width: 115px;
+      left: -35px;
+    }
+    @media (max-width: 400px) {
+      width: 90px;
+      left: -25px;
+    }
   }
   .img-hand-paint {
     width: 300px;
@@ -48,6 +61,14 @@ export const BackgroundContainer = styled.div`
     @media (max-width: 550px) {
       width: 160px;
       right: -35px;
+    }
+    @media (max-width: 450px) {
+      width: 130px;
+      right: -30px;
+    }
+    @media (max-width: 400px) {
+      width: 100px;
+      right: -20px;
     }
   }
   .upper-contain {
@@ -64,6 +85,9 @@ export const BackgroundContainer = styled.div`
       top: 15px;
       gap: 10px;
     }
+    @media (max-width: 400px) {
+      gap: 6px;
+    }
     .first-container {
       display: flex;
       gap: 30px;
@@ -77,6 +101,9 @@ export const BackgroundContainer = styled.div`
           }
           @media (max-width: 550px) {
             font-size: 16px;
+          }
+          @media (max-width: 400px) {
+            font-size: 14px;
           }
         }
       }
@@ -96,6 +123,9 @@ export const BackgroundContainer = styled.div`
         @media (max-width: 550px) {
           font-size: 10px;
         }
+        @media (max-width: 400px) {
+          font-size: 8px;
+        }
       }
     }
     .second-container {
@@ -112,6 +142,9 @@ export const BackgroundContainer = styled.div`
         @media (max-width: 550px) {
           font-size: 13px;
         }
+        @media (max-width: 400px) {
+          font-size: 11px;
+        }
         span {
           font-weight: 800;
         }
@@ -124,12 +157,16 @@ export const BackgroundContainer = styled.div`
     align-items: center;
     gap: 30px;
     position: absolute;
+    width: 100%;
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     @media (max-width: 991px) {
       bottom: 5px;
       gap: 10px;
+    }
+    @media (max-width: 400px) {
+      gap: 6px;
     }
     .first-container {
       display: flex;
@@ -144,6 +181,10 @@ export const BackgroundContainer = styled.div`
         }
         @media (max-width: 550px) {
           font-size: 12px;
+        }
+        @media (max-width: 400px) {
+          font-size: 10px;
+          line-height: 10px;
         }
         span {
           font-weight: 800;
@@ -177,6 +218,9 @@ export const BackgroundContainer = styled.div`
           font-size: 10px;
           line-height: 12px;
         }
+        @media (max-width: 400px) {
+          line-height: 10px;
+        }
       }
       .chevron-down {
         font-size: 20px;
@@ -187,6 +231,9 @@ export const BackgroundContainer = styled.div`
         }
         @media (max-width: 550px) {
           font-size: 14px;
+        }
+        @media (max-width: 400px) {
+          font-size: 10px;
         }
       }
     }
@@ -202,12 +249,18 @@ export const Middlecontainer = styled.div`
   @media (max-width: 550px) {
     padding-inline: 0;
   }
+  @media (max-width: 510px) {
+    padding-block: 30px 270px;
+  }
   .main-title {
     display: flex;
     flex-direction: column;
     gap: 20px;
     justify-content: center;
     position: relative;
+    @media (max-width: 400px) {
+      gap: 30px;
+    }
     .text-title {
       font-size: 16px;
       font-weight: 500;
@@ -218,6 +271,9 @@ export const Middlecontainer = styled.div`
       }
       @media (max-width: 550px) {
         font-size: 10px;
+      }
+      @media (max-width: 400px) {
+        font-size: 9px;
       }
       span {
         font-weight: 800;
@@ -239,6 +295,9 @@ export const Middlecontainer = styled.div`
           font-weight: 500px;
           @media (max-width: 550px) {
             font-size: 12px;
+          }
+          @media (max-width: 400px) {
+            font-size: 10px;
           }
         }
       }
@@ -262,6 +321,9 @@ export const Middlecontainer = styled.div`
           padding-block: 5px;
           padding-inline: 10px;
         }
+        @media (max-width: 400px) {
+          font-size: 10px;
+        }
       }
       .left-text {
         position: absolute;
@@ -272,6 +334,9 @@ export const Middlecontainer = styled.div`
         @media (max-width: 550px) {
           bottom: 20px;
           padding-right: 20px;
+        }
+        @media (max-width: 400px) {
+          bottom: 25px;
         }
         .text {
           text-align: end;
@@ -286,6 +351,7 @@ export const Middlecontainer = styled.div`
           @media (max-width: 550px) {
             font-size: 8px;
           }
+
           .span1 {
             color: #ff9b00;
           }
@@ -294,6 +360,9 @@ export const Middlecontainer = styled.div`
             font-weight: 800;
             @media (max-width: 991px) {
               font-size: 12px;
+            }
+            @media (max-width: 400px) {
+              font-size: 10px;
             }
           }
         }
@@ -304,16 +373,35 @@ export const Middlecontainer = styled.div`
       top: 158px;
       position: absolute;
       display: flex;
-      justify-content: space-between;
+      gap: 50px;
+      @media (max-width: 991px) {
+        gap: 15px;
+      }
       @media (max-width: 550px) {
         top: 120px;
         padding-inline: 10px;
+      }
+      @media (max-width: 510px) {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 25px;
+      }
+      .cards-position {
+        display: flex;
+        gap: 50px;
+        @media (max-width: 991px) {
+          gap: 15px;
+        }
       }
       .card-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
+        @media (max-width: 510px) {
+          gap: 5px;
+        }
         .index {
           font-size: 24px;
           font-weight: 800;
@@ -347,6 +435,10 @@ export const Middlecontainer = styled.div`
             max-width: 100px;
             height: 270px;
           }
+          @media (max-width: 510px) {
+            max-width: 150px;
+            height: 200px;
+          }
           .divider {
             top: 0;
             left: 0;
@@ -378,10 +470,6 @@ export const Middlecontainer = styled.div`
               font-size: 10px;
               line-height: 16px;
             }
-            // @media (max-width: 550px) {
-            //   font-size: 9px;
-            //   line-height: 14px;
-            // }
             span {
               color: #ff9b00;
             }
@@ -436,6 +524,9 @@ export const BottomContainer = styled.div`
   @media (max-width: 991px) {
     padding-block: 180px 40px;
   }
+  @media (max-width: 510px) {
+    padding-block: 250px 40px;
+  }
   p {
     margin: 0;
   }
@@ -446,11 +537,21 @@ export const BottomContainer = styled.div`
     span {
       color: #d244d1;
     }
+    @media (max-width: 400px) {
+      font-size: 14px;
+    }
+    @media (max-width: 375px) {
+      font-size: 12px;
+    }
   }
   .courses {
     display: flex;
     gap: 20px;
     overflow: hidden;
+  }
+  .courses-2 {
+    display: flex;
+    gap: 20px;
   }
   .footer-text {
     display: flex;
@@ -462,6 +563,9 @@ export const BottomContainer = styled.div`
       color: gray;
       @media (max-width: 991px) {
         font-size: 8px;
+      }
+      @media (max-width: 400px) {
+        font-size: 7px;
       }
       span {
         font-weight: 800;
