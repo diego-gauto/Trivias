@@ -14,7 +14,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setShow(false);
   const ref = useRef<any>(null);
-  const slider = document.querySelector(".scroll-container-modal") as HTMLElement;
+  const slider = document.querySelector(".scroll-container") as HTMLElement;
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -208,7 +208,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         <p className="main-text">
           Algunos cursos incluidos en <span>Gonvar+</span>
         </p>
-        <div className="courses scroll-container-modal" id="scroll-container-modal">
+        <div className="courses scroll-container" id="scroll-container">
           <div className='courses-2' onMouseDown={mouseDownHandler}>
             {
               course.map((val: any, index: any) => {

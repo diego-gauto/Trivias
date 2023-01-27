@@ -146,7 +146,7 @@ const RewardSlider = (props: reward_slider) => {
                             (type == "claim-months" || type == "claim-points" || type == "claim-certificates") &&
                             <button className="btn-info">
                               <p className='text'>
-                                Hacer pedido
+                                Más información
                               </p>
                             </button>
                           }
@@ -154,7 +154,7 @@ const RewardSlider = (props: reward_slider) => {
                             (type == "months" || type == "points" || type == "certificates") &&
                             <button className="btn-info" onClick={() => showRewardData(index)}>
                               <p className='text' >
-                                Más información
+                                Hacer pedido
                               </p>
                             </button>
                           }
