@@ -128,7 +128,7 @@ const RewardSlider = (props: reward_slider) => {
                       <img src={reward?.path} className="image-container" />
                       <div className="text-container">
                         <p className="about-text">
-                          {reward.about}
+                          {reward.title}
                         </p>
                       </div>
 
