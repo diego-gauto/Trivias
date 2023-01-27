@@ -547,7 +547,8 @@ export const BottomContainer = styled.div`
   .courses {
     display: flex;
     gap: 20px;
-    overflow: hidden;
+    overflow: scroll;
+    overflow-y: hidden;
   }
   .courses-2 {
     display: flex;
