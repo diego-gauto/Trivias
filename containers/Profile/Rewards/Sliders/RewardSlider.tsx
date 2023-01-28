@@ -81,6 +81,7 @@ const RewardSlider = (props: reward_slider) => {
   const getAllUserRewards = () => {
     getUserRewards(user.id).then((res) => {
       setUserReward(res);
+      console.log(res);
     });
   }
   const showRewardData = (index: any, rewardPoints: any) => {
@@ -220,10 +221,19 @@ const RewardSlider = (props: reward_slider) => {
                             (type == "months" || score > reward.points || type == "certificates") &&
                             <>
                               {
-                                userReward.map((val: string) => {
+                                userReward.map((val: any, index: number,) => {
                                   return (
-                                    <>
-                                    </>
+                                    <React.Fragment key={index + " RewardCompare"}>
+                                      {/* {
+                                        val.id 
+                                        ?(
+                                          val.id == reward.id
+                                          ?
+                                          :""
+                                          ) 
+                                        :
+                                      } */}
+                                    </React.Fragment>
                                     //   <button className="btn-info"
                                     //   onClick={() => {
                                     //     AddUserRewards(reward.id, reward.title),

@@ -519,7 +519,6 @@ export const BottomContainer = styled.div`
   gap: 20px;
   background-color: #ede7f2;
   padding-block: 220px 40px;
-  padding-inline: 30px;
   border-radius: 0 0 20px 20px;
   @media (max-width: 991px) {
     padding-block: 180px 40px;
@@ -534,6 +533,7 @@ export const BottomContainer = styled.div`
     font-size: 16px;
     font-weight: 600;
     color: #3f1168;
+    padding-left: 30px;
     span {
       color: #d244d1;
     }
