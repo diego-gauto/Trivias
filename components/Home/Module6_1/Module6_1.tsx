@@ -198,8 +198,12 @@ export const Module6_1 = (props: IModule6_1) => {
             </FooterAText>
             <FooterBIcons >
               <div className="content">
-                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}> </FooterBIcons_1>
-                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
+                <a href="https://wa.me/5491153137872">
+                  <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}></FooterBIcons_1>
+                </a>
+                <a href="">
+                  <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
+                </a>
                 <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
                 <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
               </div>
