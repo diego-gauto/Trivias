@@ -24,6 +24,12 @@ const RewardSlider = (props: reward_slider) => {
     if (type == "claim-points") {
       slides = rewards.filter((val: any) => (val.type == "points" && score >= val.points));
       slides.sort((a: any, b: any) => a.points - b.points)
+      slides = slides.filter((pointReward: any) =>
+        userReward.map((res: any) =>
+          res.id == pointReward.id
+        )
+      )
+      console.log(slides);
       setTexts({
         header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
