@@ -4,13 +4,15 @@ import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
 import slider from 'antd/es/slider';
+import { addRequest, addUserReward, getUserRewards } from '../../../../store/actions/RewardActions';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
 
   let [counter, setCounter] = useState<any>(0);
-  const { score, rewards, type, innerWidth, indexSlider } = props;
+  const { score, rewards, type, innerWidth, indexSlider, user } = props;
   const [slides, setSlides] = useState([]);
+  const [userReward, setUserReward] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>()
   const [texts, setTexts] = useState<any>({
     header: "",
@@ -76,10 +78,73 @@ const RewardSlider = (props: reward_slider) => {
     }
     setSlides(slides)
   }
-
-  const showRewardData = (index: any) => {
+  const getAllUserRewards = () => {
+    getUserRewards(user.id).then((res) => {
+      setUserReward(res);
+    });
+  }
+  const showRewardData = (index: any, rewardPoints: any) => {
     setOpenRewardInfo(index);
   }
+  const AddUserRewards = async (rewardId: any, rewardTitle: any) => {
+    let tempReward = {
+      id: rewardId,
+      status: false,
+      title: rewardTitle,
+    }
+    addUserReward(tempReward, user.id).then((res: any) => {
+    }).then(() => {
+      alert("Recompensa reclamada con éxito")
+    })
+  }
+  const sendRequest = async (rewardTitle: any, rewardProductType: any) => {
+    let tempRequest: any
+    if (type == "points") {
+      tempRequest = {
+        userId: user.id,
+        user: user.name,
+        userPhoto: user.photoURL,
+        points: user.score,
+        createAt: new Date(),
+        phoneNumber: user.phoneNumber,
+        type: type,
+        title: rewardTitle,
+        productType: rewardProductType,
+        status: false,
+      }
+    }
+    if (type == "months") {
+      tempRequest = {
+        userId: user.id,
+        user: user.name,
+        userPhoto: user.photoURL,
+        months: 1,
+        createAt: new Date(),
+        phoneNumber: user.phoneNumber,
+        type: type,
+        title: rewardTitle,
+        productType: rewardProductType,
+        status: false,
+      }
+    }
+    if (type == "certificates") {
+      tempRequest = {
+        userId: user.id,
+        user: user.name,
+        userPhoto: user.photoURL,
+        certificates: 2,
+        createAt: new Date(),
+        phoneNumber: user.phoneNumber,
+        type: type,
+        title: rewardTitle,
+        productType: rewardProductType,
+        status: false,
+      }
+    }
+    addRequest(tempRequest).then((res: any) => {
+    })
+  }
+
   let slider: any;
   const mouseDownHandler = function (e: any) {
     slider = document.querySelector(`.scroll-container-${indexSlider}`) as HTMLElement;
@@ -109,6 +174,7 @@ const RewardSlider = (props: reward_slider) => {
   };
 
   useEffect(() => {
+    getAllUserRewards();
     getSliders();
   }, [rewards])
 
@@ -143,22 +209,36 @@ const RewardSlider = (props: reward_slider) => {
                         <img src={reward?.path} className="image-container" />
                         <div className="btn-contain">
                           {
-                            (type == "claim-months" || type == "claim-points" || type == "claim-certificates") &&
-                            <button className="btn-info">
+                            (type == "claim-months" || score < reward.points || type == "claim-certificates") &&
+                            <button className="btn-info" onClick={() => showRewardData(index, reward.points)}>
                               <p className='text'>
                                 Más información
                               </p>
                             </button>
                           }
                           {
-                            (type == "months" || type == "points" || type == "certificates") &&
-                            <button className="btn-info" onClick={() => showRewardData(index)}>
-                              <p className='text' >
-                                Hacer pedido
-                              </p>
-                            </button>
+                            (type == "months" || score > reward.points || type == "certificates") &&
+                            <>
+                              {
+                                userReward.map((val: string) => {
+                                  return (
+                                    <>
+                                    </>
+                                    //   <button className="btn-info"
+                                    //   onClick={() => {
+                                    //     AddUserRewards(reward.id, reward.title),
+                                    //       sendRequest(reward.title, reward.productType);
+                                    //   }}
+                                    // >
+                                    //   <p className='text' >
+                                    //     Hacer pedido
+                                    //   </p>
+                                    // </button>
+                                  )
+                                })
+                              }
+                            </>
                           }
-
                         </div>
                       </div>
                       {

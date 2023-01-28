@@ -208,7 +208,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
       </Middlecontainer>
       <BottomContainer>
         <p className="main-text">
-          Algunos cursos incluidos en <span>Gonvar+</span>
+          Cursos incluidos en <span>Gonvar+</span>
         </p>
         <div className="courses scroll-container" id="scroll-container">
           <div className='courses-2' onMouseDown={mouseDownHandler}>
