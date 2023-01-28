@@ -29,6 +29,7 @@ export const ModalCont = styled.div`
 export const ModalBackground = styled.div`
   display: flex;
   position: relative;
+  min-height: 270px;
 `;
 export const BackgroundOverlay = styled.div`
   width: 100%;
@@ -111,6 +112,9 @@ export const TextContainer = styled.div`
   button {
     margin-block-start: 30px;
     padding-inline: 20px;
+    @media (max-width: 460px) {
+      margin: 0;
+    }
   }
 `;
 export const Cross = styled.p`
@@ -215,6 +219,11 @@ export const CourseContain = styled.div<{ level: any }>`
     display: flex;
     flex-direction: column;
     border-right: 1px solid #80808063;
+    @media (max-width: 990px) {
+      border-right: none;
+      border-bottom: 1px solid #80808063;
+      padding-bottom: 20px;
+    }
     padding-right: 20px;
     .level-container {
       margin-block-start: 10px;
@@ -278,12 +287,19 @@ export const CourseContain = styled.div<{ level: any }>`
     .top {
       display: flex;
       gap: 30px;
+      @media (max-width: 991px) {
+        flex-direction: column-reverse;
+        align-items: center;
+      }
       .rating {
         display: flex;
         align-items: center;
         gap: 10px;
         padding-right: 30px;
         border-right: 1px solid #80808063;
+        @media (max-width: 991px) {
+          border-right: none;
+        }
         p {
           font-size: 28px;
           font-weight: 600;
@@ -409,12 +425,16 @@ export const LessonContain = styled.div`
   padding-right: 80px;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
+  @media (max-width: 990px) {
+    padding-inline: 20px;
+  }
 `;
 export const SeasonContain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 374px) {
+  @media (max-width: 520px) {
+    align-items: center;
     flex-direction: column;
     gap: 10px;
   }
@@ -434,6 +454,8 @@ export const VideoContain = styled.div`
   gap: 20px;
   @media (max-width: 991px) {
     gap: 15px;
+    flex-direction: column;
+    align-items: baseline;
   }
   @media (max-width: 450px) {
     gap: 8px;
