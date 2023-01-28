@@ -10,9 +10,8 @@ SwiperCore.use([Autoplay]);
 const RewardSlider = (props: reward_slider) => {
 
   let [counter, setCounter] = useState<any>(0);
-  const { score, rewards, type, innerWidth, indexSlider, user } = props;
+  const { score, rewards, type, innerWidth, indexSlider, user, userReward } = props;
   const [slides, setSlides] = useState([]);
-  const [userReward, setUserReward] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>()
   const [texts, setTexts] = useState<any>({
     header: "",
@@ -77,12 +76,6 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     setSlides(slides)
-  }
-  const getAllUserRewards = () => {
-    getUserRewards(user.id).then((res) => {
-      setUserReward(res);
-      console.log(res);
-    });
   }
   const showRewardData = (index: any, rewardPoints: any) => {
     setOpenRewardInfo(index);
@@ -175,7 +168,6 @@ const RewardSlider = (props: reward_slider) => {
   };
 
   useEffect(() => {
-    getAllUserRewards();
     getSliders();
   }, [rewards])
 
@@ -224,26 +216,43 @@ const RewardSlider = (props: reward_slider) => {
                                 userReward.map((val: any, index: number,) => {
                                   return (
                                     <React.Fragment key={index + " RewardCompare"}>
-                                      {/* {
-                                        val.id 
-                                        ?(
-                                          val.id == reward.id
-                                          ?
-                                          :""
-                                          ) 
-                                        :
-                                      } */}
+                                      {
+                                        val.id
+                                          ? (
+                                            val.id == reward.id
+                                              ?
+                                              <button className="btn-info"
+                                              >
+                                                <p className='text' >
+                                                  En proceso...
+                                                </p>
+                                              </button>
+                                              :
+                                              <button className="btn-info"
+                                                onClick={() => {
+                                                  AddUserRewards(reward.id, reward.title),
+                                                    sendRequest(reward.title, reward.productType);
+                                                }}
+                                              >
+                                                <p className='text' >
+                                                  Hacer pedido
+                                                </p>
+                                              </button>
+                                          )
+                                          :
+                                          <button className="btn-info"
+                                            onClick={() => {
+                                              AddUserRewards(reward.id, reward.title),
+                                                sendRequest(reward.title, reward.productType);
+                                            }}
+                                          >
+                                            <p className='text' >
+                                              Hacer pedido
+                                            </p>
+                                          </button>
+                                      }
                                     </React.Fragment>
-                                    //   <button className="btn-info"
-                                    //   onClick={() => {
-                                    //     AddUserRewards(reward.id, reward.title),
-                                    //       sendRequest(reward.title, reward.productType);
-                                    //   }}
-                                    // >
-                                    //   <p className='text' >
-                                    //     Hacer pedido
-                                    //   </p>
-                                    // </button>
+
                                   )
                                 })
                               }

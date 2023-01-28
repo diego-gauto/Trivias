@@ -4,7 +4,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import {
-  getRewards,
+  getRewards, getUserRewards,
 } from "../../../store/actions/RewardActions";
 import {
   TitleContainer,
@@ -25,6 +25,7 @@ const Rewards = () => {
   const [loading, setLoading] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [rewardsTypes, setRewardsTypes] = useState([]);
+  const [userReward, setUserReward] = useState([]);
   const allSlider = [
     { type: "claim-points" },
     { type: "points" },
@@ -50,6 +51,12 @@ const Rewards = () => {
     } catch (error) {
       return false
     }
+  }
+  const getAllUserRewards = () => {
+    getUserRewards(userData.id).then((res) => {
+      setUserReward(res);
+      console.log(res);
+    });
   }
   const changeRewardPosition = (val: string) => {
     if (val == selectReward) {
@@ -132,8 +139,8 @@ const Rewards = () => {
 
   useEffect(() => {
     if (userData != null) {
+      getAllUserRewards();
       getAllRewards();
-      console.log(userData)
     }
   }, [userData]);
 
@@ -261,6 +268,7 @@ const Rewards = () => {
                 type={val.type}
                 innerWidth={innerWidth}
                 indexSlider={index}
+                userReward={userReward}
               />
             )
           })

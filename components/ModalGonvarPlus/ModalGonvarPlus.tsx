@@ -10,7 +10,6 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
-  const [AllCourses, setAllCourses] = useState([]);
   let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setShow(false);
   const ref = useRef<any>(null);
@@ -210,7 +209,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         <p className="main-text">
           Cursos incluidos en <span>Gonvar+</span>
         </p>
-        <div className="courses scroll-container" id="scroll-container">
+        <div className="courses scroll-container" id="scroll-container" style={{ paddingLeft: 30 }}>
           <div className='courses-2' onMouseDown={mouseDownHandler}>
             {
               course.map((val: any, index: any) => {

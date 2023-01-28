@@ -5,6 +5,7 @@ export interface reward_slider {
   type: string;
   innerWidth: number;
   indexSlider: number;
+  userReward: any;
 }
 interface SlideObj {
   id: string;
