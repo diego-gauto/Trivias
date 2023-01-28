@@ -21,7 +21,8 @@ export const RewardContain = styled.div`
     color: #fff;
   }
   .rewards {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     gap: 20px;
     p {
       margin: 0;
@@ -89,7 +90,7 @@ export const Reward = styled.div<{ type: any }>`
   }
   img {
     cursor: pointer;
-    width: 260px;
+    width: 100%;
     box-shadow: rgb(0 0 0 / 25%) 0px 0px 20px 2px;
     border-radius: 10px;
     &:hover {
@@ -97,6 +98,8 @@ export const Reward = styled.div<{ type: any }>`
     }
   }
   .title {
+    padding-inline: 10px;
     font-weight: 600;
+    text-align: center;
   }
 `;

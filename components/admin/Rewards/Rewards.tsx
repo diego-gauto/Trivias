@@ -67,7 +67,7 @@ const Rewards = () => {
             return (
               <Reward type={reward.type}>
                 <FiEdit></FiEdit>
-                <img src={reward.path} alt="" onClick={() => { setReward(reward); setEdit(true) }} />
+                <img height={170} src={reward.path} alt="" onClick={() => { setReward(reward); setEdit(true) }} />
                 <p className="title">{reward.title}</p>
                 {reward.type == "points" && <p>{reward.points} Puntos</p>}
                 {reward.type == "months" && <p>{reward.months} Meses</p>}
