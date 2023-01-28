@@ -6,70 +6,78 @@ export const Container = styled.div`
   background-color: #26264a;
   gap: 20px;
   padding: 20px;
-  min-width: 200px;
   min-height: 100vh;
+  .tab {
+    ul {
+      li {
+        color: #fff;
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+  }
 `;
 export const Text = styled.p`
   font-size: 20px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   cursor: pointer;
   color: white;
   margin: 0;
 `;
 export const AdminContain = styled.div`
   display: flex;
-  width:100%;
-  @font-face{
-    font-family:Montserrat;
-    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  width: 100%;
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face{
-    font-family:Raleway;
-    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway-VariableFont_wght.ttf);
   }
-  @font-face{ 
-    font-family:Nunito;
-    src:url(../fonts/Nunito-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Nunito;
+    src: url(../fonts/Nunito-VariableFont_wght.ttf);
   }
 `;
 export const Table = styled.table`
-td{
-  font-size: 14px;
-  font-family: 'Raleway', sans-serif;
-  padding-left: 10px;
-  padding-block: 15px;
-  text-align: left;
-  &:last-child{
-    color: #6717CD;
-    &:hover{
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
-}
-  th{
+  td {
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
     padding-left: 10px;
     padding-block: 15px;
     text-align: left;
-    background-color: #6717CD;
+    &:last-child {
+      color: #6717cd;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+  th {
+    padding-left: 10px;
+    padding-block: 15px;
+    text-align: left;
+    background-color: #6717cd;
     color: white;
     font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
+  }
+  tr {
+    &:hover {
+      background: #d3d3d3;
+      &:last-child {
+        border-radius: 0 0 10px 10px;
+      }
     }
-tr{  
-  &:hover {
-  background: #d3d3d3;
+    border-bottom: 1px solid gray;
+    &:first-child {
+      border-bottom: none;
+    }
     &:last-child {
-      border-radius: 0 0 10px 10px;
- }
-}
-  border-bottom: 1px solid gray;
-  &:first-child {
-    border-bottom: none;
- }
-  &:last-child {
-    border-bottom: none;
- }
-}
+      border-bottom: none;
+    }
+  }
 `;
