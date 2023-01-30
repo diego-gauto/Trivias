@@ -18,8 +18,7 @@ import { functions } from "../../../firebase/firebaseConfig";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, prize, setPrize, timePrize, setTimePrize, nextCertificate }: any) => {
-  const [prizeSize, setPrizeSize] = useState<any>(0);
+const NextReward = ({ score, timeIndex, timeLevel, reward, prizeSize, setReward, user, prize, timePrize, setTimePrize, nextCertificate, monthProgress }: any) => {
   const [timePrizeSize, setTimePrizeSize] = useState<any>(0);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
@@ -28,24 +27,6 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(true)
-  }
-
-
-  const getNextReward = () => {
-    let tempSize: any = [];
-    getRewards().then((res) => {
-      tempSize = res.filter((data: any) => (data.points <= score));
-      res = res.filter((data: any) => (data.points > score));
-      if (tempSize) {
-        setPrizeSize(tempSize.length);
-      }
-      if (res[0] == null) {
-        setPrize([])
-      }
-      else {
-        setPrize(res[0])
-      }
-    })
   }
   const getNextTimeReward = async () => {
     let tempSize: any = [];
@@ -63,7 +44,6 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
     })
   }
   useEffect(() => {
-    getNextReward();
     let tempDate = new Date((user.membership.finalDate) * 1000);
     let tempDay = tempDate.getDate();
     let tempMonth = tempDate.getMonth() + 1;
@@ -72,12 +52,10 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
 
   }, [])
   useEffect(() => {
-    if (timeLevel) {
+    if (monthProgress !== 0) {
       getNextTimeReward()
     }
-  }, [timeLevel])
-
-
+  }, [monthProgress])
   const cancelSubscription = async () => {
     setLoader(true);
     if (user.membership.method == 'stripe') {
@@ -99,24 +77,6 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, setReward, user, priz
     }
     cancelSub(user.id);
   }
-
-  const rewardCenter = (
-    <Link href="/Rewards">
-      <RewardCenterLink>
-        Ir al Centro de Recompensas
-        <ArrowRight />
-      </RewardCenterLink>
-    </Link>
-  )
-
-  const rewardCenterNoReward = (
-    <Link href="/Rewards">
-      <RewardCenterLinkNoReward>
-        Ir al Centro de Recompensas
-        <ArrowRight />
-      </RewardCenterLinkNoReward>
-    </Link>
-  )
 
   return (
     <ThirdBox>

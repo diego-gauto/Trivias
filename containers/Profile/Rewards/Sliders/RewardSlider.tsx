@@ -54,7 +54,9 @@ const RewardSlider = (props: reward_slider) => {
         if (!pointReward.id.includes(tempUserRewards[index])) {
           slides.push(pointReward);
         }
+
       })
+      console.log(slides)
       setTexts({
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",
@@ -232,49 +234,47 @@ const RewardSlider = (props: reward_slider) => {
                             </button>
                           }
                           {
-                            (type == "months" || score > reward.points || type == "certificates") &&
+                            (type == "months" || score >= reward.points || type == "certificates") &&
                             <>
                               {
                                 userReward.map((val: any, index: number,) => {
                                   return (
                                     <React.Fragment key={index + " RewardCompare"}>
                                       {
-                                        val.id
-                                          ? (
-                                            val.id == reward.id
-                                              ?
-                                              <button className="btn-info"
-                                              >
-                                                <p className='text' >
-                                                  En proceso...
-                                                </p>
-                                              </button>
-                                              :
-                                              <button className="btn-info"
-                                                onClick={() => {
-                                                  AddUserRewards(reward.id, reward.title),
-                                                    sendRequest(reward.title, reward.productType);
-                                                }}
-                                              >
-                                                <p className='text' >
-                                                  Hacer pedido
-                                                </p>
-                                              </button>
-                                          )
-                                          :
-                                          <button className="btn-info"
-                                            onClick={() => {
-                                              AddUserRewards(reward.id, reward.title),
-                                                sendRequest(reward.title, reward.productType);
-                                            }}
-                                          >
-                                            <p className='text' >
-                                              Hacer pedido
-                                            </p>
-                                          </button>
+                                        (val.id == reward.id && val.status == false)
+                                        &&
+                                        <button className="btn-info">
+                                          <p className='text' >
+                                            En proceso...
+                                          </p>
+                                        </button>
+                                      }
+                                      {
+                                        (val.id == reward.id && val.status == true)
+                                        &&
+                                        <button className="btn-info"
+                                          onClick={() => showRewardData(index, reward.points)}
+                                        >
+                                          <p className='text'>
+                                            Más información
+                                          </p>
+                                        </button>
+                                      }
+                                      {
+                                        ((!reward.id.includes(val.id)) && val.status == false && type == "points")
+                                        &&
+                                        <button className="btn-info"
+                                          onClick={() => {
+                                            AddUserRewards(reward.id, reward.title),
+                                              sendRequest(reward.title, reward.productType);
+                                          }}
+                                        >
+                                          <p className='text' >
+                                            Hacer Pedido
+                                          </p>
+                                        </button>
                                       }
                                     </React.Fragment>
-
                                   )
                                 })
                               }

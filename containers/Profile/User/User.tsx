@@ -11,7 +11,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getPaymentmethods } from "../../../store/actions/PaymentActions";
-import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
+import { getLevel, getRewards, getTimeLevel } from "../../../store/actions/RewardActions";
 import {
   BackgroundProfile,
   LogOut,
@@ -35,16 +35,14 @@ const User = () => {
   const [timeProgress, setTimeProgress] = useState(0);
   const [loading, setLoading] = useState(true);
   const [paymentMethod, setPaymentMethods] = useState<any>([]);
-  const [currentLevel, setCurrentLevel] = useState<number>(0);
-  const [timeScore, setTimeScore] = useState<number>(0);
-  const [timeLevel, setTimeLevel] = useState<any>([]);
+  const [monthProgress, setMonthProgress] = useState(0)
+  const [timeLevel, setTimeLevel] = useState<any>(0);
   const [starPosition, setStarPosition] = useState(0);
-  const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
-  const [taskView, setTaskView] = useState(false);
   const [nameUpperCase, setNameUpperCase] = useState<string>("");
   const [data, setData] = useState<number>(0)
   const [reward, setReward] = useState<any>(0);
-  const [prize, setPrize] = useState<any>([]);
+  const [pointsRewards, setPointsRewards] = useState<any>([]);
+  const [pointsRewardSize, setpointsRewardSize] = useState([]);
   const [timePrize, setTimePrize] = useState<any>([]);
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [nextCertificate, setNextCertificate] = useState([]);
@@ -99,59 +97,45 @@ const User = () => {
       return false
     }
   }
-  const getDate = () => {
-    let tempToday: number = new Date().getTime() / 1000;
-    let tempDate: number = userData.membership?.startDate;
-    // let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
-    let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
-
-    if (tempDate == 0) {
-      timeScore = 0;
-    }
-    setTimeScore(timeScore)
+  const getAllRewards = () => {
+    let monthsRewards: any
+    getRewards().then((reward) => {
+      monthsRewards = reward.filter((val: any) => (val.type == "months"))
+      getNextPointsReward(reward);
+    })
   }
-
-
+  const getNextPointsReward = (reward: any) => {
+    let tempRewardSize = reward.length;
+    console.log(tempRewardSize);
+    let pointsRewards = reward.filter((val: any) => (val.type == "points" && (userData.score < val.points)))
+    pointsRewards.sort((a: any, b: any) => a.points - b.points)
+    if (pointsRewards[0] == null) {
+      setPointsRewards([])
+    }
+    else {
+      setPointsRewards(pointsRewards[0])
+    }
+  }
   const getCurrentLevel = () => {
     getLevel().then((res) => {
       res = res.filter((data: any, index: any) => data.minimum <= userData.score)
       setLevel(res[0])
-      setCurrentLevel(res.length)
     })
   }
   const getCurrentTimeLevel = () => {
-    getTimeLevel().then(async (res) => {
-      await Promise.all(res.map(async (element: any) => {
-        element.minMonth = element.minimum * 30;
-        element.maxMonth = element.maximum * 30;
-      }))
-      let tempIndex = 0;
-      let tempLevels: any = [];
-      tempLevels = res.filter((data: any, index: any) => timeScore >= data.minMonth && timeScore < data.maxMonth);
-      if (tempLevels.length > 0) {
-        tempIndex = res.findIndex((x: any) =>
-          x.id == tempLevels[0]?.id)
-        tempLevels[0].level = tempIndex + 1;
-        tempLevels[0].index = tempIndex;
-        setTimeLevel(tempLevels[0]);
-        setCurrentTimeLevel(res.length)
-      } else {
-        tempLevels = res.filter((data: any, index: any) => timeScore > data.maxMonth);
-        const lastItem: any = [...tempLevels].pop();
-        tempIndex = res.findIndex((x: any) =>
-          x.id == lastItem?.id);
-        if (lastItem) {
-          lastItem.level = tempIndex + 1;
-          lastItem.index = tempIndex;
-          setTimeLevel(lastItem);
-        }
-      }
-
-      if (res[0].minMonth > timeScore) {
-        tempLevels.level = 0;
-        setTimeLevel(tempLevels)
-      }
-    })
+    let tempCurrentDate: any = new Date().getTime() / 1000;
+    let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
+    let getMonth: any = tempDayCount / (60 * 60 * 24 * 30);
+    setMonthProgress(getMonth);
+    setTimeLevel(Math.floor(getMonth))
+  }
+  const getTimeProgress = () => {
+    if (monthProgress == 0) {
+      setTimeProgress(0)
+    }
+    else {
+      setTimeProgress(755 - (((monthProgress - timeLevel) / (timeLevel + 1 - timeLevel)) * 755))
+    }
   }
   const getNextCertificates = () => {
     let counter: number = 0;
@@ -191,43 +175,22 @@ const User = () => {
     tempProgress = ((totalLessonsLeft?.lessonsLeft) / totalLessonsLeft?.maxLessons) * 755;
     setCertificateProgress(tempProgress);
   }
-
   useEffect(() => {
     fetchDB_data()
-
   }, [loggedIn])
   useEffect(() => {
     if (userData != null) {
       getCurrentLevel();
-      getDate();
       getCurrentTimeLevel();
       getNextCertificates();
+      getAllRewards();
       setNameUpperCase(userData.name.toUpperCase())
     }
   }, [userData]);
   useEffect(() => {
     if (userData !== null && level !== null && timeLevel !== null && nextCertificate !== null) {
       certificateProgressBar();
-      if (timeScore == 0) {
-        setTimeProgress(0)
-      }
-      else {
-        setTimeProgress(755 - (((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 755))
-      }
-      if (reward == 0) {
-        setStarPosition((userData.score - level.minimum) / (level.maximum - level.minimum));
-      }
-      if (reward == 1) {
-        if (timeScore == 0) {
-          setStarPosition(0);
-        }
-        else {
-          setStarPosition((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth));
-        }
-      }
-      if (reward == 2) {
-        setStarPosition(0)
-      }
+      getTimeProgress();
       setData(755 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 755));
       setLoading(false);
     }
@@ -265,7 +228,7 @@ const User = () => {
         &&
         <UserInfo
           userData={userData}
-          nextReward={prize}
+          nextReward={pointsRewards}
           nextTimeReward={timePrize}
           data={data}
           timeProgress={timeProgress}
@@ -292,10 +255,11 @@ const User = () => {
           user={userData}
           reward={reward}
           setReward={setReward}
-          timeLevel={timeLevel?.level}
+          timeLevel={timeLevel}
+          monthProgress={monthProgress}
           timeIndex={timeLevel.index}
-          prize={prize}
-          setPrize={setPrize}
+          prize={pointsRewards}
+          prizeSize={pointsRewardSize}
           timePrize={timePrize}
           setTimePrize={setTimePrize}
           nextCertificate={nextCertificate}

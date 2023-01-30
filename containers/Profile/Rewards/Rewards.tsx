@@ -55,7 +55,6 @@ const Rewards = () => {
   const getAllUserRewards = () => {
     getUserRewards(userData.id).then((res) => {
       setUserReward(res);
-      console.log(res);
     });
   }
   const changeRewardPosition = (val: string) => {
