@@ -165,7 +165,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                 :
                 reward == 1 ?
                   <span>
-                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin suscripción"}
+                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin recompensa"}
                   </span>
                   : <></>
             }
