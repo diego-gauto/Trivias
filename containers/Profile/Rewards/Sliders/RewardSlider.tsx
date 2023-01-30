@@ -21,15 +21,20 @@ const RewardSlider = (props: reward_slider) => {
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   const getSliders = () => {
     let slides: any = [];
+    let tempFilter: any = [];
+    let tempUserRewards: any = [];
     if (type == "claim-points") {
-      slides = rewards.filter((val: any) => (val.type == "points" && score >= val.points));
-      slides.sort((a: any, b: any) => a.points - b.points)
-      slides = slides.filter((pointReward: any) =>
-        userReward.map((res: any) =>
-          res.id == pointReward.id
-        )
+      tempFilter = rewards.filter((val: any) => (val.type == "points" && score >= val.points));
+      tempFilter.sort((a: any, b: any) => a.points - b.points)
+      tempFilter = tempFilter.filter((pointReward: any) => {
+        userReward.map((res: any) => {
+          if ((pointReward.id == res.id) && res.status == true) {
+            slides.push(pointReward);
+          }
+        }
+        );
+      }
       )
-      console.log(slides);
       setTexts({
         header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
@@ -37,8 +42,19 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "points") {
-      slides = rewards.filter((val: any) => (val.type == "points"));
-      slides.sort((a: any, b: any) => a.points - b.points)
+      tempFilter = rewards.filter((val: any) => (val.type == "points"));
+      tempFilter.sort((a: any, b: any) => a.points - b.points)
+      tempUserRewards = userReward.map((val: any) => { return val.id });
+      tempFilter.map((pointReward: any, index: any) => {
+        userReward.map((res: any) => {
+          if ((pointReward.id == res.id) && res.status == false) {
+            slides.push(pointReward);
+          }
+        })
+        if (!pointReward.id.includes(tempUserRewards[index])) {
+          slides.push(pointReward);
+        }
+      })
       setTexts({
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",

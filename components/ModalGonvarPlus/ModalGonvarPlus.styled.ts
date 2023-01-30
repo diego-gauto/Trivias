@@ -92,6 +92,18 @@ export const BackgroundContainer = styled.div`
       display: flex;
       gap: 30px;
       .text-contain {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        img {
+          width: 30px;
+          @media (max-width: 550px) {
+            width: 26px;
+          }
+          @media (max-width: 400px) {
+            width: 22px;
+          }
+        }
         .text {
           font-size: 20px;
           font-weight: 600;

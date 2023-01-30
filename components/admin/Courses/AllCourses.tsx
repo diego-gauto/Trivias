@@ -29,7 +29,7 @@ export const AllCourses = ({
 
   const [open, setOpen] = useState(false);
   const [IsDeleting, setIsDeleting] = useState<boolean>(false);
-
+  const GonvarImg = "/images/purchase/logo.png";
   const deleteCourse = (element: any) => {
     setIsDeleting(true);
     if (window.confirm("Desea borrar este curso?")) {
@@ -39,13 +39,13 @@ export const AllCourses = ({
       })
     }
   }
-
+  console.log(course)
   return (
     <MainContainer>
       <CourseContainer >
         <TitleContain onClick={() => { setOpen(!open) }}>
           <CourseName>
-            Curso - {course.courseTittle}
+            Curso - {course.courseTittle} {course.courseType == "Mensual" && <img src={GonvarImg} style={{ width: 30 }} />}
           </CourseName>
           {
             open == false &&

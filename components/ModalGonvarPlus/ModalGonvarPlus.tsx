@@ -10,6 +10,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
+  const GonvarLogo = "/images/purchase/logo.png";
   let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setShow(false);
   const ref = useRef<any>(null);
@@ -55,6 +56,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         <div className="upper-contain">
           <div className="first-container">
             <div className="text-contain">
+              <img src={GonvarLogo} />
               <p className="text">
                 Gonvar+
               </p>
