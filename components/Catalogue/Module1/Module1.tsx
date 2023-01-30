@@ -105,7 +105,7 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
 
   return (
     <Container>
-      {(!responsive1023 && historyCourse.seasons && historyCourse.seasons.length > 0) && <>
+      {(historyCourse.seasons && historyCourse.seasons.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <ImageContain>
             <VideoContain>
