@@ -3,26 +3,20 @@ import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
 
-import { getAuth, signOut } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import Link from "next/link";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { Background, BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getPaymentmethods } from "../../../store/actions/PaymentActions";
-import { getLevel, getRewards, getTimeLevel } from "../../../store/actions/RewardActions";
+import { getRewards } from "../../../store/actions/RewardActions";
 import {
   BackgroundProfile,
-  LogOut,
-  LogOutIcon,
   SecondBox,
   ThirdBox,
 } from "../../Profile/User/User.styled";
-import HomeWork from "./HomeWork";
 import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
-import UserData from "./UserData";
 import UserInfo from "./UserInfo";
 import { History } from "./History";
 import { getNextCertificate } from "../../../store/actions/courseActions";
@@ -168,7 +162,13 @@ const User = () => {
   const getCurrentTimeLevel = () => {
     let tempCurrentDate: any = new Date().getTime() / 1000;
     let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
-    let getMonth: any = tempDayCount / (60 * 60 * 24 * 30);
+    let getMonth: any;
+    if (userData.membership.startDate == 0) {
+      getMonth = 0;
+    }
+    else {
+      getMonth = tempDayCount / (3600 * 24 * 30);
+    }
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
   }

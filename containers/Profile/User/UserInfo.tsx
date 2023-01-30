@@ -173,9 +173,23 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               reward == 2 &&
               <>
                 <span style={{ color: "#0057e2" }}>
-                  Estás a {nextCertificate.lessonsLeft} lecciones
+                  {
+                    nextCertificate
+                      ?
+                      (
+                        nextCertificate.lessonsLeft == 1
+                          ? "Estás a " + nextCertificate.lessonsLeft + " lección"
+                          : "Estás a " + nextCertificate.lessonsLeft + " lecciones"
+                      )
+                      : "Mira lecciones "
+                  }
                 </span>
-                <br /> de un nuevo <br /> certificado
+                {
+                  nextCertificate
+                    ? <><br /> de un nuevo <br /> certificado</>
+                    : <><br /> para obtener <br /> certificados!</>
+                }
+
               </>
             }
           </p>
