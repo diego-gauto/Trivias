@@ -362,7 +362,9 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               <div className="data-contain">
                 <p className="points">{points_format} puntos</p>
                 <p className="months">{format(userData.created_at.seconds)} meses de aprendizaje</p>
-                <p className="certificates">{userData.certificates?.length} certificados</p>
+                <p className="certificates">
+                  {userData.certificates?.length > 0 ? (userData.certificates?.length == 1 ? userData.certificates?.length + " certificado" : userData.certificates?.length + " certificados") : "Sin certificados"}
+                </p>
               </div>
             </div>
             :
