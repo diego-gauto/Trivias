@@ -201,11 +201,15 @@ export const Module6_1 = (props: IModule6_1) => {
                 <a href="https://wa.me/5491153137872">
                   <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}></FooterBIcons_1>
                 </a>
-                <a href="">
+                <a href="mailto:diego@gonvar.io">
                   <FooterBIcons_1 style={{ backgroundImage: `url(${IMG4.src})` }}> </FooterBIcons_1>
                 </a>
-                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
-                <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
+                <a href="https://www.instagram.com/gonvarnails/">
+                  <FooterBIcons_1 style={{ backgroundImage: `url(${IMG5.src})` }}> </FooterBIcons_1>
+                </a>
+                <a href="https://www.facebook.com/GonvarNails">
+                  <FooterBIcons_1 style={{ backgroundImage: `url(${IMG6.src})` }}> </FooterBIcons_1>
+                </a>
               </div>
               <FooterAIcons_1 style={{ backgroundImage: `url(${IMG2.src})` }}> </FooterAIcons_1>
               <img className="responsive-img" src={IMG2.src} alt="" />
