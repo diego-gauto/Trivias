@@ -165,7 +165,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                 :
                 reward == 1 ?
                   <span>
-                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin suscripción"}
+                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin recompensa"}
                   </span>
                   : <></>
             }
@@ -173,9 +173,23 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               reward == 2 &&
               <>
                 <span style={{ color: "#0057e2" }}>
-                  Estás a {nextCertificate.lessonsLeft} lecciones
+                  {
+                    nextCertificate
+                      ?
+                      (
+                        nextCertificate.lessonsLeft == 1
+                          ? "Estás a " + nextCertificate.lessonsLeft + " lección"
+                          : "Estás a " + nextCertificate.lessonsLeft + " lecciones"
+                      )
+                      : "Mira lecciones "
+                  }
                 </span>
-                <br /> de un nuevo <br /> certificado
+                {
+                  nextCertificate
+                    ? <><br /> de un nuevo <br /> certificado</>
+                    : <><br /> para obtener <br /> certificados!</>
+                }
+
               </>
             }
           </p>
@@ -362,7 +376,9 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               <div className="data-contain">
                 <p className="points">{points_format} puntos</p>
                 <p className="months">{format(userData.created_at.seconds)} meses de aprendizaje</p>
-                <p className="certificates">{userData.certificates?.length} certificados</p>
+                <p className="certificates">
+                  {userData.certificates?.length > 0 ? (userData.certificates?.length == 1 ? userData.certificates?.length + " certificado" : userData.certificates?.length + " certificados") : "Sin certificados"}
+                </p>
               </div>
             </div>
             :

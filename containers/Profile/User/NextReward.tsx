@@ -1,15 +1,12 @@
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import {
-  ArrowRight,
-  RewardCenterLink,
-  RewardCenterLinkNoReward,
   RewardContainer,
   ThirdBox,
   SubscriptionContainer,
 } from "./User.styled";
 import { useEffect, useState } from "react";
-import { cancelSub, getRewards, getTimeRewards } from "../../../store/actions/ProfileActions";
+import { cancelSub, getTimeRewards } from "../../../store/actions/ProfileActions";
 import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
@@ -18,8 +15,7 @@ import { functions } from "../../../firebase/firebaseConfig";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ score, timeIndex, timeLevel, reward, prizeSize, setReward, user, prize, timePrize, setTimePrize, nextCertificate, monthProgress }: any) => {
-  const [timePrizeSize, setTimePrizeSize] = useState<any>(0);
+const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
@@ -29,19 +25,19 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, prizeSize, setReward,
     setShow(true)
   }
   const getNextTimeReward = async () => {
-    let tempSize: any = [];
-    let tempReward: any = [];
-    getTimeRewards().then(async (res) => {
-      tempSize = res.filter((data: any) => (data.month <= timeLevel))
-      tempReward = res.filter((data: any) => (data.month > timeLevel));
-      if (tempSize) {
-        setTimePrizeSize(tempSize.length);
-      }
-      const timeLevels = await getTimeLevel()
-      let tempRewards: any = [];
-      tempRewards = res.filter((data: any) => (data.month >= timeLevels[timeIndex]?.minimum && data.month < timeLevels[timeIndex].maximum));
-      setTimePrize(tempReward[0]);
-    })
+    // let tempSize: any = [];
+    // let tempReward: any = [];
+    // getTimeRewards().then(async (res) => {
+    //   tempSize = res.filter((data: any) => (data.month <= timeLevel))
+    //   tempReward = res.filter((data: any) => (data.month > timeLevel));
+    //   if (tempSize) {
+    //     setTimePrizeSize(tempSize.length);
+    //   }
+    //   const timeLevels = await getTimeLevel()
+    //   let tempRewards: any = [];
+    //   tempRewards = res.filter((data: any) => (data.month >= timeLevels[timeIndex]?.minimum && data.month < timeLevels[timeIndex].maximum));
+    //   setTimePrize(tempReward[0]);
+    // })
   }
   useEffect(() => {
     let tempDate = new Date((user.membership.finalDate) * 1000);
@@ -143,7 +139,7 @@ const NextReward = ({ score, timeIndex, timeLevel, reward, prizeSize, setReward,
                       ? <>Sin<span> Recompensa</span></>
                       :
                       timePrize
-                        ? <>Siguiente Recompensa<span>{timePrize?.title}</span></>
+                        ? <>Siguiente Recompensa <span>{timePrize.title}</span></>
                         : <>Sin<span> Recompensa</span></>
                   }
                 </p>
