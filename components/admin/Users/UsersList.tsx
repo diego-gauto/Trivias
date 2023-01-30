@@ -115,6 +115,11 @@ const UsersList = () => {
       [...tempUsers] = allUsers.filter((item) =>
         item.courses)
     };
+    if (value == 5) {
+      [...tempUsers] = allUsers.sort((a: any, b: any) => {
+        return a.total < b.total ? 1 : -1;
+      })
+    };
     setUsers(tempUsers);
     setUsersFilter(tempUsers);
   }
@@ -205,6 +210,7 @@ const UsersList = () => {
                   <option value={2}>Suscripción</option>
                   <option value={3}>Nombre</option>
                   <option value={4}>Cursos</option>
+                  <option value={5}>Amount spend</option>
                 </select>
               </Select>
               <SearchContain>

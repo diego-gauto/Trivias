@@ -25,11 +25,15 @@ export const ModalMod = styled(Modal)`
 export const ModalCont = styled.div`
   display: flex;
   flex-direction: column;
+  background: #ede7f2;
 `;
 export const ModalBackground = styled.div`
   display: flex;
   position: relative;
   min-height: 270px;
+  @media (max-width: 991px) {
+    margin: 40px;
+  }
 `;
 export const BackgroundOverlay = styled.div`
   width: 100%;
@@ -69,6 +73,12 @@ export const Container = styled.div`
         font-weight: 100;
         color: #ffffffa8;
       }
+      @media (max-width: 1023px) {
+        display: none;
+      }
+    }
+    @media (max-width: 1023px) {
+      justify-content: end;
     }
   }
   @media (max-width: 991px) {
@@ -89,6 +99,7 @@ export const TextContainer = styled.div`
   flex-direction: column;
   gap: 2px;
   align-items: center;
+  text-align: center;
   padding-block-end: 40px;
   p {
     color: white;
@@ -112,8 +123,8 @@ export const TextContainer = styled.div`
   button {
     margin-block-start: 30px;
     padding-inline: 20px;
-    @media (max-width: 460px) {
-      margin: 0;
+    @media (max-width: 990px) {
+      font-size: 14px;
     }
   }
 `;
@@ -125,8 +136,8 @@ export const Cross = styled.p`
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin: 0;
-  @media (max-width: 500px) {
-    font-size: 24px;
+  @media (max-width: 1023px) {
+    color: #fff;
   }
 `;
 export const Title = styled.h1`
@@ -161,8 +172,9 @@ export const SubTitle = styled.p`
 `;
 export const ImageBack = styled.img`
   width: 100%;
-  @media (max-width: 1023px) {
-    height: auto;
+  @media (max-width: 990px) {
+    max-height: 400px;
+    border-radius: 30px;
   }
 `;
 export const ImageDiv = styled.div`
@@ -213,6 +225,69 @@ export const CourseContain = styled.div<{ level: any }>`
     color: #3f1168;
     font-weight: 500;
     line-height: initial;
+  }
+  .responsive-top-info {
+    border-bottom: 1px solid #80808063;
+    display: flex;
+    .left {
+      border-right: 1px solid #80808063;
+      flex: 1;
+      border-bottom: none;
+      display: flex;
+      .professor-container {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        p {
+          font-size: 12px;
+          span {
+            font-weight: 600;
+          }
+          .name {
+            font-size: 16px;
+          }
+        }
+        img {
+          width: 50px;
+          border-radius: 50%;
+        }
+        @media (max-width: 450px) {
+          flex-direction: column;
+        }
+      }
+    }
+    .right {
+      flex: none;
+      padding-left: 20px;
+      gap: 0;
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .time {
+        color: #a733e4;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+      .duration {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      button {
+        border: 1px solid #ff9b00;
+        border-radius: 20px;
+        color: #ff9b00;
+        background: none;
+        font-size: 12px;
+        font-weight: 700;
+        width: fit-content;
+        padding: 5px 20px;
+        margin-block-start: 15px;
+      }
+    }
   }
   .left {
     flex: 0 35%;
@@ -284,6 +359,13 @@ export const CourseContain = styled.div<{ level: any }>`
     display: flex;
     flex-direction: column;
     gap: 30px;
+    .bottom {
+      @media (max-width: 991px) {
+        p {
+          text-align: justify;
+        }
+      }
+    }
     .top {
       display: flex;
       gap: 30px;
@@ -332,6 +414,7 @@ export const CourseContain = styled.div<{ level: any }>`
   @media (max-width: 991px) {
     flex-direction: column;
     z-index: 10;
+    padding-top: 0;
   }
 `;
 export const AboutContain = styled.div`
@@ -426,7 +509,7 @@ export const LessonContain = styled.div`
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
   @media (max-width: 990px) {
-    padding-inline: 20px;
+    padding-inline: 40px;
   }
 `;
 export const SeasonContain = styled.div`
@@ -448,18 +531,13 @@ export const LessonTitle = styled.p`
   span {
     color: #a733e4;
   }
+  @media (max-width: 990px) {
+    font-size: 16px;
+  }
 `;
 export const VideoContain = styled.div`
   display: flex;
   gap: 20px;
-  @media (max-width: 991px) {
-    gap: 15px;
-    flex-direction: column;
-    align-items: baseline;
-  }
-  @media (max-width: 450px) {
-    gap: 8px;
-  }
 `;
 export const ModalVideo = styled.div`
   position: relative;
@@ -490,6 +568,9 @@ export const EpisodeContain = styled.div`
   img {
     border-radius: 20px;
   }
+  @media (max-width: 990px) {
+    width: 160px;
+  }
 `;
 export const ContainerVideo = styled.div`
   display: flex;
@@ -499,8 +580,6 @@ export const ContainerVideo = styled.div`
 export const ContainVideo = styled.div`
   display: flex;
   justify-content: center;
-  @media (max-width: 991px) {
-  }
 `;
 export const EpisodeInfo = styled.div`
   display: flex;
@@ -516,15 +595,24 @@ export const EpisodeTitle = styled.p`
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
   margin: 0;
+  @media (max-width: 990px) {
+    font-size: 16px;
+  }
 `;
 export const EpisodeTime = styled.p`
   font-family: "Raleway", sans-serif;
   margin: 0;
+  @media (max-width: 990px) {
+    font-size: 14px;
+  }
 `;
 export const Description = styled.p`
   font-size: 18px;
   font-family: "Raleway", sans-serif;
   margin: 0;
+  @media (max-width: 990px) {
+    font-size: 14px;
+  }
 `;
 export const DescriptionResp = styled.p`
   font-size: 11px;

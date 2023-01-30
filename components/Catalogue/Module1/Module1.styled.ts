@@ -53,6 +53,29 @@ export const TextContain = styled.div`
       font-weight: 600;
     }
   }
+  @media (max-width: 1023px) {
+    padding-right: 20px;
+    width: min-content;
+  }
+  @media (max-width: 700px) {
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 60px;
+    height: auto;
+    border-radius: 20px;
+    text-align: center;
+    padding-inline: 20px;
+    align-items: center;
+    .top {
+      justify-content: center;
+      img {
+        width: 25px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+  }
 `;
 
 export const Gradient = styled.div`
@@ -72,13 +95,6 @@ export const ButtonContain = styled.div`
   margin-top: 20px;
   gap: 30px;
   @media (max-width: 1023px) {
-    flex-direction: column;
-    width: fit-content;
-  }
-  @media (max-width: 650px) {
-    flex-direction: column;
-    margin-top: 0;
-    gap: 5px;
   }
 `;
 export const Title = styled.h1`
@@ -86,11 +102,8 @@ export const Title = styled.h1`
   font-family: "Montserrat", sans-serif;
   color: #3f1168;
   margin: 0;
-  @media (max-width: 1023px) {
+  @media (max-width: 600px) {
     font-size: 24px;
-  }
-  @media (max-width: 650px) {
-    font-size: 18px;
   }
 `;
 export const SubText = styled.p`
@@ -99,6 +112,9 @@ export const SubText = styled.p`
   color: #3f1168;
   font-weight: 500;
   margin: 0;
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 export const Banner = styled(Image)`
   width: 100%;

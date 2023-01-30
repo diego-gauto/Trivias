@@ -117,10 +117,10 @@ export const ContainerMain = styled.div`
   }
   &:hover {
     z-index: 1;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   &:active {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 `;
 
