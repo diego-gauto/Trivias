@@ -27,14 +27,9 @@ export const Selected = styled.div`
     font-size: 22px;
   }
   @media (max-width: 991px) {
-    font-size: 14px;
-    padding-block: 8px;
-    width: 210px;
-  }
-  @media (max-width: 399px) {
     font-size: 12px;
-    padding-block: 8px;
-    width: 174px;
+    padding-inline: 10px;
+    padding-block: 3px;
   }
 `;
 export const SelectContain = styled.div`

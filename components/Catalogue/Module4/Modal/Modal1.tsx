@@ -39,7 +39,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const [lessons, setLessons] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
-  // const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const responsive990 = useMediaQuery({ query: "(max-width: 990px)" });
   let today = new Date().getTime() / 1000;
 
   const handleClick = (value: any) => {
@@ -167,7 +167,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             </Container>
           </ModalBackground>
           <CourseContain level={course.courseDifficulty}>
-            <div className="left">
+            {!responsive990 && <div className="left">
               <p>{course.courseTittle}.</p>
               <div className="level-container">
                 {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
@@ -178,9 +178,36 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               <p className="time">Duración estimada</p>
               <p className="duration">{hms(course.totalDuration)}</p>
               <button onClick={handleShow}>Materiales</button>
-            </div>
+            </div>}
+            {responsive990 && <div className="responsive-top-info">
+              <div className="left">
+                <p>{course.courseTittle}.</p>
+                <div className="level-container">
+                  {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                  {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                  {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                  <p>{course.courseDifficulty}</p>
+                </div>
+                <div className="professor-container">
+                  <img src="/images/teachers/iker.jpg" alt="" />
+                  <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
+                    <span className="name">Iker Robles García</span></p>
+                </div>
+              </div>
+              <div className="right">
+                <div className="rating">
+                  <p>{course.courseRating ? (course.courseRating / 20) : 0}</p>
+                  <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
+                    emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
+                    fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
+                </div>
+                <p className="time">Duración estimada</p>
+                <p className="duration">{hms(course.totalDuration)}</p>
+                <button onClick={handleShow}>Materiales</button>
+              </div>
+            </div>}
             <div className="right">
-              <div className="top">
+              {!responsive990 && <div className="top">
                 <div className="rating">
                   <p>{course.courseRating ? (course.courseRating / 20) : 0}</p>
                   <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
@@ -192,7 +219,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">Iker Robles García</span></p>
                 </div>
-              </div>
+              </div>}
               <div className="bottom">
                 <p>{course.courseAbout}</p>
               </div>
@@ -235,9 +262,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                         </EpisodeTime>}
                     </EpisodeInfo>
                   </VideoContain>
-                  <DescriptionResp>
-                    {lesson.description}
-                  </DescriptionResp>
                 </ContainerVideo>
               )
             })}
