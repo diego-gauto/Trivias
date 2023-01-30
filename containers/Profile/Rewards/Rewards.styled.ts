@@ -455,6 +455,8 @@ export const RewardCardContainer = styled.div<{
 `;
 export const AllSlider = styled.div`
   margin-top: 90px;
+  display: flex;
+  flex-direction: column;
   @media (max-width: 1500px) {
     margin-top: 50px;
   }
@@ -475,10 +477,8 @@ export const AllSlider = styled.div`
       font-size: 14px;
     }
   }
-  gap: 20px;
   .slide-container {
     display: flex;
-    gap: 20px;
   }
 `;
 export const Gradient = styled.linearGradient``;
