@@ -34,6 +34,9 @@ export const ModalBackground = styled.div`
   @media (max-width: 991px) {
     margin: 40px;
   }
+  @media (max-width: 550px) {
+    margin: 0;
+  }
 `;
 export const BackgroundOverlay = styled.div`
   width: 100%;
@@ -114,6 +117,9 @@ export const TextContainer = styled.div`
   .title {
     font-size: 28px;
     font-weight: 700;
+    @media (max-width: 450px) {
+      font-size: 24px;
+    }
   }
   .price {
     color: #ff9b00;
@@ -176,6 +182,16 @@ export const ImageBack = styled.img`
     max-height: 400px;
     border-radius: 30px;
   }
+  @media (max-width: 550px) {
+    max-height: 400px;
+    border-radius: 0;
+  }
+  @media (max-width: 450px) {
+    max-height: 350px;
+  }
+  @media (max-width: 400px) {
+    max-height: 300px;
+  }
 `;
 export const ImageDiv = styled.div`
   position: absolute;
@@ -220,6 +236,9 @@ export const CourseContain = styled.div<{ level: any }>`
   padding: 40px;
   gap: 20px;
   background: #ede7f2;
+  @media (max-width: 550px) {
+    margin-top: 30px;
+  }
   p {
     margin: 0;
     color: #3f1168;
