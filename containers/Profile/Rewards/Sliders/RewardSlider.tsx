@@ -22,7 +22,6 @@ const RewardSlider = (props: reward_slider) => {
   const getSliders = () => {
     let slides: any = [];
     let tempFilter: any = [];
-    let tempUserRewards: any = [];
     if (type == "claim-points") {
       tempFilter = rewards.filter((val: any) => (val.type == "points"));
       tempFilter.forEach((element: any) => {
@@ -54,8 +53,13 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-months") {
-      slides = rewards.filter((val: any) => (val.type == "months"));
-      slides.sort((a: any, b: any) => a.months - b.months)
+      tempFilter = rewards.filter((val: any) => (val.type == "months"));
+      tempFilter.sort((a: any, b: any) => a.months - b.months);
+      tempFilter.forEach((element: any) => {
+        if (userReward.find((x: any) => x.id == element.id && x.status)) {
+          slides.push(element);
+        }
+      });
       setTexts({
         header: "Beneficios Acumulados",
         title: "Beneficio desbloqueado",
@@ -63,8 +67,16 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "months") {
-      slides = rewards.filter((val: any) => (val.type == "months"));
-      slides.sort((a: any, b: any) => a.months - b.months)
+      tempFilter = rewards.filter((val: any) => (val.type == "months"));
+      tempFilter.sort((a: any, b: any) => a.months - b.months)
+      tempFilter.forEach((element: any) => {
+        if (userReward.find((x: any) => x.id == element.id && !x.status)) {
+          slides.push(element);
+        }
+        if (!userReward.find((x: any) => x.id == element.id)) {
+          slides.push(element);
+        }
+      });
       setTexts({
         header: "Beneficios por desbloquear",
         title: "Beneficio bloqueado",
@@ -72,8 +84,13 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-certificates") {
-      slides = rewards.filter((val: any) => (val.type == "certificates"));
-      slides.sort((a: any, b: any) => a.certificates - b.certificates);
+      tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
+      tempFilter.sort((a: any, b: any) => a.certificates - b.certificates);
+      tempFilter.forEach((element: any) => {
+        if (userReward.find((x: any) => x.id == element.id && x.status)) {
+          slides.push(element);
+        }
+      });
       setTexts({
         header: "Certificados Acumulados",
         title: "Beneficio desbloqueado",
@@ -81,8 +98,16 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "certificates") {
-      slides = rewards.filter((val: any) => (val.type == "certificates"));
-      slides.sort((a: any, b: any) => a.certificates - b.certificates)
+      tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
+      tempFilter.sort((a: any, b: any) => a.certificates - b.certificates)
+      tempFilter.forEach((element: any) => {
+        if (userReward.find((x: any) => x.id == element.id && !x.status)) {
+          slides.push(element);
+        }
+        if (!userReward.find((x: any) => x.id == element.id)) {
+          slides.push(element);
+        }
+      });
       setTexts({
         header: "Certificados por desbloquear",
         title: "Beneficio bloqueado",
@@ -222,7 +247,7 @@ const RewardSlider = (props: reward_slider) => {
                         <div className="btn-contain">
                           {
                             (type == "claim-months" || type == "claim-points" || type == "claim-certificates"
-                              || (score < reward.points)) &&
+                              || (score < reward.points) || months < reward.months || certificates < reward.certificates) &&
                             <button className="btn-info" onClick={() => showRewardData(index, reward.points)}>
                               <p className='text'>
                                 Más información
@@ -230,7 +255,9 @@ const RewardSlider = (props: reward_slider) => {
                             </button>
                           }
                           {
-                            ((score >= reward.points && !userReward.find((x: any) => x.id == reward.id))) &&
+                            ((score >= reward.points && !userReward.find((x: any) => x.id == reward.id)) ||
+                              (months >= reward.months && !userReward.find((x: any) => x.id == reward.id)) ||
+                              (certificates >= reward.certificates && !userReward.find((x: any) => x.id == reward.id))) &&
                             <button className="btn-info"
                               onClick={() => {
                                 AddUserRewards(reward);
