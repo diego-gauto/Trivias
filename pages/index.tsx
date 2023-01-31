@@ -93,7 +93,6 @@ const Homepage = () => {
       setCourses(tempCourses);
     })
   }
-  console.log(courseGonvarPlus)
   var obj_1: any =
   {
     "tituloInicial": "hola",

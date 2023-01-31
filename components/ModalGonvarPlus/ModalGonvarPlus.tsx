@@ -1,13 +1,16 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
+import { SIGNUP_PATH } from '../../constants/paths';
 import Modal1 from '../Catalogue/Module4/Modal/Modal1';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
 
 
-export const ModalGonvarPlus = ({ show, setShow, course, user }: any) => {
+export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedIn }: any) => {
+  SIGNUP_PATH
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
@@ -15,8 +18,9 @@ export const ModalGonvarPlus = ({ show, setShow, course, user }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [courseModal, setCourseModal] = useState<any>([]);
+  const router = useRouter();
   let [counter, setCounter] = useState<any>(0);
-  const handleClose = () => setShow(false);
+  const handleClose = () => setOpenModal(false);
   const ref = useRef<any>(null);
 
   let pos = { top: 0, left: 0, x: 0, y: 0 };
@@ -64,7 +68,7 @@ export const ModalGonvarPlus = ({ show, setShow, course, user }: any) => {
     }
   }, [course])
   return (
-    <ModalContainer show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
+    <ModalContainer show={openModal} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
       <BackgroundContainer>
         <img className="img-background" src={backgroundImage} />
         <img className="img-hand-phone" src={phoneImage} />
@@ -113,7 +117,13 @@ export const ModalGonvarPlus = ({ show, setShow, course, user }: any) => {
             <span className="span3">por sólo $149 <span style={{ fontWeight: 500 }}>MXN/mes</span></span>
           </p>
           <div className="bottom-container">
-            <button className="start-button">Comenzar ahora</button>
+            <button className="start-button"
+              onClick={() => {
+                loggedIn
+                  ? router.push("/Purchase?type=subscription")
+                  : router.push(SIGNUP_PATH)
+              }}
+            >Comenzar ahora</button>
             <div className="left-text">
               <p className="text">
                 <span className="span1">*</span> Costo ordinario sin suscripción <br />

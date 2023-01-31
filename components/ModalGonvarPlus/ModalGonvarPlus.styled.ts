@@ -325,6 +325,10 @@ export const Middlecontainer = styled.div`
         color: white;
         border: none;
         background: linear-gradient(135deg, #942ced 0%, #cc42d4 100%);
+        &:hover {
+          transition: 1s ease all;
+          transform: scale(1.1);
+        }
         @media (max-width: 991px) {
           font-size: 14px;
         }

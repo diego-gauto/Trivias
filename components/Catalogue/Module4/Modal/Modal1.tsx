@@ -41,7 +41,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const [seasons, setSeasons] = useState<any>([]);
   const responsive990 = useMediaQuery({ query: "(max-width: 990px)" });
   let today = new Date().getTime() / 1000;
-
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons);
   };

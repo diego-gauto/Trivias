@@ -16,9 +16,9 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState<any>([]);
-  const [show, setShow] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const handleShow = () => {
-    setShow(true);
+    setOpenModal(true);
   }
   const router = useRouter();
 
@@ -89,7 +89,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
-            <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
+            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} />
           </Row>}
         </div>
         <div className="video">
@@ -104,7 +104,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
-            <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
+            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />
           </Row>}
         </div>
       </div>
