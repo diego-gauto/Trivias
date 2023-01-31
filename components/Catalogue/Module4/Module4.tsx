@@ -95,17 +95,17 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   }, [user, isLoading])
 
   return (
-    <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px" }}>
+    <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0 }}>
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-            <Title>
+            <Title style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
               Cursos disponibles
             </Title>
           </div>
-          <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}
+          <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}
           >
-            <div className="scollx" style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
+            <div className="scollx" style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div className="grey-field" key={"mod4 " + idx} onClick={() => {
                   handleShow();
@@ -129,7 +129,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
               ))}
             </div>
           </div>
-          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "30px" }}></div>
         </div>
       </>}
       <Modal1 show={show} setShow={setShow} course={course} user={user} />

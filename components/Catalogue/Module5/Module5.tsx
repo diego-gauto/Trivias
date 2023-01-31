@@ -83,17 +83,17 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
 
   return (
     <Container fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px" }}>
+      style={{ overflow: "hidden", padding: 0, margin: 0 }}>
       {(courses.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-            <Title>
+            <Title style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
               Cursos incluidos en <span>Gonvar+</span>
             </Title>
           </div>
-          <div id="scroll-container3" className="scroll-container3" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px", paddingLeft: "20px" }}
+          <div id="scroll-container3" className="scroll-container3" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "10px" }}
           >
-            <div style={{ display: "flex" }} onMouseDown={
+            <div style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }} onMouseDown={
               mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div className="grey-field" key={"mod5 " + idx} onClick={(e) => {

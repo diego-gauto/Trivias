@@ -23,10 +23,13 @@ export const ModuleContain = styled.div`
   flex-direction: Column;
   gap: 40px;
   .line {
-    margin-left: 20px;
+    margin-left: 60px;
     height: 1px;
     width: auto;
     background: #00000033;
+    @media (max-width: 1023px) {
+      margin-left: 30px;
+    }
   }
   @media (max-width: 1023px) {
     gap: 20px;

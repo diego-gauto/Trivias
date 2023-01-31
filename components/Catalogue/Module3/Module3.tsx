@@ -102,14 +102,14 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <Container fluid
-            style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px" }}>
+            style={{ overflow: "hidden", padding: 0, margin: 0 }}>
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-              <Title>
+              <Title style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
                 Tus Cursos
               </Title>
             </div>
-            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}>
-              <div style={{ display: "flex" }}>
+            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}>
+              <div style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }}>
                 {courses.map((element: any, idx: any) => (
                   <div className="grey-field" key={"mod3 " + idx} onClick={() => { goTo(element) }}>
                     < SlideModuleContainer
@@ -134,7 +134,7 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
                 ))}
               </div>
             </div>
-            <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
+            <div className="line" style={{ marginRight: responsive1023 ? "30px" : "30px" }}></div>
           </Container>
         </div>
       </>}

@@ -42,7 +42,6 @@ const Rewards = () => {
   const crownImage = "/images/profile/crown.png"
   const handStarImage = "/images/Rewards/handStar.png"
   const router = useRouter();
-  console.log(router);
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));

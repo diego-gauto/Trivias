@@ -122,18 +122,18 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
 
   return (
     <Container fluid style={{
-      overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "40px"
+      overflow: "hidden", padding: 0, margin: 0
     }}
     >
       {(courses.length > 0) && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-            <ContinueText>
+            <ContinueText style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
               Continua viendo
             </ContinueText>
           </div>
-          <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px", paddingLeft: "20px" }}>
-            <div style={{ display: "flex" }} onMouseDown={mouseDownHandler}>
+          <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}>
+            <div style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div key={"Mod2 " + idx} id="grey-field" className="grey-field" onClick={() => { goTo(element) }}>
                   < SlideModuleContainer
@@ -156,7 +156,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
               ))}
             </div>
           </div>
-          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "30px" }}></div>
         </div>
       </>
       }
