@@ -328,6 +328,8 @@ const Rewards = () => {
                 key={"Slider Rewards " + index}
                 user={userData}
                 score={userData.score}
+                months={timeLevel}
+                certificates={userData.certificates?.length}
                 rewards={rewards}
                 type={val.type}
                 innerWidth={innerWidth}
