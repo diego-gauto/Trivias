@@ -30,7 +30,6 @@ const RewardSlider = (props: reward_slider) => {
           slides.push(element);
         }
       });
-      // tempFilter.sort((a: any, b: any) => a.points - b.points);
       setTexts({
         header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
@@ -40,18 +39,14 @@ const RewardSlider = (props: reward_slider) => {
     if (type == "points") {
       tempFilter = rewards.filter((val: any) => (val.type == "points"));
       tempFilter.sort((a: any, b: any) => a.points - b.points)
-      tempUserRewards = userReward.map((val: any) => { return val.id });
-      tempFilter.map((pointReward: any, index: any) => {
-        userReward.map((res: any) => {
-          if ((pointReward.id == res.id) && res.status == false) {
-            slides.push(pointReward);
-          }
-        })
-        if (!pointReward.id.includes(tempUserRewards[index])) {
-          slides.push(pointReward);
+      tempFilter.forEach((element: any) => {
+        if (userReward.find((x: any) => x.id == element.id && !x.status)) {
+          slides.push(element);
         }
-
-      })
+        if (!userReward.find((x: any) => x.id == element.id)) {
+          slides.push(element);
+        }
+      });
       setTexts({
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",
