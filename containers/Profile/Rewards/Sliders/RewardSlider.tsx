@@ -102,7 +102,11 @@ const RewardSlider = (props: reward_slider) => {
     setSlides(slides)
   }
   const showRewardData = (index: any, rewardPoints: any) => {
-    setOpenRewardInfo(index);
+    if (index == openRewardInfo) {
+      setOpenRewardInfo(undefined);
+    } else {
+      setOpenRewardInfo(index);
+    }
   }
   const AddUserRewards = async (rewardId: any, rewardTitle: any) => {
     let tempReward = {
@@ -284,7 +288,22 @@ const RewardSlider = (props: reward_slider) => {
                       </div>
                       {
                         openRewardInfo == index
-                          ? <></>
+                          ?
+                          <div className='reward-info-container'>
+                            <div className='top'>
+                              <p>{reward.title} <span>de Gonvar Nails</span></p>
+                              <p className='about'>{reward.about}</p>
+                            </div>
+                            <div className='bottom'>
+                              <p>Beneficio por completar</p>
+                              {reward.type == "points" &&
+                                <p>{reward.points} puntos en Gonvar</p>}
+                              {reward.type == "months" &&
+                                <p>{reward.months} meses en Gonvar</p>}
+                              {reward.type == "certificates" &&
+                                <p>{reward.certificates} certificados en Gonvar</p>}
+                            </div>
+                          </div>
                           :
                           <div className="text-container">
                             <p className="about-text">

@@ -4,28 +4,32 @@ export const SlideContainer = styled.div<{
   type: string;
   innerWidth: number;
 }>`
+  padding-left: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
   position: relative;
   flex-shrink: 0;
-  width: ${(props) => (props.innerWidth - 40) / 5}px;
-  @media (max-width: 1023px) {
-    gap: 10px;
+  &:first-child{
+     padding-left: 20px;
   }
-  @media (max-width: 750px) {
-    width: ${(props) => (props.innerWidth - 40) / 3}px;
-  }
-  @media (max-width: 450px) {
-    width: ${(props) => (props.innerWidth - 100) / 2}px;
-  }
+  // width: ${(props) => (props.innerWidth - 40) / 5}px;
+  // @media (max-width: 1023px) {
+  //   gap: 10px;
+  // }
+  // @media (max-width: 750px) {
+  //   width: ${(props) => (props.innerWidth - 40) / 3}px;
+  // }
+  // @media (max-width: 450px) {
+  //   width: ${(props) => (props.innerWidth - 100) / 2}px;
+  // }
   p {a
     margin: 0;
   }
   .text-container {
     text-align: center;
     font-size: 12px;
+    margin-block: 15px;
     @media (max-width: 1023px) {
       font-size: 10px;
     }
@@ -68,9 +72,11 @@ export const SlideContainer = styled.div<{
     }
   }
   .img-complete{
-    width: 85%;
-    min-height: 55%;
-    max-height: 55%;
+    // width: 85%;
+    // min-height: 55%;
+    // max-height: 55%;
+    width: 250px;
+    height: 250px;
     position: relative;
     cursor: pointer;
     .image-container {
@@ -128,6 +134,36 @@ export const SlideContainer = styled.div<{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  .reward-info-container{
+    display: flex; 
+    flex-direction: column;
+    width: 250px;
+    font-size: 12px;
+    .top{
+      background-color: #dad3e5;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      p{
+        color: #942ced;
+        font-weight: 600;
+        span{
+          font-weight: 500;
+        }
+      }
+      .about{
+        font-weight: 500;
+        color: #3f1168;
+      }
+    }
+    .bottom{
+      text-align: center;
+      padding: 15px;
+      background: #3f1168;
+      color: white;
+    }
   }
 `;
 export const BackgroundSlide = styled.div<{ type: string }>`
