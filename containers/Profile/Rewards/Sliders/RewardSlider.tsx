@@ -3,7 +3,6 @@ import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
-import slider from 'antd/es/slider';
 import { addRequest, addUserReward, getUserRewards } from '../../../../store/actions/RewardActions';
 SwiperCore.use([Autoplay]);
 
@@ -12,7 +11,8 @@ const RewardSlider = (props: reward_slider) => {
   let [counter, setCounter] = useState<any>(0);
   const { score, rewards, type, innerWidth, indexSlider, user, userReward } = props;
   const [slides, setSlides] = useState([]);
-  const [openRewardInfo, setOpenRewardInfo] = useState<any>()
+  const [openRewardInfo, setOpenRewardInfo] = useState<any>();
+
   const [texts, setTexts] = useState<any>({
     header: "",
     title: "",
@@ -24,17 +24,13 @@ const RewardSlider = (props: reward_slider) => {
     let tempFilter: any = [];
     let tempUserRewards: any = [];
     if (type == "claim-points") {
-      tempFilter = rewards.filter((val: any) => (val.type == "points" && score >= val.points));
-      tempFilter.sort((a: any, b: any) => a.points - b.points)
-      tempFilter = tempFilter.filter((pointReward: any) => {
-        userReward.map((res: any) => {
-          if ((pointReward.id == res.id) && res.status == true) {
-            slides.push(pointReward);
-          }
+      tempFilter = rewards.filter((val: any) => (val.type == "points"));
+      tempFilter.forEach((element: any) => {
+        if (userReward.find((x: any) => x.id == element.id && x.status)) {
+          slides.push(element);
         }
-        );
-      }
-      )
+      });
+      // tempFilter.sort((a: any, b: any) => a.points - b.points);
       setTexts({
         header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
@@ -83,20 +79,20 @@ const RewardSlider = (props: reward_slider) => {
     }
     if (type == "claim-certificates") {
       slides = rewards.filter((val: any) => (val.type == "certificates"));
-      slides.sort((a: any, b: any) => a.certificates - b.certificates)
+      slides.sort((a: any, b: any) => a.certificates - b.certificates);
       setTexts({
-        header: "Certificados por desbloquear",
-        title: "Beneficio bloqueado",
-        scoreText: "al completar",
+        header: "Certificados Acumulados",
+        title: "Beneficio desbloqueado",
+        scoreText: "por completar",
       })
     }
     if (type == "certificates") {
       slides = rewards.filter((val: any) => (val.type == "certificates"));
       slides.sort((a: any, b: any) => a.certificates - b.certificates)
       setTexts({
-        header: "Certificados Acumulados",
-        title: "Beneficio desbloqueado",
-        scoreText: "por completar",
+        header: "Certificados por desbloquear",
+        title: "Beneficio bloqueado",
+        scoreText: "al completar",
       })
     }
     setSlides(slides)
@@ -108,11 +104,12 @@ const RewardSlider = (props: reward_slider) => {
       setOpenRewardInfo(index);
     }
   }
-  const AddUserRewards = async (rewardId: any, rewardTitle: any) => {
+  const AddUserRewards = async (reward: any) => {
     let tempReward = {
-      id: rewardId,
+      id: reward.id,
       status: false,
-      title: rewardTitle,
+      title: reward.title,
+      type: reward.type
     }
     addUserReward(tempReward, user.id).then((res: any) => {
     }).then(() => {
@@ -230,7 +227,8 @@ const RewardSlider = (props: reward_slider) => {
                         <img src={reward?.path} className="image-container" />
                         <div className="btn-contain">
                           {
-                            (type == "claim-months" || score < reward.points || type == "claim-certificates") &&
+                            (type == "claim-months" || type == "claim-points" || type == "claim-certificates"
+                              || (score < reward.points)) &&
                             <button className="btn-info" onClick={() => showRewardData(index, reward.points)}>
                               <p className='text'>
                                 Más información
@@ -238,6 +236,28 @@ const RewardSlider = (props: reward_slider) => {
                             </button>
                           }
                           {
+                            ((score >= reward.points && !userReward.find((x: any) => x.id == reward.id))) &&
+                            <button className="btn-info"
+                              onClick={() => {
+                                AddUserRewards(reward);
+                                sendRequest(reward.title, reward.productType);
+                              }}
+                            >
+                              <p className='text' >
+                                Hacer Pedido
+                              </p>
+                            </button>
+                          }
+                          {
+
+                            ((userReward.find((x: any) => x.id == reward.id && !x.status))) &&
+                            <button className="btn-info">
+                              <p className='text'>
+                                En proceso..
+                              </p>
+                            </button>
+                          }
+                          {/* {
                             (type == "months" || score >= reward.points || type == "certificates") &&
                             <>
                               {
@@ -269,7 +289,7 @@ const RewardSlider = (props: reward_slider) => {
                                         &&
                                         <button className="btn-info"
                                           onClick={() => {
-                                            AddUserRewards(reward.id, reward.title),
+                                            AddUserRewards(reward),
                                               sendRequest(reward.title, reward.productType);
                                           }}
                                         >
@@ -283,7 +303,7 @@ const RewardSlider = (props: reward_slider) => {
                                 })
                               }
                             </>
-                          }
+                          } */}
                         </div>
                       </div>
                       {
