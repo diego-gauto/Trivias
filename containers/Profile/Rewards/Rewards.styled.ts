@@ -225,8 +225,6 @@ export const RewardsTitle = styled.div`
 export const RewardCardContainer = styled.div<{
   reward: any;
   progress: any;
-  timeProgress: any;
-  certificateProgress: any;
   type: any;
 }>`
   display: flex;
@@ -389,21 +387,7 @@ export const RewardCardContainer = styled.div<{
       stroke: url(#gradient);
       stroke-width: 34px;
       stroke-dasharray: 565;
-      ${(props) =>
-        props.reward == "points" &&
-        css<{ progress: number }>`
           stroke-dashoffset: ${(props) => props.progress};
-        `}
-      ${(props) =>
-        props.reward == "months" &&
-        css<{ timeProgress: number }>`
-          stroke-dashoffset: ${(props) => props.timeProgress};
-        `}
-        ${(props) =>
-          props.reward == "certificates" &&
-          css<{ certificateProgress: number }>`
-            stroke-dashoffset: ${(props) => props.certificateProgress};
-          `}
       stroke-linecap: round;
       cx: 110px;
       cy: 110px;

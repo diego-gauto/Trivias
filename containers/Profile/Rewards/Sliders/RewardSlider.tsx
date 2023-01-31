@@ -52,7 +52,6 @@ const RewardSlider = (props: reward_slider) => {
         }
 
       })
-      console.log(slides)
       setTexts({
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",

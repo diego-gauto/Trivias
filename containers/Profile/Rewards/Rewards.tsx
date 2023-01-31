@@ -26,6 +26,8 @@ const Rewards = () => {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [rewardsTypes, setRewardsTypes] = useState([]);
   const [userReward, setUserReward] = useState([]);
+  const [monthProgress, setMonthProgress] = useState(0)
+  const [timeLevel, setTimeLevel] = useState<any>(0);
   const allSlider = [
     { type: "claim-points" },
     { type: "points" },
@@ -71,19 +73,80 @@ const Rewards = () => {
       getNextRewards(res);
     })
   }
+  const getCurrentTimeLevel = () => {
+    let tempCurrentDate: any = new Date().getTime() / 1000;
+    let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
+    let getMonth: any;
+    if (userData.membership.startDate == 0) {
+      getMonth = 0;
+    }
+    else {
+      getMonth = tempDayCount / (3600 * 24 * 30);
+    }
+    setMonthProgress(getMonth);
+    setTimeLevel(Math.floor(getMonth))
+  }
   const getNextRewards = (res: any) => {
     let pointsFilter = [];
+    let previousRewardPoints: any = [];
+    let progressPoints: number = 0;
+    let pointsLength = [];
     let monthsFilter = [];
+    let previousRewardMonths: any = [];
+    let progressMonths: number = 0;
+    let monthsLength = [];
     let certificatesFilter = [];
+    let previousRewardCertificates: any = [];
+    let certificateLength = [];
+    let tempCertificatesLength: number = userData.certificates?.length;
+    let progressCertificates: number = 0;
     pointsFilter = res.filter((reward: any) => (reward.type == "points" && userData.score < reward.points));
-    monthsFilter = res.filter((reward: any) => reward.type == "months");
-    certificatesFilter = res.filter((reward: any) => reward.type == "certificates");
+    previousRewardPoints = res.filter((reward: any) => (reward.type == "points" && userData.score >= reward.points));
+    pointsLength = res.filter((reward: any) => (reward.type == "points" && userData.score >= reward.points));
+    monthsFilter = res.filter((reward: any) => (reward.type == "months" && timeLevel < reward.months));
+    previousRewardMonths = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
+    monthsLength = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
+    if (tempCertificatesLength) {
+      certificatesFilter = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength < reward.certificates));
+      certificateLength = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength >= reward.certificates));
+      previousRewardCertificates = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength >= reward.certificates));
+    }
+    else {
+      certificatesFilter = res.filter((reward: any) => (reward.type == "certificates" && 0 < reward.certificates));
+    }
+    if (previousRewardPoints.length == 0) {
+      previousRewardPoints = [{
+        points: 0,
+      }]
+    }
+    if (previousRewardMonths.length == 0) {
+      previousRewardMonths = [{
+        months: 0,
+      }]
+    }
+    if (previousRewardCertificates.length == 0) {
+      previousRewardCertificates = [{
+        certificates: 0,
+      }]
+    }
     pointsFilter.sort((a: any, b: any) => a.points - b.points)
-    console.log(pointsFilter[0]);
-    getRewardTexts(pointsFilter[0]);
+    monthsFilter.sort((a: any, b: any) => a.months - b.months)
+    certificatesFilter.sort((a: any, b: any) => a.certificates - b.certificates)
+    previousRewardPoints.sort((a: any, b: any) => b.points - a.points)
+    previousRewardMonths.sort((a: any, b: any) => b.months - a.months)
+    previousRewardCertificates.sort((a: any, b: any) => b.certificates - a.certificates)
+    progressPoints = 565 - (((userData.score - previousRewardPoints[0].points) / (pointsFilter[0].points - previousRewardPoints[0].points)) * 565)
+    progressMonths = 565 - (((monthProgress - previousRewardMonths[0].months) / (monthsFilter[0].months - previousRewardMonths[0].months)) * 565)
+    if (tempCertificatesLength) {
+      progressCertificates = 565 - (((tempCertificatesLength - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+    }
+    else {
+      progressCertificates = 565 - (((0 - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+    }
+    console.log(progressMonths);
+    getRewardTexts(pointsFilter[0], pointsLength, progressPoints, monthsFilter[0], monthsLength, progressMonths, certificatesFilter[0], certificateLength, progressCertificates);
   }
-  const getRewardTexts = (pointsFilter: any) => {
-    console.log(pointsFilter)
+  const getRewardTexts = (pointsFilter: any, pointsLength: any, progressPoints: number, monthsFilter: any, monthsLength: any, monthProgress: any, certificatesFilter: any, certificateLength: any, progressCertificates: any) => {
     let arrayRewards: any = [
       {
         type: "points",
@@ -91,23 +154,26 @@ const Rewards = () => {
         score: userData.score,
         title: pointsFilter.title,
         points: pointsFilter.points,
-        completed: 7,
+        completed: pointsLength.length,
+        progress: progressPoints,
       },
       {
         type: "months",
         scoreType: "meses",
-        score: 1,
-        title: "2 Monomeros Gonvar",
-        months: 2,
-        completed: 0,
+        score: timeLevel,
+        title: monthsFilter.title,
+        months: monthsFilter.months,
+        completed: monthsLength.length,
+        progress: monthProgress,
       },
       {
         type: "certificates",
         scoreType: "certificados",
-        score: 2,
-        title: "2 Monomeros Gonvar",
-        certificates: 3,
-        completed: 12,
+        score: userData.certificates?.length ? userData.certificates?.length : 0,
+        title: certificatesFilter.title,
+        certificates: userData.certificates?.length ? certificatesFilter.certificates - userData.certificates?.length : certificatesFilter.certificates - 0,
+        completed: certificateLength.length,
+        progress: progressCertificates,
       },
     ];
     setLoading(false);
@@ -140,6 +206,7 @@ const Rewards = () => {
     if (userData != null) {
       getAllUserRewards();
       getAllRewards();
+      getCurrentTimeLevel();
     }
   }, [userData]);
 
@@ -184,9 +251,7 @@ const Rewards = () => {
                 <RewardCardContainer
                   key={"RewardsCard " + index}
                   reward={selectReward}
-                  progress={380}
-                  timeProgress={380}
-                  certificateProgress={380}
+                  progress={val.progress}
                   type={val.type}
                   onClick={() => changeRewardPosition(val.type)}
                 >
@@ -223,8 +288,8 @@ const Rewards = () => {
                       </span>
                       <br />
                       {val.points && "en total"}
-                      {val.months && (val.score > 1 ? "completados" : "completado")}
-                      {val.certificates && (val.score > 1 ? "completados" : "completado")}
+                      {val.months && (val.score == 1 ? "completado" : "completados")}
+                      {val.certificates && (val.score == 1 ? "completado" : "completados")}
                     </p>
                   </div >
                   <div className="next-reward">
@@ -240,11 +305,11 @@ const Rewards = () => {
                       <p className="next-reward-points">
                         {val.points && <>al reunir<br /></>}
                         {val.months && <>al completar<br /></>}
-                        {val.certificates && <>al terminar<br /></>}
+                        {val.certificates && <>al completar<br /></>}
                         <span>
                           {val.points && val.points + " puntos"}
-                          {val.months && val.months + " meses"}
-                          {val.certificates && val.certificates + " lecciones"}
+                          {val.months && (val.months == 1 ? val.months + " mes" : val.months + " meses")}
+                          {val.certificates && (val.certificates == 1 ? val.certificates + " certificado" : val.certificates + " certificados")}
                         </span>
                       </p>
                     </div>
