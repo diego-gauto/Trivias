@@ -352,7 +352,7 @@ const Rewards = () => {
                 user={userData}
                 score={userData.score}
                 months={timeLevel}
-                certificates={userData.certificates?.length}
+                certificates={userData.certificates?.length ? userData.certificates?.length : 0}
                 rewards={rewards}
                 type={val.type}
                 innerWidth={innerWidth}
