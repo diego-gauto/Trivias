@@ -61,7 +61,6 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     }
     setCounter(0)
   }
-
   useEffect(() => {
     if (user) {
       let date = new Date().getTime() / 1000;

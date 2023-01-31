@@ -62,7 +62,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
     }
     setCounter(0)
   }
-
+  console.log(course)
   useEffect(() => {
     if (course) {
       let temp_courses: any = [];

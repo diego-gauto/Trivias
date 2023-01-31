@@ -1,16 +1,13 @@
 import { Card, Col, Image, Row } from "react-bootstrap";
-import { isIOS, isSafari } from "react-device-detect";
-import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
 import { SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
-import { PREVIEW_PATH } from "../../../constants/paths";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
-import { getFiveCourses } from "../../../store/actions/courseActions";
+import { getWholeCourses } from "../../../store/actions/courseActions";
 declare let Hls: any
 
 export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
@@ -19,9 +16,9 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState<any>([]);
-  const [show, setShow] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const handleShow = () => {
-    setShow(true);
+    setOpenModal(true);
   }
   const router = useRouter();
 
@@ -38,11 +35,29 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
       video.src = `${videoSrc}`
     }
   }
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
   const getCourses = () => {
     let tempCourses: any = [];
-    getFiveCourses().then((res: any) => {
-      setCourses(res);
-    });
+    getWholeCourses().then((response) => {
+      response.forEach((element: any) => {
+        if (element.totalLessons > 0) {
+          element.totalDuration = hms(element.totalDuration)
+          tempCourses.push(element)
+        }
+      });
+      setCourses(tempCourses);
+    })
   }
 
   useEffect(() => {
@@ -74,7 +89,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
-            <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
+            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} />
           </Row>}
         </div>
         <div className="video">
@@ -89,7 +104,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
               }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
-            <ModalGonvarPlus show={show} setShow={setShow} course={courses} user={user} />
+            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />
           </Row>}
         </div>
       </div>

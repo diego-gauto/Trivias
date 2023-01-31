@@ -93,7 +93,6 @@ const Homepage = () => {
       setCourses(tempCourses);
     })
   }
-
   var obj_1: any =
   {
     "tituloInicial": "hola",

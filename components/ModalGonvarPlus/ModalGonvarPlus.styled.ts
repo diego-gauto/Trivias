@@ -325,6 +325,10 @@ export const Middlecontainer = styled.div`
         color: white;
         border: none;
         background: linear-gradient(135deg, #942ced 0%, #cc42d4 100%);
+        &:hover {
+          transition: 1s ease all;
+          transform: scale(1.1);
+        }
         @media (max-width: 991px) {
           font-size: 14px;
         }
@@ -591,10 +595,41 @@ export const CoursesContainer = styled.div`
   flex-direction: column;
   gap: 5px;
   max-width: 130px;
-  img {
+  .image-contain {
     width: 130px;
     height: 72px;
+    background-color: black;
     border-radius: 10px;
+    position: relative;
+    .btn-info {
+      font-size: 12px;
+      color: #3f1168;
+      font-weight: 600;
+      position: absolute;
+      white-space: nowrap;
+      padding-block: 5px;
+      padding-inline: 8px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 100px;
+      border: none;
+      z-index: 5;
+      opacity: 0;
+    }
+    .img-course {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    &:hover {
+      .img-course {
+        opacity: 0.5;
+      }
+      .btn-info {
+        opacity: 1;
+      }
+    }
   }
   .course-info {
     display: flex;
