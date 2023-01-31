@@ -29,15 +29,10 @@ const Rewards = () => {
   const [userReward, setUserReward] = useState([]);
   const [monthProgress, setMonthProgress] = useState(0)
   const [timeLevel, setTimeLevel] = useState<any>(0);
-  const allSlider = [
+  const [allSlider, setAllSlider] = useState<any>([
     { type: "claim-points" },
     { type: "points" },
-    { type: "claim-months" },
-    { type: "months" },
-    { type: "claim-certificates" },
-    { type: "certificates" },
-
-  ]
+  ])
   const [selectReward, setSelectReward] = useState("points");
   const crownImage = "/images/profile/crown.png"
   const handStarImage = "/images/Rewards/handStar.png"
@@ -61,14 +56,36 @@ const Rewards = () => {
     });
   }
   const changeRewardPosition = (val: string) => {
+    let tempSlides: any = [];
     if (val == selectReward) {
       setSelectReward("points")
     }
     else {
       setSelectReward(val)
     }
+    if (val == "points") {
+      tempSlides = [
+        { type: "claim-points" },
+        { type: "points" },
+      ]
+      setAllSlider(tempSlides)
+    }
+    if (val == "months") {
+      tempSlides = [
+        { type: "claim-months" },
+        { type: "months" },
+      ]
+      setAllSlider(tempSlides)
+    }
+    if (val == "certificates") {
+      tempSlides = [
+        { type: "claim-certificates" },
+        { type: "certificates" },
+      ]
+      setAllSlider(tempSlides)
+    }
   }
-
+  console.log(allSlider);
   const getAllRewards = () => {
     getRewards().then((res) => {
       setRewards(res);

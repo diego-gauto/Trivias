@@ -3,7 +3,8 @@ import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
-import { addRequest, addUserReward, getUserRewards } from '../../../../store/actions/RewardActions';
+import { addRequest, addUserReward } from '../../../../store/actions/RewardActions';
+import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -219,7 +220,7 @@ const RewardSlider = (props: reward_slider) => {
 
   useEffect(() => {
     getSliders();
-  }, [rewards])
+  }, [rewards, type])
 
   return (
     <BackgroundSlide type={type}>
