@@ -278,53 +278,6 @@ const RewardSlider = (props: reward_slider) => {
                               </p>
                             </button>
                           }
-                          {/* {
-                            (type == "months" || score >= reward.points || type == "certificates") &&
-                            <>
-                              {
-                                userReward.map((val: any, index: number,) => {
-                                  return (
-                                    <React.Fragment key={index + " RewardCompare"}>
-                                      {
-                                        (val.id == reward.id && val.status == false)
-                                        &&
-                                        <button className="btn-info">
-                                          <p className='text' >
-                                            En proceso...
-                                          </p>
-                                        </button>
-                                      }
-                                      {
-                                        (val.id == reward.id && val.status == true)
-                                        &&
-                                        <button className="btn-info"
-                                          onClick={() => showRewardData(index, reward.points)}
-                                        >
-                                          <p className='text'>
-                                            Más información
-                                          </p>
-                                        </button>
-                                      }
-                                      {
-                                        ((!reward.id.includes(val.id)) && val.status == false && type == "points")
-                                        &&
-                                        <button className="btn-info"
-                                          onClick={() => {
-                                            AddUserRewards(reward),
-                                              sendRequest(reward.title, reward.productType);
-                                          }}
-                                        >
-                                          <p className='text' >
-                                            Hacer Pedido
-                                          </p>
-                                        </button>
-                                      }
-                                    </React.Fragment>
-                                  )
-                                })
-                              }
-                            </>
-                          } */}
                         </div>
                       </div>
                       {
