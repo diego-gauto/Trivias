@@ -1408,12 +1408,12 @@ export const RewardContainer = styled.div<{ reward: any }>`
               position: absolute;
               background-color: transparent;
               border-top-left-radius: 21px;
-              height: 42px;
-              width: 24px;
-              top: -9px;
-              left: 9px;
-              transform: rotate(90deg) scaleY(-1);
-              box-shadow: 0 -25px 0 0 #e6c4ea;
+              height: 19px;
+              width: 42px;
+              top: 0px;
+              left: 0px;
+              transform: rotate(0deg) scaleY(1);
+              box-shadow: -25px 0 0 0 #e6c4ea;
             }
             .time-container::after {
               content: "";
