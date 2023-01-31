@@ -9,7 +9,7 @@ SwiperCore.use([Autoplay]);
 const RewardSlider = (props: reward_slider) => {
 
   let [counter, setCounter] = useState<any>(0);
-  const { score, rewards, type, innerWidth, indexSlider, user, userReward } = props;
+  const { score, months, certificates, rewards, type, innerWidth, indexSlider, user, userReward } = props;
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
 
