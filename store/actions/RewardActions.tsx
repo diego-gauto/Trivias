@@ -269,7 +269,13 @@ export const updateRequest = async (id: any) => {
   })
   return 'exito'
 }
-
+export const updateUserRewards = async (userId: any, rewardId: any) => {
+  const docRef = doc(db, 'users', userId, "rewards", rewardId);
+  await updateDoc(docRef, {
+    status: true
+  })
+  return 'exito'
+}
 export const addUserReward = async (userRewards: any, userId: any) => {
   const docRef = await setDoc(
     doc(db, "users", userId, "rewards", userRewards.id),

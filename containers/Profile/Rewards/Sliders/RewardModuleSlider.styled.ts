@@ -163,6 +163,20 @@ export const SlideContainer = styled.div<{
       padding: 15px;
       background: #3f1168;
       color: white;
+      margin-bottom: 30px;
+      border-radius: 0 0 20px 20px;
+      .rewards{
+        font-weight: 600;
+        color: #dd5900;
+      }
+      .months{
+        font-weight: 600;
+        color: #1bb87f;
+      }
+      .certificates{
+        font-weight: 600;
+        color: #524af5;
+      }
     }
   }
 `;

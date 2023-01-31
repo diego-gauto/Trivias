@@ -9,9 +9,10 @@ SwiperCore.use([Autoplay]);
 const RewardSlider = (props: reward_slider) => {
 
   let [counter, setCounter] = useState<any>(0);
-  const { score, months, certificates, rewards, type, innerWidth, indexSlider, user, userReward } = props;
+  const { score, months, certificates, rewards, type, innerWidth, indexSlider, user, userReward, getAllUserRewards } = props;
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
+
 
   const [texts, setTexts] = useState<any>({
     header: "",
@@ -133,49 +134,54 @@ const RewardSlider = (props: reward_slider) => {
     addUserReward(tempReward, user.id).then((res: any) => {
     }).then(() => {
       alert("Recompensa reclamada con éxito")
+      getSliders();
+      getAllUserRewards();
     })
   }
-  const sendRequest = async (rewardTitle: any, rewardProductType: any) => {
+  const sendRequest = async (reward: any) => {
     let tempRequest: any
     if (type == "points") {
       tempRequest = {
         userId: user.id,
+        rewardId: reward.id,
         user: user.name,
         userPhoto: user.photoURL,
         points: user.score,
         createAt: new Date(),
         phoneNumber: user.phoneNumber,
         type: type,
-        title: rewardTitle,
-        productType: rewardProductType,
+        title: reward.title,
+        productType: reward.productType,
         status: false,
       }
     }
     if (type == "months") {
       tempRequest = {
         userId: user.id,
+        rewardId: reward.id,
         user: user.name,
         userPhoto: user.photoURL,
         months: 1,
         createAt: new Date(),
         phoneNumber: user.phoneNumber,
         type: type,
-        title: rewardTitle,
-        productType: rewardProductType,
+        title: reward.title,
+        productType: reward.productType,
         status: false,
       }
     }
     if (type == "certificates") {
       tempRequest = {
         userId: user.id,
+        rewardId: reward.id,
         user: user.name,
         userPhoto: user.photoURL,
         certificates: 2,
         createAt: new Date(),
         phoneNumber: user.phoneNumber,
         type: type,
-        title: rewardTitle,
-        productType: rewardProductType,
+        title: reward.title,
+        productType: reward.productType,
         status: false,
       }
     }
@@ -261,7 +267,7 @@ const RewardSlider = (props: reward_slider) => {
                             <button className="btn-info"
                               onClick={() => {
                                 AddUserRewards(reward);
-                                sendRequest(reward.title, reward.productType);
+                                sendRequest(reward);
                               }}
                             >
                               <p className='text' >
@@ -270,7 +276,6 @@ const RewardSlider = (props: reward_slider) => {
                             </button>
                           }
                           {
-
                             ((userReward.find((x: any) => x.id == reward.id && !x.status))) &&
                             <button className="btn-info">
                               <p className='text'>
@@ -291,11 +296,11 @@ const RewardSlider = (props: reward_slider) => {
                             <div className='bottom'>
                               <p>Beneficio por completar</p>
                               {reward.type == "points" &&
-                                <p>{reward.points} puntos en Gonvar</p>}
+                                <p><span className="rewards">{reward.points} puntos</span> en Gonvar</p>}
                               {reward.type == "months" &&
-                                <p>{reward.months} meses en Gonvar</p>}
+                                <p><span className="months">{reward.months} meses</span> en Gonvar</p>}
                               {reward.type == "certificates" &&
-                                <p>{reward.certificates} certificados en Gonvar</p>}
+                                <p><span className="certificates">{reward.certificates} certificados</span> en Gonvar</p>}
                             </div>
                           </div>
                           :

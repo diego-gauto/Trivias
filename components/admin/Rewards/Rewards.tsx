@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
-import { getBanner, getRequest, getRewards, updateBanner, updateRequest } from "../../../store/actions/RewardActions";
+import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import AddReward from "./Modals/AddReward";
@@ -52,10 +52,11 @@ const Rewards = () => {
             setRequests(res);
           })
         })
+        updateUserRewards(data.userId, data.rewardId).then(() => {
+        })
       }
     }
   }
-
   return (
     <AdminContain>
       <SideBar />
@@ -63,9 +64,9 @@ const Rewards = () => {
         <p className="title">Recompensas Gonvar</p>
         <button className="add" onClick={() => { setShow(true) }}>Agregar Recompensa</button>
         <div className="rewards">
-          {rewards.map((reward: any) => {
+          {rewards.map((reward: any, index: any) => {
             return (
-              <Reward type={reward.type}>
+              <Reward type={reward.type} key={"RewardTable " + index}>
                 <FiEdit></FiEdit>
                 <img height={170} src={reward.path} alt="" onClick={() => { setReward(reward); setEdit(true) }} />
                 <p className="title">{reward.title}</p>
@@ -84,11 +85,11 @@ const Rewards = () => {
             <p>Fecha</p>
             <p>Status</p>
           </div>
-          {requests.map((request: any) => {
+          {requests.map((request: any, index: number) => {
             return (
-              <div className="tr">
+              <div className="tr" key={"RequestTable " + index}>
                 <p>{request.user}</p>
-                <p>{request.product}</p>
+                <p>{request.title}</p>
                 <p>{formatDate(request.createAt)}</p>
                 <p style={{ background: request.status ? "#33c600" : "#e70000", color: "#fff", cursor: "pointer" }}
                   onClick={() => {

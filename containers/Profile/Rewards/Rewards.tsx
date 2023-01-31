@@ -67,6 +67,7 @@ const Rewards = () => {
       setSelectReward(val)
     }
   }
+
   const getAllRewards = () => {
     getRewards().then((res) => {
       setRewards(res);
@@ -358,6 +359,7 @@ const Rewards = () => {
                 innerWidth={innerWidth}
                 indexSlider={index}
                 userReward={userReward}
+                getAllUserRewards={getAllUserRewards}
               />
             )
           })
