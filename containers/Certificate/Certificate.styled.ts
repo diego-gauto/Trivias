@@ -15,7 +15,8 @@ export const MainContainer = styled.div<{ color: any }>`
   .certificate {
     position: relative;
     margin-block-start: 4rem;
-    aspect-ratio: 859 / 616;
+    width: 850px;
+    height: 600px;
     ${(props) =>
       props.color == "azul" &&
       css`
@@ -48,8 +49,6 @@ export const MainContainer = styled.div<{ color: any }>`
       `}
     background-repeat: no-repeat;
     background-size: 100%;
-    min-width: 850px;
-    width: 50vw;
     margin-inline: auto;
     box-shadow: 1px 3.29186px 8px rgb(0 0 0 / 20%);
     p {

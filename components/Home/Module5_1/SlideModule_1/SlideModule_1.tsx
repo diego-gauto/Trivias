@@ -53,14 +53,6 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
-              {
-                isNew ?
-                  <NewTag>
-                    <TextNew>Nuevo</TextNew>
-                  </NewTag>
-                  : <></>
-              }
-
             </SlideImg>
           </Row>
           <TextSectionWrapper >
