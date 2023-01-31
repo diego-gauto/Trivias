@@ -16,6 +16,7 @@ import {
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
 import RewardSlider from "./Sliders/RewardSlider";
+import { useRouter } from "next/router";
 
 const Rewards = () => {
 
@@ -40,7 +41,8 @@ const Rewards = () => {
   const [selectReward, setSelectReward] = useState("points");
   const crownImage = "/images/profile/crown.png"
   const handStarImage = "/images/Rewards/handStar.png"
-
+  const router = useRouter();
+  console.log(router);
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -210,6 +212,7 @@ const Rewards = () => {
         setLoggedIn(true)
       } else {
         setLoggedIn(false)
+        router.push("auth/Login")
       }
     }, [])
 
