@@ -85,7 +85,6 @@ const Rewards = () => {
       setAllSlider(tempSlides)
     }
   }
-  console.log(allSlider);
   const getAllRewards = () => {
     getRewards().then((res) => {
       setRewards(res);
