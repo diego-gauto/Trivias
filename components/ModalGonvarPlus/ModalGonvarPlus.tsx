@@ -3,14 +3,18 @@ import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
+import Modal1 from '../Catalogue/Module4/Modal/Modal1';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
 
 
-export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
+export const ModalGonvarPlus = ({ show, setShow, course, user }: any) => {
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
   const GonvarLogo = "/images/purchase/logo.png";
+  const [showModal, setShowModal] = useState(false);
+  const [courses, setCourses] = useState<any>([]);
+  const [courseModal, setCourseModal] = useState<any>([]);
   let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setShow(false);
   const ref = useRef<any>(null);
@@ -41,11 +45,24 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;
   };
-
   const mouseUpHandler = function () {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
+  useEffect(() => {
+    if (course) {
+      let temp_courses: any = [];
+      course.forEach((element: any) => {
+        if (element.courseType == 'Mensual') {
+          element.courseAbout = element.courseAbout
+          element.courseSubtittle = element.courseSubtittle
+          element.courseTittle = element.courseTittle
+          temp_courses.push(element);
+        }
+      });
+      setCourses(temp_courses);
+    }
+  }, [course])
   return (
     <ModalContainer show={show} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
       <BackgroundContainer>
@@ -214,10 +231,13 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
         <div className="courses scroll-container" id="scroll-container" style={{ paddingLeft: 30 }}>
           <div className='courses-2' onMouseDown={mouseDownHandler}>
             {
-              course.map((val: any, index: any) => {
+              courses.map((val: any, index: any) => {
                 return (
                   <CoursesContainer key={"Course data " + index}>
-                    <img src={val.coursePath} />
+                    <div className="image-contain">
+                      <button className="btn-info" onClick={() => { setShowModal(true), setCourseModal(val) }}>Mas informacion</button>
+                      <img src={val.coursePath} className="img-course" />
+                    </div>
                     <div className="course-info">
                       <p className="course-name">
                         {val.courseTittle}
@@ -243,6 +263,7 @@ export const ModalGonvarPlus = ({ show, setShow, course }: any) => {
           </p>
         </div>
       </BottomContainer>
+      <Modal1 show={showModal} setShow={setShowModal} course={courseModal} user={user} />
     </ModalContainer >
   )
 }

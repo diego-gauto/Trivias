@@ -28,16 +28,7 @@ export const getCourses = async () => {
   });
   return courses;
 }
-export const getFiveCourses = async () => {
-  let courses: any = []
-  const docRef = collection(db, 'courses');
-  const q = query(docRef, where("courseType", "==", "Mensual"), orderBy("createdAt", "desc"));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    courses.push({ ...doc.data(), id: doc.id });
-  });
-  return courses;
-}
+
 export const getSeason = async (courseId: any) => {
   let courses: any = []
   const docRef = query(collection(db, 'courses', courseId, 'seasons'), orderBy('name'));
@@ -115,7 +106,16 @@ export const deleteLessonMaterial = async (material: any) => {
     console.log(error)
   });
 }
-
+export const getFiveCourses = async () => {
+  let courses: any = []
+  const docRef = collection(db, 'courses');
+  const q = query(docRef, where("courseType", "==", "Mensual"), orderBy("createdAt", "desc"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0, totalDuration: 0 });
+  });
+  return courses;
+}
 export const getWholeCourses = async () => {
   let courses: any = []
   let tempCourses: any = []
