@@ -135,15 +135,38 @@ const Rewards = () => {
     previousRewardPoints.sort((a: any, b: any) => b.points - a.points)
     previousRewardMonths.sort((a: any, b: any) => b.months - a.months)
     previousRewardCertificates.sort((a: any, b: any) => b.certificates - a.certificates)
-    progressPoints = 565 - (((userData.score - previousRewardPoints[0].points) / (pointsFilter[0].points - previousRewardPoints[0].points)) * 565)
-    progressMonths = 565 - (((monthProgress - previousRewardMonths[0].months) / (monthsFilter[0].months - previousRewardMonths[0].months)) * 565)
-    if (tempCertificatesLength) {
-      progressCertificates = 565 - (((tempCertificatesLength - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+    if (pointsFilter.length == 0) {
+      pointsFilter = [{
+        points: 0,
+        title: "Sin Recompensas"
+      }]
     }
     else {
-      progressCertificates = 565 - (((0 - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+      progressPoints = 565 - (((userData.score - previousRewardPoints[0].points) / (pointsFilter[0].points - previousRewardPoints[0].points)) * 565)
     }
-    console.log(progressMonths);
+    if (monthsFilter.length == 0) {
+      monthsFilter = [{
+        months: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      progressMonths = 565 - (((monthProgress - previousRewardMonths[0].months) / (monthsFilter[0].months - previousRewardMonths[0].months)) * 565)
+    }
+    if (certificatesFilter.length == 0) {
+      certificatesFilter = [{
+        certificates: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      if (tempCertificatesLength) {
+        progressCertificates = 565 - (((tempCertificatesLength - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+      }
+      else {
+        progressCertificates = 565 - (((0 - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+      }
+    }
     getRewardTexts(pointsFilter[0], pointsLength, progressPoints, monthsFilter[0], monthsLength, progressMonths, certificatesFilter[0], certificateLength, progressCertificates);
   }
   const getRewardTexts = (pointsFilter: any, pointsLength: any, progressPoints: number, monthsFilter: any, monthsLength: any, monthProgress: any, certificatesFilter: any, certificateLength: any, progressCertificates: any) => {
@@ -287,9 +310,9 @@ const Rewards = () => {
                         {val.type == "certificates" ? (val.score == 1 ? val.score + " certificado" : val.score + " certificados") : ""}
                       </span>
                       <br />
-                      {val.points && "en total"}
-                      {val.months && (val.score == 1 ? "completado" : "completados")}
-                      {val.certificates && (val.score == 1 ? "completado" : "completados")}
+                      {val.type == "points" && "en total"}
+                      {val.type == "months" && (val.score == 1 ? "completado" : "completados")}
+                      {val.type == "certificates" && (val.score == 1 ? "completado" : "completados")}
                     </p>
                   </div >
                   <div className="next-reward">
@@ -303,13 +326,13 @@ const Rewards = () => {
                         <span>{val.title}</span>
                       </p>
                       <p className="next-reward-points">
-                        {val.points && <>al reunir<br /></>}
-                        {val.months && <>al completar<br /></>}
-                        {val.certificates && <>al completar<br /></>}
+                        {val.type == "points" && <>{val.points !== 0 ? <>al reunir<br /></> : <>Recompensas<br /></>}</>}
+                        {val.type == "months" && <>{val.months !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
+                        {val.type == "certificates" && <>{val.certificates !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
                         <span>
-                          {val.points && val.points + " puntos"}
-                          {val.months && (val.months == 1 ? val.months + " mes" : val.months + " meses")}
-                          {val.certificates && (val.certificates == 1 ? val.certificates + " certificado" : val.certificates + " certificados")}
+                          {val.type == "points" && <>{val.points !== 0 ? val.points + " puntos" : "Completadas"}</>}
+                          {val.type == "months" && <>{val.months !== 0 ? (val.months == 1 ? val.months + " mes" : val.months + " meses") : "Completadas"}</>}
+                          {val.type == "certificates" && <>{val.certificates !== 0 ? (val.certificates == 1 ? val.certificates + " certificado" : val.certificates + " certificados") : "Completadas"}</>}
                         </span>
                       </p>
                     </div>
