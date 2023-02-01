@@ -18,6 +18,7 @@ const SideBar = () => {
   const [isUsers, setIsUsers] = useState<boolean>();
   const [index, setIndex] = useState(0)
   const [section, setSection] = useState(0)
+  const [userData, setUserData] = useState<any>(null);
   try {
     var userDataAuth = useAuth();
     if (!userDataAuth.user) {
@@ -32,6 +33,7 @@ const SideBar = () => {
           return onSnapshot(query_1, (response) => {
             var adminData: any;
             response.forEach((e) => {
+              setUserData({ ...e.data(), id: e.id });
               if (e.data().role == "user") {
                 router.push({
                   pathname: '/Preview',
@@ -83,9 +85,52 @@ const SideBar = () => {
   const set = (idx: number) => {
     setIndex(idx)
   }
+  useEffect(() => {
+    if (userData != null) {
+      if (userData.role == "admin") {
+        if (userData.adminType.superAdmin == false) {
+          if (router.pathname == "/admin/Courses" && userData.adminType.courses == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Pago" && userData.adminType.pay == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Coupons" && userData.adminType.coupons == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Landing" && userData.adminType.landing == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Rewards" && userData.adminType.rewards == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Users" && userData.adminType.users == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Edit" && userData.adminType.courses == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/EditLesson" && userData.adminType.courses == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Teacher" && userData.adminType.courses == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Materials" && userData.adminType.courses == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/CourseAtributes" && userData.adminType.courses == false) {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+          if (router.pathname == "/admin/Sections") {
+            router.push({ pathname: "/admin/HomeWork" })
+          }
+        }
+      }
+    }
+  }, [userData])
 
   return (
-
     <Container>
       {isSuperAdmin &&
         <>
