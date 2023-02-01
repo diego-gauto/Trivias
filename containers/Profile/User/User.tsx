@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
 
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
@@ -60,7 +60,6 @@ const User = () => {
 
     setLoggedIn(false)
   }
-
   const fetchDB_data = async () => {
     try {
       let temp_pm: any = []

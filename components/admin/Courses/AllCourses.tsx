@@ -39,7 +39,6 @@ export const AllCourses = ({
       })
     }
   }
-  console.log(course)
   return (
     <MainContainer>
       <CourseContainer >

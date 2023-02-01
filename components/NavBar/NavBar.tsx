@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, doc, updateDoc } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -97,6 +97,24 @@ const NavBar = () => {
       return false
     }
   }
+  const addAdmintypes = async () => {
+    const createAdminType: any = {
+      general: true,
+      pay: false,
+      courses: false,
+      rewards: false,
+      landing: false,
+      coupons: false,
+      users: false,
+      superAdmin: false
+    }
+    const docRef = doc(db, 'users', userData.id);
+    await updateDoc(docRef, {
+      adminType: createAdminType,
+    }).then(() => {
+      console.log('exito')
+    })
+  }
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -119,6 +137,13 @@ const NavBar = () => {
       setColor(0)
     }
   }
+  useEffect(() => {
+    if (userData != null) {
+      if (userData.role == "admin" && (!("adminType" in userData))) {
+        addAdmintypes();
+      }
+    }
+  }, [userData]);
   useEffect(
     () => {
       window.addEventListener('scroll', ChangeNav);
