@@ -21,7 +21,6 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: fit-content;
     .top {
       display: flex;
       align-items: center;
@@ -52,8 +51,9 @@ export const MainContainer = styled.div`
         margin: 0;
       }
       .left {
+        width: 100%;
         display: flex;
-        gap: 80px;
+        gap: 30px;
         .like {
           display: flex;
           align-items: center;
@@ -75,6 +75,25 @@ export const MainContainer = styled.div`
           border: none;
           background: none;
         }
+        .answer-input {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+          .answer {
+            background: none;
+            color: #8e2de2;
+            padding-inline: 20px;
+            outline: none;
+            border: 1px solid #8e2de2;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            ::placeholder {
+              color: #8e2de2;
+            }
+          }
+        }
       }
       .report {
         font-size: 18px;
@@ -82,6 +101,52 @@ export const MainContainer = styled.div`
         font-weight: 600;
         border: none;
         background: none;
+      }
+    }
+    .answer-container {
+      margin-left: 130px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      @media (max-width: 650px) {
+        margin-left: 0;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .like {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #fa3838;
+          svg {
+            cursor: pointer;
+            font-size: 22px;
+          }
+          p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fa3838;
+          }
+        }
+        p {
+          text-transform: capitalize;
+          color: #74549c;
+          margin: 0;
+          font-weight: 600;
+          span {
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+      .middle {
+        p {
+          font-weight: 500;
+          color: #74549c;
+          margin: 0;
+        }
       }
     }
   }
@@ -133,12 +198,9 @@ export const CommentInput = styled.input`
   }
 `;
 export const Profile = styled.img`
-  width: 48px;
-  height: auto;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  @media (max-width: 1023px) {
-    width: 32px;
-  }
 `;
 export const CommentText = styled.div`
   display: flex;

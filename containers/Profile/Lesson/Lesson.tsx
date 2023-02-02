@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { LOGIN_PATH } from "../../../constants/paths";
 import { db } from "../../../firebase/firebaseConfig";
@@ -32,10 +32,25 @@ const Lesson = () => {
   }, [router, course]);
 
   const checkCourse = () => {
+
     let date = new Date().getTime() / 1000;
     if (course) {
       let temp_lesson;
       let temp_comments;
+
+      onSnapshot(query(collection(db, 'comments'), orderBy("createdAt", "desc")), (doc) => {
+        let comment: any = []
+        doc.docs.forEach((x) => {
+          comment.push({ ...x.data(), id: x.id })
+        })
+        if (comment?.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
+          temp_comments = [...comment].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
+          setCurrentComments(temp_comments);
+        } else {
+          setCurrentComments([]);
+        }
+      })
+
       temp_lesson = course.seasons[season].lessons[lesson];
       temp_lesson.seasonId = course?.seasons[season].id;
       temp_lesson.courseId = course.id;
@@ -79,12 +94,6 @@ const Lesson = () => {
           }
         }
       }
-      if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
-        temp_comments = [...comments].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
-        setCurrentComments(temp_comments);
-      } else {
-        setCurrentComments([]);
-      }
     }
   }
 
@@ -107,9 +116,6 @@ const Lesson = () => {
 
   const fetchDB_data = async () => {
     try {
-      getComments().then((res) => {
-        setComments(res);
-      })
       let date = new Date().getTime() / 1000;
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
