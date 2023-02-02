@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { getTeacher, getUsers } from '../../../store/actions/courseActions';
+import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks } from '../../../store/actions/UserActions';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
@@ -16,10 +16,20 @@ const HomeWork = () => {
   const [data, setData] = useState<any>([]);
   const [id, setId] = useState("");
   const [professor, setProfessor] = useState<any>([]);
+  const [course, setCourse] = useState<any>([]);
   const [openSelect, setOpenSelect] = useState(false)
+  const [courseSelect, setCourseSelect] = useState(false)
   const [professorFilter, setProfessorFilter] = useState<any>("");
-  const [professorLength, setProfessorLength] = useState<any>(0);
+  const [courseFilter, setCourseFilter] = useState<any>("");
 
+  const openCourseSelect = () => {
+    setOpenSelect(false);
+    setCourseSelect(!courseSelect)
+  }
+  const openTeacherSelect = () => {
+    setOpenSelect(!openSelect);
+    setCourseSelect(false)
+  }
   const getHomeworks = () => {
     let tempFilter: any = [];
     if (professorFilter != "") {
@@ -32,7 +42,6 @@ const HomeWork = () => {
           let tempYear = tempDate.getFullYear()
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
-
         res.filter((element: any, index: any) => {
           element.teacherCreds.map((val: any) => {
             if (val.id === professorFilter.id) {
@@ -56,6 +65,18 @@ const HomeWork = () => {
       })
     }
   }
+  const getAllCourses = () => {
+    let courses: any = []
+    getCourses().then((res) => {
+      res.map((val: any) =>
+        homeWorks.map((hw: any) => {
+          if (hw.courseId) {
+
+          }
+        })
+      )
+    })
+  }
   const getAllteachers = () => {
     getTeacher().then((res) => {
       setProfessor(res);
@@ -70,6 +91,7 @@ const HomeWork = () => {
   }
   useEffect(() => {
     getAllteachers();
+    getAllCourses();
   }, [])
   useEffect(() => {
     getHomeworks();
@@ -84,53 +106,102 @@ const HomeWork = () => {
             <p>
               Tareas
             </p>
-            <SelectContain key={1}>
-              <Selected onClick={(e) => { setOpenSelect(!openSelect) }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
-                {
-                  professorFilter ? professorFilter.name : "Seleccione un professor"
-                }
-                <CaretD2 style={{ top: "18%" }} />
-              </Selected>
-
-              {
-                openSelect == true &&
-
-                <OptionContain>
-                  <Option
-                    onClick={() => {
-                      setProfessorFilter("");
-                    }}>
-                    <input
-                      type="radio"
-                      id="professor"
-                      name="professor"
-                      value=""
-                    />
-                    <Label2>Ver Todas</Label2>
-                  </Option>
+            <div style={{ display: "flex", gap: 10 }}>
+              <SelectContain key={2}>
+                <Selected onClick={openCourseSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
-                    professor.map((val: any, index: any) => {
-                      return (
-                        <Option
-                          key={"Professor " + index}
-                          onClick={() => {
-                            setProfessorFilter(val);
-                          }}>
-                          <input
-                            type="radio"
-                            id="professor"
-                            name="professor"
-                            value="professor"
-                          />
-                          <Label2>{val.name}</Label2>
-                        </Option>
-                      )
-                    })
+                    professorFilter ? professorFilter.name : "Seleccione un curso"
                   }
+                  <CaretD2 style={{ top: "18%" }} />
+                </Selected>
 
-                </OptionContain>
-              }
-            </SelectContain>
+                {
+                  courseSelect == true &&
+
+                  <OptionContain>
+                    <Option
+                      onClick={() => {
+                        setCourseFilter("");
+                      }}>
+                      <input
+                        type="radio"
+                        id="professor"
+                        name="professor"
+                        value=""
+                      />
+                      <Label2>Ver Todas</Label2>
+                    </Option>
+                    {
+                      professor.map((val: any, index: any) => {
+                        return (
+                          <Option
+                            key={"Professor " + index}
+                            onClick={() => {
+                              setCourseFilter(val);
+                            }}>
+                            <input
+                              type="radio"
+                              id="professor"
+                              name="professor"
+                              value="professor"
+                            />
+                            <Label2>{val.name}</Label2>
+                          </Option>
+                        )
+                      })
+                    }
+
+                  </OptionContain>
+                }
+              </SelectContain>
+              <SelectContain key={1}>
+                <Selected onClick={openTeacherSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
+                  {
+                    professorFilter ? professorFilter.name : "Seleccione un professor"
+                  }
+                  <CaretD2 style={{ top: "18%" }} />
+                </Selected>
+
+                {
+                  openSelect == true &&
+
+                  <OptionContain>
+                    <Option
+                      onClick={() => {
+                        setProfessorFilter("");
+                      }}>
+                      <input
+                        type="radio"
+                        id="professor"
+                        name="professor"
+                        value=""
+                      />
+                      <Label2>Ver Todas</Label2>
+                    </Option>
+                    {
+                      professor.map((val: any, index: any) => {
+                        return (
+                          <Option
+                            key={"Professor " + index}
+                            onClick={() => {
+                              setProfessorFilter(val);
+                            }}>
+                            <input
+                              type="radio"
+                              id="professor"
+                              name="professor"
+                              value="professor"
+                            />
+                            <Label2>{val.name}</Label2>
+                          </Option>
+                        )
+                      })
+                    }
+
+                  </OptionContain>
+                }
+              </SelectContain>
+            </div>
           </TitleContain>
           <Table id="Pay">
             <tbody>
