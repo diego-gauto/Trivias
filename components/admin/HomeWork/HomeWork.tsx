@@ -61,20 +61,22 @@ const HomeWork = () => {
           let tempYear = tempDate.getFullYear()
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
+        getAllCourses(res);
         setHomeWorks(res);
       })
     }
   }
-  const getAllCourses = () => {
+  const getAllCourses = (homeWork: any) => {
     let courses: any = []
     getCourses().then((res) => {
       res.map((val: any) =>
-        homeWorks.map((hw: any) => {
-          if (hw.courseId) {
-
+        homeWork.map((hw: any) => {
+          if (val.id == hw.courseId) {
+            courses.push(val)
           }
         })
       )
+      setCourse(courses)
     })
   }
   const getAllteachers = () => {
@@ -91,11 +93,10 @@ const HomeWork = () => {
   }
   useEffect(() => {
     getAllteachers();
-    getAllCourses();
   }, [])
   useEffect(() => {
     getHomeworks();
-  }, [professorFilter])
+  }, [professorFilter, courseFilter])
 
   return (
     <AdminContain>
@@ -110,7 +111,7 @@ const HomeWork = () => {
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
-                    professorFilter ? professorFilter.name : "Seleccione un curso"
+                    courseFilter ? courseFilter.courseTittle : "Seleccione un curso"
                   }
                   <CaretD2 style={{ top: "18%" }} />
                 </Selected>
@@ -132,7 +133,7 @@ const HomeWork = () => {
                       <Label2>Ver Todas</Label2>
                     </Option>
                     {
-                      professor.map((val: any, index: any) => {
+                      course.map((val: any, index: any) => {
                         return (
                           <Option
                             key={"Professor " + index}
@@ -145,7 +146,7 @@ const HomeWork = () => {
                               name="professor"
                               value="professor"
                             />
-                            <Label2>{val.name}</Label2>
+                            <Label2>{val.courseTittle}</Label2>
                           </Option>
                         )
                       })
