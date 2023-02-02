@@ -85,9 +85,11 @@ const Preview = () => {
     fetchDB_data()
   }, [loggedIn])
 
+
   window.addEventListener("resize", () => {
-    setInnerWidth(window.innerWidth)
+    setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
+
   return (
     <>
       <PreviewContain>

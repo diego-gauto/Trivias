@@ -7,6 +7,7 @@ export interface IAllCourses {
   coursePrice: string;
   courseProfessor: any;
   coursePublishYear: string;
+  courseRating: number;
   courseSubtittle: string;
   courseType?: string;
   index: number;

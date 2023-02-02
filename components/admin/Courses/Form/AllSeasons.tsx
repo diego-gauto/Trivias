@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { onSnapshot, DocumentData } from "firebase/firestore";
 import Link from "next/link";
-
 import { db } from "../../../../firebase/firebaseConfig";
 import { MainContainer } from "../AllCourses.styled";
 import { AllLessons } from "./AllLessons";
@@ -31,6 +30,7 @@ interface IAllSeasons {
   seasonID: string,
   setSeasonEditModalData: Function,
   name: string,
+  change: boolean
 }
 interface AllLessonsProps {
   lessonTitle: string,
@@ -40,6 +40,7 @@ interface AllLessonsProps {
 }
 
 export const AllSeasons = ({
+  change,
   documentID,
   index,
   courseID,
@@ -71,24 +72,24 @@ export const AllSeasons = ({
       return false
     }
   }
+
   useEffect(() => {
     getSeasonID()
-  }, [])
-
+  }, [change])
   const onSeasonEditClick = () => {
     setSeasonEditModalData({ seasonID: documentID, currentName: name });
   };
 
 
   return (
-    <><MainContainer>
+    <><MainContainer id={"target" + index} >
       <SeasonContain onClick={() => { setOpenSeason(!openSeason); getSeasonID() }}>
         <TitleContain>
           <TitleEdit>
             <Title>
               {name}
               {!openSeason &&
-                <EpisodesNumber>{lessons?.length} Episodios</EpisodesNumber>}
+                <EpisodesNumber>{lessons?.length} Lecciónes</EpisodesNumber>}
             </Title>
             <Button
               onClick={onSeasonEditClick}
@@ -110,9 +111,10 @@ export const AllSeasons = ({
                 </Link>
                 {
                   lessons.length == 0 &&
-                  <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
-
+                  <></>
                 }
+                <Button onClick={() => { setShow(true), setDeleteMessage(2) }}>Eliminar temporada <TrashIcon /></Button>
+
                 <ChevU />
               </>}
             {!openSeason &&
@@ -143,8 +145,9 @@ export const AllSeasons = ({
           deleteMessage={deleteMessage}
           seasonID={documentID}
           courseID={courseID}
-          setOpenSeason={setOpenSeason} />
-
+          setOpenSeason={setOpenSeason}
+          lessons={lessons}
+        />
 
       </SeasonContain>
     </MainContainer>

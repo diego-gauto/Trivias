@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
-
 import { LOGIN_PATH } from "../../../constants/paths";
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
@@ -11,9 +10,8 @@ import {
   getComments,
   getWholeCourse,
 } from "../../../store/actions/courseActions";
-import { getPaidCourses } from "../../../store/actions/UserActions";
+import { addUserCertificate, getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, FirstContainer, MainContainer } from "./Lesson.styled";
-import Modules from "./LessonComponents/Modules/Modules";
 import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 
@@ -22,23 +20,64 @@ const Lesson = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState<any>();
   const router = useRouter()
-  const [userData, setUserData] = useState<any>(null);
   const { id, season, lesson }: any = router.query;
+  const [userData, setUserData] = useState<any>(null);
   const [currentlesson, setCurrentLesson] = useState<any>({});
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
-
+  const [certficate, setCertificate] = useState<any>(false);
 
   useEffect(() => {
+    checkCourse()
+  }, [router, course]);
+
+  const checkCourse = () => {
+    let date = new Date().getTime() / 1000;
     if (course) {
       let temp_lesson;
       let temp_comments;
       temp_lesson = course.seasons[season].lessons[lesson];
-      temp_lesson.seasonId = course?.seasons[season].id
-      temp_lesson.courseId = course.id
+      temp_lesson.seasonId = course?.seasons[season].id;
+      temp_lesson.courseId = course.id;
+      temp_lesson.courseTitle = course?.courseTittle;
+      temp_lesson.teachers = course?.courseProfessor;
       setCurrentLesson(temp_lesson);
       if (userData) {
-        addHistoryCourse(course, userData.id, season, lesson);
+        if (course.courseType == 'Gratis') {
+          addHistoryCourse(course, userData.id, season, lesson);
+        }
+        if (course.courseType == 'Mensual' && userData.membership.finalDate > date) {
+          addHistoryCourse(course, userData.id, season, lesson);
+        }
+        if (course.courseType == 'Producto') {
+          getPaidCourses(userData.id).then((paid: any) => {
+            if (paid.some((x: any) => x.id == course.id && date < x.finalDate)) {
+              addHistoryCourse(course, userData.id, season, lesson);
+            }
+          })
+        }
+        let viewed = 0;
+        course.lessons.forEach((element: any) => {
+          if (element.users.includes(userData.id)) {
+            viewed++;
+          }
+        });
+        if (course.lessons.length == viewed) {
+          setCertificate(true);
+          let tempCertificate = userData.certificates;
+          if (tempCertificate) {
+            if (tempCertificate.find((x: any) => x.courseId == course.id)) {
+              return;
+            } else {
+              tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id });
+              addUserCertificate(tempCertificate, userData.id);
+            }
+          } else {
+            tempCertificate = []
+            tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id, courseTitle: course.courseTittle });
+            addUserCertificate(tempCertificate, userData.id);
+          }
+        }
       }
       if (comments.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
         temp_comments = [...comments].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
@@ -46,9 +85,12 @@ const Lesson = () => {
       } else {
         setCurrentComments([]);
       }
-      setIsLoading(false);
     }
-  }, [router, course]);
+  }
+
+  const handleComplete = () => {
+    checkCourse()
+  }
 
   try {
     var userDataAuth = useAuth();
@@ -56,15 +98,7 @@ const Lesson = () => {
       if (userDataAuth.user !== null) {
         setLoggedIn(true)
       } else {
-        setLoggedIn(false);
-        getWholeCourse(id).then((res: any) => {
-          if (res.courseType == 'Gratis') {
-            setCourse(res);
-          }
-          if (res.courseType == 'Producto' || res.courseType == 'Mensual') {
-            router.push(LOGIN_PATH)
-          }
-        })
+        router.push(LOGIN_PATH)
       }
     }, [])
   } catch (error) {
@@ -86,6 +120,7 @@ const Lesson = () => {
                 if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
                   res.paid = true;
                   addHistoryCourse(res, e.id, season, lesson);
+                  setIsLoading(false);
                 } else {
                   router.push({
                     pathname: 'Purchase', query: { type: 'course', id: id }
@@ -95,6 +130,7 @@ const Lesson = () => {
               if (res.courseType == 'Mensual') {
                 if (e.data().membership.finalDate > date) {
                   addHistoryCourse(res, e.id, season, lesson);
+                  setIsLoading(false);
                 }
                 else {
                   router.push(
@@ -104,6 +140,7 @@ const Lesson = () => {
               }
               if (res.courseType == 'Gratis') {
                 addHistoryCourse(res, e.id, season, lesson);
+                setIsLoading(false);
               }
               setCourse(res);
             })
@@ -121,21 +158,20 @@ const Lesson = () => {
 
   }, [loggedIn])
 
+
   return (
     <>
-      {isLoading ? <Background>
-        <LoaderImage>
+      {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>
+        <LoaderImage >
           <LoaderContain />
         </LoaderImage>
       </Background> :
         <MainContainer>
           {course && <Container>
             <FirstContainer>
-              <Video data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} />
-              <Modules data={currentlesson} user={userData} comments={currentComments} season={season} lesson={lesson} teacherId={course.courseProfessor.id} />
+              <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer>
           </Container>}
-
         </MainContainer>}
     </>
   )

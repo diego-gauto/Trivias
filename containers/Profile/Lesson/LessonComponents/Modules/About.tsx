@@ -1,70 +1,89 @@
-import React, { useState } from 'react'
-import { AboutContain, CircleContain, NumberText, PointText, TextContainer, LessonTitle, LessonContent } from './About.styled';
-import { BookIcon, ChatboxIcon, EaselIcon, IconContain, ListIcon, PositionTitle, SelectContain, TitleContain, Titles, UnSelected } from './Module.styled';
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link';
+import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
+import { PositionTitle, TitleContain, Titles } from './Module.styled';
+import { BsPlayBtn } from 'react-icons/bs';
+import { SlNotebook } from 'react-icons/sl';
+import { TfiCommentAlt } from 'react-icons/tfi';
+import { getTeacherCourse } from '../../../../../store/actions/courseActions';
+import { BiDownload } from 'react-icons/bi';
+import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
 
-const About = ({ value, setValue, data }: any) => {
+const About = ({ value, setValue, data, teacherCreds }: any) => {
+
+  const [teacher, setTeacher] = useState<any>([])
+
+  useEffect(() => {
+    console.log(teacherCreds);
+
+    if (teacherCreds.length > 0) {
+      getTeacherCourse(teacherCreds[0].name).then((res: any) => {
+        setTeacher(res[0])
+      })
+    }
+  }, [])
 
   return (
     <>
       <TitleContain>
         <PositionTitle position={value}>
-          Acerca de
+          <BsPlayBtn></BsPlayBtn>
+          Acerca del curso
         </PositionTitle>
         <Titles onClick={() => {
-          setValue(2)
-        }}>
-          Material Extra
-        </Titles>
-        {data.homeworkAvailable && <Titles onClick={() => {
           setValue(3)
         }}>
-          Tareas
-        </Titles>}
+          <SlNotebook></SlNotebook>
+          Evaluación
+        </Titles>
         <Titles onClick={() => {
           setValue(4)
         }}>
+          <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </Titles>
+        <div className='line'></div>
       </TitleContain>
-      <IconContain>
-        <SelectContain>
-          {/* <WhiteDivide /> */}
-          <ListIcon />
-        </SelectContain>
-        {data.homeworkAvailable && <UnSelected>
-          <BookIcon onClick={() => {
-            setValue(3)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>}
-        <UnSelected>
-          <ChatboxIcon onClick={() => {
-            setValue(4)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        {/* <UnSelected>
-          <EaselIcon
-            onClick={() => {
-              setValue(2)
-            }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
-      </IconContain>
       <AboutContain>
-        {data.points > 0 && <CircleContain>
-          {<NumberText>
-            +{data.points}
-          </NumberText>}
-          <PointText>
-            Puntos al <br /> finalizar
-          </PointText>
-        </CircleContain>}
         <TextContainer>
           <LessonTitle>
-            Sobre la lección
+            {data.courseTitle}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
-            {data.about}
+            <p className='title'>Objetivo principal</p>
+            <p>En esta clase de nivel básico aprenderás cómo realizar el efecto humo.</p>
+            <p className='title'>Especificaciones</p>
+            <p>A través de este curso, aprenderás todas las habilidades que necesitas para ayudar a
+              las empresas a brindar la experiencia de usuario adecuada para sus productos.
+              Todas las técnicas incluidas en en el curso son estándares de la industria probados y
+              comprobados, que te equiparán con el mejor conocimiento para comenzar tu nuevo
+              camino profesional.</p>
+            <p className='title'>Material de apoyo</p>
+            <ol type="a">
+              {data?.extra?.map((extra: any) => {
+                return (
+                  <Link href={extra.path}>
+                    <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                      <DownlowadContain>
+                        <DownloadText>
+                          <li>{extra.title.slice(0, -4)}</li>
+                        </DownloadText>
+                        <Pdf><BiDownload></BiDownload> Descargar Pdf</Pdf>
+                      </DownlowadContain>
+                    </a>
+                  </Link>
+                )
+              })}
+            </ol>
           </LessonContent>
         </TextContainer>
+        <div className='teacher-container'>
+          <img src="/images/teachers/Brenda_instructora.jpg" alt="" />
+          <p className='title'>Conoce a <br />
+            <span>tu instructor</span>
+          </p>
+          <p>{teacher.about}</p>
+        </div>
       </AboutContain>
     </>
   )

@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -55,6 +56,7 @@ export const signUpWithCreds = (
         return await addDoc(collection(db, "users"), {
           uid: user?.uid,
           name: credentials.name,
+          lastName: credentials.lastName,
           email: credentials.email,
           photoURL: "",
           provider: "Webpage",
@@ -119,7 +121,25 @@ export const signInWithCreds = async (signUpData: { credentials: any; }) => {
 
   //Una vez inicializado es contextual a las llamadas de firebase
   const auth = getAuth();
-
+  try {
+    await signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+    localStorage.setItem("email", credentials.email);
+    return PREVIEW_PATH;
+  } catch (err: any) {
+    firebase.auth().signOut();
+    return err.code;
+  }
+};
+export const signUpCreds = async (signUpData: { credentials: any; }) => {
+  const {
+    credentials,
+  } = signUpData;
+  const hasCurrentUserVar = await hasCurrentUser(credentials.email);
+  if (hasCurrentUserVar) {
+    localStorage.setItem("pastUserEmail", credentials.email);
+    return SIGNUP_PAST_USER_PATH;
+  }
+  const auth = getAuth();
   try {
     await signInWithEmailAndPassword(auth, credentials.email, credentials.password)
     localStorage.setItem("email", credentials.email);
@@ -245,4 +265,20 @@ export const accessWithAuthProvider = (provider: any, trial?: any) => {
       console.error(error);
       throw error;
     });
+}
+export const getPastUser = async (email: string) => {
+  const usersRef = query(collection(db, "pastUsers"), where("email", "==", email))
+  let tempUsers: any = [];
+  const data = await getDocs(usersRef);
+  data.forEach((user) => {
+    tempUsers.push({ ...user.data(), id: user.id });
+  })
+  return tempUsers
+}
+
+export const deleteSelectedUser = async (email: string) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  console.log(user);
+
 }

@@ -26,6 +26,7 @@ import {
   TextFinish,
   WAIcon,
 } from "./Footer.styled";
+import { FooterContainerMobile } from "./FooterMobile.styled";
 
 const Footer = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +48,6 @@ const Footer = () => {
     }, [])
 
   } catch (error) {
-    console.log(error)
     setLoggedIn(false)
   }
 
@@ -89,128 +89,32 @@ const Footer = () => {
       })
     }
   }
-
-  let { pathname } = useRouter();
-  return (
-    <>
-      <FooterContainer>
-        <Logo2 />
-        <Column>
-          <FooterText>
-            Aviso de Privacidad
-          </FooterText>
-          <FooterText>
-            Condiciones
-          </FooterText>
-        </Column>
-        <Column>
-          <Link href="/">
-            <FooterText>
-              Inicio
-            </FooterText>
-          </Link>
-          <FooterText>
-            Tienda Online
-          </FooterText>
-        </Column>
-        <Column>
-          <Link href="/Preview">
-            <FooterText>
-              Cursos
-            </FooterText>
-          </Link>
-          <Link href="/auth/Register">
-            <FooterText>
-              Registrarse
-            </FooterText>
-          </Link>
-        </Column>
-        <FooterIcons>
-          {
-            (pathname == '/Profile' && userData?.membership.level == 1 && !loader) &&
-            <TextFinish onClick={cancelSubscription}>
-              Terminar Suscripción
-            </TextFinish>
-          }
-          {loader && <LoaderContain />}
-          <FooterText>
-            Contactanos
-          </FooterText>
-          <SocialContainer>
-            <a href="https://www.facebook.com/GonvarNails">
-              <FBIcon />
-            </a>
-            <a href="https://www.instagram.com/gonvarnails/">
-              <IGIcon />
-            </a>
-            <WAIcon />
-          </SocialContainer>
-        </FooterIcons>
-      </FooterContainer>
-      <FooterResponsive>
-        <RespContainer>
-          <Logo2 />
-          <Link href="/">
-            <FooterText>
-              Inicio
-            </FooterText>
-          </Link>
-          <FooterText>
-            Tienda Online
-          </FooterText>
-          <Link href="/Preview">
-            <FooterText>
-              Cursos
-            </FooterText>
-          </Link>
-          <Link href="/auth/Register">
-            <FooterText>
-              Registrarse
-            </FooterText>
-          </Link>
-        </RespContainer>
-        <RespContainer2>
-          <FooterText >
-            Aviso de Privacidad
-          </FooterText>
-          <FooterText>
-            Condiciones
-          </FooterText>
-          <FooterText>
-            Facturación
-          </FooterText>
-          <FooterIcons>
-            {
-              pathname == '/Profile' && userData?.membership.level == 1 &&
-              <TextFinish onClick={() => {
-                cancelSubscription()
-              }}>
-                Terminar Suscripción
-              </TextFinish>
-            }
-            <FooterText>
-              Contactanos
-            </FooterText>
-            <SocialContainer>
-              <a href="https://www.facebook.com/GonvarNails">
-                <FBIcon />
-              </a>
-              <a href="https://www.instagram.com/gonvarnails/">
-                <IGIcon />
-              </a>
-              <WAIcon />
-            </SocialContainer>
-          </FooterIcons>
-        </RespContainer2>
-      </FooterResponsive>
-      <BottomContainer>
+  {/* <BottomContainer>
         <BottomText>
           Gonvar Nails Academy 2022
         </BottomText>
         <BottomText>
           Gonvar©️ | Todos los derechos reservados
         </BottomText>
-      </BottomContainer>
+      </BottomContainer> */}
+
+  let { pathname } = useRouter();
+  return (
+    <>
+      <FooterContainer>
+        <img src="/images/Footer/logo.png" alt="" />
+        <div className="right-section">
+          <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
+          <p>Todos los derechos reservados</p>
+        </div>
+      </FooterContainer>
+      <FooterContainerMobile>
+        <img src="/images/Footer/logo.png" alt="" />
+        <div className="right-section">
+          <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
+          <p>Todos los derechos reservados</p>
+        </div>
+      </FooterContainerMobile>
       <ModalFinish show={show} setShow={setShow} user={userData} />
     </>
 

@@ -5,12 +5,13 @@ import { useMediaQuery } from "react-responsive";
 
 import router from "next/router";
 
-import { LOGIN_PATH } from "../../../constants/paths";
-import { getViewedCourses, getWholeCourses } from "../../../store/actions/courseActions";
+import { LOGIN_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { getViewedCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
   ButtonContain,
   Container,
+  Gradient,
   ImageContain,
   PlayIcon,
   PurpleButton,
@@ -21,13 +22,14 @@ import {
   VideoContain,
 } from "./Module1.styled";
 import Modal from "./modal/modal";
+import { BsTriangle } from "react-icons/bs";
 
 const Module1 = ({ user, allCourses, isLoading, }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  const [course, setCourse] = useState<any>({});
   const [historyCourse, setHistoryCourse] = useState<any>({});
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
+
   const goTo = () => {
     if (user) {
       let today = new Date().getTime() / 1000;
@@ -55,7 +57,7 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
         });
       }
       if (!user && (historyCourse.courseType == 'Mensual' || historyCourse.courseType == 'Producto')) {
-        router.push(LOGIN_PATH);
+        router.push(SIGNUP_PATH);
       }
     }
   }
@@ -76,7 +78,14 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
               } else {
                 res[0].paid = false;
               }
+              console.log(res[0]);
+
               setHistoryCourse(res[0]);
+            }
+            else {
+              allCourses.lesson = 0;
+              allCourses.season = 0;
+              setHistoryCourse(allCourses);
             }
             setTimeout(() => {
               setLoading(false);
@@ -93,6 +102,7 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
       }
     }
   }, [user, isLoading])
+
   return (
     <Container>
       {(historyCourse.seasons && historyCourse.seasons.length > 0) && <>
@@ -101,33 +111,39 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
             <VideoContain>
               <ReactPlayer
                 className='absolute'
-                url={historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(-5)}
+                url={
+                  historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link ?
+                    historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson]?.link.slice(-5) :
+                    historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson - 1]?.link.slice(0, -11) + "stream_0" + historyCourse?.seasons[historyCourse.season].lessons[historyCourse.lesson - 1]?.link.slice(-5)
+                }
                 playing={true}
                 muted={true}
-                //controls
+                loop={true}
                 width='100%'
-                height='180%'
-                style={{ position: "absolute", top: responsive1023 ? "-95px" : "-170px", }}
+                height='100%'
               />
             </VideoContain>
           </ImageContain>
-
           <TextContain>
-            <div className="grey-field" style={{ 'width': '60%' }}>
+            <div className="grey-field">
+              <div className="top">
+                <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
+                <p>Gonvar+</p>
+              </div>
               <Title>
-                Curso {historyCourse.courseTittle}: “{historyCourse.seasons[historyCourse.season]?.lessons[historyCourse.lesson]?.title}”
+                {historyCourse.courseTittle}
               </Title>
             </div>
-            <div className="grey-field" style={{ 'width': '60%' }}>
+            <div className="grey-field">
               <SubText>
-                {historyCourse.courseAbout}
+                de {historyCourse.courseProfessor[0]?.name}
               </SubText>
             </div>
             <ButtonContain>
               <div className="grey-field" style={{ maxWidth: "fit-content" }}>
                 <PurpleButton onClick={goTo}>
+                  <BsTriangle />
                   Reproducir
-                  <PlayIcon />
                 </PurpleButton>
               </div>
               <div className="grey-field" style={{ maxWidth: "fit-content" }}>
@@ -137,8 +153,8 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
               </div>
             </ButtonContain>
           </TextContain>
+          <Gradient></Gradient>
         </div>
-
       </>}
       <Modal show={show} setShow={setShow} course={historyCourse} user={user} />
     </Container >

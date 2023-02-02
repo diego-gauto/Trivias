@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { DEFAULT_USER_IMG } from '../../../../../constants/paths'
 import { addComment } from '../../../../../store/actions/courseActions'
-import { Button, Comment, CommentContain, CommentInput, CommentText, MainContainer, Pp1, Pp2, Pp3, Profile } from './Comments.styled'
-import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
+import { Button, Comment, CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
+import { TitleContain, PositionTitle, Titles } from './Module.styled'
+import { FiHeart } from 'react-icons/fi';
+import { BsPlayBtn } from 'react-icons/bs';
+import { SlNotebook } from 'react-icons/sl';
+import { TfiCommentAlt } from 'react-icons/tfi';
+
 const Comments = ({ value, setValue, user, data, comments }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>(comments);
@@ -54,82 +59,75 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
         <Titles onClick={() => {
           setValue(1)
         }}>
-          Acerca de
+          <BsPlayBtn></BsPlayBtn>
+          Acerca del curso
         </Titles>
-
-        <Titles onClick={() => {
-          setValue(2)
-        }}>
-          Material Extra
-        </Titles>
-
-        {data.homeworkAvailable && <Titles onClick={() => {
+        {<Titles onClick={() => {
           setValue(3)
         }}>
-          Tareas
+          <SlNotebook></SlNotebook>
+          Evaluación
         </Titles>}
-
         <PositionTitle position={value}>
+          <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </PositionTitle>
-
+        <div className='line'></div>
       </TitleContain>
-      <IconContain>
-        <UnSelected>
-          <ListIcon onClick={() => {
-            setValue(1)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>
-        {data.homeworkAvailable && <UnSelected>
-          <BookIcon onClick={() => {
-            setValue(3)
-          }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected>}
-        <SelectContain>
-          <ChatboxIcon />
-        </SelectContain>
-        {/* <UnSelected>
-          <EaselIcon
-            onClick={() => {
-              setValue(2)
-            }} style={{ backgroundColor: 'gray' }} />
-        </UnSelected> */}
-      </IconContain>
       <MainContainer>
         <CommentContain>
-          {comments && user.userPhoto
-            ?
-            <Profile src={user.userPhoto} />
-            :
-            <Profile
-              src={DEFAULT_USER_IMG}
-            />}
-          <CommentInput value={comment} placeholder="¿Qué quieres decir?" onChange={(e: any) => {
-            setComment(e.target.value)
-          }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                addLessonComment()
-              }
-            }} />
-          <Button style={{ color: !comment ? 'gray' : '#6717cd', 'borderColor': !comment ? 'gray' : '#6717cd' }} onClick={addLessonComment}>Comentar</Button>
+          <div className='comments-info'>
+            <p className='title'>Preguntas y comentarios</p>
+            <div className='line'></div>
+            <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
+          </div>
+          <div className='comment'>
+            {comments && user.userPhoto
+              ?
+              <Profile src={user.userPhoto} />
+              :
+              <Profile
+                src={DEFAULT_USER_IMG}
+              />}
+            <CommentInput value={comment} placeholder="Escribe tus comentarios" onChange={(e: any) => {
+              setComment(e.target.value)
+            }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addLessonComment()
+                }
+              }} />
+            {/* <Button style={{ color: !comment ? 'gray' : '#6717cd', 'borderColor': !comment ? 'gray' : '#6717cd' }} onClick={addLessonComment}>Comentar</Button> */}
+          </div>
         </CommentContain>
+        <div className='line-m'></div>
         {currentComments.map((x: any, index: any) => {
           return (
-            <CommentContain key={'comments-' + index}>
-              {comments && x.userPhoto
-                ?
-                <Profile src={x.userPhoto} />
-                :
-                <Profile
-                  src={DEFAULT_USER_IMG}
-                />}
-              <CommentText>
-                <Comment>
-                  {x.comment}
-                </Comment>
-              </CommentText>
-            </CommentContain>
+            <div className='comment-container' key={'comments-' + index}>
+              <div className="top">
+                {comments && x.userPhoto
+                  ?
+                  <Profile src={x.userPhoto} />
+                  :
+                  <Profile
+                    src={DEFAULT_USER_IMG}
+                  />}
+                <p>{x.userName} <span>Hace 2 semanas</span></p>
+              </div>
+              <div className='middle'>
+                <p>{x.comment}</p>
+              </div>
+              <div className="bottom">
+                <div className='left'>
+                  <div className='like'>
+                    <FiHeart />
+                    <p>21</p>
+                  </div>
+                  <button>Responder</button>
+                </div>
+                <button className='report'>Reportar</button>
+              </div>
+            </div>
           )
         })}
       </MainContainer>

@@ -8,37 +8,68 @@ import Modal1 from "./Modal/Modal1";
 import {
   Title,
 } from "./Module4.styled";
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css/scrollbar';
-import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 
 import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
-SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
+  const [material, setMaterial] = useState(false);
+  let [counter, setCounter] = useState<any>(0);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const slider = document.querySelector('.scroll-container2') as HTMLElement;
+
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
+    pos = {
+      // The current scroll
+      left: slider?.scrollLeft,
+      top: slider?.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseMoveHandler = function (e: any) {
+    setCounter(counter++);
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    slider.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
 
   const handleShow = () => {
-    setShow(true);
+    if (counter < 2) {
+      setShow(true);
+    }
+    setCounter(0)
   }
-
   useEffect(() => {
     if (user) {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);
         allCourses.forEach((element: any) => {
-          element.courseAbout = element.courseAbout.slice(0, 100);
-          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-          element.courseTittle = element.courseTittle.slice(0, 15);
+          element.courseAbout = element.courseAbout
+          element.courseSubtittle = element.courseSubtittle
+          element.courseTittle = element.courseTittle;
           if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
             element.paid = true;
           } else {
@@ -52,9 +83,9 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       })
     } else {
       allCourses.forEach((element: any) => {
-        element.courseAbout = element.courseAbout.slice(0, 100);
-        element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-        element.courseTittle = element.courseTittle.slice(0, 15);
+        element.courseAbout = element.courseAbout
+        element.courseSubtittle = element.courseSubtittle
+        element.courseTittle = element.courseTittle
       });
       setCourses(allCourses);
       setTimeout(() => {
@@ -64,36 +95,45 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   }, [user, isLoading])
 
   return (
-    <>
-      <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px" }}>
-        {courses.length > 0 && <>
-          <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
-            <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-              <Title>
-                Cursos disponibles
-              </Title>
-            </div>
-            <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
-              <div style={{ display: "flex" }}>
-                {courses.map((element: any, idx: any) => (
-                  <div className="grey-field" key={idx} onClick={() => {
-                    handleShow();
-                    setCourse(element);
-                  }}>
-                    < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
-                      <SlideModuleContainer>
-                        <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-                      </SlideModuleContainer>
-                    </SlideModuleContainer>
-                  </div>
-                ))}
-              </div>
+    <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0 }}>
+      {courses.length > 0 && <>
+        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+          <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+            <Title style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
+              Cursos disponibles
+            </Title>
+          </div>
+          <div id="scroll-container2" className="scroll-container2" style={{ cursor: "grab", overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}
+          >
+            <div className="scollx" style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }} onMouseDown={mouseDownHandler}>
+              {courses.map((element: any, idx: any) => (
+                <div className="grey-field" key={"mod4 " + idx} onClick={() => {
+                  handleShow();
+                  setCourse(element);
+                }}>
+                  < SlideModuleContainer
+                    level={element.courseDifficulty}
+                    style={{ cursor: "grab", flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
+                    <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                    <p className="title">{element.courseTittle}</p>
+                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <p className="modules">{element.seasons.length} Módulos</p>
+                    <div className="level-container">
+                      {(element.courseDifficulty == "Muy Fácil" || element.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                      {(element.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                      {(element.courseDifficulty == "Avanzado" || element.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                      <p>{element.courseDifficulty}</p>
+                    </div>
+                  </SlideModuleContainer>
+                </div>
+              ))}
             </div>
           </div>
-        </>}
-      </Container>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "30px" }}></div>
+        </div>
+      </>}
       <Modal1 show={show} setShow={setShow} course={course} user={user} />
-    </>
+    </Container>
   )
 }
 export default Module4;

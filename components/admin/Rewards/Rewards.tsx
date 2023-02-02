@@ -1,102 +1,110 @@
 import React, { useEffect, useState } from "react";
+import { FiEdit } from "react-icons/fi";
 
-import { getBanner, updateBanner } from "../../../store/actions/RewardActions";
+import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
-import Prize from "./Prizes/Prize";
-import TimePrize from "./Prizes/TimePrize";
+import AddReward from "./Modals/AddReward";
+import EditReward from "./Modals/EditReward";
+
 import {
-  ButtonPosition,
-  Container,
-  ImageContain,
-  PriceContain,
-  PriceTitle,
+  Reward,
   RewardContain,
-  Title,
-  TitleContain,
 } from "./Rewards.styled";
-import Points from "./Rewards/Points";
-import Request from "./Rewards/Request";
-import Time from "./Rewards/Time";
 
 const Rewards = () => {
+  const [show, setShow] = useState(false);
+  const [rewards, setRewards] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [reward, setReward] = useState<any>({});
+  const [edit, setEdit] = useState(false);
 
-  const [place, setPlace] = useState("points");
-  const [banner, setBanner] = useState<any>({
-    path: "",
-  })
-  const [image, setImage] = useState<any>()
+  useEffect(() => {
+    getRewards().then((res) => {
+      setRewards(res);
+    })
+    getRequest().then((res) => {
+      setRequests(res);
+    })
+  }, []);
 
-  const getRewardBanner = () => {
-    getBanner().then((res) => {
-      setImage(res?.path)
-      setBanner(res);
+  const handleEvent = () => {
+    getRewards().then((res) => {
+      setRewards(res);
     })
   }
 
-  const update = () => {
-    updateBanner(banner);
-  }
-  const getImage = (file: any) => {
-    var reader = new FileReader();
-    reader.readAsDataURL(file[0]);
-    reader.onload = (_event) => {
-      setImage(reader.result)
-      setBanner({ ...banner, format: reader.result })
-    };
+  const formatDate = (date: any) => {
+    let tempDate = new Date(date.seconds * 1000);
+    let tempDay = tempDate.getDate()
+    let tempMonth = tempDate.getUTCMonth() + 1;
+    let tempYear = tempDate.getFullYear()
+    let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    return formatDate
   }
 
-  useEffect(() => {
-    getRewardBanner();
-  }, [])
+  const confirmRequest = (data: any) => {
+    if (!data.status) {
+      var result = confirm("Desea que esta recompensa sea reclamada?");
+      if (result == true) {
+        updateRequest(data.id).then(() => {
+          getRequest().then((res) => {
+            setRequests(res);
+          })
+        })
+        updateUserRewards(data.userId, data.rewardId).then(() => {
+        })
+      }
+    }
+  }
   return (
     <AdminContain>
       <SideBar />
       <RewardContain>
-        <ImageContain>
-          <img src={image} />
-        </ImageContain>
-        <TitleContain>
-          <Title >Centro de Recompensas</Title>
-        </TitleContain>
-        <ButtonPosition >
-          <label htmlFor="input">
-            Seleccionar Imagen
-            <input
-              type="file"
-              id="input"
-              onChange={(e) => { getImage(e.target.files) }}
-            />
-          </label>
-          {
-            banner.path != ""
-              ?
-              <button onClick={() => { update() }}>
-                Guardar
-              </button>
-              : <></>
-          }
-        </ButtonPosition>
-        <Container>
-          {place == "points" && <Points setPlace={setPlace} place={place} />}
-          {place == "time" && <Time setPlace={setPlace} />}
-          {place == "request" && <Request setPlace={setPlace} />}
-        </Container>
-        {
-          place == "points" &&
-          <PriceContain>
-            <PriceTitle>Premios por reclamar</PriceTitle>
-            <Prize />
-          </PriceContain>
-          ||
-          place == "time" &&
-          <PriceContain>
-            <PriceTitle>Premios por reclamar</PriceTitle>
-            <TimePrize />
-          </PriceContain>
-        }
-
+        <p className="title">Recompensas Gonvar</p>
+        <button className="add" onClick={() => { setShow(true) }}>Agregar Recompensa</button>
+        <div className="rewards">
+          {rewards.map((reward: any, index: any) => {
+            return (
+              <Reward type={reward.type} key={"RewardTable " + index}>
+                <FiEdit></FiEdit>
+                <img height={170} src={reward.path} alt="" onClick={() => { setReward(reward); setEdit(true) }} />
+                <p className="title">{reward.title}</p>
+                {reward.type == "points" && <p>{reward.points} Puntos</p>}
+                {reward.type == "months" && <p>{reward.months} Meses</p>}
+                {reward.type == "certificates" && <p>{reward.certificates} Certificados</p>}
+              </Reward>
+            )
+          })}
+        </div>
+        <p className="title">Solicitudes</p>
+        <div className="request-container">
+          <div className="row-titles">
+            <p>Nombre</p>
+            <p>Producto</p>
+            <p>Fecha</p>
+            <p>Status</p>
+          </div>
+          {requests.map((request: any, index: number) => {
+            return (
+              <div className="tr" key={"RequestTable " + index}>
+                <p>{request.user}</p>
+                <p>{request.title}</p>
+                <p>{formatDate(request.createAt)}</p>
+                <p style={{ background: request.status ? "#33c600" : "#e70000", color: "#fff", cursor: "pointer" }}
+                  onClick={() => {
+                    confirmRequest(request)
+                  }}
+                >
+                  {request.status ? "Reclamada" : "No reclamada"}
+                </p>
+              </div>
+            )
+          })}
+        </div>
       </RewardContain>
+      <AddReward show={show} setShow={setShow} handleEvent={handleEvent}></AddReward>
+      <EditReward show={edit} setShow={setEdit} handleEvent={handleEvent} data={reward}></EditReward>
     </AdminContain>
   )
 }

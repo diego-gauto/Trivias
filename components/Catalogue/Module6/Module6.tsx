@@ -25,11 +25,38 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   const router = useRouter()
   const [userCourses, setUserCourses] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const swiperRef = useRef<SwiperCore>();
+  const slider = document.querySelector('.scroll-container5') as HTMLElement;
 
-  const onInit = (swiper: SwiperCore) => {
-    swiperRef.current = swiper;
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+  const mouseDownHandler = function (e: any) {
+    e.preventDefault();
+    pos = {
+      // The current scroll
+      left: slider.scrollLeft,
+      top: slider.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+    console.log(pos);
+
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
   };
+
+  const mouseMoveHandler = function (e: any) {
+    // How far the mouse has been moved
+    const dx = e.clientX - pos.x;
+    slider.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
+
   const handleShow = () => {
     setShow(true);
   }
@@ -41,9 +68,9 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
         setUserCourses(paid);
         allCourses.forEach((element: any) => {
           if (element.courseType == 'Producto') {
-            element.courseAbout = element.courseAbout.slice(0, 100);
-            element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-            element.courseTittle = element.courseTittle.slice(0, 15);
+            element.courseAbout = element.courseAbout
+            element.courseSubtittle = element.courseSubtittle
+            element.courseTittle = element.courseTittle
             if (paid.some((x: any) => x.id == element.id && date < x.finalDate)) {
               element.paid = true;
             } else {
@@ -60,9 +87,9 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     } else {
       allCourses.forEach((element: any) => {
         if (element.courseType == 'Producto') {
-          element.courseAbout = element.courseAbout.slice(0, 100);
-          element.courseSubtittle = element.courseSubtittle.slice(0, 30);
-          element.courseTittle = element.courseTittle.slice(0, 15);
+          element.courseAbout = element.courseAbout
+          element.courseSubtittle = element.courseSubtittle
+          element.courseTittle = element.courseTittle
           temp_courses.push(element);
         }
       });
@@ -93,30 +120,35 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
   return (
     <Container fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0, paddingLeft: responsive1023 ? "10px" : "20px", marginTop: responsive1023 ? "-20px" : "-40px", }}>
+      style={{ overflow: "hidden", padding: 0, margin: 0 }}>
       {courses.length > 0 && <>
         <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-            <Title>
-              Productos Individuales
+            <Title style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
+              Cursos especiales <span>de pago individual</span>
             </Title>
           </div>
-          <div className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden" }}>
-            <div style={{ display: "flex" }}>
+          <div className="scroll-container5" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}>
+            <div style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
-                <div className="grey-field" key={idx} onClick={() => {
+                <div className="grey-field" key={"mod6 " + idx} onClick={() => {
                   handleShow();
                   setCourse(element);
                 }}>
-                  < SlideModuleContainer style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 30) / 5 }}>
-                    <SlideModuleContainer>
-                      <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 10px)" }} />
-                    </SlideModuleContainer>
+                  < SlideModuleContainer
+                    level={element.courseDifficulty}
+                    style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
+                    <Image src={element.coursePath} style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                    <p className="title">{element.courseTittle}</p>
+                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <p className="modules" style={{ color: "#12a071" }}>{element.seasons.length} Módulos</p>
+                    <p className="price">$ {element.coursePrice.toLocaleString('en-US')}.°° MXN</p>
                   </SlideModuleContainer>
                 </div>
               ))}
             </div>
           </div>
+          <div className="line" style={{ marginRight: responsive1023 ? "30px" : "60px" }}></div>
         </div>
       </>}
       <Modal1 show={show} setShow={setShow} course={course} user={user} />

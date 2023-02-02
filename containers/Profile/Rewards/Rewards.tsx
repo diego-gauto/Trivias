@@ -1,80 +1,42 @@
 import React, { useEffect, useState } from "react";
-
-
-
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import {
-  getBanner,
-  getLevel,
-  getTimeLevel,
-  getTimeLevels,
+  getRewards, getUserRewards,
 } from "../../../store/actions/RewardActions";
-import PointRewards from "./RewardComponent/PointRewards";
-import TimeRewards from "./RewardComponent/TimeRewards";
 import {
-  BannerContain,
-  BannerTitle,
-  CurrentLevel,
-  ImageContain,
-  InsideContain,
-  LevelContain,
-  MainContain,
-  OuterProgress,
-  PointsText,
-  ProgressBackground,
-  ProgressCircle,
-  ProgressContain,
-  ProgressSvg,
+  TitleContainer,
   RewardContainer,
-  Vector,
-  Vector2,
+  RewardsTitle,
+  RewardCardContainer,
+  AllSlider,
 } from "./Rewards.styled";
-import { TimeProgressBackground, TimeProgressCircle, TimeSvg } from "./RewardsTime.styled";
+import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
+import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
+import RewardSlider from "./Sliders/RewardSlider";
+import { useRouter } from "next/router";
 
 const Rewards = () => {
 
-  const [rewards, setRewards] = useState(true);
-  const [size, setSize] = useState(0);
+  const [rewards, setRewards] = useState<any>([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [level, setLevel] = useState<any>([]);
-  const [currentLevel, setCurrentLevel] = useState<number>(0);
-  const [timeScore, setTimeScore] = useState<number>(0);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const [rewardsTypes, setRewardsTypes] = useState([]);
+  const [userReward, setUserReward] = useState([]);
+  const [monthProgress, setMonthProgress] = useState(0)
   const [timeLevel, setTimeLevel] = useState<any>(0);
-  const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
-
-  const [data, setData] = useState<number>(0)
-  const [dataResp, setDataResp] = useState<number>(0)
-  const [timeData, setTimeData] = useState<number>(0)
-  const [timeDataResp, setTimeDataResp] = useState<number>(0)
-  const [banner, setBanner] = useState<any>({})
-
-  const [timeLevels, setTimeLevels] = useState<any>()
-
-  const getAllTimeLevels = () => {
-    getTimeLevels().then(res => {
-      setTimeLevels(res)
-    })
-  }
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-      }
-    }, [])
-
-  } catch (error) {
-    console.log(error);
-    setLoggedIn(false);
-  }
+  const [allSlider, setAllSlider] = useState<any>([
+    { type: "claim-points" },
+    { type: "points" },
+  ])
+  const [selectReward, setSelectReward] = useState("points");
+  const crownImage = "/images/profile/crown.png"
+  const handStarImage = "/images/Rewards/handStar.png"
+  const router = useRouter();
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -83,220 +45,344 @@ const Rewards = () => {
         response.forEach((e: any) => {
           setUserData({ ...e.data(), id: e.id });
         });
-
       })
     } catch (error) {
       return false
     }
   }
-  const getDate = () => {
-    let tempToday: number = new Date().getTime() / 1000;
-    let tempDate: number = userData.membership?.startDate;
-    let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
-    if (tempDate == 0) {
-      timeScore = 0;
-    }
-    setTimeScore(timeScore)
-  }
-
-  const getRewardBanner = () => {
-    getBanner().then((res) => {
-      setBanner(res);
-    })
-  }
-
-  const getSize = async () => {
-    db.collection('levelPoints').get().then(snap => {
-      setSize(snap.size) // will return the collection size
+  const getAllUserRewards = () => {
+    getUserRewards(userData.id).then((res) => {
+      setUserReward(res);
     });
   }
-
-  const getCurrentLevel = () => {
-    getLevel().then((res) => {
-      res = res.filter((data: any, index: any) => data.minimum <= userData.score)
-      setLevel(res[0])
-      setCurrentLevel(res.length)
+  const changeRewardPosition = (val: string) => {
+    let tempSlides: any = [];
+    if (val == selectReward) {
+      setSelectReward("points")
+    }
+    else {
+      setSelectReward(val)
+    }
+    if (val == "points") {
+      tempSlides = [
+        { type: "claim-points" },
+        { type: "points" },
+      ]
+      setAllSlider(tempSlides)
+    }
+    if (val == "months") {
+      tempSlides = [
+        { type: "claim-months" },
+        { type: "months" },
+      ]
+      setAllSlider(tempSlides)
+    }
+    if (val == "certificates") {
+      tempSlides = [
+        { type: "claim-certificates" },
+        { type: "certificates" },
+      ]
+      setAllSlider(tempSlides)
+    }
+  }
+  const getAllRewards = () => {
+    getRewards().then((res) => {
+      setRewards(res);
+      getNextRewards(res);
     })
   }
-
   const getCurrentTimeLevel = () => {
-    getTimeLevel().then(async (res) => {
-      await Promise.all(res.map(async (element: any) => {
-        element.minMonth = element.minimum * 30;
-        element.maxMonth = element.maximum * 30;
-      }))
-      let tempIndex = 0;
-      let tempLevels: any = [];
-      tempLevels = res.filter((data: any, index: any) => timeScore >= data.minMonth && timeScore < data.maxMonth);
-      if (tempLevels.length > 0) {
-        tempIndex = res.findIndex((x: any) =>
-          x.id == tempLevels[0]?.id)
-        tempLevels[0].level = tempIndex + 1;
-        tempLevels[0].index = tempIndex;
-        setTimeLevel(tempLevels[0]);
-        setCurrentTimeLevel(res.length);
-        setTimeData(346 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 346));
-        setTimeDataResp(289 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 289));
+    let tempCurrentDate: any = new Date().getTime() / 1000;
+    let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
+    let getMonth: any;
+    if (userData.membership.startDate == 0) {
+      getMonth = 0;
+    }
+    else {
+      getMonth = tempDayCount / (3600 * 24 * 30);
+    }
+    setMonthProgress(getMonth);
+    setTimeLevel(Math.floor(getMonth))
+  }
+  const getNextRewards = (res: any) => {
+    let pointsFilter = [];
+    let previousRewardPoints: any = [];
+    let progressPoints: number = 0;
+    let pointsLength = [];
+    let monthsFilter = [];
+    let previousRewardMonths: any = [];
+    let progressMonths: number = 0;
+    let monthsLength = [];
+    let certificatesFilter = [];
+    let previousRewardCertificates: any = [];
+    let certificateLength = [];
+    let tempCertificatesLength: number = userData.certificates?.length;
+    let progressCertificates: number = 0;
+    pointsFilter = res.filter((reward: any) => (reward.type == "points" && userData.score < reward.points));
+    previousRewardPoints = res.filter((reward: any) => (reward.type == "points" && userData.score >= reward.points));
+    pointsLength = res.filter((reward: any) => (reward.type == "points" && userData.score >= reward.points));
+    monthsFilter = res.filter((reward: any) => (reward.type == "months" && timeLevel < reward.months));
+    previousRewardMonths = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
+    monthsLength = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
+    if (tempCertificatesLength) {
+      certificatesFilter = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength < reward.certificates));
+      certificateLength = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength >= reward.certificates));
+      previousRewardCertificates = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength >= reward.certificates));
+    }
+    else {
+      certificatesFilter = res.filter((reward: any) => (reward.type == "certificates" && 0 < reward.certificates));
+    }
+    if (previousRewardPoints.length == 0) {
+      previousRewardPoints = [{
+        points: 0,
+      }]
+    }
+    if (previousRewardMonths.length == 0) {
+      previousRewardMonths = [{
+        months: 0,
+      }]
+    }
+    if (previousRewardCertificates.length == 0) {
+      previousRewardCertificates = [{
+        certificates: 0,
+      }]
+    }
+    pointsFilter.sort((a: any, b: any) => a.points - b.points)
+    monthsFilter.sort((a: any, b: any) => a.months - b.months)
+    certificatesFilter.sort((a: any, b: any) => a.certificates - b.certificates)
+    previousRewardPoints.sort((a: any, b: any) => b.points - a.points)
+    previousRewardMonths.sort((a: any, b: any) => b.months - a.months)
+    previousRewardCertificates.sort((a: any, b: any) => b.certificates - a.certificates)
+    if (pointsFilter.length == 0) {
+      pointsFilter = [{
+        points: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      progressPoints = 565 - (((userData.score - previousRewardPoints[0].points) / (pointsFilter[0].points - previousRewardPoints[0].points)) * 565)
+    }
+    if (monthsFilter.length == 0) {
+      monthsFilter = [{
+        months: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      progressMonths = 565 - (((monthProgress - previousRewardMonths[0].months) / (monthsFilter[0].months - previousRewardMonths[0].months)) * 565)
+    }
+    if (certificatesFilter.length == 0) {
+      certificatesFilter = [{
+        certificates: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      if (tempCertificatesLength) {
+        progressCertificates = 565 - (((tempCertificatesLength - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+      }
+      else {
+        progressCertificates = 565 - (((0 - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
+      }
+    }
+    getRewardTexts(pointsFilter[0], pointsLength, progressPoints, monthsFilter[0], monthsLength, progressMonths, certificatesFilter[0], certificateLength, progressCertificates);
+  }
+  const getRewardTexts = (pointsFilter: any, pointsLength: any, progressPoints: number, monthsFilter: any, monthsLength: any, monthProgress: any, certificatesFilter: any, certificateLength: any, progressCertificates: any) => {
+    let arrayRewards: any = [
+      {
+        type: "points",
+        scoreType: "puntaje",
+        score: userData.score,
+        title: pointsFilter.title,
+        points: pointsFilter.points,
+        completed: pointsLength.length,
+        progress: progressPoints,
+      },
+      {
+        type: "months",
+        scoreType: "meses",
+        score: timeLevel,
+        title: monthsFilter.title,
+        months: monthsFilter.months,
+        completed: monthsLength.length,
+        progress: monthProgress,
+      },
+      {
+        type: "certificates",
+        scoreType: "certificados",
+        score: userData.certificates?.length ? userData.certificates?.length : 0,
+        title: certificatesFilter.title,
+        certificates: userData.certificates?.length ? certificatesFilter.certificates - userData.certificates?.length : certificatesFilter.certificates - 0,
+        completed: certificateLength.length,
+        progress: progressCertificates,
+      },
+    ];
+    setLoading(false);
+    setRewardsTypes(arrayRewards)
+  }
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
       } else {
-        tempLevels = res.filter((data: any, index: any) => timeScore > data.maxMonth);
-        const lastItem: any = [...tempLevels].pop();
-        tempIndex = res.findIndex((x: any) =>
-          x.id == lastItem?.id);
-        if (lastItem) {
-          lastItem.level = tempIndex + 1;
-          lastItem.index = tempIndex;
-          setTimeLevel(lastItem);
-          setTimeData(346 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 346));
-          setTimeDataResp(289 - (((timeScore - tempLevels[0].minMonth) / (tempLevels[0].maxMonth - tempLevels[0].minMonth)) * 289));
-        }
+        setLoggedIn(false)
+        router.push("auth/Login")
       }
-      if (res[0].minMonth > timeScore) {
-        tempLevels.level = 0;
-        setTimeLevel(tempLevels);
-        setTimeData(0);
-        setTimeDataResp(0);
-      }
-    })
+    }, [])
+
+  } catch (error) {
+    console.log(error);
+    setLoggedIn(false);
   }
 
+  window.addEventListener("resize", () => {
+    setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
+  });
   useEffect(() => {
     fetchDB_data()
-    getRewardBanner()
+
   }, [])
 
   useEffect(() => {
     if (userData != null) {
-      getCurrentLevel();
+      getAllUserRewards();
+      getAllRewards();
       getCurrentTimeLevel();
-      getAllTimeLevels();
-      getSize();
-      getDate();
     }
-  }, [userData, size]);
-
-  useEffect(() => {
-    if (userData != null && level != null) {
-      if (level.maximum < userData.score) {
-        setData(0);
-        setDataResp(0);
-      } else {
-        setData(346 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 346));
-        setDataResp(289 - (((userData.score - level.minimum) / (level.maximum - level.minimum)) * 289));
-      }
-      setLoading(false);
-    }
-  }, [level])
+  }, [userData]);
 
   if (loading) {
     return (
-      <Background>
+      <Background style={{ alignItems: "center", justifyContent: "center" }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
     )
   }
-
+  /////// REDISENIO
   return (
     <RewardContainer>
-
-      <BannerContain>
-        <ImageContain>
-          <img
-            src={banner.path}
-          />
-        </ImageContain>
-        <InsideContain>
-          <BannerTitle>
-            Centro de Recompensas
-          </BannerTitle>
+      <TitleContainer>
+        <div className="rewards-circle">
+          <div className="inside" />
+        </div>
+        <p className="title">CENTRO DE <span>RECOMPENSAS</span></p>
+      </TitleContainer>
+      <RewardsTitle>
+        <div className="hand-container">
+          <img src={handStarImage} />
+        </div>
+        <p className="main-text">
+          ¡Haz hecho<br /> un gran trabajo <br />hasta ahora,<br /><span> {userData.name}!</span>
+        </p>
+        <div className="sub-paragraph">
+          <p className="second-text">Descubre lo que tu progreso <br />
+            en <span className="span-color">Gonvar</span> trajo para ti.
+          </p>
+          <p className="second-text">
+            No olvides regresar pronto<br />
+            <span className="span-weight">para descubrir nuevos premios.</span>
+          </p>
+        </div>
+        <div className="reward-card-container">
           {
-            rewards
-              ?
-              <ProgressContain>
-                <PointsText>
-                  {userData.score} puntos
-                </PointsText>
-                <OuterProgress>
-                  <LevelContain>
-                    <CurrentLevel>
-                      {currentLevel}
-                    </CurrentLevel>
-                    <Vector />
-                    <Vector2 />
-                  </LevelContain>
-                  <ProgressSvg
-                  >
-                    <defs>
-                      <linearGradient id="gradient">
-                        <stop offset="0%" stopColor="#8E2DE2" />
-                        <stop offset="100%" stopColor="#4A00E0" />
-                      </linearGradient>
-                    </defs>
-                    <ProgressBackground />
-                    <ProgressCircle
-                      progress={data}
-                      progressResp={dataResp}
-                    />
-                  </ProgressSvg>
-                </OuterProgress>
-              </ProgressContain>
-              :
-              <ProgressContain>
-                <PointsText>
-                  {Math.floor((timeScore / 30))}
-                  {
-                    Math.floor((timeScore / 30)) == 1 ? " mes" : " meses"
-                  }
-                </PointsText>
-                <OuterProgress>
-                  <LevelContain>
-                    <CurrentLevel>
-                      {timeLevel ? timeLevel.level : 0}
-                    </CurrentLevel>
-                    <Vector />
-                    <Vector2 />
-                  </LevelContain>
-                  <TimeSvg
-                  >
-                    <defs>
-                      <linearGradient id="gradientTimeLevel">
-                        <stop offset="0%" stopColor="#8E2DE2" />
-                        <stop offset="100%" stopColor="#4A00E0" />
-                      </linearGradient>
-                    </defs>
-                    <TimeProgressBackground />
-                    <TimeProgressCircle
-                      progress={timeData}
-                      progressResp={timeDataResp}
-                    />
-                  </TimeSvg>
-                </OuterProgress>
-              </ProgressContain>
+            rewardsTypes.map((val: any, index: any) => {
+              return (
+                <RewardCardContainer
+                  key={"RewardsCard " + index}
+                  reward={selectReward}
+                  progress={val.progress}
+                  type={val.type}
+                  onClick={() => changeRewardPosition(val.type)}
+                >
+                  <div className="circle-level">
+                    <img src={crownImage} className="crown" />
+                    <p className="points"> {(val.completed > 9 || val.completed == 0) ? val.completed : "0" + val.completed}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="gradient">
+                          <stop offset="0%" stopColor="#902be7" />
+                          <stop offset="100%" stopColor="#451371" />
+                        </linearGradient>
+                      </defs>
+                      <circle className="progress-background"
+                      />
+                      <circle className="progress-circle" />
+                    </svg>
+                  </div>
+                  <div className="card-title">
+                    <div className="title-contain">
+                      {val.type == "points" && <AiOutlineStar className="icon" />}
+                      {val.type == "months" && <AiOutlineHourglass className="icon" />}
+                      {val.type == "certificates" && <FaAward className="icon" />}
+                      <p className="texts">
+                        <span className="main">RECOMPENSAS</span><br />
+                        por {val.scoreType}
+                      </p>
+                    </div>
+                    <p className="texts">
+                      <span className="sub">
+                        {val.type == "points" && val.score + " puntos"}
+                        {val.type == "months" ? (val.score == 1 ? val.score + " mes" : val.score + " meses") : ""}
+                        {val.type == "certificates" ? (val.score == 1 ? val.score + " certificado" : val.score + " certificados") : ""}
+                      </span>
+                      <br />
+                      {val.type == "points" && "en total"}
+                      {val.type == "months" && (val.score == 1 ? "completado" : "completados")}
+                      {val.type == "certificates" && (val.score == 1 ? "completado" : "completados")}
+                    </p>
+                  </div >
+                  <div className="next-reward">
+                    <div className="container">
+                      <div className="icon-rewards">
+                        <FaPrescriptionBottleAlt />
+                        <FaPrescriptionBottleAlt />
+                      </div>
+                      <p className="next-reward-title">
+                        Siguiente recompensa <br />
+                        <span>{val.title}</span>
+                      </p>
+                      <p className="next-reward-points">
+                        {val.type == "points" && <>{val.points !== 0 ? <>al reunir<br /></> : <>Recompensas<br /></>}</>}
+                        {val.type == "months" && <>{val.months !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
+                        {val.type == "certificates" && <>{val.certificates !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
+                        <span>
+                          {val.type == "points" && <>{val.points !== 0 ? val.points + " puntos" : "Completadas"}</>}
+                          {val.type == "months" && <>{val.months !== 0 ? (val.months == 1 ? val.months + " mes" : val.months + " meses") : "Completadas"}</>}
+                          {val.type == "certificates" && <>{val.certificates !== 0 ? (val.certificates == 1 ? val.certificates + " certificado" : val.certificates + " certificados") : "Completadas"}</>}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </RewardCardContainer>
+              )
+            })
           }
-        </InsideContain>
-      </BannerContain>
-      <MainContain>
+        </div>
+      </RewardsTitle>
+      <AllSlider>
         {
-          rewards
-            ? <PointRewards
-              setRewards={setRewards}
-              level={level}
-              currentLevel={currentLevel}
-              score={userData.score}
-              user={userData}
-            />
-            : <TimeRewards
-              user={userData}
-              rewards={rewards}
-              setRewards={setRewards}
-              score={timeScore}
-              level={timeLevel}
-              currentLevel={currentTimeLevel}
-              levels={timeLevels}
-            />
+          allSlider.map((val: any, index: any) => {
+            return (
+              <RewardSlider
+                key={"Slider Rewards " + index}
+                user={userData}
+                score={userData.score}
+                months={timeLevel}
+                certificates={userData.certificates?.length ? userData.certificates?.length : 0}
+                rewards={rewards}
+                type={val.type}
+                innerWidth={innerWidth}
+                indexSlider={index}
+                userReward={userReward}
+                getAllUserRewards={getAllUserRewards}
+              />
+            )
+          })
         }
-      </MainContain>
+      </AllSlider>
     </RewardContainer>
   )
 }

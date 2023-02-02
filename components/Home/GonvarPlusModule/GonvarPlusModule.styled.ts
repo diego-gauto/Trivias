@@ -2,15 +2,104 @@ import { Card } from "react-bootstrap";
 import styled from "styled-components";
 
 export const CardContainer = styled(Card)`
+  background: #ede7f2;
   border: 0;
   border-radius: 0;
   color: #fff;
   font-family: "Montserrat", sans-seriff;
+  .course-container {
+    display: flex;
+    justify-content: space-between;
+    @media only screen and (max-width: 1140px) {
+      flex-direction: column;
+      gap: 0;
+      align-items: center;
+      text-align: center;
+    }
+    .info {
+      padding-left: 80px;
+      padding-block: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      flex: 0 35%;
+      @media only screen and (max-width: 1140px) {
+        padding-left: 0;
+        .top {
+          padding: 15px;
+          justify-content: center;
+          button {
+            font-size: 14px !important;
+            margin-left: 0 !important;
+          }
+        }
+        .middle {
+          h1 {
+            font-size: 32px !important;
+          }
+          p {
+            font-size: 20px !important;
+          }
+        }
+      }
+      p,
+      h1 {
+        margin: 0;
+      }
+
+      .top {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        p {
+          color: #3f1168;
+          font-size: 25px;
+          font-weight: 500;
+        }
+        button {
+          margin-left: 40px;
+          border: 1.5px solid #3f1168;
+          background: none;
+          border-radius: 20px;
+          @media only screen and (max-width: 1366px) {
+            font-size: 14px;
+            width: max-content;
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .middle {
+        h1 {
+          color: #3f1168;
+          font-size: 32px;
+          span {
+            color: #a733e4;
+          }
+        }
+        p {
+          padding-top: 10px;
+          color: #3f1168;
+          font-size: 18px;
+          line-height: initial;
+        }
+      }
+      .price {
+        font-size: 28px;
+        color: #ff9b00;
+        span {
+          font-size: 20px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
   .video video::-webkit-media-controls-start-playback-button {
     display: none;
   }
   .video {
     position: relative;
+    flex: 1;
   }
   .video iframe {
     display: block;
@@ -18,20 +107,32 @@ export const CardContainer = styled(Card)`
   }
   video {
     object-fit: cover;
+    height: 100%;
   }
-  .video::before {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
+  // .video::before {
+  //   content: "";
+  //   position: absolute;
+  //   z-index: 0;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  // }
   .row {
     bottom: 50px;
     width: 100%;
     position: absolute;
+    left: 40px;
+    @media only screen and (max-width: 1140px) {
+      position: initial;
+      margin: auto;
+      .second-col {
+        gap: 0;
+        width: auto;
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
   }
   .new-btn {
     background: transparent;
@@ -60,6 +161,11 @@ export const CardContainer = styled(Card)`
   .first-col {
     padding-left: 150px;
   }
+  .second-col {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
   button:first-of-type {
     margin-right: 10px;
   }
@@ -87,7 +193,9 @@ export const CardContainer = styled(Card)`
     }
     .first-col,
     .second-col {
-      padding-left: 50px;
+      button {
+        width: 170px;
+      }
     }
     .video::before {
       content: "";

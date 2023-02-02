@@ -2,9 +2,10 @@ import { Card } from "react-bootstrap";
 import styled from "styled-components";
 
 export const CardContainer = styled(Card)`
+  background: #ede7f2;
   border: 0;
   border-radius: 0;
-  color: #fff;
+  color: #ede7f2;
   font-family: "Montserrat", sans-seriff;
   .video {
     position: relative;
@@ -29,25 +30,33 @@ export const CardContainer = styled(Card)`
     bottom: 50px;
     width: 100%;
     position: absolute;
+    @media only screen and (max-width: 1140px) {
+      margin: auto;
+      text-align: center;
+      .first-col,
+      .second-col {
+        padding: 0;
+      }
+    }
   }
   .new-btn {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 4px 18px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+    color: #ede7f2;
+    border: none;
+    padding: 7px 18px;
+    border-radius: 12px;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: default;
-    &:active,
-    &:focus {
-      border-color: #fff;
+    font-weight: 500;
+    span {
+      font-weight: 300;
     }
   }
   .card-title {
     font-size: 36px;
-    font-weight: 400;
-    margin-bottom: 20px;
+    font-weight: 600;
+    margin-bottom: 0px;
   }
   .card-subtitle {
     font-size: 24px;
@@ -60,18 +69,35 @@ export const CardContainer = styled(Card)`
     line-height: 1.3em;
   }
   .first-col {
-    padding-left: 150px;
+    padding-left: 80px;
+    .level {
+      width: fit-content;
+      position: relative;
+      bottom: 0px;
+      margin-bottom: 20px;
+      flex-wrap: nowrap;
+    }
   }
   .second-col {
+    align-self: center;
     padding-top: 30px;
+    text-align: center;
   }
   button:first-of-type {
     margin-right: 10px;
   }
   .price,
   .mobile-price {
+    color: #ff9b00;
     font-size: 24px;
     font-weight: 700;
+    span {
+      color: #ede7f2;
+    }
+    .lower {
+      font-size: 18px;
+      font-weight: 300;
+    }
   }
   .mobile-price {
     margin-top: 20px;
@@ -93,6 +119,9 @@ export const CardContainer = styled(Card)`
     .first-col,
     .second-col {
       padding-left: 50px;
+      button {
+        width: 170px;
+      }
     }
     .video::before {
       content: "";

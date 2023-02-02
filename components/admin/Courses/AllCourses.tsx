@@ -18,6 +18,7 @@ import {
   PurpleButton,
   RedButton,
   Text,
+  TextColor,
   TitleContain,
   TransparentButton,
 } from "./AllCourses.styled";
@@ -28,7 +29,7 @@ export const AllCourses = ({
 
   const [open, setOpen] = useState(false);
   const [IsDeleting, setIsDeleting] = useState<boolean>(false);
-
+  const GonvarImg = "/images/purchase/logo.png";
   const deleteCourse = (element: any) => {
     setIsDeleting(true);
     if (window.confirm("Desea borrar este curso?")) {
@@ -38,13 +39,12 @@ export const AllCourses = ({
       })
     }
   }
-
   return (
     <MainContainer>
-      <CourseContainer onClick={() => { setOpen(!open) }}>
-        <TitleContain>
+      <CourseContainer >
+        <TitleContain onClick={() => { setOpen(!open) }}>
           <CourseName>
-            Curso - {course.courseTittle}
+            Curso - {course.courseTittle} {course.courseType == "Mensual" && <img src={GonvarImg} style={{ width: 30 }} />}
           </CourseName>
           {
             open == false &&
@@ -70,16 +70,42 @@ export const AllCourses = ({
                   <Text>{course.courseSubtittle} </Text>
                 </Info>
                 <Info>
-                  <Label>Sobre el Curso</Label>
+                  <Label>Objetivos</Label>
                   <Text>
                     {course.courseAbout}
                   </Text>
                 </Info>
+                <Info>
+                  <Label>Frase Descriptiva</Label>
+                  <Text>{course.coursePhrase}</Text>
+                </Info>
+                <Info>
+                  <Label>Color del certificado</Label>
+                  {
+                    course.courseCertificateColor == "" ?
+                      <Text>No hay color</Text>
+                      :
+                      <>
+                        <TextColor color={course.courseCertificateColor}>{course.courseCertificateColor}</TextColor>
+                      </>
+                  }
+                </Info>
               </Column>
               <Column>
                 <Info>
-                  <Label>Profesor(es)</Label>
-                  <Text> {course.courseProfessor.name} </Text>
+                  <Label>Instructor(es)</Label>
+                  <Text>
+                    {
+                      course.courseProfessor.map((val: any, index: any) => {
+                        return (
+                          <React.Fragment key={'Show Professors ' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        )
+                      })
+                    }
+                  </Text>
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
@@ -93,8 +119,20 @@ export const AllCourses = ({
                   <Label>Tareas</Label>
                   <Text> {course.courseHomeWork == false ? "Flexible" : "Obligatorio"} </Text>
                 </Info>
+                <Info>
+                  <Label>Materiales del curso</Label>
+                  <Text>{course.courseMaterial}</Text>
+                </Info>
               </Column>
               <Column>
+                <Info>
+                  <Label>Dificultad del curso</Label>
+                  <Text>{course.courseDifficulty}</Text>
+                </Info>
+                <Info>
+                  <Label>Membresía</Label>
+                  <Text>{course.courseType}</Text>
+                </Info>
                 <Info>
                   <Label>Duración de Suscripción (Días)</Label>
                   <Text> {course.courseDuration} </Text>

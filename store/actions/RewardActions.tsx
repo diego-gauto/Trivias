@@ -85,6 +85,7 @@ export const addLevelTime = async (level: any) => {
   );
   return 'exito'
 }
+
 export const updateLevel = async (level: any, id: any) => {
 
   const docRef = doc(db, 'levelPoints', id);
@@ -106,7 +107,7 @@ export const updateLevelTime = async (level: any, id: any) => {
 
 const uploadPointRewardsImage = (image: any, name: any) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `rewards/points/${name}`);
+  const storageRef = ref(storage, `rewards/${name}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
@@ -121,7 +122,7 @@ export const addReward = async (reward: any) => {
   reward.path = await uploadPointRewardsImage(reward.path, reward.reference);
 
   const docRef = await addDoc(
-    collection(db, "rewards"),
+    collection(db, "allRewards"),
     {
       ...reward
     }
@@ -132,7 +133,7 @@ export const addReward = async (reward: any) => {
 
 export const getRewards = async () => {
   let data: any = []
-  const docRef = query(collection(db, "rewards"), orderBy("points", "asc"));
+  const docRef = query(collection(db, "allRewards"));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
     data.push({ ...doc.data(), id: doc.id })
@@ -143,7 +144,7 @@ export const getRewards = async () => {
 export const updateRewards = async (reward: any, id: any) => {
   let tempReward: any = JSON.parse(JSON.stringify(reward))
   const storage = getStorage();
-  const desertRef = ref(storage, `rewards/points/${tempReward.reference}`);
+  const desertRef = ref(storage, `rewards/${tempReward.reference}`);
   if ("format" in tempReward) {
     await deleteObject(desertRef).then(async () => {
       tempReward.reference = `${tempReward.title}-${uuidv4()}`
@@ -153,7 +154,7 @@ export const updateRewards = async (reward: any, id: any) => {
     tempReward.path = await uploadPointRewardsImage(tempReward.format, tempReward.reference);
     delete tempReward.format;
   }
-  const docRef = doc(db, 'rewards', id);
+  const docRef = doc(db, 'allRewards', id);
   delete tempReward.id;
 
   await updateDoc(docRef, {
@@ -162,11 +163,12 @@ export const updateRewards = async (reward: any, id: any) => {
 
   return 'exito'
 }
-export const deletePointPrize = async (reward: any) => {
+
+export const deleteProduct = async (reward: any) => {
   const storage = getStorage();
-  const desertRef = ref(storage, `rewards/points/${reward.reference}`);
+  const desertRef = ref(storage, `rewards/${reward.reference}`);
   await deleteObject(desertRef).then(async () => {
-    await deleteDoc(doc(db, "rewards", reward.id));
+    await deleteDoc(doc(db, "allRewards", reward.id));
     return 'success'
   }).catch((error) => {
     console.log(error)
@@ -227,7 +229,6 @@ export const updateTimeRewards = async (reward: any, id: any) => {
   await updateDoc(docRef, {
     ...tempReward
   })
-
   return 'exito'
 }
 export const deleteTimePrize = async (reward: any) => {
@@ -251,7 +252,7 @@ export const addRequest = async (request: any) => {
   return 'exito'
 }
 export const getRequest = async () => {
-  const requestRef = query(collection(db, "requests"), orderBy("createAt"))
+  const requestRef = query(collection(db, "requests"), orderBy("createAt", "desc"))
   let tempData: any = []
   const data = await getDocs(requestRef)
   data.forEach((doc) => {
@@ -259,9 +260,17 @@ export const getRequest = async () => {
   })
   return tempData
 }
+
 export const updateRequest = async (id: any) => {
 
   const docRef = doc(db, 'requests', id);
+  await updateDoc(docRef, {
+    status: true
+  })
+  return 'exito'
+}
+export const updateUserRewards = async (userId: any, rewardId: any) => {
+  const docRef = doc(db, 'users', userId, "rewards", rewardId);
   await updateDoc(docRef, {
     status: true
   })

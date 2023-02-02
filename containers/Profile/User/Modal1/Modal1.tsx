@@ -29,7 +29,11 @@ import { LoaderContain } from "../User.styled";
 const Modal1 = ({ show, setShow, data, handleClick }: any) => {
 
   const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    document.body.style.position = "relative";
+  }
+
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -71,7 +75,7 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
           await attach(newCard).then((res) => {
             setLoader(false);
             handleClick(true);
-            setShow(false);
+            handleClose();
           })
         }
       })
@@ -84,6 +88,8 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
 
   useEffect(() => {
     if (show) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       Object.keys(card).forEach(key => {
         card[key] = '';
       });

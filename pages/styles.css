@@ -37,6 +37,16 @@
     background-color: #3035417c;
   }
 }
+
+
+@keyframes scale {
+  0% {
+    transform: scale(1.0)
+  }
+  100% {
+    transform:scale(1.1)
+  }
+}
 .right-shadow{
     width: 100px;
     height: 209px;
@@ -111,6 +121,65 @@ h1,th{
   border: 1px solid #6717cd !important;
   border-radius: 0 0 10px 10px;
 }
-.scroll-container::-webkit-scrollbar {
+@media screen and (max-width:1000px){
+.scroll-container::-webkit-scrollbar{
+  display: none !important;
+}
+}
+.scroll-container::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container3::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container2::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container4::-webkit-scrollbar{
+  display: none;
+}
+.scroll-container5::-webkit-scrollbar{
+  display: none;
+}
+.scroll::-webkit-scrollbar{
+  display: none;
+}
+/* .scroll-container::-webkit-scrollbar-thumb {
+  background: #6717cd;
+  border-radius: 10px;
+} */
+.paypal-button.paypal-button-shape-pill{
+    background: #009CDE;
+}
+.modal-content{
+  border-radius: 40px;
+}
+input::-webkit-contacts-auto-fill-button {
+	display: none;
+}
+input[type="text"]::-webkit-credentials-auto-fill-button {
+	display: none;
+}
+.swiper .swiper-pagination .swiper-pagination-bullet {
+  background: #3F1168;
+  opacity: 1;
+}
+.swiper .swiper-pagination{
+  top: 10px;
+  height: fit-content;
+}
+.swiper .swiper-pagination .swiper-pagination-bullet-active{
+  background: #E55C00;
+}
+.custom-dialog {
+    max-width: 700px;
+  }
+.custom-dialog-material {
+    background: white;
+  }
+.ant-space .ant-progress-text{
+  color: #3F1168 !important;
+}
+.paypal .paypal-buttons .buttons-container .paypal-button-container .paypal-button-tagline{
   display: none;
 }

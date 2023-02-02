@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
 export const DropDown = styled.i`
-  top: 50%;
-  right: 20px;
-  transform: translateY(-40%);
   pointer-events: none;
   background-image: url(../images/Preview/purpleArrowDown.svg);
-  position: absolute;
   height: 10px;
   width: 16px;
   background-position: center;
@@ -17,22 +13,23 @@ export const Selected = styled.div`
   cursor: pointer;
   font-size: 16px;
   justify-content: center;
-  width: 260px;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 15px;
+  font-weight: 600;
   font-family: "Montserrat", sans-serif;
-  padding-block: 10px;
-  color: #6717cd;
+  padding-block: 5px;
+  color: #942ced;
   border-radius: 30px;
-  border: 1px solid #6717cd;
+  border: 1px solid #942ced;
   z-index: 5;
-  @media (max-width: 991px) {
-    font-size: 14px;
-    padding-block: 8px;
-    width: 210px;
+  svg {
+    font-size: 22px;
   }
-  @media (max-width: 399px) {
+  @media (max-width: 991px) {
     font-size: 12px;
-    padding-block: 8px;
-    width: 174px;
+    padding-inline: 10px;
+    padding-block: 3px;
   }
 `;
 export const SelectContain = styled.div`

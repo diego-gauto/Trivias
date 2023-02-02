@@ -6,7 +6,6 @@ const PurchaseDetails = ({ data, type }: any) => {
     price: 149.00,
     title: 'Gonvar Plus',
   }
-  console.log(data);
 
   return (
     <PurchaseContainer>

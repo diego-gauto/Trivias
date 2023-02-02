@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ContainText, MainContainer, ProgressBar, ProgressBar2, ProgressContain, SeasonContain, SeasonSpan, SeasonText, Subtitle, TitleCourse } from './CourseProgress.styled';
-
+import { Progress, Space } from 'antd';
 const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any) => {
   const [totalViewed, setTotalViewed] = useState(0)
 
@@ -20,36 +19,9 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
   }, [refresh])
 
   return (
-    <MainContainer>
-      <TitleCourse>
-        {title}
-      </TitleCourse>
-      <Subtitle>
-        Temporada {parseInt(season) + 1}: Lección {parseInt(lesson) + 1}
-      </Subtitle>
-      <ProgressContain>
-        <ProgressBar2 />
-        <ProgressBar progress={(totalViewed * 100) / course?.seasons[season]?.lessons.length} />
-      </ProgressContain>
-      <SeasonContain>
-        <ContainText>
-          <SeasonText>
-            {Math.ceil((totalViewed * 100) / course?.seasons[season]?.lessons.length)}%
-          </SeasonText>
-          <SeasonSpan>
-            temporada completada
-          </SeasonSpan>
-        </ContainText>
-        {/* <ContainText>
-          <SeasonText>
-            1/3
-          </SeasonText>
-          <SeasonSpan>
-            temporada completada
-          </SeasonSpan>
-        </ContainText> */}
-      </SeasonContain>
-    </MainContainer>
+    <Space wrap>
+      <Progress width={60} strokeWidth={10} trailColor="#3F1168" strokeColor="#FF9B00" type="circle" percent={Math.ceil((totalViewed * 100) / course?.seasons[season]?.lessons.length)} />
+    </Space>
   )
 }
 export default CourseProgress;

@@ -23,6 +23,8 @@ import {
   UserContain,
   UserShow,
 } from "./UsersList.styled";
+import EditUserModal from "./EditUserModal";
+import { getInvoice } from "../../../store/actions/PaymentActions";
 
 export interface SelectedUser {
   id?: string;
@@ -70,6 +72,8 @@ const UsersList = () => {
   const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
+  const [show, setShow] = useState<boolean>(false);
+  const [user, setUser] = useState<any>([]);
 
   const openUserCardData = async (user: DocumentData) => {
     setSelectedUser(user);
@@ -111,6 +115,11 @@ const UsersList = () => {
       [...tempUsers] = allUsers.filter((item) =>
         item.courses)
     };
+    if (value == 5) {
+      [...tempUsers] = allUsers.sort((a: any, b: any) => {
+        return a.total < b.total ? 1 : -1;
+      })
+    };
     setUsers(tempUsers);
     setUsersFilter(tempUsers);
   }
@@ -126,9 +135,14 @@ const UsersList = () => {
       setCourses(tempCourses)
     })
   }
-
   useEffect(() => {
-
+    let tempInvoice: any = [];
+    getInvoice().then((res) => {
+      res.forEach((element: DocumentData) => {
+        element.amount = element.amount / 100;
+        tempInvoice.push(element);
+      });
+    })
     const getUsers = async (): Promise<void> => {
       const mainResponse = await getDocs(usersCollectionRef);
       const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -136,6 +150,7 @@ const UsersList = () => {
       const usersData = [...usersResponse].map((user: any) => ({
         name: user.name,
         email: user.email,
+        lastName: user.lastName,
         phoneNumber: user.phoneNumber ?? "",
         created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
         score: user.score.toString(),
@@ -144,9 +159,14 @@ const UsersList = () => {
         courses: 0,
         membership: user.membership
       }));
-
       let today: any = new Date().getTime() / 1000;
       usersData.forEach((user: any) => {
+        user.total = 0;
+        tempInvoice.forEach((element: any) => {
+          if (element.userEmail == user.email) {
+            user.total = user.total + element.amount;
+          }
+        });
         getPaidCourses(user.id).then((res) => {
           res.forEach((element: DocumentData) => {
             if (element.finalDate > today) {
@@ -161,7 +181,7 @@ const UsersList = () => {
     }
     getUsers();
     getCoures();
-  }, []);
+  }, [show]);
 
   return (
     <AdminContain>
@@ -178,8 +198,8 @@ const UsersList = () => {
               datas={users.map(({ id, membership, ...users }) => users)}
             >
               <DownloadUserData>
-                <img src="https://img.icons8.com/ios/50/000000/export-excel.png" />
-                <TransparentButton2>Descargar lista de usuarios</TransparentButton2>
+                {/* <img src="https://img.icons8.com/ios/50/000000/export-excel.png" /> */}
+                <p>Descargar lista de usuarios</p>
               </DownloadUserData>
             </CsvDownloader>
             <FilterContain>
@@ -190,12 +210,17 @@ const UsersList = () => {
                   <option value={2}>Suscripción</option>
                   <option value={3}>Nombre</option>
                   <option value={4}>Cursos</option>
+                  <option value={5}>Amount spend</option>
                 </select>
               </Select>
               <SearchContain>
+                <div className="hidden">
+
+                </div>
                 <SearchIcon />
                 <SearchInput
                   placeholder="Buscar un Usuario"
+                  type={"text"}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
                 />
               </SearchContain>
@@ -208,14 +233,16 @@ const UsersList = () => {
                 <th>Correo Electrónico</th>
                 <th>Fecha de Creación</th>
                 <th>Cursos Suscritos</th>
-                <th>Recompensas</th>
+                <th>Amount spent</th>
+                {/* <th>Recompensas</th> */}
                 <th>Visualizar</th>
+                <th>Editar</th>
               </tr>
               {/* TABLAS */}
               {users.length > 0 && (
                 users.map((user, index): any => {
                   return (
-                    <tr key={index} onClick={() => openUserCardData(user)}>
+                    <tr key={index}>
                       <td style={{ fontWeight: 600 }}>
                         <ProfileContain>
                           <Profile />
@@ -226,8 +253,10 @@ const UsersList = () => {
                       <td>{user.created_at}</td>
                       {user.courses > 1 ? <td >{user.courses} Activos</td> :
                         <td >{user.courses} Activo</td>}
-                      <td>{user.score} puntos</td>
-                      <td><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                      <td>MXN${user.total}</td>
+                      {/* <td>{user.score} puntos</td> */}
+                      <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                      <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
                     </tr>
                   )
                 })
@@ -241,6 +270,7 @@ const UsersList = () => {
           <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} />
         }
       </UserContain>
+      <EditUserModal show={show} setShow={setShow} user={user} />
     </AdminContain >
   )
 }

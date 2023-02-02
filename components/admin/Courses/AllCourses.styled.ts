@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  background: white;
 `;
 export const CourseContainer = styled.div`
   display: flex;
@@ -12,7 +13,6 @@ export const CourseContainer = styled.div`
   padding: 15px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  cursor: pointer;
 `;
 export const CourseName = styled.p`
   font-size: 24px;
@@ -24,6 +24,7 @@ export const TitleContain = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 `;
 export const ChevU = styled.i`
   background-image: url(../images/Video/icons/arrowUp.svg);
@@ -53,12 +54,55 @@ export const Column = styled.div`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
+  .circle {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+  }
 `;
 export const Text = styled.p`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
   margin: 0;
   text-align: justify;
+`;
+export const TextColor = styled.p<{ color: string }>`
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 10px;
+  color: white;
+  margin: 0;
+  text-align: justify;
+  ${(props) =>
+    props.color == "azul" &&
+    css`
+      background-color: #6778f9;
+    `}
+  ${(props) =>
+    props.color == "amarillo" &&
+    css`
+      background-color: #e2a12d;
+    `}
+    ${(props) =>
+    props.color == "morado" &&
+    css`
+      background-color: #9900ee;
+    `}
+    ${(props) =>
+    props.color == "naranja" &&
+    css`
+      background-color: #f04a18;
+    `}
+    ${(props) =>
+    props.color == "rosa" &&
+    css`
+      background-color: #d445d3;
+    `}
+    ${(props) =>
+    props.color == "verde" &&
+    css`
+      background-color: #03bc80;
+    `}
 `;
 export const Label = styled.label`
   font-size: 16px;

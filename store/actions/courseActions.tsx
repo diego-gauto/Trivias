@@ -6,6 +6,7 @@ import {
   DocumentData,
   getDoc,
   getDocs,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -28,6 +29,15 @@ export const getCourses = async () => {
   return courses;
 }
 
+export const getSeason = async (courseId: any) => {
+  let courses: any = []
+  const docRef = query(collection(db, 'courses', courseId, 'seasons'), orderBy('name'));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    courses.push({ ...doc.data(), id: doc.id });
+  });
+  return courses;
+}
 export const getcourse = async (id: any) => {
   const docRef = doc(db, "courses", id);
   const docSnap = await getDoc(docRef);
@@ -96,7 +106,16 @@ export const deleteLessonMaterial = async (material: any) => {
     console.log(error)
   });
 }
-
+export const getFiveCourses = async () => {
+  let courses: any = []
+  const docRef = collection(db, 'courses');
+  const q = query(docRef, where("courseType", "==", "Mensual"), orderBy("createdAt", "desc"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0, totalDuration: 0 });
+  });
+  return courses;
+}
 export const getWholeCourses = async () => {
   let courses: any = []
   let tempCourses: any = []
@@ -196,6 +215,38 @@ export const addComment = async (data: any) => {
   return 'exito'
 }
 
+export const getNextCertificate = async () => {
+  let courses: any = []
+  const docRef = query(collection(db, 'courses'), orderBy('createdAt', 'desc'));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc: any) => {
+    courses.push({ ...doc.data(), id: doc.id, seasons: [], totalLessons: 0, totalDuration: 0, lessons: [] });
+  })
+  await Promise.all(courses.map(async (course: any) => {
+    const docRefSeasons = query(collection(db, 'courses', course.id, "seasons"), orderBy('season'));
+    const querySnapshotSeasons = await getDocs(docRefSeasons);
+    querySnapshotSeasons.forEach((season: any) => {
+      course.seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+    });
+    await Promise.all(course.seasons.map(async (season: any) => {
+      const docRefLesson = query(collection(db, 'courses', course?.id, "seasons", season.id, "lessons"), orderBy('number'));
+      const querySnapshotLesson = await getDocs(docRefLesson);
+      querySnapshotLesson.forEach((lesson: any) => {
+        var newobj = Object.assign({}, lesson.data());
+        if (!("duration" in lesson.data())) {
+          newobj["duration"] = 0;
+        }
+        if (course.lessons) {
+          course.lessons.push({ ...newobj, id: lesson.id });
+        }
+        course.totalDuration = course.totalDuration + newobj.duration;
+        course.totalLessons++;
+        season.lessons.push({ ...newobj, id: lesson.id });
+      });
+    }))
+  }))
+  return courses;
+}
 
 export const getComments = async () => {
   let comment: any = []
@@ -363,10 +414,156 @@ export const deleteCategory = async (category: any) => {
   await deleteDoc(doc(db, "category", category.id));
 }
 export const updateCategory = async (category: any, id: any) => {
-  console.log(category)
   const docRef = doc(db, 'category', id);
   await updateDoc(docRef, {
     name: category.name
   })
   return 'exito'
+}
+
+// "CREAR MATERIALES"
+export const addMaterial = async (material: any) => {
+  const docRef = await addDoc(
+    collection(db, "material"),
+    {
+      ...material
+    }
+  );
+  return 'exito'
+}
+export const getMaterial = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "material"), orderBy("name", "asc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
+export const deleteMaterial = async (material: any) => {
+  await deleteDoc(doc(db, "material", material.id));
+}
+export const updateMaterial = async (material: any, id: any) => {
+  const docRef = doc(db, 'material', id);
+  await updateDoc(docRef, {
+    name: material.name
+  })
+  return 'exito'
+}
+// "CREAR PROFESOR"
+const uploadProfessorImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professorPicture/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+const uploadSignImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professorSign/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const addTeacher = async (professor: any) => {
+  professor.reference = `${professor.name}-${uuidv4()}`
+  professor.referenceSign = `${professor.name}-${uuidv4()}`
+  professor.sign = await uploadSignImage(professor.sign, professor.referenceSign);
+  professor.path = await uploadProfessorImage(professor.path, professor.reference);
+  const docRef = await addDoc(
+    collection(db, "professor"),
+    {
+      ...professor
+    }
+  );
+  return docRef.id
+}
+export const getTeacher = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "professor"), orderBy("name", "asc"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
+export const deleteTeacher = async (professor: any) => {
+  const storage = getStorage();
+  const desertRef = ref(storage, `professorPicture/${professor.reference}`);
+  const desertRefSign = ref(storage, `professorSign/${professor.referenceSign}`);
+  await deleteObject(desertRef).then(async () => {
+    await deleteObject(desertRefSign).then(async () => {
+      await deleteDoc(doc(db, "professor", professor.id));
+    }).catch((error) => {
+      console.log(error)
+    })
+  }).catch((error) => {
+    console.log(error)
+  });
+}
+export const updateTeacher = async (professor: any, id: any) => {
+  let tempProfessor: any = JSON.parse(JSON.stringify(professor))
+  const storage = getStorage();
+  const desertRef = ref(storage, `professorPicture/${tempProfessor.reference}`);
+  const desertRefSign = ref(storage, `professorSign/${professor.referenceSign}`);
+  if ("format" in tempProfessor) {
+    await deleteObject(desertRef).then(async () => {
+      tempProfessor.reference = `${tempProfessor.name}-${uuidv4()}`
+    }).catch((error) => {
+      console.log(error)
+    });
+    tempProfessor.path = await uploadProfessorImage(tempProfessor.format, tempProfessor.reference);
+    delete tempProfessor.format;
+  }
+  if ("formatSign" in tempProfessor) {
+    await deleteObject(desertRefSign).then(async () => {
+      tempProfessor.referenceSign = `${tempProfessor.name}-${uuidv4()}`
+    }).catch((error) => {
+      console.log(error)
+    });
+    tempProfessor.sign = await uploadSignImage(tempProfessor.formatSign, tempProfessor.referenceSign);
+    delete tempProfessor.formatSign;
+  }
+  const docRef = doc(db, 'professor', id);
+  delete tempProfessor.id;
+  await updateDoc(docRef, {
+    ...tempProfessor
+  })
+
+  return 'exito'
+}
+export const deleteQuiz = async (courseId: any, seasonId: any, lessonId: any) => {
+  await deleteDoc(doc(db, "courses", courseId, "seasons", seasonId, "lessons", lessonId)).then(() => {
+    return "200"
+  })
+}
+
+export const getTeacherCourse = async (name: string) => {
+  let data: any = []
+  const docRef = query(collection(db, "professor"), where("name", "==", name));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
+}
+
+const uploadCertificate = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `certificates/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
 }

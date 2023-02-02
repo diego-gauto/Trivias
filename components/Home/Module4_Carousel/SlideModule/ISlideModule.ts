@@ -3,5 +3,11 @@ export interface ISlideModule {
   title?: string;
   subtitle: string;
   imgURL?: string;
-  duration?: string;
+  number?: any;
+  type?: string;
+  level?: string;
+  professor?: any;
+  user?: any;
+  course: any;
+  data?: any;
 }

@@ -1,31 +1,60 @@
 import styled, { keyframes } from "styled-components";
 
 export const FooterContainer = styled.div`
+  z-index: 2;
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  background-color: white;
-  position: relative;
-
-  align-items: center;
+  background-color: #29282c;
   padding: 20px;
-  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
-  @font-face {
-    font-family: Raleway;
-    src: url(../fonts/Raleway-VariableFont_wght.ttf);
+  //box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+  padding-inline: 80px;
+  padding-block: 40px;
+  padding-right: 0;
+  align-items: baseline;
+  gap: 40px;
+  img {
+    width: 150px;
   }
-  @font-face {
-    font-family: Nunito;
-    src: url(../fonts/Nunito-VariableFont_wght.ttf);
+  .right-section {
+    display: flex;
+    color: #ede7f2;
+    font-size: 20px;
+    gap: 20px;
+    p {
+      font-weight: bold;
+      margin: 0;
+      span {
+        border-right: 2px solid white;
+        border-left: 2px solid white;
+        padding-inline: 20px;
+        margin-left: 20px;
+        @media only screen and (max-width: 1250px) {
+          border-right: none;
+        }
+      }
+    }
+    @media only screen and (max-width: 1250px) {
+      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
+    }
+    @media only screen and (max-width: 1250px) {
+      font-size: 11px !important;
+    }
   }
-  @media (max-width: 1023px) {
+  @media only screen and (max-width: 1028px) {
     display: none;
+  }
+  @media only screen and (max-width: 1250px) {
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 0;
   }
 `;
 export const Logo2 = styled.i`
   background-size: contain;
   background-position: center;
-  background-image: url(../images/Navbar/Logo.svg);
+  background-image: url(../images/Footer/GonvarFooter.png);
   background-repeat: no-repeat;
   width: 100px;
   height: 80px;
@@ -48,6 +77,7 @@ export const FooterResponsive = styled.div`
   background-color: white;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   justify-content: space-between;
+  z-index: 1;
   @font-face {
     font-family: Raleway;
     src: url(../fonts/Raleway-VariableFont_wght.ttf);
@@ -88,9 +118,9 @@ export const FooterText = styled.a`
   cursor: pointer;
   color: black;
   text-decoration: none;
+  font-weight: 600;
   &:hover {
     color: #6717cd;
-    font-weight: 600;
   }
   @media (max-width: 870px) {
     font-size: 15px;

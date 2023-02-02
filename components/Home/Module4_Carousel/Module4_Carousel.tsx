@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 
 import { Container } from "react-bootstrap";
+import { useMediaQuery } from "react-responsive";
 
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
@@ -12,8 +13,9 @@ SwiperCore.use([Autoplay]);
 
 export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
+  const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
 
-  const { isInfinite, slideData, type } = props;
+  const { isInfinite, slideData, type, title, user, course } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
   if (slideDataArr) {
@@ -25,18 +27,17 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
         && course.documentID !== SEP_COURSE_ID
       ).map((course: any) => {
         return (
-          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, duration: '' }
+          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty, professor: course.courseProfessor[0], data: course }
         )
       })
     } else {
       slideDataArr = slideDataArr.map((lesson: any) => {
         return (
-          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, duration: lesson.duration }
+          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "", data: "" }
         )
       })
     }
   }
-
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
@@ -56,7 +57,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const settings = {
     loop: isInfinite,
     autoplay: {
-      delay: 0,
+      delay: 100,
     },
     speed: 7000,
     freeMode: true,
@@ -64,8 +65,8 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
     spaceBetween: 0,
     breakpoints: {
       1024: {
-        slidesPerView: 3.5,
-        spaceBetween: 0,
+        slidesPerView: 5,
+        spaceBetween: 10,
       }
     }
   };
@@ -73,19 +74,29 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   return (
     <Container
       fluid
-      style={{ overflow: "hidden", padding: 0, margin: 0 }}
+      style={{ overflow: "hidden", padding: 0, margin: 0, backgroundColor: "#ede7f2", paddingTop: 40 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
+      {type == 'subscription' ? <h1 style={{ color: "#3F1168", fontSize: "30px", paddingLeft: responsive768 ? '20px' : '80px' }}>Cursos incluidos en <span
+        style={{ color: "#A733E4" }}>Gonvar+</span></h1> :
+        <h1 style={{ color: "#3F1168", paddingLeft: responsive768 ? '20px' : '80px', fontSize: "30px" }}>Lecciones de <span
+          style={{ color: "#A733E4" }}>{title}</span></h1>
+      }
       <Swiper {...settings} onInit={onInit}>
-        {slideDataArr?.slice(0, 12).map((element, idx) => (
+        {slideDataArr?.map((element, idx) => (
           <SwiperSlide key={idx}>
             <SlideModule
+              type={type}
               isNew={element.isNew}
               title={element.title}
               subtitle={""}
+              level={element.level}
               imgURL={element.imgURL}
-              duration={element.duration}
+              number={element.number}
+              professor={element.professor}
+              user={user}
+              course={element.data}
             />
           </SwiperSlide>
         ))}

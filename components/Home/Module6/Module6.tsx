@@ -35,8 +35,14 @@ export const Module6 = (props: IModule6) => {
   };
   const settings = {
     loop: true,
+
+    centeredSlides: true,
     autoplay: {
       delay: 0,
+
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+      waitForTransition: true,
     },
     speed: 4000,
     freeMode: true,

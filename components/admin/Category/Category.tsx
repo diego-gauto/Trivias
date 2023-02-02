@@ -42,7 +42,6 @@ const Category = () => {
     }
   }
   const update = (val: any) => {
-    console.log(val)
     updateCategory(val, val.id).then(() => {
       alert("Categoría actualizada")
       getAllCategories();

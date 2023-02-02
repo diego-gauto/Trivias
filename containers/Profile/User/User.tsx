@@ -3,43 +3,48 @@ import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
 
-import { getAuth, signOut } from "firebase/auth";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import Link from "next/link";
+import { collection, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getPaymentmethods } from "../../../store/actions/PaymentActions";
-import { getLevel, getTimeLevel } from "../../../store/actions/RewardActions";
+import { getRewards } from "../../../store/actions/RewardActions";
 import {
   BackgroundProfile,
-  LogOut,
-  LogOutIcon,
   SecondBox,
   ThirdBox,
 } from "../../Profile/User/User.styled";
-import HomeWork from "./HomeWork";
 import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
-import UserData from "./UserData";
 import UserInfo from "./UserInfo";
+import { History } from "./History";
+import { getNextCertificate } from "../../../store/actions/courseActions";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  const [level, setLevel] = useState<any>([]);
-  const [barProgress, setBarProgress] = useState(0);
   const [timeProgress, setTimeProgress] = useState(0);
   const [loading, setLoading] = useState(true);
   const [paymentMethod, setPaymentMethods] = useState<any>([]);
-  const [currentLevel, setCurrentLevel] = useState<number>(0);
-  const [timeScore, setTimeScore] = useState<number>(0);
-  const [timeLevel, setTimeLevel] = useState<any>([]);
-  const [currentTimeLevel, setCurrentTimeLevel] = useState<number>(0);
-  const [taskView, setTaskView] = useState(false);
+  const [monthProgress, setMonthProgress] = useState(0)
+  const [timeLevel, setTimeLevel] = useState<any>(0);
+  const [starPosition, setStarPosition] = useState(0);
+  const [nameUpperCase, setNameUpperCase] = useState<string>("");
+  const [data, setData] = useState<number>(0)
+  const [reward, setReward] = useState<any>(0);
+  const [pointsRewards, setPointsRewards] = useState<any>([]);
+  const [pointsRewardSize, setpointsRewardSize] = useState([]);
+  const [timePrize, setTimePrize] = useState<any>([]);
+  const [timePrizeSize, setTimePrizeSize] = useState<any>([]);
+  const [addPayment, setAddPayment] = useState<boolean>(false);
+  const [nextCertificate, setNextCertificate] = useState([]);
+  const [certificateProgress, setCertificateProgress] = useState(0);
 
+  const newCard = () => {
+    setAddPayment(!addPayment)
+  }
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -55,7 +60,6 @@ const User = () => {
 
     setLoggedIn(false)
   }
-
   const fetchDB_data = async () => {
     try {
       let temp_pm: any = []
@@ -86,146 +90,226 @@ const User = () => {
       return false
     }
   }
-  const getDate = () => {
-    let tempToday: number = new Date().getTime() / 1000;
-    let tempDate: number = userData.membership?.startDate;
-    // let timeScore: any = (((tempToday - tempDate) / 86400) / 30).toPrecision(2);
-    let timeScore = Math.ceil((tempToday - tempDate) / (3600 * 24));
-
-    if (tempDate == 0) {
-      timeScore = 0;
+  const getAllRewards = () => {
+    getRewards().then((reward) => {
+      getNextPointsReward(reward);
+      getNextMonthReward(reward);
+    })
+  }
+  const getNextPointsReward: any = (reward: any) => {
+    let tempRewardSize: any = reward.filter((val: any) => (val.type == "points" && (userData.score >= val.points)))
+    tempRewardSize.sort((a: any, b: any) => b.points - a.points)
+    setpointsRewardSize(tempRewardSize.length);
+    let previousReward: any;
+    if (!tempRewardSize[0]) {
+      previousReward = {
+        points: 0,
+      }
     }
-    setTimeScore(timeScore)
+    else {
+      previousReward = tempRewardSize[0];
+    }
+    let pointsRewards = reward.filter((val: any) => (val.type == "points" && (userData.score < val.points)))
+    pointsRewards.sort((a: any, b: any) => a.points - b.points)
+    let nextReward: any = pointsRewards[0];
+    if (!nextReward) {
+      setPointsRewards([])
+      nextReward = {
+        points: 0,
+      }
+    }
+    else {
+      setPointsRewards(nextReward)
+    }
+    getPointsProgress(previousReward, nextReward);
   }
-
-
-
-  const getCurrentLevel = () => {
-    getLevel().then((res) => {
-      res = res.filter((data: any, index: any) => data.minimum <= userData.score)
-      setLevel(res[0])
-      setCurrentLevel(res.length)
-    })
+  const getPointsProgress = (previousReward: any, nextReward: any) => {
+    setData(755 - (((userData.score - previousReward.points) / (nextReward.points - previousReward.points)) * 755));
   }
-
+  const getNextMonthReward = (reward: any) => {
+    let monthsRewardsSize: any = reward.filter((val: any) => (val.type == "months" && timeLevel >= val.months))
+    monthsRewardsSize.sort((a: any, b: any) => b.months - a.months)
+    setTimePrizeSize(monthsRewardsSize.length);
+    let previousReward: any;
+    if (!monthsRewardsSize[0]) {
+      previousReward = {
+        months: 0,
+      }
+    }
+    else {
+      previousReward = monthsRewardsSize[0];
+    }
+    let monthsRewards: any
+    monthsRewards = reward.filter((val: any) => (val.type == "months" && timeLevel < val.months))
+    monthsRewards.sort((a: any, b: any) => a.months - b.months)
+    let nextReward: any = []
+    nextReward = monthsRewards[0];
+    if (monthsRewards) {
+      setTimePrize(nextReward);
+      nextReward = {
+        points: 0,
+      }
+    }
+    else {
+      setTimePrize([]);
+      nextReward = {
+        points: 0,
+      }
+    }
+    getTimeProgress(previousReward, nextReward);
+  }
   const getCurrentTimeLevel = () => {
-    getTimeLevel().then(async (res) => {
-      await Promise.all(res.map(async (element: any) => {
-        element.minMonth = element.minimum * 30;
-        element.maxMonth = element.maximum * 30;
-      }))
-      let tempIndex = 0;
-      let tempLevels: any = [];
-      tempLevels = res.filter((data: any, index: any) => timeScore >= data.minMonth && timeScore < data.maxMonth);
-      if (tempLevels.length > 0) {
-        tempIndex = res.findIndex((x: any) =>
-          x.id == tempLevels[0]?.id)
-        tempLevels[0].level = tempIndex + 1;
-        tempLevels[0].index = tempIndex;
-        setTimeLevel(tempLevels[0]);
-        setCurrentTimeLevel(res.length)
-      } else {
-        tempLevels = res.filter((data: any, index: any) => timeScore > data.maxMonth);
-        const lastItem: any = [...tempLevels].pop();
-        tempIndex = res.findIndex((x: any) =>
-          x.id == lastItem?.id);
-        if (lastItem) {
-          lastItem.level = tempIndex + 1;
-          lastItem.index = tempIndex;
-          setTimeLevel(lastItem);
+    let tempCurrentDate: any = new Date().getTime() / 1000;
+    let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
+    let getMonth: any;
+    if (userData.membership.startDate == 0) {
+      getMonth = 0;
+    }
+    else {
+      getMonth = tempDayCount / (3600 * 24 * 30);
+    }
+    setMonthProgress(getMonth);
+    setTimeLevel(Math.floor(getMonth))
+  }
+  const getTimeProgress = (previousReward: any, nextReward: any) => {
+    if (monthProgress == 0) {
+      setTimeProgress(0)
+    }
+    else {
+      setTimeProgress(755 - (((monthProgress - previousReward.months) / (nextReward.months - previousReward.months)) * 755))
+    }
+  }
+  const getNextCertificates = () => {
+    let counter: number = 0;
+    let totalLessons: number = 0;
+    let maxTtotalLessons: number = 0;
+    let average: number = 0;
+    let arrCourse: any = [];
+    let maximum: any = 0;
+    getNextCertificate().then((res: any) => {
+      res.map((course: any) => {
+        course.lessons.map((lesson: any) => {
+          lesson.users.map((userID: any) => {
+            if (userData.id === userID) {
+              counter = counter + 1;
+            }
+          })
+        })
+        maxTtotalLessons = course.lessons.length;
+        average = counter / maxTtotalLessons;
+        totalLessons = maxTtotalLessons - counter;
+        if (average == 1) {
+          counter = 0;
         }
-      }
-
-      if (res[0].minMonth > timeScore) {
-        tempLevels.level = 0;
-        setTimeLevel(tempLevels)
-      }
+        if (counter > 0) {
+          arrCourse.push({ total: average, name: course.courseTittle, lessonsLeft: totalLessons, maxLessons: maxTtotalLessons })
+          counter = 0;
+        }
+      })
+      maximum = Math.max(...arrCourse.map((val: any) => val.total));
+      arrCourse = arrCourse.filter((val: any) => val.total == maximum);
+      setNextCertificate(arrCourse[0]);
     })
   }
-
-  const logoutFunc = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      window.location.href = "/";
-    }).catch((error) => {
-      console.log(error)
-    });
-  };
+  const certificateProgressBar = () => {
+    let tempProgress: number = 0;
+    let totalLessonsLeft: any = nextCertificate;
+    tempProgress = ((totalLessonsLeft?.lessonsLeft) / totalLessonsLeft?.maxLessons) * 755;
+    setCertificateProgress(tempProgress);
+  }
   useEffect(() => {
     fetchDB_data()
-
   }, [loggedIn])
-
   useEffect(() => {
     if (userData != null) {
-      getCurrentLevel();
-      getDate();
       getCurrentTimeLevel();
+      getNextCertificates();
+      getAllRewards();
+      setNameUpperCase(userData.name.toUpperCase())
     }
   }, [userData]);
   useEffect(() => {
-    if (userData != null && level != null && timeLevel != null) {
-      setBarProgress(((userData.score - level.minimum) / (level.maximum - level.minimum)) * 100)
-      setTimeProgress(((timeScore - timeLevel.minMonth) / (timeLevel.maxMonth - timeLevel.minMonth)) * 100)
+    if (userData !== null && nextCertificate !== null) {
+      certificateProgressBar();
       setLoading(false);
     }
-  }, [level, timeLevel]);
-
+  }, [nextCertificate]);
   const handleClick = (value: boolean) => {
     fetchDB_data();
   }
   if (loading) {
     return (
-      <Background>
+      <BackgroundLoader>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
-      </Background>
+      </BackgroundLoader>
     )
   }
   return (
     <BackgroundProfile>
-      {/* FIRST BOX */}
+      {/* FIRST CONTAINER */}
+      {
+        responsive1023 &&
+        < div className="title-contain">
+          <p className="first-text">
+            PERFIL DE <span>{nameUpperCase}</span>
+          </p>
+          <p className="second-text">
+            ¡Dale seguimiento<br /><span> a tu aprendizaje!</span>
+          </p>
+        </div>
+      }
+
       {//Vista del navbar dinamico de Homepage
+
         userData !== null
-          ?
-          <UserInfo
-            userData={userData}
-            taskView={taskView}
-            setTaskView={setTaskView}
-
-          /> : <></>}
+        &&
+        <UserInfo
+          userData={userData}
+          nextReward={pointsRewards}
+          nextTimeReward={timePrize}
+          data={data}
+          timeProgress={timeProgress}
+          reward={reward}
+          responsive1023={responsive1023}
+          starPosition={starPosition}
+          timeLevel={timeLevel}
+          nextCertificate={nextCertificate}
+          certificateProgress={certificateProgress}
+        />
+      }
       {/* SECOND Container */}
-      {
-        taskView == false &&
-        <SecondBox>
-          <NextReward
-            score={userData.score}
-            barProgress={barProgress}
-            level={currentLevel}
-            max={level.maximum}
-
-            timeScore={timeScore}
-            timeProgress={timeProgress}
-            timeLevel={timeLevel?.level}
-            timeIndex={timeLevel.index}
-          />
-          <ThirdBox>
-            {/* Third Container */}
-            <UserData data={userData} pm={paymentMethod} />
-            {/* Fourth Container */}
-            <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} />
-          </ThirdBox>
-        </SecondBox>
-      }
-      {
-        taskView == true &&
-        <SecondBox>
-          <HomeWork userId={userData.id} user={userData} />
-        </SecondBox>
-      }
-
-      <Link href="/">
+      <SecondBox>
+        <div className="title-contain">
+          <p className="first-text">
+            PERFIL DE <span>{nameUpperCase}</span>
+          </p>
+          <p className="second-text">
+            ¡Dale seguimiento<span> a tu aprendizaje!</span>
+          </p>
+        </div>
+        <NextReward
+          user={userData}
+          reward={reward}
+          setReward={setReward}
+          timeLevel={timeLevel}
+          monthProgress={monthProgress}
+          prize={pointsRewards}
+          prizeSize={pointsRewardSize}
+          timePrize={timePrize}
+          timePrizeSize={timePrizeSize}
+          nextCertificate={nextCertificate}
+        />
+        <ThirdBox>
+          {/* Third Container */}
+          <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} newCard={newCard} addPayment={addPayment} />
+          {/* Fourth Container */}
+          {/* <UserData data={userData} pm={paymentMethod} /> */}
+          <History user={userData} addPayment={addPayment} />
+        </ThirdBox>
+      </SecondBox>
+      {/* <Link href="/">
         <LogOut onClick={logoutFunc} style={{
           display: responsive1023 ? "" : "none",
           marginTop: "-5%",
@@ -233,8 +317,8 @@ const User = () => {
           Cerrar Sesión
           <LogOutIcon />
         </LogOut>
-      </Link>
-    </BackgroundProfile>
+      </Link> */}
+    </BackgroundProfile >
   )
 }
 export default User;

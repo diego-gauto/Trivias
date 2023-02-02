@@ -8,9 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { createCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getUsers } from "../../../../store/actions/courseActions";
-import { Input2, TitleContain } from "../../Rewards/Prizes/Modal/Modal.styled";
-import { CourseName } from "../AllCourses.styled";
+import { getCategory, getMaterial, getTeacher, getUsers } from "../../../../store/actions/courseActions";
+import { CourseName, TitleContain } from "../AllCourses.styled";
 import {
   Button,
   ButtonContain,
@@ -33,7 +32,11 @@ import {
   Selected,
   SelectContain,
   OptionCat,
+  OptionProfessor,
+  OptionColor,
 } from "./Select/SelectStyles.styled";
+import image from "next/image";
+import { Input2 } from "../../Rewards/Modals/AddReward.styled";
 
 const formSchema = yup.object().shape({
   free: yup.number(),
@@ -47,6 +50,9 @@ const formSchema = yup.object().shape({
       then: yup.string().required('Must enter email address'),
     }),
   courseSubtittle: yup
+    .string()
+    .required("Campo requerido"),
+  coursePhrase: yup
     .string()
     .required("Campo requerido"),
   courseAbout: yup
@@ -67,6 +73,7 @@ type FormValues = {
   courseAbout: string;
   coursePublishYear: number;
   coursePrice: number;
+  coursePhrase: string;
 };
 
 const CourseForm_Create = () => {
@@ -92,23 +99,31 @@ const CourseForm_Create = () => {
   const [openProfessor, setOpenProfessor] = useState<boolean>(false);
   const [openCategory, setOpenCategory] = useState<boolean>(false);
   const [openMembership, setOpenMembership] = useState<boolean>(false);
+  const [openMaterial, setOpenMaterial] = useState<boolean>(false);
   const [openHw, setOpenHw] = useState<boolean>(false);
+  const [openLevel, setOpenLevel] = useState<boolean>(false);
+  const [openColor, setOpenColor] = useState<boolean>(false);
   const [name, setName] = useState("Seleccionar un profesor");
   const [homeWork, setHomeWork] = useState(false);
   const [free, setFree] = useState(0)
   const [value, setValue] = useState<any>({});
-  const [userData, setUserData] = useState<any>([]);
+  const [professors, setProfessors] = useState<any>([]);
+  const [professor, setProfessor] = useState<any>([]);
   const [value2, setValue2] = useState<any>([]);
+  const [material, setMaterial] = useState<any>([]);
+  const [materials, setMaterials] = useState<any>([]);
   const [value3, setValue3] = useState("Gratis");
+  const [difficultyValue, setDifficultyValue] = useState("");
   const [image, setImage] = useState<any>("");
   const [missing, setMissing] = useState(false)
   const [creatingNewCourse, setCreatingNewCourse] = useState<boolean>(false);
-
-
+  const [colorRGB, setColorRGB] = useState("");
+  const color = ([
+    "azul", "amarillo", "morado", "naranja", "rosa", "verde"
+  ]);
   const addCategories = (val: any, index: any) => {
     let tempCategories = value2
     let tempIndex = 0;
-    console.log(index)
     if (tempCategories.includes(val)) {
       tempIndex = tempCategories.findIndex((x: any) =>
         x == val
@@ -120,20 +135,57 @@ const CourseForm_Create = () => {
     }
     setValue2([...tempCategories])
   }
+  const addMaterial = (val: any, index: any) => {
+    let tempMaterial = material
+    let tempIndex = 0;
+    if (tempMaterial.includes(val)) {
+      tempIndex = tempMaterial.findIndex((x: any) =>
+        x == val
+      )
+      tempMaterial.splice(tempIndex, 1);
+    }
+    else {
+      tempMaterial.push(val)
+    }
+    setMaterial([...tempMaterial])
+  }
+  const addProfessors = (val: any, index: any) => {
+    let tempProfessor = professor
+    let tempIndex = 0;
+    if (tempProfessor.some((e: any) => e.name === val.name)) {
+      tempIndex = tempProfessor.findIndex((x: any) =>
+        x.name == val.name
+      )
+      tempProfessor.splice(tempIndex, 1);
+    }
+    else {
+      tempProfessor.push(val)
+    }
+    setProfessor([...tempProfessor])
+  }
+
   const onSubmit: SubmitHandler<FormValues> = formData => {
 
     setCreatingNewCourse(true)
-    var professor = ""
-    if (value !== undefined && value !== null) {
-      professor = value
+    var professors = ""
+    if (professor !== undefined && professor !== null) {
+      professors = professor
     }
     var category = ""
     if (value2 !== undefined && value2 !== null) {
       category = value2
     }
+    var materials = ""
+    if (material !== undefined && material !== null) {
+      materials = material
+    }
     var type = ""
     if (value3 !== undefined && value3 !== null) {
       type = value3;
+    }
+    var difficultyLevel = ""
+    if (difficultyValue !== undefined && difficultyValue !== null) {
+      difficultyLevel = difficultyValue
     }
     if (formData.courseDuration === undefined) {
       formData.courseDuration = 0;
@@ -143,16 +195,20 @@ const CourseForm_Create = () => {
     }
     let signUpData: any = {
       data: {
+        courseCertificateColor: colorRGB,
         courseTittle: formData.courseTittle,
         courseDuration: formData.courseDuration * free + 0,
         courseSubtittle: formData.courseSubtittle,
         coursePath: image,
         courseAbout: formData.courseAbout,
         coursePrice: formData.coursePrice * free + 0,
-        courseProfessor: professor,
+        courseProfessor: professors,
         courseCategory: category,
+        courseDifficulty: difficultyLevel,
         courseType: type,
         courseHomeWork: homeWork,
+        coursePhrase: formData.coursePhrase,
+        courseMaterial: materials,
         uid: "A5uQQ3JAyS8GvnnwLPdE"
       },
     };
@@ -167,19 +223,23 @@ const CourseForm_Create = () => {
       alert("Por favor agregue una imagen");
       setCreatingNewCourse(false);
     }
-
   }
+
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
-    reader.onload = (_event) => {
-      setImage(reader.result)
-    };
+    if (file[0].size == 573779 || file[0].size == 48830) {
+      reader.onload = (_event) => {
+        setImage(reader.result)
+      };
+    } else {
+      alert("La imagen debe tener una resolución de 1520 × 840 px  ó 760 × 420 px")
+    }
   }
   const getProffessors = () => {
-    getUsers().then((res) => {
-      res = res.filter((user: any, index: any) => user.role == "admin")
-      setUserData(res);
+    getTeacher().then((res) => {
+      setProfessors(res);
+      return res;
     })
   }
   const getAllCategories = () => {
@@ -188,8 +248,15 @@ const CourseForm_Create = () => {
       return res;
     })
   }
+  const getAllMaterials = () => {
+    getMaterial().then((res) => {
+      setMaterials(res);
+      return res;
+    })
+  }
   if (Object.keys(errors).length > 0 && missing == true) {
-    alert(`Falta lo siguiente: \n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio" : ""}`);
+    alert(`Falta lo siguiente:\n${errors.courseTittle ? "-Título\n" : ""}${errors.courseSubtittle ? "-Subtítulo\n" : ""}${errors.courseAbout ? "-Sobre el Curso\n" : ""}${errors.coursePublishYear ? "-Año\n" : ""}${errors.courseDuration ? "-Duración\n" : ""}${errors.coursePrice ? "-Precio\n" : ""}${errors.coursePhrase ? "-Frase descriptiva\n" : ""}
+    `);
     setMissing(false)
   }
   const handleOpenHomeWork = () => {
@@ -197,33 +264,82 @@ const CourseForm_Create = () => {
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenProfessor = () => {
     setOpenHw(false);
     setOpenProfessor(!openProfessor);
     setOpenCategory(false);
     setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenCategory = () => {
     setOpenHw(false);
     setOpenProfessor(false);
     setOpenCategory(!openCategory);
     setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(false);
+    setOpenColor(false);
   }
   const handleOpenMembership = () => {
     setOpenHw(false);
     setOpenProfessor(false);
     setOpenCategory(false);
     setOpenMembership(!openMembership);
+    setOpenLevel(false);
+    setOpenMaterial(false);
+    setOpenColor(false);
   }
+  const handleOpenLevel = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(!openLevel);
+    setOpenMaterial(false);
+    setOpenColor(false);
+  }
+  const handleOpenMaterial = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(!openMaterial);
+    setOpenColor(false);
+  }
+  const handleOpenColor = () => {
+    setOpenHw(false);
+    setOpenProfessor(false);
+    setOpenCategory(false);
+    setOpenMembership(false);
+    setOpenLevel(false);
+    setOpenMaterial(false);
+    setOpenColor(!openColor);
+  }
+
+  const difficulty = [
+    "Muy Fácil",
+    "Fácil",
+    "Intermedio",
+    "Avanzado",
+    "Máster",
+  ]
   useEffect(() => {
     getProffessors();
     getAllCategories();
+    getAllMaterials();
   }, [])
+
   return (
-    <CourseFormContain onClick={() => { setOpenCourse(!openCourse) }}>
+    <CourseFormContain >
       {/* LINEA 1 */}
-      <TitleContain>
+      <TitleContain onClick={() => { setOpenCourse(!openCourse) }}>
         <CourseName>
           Crear Curso Nuevo
         </CourseName>
@@ -251,35 +367,46 @@ const CourseForm_Create = () => {
             />
           </InputContain>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Profesor(es)</Label>
+            <Label>Instructor(es)</Label>
             <IconContain>
 
               <SelectContain key={1}>
-                <Selected onClick={(e) => { handleOpenProfessor() }}>
-                  {name}
+                <Selected onClick={(e) => { handleOpenProfessor() }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
+                  {
+                    professor.length === 0
+                      ? "Seleccione un professor"
+                      : professor.map((val: any, index: any) => {
+                        return (
+                          <React.Fragment key={'Select Professors ' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        )
+                      })
+                  }
                   <CaretD2 />
                 </Selected>
                 {
                   openProfessor == true &&
                   <OptionContain>
                     {
-                      userData.map((val: any, index: any) => {
+                      professors.map((val: any, index: any) => {
                         return (
-                          <Option
+                          <OptionProfessor
+                            professor={val.name}
+                            marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              setName(val.name);
-                              setValue({ id: val.id, name: val.name });
-                              setOpenProfessor(false)
+                              addProfessors({ id: val.id, name: val.name }, index);
                             }}>
                             <input
                               type="radio"
-                              id="Temporada1"
-                              name="category"
-                              value="Temporada 1"
+                              id="professor"
+                              name="professor"
+                              value="professor"
                             />
                             <Label2>{val.name}</Label2>
-                          </Option>
+                          </OptionProfessor>
                         )
                       })
                     }
@@ -398,7 +525,91 @@ const CourseForm_Create = () => {
         {/* LINEA 3 */}
         <InputForm>
           <InputContain onClick={(e) => { e.stopPropagation(); }}>
-            <Label>Sobre el Curso</Label>
+            <Label>Frase descriptiva icónica</Label>
+            <InputBig
+              placeholder="Frase descriptiva"
+              className={`form-control ${errors.coursePhrase ? 'is-invalid' : ''}`}
+              {...register("coursePhrase")}
+            />
+          </InputContain>
+
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Nivel de Dificultad</Label>
+            <IconContain>
+
+              <SelectContain key={3}>
+                <Selected onClick={() => { handleOpenLevel() }}>
+                  {
+                    difficultyValue == "" ? "Seleccione una Dificultad" : difficultyValue
+                  }
+                  <CaretD2 />
+                </Selected>
+                {
+                  openLevel == true &&
+                  <OptionContain>
+                    {
+                      difficulty.map((val) => {
+                        return (
+                          <Option onClick={() => { setOpenLevel(false), setDifficultyValue(val) }} key={"difficulty " + val}>
+                            <input
+                              type="radio"
+                              id="difficulty"
+                              value="difficulty"
+                            />
+                            <Label2 > {val}</Label2>
+                          </Option>
+                        )
+                      })
+                    }
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+          </InputContain>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Material</Label>
+            <IconContain>
+
+              <SelectContain key={2}>
+                <Selected onClick={() => { handleOpenMaterial() }} style={{ height: "auto" }}>
+                  {material.length == 0 ? "Seleccione un material" : material.length > 1 ? material + " " : material}
+                  <CaretD2 />
+                </Selected>
+                {
+                  openMaterial == true &&
+                  <OptionContain>
+                    {
+                      materials.map((val: any, index: any) => {
+                        return (
+                          <OptionCat
+                            category={val.name}
+                            marked={value2}
+                            key={"SelectCategory" + index}
+                            onClick={() => {
+                              addMaterial(val.name, index)
+                            }}>
+                            <input
+                              type="radio"
+                              id="category"
+                              name="category"
+                              value="Category"
+                            />
+                            <Label2>{val.name}</Label2>
+                          </OptionCat>
+                        )
+                      })
+                    }
+                  </OptionContain>
+                }
+              </SelectContain>
+            </IconContain>
+
+          </InputContain>
+        </InputForm>
+        {/* LINEA 4 */}
+        <InputForm>
+          <InputContain onClick={(e) => { e.stopPropagation(); }}>
+            <Label>Objetivos</Label>
             <InputBig
               placeholder="Lorem ipsum dolor sit amet, 
           consectetur adipiscing elit. Nisi, sem rutrum 
@@ -416,7 +627,6 @@ const CourseForm_Create = () => {
             {
               (value3 == "Producto") &&
               <>
-
                 <InputContain>
                   <Label>Precio (MXN)</Label>
                   <Input
@@ -487,56 +697,87 @@ const CourseForm_Create = () => {
           </TagLabel>
         </TagContain> */}
           <InputContain2>
-
-            <ButtonContain >
-              <InputContain onClick={(e) => { e.stopPropagation(); }}>
-                <Label>Categorías</Label>
-                <IconContain>
-
-                  <SelectContain key={2}>
-                    <Selected onClick={() => { handleOpenCategory() }}>
-                      {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
-                      <CaretD2 />
-                    </Selected>
-                    {
-                      openCategory == true &&
-                      <OptionContain>
-                        {
-                          categories.map((val: any, index: any) => {
-                            return (
-                              <OptionCat
-                                category={val.name}
-                                marked={value2}
-                                key={"SelectCategory" + index}
-                                onClick={() => {
-                                  addCategories(val.name, index)
-                                }}>
-                                <input
-                                  type="radio"
-                                  id="category"
-                                  name="category"
-                                  value="Category"
-                                />
-                                <Label2>{val.name}</Label2>
-                              </OptionCat>
-                            )
-                          })
-                        }
-                      </OptionContain>
-                    }
-                  </SelectContain>
-                </IconContain>
-
-              </InputContain>
-              {!creatingNewCourse ?
-                <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
-                :
-                <LoaderContain />
-              }
-            </ButtonContain>
+            <InputContain onClick={(e) => { e.stopPropagation(); }}>
+              <Label>Categorías</Label>
+              <IconContain>
+                <SelectContain key={2}>
+                  <Selected onClick={() => { handleOpenCategory() }} style={{ height: "auto" }}>
+                    {value2.length == 0 ? "Seleccione una categoria" : value2.length > 1 ? value2 + " " : value2}
+                    <CaretD2 />
+                  </Selected>
+                  {
+                    openCategory == true &&
+                    <OptionContain>
+                      {
+                        categories.map((val: any, index: any) => {
+                          return (
+                            <OptionCat
+                              category={val.name}
+                              marked={value2}
+                              key={"SelectCategory" + index}
+                              onClick={() => {
+                                addCategories(val.name, index)
+                              }}>
+                              <input
+                                type="radio"
+                                id="category"
+                                name="category"
+                                value="Category"
+                              />
+                              <Label2>{val.name}</Label2>
+                            </OptionCat>
+                          )
+                        })
+                      }
+                    </OptionContain>
+                  }
+                </SelectContain>
+              </IconContain>
+            </InputContain>
+            <InputContain onClick={(e) => { e.stopPropagation(); }}>
+              <Label>Color</Label>
+              <IconContain>
+                <SelectContain key={2}>
+                  <Selected onClick={() => { handleOpenColor() }} style={{ height: "auto" }}>
+                    {colorRGB == "" ? "Seleccione un color" : colorRGB}
+                    <CaretD2 />
+                  </Selected>
+                  {
+                    openColor == true &&
+                    <OptionContain>
+                      {
+                        color.map((val: any, index: any) => {
+                          return (
+                            <OptionColor
+                              color={val}
+                              onClick={() => { setOpenColor(false), setColorRGB(val) }}
+                              key={"SelectColor " + index}>
+                              <input
+                                type="radio"
+                                id="color"
+                                name="color"
+                                value="color"
+                              />
+                              <Label2>{val}</Label2>
+                            </OptionColor>
+                          )
+                        })
+                      }
+                    </OptionContain>
+                  }
+                </SelectContain>
+              </IconContain>
+            </InputContain>
           </InputContain2>
-
-
+        </InputForm>
+        <InputForm style={{ justifyContent: "center" }}>
+          <ButtonContain >
+            {!creatingNewCourse ?
+              <Button type='submit' onClick={(e) => { e.stopPropagation(); setMissing(true) }}>Crear Curso</Button>
+              :
+              <LoaderContain />
+            }
+          </ButtonContain>
         </InputForm>
       </form>}
     </CourseFormContain>

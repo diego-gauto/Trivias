@@ -7,7 +7,6 @@ export const CourseFormContain = styled.div`
   padding: 15px;
   box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 20%);
   border-radius: 10px;
-  cursor: pointer;
 }
 `;
 export const ButtonContain = styled.div`

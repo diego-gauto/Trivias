@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
-import { Title, VideoContain, VideoImage, Segment, MenuIcon, TitleContain } from './Video.styled';
+import { Title, VideoContain, Segment } from './Video.styled';
 import Courses from '../../LessonComponents/Courses/Courses';
 import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
-import { EaselIcon } from '../Modules/Module.styled';
+import Modules from '../Modules/Modules';
+import { useMediaQuery } from 'react-responsive';
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+
 declare let Hls: any
 
-const Video = ({ data, title, id, course, user, season, lesson }: any) => {
+const Video = ({ data, title, id, course, user, season, lesson, handleComplete, comments }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
+  const [active, setActive] = useState(false);
+
+  const [selected, setSelected] = useState<any>([]);
+  const [open, setOpen] = useState(false);
+  const [count, setCount] = useState(0);
+  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
+  const [quiz, setQuiz] = useState<any>([]);
 
   const finishedLesson = () => {
     let temp: any = { ...data };
@@ -22,12 +33,23 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
         addUserToLesson(data, id, data.seasonId, data.id, user);
         temp.users.push(user.id);
         setCurrent({ ...temp });
+        handleComplete()
       }
     }
   }
 
   useEffect(() => {
     setCurrent(data)
+    setQuiz([])
+    if ("mandatory" in data && data) {
+      let tempQuiz: any = []
+      data.questions.forEach((element: any) => {
+        if (tempQuiz.length <= data.questions.length) {
+          tempQuiz.push([])
+        }
+      });
+      setQuiz(tempQuiz)
+    }
   }, [data])
 
   const handleClick = (value: boolean) => {
@@ -73,51 +95,146 @@ const Video = ({ data, title, id, course, user, season, lesson }: any) => {
     }
   }
 
-  // const doVideoStuff = () => {
-  //   //@ts-ignore
-  //   var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
-  //   var videoSrc = data.link;
-  //   if (Hls.isSupported()) {
-  //     var hls = new Hls();
-  //     hls.loadSource(videoSrc);
-  //     hls.attachMedia(video);
-  //   } else {
-  //     video.src = `${videoSrc}`
-  //   }
-  // }
-  // useEffect(() => {
-  //   doVideoStuff()
-  // }, [])
+  useEffect(() => {
+    let temp_selected: any = [];
+    course?.seasons.forEach((element: any) => {
+      temp_selected.push(false)
+    });
+    setSelected(temp_selected);
+
+    let viewed = 0;
+    course.lessons.forEach((element: any) => {
+      if (element.users.includes(user.id)) {
+        viewed++;
+      }
+    });
+    setCount(viewed)
+  }, [course])
+
+  useEffect(() => {
+    setOpen(menu)
+  }, [menu])
+
+  const toggleHandler = (index: any) => {
+    let temp = [...selected]
+    temp[index] = !temp[index];
+    setSelected(temp)
+  }
+
+  const chooseAnswer = (indQ: number, indA: number) => {
+    course.seasons[season].lessons[lesson].questions[indQ].answers.forEach((element: any, index: number) => {
+      if (indA == index) {
+        let actual = document.getElementById("q" + indQ + "a" + index) as HTMLInputElement;
+        actual.checked = true;
+        quiz[indQ] = indA
+      } else {
+        let other = document.getElementById("q" + indQ + "a" + index) as HTMLInputElement;
+        other.checked = false;
+      }
+    });
+    setQuiz(quiz);
+  }
+
+  const submit = () => {
+    let temp: any = { ...data };
+    if (user) {
+      if (temp.users.includes(user.id)) {
+        console.log("user exist");
+      } else {
+        const correct = 100 / data.questions.length;
+        let tempPoints = 0;
+        const score = parseInt(data.points) / data.questions.length;
+        let tempScore = 0;
+        data.questions.forEach((element: any, indQ: number) => {
+          element.answers.forEach((answer: any, indA: number) => {
+            if (quiz[indQ] == indA && answer.status) {
+              tempPoints = tempPoints + correct
+              tempScore = tempScore + score;
+            }
+          });
+        });
+        if (tempPoints >= data.passingGrade) {
+          alert("aprobado")
+          user.score = parseInt(user.score) + tempScore;
+          addUserToLesson(data, id, data.seasonId, data.id, user);
+          temp.users.push(user.id);
+          setCurrent({ ...temp });
+          handleComplete()
+        } else {
+          alert("reprobado")
+        }
+      }
+    }
+  }
 
   return (
     <Segment>
       <VideoContain>
-        <TitleContain>
-          <Title>
-            {title}
-          </Title>
-          <EaselIcon onClick={() => { setMenu(!menu) }} />
-          {/* <video id="video" controls playsInline preload="auto" width="100%"
-          ></video> */}
-        </TitleContain>
-        <ReactPlayer
-          className='absolute'
-          ref={p => p?.seekTo(handleViewed())}
-          url={data.link}
-          playing={false}
-          muted={false}
-          controls
-          width="100%" height="100%"
-          onEnded={finishedLesson}
-          onDuration={(duration) =>
-            handleDuration(duration)
-          }
-          onProgress={(state) => {
-            handleProgress(state.playedSeconds)
-          }}
-        />
+        <div className='nav-course'>
+          <img src="/images/Navbar/NavbarLogo2.png" alt="" />
+          {!menu ? <GiHamburgerMenu onClick={() => {
+            setMenu(!menu)
+          }}></GiHamburgerMenu> :
+            <AiOutlineClose onClick={() => {
+              setMenu(!menu)
+            }}></AiOutlineClose>}
+        </div>
+        {"mandatory" in course.seasons[season].lessons[lesson] ?
+          <div className='quiz-container'>
+            <Title>
+              Quiz: {course.seasons[season].lessons[lesson].title}
+            </Title>
+            {course.seasons[season].lessons[lesson].questions.map((question: any, index: number) => {
+              return (
+                <div className='question-container'>
+                  <div className='question'>
+                    <p>{index + 1}.</p>
+                    <p dangerouslySetInnerHTML={{ __html: question.question }}></p>
+                  </div>
+                  <div className='answers'>
+                    {question.answers.map((answer: any, ind: number) => {
+                      return (
+                        <div style={{ display: "flex" }}>
+                          <p>{answer.answer}</p>
+                          <input type="radio" id={"q" + index + "a" + ind} onChange={() => {
+                            chooseAnswer(index, ind)
+                          }} />
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+            <button onClick={submit}>Responder</button>
+          </div>
+          :
+          <ReactPlayer
+            className='absolute'
+            ref={p => p?.seekTo(handleViewed())}
+            url={data.link}
+            playing={true}
+            muted={false}
+            controls
+            width="100%" height="100%"
+            onEnded={finishedLesson}
+            onDuration={(duration) =>
+              handleDuration(duration)
+            }
+            onProgress={(state) => {
+              handleProgress(state.playedSeconds)
+            }}
+          />
+        }
+        {
+          responsive1124 && <div className='module-selector'>
+            <p>{course.courseTittle}</p>
+            <p><span>Un curso de</span> {course.courseProfessor[0]?.name}</p>
+          </div>
+        }
+        <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
       </VideoContain>
-      <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userId={user?.id} season={season} lesson={lesson} />
+      <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userData={user} season={season} lesson={lesson} />
     </Segment>
   )
 }

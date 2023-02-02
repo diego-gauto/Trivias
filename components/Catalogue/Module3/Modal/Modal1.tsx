@@ -92,7 +92,7 @@ const Modal1 = ({ show, setShow }: any) => {
             </Container>
           </ModalBackground>
 
-          <CourseContain>
+          <CourseContain level={"no"}>
             <AboutContain>
               <Titles>
                 Sobre el curso:

@@ -9,7 +9,7 @@ import {
   ProgressSvg,
   Vector,
   Vector2,
-} from "../../../../containers/Profile/Rewards/UserLevel/UserLevel.styled";
+} from "./UsersCardData.styled";
 import { db } from "../../../../firebase/firebaseConfig";
 import { getLevels } from "../../../../store/actions/RewardActions";
 

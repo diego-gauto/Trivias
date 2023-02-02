@@ -10,7 +10,6 @@ import {
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
 
 const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
-  console.log(data);
 
   return (
     <MainContainer>

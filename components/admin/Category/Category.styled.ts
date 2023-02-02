@@ -23,6 +23,16 @@ export const FormContain = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+  img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+  }
+  .inputs {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
 `;
 export const InputContain = styled.div`
   display: flex;
@@ -102,6 +112,6 @@ export const CloseIcon = styled.i`
 `;
 export const EditCat = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 20px;
 `;

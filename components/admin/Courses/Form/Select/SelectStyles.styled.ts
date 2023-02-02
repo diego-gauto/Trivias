@@ -45,6 +45,55 @@ export const Option = styled.div`
     }
   }
 `;
+export const OptionColor = styled.div<{ color: string }>`
+  ${(props) =>
+    props.color == "azul" &&
+    css`
+      background-color: #6778f9;
+      border-radius: 10px 10px 0 0;
+    `}
+  ${(props) =>
+    props.color == "amarillo" &&
+    css`
+      background-color: #e2a12d;
+    `}
+    ${(props) =>
+    props.color == "morado" &&
+    css`
+      background-color: #9900ee;
+    `}
+    ${(props) =>
+    props.color == "naranja" &&
+    css`
+      background-color: #f04a18;
+    `}
+    ${(props) =>
+    props.color == "rosa" &&
+    css`
+      background-color: #d445d3;
+    `}
+    ${(props) =>
+    props.color == "verde" &&
+    css`
+      background-color: #03bc80;
+      border-radius: 0 0 10px 10px;
+    `}
+  &:hover {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    color: white;
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+  }
+  input {
+    &[type="radio"] {
+      display: none;
+    }
+  }
+`;
 export const OptionCat = styled.div<{ category: string; marked: string }>`
   &:hover {
     background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
@@ -74,6 +123,55 @@ export const OptionCat = styled.div<{ category: string; marked: string }>`
       }
     `}
 `;
+export const OptionProfessor = styled.div<{
+  professor: string;
+  marked: string;
+}>`
+  &:hover {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    color: white;
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+  }
+  input {
+    &[type="radio"] {
+      display: none;
+    }
+  }
+`;
+export const OptionMat = styled.div<{ material: string; marked: string }>`
+  &:hover {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    color: white;
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+  }
+  input {
+    &[type="radio"] {
+      display: none;
+    }
+  }
+  ${(props) =>
+    props.marked.includes(props.material) &&
+    css`
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      color: white;
+      &:first-child {
+        border-radius: 10px 10px 0 0;
+      }
+      &:last-child {
+        border-radius: 0 0 8px 8px;
+      }
+    `}
+`;
 export const Label2 = styled.label`
   display: flex;
   font-size: 14px;
@@ -85,6 +183,9 @@ export const Label2 = styled.label`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   white-space: nowrap;
+  &:hover {
+    color: white;
+  }
 `;
 export const CaretD2 = styled.i`
   position: absolute;

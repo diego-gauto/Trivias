@@ -10,30 +10,41 @@ export const getLandingData = async () => {
   const heroSectionRef = doc(db, "landingPage", "heroSection")
   const featureShowcaseSectionRef = doc(db, "landingPage", "featureShowcaseSection")
   const reseniasCollectionRef = collection(db, "landingPage", "reseniasSection", "resenias")
+  const experienciasCollectionRef = collection(db, "landingPage", "experienciasUsuario", "resenias")
   const productosCollectionRef = collection(db, "landingPage", "productosDestacadosSection", "productos")
   const [
     heroSectionDoc,
     featureShowcaseSectionDoc,
     reseniasDocs,
+    experienciasDocs,
     productosDestacadosDocs,
   ] = await Promise.all([
     getDoc(heroSectionRef),
     getDoc(featureShowcaseSectionRef),
     getDocs(reseniasCollectionRef),
-    getDocs(productosCollectionRef)
+
+    getDocs(experienciasCollectionRef),
+    getDocs(productosCollectionRef),
   ])
   const parsedReseniasData = reseniasDocs.docs.map((d) => {
     const { nombre, imgURL } = d.data()
     return { title: nombre, imgURL: downloadFileWithStoragePath(imgURL), id: d.id }
   })
+  const parsedExperienciasData = experienciasDocs.docs.map((d) => {
+    const { descripcion, username, imgURL, isNew, date, usrImgURL, usrFacebookURL } = d.data()
+    var convertedDate = new Date(date.toDate())
+    return { descripcion, username, imgURL, isNew, convertedDate, usrImgURL, usrFacebookURL, id: d.id }
+  })
   const parsedProductosDestacadosData = productosDestacadosDocs.docs.map((d) => {
-    const { nombre, precio, imgURL, clickURL } = d.data()
-    return { title: nombre, subtitle: precio, isNew: false, imgURL, clickURL, id: d.id }
+    const { nombre, precio, compraRapida, imgURL, isNew, clickURL, currency,
+      disponible } = d.data()
+    return { title: nombre, precio, compraRapida, currency, disponible, isNew, imgURL, clickURL, id: d.id }
   })
   return {
     heroSectionData: heroSectionDoc.data() || {},
     featureShowcaseSectionData: featureShowcaseSectionDoc.data() || {},
     reseniasSectionData: parsedReseniasData || [],
+    experienciasSectionData: parsedExperienciasData || [],
     productosDestacadosData: parsedProductosDestacadosData || []
   }
 }
@@ -41,10 +52,10 @@ export const getLandingData = async () => {
 export const saveProductsData = async (products: Product[]) => {
   const productsCollection = db.collection("landingPage").doc("productosDestacadosSection").collection("productos")
   const promises = products.map((p) => {
-    const { title, subtitle, imgURL, clickURL, id } = p
+    const { title, subtitle, imgURL, clickURL, id, precio } = p
     return productsCollection.doc(id).update({
       nombre: title,
-      precio: subtitle,
+      precio: precio,
       isNew: false,
       imgURL,
       clickURL
@@ -81,22 +92,32 @@ export const saveHeroData = async (heroData: HeroData) => {
 }
 
 export const saveReviewsData = async (reviewsData: Review[]) => {
-  const reviewsCollection = db.collection("landingPage").doc("reseniasSection").collection("resenias")
-  const promises = reviewsData.map((r) => {
-    const { title, id } = r
+  const reviewsCollection = db.collection("landingPage").doc("experienciasUsuario").collection("resenias")
+  const promises = reviewsData.map((r: any) => {
+    const { username, usrFacebookURL, descripcion, id } = r
     return reviewsCollection.doc(id).update({
-      nombre: title,
+      username: username,
+      usrFacebookURL: usrFacebookURL,
+      descripcion: descripcion
     })
   })
-  const updatedFiles = reviewsData.filter((p) => !!p.file)
-  const filePromises = updatedFiles.map(async ({ file, id }) => {
-    const result = await uploadFile(file!, `landing/resenias/${id}`)
+  const updatedFiles = reviewsData.filter((p) => !!p.userFile)
+  const filePromises = updatedFiles.map(async ({ userFile, id }) => {
+    const result = await uploadFile(userFile!, `landing/experiencias/users/${id}`)
+    return reviewsCollection.doc(id).update({
+      usrImgURL: result.metadata.fullPath
+    })
+  })
+
+  const updatedBg = reviewsData.filter((p) => !!p.file)
+  const fileBgPromises = updatedBg.map(async ({ file, id }) => {
+    const result = await uploadFile(file!, `landing/experiencias/publication/${id}`)
     return reviewsCollection.doc(id).update({
       imgURL: result.metadata.fullPath
     })
   })
   try {
-    await Promise.all([...promises, ...filePromises])
+    await Promise.all([...promises, ...filePromises, ...fileBgPromises])
   } catch {
     return false
   }
@@ -110,6 +131,12 @@ export const uploadFile = async (file: File, uploadPath: string) => {
 }
 
 export const downloadFileWithStoragePath = async (path: string) => {
-  const storage = getStorage()
-  return await getDownloadURL(ref(storage, path))
+  try {
+
+    const storage = getStorage()
+    return await getDownloadURL(ref(storage, path))
+  } catch (error) {
+
+  }
+  return ""
 }

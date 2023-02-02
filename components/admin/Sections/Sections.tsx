@@ -17,6 +17,7 @@ import {
   TitleBox,
   TitleContain,
 } from "./Sections.styled";
+import { useRouter } from "next/router";
 
 export type INewUser = {
   name?: string,
@@ -48,7 +49,7 @@ const Sections = () => {
   const [role, setRole] = useState<string>();
   const [adminID, setAdminID] = useState<string>();
   const [selectedAdmin, setSelectedAdmin] = useState<Array<any>>([]);
-
+  const router = useRouter();
   const editRole = async (id: string): Promise<void> => {
     setIsVisible(true);
 

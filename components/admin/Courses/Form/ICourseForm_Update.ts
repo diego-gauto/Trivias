@@ -10,6 +10,11 @@ export interface ICourseForm_Update {
   coursePublishYear: string;
   courseHomeWork: boolean;
   courseSubtittle: string;
+  coursePhrase: string;
+  courseMaterial: string;
+  courseDifficulty: string;
+  courseRating: number;
+  courseCertificateColor: string;
   index: number;
   documentID: string;
   reference: string;
