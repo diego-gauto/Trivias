@@ -171,7 +171,6 @@ const CourseForm = (props: ICourseForm_Update) => {
     setMaterial([...tempMaterial])
   }
   const addProfessors = (val: any, index: any) => {
-
     let tempProfessor = professor
     let tempIndex = 0;
     if (tempProfessor.some((e: any) => e.name === val.name)) {
@@ -394,7 +393,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                             marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              addProfessors({ id: val.id, name: val.name }, index);
+                              addProfessors(val, index);
                             }}>
                             <input
                               type="radio"

@@ -113,5 +113,4 @@ export const CloseIcon = styled.i`
 export const EditCat = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
 `;
