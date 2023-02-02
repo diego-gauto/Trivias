@@ -55,6 +55,13 @@ export const MainContainer = styled.div<{ color: any }>`
       margin: 0;
       width: max-content;
     }
+    .main-signature {
+      width: 100px;
+      position: absolute;
+      z-index: 2;
+      bottom: 14%;
+      left: 53%;
+    }
     .title {
       position: absolute;
       left: 50%;
@@ -97,9 +104,11 @@ export const MainContainer = styled.div<{ color: any }>`
       font-weight: 400;
     }
     .professor-name {
+      max-width: 100px;
       position: absolute;
-      left: 27%;
-      transform: translateY(508px);
+      left: 34%;
+      line-height: 15px;
+      bottom: 75px;
       color: #451466;
       font-size: 14px;
       font-weight: 600;

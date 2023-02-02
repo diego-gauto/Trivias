@@ -13,7 +13,7 @@ const Certificate = () => {
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
-
+  const aritaSignature = "/images/signatures/AritaGonvar.png";
   const getUserCertificate = () => {
     getUser(id).then((res) => {
       let tempCertificate = res[0].certificates.find((x: any) => x.courseId == courseId)
@@ -80,6 +80,7 @@ const Certificate = () => {
           <p className="folio">{folio}</p>
           <p className="professor-name">{professor}</p>
           <img id="img" src={image} style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }} alt="" />
+          <img src={aritaSignature} className="main-signature" />
         </div>
       </div>
       <button onClick={downloadCertficate}>Descargar</button>
