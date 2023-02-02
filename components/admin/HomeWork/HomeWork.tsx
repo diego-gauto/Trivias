@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
-import { getAllHomeWorks } from '../../../store/actions/UserActions';
+import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import SideBar from '../SideBar';
@@ -32,7 +32,7 @@ const HomeWork = () => {
   }
   const getHomeworks = () => {
     let tempFilter: any = [];
-    if (professorFilter != "") {
+    if (professorFilter !== "" || courseFilter !== "") {
       setHomeWorks([]);
       getAllHomeWorks().then((res) => {
         res.forEach((element: any) => {
@@ -43,17 +43,33 @@ const HomeWork = () => {
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
         res.filter((element: any, index: any) => {
-          element.teacherCreds.map((val: any) => {
-            if (val.id === professorFilter.id) {
+          if (professorFilter !== "" && courseFilter === "") {
+            element.teacherCreds.map((val: any) => {
+              if (val.id === professorFilter.id) {
+                tempFilter.push(element);
+              }
+            })
+          }
+          if (professorFilter === "" && courseFilter !== "") {
+            if (element.courseId == courseFilter.id) {
               tempFilter.push(element);
             }
-          })
+          }
+          if (professorFilter !== "" && courseFilter !== "") {
+            if (element.courseId == courseFilter.id) {
+              element.teacherCreds.map((val: any) => {
+                if (val.id === professorFilter.id) {
+                  tempFilter.push(element);
+                }
+              })
+            }
+          }
         })
         setHomeWorks(tempFilter);
       })
     }
     else {
-      getAllHomeWorks().then((res) => {
+      getAllHomeWorks().then((res: any) => {
         res.forEach((element: any) => {
           let tempDate = new Date(element.createdAt.seconds * 1000);
           let tempDay = tempDate.getDate()
@@ -61,20 +77,25 @@ const HomeWork = () => {
           let tempYear = tempDate.getFullYear()
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
+        getAllCourses(res);
         setHomeWorks(res);
       })
     }
   }
-  const getAllCourses = () => {
+  const getAllCourses = (homeWork: any) => {
     let courses: any = []
+    let hwMap: any = homeWork.map((hw: any) => { return hw.courseId })
+    let hwFilter: any = hwMap.filter((hw: any, index: number) => { return hwMap.indexOf(hw) === index })
     getCourses().then((res) => {
-      res.map((val: any) =>
-        homeWorks.map((hw: any) => {
-          if (hw.courseId) {
-
+      res.filter((val: any) => {
+        hwFilter.map((hw: any) => {
+          if (val.id == hw) {
+            courses.push(val);
           }
         })
+      }
       )
+      setCourse(courses)
     })
   }
   const getAllteachers = () => {
@@ -91,11 +112,10 @@ const HomeWork = () => {
   }
   useEffect(() => {
     getAllteachers();
-    getAllCourses();
   }, [])
   useEffect(() => {
     getHomeworks();
-  }, [professorFilter])
+  }, [professorFilter, courseFilter])
 
   return (
     <AdminContain>
@@ -110,7 +130,7 @@ const HomeWork = () => {
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
-                    professorFilter ? professorFilter.name : "Seleccione un curso"
+                    courseFilter ? courseFilter.courseTittle : "Seleccione un curso"
                   }
                   <CaretD2 style={{ top: "18%" }} />
                 </Selected>
@@ -122,6 +142,7 @@ const HomeWork = () => {
                     <Option
                       onClick={() => {
                         setCourseFilter("");
+                        setCourseSelect(false);
                       }}>
                       <input
                         type="radio"
@@ -132,12 +153,13 @@ const HomeWork = () => {
                       <Label2>Ver Todas</Label2>
                     </Option>
                     {
-                      professor.map((val: any, index: any) => {
+                      course.map((val: any, index: any) => {
                         return (
                           <Option
                             key={"Professor " + index}
                             onClick={() => {
                               setCourseFilter(val);
+                              setCourseSelect(false);
                             }}>
                             <input
                               type="radio"
@@ -145,7 +167,7 @@ const HomeWork = () => {
                               name="professor"
                               value="professor"
                             />
-                            <Label2>{val.name}</Label2>
+                            <Label2>{val.courseTittle}</Label2>
                           </Option>
                         )
                       })
@@ -169,6 +191,7 @@ const HomeWork = () => {
                     <Option
                       onClick={() => {
                         setProfessorFilter("");
+                        setOpenSelect(false)
                       }}>
                       <input
                         type="radio"
@@ -185,6 +208,7 @@ const HomeWork = () => {
                             key={"Professor " + index}
                             onClick={() => {
                               setProfessorFilter(val);
+                              setOpenSelect(false)
                             }}>
                             <input
                               type="radio"
