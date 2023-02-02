@@ -32,7 +32,7 @@ const HomeWork = () => {
   }
   const getHomeworks = () => {
     let tempFilter: any = [];
-    if (professorFilter != "") {
+    if (professorFilter !== "" || courseFilter !== "") {
       setHomeWorks([]);
       getAllHomeWorks().then((res) => {
         res.forEach((element: any) => {
@@ -43,17 +43,29 @@ const HomeWork = () => {
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
         res.filter((element: any, index: any) => {
-          element.teacherCreds.map((val: any) => {
-            if (val.id === professorFilter.id) {
-              tempFilter.push(element);
-            }
-          })
+          if (professorFilter !== "" && courseFilter === "") {
+            element.teacherCreds.map((val: any) => {
+              if (val.id === professorFilter.id) {
+                tempFilter.push(element);
+              }
+            })
+          }
+          if (professorFilter === "" && courseFilter !== "") {
+            course.map((val: any) => {
+              if (val.id === courseFilter.id) {
+                console.log('hola')
+              }
+              // if (val.id === professorFilter.id) {
+              //   tempFilter.push(element);
+              // }
+            })
+          }
         })
         setHomeWorks(tempFilter);
       })
     }
     else {
-      getAllHomeWorks().then((res) => {
+      getAllHomeWorks().then((res: any) => {
         res.forEach((element: any) => {
           let tempDate = new Date(element.createdAt.seconds * 1000);
           let tempDay = tempDate.getDate()
