@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
-import { getAllHomeWorks } from '../../../store/actions/UserActions';
+import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import SideBar from '../SideBar';
@@ -32,7 +32,7 @@ const HomeWork = () => {
   }
   const getHomeworks = () => {
     let tempFilter: any = [];
-    if (professorFilter != "") {
+    if (professorFilter !== "" || courseFilter !== "") {
       setHomeWorks([]);
       getAllHomeWorks().then((res) => {
         res.forEach((element: any) => {
@@ -43,17 +43,33 @@ const HomeWork = () => {
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
         res.filter((element: any, index: any) => {
-          element.teacherCreds.map((val: any) => {
-            if (val.id === professorFilter.id) {
+          if (professorFilter !== "" && courseFilter === "") {
+            element.teacherCreds.map((val: any) => {
+              if (val.id === professorFilter.id) {
+                tempFilter.push(element);
+              }
+            })
+          }
+          if (professorFilter === "" && courseFilter !== "") {
+            if (element.courseId == courseFilter.id) {
               tempFilter.push(element);
             }
-          })
+          }
+          if (professorFilter !== "" && courseFilter !== "") {
+            if (element.courseId == courseFilter.id) {
+              element.teacherCreds.map((val: any) => {
+                if (val.id === professorFilter.id) {
+                  tempFilter.push(element);
+                }
+              })
+            }
+          }
         })
         setHomeWorks(tempFilter);
       })
     }
     else {
-      getAllHomeWorks().then((res) => {
+      getAllHomeWorks().then((res: any) => {
         res.forEach((element: any) => {
           let tempDate = new Date(element.createdAt.seconds * 1000);
           let tempDay = tempDate.getDate()
@@ -68,13 +84,16 @@ const HomeWork = () => {
   }
   const getAllCourses = (homeWork: any) => {
     let courses: any = []
+    let hwMap: any = homeWork.map((hw: any) => { return hw.courseId })
+    let hwFilter: any = hwMap.filter((hw: any, index: number) => { return hwMap.indexOf(hw) === index })
     getCourses().then((res) => {
-      res.map((val: any) =>
-        homeWork.map((hw: any) => {
-          if (val.id == hw.courseId) {
-            courses.push(val)
+      res.filter((val: any) => {
+        hwFilter.map((hw: any) => {
+          if (val.id == hw) {
+            courses.push(val);
           }
         })
+      }
       )
       setCourse(courses)
     })
@@ -123,6 +142,7 @@ const HomeWork = () => {
                     <Option
                       onClick={() => {
                         setCourseFilter("");
+                        setCourseSelect(false);
                       }}>
                       <input
                         type="radio"
@@ -139,6 +159,7 @@ const HomeWork = () => {
                             key={"Professor " + index}
                             onClick={() => {
                               setCourseFilter(val);
+                              setCourseSelect(false);
                             }}>
                             <input
                               type="radio"
@@ -170,6 +191,7 @@ const HomeWork = () => {
                     <Option
                       onClick={() => {
                         setProfessorFilter("");
+                        setOpenSelect(false)
                       }}>
                       <input
                         type="radio"
@@ -186,6 +208,7 @@ const HomeWork = () => {
                             key={"Professor " + index}
                             onClick={() => {
                               setProfessorFilter(val);
+                              setOpenSelect(false)
                             }}>
                             <input
                               type="radio"
