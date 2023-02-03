@@ -41,7 +41,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
   const [seasons, setSeasons] = useState<any>([]);
   const [material, setMaterial] = useState(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-
+  const DEFAULT_PROFESSOR_IMAGE = "/images/teachers/iker.jpg";
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons)
   };
@@ -95,7 +95,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
       }, 2000)
     }
   }, [course])
-
   const hms = (totalSeconds: any) => {
     if (typeof totalSeconds == 'string') return totalSeconds
     const hours = Math.floor(totalSeconds / 3600);
@@ -148,7 +147,6 @@ const Modal = ({ show, setShow, course, user }: any) => {
       }
     }
   };
-
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -197,9 +195,9 @@ const Modal = ({ show, setShow, course, user }: any) => {
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
                 <div className="professor-container">
-                  <img src="/images/teachers/iker.jpg" alt="" />
+                  <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">Iker Robles García</span></p>
+                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
                 </div>
               </div>
               <div className="bottom">
