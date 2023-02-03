@@ -5,6 +5,7 @@ import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 import { SIGNUP_PATH } from '../../constants/paths';
+import { getTeacher } from '../../store/actions/courseActions';
 import Modal1 from '../Catalogue/Module4/Modal/Modal1';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
 
@@ -53,11 +54,19 @@ export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedI
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
-  useEffect(() => {
+  const getCourses = (professor: any) => {
+    let tempProfessor: Array<any> = professor;
     if (course) {
       let temp_courses: any = [];
       course.forEach((element: any) => {
         if (element.courseType == 'Mensual') {
+          element.courseProfessor.map((profId: string, index: number) => {
+            tempProfessor.map((val: any) => {
+              if (profId.includes(val.id)) {
+                element.courseProfessor[index] = val;
+              }
+            })
+          })
           element.courseAbout = element.courseAbout
           element.courseSubtittle = element.courseSubtittle
           element.courseTittle = element.courseTittle
@@ -66,6 +75,16 @@ export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedI
       });
       setCourses(temp_courses);
     }
+  }
+
+  const getProffessors = () => {
+    getTeacher().then((res) => {
+      getCourses(res);
+      return res;
+    })
+  }
+  useEffect(() => {
+    getProffessors();
   }, [course])
   return (
     <ModalContainer show={openModal} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
