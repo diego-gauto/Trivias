@@ -179,7 +179,6 @@ const Lesson = () => {
 
   }, [loggedIn])
 
-
   return (
     <>
       {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>

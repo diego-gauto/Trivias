@@ -12,7 +12,7 @@ import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
 const About = ({ value, setValue, data, teacherCreds }: any) => {
 
   const [teacher, setTeacher] = useState<any>([])
-
+  const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   useEffect(() => {
     if (teacherCreds.length > 0) {
       getTeacherCourse(teacherCreds[0].name).then((res: any) => {
@@ -20,7 +20,6 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
       })
     }
   }, [])
-
   return (
     <>
       <TitleContain>
@@ -76,7 +75,7 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>
-          <img src="/images/teachers/Brenda_instructora.jpg" alt="" />
+          <img src={teacher.path ? teacher.path : defaultImg} alt="" />
           <p className='title'>Conoce a <br />
             <span>tu instructor</span>
           </p>
