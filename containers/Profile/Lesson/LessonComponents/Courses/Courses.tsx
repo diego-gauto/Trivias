@@ -52,11 +52,10 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
         id: userData.uid,
         color: course.courseCertificateColor,
         courseId: course.id,
-        teacherSignature: "",
+        teacherSignature: course.courseProfessor[0].sign,
       }
     });
   }
-
 
   return (
     <MainContainer open={open}>

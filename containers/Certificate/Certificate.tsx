@@ -9,7 +9,7 @@ import QRCode from 'qrcode'
 
 const Certificate = () => {
   const router = useRouter()
-  const { name, title, professor, id, color, courseId }: any = router.query;
+  const { name, title, professor, id, color, courseId, teacherSignature }: any = router.query;
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
@@ -31,7 +31,6 @@ const Certificate = () => {
       setDate(`${day} de ${month} de ${year}`);
     })
   }
-
   const downloadCertficate = () => {
     window.scroll(0, 0);
     let DATA: any = document.getElementById('certificate');
@@ -81,6 +80,7 @@ const Certificate = () => {
           <p className="professor-name">{professor}</p>
           <img id="img" src={image} style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }} alt="" />
           <img src={aritaSignature} className="main-signature" />
+          <img src={teacherSignature} className="professor-signature" />
         </div>
       </div>
       <button onClick={downloadCertficate}>Descargar</button>

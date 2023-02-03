@@ -62,6 +62,13 @@ export const MainContainer = styled.div<{ color: any }>`
       bottom: 14%;
       left: 53%;
     }
+    .professor-signature {
+      width: 100px;
+      position: absolute;
+      z-index: 2;
+      bottom: 14%;
+      left: 34%;
+    }
     .title {
       position: absolute;
       left: 50%;
