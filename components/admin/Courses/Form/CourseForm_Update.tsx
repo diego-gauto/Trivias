@@ -172,6 +172,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   }
   const addProfessors = (val: any, index: any) => {
     let tempProfessor: any = professor;
+    console.log(professor)
     let profName: any = professorName;
     let tempIndex = 0;
     if (tempProfessor.some((e: any) => e === val)) {
@@ -179,25 +180,18 @@ const CourseForm = (props: ICourseForm_Update) => {
         x == val
       )
       tempProfessor.splice(tempIndex, 1);
-      professors.forEach((prof: any) => {
-        tempProfessor.forEach((res: any) => {
-          if (prof.id == res) {
-            profName.splice(tempIndex, 1);
-          }
-        })
-      })
+      profName.splice(tempIndex, 1);
     }
     else {
       tempProfessor.push(val)
-      professors.forEach((prof: any) => {
-        tempProfessor.forEach((res: any) => {
-          if (prof.id == res) {
-            profName.push(val);
-          }
-        })
+      professors.map((x: any) => {
+        if (x.id.includes(val)) {
+          profName.push(x);
+        }
       })
     }
-    console.log(profName)
+    console.log(tempProfessor)
+    setProfessorName(profName)
     setProfessor([...tempProfessor])
   }
   useEffect(() => {
@@ -385,9 +379,9 @@ const CourseForm = (props: ICourseForm_Update) => {
               <SelectContain key={1}>
                 <Selected onClick={(e) => { handleOpenProfessor() }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
-                    professor.length === 0
+                    professorName.length === 0
                       ? "Seleccione un professor"
-                      : professor.map((val: any, index: any) => {
+                      : professorName.map((val: any, index: any) => {
                         return (
                           <React.Fragment key={'Update Professors ' + index}>
                             {val.name}
