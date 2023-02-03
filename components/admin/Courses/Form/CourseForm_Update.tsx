@@ -200,6 +200,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setValue(courseProfessor)
   }, []);
 
+
   const onSubmit: SubmitHandler<FormValues> = formData => {
     setIsUpdating(true);
     var professors = ""
@@ -265,8 +266,20 @@ const CourseForm = (props: ICourseForm_Update) => {
   const getProffessors = () => {
     getTeacher().then((res) => {
       setProfessors(res);
+      getSelectedProfessors(res);
       return res;
     })
+  }
+  const getSelectedProfessors = (prof: any) => {
+    let profName: any = [];
+    courseProfessor.map((val: any) => {
+      prof.map((course: any) => {
+        if (course.id.includes(val)) {
+          profName.push(course);
+        }
+      })
+    })
+    setProfessorName(profName)
   }
   const getAllCategories = () => {
     getCategory().then((res) => {
