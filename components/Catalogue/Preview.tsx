@@ -20,7 +20,6 @@ const Preview = () => {
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
   const [professors, setProfessors] = useState<any>([]);
-  const [professorName, setProfessorName] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -89,21 +88,10 @@ const Preview = () => {
   const getProffessors = () => {
     getTeacher().then((res) => {
       getCourses(res);
-      // getSelectedProfessors(res);
+      setProfessors(res);
       return res;
     })
   }
-  // const getSelectedProfessors = (prof: any) => {
-  //   let profName: any = [];
-  //   courseProfessor.map((val: any) => {
-  //     prof.map((course: any) => {
-  //       if (course.id.includes(val)) {
-  //         profName.push(course);
-  //       }
-  //     })
-  //   })
-  //   setProfessorName(profName)
-  // }
   useEffect(() => {
     getProffessors()
   }, [])
@@ -120,9 +108,9 @@ const Preview = () => {
   return (
     <>
       <PreviewContain>
-        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} />
+        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} professor={professors} />
         <ModuleContain>
-          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
+          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} professor={professors} />}
           {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
           <Module4 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />
           <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} innerWidth={innerWidth} />
