@@ -127,7 +127,6 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
       toggle(index)
     });
   }
-
   return (
     <>
       <TitleContain >
@@ -157,9 +156,9 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
             <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
           </div>
           <div className='comment'>
-            {comments && user.userPhoto
+            {comments && user.photoURL
               ?
-              <Profile src={user.userPhoto} />
+              <Profile src={user.photoURL} />
               :
               <Profile
                 src={DEFAULT_USER_IMG}
