@@ -172,7 +172,6 @@ const CourseForm = (props: ICourseForm_Update) => {
   }
   const addProfessors = (val: any, index: any) => {
     let tempProfessor: any = professor;
-    console.log(professor)
     let profName: any = professorName;
     let tempIndex = 0;
     if (tempProfessor.some((e: any) => e === val)) {
@@ -190,7 +189,6 @@ const CourseForm = (props: ICourseForm_Update) => {
         }
       })
     }
-    console.log(tempProfessor)
     setProfessorName(profName)
     setProfessor([...tempProfessor])
   }
