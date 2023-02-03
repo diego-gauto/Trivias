@@ -117,7 +117,6 @@ export const SlideImg = styled.div`
 export const TextSectionWrapper = styled.div`
   padding-bottom: 20px;
   @media only screen and (max-width: 1024px) {
-    display: none;
     padding-bottom: 0;
   }
 `;
