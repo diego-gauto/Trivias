@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { updateCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getMaterial, getTeacher, getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getMaterial, getTeacher, getTeacherById, getUsers } from "../../../../store/actions/courseActions";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
   ButtonContain2,
@@ -135,7 +135,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [materials, setMaterials] = useState<any>([]);
   const [images, setimages] = useState<any>("")
   const [value3, setValue3] = useState(courseType)
-  const [userData, setUserData] = useState<any>([]);
+  const [professorName, setProfessorName] = useState([]);
   const [difficultyValue, setDifficultyValue] = useState(courseDifficulty);
   const [openLevel, setOpenLevel] = useState<boolean>(false);
   const [colorRGB, setColorRGB] = useState(courseCertificateColor);
@@ -171,17 +171,33 @@ const CourseForm = (props: ICourseForm_Update) => {
     setMaterial([...tempMaterial])
   }
   const addProfessors = (val: any, index: any) => {
-    let tempProfessor = professor
+    let tempProfessor: any = professor;
+    let profName: any = professorName;
     let tempIndex = 0;
-    if (tempProfessor.some((e: any) => e.name === val.name)) {
+    if (tempProfessor.some((e: any) => e === val)) {
       tempIndex = tempProfessor.findIndex((x: any) =>
-        x.name == val.name
+        x == val
       )
       tempProfessor.splice(tempIndex, 1);
+      professors.forEach((prof: any) => {
+        tempProfessor.forEach((res: any) => {
+          if (prof.id == res) {
+            profName.splice(tempIndex, 1);
+          }
+        })
+      })
     }
     else {
       tempProfessor.push(val)
+      professors.forEach((prof: any) => {
+        tempProfessor.forEach((res: any) => {
+          if (prof.id == res) {
+            profName.push(val);
+          }
+        })
+      })
     }
+    console.log(profName)
     setProfessor([...tempProfessor])
   }
   useEffect(() => {
@@ -393,7 +409,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                             marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              addProfessors(val, index);
+                              addProfessors(val.id, index);
                             }}>
                             <input
                               type="radio"

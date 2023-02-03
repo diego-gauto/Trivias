@@ -466,6 +466,12 @@ export const getTeacher = async () => {
   });
   return data
 }
+export const getTeacherById = async (professorId: string) => {
+  let data: any = []
+  const docRef = doc(db, "professor", professorId);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();;
+}
 export const deleteTeacher = async (professor: any) => {
   const storage = getStorage();
   const desertRef = ref(storage, `professorPicture/${professor.reference}`);
