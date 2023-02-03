@@ -40,6 +40,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
   const responsive990 = useMediaQuery({ query: "(max-width: 990px)" });
+  const DEFAULT_PROFESSOR_IMAGE = "/images/teachers/iker.jpg";
   let today = new Date().getTime() / 1000;
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons);
@@ -213,9 +214,9 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
                 <div className="professor-container">
-                  <img src="/images/teachers/iker.jpg" alt="" />
+                  <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">Iker Robles García</span></p>
+                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
                 </div>
               </div>}
               <div className="bottom">

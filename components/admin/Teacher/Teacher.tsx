@@ -262,7 +262,7 @@ const Teacher = () => {
                                       :
                                       <>
                                         {
-                                          editSignImage !== "" && <img src={editSignImage} />
+                                          editSignImage !== "" && <img src={editSignImage} style={{ width: 120 }} />
                                         }
                                       </>
                                   }
