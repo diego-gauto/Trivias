@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoaderContain } from "../../../../containers/Profile/User/User.styled";
 import { updateCourse } from "../../../../store/actions/AdminActions";
-import { getCategory, getMaterial, getTeacher, getUsers } from "../../../../store/actions/courseActions";
+import { getCategory, getMaterial, getTeacher, getTeacherById, getUsers } from "../../../../store/actions/courseActions";
 import { ICourseForm_Update } from "../Form/ICourseForm_Update";
 import {
   ButtonContain2,
@@ -135,7 +135,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [materials, setMaterials] = useState<any>([]);
   const [images, setimages] = useState<any>("")
   const [value3, setValue3] = useState(courseType)
-  const [userData, setUserData] = useState<any>([]);
+  const [professorName, setProfessorName] = useState([]);
   const [difficultyValue, setDifficultyValue] = useState(courseDifficulty);
   const [openLevel, setOpenLevel] = useState<boolean>(false);
   const [colorRGB, setColorRGB] = useState(courseCertificateColor);
@@ -171,18 +171,25 @@ const CourseForm = (props: ICourseForm_Update) => {
     setMaterial([...tempMaterial])
   }
   const addProfessors = (val: any, index: any) => {
-
-    let tempProfessor = professor
+    let tempProfessor: any = professor;
+    let profName: any = professorName;
     let tempIndex = 0;
-    if (tempProfessor.some((e: any) => e.name === val.name)) {
+    if (tempProfessor.some((e: any) => e === val)) {
       tempIndex = tempProfessor.findIndex((x: any) =>
-        x.name == val.name
+        x == val
       )
       tempProfessor.splice(tempIndex, 1);
+      profName.splice(tempIndex, 1);
     }
     else {
       tempProfessor.push(val)
+      professors.map((x: any) => {
+        if (x.id.includes(val)) {
+          profName.push(x);
+        }
+      })
     }
+    setProfessorName(profName)
     setProfessor([...tempProfessor])
   }
   useEffect(() => {
@@ -190,6 +197,7 @@ const CourseForm = (props: ICourseForm_Update) => {
     setValue2(courseCategory)
     setValue(courseProfessor)
   }, []);
+
 
   const onSubmit: SubmitHandler<FormValues> = formData => {
     setIsUpdating(true);
@@ -256,8 +264,20 @@ const CourseForm = (props: ICourseForm_Update) => {
   const getProffessors = () => {
     getTeacher().then((res) => {
       setProfessors(res);
+      getSelectedProfessors(res);
       return res;
     })
+  }
+  const getSelectedProfessors = (prof: any) => {
+    let profName: any = [];
+    courseProfessor.map((val: any) => {
+      prof.map((course: any) => {
+        if (course.id.includes(val)) {
+          profName.push(course);
+        }
+      })
+    })
+    setProfessorName(profName)
   }
   const getAllCategories = () => {
     getCategory().then((res) => {
@@ -370,9 +390,9 @@ const CourseForm = (props: ICourseForm_Update) => {
               <SelectContain key={1}>
                 <Selected onClick={(e) => { handleOpenProfessor() }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
-                    professor.length === 0
+                    professorName.length === 0
                       ? "Seleccione un professor"
-                      : professor.map((val: any, index: any) => {
+                      : professorName.map((val: any, index: any) => {
                         return (
                           <React.Fragment key={'Update Professors ' + index}>
                             {val.name}
@@ -394,7 +414,7 @@ const CourseForm = (props: ICourseForm_Update) => {
                             marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              addProfessors({ id: val.id, name: val.name }, index);
+                              addProfessors(val.id, index);
                             }}>
                             <input
                               type="radio"

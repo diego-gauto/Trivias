@@ -11,7 +11,7 @@ import { collection, onSnapshot, query, where, getDocs, orderBy, DocumentData } 
 import { db } from "../../firebase/firebaseConfig";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { getCourses, getWholeCourses } from "../../store/actions/courseActions";
+import { getTeacher, getWholeCourses } from "../../store/actions/courseActions";
 import Module6 from "./Module6/Module6";
 
 
@@ -19,6 +19,7 @@ const Preview = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
+  const [professors, setProfessors] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -63,12 +64,20 @@ const Preview = () => {
     return result;
   }
 
-  const getCourses = async () => {
+  const getCourses = async (professor: any) => {
     let tempCourses: Array<any> = [];
+    let tempProfessor: Array<any> = professor;
     getWholeCourses().then((response) => {
       response.forEach((element: any) => {
         if (element.totalLessons > 0) {
           element.totalDuration = hms(element.totalDuration)
+          element.courseProfessor.map((profId: string, index: number) => {
+            tempProfessor.map((val: any) => {
+              if (profId.includes(val.id)) {
+                element.courseProfessor[index] = val;
+              }
+            })
+          })
           tempCourses.push(element)
         }
       });
@@ -76,9 +85,15 @@ const Preview = () => {
       setIsLoading(false);
     })
   }
-
+  const getProffessors = () => {
+    getTeacher().then((res) => {
+      getCourses(res);
+      setProfessors(res);
+      return res;
+    })
+  }
   useEffect(() => {
-    getCourses();
+    getProffessors()
   }, [])
 
   useEffect(() => {
@@ -93,9 +108,9 @@ const Preview = () => {
   return (
     <>
       <PreviewContain>
-        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} />
+        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} professor={professors} />
         <ModuleContain>
-          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
+          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} professor={professors} />}
           {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
           <Module4 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />
           <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} innerWidth={innerWidth} />

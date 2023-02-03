@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { addTeacher, deleteTeacher, getTeacher, updateTeacher } from '../../../store/actions/courseActions';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
-import Delete from '../Courses/Form/Delete/Delete';
 import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import {
@@ -13,8 +12,6 @@ import {
   Title, TitleContain
 } from '../Category/Category.styled';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
-import file from 'react-player/file';
-
 
 const Teacher = () => {
   const [newTeacher, setNewTeacher] = useState<boolean>(false);
@@ -70,6 +67,7 @@ const Teacher = () => {
       setLoading(false);
     }
     else {
+      teacher.courses = [];
       addTeacher(teacher).then((res) => {
         alert("Profesor agregado con Exito")
         getAllteachers();

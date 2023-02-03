@@ -109,6 +109,7 @@ const CourseForm_Create = () => {
   const [value, setValue] = useState<any>({});
   const [professors, setProfessors] = useState<any>([]);
   const [professor, setProfessor] = useState<any>([]);
+  const [professorName, setProfessorName] = useState([]);
   const [value2, setValue2] = useState<any>([]);
   const [material, setMaterial] = useState<any>([]);
   const [materials, setMaterials] = useState<any>([]);
@@ -150,17 +151,27 @@ const CourseForm_Create = () => {
     setMaterial([...tempMaterial])
   }
   const addProfessors = (val: any, index: any) => {
-    let tempProfessor = professor
+
+    let tempProfessor = professor;
+    let profName: any = professorName;
+
     let tempIndex = 0;
-    if (tempProfessor.some((e: any) => e.name === val.name)) {
+    if (tempProfessor.some((e: any) => e === val)) {
       tempIndex = tempProfessor.findIndex((x: any) =>
-        x.name == val.name
+        x == val
       )
       tempProfessor.splice(tempIndex, 1);
+      profName.splice(tempIndex, 1);
     }
     else {
       tempProfessor.push(val)
+      professors.map((x: any) => {
+        if (x.id.includes(val)) {
+          profName.push(x);
+        }
+      })
     }
+    setProfessorName(profName)
     setProfessor([...tempProfessor])
   }
 
@@ -373,9 +384,9 @@ const CourseForm_Create = () => {
               <SelectContain key={1}>
                 <Selected onClick={(e) => { handleOpenProfessor() }} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
-                    professor.length === 0
+                    professorName.length === 0
                       ? "Seleccione un professor"
-                      : professor.map((val: any, index: any) => {
+                      : professorName.map((val: any, index: any) => {
                         return (
                           <React.Fragment key={'Select Professors ' + index}>
                             {val.name}
@@ -397,7 +408,7 @@ const CourseForm_Create = () => {
                             marked={professor}
                             key={"SelectProfessor " + index}
                             onClick={() => {
-                              addProfessors({ id: val.id, name: val.name }, index);
+                              addProfessors(val.id, index);
                             }}>
                             <input
                               type="radio"

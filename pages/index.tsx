@@ -18,7 +18,7 @@ import {
 import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
 import { db } from "../firebase/firebaseConfig";
 import { useAuth } from "../hooks/useAuth";
-import { getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
+import { getTeacher, getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 import Footer from "../components/Footer/Footer";
 
@@ -82,11 +82,19 @@ const Homepage = () => {
     setCourseExpData(courseExpData);
     setLoading(false);
   }
-  const getCourses = async () => {
+  const getCourses = async (professor: any) => {
     let tempCourses: Array<any> = [];
+    let tempProfessor: Array<any> = professor;
     getWholeCourses().then((response) => {
       response.forEach((element: any) => {
         if (element.totalLessons > 0) {
+          element.courseProfessor.map((profId: string, index: number) => {
+            tempProfessor.map((val: any) => {
+              if (profId.includes(val.id)) {
+                element.courseProfessor[index] = val;
+              }
+            })
+          })
           tempCourses.push(element)
         }
       });
@@ -104,9 +112,14 @@ const Homepage = () => {
     "segundaCaracteristica": "hola",
     "terceraCaracteristica": "hola",
   };
-
+  const getProffessors = () => {
+    getTeacher().then((res) => {
+      getCourses(res);
+      return res;
+    })
+  }
   useEffect(() => {
-    getCourses();
+    getProffessors();
   }, [])
 
   useEffect(() => {

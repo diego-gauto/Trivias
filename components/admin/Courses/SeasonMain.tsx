@@ -75,16 +75,11 @@ const SeasonsMain = () => {
         var data: DocumentData = [];
         response.forEach((e) => {
           if (e.id == courseID) {
-            console.log(1);
-            console.log(e.data());
-
             var obj: any = {}
             obj = e.data()
             data.push(obj)
           }
         });
-        console.log(data);
-
         setCoursesData(data)
         return data
       })

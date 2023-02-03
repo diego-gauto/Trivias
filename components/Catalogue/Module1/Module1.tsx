@@ -24,7 +24,7 @@ import {
 import Modal from "./modal/modal";
 import { BsTriangle } from "react-icons/bs";
 
-const Module1 = ({ user, allCourses, isLoading, }: any) => {
+const Module1 = ({ user, allCourses, isLoading, professor }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [historyCourse, setHistoryCourse] = useState<any>({});
   const [show, setShow] = useState(false);
@@ -65,7 +65,6 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
   const handleShow = () => {
     setShow(true);
   }
-
   useEffect(() => {
     if (!isLoading) {
       if (user) {
@@ -73,12 +72,12 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
         getPaidCourses(user.id).then((paid: any) => {
           getViewedCourses(user.id).then((res) => {
             if (res && res.length > 0) {
+
               if (paid.some((x: any) => x.id == res[0].documentID && date < x.finalDate)) {
                 res[0].paid = true;
               } else {
                 res[0].paid = false;
               }
-              console.log(res[0]);
 
               setHistoryCourse(res[0]);
             }
@@ -102,7 +101,6 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
       }
     }
   }, [user, isLoading])
-
   return (
     <Container>
       {(historyCourse.seasons && historyCourse.seasons.length > 0) && <>

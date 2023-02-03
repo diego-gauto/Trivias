@@ -138,7 +138,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
       }
     }
   };
-
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size="lg" centered>

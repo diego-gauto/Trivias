@@ -27,7 +27,6 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     let temp: any = { ...data };
     if (user) {
       if (temp.users.includes(user.id)) {
-        console.log("user exist");
       } else {
         user.score = parseInt(user.score) + parseInt(data.points);
         addUserToLesson(data, id, data.seasonId, data.id, user);
@@ -139,7 +138,6 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     let temp: any = { ...data };
     if (user) {
       if (temp.users.includes(user.id)) {
-        console.log("user exist");
       } else {
         const correct = 100 / data.questions.length;
         let tempPoints = 0;

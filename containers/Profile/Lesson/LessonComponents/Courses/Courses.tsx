@@ -42,7 +42,6 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
     temp[index] = !temp[index];
     setSelected(temp)
   }
-
   const goTo = () => {
     router.push({
       pathname: `/Certificates`,
@@ -52,11 +51,11 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
         professor: course.courseProfessor[0].name,
         id: userData.uid,
         color: course.courseCertificateColor,
-        courseId: course.id
+        courseId: course.id,
+        teacherSignature: course.courseProfessor[0].sign,
       }
     });
   }
-
 
   return (
     <MainContainer open={open}>

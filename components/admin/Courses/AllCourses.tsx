@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
 import { LoaderContain } from "../../../containers/Profile/User/User.styled";
-import { deleteWholeCourse } from "../../../store/actions/courseActions";
+import { deleteWholeCourse, getTeacher } from "../../../store/actions/courseActions";
 import {
   ButtonContain,
   ChevD,
@@ -26,10 +26,27 @@ import {
 export const AllCourses = ({
   course
 }: DocumentData) => {
-
+  const [professorName, setProfessorName] = useState([]);
   const [open, setOpen] = useState(false);
   const [IsDeleting, setIsDeleting] = useState<boolean>(false);
   const GonvarImg = "/images/purchase/logo.png";
+  const getProffessors = () => {
+    getTeacher().then((res) => {
+      getSelectedProfessors(res);
+      return res;
+    })
+  }
+  const getSelectedProfessors = (prof: any) => {
+    let profName: any = [];
+    course.courseProfessor.map((val: any) => {
+      prof.map((course: any) => {
+        if (course.id.includes(val)) {
+          profName.push(course);
+        }
+      })
+    })
+    setProfessorName(profName)
+  }
   const deleteCourse = (element: any) => {
     setIsDeleting(true);
     if (window.confirm("Desea borrar este curso?")) {
@@ -39,6 +56,10 @@ export const AllCourses = ({
       })
     }
   }
+  useEffect(() => {
+    getProffessors();
+  }, [])
+
   return (
     <MainContainer>
       <CourseContainer >
@@ -96,7 +117,7 @@ export const AllCourses = ({
                   <Label>Instructor(es)</Label>
                   <Text>
                     {
-                      course.courseProfessor.map((val: any, index: any) => {
+                      professorName.map((val: any, index: any) => {
                         return (
                           <React.Fragment key={'Show Professors ' + index}>
                             {val.name}

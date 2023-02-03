@@ -20,6 +20,8 @@ export const OptionContain = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
+  overflow: auto;
+  max-height: 500px;
   color: black;
   width: 100%;
   right: 0;

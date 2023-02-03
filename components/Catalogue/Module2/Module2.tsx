@@ -19,7 +19,7 @@ import "swiper/css/effect-flip";
 import { useMediaQuery } from "react-responsive";
 SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
-const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
+const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) => {
   const [courses, setCourses] = useState<any>([]);
   let [counter, setCounter] = useState<any>(0);
   const swiperRef = useRef<SwiperCore>();
@@ -40,7 +40,6 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       x: e.clientX,
       y: e.clientY,
     };
-    console.log(pos);
 
 
     document.addEventListener('mousemove', mouseMoveHandler);
@@ -58,12 +57,18 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
-
   useEffect(() => {
     if (user) {
       let tempCourses: any = [];
       getViewedCourses(user.id).then((res: any) => {
         res.forEach((element: DocumentData) => {
+          element.courseProfessor.map((profId: string, index: any) => {
+            professor.map((prof: any) => {
+              if (prof.id.includes(profId)) {
+                element.courseProfessor[index] = prof;
+              }
+            })
+          })
           let tempCourse;
           if (allCourses.some((x: any) => x.id == element.documentID)) {
             tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
