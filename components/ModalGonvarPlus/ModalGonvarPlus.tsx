@@ -62,7 +62,7 @@ export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedI
         if (element.courseType == 'Mensual') {
           element.courseProfessor.map((profId: string, index: number) => {
             tempProfessor.map((val: any) => {
-              if (profId.includes(val.id)) {
+              if (profId == val.id) {
                 element.courseProfessor[index] = val;
               }
             })
