@@ -39,7 +39,6 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
       x: e.clientX,
       y: e.clientY,
     };
-    console.log(pos);
 
 
     document.addEventListener('mousemove', mouseMoveHandler);

@@ -78,7 +78,6 @@ const Module1 = ({ user, allCourses, isLoading, }: any) => {
               } else {
                 res[0].paid = false;
               }
-              console.log(res[0]);
 
               setHistoryCourse(res[0]);
             }

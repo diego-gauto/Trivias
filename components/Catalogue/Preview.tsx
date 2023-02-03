@@ -11,7 +11,7 @@ import { collection, onSnapshot, query, where, getDocs, orderBy, DocumentData } 
 import { db } from "../../firebase/firebaseConfig";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { getCourses, getWholeCourses } from "../../store/actions/courseActions";
+import { getTeacher, getWholeCourses } from "../../store/actions/courseActions";
 import Module6 from "./Module6/Module6";
 
 
@@ -19,6 +19,8 @@ const Preview = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
+  const [professors, setProfessors] = useState<any>([]);
+  const [professorName, setProfessorName] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -63,12 +65,20 @@ const Preview = () => {
     return result;
   }
 
-  const getCourses = async () => {
+  const getCourses = async (professor: any) => {
     let tempCourses: Array<any> = [];
+    let tempProfessor: Array<any> = professor;
     getWholeCourses().then((response) => {
       response.forEach((element: any) => {
         if (element.totalLessons > 0) {
           element.totalDuration = hms(element.totalDuration)
+          element.courseProfessor.map((profId: string, index: number) => {
+            tempProfessor.map((val: any) => {
+              if (profId.includes(val.id)) {
+                element.courseProfessor[index] = val;
+              }
+            })
+          })
           tempCourses.push(element)
         }
       });
@@ -76,9 +86,26 @@ const Preview = () => {
       setIsLoading(false);
     })
   }
-
+  const getProffessors = () => {
+    getTeacher().then((res) => {
+      getCourses(res);
+      // getSelectedProfessors(res);
+      return res;
+    })
+  }
+  // const getSelectedProfessors = (prof: any) => {
+  //   let profName: any = [];
+  //   courseProfessor.map((val: any) => {
+  //     prof.map((course: any) => {
+  //       if (course.id.includes(val)) {
+  //         profName.push(course);
+  //       }
+  //     })
+  //   })
+  //   setProfessorName(profName)
+  // }
   useEffect(() => {
-    getCourses();
+    getProffessors()
   }, [])
 
   useEffect(() => {
