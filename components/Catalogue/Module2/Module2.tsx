@@ -62,13 +62,6 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
       let tempCourses: any = [];
       getViewedCourses(user.id).then((res: any) => {
         res.forEach((element: DocumentData) => {
-          element.courseProfessor.map((profId: string, index: any) => {
-            professor.map((prof: any) => {
-              if (prof.id.includes(profId)) {
-                element.courseProfessor[index] = prof;
-              }
-            })
-          })
           let tempCourse;
           if (allCourses.some((x: any) => x.id == element.documentID)) {
             tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
