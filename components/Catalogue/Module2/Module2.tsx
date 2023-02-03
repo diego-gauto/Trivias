@@ -62,7 +62,6 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
       let tempCourses: any = [];
       getViewedCourses(user.id).then((res: any) => {
         res.forEach((element: DocumentData) => {
-          console.log(res);
           element.courseProfessor.map((profId: string, index: any) => {
             professor.map((prof: any) => {
               if (prof.id.includes(profId)) {
@@ -81,7 +80,6 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
             tempCourses.push(element)
           }
         });
-        // console.log(res);
         setCourses(tempCourses);
         setTimeout(() => {
           setLoading(false)

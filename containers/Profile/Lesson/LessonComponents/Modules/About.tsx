@@ -14,8 +14,6 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
   const [teacher, setTeacher] = useState<any>([])
 
   useEffect(() => {
-    console.log(teacherCreds);
-
     if (teacherCreds.length > 0) {
       getTeacherCourse(teacherCreds[0].name).then((res: any) => {
         setTeacher(res[0])

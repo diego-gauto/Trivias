@@ -8,6 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import {
   addHistoryCourse,
   getComments,
+  getTeacher,
   getWholeCourse,
 } from "../../../store/actions/courseActions";
 import { addUserCertificate, getPaidCourses } from "../../../store/actions/UserActions";
@@ -114,7 +115,8 @@ const Lesson = () => {
     setLoggedIn(false)
   }
 
-  const fetchDB_data = async () => {
+  const fetchDB_data = async (professor: any) => {
+    let tempProfessor: Array<any> = professor;
     try {
       let date = new Date().getTime() / 1000;
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -122,7 +124,15 @@ const Lesson = () => {
         response.forEach((e: any) => {
           getPaidCourses(e.id).then((paid: any) => {
             getWholeCourse(id).then((res: any) => {
+              res.courseProfessor.map((profId: string, index: number) => {
+                tempProfessor.map((val: any) => {
+                  if (profId.includes(val.id)) {
+                    res.courseProfessor[index] = val;
+                  }
+                })
+              })
               if (res.courseType == 'Producto') {
+
                 if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
                   res.paid = true;
                   addHistoryCourse(res, e.id, season, lesson);
@@ -158,9 +168,14 @@ const Lesson = () => {
       return false
     }
   }
-
+  const getProffessors = () => {
+    getTeacher().then((res) => {
+      fetchDB_data(res);
+      return res;
+    })
+  }
   useEffect(() => {
-    fetchDB_data()
+    getProffessors();
 
   }, [loggedIn])
 
