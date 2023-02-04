@@ -63,7 +63,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
       tempResponses.push(false);
     });
     setResponses(tempResponses)
-  }, [])
+  }, [comment])
 
   const like = (index: number) => {
     if (comments[index].likes.includes(user.id)) {
@@ -220,7 +220,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
               </div>
               {x.answers.map((ans: any, idx: any) => {
                 return (
-                  <div className='answer-container'>
+                  <div className='answer-container' key={"Comments " + idx}>
                     <div className="top">
                       {ans.userPhoto
                         ?
@@ -231,7 +231,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
                         />}
                       <p>{ans.userName} <span>{getDate(ans.createdAt)}</span></p>
                       <div className='like' onClick={() => { likeAnswer(index, idx) }}>
-                        {comments[index].answers[idx].likes.includes(user.id) ? <FaHeart /> :
+                        {comments[index]?.answers[idx]?.likes.includes(user.id) ? <FaHeart /> :
                           <FiHeart />}
                         <p>{ans.likes.length}</p>
                       </div>
