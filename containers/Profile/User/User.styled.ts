@@ -447,7 +447,7 @@ export const InputPhone = styled(PhoneInput)`
     @media (max-width: 400px) {
       width: 140px;
       font-size: 10px;
-      left: 40px;
+      left: 38px;
     }
   }
   .PhoneInputCountry {
@@ -462,7 +462,8 @@ export const InputPhone = styled(PhoneInput)`
       left: 12px;
     }
     @media (max-width: 400px) {
-      width: 22px;
+      width: 20px;
+      top: 46%;
     }
   }
 `;
@@ -489,7 +490,7 @@ export const Box2 = styled.div`
       height: 28px;
     }
     @media (max-width: 400px) {
-      left: 38px;
+      left: 36px;
     }
   }
 `;
@@ -2293,7 +2294,8 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         padding-block: 5px;
         padding-inline: 20px;
         :focus {
-          outline: 2px solid blue;
+          outline: none;
+          border: 2px solid white;
           border-radius: 100px;
         }
         ::placeholder {
