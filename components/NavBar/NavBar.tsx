@@ -207,7 +207,7 @@ const NavBar = () => {
         }
         {
           loggedIn &&
-          <UserContain pathname={pathname} color={color}>
+          <UserContain color={color}>
             <Link href="/Rewards">
               <div className="rewards-circle">
                 <div className="inside" />
@@ -313,7 +313,7 @@ const NavBar = () => {
                 <LogoS_2 />
               </Link>
             </div>
-            <UserContain pathname={pathname} color={color}>
+            <UserContain color={color}>
               <Link href="/Rewards">
                 <div className="rewards-circle">
                   <div className="inside" />

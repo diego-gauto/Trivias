@@ -220,7 +220,7 @@ export const PurpleButton = styled.button`
     font-size: 14px;
   }
 `;
-export const UserContain = styled.div<{ pathname: any; color: any }>`
+export const UserContain = styled.div<{ color: any }>`
   display: flex;
   align-items: center;
   gap: 40px;
@@ -444,11 +444,6 @@ export const HamburgerContain = styled.div<{ hamburger: boolean }>`
   .menu-hamburger {
     opacity: 0;
   }
-  @media (max-width: 424px) {
-    border-radius: 0 0 20px 20px;
-  }
-  @media (max-width: 350px) {
-  }
   ${(props) =>
     props.hamburger &&
     css`
@@ -457,12 +452,6 @@ export const HamburgerContain = styled.div<{ hamburger: boolean }>`
       .menu-hamburger {
         transition: 0.5s ease-in-out;
         opacity: 1;
-      }
-      @media (max-width: 424px) {
-        height: 110px;
-      }
-      @media (max-width: 350px) {
-        height: 95px;
       }
     `}
 `;
@@ -542,9 +531,6 @@ export const HBMenu = styled.ul`
   padding: 20px;
   list-style: none;
   margin: 0;
-  @media (max-width: 424px) {
-    padding: 10px;
-  }
   a {
     text-decoration: none;
   }
@@ -555,12 +541,6 @@ export const HBList = styled.li`
   gap: 10px;
   font-size: 16px;
   font-family: "Montserrat", sans-seriff;
-  @media (max-width: 424px) {
-    font-size: 14px;
-  }
-  @media (max-width: 350px) {
-    font-size: 12px;
-  }
   a {
     display: flex;
     text-decoration: none;
