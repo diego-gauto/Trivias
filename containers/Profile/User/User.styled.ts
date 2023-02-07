@@ -444,7 +444,7 @@ export const InputPhone = styled(PhoneInput)`
       font-size: 12px;
       left: 48px;
     }
-    @media (max-width: 355px) {
+    @media (max-width: 400px) {
       width: 140px;
       font-size: 10px;
       left: 40px;
@@ -461,7 +461,7 @@ export const InputPhone = styled(PhoneInput)`
       width: 25px;
       left: 12px;
     }
-    @media (max-width: 355px) {
+    @media (max-width: 400px) {
       width: 22px;
     }
   }
@@ -488,7 +488,7 @@ export const Box2 = styled.div`
       left: 45px;
       height: 28px;
     }
-    @media (max-width: 355px) {
+    @media (max-width: 400px) {
       left: 38px;
     }
   }
@@ -902,7 +902,7 @@ export const ProfileMainContainer = styled.div<{
           @media (max-width: 450px) {
             font-size: 10px;
           }
-          @media (max-width: 355px) {
+          @media (max-width: 400px) {
             padding-inline: 0;
             padding-block: 5px;
           }
@@ -2066,6 +2066,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
     }
     @media (max-width: 1023px) {
       height: fit-content;
+      min-height: unset;
     }
     @media (max-width: 600px) {
       padding-block: 20px;
@@ -2293,6 +2294,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         padding-inline: 20px;
         :focus {
           outline: 2px solid white;
+          border-radius: 100px;
         }
         ::placeholder {
           /* Chrome, Firefox, Opera, Safari 10.1+ */
