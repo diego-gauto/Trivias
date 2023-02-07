@@ -99,9 +99,10 @@ export const SlideContainer = styled.div<{
         .text{
           font-size: 14px;
           font-weight: 600;
-          background: linear-gradient(to right, #942ced, #d144d1);
-          -webkit-text-fill-color: transparent;
-          -webkit-background-clip: text;
+          color: blue;
+          // background: linear-gradient(to right, #942ced, #d144d1);
+          // -webkit-text-fill-color: transparent;
+          // -webkit-background-clip: text;
           @media(max-width: 1023px){
             font-size: 10px;
           }
