@@ -318,7 +318,7 @@ export const Level = styled.i`
   height: 50px;
   cursor: pointer;
 `;
-export const UserImage = styled.i`
+export const UserImage = styled.div`
   background-repeat: no-repeat;
   width: 35px;
   height: 35px;
