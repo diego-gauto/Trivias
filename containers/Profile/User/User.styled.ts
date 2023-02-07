@@ -2293,7 +2293,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
         padding-block: 5px;
         padding-inline: 20px;
         :focus {
-          outline: 2px solid white;
+          outline: 2px solid blue;
           border-radius: 100px;
         }
         ::placeholder {
