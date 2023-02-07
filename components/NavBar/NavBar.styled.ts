@@ -319,13 +319,13 @@ export const Level = styled.i`
   cursor: pointer;
 `;
 export const UserImage = styled.div`
-  background-repeat: no-repeat;
-  width: 35px;
-  height: 35px;
   cursor: pointer;
-  border-radius: 50%;
-  background-size: cover;
   position: relative;
+  img {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+  }
   &:hover {
     .hover-text {
       opacity: 1;

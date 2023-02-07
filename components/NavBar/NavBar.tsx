@@ -220,18 +220,16 @@ const NavBar = () => {
               <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
             </div>
             <Link href="/Profile">
-              {userData && userData.photoURL ?
-
-                < UserImage
-                  style={{
-                    backgroundImage: "url(" + userData.photoURL + ")"
-                  }}
-                ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
-                :
-                < UserImage style={{
-                  backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                }} ><HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText></UserImage>
-              }
+              < UserImage>
+                {
+                  userData && userData.photoURL
+                    ?
+                    <img src={userData.photoURL} />
+                    :
+                    <img src={DEFAULT_USER_IMG} />
+                }
+                <HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText>
+              </UserImage>
             </Link>
           </UserContain>
         }
@@ -323,24 +321,13 @@ const NavBar = () => {
                 <SlBell className="bell" />
                 <div className="notifications" />
               </div>
-              <>
-                {userData && userData.photoURL ?
-                  < UserImage onClick={() => { setHamburger(!hamburger) }}
-
-                    style={{
-                      backgroundImage: "url(" + userData.photoURL + ")"
-                      , backgroundSize: "100%"
-                    }}
-                  />
-                  :
-                  < UserImage
-                    onClick={() => { setHamburger(!hamburger) }}
-
-                    style={{
-                      backgroundImage: "url(" + DEFAULT_USER_IMG + ")"
-                    }} />
+              < UserImage onClick={() => { setHamburger(!hamburger) }}>
+                {
+                  userData && userData.photoURL
+                    ? <img src={userData.photoURL} />
+                    : <img src={DEFAULT_USER_IMG} />
                 }
-              </>
+              </UserImage>
             </UserContain>
             <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
               <HBMenu className="menu-hamburger">
