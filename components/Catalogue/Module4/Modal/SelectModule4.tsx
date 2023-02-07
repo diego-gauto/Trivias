@@ -41,11 +41,19 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
                   name="category"
                   value="Temporada 1"
                 />
-                <Label > {season?.name == undefined ? `Módulo ${index + 1}` : season.name} {season.lessons.length == 1 && <Episodes>({season.lessons.length} lección)
-                </Episodes>}
-                  {season.lessons.length > 1 && <Episodes>({season.lessons.length} lecciónes)
-                  </Episodes>}
-                </Label>
+                <p> {season?.name == undefined ? `Módulo ${index + 1}` : season.name}
+                  {season.lessons.length == 1 &&
+                    <span>
+                      ({season.lessons.length} lección)
+                    </span>
+                  }
+                  {
+                    season.lessons.length > 1 &&
+                    <span>
+                      ({season.lessons.length} lecciónes)
+                    </span>
+                  }
+                </p>
               </Option>
             )
           })}

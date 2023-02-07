@@ -40,11 +40,13 @@ export const OptionContain = styled.div`
   flex-direction: column;
   background: white;
   color: black;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   position: absolute;
   border-radius: 10px;
   box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
   z-index: 1;
+  min-width: 300px;
 `;
 export const Option = styled.div`
   &:hover {
@@ -55,6 +57,30 @@ export const Option = styled.div`
     }
     &:last-child {
       border-radius: 0 0 8px 8px;
+    }
+  }
+
+  p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    font-weight: 600;
+    margin: 0;
+    span {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    @media (max-width: 991px) {
+      font-size: 14px;
+      padding-block: 8px;
+      padding-inline: 10px;
+    }
+    @media (max-width: 399px) {
+      font-size: 12px;
+      padding-block: 8px;
+      padding-inline: 5px;
     }
   }
 `;
