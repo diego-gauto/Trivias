@@ -15,6 +15,8 @@ export const ModalMod = styled(Modal)`
   // .modal-content {
   //   border-radius: 0px !important;
   // }
+  padding-right: 0px !important;
+  padding-left: 0px !important;
   @media (min-width: 992px) {
     .modal-lg,
     .modal-xl {
@@ -239,6 +241,9 @@ export const CourseContain = styled.div<{ level: any }>`
   @media (max-width: 550px) {
     margin-top: 30px;
   }
+  @media (max-width: 450px) {
+    padding: 30px;
+  }
   p {
     margin: 0;
     color: #3f1168;
@@ -253,25 +258,56 @@ export const CourseContain = styled.div<{ level: any }>`
       flex: 1;
       border-bottom: none;
       display: flex;
+      .title {
+        @media (max-width: 450px) {
+          font-size: 12px;
+        }
+        @media (max-width: 400px) {
+          font-size: 11px;
+        }
+      }
       .professor-container {
         display: flex;
-        gap: 10px;
         align-items: center;
+        gap: 10px;
+        @media (max-width: 450px) {
+          gap: 10px;
+        }
+        @media (max-width: 400px) {
+          gap: 5px;
+        }
         p {
           font-size: 12px;
+          @media (max-width: 450px) {
+            letter-spacing: 1px;
+            font-size: 8px;
+          }
+          @media (max-width: 375px) {
+            font-size: 6px;
+          }
           span {
             font-weight: 600;
           }
           .name {
             font-size: 16px;
+            letter-spacing: 0;
+            @media (max-width: 450px) {
+              font-size: 12px;
+            }
+            @media (max-width: 400px) {
+              font-size: 10px;
+            }
           }
         }
         img {
           width: 50px;
           border-radius: 50%;
-        }
-        @media (max-width: 450px) {
-          flex-direction: column;
+          @media (max-width: 450px) {
+            width: 40px;
+          }
+          @media (max-width: 375px) {
+            width: 35px;
+          }
         }
       }
     }
@@ -279,21 +315,45 @@ export const CourseContain = styled.div<{ level: any }>`
       flex: none;
       padding-left: 20px;
       gap: 0;
+      @media (max-width: 450px) {
+        padding-left: 15px;
+      }
+      @media (max-width: 400px) {
+        padding-left: 10px;
+      }
       .rating {
         display: flex;
         align-items: center;
         gap: 10px;
         margin-bottom: 10px;
+        @media (max-width: 450px) {
+          font-size: 14px;
+        }
+        @media (max-width: 400px) {
+          font-size: 12px;
+        }
       }
       .time {
         color: #a733e4;
         font-size: 12px;
         font-weight: 700;
         letter-spacing: -0.5px;
+        @media (max-width: 450px) {
+          font-size: 10px;
+        }
+        @media (max-width: 400px) {
+          font-size: 9px;
+        }
       }
       .duration {
         font-weight: 700;
         font-size: 14px;
+        @media (max-width: 450px) {
+          font-size: 12px;
+        }
+        @media (max-width: 400px) {
+          font-size: 11px;
+        }
       }
       button {
         border: 1px solid #ff9b00;
@@ -305,6 +365,14 @@ export const CourseContain = styled.div<{ level: any }>`
         width: fit-content;
         padding: 5px 20px;
         margin-block-start: 15px;
+        @media (max-width: 450px) {
+          font-size: 10px;
+          padding: 5px 15px;
+        }
+        @media (max-width: 400px) {
+          font-size: 10px;
+          padding: 4px 12px;
+        }
       }
     }
   }
@@ -318,6 +386,10 @@ export const CourseContain = styled.div<{ level: any }>`
       border-bottom: 1px solid #80808063;
       padding-bottom: 20px;
     }
+    @media (max-width: 450px) {
+      padding-bottom: 15px;
+      padding-right: 5px;
+    }
     padding-right: 20px;
     .level-container {
       margin-block-start: 10px;
@@ -325,8 +397,16 @@ export const CourseContain = styled.div<{ level: any }>`
       display: flex;
       gap: 10px;
       align-items: center;
+      @media (max-width: 450px) {
+        margin-block-start: 8px;
+        margin-block-end: 12px;
+        gap: 5px;
+      }
       img {
         width: 17px !important;
+        @media (max-width: 450px) {
+          width: 15px !important;
+        }
       }
       p {
         color: inherit;
@@ -334,6 +414,9 @@ export const CourseContain = styled.div<{ level: any }>`
         text-transform: uppercase;
         font-weight: 600;
         letter-spacing: 2px;
+        @media (max-width: 450px) {
+          font-size: 10px;
+        }
       }
       ${(props) =>
         (props.level == "Muy Fácil" || props.level == "Fácil") &&
@@ -356,10 +439,22 @@ export const CourseContain = styled.div<{ level: any }>`
       font-size: 12px;
       font-weight: 700;
       letter-spacing: -0.5px;
+      @media (max-width: 450px) {
+        font-size: 10px;
+      }
+      @media (max-width: 400px) {
+        font-size: 9px;
+      }
     }
     .duration {
       font-weight: 700;
       font-size: 14px;
+      @media (max-width: 450px) {
+        font-size: 12px;
+      }
+      @media (max-width: 400px) {
+        font-size: 11px;
+      }
     }
     button {
       border: 1px solid #ff9b00;
@@ -382,6 +477,12 @@ export const CourseContain = styled.div<{ level: any }>`
       @media (max-width: 991px) {
         p {
           text-align: justify;
+        }
+      }
+      @media (max-width: 450px) {
+        p {
+          font-size: 12px;
+          line-height: 14px;
         }
       }
     }
@@ -529,6 +630,10 @@ export const LessonContain = styled.div`
   border-bottom-left-radius: 30px;
   @media (max-width: 990px) {
     padding-inline: 40px;
+  }
+  @media (max-width: 450px) {
+    padding-inline: 30px;
+    padding-block: 30px;
   }
 `;
 export const SeasonContain = styled.div`
