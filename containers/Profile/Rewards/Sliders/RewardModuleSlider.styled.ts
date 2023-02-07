@@ -91,27 +91,15 @@ export const SlideContainer = styled.div<{
       opacity: 0;
       .btn-info{
         white-space: nowrap;
-        padding-block: 5px;
-        padding-inline: 12px;
+        padding-block: 8px;
+        padding-inline: 20px;
         border-radius: 100px;
         border: none;
         z-index: 3;
         .text{
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 600;
-          color: blue;
-          // background: linear-gradient(to right, #942ced, #d144d1);
-          // -webkit-text-fill-color: transparent;
-          // -webkit-background-clip: text;
-          @media(max-width: 1023px){
-            font-size: 10px;
-          }
-          @media(max-width: 750px){
-            font-size: 14px;
-          }
-          @media(max-width: 500px){
-            font-size: 10px;
-          }
+          color: #3f1168;
         }
       }
 
