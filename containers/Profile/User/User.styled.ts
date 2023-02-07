@@ -441,8 +441,8 @@ export const InputPhone = styled(PhoneInput)`
     }
     @media (max-width: 450px) {
       width: 160px;
-      font-size: 12px;
-      left: 48px;
+      font-size: 11px;
+      left: 45px;
     }
     @media (max-width: 400px) {
       width: 140px;
@@ -486,7 +486,7 @@ export const Box2 = styled.div`
     background-color: white;
     line-height: 0px;
     @media (max-width: 450px) {
-      left: 45px;
+      left: 42px;
       height: 28px;
     }
     @media (max-width: 400px) {
