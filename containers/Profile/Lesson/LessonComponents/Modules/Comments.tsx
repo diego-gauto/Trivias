@@ -193,12 +193,14 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
               </div>
               <div className="bottom">
                 <div className='left'>
-                  <div className='like' onClick={() => { like(index) }}>
-                    {comments[index]?.likes.includes(user.id) ? <FaHeart /> :
-                      <FiHeart />}
-                    <p>{x.likes.length}</p>
+                  <div className='new-comment'>
+                    <div className='like' onClick={() => { like(index) }}>
+                      {comments[index]?.likes.includes(user.id) ? <FaHeart /> :
+                        <FiHeart />}
+                      <p>{x.likes.length}</p>
+                    </div>
+                    <button onClick={() => { toggle(index) }}>Responder</button>
                   </div>
-                  <button onClick={() => { toggle(index) }}>Responder</button>
                   {responses[index] && <div className='answer-input'>
                     {user.photoURL
                       ?

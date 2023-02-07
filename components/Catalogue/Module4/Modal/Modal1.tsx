@@ -10,7 +10,6 @@ import {
   CourseContain,
   Cross,
   Description,
-  DescriptionResp,
   EpisodeContain,
   EpisodeInfo,
   EpisodeTime,
@@ -140,9 +139,9 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     }
   };
   return (
-    <ModalContain>
+    <ModalContain >
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
-        <ModalCont>
+        <ModalCont >
           <ModalBackground>
             <ImageBack src={course.coursePath}
               width={1000}
@@ -180,7 +179,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             </div>}
             {responsive990 && <div className="responsive-top-info">
               <div className="left">
-                <p>{course.courseTittle}.</p>
+                <p className="title">{course.courseTittle}.</p>
                 <div className="level-container">
                   {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                   {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
@@ -188,9 +187,9 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   <p>{course.courseDifficulty}</p>
                 </div>
                 <div className="professor-container">
-                  <img src="/images/teachers/iker.jpg" alt="" />
+                  <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">Iker Robles García</span></p>
+                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
                 </div>
               </div>
               <div className="right">
