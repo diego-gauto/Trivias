@@ -53,7 +53,14 @@ export const MainContainer = styled.div`
       .left {
         width: 100%;
         display: flex;
-        gap: 30px;
+        gap: 10px;
+        @media (max-width: 1023px) {
+          flex-direction: column;
+        }
+        .new-comment {
+          display: flex;
+          gap: 30px;
+        }
         .like {
           display: flex;
           align-items: center;
@@ -109,7 +116,7 @@ export const MainContainer = styled.div`
       flex-direction: column;
       gap: 10px;
       @media (max-width: 650px) {
-        margin-left: 0;
+        margin-left: 30px;
       }
       .top {
         display: flex;
