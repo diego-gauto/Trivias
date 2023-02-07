@@ -318,7 +318,7 @@ export const Level = styled.i`
   height: 50px;
   cursor: pointer;
 `;
-export const UserImage = styled.i`
+export const UserImage = styled.div`
   background-repeat: no-repeat;
   width: 35px;
   height: 35px;
@@ -445,6 +445,7 @@ export const HamburgerContain = styled.div<{ hamburger: boolean }>`
     opacity: 0;
   }
   @media (max-width: 424px) {
+    border-radius: 0 0 20px 20px;
   }
   @media (max-width: 350px) {
   }
@@ -456,6 +457,12 @@ export const HamburgerContain = styled.div<{ hamburger: boolean }>`
       .menu-hamburger {
         transition: 0.5s ease-in-out;
         opacity: 1;
+      }
+      @media (max-width: 424px) {
+        height: 110px;
+      }
+      @media (max-width: 350px) {
+        height: 95px;
       }
     `}
 `;

@@ -84,6 +84,7 @@ export const Gradient = styled.div`
   height: 100px;
   bottom: 0;
   left: 0;
+  pointer-events: none;
   background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0.3) 0%,
