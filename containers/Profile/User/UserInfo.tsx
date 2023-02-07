@@ -10,7 +10,6 @@ import {
   InputPhone,
   Box2,
   ProfileText,
-  CurveText
 } from "./User.styled";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
@@ -203,7 +202,14 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                   fill="none"
                   d="M60,130 Q 200,0 0,-200" />
                 {
-                  reward != 2 &&
+                  reward == 0 &&
+                  <text>
+                    <textPath href="#MyPath" fill="#3f1168"
+                      style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
+                  </text>
+                }
+                {
+                  (reward == 1) &&
                   <text>
                     <textPath href="#MyPath" fill="#3f1168"
                       style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
@@ -215,7 +221,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
             <ProfileText
               style={reward == 0
                 ? { bottom: -54, right: -122, transform: "rotate(-5deg)" }
-                : reward == 1 ? timeLevel.level == 0
+                : reward == 1 ? timeLevel == 0
                   ? { bottom: -67, right: -116, transform: "rotate(1deg)" }
                   : { bottom: -27, right: -131, transform: "rotate(-13deg)" }
                   : {}
@@ -232,10 +238,9 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                       reward == 0 && `${points_format} puntos`
                     }
                     {
-                      reward == 1 ?
-                        timeLevel.level == 0 ? "Sin Suscripción "
-                          : `${timeLevel.minimum}${timeLevel.minimum > 1 ? " meses" : " mes"}`
-                        : ""
+                      (reward == 1 && timeLevel) ?
+                        `${timeLevel}${timeLevel > 1 ? " meses" : " mes"}`
+                        : "Sin Suscripción"
                     }
                   </textPath>
                 </text>
