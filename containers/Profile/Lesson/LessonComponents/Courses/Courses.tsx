@@ -16,7 +16,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
   useEffect(() => {
     let temp_selected: any = [];
     course?.seasons.forEach((element: any) => {
-      temp_selected.push(false)
+      temp_selected.push(true)
     });
     setSelected(temp_selected);
 
@@ -56,7 +56,6 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
       }
     });
   }
-
   return (
     <MainContainer open={open}>
       <div className='course-info'>

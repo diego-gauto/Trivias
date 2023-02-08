@@ -250,18 +250,7 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
       height: auto;
       max-height: 100%;
       transition: 1s ease all;
-      //   &::-webkit-scrollbar {
-      //     width: 6px;
-      //     height: 10px;
-      // }
-      // &::-webkit-scrollbar-thumb {
-      //   -webkit-appearance: none;
-      //   width: 10px;
-      //   height: 10px;
-      //   border-radius: 10px;
-      //   background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-      //   ...
-      // }
+      z-index: 3;
     `}
   ${(props) =>
     props.active == false &&
