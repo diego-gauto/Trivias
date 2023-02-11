@@ -529,53 +529,17 @@ const CourseForm = (props: ICourseForm_Update) => {
               </SelectContain>
             </IconContain>
           </InputContain>
-          {/* <InputContain>
-            <Label>Categorías</Label>
-            <IconContain>
 
-              <SelectContain key={2}>
-                <Selected onClick={() => { setOpen2(!open2), setOpen(false) }}>
-                  {value2}
-                  <CaretD2 />
-                </Selected>
-                {
-                  open2 == true &&
-                  <OptionContain>
-                    <Option onClick={() => { setValue2("Uñas de salón"); setOpen2(false) }}>
-                      <input
-                        type="radio"
-                        id="Temporada1"
-                        name="category"
-                        value="Temporada 1"
-                      />
-                      <Label2 > Uñas de salón</Label2>
-                    </Option>
-                    <Option onClick={() => { setValue2("Uñas francesas"); setOpen2(false) }}>
-                      <input
-                        type="radio"
-                        id="Temporada2"
-                        name="category"
-                        value="Temporada 2"
-                      />
-                      <Label2> Uñas francesas</Label2>
-                    </Option>
-                  </OptionContain>
-                }
-              </SelectContain>
-            </IconContain>
-
-          </InputContain> */}
           <InputContain>
             <Label>Portada del Curso</Label>
             <IconContain>
               <Folder />
-              <Input2>
-                <input
-                  type="file"
-                  placeholder="Seleccionar archivo"
-                  onChange={(e) => { getImage(e.target.files) }}>
-                </input>
-              </Input2>
+              <input
+                className="inp-file"
+                type="file"
+                placeholder="Seleccionar archivo"
+                onChange={(e) => { getImage(e.target.files) }}>
+              </input>
             </IconContain>
           </InputContain>
         </InputForm>

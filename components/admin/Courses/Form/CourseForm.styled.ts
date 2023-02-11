@@ -52,6 +52,16 @@ export const InputContain = styled.div`
 export const IconContain = styled.div`
   display: flex;
   position: relative;
+  .inp-file {
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    padding-inline: 20px;
+    padding-block: 10px;
+    width: 100%;
+    border: 1px solid #6717cd;
+    border-radius: 20px;
+    padding-left: 50px;
+  }
 `;
 export const InputContain2 = styled.div`
   display: flex;
