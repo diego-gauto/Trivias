@@ -1,2 +1,7 @@
 [[plugins]]
 package = "@netlify/plugin-functions-install-core"
+[[redirects]]
+  from = "/blog"
+  to = "https://gonvarnailsacademy.com/blog"
+  status = 200
+  force = true # COMMENT: ensure that we always redirect
