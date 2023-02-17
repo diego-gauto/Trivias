@@ -5,3 +5,8 @@ package = "@netlify/plugin-functions-install-core"
   to = "https://gonvarnailsacademy.com/blog"
   status = 200
   force = true # COMMENT: ensure that we always redirect
+[[redirects]]
+  from = "/blog/pegar-unas-postizas-no-pegamento"
+  to = "https://gonvarnailsacademy.com/pegar-unas-postizas-no-pegamento/"
+  status = 200
+  force = true # COMMENT: ensure that we always redirect
