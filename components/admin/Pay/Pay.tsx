@@ -17,7 +17,6 @@ import {
   Title,
   TitleContain,
 } from "./Pay.styled";
-import Select from "./Select/Select";
 
 const Pay = () => {
   let today = new Date().getTime() / 1000;

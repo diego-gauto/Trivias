@@ -205,6 +205,12 @@ const NavBar = () => {
             </NavText>
           </Link>
         }
+        <Link href="/Blog">
+          <NavText pathname={pathname} color={color} title="Inicio"
+            style={pathname == "/Blog" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+            Blog
+          </NavText>
+        </Link>
         {
           loggedIn &&
           <UserContain color={color}>
@@ -346,6 +352,11 @@ const NavBar = () => {
                     Tienda
                   </HBList>
                 </a>
+                <Link href="/Preview" >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Blog" ? { fontWeight: 600 } : {}}>
+                    Blog
+                  </HBList>
+                </Link>
                 <HBList onClick={() => { closeHamburgerMenu(), logoutFunc() }}>
                   Cerrar Sesion
                 </HBList>

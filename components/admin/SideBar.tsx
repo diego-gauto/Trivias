@@ -74,8 +74,11 @@ const SideBar = () => {
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "HomeWork") {
         setIndex(6)
       }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Sections") {
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Blog") {
         setIndex(7)
+      }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Sections") {
+        setIndex(8)
       }
     }, [])
 
@@ -170,11 +173,14 @@ const SideBar = () => {
               <Link href="/admin/HomeWork">
                 <li style={{ color: index == 6 ? "#ffa500" : "#fff" }}>Assigments</li>
               </Link>
+              <Link href="/admin/Blog">
+                <li style={{ color: index == 7 ? "#ffa500" : "#fff" }}>Blogs</li>
+              </Link>
             </ul>
             <Text>Organization</Text>
             <ul>
               <Link href="/admin/Sections">
-                <li style={{ color: index == 7 ? "#ffa500" : "#fff" }}>Team Members</li>
+                <li style={{ color: index == 8 ? "#ffa500" : "#fff" }}>Team Members</li>
               </Link>
             </ul>
           </div>
@@ -217,6 +223,9 @@ const SideBar = () => {
               </Link>}
               <Link href="/admin/HomeWork">
                 <li style={{ color: index == 6 ? "#ffa500" : "#fff" }}>Assigments</li>
+              </Link>
+              <Link href="/admin/Blog">
+                <li style={{ color: index == 7 ? "#ffa500" : "#fff" }}>Blogs</li>
               </Link>
             </ul>
           </div>
