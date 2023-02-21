@@ -198,12 +198,20 @@ const AddLesson = () => {
   }
   const getImage = (file: any) => {
     var reader = new FileReader();
+    var imageComp: any = new Image();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
-      setLesson({ ...lesson, image: reader.result })
+      imageComp.src = reader.result;
     };
+    setTimeout(() => {
+      if (imageComp.width == 760 && imageComp.height == 420) {
+        setLesson({ ...lesson, image: reader.result })
+      }
+      else {
+        alert("La imagen debe tener una resolución de 760 px × 420 px")
+      }
+    }, 1000);
   }
-
   const addQuestion = () => {
     let tempQuiz: any = quiz;
     if (question.question !== "") {

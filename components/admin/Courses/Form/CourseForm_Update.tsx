@@ -256,6 +256,8 @@ const CourseForm = (props: ICourseForm_Update) => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       imageComp.src = reader.result;
+    };
+    setTimeout(() => {
       if (imageComp.width == 4000 && imageComp.height == 2250) {
         setImage(reader.result)
         setImages(reader.result)
@@ -263,7 +265,7 @@ const CourseForm = (props: ICourseForm_Update) => {
       else {
         alert("La imagen debe tener una resolución de 4000 px × 2250 px")
       }
-    };
+    }, 1000);
   }
   const getProffessors = () => {
     getTeacher().then((res) => {
