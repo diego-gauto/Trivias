@@ -15,6 +15,8 @@ export interface ICourseForm_Update {
   courseDifficulty: string;
   courseRating: number;
   courseCertificateColor: string;
+  images: string;
+  setImages: any;
   index: number;
   documentID: string;
   reference: string;

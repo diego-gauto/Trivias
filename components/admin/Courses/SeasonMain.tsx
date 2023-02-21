@@ -33,6 +33,7 @@ interface ISeasonEditModalData {
 }
 
 const SeasonsMain = () => {
+  const [images, setImages] = useState<any>("")
   const [isLoading, setIsLoading] = useState(true);
   const [courseData, setCoursesData] = useState<any>(null);
   const [seasons, setSeasons] = useState<any>(null);
@@ -150,7 +151,7 @@ const SeasonsMain = () => {
           <CourseContain>
             <Imagecontain>
               <ImageBack
-                src={courseData[0].coursePath}
+                src={images == "" ? courseData[0].coursePath : images}
               />
               <BackgroundOverlay />
             </Imagecontain>
@@ -166,6 +167,8 @@ const SeasonsMain = () => {
               courseData !== null
                 ?
                 <CourseForm_Update
+                  images={images}
+                  setImages={setImages}
                   reference={courseData[0].reference}
                   courseTittle={courseData[0].courseTittle}
                   courseAbout={courseData[0].courseAbout}

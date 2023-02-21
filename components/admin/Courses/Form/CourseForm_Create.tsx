@@ -235,17 +235,19 @@ const CourseForm_Create = () => {
       setCreatingNewCourse(false);
     }
   }
-
   const getImage = (file: any) => {
     var reader = new FileReader();
+    var imageComp: any = new Image();
     reader.readAsDataURL(file[0]);
-    if (file[0].size == 573779 || file[0].size == 48830) {
-      reader.onload = (_event) => {
+    reader.onload = (_event) => {
+      imageComp.src = reader.result;
+      if (imageComp.width == 4000 && imageComp.height == 2250) {
         setImage(reader.result)
-      };
-    } else {
-      alert("La imagen debe tener una resolución de 1520 × 840 px  ó 760 × 420 px")
-    }
+      }
+      else {
+        alert("La imagen debe tener una resolución de 4000 px × 2250 px")
+      }
+    };
   }
   const getProffessors = () => {
     getTeacher().then((res) => {

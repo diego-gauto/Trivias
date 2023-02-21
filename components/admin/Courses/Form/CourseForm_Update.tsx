@@ -99,6 +99,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const { documentID } = props;
   const { coursePath } = props;
   const { reference } = props;
+  const { images, setImages } = props;
 
   const [IsUpdating, setIsUpdating] = useState<boolean>(false);
   const [select, setSelect] = useState("");
@@ -133,7 +134,7 @@ const CourseForm = (props: ICourseForm_Update) => {
   const [image, setImage] = useState<any>(coursePath)
   const [material, setMaterial] = useState<any>([]);
   const [materials, setMaterials] = useState<any>([]);
-  const [images, setimages] = useState<any>("")
+
   const [value3, setValue3] = useState(courseType)
   const [professorName, setProfessorName] = useState([]);
   const [difficultyValue, setDifficultyValue] = useState(courseDifficulty);
@@ -251,15 +252,18 @@ const CourseForm = (props: ICourseForm_Update) => {
   }
   const getImage = (file: any) => {
     var reader = new FileReader();
+    var imageComp: any = new Image();
     reader.readAsDataURL(file[0]);
-    if (file[0].size == 573779 || file[0].size == 48830) {
-      reader.onload = (_event) => {
+    reader.onload = (_event) => {
+      imageComp.src = reader.result;
+      if (imageComp.width == 4000 && imageComp.height == 2250) {
         setImage(reader.result)
-        setimages(reader.result)
-      };
-    } else {
-      alert("La imagen debe tener una resolución de 1520 × 840 px  ó 760 × 420 px")
-    }
+        setImages(reader.result)
+      }
+      else {
+        alert("La imagen debe tener una resolución de 4000 px × 2250 px")
+      }
+    };
   }
   const getProffessors = () => {
     getTeacher().then((res) => {
