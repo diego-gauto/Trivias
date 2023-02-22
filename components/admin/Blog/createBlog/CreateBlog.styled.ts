@@ -42,9 +42,15 @@ export const BlogBackground = styled.div`
     .blog-form {
       display: flex;
       flex-direction: column;
+      gap: 30px;
       .blog-row {
         display: flex;
         width: 100%;
+        gap: 20px;
+      }
+      .blog-column {
+        display: flex;
+        flex-direction: column;
         gap: 20px;
       }
     }
@@ -55,6 +61,17 @@ export const BlogInputs = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 5px;
+  #quill {
+    .ql-container {
+      height: 100px;
+    }
+  }
+  .quill {
+    min-height: 0;
+    .ql-container {
+      height: auto;
+    }
+  }
   .blog-label {
     color: #6717cd;
     font-weight: 600;

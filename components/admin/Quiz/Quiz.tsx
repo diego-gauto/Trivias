@@ -179,7 +179,6 @@ const Quiz = () => {
     let tempQuiz = quiz;
     tempQuiz.questions[index].question = content;
   }
-
   return (
     <QuizContainer>
       <TitleContain>
