@@ -300,3 +300,43 @@ export const editSeasonName = async (courseID: string, seasonID: string, seasonN
 export const editSeasonIndex = async (courseID: string, seasonID: any, index: number) => {
   return await db.collection('courses').doc(courseID).collection("seasons").doc(seasonID).update({ season: index });
 }
+const uploadBlogImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `blog/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+const uploadSubThemeBlogImage = (image: any, name: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `blog/subTheme/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const addBlog = async (blog: any) => {
+  blog.createdAt = new Date();
+  blog.reference = `${blog.title}-${uuidv4()}`
+  // blog.path = await uploadBlogImage(blog.path, blog.reference);
+  // blog.subTopic.forEach(async (topic: any) => {
+  //   if (topic.topicPath) {
+  //     topic.reference = `${topic.topicTitle}-${uuidv4()}`
+  //     topic.topicPath = await uploadSubThemeBlogImage(topic.topicPath, topic.reference);
+  //   }
+  // })
+  const docRef = await addDoc(
+    collection(db, "blog"),
+    {
+      ...blog
+    }
+  );
+  return 'exito'
+}

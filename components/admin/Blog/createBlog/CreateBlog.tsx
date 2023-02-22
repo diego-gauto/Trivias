@@ -3,6 +3,9 @@ import ReactQuill from 'react-quill';
 import { BlogBackground, BlogInputs } from './CreateBlog.styled';
 import 'react-quill/dist/quill.snow.css';
 import { text } from 'stream/consumers';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../../../../firebase/firebaseConfig';
+import { addBlog } from '../../../../store/actions/AdminActions';
 const CreateBlog = () => {
   const [image, setImage] = useState<any>("");
   const [quill, setQuill] = useState("");
@@ -73,7 +76,6 @@ const CreateBlog = () => {
     let tempTopic: any = { ...topicVal, topicTitle: text };
     let tempBlog: any = blog;
     tempBlog.subTopic[index] = tempTopic;
-    console.log(tempTopic)
     setBlog({ ...tempBlog })
   }
   const changeTopicImage = (topicVal: any, file: any, index: any) => {
@@ -93,8 +95,18 @@ const CreateBlog = () => {
     let tempTopic: any = { ...topicVal, topicText: content };
     let tempBlog: any = blog;
     tempBlog.subTopic[index] = tempTopic;
-    console.log(tempTopic)
     setBlog({ ...tempBlog })
+  }
+
+  const createNewBlog = async () => {
+    console.log('entro')
+    // // const addBlog = httpsCallable(functions, 'createBlogs');
+    // await addBlog(blog).then(async (res: any) => {
+    //   console.log(res);
+    //   addBlog(res)
+    // })
+    console.log(blog)
+    addBlog(blog)
   }
 
   useEffect(() => {
@@ -107,11 +119,18 @@ const CreateBlog = () => {
           <p className="title">
             Creación de Blog
           </p>
-          <button className="add-theme" onClick={addTheme}>
-            <p className="theme-text">
-              Agregar Subtema
-            </p>
-          </button>
+          <div className="blog-buttons">
+            <button className="add-theme" onClick={addTheme}>
+              <p className="theme-text">
+                Agregar Subtema
+              </p>
+            </button>
+            <button className="create-blog" onClick={createNewBlog}>
+              <p className="theme-text">
+                Crear Blog
+              </p>
+            </button>
+          </div>
         </div>
         <div className="blog-form">
           <div className="blog-row">

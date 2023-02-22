@@ -25,6 +25,10 @@ export const BlogBackground = styled.div`
         font-weight: 600;
       }
     }
+    .blog-buttons {
+      display: flex;
+      gap: 10px;
+    }
     .add-theme {
       border: 1px solid #6717cd;
       padding-block: 5px;
@@ -36,6 +40,20 @@ export const BlogBackground = styled.div`
       }
       &:hover {
         background-color: #ede6f5;
+        transition: 0.2s ease all;
+      }
+    }
+    .create-blog {
+      border: none;
+      padding-block: 5px;
+      padding-inline: 20px;
+      border-radius: 100px;
+      background-color: #6717cd;
+      .theme-text {
+        color: white;
+      }
+      &:hover {
+        background-color: #8b59cb;
         transition: 0.2s ease all;
       }
     }
