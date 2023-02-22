@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import { BlogBackground, BlogInputs } from './CreateBlog.styled';
 import 'react-quill/dist/quill.snow.css';
+import { text } from 'stream/consumers';
 const CreateBlog = () => {
   const [image, setImage] = useState<any>("");
   const [quill, setQuill] = useState("");
@@ -57,7 +58,6 @@ const CreateBlog = () => {
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
         setImage(reader.result);
-        // tempBlog.path = reader.result;
         setBlog({ ...blog, path: reader.result })
       };
     }
@@ -69,16 +69,34 @@ const CreateBlog = () => {
     setBlog({ ...tempBlog })
   }
 
-  const changeTitle = (index: number, text: string) => {
-    let tempBlog = blog;
-    tempBlog.subTopic[index].topicTitle = text;
+  const changeTopicTitle = (topicVal: any, index: number, text: string) => {
+    let tempTopic: any = { ...topicVal, topicTitle: text };
+    let tempBlog: any = blog;
+    tempBlog.subTopic[index] = tempTopic;
+    console.log(tempTopic)
+    setBlog({ ...tempBlog })
   }
-  const addTextContent = (content: any, index: any) => {
-    let tempBlog = blog;
-    tempBlog.subTopic[index].topicText = content;
-    setBlog(tempBlog)
+  const changeTopicImage = (topicVal: any, file: any, index: any) => {
+    let tempTopic: any
+    let tempBlog: any = blog;
+    if (file.length > 0) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file[0]);
+      reader.onload = (_event) => {
+        tempTopic = { ...topicVal, topicPath: reader.result }
+        tempBlog.subTopic[index] = tempTopic;
+        setBlog({ ...tempBlog })
+      };
+    }
   }
-  console.log(blog)
+  const changeTopicContent = (topicVal: any, content: any, index: any) => {
+    let tempTopic: any = { ...topicVal, topicText: content };
+    let tempBlog: any = blog;
+    tempBlog.subTopic[index] = tempTopic;
+    console.log(tempTopic)
+    setBlog({ ...tempBlog })
+  }
+
   useEffect(() => {
   }, [quill])
 
@@ -140,19 +158,31 @@ const CreateBlog = () => {
             blog.subTopic?.map((topic: any, index: number) => {
               return (
                 <div className="blog-column" key={"topic " + index}>
+                  <div className="blog-row">
+                    <BlogInputs>
+                      <label className="blog-label">
+                        Título {index + 1}
+                      </label>
+                      <input
+                        className="blog-input"
+                        placeholder="Título del Blog"
+                        onChange={(e: any) => { changeTopicTitle(topic, index, e.target.value) }}
+                      />
+                    </BlogInputs>
+                    <BlogInputs>
+                      <label className="blog-label">
+                        Imagen del subtema {index + 1}
+                      </label>
+                      <input
+                        className="blog-input"
+                        type="file"
+                        onChange={(e) => { changeTopicImage(topic, e.target.files, index) }}
+                      />
+                    </BlogInputs>
+                  </div>
                   <BlogInputs>
                     <label className="blog-label">
-                      Título {index + 1}
-                    </label>
-                    <input
-                      className="blog-input"
-                      placeholder="Título del Blog"
-                      onChange={(e: any) => { changeTitle(index, e.target.value) }}
-                    />
-                  </BlogInputs>
-                  <BlogInputs>
-                    <label className="blog-label">
-                      Texto
+                      Texto {index + 1}
                     </label>
                     <ReactQuill
                       placeholder="Lorem ipsum dolor sit amet, consectetur 
@@ -161,7 +191,7 @@ const CreateBlog = () => {
                         malesuada facilisi vel nunc." theme="snow" id='quill'
                       formats={formats} modules={modules}
                       defaultValue="" onChange={(content, delta, source, editor) => {
-                        addTextContent(content, index);
+                        changeTopicContent(topic, content, index);
                       }} />
                   </BlogInputs>
                 </div>
