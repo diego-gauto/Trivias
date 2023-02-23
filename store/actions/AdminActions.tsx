@@ -351,7 +351,14 @@ export const addBlog = async (blog: any) => {
       }
     );
   }
-
-
   return 'exito'
+}
+export const getBlogs = async () => {
+  let data: any = []
+  const docRef = query(collection(db, "blog"));
+  const querySnapshot = await getDocs(docRef);
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id })
+  });
+  return data
 }

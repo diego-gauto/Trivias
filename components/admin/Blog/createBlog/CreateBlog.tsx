@@ -8,6 +8,7 @@ import { functions } from '../../../../firebase/firebaseConfig';
 import { addBlog } from '../../../../store/actions/AdminActions';
 import { AiOutlineClose } from 'react-icons/ai';
 import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
+import router from "next/router";
 const CreateBlog = () => {
   const [loader, setLoader] = useState<boolean>(true);
   const [image, setImage] = useState<any>("");
@@ -58,6 +59,7 @@ const CreateBlog = () => {
     "indent",
     "align"
   ];
+  console.log(router.query);
   const getImage = (file: any) => {
     if (file.length > 0) {
       var reader = new FileReader();
