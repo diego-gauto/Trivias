@@ -6,7 +6,10 @@ import { text } from 'stream/consumers';
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../../../../firebase/firebaseConfig';
 import { addBlog } from '../../../../store/actions/AdminActions';
+import { AiOutlineClose } from 'react-icons/ai';
+import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
 const CreateBlog = () => {
+  const [loader, setLoader] = useState<boolean>(true);
   const [image, setImage] = useState<any>("");
   const [quill, setQuill] = useState("");
   const [blog, setBlog] = useState<any>({
@@ -71,6 +74,16 @@ const CreateBlog = () => {
     tempBlog.subTopic.push(topic)
     setBlog({ ...tempBlog })
   }
+  const removeTheme = (index: number) => {
+    let tempBlog: any = blog;
+    if (confirm(`¿Desea eliminar subtema ${index + 1}?, esto recorrera los otros subtemas`)) {
+      //PENDIENTE REPARAR
+      tempBlog.subTopic.splice(index, 1)
+      setBlog({ ...tempBlog })
+    } else {
+
+    }
+  }
 
   const changeTopicTitle = (topicVal: any, index: number, text: string) => {
     let tempTopic: any = { ...topicVal, topicTitle: text };
@@ -108,7 +121,7 @@ const CreateBlog = () => {
     console.log(blog)
     addBlog(blog)
   }
-
+  console.log(blog)
   useEffect(() => {
   }, [quill])
 
@@ -174,48 +187,53 @@ const CreateBlog = () => {
             </BlogInputs>
           </div>
           {
-            blog.subTopic?.map((topic: any, index: number) => {
-              return (
-                <div className="blog-column" key={"topic " + index}>
-                  <div className="blog-row">
-                    <BlogInputs>
+            loader ?
+              blog.subTopic?.map((topic: any, index: number) => {
+                return (
+                  <div className="blog-column" key={"topic " + index}>
+                    <div className="close-container" >
+                      <AiOutlineClose onClick={() => { removeTheme(index) }} className="close" />
+                    </div>
+                    <div className="blog-row">
+                      <BlogInputs>
+                        <label className="blog-label">
+                          Título {index + 1}
+                        </label>
+                        <input
+                          className="blog-input"
+                          placeholder="Título del Blog"
+                          onChange={(e: any) => { changeTopicTitle(topic, index, e.target.value) }}
+                        />
+                      </BlogInputs>
+                      <BlogInputs>
+                        <label className="blog-label">
+                          Imagen del subtema {index + 1}
+                        </label>
+                        <input
+                          className="blog-input"
+                          type="file"
+                          onChange={(e) => { changeTopicImage(topic, e.target.files, index) }}
+                        />
+                      </BlogInputs>
+                    </div>
+                    <BlogInputs style={{ marginTop: 20 }}>
                       <label className="blog-label">
-                        Título {index + 1}
+                        Texto {index + 1}
                       </label>
-                      <input
-                        className="blog-input"
-                        placeholder="Título del Blog"
-                        onChange={(e: any) => { changeTopicTitle(topic, index, e.target.value) }}
-                      />
-                    </BlogInputs>
-                    <BlogInputs>
-                      <label className="blog-label">
-                        Imagen del subtema {index + 1}
-                      </label>
-                      <input
-                        className="blog-input"
-                        type="file"
-                        onChange={(e) => { changeTopicImage(topic, e.target.files, index) }}
-                      />
-                    </BlogInputs>
-                  </div>
-                  <BlogInputs>
-                    <label className="blog-label">
-                      Texto {index + 1}
-                    </label>
-                    <ReactQuill
-                      placeholder="Lorem ipsum dolor sit amet, consectetur 
+                      <ReactQuill
+                        placeholder="Lorem ipsum dolor sit amet, consectetur 
                         adipiscing elit. Pharetra, cursus sapien ac magna. 
                         Consectetur amet eu tincidunt quis. Non habitasse viverra 
                         malesuada facilisi vel nunc." theme="snow" id='quill'
-                      formats={formats} modules={modules}
-                      defaultValue="" onChange={(content, delta, source, editor) => {
-                        changeTopicContent(topic, content, index);
-                      }} />
-                  </BlogInputs>
-                </div>
-              )
-            })
+                        formats={formats} modules={modules}
+                        defaultValue="" onChange={(content, delta, source, editor) => {
+                          changeTopicContent(topic, content, index);
+                        }} />
+                    </BlogInputs>
+                  </div>
+                )
+              })
+              : <LoaderContain />
           }
         </div>
       </div>

@@ -325,18 +325,33 @@ const uploadSubThemeBlogImage = (image: any, name: any) => {
 export const addBlog = async (blog: any) => {
   blog.createdAt = new Date();
   blog.reference = `${blog.title}-${uuidv4()}`
-  // blog.path = await uploadBlogImage(blog.path, blog.reference);
-  // blog.subTopic.forEach(async (topic: any) => {
-  //   if (topic.topicPath) {
-  //     topic.reference = `${topic.topicTitle}-${uuidv4()}`
-  //     topic.topicPath = await uploadSubThemeBlogImage(topic.topicPath, topic.reference);
-  //   }
-  // })
-  const docRef = await addDoc(
-    collection(db, "blog"),
-    {
-      ...blog
-    }
-  );
+  blog.path = await uploadBlogImage(blog.path, blog.reference);
+  if (blog.subTopic.length > 0) {
+    blog.subTopic.forEach(async (topic: any, index: any) => {
+      if (topic.topicPath) {
+        topic.reference = `${topic.topicTitle}-${uuidv4()}`
+        topic.topicPath = await uploadSubThemeBlogImage(topic.topicPath, topic.reference);
+      }
+      if (index == blog.subTopic.length - 1) {
+        const docRef = await addDoc(
+          collection(db, "blog"),
+          {
+            ...blog
+          }
+        );
+        console.log('exito')
+      }
+    })
+  }
+  else {
+    const docRef = await addDoc(
+      collection(db, "blog"),
+      {
+        ...blog
+      }
+    );
+  }
+
+
   return 'exito'
 }

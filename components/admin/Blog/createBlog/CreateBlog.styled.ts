@@ -69,7 +69,14 @@ export const BlogBackground = styled.div`
       .blog-column {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+      }
+      .close-container {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 24px;
+        .close {
+          cursor: pointer;
+        }
       }
     }
   }
