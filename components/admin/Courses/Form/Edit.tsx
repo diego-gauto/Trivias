@@ -62,7 +62,7 @@ const Edit = () => {
   const [value, setValue] = useState(false);
   const [quill, setQuill] = useState("");
   const [type, setType] = useState("homework");
-
+  console.log(routerState)
   const { courseID, seasonID, lessonID } = router.query;
   const [mandatory, setMandatory] = useState<boolean>(false)
   const [openSelect, setOpenSelect] = useState<boolean>(false)

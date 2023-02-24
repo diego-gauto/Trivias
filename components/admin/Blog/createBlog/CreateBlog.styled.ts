@@ -20,10 +20,26 @@ export const BlogBackground = styled.div`
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      .title-container {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        .return-icon {
+          font-size: 30px;
+          cursor: pointer;
+          &:hover {
+            color: #6717cd;
+          }
+        }
+      }
       .title {
         font-size: 24px;
         font-weight: 600;
       }
+    }
+    .blog-buttons {
+      display: flex;
+      gap: 10px;
     }
     .add-theme {
       border: 1px solid #6717cd;
@@ -39,6 +55,34 @@ export const BlogBackground = styled.div`
         transition: 0.2s ease all;
       }
     }
+    .create-blog {
+      border: none;
+      padding-block: 5px;
+      padding-inline: 20px;
+      border-radius: 100px;
+      background-color: #6717cd;
+      .theme-text {
+        color: white;
+      }
+      &:hover {
+        background-color: #8b59cb;
+        transition: 0.2s ease all;
+      }
+    }
+    .delete-blog {
+      border: none;
+      padding-block: 5px;
+      padding-inline: 20px;
+      border-radius: 100px;
+      background-color: red;
+      .theme-text {
+        color: white;
+      }
+      &:hover {
+        background-color: #bd0000;
+        transition: 0.2s ease all;
+      }
+    }
     .blog-form {
       display: flex;
       flex-direction: column;
@@ -51,7 +95,14 @@ export const BlogBackground = styled.div`
       .blog-column {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+      }
+      .close-container {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 24px;
+        .close {
+          cursor: pointer;
+        }
       }
     }
   }
