@@ -33,6 +33,7 @@ export const BlogContainer = styled.div`
     }
   }
   .blogs {
+    display: grid;
     margin-top: 50px;
   }
 `;
@@ -46,7 +47,7 @@ export const BlogCard = styled.div`
     position: relative;
     cursor: pointer;
     .blog-image {
-      width: 300px;
+      width: 298px;
       height: 200px;
     }
     .edit-icon {

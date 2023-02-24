@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import firebase from "firebase/compat/app";
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
@@ -311,6 +311,7 @@ const uploadBlogImage = (image: any, name: any) => {
     });
   });
 }
+
 const uploadSubThemeBlogImage = (image: any, name: any) => {
   const storage = getStorage();
   const storageRef = ref(storage, `blog/subTheme/${name}`);
@@ -361,4 +362,62 @@ export const getBlogs = async () => {
     data.push({ ...doc.data(), id: doc.id })
   });
   return data
+}
+export const updateBlog = async (blog: any, blogId: any) => {
+  let tempBlog: any = JSON.parse(JSON.stringify(blog))
+  if ('format' in tempBlog) {
+    console.log('entro')
+    tempBlog.image = await uploadBlogImage(tempBlog.path, tempBlog.reference);
+    delete tempBlog.format
+  }
+  if (tempBlog.subTopic.length > 0) {
+    blog.subTopic.forEach(async (topic: any, index: any) => {
+      if ('format' in topic) {
+        topic.reference = `${topic.topicTitle}-${uuidv4()}`
+        topic.topicPath = await uploadSubThemeBlogImage(topic.topicPath, topic.reference);
+        delete topic.topicFormat
+      }
+      if (index == blog.subTopic.length - 1) {
+        const docRef = doc(db, 'blog', blogId);
+        delete tempBlog.id
+        await updateDoc(docRef, {
+          ...tempBlog
+        })
+      }
+    })
+  }
+  else {
+    const docRef = doc(db, 'blog', blogId);
+    delete tempBlog.id
+    await updateDoc(docRef, {
+      ...tempBlog
+    })
+  }
+}
+export const deleteBlog = async (blog: any) => {
+  const storage = getStorage();
+  const desertRef = ref(storage, `blog/${blog.reference}`);
+  await deleteObject(desertRef).then(async () => {
+    if (blog.subTopic.length > 0) {
+      blog.subTopic.forEach(async (topic: any, index: any) => {
+        if ('reference' in topic) {
+          const subDesertRef = ref(storage, `blog/subTheme/${topic.reference}`);
+          await deleteObject(subDesertRef);
+        }
+        if (index == blog.subTopic.length - 1) {
+          console.log('borrar')
+          await deleteDoc(doc(db, "blog", blog.id));
+          return 'success'
+        }
+        return 'entered'
+      })
+      return 'entered'
+    }
+    else {
+      await deleteDoc(doc(db, "blog", blog.id));
+      return 'success'
+    }
+  }).catch((error) => {
+    console.log(error)
+  });
 }

@@ -5,12 +5,16 @@ import 'react-quill/dist/quill.snow.css';
 import { text } from 'stream/consumers';
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../../../../firebase/firebaseConfig';
-import { addBlog } from '../../../../store/actions/AdminActions';
+import { addBlog, deleteBlog, getBlogs, updateBlog } from '../../../../store/actions/AdminActions';
 import { AiOutlineClose } from 'react-icons/ai';
 import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
-import router from "next/router";
+import router, { useRouter } from "next/router";
+import { MdKeyboardReturn } from 'react-icons/md';
+import { GiExitDoor } from 'react-icons/gi';
 const CreateBlog = () => {
-  const [loader, setLoader] = useState<boolean>(true);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [processLoader, setProcessLoader] = useState<boolean>(false);
+  const routerState = useRouter().query
   const [image, setImage] = useState<any>("");
   const [quill, setQuill] = useState("");
   const [blog, setBlog] = useState<any>({
@@ -59,14 +63,23 @@ const CreateBlog = () => {
     "indent",
     "align"
   ];
-  console.log(router.query);
+  const { blogId } = routerState;
+
+  const goToBlog = () => {
+    router.push({ pathname: "/admin/Blog" })
+  }
   const getImage = (file: any) => {
     if (file.length > 0) {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
         setImage(reader.result);
-        setBlog({ ...blog, path: reader.result })
+        if (blogId) {
+          setBlog({ ...blog, path: reader.result, format: reader.result })
+        }
+        else {
+          setBlog({ ...blog, path: reader.result })
+        }
       };
     }
 
@@ -100,7 +113,12 @@ const CreateBlog = () => {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
-        tempTopic = { ...topicVal, topicPath: reader.result }
+        if (blogId) {
+          tempTopic = { ...topicVal, topicPath: reader.result, topicFormat: reader.result }
+        }
+        else {
+          tempTopic = { ...topicVal, topicPath: reader.result }
+        }
         tempBlog.subTopic[index] = tempTopic;
         setBlog({ ...tempBlog })
       };
@@ -112,132 +130,184 @@ const CreateBlog = () => {
     tempBlog.subTopic[index] = tempTopic;
     setBlog({ ...tempBlog })
   }
-
   const createNewBlog = async () => {
-    console.log('entro')
+    setProcessLoader(true);
     // // const addBlog = httpsCallable(functions, 'createBlogs');
     // await addBlog(blog).then(async (res: any) => {
     //   console.log(res);
     //   addBlog(res)
     // })
-    console.log(blog)
-    addBlog(blog)
+    addBlog(blog).then(() => {
+      router.push({ pathname: "/admin/Blog" })
+      setProcessLoader(false);
+    })
   }
-  console.log(blog)
-  useEffect(() => {
-  }, [quill])
+  const editBlog = async () => {
+    setProcessLoader(true);
+    updateBlog(blog, blog.id).then(() => {
+      router.push({ pathname: "/admin/Blog" })
+      setProcessLoader(false);
+    })
+  }
+  const deleteBlock = async () => {
+    if (confirm("¿Quieres eliminar este blog?, Esta acción no tiene marcha atrás.")) {
+      deleteBlog(blog).then(() => {
+        router.push({ pathname: "/admin/Blog" })
+      });
+    }
+    else {
 
+    }
+  }
+  const getNewBlog = () => {
+    let tempBlog: any;
+    getBlogs().then((res) => {
+      tempBlog = res.filter((allBlogs: any) => allBlogs.id == blogId)
+      setBlog(tempBlog[0]);
+      setLoader(true);
+    })
+  }
+  useEffect(() => {
+    if (blogId) {
+      getNewBlog();
+    }
+    else {
+      setLoader(true);
+    }
+  }, [quill])
   return (
     <BlogBackground>
       <div className="blog-container">
         <div className="title-contain">
-          <p className="title">
-            Creación de Blog
-          </p>
+          <div className="title-container">
+            <GiExitDoor className="return-icon" onClick={goToBlog} />
+            <p className="title">
+              {!blogId ? "Creación de Blog" : "Edición de Blog"}
+            </p>
+          </div>
           <div className="blog-buttons">
             <button className="add-theme" onClick={addTheme}>
               <p className="theme-text">
                 Agregar Subtema
               </p>
             </button>
-            <button className="create-blog" onClick={createNewBlog}>
-              <p className="theme-text">
-                Crear Blog
-              </p>
-            </button>
+            {
+              !processLoader
+                ?
+                <button className="create-blog" onClick={!blogId ? createNewBlog : editBlog}>
+                  <p className="theme-text">
+                    {!blogId ? "Crear Blog" : "Editar Blog"}
+                  </p>
+                </button>
+                : <LoaderContain />
+            }
+            {
+              blogId &&
+              <button className="delete-blog" onClick={deleteBlock}>
+                <p className="theme-text">
+                  Eliminar blog
+                </p>
+              </button>
+            }
           </div>
         </div>
-        <div className="blog-form">
-          <div className="blog-row">
-            <BlogInputs>
-              <label className="blog-label">
-                Título
-              </label>
-              <input
-                className="blog-input"
-                placeholder="Título del Blog"
-                onChange={(e: any) => {
-                  setBlog({
-                    ...blog, title: e.target.value
-                  })
-                }}
-              />
-            </BlogInputs>
-            <BlogInputs>
-              <label className="blog-label">
-                Subtítulo
-              </label>
-              <input
-                className="blog-input"
-                placeholder="Subtítulo del Blog"
-                onChange={(e: any) => {
-                  setBlog({
-                    ...blog, subTitle: e.target.value
-                  })
-                }}
-              />
-            </BlogInputs>
-            <BlogInputs>
-              <label className="blog-label">
-                Portada del blog
-              </label>
-              <input
-                className="blog-input"
-                type="file"
-                onChange={(e) => { getImage(e.target.files) }}
-              />
-            </BlogInputs>
-          </div>
-          {
-            loader ?
-              blog.subTopic?.map((topic: any, index: number) => {
-                return (
-                  <div className="blog-column" key={"topic " + index}>
-                    <div className="close-container" >
-                      <AiOutlineClose onClick={() => { removeTheme(index) }} className="close" />
-                    </div>
-                    <div className="blog-row">
-                      <BlogInputs>
+        {
+          loader
+            ? <div className="blog-form">
+              <div className="blog-row">
+                <BlogInputs>
+                  <label className="blog-label">
+                    Título
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="Título del Blog"
+                    defaultValue={blog.title}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, title: e.target.value
+                      })
+                    }}
+                  />
+                </BlogInputs>
+                <BlogInputs>
+                  <label className="blog-label">
+                    Subtítulo
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="Subtítulo del Blog"
+                    defaultValue={blog.subTitle}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, subTitle: e.target.value
+                      })
+                    }}
+                  />
+                </BlogInputs>
+                <BlogInputs>
+                  <label className="blog-label">
+                    Portada del blog
+                  </label>
+                  <input
+                    className="blog-input"
+                    type="file"
+                    onChange={(e) => { getImage(e.target.files) }}
+                  />
+                </BlogInputs>
+              </div>
+              {
+                blog.subTopic?.map((topic: any, index: number) => {
+                  return (
+                    <div className="blog-column" key={"topic " + index}>
+                      <div className="close-container" >
+                        <AiOutlineClose onClick={() => { removeTheme(index) }} className="close" />
+                      </div>
+                      <div className="blog-row">
+                        <BlogInputs>
+                          <label className="blog-label">
+                            Título {index + 1}
+                          </label>
+                          <input
+                            className="blog-input"
+                            placeholder="Título del Blog"
+                            defaultValue={topic.topicTitle}
+                            onChange={(e: any) => { changeTopicTitle(topic, index, e.target.value) }}
+                          />
+                        </BlogInputs>
+                        <BlogInputs>
+                          <label className="blog-label">
+                            Imagen del subtema {index + 1}
+                          </label>
+                          <input
+                            className="blog-input"
+                            type="file"
+                            onChange={(e) => { changeTopicImage(topic, e.target.files, index) }}
+                          />
+                        </BlogInputs>
+                      </div>
+                      <BlogInputs style={{ marginTop: 20 }}>
                         <label className="blog-label">
-                          Título {index + 1}
+                          Texto {index + 1}
                         </label>
-                        <input
-                          className="blog-input"
-                          placeholder="Título del Blog"
-                          onChange={(e: any) => { changeTopicTitle(topic, index, e.target.value) }}
-                        />
-                      </BlogInputs>
-                      <BlogInputs>
-                        <label className="blog-label">
-                          Imagen del subtema {index + 1}
-                        </label>
-                        <input
-                          className="blog-input"
-                          type="file"
-                          onChange={(e) => { changeTopicImage(topic, e.target.files, index) }}
-                        />
-                      </BlogInputs>
-                    </div>
-                    <BlogInputs style={{ marginTop: 20 }}>
-                      <label className="blog-label">
-                        Texto {index + 1}
-                      </label>
-                      <ReactQuill
-                        placeholder="Lorem ipsum dolor sit amet, consectetur 
+                        <ReactQuill
+                          placeholder="Lorem ipsum dolor sit amet, consectetur 
                         adipiscing elit. Pharetra, cursus sapien ac magna. 
                         Consectetur amet eu tincidunt quis. Non habitasse viverra 
                         malesuada facilisi vel nunc." theme="snow" id='quill'
-                        formats={formats} modules={modules}
-                        defaultValue="" onChange={(content, delta, source, editor) => {
-                          changeTopicContent(topic, content, index);
-                        }} />
-                    </BlogInputs>
-                  </div>
-                )
-              })
-              : <LoaderContain />
-          }
-        </div>
+                          formats={formats} modules={modules}
+                          defaultValue={topic.topicText} onChange={(content, delta, source, editor) => {
+                            changeTopicContent(topic, content, index);
+                          }} />
+                      </BlogInputs>
+                    </div>
+                  )
+                })
+              }
+            </div>
+            : <LoaderContain />
+        }
+
       </div>
     </BlogBackground>
   )
