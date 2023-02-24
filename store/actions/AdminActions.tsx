@@ -26,6 +26,7 @@ export const createCourse = async (signUpData: { data: any; }) => {
     })
 
 }
+
 const uploadImage = (image: any, name: any) => {
   const storage = getStorage();
   const storageRef = ref(storage, `courses/${name}`);
@@ -37,6 +38,7 @@ const uploadImage = (image: any, name: any) => {
     });
   });
 }
+
 export const updateCourse = async (signUpData: { data: any; }, images: any) => {
   const {
     data,
