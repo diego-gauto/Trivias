@@ -496,8 +496,9 @@ const Purchase = () => {
                   }}>
                     <option value="">--</option>
                     {cards.map((x: any, idC: number) => {
+                      console.log('x value', x.cardId)
                       return (
-                        <option value={idC}>{x.last4}</option>
+                        <option value={idC} selected={x.cardId == 'pm_1Mf4ocAaQg7w1ZH2V2UALECs'}>{x.last4}</option>
                       )
                     })}
                   </select>}
