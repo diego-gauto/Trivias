@@ -10,11 +10,9 @@ const Blog = () => {
   const [loader, setLoader] = useState(false);
 
   const goToBlog = (blog: any) => {
-    // let blogText: any = blog.title.replaceAll(" ", "-");
-    // router.push({ pathname: "/admin/CreateBlog/", query: { blogId: blog.id } })
+    let blogText: any = blog.title.replaceAll(" ", "-");
+    router.push({ pathname: `/${blogText}` })
   }
-  const Context = createContext(blogs);
-  console.log(Context)
   useEffect(() => {
     getBlogs().then((res: any) => {
       setBlogs(res)

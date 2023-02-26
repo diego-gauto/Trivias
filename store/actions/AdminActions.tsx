@@ -327,6 +327,7 @@ const uploadSubThemeBlogImage = (image: any, name: any) => {
 }
 export const addBlog = async (blog: any) => {
   blog.createdAt = new Date();
+  blog.lastPublished = new Date();
   blog.reference = `${blog.title}-${uuidv4()}`
   blog.path = await uploadBlogImage(blog.path, blog.reference);
   if (blog.subTopic.length > 0) {
@@ -366,6 +367,8 @@ export const getBlogs = async () => {
   return data
 }
 export const updateBlog = async (blog: any, blogId: any) => {
+  blog.lastPublished = new Date();
+  console.log(blog);
   let tempBlog: any = JSON.parse(JSON.stringify(blog))
   if ('format' in tempBlog) {
     console.log('entro')

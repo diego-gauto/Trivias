@@ -4,7 +4,7 @@ import { AdminContain } from "../SideBar.styled";
 import { BlogCard, BlogContainer } from './Blog.styled';
 import router from "next/router";
 import { getBlogs } from '../../../store/actions/AdminActions';
-import { AiFillEdit, AiFillPlusCircle } from 'react-icons/ai';
+import { AiFillEdit } from 'react-icons/ai';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 
 const Blog = () => {
