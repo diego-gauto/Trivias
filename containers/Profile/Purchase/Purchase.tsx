@@ -79,7 +79,9 @@ const Purchase = () => {
     setLoggedIn(false);
   }
 
+  console.log('que chucha es defC', defaultCard, cards)
   const fetchDB_data = async () => {
+    let defaultC: any = {};
     try {
       let temp_cards: any = []
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -90,8 +92,15 @@ const Purchase = () => {
             setCards(res);
             res.forEach((element: any) => {
               temp_cards.push(false)
+              if (e.data().membership.paymentMethod == element.cardId) {
+                element.defaultCard = true;
+                defaultC = element;
+              } else {
+                element.defaultCard = false;
+              }
+              setDefaultCard(defaultC);
             });
-            setDefaultCard(temp_cards)
+
           })
           setUserData({ ...e.data(), id: e.id })
           if (type == 'subscription') {
@@ -139,8 +148,8 @@ const Purchase = () => {
   const setDefault = (idx: any) => {
     setCard({ ...card, brand: cards[idx].brand, last4: cards[idx].last4, paymentMethod: cards[idx].cardId });
     defaultCard.forEach((element: any, index: any) => {
-      if (index == idx) {
-        defaultCard[index] = true
+      if (card.paymentMethod == cards[idx].cardId) {
+        defaultCard[index] = true;
       } else {
         defaultCard[index] = false
       }
@@ -496,9 +505,8 @@ const Purchase = () => {
                   }}>
                     <option value="">--</option>
                     {cards.map((x: any, idC: number) => {
-                      console.log('x value', x.cardId)
                       return (
-                        <option value={idC} selected={x.cardId == 'pm_1Mf4ocAaQg7w1ZH2V2UALECs'}>{x.last4}</option>
+                        <option value={idC} selected={x.cardId == defaultCard.cardId}>{x.last4}</option>
                       )
                     })}
                   </select>}

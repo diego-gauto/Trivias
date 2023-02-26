@@ -112,6 +112,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
             <>
               {pm.length > 0 ? <>
                 {pm.map((pm: any, index: any) => {
+                  console.log('card pm: ', pm)
                   return (
                     <React.Fragment key={"pmUser " + index}>
                       <div className="card-contain" >

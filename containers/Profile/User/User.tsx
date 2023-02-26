@@ -70,6 +70,7 @@ const User = () => {
             temp_pm = res;
             res.forEach((element: any) => {
               if (e.data().membership.paymentMethod == element.cardId) {
+                console.log('element', element)
                 element.default = true;
               } else {
                 element.default = false;
