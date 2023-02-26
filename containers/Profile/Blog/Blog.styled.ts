@@ -8,6 +8,7 @@ export const BlogContainer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 100px;
+  background-color: #ede7f2;
   .title-contain {
     display: flex;
     width: 100%;
@@ -27,7 +28,7 @@ export const BlogItems = styled.div`
   flex-direction: column;
   width: fit-content;
   max-width: 300px;
-  border: 1px solid black;
+  border: 1px solid #c6c6c6;
   .img-contain {
     position: relative;
     cursor: pointer;
