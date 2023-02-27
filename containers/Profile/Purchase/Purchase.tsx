@@ -79,7 +79,6 @@ const Purchase = () => {
     setLoggedIn(false);
   }
 
-  // console.log('que chucha es defC', defaultCard, cards)
   const fetchDB_data = async () => {
     let defaultC: any = {};
     try {
