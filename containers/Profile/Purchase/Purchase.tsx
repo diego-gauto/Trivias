@@ -413,7 +413,8 @@ const Purchase = () => {
   }, [card, plan])
 
   useEffect(() => {
-    if (router.query.type == "subscription" && userData?.membership.level == 1) {
+    let today = new Date().getTime() / 1000;
+    if (router.query.type == "subscription" && userData?.membership.finalDate > today) {
       window.location.href = "/Preview";
     }
     if (userData !== null) {
