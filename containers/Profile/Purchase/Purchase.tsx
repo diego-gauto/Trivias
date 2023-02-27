@@ -491,20 +491,23 @@ const Purchase = () => {
                     }} />
                     <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
                   </div>
-                  <div className="option">
-                    <input type="radio" checked={payment} onClick={() => {
-                      setPayment(!payment),
-                        setCardInfo(false),
-                        setPlan({ method: 'stripe' })
-                      setCard({ ...card, cardId: "" })
-                    }} />
-                    <p>Pagaré con <span>tarjetas guardadas</span></p>
-                  </div>
+                  {cards.length === 0 ? null :
+                    <div className="option">
+                      <input type="radio" checked={payment} onClick={() => {
+                        setPayment(!payment),
+                          setCardInfo(false),
+                          setPlan({ method: 'stripe' })
+                        setCard({ ...card, cardId: "" })
+                      }} />
+                      <p>Pagaré con <span>tarjetas guardadas</span></p>
+                    </div>
+                  }
                   {payment && <select className="cards" onChange={(e) => {
                     // setDefault(e.target.value)
                   }}>
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
+                      console.log(cards)
                       return (
                         <option value={idC} selected={x.cardId == defaultCard.cardId}>{x.last4}</option>
                       )
