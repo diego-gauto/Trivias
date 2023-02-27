@@ -100,6 +100,12 @@ const CreateBlog = () => {
     }
   }
 
+  const removeImage = (index: any) => {
+    let tempBlog: any = blog;
+    tempBlog.subTopic[index].topicPath = ""
+    tempBlog.subTopic[index].topicFormat = ""
+    setBlog({ ...tempBlog })
+  }
   const changeTopicTitle = (topicVal: any, index: number, text: string) => {
     let tempTopic: any = { ...topicVal, topicTitle: text };
     let tempBlog: any = blog;
@@ -278,6 +284,13 @@ const CreateBlog = () => {
                         <BlogInputs>
                           <label className="blog-label">
                             Imagen del subtema {index + 1}
+                            {
+                              topic.topicPath &&
+                              <AiOutlineClose
+                                style={{ cursor: "pointer", marginLeft: 20 }}
+                                onClick={() => removeImage(index)}
+                              />
+                            }
                           </label>
                           <input
                             className="blog-input"
