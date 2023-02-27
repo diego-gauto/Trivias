@@ -79,7 +79,7 @@ const Purchase = () => {
     setLoggedIn(false);
   }
 
-  console.log('que chucha es defC', defaultCard, cards)
+  // console.log('que chucha es defC', defaultCard, cards)
   const fetchDB_data = async () => {
     let defaultC: any = {};
     try {
@@ -146,15 +146,15 @@ const Purchase = () => {
   }, [])
 
   const setDefault = (idx: any) => {
-    setCard({ ...card, brand: cards[idx].brand, last4: cards[idx].last4, paymentMethod: cards[idx].cardId });
-    defaultCard.forEach((element: any, index: any) => {
-      if (card.paymentMethod == cards[idx].cardId) {
-        defaultCard[index] = true;
-      } else {
-        defaultCard[index] = false
-      }
-    });
-    setDefaultCard(defaultCard);
+    // setCard({ ...card, brand: cards[idx].brand, last4: cards[idx].last4, paymentMethod: cards[idx].cardId });
+    // defaultCard.forEach((element: any, index: any) => {
+    //   if (card.paymentMethod == cards[idx].cardId) {
+    //     defaultCard[index] = true;
+    //   } else {
+    //     defaultCard[index] = false
+    //   }
+    // });
+    // setDefaultCard(defaultCard);
   }
 
   const handleConfirm = async () => {
@@ -502,9 +502,9 @@ const Purchase = () => {
                     <p>Pagaré con <span>tarjetas guardadas</span></p>
                   </div>
                   {payment && <select className="cards" onChange={(e) => {
-                    setDefault(e.target.value)
+                    // setDefault(e.target.value)
                   }}>
-                    <option value="">--</option>
+                    <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
                         <option value={idC} selected={x.cardId == defaultCard.cardId}>{x.last4}</option>
