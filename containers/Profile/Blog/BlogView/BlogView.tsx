@@ -74,7 +74,7 @@ const BlogView = () => {
 
   }
   const getBlog = () => {
-    let tempTitle: any = router.query.blog;
+    let tempTitle: any = router.query.slug;
     let titleSearch: string = tempTitle.replaceAll("-", " ");
     let tempBlog: any;
     let allBlogs: any;
