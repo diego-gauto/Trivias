@@ -1,18 +1,51 @@
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
+import { db } from '../../../../firebase/firebaseConfig';
+import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
 import { getBlogs } from '../../../../store/actions/AdminActions';
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles } from './BlogView.styled';
 import { IBlog } from './IBlogView';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
+  const [userData, setUserData] = useState<any>(null);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [blogs, setBlogs] = useState<any>();
   const [blog, setBlog] = useState<IBlog>();
   const [month, setMonth] = useState<string>("");
   const [topicLength, setTopicLength] = useState(0);
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
+  const fetchDB_data = async () => {
+    try {
+      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
+      return onSnapshot(query_1, (response) => {
+
+        response.forEach((e: any) => {
+          setUserData({ ...e.data(), id: e.id });
+        });
+      })
+    } catch (error) {
+      return false
+    }
+  }
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+        router.push("auth/Login")
+      }
+    }, [])
+
+  } catch (error) {
+    console.log(error);
+    setLoggedIn(false);
+  }
   const moveTo = (index: number) => {
     let element = document.getElementById(`box-${index}`);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -23,6 +56,22 @@ const BlogView = () => {
     router.push({ pathname: `/${blogText}` }).then(() => {
       window.location.reload();
     })
+  }
+  const goToCourses = () => {
+    let userDate = userData.membership.finalDate;
+    let curentTime = new Date().getTime() / 1000;
+    if (userData) {
+      if ((userDate > curentTime)) {
+        router.push("/Preview")
+      }
+      else {
+        router.push("/Purchase?type=subscription")
+      }
+    }
+    else {
+      router.push("/Register")
+    }
+
   }
   const getBlog = () => {
     let tempTitle: any = router.query.blog;
@@ -98,6 +147,7 @@ const BlogView = () => {
     setMonth(textMonth)
   }
   useEffect(() => {
+    fetchDB_data();
     getBlog()
   }, [])
   if (!loader) {
@@ -199,7 +249,9 @@ const BlogView = () => {
                             express, técnica de tips, pedicure y mucho más!
                           </p>
                           <div className="button-contain">
-                            <button className="button-gonvar">Inscríbete a solo $149 MXN al mes</button>
+                            <button className="button-gonvar" onClick={goToCourses}>
+                              Inscríbete a solo $149 MXN al mes
+                            </button>
                           </div>
                         </div>
                       </GonvarAd>
