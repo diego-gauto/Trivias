@@ -91,15 +91,17 @@ const CreateBlog = () => {
   }
   const removeTheme = (index: number) => {
     let tempBlog: any = blog;
+    setLoader(false);
     if (confirm(`¿Desea eliminar subtema ${index + 1}?, esto recorrera los otros subtemas`)) {
-      //PENDIENTE REPARAR
       tempBlog.subTopic.splice(index, 1)
       setBlog({ ...tempBlog })
+      setTimeout(() => {
+        setLoader(true);
+      }, 1000)
     } else {
-
     }
-  }
 
+  }
   const removeImage = (index: any) => {
     let tempBlog: any = blog;
     tempBlog.subTopic[index].topicPath = ""

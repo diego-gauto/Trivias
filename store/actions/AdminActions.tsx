@@ -367,6 +367,7 @@ export const getBlogs = async () => {
   return data
 }
 export const updateBlog = async (blog: any, blogId: any) => {
+  delete blog.lastPublished
   blog.lastPublished = new Date();
   console.log(blog);
   let tempBlog: any = JSON.parse(JSON.stringify(blog))

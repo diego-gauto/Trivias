@@ -11,12 +11,19 @@ const BlogView = () => {
   const [blog, setBlog] = useState<IBlog>();
   const [month, setMonth] = useState<string>("");
   const [topicLength, setTopicLength] = useState(0);
-  const getGonvarAdImage = "/images/blog/publicidad.PNG"
+  const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
   const moveTo = (index: number) => {
     let element = document.getElementById(`box-${index}`);
     element?.scrollIntoView({ behavior: "smooth" });
   };
+  const goToBlog = (blog: any) => {
+    setLoader(true);
+    let blogText: any = blog.title.replaceAll(" ", "-");
+    router.push({ pathname: `/${blogText}` }).then(() => {
+      window.location.reload();
+    })
+  }
   const getBlog = () => {
     let tempTitle: any = router.query.blog;
     let titleSearch: string = tempTitle.replaceAll("-", " ");
@@ -170,24 +177,30 @@ const BlogView = () => {
                       index == 0 &&
                       <GonvarAd>
                         <div className="img">
-                          <p className="title">Gonvar +</p>
+                          <p className="title">GONVAR +</p>
                           <img className="img-display" src={getGonvarAdImage} />
                         </div>
                         <div className="all-texts">
-                          <p>Instructores internacionales</p>
-                          <p>Aprende 24/7 desde donde quieras, y
+                          <p className="space">Instructores internacionales</p>
+                          <p className="space">Aprende 24/7 desde donde quieras, y
                             accede a +180 clases ya disponibles.
                           </p>
-                          <p className="text-style">(47 calificaciones)
+                          <p className="text-style space">(47 calificaciones)
                             <span><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /></span>
+                          </p>
+                          <p className="space">
+                            Aprende paso a paso y desde cero, las mejores técnicas de uñas,
+                            por instructores 100% capacitados.
                           </p>
                           <p>Diseño y decoración</p>
                           <p>Técnicas en tendencias</p>
-                          <p>¡Mano alzada, 3D, Stamping, micro-pintura,
+                          <p className="space">¡Mano alzada, 3D, Stamping, micro-pintura,
                             one Stroke, Uñas esculturales, Polygel, técnica
-                            express, técnica de tips, pedicure y much más!
+                            express, técnica de tips, pedicure y mucho más!
                           </p>
-                          <button className="button-gonvar">Inscríbete a solo $149 MXN al mes</button>
+                          <div className="button-contain">
+                            <button className="button-gonvar">Inscríbete a solo $149 MXN al mes</button>
+                          </div>
                         </div>
                       </GonvarAd>
                     }
@@ -199,16 +212,21 @@ const BlogView = () => {
         </div>
         <div className="right-content">
           <RelatedArticles>
-            <p className="titles" onClick={() => { console.log(blogs) }}>ARTÍCULOS RELACIONADOS</p>
-            <div>
-              {
-                blogs.map((blogVar: any, index: number) => {
+            <p className="titles">ARTÍCULOS RELACIONADOS</p>
+            {
+              blogs.map((blogVar: IBlog, index: number) => {
+                return (
                   <div key={"extra text 1" + index} className="cards" >
-                    {blogVar.title}
+                    <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
+                    <p className="title">                {blogVar.title}</p>
+                    {
+                      blogVar.subTitle &&
+                      <p className="sub-title">{blogVar.subTitle}</p>
+                    }
                   </div>
-                })
-              }
-            </div>
+                )
+              })
+            }
           </RelatedArticles>
         </div>
       </div>
@@ -217,6 +235,22 @@ const BlogView = () => {
           <p className="title">
             ARTÍCULOS RELACIONADOS
           </p>
+        </div>
+        <div className="all-cards">
+          {
+            blogs.map((blogVar: IBlog, index: any) => {
+              return (
+                <div key={"extra text 1" + index} className="cards" >
+                  <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
+                  <p className="title">                {blogVar.title}</p>
+                  {
+                    blogVar.subTitle &&
+                    <p className="sub-title">{blogVar.subTitle}</p>
+                  }
+                </div>
+              )
+            })
+          }
         </div>
       </BottomSection>
 
