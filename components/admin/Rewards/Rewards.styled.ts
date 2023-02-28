@@ -47,6 +47,7 @@ export const RewardContain = styled.div`
     .tr {
       display: flex;
       border-bottom: 1px solid gray;
+      font-size: 12px;
       * {
         padding: 10px;
         flex: 0 25%;
