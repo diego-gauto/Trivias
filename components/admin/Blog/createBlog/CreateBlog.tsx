@@ -258,6 +258,7 @@ const CreateBlog = () => {
                   <input
                     className="blog-input"
                     type="file"
+                    style={{ width: "90%" }}
                     onChange={(e) => { getImage(e.target.files) }}
                   />
                 </BlogInputs>

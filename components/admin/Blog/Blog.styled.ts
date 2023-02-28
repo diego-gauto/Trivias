@@ -8,6 +8,7 @@ export const BlogContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 40px;
+  gap: 30px;
   .title-contain {
     display: flex;
     justify-content: space-between;
@@ -34,7 +35,10 @@ export const BlogContainer = styled.div`
   }
   .blogs {
     display: grid;
-    margin-top: 50px;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+    grid-template-columns: repeat(2, 300px);
   }
 `;
 export const BlogCard = styled.div`

@@ -20,13 +20,32 @@ export const BlogContainer = styled.div`
     }
   }
   .blogs {
-    padding-inline: 5%;
+    display: grid;
+    justify-content: center;
+    column-gap: 10%;
+    row-gap: 50px;
+    margin-bottom: 50px;
+    grid-template-columns: repeat(3, 300px);
+    @media (max-width: 1200px) {
+      column-gap: 5%;
+    }
+    @media (max-width: 1100px) {
+      column-gap: 3%;
+    }
+    @media (max-width: 1023px) {
+      row-gap: 30px;
+      grid-template-columns: repeat(2, 300px);
+    }
+    @media (max-width: 650px) {
+      grid-template-columns: repeat(1, 300px);
+    }
   }
 `;
 export const BlogItems = styled.div`
   display: flex;
   flex-direction: column;
   width: fit-content;
+  height: fit-content;
   max-width: 300px;
   border: 1px solid #c6c6c6;
   .img-contain {

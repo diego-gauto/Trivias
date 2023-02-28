@@ -1,26 +1,37 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { AiFillStar } from 'react-icons/ai';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
 import { getBlogs } from '../../../../store/actions/AdminActions';
-import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, RelatedArticles } from './BlogView.styled';
+import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles } from './BlogView.styled';
 import { IBlog } from './IBlogView';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
+  const [blogs, setBlogs] = useState<any>();
   const [blog, setBlog] = useState<IBlog>();
   const [month, setMonth] = useState<string>("");
+  const [topicLength, setTopicLength] = useState(0);
+  const getGonvarAdImage = "/images/blog/publicidad.PNG"
   const router = useRouter();
-
-
   const moveTo = (index: number) => {
     let element = document.getElementById(`box-${index}`);
     element?.scrollIntoView({ behavior: "smooth" });
   };
-
   const getBlog = () => {
     let tempTitle: any = router.query.blog;
     let titleSearch: string = tempTitle.replaceAll("-", " ");
     let tempBlog: any;
+    let allBlogs: any;
     getBlogs().then((res) => {
+      allBlogs = res.filter((blog: IBlog) => blog.title !== titleSearch);
+      if (allBlogs.length > 4) {
+        let shuffleBlog = allBlogs.sort((a: any, b: any) => 0.5 - Math.random());
+        shuffleBlog.splice(4);
+        setBlogs(shuffleBlog);
+      }
+      else {
+        setBlogs(allBlogs);
+      }
       tempBlog = res.filter((blog: IBlog) => blog.title === titleSearch);
       tempBlog.forEach((element: IBlog) => {
         let tempDate: any = new Date(element.createdAt.seconds * 1000);
@@ -34,7 +45,7 @@ const BlogView = () => {
           year: tempYear,
         };
       })
-
+      setTopicLength(tempBlog[0].subTopic.length)
       setBlog(tempBlog[0])
       setLoader(true);
     })
@@ -132,6 +143,14 @@ const BlogView = () => {
                   )
                 })
               }
+              <div className="section-title">
+                <p className="number">
+                  {topicLength + 1}.
+                </p>
+                <p className="topic-title" onClick={() => moveTo(topicLength + 1)}>
+                  ARTÍCULOS RELACIONADOS
+                </p>
+              </div>
             </div>
           </BoxSection>
           <ContentContainer>
@@ -147,6 +166,31 @@ const BlogView = () => {
                         <img src={topic.topicPath} />
                       </div>
                     }
+                    {
+                      index == 0 &&
+                      <GonvarAd>
+                        <div className="img">
+                          <p className="title">Gonvar +</p>
+                          <img className="img-display" src={getGonvarAdImage} />
+                        </div>
+                        <div className="all-texts">
+                          <p>Instructores internacionales</p>
+                          <p>Aprende 24/7 desde donde quieras, y
+                            accede a +180 clases ya disponibles.
+                          </p>
+                          <p className="text-style">(47 calificaciones)
+                            <span><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /></span>
+                          </p>
+                          <p>Diseño y decoración</p>
+                          <p>Técnicas en tendencias</p>
+                          <p>¡Mano alzada, 3D, Stamping, micro-pintura,
+                            one Stroke, Uñas esculturales, Polygel, técnica
+                            express, técnica de tips, pedicure y much más!
+                          </p>
+                          <button className="button-gonvar">Inscríbete a solo $149 MXN al mes</button>
+                        </div>
+                      </GonvarAd>
+                    }
                   </div>
                 )
               })
@@ -155,12 +199,21 @@ const BlogView = () => {
         </div>
         <div className="right-content">
           <RelatedArticles>
-            <p className="titles">ARTÍCULOS RELACIONADOS</p>
+            <p className="titles" onClick={() => { console.log(blogs) }}>ARTÍCULOS RELACIONADOS</p>
+            <div>
+              {
+                blogs.map((blogVar: any, index: number) => {
+                  <div key={"extra text 1" + index} className="cards" >
+                    {blogVar.title}
+                  </div>
+                })
+              }
+            </div>
           </RelatedArticles>
         </div>
       </div>
       <BottomSection>
-        <div className="title-contain">
+        <div className="title-contain" id={`box-${topicLength + 1}`}>
           <p className="title">
             ARTÍCULOS RELACIONADOS
           </p>

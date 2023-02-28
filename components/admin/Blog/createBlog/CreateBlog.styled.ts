@@ -86,9 +86,11 @@ export const BlogBackground = styled.div`
     .blog-form {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       gap: 30px;
       .blog-row {
         display: flex;
+        justify-content: space-between;
         width: 100%;
         gap: 20px;
       }

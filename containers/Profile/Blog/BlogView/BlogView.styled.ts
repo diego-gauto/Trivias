@@ -5,7 +5,7 @@ export const BlogContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  background-color: #ede7f2;
+  // background-color: #ede7f2;
   padding-block: 10px;
   padding-inline: min(100px, 5%);
   .content {
@@ -19,7 +19,7 @@ export const BlogContainer = styled.div`
       width: 60%;
     }
     .right-content {
-      width: 20%;
+      width: 24%;
     }
   }
 `;
@@ -138,6 +138,7 @@ export const ContentContainer = styled.div`
     }
     .topic-image {
       img {
+        width: 100%;
       }
     }
   }
@@ -145,6 +146,8 @@ export const ContentContainer = styled.div`
 export const RelatedArticles = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
+  gap: 20px;
   p {
     margin: 0;
   }
@@ -153,6 +156,15 @@ export const RelatedArticles = styled.div`
     font-weight: 500;
   }
   .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .title {
+    }
+    .sub-title {
+    }
+    .img {
+    }
   }
 `;
 export const BottomSection = styled.div`
@@ -168,6 +180,49 @@ export const BottomSection = styled.div`
     .title {
       font-size: 20px;
       font-weight: 500;
+    }
+  }
+`;
+export const GonvarAd = styled.div`
+  display: flex;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid #c6c6c6;
+  padding: 20px;
+  .img {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0;
+    }
+    .img-display {
+      width: 100%;
+    }
+  }
+  .all-texts {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 5px;
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
+    .text-style {
+      span {
+        color: #b746cd;
+      }
+    }
+    .button-gonvar {
+      border-block: 5px;
+      border-inline: 15px;
+      color: white;
+      font-weight: 600;
+      background-color: linear-gradient(218deg, #8300e9 26%, #b746cd 95%);
     }
   }
 `;
