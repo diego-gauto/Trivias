@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill';
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import { BlogBackground, BlogInputs } from './CreateBlog.styled';
 import 'react-quill/dist/quill.snow.css';
 import { text } from 'stream/consumers';
@@ -11,6 +11,7 @@ import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
 import router, { useRouter } from "next/router";
 import { MdKeyboardReturn } from 'react-icons/md';
 import { GiExitDoor } from 'react-icons/gi';
+import dynamic from 'next/dynamic';
 const CreateBlog = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [processLoader, setProcessLoader] = useState<boolean>(false);

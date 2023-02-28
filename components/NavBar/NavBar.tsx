@@ -86,6 +86,10 @@ const NavBar = () => {
         var userData: any;
         response.forEach((e) => {
           userData = e.data()
+          if (userData.role == "admin" && (!("adminType" in userData))) {
+            addAdmintypes(e.id);
+          }
+          //AQUI VA
         });
         setUserData(userData)
         if (userData.role == "admin") {
@@ -97,7 +101,7 @@ const NavBar = () => {
       return false
     }
   }
-  const addAdmintypes = async () => {
+  const addAdmintypes = async (id: any) => {
     const createAdminType: any = {
       general: true,
       pay: false,
@@ -108,7 +112,7 @@ const NavBar = () => {
       users: false,
       superAdmin: false
     }
-    const docRef = doc(db, 'users', userData.id);
+    const docRef = doc(db, 'users', id);
     await updateDoc(docRef, {
       adminType: createAdminType,
     }).then(() => {
@@ -138,11 +142,6 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
-    if (userData != null) {
-      if (userData.role == "admin" && (!("adminType" in userData))) {
-        addAdmintypes();
-      }
-    }
   }, [userData]);
   useEffect(
     () => {
