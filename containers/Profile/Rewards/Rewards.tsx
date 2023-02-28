@@ -251,7 +251,6 @@ const Rewards = () => {
       getCurrentTimeLevel();
     }
   }, [userData]);
-
   if (loading) {
     return (
       <Background style={{ alignItems: "center", justifyContent: "center" }}>

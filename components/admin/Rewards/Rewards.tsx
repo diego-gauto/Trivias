@@ -81,6 +81,8 @@ const Rewards = () => {
         <div className="request-container">
           <div className="row-titles">
             <p>Nombre</p>
+            <p>Telefono</p>
+            <p>Correo</p>
             <p>Producto</p>
             <p>Fecha</p>
             <p>Status</p>
@@ -89,6 +91,8 @@ const Rewards = () => {
             return (
               <div className="tr" key={"RequestTable " + index}>
                 <p>{request.user}</p>
+                <p>{request.phoneNumber}</p>
+                <p>{request.email}</p>
                 <p>{request.title}</p>
                 <p>{formatDate(request.createAt)}</p>
                 <p style={{ background: request.status ? "#33c600" : "#e70000", color: "#fff", cursor: "pointer" }}
