@@ -104,11 +104,10 @@ const Preview = () => {
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
-
   return (
     <>
       <PreviewContain>
-        <Module1 user={userData} allCourses={courses[0]} isLoading={isLoading} professor={professors} />
+        <Module1 user={userData} allCourses={courses[12]} isLoading={isLoading} professor={professors} />
         <ModuleContain>
           {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} professor={professors} />}
           {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}

@@ -71,19 +71,18 @@ const Module1 = ({ user, allCourses, isLoading, professor }: any) => {
         let date = new Date().getTime() / 1000;
         getPaidCourses(user.id).then((paid: any) => {
           getViewedCourses(user.id).then((res) => {
-            if (res && res.length > 0) {
-
-              if (paid.some((x: any) => x.id == res[0].documentID && date < x.finalDate)) {
-                res[0].paid = true;
+            if (allCourses && allCourses.length > 0) {
+              if (paid.some((x: any) => x.id == allCourses.documentID && date < x.finalDate)) {
+                allCourses.paid = true;
               } else {
-                res[0].paid = false;
+                allCourses.paid = false;
               }
 
-              setHistoryCourse(res[0]);
+              setHistoryCourse(allCourses);
             }
             else {
               allCourses.lesson = 0;
-              allCourses.season = 0;
+              allCourses.season = 1;
               setHistoryCourse(allCourses);
             }
             setTimeout(() => {
@@ -93,7 +92,7 @@ const Module1 = ({ user, allCourses, isLoading, professor }: any) => {
         })
       } else {
         allCourses.lesson = 0;
-        allCourses.season = 0;
+        allCourses.season = 1;
         setHistoryCourse(allCourses);
         setTimeout(() => {
           setLoading(false);
