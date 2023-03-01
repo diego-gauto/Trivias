@@ -88,7 +88,8 @@ const AddLesson = () => {
         [{ size: ["small", false, "large", "huge"] }, {
           color: [
             "red",
-            "blue"
+            "blue",
+            "#6717cd",
           ]
         }],
         [

@@ -87,7 +87,8 @@ const Edit = () => {
         [{ size: ["small", false, "large", "huge"] }, {
           color: [
             "red",
-            "blue"
+            "blue",
+            "#6717cd",
           ]
         }],
         [
