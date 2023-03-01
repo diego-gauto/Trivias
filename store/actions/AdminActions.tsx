@@ -372,7 +372,6 @@ export const updateBlog = async (blog: any, blogId: any) => {
   console.log(blog);
   let tempBlog: any = JSON.parse(JSON.stringify(blog))
   if ('format' in tempBlog) {
-    console.log('entro')
     tempBlog.image = await uploadBlogImage(tempBlog.path, tempBlog.reference);
     delete tempBlog.format
   }

@@ -2,11 +2,12 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
+import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
 import { getBlogs } from '../../../../store/actions/AdminActions';
-import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles } from './BlogView.styled';
+import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
 import { IBlog } from './IBlogView';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
@@ -261,6 +262,19 @@ const BlogView = () => {
               })
             }
           </ContentContainer>
+          {
+            blog?.link &&
+            <VideoBlog>
+              <ReactPlayer
+                url={blog.link}
+                playing={true}
+                muted={false}
+                controls
+                width="100%" height="100%"
+              />
+            </VideoBlog>
+          }
+
         </div>
         <div className="right-content">
           <RelatedArticles>

@@ -376,3 +376,6 @@ export const GonvarAd = styled.div`
     }
   }
 `;
+export const VideoBlog = styled.div`
+  display: flex;
+`;

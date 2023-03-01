@@ -22,6 +22,7 @@ const CreateBlog = () => {
     title: "",
     subTitle: "",
     path: "",
+    link: "",
     subTopic: [],
   });
   const [topic, setTopic] = useState<any>({
@@ -302,6 +303,23 @@ const CreateBlog = () => {
                     type="file"
                     style={{ width: "90%" }}
                     onChange={(e) => { getImage(e.target.files) }}
+                  />
+                </BlogInputs>
+              </div >
+              <div className="blog-row">
+                <BlogInputs>
+                  <label className="blog-label">
+                    Link de Video ( Opcional )
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+                    defaultValue={blog.link}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, link: e.target.value
+                      })
+                    }}
                   />
                 </BlogInputs>
               </div>
