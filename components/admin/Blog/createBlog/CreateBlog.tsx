@@ -46,6 +46,7 @@ const CreateBlog = () => {
           { indent: "+1" },
           { align: [] }
         ],
+        ['link', 'image', 'video'],
         ["clean"]
       ],
     },
@@ -62,6 +63,9 @@ const CreateBlog = () => {
     "list",
     "bullet",
     "indent",
+    "link",
+    "image",
+    "video",
     "align"
   ];
   const { blogId } = routerState;
