@@ -17,6 +17,7 @@ const CreateBlog = () => {
   const routerState = useRouter().query
   const [image, setImage] = useState<any>("");
   const [quill, setQuill] = useState("");
+  const [blogs, setBlogs] = useState<any>([]);
   const [blog, setBlog] = useState<any>({
     title: "",
     subTitle: "",
@@ -37,6 +38,7 @@ const CreateBlog = () => {
             "red",
             "blue",
             "#6717cd",
+            "black",
           ]
         }],
         [
@@ -150,17 +152,47 @@ const CreateBlog = () => {
     //   console.log(res);
     //   addBlog(res)
     // })
-    addBlog(blog).then(() => {
-      router.push({ pathname: "/admin/Blog" })
+    let checkTitles: number = 0;
+    blogs.forEach((element: any) => {
+      if (element.title === blog.title) {
+        checkTitles++;
+      }
+    });
+    if (blog.path === "") {
+      alert("Seleccione una imagen");
       setProcessLoader(false);
-    })
+    }
+    else {
+      if (checkTitles > 0) {
+        alert("Titulo repetido, elija uno diferente")
+        setProcessLoader(false);
+      }
+      else {
+        addBlog(blog).then(() => {
+          router.push({ pathname: "/admin/Blog" })
+          setProcessLoader(false);
+        })
+      }
+    }
   }
   const editBlog = async () => {
     setProcessLoader(true);
-    updateBlog(blog, blog.id).then(() => {
-      router.push({ pathname: "/admin/Blog" })
+    let checkTitles: number = 0;
+    blogs.forEach((element: any) => {
+      if (element.title === blog.title) {
+        checkTitles++;
+      }
+    });
+    if (checkTitles > 0) {
+      alert("Titulo repetido, elija uno diferente")
       setProcessLoader(false);
-    })
+    }
+    else {
+      updateBlog(blog, blog.id).then(() => {
+        router.push({ pathname: "/admin/Blog" })
+        setProcessLoader(false);
+      })
+    }
   }
   const deleteBlock = async () => {
     if (confirm("¿Quieres eliminar este blog?, Esta acción no tiene marcha atrás.")) {
@@ -174,19 +206,22 @@ const CreateBlog = () => {
   }
   const getNewBlog = () => {
     let tempBlog: any;
+    let tempAllBlogs: any;
     getBlogs().then((res) => {
-      tempBlog = res.filter((allBlogs: any) => allBlogs.id == blogId)
-      setBlog(tempBlog[0]);
+      if (blogId) {
+        tempAllBlogs = res.filter((allBlogs: any) => allBlogs.id !== blogId)
+        tempBlog = res.filter((allBlogs: any) => allBlogs.id === blogId)
+        setBlog(tempBlog[0]);
+        setBlogs(tempAllBlogs);
+      }
+      else {
+        setBlogs(res);
+      }
       setLoader(true);
     })
   }
   useEffect(() => {
-    if (blogId) {
-      getNewBlog();
-    }
-    else {
-      setLoader(true);
-    }
+    getNewBlog();
   }, [quill])
   return (
     <BlogBackground>
