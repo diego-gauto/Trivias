@@ -2,6 +2,7 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
+import { BsFacebook, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -173,6 +174,12 @@ const BlogView = () => {
           <p className="date">
             por Gonvar | {blog?.date.day} de {month} de {blog?.date.year}
           </p>
+          <div className="socials">
+            <BsFacebook className="icon" />
+            <BsTwitter className="icon" />
+            <BsLinkedin className="icon" />
+            <BsPrinterFill className="icon" />
+          </div>
         </div>
         <div className="img-container">
           <img src={blog?.path} />
