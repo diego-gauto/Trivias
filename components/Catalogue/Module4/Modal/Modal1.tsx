@@ -155,12 +155,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 </Cross>
               </div>
               <TextContainer>
-                <p className="course">CURSO</p>
-                <p className="title">{course.courseTittle}</p>
+                {/* <p className="course">CURSO</p>
+                <p className="title">{course.courseTittle}</p> */}
                 {course.courseType == "Producto" && <p className="price">por ${course.coursePrice?.toLocaleString('en-US')} <span>MXN</span></p>}
-                <PurpleButton onClick={goTo}>
+                <button onClick={goTo}>
                   Comenzar ahora
-                </PurpleButton>
+                </button>
               </TextContainer>
             </Container>
           </ModalBackground>

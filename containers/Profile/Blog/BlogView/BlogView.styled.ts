@@ -70,9 +70,19 @@ export const FirstSection = styled.div`
       font-weight: 500;
       margin: 0;
     }
-    // .socials{
-    //   display: flex;
-    // }
+    .socials {
+      display: flex;
+      padding: 20px;
+      gap: 30px;
+      .icon {
+        font-size: 18px;
+        opacity: 0.8;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.1;
+        }
+      }
+    }
   }
   .img-container {
     display: flex;

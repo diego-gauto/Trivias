@@ -105,7 +105,13 @@ export const TextContainer = styled.div`
   gap: 2px;
   align-items: center;
   text-align: center;
-  padding-block-end: 40px;
+  padding-block-end: 15px;
+  @media (max-width: 991px) {
+    padding-block-end: 8px;
+  }
+  @media (max-width: 450px) {
+    padding-block-end: 4px;
+  }
   p {
     color: white;
     margin: 0;
@@ -128,11 +134,33 @@ export const TextContainer = styled.div`
     font-size: 20px;
     font-weight: 700;
   }
+
   button {
-    margin-block-start: 30px;
-    padding-inline: 20px;
-    @media (max-width: 990px) {
-      font-size: 14px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    justify-content: center;
+    padding-inline: 15px;
+    padding-block: 8px;
+    background: linear-gradient(135deg, #952ced 22%, #ca41d4 80%);
+    color: #fff;
+    border-radius: 100px;
+    border: none;
+    &:hover {
+      background-color: #5000b5;
+      transform: scale(1.03);
+      transition: 0.5s ease all;
+    }
+    @media (max-width: 991px) {
+      font-size: 12px;
+      padding-block: 6px;
+    }
+    @media (max-width: 450px) {
+      padding-block: 4px;
+      font-size: 10px;
     }
   }
 `;
