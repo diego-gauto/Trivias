@@ -57,7 +57,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
         <TitleContain>
-          <Title>Nueva Recompensa</Title>
+          <Title>Editar Recompensa</Title>
           <CloseIcon onClick={() => { setShow(false) }} />
         </TitleContain>
         <InputContain>
@@ -95,7 +95,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
           <select value={type} onChange={(e) => { setType(e.target.value) }}>
             <option value="points">Puntos</option>
             <option value="months">Tiempo</option>
-            <option value="certificates">Certificados</option>
+            {/* <option value="certificates">Certificados</option> */}
           </select>
         </InputContain>
         {type == "points" && <InputContain>

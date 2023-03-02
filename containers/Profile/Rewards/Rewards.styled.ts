@@ -311,7 +311,7 @@ export const RewardCardContainer = styled.div<{
     padding-inline: 40px 30px;
     background-color: #3f1168;
     border-radius: 300px 0 0 300px;
-    white-space: nowrap;
+    max-width: 300px;
     @media (max-width: 550px) {
       padding-inline: 40px 5px;
     }
@@ -325,11 +325,14 @@ export const RewardCardContainer = styled.div<{
         color: #fedd67;
       }
       .next-reward-title{
+        white-space:nowrap;
         color:#ede7f2;
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
         span{
+          white-space:initial;
+          font-size: 14px;
           color: #fedd67;
           font-weight: 600;
         }         

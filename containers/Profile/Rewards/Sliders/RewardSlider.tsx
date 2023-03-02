@@ -10,16 +10,25 @@ SwiperCore.use([Autoplay]);
 const RewardSlider = (props: reward_slider) => {
 
   let [counter, setCounter] = useState<any>(0);
-  const { score, months, certificates, rewards, type, innerWidth, indexSlider, user, userReward, getAllUserRewards } = props;
+  const {
+    score,
+    months,
+    certificates,
+    rewards,
+    type,
+    innerWidth,
+    indexSlider,
+    user,
+    userReward,
+    getAllUserRewards,
+    courses,
+    completeCertificates } = props;
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
-
-
   const [texts, setTexts] = useState<any>({
     header: "",
     title: "",
   })
-
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   const getSliders = () => {
     let slides: any = [];
@@ -86,37 +95,50 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-certificates") {
-      tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
-      tempFilter.sort((a: any, b: any) => a.certificates - b.certificates);
-      tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.id == element.id && x.status)) {
-          slides.push(element);
-        }
-      });
+
+      // tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
+      // tempFilter.forEach((element: any) => {
+      //   if (userReward.find((x: any) => x.id == element.id && x.status)) {
+      //     slides.push(element);
+      //   }
+      // });
+      // tempFilter = courses;
+      // tempFilter.sort((a: any, b: any) => a.total - b.total);
+      // slides = tempFilter;
+      tempFilter = completeCertificates;
+      console.log(tempFilter);
+      slides = tempFilter;
       setTexts({
         header: "Certificados Acumulados",
-        title: "Beneficio desbloqueado",
-        scoreText: "por completar",
+        title: "Curso completado",
+        scoreText: "Obtener Certificado",
       })
     }
     if (type == "certificates") {
-      tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
-      tempFilter.sort((a: any, b: any) => a.certificates - b.certificates)
-      tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.id == element.id && !x.status)) {
-          slides.push(element);
-        }
-        if (!userReward.find((x: any) => x.id == element.id)) {
-          slides.push(element);
-        }
-      });
+      // tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
+      // tempFilter.sort((a: any, b: any) => a.certificates - b.certificates)
+      // tempFilter.forEach((element: any) => {
+      //   if (userReward.find((x: any) => x.id == element.id && !x.status)) {
+      //     slides.push(element);
+      //   }
+      //   if (!userReward.find((x: any) => x.id == element.id)) {
+      //     slides.push(element);
+      //   }
+      // });
+      tempFilter = courses;
+      tempFilter.sort((a: any, b: any) => a.total - b.total);
+      slides = tempFilter;
       setTexts({
         header: "Certificados por desbloquear",
-        title: "Beneficio bloqueado",
-        scoreText: "al completar",
+        title: "Certificado bloqueado",
+        scoreText: "hasta completar ",
       })
     }
     setSlides(slides)
+  }
+
+  const moveToCertificate = () => {
+
   }
   const showRewardData = (index: any, rewardPoints: any) => {
     if (index == openRewardInfo) {
@@ -220,11 +242,9 @@ const RewardSlider = (props: reward_slider) => {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
-
   useEffect(() => {
     getSliders();
   }, [rewards, type])
-
   return (
     <BackgroundSlide type={type}>
       <h1>
@@ -247,17 +267,34 @@ const RewardSlider = (props: reward_slider) => {
                       <div className="text-container">
                         <p className="title-text">
                           <span>{texts.title}</span><br />
-                          {texts.scoreText} {reward.points && reward.points + " puntos"}
+                          {texts.scoreText}
+                          {reward.points && reward.points + " puntos"}
                           {reward.months ? (reward.months == 1 ? reward.months + " mes" : reward.months + " meses") : ""}
-                          {reward.certificates ? (reward.certificates == 1 ? reward.certificates + " certificado" : reward.certificates + " certificados") : ""}
+                          {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : ""}
                         </p>
+                        {/* {
+                          reward.total &&
+                          <div className="progress-bar">
+                            <div className="progress-complete">
+
+                            </div>
+                          </div>
+                        } */}
                       </div>
-                      <div className='img-complete'>
-                        <img src={reward?.path} className="image-container" />
+                      <div className='img-complete' style={(type == "claim-certificates" || type == "certificates") ? { height: 150, borderRadius: 10 } : {}}>
+                        <img src={reward?.path} className="image-container" style={(type == "claim-certificates" || type == "certificates") ? { borderRadius: 10 } : {}} />
                         <div className="btn-contain">
                           {
-                            (type == "claim-months" || type == "claim-points" || type == "claim-certificates"
-                              || (score < reward.points) || months < reward.months || certificates < reward.certificates) &&
+                            type == "claim-certificates" &&
+                            <button className="btn-info" onClick={() => moveToCertificate()}>
+                              <p className='text'>
+                                Ver certificado
+                              </p>
+                            </button>
+                          }
+                          {
+                            (type == "claim-months" || type == "claim-points" || type == "certificates"
+                              || (score < reward.points) || months < reward.months) &&
                             <button className="btn-info" onClick={() => showRewardData(index, reward.points)}>
                               <p className='text'>
                                 Más información
@@ -322,7 +359,6 @@ const RewardSlider = (props: reward_slider) => {
           </div>
           : <p className="un-claimed">Sin Recompensas Reclamadas...</p>
       }
-
     </BackgroundSlide>
   )
 }

@@ -9,6 +9,8 @@ export interface reward_slider {
   indexSlider: number;
   userReward: any;
   getAllUserRewards: any;
+  courses: course[];
+  completeCertificates: courses[];
 }
 interface SlideObj {
   id: string;
@@ -21,3 +23,10 @@ interface SlideObj {
   productType: string;
   type: string;
 }
+interface course {
+  lessonsLeft: number;
+  maxLessons: number;
+  total: number;
+  name: string;
+}
+interface courses {}

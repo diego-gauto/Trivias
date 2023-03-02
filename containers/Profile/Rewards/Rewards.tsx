@@ -17,12 +17,16 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
 import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
+import { getNextCertificate } from "../../../store/actions/courseActions";
+import { title } from "process";
 
 const Rewards = () => {
 
   const [rewards, setRewards] = useState<any>([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const [courses, setCourses] = useState<any>([]);
+  const [completeCertificates, setCompleteCertificates] = useState<any>([])
   const [loading, setLoading] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [rewardsTypes, setRewardsTypes] = useState([]);
@@ -85,10 +89,10 @@ const Rewards = () => {
       setAllSlider(tempSlides)
     }
   }
-  const getAllRewards = () => {
+  const getAllRewards = (nextCertificate: any) => {
     getRewards().then((res) => {
       setRewards(res);
-      getNextRewards(res);
+      getNextRewards(res, nextCertificate);
     })
   }
   const getCurrentTimeLevel = () => {
@@ -104,7 +108,57 @@ const Rewards = () => {
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
   }
-  const getNextRewards = (res: any) => {
+  const getNextCertificates = () => {
+    let counter: number = 0;
+    let totalLessons: number = 0;
+    let maxTtotalLessons: number = 0;
+    let average: number = 0;
+    let arrCourse: any = [];
+    let maximum: any = 0;
+    let certCourses: any = [];
+    getNextCertificate().then((res: any) => {
+      res.map((course: any) => {
+        if (userData?.certificates) {
+          userData?.certificates.forEach((cert: any) => {
+            if (cert.courseId == course.id) {
+              certCourses.push({ title: course.courseTittle, path: course.coursePath });
+            }
+          })
+        }
+        setCompleteCertificates(certCourses);
+        course.lessons.map((lesson: any) => {
+          lesson.users.map((userID: any) => {
+            if (userData.id === userID) {
+              counter = counter + 1;
+            }
+          })
+        })
+        maxTtotalLessons = course.lessons.length;
+        average = counter / maxTtotalLessons;
+        totalLessons = maxTtotalLessons - counter;
+        if (average == 1) {
+          counter = 0;
+        }
+        if (counter > 0) {
+          arrCourse.push({
+            total: average,
+            title: course.courseTittle,
+            lessonsLeft: totalLessons,
+            maxLessons: maxTtotalLessons,
+            type: "certificates",
+            path: course.coursePath,
+            about: course.courseAbout,
+          })
+          counter = 0;
+        }
+      })
+      maximum = Math.max(...arrCourse.map((val: any) => val.total));
+      setCourses(arrCourse);
+      arrCourse = arrCourse.filter((val: any) => val.total == maximum);
+      getAllRewards(arrCourse[0]);
+    })
+  }
+  const getNextRewards = (res: any, nextCertificate: any) => {
     let pointsFilter = [];
     let previousRewardPoints: any = [];
     let progressPoints: number = 0;
@@ -113,10 +167,7 @@ const Rewards = () => {
     let previousRewardMonths: any = [];
     let progressMonths: number = 0;
     let monthsLength = [];
-    let certificatesFilter = [];
-    let previousRewardCertificates: any = [];
-    let certificateLength = [];
-    let tempCertificatesLength: number = userData.certificates?.length;
+    let certificatesCompleted: number = userData.certificates?.length;
     let progressCertificates: number = 0;
     pointsFilter = res.filter((reward: any) => (reward.type == "points" && userData.score < reward.points));
     previousRewardPoints = res.filter((reward: any) => (reward.type == "points" && userData.score >= reward.points));
@@ -124,14 +175,6 @@ const Rewards = () => {
     monthsFilter = res.filter((reward: any) => (reward.type == "months" && timeLevel < reward.months));
     previousRewardMonths = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
     monthsLength = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
-    if (tempCertificatesLength) {
-      certificatesFilter = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength < reward.certificates));
-      certificateLength = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength >= reward.certificates));
-      previousRewardCertificates = res.filter((reward: any) => (reward.type == "certificates" && tempCertificatesLength >= reward.certificates));
-    }
-    else {
-      certificatesFilter = res.filter((reward: any) => (reward.type == "certificates" && 0 < reward.certificates));
-    }
     if (previousRewardPoints.length == 0) {
       previousRewardPoints = [{
         points: 0,
@@ -142,17 +185,10 @@ const Rewards = () => {
         months: 0,
       }]
     }
-    if (previousRewardCertificates.length == 0) {
-      previousRewardCertificates = [{
-        certificates: 0,
-      }]
-    }
     pointsFilter.sort((a: any, b: any) => a.points - b.points)
     monthsFilter.sort((a: any, b: any) => a.months - b.months)
-    certificatesFilter.sort((a: any, b: any) => a.certificates - b.certificates)
     previousRewardPoints.sort((a: any, b: any) => b.points - a.points)
     previousRewardMonths.sort((a: any, b: any) => b.months - a.months)
-    previousRewardCertificates.sort((a: any, b: any) => b.certificates - a.certificates)
     if (pointsFilter.length == 0) {
       pointsFilter = [{
         points: 0,
@@ -171,23 +207,15 @@ const Rewards = () => {
     else {
       progressMonths = 565 - (((monthProgress - previousRewardMonths[0].months) / (monthsFilter[0].months - previousRewardMonths[0].months)) * 565)
     }
-    if (certificatesFilter.length == 0) {
-      certificatesFilter = [{
-        certificates: 0,
-        title: "Sin Recompensas"
-      }]
+    if (nextCertificate) {
+      progressCertificates = ((1 - nextCertificate.total) * 565);
     }
     else {
-      if (tempCertificatesLength) {
-        progressCertificates = 565 - (((tempCertificatesLength - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
-      }
-      else {
-        progressCertificates = 565 - (((0 - previousRewardCertificates[0].certificates) / (certificatesFilter[0].certificates - previousRewardCertificates[0].certificates)) * 565);
-      }
+      progressCertificates = 0;
     }
-    getRewardTexts(pointsFilter[0], pointsLength, progressPoints, monthsFilter[0], monthsLength, progressMonths, certificatesFilter[0], certificateLength, progressCertificates);
+    getRewardTexts(pointsFilter[0], pointsLength, progressPoints, monthsFilter[0], monthsLength, progressMonths, progressCertificates, nextCertificate, certificatesCompleted);
   }
-  const getRewardTexts = (pointsFilter: any, pointsLength: any, progressPoints: number, monthsFilter: any, monthsLength: any, monthProgress: any, certificatesFilter: any, certificateLength: any, progressCertificates: any) => {
+  const getRewardTexts = (pointsFilter: any, pointsLength: any, progressPoints: number, monthsFilter: any, monthsLength: any, monthProgress: any, progressCertificates: any, nextCertificate: any, certificatesCompleted: any) => {
     let arrayRewards: any = [
       {
         type: "points",
@@ -210,10 +238,10 @@ const Rewards = () => {
       {
         type: "certificates",
         scoreType: "certificados",
-        score: userData.certificates?.length ? userData.certificates?.length : 0,
-        title: certificatesFilter.title,
-        certificates: userData.certificates?.length ? certificatesFilter.certificates - userData.certificates?.length : certificatesFilter.certificates - 0,
-        completed: certificateLength.length,
+        score: certificatesCompleted ? certificatesCompleted : 0,
+        title: nextCertificate.title ? nextCertificate.title : "Sin certificados",
+        certificates: nextCertificate.lessonsLeft,
+        completed: certificatesCompleted ? certificatesCompleted : 0,
         progress: progressCertificates,
       },
     ];
@@ -243,11 +271,10 @@ const Rewards = () => {
     fetchDB_data()
 
   }, [])
-
   useEffect(() => {
     if (userData != null) {
       getAllUserRewards();
-      getAllRewards();
+      getNextCertificates();
       getCurrentTimeLevel();
     }
   }, [userData]);
@@ -316,11 +343,22 @@ const Rewards = () => {
                       {val.type == "points" && <AiOutlineStar className="icon" />}
                       {val.type == "months" && <AiOutlineHourglass className="icon" />}
                       {val.type == "certificates" && <FaAward className="icon" />}
-                      <p className="texts">
-                        <span className="main">RECOMPENSAS</span><br />
-                        por {val.scoreType}
-                      </p>
+                      {
+                        (val.type == "points" || val.type == "months") &&
+                        <p className="texts">
+                          <span className="main">RECOMPENSAS</span><br />
+                          por {val.scoreType}
+                        </p>
+                      }
+                      {
+                        val.type == "certificates" &&
+                        <p className="texts">
+                          <span className="main">CERTIFICADOS</span><br />
+                          Completados
+                        </p>
+                      }
                     </div>
+
                     <p className="texts">
                       <span className="sub">
                         {val.type == "points" && val.score + " puntos"}
@@ -350,7 +388,7 @@ const Rewards = () => {
                         <span>
                           {val.type == "points" && <>{val.points !== 0 ? val.points + " puntos" : "Completadas"}</>}
                           {val.type == "months" && <>{val.months !== 0 ? (val.months == 1 ? val.months + " mes" : val.months + " meses") : "Completadas"}</>}
-                          {val.type == "certificates" && <>{val.certificates !== 0 ? (val.certificates == 1 ? val.certificates + " certificado" : val.certificates + " certificados") : "Completadas"}</>}
+                          {val.type == "certificates" && <>{val.certificates !== 0 ? (val.certificates == 1 ? val.certificates + " lección" : val.certificates + " lecciones") : "Completadas"}</>}
                         </span>
                       </p>
                     </div>
@@ -377,6 +415,8 @@ const Rewards = () => {
                 indexSlider={index}
                 userReward={userReward}
                 getAllUserRewards={getAllUserRewards}
+                courses={courses}
+                completeCertificates={completeCertificates}
               />
             )
           })

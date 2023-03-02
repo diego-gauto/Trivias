@@ -36,6 +36,13 @@ export const SlideContainer = styled.div<{
     @media (max-width: 1023px) {
       font-size: 10px;
     }
+    // .progress-bar {
+    //   .progress-complete {
+    //     border: 1px solid black;
+    //     border-radius: 100px;
+
+    //   }
+    // }
     .title-text {
       font-weight: 600;
       color: #3f1168;

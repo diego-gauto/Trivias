@@ -363,7 +363,6 @@ const NavBar = () => {
             </HamburgerContain>
           </>
         }
-
       </NavResponsive>
     </NavContainer >
 
