@@ -149,9 +149,17 @@ const NavBar = () => {
     },
     [pathname],
   );
+
+  const closeNavbar = () => {
+    setHamburger(false);
+    setIngresarOpetionsMenuIsOpen(false);
+    setNewHamburgerMenuIsOpen(false);
+  }
+
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
+      <div className="bg-transparent" onClick={() => { closeNavbar(); }}></div>
       <LogoContain>
         {
           pathname == "/" ?
