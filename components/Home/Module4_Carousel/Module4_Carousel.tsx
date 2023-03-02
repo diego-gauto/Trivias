@@ -14,6 +14,7 @@ SwiperCore.use([Autoplay]);
 export const Module4_Carousel = (props: IModule4_Carousel) => {
   const swiperRef = useRef<SwiperCore>();
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const { isInfinite, slideData, type, title, user, course } = props;
   let slideDataArr = [];
@@ -97,6 +98,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
               professor={element.professor}
               user={user}
               course={element.data}
+              responsive1023={responsive1023}
             />
           </SwiperSlide>
         ))}
