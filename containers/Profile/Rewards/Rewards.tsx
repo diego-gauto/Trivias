@@ -121,7 +121,13 @@ const Rewards = () => {
         if (userData?.certificates) {
           userData?.certificates.forEach((cert: any) => {
             if (cert.courseId == course.id) {
-              certCourses.push({ title: course.courseTittle, path: course.coursePath });
+              certCourses.push({
+                title: course.courseTittle,
+                path: course.coursePath,
+                professorId: course.courseProfessor[0],
+                color: course.courseCertificateColor,
+                courseId: course.id,
+              });
             }
           })
         }
@@ -417,6 +423,7 @@ const Rewards = () => {
                 getAllUserRewards={getAllUserRewards}
                 courses={courses}
                 completeCertificates={completeCertificates}
+                router={router}
               />
             )
           })

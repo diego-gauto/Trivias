@@ -5,6 +5,7 @@ import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
 import { addRequest, addUserReward } from '../../../../store/actions/RewardActions';
 import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import { getTeacherById } from '../../../../store/actions/courseActions';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -22,7 +23,9 @@ const RewardSlider = (props: reward_slider) => {
     userReward,
     getAllUserRewards,
     courses,
-    completeCertificates } = props;
+    completeCertificates,
+    router
+  } = props;
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
   const [texts, setTexts] = useState<any>({
@@ -106,7 +109,6 @@ const RewardSlider = (props: reward_slider) => {
       // tempFilter.sort((a: any, b: any) => a.total - b.total);
       // slides = tempFilter;
       tempFilter = completeCertificates;
-      console.log(tempFilter);
       slides = tempFilter;
       setTexts({
         header: "Certificados Acumulados",
@@ -137,8 +139,24 @@ const RewardSlider = (props: reward_slider) => {
     setSlides(slides)
   }
 
-  const moveToCertificate = () => {
-
+  const moveToCertificate = (reward: any) => {
+    getTeacherById(reward.professorId).then((professor: any) => {
+      if (!professor.sign) {
+        professor.sign = "";
+      }
+      router.push({
+        pathname: `/Certificates`,
+        query: {
+          name: user.name,
+          title: reward.title,
+          professor: professor.name,
+          id: user.uid,
+          color: reward.color,
+          courseId: reward.courseId,
+          teacherSignature: professor.sign,
+        }
+      });
+    })
   }
   const showRewardData = (index: any, rewardPoints: any) => {
     if (index == openRewardInfo) {
@@ -286,7 +304,7 @@ const RewardSlider = (props: reward_slider) => {
                         <div className="btn-contain">
                           {
                             type == "claim-certificates" &&
-                            <button className="btn-info" onClick={() => moveToCertificate()}>
+                            <button className="btn-info" onClick={() => moveToCertificate(reward)}>
                               <p className='text'>
                                 Ver certificado
                               </p>
