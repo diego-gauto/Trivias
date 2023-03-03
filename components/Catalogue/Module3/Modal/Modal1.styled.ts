@@ -34,7 +34,7 @@ export const ModalBackground = styled.div`
   position: relative;
   min-height: 270px;
   @media (max-width: 991px) {
-    margin: 40px;
+    margin-bottom: 20px;
   }
   @media (max-width: 550px) {
     margin: 0;
@@ -208,19 +208,17 @@ export const SubTitle = styled.p`
 `;
 export const ImageBack = styled.img`
   width: 100%;
+  height: auto;
   @media (max-width: 990px) {
-    max-height: 400px;
-    border-radius: 30px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
   @media (max-width: 550px) {
-    max-height: 400px;
-    border-radius: 0;
-  }
-  @media (max-width: 450px) {
-    max-height: 350px;
-  }
-  @media (max-width: 400px) {
-    max-height: 300px;
+    width: 100%;
+    height: auto !important;
+    margin-top: 0;
+    margin-bottom: auto;
   }
 `;
 export const ImageDiv = styled.div`
@@ -393,6 +391,9 @@ export const CourseContain = styled.div<{ level: any }>`
         width: fit-content;
         padding: 5px 20px;
         margin-block-start: 15px;
+        @media (max-width: 550px) {
+          margin-block: 8px;
+        }
         @media (max-width: 450px) {
           font-size: 10px;
           padding: 5px 15px;
