@@ -159,7 +159,7 @@ const NavBar = () => {
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
-      <div className="bg-transparent" onClick={() => { closeNavbar(); }}></div>
+      {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
       <LogoContain>
         {
           pathname == "/" ?
