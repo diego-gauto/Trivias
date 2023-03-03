@@ -162,8 +162,7 @@ export const DivisorMobile = styled.div`
 export const ContainerMainMobile = styled.div`
   background-color: #e5b6e9;
   margin-top: 0;
-
-  height: 1020px;
+  height: calc(100vw * 0.39 + 612px);
   position: inherit;
   width: 100%;
 `;
