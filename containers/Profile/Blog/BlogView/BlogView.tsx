@@ -8,6 +8,11 @@ import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
 import { getBlogs } from '../../../../store/actions/AdminActions';
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+} from "react-share";
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
 import { IBlog } from './IBlogView';
 const BlogView = () => {
@@ -18,6 +23,7 @@ const BlogView = () => {
   const [blog, setBlog] = useState<IBlog>();
   const [month, setMonth] = useState<string>("");
   const [topicLength, setTopicLength] = useState(0);
+  const [url, setUrl] = useState<string>("")
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
   const fetchDB_data = async () => {
@@ -77,6 +83,8 @@ const BlogView = () => {
   }
   const getBlog = () => {
     let tempTitle: any = router.query.slug;
+    let finalUrl: any = "gonvar.io" + router.asPath
+    setUrl(finalUrl)
     let titleSearch: string = tempTitle.replaceAll("-", " ");
     let tempBlog: any;
     let allBlogs: any;
@@ -175,10 +183,26 @@ const BlogView = () => {
             por Gonvar | {blog?.date.day} de {month} de {blog?.date.year}
           </p>
           <div className="socials">
-            <BsFacebook className="icon" />
-            <BsTwitter className="icon" />
-            <BsLinkedin className="icon" />
-            <BsPrinterFill className="icon" />
+            <FacebookShareButton
+              url={url}
+              quote={blog?.title}
+              hashtag={"#Gonvar"}
+            >
+              <BsFacebook className="icon" />
+            </FacebookShareButton>
+            <TwitterShareButton
+              url={url}
+              title={blog?.title}
+            >
+              <BsTwitter className="icon" />
+            </TwitterShareButton>
+            <LinkedinShareButton
+              url={url}
+              title={blog?.title}
+            >
+              <BsLinkedin className="icon" />
+            </LinkedinShareButton>
+            <BsPrinterFill className="icon" style={{ alignSelf: "center" }} />
           </div>
         </div>
         <div className="img-container">

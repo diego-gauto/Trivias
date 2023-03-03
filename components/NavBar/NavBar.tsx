@@ -359,7 +359,7 @@ const NavBar = () => {
                     Tienda
                   </HBList>
                 </a>
-                <Link href="/Preview" >
+                <Link href="/Blog" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Blog" ? { fontWeight: 600 } : {}}>
                     Blog
                   </HBList>
