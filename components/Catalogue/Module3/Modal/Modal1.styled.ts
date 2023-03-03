@@ -276,6 +276,15 @@ export const CourseContain = styled.div<{ level: any }>`
     font-weight: 500;
     line-height: initial;
   }
+  .title {
+    font-size: 25px;
+    @media (max-width: 500px) {
+      font-size: 20px;
+    }
+    @media (max-width: 400px) {
+      font-size: 18px;
+    }
+  }
   .responsive-top-info {
     border-bottom: 1px solid #80808063;
     display: flex;
@@ -284,14 +293,7 @@ export const CourseContain = styled.div<{ level: any }>`
       flex: 1;
       border-bottom: none;
       display: flex;
-      .title {
-        @media (max-width: 450px) {
-          font-size: 12px;
-        }
-        @media (max-width: 400px) {
-          font-size: 11px;
-        }
-      }
+
       .professor-container {
         display: flex;
         align-items: center;
