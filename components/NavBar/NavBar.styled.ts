@@ -41,9 +41,9 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     min-height: 100vh;
     height: 100%;
     display: none;
-    @media (max-width: 1000px) {
-      display: flex;
-    }
+    // @media (max-width: 1000px) {
+    //   display: flex;
+    // }
   }
 `;
 export const NavTags = styled.div`
