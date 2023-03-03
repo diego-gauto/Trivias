@@ -175,7 +175,7 @@ const Modal = ({ show, setShow, course, user }: any) => {
           </ModalBackground>
           <CourseContain level={course.courseDifficulty}>
             <div className="left">
-              <p>{course.courseTittle}.</p>
+              <p className="title">{course.courseTittle}.</p>
               <div className="level-container">
                 {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                 {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
