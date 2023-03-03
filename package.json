@@ -45,6 +45,7 @@
     "react-share": "^4.4.1",
     "react-simple-star-rating": "^4.0.5",
     "react-slick": "^0.29.0",
+    "react-to-print": "^2.14.12",
     "react-uuid": "^2.0.0",
     "slick-carousel": "^1.8.1",
     "stripe": "^10.0.0",

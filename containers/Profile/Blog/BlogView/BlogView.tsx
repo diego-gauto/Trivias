@@ -1,6 +1,6 @@
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
 import { BsFacebook, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
@@ -15,6 +15,7 @@ import {
 } from "react-share";
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
 import { IBlog } from './IBlogView';
+import ReactToPrint from 'react-to-print';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -26,6 +27,7 @@ const BlogView = () => {
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
+  const ref = useRef<any>(null);
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -185,6 +187,7 @@ const BlogView = () => {
               url={url}
               quote={blog?.title}
               hashtag={"#Gonvar"}
+              openShareDialogOnClick={true}
             >
               <BsFacebook className="icon" />
             </FacebookShareButton>
@@ -201,7 +204,16 @@ const BlogView = () => {
             >
               <BsLinkedin className="icon" />
             </LinkedinShareButton>
-            <BsPrinterFill className="icon" style={{ alignSelf: "center" }} />
+            {/* <ReactToPrint
+              trigger={() => {
+                return <BsPrinterFill className="icon" style={{ alignSelf: "center" }} />
+              }
+              }
+              content={() => { ref }}
+              documentTitle="nuevo documento"
+              pageStyle="print"
+            >
+            </ReactToPrint> */}
           </div>
         </div>
         <div className="img-container">
@@ -241,7 +253,7 @@ const BlogView = () => {
               </div>
             </div>
           </BoxSection>
-          <ContentContainer>
+          <ContentContainer ref={ref}>
             {
               blog?.subTopic.map((topic, index: number) => {
                 return (
@@ -297,7 +309,7 @@ const BlogView = () => {
             <VideoBlog>
               <ReactPlayer
                 url={blog.link}
-                playing={true}
+                playing={false}
                 muted={false}
                 controls
                 width="100%" height="100%"
