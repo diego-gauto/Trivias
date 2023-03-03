@@ -95,6 +95,7 @@ export const MainContainer = styled.div<{ open: any }>`
     css`
       right: 0 !important;
       transition: 1s ease all;
+      height: max-content !important;
     `}
   .certificate-responsive {
     display: none;
@@ -102,6 +103,8 @@ export const MainContainer = styled.div<{ open: any }>`
   @media (max-width: 1124px) {
     transition: 1s ease all;
     position: absolute;
+    overflow: hidden;
+    height: 100%;
     top: 64px;
     right: -100%;
     width: 100%;
