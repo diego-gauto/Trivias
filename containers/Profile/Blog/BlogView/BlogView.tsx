@@ -23,7 +23,7 @@ const BlogView = () => {
   const [blog, setBlog] = useState<IBlog>();
   const [month, setMonth] = useState<string>("");
   const [topicLength, setTopicLength] = useState(0);
-  const [url, setUrl] = useState<string>("")
+  const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
   const fetchDB_data = async () => {
@@ -83,8 +83,6 @@ const BlogView = () => {
   }
   const getBlog = () => {
     let tempTitle: any = router.query.slug;
-    let finalUrl: any = "gonvar.io" + router.asPath
-    setUrl(finalUrl)
     let titleSearch: string = tempTitle.replaceAll("-", " ");
     let tempBlog: any;
     let allBlogs: any;
@@ -192,13 +190,14 @@ const BlogView = () => {
             </FacebookShareButton>
             <TwitterShareButton
               url={url}
-              title={blog?.title}
+              title={blog?.subTitle}
             >
               <BsTwitter className="icon" />
             </TwitterShareButton>
             <LinkedinShareButton
               url={url}
               title={blog?.title}
+
             >
               <BsLinkedin className="icon" />
             </LinkedinShareButton>
