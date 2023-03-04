@@ -168,8 +168,7 @@ const NavBar = () => {
                 color == 0 &&
                 <Link href="/">
                   <Logo style={{
-                    width: "auto", height: "66.6%",
-                    paddingTop: "15px"
+                    width: "130px", height: "30px",
                   }} src="/images/Navbar/NavbarLogo.png" />
                 </Link>
               }
@@ -177,8 +176,7 @@ const NavBar = () => {
                 color == 1 &&
                 <Link href="/">
                   <Logo style={{
-                    width: "auto", height: "66.6%",
-                    paddingTop: "15px"
+                    width: "130px", height: "30px",
                   }} src="/images/Navbar/NavbarLogo2.png" />
                 </Link>
               }
@@ -186,8 +184,7 @@ const NavBar = () => {
             :
             <Link href="/">
               <Logo style={{
-                width: "auto", height: "66.6%",
-                paddingTop: "15px"
+                width: "130px", height: "30px",
               }} src="/images/Navbar/NavbarLogo.png" />
             </Link>
         }

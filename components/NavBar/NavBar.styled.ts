@@ -6,7 +6,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
   width: 100%;
   justify-content: space-between;
   background-color: #dad3e5;
-  padding-block: 5px;
+  padding-block: 15px;
   padding-inline: 70px;
   // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
