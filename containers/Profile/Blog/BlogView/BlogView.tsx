@@ -171,57 +171,57 @@ const BlogView = () => {
   }
   return (
     <BlogContainer>
-      <FirstSection>
-        <div className="title-container">
-          <h1 className="title">
-            {blog?.title}
-          </h1>
-          <p className="sub-title">
-            {blog?.subTitle}
-          </p>
-          <p className="date">
-            por Gonvar | {blog?.date.day} de {month} de {blog?.date.year}
-          </p>
-          <div className="socials">
-            <FacebookShareButton
-              url={url}
-              quote={blog?.title}
-              hashtag={"#Gonvar"}
-              openShareDialogOnClick={true}
-            >
-              <BsFacebook className="icon" />
-            </FacebookShareButton>
-            <TwitterShareButton
-              url={url}
-              title={blog?.subTitle}
-            >
-              <BsTwitter className="icon" />
-            </TwitterShareButton>
-            <LinkedinShareButton
-              url={url}
-              title={blog?.title}
-
-            >
-              <BsLinkedin className="icon" />
-            </LinkedinShareButton>
-            {/* <ReactToPrint
-              trigger={() => {
-                return <BsPrinterFill className="icon" style={{ alignSelf: "center" }} />
-              }
-              }
-              content={() => { ref }}
-              documentTitle="nuevo documento"
-              pageStyle="print"
-            >
-            </ReactToPrint> */}
-          </div>
-        </div>
-        <div className="img-container">
-          <img src={blog?.path} />
-        </div>
-      </FirstSection>
       <div className="content">
-        <div className="left-content">
+        <div className="left-content" ref={(e) => { ref.current = e }}>
+          <FirstSection >
+            <div className="title-container">
+              <h1 className="title">
+                {blog?.title}
+              </h1>
+              <p className="sub-title">
+                {blog?.subTitle}
+              </p>
+              <p className="date">
+                por Gonvar | {blog?.date.day} de {month} de {blog?.date.year}
+              </p>
+              <div className="socials">
+                <FacebookShareButton
+                  url={url}
+                  quote={blog?.title}
+                  hashtag={"#Gonvar"}
+                  openShareDialogOnClick={true}
+                >
+                  <BsFacebook className="icon" />
+                </FacebookShareButton>
+                <TwitterShareButton
+                  url={url}
+                  title={blog?.subTitle}
+                >
+                  <BsTwitter className="icon" />
+                </TwitterShareButton>
+                <LinkedinShareButton
+                  url={url}
+                  title={blog?.title}
+
+                >
+                  <BsLinkedin className="icon" />
+                </LinkedinShareButton>
+                <ReactToPrint
+                  trigger={() => {
+                    return <BsPrinterFill className="icon" style={{ alignSelf: "center" }} />
+                  }
+                  }
+                  content={() => ref.current}
+                  documentTitle="Gonvar"
+                  pageStyle="print"
+                >
+                </ReactToPrint>
+              </div>
+            </div>
+            <div className="img-container" key="remove" id="remove">
+              <img src={blog?.path} />
+            </div>
+          </FirstSection>
           <BoxSection>
             <div className="title-contain">
               <h1 className="title">
@@ -253,7 +253,7 @@ const BlogView = () => {
               </div>
             </div>
           </BoxSection>
-          <ContentContainer ref={ref}>
+          <ContentContainer style={{ marginTop: 20 }}>
             {
               blog?.subTopic.map((topic, index: number) => {
                 return (
@@ -319,6 +319,9 @@ const BlogView = () => {
 
         </div>
         <div className="right-content">
+          <div className="img-container" key="remove" id="remove">
+            <img src={blog?.path} />
+          </div>
           <RelatedArticles>
             <p className="titles">ARTÍCULOS RELACIONADOS</p>
             {

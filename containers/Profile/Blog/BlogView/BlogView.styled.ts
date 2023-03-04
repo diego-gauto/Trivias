@@ -22,9 +22,22 @@ export const BlogContainer = styled.div`
       }
     }
     .right-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
       width: 24%;
       @media (max-width: 1023px) {
         display: none;
+      }
+      .img-container {
+        display: flex;
+        justify-content: flex-end;
+        img {
+          border-radius: 10px;
+          width: 180%;
+          max-height: 300px;
+          max-width: 500px;
+        }
       }
     }
   }
@@ -42,16 +55,7 @@ export const FirstSection = styled.div`
     flex-direction: column;
     gap: 10px;
     margin-top: 30px;
-    max-width: 600px;
-    @media (max-width: 1250px) {
-      max-width: 45%;
-    }
-    @media (max-width: 1023px) {
-      max-width: 70%;
-    }
-    @media (max-width: 600px) {
-      max-width: 90%;
-    }
+    max-width: 90%;
     .title {
       font-size: 36px;
       font-weight: 600;
@@ -72,6 +76,7 @@ export const FirstSection = styled.div`
     }
     .socials {
       display: flex;
+      margin-top: 20px;
       padding: 20px;
       gap: 30px;
       .icon {
@@ -85,7 +90,7 @@ export const FirstSection = styled.div`
     }
   }
   .img-container {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-end;
     min-width: 45%;
@@ -93,6 +98,9 @@ export const FirstSection = styled.div`
       justify-content: center;
       min-width: unset;
       width: 100%;
+    }
+    @media (max-width: 770px) {
+      display: flex;
     }
     img {
       border-radius: 10px;
@@ -109,19 +117,9 @@ export const FirstSection = styled.div`
         height: 240px;
       }
       @media (max-width: 1023px) {
-        display: none;
         max-width: 100%;
         width: 100%;
-        height: 400px;
-      }
-      @media (max-width: 770px) {
-        display: unset;
-      }
-      @media (max-width: 600px) {
-        height: 300px;
-      }
-      @media (max-width: 450px) {
-        height: 200px;
+        height: auto;
       }
     }
   }
@@ -132,6 +130,7 @@ export const BoxSection = styled.div`
   width: 100%;
   border: 1px solid #949494;
   border-radius: 5px;
+  margin-top: 10px;
   .title-contain {
     display: flex;
     padding-inline: 20px;
