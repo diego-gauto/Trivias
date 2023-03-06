@@ -6,27 +6,35 @@ import "./styles.css";
 import { AuthProvider } from "../hooks/useAuth";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Helmet from 'react-helmet';
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   const router = useRouter();
   return (
     <AuthProvider>
       <Head>
-        <link rel="canonical" href={"https://gonvar.io" + router.asPath} />
-        <meta name="twitter:title" content="Gonvar Nails  titulo twitter" />
-        <meta name="description" content="prueba desc gonvar fb" />
-        <meta name="twitter:description" content="Prueba Gonvar desc twitter" />
-        <meta name="twitter:site" content="@gonvar" />
-        <meta name="twitter:domain" content="gonvar.io" />
-        <meta name="twitter:url" content={"https://gonvar.io" + router.asPath} />
-        <meta property="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/blog%2F%C2%BFCon%20qu%C3%A9%20puedo%20pegar%20u%C3%B1as%20postizas%20si%20no%20tengo%20pegamento%3F-604272aa-44aa-4f1e-80b5-7d4588aad96f?alt=media&amp;token=45651d40-7c50-480f-a874-bacbcb65cecf" />
-        <meta property="twitter:image:src" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/blog%2F%C2%BFCon%20qu%C3%A9%20puedo%20pegar%20u%C3%B1as%20postizas%20si%20no%20tengo%20pegamento%3F-604272aa-44aa-4f1e-80b5-7d4588aad96f?alt=media&amp;token=45651d40-7c50-480f-a874-bacbcb65cecf" />
-        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/blog%2F%C2%BFCon%20qu%C3%A9%20puedo%20pegar%20u%C3%B1as%20postizas%20si%20no%20tengo%20pegamento%3F-604272aa-44aa-4f1e-80b5-7d4588aad96f?alt=media&amp;token=45651d40-7c50-480f-a874-bacbcb65cecf" />
-        <meta property="og:image:alt" content="gonvar" />
-        <meta property="og:title" content="Gonvar nails academy prueba tit" />
-        <meta property="og:url" content={"https://gonvar.io" + router.asPath} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+        <Helmet>
+          <link rel="canonical" href={"https://gonvar.io" + router.asPath} />
+          <meta name="twitter:title" content="Gonvar Nails  titulo twitter" />
+          <meta name="description" content="prueba desc gonvar fb" />
+          <meta name="twitter:description" content="Prueba Gonvar desc twitter" />
+          <meta name="twitter:site" content="@gonvar" />
+          <meta name="twitter:domain" content="gonvar.io" />
+          <meta name="twitter:url" content={"https://gonvar.io" + router.asPath} />
+          <meta property="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/blog%2F%C2%BFCon%20qu%C3%A9%20puedo%20pegar%20u%C3%B1as%20postizas%20si%20no%20tengo%20pegamento%3F-604272aa-44aa-4f1e-80b5-7d4588aad96f?alt=media&amp;token=45651d40-7c50-480f-a874-bacbcb65cecf" />
+          <meta property="twitter:image:src" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/blog%2F%C2%BFCon%20qu%C3%A9%20puedo%20pegar%20u%C3%B1as%20postizas%20si%20no%20tengo%20pegamento%3F-604272aa-44aa-4f1e-80b5-7d4588aad96f?alt=media&amp;token=45651d40-7c50-480f-a874-bacbcb65cecf" />
+          <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/blog%2F%C2%BFCon%20qu%C3%A9%20puedo%20pegar%20u%C3%B1as%20postizas%20si%20no%20tengo%20pegamento%3F-604272aa-44aa-4f1e-80b5-7d4588aad96f?alt=media&amp;token=45651d40-7c50-480f-a874-bacbcb65cecf" />
+          <meta property="og:image:alt" content="gonvar" />
+          <meta property="og:title" content="Gonvar nails academy prueba tit" />
+          <meta property="og:url" content={"https://gonvar.io" + router.asPath} />
+          <meta property="og:locale" content="es_MX" />
+          <meta property="og:type" content="article" />
+          <meta property="og:site_name" content="Academia de uñas en México | Gonvar" />
+          <meta property="article:section" content="Uñas" />
+          <meta property="og:image:width" content="1024" />
+          <meta property="og:image:height" content="683" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+        </Helmet>
       </Head>
       <Layout>
         <Component {...pageProps} />
