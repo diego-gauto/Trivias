@@ -174,7 +174,7 @@ const BlogView = () => {
     <BlogContainer>
       <HelmetMetaTags
         title={blog?.title}
-        image={getGonvarAdImage}
+        image={blog?.path}
         description={blog?.subTitle ? blog?.subTitle : "Gonvar Nails Academy"}
         quote={"gonvar - " + blog?.title}
       />
