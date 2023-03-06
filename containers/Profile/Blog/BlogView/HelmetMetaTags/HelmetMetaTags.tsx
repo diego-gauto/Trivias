@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 export default function HelmetMetaTags(props: any) {
   console.log(props)
   const router = useRouter();
-  let currentUrl = "http://gonvari.io" + router.asPath;
+  let currentUrl = "http://gonvar.io" + router.asPath;
   let quote = props.quote !== undefined ? props.quote : "";
   let title = props.title !== undefined ? props.title : "Gonvar Nails Academy";
   let image = props.image !== undefined ? props.image : "https://storage.googleapis.com/cmperstribe_storage_usha/Banner/IMG_3640.JPG";
@@ -28,7 +28,7 @@ export default function HelmetMetaTags(props: any) {
       <meta property="quote" content={quote} />
       <meta name="description" content={description} />
       <meta property="image" content={image} />
-      <meta property="og:locale" content="en_US" />
+      <meta property="og:locale" content="es_MX" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:quote" content={quote} />
