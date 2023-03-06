@@ -4,14 +4,14 @@ import { useRouter } from 'next/router';
 export default function HelmetMetaTags(props: any) {
   console.log(props)
   const router = useRouter();
-  let currentUrl = "http://www.camperstribe.com" + router.pathname;
+  let currentUrl = "http://gonvari.io" + router.asPath;
   let quote = props.quote !== undefined ? props.quote : "";
-  let title = props.title !== undefined ? props.title : "CampersTribe - World is yours to explore";
+  let title = props.title !== undefined ? props.title : "Gonvar Nails Academy";
   let image = props.image !== undefined ? props.image : "https://storage.googleapis.com/cmperstribe_storage_usha/Banner/IMG_3640.JPG";
   let description = props.description !== undefined ? props.description : "CampersTribe lets you experience the camping culture. We discover the hidden gems in the nearby to help you connect with nature & yourself by learning in the woods, on the riverbank under the open sky." +
     "Trust us, its million dollars experience to ride away from city life, pitch a tent, do campfire and endless talk!" +
     "So, join us on this voyage, and explore the beauty and miracle of being yourself!";
-  let hashtag = props.hashtag !== undefined ? props.hashtag : "#camperstribe";
+  let hashtag = props.hashtag !== undefined ? props.hashtag : "#gonvar";
   return (
     <Helmet>
       <title>{title}</title>

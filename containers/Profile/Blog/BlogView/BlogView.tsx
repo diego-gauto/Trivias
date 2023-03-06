@@ -172,7 +172,12 @@ const BlogView = () => {
   }
   return (
     <BlogContainer>
-      <HelmetMetaTags title={blog?.title} image={blog?.path} />
+      <HelmetMetaTags
+        title={blog?.title}
+        image={blog?.path}
+        description={blog?.subTitle ? blog?.subTitle : "Gonvar Nails Academy"}
+        quote={"gonvar - " + blog?.title}
+      />
       <div className="content">
         <div className="left-content" ref={(e) => { ref.current = e }}>
           <FirstSection >
@@ -189,7 +194,7 @@ const BlogView = () => {
               <div className="socials">
                 <FacebookShareButton
                   url={url}
-                  quote={blog?.title}
+                  quote={"gonvar - " + blog?.title}
                   hashtag={"#Gonvar"}
                   openShareDialogOnClick={true}
                 >
