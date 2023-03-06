@@ -8,6 +8,7 @@ import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
 import { getBlogs } from '../../../../store/actions/AdminActions';
+import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags.tsx'
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -171,6 +172,7 @@ const BlogView = () => {
   }
   return (
     <BlogContainer>
+      <HelmetMetaTags title={blog?.title} image={blog?.path} />
       <div className="content">
         <div className="left-content" ref={(e) => { ref.current = e }}>
           <FirstSection >
