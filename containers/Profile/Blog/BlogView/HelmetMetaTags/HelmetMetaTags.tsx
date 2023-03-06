@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useRouter } from 'next/router';
 export default function HelmetMetaTags(props: any) {
-  console.log(props)
   const router = useRouter();
   let currentUrl = "http://gonvar.io" + router.asPath;
   let quote = props.quote !== undefined ? props.quote : "";
