@@ -8,7 +8,6 @@ import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
 import { getBlogs } from '../../../../store/actions/AdminActions';
-import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags.tsx'
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -17,6 +16,7 @@ import {
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
 import { IBlog } from './IBlogView';
 import ReactToPrint from 'react-to-print';
+import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags'
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);

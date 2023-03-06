@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useRouter } from 'next/router';
-export default function HelmetMetaTags(props) {
+export default function HelmetMetaTags(props: any) {
   console.log(props)
   const router = useRouter();
   let currentUrl = "http://www.camperstribe.com" + router.pathname;
