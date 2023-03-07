@@ -265,7 +265,7 @@ const BlogView = () => {
               blog?.subTopic.map((topic, index: number) => {
                 return (
                   <div className="text-container" id={`box-${index}`} key={"topic-context" + index}>
-                    <h3 className="topic-title">{topic.topicTitle}</h3>
+                    <h2 className="topic-title">{topic.topicTitle}</h2>
                     <p dangerouslySetInnerHTML={{ __html: topic.topicText }} className="topic-subtitle" />
                     {
                       topic.topicPath &&
