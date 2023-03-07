@@ -29,6 +29,7 @@ const BlogView = () => {
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
   const ref = useRef<any>(null);
+  let topicTitleCount: any = 0
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -161,6 +162,7 @@ const BlogView = () => {
     fetchDB_data();
     getBlog()
   }, [])
+
   if (!loader) {
     return (
       <BackgroundLoader>
@@ -237,22 +239,27 @@ const BlogView = () => {
             </div>
             <div className="subtitle-container">
               {
+
                 blog?.subTopic.map((topic, index: number) => {
-                  return (
-                    <div className="section-title" key={"topic-titles " + index}>
-                      <p className="number">
-                        {index + 1}.
-                      </p>
-                      <p className="topic-title" onClick={() => moveTo(index)}>
-                        {topic.topicTitle}
-                      </p>
-                    </div>
-                  )
+                  if (topic.topicTitle) {
+                    topicTitleCount++
+                    return (
+                      <div className="section-title" key={"topic-titles " + index}>
+                        <p className="number">
+                          {topicTitleCount}.
+                        </p>
+                        <p className="topic-title" onClick={() => moveTo(index)}>
+                          {topic.topicTitle}
+                        </p>
+                      </div>
+                    )
+                  }
+
                 })
               }
               <div className="section-title">
                 <p className="number">
-                  {topicLength + 1}.
+                  {topicTitleCount + 1}.
                 </p>
                 <p className="topic-title" onClick={() => moveTo(topicLength + 1)}>
                   Artículos relacionados

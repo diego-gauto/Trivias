@@ -134,7 +134,7 @@ export const BoxSection = styled.div`
   .title-contain {
     display: flex;
     padding-inline: 20px;
-    padding-block: 20px 30px;
+    padding-block: 25px 25px;
     border-bottom: 1px solid #949494;
     @media (max-width: 500px) {
       padding-inline: 15px;
