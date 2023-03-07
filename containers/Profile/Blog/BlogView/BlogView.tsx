@@ -255,7 +255,7 @@ const BlogView = () => {
                   {topicLength + 1}.
                 </p>
                 <p className="topic-title" onClick={() => moveTo(topicLength + 1)}>
-                  ARTÍCULOS RELACIONADOS
+                  Artículos relacionados
                 </p>
               </div>
             </div>
@@ -351,7 +351,7 @@ const BlogView = () => {
       <BottomSection>
         <div className="title-contain" id={`box-${topicLength + 1}`}>
           <p className="title">
-            ARTÍCULOS RELACIONADOS
+            Artículos relacionados
           </p>
         </div>
         <div className="all-cards">
