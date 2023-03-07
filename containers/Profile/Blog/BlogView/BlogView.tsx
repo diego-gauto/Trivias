@@ -338,8 +338,8 @@ const BlogView = () => {
                     <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
                     <p className="title">                {blogVar.title}</p>
                     {
-                      blogVar.subTitle &&
-                      <p className="sub-title">{blogVar.subTitle}</p>
+                      blogVar.summary &&
+                      <p className="sub-title">{blogVar.summary}</p>
                     }
                   </div>
                 )
@@ -362,8 +362,8 @@ const BlogView = () => {
                   <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
                   <p className="title">                {blogVar.title}</p>
                   {
-                    blogVar.subTitle &&
-                    <p className="sub-title">{blogVar.subTitle}</p>
+                    blogVar.summary &&
+                    <p className="sub-title">{blogVar.summary}</p>
                   }
                 </div>
               )

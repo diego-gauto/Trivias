@@ -228,6 +228,7 @@ export const RelatedArticles = styled.div`
     .sub-title {
       font-size: 14px;
       line-height: 16px;
+      overflow: hidden;
     }
     .img {
       border-radius: 10px;
@@ -278,6 +279,7 @@ export const BottomSection = styled.div`
       .sub-title {
         font-size: 14px;
         line-height: 15px;
+        overflow: hidden;
       }
       .img {
         border-radius: 10px;

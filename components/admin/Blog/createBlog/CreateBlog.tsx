@@ -21,6 +21,7 @@ const CreateBlog = () => {
   const [blog, setBlog] = useState<any>({
     title: "",
     subTitle: "",
+    summary: "",
     path: "",
     link: "",
     subTopic: [],
@@ -306,6 +307,23 @@ const CreateBlog = () => {
                   />
                 </BlogInputs>
               </div >
+              <div className="blog-row">
+                <BlogInputs>
+                  <label className="blog-label">
+                    Resumen
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="Resumen del blog"
+                    defaultValue={blog.summary}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, summary: e.target.value
+                      })
+                    }}
+                  />
+                </BlogInputs>
+              </div>
               <div className="blog-row">
                 <BlogInputs>
                   <label className="blog-label">
