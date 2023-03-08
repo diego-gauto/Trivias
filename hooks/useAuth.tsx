@@ -32,8 +32,6 @@ export const AuthProvider = ({ children, ...props }: Props) => {
   const [user, setUser] = useState<any>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const auth = getAuth();
-
-
   const logout = () => {
 
     return signOut(auth).then(() => {
@@ -66,8 +64,6 @@ export const AuthProvider = ({ children, ...props }: Props) => {
       }
     });
   }, [])
-
-
 
   const values = {
     user,

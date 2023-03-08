@@ -155,7 +155,6 @@ const Login = () => {
         startDate: stripeUserData.current_period_start,
       }
     }
-
     const redirectURL = await signUpWithCreds(signUpData, stripeUserData?.paymentMethods);
     window.location.href = redirectURL;
   }
