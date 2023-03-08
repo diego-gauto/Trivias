@@ -79,7 +79,7 @@ const Blog = () => {
         loader ?
           <div className="blogs">
             {
-              blogs.map((blog: any, index: any) => {
+              blogs.map((blog: IBlog, index: any) => {
                 return (
                   <BlogItems key={"blog-card " + index}>
                     <div className="img-contain" onClick={() => { goToBlog(blog) }}>
