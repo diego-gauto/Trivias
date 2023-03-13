@@ -8,6 +8,7 @@ export interface IBlog {
   title: string;
   subTitle: string;
   link: string;
+  summary: string;
   date: {
     day: number;
     month: string;

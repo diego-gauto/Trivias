@@ -22,16 +22,12 @@ export const BlogContainer = styled.div`
   .blogs {
     display: grid;
     justify-content: center;
-    column-gap: 10%;
+    column-gap: 5%;
     row-gap: 50px;
     margin-bottom: 50px;
     grid-template-columns: repeat(3, 300px);
-    @media (max-width: 1200px) {
-      column-gap: 5%;
-    }
-    @media (max-width: 1100px) {
-      column-gap: 3%;
-    }
+    justify-items: center;
+
     @media (max-width: 1023px) {
       row-gap: 30px;
       grid-template-columns: repeat(2, 300px);
@@ -44,16 +40,23 @@ export const BlogContainer = styled.div`
 export const BlogItems = styled.div`
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: min-content;
   height: fit-content;
-  max-width: 300px;
+  max-width: 400px;
   border: 1px solid #c6c6c6;
   .img-contain {
     position: relative;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
     .blog-image {
-      width: 298px;
-      height: 200px;
+      width: 300px;
+      height: auto;
+      margin: auto;
+      @media (max-width: 650px) {
+        width: 80vw;
+        max-width: 400px;
+      }
     }
     .edit-icon {
       font-size: 40px;

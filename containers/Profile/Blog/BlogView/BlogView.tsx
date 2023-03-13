@@ -14,7 +14,7 @@ import {
   TwitterShareButton,
 } from "react-share";
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
-import { IBlog } from './IBlogView';
+import { IBlog, ISubTopic } from './IBlogView';
 import ReactToPrint from 'react-to-print';
 import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags'
 const BlogView = () => {
@@ -240,7 +240,7 @@ const BlogView = () => {
             <div className="subtitle-container">
               {
 
-                blog?.subTopic.map((topic, index: number) => {
+                blog?.subTopic.map((topic: ISubTopic, index: number) => {
                   if (topic.topicTitle) {
                     topicTitleCount++
                     return (
@@ -254,7 +254,9 @@ const BlogView = () => {
                       </div>
                     )
                   }
-
+                  else {
+                    return <></>
+                  }
                 })
               }
               <div className="section-title">
@@ -269,7 +271,7 @@ const BlogView = () => {
           </BoxSection>
           <ContentContainer style={{ marginTop: 20 }}>
             {
-              blog?.subTopic.map((topic, index: number) => {
+              blog?.subTopic.map((topic: ISubTopic, index: number) => {
                 return (
                   <div className="text-container" id={`box-${index}`} key={"topic-context" + index}>
                     <h2 className="topic-title">{topic.topicTitle}</h2>
