@@ -35,7 +35,8 @@ const Quiz = () => {
         [{ size: ["small", "normal", "large", "huge"] }, {
           color: [
             "red",
-            "blue"
+            "blue",
+            "#6717cd",
           ]
         }],
         [

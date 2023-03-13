@@ -22,16 +22,16 @@ export const Title = styled.h1`
 `;
 export const CourseButton = styled.button`
   font-size: 18px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 600;
   color: #41417e;
   background-color: white;
   border: 1px solid #41417e;
   padding-block: 10px;
   padding-inline: 20px;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const Container = styled.div`
@@ -48,20 +48,20 @@ export const BackGround = styled.div`
   background-color: #f3f3f5;
 `;
 export const AdminRoleChange = styled.div`
-display: flex;
-font-size: 20px;
-align-items: center;
-flex-direction: column;
-min-width: 342;
-width: 300px;
-height: 200px;
-padding: 15px;
-justify-content: center;
-gap: 30px;
-border-radius: 10px;
-margin-top: 85px;
-color: #41417e;
-box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: column;
+  min-width: 342;
+  width: 300px;
+  height: 200px;
+  padding: 15px;
+  justify-content: center;
+  gap: 30px;
+  border-radius: 10px;
+  margin-top: 85px;
+  color: #41417e;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
 `;
 export const TitleContain = styled.div`
   display: flex;
@@ -74,7 +74,7 @@ export const BodyContain = styled.div`
 `;
 export const GonvarTitle = styled.p`
   font-size: 24px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 600;
   color: #41417e;
   margin: 0;
@@ -82,16 +82,16 @@ export const GonvarTitle = styled.p`
 export const ShareButton = styled.button`
   font-size: 14px;
   border-radius: 24px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 600;
   color: #41417e;
   background-color: white;
   border: 1px solid #41417e;
   padding-block: 10px;
   padding-inline: 20px;
-  &:hover{
-    transform:scale(1.03);
-    transition:.5s ease all;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const BoxContain = styled.div`
@@ -100,23 +100,22 @@ export const BoxContain = styled.div`
   width: 33.33%;
   padding: 15px;
   border: 1px solid #41417e;
-
 `;
 export const BoxTitle = styled.p`
   font-size: 30px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #41417e;
-  margin: 0;  
+  margin: 0;
 `;
 export const BoxSubTitle = styled.p`
   font-size: 14px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #41417e;
-  margin: 0;  
+  margin: 0;
 `;
 export const SubText = styled.p`
   font-size: 24px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 600;
   color: #41417e;
   margin: 0;
@@ -130,10 +129,10 @@ export const CourseContain = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
-  &:hover{
+  &:hover {
     cursor: pointer;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const InfoContain = styled.div`
@@ -151,12 +150,12 @@ export const FirstData = styled.div`
 `;
 export const CourseTitle = styled.p`
   font-size: 14px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 0;
 `;
 export const CourseLink = styled.p`
   font-size: 12px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #41417e;
   font-weight: 600;
   cursor: pointer;
@@ -166,15 +165,15 @@ export const Announcement = styled.div`
   font-size: 12px;
   background-color: #5d945a;
   border-radius: 5px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: white;
   padding: 2px;
 `;
 export const Icon = styled.i`
   background-image: url(../images/admin/Demo2.PNG);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   width: 53px;
   height: 53px;
-  cursor:pointer;
-  border-radius:10px 0 0 10px;
+  cursor: pointer;
+  border-radius: 10px 0 0 10px;
 `;

@@ -7,14 +7,16 @@ import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text01_p, Text02, Text02_p, Text03, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
-  const { imgURL, title, subtitle, number, type, level, professor, user, course } = props;
+  const { imgURL, title, subtitle, number, type, level, professor, user, course, responsive1023 } = props;
   const [show, setShow] = useState(false);
   const sendTo = () => {
     setShow(true);
   }
   return (
     <SlideModuleContainer>
-      <div className="hover">
+      <div className="hover" onClick={() => {
+        responsive1023 && sendTo();
+      }}>
         <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
         <div className="text-overlay">
           {type == "subscription" && <button onClick={sendTo}>

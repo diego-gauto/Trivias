@@ -62,7 +62,6 @@ const Edit = () => {
   const [value, setValue] = useState(false);
   const [quill, setQuill] = useState("");
   const [type, setType] = useState("homework");
-  console.log(routerState)
   const { courseID, seasonID, lessonID } = router.query;
   const [mandatory, setMandatory] = useState<boolean>(false)
   const [openSelect, setOpenSelect] = useState<boolean>(false)
@@ -87,7 +86,8 @@ const Edit = () => {
         [{ size: ["small", false, "large", "huge"] }, {
           color: [
             "red",
-            "blue"
+            "blue",
+            "#6717cd",
           ]
         }],
         [
@@ -202,7 +202,10 @@ const Edit = () => {
 
   const addQuestion = () => {
     let tempQuiz: any = quiz;
-    if (question.question !== "") {
+    if (tempQuiz.questions) {
+      tempQuiz.questions.push(question)
+    } else {
+      tempQuiz.questions = [];
       tempQuiz.questions.push(question)
     }
     setQuiz({ ...tempQuiz })
@@ -221,6 +224,7 @@ const Edit = () => {
     }
     setQuiz({ ...tempQuiz })
   }
+
   const changeStatus = (index: number, ind: number) => {
     let tempQuiz: any = quiz;
     tempQuiz.questions[index].answers.forEach((element: any, idx: number) => {
@@ -236,7 +240,6 @@ const Edit = () => {
   const removeAnswer = (index: number, ind: number) => {
     let tempQuiz: any = quiz;
     tempQuiz.questions[index].answers.splice(ind, 1)
-    console.log({ ...tempQuiz })
     setQuiz({ ...tempQuiz })
   }
 
@@ -561,7 +564,7 @@ const Edit = () => {
                     </div>
 
                     {
-                      quiz.questions.map((question: any, index: any) => {
+                      quiz.questions && quiz.questions.map((question: any, index: any) => {
                         return (
                           <div className="question-content" key={"Preguntas " + index}>
                             <div className="questions">

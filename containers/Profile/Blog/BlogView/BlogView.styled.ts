@@ -22,20 +22,30 @@ export const BlogContainer = styled.div`
       }
     }
     .right-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
       width: 24%;
       @media (max-width: 1023px) {
         display: none;
+      }
+      .img-container {
+        display: flex;
+        justify-content: flex-end;
+        img {
+          border-radius: 10px;
+          width: 180%;
+          max-height: 300px;
+          max-width: 500px;
+        }
       }
     }
   }
 `;
 export const FirstSection = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
-  @media (max-width: 1400px) {
-    justify-content: space-between;
-  }
   @media (max-width: 1023px) {
     flex-direction: column;
     gap: 20px;
@@ -45,16 +55,7 @@ export const FirstSection = styled.div`
     flex-direction: column;
     gap: 10px;
     margin-top: 30px;
-    max-width: 600px;
-    @media (max-width: 1250px) {
-      max-width: 45%;
-    }
-    @media (max-width: 1023px) {
-      max-width: 70%;
-    }
-    @media (max-width: 600px) {
-      max-width: 90%;
-    }
+    max-width: 90%;
     .title {
       font-size: 36px;
       font-weight: 600;
@@ -73,12 +74,23 @@ export const FirstSection = styled.div`
       font-weight: 500;
       margin: 0;
     }
-    // .socials{
-    //   display: flex;
-    // }
+    .socials {
+      display: flex;
+      margin-top: 20px;
+      padding: 20px;
+      gap: 30px;
+      .icon {
+        font-size: 18px;
+        opacity: 0.8;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.1;
+        }
+      }
+    }
   }
   .img-container {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-end;
     min-width: 45%;
@@ -86,6 +98,9 @@ export const FirstSection = styled.div`
       justify-content: center;
       min-width: unset;
       width: 100%;
+    }
+    @media (max-width: 770px) {
+      display: flex;
     }
     img {
       border-radius: 10px;
@@ -102,19 +117,9 @@ export const FirstSection = styled.div`
         height: 240px;
       }
       @media (max-width: 1023px) {
-        display: none;
         max-width: 100%;
         width: 100%;
-        height: 400px;
-      }
-      @media (max-width: 770px) {
-        display: unset;
-      }
-      @media (max-width: 600px) {
-        height: 300px;
-      }
-      @media (max-width: 450px) {
-        height: 200px;
+        height: auto;
       }
     }
   }
@@ -125,10 +130,11 @@ export const BoxSection = styled.div`
   width: 100%;
   border: 1px solid #949494;
   border-radius: 5px;
+  margin-top: 10px;
   .title-contain {
     display: flex;
     padding-inline: 20px;
-    padding-block: 20px 30px;
+    padding-block: 25px 25px;
     border-bottom: 1px solid #949494;
     @media (max-width: 500px) {
       padding-inline: 15px;
@@ -222,6 +228,7 @@ export const RelatedArticles = styled.div`
     .sub-title {
       font-size: 14px;
       line-height: 16px;
+      overflow: hidden;
     }
     .img {
       border-radius: 10px;
@@ -246,25 +253,14 @@ export const BottomSection = styled.div`
   }
   .all-cards {
     display: grid;
-    gap: 20px;
+    gap: 2%;
     justify-content: space-between;
-    grid-template-columns: repeat(4, 300px);
+    grid-template-columns: repeat(4, 23%);
     width: 100%;
-    @media (max-width: 1400px) {
-      grid-template-columns: repeat(4, 250px);
-    }
-    @media (max-width: 1200px) {
-      grid-template-columns: repeat(4, 210px);
-    }
     @media (max-width: 1023px) {
-      grid-template-columns: repeat(2, 400px);
-      justify-content: space-around;
-    }
-    @media (max-width: 850px) {
-      grid-template-columns: repeat(2, 330px);
-    }
-    @media (max-width: 750px) {
-      grid-template-columns: repeat(2, 280px);
+      grid-template-columns: repeat(2, 47%);
+      gap: 5%;
+      margin-bottom: 80px;
     }
     @media (max-width: 650px) {
       grid-template-columns: repeat(1, 100%);
@@ -283,31 +279,23 @@ export const BottomSection = styled.div`
       .sub-title {
         font-size: 14px;
         line-height: 15px;
+        overflow: hidden;
       }
       .img {
         border-radius: 10px;
         cursor: pointer;
         width: 100%;
         height: 200px;
-        @media (max-width: 1400px) {
+        @media (max-width: 1300px) {
           height: 170px;
         }
-        @media (max-width: 1200px) {
-          height: 120px;
+        @media (max-width: 1150px) {
+          height: 150px;
         }
         @media (max-width: 1023px) {
           height: 300px;
         }
-        @media (max-width: 850px) {
-          height: 240px;
-        }
         @media (max-width: 750px) {
-          height: 200px;
-        }
-        @media (max-width: 650px) {
-          height: 300px;
-        }
-        @media (max-width: 420px) {
           height: 240px;
         }
       }
@@ -398,4 +386,7 @@ export const GonvarAd = styled.div`
       }
     }
   }
+`;
+export const VideoBlog = styled.div`
+  display: flex;
 `;

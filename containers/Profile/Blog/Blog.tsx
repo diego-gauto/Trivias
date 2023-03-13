@@ -96,7 +96,7 @@ const Blog = () => {
                       </div>
                       <div className="last-text">
                         <h3 className="blog-about">
-                          {blog.subTitle}
+                          {blog.summary}
                         </h3>
                         <a className="read-more" onClick={() => { goToBlog(blog) }}>
                           Leer mas...

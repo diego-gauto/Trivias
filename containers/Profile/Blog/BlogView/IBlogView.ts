@@ -7,6 +7,8 @@ export interface IBlog {
   subTopic: [ISubTopic];
   title: string;
   subTitle: string;
+  link: string;
+  summary: string;
   date: {
     day: number;
     month: number;

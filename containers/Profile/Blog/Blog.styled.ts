@@ -84,6 +84,7 @@ export const BlogItems = styled.div`
       font-size: 24px;
       font-weight: 500;
       line-height: 30px;
+      overflow: hidden;
     }
     .create-date-contain {
       display: flex;
@@ -101,6 +102,7 @@ export const BlogItems = styled.div`
         line-height: 20px;
         font-weight: 400;
         margin: 0;
+        overflow: hidden;
       }
       .read-more {
         font-size: 14px;

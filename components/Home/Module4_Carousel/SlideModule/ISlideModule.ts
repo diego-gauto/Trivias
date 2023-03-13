@@ -10,4 +10,5 @@ export interface ISlideModule {
   user?: any;
   course: any;
   data?: any;
+  responsive1023: any;
 }

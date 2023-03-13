@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import { BlogBackground, BlogInputs } from './CreateBlog.styled';
 import 'react-quill/dist/quill.snow.css';
 import { text } from 'stream/consumers';
@@ -9,7 +10,6 @@ import { addBlog, deleteBlog, getBlogs, updateBlog } from '../../../../store/act
 import { AiOutlineClose } from 'react-icons/ai';
 import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
 import router, { useRouter } from "next/router";
-import { MdKeyboardReturn } from 'react-icons/md';
 import { GiExitDoor } from 'react-icons/gi';
 const CreateBlog = () => {
   const [loader, setLoader] = useState<boolean>(false);
@@ -17,10 +17,13 @@ const CreateBlog = () => {
   const routerState = useRouter().query
   const [image, setImage] = useState<any>("");
   const [quill, setQuill] = useState("");
+  const [blogs, setBlogs] = useState<any>([]);
   const [blog, setBlog] = useState<any>({
     title: "",
     subTitle: "",
+    summary: "",
     path: "",
+    link: "",
     subTopic: [],
   });
   const [topic, setTopic] = useState<any>({
@@ -35,7 +38,9 @@ const CreateBlog = () => {
         [{ size: ["small", "normal", "large", "huge"] }, {
           color: [
             "red",
-            "blue"
+            "blue",
+            "#6717cd",
+            "black",
           ]
         }],
         [
@@ -45,6 +50,7 @@ const CreateBlog = () => {
           { indent: "+1" },
           { align: [] }
         ],
+        ['link', 'image', 'video'],
         ["clean"]
       ],
     },
@@ -61,6 +67,9 @@ const CreateBlog = () => {
     "list",
     "bullet",
     "indent",
+    "link",
+    "image",
+    "video",
     "align"
   ];
   const { blogId } = routerState;
@@ -145,17 +154,47 @@ const CreateBlog = () => {
     //   console.log(res);
     //   addBlog(res)
     // })
-    addBlog(blog).then(() => {
-      router.push({ pathname: "/admin/Blog" })
+    let checkTitles: number = 0;
+    blogs.forEach((element: any) => {
+      if (element.title === blog.title) {
+        checkTitles++;
+      }
+    });
+    if (blog.path === "") {
+      alert("Seleccione una imagen");
       setProcessLoader(false);
-    })
+    }
+    else {
+      if (checkTitles > 0) {
+        alert("Titulo repetido, elija uno diferente")
+        setProcessLoader(false);
+      }
+      else {
+        addBlog(blog).then(() => {
+          router.push({ pathname: "/admin/Blog" })
+          setProcessLoader(false);
+        })
+      }
+    }
   }
   const editBlog = async () => {
     setProcessLoader(true);
-    updateBlog(blog, blog.id).then(() => {
-      router.push({ pathname: "/admin/Blog" })
+    let checkTitles: number = 0;
+    blogs.forEach((element: any) => {
+      if (element.title === blog.title) {
+        checkTitles++;
+      }
+    });
+    if (checkTitles > 0) {
+      alert("Titulo repetido, elija uno diferente")
       setProcessLoader(false);
-    })
+    }
+    else {
+      updateBlog(blog, blog.id).then(() => {
+        router.push({ pathname: "/admin/Blog" })
+        setProcessLoader(false);
+      })
+    }
   }
   const deleteBlock = async () => {
     if (confirm("¿Quieres eliminar este blog?, Esta acción no tiene marcha atrás.")) {
@@ -169,19 +208,22 @@ const CreateBlog = () => {
   }
   const getNewBlog = () => {
     let tempBlog: any;
+    let tempAllBlogs: any;
     getBlogs().then((res) => {
-      tempBlog = res.filter((allBlogs: any) => allBlogs.id == blogId)
-      setBlog(tempBlog[0]);
+      if (blogId) {
+        tempAllBlogs = res.filter((allBlogs: any) => allBlogs.id !== blogId)
+        tempBlog = res.filter((allBlogs: any) => allBlogs.id === blogId)
+        setBlog(tempBlog[0]);
+        setBlogs(tempAllBlogs);
+      }
+      else {
+        setBlogs(res);
+      }
       setLoader(true);
     })
   }
   useEffect(() => {
-    if (blogId) {
-      getNewBlog();
-    }
-    else {
-      setLoader(true);
-    }
+    getNewBlog();
   }, [quill])
   return (
     <BlogBackground>
@@ -262,6 +304,40 @@ const CreateBlog = () => {
                     type="file"
                     style={{ width: "90%" }}
                     onChange={(e) => { getImage(e.target.files) }}
+                  />
+                </BlogInputs>
+              </div >
+              <div className="blog-row">
+                <BlogInputs>
+                  <label className="blog-label">
+                    Resumen
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="Resumen del blog"
+                    defaultValue={blog.summary}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, summary: e.target.value
+                      })
+                    }}
+                  />
+                </BlogInputs>
+              </div>
+              <div className="blog-row">
+                <BlogInputs>
+                  <label className="blog-label">
+                    Link de Video ( Opcional )
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="https://video.gonvar.io/media/alineacion_sep/1/master.m3u8"
+                    defaultValue={blog.link}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, link: e.target.value
+                      })
+                    }}
                   />
                 </BlogInputs>
               </div>

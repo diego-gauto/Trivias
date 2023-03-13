@@ -6,7 +6,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
   width: 100%;
   justify-content: space-between;
   background-color: #dad3e5;
-  padding-block: 5px;
+  padding-block: 15px;
   padding-inline: 70px;
   // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -32,6 +32,18 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     padding-block: 10px;
     padding-inline: 0;
     // padding-top: 60px;
+  }
+  .bg-transparent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    display: none;
+    @media (max-width: 1000px) {
+      display: flex;
+    }
   }
 `;
 export const NavTags = styled.div`
@@ -372,7 +384,7 @@ export const NavResponsive = styled.div`
   align-items: center;
   width: 100%;
   padding-block: 10px;
-  // padding-bottom: 25px;
+  z-index: 2;
   padding-right: 40px !important;
   padding-inline: 20px;
   justify-content: space-between;

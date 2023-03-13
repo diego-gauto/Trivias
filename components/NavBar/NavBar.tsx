@@ -86,6 +86,10 @@ const NavBar = () => {
         var userData: any;
         response.forEach((e) => {
           userData = e.data()
+          if (userData.role == "admin" && (!("adminType" in userData))) {
+            addAdmintypes(e.id);
+          }
+          //AQUI VA
         });
         setUserData(userData)
         if (userData.role == "admin") {
@@ -97,7 +101,7 @@ const NavBar = () => {
       return false
     }
   }
-  const addAdmintypes = async () => {
+  const addAdmintypes = async (id: any) => {
     const createAdminType: any = {
       general: true,
       pay: false,
@@ -108,7 +112,7 @@ const NavBar = () => {
       users: false,
       superAdmin: false
     }
-    const docRef = doc(db, 'users', userData.id);
+    const docRef = doc(db, 'users', id);
     await updateDoc(docRef, {
       adminType: createAdminType,
     }).then(() => {
@@ -138,11 +142,6 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
-    if (userData != null) {
-      if (userData.role == "admin" && (!("adminType" in userData))) {
-        addAdmintypes();
-      }
-    }
   }, [userData]);
   useEffect(
     () => {
@@ -150,9 +149,17 @@ const NavBar = () => {
     },
     [pathname],
   );
+
+  const closeNavbar = () => {
+    setHamburger(false);
+    setIngresarOpetionsMenuIsOpen(false);
+    setNewHamburgerMenuIsOpen(false);
+  }
+
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
+      {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
       <LogoContain>
         {
           pathname == "/" ?
@@ -161,8 +168,7 @@ const NavBar = () => {
                 color == 0 &&
                 <Link href="/">
                   <Logo style={{
-                    width: "auto", height: "66.6%",
-                    paddingTop: "15px"
+                    width: "130px", height: "30px",
                   }} src="/images/Navbar/NavbarLogo.png" />
                 </Link>
               }
@@ -170,8 +176,7 @@ const NavBar = () => {
                 color == 1 &&
                 <Link href="/">
                   <Logo style={{
-                    width: "auto", height: "66.6%",
-                    paddingTop: "15px"
+                    width: "130px", height: "30px",
                   }} src="/images/Navbar/NavbarLogo2.png" />
                 </Link>
               }
@@ -179,8 +184,7 @@ const NavBar = () => {
             :
             <Link href="/">
               <Logo style={{
-                width: "auto", height: "66.6%",
-                paddingTop: "15px"
+                width: "130px", height: "30px",
               }} src="/images/Navbar/NavbarLogo.png" />
             </Link>
         }
@@ -352,7 +356,7 @@ const NavBar = () => {
                     Tienda
                   </HBList>
                 </a>
-                <Link href="/Preview" >
+                <Link href="/Blog" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Blog" ? { fontWeight: 600 } : {}}>
                     Blog
                   </HBList>
@@ -364,7 +368,6 @@ const NavBar = () => {
             </HamburgerContain>
           </>
         }
-
       </NavResponsive>
     </NavContainer >
 

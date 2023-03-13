@@ -155,18 +155,18 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 </Cross>
               </div>
               <TextContainer>
-                <p className="course">CURSO</p>
-                <p className="title">{course.courseTittle}</p>
+                {/* <p className="course">CURSO</p>
+                <p className="title">{course.courseTittle}</p> */}
                 {course.courseType == "Producto" && <p className="price">por ${course.coursePrice?.toLocaleString('en-US')} <span>MXN</span></p>}
-                <PurpleButton onClick={goTo}>
+                <button onClick={goTo}>
                   Comenzar ahora
-                </PurpleButton>
+                </button>
               </TextContainer>
             </Container>
           </ModalBackground>
           <CourseContain level={course.courseDifficulty}>
             {!responsive990 && <div className="left">
-              <p>{course.courseTittle}.</p>
+              <p className="title">{course.courseTittle}.</p>
               <div className="level-container">
                 {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                 {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}

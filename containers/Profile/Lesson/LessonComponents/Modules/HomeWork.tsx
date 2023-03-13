@@ -26,13 +26,15 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    let tempAnswers: any = [];
-    setNext(100 / data.quiz?.questions.length);
-    setProgress(100 / data.quiz?.questions.length)
-    data.quiz?.questions.forEach((element: any) => {
-      tempAnswers.push([]);
-    });
-    setAnswers(tempAnswers);
+    if ("type" in data && data.type === "quiz") {
+      let tempAnswers: any = [];
+      setNext(100 / data.quiz?.questions.length);
+      setProgress(100 / data.quiz?.questions.length)
+      data.quiz?.questions.forEach((element: any) => {
+        tempAnswers.push([]);
+      });
+      setAnswers(tempAnswers);
+    }
   }, [])
 
 

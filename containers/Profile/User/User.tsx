@@ -209,6 +209,7 @@ const User = () => {
       maximum = Math.max(...arrCourse.map((val: any) => val.total));
       arrCourse = arrCourse.filter((val: any) => val.total == maximum);
       setNextCertificate(arrCourse[0]);
+
     })
   }
   const certificateProgressBar = () => {

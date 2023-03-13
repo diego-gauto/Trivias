@@ -99,7 +99,7 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
           <select onChange={(e) => { setType(e.target.value) }}>
             <option value="points">Puntos</option>
             <option value="months">Tiempo</option>
-            <option value="certificates">Certificados</option>
+            {/* <option value="certificates">Certificados</option> */}
           </select>
         </InputContain>
         {type == "points" && <InputContain>

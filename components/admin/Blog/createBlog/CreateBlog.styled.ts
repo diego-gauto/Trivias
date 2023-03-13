@@ -116,7 +116,7 @@ export const BlogInputs = styled.div`
   gap: 5px;
   #quill {
     .ql-container {
-      height: 100px;
+      height: auto;
     }
   }
   .quill {

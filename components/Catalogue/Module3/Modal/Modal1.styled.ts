@@ -34,7 +34,7 @@ export const ModalBackground = styled.div`
   position: relative;
   min-height: 270px;
   @media (max-width: 991px) {
-    margin: 40px;
+    margin-bottom: 20px;
   }
   @media (max-width: 550px) {
     margin: 0;
@@ -105,7 +105,13 @@ export const TextContainer = styled.div`
   gap: 2px;
   align-items: center;
   text-align: center;
-  padding-block-end: 40px;
+  padding-block-end: 15px;
+  @media (max-width: 991px) {
+    padding-block-end: 8px;
+  }
+  @media (max-width: 450px) {
+    padding-block-end: 4px;
+  }
   p {
     color: white;
     margin: 0;
@@ -128,11 +134,33 @@ export const TextContainer = styled.div`
     font-size: 20px;
     font-weight: 700;
   }
+
   button {
-    margin-block-start: 30px;
-    padding-inline: 20px;
-    @media (max-width: 990px) {
-      font-size: 14px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    justify-content: center;
+    padding-inline: 15px;
+    padding-block: 8px;
+    background: linear-gradient(135deg, #952ced 22%, #ca41d4 80%);
+    color: #fff;
+    border-radius: 100px;
+    border: none;
+    &:hover {
+      background-color: #5000b5;
+      transform: scale(1.03);
+      transition: 0.5s ease all;
+    }
+    @media (max-width: 991px) {
+      font-size: 12px;
+      padding-block: 6px;
+    }
+    @media (max-width: 450px) {
+      padding-block: 4px;
+      font-size: 10px;
     }
   }
 `;
@@ -180,19 +208,17 @@ export const SubTitle = styled.p`
 `;
 export const ImageBack = styled.img`
   width: 100%;
+  height: auto;
   @media (max-width: 990px) {
-    max-height: 400px;
-    border-radius: 30px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
   @media (max-width: 550px) {
-    max-height: 400px;
-    border-radius: 0;
-  }
-  @media (max-width: 450px) {
-    max-height: 350px;
-  }
-  @media (max-width: 400px) {
-    max-height: 300px;
+    width: 100%;
+    height: auto !important;
+    margin-top: 0;
+    margin-bottom: auto;
   }
 `;
 export const ImageDiv = styled.div`
@@ -250,6 +276,15 @@ export const CourseContain = styled.div<{ level: any }>`
     font-weight: 500;
     line-height: initial;
   }
+  .title {
+    font-size: 25px;
+    @media (max-width: 500px) {
+      font-size: 20px;
+    }
+    @media (max-width: 400px) {
+      font-size: 18px;
+    }
+  }
   .responsive-top-info {
     border-bottom: 1px solid #80808063;
     display: flex;
@@ -258,14 +293,7 @@ export const CourseContain = styled.div<{ level: any }>`
       flex: 1;
       border-bottom: none;
       display: flex;
-      .title {
-        @media (max-width: 450px) {
-          font-size: 12px;
-        }
-        @media (max-width: 400px) {
-          font-size: 11px;
-        }
-      }
+
       .professor-container {
         display: flex;
         align-items: center;
@@ -365,6 +393,9 @@ export const CourseContain = styled.div<{ level: any }>`
         width: fit-content;
         padding: 5px 20px;
         margin-block-start: 15px;
+        @media (max-width: 550px) {
+          margin-block: 8px;
+        }
         @media (max-width: 450px) {
           font-size: 10px;
           padding: 5px 15px;

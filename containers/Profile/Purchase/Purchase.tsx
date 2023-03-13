@@ -71,6 +71,7 @@ const Purchase = () => {
       if (userDataAuth.user !== null) {
         setLoggedIn(true)
       } else {
+        window.location.href = "/auth/Login";
         setLoggedIn(false)
       }
     }, [])

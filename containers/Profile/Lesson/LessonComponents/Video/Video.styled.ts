@@ -37,6 +37,7 @@ export const VideoContain = styled.div`
       height: auto !important;
     }
     video {
+      height: 100% !important;
       object-fit: cover;
     }
   }
