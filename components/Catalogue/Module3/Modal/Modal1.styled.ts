@@ -527,6 +527,7 @@ export const CourseContain = styled.div<{ level: any }>`
         img {
           width: 70px;
           border-radius: 50%;
+          aspect-ratio: 1;
         }
       }
     }
