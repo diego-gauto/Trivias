@@ -30,7 +30,8 @@ import { getSeason } from "../../../../store/actions/courseActions";
 import ModalMaterials from "./ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'
-import { AiFillStar } from "react-icons/ai";
+import { AiFillInfoCircle, AiFillStar } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
 
 const Modal1 = ({ show, setShow, course, user }: any) => {
   const [material, setMaterial] = useState(false);
@@ -190,6 +191,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
+                  <div className="tooltip"><AiFillInfoCircle /></div>
+                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div>
                 </div>
               </div>
               <div className="right">
@@ -216,6 +219,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
+                  <div className="tooltip"><AiFillInfoCircle /></div>
+                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div>
                 </div>
               </div>}
               <div className="bottom">
