@@ -34,7 +34,6 @@ const BlogView = () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-
         response.forEach((e: any) => {
           setUserData({ ...e.data(), id: e.id });
         });
@@ -50,7 +49,6 @@ const BlogView = () => {
         setLoggedIn(true)
       } else {
         setLoggedIn(false)
-        router.push("auth/Login")
       }
     }, [])
 
