@@ -65,7 +65,7 @@ const BlogView = () => {
   const goToBlog = (blog: any) => {
     setLoader(true);
     let blogText: any = blog.title.replaceAll(" ", "-");
-    router.push({ pathname: `/${blogText}` }).then(() => {
+    router.push({ pathname: `/Blog/${blogText}` }).then(() => {
       window.location.reload();
     })
   }
@@ -233,9 +233,9 @@ const BlogView = () => {
           </FirstSection>
           <BoxSection>
             <div className="title-contain">
-              <h1 className="title">
+              <p className="title">
                 En este artículo aprenderás
-              </h1>
+              </p>
             </div>
             <div className="subtitle-container">
               {

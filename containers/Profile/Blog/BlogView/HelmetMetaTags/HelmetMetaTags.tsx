@@ -37,7 +37,6 @@ export default function HelmetMetaTags(props: any) {
       <meta property="og:url" content={currentUrl} />
       <meta property="og:site_name" content="CampersTribe" />
       <meta property="og:description" content={description} />
-      <meta name="google-site-verification" content="ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw" />
     </Helmet>
   );
 }
