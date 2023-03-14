@@ -334,7 +334,7 @@ const BlogView = () => {
         </div>
         <div className="right-content">
           <div className="img-container" key="remove" id="remove">
-            <img src={blog?.path} />
+            <img src={blog?.path} alt={blog?.title} />
           </div>
           <RelatedArticles>
             <p className="titles">ARTÍCULOS RELACIONADOS</p>
