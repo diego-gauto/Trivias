@@ -1,6 +1,6 @@
 import React from 'react'
-import BlogView from '../containers/Profile/Blog/BlogView/BlogView';
-import { MainContain } from "../screens/Styles.styled";
+import BlogView from '../../containers/Profile/Blog/BlogView/BlogView';
+import { MainContain } from "../../screens/Styles.styled";
 const BlogScreen = () => {
   return (
     <MainContain

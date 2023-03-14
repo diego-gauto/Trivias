@@ -141,6 +141,7 @@ export const BoxSection = styled.div`
       padding-block: 15px;
     }
     .title {
+      font-weight: 600;
       font-size: 18px;
       margin: 0;
     }

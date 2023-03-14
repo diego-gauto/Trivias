@@ -34,7 +34,6 @@ const BlogView = () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
       return onSnapshot(query_1, (response) => {
-
         response.forEach((e: any) => {
           setUserData({ ...e.data(), id: e.id });
         });
@@ -50,7 +49,6 @@ const BlogView = () => {
         setLoggedIn(true)
       } else {
         setLoggedIn(false)
-        router.push("auth/Login")
       }
     }, [])
 
@@ -65,7 +63,7 @@ const BlogView = () => {
   const goToBlog = (blog: any) => {
     setLoader(true);
     let blogText: any = blog.title.replaceAll(" ", "-");
-    router.push({ pathname: `/${blogText}` }).then(() => {
+    router.push({ pathname: `/Blog/${blogText}` }).then(() => {
       window.location.reload();
     })
   }
@@ -233,9 +231,9 @@ const BlogView = () => {
           </FirstSection>
           <BoxSection>
             <div className="title-contain">
-              <h1 className="title">
+              <p className="title">
                 En este artículo aprenderás
-              </h1>
+              </p>
             </div>
             <div className="subtitle-container">
               {
@@ -336,7 +334,7 @@ const BlogView = () => {
         </div>
         <div className="right-content">
           <div className="img-container" key="remove" id="remove">
-            <img src={blog?.path} />
+            <img src={blog?.path} alt={blog?.title} />
           </div>
           <RelatedArticles>
             <p className="titles">ARTÍCULOS RELACIONADOS</p>

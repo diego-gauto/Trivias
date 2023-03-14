@@ -330,6 +330,8 @@ export const CourseContain = styled.div<{ level: any }>`
         img {
           width: 50px;
           border-radius: 50%;
+          aspect-ratio: 1;
+          object-fit: cover;
           @media (max-width: 450px) {
             width: 40px;
           }
@@ -593,8 +595,9 @@ export const CourseContain = styled.div<{ level: any }>`
         }
         img {
           width: 70px;
+          height: 70px;
+          object-fit: cover;
           border-radius: 50%;
-          aspect-ratio: 1;
         }
         .tooltip {
           position: relative;

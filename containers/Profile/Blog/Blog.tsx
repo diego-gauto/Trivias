@@ -12,7 +12,7 @@ const Blog = () => {
 
   const goToBlog = (blog: any) => {
     let blogText: any = blog.title.replaceAll(" ", "-");
-    router.push({ pathname: `/${blogText}` })
+    router.push({ pathname: `/Blog/${blogText}` })
   }
   useEffect(() => {
     getBlogs().then((res: any) => {
