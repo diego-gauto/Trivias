@@ -191,8 +191,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
-                  <div className="tooltip"><AiFillInfoCircle /></div>
-                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div>
+                  {/* <div className="tooltip"><AiFillInfoCircle /></div>
+                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div> */}
                 </div>
               </div>
               <div className="right">
@@ -218,9 +218,16 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <div className="professor-container">
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
-                  <div className="tooltip"><AiFillInfoCircle /></div>
-                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div>
+                    <span className="name">
+                      {
+                        course.courseProfessor?.length > 0
+                          ? <>{course.courseProfessor[0].name} <AiFillInfoCircle /></>
+                          : <>Iker Robles García <AiFillInfoCircle /></>
+                      }
+                    </span>
+                  </p>
+                  {/* 
+                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div> */}
                 </div>
               </div>}
               <div className="bottom">
