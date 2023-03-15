@@ -172,7 +172,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                 {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
                 {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                <p>{course.courseDifficulty}</p>
+                <p>
+                  {course.courseDifficulty}
+                  <div className="info-icon">
+                    i
+                    <div className="info-box">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                  </div>
+                </p>
               </div>
               <p className="time">Duración estimada</p>
               <p className="duration">{hms(course.totalDuration)}</p>
@@ -185,19 +193,34 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                   {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
                   {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                  <p>{course.courseDifficulty}</p>
+                  <p>
+                    {course.courseDifficulty}
+                    <div className="info-icon">
+                      i
+                      <div className="info-box">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </div>
+                    </div>
+                  </p>
                 </div>
                 <div className="professor-container">
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
-                  <div className="tooltip"><AiFillInfoCircle /></div>
-                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div>
+                    <span className="name">
+                      {course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}
+                    </span>
+                    <div className="info-icon">
+                      i
+                      <div className="info-box">
+                        <p>{course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}</p>
+                      </div>
+                    </div>
+                  </p>
                 </div>
               </div>
               <div className="right">
                 <div className="rating">
-                  <p>{course.courseRating ? (course.courseRating / 20) : 0}</p>
+                  <p>{course.courseRating ? (course.courseRating / 20) : 0} (142)</p>
                   <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
@@ -210,7 +233,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
             <div className="right">
               {!responsive990 && <div className="top">
                 <div className="rating">
-                  <p>{course.courseRating ? (course.courseRating / 20) : 0}</p>
+                  <p>{course.courseRating ? (course.courseRating / 20) : 0} <span className="review-count">(142)</span></p>
                   <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
@@ -218,9 +241,21 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <div className="professor-container">
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
-                  <div className="tooltip"><AiFillInfoCircle /></div>
-                  <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div>
+                    <span className="name">
+                      {
+                        course.courseProfessor?.length > 0
+                          ? <>{course.courseProfessor[0].name} </>
+                          : <>Iker Robles García</>
+                      }
+                    </span>
+                    <div className="info-icon">
+                      i
+                      <div className="info-box">
+                        <p>{course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}</p>
+                      </div>
+                    </div>
+
+                  </p>
                 </div>
               </div>}
               <div className="bottom">

@@ -306,6 +306,53 @@ export const CourseContain = styled.div<{ level: any }>`
         }
         p {
           font-size: 12px;
+          .info-icon {
+            display: inline-block;
+            font-size: 6px;
+            font-weight: 600;
+            line-height: 6px;
+            position: relative;
+            top: -5px;
+            border-radius: 100%;
+            background-color: gray;
+            color: white;
+            height: 10px;
+            width: 10px;
+            text-align: center;
+            padding-top: 2px;
+            padding-left: 2px;
+            left: 2px;
+            cursor: pointer;
+            font-weight: 500;
+            @media (max-width: 450px) {
+              top: -2px !important;
+            }
+            &:hover {
+              .info-box {
+                display: block;
+                width: 200px;
+                background: gray;
+                border-radius: 10px 10px 0px 10px;
+                transform: translate(-99%, -110%);
+                padding: 10px;
+                text-align: left;
+                p {
+                  color: white;
+                }
+                @media (max-width: 990px) {
+                  transform: translate(-50%, -130%);
+                }
+                @media (max-width: 450px) {
+                  transform: translate(-50%, -150%);
+                }
+              }
+            }
+          }
+          .info-box {
+            position: absolute;
+            display: none;
+          }
+
           @media (max-width: 450px) {
             letter-spacing: 1px;
             font-size: 8px;
@@ -316,6 +363,7 @@ export const CourseContain = styled.div<{ level: any }>`
           span {
             font-weight: 600;
           }
+
           .name {
             font-size: 16px;
             letter-spacing: 0;
@@ -466,6 +514,50 @@ export const CourseContain = styled.div<{ level: any }>`
       display: flex;
       gap: 10px;
       align-items: center;
+      .info-icon {
+        display: inline-block;
+        font-size: 6px;
+        font-weight: 600;
+        position: relative;
+        line-height: 6px;
+        top: -5px;
+        border-radius: 100%;
+        background-color: gray;
+        color: white;
+        height: 10px;
+        width: 10px;
+        text-align: center;
+        padding-top: 2px;
+        padding-left: 2px;
+        cursor: pointer;
+        text-transform: lowercase;
+        font-weight: 500;
+        @media (max-width: 450px) {
+          top: -2px;
+        }
+
+        &:hover {
+          .info-box {
+            display: block;
+            width: 200px;
+            background: gray;
+            border-radius: 10px 10px 0px 10px;
+            transform: translate(-99%, -110%);
+            padding: 10px;
+            text-align: left;
+            p {
+              color: white;
+            }
+            @media (max-width: 990px) {
+              transform: translate(-50%, -140%);
+            }
+          }
+        }
+      }
+      .info-box {
+        position: absolute;
+        display: none;
+      }
       @media (max-width: 450px) {
         margin-block-start: 8px;
         margin-block-end: 12px;
@@ -574,6 +666,16 @@ export const CourseContain = styled.div<{ level: any }>`
         p {
           font-size: 28px;
           font-weight: 600;
+          justify-content: center;
+          flex-wrap: wrap;
+          text-align: center;
+          display: flex;
+          align-items: center;
+
+          .review-count {
+            font-weight: 400;
+            font-size: initial;
+          }
         }
         svg {
           font-size: 25px;
@@ -591,6 +693,46 @@ export const CourseContain = styled.div<{ level: any }>`
           }
           .name {
             font-size: 16px;
+          }
+          .info-icon {
+            display: inline-block;
+            font-size: 6px;
+            font-weight: 600;
+            position: relative;
+            top: -5px;
+            border-radius: 100%;
+            background-color: gray;
+            line-height: 6px;
+            color: white;
+            height: 10px;
+            width: 10px;
+            text-align: center;
+            padding-top: 2px;
+            padding-left: 2px;
+            right: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            @media (max-width: 450px) {
+              top: -2px !important;
+            }
+            &:hover {
+              .info-box {
+                display: block;
+                width: 200px;
+                background: gray;
+                border-radius: 10px 10px 0px 10px;
+                transform: translate(-99%, -110%);
+                padding: 10px;
+                text-align: left;
+                p {
+                  color: white;
+                }
+              }
+            }
+          }
+          .info-box {
+            position: absolute;
+            display: none;
           }
         }
         img {
@@ -876,7 +1018,7 @@ export const Lock = styled.i`
   background-position: center;
   cursor: pointer;
 `;
-export const PlayIcon = styled.i`
+export const Play = styled.i`
   background-repeat: no-repeat;
   background-image: url(../images/Preview/rigthArrow.svg);
   height: 20px;
