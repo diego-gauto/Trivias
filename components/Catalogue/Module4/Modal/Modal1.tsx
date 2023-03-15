@@ -172,7 +172,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                 {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
                 {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                <p>{course.courseDifficulty}</p>
+                <p>
+                  {course.courseDifficulty}
+                  <div className="info-icon">
+                    i
+                    <div className="info-box">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                  </div>
+                </p>
               </div>
               <p className="time">Duración estimada</p>
               <p className="duration">{hms(course.totalDuration)}</p>
@@ -185,12 +193,29 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                   {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
                   {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                  <p>{course.courseDifficulty}</p>
+                  <p>
+                    {course.courseDifficulty}
+                    <div className="info-icon">
+                      i
+                      <div className="info-box">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </div>
+                    </div>
+                  </p>
                 </div>
                 <div className="professor-container">
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
-                    <span className="name">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}</span></p>
+                    <span className="name">
+                      {course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}
+                    </span>
+                    <div className="info-icon">
+                      i
+                      <div className="info-box">
+                        <p>{course.courseProfessor?.about ? course.courseProfessor.about : "Lorem ipsum"}</p>
+                      </div>
+                    </div>
+                  </p>
                   {/* <div className="tooltip"><AiFillInfoCircle /></div>
                   <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div> */}
                 </div>
@@ -221,10 +246,17 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <span className="name">
                       {
                         course.courseProfessor?.length > 0
-                          ? <>{course.courseProfessor[0].name} <AiFillInfoCircle /></>
-                          : <>Iker Robles García <AiFillInfoCircle /></>
+                          ? <>{course.courseProfessor[0].name} </>
+                          : <>Iker Robles García</>
                       }
                     </span>
+                    <div className="info-icon">
+                      i
+                      <div className="info-box">
+                        <p>{course.courseProfessor?.about ? course.courseProfessor.about : "Lorem ipsum"}</p>
+                      </div>
+                    </div>
+
                   </p>
                   {/* 
                   <div className="tooltiptext">{course.courseProfessor?.length > 0 ? course.courseProfessor[0].about : "hola"}</div> */}
