@@ -16,6 +16,8 @@ export const AboutContain = styled.div`
     img {
       border-radius: 50%;
       width: 50%;
+      aspect-ratio: 1;
+      object-fit: cover;
       position: absolute;
       top: 0;
       left: 0;
