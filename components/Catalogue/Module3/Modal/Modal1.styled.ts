@@ -308,15 +308,15 @@ export const CourseContain = styled.div<{ level: any }>`
           font-size: 12px;
           .info-icon {
             display: inline-block;
-            font-size: 0.6rem;
+            font-size: 6px;
             font-weight: 600;
             position: relative;
             top: -5px;
             border-radius: 100%;
             background-color: gray;
             color: white;
-            height: 15px;
-            width: 15px;
+            height: 10px;
+            width: 10px;
             text-align: center;
             padding-top: 2px;
             padding-left: 1px;
@@ -325,7 +325,6 @@ export const CourseContain = styled.div<{ level: any }>`
             font-weight: 500;
             @media (max-width: 450px) {
               top: -2px !important;
-              scale: 0.8;
             }
             &:hover {
               .info-box {
@@ -516,15 +515,15 @@ export const CourseContain = styled.div<{ level: any }>`
       align-items: center;
       .info-icon {
         display: inline-block;
-        font-size: 0.6rem;
+        font-size: 6px;
         font-weight: 600;
         position: relative;
         top: -5px;
         border-radius: 100%;
         background-color: gray;
         color: white;
-        height: 15px;
-        width: 15px;
+        height: 10px;
+        width: 10px;
         text-align: center;
         padding-top: 2px;
         padding-left: 1px;
@@ -533,7 +532,6 @@ export const CourseContain = styled.div<{ level: any }>`
         font-weight: 500;
         @media (max-width: 450px) {
           top: -2px;
-          scale: 0.8;
         }
 
         &:hover {
@@ -666,6 +664,16 @@ export const CourseContain = styled.div<{ level: any }>`
         p {
           font-size: 28px;
           font-weight: 600;
+          justify-content: center;
+          flex-wrap: wrap;
+          text-align: center;
+          display: flex;
+          align-items: center;
+
+          .review-count {
+            font-weight: 400;
+            font-size: initial;
+          }
         }
         svg {
           font-size: 25px;
@@ -686,15 +694,15 @@ export const CourseContain = styled.div<{ level: any }>`
           }
           .info-icon {
             display: inline-block;
-            font-size: 0.6rem;
+            font-size: 6px;
             font-weight: 600;
             position: relative;
             top: -5px;
             border-radius: 100%;
             background-color: gray;
             color: white;
-            height: 15px;
-            width: 15px;
+            height: 10px;
+            width: 10px;
             text-align: center;
             padding-top: 2px;
             padding-left: 1px;
@@ -703,7 +711,6 @@ export const CourseContain = styled.div<{ level: any }>`
             font-weight: 500;
             @media (max-width: 450px) {
               top: -2px !important;
-              scale: 0.8;
             }
             &:hover {
               .info-box {
