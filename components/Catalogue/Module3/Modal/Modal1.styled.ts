@@ -310,6 +310,7 @@ export const CourseContain = styled.div<{ level: any }>`
             display: inline-block;
             font-size: 6px;
             font-weight: 600;
+            line-height: 6px;
             position: relative;
             top: -5px;
             border-radius: 100%;
@@ -319,7 +320,7 @@ export const CourseContain = styled.div<{ level: any }>`
             width: 10px;
             text-align: center;
             padding-top: 2px;
-            padding-left: 1px;
+            padding-left: 2px;
             left: 2px;
             cursor: pointer;
             font-weight: 500;
@@ -518,6 +519,7 @@ export const CourseContain = styled.div<{ level: any }>`
         font-size: 6px;
         font-weight: 600;
         position: relative;
+        line-height: 6px;
         top: -5px;
         border-radius: 100%;
         background-color: gray;
@@ -526,7 +528,7 @@ export const CourseContain = styled.div<{ level: any }>`
         width: 10px;
         text-align: center;
         padding-top: 2px;
-        padding-left: 1px;
+        padding-left: 2px;
         cursor: pointer;
         text-transform: lowercase;
         font-weight: 500;
@@ -700,12 +702,13 @@ export const CourseContain = styled.div<{ level: any }>`
             top: -5px;
             border-radius: 100%;
             background-color: gray;
+            line-height: 6px;
             color: white;
             height: 10px;
             width: 10px;
             text-align: center;
             padding-top: 2px;
-            padding-left: 1px;
+            padding-left: 2px;
             right: 5px;
             cursor: pointer;
             font-weight: 500;
