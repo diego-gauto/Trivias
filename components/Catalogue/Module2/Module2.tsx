@@ -66,7 +66,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
           if (allCourses.some((x: any) => x.id == element.documentID)) {
             tempCourse = allCourses.filter((x: any) => x.documentID == element.documentID);
             element.coursePath = tempCourse[0].coursePath;
-            if (tempCourse[0].seasons[element.season].lessons[element.lesson] && ("progress" in tempCourse[0].seasons[element.season].lessons[element.lesson])) {
+            if (tempCourse[0].seasons[element.season]?.lessons[element.lesson] && ("progress" in tempCourse[0].seasons[element.season].lessons[element.lesson])) {
               element.progress = tempCourse[0].seasons[element.season].lessons[element.lesson].progress.filter((x: any) => x.id == user.id)
               element.progress = element.progress[0]?.time
             }

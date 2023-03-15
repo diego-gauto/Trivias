@@ -5,7 +5,6 @@ import { IoIosArrowDown } from "react-icons/io";
 const SelectModule4 = ({ course, handleClick, seasons }: any) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(course.seasons[0]?.name)
-
   useEffect(() => {
     course.seasons.forEach((element: any) => {
       seasons.forEach((season: any) => {
@@ -14,6 +13,7 @@ const SelectModule4 = ({ course, handleClick, seasons }: any) => {
         }
       });
     });
+    setValue(course.seasons[0]?.name);
   }, [])
 
   return (
