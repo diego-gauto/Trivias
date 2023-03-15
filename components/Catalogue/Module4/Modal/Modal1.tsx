@@ -172,15 +172,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                 {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
                 {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                <p>
+                <div className="difficulty-word">
                   {course.courseDifficulty}
                   <div className="info-icon">
                     i
                     <div className="info-box">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
               <p className="time">Duración estimada</p>
               <p className="duration">{hms(course.totalDuration)}</p>
@@ -193,15 +193,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
                   {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
                   {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                  <p>
+                  <div className="difficulty-word">
                     {course.courseDifficulty}
                     <div className="info-icon">
                       i
                       <div className="info-box">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       </div>
                     </div>
-                  </p>
+                  </div>
                 </div>
                 <div className="professor-container">
                   <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
