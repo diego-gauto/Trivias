@@ -212,7 +212,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <div className="info-icon">
                       i
                       <div className="info-box">
-                        <p>{course.courseProfessor?.about ? course.courseProfessor.about : "Lorem ipsum"}</p>
+                        <p>{course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum"}</p>
                       </div>
                     </div>
                   </p>
@@ -253,7 +253,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <div className="info-icon">
                       i
                       <div className="info-box">
-                        <p>{course.courseProfessor?.about ? course.courseProfessor.about : "Lorem ipsum"}</p>
+                        <p>{course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum"}</p>
                       </div>
                     </div>
 
