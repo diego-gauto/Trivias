@@ -209,18 +209,18 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <span className="name">
                       {course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}
                     </span>
-                    <div className="info-icon">
+                    <span className="info-icon">
                       i
-                      <div className="info-box">
-                        <p>{course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}</p>
-                      </div>
-                    </div>
+                      <span className="info-box">
+                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                      </span>
+                    </span>
                   </p>
                 </div>
               </div>
               <div className="right">
                 <div className="rating">
-                  <p>{course.courseRating ? (course.courseRating / 20) : 0} (142)</p>
+                  <p>{course.courseRating ? (course.courseRating / 20) : 0} <span className="review-count">(142)</span></p>
                   <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
@@ -248,13 +248,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                           : <>Iker Robles García</>
                       }
                     </span>
-                    <div className="info-icon">
+                    <span className="info-icon">
                       i
-                      <div className="info-box">
-                        <p>{course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}</p>
-                      </div>
-                    </div>
-
+                      <span className="info-box">
+                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                      </span>
+                    </span>
                   </p>
                 </div>
               </div>}
