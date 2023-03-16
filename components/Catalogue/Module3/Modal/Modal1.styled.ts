@@ -336,6 +336,7 @@ export const CourseContain = styled.div<{ level: any }>`
                 transform: translate(-99%, -110%);
                 padding: 10px;
                 text-align: left;
+                text-size: 1rem;
                 p {
                   color: white;
                 }
@@ -545,6 +546,7 @@ export const CourseContain = styled.div<{ level: any }>`
             transform: translate(-99%, -110%);
             padding: 10px;
             text-align: left;
+            text-size: 1rem;
             p {
               color: white;
             }
@@ -569,7 +571,7 @@ export const CourseContain = styled.div<{ level: any }>`
           width: 15px !important;
         }
       }
-      p {
+      .difficulty-word {
         color: inherit;
         font-size: 12px;
         text-transform: uppercase;
@@ -724,6 +726,7 @@ export const CourseContain = styled.div<{ level: any }>`
                 transform: translate(-99%, -110%);
                 padding: 10px;
                 text-align: left;
+                text-size: 1rem;
                 p {
                   color: white;
                 }
