@@ -447,6 +447,10 @@ export const CourseContain = styled.div<{ level: any }>`
         @media (max-width: 400px) {
           font-size: 12px;
         }
+        .review-count {
+          font-weight: 400;
+          font-size: smaller;
+        }
       }
       .time {
         color: #a733e4;
