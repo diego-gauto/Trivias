@@ -309,7 +309,7 @@ export const CourseContain = styled.div<{ level: any }>`
           .info-icon {
             display: inline-block;
             font-size: 6px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 6px;
             position: relative;
             top: -5px;
@@ -323,7 +323,6 @@ export const CourseContain = styled.div<{ level: any }>`
             padding-left: 2px;
             left: 2px;
             cursor: pointer;
-            font-weight: 500;
             @media (max-width: 450px) {
               top: -2px !important;
             }
@@ -336,10 +335,10 @@ export const CourseContain = styled.div<{ level: any }>`
                 transform: translate(-99%, -110%);
                 padding: 10px;
                 text-align: left;
-                text-size: 1rem;
-                p {
-                  color: white;
-                }
+                font-size: 12px;
+                color: white;
+                letter-spacing: 1px;
+                font-weight: 400;
                 @media (max-width: 990px) {
                   transform: translate(-50%, -130%);
                 }
@@ -550,7 +549,11 @@ export const CourseContain = styled.div<{ level: any }>`
             transform: translate(-99%, -110%);
             padding: 10px;
             text-align: left;
-            text-size: 1rem;
+            line-height: normal;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+
             p {
               color: white;
             }
@@ -730,10 +733,10 @@ export const CourseContain = styled.div<{ level: any }>`
                 transform: translate(-99%, -110%);
                 padding: 10px;
                 text-align: left;
-                text-size: 1rem;
-                p {
-                  color: white;
-                }
+                letter-spacing: 1px;
+                color: white;
+                font-weight: 400;
+                font-size: 12px;
               }
             }
           }

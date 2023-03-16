@@ -209,12 +209,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <span className="name">
                       {course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}
                     </span>
-                    <div className="info-icon">
+                    <span className="info-icon">
                       i
-                      <div className="info-box">
-                        <p>{course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}</p>
-                      </div>
-                    </div>
+                      <span className="info-box">
+                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                      </span>
+                    </span>
                   </p>
                 </div>
               </div>
@@ -248,13 +248,12 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                           : <>Iker Robles García</>
                       }
                     </span>
-                    <div className="info-icon">
+                    <span className="info-icon">
                       i
-                      <div className="info-box">
-                        <p>{course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}</p>
-                      </div>
-                    </div>
-
+                      <span className="info-box">
+                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                      </span>
+                    </span>
                   </p>
                 </div>
               </div>}
