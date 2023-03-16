@@ -2,6 +2,7 @@ import router from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
+import { getSeason } from '../../../../../store/actions/courseActions';
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
@@ -11,6 +12,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
+  const [seasons, setSeasons] = useState<any>([]);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
   useEffect(() => {
@@ -56,6 +58,17 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
       }
     });
   }
+
+  const getCurrentSeason = () => {
+    let tempSeason: any = []
+    getSeason(course.id).then((res) => {
+      tempSeason = res.sort((a: any, b: any) => a.season - b.season)
+      setSeasons(tempSeason)
+    })
+  }
+  useEffect(() => {
+    getCurrentSeason();
+  }, [])
   return (
     <MainContainer open={open}>
       <div className='course-info'>
@@ -101,7 +114,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
               <div className='module'>
                 {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userData?.id} refresh={toggleHandler} />}
                 <div>
-                  <p className='title'>Módulo {index + 1}</p>
+                  <p className='title'>{seasons[index]?.name ? seasons[index]?.name : `Módulo ${index + 1}`}</p>
                   <Episode>
                     {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
                   </Episode>
