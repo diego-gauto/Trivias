@@ -272,7 +272,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 <SelectModule4 course={course} handleClick={handleClick} seasons={seasons} />
               }
             </SeasonContain>
-            {lessons.map((lesson: any, index: any) => {
+            {lessons?.map((lesson: any, index: any) => {
               return (
                 <ContainerVideo key={"lesson " + index}>
                   <VideoContain >
