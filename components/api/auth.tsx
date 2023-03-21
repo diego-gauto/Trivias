@@ -1,12 +1,10 @@
 import axios from "axios";
 
-export const getUsers = async () => {
+export const login = async (user: any) => {
   return axios
     .post("http://localhost:4001/auth/login")
     .then((res) => {
-      console.log(res);
-
-      return res;
+      window.location.href = "/";
     })
     .catch((error) => {
       console.log(error);

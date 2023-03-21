@@ -239,9 +239,6 @@ const User = () => {
   const handleClick = (value: boolean) => {
     fetchDB_data();
   }
-  useEffect(() => {
-    getUsers()
-  }, [])
 
   if (loading) {
     return (

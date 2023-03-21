@@ -23,6 +23,7 @@ import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
+import { getUsers } from "../../components/api/user";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -184,6 +185,10 @@ const Login = () => {
       setIsLoading(false)
     }, 300);
   }, [])
+
+  const googleLogin = () => {
+    getUsers()
+  }
 
   return (
 
@@ -383,7 +388,8 @@ const Login = () => {
                     </div>
                     <div className="socials">
                       <img src="../images/googleLogin.png" onClick={() => {
-                        handleSignUpWithAuthProvider("Google");
+                        // handleSignUpWithAuthProvider("Google");
+                        googleLogin()
                       }} alt="" />
                       <img src="../images/facebookLogin.png" onClick={() => {
                         handleSignUpWithAuthProvider("Facebook");
