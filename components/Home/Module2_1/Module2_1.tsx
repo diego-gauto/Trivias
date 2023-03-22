@@ -25,6 +25,22 @@ export const Module2_1 = (props: IModule2_1) => {
 
   }, [data]);
 
+
+  const startFromRedirect = () => {
+    let newDate = new Date();
+    let currentDaySeconds = (newDate.getTime() / 1000);
+    if (user) {
+      if (user.membership.finalDate > currentDaySeconds) {
+        router.push("/Preview")
+      }
+      else {
+        router.push("/Purchase?type=subscription")
+      }
+    } else {
+      router.push("/auth/Register")
+    }
+  }
+
   const goToPreview = () => {
     if (user) {
       router.push("/auth/Register")
@@ -32,8 +48,6 @@ export const Module2_1 = (props: IModule2_1) => {
       router.push("/Preview")
     }
   }
-
-
 
   return (
     <>
@@ -54,7 +68,7 @@ export const Module2_1 = (props: IModule2_1) => {
           </Subtittle1>}
           <div className="buttons">
             <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
-              onClick={() => router.push("/auth/Register")} />
+              onClick={startFromRedirect} />
             <PurpleEmptyButton text={"Ver cursos"} onClick={() => { goToPreview() }} />
           </div>
         </div>
