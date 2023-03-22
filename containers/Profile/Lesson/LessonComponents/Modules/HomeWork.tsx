@@ -184,7 +184,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
     });
     setAnswers(tempAnswers);
   }
-
   return (
     <>
       <TitleContain >
@@ -206,54 +205,64 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
         </Titles>
         <div className='line'></div>
       </TitleContain>
-      <HomeWorkContain>
-        {(data.type == "homework" || !("type" in data)) ? <div className='right'>
-          <TaskTitle style={{ color: "#f78803" }}>
-            Sube aquí tus prácticas <br />
-            <span>
-              Da click en el botón correspondiente <br />
-              y sube tu tarea manualmente.
-            </span>
-          </TaskTitle>
-          <div className='upload-info'>
-            <p className='title'>Tamaño máximo: <b>5 Mb</b></p>
-            <p className='title'>Formatos permitidos:</p>
-            <div className='files'>
-              <p>PNG</p>
+      <HomeWorkContain >
+        {(data.type == "homework" || !("type" in data)) ?
+          <div className="complete-hw">
+            <div className='right'>
+              <TaskTitle style={{ color: "#f78803" }}>
+                Sube aquí tus prácticas <br />
+                <span>
+                  Da click en el botón correspondiente <br />
+                  y sube tu tarea manualmente.
+                </span>
+              </TaskTitle>
+              <div className='upload-info'>
+                <p className='title'>Tamaño máximo: <b>5 Mb</b></p>
+                <p className='title'>Formatos permitidos:</p>
+                <div className='files'>
+                  <p>PNG</p>
+                  <div className='line'></div>
+                  <p>JPG</p>
+                  <div className='line'></div>
+                  <p>DOC</p>
+                  <div className='line'></div>
+                  <p>DOCX</p>
+                  <div className='line'></div>
+                  <p>PPT</p>
+                  <div className='line'></div>
+                  <p>PPTX</p>
+                  <div className='line'></div>
+                  <p>PDF</p>
+                </div>
+              </div>
               <div className='line'></div>
-              <p>JPG</p>
-              <div className='line'></div>
-              <p>DOC</p>
-              <div className='line'></div>
-              <p>DOCX</p>
-              <div className='line'></div>
-              <p>PPT</p>
-              <div className='line'></div>
-              <p>PPTX</p>
-              <div className='line'></div>
-              <p>PDF</p>
+              {data.homeworkAvailable ? <div className='upload-container'>
+                <p>a. Módulo {parseInt(season) + 1} - Lección {parseInt(lesson) + 1}</p>
+                <p>Tarea: <span>{data.homeWork}</span></p>
+                {status == "pending" && <div className='homework'>
+                  <BsFileArrowUp></BsFileArrowUp>
+                  En Revisión
+                </div>}
+                {status == "aproved" && <div className='homework'>
+                  <BsFileArrowUp></BsFileArrowUp>
+                  Tarea Aprobada
+                </div>}
+              </div> :
+                <p>Lección sin tarea...</p>}
             </div>
+            {
+              data.homeworkAvailable &&
+              <>
+                <p dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }} className="quill-hw" />
+                {status == "" && <div className='homework' onClick={uploadHwk}>
+                  <BsFileArrowUp></BsFileArrowUp>
+                  Subir Tarea
+                  <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
+                </div>}
+              </>
+            }
           </div>
-          <div className='line'></div>
-          {data.homeworkAvailable ? <div className='upload-container'>
-            <p>a. Módulo {parseInt(season) + 1} - Lección {parseInt(lesson) + 1}</p>
-            <p>Tarea: <span>{data.homeWork}</span></p>
-            {status == "" && <div className='homework' onClick={uploadHwk}>
-              <BsFileArrowUp></BsFileArrowUp>
-              Subir Tarea
-              <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
-            </div>}
-            {status == "pending" && <div className='homework'>
-              <BsFileArrowUp></BsFileArrowUp>
-              En Revisión
-            </div>}
-            {status == "aproved" && <div className='homework'>
-              <BsFileArrowUp></BsFileArrowUp>
-              Tarea Aprobada
-            </div>}
-          </div> :
-            <p>Lección sin tarea...</p>}
-        </div> :
+          :
           <div className='quiz'>
             {step == 0 && <div className='quiz-info'>
               <div className='top'>

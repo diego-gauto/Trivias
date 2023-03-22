@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PreviewContain = styled.div`
   display: flex;
@@ -22,6 +22,17 @@ export const ModuleContain = styled.div`
   display: flex;
   flex-direction: Column;
   gap: 40px;
+  .reveal-arrows {
+    .arrows {
+      opacity: 0;
+    }
+    &:hover {
+      .arrows {
+        transition: 0.5s ease all;
+        opacity: 1;
+      }
+    }
+  }
   .line {
     margin-left: 60px;
     height: 1px;
@@ -35,4 +46,26 @@ export const ModuleContain = styled.div`
     gap: 20px;
     padding-inline: 0px;
   }
+`;
+
+export const Arrows = styled.div<{ side: string }>`
+  display: flex;
+  cursor: pointer;
+  position: absolute;
+  font-size: 45px;
+  top: 30%;
+  z-index: 10000;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+  ${(props) =>
+    props.side === "left" &&
+    css`
+      left: 10px;
+    `}
+  ${(props) =>
+    props.side === "right" &&
+    css`
+      right: 10px;
+    `}
 `;
