@@ -483,7 +483,7 @@ const Purchase = () => {
               <div className="payment-methods">
                 <div className="stripe">
                   <div className="option">
-                    <input type="radio" checked={cardInfo} onClick={() => {
+                    <input type="radio" checked={!payment} onClick={() => {
                       setPayment(false);
                       setCardInfo(!cardInfo);
                       setPlan({ method: 'stripe' });
@@ -495,7 +495,7 @@ const Purchase = () => {
                   {cards.length === 0 ? null :
                     <div className="option">
                       <input type="radio" checked={payment} onClick={() => {
-                        setPayment(!payment),
+                        setPayment(true),
                           setCardInfo(false),
                           setPlan({ method: 'stripe' })
                         setCard({ ...card, cardId: "" })
