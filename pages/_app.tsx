@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <FacebookProvider appId="3010100615906804">
             <Component {...pageProps} />
           </FacebookProvider>
-        </GoogleOAuthProvider>;
+        </GoogleOAuthProvider>
       </Layout>
     </AuthProvider>
   );

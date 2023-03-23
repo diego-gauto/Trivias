@@ -185,11 +185,30 @@ const Register = () => {
       const response = await login({
         scope: 'email',
       });
-      let user = {
+      let userInfo = {
         id: response.authResponse.userID,
         access_token: response.authResponse.accessToken
       }
-      facebookUserInfo(user)
+      facebookUserInfo(userInfo).then((res) => {
+        let user = {
+          name: res.name,
+          last_Name: "",
+          email: res.email,
+          stripe_id: "",
+          photo: res.picture.data.url
+        }
+        newUser(user).then((res) => {
+          if (res === "Este usuario ya existe!") {
+            setErrorMsg('Este usuario ya existe!');
+            setAuthLoader(false);
+            setShow(true);
+            setIsLoading(false);
+          } else {
+            localStorage.setItem('email', res.email)
+            window.location.href = "/Purchase?type=subscription"
+          }
+        })
+      })
     } catch (error: any) {
       console.log(error.message);
     }
