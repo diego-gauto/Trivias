@@ -17,6 +17,8 @@ import { Container } from "react-bootstrap";
 import { LOGIN_PATH } from "../../../constants/paths";
 import "swiper/css/effect-flip";
 import { useMediaQuery } from "react-responsive";
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+import { Arrows } from "../Preview.styled";
 SwiperCore.use([Scrollbar, Mousewheel, EffectFlip]);
 
 const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) => {
@@ -40,12 +42,16 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
       x: e.clientX,
       y: e.clientY,
     };
-
-
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
+  const pushToRight = () => {
+    slider.scrollLeft += innerWidth;
+  }
+  const pushToLeft = () => {
+    slider.scrollLeft += -innerWidth;
+  }
   const mouseMoveHandler = function (e: any) {
     setCounter(counter++);
     // How far the mouse has been moved
@@ -124,13 +130,28 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
     }}
     >
       {(courses.length > 0) && <>
-        <div className={loading ? "skeleton-product" : ""} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+        <div className={loading ? "skeleton-product" : "reveal-arrows"} style={{ 'width': '100%', position: "relative", display: "initial" }}>
+          {/* {
+            courses.length >= 5 &&
+            <div className="arrows">
+              <Arrows side="left">
+                <MdArrowBackIosNew onClick={pushToLeft} />
+              </Arrows>
+              <Arrows side="right">
+                <MdArrowForwardIos onClick={pushToRight} />
+              </Arrows>
+            </div>
+          } */}
           <div className="grey-field" style={{ maxWidth: "fit-content" }}>
             <ContinueText style={{ paddingLeft: responsive1023 ? "30px" : "60px" }}>
               Continua viendo
             </ContinueText>
           </div>
-          <div id="scroll-container" className="scroll-container" style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}>
+          <div
+            id="scroll-container"
+            className="scroll-container"
+            style={{ overflow: "scroll", overflowY: "hidden", paddingBlockEnd: "40px" }}
+          >
             <div style={{ display: "flex", paddingLeft: responsive1023 ? "30px" : "60px" }} onMouseDown={mouseDownHandler}>
               {courses.map((element: any, idx: any) => (
                 <div key={"Mod2 " + idx} id="grey-field" className="grey-field" onClick={() => { goTo(element) }}>

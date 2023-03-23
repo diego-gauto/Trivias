@@ -3,6 +3,37 @@ import styled, { css } from "styled-components";
 export const HomeWorkContain = styled.div`
   display: flex;
   gap: 2%;
+  .complete-hw {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    .homework {
+      margin-top: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-weight: 500;
+      opacity: 0.7;
+      color: #8e5fc1;
+      svg {
+        font-size: 22px;
+      }
+      &:hover {
+        opacity: 1;
+        color: #8e2de2;
+        font-weight: 600;
+        transition: 0.5s ease all;
+      }
+    }
+    .quill-hw {
+      p {
+        margin: 0;
+      }
+    }
+  }
   .left {
     width: 48%;
   }
