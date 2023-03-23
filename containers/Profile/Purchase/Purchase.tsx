@@ -508,7 +508,6 @@ const Purchase = () => {
                   }}>
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
-                      console.log(cards)
                       return (
                         <option value={idC} selected={x.cardId == defaultCard.cardId}>{x.last4}</option>
                       )
@@ -533,6 +532,14 @@ const Purchase = () => {
                         <select className="short" onChange={(e) => {
                           setCard((card: any) => ({ ...card, exp_month: e.target.value }));
                         }}>
+                          {payment && defaultCard &&
+                            cards.map((x: any, idC: number) => {
+                              console.log('hola pap', x.defaultCard)
+                              return (
+                                <option value={x.exp_month} selected={x.defaultCard}>{(x.exp_month < 10) ? '0' + x.exp_month.toString() : x.exp_month.toString()}</option>
+                              )
+                            })
+                          }
                           <option value="">Mes</option>
                           <option value="01">01</option>
                           <option value="02">02</option>
@@ -550,6 +557,13 @@ const Purchase = () => {
                         <select className="short" onChange={(e) => {
                           setCard((card: any) => ({ ...card, exp_year: e.target.value }));
                         }}>
+                          {payment && defaultCard &&
+                            cards.map((x: any, idC: number) => {
+                              return (
+                                <option value={idC} selected={defaultCard == x}>{x.exp_year - 2000}</option>
+                              )
+                            })
+                          }
                           <option value="">Año</option>
                           <option value="22">22</option>
                           <option value="23">23</option>
