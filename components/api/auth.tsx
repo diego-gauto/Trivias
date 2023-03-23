@@ -1,12 +1,13 @@
 import axios from "axios";
 
-export const login = async (user: any) => {
+export const newUser = async (user: any) => {
   return axios
-    .post("http://localhost:4001/auth/login")
+    .post("http://94.74.77.165/" + "auth/register", user)
     .then((res) => {
-      window.location.href = "/";
+      return res.data.msg
     })
     .catch((error) => {
       console.log(error);
+      return error
     });
 };

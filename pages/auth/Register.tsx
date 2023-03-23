@@ -23,6 +23,7 @@ import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds }
 import { useAuth } from "../../hooks/useAuth";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import ErrorModal from "../../components/Error/ErrorModal";
+import { newUser } from "../../components/api/auth";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -113,125 +114,50 @@ const Register = () => {
   };
 
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
-  const onSubmit: SubmitHandler<FormValues> = async formData => {
-    setAuthLoader(true)
-    setphone(phoneInput)
 
-    if (phoneCode == '+52') {
-      if (isValidPhoneNumber(phoneInput)) {
-        let tempMonth = false;
-        let tempPhoneInput = phoneInput;
-        if (trial) {
-          tempMonth = true;
-        }
-        var input = document.getElementById("input_1") as HTMLInputElement;
-        if (!tempPhoneInput) {
-          tempPhoneInput = ""
-        }
-        // 2592000
-        let signUpData = {
-          credentials: {
-            name: formData.name,
-            lastName: formData.lastName,
-            email: formData.email,
-            password: formData.password,
-            phoneInput: tempPhoneInput,
-            month: tempMonth
-          },
-        };
-        const redirectURL = await signUpCreds(signUpData);
-        if (redirectURL == "/auth/RegisterPastUser") {
-          setErrorMsg('El correo ingresado ya existe!');
-          setError(true);
-          setAuthLoader(false);
-          setShow(true);
-        }
-        if (redirectURL == "auth/wrong-password") {
-          setErrorMsg('El correo ingresado ya existe!');
+  const onSubmit: SubmitHandler<FormValues> = async formData => {
+    setAuthLoader(true);
+    setphone(phoneInput);
+    let user = {
+      name: formData.name,
+      last_Name: formData.lastName,
+      email: formData.email,
+      password: formData.password,
+      phone_number: phoneInput,
+      stripe_id: ""
+    }
+    if (isValidPhoneNumber(phoneInput)) {
+      newUser(user).then((res) => {
+        if (res === "Este usuario ya existe!") {
+          setErrorMsg('Este usuario ya existe!');
           setAuthLoader(false);
           setError(true);
           setIsLoading(false);
+        } else {
+          localStorage.setItem('email', user.email)
+          window.location.href = "/Purchase?type=subscription"
         }
-
-        if (redirectURL == "auth/user-not-found") {
-          setIsLoading(true)
-          signUpWithCreds(signUpData).then(() => {
-            window.location.href = "/Purchase?type=subscription";
-          });
-        }
-        if (redirectURL == "/Preview") {
-          setIsLoading(true)
-          signUpWithCreds(signUpData).then(() => {
-            window.location.href = "/Purchase?type=subscription";
-          });
-        }
-      }
-      else {
-        setErrorPhone(true);
-        setErrorPhoneMsg("Número de teléfono Invalido");
-        setAuthLoader(false);
-      }
+      })
+    } else {
+      setErrorPhone(true);
+      setErrorPhoneMsg("Número de teléfono Invalido");
+      setAuthLoader(false);
     }
-    else {
-      let tempMonth = false;
-      let tempPhoneInput = phoneInput;
-      if (trial) {
-        tempMonth = true;
-      }
-      if (!tempPhoneInput) {
-        tempPhoneInput = ""
-      }
-      // 2592000
-      let signUpData = {
-        credentials: {
-          name: formData.name,
-          lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-          phoneInput: tempPhoneInput,
-          month: tempMonth
-        },
-      };
-      const redirectURL = await signUpCreds(signUpData);
-      if (redirectURL == "auth/user-not-found") {
-        setIsLoading(true)
-        signUpWithCreds(signUpData).then(() => {
-          window.location.href = "/Purchase?type=subscription";
-        });
-      }
-
-      if (redirectURL == "/auth/RegisterPastUser") {
-        setErrorMsg('El correo ingresado ya existe!');
-        setError(true);
-        setIsLoading(false);
-        setAuthLoader(false);
-      }
-      if (redirectURL == "auth/wrong-password") {
-        setErrorMsg('El correo ingresado ya existe!');
-        setAuthLoader(false);
-        setError(true);
-        setIsLoading(false);
-      }
-      if (redirectURL == "/Preview") {
-        setIsLoading(true)
-        signUpWithCreds(signUpData).then(() => {
-          window.location.href = "/Purchase?type=subscription";
-        });
-      }
-    }
-
 
   }
 
   useEffect(() => {
-    if (loggedIn) {
-      window.location.href = "/Preview";
-    } else {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 500);
-    }
-  }, [loggedIn])
+    // if (localStorage.getItem("email")) {
+    //   window.location.href = "/Preview";
+    // } else {
+    //   setTimeout(() => {
+    //     setIsLoading(false)
+    //   }, 500);
+    // }
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
+  }, [])
 
 
 
