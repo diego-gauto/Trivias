@@ -137,7 +137,8 @@ const Register = () => {
           setShow(true);
           setIsLoading(false);
         } else {
-          localStorage.setItem('email', user.email)
+          localStorage.setItem('email', user.email);
+          localStorage.setItem("method", "mail");
           window.location.href = "/Purchase?type=subscription"
         }
       })
@@ -151,6 +152,7 @@ const Register = () => {
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: tokenResponse => {
+      setAuthLoader(true);
       googleTokens(tokenResponse.code).then((res) => {
         let user = {
           name: res.given_name,
@@ -176,12 +178,8 @@ const Register = () => {
   });
 
   const loginWithFacebook = async () => {
-    // api?.getLoginStatus().then((res) => {
-    //   console.log(res);
-
-    // })
-
     try {
+      setAuthLoader(true);
       const response = await login({
         scope: 'email',
       });
@@ -204,28 +202,26 @@ const Register = () => {
             setShow(true);
             setIsLoading(false);
           } else {
-            localStorage.setItem('email', res.email)
+            localStorage.setItem('email', user.email);
+            localStorage.setItem('method', "facebook");
             window.location.href = "/Purchase?type=subscription"
           }
         })
       })
     } catch (error: any) {
-      console.log(error.message);
+      setAuthLoader(false);
     }
   }
 
 
   useEffect(() => {
-    // if (localStorage.getItem("email")) {
-    //   winloginWithFacebookow.location.href = "/Preview";
-    // } else {
-    //   setTimeout(() => {
-    //     setIsLoading(false)
-    //   }, 500);
-    // }
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 500);
+    if (localStorage.getItem("email")) {
+      window.location.href = "/Preview";
+    } else {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
+    }
   }, [])
 
 

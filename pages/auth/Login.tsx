@@ -23,7 +23,6 @@ import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { getUsers } from "../../components/api/user";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -187,7 +186,7 @@ const Login = () => {
   }, [])
 
   const googleLogin = () => {
-    getUsers()
+    // getUser()
   }
 
   return (

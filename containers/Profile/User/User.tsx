@@ -20,7 +20,6 @@ import PaymentMethod from "./PaymentMethod";
 import UserInfo from "./UserInfo";
 import { History } from "./History";
 import { getNextCertificate } from "../../../store/actions/courseActions";
-import { getUsers } from "../../../components/api/user";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });

@@ -15,6 +15,7 @@ import {
 } from "./Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
+import { getUserApi } from "../../api/users";
 
 const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -24,7 +25,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
-
+  const [userData, setUserData] = useState<any>(null);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const slider = document.querySelector('.scroll-container3') as HTMLElement;
 
@@ -80,6 +81,16 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
     }
   }, [course, isLoading])
 
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
+
+
+
   return (
     <Container fluid
       style={{ overflow: "hidden", padding: 0, margin: 0 }}>
@@ -119,14 +130,14 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
           </div>
           {
             <ButtonContain>
-              {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
+              {(userData && userData.final_date < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
                 <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                   <PurpleButton>
                     Adquiere Gonvar+
                   </PurpleButton>
                 </div>
               </Link>}
-              {!user && <Link href={LOGIN_PATH}>
+              {!userData && <Link href={LOGIN_PATH}>
                 <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                   <PurpleButton>
                     Adquiere Gonvar+

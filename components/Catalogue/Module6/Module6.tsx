@@ -61,7 +61,7 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   }
   useEffect(() => {
     let temp_courses: any = [];
-    if (user) {
+    if (user === "none") {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);

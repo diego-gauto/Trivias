@@ -67,7 +67,8 @@ const Module1 = ({ user, allCourses, isLoading, professor }: any) => {
   }
   useEffect(() => {
     if (!isLoading) {
-      if (user) {
+
+      if (user === "none") {
         let date = new Date().getTime() / 1000;
         getPaidCourses(user.id).then((paid: any) => {
           getViewedCourses(user.id).then((res) => {

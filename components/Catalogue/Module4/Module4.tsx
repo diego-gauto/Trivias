@@ -62,7 +62,7 @@ const Module4 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     setCounter(0)
   }
   useEffect(() => {
-    if (user) {
+    if (user === "none") {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);

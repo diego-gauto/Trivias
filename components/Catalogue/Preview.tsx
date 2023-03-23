@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { getTeacher, getWholeCourses } from "../../store/actions/courseActions";
 import Module6 from "./Module6/Module6";
+import { getUserApi } from "../api/users";
 
 
 const Preview = () => {
@@ -96,14 +97,26 @@ const Preview = () => {
     getProffessors()
   }, [])
 
+  // useEffect(() => {
+  //   fetchDB_data()
+  // }, [loggedIn])
+
+  //User Api
+
   useEffect(() => {
-    fetchDB_data()
-  }, [loggedIn])
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setLoggedIn(true);
+        setUserData(res);
+      })
+    }
+  }, [])
 
 
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
+
   return (
     <>
       <PreviewContain>
