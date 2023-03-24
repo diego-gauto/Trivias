@@ -157,6 +157,7 @@ const Rewards = () => {
           })
           counter = 0;
         }
+        console.log('see arrCourse', arrCourse.lessonsLeft)
       })
       maximum = Math.max(...arrCourse.map((val: any) => val.total));
       setCourses(arrCourse);
@@ -245,14 +246,15 @@ const Rewards = () => {
         type: "certificates",
         scoreType: "certificados",
         score: certificatesCompleted ? certificatesCompleted : 0,
-        title: nextCertificate.title ? nextCertificate.title : "Sin certificados",
-        certificates: nextCertificate.lessonsLeft,
+        title: nextCertificate?.title ? nextCertificate.title : "Sin certificados",
+        certificates: nextCertificate?.lessonsLeft ? nextCertificate.lessonsLeft : "0",
         completed: certificatesCompleted ? certificatesCompleted : 0,
         progress: progressCertificates,
       },
     ];
     setLoading(false);
     setRewardsTypes(arrayRewards)
+    console.log('hola puta', arrayRewards)
   }
   try {
     var userDataAuth = useAuth();
