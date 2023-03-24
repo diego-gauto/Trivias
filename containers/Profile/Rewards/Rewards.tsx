@@ -157,7 +157,6 @@ const Rewards = () => {
           })
           counter = 0;
         }
-        console.log('see arrCourse', arrCourse.lessonsLeft)
       })
       maximum = Math.max(...arrCourse.map((val: any) => val.total));
       setCourses(arrCourse);
@@ -254,7 +253,6 @@ const Rewards = () => {
     ];
     setLoading(false);
     setRewardsTypes(arrayRewards)
-    console.log('hola puta', arrayRewards)
   }
   try {
     var userDataAuth = useAuth();
@@ -352,9 +350,16 @@ const Rewards = () => {
                       {val.type == "months" && <AiOutlineHourglass className="icon" />}
                       {val.type == "certificates" && <FaAward className="icon" />}
                       {
-                        (val.type == "points" || val.type == "months") &&
+                        (val.type == "points") &&
                         <p className="texts">
                           <span className="main">RECOMPENSAS</span><br />
+                          por {val.scoreType}
+                        </p>
+                      }
+                      {
+                        (val.type == "months") &&
+                        <p className="texts">
+                          <span className="main">BENEFICIOS</span><br />
                           por {val.scoreType}
                         </p>
                       }
@@ -386,7 +391,9 @@ const Rewards = () => {
                         <FaPrescriptionBottleAlt />
                       </div>
                       <p className="next-reward-title">
-                        Siguiente recompensa <br />
+                        {val.type == "points" && <>Siguiente recompensa<br /></>}
+                        {val.type == "months" && <>Siguiente beneficio<br /></>}
+                        {val.type == "certificates" && <>Siguiente certificado<br /></>}
                         <span>{val.title}</span>
                       </p>
                       <p className="next-reward-points">
