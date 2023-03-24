@@ -1502,6 +1502,9 @@ export const RewardContainer = styled.div<{ reward: any }>`
             css`
               background-color: #e6c4ea;
             `}
+          .first-word {
+            color: #e86bff;
+          }
           p {
             color: #3f1168;
             line-height: 18px;
@@ -1572,6 +1575,9 @@ export const RewardContainer = styled.div<{ reward: any }>`
             css`
               border-radius: 0 0 20px 0;
             `}
+          .first-word {
+            color: #cb61df;
+          }
           p {
             color: #3f1168;
             line-height: 18px;
@@ -1642,6 +1648,9 @@ export const RewardContainer = styled.div<{ reward: any }>`
           css`
             border-radius: 0 0 0 20px;
           `}
+        .first-word {
+          color: #9530a8;
+        }
         p {
           color: #3f1168;
           line-height: 18px;

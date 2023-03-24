@@ -89,7 +89,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
           <div className="reward-containers">
             <div className="reward-conditions">
               <div className="point-container" onClick={() => { setReward(0) }}>
-                <p>Recompensas<br />
+                <p><span className="first-word">Recompensas</span> <br />
                   obtenidas<br />
                   <span> por puntaje</span></p>
                 <div className="bottom-contain">
@@ -100,7 +100,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 </div>
               </div>
               <div className="time-container" onClick={() => { setReward(1) }}>
-                <p>Beneficios<br />
+                <p><span className="first-word">Beneficios</span> <br />
                   obtenidos<br />
                   <span> por tiempo</span></p>
                 <div className="bottom-contain">
@@ -111,7 +111,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 </div>
               </div>
               <div className="certificates-container" onClick={() => { setReward(2) }}>
-                <p>Certificados<br />
+                <p><span className="first-word">Certificados</span> <br />
                   <span>acumulados</span></p>
                 <div className="bottom-contain">
                   <p className="certificate-number">

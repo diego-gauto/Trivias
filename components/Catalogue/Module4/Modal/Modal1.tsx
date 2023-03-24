@@ -178,6 +178,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     i
                     <div className="info-box">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </div>
                   </div>
                 </div>
@@ -198,6 +199,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                     <div className="info-icon">
                       i
                       <div className="info-box">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       </div>
                     </div>

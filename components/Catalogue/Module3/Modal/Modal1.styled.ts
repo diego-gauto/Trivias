@@ -519,7 +519,7 @@ export const CourseContain = styled.div<{ level: any }>`
       gap: 10px;
       align-items: center;
       .info-icon {
-        display: inline-block;
+        display: inline-flex;
         font-size: 6px;
         font-weight: 600;
         position: relative;
@@ -536,6 +536,9 @@ export const CourseContain = styled.div<{ level: any }>`
         cursor: pointer;
         text-transform: lowercase;
         font-weight: 500;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        align-items: center;
         @media (max-width: 450px) {
           top: -2px;
         }
@@ -545,20 +548,17 @@ export const CourseContain = styled.div<{ level: any }>`
             display: block;
             width: 200px;
             background: gray;
-            border-radius: 10px 10px 0px 10px;
-            transform: translate(-99%, -110%);
+            border-radius: 10px 10px 10px 10px;
             padding: 10px;
             text-align: left;
             line-height: normal;
             font-size: 12px;
             font-weight: 400;
             letter-spacing: 1px;
+            margin: 100%;
 
             p {
               color: white;
-            }
-            @media (max-width: 990px) {
-              transform: translate(-50%, -140%);
             }
           }
         }
