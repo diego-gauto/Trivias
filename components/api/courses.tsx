@@ -26,7 +26,19 @@ export const createCoursesApi = async (course: any) => {
 };
 export const updateCourseApi = async (course: any) => {
   return axios
-    .post("http://94.74.77.165/" + "courses/updateCourse", course.id)
+    .put("http://94.74.77.165/" + "courses/updateCourse", course)
+    .then((res) => {
+      console.log(res)
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const deleteCourseApi = async (course: any) => {
+  return axios
+    .put("http://94.74.77.165/" + "courses/updateCourse", course)
     .then((res) => {
       console.log(res)
       return res.data.msg

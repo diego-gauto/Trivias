@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createCoursesApi, getCoursesApi, updateCourseApi } from '../../api/courses';
+import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi } from '../../api/courses';
 import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 
@@ -52,7 +52,23 @@ const Courses = () => {
   }
   useEffect(() => {
     getCoursesApi().then((res) => {
-      console.log(res.data.data[0]);
+      res.data.data[0] = {
+        id: res.data.data[0].id,
+        title: "Curso de prueba actualizar",
+        subtitle: "Curso de prueba actualizar",
+        about: "Curso de prueba actualizar",
+        certificate_color: "#ffffff",
+        difficulty: "Curso de prueba actualizar",
+        mandatory: false,
+        image: "Curso de prueba actualizar",
+        phrase: "Curso de prueba actualizar",
+        price: 150,
+        rating: 40,
+        reviews: 30,
+        type: "Gratis",
+        sequential: true,
+      }
+      console.log(res.data);
       setCourses(res.data.data[0]);
     });
   }, [])
@@ -61,7 +77,8 @@ const Courses = () => {
       <SideBar />
       Courses {courses?.title}
       <button onClick={() => createCoursesApi(courseForTest)}>addCourse</button>
-      <button onClick={() => updateCourseApi(courseForUpdate)}>update Course</button>
+      <button onClick={() => updateCourseApi(courses)}>update Course</button>
+      <button onClick={() => deleteCourseApi(courses.id)}>delete Course</button>
     </AdminContain>
 
   )
