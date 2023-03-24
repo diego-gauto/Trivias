@@ -536,7 +536,7 @@ const Purchase = () => {
                             cards.map((x: any, idC: number) => {
                               console.log('hola pap', x.defaultCard)
                               return (
-                                <option value={x.exp_month} selected={x.defaultCard}>{(x.exp_month < 10) ? '0' + x.exp_month.toString() : x.exp_month.toString()}</option>
+                                <option value={x.exp_month} selected={x.defaultCard} hidden>{(x.exp_month < 10) ? '0' + x.exp_month.toString() : x.exp_month.toString()}</option>
                               )
                             })
                           }
@@ -560,12 +560,11 @@ const Purchase = () => {
                           {payment && defaultCard &&
                             cards.map((x: any, idC: number) => {
                               return (
-                                <option value={idC} selected={defaultCard == x}>{x.exp_year - 2000}</option>
+                                <option value={idC} selected={defaultCard == x} hidden>{x.exp_year - 2000}</option>
                               )
                             })
                           }
                           <option value="">Año</option>
-                          <option value="22">22</option>
                           <option value="23">23</option>
                           <option value="24">24</option>
                           <option value="25">25</option>
@@ -578,6 +577,7 @@ const Purchase = () => {
                           <option value="32">32</option>
                           <option value="33">33</option>
                           <option value="34">34</option>
+                          <option value="35">35</option>
                         </select>
                       </div>
                     </div>
