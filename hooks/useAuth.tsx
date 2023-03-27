@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 import { db } from "../firebase/firebaseConfig";
+import { getUserApi } from "../components/api/users";
 
 interface Props {
   children?: ReactNode
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children, ...props }: Props) => {
   const [user, setUser] = useState<any>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const auth = getAuth();
+
   const logout = () => {
 
     return signOut(auth).then(() => {
@@ -43,26 +45,34 @@ export const AuthProvider = ({ children, ...props }: Props) => {
 
 
   useEffect(() => {
-    return onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        const docRef = doc(db, "users", uid);
-        const docSnap = await getDoc(docRef);
-        const data = {
-          id: uid,
-          ...docSnap.data()
-        }
-        setUser(data);
+    // return onAuthStateChanged(auth, async (user) => {
+    //   if (user) {
+    //     // User is signed in, see docs for a list of available properties
+    //     // https://firebase.google.com/docs/reference/js/firebase.User
+    //     const uid = user.uid;
+    //     const docRef = doc(db, "users", uid);
+    //     const docSnap = await getDoc(docRef);
+    //     const data = {
+    //       id: uid,
+    //       ...docSnap.data()
+    //     }
+    //     setUser(data);
+    //     setIsAuthenticating(false);
+    //     // ...
+    //   } else {
+    //     // User is signed out
+    //     // ...
+    //     setIsAuthenticating(false);
+    //   }
+    // });
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUser(res);
         setIsAuthenticating(false);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        setIsAuthenticating(false);
-      }
-    });
+      })
+    } else {
+      setIsAuthenticating(false);
+    }
   }, [])
 
   const values = {
