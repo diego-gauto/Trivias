@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { getWholeCourses } from "../../../store/actions/courseActions";
+import { getCoursesApi } from "../../api/courses";
 import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import { AllCourses } from "./AllCourses";
@@ -18,6 +19,7 @@ const CourseMain = () => {
   }
   useEffect(() => {
     fetchDB_data()
+    getCoursesApi();
   }, [])
 
   return (
