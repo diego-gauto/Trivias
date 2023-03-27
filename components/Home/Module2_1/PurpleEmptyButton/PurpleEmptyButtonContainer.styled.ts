@@ -10,6 +10,8 @@ export const PurpleEmptyButtonContainer = styled(Button)`
   color: #3f1168;
   background: transparent;
   padding: 10px 25px;
+  --bs-btn-active-bg: #a733e4;
+  --bs-btn-active-border-color: darkviolet;
   &:hover {
     background-color: #6717cd;
     border-color: transparent;

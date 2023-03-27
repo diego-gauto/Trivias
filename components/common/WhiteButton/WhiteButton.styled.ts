@@ -11,6 +11,8 @@ export const WhiteButtonContainer = styled(Button)`
   font-weight: 600;
   background: transparent;
   padding: 15px 25px;
+  --bs-btn-active-bg: #a733e4;
+  --bs-btn-active-border-color: darkviolet;
   &:hover {
     background-color: #6717cd;
     border-color: transparent;
