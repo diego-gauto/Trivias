@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi } from '../../api/courses';
+import { createProfessorApi, getProfessorApi, updateProfessorApi } from '../../api/professors';
 import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 
 const Courses = () => {
   const [courses, setCourses] = useState<any>([]);
+  const [prof, setProf] = useState<any>([]);
+  const [prof2, setProf2] = useState<any>([]);
   const course = {
     title: "",
     subtitle: "",
@@ -19,6 +22,18 @@ const Courses = () => {
     reviews: 0,
     type: "",
     sequential: false,
+  }
+  const professorDemo = {
+    name: "Andrei",
+    about: "Hola soy andrei",
+    image: "Prueba prof",
+    sign: "Prueba prof"
+  }
+  const actualizarProf = {
+    name: "kevin",
+    about: "Hola soy andrei",
+    image: "Prueba prof",
+    sign: "Prueba prof"
   }
   const courseForTest = {
     title: "Curso de prueba",
@@ -50,7 +65,20 @@ const Courses = () => {
     type: "Gratis",
     sequential: true,
   }
+  console.log(prof)
+  console.log(prof2)
   useEffect(() => {
+    getProfessorApi().then((res) => {
+      setProf(res.data.data[0])
+      res.data.data[0] = {
+        id: res.data.data[0].id,
+        name: "Carlos",
+        about: "Hola soy andrei",
+        image: "Prueba prof",
+        sign: "Prueba prof"
+      }
+      setProf2(res.data.data[0])
+    })
     getCoursesApi().then((res) => {
       res.data.data[0] = {
         id: res.data.data[0].id,
@@ -68,17 +96,18 @@ const Courses = () => {
         type: "Gratis",
         sequential: true,
       }
-      console.log(res.data);
       setCourses(res.data.data[0]);
     });
   }, [])
   return (
     <AdminContain>
       <SideBar />
-      Courses {courses?.title}
-      <button onClick={() => createCoursesApi(courseForTest)}>addCourse</button>
-      <button onClick={() => updateCourseApi(courses)}>update Course</button>
-      <button onClick={() => deleteCourseApi(courses.id)}>delete Course</button>
+      Prof {prof?.name}
+      <button onClick={() => createProfessorApi(professorDemo)}>agregar prof</button>
+      <button onClick={() => updateProfessorApi(prof2)}>actualizar prof</button>
+      {/* <button onClick={() => createCoursesApi(courseForTest)}>addCourse</button>
+      <button onClick={() => updateCourseApi(courses)}>update Course</button> */}
+      {/* <button onClick={() => deleteCourseApi(courses.id)}>delete Course</button> */}
     </AdminContain>
 
   )

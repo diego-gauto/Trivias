@@ -4,7 +4,6 @@ export const getCoursesApi = async () => {
   return axios
     .get("http://94.74.77.165/" + "courses/getCourses")
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((error) => {
@@ -37,8 +36,9 @@ export const updateCourseApi = async (course: any) => {
     });
 };
 export const deleteCourseApi = async (course: any) => {
+  console.log(course)
   return axios
-    .put("http://94.74.77.165/" + "courses/updateCourse", course)
+    .delete("http://94.74.77.165/" + "courses/deleteCourse", course)
     .then((res) => {
       console.log(res)
       return res.data.msg
