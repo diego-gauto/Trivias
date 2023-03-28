@@ -4,7 +4,6 @@ import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/acti
 import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
-import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import { Button, Container, Download, HWContainer, Table, TitleContain } from './HomeWork.styled'
 import HomeWorkModal from './HomeWorkModal/HomeWorkModal';
@@ -119,7 +118,6 @@ const HomeWork = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <HWContainer>
         <Container>
           <TitleContain>

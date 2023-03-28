@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const getProfessorApi = async () => {
+export const getCategoriesApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "professors/getProfessors")
+    .get("http://94.74.77.165/" + "categories/getCategories")
     .then((res) => {
       return res
     })
@@ -11,10 +11,11 @@ export const getProfessorApi = async () => {
       return error
     });
 };
-export const createProfessorApi = async (professor: any) => {
+export const createCategoryApi = async (category: any) => {
   return axios
-    .post("http://94.74.77.165/" + "professors/createProfessor", professor)
+    .post("http://94.74.77.165/" + "categories/createCategory", category)
     .then((res) => {
+      console.log(res)
       return res.data.msg
     })
     .catch((error) => {
@@ -22,11 +23,11 @@ export const createProfessorApi = async (professor: any) => {
       return error
     });
 };
-export const updateProfessorApi = async (professor: any) => {
-  console.log(professor)
+export const updateCategoryApi = async (category: any) => {
   return axios
-    .put("http://94.74.77.165/" + "professors/updateProfessor", professor)
+    .put("http://94.74.77.165/" + "categories/updateCategory", category)
     .then((res) => {
+      console.log(res)
       return res.data.msg
     })
     .catch((error) => {

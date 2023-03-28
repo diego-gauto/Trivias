@@ -1,113 +1,539 @@
 import React, { useEffect, useState } from 'react'
+import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+
+import { createCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
 import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi } from '../../api/courses';
+import { createMaterialApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
 import { createProfessorApi, getProfessorApi, updateProfessorApi } from '../../api/professors';
-import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
+import AllCourses from './AllCourses/AllCourses';
+import { CourseContainer, OptionColor, SelectOption } from './Courses.styled';
+import { ICategories, ICourses, IMaterials, IProfessors } from './ICourses';
 
 const Courses = () => {
   const [courses, setCourses] = useState<any>([]);
-  const [prof, setProf] = useState<any>([]);
-  const [prof2, setProf2] = useState<any>([]);
-  const course = {
+  const [professors, setProfessors] = useState<any>([]);
+  const [categories, setCategories] = useState<any>([]);
+  const [materials, setMaterials] = useState<any>([]);
+  const [openDifficultySelect, setOpenDifficultySelect] = useState<boolean>(false);
+  const [openSequentialSelect, setOpenSequentialSelect] = useState<boolean>(false);
+  const [openColorSelect, setOpenColorSelect] = useState<boolean>(false);
+  const [openProductTypeSelect, setOpenProductTypeSelect] = useState<boolean>(false);
+  const [openProfessorsSelect, setOpenProfessorsSelect] = useState<boolean>(false);
+  const [openCategoriesSelect, setOpenCategoriesSelect] = useState<boolean>(false);
+  const [openMaterialsSelect, setOpenMaterialsSelect] = useState<boolean>(false);
+  const [course, setCourse] = useState<any>({
     title: "",
     subtitle: "",
     about: "",
-    certificate_color: "",
     difficulty: "",
     mandatory: false,
     image: "",
     phrase: "",
+    certificate_color: "",
     price: 0,
     rating: 0,
     reviews: 0,
-    type: "",
+    duration: 0,
+    type: "Free",
     sequential: false,
+    professors: [],
+    categories: [],
+    materials: [],
+  })
+  const difficulty = [
+    "Muy Fácil",
+    "Fácil",
+    "Intermedio",
+    "Avanzado",
+    "Máster",
+  ];
+  const sequential = [
+    "Flexible",
+    "Obligatorio",
+  ];
+  const membershipType = [
+    "Free",
+    "Monthly",
+    "Product",
+  ];
+  const color = [
+    "azul", "amarillo", "morado", "naranja", "rosa", "verde"
+  ];
+  const addProfessors = (val: any) => {
+    let tempProfessor = course.professors;
+    let tempIndex = 0;
+    if (tempProfessor.some((e: any) => e.id === val.id)) {
+      tempIndex = tempProfessor.findIndex((x: any) =>
+        x.id == val.id
+      )
+      tempProfessor.splice(tempIndex, 1);
+    }
+    else {
+      tempProfessor.push(val)
+    }
+    setCourse({ ...course, professors: tempProfessor })
   }
-  const professorDemo = {
-    name: "Andrei",
-    about: "Hola soy andrei",
-    image: "Prueba prof",
-    sign: "Prueba prof"
+  const addCategories = (val: any) => {
+    let tempCategory = course.categories;
+    let tempIndex = 0;
+    if (tempCategory.some((e: any) => e.id === val.id)) {
+      tempIndex = tempCategory.findIndex((x: any) =>
+        x.id == val.id
+      )
+      tempCategory.splice(tempIndex, 1);
+    }
+    else {
+      tempCategory.push(val)
+    }
+    setCourse({ ...course, categories: tempCategory })
   }
-  const actualizarProf = {
-    name: "kevin",
-    about: "Hola soy andrei",
-    image: "Prueba prof",
-    sign: "Prueba prof"
+  const addMaterials = (val: any) => {
+    let tempMaterials = course.materials;
+    let tempIndex = 0;
+    if (tempMaterials.some((e: any) => e.id === val.id)) {
+      tempIndex = tempMaterials.findIndex((x: any) =>
+        x.id == val.id
+      )
+      tempMaterials.splice(tempIndex, 1);
+    }
+    else {
+      tempMaterials.push(val)
+    }
+    setCourse({ ...course, materials: tempMaterials })
   }
-  const courseForTest = {
-    title: "Curso de prueba",
-    subtitle: "Curso de prueba",
-    about: "Curso de prueba",
-    certificate_color: "#ffffff",
-    difficulty: "Curso de prueba",
-    mandatory: false,
-    image: "Curso de prueba",
-    phrase: "Curso de prueba",
-    price: 10,
-    rating: 50,
-    reviews: 20,
-    type: "Gratis",
-    sequential: false,
+  const createCourse = () => {
+
   }
-  const courseForUpdate = {
-    title: "Curso de prueba actualizar",
-    subtitle: "Curso de prueba actualizar",
-    about: "Curso de prueba actualizar",
-    certificate_color: "#ffffff",
-    difficulty: "Curso de prueba actualizar",
-    mandatory: false,
-    image: "Curso de prueba actualizar",
-    phrase: "Curso de prueba actualizar",
-    price: 150,
-    rating: 40,
-    reviews: 30,
-    type: "Gratis",
-    sequential: true,
-  }
-  console.log(prof)
-  console.log(prof2)
   useEffect(() => {
-    getProfessorApi().then((res) => {
-      setProf(res.data.data[0])
-      res.data.data[0] = {
-        id: res.data.data[0].id,
-        name: "Carlos",
-        about: "Hola soy andrei",
-        image: "Prueba prof",
-        sign: "Prueba prof"
-      }
-      setProf2(res.data.data[0])
+    getProfessorApi().then((profs) => {
+      setProfessors(profs.data.data)
+    })
+    getMaterialsApi().then((mats) => {
+      setMaterials(mats.data.data)
+    })
+    getCategoriesApi().then((cats) => {
+      setCategories(cats.data.data)
     })
     getCoursesApi().then((res) => {
-      res.data.data[0] = {
-        id: res.data.data[0].id,
-        title: "Curso de prueba actualizar",
-        subtitle: "Curso de prueba actualizar",
-        about: "Curso de prueba actualizar",
-        certificate_color: "#ffffff",
-        difficulty: "Curso de prueba actualizar",
-        mandatory: false,
-        image: "Curso de prueba actualizar",
-        phrase: "Curso de prueba actualizar",
-        price: 150,
-        rating: 40,
-        reviews: 30,
-        type: "Gratis",
-        sequential: true,
-      }
-      setCourses(res.data.data[0]);
+      setCourses(res.data.data);
     });
   }, [])
   return (
     <AdminContain>
-      <SideBar />
-      Prof {prof?.name}
-      <button onClick={() => createProfessorApi(professorDemo)}>agregar prof</button>
-      <button onClick={() => updateProfessorApi(prof2)}>actualizar prof</button>
-      {/* <button onClick={() => createCoursesApi(courseForTest)}>addCourse</button>
-      <button onClick={() => updateCourseApi(courses)}>update Course</button> */}
-      {/* <button onClick={() => deleteCourseApi(courses.id)}>delete Course</button> */}
+      <CourseContainer>
+        <div className="create-course">
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Título</label>
+              <input
+                className="input-create"
+                placeholder="Título del curso"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, title: e.target.value
+                  })
+                }}
+              />
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Subtítulo</label>
+              <input
+                className="input-create"
+                placeholder="Subtítulo del curso"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, subtitle: e.target.value
+                  })
+                }}
+              />
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Descripción</label>
+              <input
+                className="input-create"
+                placeholder="Descripción del curso"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, about: e.target.value
+                  })
+                }}
+              />
+            </div>
+          </div>
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Dificultad</label>
+              <SelectOption onClick={() => setOpenDifficultySelect(!openDifficultySelect)}>
+                {
+                  course.difficulty === ""
+                    ? "Seleccione la dificultad"
+                    : course.difficulty
+                }
+                {
+                  openDifficultySelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openDifficultySelect &&
+                  <div className="options">
+                    {
+                      difficulty.map((val: string, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"difficulty_" + index}
+                            onClick={() => setCourse({
+                              ...course, difficulty: val
+                            })}
+                          >
+                            {val}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Secuencial</label>
+              <SelectOption onClick={() => setOpenSequentialSelect(!openSequentialSelect)}>
+                {
+                  course.sequential === true
+                    ? "Obligatorio"
+                    : "Flexible"
+                }
+                {
+                  openSequentialSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openSequentialSelect &&
+                  <div className="options">
+                    {
+                      sequential.map((val: string, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"secuencial_" + index}
+                            onClick={() => setCourse({
+                              ...course, sequential: val === "Flexible" ? false : true
+                            })}
+                          >
+                            {val}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Color</label>
+              <SelectOption onClick={() => setOpenColorSelect(!openColorSelect)}>
+                {
+                  course.certificate_color === ""
+                    ? "Seleccione un color"
+                    : course.certificate_color
+                }
+                {
+                  openColorSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openColorSelect &&
+                  <div className="options">
+                    {
+                      color.map((val: string, index: number) => {
+                        return (
+                          <OptionColor
+                            color={val}
+                            key={"color_" + index}
+                            onClick={() => setCourse({
+                              ...course, certificate_color: val
+                            })}
+                          >
+                            {val}
+                          </OptionColor>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+          </div>
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Calificación</label>
+              <input
+                className="input-create"
+                placeholder="Rate del curso"
+                type="number"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, rating: parseInt(e.target.value)
+                  })
+                }}
+              />
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Reviews</label>
+              <input
+                className="input-create"
+                placeholder="Reviews del curso"
+                type="number"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, reviews: parseInt(e.target.value)
+                  })
+                }}
+              />
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Imagen</label>
+              <input
+                className="input-create"
+                placeholder="Seleccione una imagen"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, image: e.target.value
+                  })
+                }}
+              />
+            </div>
+          </div>
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Tipo</label>
+              <SelectOption onClick={() => setOpenProductTypeSelect(!openProductTypeSelect)}>
+                {
+                  course.type
+                }
+                {
+                  openProductTypeSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openProductTypeSelect &&
+                  <div className="options">
+                    {
+                      membershipType.map((val: string, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"membresia_" + index}
+                            onClick={() => setCourse({
+                              ...course, type: val
+                            })}
+                          >
+                            {val}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+            {
+              course.type !== "Free" &&
+              <>
+                <div className="input-contain">
+                  <label className="input-label">Precio</label>
+                  <input
+                    className="input-create"
+                    type="number"
+                    placeholder="Costo del curso"
+                    onChange={(e: any) => {
+                      setCourse({
+                        ...course, price: parseInt(e.target.value)
+                      })
+                    }}
+                  />
+                </div>
+                {
+                  course.type === "Product" &&
+                  <div className="input-contain">
+                    <label className="input-label">Duración</label>
+                    <input
+                      className="input-create"
+                      type="number"
+                      placeholder="Duración de la membresia"
+                      onChange={(e: any) => {
+                        setCourse({
+                          ...course, duration: parseInt(e.target.value)
+                        })
+                      }}
+                    />
+                  </div>
+                }
+              </>
+            }
+          </div>
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Frase descriptiva</label>
+              <input
+                className="input-create"
+                placeholder="Frase descriptiva del curso"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, phrase: e.target.value
+                  })
+                }}
+              />
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Profesores</label>
+              <SelectOption onClick={() => setOpenProfessorsSelect(!openProfessorsSelect)}>
+                <p>
+                  {
+                    course.professors.length > 0
+                      ? course.professors.map((val: IProfessors, index: number) => { return <React.Fragment key={"profName_" + index}>{val.name}<br /></React.Fragment> })
+                      : "Seleccione un professor"
+                  }
+                </p>
+                {
+                  openProfessorsSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openProfessorsSelect &&
+                  <div className="options">
+                    {
+                      professors.map((val: IProfessors, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"professor_" + index}
+                            onClick={() => addProfessors(val)}
+                          >
+                            {val.name}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+            <div className="input-contain">
+              <label className="input-label">Categorias</label>
+              <SelectOption onClick={() => setOpenCategoriesSelect(!openCategoriesSelect)}>
+                <p>
+                  {
+                    course.categories.length > 0
+                      ? course.categories.map((val: ICategories, index: number) => { return <React.Fragment key={"catsName_" + index}>{val.name}<br /></React.Fragment> })
+                      : "Seleccione una categoria"
+                  }
+                </p>
+                {
+                  openCategoriesSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openCategoriesSelect &&
+                  <div className="options">
+                    {
+                      categories.map((val: ICategories, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"categories_" + index}
+                            onClick={() => addCategories(val)}
+                          >
+                            {val.name}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+          </div>
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Materiales</label>
+              <SelectOption onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}>
+                <p>
+                  {
+                    course.materials.length > 0
+                      ? course.materials.map((val: IMaterials, index: number) => { return <React.Fragment key={"matsName_" + index}>{val.name}<br /></React.Fragment> })
+                      : "Seleccione un material"
+                  }
+                </p>
+                {
+                  openMaterialsSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openMaterialsSelect &&
+                  <div className="options">
+                    {
+                      materials.map((val: IMaterials, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"materials_" + index}
+                            onClick={() => addMaterials(val)}
+                          >
+                            {val.name}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
+          </div>
+          <div className="rows" style={{ justifyContent: "center" }}>
+            <div className="input-contain" style={{ alignItems: "center" }}>
+              <button className="create-button" onClick={createCourse}>
+                Crear curso
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* ALL COURSES */}
+        {
+          courses.map((course: ICourses, index: number) => {
+            return (
+              <AllCourses
+                title={course.title}
+                subtitle={course.subtitle}
+                about={course.about}
+                difficulty={course.difficulty}
+                sequential={course.sequential}
+                certificate_color={course.certificate_color}
+                rating={course.rating}
+                reviews={course.reviews}
+                image={course.image}
+                type={course.type}
+                price={course.price}
+                duration={course.duration}
+                phrase={course.phrase}
+                mandatory={course.mandatory}
+                id={course.id}
+                index={index}
+                key={"AllCourses_" + index}
+              />
+            )
+          })
+        }
+
+      </CourseContainer>
     </AdminContain>
 
   )

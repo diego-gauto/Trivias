@@ -3,7 +3,6 @@ import { addCategory, deleteCategory, getCategory, updateCategory } from '../../
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import Delete from '../Courses/Form/Delete/Delete';
-import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import { Button, ButtonContain, CatContain, CatData, CategoryContain, CatText, CloseIcon, EditCat, EditIcon, FormContain, Input, InputContain, Label, Title, TitleContain } from './Category.styled';
 
@@ -52,7 +51,6 @@ const Category = () => {
   }, [])
   return (
     <AdminContain>
-      <SideBar />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewCategory(!newCategory) }}>

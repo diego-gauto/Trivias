@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
 import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
-import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import AddReward from "./Modals/AddReward";
 import EditReward from "./Modals/EditReward";
@@ -59,7 +58,6 @@ const Rewards = () => {
   }
   return (
     <AdminContain>
-      <SideBar />
       <RewardContain>
         <p className="title">Recompensas Gonvar</p>
         <button className="add" onClick={() => { setShow(true) }}>Agregar Recompensa</button>

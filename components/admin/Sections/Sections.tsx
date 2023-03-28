@@ -6,7 +6,6 @@ import { collection, getDocs, query } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { getSingleUser } from "../../../hooks/useAuth";
-import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
 import AdminDataUpdate from "./AdminData/AdminDataUpdate";
 import {
@@ -96,7 +95,6 @@ const Sections = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <GeneralContain>
         <TitleBox>
           <Title>Secciones</Title>

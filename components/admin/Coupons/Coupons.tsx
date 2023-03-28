@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { createCoupon, deleteCoupon, getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
 
 import { TrashIcon } from "../Courses/Form/Edit.styled";
-import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
 import {
   ActiveC,
@@ -79,7 +78,6 @@ const Coupons = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <CouponContain>
         <Container>
           <Title>Añadir Cupón</Title>

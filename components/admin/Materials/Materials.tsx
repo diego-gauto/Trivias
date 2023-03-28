@@ -3,7 +3,6 @@ import { addMaterial, deleteMaterial, getMaterial, updateMaterial } from '../../
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import Delete from '../Courses/Form/Delete/Delete';
-import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import {
   Button, ButtonContain,
@@ -57,7 +56,6 @@ const Materials = () => {
   }, [])
   return (
     <AdminContain>
-      <SideBar />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewMaterial(!newMaterial) }}>

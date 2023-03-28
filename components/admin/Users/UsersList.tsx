@@ -8,7 +8,6 @@ import { db } from "../../../firebase/firebaseConfig";
 import { getWholeCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
-import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
 import UserCardData from "./UserData/UserCardData";
 import { TransparentButton2 } from "./UserData/UsersCardData.styled";
@@ -185,7 +184,6 @@ const UsersList = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <UserContain>
         <Container>
           <TitleContain>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { addTeacher, deleteTeacher, getTeacher, updateTeacher } from '../../../store/actions/courseActions';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
-import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import {
   Button, ButtonContain,
@@ -107,7 +106,6 @@ const Teacher = () => {
   }, [])
   return (
     <AdminContain>
-      <SideBar />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewTeacher(!newTeacher); setEdit(-1); setEditImage("") }}>

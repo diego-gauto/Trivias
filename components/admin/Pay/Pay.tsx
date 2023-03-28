@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import { getInvoice } from "../../../store/actions/PaymentActions";
-import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
 import {
   ButtonIcon,
@@ -64,7 +63,6 @@ const Pay = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <PayContain>
         <Container>
           <TitleContain>
