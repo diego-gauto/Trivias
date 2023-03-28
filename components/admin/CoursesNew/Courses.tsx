@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
-
 import { createCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
 import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi } from '../../api/courses';
 import { createMaterialApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
 import { createProfessorApi, getProfessorApi, updateProfessorApi } from '../../api/professors';
 import { AdminContain } from '../SideBar.styled';
 import AllCourses from './AllCourses/AllCourses';
-import { CourseContainer, OptionColor, SelectOption } from './Courses.styled';
+import { CourseContainer, LoaderButton, OptionColor, SelectOption } from './Courses.styled';
 import { ICategories, ICourses, IMaterials, IProfessors } from './ICourses';
 
 const Courses = () => {
+  const [loader, setLoader] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [professors, setProfessors] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
@@ -102,8 +102,15 @@ const Courses = () => {
     }
     setCourse({ ...course, materials: tempMaterials })
   }
+  console.log(courses);
   const createCourse = () => {
-
+    setLoader(true);
+    createCoursesApi(course).then(() => {
+      getCoursesApi().then((res) => {
+        setLoader(false);
+        setCourses(res.data.data);
+      });
+    })
   }
   useEffect(() => {
     getProfessorApi().then((profs) => {
@@ -500,9 +507,16 @@ const Courses = () => {
           </div>
           <div className="rows" style={{ justifyContent: "center" }}>
             <div className="input-contain" style={{ alignItems: "center" }}>
-              <button className="create-button" onClick={createCourse}>
-                Crear curso
-              </button>
+              {
+                !loader
+                  ?
+                  <button className="create-button" onClick={createCourse}>
+                    Crear curso
+                  </button>
+                  :
+                  <LoaderButton />
+              }
+
             </div>
           </div>
         </div>

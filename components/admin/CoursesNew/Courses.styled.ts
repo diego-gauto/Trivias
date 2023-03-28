@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const CourseContainer = styled.div`
   display: flex;
@@ -232,4 +232,27 @@ export const OptionColor = styled.div<{ color: string }>`
       border-radius: 0 0 8px 8px;
     }
   }
+`;
+const rotate = keyframes`
+from {
+  transform: rotate(0deg);
+}
+
+to {
+  transform: rotate(360deg);
+}
+`;
+export const LoaderButton = styled.div`
+  box-sizing: border-box;
+  align-self: center;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 6px;
+  border-width: 9px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #6717cd transparent transparent;
+  animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
+    running;
 `;

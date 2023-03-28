@@ -21,11 +21,11 @@ const SideBar = () => {
   const [userData, setUserData] = useState<any>(null);
   try {
     var userDataAuth = useAuth();
-    if (!userDataAuth.user) {
-      router.push({
-        pathname: '/',
-      });
-    }
+    // if (!userDataAuth.user) {
+    //   router.push({
+    //     pathname: '/',
+    //   });
+    // }
     useEffect(() => {
       const fetchDB_data = async () => {
         try {
