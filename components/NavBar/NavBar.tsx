@@ -114,14 +114,18 @@ const NavBar = () => {
     setNewHamburgerMenuIsOpen(false);
   }
 
-  useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setUserData(userDataAuth.user);
         setLoggedIn(true);
-        setUserData(res);
-      })
-    }
-  }, [])
+      }
+    }, [])
+
+  } catch (error) {
+    setLoggedIn(false);
+  }
 
   // COLOR NAVBAR
   return (
