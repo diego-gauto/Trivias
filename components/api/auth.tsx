@@ -39,4 +39,16 @@ export const facebookUserInfo = (userData: any) => {
   })
 }
 
+export const loginWithProviderApi = async (user: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "auth/login-with-providers", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
 

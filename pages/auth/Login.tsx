@@ -13,7 +13,7 @@ import {
   LoginBackground,
   Error,
 } from "../../screens/Login.styled";
-import { accessWithAuthProvider, getPastUser, signInWithCreds, signUpWithCreds } from "../../store/actions/AuthActions";
+import { signUpWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../hooks/useAuth";
@@ -23,6 +23,9 @@ import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
+import { useGoogleLogin } from "@react-oauth/google";
+import { facebookUserInfo, googleTokens, loginWithProviderApi } from "../../components/api/auth";
+import { useLogin, useFacebook } from 'react-facebook';
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -61,6 +64,8 @@ const Login = () => {
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const { login } = useLogin();
+
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
   };
@@ -70,6 +75,7 @@ const Login = () => {
   const toggleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
   };
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -92,43 +98,45 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
-    setAuthLoader(true)
+    setAuthLoader(true);
     let signUpData = {
       credentials: {
         email: formData.email,
         password: formData.password,
       },
     };
-    const redirectURL = await signInWithCreds(signUpData);
-    console.log(redirectURL)
-    if (redirectURL == 'auth/user-not-found') {
-      setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
-      setError(true);
-      setAuthLoader(false);
-      setShow(true);
-    }
-    if (redirectURL == 'auth/wrong-password') {
-      setErrorMsg('El correo o la contraseña es incorrecta!');
-      setError(true);
-      setAuthLoader(false);
-      setShow(true);
-    }
-    if (redirectURL == "auth/email-already-exists") {
-      setErrorMsg('El correo ingresado ya existe!');
-      setError(true);
-      setAuthLoader(false);
-      setShow(true);
-    }
-    if (redirectURL == "/Preview") {
-      setIsLoading(true);
-      window.location.href = redirectURL;
-    }
-    if (redirectURL == "/auth/RegisterPastUser") {
-      setPastUserScreen(true);
-      getPastUser(formData.email).then((res) => {
-        setPastUser(res[0]);
-      }).then(() => { setAuthLoader(false); })
-    }
+    loginWithProviderApi(signUpData.credentials).then((res) => {
+      if (res[0]) {
+        if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
+          localStorage.setItem('email', signUpData.credentials.email);
+          window.location.href = '/';
+        }
+        if (res[0].password !== signUpData.credentials.password) {
+          setErrorMsg('La contraseña es incorrecta!');
+          setError(true);
+          setAuthLoader(false);
+          setShow(true);
+        }
+        if (res[0].provider !== 'web') {
+          setErrorMsg('El correo existe con otra cuenta!');
+          setError(true);
+          setAuthLoader(false);
+          setShow(true);
+        }
+      }
+      if (res.msg === false) {
+        setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
+        setError(true);
+        setAuthLoader(false);
+        setShow(true);
+      }
+    })
+    // if (redirectURL == "/auth/RegisterPastUser") {
+    //   setPastUserScreen(true);
+    //   getPastUser(formData.email).then((res) => {
+    //     setPastUser(res[0]);
+    //   }).then(() => { setAuthLoader(false); })
+    // }
   }
   const onSubmit2: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
@@ -160,14 +168,6 @@ const Login = () => {
   }
   const [showForgot, setShowForgot] = useState(false);
 
-  const handleSignUpWithAuthProvider = async (authProvider: string) => {
-    let trial = false;
-    setIsLoading(true)
-    const redirectURL = await accessWithAuthProvider(authProvider, trial);
-    window.location.href = redirectURL;
-  };
-
-
   useEffect(() => {
     if (loggedIn) {
       setIsLoading(true)
@@ -185,8 +185,44 @@ const Login = () => {
     }, 300);
   }, [])
 
-  const googleLogin = () => {
-    // getUser()
+  const googleLogin = useGoogleLogin({
+    onSuccess: tokenResponse => {
+      setAuthLoader(true);
+      googleTokens(tokenResponse.code).then((res) => {
+        let user = {
+          email: res.email,
+        }
+        loginWithProviderApi(user).then((res) => {
+          localStorage.setItem('email', user.email)
+          window.location.href = "/"
+        })
+      })
+    },
+    flow: 'auth-code',
+  });
+
+  const loginWithFacebook = async () => {
+    try {
+      setAuthLoader(true);
+      const response = await login({
+        scope: 'email',
+      });
+      let userInfo = {
+        id: response.authResponse.userID,
+        access_token: response.authResponse.accessToken
+      }
+      facebookUserInfo(userInfo).then((res) => {
+        let user = {
+          email: res.email,
+        }
+        loginWithProviderApi(user).then((res) => {
+          localStorage.setItem('email', user.email);
+          window.location.href = "/"
+        })
+      })
+    } catch (error: any) {
+      setAuthLoader(false);
+    }
   }
 
   return (
@@ -387,11 +423,10 @@ const Login = () => {
                     </div>
                     <div className="socials">
                       <img src="../images/googleLogin.png" onClick={() => {
-                        // handleSignUpWithAuthProvider("Google");
-                        googleLogin()
+                        googleLogin();
                       }} alt="" />
                       <img src="../images/facebookLogin.png" onClick={() => {
-                        handleSignUpWithAuthProvider("Facebook");
+                        loginWithFacebook();
                       }} alt="" />
                     </div>
                     <p className="terms">Al iniciar sesión, aceptas los <span>términos, <br />

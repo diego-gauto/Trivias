@@ -1,8 +1,12 @@
+import { googleLogout } from "@react-oauth/google";
 import { getAuth, signOut, updatePassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
+import { updateUserInfo } from "../../../components/api/users";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
+import { updateProfileImage } from "../../../store/actions/UserActions";
+import { FacebookProvider, useLogin, useFacebook } from 'react-facebook';
 import {
   PictureContain,
   ProfileIcon,
@@ -11,13 +15,10 @@ import {
   Box2,
   ProfileText,
 } from "./User.styled";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
-import { updateProfileImage } from "../../../store/actions/UserActions";
 
-const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
+const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
-  let tempDate = new Date(userData.membership.finalDate * 1000);
+  let tempDate = new Date(userData.final_date * 1000);
   let tempDay = tempDate.getDate()
   let tempMonth = tempDate.getUTCMonth() + 1;
   let tempYear = tempDate.getFullYear()
@@ -40,6 +41,8 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
   const userPass: any = auth.currentUser;
   const starsImage = "/images/profile/stars.png"
   const crownImage = "/images/profile/crown.png"
+  const { api } = useFacebook();
+
   const changePassword = async () => {
     updatePassword(userPass, password).then(() => {
       setErrorPassword(false);
@@ -50,6 +53,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
       return error
     });
   }
+
   const hiddenFileInput: any = React.useRef(null);
   const changeImage = (e: any) => {
     hiddenFileInput.current.click();
@@ -62,54 +66,57 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
       setUser({ ...user, format: reader.result });
     };
   }
+
   const logoutFunc = () => {
-    signOut(auth).then(() => {
+    localStorage.clear();
+    if (user.provider === "web") {
       window.location.href = "/";
-    }).catch((error) => {
-      console.log(error)
-    });
-  };
-  const updateUser = async () => {
-    const docRef = doc(db, 'users', user.id);
-    await updateDoc(docRef, {
-      name: user.name,
-      lastName: user.lastName,
-      phoneNumber: user.phoneNumber,
-    }).then(() => {
-      if (editPassword) {
-        if (!errorPassword) {
-          setEditPassword(false);
-          setStartEdit(false);
-        }
-      }
-      else {
-        setStartEdit(false);
-      }
-    })
-  }
-  const handleUpdateData = () => {
-    updateUser();
-    if (editPassword) {
-      if (password == confirmPassword) {
-        if (password.length >= 6) {
-          changePassword();
-        }
-        else {
-          setErrorPassword(true);
-          setErrorMsg("La contraseña debe tener al menos 6 carácteres");
-        }
-      }
-      else {
-        setErrorPassword(true);
-        setErrorMsg("La contraseña no coincide");
-      }
     }
+    if (user.provider === "google") {
+      googleLogout();
+      window.location.href = "/";
+    }
+    if (user.provider === "facebook") {
+      api?.logout();
+      window.location.href = "/";
+    }
+  };
+
+  const handleUpdateData = async () => {
+    let photo = user.photo;
     if (image !== "") {
-      updateProfileImage(user, user.id).then(() => {
+      await updateProfileImage(user, user.id).then((res) => {
+        photo = res;
         setImage("");
       })
     }
+    updateUserInfo({
+      name: user.name,
+      last_name: user.last_name,
+      phone_number: user.phone_number,
+      userId: user.id,
+      photo: photo
+    }).then((res) => {
+      setStartEdit(false);
+      handleClick();
+    })
+    // if (editPassword) {
+    //   if (password == confirmPassword) {
+    //     if (password.length >= 6) {
+    //       changePassword();
+    //     }
+    //     else {
+    //       setErrorPassword(true);
+    //       setErrorMsg("La contraseña debe tener al menos 6 carácteres");
+    //     }
+    //   }
+    //   else {
+    //     setErrorPassword(true);
+    //     setErrorMsg("La contraseña no coincide");
+    //   }
+    // }
   }
+
   const getStarCoordinates = () => {
     let tempFormula: number = 0;
     if (0 <= starPosition && starPosition < .125) {
@@ -142,6 +149,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
   useEffect(() => {
     getStarCoordinates();
     setUser({ ...userData })
+
   }, [userData])
 
   const format = (date: number) => {
@@ -258,7 +266,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
             <ProfileIcon
               onClick={changeImage}
               edit={startEdit}
-              src={(startEdit == true && image !== "") ? image : ((userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG)} >
+              src={(startEdit == true && image !== "") ? image : ((userData) ? userData.photo : DEFAULT_USER_IMG)} >
             </ProfileIcon>
             <input
               className="picture"
@@ -321,7 +329,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               <ProfileIcon
                 onClick={changeImage}
                 edit={startEdit}
-                src={(startEdit == true && image !== "") ? image : ((userData && userData.photoURL.length > 0) ? userData.photoURL : DEFAULT_USER_IMG)} >
+                src={(startEdit == true && image !== "") ? image : ((userData) ? userData.photo : DEFAULT_USER_IMG)} >
               </ProfileIcon>
               {
                 startEdit &&
@@ -380,7 +388,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               </p>
               <div className="data-contain">
                 <p className="points">{points_format} puntos</p>
-                <p className="months">{format(userData.created_at.seconds)} meses de aprendizaje</p>
+                <p className="months">{format(new Date(userData.created_at).getTime() / 1000)} meses de aprendizaje</p>
                 <p className="certificates">
                   {userData.certificates?.length > 0 ? (userData.certificates?.length == 1 ? userData.certificates?.length + " certificado" : userData.certificates?.length + " certificados") : "Sin certificados"}
                 </p>
@@ -405,10 +413,10 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                   Apellido
                 </label>
                 <input
-                  placeholder={userData.lastName}
-                  defaultValue={userData.lastName}
+                  placeholder={userData.last_name}
+                  defaultValue={userData.last_name}
                   onChange={(e) => {
-                    setUser({ ...user, lastName: e.target.value })
+                    setUser({ ...user, last_name: e.target.value })
                   }}
                 />
               </div>
@@ -444,18 +452,18 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
               !startEdit
                 ?
                 <p className="email-user">
-                  {userData.phoneNumber}
+                  {userData.phone_number === 'undefined' ? '' : userData.phone_number}
                 </p>
                 :
                 <Box2>
                   <div className="separate" />
                   <InputPhone
-                    value={userData.phoneNumber}
+                    value={userData.phone_number === 'undefined' ? '' : userData.phone_number}
                     limitMaxLength={true}
                     international={true}
                     countryCallingCodeEditable={false}
                     onChange={(e: any) => {
-                      setUser({ ...user, phoneNumber: e })
+                      setUser({ ...user, phone_number: e })
                     }}
                   />
                 </Box2>
@@ -480,16 +488,18 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
                   }
                 </>
                 :
-                <button
-                  onClick={() => { setEditPassword(!editPassword) }}
-                  className="password-edit"
-                >
-                  Crear nueva contraseña
-                </button>
+                <>
+                  {user.provider === 'web' && <button
+                    onClick={() => { setEditPassword(!editPassword) }}
+                    className="password-edit"
+                  >
+                    Crear nueva contraseña
+                  </button>}
+                </>
             }
           </div>
         </div>
-        {
+        {/* {
           editPassword &&
           <div className="edit-contain">
             <div className="input-contain">
@@ -540,7 +550,7 @@ const UserInfo = ({ userData, nextReward, nextTimeReward, timeProgress, data, re
 
             </div>
           </div>
-        }
+        } */}
 
       </div>
       <div className="btn-container">

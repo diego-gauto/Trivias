@@ -220,7 +220,7 @@ export const PayContainer = styled.div`
 export const CardIconResp = styled.div`
   width: fit-content;
   img {
-    width: 50px;
+    width: 40px;
     @media (max-width: 750px) {
       width: 40px;
     }

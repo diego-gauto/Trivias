@@ -15,6 +15,18 @@ export const getUserApi = async (email: any) => {
     });
 };
 
+export const updateUserInfo = async (user: any) => {
+  return axios
+    .put("http://94.74.77.165/" + "users/update-user-info", user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
 export const updateMembership = async (user: any) => {
   return axios
     .put("http://94.74.77.165/" + "users/user-membership", user)

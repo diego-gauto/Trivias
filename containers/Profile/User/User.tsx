@@ -20,6 +20,7 @@ import PaymentMethod from "./PaymentMethod";
 import UserInfo from "./UserInfo";
 import { History } from "./History";
 import { getNextCertificate } from "../../../store/actions/courseActions";
+import { getUserApi } from "../../../components/api/users";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -45,51 +46,36 @@ const User = () => {
   const newCard = () => {
     setAddPayment(!addPayment)
   }
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-      }
-    }, [])
 
-  } catch (error) {
-    console.log(error)
+  // try {
+  //   var userDataAuth = useAuth();
+  //   useEffect(() => {
+  //     if (userDataAuth.user !== null) {
+  //       // retrieveUser()
+  //       setLoading(false)
+  //     } else {
+  //       window.location.href = "/auth/Login";
+  //     }
+  //   }, [])
 
-    setLoggedIn(false)
-  }
-  const fetchDB_data = async () => {
-    try {
-      let temp_pm: any = []
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        response.forEach((e) => {
-          getPaymentmethods(e.id).then((res: any) => {
-            temp_pm = res;
-            res.forEach((element: any) => {
-              if (e.data().membership.paymentMethod == element.cardId) {
-                element.default = true;
-              } else {
-                element.default = false;
-              }
-            });
-            setPaymentMethods(res);
-            temp_pm = temp_pm.filter((x: any) => x.cardId == e.data().membership.paymentMethod);
-            if (temp_pm.length > 0) {
-              setUserData({ ...e.data(), id: e.id, membership: { ...e.data().membership, brand: temp_pm[0].brand, last4: temp_pm[0].last4 } });
-            } else {
-              setUserData({ ...e.data(), id: e.id });
-            }
+  // } catch (error) {
+  //   setLoggedIn(false);
+  // }
 
-          })
-        });
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+        setLoading(false)
       })
-    } catch (error) {
-      return false
     }
+  }, [])
+  const retrieveUser = () => {
+    getUserApi(localStorage.getItem("email")).then((res) => {
+      setUserData(res);
+    })
   }
+
   const getAllRewards = () => {
     getRewards().then((reward) => {
       getNextPointsReward(reward);
@@ -218,25 +204,25 @@ const User = () => {
     tempProgress = ((totalLessonsLeft?.lessonsLeft) / totalLessonsLeft?.maxLessons) * 755;
     setCertificateProgress(tempProgress);
   }
-  useEffect(() => {
-    fetchDB_data()
-  }, [loggedIn])
+
   useEffect(() => {
     if (userData != null) {
-      getCurrentTimeLevel();
-      getNextCertificates();
-      getAllRewards();
+      // getCurrentTimeLevel();
+      // getNextCertificates();
+      // getAllRewards();
       setNameUpperCase(userData.name.toUpperCase())
     }
   }, [userData]);
-  useEffect(() => {
-    if (userData !== null && nextCertificate !== null) {
-      certificateProgressBar();
-      setLoading(false);
-    }
-  }, [nextCertificate]);
+
+  // useEffect(() => {
+  //   if (userData !== null && nextCertificate !== null) {
+  //     certificateProgressBar();
+  //     setLoading(false);
+  //   }
+  // }, [nextCertificate]);
+
   const handleClick = (value: boolean) => {
-    fetchDB_data();
+    retrieveUser();
   }
 
   if (loading) {
@@ -264,7 +250,6 @@ const User = () => {
       }
 
       {//Vista del navbar dinamico de Homepage
-
         userData !== null
         &&
         <UserInfo
@@ -279,6 +264,7 @@ const User = () => {
           timeLevel={timeLevel}
           nextCertificate={nextCertificate}
           certificateProgress={certificateProgress}
+          handleClick={handleClick}
         />
       }
       {/* SECOND Container */}
@@ -305,21 +291,12 @@ const User = () => {
         />
         <ThirdBox>
           {/* Third Container */}
-          <PaymentMethod data={userData} pm={paymentMethod} handleClick={handleClick} newCard={newCard} addPayment={addPayment} />
+          <PaymentMethod data={userData} pm={userData.payment_methods} handleClick={handleClick} newCard={newCard} addPayment={addPayment} />
           {/* Fourth Container */}
           {/* <UserData data={userData} pm={paymentMethod} /> */}
           <History user={userData} addPayment={addPayment} />
         </ThirdBox>
       </SecondBox>
-      {/* <Link href="/">
-        <LogOut onClick={logoutFunc} style={{
-          display: responsive1023 ? "" : "none",
-          marginTop: "-5%",
-        }}>
-          Cerrar Sesión
-          <LogOutIcon />
-        </LogOut>
-      </Link> */}
     </BackgroundProfile >
   )
 }

@@ -7,7 +7,6 @@ import {
 } from "./User.styled";
 import { useEffect, useState } from "react";
 import { cancelSub, getTimeRewards } from "../../../store/actions/ProfileActions";
-import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
 import { httpsCallable } from "firebase/functions";
@@ -40,7 +39,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
     // })
   }
   useEffect(() => {
-    let tempDate = new Date((user.membership.finalDate) * 1000);
+    let tempDate = new Date((user.final_date) * 1000);
     let tempDay = tempDate.getDate();
     let tempMonth = tempDate.getMonth() + 1;
     let tempYear = tempDate.getFullYear();
@@ -114,9 +113,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 <p>Certificados<br />
                   <span>acumulados</span></p>
                 <div className="bottom-contain">
-                  <p className="certificate-number">
+                  {/* <p className="certificate-number">
                     {user.certificates?.length > 0 ? (user.certificates.length > 9 ? user.certificates.length : "0" + user.certificates.length) : 0}
-                  </p>
+                  </p> */}
                   <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
               </div>
@@ -159,7 +158,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
 
         </div>
         <Link href="/Rewards">
-          <button>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+          <button disabled>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
         </Link>
       </RewardContainer>
       <SubscriptionContainer>
@@ -172,7 +171,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {user.membership.finalDate > date ? <p >
+              {user.final_date > date ? <p >
                 Gonvar+<br />
                 <span className="span">Suscripción mensual</span>
               </p> :
@@ -182,12 +181,12 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
               Próximo cargo
             </p>
             <div className="subscription-info">
-              {user.membership.finalDate > date ? <p >
+              {user.final_date > date ? <p >
                 <span className="span">{formatDate}</span>
               </p> :
                 <p><span className="span">s/f</span></p>}
             </div>
-            {(!loader && user.membership.level > 0) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
+            {(!loader && user.level > 0) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>

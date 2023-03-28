@@ -39,19 +39,6 @@ const Preview = () => {
     setLoggedIn(false)
   }
 
-  const fetchDB_data = async () => {
-    try {
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response: any) => {
-        response.forEach((e: any) => {
-          setUserData({ ...e.data(), id: e.id });
-        });
-      })
-    } catch (error) {
-      return false
-    }
-  }
-
   const hms = (totalSeconds: any) => {
     if (typeof totalSeconds == 'string') return totalSeconds
     const hours = Math.floor(totalSeconds / 3600);
@@ -96,12 +83,6 @@ const Preview = () => {
   useEffect(() => {
     getProffessors()
   }, [])
-
-  // useEffect(() => {
-  //   fetchDB_data()
-  // }, [loggedIn])
-
-  //User Api
 
   useEffect(() => {
     if (localStorage.getItem("email")) {

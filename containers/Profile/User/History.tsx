@@ -1,6 +1,7 @@
 import { DocumentData } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'
+import { userInvoices } from '../../../components/api/profile';
 import { getInvoice } from '../../../store/actions/PaymentActions';
 import { getUserInvoices } from '../../../store/actions/ProfileActions';
 import { HistoryContainer } from './User.styled'
@@ -27,26 +28,27 @@ export const History = ({ user, addPayment }: any) => {
     }
   }
 
-  const getAllInvoice = () => {
-    let tempInvoice: any = [];
-    let tempOption: any = []
-    getUserInvoices(user.email).then((res) => {
-      res.forEach((element: DocumentData) => {
-        let tempDate: any = new Date(element.paidAt.seconds * 1000);
+  const retrieveInvoices = () => {
+    userInvoices(user.id).then((res) => {
+      let tempInvoice: any = [];
+      let tempOption: any = [];
+      res.data.invoices.forEach((element: any) => {
+        let tempDate: any = new Date(element.paid_at);
         let tempDay = tempDate.getDate();
         let tempMonth = tempDate.getMonth() + 1;
         let tempYear = tempDate.getFullYear();
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         element.amount = element.amount / 100;
+
         if (element.amount == 149) {
-          tempDate = new Date((element.paidAt.seconds + 2628000) * 1000);
+          let tempFinalDate: any = new Date(element.paid_at).getTime() / 1000;
+          tempDate = new Date((tempFinalDate + 2628000) * 1000);
           tempDay = tempDate.getDate();
           tempMonth = tempDate.getMonth() + 1;
           tempYear = tempDate.getFullYear();
           element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
-
           let date = new Date().getTime() / 1000;
-          if ((element.paidAt.seconds + 2628000) > date) {
+          if ((tempFinalDate + 2628000) > date) {
             element.status = "Activo"
           } else {
             element.status = "Inactivo"
@@ -69,6 +71,9 @@ export const History = ({ user, addPayment }: any) => {
         tempInvoice.push(element);
       });
 
+      tempInvoice.sort((a: any, b: any) => {
+        return a.paid_at < b.paid_at ? 1 : -1;
+      })
       tempInvoice = tempInvoice.slice(0, 5);
       tempInvoice.forEach((element: any, index: number) => {
         tempOption.push(index);
@@ -76,11 +81,12 @@ export const History = ({ user, addPayment }: any) => {
       setAllOptions(tempOption);
       setInvoices(tempInvoice.slice(0, 5));
     })
-
   }
+
   useEffect(() => {
-    getAllInvoice();
+    retrieveInvoices()
   }, []);
+
   return (
     <HistoryContainer addPayment={addPayment}>
       <div className='title'>

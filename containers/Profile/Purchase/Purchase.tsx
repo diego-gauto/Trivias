@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import InputMask from "react-input-mask";
-
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { httpsCallable } from "firebase/functions";
 import router, { useRouter } from "next/router";
 import { FaCheck, FaArrowRight } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-
-import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getCoupons } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
-import {
-  getPaymentmethods,
-  updateUserPlan,
-} from "../../../store/actions/PaymentActions";
 import {
   Container,
   LoaderContainSpinner,
@@ -33,14 +24,12 @@ const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
-  const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
   const [couponError, setCouponError] = useState(false);
   const [errorMsg, setErrorMsg] = useState<any>("");
   const [step2, setStep2] = useState(false);
   const [payment, setPayment] = useState(false);
   const [cardInfo, setCardInfo] = useState(true);
-  const [process, setProcess] = useState(true);
   const [paypal, setPaypal] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
@@ -198,7 +187,6 @@ const Purchase = () => {
           amount: product.price,
           method: 'stripe'
         }
-
         stripePaymentApi(data).then((res) => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
@@ -395,7 +383,7 @@ const Purchase = () => {
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option value={idC} selected={x.id == userData.payment_method}>{x.card.last4}</option>
+                        <option value={idC} selected={x.default}>{x.card.last4}</option>
                       )
                     })}
                   </select>}
