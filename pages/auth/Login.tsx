@@ -124,7 +124,7 @@ const Login = () => {
           setShow(true);
         }
       }
-      if (res.msg === false) {
+      if (res.msg === 'Este usuario no existe!') {
         setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
         setError(true);
         setAuthLoader(false);
@@ -193,7 +193,7 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
-          if (res === "Este usuario no existe!") {
+          if (res.msg === "Este usuario no existe!") {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
             setShow(true);
@@ -223,7 +223,7 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
-          if (res === "Este usuario no existe!") {
+          if (res.msg === "Este usuario no existe!") {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
             setShow(true);
