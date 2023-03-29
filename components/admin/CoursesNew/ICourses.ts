@@ -18,6 +18,7 @@ export interface ICourses {
   professors: [IProfessors];
   categories: [ICategories];
   materials: [IMaterials];
+  published: boolean;
 }
 export interface IProfessors {
   id: number;

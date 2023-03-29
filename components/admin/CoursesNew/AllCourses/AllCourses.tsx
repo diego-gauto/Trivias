@@ -13,6 +13,7 @@ const AllCourses = (props: IAllCourses) => {
   const [openProfessorsSelect, setOpenProfessorsSelect] = useState<boolean>(false);
   const [openCategoriesSelect, setOpenCategoriesSelect] = useState<boolean>(false);
   const [openMaterialsSelect, setOpenMaterialsSelect] = useState<boolean>(false);
+  const [openPublishSelect, setOpenPublishSelect] = useState<boolean>(false);
   const {
     title,
     subtitle,
@@ -37,6 +38,7 @@ const AllCourses = (props: IAllCourses) => {
     allProfessors,
     allCategories,
     allMaterials,
+    published,
     id,
     index,
   } = props;
@@ -58,6 +60,7 @@ const AllCourses = (props: IAllCourses) => {
     professors: professors,
     categories: categories,
     materials: materials,
+    published: published,
   })
   const difficultyData = [
     "Muy Fácil",
@@ -78,6 +81,9 @@ const AllCourses = (props: IAllCourses) => {
   const color = [
     "azul", "amarillo", "morado", "naranja", "rosa", "verde"
   ];
+  const publishedData = [
+    "Publicado", "No Publicado"
+  ]
   const GonvarImg = "/images/purchase/logo.png";
   const addProfessors = (val: any) => {
     let tempProfessor = course.professors;
@@ -646,6 +652,51 @@ const AllCourses = (props: IAllCourses) => {
                                 onClick={() => addMaterials(val)}
                               >
                                 {val.name}
+                              </div>
+                            )
+                          })
+                        }
+                      </div>
+                    }
+                  </SelectOption>
+              }
+            </div>
+          </div>
+          <div className="rows">
+            <div className="course-data">
+              <label className="course-data-title">
+                Published
+              </label>
+              {
+                !startEdit
+                  ?
+                  <p className="content">
+                    {published ? "Publicado" : "No Publicado"}
+                  </p>
+                  :
+                  <SelectOption onClick={() => setOpenPublishSelect(!openPublishSelect)}>
+                    {
+                      course.published ? "Publicado" : "No publicado"
+                    }
+                    {
+                      openPublishSelect
+                        ? <RiArrowDropUpLine className="arrow" />
+                        : <RiArrowDropDownLine className="arrow" />
+                    }
+                    {
+                      openPublishSelect &&
+                      <div className="options">
+                        {
+                          publishedData.map((val: string, index: number) => {
+                            return (
+                              <div
+                                className="map-options"
+                                key={"published_" + index}
+                                onClick={() => setCourse({
+                                  ...course, published: val === "Publicado" ? true : false
+                                })}
+                              >
+                                {val}
                               </div>
                             )
                           })

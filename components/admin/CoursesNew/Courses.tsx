@@ -23,6 +23,7 @@ const Courses = () => {
   const [openProfessorsSelect, setOpenProfessorsSelect] = useState<boolean>(false);
   const [openCategoriesSelect, setOpenCategoriesSelect] = useState<boolean>(false);
   const [openMaterialsSelect, setOpenMaterialsSelect] = useState<boolean>(false);
+  const [openPublishSelect, setOpenPublishSelect] = useState<boolean>(false);
   const [openCourseEdit, setOpenCourseEdit] = useState<number>(-1);
   const [course, setCourse] = useState<any>({
     title: "",
@@ -39,6 +40,7 @@ const Courses = () => {
     duration: 0,
     type: "Free",
     sequential: false,
+    published: true,
     professors: [],
     categories: [],
     materials: [],
@@ -62,6 +64,9 @@ const Courses = () => {
   const color = [
     "azul", "amarillo", "morado", "naranja", "rosa", "verde"
   ];
+  const published = [
+    "Publicado", "No Publicado"
+  ]
   const openCourse = (courseIndex: number) => {
     if (openCourseEdit === courseIndex) {
       setOpenCourseEdit(-1);
@@ -533,6 +538,39 @@ const Courses = () => {
                 }
               </SelectOption>
             </div>
+            <div className="input-contain">
+              <label className="input-label">Publicado</label>
+              <SelectOption onClick={() => setOpenPublishSelect(!openPublishSelect)}>
+                {
+                  course.published ? "Publicado" : "No Publicado"
+                }
+                {
+                  openPublishSelect
+                    ? <RiArrowDropUpLine className="arrow" />
+                    : <RiArrowDropDownLine className="arrow" />
+                }
+                {
+                  openPublishSelect &&
+                  <div className="options">
+                    {
+                      published.map((val: string, index: number) => {
+                        return (
+                          <div
+                            className="map-options"
+                            key={"published_" + index}
+                            onClick={() => setCourse({
+                              ...course, published: val === "Publicado" ? true : false
+                            })}
+                          >
+                            {val}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                }
+              </SelectOption>
+            </div>
           </div>
           <div className="rows" style={{ justifyContent: "center" }}>
             <div className="input-contain" style={{ alignItems: "center" }}>
@@ -571,6 +609,7 @@ const Courses = () => {
                 professors={course.professors}
                 categories={course.categories}
                 materials={course.materials}
+                published={course.published}
                 openCourseEdit={openCourseEdit}
                 openCourse={openCourse}
                 allProfessors={professors}

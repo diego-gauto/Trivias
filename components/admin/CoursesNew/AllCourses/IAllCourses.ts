@@ -21,6 +21,7 @@ export interface IAllCourses {
   professors: [IProfessors];
   categories: [ICategories];
   materials: [IMaterials];
+  published: boolean;
   allProfessors: [IProfessors];
   allCategories: [ICategories];
   allMaterials: [IMaterials];
