@@ -127,7 +127,8 @@ const Register = () => {
       email: formData.email,
       password: formData.password,
       phone_number: phoneInput,
-      stripe_id: ""
+      stripe_id: "",
+      provider: 'web'
     }
     if (isValidPhoneNumber(phoneInput)) {
       newUser(user).then((res) => {
@@ -159,7 +160,8 @@ const Register = () => {
           last_Name: res.family_name,
           email: res.email,
           stripe_id: "",
-          photo: res.picture
+          photo: res.picture,
+          provider: 'google'
         }
         newUser(user).then((res) => {
           if (res === "Este usuario ya existe!") {
@@ -193,7 +195,8 @@ const Register = () => {
           last_Name: "",
           email: res.email,
           stripe_id: "",
-          photo: res.picture.data.url
+          photo: res.picture.data.url,
+          provider: 'facebook'
         }
         newUser(user).then((res) => {
           if (res === "Este usuario ya existe!") {

@@ -93,6 +93,11 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
     setCurrentRole(admin.adminType.superAdmin);
   }, [admin, show]);
 
+  const formatDate = (value: any) => {
+    let tempDate = new Date(value).getTime();
+    return new Date(tempDate).toLocaleDateString("es-MX")
+  }
+
   return (
     <UserContain>
       <TitleContain>
@@ -128,7 +133,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
             {!currentRole &&
               <InputContain>
                 <Info>Cambiar rol</Info>
-                {admin.adminType &&
+                {admin.role === 'admin' &&
                   <IconRoleContain>
                     <SelectContain key={1}>
                       <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
@@ -166,14 +171,14 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
               Fecha de Creación
               {admin.created_at &&
                 <Label>
-                  {new Date(admin.created_at.seconds * 1000).toLocaleDateString("es-MX")}
+                  {formatDate(admin.created_at)}
                 </Label>
               }
             </Info>
             <Info>
               Teléfono
               <Label>
-                {!admin.phoneNumber ? "N/A" : admin.phoneNumber}
+                {!admin.phone_number ? "N/A" : admin.phone_number}
               </Label>
             </Info>
             {!currentRole &&

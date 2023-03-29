@@ -61,24 +61,6 @@ const NavBar = () => {
     setHamburger(false)
   }
 
-  const addAdmintypes = async (id: any) => {
-    const createAdminType: any = {
-      general: true,
-      pay: false,
-      courses: false,
-      rewards: false,
-      landing: false,
-      coupons: false,
-      users: false,
-      superAdmin: false
-    }
-    const docRef = doc(db, 'users', id);
-    await updateDoc(docRef, {
-      adminType: createAdminType,
-    }).then(() => {
-      console.log('exito')
-    })
-  }
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -119,6 +101,9 @@ const NavBar = () => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         setUserData(userDataAuth.user);
+        if (userDataAuth.user.role === 'admin' || 'superAdmin') {
+          setIsAdmin(true);
+        }
         setLoggedIn(true);
       }
     }, [])
