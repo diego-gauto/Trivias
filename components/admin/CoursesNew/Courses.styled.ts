@@ -4,7 +4,7 @@ export const CourseContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 30px;
+  padding: 20px;
   width: 100%;
   font-family: "Montserrat", sans-serif;
   .create-course {

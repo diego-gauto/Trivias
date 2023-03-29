@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { createCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
@@ -139,7 +140,23 @@ const Courses = () => {
     });
   }, [])
   return (
-    <AdminContain>
+    <AdminContain style={{ flexDirection: "column" }}>
+      <div className="courses-header">
+        <h1 className="main-title">Crear Curso</h1>
+        <div className="courses-buttons">
+          <Link href="/admin/Teacher">
+            <button>Profesores</button>
+          </Link>
+          <Link href="/admin/CourseAttributes">
+            <button>Categorías</button>
+          </Link>
+          <Link href="/admin/Materials">
+            <button>Materiales</button>
+          </Link>
+
+
+        </div>
+      </div>
       <CourseContainer>
         <div className="create-course">
           <div className="rows">

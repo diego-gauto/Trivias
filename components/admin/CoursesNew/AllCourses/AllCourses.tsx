@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { OptionColor, SelectOption } from '../Courses.styled';
 import { IAllCourses, ICategories, IMaterials, IProfessors } from './IAllCourses';
 const AllCourses = (props: IAllCourses) => {
+  const router = useRouter();
   const [startEdit, setStartEdit] = useState<boolean>(false);
   const [openDifficultySelect, setOpenDifficultySelect] = useState<boolean>(false);
   const [openSequentialSelect, setOpenSequentialSelect] = useState<boolean>(false);
@@ -123,7 +125,7 @@ const AllCourses = (props: IAllCourses) => {
 
   }
   const goToSeasons = () => {
-
+    router.push({ pathname: `/admin/Courses/${id}` })
   }
   const deleteCourse = () => {
 

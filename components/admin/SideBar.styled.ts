@@ -27,6 +27,34 @@ export const Text = styled.p`
 export const AdminContain = styled.div`
   display: flex;
   width: 100%;
+  .courses-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-inline: 20px;
+    align-items: center;
+    .main-title {
+      font-size: 30px;
+      margin: 0;
+    }
+    .courses-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      button {
+        border-radius: 100px;
+        padding-block: 5px;
+        padding-inline: 20px;
+        border: none;
+        background-color: #6717cd;
+        color: white;
+        border: none;
+        &:hover {
+          background-color: #45009c;
+        }
+      }
+    }
+  }
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
