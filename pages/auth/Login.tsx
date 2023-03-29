@@ -193,8 +193,15 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
-          localStorage.setItem('email', user.email)
-          window.location.href = "/"
+          if (res === "Este usuario no existe!") {
+            setErrorMsg('Este usuario no existe!');
+            setAuthLoader(false);
+            setShow(true);
+            setIsLoading(false);
+          } else {
+            localStorage.setItem('email', user.email)
+            window.location.href = "/"
+          }
         })
       })
     },
@@ -216,8 +223,15 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
-          localStorage.setItem('email', user.email);
-          window.location.href = "/"
+          if (res === "Este usuario no existe!") {
+            setErrorMsg('Este usuario no existe!');
+            setAuthLoader(false);
+            setShow(true);
+            setIsLoading(false);
+          } else {
+            localStorage.setItem('email', user.email);
+            window.location.href = "/"
+          }
         })
       })
     } catch (error: any) {
