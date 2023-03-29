@@ -13,11 +13,17 @@ export interface IAllCourses {
   duration: number;
   type: string;
   sequential: boolean;
+  openCourseEdit: number;
+  openCourse: any;
+  moveTo: any;
   id: number;
   index: number;
-  // professors: [IProfessors];
-  // categories: [ICategories];
-  // materials: [IMaterials];
+  professors: [IProfessors];
+  categories: [ICategories];
+  materials: [IMaterials];
+  allProfessors: [IProfessors];
+  allCategories: [ICategories];
+  allMaterials: [IMaterials];
 }
 export interface IProfessors {
   id: number;

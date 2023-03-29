@@ -68,13 +68,13 @@ export const CourseContainer = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      cursor: pointer;
       .title {
         font-size: 20px;
         font-weight: 600;
       }
       .arrow {
         font-size: 50px;
-        cursor: pointer;
       }
     }
     .course-content {
@@ -104,6 +104,11 @@ export const CourseContainer = styled.div`
             color: white;
             border: none;
           }
+          .save-button {
+            background-color: #6717cd;
+            color: white;
+            border: none;
+          }
         }
         .course-data {
           display: flex;
@@ -113,7 +118,17 @@ export const CourseContainer = styled.div`
             font-size: 16px;
             color: #6717cd;
             margin: 0;
-            span {
+          }
+          .input-edit {
+            font-size: 14px;
+            border-radius: 100px;
+            padding-inline: 20px;
+            padding-block: 5px;
+            width: 100%;
+            border: 1px solid #6717cd;
+            border-radius: 20px;
+            :focus {
+              outline: 1px solid #8e2de2;
             }
           }
         }

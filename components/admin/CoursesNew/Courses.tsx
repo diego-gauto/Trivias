@@ -22,6 +22,7 @@ const Courses = () => {
   const [openProfessorsSelect, setOpenProfessorsSelect] = useState<boolean>(false);
   const [openCategoriesSelect, setOpenCategoriesSelect] = useState<boolean>(false);
   const [openMaterialsSelect, setOpenMaterialsSelect] = useState<boolean>(false);
+  const [openCourseEdit, setOpenCourseEdit] = useState<number>(-1);
   const [course, setCourse] = useState<any>({
     title: "",
     subtitle: "",
@@ -60,6 +61,18 @@ const Courses = () => {
   const color = [
     "azul", "amarillo", "morado", "naranja", "rosa", "verde"
   ];
+  const openCourse = (courseIndex: number) => {
+    if (openCourseEdit === courseIndex) {
+      setOpenCourseEdit(-1);
+    }
+    else {
+      setOpenCourseEdit(courseIndex);
+    }
+  }
+  const moveTo = (index: number) => {
+    let element = document.getElementById(`course-${index}`);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
   const addProfessors = (val: any) => {
     let tempProfessor = course.professors;
     let tempIndex = 0;
@@ -102,7 +115,6 @@ const Courses = () => {
     }
     setCourse({ ...course, materials: tempMaterials })
   }
-  console.log(courses);
   const createCourse = () => {
     setLoader(true);
     createCoursesApi(course).then(() => {
@@ -398,7 +410,7 @@ const Courses = () => {
               />
             </div>
             <div className="input-contain">
-              <label className="input-label">Profesores</label>
+              <label className="input-label">Instructor (es)</label>
               <SelectOption onClick={() => setOpenProfessorsSelect(!openProfessorsSelect)}>
                 <p>
                   {
@@ -433,13 +445,13 @@ const Courses = () => {
               </SelectOption>
             </div>
             <div className="input-contain">
-              <label className="input-label">Categorias</label>
+              <label className="input-label">Categorías</label>
               <SelectOption onClick={() => setOpenCategoriesSelect(!openCategoriesSelect)}>
                 <p>
                   {
                     course.categories.length > 0
                       ? course.categories.map((val: ICategories, index: number) => { return <React.Fragment key={"catsName_" + index}>{val.name}<br /></React.Fragment> })
-                      : "Seleccione una categoria"
+                      : "Seleccione una categoría"
                   }
                 </p>
                 {
@@ -539,6 +551,15 @@ const Courses = () => {
                 duration={course.duration}
                 phrase={course.phrase}
                 mandatory={course.mandatory}
+                professors={course.professors}
+                categories={course.categories}
+                materials={course.materials}
+                openCourseEdit={openCourseEdit}
+                openCourse={openCourse}
+                allProfessors={professors}
+                allCategories={categories}
+                allMaterials={materials}
+                moveTo={moveTo}
                 id={course.id}
                 index={index}
                 key={"AllCourses_" + index}
