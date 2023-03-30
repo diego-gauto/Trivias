@@ -339,6 +339,7 @@ const Courses = () => {
             <div className="input-contain">
               <label className="input-label">Imagen</label>
               <input
+                type="file"
                 className="input-create"
                 placeholder="Seleccione una imagen"
                 onChange={(e: any) => {

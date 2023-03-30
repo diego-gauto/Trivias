@@ -38,6 +38,9 @@ export const CourseContainer = styled.div`
           color: #6717cd;
           margin: 0;
         }
+        input::file-selector-button {
+          display: none;
+        }
         .input-create {
           font-size: 14px;
           border-radius: 100px;
@@ -118,6 +121,9 @@ export const CourseContainer = styled.div`
             font-size: 16px;
             color: #6717cd;
             margin: 0;
+          }
+          input::file-selector-button {
+            display: none;
           }
           .input-edit {
             font-size: 14px;
