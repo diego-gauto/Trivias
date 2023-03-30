@@ -1,11 +1,10 @@
-import { user } from 'firebase-functions/v1/auth';
-import { doc, updateDoc } from 'firebase/firestore';
-import React, { useState, useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
-import { db } from '../../../firebase/firebaseConfig';
+import { updateUserInfoApi } from '../../api/admin';
 import { ModalContainer, ModalContent } from './Modal.styled';
 
-const EditUserModal = ({ show, setShow, user }: any) => {
+const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
   const [update, setUpdate] = useState<any>({ user })
   const [updating, setUpdating] = useState(false);
 
@@ -13,20 +12,28 @@ const EditUserModal = ({ show, setShow, user }: any) => {
 
   const updateUser = async () => {
     setUpdating(true);
-    const docRef = doc(db, 'users', update.id);
-    await updateDoc(docRef, {
+    let tempUser = {
       name: update.name,
-      lastName: update.lastName,
-      phoneNumber: update.phoneNumber,
+      last_name: update.lastName,
+      phone_number: update.phoneNumber,
       score: update.score,
-    }).then(() => {
+      id: update.id
+    }
+    updateUserInfoApi(tempUser).then(() => {
+      handleClick();
       setUpdating(false);
       handleClose();
     })
   }
+
   useEffect(() => {
-    setUpdate({ ...user })
+    if (user) {
+      setUpdate(user)
+    }
   }, [user])
+
+
+
   return (
     <ModalContainer show={show} onHide={handleClose} centered>
       <ModalContent>
@@ -54,10 +61,10 @@ const EditUserModal = ({ show, setShow, user }: any) => {
                 Last Name
               </label>
               <input
-                placeholder={user.lastName}
-                defaultValue={user.lastName}
+                placeholder={user.last_name}
+                defaultValue={user.last_name}
                 onChange={(e) => {
-                  setUpdate({ ...update, lastName: e.target.value })
+                  setUpdate({ ...update, last_name: e.target.value })
                 }}
               />
             </div>
@@ -80,10 +87,10 @@ const EditUserModal = ({ show, setShow, user }: any) => {
                 Whatsapp
               </label>
               <input
-                placeholder={user.phoneNumber}
-                defaultValue={user.phoneNumber}
+                placeholder={user.phone_number}
+                defaultValue={user.phone_number}
                 onChange={(e) => {
-                  setUpdate({ ...update, phoneNumber: e.target.value })
+                  setUpdate({ ...update, phone_number: e.target.value })
                 }}
               />
             </div>

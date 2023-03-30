@@ -1,4 +1,5 @@
 import axios from "axios";
+import { user } from "firebase-functions/v1/auth";
 
 export const getAdmins = async () => {
   return axios
@@ -92,6 +93,32 @@ export const updateCouponStatusApi = async (coupon: any) => {
 export const getInvoicesApi = async () => {
   return axios
     .get("http://94.74.77.165/" + "admin/invoices")
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+//Users
+
+export const getUsersApi = async () => {
+  return axios
+    .get("http://94.74.77.165/" + "admin/users")
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateUserInfoApi = async (user: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "admin/user-update-info", user)
     .then((res) => {
       return res
     })
