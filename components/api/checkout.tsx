@@ -33,6 +33,17 @@ export const stripePaymentApi = async (data: any) => {
     });
 };
 
+export const addUserCouponApi = async (data: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "checkout/coupon-user", data)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+};
+
 export const createInvoiceApi = async (data: any) => {
   return axios
     .post("http://94.74.77.165/" + "checkout/invoice", data)

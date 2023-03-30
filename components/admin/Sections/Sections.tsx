@@ -56,14 +56,22 @@ const Sections = () => {
   };
 
   useEffect(() => {
-    getAdmins().then((res) => {
-      setUsers(res.data.admins);
-    })
+    retrieveAdmin();
   }, [])
 
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime();
     return new Date(tempDate).toLocaleDateString("es-MX")
+  }
+
+  const retrieveAdmin = () => {
+    getAdmins().then((res) => {
+      setUsers(res.data.admins);
+    })
+  }
+
+  const handleClick = () => {
+    retrieveAdmin();
   }
 
   return (
@@ -111,7 +119,7 @@ const Sections = () => {
       </GeneralContain>
       {
         isVisible &&
-        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} />
+        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} handleClick={handleClick} />
       }
     </AdminContain>
   )

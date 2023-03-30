@@ -16,8 +16,9 @@ import {
 } from "./Purchase.styled";
 import ModalError from "./Modal1/ModalError";
 import ErrorModal from "../../../components/Error/ErrorModal";
-import { createInvoiceApi, createPaymentMethodApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
+import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
 import { updateMembership } from "../../../components/api/users";
+import { retrieveCoupons } from "../../../components/api/admin";
 
 const Purchase = () => {
   const [user, setUser] = useState("");
@@ -174,20 +175,28 @@ const Purchase = () => {
           } else {
             setPay(true);
             setLoader(false);
-            updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.id })
+            updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
             setConfirmation(false);
           }
         })
       } else {
+        let price = product.price
+        if (coupon) {
+          if (coupon.type == 'amount') {
+            price = price - coupon.discount;
+          } else {
+            price = (price - (coupon.discount / 100) * price)
+          }
+        }
         const data = {
           new: card.cardId ? card.status : false,
           cardId: card.cardId,
           paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
           stripeId: userData.stripe_id,
-          amount: product.price,
+          amount: price,
           method: 'stripe'
         }
-        stripePaymentApi(data).then((res) => {
+        stripePaymentApi(data).then(async (res) => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
@@ -209,10 +218,15 @@ const Purchase = () => {
               amount: res.paymentIntent.amount,
               product: product.title,
               method: 'stripe',
-              user_id: userData.id,
+              user_id: userData.user_id,
               course_id: 1,
               final_date: (new Date().getTime() / 1000) + product.duration * 86400
             }
+            let tempCoupon = {
+              coupons_id: coupon.id,
+              user_id: userData.user_id
+            }
+            await addUserCouponApi(tempCoupon)
             createInvoiceApi(invoice).then((res) => {
               setConfirmation(false);
               setPay(true);
@@ -240,7 +254,7 @@ const Purchase = () => {
           amount: price * 100,
           product: product.title,
           method: 'paypal',
-          user_id: userData.id,
+          user_id: userData.user_id,
           course_id: 1,
           final_date: (new Date().getTime() / 1000) + product.duration * 86400
         }
@@ -253,13 +267,21 @@ const Purchase = () => {
     }
   }
 
+  const getAllCoupons = () => {
+    retrieveCoupons().then((res) => {
+      res.data.coupons.forEach((element: any) => {
+        let tempUsers: any = []
+        element.users.forEach((user: any) => {
+          tempUsers.push(user.user_id);
+        });
+        element.users = tempUsers;
+      });
+      setCoupons(res.data.coupons);
+    })
+  }
+
   const handleCoupons = (value: any) => {
     setCoupon(value);
-  }
-  const getAllCoupons = () => {
-    getCoupons().then((res: any) => {
-      setCoupons(res);
-    })
   }
 
   const checkCoupon = () => {
@@ -267,12 +289,12 @@ const Purchase = () => {
     setPaypal(true)
     coupon = coupons.filter((x: any) => x.code == code && x.status);
     if (coupon.length > 0) {
-      if (coupon[0].users.includes(userData?.id)) {
+      if (coupon[0].users.includes(userData?.user_id)) {
         setCouponError(true);
         setErrorMsg("Este cupón ya ha sido canjeado")
         setCode('');
       } else {
-        coupon[0].users.push(userData?.id);
+        coupon[0].users.push(userData?.user_id);
         handleCoupons({ ...coupon[0] });
         setCode('');
       }
@@ -478,7 +500,7 @@ const Purchase = () => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
                         finalDate = today + 2629800;
-                        updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.id })
+                        updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                         setConfirmation(false);
                         setPay(true);
                         return data
@@ -739,7 +761,7 @@ const Purchase = () => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
                           finalDate = today + 2629800;
-                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.id })
+                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                           setConfirmation(false);
                           setPay(true);
                           return data
