@@ -131,7 +131,12 @@ const AllCourses = (props: IAllCourses) => {
 
   }
   const goToSeasons = () => {
-    router.push({ pathname: `/admin/Courses/${id}` })
+    router.push({
+      pathname: "/admin/Courses/Seasons",
+      query: {
+        course: id,
+      }
+    })
   }
   const deleteCourse = () => {
 
@@ -745,7 +750,7 @@ const AllCourses = (props: IAllCourses) => {
                   className="save-button"
                   onClick={() => goToSeasons()}
                 >
-                  Ver Lecciones
+                  Ver Temporadas
                 </button>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -27,14 +27,28 @@ export const Text = styled.p`
 export const AdminContain = styled.div`
   display: flex;
   width: 100%;
+  position: relative;
+  .icon-exit {
+    position: absolute;
+    font-size: 24px;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    &:hover {
+      color: #6717cd;
+    }
+  }
   .courses-header {
     display: flex;
     justify-content: space-between;
-    padding-top: 20px;
+    padding-top: 40px;
     padding-inline: 20px;
     align-items: center;
     .main-title {
-      font-size: 30px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 24px;
       margin: 0;
     }
     .courses-buttons {
@@ -42,6 +56,9 @@ export const AdminContain = styled.div`
       justify-content: flex-end;
       gap: 10px;
       button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
         border-radius: 100px;
         padding-block: 5px;
         padding-inline: 20px;
@@ -106,6 +123,46 @@ export const Table = styled.table`
     }
     &:last-child {
       border-bottom: none;
+    }
+  }
+`;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+export const AdminLoader = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+  .loader-image {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    background-image: url(../images/logo2.png);
+    background-size: 80px;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    .loader-contain {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      margin: 6px;
+      border-width: 9px;
+      border-style: solid;
+      border-radius: 50%;
+      border-color: #6717cd transparent transparent;
+      animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal
+        none running;
     }
   }
 `;

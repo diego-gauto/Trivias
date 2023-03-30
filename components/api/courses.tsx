@@ -48,3 +48,37 @@ export const deleteCourseApi = async (course: any) => {
       return error
     });
 };
+export const getSingleCourseApi = async (courseId: any) => {
+  return axios
+    .get("http://94.74.77.165/" + "courses/" + courseId, courseId)
+    .then((res) => {
+      return res.data.data[0]
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const getSeasonsFromCourseApi = async (courseId: any) => {
+  return axios
+    .get("http://94.74.77.165/" + "courses/seasons/" + courseId, courseId)
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const createSeason = async (course: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "courses/createSeason", course)
+    .then((res) => {
+      console.log(res)
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
