@@ -55,34 +55,38 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   }
 
   const goTo = () => {
-    if (user) {
-      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: course.id, season: 0, lesson: 0 },
-        });
-      }
-      if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
-        router.push(
-          { pathname: 'Purchase', query: { type: 'subscription' } }
-        )
-      }
-      if (course.courseType == 'Producto' && !course.paid) {
-        router.push(
-          { pathname: 'Purchase', query: { type: 'course', id: course.id } }
-        )
-      }
-    } else {
-      if (course.courseType == 'Gratis') {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: course.id, season: 0, lesson: 0 },
-        });
-      }
-      if (!user && course.courseType !== 'Gratis') {
-        router.push(LOGIN_PATH)
-      }
-    }
+    router.push({
+      pathname: 'Lesson',
+      query: { id: course.id, season: 0, lesson: 0 },
+    });
+    // if (user) {
+    //   if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
+    //     router.push({
+    //       pathname: 'Lesson',
+    //       query: { id: course.id, season: 0, lesson: 0 },
+    //     });
+    //   }
+    //   if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
+    //     router.push(
+    //       { pathname: 'Purchase', query: { type: 'subscription' } }
+    //     )
+    //   }
+    //   if (course.courseType == 'Producto' && !course.paid) {
+    //     router.push(
+    //       { pathname: 'Purchase', query: { type: 'course', id: course.id } }
+    //     )
+    //   }
+    // } else {
+    //   if (course.courseType == 'Gratis') {
+    //     router.push({
+    //       pathname: 'Lesson',
+    //       query: { id: course.id, season: 0, lesson: 0 },
+    //     });
+    //   }
+    //   if (!user && course.courseType !== 'Gratis') {
+    //     router.push(LOGIN_PATH)
+    //   }
+    // }
   }
 
   useEffect(() => {

@@ -5,7 +5,6 @@ import { PositionTitle, TitleContain, Titles } from './Module.styled';
 import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
-import { getTeacherCourse } from '../../../../../store/actions/courseActions';
 import { BiDownload } from 'react-icons/bi';
 import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
 
@@ -13,13 +12,7 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
 
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
-  useEffect(() => {
-    if (teacherCreds.length > 0) {
-      getTeacherCourse(teacherCreds[0].name).then((res: any) => {
-        setTeacher(res[0])
-      })
-    }
-  }, [])
+
   return (
     <>
       <TitleContain>

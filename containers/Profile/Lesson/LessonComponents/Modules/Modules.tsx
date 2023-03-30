@@ -14,8 +14,6 @@ const Modules = ({ data, user, comments, season, lesson, teacherCreds }: any) =>
       {
         position === 1
           ? <About value={position} setValue={setPosition} data={data} teacherCreds={teacherCreds} /> :
-          // position === 2
-          //   ? <Extra value={position} setValue={setPosition} data={data} /> :
           position === 3
             ? <HomeWork value={position} setValue={setPosition} data={data} user={user} season={season} lesson={lesson} teacherCreds={teacherCreds} /> :
             position === 4
