@@ -55,6 +55,11 @@ export const AdminContain = styled.div`
       display: flex;
       justify-content: flex-end;
       gap: 10px;
+      .delete-btn {
+        &:hover {
+          opacity: 0.8;
+        }
+      }
       button {
         display: flex;
         align-items: center;
