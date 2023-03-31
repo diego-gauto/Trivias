@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { addCategory, deleteCategory, getCategory, updateCategory } from '../../../store/actions/courseActions';
+import { createCategoryApi } from '../../api/categories';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import Delete from '../Courses/Form/Delete/Delete';
@@ -49,6 +50,7 @@ const Category = () => {
   useEffect(() => {
     getAllCategories();
   }, [])
+
   return (
     <AdminContain>
       <CourseFormContain>

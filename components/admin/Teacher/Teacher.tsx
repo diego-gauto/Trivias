@@ -11,6 +11,7 @@ import {
   Title, TitleContain
 } from '../Category/Category.styled';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
+import { createProfessorApi } from '../../api/professors';
 
 const Teacher = () => {
   const [newTeacher, setNewTeacher] = useState<boolean>(false);
@@ -104,6 +105,7 @@ const Teacher = () => {
   useEffect(() => {
     getAllteachers();
   }, [])
+
   return (
     <AdminContain>
       <CourseFormContain>

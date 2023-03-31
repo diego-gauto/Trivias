@@ -11,6 +11,7 @@ import {
   FormContain, Input, InputContain, Label,
   Title, TitleContain
 } from '../Category/Category.styled';
+import { createMaterialApi } from '../../api/materials';
 
 
 const Materials = () => {
@@ -54,6 +55,7 @@ const Materials = () => {
   useEffect(() => {
     getAllMaterials();
   }, [])
+
   return (
     <AdminContain>
       <CourseFormContain>

@@ -53,6 +53,7 @@
     "react-to-print": "^2.14.12",
     "react-uuid": "^2.0.0",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.6.1",
     "stripe": "^10.0.0",
     "styled-components": "^5.3.3",
     "swiper": "^8.4.5",

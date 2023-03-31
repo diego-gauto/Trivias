@@ -16,6 +16,8 @@ import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
+import { io } from 'socket.io-client';
+
 
 
 const Lesson = () => {
@@ -29,10 +31,27 @@ const Lesson = () => {
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
   const [certficate, setCertificate] = useState<any>(false);
+  const socket = io("http://94.74.77.165:89");
+
+  socket.io.on("error", (error) => {
+    console.log(error);
+
+  });
 
   useEffect(() => {
     checkCourse()
   }, [router, course]);
+
+
+  const send = () => {
+    console.log(0);
+    socket.emit("comment", { data: "hola" }).timeout(5000);
+  }
+
+  socket.on("comment", ({ data }) => {
+    console.log(data);
+
+  });
 
   const checkCourse = () => {
 
@@ -135,6 +154,11 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
+          <div onClick={() => {
+            send()
+          }}>
+            aaa
+          </div>
           <div className="left-side">
             <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             <Modules data={currentlesson} user={userData} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
