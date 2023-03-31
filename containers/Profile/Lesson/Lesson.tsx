@@ -7,14 +7,16 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import {
   addHistoryCourse,
-  getComments,
   getTeacher,
   getWholeCourse,
 } from "../../../store/actions/courseActions";
 import { addUserCertificate, getPaidCourses } from "../../../store/actions/UserActions";
-import { Container, FirstContainer, MainContainer } from "./Lesson.styled";
+import { MainContainer } from "./Lesson.styled";
 import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import Modules from "./LessonComponents/Modules/Modules";
+import Courses from "./LessonComponents/Courses/Courses";
+
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -115,69 +117,15 @@ const Lesson = () => {
     setLoggedIn(false)
   }
 
-  const fetchDB_data = async (professor: any) => {
-    let tempProfessor: Array<any> = professor;
-    try {
-      let date = new Date().getTime() / 1000;
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        response.forEach((e: any) => {
-          getPaidCourses(e.id).then((paid: any) => {
-            getWholeCourse(id).then((res: any) => {
-              res.courseProfessor.map((profId: string, index: number) => {
-                tempProfessor.map((val: any) => {
-                  if (profId.includes(val.id)) {
-                    res.courseProfessor[index] = val;
-                  }
-                })
-              })
-              if (res.courseType == 'Producto') {
-
-                if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
-                  res.paid = true;
-                  addHistoryCourse(res, e.id, season, lesson);
-                  setIsLoading(false);
-                } else {
-                  router.push({
-                    pathname: 'Purchase', query: { type: 'course', id: id }
-                  });
-                }
-              }
-              if (res.courseType == 'Mensual') {
-                if (e.data().membership.finalDate > date) {
-                  addHistoryCourse(res, e.id, season, lesson);
-                  setIsLoading(false);
-                }
-                else {
-                  router.push(
-                    { pathname: 'Purchase', query: { type: 'subscription' } }
-                  )
-                }
-              }
-              if (res.courseType == 'Gratis') {
-                addHistoryCourse(res, e.id, season, lesson);
-                setIsLoading(false);
-              }
-              setCourse(res);
-            })
-          })
-          setUserData({ ...e.data(), id: e.id });
-        });
-      });
-    } catch (error) {
-      return false
-    }
-  }
-  const getProffessors = () => {
-    getTeacher().then((res) => {
-      fetchDB_data(res);
-      return res;
-    })
-  }
   useEffect(() => {
-    getProffessors();
-
+    getWholeCourse(id).then((res: any) => {
+      setCourse(res);
+      setIsLoading(false);
+    })
   }, [loggedIn])
+
+  const handleClick = () => {
+  }
 
   return (
     <>
@@ -187,11 +135,14 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
-          {course && <Container>
-            <FirstContainer>
+          <div className="left-side">
+            <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
+            <Modules data={currentlesson} user={userData} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
+          </div>
+          <Courses menu={true} handleClick={handleClick} id={id} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
+          {/* <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-            </FirstContainer>
-          </Container>}
+            </FirstContainer> */}
         </MainContainer>}
     </>
   )

@@ -15,6 +15,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
   const [seasons, setSeasons] = useState<any>([]);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
+
   useEffect(() => {
     let temp_selected: any = [];
     course?.seasons.forEach((element: any) => {

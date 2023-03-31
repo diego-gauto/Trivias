@@ -48,25 +48,13 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const getUserCourses = () => {
-    let tempCourses: Array<any> = [];
-    getPaidCourses(user.id).then((res) => {
-      let today: any = new Date().getTime() / 1000;
-      res.forEach((element: DocumentData) => {
-        if (element.finalDate > today) {
-          tempCourses.push(element);
-        }
-      });
-      setPaidCourses(tempCourses);
-    })
-  }
   const handleCourse = () => {
-    getUserCourses();
+    // getUserCourses();
   }
-  const getAllPaymentMethods = () => {
-    getPaymentmethods(user.id).then((res) => {
-      setPaymentMethods(res);
-    })
+
+  const formatDate = (value: any) => {
+    let tempDate = new Date(value).getTime();
+    return new Date(tempDate).toLocaleDateString("es-MX")
   }
 
   const deleteUser = () => {
@@ -74,8 +62,7 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
   }
 
   useEffect(() => {
-    getUserCourses();
-    getAllPaymentMethods();
+
   }, [user])
 
   return (
@@ -123,13 +110,13 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
             <Info>
               Fecha de Creación
               <Label>
-                {user.created_at}
+                {formatDate(user.created_at)}
               </Label>
             </Info>
             <Info>
               Teléfono
               <Label>
-                {!user.phoneNumber ? "N/A" : user.phoneNumber}
+                {!user.phone_umber ? "N/A" : user.phone_umber}
               </Label>
             </Info>
           </ColumnContain>

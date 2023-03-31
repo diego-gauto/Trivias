@@ -156,13 +156,17 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
             <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
           </div>
           <div className='comment'>
-            {comments && user.photoURL
+            {/* {
+            comments && user.photoURL
               ?
               <Profile src={user.photoURL} />
               :
               <Profile
                 src={DEFAULT_USER_IMG}
-              />}
+              />} */}
+            <Profile
+              src={DEFAULT_USER_IMG}
+            />
             <CommentInput value={comment} placeholder="Escribe tus comentarios" onChange={(e: any) => {
               setComment(e.target.value)
             }}

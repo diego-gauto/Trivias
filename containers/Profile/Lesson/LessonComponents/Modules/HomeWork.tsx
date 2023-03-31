@@ -37,25 +37,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
     }
   }, [])
 
-
-  useEffect(() => {
-    getHomework(data.id, user.id).then((res: any) => {
-      if (res) {
-        if (!res.status) {
-          setStatus("pending");
-        }
-        if (res.status && res.aproved) {
-          setStatus("aproved")
-        }
-        if (res.status && !res.aproved) {
-          setStatus("")
-        }
-      } else {
-        setStatus("")
-      }
-    })
-  }, [data])
-
   const getImage = (file: any) => {
     let tempHomework: any = {}
     tempHomework.userName = user.name;
