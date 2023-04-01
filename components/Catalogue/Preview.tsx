@@ -14,6 +14,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { getTeacher, getWholeCourses } from "../../store/actions/courseActions";
 import Module6 from "./Module6/Module6";
 import { getUserApi } from "../api/users";
+import { addCourse } from "../api/lessons";
 
 
 const Preview = () => {
