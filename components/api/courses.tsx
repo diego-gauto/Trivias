@@ -82,3 +82,37 @@ export const createSeason = async (course: any) => {
       return error
     });
 };
+export const getLessonsFromApi = async (seasons_id: any) => {
+  return axios
+    .get("http://94.74.77.165/" + "courses/lessons/" + seasons_id, seasons_id)
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const getLessonFromApi = async (lessons_id: any) => {
+  return axios
+    .get("http://94.74.77.165/" + "courses/single/" + lessons_id, lessons_id)
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const createLessonFromApi = async (lesson: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "courses/createLesson", lesson)
+    .then((res) => {
+      console.log(res)
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
