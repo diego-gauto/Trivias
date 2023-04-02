@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { type } from 'os';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoMdExit } from 'react-icons/io';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import dynamic from "next/dynamic";
@@ -11,13 +11,18 @@ import { SelectOption } from '../../Courses.styled';
 import { LessonContainer } from './Lessons.styled';
 import { MdDelete } from 'react-icons/md';
 import { IAnswer, ILesson, IQuestion } from './ILessons';
+import { createLessonFromApi, getLessonFromApi } from '../../../../api/courses';
+import ReactPlayer from 'react-player';
 
 const Lessons = () => {
   const [selectQuizHw, setSelectQuizHw] = useState<boolean>(false);
   const [quill, setQuill] = useState("");
+  const [updateMode, setUpdateMode] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(false);
   const router = useRouter();
   let courseID: any = router.query.course;
   let seasonID: any = router.query.season;
+  let lessonID: any = router.query.lesson;
   const [lesson, setLesson] = useState<any>({
     title: "",
     number: 0,
@@ -26,12 +31,10 @@ const Lessons = () => {
     points: 0,
     banner: "",
     objectives: "",
-    duration: 0,
+    duration: 10,
     quiz: false,
     homework: false,
     seasons_id: +seasonID,
-    quizzes: [],
-    lesson_homeworks: [],
   });
   const [homeWorkData, sethomeWorkData] = useState({
     title: "",
@@ -134,12 +137,15 @@ const Lessons = () => {
     setQuiz({ ...tempQuiz })
   }
   const addAnswer = (index: number) => {
-    let tempQuiz: any = quiz;
+    let tempQuiz: any = JSON.parse(JSON.stringify(quiz));
     if (answers.answer !== "") {
-      tempQuiz.questions[index].answers.push({ answer: answers.answer, status: false });
+      tempQuiz.questions[index].answers.push(answers);
     }
     setQuiz({ ...tempQuiz })
-    setAnswers({ ...answers, answer: "" })
+    setAnswers({
+      answer: "",
+      status: false,
+    })
   }
   const removeAnswer = (index: number, ind: number) => {
     let tempQuiz: any = quiz;
@@ -148,16 +154,27 @@ const Lessons = () => {
   }
   const createLesson = () => {
     if (lesson.quiz === true) {
-      lesson.quizzes.push(quiz);
+      lesson.quizzes = quiz;
     }
     if (lesson.homework === true) {
-      lesson.lesson_homeworks.push(homeWorkData);
+      lesson.lesson_homeworks = homeWorkData;
     }
-    console.log(lesson)
+    createLessonFromApi(lesson).then(() => {
+
+    })
   }
   const deleteLesson = () => {
 
   }
+  useEffect(() => {
+    if (lessonID) {
+      setUpdateMode(true);
+      getLessonFromApi(lessonID).then((res) => {
+        console.log(res);
+      })
+    }
+  }, [])
+
   return (
     <AdminContain style={{ flexDirection: "column" }}>
       <IoMdExit className="icon-exit" onClick={returnToSeasons} />
@@ -506,7 +523,6 @@ const Lessons = () => {
                               ...questions, question: content
                             })
                           }} />
-
                         {
                           quest.answers.length > 0 &&
                           <div className="answer-contain">
@@ -540,6 +556,17 @@ const Lessons = () => {
           }
         </div>
       </LessonContainer>
+      {lesson.link && <ReactPlayer hidden
+        url={lesson.link}
+        onError={e => {
+          alert("El formato del video es incorrecto!");
+          setLesson({ ...lesson, duration: 0 })
+        }
+        }
+        onDuration={(duration) =>
+          setLesson({ ...lesson, duration: duration })
+        }
+      ></ReactPlayer>}
     </AdminContain>
   )
 }

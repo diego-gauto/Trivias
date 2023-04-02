@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { AiFillEdit, AiOutlinePlus } from 'react-icons/ai';
 import { IoMdExit } from 'react-icons/io';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
-import { createSeason, getSeasonsFromCourseApi, getSingleCourseApi } from '../../../api/courses';
+import { createSeason, getLessonsFromApi, getSeasonsFromCourseApi, getSingleCourseApi } from '../../../api/courses';
 import { AdminContain, AdminLoader } from '../../SideBar.styled';
-import { ISeason } from './ISeasons';
+import { ILesson, ISeason } from './ISeasons';
 import { SeasonContainer } from './Seasons.styled';
 
 const Seasons = () => {
@@ -16,7 +16,6 @@ const Seasons = () => {
   const [seasons, setSeasons] = useState<any>([])
   const router = useRouter();
   let courseID: any = router.query.course;
-
   const returnToCourses = () => {
     router.push({
       pathname: "/admin/Courses",
@@ -32,7 +31,6 @@ const Seasons = () => {
       setLoader(false);
       getSeasonsFromCourseApi(+courseID).then((resSeason) => {
         setSeasons(resSeason);
-        console.log(resSeason);
         setLoader(true);
       })
     })
@@ -43,6 +41,16 @@ const Seasons = () => {
       query: {
         course: courseID,
         season: seasonID,
+      }
+    })
+  }
+  const editLesson = (seasonID: number, lessonID: number) => {
+    router.push({
+      pathname: "/admin/Courses/Seasons/Lessons",
+      query: {
+        course: courseID,
+        season: seasonID,
+        lesson: lessonID,
       }
     })
   }
@@ -67,8 +75,15 @@ const Seasons = () => {
       setCourse(res);
       getSeasonsFromCourseApi(+courseID).then((resSeason) => {
         setSeasons(resSeason);
-        console.log(resSeason);
-        setLoader(true);
+        resSeason.forEach((season: any, index: number) => {
+          getLessonsFromApi(season.id).then((resLesson) => {
+            season.lessons = resLesson
+          })
+          if (resSeason.length - 1 === index) {
+            setLoader(true);
+          }
+        })
+
       })
     })
   }, [])
@@ -126,9 +141,23 @@ const Seasons = () => {
 
                       </div>
                       {
-                        openSeason === index &&
+                        (openSeason === index && seasonData.lessons?.length > 0) &&
                         <div className="lesson-content">
-
+                          {
+                            seasonData.lessons.map((lesson: ILesson, ind: number) => {
+                              return (
+                                <div className="lesson-contain" key={"LessonShow_" + ind}>
+                                  <img className="img-banner" />
+                                  <div className="lesson-data">
+                                    <p className="lesson-title">{lesson.title}</p>
+                                    <p className="lesson-about">{lesson.about}</p>
+                                    <p className="lesson-duration">{lesson.duration + " min"}</p>
+                                    <p className="lesson-edit" onClick={() => { editLesson(index + 1, ind + 1) }}>Editar Leccion</p>
+                                  </div>
+                                </div>
+                              )
+                            })
+                          }
                         </div>
                       }
                     </div>

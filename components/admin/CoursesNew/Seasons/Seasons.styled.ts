@@ -87,6 +87,39 @@ export const SeasonContainer = styled.div`
     }
     .lesson-content {
       display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .lesson-contain {
+        display: flex;
+        gap: 30px;
+        p {
+          margin: 0;
+        }
+        .img-banner {
+        }
+        .lesson-data {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          .lesson-title {
+            font-size: 16px;
+            font-weight: 600;
+          }
+          .lesson-about {
+            font-size: 14px;
+          }
+          .lesson-duration {
+            font-size: 12px;
+            color: gray;
+          }
+          .lesson-edit {
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #6717cd;
+          }
+        }
+      }
     }
   }
 `;
