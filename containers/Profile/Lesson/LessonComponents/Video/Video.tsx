@@ -10,7 +10,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 declare let Hls: any
 
-const Video = ({ data, title, id, course, user, season, lesson, handleComplete, comments }: any) => {
+const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
@@ -59,36 +59,37 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     setDuration(duration);
   }
   const handleProgress = (seconds: number) => {
-    let progress = (seconds * 100) / duration;
-    if (user) {
-      if (!("progress" in course.seasons[season].lessons[lesson])) {
-        course.seasons[season].lessons[lesson].progress = [];
-      }
-      if (!course.seasons[season].lessons[lesson].progress.some((e: any) => e.id == user.id)) {
-        course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds, status: false })
-      } else {
-        let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-        course.seasons[season].lessons[lesson].progress[index].seconds = seconds;
-        course.seasons[season].lessons[lesson].progress[index].time = progress;
-      }
+    // let progress = (seconds * 100) / duration;
+    // if (user) {
+    //   if (!("progress" in course.seasons[season].lessons[lesson])) {
+    //     course.seasons[season].lessons[lesson].progress = [];
+    //   }
+    //   if (!course.seasons[season].lessons[lesson].progress.some((e: any) => e.id == user.id)) {
+    //     course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds, status: false })
+    //   } else {
+    //     let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
+    //     course.seasons[season].lessons[lesson].progress[index].seconds = seconds;
+    //     course.seasons[season].lessons[lesson].progress[index].time = progress;
+    //   }
 
-      // updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
-      updateLessonProgress(user.id, progress, seconds, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
-    }
+    //   // updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+    //   updateLessonProgress(user.id, progress, seconds, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+    // }
   }
 
   const handleViewed = () => {
     if (user) {
-      if (("progress" in course.seasons[season].lessons[lesson])) {
-        let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-        if (index == -1) {
-          return 0
-        } else {
-          return course.seasons[season].lessons[lesson].progress[index].seconds
-        }
-      } else {
-        return 0
-      }
+      // if (("progress" in course.seasons[season].lessons[lesson])) {
+      //   let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
+      //   if (index == -1) {
+      //     return 0
+      //   } else {
+      //     return course.seasons[season].lessons[lesson].progress[index].seconds
+      //   }
+      // } else {
+      //   return 0
+      // }
+      return 0
     } else {
       return 0
     }
@@ -168,7 +169,7 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
   return (
     <ReactPlayer
       className='absolute'
-      // ref={p => p?.seekTo(handleViewed())}
+      ref={p => p?.seekTo(handleViewed())}
       url={data.link}
       playing={true}
       muted={false}

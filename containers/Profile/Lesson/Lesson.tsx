@@ -17,7 +17,7 @@ import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.s
 import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
 import { io } from 'socket.io-client';
-import { addCourse } from "../../../components/api/lessons";
+import { addCourse, getCourseApi } from "../../../components/api/lessons";
 
 
 
@@ -40,7 +40,10 @@ const Lesson = () => {
   // });
 
   useEffect(() => {
-    checkCourse()
+    if (course) {
+      setCurrentLesson(course.seasons[season].lessons[lesson]);
+    }
+
   }, [router, course]);
 
 
@@ -121,7 +124,7 @@ const Lesson = () => {
   }
 
   const handleComplete = () => {
-    checkCourse()
+    getCourse()
   }
 
   try {
@@ -138,11 +141,16 @@ const Lesson = () => {
   }
 
   useEffect(() => {
-    getWholeCourse(id).then((res: any) => {
+    getCourse();
+  }, [])
+
+  const getCourse = () => {
+    getCourseApi(id).then((res) => {
+      setCurrentLesson(res.seasons[season].lessons[lesson]);
       setCourse(res);
       setIsLoading(false);
     })
-  }, [loggedIn])
+  }
 
   const handleClick = () => {
   }
@@ -156,10 +164,10 @@ const Lesson = () => {
       </Background> :
         <MainContainer>
           <div className="left-side">
-            <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-            <Modules data={currentlesson} user={userData} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
+            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
+            <Modules data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} />
           </div>
-          <Courses menu={true} handleClick={handleClick} id={id} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
+          <Courses menu={true} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
           {/* <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer> */}

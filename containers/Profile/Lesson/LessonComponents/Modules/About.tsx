@@ -37,18 +37,14 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
       <AboutContain>
         <TextContainer>
           <LessonTitle>
-            {data.courseTitle}, <span>de {teacherCreds[0]?.name}</span>
+            {data.title}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>
-            <p>En esta clase de nivel básico aprenderás cómo realizar el efecto humo.</p>
+            <p>{data.objectives}.</p>
             <p className='title'>Especificaciones</p>
-            <p>A través de este curso, aprenderás todas las habilidades que necesitas para ayudar a
-              las empresas a brindar la experiencia de usuario adecuada para sus productos.
-              Todas las técnicas incluidas en en el curso son estándares de la industria probados y
-              comprobados, que te equiparán con el mejor conocimiento para comenzar tu nuevo
-              camino profesional.</p>
-            <p className='title'>Material de apoyo</p>
+            <p>{data.about}.</p>
+            {/* {data.extra.length > 0 && <p className='title'>Material de apoyo</p>}
             <ol type="a">
               {data?.extra?.map((extra: any) => {
                 return (
@@ -64,7 +60,7 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
                   </Link>
                 )
               })}
-            </ol>
+            </ol> */}
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>

@@ -7,7 +7,7 @@ import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
-const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick }: any) => {
+const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
 
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
@@ -16,25 +16,26 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
 
-  useEffect(() => {
-    let temp_selected: any = [];
-    course?.seasons.forEach((element: any) => {
-      temp_selected.push(true)
-    });
-    setSelected(temp_selected);
+  // useEffect(() => {
+  //   let temp_selected: any = [];
+  //   course?.seasons.forEach((element: any) => {
+  //     temp_selected.push(true)
+  //   });
+  //   setSelected(temp_selected);
 
-    let viewed = 0;
-    course.lessons.forEach((element: any) => {
-      if (element.users.includes(userData?.id)) {
-        viewed++;
-      }
-    });
-    if (course.lessons.length == viewed) {
-      setCertificate(true)
-    }
-    setCount(viewed)
+  //   let viewed = 0;
+  //   course.lessons.forEach((element: any) => {
+  //     if (element.users.includes(userData?.id)) {
+  //       viewed++;
+  //     }
+  //   });
 
-  }, [course, data])
+  //   if (course.lessons.length == viewed) {
+  //     setCertificate(true)
+  //   }
+  //   setCount(viewed)
+
+  // }, [course, data])
 
   useEffect(() => {
     setOpen(menu)
@@ -45,6 +46,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
     temp[index] = !temp[index];
     setSelected(temp)
   }
+
   const goTo = () => {
     router.push({
       pathname: `/Certificates`,
@@ -60,26 +62,24 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
     });
   }
 
-  const getCurrentSeason = () => {
-    let tempSeason: any = []
-    getSeason(course.id).then((res) => {
-      tempSeason = res.sort((a: any, b: any) => a.season - b.season)
-      setSeasons(tempSeason)
-    })
-  }
   useEffect(() => {
-    getCurrentSeason();
+    let temp_selected: any = [];
+    course.seasons.forEach((element: any) => {
+      temp_selected.push(true)
+    });
+    setSelected(temp_selected);
   }, [])
+
   return (
     <MainContainer open={open}>
       <div className='course-info'>
-        <p className='title'>{course?.courseTittle}</p>
-        <p>Un curso de <span>{course?.courseProfessor[0]?.name}</span></p>
+        <p className='title'>{course?.title}</p>
+        <p>Un curso de <span>{course?.professors[0]?.name}</span></p>
         <div className='level-container'>
-          {(course?.courseDifficulty == "Muy Fácil" || course?.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-          {(course?.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-          {(course?.courseDifficulty == "Avanzado" || course?.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-          <Text03 style={{ padding: 0 }} level={course?.courseDifficulty}><span>{course?.courseDifficulty}</span></Text03>
+          {(course?.dificulty == "Muy Fácil" || course?.dificulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+          {(course?.dificulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+          {(course?.dificulty == "Avanzado" || course?.dificulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+          <Text03 style={{ padding: 0 }} level={course?.dificulty}><span>{course?.dificulty}</span></Text03>
         </div>
       </div>
       {(certficate && !responsive1124) && <div className="certificate-container">
@@ -89,7 +89,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
       </div>}
       <div className='course-progress'>
         <p className='title'>Tu progreso <br />
-          <b>{count} de {course?.lessons.length}</b> <span>lecciones.</span>
+          <b>{count} de {course.lessons}</b> <span>lecciones.</span>
         </p>
         <div className='certificate-box'>
           <div className='half'></div>
@@ -113,7 +113,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
               <div className='module'>
-                {selected[index] && <CourseProgress title={course?.courseTittle} season={index} lesson={lesson} course={course} userId={userData?.id} refresh={toggleHandler} />}
+                {selected[index] && <CourseProgress title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.id} refresh={toggleHandler} />}
                 <div>
                   <p className='title'>{seasons[index]?.name ? seasons[index]?.name : `Módulo ${index + 1}`}</p>
                   <Episode>
@@ -126,7 +126,7 @@ const Courses = ({ id, course, data, userData, season, lesson, menu, handleClick
             <CoursesContainer active={selected[index]} onClick={() => {
               setOpen(!open); handleClick(false)
             }}>
-              <EveryCourse id={id} season={index} lessons={season.lessons} data={data} userId={userData?.id} course={course} />
+              <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.id} course={course} />
             </CoursesContainer>
           </SeasonContainer>
         )

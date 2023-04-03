@@ -23,3 +23,15 @@ export const getCoursesApi = async () => {
       return error
     });
 };
+
+export const getCourseApi = async (courseId: any) => {
+  return axios
+    .get("http://94.74.77.165/" + "lessons/" + courseId)
+    .then((res) => {
+      return res.data.data[0]
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

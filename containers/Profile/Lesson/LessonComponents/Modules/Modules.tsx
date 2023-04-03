@@ -5,7 +5,7 @@ import Extra from './Extra'
 import HomeWork from './HomeWork'
 import { MainContainer } from './Module.styled'
 
-const Modules = ({ data, user, comments, season, lesson, teacherCreds }: any) => {
+const Modules = ({ data, user, season, lesson, teacherCreds }: any) => {
 
   const [position, setPosition] = useState(1)
 
@@ -17,8 +17,8 @@ const Modules = ({ data, user, comments, season, lesson, teacherCreds }: any) =>
           position === 3
             ? <HomeWork value={position} setValue={setPosition} data={data} user={user} season={season} lesson={lesson} teacherCreds={teacherCreds} /> :
             position === 4
-              ? <Comments value={position} setValue={setPosition} data={data} user={user} comments={comments} />
-              : <About value={position} setValue={setPosition} user={user} />
+        // ? <Comments value={position} setValue={setPosition} data={data} user={user} />
+        // : <About value={position} setValue={setPosition} user={user} />
       }
     </MainContainer>
   )
