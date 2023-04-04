@@ -107,6 +107,7 @@ const Seasons = () => {
           }
         })
       })
+      setLoader(true);
     })
   }, [])
 
