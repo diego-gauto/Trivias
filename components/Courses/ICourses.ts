@@ -1,1 +1,3 @@
-export interface ICourses {}
+export interface ICourses {
+  published: number;
+}
