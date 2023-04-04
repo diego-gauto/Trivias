@@ -10,6 +10,8 @@ const Courses = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [courses, setCourses] = useState<any>([]);
+  const [userData, setUserData] = useState<any>(null);
+  const [loggedIn, setLoggedIn] = useState(false);
   const block = false;
   let courseSections = [
     "continue-watching",
@@ -29,8 +31,13 @@ const Courses = () => {
   }
   useEffect(() => {
     coursesAll();
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setLoggedIn(true);
+        setUserData(res);
+      })
+    }
   }, [])
-
   return (
     <CoursesContain>
       {/* VIDEO  */}
@@ -95,6 +102,7 @@ const Courses = () => {
                 slideNumber={index}
                 innerWidth={innerWidth}
                 allCourses={courses}
+                user={userData}
                 key={"Course-slider-" + index}
               />
             )

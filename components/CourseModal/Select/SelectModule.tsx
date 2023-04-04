@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { SelectContain, Selected, DropDown, OptionContain, Input, Label, Episodes, Option } from '../../Module3/Modal/Select.styled';
 import { IoIosArrowDown } from "react-icons/io";
+import { ISeason, ISelect, ISeasons } from './ISelectModule';
+import { SelectContain, Selected, OptionContain, Input, Option } from './SelectModule.styled';
 
-const SelectModule4 = ({ course, handleClick, seasons }: any) => {
+const SelectModule4 = (props: ISelect) => {
+  const { course, handleClick, seasons } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(course.seasons[0]?.name)
   useEffect(() => {
-    course.seasons.forEach((element: any) => {
-      seasons.forEach((season: any) => {
+    course.seasons.forEach((element: ISeason) => {
+      seasons.forEach((season: ISeasons) => {
         if (element.seasons == season.season) {
           element.name = season.name
         }

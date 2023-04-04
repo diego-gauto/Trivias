@@ -27,9 +27,9 @@ import {
   TextContainer,
   VideoContain,
 } from "../../Module3/Modal/Modal1.styled";
-import SelectModule4 from "../../Module4/Modal/SelectModule4";
+import SelectModule4 from "../../../CourseModal/Select/SelectModule";
 import { getSeason } from "../../../../store/actions/courseActions";
-import ModalMaterials from "../../Module4/Modal/ModalMaterials";
+import ModalMaterials from "../../../CourseModal/Materials/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'
 import { AiFillStar } from "react-icons/ai";

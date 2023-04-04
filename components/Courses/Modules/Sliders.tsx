@@ -3,14 +3,21 @@ import { Container } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { ICourse, ICourseData } from './ISliders';
 import { Image } from "react-bootstrap";
-import { Title, Progress, SlideContain, SlideModuleContainer } from './Sliders.styled';
+import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain } from './Sliders.styled';
+import CourseModal from '../../CourseModal/CourseModal';
+import { PurpleButton } from '../Courses.styled';
+import Link from 'next/link';
+import { LOGIN_PATH } from '../../../constants/paths';
 
 const Sliders = (props: ICourseData) => {
-  const { slideNumber, slideType, innerWidth, allCourses } = props;
-  const [loading, setLoading] = useState<any>(true);
+  const { slideNumber, slideType, innerWidth, allCourses, user } = props;
+  const [show, setShow] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  let today = new Date().getTime() / 1000;
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let [counter, setCounter] = useState<any>(0);
   const [courses, setCourses] = useState<any>([]);
+  const [course, setCourse] = useState<any>({});
   const [texts, setTexts] = useState({
     title: "",
     spanTitle: "",
@@ -95,6 +102,14 @@ const Sliders = (props: ICourseData) => {
   const goTo = (courseData: ICourse) => {
 
   }
+  const openModal = (courseData: ICourse) => {
+    if (counter < 2) {
+      setShow(true);
+    }
+    setCounter(0)
+    setCourse(courseData);
+  }
+
   useEffect(() => {
     getCourseContent();
     setTimeout(() => {
@@ -118,7 +133,16 @@ const Sliders = (props: ICourseData) => {
                 {
                   courses.map((course: ICourse, index: number) => {
                     return (
-                      <div key={"Course_" + index + slideNumber} id="grey-field" className="grey-field" onClick={() => { goTo(course) }}>
+                      <div key={"Course_" + index + slideNumber} id="grey-field" className="grey-field"
+                        onClick={() => {
+                          if (slideType === "continue-watching" || slideType === "my-courses") {
+                            goTo(course)
+                          }
+                          if (slideType === "all-courses" || slideType === "product-courses" || slideType === "monthly-courses") {
+                            openModal(course)
+                          }
+                        }}
+                      >
                         <SlideModuleContainer
                           level={course.difficulty}
                           style={{ width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}
@@ -145,7 +169,30 @@ const Sliders = (props: ICourseData) => {
               </div>
             </SlideContain>
             <div className="line"></div>
+            {
+              slideType === "monthly-courses" &&
+              <ButtonContain>
+                {
+                  (user && user.final_date < today) &&
+                  <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
+                    <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+                      <PurpleButton>
+                        Adquiere Gonvar+
+                      </PurpleButton>
+                    </div>
+                  </Link>
+                }
+                {!user && <Link href={LOGIN_PATH}>
+                  <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+                    <PurpleButton>
+                      Adquiere Gonvar+
+                    </PurpleButton>
+                  </div>
+                </Link>}
+              </ButtonContain>
+            }
           </div>
+          <CourseModal show={show} setShow={setShow} course={course} user={user} />
         </Container>
       }
     </>

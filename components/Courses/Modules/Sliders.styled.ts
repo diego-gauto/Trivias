@@ -129,3 +129,32 @@ export const Title = styled.h1`
     font-size: 24px;
   }
 `;
+export const ButtonContain = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-block: 40px;
+  @media (max-width: 1023px) {
+    margin-block: 20px;
+  }
+`;
+export const PurpleButton = styled.button`
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #6717cd;
+  padding-block: 15px;
+  padding-inline: 25px;
+  color: #fff;
+  border-radius: 30px;
+  border: none;
+  &:hover {
+    background-color: #5000b5;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
+  }
+  @media (max-width: 1023px) {
+    bottom: 10px;
+    font-size: 14px;
+    padding-block: 10px;
+    padding-inline: 20px;
+  }
+`;

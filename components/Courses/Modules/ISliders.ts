@@ -3,6 +3,9 @@ export interface ICourseData {
   slideNumber: number;
   innerWidth: any;
   allCourses: [];
+  user: {
+    final_date: number;
+  };
 }
 export interface ICourse {
   title: string;

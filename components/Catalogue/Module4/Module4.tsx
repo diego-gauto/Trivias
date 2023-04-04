@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Image, Row } from "react-bootstrap";
 
 import { getPaidCourses } from "../../../store/actions/UserActions";
-import Modal1 from "./Modal/Modal1";
+import Modal1 from "../../CourseModal/CourseModal";
 import {
   Title,
 } from "./Module4.styled";

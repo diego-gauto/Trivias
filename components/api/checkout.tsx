@@ -54,3 +54,14 @@ export const createInvoiceApi = async (data: any) => {
       return error.response.data;
     });
 };
+export const getCourseForCheckoutApi = async (courseId: any) => {
+  return axios
+    .get("http://94.74.77.165/" + "checkout/" + courseId, courseId)
+    .then((res) => {
+      return res.data.data[0]
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

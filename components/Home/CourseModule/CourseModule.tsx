@@ -7,7 +7,7 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
-import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
+import Modal1 from "../../CourseModal/CourseModal";
 import { useEffect, useState } from "react";
 import { NAILS_MASTER_COURSE_ID } from "../../../constants/gonvar";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
