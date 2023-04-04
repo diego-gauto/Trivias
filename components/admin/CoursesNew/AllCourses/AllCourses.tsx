@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
-import { OptionColor, SelectOption } from '../Courses.styled';
+import { updateCourseImage } from '../../../../store/actions/courseActions';
+import { updateCourseApi } from '../../../api/courses';
+import { LoaderButton, OptionColor, SelectOption } from '../Courses.styled';
 import { IAllCourses, ICategories, IMaterials, IProfessors } from './IAllCourses';
 const AllCourses = (props: IAllCourses) => {
   const router = useRouter();
   const [startEdit, setStartEdit] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(false);
   const [openDifficultySelect, setOpenDifficultySelect] = useState<boolean>(false);
   const [openSequentialSelect, setOpenSequentialSelect] = useState<boolean>(false);
   const [openColorSelect, setOpenColorSelect] = useState<boolean>(false);
@@ -14,6 +17,23 @@ const AllCourses = (props: IAllCourses) => {
   const [openCategoriesSelect, setOpenCategoriesSelect] = useState<boolean>(false);
   const [openMaterialsSelect, setOpenMaterialsSelect] = useState<boolean>(false);
   const [openPublishSelect, setOpenPublishSelect] = useState<boolean>(false);
+  const [courseImage, setCourseImage] = useState("");
+  const [errors, setErrors] = useState<any>({
+    errorTitle: false,
+    errorSubtitle: false,
+    errorAbout: false,
+    errorDifficulty: false,
+    errorImage: false,
+    errorPhrase: false,
+    errorColor: false,
+    errorPrice: false,
+    errorRating: false,
+    errorReviews: false,
+    errorDuration: false,
+    errorProfessor: false,
+    errorCategory: false,
+    errorMaterial: false
+  });
   const {
     title,
     subtitle,
@@ -42,25 +62,26 @@ const AllCourses = (props: IAllCourses) => {
     id,
     index,
   } = props;
-  const [course, setCourse] = useState({
-    title: title,
-    subtitle: subtitle,
-    about: about,
-    difficulty: difficulty,
-    mandatory: mandatory,
-    image: image,
-    phrase: phrase,
-    certificate_color: certificate_color,
-    price: price,
-    rating: rating,
-    reviews: reviews,
-    duration: duration,
-    type: type,
-    sequential: sequential,
-    professors: professors,
-    categories: categories,
-    materials: materials,
-    published: published,
+  const [course, setCourse] = useState<any>({
+    id: props.id,
+    title: props.title,
+    subtitle: props.subtitle,
+    about: props.about,
+    difficulty: props.difficulty,
+    mandatory: props.mandatory,
+    image: props.image,
+    phrase: props.phrase,
+    certificate_color: props.certificate_color,
+    price: props.price,
+    rating: props.rating,
+    reviews: props.reviews,
+    duration: props.duration,
+    type: props.type,
+    sequential: props.sequential,
+    professors: props.professors,
+    categories: props.categories,
+    materials: props.materials,
+    published: props.published,
   })
   const difficultyData = [
     "Muy Fácil",
@@ -74,9 +95,9 @@ const AllCourses = (props: IAllCourses) => {
     "Obligatorio",
   ];
   const membershipType = [
-    "Free",
-    "Monthly",
-    "Product",
+    "Gratis",
+    "Mensual",
+    "Producto",
   ];
   const color = [
     "azul", "amarillo", "morado", "naranja", "rosa", "verde"
@@ -88,9 +109,9 @@ const AllCourses = (props: IAllCourses) => {
   const addProfessors = (val: any) => {
     let tempProfessor = course.professors;
     let tempIndex = 0;
-    if (tempProfessor.some((e: any) => e.id === val.id)) {
+    if (tempProfessor.some((e: any) => e.professors_id === val.professors_id)) {
       tempIndex = tempProfessor.findIndex((x: any) =>
-        x.id == val.id
+        x.professors_id == val.professors_id
       )
       tempProfessor.splice(tempIndex, 1);
     }
@@ -99,12 +120,31 @@ const AllCourses = (props: IAllCourses) => {
     }
     setCourse({ ...course, professors: tempProfessor })
   }
+  const getImage = (file: any) => {
+    var reader: any = new FileReader();
+    var imageComp: any = new Image();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event: any) => {
+      imageComp.src = reader.result;
+    };
+    setTimeout(() => {
+      setCourse({ ...course, image: reader.result })
+      setCourseImage(reader.result)
+      // if ((imageComp.width == 760 && imageComp.height == 420) || (imageComp.width == 4000 && imageComp.height == 2250)) {
+      //   setLesson({ ...lesson, banner: reader.result })
+      //   alert("Imagen aceptada")
+      // }
+      // else {
+      //   alert("La imagen debe tener una resolución de 4000 px x 2250 px o 760 px × 420 px")
+      // }
+    }, 1000);
+  }
   const addCategories = (val: any) => {
     let tempCategory = course.categories;
     let tempIndex = 0;
-    if (tempCategory.some((e: any) => e.id === val.id)) {
+    if (tempCategory.some((e: any) => e.categories_id === val.categories_id)) {
       tempIndex = tempCategory.findIndex((x: any) =>
-        x.id == val.id
+        x.categories_id == val.categories_id
       )
       tempCategory.splice(tempIndex, 1);
     }
@@ -116,9 +156,9 @@ const AllCourses = (props: IAllCourses) => {
   const addMaterials = (val: any) => {
     let tempMaterials = course.materials;
     let tempIndex = 0;
-    if (tempMaterials.some((e: any) => e.id === val.id)) {
+    if (tempMaterials.some((e: any) => e.materials_id === val.materials_id)) {
       tempIndex = tempMaterials.findIndex((x: any) =>
-        x.id == val.id
+        x.materials_id == val.materials_id
       )
       tempMaterials.splice(tempIndex, 1);
     }
@@ -127,12 +167,54 @@ const AllCourses = (props: IAllCourses) => {
     }
     setCourse({ ...course, materials: tempMaterials })
   }
-  const editCourse = () => {
+  const editCourse = async () => {
+    setLoader(true);
+    let tempErrors: any = {
+      errorTitle: course.title === "" ? true : false,
+      errorSubtitle: course.subtitle === "" ? true : false,
+      errorAbout: course.about === "" ? true : false,
+      errorDifficulty: course.difficulty === "" ? true : false,
+      errorImage: course.image === "" ? true : false,
+      errorPhrase: course.phrase === "" ? true : false,
+      errorColor: course.certificate_color === "" ? true : false,
+      errorPrice: course.type === "Gratis" ? false : (course.price === 0 ? true : false),
+      errorRating: course.rating === 0 ? true : false,
+      errorReviews: course.reviews === 0 ? true : false,
+      errorDuration: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.duration === 0 ? true : false),
+      errorProfessor: course.professors.length === 0 ? true : false,
+      errorCategory: course.categories.length === 0 ? true : false,
+      errorMaterial: course.materials.length === 0 ? true : false
+    }
+    setErrors(tempErrors)
+    console.log(tempErrors);
+    let checkErrors = Object.values(tempErrors).includes(true);
+    if (!checkErrors) {
+      if (course.type === "Gratis") {
+        course.price = 0;
+        course.duration = 0;
+      }
+      if (course.type === "Mensual") {
+        course.duration = 30;
+      }
+      if (courseImage !== "") {
+        await updateCourseImage(course.id, course.image).then((res: any) => {
+          course.image = res;
+        })
+      }
+      setLoader(true);
+      updateCourseApi(course).then(() => {
+        window.location.reload();
+        setLoader(false);
+      })
+    }
+    else {
+      setLoader(false);
+    }
 
   }
   const goToSeasons = () => {
     router.push({
-      pathname: "/admin/Courses/Seasons",
+      pathname: "/admin/CourseSeason",
       query: {
         course: id,
       }
@@ -151,9 +233,13 @@ const AllCourses = (props: IAllCourses) => {
             : <RiArrowDropDownLine className="arrow" />
         }
       </div>
+
       {
         index === openCourseEdit &&
         <div className="course-content">
+          <div className="course-image" >
+            <img src={course.image} />
+          </div>
           <div className="rows">
             <div className="course-data">
               <label className="course-data-title">
@@ -170,6 +256,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={title}
                     placeholder="Titulo del Curso"
+                    style={errors.errorTitle ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, title: e.target.value
@@ -193,6 +280,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={subtitle}
                     placeholder="Subtitulo del Curso"
+                    style={errors.errorSubtitle ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, subtitle: e.target.value
@@ -216,6 +304,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={about}
                     placeholder="Descripcion del Curso"
+                    style={errors.errorAbout ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, about: e.target.value
@@ -237,9 +326,12 @@ const AllCourses = (props: IAllCourses) => {
                     {difficulty}
                   </p>
                   :
-                  <SelectOption onClick={() => setOpenDifficultySelect(!openDifficultySelect)}>
+                  <SelectOption
+                    onClick={() => setOpenDifficultySelect(!openDifficultySelect)}
+                    style={errors.errorDifficulty ? { border: "1px solid red" } : {}}
+                  >
                     {
-                      course.difficulty
+                      course.difficulty ? course.difficulty : "Seleccione una dificultad"
                     }
                     {
                       openDifficultySelect
@@ -280,7 +372,8 @@ const AllCourses = (props: IAllCourses) => {
                     {sequential ? "Obligatorio" : "Flexible"}
                   </p>
                   :
-                  <SelectOption onClick={() => setOpenSequentialSelect(!openSequentialSelect)}>
+                  <SelectOption
+                    onClick={() => setOpenSequentialSelect(!openSequentialSelect)}>
                     {
                       course.sequential ? "Obligatorio" : "Flexible"
                     }
@@ -323,9 +416,12 @@ const AllCourses = (props: IAllCourses) => {
                     {certificate_color}
                   </p>
                   :
-                  <SelectOption onClick={() => setOpenColorSelect(!openColorSelect)}>
+                  <SelectOption
+                    onClick={() => setOpenColorSelect(!openColorSelect)}
+                    style={errors.errorColor ? { border: "1px solid red" } : {}}
+                  >
                     {
-                      course.certificate_color
+                      course.certificate_color ? course.certificate_color : "Seleccione un color"
                     }
                     {
                       openColorSelect
@@ -372,6 +468,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={rating}
                     placeholder="Rating del Curso"
+                    style={errors.errorRating ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, rating: parseInt(e.target.value)
@@ -395,6 +492,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={reviews}
                     placeholder="Reviews del Curso"
+                    style={errors.errorReviews ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, reviews: parseInt(e.target.value)
@@ -463,6 +561,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={price}
                     placeholder="Precio del Curso"
+                    style={errors.errorPrice ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, price: parseInt(e.target.value)
@@ -473,7 +572,7 @@ const AllCourses = (props: IAllCourses) => {
             </div>
             <div className="course-data">
               <label className="course-data-title">
-                Duracion
+                Duracion (dias)
               </label>
               {
                 !startEdit
@@ -486,6 +585,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={duration}
                     placeholder="Duracion del Curso"
+                    style={errors.errorDuration ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, duration: parseInt(e.target.value)
@@ -509,6 +609,7 @@ const AllCourses = (props: IAllCourses) => {
                     className="input-edit"
                     defaultValue={phrase}
                     placeholder="Frase del Curso"
+                    style={errors.errorPhrase ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, phrase: e.target.value
@@ -536,7 +637,10 @@ const AllCourses = (props: IAllCourses) => {
                     }
                   </p>
                   :
-                  <SelectOption onClick={() => setOpenProfessorsSelect(!openProfessorsSelect)}>
+                  <SelectOption
+                    onClick={() => setOpenProfessorsSelect(!openProfessorsSelect)}
+                    style={errors.errorProfessor ? { border: "1px solid red" } : {}}
+                  >
                     {
                       course.professors.length > 0
                         ? course.professors.map((val: IProfessors, index: number) => { return <React.Fragment key={"profNameEdit_" + index}>{val.name}<br /></React.Fragment> })
@@ -585,7 +689,10 @@ const AllCourses = (props: IAllCourses) => {
                     }
                   </p>
                   :
-                  <SelectOption onClick={() => setOpenCategoriesSelect(!openCategoriesSelect)}>
+                  <SelectOption
+                    onClick={() => setOpenCategoriesSelect(!openCategoriesSelect)}
+                    style={errors.errorCategory ? { border: "1px solid red" } : {}}
+                  >
                     {
                       course.categories.length > 0
                         ? course.categories.map((val: ICategories, index: number) => { return <React.Fragment key={"catNameEdit_" + index}>{val.name}<br /></React.Fragment> })
@@ -634,7 +741,10 @@ const AllCourses = (props: IAllCourses) => {
                     }
                   </p>
                   :
-                  <SelectOption onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}>
+                  <SelectOption
+                    onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}
+                    style={errors.errorMaterial ? { border: "1px solid red" } : {}}
+                  >
                     {
                       course.materials.length > 0
                         ? course.materials.map((val: IMaterials, index: number) => { return <React.Fragment key={"matNameEdit_" + index}>{val.name}<br /></React.Fragment> })
@@ -670,7 +780,7 @@ const AllCourses = (props: IAllCourses) => {
           <div className="rows">
             <div className="course-data">
               <label className="course-data-title">
-                Published
+                Publicado
               </label>
               {
                 !startEdit
@@ -711,6 +821,18 @@ const AllCourses = (props: IAllCourses) => {
                   </SelectOption>
               }
             </div>
+            {
+              startEdit &&
+              <div className="course-data">
+                <label className="course-data-title">Portada del curso</label>
+                <input
+                  type="file"
+                  className="input-edit"
+                  placeholder="Seleccione una imagen"
+                  onChange={(e) => { getImage(e.target.files) }}
+                />
+              </div>
+            }
           </div>
           <div className="rows" style={{ justifyContent: "center", marginTop: 10 }}>
             <div className="button-data">
@@ -732,12 +854,19 @@ const AllCourses = (props: IAllCourses) => {
                     Eliminar
                   </button>
                   :
-                  <button
-                    className="save-button"
-                    onClick={() => editCourse()}
-                  >
-                    Editar Curso
-                  </button>
+                  <>
+                    {
+                      !loader ?
+                        <button
+                          className="save-button"
+                          onClick={() => editCourse()}
+                        >
+                          Editar Curso
+                        </button>
+                        : <LoaderButton />
+                    }
+                  </>
+
               }
             </div>
           </div>

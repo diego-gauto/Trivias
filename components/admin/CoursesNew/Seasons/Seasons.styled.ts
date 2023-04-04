@@ -68,6 +68,7 @@ export const SeasonContainer = styled.div`
       }
       .arrow-button {
         display: flex;
+        gap: 5px;
         .button-edit {
           display: flex;
           align-items: center;
@@ -78,6 +79,17 @@ export const SeasonContainer = styled.div`
           background-color: white;
           color: #6717cd;
           border: 1px solid #6717cd;
+        }
+        .button-delete {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          border-radius: 100px;
+          padding-block: 5px;
+          padding-inline: 20px;
+          background-color: red;
+          color: white;
+          border: 1px solid white;
         }
         .arrow {
           cursor: pointer;
@@ -96,6 +108,11 @@ export const SeasonContainer = styled.div`
           margin: 0;
         }
         .img-banner {
+          width: 288px;
+          height: 162px;
+          min-width: 162px;
+          min-height: 162px;
+          border-radius: 10px;
         }
         .lesson-data {
           display: flex;

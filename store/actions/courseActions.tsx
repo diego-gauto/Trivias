@@ -538,3 +538,37 @@ const uploadCertificate = (image: any, name: any) => {
     });
   });
 }
+
+
+/////////////////BACK END
+
+const uploadLessonImage = (courseID: number, seasonID: number, lesson: any, lessonID: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/${lessonID}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, lesson, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateLessonImage = async (courseID: number, seasonID: number, image: any, lessonID: number) => {
+  const url = await uploadLessonImage(courseID, seasonID, image, lessonID);
+  return url;
+}
+const uploadCourseImage = (courseID: number, course: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${courseID}}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, course, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateCourseImage = async (courseID: number, image: any) => {
+  const url = await uploadCourseImage(courseID, image);
+  return url;
+}

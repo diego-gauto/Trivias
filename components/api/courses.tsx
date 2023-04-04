@@ -15,8 +15,7 @@ export const createCoursesApi = async (course: any) => {
   return axios
     .post("http://94.74.77.165/" + "courses/createCourse", course)
     .then((res) => {
-      console.log(res)
-      return res.data.msg
+      return res.data.data
     })
     .catch((error) => {
       console.log(error);
@@ -25,9 +24,8 @@ export const createCoursesApi = async (course: any) => {
 };
 export const updateCourseApi = async (course: any) => {
   return axios
-    .put("http://94.74.77.165/" + "courses/updateCourse", course)
+    .post("http://94.74.77.165/" + "courses/updateCourse", course)
     .then((res) => {
-      console.log(res)
       return res.data.msg
     })
     .catch((error) => {
@@ -40,7 +38,6 @@ export const deleteCourseApi = async (course: any) => {
   return axios
     .delete("http://94.74.77.165/" + "courses/deleteCourse", course)
     .then((res) => {
-      console.log(res)
       return res.data.msg
     })
     .catch((error) => {
@@ -74,7 +71,6 @@ export const createSeason = async (course: any) => {
   return axios
     .post("http://94.74.77.165/" + "courses/createSeason", course)
     .then((res) => {
-      console.log(res)
       return res.data.msg
     })
     .catch((error) => {
@@ -97,7 +93,7 @@ export const getLessonFromApi = async (lessons_id: any) => {
   return axios
     .get("http://94.74.77.165/" + "courses/single/" + lessons_id, lessons_id)
     .then((res) => {
-      return res.data.data
+      return res.data.data[0]
     })
     .catch((error) => {
       console.log(error);
@@ -108,7 +104,72 @@ export const createLessonFromApi = async (lesson: any) => {
   return axios
     .post("http://94.74.77.165/" + "courses/createLesson", lesson)
     .then((res) => {
-      console.log(res)
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateLessonFromApi = async (lesson: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "courses/updateLesson", lesson)
+    .then((res) => {
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const deleteSeasonFromApi = async (season: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "courses/deleteSeason", season)
+    .then((res) => {
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const deleteLessonFromApi = async (lesson: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "courses/deleteLesson", lesson)
+    .then((res) => {
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateLessonImageFromApi = async (lesson: any) => {
+  return axios
+    .put("http://94.74.77.165/" + "courses/updateImage", lesson)
+    .then((res) => {
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateCourseImageFromApi = async (course: any) => {
+  return axios
+    .put("http://94.74.77.165/" + "courses/updateCourseImage", course)
+    .then((res) => {
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateSeasonNameApi = async (season: any) => {
+  return axios
+    .put("http://94.74.77.165/" + "courses/updateSeason", season)
+    .then((res) => {
       return res.data.msg
     })
     .catch((error) => {

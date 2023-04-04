@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { AiFillEdit, AiOutlinePlus } from 'react-icons/ai';
 import { IoMdExit } from 'react-icons/io';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
-import { createSeason, getLessonsFromApi, getSeasonsFromCourseApi, getSingleCourseApi } from '../../../api/courses';
+import { createSeason, deleteLessonFromApi, deleteSeasonFromApi, getLessonFromApi, getLessonsFromApi, getSeasonsFromCourseApi, getSingleCourseApi, updateSeasonNameApi } from '../../../api/courses';
 import { AdminContain, AdminLoader } from '../../SideBar.styled';
 import { ILesson, ISeason } from './ISeasons';
 import { SeasonContainer } from './Seasons.styled';
@@ -37,7 +37,7 @@ const Seasons = () => {
   }
   const addLesson = (seasonID: number) => {
     router.push({
-      pathname: "/admin/Courses/Seasons/Lessons",
+      pathname: "/admin/CourseLesson",
       query: {
         course: courseID,
         season: seasonID,
@@ -46,7 +46,7 @@ const Seasons = () => {
   }
   const editLesson = (seasonID: number, lessonID: number) => {
     router.push({
-      pathname: "/admin/Courses/Seasons/Lessons",
+      pathname: "/admin/CourseLesson",
       query: {
         course: courseID,
         season: seasonID,
@@ -70,6 +70,29 @@ const Seasons = () => {
       setEditSeasonName(courseIndex);
     }
   }
+  const deleteSeaons = (seasonData: ISeason) => {
+    if (confirm(`¿Desea eliminar temporada ${seasonData.name}?, esto eliminara todas las lecciones`)) {
+      seasonData.lessons.map((lessonData: ILesson) => {
+        getLessonFromApi(lessonData.id).then((lesson) => {
+          if (lesson.quizzes) {
+            lessonData.quizzes = lesson.quizzes;
+          }
+          if (lesson.lesson_homeworks) {
+            lessonData.lesson_homeworks = lesson.lesson_homeworks;
+          }
+        })
+      })
+      // deleteSeasonFromApi(seasonData).then(() => {
+      // })
+    }
+  }
+  const saveData = (seasonData: ISeason, index: number) => {
+    let inpAnswer: any = document.getElementById("module-name" + index) as HTMLInputElement;
+    seasonData.name = inpAnswer.value;
+    updateSeasonNameApi(seasonData).then(() => {
+      window.location.reload();
+    })
+  }
   useEffect(() => {
     getSingleCourseApi(+courseID).then((res) => {
       setCourse(res);
@@ -83,7 +106,6 @@ const Seasons = () => {
             setLoader(true);
           }
         })
-
       })
     })
   }, [])
@@ -115,8 +137,9 @@ const Seasons = () => {
                                 className="season-input"
                                 placeholder="Nombre de la temporada"
                                 defaultValue={seasonData.name}
+                                id={"module-name" + index}
                               />
-                              <button className="button-save">Guardar</button>
+                              <button className="button-save" onClick={() => saveData(seasonData, index)}>Guardar</button>
                               <AiFillEdit className="edit-icon" onClick={() => { startSeasonUpdate(index) }} />
                             </div>
 
@@ -134,7 +157,10 @@ const Seasons = () => {
                           <button className="button-edit" onClick={() => addLesson(seasonData.id)}>Añadir lección<AiOutlinePlus style={{ fontSize: 20 }} /></button>
                           {
                             openSeason === index
-                              ? <RiArrowDropUpLine className="arrow" onClick={() => { changeOpenSeasonState(index) }} />
+                              ? <>
+                                <button className="button-delete" onClick={() => { deleteSeaons(seasonData) }}>Eliminar Temporada</button>
+                                <RiArrowDropUpLine className="arrow" onClick={() => { changeOpenSeasonState(index) }} />
+                              </>
                               : <RiArrowDropDownLine className="arrow" onClick={() => { changeOpenSeasonState(index) }} />
                           }
                         </div>
@@ -147,12 +173,12 @@ const Seasons = () => {
                             seasonData.lessons.map((lesson: ILesson, ind: number) => {
                               return (
                                 <div className="lesson-contain" key={"LessonShow_" + ind}>
-                                  <img className="img-banner" />
+                                  <img className="img-banner" src={lesson.banner} />
                                   <div className="lesson-data">
                                     <p className="lesson-title">{lesson.title}</p>
                                     <p className="lesson-about">{lesson.about}</p>
                                     <p className="lesson-duration">{lesson.duration + " min"}</p>
-                                    <p className="lesson-edit" onClick={() => { editLesson(index + 1, ind + 1) }}>Editar Leccion</p>
+                                    <p className="lesson-edit" onClick={() => { editLesson(seasonData.id, lesson.id) }}>Editar Leccion</p>
                                   </div>
                                 </div>
                               )

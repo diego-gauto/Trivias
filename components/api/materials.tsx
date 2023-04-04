@@ -4,7 +4,7 @@ export const getMaterialsApi = async () => {
   return axios
     .get("http://94.74.77.165/" + "materials/getMaterials")
     .then((res) => {
-      return res
+      return res.data.data
     })
     .catch((error) => {
       console.log(error);
