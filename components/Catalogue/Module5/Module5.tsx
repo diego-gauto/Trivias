@@ -63,14 +63,12 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
     }
     setCounter(0)
   }
+
   useEffect(() => {
     if (course) {
       let temp_courses: any = [];
       course.forEach((element: any) => {
-        if (element.courseType == 'Mensual') {
-          element.courseAbout = element.courseAbout
-          element.courseSubtittle = element.courseSubtittle
-          element.courseTittle = element.courseTittle
+        if (element.type == 'Mensual') {
           temp_courses.push(element);
         }
       });
@@ -111,17 +109,17 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
                   setCourse(element);
                 }}>
                   <SlideModuleContainer
-                    level={element.courseDifficulty}
+                    level={element.difficulty}
                     style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
-                    <p className="title">{element.courseTittle}</p>
-                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <Image src={element.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                    <p className="title">{element.title}</p>
+                    <p className="sub">de <span>{element.professors[0]?.name}</span></p>
                     <p className="modules">{element.seasons.length} Módulos</p>
                     <div className="level-container">
-                      {(element.courseDifficulty == "Muy Fácil" || element.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-                      {(element.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-                      {(element.courseDifficulty == "Avanzado" || element.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                      <p>{element.courseDifficulty}</p>
+                      {(element.difficulty == "Muy Fácil" || element.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                      {(element.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                      {(element.difficulty == "Avanzado" || element.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                      <p>{element.difficulty}</p>
                     </div>
                   </SlideModuleContainer>
                 </div>

@@ -14,14 +14,13 @@ import { useAuth } from "../../hooks/useAuth";
 import { getTeacher, getWholeCourses } from "../../store/actions/courseActions";
 import Module6 from "./Module6/Module6";
 import { getUserApi } from "../api/users";
-import { addCourse } from "../api/lessons";
+import { addCourse, getCoursesApi } from "../api/lessons";
 
 
 const Preview = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
-  const [professors, setProfessors] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -53,38 +52,6 @@ const Preview = () => {
     return result;
   }
 
-  const getCourses = async (professor: any) => {
-    let tempCourses: Array<any> = [];
-    let tempProfessor: Array<any> = professor;
-    getWholeCourses().then((response) => {
-      response.forEach((element: any) => {
-        if (element.totalLessons > 0) {
-          element.totalDuration = hms(element.totalDuration)
-          element.courseProfessor.map((profId: string, index: number) => {
-            tempProfessor.map((val: any) => {
-              if (profId.includes(val.id)) {
-                element.courseProfessor[index] = val;
-              }
-            })
-          })
-          tempCourses.push(element)
-        }
-      });
-      setCourses(tempCourses);
-      setIsLoading(false);
-    })
-  }
-  const getProffessors = () => {
-    getTeacher().then((res) => {
-      getCourses(res);
-      setProfessors(res);
-      return res;
-    })
-  }
-  useEffect(() => {
-    getProffessors()
-  }, [])
-
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -99,15 +66,55 @@ const Preview = () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
 
+  const add = () => {
+    courses.forEach((element: any) => {
+      let tempCoures = {
+        title: element.courseTittle,
+        subtitle: element.courseSubtittle,
+        about: element.courseAbout,
+        certificate_color: element.courseCertificateColor || "naranja",
+        difficulty: element.courseDifficulty,
+        mandatory: element.courseHomeWork,
+        image: element.coursePath,
+        phrase: element.coursePhrase,
+        price: element.coursePrice,
+        duration: element.courseDuration,
+        rating: element.courseRating,
+        reviews: 0,
+        type: element.courseType,
+        sequential: element.courseHomeWork,
+        published: true,
+        categories: element.courseCategory,
+        materials: element.courseMaterial,
+        seasons: element.seasons
+      }
+      addCourse(tempCoures).then((res) => {
+        console.log(res);
+      })
+    });
+
+  }
+
+  const coursesAll = () => {
+    getCoursesApi().then((res) => {
+      setCourses(res.data.data);
+      setIsLoading(false);
+    })
+  }
+
+  useEffect(() => {
+    coursesAll()
+  }, [])
+
   return (
     <>
       <PreviewContain>
-        <Module1 user={userData} allCourses={courses[12]} isLoading={isLoading} professor={professors} />
+        {/* <Module1 user={userData} allCourses={courses[12]} isLoading={isLoading} professor={professors} /> */}
         <ModuleContain>
-          {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} professor={professors} />}
+          {/* {userData && <Module2 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} professor={professors} />}
           {userData && <Module3 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />}
           <Module4 user={userData} allCourses={courses} isLoading={isLoading} innerWidth={innerWidth} />
-          <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} innerWidth={innerWidth} />
+          <Module6 user={userData} allCourses={courses} isLoading={isLoading} setFirstLoad={setFirstLoad} innerWidth={innerWidth} /> */}
           <Module5 user={userData} course={courses} isLoading={isLoading} firstLoad={firstLoad} innerWidth={innerWidth} />
         </ModuleContain>
       </PreviewContain>

@@ -12,9 +12,10 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
     });
     setTotalViewed(tempViewd);
   }
+
   useEffect(() => {
     if (course) {
-      checkLecture()
+      // checkLecture()
     }
   }, [refresh])
 
