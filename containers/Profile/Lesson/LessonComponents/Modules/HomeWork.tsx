@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { addHomework, getHomework, updateProgressStatus } from '../../../../../store/actions/courseActions'
+import { updateProgressStatus, uploadImageHomework } from '../../../../../store/actions/courseActions'
 import { DownlowadContain, DownloadText, FileIcon, Weight, Pdf } from './Extra.styled'
 import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkContain, ReviewButton, Answer } from './HomeWork.styled'
 import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
@@ -11,9 +11,10 @@ import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { updateUser } from '../../../../../store/actions/UserActions';
 import progress from 'antd/es/progress';
+import { addHomeworkApi, getHomeworkUserApi } from '../../../../../components/api/homeworks';
 
 
-const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }: any) => {
+const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds }: any) => {
   const [status, setStatus] = useState("");
   const [step, setStep] = useState(0);
   const [index, setIndex] = useState(0);
@@ -38,29 +39,30 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
   }, [])
 
   const getImage = (file: any) => {
-    let tempHomework: any = {}
-    tempHomework.userName = user.name;
-    tempHomework.userEmail = user.email;
-    tempHomework.title = data.homeWork;
-    tempHomework.path = '';
-    tempHomework.season = parseInt(season);
-    tempHomework.lesson = parseInt(lesson);
-    tempHomework.createdAt = new Date();
-    tempHomework.courseId = data.courseId;
-    tempHomework.userId = user.id;
-    tempHomework.lessonId = data.id;
-    tempHomework.seasonId = ""
-    tempHomework.aproved = false
-    tempHomework.comment = ""
-    tempHomework.teacherCreds = teacherCreds;
-    tempHomework.status = false;
+    let tempHomework: any = {
+      approved: false,
+      comment: "",
+      image: "",
+      lessonId: data.id,
+      courseId: parseInt(courseIds.courseId),
+      seasonId: courseIds.seasonId,
+      status: false,
+      user_id: user.user_id,
+      title: data.lesson_homeworks.title,
+    }
 
     if (file.length > 0) {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);
-      reader.onload = (_event) => {
-        tempHomework.path = reader.result;
-        addHomework(tempHomework, user.id).then(() => {
+      reader.onload = async (_event) => {
+        let tempData = {
+          path: reader.result,
+          lessonId: data.id,
+          userId: user.user_id
+        }
+        const url = await uploadImageHomework(tempData);
+        tempHomework.image = url;
+        addHomeworkApi(tempHomework).then(() => {
           alert("Su tarea se subió correctamente!");
           setStatus("pending");
         })
@@ -165,6 +167,31 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
     });
     setAnswers(tempAnswers);
   }
+
+  useEffect(() => {
+    let tempData = {
+      lessonId: data.id,
+      user_id: user.user_id
+    }
+    getHomeworkUserApi(tempData).then((res) => {
+      if (res.data.data.length > 0) {
+        let temp = res.data.data[0]
+        if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+          setStatus("");
+        }
+        if (temp.user_id === user.user_id && temp.status === 0) {
+          setStatus("pending");
+        }
+        if (temp.user_id === user.user_id && temp.approved === 1) {
+          setStatus("approved");
+        }
+      } else {
+        setStatus("");
+      }
+    })
+  }, [data])
+
+
   return (
     <>
       <TitleContain >
@@ -217,14 +244,14 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 </div>
               </div>
               <div className='line'></div>
-              {data.homeworkAvailable ? <div className='upload-container'>
+              {data.homework === 1 ? <div className='upload-container'>
                 <p>a. Módulo {parseInt(season) + 1} - Lección {parseInt(lesson) + 1}</p>
-                <p>Tarea: <span>{data.homeWork}</span></p>
+                <p>Tarea: <span>{data.lesson_homeworks.title}</span></p>
                 {status == "pending" && <div className='homework'>
                   <BsFileArrowUp></BsFileArrowUp>
                   En Revisión
                 </div>}
-                {status == "aproved" && <div className='homework'>
+                {status == "approved" && <div className='homework'>
                   <BsFileArrowUp></BsFileArrowUp>
                   Tarea Aprobada
                 </div>}
@@ -232,9 +259,9 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, teacherCreds }:
                 <p>Lección sin tarea...</p>}
             </div>
             {
-              data.homeworkAvailable &&
+              data.homework === 1 &&
               <>
-                <p dangerouslySetInnerHTML={{ __html: data.homeWorkAbout }} className="quill-hw" />
+                <p dangerouslySetInnerHTML={{ __html: data.lesson_homeworks.about }} className="quill-hw" />
                 {status == "" && <div className='homework' onClick={uploadHwk}>
                   <BsFileArrowUp></BsFileArrowUp>
                   Subir Tarea

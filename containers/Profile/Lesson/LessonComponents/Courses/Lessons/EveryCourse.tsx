@@ -137,7 +137,6 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
 
   // }, [])
 
-
   return (
     <>
       {lessons.map((less: any, index: any) => {

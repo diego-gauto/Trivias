@@ -255,9 +255,9 @@ export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any,
   return 'success'
 }
 
-const uploadImageHwk = (image: any, name: any) => {
+const uploadImageHwk = (image: any, lessonId: any, userId: any) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `homeworks/${name}`);
+  const storageRef = ref(storage, `homeworks/lesson-${lessonId}-${userId}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url')
       .then((snapshot) => {
@@ -274,15 +274,9 @@ export const getHomework = async (lessonId: string, userId: string) => {
   return docSnap.data();
 }
 
-export const addHomework = async (data: any, userId: string) => {
-  data.path = await uploadImageHwk(data.path, `${data.title}-${uuidv4()}`);
-  const docRef = await setDoc(
-    doc(db, "homeworks", `${data.lessonId}-${userId}`),
-    {
-      ...data
-    }
-  );
-  return 'exito'
+export const uploadImageHomework = async (homework: any) => {
+  const image = await uploadImageHwk(homework.path, homework.lessonId, homework.userId);
+  return image;
 }
 export const addHistoryCourse = async (course: any, userId: any, season: any, lesson: any) => {
   course.userId = userId;

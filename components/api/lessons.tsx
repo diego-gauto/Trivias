@@ -35,3 +35,27 @@ export const getCourseApi = async (courseId: any) => {
       return error
     });
 };
+
+export const addUserToLessonApi = async (lesson: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "lessons/add-user", lesson)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateUserProgressApi = async (progress: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "lessons/update-user-progress", progress)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

@@ -16,26 +16,21 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
 
-  // useEffect(() => {
-  //   let temp_selected: any = [];
-  //   course?.seasons.forEach((element: any) => {
-  //     temp_selected.push(true)
-  //   });
-  //   setSelected(temp_selected);
+  useEffect(() => {
 
-  //   let viewed = 0;
-  //   course.lessons.forEach((element: any) => {
-  //     if (element.users.includes(userData?.id)) {
-  //       viewed++;
-  //     }
-  //   });
+    let viewed = 0;
+    course.lessons.forEach((element: any) => {
+      if (element.users.includes(userData?.user_id)) {
+        viewed++;
+      }
+    });
 
-  //   if (course.lessons.length == viewed) {
-  //     setCertificate(true)
-  //   }
-  //   setCount(viewed)
+    if (course.lessons.length == viewed) {
+      setCertificate(true)
+    }
+    setCount(viewed)
 
-  // }, [course, data])
+  }, [data])
 
   useEffect(() => {
     setOpen(menu)
@@ -89,7 +84,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
       </div>}
       <div className='course-progress'>
         <p className='title'>Tu progreso <br />
-          <b>{count} de {course.lessons}</b> <span>lecciones.</span>
+          <b>{count} de {course.lessons.length}</b> <span>lecciones.</span>
         </p>
         <div className='certificate-box'>
           <div className='half'></div>
@@ -113,7 +108,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
               <div className='module'>
-                {selected[index] && <CourseProgress title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.id} refresh={toggleHandler} />}
+                {selected[index] && <CourseProgress title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
                 <div>
                   <p className='title'>{seasons[index]?.name ? seasons[index]?.name : `Módulo ${index + 1}`}</p>
                   <Episode>
@@ -126,7 +121,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
             <CoursesContainer active={selected[index]} onClick={() => {
               setOpen(!open); handleClick(false)
             }}>
-              <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.id} course={course} />
+              <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.user_id} course={course} />
             </CoursesContainer>
           </SeasonContainer>
         )

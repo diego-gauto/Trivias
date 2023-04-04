@@ -41,10 +41,10 @@ const Lesson = () => {
 
   useEffect(() => {
     if (course) {
-      setCurrentLesson(course.seasons[season].lessons[lesson]);
+      getCourse();
     }
 
-  }, [router, course]);
+  }, [router]);
 
 
   // const send = () => {
@@ -131,6 +131,7 @@ const Lesson = () => {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
+        setUserData(userDataAuth.user)
         setLoggedIn(true)
       } else {
         router.push(LOGIN_PATH)
@@ -165,7 +166,7 @@ const Lesson = () => {
         <MainContainer>
           <div className="left-side">
             <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-            <Modules data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} />
+            <Modules data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
           </div>
           <Courses menu={true} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
           {/* <FirstContainer>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
+import { getHomeworksApi } from '../../api/homeworks';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import { AdminContain } from '../SideBar.styled';
@@ -29,6 +30,7 @@ const HomeWork = () => {
     setOpenSelect(!openSelect);
     setCourseSelect(false)
   }
+
   const getHomeworks = () => {
     let tempFilter: any = [];
     if (professorFilter !== "" || courseFilter !== "") {
@@ -68,35 +70,19 @@ const HomeWork = () => {
       })
     }
     else {
-      getAllHomeWorks().then((res: any) => {
-        res.forEach((element: any) => {
-          let tempDate = new Date(element.createdAt.seconds * 1000);
+      getHomeworksApi().then((res: any) => {
+        res.data.data.forEach((element: any) => {
+          let tempDate: any = new Date();
           let tempDay = tempDate.getDate()
           let tempMonth = tempDate.getMonth() + 1;
           let tempYear = tempDate.getFullYear()
           element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         });
-        getAllCourses(res);
-        setHomeWorks(res);
+        setHomeWorks(res.data.data);
       })
     }
   }
-  const getAllCourses = (homeWork: any) => {
-    let courses: any = []
-    let hwMap: any = homeWork.map((hw: any) => { return hw.courseId })
-    let hwFilter: any = hwMap.filter((hw: any, index: number) => { return hwMap.indexOf(hw) === index })
-    getCourses().then((res) => {
-      res.filter((val: any) => {
-        hwFilter.map((hw: any) => {
-          if (val.id == hw) {
-            courses.push(val);
-          }
-        })
-      }
-      )
-      setCourse(courses)
-    })
-  }
+
   const getAllteachers = () => {
     getTeacher().then((res) => {
       setProfessor(res);
@@ -251,12 +237,12 @@ const HomeWork = () => {
                       >{task.userEmail}</td>
                       <td
 
-                      >{task.title}  ({task.season + 1}, {task.lesson + 1}) </td>
+                      >{task.courseTitle}  ({task.seasonNumber}, {task.lessonNumber}) </td>
                       <td
 
                       >{task.formatDate}</td>
                       <td style={{ padding: "0" }} onClick={(e: any) => { e.stopPropagation(); setShow(false) }}>
-                        <Link href={task.path}>
+                        <Link href={task.homeworkImage}>
                           <a target="_blank" style={{ textDecoration: "none" }}>
                             <Download>
                               Descargar Tarea

@@ -7,6 +7,7 @@ import Modules from '../Modules/Modules';
 import { useMediaQuery } from 'react-responsive';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import { addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
 
 declare let Hls: any
 
@@ -24,16 +25,14 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
   const [quiz, setQuiz] = useState<any>([]);
 
   const finishedLesson = () => {
-    let temp: any = { ...data };
-    if (user) {
-      if (temp.users.includes(user.id)) {
-      } else {
-        user.score = parseInt(user.score) + parseInt(data.points);
-        addUserToLesson(data, id, data.seasonId, data.id, user);
-        temp.users.push(user.id);
-        setCurrent({ ...temp });
-        handleComplete()
+    if (!data.users.includes(user.user_id)) {
+      let tempLesson = {
+        lessonId: data.id,
+        userId: user.user_id
       }
+      addUserToLessonApi(tempLesson).then(() => {
+        handleComplete();
+      })
     }
   }
 
@@ -51,45 +50,30 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
     }
   }, [data])
 
-  const handleClick = (value: boolean) => {
-    setMenu(value);
-  }
-
   const handleDuration = (duration: number) => {
     setDuration(duration);
   }
-  const handleProgress = (seconds: number) => {
-    // let progress = (seconds * 100) / duration;
-    // if (user) {
-    //   if (!("progress" in course.seasons[season].lessons[lesson])) {
-    //     course.seasons[season].lessons[lesson].progress = [];
-    //   }
-    //   if (!course.seasons[season].lessons[lesson].progress.some((e: any) => e.id == user.id)) {
-    //     course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds, status: false })
-    //   } else {
-    //     let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-    //     course.seasons[season].lessons[lesson].progress[index].seconds = seconds;
-    //     course.seasons[season].lessons[lesson].progress[index].time = progress;
-    //   }
-
-    //   // updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
-    //   updateLessonProgress(user.id, progress, seconds, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
-    // }
+  const handleProgress = async (seconds: number) => {
+    let progress = (seconds * 100) / duration;
+    let tempProgress = {
+      time: progress,
+      seconds: seconds,
+      lessonId: data.id,
+      userId: user.user_id
+    }
+    if (user) {
+      await updateUserProgressApi(tempProgress);
+    }
   }
 
   const handleViewed = () => {
     if (user) {
-      // if (("progress" in course.seasons[season].lessons[lesson])) {
-      //   let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-      //   if (index == -1) {
-      //     return 0
-      //   } else {
-      //     return course.seasons[season].lessons[lesson].progress[index].seconds
-      //   }
-      // } else {
-      //   return 0
-      // }
-      return 0
+      let index = data.progress.findIndex((x: any) => x.user_id == user.user_id)
+      if (index == -1) {
+        return 0
+      } else {
+        return data.progress[index].seconds
+      }
     } else {
       return 0
     }
