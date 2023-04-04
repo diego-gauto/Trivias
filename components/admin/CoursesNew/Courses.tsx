@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+import { updateCourseImage } from '../../../store/actions/courseActions';
 import { createCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
-import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi } from '../../api/courses';
+import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi, updateCourseImageFromApi } from '../../api/courses';
 import { createMaterialApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
 import { createProfessorApi, getProfessorApi, updateProfessorApi } from '../../api/professors';
 import { AdminContain } from '../SideBar.styled';
@@ -25,6 +26,22 @@ const Courses = () => {
   const [openMaterialsSelect, setOpenMaterialsSelect] = useState<boolean>(false);
   const [openPublishSelect, setOpenPublishSelect] = useState<boolean>(false);
   const [openCourseEdit, setOpenCourseEdit] = useState<number>(-1);
+  const [errors, setErrors] = useState<any>({
+    errorTitle: false,
+    errorSubtitle: false,
+    errorAbout: false,
+    errorDifficulty: false,
+    errorImage: false,
+    errorPhrase: false,
+    errorColor: false,
+    errorPrice: false,
+    errorRating: false,
+    errorReviews: false,
+    errorDuration: false,
+    errorProfessor: false,
+    errorCategory: false,
+    errorMaterial: false
+  });
   const [course, setCourse] = useState<any>({
     title: "",
     subtitle: "",
@@ -38,7 +55,7 @@ const Courses = () => {
     rating: 0,
     reviews: 0,
     duration: 0,
-    type: "Free",
+    type: "Gratis",
     sequential: false,
     published: true,
     professors: [],
@@ -57,9 +74,9 @@ const Courses = () => {
     "Obligatorio",
   ];
   const membershipType = [
-    "Free",
-    "Monthly",
-    "Product",
+    "Gratis",
+    "Mensual",
+    "Producto",
   ];
   const color = [
     "azul", "amarillo", "morado", "naranja", "rosa", "verde"
@@ -79,6 +96,24 @@ const Courses = () => {
     let element = document.getElementById(`course-${index}`);
     element?.scrollIntoView({ behavior: "smooth" });
   };
+  const getImage = (file: any) => {
+    var reader = new FileReader();
+    var imageComp: any = new Image();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      imageComp.src = reader.result;
+    };
+    setTimeout(() => {
+      setCourse({ ...course, image: reader.result })
+      // if ((imageComp.width == 760 && imageComp.height == 420) || (imageComp.width == 4000 && imageComp.height == 2250)) {
+      //   setLesson({ ...lesson, banner: reader.result })
+      //   alert("Imagen aceptada")
+      // }
+      // else {
+      //   alert("La imagen debe tener una resolución de 4000 px x 2250 px o 760 px × 420 px")
+      // }
+    }, 1000);
+  }
   const addProfessors = (val: any) => {
     let tempProfessor = course.professors;
     let tempIndex = 0;
@@ -123,22 +158,70 @@ const Courses = () => {
   }
   const createCourse = () => {
     setLoader(true);
-    createCoursesApi(course).then(() => {
-      getCoursesApi().then((res) => {
-        setLoader(false);
-        setCourses(res.data.data);
-      });
-    })
+    let tempErrors: any = {
+      errorTitle: course.title === "" ? true : false,
+      errorSubtitle: course.subtitle === "" ? true : false,
+      errorAbout: course.about === "" ? true : false,
+      errorDifficulty: course.difficulty === "" ? true : false,
+      errorImage: course.image === "" ? true : false,
+      errorPhrase: course.phrase === "" ? true : false,
+      errorColor: course.certificate_color === "" ? true : false,
+      errorPrice: course.type === "Gratis" ? false : (course.price === 0 ? true : false),
+      errorRating: course.rating === 0 ? true : false,
+      errorReviews: course.reviews === 0 ? true : false,
+      errorDuration: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.duration === 0 ? true : false),
+      errorProfessor: course.professors.length === 0 ? true : false,
+      errorCategory: course.categories.length === 0 ? true : false,
+      errorMaterial: course.materials.length === 0 ? true : false
+    }
+    setErrors(tempErrors)
+    let checkErrors = Object.values(tempErrors).includes(true);
+    if (!checkErrors) {
+      if (course.type === "Gratis") {
+        course.price = 0;
+        course.duration = 0;
+      }
+      if (course.type === "Mensual") {
+        course.duration = 30;
+      }
+      let tempImage = course.image;
+      course.image = "";
+      createCoursesApi(course).then((res) => {
+        course.id = res;
+        updateCourseImage(course.id, tempImage).then((image) => {
+          course.image = image;
+          updateCourseImageFromApi(course).then(() => {
+            getCoursesApi().then((res) => {
+              setLoader(false);
+              setCourses(res.data.data);
+            });
+          })
+        })
+      })
+    }
+    else {
+      setLoader(false);
+    }
+
   }
   useEffect(() => {
     getProfessorApi().then((profs) => {
-      setProfessors(profs.data.data)
+      profs.forEach((element: any) => {
+        element.professors_id = element.id;
+      });
+      setProfessors(profs)
     })
     getMaterialsApi().then((mats) => {
-      setMaterials(mats.data.data)
+      mats.forEach((element: any) => {
+        element.materials_id = element.id;
+      });
+      setMaterials(mats)
     })
     getCategoriesApi().then((cats) => {
-      setCategories(cats.data.data)
+      cats.forEach((element: any) => {
+        element.categories_id = element.id;
+      });
+      setCategories(cats)
     })
     getCoursesApi().then((res) => {
       setCourses(res.data.data);
@@ -170,6 +253,7 @@ const Courses = () => {
               <input
                 className="input-create"
                 placeholder="Título del curso"
+                style={errors.errorTitle ? { border: "1px solid red" } : {}}
                 onChange={(e: any) => {
                   setCourse({
                     ...course, title: e.target.value
@@ -182,6 +266,7 @@ const Courses = () => {
               <input
                 className="input-create"
                 placeholder="Subtítulo del curso"
+                style={errors.errorSubtitle ? { border: "1px solid red" } : {}}
                 onChange={(e: any) => {
                   setCourse({
                     ...course, subtitle: e.target.value
@@ -194,6 +279,7 @@ const Courses = () => {
               <input
                 className="input-create"
                 placeholder="Descripción del curso"
+                style={errors.errorAbout ? { border: "1px solid red" } : {}}
                 onChange={(e: any) => {
                   setCourse({
                     ...course, about: e.target.value
@@ -205,7 +291,10 @@ const Courses = () => {
           <div className="rows">
             <div className="input-contain">
               <label className="input-label">Dificultad</label>
-              <SelectOption onClick={() => setOpenDifficultySelect(!openDifficultySelect)}>
+              <SelectOption
+                style={errors.errorDifficulty ? { border: "1px solid red" } : {}}
+                onClick={() => setOpenDifficultySelect(!openDifficultySelect)}
+              >
                 {
                   course.difficulty === ""
                     ? "Seleccione la dificultad"
@@ -275,7 +364,10 @@ const Courses = () => {
             </div>
             <div className="input-contain">
               <label className="input-label">Color</label>
-              <SelectOption onClick={() => setOpenColorSelect(!openColorSelect)}>
+              <SelectOption
+                onClick={() => setOpenColorSelect(!openColorSelect)}
+                style={errors.errorColor ? { border: "1px solid red" } : {}}
+              >
                 {
                   course.certificate_color === ""
                     ? "Seleccione un color"
@@ -316,6 +408,7 @@ const Courses = () => {
                 className="input-create"
                 placeholder="Rate del curso"
                 type="number"
+                style={errors.errorRating ? { border: "1px solid red" } : {}}
                 onChange={(e: any) => {
                   setCourse({
                     ...course, rating: parseInt(e.target.value)
@@ -329,6 +422,7 @@ const Courses = () => {
                 className="input-create"
                 placeholder="Reviews del curso"
                 type="number"
+                style={errors.errorReviews ? { border: "1px solid red" } : {}}
                 onChange={(e: any) => {
                   setCourse({
                     ...course, reviews: parseInt(e.target.value)
@@ -337,16 +431,13 @@ const Courses = () => {
               />
             </div>
             <div className="input-contain">
-              <label className="input-label">Imagen</label>
+              <label className="input-label">Portada del curso</label>
               <input
                 type="file"
                 className="input-create"
+                style={errors.errorImage ? { border: "1px solid red" } : {}}
                 placeholder="Seleccione una imagen"
-                onChange={(e: any) => {
-                  setCourse({
-                    ...course, image: e.target.value
-                  })
-                }}
+                onChange={(e) => { getImage(e.target.files) }}
               />
             </div>
           </div>
@@ -385,7 +476,7 @@ const Courses = () => {
               </SelectOption>
             </div>
             {
-              course.type !== "Free" &&
+              course.type !== "Gratis" &&
               <>
                 <div className="input-contain">
                   <label className="input-label">Precio</label>
@@ -393,6 +484,7 @@ const Courses = () => {
                     className="input-create"
                     type="number"
                     placeholder="Costo del curso"
+                    style={errors.errorPrice ? { border: "1px solid red" } : {}}
                     onChange={(e: any) => {
                       setCourse({
                         ...course, price: parseInt(e.target.value)
@@ -401,13 +493,14 @@ const Courses = () => {
                   />
                 </div>
                 {
-                  course.type === "Product" &&
+                  course.type === "Producto" &&
                   <div className="input-contain">
-                    <label className="input-label">Duración</label>
+                    <label className="input-label">Duración (dias)</label>
                     <input
                       className="input-create"
                       type="number"
                       placeholder="Duración de la membresia"
+                      style={errors.errorDuration ? { border: "1px solid red" } : {}}
                       onChange={(e: any) => {
                         setCourse({
                           ...course, duration: parseInt(e.target.value)
@@ -425,6 +518,7 @@ const Courses = () => {
               <input
                 className="input-create"
                 placeholder="Frase descriptiva del curso"
+                style={errors.errorPhrase ? { border: "1px solid red" } : {}}
                 onChange={(e: any) => {
                   setCourse({
                     ...course, phrase: e.target.value
@@ -434,7 +528,10 @@ const Courses = () => {
             </div>
             <div className="input-contain">
               <label className="input-label">Instructor (es)</label>
-              <SelectOption onClick={() => setOpenProfessorsSelect(!openProfessorsSelect)}>
+              <SelectOption
+                onClick={() => setOpenProfessorsSelect(!openProfessorsSelect)}
+                style={errors.errorProfessor ? { border: "1px solid red" } : {}}
+              >
                 <p>
                   {
                     course.professors.length > 0
@@ -469,7 +566,10 @@ const Courses = () => {
             </div>
             <div className="input-contain">
               <label className="input-label">Categorías</label>
-              <SelectOption onClick={() => setOpenCategoriesSelect(!openCategoriesSelect)}>
+              <SelectOption
+                onClick={() => setOpenCategoriesSelect(!openCategoriesSelect)}
+                style={errors.errorCategory ? { border: "1px solid red" } : {}}
+              >
                 <p>
                   {
                     course.categories.length > 0
@@ -506,7 +606,10 @@ const Courses = () => {
           <div className="rows">
             <div className="input-contain">
               <label className="input-label">Materiales</label>
-              <SelectOption onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}>
+              <SelectOption
+                onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}
+                style={errors.errorMaterial ? { border: "1px solid red" } : {}}
+              >
                 <p>
                   {
                     course.materials.length > 0

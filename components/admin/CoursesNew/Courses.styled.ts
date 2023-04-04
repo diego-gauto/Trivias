@@ -84,6 +84,16 @@ export const CourseContainer = styled.div`
       display: flex;
       flex-direction: column;
       gap: 10px;
+      .course-image {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 20px;
+        img {
+          width: 50%;
+          border-radius: 10px;
+        }
+      }
       .rows {
         display: flex;
         justify-content: space-between;
@@ -150,7 +160,7 @@ export const SelectOption = styled.div`
   padding-inline: 20px;
   padding-block: 5px;
   border: 1px solid #6717cd;
-  border-radius: 100px;
+  border-radius: 10px;
   position: relative;
   cursor: pointer;
   p {

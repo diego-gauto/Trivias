@@ -49,6 +49,11 @@ export const LessonContainer = styled.div`
         p {
           margin: 0;
         }
+        .img-preview {
+          width: 100%;
+          max-height: 160px;
+          border-radius: 10px;
+        }
         .save-button {
           font-size: 14px;
           border-radius: 100px;
