@@ -281,12 +281,14 @@ const Lessons = () => {
 
   }
   const deleteLesson = () => {
-    lesson.quizzes = quiz;
-    lesson.lesson_homeworks = homeWorkData;
-    lesson.id = +lessonID;
-    deleteLessonFromApi(lesson).then(() => {
-      returnToSeasons();
-    })
+    if (confirm(`¿Desea eliminar la leccion ${lesson.name}?, esta accion no tiene marcha atras`)) {
+      lesson.quizzes = quiz;
+      lesson.lesson_homeworks = homeWorkData;
+      lesson.id = +lessonID;
+      deleteLessonFromApi(lesson).then(() => {
+        returnToSeasons();
+      })
+    }
   }
   useEffect(() => {
     if (lessonID) {
