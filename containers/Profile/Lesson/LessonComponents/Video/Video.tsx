@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
+import { duration } from 'html2canvas/dist/types/css/property-descriptors/duration';
 
 declare let Hls: any
 
@@ -160,8 +161,9 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
       controls
       width="100%" height="auto"
       onEnded={finishedLesson}
-      onDuration={(duration) =>
-        handleDuration(duration)
+      onDuration={(duration) => {
+        handleDuration(duration);
+      }
       }
       onProgress={(state) => {
         handleProgress(state.playedSeconds)

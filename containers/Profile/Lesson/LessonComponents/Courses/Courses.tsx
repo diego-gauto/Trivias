@@ -15,6 +15,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const [seasons, setSeasons] = useState<any>([]);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
+  const [temp, setTemp] = useState(data);
 
   useEffect(() => {
 
@@ -108,7 +109,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           <SeasonContainer key={"course seasons " + index}>
             <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
               <div className='module'>
-                {selected[index] && <CourseProgress title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
+                {selected[index] && <CourseProgress data={temp} title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
                 <div>
                   <p className='title'>{seasons[index]?.name ? seasons[index]?.name : `Módulo ${index + 1}`}</p>
                   <Episode>
