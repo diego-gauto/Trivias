@@ -30,8 +30,10 @@ import ModalMaterials from "./Materials/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'
 import { AiFillStar } from "react-icons/ai";
+import { ICourseModal } from "./ICourseModal";
 
-const CourseModal = ({ show, setShow, course, user }: any) => {
+const CourseModal = (props: ICourseModal) => {
+  const { show, setShow, course, user } = props;
   const [material, setMaterial] = useState(false);
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([]);
@@ -48,38 +50,32 @@ const CourseModal = ({ show, setShow, course, user }: any) => {
   }
 
   const goTo = () => {
-    // router.push({
-    //   pathname: 'Lesson',
-    //   query: { id: course.id, season: 0, lesson: 0 },
-    // });
-    // if (user) {
-    //   if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
-    //     router.push({
-    //       pathname: 'Lesson',
-    //       query: { id: course.id, season: 0, lesson: 0 },
-    //     });
-    //   }
-    //   if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
-    //     router.push(
-    //       { pathname: 'Purchase', query: { type: 'subscription' } }
-    //     )
-    //   }
-    if (course.type == 'Producto') {
+    if ((course.type === "Mensual") && (user.final_date >= today)) {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: course.id, season: 0, lesson: 0 },
+      });
+    }
+    if ((course.type === "Mensual") && (user.final_date < today)) {
+      router.push({
+        pathname: 'Purchase',
+        query: { type: 'subscription' }
+      });
+    }
+    if (course.type === "Producto" && course.pay) {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: course.id, season: 0, lesson: 0 },
+      });
+    }
+    if (!user) {
+      router.push({ pathname: '/auth/Login' })
+    }
+    if (course.type === 'Producto' && !course.pay) {
       router.push(
         { pathname: 'Purchase', query: { type: 'course', id: course.id } }
       )
     }
-    // } else {
-    //   if (course.courseType == 'Gratis') {
-    //     router.push({
-    //       pathname: 'Lesson',
-    //       query: { id: course.id, season: 0, lesson: 0 },
-    //     });
-    //   }
-    //   if (!user && course.courseType !== 'Gratis') {
-    //     router.push(LOGIN_PATH)
-    //   }
-    // }
   }
 
   useEffect(() => {
@@ -215,8 +211,8 @@ const CourseModal = ({ show, setShow, course, user }: any) => {
               </div>
               <div className="right">
                 <div className="rating">
-                  <p>{course.courseRating ? (course.courseRating / 20) : 0} <span className="review-count">(142)</span></p>
-                  <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
+                  <p>{course.rating ? (course.rating / 20) : 0} <span className="review-count">(142)</span></p>
+                  <Rating allowHover={false} readonly={true} ratingValue={course.rating ? (course.rating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
@@ -246,7 +242,7 @@ const CourseModal = ({ show, setShow, course, user }: any) => {
                     <span className="info-icon">
                       i
                       <span className="info-box">
-                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                        {course.professors?.length > 0 ? (course.professors[0].about ? course.professors[0].about : "Lorem ipsum") : "Lorem ipsum"}
                       </span>
                     </span>
                   </p>

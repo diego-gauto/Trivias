@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BsTriangle } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
-import { Container, CoursesContain, PurpleButton, SubText, Title, TransparentButton, Gradient } from './Courses.styled';
+import { Container, CoursesContain, PurpleButton, SubText, Title, TransparentButton, Gradient, GonvarLoader } from './Courses.styled';
 import Sliders from './Modules/Sliders';
 import { getUserApi } from "../api/users";
 import { getCoursesApi } from "../api/lessons";
@@ -26,18 +26,27 @@ const Courses = () => {
   const coursesAll = () => {
     getCoursesApi().then((res) => {
       setCourses(res.data.data);
-      setLoading(false);
+      setLoading(true);
     })
   }
   useEffect(() => {
-    coursesAll();
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setLoggedIn(true);
         setUserData(res);
+        coursesAll();
       })
     }
   }, [])
+  // if (!loading) {
+  //   return (
+  //     <GonvarLoader>
+  //       <div className="loader-image">
+  //         <div className="loader-contain" />
+  //       </div>
+  //     </GonvarLoader>
+  //   )
+  // }
   return (
     <CoursesContain>
       {/* VIDEO  */}
