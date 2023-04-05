@@ -193,6 +193,14 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
+          if (res[0]) {
+            if (res[0].provider !== 'google') {
+              setErrorMsg('El correo existe con otra cuenta!');
+              setError(true);
+              setAuthLoader(false);
+              setShow(true);
+            }
+          }
           if (res.msg === "Este usuario no existe!") {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
@@ -223,6 +231,14 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
+          if (res[0]) {
+            if (res[0].provider !== 'google') {
+              setErrorMsg('El correo existe con otra cuenta!');
+              setError(true);
+              setAuthLoader(false);
+              setShow(true);
+            }
+          }
           if (res.msg === "Este usuario no existe!") {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
