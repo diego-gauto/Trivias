@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive';
 import { addUserCertificateApi, getUserCertificateApi } from '../../../../../components/api/lessons';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
-import { getSeason } from '../../../../../store/actions/courseActions';
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
@@ -19,7 +18,6 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const [temp, setTemp] = useState(data);
 
   useEffect(() => {
-
     let viewed = 0;
     course.lessons.forEach((element: any) => {
       if (element.users.includes(userData?.user_id)) {
