@@ -7,7 +7,7 @@ import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text01_p, Text02, Text02_p, Text03, TextSectionWrapper } from "./SlideModule.styled";
 
 export const SlideModule = (props: ISlideModule) => {
-  const { imgURL, title, subtitle, number, type, level, professor, user, course, responsive1023 } = props;
+  const { imgURL, title, subtitle, number, type, level, professors, user, course, responsive1023 } = props;
   const [show, setShow] = useState(false);
   const sendTo = () => {
     setShow(true);
@@ -30,8 +30,8 @@ export const SlideModule = (props: ISlideModule) => {
         </Row>
         <Row>
           {
-            professor &&
-            <Text02_p><span>de </span>{professor.name}</Text02_p>
+            professors &&
+            <Text02_p><span>de </span>{professors.name}</Text02_p>
           }
 
         </Row>

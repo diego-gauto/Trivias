@@ -16,29 +16,29 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
-  const { isInfinite, slideData, type, title, user, course } = props;
+  const { isInfinite, slideData, type, title, user, courses } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
-  if (slideDataArr) {
-    if (type == 'subscription') {
-      slideDataArr = slideDataArr.filter((course: any) =>
-        course.documentID !== NAILS_MASTER_COURSE_ID
-        && course.documentID !== EXPERTS_ESCULTURAL_COURSE_ID
-        && course.documentID !== DRY_MANICURE_COURSE_ID
-        && course.documentID !== SEP_COURSE_ID
-      ).map((course: any) => {
-        return (
-          { isNew: false, title: course.courseTittle, subtitle: "", imgURL: course.coursePath, number: course.seasons.length, level: course.courseDifficulty, professor: course.courseProfessor[0], data: course }
-        )
-      })
-    } else {
-      slideDataArr = slideDataArr.map((lesson: any) => {
-        return (
-          { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "", data: "" }
-        )
-      })
-    }
-  }
+  // if (slideDataArr) {
+  //   if (type == 'subscription') {
+  //     slideDataArr = slideDataArr.filter((course: any) =>
+  //       course.documentID !== NAILS_MASTER_COURSE_ID
+  //       && course.documentID !== EXPERTS_ESCULTURAL_COURSE_ID
+  //       && course.documentID !== DRY_MANICURE_COURSE_ID
+  //       && course.documentID !== SEP_COURSE_ID
+  //     ).map((course: any) => {
+  //       return (
+  //         { isNew: false, title: course.title, subtitle: "", imgURL: course.image, number: course.seasons.length, level: course.difficulty, professor: course.professor[0], data: course }
+  //       )
+  //     })
+  //   } else {
+  //     slideDataArr = slideDataArr.map((lesson: any) => {
+  //       return (
+  //         { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "", data: "" }
+  //       )
+  //     })
+  //   }
+  // }
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
@@ -93,11 +93,11 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
               title={element.title}
               subtitle={""}
               level={element.level}
-              imgURL={element.imgURL}
+              imgURL={element.image}
               number={element.number}
-              professor={element.professor}
+              professors={element.professors}
               user={user}
-              course={element.data}
+              course={element}
               responsive1023={responsive1023}
             />
           </SwiperSlide>

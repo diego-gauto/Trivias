@@ -10,12 +10,11 @@ import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
 import { getWholeCourses } from "../../../store/actions/courseActions";
 declare let Hls: any
 
-export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
+export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   const responsive1140 = useMediaQuery({ query: "(max-width: 1140px)" });
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
-  const [courses, setCourses] = useState<any>([]);
   const [openModal, setOpenModal] = useState(false);
   const handleShow = () => {
     setOpenModal(true);
@@ -47,22 +46,9 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
     }
     return result;
   }
-  const getCourses = () => {
-    let tempCourses: any = [];
-    getWholeCourses().then((response) => {
-      response.forEach((element: any) => {
-        if (element.totalLessons > 0) {
-          element.totalDuration = hms(element.totalDuration)
-          tempCourses.push(element)
-        }
-      });
-      setCourses(tempCourses);
-    })
-  }
 
   useEffect(() => {
     doVideoStuff()
-    getCourses();
   }, [])
   return (
     <CardContainer className="card-container">

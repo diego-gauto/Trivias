@@ -6,7 +6,7 @@ export interface ISlideModule {
   number?: any;
   type?: string;
   level?: string;
-  professor?: any;
+  professors?: any;
   user?: any;
   course: any;
   data?: any;

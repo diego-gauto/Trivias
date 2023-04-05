@@ -4,7 +4,7 @@ export interface IModule4_Carousel {
   type: string;
   title: string;
   user?: any;
-  course: any;
+  courses: any;
 }
 interface SlideObj {
   isNew: boolean;
@@ -14,4 +14,5 @@ interface SlideObj {
   level?: string;
   imgURL?: string;
   number?: any;
+  professors: any;
 }
