@@ -7,11 +7,13 @@ import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { BiDownload } from 'react-icons/bi';
 import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const About = ({ value, setValue, data, teacherCreds }: any) => {
 
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
+  const [index, setIndex] = useState<number>(0)
 
   return (
     <>
@@ -64,11 +66,25 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>
-          <img src={teacher.path ? teacher.path : defaultImg} alt="" />
+          <img src={teacherCreds[index]?.image ? teacherCreds[index]?.image : defaultImg} alt="" />
+          {teacherCreds.length > 0 && <MdKeyboardArrowLeft className='left' onClick={() => {
+            if (index === 0) {
+              setIndex(teacherCreds.length - 1)
+            } else {
+              setIndex(index - 1)
+            }
+          }} />}
+          {teacherCreds.length > 0 && < MdKeyboardArrowRight className='right' onClick={() => {
+            if (index === teacherCreds.length - 1) {
+              setIndex(0)
+            } else {
+              setIndex(index + 1)
+            }
+          }} />}
           <p className='title'>Conoce a <br />
             <span>tu instructor</span>
           </p>
-          <p>{teacher.about}</p>
+          <p>{teacherCreds[index]?.about}</p>
         </div>
       </AboutContain>
     </>

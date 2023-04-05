@@ -1,6 +1,7 @@
 import router from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive';
+import { addUserCertificateApi, getUserCertificateApi } from '../../../../../components/api/lessons';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
 import { getSeason } from '../../../../../store/actions/courseActions';
 import CourseProgress from '../Progress/CourseProgress';
@@ -27,6 +28,19 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
     });
 
     if (course.lessons.length == viewed) {
+      let ids = {
+        userId: userData.user_id,
+        courseId: course.id
+      }
+      let tempCertificate = {
+        ...ids,
+        folio: `${ids.courseId}-${ids.userId}`
+      }
+      getUserCertificateApi(ids).then((res) => {
+        if (res.data.data.length === 0) {
+          addUserCertificateApi(tempCertificate)
+        }
+      })
       setCertificate(true)
     }
     setCount(viewed)
@@ -48,12 +62,12 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
       pathname: `/Certificates`,
       query: {
         name: userData.name,
-        title: course.courseTittle,
-        professor: course.courseProfessor[0].name,
-        id: userData.uid,
-        color: course.courseCertificateColor,
+        title: course.title,
+        professor: course.professors[0].name,
+        id: userData.user_id,
+        color: course.certificate_color,
         courseId: course.id,
-        teacherSignature: course.courseProfessor[0].sign,
+        teacherSignature: course.professors[0].sign,
       }
     });
   }

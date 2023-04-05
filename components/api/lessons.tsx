@@ -107,3 +107,27 @@ export const updateUserScoreApi = async (user: any) => {
       return error
     });
 };
+
+export const getUserCertificateApi = async (ids: any) => {
+  return axios
+    .get("http://94.74.77.165/" + `lessons/user-certificate/${ids.userId}/${ids.courseId}`)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addUserCertificateApi = async (certificate: any) => {
+  return axios
+    .post("http://94.74.77.165/" + `lessons/add-user-certiticate`, certificate)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
