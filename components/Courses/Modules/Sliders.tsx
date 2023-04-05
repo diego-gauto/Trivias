@@ -126,7 +126,6 @@ const Sliders = (props: ICourseData) => {
     }, 300 * slideNumber);
   }, [allCourses])
 
-  console.log(courses);
   return (
     <>
       {
