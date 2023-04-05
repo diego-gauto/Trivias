@@ -84,8 +84,8 @@ const NavBar = () => {
   }
   useEffect(() => {
     window.addEventListener('scroll', ChangeNav);
-    localStorage.clear();
-    logoutFunc();
+    // localStorage.clear();
+    // logoutFunc();
   },
     [pathname],
   );
