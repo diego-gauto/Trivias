@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const CoursesContain = styled.div`
   display: flex;
@@ -235,4 +235,44 @@ export const Gradient = styled.div`
     rgba(255, 255, 255, 0.3) 0%,
     rgba(255, 255, 255, 0.016) 90%
   );
+`;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+export const GonvarLoader = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+  .loader-image {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    background-image: url(../images/logo2.png);
+    background-size: 80px;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    .loader-contain {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      margin: 6px;
+      border-width: 9px;
+      border-style: solid;
+      border-radius: 50%;
+      border-color: #6717cd transparent transparent;
+      animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal
+        none running;
+    }
+  }
 `;

@@ -5,9 +5,11 @@ export interface ICourseData {
   allCourses: [];
   user: {
     final_date: number;
+    user_courses: [IUserCourse];
   };
 }
 export interface ICourse {
+  id: number;
   title: string;
   difficulty: string;
   image: string;
@@ -15,6 +17,7 @@ export interface ICourse {
   progress: number;
   seasons: [ISeasons];
   type: string;
+  pay: boolean;
 }
 interface IProfessors {
   name: string;
@@ -22,4 +25,8 @@ interface IProfessors {
 interface ISeasons {
   name: string;
   season: number;
+}
+export interface IUserCourse {
+  course_id: number;
+  final_date: number;
 }

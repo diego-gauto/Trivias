@@ -7,7 +7,7 @@ export const getUserApi = async (email: any) => {
   return axios
     .post("http://94.74.77.165/" + "users/user-info", user)
     .then((res) => {
-      return { ...res.data.user[0], payment_methods: res.data.payment_methods.data };
+      return { ...res.data.user[0], payment_methods: res.data.payment_methods.data, user_courses: res.data.courses };
     })
     .catch((error) => {
       console.log(error);

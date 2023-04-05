@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import { ICourse, ICourseData } from './ISliders';
+import { ICourse, ICourseData, IUserCourse } from './ISliders';
 import { Image } from "react-bootstrap";
 import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain } from './Sliders.styled';
 import CourseModal from '../../CourseModal/CourseModal';
@@ -55,6 +55,14 @@ const Sliders = (props: ICourseData) => {
         if (course.type === "Producto") {
           tempShowCourse.push(course);
         }
+        user.user_courses.forEach((courses: IUserCourse) => {
+          if ((courses.final_date > today) && (course.id === courses.course_id)) {
+            course.pay = true;
+          }
+          else {
+            course.pay = false;
+          }
+        });
       })
       setCourses(tempShowCourse);
       setTexts(tempTexts);
@@ -112,6 +120,7 @@ const Sliders = (props: ICourseData) => {
 
   useEffect(() => {
     getCourseContent();
+    // setLoading(false);
     setTimeout(() => {
       setLoading(false);
     }, 300 * slideNumber);
