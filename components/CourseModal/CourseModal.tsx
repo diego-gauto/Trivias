@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import router from "next/router";
 
-import { LOGIN_PATH } from "../../../../constants/paths";
-import { PurpleButton } from "../../Module1/Module1.styled";
+import { LOGIN_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -24,16 +23,15 @@ import {
   SeasonContain,
   TextContainer,
   VideoContain,
-} from "../../Module3/Modal/Modal1.styled";
-import SelectModule4 from "./SelectModule4";
-import { getSeason } from "../../../../store/actions/courseActions";
-import ModalMaterials from "./ModalMaterials";
+} from "./CourseModal.styled";
+import SelectModule4 from "./Select/SelectModule";
+import { getSeason } from "../../store/actions/courseActions";
+import ModalMaterials from "./Materials/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'
-import { AiFillInfoCircle, AiFillStar } from "react-icons/ai";
-import { Modal } from "react-bootstrap";
+import { AiFillStar } from "react-icons/ai";
 
-const Modal1 = ({ show, setShow, course, user }: any) => {
+const CourseModal = ({ show, setShow, course, user }: any) => {
   const [material, setMaterial] = useState(false);
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([]);
@@ -50,10 +48,10 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   }
 
   const goTo = () => {
-    router.push({
-      pathname: 'Lesson',
-      query: { id: course.id, season: 0, lesson: 0 },
-    });
+    // router.push({
+    //   pathname: 'Lesson',
+    //   query: { id: course.id, season: 0, lesson: 0 },
+    // });
     // if (user) {
     //   if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
     //     router.push({
@@ -66,11 +64,11 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     //       { pathname: 'Purchase', query: { type: 'subscription' } }
     //     )
     //   }
-    //   if (course.courseType == 'Producto' && !course.paid) {
-    //     router.push(
-    //       { pathname: 'Purchase', query: { type: 'course', id: course.id } }
-    //     )
-    //   }
+    if (course.type == 'Producto') {
+      router.push(
+        { pathname: 'Purchase', query: { type: 'course', id: course.id } }
+      )
+    }
     // } else {
     //   if (course.courseType == 'Gratis') {
     //     router.push({
@@ -306,4 +304,4 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     </ModalContain >
   )
 }
-export default Modal1;
+export default CourseModal;

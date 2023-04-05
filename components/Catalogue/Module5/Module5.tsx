@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
-import Modal1 from "../Module4/Modal/Modal1";
+import Modal1 from "../../CourseModal/CourseModal";
 
 import { Container } from "react-bootstrap";
 import {

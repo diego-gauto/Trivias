@@ -6,7 +6,7 @@ import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 import { SIGNUP_PATH } from '../../constants/paths';
 import { getTeacher } from '../../store/actions/courseActions';
-import Modal1 from '../Catalogue/Module4/Modal/Modal1';
+import Modal1 from '../CourseModal/CourseModal';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
 
 

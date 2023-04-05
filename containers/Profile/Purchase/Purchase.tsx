@@ -16,7 +16,7 @@ import {
 } from "./Purchase.styled";
 import ModalError from "./Modal1/ModalError";
 import ErrorModal from "../../../components/Error/ErrorModal";
-import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
+import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, getCourseForCheckoutApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
 import { updateMembership } from "../../../components/api/users";
 import { retrieveCoupons } from "../../../components/api/admin";
 
@@ -61,8 +61,8 @@ const Purchase = () => {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
       setPaypal(false);
     } else {
-      getWholeCourse(id).then((res: any) => {
-        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
+      getCourseForCheckoutApi(id).then((res: any) => {
+        setProduct({ ...product, title: res.title, price: res.price, duration: res.duration, type: 'course', img: res.image });
         setPaypal(false);
       })
     }
@@ -219,14 +219,14 @@ const Purchase = () => {
               product: product.title,
               method: 'stripe',
               user_id: userData.user_id,
-              course_id: 1,
+              course_id: id,
               final_date: (new Date().getTime() / 1000) + product.duration * 86400
             }
-            let tempCoupon = {
-              coupons_id: coupon.id,
-              user_id: userData.user_id
-            }
-            await addUserCouponApi(tempCoupon)
+            // let tempCoupon = {
+            //   coupons_id: coupon.id,
+            //   user_id: userData.user_id
+            // }
+            // await addUserCouponApi(tempCoupon)
             createInvoiceApi(invoice).then((res) => {
               setConfirmation(false);
               setPay(true);
@@ -255,7 +255,7 @@ const Purchase = () => {
           product: product.title,
           method: 'paypal',
           user_id: userData.user_id,
-          course_id: 1,
+          course_id: id,
           final_date: (new Date().getTime() / 1000) + product.duration * 86400
         }
         createInvoiceApi(invoice).then((res) => {
