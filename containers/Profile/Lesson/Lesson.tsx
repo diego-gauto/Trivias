@@ -57,72 +57,6 @@ const Lesson = () => {
 
   // });
 
-  const checkCourse = () => {
-
-    let date = new Date().getTime() / 1000;
-    if (course) {
-      let temp_lesson;
-      let temp_comments;
-
-      onSnapshot(query(collection(db, 'comments'), orderBy("createdAt", "desc")), (doc) => {
-        let comment: any = []
-        doc.docs.forEach((x) => {
-          comment.push({ ...x.data(), id: x.id })
-        })
-        if (comment?.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
-          temp_comments = [...comment].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
-          setCurrentComments(temp_comments);
-        } else {
-          setCurrentComments([]);
-        }
-      })
-
-      temp_lesson = course.seasons[season].lessons[lesson];
-      temp_lesson.seasonId = course?.seasons[season].id;
-      temp_lesson.courseId = course.id;
-      temp_lesson.courseTitle = course?.courseTittle;
-      temp_lesson.teachers = course?.courseProfessor;
-      setCurrentLesson(temp_lesson);
-      if (userData) {
-        if (course.courseType == 'Gratis') {
-          addHistoryCourse(course, userData.id, season, lesson);
-        }
-        if (course.courseType == 'Mensual' && userData.membership.finalDate > date) {
-          addHistoryCourse(course, userData.id, season, lesson);
-        }
-        if (course.courseType == 'Producto') {
-          getPaidCourses(userData.id).then((paid: any) => {
-            if (paid.some((x: any) => x.id == course.id && date < x.finalDate)) {
-              addHistoryCourse(course, userData.id, season, lesson);
-            }
-          })
-        }
-        let viewed = 0;
-        course.lessons.forEach((element: any) => {
-          if (element.users.includes(userData.id)) {
-            viewed++;
-          }
-        });
-        if (course.lessons.length == viewed) {
-          setCertificate(true);
-          let tempCertificate = userData.certificates;
-          if (tempCertificate) {
-            if (tempCertificate.find((x: any) => x.courseId == course.id)) {
-              return;
-            } else {
-              tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id });
-              addUserCertificate(tempCertificate, userData.id);
-            }
-          } else {
-            tempCertificate = []
-            tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id, courseTitle: course.courseTittle });
-            addUserCertificate(tempCertificate, userData.id);
-          }
-        }
-      }
-    }
-  }
-
   const handleComplete = () => {
     getCourse()
   }
@@ -147,6 +81,8 @@ const Lesson = () => {
 
   const getCourse = () => {
     getCourseApi(id).then((res) => {
+      console.log(res);
+
       setCurrentLesson(res.seasons[season].lessons[lesson]);
       setCourse(res);
       setIsLoading(false);

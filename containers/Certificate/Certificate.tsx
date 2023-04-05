@@ -5,6 +5,7 @@ import { MainContainer } from "./Certificate.styled";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import QRCode from 'qrcode'
+import { getUserCertificateApi } from "../../components/api/lessons";
 
 
 const Certificate = () => {
@@ -14,17 +15,24 @@ const Certificate = () => {
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
   const aritaSignature = "/images/signatures/AritaGonvar.png";
+
   const getUserCertificate = () => {
-    getUser(id).then((res) => {
-      let tempCertificate = res[0].certificates.find((x: any) => x.courseId == courseId)
+    let ids = {
+      userId: id,
+      courseId: courseId
+    }
+    getUserCertificateApi(ids).then((res) => {
+      let tempCertificate = res.data.data[0];
+
       setFolio(tempCertificate.folio);
       const months = [
         "enero", "febrero", "marzo", "abril",
         "mayo", "junio", "julio", "agosto",
         "septiembre", "octubre", "noviembre", "diciembre"
       ];
-      const dateTime = new Date(tempCertificate.createdAt.seconds * 1000);
-      const day = dateTime.getDate();
+      let tempDate = new Date(tempCertificate.created_at).getTime();
+      const dateTime = new Date(tempDate);
+      const day = dateTime.getDate() + 1;
       const month = months[dateTime.getMonth()];
       const year = dateTime.getFullYear();
 
