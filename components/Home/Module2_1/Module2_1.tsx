@@ -30,7 +30,7 @@ export const Module2_1 = (props: IModule2_1) => {
     let newDate = new Date();
     let currentDaySeconds = (newDate.getTime() / 1000);
     if (user) {
-      if (user.membership.finalDate > currentDaySeconds) {
+      if (user.final_date > currentDaySeconds) {
         router.push("/Preview")
       }
       else {

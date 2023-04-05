@@ -16,12 +16,14 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+  let today = new Date().getTime() / 1000;
   const handleShow = () => {
     setOpenModal(true);
   }
   const router = useRouter();
 
   const doVideoStuff = () => {
+
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
     var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
@@ -46,7 +48,21 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
     }
     return result;
   }
-
+  const goTo = () => {
+    if (loggedIn) {
+      if (user.final_date >= today) {
+        router.push("/Preview")
+      }
+      if (user.final_date < today) {
+        router.push({
+          pathname: 'Purchase',
+          query: { type: 'subscription' }
+        });
+      }
+    } else {
+      router.push(SIGNUP_PATH)
+    }
+  }
   useEffect(() => {
     doVideoStuff()
   }, [])
@@ -68,14 +84,10 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
           <h1 className="price">Sólo $149 <span>MXN/mes</span></h1>
           {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
-                loggedIn
-                  ? router.push("/Purchase?type=subscription")
-                  : router.push(SIGNUP_PATH)
-              }} />
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => { goTo() }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
-            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} />
+            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />
           </Row>}
         </div>
         <div className="video">
@@ -83,11 +95,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
           ></video>
           {!responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
-                loggedIn
-                  ? router.push("/Purchase?type=subscription")
-                  : router.push(SIGNUP_PATH)
-              }} />
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => { goTo() }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
             <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />

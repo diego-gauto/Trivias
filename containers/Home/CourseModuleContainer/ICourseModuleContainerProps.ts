@@ -1,6 +1,8 @@
 export interface ICourseModuleContainerProps {
-  courseId: string;
+  courses: any;
   num: number;
   loggedIn: boolean;
-  user: {};
+  user: {
+    final_date: number;
+  };
 }

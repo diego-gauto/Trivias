@@ -6,6 +6,7 @@ export interface ICourseModal {
   course: {
     id: number;
     pay: boolean;
+    data: any;
     seasons: any;
     type: string;
     difficulty: string;
