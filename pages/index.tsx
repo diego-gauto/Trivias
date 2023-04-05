@@ -31,6 +31,7 @@ const Homepage = () => {
   const [courseSEPData, setCourseSEPData] = useState<any>([]);
   const [userData, setUserData] = useState<any>(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  let today = new Date().getTime() / 1000;
 
   // try {
   //   var userDataAuth = useAuth();
@@ -101,9 +102,8 @@ const Homepage = () => {
   // useEffect(() => {
   //   getProffessors();
   // }, [])
-  const coursesAll = () => {
+  const coursesAll = (user: any) => {
     getCoursesApi().then((res) => {
-      console.log(res.data.data);
       let tempCourses = res.data.data;
       let gonvarPlusCourses = [];
       let nailsMaster = tempCourses;
@@ -113,10 +113,52 @@ const Homepage = () => {
         return course.type === "Mensual"
       })
       nailsMaster = tempCourses.filter((course: any) => {
+        if (course.id === 122) {
+          course.lessons = [];
+          user.user_courses.forEach((courses: any) => {
+            if ((courses.final_date > today) && (course.id === courses.course_id)) {
+              course.pay = true;
+            }
+            else {
+              course.pay = false;
+            }
+          });
+          course.seasons.forEach((season: any) => {
+            season.lessons.forEach((lesson: any) => {
+              lesson.seasons = course.seasons;
+              lesson.professors = course.professors;
+              lesson.materials = course.materials;
+              lesson.categories = course.categories;
+              lesson.image = lesson.banner;
+              course.lessons.push(lesson);
+            });
+          });
+        }
         course.totalDuration = hms(course.totalDuration) && 0
         return course.id === 122
       })
       alineacionCert = tempCourses.filter((course: any) => {
+        if (course.id === 96) {
+          course.lessons = [];
+          user.user_courses.forEach((courses: any) => {
+            if ((courses.final_date > today) && (course.id === courses.course_id)) {
+              course.pay = true;
+            }
+            else {
+              course.pay = false;
+            }
+          });
+          course.seasons.forEach((season: any) => {
+            season.lessons.forEach((lesson: any) => {
+              lesson.seasons = course.seasons;
+              lesson.professors = course.professors;
+              lesson.materials = course.materials;
+              lesson.categories = course.categories;
+              lesson.image = lesson.banner;
+              course.lessons.push(lesson);
+            });
+          });
+        }
         course.totalDuration = hms(course.totalDuration) && 0
         return course.id === 96
       })
@@ -132,7 +174,7 @@ const Homepage = () => {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setLoggedIn(true);
         setUserData(res);
-        coursesAll();
+        coursesAll(res);
       })
     }
   }, []);
@@ -165,24 +207,24 @@ const Homepage = () => {
       {/* Gonvar Plus Module Card */}
       <GonvarPlusModule loggedIn={loggedIn} user={userData} courses={courseGonvarPlus} />
       {courseGonvarPlus &&
-        <Module4_Carousel user={userData} courses={courseGonvarPlus} type={'subscription'} isInfinite={true} title={courseGonvarPlus.courseTittle} slideData={
+        <Module4_Carousel user={userData} courses={courseGonvarPlus} type={'subscription'} isInfinite={true} title={courseGonvarPlus.title} slideData={
           courseGonvarPlus
         } />
       }
       {/* Nails Master Module Card */}
-      {/* <CourseModuleContainer courseId={NAILS_MASTER_COURSE_ID} num={1} loggedIn={loggedIn} user={userData} />
+      <CourseModuleContainer courses={courseNailsData} num={1} loggedIn={loggedIn} user={userData} />
       {courseNailsData &&
-        <Module4_Carousel user={userData} course={courseNailsData} type={"product"} isInfinite={true} title={courseNailsData.courseTittle} slideData={
-          courseNailsData.lessons
-        } />
-      } */}
+        <Module4_Carousel user={userData} courses={courseNailsData} type={"product"} isInfinite={true} title={courseNailsData.title}
+          slideData={courseNailsData.lessons}
+        />
+      }
       {/* SEP Module Card */}
-      {/* <CourseModuleContainer courseId={SEP_COURSE_ID} num={2} loggedIn={loggedIn} user={userData} />
+      <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&
-        <Module4_Carousel user={userData} course={courseSEPData} type={"product"} isInfinite={true} title={courseSEPData.courseTittle} slideData={
+        <Module4_Carousel user={userData} courses={courseSEPData} type={"product"} isInfinite={true} title={courseSEPData.title} slideData={
           courseSEPData.lessons
         } />
-      } */}
+      }
       <Module5_1 slideData={landingData.experienciasSectionData} />
       <Module6_1 slideData={landingData.productosDestacadosData} />
       {/* <Footer /> */}

@@ -19,26 +19,6 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const { isInfinite, slideData, type, title, user, courses } = props;
   let slideDataArr = [];
   slideDataArr = slideData;
-  // if (slideDataArr) {
-  //   if (type == 'subscription') {
-  //     slideDataArr = slideDataArr.filter((course: any) =>
-  //       course.documentID !== NAILS_MASTER_COURSE_ID
-  //       && course.documentID !== EXPERTS_ESCULTURAL_COURSE_ID
-  //       && course.documentID !== DRY_MANICURE_COURSE_ID
-  //       && course.documentID !== SEP_COURSE_ID
-  //     ).map((course: any) => {
-  //       return (
-  //         { isNew: false, title: course.title, subtitle: "", imgURL: course.image, number: course.seasons.length, level: course.difficulty, professor: course.professor[0], data: course }
-  //       )
-  //     })
-  //   } else {
-  //     slideDataArr = slideDataArr.map((lesson: any) => {
-  //       return (
-  //         { isNew: false, title: lesson.title, subtitle: "", imgURL: lesson.image, number: lesson.number, level: "", professor: "", data: "" }
-  //       )
-  //     })
-  //   }
-  // }
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
@@ -92,12 +72,12 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
               isNew={element.isNew}
               title={element.title}
               subtitle={""}
-              level={element.level}
+              level={type === "subscription" ? element.difficulty : ""}
               imgURL={element.image}
-              number={element.number}
+              number={type === "subscription" ? element.seasons.length : element.number}
               professors={element.professors}
               user={user}
-              course={element}
+              course={type === "subscription" ? element : ""}
               responsive1023={responsive1023}
             />
           </SwiperSlide>

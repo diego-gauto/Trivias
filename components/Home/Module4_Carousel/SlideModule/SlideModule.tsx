@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Image, Row } from "react-bootstrap";
 import { number } from "yup";
-import Modal1 from "../../../CourseModal/CourseModal";
+import CourseModal from "../../../CourseModal/CourseModal";
 import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text01_p, Text02, Text02_p, Text03, TextSectionWrapper } from "./SlideModule.styled";
 
@@ -19,19 +19,19 @@ export const SlideModule = (props: ISlideModule) => {
       }}>
         <Image src={imgURL} fluid style={{ borderRadius: "10px" }} />
         <div className="text-overlay">
-          {type == "subscription" && <button onClick={sendTo}>
+          {(type == "subscription") && <button onClick={sendTo}>
             Más información
           </button>}
         </div>
       </div>
-      {type == "subscription" ? <TextSectionWrapper>
+      {(type == "subscription") ? <TextSectionWrapper>
         <Row>
           <Text01_p>{title}</Text01_p>
         </Row>
         <Row>
           {
-            professors &&
-            <Text02_p><span>de </span>{professors.name}</Text02_p>
+            professors.length > 0 &&
+            <Text02_p><span>de </span>{professors[0].name}</Text02_p>
           }
 
         </Row>
@@ -53,7 +53,7 @@ export const SlideModule = (props: ISlideModule) => {
             <Text02_p><span>de</span> default</Text02_p>
           </Row> */}
         </TextSectionWrapper>}
-      <Modal1 show={show} setShow={setShow} course={course} user={user} />
+      <CourseModal show={show} setShow={setShow} course={course} user={user} />
     </SlideModuleContainer>
   )
 }

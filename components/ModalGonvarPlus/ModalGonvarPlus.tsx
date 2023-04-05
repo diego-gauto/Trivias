@@ -6,19 +6,19 @@ import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 import { SIGNUP_PATH } from '../../constants/paths';
 import { getTeacher } from '../../store/actions/courseActions';
-import Modal1 from '../CourseModal/CourseModal';
+import CourseModal from '../CourseModal/CourseModal';
+import { ICourse } from './IModalGonvarPlus';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
 
 
-export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedIn }: any) => {
-  SIGNUP_PATH
+export const ModalGonvarPlus = (props: ICourse) => {
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
   const GonvarLogo = "/images/purchase/logo.png";
   const [showModal, setShowModal] = useState(false);
-  const [courses, setCourses] = useState<any>([]);
   const [courseModal, setCourseModal] = useState<any>([]);
+  const { openModal, setOpenModal, course, user, loggedIn } = props;
   const router = useRouter();
   let [counter, setCounter] = useState<any>(0);
   const handleClose = () => setOpenModal(false);
@@ -54,38 +54,7 @@ export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedI
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
-  const getCourses = (professor: any) => {
-    let tempProfessor: Array<any> = professor;
-    if (course) {
-      let temp_courses: any = [];
-      course.forEach((element: any) => {
-        if (element.courseType == 'Mensual') {
-          element.courseProfessor.map((profId: string, index: number) => {
-            tempProfessor.map((val: any) => {
-              if (profId == val.id) {
-                element.courseProfessor[index] = val;
-              }
-            })
-          })
-          element.courseAbout = element.courseAbout
-          element.courseSubtittle = element.courseSubtittle
-          element.courseTittle = element.courseTittle
-          temp_courses.push(element);
-        }
-      });
-      setCourses(temp_courses);
-    }
-  }
 
-  const getProffessors = () => {
-    getTeacher().then((res) => {
-      getCourses(res);
-      return res;
-    })
-  }
-  useEffect(() => {
-    getProffessors();
-  }, [course])
   return (
     <ModalContainer show={openModal} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
       <BackgroundContainer>
@@ -260,21 +229,21 @@ export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedI
         <div className="courses scroll-container" id="scroll-container" style={{ paddingLeft: 30 }}>
           <div className='courses-2' onMouseDown={mouseDownHandler}>
             {
-              courses.map((val: any, index: any) => {
+              course.map((val: any, index: any) => {
                 return (
                   <CoursesContainer key={"Course data " + index}>
                     <div className="image-contain">
                       <button className="btn-info" onClick={() => { setShowModal(true), setCourseModal(val) }}>Mas informacion</button>
-                      <img src={val.coursePath} className="img-course" />
+                      <img src={val.image} className="img-course" />
                     </div>
                     <div className="course-info">
                       <p className="course-name">
-                        {val.courseTittle}
+                        {val.title}
                       </p>
                       {
-                        val.courseProfessor.length > 0 &&
+                        val.professors.length > 0 &&
                         <p className="course-professor">
-                          de <span>{val.courseProfessor[0].name}</span>
+                          de <span>{val.professors[0].name}</span>
                         </p>
                       }
                     </div>
@@ -292,7 +261,7 @@ export const ModalGonvarPlus = ({ openModal, setOpenModal, course, user, loggedI
           </p>
         </div>
       </BottomContainer>
-      <Modal1 show={showModal} setShow={setShowModal} course={courseModal} user={user} />
+      <CourseModal show={showModal} setShow={setShowModal} course={courseModal} user={user} />
     </ModalContainer >
   )
 }

@@ -48,7 +48,6 @@ const CourseModal = (props: ICourseModal) => {
   const handleShow = () => {
     setMaterial(true);
   }
-
   const goTo = () => {
     if ((course.type === "Mensual") && (user.final_date >= today)) {
       router.push({
@@ -82,7 +81,6 @@ const CourseModal = (props: ICourseModal) => {
     if (Object.values(course).length > 0) {
       setLessons(course?.seasons[0]?.lessons);
       setIsPlaying(true);
-
       setTimeout(() => {
         setIsPlaying(false)
       }, 2000)
