@@ -1,10 +1,5 @@
-import { doc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
-import { db } from '../../../../firebase/firebaseConfig';
-import { IHomeWorkModal } from '../../../../interfaces/IHomeWorks';
-import { getWholeCourse, updateProgressStatus } from '../../../../store/actions/courseActions';
-import { addReview, getUserScore } from '../../../../store/actions/UserActions';
 import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, InputContain, ButtonContain, SafeContained } from './HomeWorkModal.styled';
 
 
@@ -29,7 +24,8 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       ...review,
       status: 1,
       id: data.id,
-      user_id: data.userId
+      user_id: data.userId,
+      lessonId: data.lessonId,
     }
     reviewHomeworkApi(temp).then(() => {
       handleClick();

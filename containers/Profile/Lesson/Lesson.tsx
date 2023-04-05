@@ -154,6 +154,7 @@ const Lesson = () => {
   }
 
   const handleClick = () => {
+    getCourse();
   }
 
   return (
@@ -166,7 +167,7 @@ const Lesson = () => {
         <MainContainer>
           <div className="left-side">
             <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-            <Modules data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
+            <Modules handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
           </div>
           <Courses menu={true} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
           {/* <FirstContainer>

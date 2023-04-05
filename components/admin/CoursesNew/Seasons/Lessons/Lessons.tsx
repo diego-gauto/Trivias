@@ -207,7 +207,7 @@ const Lessons = () => {
       number: lesson.number === 0 ? true : false,
       about: lesson.about === "" ? true : false,
       link: lesson.link === "" ? true : false,
-      points: lesson.points === 0 ? true : false,
+      // points: lesson.points === 0 ? true : false,
       // banner: lesson.banner === "" ? true : false,
       objectives: lesson.objectives === "" ? true : false,
       // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,

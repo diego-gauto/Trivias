@@ -59,3 +59,51 @@ export const updateUserProgressApi = async (progress: any) => {
       return error
     });
 };
+
+export const getUserQuizApi = async (quiz: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "lessons/user-quiz", quiz)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateUserProgressByQuizApi = async (progress: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "lessons/update-user-progress-by-quiz", progress)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateUserQuizApi = async (quiz: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "lessons/update-user-quiz", quiz)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateUserScoreApi = async (user: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "lessons/update-user-score", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
