@@ -79,7 +79,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
         </Col>
       </Row>
-      <Modal1 show={show} setShow={setShow} course={data} user={user} />
+      {/* <Modal1 show={show} setShow={setShow} course={data} user={user} /> */}
     </CardContainer>
   )
 }

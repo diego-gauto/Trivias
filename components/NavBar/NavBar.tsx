@@ -64,7 +64,6 @@ const NavBar = () => {
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      window.location.href = "/";
     }).catch((error) => {
       console.log(error)
     });
@@ -83,10 +82,11 @@ const NavBar = () => {
       setColor(0)
     }
   }
-  useEffect(
-    () => {
-      window.addEventListener('scroll', ChangeNav);
-    },
+  useEffect(() => {
+    window.addEventListener('scroll', ChangeNav);
+    localStorage.clear();
+    logoutFunc();
+  },
     [pathname],
   );
 
