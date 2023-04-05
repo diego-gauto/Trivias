@@ -222,11 +222,13 @@ const Purchase = () => {
               course_id: id,
               final_date: (new Date().getTime() / 1000) + product.duration * 86400
             }
-            // let tempCoupon = {
-            //   coupons_id: coupon.id,
-            //   user_id: userData.user_id
-            // }
-            // await addUserCouponApi(tempCoupon)
+            if (coupon) {
+              let tempCoupon = {
+                coupons_id: coupon.id,
+                user_id: userData.user_id
+              }
+              await addUserCouponApi(tempCoupon)
+            }
             createInvoiceApi(invoice).then((res) => {
               setConfirmation(false);
               setPay(true);
@@ -257,6 +259,13 @@ const Purchase = () => {
           user_id: userData.user_id,
           course_id: id,
           final_date: (new Date().getTime() / 1000) + product.duration * 86400
+        }
+        if (coupon) {
+          let tempCoupon = {
+            coupons_id: coupon.id,
+            user_id: userData.user_id
+          }
+          await addUserCouponApi(tempCoupon)
         }
         createInvoiceApi(invoice).then((res) => {
           setConfirmation(false);
