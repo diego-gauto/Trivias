@@ -572,3 +572,33 @@ export const updateCourseImage = async (courseID: number, image: any) => {
   const url = await uploadCourseImage(courseID, image);
   return url;
 }
+const uploadProfessorPicture = (image: string, name: string) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professor-image/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateProfessorImage = async (image: string, name: string) => {
+  const url = await uploadProfessorPicture(image, name);
+  return url;
+}
+const uploadProfessorSignature = (image: string, name: string) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professor-signature/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateProfessorSignature = async (image: string, name: string) => {
+  const url = await uploadProfessorSignature(image, name);
+  return url;
+}

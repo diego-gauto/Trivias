@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { addCategory, deleteCategory, getCategory, updateCategory } from '../../../store/actions/courseActions';
-import { createCategoryApi } from '../../api/categories';
+import { createCategoryApi, deleteCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
-import Delete from '../Courses/Form/Delete/Delete';
 import { AdminContain } from '../SideBar.styled';
 import { Button, ButtonContain, CatContain, CatData, CategoryContain, CatText, CloseIcon, EditCat, EditIcon, FormContain, Input, InputContain, Label, Title, TitleContain } from './Category.styled';
 
@@ -21,28 +19,26 @@ const Category = () => {
       alert("Complete todos los campos")
     }
     else {
-      addCategory(category).then((res) => {
+      createCategoryApi(category).then(() => {
         alert("Categoría Agregada con Exito")
         getAllCategories();
       })
     }
   }
   const getAllCategories = () => {
-    getCategory().then((res) => {
+    getCategoriesApi().then((res) => {
       setCategories(res);
-      return res;
     })
   }
   const Delete = (val: any) => {
     if (window.confirm("Desea borrar esta categoría: " + val.name)) {
-      deleteCategory(val).then(() => {
+      deleteCategoryApi(val).then(() => {
         getAllCategories();
-        // alert("Categoría: " + val.name + " eliminada con éxito")
       })
     }
   }
   const update = (val: any) => {
-    updateCategory(val, val.id).then(() => {
+    updateCategoryApi(val).then(() => {
       alert("Categoría actualizada")
       getAllCategories();
     })
@@ -112,6 +108,7 @@ const Category = () => {
                           <FormContain>
                             <InputContain style={{ width: 500 }}>
                               <Input
+                                defaultValue={val.name}
                                 placeholder={"Editar nombre de: " + val.name}
                                 onChange={(e: any) => {
                                   categories[i].name = e.target.value
