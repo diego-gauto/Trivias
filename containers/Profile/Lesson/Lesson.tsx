@@ -57,7 +57,7 @@ const Lesson = () => {
         let today = new Date().getTime() / 1000;
         setUserData(user);
         getCourseApi(id).then((res) => {
-          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === id && x.final_date < today).length === 0) {
+          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) {
             router.push(
               { pathname: 'Purchase', query: { type: 'course', id: res.id } }
             )
