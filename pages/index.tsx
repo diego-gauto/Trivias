@@ -115,14 +115,16 @@ const Homepage = () => {
       nailsMaster = tempCourses.filter((course: any) => {
         if (course.id === 122) {
           course.lessons = [];
-          user.user_courses.forEach((courses: any) => {
-            if ((courses.final_date > today) && (course.id === courses.course_id)) {
-              course.pay = true;
-            }
-            else {
-              course.pay = false;
-            }
-          });
+          if (user) {
+            user.user_courses.forEach((courses: any) => {
+              if ((courses.final_date > today) && (course.id === courses.course_id)) {
+                course.pay = true;
+              }
+              else {
+                course.pay = false;
+              }
+            });
+          }
           course.seasons.forEach((season: any) => {
             season.lessons.forEach((lesson: any) => {
               lesson.seasons = course.seasons;
@@ -140,14 +142,16 @@ const Homepage = () => {
       alineacionCert = tempCourses.filter((course: any) => {
         if (course.id === 96) {
           course.lessons = [];
-          user.user_courses.forEach((courses: any) => {
-            if ((courses.final_date > today) && (course.id === courses.course_id)) {
-              course.pay = true;
-            }
-            else {
-              course.pay = false;
-            }
-          });
+          if (user) {
+            user.user_courses.forEach((courses: any) => {
+              if ((courses.final_date > today) && (course.id === courses.course_id)) {
+                course.pay = true;
+              }
+              else {
+                course.pay = false;
+              }
+            });
+          }
           course.seasons.forEach((season: any) => {
             season.lessons.forEach((lesson: any) => {
               lesson.seasons = course.seasons;
@@ -176,6 +180,9 @@ const Homepage = () => {
         setUserData(res);
         coursesAll(res);
       })
+    }
+    else {
+      coursesAll(null);
     }
   }, []);
 

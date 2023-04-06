@@ -49,31 +49,33 @@ const CourseModal = (props: ICourseModal) => {
     setMaterial(true);
   }
   const goTo = () => {
-    if ((course.type === "Mensual") && (user.final_date >= today)) {
-      router.push({
-        pathname: 'Lesson',
-        query: { id: course.id, season: 0, lesson: 0 },
-      });
+    if (user) {
+      if ((course.type === "Mensual") && (user.final_date >= today)) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: 0, lesson: 0 },
+        });
+      }
+      if ((course.type === "Mensual") && (user.final_date < today)) {
+        router.push({
+          pathname: 'Purchase',
+          query: { type: 'subscription' }
+        });
+      }
+      if (course.type === "Producto" && course.pay) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: 0, lesson: 0 },
+        });
+      }
+      if (course.type === 'Producto' && !course.pay) {
+        router.push(
+          { pathname: 'Purchase', query: { type: 'course', id: course.id } }
+        )
+      }
     }
-    if ((course.type === "Mensual") && (user.final_date < today)) {
-      router.push({
-        pathname: 'Purchase',
-        query: { type: 'subscription' }
-      });
-    }
-    if (course.type === "Producto" && course.pay) {
-      router.push({
-        pathname: 'Lesson',
-        query: { id: course.id, season: 0, lesson: 0 },
-      });
-    }
-    if (!user) {
+    else {
       router.push({ pathname: '/auth/Login' })
-    }
-    if (course.type === 'Producto' && !course.pay) {
-      router.push(
-        { pathname: 'Purchase', query: { type: 'course', id: course.id } }
-      )
     }
   }
 
