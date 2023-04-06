@@ -39,6 +39,9 @@ export const InputContain = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  input::file-selector-button {
+    display: none;
+  }
 `;
 export const Label = styled.label`
   font-size: 14px;

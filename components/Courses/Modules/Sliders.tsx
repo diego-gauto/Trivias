@@ -8,6 +8,7 @@ import CourseModal from '../../CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
 import { LOGIN_PATH } from '../../../constants/paths';
+import { useRouter } from 'next/router';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user } = props;
@@ -18,11 +19,11 @@ const Sliders = (props: ICourseData) => {
   let [counter, setCounter] = useState<any>(0);
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
+  const router = useRouter();
   const [texts, setTexts] = useState({
     title: "",
     spanTitle: "",
   })
-
   const getCourseContent = () => {
     let tempTexts: any = {
       title: "",
@@ -39,6 +40,21 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "my-courses") {
       tempTexts.title = "Tus Cursos";
       tempTexts.spanTitle = "";
+      if (user) {
+        tempCourses.forEach((course: ICourse) => {
+          if (user.final_date >= today && course.type === "Mensual") {
+            tempShowCourse.push(course);
+          }
+          if (user.user_courses.length > 0) {
+            user.user_courses.forEach((courses: IUserCourse) => {
+              if ((courses.final_date >= today) && (course.id === courses.course_id)) {
+                tempShowCourse.push(course)
+              }
+            });
+          }
+        })
+      }
+      setCourses(tempShowCourse);
       setTexts(tempTexts);
     }
     if (slideType === "all-courses") {
@@ -55,14 +71,20 @@ const Sliders = (props: ICourseData) => {
         if (course.type === "Producto") {
           tempShowCourse.push(course);
         }
-        user.user_courses.forEach((courses: IUserCourse) => {
-          if ((courses.final_date > today) && (course.id === courses.course_id)) {
-            course.pay = true;
-          }
-          else {
-            course.pay = false;
-          }
-        });
+        if (user) {
+          user.user_courses.forEach((courses: IUserCourse) => {
+            if ((courses.final_date > today) && (course.id === courses.course_id)) {
+              course.pay = true;
+            }
+            else {
+              course.pay = false;
+            }
+          });
+        }
+        else {
+          course.pay = false;
+        }
+
       })
       setCourses(tempShowCourse);
       setTexts(tempTexts);
@@ -108,7 +130,10 @@ const Sliders = (props: ICourseData) => {
     document.removeEventListener('mouseup', mouseUpHandler);
   };
   const goTo = (courseData: ICourse) => {
-
+    router.push({
+      pathname: 'Lesson',
+      query: { id: courseData.id, season: 0, lesson: 0 },
+    });
   }
   const openModal = (courseData: ICourse) => {
     if (counter < 2) {
@@ -137,7 +162,7 @@ const Sliders = (props: ICourseData) => {
                 {texts.title}<span>{texts.spanTitle}</span>
               </Title>
             </div>
-            <SlideContain className={`scroll-container` + slideNumber}>
+            <SlideContain className={`scroll-slide scroll-container` + slideNumber}>
               <div className="slide-mod" onMouseDown={mouseDownHandler}>
                 {
                   courses.map((course: ICourse, index: number) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addTeacher, deleteTeacher, getTeacher, updateTeacher } from '../../../store/actions/courseActions';
+import { addTeacher, deleteTeacher, updateProfessorImage, updateProfessorSignature, updateTeacher } from '../../../store/actions/courseActions';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import { AdminContain } from '../SideBar.styled';
@@ -11,7 +11,7 @@ import {
   Title, TitleContain
 } from '../Category/Category.styled';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
-import { createProfessorApi } from '../../api/professors';
+import { createProfessorApi, deleteProfessorApi, getProfessorApi, updateImagesfromProfessorApi, updateProfessorApi } from '../../api/professors';
 
 const Teacher = () => {
   const [newTeacher, setNewTeacher] = useState<boolean>(false);
@@ -22,12 +22,27 @@ const Teacher = () => {
   const [editSignImage, setEditSignImage] = useState<any>("");
   const [addImage, setAddImage] = useState<any>("");
   const [addSign, setAddSign] = useState<any>("");
+  const [updateTeacher, setUpdateTeacher] = useState<any>({
+    name: "",
+    about: "",
+    image: "",
+    sign: "",
+    id: 0
+  })
   const [teacher, setTeacher] = useState<any>({
     name: "",
     about: "",
-    path: "",
+    image: "",
     sign: ""
   });
+  const getImage = (file: any) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (_event) => {
+      setAddImage(reader.result)
+      setTeacher({ ...teacher, image: reader.result })
+    };
+  }
   const getSign = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -36,20 +51,12 @@ const Teacher = () => {
       setTeacher({ ...teacher, sign: reader.result })
     };
   }
-  const getImage = (file: any) => {
-    var reader = new FileReader();
-    reader.readAsDataURL(file[0]);
-    reader.onload = (_event) => {
-      setAddImage(reader.result)
-      setTeacher({ ...teacher, path: reader.result })
-    };
-  }
   const changeImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       setEditImage(reader.result)
-      setTeacher({ ...teacher, format: reader.result })
+      setUpdateTeacher({ ...updateTeacher, image: reader.result })
     };
   }
   const changeSign = (file: any) => {
@@ -57,49 +64,93 @@ const Teacher = () => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       setEditSignImage(reader.result)
-      setTeacher({ ...teacher, formatSign: reader.result })
+      setUpdateTeacher({ ...updateTeacher, sign: reader.result })
     };
   }
   const createTeacher = () => {
+    let tempImage = teacher.image;
+    let tempSign = teacher.image;
     setLoading(true);
     if (Object.keys(teacher).some(key => teacher[key] === '')) {
       alert("Complete todos los campos")
       setLoading(false);
     }
     else {
-      teacher.courses = [];
-      addTeacher(teacher).then((res) => {
-        alert("Profesor agregado con Exito")
-        getAllteachers();
-        setLoading(false);
+      teacher.image = "";
+      teacher.sign = "";
+      createProfessorApi(teacher).then((res) => {
+        teacher.id = res;
+        updateProfessorImage(tempImage, res).then((img) => {
+          console.log(img);
+          updateProfessorSignature(tempSign, res).then((sign) => {
+            teacher.image = img;
+            teacher.sign = sign;
+            updateImagesfromProfessorApi(teacher).then(() => {
+              alert("Profesor agregado con Exito")
+              getAllteachers();
+              setLoading(false);
+              delete teacher.id;
+              setTeacher({
+                name: "",
+                about: "",
+                image: "",
+                sign: ""
+              })
+            })
+          })
+        })
+
       })
+
     }
   }
   const getAllteachers = () => {
-    getTeacher().then((res) => {
+    getProfessorApi().then((res) => {
       setTeachers(res);
-      return res;
+    })
+  }
+  const changeUpdateData = (professor: any) => {
+    setEditImage("");
+    setEditSignImage("");
+    setUpdateTeacher({
+      name: professor.name,
+      about: professor.about,
+      image: professor.image,
+      sign: professor.sign,
+      id: professor.id
     })
   }
   const Delete = (val: any) => {
     if (window.confirm("Desea borrar este Profesor: " + val.name)) {
-      deleteTeacher(val).then(() => {
+      deleteProfessorApi(val).then(() => {
         getAllteachers();
       })
     }
   }
-  const update = (val: any, valFormat: any, valFormatSign: any) => {
-    let tempVal: any = {
-      format: valFormat,
-      formatSign: valFormatSign,
-      ...val
-    };
-    updateTeacher(tempVal, val.id).then(() => {
+  const update = async (val: any) => {
+    if (editImage !== "") {
+      await updateProfessorImage(updateTeacher.image, updateTeacher.id).then((res) => {
+        updateTeacher.image = res;
+      })
+    }
+    if (editSignImage !== "") {
+      await updateProfessorSignature(updateTeacher.sign, updateTeacher.id).then((res) => {
+        updateTeacher.sign = res;
+      })
+    }
+    updateProfessorApi(updateTeacher).then(() => {
       setEdit(-1);
       alert("Profesor actualizado")
       getAllteachers();
-      delete teacher.format;
-      delete teacher.formatSign;
+      setEditImage("");
+      setEditSignImage("");
+      setUpdateTeacher({
+        name: "",
+        about: "",
+        image: "",
+        sign: "",
+        id: 0
+      })
     })
   }
   useEffect(() => {
@@ -214,7 +265,7 @@ const Teacher = () => {
                                   defaultValue={val.name}
                                   placeholder={"Editar nombre de: " + val.name}
                                   onChange={(e: any) => {
-                                    teachers[i].name = e.target.value
+                                    setUpdateTeacher({ ...updateTeacher, name: e.target.value })
                                   }}
                                 />
                               </InputContain>
@@ -224,7 +275,7 @@ const Teacher = () => {
                                   defaultValue={val.about == undefined ? "Nueva descripción" : val.about}
                                   placeholder={val.about == undefined ? "Agregar descripción" : "Editar descripción: " + val.about}
                                   onChange={(e: any) => {
-                                    teachers[i].about = e.target.value
+                                    setUpdateTeacher({ ...updateTeacher, about: e.target.value })
                                   }}
                                 />
                               </InputContain>
@@ -238,7 +289,7 @@ const Teacher = () => {
                                 />
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                   {
-                                    (teachers[i].path && editImage == "") ? <img src={teachers[i].path} />
+                                    (val.image && editImage == "") ? <img src={val.image} />
                                       :
                                       <>
                                         {
@@ -258,7 +309,7 @@ const Teacher = () => {
                                 />
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                   {
-                                    (teachers[i].sign && editSignImage == "") ? <img src={teachers[i].sign} style={{ height: 40 }} />
+                                    (val.sign && editSignImage == "") ? <img src={val.sign} style={{ height: 40 }} />
                                       :
                                       <>
                                         {
@@ -271,7 +322,7 @@ const Teacher = () => {
                               <ButtonContain >
                                 <Button
                                   onClick={() => {
-                                    update(val, teacher.format, teacher.formatSign);
+                                    update(val);
                                   }}
                                 >Editar</Button>
                               </ButtonContain>
@@ -281,7 +332,7 @@ const Teacher = () => {
 
                       </EditCat>
                       <CatData>
-                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); setEditImage(""); setNewTeacher(false); setEditSignImage("") }} />
+                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); changeUpdateData(val); setNewTeacher(false) }} />
                         <CloseIcon onClick={() => {
                           Delete(val); setEdit(-1);
                         }} />

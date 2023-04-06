@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { addMaterial, deleteMaterial, getMaterial, updateMaterial } from '../../../store/actions/courseActions';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import Delete from '../Courses/Form/Delete/Delete';
@@ -11,7 +10,7 @@ import {
   FormContain, Input, InputContain, Label,
   Title, TitleContain
 } from '../Category/Category.styled';
-import { createMaterialApi } from '../../api/materials';
+import { createMaterialApi, deleteMaterialsApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
 
 
 const Materials = () => {
@@ -26,28 +25,27 @@ const Materials = () => {
       alert("Complete todos los campos")
     }
     else {
-      addMaterial(material).then((res) => {
+      createMaterialApi(material).then((res) => {
         alert("Material agregado con Exito")
         getAllMaterials();
       })
     }
   }
   const getAllMaterials = () => {
-    getMaterial().then((res) => {
+    getMaterialsApi().then((res) => {
       setMaterials(res);
-      return res;
     })
   }
   const Delete = (val: any) => {
     if (window.confirm("Desea borrar este Material: " + val.name)) {
-      deleteMaterial(val).then(() => {
+      deleteMaterialsApi(val).then(() => {
         getAllMaterials();
         // alert("Categoría: " + val.name + " eliminada con éxito")
       })
     }
   }
   const update = (val: any) => {
-    updateMaterial(val, val.id).then(() => {
+    updateMaterialApi(val).then(() => {
       alert("Material actualizado")
       getAllMaterials();
     })
@@ -118,6 +116,7 @@ const Materials = () => {
                             <InputContain style={{ width: 500 }}>
                               <Input
                                 placeholder={"Editar nombre de: " + val.name}
+                                defaultValue={val.name}
                                 onChange={(e: any) => {
                                   materials[i].name = e.target.value
                                 }}

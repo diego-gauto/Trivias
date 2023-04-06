@@ -36,6 +36,8 @@ const Courses = () => {
         setUserData(res);
         coursesAll();
       })
+    } else {
+      coursesAll();
     }
   }, [])
   // if (!loading) {

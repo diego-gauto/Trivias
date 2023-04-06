@@ -15,7 +15,6 @@ export const createMaterialApi = async (material: any) => {
   return axios
     .post("http://94.74.77.165/" + "materials/createMaterial", material)
     .then((res) => {
-      console.log(res)
       return res.data.msg
     })
     .catch((error) => {
@@ -27,7 +26,17 @@ export const updateMaterialApi = async (material: any) => {
   return axios
     .put("http://94.74.77.165/" + "materials/updateMaterial", material)
     .then((res) => {
-      console.log(res)
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const deleteMaterialsApi = async (material: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "materials/deleteMaterials", material)
+    .then((res) => {
       return res.data.msg
     })
     .catch((error) => {

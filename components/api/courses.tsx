@@ -34,7 +34,6 @@ export const updateCourseApi = async (course: any) => {
     });
 };
 export const deleteCourseApi = async (course: any) => {
-  console.log(course)
   return axios
     .delete("http://94.74.77.165/" + "courses/deleteCourse", course)
     .then((res) => {
