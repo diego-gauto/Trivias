@@ -15,8 +15,6 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh, data }
 
   useEffect(() => {
     if (data) {
-      console.log(1);
-
       checkLecture()
     }
   }, [data])

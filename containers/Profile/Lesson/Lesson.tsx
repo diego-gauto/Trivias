@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
-
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { LOGIN_PATH } from "../../../constants/paths";
-import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import {
-  addHistoryCourse,
-  getTeacher,
-  getWholeCourse,
-} from "../../../store/actions/courseActions";
-import { addUserCertificate, getPaidCourses } from "../../../store/actions/UserActions";
 import { MainContainer } from "./Lesson.styled";
 import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
 import { io } from 'socket.io-client';
-import { addCourse, getCourseApi } from "../../../components/api/lessons";
+import { addCourse, addUserHistory, getCourseApi } from "../../../components/api/lessons";
 
 
 
@@ -29,9 +20,6 @@ const Lesson = () => {
   const { id, season, lesson }: any = router.query;
   const [userData, setUserData] = useState<any>(null);
   const [currentlesson, setCurrentLesson] = useState<any>({});
-  const [currentComments, setCurrentComments] = useState<any>([]);
-  const [comments, setComments] = useState<any>([]);
-  const [certficate, setCertificate] = useState<any>(false);
   // const socket = io("http://94.74.77.165:89");
 
   // socket.io.on("error", (error) => {
@@ -65,7 +53,26 @@ const Lesson = () => {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
-        setUserData(userDataAuth.user)
+        let user = userDataAuth.user;
+        let today = new Date().getTime() / 1000;
+        if (user.final_date < today) {
+          router.push({
+            pathname: 'Purchase',
+            query: { type: 'subscription' }
+          });
+        }
+        setUserData(user);
+        getCourseApi(id).then((res) => {
+          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === id && x.final_date < today).length > 0) {
+            router.push(
+              { pathname: 'Purchase', query: { type: 'course', id: res.id } }
+            )
+          }
+          setCurrentLesson(res.seasons[season].lessons[lesson]);
+          setCourse(res);
+          history(res, user);
+          setIsLoading(false);
+        })
         setLoggedIn(true)
       } else {
         router.push(LOGIN_PATH)
@@ -75,18 +82,25 @@ const Lesson = () => {
     setLoggedIn(false)
   }
 
-  useEffect(() => {
-    getCourse();
-  }, [])
-
   const getCourse = () => {
     getCourseApi(id).then((res) => {
-      console.log(res);
-
       setCurrentLesson(res.seasons[season].lessons[lesson]);
       setCourse(res);
+      if (userData !== null) {
+        history(res, userData);
+      }
       setIsLoading(false);
     })
+  }
+
+  const history = (data: any, user: any) => {
+    let temp = {
+      courseId: data.id,
+      seasonId: data.seasons[season].id,
+      lessonId: data.seasons[season].lessons[lesson].id,
+      userId: user.user_id
+    }
+    addUserHistory(temp)
   }
 
   const handleClick = () => {

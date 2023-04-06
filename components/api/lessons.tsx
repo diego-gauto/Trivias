@@ -131,3 +131,15 @@ export const addUserCertificateApi = async (certificate: any) => {
       return error
     });
 };
+
+export const addUserHistory = async (history: any) => {
+  return axios
+    .post("http://94.74.77.165/" + `lessons/add-user-history`, history)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
