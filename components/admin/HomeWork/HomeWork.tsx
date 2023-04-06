@@ -9,6 +9,10 @@ import { AdminContain } from '../SideBar.styled';
 import { Button, Container, Download, HWContainer, Table, TitleContain } from './HomeWork.styled'
 import HomeWorkModal from './HomeWorkModal/HomeWorkModal';
 
+export class CsvData {
+  public id: any;
+  public properties: any[] = [];
+}
 
 const HomeWork = () => {
   const [show, setShow] = useState(false);
@@ -102,10 +106,70 @@ const HomeWork = () => {
     getHomeworks();
   }, [professorFilter, courseFilter])
 
+  const isValidCSVFile = (file: any) => {
+    return file.name.endsWith(".csv");
+  }
+
+  const uploadCsv = (event: any) => {
+    const reader = new FileReader()
+    const fileContent = event.target
+    reader.readAsText(fileContent.files[0])
+
+    if (!isValidCSVFile(fileContent.files[0])) { return alert("Por favor ingresa un archivo .csv."); }
+
+    reader.onload = () => {
+      let csvData: any = reader.result
+      let csvRecordsArray = csvData.split(/\r\n|\n/);
+
+
+      const headersRow = getHeaderArray(csvRecordsArray);
+      const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+
+      getJsonData(records, headersRow)
+    }
+    reader.onerror = function () {
+    };
+  }
+
+
+  const getHeaderArray = (csvRecordsArr: any) => {
+    let headers = (csvRecordsArr[0]).split(',');
+    let headerArray = [];
+    for (let j = 1; j < headers.length; j++) {
+      headerArray.push(headers[j]);
+    }
+    return headerArray;
+  }
+
+  const getDataRecordsArrayFromCSVFile = (csvRecordsArray: any, headerLength: any) => {
+    let csvArr = [];
+
+    for (let i = 1; i < csvRecordsArray.length; i++) {
+      let currentRecord = (csvRecordsArray[i]).split(',');
+      let csvRecord: any = new CsvData();
+      for (let i = 1; i < currentRecord.length; i++) {
+        csvRecord.properties.push(currentRecord[i].trim())
+      }
+      if (csvRecord.properties[0] != '') { csvArr.push(csvRecord); }
+    }
+    return csvArr;
+  }
+
+  const getJsonData = (records: any, headersRow: any) => {
+    const jsonData = records
+    const headerJson = headersRow
+    var rec = {
+      records: jsonData
+    }
+    console.log(rec.records);
+
+  }
+
   return (
     <AdminContain>
       <HWContainer>
         <Container>
+          <input type="file" onChange={(e) => { uploadCsv(e) }} />
           <TitleContain>
             <p>
               Tareas

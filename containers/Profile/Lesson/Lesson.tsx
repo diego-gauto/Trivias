@@ -55,18 +55,18 @@ const Lesson = () => {
       if (userDataAuth.user !== null) {
         let user = userDataAuth.user;
         let today = new Date().getTime() / 1000;
-        if (user.final_date < today) {
-          router.push({
-            pathname: 'Purchase',
-            query: { type: 'subscription' }
-          });
-        }
         setUserData(user);
         getCourseApi(id).then((res) => {
-          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === id && x.final_date < today).length > 0) {
+          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === id && x.final_date < today).length === 0) {
             router.push(
               { pathname: 'Purchase', query: { type: 'course', id: res.id } }
             )
+          }
+          if (res.type === 'Mensual' && user.final_date < today) {
+            router.push({
+              pathname: 'Purchase',
+              query: { type: 'subscription' }
+            });
           }
           setCurrentLesson(res.seasons[season].lessons[lesson]);
           setCourse(res);
