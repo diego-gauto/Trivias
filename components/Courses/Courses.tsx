@@ -112,6 +112,7 @@ const Courses = () => {
     } else {
       coursesAll(null);
     }
+
   }, [])
   return (
     <CoursesContain>
