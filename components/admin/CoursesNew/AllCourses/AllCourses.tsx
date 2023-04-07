@@ -177,7 +177,7 @@ const AllCourses = (props: IAllCourses) => {
       errorImage: course.image === "" ? true : false,
       errorPhrase: course.phrase === "" ? true : false,
       errorColor: course.certificate_color === "" ? true : false,
-      errorPrice: course.type === "Gratis" ? false : (course.price === 0 ? true : false),
+      errorPrice: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.price === 0 ? true : false),
       errorRating: course.rating === 0 ? true : false,
       errorReviews: course.reviews === 0 ? true : false,
       errorDuration: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.duration === 0 ? true : false),

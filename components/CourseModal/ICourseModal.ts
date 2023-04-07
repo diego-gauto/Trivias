@@ -31,7 +31,7 @@ export interface ISeasons {
 export interface ILessons {}
 
 export interface IProfessors {
-  path: string;
+  image: string;
   name: string;
   about: string;
 }

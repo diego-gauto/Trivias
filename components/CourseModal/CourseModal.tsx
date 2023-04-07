@@ -195,7 +195,7 @@ const CourseModal = (props: ICourseModal) => {
                   </div>
                 </div>
                 <div className="professor-container">
-                  <img src={course.professors?.length ? (course.professors[0].path ? course.professors[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
+                  <img src={course.professors?.length ? (course.professors[0].image ? course.professors[0].image : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">
                       {course.professors?.length > 0 ? course.professors[0].name : "Iker Robles García"}
@@ -230,7 +230,7 @@ const CourseModal = (props: ICourseModal) => {
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
                 <div className="professor-container">
-                  <img src={course.professors?.length ? (course.professors[0].path ? course.professors[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
+                  <img src={course.professors?.length ? (course.professors[0].image ? course.professors[0].image : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">
                       {

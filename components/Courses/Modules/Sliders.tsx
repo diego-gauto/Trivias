@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { LOGIN_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { user } from 'firebase-functions/v1/auth';
+import { AiOutlinePlayCircle } from 'react-icons/ai';
+import { BsPlayCircle } from 'react-icons/bs';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user } = props;
@@ -247,7 +249,13 @@ const Sliders = (props: ICourseData) => {
                                 <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
                               </ImageContent>
                               :
-                              <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                              <ImageContent>
+                                {
+                                  slideType === "continue-watching" &&
+                                  <BsPlayCircle className="play-icon" />
+                                }
+                                <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                              </ImageContent>
                           }
                           {
                             slideType === "continue-watching" &&

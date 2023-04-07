@@ -173,6 +173,14 @@ export const ImageContent = styled.div`
     left: -20px;
     z-index: 1;
   }
+  .play-icon {
+    font-size: 55px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .days-left {
     display: flex;
     position: absolute;
@@ -199,6 +207,9 @@ export const ImageContent = styled.div`
       left: 0px;
       z-index: 2;
       font-size: 12px;
+    }
+    .play-icon {
+      font-size: 40px;
     }
   }
 `;
