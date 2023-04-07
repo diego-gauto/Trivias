@@ -62,7 +62,7 @@ const Lesson = () => {
               { pathname: 'Purchase', query: { type: 'course', id: res.id } }
             )
           }
-          if (res.type === 'Mensual' && user.final_date < today) {
+          if (res.type === 'Mensual' && user.level === 0) {
             router.push({
               pathname: 'Purchase',
               query: { type: 'subscription' }

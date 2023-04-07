@@ -26,6 +26,8 @@ import ErrorModal from "../../components/Error/ErrorModal";
 import { useGoogleLogin } from "@react-oauth/google";
 import { facebookUserInfo, googleTokens, loginWithProviderApi } from "../../components/api/auth";
 import { useLogin, useFacebook } from 'react-facebook';
+import { getWholeCourses } from "../../store/actions/courseActions";
+import { addCourse } from "../../components/api/lessons";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -254,6 +256,36 @@ const Login = () => {
       setAuthLoader(false);
     }
   }
+
+  // useEffect(() => {
+  //   getWholeCourses().then((res) => {
+  //     res.forEach((element: any) => {
+  //       let tempCoures = {
+  //         title: element.courseTittle,
+  //         subtitle: element.courseSubtittle,
+  //         about: element.courseAbout,
+  //         certificate_color: element.courseCertificateColor || "naranja",
+  //         difficulty: element.courseDifficulty,
+  //         mandatory: element.courseHomeWork,
+  //         image: element.coursePath,
+  //         phrase: element.coursePhrase,
+  //         price: element.coursePrice,
+  //         duration: element.courseDuration,
+  //         rating: element.courseRating,
+  //         reviews: 0,
+  //         type: element.courseType,
+  //         sequential: element.courseHomeWork,
+  //         published: true,
+  //         categories: element.courseCategory,
+  //         materials: element.courseMaterial,
+  //         seasons: element.seasons
+  //       }
+  //       addCourse(tempCoures).then((res) => {
+  //         console.log(res);
+  //       })
+  //     });
+  //   })
+  // }, [])
 
   return (
 
