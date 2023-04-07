@@ -73,6 +73,7 @@ const Purchase = () => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         let cards = userDataAuth.user.payment_methods;
+
         cards.forEach((element: any) => {
           if (element.default) {
             let tempCard = {
@@ -136,6 +137,8 @@ const Purchase = () => {
         }
       })
     }
+    console.log(payment)
+    console.log(defaultCard.paymentMethod)
     if (payment && defaultCard.paymentMethod) {
       FinishPayment();
     }
@@ -414,7 +417,7 @@ const Purchase = () => {
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option value={idC} selected={x.default}>{x.card.last4}</option>
+                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
                       )
                     })}
                   </select>}

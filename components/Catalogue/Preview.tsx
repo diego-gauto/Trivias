@@ -97,7 +97,7 @@ const Preview = () => {
 
   const coursesAll = () => {
     getCoursesApi().then((res) => {
-      setCourses(res.data.data);
+      setCourses(res);
       setIsLoading(false);
     })
   }

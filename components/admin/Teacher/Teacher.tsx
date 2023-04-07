@@ -12,6 +12,8 @@ import {
 } from '../Category/Category.styled';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { createProfessorApi, deleteProfessorApi, getProfessorApi, updateImagesfromProfessorApi, updateProfessorApi } from '../../api/professors';
+import { IoMdExit } from 'react-icons/io';
+import { useRouter } from 'next/router';
 
 const Teacher = () => {
   const [newTeacher, setNewTeacher] = useState<boolean>(false);
@@ -22,6 +24,7 @@ const Teacher = () => {
   const [editSignImage, setEditSignImage] = useState<any>("");
   const [addImage, setAddImage] = useState<any>("");
   const [addSign, setAddSign] = useState<any>("");
+  const router = useRouter();
   const [updateTeacher, setUpdateTeacher] = useState<any>({
     name: "",
     about: "",
@@ -35,6 +38,11 @@ const Teacher = () => {
     image: "",
     sign: ""
   });
+  const returnToCourses = () => {
+    router.push({
+      pathname: "/admin/Courses",
+    })
+  }
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -159,6 +167,7 @@ const Teacher = () => {
 
   return (
     <AdminContain>
+      <IoMdExit className="icon-exit" onClick={returnToCourses} />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewTeacher(!newTeacher); setEdit(-1); setEditImage("") }}>

@@ -35,6 +35,9 @@ const SideBar = () => {
           setIsSuperAdmin(true);
         }
       }
+      else {
+        router.push({ pathname: "/" })
+      }
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Courses") {
         setIndex(0)
       } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Landing") {
@@ -115,7 +118,6 @@ const SideBar = () => {
       }
     }
   }, [userData])
-
   return (
     <Container>
       <div className="tab" style={{ whiteSpace: "pre" }}>

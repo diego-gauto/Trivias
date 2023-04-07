@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import { ICourse, ICourseData, IUserCourse } from './ISliders';
+import { ICourse, ICourseData, IUserCourse, IUserHistory, IUserProgress } from './ISliders';
 import { Image } from "react-bootstrap";
-import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain } from './Sliders.styled';
+import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, ImageContent } from './Sliders.styled';
 import CourseModal from '../../CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
 import { LOGIN_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
+import { user } from 'firebase-functions/v1/auth';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user } = props;
@@ -34,6 +35,48 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "continue-watching") {
       tempTexts.title = "Continua Viendo";
       tempTexts.spanTitle = "";
+      if (user) {
+        if (user.user_history.length > 0) {
+          user.user_history.forEach((courses: IUserHistory) => {
+            tempCourses.forEach((course: ICourse) => {
+              if (course.id === courses.course_id) {
+                course.seasons.forEach((season: any, index: number) => {
+                  if (season.id === courses.season_id) {
+                    course.seasonId = index;
+                    season.lessons.forEach((lesson: any, index: number) => {
+                      if (lesson.id === courses.lesson_id) {
+                        course.lessonId = index;
+                      }
+                    });
+                  }
+                });
+              }
+              if ((course.id === courses.course_id)) {
+                if (course.type === "Producto") {
+                  user.user_courses.forEach((userCourse: IUserCourse) => {
+                    if (userCourse.final_date >= today) {
+                      user.user_progress.forEach((progress: IUserProgress) => {
+                        if (courses.lesson_id === progress.lessons_id) {
+                          course.lessonProgress = progress.time;
+                        }
+                      });
+                      tempShowCourse.push(course)
+                    }
+                  })
+                }
+                if (course.type === "Mensual" && user.final_date >= today) {
+                  user.user_progress.forEach((progress: IUserProgress) => {
+                    if (courses.lesson_id === progress.lessons_id) {
+                      course.lessonProgress = progress.time;
+                    }
+                  });
+                  tempShowCourse.push(course)
+                }
+              }
+            })
+          });
+        }
+      }
       setCourses(tempShowCourse);
       setTexts(tempTexts);
     }
@@ -42,18 +85,20 @@ const Sliders = (props: ICourseData) => {
       tempTexts.spanTitle = "";
       if (user) {
         tempCourses.forEach((course: ICourse) => {
-          if (user.final_date >= today && course.type === "Mensual") {
-            tempShowCourse.push(course);
-          }
+          // if (user.final_date >= today && course.type === "Mensual") {
+          //   tempShowCourse.push(course);
+          // }
           if (user.user_courses.length > 0) {
             user.user_courses.forEach((courses: IUserCourse) => {
               if ((courses.final_date >= today) && (course.id === courses.course_id)) {
+                course.days = Math.round((courses.final_date - today) / 86400)
                 tempShowCourse.push(course)
               }
             });
           }
         })
       }
+      console.log(tempShowCourse);
       setCourses(tempShowCourse);
       setTexts(tempTexts);
     }
@@ -130,10 +175,18 @@ const Sliders = (props: ICourseData) => {
     document.removeEventListener('mouseup', mouseUpHandler);
   };
   const goTo = (courseData: ICourse) => {
-    router.push({
-      pathname: 'Lesson',
-      query: { id: courseData.id, season: 0, lesson: 0 },
-    });
+    if (slideType === "continue-watching") {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: courseData.id, season: courseData.seasonId, lesson: courseData.seasonId },
+      });
+    }
+    if (slideType === "my-courses") {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: courseData.id, season: 0, lesson: 0 },
+      });
+    }
   }
   const openModal = (courseData: ICourse) => {
     if (counter < 2) {
@@ -181,11 +234,27 @@ const Sliders = (props: ICourseData) => {
                           level={course.difficulty}
                           style={{ width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}
                         >
-                          <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                          {
+                            slideType === "my-courses" ?
+                              <ImageContent>
+                                {
+                                  course.type === "Producto" &&
+                                  <>
+                                    <i className="band" />
+                                    <div className="days-left">{course.days} días</div>
+                                  </>
+                                }
+
+                                <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                              </ImageContent>
+                              :
+                              <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                          }
                           {
                             slideType === "continue-watching" &&
-                            <Progress style={course.progress == null ? { 'width': 0 } : { 'width': `calc(${course.progress}% - 20px)` }} />
+                            <Progress style={course.lessonProgress == null ? { 'width': 0 } : { 'width': `calc(${course.lessonProgress}% - 20px)` }} />
                           }
+
                           <p className="title">{course.title}</p>
                           <p className="sub">de <span>{course.professors[0]?.name}</span></p>
                           <p className="modules">{course.seasons.length} Módulos</p>
