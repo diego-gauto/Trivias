@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
+import { addPastUsers } from '../../api/auth';
 import { getHomeworksApi } from '../../api/homeworks';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
@@ -155,14 +156,32 @@ const HomeWork = () => {
     return csvArr;
   }
 
-  const getJsonData = (records: any, headersRow: any) => {
+  const getJsonData = async (records: any, headersRow: any) => {
     const jsonData = records
     const headerJson = headersRow
-    var rec = {
-      records: jsonData
-    }
-    console.log(rec.records);
+    // await Promise.all(jsonData.map(async (x: any, index: number) => {
+    //   let rec = {
+    //     records: x
+    //   }
+    //   await addPastUsers(rec);
+    // }))
 
+    let count = 0;
+    let plus = 50;
+
+    let arr = new Array(800);
+    console.log(arr);
+
+    await Promise.all(jsonData.slice(0, 800).map(async (x: any, index: number) => {
+      let rec = {
+        records: jsonData.slice(count, (count + 50 - 1))
+      }
+      setTimeout(async () => {
+        await addPastUsers(rec).then((res) => {
+          count += 50;
+        })
+      }, 2000);
+    }))
   }
 
   return (

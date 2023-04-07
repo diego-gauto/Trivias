@@ -40,6 +40,7 @@ const Courses = () => {
       coursesAll();
     }
   }, [])
+
   // if (!loading) {
   //   return (
   //     <GonvarLoader>
