@@ -111,26 +111,27 @@ const HomeWork = () => {
     return file.name.endsWith(".csv");
   }
 
-  const uploadCsv = (event: any) => {
-    const reader = new FileReader()
-    const fileContent = event.target
-    reader.readAsText(fileContent.files[0])
+  // const uploadCsv = (event: any) => {
+  //   const reader = new FileReader()
+  //   const fileContent = event.target
+  //   reader.readAsText(fileContent.files[0])
 
-    if (!isValidCSVFile(fileContent.files[0])) { return alert("Por favor ingresa un archivo .csv."); }
+  //   if (!isValidCSVFile(fileContent.files[0])) { return alert("Por favor ingresa un archivo .csv."); }
 
-    reader.onload = () => {
-      let csvData: any = reader.result
-      let csvRecordsArray = csvData.split(/\r\n|\n/);
+  //   reader.onload = () => {
+  //     let csvData: any = reader.result
+  //     let csvRecordsArray = csvData.split(/\r\n|\n/);
 
 
-      const headersRow = getHeaderArray(csvRecordsArray);
-      const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-
-      getJsonData(records, headersRow)
-    }
-    reader.onerror = function () {
-    };
-  }
+  //     const headersRow = getHeaderArray(csvRecordsArray);
+  //     const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+  //     setHeadersRow(headersRow)
+  //     setRecords(records)
+  //     // getJsonData(records, headersRow)
+  //   }
+  //   reader.onerror = function () {
+  //   };
+  // }
 
 
   const getHeaderArray = (csvRecordsArr: any) => {
@@ -156,39 +157,46 @@ const HomeWork = () => {
     return csvArr;
   }
 
-  const getJsonData = async (records: any, headersRow: any) => {
-    const jsonData = records
-    const headerJson = headersRow
-    // await Promise.all(jsonData.map(async (x: any, index: number) => {
-    //   let rec = {
-    //     records: x
-    //   }
-    //   await addPastUsers(rec);
-    // }))
+  // const getJsonData = async (records: any, headersRow: any) => {
+  //   const jsonData = records
+  //   const headerJson = headersRow
+  //   // await Promise.all(jsonData.map(async (x: any, index: number) => {
+  //   //   let rec = {
+  //   //     records: x
+  //   //   }
+  //   //   await addPastUsers(rec);
+  //   // }))
+  //   let arr = new Array(800);
+  //   console.log(countdown);
+  //   let rec = {
+  //     records: jsonData.slice((countdown - 1) * 1, (countdown * 1))
+  //   }
+  //   await addPastUsers(rec).then((res) => {
+  //   })
 
-    let count = 0;
-    let plus = 50;
+  // }
+  // const [countdown, setCountdown] = useState(1);
+  // const [headersRow, setHeadersRow] = useState<any>();
+  // const [records, setRecords] = useState<any>(null);
 
-    let arr = new Array(800);
-    console.log(arr);
-
-    await Promise.all(jsonData.slice(0, 800).map(async (x: any, index: number) => {
-      let rec = {
-        records: jsonData.slice(count, (count + 50 - 1))
-      }
-      setTimeout(async () => {
-        await addPastUsers(rec).then((res) => {
-          count += 50;
-        })
-      }, 2000);
-    }))
-  }
+  // useEffect(() => {
+  //   let timeout: any;
+  //   if (records) {
+  //     if (countdown <= 2000) {
+  //       timeout = setTimeout(() => {
+  //         setCountdown(countdown + 1);
+  //         getJsonData(records, headersRow)
+  //       }, 50);
+  //       return () => clearTimeout(timeout);
+  //     }
+  //   }
+  // }, [records, countdown]);
 
   return (
     <AdminContain>
       <HWContainer>
         <Container>
-          <input type="file" onChange={(e) => { uploadCsv(e) }} />
+          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
           <TitleContain>
             <p>
               Tareas
