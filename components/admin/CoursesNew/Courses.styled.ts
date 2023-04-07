@@ -177,6 +177,8 @@ export const SelectOption = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
+    max-height: 200px;
+    overflow: auto;
     top: 32px;
     left: 0;
     width: 100%;
@@ -184,6 +186,14 @@ export const SelectOption = styled.div`
     z-index: 2;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    ::-webkit-scrollbar {
+      background: white;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      border-radius: 10px;
+    }
     font-weight: 600;
     .map-options {
       display: flex;

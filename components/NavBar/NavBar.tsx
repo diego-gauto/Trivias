@@ -101,7 +101,7 @@ const NavBar = () => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         setUserData(userDataAuth.user);
-        if (userDataAuth.user.role === 'admin' || 'superAdmin') {
+        if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
           setIsAdmin(true);
         }
         setLoggedIn(true);

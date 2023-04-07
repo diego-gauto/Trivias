@@ -158,3 +158,47 @@ export const PurpleButton = styled.button`
     padding-inline: 20px;
   }
 `;
+export const ImageContent = styled.div`
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  .band {
+    background-image: url(../images/band.png);
+    background-repeat: no-repeat;
+    width: 140px;
+    height: 110px;
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    z-index: 1;
+  }
+  .days-left {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    font-family: "Montserrat", sans serif;
+    transform: rotate(-40deg);
+    color: white;
+    top: 25px;
+    left: 15px;
+    z-index: 2;
+  }
+  @media (max-width: 1023px) {
+    height: auto;
+    .band {
+      background-image: none;
+      top: -33px;
+      left: 0;
+      width: 27px;
+      rotate: 45deg;
+      background: #6717cd;
+    }
+    .days-left {
+      top: 8px;
+      left: 0px;
+      z-index: 2;
+      font-size: 12px;
+    }
+  }
+`;

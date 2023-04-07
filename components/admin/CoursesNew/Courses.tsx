@@ -193,7 +193,7 @@ const Courses = () => {
           updateCourseImageFromApi(course).then(() => {
             getCoursesApi().then((res) => {
               setLoader(false);
-              setCourses(res.data.data);
+              setCourses(res);
             });
           })
         })
@@ -224,7 +224,7 @@ const Courses = () => {
       setCategories(cats)
     })
     getCoursesApi().then((res) => {
-      setCourses(res.data.data);
+      setCourses(res);
     });
   }, [])
   return (

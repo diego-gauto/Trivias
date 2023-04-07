@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
+import { IoMdExit } from 'react-icons/io';
 import { createCategoryApi, deleteCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
@@ -11,9 +13,15 @@ const Category = () => {
   const [newCategory, setNewCategory] = useState<boolean>(false);
   const [edit, setEdit] = useState<number>();
   const [categories, setCategories] = useState<any>([]);
+  const router = useRouter();
   const [category, setCategory] = useState<any>({
     name: ""
   });
+  const returnToCourses = () => {
+    router.push({
+      pathname: "/admin/Courses",
+    })
+  }
   const createCategory = () => {
     if (Object.keys(category).some(key => category[key] === '')) {
       alert("Complete todos los campos")
@@ -49,6 +57,7 @@ const Category = () => {
 
   return (
     <AdminContain>
+      <IoMdExit className="icon-exit" onClick={returnToCourses} />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewCategory(!newCategory) }}>

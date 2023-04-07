@@ -4,7 +4,7 @@ export const CoursesContain = styled.div`
   display: flex;
   flex-direction: Column;
   width: 100%;
-  gap: 40px;
+  gap: 20px;
   background: #ede7f2;
   @font-face {
     font-family: Montserrat;
@@ -57,8 +57,7 @@ export const Container = styled.div`
   width: 100%;
   justify-content: center;
   position: relative;
-  .skeleton-product {
-    background: grey;
+  .video-display {
     width: 100%;
     position: relative;
     display: initial;
@@ -79,6 +78,9 @@ export const Container = styled.div`
           }
         }
       }
+    }
+    .skeleton-product {
+      background: grey;
     }
     .text-container {
       position: absolute;

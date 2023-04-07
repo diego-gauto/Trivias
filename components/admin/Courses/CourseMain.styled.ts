@@ -5,11 +5,12 @@ export const CourseFormContain = styled.div`
   flex-direction: column;
   gap: 30px;
   padding: 30px;
+  margin-top: 10px;
   width: 100%;
 `;
 export const Title = styled.h1`
   font-size: 36px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const ButtonContain = styled.div`
@@ -19,14 +20,14 @@ export const ButtonContain = styled.div`
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
-  background: #6717CD;
+  background: #6717cd;
   border-radius: 30px;
   color: white;
   border: none;
-  &:hover{
+  &:hover {
     background: #5b02cc;
   }
 `;
@@ -47,55 +48,55 @@ export const IconContain = styled.div`
 export const InputContain2 = styled.div`
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
   gap: 20px;
 `;
 export const Label = styled.label`
   font-size: 14px;
-  color: #6717CD;
-  font-family: 'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   width: 100%;
-  border:1px solid #6717CD;
-  border-radius:20px;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
 `;
 export const InputIcon = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
   width: 100%;
-  border:1px solid #6717CD;
-  border-radius:20px;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
 `;
 export const InputBig = styled.textarea`
   font-size: 12px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-align: justify;
   padding-block: 10px;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   padding-inline: 20px;
-  border:1px solid #6717CD;
+  border: 1px solid #6717cd;
   border-radius: 10px;
   overflow: hidden;
   resize: none;
-  :focus{
-    outline: 1px solid #8E2DE2;
+  :focus {
+    outline: 1px solid #8e2de2;
   }
-::placeholder{
-}
+  ::placeholder {
+  }
 `;
 export const Folder = styled.i`
   position: absolute;

@@ -104,7 +104,7 @@ const Homepage = () => {
   // }, [])
   const coursesAll = (user: any) => {
     getCoursesApi().then((res) => {
-      let tempCourses = res.data.data;
+      let tempCourses = res;
       let gonvarPlusCourses = [];
       let nailsMaster = tempCourses;
       let alineacionCert = tempCourses;

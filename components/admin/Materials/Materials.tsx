@@ -11,15 +11,23 @@ import {
   Title, TitleContain
 } from '../Category/Category.styled';
 import { createMaterialApi, deleteMaterialsApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
+import { useRouter } from 'next/router';
+import { IoMdExit } from 'react-icons/io';
 
 
 const Materials = () => {
   const [newMaterial, setNewMaterial] = useState<boolean>(false);
   const [edit, setEdit] = useState<number>();
   const [materials, setMaterials] = useState<any>([]);
+  const router = useRouter();
   const [material, setMaterial] = useState<any>({
     name: ""
   });
+  const returnToCourses = () => {
+    router.push({
+      pathname: "/admin/Courses",
+    })
+  }
   const createMaterial = () => {
     if (Object.keys(material).some(key => material[key] === '')) {
       alert("Complete todos los campos")
@@ -56,6 +64,7 @@ const Materials = () => {
 
   return (
     <AdminContain>
+      <IoMdExit className="icon-exit" onClick={returnToCourses} />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewMaterial(!newMaterial) }}>
