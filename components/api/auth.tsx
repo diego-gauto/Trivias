@@ -63,3 +63,15 @@ export const addPastUsers = async (user: any) => {
     });
 };
 
+export const updatePastUser = async (user: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "auth/register-past-user", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+

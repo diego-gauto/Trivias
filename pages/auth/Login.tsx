@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../firebase/firebaseConfig";
 import {
   LoaderContain,
   LoaderImage,
@@ -13,18 +10,15 @@ import {
   LoginBackground,
   Error,
 } from "../../screens/Login.styled";
-import { signUpWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../hooks/useAuth";
-import { IMembership } from "../../store/types/AuthActionTypes";
-import { IStripeUserData } from "../../interfaces/IStripeUserData";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
 import { useGoogleLogin } from "@react-oauth/google";
-import { facebookUserInfo, googleTokens, loginWithProviderApi } from "../../components/api/auth";
+import { facebookUserInfo, googleTokens, loginWithProviderApi, updatePastUser } from "../../components/api/auth";
 import { useLogin, useFacebook } from 'react-facebook';
 import { getWholeCourses } from "../../store/actions/courseActions";
 import { addCourse } from "../../components/api/lessons";
@@ -109,6 +103,12 @@ const Login = () => {
     };
     loginWithProviderApi(signUpData.credentials).then((res) => {
       if (res[0]) {
+        if (res[0].past_user === 'si') {
+          setPastUser(res[0]);
+          setPastUserScreen(true);
+          setAuthLoader(false);
+          return
+        }
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
           localStorage.setItem('email', signUpData.credentials.email);
           window.location.href = '/';
@@ -133,41 +133,20 @@ const Login = () => {
         setShow(true);
       }
     })
-    // if (redirectURL == "/auth/RegisterPastUser") {
-    //   setPastUserScreen(true);
-    //   getPastUser(formData.email).then((res) => {
-    //     setPastUser(res[0]);
-    //   }).then(() => { setAuthLoader(false); })
-    // }
   }
   const onSubmit2: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
-    const getStripeUserData = httpsCallable<{ customerEmail: string }, IStripeUserData | null>(functions, "getStripeUserData");
-    const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
-    const signUpData: { credentials: object; membership?: IMembership } = {
-      credentials: {
-        name: pastUser.firstName,
-        lastName: pastUser.lastName,
-        email: pastUser.email,
-        password: formData.password,
-        phoneInput: "+52" + pastUser.whatsapp,
-      },
-    };
-    if (!!stripeUserData) {
-      signUpData.membership = {
-        finalDate: stripeUserData.current_period_end,
-        level: 1,
-        method: MEMBERSHIP_METHOD_DEFAULT,
-        paymentMethod: stripeUserData.paymentMethods.map((pm) => pm.id),
-        // @ts-expect-error
-        planId: stripeUserData.plan.id,
-        planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
-        startDate: stripeUserData.current_period_start,
-      }
+    let past_user = {
+      password: formData.password,
+      provider: "web",
+      userId: pastUser.id
     }
-    const redirectURL = await signUpWithCreds(signUpData, stripeUserData?.paymentMethods);
-    window.location.href = redirectURL;
+    updatePastUser(past_user).then((res) => {
+      localStorage.setItem('email', pastUser.email);
+      window.location.href = "/";
+    })
   }
+
   const [showForgot, setShowForgot] = useState(false);
 
   useEffect(() => {
@@ -196,6 +175,19 @@ const Login = () => {
         }
         loginWithProviderApi(user).then((res) => {
           if (res[0]) {
+            if (res[0].past_user === 'si') {
+              let past_user = {
+                password: "",
+                provider: "google",
+                userId: res[0].id
+              }
+              updatePastUser(past_user).then((respone) => {
+                localStorage.setItem('email', res[0].email);
+                window.location.href = "/";
+              })
+              setAuthLoader(false);
+              return
+            }
             if (res[0].provider !== 'google') {
               setErrorMsg('El correo existe con otra cuenta!');
               setError(true);
@@ -234,7 +226,20 @@ const Login = () => {
         }
         loginWithProviderApi(user).then((res) => {
           if (res[0]) {
-            if (res[0].provider !== 'google') {
+            if (res[0].past_user === 'si') {
+              let past_user = {
+                password: "",
+                provider: "facebook",
+                userId: res[0].id
+              }
+              updatePastUser(past_user).then((respone) => {
+                localStorage.setItem('email', res[0].email);
+                window.location.href = "/";
+              })
+              setAuthLoader(false);
+              return
+            }
+            if (res[0].provider !== 'facebook') {
               setErrorMsg('El correo existe con otra cuenta!');
               setError(true);
               setAuthLoader(false);
@@ -397,6 +402,7 @@ const Login = () => {
                               value={pastUser.email}
                               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                               {...register("email")}
+                              disabled={pastUserScreen}
                             />
                           </div>
                           {
