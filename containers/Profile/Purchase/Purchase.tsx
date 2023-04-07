@@ -17,7 +17,7 @@ import {
 import ModalError from "./Modal1/ModalError";
 import ErrorModal from "../../../components/Error/ErrorModal";
 import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, getCourseForCheckoutApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
-import { updateMembership } from "../../../components/api/users";
+import { getUserApi, updateMembership } from "../../../components/api/users";
 import { retrieveCoupons } from "../../../components/api/admin";
 
 const Purchase = () => {
@@ -68,12 +68,11 @@ const Purchase = () => {
     }
   }, [])
 
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        let cards = userDataAuth.user.payment_methods;
-
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        guardCheckout(res);
+        let cards = res.payment_methods;
         cards.forEach((element: any) => {
           if (element.default) {
             let tempCard = {
@@ -83,24 +82,20 @@ const Purchase = () => {
             setDefaultCard({ ...tempCard });
           }
         });
-        setUserData(userDataAuth.user);
-        setCards(userDataAuth.user.payment_methods);
-        guardCheckout(userDataAuth.user);
+        setUserData(res);
+        setCards(res.payment_methods);
         setLoggedIn(true);
         setIsLoading(false);
-      } else {
-        window.location.href = "/auth/Login";
-        setLoggedIn(false)
-      }
-    }, [])
-
-  } catch (error) {
-    setLoggedIn(false);
-  }
+      })
+    } else {
+      window.location.href = "/auth/Login";
+      setLoggedIn(false)
+    }
+  }, [])
 
   const guardCheckout = (userData: any) => {
     let today = new Date().getTime() / 1000;
-    if (router.query.type == "subscription" && userData.final_date > today) {
+    if (router.query.type == "subscription" && userData.level === 1) {
       window.location.href = "/Preview";
     }
   }
