@@ -258,8 +258,8 @@ const Login = () => {
   }
 
   // useEffect(() => {
-  //   getWholeCourses().then((res) => {
-  //     res.forEach((element: any) => {
+  //   getWholeCourses().then(async (res) => {
+  //     await Promise.all(res.map(async (element: any) => {
   //       let tempCoures = {
   //         title: element.courseTittle,
   //         subtitle: element.courseSubtittle,
@@ -280,10 +280,10 @@ const Login = () => {
   //         materials: element.courseMaterial,
   //         seasons: element.seasons
   //       }
-  //       addCourse(tempCoures).then((res) => {
+  //       await addCourse(tempCoures).then((res) => {
   //         console.log(res);
   //       })
-  //     });
+  //     }))
   //   })
   // }, [])
 

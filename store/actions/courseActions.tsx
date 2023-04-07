@@ -128,7 +128,7 @@ export const getWholeCourses = async () => {
     const docRefSeasons = query(collection(db, 'courses', course.id, "seasons"), orderBy('season'));
     const querySnapshotSeasons = await getDocs(docRefSeasons);
     querySnapshotSeasons.forEach((season: any) => {
-      course.seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+      course.seasons.push({ seasons: season.data().season, name: season.data().name, lessons: [], id: season.id })
     });
     await Promise.all(course.seasons.map(async (season: any) => {
       const docRefLesson = query(collection(db, 'courses', course?.id, "seasons", season.id, "lessons"), orderBy('number'));
