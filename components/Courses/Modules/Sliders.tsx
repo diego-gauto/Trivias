@@ -98,7 +98,6 @@ const Sliders = (props: ICourseData) => {
           }
         })
       }
-      console.log(tempShowCourse);
       setCourses(tempShowCourse);
       setTexts(tempTexts);
     }
