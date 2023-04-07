@@ -64,7 +64,7 @@ const Sliders = (props: ICourseData) => {
                     }
                   })
                 }
-                if (course.type === "Mensual" && user.final_date >= today) {
+                if (course.type === "Mensual" && user.level === 1) {
                   user.user_progress.forEach((progress: IUserProgress) => {
                     if (courses.lesson_id === progress.lessons_id) {
                       course.lessonProgress = progress.time;
@@ -85,7 +85,7 @@ const Sliders = (props: ICourseData) => {
       tempTexts.spanTitle = "";
       if (user) {
         tempCourses.forEach((course: ICourse) => {
-          // if (user.final_date >= today && course.type === "Mensual") {
+          // if (user.level === 1 && course.type === "Mensual") {
           //   tempShowCourse.push(course);
           // }
           if (user.user_courses.length > 0) {
@@ -270,12 +270,14 @@ const Sliders = (props: ICourseData) => {
                 }
               </div>
             </SlideContain>
+
             <div className="line"></div>
+
             {
               slideType === "monthly-courses" &&
               <ButtonContain>
                 {
-                  (user && user.final_date < today) &&
+                  (user && user.level === 0) &&
                   <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
                     <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                       <PurpleButton>

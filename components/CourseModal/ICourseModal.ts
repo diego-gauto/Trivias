@@ -21,6 +21,7 @@ export interface ICourseModal {
     materials: [IMaterialData];
   };
   user: {
+    level: number;
     final_date: number;
   };
 }

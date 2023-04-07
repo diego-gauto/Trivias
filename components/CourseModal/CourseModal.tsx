@@ -50,13 +50,13 @@ const CourseModal = (props: ICourseModal) => {
   }
   const goTo = () => {
     if (user) {
-      if ((course.type === "Mensual") && (user.final_date >= today)) {
+      if ((course.type === "Mensual") && (user.level === 1)) {
         router.push({
           pathname: 'Lesson',
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
-      if ((course.type === "Mensual") && (user.final_date < today)) {
+      if ((course.type === "Mensual") && (user.level === 0)) {
         router.push({
           pathname: 'Purchase',
           query: { type: 'subscription' }

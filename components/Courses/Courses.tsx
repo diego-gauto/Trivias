@@ -108,6 +108,7 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         coursesAll(res);
+        console.log(res);
       })
     } else {
       coursesAll(null);

@@ -5,6 +5,7 @@ export interface ICourseData {
   allCourses: [];
   user: {
     final_date: number;
+    level: number;
     user_courses: [IUserCourse];
     user_history: [IUserHistory];
     user_progress: [IUserProgress];
