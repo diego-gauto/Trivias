@@ -113,7 +113,7 @@ const Homepage = () => {
         return course.type === "Mensual"
       })
       nailsMaster = tempCourses.filter((course: any) => {
-        if (course.id === 122) {
+        if (course.id === 30) {
           course.lessons = [];
           if (user) {
             user.user_courses.forEach((courses: any) => {
@@ -137,10 +137,10 @@ const Homepage = () => {
           });
         }
         course.totalDuration = hms(course.totalDuration) && 0
-        return course.id === 122
+        return course.id === 30
       })
       alineacionCert = tempCourses.filter((course: any) => {
-        if (course.id === 96) {
+        if (course.id === 45) {
           course.lessons = [];
           if (user) {
             user.user_courses.forEach((courses: any) => {
@@ -164,7 +164,7 @@ const Homepage = () => {
           });
         }
         course.totalDuration = hms(course.totalDuration) && 0
-        return course.id === 96
+        return course.id === 45
       })
       setCourseGonvarPlus(gonvarPlusCourses);
       setCourseNailsData(nailsMaster[0]);
