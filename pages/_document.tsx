@@ -14,6 +14,8 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
           <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+          {/* <!--Google tag (gtag.js)>
+          <script async src="https://www.google"></script> */}
         </Head>
         <body>
           <Main />

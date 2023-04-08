@@ -162,28 +162,29 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       <div className="first-text">
         <div className="main-text">
           <p >
-            {
-              (reward == 0 || reward == 1) && <>Siguiente<br />recompensa            <br /></>
+            Recompensas <br /><span>Proximamente</span>
+            {/* {
+              (reward === 0 || reward === 1) && <>Siguiente<br />recompensa            <br /></>
             }
             {
-              reward == 0 ?
+              reward === 0 ?
                 <span>{nextLevel_format} puntos</span>
                 :
-                reward == 1 ?
+                reward === 1 ?
                   <span>
                     {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin recompensa"}
                   </span>
                   : <></>
             }
             {
-              reward == 2 &&
+              reward === 2 &&
               <>
                 <span style={{ color: "#0057e2" }}>
                   {
                     nextCertificate
                       ?
                       (
-                        nextCertificate.lessonsLeft == 1
+                        nextCertificate.lessonsLeft === 1
                           ? "Estás a " + nextCertificate.lessonsLeft + " lección"
                           : "Estás a " + nextCertificate.lessonsLeft + " lecciones"
                       )
@@ -197,7 +198,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                 }
 
               </>
-            }
+            } */}
           </p>
         </div>
         <div className="responsive-picture">
@@ -209,14 +210,14 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                   fill="none"
                   d="M60,130 Q 200,0 0,-200" />
                 {
-                  reward == 0 &&
+                  reward === 0 &&
                   <text>
                     <textPath href="#MyPath" fill="#3f1168"
                       style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
                   </text>
                 }
                 {
-                  (reward == 1) &&
+                  (reward === 1) &&
                   <text>
                     <textPath href="#MyPath" fill="#3f1168"
                       style={{ fontSize: 14, fontFamily: "Montserrat" }}>Puntaje actual</textPath>
@@ -226,9 +227,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               </svg>
             </ProfileText>
             <ProfileText
-              style={reward == 0
+              style={reward === 0
                 ? { bottom: -54, right: -122, transform: "rotate(-5deg)" }
-                : reward == 1 ? timeLevel == 0
+                : reward === 1 ? timeLevel === 0
                   ? { bottom: -67, right: -116, transform: "rotate(1deg)" }
                   : { bottom: -27, right: -131, transform: "rotate(-13deg)" }
                   : {}

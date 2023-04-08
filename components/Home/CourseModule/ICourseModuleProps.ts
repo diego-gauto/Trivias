@@ -5,5 +5,6 @@ export interface ICourseModuleProps {
   loggedIn: boolean;
   user: {
     final_date: number;
+    level: number;
   };
 }

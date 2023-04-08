@@ -18,6 +18,7 @@ export interface ICourse {
   documentID: string;
   uid: string;
   user: {
+    level: number;
     final_date: number;
   };
   // the course about
@@ -37,7 +38,7 @@ export interface ISeasons {
 export interface ILessons {}
 
 export interface IProfessors {
-  path: string;
+  image: string;
   name: string;
   about: string;
 }

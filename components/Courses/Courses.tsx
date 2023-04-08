@@ -37,35 +37,49 @@ const Courses = () => {
       setCourses(res);
       let courseforVideo: any = JSON.parse(JSON.stringify(res));
       let courseForModal: any = [];
-      if (user && user.user_history.length > 0) {
-        courseForModal = res.filter((course: ICourses) => {
-          return course.id === user.user_history[0].course_id
-        })
+      if (user) {
         courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
-          return course.id === user.user_history[0].course_id
-        })
-        courseforVideo[0].seasons = courseforVideo[0].seasons.filter((season: ISeasons, index: number) => {
-          if (season.id === user.user_history[0].season_id) {
-            setSeasonIndex(index);
-          }
-          return season.id === user.user_history[0].season_id
-        })
-        courseforVideo[0].seasons[0].lessons = courseforVideo[0].seasons[0].lessons.filter((lesson: ILessons, index: number) => {
-          if (lesson.id === user.user_history[0].lesson_id) {
-            setLessonIndex(index);
-          }
-          return lesson.id === user.user_history[0].lesson_id
+          return course.id === 13
         })
       }
       else {
-        let latestId = Math.max(...res.map((val: any) => val.id));
-        courseforVideo = courseforVideo.filter((course: ICourses) => { return course.id === latestId })
-        courseForModal = courseforVideo;
-        setSeasonIndex(0);
-        setLessonIndex(0);
+        courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
+          return course.id === 35
+        })
       }
-      setCourseForModal(courseForModal[0]);
+
       setVideoCourse(courseforVideo[0]);
+      // LA LOGICA COMENTADA ES POR SI ALGUN DIA PIDEN HISTORIAL DEL ULTIMO CURSO VISTO 
+
+      // if (user && user.user_history.length > 0) {
+      //   courseForModal = res.filter((course: ICourses) => {
+      //     return course.id === user.user_history[0].course_id
+      //   })
+      //   courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
+      //     return course.id === user.user_history[0].course_id
+      //   })
+      //   courseforVideo[0].seasons = courseforVideo[0].seasons.filter((season: ISeasons, index: number) => {
+      //     if (season.id === user.user_history[0].season_id) {
+      //       setSeasonIndex(index);
+      //     }
+      //     return season.id === user.user_history[0].season_id
+      //   })
+      //   courseforVideo[0].seasons[0].lessons = courseforVideo[0].seasons[0].lessons.filter((lesson: ILessons, index: number) => {
+      //     if (lesson.id === user.user_history[0].lesson_id) {
+      //       setLessonIndex(index);
+      //     }
+      //     return lesson.id === user.user_history[0].lesson_id
+      //   })
+      // }
+      // else {
+      //   let latestId = Math.max(...res.map((val: any) => val.id));
+      //   courseforVideo = courseforVideo.filter((course: ICourses) => { return course.id === latestId })
+      //   courseForModal = courseforVideo;
+      //   setSeasonIndex(0);
+      // //   setLessonIndex(0);
+      // // }
+      // setCourseForModal(courseForModal[0]);
+      // setVideoCourse(courseforVideo[0]);
       setLoading(false);
     })
   }
@@ -167,7 +181,7 @@ const Courses = () => {
           </div>
         </Container>
       }
-      <CourseModal show={show} setShow={setShow} course={courseForModal} user={userData} />
+      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
       {/* SLIDERS */}
       <div className="module-contain">
         {
