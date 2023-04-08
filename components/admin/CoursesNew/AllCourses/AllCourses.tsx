@@ -177,7 +177,7 @@ const AllCourses = (props: IAllCourses) => {
       errorImage: course.image === "" ? true : false,
       errorPhrase: course.phrase === "" ? true : false,
       errorColor: course.certificate_color === "" ? true : false,
-      errorPrice: course.type === "Gratis" ? false : (course.price === 0 ? true : false),
+      errorPrice: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.price === 0 ? true : false),
       errorRating: course.rating === 0 ? true : false,
       errorReviews: course.reviews === 0 ? true : false,
       errorDuration: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.duration === 0 ? true : false),
@@ -226,7 +226,7 @@ const AllCourses = (props: IAllCourses) => {
   return (
     <div className="edit-course" id={`course-${index}`}>
       <div className="title-contain" onClick={() => { openCourse(index), moveTo(index) }}>
-        <p className="title">{title} {type === "Monthly" && <img src={GonvarImg} style={{ width: 30 }} />}</p>
+        <p className="title">{title} {type === "Mensual" && <img src={GonvarImg} style={{ width: 30 }} />}</p>
         {
           index === openCourseEdit
             ? <RiArrowDropUpLine className="arrow" />

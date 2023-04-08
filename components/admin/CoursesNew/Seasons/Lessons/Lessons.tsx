@@ -59,7 +59,8 @@ const Lessons = () => {
   });
   const [homeWorkData, sethomeWorkData] = useState<any>({
     title: "",
-    about: ""
+    about: "",
+    points: 0,
   })
   const [quiz, setQuiz] = useState<any>({
     title: "",
@@ -315,6 +316,7 @@ const Lessons = () => {
             title: res.lesson_homeworks.title,
             about: res.lesson_homeworks.about,
             lessons_id: res.lesson_homeworks.lessons_id,
+            points: res.lesson_homeworks.points,
           })
         }
         if (res.quizzes) {
@@ -572,40 +574,61 @@ const Lessons = () => {
           }
           {
             lesson.homework &&
-            <div className="rows">
-              <div className="input-contain">
-                <label className="input-label">
-                  Título de la Tarea
-                </label>
-                <input
-                  placeholder="Tarea 23: Intro a uñas francesas"
-                  className="input-create"
-                  defaultValue={homeWorkData.title}
-                  onChange={(e: any) => {
-                    sethomeWorkData({
-                      ...homeWorkData, title: e.target.value
-                    })
-                  }}
-                />
+            <>
+              <div className="rows">
+                <div className="input-contain">
+                  <label className="input-label">
+                    Título de la Tarea
+                  </label>
+                  <input
+                    placeholder="Tarea 23: Intro a uñas francesas"
+                    className="input-create"
+                    defaultValue={homeWorkData.title}
+                    onChange={(e: any) => {
+                      sethomeWorkData({
+                        ...homeWorkData, title: e.target.value
+                      })
+                    }}
+                  />
+                </div>
+                <div className="input-contain" style={{ width: "64%" }}>
+                  <label className="input-label">
+                    Descripción de la Tarea
+                  </label>
+                  <ReactQuill placeholder="Lorem ipsum dolor sit amet, consectetur 
+          adipiscing elit. Pharetra, cursus sapien ac magna. 
+          Consectetur amet eu tincidunt quis. Non habitasse viverra 
+          malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
+          adipiscing morbi mattis eget." id="quill" theme="snow" className="quill-lesson"
+                    formats={formats} modules={modules}
+                    defaultValue={homeWorkData.about}
+                    onChange={(content, delta, source, editor) => {
+                      setQuill(editor.getText()); sethomeWorkData({
+                        ...homeWorkData, about: content
+                      })
+                    }} />
+                </div>
               </div>
-              <div className="input-contain" style={{ width: "64%" }}>
-                <label className="input-label">
-                  Descripción de la Tarea
-                </label>
-                <ReactQuill placeholder="Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit. Pharetra, cursus sapien ac magna. 
-            Consectetur amet eu tincidunt quis. Non habitasse viverra 
-            malesuada facilisi vel nunc. Mattis euismod nisi, id bibendum 
-            adipiscing morbi mattis eget." id="quill" theme="snow" className="quill-lesson"
-                  formats={formats} modules={modules}
-                  defaultValue={homeWorkData.about}
-                  onChange={(content, delta, source, editor) => {
-                    setQuill(editor.getText()); sethomeWorkData({
-                      ...homeWorkData, about: content
-                    })
-                  }} />
+              <div className="rows">
+                <div className="input-contain">
+                  <label className="input-label">
+                    Puntos de la Tarea
+                  </label>
+                  <input
+                    placeholder="50"
+                    className="input-create"
+                    type="number"
+                    defaultValue={homeWorkData.points}
+                    onChange={(e: any) => {
+                      sethomeWorkData({
+                        ...homeWorkData, points: parseInt(e.target.value)
+                      })
+                    }}
+                  />
+                </div>
               </div>
-            </div>
+            </>
+
           }
 
           {
