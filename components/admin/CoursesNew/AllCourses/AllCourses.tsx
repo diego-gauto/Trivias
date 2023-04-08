@@ -226,7 +226,7 @@ const AllCourses = (props: IAllCourses) => {
   return (
     <div className="edit-course" id={`course-${index}`}>
       <div className="title-contain" onClick={() => { openCourse(index), moveTo(index) }}>
-        <p className="title">{title} {type === "Monthly" && <img src={GonvarImg} style={{ width: 30 }} />}</p>
+        <p className="title">{title} {type === "Mensual" && <img src={GonvarImg} style={{ width: 30 }} />}</p>
         {
           index === openCourseEdit
             ? <RiArrowDropUpLine className="arrow" />

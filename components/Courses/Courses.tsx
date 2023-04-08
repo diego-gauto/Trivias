@@ -34,6 +34,7 @@ const Courses = () => {
   });
   const coursesAll = (user: any) => {
     getCoursesApi().then((res) => {
+      console.log(res);
       setCourses(res);
       let courseforVideo: any = JSON.parse(JSON.stringify(res));
       let courseForModal: any = [];

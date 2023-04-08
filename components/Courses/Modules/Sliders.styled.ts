@@ -213,3 +213,24 @@ export const ImageContent = styled.div`
     }
   }
 `;
+export const Arrows = styled.div<{ side: string }>`
+  display: flex;
+  cursor: pointer;
+  position: absolute;
+  font-size: 45px;
+  top: 30%;
+  z-index: 10000;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+  ${(props) =>
+    props.side === "left" &&
+    css`
+      left: 10px;
+    `}
+  ${(props) =>
+    props.side === "right" &&
+    css`
+      right: 10px;
+    `}
+`;

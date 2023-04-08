@@ -3,14 +3,13 @@ import { Container } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { ICourse, ICourseData, IUserCourse, IUserHistory, IUserProgress } from './ISliders';
 import { Image } from "react-bootstrap";
-import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, ImageContent } from './Sliders.styled';
+import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, ImageContent, Arrows } from './Sliders.styled';
 import CourseModal from '../../CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
 import { LOGIN_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
-import { user } from 'firebase-functions/v1/auth';
-import { AiOutlinePlayCircle } from 'react-icons/ai';
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
 
 const Sliders = (props: ICourseData) => {
@@ -148,9 +147,9 @@ const Sliders = (props: ICourseData) => {
     }
   }
   let pos = { top: 0, left: 0, x: 0, y: 0 };
-  let slider: any;
+  let slider: any = document.querySelector(`.scroll-container${slideNumber}`) as HTMLElement;
   const mouseDownHandler = function (e: any) {
-    slider = document.querySelector(`.scroll-container${slideNumber}`) as HTMLElement;
+
     e.preventDefault();
     pos = {
       // The current scroll
@@ -175,6 +174,13 @@ const Sliders = (props: ICourseData) => {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
+  const [countdown, setCountdown] = useState(0);
+  const pushToRight = () => {
+    slider.scrollLeft += innerWidth;
+  }
+  const pushToLeft = () => {
+    slider.scrollLeft += -innerWidth;
+  }
   const goTo = (courseData: ICourse) => {
     if (slideType === "continue-watching") {
       router.push({
@@ -204,13 +210,33 @@ const Sliders = (props: ICourseData) => {
       setLoading(false);
     }, 300 * slideNumber);
   }, [allCourses])
+  //   useEffect(() => {
+  //   let timeout: any;
+  //     if (countdown <= 2000) {
+  //       timeout = setTimeout(() => {
+  //         setCountdown(countdown + 1);
+  //       }, 50);
+  //       return () => clearTimeout(timeout);
+  //     }
 
+  // }, [pushToRight, pushToLeft]);
   return (
     <>
       {
         courses.length > 0 &&
         <Container fluid style={{ overflow: "hidden", padding: 0, margin: 0 }}>
           <div className={loading ? "skeleton-product" : "reveal-arrows"}>
+            {
+              courses.length >= 5 &&
+              <div className="arrows">
+                <Arrows side="left">
+                  <MdArrowBackIosNew onClick={pushToLeft} />
+                </Arrows>
+                <Arrows side="right">
+                  <MdArrowForwardIos onClick={pushToRight} />
+                </Arrows>
+              </div>
+            }
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
                 {texts.title}<span>{texts.spanTitle}</span>
