@@ -4,5 +4,6 @@ export interface ICourseModuleContainerProps {
   loggedIn: boolean;
   user: {
     final_date: number;
+    level: number;
   };
 }
