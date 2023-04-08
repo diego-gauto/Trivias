@@ -44,3 +44,39 @@ export const updateMembership = async (user: any) => {
       return error
     });
 };
+
+export const getPastUsers = async () => {
+  return axios
+    .get("http://94.74.77.165/" + "users/past-users")
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateScorePastUser = async (progress: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "users/update-past-user", progress)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addPastUserProgress = async (progress: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "users/update-past-user-progress", progress)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
