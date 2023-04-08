@@ -175,6 +175,7 @@ const Sliders = (props: ICourseData) => {
     document.removeEventListener('mouseup', mouseUpHandler);
   };
   const [countdown, setCountdown] = useState(0);
+  const [start, setStart] = useState("");
   const pushToRight = () => {
     slider.scrollLeft += innerWidth;
   }
@@ -210,16 +211,38 @@ const Sliders = (props: ICourseData) => {
       setLoading(false);
     }, 300 * slideNumber);
   }, [allCourses])
-  //   useEffect(() => {
-  //   let timeout: any;
-  //     if (countdown <= 2000) {
-  //       timeout = setTimeout(() => {
-  //         setCountdown(countdown + 1);
-  //       }, 50);
-  //       return () => clearTimeout(timeout);
-  //     }
+  useEffect(() => {
+    let timeout: any;
+    if (start === "left") {
+      if (countdown <= innerWidth) {
+        timeout = setTimeout(() => {
+          setCountdown(countdown + 5);
+          --slider.scrollLeft;
+          --slider.scrollLeft;
+          --slider.scrollLeft;
+          --slider.scrollLeft;
+          --slider.scrollLeft;
 
-  // }, [pushToRight, pushToLeft]);
+        }, 10);
+        return () => clearTimeout(timeout);
+      }
+    }
+    if (start === "right") {
+      if (countdown <= innerWidth) {
+        timeout = setTimeout(() => {
+          setCountdown(countdown + 5);
+          ++slider.scrollLeft;
+          ++slider.scrollLeft;
+          ++slider.scrollLeft;
+          ++slider.scrollLeft;
+          ++slider.scrollLeft;
+        }, 10);
+        return () => clearTimeout(timeout);
+      }
+    }
+
+  }, [start, countdown]);
+
   return (
     <>
       {
@@ -230,10 +253,10 @@ const Sliders = (props: ICourseData) => {
               courses.length >= 5 &&
               <div className="arrows">
                 <Arrows side="left">
-                  <MdArrowBackIosNew onClick={pushToLeft} />
+                  <MdArrowBackIosNew onClick={() => { setStart("left"); setCountdown(0) }} />
                 </Arrows>
                 <Arrows side="right">
-                  <MdArrowForwardIos onClick={pushToRight} />
+                  <MdArrowForwardIos onClick={() => { setStart("right"); setCountdown(0) }} />
                 </Arrows>
               </div>
             }
