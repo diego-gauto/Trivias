@@ -195,6 +195,7 @@ const HomeWork = () => {
         return () => clearTimeout(timeout);
       }
     }
+    return
   }, [records, countdown]);
 
   useEffect(() => {

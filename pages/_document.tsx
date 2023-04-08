@@ -17,11 +17,11 @@ class MyDocument extends Document {
           {/* <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+{  window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-8N2X594YBK');
+  gtag('config', 'G-8N2X594YBK');}
 </script> */}
         </Head>
         <body>
