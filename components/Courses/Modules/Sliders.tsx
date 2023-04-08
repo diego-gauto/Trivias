@@ -16,6 +16,8 @@ const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user } = props;
   const [show, setShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [countdown, setCountdown] = useState(0);
+  const [start, setStart] = useState("");
   let today = new Date().getTime() / 1000;
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let [counter, setCounter] = useState<any>(0);
@@ -174,14 +176,6 @@ const Sliders = (props: ICourseData) => {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
   };
-  const [countdown, setCountdown] = useState(0);
-  const [start, setStart] = useState("");
-  const pushToRight = () => {
-    slider.scrollLeft += innerWidth;
-  }
-  const pushToLeft = () => {
-    slider.scrollLeft += -innerWidth;
-  }
   const goTo = (courseData: ICourse) => {
     if (slideType === "continue-watching") {
       router.push({
@@ -240,7 +234,7 @@ const Sliders = (props: ICourseData) => {
         return () => clearTimeout(timeout);
       }
     }
-
+    return
   }, [start, countdown]);
 
   return (

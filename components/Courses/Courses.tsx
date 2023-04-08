@@ -34,7 +34,6 @@ const Courses = () => {
   });
   const coursesAll = (user: any) => {
     getCoursesApi().then((res) => {
-      console.log(res);
       setCourses(res);
       let courseforVideo: any = JSON.parse(JSON.stringify(res));
       let courseForModal: any = [];
@@ -109,7 +108,6 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         coursesAll(res);
-        console.log(res);
       })
     } else {
       coursesAll(null);

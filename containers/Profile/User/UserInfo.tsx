@@ -157,7 +157,6 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     tempDate = Math.floor(tempDate);
     return tempDate;
   }
-
   return (
     <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition} coordinates={starCoordinates}>
       <div className="first-text">
@@ -243,12 +242,16 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                   <textPath href="#scorePath" fill="#3f1168"
                     style={{ fontSize: 14, fontWeight: 700, fontFamily: "Montserrat" }}>
                     {
-                      reward == 0 && `${points_format} puntos`
+                      reward === 0 && `${points_format} puntos`
                     }
                     {
-                      (reward == 1 && timeLevel) ?
-                        `${timeLevel}${timeLevel > 1 ? " meses" : " mes"}`
-                        : "Sin Suscripción"
+                      reward === 1 &&
+                      <>
+                        {
+                          timeLevel > 0 ? (timeLevel > 1 ? timeLevel + " meses" : timeLevel + " mes")
+                            : "Sin Suscripción"
+                        }
+                      </>
                     }
                   </textPath>
                 </text>

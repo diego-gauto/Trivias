@@ -115,27 +115,27 @@ const HomeWork = () => {
     return file.name.endsWith(".csv");
   }
 
-  // const uploadCsv = (event: any) => {
-  //   const reader = new FileReader()
-  //   const fileContent = event.target
-  //   reader.readAsText(fileContent.files[0])
+  const uploadCsv = (event: any) => {
+    const reader = new FileReader()
+    const fileContent = event.target
+    reader.readAsText(fileContent.files[0])
 
-  //   if (!isValidCSVFile(fileContent.files[0])) { return alert("Por favor ingresa un archivo .csv."); }
+    if (!isValidCSVFile(fileContent.files[0])) { return alert("Por favor ingresa un archivo .csv."); }
 
-  //   reader.onload = () => {
-  //     let csvData: any = reader.result
-  //     let csvRecordsArray = csvData.split(/\r\n|\n/);
+    reader.onload = () => {
+      let csvData: any = reader.result
+      let csvRecordsArray = csvData.split(/\r\n|\n/);
 
 
-  //     const headersRow = getHeaderArray(csvRecordsArray);
-  //     const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-  //     setHeadersRow(headersRow)
-  //     setRecords(records)
-  //     // getJsonData(records, headersRow)
-  //   }
-  //   reader.onerror = function () {
-  //   };
-  // }
+      const headersRow = getHeaderArray(csvRecordsArray);
+      const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+      setHeadersRow(headersRow)
+      setRecords(records)
+      // getJsonData(records, headersRow)
+    }
+    reader.onerror = function () {
+    };
+  }
 
 
   const getHeaderArray = (csvRecordsArr: any) => {
@@ -161,40 +161,41 @@ const HomeWork = () => {
     return csvArr;
   }
 
-  // const getJsonData = async (records: any, headersRow: any) => {
-  //   const jsonData = records
-  //   const headerJson = headersRow
-  //   // await Promise.all(jsonData.map(async (x: any, index: number) => {
-  //   //   let rec = {
-  //   //     records: x
-  //   //   }
-  //   //   await addPastUsers(rec);
-  //   // }))
-  //   let arr = new Array(800);
-  //   console.log(countdown);
-  //   let rec = {
-  //     records: jsonData.slice((countdown - 1) * 1, (countdown * 1))
-  //   }
-  //   await addPastUsers(rec).then((res) => {
-  //   })
+  const getJsonData = async (records: any, headersRow: any) => {
+    const jsonData = records
+    const headerJson = headersRow
+    // await Promise.all(jsonData.map(async (x: any, index: number) => {
+    //   let rec = {
+    //     records: x
+    //   }
+    //   await addPastUsers(rec);
+    // }))
+    let arr = new Array(800);
+    console.log(countdown);
+    let rec = {
+      records: jsonData.slice((countdown - 1) * 1, (countdown * 1))
+    }
+    await addPastUsers(rec).then((res) => {
+    })
 
-  // }
-  // const [countdown, setCountdown] = useState(1);
-  // const [headersRow, setHeadersRow] = useState<any>();
-  // const [records, setRecords] = useState<any>(null);
+  }
 
-  // useEffect(() => {
-  //   let timeout: any;
-  //   if (records) {
-  //     if (countdown <= 2000) {
-  //       timeout = setTimeout(() => {
-  //         setCountdown(countdown + 1);
-  //         getJsonData(records, headersRow)
-  //       }, 50);
-  //       return () => clearTimeout(timeout);
-  //     }
-  //   }
-  // }, [records, countdown]);
+  const [countdown, setCountdown] = useState(1);
+  const [headersRow, setHeadersRow] = useState<any>();
+  const [records, setRecords] = useState<any>(null);
+
+  useEffect(() => {
+    let timeout: any;
+    if (records) {
+      if (countdown <= 4003) {
+        timeout = setTimeout(() => {
+          setCountdown(countdown + 1);
+          getJsonData(records, headersRow)
+        }, 150);
+        return () => clearTimeout(timeout);
+      }
+    }
+  }, [records, countdown]);
 
   useEffect(() => {
     getPastUsers().then((res) => {
@@ -202,42 +203,46 @@ const HomeWork = () => {
     })
   }, [])
 
-  const addProgress = () => {
+  const addProgress = async () => {
     console.log(pastUsers);
-    let completed: any = []
-    pastUsers.forEach((user: any) => {
-      completed.forEach(async (element: any) => {
-        if (user.email === element.email) {
-          let tempUser = {
-            email: user.email,
-            score: element.score,
-            userId: user.id
-          }
-          await updateScorePastUser(tempUser);
-          if (element.viewed === 100) {
-            await getCourseApi(element.courseId).then((course) => {
-              course.lessons.forEach(async (lesson: any) => {
-                let tempLesson = {
-                  lessonId: lesson.id,
-                  userId: user.id
-                }
-                await addPastUserProgress(tempLesson).then((res) => {
-                  console.log(res);
-                });
-              });
-            })
-          }
-        }
-      });
-    });
+    console.log(records);
+    await Promise.all(
+      pastUsers.map(async (user: any) => {
+        await Promise.all(
+          records.map(async (element: any) => {
+            if (user.email === element.properties[0]) {
+              let tempUser = {
+                email: user.email,
+                score: +element.properties[2],
+                userId: user.id
+              }
+              // console.log(tempUser);
+              await updateScorePastUser(tempUser);
+              // await getCourseApi(+element.properties[1]).then((course) => {
+              //   course.lessons.forEach(async (lesson: any) => {
+              //     let tempLesson = {
+              //       lessonId: lesson.id,
+              //       userId: user.id
+              //     }
+              //     await addPastUserProgress(tempLesson).then((res) => {
+              //       console.log(res);
+              //     });
+              //   });
+              // })
+            }
+          })
+        )
+
+      })
+    )
   }
 
   return (
     <AdminContain>
       <HWContainer>
         <Container>
-          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
-          <button onClick={addProgress}>add</button>
+          <input type="file" onChange={(e) => { uploadCsv(e) }} />
+          {/* <button onClick={addProgress}>add</button> */}
           <TitleContain>
             <p>
               Tareas

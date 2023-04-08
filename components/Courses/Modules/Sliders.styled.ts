@@ -42,19 +42,29 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
     font-size: 12px;
     margin: 0;
     ${(props) =>
-      (props.level == "Muy Fácil" || props.level == "Fácil") &&
+      props.level == "Muy Fácil" &&
       css`
         color: #6678f8;
       `}
     ${(props) =>
-      (props.level == "Avanzado" || props.level == "Máster") &&
+      props.level == "Fácil" &&
       css`
-        color: #ef1155;
+        color: #6678f8;
       `}
-    ${(props) =>
+      ${(props) =>
       props.level == "Intermedio" &&
       css`
         color: #12a071;
+      `}
+    ${(props) =>
+      props.level == "Avanzado" &&
+      css`
+        color: #ef1155;
+      `}
+      ${(props) =>
+      props.level == "Máster" &&
+      css`
+        color: #ef1155;
       `}
   }
   .price {
@@ -77,19 +87,29 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
       letter-spacing: 2px;
     }
     ${(props) =>
-      (props.level == "Muy Fácil" || props.level == "Fácil") &&
+      props.level == "Muy Fácil" &&
       css`
         color: #6678f8;
       `}
     ${(props) =>
-      (props.level == "Avanzado" || props.level == "Máster") &&
+      props.level == "Fácil" &&
       css`
-        color: #ef1155;
+        color: #6678f8;
       `}
-    ${(props) =>
+      ${(props) =>
       props.level == "Intermedio" &&
       css`
         color: #12a071;
+      `}
+    ${(props) =>
+      props.level == "Avanzado" &&
+      css`
+        color: #ef1155;
+      `}
+      ${(props) =>
+      props.level == "Máster" &&
+      css`
+        color: #ef1155;
       `}
   }
   &:hover {
