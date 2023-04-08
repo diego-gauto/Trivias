@@ -4,6 +4,7 @@ export interface ICourse {
   course: [];
   user: {
     final_date: number;
+    level: number;
   };
   loggedIn: boolean;
 }
