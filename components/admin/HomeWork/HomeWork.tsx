@@ -4,6 +4,8 @@ import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/acti
 import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
 import { addPastUsers } from '../../api/auth';
 import { getHomeworksApi } from '../../api/homeworks';
+import { getCourseApi } from '../../api/lessons';
+import { addPastUserProgress, getPastUsers, updateScorePastUser } from '../../api/users';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import { AdminContain } from '../SideBar.styled';
@@ -26,6 +28,8 @@ const HomeWork = () => {
   const [courseSelect, setCourseSelect] = useState(false)
   const [professorFilter, setProfessorFilter] = useState<any>("");
   const [courseFilter, setCourseFilter] = useState<any>("");
+
+  const [pastUsers, setPastUsers] = useState<any>([]);
 
   const openCourseSelect = () => {
     setOpenSelect(false);
@@ -192,11 +196,48 @@ const HomeWork = () => {
   //   }
   // }, [records, countdown]);
 
+  useEffect(() => {
+    getPastUsers().then((res) => {
+      setPastUsers(res.data.past);
+    })
+  }, [])
+
+  const addProgress = () => {
+    console.log(pastUsers);
+    let completed: any = []
+    pastUsers.forEach((user: any) => {
+      completed.forEach(async (element: any) => {
+        if (user.email === element.email) {
+          let tempUser = {
+            email: user.email,
+            score: element.score,
+            userId: user.id
+          }
+          await updateScorePastUser(tempUser);
+          if (element.viewed === 100) {
+            await getCourseApi(element.courseId).then((course) => {
+              course.lessons.forEach(async (lesson: any) => {
+                let tempLesson = {
+                  lessonId: lesson.id,
+                  userId: user.id
+                }
+                await addPastUserProgress(tempLesson).then((res) => {
+                  console.log(res);
+                });
+              });
+            })
+          }
+        }
+      });
+    });
+  }
+
   return (
     <AdminContain>
       <HWContainer>
         <Container>
           {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
+          <button onClick={addProgress}>add</button>
           <TitleContain>
             <p>
               Tareas
