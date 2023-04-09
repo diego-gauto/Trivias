@@ -274,7 +274,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
               </div>
               <div className='line'></div>
               {data.homework === 1 ? <div className='upload-container'>
-                <p>a. Módulo {parseInt(season) + 1} - Lección {parseInt(lesson) + 1}</p>
                 <p>Tarea: <span>{data.lesson_homeworks.title}</span></p>
                 {status == "pending" && <div className='homework'>
                   <BsFileArrowUp></BsFileArrowUp>
