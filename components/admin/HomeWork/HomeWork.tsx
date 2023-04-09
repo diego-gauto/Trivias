@@ -187,11 +187,11 @@ const HomeWork = () => {
   useEffect(() => {
     let timeout: any;
     if (records) {
-      if (countdown <= 4003) {
+      if (countdown <= 5003) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 1);
           getJsonData(records, headersRow)
-        }, 150);
+        }, 60);
         return () => clearTimeout(timeout);
       }
     }
