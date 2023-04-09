@@ -19,6 +19,10 @@ const Lesson = () => {
   const { id, season, lesson }: any = router.query;
   const [userData, setUserData] = useState<any>(null);
   const [currentlesson, setCurrentLesson] = useState<any>({});
+  const [nextLesson, setnextLesson] = useState<any>({
+    lessonIndex: 0,
+    seasonIndex: 0,
+  });
   // const socket = io("http://94.74.77.165:89");
 
   // socket.io.on("error", (error) => {
@@ -56,7 +60,6 @@ const Lesson = () => {
         let today = new Date().getTime() / 1000;
         setUserData(user);
         getCourseApi(id).then((res) => {
-          console.log(res);
 
           if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) {
             router.push(
@@ -87,13 +90,32 @@ const Lesson = () => {
     getCourseApi(id).then((res) => {
       setCurrentLesson(res.seasons[season].lessons[lesson]);
       setCourse(res);
+      if (course.seasons[season].lessons[+lesson + 1]) {
+        setnextLesson({
+          lessonIndex: +lesson + 1,
+          seasonIndex: +season,
+        });
+      }
+      else {
+        if (course.seasons[+season + 1]) {
+          setnextLesson({
+            lessonIndex: 0,
+            seasonIndex: +season + 1,
+          });
+        }
+        else {
+          setnextLesson({
+            lessonIndex: 0,
+            seasonIndex: 0,
+          });
+        }
+      }
       if (userData !== null) {
         history(res, userData);
       }
       setIsLoading(false);
     })
   }
-
   const history = (data: any, user: any) => {
     let temp = {
       courseId: data.id,
@@ -117,7 +139,7 @@ const Lesson = () => {
       </Background> :
         <MainContainer>
           <div className="left-side">
-            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
+            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} />
             <Modules handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
           </div>
           <Courses menu={true} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />

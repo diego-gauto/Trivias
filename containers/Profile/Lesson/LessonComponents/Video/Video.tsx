@@ -9,10 +9,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
 import { duration } from 'html2canvas/dist/types/css/property-descriptors/duration';
+import { useRouter } from 'next/router';
 
 declare let Hls: any
 
-const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) => {
+const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
@@ -24,7 +25,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
   const [count, setCount] = useState(0);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [quiz, setQuiz] = useState<any>([]);
-
+  const router = useRouter();
   const finishedLesson = () => {
     if (!data.users.includes(user.user_id)) {
       let tempLesson = {
@@ -33,7 +34,21 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
       }
       addUserToLessonApi(tempLesson).then(() => {
         handleComplete();
+        if (course.sequential === 0) {
+          router.push({
+            pathname: 'Lesson',
+            query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+          })
+        }
       })
+    }
+    else {
+      if (course.sequential === 0) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+        })
+      }
     }
   }
 
@@ -70,10 +85,14 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
   const handleViewed = () => {
     if (user) {
       let index = data.progress.findIndex((x: any) => x.user_id == user.user_id)
-      if (index == -1) {
+      if (data.progress[index].time >= 99) {
         return 0
       } else {
-        return data.progress[index].seconds
+        if (index == -1) {
+          return 0
+        } else {
+          return data.progress[index].seconds
+        }
       }
     } else {
       return 0
@@ -160,6 +179,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete }: any) 
       muted={false}
       controls
       width="100%" height="auto"
+      style={{ position: "relative" }}
       onEnded={finishedLesson}
       onDuration={(duration) => {
         handleDuration(duration);

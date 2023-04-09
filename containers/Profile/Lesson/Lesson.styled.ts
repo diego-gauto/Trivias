@@ -11,6 +11,15 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 70%;
+    .video-contain {
+      position: relative;
+      .next-episode {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        z-index: 10;
+      }
+    }
     .absolute {
       @media (max-width: 1450px) {
         height: auto !important;
