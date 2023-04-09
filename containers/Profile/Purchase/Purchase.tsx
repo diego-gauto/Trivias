@@ -73,15 +73,6 @@ const Purchase = () => {
       getUserApi(localStorage.getItem("email")).then((res) => {
         guardCheckout(res);
         let cards = res.payment_methods;
-        cards.forEach((element: any) => {
-          if (element.default) {
-            let tempCard = {
-              paymentMethod: element.id,
-              status: false,
-            }
-            setDefaultCard({ ...tempCard });
-          }
-        });
         setUserData(res);
         setCards(res.payment_methods);
         setLoggedIn(true);
@@ -100,10 +91,30 @@ const Purchase = () => {
     }
   }
 
+  useEffect(() => {
+    if (payment) {
+      if (cards.length > 0) {
+        cards.forEach((element: any) => {
+          if (element.default) {
+            let tempCard = {
+              paymentMethod: element.id,
+              status: false,
+              exp_month: element.card.exp_month,
+              exp_year: element.card.exp_year
+            }
+            setDefaultCard({ ...tempCard });
+          }
+        });
+      }
+    }
+  }, [payment])
+
   const setDefault = (idx: any) => {
     let tempCard = {
       paymentMethod: cards[idx].id,
       status: false,
+      exp_month: cards[idx].card.exp_month,
+      exp_year: cards[idx].card.exp_year
     }
     setDefaultCard(tempCard);
   }
@@ -132,8 +143,6 @@ const Purchase = () => {
         }
       })
     }
-    console.log(payment)
-    console.log(defaultCard.paymentMethod)
     if (payment && defaultCard.paymentMethod) {
       FinishPayment();
     }
@@ -431,7 +440,7 @@ const Purchase = () => {
                   <div style={{ "display": "flex", "justifyContent": "space-between" }}>
                     <div className="form-row">
                       <label>Fecha de expiración</label>
-                      <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                      {!payment ? <div style={{ "display": "flex", "justifyContent": "space-between" }}>
                         <select className="short" onChange={(e) => {
                           setCard((card: any) => ({ ...card, exp_month: e.target.value }));
                         }}>
@@ -467,11 +476,15 @@ const Purchase = () => {
                           <option value="33">33</option>
                           <option value="34">34</option>
                         </select>
-                      </div>
+                      </div> :
+                        <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                          <input className="short" disabled={payment} value={defaultCard.exp_month} />
+                          <input className="short" disabled={payment} value={defaultCard.exp_year} />
+                        </div>}
                     </div>
                     <div className="form-row">
                       <label>CVV</label>
-                      <input className="short" type="password" placeholder="∗∗∗" maxLength={4} onChange={(e) => {
+                      <input className="short" type="password" disabled={payment} placeholder="∗∗∗" maxLength={4} onChange={(e) => {
                         setCard((card: any) => ({ ...card, cvc: e.target.value }));
                       }} />
                     </div>
