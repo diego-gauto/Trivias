@@ -14,10 +14,10 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh, data }
   }
 
   useEffect(() => {
-    if (data) {
+    if (data || course) {
       checkLecture()
     }
-  }, [data])
+  }, [data, course])
 
   return (
     <Space wrap>
