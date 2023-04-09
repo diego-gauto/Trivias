@@ -143,6 +143,7 @@ const Courses = () => {
                   playing={true}
                   muted={true}
                   loop={true}
+                  playsinline
                   width='100%'
                   height='100%'
                 />
