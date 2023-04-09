@@ -5,7 +5,7 @@ export const getUserApi = async (email: any) => {
     email
   }
   return axios
-    .post("http://94.74.77.165/" + "users/user-info", user)
+    .post("https://gonvar.inowu.dev/" + "users/user-info", user)
     .then((res) => {
       return {
         ...res.data.user[0],
@@ -72,6 +72,18 @@ export const updateScorePastUser = async (progress: any) => {
 export const addPastUserProgress = async (progress: any) => {
   return axios
     .post("http://94.74.77.165/" + "users/update-past-user-progress", progress)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const cancelStripe = async (sub: any) => {
+  return axios
+    .post("http://94.74.77.165/" + "users/cancel-stripe", sub)
     .then((res) => {
       return res;
     })

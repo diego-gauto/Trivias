@@ -17,8 +17,8 @@ const Modules = ({ data, user, season, lesson, teacherCreds, courseIds, handleCl
           position === 3
             ? <HomeWork handleClick={handleClick} value={position} setValue={setPosition} data={data} user={user} season={season} lesson={lesson} courseIds={courseIds} /> :
             position === 4
-        // ? <Comments value={position} setValue={setPosition} data={data} user={user} />
-        // : <About value={position} setValue={setPosition} user={user} />
+              ? <Comments value={position} setValue={setPosition} data={data} user={user} />
+              : <About value={position} setValue={setPosition} data={data} teacherCreds={teacherCreds} />
       }
     </MainContainer>
   )

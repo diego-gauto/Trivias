@@ -288,6 +288,7 @@ const User = () => {
           timePrize={timePrize}
           timePrizeSize={timePrizeSize}
           nextCertificate={nextCertificate}
+          handleClick={handleClick}
         />
         <ThirdBox>
           {/* Third Container */}

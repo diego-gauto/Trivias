@@ -10,7 +10,7 @@ import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
 const Comments = ({ value, setValue, user, data, comments }: any) => {
 
-  const [currentComments, setCurrentComments] = useState<any>(comments);
+  const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
   const [answer, setAnswer] = useState("");
   const [responses, setResponses] = useState<any>([]);
@@ -52,18 +52,22 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
     }
   }
   useEffect(() => {
-    if (comments) {
-      setCurrentComments(comments);
+    if (data) {
+      getComments()
     }
-  }, [comments])
+  }, [data])
 
-  useEffect(() => {
-    let tempResponses: any = [];
-    comments.forEach((element: any) => {
-      tempResponses.push(false);
-    });
-    setResponses(tempResponses)
-  }, [comment])
+  const getComments = () => {
+    setCurrentComments([])
+  }
+
+  // useEffect(() => {
+  //   let tempResponses: any = [];
+  //   comments.forEach((element: any) => {
+  //     tempResponses.push(false);
+  //   });
+  //   setResponses(tempResponses)
+  // }, [comment])
 
   const like = (index: number) => {
     if (comments[index].likes.includes(user.id)) {
@@ -127,6 +131,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
       toggle(index)
     });
   }
+
   return (
     <>
       <TitleContain >

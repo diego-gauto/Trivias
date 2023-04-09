@@ -85,7 +85,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
   const handleViewed = () => {
     if (user) {
       let index = data.progress.findIndex((x: any) => x.user_id == user.user_id)
-      if (data.progress[index].time >= 99) {
+      if (data.progress[index] && data.progress[index].time >= 99) {
         return 0
       } else {
         if (index == -1) {
