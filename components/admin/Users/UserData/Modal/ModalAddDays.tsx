@@ -5,6 +5,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { updateUserPlan } from "../../../../../store/actions/UserActions";
+import { updateMembershipDaysApi } from "../../../../api/users";
 
 import { CloseIcon } from "../UsersCardData.styled";
 import {
@@ -25,17 +26,24 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
 
   const addDays = () => {
     let tempFinalDate = 0;
-    if (user.membership.finalDate == 0) {
+    if (user.final_date < today) {
       tempFinalDate = today + days * 86400;
-    } else {
-      tempFinalDate = user.membership.finalDate + days * 86400;
+      user.final_date = tempFinalDate;
     }
-    updateUserPlan(tempFinalDate, user.id).then(() => {
-      alert(`El usuario ahora cuenta con ${days} días de suscripción`);
+    if (user.final_date > today) {
+      tempFinalDate = user.final_date + days * 86400;
+      user.final_date = tempFinalDate;
+    }
+    let newDate = new Date(tempFinalDate * 1000);
+    let tempDay = newDate.getDate()
+    let tempMonth = newDate.getMonth() + 1;
+    let tempYear = newDate.getFullYear()
+    let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    updateMembershipDaysApi(user).then((res: any) => {
+      alert("Nueva Fecha de finalizacion: " + formatDate)
       handleClose();
-    })
+    });
   }
-
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Container>
