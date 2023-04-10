@@ -1,12 +1,6 @@
 
 
 import { useEffect, useState } from "react";
-
-import { DocumentData } from "firebase/firestore";
-
-import { getPaymentmethods } from "../../../../store/actions/PaymentActions";
-import { getPaidCourses } from "../../../../store/actions/UserActions";
-import GetUserLevel from "./GetUserLevel";
 import Modal1 from "./Modal/Modal";
 import ModalAddDays from "./Modal/ModalAddDays";
 import {
@@ -31,7 +25,6 @@ import {
   TransparentButton,
   UserContain,
 } from "./UsersCardData.styled";
-import { deleteSelectedUser } from "../../../../store/actions/AuthActions";
 import ErrorModal from "../../../Error/ErrorModal";
 
 type CardData = {
@@ -74,12 +67,13 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
         <CloseIcon onClick={() => setIsVisible(false)} />
       </TitleContain>
 
-      <><ProfileContain>
-        <ProfilePic />
-        <Level>
+      <>
+        <ProfileContain>
+          <ProfilePic />
+          {/* <Level>
           <GetUserLevel userLevel={user} />
-        </Level>
-      </ProfileContain><Columns>
+        </Level> */}
+        </ProfileContain><Columns>
           <ColumnContain>
             <Info>
               Usuario
@@ -125,9 +119,9 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
             Cursos Activos
           </TitleBox>
           {paidCourses.length > 0 ? <CourseContain>
-            {paidCourses.map((x) => {
+            {paidCourses.map((x, index: number) => {
               return (
-                <Image1 />
+                <Image1 key={"paid-courses," + index} />
               )
             })}
           </CourseContain> : <CourseContain>
