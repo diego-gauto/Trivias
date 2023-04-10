@@ -1,7 +1,7 @@
 
 
 import { DocumentData } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { addCourseUser } from "../../../../../store/actions/PaymentActions";
 
@@ -10,7 +10,6 @@ import {
   ButtonContain,
   Card,
   CardContain,
-  CardImage,
   CardSubTitle,
   CardTitle,
   Container,
@@ -62,7 +61,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse }: any) => {
     <Modal show={show} onHide={handleClose} centered>
       <Container>
         <TitleContain>
-          <Title>Agregar Curso</Title>
+          <Title>Agregar Curso de paga</Title>
           <CloseIcon onClick={handleClose} />
         </TitleContain>
         <Data>
@@ -86,6 +85,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse }: any) => {
         <InputContain>
           <Label>Curso a añadir</Label>
           <IconContain>
+            {/* select de cursos */}
             <Select courses={courses} handleClick={handleClick} />
           </IconContain>
         </InputContain>
@@ -94,13 +94,24 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse }: any) => {
             <MainCard>
               <Card>
                 <ImageContain>
-                  <CardImage />
-                  {course.totalLessons == 1 ? <LessonText>Unica Lección</LessonText> :
-                    <LessonText>{course.totalLessons} Lecciones</LessonText>}
+                  <img src={course.image} className="img-course" />
+                  {course.totalLessons === 1 ? <LessonText>Unica Lección</LessonText> :
+                    <LessonText>{course.totalLessons} Lecciones</LessonText>
+                  }
                 </ImageContain>
                 <CardContain>
-                  <CardTitle>Curso: {course.courseTittle}</CardTitle>
-                  <CardSubTitle>{course.courseCategory}</CardSubTitle>
+                  <CardTitle>Curso: {course.title}</CardTitle>
+                  <CardSubTitle>
+                    {
+                      course.categories.map((val: any, idx: number) => {
+                        return (
+                          <React.Fragment key={"cat_idx" + idx}>
+                            {val.name}
+                          </React.Fragment>
+                        )
+                      })
+                    }
+                  </CardSubTitle>
                 </CardContain>
               </Card>
             </MainCard>

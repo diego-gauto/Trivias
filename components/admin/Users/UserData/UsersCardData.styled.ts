@@ -7,7 +7,9 @@ export const UserContain = styled.div`
   padding: 15px;
   gap: 30px;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  position: fixed;
 `;
 export const TitleContain = styled.div`
   display: flex;

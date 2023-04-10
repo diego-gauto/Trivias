@@ -6,6 +6,7 @@ export const UserContain = styled.div`
   padding: 40px;
   height: auto;
   gap: 20px;
+  position: relative;
 `;
 export const FilterContain = styled.div`
   display: flex;
@@ -20,6 +21,7 @@ export const Select = styled.div`
   border-right: none;
   border-radius: 10px 0px 0px 10px;
   select {
+    padding-inline: 15px;
     border: none;
     outline: none;
     border-radius: 10px 0px 0px 10px;
