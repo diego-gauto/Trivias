@@ -153,7 +153,7 @@ const HomeWork = () => {
     for (let i = 1; i < csvRecordsArray.length; i++) {
       let currentRecord = (csvRecordsArray[i]).split(',');
       let csvRecord: any = new CsvData();
-      for (let i = 1; i < currentRecord.length; i++) {
+      for (let i = 0; i < currentRecord.length; i++) {
         csvRecord.properties.push(currentRecord[i].trim())
       }
       if (csvRecord.properties[0] != '') { csvArr.push(csvRecord); }
@@ -187,11 +187,11 @@ const HomeWork = () => {
   useEffect(() => {
     let timeout: any;
     if (records) {
-      if (countdown <= 5003) {
+      if (countdown <= 5007) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 1);
-          getJsonData(records, headersRow)
-        }, 60);
+          addProgress()
+        }, 100);
         return () => clearTimeout(timeout);
       }
     }
@@ -199,41 +199,45 @@ const HomeWork = () => {
   }, [records, countdown]);
 
   useEffect(() => {
-    getPastUsers().then((res) => {
+    let range = {
+      start: 10000,
+      end: 15001
+    }
+    getPastUsers(range).then((res) => {
+      console.log(res);
+
       setPastUsers(res.data.past);
     })
   }, [])
 
   const addProgress = async () => {
-    console.log(pastUsers);
-    console.log(records);
     await Promise.all(
-      pastUsers.map(async (user: any) => {
-        await Promise.all(
-          records.map(async (element: any) => {
+      pastUsers.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
+        console.log(index);
+        let tempArray = records.filter((x: any) => x.properties[0] === user.email)
+        if (tempArray.length > 0) {
+          await Promise.all(tempArray.map(async (element: any) => {
             if (user.email === element.properties[0]) {
               let tempUser = {
                 email: user.email,
                 score: +element.properties[2],
                 userId: user.id
               }
-              // console.log(tempUser);
               await updateScorePastUser(tempUser);
-              // await getCourseApi(+element.properties[1]).then((course) => {
-              //   course.lessons.forEach(async (lesson: any) => {
-              //     let tempLesson = {
-              //       lessonId: lesson.id,
-              //       userId: user.id
-              //     }
-              //     await addPastUserProgress(tempLesson).then((res) => {
-              //       console.log(res);
-              //     });
-              //   });
-              // })
+              await getCourseApi(+element.properties[1]).then((course) => {
+                if (course.lessons && course.lessons.length > 0) {
+                  course.lessons.forEach(async (lesson: any) => {
+                    let tempLesson = {
+                      lessonId: lesson.id,
+                      userId: user.id
+                    }
+                    return await addPastUserProgress(tempLesson)
+                  });
+                }
+              })
             }
-          })
-        )
-
+          }))
+        }
       })
     )
   }
@@ -243,7 +247,7 @@ const HomeWork = () => {
       <HWContainer>
         <Container>
           <input type="file" onChange={(e) => { uploadCsv(e) }} />
-          {/* <button onClick={addProgress}>add</button> */}
+          <button onClick={addProgress}>add</button>
           <TitleContain>
             <p>
               Tareas

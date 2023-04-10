@@ -45,9 +45,9 @@ export const updateMembership = async (user: any) => {
     });
 };
 
-export const getPastUsers = async () => {
+export const getPastUsers = async (range: any) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "users/past-users")
+    .post("https://gonvar.inowu.dev/" + "users/past-users", range)
     .then((res) => {
       return res;
     })
