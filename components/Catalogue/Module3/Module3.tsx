@@ -61,7 +61,7 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user === "none") {
       let temp_courses: any = [];
       let date = new Date().getTime() / 1000;
       let temp_final_date: any;

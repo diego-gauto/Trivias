@@ -5,8 +5,8 @@ import Layout from "../components/Layout";
 import "./styles.css";
 import { AuthProvider } from "../hooks/useAuth";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import Helmet from 'react-helmet';
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { FacebookProvider } from 'react-facebook';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -17,7 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
+          <FacebookProvider appId="3010100615906804">
+            <Component {...pageProps} />
+          </FacebookProvider>
+        </GoogleOAuthProvider>
       </Layout>
     </AuthProvider>
   );

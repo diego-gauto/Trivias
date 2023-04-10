@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { addMaterial, deleteMaterial, getMaterial, updateMaterial } from '../../../store/actions/courseActions';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import Delete from '../Courses/Form/Delete/Delete';
-import SideBar from '../SideBar';
 import { AdminContain } from '../SideBar.styled';
 import {
   Button, ButtonContain,
@@ -12,42 +10,50 @@ import {
   FormContain, Input, InputContain, Label,
   Title, TitleContain
 } from '../Category/Category.styled';
+import { createMaterialApi, deleteMaterialsApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
+import { useRouter } from 'next/router';
+import { IoMdExit } from 'react-icons/io';
 
 
 const Materials = () => {
   const [newMaterial, setNewMaterial] = useState<boolean>(false);
   const [edit, setEdit] = useState<number>();
   const [materials, setMaterials] = useState<any>([]);
+  const router = useRouter();
   const [material, setMaterial] = useState<any>({
     name: ""
   });
+  const returnToCourses = () => {
+    router.push({
+      pathname: "/admin/Courses",
+    })
+  }
   const createMaterial = () => {
     if (Object.keys(material).some(key => material[key] === '')) {
       alert("Complete todos los campos")
     }
     else {
-      addMaterial(material).then((res) => {
+      createMaterialApi(material).then((res) => {
         alert("Material agregado con Exito")
         getAllMaterials();
       })
     }
   }
   const getAllMaterials = () => {
-    getMaterial().then((res) => {
+    getMaterialsApi().then((res) => {
       setMaterials(res);
-      return res;
     })
   }
   const Delete = (val: any) => {
     if (window.confirm("Desea borrar este Material: " + val.name)) {
-      deleteMaterial(val).then(() => {
+      deleteMaterialsApi(val).then(() => {
         getAllMaterials();
         // alert("Categoría: " + val.name + " eliminada con éxito")
       })
     }
   }
   const update = (val: any) => {
-    updateMaterial(val, val.id).then(() => {
+    updateMaterialApi(val).then(() => {
       alert("Material actualizado")
       getAllMaterials();
     })
@@ -55,9 +61,10 @@ const Materials = () => {
   useEffect(() => {
     getAllMaterials();
   }, [])
+
   return (
     <AdminContain>
-      <SideBar />
+      <IoMdExit className="icon-exit" onClick={returnToCourses} />
       <CourseFormContain>
         <CategoryContain >
           <TitleContain onClick={() => { setNewMaterial(!newMaterial) }}>
@@ -118,6 +125,7 @@ const Materials = () => {
                             <InputContain style={{ width: 500 }}>
                               <Input
                                 placeholder={"Editar nombre de: " + val.name}
+                                defaultValue={val.name}
                                 onChange={(e: any) => {
                                   materials[i].name = e.target.value
                                 }}

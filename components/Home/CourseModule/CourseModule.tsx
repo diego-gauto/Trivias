@@ -7,22 +7,22 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
-import Modal1 from "../../Catalogue/Module4/Modal/Modal1";
 import { useEffect, useState } from "react";
 import { NAILS_MASTER_COURSE_ID } from "../../../constants/gonvar";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
+import CourseModal from "../../CourseModal/CourseModal";
 declare let Hls: any
 
 export const CourseModule = (props: ICourseModuleProps) => {
   const { data, num, user, loggedIn } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
+  let today = new Date().getTime() / 1000;
   const router = useRouter();
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(true);
   }
-
   const doVideoStuff = () => {
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById(`video-${num}`) as HTMLMediaElement;
@@ -38,10 +38,25 @@ export const CourseModule = (props: ICourseModuleProps) => {
     }
 
   }
+  const goTo = () => {
+    if (loggedIn && data.pay) {
+      router.push({
+        pathname: 'Lesson',
+        query: { id: data.id, season: 0, lesson: 0 },
+      });
+    }
+    if (loggedIn && !data.pay) {
+      router.push(
+        { pathname: 'Purchase', query: { type: 'course', id: data.id } }
+      )
+    }
+    if (!loggedIn) {
+      router.push(SIGNUP_PATH)
+    }
+  }
   useEffect(() => {
     doVideoStuff()
   }, [])
-
   return (
     <CardContainer className="card-container">
       <div className="video">
@@ -51,12 +66,12 @@ export const CourseModule = (props: ICourseModuleProps) => {
       <Row>
         <Col sm={12} md={5} className="first-col">
           <Button className="new-btn">NAILS <span>ACADEMY</span></Button>
-          <Card.Title>{data.courseTittle}</Card.Title>
+          <Card.Title>{data.title}</Card.Title>
           <Row className="level">
-            {(data.courseDifficulty == "Muy Fácil" || data.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-            {(data.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-            {(data.courseDifficulty == "Avanzado" || data.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-            <Text03 style={{ padding: 0 }} level={data.courseDifficulty}><span>{data.courseDifficulty}</span></Text03>
+            {(data.difficulty == "Muy Fácil" || data.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+            {(data.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+            {(data.difficulty == "Avanzado" || data.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+            <Text03 style={{ padding: 0 }} level={data.difficulty}><span>{data.difficulty}</span></Text03>
           </Row>
           <Card.Subtitle>
             Aprende desde cero a aplicar <br />
@@ -66,20 +81,14 @@ export const CourseModule = (props: ICourseModuleProps) => {
         <Col sm={12} md={5} className="second-col">
           <Card.Text className="price">
             Curso individual <br />
-            <span>por ${data.coursePrice}</span> <span className="lower">MXN</span>
+            <span>por ${data.price}</span> <span className="lower">MXN</span>
           </Card.Text>
-          <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => {
-            loggedIn
-              ? router.push(
-                { pathname: 'Purchase', query: { type: 'course', id: NAILS_MASTER_COURSE_ID } }
-              )
-              : router.push(SIGNUP_PATH)
-          }
+          <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }
           } />
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
         </Col>
       </Row>
-      <Modal1 show={show} setShow={setShow} course={data} user={user} />
+      <CourseModal show={show} setShow={setShow} course={data} user={user} />
     </CardContainer>
   )
 }

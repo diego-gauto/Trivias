@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, CurrentCourse, CurrentDivider, DetailContain, Details, DividerComplete, DividerIncomplete, IncompleteCircle, LessonContain, ProgressCircle } from './EveryCourse.styled';
 
-const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
+const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
+
   const router = useRouter();
 
   const hms = (totalSeconds: any) => {
@@ -21,44 +22,49 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
-    if (course.courseType == "Gratis" || !course.courseHomeWork) {
-      return router.push({
-        pathname: 'Lesson',
-        query: { id: id, season: season, lesson: lIndex },
-      })
-    }
-    if (userId) {
-      if (userId && lIndex > 0) {
-        tempIndex = lessons[lIndex - 1].progress.findIndex((x: any) => x.id == userId);
-      }
-      if (userId && lIndex == 0) {
-        if (season > 0) {
-          tempPreviousSeason = course.seasons[season - 1].lessons[course.seasons[season - 1].lessons.length - 1];
-          lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.id == userId);
-        }
-      }
-      if (season == 0 && lIndex == 0 ||
-        season == 0 && lIndex > 0 && lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex] && lessons[lIndex - 1].progress[tempIndex].status ||
-        season == 0 && lIndex > 0 && !lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex] ||
-        season > 0 && lIndex == 0 && tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status ||
-        season > 0 && lIndex == 0 && !tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
-        season > 0 && lIndex > 0 && lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex] && lessons[lIndex - 1].progress[tempIndex].status ||
-        season > 0 && lIndex > 0 && !lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex]
-      ) {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: id, season: season, lesson: lIndex },
-        });
-      }
-    }
-    conditionalDiv(less, lIndex);
-    return 'okey';
+    return router.push({
+      pathname: 'Lesson',
+      query: { id: course.id, season: season, lesson: lIndex },
+    })
+    // if (course.type == "Gratis" || !course.courseHomeWork) {
+    //   return router.push({
+    //     pathname: 'Lesson',
+    //     query: { id: id, season: season, lesson: lIndex },
+    //   })
+    // }
+    // if (userId) {
+    //   if (userId && lIndex > 0) {
+    //     tempIndex = lessons[lIndex - 1].progress.findIndex((x: any) => x.id == userId);
+    //   }
+    //   if (userId && lIndex == 0) {
+    //     if (season > 0) {
+    //       tempPreviousSeason = course.seasons[season - 1].lessons[course.seasons[season - 1].lessons.length - 1];
+    //       lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.id == userId);
+    //     }
+    //   }
+    //   if (season == 0 && lIndex == 0 ||
+    //     season == 0 && lIndex > 0 && lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex] && lessons[lIndex - 1].progress[tempIndex].status ||
+    //     season == 0 && lIndex > 0 && !lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex] ||
+    //     season > 0 && lIndex == 0 && tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status ||
+    //     season > 0 && lIndex == 0 && !tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
+    //     season > 0 && lIndex > 0 && lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex] && lessons[lIndex - 1].progress[tempIndex].status ||
+    //     season > 0 && lIndex > 0 && !lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex]
+    //   ) {
+    //     router.push({
+    //       pathname: 'Lesson',
+    //       query: { id: id, season: season, lesson: lIndex },
+    //     });
+    //   }
+    // }
+    // conditionalDiv(less, lIndex);
+    // return 'okey';
   }
+
   const conditionalDiv = (less: any, index: number) => {
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
-    if (course.courseType == "Gratis" || !course.courseHomeWork) {
+    if (course.type == "Gratis" || course.sequential === 0) {
       return (<Details style={{ cursor: 'pointer' }} onClick={() => {
         goTo(index, less)
       }}>
@@ -77,22 +83,24 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
       </Details>)
     }
     if (userId && index > 0 && lessons[index - 1].progress) {
-      tempIndex = lessons[index - 1].progress.findIndex((x: any) => x.id == userId);
+      tempIndex = lessons[index - 1].progress.findIndex((x: any) => x.user_id == userId);
     }
+
     if (userId && index == 0 && season > 0) {
       tempPreviousSeason = course.seasons[season - 1].lessons[course.seasons[season - 1].lessons.length - 1];
       if (tempPreviousSeason.progress) {
-        lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.id == userId);
+        lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.user_id == userId);
       }
     }
+
     if (season == 0 && index == 0 ||
-      season == 0 && index > 0 && lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status ||
-      season == 0 && index > 0 && !lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] ||
-      // (season == 0 && index > 0 && !lessons[index - 1].homeworkAvailable) && (season == 0 && index > 0 && !lessons[index].homeworkAvailable) ||
-      season > 0 && index == 0 && tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status ||
-      season > 0 && index == 0 && !tempPreviousSeason.homeworkAvailable && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
-      season > 0 && index > 0 && lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status ||
-      season > 0 && index > 0 && !lessons[index - 1].homeworkAvailable && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]
+      season == 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
+      season == 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] ||
+      // (season == 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]) && (season == 0 && index > 0 && lessons[index].homework === 0)
+      season > 0 && index == 0 && tempPreviousSeason.homework === 1 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status === 1 ||
+      season > 0 && index == 0 && tempPreviousSeason.homework === 0 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
+      season > 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
+      season > 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]
     ) {
       return (<Details style={{ cursor: 'pointer' }} onClick={() => {
         goTo(index, less)
@@ -105,13 +113,13 @@ const EveryCourse = ({ id, lessons, season, data, userId, course }: any) => {
             {hms(less.duration)}
             {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>
-          {/* {less.points > 0 && <CoursePoints>
+          {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>} */}
+          </CoursePoints>}
         </DetailContain>
       </Details>)
     }
-    return (<Details style={{ 'background': '#d6d4d499', borderRadius: '5px', cursor: 'auto' }}>
+    return (<Details style={{ 'background': '#84848499', borderRadius: '5px', cursor: 'auto' }}>
       <CourseTitle active={data?.id == less.id}>
         {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
       </CourseTitle>

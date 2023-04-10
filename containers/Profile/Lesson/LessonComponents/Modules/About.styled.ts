@@ -5,14 +5,31 @@ export const AboutContain = styled.div`
   gap: 70px;
   .teacher-container {
     margin-top: 50px;
-    width: 200px;
+    width: 250px;
     position: relative;
     padding: 20px;
+    padding-inline: 50px;
     background: #e0dcec;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 30px;
+    svg {
+      cursor: pointer;
+      position: absolute;
+      font-size: 35px;
+      color: #3f1168;
+    }
+    .left {
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .right {
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
     img {
       border-radius: 50%;
       width: 50%;

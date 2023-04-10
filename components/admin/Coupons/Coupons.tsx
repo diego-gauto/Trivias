@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createCoupon, deleteCoupon, getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
+import { addCouponApi, deleteCouponApi, retrieveCoupons, updateCouponStatusApi } from "../../api/admin";
 
 import { TrashIcon } from "../Courses/Form/Edit.styled";
-import SideBar from "../SideBar";
 import { AdminContain, Table } from "../SideBar.styled";
 import {
   ActiveC,
@@ -43,7 +43,7 @@ const Coupons = () => {
     if (Object.values(coupon).every(value => value !== '')) {
       coupon.discount = parseInt(coupon.discount);
       coupon.users = [];
-      createCoupon(coupon).then(() => {
+      addCouponApi(coupon).then(() => {
         alert('Coupon creado con exito!');
         getAllCoupons();
         setCoupon({ name: '', code: '', type: 'porcentage', discount: '', status: true })
@@ -52,8 +52,8 @@ const Coupons = () => {
   }
 
   const getAllCoupons = () => {
-    getCoupons().then((res) => {
-      setCoupons(res);
+    retrieveCoupons().then((res) => {
+      setCoupons(res.data.coupons);
     })
   }
 
@@ -61,13 +61,20 @@ const Coupons = () => {
     let tempCoupons = coupons;
     tempCoupons[i].status = !tempCoupons[i].status;
     setCoupons([...tempCoupons]);
-    updateCoupon(tempCoupons[i], tempCoupons[i].id);
+    let tempCoupon = {
+      id: tempCoupons[i].id,
+      status: tempCoupons[i].status
+    }
+    updateCouponStatusApi(tempCoupon);
   }
 
   const deleteThisCoupon = (coupon: any, index: any) => {
     let tempCoupons = coupons;
     tempCoupons.splice(index, 1);
-    deleteCoupon(coupon).then(() => {
+    let tempCoupon = {
+      id: coupon.id
+    }
+    deleteCouponApi(tempCoupon).then(() => {
       alert('Cupón borrado con exito!');
       setCoupons([...tempCoupons]);
     })
@@ -79,7 +86,6 @@ const Coupons = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <CouponContain>
         <Container>
           <Title>Añadir Cupón</Title>

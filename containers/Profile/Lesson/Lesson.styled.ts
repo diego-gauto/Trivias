@@ -2,12 +2,33 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 20px;
   width: 100%;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    .video-contain {
+      position: relative;
+      .next-episode {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        z-index: 10;
+      }
+    }
+    .absolute {
+      @media (max-width: 1450px) {
+        height: auto !important;
+      }
+      video {
+        height: 100% !important;
+        object-fit: cover;
+      }
+    }
   }
   .certificate-container {
     display: flex;
@@ -33,29 +54,5 @@ export const MainContainer = styled.div`
         // transform: scale(1.1);
       }
     }
-  }
-`;
-export const Container = styled.div`
-  display: flex;
-  gap: 20px;
-`;
-export const FirstContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  @media (max-width: 1023px) {
-    width: 100%;
-  }
-  @media (max-width: 600px) {
-    gap: 10px;
-  }
-`;
-export const SecondContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  gap: 40px;
-  @media (max-width: 1023px) {
-    display: none;
   }
 `;

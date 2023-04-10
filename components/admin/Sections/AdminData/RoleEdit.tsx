@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Modal } from "react-bootstrap";
 
@@ -18,6 +18,7 @@ import {
   Title,
   TitleContain,
 } from "./RoleEdit.styled";
+import { updateAdminAccessApi } from "../../../api/admin";
 
 type CheckBoxNames = {
   general: boolean;
@@ -41,11 +42,13 @@ type RoleProps = {
   adminID: any;
   role: any;
   show: boolean;
+  refresh: any
 };
 
-const RoleEdit = ({ show, setShow, admin, adminID, role }: RoleProps) => {
+const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) => {
   const handleClose = () => setShow(false);
-  const [state, setState] = useState<CheckBoxNames>(role);
+  const [state, setState] = useState<CheckBoxNames>(admin.adminTypes);
+
 
   const handleChange = (e: { target: CheckBoxValues }) => {
     const value = e.target.checked;
@@ -56,14 +59,15 @@ const RoleEdit = ({ show, setShow, admin, adminID, role }: RoleProps) => {
   };
 
   const updateAdminType = () => {
-    if (_.isEqual(state, role)) return;
-    let adminData = { ...admin };
-    adminData.adminType = { ...state };
-
-    updateRole(adminData, adminID).then(() => {
-      alert("Acceso actualizado correctamente");
-      window.location.reload();
-    });
+    let user = {
+      user_id: admin.user_id,
+      role: state
+    }
+    updateAdminAccessApi(user).then(() => {
+      setShow(false);
+      refresh();
+      alert("Accesos actualizados");
+    })
   };
 
   return (

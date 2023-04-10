@@ -12,9 +12,9 @@ import { deletePaymentMethod, updatePaymentMethod } from "../../../store/actions
 import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import { addPaymentMethod } from "../../../store/actions/PaymentActions";
+import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, setDefaultPaymentMethod } from "../../../components/api/profile";
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
-
   const [show, setShow] = useState(false);
   const [user, setUser] = useState<any>({ data })
   const handleShow = () => setShow(true);
@@ -25,81 +25,61 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   });
 
   const addNewCard = async () => {
-    let temp_new = {};
     setLoader(!loader);
     if (Object.keys(card).some(key => card[key] === '')) {
       alert('Por favor acomplete todos los campos!');
       setLoader(false);
     } else {
-      const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
       const info = {
         card: card,
-        stripe_id: data.stripeId
+        stripe_id: data.stripe_id
       }
-      await addCard(info).then(async (res: any) => {
-        if ("raw" in res.data) {
+      createPaymentMethod(info).then((res) => {
+        if (res.status === 400) {
           alert("Hay un error en los datos de la tarjeta!");
-          setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
           setLoader(false);
         } else {
-          temp_new = {
-            cardId: res.data.id,
-            brand: res.data.card.brand,
-            last4: res.data.card.last4,
-            cvc: card.cvc,
-            holder: card.holder,
-            exp_month: parseInt(card.exp_month),
-            exp_year: parseInt(card.exp_year),
+          let cardInfo = {
+            stripe_id: data.stripe_id,
+            payment_method: res.data.paymentMethod.id
           }
-          addPaymentMethod(temp_new, data.id);
-          let newCard = {
-            cardId: res.data.id,
-            stripeId: data.stripeId
-          }
-          const attach = httpsCallable(functions, 'attachPaymentMethodStripe');
-          await attach(newCard).then((res) => {
-            setLoader(false);
+          attachPaymentMethod(cardInfo).then(() => {
+            setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+            newCard();
             handleClick(true);
+            setLoader(false);
           })
         }
       })
     }
   }
-  useEffect(() => {
 
-  }, [card])
   const updateUserCard = async (card: any) => {
     setDeleteLoad(true);
     let info = {
-      cardId: card.cardId,
-      stripeId: data.stripeId
+      payment_method: card.id,
+      stripe_id: data.stripe_id
     }
-    const updateCard = httpsCallable(functions, 'setDefaultPaymentMethod');
-    await updateCard(info).then(async (res: any) => {
-      updatePaymentMethod(card.cardId, data.id).then(() => {
-        setDeleteLoad(false);
-      })
+    setDefaultPaymentMethod(info).then(() => {
+      handleClick();
+      setDeleteLoad(false);
     })
   }
   const detachPayment = async (card: any) => {
     setDeleteLoad(!loader);
-    const detach = httpsCallable(functions, 'detachPaymentMethod');
-    detach(card.cardId).then(async (res: any) => {
-      deletePaymentMethod(data.id, card.id).then(() => {
-        setDeleteLoad(false);
-        handleClick(true);
-      })
+    let info = {
+      payment_method: card.id
+    }
+    detachPaymentMethod(info).then(() => {
+      setDeleteLoad(false);
+      handleClick(true);
     })
-    // if (data.membership.paymentMethod == card.cardId) {
-    //   alert('Esta tarjeta es su método de pago predeterminado, por favor de asiganar otra tarjeta como método de pago predeterminado antes de eliminar esta tarjeta!')
-    //   setDeleteLoad(false);
-    // } else {
-
-    // }
   }
+
   useEffect(() => {
     setUser({ ...data })
   }, [data])
+
   return (
     <PaymentMethodContainer add={addPayment}>
       <div className="main-container">
@@ -117,22 +97,22 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
                       <div className="card-contain" >
                         <div
                           className="card"
-                          onClick={() => data.membership.paymentMethod != pm.cardId && updateUserCard(pm)}
+                          onClick={() => data.payment_method != pm.id && updateUserCard(pm)}
                         >
                           <CardIconResp>
                             {
-                              pm.brand == "visa" &&
+                              pm.card.brand == "visa" &&
                               <img src="/images/profile/visaLogo.png" />
                             }
                             {
-                              pm.brand == "mastercard" &&
+                              pm.card.brand == "mastercard" &&
                               <img src="/images/profile/masterCardLogo.png" />
                             }
                           </CardIconResp>
                           {/* <CardIconResp brand={pm.brand} /> */}
-                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
+                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.card.last4}</span></p>
                           {
-                            data.membership.paymentMethod == pm.cardId
+                            pm.default
                               ?
                               <div className="star">
                                 <AiFillStar />
@@ -214,6 +194,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
               <div className="date">
                 <p>CVV</p>
                 <input
+                  type={"password"}
                   placeholder="***"
                   className="date-inputs"
                   maxLength={4} onChange={(e) => {

@@ -2,16 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import CsvDownloader from "react-csv-downloader";
 
-import { collection, getDocs, query, DocumentData } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebaseConfig";
 import { getWholeCourses } from "../../../store/actions/courseActions";
-import { getPaidCourses } from "../../../store/actions/UserActions";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
-import SideBar from "../SideBar";
-import { AdminContain, Table } from "../SideBar.styled";
+import { AdminContain, AdminLoader, Table } from "../SideBar.styled";
 import UserCardData from "./UserData/UserCardData";
-import { TransparentButton2 } from "./UserData/UsersCardData.styled";
 import {
   DownloadUserData,
   EditIcon,
@@ -24,7 +20,10 @@ import {
   UserShow,
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
+import { getCoursesApi } from "../../api/lessons";
 import { getInvoice } from "../../../store/actions/PaymentActions";
+import { getLessonFromUserApi, getUsersApi } from "../../api/admin";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
 export interface SelectedUser {
   id?: string;
@@ -64,7 +63,6 @@ export interface Users {
 };
 
 const UsersList = () => {
-  const usersCollectionRef = query(collection(db, "users"));
   const [filterValue, setFilterValue] = useState<number>(0)
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
@@ -74,118 +72,153 @@ const UsersList = () => {
   const [selectedUser, setSelectedUser] = useState<any>({});
   const [show, setShow] = useState<boolean>(false);
   const [user, setUser] = useState<any>([]);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [pageIndex, setPageIndex] = useState<number>(0);
+  const [maxPages, setMaxPages] = useState<number>(0);
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [loadCard, setLoadCard] = useState(false);
 
-  const openUserCardData = async (user: DocumentData) => {
-    setSelectedUser(user);
+  const openUserCardData = async (user: any) => {
+    setLoadCard(false);
+    getLessonFromUserApi(user.id).then((res) => {
+      res.data.data.forEach((userCourse: any) => {
+        courses.forEach((course: any) => {
+          if (userCourse.course_id === course.id) {
+            userCourse.courseTitle = course.title;
+            userCourse.image = course.image;
+          }
+        });
+      });
+      user.user_courses = res.data.data;
+      setSelectedUser(user);
+      setLoadCard(true);
+    })
     setIsVisible(true);
   };
-
   const filterUsersByValue = (value: string): void => {
-    if (value === "") return setUsers(usersFilter);
-    const query = value.toLocaleLowerCase();
-    const filteredUsers = usersFilter.filter((item) =>
-      item.name.toLowerCase().includes(query) ||
-      item.email.includes(query) ||
-      item.role.includes(query) ||
-      item.score.toString().includes(query) ||
-      item.created_at.includes(query));
-    setUsers(filteredUsers);
+    let tempAllUsers = allUsers;
+    let query = value.toLocaleLowerCase();
+    const filteredUsers = tempAllUsers.filter((item) => {
+      return item.name.toLowerCase().includes(query)
+    })
+    // if (value === "") return setUsers(usersFilter);
+    // const filteredUsers = usersFilter.filter((item) =>
+    //   item.name.toLowerCase().includes(query) ||
+    //   item.email.includes(query) ||
+    //   item.score.toString().includes(query) ||
+    //   item.created_at.includes(query));
+    // setUsers(filteredUsers);
+    pagePerUsers(filteredUsers);
   };
 
-  const filter = (value: number) => {
-    let tempUsers = users;
-    if (value == 0) { setUsersFilter(allUsers); return setUsers(allUsers) };
-    if (value == 1) {
-      [...tempUsers] = allUsers.sort((a: any, b: any) => {
-        return b.score - a.score;
-      })
-    };
-    if (value == 2) {
-      let today = new Date().getTime() / 1000;
-      [...tempUsers] = allUsers.filter((item) => (
-        item.membership.finalDate > today
-      ))
-    };
-    if (value == 3) {
-      [...tempUsers] = allUsers.sort((a: any, b: any) => {
-        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
-      })
-    };
-    if (value == 4) {
-      [...tempUsers] = allUsers.filter((item) =>
-        item.courses)
-    };
-    if (value == 5) {
-      [...tempUsers] = allUsers.sort((a: any, b: any) => {
-        return a.total < b.total ? 1 : -1;
-      })
-    };
-    setUsers(tempUsers);
-    setUsersFilter(tempUsers);
+  const filter = (value: string) => {
+    let tempAllUsers = allUsers;
+    let userFilter: any = [];
+    if (value === "all") {
+      userFilter = tempAllUsers.sort((a: any, b: any) => {
+        return b.id - a.id;
+      });
+    }
+    if (value === "suscription") {
+      userFilter = tempAllUsers.sort((a: any, b: any) => {
+        return b.level - a.level;
+      });
+    }
+    if (value === "name") {
+      userFilter = tempAllUsers.sort((a: any, b: any) => {
+        return a.name.localeCompare(b.name);
+      });
+    }
+    if (value === "spend") {
+      userFilter = tempAllUsers.sort((a: any, b: any) => {
+        return b.spent - a.spent;
+      });
+    }
+    pagePerUsers(userFilter);
   }
 
   const getCoures = () => {
     let tempCourses: Array<any> = [];
-    getWholeCourses().then((res) => {
-      res.forEach((element: DocumentData) => {
-        if (element.courseType == 'Producto') {
+    getCoursesApi().then((res) => {
+      res.forEach((element: any) => {
+        if (element.type == 'Producto') {
+          let counter: number = 0;
+          element.seasons.forEach((season: any) => {
+            season.lessons.forEach((lesson: any) => {
+              counter++;
+            })
+          });
+          element.totalLessons = counter;
           tempCourses.push(element)
         }
       });
       setCourses(tempCourses)
     })
   }
-  useEffect(() => {
-    let tempInvoice: any = [];
-    getInvoice().then((res) => {
-      res.forEach((element: DocumentData) => {
-        element.amount = element.amount / 100;
-        tempInvoice.push(element);
-      });
-    })
-    const getUsers = async (): Promise<void> => {
-      const mainResponse = await getDocs(usersCollectionRef);
-      const usersResponse = mainResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+  const pagePerUsers = (users: any) => {
+    let usersPerPage: number = 100;
+    let pages: number = Math.ceil(users.length / usersPerPage);
 
-      const usersData = [...usersResponse].map((user: any) => ({
-        name: user.name,
-        email: user.email,
-        lastName: user.lastName,
-        phoneNumber: user.phoneNumber ?? "",
-        created_at: new Date(user.created_at.seconds * 1000).toLocaleDateString("es-MX"),
-        score: user.score.toString(),
-        role: user.role ?? "",
-        id: user.id,
-        courses: 0,
-        membership: user.membership
-      }));
-      let today: any = new Date().getTime() / 1000;
-      usersData.forEach((user: any) => {
-        user.total = 0;
-        tempInvoice.forEach((element: any) => {
-          if (element.userEmail == user.email) {
-            user.total = user.total + element.amount;
-          }
-        });
-        getPaidCourses(user.id).then((res) => {
-          res.forEach((element: DocumentData) => {
-            if (element.finalDate > today) {
-              user.courses++;
-            }
-          });
-        })
-      })
-      setUsers(usersData);
-      setUsersFilter(usersData);
-      setAllUsers(usersData);
+    let tempUsers: any = [];
+    for (let i = 0; i < pages; i++) {
+      tempUsers.push([])
+      for (let j = 0; j < usersPerPage; j++) {
+        if (users[j + (usersPerPage * i)]) {
+          tempUsers[i].push(users[j + (usersPerPage * i)])
+        }
+      }
     }
+    setMaxPages(pages);
+    setTotalUsers(usersPerPage);
+    setUsersFilter(tempUsers);
+    setUsers(tempUsers);
+    setLoader(true);
+  }
+  const getNextUsers = (direction: string) => {
+    if (direction === "backward") {
+      if (pageIndex !== 0) {
+        setPageIndex(pageIndex - 1)
+      }
+    }
+    if (direction === "forward") {
+      if (pageIndex !== maxPages - 1) {
+        setPageIndex(pageIndex + 1)
+      }
+    }
+
+  }
+  const getUsers = async (): Promise<void> => {
+    getUsersApi().then((res) => {
+      pagePerUsers(res.data.users)
+      setAllUsers(res.data.users);
+    })
+  }
+
+  useEffect(() => {
     getUsers();
     getCoures();
   }, [show]);
 
+  const formatDate = (value: any) => {
+    let tempDate = new Date(value).getTime();
+    return new Date(tempDate).toLocaleDateString("es-MX")
+  }
+
+  const handleClick = () => {
+    getUsers();
+  }
+
+  if (!loader) {
+    return (
+      <AdminLoader>
+        <div className="loader-image">
+          <div className="loader-contain" />
+        </div>
+      </AdminLoader>
+    )
+  }
   return (
     <AdminContain>
-      <SideBar />
       <UserContain>
         <Container>
           <TitleContain>
@@ -198,19 +231,16 @@ const UsersList = () => {
               datas={users.map(({ id, membership, ...users }) => users)}
             >
               <DownloadUserData>
-                {/* <img src="https://img.icons8.com/ios/50/000000/export-excel.png" /> */}
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
             </CsvDownloader>
             <FilterContain>
               <Select>
-                <select defaultValue={filterValue} onChange={(e: any) => { setUsers(allUsers); filter(e.target.value) }}>
-                  <option value={0}>Todos</option>
-                  <option value={1}>Puntos</option>
-                  <option value={2}>Suscripción</option>
-                  <option value={3}>Nombre</option>
-                  <option value={4}>Cursos</option>
-                  <option value={5}>Amount spend</option>
+                <select defaultValue={filterValue} onChange={(e: any) => { filter(e.target.value) }}>
+                  <option value={"all"}>Todos</option>
+                  <option value={"suscription"}>Suscripción</option>
+                  <option value={"name"}>Nombre</option>
+                  <option value={"spend"}>Amount spend</option>
                 </select>
               </Select>
               <SearchContain>
@@ -226,6 +256,16 @@ const UsersList = () => {
               </SearchContain>
             </FilterContain>
           </TitleContain>
+          <div className="pages">
+            <div className="index">
+              <AiFillCaretLeft className="arrows" onClick={() => { getNextUsers("backward") }} />
+              <p className="current-number">{pageIndex + 1}</p>
+              <AiFillCaretRight className="arrows" onClick={() => { getNextUsers("forward") }} />
+            </div>
+            <div className="max-pages">
+              <p className="max-number">Paginas: {maxPages}</p>
+            </div>
+          </div>
           <Table id="Users">
             <tbody>
               <tr>
@@ -234,13 +274,12 @@ const UsersList = () => {
                 <th>Fecha de Creación</th>
                 <th>Cursos Suscritos</th>
                 <th>Amount spent</th>
-                {/* <th>Recompensas</th> */}
                 <th>Visualizar</th>
                 <th>Editar</th>
               </tr>
               {/* TABLAS */}
               {users.length > 0 && (
-                users.map((user, index): any => {
+                users[pageIndex].map((user: any, index: number) => {
                   return (
                     <tr key={index}>
                       <td style={{ fontWeight: 600 }}>
@@ -250,10 +289,10 @@ const UsersList = () => {
                         </ProfileContain>
                       </td>
                       <td >{user.email}</td>
-                      <td>{user.created_at}</td>
-                      {user.courses > 1 ? <td >{user.courses} Activos</td> :
-                        <td >{user.courses} Activo</td>}
-                      <td>MXN${user.total}</td>
+                      <td>{formatDate(user.created_at)}</td>
+                      {user.level > 1 ? <td >{user.level} Activos</td> :
+                        <td >{user.level} Activo</td>}
+                      <td>MXN${user.spent}</td>
                       {/* <td>{user.score} puntos</td> */}
                       <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
                       <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
@@ -261,16 +300,15 @@ const UsersList = () => {
                   )
                 })
               )}
-
             </tbody>
           </Table>
         </Container>
         {
           isVisible === true &&
-          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} />
+          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
         }
       </UserContain>
-      <EditUserModal show={show} setShow={setShow} user={user} />
+      <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
     </AdminContain >
   )
 }

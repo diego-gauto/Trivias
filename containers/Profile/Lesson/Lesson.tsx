@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { LOGIN_PATH } from "../../../constants/paths";
-import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
-import {
-  addHistoryCourse,
-  getComments,
-  getTeacher,
-  getWholeCourse,
-} from "../../../store/actions/courseActions";
-import { addUserCertificate, getPaidCourses } from "../../../store/actions/UserActions";
-import { Container, FirstContainer, MainContainer } from "./Lesson.styled";
+import { MainContainer } from "./Lesson.styled";
 import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import Modules from "./LessonComponents/Modules/Modules";
+import Courses from "./LessonComponents/Courses/Courses";
+import { io } from 'socket.io-client';
+import { addCourse, addUserHistory, getCourseApi } from "../../../components/api/lessons";
+
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,88 +19,65 @@ const Lesson = () => {
   const { id, season, lesson }: any = router.query;
   const [userData, setUserData] = useState<any>(null);
   const [currentlesson, setCurrentLesson] = useState<any>({});
-  const [currentComments, setCurrentComments] = useState<any>([]);
-  const [comments, setComments] = useState<any>([]);
-  const [certficate, setCertificate] = useState<any>(false);
+  const [nextLesson, setnextLesson] = useState<any>({
+    lessonIndex: 0,
+    seasonIndex: 0,
+  });
+  // const socket = io("http://94.74.77.165:89");
+
+  // socket.io.on("error", (error) => {
+  //   console.log(error);
+
+  // });
 
   useEffect(() => {
-    checkCourse()
-  }, [router, course]);
-
-  const checkCourse = () => {
-
-    let date = new Date().getTime() / 1000;
     if (course) {
-      let temp_lesson;
-      let temp_comments;
-
-      onSnapshot(query(collection(db, 'comments'), orderBy("createdAt", "desc")), (doc) => {
-        let comment: any = []
-        doc.docs.forEach((x) => {
-          comment.push({ ...x.data(), id: x.id })
-        })
-        if (comment?.some((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id)) {
-          temp_comments = [...comment].filter((x: any) => x.courseId == course.id && x.lessonId == course.seasons[season].lessons[lesson].id && x.seasonId == course.seasons[season].id);
-          setCurrentComments(temp_comments);
-        } else {
-          setCurrentComments([]);
-        }
-      })
-
-      temp_lesson = course.seasons[season].lessons[lesson];
-      temp_lesson.seasonId = course?.seasons[season].id;
-      temp_lesson.courseId = course.id;
-      temp_lesson.courseTitle = course?.courseTittle;
-      temp_lesson.teachers = course?.courseProfessor;
-      setCurrentLesson(temp_lesson);
-      if (userData) {
-        if (course.courseType == 'Gratis') {
-          addHistoryCourse(course, userData.id, season, lesson);
-        }
-        if (course.courseType == 'Mensual' && userData.membership.finalDate > date) {
-          addHistoryCourse(course, userData.id, season, lesson);
-        }
-        if (course.courseType == 'Producto') {
-          getPaidCourses(userData.id).then((paid: any) => {
-            if (paid.some((x: any) => x.id == course.id && date < x.finalDate)) {
-              addHistoryCourse(course, userData.id, season, lesson);
-            }
-          })
-        }
-        let viewed = 0;
-        course.lessons.forEach((element: any) => {
-          if (element.users.includes(userData.id)) {
-            viewed++;
-          }
-        });
-        if (course.lessons.length == viewed) {
-          setCertificate(true);
-          let tempCertificate = userData.certificates;
-          if (tempCertificate) {
-            if (tempCertificate.find((x: any) => x.courseId == course.id)) {
-              return;
-            } else {
-              tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id });
-              addUserCertificate(tempCertificate, userData.id);
-            }
-          } else {
-            tempCertificate = []
-            tempCertificate.push({ folio: course.id.slice(0, 4) + userData.id.slice(0, 4), createdAt: new Date(), courseId: course.id, courseTitle: course.courseTittle });
-            addUserCertificate(tempCertificate, userData.id);
-          }
-        }
-      }
+      getCourse();
     }
-  }
+
+  }, [router]);
+
+
+  // const send = () => {
+  //   console.log(0);
+  //   socket.emit("comment", { data: "hola" }).timeout(5000);
+  // }
+
+  // socket.on("comment", ({ data }) => {
+  //   console.log(data);
+
+  // });
 
   const handleComplete = () => {
-    checkCourse()
+    getCourse()
   }
 
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
+        let user = userDataAuth.user;
+        let today = new Date().getTime() / 1000;
+        setUserData(user);
+        getCourseApi(id).then((res) => {
+          console.log(res);
+
+          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) {
+            router.push(
+              { pathname: 'Purchase', query: { type: 'course', id: res.id } }
+            )
+          }
+          if (res.type === 'Mensual' && user.level === 0) {
+            router.push({
+              pathname: 'Purchase',
+              query: { type: 'subscription' }
+            });
+          }
+          setCurrentLesson(res.seasons[season].lessons[lesson]);
+          setCourse(res);
+          history(res, user);
+          setIsLoading(false);
+        })
         setLoggedIn(true)
       } else {
         router.push(LOGIN_PATH)
@@ -115,69 +87,49 @@ const Lesson = () => {
     setLoggedIn(false)
   }
 
-  const fetchDB_data = async (professor: any) => {
-    let tempProfessor: Array<any> = professor;
-    try {
-      let date = new Date().getTime() / 1000;
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        response.forEach((e: any) => {
-          getPaidCourses(e.id).then((paid: any) => {
-            getWholeCourse(id).then((res: any) => {
-              res.courseProfessor.map((profId: string, index: number) => {
-                tempProfessor.map((val: any) => {
-                  if (profId.includes(val.id)) {
-                    res.courseProfessor[index] = val;
-                  }
-                })
-              })
-              if (res.courseType == 'Producto') {
-
-                if (paid.some((x: any) => x.id == res.id && date < x.finalDate)) {
-                  res.paid = true;
-                  addHistoryCourse(res, e.id, season, lesson);
-                  setIsLoading(false);
-                } else {
-                  router.push({
-                    pathname: 'Purchase', query: { type: 'course', id: id }
-                  });
-                }
-              }
-              if (res.courseType == 'Mensual') {
-                if (e.data().membership.finalDate > date) {
-                  addHistoryCourse(res, e.id, season, lesson);
-                  setIsLoading(false);
-                }
-                else {
-                  router.push(
-                    { pathname: 'Purchase', query: { type: 'subscription' } }
-                  )
-                }
-              }
-              if (res.courseType == 'Gratis') {
-                addHistoryCourse(res, e.id, season, lesson);
-                setIsLoading(false);
-              }
-              setCourse(res);
-            })
-          })
-          setUserData({ ...e.data(), id: e.id });
+  const getCourse = () => {
+    getCourseApi(id).then((res) => {
+      setCurrentLesson(res.seasons[season].lessons[lesson]);
+      setCourse(res);
+      if (course.seasons[season].lessons[+lesson + 1]) {
+        setnextLesson({
+          lessonIndex: +lesson + 1,
+          seasonIndex: +season,
         });
-      });
-    } catch (error) {
-      return false
-    }
-  }
-  const getProffessors = () => {
-    getTeacher().then((res) => {
-      fetchDB_data(res);
-      return res;
+      }
+      else {
+        if (course.seasons[+season + 1]) {
+          setnextLesson({
+            lessonIndex: 0,
+            seasonIndex: +season + 1,
+          });
+        }
+        else {
+          setnextLesson({
+            lessonIndex: 0,
+            seasonIndex: 0,
+          });
+        }
+      }
+      if (userData !== null) {
+        history(res, userData);
+      }
+      setIsLoading(false);
     })
   }
-  useEffect(() => {
-    getProffessors();
+  const history = (data: any, user: any) => {
+    let temp = {
+      courseId: data.id,
+      seasonId: data.seasons[season].id,
+      lessonId: data.seasons[season].lessons[lesson].id,
+      userId: user.user_id
+    }
+    addUserHistory(temp)
+  }
 
-  }, [loggedIn])
+  const handleClick = () => {
+    getCourse();
+  }
 
   return (
     <>
@@ -187,11 +139,14 @@ const Lesson = () => {
         </LoaderImage>
       </Background> :
         <MainContainer>
-          {course && <Container>
-            <FirstContainer>
+          <div className="left-side">
+            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} />
+            <Modules handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
+          </div>
+          <Courses menu={true} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
+          {/* <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
-            </FirstContainer>
-          </Container>}
+            </FirstContainer> */}
         </MainContainer>}
     </>
   )

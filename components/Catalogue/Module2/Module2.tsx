@@ -64,7 +64,7 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
     document.removeEventListener('mouseup', mouseUpHandler);
   };
   useEffect(() => {
-    if (user) {
+    if (user === "none") {
       let tempCourses: any = [];
       getViewedCourses(user.id).then((res: any) => {
         res.forEach((element: DocumentData) => {

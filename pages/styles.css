@@ -129,16 +129,7 @@ h1,th{
 .scroll-container::-webkit-scrollbar{
   display: none;
 }
-.scroll-container3::-webkit-scrollbar{
-  display: none;
-}
-.scroll-container2::-webkit-scrollbar{
-  display: none;
-}
-.scroll-container4::-webkit-scrollbar{
-  display: none;
-}
-.scroll-container5::-webkit-scrollbar{
+.scroll-slide::-webkit-scrollbar{
   display: none;
 }
 .scroll::-webkit-scrollbar{

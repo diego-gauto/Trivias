@@ -1,48 +1,36 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import InputMask from "react-input-mask";
-
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { httpsCallable } from "firebase/functions";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { FaCheck, FaArrowRight } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-
-import { db, functions } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
+import { getCoupons } from "../../../store/actions/CouponsActions";
 import { getWholeCourse } from "../../../store/actions/courseActions";
-import {
-  addCourseUser,
-  addInvoice,
-  addPaymentMethod,
-  getPaymentmethods,
-  updateUserPlan,
-} from "../../../store/actions/PaymentActions";
 import {
   Container,
   LoaderContainSpinner,
 } from "./Purchase.styled";
-import { getPaidCourses } from "../../../store/actions/UserActions";
 import ModalError from "./Modal1/ModalError";
 import ErrorModal from "../../../components/Error/ErrorModal";
+import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, getCourseForCheckoutApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
+import { getUserApi, updateMembership } from "../../../components/api/users";
+import { retrieveCoupons } from "../../../components/api/admin";
 
 const Purchase = () => {
   const [user, setUser] = useState("");
+  const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
-  const [userData, setUserData] = useState<any>(null);
-  const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
   const [couponError, setCouponError] = useState(false);
   const [errorMsg, setErrorMsg] = useState<any>("");
   const [step2, setStep2] = useState(false);
   const [payment, setPayment] = useState(false);
-  const [cardInfo, setCardInfo] = useState(false);
-  const [process, setProcess] = useState(true);
+  const [cardInfo, setCardInfo] = useState(true);
   const [paypal, setPaypal] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
   const [pay, setPay] = useState(false);
@@ -52,7 +40,7 @@ const Purchase = () => {
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
-  const [defaultCard, setDefaultCard] = useState<any>([]);
+  const [defaultCard, setDefaultCard] = useState<any>({});
   const [product, setProduct] = useState<any>({});
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
@@ -65,71 +53,6 @@ const Purchase = () => {
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setLoggedIn(true)
-      } else {
-        window.location.href = "/auth/Login";
-        setLoggedIn(false)
-      }
-    }, [])
-
-  } catch (error) {
-    setLoggedIn(false);
-  }
-
-  const fetchDB_data = async () => {
-    let defaultC: any = {};
-    try {
-      let temp_cards: any = []
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        response.forEach((e) => {
-          setUser(e.data().name);
-          getPaymentmethods(e.id).then((res) => {
-            setCards(res);
-            res.forEach((element: any) => {
-              temp_cards.push(false)
-              if (e.data().membership.paymentMethod == element.cardId) {
-                element.defaultCard = true;
-                defaultC = element;
-              } else {
-                element.defaultCard = false;
-              }
-              setDefaultCard(defaultC);
-            });
-
-          })
-          setUserData({ ...e.data(), id: e.id })
-          if (type == 'subscription') {
-            setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
-          } else {
-            getWholeCourse(id).then((res: any) => {
-              setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
-            })
-          }
-        });
-        setIsLoading(false);
-        // setPaypal(true);
-      })
-    } catch (error) {
-      return false
-    }
-  }
-  const getUserCourses = (user: any) => {
-    getPaidCourses(user).then((res) => {
-      res = res.filter((course: any, index: any) => course.id == router.query.id)
-      if (res[0] == null) {
-        res[0] = []
-      }
-    })
-  }
-
-  useEffect(() => {
-    fetchDB_data();
-  }, [loggedIn]);
 
   useEffect(() => {
     getAllCoupons();
@@ -138,32 +61,66 @@ const Purchase = () => {
       setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
       setPaypal(false);
     } else {
-      getWholeCourse(id).then((res: any) => {
-        setProduct({ ...product, title: res.courseTittle, price: res.coursePrice, duration: res.courseDuration, type: 'course', category: res.courseCategory, lessons: res.totalLessons, img: res.coursePath })
+      getCourseForCheckoutApi(id).then((res: any) => {
+        setProduct({ ...product, title: res.title, price: res.price, duration: res.duration, type: 'course', img: res.image });
         setPaypal(false);
       })
     }
   }, [])
 
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        guardCheckout(res);
+        let cards = res.payment_methods;
+        setUserData(res);
+        setCards(res.payment_methods);
+        setLoggedIn(true);
+        setIsLoading(false);
+      })
+    } else {
+      window.location.href = "/auth/Login";
+      setLoggedIn(false)
+    }
+  }, [])
+
+  const guardCheckout = (userData: any) => {
+    let today = new Date().getTime() / 1000;
+    if (router.query.type == "subscription" && userData.level === 1) {
+      window.location.href = "/Preview";
+    }
+  }
+
+  useEffect(() => {
+    if (payment) {
+      if (cards.length > 0) {
+        cards.forEach((element: any) => {
+          if (element.default) {
+            let tempCard = {
+              paymentMethod: element.id,
+              status: false,
+              exp_month: element.card.exp_month,
+              exp_year: element.card.exp_year
+            }
+            setDefaultCard({ ...tempCard });
+          }
+        });
+      }
+    }
+  }, [payment])
+
   const setDefault = (idx: any) => {
-    // setCard({ ...card, brand: cards[idx].brand, last4: cards[idx].last4, paymentMethod: cards[idx].cardId });
-    // defaultCard.forEach((element: any, index: any) => {
-    //   if (card.paymentMethod == cards[idx].cardId) {
-    //     defaultCard[index] = true;
-    //   } else {
-    //     defaultCard[index] = false
-    //   }
-    // });
-    // setDefaultCard(defaultCard);
+    let tempCard = {
+      paymentMethod: cards[idx].id,
+      status: false,
+      exp_month: cards[idx].card.exp_month,
+      exp_year: cards[idx].card.exp_year
+    }
+    setDefaultCard(tempCard);
   }
 
   const handleConfirm = async () => {
     setLoader(true);
-    if ((!cardInfo && !payment && plan.method !== 'paypal') || (!cardInfo && payment && !card.paymentMethod)) {
-      setError(true);
-      setErrorMsg("Por favor seleccione un método de pago!");
-      setLoader(false);
-    }
     if (cardInfo) {
       delete card.brand
       delete card.cardId
@@ -176,25 +133,17 @@ const Purchase = () => {
       setLoader(false)
     }
     if (cardInfo && Object.values(card).every(value => value !== '')) {
-      const data = {
-        card: card,
-        stripe_id: userData.stripeId
-      }
-      const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
-      await addCard(data).then(async (res: any) => {
-        if ("raw" in res.data) {
+      createPaymentMethodApi(card).then((res) => {
+        if (res.status === 400) {
           setError(true);
           setErrorMsg("Hay un error en los datos de la tarjeta!")
           setLoader(false);
         } else {
-          setCard({ ...card, cardId: res.data.id, brand: res.data.card.brand, last4: res.data.card.last4, status: true })
+          setCard({ ...card, cardId: res.id, brand: res.card.brand, last4: res.card.last4, status: true })
         }
       })
     }
-    if (payment && card.paymentMethod) {
-      setCard({ ...card, status: false });
-      setProcess(false);
-      setConfirmation(true);
+    if (payment && defaultCard.paymentMethod) {
       FinishPayment();
     }
     if (plan.method == 'paypal') {
@@ -203,124 +152,95 @@ const Purchase = () => {
   }
 
   const FinishPayment = async () => {
-    console.log(card);
-
-    let invoice = {
-      amount: 0,
-      userName: userData.name,
-      userEmail: userData.email,
-      paidAt: new Date(),
-      product: product.title,
-      brand: card.brand,
-      userId: userData.id,
-      method: plan.method,
-      type: type,
-      finalDate: 0
-    }
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
-        const pay = httpsCallable(functions, 'payWithStripeSubscription');
         const data = {
-          new: card.status,
+          new: card.cardId ? card.status : false,
           cardId: card.cardId,
-          paymentMethod: card.paymentMethod,
-          stripeId: userData.stripeId,
+          paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
+          stripeId: userData.stripe_id,
           priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk',
           method: 'stripe'
         }
-        await pay(data).then((res: any) => {
-          if ("raw" in res.data) {
+        stripeSubscriptionApi(data).then((res) => {
+          if (res.error) {
             setCard({ ...card, cardId: "" })
-            if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
+            if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               setError(true);
-              setErrorMsg(res.data.raw.code == "card_declined" && (
-                res.data.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              setErrorMsg(res.error.raw.code == "card_declined" && (
+                res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+                res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+                res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+                res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
               ) ||
-                res.data.raw.code == "expired_card" && "Tarjeta expirada" ||
-                res.data.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-                res.data.raw.code == "processing_error" && "Error de proceso" ||
-                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+                res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
+                res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+                res.error.raw.code == "processing_error" && "Error de proceso" ||
+                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
             }
             setLoader(false);
           } else {
             setPay(true);
             setLoader(false);
-            updateUserPlan({ ...plan, finalDate: res.data.current_period_end, paymentMethod: card.cardId || card.paymentMethod, id: res.data.id, name: product.title }, userData.id)
-            if (card.status) {
-              addPaymentMethod(card, userData.id);
-            }
+            updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
             setConfirmation(false);
           }
-        });
+        })
       } else {
+        let price = product.price
+        if (coupon) {
+          if (coupon.type == 'amount') {
+            price = price - coupon.discount;
+          } else {
+            price = (price - (coupon.discount / 100) * price)
+          }
+        }
         const data = {
-          new: card.status,
+          new: card.cardId ? card.status : false,
           cardId: card.cardId,
-          paymentMethod: card.paymentMethod,
-          stripeId: userData.stripeId,
-          amount: product.price,
+          paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
+          stripeId: userData.stripe_id,
+          amount: price,
           method: 'stripe'
         }
-        console.log(data);
-
-        const pay = httpsCallable(functions, 'payWithStripeCourse');
-        await pay(data).then((res: any) => {
-          if ("raw" in res.data) {
+        stripePaymentApi(data).then(async (res) => {
+          if (res.error) {
             setCard({ ...card, cardId: "" })
-            if (res.data.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
+            if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
               setError(true);
-              setErrorMsg(res.data.raw.code == "card_declined" && (
-                res.data.raw.decline_code == "generic_decline" && "Puede ser un error en el método de pago o porque no cumple con ciertos requisitos de seguridad" ||
-                res.data.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                res.data.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                res.data.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              setErrorMsg(res.error.raw.code == "card_declined" && (
+                res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+                res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+                res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+                res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
               ) ||
-                res.data.raw.code == "expired_card" && "Tarjeta expirada" ||
-                res.data.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-                res.data.raw.code == "processing_error" && "Error de proceso" ||
-                res.data.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+                res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
+                res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+                res.error.raw.code == "processing_error" && "Error de proceso" ||
+                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
             }
             setLoader(false);
           } else {
-            let price = res.data.amount / 100
+            let invoice = {
+              amount: res.paymentIntent.amount,
+              product: product.title,
+              method: 'stripe',
+              user_id: userData.user_id,
+              course_id: id,
+              final_date: (new Date().getTime() / 1000) + product.duration * 86400
+            }
             if (coupon) {
-              if (coupon.type == 'amount') {
-                price = price - coupon.discount;
-              } else {
-                price = (price - (coupon.discount / 100) * price)
+              let tempCoupon = {
+                coupons_id: coupon.id,
+                user_id: userData.user_id
               }
-              updateCoupon(coupon, coupon.id);
+              await addUserCouponApi(tempCoupon)
             }
-            invoice.amount = price * 100;
-            invoice.finalDate = (new Date().getTime() / 1000) + product.duration * 86400;
-            const course = {
-              id: id,
-              duration: (new Date().getTime() / 1000) + product.duration * 86400
-            }
-            addCourseUser(course, userData.id);
-            addInvoice(invoice).then(async (res) => {
-              let receipt = {
-                type: type,
-                name: userData.name,
-                product: product.title,
-                total: product.price,
-                start: new Date().toLocaleDateString(),
-                end: new Date(((new Date().getTime() / 1000) + product.duration * 86400) * 1000).toLocaleDateString(),
-                id: res,
-                email: userData.email
-              }
-              const mail = httpsCallable(functions, 'sendReceipt');
-              await mail(receipt)
+            createInvoiceApi(invoice).then((res) => {
+              setConfirmation(false);
+              setPay(true);
+              setLoader(false);
             })
-            if (card.status) {
-              addPaymentMethod(card, userData.id);
-            }
-            setConfirmation(false);
-            setPay(true);
-            setLoader(false);
           }
         })
       }
@@ -338,44 +258,46 @@ const Purchase = () => {
           } else {
             price = (price - (coupon.discount / 100) * price)
           }
-          updateCoupon(coupon, coupon.id);
         }
-        delete invoice.brand;
-        invoice.amount = price * 100;
-        invoice.finalDate = (new Date().getTime() / 1000) + product.duration * 86400;
-        const course = {
-          id: id,
-          duration: (new Date().getTime() / 1000) + product.duration * 86400
+        let invoice = {
+          amount: price * 100,
+          product: product.title,
+          method: 'paypal',
+          user_id: userData.user_id,
+          course_id: id,
+          final_date: (new Date().getTime() / 1000) + product.duration * 86400
         }
-        addCourseUser(course, userData.id);
-        addInvoice(invoice).then(async (res) => {
-          let receipt = {
-            type: type,
-            name: userData.name,
-            product: product.title,
-            total: product.price,
-            start: new Date().toLocaleDateString(),
-            end: new Date(((new Date().getTime() / 1000) + product.duration * 86400) * 1000).toLocaleDateString(),
-            id: res,
-            email: userData.email
+        if (coupon) {
+          let tempCoupon = {
+            coupons_id: coupon.id,
+            user_id: userData.user_id
           }
-          const mail = httpsCallable(functions, 'sendReceipt');
-          await mail(receipt)
+          await addUserCouponApi(tempCoupon)
+        }
+        createInvoiceApi(invoice).then((res) => {
+          setConfirmation(false);
+          setPay(true);
+          setLoader(false);
         })
-        setConfirmation(false);
-        setPay(true);
       }
     }
   }
-  const handleShow = () => setShow(true);
+
+  const getAllCoupons = () => {
+    retrieveCoupons().then((res) => {
+      res.data.coupons.forEach((element: any) => {
+        let tempUsers: any = []
+        element.users.forEach((user: any) => {
+          tempUsers.push(user.user_id);
+        });
+        element.users = tempUsers;
+      });
+      setCoupons(res.data.coupons);
+    })
+  }
 
   const handleCoupons = (value: any) => {
     setCoupon(value);
-  }
-  const getAllCoupons = () => {
-    getCoupons().then((res: any) => {
-      setCoupons(res);
-    })
   }
 
   const checkCoupon = () => {
@@ -383,12 +305,12 @@ const Purchase = () => {
     setPaypal(true)
     coupon = coupons.filter((x: any) => x.code == code && x.status);
     if (coupon.length > 0) {
-      if (coupon[0].users.includes(userData?.id)) {
+      if (coupon[0].users.includes(userData?.user_id)) {
         setCouponError(true);
         setErrorMsg("Este cupón ya ha sido canjeado")
         setCode('');
       } else {
-        coupon[0].users.push(userData?.id);
+        coupon[0].users.push(userData?.user_id);
         handleCoupons({ ...coupon[0] });
         setCode('');
       }
@@ -411,16 +333,6 @@ const Purchase = () => {
       FinishPayment();
     }
   }, [card, plan])
-
-  useEffect(() => {
-    let today = new Date().getTime() / 1000;
-    if (router.query.type == "subscription" && userData?.membership.finalDate > today) {
-      window.location.href = "/Preview";
-    }
-    if (userData !== null) {
-      getUserCourses(userData.id);
-    }
-  }, [isLoading])
 
   return (
     <>
@@ -470,7 +382,7 @@ const Purchase = () => {
                     de pago</p>
                 </div>
               </div>
-              <p className="title">Ya puedes realizar tu compra, <span>{user}!</span></p>
+              <p className="title">Ya puedes realizar tu compra, <span>{userData.name}!</span></p>
               <div className="security-info">
                 <div className="top">
                   <AiFillLock></AiFillLock>
@@ -485,7 +397,7 @@ const Purchase = () => {
                   <div className="option">
                     <input type="radio" checked={!payment} onClick={() => {
                       setPayment(false);
-                      setCardInfo(!cardInfo);
+                      setCardInfo(true);
                       setPlan({ method: 'stripe' });
                       delete card.paymentMethod;
                       setCard({ ...card, cardId: "" })
@@ -504,16 +416,16 @@ const Purchase = () => {
                     </div>
                   }
                   {payment && <select className="cards" onChange={(e) => {
-                    // setDefault(e.target.value)
+                    setDefault(e.target.value)
                   }}>
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option value={idC} selected={x.cardId == defaultCard.cardId}>{x.last4}</option>
+                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
                       )
                     })}
                   </select>}
-                  {!payment && !card.paymentMethod && <div className="form-row">
+                  {!payment && <div className="form-row">
                     <label>Número de tarjeta</label>
                     <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
                       setCard((card: any) => ({ ...card, number: e.target.value }));
@@ -528,7 +440,7 @@ const Purchase = () => {
                   <div style={{ "display": "flex", "justifyContent": "space-between" }}>
                     <div className="form-row">
                       <label>Fecha de expiración</label>
-                      <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                      {!payment ? <div style={{ "display": "flex", "justifyContent": "space-between" }}>
                         <select className="short" onChange={(e) => {
                           setCard((card: any) => ({ ...card, exp_month: e.target.value }));
                         }}>
@@ -579,11 +491,15 @@ const Purchase = () => {
                           <option value="34">34</option>
                           <option value="35">35</option>
                         </select>
-                      </div>
+                      </div> :
+                        <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                          <input className="short" disabled={payment} value={defaultCard.exp_month} />
+                          <input className="short" disabled={payment} value={defaultCard.exp_year} />
+                        </div>}
                     </div>
                     <div className="form-row">
                       <label>CVV</label>
-                      <input className="short" type="password" placeholder="∗∗∗" maxLength={4} onChange={(e) => {
+                      <input className="short" type="password" disabled={payment} placeholder="∗∗∗" maxLength={4} onChange={(e) => {
                         setCard((card: any) => ({ ...card, cvc: e.target.value }));
                       }} />
                     </div>
@@ -619,10 +535,9 @@ const Purchase = () => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
                         finalDate = today + 2629800;
-                        updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title, method: "paypal" }, userData.id).then(() => {
-                          setConfirmation(false);
-                          setPay(true);
-                        })
+                        updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                        setConfirmation(false);
+                        setPay(true);
                         return data
                       }}
                     />}
@@ -761,7 +676,7 @@ const Purchase = () => {
             </div>
             <div className="slider-container">
               <div className="pay-slide">
-                <p className="title">Ya puedes realizar <br /> tu compra, <span>{user}!</span></p>
+                <p className="title">Ya puedes realizar <br /> tu compra, <span>{userData.name}!</span></p>
                 <div className="info-container">
                   <div className="security-info">
                     <div className="top">
@@ -881,10 +796,9 @@ const Purchase = () => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
                           finalDate = today + 2629800;
-                          updateUserPlan({ ...plan, finalDate: finalDate, paymentMethod: '', id: data.subscriptionID, name: product.title, method: "paypal" }, userData.id).then(() => {
-                            setConfirmation(false);
-                            setPay(true);
-                          })
+                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                          setConfirmation(false);
+                          setPay(true);
                           return data
                         }}
                       />}

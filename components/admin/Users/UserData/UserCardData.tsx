@@ -1,12 +1,6 @@
 
 
 import { useEffect, useState } from "react";
-
-import { DocumentData } from "firebase/firestore";
-
-import { getPaymentmethods } from "../../../../store/actions/PaymentActions";
-import { getPaidCourses } from "../../../../store/actions/UserActions";
-import GetUserLevel from "./GetUserLevel";
 import Modal1 from "./Modal/Modal";
 import ModalAddDays from "./Modal/ModalAddDays";
 import {
@@ -31,53 +25,46 @@ import {
   TransparentButton,
   UserContain,
 } from "./UsersCardData.styled";
-import { deleteSelectedUser } from "../../../../store/actions/AuthActions";
 import ErrorModal from "../../../Error/ErrorModal";
+import { getLessonFromUserApi } from "../../../api/admin";
+import { AdminLoader } from "../../SideBar.styled";
 
 type CardData = {
   user: any;
+  loader: any;
   setIsVisible: (open: boolean) => void;
   courses: Array<any>;
+  openUserCardData: any;
 };
 
-const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
+const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }: CardData) => {
   const [show, setShow] = useState(false);
   const [showAddDays, setShowAddDays] = useState(false);
-  const [paidCourses, setPaidCourses] = useState<Array<any>>([]);
-  const [paymentMethod, setPaymentMethods] = useState<Array<any>>([]);
   const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
-  const getUserCourses = () => {
-    let tempCourses: Array<any> = [];
-    getPaidCourses(user.id).then((res) => {
-      let today: any = new Date().getTime() / 1000;
-      res.forEach((element: DocumentData) => {
-        if (element.finalDate > today) {
-          tempCourses.push(element);
-        }
-      });
-      setPaidCourses(tempCourses);
-    })
-  }
+  const GonvarImg = "/images/purchase/logo.png";
+  let today = new Date().getTime() / 1000;
   const handleCourse = () => {
-    getUserCourses();
+    // getUserCourses();
   }
-  const getAllPaymentMethods = () => {
-    getPaymentmethods(user.id).then((res) => {
-      setPaymentMethods(res);
-    })
+
+  const formatDate = (value: any) => {
+    let tempDate = new Date(value).getTime();
+    return new Date(tempDate).toLocaleDateString("es-MX")
   }
 
   const deleteUser = () => {
     setError(true);
   }
 
-  useEffect(() => {
-    getUserCourses();
-    getAllPaymentMethods();
-  }, [user])
-
+  if (!loader) {
+    return (
+      <AdminLoader>
+        <div className="loader-image">
+          <div className="loader-contain" />
+        </div>
+      </AdminLoader>
+    )
+  }
   return (
     <UserContain>
       <TitleContain>
@@ -87,12 +74,11 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
         <CloseIcon onClick={() => setIsVisible(false)} />
       </TitleContain>
 
-      <><ProfileContain>
-        <ProfilePic />
-        <Level>
-          <GetUserLevel userLevel={user} />
-        </Level>
-      </ProfileContain><Columns>
+      <>
+        <ProfileContain>
+          <img src={user.photo ? user.photo : "/images/admin/ProfileIcon.png"} />
+        </ProfileContain>
+        <Columns>
           <ColumnContain>
             <Info>
               Usuario
@@ -123,31 +109,46 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
             <Info>
               Fecha de Creación
               <Label>
-                {user.created_at}
+                {formatDate(user.created_at)}
               </Label>
             </Info>
             <Info>
               Teléfono
               <Label>
-                {!user.phoneNumber ? "N/A" : user.phoneNumber}
+                {!user.phone_umber ? "N/A" : user.phone_umber}
               </Label>
             </Info>
           </ColumnContain>
-        </Columns><Courses>
+        </Columns>
+        <Courses>
           <TitleBox>
             Cursos Activos
           </TitleBox>
-          {paidCourses.length > 0 ? <CourseContain>
-            {paidCourses.map((x) => {
-              return (
-                <Image1 />
-              )
-            })}
-          </CourseContain> : <CourseContain>
-            Sin cursos...
-          </CourseContain>}
+          {
+            user.final_date >= today &&
+            <img src={GonvarImg} className="img-gonvar" />
+          }
+          {
+            user.user_courses.length > 0 ?
+              <CourseContain>
+                {
+                  user.user_courses.map((x: any, index: number) => {
+                    return (
+                      <img
+                        key={"paid-courses," + index}
+                        src={x.image}
+                      />
+                    )
+                  })
+                }
+              </CourseContain> :
+              <CourseContain>
+                Sin cursos...
+              </CourseContain>
+          }
           <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton>
-        </Courses><PayContain>
+        </Courses>
+        {/* <PayContain>
           <TitleBox>
             Métodos de pago asociados
           </TitleBox>
@@ -161,11 +162,11 @@ const UserCardData = ({ user, setIsVisible, courses }: CardData) => {
             <LastContainer>
               Sin métodos de pago...
             </LastContainer>}
-        </PayContain>
+        </PayContain> */}
         <TransparentButton onClick={() => { setShowAddDays(true); }}>Agregar días de suscripción</TransparentButton>
-        <TransparentButton onClick={() => { deleteUser() }}>Eliminar usuario</TransparentButton>
+        {/* <TransparentButton onClick={() => { deleteUser() }}>Eliminar usuario</TransparentButton> */}
       </>
-      <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} />
+      <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} openUserCardData={openUserCardData} />
       <ModalAddDays show={showAddDays} setShow={setShowAddDays} user={user} />
       <ErrorModal show={error} setShow={setError} error={"Lo sentimos, esta acción solo se puede realizar manualmente desde Firebase, gracias!"}></ErrorModal>
     </UserContain>

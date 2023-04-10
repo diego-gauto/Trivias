@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import { BlogCard, BlogContainer } from './Blog.styled';
 import router from "next/router";
@@ -76,7 +75,6 @@ const Blog = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <BlogContainer>
         <div className="title-contain">
           <p className="title">

@@ -8,93 +8,79 @@ import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
+import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addCommentLikeApi, deleteCommentAnswerLikeApi, deleteCommentLikeApi, retrieveComments } from '../../../../../components/api/lessons'
 const Comments = ({ value, setValue, user, data, comments }: any) => {
 
-  const [currentComments, setCurrentComments] = useState<any>(comments);
+  const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
   const [answer, setAnswer] = useState("");
   const [responses, setResponses] = useState<any>([]);
 
   const addLessonComment = () => {
-    let temp_comments: any = currentComments;
     let body: any;
     if (comment) {
-      if (user) {
-        body = {
-          createdAt: new Date(),
-          userName: user.name,
-          userEmail: user.email,
-          userPhoto: user.photoURL,
-          courseId: data.courseId,
-          seasonId: data.seasonId,
-          lessonId: data.id,
-          comment: comment,
-          likes: [],
-          answers: []
-        }
-      } else {
-        body = {
-          createdAt: new Date(),
-          userName: 'local',
-          userEmail: 'user@local.com',
-          userPhoto: '',
-          courseId: data.courseId,
-          seasonId: data.seasonId,
-          lessonId: data.id,
-          comment: comment
-        }
+      body = {
+        userId: user.user_id ? user.user_id : "",
+        comment: comment,
+        lessonId: data.id,
       }
-      addComment(body).then(() => {
-        temp_comments.unshift(body);
-        setCurrentComments([...temp_comments]);
-        setComment("");
+      addCommentApi(body).then((res) => {
+        getComments();
       })
     }
   }
   useEffect(() => {
-    if (comments) {
-      setCurrentComments(comments);
+    if (data) {
+      getComments()
     }
-  }, [comments])
+  }, [data])
 
-  useEffect(() => {
-    let tempResponses: any = [];
-    comments.forEach((element: any) => {
-      tempResponses.push(false);
-    });
-    setResponses(tempResponses)
-  }, [comment])
-
-  const like = (index: number) => {
-    if (comments[index].likes.includes(user.id)) {
-      const idx = comments[index].likes.indexOf(user.id);
-      if (idx > -1) { // only splice array when item is found
-        comments[index].likes.splice(idx, 1); // 2nd parameter means remove one item only
-      }
+  const getComments = () => {
+    let temp: any = []
+    retrieveComments(data.id).then((res) => {
+      res.data.data.forEach((element: any, i: number) => {
+        temp.push(false);
+      })
+      setResponses(temp)
+      setCurrentComments(res.data.data)
+    })
+  }
+  const like = (x: any) => {
+    let temp = {
+      userId: user.user_id,
+      commentId: x.comment_id
+    }
+    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+      addCommentLikeApi(temp).then(() => {
+        getComments();
+      })
     } else {
-      comments[index].likes.push(user.id)
+      deleteCommentLikeApi(temp).then(() => {
+        getComments();
+      })
     }
-    updateComment(comments[index]);
-    setCurrentComments([...comments]);
   }
 
-  const likeAnswer = (idxC: number, idxA: number) => {
-    if (comments[idxC].answers[idxA].likes.includes(user.id)) {
-      const idx = comments[idxC].answers[idxA].likes.indexOf(user.id);
-      if (idx > -1) { // only splice array when item is found
-        comments[idxC].answers[idxA].likes.splice(idx, 1); // 2nd parameter means remove one item only
-      }
-    } else {
-      comments[idxC].answers[idxA].likes.push(user.id)
+  const likeAnswer = (x: any) => {
+    let temp = {
+      userId: user.user_id,
+      commentId: x.commentA_id
     }
-    updateComment(comments[idxC]);
-    setCurrentComments([...comments]);
+    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+      addCommentAnswerLikeApi(temp).then(() => {
+        getComments();
+      })
+    } else {
+      deleteCommentAnswerLikeApi(temp).then(() => {
+        getComments();
+      })
+    }
   }
 
   const getDate = (tempDate: any) => {
     let date: any = new Date(tempDate);
     if (date == "Invalid Date") {
-      date = new Date(tempDate.seconds * 1000).toLocaleDateString()
+      date = new Date(tempDate.created_at).toLocaleDateString()
     } else {
       date = new Date(tempDate).toLocaleDateString();
     }
@@ -113,20 +99,20 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
     setAnswer("");
   }
 
-  const answerQuestion = (index: number) => {
-    let tempAnswer = {
-      comment: answer,
-      createdAt: new Date(),
-      likes: [],
-      userName: user.name,
-      userEmail: user.email,
-      userPhoto: user.photoURL || DEFAULT_USER_IMG,
+  const answerQuestion = (x: any) => {
+    let body: any;
+    if (answer) {
+      body = {
+        userId: user.user_id ? user.user_id : "",
+        comment: answer,
+        commentId: x.comment_id,
+      }
+      addCommentAnswerApi(body).then((res) => {
+        getComments();
+      })
     }
-    comments[index].answers.push(tempAnswer)
-    updateComment(comments[index]).then(() => {
-      toggle(index)
-    });
   }
+
   return (
     <>
       <TitleContain >
@@ -156,13 +142,17 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
             <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
           </div>
           <div className='comment'>
-            {comments && user.photoURL
+            {/* {
+            comments && user.photoURL
               ?
               <Profile src={user.photoURL} />
               :
               <Profile
                 src={DEFAULT_USER_IMG}
-              />}
+              />} */}
+            <Profile
+              src={DEFAULT_USER_IMG}
+            />
             <CommentInput value={comment} placeholder="Escribe tus comentarios" onChange={(e: any) => {
               setComment(e.target.value)
             }}
@@ -179,14 +169,14 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
           return (
             <div className='comment-container' key={'comments-' + index}>
               <div className="top">
-                {comments && x.userPhoto
+                {comments && x.photo
                   ?
-                  <Profile src={x.userPhoto} />
+                  <Profile src={x.photo} />
                   :
                   <Profile
                     src={DEFAULT_USER_IMG}
                   />}
-                <p>{x.userName} <span>{getDate(x.createdAt)}</span></p>
+                <p>{x.name} <span>{getDate(x.comment_created_at)}</span></p>
               </div>
               <div className='middle'>
                 <p>{x.comment}</p>
@@ -194,8 +184,8 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
               <div className="bottom">
                 <div className='left'>
                   <div className='new-comment'>
-                    <div className='like' onClick={() => { like(index) }}>
-                      {comments[index]?.likes.includes(user.id) ? <FaHeart /> :
+                    <div className='like' onClick={() => { like(x) }}>
+                      {x.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
                         <FiHeart />}
                       <p>{x.likes.length}</p>
                     </div>
@@ -204,7 +194,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
                   {responses[index] && <div className='answer-input'>
                     {user.photoURL
                       ?
-                      <Profile src={user.photoURL} />
+                      <Profile src={user.photo} />
                       :
                       <Profile
                         src={DEFAULT_USER_IMG}
@@ -215,7 +205,7 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                          answerQuestion(index);
+                          answerQuestion(x);
                         }
                       }} /></div>}
                 </div>
@@ -224,16 +214,16 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
                 return (
                   <div className='answer-container' key={"Comments " + idx}>
                     <div className="top">
-                      {ans.userPhoto
+                      {ans.photo
                         ?
-                        <Profile src={ans.userPhoto} />
+                        <Profile src={ans.photo} />
                         :
                         <Profile
                           src={DEFAULT_USER_IMG}
                         />}
-                      <p>{ans.userName} <span>{getDate(ans.createdAt)}</span></p>
-                      <div className='like' onClick={() => { likeAnswer(index, idx) }}>
-                        {comments[index]?.answers[idx]?.likes.includes(user.id) ? <FaHeart /> :
+                      <p>{ans.name} <span>{getDate(ans.commentA_created_at)}</span></p>
+                      <div className='like' onClick={() => { likeAnswer(ans) }}>
+                        {ans.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
                           <FiHeart />}
                         <p>{ans.likes.length}</p>
                       </div>

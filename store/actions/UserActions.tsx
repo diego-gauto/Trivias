@@ -77,12 +77,8 @@ const uploadUserImage = (image: any, name: any) => {
 }
 export const updateProfileImage = async (user: any, id: any) => {
   let tempUser: any = JSON.parse(JSON.stringify(user))
-  tempUser.photoURL = await uploadUserImage(tempUser.format, id);
-  const docRef = doc(db, 'users', id);
-  await updateDoc(docRef, {
-    photoURL: tempUser.photoURL,
-  })
-  return 'exito'
+  const url = await uploadUserImage(tempUser.format, id);
+  return url;
 }
 
 export const addUserCertificate = async (certificate: any, id: any) => {

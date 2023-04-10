@@ -1,8 +1,11 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap';
+import { IMaterialData, IMaterials } from './IModalMaterials';
 import { Container } from './ModalMaterials.styled';
 
-export const ModalMaterials = ({ show, setShow, materials }: any) => {
+export const ModalMaterials = (props: IMaterials) => {
+
+  const { show, setShow, materials } = props;
 
   const handleClose = () => setShow(false);
 
@@ -13,9 +16,9 @@ export const ModalMaterials = ({ show, setShow, materials }: any) => {
           <h1>
             Materiales
           </h1>
-          {materials?.map((material: any, index: any) => {
+          {materials?.map((material: IMaterialData, index: any) => {
             return (
-              <p key={"Materiales " + index}>{material}</p>
+              <p key={"Materiales " + index}>{material.name}</p>
             )
           })}
         </div>

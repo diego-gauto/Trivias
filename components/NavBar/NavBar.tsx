@@ -32,6 +32,7 @@ import {
 } from "./NavBar.styled";
 import { SlBell } from "react-icons/sl";
 import { getAuth, signOut } from "firebase/auth";
+import { getUserApi } from "../api/users";
 
 const NavBar = () => {
 
@@ -59,70 +60,10 @@ const NavBar = () => {
   function closeHamburgerMenu() {
     setHamburger(false)
   }
-  //validate if its logged in
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-      }
-    }, [])
 
-  } catch (error) {
-    setLoggedIn(false)
-  }
-
-  //Call firestore user data
-  useEffect(() => {
-    fetchDB_data()
-  }, [loggedIn])
-  //firestore query from auth data
-  const fetchDB_data = async () => {
-    try {
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        var userData: any;
-        response.forEach((e) => {
-          userData = e.data()
-          if (userData.role == "admin" && (!("adminType" in userData))) {
-            addAdmintypes(e.id);
-          }
-          //AQUI VA
-        });
-        setUserData(userData)
-        if (userData.role == "admin") {
-          setIsAdmin(true)
-        }
-        return userData
-      })
-    } catch (error) {
-      return false
-    }
-  }
-  const addAdmintypes = async (id: any) => {
-    const createAdminType: any = {
-      general: true,
-      pay: false,
-      courses: false,
-      rewards: false,
-      landing: false,
-      coupons: false,
-      users: false,
-      superAdmin: false
-    }
-    const docRef = doc(db, 'users', id);
-    await updateDoc(docRef, {
-      adminType: createAdminType,
-    }).then(() => {
-      console.log('exito')
-    })
-  }
   const logoutFunc = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      window.location.href = "/";
     }).catch((error) => {
       console.log(error)
     });
@@ -142,11 +83,10 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
-  }, [userData]);
-  useEffect(
-    () => {
-      window.addEventListener('scroll', ChangeNav);
-    },
+    window.addEventListener('scroll', ChangeNav);
+    // localStorage.clear();
+    // logoutFunc();
+  },
     [pathname],
   );
 
@@ -154,6 +94,22 @@ const NavBar = () => {
     setHamburger(false);
     setIngresarOpetionsMenuIsOpen(false);
     setNewHamburgerMenuIsOpen(false);
+  }
+
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setUserData(userDataAuth.user);
+        if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
+          setIsAdmin(true);
+        }
+        setLoggedIn(true);
+      }
+    }, [])
+
+  } catch (error) {
+    setLoggedIn(false);
   }
 
   // COLOR NAVBAR
@@ -232,9 +188,9 @@ const NavBar = () => {
             <Link href="/Profile">
               < UserImage>
                 {
-                  userData && userData.photoURL
+                  userData && userData.photo
                     ?
-                    <img src={userData.photoURL} />
+                    <img src={userData.photo} />
                     :
                     <img src={DEFAULT_USER_IMG} />
                 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Progress, Space } from 'antd';
-const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any) => {
+const CourseProgress = ({ title, season, lesson, course, userId, refresh, data }: any) => {
   const [totalViewed, setTotalViewed] = useState(0)
 
   const checkLecture = () => {
@@ -12,11 +12,12 @@ const CourseProgress = ({ title, season, lesson, course, userId, refresh }: any)
     });
     setTotalViewed(tempViewd);
   }
+
   useEffect(() => {
-    if (course) {
+    if (data || course) {
       checkLecture()
     }
-  }, [refresh])
+  }, [data, course])
 
   return (
     <Space wrap>

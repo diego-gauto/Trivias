@@ -6,16 +6,13 @@ import {
   SubscriptionContainer,
 } from "./User.styled";
 import { useEffect, useState } from "react";
-import { cancelSub, getTimeRewards } from "../../../store/actions/ProfileActions";
-import { getTimeLevel } from "../../../store/actions/RewardActions";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../../firebase/firebaseConfig";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
+import { cancelStripe } from "../../../components/api/users";
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress }: any) => {
+const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
@@ -40,7 +37,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
     // })
   }
   useEffect(() => {
-    let tempDate = new Date((user.membership.finalDate) * 1000);
+    let tempDate = new Date((user.final_date) * 1000);
     let tempDay = tempDate.getDate();
     let tempMonth = tempDate.getMonth() + 1;
     let tempYear = tempDate.getFullYear();
@@ -54,24 +51,26 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   }, [monthProgress])
   const cancelSubscription = async () => {
     setLoader(true);
-    if (user.membership.method == 'stripe') {
-      const updateCard = httpsCallable(functions, 'cancelStripeSubscription');
-      await updateCard(user.membership.planId).then(async (res: any) => {
-        handleShow()
+    if (user.method == 'stripe') {
+      let sub = {
+        subscriptionId: user.plan_id,
+        userId: user.user_id,
+        planName: ""
+      }
+      cancelStripe(sub).then(() => {
+        handleClick()
         setLoader(false);
       })
     } else {
-      let userPlan: any = {
-        planId: user.membership.planId,
-        id: user.id
-      }
-      const cancelPlan = httpsCallable(functions, 'cancelPaypalSubscription');
-      await cancelPlan(userPlan).then(async (res: any) => {
-        handleShow();
-        setLoader(false);
-      })
+      //   const cancelPlan = httpsCallable(functions, 'cancelPaypalSubscription');
+      //   await cancelPlan(userPlan).then(async (res: any) => {
+      //     handleShow();
+      //     setLoader(false);
+      //   })
+      // }
+      // cancelSub(user.id);
     }
-    cancelSub(user.id);
+
   }
 
   return (
@@ -114,9 +113,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 <p><span className="first-word">Certificados</span> <br />
                   <span>acumulados</span></p>
                 <div className="bottom-contain">
-                  <p className="certificate-number">
+                  {/* <p className="certificate-number">
                     {user.certificates?.length > 0 ? (user.certificates.length > 9 ? user.certificates.length : "0" + user.certificates.length) : 0}
-                  </p>
+                  </p> */}
                   <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
               </div>
@@ -159,7 +158,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
 
         </div>
         <Link href="/Rewards">
-          <button>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+          <button disabled>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
         </Link>
       </RewardContainer>
       <SubscriptionContainer>
@@ -172,7 +171,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {user.membership.finalDate > date ? <p >
+              {user.level === 1 ? <p >
                 Gonvar+<br />
                 <span className="span">Suscripción mensual</span>
               </p> :
@@ -182,12 +181,12 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
               Próximo cargo
             </p>
             <div className="subscription-info">
-              {user.membership.finalDate > date ? <p >
+              {user.level === 1 ? <p >
                 <span className="span">{formatDate}</span>
               </p> :
                 <p><span className="span">s/f</span></p>}
             </div>
-            {(!loader && user.membership.level > 0) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
+            {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>

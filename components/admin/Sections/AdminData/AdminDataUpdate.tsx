@@ -1,8 +1,7 @@
 
 
 import { useEffect, useState } from "react";
-
-import { updateRole } from "../../../../store/actions/AdminActions";
+import { updateAdminRole } from "../../../api/admin";
 import { SelectContain } from "../../Coupons/Coupons.styled";
 import { InputContain } from "../../Courses/Form/CourseForm_Create.styled";
 import { CaretD2, Label2 } from "../../Courses/Form/Select/SelectStyles.styled";
@@ -27,71 +26,39 @@ import {
 } from "./AdminDataUpdate.styled";
 import RoleEdit from "./RoleEdit";
 
-type AdminType = {
-  general: boolean;
-  pay: boolean;
-  courses: boolean;
-  rewards: boolean;
-  landing: boolean;
-  coupons: boolean;
-  users: boolean;
-  superAdmin: boolean;
-};
-
 type Props = {
   admin: any;
   setIsVisible: (open: boolean) => void;
   adminID: any;
   role: any;
+  handleClick: any;
 };
 
-const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
-  const [adminType, setAdminType] = useState<AdminType>({
-    general: true,
-    pay: false,
-    courses: false,
-    rewards: false,
-    landing: false,
-    coupons: false,
-    users: false,
-    superAdmin: false
-  });
+const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
-  const [currentRole, setCurrentRole] = useState<boolean>();
 
-  useEffect(() => {
-    const submitChanges = () => {
-      if (!value) return;
-      var newAdminType = { ...adminType };
-      if (value == "superAdmin") {
-        newAdminType.superAdmin = true;
-        setAdminType(newAdminType)
-      };
-      let adminData = { ...admin };
-      adminData.adminType = newAdminType;
 
-      if (admin.adminType.superAdmin === adminData.adminType.superAdmin) return;
+  const formatDate = (value: any) => {
+    let tempDate = new Date(value).getTime();
+    return new Date(tempDate).toLocaleDateString("es-MX")
+  }
 
-      updateRole(adminData, adminID).then(() => {
-        alert("Rol actualizado correctamente")
-        window.location.reload();
-      });
-    }
-    submitChanges();
-  }, [value]);
+  const updateRole = () => {
+    updateAdminRole(admin.user_id).then((res) => {
+      handleClick();
+      setIsVisible(false);
+      setOpen(false);
+    })
+  }
 
-  useEffect(() => {
+  const refresh = () => {
+    handleClick();
+    setIsVisible(false);
     setOpen(false);
-    if ("adminType" in admin) {
-    } else {
-      admin.adminType = adminType;
-    }
-    if (!admin.adminType) return;
-    setCurrentRole(admin.adminType.superAdmin);
-  }, [admin, show]);
+  }
 
   return (
     <UserContain>
@@ -125,21 +92,21 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
                 Gonvar Plus
               </Label>
             </Info>
-            {!currentRole &&
+            {admin.role === 'admin' &&
               <InputContain>
                 <Info>Cambiar rol</Info>
-                {admin.adminType &&
+                {admin.role === 'admin' &&
                   <IconRoleContain>
                     <SelectContain key={1}>
                       <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
-                        {!updatedRole && <>{admin.adminType.superAdmin ? ("superAdmin") : ("admin")}</>}
+                        {!updatedRole && <>{admin.role === 'superAdmin' ? ("superAdmin") : ("admin")}</>}
                         {updatedRole && value}
                         <CaretD2 />
                       </SelectedRoleContain>
                       {
                         open &&
                         <OptionRoleContain>
-                          <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) setValue("superAdmin"); setOpen(false) }}>
+                          <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) updateRole(); }}>
                             <input
                               type="radio"
                               id="Temporada2"
@@ -166,17 +133,17 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
               Fecha de Creación
               {admin.created_at &&
                 <Label>
-                  {new Date(admin.created_at.seconds * 1000).toLocaleDateString("es-MX")}
+                  {formatDate(admin.created_at)}
                 </Label>
               }
             </Info>
             <Info>
               Teléfono
               <Label>
-                {!admin.phoneNumber ? "N/A" : admin.phoneNumber}
+                {admin.phone_number === "undefined" ? "N/A" : admin.phone_number}
               </Label>
             </Info>
-            {!currentRole &&
+            {admin.role === 'admin' &&
               <ButtonRoleContain style={{ marginTop: "22px" }}>
                 <UpdateButton onClick={() => { setShow(true); }}>Editar acceso</UpdateButton>
               </ButtonRoleContain>
@@ -184,7 +151,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role }: Props) => {
           </ColumnContain>
         </Columns>
         {show &&
-          <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} />
+          <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} refresh={refresh} />
         }
       </>
     </UserContain>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { LOGIN_PATH } from "../../../constants/paths";
-import Modal1 from "../Module4/Modal/Modal1";
+import Modal1 from "../../CourseModal/CourseModal";
 
 import { Container } from "react-bootstrap";
 import {
@@ -15,6 +15,7 @@ import {
 } from "./Module5.styled";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
+import { getUserApi } from "../../api/users";
 
 const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [courses, setCourses] = useState<any>([]);
@@ -24,7 +25,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
   const [show, setShow] = useState(false);
   const [course_1, setCourse] = useState<any>({});
   const [loading, setLoading] = useState(true);
-
+  const [userData, setUserData] = useState<any>(null);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const slider = document.querySelector('.scroll-container3') as HTMLElement;
 
@@ -62,14 +63,12 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
     }
     setCounter(0)
   }
+
   useEffect(() => {
     if (course) {
       let temp_courses: any = [];
       course.forEach((element: any) => {
-        if (element.courseType == 'Mensual') {
-          element.courseAbout = element.courseAbout
-          element.courseSubtittle = element.courseSubtittle
-          element.courseTittle = element.courseTittle
+        if (element.type == 'Mensual') {
           temp_courses.push(element);
         }
       });
@@ -79,6 +78,16 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
       }, 4500);
     }
   }, [course, isLoading])
+
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
+
+
 
   return (
     <Container fluid
@@ -100,17 +109,17 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
                   setCourse(element);
                 }}>
                   <SlideModuleContainer
-                    level={element.courseDifficulty}
+                    level={element.difficulty}
                     style={{ flexShrink: 0, width: responsive1023 ? (innerWidth - 10) / 2.25 : (innerWidth - 60) / 5 }}>
-                    <Image src={element.coursePath} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
-                    <p className="title">{element.courseTittle}</p>
-                    <p className="sub">de <span>{element.courseProfessor[0]?.name}</span></p>
+                    <Image src={element.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)", marginBottom: "10px", }} />
+                    <p className="title">{element.title}</p>
+                    <p className="sub">de <span>{element.professors[0]?.name}</span></p>
                     <p className="modules">{element.seasons.length} Módulos</p>
                     <div className="level-container">
-                      {(element.courseDifficulty == "Muy Fácil" || element.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-                      {(element.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-                      {(element.courseDifficulty == "Avanzado" || element.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-                      <p>{element.courseDifficulty}</p>
+                      {(element.difficulty == "Muy Fácil" || element.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                      {(element.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                      {(element.difficulty == "Avanzado" || element.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                      <p>{element.difficulty}</p>
                     </div>
                   </SlideModuleContainer>
                 </div>
@@ -119,14 +128,14 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
           </div>
           {
             <ButtonContain>
-              {(user && user.membership.finalDate < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
+              {(userData && userData.final_date < today) && <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
                 <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                   <PurpleButton>
                     Adquiere Gonvar+
                   </PurpleButton>
                 </div>
               </Link>}
-              {!user && <Link href={LOGIN_PATH}>
+              {!userData && <Link href={LOGIN_PATH}>
                 <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                   <PurpleButton>
                     Adquiere Gonvar+

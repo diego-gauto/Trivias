@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import router from "next/router";
 
-import { LOGIN_PATH } from "../../../../constants/paths";
-import { PurpleButton } from "../../Module1/Module1.styled";
+import { LOGIN_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -24,16 +23,17 @@ import {
   SeasonContain,
   TextContainer,
   VideoContain,
-} from "../../Module3/Modal/Modal1.styled";
-import SelectModule4 from "./SelectModule4";
-import { getSeason } from "../../../../store/actions/courseActions";
-import ModalMaterials from "./ModalMaterials";
+} from "./CourseModal.styled";
+import SelectModule4 from "./Select/SelectModule";
+import { getSeason } from "../../store/actions/courseActions";
+import ModalMaterials from "./Materials/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'
-import { AiFillInfoCircle, AiFillStar } from "react-icons/ai";
-import { Modal } from "react-bootstrap";
+import { AiFillStar } from "react-icons/ai";
+import { ICourseModal } from "./ICourseModal";
 
-const Modal1 = ({ show, setShow, course, user }: any) => {
+const CourseModal = (props: ICourseModal) => {
+  const { show, setShow, course, user } = props;
   const [material, setMaterial] = useState(false);
   const handleClose = () => setShow(false);
   const [lessons, setLessons] = useState<any>([]);
@@ -48,40 +48,34 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
   const handleShow = () => {
     setMaterial(true);
   }
-  const getCurrentSeason = () => {
-    getSeason(course.id).then((res) => {
-      setSeasons(res);
-    })
-  }
-
   const goTo = () => {
     if (user) {
-      if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
+      if ((course.type === "Mensual") && ((user.level === 1 && user.final_date > today) || (user.level === 0 && user.final_date > today))) {
         router.push({
           pathname: 'Lesson',
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
-      if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
-        router.push(
-          { pathname: 'Purchase', query: { type: 'subscription' } }
-        )
+      if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
+        router.push({
+          pathname: 'Purchase',
+          query: { type: 'subscription' }
+        });
       }
-      if (course.courseType == 'Producto' && !course.paid) {
+      if (course.type === "Producto" && course.pay) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: 0, lesson: 0 },
+        });
+      }
+      if (course.type === 'Producto' && !course.pay) {
         router.push(
           { pathname: 'Purchase', query: { type: 'course', id: course.id } }
         )
       }
-    } else {
-      if (course.courseType == 'Gratis') {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: course.id, season: 0, lesson: 0 },
-        });
-      }
-      if (!user && course.courseType !== 'Gratis') {
-        router.push(LOGIN_PATH)
-      }
+    }
+    else {
+      router.push({ pathname: '/auth/Login' })
     }
   }
 
@@ -89,7 +83,6 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
     if (Object.values(course).length > 0) {
       setLessons(course?.seasons[0]?.lessons);
       setIsPlaying(true);
-      getCurrentSeason();
       setTimeout(() => {
         setIsPlaying(false)
       }, 2000)
@@ -144,7 +137,7 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
         <ModalCont >
           <ModalBackground>
-            <ImageBack src={course.coursePath}
+            <ImageBack src={course.image}
               width={1000}
               height={600}
             />
@@ -156,24 +149,22 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 </Cross>
               </div>
               <TextContainer>
-                {/* <p className="course">CURSO</p>
-                <p className="title">{course.courseTittle}</p> */}
-                {course.courseType == "Producto" && <p className="price">por ${course.coursePrice?.toLocaleString('en-US')} <span>MXN</span></p>}
+                {course.type == "Producto" && <p className="price">por ${course.price?.toLocaleString('en-US')} <span>MXN</span></p>}
                 <button onClick={goTo}>
                   Comenzar ahora
                 </button>
               </TextContainer>
             </Container>
           </ModalBackground>
-          <CourseContain level={course.courseDifficulty}>
+          <CourseContain level={course.difficulty}>
             {!responsive990 && <div className="left">
-              <p className="title">{course.courseTittle}</p>
+              <p className="title">{course.title}</p>
               <div className="level-container">
-                {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-                {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-                {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                {(course.difficulty == "Muy Fácil" || course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                {(course.difficulty == "Avanzado" || course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
                 <div className="difficulty-word">
-                  {course.courseDifficulty}
+                  {course.difficulty}
                   <div className="info-icon">
                     i
                     <div className="info-box">
@@ -184,18 +175,18 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                 </div>
               </div>
               <p className="time">Duración estimada</p>
-              <p className="duration">{hms(course.totalDuration)}</p>
+              <p className="duration">{hms(course.duration)}</p>
               <button onClick={handleShow}>Materiales</button>
             </div>}
             {responsive990 && <div className="responsive-top-info">
               <div className="left">
-                <p className="title">{course.courseTittle}.</p>
+                <p className="title">{course.title}.</p>
                 <div className="level-container">
-                  {(course.courseDifficulty == "Muy Fácil" || course.courseDifficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-                  {(course.courseDifficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-                  {(course.courseDifficulty == "Avanzado" || course.courseDifficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                  {(course.difficulty == "Muy Fácil" || course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
+                  {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
+                  {(course.difficulty == "Avanzado" || course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
                   <div className="difficulty-word">
-                    {course.courseDifficulty}
+                    {course.difficulty}
                     <div className="info-icon">
                       i
                       <div className="info-box">
@@ -206,15 +197,15 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
                   </div>
                 </div>
                 <div className="professor-container">
-                  <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
+                  <img src={course.professors?.length ? (course.professors[0].image ? course.professors[0].image : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">
-                      {course.courseProfessor?.length > 0 ? course.courseProfessor[0].name : "Iker Robles García"}
+                      {course.professors?.length > 0 ? course.professors[0].name : "Iker Robles García"}
                     </span>
                     <span className="info-icon">
                       i
                       <span className="info-box">
-                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                        {course.professors?.length > 0 ? (course.professors[0].about ? course.professors[0].about : "Lorem ipsum") : "Lorem ipsum"}
                       </span>
                     </span>
                   </p>
@@ -222,45 +213,45 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
               </div>
               <div className="right">
                 <div className="rating">
-                  <p>{course.courseRating ? (course.courseRating / 20) : 0} <span className="review-count">(142)</span></p>
-                  <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
+                  <p>{course.rating ? (course.rating / 20) : 0} <span className="review-count">(142)</span></p>
+                  <Rating allowHover={false} readonly={true} ratingValue={course.rating ? (course.rating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
                 <p className="time">Duración estimada</p>
-                <p className="duration">{hms(course.totalDuration)}</p>
+                <p className="duration">{hms(course.duration)}</p>
                 <button onClick={handleShow}>Materiales</button>
               </div>
             </div>}
             <div className="right">
               {!responsive990 && <div className="top">
                 <div className="rating">
-                  <p>{course.courseRating ? (course.courseRating / 20) : 0} <span className="review-count">(142)</span></p>
-                  <Rating allowHover={false} readonly={true} ratingValue={course.courseRating ? (course.courseRating) : 0}
+                  <p>{course.rating ? (course.rating / 20) : 0} <span className="review-count">({course.reviews})</span></p>
+                  <Rating allowHover={false} readonly={true} ratingValue={course.rating ? (course.rating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
                 <div className="professor-container">
-                  <img src={course.courseProfessor?.length ? (course.courseProfessor[0].path ? course.courseProfessor[0].path : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
+                  <img src={course.professors?.length ? (course.professors[0].image ? course.professors[0].image : DEFAULT_PROFESSOR_IMAGE) : DEFAULT_PROFESSOR_IMAGE} alt="" />
                   <p>CONOCE A <span>TU INSTRUCTOR</span> <br />
                     <span className="name">
                       {
-                        course.courseProfessor?.length > 0
-                          ? <>{course.courseProfessor[0].name} </>
+                        course.professors?.length > 0
+                          ? <>{course.professors[0].name} </>
                           : <>Iker Robles García</>
                       }
                     </span>
                     <span className="info-icon">
                       i
                       <span className="info-box">
-                        {course.courseProfessor?.length > 0 ? (course.courseProfessor[0].about ? course.courseProfessor[0].about : "Lorem ipsum") : "Lorem ipsum"}
+                        {course.professors?.length > 0 ? (course.professors[0].about ? course.professors[0].about : "Lorem ipsum") : "Lorem ipsum"}
                       </span>
                     </span>
                   </p>
                 </div>
               </div>}
               <div className="bottom">
-                <p>{course.courseAbout}</p>
+                <p>{course.about}</p>
               </div>
             </div>
           </CourseContain>
@@ -307,8 +298,8 @@ const Modal1 = ({ show, setShow, course, user }: any) => {
           </LessonContain>
         </ModalCont>
       </ModalMod>
-      <ModalMaterials show={material} setShow={setMaterial} materials={course.courseMaterial}></ModalMaterials>
+      <ModalMaterials show={material} setShow={setMaterial} materials={course.materials}></ModalMaterials>
     </ModalContain >
   )
 }
-export default Modal1;
+export default CourseModal;

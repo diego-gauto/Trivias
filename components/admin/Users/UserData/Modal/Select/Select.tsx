@@ -15,16 +15,16 @@ const Select = ({ courses, handleClick }: any) => {
       {
         open == true &&
         <OptionContain>
-          {courses.map((x: DocumentData) => {
+          {courses.map((x: DocumentData, index: number) => {
             return (
-              <Option onClick={() => { setValue(x.courseTittle); setOpen(false); handleClick(x) }}>
+              <Option key={"course-product-" + index} onClick={() => { setValue(x.title); setOpen(false); handleClick(x) }}>
                 <input
                   type="radio"
                   id="Temporada1"
                   name="category"
                   value="Temporada 1"
                 />
-                <Label > Curso {x.courseTittle}</Label>
+                <Label > Curso {x.title}</Label>
               </Option>
             )
           })}

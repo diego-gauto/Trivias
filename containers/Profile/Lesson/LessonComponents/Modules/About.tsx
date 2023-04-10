@@ -5,21 +5,16 @@ import { PositionTitle, TitleContain, Titles } from './Module.styled';
 import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
-import { getTeacherCourse } from '../../../../../store/actions/courseActions';
 import { BiDownload } from 'react-icons/bi';
 import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const About = ({ value, setValue, data, teacherCreds }: any) => {
 
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
-  useEffect(() => {
-    if (teacherCreds.length > 0) {
-      getTeacherCourse(teacherCreds[0].name).then((res: any) => {
-        setTeacher(res[0])
-      })
-    }
-  }, [])
+  const [index, setIndex] = useState<number>(0)
+
   return (
     <>
       <TitleContain>
@@ -44,18 +39,14 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
       <AboutContain>
         <TextContainer>
           <LessonTitle>
-            {data.courseTitle}, <span>de {teacherCreds[0]?.name}</span>
+            {data.title}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>
-            <p>En esta clase de nivel básico aprenderás cómo realizar el efecto humo.</p>
+            <p>{data.objectives}.</p>
             <p className='title'>Especificaciones</p>
-            <p>A través de este curso, aprenderás todas las habilidades que necesitas para ayudar a
-              las empresas a brindar la experiencia de usuario adecuada para sus productos.
-              Todas las técnicas incluidas en en el curso son estándares de la industria probados y
-              comprobados, que te equiparán con el mejor conocimiento para comenzar tu nuevo
-              camino profesional.</p>
-            <p className='title'>Material de apoyo</p>
+            <p>{data.about}.</p>
+            {/* {data.extra.length > 0 && <p className='title'>Material de apoyo</p>}
             <ol type="a">
               {data?.extra?.map((extra: any) => {
                 return (
@@ -71,15 +62,29 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
                   </Link>
                 )
               })}
-            </ol>
+            </ol> */}
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>
-          <img src={teacher.path ? teacher.path : defaultImg} alt="" />
+          <img src={teacherCreds[index]?.image ? teacherCreds[index]?.image : defaultImg} alt="" />
+          {teacherCreds.length > 0 && <MdKeyboardArrowLeft className='left' onClick={() => {
+            if (index === 0) {
+              setIndex(teacherCreds.length - 1)
+            } else {
+              setIndex(index - 1)
+            }
+          }} />}
+          {teacherCreds.length > 0 && < MdKeyboardArrowRight className='right' onClick={() => {
+            if (index === teacherCreds.length - 1) {
+              setIndex(0)
+            } else {
+              setIndex(index + 1)
+            }
+          }} />}
           <p className='title'>Conoce a <br />
             <span>tu instructor</span>
           </p>
-          <p>{teacher.about}</p>
+          <p>{teacherCreds[index]?.about}</p>
         </div>
       </AboutContain>
     </>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getLandingData } from "../../../store/actions/LandingActions";
 import LandingObject from "../Landing/templates";
-import SideBar from "../SideBar";
 import { AdminContain } from "../SideBar.styled";
 import HeroSection from "./HeroSection/HeroSection";
 import {
@@ -46,7 +45,6 @@ const Landing = () => {
 
   return (
     <AdminContain>
-      <SideBar />
       <GeneralContain>
         <AddTitle>
           HomePage

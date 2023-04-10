@@ -1,97 +1,45 @@
-import { doc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
-import { db } from '../../../../firebase/firebaseConfig';
-import { IHomeWorkModal } from '../../../../interfaces/IHomeWorks';
-import { getWholeCourse, updateProgressStatus } from '../../../../store/actions/courseActions';
-import { addReview, getUserScore } from '../../../../store/actions/UserActions';
 import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, InputContain, ButtonContain, SafeContained } from './HomeWorkModal.styled';
 
 
 import { SendSingleEmail } from "../../../../store/actions/EmailActions";
+import { reviewHomeworkApi } from '../../../api/homeworks';
 
 interface props {
   show: boolean,
   setShow: any,
-  data: IHomeWorkModal,
+  data: any,
   user: any,
   handleClick: any
 }
 
 const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
-  const [userScore, setUserScore] = useState<number>(0)
   const [value, setValue] = useState<number>(0)
   const [review, setReview] = useState<any>({ score: 0 })
   const handleClose = () => setShow(false);
 
-  const createReview = () => {
-    addReview(review).then((res) => {
+  const updateHomework = () => {
+    let temp = {
+      ...review,
+      status: 1,
+      id: data.id,
+      user_id: data.userId,
+      lessonId: data.lessonId,
+    }
+    reviewHomeworkApi(temp).then(() => {
+      handleClick();
+      setValue(0);
     })
   }
-  const updateStatus = async () => {
-
-    let tempAproved = review.aproved
-    if (value == 1) {
-      tempAproved = true;
-    }
-    if (tempAproved) {
-      const docRef = doc(db, 'users', data.userId);
-      await updateDoc(docRef, {
-        score: userScore + review.score
-      })
-      getWholeCourse(data.courseId).then((res) => {
-        let tempIndex = res.seasons[data.season].lessons[data.lesson].progress.findIndex((x: any) => x.id == data.userId);
-        res.seasons[data.season].lessons[data.lesson].progress[tempIndex].status = true;
-        updateProgressStatus(res.seasons[data.season].lessons[data.lesson].progress, data.courseId, res.seasons[data.season].id, data.lessonId)
-      })
-    }
-    const docRef = doc(db, 'homeworks', data.id);
-    await updateDoc(docRef, {
-      status: true,
-      aproved: tempAproved
-    })
-
-
-    handleClick();
-    setValue(0);
-
-    /*  let emailData = {
- 
-       text: "hello",
-       text2: 2,
- 
-     };
- 
-     await SendSingleEmail(
-       emailData
- 
-     ).then((e) => {
-       console.log(e)
-     }) */
-
-
-  }
-  const getUser = () => {
-    getUserScore(data.userId).then((res: any) => {
-      setUserScore(res[0].score)
-    })
-  }
-  useEffect(() => {
-    if (show == true) {
-      getUser()
-    }
-  }, [show])
 
   useEffect(() => {
     if (data) {
       setReview({
         score: 0,
-        id: data.courseId,
-        title: data.title,
-        lesson: data.lesson,
-        season: data.season,
-        userEmail: data.userEmail,
-        aproved: data.aproved
+        status: 0,
+        approved: data.approved,
+        comment: ''
       })
     }
   }, [data])
@@ -119,7 +67,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                   Curso
                 </Text>
                 <Text2>
-                  {data.title}
+                  {data.courseTitle}
                 </Text2>
               </ItemContain>
               <ItemContain>
@@ -127,7 +75,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                   Temporada
                 </Text>
                 <Text2>
-                  {data.season + 1}
+                  {data.seasonNumber}
                 </Text2>
               </ItemContain>
               <ItemContain>
@@ -135,7 +83,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                   Lección
                 </Text>
                 <Text2>
-                  {data.lesson + 1}
+                  {data.lessonNumber}
                 </Text2>
               </ItemContain>
               <InputContain>
@@ -155,7 +103,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                   Tarea Aprobada
                 </label>
                 <select defaultValue={0} onChange={(e: any) => {
-                  setValue(e.target.value)
+                  setReview({ ...review, approved: parseInt(e.target.value) })
                 }}>
                   <option value={1}>Si</option>
                   <option value={0}>No</option>
@@ -169,16 +117,15 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                   placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing 
               elit. Tellus ultrices id feugiat cursus velit. Aliquam pulvinar 
               in orci malesuada."
-                  defaultValue={data.about}
+                  defaultValue={review.comment}
                   onChange={(e: any) => {
-                    setReview({ ...review, description: e.target.value })
+                    setReview({ ...review, comment: e.target.value })
                   }}
                 />
               </InputContain>
               <ButtonContain>
                 <button onClick={() => {
-                  createReview(),
-                    updateStatus()
+                  updateHomework()
                 }}>
                   Guardar
                 </button>
@@ -186,7 +133,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
             </DataContain>
           }
           {
-            data.status == true &&
+            data.status === 1 &&
             <DataContain>
               <SafeContained>
                 <p> Tarea Revisada</p>

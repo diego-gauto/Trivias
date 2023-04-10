@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Image } from "react-bootstrap";
 
 import { getPaidCourses } from "../../../store/actions/UserActions";
-import Modal1 from "../Module4/Modal/Modal1";
+import Modal1 from "../../CourseModal/CourseModal";
 import {
   Title,
 } from "../Module4/Module4.styled";
@@ -61,7 +61,7 @@ const Module6 = ({ user, allCourses, isLoading, innerWidth }: any) => {
   }
   useEffect(() => {
     let temp_courses: any = [];
-    if (user) {
+    if (user === "none") {
       let date = new Date().getTime() / 1000;
       getPaidCourses(user.id).then((paid) => {
         setUserCourses(paid);

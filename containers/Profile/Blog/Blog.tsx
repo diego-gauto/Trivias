@@ -5,16 +5,19 @@ import { getBlogs } from '../../../store/actions/AdminActions';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { LoaderContain } from '../User/User.styled';
 import { IBlog } from './IBlog';
+import { getBlogsApi } from '../../../components/api/blog';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
   const [loader, setLoader] = useState(false);
+
 
   const goToBlog = (blog: any) => {
     let blogText: any = blog.title.replaceAll(" ", "-");
     router.push({ pathname: `/Blog/${blogText}` })
   }
   useEffect(() => {
+    getBlogsApi();
     getBlogs().then((res: any) => {
       res.forEach((element: IBlog) => {
         let tempDate: any = new Date(element.createdAt.seconds * 1000);

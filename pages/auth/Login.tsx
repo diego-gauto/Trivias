@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../firebase/firebaseConfig";
 import {
   LoaderContain,
   LoaderImage,
@@ -13,17 +10,18 @@ import {
   LoginBackground,
   Error,
 } from "../../screens/Login.styled";
-import { accessWithAuthProvider, getPastUser, signInWithCreds, signUpWithCreds } from "../../store/actions/AuthActions";
 import ModalForgot from "./Modals/ModalForgot";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../hooks/useAuth";
-import { IMembership } from "../../store/types/AuthActionTypes";
-import { IStripeUserData } from "../../interfaces/IStripeUserData";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { getUsers } from "../../components/api/user";
+import { useGoogleLogin } from "@react-oauth/google";
+import { facebookUserInfo, googleTokens, loginWithProviderApi, updatePastUser } from "../../components/api/auth";
+import { useLogin, useFacebook } from 'react-facebook';
+import { getWholeCourses } from "../../store/actions/courseActions";
+import { addCourse } from "../../components/api/lessons";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -62,6 +60,8 @@ const Login = () => {
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const { login } = useLogin();
+
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
   };
@@ -71,6 +71,7 @@ const Login = () => {
   const toggleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
   };
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -93,81 +94,60 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
-    setAuthLoader(true)
+    setAuthLoader(true);
     let signUpData = {
       credentials: {
         email: formData.email,
         password: formData.password,
       },
     };
-    const redirectURL = await signInWithCreds(signUpData);
-    console.log(redirectURL)
-    if (redirectURL == 'auth/user-not-found') {
-      setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
-      setError(true);
-      setAuthLoader(false);
-      setShow(true);
-    }
-    if (redirectURL == 'auth/wrong-password') {
-      setErrorMsg('El correo o la contraseña es incorrecta!');
-      setError(true);
-      setAuthLoader(false);
-      setShow(true);
-    }
-    if (redirectURL == "auth/email-already-exists") {
-      setErrorMsg('El correo ingresado ya existe!');
-      setError(true);
-      setAuthLoader(false);
-      setShow(true);
-    }
-    if (redirectURL == "/Preview") {
-      setIsLoading(true);
-      window.location.href = redirectURL;
-    }
-    if (redirectURL == "/auth/RegisterPastUser") {
-      setPastUserScreen(true);
-      getPastUser(formData.email).then((res) => {
-        setPastUser(res[0]);
-      }).then(() => { setAuthLoader(false); })
-    }
+    loginWithProviderApi(signUpData.credentials).then((res) => {
+      if (res[0]) {
+        if (res[0].past_user === 'si') {
+          setPastUser(res[0]);
+          setPastUserScreen(true);
+          setAuthLoader(false);
+          return
+        }
+        if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
+          localStorage.setItem('email', signUpData.credentials.email);
+          window.location.href = '/';
+        }
+        if (res[0].password !== signUpData.credentials.password) {
+          setErrorMsg('La contraseña es incorrecta!');
+          setError(true);
+          setAuthLoader(false);
+          setShow(true);
+        }
+        if (res[0].provider !== 'web') {
+          setErrorMsg('El correo existe con otra cuenta!');
+          setError(true);
+          setAuthLoader(false);
+          setShow(true);
+        }
+      }
+      if (res.msg === 'Este usuario no existe!') {
+        setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
+        setError(true);
+        setAuthLoader(false);
+        setShow(true);
+      }
+    })
   }
   const onSubmit2: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
-    const getStripeUserData = httpsCallable<{ customerEmail: string }, IStripeUserData | null>(functions, "getStripeUserData");
-    const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
-    const signUpData: { credentials: object; membership?: IMembership } = {
-      credentials: {
-        name: pastUser.firstName,
-        lastName: pastUser.lastName,
-        email: pastUser.email,
-        password: formData.password,
-        phoneInput: "+52" + pastUser.whatsapp,
-      },
-    };
-    if (!!stripeUserData) {
-      signUpData.membership = {
-        finalDate: stripeUserData.current_period_end,
-        level: 1,
-        method: MEMBERSHIP_METHOD_DEFAULT,
-        paymentMethod: stripeUserData.paymentMethods.map((pm) => pm.id),
-        // @ts-expect-error
-        planId: stripeUserData.plan.id,
-        planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
-        startDate: stripeUserData.current_period_start,
-      }
+    let past_user = {
+      password: formData.password,
+      provider: "web",
+      userId: pastUser.id
     }
-    const redirectURL = await signUpWithCreds(signUpData, stripeUserData?.paymentMethods);
-    window.location.href = redirectURL;
+    updatePastUser(past_user).then((res) => {
+      localStorage.setItem('email', pastUser.email);
+      window.location.href = "/";
+    })
   }
+
   const [showForgot, setShowForgot] = useState(false);
-
-  const handleSignUpWithAuthProvider = async (authProvider: string) => {
-    let trial = false;
-    setIsLoading(true)
-    const redirectURL = await accessWithAuthProvider(authProvider, trial);
-    window.location.href = redirectURL;
-  };
-
 
   useEffect(() => {
     if (loggedIn) {
@@ -186,9 +166,131 @@ const Login = () => {
     }, 300);
   }, [])
 
-  const googleLogin = () => {
-    getUsers()
+  const googleLogin = useGoogleLogin({
+    onSuccess: tokenResponse => {
+      setAuthLoader(true);
+      googleTokens(tokenResponse.code).then((res) => {
+        let user = {
+          email: res.email,
+        }
+        loginWithProviderApi(user).then((res) => {
+          if (res[0]) {
+            if (res[0].past_user === 'si') {
+              let past_user = {
+                password: "",
+                provider: "google",
+                userId: res[0].id
+              }
+              updatePastUser(past_user).then((respone) => {
+                localStorage.setItem('email', res[0].email);
+                window.location.href = "/";
+              })
+              setAuthLoader(false);
+              return
+            }
+            if (res[0].provider !== 'google') {
+              setErrorMsg('El correo existe con otra cuenta!');
+              setError(true);
+              setAuthLoader(false);
+              setShow(true);
+            }
+          }
+          if (res.msg === "Este usuario no existe!") {
+            setErrorMsg('Este usuario no existe!');
+            setAuthLoader(false);
+            setShow(true);
+            setIsLoading(false);
+          } else {
+            localStorage.setItem('email', user.email)
+            window.location.href = "/"
+          }
+        })
+      })
+    },
+    flow: 'auth-code',
+  });
+
+  const loginWithFacebook = async () => {
+    try {
+      setAuthLoader(true);
+      const response = await login({
+        scope: 'email',
+      });
+      let userInfo = {
+        id: response.authResponse.userID,
+        access_token: response.authResponse.accessToken
+      }
+      facebookUserInfo(userInfo).then((res) => {
+        let user = {
+          email: res.email,
+        }
+        loginWithProviderApi(user).then((res) => {
+          if (res[0]) {
+            if (res[0].past_user === 'si') {
+              let past_user = {
+                password: "",
+                provider: "facebook",
+                userId: res[0].id
+              }
+              updatePastUser(past_user).then((respone) => {
+                localStorage.setItem('email', res[0].email);
+                window.location.href = "/";
+              })
+              setAuthLoader(false);
+              return
+            }
+            if (res[0].provider !== 'facebook') {
+              setErrorMsg('El correo existe con otra cuenta!');
+              setError(true);
+              setAuthLoader(false);
+              setShow(true);
+            }
+          }
+          if (res.msg === "Este usuario no existe!") {
+            setErrorMsg('Este usuario no existe!');
+            setAuthLoader(false);
+            setShow(true);
+            setIsLoading(false);
+          } else {
+            localStorage.setItem('email', user.email);
+            window.location.href = "/"
+          }
+        })
+      })
+    } catch (error: any) {
+      setAuthLoader(false);
+    }
   }
+
+  // useEffect(() => {
+  //   getWholeCourses().then(async (res) => {
+  //     await Promise.all(res.map(async (element: any) => {
+  //       let tempCoures = {
+  //         title: element.courseTittle,
+  //         subtitle: element.courseSubtittle,
+  //         about: element.courseAbout,
+  //         certificate_color: element.courseCertificateColor || "naranja",
+  //         difficulty: element.courseDifficulty,
+  //         mandatory: element.courseHomeWork,
+  //         image: element.coursePath,
+  //         phrase: element.coursePhrase,
+  //         price: element.coursePrice,
+  //         duration: element.courseDuration,
+  //         rating: element.courseRating,
+  //         reviews: 0,
+  //         type: element.courseType,
+  //         sequential: element.courseHomeWork,
+  //         published: true,
+  //         categories: element.courseCategory,
+  //         materials: element.courseMaterial,
+  //         seasons: element.seasons
+  //       }
+  //       await addCourse(tempCoures).then((res) => {
+  //         console.log(res);
+  //       })
+  //     }))
+  //   })
+  // }, [])
 
   return (
 
@@ -300,6 +402,7 @@ const Login = () => {
                               value={pastUser.email}
                               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                               {...register("email")}
+                              disabled={pastUserScreen}
                             />
                           </div>
                           {
@@ -388,11 +491,10 @@ const Login = () => {
                     </div>
                     <div className="socials">
                       <img src="../images/googleLogin.png" onClick={() => {
-                        // handleSignUpWithAuthProvider("Google");
-                        googleLogin()
+                        googleLogin();
                       }} alt="" />
                       <img src="../images/facebookLogin.png" onClick={() => {
-                        handleSignUpWithAuthProvider("Facebook");
+                        loginWithFacebook();
                       }} alt="" />
                     </div>
                     <p className="terms">Al iniciar sesión, aceptas los <span>términos, <br />

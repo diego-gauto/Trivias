@@ -10,19 +10,20 @@ import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
 import { getWholeCourses } from "../../../store/actions/courseActions";
 declare let Hls: any
 
-export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
+export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   const responsive1140 = useMediaQuery({ query: "(max-width: 1140px)" });
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
   const [loading, setLoading] = useState(true);
-  const [courses, setCourses] = useState<any>([]);
   const [openModal, setOpenModal] = useState(false);
+  let today = new Date().getTime() / 1000;
   const handleShow = () => {
     setOpenModal(true);
   }
   const router = useRouter();
 
   const doVideoStuff = () => {
+
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById('video') as HTMLMediaElement;
     var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
@@ -47,22 +48,23 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
     }
     return result;
   }
-  const getCourses = () => {
-    let tempCourses: any = [];
-    getWholeCourses().then((response) => {
-      response.forEach((element: any) => {
-        if (element.totalLessons > 0) {
-          element.totalDuration = hms(element.totalDuration)
-          tempCourses.push(element)
-        }
-      });
-      setCourses(tempCourses);
-    })
+  const goTo = () => {
+    if (loggedIn) {
+      if (user.level === 1) {
+        router.push("/Preview")
+      }
+      if (user.level === 0) {
+        router.push({
+          pathname: 'Purchase',
+          query: { type: 'subscription' }
+        });
+      }
+    } else {
+      router.push(SIGNUP_PATH)
+    }
   }
-
   useEffect(() => {
     doVideoStuff()
-    getCourses();
   }, [])
   return (
     <CardContainer className="card-container">
@@ -82,14 +84,10 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
           <h1 className="price">Sólo $149 <span>MXN/mes</span></h1>
           {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
-                loggedIn
-                  ? router.push("/Purchase?type=subscription")
-                  : router.push(SIGNUP_PATH)
-              }} />
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => { goTo() }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
-            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} />
+            <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />
           </Row>}
         </div>
         <div className="video">
@@ -97,11 +95,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courseId }: any) => {
           ></video>
           {!responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => {
-                loggedIn
-                  ? router.push("/Purchase?type=subscription")
-                  : router.push(SIGNUP_PATH)
-              }} />
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => { goTo() }} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
             <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />

@@ -7,10 +7,13 @@ import Modules from '../Modules/Modules';
 import { useMediaQuery } from 'react-responsive';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import { addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
+import { duration } from 'html2canvas/dist/types/css/property-descriptors/duration';
+import { useRouter } from 'next/router';
 
 declare let Hls: any
 
-const Video = ({ data, title, id, course, user, season, lesson, handleComplete, comments }: any) => {
+const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [viewed, setViewed] = useState<any>(0);
@@ -22,17 +25,29 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
   const [count, setCount] = useState(0);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [quiz, setQuiz] = useState<any>([]);
-
+  const router = useRouter();
   const finishedLesson = () => {
-    let temp: any = { ...data };
-    if (user) {
-      if (temp.users.includes(user.id)) {
-      } else {
-        user.score = parseInt(user.score) + parseInt(data.points);
-        addUserToLesson(data, id, data.seasonId, data.id, user);
-        temp.users.push(user.id);
-        setCurrent({ ...temp });
-        handleComplete()
+    if (!data.users.includes(user.user_id)) {
+      let tempLesson = {
+        lessonId: data.id,
+        userId: user.user_id
+      }
+      addUserToLessonApi(tempLesson).then(() => {
+        handleComplete();
+        if (course.sequential === 0) {
+          router.push({
+            pathname: 'Lesson',
+            query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+          })
+        }
+      })
+    }
+    else {
+      if (course.sequential === 0) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+        })
       }
     }
   }
@@ -51,43 +66,33 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     }
   }, [data])
 
-  const handleClick = (value: boolean) => {
-    setMenu(value);
-  }
-
   const handleDuration = (duration: number) => {
     setDuration(duration);
   }
-  const handleProgress = (seconds: number) => {
+  const handleProgress = async (seconds: number) => {
     let progress = (seconds * 100) / duration;
+    let tempProgress = {
+      time: progress,
+      seconds: seconds,
+      lessonId: data.id,
+      userId: user.user_id
+    }
     if (user) {
-      if (!("progress" in course.seasons[season].lessons[lesson])) {
-        course.seasons[season].lessons[lesson].progress = [];
-      }
-      if (!course.seasons[season].lessons[lesson].progress.some((e: any) => e.id == user.id)) {
-        course.seasons[season].lessons[lesson].progress.push({ id: user.id, time: progress, seconds: seconds, status: false })
-      } else {
-        let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
-        course.seasons[season].lessons[lesson].progress[index].seconds = seconds;
-        course.seasons[season].lessons[lesson].progress[index].time = progress;
-      }
-
-      // updateLessonProgress(course.seasons[season].lessons[lesson].progress, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
-      updateLessonProgress(user.id, progress, seconds, id, course.seasons[season].id, course.seasons[season].lessons[lesson].id)
+      await updateUserProgressApi(tempProgress);
     }
   }
 
   const handleViewed = () => {
     if (user) {
-      if (("progress" in course.seasons[season].lessons[lesson])) {
-        let index = course.seasons[season].lessons[lesson].progress.findIndex((x: any) => x.id == user.id)
+      let index = data.progress.findIndex((x: any) => x.user_id == user.user_id)
+      if (data.progress[index] && data.progress[index].time >= 99) {
+        return 0
+      } else {
         if (index == -1) {
           return 0
         } else {
-          return course.seasons[season].lessons[lesson].progress[index].seconds
+          return data.progress[index].seconds
         }
-      } else {
-        return 0
       }
     } else {
       return 0
@@ -102,11 +107,11 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
     setSelected(temp_selected);
 
     let viewed = 0;
-    course.lessons.forEach((element: any) => {
-      if (element.users.includes(user.id)) {
-        viewed++;
-      }
-    });
+    // course.lessons.forEach((element: any) => {
+    //   if (element.users.includes(user.id)) {
+    //     viewed++;
+    //   }
+    // });
     setCount(viewed)
   }, [course])
 
@@ -166,74 +171,92 @@ const Video = ({ data, title, id, course, user, season, lesson, handleComplete, 
   }
 
   return (
-    <Segment>
-      <VideoContain>
-        <div className='nav-course'>
-          <img src="/images/Navbar/NavbarLogo2.png" alt="" />
-          {!menu ? <GiHamburgerMenu onClick={() => {
-            setMenu(!menu)
-          }}></GiHamburgerMenu> :
-            <AiOutlineClose onClick={() => {
-              setMenu(!menu)
-            }}></AiOutlineClose>}
-        </div>
-        {"mandatory" in course.seasons[season].lessons[lesson] ?
-          <div className='quiz-container'>
-            <Title>
-              Quiz: {course.seasons[season].lessons[lesson].title}
-            </Title>
-            {course.seasons[season].lessons[lesson].questions.map((question: any, index: number) => {
-              return (
-                <div className='question-container'>
-                  <div className='question'>
-                    <p>{index + 1}.</p>
-                    <p dangerouslySetInnerHTML={{ __html: question.question }}></p>
-                  </div>
-                  <div className='answers'>
-                    {question.answers.map((answer: any, ind: number) => {
-                      return (
-                        <div style={{ display: "flex" }}>
-                          <p>{answer.answer}</p>
-                          <input type="radio" id={"q" + index + "a" + ind} onChange={() => {
-                            chooseAnswer(index, ind)
-                          }} />
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )
-            })}
-            <button onClick={submit}>Responder</button>
-          </div>
-          :
-          <ReactPlayer
-            className='absolute'
-            ref={p => p?.seekTo(handleViewed())}
-            url={data.link}
-            playing={true}
-            muted={false}
-            controls
-            width="100%" height="auto"
-            onEnded={finishedLesson}
-            onDuration={(duration) =>
-              handleDuration(duration)
-            }
-            onProgress={(state) => {
-              handleProgress(state.playedSeconds)
-            }}
-          />
-        }
-        {
-          responsive1124 && <div className='module-selector'>
-            <p>{course.courseTittle}</p>
-            <p><span>Un curso de</span> {course.courseProfessor[0]?.name}</p>
-          </div>
-        }
-        <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} />
-      </VideoContain>
-      <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userData={user} season={season} lesson={lesson} />
-    </Segment>
+    <ReactPlayer
+      className='absolute'
+      ref={p => p?.seekTo(handleViewed())}
+      url={data.link}
+      playing={true}
+      muted={false}
+      controls
+      width="100%" height="auto"
+      style={{ position: "relative" }}
+      onEnded={finishedLesson}
+      onDuration={(duration) => {
+        handleDuration(duration);
+      }
+      }
+      onProgress={(state) => {
+        handleProgress(state.playedSeconds)
+      }}
+    />
+    // <Segment>
+    //   <VideoContain>
+    //     <div className='nav-course'>
+    //       <img src="/images/Navbar/NavbarLogo2.png" alt="" />
+    //       {!menu ? <GiHamburgerMenu onClick={() => {
+    //         setMenu(!menu)
+    //       }}></GiHamburgerMenu> :
+    //         <AiOutlineClose onClick={() => {
+    //           setMenu(!menu)
+    //         }}></AiOutlineClose>}
+    //     </div>
+    //     {"mandatory" in course.seasons[season].lessons[lesson] ?
+    //       <div className='quiz-container'>
+    //         <Title>
+    //           Quiz: {course.seasons[season].lessons[lesson].title}
+    //         </Title>
+    //         {course.seasons[season].lessons[lesson].questions.map((question: any, index: number) => {
+    //           return (
+    //             <div className='question-container'>
+    //               <div className='question'>
+    //                 <p>{index + 1}.</p>
+    //                 <p dangerouslySetInnerHTML={{ __html: question.question }}></p>
+    //               </div>
+    //               <div className='answers'>
+    //                 {question.answers.map((answer: any, ind: number) => {
+    //                   return (
+    //                     <div style={{ display: "flex" }}>
+    //                       <p>{answer.answer}</p>
+    //                       <input type="radio" id={"q" + index + "a" + ind} onChange={() => {
+    //                         chooseAnswer(index, ind)
+    //                       }} />
+    //                     </div>
+    //                   )
+    //                 })}
+    //               </div>
+    //             </div>
+    //           )
+    //         })}
+    //         <button onClick={submit}>Responder</button>
+    //       </div>
+    //       :
+    //       <ReactPlayer
+    //         className='absolute'
+    //         ref={p => p?.seekTo(handleViewed())}
+    //         url={data.link}
+    //         playing={true}
+    //         muted={false}
+    //         controls
+    //         width="100%" height="auto"
+    //         onEnded={finishedLesson}
+    //         onDuration={(duration) =>
+    //           handleDuration(duration)
+    //         }
+    //         onProgress={(state) => {
+    //           handleProgress(state.playedSeconds)
+    //         }}
+    //       />
+    //     }
+    //     {
+    //       responsive1124 && <div className='module-selector'>
+    //         <p>{course.courseTittle}</p>
+    //         <p><span>Un curso de</span> {course.courseProfessor[0]?.name}</p>
+    //       </div>
+    //     }
+    //     {/* <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} /> */}
+    //   </VideoContain>
+    //   {/* <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userData={user} season={season} lesson={lesson} /> */}
+    // </Segment>
   )
 }
 export default Video;

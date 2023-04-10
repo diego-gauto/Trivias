@@ -128,7 +128,7 @@ export const getWholeCourses = async () => {
     const docRefSeasons = query(collection(db, 'courses', course.id, "seasons"), orderBy('season'));
     const querySnapshotSeasons = await getDocs(docRefSeasons);
     querySnapshotSeasons.forEach((season: any) => {
-      course.seasons.push({ seasons: season.data().season, lessons: [], id: season.id })
+      course.seasons.push({ seasons: season.data().season, name: season.data().name, lessons: [], id: season.id })
     });
     await Promise.all(course.seasons.map(async (season: any) => {
       const docRefLesson = query(collection(db, 'courses', course?.id, "seasons", season.id, "lessons"), orderBy('number'));
@@ -255,9 +255,9 @@ export const addUserToLesson = async (lesson: any, courseId: any, seasonId: any,
   return 'success'
 }
 
-const uploadImageHwk = (image: any, name: any) => {
+const uploadImageHwk = (image: any, lessonId: any, userId: any) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `homeworks/${name}`);
+  const storageRef = ref(storage, `homeworks/lesson-${lessonId}-${userId}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url')
       .then((snapshot) => {
@@ -274,15 +274,9 @@ export const getHomework = async (lessonId: string, userId: string) => {
   return docSnap.data();
 }
 
-export const addHomework = async (data: any, userId: string) => {
-  data.path = await uploadImageHwk(data.path, `${data.title}-${uuidv4()}`);
-  const docRef = await setDoc(
-    doc(db, "homeworks", `${data.lessonId}-${userId}`),
-    {
-      ...data
-    }
-  );
-  return 'exito'
+export const uploadImageHomework = async (homework: any) => {
+  const image = await uploadImageHwk(homework.path, homework.lessonId, homework.userId);
+  return image;
 }
 export const addHistoryCourse = async (course: any, userId: any, season: any, lesson: any) => {
   course.userId = userId;
@@ -543,4 +537,68 @@ const uploadCertificate = (image: any, name: any) => {
       });
     });
   });
+}
+
+
+/////////////////BACK END
+
+const uploadLessonImage = (courseID: number, seasonID: number, lesson: any, lessonID: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/${lessonID}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, lesson, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateLessonImage = async (courseID: number, seasonID: number, image: any, lessonID: number) => {
+  const url = await uploadLessonImage(courseID, seasonID, image, lessonID);
+  return url;
+}
+const uploadCourseImage = (courseID: number, course: any) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${courseID}}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, course, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateCourseImage = async (courseID: number, image: any) => {
+  const url = await uploadCourseImage(courseID, image);
+  return url;
+}
+const uploadProfessorPicture = (image: string, name: string) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professor-image/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateProfessorImage = async (image: string, name: string) => {
+  const url = await uploadProfessorPicture(image, name);
+  return url;
+}
+const uploadProfessorSignature = (image: string, name: string) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `professor-signature/${name}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateProfessorSignature = async (image: string, name: string) => {
+  const url = await uploadProfessorSignature(image, name);
+  return url;
 }

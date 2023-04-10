@@ -12,6 +12,34 @@ export const Container = styled.div`
   border-radius: 10px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  .pages {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 20px;
+    padding-bottom: 10px;
+    align-items: center;
+    p {
+      margin: 0;
+    }
+    .index {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .current-number {
+        font-size: 30px;
+      }
+      .arrows {
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+    .max-pages {
+      .max-number {
+        font-weight: 600;
+        font-size: 24px;
+      }
+    }
+  }
 `;
 export const TitleContain = styled.div`
   display: flex;
