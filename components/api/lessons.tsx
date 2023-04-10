@@ -144,9 +144,81 @@ export const addUserHistory = async (history: any) => {
     });
 };
 
-export const retrieveComments = async () => {
+export const retrieveComments = async (lessonId: string) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + `lessons/comments`)
+    .get("https://gonvar.inowu.dev/" + `lessons/comments/${lessonId}`)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addCommentApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/add-comment`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addCommentLikeApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/add-comment-like`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const deleteCommentLikeApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/delete-comment-like`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addCommentAnswerApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/add-comment-answer`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addCommentAnswerLikeApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/add-answer-like`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const deleteCommentAnswerLikeApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/delete-answer-like`, comment)
     .then((res) => {
       return res
     })

@@ -59,8 +59,6 @@ const Lesson = () => {
         let user = userDataAuth.user;
         let today = new Date().getTime() / 1000;
         setUserData(user);
-        console.log(id);
-
         getCourseApi(id).then((res) => {
           console.log(res);
 
