@@ -6,7 +6,6 @@ import { Label, Option, OptionContain, SelectContain, Selected, CaretD } from '.
 const Select = ({ courses, handleClick }: any) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Elegir Curso")
-  console.log(courses);
   return (
     <SelectContain>
       <Selected onClick={() => { setOpen(!open) }}>
@@ -16,9 +15,9 @@ const Select = ({ courses, handleClick }: any) => {
       {
         open == true &&
         <OptionContain>
-          {courses.map((x: DocumentData) => {
+          {courses.map((x: DocumentData, index: number) => {
             return (
-              <Option onClick={() => { setValue(x.title); setOpen(false); handleClick(x) }}>
+              <Option key={"course-product-" + index} onClick={() => { setValue(x.title); setOpen(false); handleClick(x) }}>
                 <input
                   type="radio"
                   id="Temporada1"

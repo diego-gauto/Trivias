@@ -3,9 +3,10 @@ import styled, { css } from "styled-components";
 export const UserContain = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 342;
+  min-width: 342px;
+  max-width: 400px;
   padding: 15px;
-  gap: 30px;
+  gap: 10px;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
@@ -40,6 +41,11 @@ export const ProfileContain = styled.div`
   width: 100%;
   justify-content: center;
   position: relative;
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
 `;
 export const ProfilePic = styled.i`
   background-image: url(../images/admin/ProfileIcon.png);
@@ -62,7 +68,7 @@ export const Columns = styled.div`
 export const ColumnContain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 `;
 export const Info = styled.p`
   display: flex;
@@ -85,16 +91,25 @@ export const Courses = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  .img-gonvar {
+    width: 10%;
+  }
 `;
 export const TitleBox = styled.p`
   font-family: "Raleway", sans-serif;
   font-size: 14px;
+  font-weight: 600;
   margin: 0;
 `;
 export const CourseContain = styled.div`
   display: flex;
   gap: 10px;
+  justify-content: center;
   flex-wrap: wrap;
+  img {
+    border-radius: 10px;
+    width: 45%;
+  }
 `;
 export const TransparentButton = styled.button`
   font-size: 16px;

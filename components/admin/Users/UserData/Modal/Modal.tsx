@@ -4,6 +4,7 @@ import { DocumentData } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { addCourseUser } from "../../../../../store/actions/PaymentActions";
+import { addCourseMembershipApi, updateCourseMembershipApi } from "../../../../api/admin";
 
 import { CloseIcon } from "../UsersCardData.styled";
 import {
@@ -30,30 +31,66 @@ import {
 } from "./Modal.styled";
 import Select from "./Select/Select";
 
-const Modal1 = ({ show, setShow, user, courses, handleCourse }: any) => {
+const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }: any) => {
   const [course, setCourse] = useState<DocumentData>({});
   const [days, setDays] = useState<number>(0);
+  let today = new Date().getTime() / 1000;
 
   const handleClick = (value: DocumentData) => {
     setCourse(value)
   }
-
   const handleClose = () => setShow(false);
   const addCourse = () => {
-    if (days == 0) {
+    if (days === 0) {
       alert("Por favor ingrese número")
-    } else {
-      let tempDays = days * 86400;
-      let tempCourse = {
-        id: course.id,
-        duration: (new Date().getTime() / 1000) + tempDays
+    }
+    else {
+      let tempUserCourse = JSON.parse(JSON.stringify(user.user_courses));
+      let courseForUpdate: any = []
+      courseForUpdate = tempUserCourse.filter((userCourse: any) => {
+        let tempFinalDate = 0;
+        if (userCourse.final_date < today) {
+          tempFinalDate = today + days * 86400;
+          userCourse.final_date = tempFinalDate;
+        }
+        if (userCourse.final_date > today) {
+          tempFinalDate = userCourse.final_date + days * 86400;
+          userCourse.final_date = tempFinalDate;
+        }
+        return userCourse.course_id === course.id
+      })
+
+      if (courseForUpdate.length > 0) {
+        let newDate = new Date(courseForUpdate[0].final_date * 1000);
+        let tempDay = newDate.getDate()
+        let tempMonth = newDate.getMonth() + 1;
+        let tempYear = newDate.getFullYear()
+        let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        updateCourseMembershipApi(courseForUpdate[0]).then((res) => {
+          alert("Nueva Fecha de finalizacion: " + formatDate + " para el curso: " + course.title);
+          console.log(res);
+          handleClose();
+          openUserCardData(user);
+        })
       }
-      addCourseUser(tempCourse, user.id).then(() => {
-        handleCourse();
-        alert('Curso agregado con exito!');
-        handleClose();
-        setCourse({});
-      });
+      else {
+        let courseData = {
+          user_id: user.id,
+          course_id: course.id,
+          final_date: today + days * 86400,
+        }
+        let newDate = new Date(courseData.final_date * 1000);
+        let tempDay = newDate.getDate()
+        let tempMonth = newDate.getMonth() + 1;
+        let tempYear = newDate.getFullYear()
+        let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        addCourseMembershipApi(courseData).then((res) => {
+          alert("Nueva Fecha de finalizacion: " + formatDate + " para el curso: " + course.title);
+          console.log(res);
+          handleClose();
+          openUserCardData(user);
+        })
+      }
     }
   }
 
@@ -118,7 +155,8 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse }: any) => {
 
             <InputContain>
               <Label>Tiempo Activo (Días)</Label>
-              <Input type="number" placeholder="Número de días activo" onChange={(e: any) => { setDays(e.target.value); }} />
+              <Input
+                type="number" placeholder="Número de días activo" onChange={(e: any) => { setDays(e.target.value); }} />
             </InputContain>
             <ButtonContain>
               <PurpleButton onClick={addCourse}>Agregar Método</PurpleButton>

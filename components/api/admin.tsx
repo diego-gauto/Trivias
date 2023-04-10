@@ -116,9 +116,42 @@ export const getUsersApi = async () => {
     });
 };
 
+export const getLessonFromUserApi = async (userId: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/" + userId, userId)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 export const updateUserInfoApi = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "admin/user-update-info", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateCourseMembershipApi = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "users/update-user-courses", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const addCourseMembershipApi = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "users/add-user-courses", user)
     .then((res) => {
       return res
     })

@@ -22,7 +22,7 @@ import {
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
 import { getInvoice } from "../../../store/actions/PaymentActions";
-import { getUsersApi } from "../../api/admin";
+import { getLessonFromUserApi, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
 export interface SelectedUser {
@@ -75,9 +75,24 @@ const UsersList = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [maxPages, setMaxPages] = useState<number>(0);
-  const [totalUsers, setTotalUsers] = useState<number>(0)
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [loadCard, setLoadCard] = useState(false);
+
   const openUserCardData = async (user: any) => {
-    setSelectedUser(user);
+    setLoadCard(false);
+    getLessonFromUserApi(user.id).then((res) => {
+      res.data.data.forEach((userCourse: any) => {
+        courses.forEach((course: any) => {
+          if (userCourse.course_id === course.id) {
+            userCourse.courseTitle = course.title;
+            userCourse.image = course.image;
+          }
+        });
+      });
+      user.user_courses = res.data.data;
+      setSelectedUser(user);
+      setLoadCard(true);
+    })
     setIsVisible(true);
   };
   const filterUsersByValue = (value: string): void => {
@@ -99,7 +114,6 @@ const UsersList = () => {
   const filter = (value: string) => {
     let tempAllUsers = allUsers;
     let userFilter: any = [];
-    console.log(value);
     if (value === "all") {
       userFilter = tempAllUsers.sort((a: any, b: any) => {
         return b.id - a.id;
@@ -291,7 +305,7 @@ const UsersList = () => {
         </Container>
         {
           isVisible === true &&
-          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} />
+          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
         }
       </UserContain>
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
