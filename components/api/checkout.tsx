@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const createPaymentMethodApi = async (card: any) => {
   return axios
-    .post("http://94.74.77.165/" + "users/create-payment-method", card)
+    .post("https://gonvar.inowu.dev/" + "users/create-payment-method", card)
     .then((res) => {
       return { card: res.data.paymentMethod.card, id: res.data.paymentMethod.id };
     })
@@ -13,7 +13,7 @@ export const createPaymentMethodApi = async (card: any) => {
 
 export const stripeSubscriptionApi = async (data: any) => {
   return axios
-    .post("http://94.74.77.165/" + "checkout/subscription-stripe", data)
+    .post("https://gonvar.inowu.dev/" + "checkout/subscription-stripe", data)
     .then((res) => {
       return res.data
     })
@@ -24,7 +24,7 @@ export const stripeSubscriptionApi = async (data: any) => {
 
 export const stripePaymentApi = async (data: any) => {
   return axios
-    .post("http://94.74.77.165/" + "checkout/stripe-payment", data)
+    .post("https://gonvar.inowu.dev/" + "checkout/stripe-payment", data)
     .then((res) => {
       return res.data
     })
@@ -35,7 +35,7 @@ export const stripePaymentApi = async (data: any) => {
 
 export const addUserCouponApi = async (data: any) => {
   return axios
-    .post("http://94.74.77.165/" + "checkout/coupon-user", data)
+    .post("https://gonvar.inowu.dev/" + "checkout/coupon-user", data)
     .then((res) => {
       return res.data
     })
@@ -46,7 +46,7 @@ export const addUserCouponApi = async (data: any) => {
 
 export const createInvoiceApi = async (data: any) => {
   return axios
-    .post("http://94.74.77.165/" + "checkout/invoice", data)
+    .post("https://gonvar.inowu.dev/" + "checkout/invoice", data)
     .then((res) => {
       return res.data
     })
@@ -56,7 +56,7 @@ export const createInvoiceApi = async (data: any) => {
 };
 export const getCourseForCheckoutApi = async (courseId: any) => {
   return axios
-    .get("http://94.74.77.165/" + "checkout/" + courseId, courseId)
+    .get("https://gonvar.inowu.dev/" + "checkout/" + courseId, courseId)
     .then((res) => {
       return res.data.data[0]
     })

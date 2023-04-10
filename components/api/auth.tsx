@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const newUser = async (user: any) => {
   return axios
-    .post("http://94.74.77.165/" + "auth/register", user)
+    .post("https://gonvar.inowu.dev/" + "auth/register", user)
     .then((res) => {
       return res.data.msg
     })
@@ -17,7 +17,7 @@ export const googleTokens = async (code: any) => {
     code: code
   }
   return axios
-    .post("http://94.74.77.165/" + "auth/register/google-tokens", googleCode)
+    .post("https://gonvar.inowu.dev/" + "auth/register/google-tokens", googleCode)
     .then((res) => {
       localStorage.setItem("method", "google");
       localStorage.setItem("token", res.data.refresh_token);
@@ -41,7 +41,7 @@ export const facebookUserInfo = (userData: any) => {
 
 export const loginWithProviderApi = async (user: any) => {
   return axios
-    .post("http://94.74.77.165/" + "auth/login-with-providers", user)
+    .post("https://gonvar.inowu.dev/" + "auth/login-with-providers", user)
     .then((res) => {
       return res.data
     })
@@ -53,7 +53,7 @@ export const loginWithProviderApi = async (user: any) => {
 
 export const addPastUsers = async (user: any) => {
   return axios
-    .post("http://94.74.77.165/" + "auth/login-past-users", user)
+    .post("https://gonvar.inowu.dev/" + "auth/login-past-users", user)
     .then((res) => {
       return res.data
     })
@@ -65,7 +65,7 @@ export const addPastUsers = async (user: any) => {
 
 export const updatePastUser = async (user: any) => {
   return axios
-    .post("http://94.74.77.165/" + "auth/register-past-user", user)
+    .post("https://gonvar.inowu.dev/" + "auth/register-past-user", user)
     .then((res) => {
       return res.data
     })

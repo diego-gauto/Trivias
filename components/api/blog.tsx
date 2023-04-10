@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getBlogsApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "blogs/getBlogs")
+    .get("https://gonvar.inowu.dev/" + "blogs/getBlogs")
     .then((res) => {
       console.log(res)
       return res

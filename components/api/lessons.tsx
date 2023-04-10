@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const addCourse = async (course: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/createCourse", course)
+    .post("https://gonvar.inowu.dev/" + "lessons/createCourse", course)
     .then((res) => {
       return res
     })
@@ -14,7 +14,7 @@ export const addCourse = async (course: any) => {
 
 export const getCoursesApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "lessons")
+    .get("https://gonvar.inowu.dev/" + "lessons")
     .then((res) => {
       return res.data.data
     })
@@ -26,7 +26,7 @@ export const getCoursesApi = async () => {
 
 export const getCourseApi = async (courseId: any) => {
   return axios
-    .get("http://94.74.77.165/" + "lessons/" + courseId)
+    .get("https://gonvar.inowu.dev/" + "lessons/" + courseId)
     .then((res) => {
       return res.data.data[0]
     })
@@ -38,7 +38,7 @@ export const getCourseApi = async (courseId: any) => {
 
 export const addUserToLessonApi = async (lesson: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/add-user", lesson)
+    .post("https://gonvar.inowu.dev/" + "lessons/add-user", lesson)
     .then((res) => {
       return res
     })
@@ -50,7 +50,7 @@ export const addUserToLessonApi = async (lesson: any) => {
 
 export const updateUserProgressApi = async (progress: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/update-user-progress", progress)
+    .post("https://gonvar.inowu.dev/" + "lessons/update-user-progress", progress)
     .then((res) => {
       return res
     })
@@ -62,7 +62,7 @@ export const updateUserProgressApi = async (progress: any) => {
 
 export const getUserQuizApi = async (quiz: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/user-quiz", quiz)
+    .post("https://gonvar.inowu.dev/" + "lessons/user-quiz", quiz)
     .then((res) => {
       return res
     })
@@ -74,7 +74,7 @@ export const getUserQuizApi = async (quiz: any) => {
 
 export const updateUserProgressByQuizApi = async (progress: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/update-user-progress-by-quiz", progress)
+    .post("https://gonvar.inowu.dev/" + "lessons/update-user-progress-by-quiz", progress)
     .then((res) => {
       return res
     })
@@ -86,7 +86,7 @@ export const updateUserProgressByQuizApi = async (progress: any) => {
 
 export const updateUserQuizApi = async (quiz: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/update-user-quiz", quiz)
+    .post("https://gonvar.inowu.dev/" + "lessons/update-user-quiz", quiz)
     .then((res) => {
       return res
     })
@@ -98,7 +98,7 @@ export const updateUserQuizApi = async (quiz: any) => {
 
 export const updateUserScoreApi = async (user: any) => {
   return axios
-    .post("http://94.74.77.165/" + "lessons/update-user-score", user)
+    .post("https://gonvar.inowu.dev/" + "lessons/update-user-score", user)
     .then((res) => {
       return res
     })
@@ -110,7 +110,7 @@ export const updateUserScoreApi = async (user: any) => {
 
 export const getUserCertificateApi = async (ids: any) => {
   return axios
-    .get("http://94.74.77.165/" + `lessons/user-certificate/${ids.userId}/${ids.courseId}`)
+    .get("https://gonvar.inowu.dev/" + `lessons/user-certificate/${ids.userId}/${ids.courseId}`)
     .then((res) => {
       return res
     })
@@ -122,7 +122,7 @@ export const getUserCertificateApi = async (ids: any) => {
 
 export const addUserCertificateApi = async (certificate: any) => {
   return axios
-    .post("http://94.74.77.165/" + `lessons/add-user-certiticate`, certificate)
+    .post("https://gonvar.inowu.dev/" + `lessons/add-user-certiticate`, certificate)
     .then((res) => {
       return res
     })
@@ -134,7 +134,7 @@ export const addUserCertificateApi = async (certificate: any) => {
 
 export const addUserHistory = async (history: any) => {
   return axios
-    .post("http://94.74.77.165/" + `lessons/add-user-history`, history)
+    .post("https://gonvar.inowu.dev/" + `lessons/add-user-history`, history)
     .then((res) => {
       return res
     })
@@ -146,7 +146,7 @@ export const addUserHistory = async (history: any) => {
 
 export const retrieveComments = async () => {
   return axios
-    .post("http://94.74.77.165/" + `lessons/add-user-history`)
+    .get("https://gonvar.inowu.dev/" + `lessons/comments`)
     .then((res) => {
       return res
     })

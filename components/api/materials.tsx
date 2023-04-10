@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getMaterialsApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "materials/getMaterials")
+    .get("https://gonvar.inowu.dev/" + "materials/getMaterials")
     .then((res) => {
       return res.data.data
     })
@@ -13,7 +13,7 @@ export const getMaterialsApi = async () => {
 };
 export const createMaterialApi = async (material: any) => {
   return axios
-    .post("http://94.74.77.165/" + "materials/createMaterial", material)
+    .post("https://gonvar.inowu.dev/" + "materials/createMaterial", material)
     .then((res) => {
       return res.data.msg
     })
@@ -24,7 +24,7 @@ export const createMaterialApi = async (material: any) => {
 };
 export const updateMaterialApi = async (material: any) => {
   return axios
-    .put("http://94.74.77.165/" + "materials/updateMaterial", material)
+    .put("https://gonvar.inowu.dev/" + "materials/updateMaterial", material)
     .then((res) => {
       return res.data.msg
     })
@@ -35,7 +35,7 @@ export const updateMaterialApi = async (material: any) => {
 };
 export const deleteMaterialsApi = async (material: any) => {
   return axios
-    .post("http://94.74.77.165/" + "materials/deleteMaterials", material)
+    .post("https://gonvar.inowu.dev/" + "materials/deleteMaterials", material)
     .then((res) => {
       return res.data.msg
     })

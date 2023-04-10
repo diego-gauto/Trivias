@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const createPaymentMethod = async (data: any) => {
   return axios
-    .post("http://94.74.77.165/" + "profile/create-payment-method", data)
+    .post("https://gonvar.inowu.dev/" + "profile/create-payment-method", data)
     .then((res) => {
       return res;
     })
@@ -14,7 +14,7 @@ export const createPaymentMethod = async (data: any) => {
 
 export const attachPaymentMethod = async (data: any) => {
   return axios
-    .post("http://94.74.77.165/" + "profile/attach-payment-method", data)
+    .post("https://gonvar.inowu.dev/" + "profile/attach-payment-method", data)
     .then((res) => {
       return res;
     })
@@ -26,7 +26,7 @@ export const attachPaymentMethod = async (data: any) => {
 
 export const setDefaultPaymentMethod = async (card: any) => {
   return axios
-    .post("http://94.74.77.165/" + "profile/update-payment-method", card)
+    .post("https://gonvar.inowu.dev/" + "profile/update-payment-method", card)
     .then((res) => {
       return res;
     })
@@ -38,7 +38,7 @@ export const setDefaultPaymentMethod = async (card: any) => {
 
 export const detachPaymentMethod = async (card: any) => {
   return axios
-    .post("http://94.74.77.165/" + "profile/delete-payment-method", card)
+    .post("https://gonvar.inowu.dev/" + "profile/delete-payment-method", card)
     .then((res) => {
       return res;
     })
@@ -53,7 +53,7 @@ export const userInvoices = async (userId: any) => {
     userId
   }
   return axios
-    .post("http://94.74.77.165/" + "profile/invoices", user)
+    .post("https://gonvar.inowu.dev/" + "profile/invoices", user)
     .then((res) => {
       return res;
     })

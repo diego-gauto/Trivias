@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getHomeworksApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "homeworks")
+    .get("https://gonvar.inowu.dev/" + "homeworks")
     .then((res) => {
       return res
     })
@@ -14,7 +14,7 @@ export const getHomeworksApi = async () => {
 
 export const addHomeworkApi = async (homework: any) => {
   return axios
-    .post("http://94.74.77.165/" + "homeworks/add-homework", homework)
+    .post("https://gonvar.inowu.dev/" + "homeworks/add-homework", homework)
     .then((res) => {
       return res
     })
@@ -26,7 +26,7 @@ export const addHomeworkApi = async (homework: any) => {
 
 export const getHomeworkUserApi = async (homework: any) => {
   return axios
-    .post("http://94.74.77.165/" + "homeworks/user-homework", homework)
+    .post("https://gonvar.inowu.dev/" + "homeworks/user-homework", homework)
     .then((res) => {
       return res
     })
@@ -38,7 +38,7 @@ export const getHomeworkUserApi = async (homework: any) => {
 
 export const reviewHomeworkApi = async (homework: any) => {
   return axios
-    .post("http://94.74.77.165/" + "homeworks/update-homework", homework)
+    .post("https://gonvar.inowu.dev/" + "homeworks/update-homework", homework)
     .then((res) => {
       return res;
     })

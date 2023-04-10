@@ -3,7 +3,7 @@ import { user } from "firebase-functions/v1/auth";
 
 export const getAdmins = async () => {
   return axios
-    .get("http://94.74.77.165/" + "admin/admins")
+    .get("https://gonvar.inowu.dev/" + "admin/admins")
     .then((res) => {
       return res
     })
@@ -16,7 +16,7 @@ export const getAdmins = async () => {
 export const updateAdminRole = async (userId: string) => {
   let user = { id: userId }
   return axios
-    .put("http://94.74.77.165/" + "admin/update-role", user)
+    .put("https://gonvar.inowu.dev/" + "admin/update-role", user)
     .then((res) => {
       return res
     })
@@ -28,7 +28,7 @@ export const updateAdminRole = async (userId: string) => {
 
 export const updateAdminAccessApi = async (data: any) => {
   return axios
-    .put("http://94.74.77.165/" + "admin/update-access", data)
+    .put("https://gonvar.inowu.dev/" + "admin/update-access", data)
     .then((res) => {
       return res
     })
@@ -42,7 +42,7 @@ export const updateAdminAccessApi = async (data: any) => {
 
 export const retrieveCoupons = async () => {
   return axios
-    .get("http://94.74.77.165/" + "admin/coupons")
+    .get("https://gonvar.inowu.dev/" + "admin/coupons")
     .then((res) => {
       return res
     })
@@ -54,7 +54,7 @@ export const retrieveCoupons = async () => {
 
 export const addCouponApi = async (coupon: any) => {
   return axios
-    .post("http://94.74.77.165/" + "admin/coupons-create", coupon)
+    .post("https://gonvar.inowu.dev/" + "admin/coupons-create", coupon)
     .then((res) => {
       return res
     })
@@ -66,7 +66,7 @@ export const addCouponApi = async (coupon: any) => {
 
 export const deleteCouponApi = async (coupon: any) => {
   return axios
-    .post("http://94.74.77.165/" + "admin/coupons-delete", coupon)
+    .post("https://gonvar.inowu.dev/" + "admin/coupons-delete", coupon)
     .then((res) => {
       return res
     })
@@ -78,7 +78,7 @@ export const deleteCouponApi = async (coupon: any) => {
 
 export const updateCouponStatusApi = async (coupon: any) => {
   return axios
-    .post("http://94.74.77.165/" + "admin/coupons-update-status", coupon)
+    .post("https://gonvar.inowu.dev/" + "admin/coupons-update-status", coupon)
     .then((res) => {
       return res
     })
@@ -92,7 +92,7 @@ export const updateCouponStatusApi = async (coupon: any) => {
 
 export const getInvoicesApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "admin/invoices")
+    .get("https://gonvar.inowu.dev/" + "admin/invoices")
     .then((res) => {
       return res
     })
@@ -106,7 +106,7 @@ export const getInvoicesApi = async () => {
 
 export const getUsersApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "admin/users")
+    .get("https://gonvar.inowu.dev/" + "admin/users")
     .then((res) => {
       return res
     })
@@ -118,7 +118,7 @@ export const getUsersApi = async () => {
 
 export const updateUserInfoApi = async (user: any) => {
   return axios
-    .post("http://94.74.77.165/" + "admin/user-update-info", user)
+    .post("https://gonvar.inowu.dev/" + "admin/user-update-info", user)
     .then((res) => {
       return res
     })

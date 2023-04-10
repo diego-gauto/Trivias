@@ -8,6 +8,7 @@ import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
+import { retrieveComments } from '../../../../../components/api/lessons'
 const Comments = ({ value, setValue, user, data, comments }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
@@ -58,7 +59,11 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
   }, [data])
 
   const getComments = () => {
-    setCurrentComments([])
+    // retrieveComments().then((res) => {
+    //   console.log(res);
+
+    //   setCurrentComments(res.data.data)
+    // })
   }
 
   // useEffect(() => {

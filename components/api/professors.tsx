@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getProfessorApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "professors/getProfessors")
+    .get("https://gonvar.inowu.dev/" + "professors/getProfessors")
     .then((res) => {
       return res.data.data
     })
@@ -13,7 +13,7 @@ export const getProfessorApi = async () => {
 };
 export const createProfessorApi = async (professor: any) => {
   return axios
-    .post("http://94.74.77.165/" + "professors/createProfessor", professor)
+    .post("https://gonvar.inowu.dev/" + "professors/createProfessor", professor)
     .then((res) => {
       return res.data.data
     })
@@ -24,7 +24,7 @@ export const createProfessorApi = async (professor: any) => {
 };
 export const updateProfessorApi = async (professor: any) => {
   return axios
-    .put("http://94.74.77.165/" + "professors/updateProfessor", professor)
+    .put("https://gonvar.inowu.dev/" + "professors/updateProfessor", professor)
     .then((res) => {
       return res.data.msg
     })
@@ -35,7 +35,7 @@ export const updateProfessorApi = async (professor: any) => {
 };
 export const deleteProfessorApi = async (professor: any) => {
   return axios
-    .post("http://94.74.77.165/" + "professors/deleteProfessor", professor)
+    .post("https://gonvar.inowu.dev/" + "professors/deleteProfessor", professor)
     .then((res) => {
       return res.data.msg
     })
@@ -46,7 +46,7 @@ export const deleteProfessorApi = async (professor: any) => {
 };
 export const updateImagesfromProfessorApi = async (professor: any) => {
   return axios
-    .put("http://94.74.77.165/" + "professors/updateProfessorImages", professor)
+    .put("https://gonvar.inowu.dev/" + "professors/updateProfessorImages", professor)
     .then((res) => {
       return res.data.msg
     })

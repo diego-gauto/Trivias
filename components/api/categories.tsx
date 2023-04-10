@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getCategoriesApi = async () => {
   return axios
-    .get("http://94.74.77.165/" + "categories/getCategories")
+    .get("https://gonvar.inowu.dev/" + "categories/getCategories")
     .then((res) => {
       return res.data.data
     })
@@ -13,7 +13,7 @@ export const getCategoriesApi = async () => {
 };
 export const createCategoryApi = async (category: any) => {
   return axios
-    .post("http://94.74.77.165/" + "categories/createCategory", category)
+    .post("https://gonvar.inowu.dev/" + "categories/createCategory", category)
     .then((res) => {
       return res.data.msg
     })
@@ -24,7 +24,7 @@ export const createCategoryApi = async (category: any) => {
 };
 export const updateCategoryApi = async (category: any) => {
   return axios
-    .put("http://94.74.77.165/" + "categories/updateCategory", category)
+    .put("https://gonvar.inowu.dev/" + "categories/updateCategory", category)
     .then((res) => {
       return res.data.msg
     })
@@ -35,7 +35,7 @@ export const updateCategoryApi = async (category: any) => {
 };
 export const deleteCategoryApi = async (category: any) => {
   return axios
-    .post("http://94.74.77.165/" + "categories/deleteCategories", category)
+    .post("https://gonvar.inowu.dev/" + "categories/deleteCategories", category)
     .then((res) => {
       return res.data.msg
     })

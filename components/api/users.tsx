@@ -23,7 +23,7 @@ export const getUserApi = async (email: any) => {
 
 export const updateUserInfo = async (user: any) => {
   return axios
-    .put("http://94.74.77.165/" + "users/update-user-info", user)
+    .put("https://gonvar.inowu.dev/" + "users/update-user-info", user)
     .then((res) => {
       return res;
     })
@@ -35,7 +35,7 @@ export const updateUserInfo = async (user: any) => {
 
 export const updateMembership = async (user: any) => {
   return axios
-    .put("http://94.74.77.165/" + "users/user-membership", user)
+    .put("https://gonvar.inowu.dev/" + "users/user-membership", user)
     .then((res) => {
       return res;
     })
@@ -47,7 +47,7 @@ export const updateMembership = async (user: any) => {
 
 export const getPastUsers = async () => {
   return axios
-    .get("http://94.74.77.165/" + "users/past-users")
+    .get("https://gonvar.inowu.dev/" + "users/past-users")
     .then((res) => {
       return res;
     })
@@ -59,7 +59,7 @@ export const getPastUsers = async () => {
 
 export const updateScorePastUser = async (progress: any) => {
   return axios
-    .post("http://94.74.77.165/" + "users/update-past-user", progress)
+    .post("https://gonvar.inowu.dev/" + "users/update-past-user", progress)
     .then((res) => {
       return res;
     })
@@ -71,7 +71,7 @@ export const updateScorePastUser = async (progress: any) => {
 
 export const addPastUserProgress = async (progress: any) => {
   return axios
-    .post("http://94.74.77.165/" + "users/update-past-user-progress", progress)
+    .post("https://gonvar.inowu.dev/" + "users/update-past-user-progress", progress)
     .then((res) => {
       return res;
     })
@@ -83,7 +83,7 @@ export const addPastUserProgress = async (progress: any) => {
 
 export const cancelStripe = async (sub: any) => {
   return axios
-    .post("http://94.74.77.165/" + "users/cancel-stripe", sub)
+    .post("https://gonvar.inowu.dev/" + "users/cancel-stripe", sub)
     .then((res) => {
       return res;
     })
