@@ -254,6 +254,11 @@ const NavBar = () => {
                       Cursos
                     </FloatingMenuItem>
                   </Link>
+                  <Link href={"/Blog"}>
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
+                      Blogs
+                    </FloatingMenuItem>
+                  </Link>
                   <a href="https://gonvarnails.mx/" target="_blank">
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Tienda

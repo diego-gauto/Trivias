@@ -50,10 +50,10 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   }
   const goTo = () => {
     if (loggedIn) {
-      if (user.level === 1) {
+      if ((user.level === 1 && user.final_date > today) || (user.level === 0 && user.final_date > today)) {
         router.push("/Preview")
       }
-      if (user.level === 0) {
+      if (user.level === 0 && user.final_date < today) {
         router.push({
           pathname: 'Purchase',
           query: { type: 'subscription' }
