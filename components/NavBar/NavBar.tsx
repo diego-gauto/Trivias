@@ -99,8 +99,8 @@ const NavBar = () => {
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
-      localStorage.clear();
-      logoutFunc();
+      // localStorage.clear();
+      // logoutFunc();
       if (userDataAuth.user !== null) {
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
