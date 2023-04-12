@@ -38,7 +38,7 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "continue-watching") {
       tempTexts.title = "Continua Viendo";
       tempTexts.spanTitle = "";
-      if (user) {
+      if (user && user.user_history) {
         if (user.user_history.length > 0) {
           user.user_history.forEach((courses: IUserHistory) => {
             tempCourses.forEach((course: ICourse) => {

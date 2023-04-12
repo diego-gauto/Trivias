@@ -115,7 +115,7 @@ const Homepage = () => {
       nailsMaster = tempCourses.filter((course: any) => {
         if (course.id === 30) {
           course.lessons = [];
-          if (user) {
+          if (user && user.user_courses) {
             user.user_courses.forEach((courses: any) => {
               if ((courses.final_date > today) && (course.id === courses.course_id)) {
                 course.pay = true;
@@ -142,7 +142,7 @@ const Homepage = () => {
       alineacionCert = tempCourses.filter((course: any) => {
         if (course.id === 45) {
           course.lessons = [];
-          if (user) {
+          if (user && user.user_courses) {
             user.user_courses.forEach((courses: any) => {
               if ((courses.final_date > today) && (course.id === courses.course_id)) {
                 course.pay = true;
