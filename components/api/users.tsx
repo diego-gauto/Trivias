@@ -102,3 +102,47 @@ export const cancelStripe = async (sub: any) => {
       return error
     });
 };
+
+export const cancelPaypal = async (user: any) => {
+  const clientIdAndSecret =
+    "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR:EObd0gCgFOOSvV6yFe1evAcs26Aie_3mg_Y3tbtbMXNYnbXrUBZqnjon9jiWReOd8vkLIrNQJk0VLzhf";
+  const base64 = Buffer.from(clientIdAndSecret).toString("base64");
+  let body = {
+    grant_type: "client_credentials"
+  }
+  return axios
+    .post("https://api-m.sandbox.paypal.com/v1/oauth2/token", body, {
+      headers: {
+        Accept: "application/json",
+        "Accept-Language": "en_US",
+        "content-type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${base64}`,
+      }
+    }).then((res) => {
+      return axios
+        .post(`https://api-m.sandbox.paypal.com/v1/billing/subscriptions/${user.planId}/cancel`,
+          { body: JSON.stringify({ reason: "Not satisfied with the service" }) },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${res.data.access_token}`,
+            }
+          }).then((result) => {
+            return axios
+              .post("https://gonvar.inowu.dev/" + "subscriptions/paypal-canceled-subscription", user)
+              .then((res) => {
+                return res;
+              })
+              .catch((error) => {
+                console.log(error);
+                return error
+              });
+          }).catch((error) => {
+            console.log(error);
+            return error
+          });
+    }).catch((error) => {
+      console.log(error);
+      return error
+    });
+};
