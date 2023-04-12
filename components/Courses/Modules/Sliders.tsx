@@ -39,7 +39,7 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "continue-watching") {
       tempTexts.title = "Continua Viendo";
       tempTexts.spanTitle = "";
-      if (user) {
+      if (user && user.user_history) {
         if (user.user_history.length > 0) {
           user.user_history.forEach((courses: IUserHistory) => {
             tempCourses.forEach((course: ICourse) => {
@@ -55,7 +55,7 @@ const Sliders = (props: ICourseData) => {
                   }
                 });
               }
-              if ((course.id === courses.course_id)) {
+              if (user.user_courses && (course.id === courses.course_id)) {
                 if (course.type === "Producto") {
                   user.user_courses.forEach((userCourse: IUserCourse) => {
                     if (userCourse.final_date >= today && course.id === userCourse.course_id) {
@@ -89,7 +89,7 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "my-courses") {
       tempTexts.title = "Tus Cursos";
       tempTexts.spanTitle = "";
-      if (user) {
+      if (user && user.user_courses) {
         tempCourses.forEach((course: ICourse) => {
           // if (user.level === 1 && course.type === "Mensual") {
           //   tempShowCourse.push(course);
@@ -121,7 +121,7 @@ const Sliders = (props: ICourseData) => {
         if (course.type === "Producto") {
           tempShowCourse.push(course);
         }
-        if (user) {
+        if (user && user.user_courses) {
           user.user_courses.forEach((courses: IUserCourse) => {
             if ((courses.final_date > today) && (course.id === courses.course_id)) {
               course.pay = true;

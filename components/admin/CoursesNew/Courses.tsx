@@ -40,7 +40,6 @@ const Courses = () => {
     errorDuration: false,
     errorProfessor: false,
     errorCategory: false,
-    errorMaterial: false
   });
   const [course, setCourse] = useState<any>({
     title: "",
@@ -172,7 +171,6 @@ const Courses = () => {
       errorDuration: (course.type === ("Gratis" || "Mensual") || course.type === "Mensual") ? false : (course.duration === 0 ? true : false),
       errorProfessor: course.professors.length === 0 ? true : false,
       errorCategory: course.categories.length === 0 ? true : false,
-      errorMaterial: course.materials.length === 0 ? true : false
     }
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
@@ -204,6 +202,11 @@ const Courses = () => {
     }
 
   }
+  const getAllCourses = () => {
+    getCoursesApi().then((res) => {
+      setCourses(res);
+    });
+  }
   useEffect(() => {
     getProfessorApi().then((profs) => {
       profs.forEach((element: any) => {
@@ -223,9 +226,7 @@ const Courses = () => {
       });
       setCategories(cats)
     })
-    getCoursesApi().then((res) => {
-      setCourses(res);
-    });
+    getAllCourses();
   }, [])
   return (
     <AdminContain style={{ flexDirection: "column" }}>
@@ -608,7 +609,6 @@ const Courses = () => {
               <label className="input-label">Materiales</label>
               <SelectOption
                 onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}
-                style={errors.errorMaterial ? { border: "1px solid red" } : {}}
               >
                 <p>
                   {
@@ -720,6 +720,7 @@ const Courses = () => {
                 allCategories={categories}
                 allMaterials={materials}
                 moveTo={moveTo}
+                getAllCourses={getAllCourses}
                 id={course.id}
                 index={index}
                 key={"AllCourses_" + index}
