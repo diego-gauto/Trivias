@@ -59,8 +59,6 @@ const Sliders = (props: ICourseData) => {
                 if (course.type === "Producto") {
                   user.user_courses.forEach((userCourse: IUserCourse) => {
                     if (userCourse.final_date >= today && course.id === userCourse.course_id) {
-                      console.log(userCourse)
-                      console.log(course)
                       user.user_progress.forEach((progress: IUserProgress) => {
                         if (courses.lesson_id === progress.lessons_id) {
                           course.lessonProgress = progress.time;

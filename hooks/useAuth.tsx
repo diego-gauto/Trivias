@@ -47,8 +47,6 @@ export const AuthProvider = ({ children, ...props }: Props) => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
-        console.log(res);
-
         setUser(res);
         setIsAuthenticating(false);
       })
