@@ -18,6 +18,7 @@ export interface IAllCourses {
   moveTo: any;
   id: number;
   index: number;
+  getAllCourses: any;
   professors: [IProfessors];
   categories: [ICategories];
   materials: [IMaterials];

@@ -32,7 +32,6 @@ const AllCourses = (props: IAllCourses) => {
     errorDuration: false,
     errorProfessor: false,
     errorCategory: false,
-    errorMaterial: false
   });
   const {
     title,
@@ -61,6 +60,7 @@ const AllCourses = (props: IAllCourses) => {
     published,
     id,
     index,
+    getAllCourses,
   } = props;
   const [course, setCourse] = useState<any>({
     id: props.id,
@@ -179,14 +179,12 @@ const AllCourses = (props: IAllCourses) => {
       errorColor: course.certificate_color === "" ? true : false,
       errorPrice: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.price === 0 ? true : false),
       errorRating: course.rating === 0 ? true : false,
-      errorReviews: course.reviews === 0 ? true : false,
+      // errorReviews: course.reviews === 0 ? true : false,
       errorDuration: (course.type === "Gratis" || course.type === "Mensual") ? false : (course.duration === 0 ? true : false),
       errorProfessor: course.professors.length === 0 ? true : false,
-      errorCategory: course.categories.length === 0 ? true : false,
-      errorMaterial: course.materials.length === 0 ? true : false
+      // errorCategory: course.categories.length === 0 ? true : false,
     }
     setErrors(tempErrors)
-    console.log(tempErrors);
     let checkErrors = Object.values(tempErrors).includes(true);
     if (!checkErrors) {
       if (course.type === "Gratis") {
@@ -203,7 +201,8 @@ const AllCourses = (props: IAllCourses) => {
       }
       setLoader(true);
       updateCourseApi(course).then(() => {
-        window.location.reload();
+        setStartEdit(false);
+        getAllCourses();
         setLoader(false);
       })
     }
@@ -743,7 +742,6 @@ const AllCourses = (props: IAllCourses) => {
                   :
                   <SelectOption
                     onClick={() => setOpenMaterialsSelect(!openMaterialsSelect)}
-                    style={errors.errorMaterial ? { border: "1px solid red" } : {}}
                   >
                     {
                       course.materials.length > 0
