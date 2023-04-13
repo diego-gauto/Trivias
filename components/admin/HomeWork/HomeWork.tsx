@@ -246,8 +246,8 @@ const HomeWork = () => {
     <AdminContain>
       <HWContainer>
         <Container>
-          <input type="file" onChange={(e) => { uploadCsv(e) }} />
-          <button onClick={addProgress}>add</button>
+          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} />
+          <button onClick={addProgress}>add</button> */}
           <TitleContain>
             <p>
               Tareas
