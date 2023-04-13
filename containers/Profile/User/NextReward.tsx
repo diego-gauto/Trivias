@@ -44,6 +44,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
     setFormatDate(`${tempDay}/${tempMonth}/${tempYear}`);
 
   }, [])
+
   useEffect(() => {
     if (monthProgress !== 0) {
       getNextTimeReward()
