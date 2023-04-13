@@ -66,6 +66,7 @@ export const Reward = styled.div<{ type: any }>`
   gap: 10px;
   border-radius: 10px;
   color: white;
+  width: 300px;
   padding-bottom: 10px;
   position: relative;
   ${(props) =>
@@ -92,6 +93,7 @@ export const Reward = styled.div<{ type: any }>`
   img {
     cursor: pointer;
     width: 100%;
+    height: 300px;
     box-shadow: rgb(0 0 0 / 25%) 0px 0px 20px 2px;
     border-radius: 10px;
     &:hover {

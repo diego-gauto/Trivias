@@ -131,15 +131,14 @@ const Lessons = () => {
       imageComp.src = reader.result;
     };
     setTimeout(() => {
-      setLesson({ ...lesson, banner: reader.result })
-      setBannerImage(reader.result);
-      // if ((imageComp.width == 760 && imageComp.height == 420) || (imageComp.width == 4000 && imageComp.height == 2250)) {
-      //   setLesson({ ...lesson, banner: reader.result })
-      //   alert("Imagen aceptada")
-      // }
-      // else {
-      //   alert("La imagen debe tener una resolución de 4000 px x 2250 px o 760 px × 420 px")
-      // }
+      if ((imageComp.width == 760 && imageComp.height == 420) || (imageComp.width == 4000 && imageComp.height == 2250)) {
+        setLesson({ ...lesson, banner: reader.result })
+        setBannerImage(reader.result);
+        alert("Imagen aceptada")
+      }
+      else {
+        alert("La imagen debe tener una resolución de 4000 px x 2250 px o 760 px × 420 px")
+      }
     }, 1000);
   }
   const startQuizHw = (val: string) => {

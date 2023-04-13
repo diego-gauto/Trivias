@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { addReward } from "../../../../store/actions/RewardActions";
+import { addReward, updRewardImage } from "../../../../store/actions/RewardActions";
+import { createRewardApi, updateRewardApi } from "../../../api/rewards";
 import { CloseIcon } from "../../Category/Category.styled";
 
 import {
@@ -20,45 +21,72 @@ import {
 
 const AddReward = ({ show, setShow, handleEvent }: any) => {
   const handleClose = () => setShow(false);
-  const [reward, setReward] = useState<any>();
-  const [type, setType] = useState("points");
-  const [productType, setProductType] = useState("fisico");
-
+  const [reward, setReward] = useState<any>({
+    title: '',
+    about: '',
+    image: '',
+    product_type: 'fisico',
+    type: 'points',
+    month: 0,
+    points: 0
+  });
+  const [errors, setErrors] = useState<any>({
+    title: false,
+    about: false,
+    image: false,
+    month: false,
+    points: false
+  });
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
-      setReward({ ...reward, path: reader.result })
+      setReward({ ...reward, image: reader.result })
     };
   }
 
   const createReward = () => {
-    let tempReward: any = {
-      title: reward?.title || "",
-      type: type,
-      about: reward?.about || "",
-      path: reward?.path || "",
-      productType: productType
+    if (reward.type === "points") {
+      reward.month = 0;
     }
-    if (type == "points") {
-      tempReward.points = reward?.points || "";
-    } else if (type == "months") {
-      tempReward.months = reward?.months || "";
-    } else if (type == "certificates") {
-      tempReward.certificates = reward?.certificates || ""
+    if (reward.type == "months") {
+      reward.points = 0;
     }
-
-    if (Object.keys(tempReward).some(key => tempReward[key] === '')) {
-      alert("Complete todos los campos")
-    } else {
-      addReward(tempReward).then(() => {
+    let tempErrors = {
+      title: reward.title === "" ? true : false,
+      about: reward.about === "" ? true : false,
+      image: reward.image === "" ? true : false,
+      month: reward.type === "months" ? (reward.month === 0 ? true : false) : false,
+      points: reward.type === "points" ? (reward.points === 0 ? true : false) : false,
+    }
+    setErrors(tempErrors)
+    let checkErrors = Object.values(tempErrors).includes(true);
+    console.log(reward);
+    if (!checkErrors) {
+      let tempImage = reward.image;
+      reward.image = "";
+      createRewardApi(reward).then((rew) => {
+        reward.id = rew;
+        updRewardImage(tempImage, reward.title).then((res) => {
+          reward.image = res;
+          updateRewardApi(reward).then(() => {
+            handleEvent();
+            setReward({
+              title: '',
+              about: '',
+              image: '',
+              product_type: 'fisico',
+              type: 'points',
+              month: 0,
+              points: 0
+            })
+          })
+        })
         handleClose();
         handleEvent();
       })
     }
   }
-
-
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
@@ -70,6 +98,7 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
           <Label>Nombre de la Recompensa</Label>
           <Input
             placeholder="Gonvar Nails Leonardo Da Vinci"
+            style={errors.title ? { border: "1px solid red" } : {}}
             onChange={(e: any) => {
               setReward({ ...reward, title: e.target.value })
             }}
@@ -82,6 +111,7 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
           Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci 
           malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium 
           aliquet ultricies. Interdum et suspendisse nunc gravida. "
+            style={errors.about ? { border: "1px solid red" } : {}}
             onChange={(e: any) => {
               setReward({ ...reward, about: e.target.value })
             }}
@@ -89,50 +119,51 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
         </InputContain>
         <InputContain>
           <Label>Producto</Label>
-          <select onChange={(e) => { setProductType(e.target.value) }}>
+          <select onChange={(e) => { setReward({ ...reward, product_type: e.target.value }) }}>
             <option value="fisico">Fisico</option>
             <option value="digital">Digital</option>
           </select>
         </InputContain>
         <InputContain>
           <Label>Tipo</Label>
-          <select onChange={(e) => { setType(e.target.value) }}>
+          <select onChange={(e) => { setReward({ ...reward, type: e.target.value }) }}>
             <option value="points">Puntos</option>
             <option value="months">Tiempo</option>
             {/* <option value="certificates">Certificados</option> */}
           </select>
         </InputContain>
-        {type == "points" && <InputContain>
-          <Label>Puntos</Label>
-          <Input placeholder="7"
-            onChange={(e: any) => {
-              setReward({ ...reward, points: parseInt(e.target.value) })
-            }} />
-        </InputContain>}
-        {type == "months" && <InputContain>
-          <Label>Meses</Label>
-          <Input placeholder="7"
-            onChange={(e: any) => {
-              setReward({ ...reward, months: parseInt(e.target.value) })
-            }} />
-        </InputContain>}
-        {type == "certificates" && <InputContain>
-          <Label>Certificados</Label>
-          <Input placeholder="7"
-            onChange={(e: any) => {
-              setReward({ ...reward, certificates: parseInt(e.target.value) })
-            }} />
-        </InputContain>}
+        {
+          reward.type == "points" &&
+          <InputContain>
+            <Label>Puntos</Label>
+            <Input placeholder="7"
+              style={errors.points ? { border: "1px solid red" } : {}}
+              onChange={(e: any) => {
+                setReward({ ...reward, points: parseInt(e.target.value) })
+              }} />
+          </InputContain>
+        }
+        {
+          reward.type == "months" &&
+          <InputContain>
+            <Label>Meses</Label>
+            <Input placeholder="7"
+              style={errors.month ? { border: "1px solid red" } : {}}
+              onChange={(e: any) => {
+                setReward({ ...reward, month: parseInt(e.target.value) })
+              }} />
+          </InputContain>
+        }
         <InputContain>
           <Label>Imagen del Producto</Label>
           <IconContain>
             <Folder />
-            <Input2>
+            <Input2 style={errors.image ? { border: "1px solid red" } : {}}>
               <input
                 type="file"
                 placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}>
-              </input>
+                onChange={(e) => { getImage(e.target.files) }}
+              />
             </Input2>
           </IconContain>
         </InputContain>

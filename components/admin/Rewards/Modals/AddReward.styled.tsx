@@ -22,6 +22,12 @@ export const InputContain = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  select{
+    padding-block: 10px;
+    padding-inline: 20px;
+    border-radius: 100px;
+    border: 1px solid #6717cd;
+  }
 `;
 export const Label = styled.label`
   font-size: 14px;

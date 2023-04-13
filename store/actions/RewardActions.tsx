@@ -325,3 +325,19 @@ export const updateBanner = async (banner: any) => {
 
   return 'exito'
 }
+/// IMAGE REWARD
+const uploadRewardImg = (image: string, id: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `reward/${id}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updRewardImage = async (image: string, id: number) => {
+  const url = await uploadRewardImg(image, id);
+  return url;
+}
