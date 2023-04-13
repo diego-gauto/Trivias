@@ -61,13 +61,12 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
     }
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
-    console.log(reward);
     if (!checkErrors) {
       let tempImage = reward.image;
       reward.image = "";
       createRewardApi(reward).then((rew) => {
         reward.id = rew;
-        updRewardImage(tempImage, reward.title).then((res) => {
+        updRewardImage(tempImage, reward.id).then((res) => {
           reward.image = res;
           updateRewardApi(reward).then(() => {
             handleEvent();

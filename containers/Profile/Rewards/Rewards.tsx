@@ -19,6 +19,8 @@ import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
 import { getNextCertificate } from "../../../store/actions/courseActions";
 import { title } from "process";
+import { getRewardsApi } from "../../../components/api/rewards";
+import { getUserApi } from "../../../components/api/users";
 
 const Rewards = () => {
 
@@ -55,18 +57,14 @@ const Rewards = () => {
     }
   }
   const getAllUserRewards = () => {
-    getUserRewards(userData.id).then((res) => {
-      setUserReward(res);
-    });
+    // getUserRewards(userData.id).then((res) => {
+    //   setUserReward(res);
+    // });
   }
   const changeRewardPosition = (val: string) => {
     let tempSlides: any = [];
-    if (val == selectReward) {
-      setSelectReward("points")
-    }
-    else {
-      setSelectReward(val)
-    }
+    setSelectReward(val)
+
     if (val == "points") {
       tempSlides = [
         { type: "claim-points" },
@@ -90,16 +88,16 @@ const Rewards = () => {
     }
   }
   const getAllRewards = (nextCertificate: any) => {
-    getRewards().then((res) => {
+    getRewardsApi().then((res) => {
       setRewards(res);
       getNextRewards(res, nextCertificate);
     })
   }
   const getCurrentTimeLevel = () => {
     let tempCurrentDate: any = new Date().getTime() / 1000;
-    let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
+    let tempDayCount: any = tempCurrentDate - userData.start_date;
     let getMonth: any;
-    if (userData.membership.startDate == 0) {
+    if (userData.start_date === 0) {
       getMonth = 0;
     }
     else {
@@ -278,12 +276,23 @@ const Rewards = () => {
 
   }, [])
   useEffect(() => {
-    if (userData != null) {
-      getAllUserRewards();
-      getNextCertificates();
-      getCurrentTimeLevel();
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        console.log(res);
+        setUserData(res);
+        getAllUserRewards();
+        getNextCertificates();
+        getCurrentTimeLevel();
+      })
     }
-  }, [userData]);
+  }, [])
+  // useEffect(() => {
+  //   if (userData != null) {
+  //     getAllUserRewards();
+  //     getNextCertificates();
+  //     getCurrentTimeLevel();
+  //   }
+  // }, [userData]);
   if (loading) {
     return (
       <Background style={{ alignItems: "center", justifyContent: "center" }}>

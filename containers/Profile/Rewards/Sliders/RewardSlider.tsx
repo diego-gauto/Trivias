@@ -46,7 +46,7 @@ const RewardSlider = (props: reward_slider) => {
       setTexts({
         header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
-        scoreText: "desde los",
+        scoreText: "desde los ",
       })
     }
     if (type == "points") {
@@ -63,7 +63,7 @@ const RewardSlider = (props: reward_slider) => {
       setTexts({
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",
-        scoreText: "hasta llegar a",
+        scoreText: "hasta llegar a ",
       })
     }
     if (type == "claim-months") {
@@ -77,7 +77,7 @@ const RewardSlider = (props: reward_slider) => {
       setTexts({
         header: "Beneficios Acumulados",
         title: "Beneficio desbloqueado",
-        scoreText: "por cumplir",
+        scoreText: "por cumplir ",
       })
     }
     if (type == "months") {
@@ -94,7 +94,7 @@ const RewardSlider = (props: reward_slider) => {
       setTexts({
         header: "Beneficios por desbloquear",
         title: "Beneficio bloqueado",
-        scoreText: "hasta cumplir",
+        scoreText: "hasta cumplir ",
       })
     }
     if (type == "claim-certificates") {
@@ -300,7 +300,7 @@ const RewardSlider = (props: reward_slider) => {
                         } */}
                       </div>
                       <div className='img-complete' style={(type == "claim-certificates" || type == "certificates") ? { height: 150, borderRadius: 10 } : {}}>
-                        <img src={reward?.path} className="image-container" style={(type == "claim-certificates" || type == "certificates") ? { borderRadius: 10 } : {}} />
+                        <img src={reward?.image} className="image-container" style={(type == "claim-certificates" || type == "certificates") ? { borderRadius: 10 } : {}} />
                         <div className="btn-contain">
                           {
                             type == "claim-certificates" &&
