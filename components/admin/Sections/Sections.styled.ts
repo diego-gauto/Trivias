@@ -177,3 +177,42 @@ export const Icon = styled.i`
   cursor: pointer;
   border-radius: 10px 0 0 10px;
 `;
+export const NewUser = styled.div`
+  position: absolute;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  svg {
+    align-self: end;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  .filter {
+    display: flex;
+    gap: 20px;
+    input {
+      border-radius: 30px;
+      border: 1px solid #6717cd;
+      width: 100%;
+      padding-inline: 15px;
+    }
+    button {
+      padding-block: 10px;
+    }
+  }
+  .column {
+    text-align: center;
+    color: #6717cd;
+    font-weight: 600;
+  }
+`;

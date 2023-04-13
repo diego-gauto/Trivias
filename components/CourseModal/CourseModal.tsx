@@ -25,7 +25,6 @@ import {
   VideoContain,
 } from "./CourseModal.styled";
 import SelectModule4 from "./Select/SelectModule";
-import { getSeason } from "../../store/actions/courseActions";
 import ModalMaterials from "./Materials/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'

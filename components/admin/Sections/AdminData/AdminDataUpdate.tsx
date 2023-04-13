@@ -39,7 +39,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick }: Pr
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
-
+  const today = new Date().getTime() / 1000;
 
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime();
@@ -59,6 +59,8 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick }: Pr
     setIsVisible(false);
     setOpen(false);
   }
+
+
 
   return (
     <UserContain>
@@ -88,9 +90,12 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick }: Pr
             </Info>
             <Info>
               Suscripción Actual
-              <Label>
+              {(admin.level > 0 || admin.final_date > today) && <Label>
                 Gonvar Plus
-              </Label>
+              </Label>}
+              {(admin.level === 0) && <Label>
+                Sin Suscripción
+              </Label>}
             </Info>
             {admin.role === 'admin' &&
               <InputContain>
