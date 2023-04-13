@@ -106,7 +106,6 @@ const Rewards = () => {
     getLessonsFromUserId(user.user_id).then((res) => {
       lesson_users = res;
     })
-
     getCoursesApi().then((res) => {
       res.forEach((course: any) => {
         let count: number = 0;
@@ -142,7 +141,7 @@ const Rewards = () => {
           nextCourseCertificate: nextCourseCertificate[0],
           totalCertificates: completedCertificates.length,
           monthCompleted: tempTimeLevel,
-          monthProgress: getMonth
+          monthPercentage: getMonth
         }
         getNextRewards(data);
       })
@@ -225,7 +224,52 @@ const Rewards = () => {
     // })
   }
   const getNextRewards = (data: any) => {
-    console.log(data);
+    let pointsFilter = [];
+    let monthFilter = [];
+    let pointRewardCompleted
+    const {
+      monthCompleted,
+      monthPercentage,
+      nextCourseCertificate,
+      reward,
+      totalCertificates,
+      user
+    } = data;
+    pointsFilter = reward.filter((data: any) => (reward.type === "points" && user.score < data.points));
+    monthFilter = reward.filter((data: any) => (reward.type === "month" && monthPercentage < data.month));
+    pointsFilter.sort((a: any, b: any) => a.points - b.points);
+    monthFilter.sort((a: any, b: any) => a.month - b.month);
+    // let arrayRewards: any = [
+    //   {
+    //     type: "points",
+    //     scoreType: "puntaje",
+    //     score: user.score,
+    //     title: pointsFilter.title,
+    //     points: pointsFilter.points,
+    //     completed: pointsLength.length,
+    //     progress: progressPoints,
+    //   },
+    //   {
+    //     type: "months",
+    //     scoreType: "meses",
+    //     score: timeLevel,
+    //     title: monthFilter.title,
+    //     months: monthFilter.months,
+    //     completed: monthsLength.length,
+    //     progress: monthProgress,
+    //   },
+    //   {
+    //     type: "certificates",
+    //     scoreType: "certificados",
+    //     score: totalCertificates ? totalCertificates : 0,
+    //     title: nextCourseCertificate?.title ? nextCourseCertificate.title : "Sin certificados",
+    //     certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : "0",
+    //     completed: totalCertificates ? totalCertificates : 0,
+    //     progress: progressCertificates,
+    //   },
+    // ];
+    // setLoading(false);
+    // setRewardsTypes(arrayRewards)
     // let pointsFilter = [];
     // let previousRewardPoints: any = [];
     // let progressPoints: number = 0;
