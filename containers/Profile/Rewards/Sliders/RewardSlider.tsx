@@ -4,8 +4,8 @@ import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
 import { addRequest, addUserReward } from '../../../../store/actions/RewardActions';
-import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import { getTeacherById } from '../../../../store/actions/courseActions';
+import { createRequestApi } from '../../../../components/api/rewards';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -98,16 +98,6 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-certificates") {
-
-      // tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
-      // tempFilter.forEach((element: any) => {
-      //   if (userReward.find((x: any) => x.id == element.id && x.status)) {
-      //     slides.push(element);
-      //   }
-      // });
-      // tempFilter = courses;
-      // tempFilter.sort((a: any, b: any) => a.total - b.total);
-      // slides = tempFilter;
       tempFilter = completeCertificates;
       slides = tempFilter;
       setTexts({
@@ -117,16 +107,6 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "certificates") {
-      // tempFilter = rewards.filter((val: any) => (val.type == "certificates"));
-      // tempFilter.sort((a: any, b: any) => a.certificates - b.certificates)
-      // tempFilter.forEach((element: any) => {
-      //   if (userReward.find((x: any) => x.id == element.id && !x.status)) {
-      //     slides.push(element);
-      //   }
-      //   if (!userReward.find((x: any) => x.id == element.id)) {
-      //     slides.push(element);
-      //   }
-      // });
       tempFilter = courses;
       tempFilter.sort((a: any, b: any) => a.total - b.total);
       slides = tempFilter;
@@ -165,71 +145,30 @@ const RewardSlider = (props: reward_slider) => {
       setOpenRewardInfo(index);
     }
   }
-  const AddUserRewards = async (reward: any) => {
-    let tempReward = {
-      id: reward.id,
-      status: false,
-      title: reward.title,
-      type: reward.type
+  // const AddUserRewards = async (reward: any) => {
+  //   let tempReward = {
+  //     id: reward.id,
+  //     status: false,
+  //     title: reward.title,
+  //     type: reward.type
+  //   }
+  //   addUserReward(tempReward, user.id).then((res: any) => {
+  //   }).then(() => {
+  //     alert("Recompensa reclamada con éxito")
+  //     getSliders();
+  //     getAllUserRewards();
+  //   })
+  // }
+  const sendRequest = async (reward: any) => {
+    let tempRequest: any = {
+      user_id: user.id,
+      reward_id: reward.id,
+      stauts: false,
     }
-    addUserReward(tempReward, user.id).then((res: any) => {
-    }).then(() => {
+    createRequestApi(tempRequest).then(() => {
       alert("Recompensa reclamada con éxito")
       getSliders();
       getAllUserRewards();
-    })
-  }
-  const sendRequest = async (reward: any) => {
-    let tempRequest: any
-    if (type == "points") {
-      tempRequest = {
-        userId: user.id,
-        rewardId: reward.id,
-        user: user.name,
-        userPhoto: user.photoURL,
-        points: user.score,
-        createAt: new Date(),
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-        type: type,
-        title: reward.title,
-        productType: reward.productType,
-        status: false,
-      }
-    }
-    if (type == "months") {
-      tempRequest = {
-        userId: user.id,
-        rewardId: reward.id,
-        user: user.name,
-        userPhoto: user.photoURL,
-        months: 1,
-        createAt: new Date(),
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-        type: type,
-        title: reward.title,
-        productType: reward.productType,
-        status: false,
-      }
-    }
-    if (type == "certificates") {
-      tempRequest = {
-        userId: user.id,
-        rewardId: reward.id,
-        user: user.name,
-        userPhoto: user.photoURL,
-        certificates: 2,
-        createAt: new Date(),
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-        type: type,
-        title: reward.title,
-        productType: reward.productType,
-        status: false,
-      }
-    }
-    addRequest(tempRequest).then((res: any) => {
     })
   }
 
@@ -238,10 +177,8 @@ const RewardSlider = (props: reward_slider) => {
     slider = document.querySelector(`.scroll-container-${indexSlider}`) as HTMLElement;
     e.preventDefault();
     pos = {
-      // The current scroll
       left: slider?.scrollLeft,
       top: slider?.scrollTop,
-      // Get the current mouse position
       x: e.clientX,
       y: e.clientY,
     };
@@ -251,7 +188,6 @@ const RewardSlider = (props: reward_slider) => {
 
   const mouseMoveHandler = function (e: any) {
     setCounter(counter++);
-    // How far the mouse has been moved
     const dx = e.clientX - pos.x;
     slider.scrollLeft = pos.left - dx;
   };
@@ -325,7 +261,7 @@ const RewardSlider = (props: reward_slider) => {
                               (certificates >= reward.certificates && !userReward.find((x: any) => x.id == reward.id))) &&
                             <button className="btn-info"
                               onClick={() => {
-                                AddUserRewards(reward);
+                                // AddUserRewards(reward);
                                 sendRequest(reward);
                               }}
                             >

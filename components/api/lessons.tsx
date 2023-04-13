@@ -227,3 +227,14 @@ export const deleteCommentAnswerLikeApi = async (comment: any) => {
       return error
     });
 };
+export const getLessonsFromUserId = async (userId: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "lessons/lesson/" + userId, userId)
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
