@@ -200,8 +200,8 @@ const HomeWork = () => {
 
   useEffect(() => {
     let range = {
-      start: 10000,
-      end: 15001
+      start: 40007,
+      end: 41543
     }
     getPastUsers(range).then((res) => {
       console.log(res);

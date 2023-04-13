@@ -11,6 +11,7 @@ import { LOGIN_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
+import { user } from 'firebase-functions/v1/auth';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user } = props;
@@ -57,7 +58,7 @@ const Sliders = (props: ICourseData) => {
               if (user.user_courses && (course.id === courses.course_id)) {
                 if (course.type === "Producto") {
                   user.user_courses.forEach((userCourse: IUserCourse) => {
-                    if (userCourse.final_date >= today) {
+                    if (userCourse.final_date >= today && course.id === userCourse.course_id) {
                       user.user_progress.forEach((progress: IUserProgress) => {
                         if (courses.lesson_id === progress.lessons_id) {
                           course.lessonProgress = progress.time;

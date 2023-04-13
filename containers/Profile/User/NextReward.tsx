@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
-import { cancelStripe } from "../../../components/api/users";
+import { cancelPaypal, cancelStripe } from "../../../components/api/users";
 const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
@@ -62,13 +62,14 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
         setLoader(false);
       })
     } else {
-      //   const cancelPlan = httpsCallable(functions, 'cancelPaypalSubscription');
-      //   await cancelPlan(userPlan).then(async (res: any) => {
-      //     handleShow();
-      //     setLoader(false);
-      //   })
-      // }
-      // cancelSub(user.id);
+      let membership = {
+        planId: user.plan_id,
+        id: user.plan_id
+      }
+      cancelPaypal(membership).then(() => {
+        handleClick()
+        setLoader(false);
+      })
     }
 
   }

@@ -26,11 +26,13 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [quiz, setQuiz] = useState<any>([]);
   const router = useRouter();
+
   const finishedLesson = () => {
     if (!data.users.includes(user.user_id)) {
       let tempLesson = {
         lessonId: data.id,
-        userId: user.user_id
+        userId: user.user_id,
+        points: parseInt(data.points) + user.score
       }
       addUserToLessonApi(tempLesson).then(() => {
         handleComplete();

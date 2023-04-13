@@ -2,13 +2,7 @@
 import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
-
-import { collection, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
-
-import { db } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getPaymentmethods } from "../../../store/actions/PaymentActions";
 import { getRewards } from "../../../store/actions/RewardActions";
 import {
   BackgroundProfile,
@@ -24,11 +18,9 @@ import { getUserApi } from "../../../components/api/users";
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [timeProgress, setTimeProgress] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [paymentMethod, setPaymentMethods] = useState<any>([]);
   const [monthProgress, setMonthProgress] = useState(0)
   const [timeLevel, setTimeLevel] = useState<any>(0);
   const [starPosition, setStarPosition] = useState(0);
