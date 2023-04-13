@@ -1,23 +1,18 @@
-
-
 import { useEffect, useState } from "react";
-
-import { collection, getDocs, query } from "firebase/firestore";
-
-import { db } from "../../../firebase/firebaseConfig";
-import { getSingleUser } from "../../../hooks/useAuth";
 import { AdminContain, Table } from "../SideBar.styled";
 import AdminDataUpdate from "./AdminData/AdminDataUpdate";
 import {
   Container,
   GeneralContain,
   GonvarTitle,
+  NewUser,
   Title,
   TitleBox,
   TitleContain,
 } from "./Sections.styled";
-import { useRouter } from "next/router";
-import { getAdmins } from "../../api/admin";
+import { getAdmins, getUserByEmailApi, updateUserRoleApi } from "../../api/admin";
+import { Button } from "../Courses/CourseMain.styled";
+import { IoClose } from "react-icons/io5";
 
 export type INewUser = {
   name?: string,
@@ -43,13 +38,16 @@ export type INewUser = {
 };
 
 const Sections = () => {
-  const usersCollectionRef = query(collection(db, "users"));
   const [users, setUsers] = useState<Array<any>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [role, setRole] = useState<string>();
   const [adminID, setAdminID] = useState<string>();
   const [selectedAdmin, setSelectedAdmin] = useState<any>({});
-  const router = useRouter();
+  const [newMember, setNewMember] = useState<boolean>(false);
+  const [member, setMember] = useState<any>("");
+  const [find, setFind] = useState<boolean>(false);
+  const [user, setUser] = useState<any>({});
+
   const editRole = async (user: any): Promise<void> => {
     setIsVisible(true);
     setSelectedAdmin(user);
@@ -74,6 +72,31 @@ const Sections = () => {
     retrieveAdmin();
   }
 
+  const search = () => {
+    if (member !== "") {
+      let temp = {
+        email: member
+      }
+      getUserByEmailApi(temp).then((res) => {
+        setMember("");
+        setUser(res.data.user);
+        setFind(true);
+      })
+    }
+  }
+
+  const updateRole = () => {
+    let temp = {
+      userId: user[0].id
+    }
+    updateUserRoleApi(temp).then(() => {
+      setMember("");
+      setFind(false);
+      setNewMember(false);
+      retrieveAdmin();
+    })
+  }
+
   return (
     <AdminContain>
       <GeneralContain>
@@ -83,6 +106,7 @@ const Sections = () => {
         <Container>
           <TitleContain>
             <GonvarTitle>Lista de administradores</GonvarTitle>
+            <Button onClick={() => { setNewMember(true); }}>Nuevo miembro</Button>
           </TitleContain>
           <Table id="Users">
             <tbody>
@@ -121,6 +145,21 @@ const Sections = () => {
         isVisible &&
         <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} handleClick={handleClick} />
       }
+      {newMember && <NewUser>
+        <IoClose onClick={() => { setNewMember(false); setMember(""); setFind(false); setUser({}) }} />
+        <div className="filter">
+          <input defaultValue={member} type="text" placeholder="Buscar por email" onChange={(e) => setMember(e.target.value)} />
+          <Button onClick={search}>Buscar</Button>
+        </div>
+        {(find && user.length > 0) && <div className="column">
+          <p>{user[0].name}</p>
+          <p>{user[0].email}</p>
+          <Button onClick={updateRole}>Hacer miembro</Button>
+        </div>}
+        {(find && user.length === 0) && <div className="column">
+          <p>No se encontró un usuario</p>
+        </div>}
+      </NewUser>}
     </AdminContain>
   )
 }

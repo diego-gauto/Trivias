@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { collection, onSnapshot, query, where, doc, updateDoc } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, SIGNUP_PATH } from "../../constants/paths";
-import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {
   HamburgerContain,
@@ -31,11 +29,9 @@ import {
   HoverText,
 } from "./NavBar.styled";
 import { SlBell } from "react-icons/sl";
-import { getAuth, signOut } from "firebase/auth";
-import { getUserApi } from "../api/users";
-
+import { googleLogout } from "@react-oauth/google";
+import { useFacebook } from "react-facebook";
 const NavBar = () => {
-
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -43,6 +39,7 @@ const NavBar = () => {
 
   const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
+  const { api } = useFacebook();
 
   //declare any object in state
   const [userData, setUserData] = useState<any>(null);
@@ -60,14 +57,6 @@ const NavBar = () => {
   function closeHamburgerMenu() {
     setHamburger(false)
   }
-
-  const logoutFunc = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-    }).catch((error) => {
-      console.log(error)
-    });
-  };
   // COLOR NAVBAR
   const [color, setColor] = useState<any>(0)
   const router = useRouter();
@@ -113,6 +102,21 @@ const NavBar = () => {
   } catch (error) {
     setLoggedIn(false);
   }
+
+  const logoutFunc = () => {
+    localStorage.clear();
+    if (userData.provider === "web") {
+      window.location.href = "/";
+    }
+    if (userData.provider === "google") {
+      googleLogout();
+      window.location.href = "/";
+    }
+    if (userData.provider === "facebook") {
+      api?.logout();
+      window.location.href = "/";
+    }
+  };
 
   // COLOR NAVBAR
   return (
@@ -324,7 +328,7 @@ const NavBar = () => {
                     Blog
                   </HBList>
                 </Link>
-                <HBList onClick={() => { closeHamburgerMenu() }}>
+                <HBList onClick={() => { closeHamburgerMenu(); logoutFunc(); }}>
                   Cerrar Sesion
                 </HBList>
               </HBMenu>

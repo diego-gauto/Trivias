@@ -160,3 +160,27 @@ export const addCourseMembershipApi = async (user: any) => {
       return error
     });
 };
+
+export const getUserByEmailApi = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/user", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateUserRoleApi = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "admin/update-role-user", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

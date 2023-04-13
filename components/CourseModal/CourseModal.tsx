@@ -25,7 +25,6 @@ import {
   VideoContain,
 } from "./CourseModal.styled";
 import SelectModule4 from "./Select/SelectModule";
-import { getSeason } from "../../store/actions/courseActions";
 import ModalMaterials from "./Materials/ModalMaterials";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from 'react-simple-star-rating'
@@ -272,7 +271,7 @@ const CourseModal = (props: ICourseModal) => {
                     <ContainVideo>
                       <EpisodeContain className={isPlaying ? "skeleton-product" : ""} >
                         <div className="grey-field" style={{ 'width': '100%', borderRadius: 10 }}>
-                          <img src={lesson.image ? lesson.image : "/images/admin/Courses/Quiz.PNG"} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                          <img src={lesson.banner ? lesson.banner : "/images/admin/Courses/Quiz.PNG"} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
                         </div>
                       </EpisodeContain>
                     </ContainVideo>
