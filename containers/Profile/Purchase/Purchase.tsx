@@ -354,7 +354,6 @@ const Purchase = () => {
               <button className="full">
                 <Link href="/Preview">Ver los cursos</Link>
               </button>
-              <button>Ver el recibo del pedido</button>
             </div>
           </div>}
           <div className="purchase-container">

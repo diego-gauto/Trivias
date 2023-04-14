@@ -88,7 +88,7 @@ const NavBar = () => {
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
-      // localStorage.clear();
+      localStorage.clear();
       // logoutFunc();
       if (userDataAuth.user !== null) {
         setUserData(userDataAuth.user);
