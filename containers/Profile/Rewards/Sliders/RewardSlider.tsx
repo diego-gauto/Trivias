@@ -119,24 +119,19 @@ const RewardSlider = (props: reward_slider) => {
     setSlides(slides)
   }
 
-  const moveToCertificate = (reward: any) => {
-    getTeacherById(reward.professorId).then((professor: any) => {
-      if (!professor.sign) {
-        professor.sign = "";
+  const moveToCertificate = (course: any) => {
+    router.push({
+      pathname: `/Certificates`,
+      query: {
+        name: user.name,
+        title: course.title,
+        professor: course.professor.name,
+        id: user.user_id,
+        color: course.color,
+        courseId: course.courseId,
+        teacherSignature: course.professor.sign,
       }
-      router.push({
-        pathname: `/Certificates`,
-        query: {
-          name: user.name,
-          title: reward.title,
-          professor: professor.name,
-          id: user.uid,
-          color: reward.color,
-          courseId: reward.courseId,
-          teacherSignature: professor.sign,
-        }
-      });
-    })
+    });
   }
   const showRewardData = (index: any, rewardPoints: any) => {
     if (index == openRewardInfo) {

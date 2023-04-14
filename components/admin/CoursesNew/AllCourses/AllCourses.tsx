@@ -841,37 +841,8 @@ const AllCourses = (props: IAllCourses) => {
                 {!startEdit ? "Iniciar Edición" : "Cancelar Edición"}
               </button>
             </div>
-            <div className="button-data">
-              {
-                !startEdit
-                  ?
-                  <button
-                    className="delete-button"
-                    onClick={() => deleteCourse()}
-                  >
-                    Eliminar
-                  </button>
-                  :
-                  <>
-                    {
-                      !loader ?
-                        <button
-                          className="save-button"
-                          onClick={() => editCourse()}
-                        >
-                          Editar Curso
-                        </button>
-                        : <LoaderButton />
-                    }
-                  </>
-
-              }
-            </div>
-          </div>
-
-          {
-            !startEdit &&
-            <div className="rows" style={{ justifyContent: "center" }}>
+            {
+              !startEdit &&
               <div className="button-data">
                 <button
                   className="save-button"
@@ -880,9 +851,27 @@ const AllCourses = (props: IAllCourses) => {
                   Ver Temporadas
                 </button>
               </div>
-            </div>
-          }
+            }
+            <div className="button-data">
+              {
+                startEdit
+                &&
+                <>
+                  {
+                    !loader ?
+                      <button
+                        className="save-button"
+                        onClick={() => editCourse()}
+                      >
+                        Editar Curso
+                      </button>
+                      : <LoaderButton />
+                  }
+                </>
 
+              }
+            </div>
+          </div>
         </div>
       }
     </div>

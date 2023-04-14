@@ -76,14 +76,12 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     }
   }
   const deleteReward = (reward: any) => {
-    deleteRewardApi(reward).then((res) => {
-      handleClose();
-      handleEvent();
-    })
-    // deleteProduct(reward).then(() => {
-    //   handleClose();
-    //   handleEvent();
-    // })
+    if (confirm("Desea eliminar esta recompensa?")) {
+      deleteRewardApi(reward).then((res) => {
+        handleClose();
+        handleEvent();
+      })
+    }
   }
 
   useEffect(() => {

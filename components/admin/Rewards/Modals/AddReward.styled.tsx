@@ -113,10 +113,10 @@ export const ButtonTransparent = styled.button`
   font-family: "Montserrat", sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
-  background: white;
+  background: red;
   border-radius: 100px;
-  color: #6717cd;
-  border: 1px solid #6717cd;
+  color: white;
+  border: none;
 `;
 export const IconContain = styled.div`
   display: flex;

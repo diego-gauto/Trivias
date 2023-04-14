@@ -80,9 +80,11 @@ const Rewards = () => {
   }
   const getRewardData = (user: any) => {
     let nextCourseCertificate: any = [];
-    let completedCertificates: any = [];
+    let completedCertificates: number = 0;
     let tempDayCount: any = today - user.start_date;
     let getMonth: any;
+    let lesson_users: any = [];
+    let completeCertificates: any = [];
     if (user.level === 1) {
       if (user.start_date === 0) {
         getMonth = 0;
@@ -94,10 +96,8 @@ const Rewards = () => {
     else {
       getMonth = 0;
     }
-    console.log(user);
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
-    let lesson_users: any = [];
     getLessonsFromUserId(user.user_id).then((res) => {
       lesson_users = res;
     })
@@ -105,6 +105,20 @@ const Rewards = () => {
       res.forEach((course: any) => {
         let count: number = 0;
         let lessonsDone: number = 0;
+        user.user_certificates.forEach((userCert: any) => {
+          if (userCert.course_id === course.id) {
+            completeCertificates.push({
+              title: course.title,
+              about: course.about,
+              professor: course.professors[0],
+              type: course.type,
+              color: course.certificate_color,
+              created_at: course.created_at,
+              image: course.image,
+              courseId: course.id,
+            })
+          }
+        })
         course.seasons.forEach((season: any) => {
           season.lessons.forEach((lesson: any) => {
             lesson_users.map((lessonUser: any) => {
@@ -120,13 +134,26 @@ const Rewards = () => {
         course.progress = lessonsDone / count;
         course.lessonsLeft = count - lessonsDone;
         if ((lessonsDone / count) < 1) {
-          nextCourseCertificate.push(course);
+          nextCourseCertificate.push({
+            title: course.title,
+            about: course.about,
+            professor: course.professors[0],
+            type: course.type,
+            color: course.certificate_color,
+            created_at: course.created_at,
+            image: course.image,
+            courseId: course.id,
+            lessonsLeft: course.lessonsLeft,
+            certificates: 2,
+          });
         }
         if ((lessonsDone / count) === 1) {
-          completedCertificates.push(course);
+          completedCertificates++;
         }
       });
+      setCompleteCertificates(completeCertificates);
       nextCourseCertificate = nextCourseCertificate.sort((a: any, b: any) => b.progress - a.progress);
+      setCourses(nextCourseCertificate);
       getRewardsApi().then((reward) => {
         let tempTimeLevel: any = Math.floor(getMonth);
         setRewards(reward);
@@ -134,7 +161,7 @@ const Rewards = () => {
           reward: reward,
           user: user,
           nextCourseCertificate: nextCourseCertificate[0],
-          totalCertificates: completedCertificates.length,
+          totalCertificates: completedCertificates,
           monthCompleted: tempTimeLevel,
           monthPercentage: getMonth
         }
