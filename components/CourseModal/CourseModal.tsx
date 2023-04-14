@@ -131,6 +131,9 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
   };
+
+  console.log(course);
+
   return (
     <ModalContain >
       <ModalMod show={show} onHide={handleClose} size="lg" centered>

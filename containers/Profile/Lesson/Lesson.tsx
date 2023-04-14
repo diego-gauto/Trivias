@@ -151,7 +151,7 @@ const Lesson = () => {
                 }}></AiOutlineClose>}
             </div>
             <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} />
-            <Modules handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
+            <Modules course={course} handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
           </div>
           <Courses menu={menu} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
           {/* <FirstContainer>

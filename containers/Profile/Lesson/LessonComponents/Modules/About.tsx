@@ -9,7 +9,7 @@ import { BiDownload } from 'react-icons/bi';
 import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
-const About = ({ value, setValue, data, teacherCreds }: any) => {
+const About = ({ value, setValue, data, teacherCreds, course }: any) => {
 
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
@@ -43,9 +43,9 @@ const About = ({ value, setValue, data, teacherCreds }: any) => {
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>
-            <p>{data.objectives}.</p>
-            <p className='title'>Especificaciones</p>
-            <p>{data.about}.</p>
+            <p>{course.about}.</p>
+            {/* <p className='title'>Especificaciones</p>
+            <p>{data.about}.</p> */}
             {/* {data.extra.length > 0 && <p className='title'>Material de apoyo</p>}
             <ol type="a">
               {data?.extra?.map((extra: any) => {
