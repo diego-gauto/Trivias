@@ -13,6 +13,7 @@ export interface ICourse {
   rating: number;
   reviews: number;
   about: string;
+  totalDuration: number;
   materials: [IMaterialData];
   final_date: number;
   documentID: string;
