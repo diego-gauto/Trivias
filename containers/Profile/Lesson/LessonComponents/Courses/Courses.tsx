@@ -8,7 +8,6 @@ import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesC
 import EveryCourse from './Lessons/EveryCourse';
 
 const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
-
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);

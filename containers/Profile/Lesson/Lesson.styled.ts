@@ -7,10 +7,31 @@ export const MainContainer = styled.div`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+  .nav-course {
+    display: none;
+    background: #411369;
+    padding-block: 20px;
+    justify-content: space-between;
+    padding-inline: 40px;
+    align-items: center;
+    img {
+      width: 80px;
+    }
+    svg {
+      color: #ede7f2;
+      font-size: 24px;
+    }
+    @media (max-width: 1124px) {
+      display: flex;
+    }
+  }
   .left-side {
     display: flex;
     flex-direction: column;
     width: 70%;
+    @media (max-width: 1124px) {
+      width: 100%;
+    }
     .video-contain {
       position: relative;
       .next-episode {

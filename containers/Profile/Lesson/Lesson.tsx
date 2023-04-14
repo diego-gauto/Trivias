@@ -9,6 +9,8 @@ import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
 import { io } from 'socket.io-client';
 import { addCourse, addUserHistory, getCourseApi } from "../../../components/api/lessons";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 
 const Lesson = () => {
@@ -18,6 +20,7 @@ const Lesson = () => {
   const router = useRouter()
   const { id, season, lesson }: any = router.query;
   const [userData, setUserData] = useState<any>(null);
+  const [menu, setMenu] = useState<boolean>(false);
   const [currentlesson, setCurrentLesson] = useState<any>({});
   const [nextLesson, setnextLesson] = useState<any>({
     lessonIndex: 0,
@@ -138,10 +141,19 @@ const Lesson = () => {
       </Background> :
         <MainContainer>
           <div className="left-side">
+            <div className='nav-course'>
+              <img src="/images/Navbar/NavbarLogo2.png" alt="" />
+              {!menu ? <GiHamburgerMenu onClick={() => {
+                setMenu(!menu)
+              }}></GiHamburgerMenu> :
+                <AiOutlineClose onClick={() => {
+                  setMenu(!menu)
+                }}></AiOutlineClose>}
+            </div>
             <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} />
             <Modules handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
           </div>
-          <Courses menu={true} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
+          <Courses menu={menu} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
           {/* <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer> */}

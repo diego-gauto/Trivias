@@ -105,7 +105,7 @@ export const MainContainer = styled.div<{ open: any }>`
     position: absolute;
     overflow: hidden;
     height: 100%;
-    top: 64px;
+    top: 139px;
     right: -100%;
     width: 100%;
     display: flex;
