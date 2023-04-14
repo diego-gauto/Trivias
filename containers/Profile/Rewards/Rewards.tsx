@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import {
   TitleContainer,
@@ -14,7 +11,7 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
 import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
-import { getRewardsApi } from "../../../components/api/rewards";
+import { getClaimedReward, getRewardsApi } from "../../../components/api/rewards";
 import { getUserApi } from "../../../components/api/users";
 import { getCoursesApi, getLessonsFromUserId } from "../../../components/api/lessons";
 
@@ -39,19 +36,6 @@ const Rewards = () => {
   const crownImage = "/images/profile/crown.png"
   const handStarImage = "/images/Rewards/handStar.png"
   const router = useRouter();
-  const fetchDB_data = async () => {
-    try {
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-
-        response.forEach((e: any) => {
-          setUserData({ ...e.data(), id: e.id });
-        });
-      })
-    } catch (error) {
-      return false
-    }
-  }
   const changeRewardPosition = (val: string) => {
     let tempSlides: any = [];
     setSelectReward(val)
@@ -98,6 +82,9 @@ const Rewards = () => {
     }
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
+    getClaimedReward(user.user_id).then((res) => {
+      setUserReward(res);
+    })
     getLessonsFromUserId(user.user_id).then((res) => {
       lesson_users = res;
     })
@@ -141,6 +128,7 @@ const Rewards = () => {
             type: course.type,
             color: course.certificate_color,
             created_at: course.created_at,
+            progress: course.progress,
             image: course.image,
             courseId: course.id,
             lessonsLeft: course.lessonsLeft,
@@ -188,7 +176,7 @@ const Rewards = () => {
     pointsFilter = reward.filter((data: any) => (data.type === "points" && user.score < data.points));
     monthFilter = reward.filter((data: any) => (data.type === "months" && monthPercentage < data.month));
     pointRewardCompleted = reward.filter((data: any) => (data.type === "points" && user.score >= data.points));
-    monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && user.score >= data.month));
+    monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && user.month >= data.month));
     pointsFilter.sort((a: any, b: any) => a.points - b.points);
     monthFilter.sort((a: any, b: any) => a.month - b.month);
     pointRewardCompleted.sort((a: any, b: any) => b.points - a.points);
@@ -259,29 +247,9 @@ const Rewards = () => {
     setRewardsTypes(arrayRewards);
     setLoading(false);
   }
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-        router.push("auth/Login")
-      }
-    }, [])
-
-  } catch (error) {
-    console.log(error);
-    setLoggedIn(false);
-  }
-
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
-  useEffect(() => {
-    fetchDB_data()
-
-  }, [])
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -436,7 +404,7 @@ const Rewards = () => {
                 innerWidth={innerWidth}
                 indexSlider={index}
                 userReward={userReward}
-                // getAllUserRewards={getAllUserRewards}
+                getRewardData={getRewardData}
                 courses={courses}
                 completeCertificates={completeCertificates}
                 router={router}

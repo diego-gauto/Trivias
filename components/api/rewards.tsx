@@ -66,6 +66,17 @@ export const getRequestsApi = async () => {
       return error
     });
 };
+export const getClaimedReward = async (userId: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "rewards/getClaimed/" + userId, userId)
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 export const createRequestApi = async (request: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "rewards/createRequest", request)

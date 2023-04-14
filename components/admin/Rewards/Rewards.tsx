@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
 import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
-import { getRewardsApi } from "../../api/rewards";
+import { getRequestsApi, getRewardsApi, updateRequestStatusApi } from "../../api/rewards";
 import { AdminContain } from "../SideBar.styled";
 import AddReward from "./Modals/AddReward";
 import EditReward from "./Modals/EditReward";
@@ -19,10 +19,17 @@ const Rewards = () => {
   const [reward, setReward] = useState<any>({});
   const [edit, setEdit] = useState(false);
 
+  const getAllRequests = () => {
+    getRequestsApi().then((res) => {
+      setRequests(res);
+    })
+  }
+
   useEffect(() => {
     getRewardsApi().then((res) => {
       setRewards(res);
     })
+    getAllRequests();
     // getRewards().then((res) => {
     //   setRewards(res);
     // })
@@ -38,25 +45,30 @@ const Rewards = () => {
   }
 
   const formatDate = (date: any) => {
-    let tempDate = new Date(date.seconds * 1000);
-    let tempDay = tempDate.getDate()
-    let tempMonth = tempDate.getUTCMonth() + 1;
-    let tempYear = tempDate.getFullYear()
-    let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-    return formatDate
+    // let tempDate = new Date(date.seconds * 1000);
+    // let tempDay = tempDate.getDate()
+    // let tempMonth = tempDate.getUTCMonth() + 1;
+    // let tempYear = tempDate.getFullYear()
+    // let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    return date.slice(0, 10)
   }
 
   const confirmRequest = (data: any) => {
     if (!data.status) {
       var result = confirm("Desea que esta recompensa sea reclamada?");
-      if (result == true) {
-        updateRequest(data.id).then(() => {
-          getRequest().then((res) => {
-            setRequests(res);
-          })
+      if (result === true) {
+        console.log(data);
+        data.status = 1;
+        updateRequestStatusApi(data).then((res) => {
+          getAllRequests();
         })
-        updateUserRewards(data.userId, data.rewardId).then(() => {
-        })
+        // updateRequest(data.id).then(() => {
+        //   getRequest().then((res) => {
+        //     setRequests(res);
+        //   })
+        // })
+        // updateUserRewards(data.userId, data.rewardId).then(() => {
+        // })
       }
     }
   }
@@ -92,11 +104,11 @@ const Rewards = () => {
           {requests.map((request: any, index: number) => {
             return (
               <div className="tr" key={"RequestTable " + index}>
-                <p>{request.user}</p>
-                <p>{request.phoneNumber}</p>
+                <p>{request.name}</p>
+                <p>{request.phone_number !== "undefined" ? request.phone_number : "Sin telefono"}</p>
                 <p>{request.email}</p>
                 <p>{request.title}</p>
-                <p>{formatDate(request.createAt)}</p>
+                <p>{formatDate(request.created_at)}</p>
                 <p style={{ background: request.status ? "#33c600" : "#e70000", color: "#fff", cursor: "pointer" }}
                   onClick={() => {
                     confirmRequest(request)
