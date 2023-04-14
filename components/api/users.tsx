@@ -12,7 +12,8 @@ export const getUserApi = async (email: any) => {
         payment_methods: res.data.payment_methods.data,
         user_courses: res.data.courses,
         user_progress: res.data.progress,
-        user_history: res.data.history
+        user_history: res.data.history,
+        user_certificates: res.data.certificates
       };
     })
     .catch((error) => {
