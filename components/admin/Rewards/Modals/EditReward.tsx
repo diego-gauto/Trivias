@@ -28,6 +28,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     image: '',
     product_type: 'fisico',
     type: 'points',
+    published: 'publicado',
     month: 0,
     points: 0
   });
@@ -133,7 +134,13 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
           <select value={reward.type} onChange={(e) => { setReward({ ...reward, type: e.target.value }) }}>
             <option value="points">Puntos</option>
             <option value="months">Tiempo</option>
-            {/* <option value="certificates">Certificados</option> */}
+          </select>
+        </InputContain>
+        <InputContain>
+          <Label>Publicado</Label>
+          <select onChange={(e) => { setReward({ ...reward, published: e.target.value }) }}>
+            <option value="publicado">Publicado</option>
+            <option value="no-publicado">No Publicado</option>
           </select>
         </InputContain>
         {

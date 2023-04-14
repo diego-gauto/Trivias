@@ -50,7 +50,7 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "points") {
-      tempFilter = rewards.filter((val: any) => (val.type == "points"));
+      tempFilter = rewards.filter((val: any) => (val.type === "points" && val.published === "published"));
       tempFilter.sort((a: any, b: any) => a.points - b.points)
       tempFilter.forEach((element: any) => {
         if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
@@ -81,7 +81,7 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "months") {
-      tempFilter = rewards.filter((val: any) => (val.type == "months"));
+      tempFilter = rewards.filter((val: any) => (val.type == "months" && val.published === "published"));
       tempFilter.sort((a: any, b: any) => a.month - b.month)
       tempFilter.forEach((element: any) => {
         if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
