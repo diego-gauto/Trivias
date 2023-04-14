@@ -10,32 +10,52 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { cancelPaypal, cancelStripe } from "../../../components/api/users";
+import { getRewardsApi } from "../../../components/api/rewards";
 const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  let date = new Date().getTime() / 1000;
   const [formatDate, setFormatDate] = useState("")
   const [loader, setLoader] = useState<any>(false);
-  const [show, setShow] = useState(false);
-  const handleShow = () => {
-    setShow(true)
+  const [points, setPoints] = useState<any>();
+  const [time, setTime] = useState<any>();
+
+  console.log(user);
+
+
+  const getRewards = async () => {
+    let tempPointsObj: any = { obtained: [], blocked: [] };
+    let tempMonthObj: any = { obtained: [], blocked: [] };
+    let tempPoints: any = [];
+    let tempMonths: any = [];
+    getRewardsApi().then((res) => {
+      tempPoints = res.filter((x: any) => x.type === 'points');
+      tempMonths = res.filter((x: any) => x.type === 'months');
+      tempPoints.sort((a: any, b: any) => a.points - b.points);
+      tempMonths.sort((a: any, b: any) => a.month - b.month);
+
+      tempPoints.forEach((element: any) => {
+        if (user.score >= element.points) {
+          tempPointsObj.obtained.push(element);
+        } else {
+          tempPointsObj.blocked.push(element);
+        }
+      });
+      setPoints(tempPointsObj);
+      let today: any = new Date().getTime() / 1000;
+      let tempDayCount: any = today - user.start_date;
+      let tempMonth = user.start_date === 0 ? 0 : tempDayCount / (3600 * 24 * 30);
+      tempMonths.forEach((element: any) => {
+        if (Math.floor(tempMonth) >= element.month) {
+          tempMonthObj.obtained.push(element);
+        } else {
+          tempMonthObj.blocked.push(element);
+        }
+      });
+      setTime(tempMonthObj);
+    })
   }
-  const getNextTimeReward = async () => {
-    // let tempSize: any = [];
-    // let tempReward: any = [];
-    // getTimeRewards().then(async (res) => {
-    //   tempSize = res.filter((data: any) => (data.month <= timeLevel))
-    //   tempReward = res.filter((data: any) => (data.month > timeLevel));
-    //   if (tempSize) {
-    //     setTimePrizeSize(tempSize.length);
-    //   }
-    //   const timeLevels = await getTimeLevel()
-    //   let tempRewards: any = [];
-    //   tempRewards = res.filter((data: any) => (data.month >= timeLevels[timeIndex]?.minimum && data.month < timeLevels[timeIndex].maximum));
-    //   setTimePrize(tempReward[0]);
-    // })
-  }
+
   useEffect(() => {
     let tempDate = new Date((user.final_date) * 1000);
     let tempDay = tempDate.getDate();
@@ -46,10 +66,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   }, [])
 
   useEffect(() => {
-    if (monthProgress !== 0) {
-      getNextTimeReward()
-    }
-  }, [monthProgress])
+    getRewards()
+  }, [])
+
   const cancelSubscription = async () => {
     setLoader(true);
     if (user.method == 'stripe') {
@@ -95,7 +114,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                   <span> por puntaje</span></p>
                 <div className="bottom-contain">
                   <p className="point-number">
-                    {prizeSize > 9 ? prizeSize : prizeSize != 0 ? "0" + prizeSize : 0}
+                    {points?.obtained.length}
                   </p>
                   <AiOutlineStar style={reward == 0 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
@@ -106,7 +125,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                   <span> por tiempo</span></p>
                 <div className="bottom-contain">
                   <p className="time-number">
-                    {timePrizeSize > 9 ? timePrizeSize : timePrizeSize != 0 ? "0" + timePrizeSize : 0}
+                    {time?.obtained.length}
                   </p>
                   <AiOutlineHourglass style={reward == 1 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
@@ -127,21 +146,21 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 reward == 0 &&
                 <p>
                   {
-                    prize.length <= 0 ? <>Sin<span> Recompensa</span></> : "Siguiente Recompensa"
+                    points?.obtained.length === 0 ? <>Sin<span> Recompensa</span></> :
+                      <>Siguiente Recompensa {points?.blocked.length > 0 ?
+                        <span>{points?.blocked[0].title}</span> :
+                        <>Sin<span> Recompensa</span></>}</>
                   }
-                  <span> {prize.title}</span>
                 </p>
               }
               {
                 reward == 1 &&
                 <p>
                   {
-                    !timeLevel
-                      ? <>Sin<span> Recompensa</span></>
-                      :
-                      timePrize
-                        ? <>Siguiente Recompensa <span>{timePrize.title}</span></>
-                        : <>Sin<span> Recompensa</span></>
+                    time?.obtained.length === 0 ? <>Sin<span> Recompensa</span></> :
+                      <>Siguiente Recompensa {time.blocked.length > 0 ?
+                        <span>{time?.blocked[0].title}</span> :
+                        <>Sin<span> Recompensa</span></>}</>
                   }
                 </p>
               }
