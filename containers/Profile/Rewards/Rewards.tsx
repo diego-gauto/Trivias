@@ -14,7 +14,6 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
 import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
-import { getNextCertificate } from "../../../store/actions/courseActions";
 import { getRewardsApi } from "../../../components/api/rewards";
 import { getUserApi } from "../../../components/api/users";
 import { getCoursesApi, getLessonsFromUserId } from "../../../components/api/lessons";
@@ -52,11 +51,6 @@ const Rewards = () => {
     } catch (error) {
       return false
     }
-  }
-  const getAllUserRewards = () => {
-    // getUserRewards(userData.id).then((res) => {
-    //   setUserReward(res);
-    // });
   }
   const changeRewardPosition = (val: string) => {
     let tempSlides: any = [];
@@ -100,6 +94,7 @@ const Rewards = () => {
     else {
       getMonth = 0;
     }
+    console.log(user);
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
     let lesson_users: any = [];
@@ -147,86 +142,14 @@ const Rewards = () => {
       })
     })
   }
-  const getCurrentTimeLevel = (user: any) => {
-    // let tempDayCount: any = today - user.start_date;
-    // let getMonth: any;
-    // if (user.start_date === 0) {
-    //   getMonth = 0;
-    // }
-    // else {
-    //   getMonth = tempDayCount / (3600 * 24 * 30);
-    // }
-    // setMonthProgress(getMonth);
-    // setTimeLevel(Math.floor(getMonth))
-  }
-  const getNextCertificates = (user: any) => {
-    let tempNextCertifica: any = {
-      counter: 0,
-      totalLessons: 0,
-      maxTotalLessons: 0,
-      average: 0,
-      maximum: 0,
-    }
-    let counter: number = 0;
-    let totalLessons: number = 0;
-    let maxTtotalLessons: number = 0;
-    let average: number = 0;
-    let maximum: any = 0;
-    let arrCourse: any = [];
-    let certCourses: any = [];
-
-    // getNextCertificate().then((res: any) => {
-    //   res.map((course: any) => {
-    //     if (user?.certificates) {
-    //       user?.certificates.forEach((cert: any) => {
-    //         if (cert.courseId == course.id) {
-    //           certCourses.push({
-    //             title: course.courseTittle,
-    //             path: course.coursePath,
-    //             professorId: course.courseProfessor[0],
-    //             color: course.courseCertificateColor,
-    //             courseId: course.id,
-    //           });
-    //         }
-    //       })
-    //     }
-    //     setCompleteCertificates(certCourses);
-    //     course.lessons.map((lesson: any) => {
-    //       lesson.users.map((userID: any) => {
-    //         if (user.id === userID) {
-    //           counter = counter + 1;
-    //         }
-    //       })
-    //     })
-    //     maxTtotalLessons = course.lessons.length;
-    //     average = counter / maxTtotalLessons;
-    //     totalLessons = maxTtotalLessons - counter;
-    //     if (average == 1) {
-    //       counter = 0;
-    //     }
-    //     if (counter > 0) {
-    //       arrCourse.push({
-    //         total: average,
-    //         title: course.courseTittle,
-    //         lessonsLeft: totalLessons,
-    //         maxLessons: maxTtotalLessons,
-    //         type: "certificates",
-    //         path: course.coursePath,
-    //         about: course.courseAbout,
-    //       })
-    //       counter = 0;
-    //     }
-    //   })
-    //   maximum = Math.max(...arrCourse.map((val: any) => val.total));
-    //   setCourses(arrCourse);
-    //   arrCourse = arrCourse.filter((val: any) => val.total == maximum);
-    //   getAllRewards(arrCourse[0], user);
-    // })
-  }
   const getNextRewards = (data: any) => {
     let pointsFilter = [];
     let monthFilter = [];
-    let pointRewardCompleted
+    let pointRewardCompleted = [];
+    let monthRewardCompleted = [];
+    let progressPoints: number = 0;
+    let progressMonth: number = 0;
+    let progressCertificates: number = 0;
     const {
       monthCompleted,
       monthPercentage,
@@ -235,129 +158,79 @@ const Rewards = () => {
       totalCertificates,
       user
     } = data;
-    pointsFilter = reward.filter((data: any) => (reward.type === "points" && user.score < data.points));
-    monthFilter = reward.filter((data: any) => (reward.type === "month" && monthPercentage < data.month));
+    pointsFilter = reward.filter((data: any) => (data.type === "points" && user.score < data.points));
+    monthFilter = reward.filter((data: any) => (data.type === "months" && monthPercentage < data.month));
+    pointRewardCompleted = reward.filter((data: any) => (data.type === "points" && user.score >= data.points));
+    monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && user.score >= data.month));
     pointsFilter.sort((a: any, b: any) => a.points - b.points);
     monthFilter.sort((a: any, b: any) => a.month - b.month);
-    // let arrayRewards: any = [
-    //   {
-    //     type: "points",
-    //     scoreType: "puntaje",
-    //     score: user.score,
-    //     title: pointsFilter.title,
-    //     points: pointsFilter.points,
-    //     completed: pointsLength.length,
-    //     progress: progressPoints,
-    //   },
-    //   {
-    //     type: "months",
-    //     scoreType: "meses",
-    //     score: timeLevel,
-    //     title: monthFilter.title,
-    //     months: monthFilter.months,
-    //     completed: monthsLength.length,
-    //     progress: monthProgress,
-    //   },
-    //   {
-    //     type: "certificates",
-    //     scoreType: "certificados",
-    //     score: totalCertificates ? totalCertificates : 0,
-    //     title: nextCourseCertificate?.title ? nextCourseCertificate.title : "Sin certificados",
-    //     certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : "0",
-    //     completed: totalCertificates ? totalCertificates : 0,
-    //     progress: progressCertificates,
-    //   },
-    // ];
-    // setLoading(false);
-    // setRewardsTypes(arrayRewards)
-    // let pointsFilter = [];
-    // let previousRewardPoints: any = [];
-    // let progressPoints: number = 0;
-    // let pointsLength = [];
-    // let monthsFilter = [];
-    // let previousRewardMonths: any = [];
-    // let progressMonths: number = 0;
-    // let monthsLength = [];
-    // let certificatesCompleted: number = user.certificates?.length;
-    // let progressCertificates: number = 0;
-    // pointsFilter = res.filter((reward: any) => (reward.type == "points" && user.score < reward.points));
-    // previousRewardPoints = res.filter((reward: any) => (reward.type == "points" && user.score >= reward.points));
-    // pointsLength = res.filter((reward: any) => (reward.type == "points" && user.score >= reward.points));
-    // monthsFilter = res.filter((reward: any) => (reward.type == "months" && timeLevel < reward.months));
-    // previousRewardMonths = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
-    // monthsLength = res.filter((reward: any) => (reward.type == "months" && timeLevel >= reward.months));
-    // if (previousRewardPoints.length == 0) {
-    //   previousRewardPoints = [{
-    //     points: 0,
-    //   }]
-    // }
-    // if (previousRewardMonths.length == 0) {
-    //   previousRewardMonths = [{
-    //     months: 0,
-    //   }]
-    // }
-    // pointsFilter.sort((a: any, b: any) => a.points - b.points)
-    // monthsFilter.sort((a: any, b: any) => a.months - b.months)
-    // previousRewardPoints.sort((a: any, b: any) => b.points - a.points)
-    // previousRewardMonths.sort((a: any, b: any) => b.months - a.months)
-    // if (pointsFilter.length == 0) {
-    //   pointsFilter = [{
-    //     points: 0,
-    //     title: "Sin Recompensas"
-    //   }]
-    // }
-    // else {
-    //   progressPoints = 565 - (((user.score - previousRewardPoints[0].points) / (pointsFilter[0].points - previousRewardPoints[0].points)) * 565)
-    // }
-    // if (monthsFilter.length == 0) {
-    //   monthsFilter = [{
-    //     months: 0,
-    //     title: "Sin Recompensas"
-    //   }]
-    // }
-    // else {
-    //   progressMonths = 565 - (((monthProgress - previousRewardMonths[0].months) / (monthsFilter[0].months - previousRewardMonths[0].months)) * 565)
-    // }
-    // if (nextCertificate) {
-    //   progressCertificates = ((1 - nextCertificate.total) * 565);
-    // }
-    // else {
-    //   progressCertificates = 0;
-    // }
-    // getRewardTexts(pointsFilter[0], pointsLength, progressPoints, monthsFilter[0], monthsLength, progressMonths, progressCertificates, nextCertificate, certificatesCompleted, user);
-  }
-  const getRewardTexts = (pointsFilter: any, pointsLength: any, progressPoints: number, monthsFilter: any, monthsLength: any, monthProgress: any, progressCertificates: any, nextCertificate: any, certificatesCompleted: any, user: any) => {
+    pointRewardCompleted.sort((a: any, b: any) => b.points - a.points);
+    monthRewardCompleted.sort((a: any, b: any) => b.month - a.month);
+    if (pointsFilter.length === 0) {
+      pointsFilter = [{
+        points: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      if (pointRewardCompleted.length === 0) {
+        progressPoints = 565 - (((user.score - 0) / (pointsFilter[0].points - 0)) * 565)
+      }
+      else {
+        progressPoints = 565 - (((user.score - pointRewardCompleted[0].points) / (pointsFilter[0].points - pointRewardCompleted[0].points)) * 565)
+      }
+    }
+    if (monthFilter.length === 0) {
+      monthFilter = [{
+        month: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      if (monthRewardCompleted.length === 0) {
+        progressMonth = 565 - (((monthProgress - 0) / (monthFilter[0].month - 0)) * 565)
+      }
+      else {
+        progressMonth = 565 - (((monthProgress - monthRewardCompleted[0].month) / (monthFilter[0].month - monthRewardCompleted[0].month)) * 565)
+      }
+    }
+    if (nextCourseCertificate) {
+      progressCertificates = ((1 - nextCourseCertificate.progress) * 565);
+    }
+    else {
+      progressCertificates = 0;
+    }
     let arrayRewards: any = [
       {
         type: "points",
         scoreType: "puntaje",
         score: user.score,
-        title: pointsFilter.title,
-        points: pointsFilter.points,
-        completed: pointsLength.length,
+        title: pointsFilter[0].title,
+        points: pointsFilter[0].points,
+        completed: pointRewardCompleted.length,
         progress: progressPoints,
       },
       {
         type: "months",
         scoreType: "meses",
-        score: timeLevel,
-        title: monthsFilter.title,
-        months: monthsFilter.months,
-        completed: monthsLength.length,
-        progress: monthProgress,
+        score: monthCompleted,
+        title: monthFilter[0].title,
+        months: monthFilter[0].month,
+        completed: monthRewardCompleted.length,
+        progress: progressMonth,
       },
       {
         type: "certificates",
         scoreType: "certificados",
-        score: certificatesCompleted ? certificatesCompleted : 0,
-        title: nextCertificate?.title ? nextCertificate.title : "Sin certificados",
-        certificates: nextCertificate?.lessonsLeft ? nextCertificate.lessonsLeft : "0",
-        completed: certificatesCompleted ? certificatesCompleted : 0,
+        score: totalCertificates ? totalCertificates : 0,
+        title: nextCourseCertificate?.title ? nextCourseCertificate.title : "Sin certificados",
+        certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : "0",
+        completed: totalCertificates ? totalCertificates : 0,
         progress: progressCertificates,
       },
     ];
+    setRewardsTypes(arrayRewards);
     setLoading(false);
-    setRewardsTypes(arrayRewards)
   }
   try {
     var userDataAuth = useAuth();
@@ -386,10 +259,7 @@ const Rewards = () => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setUserData(res);
-        getAllUserRewards();
         getRewardData(res);
-        getNextCertificates(res);
-        getCurrentTimeLevel(res);
       })
     }
   }, [])
@@ -539,7 +409,7 @@ const Rewards = () => {
                 innerWidth={innerWidth}
                 indexSlider={index}
                 userReward={userReward}
-                getAllUserRewards={getAllUserRewards}
+                // getAllUserRewards={getAllUserRewards}
                 courses={courses}
                 completeCertificates={completeCertificates}
                 router={router}

@@ -21,7 +21,7 @@ const RewardSlider = (props: reward_slider) => {
     indexSlider,
     user,
     userReward,
-    getAllUserRewards,
+    // getAllUserRewards,
     courses,
     completeCertificates,
     router
@@ -168,7 +168,7 @@ const RewardSlider = (props: reward_slider) => {
     createRequestApi(tempRequest).then(() => {
       alert("Recompensa reclamada con éxito")
       getSliders();
-      getAllUserRewards();
+      // getAllUserRewards();
     })
   }
 

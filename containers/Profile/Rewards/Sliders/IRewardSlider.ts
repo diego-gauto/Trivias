@@ -8,7 +8,7 @@ export interface reward_slider {
   innerWidth: number;
   indexSlider: number;
   userReward: any;
-  getAllUserRewards: any;
+  // getAllUserRewards: any;
   courses: course[];
   completeCertificates: courses[];
   router: any;
