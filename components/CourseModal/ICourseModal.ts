@@ -19,6 +19,7 @@ export interface ICourseModal {
     reviews: number;
     about: string;
     materials: [IMaterialData];
+    totalDuration: number;
   };
   user: {
     level: number;

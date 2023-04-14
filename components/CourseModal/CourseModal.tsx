@@ -132,8 +132,6 @@ const CourseModal = (props: ICourseModal) => {
     }
   };
 
-  console.log(course);
-
   return (
     <ModalContain >
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -180,7 +178,7 @@ const CourseModal = (props: ICourseModal) => {
                 </div>
               </div>
               <p className="time">Duración estimada</p>
-              <p className="duration">{hms(course.duration)}</p>
+              <p className="duration">{hms(course.totalDuration)}</p>
               <button onClick={handleShow}>Materiales</button>
             </div>}
             {responsive990 && <div className="responsive-top-info">
