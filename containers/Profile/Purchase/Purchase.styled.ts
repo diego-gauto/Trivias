@@ -237,6 +237,12 @@ export const Container = styled.div`
         bottom: 0;
         left: -71px;
         max-height: 350px;
+        @media (max-width: 1400px) {
+          max-height: 300px;
+        }
+        @media (max-width: 1280px) {
+          max-height: 270px;
+        }
       }
     }
   }
