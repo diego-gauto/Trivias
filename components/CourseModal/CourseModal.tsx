@@ -167,8 +167,11 @@ const CourseModal = (props: ICourseModal) => {
                   <div className="info-icon">
                     i
                     <div className="info-box">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      {course.difficulty === "Muy Fácil" && "Recomendado para personas principiantes"}
+                      {course.difficulty === "Fácil" && "Recomendado para personas a partir de 3 meses de experiencia"}
+                      {course.difficulty === "Intermedio" && "Recomendado para personas a partir de 6 meses de experiencia"}
+                      {course.difficulty === "Avanzado" && "Recomendado para personas a partir de un año de experiencia"}
+                      {course.difficulty === "Máster" && "Recomendado para personas a partir de un año de experiencia y con capacitación constante"}
                     </div>
                   </div>
                 </div>
@@ -189,8 +192,11 @@ const CourseModal = (props: ICourseModal) => {
                     <div className="info-icon">
                       i
                       <div className="info-box">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        {course.difficulty === "Muy Fácil" && "Recomendado para personas principiantes"}
+                        {course.difficulty === "Fácil" && "Recomendado para personas a partir de 3 meses de experiencia"}
+                        {course.difficulty === "Intermedio" && "Recomendado para personas a partir de 6 meses de experiencia"}
+                        {course.difficulty === "Avanzado" && "Recomendado para personas a partir de un año de experiencia"}
+                        {course.difficulty === "Máster" && "Recomendado para personas a partir de un año de experiencia y con capacitación constante"}
                       </div>
                     </div>
                   </div>

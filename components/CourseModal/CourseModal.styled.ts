@@ -356,7 +356,7 @@ export const CourseContain = styled.div<{ level: any }>`
         padding-top: 2px;
         padding-left: 2px;
         cursor: pointer;
-        text-transform: lowercase;
+        text-transform: math-auto;
         font-weight: 500;
         line-height: 6px;
         @media (max-width: 450px) {
