@@ -12,6 +12,7 @@ export interface reward_slider {
   courses: course[];
   completeCertificates: courses[];
   router: any;
+  getRewardData: any;
 }
 interface SlideObj {
   id: string;

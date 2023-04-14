@@ -3,9 +3,8 @@ import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
-import { addRequest, addUserReward } from '../../../../store/actions/RewardActions';
-import { getTeacherById } from '../../../../store/actions/courseActions';
 import { createRequestApi } from '../../../../components/api/rewards';
+import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -21,13 +20,14 @@ const RewardSlider = (props: reward_slider) => {
     indexSlider,
     user,
     userReward,
-    // getAllUserRewards,
+    getRewardData,
     courses,
     completeCertificates,
     router
   } = props;
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
+  const [loader, setLoader] = useState<boolean>(false);
   const [texts, setTexts] = useState<any>({
     header: "",
     title: "",
@@ -39,7 +39,7 @@ const RewardSlider = (props: reward_slider) => {
     if (type == "claim-points") {
       tempFilter = rewards.filter((val: any) => (val.type == "points"));
       tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.id == element.id && x.status)) {
+        if (userReward.find((x: any) => x.reward_id == element.id && x.status)) {
           slides.push(element);
         }
       });
@@ -53,10 +53,10 @@ const RewardSlider = (props: reward_slider) => {
       tempFilter = rewards.filter((val: any) => (val.type == "points"));
       tempFilter.sort((a: any, b: any) => a.points - b.points)
       tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.id == element.id && !x.status)) {
+        if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
           slides.push(element);
         }
-        if (!userReward.find((x: any) => x.id == element.id)) {
+        if (!userReward.find((x: any) => x.reward_id == element.id)) {
           slides.push(element);
         }
       });
@@ -68,9 +68,9 @@ const RewardSlider = (props: reward_slider) => {
     }
     if (type == "claim-months") {
       tempFilter = rewards.filter((val: any) => (val.type == "months"));
-      tempFilter.sort((a: any, b: any) => a.months - b.months);
+      tempFilter.sort((a: any, b: any) => a.month - b.month);
       tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.id == element.id && x.status)) {
+        if (userReward.find((x: any) => x.reward_id == element.id && x.status)) {
           slides.push(element);
         }
       });
@@ -82,12 +82,12 @@ const RewardSlider = (props: reward_slider) => {
     }
     if (type == "months") {
       tempFilter = rewards.filter((val: any) => (val.type == "months"));
-      tempFilter.sort((a: any, b: any) => a.months - b.months)
+      tempFilter.sort((a: any, b: any) => a.month - b.month)
       tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.id == element.id && !x.status)) {
+        if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
           slides.push(element);
         }
-        if (!userReward.find((x: any) => x.id == element.id)) {
+        if (!userReward.find((x: any) => x.reward_id == element.id)) {
           slides.push(element);
         }
       });
@@ -140,30 +140,18 @@ const RewardSlider = (props: reward_slider) => {
       setOpenRewardInfo(index);
     }
   }
-  // const AddUserRewards = async (reward: any) => {
-  //   let tempReward = {
-  //     id: reward.id,
-  //     status: false,
-  //     title: reward.title,
-  //     type: reward.type
-  //   }
-  //   addUserReward(tempReward, user.id).then((res: any) => {
-  //   }).then(() => {
-  //     alert("Recompensa reclamada con éxito")
-  //     getSliders();
-  //     getAllUserRewards();
-  //   })
-  // }
   const sendRequest = async (reward: any) => {
+    setLoader(true);
     let tempRequest: any = {
-      user_id: user.id,
+      user_id: user.user_id,
       reward_id: reward.id,
-      stauts: false,
+      status: false,
     }
     createRequestApi(tempRequest).then(() => {
       alert("Recompensa reclamada con éxito")
       getSliders();
-      // getAllUserRewards();
+      getRewardData();
+      setLoader(false);
     })
   }
 
@@ -218,7 +206,7 @@ const RewardSlider = (props: reward_slider) => {
                           <span>{texts.title}</span><br />
                           {texts.scoreText}
                           {reward.points && reward.points + " puntos"}
-                          {reward.months ? (reward.months == 1 ? reward.months + " mes" : reward.months + " meses") : ""}
+                          {reward.month ? (reward.month == 1 ? reward.month + " mes" : reward.month + " meses") : ""}
                           {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : ""}
                         </p>
                         {/* {
@@ -243,7 +231,7 @@ const RewardSlider = (props: reward_slider) => {
                           }
                           {
                             (type == "claim-months" || type == "claim-points" || type == "certificates"
-                              || (score < reward.points) || months < reward.months) &&
+                              || (score < reward.points) || months < reward.month) &&
                             <button className="btn-info" onClick={() => showRewardData(index, reward.points)}>
                               <p className='text'>
                                 Más información
@@ -251,22 +239,27 @@ const RewardSlider = (props: reward_slider) => {
                             </button>
                           }
                           {
-                            ((score >= reward.points && !userReward.find((x: any) => x.id == reward.id)) ||
-                              (months >= reward.months && !userReward.find((x: any) => x.id == reward.id)) ||
-                              (certificates >= reward.certificates && !userReward.find((x: any) => x.id == reward.id))) &&
-                            <button className="btn-info"
-                              onClick={() => {
-                                // AddUserRewards(reward);
-                                sendRequest(reward);
-                              }}
-                            >
-                              <p className='text' >
-                                Hacer Pedido
-                              </p>
-                            </button>
+                            ((reward.type === "points" && score >= reward.points && !userReward.find((x: any) => x.reward_id == reward.id)) ||
+                              (reward.type === "months" && months >= reward.month && !userReward.find((x: any) => x.reward_id == reward.id))) &&
+                            <>
+                              {
+                                !loader ?
+                                  <button className="btn-info"
+                                    onClick={() => {
+                                      // AddUserRewards(reward);
+                                      sendRequest(reward);
+                                    }}
+                                  >
+                                    <p className='text' >
+                                      Hacer Pedido
+                                    </p>
+                                  </button>
+                                  : <LoaderButton />
+                              }
+                            </>
                           }
                           {
-                            ((userReward.find((x: any) => x.id == reward.id && !x.status))) &&
+                            ((userReward.find((x: any) => x.reward_id === reward.id && !x.status))) &&
                             <button className="btn-info">
                               <p className='text'>
                                 En proceso..
@@ -288,7 +281,7 @@ const RewardSlider = (props: reward_slider) => {
                               {reward.type == "points" &&
                                 <p><span className="rewards">{reward.points} puntos</span> en Gonvar</p>}
                               {reward.type == "months" &&
-                                <p><span className="months">{reward.months} meses</span> en Gonvar</p>}
+                                <p><span className="months">{reward.month} meses</span> en Gonvar</p>}
                               {reward.type == "certificates" &&
                                 <p><span className="certificates">{reward.certificates} certificados</span> en Gonvar</p>}
                             </div>
