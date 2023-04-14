@@ -52,24 +52,24 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
         }
       });
       setTime(tempMonthObj);
-      let array: any = [];
-      user.user_certificates.forEach((element: any) => {
-        array.push(element.course_id)
-      });
-      getCoursesApi().then((courses) => {
-        let tempCertificates = courses.filter((x: any) => !array.includes(x.id));
-        let countArray: any = []
-        tempCertificates.forEach((course: any, index: number) => {
-          countArray.push({ id: course.id, name: course.title, count: 0 })
-          course.lessons.forEach((lesson: any) => {
-            if (lesson.users.filter((x: any) => x.user_id === user.user_id).length > 0) {
-              countArray[index].count++;
-            }
-          });
+    })
+    let array: any = [];
+    user.user_certificates.forEach((element: any) => {
+      array.push(element.course_id)
+    });
+    getCoursesApi().then((courses) => {
+      let tempCertificates = courses.filter((x: any) => !array.includes(x.id));
+      let countArray: any = []
+      tempCertificates.forEach((course: any, index: number) => {
+        countArray.push({ id: course.id, name: course.title, count: 0 })
+        course.lessons.forEach((lesson: any) => {
+          if (lesson.users.filter((x: any) => x.user_id === user.user_id).length > 0) {
+            countArray[index].count++;
+          }
         });
-        countArray.sort((a: any, b: any) => b.count - a.count);
-        setCertificates(countArray);
-      })
+      });
+      countArray.sort((a: any, b: any) => b.count - a.count);
+      setCertificates(countArray);
     })
   }
 

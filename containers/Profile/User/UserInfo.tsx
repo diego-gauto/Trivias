@@ -394,7 +394,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                 <p className="points">{points_format} puntos</p>
                 <p className="months">{format(new Date(userData.created_at).getTime() / 1000)} meses de aprendizaje</p>
                 <p className="certificates">
-                  {userData.certificates?.length > 0 ? (userData.certificates?.length == 1 ? userData.certificates?.length + " certificado" : userData.certificates?.length + " certificados") : "Sin certificados"}
+                  {userData.user_certificates?.length > 0 ? (userData.user_certificates?.length == 1 ? userData.user_certificates?.length + " certificado" : userData.user_certificates?.length + " certificados") : "Sin certificados"}
                 </p>
               </div>
             </div>
