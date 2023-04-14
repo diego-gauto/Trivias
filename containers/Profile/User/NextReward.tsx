@@ -11,6 +11,7 @@ import { FaArrowRight, FaAward } from "react-icons/fa";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { cancelPaypal, cancelStripe } from "../../../components/api/users";
 import { getRewardsApi } from "../../../components/api/rewards";
+import { getCoursesApi } from "../../../components/api/lessons";
 const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
@@ -19,9 +20,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   const [loader, setLoader] = useState<any>(false);
   const [points, setPoints] = useState<any>();
   const [time, setTime] = useState<any>();
-
-  console.log(user);
-
+  const [certificates, setCertificates] = useState<any>();
 
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
@@ -53,6 +52,24 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
         }
       });
       setTime(tempMonthObj);
+      let array: any = [];
+      user.user_certificates.forEach((element: any) => {
+        array.push(element.course_id)
+      });
+      getCoursesApi().then((courses) => {
+        let tempCertificates = courses.filter((x: any) => !array.includes(x.id));
+        let countArray: any = []
+        tempCertificates.forEach((course: any, index: number) => {
+          countArray.push({ id: course.id, name: course.title, count: 0 })
+          course.lessons.forEach((lesson: any) => {
+            if (lesson.users.filter((x: any) => x.user_id === user.user_id).length > 0) {
+              countArray[index].count++;
+            }
+          });
+        });
+        countArray.sort((a: any, b: any) => b.count - a.count);
+        setCertificates(countArray);
+      })
     })
   }
 
@@ -134,9 +151,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 <p><span className="first-word">Certificados</span> <br />
                   <span>acumulados</span></p>
                 <div className="bottom-contain">
-                  {/* <p className="certificate-number">
-                    {user.certificates?.length > 0 ? (user.certificates.length > 9 ? user.certificates.length : "0" + user.certificates.length) : 0}
-                  </p> */}
+                  <p className="certificate-number">
+                    {user.user_certificates?.length > 0 ? user.user_certificates.length : 0}
+                  </p>
                   <FaAward style={reward == 2 ? { color: "white" } : { color: "#942cec" }} />
                 </div>
               </div>
@@ -168,15 +185,14 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 reward == 2 &&
                 <p style={{ textAlign: "center" }}>
                   {
-                    nextCertificate ?
-                      <> Certificado más próximo<span> {nextCertificate.name}</span></>
+                    certificates?.length > 0 ?
+                      <> Certificado más próximo<span> {certificates[0]?.name}</span></>
                       : <>Sin <span>Certificados</span></>
                   }
                 </p>
               }
             </div>
           </div>
-
         </div>
         <Link href="/Rewards">
           <button disabled>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
