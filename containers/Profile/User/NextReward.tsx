@@ -87,28 +87,29 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   }, [])
 
   const cancelSubscription = async () => {
-    setLoader(true);
-    if (user.method == 'stripe') {
-      let sub = {
-        subscriptionId: user.plan_id,
-        userId: user.user_id,
-        planName: ""
+    if (confirm(`¿Desea cancelar su suscripción?`)) {
+      setLoader(true);
+      if (user.method == 'stripe') {
+        let sub = {
+          subscriptionId: user.plan_id,
+          userId: user.user_id,
+          planName: ""
+        }
+        cancelStripe(sub).then(() => {
+          handleClick()
+          setLoader(false);
+        })
+      } else {
+        let membership = {
+          planId: user.plan_id,
+          id: user.plan_id
+        }
+        cancelPaypal(membership).then(() => {
+          handleClick()
+          setLoader(false);
+        })
       }
-      cancelStripe(sub).then(() => {
-        handleClick()
-        setLoader(false);
-      })
-    } else {
-      let membership = {
-        planId: user.plan_id,
-        id: user.plan_id
-      }
-      cancelPaypal(membership).then(() => {
-        handleClick()
-        setLoader(false);
-      })
     }
-
   }
 
   return (
