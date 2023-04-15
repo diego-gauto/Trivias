@@ -29,7 +29,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
   const [progress, setProgress] = useState(0);
   const [counter, setCounter] = useState(0);
   const [loader, setLoader] = useState(false);
-
+  const [homework, setHomework] = useState<any>();
 
   useEffect(() => {
     if (data.quiz === 1) {
@@ -206,16 +206,20 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
       if (res.data.data.length > 0) {
         let temp = res.data.data[0]
         if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+          setHomework(temp);
           setStatus("");
         }
         if (temp.user_id === user.user_id && temp.status === 0) {
           setStatus("pending");
+          setHomework("");
         }
         if (temp.user_id === user.user_id && temp.approved === 1) {
           setStatus("approved");
+          setHomework("");
         }
       } else {
         setStatus("");
+        setHomework("");
       }
     })
   }, [data])
@@ -275,14 +279,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
               <div className='line'></div>
               {data.homework === 1 ? <div className='upload-container'>
                 <p>Tarea: <span>{data.lesson_homeworks.title}</span></p>
-                {status == "pending" && <div className='homework'>
-                  <BsFileArrowUp></BsFileArrowUp>
-                  En Revisión
-                </div>}
-                {status == "approved" && <div className='homework'>
-                  <BsFileArrowUp></BsFileArrowUp>
-                  Tarea Aprobada
-                </div>}
               </div> :
                 <p>Lección sin tarea...</p>}
             </div>
@@ -290,10 +286,22 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
               data.homework === 1 &&
               <>
                 <p dangerouslySetInnerHTML={{ __html: data.lesson_homeworks.about }} className="quill-hw" />
+                {(homework && homework.status === 1 && homework.approved === 0) && <>
+                  <p className='reason'>Tu tarea fue rechazada, por la siguiente razón:</p>
+                  <p>{homework.comment}</p>
+                </>}
                 {status == "" && <div className='homework' onClick={uploadHwk}>
                   <BsFileArrowUp></BsFileArrowUp>
                   Subir Tarea
                   <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
+                </div>}
+                {status == "pending" && <div className='homework'>
+                  <BsFileArrowUp></BsFileArrowUp>
+                  En Revisión
+                </div>}
+                {status == "approved" && <div className='homework'>
+                  <BsFileArrowUp></BsFileArrowUp>
+                  Tarea Aprobada
                 </div>}
               </>
             }

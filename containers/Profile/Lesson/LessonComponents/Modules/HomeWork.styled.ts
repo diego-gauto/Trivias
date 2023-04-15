@@ -8,6 +8,10 @@ export const HomeWorkContain = styled.div`
     flex-direction: column;
     width: 100%;
     gap: 10px;
+    .reason {
+      font-weight: 700;
+      color: #3f1168;
+    }
     .homework {
       margin-top: 20px;
       cursor: pointer;
