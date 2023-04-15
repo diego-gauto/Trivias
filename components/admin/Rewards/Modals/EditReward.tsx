@@ -30,7 +30,8 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     type: 'points',
     published: 'publicado',
     month: 0,
-    points: 0
+    points: 0,
+    price: 0
   });
   const [image, setImage] = useState<any>("");
   const [errors, setErrors] = useState<any>({
@@ -166,6 +167,14 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
               }} />
           </InputContain>
         }
+        <InputContain>
+          <Label>Precio</Label>
+          <Input placeholder="7"
+            style={errors.points ? { border: "1px solid red" } : {}}
+            onChange={(e: any) => {
+              setReward({ ...reward, price: parseInt(e.target.value) })
+            }} />
+        </InputContain>
         <InputContain>
           <Label>Imagen del Producto</Label>
           <IconContain>

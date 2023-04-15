@@ -229,6 +229,18 @@ const BlogView = () => {
               <img src={blog?.path} />
             </div>
           </FirstSection>
+          {
+            blog?.link &&
+            <VideoBlog>
+              <ReactPlayer
+                url={blog.link}
+                playing={false}
+                muted={false}
+                controls
+                width="100%" height="100%"
+              />
+            </VideoBlog>
+          }
           <BoxSection>
             <div className="title-contain">
               <p className="title">
@@ -318,19 +330,6 @@ const BlogView = () => {
               })
             }
           </ContentContainer>
-          {
-            blog?.link &&
-            <VideoBlog>
-              <ReactPlayer
-                url={blog.link}
-                playing={false}
-                muted={false}
-                controls
-                width="100%" height="100%"
-              />
-            </VideoBlog>
-          }
-
         </div>
         <div className="right-content">
           <div className="img-container" key="remove" id="remove">

@@ -3,9 +3,6 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 import { BlogBackground, BlogInputs } from './CreateBlog.styled';
 import 'react-quill/dist/quill.snow.css';
-import { text } from 'stream/consumers';
-import { httpsCallable } from 'firebase/functions';
-import { functions } from '../../../../firebase/firebaseConfig';
 import { addBlog, deleteBlog, getBlogs, updateBlog } from '../../../../store/actions/AdminActions';
 import { AiOutlineClose } from 'react-icons/ai';
 import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
@@ -149,11 +146,6 @@ const CreateBlog = () => {
   }
   const createNewBlog = async () => {
     setProcessLoader(true);
-    // // const addBlog = httpsCallable(functions, 'createBlogs');
-    // await addBlog(blog).then(async (res: any) => {
-    //   console.log(res);
-    //   addBlog(res)
-    // })
     let checkTitles: number = 0;
     blogs.forEach((element: any) => {
       if (element.title === blog.title) {

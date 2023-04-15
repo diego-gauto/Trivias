@@ -29,7 +29,8 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
     type: 'points',
     published: 'publicado',
     month: 0,
-    points: 0
+    points: 0,
+    price: 0
   });
   const [errors, setErrors] = useState<any>({
     title: false,
@@ -79,7 +80,8 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
               type: 'points',
               published: 'publicado',
               month: 0,
-              points: 0
+              points: 0,
+              price: 0
             })
           })
         })
@@ -143,8 +145,7 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
           reward.type == "points" &&
           <InputContain>
             <Label>Puntos</Label>
-            <Input placeholder="7"
-              style={errors.points ? { border: "1px solid red" } : {}}
+            <Input placeholder="145"
               onChange={(e: any) => {
                 setReward({ ...reward, points: parseInt(e.target.value) })
               }} />
@@ -161,6 +162,14 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
               }} />
           </InputContain>
         }
+        <InputContain>
+          <Label>Precio</Label>
+          <Input placeholder="7"
+            style={errors.points ? { border: "1px solid red" } : {}}
+            onChange={(e: any) => {
+              setReward({ ...reward, price: parseInt(e.target.value) })
+            }} />
+        </InputContain>
         <InputContain>
           <Label>Imagen del Producto</Label>
           <IconContain>
