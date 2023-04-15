@@ -39,9 +39,11 @@ export const SlideModule = (props: ISlideModule) => {
           <Text03 level={level}>{number} Módulos</Text03>
         </Row>
         <Row style={{ flexWrap: "nowrap" }}>
-          {(level == "Muy Fácil" || level == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-          {(level == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-          {(level == "Avanzado" || level == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+          {(level == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/beginner.jpeg" alt="" />}
+          {(level == "Fácil") && <img style={{ width: "auto" }} src="../images/easy.jpeg" alt="" />}
+          {(level == "Intermedio") && <img style={{ width: "auto" }} src="../images/medium.jpeg" alt="" />}
+          {(level == "Avanzado") && <img style={{ width: "auto" }} src="../images/advance.jpeg" alt="" />}
+          {(level == "Máster") && <img style={{ width: "auto" }} src="../images/master.jpeg" alt="" />}
           <Text03 style={{ padding: 0 }} level={level}><span>{level}</span></Text03>
         </Row>
       </TextSectionWrapper> :

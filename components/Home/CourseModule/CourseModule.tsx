@@ -68,9 +68,11 @@ export const CourseModule = (props: ICourseModuleProps) => {
           <Button className="new-btn">NAILS <span>ACADEMY</span></Button>
           <Card.Title>{data.title}</Card.Title>
           <Row className="level">
-            {(data.difficulty == "Muy Fácil" || data.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-            {(data.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-            {(data.difficulty == "Avanzado" || data.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+            {(data.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/beginner.jpeg" alt="" />}
+            {(data.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/easy.jpeg" alt="" />}
+            {(data.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/medium.jpeg" alt="" />}
+            {(data.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/advance.jpeg" alt="" />}
+            {(data.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/master.jpeg" alt="" />}
             <Text03 style={{ padding: 0 }} level={data.difficulty}><span>{data.difficulty}</span></Text03>
           </Row>
           <Card.Subtitle>
