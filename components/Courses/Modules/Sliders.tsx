@@ -312,9 +312,11 @@ const Sliders = (props: ICourseData) => {
                           <p className="sub">de <span>{course.professors[0]?.name}</span></p>
                           <p className="modules">{course.seasons.length} Módulos</p>
                           <div className="level-container">
-                            {(course.difficulty == "Muy Fácil" || course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-                            {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-                            {(course.difficulty == "Avanzado" || course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
+                            {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/beginner.jpeg" alt="" />}
+                            {(course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/easy.jpeg" alt="" />}
+                            {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/medium.jpeg" alt="" />}
+                            {(course.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/advance.jpeg" alt="" />}
+                            {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/master.jpeg" alt="" />}
                             <p>{course.difficulty}</p>
                           </div>
                         </SlideModuleContainer>

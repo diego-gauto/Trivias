@@ -44,27 +44,27 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
     ${(props) =>
       props.level == "Muy Fácil" &&
       css`
-        color: #6678f8;
+        color: #006ca8;
       `}
     ${(props) =>
       props.level == "Fácil" &&
       css`
-        color: #6678f8;
+        color: #8c5098;
       `}
       ${(props) =>
       props.level == "Intermedio" &&
       css`
-        color: #12a071;
+        color: #ec7501;
       `}
     ${(props) =>
       props.level == "Avanzado" &&
       css`
-        color: #ef1155;
+        color: #149e62;
       `}
       ${(props) =>
       props.level == "Máster" &&
       css`
-        color: #ef1155;
+        color: #d22978;
       `}
   }
   .price {
@@ -89,27 +89,27 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
     ${(props) =>
       props.level == "Muy Fácil" &&
       css`
-        color: #6678f8;
+        color: #006ca8;
       `}
     ${(props) =>
       props.level == "Fácil" &&
       css`
-        color: #6678f8;
+        color: #8c5098;
       `}
       ${(props) =>
       props.level == "Intermedio" &&
       css`
-        color: #12a071;
+        color: #ec7501;
       `}
     ${(props) =>
       props.level == "Avanzado" &&
       css`
-        color: #ef1155;
+        color: #149e62;
       `}
       ${(props) =>
       props.level == "Máster" &&
       css`
-        color: #ef1155;
+        color: #d22978;
       `}
   }
   &:hover {
