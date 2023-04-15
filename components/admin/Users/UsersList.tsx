@@ -65,7 +65,7 @@ export interface Users {
 const UsersList = () => {
   const [filterValue, setFilterValue] = useState<number>(0)
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [allUsers, setAllUsers] = useState<Array<UserData>>([]);
+  const [allUsers, setAllUsers] = useState<Array<any>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
   const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
@@ -228,7 +228,8 @@ const UsersList = () => {
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={users.map(({ id, membership, ...users }) => users)}
+              datas={allUsers.map(({ ...user }) => user
+              )}
             >
               <DownloadUserData>
                 <p>Descargar lista de usuarios</p>
