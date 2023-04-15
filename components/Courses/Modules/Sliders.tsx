@@ -14,7 +14,7 @@ import { BsPlayCircle } from 'react-icons/bs';
 import { user } from 'firebase-functions/v1/auth';
 
 const Sliders = (props: ICourseData) => {
-  const { slideNumber, slideType, innerWidth, allCourses, user } = props;
+  const { slideNumber, slideType, innerWidth, allCourses, user, containLoader } = props;
   const [show, setShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [countdown, setCountdown] = useState(0);
@@ -200,16 +200,18 @@ const Sliders = (props: ICourseData) => {
   }
 
   useEffect(() => {
-    getCourseContent();
-    // setLoading(false);
-    setTimeout(() => {
-      setLoading(false);
-    }, 300 * slideNumber);
-  }, [allCourses])
+    if (!containLoader) {
+      getCourseContent();
+      // setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 300 * slideNumber);
+    }
+  }, [allCourses, containLoader])
   useEffect(() => {
     let timeout: any;
     if (start === "left") {
-      if (countdown <= innerWidth) {
+      if (countdown < innerWidth - 50) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 5);
           --slider.scrollLeft;
@@ -223,7 +225,7 @@ const Sliders = (props: ICourseData) => {
       }
     }
     if (start === "right") {
-      if (countdown <= innerWidth) {
+      if (countdown < innerWidth - 50) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 5);
           ++slider.scrollLeft;
@@ -237,7 +239,7 @@ const Sliders = (props: ICourseData) => {
     }
     return
   }, [start, countdown]);
-
+  console.log(countdown)
   return (
     <>
       {

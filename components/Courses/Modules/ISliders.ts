@@ -1,5 +1,6 @@
 export interface ICourseData {
   slideType: string;
+  containLoader: boolean;
   slideNumber: number;
   innerWidth: any;
   allCourses: [];

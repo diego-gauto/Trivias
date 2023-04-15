@@ -37,18 +37,6 @@ const Courses = () => {
       setCourses(res);
       let courseforVideo: any = JSON.parse(JSON.stringify(res));
       let courseForModal: any = [];
-      // if (user) {
-      //   courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
-      //     return course.id === 13
-      //   })
-      // }
-      // else {
-      //   courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
-      //     return course.id === 35
-      //   })
-      // }
-      // LA LOGICA COMENTADA ES POR SI ALGUN DIA PIDEN HISTORIAL DEL ULTIMO CURSO VISTO 
-
       if (user && user.user_history.length > 0) {
         courseForModal = res.filter((course: ICourses) => {
           return course.id === user.user_history[0].course_id
@@ -73,9 +61,6 @@ const Courses = () => {
         courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
           return course.id === 35
         })
-        // let latestId = Math.max(...res.map((val: any) => val.id));
-        // courseforVideo = courseforVideo.filter((course: ICourses) => { return course.id === latestId })
-        // courseForModal = courseforVideo;
         setSeasonIndex(0);
         setLessonIndex(0);
       }
@@ -132,12 +117,12 @@ const Courses = () => {
   return (
     <CoursesContain>
       {/* VIDEO  */}
-      {
-        (!loading && videoCourse.seasons[0].lessons[0].link !== "") &&
-        <Container>
-          <div className={loading ? "skeleton-product video-display" : "video-display"}>
-            <div className="image-container">
-              <div className="video-container">
+      <Container>
+        <div className={loading ? "skeleton-product video-display" : "video-display"}>
+          <div className="image-container">
+            <div className="video-container">
+              {
+                !loading &&
                 <ReactPlayer
                   url={videoCourse.seasons[0].lessons[0].link}
                   className='absolute'
@@ -148,41 +133,41 @@ const Courses = () => {
                   width='100%'
                   height='100%'
                 />
-              </div>
+              }
             </div>
-            <div className="text-container">
-              <div className="grey-field">
-                <div className="top">
-                  <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  <p>Gonvar+</p>
-                </div>
-                <Title>
-                  {videoCourse.title}
-                </Title>
-              </div>
-              <div className="grey-field">
-                <SubText>
-                  {videoCourse.professors.length > 0 ? videoCourse.professors[0].name : "Arita Gonvar"}
-                </SubText>
-              </div>
-              <div className="button-contain">
-                <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-                  <PurpleButton onClick={goTo}>
-                    <BsTriangle />
-                    Reproducir
-                  </PurpleButton>
-                </div>
-                <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-                  <TransparentButton onClick={handleOpen}>
-                    Más información
-                  </TransparentButton>
-                </div>
-              </div>
-            </div>
-            <Gradient></Gradient>
           </div>
-        </Container>
-      }
+          <div className="text-container">
+            <div className="grey-field">
+              <div className="top">
+                <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
+                <p>Gonvar+</p>
+              </div>
+              <Title>
+                {!loading && videoCourse.title}
+              </Title>
+            </div>
+            <div className="grey-field">
+              <SubText>
+                {!loading && (videoCourse.professors.length > 0 ? videoCourse.professors[0].name : "Arita Gonvar")}
+              </SubText>
+            </div>
+            <div className="button-contain">
+              <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+                <PurpleButton onClick={goTo}>
+                  <BsTriangle />
+                  Reproducir
+                </PurpleButton>
+              </div>
+              <div className="grey-field" style={{ maxWidth: "fit-content" }}>
+                <TransparentButton onClick={handleOpen}>
+                  Más información
+                </TransparentButton>
+              </div>
+            </div>
+          </div>
+          <Gradient></Gradient>
+        </div>
+      </Container>
       <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
       {/* SLIDERS */}
       <div className="module-contain">
@@ -192,6 +177,7 @@ const Courses = () => {
               <Sliders
                 slideType={slideType}
                 slideNumber={index}
+                containLoader={loading}
                 innerWidth={innerWidth}
                 allCourses={courses}
                 user={userData}
