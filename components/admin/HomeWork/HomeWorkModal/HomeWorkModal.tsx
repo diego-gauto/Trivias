@@ -26,6 +26,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       id: data.id,
       user_id: data.userId,
       lessonId: data.lessonId,
+      score: data.lessonPoints,
     }
     reviewHomeworkApi(temp).then(() => {
       handleClick();
@@ -80,24 +81,20 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
               </ItemContain>
               <ItemContain>
                 <Text>
-                  Lección
+                  Curso
                 </Text>
                 <Text2>
-                  {data.lessonNumber}
+                  {data.courseTitle}
                 </Text2>
               </ItemContain>
-              <InputContain>
-                <label>
+              <ItemContain>
+                <Text>
                   Puntos
-                </label>
-                <input
-                  defaultValue={review.score}
-                  placeholder="0"
-                  onChange={(e: any) => {
-                    setReview({ ...review, score: parseInt(e.target.value) })
-                  }}
-                />
-              </InputContain>
+                </Text>
+                <Text2>
+                  {data.lessonPoints}
+                </Text2>
+              </ItemContain>
               <InputContain>
                 <label>
                   Tarea Aprobada
@@ -142,7 +139,6 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
               </SafeContained>
             </DataContain>
           }
-
         </Container>
       </Modal>
     </ModContainer>

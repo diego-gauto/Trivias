@@ -43,54 +43,55 @@ const HomeWork = () => {
 
   const getHomeworks = () => {
     let tempFilter: any = [];
-    if (professorFilter !== "" || courseFilter !== "") {
-      setHomeWorks([]);
-      getAllHomeWorks().then((res) => {
-        res.forEach((element: any) => {
-          let tempDate = new Date(element.createdAt.seconds * 1000);
-          let tempDay = tempDate.getDate()
-          let tempMonth = tempDate.getMonth() + 1;
-          let tempYear = tempDate.getFullYear()
-          element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-        });
-        res.filter((element: any, index: any) => {
-          if (professorFilter !== "" && courseFilter === "") {
-            element.teacherCreds.map((val: any) => {
-              if (val.id === professorFilter.id) {
-                tempFilter.push(element);
-              }
-            })
-          }
-          if (professorFilter === "" && courseFilter !== "") {
-            if (element.courseId == courseFilter.id) {
-              tempFilter.push(element);
-            }
-          }
-          if (professorFilter !== "" && courseFilter !== "") {
-            if (element.courseId == courseFilter.id) {
-              element.teacherCreds.map((val: any) => {
-                if (val.id === professorFilter.id) {
-                  tempFilter.push(element);
-                }
-              })
-            }
-          }
-        })
-        setHomeWorks(tempFilter);
-      })
-    }
-    else {
-      getHomeworksApi().then((res: any) => {
-        res.data.data.forEach((element: any) => {
-          let tempDate: any = new Date();
-          let tempDay = tempDate.getDate()
-          let tempMonth = tempDate.getMonth() + 1;
-          let tempYear = tempDate.getFullYear()
-          element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-        });
-        setHomeWorks(res.data.data);
-      })
-    }
+    // if (professorFilter !== "" || courseFilter !== "") {
+    //   setHomeWorks([]);
+    //   getAllHomeWorks().then((res) => {
+    //     res.forEach((element: any) => {
+    //       let tempDate = new Date(element.createdAt.seconds * 1000);
+    //       let tempDay = tempDate.getDate()
+    //       let tempMonth = tempDate.getMonth() + 1;
+    //       let tempYear = tempDate.getFullYear()
+    //       element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    //     });
+    //     res.filter((element: any, index: any) => {
+    //       if (professorFilter !== "" && courseFilter === "") {
+    //         element.teacherCreds.map((val: any) => {
+    //           if (val.id === professorFilter.id) {
+    //             tempFilter.push(element);
+    //           }
+    //         })
+    //       }
+    //       if (professorFilter === "" && courseFilter !== "") {
+    //         if (element.courseId == courseFilter.id) {
+    //           tempFilter.push(element);
+    //         }
+    //       }
+    //       if (professorFilter !== "" && courseFilter !== "") {
+    //         if (element.courseId == courseFilter.id) {
+    //           element.teacherCreds.map((val: any) => {
+    //             if (val.id === professorFilter.id) {
+    //               tempFilter.push(element);
+    //             }
+    //           })
+    //         }
+    //       }
+    //     })
+    //     setHomeWorks(tempFilter);
+    //   })
+    // }
+    // else {
+    getHomeworksApi().then((res: any) => {
+      res.data.data.forEach((element: any) => {
+        console.log(element)
+        let tempDate: any = new Date();
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      setHomeWorks(res.data.data);
+    })
+    // }
   }
 
   const getAllteachers = () => {
