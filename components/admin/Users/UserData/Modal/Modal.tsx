@@ -93,7 +93,21 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
       }
     }
   }
-
+  // const testDays = () => {
+  //   let date = new Date(days);
+  //   let seconds = date.getTime() / 1000; //1440516958
+  //   let courseData = {
+  //     user_id: user.id,
+  //     course_id: course.id,
+  //     final_date: seconds,
+  //   }
+  //   addCourseMembershipApi(courseData).then((res) => {
+  //     console.log(res);
+  //     handleClose();
+  //     openUserCardData(user);
+  //   })
+  //   console.log(seconds);
+  // }
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Container>
@@ -156,10 +170,10 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
             <InputContain>
               <Label>Tiempo Activo (Días)</Label>
               <Input
-                type="number" placeholder="Número de días activo" onChange={(e: any) => { setDays(e.target.value); }} />
+                type="string" placeholder="Número de días activo" onChange={(e: any) => { setDays(e.target.value); }} />
             </InputContain>
             <ButtonContain>
-              <PurpleButton onClick={addCourse}>Agregar Método</PurpleButton>
+              <PurpleButton onClick={addCourse}>Agregar Dias al Curso</PurpleButton>
             </ButtonContain>
           </>
         }
