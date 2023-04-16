@@ -7,6 +7,7 @@ import { AuthProvider } from "../hooks/useAuth";
 import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { FacebookProvider } from 'react-facebook';
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -15,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="canonical" href={"https://gonvar.io" + router.asPath} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
-        <script
+        <Script
           id="fb-pixel"
           dangerouslySetInnerHTML={{
             __html:
@@ -34,8 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     `
           }}
         />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></script>
-        <script
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></Script>
+        <Script
           dangerouslySetInnerHTML={{
             __html:
               `
@@ -46,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             `
           }}
         >
-        </script>
+        </Script>
       </Head>
       <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
         <FacebookProvider appId="3010100615906804">

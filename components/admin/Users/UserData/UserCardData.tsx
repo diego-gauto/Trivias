@@ -51,6 +51,10 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
     let tempDate = new Date(value).getTime();
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
+  const secondsToDate = (value: any) => {
+    let tempDate = new Date(value * 1000)
+    return new Date(tempDate).toLocaleDateString("es-MX")
+  }
 
   const deleteUser = () => {
     setError(true);
@@ -73,7 +77,6 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
         </FirstBox>
         <CloseIcon onClick={() => setIsVisible(false)} />
       </TitleContain>
-
       <>
         <ProfileContain>
           <img src={user.photo ? user.photo : "/images/admin/ProfileIcon.png"} />
@@ -134,10 +137,18 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
                 {
                   user.user_courses.map((x: any, index: number) => {
                     return (
-                      <img
-                        key={"paid-courses," + index}
-                        src={x.image}
-                      />
+                      <div key={"paid-courses," + index} className="contain-course">
+                        {
+                          x.final_date > today &&
+                          <>
+                            <p className="date"> {secondsToDate(x.final_date)}</p>
+                            <img
+                              src={x.image}
+                            />
+                          </>
+                        }
+                      </div>
+
                     )
                   })
                 }

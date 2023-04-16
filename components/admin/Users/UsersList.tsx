@@ -77,7 +77,7 @@ const UsersList = () => {
   const [maxPages, setMaxPages] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [loadCard, setLoadCard] = useState(false);
-
+  let today = new Date().getTime() / 1000;
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -99,7 +99,7 @@ const UsersList = () => {
     let tempAllUsers = allUsers;
     let query = value.toLocaleLowerCase();
     const filteredUsers = tempAllUsers.filter((item) => {
-      return item.name.toLowerCase().includes(query)
+      return item.name.toLowerCase().includes(query) || item.email.includes(query)
     })
     // if (value === "") return setUsers(usersFilter);
     // const filteredUsers = usersFilter.filter((item) =>
@@ -203,6 +203,22 @@ const UsersList = () => {
     let tempDate = new Date(value).getTime();
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
+  const activeCourses = (userId: any) => {
+    let counterCourses: number = 0;
+    // if (userId === 2) {
+    //   counterCourses++;
+    // }
+    // getLessonFromUserApi(userId).then((res) => {
+    //   res.data.data.forEach((userCourse: any) => {
+    //     if (userCourse.final_date > today) {
+    //       counterCourses++;
+
+    //     }
+    //   });
+    // })
+    // console.log(counterCourses);
+    return "Activo " + counterCourses;
+  }
 
   const handleClick = () => {
     getUsers();
@@ -291,8 +307,7 @@ const UsersList = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{formatDate(user.created_at)}</td>
-                      {user.level > 1 ? <td >{user.level} Activos</td> :
-                        <td >{user.level} Activo</td>}
+                      <td>{activeCourses(user.id)}</td>
                       <td>MXN${user.spent}</td>
                       {/* <td>{user.score} puntos</td> */}
                       <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>

@@ -23,7 +23,6 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
   const handleClose = () => setShow(false);
   let today = new Date().getTime() / 1000;
   const [days, setDays] = useState(0);
-  console.log(user);
   const addDays = () => {
     let tempFinalDate = 0;
     if (user.final_date < today) {

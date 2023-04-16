@@ -118,24 +118,26 @@ const Rewards = () => {
         });
         course.completeLessons = lessonsDone;
         course.totalLessons = count;
-        course.progress = lessonsDone / count;
+        let progress = lessonsDone / count;
+        course.progress = progress;
         course.lessonsLeft = count - lessonsDone;
-        if ((lessonsDone / count) < 1) {
+        if (progress < 1 && progress !== 0) {
           nextCourseCertificate.push({
             title: course.title,
             about: course.about,
             professor: course.professors[0],
-            type: course.type,
+            type: "certificates",
             color: course.certificate_color,
             created_at: course.created_at,
             progress: course.progress,
             image: course.image,
             courseId: course.id,
             lessonsLeft: course.lessonsLeft,
+            totalLessons: course.totalLessons,
             certificates: 2,
           });
         }
-        if ((lessonsDone / count) === 1) {
+        if (progress === 1) {
           completedCertificates++;
         }
       });

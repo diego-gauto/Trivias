@@ -2,10 +2,11 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
+import { addCourseMembershipApi } from '../../api/admin';
 import { addPastUsers } from '../../api/auth';
 import { getHomeworksApi } from '../../api/homeworks';
 import { getCourseApi } from '../../api/lessons';
-import { addPastUserProgress, getPastUsers, updateScorePastUser } from '../../api/users';
+import { addPastUserProgress, getPastUsers, getUserApi, updateScorePastUser } from '../../api/users';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import { AdminContain } from '../SideBar.styled';
@@ -187,10 +188,11 @@ const HomeWork = () => {
   useEffect(() => {
     let timeout: any;
     if (records) {
-      if (countdown <= 5007) {
+      if (countdown <= 29) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 1);
-          addProgress()
+          // addDays(records, headersRow);
+          // addProgress()
         }, 100);
         return () => clearTimeout(timeout);
       }
@@ -241,13 +243,35 @@ const HomeWork = () => {
       })
     )
   }
+  const addDays = (records: any, headersRow: any) => {
+    // console.log(records);
+    let rec = {
+      records: records.slice((countdown - 1) * 1, (countdown * 1))
+    }
+    let date = new Date(rec.records[0].properties[1])
+    let seconds = date.getTime() / 1000;
+    console.log(countdown)
+    //NAILS MASTER ES course_id = 30
+    //Alineacion cert es course_id = 45
+    getUserApi(rec.records[0].properties[0]).then((res) => {
+      let addCourse = {
+        user_id: res.id,
+        course_id: 30,
+        final_date: seconds,
+      }
+      console.log(addCourse)
+      // addCourseMembershipApi(addCourse).then(() => {
+      //   console.log('exito')
+      // })
+    })
 
+  }
   return (
     <AdminContain>
       <HWContainer>
         <Container>
-          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} />
-          <button onClick={addProgress}>add</button> */}
+          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
+          {/* <button onClick={addProgress}>add</button> */}
           <TitleContain>
             <p>
               Tareas

@@ -115,6 +115,7 @@ const RewardSlider = (props: reward_slider) => {
         title: "Certificado bloqueado",
         scoreText: "hasta completar ",
       })
+      console.log(slides);
     }
     setSlides(slides)
   }
@@ -274,16 +275,30 @@ const RewardSlider = (props: reward_slider) => {
                           <div className='reward-info-container'>
                             <div className='top'>
                               <p>{reward.title} <span>de Gonvar Nails</span></p>
+
                               <p className='about'>{reward.about}</p>
                             </div>
                             <div className='bottom'>
-                              <p>Beneficio por completar</p>
-                              {reward.type == "points" &&
-                                <p><span className="rewards">{reward.points} puntos</span> en Gonvar</p>}
-                              {reward.type == "months" &&
-                                <p><span className="months">{reward.month} meses</span> en Gonvar</p>}
-                              {reward.type == "certificates" &&
-                                <p><span className="certificates">{reward.certificates} certificados</span> en Gonvar</p>}
+
+                              {reward.type === "points" &&
+                                <>
+                                  <p>Beneficio por completar</p>
+                                  <p><span className="rewards">{reward.points} puntos</span> en Gonvar</p>
+                                </>
+                              }
+                              {
+                                reward.type === "months" &&
+                                <>
+                                  <p>Beneficio por completar</p>
+                                  <p><span className="months">{reward.month} meses</span> en Gonvar</p>
+                                </>
+                              }
+                              {reward.type === "certificates" &&
+                                <>
+                                  <p>Certificado por completar</p>
+                                  <p><span className="certificates">{reward.totalLessons} lecciones</span> en Gonvar</p>
+                                </>
+                              }
                             </div>
                           </div>
                           :

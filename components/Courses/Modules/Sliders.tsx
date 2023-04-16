@@ -239,7 +239,6 @@ const Sliders = (props: ICourseData) => {
     }
     return
   }, [start, countdown]);
-  console.log(countdown)
   return (
     <>
       {

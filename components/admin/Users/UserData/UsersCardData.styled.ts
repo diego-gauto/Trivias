@@ -106,9 +106,18 @@ export const CourseContain = styled.div`
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
-  img {
-    border-radius: 10px;
-    width: 45%;
+  .contain-course {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .date {
+      font-size: 12px;
+      margin: 0;
+    }
+    img {
+      border-radius: 10px;
+      width: 45%;
+    }
   }
 `;
 export const TransparentButton = styled.button`
