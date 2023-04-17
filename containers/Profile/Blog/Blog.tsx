@@ -13,8 +13,8 @@ const Blog = () => {
 
 
   const goToBlog = (blog: any) => {
-    let blogText: any = blog.title.replaceAll(" ", "-");
-    router.push({ pathname: `/Blog/${blogText}` })
+    let blogText: any = blog.title.replaceAll("-", "&#45;").replaceAll(" ", "-");
+    router.push({ pathname: `/Blogs/${blogText}` })
   }
   useEffect(() => {
     getBlogsApi();

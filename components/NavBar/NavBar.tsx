@@ -171,9 +171,9 @@ const NavBar = () => {
             </NavText>
           </Link>
         }
-        <Link href="/Blog">
+        <Link href="/Blogs">
           <NavText pathname={pathname} color={color} title="Inicio"
-            style={pathname == "/Blog" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+            style={pathname == "/Blogs" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Blog
           </NavText>
         </Link>
@@ -260,7 +260,7 @@ const NavBar = () => {
                       Cursos
                     </FloatingMenuItem>
                   </Link>
-                  <Link href={"/Blog"}>
+                  <Link href={"/Blogs"}>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Blogs
                     </FloatingMenuItem>
@@ -323,8 +323,8 @@ const NavBar = () => {
                     Tienda
                   </HBList>
                 </a>
-                <Link href="/Blog" >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Blog" ? { fontWeight: 600 } : {}}>
+                <Link href="/Blogs" >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Blogs" ? { fontWeight: 600 } : {}}>
                     Blog
                   </HBList>
                 </Link>

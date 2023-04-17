@@ -63,7 +63,7 @@ const BlogView = () => {
   const goToBlog = (blog: any) => {
     setLoader(true);
     let blogText: any = blog.title.replaceAll(" ", "-");
-    router.push({ pathname: `/Blog/${blogText}` }).then(() => {
+    router.push({ pathname: `/Blogs/${blogText}` }).then(() => {
       window.location.reload();
     })
   }
@@ -85,7 +85,7 @@ const BlogView = () => {
   }
   const getBlog = () => {
     let tempTitle: any = router.query.slug;
-    let titleSearch: string = tempTitle.replaceAll("-", " ");
+    let titleSearch: string = tempTitle.replaceAll("-", " ").replaceAll("&#45;", "-");
     let tempBlog: any;
     let allBlogs: any;
     getBlogs().then((res) => {
@@ -265,7 +265,7 @@ const BlogView = () => {
                     )
                   }
                   else {
-                    return <></>
+                    return <React.Fragment key={"topicCase_" + index}></React.Fragment>
                   }
                 })
               }
@@ -340,7 +340,7 @@ const BlogView = () => {
             {
               blogs.map((blogVar: IBlog, index: number) => {
                 return (
-                  <div key={"extra text 1" + index} className="cards" >
+                  <div key={"extra text 1_" + index} className="cards" >
                     <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
                     <p className="title">                {blogVar.title}</p>
                     {
@@ -364,7 +364,7 @@ const BlogView = () => {
           {
             blogs.map((blogVar: IBlog, index: any) => {
               return (
-                <div key={"extra text 1" + index} className="cards" >
+                <div key={"extra text 2_" + index} className="cards" >
                   <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
                   <p className="title">                {blogVar.title}</p>
                   {
