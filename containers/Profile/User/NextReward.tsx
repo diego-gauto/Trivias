@@ -196,7 +196,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
           </div>
         </div>
         <Link href="/Rewards">
-          <button disabled>Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+          <button >Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
         </Link>
       </RewardContainer>
       <SubscriptionContainer>
