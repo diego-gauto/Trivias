@@ -32,7 +32,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       let tempLesson = {
         lessonId: data.id,
         userId: user.user_id,
-        points: parseInt(data.points) + user.score
+        points: parseInt(data.points)
       }
       addUserToLessonApi(tempLesson).then(() => {
         handleComplete();
