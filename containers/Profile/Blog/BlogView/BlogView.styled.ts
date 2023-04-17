@@ -234,6 +234,7 @@ export const RelatedArticles = styled.div`
     .img {
       border-radius: 10px;
       cursor: pointer;
+      max-height: 200px;
     }
   }
 `;
