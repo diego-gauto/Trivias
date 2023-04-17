@@ -7,7 +7,6 @@ import Video from "./LessonComponents/Video/Video";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
-import { io } from 'socket.io-client';
 import { addCourse, addUserHistory, getCourseApi } from "../../../components/api/lessons";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
@@ -26,12 +25,6 @@ const Lesson = () => {
     lessonIndex: 0,
     seasonIndex: 0,
   });
-  // const socket = io("http://94.74.77.165:89");
-
-  // socket.io.on("error", (error) => {
-  //   console.log(error);
-
-  // });
 
   useEffect(() => {
     if (course) {
@@ -39,17 +32,6 @@ const Lesson = () => {
     }
 
   }, [router]);
-
-
-  // const send = () => {
-  //   console.log(0);
-  //   socket.emit("comment", { data: "hola" }).timeout(5000);
-  // }
-
-  // socket.on("comment", ({ data }) => {
-  //   console.log(data);
-
-  // });
 
   const handleComplete = () => {
     getCourse()
