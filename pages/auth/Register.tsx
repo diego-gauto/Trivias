@@ -140,7 +140,7 @@ const Register = () => {
         } else {
           localStorage.setItem('email', user.email);
           localStorage.setItem("method", "mail");
-          window.location.href = "/Purchase?type=subscription"
+          window.location.href = "/Preview"
         }
       })
     } else {
@@ -171,7 +171,7 @@ const Register = () => {
             setIsLoading(false);
           } else {
             localStorage.setItem('email', user.email)
-            window.location.href = "/Purchase?type=subscription"
+            window.location.href = "/Preview"
           }
         })
       })
@@ -207,7 +207,7 @@ const Register = () => {
           } else {
             localStorage.setItem('email', user.email);
             localStorage.setItem('method', "facebook");
-            window.location.href = "/Purchase?type=subscription"
+            window.location.href = "/Preview"
           }
         })
       })

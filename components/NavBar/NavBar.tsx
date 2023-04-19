@@ -218,7 +218,7 @@ const NavBar = () => {
             </Link>
             <Link href="/auth/Register">
               <PurpleButton>
-                Suscribirse Ya
+                Registrarse
               </PurpleButton>
             </Link>
           </>
