@@ -212,7 +212,6 @@ const UsersList = () => {
     //   res.data.data.forEach((userCourse: any) => {
     //     if (userCourse.final_date > today) {
     //       counterCourses++;
-
     //     }
     //   });
     // })

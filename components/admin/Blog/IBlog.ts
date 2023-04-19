@@ -3,6 +3,8 @@ export interface IBlog {
     nanoseconds: number;
     seconds: number;
   };
+  image: string;
+  created_at: string;
   path: string;
   subTopic: [ISubTopic];
   title: string;

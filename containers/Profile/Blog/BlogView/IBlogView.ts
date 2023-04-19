@@ -6,18 +6,19 @@ export interface IBlog {
   path: string;
   subTopic: [ISubTopic];
   title: string;
-  subTitle: string;
+  subtitle: string;
+  image: string;
   link: string;
   summary: string;
+  created_at: string;
   date: {
     day: number;
-    month: number;
+    month: string;
     year: number;
   };
 }
 export interface ISubTopic {
-  reference: string;
-  topicTitle: string;
-  topicPath: string;
-  topicText: string;
+  text: string;
+  title: string;
+  image: string;
 }
