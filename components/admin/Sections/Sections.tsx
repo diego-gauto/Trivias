@@ -34,6 +34,8 @@ export type INewUser = {
     coupons: boolean;
     users: boolean;
     superAdmin: boolean;
+    blogs: boolean;
+    assignments: boolean;
   }
 };
 

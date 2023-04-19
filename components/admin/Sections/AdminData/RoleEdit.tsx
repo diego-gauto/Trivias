@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 
 import _ from "lodash";
-
-import { updateRole } from "../../../../store/actions/AdminActions";
 import { ButtonRoleContain, CloseIcon, UpdateButton } from "./AdminDataUpdate.styled";
 import {
   Info,
@@ -27,6 +25,8 @@ type CheckBoxNames = {
   rewards: boolean;
   landing: boolean;
   coupons: boolean;
+  blogs: boolean;
+  assignments: boolean;
   users: boolean;
   superAdmin: boolean;
 };
@@ -70,6 +70,9 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
     })
   };
 
+  console.log(admin);
+
+
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
@@ -85,10 +88,10 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
                 <li>General</li>
                 <input type="checkbox" name="general" checked={state.general} onChange={handleChange} defaultValue={"checked"} />
               </RowContain>
-              <RowContain>
+              {/* <RowContain>
                 <li>Pagos</li>
                 <input type="checkbox" name="pay" checked={state.pay} onChange={handleChange} />
-              </RowContain>
+              </RowContain> */}
               <RowContain>
                 <li>Cursos</li>
                 <input type="checkbox" name="courses" checked={state.courses} onChange={handleChange} />
@@ -97,10 +100,10 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
                 <li>Recompensas</li>
                 <input type="checkbox" name="rewards" checked={state.rewards} onChange={handleChange} />
               </RowContain>
-              <RowContain>
+              {/* <RowContain>
                 <li>Landing</li>
                 <input type="checkbox" name="landing" checked={state.landing} onChange={handleChange} />
-              </RowContain>
+              </RowContain> */}
               <RowContain>
                 <li>Cupones</li>
                 <input type="checkbox" name="coupons" checked={state.coupons} onChange={handleChange} />
@@ -108,6 +111,14 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
               <RowContain>
                 <li>Usuarios</li>
                 <input type="checkbox" name="users" checked={state.users} onChange={handleChange} />
+              </RowContain>
+              <RowContain>
+                <li>Blogs</li>
+                <input type="checkbox" name="blogs" checked={state.blogs} onChange={handleChange} />
+              </RowContain>
+              <RowContain>
+                <li>Assignments</li>
+                <input type="checkbox" name="assignments" checked={state.assignments} onChange={handleChange} />
               </RowContain>
             </SelectedRoleContain>
           </SectionOptions>

@@ -43,17 +43,11 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
   const crownImage = "/images/profile/crown.png"
   const { api } = useFacebook();
 
-  const [socket, setSocket] = useState<any>();
+  // const socket = io('https://gonvar.inowu.dev:4003');
 
-  useEffect(() => {
-
-    const newSocket = io('https://gonvar.inowu.dev:8001');
-    console.log(newSocket);
-
-    setSocket(newSocket)
-  }, [setSocket])
-
-
+  // socket.on('message', (data) => {
+  //   console.log('Received message:', data);
+  // });
 
   const changePassword = async () => {
     updatePassword(userPass, password).then(() => {
