@@ -174,13 +174,12 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
           <Label>Imagen del Producto</Label>
           <IconContain>
             <Folder />
-            <Input2 style={errors.image ? { border: "1px solid red" } : {}}>
-              <input
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}
-              />
-            </Input2>
+            <input className="input-file"
+              style={errors.image ? { border: "1px solid red" } : {}}
+              type="file"
+              placeholder="Seleccionar archivo"
+              onChange={(e) => { getImage(e.target.files) }}
+            />
           </IconContain>
         </InputContain>
         <ButtonContain>

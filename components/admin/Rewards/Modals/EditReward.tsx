@@ -179,13 +179,12 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
           <Label>Imagen del Producto</Label>
           <IconContain>
             <Folder />
-            <Input2>
-              <input
-                type="file"
-                placeholder="Seleccionar archivo"
-                onChange={(e) => { getImage(e.target.files) }}>
-              </input>
-            </Input2>
+            <input
+              className="input-file"
+              type="file"
+              placeholder="Seleccionar archivo"
+              onChange={(e) => { getImage(e.target.files) }}>
+            </input>
           </IconContain>
         </InputContain>
         <ButtonContain>

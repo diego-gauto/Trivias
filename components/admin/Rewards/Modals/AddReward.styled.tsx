@@ -122,6 +122,29 @@ export const IconContain = styled.div`
   display: flex;
   position: relative;
   width: 100%;
+  .input-file{
+     font-size: 14px;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  padding-inline: 50px 20px;
+  padding-block: 10px;
+  height: 43px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
+  input::file-selector-button {
+    display: none;
+  }
+  input {
+    width: 100%;
+  }
+  label {
+    color: #6717cd;
+  }
+  outline: none;
+  :focus {
+    border: 2px solid #8e2de2;
+  }
+  }
 `;
 export const Folder = styled.i`
   position: absolute;
