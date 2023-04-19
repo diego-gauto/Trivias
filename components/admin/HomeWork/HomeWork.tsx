@@ -82,7 +82,6 @@ const HomeWork = () => {
     // else {
     getHomeworksApi().then((res: any) => {
       res.data.data.forEach((element: any) => {
-        console.log(element)
         let tempDate: any = new Date();
         let tempDay = tempDate.getDate()
         let tempMonth = tempDate.getMonth() + 1;
@@ -207,8 +206,6 @@ const HomeWork = () => {
       end: 41543
     }
     getPastUsers(range).then((res) => {
-      console.log(res);
-
       setPastUsers(res.data.past);
     })
   }, [])

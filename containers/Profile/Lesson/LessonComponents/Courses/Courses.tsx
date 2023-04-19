@@ -18,10 +18,16 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
 
   useEffect(() => {
     let viewed = 0;
-    course.lessons.forEach((element: any) => {
-      if (element.users.includes(userData?.user_id)) {
-        viewed++;
-      }
+    course.seasons.forEach((s: any) => {
+      s.lessons.forEach((l: any) => {
+        let array = l.progress.filter((x: any) => x.user_id === userData.user_id && x.status === 1)
+        if (l.users.includes(userData?.user_id) && l.homework === 0 && l.quiz === 0) {
+          viewed++;
+        }
+        if (l.users.includes(userData?.user_id) && (l.homework === 1 || l.quiz === 1) && array.length > 0) {
+          viewed++;
+        }
+      });
     });
 
     if (course.lessons.length == viewed) {
@@ -59,6 +65,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
       pathname: `/Certificates`,
       query: {
         name: userData.name,
+        lastName: userData.last_name,
         title: course.title,
         professor: course.professors[0].name,
         id: userData.user_id,

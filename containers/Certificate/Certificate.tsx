@@ -10,7 +10,7 @@ import { getUserCertificateApi } from "../../components/api/lessons";
 
 const Certificate = () => {
   const router = useRouter()
-  const { name, title, professor, id, color, courseId, teacherSignature }: any = router.query;
+  const { name, lastName, title, professor, id, color, courseId, teacherSignature }: any = router.query;
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
@@ -23,8 +23,7 @@ const Certificate = () => {
     }
     getUserCertificateApi(ids).then((res) => {
       let tempCertificate = res.data.data[0];
-
-      setFolio(tempCertificate.folio);
+      setFolio(tempCertificate.id);
       const months = [
         "enero", "febrero", "marzo", "abril",
         "mayo", "junio", "julio", "agosto",
@@ -80,12 +79,12 @@ const Certificate = () => {
     <MainContainer color={color}>
       <div id="my_mm">
         <div className="certificate" id="certificate">
-          <p className="title">{name}</p>
+          <p className="title">{name} {lastName}</p>
           <p className="course-title">{title}</p>
           <p className="professor">{professor}</p>
           <p className="date">{date}</p>
           <p className="folio">{folio}</p>
-          <p className="professor-name">{professor}</p>
+          <p className="professor-name" id="name" style={{ left: document.getElementById("name")?.clientWidth! > 168 ? "26%" : "32%" }}>{professor}</p>
           <img id="img" src={image} style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }} alt="" />
           <img src={aritaSignature} className="main-signature" />
           <img src={teacherSignature} className="professor-signature" />

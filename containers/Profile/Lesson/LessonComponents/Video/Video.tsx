@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
-import { Title, VideoContain, Segment } from './Video.styled';
-import Courses from '../../LessonComponents/Courses/Courses';
-import { addUserToLesson, updateLessonProgress } from '../../../../../store/actions/courseActions';
-import Modules from '../Modules/Modules';
-import { useMediaQuery } from 'react-responsive';
-import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
 import { addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
-import { duration } from 'html2canvas/dist/types/css/property-descriptors/duration';
 import { useRouter } from 'next/router';
 
 declare let Hls: any
@@ -16,14 +8,11 @@ declare let Hls: any
 const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
-  const [viewed, setViewed] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
-  const [active, setActive] = useState(false);
 
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
-  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [quiz, setQuiz] = useState<any>([]);
   const router = useRouter();
 
@@ -120,57 +109,6 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
   useEffect(() => {
     setOpen(menu)
   }, [menu])
-
-  const toggleHandler = (index: any) => {
-    let temp = [...selected]
-    temp[index] = !temp[index];
-    setSelected(temp)
-  }
-
-  const chooseAnswer = (indQ: number, indA: number) => {
-    course.seasons[season].lessons[lesson].questions[indQ].answers.forEach((element: any, index: number) => {
-      if (indA == index) {
-        let actual = document.getElementById("q" + indQ + "a" + index) as HTMLInputElement;
-        actual.checked = true;
-        quiz[indQ] = indA
-      } else {
-        let other = document.getElementById("q" + indQ + "a" + index) as HTMLInputElement;
-        other.checked = false;
-      }
-    });
-    setQuiz(quiz);
-  }
-
-  const submit = () => {
-    let temp: any = { ...data };
-    if (user) {
-      if (temp.users.includes(user.id)) {
-      } else {
-        const correct = 100 / data.questions.length;
-        let tempPoints = 0;
-        const score = parseInt(data.points) / data.questions.length;
-        let tempScore = 0;
-        data.questions.forEach((element: any, indQ: number) => {
-          element.answers.forEach((answer: any, indA: number) => {
-            if (quiz[indQ] == indA && answer.status) {
-              tempPoints = tempPoints + correct
-              tempScore = tempScore + score;
-            }
-          });
-        });
-        if (tempPoints >= data.passingGrade) {
-          alert("aprobado")
-          user.score = parseInt(user.score) + tempScore;
-          addUserToLesson(data, id, data.seasonId, data.id, user);
-          temp.users.push(user.id);
-          setCurrent({ ...temp });
-          handleComplete()
-        } else {
-          alert("reprobado")
-        }
-      }
-    }
-  }
 
   return (
     <ReactPlayer

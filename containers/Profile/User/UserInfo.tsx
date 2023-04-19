@@ -1,7 +1,6 @@
 import { googleLogout } from "@react-oauth/google";
 import { getAuth, signOut, updatePassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
 import { updateUserInfo } from "../../../components/api/users";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
@@ -15,6 +14,7 @@ import {
   Box2,
   ProfileText,
 } from "./User.styled";
+import io from 'socket.io-client';
 
 const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
@@ -42,6 +42,18 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
   const starsImage = "/images/profile/stars.png"
   const crownImage = "/images/profile/crown.png"
   const { api } = useFacebook();
+
+  const [socket, setSocket] = useState<any>();
+
+  useEffect(() => {
+
+    const newSocket = io('https://gonvar.inowu.dev:8001');
+    console.log(newSocket);
+
+    setSocket(newSocket)
+  }, [setSocket])
+
+
 
   const changePassword = async () => {
     updatePassword(userPass, password).then(() => {

@@ -125,6 +125,7 @@ const RewardSlider = (props: reward_slider) => {
       pathname: `/Certificates`,
       query: {
         name: user.name,
+        lastName: user.last_name,
         title: course.title,
         professor: course.professor.name,
         id: user.user_id,
