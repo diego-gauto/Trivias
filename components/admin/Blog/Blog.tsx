@@ -6,9 +6,12 @@ import { getBlogs } from '../../../store/actions/AdminActions';
 import { AiFillEdit } from 'react-icons/ai';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { IBlog } from './IBlog';
+import { createBlogsApi, getBlogsApi, updateBlogImageApi, updateBlogsApi, updateSubTopicImageApi } from '../../api/blog';
+import { updateBlogImage, updateSubTopicImage } from '../../../store/actions/FireBaseImages';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
+  const [oldBlogs, setoldBlogs] = useState<any>([]);
   const [loader, setLoader] = useState(false);
   const goToCreateBlog = () => {
     router.push({ pathname: "/admin/CreateBlog" })
@@ -17,6 +20,86 @@ const Blog = () => {
   const goToEditBlog = (blog: any) => {
     // let blogText: any = blog.title.replaceAll(" ", "-");
     router.push({ pathname: "/admin/CreateBlog/", query: { blogId: blog.id } })
+  }
+  // const addimages = () => {
+  //   oldBlogs[7].subTopic.forEach((blog: any, index: any) => {
+  //     if (blog.topicPath !== '') {
+  //       updateSubTopicImage(blog.topicPath, 8, 31 + index).then((url_subtopic: any) => {
+  //         let tempBlog = {
+  //           image: url_subtopic,
+  //           id: 31 + index,
+  //         }
+  //         console.log(tempBlog);
+  //         updateSubTopicImageApi(tempBlog).then(() => {
+  //           console.log('exito')
+  //         })
+  //       })
+  //     }
+  //   });
+  // }
+  // const creatNewBlog = () => {
+  //   oldBlogs.forEach((old: any) => {
+  //     let blogToAdd = {
+  //       title: old.title,
+  //       subtitle: old.subTitle,
+  //       summary: old.summary,
+  //       link: old.link,
+  //       image: old.path,
+  //       subTopic: old.subTopic.map((sbt: any) => {
+  //         let newsbt = {
+  //           title: sbt.topicTitle,
+  //           text: sbt.topicText,
+  //           image: '',
+  //         }
+  //         return newsbt
+  //       })
+  //     }
+  //     console.log(blogToAdd);
+  //     createBlogsApi(blogToAdd).then((res) => {
+  //       console.log('exit')
+  //     })
+  //   })
+  // }
+  const getMonth = (month: any) => {
+    if (month === 1) {
+      return "ene"
+    }
+    else if (month === 2) {
+      return "feb"
+    }
+    else if (month === 3) {
+      return "mar"
+    }
+    else if (month === 4) {
+      return "abr"
+    }
+    else if (month === 5) {
+      return "may"
+    }
+    else if (month === 6) {
+      return "jun"
+    }
+    else if (month === 7) {
+      return "jul"
+    }
+    else if (month === 8) {
+      return "ago"
+    }
+    else if (month === 9) {
+      return "sep"
+    }
+    else if (month === 10) {
+      return "oct"
+    }
+    else if (month === 11) {
+      return "nov"
+    }
+    else if (month === 12) {
+      return "dec"
+    }
+    else {
+      return ''
+    }
   }
   useEffect(() => {
     getBlogs().then((res: any) => {
@@ -68,11 +151,26 @@ const Blog = () => {
           year: tempYear,
         };
       });
+      setoldBlogs(res)
+      setLoader(true);
+    })
+    getBlogsApi().then((res) => {
+      res.forEach((blog: IBlog, index: number) => {
+        let date = new Date(blog.created_at)
+        let tempDay = date.getDate();
+        let tempMonth = date.getMonth() + 1;
+        let textMonth: string = getMonth(tempMonth);
+        let tempYear = date.getFullYear();
+        blog.date = {
+          day: tempDay,
+          month: textMonth,
+          year: tempYear,
+        };
+      });
       setBlogs(res)
       setLoader(true);
     })
   }, [router])
-
   return (
     <AdminContain>
       <BlogContainer>
@@ -80,6 +178,8 @@ const Blog = () => {
           <p className="title">
             Blog
           </p>
+          {/* <button onClick={creatNewBlog}>add blog sql</button> */}
+          {/* <button onClick={addimages}>crear imagenes</button> */}
           <button className="add-course" onClick={goToCreateBlog}>
             <p className="add-text">
               Agregar Blog
@@ -94,7 +194,7 @@ const Blog = () => {
                   return (
                     <BlogCard key={"blog-card " + index}>
                       <div className="img-contain" onClick={() => { goToEditBlog(blog) }}>
-                        <img className="blog-image" src={blog.path} />
+                        <img className="blog-image" src={blog.image} />
                         {/* <p className="edit-icon"><AiFillPlusCircle /></p> */}
                         <p className="edit-icon"><AiFillEdit /></p>
                       </div>

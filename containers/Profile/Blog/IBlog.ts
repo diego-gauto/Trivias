@@ -3,10 +3,12 @@ export interface IBlog {
     nanoseconds: number;
     seconds: number;
   };
+  created_at: string;
   path: string;
   subTopic: [ISubTopic];
   title: string;
   subTitle: string;
+  image: string;
   link: string;
   summary: string;
   date: {

@@ -8,6 +8,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { LoaderContain } from '../../../../containers/Profile/User/User.styled';
 import router, { useRouter } from "next/router";
 import { GiExitDoor } from 'react-icons/gi';
+import { createBlogsApi, deleteBlogsApi, getBlogsApi, getSingleBlogApi, updateBlogImageApi, updateBlogsApi, updateSubTopicImageApi } from '../../../api/blog';
+import { updateBlogImage, updateSubTopicImage } from '../../../../store/actions/FireBaseImages';
 const CreateBlog = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [processLoader, setProcessLoader] = useState<boolean>(false);
@@ -17,16 +19,17 @@ const CreateBlog = () => {
   const [blogs, setBlogs] = useState<any>([]);
   const [blog, setBlog] = useState<any>({
     title: "",
-    subTitle: "",
+    subtitle: "",
     summary: "",
-    path: "",
+    image: "",
     link: "",
     subTopic: [],
   });
   const [topic, setTopic] = useState<any>({
-    topicTitle: "",
-    topicText: "",
-    topicPath: "",
+    title: "",
+    text: "",
+    image: "",
+    newImage: "",
   })
   const modules = {
     toolbar: {
@@ -80,15 +83,9 @@ const CreateBlog = () => {
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
         setImage(reader.result);
-        if (blogId) {
-          setBlog({ ...blog, path: reader.result, format: reader.result })
-        }
-        else {
-          setBlog({ ...blog, path: reader.result })
-        }
+        setBlog({ ...blog, image: reader.result })
       };
     }
-
   }
   const addTheme = () => {
     let tempBlog: any = blog;
@@ -110,12 +107,11 @@ const CreateBlog = () => {
   }
   const removeImage = (index: any) => {
     let tempBlog: any = blog;
-    tempBlog.subTopic[index].topicPath = ""
-    tempBlog.subTopic[index].topicFormat = ""
+    tempBlog.subTopic[index].image = ""
     setBlog({ ...tempBlog })
   }
   const changeTopicTitle = (topicVal: any, index: number, text: string) => {
-    let tempTopic: any = { ...topicVal, topicTitle: text };
+    let tempTopic: any = { ...topicVal, title: text };
     let tempBlog: any = blog;
     tempBlog.subTopic[index] = tempTopic;
     setBlog({ ...tempBlog })
@@ -127,11 +123,10 @@ const CreateBlog = () => {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
+        tempTopic = { ...topicVal, image: reader.result }
+        tempTopic = { ...topicVal, image: reader.result }
         if (blogId) {
-          tempTopic = { ...topicVal, topicPath: reader.result, topicFormat: reader.result }
-        }
-        else {
-          tempTopic = { ...topicVal, topicPath: reader.result }
+          tempTopic = { ...topicVal, newImage: reader.result }
         }
         tempBlog.subTopic[index] = tempTopic;
         setBlog({ ...tempBlog })
@@ -139,20 +134,20 @@ const CreateBlog = () => {
     }
   }
   const changeTopicContent = (topicVal: any, content: any, index: any) => {
-    let tempTopic: any = { ...topicVal, topicText: content };
+    let tempTopic: any = { ...topicVal, text: content };
     let tempBlog: any = blog;
     tempBlog.subTopic[index] = tempTopic;
     setBlog({ ...tempBlog })
   }
   const createNewBlog = async () => {
-    setProcessLoader(true);
+    // setProcessLoader(true);
     let checkTitles: number = 0;
     blogs.forEach((element: any) => {
       if (element.title === blog.title) {
         checkTitles++;
       }
     });
-    if (blog.path === "") {
+    if (blog.image === "") {
       alert("Seleccione una imagen");
       setProcessLoader(false);
     }
@@ -162,9 +157,47 @@ const CreateBlog = () => {
         setProcessLoader(false);
       }
       else {
-        addBlog(blog).then(() => {
-          router.push({ pathname: "/admin/Blog" })
-          setProcessLoader(false);
+        let tempImage = blog.image;
+        blog.image = "";
+        let blogsImages = blog.subTopic;
+        blog.subTopic = blog.subTopic.map((b: any) => {
+          let tempBlog = {
+            title: b.title,
+            text: b.text,
+            image: '',
+          }
+          return tempBlog
+        })
+        createBlogsApi(blog).then((response) => {
+          blog.id = response.data.data;
+          updateBlogImage(tempImage, blog.id).then((url) => {
+            blog.image = url;
+            updateBlogImageApi(blog);
+            if (blogsImages.length > 0) {
+              blogsImages.forEach((subtpc: any, index: number) => {
+                subtpc.id = response.data.subTopic[index];
+                if (subtpc.image !== "") {
+                  let tempSubTopicImg = subtpc.image;
+                  subtpc.image = "";
+                  updateSubTopicImage(tempSubTopicImg, blog.id, subtpc.id).then((url_subtopic: any) => {
+                    subtpc.image = url_subtopic;
+                    updateSubTopicImageApi(subtpc).then(() => {
+                      console.log('exito')
+                    })
+                  })
+                }
+                if (blogsImages.length === index + 1) {
+                  router.push({ pathname: "/admin/Blog" })
+                  setProcessLoader(false);
+                }
+              })
+            }
+            else {
+              router.push({ pathname: "/admin/Blog" })
+              setProcessLoader(false);
+            }
+
+          })
         })
       }
     }
@@ -182,36 +215,84 @@ const CreateBlog = () => {
       setProcessLoader(false);
     }
     else {
-      updateBlog(blog, blog.id).then(() => {
-        router.push({ pathname: "/admin/Blog" })
-        setProcessLoader(false);
-      })
+      if (image !== '') {
+        updateBlogImage(image, blog.id).then(async (url) => {
+          blog.image = url;
+          updateFinalProcess();
+        })
+      }
+      else {
+        updateFinalProcess();
+      }
     }
   }
-  const deleteBlock = async () => {
-    if (confirm("¿Quieres eliminar este blog?, Esta acción no tiene marcha atrás.")) {
-      deleteBlog(blog).then(() => {
+  const updateFinalProcess = async () => {
+    let subTopicWithNoId: any = [];
+    await Promise.all(blog.subTopic.map(async (b: any) => {
+      if (b.newImage && b.id) {
+        await updateSubTopicImage(b.newImage, blog.id, b.id).then((subUrl) => {
+          b.image = subUrl;
+        })
+        delete b.newImage
+      }
+      if (!b.id) {
+        let subTopic = JSON.parse(JSON.stringify({
+          title: b.title,
+          text: b.text,
+          image: '',
+          imageUpdate: b.image
+        }));
+        subTopicWithNoId.push(subTopic);
+        b.image = "";
+        b.newImage = "";
+      }
+    }))
+    await updateBlogsApi(blog).then(async (newSubTopicId) => {
+      if (subTopicWithNoId.length > 0) {
+        await Promise.all(subTopicWithNoId.map((subTpc: any, index: number) => {
+          if (subTpc.imageUpdate !== '') {
+            updateSubTopicImage(subTpc.imageUpdate, blog.id, newSubTopicId[index]).then((subUrl) => {
+              subTpc.image = subUrl;
+              updateSubTopicImageApi(subTpc).then(() => {
+                console.log('exito')
+              })
+            })
+          }
+        }))
         router.push({ pathname: "/admin/Blog" })
-      });
+        setProcessLoader(false);
+      }
+      else {
+        router.push({ pathname: "/admin/Blog" })
+        setProcessLoader(false);
+      }
+    })
+  }
+  const deleteBlogSql = async () => {
+    if (confirm("¿Quieres eliminar este blog?, Esta acción no tiene marcha atrás.")) {
+      deleteBlogsApi(blog).then(() => {
+        router.push({ pathname: "/admin/Blog" })
+      })
     }
     else {
 
     }
   }
   const getNewBlog = () => {
-    let tempBlog: any;
     let tempAllBlogs: any;
-    getBlogs().then((res) => {
+    getBlogsApi().then((res) => {
       if (blogId) {
-        tempAllBlogs = res.filter((allBlogs: any) => allBlogs.id !== blogId)
-        tempBlog = res.filter((allBlogs: any) => allBlogs.id === blogId)
-        setBlog(tempBlog[0]);
+        tempAllBlogs = res.filter((allBlogs: any) => allBlogs.id !== +blogId)
+        getSingleBlogApi(blogId).then((response) => {
+          setBlog(response)
+          setLoader(true);
+        })
         setBlogs(tempAllBlogs);
       }
       else {
         setBlogs(res);
+        setLoader(true);
       }
-      setLoader(true);
     })
   }
   useEffect(() => {
@@ -245,7 +326,7 @@ const CreateBlog = () => {
             }
             {
               blogId &&
-              <button className="delete-blog" onClick={deleteBlock}>
+              <button className="delete-blog" onClick={deleteBlogSql}>
                 <p className="theme-text">
                   Eliminar blog
                 </p>
@@ -279,10 +360,10 @@ const CreateBlog = () => {
                   <input
                     className="blog-input"
                     placeholder="Subtítulo del Blog"
-                    defaultValue={blog.subTitle}
+                    defaultValue={blog.subtitle}
                     onChange={(e: any) => {
                       setBlog({
-                        ...blog, subTitle: e.target.value
+                        ...blog, subtitle: e.target.value
                       })
                     }}
                   />
@@ -348,7 +429,7 @@ const CreateBlog = () => {
                           <input
                             className="blog-input"
                             placeholder="Título del Blog"
-                            defaultValue={topic.topicTitle}
+                            defaultValue={topic.title}
                             onChange={(e: any) => { changeTopicTitle(topic, index, e.target.value) }}
                           />
                         </BlogInputs>
@@ -356,7 +437,7 @@ const CreateBlog = () => {
                           <label className="blog-label">
                             Imagen del subtema {index + 1}
                             {
-                              topic.topicPath &&
+                              topic.image &&
                               <AiOutlineClose
                                 style={{ cursor: "pointer", marginLeft: 20 }}
                                 onClick={() => removeImage(index)}
@@ -380,7 +461,7 @@ const CreateBlog = () => {
                         Consectetur amet eu tincidunt quis. Non habitasse viverra 
                         malesuada facilisi vel nunc." theme="snow" id='quill'
                           formats={formats} modules={modules}
-                          defaultValue={topic.topicText} onChange={(content, delta, source, editor) => {
+                          defaultValue={topic.text} onChange={(content, delta, source, editor) => {
                             changeTopicContent(topic, content, index);
                           }} />
                       </BlogInputs>

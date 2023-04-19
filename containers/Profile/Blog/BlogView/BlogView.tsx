@@ -7,7 +7,6 @@ import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
-import { getBlogs } from '../../../../store/actions/AdminActions';
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -17,13 +16,13 @@ import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSectio
 import { IBlog, ISubTopic } from './IBlogView';
 import ReactToPrint from 'react-to-print';
 import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags'
+import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [blogs, setBlogs] = useState<any>();
   const [blog, setBlog] = useState<IBlog>();
-  const [month, setMonth] = useState<string>("");
   const [topicLength, setTopicLength] = useState(0);
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
@@ -83,12 +82,53 @@ const BlogView = () => {
     }
 
   }
+  const getMonth = (month: any) => {
+    if (month === 1) {
+      return "enero"
+    }
+    else if (month === 2) {
+      return "febrero"
+    }
+    else if (month === 3) {
+      return "marzo"
+    }
+    else if (month === 4) {
+      return "abril"
+    }
+    else if (month === 5) {
+      return "mayo"
+    }
+    else if (month === 6) {
+      return "junio"
+    }
+    else if (month === 7) {
+      return "julio"
+    }
+    else if (month === 8) {
+      return "agosto"
+    }
+    else if (month === 9) {
+      return "septiembre"
+    }
+    else if (month === 10) {
+      return "octubre"
+    }
+    else if (month === 11) {
+      return "noviembre"
+    }
+    else if (month === 12) {
+      return "diciembre"
+    }
+    else {
+      return ''
+    }
+  }
   const getBlog = () => {
     let tempTitle: any = router.query.slug;
     let titleSearch: string = tempTitle.replaceAll("-", " ").replaceAll("&#45;", "-");
     let tempBlog: any;
     let allBlogs: any;
-    getBlogs().then((res) => {
+    getBlogsApi().then((res) => {
       allBlogs = res.filter((blog: IBlog) => blog.title !== titleSearch);
       if (allBlogs.length > 4) {
         let shuffleBlog = allBlogs.sort((a: any, b: any) => 0.5 - Math.random());
@@ -99,62 +139,23 @@ const BlogView = () => {
         setBlogs(allBlogs);
       }
       tempBlog = res.filter((blog: IBlog) => blog.title === titleSearch);
-      tempBlog.forEach((element: IBlog) => {
-        let tempDate: any = new Date(element.createdAt.seconds * 1000);
-        let tempDay = tempDate.getDate();
-        let tempMonth = tempDate.getMonth() + 1;
-        getTextMonth(tempMonth);
-        let tempYear = tempDate.getFullYear();
-        element.date = {
+      getSingleBlogApi(tempBlog[0].id).then((res) => {
+        let date = new Date(res.created_at)
+        let tempDay = date.getDate();
+        let tempMonth = date.getMonth() + 1;
+        let textMonth: string = getMonth(tempMonth);
+        let tempYear = date.getFullYear();
+        res.date = {
           day: tempDay,
-          month: tempMonth,
+          month: textMonth,
           year: tempYear,
         };
+        setTopicLength(res.subTopic.length)
+        setBlog(res)
+        setLoader(true);
       })
-      setTopicLength(tempBlog[0].subTopic.length)
-      setBlog(tempBlog[0])
-      setLoader(true);
+
     })
-  }
-  const getTextMonth = (tempMonth: any) => {
-    let textMonth: string = ""
-    if (tempMonth == 1) {
-      textMonth = "enero"
-    }
-    if (tempMonth == 2) {
-      textMonth = "febrero"
-    }
-    if (tempMonth == 3) {
-      textMonth = "marzo"
-    }
-    if (tempMonth == 4) {
-      textMonth = "abril"
-    }
-    if (tempMonth == 5) {
-      textMonth = "mayo"
-    }
-    if (tempMonth == 6) {
-      textMonth = "junio"
-    }
-    if (tempMonth == 7) {
-      textMonth = "julio"
-    }
-    if (tempMonth == 8) {
-      textMonth = "agosto"
-    }
-    if (tempMonth == 9) {
-      textMonth = "septiembre"
-    }
-    if (tempMonth == 10) {
-      textMonth = "octubre"
-    }
-    if (tempMonth == 11) {
-      textMonth = "noviembre"
-    }
-    if (tempMonth == 12) {
-      textMonth = "diciembre"
-    }
-    setMonth(textMonth)
   }
   useEffect(() => {
     fetchDB_data();
@@ -175,7 +176,7 @@ const BlogView = () => {
       <HelmetMetaTags
         title={blog?.title}
         image={blog?.path}
-        description={blog?.subTitle ? blog?.subTitle : "Gonvar Nails Academy"}
+        description={blog?.subtitle ? blog?.subtitle : "Gonvar Nails Academy"}
         quote={"gonvar - " + blog?.title}
       />
       <div className="content">
@@ -186,10 +187,10 @@ const BlogView = () => {
                 {blog?.title}
               </h1>
               <p className="sub-title">
-                {blog?.subTitle}
+                {blog?.subtitle}
               </p>
               <p className="date">
-                por Gonvar | {blog?.date.day} de {month} de {blog?.date.year}
+                por Gonvar | {blog?.date.day} de {blog?.date.month} de {blog?.date.year}
               </p>
               <div className="socials">
                 <FacebookShareButton
@@ -202,7 +203,7 @@ const BlogView = () => {
                 </FacebookShareButton>
                 <TwitterShareButton
                   url={url}
-                  title={blog?.subTitle}
+                  title={blog?.subtitle}
                 >
                   <BsTwitter className="icon" />
                 </TwitterShareButton>
@@ -226,7 +227,7 @@ const BlogView = () => {
               </div>
             </div>
             <div className="img-container" key="remove" id="remove">
-              <img src={blog?.path} />
+              <img src={blog?.image} />
             </div>
           </FirstSection>
           {
@@ -249,9 +250,8 @@ const BlogView = () => {
             </div>
             <div className="subtitle-container">
               {
-
                 blog?.subTopic.map((topic: ISubTopic, index: number) => {
-                  if (topic.topicTitle) {
+                  if (topic.title) {
                     topicTitleCount++
                     return (
                       <div className="section-title" key={"topic-titles " + index}>
@@ -259,7 +259,7 @@ const BlogView = () => {
                           {topicTitleCount}.
                         </p>
                         <p className="topic-title" onClick={() => moveTo(index)}>
-                          {topic.topicTitle}
+                          {topic.title}
                         </p>
                       </div>
                     )
@@ -284,12 +284,12 @@ const BlogView = () => {
               blog?.subTopic.map((topic: ISubTopic, index: number) => {
                 return (
                   <div className="text-container" id={`box-${index}`} key={"topic-context" + index}>
-                    <h2 className="topic-title">{topic.topicTitle}</h2>
-                    <p dangerouslySetInnerHTML={{ __html: topic.topicText }} className="topic-subtitle" />
+                    <h2 className="topic-title">{topic.title}</h2>
+                    <p dangerouslySetInnerHTML={{ __html: topic.text }} className="topic-subtitle" />
                     {
-                      topic.topicPath &&
+                      topic.image &&
                       <div className="topic-image">
-                        <img src={topic.topicPath} />
+                        <img src={topic.image} />
                       </div>
                     }
                     {
@@ -333,7 +333,7 @@ const BlogView = () => {
         </div>
         <div className="right-content">
           <div className="img-container" key="remove" id="remove">
-            <img src={blog?.path} alt={blog?.title} />
+            <img src={blog?.image} alt={blog?.title} />
           </div>
           <RelatedArticles>
             <p className="titles">ARTÍCULOS RELACIONADOS</p>
@@ -341,7 +341,7 @@ const BlogView = () => {
               blogs.map((blogVar: IBlog, index: number) => {
                 return (
                   <div key={"extra text 1_" + index} className="cards" >
-                    <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
+                    <img src={blogVar.image} className="img" onClick={() => goToBlog(blogVar)} />
                     <p className="title">                {blogVar.title}</p>
                     {
                       blogVar.summary &&
@@ -365,7 +365,7 @@ const BlogView = () => {
             blogs.map((blogVar: IBlog, index: any) => {
               return (
                 <div key={"extra text 2_" + index} className="cards" >
-                  <img src={blogVar.path} className="img" onClick={() => goToBlog(blogVar)} />
+                  <img src={blogVar.image} className="img" onClick={() => goToBlog(blogVar)} />
                   <p className="title">                {blogVar.title}</p>
                   {
                     blogVar.summary &&

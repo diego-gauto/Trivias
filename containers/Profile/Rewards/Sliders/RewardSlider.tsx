@@ -50,7 +50,7 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "points") {
-      tempFilter = rewards.filter((val: any) => (val.type === "points" && val.published === "published"));
+      tempFilter = rewards.filter((val: any) => (val.type === "points" && val.published === "publicado"));
       tempFilter.sort((a: any, b: any) => a.points - b.points)
       tempFilter.forEach((element: any) => {
         if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
