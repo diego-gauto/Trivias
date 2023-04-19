@@ -10,7 +10,7 @@ import { getUserCertificateApi } from "../../components/api/lessons";
 
 const Certificate = () => {
   const router = useRouter()
-  const { name, title, professor, id, color, courseId, teacherSignature }: any = router.query;
+  const { name, lastName, title, professor, id, color, courseId, teacherSignature }: any = router.query;
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
@@ -79,7 +79,7 @@ const Certificate = () => {
     <MainContainer color={color}>
       <div id="my_mm">
         <div className="certificate" id="certificate">
-          <p className="title">{name}</p>
+          <p className="title">{name} {lastName}</p>
           <p className="course-title">{title}</p>
           <p className="professor">{professor}</p>
           <p className="date">{date}</p>

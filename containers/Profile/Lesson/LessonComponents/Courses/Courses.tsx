@@ -65,6 +65,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
       pathname: `/Certificates`,
       query: {
         name: userData.name,
+        lastName: userData.last_name,
         title: course.title,
         professor: course.professors[0].name,
         id: userData.user_id,
