@@ -10,7 +10,9 @@ export const SlideContainer = styled.div<{
   align-items: center;
   position: relative;
   flex-shrink: 0;
+  max-width: 310px;
   @media (max-width: 450px) {
+    max-width: 180px;
     padding-left: 30px;
   }
   &:first-child {

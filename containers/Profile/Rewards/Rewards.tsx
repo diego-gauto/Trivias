@@ -21,6 +21,7 @@ const Rewards = () => {
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
   const [completeCertificates, setCompleteCertificates] = useState<any>([])
+  const [certLoader, setCertLoader] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   let today = new Date().getTime() / 1000;
@@ -62,12 +63,13 @@ const Rewards = () => {
       setAllSlider(tempSlides)
     }
   }
-  const getRewardData = (user: any) => {
+  const getRewardData = async (user: any) => {
     let nextCourseCertificate: any = [];
-    let completedCertificates: number = 0;
+    let completedCertificates: number = user.user_certificates.length;
     let tempDayCount: any = today - user.start_date;
     let getMonth: any;
     let lesson_users: any = [];
+    let tempRewards: any = [];
     let completeCertificates: any = [];
     if (user.level === 1) {
       if (user.start_date === 0) {
@@ -82,18 +84,28 @@ const Rewards = () => {
     }
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
-    getClaimedReward(user.user_id).then((res) => {
+    let tempTimeLevel: any = Math.floor(getMonth);
+    await getClaimedReward(user.user_id).then(async (res) => {
       setUserReward(res);
     })
-    getLessonsFromUserId(user.user_id).then((res) => {
+    await getRewardsApi().then(async (res) => {
+      await Promise.all(res.map((reward: any) => {
+        tempRewards.push(reward);
+      }))
+      setRewards(res);
+
+    })
+    await getLessonsFromUserId(user.user_id).then((res) => {
       lesson_users = res;
     })
-    getCoursesApi().then((res) => {
-      res.forEach((course: any) => {
+    await getCoursesApi().then(async (res) => {
+      await Promise.all(res.map(async (course: any) => {
         let count: number = 0;
         let lessonsDone: number = 0;
-        user.user_certificates.forEach((userCert: any) => {
+        let courseIdWithCertificate: number = 0;
+        user.user_certificates.map((userCert: any) => {
           if (userCert.course_id === course.id) {
+            courseIdWithCertificate = userCert.course_id
             completeCertificates.push({
               title: course.title,
               about: course.about,
@@ -106,8 +118,8 @@ const Rewards = () => {
             })
           }
         })
-        course.seasons.forEach((season: any) => {
-          season.lessons.forEach((lesson: any) => {
+        course.seasons.map((season: any) => {
+          season.lessons.map((lesson: any) => {
             lesson_users.map((lessonUser: any) => {
               if (lesson.id === lessonUser.lessons_id) {
                 lessonsDone++;
@@ -121,7 +133,7 @@ const Rewards = () => {
         let progress = lessonsDone / count;
         course.progress = progress;
         course.lessonsLeft = count - lessonsDone;
-        if (progress < 1 && progress !== 0) {
+        if (progress !== 0 && courseIdWithCertificate === 0) {
           nextCourseCertificate.push({
             title: course.title,
             about: course.about,
@@ -137,27 +149,21 @@ const Rewards = () => {
             certificates: 2,
           });
         }
-        if (progress === 1) {
-          completedCertificates++;
-        }
-      });
+      }));
       setCompleteCertificates(completeCertificates);
       nextCourseCertificate = nextCourseCertificate.sort((a: any, b: any) => b.progress - a.progress);
       setCourses(nextCourseCertificate);
-      getRewardsApi().then((reward) => {
-        let tempTimeLevel: any = Math.floor(getMonth);
-        setRewards(reward);
-        let data = {
-          reward: reward,
-          user: user,
-          nextCourseCertificate: nextCourseCertificate[0],
-          totalCertificates: completedCertificates,
-          monthCompleted: tempTimeLevel,
-          monthPercentage: getMonth
-        }
-        getNextRewards(data);
-      })
     })
+    let data = {
+      reward: tempRewards,
+      user: user,
+      nextCourseCertificate: nextCourseCertificate[0],
+      totalCertificates: completedCertificates,
+      monthCompleted: tempTimeLevel,
+      monthPercentage: getMonth
+    }
+    console.log(data);
+    getNextRewards(data);
   }
   const getNextRewards = (data: any) => {
     let pointsFilter = [];
@@ -246,8 +252,8 @@ const Rewards = () => {
         progress: progressCertificates,
       },
     ];
-    setRewardsTypes(arrayRewards);
     setLoading(false);
+    setRewardsTypes(arrayRewards);
   }
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
@@ -255,6 +261,7 @@ const Rewards = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
+        console.log(res);
         setUserData(res);
         getRewardData(res);
       })
