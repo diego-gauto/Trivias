@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const MainContainer = styled.div<{ color: any }>`
   display: flex;
   flex-direction: column;
+  margin: auto;
   button {
     border: none;
     color: white;
@@ -111,9 +112,8 @@ export const MainContainer = styled.div<{ color: any }>`
       font-weight: 400;
     }
     .professor-name {
-      max-width: 100px;
       position: absolute;
-      left: 34%;
+      left: 32%;
       line-height: 15px;
       bottom: 75px;
       color: #451466;
