@@ -14,7 +14,7 @@ import {
   Box2,
   ProfileText,
 } from "./User.styled";
-import io from 'socket.io-client';
+import { io } from "socket.io-client";
 
 const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
@@ -43,10 +43,15 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
   const crownImage = "/images/profile/crown.png"
   const { api } = useFacebook();
 
-  // const socket = io('https://gonvar.inowu.dev:4003');
 
-  // socket.on('message', (data) => {
-  //   console.log('Received message:', data);
+  // const socket = io("ws://gonvar.inowu.dev:8000");
+
+  // send a message to the server
+  // socket.emit("hello from client", 5, "6", { 7: Uint8Array.from([8]) });
+
+  // // receive a message from the server
+  // socket.on("hello from server", (...args) => {
+  //   // ...
   // });
 
   const changePassword = async () => {
