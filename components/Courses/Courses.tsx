@@ -64,6 +64,7 @@ const Courses = () => {
         setSeasonIndex(0);
         setLessonIndex(0);
       }
+      console.log(courseForModal[0]);
       setCourseForModal(courseForModal[0]);
       setVideoCourse(courseforVideo[0]);
       setLoading(false);
@@ -168,7 +169,7 @@ const Courses = () => {
           <Gradient></Gradient>
         </div>
       </Container>
-      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
+      <CourseModal show={show} setShow={setShow} course={courseForModal} user={userData} />
       {/* SLIDERS */}
       <div className="module-contain">
         {
