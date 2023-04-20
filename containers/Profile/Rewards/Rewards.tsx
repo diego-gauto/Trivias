@@ -162,7 +162,6 @@ const Rewards = () => {
       monthCompleted: tempTimeLevel,
       monthPercentage: getMonth
     }
-    console.log(data);
     getNextRewards(data);
   }
   const getNextRewards = (data: any) => {
@@ -247,11 +246,12 @@ const Rewards = () => {
         scoreType: "certificados",
         score: totalCertificates ? totalCertificates : 0,
         title: nextCourseCertificate?.title ? nextCourseCertificate.title : "Sin certificados",
-        certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : "0",
+        certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : 0,
         completed: totalCertificates ? totalCertificates : 0,
         progress: progressCertificates,
       },
     ];
+    console.log(arrayRewards);
     setLoading(false);
     setRewardsTypes(arrayRewards);
   }
@@ -261,7 +261,6 @@ const Rewards = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
-        console.log(res);
         setUserData(res);
         getRewardData(res);
       })
@@ -383,11 +382,19 @@ const Rewards = () => {
                       <p className="next-reward-points">
                         {val.type == "points" && <>{val.points !== 0 ? <>al reunir<br /></> : <>Recompensas<br /></>}</>}
                         {val.type == "months" && <>{val.months !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
-                        {val.type == "certificates" && <>{val.certificates !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
+                        {val.type == "certificates" && <>{val.title !== "Sin certificados" ? <>al completar<br /></> : <>Certificados<br /></>}</>}
                         <span>
                           {val.type == "points" && <>{val.points !== 0 ? val.points + " puntos" : "Completadas"}</>}
                           {val.type == "months" && <>{val.months !== 0 ? (val.months == 1 ? val.months + " mes" : val.months + " meses") : "Completadas"}</>}
-                          {val.type == "certificates" && <>{val.certificates !== 0 ? (val.certificates == 1 ? val.certificates + " lección" : val.certificates + " lecciones") : "Completadas"}</>}
+                          {
+                            val.type == "certificates" && <>{val.title !== "Sin certificados"
+                              ? (val.certificates !== 0
+                                ? (val.certificates === 1
+                                  ? val.certificates + " lección"
+                                  : val.certificates + " lecciones")
+                                : "las tareas")
+                              : "Completadas"}</>
+                          }
                         </span>
                       </p>
                     </div>

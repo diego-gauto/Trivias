@@ -115,7 +115,6 @@ const RewardSlider = (props: reward_slider) => {
         title: "Certificado bloqueado",
         scoreText: "hasta completar ",
       })
-      console.log(slides);
     }
     setSlides(slides)
   }
@@ -209,7 +208,7 @@ const RewardSlider = (props: reward_slider) => {
                           {texts.scoreText}
                           {reward.points && reward.points + " puntos"}
                           {reward.month ? (reward.month == 1 ? reward.month + " mes" : reward.month + " meses") : ""}
-                          {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : ""}
+                          {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : (reward.type === "certificates" && "las tareas faltantes")}
                         </p>
                         {/* {
                           reward.total &&
