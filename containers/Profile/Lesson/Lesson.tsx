@@ -58,6 +58,7 @@ const Lesson = () => {
           }
           setCurrentLesson(res.seasons[season].lessons[lesson]);
           setCourse(res);
+          getDataForNextLesson(res);
           history(res, user);
           setIsLoading(false);
         })
@@ -69,36 +70,39 @@ const Lesson = () => {
   } catch (error) {
     setLoggedIn(false)
   }
-
   const getCourse = () => {
     getCourseApi(id).then((res) => {
       setCurrentLesson(res.seasons[season].lessons[lesson]);
       setCourse(res);
-      if (course.seasons[season].lessons[+lesson + 1]) {
-        setnextLesson({
-          lessonIndex: +lesson + 1,
-          seasonIndex: +season,
-        });
-      }
-      else {
-        if (course.seasons[+season + 1]) {
-          setnextLesson({
-            lessonIndex: 0,
-            seasonIndex: +season + 1,
-          });
-        }
-        else {
-          setnextLesson({
-            lessonIndex: 0,
-            seasonIndex: 0,
-          });
-        }
-      }
+      getDataForNextLesson(res);
       if (userData !== null) {
         history(res, userData);
       }
       setIsLoading(false);
     })
+  }
+  const getDataForNextLesson = (courseData: any) => {
+    console.log('hola')
+    if (courseData.seasons[season].lessons[+lesson + 1]) {
+      setnextLesson({
+        lessonIndex: +lesson + 1,
+        seasonIndex: +season,
+      });
+    }
+    else {
+      if (courseData.seasons[+season + 1]) {
+        setnextLesson({
+          lessonIndex: 0,
+          seasonIndex: +season + 1,
+        });
+      }
+      else {
+        setnextLesson({
+          lessonIndex: +lesson,
+          seasonIndex: +season,
+        });
+      }
+    }
   }
   const history = (data: any, user: any) => {
     let temp = {
