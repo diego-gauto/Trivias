@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import CsvDownloader from "react-csv-downloader";
-
-
-import { db } from "../../../firebase/firebaseConfig";
-import { getWholeCourses } from "../../../store/actions/courseActions";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
 import { AdminContain, AdminLoader, Table } from "../SideBar.styled";
 import UserCardData from "./UserData/UserCardData";
@@ -21,7 +16,6 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getInvoice } from "../../../store/actions/PaymentActions";
 import { getLessonFromUserApi, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
@@ -158,7 +152,6 @@ const UsersList = () => {
   const pagePerUsers = (users: any) => {
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(users.length / usersPerPage);
-
     let tempUsers: any = [];
     for (let i = 0; i < pages; i++) {
       tempUsers.push([])
@@ -202,21 +195,6 @@ const UsersList = () => {
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime();
     return new Date(tempDate).toLocaleDateString("es-MX")
-  }
-  const activeCourses = (userId: any) => {
-    let counterCourses: number = 0;
-    // if (userId === 2) {
-    //   counterCourses++;
-    // }
-    // getLessonFromUserApi(userId).then((res) => {
-    //   res.data.data.forEach((userCourse: any) => {
-    //     if (userCourse.final_date > today) {
-    //       counterCourses++;
-    //     }
-    //   });
-    // })
-    // console.log(counterCourses);
-    return "Activo " + counterCourses;
   }
 
   const handleClick = () => {
@@ -306,7 +284,7 @@ const UsersList = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{formatDate(user.created_at)}</td>
-                      <td>{activeCourses(user.id)}</td>
+                      <td>Activo 0</td>
                       <td>MXN${user.spent}</td>
                       {/* <td>{user.score} puntos</td> */}
                       <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>

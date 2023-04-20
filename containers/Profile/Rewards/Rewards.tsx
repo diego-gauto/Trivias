@@ -170,8 +170,8 @@ const Rewards = () => {
     let pointRewardCompleted = [];
     let monthRewardCompleted = [];
     let progressPoints: number = 0;
-    let progressMonth: number = 0;
-    let progressCertificates: number = 0;
+    let progressMonth: number = 565;
+    let progressCertificates: number = 565;
     const {
       monthCompleted,
       monthPercentage,
@@ -220,7 +220,7 @@ const Rewards = () => {
       progressCertificates = ((1 - nextCourseCertificate.progress) * 565);
     }
     else {
-      progressCertificates = 0;
+      progressCertificates = 565;
     }
     let arrayRewards: any = [
       {
@@ -381,7 +381,7 @@ const Rewards = () => {
                       </p>
                       <p className="next-reward-points">
                         {val.type == "points" && <>{val.points !== 0 ? <>al reunir<br /></> : <>Recompensas<br /></>}</>}
-                        {val.type == "months" && <>{val.months !== 0 ? <>al completar<br /></> : <>Recompensas<br /></>}</>}
+                        {val.type == "months" && <>{val.months !== 0 ? <>al completar<br /></> : <>Beneficios<br /></>}</>}
                         {val.type == "certificates" && <>{val.title !== "Sin certificados" ? <>al completar<br /></> : <>Certificados<br /></>}</>}
                         <span>
                           {val.type == "points" && <>{val.points !== 0 ? val.points + " puntos" : "Completadas"}</>}
