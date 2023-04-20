@@ -311,11 +311,11 @@ const Sliders = (props: ICourseData) => {
                           <p className="sub">de <span>{course.professors[0]?.name}</span></p>
                           <p className="modules">{course.seasons.length} Módulos</p>
                           <div className="level-container">
-                            {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/beginner.jpeg" alt="" />}
-                            {(course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/easy.jpeg" alt="" />}
-                            {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/medium.jpeg" alt="" />}
-                            {(course.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/advance.jpeg" alt="" />}
-                            {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/master.jpeg" alt="" />}
+                            {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
+                            {(course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/iconoLila.png" alt="" />}
+                            {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/iconoNaranja.png" alt="" />}
+                            {(course.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/iconoVerde.png" alt="" />}
+                            {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/iconoRosa.png" alt="" />}
                             <p>{course.difficulty}</p>
                           </div>
                         </SlideModuleContainer>
