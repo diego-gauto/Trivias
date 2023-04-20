@@ -56,6 +56,9 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     if (reward.type == "months") {
       reward.points = 0;
     }
+    if (reward.product_type === "digital") {
+      reward.price = 0;
+    }
     let tempErrors = {
       title: reward.title === "" ? true : false,
       about: reward.about === "" ? true : false,
@@ -90,7 +93,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     setReward({ ...data });
 
   }, [data])
-
+  console.log(reward);
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
@@ -160,21 +163,24 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
           <InputContain>
             <Label>Meses</Label>
             <Input placeholder="7"
-              defaultValue={data.months}
+              defaultValue={data.month}
               style={errors.month ? { border: "1px solid red" } : {}}
               onChange={(e: any) => {
-                setReward({ ...reward, months: parseInt(e.target.value) })
+                setReward({ ...reward, month: parseInt(e.target.value) })
               }} />
           </InputContain>
         }
-        <InputContain>
-          <Label>Precio</Label>
-          <Input placeholder="7"
-            style={errors.points ? { border: "1px solid red" } : {}}
-            onChange={(e: any) => {
-              setReward({ ...reward, price: parseInt(e.target.value) })
-            }} />
-        </InputContain>
+        {
+          reward.product_type === "fisico" &&
+          <InputContain>
+            <Label>Precio</Label>
+            <Input placeholder="7"
+              style={errors.points ? { border: "1px solid red" } : {}}
+              onChange={(e: any) => {
+                setReward({ ...reward, price: parseInt(e.target.value) })
+              }} />
+          </InputContain>
+        }
         <InputContain>
           <Label>Imagen del Producto</Label>
           <IconContain>

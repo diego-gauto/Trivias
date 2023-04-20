@@ -101,6 +101,7 @@ export const Reward = styled.div<{ type: any }>`
     }
   }
   .title {
+    font-size: 16px;
     padding-inline: 10px;
     font-weight: 600;
     text-align: center;

@@ -54,6 +54,9 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
     if (reward.type == "months") {
       reward.points = 0;
     }
+    if (reward.product_type === "digital") {
+      reward.price = 0;
+    }
     let tempErrors = {
       title: reward.title === "" ? true : false,
       about: reward.about === "" ? true : false,
@@ -162,14 +165,17 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
               }} />
           </InputContain>
         }
-        <InputContain>
-          <Label>Precio</Label>
-          <Input placeholder="7"
-            style={errors.points ? { border: "1px solid red" } : {}}
-            onChange={(e: any) => {
-              setReward({ ...reward, price: parseInt(e.target.value) })
-            }} />
-        </InputContain>
+        {
+          reward.product_type === "fisico" &&
+          <InputContain>
+            <Label>Precio</Label>
+            <Input placeholder="7"
+              style={errors.points ? { border: "1px solid red" } : {}}
+              onChange={(e: any) => {
+                setReward({ ...reward, price: parseInt(e.target.value) })
+              }} />
+          </InputContain>
+        }
         <InputContain>
           <Label>Imagen del Producto</Label>
           <IconContain>

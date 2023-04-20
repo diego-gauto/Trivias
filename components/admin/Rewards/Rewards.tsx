@@ -85,7 +85,7 @@ const Rewards = () => {
                 <img height={170} src={reward.image} alt="" onClick={() => { setReward(reward); setEdit(true) }} />
                 <p className="title">{reward.title}</p>
                 {reward.type == "points" && <p>{reward.points} Puntos</p>}
-                {reward.type == "months" && <p>{reward.months} Meses</p>}
+                {reward.type == "months" && <p>{reward.month} Meses</p>}
                 {reward.type == "certificates" && <p>{reward.certificates} Certificados</p>}
               </Reward>
             )
