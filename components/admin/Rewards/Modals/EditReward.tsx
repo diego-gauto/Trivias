@@ -175,6 +175,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
           <InputContain>
             <Label>Precio</Label>
             <Input placeholder="7"
+              defaultValue={data.price}
               style={errors.points ? { border: "1px solid red" } : {}}
               onChange={(e: any) => {
                 setReward({ ...reward, price: parseInt(e.target.value) })

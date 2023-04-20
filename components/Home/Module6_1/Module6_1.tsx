@@ -86,6 +86,7 @@ import "swiper/css/navigation";
 import { IModule6_1 } from "./IModule6_1";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { SlideModule_1 } from "./SlideModule_1/SlideModule_2";
+import Link from "next/link";
 SwiperCore.use([Autoplay]);
 
 export const Module6_1 = (props: IModule6_1) => {
@@ -181,20 +182,28 @@ export const Module6_1 = (props: IModule6_1) => {
               <div className="yellow"></div>
             </div>
             <MoreText>
-              <MoreText_2>Cursos</MoreText_2>
-              <MoreText_3>Tienda</MoreText_3>
+              <Link href="/Preview">
+                <MoreText_2>Cursos</MoreText_2>
+              </Link>
+              <a href="https://gonvarnails.mx/" target="_blank" style={{ textDecoration: "none", fontWeight: 600 }}>
+                <MoreText_3>Tienda</MoreText_3>
+              </a>
             </MoreText>
           </PeopleContainer>
           <PineappleTextContainer>
             <FooterAText >
               <MoreTextMobile>
-                <MoreText_2Mobile>Cursos</MoreText_2Mobile>
-                <MoreText_3Mobile>Tienda</MoreText_3Mobile>
+                <Link href="/Preview">
+                  <MoreText_2Mobile>Cursos</MoreText_2Mobile>
+                </Link>
+                <a href="https://gonvarnails.mx/" target="_blank" style={{ textDecoration: "none", fontWeight: 600 }}>
+                  <MoreText_3Mobile>Tienda</MoreText_3Mobile>
+                </a>
               </MoreTextMobile>
               <FooterAText_1>Aviso de privacidad</FooterAText_1>
               <FooterAText_2>Términos y condiciones</FooterAText_2>
-              <FooterAText_3>Políticas de cancelación</FooterAText_3>
-              <FooterAText_3>Trabaja con nosotros</FooterAText_3>
+              {/* <FooterAText_3>Políticas de cancelación</FooterAText_3>
+              <FooterAText_3>Trabaja con nosotros</FooterAText_3> */}
             </FooterAText>
             <FooterBIcons >
               <div className="content">
