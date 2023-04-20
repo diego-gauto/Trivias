@@ -61,6 +61,7 @@ const Courses = () => {
         courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
           return course.id === 35
         })
+        courseForModal = courseforVideo;
         setSeasonIndex(0);
         setLessonIndex(0);
       }
