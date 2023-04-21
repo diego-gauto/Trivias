@@ -209,12 +209,17 @@ const RewardSlider = (props: reward_slider) => {
                     >
                       <div className="text-container">
                         <p className="title-text">
-                          <span>{texts.title}</span><br />
+                          <span className='span-1'>{texts.title}</span><br />
                           {texts.scoreText}
                           {reward.points && reward.points + " puntos"}
                           {reward.month ? (reward.month == 1 ? reward.month + " mes" : reward.month + " meses") : ""}
                           {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : (reward.type === "certificates" && "las tareas faltantes")}
                         </p>
+                        {
+                          reward.type === "points" &&
+                          <p className="title-text">Precio real:  <span className='span-2'> $ {reward.price}.00 MXN </span></p>
+                        }
+
                         {/* {
                           reward.total &&
                           <div className="progress-bar">

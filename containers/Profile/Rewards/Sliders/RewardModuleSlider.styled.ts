@@ -52,7 +52,7 @@ export const SlideContainer = styled.div<{
       @media (max-width: 1023px) {
         line-height: 12px;
       }
-      span {
+      .span-1 {
         font-weight: 800;
         ${(props) =>
           (props.type == "points" || props.type == "claim-points") &&
@@ -70,6 +70,9 @@ export const SlideContainer = styled.div<{
           css`
             color: #524af5;
           `}
+      }
+      .span-2 {
+        text-decoration: line-through;
       }
     }
     .about-text {
