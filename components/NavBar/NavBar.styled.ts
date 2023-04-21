@@ -209,7 +209,7 @@ export const PurpleButton = styled.button`
   color: #fff;
   padding-block: 15px;
   padding-inline: 25px;
-  font-size: 12px;
+  font-size: 15px;
 
   font-family: "MONTSERRAT-BOLD" !important;
   @font-face {

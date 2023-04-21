@@ -602,3 +602,19 @@ export const updateProfessorSignature = async (image: string, name: string) => {
   const url = await uploadProfessorSignature(image, name);
   return url;
 }
+
+const uploadLessonHomeWorks = (courseID: number, seasonID: number, lesson: any, lessonID: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/${lessonID}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, lesson, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateLessonHomeWorks = async (courseID: number, seasonID: number, image: any, lessonID: number) => {
+  const url = await uploadLessonHomeWorks(courseID, seasonID, image, lessonID);
+  return url;
+}

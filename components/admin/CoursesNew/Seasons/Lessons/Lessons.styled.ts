@@ -46,6 +46,21 @@ export const LessonContainer = styled.div`
         width: 32%;
         flex-direction: column;
         gap: 5px;
+        .extra-materials {
+          padding-left: 10px;
+          .hw-contain {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .close {
+              cursor: pointer;
+            }
+            .extra-hmk {
+              margin: 0;
+              font-size: 14px;
+            }
+          }
+        }
         p {
           margin: 0;
         }

@@ -93,6 +93,18 @@ const Seasons = () => {
       window.location.reload();
     })
   }
+  const hms = (totalSeconds: any) => {
+    if (typeof totalSeconds == 'string') return totalSeconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let result = `${minutes
+      .toString()
+      .padStart(1, '0')} min`;
+    if (!!hours) {
+      result = `${hours.toString()} hr ${minutes} min`;
+    }
+    return result;
+  }
   useEffect(() => {
     getSingleCourseApi(+courseID).then((res) => {
       setCourse(res);
@@ -178,7 +190,7 @@ const Seasons = () => {
                                   <div className="lesson-data">
                                     <p className="lesson-title">{lesson.title}</p>
                                     <p className="lesson-about">{lesson.about}</p>
-                                    <p className="lesson-duration">{lesson.duration + " min"}</p>
+                                    <p className="lesson-duration">{hms(lesson.duration)}</p>
                                     <p className="lesson-edit" onClick={() => { editLesson(seasonData.id, lesson.id) }}>Editar Leccion</p>
                                   </div>
                                 </div>

@@ -103,7 +103,7 @@ export const createLessonFromApi = async (lesson: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "courses/createLesson", lesson)
     .then((res) => {
-      return res.data.data
+      return res.data
     })
     .catch((error) => {
       console.log(error);
@@ -168,6 +168,17 @@ export const updateCourseImageFromApi = async (course: any) => {
 export const updateSeasonNameApi = async (season: any) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "courses/updateSeason", season)
+    .then((res) => {
+      return res.data.msg
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateLessonMaterialContect = async (lsn_mat: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "courses/updateMaterial", lsn_mat)
     .then((res) => {
       return res.data.msg
     })

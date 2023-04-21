@@ -63,8 +63,10 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
       tempCertificates.forEach((course: any, index: number) => {
         countArray.push({ id: course.id, name: course.title, count: 0 })
         course.lessons.forEach((lesson: any) => {
-          if (lesson.users.filter((x: any) => x.user_id === user.user_id).length > 0) {
-            countArray[index].count++;
+          if (lesson.users) {
+            if (lesson.users.filter((x: any) => x.user_id === user.user_id).length > 0) {
+              countArray[index].count++;
+            }
           }
         });
       });

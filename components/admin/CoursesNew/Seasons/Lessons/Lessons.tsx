@@ -11,15 +11,17 @@ import { LoaderButton, SelectOption } from '../../Courses.styled';
 import { LessonContainer } from './Lessons.styled';
 import { MdDelete } from 'react-icons/md';
 import { IAnswer, ILesson, IQuestion } from './ILessons';
-import { createLessonFromApi, deleteLessonFromApi, getLessonFromApi, updateLessonFromApi, updateLessonImageFromApi } from '../../../../api/courses';
+import { createLessonFromApi, deleteLessonFromApi, getLessonFromApi, updateLessonFromApi, updateLessonImageFromApi, updateLessonMaterialContect } from '../../../../api/courses';
 import ReactPlayer from 'react-player';
-import { updateLessonImage } from '../../../../../store/actions/courseActions';
+import { updateLessonHomeWorks, updateLessonImage } from '../../../../../store/actions/courseActions';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const Lessons = () => {
   const [selectQuizHw, setSelectQuizHw] = useState<boolean>(false);
   const [quill, setQuill] = useState("");
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [updateLoader, setUpdateLoader] = useState<boolean>(false);
+  const [materialLoader, setMaterialLoader] = useState<boolean>(false);
   const [bannerImage, setBannerImage] = useState<any>("");
   const [oldQuiz, setOldQuiz] = useState<any>({});
   const [title, setTitle] = useState<string>("");
@@ -52,6 +54,7 @@ const Lessons = () => {
     points: 0,
     banner: "",
     objectives: "",
+    extra_material: "",
     duration: 0,
     quiz: false,
     homework: false,
@@ -62,6 +65,7 @@ const Lessons = () => {
     about: "",
     points: 0,
   })
+  const [extraMaterial, setExtraMaterial] = useState<any>([]);
   const [quiz, setQuiz] = useState<any>({
     title: "",
     passing_grade: 0,
@@ -131,15 +135,39 @@ const Lessons = () => {
       imageComp.src = reader.result;
     };
     setTimeout(() => {
-      if ((imageComp.width == 760 && imageComp.height == 420) || (imageComp.width == 4000 && imageComp.height == 2250)) {
-        setLesson({ ...lesson, banner: reader.result })
-        setBannerImage(reader.result);
-        alert("Imagen aceptada")
-      }
-      else {
-        alert("La imagen debe tener una resolución de 4000 px x 2250 px o 760 px × 420 px")
-      }
+      // if ((imageComp.width == 760 && imageComp.height == 420) || (imageComp.width == 4000 && imageComp.height == 2250)) {
+      setLesson({ ...lesson, banner: reader.result })
+      setBannerImage(reader.result);
+      //   alert("Imagen aceptada")
+      // }
+      // else {
+      //   alert("La imagen debe tener una resolución de 4000 px x 2250 px o 760 px × 420 px")
+      // }
     }, 1000);
+  }
+  const getExtraMaterial = (file: any) => {
+    setMaterialLoader(true);
+    if (file.length > 0) {
+      var reader = new FileReader();
+      var imageComp: any = new Image();
+      let tempExtraMaterial = extraMaterial;
+      reader.readAsDataURL(file[0]);
+      reader.onload = (_event) => {
+        imageComp.src = reader.result;
+        tempExtraMaterial.push(reader.result)
+        setExtraMaterial(tempExtraMaterial);
+        setMaterialLoader(false);
+      };
+    }
+  }
+  const removeExtraMaterial = (index: number) => {
+    setMaterialLoader(true);
+    let tempExtraMaterial: any = extraMaterial;
+    tempExtraMaterial.splice(index, 1)
+    setExtraMaterial(tempExtraMaterial)
+    setTimeout(() => {
+      setMaterialLoader(false);
+    }, 100);
   }
   const startQuizHw = (val: string) => {
     let currentState: boolean = val === "Si" ? true : false;
@@ -193,8 +221,6 @@ const Lessons = () => {
     setQuiz({ ...tempQuiz })
   }
   const createLesson = () => {
-    let tempImage = lesson.banner;
-    lesson.banner = "";
     setLoader(true);
     if (lesson.quiz === true) {
       lesson.quizzes = quiz;
@@ -202,6 +228,7 @@ const Lessons = () => {
     if (lesson.homework === true) {
       lesson.lesson_homeworks = homeWorkData;
     }
+    lesson.extraMaterial = extraMaterial;
     let tempErrors: any = {
       title: lesson.title === "" ? true : false,
       number: lesson.number === 0 ? true : false,
@@ -221,14 +248,40 @@ const Lessons = () => {
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
     if (!checkErrors) {
-      createLessonFromApi(lesson).then((res) => {
-        lesson.id = res;
-        updateLessonImage(courseID, seasonID, tempImage, res).then((banner) => {
+      let tempImage = lesson.banner;
+      lesson.banner = "";
+      let materialContent = extraMaterial;
+      lesson.extraMaterial = extraMaterial.map((b: any) => {
+        let extraMat = {
+          image: '',
+        }
+        return extraMat
+      })
+      createLessonFromApi(lesson).then(async (res) => {
+        lesson.id = res.data;
+        await updateLessonImage(courseID, seasonID, tempImage, res.data).then((banner) => {
           lesson.banner = banner;
           updateLessonImageFromApi(lesson).then(() => {
-            returnToSeasons();
           })
         })
+        if (materialContent.length > 0) {
+          materialContent.forEach(async (image: any) => {
+            await updateLessonHomeWorks(courseID, seasonID, image, res.data).then((url) => {
+              image = url
+            })
+          });
+          materialContent.forEach(async (image: any, index: number,) => {
+            await updateLessonHomeWorks(courseID, seasonID, image, res.data).then((url) => {
+              let sentData = {
+                material: url,
+                id: res.lesson_material[index]
+              }
+              updateLessonMaterialContect(sentData);
+            })
+          });
+        }
+      }).then(() => {
+        returnToSeasons();
       })
     }
     else {
@@ -244,6 +297,7 @@ const Lessons = () => {
     if (lesson.homework === true) {
       lesson.lesson_homeworks = homeWorkData;
     }
+    lesson.extraMaterial = extraMaterial;
     if (bannerImage !== "") {
       await updateLessonImage(courseID, seasonID, lesson.banner, +lessonID).then((res) => {
         lesson.banner = res;
@@ -487,6 +541,11 @@ const Lessons = () => {
                 occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
                 anim id est laborum."
                 className="input-textarea"
+                onChange={(e: any) => {
+                  setLesson({
+                    ...lesson, extra_material: e.target.value
+                  })
+                }}
               />
             </div>
             <div className="input-contain">
@@ -526,7 +585,21 @@ const Lessons = () => {
               <input
                 type="file"
                 className="input-create"
+                onChange={(e) => { getExtraMaterial(e.target.files) }}
               />
+              <div className='extra-materials'>
+                {
+                  (extraMaterial.length > 0 && !materialLoader) &&
+                  extraMaterial.map((extra: any, index: number) => {
+                    return (
+                      <div key={"hwks_" + index} className="hw-contain">
+                        <AiOutlineClose className='close' onClick={() => { removeExtraMaterial(index) }} />
+                        <p className="extra-hmk">Tarea {index + 1}</p>
+                      </div>
+                    )
+                  })
+                }
+              </div>
             </div>
             <div className="input-contain">
               <label className="input-label">
