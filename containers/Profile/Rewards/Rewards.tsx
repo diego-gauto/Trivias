@@ -251,7 +251,6 @@ const Rewards = () => {
         progress: progressCertificates,
       },
     ];
-    console.log(arrayRewards);
     setLoading(false);
     setRewardsTypes(arrayRewards);
   }

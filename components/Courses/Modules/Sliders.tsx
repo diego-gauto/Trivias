@@ -198,7 +198,7 @@ const Sliders = (props: ICourseData) => {
     setCounter(0)
     setCourse(courseData);
   }
-
+  console.log(props)
   useEffect(() => {
     if (!containLoader) {
       getCourseContent();

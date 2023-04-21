@@ -46,7 +46,6 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
   const handleCourse = () => {
     // getUserCourses();
   }
-
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime();
     return new Date(tempDate).toLocaleDateString("es-MX")
@@ -118,7 +117,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
             <Info>
               Teléfono
               <Label>
-                {!user.phone_umber ? "N/A" : user.phone_umber}
+                {!user.phone_number ? user.phone_number : "N/A"}
               </Label>
             </Info>
           </ColumnContain>

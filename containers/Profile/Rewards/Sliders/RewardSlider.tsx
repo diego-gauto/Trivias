@@ -47,6 +47,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Recompensas acumuladas",
         title: "Recompensa desbloqueda",
         scoreText: "desde los ",
+        bottomText: "Sin Recompensas Reclamadas..."
       })
     }
     if (type == "points") {
@@ -64,6 +65,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",
         scoreText: "hasta llegar a ",
+        bottomText: "Sin Recompensas..."
       })
     }
     if (type == "claim-months") {
@@ -78,6 +80,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Beneficios Acumulados",
         title: "Beneficio desbloqueado",
         scoreText: "por cumplir ",
+        bottomText: "Sin Beneficios Reclamados..."
       })
     }
     if (type == "months") {
@@ -95,6 +98,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Beneficios por desbloquear",
         title: "Beneficio bloqueado",
         scoreText: "hasta cumplir ",
+        bottomText: "Sin Beneficios...",
       })
     }
     if (type == "claim-certificates") {
@@ -104,6 +108,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Certificados Acumulados",
         title: "Curso completado",
         scoreText: "Obtener Certificado",
+        bottomText: "Finaliza un curso para obtener un certificado",
       })
     }
     if (type == "certificates") {
@@ -114,6 +119,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Certificados por desbloquear",
         title: "Certificado bloqueado",
         scoreText: "hasta completar ",
+        bottomText: "Comienza un curso para obtener un certificado",
       })
     }
     setSlides(slides)
@@ -314,7 +320,7 @@ const RewardSlider = (props: reward_slider) => {
               }
             </div>
           </div>
-          : <p className="un-claimed">Sin Recompensas Reclamadas...</p>
+          : <p className="un-claimed">{texts.bottomText}</p>
       }
     </BackgroundSlide>
   )

@@ -180,6 +180,15 @@ const UsersList = () => {
     }
 
   }
+  const activeCourses = (user_courses: any) => {
+    let countCourses: number = 0
+    user_courses.map((x: any) => {
+      if (x.final_date > today) {
+        countCourses++;
+      }
+    })
+    return "Activo " + countCourses
+  }
   const getUsers = async (): Promise<void> => {
     getUsersApi().then((res) => {
       pagePerUsers(res.data.users)
@@ -284,7 +293,7 @@ const UsersList = () => {
                       </td>
                       <td >{user.email}</td>
                       <td>{formatDate(user.created_at)}</td>
-                      <td>Activo 0</td>
+                      <td>{activeCourses(user.user_courses)}</td>
                       <td>MXN${user.spent}</td>
                       {/* <td>{user.score} puntos</td> */}
                       <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
