@@ -26,7 +26,15 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const doVideoStuff = () => {
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById(`video-${num}`) as HTMLMediaElement;
-    var videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
+    console.log(data)
+    var videoSrc: any = ""
+    if (data.id === 30) {
+      videoSrc = "https://video.gonvar.io/media/Nails Master 2.0 reedición/NM 2.0 Bienvenida/master.m3u8";
+    }
+    if (data.id === 45) {
+      videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
+    }
+
     videoSrc = videoSrc.slice(0, -11) + "stream_0" + videoSrc.slice(-5);
     if (Hls.isSupported()) {
       var hls = new Hls();
