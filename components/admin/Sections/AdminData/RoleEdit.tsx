@@ -47,31 +47,41 @@ type RoleProps = {
 
 const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) => {
   const handleClose = () => setShow(false);
-  const [state, setState] = useState<CheckBoxNames>(admin.adminTypes);
+  const [roles, setRoles] = useState<any>([{ role: "Cursos", active: false, name: "course", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
+  { role: "Cupones", active: false, name: "coupons", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
+  { role: "Blogs", active: false, name: "blogs", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
+  { role: "Recompensas", active: false, name: "rewards", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }, { active: false, task: "Solicitudes" }] },
+  { role: "Usuarios", active: false, name: "users", tasks: [{ active: false, task: "Editar" }, { active: false, task: "Generar Reporte" }] },
+  { role: "Landing", active: false, name: "landing", tasks: [] },
+  { role: "Pagos", active: false, name: "payments", tasks: [] },
+  { role: "Tarea", active: false, name: "homeworks", tasks: [], courses: [] }]);
 
 
-  const handleChange = (e: { target: CheckBoxValues }) => {
+  const handleRole = (e: { target: CheckBoxValues }, indexRole: number) => {
     const value = e.target.checked;
-    setState({
-      ...state,
-      [e.target.name]: value
-    });
+    roles[indexRole].active = value;
+    setRoles(roles);
+  };
+
+  const handleChange = (e: { target: CheckBoxValues }, indexRole: number, indexTask: number) => {
+    const value = e.target.checked;
+    roles[indexRole].tasks[indexTask].active = value;
+    setRoles(roles);
   };
 
   const updateAdminType = () => {
+    console.log(roles);
+
     let user = {
       user_id: admin.user_id,
-      role: state
+      // role: state
     }
-    updateAdminAccessApi(user).then(() => {
-      setShow(false);
-      refresh();
-      alert("Accesos actualizados");
-    })
+    // updateAdminAccessApi(user).then(() => {
+    //   setShow(false);
+    //   refresh();
+    //   alert("Accesos actualizados");
+    // })
   };
-
-  console.log(admin);
-
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -84,42 +94,24 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
           <SectionOptions>
             <Info>Secciones a las que tiene acceso</Info>
             <SelectedRoleContain>
-              <RowContain >
-                <li>General</li>
-                <input type="checkbox" name="general" checked={state.general} onChange={handleChange} defaultValue={"checked"} />
-              </RowContain>
-              {/* <RowContain>
-                <li>Pagos</li>
-                <input type="checkbox" name="pay" checked={state.pay} onChange={handleChange} />
-              </RowContain> */}
-              <RowContain>
-                <li>Cursos</li>
-                <input type="checkbox" name="courses" checked={state.courses} onChange={handleChange} />
-              </RowContain>
-              <RowContain>
-                <li>Recompensas</li>
-                <input type="checkbox" name="rewards" checked={state.rewards} onChange={handleChange} />
-              </RowContain>
-              {/* <RowContain>
-                <li>Landing</li>
-                <input type="checkbox" name="landing" checked={state.landing} onChange={handleChange} />
-              </RowContain> */}
-              <RowContain>
-                <li>Cupones</li>
-                <input type="checkbox" name="coupons" checked={state.coupons} onChange={handleChange} />
-              </RowContain>
-              <RowContain>
-                <li>Usuarios</li>
-                <input type="checkbox" name="users" checked={state.users} onChange={handleChange} />
-              </RowContain>
-              <RowContain>
-                <li>Blogs</li>
-                <input type="checkbox" name="blogs" checked={state.blogs} onChange={handleChange} />
-              </RowContain>
-              <RowContain>
-                <li>Assignments</li>
-                <input type="checkbox" name="assignments" checked={state.assignments} onChange={handleChange} />
-              </RowContain>
+              {roles.map((x: any, indexR: number) => {
+                return (
+                  <div className="role-row">
+                    <RowContain>
+                      <li>{x.role}</li>
+                      <input type="checkbox" name={x.name} defaultChecked={x.active} onChange={(e) => handleRole(e, indexR)} />
+                    </RowContain>
+                    {x.tasks.map((task: any, indexT: number) => {
+                      return (
+                        <div className="tasks">
+                          <input type="chechkbox" name={task.task} defaultChecked={task.active} onChange={(e) => handleChange(e, indexR, indexT)} />
+                          <li>{task.task}</li>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              })}
             </SelectedRoleContain>
           </SectionOptions>
         </OptionsContain>

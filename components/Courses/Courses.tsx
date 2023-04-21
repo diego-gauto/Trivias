@@ -65,7 +65,6 @@ const Courses = () => {
         setSeasonIndex(0);
         setLessonIndex(0);
       }
-      console.log(courseForModal[0]);
       setCourseForModal(courseForModal[0]);
       setVideoCourse(courseforVideo[0]);
       setLoading(false);

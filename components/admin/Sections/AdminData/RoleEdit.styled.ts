@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export const ModalContain = styled.div`
-display: flex;
-flex-direction: column;
-//height: 0px;
-padding: 15px;
-gap: 20px;
-  @font-face{
-    font-family:Montserrat;
-    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  display: flex;
+  flex-direction: column;
+  //height: 0px;
+  padding: 15px;
+  gap: 20px;
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  @font-face{
-    font-family:Raleway;
-    src:url(../fonts/Raleway-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway-VariableFont_wght.ttf);
   }
 `;
 export const IconRoleContain = styled.div`
@@ -24,18 +24,18 @@ export const TitleContain = styled.div`
   justify-content: space-between;
 `;
 export const SectionOptions = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 `;
 export const RowContain = styled.div`
-display: flex;
-gap: 20px;
-justify-content: space-between;
-&:hover{
-  cursor: pointer;
-}
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const OptionsContain = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ export const OptionsContain = styled.div`
 `;
 export const Title = styled.p`
   font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const SelectedRoleContain = styled.div`
@@ -52,17 +52,26 @@ export const SelectedRoleContain = styled.div`
   font-size: 15px;
   width: 180px;
   padding: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-block: 5px;
   border-radius: 15px;
   gap: 10px;
-  border: 1px solid #6717CD;
+  border: 1px solid #6717cd;
   z-index: 5;
-  li{
+  li {
     list-style-type: none;
   }
-  input{
+  input {
     //z-index: -1;
+  }
+  .role-row {
+    display: flex;
+    flex-direction: column;
+    .tasks {
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;
 export const Info = styled.div`
