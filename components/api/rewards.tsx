@@ -99,3 +99,14 @@ export const updateRequestStatusApi = async (request: any) => {
       return error
     });
 };
+export const getAllRewardDataApi = async (userId: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "rewards/getCourse/" + userId, userId)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

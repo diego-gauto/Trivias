@@ -113,7 +113,6 @@ const RewardSlider = (props: reward_slider) => {
     }
     if (type == "certificates") {
       tempFilter = courses;
-      tempFilter.sort((a: any, b: any) => a.total - b.total);
       slides = tempFilter;
       setTexts({
         header: "Certificados por desbloquear",

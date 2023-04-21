@@ -11,7 +11,7 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
 import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
-import { getClaimedReward, getRewardsApi } from "../../../components/api/rewards";
+import { getAllRewardDataApi, getClaimedReward, getRewardsApi } from "../../../components/api/rewards";
 import { getUserApi } from "../../../components/api/users";
 import { getCoursesApi, getLessonsFromUserId } from "../../../components/api/lessons";
 
@@ -65,12 +65,11 @@ const Rewards = () => {
   }
   const getRewardData = async (user: any) => {
     let nextCourseCertificate: any = [];
-    let completedCertificates: number = user.user_certificates.length;
+    let completedCertificates: any = [];
     let tempDayCount: any = today - user.start_date;
     let getMonth: any;
-    let lesson_users: any = [];
+    let requests: any;
     let tempRewards: any = [];
-    let completeCertificates: any = [];
     if (user.level === 1) {
       if (user.start_date === 0) {
         getMonth = 0;
@@ -85,83 +84,28 @@ const Rewards = () => {
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
     let tempTimeLevel: any = Math.floor(getMonth);
-    await getClaimedReward(user.user_id).then(async (res) => {
-      setUserReward(res);
-    })
     await getRewardsApi().then(async (res) => {
       await Promise.all(res.map((reward: any) => {
         tempRewards.push(reward);
       }))
       setRewards(res);
-
     })
-    await getLessonsFromUserId(user.user_id).then((res) => {
-      lesson_users = res;
-    })
-    await getCoursesApi().then(async (res) => {
-      await Promise.all(res.map(async (course: any) => {
-        let count: number = 0;
-        let lessonsDone: number = 0;
-        let courseIdWithCertificate: number = 0;
-        user.user_certificates.map((userCert: any) => {
-          if (userCert.course_id === course.id) {
-            courseIdWithCertificate = userCert.course_id
-            completeCertificates.push({
-              title: course.title,
-              about: course.about,
-              professor: course.professors[0],
-              type: course.type,
-              color: course.certificate_color,
-              created_at: course.created_at,
-              image: course.image,
-              courseId: course.id,
-            })
-          }
-        })
-        course.seasons.map((season: any) => {
-          season.lessons.map((lesson: any) => {
-            lesson_users.map((lessonUser: any) => {
-              if (lesson.id === lessonUser.lessons_id) {
-                lessonsDone++;
-              }
-            })
-            count++;
-          })
-        });
-        course.completeLessons = lessonsDone;
-        course.totalLessons = count;
-        let progress = lessonsDone / count;
-        course.progress = progress;
-        course.lessonsLeft = count - lessonsDone;
-        if (progress !== 0 && courseIdWithCertificate === 0) {
-          nextCourseCertificate.push({
-            title: course.title,
-            about: course.about,
-            professor: course.professors[0],
-            type: "certificates",
-            color: course.certificate_color,
-            created_at: course.created_at,
-            progress: course.progress,
-            image: course.image,
-            courseId: course.id,
-            lessonsLeft: course.lessonsLeft,
-            totalLessons: course.totalLessons,
-            certificates: 2,
-          });
-        }
-      }));
-      setCompleteCertificates(completeCertificates);
-      nextCourseCertificate = nextCourseCertificate.sort((a: any, b: any) => b.progress - a.progress);
-      setCourses(nextCourseCertificate);
-    })
+    await getAllRewardDataApi(user.id).then((res) => {
+      completedCertificates = res.certificates;
+      nextCourseCertificate = res.nextCertificates;
+      requests = res.requests;
+    });
     let data = {
       reward: tempRewards,
       user: user,
       nextCourseCertificate: nextCourseCertificate[0],
-      totalCertificates: completedCertificates,
+      totalCertificates: completedCertificates.length,
       monthCompleted: tempTimeLevel,
       monthPercentage: getMonth
     }
+    setUserReward(requests);
+    setCompleteCertificates(completedCertificates);
+    setCourses(nextCourseCertificate);
     getNextRewards(data);
   }
   const getNextRewards = (data: any) => {
@@ -413,7 +357,7 @@ const Rewards = () => {
                 user={userData}
                 score={userData.score}
                 months={timeLevel}
-                certificates={userData.certificates?.length ? userData.certificates?.length : 0}
+                certificates={completeCertificates.length}
                 rewards={rewards}
                 type={val.type}
                 innerWidth={innerWidth}
