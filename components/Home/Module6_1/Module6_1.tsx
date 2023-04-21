@@ -18,6 +18,7 @@ import {
   FooterAText,
   FooterAText_1,
   FooterAText_2,
+  FooterAText_3,
   FooterAIcons_1,
   FooterBIcons,
   FooterBIcons_1,
@@ -162,9 +163,11 @@ export const Module6_1 = (props: IModule6_1) => {
                 </a>
               </MoreTextMobile>
               <FooterAText_1 onClick={() => { setShowAbout(true) }}>Aviso de privacidad</FooterAText_1>
-              <FooterAText_2>Términos y condiciones</FooterAText_2>
-              {/* <FooterAText_3>Políticas de cancelación</FooterAText_3>
-              <FooterAText_3>Trabaja con nosotros</FooterAText_3> */}
+              <FooterAText_2 onClick={() => { setShowTerms(true) }}>Términos y condiciones</FooterAText_2>
+              {/* <FooterAText_3>Políticas de cancelación</FooterAText_3> */}
+              <a href="https://shelled-adasaurus-589.notion.site/Trabaja-en-Gonvar-bf52237ee52f4e109c39e2c53f83d6a8" target="_blank" style={{ textDecoration: "none" }}>
+                <FooterAText_3>Trabaja con nosotros</FooterAText_3>
+              </a>
             </FooterAText>
             <FooterBIcons >
               <div className="content">

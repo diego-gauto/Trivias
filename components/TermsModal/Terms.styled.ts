@@ -43,5 +43,9 @@ export const TermsContainer = styled.div`
     span {
       color: #a733e4;
     }
+    .underline {
+      text-decoration: underline;
+      color: #3f1168;
+    }
   }
 `;
