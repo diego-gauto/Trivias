@@ -189,8 +189,6 @@ export const Module6_1 = (props: IModule6_1) => {
             </FooterBIcons>
           </PineappleTextContainer>
         </ContainerMain >
-        <Terms show={showTerms} setShow={setShowTerms} />
-        <About show={showAbout} setShow={setShowAbout} />
       </GeneralContainer >
     </>
   )
