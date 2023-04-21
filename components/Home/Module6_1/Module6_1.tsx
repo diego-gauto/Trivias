@@ -1,5 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import 'swiper/css';
@@ -13,63 +12,21 @@ import {
   People,
   PeopleContainer,
   GeneralContainer,
-  ContainerMain2,
-  Line,
   MoreText,
-  MoreText_1,
   MoreText_2,
   MoreText_3,
   FooterAText,
   FooterAText_1,
   FooterAText_2,
-  FooterAText_3,
-  FooterAIcons,
   FooterAIcons_1,
   FooterBIcons,
   FooterBIcons_1,
-  FooterEnding,
-  FooterEndText1,
-  GonvarFooterLogo,
-  SeparingLine,
-  CenterFooterContent,
-  LeftFooterContent,
-  FooterTextLine,
   PineappleTextContainer,
-  FooterComplement,
 } from "./Module6_1.styled";
 import {
-  BgColorMobile,
-  CenterFooterContentMobile,
-  ContainerMain2Mobile,
-  ContainerMainMobile,
-  FooterAIconsMobile,
-  FooterAIcons_1Mobile,
-  FooterATextMobile,
-  FooterAText_1Mobile,
-  FooterAText_2Mobile,
-  FooterAText_3Mobile,
-  FooterBIconsMobile,
-  FooterBIcons_1Mobile,
-  FooterEndingMobile,
-  FooterEndText1Mobile,
-  FooterTextLineMobile,
-  GeneralContainerMobile,
-  GonvarFooterLogoMobile,
-  LeftFooterContentMobile,
   MoreTextMobile,
-  MoreText_1Mobile,
   MoreText_2Mobile,
   MoreText_3Mobile,
-  PeopleContainerMobile,
-  PeopleMobile,
-  SeparingLineMobile,
-  SliderContainerMobile,
-  SliderSectionTitleMobile,
-  SwiperContainer,
-  SwiperContainerMoreReduced,
-  SwiperContainerReduced,
-  TittleAMobile,
-  TittleBMobile
 } from "./Module6_1Mobile.styled";
 
 
@@ -87,11 +44,15 @@ import { IModule6_1 } from "./IModule6_1";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { SlideModule_1 } from "./SlideModule_1/SlideModule_2";
 import Link from "next/link";
+import About from "../../AboutModal/About";
+import Terms from '../../TermsModal/Terms';
 SwiperCore.use([Autoplay]);
 
 export const Module6_1 = (props: IModule6_1) => {
   const swiperRef = useRef<SwiperCore>();
   const { slideData } = props;
+  const [showAbout, setShowAbout] = useState<boolean>(false);
+  const [showTerms, setShowTerms] = useState<boolean>(false);
   var slideDataArr = [];
   slideDataArr = slideData;
   const onInit = (swiper: SwiperCore) => {
@@ -200,7 +161,7 @@ export const Module6_1 = (props: IModule6_1) => {
                   <MoreText_3Mobile>Tienda</MoreText_3Mobile>
                 </a>
               </MoreTextMobile>
-              <FooterAText_1>Aviso de privacidad</FooterAText_1>
+              <FooterAText_1 onClick={() => { setShowAbout(true) }}>Aviso de privacidad</FooterAText_1>
               <FooterAText_2>Términos y condiciones</FooterAText_2>
               {/* <FooterAText_3>Políticas de cancelación</FooterAText_3>
               <FooterAText_3>Trabaja con nosotros</FooterAText_3> */}
@@ -225,6 +186,8 @@ export const Module6_1 = (props: IModule6_1) => {
             </FooterBIcons>
           </PineappleTextContainer>
         </ContainerMain >
+        <Terms show={showTerms} setShow={setShowTerms} />
+        <About show={showAbout} setShow={setShowAbout} />
       </GeneralContainer >
     </>
   )
