@@ -30,7 +30,8 @@ export const CoursesContain = styled.div`
       }
       &:hover {
         .arrows {
-          transition: 0.5s ease all;
+          z-index: 50;
+          transition: 0.1s ease all;
           opacity: 1;
         }
       }
