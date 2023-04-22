@@ -55,9 +55,22 @@ export const LessonContainer = styled.div`
             .close {
               cursor: pointer;
             }
+            .extra-no-hmk {
+              margin: 0;
+              font-size: 14px;
+              cursor: pointer;
+              text-decoration: none;
+              color: black;
+            }
             .extra-hmk {
               margin: 0;
               font-size: 14px;
+              cursor: pointer;
+              text-decoration: none;
+              color: black;
+              &:hover {
+                font-weight: 600;
+              }
             }
           }
         }

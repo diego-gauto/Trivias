@@ -15,6 +15,7 @@ import { createLessonFromApi, deleteLessonFromApi, getLessonFromApi, updateLesso
 import ReactPlayer from 'react-player';
 import { updateLessonHomeWorks, updateLessonImage } from '../../../../../store/actions/courseActions';
 import { AiOutlineClose } from 'react-icons/ai';
+import Link from 'next/link';
 
 const Lessons = () => {
   const [selectQuizHw, setSelectQuizHw] = useState<boolean>(false);
@@ -154,7 +155,7 @@ const Lessons = () => {
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
         imageComp.src = reader.result;
-        tempExtraMaterial.push(reader.result)
+        tempExtraMaterial.push({ material: reader.result });
         setExtraMaterial(tempExtraMaterial);
         setMaterialLoader(false);
       };
@@ -220,7 +221,7 @@ const Lessons = () => {
     tempQuiz.questions[index].answers.splice(ind, 1)
     setQuiz({ ...tempQuiz })
   }
-  const createLesson = () => {
+  const createLesson = async () => {
     setLoader(true);
     if (lesson.quiz === true) {
       lesson.quizzes = quiz;
@@ -230,13 +231,13 @@ const Lessons = () => {
     }
     lesson.extraMaterial = extraMaterial;
     let tempErrors: any = {
-      title: lesson.title === "" ? true : false,
-      number: lesson.number === 0 ? true : false,
-      about: lesson.about === "" ? true : false,
-      link: lesson.link === "" ? true : false,
-      // points: lesson.points === 0 ? true : false,
-      // banner: lesson.banner === "" ? true : false,
-      objectives: lesson.objectives === "" ? true : false,
+      // title: lesson.title === "" ? true : false,
+      // number: lesson.number === 0 ? true : false,
+      // about: lesson.about === "" ? true : false,
+      // link: lesson.link === "" ? true : false,
+      // // points: lesson.points === 0 ? true : false,
+      // // banner: lesson.banner === "" ? true : false,
+      // objectives: lesson.objectives === "" ? true : false,
       // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,
       // hoemWorkAbout:lesson.lesson_homeworks.about ==="" ? true : false,
       // quizTitle:lesson.quizzes.title ==="" ? true : false,
@@ -253,11 +254,11 @@ const Lessons = () => {
       let materialContent = extraMaterial;
       lesson.extraMaterial = extraMaterial.map((b: any) => {
         let extraMat = {
-          image: '',
+          material: '',
         }
         return extraMat
       })
-      createLessonFromApi(lesson).then(async (res) => {
+      await createLessonFromApi(lesson).then(async (res) => {
         lesson.id = res.data;
         await updateLessonImage(courseID, seasonID, tempImage, res.data).then((banner) => {
           lesson.banner = banner;
@@ -266,12 +267,12 @@ const Lessons = () => {
         })
         if (materialContent.length > 0) {
           materialContent.forEach(async (image: any) => {
-            await updateLessonHomeWorks(courseID, seasonID, image, res.data).then((url) => {
-              image = url
+            await updateLessonHomeWorks(courseID, seasonID, image.material, res.data).then((url) => {
+              image.material = url
             })
           });
           materialContent.forEach(async (image: any, index: number,) => {
-            await updateLessonHomeWorks(courseID, seasonID, image, res.data).then((url) => {
+            await updateLessonHomeWorks(courseID, seasonID, image.material, res.data).then((url) => {
               let sentData = {
                 material: url,
                 id: res.lesson_material[index]
@@ -290,6 +291,7 @@ const Lessons = () => {
 
   }
   const updateLesson = async () => {
+    setLoader(true);
     if (lesson.quiz === true) {
       lesson.quizzes = quiz;
       lesson.old_quiz = oldQuiz;
@@ -297,13 +299,6 @@ const Lessons = () => {
     if (lesson.homework === true) {
       lesson.lesson_homeworks = homeWorkData;
     }
-    lesson.extraMaterial = extraMaterial;
-    if (bannerImage !== "") {
-      await updateLessonImage(courseID, seasonID, lesson.banner, +lessonID).then((res) => {
-        lesson.banner = res;
-      })
-    }
-    setLoader(true);
     let tempErrors: any = {
       title: lesson.title === "" ? true : false,
       number: lesson.number === 0 ? true : false,
@@ -311,7 +306,7 @@ const Lessons = () => {
       link: lesson.link === "" ? true : false,
       points: lesson.points === 0 ? true : false,
       banner: lesson.banner === "" ? true : false,
-      objectives: lesson.objectives === "" ? true : false,
+      // objectives: lesson.objectives === "" ? true : false,
       // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,
       // hoemWorkAbout:lesson.lesson_homeworks.about ==="" ? true : false,
       // quizTitle:lesson.quizzes.title ==="" ? true : false,
@@ -320,11 +315,26 @@ const Lessons = () => {
       // questions:lesson.quizzes.questions.length === 0 ? true : false,
       // answers: false,
     }
+    console.log(lesson)
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
     lesson.id = +lessonID;
     if (!checkErrors) {
-      updateLessonFromApi(lesson).then(() => {
+      if (bannerImage !== "") {
+        await updateLessonImage(courseID, seasonID, lesson.banner, +lessonID).then((url) => {
+          lesson.banner = url;
+        })
+      }
+      lesson.extraMaterial = extraMaterial;
+      await Promise.all(lesson.extraMaterial.map(async (mat: any) => {
+        if (!mat.id) {
+          await updateLessonHomeWorks(courseID, seasonID, mat.material, +lessonID).then((url) => {
+            mat.material = url;
+          })
+        }
+      }));
+      console.log(lesson);
+      await updateLessonFromApi(lesson).then(() => {
         setLoader(false);
         returnToSeasons();
       })
@@ -391,10 +401,14 @@ const Lessons = () => {
           })
           setOldQuiz(tempQuiz);
         }
+        if (res.lesson_materials) {
+          setExtraMaterial(res.lesson_materials);
+        }
         setUpdateLoader(false);
       })
     }
   }, [])
+  console.log(extraMaterial)
   if (updateLoader) {
     return (
       <LoaderButton />
@@ -594,7 +608,13 @@ const Lessons = () => {
                     return (
                       <div key={"hwks_" + index} className="hw-contain">
                         <AiOutlineClose className='close' onClick={() => { removeExtraMaterial(index) }} />
-                        <p className="extra-hmk">Tarea {index + 1}</p>
+                        {
+                          extra.id ?
+                            <Link href={extra.material}>
+                              <a target="_blank" className="extra-hmk">Tarea {index + 1}</a>
+                            </Link>
+                            : <a target="_blank" className="extra-no-hmk">Tarea {index + 1}</a>
+                        }
                       </div>
                     )
                   })
