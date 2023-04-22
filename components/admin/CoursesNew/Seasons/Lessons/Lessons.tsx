@@ -315,7 +315,6 @@ const Lessons = () => {
       // questions:lesson.quizzes.questions.length === 0 ? true : false,
       // answers: false,
     }
-    console.log(lesson)
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
     lesson.id = +lessonID;
@@ -333,7 +332,6 @@ const Lessons = () => {
           })
         }
       }));
-      console.log(lesson);
       await updateLessonFromApi(lesson).then(() => {
         setLoader(false);
         returnToSeasons();
@@ -408,7 +406,6 @@ const Lessons = () => {
       })
     }
   }, [])
-  console.log(extraMaterial)
   if (updateLoader) {
     return (
       <LoaderButton />
