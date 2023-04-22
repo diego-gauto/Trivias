@@ -367,6 +367,7 @@ const Lessons = () => {
           banner: res.banner,
           objectives: res.objectives,
           duration: res.duration,
+          extra_material: res.extra_material,
           quiz: res.quiz ? true : false,
           homework: res.homework ? true : false,
           seasons_id: res.seasons_id,
@@ -552,6 +553,7 @@ const Lessons = () => {
                 occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
                 anim id est laborum."
                 className="input-textarea"
+                defaultValue={lesson.extra_material}
                 onChange={(e: any) => {
                   setLesson({
                     ...lesson, extra_material: e.target.value
