@@ -45,13 +45,13 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
             <p className='title'>Objetivo principal</p>
             <p>{course.about}.</p>
             {
-              course.lesson_material.length > 0 &&
+              data.lesson_material.length > 0 &&
               <>
                 <p className='support-material'>Material de Apoyo</p>
                 {
-                  course.lesson_material.map((extra: any, index: number) => {
+                  data.lesson_material.map((extra: any, index: number) => {
                     return (
-                      <a className='pdf' target="_blank" download href={extra.material}>{index}.Descargar Material</a>
+                      <a className='pdf' target="_blank" download={extra.material} href={extra.material}>{index + 1}. Descargar Material</a>
                     )
                   })
                 }

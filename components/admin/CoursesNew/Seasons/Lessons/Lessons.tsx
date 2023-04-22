@@ -540,7 +540,7 @@ const Lessons = () => {
             </div>
           </div>
           <div className="rows">
-            <div className="input-contain">
+            {/* <div className="input-contain">
               <label className="input-label">
                 Material Adicional
               </label>
@@ -560,7 +560,7 @@ const Lessons = () => {
                   })
                 }}
               />
-            </div>
+            </div> */}
             <div className="input-contain">
               <label className="input-label">
                 Objetivos
