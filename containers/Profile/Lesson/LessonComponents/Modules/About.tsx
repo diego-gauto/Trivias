@@ -14,7 +14,6 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [index, setIndex] = useState<number>(0)
-  console.log(course);
   return (
     <>
       <TitleContain>
