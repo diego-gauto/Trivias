@@ -82,7 +82,6 @@ const Lesson = () => {
     })
   }
   const getDataForNextLesson = (courseData: any) => {
-    console.log('hola')
     if (courseData.seasons[season].lessons[+lesson + 1]) {
       setnextLesson({
         lessonIndex: +lesson + 1,

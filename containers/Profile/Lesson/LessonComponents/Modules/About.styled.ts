@@ -134,7 +134,20 @@ export const LessonContent = styled.div`
     font-weight: 700;
     font-size: 18px;
   }
-
+  .support-material {
+    color: #f8a44c;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .pdf {
+    color: #74549c;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      font-weight: 700;
+    }
+  }
   @media (max-width: 1023px) {
     font-size: 12px;
   }

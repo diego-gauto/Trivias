@@ -14,7 +14,7 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [index, setIndex] = useState<number>(0)
-
+  console.log(course);
   return (
     <>
       <TitleContain>
@@ -44,6 +44,19 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
           <LessonContent>
             <p className='title'>Objetivo principal</p>
             <p>{course.about}.</p>
+            {
+              course.lesson_material.length > 0 &&
+              <>
+                <p className='support-material'>Material de Apoyo</p>
+                {
+                  course.lesson_material.map((extra: any, index: number) => {
+                    return (
+                      <a className='pdf' target="_blank" download href={extra.material}>{index}.Descargar Material</a>
+                    )
+                  })
+                }
+              </>
+            }
             {/* <p className='title'>Especificaciones</p>
             <p>{data.about}.</p> */}
             {/* {data.extra.length > 0 && <p className='title'>Material de apoyo</p>}
