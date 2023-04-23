@@ -50,7 +50,7 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
                 {
                   data.lesson_material.map((extra: any, index: number) => {
                     return (
-                      <a className='pdf' target="_blank" download={extra.material} href={extra.material}>{index + 1}. Descargar Material</a>
+                      <a key={"extra_material_" + index} className='pdf' target="_blank" download={extra.material} href={extra.material}>{index + 1}. Descargar Material</a>
                     )
                   })
                 }
