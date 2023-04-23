@@ -5,7 +5,7 @@ import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserAction
 import { addCourseMembershipApi } from '../../api/admin';
 import { addPastUsers } from '../../api/auth';
 import { getHomeworksApi } from '../../api/homeworks';
-import { getCourseApi } from '../../api/lessons';
+import { addUserCertificateApi, getCourseApi } from '../../api/lessons';
 import { addPastUserProgress, getPastUsers, getUserApi, updateScorePastUser } from '../../api/users';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
@@ -130,6 +130,8 @@ const HomeWork = () => {
 
       const headersRow = getHeaderArray(csvRecordsArray);
       const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+      // console.log(records);
+
       setHeadersRow(headersRow)
       setRecords(records)
       // getJsonData(records, headersRow)
@@ -165,13 +167,6 @@ const HomeWork = () => {
   const getJsonData = async (records: any, headersRow: any) => {
     const jsonData = records
     const headerJson = headersRow
-    // await Promise.all(jsonData.map(async (x: any, index: number) => {
-    //   let rec = {
-    //     records: x
-    //   }
-    //   await addPastUsers(rec);
-    // }))
-    let arr = new Array(800);
     console.log(countdown);
     let rec = {
       records: jsonData.slice((countdown - 1) * 1, (countdown * 1))
@@ -188,12 +183,12 @@ const HomeWork = () => {
   useEffect(() => {
     let timeout: any;
     if (records) {
-      if (countdown <= 29) {
+      if (countdown <= 10005) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 1);
           // addDays(records, headersRow);
-          // addProgress()
-        }, 100);
+          addProgress()
+        }, 50);
         return () => clearTimeout(timeout);
       }
     }
@@ -202,10 +197,12 @@ const HomeWork = () => {
 
   useEffect(() => {
     let range = {
-      start: 40007,
-      end: 41543
+      start: 39999,
+      end: 50000
     }
     getPastUsers(range).then((res) => {
+      console.log(res.data.past);
+
       setPastUsers(res.data.past);
     })
   }, [])
@@ -223,16 +220,25 @@ const HomeWork = () => {
                 score: +element.properties[2],
                 userId: user.id
               }
-              await updateScorePastUser(tempUser);
-              await getCourseApi(+element.properties[1]).then((course) => {
+              // await updateScorePastUser(tempUser);
+              await getCourseApi(+element.properties[1]).then(async (course) => {
                 if (course.lessons && course.lessons.length > 0) {
-                  course.lessons.forEach(async (lesson: any) => {
-                    let tempLesson = {
-                      lessonId: lesson.id,
-                      userId: user.id
-                    }
-                    return await addPastUserProgress(tempLesson)
-                  });
+                  let ids = {
+                    userId: user.id,
+                    courseId: course.id,
+                  }
+                  let tempCertificate = {
+                    ...ids,
+                    folio: `${ids.courseId}-${ids.userId}`
+                  }
+                  await addUserCertificateApi(tempCertificate)
+                  // course.lessons.forEach(async (lesson: any) => {
+                  //   let tempLesson = {
+                  //     lessonId: lesson.id,
+                  //     userId: user.id
+                  //   }
+                  //   return await addPastUserProgress(tempLesson)
+                  // });
                 }
               })
             }
@@ -268,7 +274,7 @@ const HomeWork = () => {
     <AdminContain>
       <HWContainer>
         <Container>
-          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
+          <input type="file" onChange={(e) => { uploadCsv(e) }} />
           {/* <button onClick={addProgress}>add</button> */}
           <TitleContain>
             <p>

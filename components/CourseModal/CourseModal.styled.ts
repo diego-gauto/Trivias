@@ -412,19 +412,29 @@ export const CourseContain = styled.div<{ level: any }>`
         }
       }
       ${(props) =>
-        (props.level == "Muy Fácil" || props.level == "Fácil") &&
+        props.level == "Muy Fácil" &&
         css`
-          color: #6678f8;
+          color: #006ca8;
         `}
       ${(props) =>
-        (props.level == "Avanzado" || props.level == "Máster") &&
+        props.level == "Fácil" &&
         css`
-          color: #ef1155;
+          color: #8c5098;
         `}
-    ${(props) =>
+      ${(props) =>
         props.level == "Intermedio" &&
         css`
-          color: #12a071;
+          color: #ec7501;
+        `}
+    ${(props) =>
+        props.level == "Avanzado" &&
+        css`
+          color: #149e62;
+        `}
+      ${(props) =>
+        props.level == "Máster" &&
+        css`
+          color: #d22978;
         `}
     }
     .time {
