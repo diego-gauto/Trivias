@@ -32,7 +32,7 @@ const SideBar = () => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         let user = userDataAuth.user;
-        if (user.role === "user" || (user.role === "admin" && user.roles.filter((x: any) => x.view === 1).length === 0)) {
+        if (user.role === "user") {
           router.push({ pathname: "/" });
         }
         user.roles.forEach((role: any) => {
@@ -79,53 +79,47 @@ const SideBar = () => {
   useEffect(() => {
     if (userData !== null) {
       if (userData.role == "admin") {
-        if (router.pathname == "/admin/Courses" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Courses" && userData.roles[0].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Pago" && userData.pay == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Pago" && userData.roles[6].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Coupons" && userData.coupons == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Coupons" && userData.roles[1].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Landing" && userData.landing == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Landing" && userData.roles[5].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Rewards" && userData.rewards == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Rewards" && userData.roles[3].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Users" && userData.users == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Users" && userData.roles[4].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Edit" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/Blog" && userData.roles[2].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/EditLesson" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+        if (router.pathname == "/admin/HomeWork" && userData.roles[7].view == 0) {
+          router.push({ pathname: "/" });
         }
-        if (router.pathname == "/admin/Teacher" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Materials" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/CourseAtributes" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
+        // if (router.pathname == "/admin/Edit" && userData.courses == false) {
+        //   router.push({ pathname: "/" });
+        // }
+        // if (router.pathname == "/admin/EditLesson" && userData.courses == false) {
+        //   router.push({ pathname: "/" });
+        // }
+        // if (router.pathname == "/admin/Teacher" && userData.courses == false) {
+        //   router.push({ pathname: "/" });
+        // }
+        // if (router.pathname == "/admin/Materials" && userData.courses == false) {
+        //   router.push({ pathname: "/" });
+        // }
+        // if (router.pathname == "/admin/CourseAtributes" && userData.courses == false) {
+        //   router.push({ pathname: "/" });
+        // }
         if (router.pathname == "/admin/Sections") {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
+          router.push({ pathname: "/" });
         }
       }
     }
