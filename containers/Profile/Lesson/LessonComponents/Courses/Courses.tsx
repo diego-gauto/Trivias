@@ -90,10 +90,12 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
         <p className='title'>{course?.title}</p>
         <p>Un curso de <span>{course?.professors[0]?.name}</span></p>
         <div className='level-container'>
-          {(course?.dificulty == "Muy Fácil" || course?.dificulty == "Fácil") && <img style={{ width: "auto" }} src="../images/Landing/blue.png" alt="" />}
-          {(course?.dificulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/Landing/green.png" alt="" />}
-          {(course?.dificulty == "Avanzado" || course?.dificulty == "Máster") && <img style={{ width: "auto" }} src="../images/Landing/red.png" alt="" />}
-          <Text03 style={{ padding: 0 }} level={course?.dificulty}><span>{course?.dificulty}</span></Text03>
+          {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
+          {(course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/iconoLila.png" alt="" />}
+          {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/iconoNaranja.png" alt="" />}
+          {(course.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/iconoVerde.png" alt="" />}
+          {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/iconoRosa.png" alt="" />}
+          <Text03 style={{ padding: 0 }} level={course?.difficulty}><span>{course?.difficulty}</span></Text03>
         </div>
       </div>
       {(certficate && !responsive1124) && <div className="certificate-container">
@@ -129,7 +131,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
               <div className='module'>
                 {selected[index] && <CourseProgress data={temp} title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
                 <div>
-                  <p className='title'>{seasons[index]?.name ? seasons[index]?.name : `Módulo ${index + 1}`}</p>
+                  <p className='title'> {season?.name == undefined ? `Módulo ${index + 1}` : season.name}</p>
                   <Episode>
                     {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
                   </Episode>

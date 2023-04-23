@@ -104,7 +104,7 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
                     {x.tasks.map((task: any, indexT: number) => {
                       return (
                         <div className="tasks">
-                          <input type="chechkbox" name={task.task} defaultChecked={task.active} onChange={(e) => handleChange(e, indexR, indexT)} />
+                          <input type="checkbox" name={task.task} defaultChecked={task.active} onChange={(e) => handleChange(e, indexR, indexT)} />
                           <li>{task.task}</li>
                         </div>
                       )
