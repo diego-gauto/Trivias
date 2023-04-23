@@ -22,6 +22,7 @@ import { getTeacher, getWholeCourse, getWholeCourses } from "../store/actions/co
 import { getLandingData } from "../store/actions/LandingActions";
 import { getUserApi } from "../components/api/users";
 import { getCoursesApi } from "../components/api/lessons";
+import { getLandingProductApi, getLandingReviewApi } from "../components/api/admin";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,8 @@ const Homepage = () => {
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
   const [courseGonvarPlus, setCourseGonvarPlus] = useState<any>([]);
   const [courseSEPData, setCourseSEPData] = useState<any>([]);
+  const [reviews, setReviews] = useState<any>([]);
+  const [product, setProduct] = useState<any>([]);
   const [userData, setUserData] = useState<any>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   let today = new Date().getTime() / 1000;
@@ -61,6 +64,7 @@ const Homepage = () => {
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
     setLandingData(landingData);
+    console.log(landingData.reseniasSectionData)
     setLoading(false);
   }
   // const getCourses = async (professor: any) => {
@@ -173,6 +177,27 @@ const Homepage = () => {
     })
   }
   useEffect(() => {
+    getLandingReviewApi().then((res) => {
+      console.log(res);
+      setReviews(res);
+    })
+    getLandingProductApi().then((res) => {
+      let productData: any = [];
+      res.forEach((product: any) => {
+        let tempProduct = {
+          clickURL: product.url,
+          compraRapida: product.purchase === 0 ? false : true,
+          currency: product.currency,
+          disponible: product.available === 0 ? false : true,
+          imgURL: product.image,
+          title: product.title,
+          isNew: product.is_new === 0 ? false : true,
+          precio: product.price,
+        }
+        productData.push(tempProduct)
+      });
+      setProduct(productData);
+    })
     fetchLandingData();
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -233,7 +258,7 @@ const Homepage = () => {
         } />
       }
       <Module5_1 slideData={landingData.experienciasSectionData} />
-      <Module6_1 slideData={landingData.productosDestacadosData} />
+      <Module6_1 slideData={product} />
       {/* <Footer /> */}
     </Container>
   )

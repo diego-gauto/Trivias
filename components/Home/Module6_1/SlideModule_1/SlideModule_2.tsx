@@ -67,7 +67,7 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
         <Text02>{title} </Text02>
         {
           disponible ? <>
-            <Text01   >$ {precio} </Text01> <Text03   >{currency} </Text03>
+            <Text01   >$ {precio}.00 </Text01> <Text03   >{currency} </Text03>
           </>
             :
             <>
