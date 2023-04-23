@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { updateCourseImage } from '../../../../store/actions/courseActions';
 import { updateCourseApi } from '../../../api/courses';
+import { getUserApi } from '../../../api/users';
 import { LoaderButton, OptionColor, SelectOption } from '../Courses.styled';
 import { IAllCourses, ICategories, IMaterials, IProfessors } from './IAllCourses';
 const AllCourses = (props: IAllCourses) => {
@@ -106,6 +107,14 @@ const AllCourses = (props: IAllCourses) => {
     "Publicado", "No Publicado"
   ]
   const GonvarImg = "/images/purchase/logo.png";
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
   const addProfessors = (val: any) => {
     let tempProfessor = course.professors;
     let tempIndex = 0;
@@ -168,6 +177,10 @@ const AllCourses = (props: IAllCourses) => {
     setCourse({ ...course, materials: tempMaterials })
   }
   const editCourse = async () => {
+    if (userData.role === "admin" && userData.roles[0].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     setLoader(true);
     let tempErrors: any = {
       errorTitle: course.title === "" ? true : false,

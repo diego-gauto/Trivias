@@ -76,6 +76,61 @@ const SideBar = () => {
   } catch (error) {
   }
 
+  useEffect(() => {
+    if (userData !== null) {
+      if (userData.role == "admin") {
+        if (router.pathname == "/admin/Courses" && userData.courses == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Pago" && userData.pay == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Coupons" && userData.coupons == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Landing" && userData.landing == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Rewards" && userData.rewards == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Users" && userData.users == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Edit" && userData.courses == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/EditLesson" && userData.courses == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Teacher" && userData.courses == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Materials" && userData.courses == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/CourseAtributes" && userData.courses == false) {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+        if (router.pathname == "/admin/Sections") {
+          setIndex(6)
+          router.push({ pathname: "/admin/HomeWork" })
+        }
+      }
+    }
+  }, [userData])
+
   return (
     <Container>
       <div className="tab" style={{ whiteSpace: "pre" }}>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { deleteProduct, updateRewards, updRewardImage } from "../../../../store/actions/RewardActions";
 import { deleteRewardApi, updateRewardApi } from "../../../api/rewards";
+import { getUserApi } from "../../../api/users";
 import { CloseIcon } from "../../Category/Category.styled";
 
 import {
@@ -41,6 +42,14 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     month: false,
     points: false
   });
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -50,6 +59,10 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     };
   }
   const editReward = async () => {
+    if (userData.role === "admin" && userData.roles[3].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (reward.type === "points") {
       reward.month = 0;
     }
@@ -81,6 +94,10 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     }
   }
   const deleteReward = (reward: any) => {
+    if (userData.role === "admin" && userData.roles[3].delete === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (confirm("Desea eliminar esta recompensa?")) {
       deleteRewardApi(reward).then((res) => {
         handleClose();

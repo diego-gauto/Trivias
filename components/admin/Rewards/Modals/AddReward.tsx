@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { addReward, updRewardImage } from "../../../../store/actions/RewardActions";
 import { createRewardApi, updateRewardApi } from "../../../api/rewards";
+import { getUserApi } from "../../../api/users";
 import { CloseIcon } from "../../Category/Category.styled";
 
 import {
@@ -39,6 +40,15 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
     month: false,
     points: false
   });
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
+
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
@@ -48,6 +58,10 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
   }
 
   const createReward = () => {
+    if (userData.role === "admin" && userData.roles[3].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (reward.type === "points") {
       reward.month = 0;
     }

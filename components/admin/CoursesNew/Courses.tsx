@@ -6,6 +6,7 @@ import { createCategoryApi, getCategoriesApi, updateCategoryApi } from '../../ap
 import { createCoursesApi, deleteCourseApi, getCoursesApi, updateCourseApi, updateCourseImageFromApi } from '../../api/courses';
 import { createMaterialApi, getMaterialsApi, updateMaterialApi } from '../../api/materials';
 import { createProfessorApi, getProfessorApi, updateProfessorApi } from '../../api/professors';
+import { getUserApi } from '../../api/users';
 import { AdminContain } from '../SideBar.styled';
 import AllCourses from './AllCourses/AllCourses';
 import { CourseContainer, LoaderButton, OptionColor, SelectOption } from './Courses.styled';
@@ -83,6 +84,14 @@ const Courses = () => {
   const published = [
     "Publicado", "No Publicado"
   ]
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
   const openCourse = (courseIndex: number) => {
     if (openCourseEdit === courseIndex) {
       setOpenCourseEdit(-1);
@@ -155,6 +164,10 @@ const Courses = () => {
     setCourse({ ...course, materials: tempMaterials })
   }
   const createCourse = () => {
+    if (userData.role === "admin" && userData.roles[0].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     setLoader(true);
     let tempErrors: any = {
       errorTitle: course.title === "" ? true : false,
