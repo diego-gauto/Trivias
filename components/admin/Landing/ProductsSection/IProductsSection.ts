@@ -8,7 +8,16 @@ export interface Product {
   title: string;
   subtitle: string;
   precio: number;
-  id: string;
+  id: any;
   file?: File;
-  url: string;
+  url: any;
+  price: number;
+  new_url: any;
+  currency: string;
+  purchase: boolean;
+  is_new: boolean;
+  image: any;
+  new_image: any;
+  img_display: any;
+  available: boolean;
 }

@@ -13,18 +13,19 @@ import {
 } from "../Landing.styled";
 import { IReviewsSectionProps } from './IReviewsSection';
 import { LoaderContain } from "../../../../screens/Login.styled";
+import { updateLandingImage, updateLandingUserImage } from '../../../../store/actions/AdminActions';
+import { updateLandingReviewApi } from '../../../api/admin';
 
 const ReviewsSection = (props: IReviewsSectionProps) => {
   const { reviewsSectionData } = props;
   const [reviewsData, setReviewsData] = useState(reviewsSectionData);
   const [loader, setLoader] = useState(true);
-
   useEffect(() => {
     reviewsData.forEach((element) => {
-      downloadFileWithStoragePath(element.usrImgURL).then((res: any) => {
+      downloadFileWithStoragePath(element.user_image).then((res: any) => {
         element.tempUserImg = res;
       })
-      downloadFileWithStoragePath(element.imgURL).then((res: any) => {
+      downloadFileWithStoragePath(element.image).then((res: any) => {
         element.tempImg = res;
       })
     })
@@ -37,17 +38,36 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
   const updateState = (e: any, key: string, i: number) => {
     const newState = [...reviewsData];
     // @ts-expect-error
-    newState[i][key] = key === "userFile" || "file" ? e.target.files[0] : e.target.value;
+    newState[i][key] = (key === "userfile" || key === "file") ? e.target.files[0] : e.target.value;
     setReviewsData(newState);
   }
 
   const onSave = async () => {
-    const success = saveReviewsData(reviewsData)
-    let alertText = "Cambios realizados correctamente"
-    if (!success) {
-      alertText = "Hubo un error"
-    }
-    alert(alertText)
+    reviewsData.map(async (reviewData) => {
+      if (reviewData.image_new) {
+        await updateLandingImage(reviewData.tempImg, reviewData.id).then((url) => {
+          reviewData.image = url;
+        })
+      }
+      if (reviewData.user_image_new) {
+        await updateLandingUserImage(reviewData.tempUserImg, reviewData.id).then((url) => {
+          reviewData.user_image = url;
+        })
+      }
+      let review = {
+        id: reviewData.id,
+        about: reviewData.about,
+        facebook_url: reviewData.facebook_url,
+        user_name: reviewData.user_name,
+        image: reviewData.image,
+        user_image: reviewData.user_image,
+        new: reviewData.new,
+        date: reviewData.date,
+      }
+      await updateLandingReviewApi(review).then((res) => {
+        console.log(res);
+      })
+    })
   }
   const chunk1 = reviewsData.slice(0, 3);
   const chunk2 = reviewsData.slice(3, 6);
@@ -59,6 +79,7 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       tempReview[i].tempUserImg = reader.result;
+      tempReview[i].user_image_new = reader.result;
       setReviewsData(tempReview);
     };
   }
@@ -69,13 +90,13 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       tempReview[i].tempImg = reader.result;
+      tempReview[i].image_new = reader.result;
       setReviewsData(tempReview);
     };
   }
-
   const getReviewElement = (review: any, num: number) => {
     return (
-      <div className='content'>
+      <div className='content' key={"Review_Data_" + num}>
         {!loader ? <img style={{ width: "100px", marginInline: "auto" }} src={review.tempUserImg} alt="" /> :
           <LoaderContain style={{ position: "relative", width: "60px", height: "60px", alignSelf: "center" }} />}
         <Inputs>
@@ -83,7 +104,7 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
             Imagen de usuario
           </EditText>
           <FolderInput
-            onChange={(e) => { updateState(e, "userFile", num); getImage(e.target.files, num) }}
+            onChange={(e) => { updateState(e, "userfile", num); getImage(e.target.files, num) }}
             type="file"
             placeholder="Seleccionar archivo"
           />
@@ -93,8 +114,8 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
             Reseñador {num + 1}
           </EditText>
           <EditInput
-            onChange={(e) => updateState(e, "username", num)}
-            value={review.username}
+            onChange={(e) => updateState(e, "user_name", num)}
+            value={review.user_name}
             placeholder="Luke Skywalker"
           />
         </Inputs>
@@ -103,8 +124,8 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
             Facebook link:
           </EditText>
           <EditInput
-            onChange={(e) => updateState(e, "usrFacebookURL", num)}
-            value={review.usrFacebookURL}
+            onChange={(e) => updateState(e, "facebook_url", num)}
+            value={review.facebook_url}
             placeholder="facebook.com/gonvar"
           />
         </Inputs>
@@ -112,8 +133,8 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
           <EditText>
             Reseña:
           </EditText>
-          <textarea onChange={(e) => updateState(e, "descripcion", num)}
-            defaultValue={review.descripcion}
+          <textarea onChange={(e) => updateState(e, "about", num)}
+            defaultValue={review.about}
             placeholder="Reseña"></textarea>
         </Inputs>
         {!loader ? <img style={{ width: "100px", marginInline: "auto" }} src={review.tempImg} alt="" /> :

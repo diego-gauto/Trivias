@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { updateLandingProductImage } from '../../../../store/actions/AdminActions';
 import { downloadFileWithStoragePath, saveProductsData } from '../../../../store/actions/LandingActions';
+import { updateLandingProductApi } from '../../../api/admin';
 import { divideArrayInChunks } from '../../../Home/Module5/helpers';
 import {
   ColumnsContainer,
@@ -31,8 +33,8 @@ const ProductsSection = (props: IProductsSectionProps) => {
 
   useEffect(() => {
     productsData.forEach((element) => {
-      downloadFileWithStoragePath(element.imgURL).then((res: any) => {
-        element.url = res
+      downloadFileWithStoragePath(element.image).then((res: any) => {
+        element.img_display = res
       })
     })
     setProductsData(productsData);
@@ -43,14 +45,15 @@ const ProductsSection = (props: IProductsSectionProps) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
-      tempProduct[i].url = reader.result;
+      tempProduct[i].img_display = reader.result;
+      tempProduct[i].new_image = reader.result;
       setProductsData(tempProduct)
     };
   }
 
-  const gerProductElement = ({ clickURL, imgURL, title, subtitle, precio, url }: Product, i: number) => {
+  const gerProductElement = ({ clickURL, imgURL, title, subtitle, price, url, image, img_display }: Product, i: number) => {
     return (
-      <ColumnsContainer2>
+      <ColumnsContainer2 key={"product_landing_" + i}>
         <Inputs>
           <EditText>
             Producto {i + 1}
@@ -66,8 +69,8 @@ const ProductsSection = (props: IProductsSectionProps) => {
             Precio
           </EditText>
           <EditInput
-            onChange={(e) => updateProductState(e, "subtitle", i)}
-            value={precio}
+            onChange={(e) => updateProductState(e, "price", i)}
+            value={price}
             placeholder="Desde $ 12.00"
           />
         </Inputs>
@@ -76,8 +79,8 @@ const ProductsSection = (props: IProductsSectionProps) => {
             Página del Producto
           </EditText>
           <EditInput
-            onChange={(e) => updateProductState(e, "clickURL", i)}
-            value={clickURL}
+            onChange={(e) => updateProductState(e, "url", i)}
+            value={url}
             placeholder="https://google.com"
           />
         </Inputs>
@@ -91,7 +94,7 @@ const ProductsSection = (props: IProductsSectionProps) => {
             placeholder="Seleccionar archivo"
           />
         </Inputs>
-        <img src={url} alt="" />
+        <img src={img_display} alt="" />
       </ColumnsContainer2>
     )
   }
@@ -106,14 +109,29 @@ const ProductsSection = (props: IProductsSectionProps) => {
     )
   })
   const onSave = async () => {
-    const success = await saveProductsData(productsData)
-    let alertText = "Cambios realizados correctamente"
-    if (!success) {
-      alertText = "Hubo un error"
-    }
-    alert(alertText)
-  }
+    productsData.map(async (product) => {
+      if (product.new_image) {
+        await updateLandingProductImage(product.new_image, product.id).then((url) => {
+          product.image = url;
+        })
+      }
+      let prodUpdate = {
+        id: product.id,
+        price: product.price,
+        url: product.url,
+        title: product.title,
+        currency: product.currency,
+        available: product.available,
+        purchase: product.purchase,
+        is_new: product.is_new,
+        image: product.image,
+      }
+      await updateLandingProductApi(prodUpdate).then((res) => {
+        console.log(res);
+      })
+    })
 
+  }
   return (
     <ProfileData style={{ boxShadow: "none", background: "none" }}>
       <ColumnsContainer>

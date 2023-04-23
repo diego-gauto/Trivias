@@ -1,5 +1,4 @@
 import axios from "axios";
-import { user } from "firebase-functions/v1/auth";
 
 export const getAdmins = async () => {
   return axios
@@ -176,6 +175,72 @@ export const getUserByEmailApi = async (user: any) => {
 export const updateUserRoleApi = async (user: any) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "admin/update-role-user", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const getLandingReviewApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "landing/getLandingReview")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const createLandingReviewApi = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "landing/add-landing-review", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateLandingReviewApi = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "landing/update-landing-review", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const getLandingProductApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "landing/getLandingProducts")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const createLandingProductApi = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "landing/add-landing-product", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateLandingProductApi = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "landing/update-landing-product", user)
     .then((res) => {
       return res
     })

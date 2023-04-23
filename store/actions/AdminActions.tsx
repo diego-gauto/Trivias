@@ -426,3 +426,49 @@ export const deleteBlog = async (blog: any) => {
     console.log(error)
   });
 }
+
+const uploadLandingUserImage = (image: string, id: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `landing/review/user_image/${id}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateLandingUserImage = async (image: string, id: number) => {
+  const url = await uploadLandingUserImage(image, id);
+  return url;
+}
+const uploadLandingImage = (image: string, id: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `landing/review/image/${id}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateLandingImage = async (image: string, id: number) => {
+  const url = await uploadLandingImage(image, id);
+  return url;
+}
+const uploadLandingProductImage = (image: string, id: number) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `landing/product/image/${id}`);
+  return new Promise((resolve, reject) => {
+    uploadString(storageRef, image, 'data_url').then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        resolve(downloadURL)
+      });
+    });
+  });
+}
+export const updateLandingProductImage = async (image: string, id: number) => {
+  const url = await uploadLandingProductImage(image, id);
+  return url;
+}
