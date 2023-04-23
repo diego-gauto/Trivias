@@ -3,6 +3,7 @@ import { FiEdit } from "react-icons/fi";
 
 import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
 import { getRequestsApi, getRewardsApi, updateRequestStatusApi } from "../../api/rewards";
+import { getUserApi } from "../../api/users";
 import { AdminContain } from "../SideBar.styled";
 import AddReward from "./Modals/AddReward";
 import EditReward from "./Modals/EditReward";
@@ -18,6 +19,16 @@ const Rewards = () => {
   const [requests, setRequests] = useState([]);
   const [reward, setReward] = useState<any>({});
   const [edit, setEdit] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
+
+
 
   const getAllRequests = () => {
     getRequestsApi().then((res) => {
@@ -54,6 +65,10 @@ const Rewards = () => {
   }
 
   const confirmRequest = (data: any) => {
+    if (userData.role === "admin" && userData.roles[3].request === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (!data.status) {
       var result = confirm("Desea que esta recompensa sea reclamada?");
       if (result === true) {

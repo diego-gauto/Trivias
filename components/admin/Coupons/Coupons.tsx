@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createCoupon, deleteCoupon, getCoupons, updateCoupon } from "../../../store/actions/CouponsActions";
 import { addCouponApi, deleteCouponApi, retrieveCoupons, updateCouponStatusApi } from "../../api/admin";
+import { getUserApi } from "../../api/users";
 
 import { TrashIcon } from "../Courses/Form/Edit.styled";
 import { AdminContain, Table } from "../SideBar.styled";
@@ -35,8 +36,20 @@ const Coupons = () => {
   };
   const [coupon, setCoupon] = useState<any>({ name: '', code: '', type: 'porcentage', discount: '', status: true });
   const [coupons, setCoupons] = useState<any>([]);
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
 
   const addCoupon = () => {
+    if (userData.role === "admin" && userData.roles[1].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (Object.keys(coupon).some(key => coupon[key] === '')) {
       alert('Por favor acomplete todo los espacios!');
     }
@@ -58,6 +71,10 @@ const Coupons = () => {
   }
 
   const handleActive = (i: any) => {
+    if (userData.role === "admin" && userData.roles[1].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     let tempCoupons = coupons;
     tempCoupons[i].status = !tempCoupons[i].status;
     setCoupons([...tempCoupons]);
@@ -69,6 +86,10 @@ const Coupons = () => {
   }
 
   const deleteThisCoupon = (coupon: any, index: any) => {
+    if (userData.role === "admin" && userData.roles[1].delete === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     let tempCoupons = coupons;
     tempCoupons.splice(index, 1);
     let tempCoupon = {

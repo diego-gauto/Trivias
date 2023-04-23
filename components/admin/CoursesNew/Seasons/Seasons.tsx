@@ -4,6 +4,7 @@ import { AiFillEdit, AiOutlinePlus } from 'react-icons/ai';
 import { IoMdExit } from 'react-icons/io';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { createSeason, deleteLessonFromApi, deleteSeasonFromApi, getLessonFromApi, getLessonsFromApi, getSeasonsFromCourseApi, getSingleCourseApi, updateSeasonNameApi } from '../../../api/courses';
+import { getUserApi } from '../../../api/users';
 import { AdminContain, AdminLoader } from '../../SideBar.styled';
 import { ILesson, ISeason } from './ISeasons';
 import { SeasonContainer } from './Seasons.styled';
@@ -16,12 +17,24 @@ const Seasons = () => {
   const [seasons, setSeasons] = useState<any>([])
   const router = useRouter();
   let courseID: any = router.query.course;
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
   const returnToCourses = () => {
     router.push({
       pathname: "/admin/Courses",
     })
   }
   const addSeason = () => {
+    if (userData.role === "admin" && userData.roles[1].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     let newSeasons: any = {
       season: seasons.length + 1,
       name: "Modulo " + (seasons.length + 1),
@@ -71,6 +84,10 @@ const Seasons = () => {
     }
   }
   const deleteSeaons = (seasonData: ISeason) => {
+    if (userData.role === "admin" && userData.roles[1].delete === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (confirm(`¿Desea eliminar temporada ${seasonData.name}?, esto eliminara todas las lecciones`)) {
       seasonData.lessons.map((lessonData: ILesson) => {
         getLessonFromApi(lessonData.id).then((lesson) => {

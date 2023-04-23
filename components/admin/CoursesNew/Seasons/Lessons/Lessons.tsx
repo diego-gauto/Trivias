@@ -16,6 +16,7 @@ import ReactPlayer from 'react-player';
 import { updateLessonHomeWorks, updateLessonImage } from '../../../../../store/actions/courseActions';
 import { AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
+import { getUserApi } from '../../../../api/users';
 
 const Lessons = () => {
   const [selectQuizHw, setSelectQuizHw] = useState<boolean>(false);
@@ -122,6 +123,14 @@ const Lessons = () => {
     "No",
     "Si",
   ];
+  const [userData, setUserData] = useState<any>(null);
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
   const returnToSeasons = () => {
     router.push({
       pathname: "/admin/CourseSeason",
@@ -222,6 +231,10 @@ const Lessons = () => {
     setQuiz({ ...tempQuiz })
   }
   const createLesson = async () => {
+    if (userData.role === "admin" && userData.roles[1].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     setLoader(true);
     if (lesson.quiz === true) {
       lesson.quizzes = quiz;
@@ -291,6 +304,10 @@ const Lessons = () => {
 
   }
   const updateLesson = async () => {
+    if (userData.role === "admin" && userData.roles[1].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     setLoader(true);
     if (lesson.quiz === true) {
       lesson.quizzes = quiz;
@@ -343,6 +360,10 @@ const Lessons = () => {
 
   }
   const deleteLesson = () => {
+    if (userData.role === "admin" && userData.roles[1].delete === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (confirm(`¿Desea eliminar la leccion ${lesson.name}?, esta accion no tiene marcha atras`)) {
       lesson.quizzes = quiz;
       lesson.lesson_homeworks = homeWorkData;
