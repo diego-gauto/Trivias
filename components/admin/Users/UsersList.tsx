@@ -225,7 +225,7 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios</Title>
-            <CsvDownloader
+            {(user.role === 'admin' && user.roles[4].report === 0) && <CsvDownloader
               filename="usersData"
               extension=".csv"
               separator=","
@@ -236,7 +236,7 @@ const UsersList = () => {
               <DownloadUserData>
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
-            </CsvDownloader>
+            </CsvDownloader>}
             <FilterContain>
               <Select>
                 <select defaultValue={filterValue} onChange={(e: any) => { filter(e.target.value) }}>

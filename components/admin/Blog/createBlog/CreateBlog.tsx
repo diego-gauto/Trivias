@@ -10,6 +10,7 @@ import router, { useRouter } from "next/router";
 import { GiExitDoor } from 'react-icons/gi';
 import { createBlogsApi, deleteBlogsApi, getBlogsApi, getSingleBlogApi, updateBlogImageApi, updateBlogsApi, updateSubTopicImageApi } from '../../../api/blog';
 import { updateBlogImage, updateSubTopicImage } from '../../../../store/actions/FireBaseImages';
+import { getUserApi } from '../../../api/users';
 const CreateBlog = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [processLoader, setProcessLoader] = useState<boolean>(false);
@@ -73,6 +74,15 @@ const CreateBlog = () => {
     "align"
   ];
   const { blogId } = routerState;
+  const [userData, setUserData] = useState<any>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
 
   const goToBlog = () => {
     router.push({ pathname: "/admin/Blog" })
@@ -88,6 +98,10 @@ const CreateBlog = () => {
     }
   }
   const addTheme = () => {
+    if (userData.role === "admin" && userData.roles[2].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     let tempBlog: any = blog;
     tempBlog.subTopic.push(topic)
     setBlog({ ...tempBlog })
@@ -140,6 +154,10 @@ const CreateBlog = () => {
     setBlog({ ...tempBlog })
   }
   const createNewBlog = async () => {
+    if (userData.role === "admin" && userData.roles[2].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     // setProcessLoader(true);
     let checkTitles: number = 0;
     blogs.forEach((element: any) => {
@@ -203,6 +221,10 @@ const CreateBlog = () => {
     }
   }
   const editBlog = async () => {
+    if (userData.role === "admin" && userData.roles[2].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     setProcessLoader(true);
     let checkTitles: number = 0;
     blogs.forEach((element: any) => {
@@ -269,6 +291,10 @@ const CreateBlog = () => {
     })
   }
   const deleteBlogSql = async () => {
+    if (userData.role === "admin" && userData.roles[2].delete === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     if (confirm("¿Quieres eliminar este blog?, Esta acción no tiene marcha atrás.")) {
       deleteBlogsApi(blog).then(() => {
         router.push({ pathname: "/admin/Blog" })

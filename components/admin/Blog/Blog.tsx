@@ -8,17 +8,35 @@ import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { IBlog } from './IBlog';
 import { createBlogsApi, getBlogsApi, updateBlogImageApi, updateBlogsApi, updateSubTopicImageApi } from '../../api/blog';
 import { updateBlogImage, updateSubTopicImage } from '../../../store/actions/FireBaseImages';
+import { getUserApi } from '../../api/users';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
   const [oldBlogs, setoldBlogs] = useState<any>([]);
   const [loader, setLoader] = useState(false);
   const goToCreateBlog = () => {
+    if (userData.role === "admin" && userData.roles[2].create === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     router.push({ pathname: "/admin/CreateBlog" })
   }
+  const [userData, setUserData] = useState<any>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
 
   const goToEditBlog = (blog: any) => {
     // let blogText: any = blog.title.replaceAll(" ", "-");
+    if (userData.role === "admin" && userData.roles[2].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     router.push({ pathname: "/admin/CreateBlog/", query: { blogId: blog.id } })
   }
   // const addimages = () => {

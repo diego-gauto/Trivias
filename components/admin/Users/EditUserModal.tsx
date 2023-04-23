@@ -2,15 +2,28 @@
 import React, { useEffect, useState } from 'react'
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { updateUserInfoApi } from '../../api/admin';
+import { getUserApi } from '../../api/users';
 import { ModalContainer, ModalContent } from './Modal.styled';
 
 const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
   const [update, setUpdate] = useState<any>({ user })
   const [updating, setUpdating] = useState(false);
-
   const handleClose = () => setShow(false);
+  const [userData, setUserData] = useState<any>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
 
   const updateUser = async () => {
+    if (userData.role === "admin" && userData.roles[4].edit === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
     setUpdating(true);
     let tempUser = {
       name: update.name,

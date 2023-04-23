@@ -11,7 +11,8 @@ const SideBar = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
   const [isPay, setIsPay] = useState<boolean>();
   const [isCourses, setIsCourses] = useState<boolean>();
-  const [isCategory, setIsCategory] = useState<boolean>();
+  const [isBlogs, setIsBlogs] = useState<boolean>();
+  const [isHomeworks, setIsHomeworks] = useState<boolean>();
   const [isRewards, setIsRewards] = useState<boolean>();
   const [isLanding, setIsLanding] = useState<boolean>();
   const [isCoupons, setIsCoupons] = useState<boolean>();
@@ -20,23 +21,34 @@ const SideBar = () => {
   const [section, setSection] = useState(0)
   const [userData, setUserData] = useState<any>(null);
 
+  const changeValue = (value: any) => {
+    if (value === 0) return false;
+    if (value === 1) return true;
+    else return
+  }
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
-        if (userDataAuth.user.role === 'admin' && userDataAuth.user.courses) setIsCourses(true);
-        if (userDataAuth.user.role === 'admin' && userDataAuth.user.coupons) setIsCoupons(true);
-        if (userDataAuth.user.role === 'admin' && userDataAuth.user.landing) setIsLanding(true);
-        if (userDataAuth.user.role === 'admin' && userDataAuth.user.pay) setIsPay(true);
-        if (userDataAuth.user.role === 'admin' && userDataAuth.user.rewards) setIsRewards(true);
-        if (userDataAuth.user.role === 'admin' && userDataAuth.user.users) setIsUsers(true);
+        let user = userDataAuth.user;
+        if (user.role === "user" || (user.role === "admin" && user.roles.filter((x: any) => x.view === 1).length === 0)) {
+          router.push({ pathname: "/" });
+        }
+        user.roles.forEach((role: any) => {
+          if (role.role === "course" && changeValue(role.view)) setIsCourses(true);
+          if (role.role === "landing" && changeValue(role.view)) setIsLanding(true);
+          if (role.role === "rewards" && changeValue(role.view)) setIsRewards(true);
+          if (role.role === "users" && changeValue(role.view)) setIsUsers(true);
+          if (role.role === "payments" && changeValue(role.view)) setIsPay(true);
+          if (role.role === "coupons" && changeValue(role.view)) setIsCoupons(true);
+          if (role.role === "homeworks" && changeValue(role.view)) setIsHomeworks(true);
+          if (role.role === "blogs" && changeValue(role.view)) setIsBlogs(true);
+        });
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'superAdmin') {
           setIsSuperAdmin(true);
         }
-      }
-      else {
-        router.push({ pathname: "/" })
       }
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Courses") {
         setIndex(0)
@@ -64,60 +76,6 @@ const SideBar = () => {
   } catch (error) {
   }
 
-  useEffect(() => {
-    if (userData !== null) {
-      if (userData.role == "admin") {
-        if (router.pathname == "/admin/Courses" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Pago" && userData.pay == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Coupons" && userData.coupons == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Landing" && userData.landing == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Rewards" && userData.rewards == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Users" && userData.users == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Edit" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/EditLesson" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Teacher" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Materials" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/CourseAtributes" && userData.courses == false) {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-        if (router.pathname == "/admin/Sections") {
-          setIndex(6)
-          router.push({ pathname: "/admin/HomeWork" })
-        }
-      }
-    }
-  }, [userData])
   return (
     <Container>
       <div className="tab" style={{ whiteSpace: "pre" }}>
@@ -159,16 +117,16 @@ const SideBar = () => {
               setIndex(5)
             }}>Users</li>
           </Link>}
-          <Link href="/admin/HomeWork">
+          {(isSuperAdmin || isHomeworks) && <Link href="/admin/HomeWork">
             <li style={{ color: index == 6 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(6)
             }}>Assigments</li>
-          </Link>
-          <Link href="/admin/Blog">
+          </Link>}
+          {(isSuperAdmin || isBlogs) && <Link href="/admin/Blog">
             <li style={{ color: index == 7 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(7)
             }}>Blogs</li>
-          </Link>
+          </Link>}
         </ul>
         <Text>Organization</Text>
         {isSuperAdmin && <ul>
