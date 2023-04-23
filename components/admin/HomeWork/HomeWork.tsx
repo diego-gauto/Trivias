@@ -130,7 +130,7 @@ const HomeWork = () => {
 
       const headersRow = getHeaderArray(csvRecordsArray);
       const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-      // console.log(records);
+      console.log(records);
 
       setHeadersRow(headersRow)
       setRecords(records)
@@ -156,7 +156,7 @@ const HomeWork = () => {
     for (let i = 1; i < csvRecordsArray.length; i++) {
       let currentRecord = (csvRecordsArray[i]).split(',');
       let csvRecord: any = new CsvData();
-      for (let i = 0; i < currentRecord.length; i++) {
+      for (let i = 1; i < currentRecord.length; i++) {
         csvRecord.properties.push(currentRecord[i].trim())
       }
       if (csvRecord.properties[0] != '') { csvArr.push(csvRecord); }
@@ -183,11 +183,11 @@ const HomeWork = () => {
   useEffect(() => {
     let timeout: any;
     if (records) {
-      if (countdown <= 10005) {
+      if (countdown <= 160) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 1);
           // addDays(records, headersRow);
-          addProgress()
+          // addProgress()
         }, 50);
         return () => clearTimeout(timeout);
       }
@@ -195,17 +195,17 @@ const HomeWork = () => {
     return
   }, [records, countdown]);
 
-  useEffect(() => {
-    let range = {
-      start: 39999,
-      end: 50000
-    }
-    getPastUsers(range).then((res) => {
-      console.log(res.data.past);
+  // useEffect(() => {
+  //   let range = {
+  //     start: 39999,
+  //     end: 50000
+  //   }
+  //   getPastUsers(range).then((res) => {
+  //     console.log(res.data.past);
 
-      setPastUsers(res.data.past);
-    })
-  }, [])
+  //     setPastUsers(res.data.past);
+  //   })
+  // }, [])
 
   const addProgress = async () => {
     await Promise.all(
@@ -274,7 +274,7 @@ const HomeWork = () => {
     <AdminContain>
       <HWContainer>
         <Container>
-          <input type="file" onChange={(e) => { uploadCsv(e) }} />
+          {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
           {/* <button onClick={addProgress}>add</button> */}
           <TitleContain>
             <p>
