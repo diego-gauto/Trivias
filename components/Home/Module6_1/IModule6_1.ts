@@ -4,7 +4,7 @@ export interface IModule6_1 {
 interface SlideObj {
   isNew: boolean;
   title: string;
-  precio: string;
+  precio: number;
   imgURL: string;
   clickURL: string;
   id: string;
