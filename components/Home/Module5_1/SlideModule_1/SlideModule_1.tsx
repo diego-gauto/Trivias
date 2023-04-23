@@ -64,9 +64,11 @@ export const SlideModule_1 = (props: ISlideModule_1) => {
             <UserDataContainer>
               <Text01   >{username} </Text01>
               {
-                datePublication ? <DateText   > {
-                  datePublication.toISOString().split('T')[0]?.toString()} </DateText>
-                  : <></>
+                datePublication && <DateText   > {
+                  datePublication.substring(0, 10)
+                  // datePublication.toISOString().split('T')[0]?.toString()
+                }
+                </DateText>
               }
             </UserDataContainer>
             <FacebookButton style={{ backgroundImage: `url(${IMG1.src})` }}
