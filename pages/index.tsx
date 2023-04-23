@@ -64,7 +64,7 @@ const Homepage = () => {
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
     setLandingData(landingData);
-    console.log(landingData.reseniasSectionData)
+    console.log(landingData.experienciasSectionData)
     setLoading(false);
   }
   // const getCourses = async (professor: any) => {
@@ -178,14 +178,29 @@ const Homepage = () => {
   }
   useEffect(() => {
     getLandingReviewApi().then((res) => {
-      console.log(res);
-      setReviews(res);
+      let reviewData: any = [];
+      res.forEach((review: any) => {
+        let tempReview = {
+          descripcion: review.about,
+          id: review.id,
+          convertedDate: review.date,
+          imgURL: review.image,
+          usrFacebookURL: review.facebook_url,
+          isNew: review.new === 0 ? false : true,
+          username: review.user_name,
+          usrImgURL: review.user_image,
+        }
+        reviewData.push(tempReview)
+      });
+      console.log(reviewData);
+      setReviews(reviewData);
     })
     getLandingProductApi().then((res) => {
       let productData: any = [];
       res.forEach((product: any) => {
         let tempProduct = {
           clickURL: product.url,
+          id: product.id,
           compraRapida: product.purchase === 0 ? false : true,
           currency: product.currency,
           disponible: product.available === 0 ? false : true,
@@ -257,7 +272,7 @@ const Homepage = () => {
           courseSEPData.lessons
         } />
       }
-      <Module5_1 slideData={landingData.experienciasSectionData} />
+      <Module5_1 slideData={reviews} />
       <Module6_1 slideData={product} />
       {/* <Footer /> */}
     </Container>

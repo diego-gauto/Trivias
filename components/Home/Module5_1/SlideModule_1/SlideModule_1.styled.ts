@@ -125,8 +125,11 @@ export const ContainerMain = styled.div`
 `;
 
 export const UserDataContainer = styled.div`
-  display: block;
   position: relative;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 5px;
 `;
 export const DisabledMask = styled.div`
   height: 400px;

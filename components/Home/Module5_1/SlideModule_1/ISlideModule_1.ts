@@ -4,7 +4,7 @@ export interface ISlideModule_1 {
   username: string;
   descripcion: string;
   usrFacebookURL: string;
-  datePublication: Date;
+  datePublication: string;
   imgURL: Promise<string>;
   usrImgURL: Promise<string>;
 }
