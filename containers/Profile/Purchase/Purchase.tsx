@@ -159,7 +159,7 @@ const Purchase = () => {
           cardId: card.cardId,
           paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
           stripeId: userData.stripe_id,
-          priceId: 'price_1LVioCAaQg7w1ZH2iNrxboKk',
+          priceId: '9d8fa0e3-2977-46dc-8cb2-19024cd66bb9',
           method: 'stripe'
         }
         stripeSubscriptionApi(data).then((res) => {
