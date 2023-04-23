@@ -64,7 +64,6 @@ const Homepage = () => {
   const fetchLandingData = async () => {
     const landingData = await getLandingData();
     setLandingData(landingData);
-    console.log(landingData.experienciasSectionData)
     setLoading(false);
   }
   // const getCourses = async (professor: any) => {
@@ -192,7 +191,6 @@ const Homepage = () => {
         }
         reviewData.push(tempReview)
       });
-      console.log(reviewData);
       setReviews(reviewData);
     })
     getLandingProductApi().then((res) => {
