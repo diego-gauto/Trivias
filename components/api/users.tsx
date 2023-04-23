@@ -113,7 +113,7 @@ export const cancelPaypal = async (user: any) => {
     grant_type: "client_credentials"
   }
   return axios
-    .post("https://api-m.sandbox.paypal.com/v1/oauth2/token", body, {
+    .post("https://api-m.paypal.com/v1/oauth2/token", body, {
       headers: {
         Accept: "application/json",
         "Accept-Language": "en_US",
@@ -122,7 +122,7 @@ export const cancelPaypal = async (user: any) => {
       }
     }).then((res) => {
       return axios
-        .post(`https://api-m.sandbox.paypal.com/v1/billing/subscriptions/${user.planId}/cancel`,
+        .post(`https://api-m.paypal.com/v1/billing/subscriptions/${user.planId}/cancel`,
           { body: JSON.stringify({ reason: "Not satisfied with the service" }) },
           {
             headers: {
