@@ -238,3 +238,14 @@ export const getLessonsFromUserId = async (userId: any) => {
       return error
     });
 };
+export const getAllCourseDataApi = async (userId: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "lessons/courses/get-courses/" + userId, userId)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
