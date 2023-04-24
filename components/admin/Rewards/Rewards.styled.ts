@@ -27,6 +27,12 @@ export const RewardContain = styled.div`
     p {
       margin: 0;
     }
+    @media (max-width: 1450px) {
+      grid-template-columns: auto auto auto;
+    }
+    @media (max-width: 1060px) {
+      grid-template-columns: auto auto;
+    }
   }
   .request-container {
     display: flex;
@@ -66,7 +72,7 @@ export const Reward = styled.div<{ type: any }>`
   gap: 10px;
   border-radius: 10px;
   color: white;
-  width: 300px;
+  width: 250px;
   padding-bottom: 10px;
   position: relative;
   ${(props) =>
@@ -93,7 +99,7 @@ export const Reward = styled.div<{ type: any }>`
   img {
     cursor: pointer;
     width: 100%;
-    height: 300px;
+    height: 250px;
     box-shadow: rgb(0 0 0 / 25%) 0px 0px 20px 2px;
     border-radius: 10px;
     &:hover {
