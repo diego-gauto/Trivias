@@ -18,19 +18,6 @@ import {
 } from "./RoleEdit.styled";
 import { updateAdminAccessApi } from "../../../api/admin";
 
-type CheckBoxNames = {
-  general: boolean;
-  pay: boolean;
-  courses: boolean;
-  rewards: boolean;
-  landing: boolean;
-  coupons: boolean;
-  blogs: boolean;
-  assignments: boolean;
-  users: boolean;
-  superAdmin: boolean;
-};
-
 type CheckBoxValues = {
   name: string;
   checked: boolean
@@ -42,10 +29,11 @@ type RoleProps = {
   adminID: any;
   role: any;
   show: boolean;
-  refresh: any
+  refresh: any,
+  courses: any
 };
 
-const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) => {
+const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: RoleProps) => {
   const handleClose = () => setShow(false);
   const [roles, setRoles] = useState<any>([{ role: "Cursos", active: false, name: "course", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
   { role: "Cupones", active: false, name: "coupons", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
@@ -56,10 +44,11 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
   { role: "Pagos", active: false, name: "payments", tasks: [] },
   { role: "Tarea", active: false, name: "homeworks", tasks: [], courses: [] }]);
   const [loading, setLoading] = useState(true);
+  const [values, setValues] = useState("");
 
   useEffect(() => {
+
     const temp = roles
-    console.log(admin.adminTypes);
     admin.adminTypes.forEach((element: any) => {
 
       temp.forEach((role: any) => {
@@ -85,6 +74,7 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
             });
           }
           if (element.role === 'homeworks') {
+            setValues(element.courses.split(","))
           }
         }
       });
@@ -111,6 +101,17 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
     setRoles(roles);
   };
 
+  const handleMultiple = (e: any) => {
+    let options = [...e.target.options];
+    let temp: any = [];
+    options.forEach((value: any) => {
+      if (value.selected) {
+        temp.push(value.value)
+      }
+    });
+    setValues(temp.toString());
+  }
+
   const updateAdminType = () => {
     admin.adminTypes.forEach((element: any) => {
       roles.forEach((role: any) => {
@@ -135,7 +136,8 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
               }
             });
           }
-          if (element.role === 'courses') {
+          if (element.role === 'homeworks') {
+            element.courses = values;
           }
         }
       });
@@ -178,6 +180,13 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
                         </div>
                       )
                     })}
+                    {(courses.length > 0 && x.name === 'homeworks') && <select name="" defaultValue={values} multiple onChange={(e) => { handleMultiple(e) }}>
+                      {courses.map((course: any) => {
+                        return (
+                          <option value={course.id}>{course.title}</option>
+                        )
+                      })}
+                    </select>}
                   </div>
                 )
               })}
