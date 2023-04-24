@@ -30,6 +30,7 @@ const HomeWork = () => {
   const [courseFilter, setCourseFilter] = useState<any>("");
 
   const [pastUsers, setPastUsers] = useState<any>([]);
+  const [userData, setUserData] = useState<any>(null);
 
   const openCourseSelect = () => {
     setOpenSelect(false);
@@ -40,7 +41,7 @@ const HomeWork = () => {
     setCourseSelect(false)
   }
 
-  const getHomeworks = () => {
+  const getHomeworks = async () => {
     let tempFilter: any = [];
     // if (professorFilter !== "" || courseFilter !== "") {
     //   setHomeWorks([]);
@@ -79,9 +80,10 @@ const HomeWork = () => {
     //   })
     // }
     // else {
+    let user: any;
+    if (localStorage.getItem("email")) user = await getUserApi(localStorage.getItem("email"))
+    setUserData(user);
     getHomeworksApi().then((res: any) => {
-      console.log(res);
-
       res.data.data.forEach((element: any) => {
         let tempDate: any = new Date();
         let tempDay = tempDate.getDate()
@@ -89,9 +91,12 @@ const HomeWork = () => {
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
+      if (user.role === "admin") {
+        let array = user.roles[7].courses.split(",");
+        res.data.data.filter((x: any) => x.courses_id.includes(array));
+      }
       setHomeWorks(res.data.data);
     })
-    // }
   }
 
   const getAllteachers = () => {
@@ -298,7 +303,7 @@ const HomeWork = () => {
             <p>
               Tareas
             </p>
-            <div style={{ display: "flex", gap: 10 }}>
+            {(userData?.role === "superAdmin") && <div style={{ display: "flex", gap: 10 }}>
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
@@ -397,7 +402,7 @@ const HomeWork = () => {
                   </OptionContain>
                 }
               </SelectContain>
-            </div>
+            </div>}
           </TitleContain>
           <Table id="Pay">
             <tbody>
