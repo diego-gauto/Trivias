@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
-import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
+import { getTeacher } from '../../../store/actions/courseActions';
 import { addCourseMembershipApi } from '../../api/admin';
 import { addPastUsers, testApi } from '../../api/auth';
 import { getHomeworksApi } from '../../api/homeworks';
@@ -31,6 +30,7 @@ const HomeWork = () => {
   const [courseFilter, setCourseFilter] = useState<any>("");
 
   const [pastUsers, setPastUsers] = useState<any>([]);
+  const [userData, setUserData] = useState<any>(null);
 
   const openCourseSelect = () => {
     setOpenSelect(false);
@@ -41,7 +41,7 @@ const HomeWork = () => {
     setCourseSelect(false)
   }
 
-  const getHomeworks = () => {
+  const getHomeworks = async () => {
     let tempFilter: any = [];
     // if (professorFilter !== "" || courseFilter !== "") {
     //   setHomeWorks([]);
@@ -80,6 +80,9 @@ const HomeWork = () => {
     //   })
     // }
     // else {
+    let user: any;
+    if (localStorage.getItem("email")) user = await getUserApi(localStorage.getItem("email"))
+    setUserData(user);
     getHomeworksApi().then((res: any) => {
       res.data.data.forEach((element: any) => {
         let tempDate: any = new Date();
@@ -88,9 +91,12 @@ const HomeWork = () => {
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
+      if (user.role === "admin") {
+        let array = user.roles[7].courses.split(",");
+        res.data.data.filter((x: any) => x.courses_id.includes(array));
+      }
       setHomeWorks(res.data.data);
     })
-    // }
   }
 
   const getAllteachers = () => {
@@ -181,33 +187,33 @@ const HomeWork = () => {
   const [records, setRecords] = useState<any>(null);
   const [start, setstart] = useState("stop");
 
-  useEffect(() => {
-    let timeout: any;
-    if (start === "start") {
-      if (countdown <= 4) {
-        timeout = setTimeout(() => {
-          setCountdown(countdown + 1);
-          // addDays(records, headersRow);
-          // addProgress()
-          testStripe();
-        }, 100);
-        return () => clearTimeout(timeout);
-      }
-    }
-    return
-  }, [start, countdown]);
+  // useEffect(() => {
+  //   let timeout: any;
+  //   if (start === "start") {
+  //     if (countdown <= 5005) {
+  //       timeout = setTimeout(() => {
+  //         setCountdown(countdown + 1);
+  //         // addDays(records, headersRow);
+  //         // addProgress()
+  //         testStripe();
+  //       }, 100);
+  //       return () => clearTimeout(timeout);
+  //     }
+  //   }
+  //   return
+  // }, [start, countdown]);
 
-  useEffect(() => {
-    let range = {
-      start: 6,
-      end: 9
-    }
-    getPastUsers(range).then((res) => {
-      console.log(res.data.past);
+  // useEffect(() => {
+  //   let range = {
+  //     start: 50000,
+  //     end: 55001
+  //   }
+  //   getPastUsers(range).then((res) => {
+  //     console.log(res.data.past);
 
-      setPastUsers(res.data.past);
-    })
-  }, [])
+  //     setPastUsers(res.data.past);
+  //   })
+  // }, [])
   const testStripe = async () => {
     await Promise.all(
       pastUsers.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
@@ -292,12 +298,12 @@ const HomeWork = () => {
         <Container>
           {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
           {/* <button onClick={addProgress}>add</button> */}
-          <button onClick={() => { setstart("start") }}> stripe</button>?
+          {/* <button onClick={() => { setstart("start") }}> stripe</button> */}
           <TitleContain>
             <p>
               Tareas
             </p>
-            <div style={{ display: "flex", gap: 10 }}>
+            {(userData?.role === "superAdmin") && <div style={{ display: "flex", gap: 10 }}>
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
                   {
@@ -396,7 +402,7 @@ const HomeWork = () => {
                   </OptionContain>
                 }
               </SelectContain>
-            </div>
+            </div>}
           </TitleContain>
           <Table id="Pay">
             <tbody>

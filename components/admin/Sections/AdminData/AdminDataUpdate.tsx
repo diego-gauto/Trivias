@@ -32,9 +32,10 @@ type Props = {
   adminID: any;
   role: any;
   handleClick: any;
+  courses: any
 };
 
-const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick }: Props) => {
+const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, courses }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
@@ -156,7 +157,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick }: Pr
           </ColumnContain>
         </Columns>
         {show &&
-          <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} refresh={refresh} />
+          <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} refresh={refresh} courses={courses} />
         }
       </>
     </UserContain>

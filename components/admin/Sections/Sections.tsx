@@ -13,6 +13,7 @@ import {
 import { getAdmins, getUserByEmailApi, updateUserRoleApi } from "../../api/admin";
 import { Button } from "../Courses/CourseMain.styled";
 import { IoClose } from "react-icons/io5";
+import { getCoursesApi } from "../../api/lessons";
 
 export type INewUser = {
   name?: string,
@@ -49,6 +50,13 @@ const Sections = () => {
   const [member, setMember] = useState<any>("");
   const [find, setFind] = useState<boolean>(false);
   const [user, setUser] = useState<any>({});
+  const [courses, setCourses] = useState<any>([]);
+
+  const getAllCourses = () => {
+    getCoursesApi().then((res) => {
+      setCourses(res);
+    });
+  }
 
   const editRole = async (user: any): Promise<void> => {
     setIsVisible(true);
@@ -57,6 +65,7 @@ const Sections = () => {
 
   useEffect(() => {
     retrieveAdmin();
+    getAllCourses();
   }, [])
 
   const formatDate = (value: any) => {
@@ -145,7 +154,7 @@ const Sections = () => {
       </GeneralContain>
       {
         isVisible &&
-        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} handleClick={handleClick} />
+        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} handleClick={handleClick} courses={courses} />
       }
       {newMember && <NewUser>
         <IoClose onClick={() => { setNewMember(false); setMember(""); setFind(false); setUser({}) }} />

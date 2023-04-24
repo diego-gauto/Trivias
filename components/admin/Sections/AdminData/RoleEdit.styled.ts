@@ -24,6 +24,7 @@ export const TitleContain = styled.div`
   justify-content: space-between;
 `;
 export const SectionOptions = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +40,6 @@ export const RowContain = styled.div`
 `;
 export const OptionsContain = styled.div`
   display: flex;
-  justify-content: space-around;
 `;
 export const Title = styled.p`
   font-size: 24px;
@@ -50,7 +50,6 @@ export const SelectedRoleContain = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 15px;
-  width: 180px;
   padding: 10px;
   font-family: "Montserrat", sans-serif;
   padding-block: 5px;
