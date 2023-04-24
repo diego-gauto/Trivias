@@ -23,15 +23,16 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const handleShow = () => {
     setShow(true);
   }
+
   const doVideoStuff = () => {
     //@ts-ignore
     var video: HTMLMediaElement = document.getElementById(`video-${num}`) as HTMLMediaElement;
-    console.log(data)
     var videoSrc: any = ""
-    if (data.id === 30) {
+
+    if (num === 1) {
       videoSrc = "https://video.gonvar.io/media/Nails Master 2.0 reedición/NM 2.0 Bienvenida/master.m3u8";
     }
-    if (data.id === 45) {
+    if (num === 2) {
       videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
     }
 

@@ -43,7 +43,7 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
   }
 
   const onSave = async () => {
-    reviewsData.map(async (reviewData) => {
+    reviewsData.map(async (reviewData, index) => {
       if (reviewData.image_new) {
         await updateLandingImage(reviewData.tempImg, reviewData.id).then((url) => {
           reviewData.image = url;
@@ -67,6 +67,9 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
       await updateLandingReviewApi(review).then((res) => {
         console.log(res);
       })
+      if (reviewsData.length === index + 1) {
+        alert("Reseñas Guardadas con exito!")
+      }
     })
   }
   const chunk1 = reviewsData.slice(0, 3);
@@ -127,6 +130,16 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
             onChange={(e) => updateState(e, "facebook_url", num)}
             value={review.facebook_url}
             placeholder="facebook.com/gonvar"
+          />
+        </Inputs>
+        <Inputs>
+          <EditText>
+            Fecha: (respetar formato "2021-08-10")
+          </EditText>
+          <EditInput
+            onChange={(e) => updateState(e, "date", num)}
+            value={review.date}
+            placeholder="2021-08-10"
           />
         </Inputs>
         <Inputs>

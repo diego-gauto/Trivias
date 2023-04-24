@@ -109,7 +109,7 @@ const ProductsSection = (props: IProductsSectionProps) => {
     )
   })
   const onSave = async () => {
-    productsData.map(async (product) => {
+    productsData.map(async (product, index) => {
       if (product.new_image) {
         await updateLandingProductImage(product.new_image, product.id).then((url) => {
           product.image = url;
@@ -129,8 +129,10 @@ const ProductsSection = (props: IProductsSectionProps) => {
       await updateLandingProductApi(prodUpdate).then((res) => {
         console.log(res);
       })
+      if (productsData.length === index + 1) {
+        alert("Productos Guardadas con exito!")
+      }
     })
-
   }
   return (
     <ProfileData style={{ boxShadow: "none", background: "none" }}>

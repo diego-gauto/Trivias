@@ -35,7 +35,6 @@ const Homepage = () => {
   const [userData, setUserData] = useState<any>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   let today = new Date().getTime() / 1000;
-
   // try {
   //   var userDataAuth = useAuth();
   //   useEffect(() => {
@@ -61,12 +60,11 @@ const Homepage = () => {
   //     return false
   //   }
   // }
-  const fetchLandingData = async () => {
-    const landingData = await getLandingData();
-    setLandingData(landingData);
-    console.log(landingData.experienciasSectionData)
-    setLoading(false);
-  }
+  // const fetchLandingData = async () => {
+  //   const landingData = await getLandingData();
+  //   setLandingData(landingData);
+  //   setLoading(false);
+  // }
   // const getCourses = async (professor: any) => {
   //   let tempCourses: Array<any> = [];
   //   let tempProfessor: Array<any> = professor;
@@ -177,6 +175,16 @@ const Homepage = () => {
     })
   }
   useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setLoggedIn(true);
+        setUserData(res);
+        coursesAll(res);
+      })
+    }
+    else {
+      coursesAll(null);
+    }
     getLandingReviewApi().then((res) => {
       let reviewData: any = [];
       res.forEach((review: any) => {
@@ -192,7 +200,6 @@ const Homepage = () => {
         }
         reviewData.push(tempReview)
       });
-      console.log(reviewData);
       setReviews(reviewData);
     })
     getLandingProductApi().then((res) => {
@@ -213,17 +220,7 @@ const Homepage = () => {
       });
       setProduct(productData);
     })
-    fetchLandingData();
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
-        setLoggedIn(true);
-        setUserData(res);
-        coursesAll(res);
-      })
-    }
-    else {
-      coursesAll(null);
-    }
+    // fetchLandingData();
   }, []);
 
   const hms = (totalSeconds: any) => {
