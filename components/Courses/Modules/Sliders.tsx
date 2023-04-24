@@ -68,7 +68,7 @@ const Sliders = (props: ICourseData) => {
                     }
                   })
                 }
-                if (course.type === "Mensual" && ((user.level === 1 && user.final_date > today) || (user.level === 0 && user.final_date > today))) {
+                if (course.type === "Mensual" && ((user.level === 1) || (user.level === 0 && user.final_date > today))) {
                   user.user_progress.forEach((progress: IUserProgress) => {
                     if (courses.lesson_id === progress.lessons_id) {
                       course.lessonProgress = progress.time;
