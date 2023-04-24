@@ -59,7 +59,9 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh }: RoleProps) =
 
   useEffect(() => {
     const temp = roles
+    console.log(admin.adminTypes);
     admin.adminTypes.forEach((element: any) => {
+
       temp.forEach((role: any) => {
         if (element.role === role.name) {
           role.active = changeValue(element.view);

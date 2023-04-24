@@ -108,14 +108,6 @@ const Register = () => {
     resolver: yupResolver(formSchema)
   });
 
-
-  const handleSignUpWithAuthProvider = (authProvider: string) => {
-    setIsLoading(true)
-    accessWithAuthProvider(authProvider, trial).then(() => {
-      window.location.href = "/Purchase?type=subscription";
-    });
-  };
-
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
