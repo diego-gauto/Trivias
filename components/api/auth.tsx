@@ -75,3 +75,14 @@ export const updatePastUser = async (user: any) => {
     });
 };
 
+export const testApi = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "auth/login-past-users-test", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

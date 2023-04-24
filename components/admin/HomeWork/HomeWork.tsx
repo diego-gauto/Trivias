@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getcourse, getCourses, getTeacher, getUsers } from '../../../store/actions/courseActions';
 import { getAllHomeWorks, getHomeworks } from '../../../store/actions/UserActions';
 import { addCourseMembershipApi } from '../../api/admin';
-import { addPastUsers } from '../../api/auth';
+import { addPastUsers, testApi } from '../../api/auth';
 import { getHomeworksApi } from '../../api/homeworks';
 import { addUserCertificateApi, getCourseApi } from '../../api/lessons';
 import { addPastUserProgress, getPastUsers, getUserApi, updateScorePastUser } from '../../api/users';
@@ -179,34 +179,50 @@ const HomeWork = () => {
   const [countdown, setCountdown] = useState(1);
   const [headersRow, setHeadersRow] = useState<any>();
   const [records, setRecords] = useState<any>(null);
+  const [start, setstart] = useState("stop");
 
   useEffect(() => {
     let timeout: any;
-    if (records) {
-      if (countdown <= 160) {
+    if (start === "start") {
+      if (countdown <= 4) {
         timeout = setTimeout(() => {
           setCountdown(countdown + 1);
           // addDays(records, headersRow);
           // addProgress()
-        }, 50);
+          testStripe();
+        }, 100);
         return () => clearTimeout(timeout);
       }
     }
     return
-  }, [records, countdown]);
+  }, [start, countdown]);
 
-  // useEffect(() => {
-  //   let range = {
-  //     start: 39999,
-  //     end: 50000
-  //   }
-  //   getPastUsers(range).then((res) => {
-  //     console.log(res.data.past);
+  useEffect(() => {
+    let range = {
+      start: 6,
+      end: 9
+    }
+    getPastUsers(range).then((res) => {
+      console.log(res.data.past);
 
-  //     setPastUsers(res.data.past);
-  //   })
-  // }, [])
+      setPastUsers(res.data.past);
+    })
+  }, [])
+  const testStripe = async () => {
+    await Promise.all(
+      pastUsers.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
+        console.log(index);
+        let tempUser = {
+          email: user.email,
+          id: user.id,
+          name: user.name,
+        }
+        testApi(tempUser).then(() => {
 
+        })
+      })
+    )
+  }
   const addProgress = async () => {
     await Promise.all(
       pastUsers.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
@@ -276,6 +292,7 @@ const HomeWork = () => {
         <Container>
           {/* <input type="file" onChange={(e) => { uploadCsv(e) }} /> */}
           {/* <button onClick={addProgress}>add</button> */}
+          <button onClick={() => { setstart("start") }}> stripe</button>?
           <TitleContain>
             <p>
               Tareas
