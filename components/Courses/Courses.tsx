@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { Container, CoursesContain, PurpleButton, SubText, Title, TransparentButton, Gradient, GonvarLoader } from './Courses.styled';
 import Sliders from './Modules/Sliders';
 import { getUserApi } from "../api/users";
-import { getCoursesApi } from "../api/lessons";
+import { getAllCourseDataApi, getCoursesApi } from "../api/lessons";
 import { ICourses, ILessons, ISeasons } from './ICourses';
 import CourseModal from '../CourseModal/CourseModal';
 import { useRouter } from 'next/router';
@@ -109,9 +109,15 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         coursesAll(res);
+        getAllCourseDataApi(res.id).then((data) => {
+          console.log(data);
+        })
       })
     } else {
       coursesAll(null);
+      getAllCourseDataApi(null).then((data) => {
+        console.log(data);
+      })
     }
 
   }, [])
