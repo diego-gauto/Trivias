@@ -108,15 +108,23 @@ const Courses = () => {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setLoggedIn(true);
         setUserData(res);
-        coursesAll(res);
+        // coursesAll(res);
         getAllCourseDataApi(res.id).then((data) => {
-          console.log(data);
+          setCourses(data);
+          setVideoCourse(data.video_preview);
+          setSeasonIndex(data.video_preview.seasonId);
+          setLessonIndex(data.video_preview.lessonId);
+          setLoading(false);
         })
       })
     } else {
-      coursesAll(null);
+      // coursesAll(null);
       getAllCourseDataApi(null).then((data) => {
-        console.log(data);
+        setCourses(data);
+        setVideoCourse(data.video_preview);
+        setSeasonIndex(0);
+        setLessonIndex(0);
+        setLoading(false);
       })
     }
 
@@ -131,7 +139,7 @@ const Courses = () => {
               {
                 !loading &&
                 <ReactPlayer
-                  url={videoCourse.seasons[0].lessons[0].link}
+                  url={videoCourse.seasons[seasonIndex].lessons[lessonIndex].link}
                   className='absolute'
                   playing={true}
                   muted={true}

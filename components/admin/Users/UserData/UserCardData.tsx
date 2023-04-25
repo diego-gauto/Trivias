@@ -58,7 +58,6 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
   const deleteUser = () => {
     setError(true);
   }
-
   if (!loader) {
     return (
       <AdminLoader>
@@ -97,7 +96,9 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
             <Info>
               Suscripción Actual
               <Label>
-                Gonvar Plus
+                {
+                  (user.level === 1 || user.final_date >= today) ? "Gonvar Plus" : "Sin suscripcion"
+                }
               </Label>
             </Info>
           </ColumnContain>
@@ -127,7 +128,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
             Cursos Activos
           </TitleBox>
           {
-            user.final_date >= today &&
+            (user.level === 1 || user.final_date >= today) &&
             <img src={GonvarImg} className="img-gonvar" />
           }
           {
@@ -147,7 +148,6 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
                           </>
                         }
                       </div>
-
                     )
                   })
                 }
