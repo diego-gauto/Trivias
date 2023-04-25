@@ -49,17 +49,18 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
     return result;
   }
   const goTo = () => {
-    if (loggedIn) {
-      if ((user.level === 1 && user.final_date > today) || (user.level === 0 && user.final_date > today)) {
+    if (user) {
+      if (user.level === 1 || user.final_date > today) {
         router.push("/Preview")
       }
-      if (user.level === 0 && user.final_date < today) {
+      else {
         router.push({
           pathname: 'Purchase',
           query: { type: 'subscription' }
         });
       }
-    } else {
+    }
+    else {
       router.push(SIGNUP_PATH)
     }
   }
@@ -84,7 +85,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
           <h1 className="price">Sólo $149 <span>MXN/mes</span></h1>
           {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => { goTo() }} />
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={goTo} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
             <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />
@@ -95,7 +96,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
           ></video>
           {!responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
-              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={() => { goTo() }} />
+              <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={goTo} />
               <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
             </Col>
             <ModalGonvarPlus openModal={openModal} setOpenModal={setOpenModal} course={courses} user={user} loggedIn={loggedIn} />

@@ -12,6 +12,7 @@ import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer
 
 
 export const ModalGonvarPlus = (props: ICourse) => {
+  let today = new Date().getTime() / 1000;
   const backgroundImage = "/images/ModalImages/gonvarplusmetal.jpg"
   const phoneImage = "/images/ModalImages/telefonogonvar.png"
   const handPaintImage = "/images/ModalImages/manopintando.png"
@@ -55,6 +56,19 @@ export const ModalGonvarPlus = (props: ICourse) => {
     document.removeEventListener('mouseup', mouseUpHandler);
   };
 
+  const goTo = () => {
+    if (user) {
+      if (user.level === 1 || user.final_date > today) {
+        router.push("/Preview")
+      }
+      else {
+        router.push("/Purchase?type=subscription")
+      }
+    }
+    else {
+      router.push(SIGNUP_PATH)
+    }
+  }
   return (
     <ModalContainer show={openModal} onHide={handleClose} size="lg" centered style={{ borderRadius: 0, paddingLeft: 0, paddingRight: 0 }}>
       <BackgroundContainer>
@@ -106,11 +120,7 @@ export const ModalGonvarPlus = (props: ICourse) => {
           </p>
           <div className="bottom-container">
             <button className="start-button"
-              onClick={() => {
-                loggedIn
-                  ? router.push("/Purchase?type=subscription")
-                  : router.push(SIGNUP_PATH)
-              }}
+              onClick={goTo}
             >Comenzar ahora</button>
             <div className="left-text">
               <p className="text">
