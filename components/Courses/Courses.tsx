@@ -112,8 +112,16 @@ const Courses = () => {
         getAllCourseDataApi(res.id).then((data) => {
           setCourses(data);
           setVideoCourse(data.video_preview);
-          setSeasonIndex(data.video_preview.seasonId);
-          setLessonIndex(data.video_preview.lessonId);
+          if (data.video_preview.seasonId) {
+            setSeasonIndex(data.video_preview.seasonId);
+          } else {
+            setSeasonIndex(0);
+          }
+          if (data.video_preview.lessonId) {
+            setLessonIndex(data.video_preview.lessonId);
+          } else {
+            setLessonIndex(0);
+          }
           setLoading(false);
         })
       })
