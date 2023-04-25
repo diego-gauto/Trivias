@@ -1,7 +1,8 @@
 
+import { user } from 'firebase-functions/v1/auth';
 import React, { useEffect, useState } from 'react'
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
-import { updateUserInfoApi } from '../../api/admin';
+import { updateAdminAccessApi, updateUserInfoApi } from '../../api/admin';
 import { getUserApi } from '../../api/users';
 import { ModalContainer, ModalContent } from './Modal.styled';
 
@@ -27,8 +28,8 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
     setUpdating(true);
     let tempUser = {
       name: update.name,
-      last_name: update.lastName,
-      phone_number: update.phoneNumber,
+      last_name: update.last_name,
+      phone_number: update.phone_number,
       score: update.score,
       id: update.id
     }
@@ -38,15 +39,11 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
       handleClose();
     })
   }
-
   useEffect(() => {
     if (user) {
-      setUpdate(user)
+      setUpdate(user);
     }
   }, [user])
-
-
-
   return (
     <ModalContainer show={show} onHide={handleClose} centered>
       <ModalContent>
@@ -62,8 +59,8 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
                 First Name
               </label>
               <input
-                placeholder={user.name}
-                defaultValue={user.name}
+                placeholder={update.name}
+                defaultValue={update.name}
                 onChange={(e) => {
                   setUpdate({ ...update, name: e.target.value })
                 }}
@@ -74,8 +71,8 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
                 Last Name
               </label>
               <input
-                placeholder={user.last_name}
-                defaultValue={user.last_name}
+                placeholder={update.last_name}
+                defaultValue={update.last_name}
                 onChange={(e) => {
                   setUpdate({ ...update, last_name: e.target.value })
                 }}
@@ -88,8 +85,9 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
                 Score
               </label>
               <input
-                placeholder={user.score}
-                defaultValue={user.score}
+                type="number"
+                placeholder={update.score}
+                defaultValue={update.score}
                 onChange={(e) => {
                   setUpdate({ ...update, score: parseInt(e.target.value) })
                 }}
@@ -100,8 +98,8 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
                 Whatsapp
               </label>
               <input
-                placeholder={user.phone_number}
-                defaultValue={user.phone_number}
+                placeholder={update.phone_number}
+                defaultValue={update.phone_number}
                 onChange={(e) => {
                   setUpdate({ ...update, phone_number: e.target.value })
                 }}

@@ -60,7 +60,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
   }
   if (!loader) {
     return (
-      <AdminLoader>
+      <AdminLoader style={{ position: "absolute" }}>
         <div className="loader-image">
           <div className="loader-contain" />
         </div>
@@ -118,7 +118,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
             <Info>
               Teléfono
               <Label>
-                {!user.phone_number ? user.phone_number : "N/A"}
+                {user.phone_number ? user.phone_number : "N/A"}
               </Label>
             </Info>
           </ColumnContain>
