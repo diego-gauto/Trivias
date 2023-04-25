@@ -86,7 +86,6 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
               </label>
               <input
                 type="number"
-                placeholder={update.score}
                 defaultValue={update.score}
                 onChange={(e) => {
                   setUpdate({ ...update, score: parseInt(e.target.value) })
