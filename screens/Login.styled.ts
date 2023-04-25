@@ -727,6 +727,8 @@ export const LoaderContain = styled.div`
   box-sizing: border-box;
   display: block;
   position: absolute;
+  left: -10px;
+  top: -16px;
   width: 100px;
   height: 100px;
   margin: 6px;
@@ -738,11 +740,13 @@ export const LoaderContain = styled.div`
     running;
 `;
 export const LoaderImage = styled.div`
+  position: relative;
+  background-size: contain;
+  background-position: center;
   display: flex;
   width: 80px;
   height: 80px;
-  background-image: url(../images/logo2.png);
-  background-size: 80px;
+  background-image: url(../images/logo-g.png);
   background-repeat: no-repeat;
   align-items: center;
   justify-content: center;
