@@ -136,7 +136,6 @@ const HomeWork = () => {
 
       const headersRow = getHeaderArray(csvRecordsArray);
       const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-      console.log(records);
 
       setHeadersRow(headersRow)
       setRecords(records)
@@ -173,7 +172,6 @@ const HomeWork = () => {
   const getJsonData = async (records: any, headersRow: any) => {
     const jsonData = records
     const headerJson = headersRow
-    console.log(countdown);
     let rec = {
       records: jsonData.slice((countdown - 1) * 1, (countdown * 1))
     }
@@ -189,24 +187,25 @@ const HomeWork = () => {
 
   // useEffect(() => {
   //   let timeout: any;
-  //   if (start === "start") {
-  //     if (countdown <= 5005) {
+  //   if (records) {
+  //     if (countdown <= 40) {
   //       timeout = setTimeout(() => {
   //         setCountdown(countdown + 1);
+  //         getJsonData(records, headersRow);
   //         // addDays(records, headersRow);
+  //         console.log(countdown);
   //         // addProgress()
-  //         testStripe();
+  //         // testStripe();
   //       }, 100);
   //       return () => clearTimeout(timeout);
   //     }
   //   }
   //   return
-  // }, [start, countdown]);
-
+  // }, [records, countdown]);
   // useEffect(() => {
   //   let range = {
-  //     start: 50000,
-  //     end: 55001
+  //     start: 40000,
+  //     end: 50001
   //   }
   //   getPastUsers(range).then((res) => {
   //     console.log(res.data.past);
@@ -232,7 +231,6 @@ const HomeWork = () => {
   const addProgress = async () => {
     await Promise.all(
       pastUsers.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
-        console.log(index);
         let tempArray = records.filter((x: any) => x.properties[0] === user.email)
         if (tempArray.length > 0) {
           await Promise.all(tempArray.map(async (element: any) => {
@@ -242,7 +240,8 @@ const HomeWork = () => {
                 score: +element.properties[2],
                 userId: user.id
               }
-              // await updateScorePastUser(tempUser);
+              console.log(tempUser);
+              await updateScorePastUser(tempUser);
               await getCourseApi(+element.properties[1]).then(async (course) => {
                 if (course.lessons && course.lessons.length > 0) {
                   let ids = {
@@ -254,13 +253,13 @@ const HomeWork = () => {
                     folio: `${ids.courseId}-${ids.userId}`
                   }
                   await addUserCertificateApi(tempCertificate)
-                  // course.lessons.forEach(async (lesson: any) => {
-                  //   let tempLesson = {
-                  //     lessonId: lesson.id,
-                  //     userId: user.id
-                  //   }
-                  //   return await addPastUserProgress(tempLesson)
-                  // });
+                  course.lessons.forEach(async (lesson: any) => {
+                    let tempLesson = {
+                      lessonId: lesson.id,
+                      userId: user.id
+                    }
+                    return await addPastUserProgress(tempLesson)
+                  });
                 }
               })
             }
