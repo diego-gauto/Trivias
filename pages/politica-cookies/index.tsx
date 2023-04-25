@@ -1,7 +1,7 @@
-import Terms from "../../components/TermsModal/Terms";
+import Cookies from "../../components/cookiesDocument/Cookies";
 import { MainContain } from "../../screens/Styles.styled";
 
-const termsConditions = () => {
+const Privacy = () => {
   return (
 
     <MainContain
@@ -10,8 +10,8 @@ const termsConditions = () => {
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <Terms></Terms>
+      <Cookies></Cookies>
     </MainContain>
   )
 }
-export default termsConditions;
+export default Privacy;

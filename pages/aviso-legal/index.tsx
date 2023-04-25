@@ -1,7 +1,7 @@
-import Terms from "../../components/TermsModal/Terms";
+import Legal from "../../components/LegalDocument/Legal";
 import { MainContain } from "../../screens/Styles.styled";
 
-const termsConditions = () => {
+const legalDocument = () => {
   return (
 
     <MainContain
@@ -10,8 +10,8 @@ const termsConditions = () => {
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <Terms></Terms>
+      <Legal></Legal>
     </MainContain>
   )
 }
-export default termsConditions;
+export default legalDocument;
