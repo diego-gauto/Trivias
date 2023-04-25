@@ -32,6 +32,7 @@ import { SlBell } from "react-icons/sl";
 import { googleLogout } from "@react-oauth/google";
 import { useFacebook } from "react-facebook";
 import io from "socket.io-client";
+import { getNotifications } from "../api/notifications";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -64,20 +65,30 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
-  // const socket = io("ws://94.74.77.165:4003");
+  const socket = io("ws://94.74.77.165:4003");
 
-  // useEffect(() => {
-  //   socket.on("receiveMessage", (msg) => {
-  //     userNotifications(msg.userId);
+  useEffect(() => {
+    socket.on("receiveMessage", (msg) => {
+      if (userData) {
+        if (userData.user_id === msg.userId) {
+          userNotifications(msg.userId);
+        }
+        if (msg.type === "global") {
+          userNotifications(userData.user_id);
+        }
+      }
+    });
 
-  //   });
-  //   console.log(1);
-
-  // }, []);
+  }, []);
 
   const userNotifications = (userId: any) => {
-    console.log(userId);
+    let data = {
+      userId: userId
+    }
 
+    getNotifications(data).then((res) => {
+      setNotifications(res.data);
+    })
   }
 
   const ChangeNav = () => {
@@ -108,7 +119,7 @@ const NavBar = () => {
       // localStorage.clear();
       // logoutFunc();
       if (userDataAuth.user !== null) {
-
+        userNotifications(userDataAuth.user.user_id)
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
           setIsAdmin(true);
