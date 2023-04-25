@@ -31,6 +31,8 @@ import {
 import { SlBell } from "react-icons/sl";
 import { googleLogout } from "@react-oauth/google";
 import { useFacebook } from "react-facebook";
+import io from "socket.io-client";
+
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
   const [loggedIn, setLoggedIn] = useState(false);
@@ -62,6 +64,21 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
+  // const socket = io("ws://94.74.77.165:4003");
+
+  // useEffect(() => {
+  //   socket.on("receiveMessage", (msg) => {
+  //     userNotifications(msg.userId);
+
+  //   });
+  //   console.log(1);
+
+  // }, []);
+
+  const userNotifications = (userId: any) => {
+    console.log(userId);
+
+  }
 
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 900) {
