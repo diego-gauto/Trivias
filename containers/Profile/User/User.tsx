@@ -15,8 +15,6 @@ import UserInfo from "./UserInfo";
 import { History } from "./History";
 import { getNextCertificate } from "../../../store/actions/courseActions";
 import { getUserApi } from "../../../components/api/users";
-import io from "socket.io-client";
-
 
 const User = () => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -36,25 +34,6 @@ const User = () => {
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [nextCertificate, setNextCertificate] = useState([]);
   const [certificateProgress, setCertificateProgress] = useState(0);
-
-  const socket = io("ws://94.74.77.165:4003");
-
-  useEffect(() => {
-    socket.on("receiveMessage", (msg) => {
-      console.log(msg);
-
-    });
-    console.log(1);
-
-  }, []);
-
-  const send = () => {
-    let message = {
-      text: "Hola",
-      type: "comment"
-    }
-    socket.emit("sendMessage", message);
-  }
 
   const newCard = () => {
     setAddPayment(!addPayment)
