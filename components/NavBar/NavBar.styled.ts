@@ -56,6 +56,7 @@ export const NavTags = styled.div`
 `;
 export const Logo = styled.img`
   background-repeat: no-repeat;
+  object-fit: cover;
   width: 130px;
   height: 70px;
   padding-left: 0;
@@ -66,7 +67,7 @@ export const Logo = styled.img`
 `;
 export const LogoContain = styled.div`
   display: flex;
-
+  align-items: center;
   @media (max-width: 1023px) {
     display: none;
   }
@@ -346,9 +347,9 @@ export const UserImage = styled.div`
   }
 `;
 export const LogoS = styled.i`
-  background-size: contain;
+  background-size: cover;
   background-position: center;
-  background-image: url(../images/Navbar/NavbarLogo.png);
+  background-image: url(../images/Navbar/gonvar_purple.png);
   background-repeat: no-repeat;
   margin-left: 35px;
   cursor: pointer;
@@ -356,11 +357,11 @@ export const LogoS = styled.i`
   height: 100%;
 `;
 export const LogoS_2 = styled.i`
-  background-size: contain;
+  background-size: cover;
   background-position: center;
 
   margin-left: 35px;
-  background-image: url(../images/Navbar/NavbarLogo.png);
+  background-image: url(../images/Navbar/gonvar_purple.png);
   background-repeat: no-repeat;
   cursor: pointer;
   width: 110px;

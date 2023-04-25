@@ -131,7 +131,7 @@ const NavBar = () => {
                 <Link href="/">
                   <Logo style={{
                     width: "130px", height: "30px",
-                  }} src="/images/Navbar/NavbarLogo.png" />
+                  }} src="/images/Navbar/gonvar_purple.png" />
                 </Link>
               }
               {
@@ -139,7 +139,7 @@ const NavBar = () => {
                 <Link href="/">
                   <Logo style={{
                     width: "130px", height: "30px",
-                  }} src="/images/Navbar/NavbarLogo2.png" />
+                  }} src="/images/Navbar/gonvar_white.png" />
                 </Link>
               }
             </>
@@ -147,7 +147,7 @@ const NavBar = () => {
             <Link href="/">
               <Logo style={{
                 width: "130px", height: "30px",
-              }} src="/images/Navbar/NavbarLogo.png" />
+              }} src="/images/Navbar/gonvar_purple.png" />
             </Link>
         }
       </LogoContain>
