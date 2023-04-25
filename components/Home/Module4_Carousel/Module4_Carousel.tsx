@@ -17,8 +17,6 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const { isInfinite, slideData, type, title, user, courses } = props;
-  let slideDataArr = [];
-  slideDataArr = slideData;
   const onInit = (swiper: SwiperCore) => {
     swiperRef.current = swiper;
   };
@@ -65,7 +63,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
           style={{ color: "#A733E4" }}>{title}</span></h1>
       }
       <Swiper {...settings} onInit={onInit}>
-        {slideDataArr?.map((element, idx) => (
+        {slideData?.map((element, idx) => (
           <SwiperSlide key={idx}>
             <SlideModule
               type={type}
@@ -73,7 +71,7 @@ export const Module4_Carousel = (props: IModule4_Carousel) => {
               title={element.title}
               subtitle={""}
               level={type === "subscription" ? element.difficulty : ""}
-              imgURL={element.image}
+              imgURL={element.image ? element.image : element.banner}
               number={type === "subscription" ? element.seasons.length : element.number}
               professors={element.professors}
               user={user}

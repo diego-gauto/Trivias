@@ -244,12 +244,12 @@ const Lessons = () => {
     }
     lesson.extraMaterial = extraMaterial;
     let tempErrors: any = {
-      // title: lesson.title === "" ? true : false,
-      // number: lesson.number === 0 ? true : false,
+      title: lesson.title === "" ? true : false,
+      number: lesson.number === 0 ? true : false,
       // about: lesson.about === "" ? true : false,
-      // link: lesson.link === "" ? true : false,
+      link: lesson.link === "" ? true : false,
       // // points: lesson.points === 0 ? true : false,
-      // // banner: lesson.banner === "" ? true : false,
+      banner: lesson.banner === "" ? true : false,
       // objectives: lesson.objectives === "" ? true : false,
       // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,
       // hoemWorkAbout:lesson.lesson_homeworks.about ==="" ? true : false,
@@ -319,9 +319,9 @@ const Lessons = () => {
     let tempErrors: any = {
       title: lesson.title === "" ? true : false,
       number: lesson.number === 0 ? true : false,
-      about: lesson.about === "" ? true : false,
+      // about: lesson.about === "" ? true : false,
       link: lesson.link === "" ? true : false,
-      points: lesson.points === 0 ? true : false,
+      // points: lesson.points === 0 ? true : false,
       banner: lesson.banner === "" ? true : false,
       // objectives: lesson.objectives === "" ? true : false,
       // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,
