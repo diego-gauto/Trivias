@@ -21,7 +21,7 @@ import { useAuth } from "../hooks/useAuth";
 import { getTeacher, getWholeCourse, getWholeCourses } from "../store/actions/courseActions";
 import { getLandingData } from "../store/actions/LandingActions";
 import { getUserApi } from "../components/api/users";
-import { getCoursesApi } from "../components/api/lessons";
+import { getCoursesApi, getLandingCoursesApi } from "../components/api/lessons";
 import { getLandingProductApi, getLandingReviewApi } from "../components/api/admin";
 
 const Homepage = () => {
@@ -104,86 +104,106 @@ const Homepage = () => {
   // useEffect(() => {
   //   getProffessors();
   // }, [])
-  const coursesAll = (user: any) => {
-    getCoursesApi().then((res) => {
-      let tempCourses = res;
-      let gonvarPlusCourses = [];
-      let nailsMaster = tempCourses;
-      let alineacionCert = tempCourses;
-      gonvarPlusCourses = tempCourses.filter((course: any) => {
-        course.totalDuration = hms(course.totalDuration) && 0
-        return course.type === "Mensual"
-      })
-      nailsMaster = tempCourses.filter((course: any) => {
-        if (course.id === 30) {
-          course.lessons = [];
-          if (user && user.user_courses) {
-            user.user_courses.forEach((courses: any) => {
-              if ((courses.final_date > today) && (course.id === courses.course_id)) {
-                course.pay = true;
-              }
-              else {
-                course.pay = false;
-              }
-            });
-          }
-          course.seasons.forEach((season: any) => {
-            season.lessons.forEach((lesson: any) => {
-              lesson.seasons = course.seasons;
-              lesson.professors = course.professors;
-              lesson.materials = course.materials;
-              lesson.categories = course.categories;
-              lesson.image = lesson.banner;
-              course.lessons.push(lesson);
-            });
-          });
-        }
-        course.totalDuration = hms(course.totalDuration) && 0
-        return course.id === 30
-      })
-      alineacionCert = tempCourses.filter((course: any) => {
-        if (course.id === 45) {
-          course.lessons = [];
-          if (user && user.user_courses) {
-            user.user_courses.forEach((courses: any) => {
-              if ((courses.final_date > today) && (course.id === courses.course_id)) {
-                course.pay = true;
-              }
-              else {
-                course.pay = false;
-              }
-            });
-          }
-          course.seasons.forEach((season: any) => {
-            season.lessons.forEach((lesson: any) => {
-              lesson.seasons = course.seasons;
-              lesson.professors = course.professors;
-              lesson.materials = course.materials;
-              lesson.categories = course.categories;
-              lesson.image = lesson.banner;
-              course.lessons.push(lesson);
-            });
-          });
-        }
-        course.totalDuration = hms(course.totalDuration) && 0
-        return course.id === 45
-      })
-      setCourseGonvarPlus(gonvarPlusCourses);
-      setCourseNailsData(nailsMaster[0]);
-      setCourseSEPData(alineacionCert[0]);
-      setLoading(true);
-    })
-  }
+  // const coursesAll = (user: any) => {
+  //   getCoursesApi().then((res) => {
+  //     let tempCourses = res;
+  //     let gonvarPlusCourses = [];
+  //     let nailsMaster = tempCourses;
+  //     let alineacionCert = tempCourses;
+  //     gonvarPlusCourses = tempCourses.filter((course: any) => {
+  //       course.totalDuration = hms(course.totalDuration) && 0
+  //       return course.type === "Mensual"
+  //     })
+  //     nailsMaster = tempCourses.filter((course: any) => {
+  //       if (course.id === 30) {
+  //         course.lessons = [];
+  //         if (user && user.user_courses) {
+  //           user.user_courses.forEach((courses: any) => {
+  //             if ((courses.final_date > today) && (course.id === courses.course_id)) {
+  //               course.pay = true;
+  //             }
+  //             else {
+  //               course.pay = false;
+  //             }
+  //           });
+  //         }
+  //         course.seasons.forEach((season: any) => {
+  //           season.lessons.forEach((lesson: any) => {
+  //             lesson.seasons = course.seasons;
+  //             lesson.professors = course.professors;
+  //             lesson.materials = course.materials;
+  //             lesson.categories = course.categories;
+  //             lesson.image = lesson.banner;
+  //             course.lessons.push(lesson);
+  //           });
+  //         });
+  //       }
+  //       course.totalDuration = hms(course.totalDuration) && 0
+  //       return course.id === 30
+  //     })
+  //     alineacionCert = tempCourses.filter((course: any) => {
+  //       if (course.id === 45) {
+  //         course.lessons = [];
+  //         if (user && user.user_courses) {
+  //           user.user_courses.forEach((courses: any) => {
+  //             if ((courses.final_date > today) && (course.id === courses.course_id)) {
+  //               course.pay = true;
+  //             }
+  //             else {
+  //               course.pay = false;
+  //             }
+  //           });
+  //         }
+  //         course.seasons.forEach((season: any) => {
+  //           season.lessons.forEach((lesson: any) => {
+  //             lesson.seasons = course.seasons;
+  //             lesson.professors = course.professors;
+  //             lesson.materials = course.materials;
+  //             lesson.categories = course.categories;
+  //             lesson.image = lesson.banner;
+  //             course.lessons.push(lesson);
+  //           });
+  //         });
+  //       }
+  //       course.totalDuration = hms(course.totalDuration) && 0
+  //       return course.id === 45
+  //     })
+  //     setCourseGonvarPlus(gonvarPlusCourses);
+  //     setCourseNailsData(nailsMaster[0]);
+  //     setCourseSEPData(alineacionCert[0]);
+  //     setLoading(true);
+  //   })
+  // }
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setLoggedIn(true);
         setUserData(res);
-        coursesAll(res);
+        getLandingCoursesApi(res.id).then((data) => {
+          data.gonvar_courses.forEach((course: any) => {
+            course.totalDuration = hms(course.totalDuration);
+          })
+          setCourseGonvarPlus(data.gonvar_courses);
+          data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
+          setCourseNailsData(data.nails_master);
+          data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
+          setCourseSEPData(data.alineacion_cert);
+          setLoading(true);
+        })
       })
     }
     else {
-      coursesAll(null);
+      getLandingCoursesApi(null).then((data) => {
+        data.gonvar_courses.forEach((course: any) => {
+          course.totalDuration = hms(course.totalDuration);
+        })
+        setCourseGonvarPlus(data.gonvar_courses);
+        data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
+        setCourseNailsData(data.nails_master);
+        data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
+        setCourseSEPData(data.alineacion_cert);
+        setLoading(true);
+      })
     }
     getLandingReviewApi().then((res) => {
       let reviewData: any = [];
