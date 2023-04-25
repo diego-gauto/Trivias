@@ -219,7 +219,7 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "continue-watching") {
       router.push({
         pathname: 'Lesson',
-        query: { id: courseData.id, season: courseData.seasonId, lesson: courseData.seasonId },
+        query: { id: courseData.id, season: courseData.currentSeason, lesson: courseData.currentLesson },
       });
     }
     if (slideType === "my-courses") {

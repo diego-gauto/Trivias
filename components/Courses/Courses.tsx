@@ -83,13 +83,13 @@ const Courses = () => {
           pathname: 'Purchase', query: { type: 'course', id: videoCourse.id }
         });
       }
-      if (videoCourse.type === "Mensual" && userData.final_date >= today) {
+      if (videoCourse.type === "Mensual" && (userData.level === 1 || userData.final_date >= today)) {
         router.push({
           pathname: 'Lesson',
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
         });
       }
-      if (videoCourse.type === "Mensual" && userData.final_date < today) {
+      if (videoCourse.type === "Mensual" && (userData.level === 0 && userData.final_date < today)) {
         router.push({
           pathname: 'Purchase',
           query: { type: 'subscription' }
@@ -112,16 +112,8 @@ const Courses = () => {
         getAllCourseDataApi(res.id).then((data) => {
           setCourses(data);
           setVideoCourse(data.video_preview);
-          if (data.video_preview.seasonId) {
-            setSeasonIndex(data.video_preview.seasonId);
-          } else {
-            setSeasonIndex(0);
-          }
-          if (data.video_preview.lessonId) {
-            setLessonIndex(data.video_preview.lessonId);
-          } else {
-            setLessonIndex(0);
-          }
+          setSeasonIndex(data.video_preview.currentSeason);
+          setLessonIndex(data.video_preview.currentLesson);
           setLoading(false);
         })
       })
