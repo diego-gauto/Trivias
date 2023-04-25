@@ -36,9 +36,9 @@ const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [hamburger, setHamburger] = useState(false);
-
   const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
+  const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
 
   //declare any object in state
@@ -91,6 +91,7 @@ const NavBar = () => {
       // localStorage.clear();
       // logoutFunc();
       if (userDataAuth.user !== null) {
+
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
           setIsAdmin(true);
@@ -102,7 +103,6 @@ const NavBar = () => {
   } catch (error) {
     setLoggedIn(false);
   }
-
   const logoutFunc = () => {
     localStorage.clear();
     if (userData.provider === "web") {
@@ -188,7 +188,12 @@ const NavBar = () => {
             </Link>
             <div className="bell-contain">
               <SlBell className="bell" />
-              <div className="notifications" />
+              {
+                notifications.length > 0 &&
+                <p className="notifications">
+                  {notifications.length}
+                </p>
+              }
               <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
             </div>
             <Link href="/Profile">
@@ -296,7 +301,12 @@ const NavBar = () => {
               </Link>
               <div className="bell-contain">
                 <SlBell className="bell" />
-                <div className="notifications" />
+                {
+                  notifications.length > 0 &&
+                  <p className="notifications">
+                    {notifications.length}
+                  </p>
+                }
               </div>
               < UserImage onClick={() => { setHamburger(!hamburger) }}>
                 {

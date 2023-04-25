@@ -256,7 +256,7 @@ export const UserContain = styled.div<{ color: any }>`
       font-size: 26px;
       color: #3f1168;
       ${(props) =>
-        props.color == 1 &&
+        props.color === 1 &&
         css`
           color: #dad3e5;
           @media (max-width: 1023px) {
@@ -265,13 +265,19 @@ export const UserContain = styled.div<{ color: any }>`
         `}
     }
     .notifications {
-      width: 11px;
-      height: 11px;
+      width: 18px;
+      height: 18px;
+      text-align: center;
+      line-height: 17px;
       border-radius: 50%;
       background-color: #e21047;
       position: absolute;
-      top: -3px;
-      right: 2px;
+      top: -5px;
+      right: -2px;
+      font-size: 10px;
+      font-weight: bold;
+      color: #dad3e5;
+      margin: 0;
     }
   }
   .rewards-circle {
