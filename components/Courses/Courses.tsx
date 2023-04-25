@@ -183,7 +183,7 @@ const Courses = () => {
           <Gradient></Gradient>
         </div>
       </Container>
-      <CourseModal show={show} setShow={setShow} course={courseForModal} user={userData} />
+      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
       {/* SLIDERS */}
       <div className="module-contain">
         {
