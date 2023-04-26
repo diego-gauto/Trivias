@@ -101,6 +101,7 @@ export const Inputs = styled.div`
     padding-inline: 20px;
     border-radius: 100px;
     border: 1px solid #6717cd;
+    max-width: 330px;
   }
 `;
 export const ProfileData = styled.div`
