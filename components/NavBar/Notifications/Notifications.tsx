@@ -1,6 +1,5 @@
 import React from 'react'
 import { INotifications } from './INotifications';
-import { NotificationContainer } from './Notifications.styled';
 const Notifications = (props: INotifications) => {
   const { message } = props;
   return (
