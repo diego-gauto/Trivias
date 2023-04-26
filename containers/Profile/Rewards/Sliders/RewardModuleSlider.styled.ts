@@ -35,6 +35,7 @@ export const SlideContainer = styled.div<{
     text-align: center;
     font-size: 12px;
     margin-block: 15px;
+    max-width: 250px;
     @media (max-width: 1023px) {
       font-size: 10px;
     }

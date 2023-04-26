@@ -28,6 +28,7 @@ const Rewards = () => {
   const [rewardsTypes, setRewardsTypes] = useState([]);
   const [userReward, setUserReward] = useState([]);
   const [monthProgress, setMonthProgress] = useState(0)
+  const [missingData, setMissingData] = useState<number>(0);
   const [timeLevel, setTimeLevel] = useState<any>(0);
   const [allSlider, setAllSlider] = useState<any>([
     { type: "claim-points" },
@@ -209,6 +210,7 @@ const Rewards = () => {
         },
       ];
       setLoading(false);
+      setMissingData(missingData + 1);
       setRewardsTypes(arrayRewards);
     })
   }
@@ -223,6 +225,11 @@ const Rewards = () => {
       })
     }
   }, [])
+  useEffect(() => {
+    if (missingData === 1) {
+      getRewardData(userData);
+    }
+  }, [missingData])
 
   if (loading) {
     return (

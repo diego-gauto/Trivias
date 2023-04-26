@@ -37,9 +37,10 @@ const RewardSlider = (props: reward_slider) => {
     let slides: any = [];
     let tempFilter: any = [];
     if (type == "claim-points") {
-      tempFilter = rewards.filter((val: any) => (val.type == "points"));
+      tempFilter = rewards.filter((val: any) => { return (val.type === "points" && user.score >= val.points) });
+      tempFilter.sort((a: any, b: any) => a.points - b.points)
       tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.reward_id == element.id && x.status)) {
+        if (!userReward.find((x: any) => x.reward_id === element.id && x.status)) {
           slides.push(element);
         }
       });
@@ -51,16 +52,9 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "points") {
-      tempFilter = rewards.filter((val: any) => (val.type === "points" && val.published === "publicado"));
+      tempFilter = rewards.filter((val: any) => { return (val.type === "points" && val.published === "publicado" && user.score < val.points) });
       tempFilter.sort((a: any, b: any) => a.points - b.points)
-      tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
-          slides.push(element);
-        }
-        if (!userReward.find((x: any) => x.reward_id == element.id)) {
-          slides.push(element);
-        }
-      });
+      slides = tempFilter;
       setTexts({
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",
@@ -69,10 +63,10 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-months") {
-      tempFilter = rewards.filter((val: any) => (val.type == "months"));
+      tempFilter = rewards.filter((val: any) => { return (val.type == "months" && months >= val.month) });
       tempFilter.sort((a: any, b: any) => a.month - b.month);
       tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.reward_id == element.id && x.status)) {
+        if (!userReward.find((x: any) => x.reward_id == element.id && x.status)) {
           slides.push(element);
         }
       });
@@ -84,16 +78,17 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "months") {
-      tempFilter = rewards.filter((val: any) => (val.type == "months" && val.published === "publicado"));
+      tempFilter = rewards.filter((val: any) => { return (val.type == "months" && val.published === "publicado" && months < val.month) });
       tempFilter.sort((a: any, b: any) => a.month - b.month)
-      tempFilter.forEach((element: any) => {
-        if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
-          slides.push(element);
-        }
-        if (!userReward.find((x: any) => x.reward_id == element.id)) {
-          slides.push(element);
-        }
-      });
+      slides = tempFilter;
+      // tempFilter.forEach((element: any) => {
+      //   if (userReward.find((x: any) => x.reward_id == element.id && !x.status)) {
+      //     slides.push(element);
+      //   }
+      //   if (!userReward.find((x: any) => x.reward_id == element.id)) {
+      //     slides.push(element);
+      //   }
+      // });
       setTexts({
         header: "Beneficios por desbloquear",
         title: "Beneficio bloqueado",
@@ -156,7 +151,7 @@ const RewardSlider = (props: reward_slider) => {
     createRequestApi(tempRequest).then(() => {
       alert("Recompensa reclamada con éxito")
       getSliders();
-      getRewardData();
+      getRewardData(user);
       setLoader(false);
     })
   }
@@ -211,8 +206,14 @@ const RewardSlider = (props: reward_slider) => {
                         <p className="title-text">
                           <span className='span-1'>{texts.title}</span><br />
                           {texts.scoreText}
-                          {reward.points && reward.points + " puntos"}
-                          {reward.month ? (reward.month == 1 ? reward.month + " mes" : reward.month + " meses") : ""}
+                          {
+                            (reward.type === "points" || reward.type === "claim-points") &&
+                            reward.points && reward.points + " puntos"
+                          }
+                          {
+                            (reward.type === "months" || reward.type === "claim-months") &&
+                            reward.month && (reward.month === 1 ? reward.month + " mes" : reward.month + " meses")
+                          }
                           {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : (reward.type === "certificates" && "las tareas faltantes")}
                         </p>
                         {
@@ -241,8 +242,7 @@ const RewardSlider = (props: reward_slider) => {
                             </button>
                           }
                           {
-                            (type == "claim-months" || type == "claim-points" || type == "certificates"
-                              || (score < reward.points) || months < reward.month) &&
+                            (type === "months" || type === "points" || type === "certificates") &&
                             <button className="btn-info" onClick={() => showRewardData(index, reward.points)}>
                               <p className='text'>
                                 Más información
