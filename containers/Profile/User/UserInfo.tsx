@@ -162,11 +162,21 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     setUser({ ...userData })
 
   }, [userData])
-
-  const format = (date: number) => {
-    let tempDate = Math.ceil((today - date) / (3600 * 24)) / 30;
-    tempDate = Math.floor(tempDate);
-    return tempDate;
+  const format = (start_date: any, level: any) => {
+    let tempDayCount: any = today - start_date;
+    let getMonth: any;
+    if (level === 1) {
+      if (start_date === 0) {
+        getMonth = 0;
+      }
+      else {
+        getMonth = tempDayCount / (3600 * 24 * 30);
+      }
+    }
+    else {
+      getMonth = 0;
+    }
+    return Math.floor(getMonth)
   }
   return (
     <ProfileMainContainer startEdit={startEdit} password={editPassword} star={starPosition} coordinates={starCoordinates}>
@@ -403,7 +413,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               </p>
               <div className="data-contain">
                 <p className="points">{points_format} puntos</p>
-                <p className="months">{format(new Date(userData.created_at).getTime() / 1000)} meses de aprendizaje</p>
+                <p className="months">{format(user.start_date, user.level)} meses de aprendizaje</p>
                 <p className="certificates">
                   {userData.user_certificates?.length > 0 ? (userData.user_certificates?.length == 1 ? userData.user_certificates?.length + " certificado" : userData.user_certificates?.length + " certificados") : "Sin certificados"}
                 </p>
