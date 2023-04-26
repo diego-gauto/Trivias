@@ -15,8 +15,10 @@ import UserInfo from "./UserInfo";
 import { History } from "./History";
 import { getNextCertificate } from "../../../store/actions/courseActions";
 import { getUserApi } from "../../../components/api/users";
+import { getAllRewardDataApi, getRewardsApi } from "../../../components/api/rewards";
 
 const User = () => {
+  let today = new Date().getTime() / 1000;
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [userData, setUserData] = useState<any>(null);
   const [timeProgress, setTimeProgress] = useState(0);
@@ -34,188 +36,143 @@ const User = () => {
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [nextCertificate, setNextCertificate] = useState([]);
   const [certificateProgress, setCertificateProgress] = useState(0);
+  const [missingData, setMissingData] = useState<number>(0);
 
   const newCard = () => {
     setAddPayment(!addPayment)
   }
-
-  // try {
-  //   var userDataAuth = useAuth();
-  //   useEffect(() => {
-  //     if (userDataAuth.user !== null) {
-  //       // retrieveUser()
-  //       setLoading(false)
-  //     } else {
-  //       window.location.href = "/auth/Login";
-  //     }
-  //   }, [])
-
-  // } catch (error) {
-  //   setLoggedIn(false);
-  // }
-
-  useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
-        setUserData(res);
-        setLoading(false)
-      })
-    }
-  }, [])
+  const handleClick = (value: boolean) => {
+    retrieveUser();
+  }
   const retrieveUser = () => {
     getUserApi(localStorage.getItem("email")).then((res) => {
       setUserData(res);
     })
   }
-
-  const getAllRewards = () => {
-    getRewards().then((reward) => {
-      getNextPointsReward(reward);
-      getNextMonthReward(reward);
-    })
-  }
-  const getNextPointsReward: any = (reward: any) => {
-    let tempRewardSize: any = reward.filter((val: any) => (val.type == "points" && (userData.score >= val.points)))
-    tempRewardSize.sort((a: any, b: any) => b.points - a.points)
-    setpointsRewardSize(tempRewardSize.length);
-    let previousReward: any;
-    if (!tempRewardSize[0]) {
-      previousReward = {
-        points: 0,
-      }
-    }
-    else {
-      previousReward = tempRewardSize[0];
-    }
-    let pointsRewards = reward.filter((val: any) => (val.type == "points" && (userData.score < val.points)))
-    pointsRewards.sort((a: any, b: any) => a.points - b.points)
-    let nextReward: any = pointsRewards[0];
-    if (!nextReward) {
-      setPointsRewards([])
-      nextReward = {
-        points: 0,
-      }
-    }
-    else {
-      setPointsRewards(nextReward)
-    }
-    getPointsProgress(previousReward, nextReward);
-  }
-  const getPointsProgress = (previousReward: any, nextReward: any) => {
-    setData(755 - (((userData.score - previousReward.points) / (nextReward.points - previousReward.points)) * 755));
-  }
-  const getNextMonthReward = (reward: any) => {
-    let monthsRewardsSize: any = reward.filter((val: any) => (val.type == "months" && timeLevel >= val.months))
-    monthsRewardsSize.sort((a: any, b: any) => b.months - a.months)
-    setTimePrizeSize(monthsRewardsSize.length);
-    let previousReward: any;
-    if (!monthsRewardsSize[0]) {
-      previousReward = {
-        months: 0,
-      }
-    }
-    else {
-      previousReward = monthsRewardsSize[0];
-    }
-    let monthsRewards: any
-    monthsRewards = reward.filter((val: any) => (val.type == "months" && timeLevel < val.months))
-    monthsRewards.sort((a: any, b: any) => a.months - b.months)
-    let nextReward: any = []
-    nextReward = monthsRewards[0];
-    if (monthsRewards) {
-      setTimePrize(nextReward);
-      nextReward = {
-        points: 0,
-      }
-    }
-    else {
-      setTimePrize([]);
-      nextReward = {
-        points: 0,
-      }
-    }
-    getTimeProgress(previousReward, nextReward);
-  }
-  const getCurrentTimeLevel = () => {
-    let tempCurrentDate: any = new Date().getTime() / 1000;
-    let tempDayCount: any = tempCurrentDate - userData.membership.startDate;
+  const getRewardData = async (user: any) => {
+    let nextCourseCertificate: any = [];
+    let completedCertificates: any = [];
+    let tempDayCount: any = today - user.start_date;
     let getMonth: any;
-    if (userData.membership.startDate == 0) {
-      getMonth = 0;
+    let requests: any;
+    let tempRewards: any = [];
+    if (user.level === 1) {
+      if (user.start_date === 0) {
+        getMonth = 0;
+      }
+      else {
+        getMonth = tempDayCount / (3600 * 24 * 30);
+      }
     }
     else {
-      getMonth = tempDayCount / (3600 * 24 * 30);
+      getMonth = 0;
     }
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
+    let tempTimeLevel: any = Math.floor(getMonth);
+    await getRewardsApi().then(async (res) => {
+      await Promise.all(res.map((reward: any) => {
+        tempRewards.push(reward);
+      }))
+      // setRewards(res);
+    })
+    await getAllRewardDataApi(user.id).then((res) => {
+      completedCertificates = res.certificates;
+      nextCourseCertificate = res.nextCertificates;
+    });
+    let data = {
+      reward: tempRewards,
+      user: user,
+      nextCourseCertificate: nextCourseCertificate[0],
+      totalCertificates: completedCertificates.length,
+      monthCompleted: tempTimeLevel,
+      monthPercentage: getMonth
+    }
+    // setCompleteCertificates(completedCertificates);
+    // setCourses(nextCourseCertificate);
+    await getNextRewards(data);
   }
-  const getTimeProgress = (previousReward: any, nextReward: any) => {
-    if (monthProgress == 0) {
-      setTimeProgress(0)
+  const getTimeReward = async (props: any) => {
+    const {
+      monthPercentage,
+      reward,
+    } = props;
+    let monthRewardCompleted = [];
+    let progressMonth: number = 755;
+    let monthFilter = [];
+    monthFilter = reward.filter((data: any) => (data.type === "months" && monthPercentage < data.month));
+    monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && monthPercentage >= data.month));
+    monthFilter.sort((a: any, b: any) => a.month - b.month);
+    monthRewardCompleted.sort((a: any, b: any) => b.month - a.month);
+    if (monthRewardCompleted.length === 0) {
+      progressMonth = 755 - (((monthProgress - 0) / (monthFilter[0].month - 0)) * 755)
     }
     else {
-      setTimeProgress(755 - (((monthProgress - previousReward.months) / (nextReward.months - previousReward.months)) * 755))
+      progressMonth = (755 - (((monthProgress - monthRewardCompleted[0].month) / (monthFilter[0].month - monthRewardCompleted[0].month)) * 755))
     }
-  }
-  const getNextCertificates = () => {
-    let counter: number = 0;
-    let totalLessons: number = 0;
-    let maxTtotalLessons: number = 0;
-    let average: number = 0;
-    let arrCourse: any = [];
-    let maximum: any = 0;
-    getNextCertificate().then((res: any) => {
-      res.map((course: any) => {
-        course.lessons.map((lesson: any) => {
-          lesson.users.map((userID: any) => {
-            if (userData.id === userID) {
-              counter = counter + 1;
-            }
-          })
-        })
-        maxTtotalLessons = course.lessons.length;
-        average = counter / maxTtotalLessons;
-        totalLessons = maxTtotalLessons - counter;
-        if (average == 1) {
-          counter = 0;
-        }
-        if (counter > 0) {
-          arrCourse.push({ total: average, name: course.courseTittle, lessonsLeft: totalLessons, maxLessons: maxTtotalLessons })
-          counter = 0;
-        }
-      })
-      maximum = Math.max(...arrCourse.map((val: any) => val.total));
-      arrCourse = arrCourse.filter((val: any) => val.total == maximum);
-      setNextCertificate(arrCourse[0]);
 
+    return { progressMonth, monthFilter, monthRewardCompleted }
+  }
+  const getNextRewards = async (data: any) => {
+    let pointsFilter: any = [];
+    let pointRewardCompleted = [];
+    let progressPoints: number = 0;
+    let progressCertificates: number = 755;
+    const {
+      monthCompleted,
+      monthPercentage,
+      nextCourseCertificate,
+      reward,
+      totalCertificates,
+      user
+    } = data;
+    pointsFilter = reward.filter((data: any) => (data.type === "points" && user.score < data.points));
+    pointRewardCompleted = reward.filter((data: any) => (data.type === "points" && user.score >= data.points));
+    pointsFilter.sort((a: any, b: any) => a.points - b.points);
+    pointRewardCompleted.sort((a: any, b: any) => b.points - a.points);
+    if (pointRewardCompleted.length === 0) {
+      progressPoints = 755 - (((user.score - 0) / (pointsFilter[0].points - 0)) * 755)
+    }
+    else {
+      progressPoints = 755 - (((user.score - pointRewardCompleted[0].points) / (pointsFilter[0].points - pointRewardCompleted[0].points)) * 755)
+    }
+    if (nextCourseCertificate) {
+      progressCertificates = ((1 - nextCourseCertificate.progress) * 755);
+    }
+    else {
+      progressCertificates = 755;
+    }
+    let timeRewardData = {
+      monthPercentage: monthPercentage,
+      reward: reward,
+    }
+
+    setPointsRewards(pointsFilter[0]);
+    setData(progressPoints);
+    setCertificateProgress(progressCertificates);
+    setNextCertificate(nextCourseCertificate);
+    await getTimeReward(timeRewardData).then((timeReward) => {
+      setTimeProgress(timeReward.progressMonth);
+      setTimePrize(timeReward.monthFilter[0]);
+      setLoading(false);
+      setMissingData(missingData + 1);
     })
-  }
-  const certificateProgressBar = () => {
-    let tempProgress: number = 0;
-    let totalLessonsLeft: any = nextCertificate;
-    tempProgress = ((totalLessonsLeft?.lessonsLeft) / totalLessonsLeft?.maxLessons) * 755;
-    setCertificateProgress(tempProgress);
-  }
 
+  }
   useEffect(() => {
-    if (userData != null) {
-      // getCurrentTimeLevel();
-      // getNextCertificates();
-      // getAllRewards();
-      setNameUpperCase(userData.name.toUpperCase())
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+        setNameUpperCase(res.name.toUpperCase())
+        getRewardData(res);
+      })
     }
-  }, [userData]);
-
-  // useEffect(() => {
-  //   if (userData !== null && nextCertificate !== null) {
-  //     certificateProgressBar();
-  //     setLoading(false);
-  //   }
-  // }, [nextCertificate]);
-
-  const handleClick = (value: boolean) => {
-    retrieveUser();
-  }
+  }, [])
+  useEffect(() => {
+    if (missingData === 1) {
+      getRewardData(userData);
+    }
+  }, [missingData])
 
   if (loading) {
     return (

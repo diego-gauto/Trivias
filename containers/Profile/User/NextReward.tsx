@@ -163,29 +163,25 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
             </div>
             <div className="extra-info">
               {
-                reward == 0 &&
+                reward === 0 &&
                 <p>
-                  {
-                    points?.obtained.length === 0 ? <>Sin<span> Recompensa</span></> :
-                      <>Siguiente Recompensa {points?.blocked.length > 0 ?
-                        <span>{points?.blocked[0].title}</span> :
-                        <>Sin<span> Recompensa</span></>}</>
-                  }
+                  <>Siguiente Recompensa {points?.blocked.length > 0 ?
+                    <span>{points?.blocked[0].title}</span> :
+                    <>Sin<span> Recompensa</span></>}</>
+
                 </p>
               }
               {
-                reward == 1 &&
+                reward === 1 &&
                 <p>
-                  {
-                    time?.obtained.length === 0 ? <>Sin<span> Recompensa</span></> :
-                      <>Siguiente Recompensa {time.blocked.length > 0 ?
-                        <span>{time?.blocked[0].title}</span> :
-                        <>Sin<span> Recompensa</span></>}</>
-                  }
+                  <>Siguiente Recompensa {time.blocked.length > 0 ?
+                    <span>{time?.blocked[0].title}</span> :
+                    <>Sin<span> Recompensa</span></>}</>
+
                 </p>
               }
               {
-                reward == 2 &&
+                reward === 2 &&
                 <p style={{ textAlign: "center" }}>
                   {
                     certificates?.length > 0 ?
@@ -220,12 +216,19 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
             <p className="text-1">
               Próximo cargo
             </p>
-            <div className="subscription-info">
-              {user.level === 1 ? <p >
-                <span className="span">{formatDate}</span>
-              </p> :
-                <p><span className="span">s/f</span></p>}
-            </div>
+            {
+              user.role === "superAdmin" ?
+                <div className="subscription-info">
+                  <p><span className="span">Super Admin</span></p>
+                </div>
+                :
+                <div className="subscription-info">
+                  {user.level === 1 ? <p >
+                    <span className="span">{formatDate}</span>
+                  </p> :
+                    <p><span className="span">s/f</span></p>}
+                </div>
+            }
             {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>

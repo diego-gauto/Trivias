@@ -183,8 +183,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       <div className="first-text">
         <div className="main-text">
           <p >
-            Recompensas <br /><span>Proximamente</span>
-            {/* {
+            {
               (reward === 0 || reward === 1) && <>Siguiente<br />recompensa            <br /></>
             }
             {
@@ -219,7 +218,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                 }
 
               </>
-            } */}
+            }
           </p>
         </div>
         <div className="responsive-picture">
