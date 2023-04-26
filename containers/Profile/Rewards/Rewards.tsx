@@ -106,15 +106,40 @@ const Rewards = () => {
     setUserReward(requests);
     setCompleteCertificates(completedCertificates);
     setCourses(nextCourseCertificate);
-    getNextRewards(data);
+    await getNextRewards(data);
   }
-  const getNextRewards = (data: any) => {
-    let pointsFilter = [];
-    let monthFilter = [];
-    let pointRewardCompleted = [];
+  const getTimeReward = async (props: any) => {
+    const {
+      monthPercentage,
+      reward,
+    } = props;
     let monthRewardCompleted = [];
-    let progressPoints: number = 0;
     let progressMonth: number = 565;
+    let monthFilter = [];
+    monthFilter = reward.filter((data: any) => (data.type === "months" && monthPercentage < data.month));
+    monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && monthPercentage >= data.month));
+    monthFilter.sort((a: any, b: any) => a.month - b.month);
+    monthRewardCompleted.sort((a: any, b: any) => b.month - a.month);
+    if (monthFilter.length === 0) {
+      monthFilter = [{
+        month: 0,
+        title: "Sin Recompensas"
+      }]
+    }
+    else {
+      if (monthRewardCompleted.length === 0) {
+        progressMonth = 565 - (((monthProgress - 0) / (monthFilter[0].month - 0)) * 565)
+      }
+      else {
+        progressMonth = (565 - (((monthProgress - monthRewardCompleted[0].month) / (monthFilter[0].month - monthRewardCompleted[0].month)) * 565))
+      }
+    }
+    return { progressMonth, monthFilter, monthRewardCompleted }
+  }
+  const getNextRewards = async (data: any) => {
+    let pointsFilter: any = [];
+    let pointRewardCompleted = [];
+    let progressPoints: number = 0;
     let progressCertificates: number = 565;
     const {
       monthCompleted,
@@ -125,13 +150,10 @@ const Rewards = () => {
       user
     } = data;
     pointsFilter = reward.filter((data: any) => (data.type === "points" && user.score < data.points));
-    monthFilter = reward.filter((data: any) => (data.type === "months" && monthPercentage < data.month));
     pointRewardCompleted = reward.filter((data: any) => (data.type === "points" && user.score >= data.points));
-    monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && user.month >= data.month));
     pointsFilter.sort((a: any, b: any) => a.points - b.points);
-    monthFilter.sort((a: any, b: any) => a.month - b.month);
     pointRewardCompleted.sort((a: any, b: any) => b.points - a.points);
-    monthRewardCompleted.sort((a: any, b: any) => b.month - a.month);
+
     if (pointsFilter.length === 0) {
       pointsFilter = [{
         points: 0,
@@ -146,57 +168,49 @@ const Rewards = () => {
         progressPoints = 565 - (((user.score - pointRewardCompleted[0].points) / (pointsFilter[0].points - pointRewardCompleted[0].points)) * 565)
       }
     }
-    if (monthFilter.length === 0) {
-      monthFilter = [{
-        month: 0,
-        title: "Sin Recompensas"
-      }]
-    }
-    else {
-      if (monthRewardCompleted.length === 0) {
-        progressMonth = 565 - (((monthProgress - 0) / (monthFilter[0].month - 0)) * 565)
-      }
-      else {
-        progressMonth = 565 - (((monthProgress - monthRewardCompleted[0].month) / (monthFilter[0].month - monthRewardCompleted[0].month)) * 565)
-      }
-    }
     if (nextCourseCertificate) {
       progressCertificates = ((1 - nextCourseCertificate.progress) * 565);
     }
     else {
       progressCertificates = 565;
     }
-    let arrayRewards: any = [
-      {
-        type: "points",
-        scoreType: "puntaje",
-        score: user.score,
-        title: pointsFilter[0].title,
-        points: pointsFilter[0].points,
-        completed: pointRewardCompleted.length,
-        progress: progressPoints,
-      },
-      {
-        type: "months",
-        scoreType: "meses",
-        score: monthCompleted,
-        title: monthFilter[0].title,
-        months: monthFilter[0].month,
-        completed: monthRewardCompleted.length,
-        progress: progressMonth,
-      },
-      {
-        type: "certificates",
-        scoreType: "certificados",
-        score: totalCertificates ? totalCertificates : 0,
-        title: nextCourseCertificate?.title ? nextCourseCertificate.title : "Sin certificados",
-        certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : 0,
-        completed: totalCertificates ? totalCertificates : 0,
-        progress: progressCertificates,
-      },
-    ];
-    setLoading(false);
-    setRewardsTypes(arrayRewards);
+    let timeRewardData = {
+      monthPercentage: monthPercentage,
+      reward: reward,
+    }
+    await getTimeReward(timeRewardData).then((timeReward) => {
+      let arrayRewards: any = [
+        {
+          type: "points",
+          scoreType: "puntaje",
+          score: user.score,
+          title: pointsFilter[0].title,
+          points: pointsFilter[0].points,
+          completed: pointRewardCompleted.length,
+          progress: progressPoints,
+        },
+        {
+          type: "months",
+          scoreType: "meses",
+          score: monthCompleted,
+          title: timeReward.monthFilter[0].title,
+          months: timeReward.monthFilter[0].month,
+          completed: timeReward.monthRewardCompleted.length,
+          progress: timeReward.progressMonth,
+        },
+        {
+          type: "certificates",
+          scoreType: "certificados",
+          score: totalCertificates ? totalCertificates : 0,
+          title: nextCourseCertificate?.title ? nextCourseCertificate.title : "Sin certificados",
+          certificates: nextCourseCertificate?.lessonsLeft ? nextCourseCertificate.lessonsLeft : 0,
+          completed: totalCertificates ? totalCertificates : 0,
+          progress: progressCertificates,
+        },
+      ];
+      setLoading(false);
+      setRewardsTypes(arrayRewards);
+    })
   }
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
