@@ -62,6 +62,8 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
       lessonId: data.id,
       courseId: parseInt(courseIds.courseId),
       seasonId: courseIds.seasonId,
+      season: season,
+      lesson: lesson,
       status: false,
       user_id: user.user_id,
       title: data.lesson_homeworks.title,

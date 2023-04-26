@@ -8,8 +8,6 @@ import { AiFillLock } from 'react-icons/ai';
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useAuth } from "../../../hooks/useAuth";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getCoupons } from "../../../store/actions/CouponsActions";
-import { getWholeCourse } from "../../../store/actions/courseActions";
 import {
   Container,
   LoaderContainSpinner,

@@ -74,7 +74,11 @@ const NavBar = () => {
 
   useEffect(() => {
     socket.on("receiveMessage", (msg) => {
+      console.log(msg);
+
       if (userData) {
+        console.log(1);
+
         if (userData.user_id === msg.userId) {
           userNotifications(msg.userId);
         }
@@ -90,7 +94,6 @@ const NavBar = () => {
     let data = {
       userId: userId
     }
-
     getNotifications(data).then((res) => {
       setNotifications(res.data);
     })

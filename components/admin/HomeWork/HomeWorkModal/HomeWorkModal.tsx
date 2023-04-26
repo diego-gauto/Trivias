@@ -27,6 +27,10 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       user_id: data.userId,
       lessonId: data.lessonId,
       score: data.lessonPoints,
+      courseId: data.courseId,
+      season: data.seasonNumber - 1,
+      lesson: data.lessonNumber - 1,
+      title: data.courseTitle,
     }
     reviewHomeworkApi(temp).then(() => {
       handleClick();
@@ -35,6 +39,8 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
   }
 
   useEffect(() => {
+    console.log(data);
+
     if (data) {
       setReview({
         score: 0,
