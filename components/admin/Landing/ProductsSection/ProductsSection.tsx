@@ -25,9 +25,13 @@ const ProductsSection = (props: IProductsSectionProps) => {
   const chunk1 = productsData.slice(0, 3)
   const chunk2 = productsData.slice(3, 6)
   const updateProductState = (e: any, key: string, i: number) => {
-    const newState = [...productsData]
-    // @ts-expect-error
-    newState[i][key] = key === "file" ? e.target.files[0] : e.target.value
+    const newState: any = [...productsData]
+    if (key === "available") {
+      newState[i][key] = e.target.value === "disponible" ? 1 : 0
+    }
+    else {
+      newState[i][key] = key === "file" ? e.target.files[0] : e.target.value
+    }
     setProductsData(newState)
   }
 
@@ -50,8 +54,8 @@ const ProductsSection = (props: IProductsSectionProps) => {
       setProductsData(tempProduct)
     };
   }
-
-  const gerProductElement = ({ clickURL, imgURL, title, subtitle, price, url, image, img_display }: Product, i: number) => {
+  console.log(productsData);
+  const gerProductElement = ({ clickURL, imgURL, title, subtitle, price, url, image, img_display, available }: Product, i: number) => {
     return (
       <ColumnsContainer2 key={"product_landing_" + i}>
         <Inputs>
@@ -73,6 +77,15 @@ const ProductsSection = (props: IProductsSectionProps) => {
             value={price}
             placeholder="Desde $ 12.00"
           />
+        </Inputs>
+        <Inputs>
+          <EditText>
+            Producto Disponible
+          </EditText>
+          <select onChange={(e) => { updateProductState(e, "available", i) }} defaultValue={available === 1 ? "disponible" : "agotado"}>
+            <option value="disponible">Disponible</option>
+            <option value="agotado">Agotado</option>
+          </select>
         </Inputs>
         <Inputs>
           <EditText>
