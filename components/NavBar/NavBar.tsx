@@ -70,20 +70,20 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
-  const socket = io("ws://94.74.77.165:4003");
+  // const socket = io("ws://94.74.77.165:4003");
 
-  useEffect(() => {
-    socket.on("receiveMessage", (msg) => {
-      if (userData) {
-        if (userData.user_id === msg.userId) {
-          userNotifications(msg.userId);
-        }
-        if (msg.type === "global") {
-          userNotifications(userData.user_id);
-        }
-      }
-    });
-  }, [userData]);
+  // useEffect(() => {
+  //   socket.on("receiveMessage", (msg) => {
+  //     if (userData) {
+  //       if (userData.user_id === msg.userId) {
+  //         userNotifications(msg.userId);
+  //       }
+  //       if (msg.type === "global") {
+  //         userNotifications(userData.user_id);
+  //       }
+  //     }
+  //   });
+  // }, [userData]);
 
   const userNotifications = (userId: any) => {
     let data = {
@@ -122,7 +122,7 @@ const NavBar = () => {
       // localStorage.clear();
       // logoutFunc();
       if (userDataAuth.user !== null) {
-        userNotifications(userDataAuth.user.user_id)
+        // userNotifications(userDataAuth.user.user_id)
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
           setIsAdmin(true);
@@ -217,7 +217,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            <div className="bell-contain">
+            {/* <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 notifications.length > 0 &&
@@ -250,12 +250,11 @@ const NavBar = () => {
                   }
                 </div>
               </NotificationContainer>
-
               {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div>
+            </div> */}
             <Link href="/Profile">
               < UserImage>
                 {
