@@ -74,11 +74,7 @@ const NavBar = () => {
 
   useEffect(() => {
     socket.on("receiveMessage", (msg) => {
-      console.log(msg);
-
       if (userData) {
-        console.log(1);
-
         if (userData.user_id === msg.userId) {
           userNotifications(msg.userId);
         }
@@ -87,15 +83,15 @@ const NavBar = () => {
         }
       }
     });
-
-  }, []);
+  }, [userData]);
 
   const userNotifications = (userId: any) => {
     let data = {
       userId: userId
     }
     getNotifications(data).then((res) => {
-      setNotifications(res.data);
+      console.log(res);
+      setNotifications(res);
     })
   }
 
@@ -120,7 +116,6 @@ const NavBar = () => {
     setIngresarOpetionsMenuIsOpen(false);
     setNewHamburgerMenuIsOpen(false);
   }
-
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -246,7 +241,7 @@ const NavBar = () => {
                         return (
                           <Notifications
                             message={not.mesaage}
-
+                            key={"Notifications_" + index}
                           />
                         )
                       })

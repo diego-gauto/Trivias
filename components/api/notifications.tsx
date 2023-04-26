@@ -4,7 +4,7 @@ export const getNotifications = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "notifications/by-user", user)
     .then((res) => {
-      return res
+      return res.data
     })
     .catch((error) => {
       console.log(error);
