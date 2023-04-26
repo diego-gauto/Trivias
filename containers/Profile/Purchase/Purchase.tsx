@@ -201,7 +201,8 @@ const Purchase = () => {
           paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
           stripeId: userData.stripe_id,
           amount: price,
-          method: 'stripe'
+          method: 'stripe',
+          userId: userData.user_id
         }
         stripePaymentApi(data).then(async (res) => {
           if (res.error) {
