@@ -96,6 +96,13 @@ export const FolderInput = styled.input`
 export const Inputs = styled.div`
   display: flex;
   flex-direction: column;
+  select {
+    padding-block: 10px;
+    padding-inline: 20px;
+    border-radius: 100px;
+    border: 1px solid #6717cd;
+    max-width: 330px;
+  }
 `;
 export const ProfileData = styled.div`
   padding: 20px;

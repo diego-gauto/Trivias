@@ -19,5 +19,5 @@ export interface Product {
   image: any;
   new_image: any;
   img_display: any;
-  available: boolean;
+  available: any;
 }
