@@ -33,6 +33,8 @@ import { googleLogout } from "@react-oauth/google";
 import { useFacebook } from "react-facebook";
 import io from "socket.io-client";
 import { getNotifications } from "../api/notifications";
+import Notifications from "./Notifications/Notifications";
+import { NotificationContainer } from "./Notifications/Notifications.styled";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -41,6 +43,7 @@ const NavBar = () => {
   const [hamburger, setHamburger] = useState(false);
   const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
 
@@ -56,7 +59,9 @@ const NavBar = () => {
     setNewHamburgerMenuIsOpen(!newHamburgerMenuIsOpen);
     setIngresarOpetionsMenuIsOpen(false);
   }
-
+  const openNotifications = () => {
+    setOpenNotification(!openNotification);
+  }
   function closeHamburgerMenu() {
     setHamburger(false)
   }
@@ -215,14 +220,43 @@ const NavBar = () => {
               </div>
             </Link>
             <div className="bell-contain">
-              <SlBell className="bell" />
+              <SlBell className="bell" onClick={openNotifications} />
               {
                 notifications.length > 0 &&
                 <p className="notifications">
                   {notifications.length}
                 </p>
               }
-              <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
+              <NotificationContainer not={openNotification}>
+                <div className='title-container'>
+                  <h1 className='title'>
+                    Notificaciones
+                  </h1>
+                  <p className='read-all-tag'>
+                    Marcar como leidos
+                  </p>
+                </div>
+                <div className="all-notifications">
+                  {
+                    notifications.length > 0 ?
+                      notifications.map((not: any, index: number) => {
+                        return (
+                          <Notifications
+                            message={not.mesaage}
+
+                          />
+                        )
+                      })
+                      :
+                      <div className="empty-notifications">Sin Notificaciones!</div>
+                  }
+                </div>
+              </NotificationContainer>
+
+              {
+                !openNotification &&
+                <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
+              }
             </div>
             <Link href="/Profile">
               < UserImage>
