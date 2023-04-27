@@ -15,6 +15,7 @@ import { addHomeworkApi, getHomeworkUserApi } from '../../../../../components/ap
 import { getUserQuizApi, updateUserProgressByQuizApi, updateUserQuizApi, updateUserScoreApi } from '../../../../../components/api/lessons';
 import { user } from 'firebase-functions/v1/auth';
 import { LoaderContainSpinner } from '../../../Purchase/Purchase.styled';
+import { createNotification } from '../../../../../components/api/notifications';
 
 const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, handleClick }: any) => {
   const [status, setStatus] = useState("");
@@ -80,6 +81,18 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
         }
         const url = await uploadImageHomework(tempData);
         tempHomework.image = url;
+        let notification = {
+          userId: user.user_id,
+          message: 'Tarea subida',
+          type: 'homework',
+          subType: "",
+          notificationId: '',
+          courseId: parseInt(courseIds.courseId),
+          season: season,
+          lesson: lesson,
+          title: data.lesson_homeworks.title,
+        }
+        createNotification(notification);
         addHomeworkApi(tempHomework).then(() => {
           alert("Su tarea se subió correctamente!");
           setStatus("pending");
