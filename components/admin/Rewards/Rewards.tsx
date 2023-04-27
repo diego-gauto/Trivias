@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
 import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
+import { createNotification } from "../../api/notifications";
 import { getRequestsApi, getRewardsApi, updateRequestStatusApi } from "../../api/rewards";
 import { getUserApi } from "../../api/users";
 import { AdminContain } from "../SideBar.styled";
@@ -69,6 +70,16 @@ const Rewards = () => {
       alert("No tienes permisos para esta acción");
       return;
     }
+    let notification = {
+      userId: data.user_id,
+      message: 'Recompensa aprovada',
+      type: 'reward',
+      subType: "request",
+      notificationId: '',
+      score: 0,
+      title: data.title,
+    }
+    createNotification(notification);
     if (!data.status) {
       var result = confirm("Desea que esta recompensa sea reclamada?");
       if (result === true) {
