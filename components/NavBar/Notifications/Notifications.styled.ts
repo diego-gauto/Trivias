@@ -8,7 +8,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   height: 0;
   opacity: 0;
   top: 46px;
-  right: -145px;
+  right: -545px;
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
   padding-top: 20px;
   border-radius: 0 0 10px 10px;
@@ -24,6 +24,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
       overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
+      right: -145px;
       ::-webkit-scrollbar {
         background: white;
         border-radius: 10px;

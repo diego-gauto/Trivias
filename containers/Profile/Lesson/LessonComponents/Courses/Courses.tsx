@@ -2,6 +2,7 @@ import router from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive';
 import { addUserCertificateApi, getUserCertificateApi } from '../../../../../components/api/lessons';
+import { createNotification } from '../../../../../components/api/notifications';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
@@ -41,7 +42,16 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
       }
       getUserCertificateApi(ids).then((res) => {
         if (res.data.data.length === 0) {
-          addUserCertificateApi(tempCertificate)
+          let notification = {
+            userId: userData.user_id,
+            message: 'Nuevo certificado',
+            type: 'certificate',
+            notificationId: '',
+            courseId: course.id,
+            title: course.title,
+          }
+          createNotification(notification);
+          addUserCertificateApi(tempCertificate);
         }
       })
       setCertificate(true)
