@@ -41,9 +41,9 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       notificationId: '',
       score: data.lessonPoints,
       courseId: data.courseId,
-      season: data.season,
-      lesson: data.lesson,
-      title: data.title,
+      season: data.seasonNumber - 1,
+      lesson: data.lessonNumber - 1,
+      title: data.courseTitle,
     }
     createNotification(notification);
     reviewHomeworkApi(temp).then(() => {
