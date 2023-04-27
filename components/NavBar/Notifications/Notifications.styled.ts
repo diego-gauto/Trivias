@@ -46,6 +46,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
     display: flex;
     justify-content: space-between;
     padding-inline: 20px;
+    min-height: 22px;
   }
   .read-all-tag {
     font-size: 12px;
@@ -65,7 +66,6 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
       padding: 15px;
       gap: 20px;
       cursor: pointer;
-
       .notification-image {
         width: 50px;
         height: 50px;
