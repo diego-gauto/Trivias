@@ -14,12 +14,26 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   border-radius: 0 0 10px 10px;
   width: 400px;
   z-indez: 10;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
   ${(props) =>
     props.not &&
     css`
-      height: 400px;
+      height: 350px;
+      overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
+      ::-webkit-scrollbar {
+        background: white;
+        border-radius: 10px;
+        width: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        width: 10px;
+        background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        border-radius: 10px;
+      }
     `}
   p,
   h1 {
@@ -37,11 +51,34 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
     font-size: 12px;
     text-decoration: underline;
     color: #0000ee;
+    cursor: pointer;
   }
   .all-notifications {
     display: flex;
     flex-direction: column;
-    .notifications {
+    .hr-line {
+      color: #3f1168;
+      margin: 0;
+    }
+    .notification-data {
+      display: flex;
+      padding: 15px;
+      gap: 20px;
+      cursor: pointer;
+
+      .notification-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .notification-info {
+        color: #3f1168;
+        font-size: 14px;
+        span {
+          font-weight: 600;
+        }
+        margin: 0;
+      }
     }
     .empty-notifications {
       justify-content: center;
