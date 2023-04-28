@@ -5,6 +5,7 @@ import { ModContainer, Container, Title, DataContain, ItemContain, Text, Text2, 
 
 import { SendSingleEmail } from "../../../../store/actions/EmailActions";
 import { reviewHomeworkApi } from '../../../api/homeworks';
+import { createNotification } from '../../../api/notifications';
 
 interface props {
   show: boolean,
@@ -32,6 +33,19 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       lesson: data.lessonNumber - 1,
       title: data.courseTitle,
     }
+    let notification = {
+      userId: data.userId,
+      message: 'Tarea revisada',
+      type: 'homework',
+      subType: "update",
+      notificationId: '',
+      score: data.lessonPoints,
+      courseId: data.courseId,
+      season: data.seasonNumber - 1,
+      lesson: data.lessonNumber - 1,
+      title: data.courseTitle,
+    }
+    createNotification(notification);
     reviewHomeworkApi(temp).then(() => {
       handleClick();
       setValue(0);

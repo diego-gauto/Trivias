@@ -52,6 +52,14 @@ export const LessonContainer = styled.div`
             display: flex;
             align-items: center;
             gap: 10px;
+            .material-content {
+              display: flex;
+              gap: 20px;
+              align-items: center;
+              input {
+                padding-top: 5px;
+              }
+            }
             .close {
               cursor: pointer;
             }
@@ -61,6 +69,7 @@ export const LessonContainer = styled.div`
               cursor: pointer;
               text-decoration: none;
               color: black;
+              white-space: nowrap;
             }
             .extra-hmk {
               margin: 0;
@@ -68,6 +77,7 @@ export const LessonContainer = styled.div`
               cursor: pointer;
               text-decoration: none;
               color: black;
+              white-space: nowrap;
               &:hover {
                 font-weight: 600;
               }

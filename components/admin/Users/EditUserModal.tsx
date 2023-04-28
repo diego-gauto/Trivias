@@ -3,6 +3,7 @@ import { user } from 'firebase-functions/v1/auth';
 import React, { useEffect, useState } from 'react'
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { updateAdminAccessApi, updateUserInfoApi } from '../../api/admin';
+import { createNotification } from '../../api/notifications';
 import { getUserApi } from '../../api/users';
 import { ModalContainer, ModalContent } from './Modal.styled';
 
@@ -33,6 +34,13 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
       score: update.score,
       id: update.id
     }
+    let notification = {
+      userId: update.id,
+      type: 'reward',
+      notificationId: '',
+      score: update.score,
+    }
+    createNotification(notification);
     updateUserInfoApi(tempUser).then(() => {
       handleClick();
       setUpdating(false);

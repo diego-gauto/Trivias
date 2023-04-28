@@ -170,6 +170,11 @@ const Lessons = () => {
       };
     }
   }
+  const changeExtraMaterialTitle = (title: string, index: number) => {
+    let tempExtraMaterial = extraMaterial;
+    tempExtraMaterial[index].title = title;
+    setExtraMaterial(tempExtraMaterial)
+  }
   const removeExtraMaterial = (index: number) => {
     setMaterialLoader(true);
     let tempExtraMaterial: any = extraMaterial;
@@ -268,6 +273,7 @@ const Lessons = () => {
       lesson.extraMaterial = extraMaterial.map((b: any) => {
         let extraMat = {
           material: '',
+          title: b.title,
         }
         return extraMat
       })
@@ -284,9 +290,10 @@ const Lessons = () => {
               image.material = url
             })
           });
-          materialContent.forEach(async (image: any, index: number,) => {
-            await updateLessonHomeWorks(courseID, seasonID, image.material, res.data).then((url) => {
+          materialContent.forEach(async (mat: any, index: number,) => {
+            await updateLessonHomeWorks(courseID, seasonID, mat.material, res.data).then((url) => {
               let sentData = {
+                title: mat.title,
                 material: url,
                 id: res.lesson_material[index]
               }
@@ -605,14 +612,6 @@ const Lessons = () => {
               />
             </div>
             <div className="input-contain">
-              <label className="input-label" style={{ textAlign: "center" }}>
-                Vista previa de imagen
-              </label>
-              <img className="img-preview" src={lesson.banner} />
-            </div>
-          </div>
-          <div className="rows">
-            <div className="input-contain">
               <label className="input-label">
                 Material Adicional
               </label>
@@ -630,10 +629,32 @@ const Lessons = () => {
                         <AiOutlineClose className='close' onClick={() => { removeExtraMaterial(index) }} />
                         {
                           extra.id ?
-                            <Link href={extra.material}>
-                              <a target="_blank" className="extra-hmk">Tarea {index + 1}</a>
-                            </Link>
-                            : <a target="_blank" className="extra-no-hmk">Tarea {index + 1}</a>
+                            <div className='material-content'>
+                              <Link href={extra.material}>
+                                <a target="_blank" className="extra-hmk">Tarea {index + 1}</a>
+                              </Link>
+                              <input
+                                placeholder={'Titulo de la tarea ' + (index + 1)}
+                                className="input-create"
+                                defaultValue={extra.title}
+                                onChange={(e) => {
+                                  changeExtraMaterialTitle(e.target.value, index)
+                                  // setExtraMaterial({
+                                  //   ...extraMaterial[index], title: e.target.value
+                                  // })
+                                }}
+                              />
+                            </div>
+                            :
+                            <div className='material-content'>
+                              <a target="_blank" className="extra-no-hmk">Tarea {index + 1}</a>
+                              <input
+                                placeholder={'Titulo de la tarea ' + (index + 1)}
+                                className="input-create"
+                                defaultValue={extra.title}
+                              />
+                            </div>
+
                         }
                       </div>
                     )
@@ -641,6 +662,15 @@ const Lessons = () => {
                 }
               </div>
             </div>
+            <div className="input-contain">
+              <label className="input-label" style={{ textAlign: "center" }}>
+                Vista previa de imagen
+              </label>
+              <img className="img-preview" src={lesson.banner} />
+            </div>
+
+          </div>
+          <div className="rows">
             <div className="input-contain">
               <label className="input-label">
                 Tarea o Quiz

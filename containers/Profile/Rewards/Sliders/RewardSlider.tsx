@@ -5,6 +5,7 @@ import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
 import { createRequestApi } from '../../../../components/api/rewards';
 import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
+import { createNotification } from '../../../../components/api/notifications';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -142,12 +143,23 @@ const RewardSlider = (props: reward_slider) => {
     }
   }
   const sendRequest = async (reward: any) => {
+
     setLoader(true);
     let tempRequest: any = {
       user_id: user.user_id,
       reward_id: reward.id,
       status: false,
     }
+    let notification = {
+      userId: user.user_id,
+      message: reward.type === "points" ? 'Recompensa reclamada' : 'Beneficio reclamado',
+      type: 'reward',
+      subType: "request",
+      notificationId: '',
+      score: 0,
+      title: reward.title,
+    }
+    createNotification(notification);
     createRequestApi(tempRequest).then(() => {
       alert("Recompensa reclamada con éxito")
       getSliders();

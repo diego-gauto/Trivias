@@ -139,6 +139,11 @@ export const LessonContent = styled.div`
     font-weight: 700;
     font-size: 16px;
   }
+  .order-material {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
   .pdf {
     color: #74549c;
     font-size: 14px;
