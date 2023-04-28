@@ -9,4 +9,6 @@ export interface INotifications {
   created_at: string;
   openNotifications: any;
   notification_id: number;
+  unReadNotification: number;
+  setUnReadNotification: any;
 }

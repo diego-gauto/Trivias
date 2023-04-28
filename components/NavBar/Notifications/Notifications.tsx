@@ -1,13 +1,15 @@
 import { useRouter } from 'next/router';
 import { type } from 'os';
 import React, { useState } from 'react'
+import { FaHeart } from 'react-icons/fa';
+import { MdOutlineComment } from 'react-icons/md';
 import { updateNotificationStatusApi } from '../../api/notifications';
 import { INotifications } from './INotifications';
 import { NotificationData } from './Notifications.styled';
 const Notifications = (props: INotifications) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
-  const { message, status, title, type, courseID, seasonID, lessonID, created_at, openNotifications, notification_id } = props;
+  const { message, status, title, type, courseID, seasonID, lessonID, created_at, openNotifications, notification_id, unReadNotification, setUnReadNotification } = props;
   const [newStatus, setNewStatus] = useState<boolean>(!status ? false : true);
   const GonvarImg = "/images/purchase/logo.png";
   const spanColor = () => {
@@ -29,6 +31,12 @@ const Notifications = (props: INotifications) => {
     if (message === "Recompensa aprobada") {
       return '#006ca8'
     }
+    if (message === "Alguien le dio like a tu comentario") {
+      return 'red'
+    }
+    if (message === "Alguien te ha comentado") {
+      return '#e68a0d'
+    }
     if (message === "Su suscripción ha fallado" || message === "Su suscripción ha sido cancelada por falta de pago") {
       return '#ff0000'
     }
@@ -38,7 +46,7 @@ const Notifications = (props: INotifications) => {
     return '#3f1168'
   }
   const ClickNotification = () => {
-    if (type === "homework") {
+    if (type === "homework" || type === "like" || type === "comment") {
       router.push({
         pathname: 'Lesson',
         query: { id: courseID, season: seasonID, lesson: lessonID },
@@ -55,6 +63,7 @@ const Notifications = (props: INotifications) => {
       setNewStatus(true);
       updateNotificationStatusApi(notificationUpdate).then((res) => {
         console.log(res)
+        setUnReadNotification(unReadNotification - 1);
         // openNotifications();
       })
     } else {
@@ -88,9 +97,17 @@ const Notifications = (props: INotifications) => {
         <img className='notification-image' src={GonvarImg} />
         <div className="notification-texts">
           <p className='notification-info'>
-            <span style={{ color: spanColor() }}> {message}</span>
             {
-              (type === 'certificate' || type === "homework") ?
+              type === 'like' &&
+              <FaHeart className='like-icon' />
+            }
+            {
+              type === 'comment' &&
+              <MdOutlineComment className='comment-icon' />
+            }
+            <span style={{ color: spanColor() }}> {message} </span>
+            {
+              (type === 'certificate' || type === "homework" || type === 'comment' || type === 'like') ?
                 " en el curso: "
                 : " - "
             }

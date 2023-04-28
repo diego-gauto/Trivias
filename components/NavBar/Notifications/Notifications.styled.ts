@@ -105,6 +105,12 @@ export const NotificationData = styled.div<{
         font-weight: 600;
         color: #868686;
       }
+      .comment-icon {
+        color: #e68a0d;
+      }
+      .like-icon {
+        color: red;
+      }
     }
   }
   .empty-notifications {
