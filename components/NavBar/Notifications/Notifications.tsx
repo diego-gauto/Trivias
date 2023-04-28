@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import { type } from 'os';
-import React from 'react'
+import React, { useState } from 'react'
+import { updateNotificationStatusApi } from '../../api/notifications';
 import { INotifications } from './INotifications';
+import { NotificationData } from './Notifications.styled';
 const Notifications = (props: INotifications) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
-  const { message, status, title, type, courseID, seasonID, lessonID, created_at, openNotifications } = props;
+  const { message, status, title, type, courseID, seasonID, lessonID, created_at, openNotifications, notification_id } = props;
+  const [newStatus, setNewStatus] = useState<boolean>(!status ? false : true);
   const GonvarImg = "/images/purchase/logo.png";
   const spanColor = () => {
     if (message === "Tarea subida") {
@@ -38,7 +41,19 @@ const Notifications = (props: INotifications) => {
     if (type === "reward") {
       router.push("/Rewards")
     }
-    openNotifications();
+    if (!status) {
+      let notificationUpdate = {
+        status: 1,
+        id: notification_id,
+      }
+      setNewStatus(true);
+      updateNotificationStatusApi(notificationUpdate).then((res) => {
+        console.log(res)
+        // openNotifications();
+      })
+    } else {
+      // openNotifications();
+    }
   }
   const TransformDate = () => {
     let notification_date = new Date(created_at);
@@ -57,8 +72,8 @@ const Notifications = (props: INotifications) => {
     return timeData
   }
   return (
-    <>
-      <div className="notification-data" style={{ backgroundColor: (status ? "white" : "#ECE8F0") }} onClick={ClickNotification}>
+    <NotificationData newStatus={newStatus} status={status} >
+      <div className="notification-data" onClick={ClickNotification}>
         <img className='notification-image' src={GonvarImg} />
         <div className="notification-texts">
           <p className='notification-info'>
@@ -77,7 +92,7 @@ const Notifications = (props: INotifications) => {
 
       </div>
       <hr className='hr-line' />
-    </>
+    </NotificationData>
   )
 }
 export default Notifications;

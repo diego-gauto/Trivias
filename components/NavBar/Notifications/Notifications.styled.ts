@@ -58,47 +58,61 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   .all-notifications {
     display: flex;
     flex-direction: column;
-    .hr-line {
-      color: #3f1168;
-      margin: 0;
+  }
+`;
+export const NotificationData = styled.div<{
+  status: boolean;
+  newStatus: boolean;
+}>`
+  .hr-line {
+    color: #3f1168;
+    margin: 0;
+  }
+  .notification-data {
+    display: flex;
+    padding: 15px;
+    gap: 20px;
+    cursor: pointer;
+    background-color: #ece8f0;
+    ${(props) =>
+      (props.status || props.newStatus) &&
+      css`
+        background-color: white;
+      `};
+    &:hover {
+      background-color: #c4aade;
     }
-    .notification-data {
+    .notification-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .notification-texts {
       display: flex;
-      padding: 15px;
-      gap: 20px;
-      cursor: pointer;
-      .notification-image {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+      flex-direction: column;
+      p {
+        margin: 0;
       }
-      .notification-texts {
-        display: flex;
-        flex-direction: column;
-        p {
-          margin: 0;
-        }
-        .notification-info {
-          color: #3f1168;
-          font-size: 14px;
-          span {
-            font-weight: 600;
-          }
-        }
-        .date-text {
-          font-size: 10px;
+      .notification-info {
+        color: #3f1168;
+        font-size: 14px;
+        span {
           font-weight: 600;
-          color: #868686;
         }
       }
+      .date-text {
+        font-size: 10px;
+        font-weight: 600;
+        color: #868686;
+      }
     }
-    .empty-notifications {
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      margin-top: 120px;
-      font-size: 20px;
-      font-weight: 600;
-    }
+  }
+  .empty-notifications {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 120px;
+    font-size: 20px;
+    font-weight: 600;
   }
 `;

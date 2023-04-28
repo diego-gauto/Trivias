@@ -8,4 +8,5 @@ export interface INotifications {
   lessonID: number;
   created_at: string;
   openNotifications: any;
+  notification_id: number;
 }

@@ -32,7 +32,7 @@ import { SlBell } from "react-icons/sl";
 import { googleLogout } from "@react-oauth/google";
 import { useFacebook } from "react-facebook";
 import io from "socket.io-client";
-import { getNotifications } from "../api/notifications";
+import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
 
@@ -134,6 +134,14 @@ const NavBar = () => {
   } catch (error) {
     setLoggedIn(false);
   }
+  const updateNotificationStatus = () => {
+    let data = {
+      userId: userData.user_id
+    }
+    updateAllNotificationStatusApi(data).then(() => {
+      userNotifications(data.userId);
+    })
+  }
   const logoutFunc = () => {
     localStorage.clear();
     if (userData.provider === "web") {
@@ -230,7 +238,7 @@ const NavBar = () => {
                   <h1 className='title'>
                     Notificaciones
                   </h1>
-                  <p className='read-all-tag'>
+                  <p className='read-all-tag' onClick={updateNotificationStatus}>
                     Marcar como leidos
                   </p>
                 </div>
@@ -249,6 +257,7 @@ const NavBar = () => {
                             lessonID={not.lesson}
                             created_at={not.created_at}
                             openNotifications={openNotifications}
+                            notification_id={not.notification_id}
                             key={"Notifications_" + index}
                           />
                         )
