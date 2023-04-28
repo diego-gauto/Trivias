@@ -65,14 +65,19 @@ const Notifications = (props: INotifications) => {
     let notification_date = new Date(created_at);
     let transformToSeconds = notification_date.getTime() / 1000;
     let secondsAfterCreate = today - transformToSeconds;
-    let timeData = '1 min'
-    if (secondsAfterCreate < 3600) {
-      timeData = Math.round(secondsAfterCreate / 60) + ' min'
+    let timeData = 'hace 1 min'
+    if (secondsAfterCreate <= 3600) {
+      timeData = 'hace ' + Math.round(secondsAfterCreate / 60) + ' min'
     }
-    if (secondsAfterCreate > 3600 && secondsAfterCreate < 86400) {
-      timeData = Math.round(secondsAfterCreate / 3600) + ' h'
+    if (secondsAfterCreate > 3600 && secondsAfterCreate <= 86400) {
+      timeData = 'hace ' + Math.round(secondsAfterCreate / 3600) + ' h'
     }
-    if (secondsAfterCreate > 86400) {
+    if (secondsAfterCreate > 86400 && secondsAfterCreate <= 2592000) {
+      timeData = 'hace ' + (Math.round(secondsAfterCreate / 86400) === 1
+        ? Math.round(secondsAfterCreate / 86400) + ' dia'
+        : Math.round(secondsAfterCreate / 86400) + ' dias')
+    }
+    if (secondsAfterCreate > 2592000) {
       timeData = new Date(transformToSeconds * 1000).toLocaleDateString("es-MX")
     }
     return timeData
