@@ -72,13 +72,24 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
         height: 50px;
         border-radius: 50%;
       }
-      .notification-info {
-        color: #3f1168;
-        font-size: 14px;
-        span {
-          font-weight: 600;
+      .notification-texts {
+        display: flex;
+        flex-direction: column;
+        p {
+          margin: 0;
         }
-        margin: 0;
+        .notification-info {
+          color: #3f1168;
+          font-size: 14px;
+          span {
+            font-weight: 600;
+          }
+        }
+        .date-text {
+          font-size: 10px;
+          font-weight: 600;
+          color: #868686;
+        }
       }
     }
     .empty-notifications {

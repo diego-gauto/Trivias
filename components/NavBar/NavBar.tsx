@@ -240,13 +240,15 @@ const NavBar = () => {
                       notifications.map((not: any, index: number) => {
                         return (
                           <Notifications
-                            message={not.message}
+                            message={not.message === "Recompensa aprovada" ? "Recompensa aprobada" : not.message}
                             status={not.status}
                             title={not.title}
                             type={not.type}
                             courseID={not.course_id}
                             seasonID={not.season}
                             lessonID={not.lesson}
+                            created_at={not.created_at}
+                            openNotifications={openNotifications}
                             key={"Notifications_" + index}
                           />
                         )

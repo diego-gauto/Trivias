@@ -6,4 +6,6 @@ export interface INotifications {
   courseID: number;
   seasonID: number;
   lessonID: number;
+  created_at: string;
+  openNotifications: any;
 }
