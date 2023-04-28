@@ -29,6 +29,12 @@ const Notifications = (props: INotifications) => {
     if (message === "Recompensa aprobada") {
       return '#006ca8'
     }
+    if (message === "Su suscripción ha fallado" || message === "Su suscripción ha sido cancelada por falta de pago") {
+      return '#ff0000'
+    }
+    if (message === "Pago de suscripción") {
+      return '#4BB543'
+    }
     return '#3f1168'
   }
   const ClickNotification = () => {
@@ -83,7 +89,7 @@ const Notifications = (props: INotifications) => {
                 " en el curso: "
                 : " - "
             }
-            <span>{title}</span>
+            <span>{title && title}</span>
           </p>
           <p className='date-text'>
             {TransformDate()}
