@@ -44,6 +44,7 @@ const NavBar = () => {
   const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
+  const [unReadNotification, setUnReadNotification] = useState<number>(0);
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
 
@@ -91,6 +92,13 @@ const NavBar = () => {
     }
     getNotifications(data).then((res) => {
       console.log(res);
+      let tempCounter = 0;
+      res.forEach((not: any) => {
+        if (!not.status) {
+          tempCounter++;
+        }
+      })
+      setUnReadNotification(tempCounter);
       setNotifications(res);
     })
   }
@@ -139,6 +147,7 @@ const NavBar = () => {
       userId: userData.user_id
     }
     updateAllNotificationStatusApi(data).then(() => {
+      setUnReadNotification(0);
       userNotifications(data.userId);
     })
   }
@@ -228,9 +237,9 @@ const NavBar = () => {
             <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
-                notifications.length > 0 &&
-                <p className="notifications">
-                  {notifications.length}
+                unReadNotification > 0 &&
+                <p className="notifications" onClick={openNotifications} >
+                  {unReadNotification}
                 </p>
               }
               <NotificationContainer not={openNotification}>
@@ -258,6 +267,8 @@ const NavBar = () => {
                             created_at={not.created_at}
                             openNotifications={openNotifications}
                             notification_id={not.notification_id}
+                            unReadNotification={unReadNotification}
+                            setUnReadNotification={setUnReadNotification}
                             key={"Notifications_" + index}
                           />
                         )
@@ -377,12 +388,53 @@ const NavBar = () => {
                 </div>
               </Link>
               <div className="bell-contain">
-                <SlBell className="bell" />
+                <SlBell className="bell" onClick={openNotifications} />
                 {
-                  notifications.length > 0 &&
-                  <p className="notifications">
-                    {notifications.length}
+                  unReadNotification > 0 &&
+                  <p className="notifications" onClick={openNotifications} >
+                    {unReadNotification}
                   </p>
+                }
+                <NotificationContainer not={openNotification}>
+                  <div className='title-container'>
+                    <h1 className='title'>
+                      Notificaciones
+                    </h1>
+                    <p className='read-all-tag' onClick={updateNotificationStatus}>
+                      Marcar como leidos
+                    </p>
+                  </div>
+                  <div className="all-notifications">
+                    {
+                      notifications.length > 0 ?
+                        notifications.map((not: any, index: number) => {
+                          return (
+                            <Notifications
+                              message={not.message === "Recompensa aprovada" ? "Recompensa aprobada" : not.message}
+                              status={not.status}
+                              title={not.title}
+                              type={not.type}
+                              courseID={not.course_id}
+                              seasonID={not.season}
+                              lessonID={not.lesson}
+                              created_at={not.created_at}
+                              openNotifications={openNotifications}
+                              notification_id={not.notification_id}
+                              unReadNotification={unReadNotification}
+                              setUnReadNotification={setUnReadNotification}
+                              key={"Notifications_" + index}
+                            />
+                          )
+                        })
+                        :
+                        <div className="empty-notifications">Sin Notificaciones!</div>
+                    }
+                  </div>
+                </NotificationContainer>
+
+                {
+                  !openNotification &&
+                  <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
                 }
               </div>
               < UserImage onClick={() => { setHamburger(!hamburger) }}>
