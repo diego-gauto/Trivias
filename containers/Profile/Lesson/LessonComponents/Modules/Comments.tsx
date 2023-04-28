@@ -9,7 +9,8 @@ import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
 import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addCommentLikeApi, deleteCommentAnswerLikeApi, deleteCommentLikeApi, retrieveComments } from '../../../../../components/api/lessons'
-const Comments = ({ value, setValue, user, data, comments }: any) => {
+import { createNotification } from '../../../../../components/api/notifications'
+const Comments = ({ value, setValue, user, data, comments, course, season, lesson }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
@@ -51,6 +52,18 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
       commentId: x.comment_id
     }
     if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+      let notification = {
+        userId: x.user_id ? x.user_id : "",
+        message: 'Alguien le dio like a tu comentario',
+        type: 'like',
+        notificationId: '',
+        courseId: course.id,
+        title: course.title,
+        lesson: lesson,
+        season: season,
+        name: user.name
+      }
+      createNotification(notification);
       addCommentLikeApi(temp).then(() => {
         getComments();
       })
@@ -67,6 +80,18 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
       commentId: x.commentA_id
     }
     if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+      let notification = {
+        userId: x.comment_user_id ? x.comment_user_id : "",
+        message: 'Alguien le dio like a tu comentario',
+        type: 'like',
+        notificationId: '',
+        courseId: course.id,
+        title: course.title,
+        lesson: lesson,
+        season: season,
+        name: user.name
+      }
+      createNotification(notification);
       addCommentAnswerLikeApi(temp).then(() => {
         getComments();
       })
@@ -101,12 +126,25 @@ const Comments = ({ value, setValue, user, data, comments }: any) => {
 
   const answerQuestion = (x: any) => {
     let body: any;
+
     if (answer) {
       body = {
         userId: user.user_id ? user.user_id : "",
         comment: answer,
         commentId: x.comment_id,
       }
+      let notification = {
+        userId: x.user_id ? x.user_id : "",
+        message: 'Alguien te ha comentado',
+        type: 'comment',
+        notificationId: '',
+        courseId: course.id,
+        title: course.title,
+        lesson: lesson,
+        season: season,
+        name: user.name
+      }
+      createNotification(notification);
       addCommentAnswerApi(body).then((res) => {
         getComments();
       })
