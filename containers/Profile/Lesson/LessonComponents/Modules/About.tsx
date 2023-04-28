@@ -10,7 +10,7 @@ import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const About = ({ value, setValue, data, teacherCreds, course }: any) => {
-
+  console.log(data.lesson_material)
   const [teacher, setTeacher] = useState<any>([])
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [index, setIndex] = useState<number>(0)
@@ -47,13 +47,15 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
               data.lesson_material.length > 0 &&
               <>
                 <p className='support-material'>Material de Apoyo</p>
-                {
-                  data.lesson_material.map((extra: any, index: number) => {
-                    return (
-                      <a key={"extra_material_" + index} className='pdf' target="_blank" download={extra.material} href={extra.material}>{index + 1}. Descargar Material</a>
-                    )
-                  })
-                }
+                <div className="order-material">
+                  {
+                    data.lesson_material.map((extra: any, index: number) => {
+                      return (
+                        <a key={"extra_material_" + index} className='pdf' target="_blank" download={extra.material} href={extra.material}>{index + 1}. {extra.title}</a>
+                      )
+                    })
+                  }
+                </div>
               </>
             }
             {/* <p className='title'>Especificaciones</p>
