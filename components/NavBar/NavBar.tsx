@@ -386,7 +386,7 @@ const NavBar = () => {
                   <div className="inside" />
                 </div>
               </Link>
-              <div className="bell-contain">
+              {/* <div className="bell-contain">
                 <SlBell className="bell" onClick={openNotifications} />
                 {
                   unReadNotification > 0 &&
@@ -435,7 +435,7 @@ const NavBar = () => {
                   !openNotification &&
                   <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
                 }
-              </div>
+              </div> */}
               < UserImage onClick={() => { setHamburger(!hamburger) }}>
                 {
                   userData && userData.photoURL
