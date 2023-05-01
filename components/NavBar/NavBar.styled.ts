@@ -362,7 +362,7 @@ export const LogoS = styled.i`
   height: 100%;
 `;
 export const LogoS_2 = styled.i`
-  background-size: cover;
+  background-size: contain;
   background-position: center;
 
   margin-left: 35px;
