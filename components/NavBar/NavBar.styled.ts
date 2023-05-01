@@ -56,7 +56,6 @@ export const NavTags = styled.div`
 `;
 export const Logo = styled.img`
   background-repeat: no-repeat;
-  object-fit: cover;
   width: 130px;
   height: 70px;
   padding-left: 0;
