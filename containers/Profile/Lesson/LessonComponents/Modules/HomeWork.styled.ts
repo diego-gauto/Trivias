@@ -18,7 +18,7 @@ export const HomeWorkContain = styled.div`
       display: flex;
       align-items: center;
       gap: 10px;
-      justify-content: center;
+      justify-content: flex-start;
       font-weight: 500;
       opacity: 0.7;
       color: #8e5fc1;
@@ -460,7 +460,7 @@ export const HomeWorkContain = styled.div`
         display: flex;
         align-items: center;
         gap: 10px;
-        justify-content: center;
+        justify-content: flex-start;
         font-weight: 500;
         opacity: 0.7;
         color: #8e5fc1;

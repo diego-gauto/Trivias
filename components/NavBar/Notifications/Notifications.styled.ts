@@ -17,9 +17,11 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   gap: 20px;
   display: flex;
   flex-direction: column;
+  max-height: 0;
   ${(props) =>
     props.not &&
     css`
+      max-height: 350px;
       height: 350px;
       overflow: auto;
       transition: 0.4s ease-in-out;
