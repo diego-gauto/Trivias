@@ -94,7 +94,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
         }
         createNotification(notification);
         addHomeworkApi(tempHomework).then(() => {
-          alert("Su tarea se subió correctamente!");
           setStatus("pending");
         })
       };
@@ -302,21 +301,19 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
               <>
                 <p dangerouslySetInnerHTML={{ __html: data.lesson_homeworks.about }} className="quill-hw" />
                 {(homework && homework.status === 1 && homework.approved === 0) && <>
-                  <p className='reason'>Tu tarea fue rechazada, por la siguiente razón:</p>
+                  <p className='reason'>Lamentablemente tu tarea no cuenta con las pautas para ser aprobada.Te invitamos a que la hagas nuevamente y la vuelvas a entregar:</p>
                   <p>{homework.comment}</p>
                 </>}
                 {status == "" && <div className='homework' onClick={uploadHwk}>
                   <BsFileArrowUp></BsFileArrowUp>
-                  Subir Tarea
+                  Entregar Tarea
                   <input id="hide" type="file" onChange={(e) => { getImage(e.target.files) }} hidden />
                 </div>}
-                {status == "pending" && <div className='homework'>
-                  <BsFileArrowUp></BsFileArrowUp>
-                  En Revisión
+                {status == "pending" && <div className='homework' style={{ cursor: "none" }}>
+                  Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
                 </div>}
-                {status == "approved" && <div className='homework'>
-                  <BsFileArrowUp></BsFileArrowUp>
-                  Tarea Aprobada
+                {status == "approved" && <div className='homework' style={{ cursor: "none" }}>
+                  Felicidades. Buen trabajo!!! Has aprobado tu tarea. Te invitamos a seguir con la próxima lección.
                 </div>}
               </>
             }

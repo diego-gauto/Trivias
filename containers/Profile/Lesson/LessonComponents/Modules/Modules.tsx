@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import About from './About'
 import Comments from './Comments'
-import Extra from './Extra'
 import HomeWork from './HomeWork'
 import { MainContainer } from './Module.styled'
 
