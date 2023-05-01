@@ -508,7 +508,7 @@ const Purchase = () => {
                 <div className="paypal" onClick={() => {
 
                 }}>
-                  {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                  {/* {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
                     "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
                     currency: "MXN",
                     'vault': true,
@@ -574,7 +574,7 @@ const Purchase = () => {
                       }}
                     />}
                   </PayPalScriptProvider>}
-                  <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
+                  <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i> */}
                 </div>
               </div>
             </div>
@@ -767,7 +767,7 @@ const Purchase = () => {
                     {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                     {loader && <LoaderContainSpinner />}
                   </div>
-                  <div className="paypal" onClick={() => {
+                  {/* <div className="paypal" onClick={() => {
 
                   }}>
                     {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
@@ -836,7 +836,7 @@ const Purchase = () => {
                       />}
                     </PayPalScriptProvider>}
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="box">
