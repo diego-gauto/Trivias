@@ -369,7 +369,7 @@ const Sliders = (props: ICourseData) => {
               slideType === "monthly-courses" &&
               <ButtonContain>
                 {
-                  (user && user.level === 0) &&
+                  (user && user.level === 0 && user.final_date < today) &&
                   <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
                     <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                       <PurpleButton>
