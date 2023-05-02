@@ -143,7 +143,7 @@ const Login = () => {
     }
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
-      window.location.href = "/";
+      window.location.href = "/Preview";
     })
   }
 
@@ -183,7 +183,7 @@ const Login = () => {
               }
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                window.location.href = "/";
+                window.location.href = "/Preview";
               })
               setAuthLoader(false);
               return
@@ -202,7 +202,7 @@ const Login = () => {
             setIsLoading(false);
           } else {
             localStorage.setItem('email', user.email)
-            window.location.href = "/"
+            window.location.href = "/Preview"
           }
         })
       })
@@ -234,7 +234,7 @@ const Login = () => {
               }
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                window.location.href = "/";
+                window.location.href = "/Preview";
               })
               setAuthLoader(false);
               return
@@ -253,7 +253,7 @@ const Login = () => {
             setIsLoading(false);
           } else {
             localStorage.setItem('email', user.email);
-            window.location.href = "/"
+            window.location.href = "/Preview"
           }
         })
       })
