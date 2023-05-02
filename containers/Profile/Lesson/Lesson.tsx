@@ -61,6 +61,7 @@ const Lesson = () => {
           getDataForNextLesson(res);
           history(res, user);
           setIsLoading(false);
+          return
         })
         setLoggedIn(true)
       } else {
