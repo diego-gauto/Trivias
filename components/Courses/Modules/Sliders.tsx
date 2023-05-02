@@ -28,6 +28,7 @@ const Sliders = (props: ICourseData) => {
   const [texts, setTexts] = useState({
     title: "",
     spanTitle: "",
+    spanAditional: "",
   })
   // const getCourseContent = () => {
   //   let tempTexts: any = {
@@ -162,30 +163,50 @@ const Sliders = (props: ICourseData) => {
       setCourses(tempCourses.continue_watching);
       setTexts(tempTexts);
     }
-    if (slideType === "my-courses") {
-      tempTexts.title = "Tus Cursos";
+    if (slideType === "free-courses") {
+      tempTexts.title = "Cursos Gratis";
       tempTexts.spanTitle = "";
-      setCourses(tempCourses.my_courses);
+      setCourses(tempCourses.free_courses);
       setTexts(tempTexts);
     }
-    if (slideType === "all-courses") {
-      tempTexts.title = "Cursos disponibles";
-      tempTexts.spanTitle = "";
-      setCourses(tempCourses.all_courses);
+    if (slideType === "art-courses") {
+      tempTexts.title = "Cursos de Arte ";
+      tempTexts.spanAditional = "Incluídos "
+      tempTexts.spanTitle = "Gonvar +";
+      setCourses(tempCourses.art_courses);
       setTexts(tempTexts);
     }
+    if (slideType === "structure-courses") {
+      tempTexts.title = "Cursos de Estructura ";
+      tempTexts.spanAditional = "Incluídos "
+      tempTexts.spanTitle = "Gonvar +";
+      setCourses(tempCourses.structure_courses);
+      setTexts(tempTexts);
+    }
+    // if (slideType === "my-courses") {
+    //   tempTexts.title = "Tus Cursos";
+    //   tempTexts.spanTitle = "";
+    //   setCourses(tempCourses.my_courses);
+    //   setTexts(tempTexts);
+    // }
+    // if (slideType === "all-courses") {
+    //   tempTexts.title = "Cursos disponibles";
+    //   tempTexts.spanTitle = "";
+    //   setCourses(tempCourses.all_courses);
+    //   setTexts(tempTexts);
+    // }
     if (slideType === "product-courses") {
       tempTexts.title = "Cursos especiales ";
       tempTexts.spanTitle = "de pago individual";
       setCourses(tempCourses.product_courses);
       setTexts(tempTexts);
     }
-    if (slideType === "monthly-courses") {
-      tempTexts.title = "Cursos incluidos en ";
-      tempTexts.spanTitle = "Gonvar+";
-      setCourses(tempCourses.monthly_courses);
-      setTexts(tempTexts);
-    }
+    // if (slideType === "monthly-courses") {
+    //   tempTexts.title = "Cursos incluidos en ";
+    //   tempTexts.spanTitle = "Gonvar+";
+    //   setCourses(tempCourses.monthly_courses);
+    //   setTexts(tempTexts);
+    // }
   }
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   let slider: any = document.querySelector(`.scroll-container${slideNumber}`) as HTMLElement;
@@ -295,7 +316,7 @@ const Sliders = (props: ICourseData) => {
             }
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
-                {texts.title}<span>{texts.spanTitle}</span>
+                {texts.title}{texts.spanAditional !== '' && <span className='span-additional'>{texts.spanAditional}</span>}<span className='span-title'>{texts.spanTitle}</span>
               </Title>
             </div>
             <SlideContain className={`scroll-slide scroll-container` + slideNumber}>

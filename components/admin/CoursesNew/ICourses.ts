@@ -14,6 +14,8 @@ export interface ICourses {
   type: string;
   sequential: boolean;
   created_at: string;
+  route: string;
+  course_number: number;
   id: number;
   professors: [IProfessors];
   categories: [ICategories];

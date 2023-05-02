@@ -24,10 +24,10 @@ const Courses = () => {
   const router = useRouter();
   let courseSections = [
     "continue-watching",
-    "my-courses",
-    "all-courses",
+    "free-courses",
+    "art-courses",
+    "structure-courses",
     "product-courses",
-    "monthly-courses"
   ]
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
@@ -110,6 +110,7 @@ const Courses = () => {
         setUserData(res);
         // coursesAll(res);
         getAllCourseDataApi(res.id).then((data) => {
+          console.log(data);
           setCourses(data);
           setVideoCourse(data.video_preview);
           setSeasonIndex(data.video_preview.currentSeason);

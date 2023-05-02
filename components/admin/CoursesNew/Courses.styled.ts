@@ -23,6 +23,12 @@ export const CourseContainer = styled.div`
         display: flex;
         width: 32%;
         flex-direction: column;
+        select {
+          padding-block: 5px;
+          padding-inline: 20px;
+          border-radius: 100px;
+          border: 1px solid #6717cd;
+        }
         .create-button {
           width: fit-content;
           border-radius: 100px;
@@ -131,6 +137,12 @@ export const CourseContainer = styled.div`
             font-size: 16px;
             color: #6717cd;
             margin: 0;
+          }
+          select {
+            padding-block: 5px;
+            padding-inline: 20px;
+            border-radius: 100px;
+            border: 1px solid #6717cd;
           }
           input::file-selector-button {
             display: none;

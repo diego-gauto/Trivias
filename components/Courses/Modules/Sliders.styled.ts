@@ -141,7 +141,10 @@ export const Title = styled.h1`
   font-family: "Montserrat", sans-serif;
   margin: 0;
   padding-left: 60px;
-  span {
+  .span-additional {
+    font-style: italic;
+  }
+  .span-title {
     color: #a733e4;
   }
   @media (max-width: 1023px) {

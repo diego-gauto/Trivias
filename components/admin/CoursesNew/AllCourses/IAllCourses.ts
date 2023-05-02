@@ -15,6 +15,8 @@ export interface IAllCourses {
   sequential: boolean;
   openCourseEdit: number;
   openCourse: any;
+  route: string;
+  course_number: number;
   moveTo: any;
   id: number;
   index: number;

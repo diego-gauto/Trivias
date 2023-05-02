@@ -55,6 +55,8 @@ const Courses = () => {
     rating: 0,
     reviews: 0,
     duration: 0,
+    course_number: 0,
+    route: "estructura",
     type: "Gratis",
     sequential: false,
     published: true,
@@ -687,6 +689,28 @@ const Courses = () => {
                 }
               </SelectOption>
             </div>
+            <div className="input-contain">
+              <label className="input-label">Ruta de Aprendizaje</label>
+              <select onChange={(e) => { setCourse({ ...course, route: e.target.value }) }}>
+                <option value="estructura">Estructura</option>
+                <option value="arte">Arte</option>
+              </select>
+            </div>
+          </div>
+          <div className="rows">
+            <div className="input-contain">
+              <label className="input-label">Numero del Curso</label>
+              <input
+                className="input-create"
+                type="number"
+                placeholder="Orden del curso"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, course_number: parseInt(e.target.value)
+                  })
+                }}
+              />
+            </div>
           </div>
           <div className="rows" style={{ justifyContent: "center" }}>
             <div className="input-contain" style={{ alignItems: "center" }}>
@@ -726,6 +750,8 @@ const Courses = () => {
                 categories={course.categories}
                 materials={course.materials}
                 published={course.published}
+                route={course.route}
+                course_number={course.course_number}
                 openCourseEdit={openCourseEdit}
                 openCourse={openCourse}
                 allProfessors={professors}

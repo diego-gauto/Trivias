@@ -49,6 +49,8 @@ const AllCourses = (props: IAllCourses) => {
     duration,
     phrase,
     mandatory,
+    route,
+    course_number,
     professors,
     categories,
     materials,
@@ -77,6 +79,8 @@ const AllCourses = (props: IAllCourses) => {
     rating: props.rating,
     reviews: props.reviews,
     duration: props.duration,
+    course_number: props.course_number,
+    route: props.route,
     type: props.type,
     sequential: props.sequential,
     professors: props.professors,
@@ -832,8 +836,49 @@ const AllCourses = (props: IAllCourses) => {
                   </SelectOption>
               }
             </div>
-            {
-              startEdit &&
+            <div className="course-data">
+              <label className="course-data-title">
+                Ruta de Aprendizaje
+              </label>
+              {
+                !startEdit ?
+                  <p className="content">
+                    {route ? route : "Sin ruta"}
+                  </p>
+                  :
+                  <select onChange={(e) => { setCourse({ ...course, route: e.target.value }) }} value={course.route} >
+                    <option value="estructura">Estructura</option>
+                    <option value="arte">Arte</option>
+                  </select>
+              }
+            </div>
+            <div className="course-data">
+              <label className="course-data-title">
+                Numero del curso
+              </label>
+              {
+                !startEdit ?
+                  <p className="content">
+                    {course_number}
+                  </p>
+                  :
+                  <input
+                    className="input-edit"
+                    type="number"
+                    defaultValue={course_number}
+                    placeholder="Orden del curso"
+                    onChange={(e: any) => {
+                      setCourse({
+                        ...course, course_number: parseInt(e.target.value)
+                      })
+                    }}
+                  />
+              }
+            </div>
+          </div>
+          {
+            startEdit &&
+            <div className='rows'>
               <div className="course-data">
                 <label className="course-data-title">Portada del curso</label>
                 <input
@@ -843,8 +888,8 @@ const AllCourses = (props: IAllCourses) => {
                   onChange={(e) => { getImage(e.target.files) }}
                 />
               </div>
-            }
-          </div>
+            </div>
+          }
           <div className="rows" style={{ justifyContent: "center", marginTop: 10 }}>
             <div className="button-data">
               <button
