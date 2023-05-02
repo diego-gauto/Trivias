@@ -23,6 +23,7 @@ import { getLandingData } from "../store/actions/LandingActions";
 import { getUserApi } from "../components/api/users";
 import { getCoursesApi, getLandingCoursesApi } from "../components/api/lessons";
 import { getLandingProductApi, getLandingReviewApi } from "../components/api/admin";
+import WelcomeModal from "../components/WelcomeModal/WelcomeModal";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ const Homepage = () => {
   const [reviews, setReviews] = useState<any>([]);
   const [product, setProduct] = useState<any>([]);
   const [userData, setUserData] = useState<any>(null);
+  const [welcomeModal, setWelcomeModal] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState(false);
   let today = new Date().getTime() / 1000;
   // try {
@@ -291,6 +293,7 @@ const Homepage = () => {
       }
       <Module5_1 slideData={reviews} />
       <Module6_1 slideData={product} />
+      <WelcomeModal show={welcomeModal} setShow={setWelcomeModal} />
       {/* <Footer /> */}
     </Container>
   )
