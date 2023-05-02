@@ -352,7 +352,7 @@ export const UserImage = styled.div`
   }
 `;
 export const LogoS = styled.i`
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-image: url(../images/Navbar/gonvar_purple.png);
   background-repeat: no-repeat;
