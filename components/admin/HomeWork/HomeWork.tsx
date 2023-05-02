@@ -22,11 +22,9 @@ const HomeWork = () => {
   const [homeWorks, setHomeWorks] = useState<any>([]);
   const [data, setData] = useState<any>([]);
   const [id, setId] = useState("");
-  const [professor, setProfessor] = useState<any>([]);
   const [course, setCourse] = useState<any>([]);
   const [openSelect, setOpenSelect] = useState(false)
   const [courseSelect, setCourseSelect] = useState(false)
-  const [professorFilter, setProfessorFilter] = useState<any>("");
   const [courseFilter, setCourseFilter] = useState<any>("");
 
   const [pastUsers, setPastUsers] = useState<any>([]);
@@ -99,12 +97,6 @@ const HomeWork = () => {
     })
   }
 
-  const getAllteachers = () => {
-    getTeacher().then((res) => {
-      setProfessor(res);
-      return res;
-    })
-  }
   const handleClick = () => {
     let index;
     index = homeWorks.findIndex((x: any) => x.id == id);
@@ -112,11 +104,8 @@ const HomeWork = () => {
     setHomeWorks([...homeWorks])
   }
   useEffect(() => {
-    getAllteachers();
-  }, [])
-  useEffect(() => {
     getHomeworks();
-  }, [professorFilter, courseFilter])
+  }, [courseFilter])
 
   const isValidCSVFile = (file: any) => {
     return file.name.endsWith(".csv");
@@ -305,16 +294,14 @@ const HomeWork = () => {
             </p>
             {(userData?.role === "superAdmin") && <div style={{ display: "flex", gap: 10 }}>
               <SelectContain key={2}>
-                <Selected onClick={openCourseSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
+                <Selected onClick={openCourseSelect}>
                   {
                     courseFilter ? courseFilter.courseTittle : "Seleccione un curso"
                   }
                   <CaretD2 style={{ top: "18%" }} />
                 </Selected>
-
                 {
                   courseSelect == true &&
-
                   <OptionContain>
                     <Option
                       onClick={() => {
@@ -349,56 +336,6 @@ const HomeWork = () => {
                         )
                       })
                     }
-
-                  </OptionContain>
-                }
-              </SelectContain>
-              <SelectContain key={1}>
-                <Selected onClick={openTeacherSelect} style={professor.length === 0 ? { height: 43 } : { height: "fit-content" }}>
-                  {
-                    professorFilter ? professorFilter.name : "Seleccione un professor"
-                  }
-                  <CaretD2 style={{ top: "18%" }} />
-                </Selected>
-
-                {
-                  openSelect == true &&
-
-                  <OptionContain>
-                    <Option
-                      onClick={() => {
-                        setProfessorFilter("");
-                        setOpenSelect(false)
-                      }}>
-                      <input
-                        type="radio"
-                        id="professor"
-                        name="professor"
-                        value=""
-                      />
-                      <Label2>Ver Todas</Label2>
-                    </Option>
-                    {
-                      professor.map((val: any, index: any) => {
-                        return (
-                          <Option
-                            key={"Professor " + index}
-                            onClick={() => {
-                              setProfessorFilter(val);
-                              setOpenSelect(false)
-                            }}>
-                            <input
-                              type="radio"
-                              id="professor"
-                              name="professor"
-                              value="professor"
-                            />
-                            <Label2>{val.name}</Label2>
-                          </Option>
-                        )
-                      })
-                    }
-
                   </OptionContain>
                 }
               </SelectContain>
