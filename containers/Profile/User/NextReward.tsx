@@ -22,6 +22,8 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   const [time, setTime] = useState<any>();
   const [certificates, setCertificates] = useState<any>();
 
+  const today = new Date().getTime() / 1000;
+
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
     let tempMonthObj: any = { obtained: [], blocked: [] };
@@ -207,7 +209,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {user.level === 1 ? <p >
+              {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
                 Gonvar+<br />
                 <span className="span">Suscripción mensual</span>
               </p> :

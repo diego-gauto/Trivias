@@ -18,7 +18,7 @@ const Layout = ({ children }: any) => {
   return (
     <Body style={{ overflowX: "hidden" }}>
       <NavBar />
-      <ChildrenContain style={{ display: "flex" }}>
+      <ChildrenContain style={{ display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial" }}>
         {
           router.pathname.slice(1, 6) === "admin" &&
           <SideBar />
