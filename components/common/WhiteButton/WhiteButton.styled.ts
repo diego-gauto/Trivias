@@ -4,9 +4,9 @@ import styled, { css } from "styled-components";
 
 export const WhiteButtonContainer = styled(Button)`
   font-family: "Montserrat";
-  border: 1.5px solid #ffffff;
+  border: 1.5px solid #6717cd;
   border-radius: 100px;
-  color: #fff;
+  color: #6717cd;
   max-width: 200px;
   font-weight: 600;
   background: transparent;
