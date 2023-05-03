@@ -81,7 +81,7 @@ const HomeWork = () => {
     let user: any;
     if (localStorage.getItem("email")) user = await getUserApi(localStorage.getItem("email"))
     setUserData(user);
-    getHomeworksApi().then((res: any) => {
+    getHomeworksApi().then(async (res: any) => {
       res.data.data.forEach((element: any) => {
         let tempDate: any = new Date();
         let tempDay = tempDate.getDate()
@@ -89,11 +89,16 @@ const HomeWork = () => {
         let tempYear = tempDate.getFullYear()
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
+      let tempHomeworks = res.data.data
       if (user.role === "admin") {
         let array = user.roles[7].courses.split(",");
-        res.data.data.filter((x: any) => x.courses_id.includes(array));
+        let temp: any = [];
+        await Promise.all(array.map((x: any) => {
+          temp.push(+x)
+        }))
+        tempHomeworks = res.data.data.filter((x: any) => temp.includes(x.courseId));
       }
-      setHomeWorks(res.data.data);
+      setHomeWorks(tempHomeworks);
     })
   }
   const handleClick = () => {

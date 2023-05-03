@@ -17,6 +17,7 @@ const SideBar = () => {
   const [isLanding, setIsLanding] = useState<boolean>();
   const [isCoupons, setIsCoupons] = useState<boolean>();
   const [isUsers, setIsUsers] = useState<boolean>();
+  const [isComments, setIsComments] = useState<boolean>();
   const [index, setIndex] = useState(0)
   const [section, setSection] = useState(0)
   const [userData, setUserData] = useState<any>(null);
@@ -44,6 +45,7 @@ const SideBar = () => {
           if (role.role === "coupons" && changeValue(role.view)) setIsCoupons(true);
           if (role.role === "homeworks" && changeValue(role.view)) setIsHomeworks(true);
           if (role.role === "blogs" && changeValue(role.view)) setIsBlogs(true);
+          if (role.role === "comments" && changeValue(role.view)) setIsComments(true);
         });
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'superAdmin') {
@@ -71,6 +73,9 @@ const SideBar = () => {
       }
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Sections") {
         setIndex(8)
+      }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Comments") {
+        setIndex(9)
       }
     }, [])
   } catch (error) {
@@ -101,6 +106,9 @@ const SideBar = () => {
           router.push({ pathname: "/" });
         }
         if (router.pathname == "/admin/HomeWork" && userData.roles[7].view == 0) {
+          router.push({ pathname: "/" });
+        }
+        if (router.pathname == "/admin/Comments" && userData.roles[8].view == 0) {
           router.push({ pathname: "/" });
         }
         // if (router.pathname == "/admin/Edit" && userData.courses == false) {
@@ -170,6 +178,11 @@ const SideBar = () => {
             <li style={{ color: index == 6 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(6)
             }}>Assigments</li>
+          </Link>}
+          {(isSuperAdmin || isHomeworks) && <Link href="/admin/Comments">
+            <li style={{ color: index == 9 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(9)
+            }}>Comments</li>
           </Link>}
           {(isSuperAdmin || isBlogs) && <Link href="/admin/Blog">
             <li style={{ color: index == 7 ? "#ffa500" : "#fff" }} onClick={() => {

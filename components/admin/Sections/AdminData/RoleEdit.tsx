@@ -42,15 +42,15 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
   { role: "Usuarios", active: false, name: "users", tasks: [{ active: false, task: "Editar" }, { active: false, task: "Generar Reporte" }] },
   { role: "Landing", active: false, name: "landing", tasks: [] },
   { role: "Pagos", active: false, name: "payments", tasks: [] },
-  { role: "Tarea", active: false, name: "homeworks", tasks: [], courses: [] }]);
+  { role: "Tarea", active: false, name: "homeworks", tasks: [], courses: [] },
+  { role: "Comentarios", active: false, name: "comments", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }], courses: [] }]);
   const [loading, setLoading] = useState(true);
   const [values, setValues] = useState("");
-
+  const [valuesComments, setValuesComments] = useState("");
   useEffect(() => {
 
     const temp = roles
     admin.adminTypes.forEach((element: any) => {
-
       temp.forEach((role: any) => {
         if (element.role === role.name) {
           role.active = changeValue(element.view);
@@ -101,7 +101,7 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
     setRoles(roles);
   };
 
-  const handleMultiple = (e: any) => {
+  const handleMultiple = (e: any, role: string) => {
     let options = [...e.target.options];
     let temp: any = [];
     options.forEach((value: any) => {
@@ -109,7 +109,9 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
         temp.push(value.value)
       }
     });
-    setValues(temp.toString());
+    if (role === "homeworks") {
+      setValues(temp.toString());
+    }
   }
 
   const updateAdminType = () => {
@@ -180,7 +182,7 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
                         </div>
                       )
                     })}
-                    {(courses.length > 0 && x.name === 'homeworks') && <select name="" defaultValue={values} multiple onChange={(e) => { handleMultiple(e) }}>
+                    {(courses.length > 0 && x.name === 'homeworks') && <select name="" defaultValue={values} multiple onChange={(e) => { handleMultiple(e, "homeworks") }}>
                       {courses.map((course: any) => {
                         return (
                           <option value={course.id}>{course.title}</option>
