@@ -96,7 +96,6 @@ const HomeWork = () => {
       setHomeWorks(res.data.data);
     })
   }
-
   const handleClick = () => {
     let index;
     index = homeWorks.findIndex((x: any) => x.id == id);
@@ -278,7 +277,6 @@ const HomeWork = () => {
       //   console.log('exito')
       // })
     })
-
   }
   return (
     <AdminContain>

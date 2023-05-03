@@ -22,8 +22,11 @@ export const WelcomeContainer = styled.div`
       }
     }
     .close {
-      font-size: 30px;
+      position: absolute;
+      font-size: 20px;
       cursor: pointer;
+      top: 17px;
+      right: 17px;
     }
   }
 `;

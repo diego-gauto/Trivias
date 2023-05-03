@@ -14,8 +14,8 @@ const WelcomeModal = (props: IWelcomeModal) => {
       <WelcomeContainer>
         <div className='title-container'>
           <h1 className='title'>
-            Bienvenida a tú nueva plataforma <span>Gonvar</span>,
-            ve este video para conocer mas sobre tú nueva experiencia <span>Gonvar</span>.
+            Bienvenida a tú nueva plataforma, ve este video
+            para conocer mas sobre la experiencia <span>Gonvar</span>.
           </h1>
           <TfiClose className="close" onClick={handleClose} />
         </div>
