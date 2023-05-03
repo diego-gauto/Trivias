@@ -251,7 +251,7 @@ const Sliders = (props: ICourseData) => {
         query: { id: courseData.id, season: courseData.currentSeason, lesson: courseData.currentLesson },
       });
     }
-    if (slideType === "my-courses") {
+    if (slideType === "free-courses") {
       router.push({
         pathname: 'Lesson',
         query: { id: courseData.id, season: 0, lesson: 0 },
@@ -338,10 +338,10 @@ const Sliders = (props: ICourseData) => {
                     return (
                       <div key={"Course_" + index + slideNumber} id="grey-field" className="grey-field"
                         onClick={() => {
-                          if (slideType === "continue-watching" || slideType === "my-courses") {
+                          if (slideType === "continue-watching" || slideType === "free-courses") {
                             goTo(course)
                           }
-                          if (slideType === "all-courses" || slideType === "product-courses" || slideType === "monthly-courses") {
+                          if (slideType === "art-courses" || slideType === "product-courses" || slideType === "structure-courses" || slideType === "makeup-courses") {
                             openModal(course)
                           }
                         }}
