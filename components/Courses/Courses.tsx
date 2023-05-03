@@ -111,7 +111,6 @@ const Courses = () => {
         setUserData(res);
         // coursesAll(res);
         getAllCourseDataApi(res.id).then((data) => {
-          console.log(data);
           setCourses(data);
           setVideoCourse(data.video_preview);
           setSeasonIndex(data.video_preview.currentSeason);

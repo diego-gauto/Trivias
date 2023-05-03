@@ -142,6 +142,7 @@ export const Title = styled.h1`
   margin: 0;
   padding-left: 60px;
   .span-additional {
+    font-size: 20px;
     font-weight: 500;
     font-style: italic;
   }
