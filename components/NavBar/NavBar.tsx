@@ -382,7 +382,7 @@ const NavBar = () => {
             </div>
             <UserContain color={color}>
               <Link href="/Rewards">
-                <div className="rewards-circle">
+                <div className="rewards-circle" onClick={closeHamburgerMenu}>
                   <div className="inside" />
                 </div>
               </Link>

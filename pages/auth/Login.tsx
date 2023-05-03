@@ -111,7 +111,7 @@ const Login = () => {
         }
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
           localStorage.setItem('email', signUpData.credentials.email);
-          window.location.href = '/';
+          window.location.href = '/Preview';
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -152,7 +152,7 @@ const Login = () => {
   useEffect(() => {
     if (loggedIn) {
       setIsLoading(true)
-      window.location.href = "/";
+      window.location.href = "/Preview";
     }
     setTimeout(() => {
       setLoginLoader(true)

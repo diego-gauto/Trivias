@@ -328,11 +328,11 @@ export const RewardCardContainer = styled.div<{
         white-space:nowrap;
         color:#ede7f2;
         text-align: center;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 500;
         span{
           white-space:initial;
-          font-size: 14px;
+          font-size: 16px;
           color: #fedd67;
           font-weight: 600;
         }         
