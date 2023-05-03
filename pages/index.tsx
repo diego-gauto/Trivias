@@ -34,7 +34,7 @@ const Homepage = () => {
   const [reviews, setReviews] = useState<any>([]);
   const [product, setProduct] = useState<any>([]);
   const [userData, setUserData] = useState<any>(null);
-  const [welcomeModal, setWelcomeModal] = useState<boolean>(true);
+  const [welcomeModal, setWelcomeModal] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState(false);
   let today = new Date().getTime() / 1000;
   // try {
@@ -195,6 +195,7 @@ const Homepage = () => {
       })
     }
     else {
+      setWelcomeModal(true)
       getLandingCoursesApi(null).then((data) => {
         data.gonvar_courses.forEach((course: any) => {
           course.totalDuration = hms(course.totalDuration);
