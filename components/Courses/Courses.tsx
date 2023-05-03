@@ -27,6 +27,7 @@ const Courses = () => {
     "free-courses",
     "art-courses",
     "structure-courses",
+    "makeup-courses",
     "product-courses",
   ]
   window.addEventListener("resize", () => {

@@ -25,6 +25,7 @@ const Sliders = (props: ICourseData) => {
   const [courses, setCourses] = useState<any>([]);
   const [course, setCourse] = useState<any>({});
   const router = useRouter();
+  const GonvarLogo = "../images/purchase/logo.png";
   const [texts, setTexts] = useState({
     title: "",
     spanTitle: "",
@@ -170,17 +171,24 @@ const Sliders = (props: ICourseData) => {
       setTexts(tempTexts);
     }
     if (slideType === "art-courses") {
-      tempTexts.title = "Cursos de Arte ";
-      tempTexts.spanAditional = "Incluídos "
-      tempTexts.spanTitle = "Gonvar +";
+      tempTexts.title = "Cursos de Arte en Uñas, ";
+      tempTexts.spanAditional = "Incluídos en "
+      tempTexts.spanTitle = "";
       setCourses(tempCourses.art_courses);
       setTexts(tempTexts);
     }
     if (slideType === "structure-courses") {
-      tempTexts.title = "Cursos de Estructura ";
-      tempTexts.spanAditional = "Incluídos "
-      tempTexts.spanTitle = "Gonvar +";
+      tempTexts.title = "Cursos de Estructura en Uñas, ";
+      tempTexts.spanAditional = "Incluídos en "
+      tempTexts.spanTitle = "";
       setCourses(tempCourses.structure_courses);
+      setTexts(tempTexts);
+    }
+    if (slideType === "makeup-courses") {
+      tempTexts.title = "Cursos de Maquilla en Uñas, ";
+      tempTexts.spanAditional = "Incluídos en "
+      tempTexts.spanTitle = "";
+      setCourses(tempCourses.makeup_courses);
       setTexts(tempTexts);
     }
     // if (slideType === "my-courses") {
@@ -317,6 +325,10 @@ const Sliders = (props: ICourseData) => {
             <div className="grey-field" style={{ maxWidth: "fit-content" }}>
               <Title>
                 {texts.title}{texts.spanAditional !== '' && <span className='span-additional'>{texts.spanAditional}</span>}<span className='span-title'>{texts.spanTitle}</span>
+                {
+                  (slideType === "art-courses" || slideType === "structure-courses" || slideType === "makeup-courses") &&
+                  <img className='gonvar-logo' src={GonvarLogo} />
+                }
               </Title>
             </div>
             <SlideContain className={`scroll-slide scroll-container` + slideNumber}>

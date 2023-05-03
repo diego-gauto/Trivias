@@ -694,6 +694,7 @@ const Courses = () => {
               <select onChange={(e) => { setCourse({ ...course, route: e.target.value }) }}>
                 <option value="estructura">Estructura</option>
                 <option value="arte">Arte</option>
+                <option value="maquillaje">Maquillaje</option>
               </select>
             </div>
           </div>

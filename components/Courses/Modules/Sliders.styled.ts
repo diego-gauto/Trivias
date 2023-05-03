@@ -142,10 +142,14 @@ export const Title = styled.h1`
   margin: 0;
   padding-left: 60px;
   .span-additional {
+    font-weight: 500;
     font-style: italic;
   }
   .span-title {
     color: #a733e4;
+  }
+  img {
+    width: 30px;
   }
   @media (max-width: 1023px) {
     padding-left: 30px;
