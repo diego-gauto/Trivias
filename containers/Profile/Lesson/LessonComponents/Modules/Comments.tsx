@@ -24,6 +24,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
         userId: user.user_id ? user.user_id : "",
         comment: comment,
         lessonId: data.id,
+        courseId: course.id
       }
       addCommentApi(body).then((res) => {
         getComments();
@@ -132,6 +133,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
         userId: user.user_id ? user.user_id : "",
         comment: answer,
         commentId: x.comment_id,
+        courseId: course.id
       }
       let notification = {
         userId: x.user_id ? x.user_id : "",
