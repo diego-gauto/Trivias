@@ -185,7 +185,7 @@ const Sliders = (props: ICourseData) => {
       setTexts(tempTexts);
     }
     if (slideType === "makeup-courses") {
-      tempTexts.title = "Cursos de Maquilla en Uñas, ";
+      tempTexts.title = "Cursos de Maquilla, ";
       tempTexts.spanAditional = "Incluídos en "
       tempTexts.spanTitle = "";
       setCourses(tempCourses.makeup_courses);
