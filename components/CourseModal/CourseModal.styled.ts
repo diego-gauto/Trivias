@@ -125,57 +125,6 @@ export const CourseContain = styled.div<{ level: any }>`
         }
         p {
           font-size: 12px;
-          .info-icon {
-            display: inline-block;
-            font-size: 6px;
-            font-weight: 500;
-            line-height: 6px;
-            position: relative;
-            top: -5px;
-            border-radius: 100%;
-            background-color: gray;
-            color: white;
-            height: 10px;
-            width: 10px;
-            text-align: center;
-            padding-top: 2px;
-            padding-left: 2px;
-            left: 2px;
-            @media (max-width: 1023px) {
-              padding-left: 1px;
-            }
-            cursor: pointer;
-            @media (max-width: 450px) {
-              top: -2px !important;
-            }
-            &:hover {
-              .info-box {
-                display: block;
-                width: 200px;
-                background: gray;
-                border-radius: 10px 10px 0px 10px;
-                transform: translate(-99%, -110%);
-                padding: 10px;
-                text-align: left;
-                font-size: 12px;
-                line-height: 12px;
-                color: white;
-                letter-spacing: 1px;
-                font-weight: 400;
-                @media (max-width: 990px) {
-                  transform: translate(-50%, -130%);
-                }
-                @media (max-width: 450px) {
-                  transform: translate(-50%, -150%);
-                }
-              }
-            }
-          }
-          .info-box {
-            position: absolute;
-            display: none;
-          }
-
           @media (max-width: 450px) {
             letter-spacing: 1px;
             font-size: 8px;
@@ -341,55 +290,6 @@ export const CourseContain = styled.div<{ level: any }>`
       display: flex;
       gap: 10px;
       align-items: center;
-      .info-icon {
-        display: inline-block;
-        font-size: 6px;
-        font-weight: 600;
-        position: relative;
-        top: -5px;
-        border-radius: 100%;
-        background-color: gray;
-        color: white;
-        height: 10px;
-        width: 10px;
-        text-align: center;
-        padding-top: 2px;
-        padding-left: 2px;
-        cursor: pointer;
-        text-transform: math-auto;
-        font-weight: 500;
-        line-height: 6px;
-        @media (max-width: 450px) {
-          top: -2px;
-        }
-
-        &:hover {
-          .info-box {
-            display: block;
-            width: 200px;
-            background: gray;
-            border-radius: 10px 10px 0px 10px;
-            transform: translate(-99%, -110%);
-            padding: 10px;
-            text-align: left;
-            line-height: normal;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 1px;
-
-            p {
-              color: white;
-            }
-            @media (max-width: 990px) {
-              transform: translate(-50%, -140%);
-            }
-          }
-        }
-      }
-      .info-box {
-        position: absolute;
-        display: none;
-      }
       @media (max-width: 450px) {
         margin-block-start: 8px;
         margin-block-end: 12px;
@@ -535,47 +435,6 @@ export const CourseContain = styled.div<{ level: any }>`
           }
           .name {
             font-size: 16px;
-          }
-          .info-icon {
-            display: inline-block;
-            font-size: 6px;
-            font-weight: 600;
-            position: relative;
-            top: -5px;
-            border-radius: 100%;
-            background-color: gray;
-            color: white;
-            height: 10px;
-            width: 10px;
-            text-align: center;
-            padding-top: 2px;
-            padding-left: 2px;
-            right: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            @media (max-width: 450px) {
-              top: -2px !important;
-            }
-            &:hover {
-              .info-box {
-                display: block;
-                width: 200px;
-                background: gray;
-                border-radius: 10px 10px 0px 10px;
-                transform: translate(-99%, -110%);
-                padding: 10px;
-                text-align: left;
-                line-height: 12px;
-                letter-spacing: 1px;
-                color: white;
-                font-weight: 400;
-                font-size: 12px;
-              }
-            }
-          }
-          .info-box {
-            position: absolute;
-            display: none;
           }
         }
         img {
@@ -827,4 +686,66 @@ export const TextContainer = styled.div`
 export const VideoContain = styled.div`
   display: flex;
   gap: 20px;
+`;
+export const InformationIcon = styled.div`
+  font-family: "Raleway", sans-serif;
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 500;
+  text-transform: none;
+  font-style: italic;
+  line-height: 8px;
+  letter-spacing: 3px;
+  position: relative;
+  top: -5px;
+  border-radius: 100%;
+  background-color: gray;
+  color: white;
+  height: 12px;
+  width: 12px;
+  text-align: center;
+  padding-top: 2px;
+  padding-left: 2px;
+  left: 1px;
+  @media (max-width: 1023px) {
+    padding-left: 1px;
+  }
+  cursor: pointer;
+  @media (max-width: 450px) {
+    top: -2px !important;
+    font-size: 6px;
+    line-height: 6px;
+    height: 10px;
+    width: 10px;
+  }
+  .info-box {
+    display: none;
+    position: absolute;
+  }
+  &:hover {
+    .info-box {
+      font-weight: 400;
+      font-style: normal;
+      display: block;
+      width: 200px;
+      background: gray;
+      border-radius: 10px 10px 0px 10px;
+      transform: translate(-99%, -110%);
+      padding: 10px;
+      text-align: left;
+      font-size: 12px;
+      line-height: 12px;
+      color: white;
+      letter-spacing: 1px;
+      font-weight: 400;
+      z-index: 3;
+      @media (max-width: 990px) {
+        left: 200px;
+        border-radius: 10px 10px 10px 0px;
+      }
+      @media (max-width: 450px) {
+        // transform: translate(-50%, -150%);
+      }
+    }
+  }
 `;

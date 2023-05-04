@@ -14,6 +14,7 @@ import {
   EpisodeTime,
   EpisodeTitle,
   ImageBack,
+  InformationIcon,
   LessonContain,
   LessonTitle,
   ModalBackground,
@@ -167,7 +168,7 @@ const CourseModal = (props: ICourseModal) => {
                 {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/iconoRosa.png" alt="" />}
                 <div className="difficulty-word">
                   {course.difficulty}
-                  <div className="info-icon">
+                  <InformationIcon>
                     i
                     <div className="info-box">
                       {course.difficulty === "Muy Fácil" && "Recomendado para personas principiantes"}
@@ -176,7 +177,7 @@ const CourseModal = (props: ICourseModal) => {
                       {course.difficulty === "Avanzado" && "Recomendado para personas a partir de un año de experiencia"}
                       {course.difficulty === "Máster" && "Recomendado para personas a partir de un año de experiencia y con capacitación constante"}
                     </div>
-                  </div>
+                  </InformationIcon>
                 </div>
               </div>
               <p className="time">Duración estimada</p>
@@ -194,7 +195,7 @@ const CourseModal = (props: ICourseModal) => {
                   {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/iconoRosa.png" alt="" />}
                   <div className="difficulty-word">
                     {course.difficulty}
-                    <div className="info-icon">
+                    <InformationIcon>
                       i
                       <div className="info-box">
                         {course.difficulty === "Muy Fácil" && "Recomendado para personas principiantes"}
@@ -203,7 +204,7 @@ const CourseModal = (props: ICourseModal) => {
                         {course.difficulty === "Avanzado" && "Recomendado para personas a partir de un año de experiencia"}
                         {course.difficulty === "Máster" && "Recomendado para personas a partir de un año de experiencia y con capacitación constante"}
                       </div>
-                    </div>
+                    </InformationIcon>
                   </div>
                 </div>
                 <div className="professor-container">
@@ -212,12 +213,12 @@ const CourseModal = (props: ICourseModal) => {
                     <span className="name">
                       {course.professors?.length > 0 ? course.professors[0].name : "Iker Robles García"}
                     </span>
-                    <span className="info-icon">
+                    <InformationIcon    >
                       i
-                      <span className="info-box">
+                      <label className="info-box">
                         {course.professors?.length > 0 ? (course.professors[0].about ? course.professors[0].about : "Lorem ipsum") : "Lorem ipsum"}
-                      </span>
-                    </span>
+                      </label>
+                    </InformationIcon>
                   </p>
                 </div>
               </div>
@@ -251,12 +252,12 @@ const CourseModal = (props: ICourseModal) => {
                           : <>Iker Robles García</>
                       }
                     </span>
-                    <span className="info-icon">
+                    <InformationIcon>
                       i
-                      <span className="info-box">
+                      <label className="info-box">
                         {course.professors?.length > 0 ? (course.professors[0].about ? course.professors[0].about : "Lorem ipsum") : "Lorem ipsum"}
-                      </span>
-                    </span>
+                      </label>
+                    </InformationIcon>
                   </p>
                 </div>
               </div>}
