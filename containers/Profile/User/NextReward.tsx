@@ -228,7 +228,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                   {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
                     <span className="span">{formatDate}</span>
                   </p> :
-                    <p><span className="span">s/f</span></p>}
+                    <p><span className="span">{user.subscription === 1 ? "Haz cancelado tu suscripción, ya no se renovara" : "s/f"}</span></p>}
                 </div>
             }
             {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
