@@ -508,8 +508,8 @@ const Purchase = () => {
                 <div className="paypal" onClick={() => {
 
                 }}>
-                  {/* {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
-                    "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
+                  {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                    "client-id": "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz",
                     currency: "MXN",
                     'vault': true,
                   }}
@@ -526,7 +526,7 @@ const Purchase = () => {
                       createSubscription={(data, actions) => {
                         setPlan({ method: "paypal" })
                         return actions.subscription.create({
-                          plan_id: 'P-6P515571TU0367642MMDGG4Y'
+                          plan_id: 'P-2P063165RR167053TMRKD7BQ'
                         })
                       }}
                       onApprove={(data: any, actions) => {
@@ -574,7 +574,7 @@ const Purchase = () => {
                       }}
                     />}
                   </PayPalScriptProvider>}
-                  <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i> */}
+                  <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>
               </div>
             </div>
@@ -767,11 +767,11 @@ const Purchase = () => {
                     {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                     {loader && <LoaderContainSpinner />}
                   </div>
-                  {/* <div className="paypal" onClick={() => {
+                  <div className="paypal" onClick={() => {
 
                   }}>
                     {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
-                      "client-id": "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR",
+                      "client-id": "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz",
                       currency: "MXN",
                       'vault': true,
                     }}
@@ -787,7 +787,7 @@ const Purchase = () => {
                         createSubscription={(data, actions) => {
                           setPlan({ method: "paypal" })
                           return actions.subscription.create({
-                            plan_id: 'P-6P515571TU0367642MMDGG4Y'
+                            plan_id: 'P-2P063165RR167053TMRKD7BQ'
                           })
                         }}
                         onApprove={(data: any, actions) => {
@@ -836,7 +836,7 @@ const Purchase = () => {
                       />}
                     </PayPalScriptProvider>}
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
-                  </div> */}
+                  </div>
                 </div>
               </div>
               <div className="box">
