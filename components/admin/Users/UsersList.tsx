@@ -202,7 +202,7 @@ const UsersList = () => {
   }, [show]);
 
   const formatDate = (value: any) => {
-    let tempDate = new Date(value).getTime();
+    let tempDate = new Date(value).getTime() + 50400000;
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
 

@@ -41,7 +41,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
   }
   const handleClose = () => setShow(false);
   const addCourse = () => {
-    if (days === 0) {
+    if (!days) {
       alert("Por favor ingrese número")
     }
     else {
@@ -67,8 +67,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
         let tempYear = newDate.getFullYear()
         let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         updateCourseMembershipApi(courseForUpdate[0]).then((res) => {
-          alert("Nueva Fecha de finalizacion: " + formatDate + " para el curso: " + course.title);
-          console.log(res);
+          alert("Se agregaron: " + days + " días, para el curso: " + course.title);
           handleClose();
           openUserCardData(user);
         })
@@ -85,8 +84,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
         let tempYear = newDate.getFullYear()
         let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         addCourseMembershipApi(courseData).then((res) => {
-          alert("Nueva Fecha de finalizacion: " + formatDate + " para el curso: " + course.title);
-          console.log(res);
+          alert("Se agregaron: " + days + " días, para el curso: " + course.title);
           handleClose();
           openUserCardData(user);
         })
@@ -170,7 +168,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
             <InputContain>
               <Label>Tiempo Activo (Días)</Label>
               <Input
-                type="string" placeholder="Número de días activo" onChange={(e: any) => { setDays(e.target.value); }} />
+                type="number" placeholder="Número de días activo" onChange={(e: any) => { setDays(parseInt(e.target.value)); }} />
             </InputContain>
             <ButtonContain>
               <PurpleButton onClick={addCourse}>Agregar Dias al Curso</PurpleButton>

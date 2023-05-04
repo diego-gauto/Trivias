@@ -47,17 +47,17 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData }:
     // getUserCourses();
   }
   const formatDate = (value: any) => {
-    let tempDate = new Date(value).getTime();
+    let tempDate = new Date(value).getTime() + 50400000;
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
   const secondsToDate = (value: any) => {
     let tempDate = new Date(value * 1000)
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
-
   const deleteUser = () => {
     setError(true);
   }
+  console.log(user)
   if (!loader) {
     return (
       <AdminLoader style={{ position: "absolute" }}>

@@ -24,24 +24,29 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
   let today = new Date().getTime() / 1000;
   const [days, setDays] = useState(0);
   const addDays = () => {
-    let tempFinalDate = 0;
-    if (user.final_date < today) {
-      tempFinalDate = today + days * 86400;
-      user.final_date = tempFinalDate;
+    if (!days) {
+      alert("Agregue dias");
     }
-    if (user.final_date > today) {
-      tempFinalDate = user.final_date + days * 86400;
-      user.final_date = tempFinalDate;
+    else {
+      let tempFinalDate = 0;
+      if (user.final_date < today) {
+        tempFinalDate = today + days * 86400;
+        user.final_date = tempFinalDate;
+      }
+      if (user.final_date > today) {
+        tempFinalDate = user.final_date + days * 86400;
+        user.final_date = tempFinalDate;
+      }
+      let newDate = new Date(tempFinalDate * 1000);
+      let tempDay = newDate.getDate()
+      let tempMonth = newDate.getMonth() + 1;
+      let tempYear = newDate.getFullYear()
+      let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      updateMembershipDaysApi(user).then((res: any) => {
+        alert("Se agregaron: " + days + " días")
+        handleClose();
+      });
     }
-    let newDate = new Date(tempFinalDate * 1000);
-    let tempDay = newDate.getDate()
-    let tempMonth = newDate.getMonth() + 1;
-    let tempYear = newDate.getFullYear()
-    let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-    updateMembershipDaysApi(user).then((res: any) => {
-      alert("Nueva Fecha de finalizacion: " + formatDate)
-      handleClose();
-    });
   }
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -56,7 +61,7 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
             placeholder="7"
             type="number"
             onChange={(e: any) => {
-              setDays(e.target.value);
+              setDays(parseInt(e.target.value));
             }}
           />
         </InputContain>
