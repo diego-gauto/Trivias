@@ -143,45 +143,52 @@ const NavBar = () => {
     setLoggedIn(false);
   }
   const sendAdminTo = () => {
-    let counter: number = 0;
-    let route: string = '/';
-    userData.roles.map((role: any) => {
-      if (counter === 0) {
-        if (role.view !== 0) {
-          counter++;
-          if (role.role === 'course') {
-            route = 'Courses'
-          }
-          if (role.role === 'coupons') {
-            route = 'Coupons'
-          }
-          if (role.role === 'blogs') {
-            route = 'Blog'
-          }
-          if (role.role === 'rewards') {
-            route = 'Rewards'
-          }
-          if (role.role === 'users') {
-            route = 'Users'
-          }
-          if (role.role === 'landing') {
-            route = 'Landing'
-          }
-          if (role.role === 'payments') {
-            route = 'Pago'
-          }
-          if (role.role === 'homeworks') {
-            route = 'HomeWork'
-          }
-          if (role.role === 'comments') {
-            route = 'Comments'
+
+    if (userData.role === 'superAdmin') {
+      router.push('/admin/Courses')
+    }
+    else {
+      let counter: number = 0;
+      let route: string = '/';
+      userData.roles.map((role: any) => {
+        if (counter === 0) {
+          if (role.view !== 0) {
+            counter++;
+            if (role.role === 'course') {
+              route = 'Courses'
+            }
+            if (role.role === 'coupons') {
+              route = 'Coupons'
+            }
+            if (role.role === 'blogs') {
+              route = 'Blog'
+            }
+            if (role.role === 'rewards') {
+              route = 'Rewards'
+            }
+            if (role.role === 'users') {
+              route = 'Users'
+            }
+            if (role.role === 'landing') {
+              route = 'Landing'
+            }
+            if (role.role === 'payments') {
+              route = 'Pago'
+            }
+            if (role.role === 'homeworks') {
+              route = 'HomeWork'
+            }
+            if (role.role === 'comments') {
+              route = 'Comments'
+            }
           }
         }
+      });
+      if (route !== '/') {
+        router.push('/admin/' + route)
       }
-    });
-    if (route !== '/') {
-      router.push('/admin/' + route)
     }
+
   }
   const updateNotificationStatus = () => {
     let data = {

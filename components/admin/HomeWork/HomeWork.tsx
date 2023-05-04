@@ -64,6 +64,14 @@ const HomeWork = () => {
         setCoursesId(temp);
         tempHomeworks = res.data.data.filter((x: any) => temp.includes(x.courseId));
       }
+      if (user.role === "superAdmin") {
+        let temp: any = [];
+        await Promise.all(tempHomeworks.map((x: any) => {
+          temp.push(+x.courseId)
+        }))
+        getCoursesForAdmin(temp);
+        setCoursesId(temp);
+      }
       setHomeWorks(tempHomeworks);
     })
   }
@@ -88,9 +96,7 @@ const HomeWork = () => {
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
       let tempHomeworks = res.data.data
-      if (userData.role === "admin") {
-        tempHomeworks = res.data.data.filter((x: any) => x.courseId === course_id);
-      }
+      tempHomeworks = res.data.data.filter((x: any) => x.courseId === course_id);
       setHomeWorks(tempHomeworks);
     })
   }
@@ -104,9 +110,7 @@ const HomeWork = () => {
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
       });
       let tempHomeworks = res.data.data
-      if (userData.role === "admin") {
-        tempHomeworks = res.data.data.filter((x: any) => coursesId.includes(x.courseId));
-      }
+      tempHomeworks = res.data.data.filter((x: any) => coursesId.includes(x.courseId));
       setHomeWorks(tempHomeworks);
     })
   }
