@@ -47,6 +47,7 @@ const User = () => {
   const retrieveUser = () => {
     getUserApi(localStorage.getItem("email")).then((res) => {
       setUserData(res);
+      setNameUpperCase(res.name.toUpperCase())
     })
   }
   const getRewardData = async (user: any) => {
