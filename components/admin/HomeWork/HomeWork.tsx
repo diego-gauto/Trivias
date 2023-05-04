@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getTeacher } from '../../../store/actions/courseActions';
 import { addCourseMembershipApi } from '../../api/admin';
 import { addPastUsers, testApi } from '../../api/auth';
+import { getCoursesApi } from '../../api/courses';
 import { getHomeworksApi } from '../../api/homeworks';
 import { addUserCertificateApi, getCourseApi } from '../../api/lessons';
 import { addPastUserProgress, getPastUsers, getUserApi, updateScorePastUser } from '../../api/users';
@@ -26,6 +27,7 @@ const HomeWork = () => {
   const [openSelect, setOpenSelect] = useState(false)
   const [courseSelect, setCourseSelect] = useState(false)
   const [courseFilter, setCourseFilter] = useState<any>("");
+  const [coursesId, setCoursesId] = useState<any>([])
 
   const [pastUsers, setPastUsers] = useState<any>([]);
   const [userData, setUserData] = useState<any>(null);
@@ -40,44 +42,6 @@ const HomeWork = () => {
   }
 
   const getHomeworks = async () => {
-    let tempFilter: any = [];
-    // if (professorFilter !== "" || courseFilter !== "") {
-    //   setHomeWorks([]);
-    //   getAllHomeWorks().then((res) => {
-    //     res.forEach((element: any) => {
-    //       let tempDate = new Date(element.createdAt.seconds * 1000);
-    //       let tempDay = tempDate.getDate()
-    //       let tempMonth = tempDate.getMonth() + 1;
-    //       let tempYear = tempDate.getFullYear()
-    //       element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-    //     });
-    //     res.filter((element: any, index: any) => {
-    //       if (professorFilter !== "" && courseFilter === "") {
-    //         element.teacherCreds.map((val: any) => {
-    //           if (val.id === professorFilter.id) {
-    //             tempFilter.push(element);
-    //           }
-    //         })
-    //       }
-    //       if (professorFilter === "" && courseFilter !== "") {
-    //         if (element.courseId == courseFilter.id) {
-    //           tempFilter.push(element);
-    //         }
-    //       }
-    //       if (professorFilter !== "" && courseFilter !== "") {
-    //         if (element.courseId == courseFilter.id) {
-    //           element.teacherCreds.map((val: any) => {
-    //             if (val.id === professorFilter.id) {
-    //               tempFilter.push(element);
-    //             }
-    //           })
-    //         }
-    //       }
-    //     })
-    //     setHomeWorks(tempFilter);
-    //   })
-    // }
-    // else {
     let user: any;
     if (localStorage.getItem("email")) user = await getUserApi(localStorage.getItem("email"))
     setUserData(user);
@@ -96,7 +60,52 @@ const HomeWork = () => {
         await Promise.all(array.map((x: any) => {
           temp.push(+x)
         }))
+        getCoursesForAdmin(temp);
+        setCoursesId(temp);
         tempHomeworks = res.data.data.filter((x: any) => temp.includes(x.courseId));
+      }
+      setHomeWorks(tempHomeworks);
+    })
+  }
+  const getCoursesForAdmin = (courses_id: any) => {
+    getCoursesApi().then((res) => {
+      let availableCourses: any = [];
+      res.map((course: any) => {
+        if (courses_id.includes(course.id)) {
+          availableCourses.push(course);
+        }
+      })
+      setCourse(availableCourses);
+    })
+  }
+  const FilterHomeWorks = (course_id: number) => {
+    getHomeworksApi().then(async (res: any) => {
+      res.data.data.forEach((element: any) => {
+        let tempDate: any = new Date();
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      let tempHomeworks = res.data.data
+      if (userData.role === "admin") {
+        tempHomeworks = res.data.data.filter((x: any) => x.courseId === course_id);
+      }
+      setHomeWorks(tempHomeworks);
+    })
+  }
+  const AllHomeWorks = () => {
+    getHomeworksApi().then(async (res: any) => {
+      res.data.data.forEach((element: any) => {
+        let tempDate: any = new Date();
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      let tempHomeworks = res.data.data
+      if (userData.role === "admin") {
+        tempHomeworks = res.data.data.filter((x: any) => coursesId.includes(x.courseId));
       }
       setHomeWorks(tempHomeworks);
     })
@@ -109,7 +118,7 @@ const HomeWork = () => {
   }
   useEffect(() => {
     getHomeworks();
-  }, [courseFilter])
+  }, [])
 
   const isValidCSVFile = (file: any) => {
     return file.name.endsWith(".csv");
@@ -295,11 +304,11 @@ const HomeWork = () => {
             <p>
               Tareas
             </p>
-            {(userData?.role === "superAdmin") && <div style={{ display: "flex", gap: 10 }}>
+            <div style={{ display: "flex", gap: 10 }}>
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect}>
                   {
-                    courseFilter ? courseFilter.courseTittle : "Seleccione un curso"
+                    courseFilter ? courseFilter.title : "Seleccione un curso"
                   }
                   <CaretD2 style={{ top: "18%" }} />
                 </Selected>
@@ -310,6 +319,7 @@ const HomeWork = () => {
                       onClick={() => {
                         setCourseFilter("");
                         setCourseSelect(false);
+                        AllHomeWorks();
                       }}>
                       <input
                         type="radio"
@@ -325,6 +335,7 @@ const HomeWork = () => {
                           <Option
                             key={"Professor " + index}
                             onClick={() => {
+                              FilterHomeWorks(val.id);
                               setCourseFilter(val);
                               setCourseSelect(false);
                             }}>
@@ -334,7 +345,7 @@ const HomeWork = () => {
                               name="professor"
                               value="professor"
                             />
-                            <Label2>{val.courseTittle}</Label2>
+                            <Label2>{val.title}</Label2>
                           </Option>
                         )
                       })
@@ -342,7 +353,7 @@ const HomeWork = () => {
                   </OptionContain>
                 }
               </SelectContain>
-            </div>}
+            </div>
           </TitleContain>
           <Table id="Pay">
             <tbody>

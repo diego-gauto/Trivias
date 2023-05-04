@@ -91,7 +91,6 @@ const NavBar = () => {
       userId: userId
     }
     getNotifications(data).then((res) => {
-      console.log(res);
       let tempCounter = 0;
       res.forEach((not: any) => {
         if (!not.status) {
@@ -143,6 +142,47 @@ const NavBar = () => {
   } catch (error) {
     setLoggedIn(false);
   }
+  const sendAdminTo = () => {
+    let counter: number = 0;
+    let route: string = '/';
+    userData.roles.map((role: any) => {
+      if (counter === 0) {
+        if (role.view !== 0) {
+          counter++;
+          if (role.role === 'course') {
+            route = 'Courses'
+          }
+          if (role.role === 'coupons') {
+            route = 'Coupons'
+          }
+          if (role.role === 'blogs') {
+            route = 'Blog'
+          }
+          if (role.role === 'rewards') {
+            route = 'Rewards'
+          }
+          if (role.role === 'users') {
+            route = 'Users'
+          }
+          if (role.role === 'landing') {
+            route = 'Landing'
+          }
+          if (role.role === 'payments') {
+            route = 'Pago'
+          }
+          if (role.role === 'homeworks') {
+            route = 'HomeWork'
+          }
+          if (role.role === 'comments') {
+            route = 'Comments'
+          }
+        }
+      }
+    });
+    if (route !== '/') {
+      router.push('/admin/' + route)
+    }
+  }
   const updateNotificationStatus = () => {
     let data = {
       userId: userData.user_id
@@ -166,7 +206,6 @@ const NavBar = () => {
       window.location.href = "/";
     }
   };
-
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
@@ -212,13 +251,12 @@ const NavBar = () => {
         </NavText>
         {
           (loggedIn && isAdmin) &&
-          <Link href="/admin/Courses">
-            <NavText pathname={pathname} color={color} title="Admin"
-              style={position == "/admin" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
-            >
-              admin
-            </NavText>
-          </Link>
+          <NavText pathname={pathname} color={color} title="Admin"
+            onClick={sendAdminTo}
+            style={position == "/admin" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
+          >
+            admin
+          </NavText>
         }
         <Link href="/Blogs">
           <NavText pathname={pathname} color={color} title="Inicio"
