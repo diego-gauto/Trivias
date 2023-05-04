@@ -81,14 +81,14 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
         </TextContainer>
         <div className='teacher-container'>
           <img src={teacherCreds[index]?.image ? teacherCreds[index]?.image : defaultImg} alt="" />
-          {teacherCreds.length > 0 && <MdKeyboardArrowLeft className='left' onClick={() => {
+          {teacherCreds.length > 1 && <MdKeyboardArrowLeft className='left' onClick={() => {
             if (index === 0) {
               setIndex(teacherCreds.length - 1)
             } else {
               setIndex(index - 1)
             }
           }} />}
-          {teacherCreds.length > 0 && < MdKeyboardArrowRight className='right' onClick={() => {
+          {teacherCreds.length > 1 && < MdKeyboardArrowRight className='right' onClick={() => {
             if (index === teacherCreds.length - 1) {
               setIndex(0)
             } else {
