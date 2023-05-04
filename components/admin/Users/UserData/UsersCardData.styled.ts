@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const UserContain = styled.div`
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   min-width: 342px;
@@ -10,7 +11,7 @@ export const UserContain = styled.div`
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-  position: fixed;
+  position: absolute;
 `;
 export const TitleContain = styled.div`
   display: flex;
