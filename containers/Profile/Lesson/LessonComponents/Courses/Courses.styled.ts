@@ -103,9 +103,9 @@ export const MainContainer = styled.div<{ open: any }>`
   @media (max-width: 1124px) {
     transition: 1s ease all;
     position: absolute;
-    overflow: hidden;
+    // overflow: hidden;
     height: 100%;
-    top: 139px;
+    top: 64px;
     right: -100%;
     width: 100%;
     display: flex;
