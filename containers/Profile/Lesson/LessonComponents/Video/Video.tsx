@@ -116,6 +116,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       ref={p => p?.seekTo(handleViewed())}
       url={data.link}
       playing={true}
+      playsinline={true}
       muted={false}
       controls
       width="100%" height="auto"

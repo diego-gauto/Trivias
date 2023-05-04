@@ -90,9 +90,6 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
     getRewards()
   }, [])
 
-  console.log(user);
-
-
   const cancelSubscription = async () => {
     if (confirm(`¿Desea cancelar su suscripción?`)) {
       setLoader(true);
