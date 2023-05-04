@@ -226,7 +226,7 @@ const RewardSlider = (props: reward_slider) => {
                             (reward.type === "months" || reward.type === "claim-months") &&
                             reward.month && (reward.month === 1 ? reward.month + " mes" : reward.month + " meses")
                           }
-                          {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " certificado" : reward.lessonsLeft + " lecciones") : (reward.type === "certificates" && "las tareas faltantes")}
+                          {reward.lessonsLeft ? (reward.lessonsLeft == 1 ? reward.lessonsLeft + " lección" : reward.lessonsLeft + " lecciones") : (reward.type === "certificates" && "las tareas faltantes")}
                         </p>
                         {
                           reward.type === "points" &&
