@@ -229,7 +229,7 @@ const CourseModal = (props: ICourseModal) => {
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
                 </div>
                 <p className="time">Duración estimada</p>
-                <p className="duration">{hms(course.duration)}</p>
+                <p className="duration">{hms(course.totalDuration)}</p>
                 <button onClick={handleShow}>Materiales</button>
               </div>
             </div>}
