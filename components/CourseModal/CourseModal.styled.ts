@@ -715,6 +715,7 @@ export const InformationIcon = styled.div`
     top: -2px !important;
     font-size: 6px;
     line-height: 6px;
+    letter-spacing: 2px;
     height: 10px;
     width: 10px;
   }

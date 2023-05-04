@@ -252,7 +252,7 @@ const CourseModal = (props: ICourseModal) => {
                           : <>Iker Robles García</>
                       }
                     </span>
-                    <InformationIcon>
+                    <InformationIcon style={{ left: -7 }}>
                       i
                       <label className="info-box">
                         {course.professors?.length > 0 ? (course.professors[0].about ? course.professors[0].about : "Lorem ipsum") : "Lorem ipsum"}
