@@ -90,6 +90,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
     getRewards()
   }, [])
 
+  console.log(user);
+
+
   const cancelSubscription = async () => {
     if (confirm(`¿Desea cancelar su suscripción?`)) {
       setLoader(true);
@@ -225,7 +228,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 </div>
                 :
                 <div className="subscription-info">
-                  {user.level === 1 ? <p >
+                  {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
                     <span className="span">{formatDate}</span>
                   </p> :
                     <p><span className="span">s/f</span></p>}
