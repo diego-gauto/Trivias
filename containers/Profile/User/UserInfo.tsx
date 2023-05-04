@@ -1,5 +1,5 @@
 import { googleLogout } from "@react-oauth/google";
-import { getAuth, signOut, updatePassword } from "firebase/auth";
+import { getAuth, reload, signOut, updatePassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
 import { updateUserInfo } from "../../../components/api/users";
@@ -15,6 +15,7 @@ import {
   ProfileText,
 } from "./User.styled";
 import { io } from "socket.io-client";
+import { useAuth } from "../../../hooks/useAuth";
 
 const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
@@ -42,7 +43,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
   const starsImage = "/images/profile/stars.png"
   const crownImage = "/images/profile/crown.png"
   const { api } = useFacebook();
-
+  const { reloadUser } = useAuth();
 
   // const socket = io("ws://gonvar.inowu.dev:8000");
 
@@ -109,6 +110,8 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       photo: photo
     }).then((res) => {
       setStartEdit(false);
+      reloadUser()
+      //  setUser({ ...user, photo: "" })
       handleClick();
     })
     // if (editPassword) {

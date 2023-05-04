@@ -55,10 +55,18 @@ export const AuthProvider = ({ children, ...props }: Props) => {
     }
   }, [])
 
+  const reloadUser = () => {
+    getUserApi(localStorage.getItem("email")).then((res) => {
+      setUser({ ...res });
+    })
+  }
+
   const values = {
     user,
     isAuthenticating,
     logout,
+    reloadUser,
+    setUser
   };
 
   return (

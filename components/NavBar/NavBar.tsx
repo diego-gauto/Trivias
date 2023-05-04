@@ -126,6 +126,7 @@ const NavBar = () => {
   }
   try {
     var userDataAuth = useAuth();
+
     useEffect(() => {
       // localStorage.clear();
       // logoutFunc();
@@ -137,7 +138,7 @@ const NavBar = () => {
         }
         setLoggedIn(true);
       }
-    }, [])
+    }, [userDataAuth])
 
   } catch (error) {
     setLoggedIn(false);
