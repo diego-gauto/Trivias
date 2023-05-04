@@ -170,13 +170,13 @@ const CourseModal = (props: ICourseModal) => {
                   {course.difficulty}
                   <InformationIcon>
                     i
-                    <div className="info-box">
+                    <label className="info-box" style={{ left: 210, borderRadius: "10px 10px 10px 0" }}>
                       {course.difficulty === "Muy Fácil" && "Recomendado para personas principiantes"}
                       {course.difficulty === "Fácil" && "Recomendado para personas a partir de 3 meses de experiencia"}
                       {course.difficulty === "Intermedio" && "Recomendado para personas a partir de 6 meses de experiencia"}
                       {course.difficulty === "Avanzado" && "Recomendado para personas a partir de un año de experiencia"}
                       {course.difficulty === "Máster" && "Recomendado para personas a partir de un año de experiencia y con capacitación constante"}
-                    </div>
+                    </label>
                   </InformationIcon>
                 </div>
               </div>
@@ -197,13 +197,13 @@ const CourseModal = (props: ICourseModal) => {
                     {course.difficulty}
                     <InformationIcon>
                       i
-                      <div className="info-box">
+                      <label className="info-box">
                         {course.difficulty === "Muy Fácil" && "Recomendado para personas principiantes"}
                         {course.difficulty === "Fácil" && "Recomendado para personas a partir de 3 meses de experiencia"}
                         {course.difficulty === "Intermedio" && "Recomendado para personas a partir de 6 meses de experiencia"}
                         {course.difficulty === "Avanzado" && "Recomendado para personas a partir de un año de experiencia"}
                         {course.difficulty === "Máster" && "Recomendado para personas a partir de un año de experiencia y con capacitación constante"}
-                      </div>
+                      </label>
                     </InformationIcon>
                   </div>
                 </div>

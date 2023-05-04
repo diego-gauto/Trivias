@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteCommentAnswers, deleteThisComment, getComments } from "../../api/admin";
+import { getCoursesApi } from "../../api/courses";
 import { addCommentAnswerApi } from "../../api/lessons";
 import { createNotification } from "../../api/notifications";
 import { getUserApi } from "../../api/users";
@@ -14,6 +15,8 @@ const Comments = () => {
   const [comment, setComment] = useState<any>()
   const [answer, setAnswer] = useState<any>("")
   const [popUp, setPopUp] = useState<any>(false)
+  const [course, setCourse] = useState<any>([]);
+  const [coursesId, setCoursesId] = useState<any>([])
 
   useEffect(() => {
     retrievComments()
@@ -32,11 +35,59 @@ const Comments = () => {
           temp.push(+x)
         }))
         tempComments = res.data.comments.filter((x: any) => temp.includes(x.course_id));
+        getCoursesForAdmin(temp);
+        setCoursesId(temp);
+      }
+      if (user.role === "superAdmin") {
+        let temp: any = [];
+        await Promise.all(tempComments.map((x: any) => {
+          temp.push(+x.course_id)
+        }))
+        getCoursesForAdmin(temp);
+        setCoursesId(temp);
       }
       setComments(tempComments)
     })
   }
-
+  const getCoursesForAdmin = (courses_id: any) => {
+    getCoursesApi().then((res) => {
+      let availableCourses: any = [];
+      res.map((course: any) => {
+        if (courses_id.includes(course.id)) {
+          availableCourses.push(course);
+        }
+      })
+      setCourse(availableCourses);
+    })
+  }
+  const FilteredComments = (course_id: number) => {
+    getComments().then(async (res: any) => {
+      res.data.comments.forEach((element: any) => {
+        let tempDate: any = new Date();
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      let tempComments = res.data.comments
+      tempComments = res.data.comments.filter((x: any) => x.course_id === course_id);
+      setComments(tempComments);
+    })
+  }
+  const AllComments = () => {
+    getComments().then(async (res: any) => {
+      res.data.comments.forEach((element: any) => {
+        let tempDate: any = new Date();
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
+      let tempComments = res.data.comments
+      tempComments = res.data.comments.filter((x: any) => coursesId.includes(x.course_id));
+      setComments(tempComments);
+    })
+  }
   const deleteComment = (value: any) => {
     if (userData.role === "admin" && userData.roles[8].delete === 0) {
       alert("No tienes permisos para esta acción");
@@ -100,11 +151,35 @@ const Comments = () => {
     <AdminContain style={{ flexDirection: "column" }}>
       <div className="courses-header">
         <h1 className="main-title">Comentarios</h1>
+        {
+          course.length > 0 &&
+          <div>
+            <select onChange={(e) => {
+              if (e.target.value === '-1') {
+                AllComments();
+              }
+              else {
+                FilteredComments(parseInt(e.target.value))
+              }
+            }}>
+              <option value={-1}>Ver todos</option>
+              {
+                course.map((course: any, index: number) => {
+                  return (
+                    <option key={"course_comment_" + index} value={course.id}>
+                      {course.title}
+                    </option>
+                  )
+                })
+              }
+            </select>
+          </div>
+        }
       </div>
       <AdminCommentsContainer>
-        {comments && comments.map((x: any) => {
+        {comments && comments.map((x: any, index: number) => {
           return (
-            <div className="comment-row">
+            <div className="comment-row" key={"admin_comments_" + index}>
               <div className="top">
                 <p><span>Comentario: </span>{x.comment}</p>
                 <div className="buttons">
@@ -113,9 +188,9 @@ const Comments = () => {
                 </div>
               </div>
               {x.answers.length > 0 ? <p className="title">Respuestas</p> : <p className="title">Sin Respuestas</p>}
-              {x.answers.map((answer: any) => {
+              {x.answers.map((answer: any, ans_ind: number) => {
                 return (
-                  <div className="answer">
+                  <div className="answer" key={"admin_answer_" + ans_ind}>
                     <p>{answer.comment}</p>
                     <MdDeleteForever onClick={() => { deleteAnswer(answer) }} />
                   </div>

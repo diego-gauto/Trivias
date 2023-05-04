@@ -38,6 +38,12 @@ export const AdminContain = styled.div`
       color: #6717cd;
     }
   }
+  select {
+    padding-block: 5px;
+    padding-inline: 20px;
+    border-radius: 100px;
+    border: 1px solid #6717cd;
+  }
   .courses-header {
     display: flex;
     justify-content: space-between;

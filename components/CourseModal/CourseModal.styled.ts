@@ -687,7 +687,7 @@ export const VideoContain = styled.div`
   display: flex;
   gap: 20px;
 `;
-export const InformationIcon = styled.div`
+export const InformationIcon = styled.label`
   font-family: "Raleway", sans-serif;
   display: inline-block;
   font-size: 8px;
@@ -734,8 +734,8 @@ export const InformationIcon = styled.div`
       transform: translate(-99%, -110%);
       padding: 10px;
       text-align: left;
-      font-size: 12px;
-      line-height: 12px;
+      font-size: 14px;
+      line-height: 14px;
       color: white;
       letter-spacing: 1px;
       font-weight: 400;
