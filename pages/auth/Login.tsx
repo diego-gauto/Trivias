@@ -22,6 +22,7 @@ import { facebookUserInfo, googleTokens, loginWithProviderApi, updatePastUser } 
 import { useLogin, useFacebook } from 'react-facebook';
 import { getWholeCourses } from "../../store/actions/courseActions";
 import { addCourse } from "../../components/api/lessons";
+import router from "next/router";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -112,6 +113,7 @@ const Login = () => {
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
           localStorage.setItem('email', signUpData.credentials.email);
           window.location.href = '/Preview';
+          redirect()
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -144,6 +146,7 @@ const Login = () => {
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
       window.location.href = "/Preview";
+      redirect()
     })
   }
 
@@ -184,6 +187,7 @@ const Login = () => {
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 window.location.href = "/Preview";
+                redirect()
               })
               setAuthLoader(false);
               return
@@ -203,12 +207,21 @@ const Login = () => {
           } else {
             localStorage.setItem('email', user.email)
             window.location.href = "/Preview"
+            redirect()
           }
         })
       })
     },
     flow: 'auth-code',
   });
+
+  const redirect = () => {
+    if (localStorage.getItem("trial") === "true") {
+      console.log(1);
+
+      window.location.href = "https://www.gonvar.io/purchase?type=subscription&trial=true"
+    }
+  }
 
   const loginWithFacebook = async () => {
     try {
@@ -234,6 +247,7 @@ const Login = () => {
               }
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
+                redirect()
                 window.location.href = "/Preview";
               })
               setAuthLoader(false);
@@ -253,6 +267,7 @@ const Login = () => {
             setIsLoading(false);
           } else {
             localStorage.setItem('email', user.email);
+            redirect()
             window.location.href = "/Preview"
           }
         })

@@ -53,22 +53,20 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    getAllCoupons();
-    setPaypal(!paypal)
-    if (type == 'subscription') {
-      setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
-      setPaypal(false);
-    } else {
-      getCourseForCheckoutApi(id).then((res: any) => {
-        setProduct({ ...product, title: res.title, price: res.price, duration: res.duration, type: 'course', img: res.image });
-        setPaypal(false);
-      })
-    }
-  }, [])
-
-  useEffect(() => {
+    localStorage.setItem("trial", "true")
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
+        getAllCoupons();
+        setPaypal(!paypal)
+        if (type == 'subscription') {
+          setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
+          setPaypal(false);
+        } else {
+          getCourseForCheckoutApi(id).then((res: any) => {
+            setProduct({ ...product, title: res.title, price: res.price, duration: res.duration, type: 'course', img: res.image });
+            setPaypal(false);
+          })
+        }
         guardCheckout(res);
         let cards = res.payment_methods;
         setUserData(res);

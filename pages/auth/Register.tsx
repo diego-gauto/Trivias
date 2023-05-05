@@ -115,6 +115,12 @@ const Register = () => {
   });
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
 
+  const redirect = () => {
+    if (localStorage.getItem("trial") === "true") {
+    }
+    window.location.href = "https://www.gonvar.io/purchase?type=subscription&trial=true"
+  }
+
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setAuthLoader(true);
     setphone(phoneInput);
@@ -138,6 +144,7 @@ const Register = () => {
           localStorage.setItem('email', user.email);
           localStorage.setItem("method", "mail");
           window.location.href = "/Preview"
+          redirect()
         }
       })
     } else {
@@ -169,6 +176,7 @@ const Register = () => {
           } else {
             localStorage.setItem('email', user.email)
             window.location.href = "/Preview"
+            redirect()
           }
         })
       })
@@ -205,6 +213,7 @@ const Register = () => {
             localStorage.setItem('email', user.email);
             localStorage.setItem('method', "facebook");
             window.location.href = "/Preview"
+            redirect()
           }
         })
       })
@@ -216,6 +225,7 @@ const Register = () => {
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
+      redirect()
       window.location.href = "/Preview";
     } else {
       setTimeout(() => {
