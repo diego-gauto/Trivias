@@ -39,6 +39,12 @@ const formSchema = yup.object().shape({
     .required("Campo requerido"),
   email: yup
     .string()
+    .test('no-special-character', 'El correo no debe contener espacios', function (value) {
+      if (value && value.includes(' ')) {
+        return false;
+      }
+      return true;
+    })
     .email("Debe ser un email válido")
     .required("Campo requerido"),
   password: yup.string()
@@ -107,7 +113,6 @@ const Register = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema)
   });
-
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
