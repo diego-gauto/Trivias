@@ -129,12 +129,7 @@ const Lesson = () => {
           <div className="left-side">
             <div className='nav-course'>
               <img src="/images/Navbar/NavbarLogo2.png" alt="" />
-              {!menu ? <GiHamburgerMenu onClick={() => {
-                setMenu(!menu)
-              }}></GiHamburgerMenu> :
-                <AiOutlineClose onClick={() => {
-                  setMenu(!menu)
-                }}></AiOutlineClose>}
+
             </div>
             <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} />
             <Modules course={course} handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />

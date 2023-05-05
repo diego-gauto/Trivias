@@ -261,3 +261,20 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
       overflow: auto;
     `}
 `;
+export const HamburgerContainer = styled.div`
+  position: absolute;
+  display: none;
+  background: #411369;
+  padding-block: 18px;
+  justify-content: space-between;
+  padding-inline: 40px;
+  align-items: center;
+  right: 0;
+  svg {
+    color: #ede7f2;
+    font-size: 24px;
+  }
+  @media (max-width: 1124px) {
+    display: flex;
+  }
+`;

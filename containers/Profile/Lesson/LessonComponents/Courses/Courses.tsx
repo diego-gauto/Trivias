@@ -1,11 +1,13 @@
 import router from 'next/router';
 import React, { useEffect, useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { useMediaQuery } from 'react-responsive';
 import { addUserCertificateApi, getUserCertificateApi } from '../../../../../components/api/lessons';
 import { createNotification } from '../../../../../components/api/notifications';
 import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideModule/SlideModule.styled';
 import CourseProgress from '../Progress/CourseProgress';
-import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer } from './Courses.styled';
+import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer, HamburgerContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 
 const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
@@ -60,9 +62,9 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
 
   }, [data])
 
-  useEffect(() => {
-    setOpen(menu)
-  }, [menu])
+  // useEffect(() => {
+  //   setOpen(menu)
+  // }, [menu])
 
   const toggleHandler = (index: any) => {
     let temp = [...selected]
@@ -95,70 +97,81 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   }, [])
 
   return (
-    <MainContainer open={open}>
-      <div className='course-info'>
-        <p className='title'>{course?.title}</p>
-        <p>Un curso de <span>{course?.professors[0]?.name}</span></p>
-        <div className='level-container'>
-          {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
-          {(course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/iconoLila.png" alt="" />}
-          {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/iconoNaranja.png" alt="" />}
-          {(course.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/iconoVerde.png" alt="" />}
-          {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/iconoRosa.png" alt="" />}
-          <Text03 style={{ padding: 0 }} level={course?.difficulty}><span>{course?.difficulty}</span></Text03>
-        </div>
-      </div>
-      {(certficate && !responsive1124) && <div className="certificate-container">
-        <button onClick={() => { goTo() }}>
-          <p>Obtener certificado</p>
-        </button>
-      </div>}
-      <div className='course-progress'>
-        <p className='title'>Tu progreso <br />
-          <b>{count} de {course.lessons.length}</b> <span>lecciones.</span>
-        </p>
-        <div className='certificate-box'>
-          <div className='half'></div>
-          <div className='certificate-label'>
-            <p>Acaba el curso <br />
-              para obtener <br />
-              tu certificado.</p>
+    <>
+      <HamburgerContainer>
+        {!open ? <GiHamburgerMenu onClick={() => {
+          setOpen(!open)
+        }}></GiHamburgerMenu> :
+          <AiOutlineClose onClick={() => {
+            setOpen(!open)
+          }}></AiOutlineClose>}
+      </HamburgerContainer>
+      <MainContainer open={open}>
+        <div className='course-info'>
+          <p className='title'>{course?.title}</p>
+          <p>Un curso de <span>{course?.professors[0]?.name}</span></p>
+          <div className='level-container'>
+            {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
+            {(course.difficulty == "Fácil") && <img style={{ width: "auto" }} src="../images/iconoLila.png" alt="" />}
+            {(course.difficulty == "Intermedio") && <img style={{ width: "auto" }} src="../images/iconoNaranja.png" alt="" />}
+            {(course.difficulty == "Avanzado") && <img style={{ width: "auto" }} src="../images/iconoVerde.png" alt="" />}
+            {(course.difficulty == "Máster") && <img style={{ width: "auto" }} src="../images/iconoRosa.png" alt="" />}
+            <Text03 style={{ padding: 0 }} level={course?.difficulty}><span>{course?.difficulty}</span></Text03>
           </div>
         </div>
-      </div>
-      {(certficate && responsive1124) && <div className="certificate-container">
-        <button onClick={() => { goTo() }}>
-          <p>Obtener certificado</p>
-        </button>
-      </div>}
-      <div className='certificate-responsive'>
-        <p>Acaba el curso para obtener tu certificado.</p>
-      </div>
-      {course?.seasons.map((season: any, index: number) => {
-        return (
-          <SeasonContainer key={"course seasons " + index}>
-            <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
-              <div className='module'>
-                {selected[index] && <CourseProgress data={temp} title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
-                <div>
-                  <p className='title'> {season?.name == undefined ? `Módulo ${index + 1}` : season.name}</p>
-                  <Episode>
-                    {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
-                  </Episode>
+        {(certficate && !responsive1124) && <div className="certificate-container">
+          <button onClick={() => { goTo() }}>
+            <p>Obtener certificado</p>
+          </button>
+        </div>}
+        <div className='course-progress'>
+          <p className='title'>Tu progreso <br />
+            <b>{count} de {course.lessons.length}</b> <span>lecciones.</span>
+          </p>
+          <div className='certificate-box'>
+            <div className='half'></div>
+            <div className='certificate-label'>
+              <p>Acaba el curso <br />
+                para obtener <br />
+                tu certificado.</p>
+            </div>
+          </div>
+        </div>
+        {(certficate && responsive1124) && <div className="certificate-container">
+          <button onClick={() => { goTo() }}>
+            <p>Obtener certificado</p>
+          </button>
+        </div>}
+        <div className='certificate-responsive'>
+          <p>Acaba el curso para obtener tu certificado.</p>
+        </div>
+        {course?.seasons.map((season: any, index: number) => {
+          return (
+            <SeasonContainer key={"course seasons " + index}>
+              <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
+                <div className='module'>
+                  {selected[index] && <CourseProgress data={temp} title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
+                  <div>
+                    <p className='title'> {season?.name == undefined ? `Módulo ${index + 1}` : season.name}</p>
+                    <Episode>
+                      {season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}
+                    </Episode>
+                  </div>
                 </div>
-              </div>
-              <UploadIcon active={selected[index]} />
-            </Container>
-            <CoursesContainer active={selected[index]} onClick={() => {
-              setOpen(!open); handleClick(false)
-            }}>
-              <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.user_id} course={course} />
-            </CoursesContainer>
-          </SeasonContainer>
-        )
-      })}
-      <div className='bg'></div>
-    </MainContainer>
+                <UploadIcon active={selected[index]} />
+              </Container>
+              <CoursesContainer active={selected[index]} onClick={() => {
+                setOpen(!open); handleClick(false)
+              }}>
+                <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.user_id} course={course} />
+              </CoursesContainer>
+            </SeasonContainer>
+          )
+        })}
+        <div className='bg'></div>
+      </MainContainer>
+    </>
+
   )
 }
 export default Courses;
