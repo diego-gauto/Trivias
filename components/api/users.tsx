@@ -107,7 +107,7 @@ export const cancelStripe = async (sub: any) => {
 
 export const cancelPaypal = async (user: any) => {
   const clientIdAndSecret =
-    "AcoNY4gJGdLGKDXKh8FnQfKKYn1A7aAFeSJYqbpdLkVauf360_0UnGNN7penwq7EuJIPNCk-y7FRHxtR:EObd0gCgFOOSvV6yFe1evAcs26Aie_3mg_Y3tbtbMXNYnbXrUBZqnjon9jiWReOd8vkLIrNQJk0VLzhf";
+    "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz:ENjzRHojJfRX2yS6vJAaFg54xyzuTEXVIe-6Fd3cDk3IXHshojM3u5nEsk6-h-QWSMxN_AAhqoz7Fm54";
   const base64 = Buffer.from(clientIdAndSecret).toString("base64");
   let body = {
     grant_type: "client_credentials"
