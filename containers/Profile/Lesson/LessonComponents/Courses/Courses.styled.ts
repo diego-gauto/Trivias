@@ -242,11 +242,13 @@ export const Divider = styled.div`
   background: black;
 `;
 export const CoursesContainer = styled.div<{ active: boolean }>`
-  height: 0px;
+  // height: 0px;
   display: flex;
   flex-direction: column;
-  transition: 1s ease all;
+  // transition: 1s ease all;
   background: #e8ddf2;
+`;
+export const DEMO = styled.div<{ active: boolean }>`
   ${(props) =>
     props.active == true &&
     css`
