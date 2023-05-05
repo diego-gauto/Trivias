@@ -53,7 +53,7 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    localStorage.setItem("trial", "true")
+    localStorage.setItem("trial", "true");
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         getAllCoupons();
@@ -176,6 +176,7 @@ const Purchase = () => {
             }
             setLoader(false);
           } else {
+            localStorage.removeItem("trial")
             setPay(true);
             setLoader(false);
             updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
