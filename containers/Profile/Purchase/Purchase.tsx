@@ -75,7 +75,7 @@ const Purchase = () => {
         setIsLoading(false);
       })
     } else {
-      window.location.href = "/auth/Login";
+      window.location.href = "/auth/Register";
       setLoggedIn(false)
     }
   }, [])
