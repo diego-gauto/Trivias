@@ -241,20 +241,39 @@ export const Divider = styled.div`
   height: 1.5px;
   background: black;
 `;
-export const CoursesContainer = styled.div<{
-  active: boolean;
-  episodes: number;
-}>`
+export const CoursesContainer = styled.div<{ active: boolean }>`
   height: 0px;
   display: flex;
   flex-direction: column;
+  transition: 1s ease all;
   background: #e8ddf2;
   ${(props) =>
     props.active == true &&
     css`
-      // height: 100px;
-      height: ${props.episodes * 100}px;
-      // max-height: ${props.episodes * 100}px;
+      height: auto;
+      position: relative;
+      max-height: 100%;
+      transition: 1s ease all;
+      z-index: 3;
+    `}
+  ${(props) =>
+    props.active == false &&
+    css`
+      overflow: hidden;
+    `}
+`;
+export const DEMO = styled.div<{ active: boolean }>`
+  height: 0px;
+  display: flex;
+  flex-direction: column;
+  transition: 1s ease all;
+  background: #e8ddf2;
+  ${(props) =>
+    props.active == true &&
+    css`
+      height: auto;
+      max-height: 100%;
+      transition: 1s ease all;
       z-index: 3;
     `}
   ${(props) =>
