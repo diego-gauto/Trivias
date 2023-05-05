@@ -43,7 +43,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id } = router.query;
+  const { type, id, trial } = router.query;
   const [loader, setLoader] = useState<any>(false);
 
   const subscription = {
@@ -157,7 +157,7 @@ const Purchase = () => {
           cardId: card.cardId,
           paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
           stripeId: userData.stripe_id,
-          priceId: '9d8fa0e3-2977-46dc-8cb2-19024cd66bb9',
+          priceId: !trial ? '9d8fa0e3-2977-46dc-8cb2-19024cd66bb9' : "45f502b3-3e0c-492e-986a-4e0e85e1a34d",
           method: 'stripe'
         }
         stripeSubscriptionApi(data).then((res) => {
@@ -505,7 +505,7 @@ const Purchase = () => {
                   {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                   {(loader) && <LoaderContainSpinner />}
                 </div>
-                <div className="paypal" onClick={() => {
+                {!trial && <div className="paypal" onClick={() => {
 
                 }}>
                   {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
@@ -575,7 +575,7 @@ const Purchase = () => {
                     />}
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
-                </div>
+                </div>}
               </div>
             </div>
             <div className="right-section">
@@ -767,7 +767,7 @@ const Purchase = () => {
                     {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                     {loader && <LoaderContainSpinner />}
                   </div>
-                  <div className="paypal" onClick={() => {
+                  {!trial && <div className="paypal" onClick={() => {
 
                   }}>
                     {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
@@ -836,7 +836,7 @@ const Purchase = () => {
                       />}
                     </PayPalScriptProvider>}
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
-                  </div>
+                  </div>}
                 </div>
               </div>
               <div className="box">
