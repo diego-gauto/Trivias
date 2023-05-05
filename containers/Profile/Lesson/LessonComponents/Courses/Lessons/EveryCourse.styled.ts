@@ -7,6 +7,7 @@ export const LessonContain = styled.div`
   position: relative;
   background: #dad3e5;
   height: 100px;
+  min-height: 100px;
   align-items: baseline;
   padding-left: 30px;
   padding-top: 20px;

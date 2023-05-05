@@ -241,18 +241,20 @@ export const Divider = styled.div`
   height: 1.5px;
   background: black;
 `;
-export const CoursesContainer = styled.div<{ active: boolean }>`
+export const CoursesContainer = styled.div<{
+  active: boolean;
+  episodes: number;
+}>`
   height: 0px;
   display: flex;
   flex-direction: column;
-  transition: 1s ease all;
   background: #e8ddf2;
   ${(props) =>
     props.active == true &&
     css`
-      height: auto;
-      max-height: 100%;
-      transition: 1s ease all;
+      // height: 100px;
+      height: ${props.episodes * 100}px;
+      // max-height: ${props.episodes * 100}px;
       z-index: 3;
     `}
   ${(props) =>
