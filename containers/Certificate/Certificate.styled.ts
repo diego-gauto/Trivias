@@ -51,7 +51,6 @@ export const MainContainer = styled.div<{ color: any }>`
     background-repeat: no-repeat;
     background-size: 100%;
     margin-inline: auto;
-    box-shadow: 1px 3.29186px 8px rgb(0 0 0 / 20%);
     p {
       margin: 0;
       width: max-content;
