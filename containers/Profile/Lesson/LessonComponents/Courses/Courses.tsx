@@ -160,15 +160,11 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
                 </div>
                 <UploadIcon active={selected[index]} />
               </Container>
-              {
-                selected[index] &&
-                <CoursesContainer active={selected[index]} onClick={() => {
-                  setOpen(!open); handleClick(false)
-                }}>
-                  <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.user_id} course={course} />
-                </CoursesContainer>
-              }
-
+              <CoursesContainer active={selected[index]} onClick={() => {
+                setOpen(!open); handleClick(false)
+              }}>
+                <EveryCourse season={index} lessons={season.lessons} data={data} userId={userData?.user_id} course={course} />
+              </CoursesContainer>
             </SeasonContainer>
           )
         })}
