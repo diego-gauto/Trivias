@@ -268,6 +268,7 @@ const Homepage = () => {
         maxWidth: "100% !important",
         margin: "0 auto",
         backgroundColor: "#ede7f2",
+        overflow: "hidden",
       }} id="landing">
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} user={userData} />
       <Module3_1 />
