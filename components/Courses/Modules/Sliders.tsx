@@ -399,7 +399,7 @@ const Sliders = (props: ICourseData) => {
             <div className="line"></div>
 
             {
-              slideType === "monthly-courses" &&
+              slideType === "product-courses" &&
               <ButtonContain>
                 {
                   (user && user.level === 0 && user.final_date < today) &&
