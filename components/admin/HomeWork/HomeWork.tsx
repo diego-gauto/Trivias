@@ -72,8 +72,6 @@ const HomeWork = () => {
         getCoursesForAdmin(temp);
         setCoursesId(temp);
       }
-      console.log(tempHomeworks);
-
       setHomeWorks(tempHomeworks);
     })
   }

@@ -59,7 +59,6 @@ const Lesson = () => {
           setCurrentLesson(res.seasons[season].lessons[lesson]);
           setCourse(res);
           getDataForNextLesson(res);
-          history(res, user);
           setIsLoading(false);
           return
         })
@@ -76,9 +75,6 @@ const Lesson = () => {
       setCurrentLesson(res.seasons[season].lessons[lesson]);
       setCourse(res);
       getDataForNextLesson(res);
-      if (userData !== null) {
-        history(res, userData);
-      }
       setIsLoading(false);
     })
   }
@@ -104,15 +100,15 @@ const Lesson = () => {
       }
     }
   }
-  const history = (data: any, user: any) => {
-    let temp = {
-      courseId: data.id,
-      seasonId: data.seasons[season].id,
-      lessonId: data.seasons[season].lessons[lesson].id,
-      userId: user.user_id
-    }
-    addUserHistory(temp)
-  }
+  // const history = (data: any, user: any) => {
+  //   let temp = {
+  //     courseId: data.id,
+  //     seasonId: data.seasons[season].id,
+  //     lessonId: data.seasons[season].lessons[lesson].id,
+  //     userId: user.user_id
+  //   }
+  //   addUserHistory(temp)
+  // }
 
   const handleClick = () => {
     getCourse();

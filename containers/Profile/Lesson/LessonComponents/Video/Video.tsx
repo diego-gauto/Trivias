@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
-import { addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
+import { addUserHistory, addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
 import { useRouter } from 'next/router';
 
 declare let Hls: any
@@ -73,6 +73,18 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
     }
   }
 
+  const history = () => {
+    if (user) {
+      let temp = {
+        courseId: course.id,
+        seasonId: course.seasons[season].id,
+        lessonId: course.seasons[season].lessons[lesson].id,
+        userId: user.user_id
+      }
+      addUserHistory(temp)
+    }
+  }
+
   const handleViewed = () => {
     if (user) {
       let index = data.progress.findIndex((x: any) => x.user_id == user.user_id)
@@ -121,6 +133,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       controls
       width="100%" height="auto"
       style={{ position: "relative" }}
+      onStart={() => history()}
       onEnded={finishedLesson}
       onDuration={(duration) => {
         handleDuration(duration);
