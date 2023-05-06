@@ -53,8 +53,11 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    localStorage.setItem("trial", "true");
+    if (trial == "true") {
+      localStorage.setItem("trial", "true");
+    }
     if (localStorage.getItem("email")) {
+      localStorage.removeItem("trial")
       getUserApi(localStorage.getItem("email")).then((res) => {
         getAllCoupons();
         setPaypal(!paypal)
