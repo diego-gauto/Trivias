@@ -181,7 +181,7 @@ export const Module6_1 = (props: IModule6_1) => {
             </FooterAText>
             <FooterBIcons >
               <div className="content">
-                <a href="https://wa.me/5491153137872">
+                <a href="https://wa.me/525538933134">
                   <FooterBIcons_1 style={{ backgroundImage: `url(${IMG3.src})` }}></FooterBIcons_1>
                 </a>
                 <a href="mailto:soporte@gonvar.io">
