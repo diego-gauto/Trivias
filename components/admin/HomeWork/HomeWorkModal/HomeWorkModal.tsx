@@ -142,7 +142,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                 <button onClick={() => {
                   updateHomework()
                 }}>
-                  Guardar
+                  Enviar
                 </button>
               </ButtonContain>
             </DataContain>
