@@ -91,7 +91,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
               </ItemContain>
               <ItemContain>
                 <Text>
-                  Temporada
+                  Módulo
                 </Text>
                 <Text2>
                   {data.seasonNumber}
