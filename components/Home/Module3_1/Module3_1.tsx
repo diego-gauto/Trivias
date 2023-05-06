@@ -67,11 +67,11 @@ export const Module3_1 = (props: IModule3) => {
                   </LiElement>
                   <LiElement>
                     <ModuleContainerBG1 style={{ backgroundImage: `url(${Icon2.src})`, backgroundSize: "75%", backgroundPositionX: "7.5px" }} />
-                    <ListText><Subtittle_1> Reconocimiento y </Subtittle_1> <Subtittle_2> certicados</Subtittle_2></ListText>
+                    <ListText><Subtittle_1> Reconocimiento y </Subtittle_1> <Subtittle_2> Certificados</Subtittle_2></ListText>
                   </LiElement>
                   <LiElement>
                     <ModuleContainerBG1 style={{ backgroundImage: `url(${Icon3.src})`, backgroundSize: "100%" }} />
-                    <ListText><Subtittle_1>Revision de prácticas</Subtittle_1></ListText>
+                    <ListText><Subtittle_1>Revisión de prácticas</Subtittle_1></ListText>
                   </LiElement>
                 </UlElement>
               </Column_1>
@@ -92,7 +92,7 @@ export const Module3_1 = (props: IModule3) => {
                   </LiElement>
                   <LiElement>
                     <ModuleContainerBG1 style={{ backgroundImage: `url(${Icon6.src})`, backgroundSize: "100%" }} />
-                    <ListText><Subtittle_1>Intructores </Subtittle_1> <Subtittle_2> internacionales </Subtittle_2></ListText>
+                    <ListText><Subtittle_1>Instructores </Subtittle_1> <Subtittle_2> internacionales </Subtittle_2></ListText>
                   </LiElement>
                 </UlElement>
               </Column_3>
@@ -117,11 +117,11 @@ export const Module3_1 = (props: IModule3) => {
                   </LiElementMobile>
                   <LiElementMobile>
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon2.src})`, backgroundSize: "75%", backgroundPositionX: "7.5px" }} />
-                    <ListTextMobile><Subtittle_1Mobile> Reconocimiento y </Subtittle_1Mobile> <Subtittle_2Mobile> certicados</Subtittle_2Mobile></ListTextMobile>
+                    <ListTextMobile><Subtittle_1Mobile> Reconocimiento y </Subtittle_1Mobile> <Subtittle_2Mobile> Certificados</Subtittle_2Mobile></ListTextMobile>
                   </LiElementMobile>
                   <LiElementMobile>
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon3.src})`, backgroundSize: "100%" }} />
-                    <ListTextMobile><Subtittle_1Mobile>Revision de prácticas</Subtittle_1Mobile></ListTextMobile>
+                    <ListTextMobile><Subtittle_1Mobile>Revisión de prácticas</Subtittle_1Mobile></ListTextMobile>
                   </LiElementMobile>
                   <LiElementMobile>
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon4.src})`, backgroundSize: "100%" }} />
@@ -133,7 +133,7 @@ export const Module3_1 = (props: IModule3) => {
                   </LiElementMobile>
                   <LiElementMobile>
                     <ModuleContainerBG1Mobile style={{ backgroundImage: `url(${Icon6.src})`, backgroundSize: "100%" }} />
-                    <ListTextMobile><Subtittle_1Mobile>Intructores </Subtittle_1Mobile> <Subtittle_2Mobile> internacionales </Subtittle_2Mobile></ListTextMobile>
+                    <ListTextMobile><Subtittle_1Mobile>Instructores </Subtittle_1Mobile> <Subtittle_2Mobile> internacionales </Subtittle_2Mobile></ListTextMobile>
                   </LiElementMobile>
                 </UlElementMobile>
               </Row_1Mobile>
