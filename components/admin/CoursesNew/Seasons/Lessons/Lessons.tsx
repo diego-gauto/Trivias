@@ -37,13 +37,6 @@ const Lessons = () => {
     points: false,
     banner: false,
     objectives: false,
-    // homeWorkTitle:false,
-    // hoemWorkAbout: false,
-    // quizTitle: false,
-    // quizPassingGrade:false,
-    // quizPoints: false,
-    // questions:false,
-    // answers: false,
   });
   let courseID: any = router.query.course;
   let seasonID: any = router.query.season;
@@ -123,6 +116,17 @@ const Lessons = () => {
     "No",
     "Si",
   ];
+  function hasDuplicates(array: any) {
+    const seen = new Set();
+    for (const element of array) {
+      if (seen.has(element.title)) {
+        return true;
+      }
+      seen.add(element.title);
+    }
+    return false;
+  }
+
   const [userData, setUserData] = useState<any>(null);
   useEffect(() => {
     if (localStorage.getItem("email")) {
@@ -155,6 +159,7 @@ const Lessons = () => {
       // }
     }, 1000);
   }
+  console.log(extraMaterial)
   const getExtraMaterial = (file: any) => {
     setMaterialLoader(true);
     if (file.length > 0) {
@@ -164,7 +169,7 @@ const Lessons = () => {
       reader.readAsDataURL(file[0]);
       reader.onload = (_event) => {
         imageComp.src = reader.result;
-        tempExtraMaterial.push({ material: reader.result });
+        tempExtraMaterial.push({ material: reader.result, title: '' });
         setExtraMaterial(tempExtraMaterial);
         setMaterialLoader(false);
       };
@@ -240,6 +245,10 @@ const Lessons = () => {
       alert("No tienes permisos para esta acción");
       return;
     }
+    if (hasDuplicates(extraMaterial)) {
+      alert("Hay material adicional con el mismo titulo");
+      return;
+    }
     setLoader(true);
     if (lesson.quiz === true) {
       lesson.quizzes = quiz;
@@ -251,18 +260,8 @@ const Lessons = () => {
     let tempErrors: any = {
       title: lesson.title === "" ? true : false,
       number: lesson.number === 0 ? true : false,
-      // about: lesson.about === "" ? true : false,
       link: lesson.link === "" ? true : false,
-      // // points: lesson.points === 0 ? true : false,
       banner: lesson.banner === "" ? true : false,
-      // objectives: lesson.objectives === "" ? true : false,
-      // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,
-      // hoemWorkAbout:lesson.lesson_homeworks.about ==="" ? true : false,
-      // quizTitle:lesson.quizzes.title ==="" ? true : false,
-      // quizPassingGrade:lesson.quizzes.passing_grade ===0 ?true : false,
-      // quizPoints: lesson.quizzes.points ===0 ? true :false,
-      // questions:lesson.quizzes.questions.length === 0 ? true : false,
-      // answers: false,
     }
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
@@ -286,12 +285,12 @@ const Lessons = () => {
         })
         if (materialContent.length > 0) {
           materialContent.forEach(async (image: any) => {
-            await updateLessonHomeWorks(courseID, seasonID, image.material, res.data).then((url) => {
+            await updateLessonHomeWorks(courseID, seasonID, image.material, res.data, image.title).then((url) => {
               image.material = url
             })
           });
           materialContent.forEach(async (mat: any, index: number,) => {
-            await updateLessonHomeWorks(courseID, seasonID, mat.material, res.data).then((url) => {
+            await updateLessonHomeWorks(courseID, seasonID, mat.material, res.data, mat.title).then((url) => {
               let sentData = {
                 title: mat.title,
                 material: url,
@@ -308,11 +307,14 @@ const Lessons = () => {
     else {
       setLoader(false);
     }
-
   }
   const updateLesson = async () => {
     if (userData.role === "admin" && userData.roles[1].edit === 0) {
       alert("No tienes permisos para esta acción");
+      return;
+    }
+    if (hasDuplicates(extraMaterial)) {
+      alert("Hay material adicional con el mismo titulo");
       return;
     }
     setLoader(true);
@@ -326,18 +328,8 @@ const Lessons = () => {
     let tempErrors: any = {
       title: lesson.title === "" ? true : false,
       number: lesson.number === 0 ? true : false,
-      // about: lesson.about === "" ? true : false,
       link: lesson.link === "" ? true : false,
-      // points: lesson.points === 0 ? true : false,
       banner: lesson.banner === "" ? true : false,
-      // objectives: lesson.objectives === "" ? true : false,
-      // homeWorkTitle:lesson.lesson_homeworks.title ==="" ? true :false,
-      // hoemWorkAbout:lesson.lesson_homeworks.about ==="" ? true : false,
-      // quizTitle:lesson.quizzes.title ==="" ? true : false,
-      // quizPassingGrade:lesson.quizzes.passing_grade ===0 ?true : false,
-      // quizPoints: lesson.quizzes.points ===0 ? true :false,
-      // questions:lesson.quizzes.questions.length === 0 ? true : false,
-      // answers: false,
     }
     setErrors(tempErrors)
     let checkErrors = Object.values(tempErrors).includes(true);
@@ -349,9 +341,10 @@ const Lessons = () => {
         })
       }
       lesson.extraMaterial = extraMaterial;
+      console.log(extraMaterial);
       await Promise.all(lesson.extraMaterial.map(async (mat: any) => {
         if (!mat.id) {
-          await updateLessonHomeWorks(courseID, seasonID, mat.material, +lessonID).then((url) => {
+          await updateLessonHomeWorks(courseID, seasonID, mat.material, +lessonID, mat.title).then((url) => {
             mat.material = url;
           })
         }
@@ -364,7 +357,6 @@ const Lessons = () => {
     else {
       setLoader(false);
     }
-
   }
   const deleteLesson = () => {
     if (userData.role === "admin" && userData.roles[1].delete === 0) {
@@ -639,9 +631,6 @@ const Lessons = () => {
                                 defaultValue={extra.title}
                                 onChange={(e) => {
                                   changeExtraMaterialTitle(e.target.value, index)
-                                  // setExtraMaterial({
-                                  //   ...extraMaterial[index], title: e.target.value
-                                  // })
                                 }}
                               />
                             </div>
@@ -652,6 +641,9 @@ const Lessons = () => {
                                 placeholder={'Titulo de la tarea ' + (index + 1)}
                                 className="input-create"
                                 defaultValue={extra.title}
+                                onChange={(e) => {
+                                  changeExtraMaterialTitle(e.target.value, index)
+                                }}
                               />
                             </div>
 

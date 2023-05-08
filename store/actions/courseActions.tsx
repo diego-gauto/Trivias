@@ -544,7 +544,7 @@ const uploadCertificate = (image: any, name: any) => {
 
 const uploadLessonImage = (courseID: number, seasonID: number, lesson: any, lessonID: number) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/${lessonID}`);
+  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/cover/${lessonID}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, lesson, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
@@ -603,9 +603,9 @@ export const updateProfessorSignature = async (image: string, name: string) => {
   return url;
 }
 
-const uploadLessonHomeWorks = (courseID: number, seasonID: number, lesson: any, lessonID: number) => {
+const uploadLessonHomeWorks = (courseID: number, seasonID: number, lesson: any, lessonID: number, title: string) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/${lessonID}`);
+  const storageRef = ref(storage, `courses/${courseID}/season/${seasonID}/extra/${lessonID}/${title}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, lesson, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
@@ -614,7 +614,7 @@ const uploadLessonHomeWorks = (courseID: number, seasonID: number, lesson: any, 
     });
   });
 }
-export const updateLessonHomeWorks = async (courseID: number, seasonID: number, image: any, lessonID: number) => {
-  const url = await uploadLessonHomeWorks(courseID, seasonID, image, lessonID);
+export const updateLessonHomeWorks = async (courseID: number, seasonID: number, image: any, lessonID: number, title: string) => {
+  const url = await uploadLessonHomeWorks(courseID, seasonID, image, lessonID, title);
   return url;
 }
