@@ -31,6 +31,14 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
             query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
           })
         }
+        else {
+          if (data.quiz === 0 && data.homework === 0) {
+            router.push({
+              pathname: 'Lesson',
+              query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+            })
+          }
+        }
       })
     }
     else {
@@ -39,6 +47,14 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
           pathname: 'Lesson',
           query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
         })
+      }
+      else {
+        if (data.quiz === 0 && data.homework === 0) {
+          router.push({
+            pathname: 'Lesson',
+            query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+          })
+        }
       }
     }
   }
