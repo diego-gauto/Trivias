@@ -53,9 +53,6 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    if (trial == "true") {
-      localStorage.setItem("trial", "true");
-    }
     if (localStorage.getItem("email")) {
       localStorage.removeItem("trial")
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -78,6 +75,13 @@ const Purchase = () => {
         setIsLoading(false);
       })
     } else {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('trial') == "true") {
+        localStorage.setItem("trial", "true");
+      }
+      if (searchParams.get('type') === "subscription") {
+        localStorage.setItem("sub", "true");
+      }
       window.location.href = "/auth/Register";
       setLoggedIn(false)
     }
