@@ -159,7 +159,6 @@ const Lessons = () => {
       // }
     }, 1000);
   }
-  console.log(extraMaterial)
   const getExtraMaterial = (file: any) => {
     setMaterialLoader(true);
     if (file.length > 0) {
@@ -341,7 +340,6 @@ const Lessons = () => {
         })
       }
       lesson.extraMaterial = extraMaterial;
-      console.log(extraMaterial);
       await Promise.all(lesson.extraMaterial.map(async (mat: any) => {
         if (!mat.id) {
           await updateLessonHomeWorks(courseID, seasonID, mat.material, +lessonID, mat.title).then((url) => {
