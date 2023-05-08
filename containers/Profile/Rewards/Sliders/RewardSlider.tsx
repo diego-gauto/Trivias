@@ -38,7 +38,7 @@ const RewardSlider = (props: reward_slider) => {
     let slides: any = [];
     let tempFilter: any = [];
     if (type == "claim-points") {
-      tempFilter = rewards.filter((val: any) => { return (val.type === "points" && user.score >= val.points) });
+      tempFilter = rewards.filter((val: any) => { return (val.type === "points" && val.published === "publicado" && user.score >= val.points) });
       tempFilter.sort((a: any, b: any) => a.points - b.points)
       tempFilter.forEach((element: any) => {
         if (!userReward.find((x: any) => x.reward_id === element.id && x.status)) {
@@ -64,7 +64,7 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-months") {
-      tempFilter = rewards.filter((val: any) => { return (val.type == "months" && months >= val.month) });
+      tempFilter = rewards.filter((val: any) => { return (val.type == "months" && val.published === "publicado" && months >= val.month) });
       tempFilter.sort((a: any, b: any) => a.month - b.month);
       tempFilter.forEach((element: any) => {
         if (!userReward.find((x: any) => x.reward_id == element.id && x.status)) {
