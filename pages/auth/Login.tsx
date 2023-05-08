@@ -217,8 +217,6 @@ const Login = () => {
 
   const redirect = () => {
     if (localStorage.getItem("trial") === "true") {
-      console.log(1);
-
       window.location.href = "https://www.gonvar.io/purchase?type=subscription&trial=true"
     }
   }

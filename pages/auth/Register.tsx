@@ -117,8 +117,8 @@ const Register = () => {
 
   const redirect = () => {
     if (localStorage.getItem("trial") === "true") {
+      window.location.href = "https://www.gonvar.io/purchase?type=subscription&trial=true"
     }
-    window.location.href = "https://www.gonvar.io/purchase?type=subscription&trial=true"
   }
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
