@@ -113,9 +113,9 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
             {hms(less.duration)}
             {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>
-          {less.points > 0 && <CoursePoints>
+          {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
-          </CoursePoints>}
+          </CoursePoints>} */}
         </DetailContain>
       </Details>)
     }
@@ -128,9 +128,9 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
           {hms(less.duration)}
           {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
         </CourseLength>
-        {less.points > 0 && <CoursePoints>
+        {/* {less.points > 0 && <CoursePoints>
           +{less.points} puntos
-        </CoursePoints>}
+        </CoursePoints>} */}
       </DetailContain>
     </Details>)
   }

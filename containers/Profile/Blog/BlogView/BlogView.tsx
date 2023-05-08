@@ -17,6 +17,7 @@ import { IBlog, ISubTopic } from './IBlogView';
 import ReactToPrint from 'react-to-print';
 import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags'
 import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
+import { FaCopy } from 'react-icons/fa';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -24,6 +25,7 @@ const BlogView = () => {
   const [blogs, setBlogs] = useState<any>();
   const [blog, setBlog] = useState<IBlog>();
   const [topicLength, setTopicLength] = useState(0);
+  const [linkToCopy, setLinkToCopy] = useState<string>("");
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
@@ -125,6 +127,7 @@ const BlogView = () => {
   }
   const getBlog = () => {
     let tempTitle: any = router.query.slug;
+    setLinkToCopy('gonvar.io/Blogs/' + tempTitle);
     let titleSearch: string = tempTitle.replaceAll("-", " ").replaceAll("&#45;", "-");
     let tempBlog: any;
     let allBlogs: any;
@@ -201,7 +204,8 @@ const BlogView = () => {
                 >
                   <BsFacebook className="icon" />
                 </FacebookShareButton>
-                <TwitterShareButton
+                <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
+                {/* <TwitterShareButton
                   url={url}
                   title={blog?.subtitle}
                 >
@@ -223,7 +227,7 @@ const BlogView = () => {
                   documentTitle="Gonvar"
                   pageStyle="print"
                 >
-                </ReactToPrint>
+                </ReactToPrint> */}
               </div>
             </div>
             <div className="img-container" key="remove" id="remove">

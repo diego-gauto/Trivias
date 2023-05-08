@@ -58,58 +58,6 @@ const Blog = () => {
     }
   }
   useEffect(() => {
-    // getBlogs().then((res: any) => {
-    //   res.forEach((element: IBlog) => {
-    //     let tempDate: any = new Date(element.createdAt.seconds * 1000);
-    //     let tempDay = tempDate.getDate();
-    //     let tempMonth = tempDate.getMonth() + 1;
-    //     let textMonth: string = ""
-    //     if (tempMonth == 1) {
-    //       textMonth = "ene"
-    //     }
-    //     if (tempMonth == 2) {
-    //       textMonth = "feb"
-    //     }
-    //     if (tempMonth == 3) {
-    //       textMonth = "mar"
-    //     }
-    //     if (tempMonth == 4) {
-    //       textMonth = "abr"
-    //     }
-    //     if (tempMonth == 5) {
-    //       textMonth = "may"
-    //     }
-    //     if (tempMonth == 6) {
-    //       textMonth = "jun"
-    //     }
-    //     if (tempMonth == 7) {
-    //       textMonth = "jul"
-    //     }
-    //     if (tempMonth == 8) {
-    //       textMonth = "ago"
-    //     }
-    //     if (tempMonth == 9) {
-    //       textMonth = "sep"
-    //     }
-    //     if (tempMonth == 10) {
-    //       textMonth = "oct"
-    //     }
-    //     if (tempMonth == 11) {
-    //       textMonth = "nov"
-    //     }
-    //     if (tempMonth == 12) {
-    //       textMonth = "dec"
-    //     }
-    //     let tempYear = tempDate.getFullYear();
-    //     element.date = {
-    //       day: tempDay,
-    //       month: textMonth,
-    //       year: tempYear,
-    //     };
-    //   });
-    //   setBlogs(res)
-    //   setLoader(true);
-    // })
     getBlogsApi().then((res) => {
       res.forEach((blog: IBlog, index: number) => {
         let date = new Date(blog.created_at)
