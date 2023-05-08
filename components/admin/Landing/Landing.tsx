@@ -79,7 +79,7 @@ const Landing = () => {
 
   if (loading) {
     return (
-      <Background>
+      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>

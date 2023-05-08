@@ -11,8 +11,6 @@ export const BackgroundLoader = styled.div`
   justify-content: center;
 `;
 export const Background = styled.div`
-  align-items: center;
-  justify-content: center;
   display: flex;
   width: 100%;
   min-height: 90vh;

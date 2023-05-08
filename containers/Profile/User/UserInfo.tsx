@@ -16,6 +16,7 @@ import {
 } from "./User.styled";
 import { io } from "socket.io-client";
 import { useAuth } from "../../../hooks/useAuth";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
