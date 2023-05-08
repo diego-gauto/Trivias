@@ -11,6 +11,8 @@ export const BackgroundLoader = styled.div`
   justify-content: center;
 `;
 export const Background = styled.div`
+  align-items: center;
+  justify-content: center;
   display: flex;
   width: 100%;
   min-height: 90vh;
@@ -727,8 +729,8 @@ export const LoaderContain = styled.div`
   box-sizing: border-box;
   display: block;
   position: absolute;
-  left: -10px;
-  top: -16px;
+  left: -26px;
+  top: -26px;
   width: 100px;
   height: 100px;
   margin: 6px;
@@ -744,8 +746,8 @@ export const LoaderImage = styled.div`
   background-size: contain;
   background-position: center;
   display: flex;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-image: url(../images/logo-g.png);
   background-repeat: no-repeat;
   align-items: center;

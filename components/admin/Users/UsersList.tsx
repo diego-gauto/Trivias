@@ -18,6 +18,7 @@ import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
 import { getLessonFromUserApi, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 
 export interface SelectedUser {
   id?: string;
@@ -212,11 +213,11 @@ const UsersList = () => {
 
   if (!loader) {
     return (
-      <AdminLoader>
-        <div className="loader-image">
-          <div className="loader-contain" />
-        </div>
-      </AdminLoader>
+      <Background>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
     )
   }
   return (
