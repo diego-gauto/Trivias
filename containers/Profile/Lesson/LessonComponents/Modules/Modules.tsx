@@ -1,3 +1,4 @@
+import router from 'next/router'
 import React, { useEffect, useState } from 'react'
 import About from './About'
 import Comments from './Comments'
@@ -5,8 +6,14 @@ import HomeWork from './HomeWork'
 import { MainContainer } from './Module.styled'
 
 const Modules = ({ data, user, season, lesson, teacherCreds, courseIds, handleClick, course }: any) => {
-
+  const { admin }: any = router.query;
   const [position, setPosition] = useState(1)
+
+  useEffect(() => {
+    if (admin) {
+      setPosition(4)
+    }
+  }, [])
 
   return (
     <MainContainer>

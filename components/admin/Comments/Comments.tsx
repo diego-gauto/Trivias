@@ -47,6 +47,13 @@ const Comments = () => {
         getCoursesForAdmin(temp);
         setCoursesId(temp);
       }
+      tempComments.forEach((element: any) => {
+        let tempDate: any = new Date(element.created_at);
+        let tempDay = tempDate.getDate()
+        let tempMonth = tempDate.getMonth() + 1;
+        let tempYear = tempDate.getFullYear()
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+      });
       setComments(tempComments)
     })
   }
@@ -151,7 +158,7 @@ const Comments = () => {
   const goTo = (value: any) => {
     router.push({
       pathname: '/Lesson',
-      query: { id: value.course_id, season: value.season_number - 1, lesson: value.lesson_number - 1 },
+      query: { id: value.course_id, season: value.season_number - 1, lesson: value.lesson_number - 1, admin: 1 },
     });
   }
 
@@ -193,6 +200,7 @@ const Comments = () => {
                 <p><span>Temporada: </span>{x.season_title}</p>
                 <p><span>Lección: </span>{x.lesson_title}</p>
                 <p><span>Comentario: </span>{x.comment}</p>
+                <p><span>Fecha: </span>{x.formatDate}</p>
                 <div className="buttons">
                   <button className="add" onClick={() => { goTo(x) }}>Ir a comentario</button>
                   <button className="add" onClick={() => { setComment(x); setPopUp(true); }}>Agregar Comentario</button>
