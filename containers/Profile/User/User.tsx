@@ -105,13 +105,17 @@ const User = () => {
     monthRewardCompleted = reward.filter((data: any) => (data.type === "months" && monthPercentage >= data.month));
     monthFilter.sort((a: any, b: any) => a.month - b.month);
     monthRewardCompleted.sort((a: any, b: any) => b.month - a.month);
-    if (monthRewardCompleted.length === 0) {
-      progressMonth = 755 - (((monthProgress - 0) / (monthFilter[0].month - 0)) * 755)
+    if (monthFilter.length > 0) {
+      if (monthRewardCompleted.length === 0) {
+        progressMonth = 755 - (((monthProgress - 0) / (monthFilter[0].month - 0)) * 755)
+      }
+      else {
+        progressMonth = (755 - (((monthProgress - monthRewardCompleted[0].month) / (monthFilter[0].month - monthRewardCompleted[0].month)) * 755))
+      }
     }
     else {
-      progressMonth = (755 - (((monthProgress - monthRewardCompleted[0].month) / (monthFilter[0].month - monthRewardCompleted[0].month)) * 755))
+      progressMonth = 0;
     }
-
     return { progressMonth, monthFilter, monthRewardCompleted }
   }
   const getNextRewards = async (data: any) => {
@@ -131,12 +135,18 @@ const User = () => {
     pointRewardCompleted = reward.filter((data: any) => (data.type === "points" && user.score >= data.points));
     pointsFilter.sort((a: any, b: any) => a.points - b.points);
     pointRewardCompleted.sort((a: any, b: any) => b.points - a.points);
-    if (pointRewardCompleted.length === 0) {
-      progressPoints = 755 - (((user.score - 0) / (pointsFilter[0].points - 0)) * 755)
+    if (pointsFilter.length > 0) {
+      if (pointRewardCompleted.length === 0) {
+        progressPoints = 755 - (((user.score - 0) / (pointsFilter[0].points - 0)) * 755)
+      }
+      else {
+        progressPoints = 755 - (((user.score - pointRewardCompleted[0].points) / (pointsFilter[0].points - pointRewardCompleted[0].points)) * 755)
+      }
     }
     else {
-      progressPoints = 755 - (((user.score - pointRewardCompleted[0].points) / (pointsFilter[0].points - pointRewardCompleted[0].points)) * 755)
+      progressPoints = 0;
     }
+
     if (nextCourseCertificate) {
       progressCertificates = ((1 - nextCourseCertificate.progress) * 755);
     }

@@ -2,11 +2,12 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
-import { BsFacebook, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
+import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
+import InstagramEmbed from 'react-instagram-embed';
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -204,6 +205,9 @@ const BlogView = () => {
                 >
                   <BsFacebook className="icon" />
                 </FacebookShareButton>
+                {/* <InstagramEmbed>
+                  <BsInstagram className='icon' />
+                </InstagramEmbed> */}
                 <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
                 {/* <TwitterShareButton
                   url={url}

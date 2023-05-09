@@ -167,19 +167,21 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
               {
                 reward === 0 &&
                 <p>
-                  <>Siguiente Recompensa {points?.blocked.length > 0 ?
-                    <span>{points?.blocked[0].title}</span> :
-                    <>Sin<span> Recompensa</span></>}</>
-
+                  {
+                    points?.blocked.length > 0 ?
+                      <>Siguiente Recompensa <span>{points?.blocked[0].title}</span></> :
+                      <>Sin <span>Recompensa</span></>
+                  }
                 </p>
               }
               {
                 reward === 1 &&
                 <p>
-                  <>Siguiente Recompensa {time.blocked.length > 0 ?
-                    <span>{time?.blocked[0].title}</span> :
-                    <>Sin<span> Recompensa</span></>}</>
-
+                  {
+                    time.blocked.length > 0 ?
+                      <>Siguiente Beneficio <span>{time?.blocked[0].title}</span></>
+                      : <>Sin <span>Beneficio</span></>
+                  }
                 </p>
               }
               {
