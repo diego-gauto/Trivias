@@ -20,6 +20,8 @@ export const AdminCommentsContainer = styled.div`
     }
     .top {
       display: flex;
+      flex-direction: column;
+      gap: 15px;
       justify-content: space-between;
       span {
         color: #6717cd;

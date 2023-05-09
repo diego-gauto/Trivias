@@ -181,6 +181,9 @@ const Comments = () => {
           return (
             <div className="comment-row" key={"admin_comments_" + index}>
               <div className="top">
+                <p><span>Curso: </span>{x.course_title}</p>
+                <p><span>Temporada: </span>{x.season_title}</p>
+                <p><span>Lección: </span>{x.lesson_title}</p>
                 <p><span>Comentario: </span>{x.comment}</p>
                 <div className="buttons">
                   <button className="add" onClick={() => { setComment(x); setPopUp(true); }}>Agregar Comentario</button>
