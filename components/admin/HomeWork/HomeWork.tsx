@@ -323,7 +323,7 @@ const HomeWork = () => {
                         >{task.userEmail}</td>
                         <td
 
-                        >{task.courseTitle}  ({task.seasonNumber}, {task.lessonNumber}) </td>
+                        >{task.courseTitle}  ({task.seasonTitle}, {task.lessonTitle}) </td>
                         <td
                           style={{ whiteSpace: "nowrap" }}
                         >{formatDate(task.homeworkCreatedAt)}</td>
