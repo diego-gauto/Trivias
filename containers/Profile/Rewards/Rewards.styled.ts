@@ -303,7 +303,7 @@ export const RewardCardContainer = styled.div<{
   align-items: center;
   gap: 20px;
   @media (max-width: 550px) {
-    gap: 10px;
+  
   }
   .next-reward{
     display: flex;
@@ -313,7 +313,7 @@ export const RewardCardContainer = styled.div<{
     border-radius: 300px 0 0 300px;
     max-width: 300px;
     @media (max-width: 550px) {
-      padding-inline: 40px 5px;
+      padding-inline: 40px 20px;
     }
     .container{
       display: flex;
@@ -330,6 +330,9 @@ export const RewardCardContainer = styled.div<{
         text-align: center;
         font-size: 20px;
         font-weight: 500;
+        @media(max-width: 550px){
+          font-size: 22px;
+        }
         span{
           white-space:initial;
           font-size: 16px;
