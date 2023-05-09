@@ -14,8 +14,9 @@ const Certificate = () => {
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
+  const [profSignature, setProfSignature] = useState<any>()
   const aritaSignature = "/images/signatures/AritaGonvar.png";
-
+  console.log(image);
   const getUserCertificate = () => {
     let ids = {
       userId: id,
@@ -63,9 +64,28 @@ const Certificate = () => {
     let my_mm = document.getElementById('my_mm');
     return Math.floor(px / 2);
   }
-
+  function imageUrlToBase64() {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL();
+        resolve(dataURL);
+      };
+      img.onerror = reject;
+      img.src = teacherSignature;
+    });
+  }
   useEffect(() => {
     getUserCertificate();
+    imageUrlToBase64().then((base64) => {
+      setProfSignature(base64)
+    })
     QRCode.toDataURL(window.location.href)
       .then(url => {
         setImage(url);
@@ -85,7 +105,7 @@ const Certificate = () => {
           <p className="date">{date}</p>
           <p className="folio">{folio}</p>
           <p className="professor-name" id="name" style={{ left: document.getElementById("name")?.clientWidth! > 168 ? "26%" : "32%" }}>{professor}</p>
-          <img id="img" src={image} style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }} alt="" />
+          <img id="img" src={profSignature} style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }} alt="" />
           <img src={aritaSignature} className="main-signature" />
           <img src={teacherSignature} className="professor-signature" />
         </div>
