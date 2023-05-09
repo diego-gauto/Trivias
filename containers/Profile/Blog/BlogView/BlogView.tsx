@@ -2,12 +2,12 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
+// import Share from 'react-native-share';
 import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
 import { BackgroundLoader, LoaderImage, LoaderContain } from '../../../../screens/Login.styled';
-import InstagramEmbed from 'react-instagram-embed';
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -32,6 +32,19 @@ const BlogView = () => {
   const router = useRouter();
   const ref = useRef<any>(null);
   let topicTitleCount: any = 0
+  const shareToInstagram = async (url: any, imageUrl: any, title: any) => {
+    // try {
+    //   const shareOptions = {
+    //     social: Share.Social.INSTAGRAM,
+    //     url: imageUrl,
+    //     title: title,
+    //     message: title + '\n\n' + url,
+    //   };
+    //   await Share.shareSingle(shareOptions);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  };
   const fetchDB_data = async () => {
     try {
       const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
@@ -179,7 +192,7 @@ const BlogView = () => {
     <BlogContainer>
       <HelmetMetaTags
         title={blog?.title}
-        image={blog?.path}
+        image={blog?.image}
         description={blog?.subtitle ? blog?.subtitle : "Gonvar Nails Academy"}
         quote={"gonvar - " + blog?.title}
       />
@@ -205,9 +218,7 @@ const BlogView = () => {
                 >
                   <BsFacebook className="icon" />
                 </FacebookShareButton>
-                {/* <InstagramEmbed>
-                  <BsInstagram className='icon' />
-                </InstagramEmbed> */}
+                {/* <BsInstagram className='icon' onClick={() => shareToInstagram(url, blog?.image, blog?.title)} /> */}
                 <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
                 {/* <TwitterShareButton
                   url={url}
