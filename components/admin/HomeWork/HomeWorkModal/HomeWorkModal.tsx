@@ -53,8 +53,6 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
   }
 
   useEffect(() => {
-    console.log(data);
-
     if (data) {
       setReview({
         score: 0,

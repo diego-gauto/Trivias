@@ -1,3 +1,4 @@
+import router from "next/router";
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteCommentAnswers, deleteThisComment, getComments } from "../../api/admin";
@@ -147,6 +148,13 @@ const Comments = () => {
     }
   }
 
+  const goTo = (value: any) => {
+    router.push({
+      pathname: '/Lesson',
+      query: { id: value.course_id, season: value.season_number - 1, lesson: value.lesson_number - 1 },
+    });
+  }
+
   return (
     <AdminContain style={{ flexDirection: "column" }}>
       <div className="courses-header">
@@ -186,6 +194,7 @@ const Comments = () => {
                 <p><span>Lección: </span>{x.lesson_title}</p>
                 <p><span>Comentario: </span>{x.comment}</p>
                 <div className="buttons">
+                  <button className="add" onClick={() => { goTo(x) }}>Ir a comentario</button>
                   <button className="add" onClick={() => { setComment(x); setPopUp(true); }}>Agregar Comentario</button>
                   <button className="delete" onClick={() => { deleteComment(x) }}>Eliminar</button>
                 </div>
