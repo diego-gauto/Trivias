@@ -155,6 +155,14 @@ const Comments = () => {
     }
   }
 
+  const formatDate = (value: any) => {
+    let tempDate: any = new Date(value);
+    let tempDay = tempDate.getDate()
+    let tempMonth = tempDate.getMonth() + 1;
+    let tempYear = tempDate.getFullYear()
+    return `${tempDay}/${tempMonth}/${tempYear}`
+  }
+
   const goTo = (value: any) => {
     router.push({
       pathname: '/Lesson',
@@ -211,7 +219,10 @@ const Comments = () => {
               {x.answers.map((answer: any, ans_ind: number) => {
                 return (
                   <div className="answer" key={"admin_answer_" + ans_ind}>
-                    <p>{answer.comment}</p>
+                    <div className="left">
+                      <p>Fecha: {formatDate(answer.created_at)}</p>
+                      <p>{answer.comment}</p>
+                    </div>
                     <MdDeleteForever onClick={() => { deleteAnswer(answer) }} />
                   </div>
                 )

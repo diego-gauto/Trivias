@@ -50,6 +50,10 @@ export const AdminCommentsContainer = styled.div`
       display: flex;
       align-items: center;
       gap: 20px;
+      .left {
+        display: flex;
+        flex-direction: column;
+      }
       svg {
         color: #da0505;
         font-size: 20px;
