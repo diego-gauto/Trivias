@@ -16,7 +16,8 @@ export const TitleContain = styled.div`
     margin: 0;
   }
   select {
-    padding: 10px;
+    padding-block: 4px;
+    padding-inline: 10px;
     border: 2px solid #6717cd;
     border-radius: 100px;
     font-size: 14px;
@@ -33,6 +34,34 @@ export const Container = styled.div`
   border-radius: 10px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  .pages {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 20px;
+    padding-bottom: 10px;
+    align-items: center;
+    p {
+      margin: 0;
+    }
+    .index {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .current-number {
+        font-size: 30px;
+      }
+      .arrows {
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+    .max-pages {
+      .max-number {
+        font-weight: 600;
+        font-size: 24px;
+      }
+    }
+  }
 `;
 export const Table = styled.table`
   td {
@@ -68,7 +97,7 @@ export const Table = styled.table`
     }
   }
 `;
-export const Button = styled.div<{ status: any }>`
+export const Button = styled.div<{ status: any; approved: any }>`
   display: flex;
   margin: auto;
   font-size: 12px;
@@ -77,12 +106,23 @@ export const Button = styled.div<{ status: any }>`
   white-space: nowrap;
   padding: 10px;
   color: white;
-  background: #e70000;
   border-radius: 100px;
   ${(props) =>
-    props.status == true &&
+    props.status === 0 &&
+    css`
+      background: #9534eb;
+    `}
+  ${(props) =>
+    props.status === 1 &&
+    props.approved === 1 &&
     css`
       background: #33c600;
+    `}
+      ${(props) =>
+    props.status === 1 &&
+    props.approved === 0 &&
+    css`
+      background: #e70000;
     `}
   cursor: pointer;
 `;

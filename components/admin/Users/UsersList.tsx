@@ -302,7 +302,8 @@ const UsersList = () => {
                     </tr>
                   )
                 })
-              )}
+              )
+              }
             </tbody>
           </Table>
         </Container>

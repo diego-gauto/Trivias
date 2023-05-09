@@ -12,6 +12,7 @@ import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Se
 import { AdminContain } from '../SideBar.styled';
 import { Button, Container, Download, HWContainer, Table, TitleContain } from './HomeWork.styled'
 import HomeWorkModal from './HomeWorkModal/HomeWorkModal';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
 export class CsvData {
   public id: any;
@@ -24,21 +25,23 @@ const HomeWork = () => {
   const [data, setData] = useState<any>([]);
   const [id, setId] = useState("");
   const [course, setCourse] = useState<any>([]);
-  const [openSelect, setOpenSelect] = useState(false)
   const [courseSelect, setCourseSelect] = useState(false)
   const [courseFilter, setCourseFilter] = useState<any>("");
   const [coursesId, setCoursesId] = useState<any>([])
-
   const [pastUsers, setPastUsers] = useState<any>([]);
+  const [filterForCourse, setFilterForCourse] = useState<boolean>(false);
+  const [pageIndex, setPageIndex] = useState<number>(0);
+  const [courseIdForFilter, setCourseIdForFilter] = useState(0);
+  const [filterForStatus, setFilterForStatus] = useState<boolean>(false);
+  const [maxPages, setMaxPages] = useState<number>(0);
+  const [currentStatus, setCurrentStatus] = useState({
+    status: 0,
+    approved: 0,
+  })
   const [userData, setUserData] = useState<any>(null);
 
   const openCourseSelect = () => {
-    setOpenSelect(false);
     setCourseSelect(!courseSelect)
-  }
-  const openTeacherSelect = () => {
-    setOpenSelect(!openSelect);
-    setCourseSelect(false)
   }
 
   const getHomeworks = async () => {
@@ -46,13 +49,6 @@ const HomeWork = () => {
     if (localStorage.getItem("email")) user = await getUserApi(localStorage.getItem("email"))
     setUserData(user);
     getHomeworksApi().then(async (res: any) => {
-      res.data.data.forEach((element: any) => {
-        let tempDate: any = new Date();
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-      });
       let tempHomeworks = res.data.data
       if (user.role === "admin") {
         let array = user.roles[7].courses.split(",");
@@ -72,10 +68,11 @@ const HomeWork = () => {
         getCoursesForAdmin(temp);
         setCoursesId(temp);
       }
-      setHomeWorks(tempHomeworks);
+      pagePerHomeworks(tempHomeworks);
     })
   }
   const getCoursesForAdmin = (courses_id: any) => {
+    setPageIndex(0)
     getCoursesApi().then((res) => {
       let availableCourses: any = [];
       res.map((course: any) => {
@@ -87,32 +84,133 @@ const HomeWork = () => {
     })
   }
   const FilterHomeWorks = (course_id: number) => {
+    setPageIndex(0)
+    setCourseIdForFilter(course_id)
     getHomeworksApi().then(async (res: any) => {
-      res.data.data.forEach((element: any) => {
-        let tempDate: any = new Date();
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-      });
       let tempHomeworks = res.data.data
-      tempHomeworks = res.data.data.filter((x: any) => x.courseId === course_id);
-      setHomeWorks(tempHomeworks);
+      if (filterForStatus) {
+        tempHomeworks = res.data.data.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved);
+        tempHomeworks = tempHomeworks.filter((x: any) => x.courseId === course_id);
+      }
+      else {
+        tempHomeworks = res.data.data.filter((x: any) => x.courseId === course_id);
+      }
+      pagePerHomeworks(tempHomeworks);
+      setFilterForCourse(true);
     })
   }
   const AllHomeWorks = () => {
     getHomeworksApi().then(async (res: any) => {
-      res.data.data.forEach((element: any) => {
-        let tempDate: any = new Date();
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-      });
       let tempHomeworks = res.data.data
-      tempHomeworks = res.data.data.filter((x: any) => coursesId.includes(x.courseId));
-      setHomeWorks(tempHomeworks);
+      if (filterForStatus) {
+        tempHomeworks = res.data.data.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved);
+        tempHomeworks = tempHomeworks.filter((x: any) => coursesId.includes(x.courseId));
+      }
+      else {
+        tempHomeworks = res.data.data.filter((x: any) => coursesId.includes(x.courseId));
+      }
+      pagePerHomeworks(tempHomeworks);
+      setFilterForCourse(false);
     })
+  }
+  const formatDate = (date: any) => {
+    return date.substring(0, 10)
+  }
+  const filterByStatus = (type: string) => {
+    getHomeworksApi().then(async (res: any) => {
+      let tempHomeworks = res.data.data
+      if (filterForCourse) {
+        tempHomeworks = res.data.data.filter((x: any) => x.courseId === courseIdForFilter);
+        if (type === "all") {
+          tempHomeworks = tempHomeworks;
+          setFilterForStatus(false);
+        }
+        else {
+          setPageIndex(0)
+          setFilterForStatus(true);
+        }
+        if (type === "pending") {
+          tempHomeworks = tempHomeworks.filter((x: any) => x.status === 0);
+          setCurrentStatus({
+            status: 0,
+            approved: 0
+          })
+        }
+        if (type === "approved") {
+          tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 1);
+          setCurrentStatus({
+            status: 1,
+            approved: 1
+          })
+        }
+        if (type === "rejected") {
+          tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 0);
+          setCurrentStatus({
+            status: 1,
+            approved: 0
+          })
+        }
+      }
+      else {
+        if (type === "all") {
+          tempHomeworks = res.data.data;
+          setFilterForStatus(false);
+        }
+        else {
+          setPageIndex(0)
+          setFilterForStatus(true);
+        }
+        if (type === "pending") {
+          tempHomeworks = res.data.data.filter((x: any) => x.status === 0);
+          setCurrentStatus({
+            status: 0,
+            approved: 0
+          })
+        }
+        if (type === "approved") {
+          tempHomeworks = res.data.data.filter((x: any) => x.status === 1 && x.approved === 1);
+          setCurrentStatus({
+            status: 1,
+            approved: 1
+          })
+        }
+        if (type === "rejected") {
+          tempHomeworks = res.data.data.filter((x: any) => x.status === 1 && x.approved === 0);
+          setCurrentStatus({
+            status: 1,
+            approved: 0
+          })
+        }
+      }
+      pagePerHomeworks(tempHomeworks)
+    })
+  }
+  const pagePerHomeworks = (homework: any) => {
+    let usersPerPage: number = 100;
+    let pages: number = Math.ceil(homework.length / usersPerPage);
+    let tempHomeWork: any = [];
+    for (let i = 0; i < pages; i++) {
+      tempHomeWork.push([])
+      for (let j = 0; j < usersPerPage; j++) {
+        if (homework[j + (usersPerPage * i)]) {
+          tempHomeWork[i].push(homework[j + (usersPerPage * i)])
+        }
+      }
+    }
+    setMaxPages(pages);
+    setHomeWorks(tempHomeWork);
+  }
+  const getNextHomeWorks = (direction: string) => {
+    if (direction === "backward") {
+      if (pageIndex !== 0) {
+        setPageIndex(pageIndex - 1)
+      }
+    }
+    if (direction === "forward") {
+      if (pageIndex !== maxPages - 1) {
+        setPageIndex(pageIndex + 1)
+      }
+    }
   }
   const handleClick = () => {
     let index;
@@ -357,8 +455,24 @@ const HomeWork = () => {
                   </OptionContain>
                 }
               </SelectContain>
+              <select onChange={(e: any) => { filterByStatus(e.target.value) }}>
+                <option value="all">Ver todas</option>
+                <option value="pending">Pendientes</option>
+                <option value="approved">Aprobadas</option>
+                <option value="rejected">Rechazadas</option>
+              </select>
             </div>
           </TitleContain>
+          <div className="pages">
+            <div className="index">
+              <AiFillCaretLeft className="arrows" onClick={() => { getNextHomeWorks("backward") }} />
+              <p className="current-number">{pageIndex + 1}</p>
+              <AiFillCaretRight className="arrows" onClick={() => { getNextHomeWorks("forward") }} />
+            </div>
+            <div className="max-pages">
+              <p className="max-number">Paginas: {maxPages}</p>
+            </div>
+          </div>
           <Table id="Pay">
             <tbody>
               <tr>
@@ -371,44 +485,52 @@ const HomeWork = () => {
               </tr>
               {/* TABLAS */}
               {
-                homeWorks.map((task: any, index: any) => {
-                  return (
-                    <tr
-                      key={"HomeWorks " + index}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => { setShow(true); setData(task); setId(task.id) }}
-                    >
-                      <td
-                      >{task.userName}</td>
-                      <td
+                homeWorks.length > 0 && (
+                  homeWorks[pageIndex].map((task: any, index: any) => {
+                    return (
+                      <tr
+                        key={"HomeWorks " + index}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => { setShow(true); setData(task); setId(task.id) }}
+                      >
+                        <td
+                        >{task.userName}</td>
+                        <td
 
-                      >{task.userEmail}</td>
-                      <td
+                        >{task.userEmail}</td>
+                        <td
 
-                      >{task.courseTitle}  ({task.seasonNumber}, {task.lessonNumber}) </td>
-                      <td
-
-                      >{task.formatDate}</td>
-                      <td style={{ padding: "0" }} onClick={(e: any) => { e.stopPropagation(); setShow(false) }}>
-                        <Link href={task.homeworkImage}>
-                          <a target="_blank" style={{ textDecoration: "none" }}>
-                            <Download>
-                              Descargar Tarea
-                            </Download>
-                          </a>
-                        </Link>
-                      </td>
-                      <td style={{ padding: "0" }}
-
-                      >{
-                          task.status == false
-                            ? <Button status={task.status}>No revisada</Button>
-                            : <Button status={task.status}>Revisada</Button>
-                        }</td>
-                    </tr>
-                  )
-                })
-              }
+                        >{task.courseTitle}  ({task.seasonNumber}, {task.lessonNumber}) </td>
+                        <td
+                          style={{ whiteSpace: "nowrap" }}
+                        >{formatDate(task.homeworkCreatedAt)}</td>
+                        <td style={{ padding: "0" }} onClick={(e: any) => { e.stopPropagation(); setShow(false) }}>
+                          <Link href={task.homeworkImage}>
+                            <a target="_blank" style={{ textDecoration: "none" }}>
+                              <Download>
+                                Descargar Tarea
+                              </Download>
+                            </a>
+                          </Link>
+                        </td>
+                        <td style={{ padding: "0" }}
+                        >{
+                            task.status === 0
+                              ? <Button status={task.status} approved={task.approved}>Pendiente</Button>
+                              :
+                              <>
+                                {
+                                  task.approved === 1
+                                    ? <Button status={task.status} approved={task.approved}> Aprobada</Button>
+                                    : <Button status={task.status} approved={task.approved}> Rechazada</Button>
+                                }
+                              </>
+                          }
+                        </td>
+                      </tr>
+                    )
+                  })
+                )}
             </tbody>
           </Table>
           <HomeWorkModal setShow={setShow} show={show} data={data} user={homeWorks.userId} handleClick={handleClick} />
