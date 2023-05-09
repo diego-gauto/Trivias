@@ -85,6 +85,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       userId: user.user_id
     }
     if (user) {
+      history()
       await updateUserProgressApi(tempProgress);
     }
   }
@@ -149,7 +150,6 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       controls
       width="100%" height="auto"
       style={{ position: "relative" }}
-      onStart={() => history()}
       onEnded={finishedLesson}
       onDuration={(duration) => {
         handleDuration(duration);
