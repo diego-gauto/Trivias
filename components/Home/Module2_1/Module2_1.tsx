@@ -37,6 +37,7 @@ export const Module2_1 = (props: IModule2_1) => {
         router.push("/Purchase?type=subscription")
       }
     } else {
+      localStorage.setItem("sub", "true");
       router.push("/auth/Register")
     }
   }
