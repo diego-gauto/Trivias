@@ -47,7 +47,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
     }
     createNotification(notification);
     reviewHomeworkApi(temp).then(() => {
-      handleClick();
+      handleClick(review.approved);
       setValue(0);
     })
   }
