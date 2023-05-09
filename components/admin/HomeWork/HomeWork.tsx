@@ -213,10 +213,12 @@ const HomeWork = () => {
     }
   }
   const handleClick = () => {
-    let index;
-    index = homeWorks.findIndex((x: any) => x.id == id);
-    homeWorks[index].status = true;
-    setHomeWorks([...homeWorks])
+    getHomeworks();
+    alert("Tarea revisada con éxito!");
+    setShow(false);
+    setPageIndex(0);
+    setFilterForStatus(false);
+    setFilterForCourse(false);
   }
   useEffect(() => {
     getHomeworks();
@@ -535,7 +537,6 @@ const HomeWork = () => {
           </Table>
           <HomeWorkModal setShow={setShow} show={show} data={data} user={homeWorks.userId} handleClick={handleClick} />
         </Container>
-
       </HWContainer>
     </AdminContain>
   )
