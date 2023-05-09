@@ -215,6 +215,9 @@ const HomeWork = () => {
     homeWorks[pageIndex][id].status = 1;
     homeWorks[pageIndex][id].approved = approved;
     alert("Tarea revisada con éxito!");
+    if (filterForStatus === true) {
+      filterByStatus("pending");
+    }
     setShow(false);
   }
   useEffect(() => {
