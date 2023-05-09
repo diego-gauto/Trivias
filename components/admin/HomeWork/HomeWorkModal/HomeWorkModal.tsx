@@ -53,6 +53,8 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
   }
 
   useEffect(() => {
+    console.log(data);
+
     if (data) {
       setReview({
         score: 0,
@@ -94,15 +96,15 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
                   Módulo
                 </Text>
                 <Text2>
-                  {data.seasonNumber}
+                  {data.seasonTitle}
                 </Text2>
               </ItemContain>
               <ItemContain>
                 <Text>
-                  Curso
+                  Lección
                 </Text>
                 <Text2>
-                  {data.courseTitle}
+                  {data.lessonTitle}
                 </Text2>
               </ItemContain>
               <ItemContain>
