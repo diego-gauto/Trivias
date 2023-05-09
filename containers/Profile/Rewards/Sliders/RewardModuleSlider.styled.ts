@@ -12,22 +12,11 @@ export const SlideContainer = styled.div<{
   flex-shrink: 0;
   max-width: 310px;
   @media (max-width: 450px) {
-    max-width: 180px;
     padding-left: 30px;
   }
   &:first-child {
     padding-left: 20px;
   }
-  // width: ${(props) => (props.innerWidth - 40) / 5}px;
-  // @media (max-width: 1023px) {
-  //   gap: 10px;
-  // }
-  // @media (max-width: 750px) {
-  //   width: ${(props) => (props.innerWidth - 40) / 3}px;
-  // }
-  // @media (max-width: 450px) {
-  //   width: ${(props) => (props.innerWidth - 100) / 2}px;
-  // }
   p {
     margin: 0;
   }

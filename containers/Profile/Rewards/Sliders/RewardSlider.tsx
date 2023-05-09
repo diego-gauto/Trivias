@@ -242,7 +242,8 @@ const RewardSlider = (props: reward_slider) => {
                           </div>
                         } */}
                       </div>
-                      <div className='img-complete' style={(type == "claim-certificates" || type == "certificates") ? { height: 150, borderRadius: 10 } : {}}>
+                      <div
+                        className='img-complete' style={(type == "claim-certificates" || type == "certificates") ? { height: 150, borderRadius: 10, width: 250 } : {}}>
                         <img src={reward?.image} className="image-container" style={(type == "claim-certificates" || type == "certificates") ? { borderRadius: 10 } : {}} />
                         <div className="btn-contain">
                           {
