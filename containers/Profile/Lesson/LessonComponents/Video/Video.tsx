@@ -85,8 +85,9 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       userId: user.user_id
     }
     if (user) {
-      history()
-      await updateUserProgressApi(tempProgress);
+      await updateUserProgressApi(tempProgress).then(() => {
+        history();
+      });
     }
   }
 
