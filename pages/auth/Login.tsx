@@ -197,6 +197,7 @@ const Login = () => {
               setError(true);
               setAuthLoader(false);
               setShow(true);
+              return
             }
           }
           if (res.msg === "Este usuario no existe!") {
@@ -262,6 +263,7 @@ const Login = () => {
               setError(true);
               setAuthLoader(false);
               setShow(true);
+              return
             }
           }
           if (res.msg === "Este usuario no existe!") {
