@@ -62,7 +62,7 @@ export const AdminCommentsContainer = styled.div`
     }
   }
   .pop-up {
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-65%);
     border-radius: 40px;
@@ -74,6 +74,13 @@ export const AdminCommentsContainer = styled.div`
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    svg {
+      position: absolute;
+      right: 40px;
+      top: 20px;
+      color: #6717cd;
+      cursor: pointer;
+    }
     h1 {
       font-size: 24px;
     }

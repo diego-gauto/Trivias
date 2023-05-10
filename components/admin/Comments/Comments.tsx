@@ -8,7 +8,7 @@ import { createNotification } from "../../api/notifications";
 import { getUserApi } from "../../api/users";
 import { AdminContain, Table } from "../SideBar.styled";
 import { AdminCommentsContainer } from "./Comments.styled";
-
+import { GrClose } from "react-icons/gr";
 const Comments = () => {
 
   const [comments, setComments] = useState<any>()
@@ -231,6 +231,7 @@ const Comments = () => {
           )
         })}
         {popUp && <div className="pop-up">
+          <GrClose onClick={() => { setPopUp(false); setAnswer(""); }} />
           <h1>Responder comentario</h1>
           <textarea placeholder="La solución es..." onChange={(e) => { setAnswer(e.target.value) }} />
           <button onClick={() => { answerQuestion() }}>Agregar</button>
