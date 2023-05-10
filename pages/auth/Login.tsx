@@ -240,6 +240,7 @@ const Login = () => {
       }
       console.log(userInfo);
       facebookUserInfo(userInfo).then((res) => {
+        console.log(res);
         let user = {
           email: res.email,
         }
