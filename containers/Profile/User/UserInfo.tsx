@@ -56,17 +56,6 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
   //   // ...
   // });
 
-  const changePassword = async () => {
-    updatePassword(userPass, password).then(() => {
-      setErrorPassword(false);
-      setEditPassword(false);
-      setStartEdit(false);
-      return 'exito'
-    }).catch((error) => {
-      return error
-    });
-  }
-
   const hiddenFileInput: any = React.useRef(null);
   const changeImage = (e: any) => {
     hiddenFileInput.current.click();
@@ -97,39 +86,40 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
 
   const handleUpdateData = async () => {
     let photo = user.photo;
+    let tempPassword = user.password;
     if (image !== "") {
       await updateProfileImage(user, user.id).then((res) => {
         photo = res;
         setImage("");
       })
     }
+    if (editPassword) {
+      if (password == confirmPassword) {
+        if (password.length >= 6) {
+          tempPassword = password
+        } else {
+          setErrorPassword(true);
+          setErrorMsg("La contraseña debe tener al menos 6 carácteres");
+          return;
+        }
+      } else {
+        setErrorPassword(true);
+        setErrorMsg("La contraseña no coincide");
+        return;
+      }
+    }
     updateUserInfo({
       name: user.name,
       last_name: user.last_name,
       phone_number: user.phone_number,
       userId: user.id,
-      photo: photo
+      photo: photo,
+      password: tempPassword
     }).then((res) => {
       setStartEdit(false);
-      reloadUser()
-      //  setUser({ ...user, photo: "" })
+      reloadUser();
       handleClick();
     })
-    // if (editPassword) {
-    //   if (password == confirmPassword) {
-    //     if (password.length >= 6) {
-    //       changePassword();
-    //     }
-    //     else {
-    //       setErrorPassword(true);
-    //       setErrorMsg("La contraseña debe tener al menos 6 carácteres");
-    //     }
-    //   }
-    //   else {
-    //     setErrorPassword(true);
-    //     setErrorMsg("La contraseña no coincide");
-    //   }
-    // }
   }
 
   const getStarCoordinates = () => {
@@ -521,13 +511,13 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     onClick={() => { setEditPassword(!editPassword) }}
                     className="password-edit"
                   >
-                    Crear nueva contraseña
+                    Cambiar contraseña
                   </button>}
                 </>
             }
           </div>
         </div>
-        {/* {
+        {
           editPassword &&
           <div className="edit-contain">
             <div className="input-contain">
@@ -578,7 +568,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
 
             </div>
           </div>
-        } */}
+        }
 
       </div>
       <div className="btn-container">

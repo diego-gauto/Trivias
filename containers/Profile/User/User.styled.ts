@@ -1000,7 +1000,6 @@ export const ProfileMainContainer = styled.div<{
           white-space: break-spaces;
           left: 50%;
           transform: translateX(-50%);
-          white-space: nowrap;
           @media (max-width: 1023px) {
             bottom: -50px;
           }
