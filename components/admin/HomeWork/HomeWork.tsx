@@ -112,8 +112,10 @@ const HomeWork = () => {
       setFilterForCourse(false);
     })
   }
-  const formatDate = (date: any) => {
-    return date.substring(0, 10)
+  const formatDate = (created_at: any) => {
+    const date = new Date(created_at);
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    return formattedDate;
   }
   const filterByStatus = (type: string) => {
     getHomeworksApi().then(async (res: any) => {
