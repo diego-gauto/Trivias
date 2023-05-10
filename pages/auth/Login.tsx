@@ -242,6 +242,7 @@ const Login = () => {
         let user = {
           email: res.email,
         }
+        console.log(user, 'email')
         loginWithProviderApi(user).then((res) => {
           console.log(res, '1')
           if (res[0]) {
@@ -274,9 +275,9 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
-            localStorage.setItem('email', user.email);
-            redirect()
-            window.location.href = "/Preview"
+            // localStorage.setItem('email', user.email);
+            // redirect()
+            // window.location.href = "/Preview"
           }
         })
       })
