@@ -117,6 +117,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       password: tempPassword
     }).then((res) => {
       setStartEdit(false);
+      setEditPassword(false);
+      setPassword("");
+      setConfirmPassword("");
       reloadUser();
       handleClick();
     })
