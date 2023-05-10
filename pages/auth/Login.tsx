@@ -243,6 +243,7 @@ const Login = () => {
           email: res.email,
         }
         loginWithProviderApi(user).then((res) => {
+          console.log(res, '1')
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
@@ -266,6 +267,7 @@ const Login = () => {
               return
             }
           }
+          console.log(res, '2')
           if (res.msg === "Este usuario no existe!") {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
