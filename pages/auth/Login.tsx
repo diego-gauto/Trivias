@@ -238,6 +238,7 @@ const Login = () => {
         id: response.authResponse.userID,
         access_token: response.authResponse.accessToken
       }
+      console.log(userInfo);
       facebookUserInfo(userInfo).then((res) => {
         let user = {
           email: res.email,
@@ -268,7 +269,6 @@ const Login = () => {
               return
             }
           }
-          console.log(res, '2')
           if (res.msg === "Este usuario no existe!") {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
