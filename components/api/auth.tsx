@@ -35,11 +35,9 @@ export const googleTokens = async (code: any) => {
 
 export const facebookUserInfo = (userData: any) => {
   return axios.get(`https://graph.facebook.com/${userData.id}?fields=id,name,email,picture&access_token=${userData.access_token}`).then((res) => {
-    console.log(res);
     return res.data
   })
     .catch((error) => {
-      console.log(error);
       return error
     })
 }

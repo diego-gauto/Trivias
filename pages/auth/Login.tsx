@@ -238,15 +238,12 @@ const Login = () => {
         id: response.authResponse.userID,
         access_token: response.authResponse.accessToken
       }
-      console.log(userInfo);
       facebookUserInfo(userInfo).then((res) => {
         console.log(res);
         let user = {
           email: res.email,
         }
-        console.log(user, 'email')
         loginWithProviderApi(user).then((res) => {
-          console.log(res, '1')
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
@@ -276,9 +273,9 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
-            // localStorage.setItem('email', user.email);
-            // redirect()
-            // window.location.href = "/Preview"
+            localStorage.setItem('email', user.email);
+            redirect()
+            window.location.href = "/Preview"
           }
         })
       })
