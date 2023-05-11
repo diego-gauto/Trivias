@@ -93,6 +93,7 @@ export const MainContainer = styled.div<{ open: any }>`
   ${(props) =>
     props.open == true &&
     css`
+      display: flex !important;
       right: 0 !important;
       transition: 1s ease all;
       height: max-content !important;
@@ -101,14 +102,12 @@ export const MainContainer = styled.div<{ open: any }>`
     display: none;
   }
   @media (max-width: 1124px) {
+    display: none;
     transition: 1s ease all;
     position: absolute;
     overflow: hidden;
-    height: 100%;
     top: 64px;
-    right: -100%;
     width: 100%;
-    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     .course-info,

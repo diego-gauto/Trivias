@@ -239,7 +239,6 @@ const Login = () => {
         access_token: response.authResponse.accessToken
       }
       facebookUserInfo(userInfo).then((res) => {
-        console.log(res);
         let user = {
           email: res.email,
         }
