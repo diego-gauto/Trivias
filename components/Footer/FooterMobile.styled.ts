@@ -13,6 +13,16 @@ export const FooterContainerMobile = styled.div`
   img {
     width: 120px;
   }
+  .right {
+    display: flex;
+    flex-direction: column;
+    color: #ede7f2;
+    p {
+      margin: auto;
+      cursor: pointer;
+      font-size: x-small;
+    }
+  }
   .right-section {
     display: flex;
     color: #ede7f2;

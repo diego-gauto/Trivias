@@ -168,6 +168,9 @@ export const Module6_1 = (props: IModule6_1) => {
               <Link href="/terms-condition">
                 <FooterAText_2 onClick={() => { setShowTerms(true) }}>Términos y condiciones</FooterAText_2>
               </Link>
+              <Link href="/terms-condition-subscription">
+                <FooterAText_2 >Términos y condiciones suscripción gonvar+</FooterAText_2>
+              </Link>
               {/* <FooterAText_3>Políticas de cancelación</FooterAText_3> */}
               <a href="https://shelled-adasaurus-589.notion.site/Trabaja-en-Gonvar-bf52237ee52f4e109c39e2c53f83d6a8" target="_blank" style={{ textDecoration: "none" }}>
                 <FooterAText_3>Trabaja con nosotros</FooterAText_3>
