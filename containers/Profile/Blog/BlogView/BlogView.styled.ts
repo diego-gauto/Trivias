@@ -79,14 +79,30 @@ export const FirstSection = styled.div`
       align-items: center;
       margin-top: 20px;
       padding: 20px;
-      gap: 30px;
+      gap: 50px;
+      .content {
+        position: relative;
+        display: flex;
+        width: fit-content;
+        .text-display {
+          position: absolute;
+          top: 30px;
+          white-space: nowrap;
+          opacity: 0;
+          margin: 0;
+          right: 50%;
+          transform: translateX(50%);
+        }
+        &:hover {
+          .text-display {
+            opacity: 1;
+          }
+        }
+      }
       .icon {
         font-size: 18px;
         opacity: 0.8;
         cursor: pointer;
-        &:hover {
-          opacity: 0.1;
-        }
       }
     }
   }

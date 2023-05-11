@@ -27,6 +27,7 @@ const BlogView = () => {
   const [blog, setBlog] = useState<IBlog>();
   const [topicLength, setTopicLength] = useState(0);
   const [linkToCopy, setLinkToCopy] = useState<string>("");
+  const [copyText, setCopyText] = useState(false);
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
@@ -210,16 +211,32 @@ const BlogView = () => {
                 por Gonvar | {blog?.date.day} de {blog?.date.month} de {blog?.date.year}
               </p>
               <div className="socials">
-                <FacebookShareButton
-                  url={url}
-                  quote={"gonvar - " + blog?.title}
-                  hashtag={"#Gonvar"}
-                  openShareDialogOnClick={true}
-                >
-                  <BsFacebook className="icon" />
-                </FacebookShareButton>
-                <BsInstagram className='icon' />
-                <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
+                <div className='content'>
+                  <FacebookShareButton
+                    url={url}
+                    quote={"gonvar - " + blog?.title}
+                    hashtag={"#Gonvar"}
+                    openShareDialogOnClick={true}
+                  >
+                    <BsFacebook className="icon" />
+                  </FacebookShareButton>
+                  <p className='text-display'>
+                    Facebook
+                  </p>
+                </div>
+
+                <div className='content'>
+                  <BsInstagram className='icon' />
+                  <p className='text-display'>
+                    Instagram
+                  </p>
+                </div>
+                <div className='content'>
+                  <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
+                  <p className='text-display'>
+                    Copiar Link
+                  </p>
+                </div>
                 {/* <TwitterShareButton
                   url={url}
                   title={blog?.subtitle}
