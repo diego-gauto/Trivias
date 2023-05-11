@@ -125,6 +125,40 @@ export const ThirdBox = styled.div`
   display: flex;
   padding-right: 30px;
   gap: 8%;
+  .dialog {
+    max-width: 350px;
+    width: 100%;
+    text-align: justify;
+    border-radius: 10px;
+    z-index: 10;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    p {
+      color: #942ced;
+    }
+  }
+  .buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: end;
+    button {
+      border: none;
+      padding-block: 5px;
+      border-radius: 5px;
+      color: #fff;
+    }
+    .left {
+      background: #942ced;
+    }
+    .right {
+      background: #3f1168;
+    }
+  }
   @media (max-width: 1500px) {
     gap: 50px;
   }

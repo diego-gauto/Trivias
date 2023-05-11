@@ -21,6 +21,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   const [points, setPoints] = useState<any>();
   const [time, setTime] = useState<any>();
   const [certificates, setCertificates] = useState<any>();
+  const [pop, setPop] = useState<any>(false);
 
   const today = new Date().getTime() / 1000;
 
@@ -91,33 +92,38 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   }, [])
 
   const cancelSubscription = async () => {
-    if (confirm(`¿Desea cancelar su suscripción?`)) {
-      setLoader(true);
-      if (user.method == 'stripe') {
-        let sub = {
-          subscriptionId: user.plan_id,
-          userId: user.user_id,
-          planName: ""
-        }
-        cancelStripe(sub).then(() => {
-          handleClick()
-          setLoader(false);
-        })
-      } else {
-        let membership = {
-          planId: user.plan_id,
-          id: user.plan_id
-        }
-        cancelPaypal(membership).then(() => {
-          handleClick()
-          setLoader(false);
-        })
+    setLoader(true);
+    if (user.method == 'stripe') {
+      let sub = {
+        subscriptionId: user.plan_id,
+        userId: user.user_id,
+        planName: ""
       }
+      cancelStripe(sub).then(() => {
+        handleClick()
+        setLoader(false);
+      })
+    } else {
+      let membership = {
+        planId: user.plan_id,
+        id: user.plan_id
+      }
+      cancelPaypal(membership).then(() => {
+        handleClick()
+        setLoader(false);
+      })
     }
   }
 
   return (
     <ThirdBox>
+      {pop && <div id="confirmBox" className="dialog">
+        <p>Si cancelas tu suscripción perderás el acceso a los cursos, tus avances y también las recompensas y beneficios acumulados</p>
+        <div className="buttons">
+          <button className="left" onClick={() => { setPop(false) }}>No Cancelar</button>
+          <button className="right" onClick={cancelSubscription}>Cancelar suscripción</button>
+        </div>
+      </div>}
       <RewardContainer reward={reward}>
         <div className="main-container">
           <div className="reward-title-contain">
@@ -126,7 +132,6 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
             </p>
           </div>
           <div>
-
           </div>
           <div className="reward-containers">
             <div className="reward-conditions">
@@ -233,7 +238,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                     <p><span className="span">{user.subscription === 1 ? "Haz cancelado tu suscripción, ya no se renovara" : "s/f"}</span></p>}
                 </div>
             }
-            {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={cancelSubscription}>Cancelar Suscripción</button>}
+            {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>
