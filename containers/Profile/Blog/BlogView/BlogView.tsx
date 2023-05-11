@@ -19,6 +19,7 @@ import ReactToPrint from 'react-to-print';
 import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags'
 import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 import { FaCopy } from 'react-icons/fa';
+import { useMediaQuery } from 'react-responsive';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -28,6 +29,7 @@ const BlogView = () => {
   const [topicLength, setTopicLength] = useState(0);
   const [linkToCopy, setLinkToCopy] = useState<string>("");
   const [demoLink, setDemoLink] = useState<any>("");
+  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
@@ -224,7 +226,6 @@ const BlogView = () => {
                     Facebook
                   </p>
                 </div>
-
                 <div className='content'>
                   <BsInstagram className='icon' />
                   <p className='text-display'>

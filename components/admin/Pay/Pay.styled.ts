@@ -23,10 +23,16 @@ export const Container = styled.div`
     }
     .index {
       display: flex;
-      gap: 10px;
+      gap: 15px;
       align-items: center;
       .current-number {
+        cursor: pointer;
         font-size: 30px;
+      }
+      .default-number {
+        cursor: pointer;
+        font-size: 20px;
+        color: #6717cd;
       }
       .arrows {
         font-size: 30px;

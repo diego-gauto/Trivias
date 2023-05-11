@@ -152,6 +152,8 @@ const UsersList = () => {
     })
   }
   const pagePerUsers = (users: any) => {
+    setPageIndex(0)
+    setTotalUsers(users.length);
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(users.length / usersPerPage);
     let tempUsers: any = [];
@@ -164,7 +166,6 @@ const UsersList = () => {
       }
     }
     setMaxPages(pages);
-    setTotalUsers(usersPerPage);
     setUsersFilter(tempUsers);
     setUsers(tempUsers);
     setLoader(true);
@@ -179,6 +180,12 @@ const UsersList = () => {
       if (pageIndex !== maxPages - 1) {
         setPageIndex(pageIndex + 1)
       }
+    }
+    if (direction === "first") {
+      setPageIndex(0)
+    }
+    if (direction === "last") {
+      setPageIndex(maxPages - 1)
     }
 
   }
@@ -211,6 +218,7 @@ const UsersList = () => {
   const handleClick = () => {
     getUsers();
   }
+  console.log(pageIndex)
 
   if (!loader) {
     return (
@@ -226,7 +234,7 @@ const UsersList = () => {
       <UserContain>
         <Container>
           <TitleContain>
-            <Title>Usuarios</Title>
+            <Title>Usuarios - {totalUsers}</Title>
             {(user.role === 'admin' && user.roles[4].report === 0) && <CsvDownloader
               filename="usersData"
               extension=".csv"
@@ -264,7 +272,9 @@ const UsersList = () => {
           <div className="pages">
             <div className="index">
               <AiFillCaretLeft className="arrows" onClick={() => { getNextUsers("backward") }} />
+              <p className="default-number" onClick={() => { getNextUsers("first") }}>1</p>
               <p className="current-number">{pageIndex + 1}</p>
+              <p className="default-number" onClick={() => { getNextUsers("last") }}>{maxPages}</p>
               <AiFillCaretRight className="arrows" onClick={() => { getNextUsers("forward") }} />
             </div>
             <div className="max-pages">
