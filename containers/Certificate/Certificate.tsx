@@ -7,7 +7,8 @@ import jsPDF from 'jspdf';
 import QRCode from 'qrcode'
 import { getUserCertificateApi } from "../../components/api/lessons";
 import { blob } from "stream/consumers";
-
+import { FacebookShareButton } from "react-share";
+import { BsFacebook } from "react-icons/bs";
 
 const Certificate = () => {
   const router = useRouter()
@@ -15,7 +16,9 @@ const Certificate = () => {
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
+  const [link, setLink] = useState('');
   const [profSignature, setProfSignature] = useState<any>()
+  let shareCertificate = document.getElementById('my_mm');
   const aritaSignature = "/images/signatures/AritaGonvar.png";
   function shortName(name: string) {
     let maxLength = 12;
@@ -119,7 +122,16 @@ const Certificate = () => {
           <img src={profSignature} className="professor-signature" />
         </div>
       </div>
-      <button onClick={downloadCertficate}>Descargar</button>
+      <div className="button-contain">
+        {/* <FacebookShareButton
+          url={'gonvar.io/' + router.query}
+          quote={"Mira mi certificado!"}
+          openShareDialogOnClick={true}
+        >
+          <BsFacebook className="icon" />
+        </FacebookShareButton> */}
+        <button onClick={downloadCertficate}>Descargar</button>
+      </div>
     </MainContainer>
   )
 }

@@ -4,6 +4,14 @@ export const MainContainer = styled.div<{ color: any }>`
   display: flex;
   flex-direction: column;
   margin: auto;
+  .button-contain {
+    display: flex;
+    gap: 20px;
+    .icon {
+      font-size: 30px;
+      color: #1877f2;
+    }
+  }
   button {
     border: none;
     color: white;
