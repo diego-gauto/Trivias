@@ -27,7 +27,7 @@ const BlogView = () => {
   const [blog, setBlog] = useState<IBlog>();
   const [topicLength, setTopicLength] = useState(0);
   const [linkToCopy, setLinkToCopy] = useState<string>("");
-  const [copyText, setCopyText] = useState(false);
+  const [demoLink, setDemoLink] = useState<any>("");
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
   const router = useRouter();
