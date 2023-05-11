@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CsvDownloader from "react-csv-downloader";
 import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
 import { AdminContain, AdminLoader, Table } from "../SideBar.styled";
@@ -72,6 +72,7 @@ const UsersList = () => {
   const [maxPages, setMaxPages] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [loadCard, setLoadCard] = useState(false);
+  const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
@@ -308,8 +309,8 @@ const UsersList = () => {
           </Table>
         </Container>
         {
-          isVisible === true &&
-          <UserCardData user={selectedUser} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
+          isVisible &&
+          <UserCardData user={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
         }
       </UserContain>
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
