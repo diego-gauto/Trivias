@@ -78,7 +78,7 @@ const BlogView = () => {
   };
   const goToBlog = (blog: any) => {
     setLoader(true);
-    let blogText: any = blog.title.replaceAll(" ", "-");
+    let blogText: any = blog.title.replaceAll("-", "&#45;").replaceAll(" ", "-");
     router.push({ pathname: `/Blogs/${blogText}` }).then(() => {
       window.location.reload();
     })
@@ -179,7 +179,7 @@ const BlogView = () => {
     fetchDB_data();
     getBlog()
   }, [])
-
+  console.log(url);
   if (!loader) {
     return (
       <BackgroundLoader>

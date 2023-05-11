@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useRouter } from 'next/router';
 export default function HelmetMetaTags(props: any) {
   const router = useRouter();
-  let currentUrl = "https://gonvar.io" + router.asPath;
+  let currentUrl = "https://gonvar.io" + router.query.slug;
   let quote = props.quote !== undefined ? props.quote : "";
   let title = props.title !== undefined ? props.title : "Gonvar Nails Academy";
   let image = props.image !== undefined ? props.image : "https://storage.googleapis.com/cmperstribe_storage_usha/Banner/IMG_3640.JPG";
