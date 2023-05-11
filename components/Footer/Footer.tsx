@@ -103,16 +103,22 @@ const Footer = () => {
     <>
       <FooterContainer>
         <img src="/images/Footer/logo.png" alt="" />
-        <div className="right-section">
-          <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
-          <p>Todos los derechos reservados</p>
+        <div className="right">
+          <div className="right-section">
+            <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
+            <p>Todos los derechos reservados</p>
+          </div>
+          <p>Términos y Condiciones de Suscripción Gonvar+</p>
         </div>
       </FooterContainer>
       <FooterContainerMobile>
         <img src="/images/Footer/logo.png" alt="" />
-        <div className="right-section">
-          <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
-          <p>Todos los derechos reservados</p>
+        <div className="right">
+          <div className="right-section">
+            <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
+            <p>Todos los derechos reservados</p>
+          </div>
+          <p>Términos y Condiciones de Suscripción Gonvar+</p>
         </div>
       </FooterContainerMobile>
       <ModalFinish show={show} setShow={setShow} user={userData} />

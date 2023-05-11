@@ -15,6 +15,15 @@ export const FooterContainer = styled.div`
   img {
     width: 150px;
   }
+  .right {
+    display: flex;
+    flex-direction: column;
+    color: #ede7f2;
+    p {
+      margin: auto;
+      cursor: pointer;
+    }
+  }
   .right-section {
     display: flex;
     color: #ede7f2;
