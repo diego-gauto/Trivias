@@ -38,15 +38,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></Script>
         <Script
           dangerouslySetInnerHTML={{
-            __html:
-              `
-            { window.dataLayer = window.dataLayer || [];
+            __html: `  window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-8N2X594YBK');}
-            `
-          }}
-        >
+              gtag('config', 'G-8N2X594YBK');`
+          }}>
         </Script>
       </Head>
       <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
