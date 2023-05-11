@@ -314,7 +314,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
                   Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
                 </div>}
                 {status == "approved" && <div>
-                  <p style={{ color: "#0a980a" }}>Tarea Aprovada</p>
+                  <p style={{ color: "#0a980a" }}>Tarea Aprobada</p>
                   <p style={{ color: "#8e2de2" }}>{homework?.comment}</p>
                   {/* Felicidades. Buen trabajo!!! Has aprobado tu tarea. Te invitamos a seguir con la próxima lección. */}
                 </div>}
