@@ -16,6 +16,7 @@ import { getUserQuizApi, updateUserProgressByQuizApi, updateUserQuizApi, updateU
 import { user } from 'firebase-functions/v1/auth';
 import { LoaderContainSpinner } from '../../../Purchase/Purchase.styled';
 import { createNotification } from '../../../../../components/api/notifications';
+import ImagePreview from './imagePreview/imagePreview';
 
 const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, handleClick }: any) => {
   const [status, setStatus] = useState("");
@@ -31,6 +32,8 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
   const [counter, setCounter] = useState(0);
   const [loader, setLoader] = useState(false);
   const [homework, setHomework] = useState<any>();
+  const [imageModal, setImageModal] = useState<boolean>(false);
+  const [imageDisplay, setImageDisplay] = useState<any>('');
 
   useEffect(() => {
     if (data.quiz === 1) {
@@ -55,6 +58,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
     })
   }
 
+  // const approvalHomeWork = (file: any) => {
+  //   if (file.length > 0) {
+  //     var reader = new FileReader();
+  //     reader.readAsDataURL(file[0]);
+  //     reader.onload = async (_event) => {
+  //       setImageDisplay(reader.result);
+  //       setImageModal(true);
+  //     }
+  //   }
+  // }
   const getImage = (file: any) => {
     let tempHomework: any = {
       approved: false,
@@ -69,7 +82,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
       user_id: user.user_id,
       title: data.lesson_homeworks.title,
     }
-
     if (file.length > 0) {
       var reader = new FileReader();
       reader.readAsDataURL(file[0]);
@@ -99,7 +111,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
       };
     }
   }
-
   const uploadHwk = () => {
     document.getElementById('hide')?.click()
   }
@@ -217,6 +228,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
       user_id: user.user_id
     }
     getHomeworkUserApi(tempData).then((res) => {
+      console.log(res);
       if (res.data.data.length > 0) {
         let temp = res.data.data[0]
         if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
@@ -314,7 +326,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
                   Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
                 </div>}
                 {status == "approved" && <div>
-                  <p style={{ color: "#0a980a" }}>Tarea Aprovada</p>
+                  <p style={{ color: "#0a980a" }}>Tarea Aprobada</p>
                   <p style={{ color: "#8e2de2" }}>{homework?.comment}</p>
                   {/* Felicidades. Buen trabajo!!! Has aprobado tu tarea. Te invitamos a seguir con la próxima lección. */}
                 </div>}
@@ -447,6 +459,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
           }
         </div>}
       </HomeWorkContain>
+      <ImagePreview show={imageModal} setShow={setImageModal} imageDisplay={imageDisplay} />
     </>
 
   )
