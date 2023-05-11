@@ -48,7 +48,13 @@ export const Container = styled.div`
       gap: 10px;
       align-items: center;
       .current-number {
+        cursor: pointer;
         font-size: 30px;
+      }
+      .default-number {
+        cursor: pointer;
+        font-size: 20px;
+        color: #6717cd;
       }
       .arrows {
         font-size: 30px;

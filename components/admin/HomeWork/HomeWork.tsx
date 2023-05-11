@@ -13,6 +13,7 @@ import { AdminContain } from '../SideBar.styled';
 import { Button, Container, Download, HWContainer, Table, TitleContain } from './HomeWork.styled'
 import HomeWorkModal from './HomeWorkModal/HomeWorkModal';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+import { SearchInput } from '../Users/UsersList.styled';
 
 export class CsvData {
   public id: any;
@@ -32,6 +33,9 @@ const HomeWork = () => {
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [courseIdForFilter, setCourseIdForFilter] = useState(0);
   const [filterForStatus, setFilterForStatus] = useState<boolean>(false);
+  const [allHomeWorks, setAllHomeWorks] = useState<any>([]);
+  const [filterForValue, setfilterForValue] = useState<boolean>(false);
+  const [textFilter, setTextFilter] = useState("");
   const [maxPages, setMaxPages] = useState<number>(0);
   const [currentStatus, setCurrentStatus] = useState({
     status: 0,
@@ -49,6 +53,7 @@ const HomeWork = () => {
     setUserData(user);
     getHomeworksApi().then(async (res: any) => {
       let tempHomeworks = res.data.data
+      setAllHomeWorks(tempHomeworks)
       if (user.role === "admin") {
         let array = user.roles[7].courses.split(",");
         let temp: any = [];
@@ -85,32 +90,45 @@ const HomeWork = () => {
   const FilterHomeWorks = (course_id: number) => {
     setPageIndex(0)
     setCourseIdForFilter(course_id)
-    getHomeworksApi().then(async (res: any) => {
-      let tempHomeworks = res.data.data
-      if (filterForStatus) {
-        tempHomeworks = res.data.data.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved);
-        tempHomeworks = tempHomeworks.filter((x: any) => x.courseId === course_id);
-      }
-      else {
-        tempHomeworks = res.data.data.filter((x: any) => x.courseId === course_id);
-      }
-      pagePerHomeworks(tempHomeworks);
-      setFilterForCourse(true);
-    })
+    let tempHomeworks = allHomeWorks
+    let query = textFilter.toLocaleLowerCase();
+    if (filterForStatus) {
+      tempHomeworks = allHomeWorks.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved);
+      tempHomeworks = tempHomeworks.filter((x: any) => x.courseId === course_id);
+    }
+    else {
+      tempHomeworks = allHomeWorks.filter((x: any) => x.courseId === course_id);
+    }
+    if (filterForValue) {
+      tempHomeworks = tempHomeworks.filter((item: any) => {
+        return item.userName.toLowerCase().includes(query) || item.userEmail.includes(query)
+      })
+    }
+    pagePerHomeworks(tempHomeworks);
+    setFilterForCourse(true);
   }
   const AllHomeWorks = () => {
-    getHomeworksApi().then(async (res: any) => {
-      let tempHomeworks = res.data.data
-      if (filterForStatus) {
-        tempHomeworks = res.data.data.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved);
-        tempHomeworks = tempHomeworks.filter((x: any) => coursesId.includes(x.courseId));
-      }
-      else {
-        tempHomeworks = res.data.data.filter((x: any) => coursesId.includes(x.courseId));
-      }
-      pagePerHomeworks(tempHomeworks);
-      setFilterForCourse(false);
-    })
+    let tempHomeworks = allHomeWorks
+    let query = textFilter.toLocaleLowerCase();
+    if (filterForValue) {
+      tempHomeworks = tempHomeworks.filter((item: any) => {
+        return item.userName.toLowerCase().includes(query) || item.userEmail.includes(query)
+      })
+    }
+    if (filterForStatus) {
+      tempHomeworks = allHomeWorks.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved);
+      tempHomeworks = tempHomeworks.filter((x: any) => coursesId.includes(x.courseId));
+    }
+    else {
+      tempHomeworks = allHomeWorks.filter((x: any) => coursesId.includes(x.courseId));
+    }
+    if (filterForValue) {
+      tempHomeworks = tempHomeworks.filter((item: any) => {
+        return item.userName.toLowerCase().includes(query) || item.userEmail.includes(query)
+      })
+    }
+    pagePerHomeworks(tempHomeworks);
+    setFilterForCourse(false);
   }
   const formatDate = (created_at: any) => {
     const date = new Date(created_at);
@@ -118,75 +136,104 @@ const HomeWork = () => {
     return formattedDate;
   }
   const filterByStatus = (type: string) => {
-    getHomeworksApi().then(async (res: any) => {
-      let tempHomeworks = res.data.data
-      if (filterForCourse) {
-        tempHomeworks = res.data.data.filter((x: any) => x.courseId === courseIdForFilter);
-        if (type === "all") {
-          tempHomeworks = tempHomeworks;
-          setFilterForStatus(false);
-        }
-        else {
-          setPageIndex(0)
-          setFilterForStatus(true);
-        }
-        if (type === "pending") {
-          tempHomeworks = tempHomeworks.filter((x: any) => x.status === 0);
-          setCurrentStatus({
-            status: 0,
-            approved: 0
-          })
-        }
-        if (type === "approved") {
-          tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 1);
-          setCurrentStatus({
-            status: 1,
-            approved: 1
-          })
-        }
-        if (type === "rejected") {
-          tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 0);
-          setCurrentStatus({
-            status: 1,
-            approved: 0
-          })
-        }
+    let tempHomeworks = allHomeWorks
+    let query = textFilter.toLocaleLowerCase();
+    if (filterForCourse) {
+      if (filterForValue) {
+        tempHomeworks = tempHomeworks.filter((item: any) => {
+          return item.userName.toLowerCase().includes(query) || item.userEmail.includes(query)
+        })
+      }
+      tempHomeworks = tempHomeworks.filter((x: any) => x.courseId === courseIdForFilter);
+      if (type === "all") {
+        tempHomeworks = tempHomeworks;
+        setFilterForStatus(false);
       }
       else {
-        if (type === "all") {
-          tempHomeworks = res.data.data;
-          setFilterForStatus(false);
-        }
-        else {
-          setPageIndex(0)
-          setFilterForStatus(true);
-        }
-        if (type === "pending") {
-          tempHomeworks = res.data.data.filter((x: any) => x.status === 0);
-          setCurrentStatus({
-            status: 0,
-            approved: 0
-          })
-        }
-        if (type === "approved") {
-          tempHomeworks = res.data.data.filter((x: any) => x.status === 1 && x.approved === 1);
-          setCurrentStatus({
-            status: 1,
-            approved: 1
-          })
-        }
-        if (type === "rejected") {
-          tempHomeworks = res.data.data.filter((x: any) => x.status === 1 && x.approved === 0);
-          setCurrentStatus({
-            status: 1,
-            approved: 0
-          })
-        }
+        setPageIndex(0)
+        setFilterForStatus(true);
       }
-      pagePerHomeworks(tempHomeworks)
-    })
+      if (type === "pending") {
+        tempHomeworks = tempHomeworks.filter((x: any) => x.status === 0);
+        setCurrentStatus({
+          status: 0,
+          approved: 0
+        })
+      }
+      if (type === "approved") {
+        tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 1);
+        setCurrentStatus({
+          status: 1,
+          approved: 1
+        })
+      }
+      if (type === "rejected") {
+        tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 0);
+        setCurrentStatus({
+          status: 1,
+          approved: 0
+        })
+      }
+    }
+    else {
+      tempHomeworks = tempHomeworks.filter((item: any) => {
+        return item.userName.toLowerCase().includes(query) || item.userEmail.includes(query)
+      })
+      if (type === "all") {
+        tempHomeworks = tempHomeworks;
+        setFilterForStatus(false);
+      }
+      else {
+        setPageIndex(0)
+        setFilterForStatus(true);
+      }
+      if (type === "pending") {
+        tempHomeworks = tempHomeworks.filter((x: any) => x.status === 0);
+        setCurrentStatus({
+          status: 0,
+          approved: 0
+        })
+      }
+      if (type === "approved") {
+        tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 1);
+        setCurrentStatus({
+          status: 1,
+          approved: 1
+        })
+      }
+      if (type === "rejected") {
+        tempHomeworks = tempHomeworks.filter((x: any) => x.status === 1 && x.approved === 0);
+        setCurrentStatus({
+          status: 1,
+          approved: 0
+        })
+      }
+    }
+    pagePerHomeworks(tempHomeworks)
   }
+  const filterhwkByValue = (value: string): void => {
+    if (value === '') {
+      setfilterForValue(false)
+    }
+    else {
+      setfilterForValue(true)
+    }
+    setTextFilter(value);
+    let tempAllHwk = allHomeWorks;
+    let query = value.toLocaleLowerCase();
+    let filteredHwk = tempAllHwk.filter((item: any) => {
+      return item.userName.toLowerCase().includes(query) || item.userEmail.includes(query)
+    })
+    if (filterForStatus) {
+      filteredHwk = filteredHwk.filter((x: any) => x.status === currentStatus.status && x.approved === currentStatus.approved); pagePerHomeworks(filteredHwk)
+    }
+    if (filterForCourse) {
+      filteredHwk = filteredHwk.filter((x: any) => x.courseId === courseIdForFilter);
+    }
+    pagePerHomeworks(filteredHwk);
+  };
   const pagePerHomeworks = (homework: any) => {
+    setPageIndex(0)
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(homework.length / usersPerPage);
     let tempHomeWork: any = [];
@@ -211,6 +258,12 @@ const HomeWork = () => {
       if (pageIndex !== maxPages - 1) {
         setPageIndex(pageIndex + 1)
       }
+    }
+    if (direction === "first") {
+      setPageIndex(0)
+    }
+    if (direction === "last") {
+      setPageIndex(maxPages - 1)
     }
   }
   const handleClick = (approved: any) => {
@@ -289,12 +342,20 @@ const HomeWork = () => {
                 <option value="approved">Aprobadas</option>
                 <option value="rejected">Rechazadas</option>
               </select>
+              <SearchInput
+                style={{ paddingInline: 20, paddingBlock: 8, borderRadius: 100 }}
+                placeholder="Buscar una tarea"
+                type={"text"}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterhwkByValue(e.target.value)}
+              />
             </div>
           </TitleContain>
           <div className="pages">
             <div className="index">
               <AiFillCaretLeft className="arrows" onClick={() => { getNextHomeWorks("backward") }} />
+              <p className="default-number" onClick={() => { getNextHomeWorks("first") }}>1</p>
               <p className="current-number">{pageIndex + 1}</p>
+              <p className="default-number" onClick={() => { getNextHomeWorks("last") }}>{maxPages}</p>
               <AiFillCaretRight className="arrows" onClick={() => { getNextHomeWorks("forward") }} />
             </div>
             <div className="max-pages">

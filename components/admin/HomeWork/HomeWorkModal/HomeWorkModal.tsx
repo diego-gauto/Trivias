@@ -86,7 +86,6 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       }, 50);
     }
   }, [data])
-  console.log(review);
   return (
     <ModContainer>
       <Modal show={show} onHide={handleClose} centered>
