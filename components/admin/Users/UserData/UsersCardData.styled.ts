@@ -4,10 +4,9 @@ export const UserContain = styled.div`
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  min-width: 342px;
-  max-width: 400px;
   padding: 15px;
   gap: 10px;
+  width: 500px;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
@@ -114,10 +113,11 @@ export const CourseContain = styled.div`
     .date {
       font-size: 12px;
       margin: 0;
+      width: fit-content;
     }
     img {
       border-radius: 10px;
-      width: 45%;
+      width: 230px;
     }
   }
 `;
