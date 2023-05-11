@@ -213,7 +213,7 @@ const BlogView = () => {
               <div className="socials">
                 <div className='content'>
                   <FacebookShareButton
-                    url={url}
+                    url={"https://gonvar.io/" + router.query.slug}
                     quote={"gonvar - " + blog?.title}
                     hashtag={"#Gonvar"}
                     openShareDialogOnClick={true}
