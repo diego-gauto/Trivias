@@ -47,7 +47,12 @@ const User = () => {
   const retrieveUser = () => {
     getUserApi(localStorage.getItem("email")).then((res) => {
       setUserData(res);
-      setNameUpperCase(res.name.toUpperCase())
+      let maxLength = 18;
+      let shortName = res.name;
+      if (shortName.length > maxLength) {
+        shortName = shortName.substring(0, maxLength) + "...";
+      }
+      setNameUpperCase(shortName.toUpperCase())
     })
   }
   const getRewardData = async (user: any) => {
@@ -174,7 +179,12 @@ const User = () => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setUserData(res);
-        setNameUpperCase(res.name.toUpperCase())
+        let maxLength = 18;
+        let shortName = res.name;
+        if (shortName.length > maxLength) {
+          shortName = shortName.substring(0, maxLength) + "...";
+        }
+        setNameUpperCase(shortName.toUpperCase())
         getRewardData(res);
       })
     }

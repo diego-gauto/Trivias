@@ -64,6 +64,18 @@ const Rewards = () => {
       setAllSlider(tempSlides)
     }
   }
+  function shortName(name: string) {
+    let maxLength = 11;
+    const words = name.split(" ");
+    if (words.length > 1) {
+      return words[0]
+    } else {
+      if (name.length > maxLength) {
+        return name.substring(0, maxLength) + "...";
+      }
+    }
+    return name;
+  }
   const getRewardData = async (user: any) => {
     let nextCourseCertificate: any = [];
     let completedCertificates: any = [];
@@ -240,7 +252,6 @@ const Rewards = () => {
       </Background>
     )
   }
-  /////// REDISENIO
   return (
     <RewardContainer>
       <TitleContainer>
@@ -254,7 +265,7 @@ const Rewards = () => {
           <img src={handStarImage} />
         </div>
         <p className="main-text">
-          ¡Haz hecho<br /> un gran trabajo <br />hasta ahora,<br /><span> {userData.name}!</span>
+          ¡Haz hecho<br /> un gran trabajo <br />hasta ahora,<br /><span> {shortName(userData.name)}!</span>
         </p>
         <div className="sub-paragraph">
           <p className="second-text">Descubre lo que tu progreso <br />

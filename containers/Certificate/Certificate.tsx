@@ -17,7 +17,18 @@ const Certificate = () => {
   const [image, setImage] = useState("");
   const [profSignature, setProfSignature] = useState<any>()
   const aritaSignature = "/images/signatures/AritaGonvar.png";
-
+  function shortName(name: string) {
+    let maxLength = 12;
+    const words = name.split(" ");
+    if (words.length > 1) {
+      return words[0]
+    } else {
+      if (name.length > maxLength) {
+        return name.substring(0, maxLength);
+      }
+    }
+    return name;
+  }
   const getUserCertificate = () => {
     let ids = {
       userId: id,
@@ -97,7 +108,7 @@ const Certificate = () => {
     <MainContainer color={color}>
       <div id="my_mm">
         <div className="certificate" id="certificate">
-          <p className="title">{name} {lastName}</p>
+          <p className="title">{shortName(name)} {shortName(lastName)}</p>
           <p className="course-title">{title}</p>
           <p className="professor">{professor}</p>
           <p className="date">{date}</p>

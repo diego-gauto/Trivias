@@ -68,7 +68,13 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       setUser({ ...user, format: reader.result });
     };
   }
-
+  function makeShortName(name: string) {
+    let maxLength = 11;
+    if (name.length > maxLength) {
+      return name.substring(0, maxLength) + "..";
+    }
+    return name;
+  }
   const logoutFunc = () => {
     localStorage.clear();
     if (user.provider === "web") {
@@ -405,7 +411,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
             ?
             <div className="user-info-up">
               <p className="name-text">
-                {userData.name}<br /><span>{userData.lastName}</span>
+                {makeShortName(userData.name)}<br /><span>{userData.lastName}</span>
               </p>
               <div className="data-contain">
                 <p className="points">{points_format} puntos</p>
