@@ -218,7 +218,7 @@ const BlogView = () => {
                 >
                   <BsFacebook className="icon" />
                 </FacebookShareButton>
-                {/* <BsInstagram className='icon' onClick={() => shareToInstagram(url, blog?.image, blog?.title)} /> */}
+                <BsInstagram className='icon' />
                 <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
                 {/* <TwitterShareButton
                   url={url}

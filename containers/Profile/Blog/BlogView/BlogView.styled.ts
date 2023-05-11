@@ -76,6 +76,7 @@ export const FirstSection = styled.div`
     }
     .socials {
       display: flex;
+      align-items: center;
       margin-top: 20px;
       padding: 20px;
       gap: 30px;
