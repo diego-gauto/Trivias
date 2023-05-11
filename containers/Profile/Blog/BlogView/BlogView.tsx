@@ -179,7 +179,7 @@ const BlogView = () => {
     fetchDB_data();
     getBlog()
   }, [])
-  console.log(url);
+
   if (!loader) {
     return (
       <BackgroundLoader>
@@ -213,7 +213,7 @@ const BlogView = () => {
               <div className="socials">
                 <div className='content'>
                   <FacebookShareButton
-                    url={"https://gonvar.io/" + router.query.slug}
+                    url={url}
                     quote={"gonvar - " + blog?.title}
                     hashtag={"#Gonvar"}
                     openShareDialogOnClick={true}
