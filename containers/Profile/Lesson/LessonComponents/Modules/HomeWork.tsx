@@ -302,7 +302,8 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
                 <p dangerouslySetInnerHTML={{ __html: data.lesson_homeworks.about }} className="quill-hw" />
                 {(homework && homework.status === 1 && homework.approved === 0) && <>
                   {/* <p className='reason'>Lamentablemente tu tarea no cuenta con las pautas para ser aprobada.Te invitamos a que la hagas nuevamente y la vuelvas a entregar:</p> */}
-                  <p>{homework.comment}</p>
+                  <p style={{ color: "#bc1515" }}>Tarea Rechazada</p>
+                  <p style={{ color: "#8e2de2" }}>{homework.comment}</p>
                 </>}
                 {status == "" && <div className='homework' onClick={uploadHwk}>
                   <BsFileArrowUp></BsFileArrowUp>
@@ -312,8 +313,9 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
                 {status == "pending" && <div className='homework' style={{ cursor: "none" }}>
                   Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
                 </div>}
-                {status == "approved" && <div className='homework' style={{ cursor: "none" }}>
-                  <p>{homework?.comment}</p>
+                {status == "approved" && <div>
+                  <p style={{ color: "#0a980a" }}>Tarea Aprovada</p>
+                  <p style={{ color: "#8e2de2" }}>{homework?.comment}</p>
                   {/* Felicidades. Buen trabajo!!! Has aprobado tu tarea. Te invitamos a seguir con la próxima lección. */}
                 </div>}
               </>
