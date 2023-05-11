@@ -224,7 +224,7 @@ const CourseModal = (props: ICourseModal) => {
               </div>
               <div className="right">
                 <div className="rating">
-                  <p>{course.rating ? (course.rating / 20) : 0} <span className="review-count">(142)</span></p>
+                  <p>{course.rating ? (course.rating / 20) : 0} <span className="review-count">({course.reviews})</span></p>
                   <Rating allowHover={false} readonly={true} ratingValue={course.rating ? (course.rating) : 0}
                     emptyColor="#3f1168" emptyIcon={<AiFillStar></AiFillStar>}
                     fullIcon={<AiFillStar></AiFillStar>} fillColor="#ff9b00"></Rating>
