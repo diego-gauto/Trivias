@@ -9,6 +9,7 @@ import { ButtonRoleContain, CloseIcon, UpdateButton } from "./AdminDataUpdate.st
 import {
   Info,
   ModalContain,
+  ModalCustom,
   OptionsContain,
   RowContain,
   SectionOptions,
@@ -47,6 +48,7 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
   const [loading, setLoading] = useState(true);
   const [values, setValues] = useState("");
   const [valuesComments, setValuesComments] = useState("");
+  const [popUp, setPopUp] = useState<any>(false);
   useEffect(() => {
 
     const temp = roles
@@ -102,15 +104,16 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
   };
 
   const handleMultiple = (e: any, role: string) => {
-    let options = [...e.target.options];
-    let temp: any = [];
-    options.forEach((value: any) => {
-      if (value.selected) {
-        temp.push(value.value)
+    let temp: any = values;
+    if (values.includes(e.toString())) {
+      const index = values.indexOf(e.toString());
+      if (index > -1) {
+        temp.splice(index, 1);
+        setValues(temp);
       }
-    });
-    if (role === "homeworks") {
-      setValues(temp.toString());
+    } else {
+      temp.push(e.toString())
+      setValues(temp);
     }
   }
 
@@ -158,6 +161,20 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
 
   return (
     <Modal show={show} onHide={handleClose} centered>
+      <Modal show={popUp} onHide={() => { setPopUp(false) }} centered>
+        <ModalCustom>
+          <h2>Cursos</h2>
+          {courses.map((course: any, index: number) => {
+            return (
+              <div className="flex" key={"courses" + index}>
+                <p>{course.title}</p>
+                <input defaultChecked={values.includes(course.id.toString())} type="checkbox"
+                  onChange={(e) => { handleMultiple(course.id, "homeworks") }} />
+              </div>
+            )
+          })}
+        </ModalCustom>
+      </Modal>
       <ModalContain>
         <TitleContain>
           <Title>Editar acceso</Title>
@@ -182,13 +199,16 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
                         </div>
                       )
                     })}
-                    {(courses.length > 0 && x.name === 'homeworks') && <select name="" defaultValue={values} multiple onChange={(e) => { handleMultiple(e, "homeworks") }}>
+                    {(courses.length > 0 && x.name === 'homeworks') && <p className="open-courses" onClick={() => {
+                      setPopUp(true)
+                    }}>Ver cursos</p>}
+                    {/* {(courses.length > 0 && x.name === 'homeworks') && <select name="" defaultValue={values} multiple onChange={(e) => { handleMultiple(e, "homeworks") }}>
                       {courses.map((course: any) => {
                         return (
                           <option value={course.id}>{course.title}</option>
                         )
                       })}
-                    </select>}
+                    </select>} */}
                   </div>
                 )
               })}
@@ -199,7 +219,7 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
           <UpdateButton onClick={updateAdminType}>Guardar cambios</UpdateButton>
         </ButtonRoleContain>
       </ModalContain>
-    </Modal>
+    </Modal >
   )
 }
 export default RoleEdit;

@@ -14,6 +14,23 @@ export const ModalContain = styled.div`
     font-family: Raleway;
     src: url(../fonts/Raleway-VariableFont_wght.ttf);
   }
+  .custom-modal {
+    padding: 20px;
+  }
+`;
+export const ModalCustom = styled.div`
+  padding: 20px;
+  h2 {
+    color: #6717cd;
+  }
+  p {
+    color: #6717cd;
+    margin: 0;
+  }
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 export const IconRoleContain = styled.div`
   display: flex;
@@ -70,6 +87,13 @@ export const SelectedRoleContain = styled.div`
       padding-left: 10px;
       display: flex;
       justify-content: space-between;
+    }
+  }
+  .open-courses {
+    color: #6717cd;
+    cursor: pointer;
+    &:hover {
+      font-weight: 700;
     }
   }
 `;
