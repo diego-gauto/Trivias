@@ -33,6 +33,7 @@ export default function HelmetMetaTags(props: any) {
       <meta property="og:quote" content={quote} />
       <meta property="og:hashtag" content={hashtag} />
       <meta property="og:image" content={image} />
+      <meta property="og:type" content="article" />
       <meta content="image/*" property="og:image:type" />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:site_name" content="CampersTribe" />
