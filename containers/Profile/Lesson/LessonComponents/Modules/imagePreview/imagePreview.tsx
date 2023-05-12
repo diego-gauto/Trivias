@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { ImageContainter } from './ImagePreview.styled';
 import { AiOutlineClose } from 'react-icons/ai';
 import DocViewer from "react-doc-viewer";
-import { LoaderContain } from '../../../../../../components/Loader.styled';
+import { LoaderContain, LoaderImage } from '../../../../../../components/Loader.styled';
 
 const ImagePreview = (props: any) => {
   const { show, setShow, imageDisplay, type, getImage, loader, setTypeFile, setImageDisplay } = props;
@@ -25,7 +25,10 @@ const ImagePreview = (props: any) => {
             <button className='cancel-btn' onClick={handleClose}>Cancelar</button>
             {
               loader
-                ? <LoaderContain />
+                ?
+                <LoaderImage>
+                  <LoaderContain />
+                </LoaderImage>
                 : <button className='continue-btn' onClick={() => getImage(imageDisplay)} >Continuar</button>
             }
           </div>

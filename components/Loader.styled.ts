@@ -23,12 +23,34 @@ export const WhiteLoader = styled.div`
   animation: ${rotate} 1.2s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite normal none
     running;
 `;
+
+export const BackgroundLoader = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+`;
+export const LoaderImage = styled.div`
+  position: relative;
+  background-size: contain;
+  background-position: center;
+  display: flex;
+  width: 60px;
+  height: 60px;
+  background-image: url(../images/logo-g.png);
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
+`;
 export const LoaderContain = styled.div`
   box-sizing: border-box;
-  align-self: center;
   display: block;
-  width: 30px;
-  height: 30px;
+  position: absolute;
+  left: -26px;
+  top: -26px;
+  width: 100px;
+  height: 100px;
   margin: 6px;
   border-width: 9px;
   border-style: solid;

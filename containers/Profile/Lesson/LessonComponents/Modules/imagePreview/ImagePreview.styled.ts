@@ -12,7 +12,7 @@ export const ImageContainter = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     h1 {
       font-size: 24px;
       color: #45009c;
