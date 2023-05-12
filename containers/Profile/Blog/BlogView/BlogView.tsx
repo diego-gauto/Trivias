@@ -20,6 +20,7 @@ import HelmetMetaTags from './HelmetMetaTags/HelmetMetaTags'
 import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 import { FaCopy } from 'react-icons/fa';
 import { useMediaQuery } from 'react-responsive';
+import axios from 'axios';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -47,6 +48,33 @@ const BlogView = () => {
     // } catch (error) {
     //   console.error(error);
     // }
+  };
+  // function InstagramPost() {
+  //   const id = '123456789';
+  //   const image = 'https://www.w3schools.com/images/w3schools_green.jpg';
+  //   const text = 'Hello%20World';
+  //   const access_token = 'TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST';
+  //   const container = 'https://graph.facebook.com/v11.0/' + id + '/media?image_url=' + image + '&caption=' + text + '&access_token=' + access_token;
+
+  //   const response = UrlFetchApp.fetch(container);
+  //   const creation = response.getContentText();
+
+  //   Logger.log(creation);
+  // }
+  // const InstagramPost = (user:any) => {
+  //   return axios
+  //   .post("https://graph.facebook.com/v16.0/17841400008460056/" + "media_publish?creation_id=" + user.id, user)
+  //   .then((res) => {
+  //     return res
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     return error
+  //   });
+  // }
+  const handleShareToInstagram = () => {
+    const url_forinstagram = 'https://www.instagram.com/share?url=' + encodeURIComponent(url);
+    window.open(url_forinstagram, '_blank');
   };
   const fetchDB_data = async () => {
     try {
@@ -227,7 +255,7 @@ const BlogView = () => {
                   </p>
                 </div>
                 <div className='content'>
-                  <BsInstagram className='icon' />
+                  <BsInstagram className='icon' onClick={handleShareToInstagram} />
                   <p className='text-display'>
                     Instagram
                   </p>

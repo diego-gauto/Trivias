@@ -34,6 +34,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
   const [homework, setHomework] = useState<any>();
   const [imageModal, setImageModal] = useState<boolean>(false);
   const [imageDisplay, setImageDisplay] = useState<any>('');
+  const [imageLoader, setImageLoader] = useState<boolean>(false);
   const [typeFile, setTypeFile] = useState("");
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
     }
   }
   const getImage = async (imageAccepted: any) => {
+    setImageLoader(true);
     let tempHomework: any = {
       approved: false,
       comment: "",
@@ -106,6 +108,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
     addHomeworkApi(tempHomework).then(() => {
       alert("Tarea enviada")
       setImageModal(false);
+      setImageLoader(false)
       setStatus("pending");
     })
   }
@@ -457,7 +460,16 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
           }
         </div>}
       </HomeWorkContain>
-      <ImagePreview show={imageModal} setShow={setImageModal} imageDisplay={imageDisplay} type={typeFile} getImage={getImage} />
+      <ImagePreview
+        show={imageModal}
+        setShow={setImageModal}
+        imageDisplay={imageDisplay}
+        type={typeFile}
+        getImage={getImage}
+        loader={imageLoader}
+        setImageDisplay={setImageDisplay}
+        setTypeFile={setTypeFile}
+      />
     </>
 
   )

@@ -21,14 +21,9 @@ const Certificate = () => {
   let shareCertificate = document.getElementById('my_mm');
   const aritaSignature = "/images/signatures/AritaGonvar.png";
   function shortName(name: string) {
-    let maxLength = 12;
     const words = name.split(" ");
     if (words.length > 1) {
       return words[0]
-    } else {
-      if (name.length > maxLength) {
-        return name.substring(0, maxLength);
-      }
     }
     return name;
   }

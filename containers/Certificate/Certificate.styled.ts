@@ -80,9 +80,9 @@ export const MainContainer = styled.div<{ color: any }>`
     .title {
       position: absolute;
       left: 50%;
-      transform: translate(-50%, 175px);
+      transform: translate(-50%, 185px);
       color: #e05c04;
-      font-size: 50px;
+      font-size: 30px;
       font-weight: 700;
       text-transform: capitalize;
     }
