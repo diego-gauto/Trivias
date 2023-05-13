@@ -761,6 +761,16 @@ export const Container = styled.div`
             display: flex;
             flex-direction: column;
             gap: 20px;
+            .cards{
+              border: 1px solid #942ced;
+              outline: none;
+              background: none;
+              border-radius: 20px;
+              padding-inline: 10px;
+              font-size: 20px;
+              color: #942ced;
+              height: 34px;
+            }
             .title {
               text-align: center;
               font-size: 28px;
