@@ -252,7 +252,7 @@ const Register = () => {
             </p>
             <img src="../images/personasRegister.png" alt="" />
           </div>
-          <div className="right-side">
+          <div className="right-side" style={{ overflow: "hidden" }}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Title>
                 Regístrate
@@ -260,7 +260,7 @@ const Register = () => {
               <div className="sub-section">
                 <p className="subtitle">¿Ya tienes una cuenta?</p>
                 <Link href={LOGIN_PATH}>
-                  <p className="loginWithGoogle">Inicia sesión</p>
+                  <p className="bold">Inicia sesión</p>
                 </Link>
               </div>
               <div className="box">
