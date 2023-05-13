@@ -290,9 +290,17 @@ export const HamburgerContainer = styled.div`
   padding-inline: 40px;
   align-items: center;
   right: 0;
+  color: #ede7f2;
   svg {
     color: #ede7f2;
     font-size: 24px;
+  }
+  p {
+    margin: 0;
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    font-size: 12px;
   }
   @media (max-width: 1124px) {
     display: flex;
