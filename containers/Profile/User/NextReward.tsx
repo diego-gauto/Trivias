@@ -115,6 +115,10 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
     }
   }
 
+  const getDays = () => {
+    return Math.round((user.final_date - today) / 86400)
+  }
+
   return (
     <ThirdBox>
       {pop && <div id="confirmBox" className="dialog">
@@ -232,10 +236,10 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 </div>
                 :
                 <div className="subscription-info">
-                  {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
+                  {((user.level === 1 && user.subscription === 0) || (user.level === 0 && user.final_date > today && user.subscription === 0)) ? <p >
                     <span className="span">{formatDate}</span>
                   </p> :
-                    <p><span className="span">{user.subscription === 1 ? "Haz cancelado tu suscripción, ya no se renovara" : "s/f"}</span></p>}
+                    <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
                 </div>
             }
             {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
