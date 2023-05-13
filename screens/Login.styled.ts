@@ -96,6 +96,11 @@ export const Background = styled.div`
         justify-content: center;
         gap: 10px;
         width: 100%;
+        .bold{
+          color: #942ced;
+          font-weight: 700;
+          cursor: pointer;
+        }
         .subtitle {
           color: #3f1168;
           font-size: 21px;
@@ -338,6 +343,7 @@ export const LoginBackground = styled.div`
     background-color: rgba(206, 91, 196, 0.5);
     position: relative;
     order: 2;
+    overflow: hidden;
     @media (max-width: 1023px) {
       width: 100%;
     }
