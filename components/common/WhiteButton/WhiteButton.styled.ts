@@ -21,11 +21,11 @@ export const WhiteButtonContainer = styled(Button)`
     font-size: 16px;
     &:hover {
       background-color: transparent;
-      border-color: white;
+      border-color: #6717cd;
     }
     &:active {
       background-color: #6717cd;
-      border-color: transparent;
+      border-color: #6717cd;
     }
   }
   @media only screen and (max-width: 576px) {
