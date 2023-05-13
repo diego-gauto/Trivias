@@ -69,6 +69,23 @@ const Purchase = () => {
         }
         guardCheckout(res);
         let cards = res.payment_methods;
+        if (cards.length > 0) {
+          setPayment(true);
+          if (cards.filter((x: any) => x.default).length === 0) {
+            cards[0].default = true;
+          }
+          cards.forEach((element: any) => {
+            if (element.default) {
+              let tempCard = {
+                paymentMethod: element.id,
+                status: false,
+                exp_month: element.card.exp_month,
+                exp_year: element.card.exp_year
+              }
+              setDefaultCard({ ...tempCard });
+            }
+          });
+        }
         setUserData(res);
         setCards(res.payment_methods);
         setLoggedIn(true);
@@ -97,6 +114,9 @@ const Purchase = () => {
   useEffect(() => {
     if (payment) {
       if (cards.length > 0) {
+        if (cards.filter((x: any) => x.default).length === 0) {
+          cards[0].default = true;
+        }
         cards.forEach((element: any) => {
           if (element.default) {
             let tempCard = {
@@ -398,16 +418,6 @@ const Purchase = () => {
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
                 <div className="stripe">
-                  <div className="option">
-                    <input type="radio" checked={!payment} onClick={() => {
-                      setPayment(false);
-                      setCardInfo(true);
-                      setPlan({ method: 'stripe' });
-                      delete card.paymentMethod;
-                      setCard({ ...card, cardId: "" })
-                    }} />
-                    <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
-                  </div>
                   {cards.length === 0 ? null :
                     <div className="option">
                       <input type="radio" checked={payment} onClick={() => {
@@ -429,6 +439,16 @@ const Purchase = () => {
                       )
                     })}
                   </select>}
+                  <div className="option">
+                    <input type="radio" checked={!payment} onClick={() => {
+                      setPayment(false);
+                      setCardInfo(true);
+                      setPlan({ method: 'stripe' });
+                      delete card.paymentMethod;
+                      setCard({ ...card, cardId: "" })
+                    }} />
+                    <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
+                  </div>
                   {!payment && <div className="form-row">
                     <label>Número de tarjeta</label>
                     <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
@@ -694,16 +714,6 @@ const Purchase = () => {
                 </div>
                 <div className="payment-methods">
                   <div className="stripe">
-                    <div className="option">
-                      <input type="radio" checked={!payment} onClick={() => {
-                        setPayment(false);
-                        setCardInfo(true);
-                        setPlan({ method: 'stripe' });
-                        delete card.paymentMethod;
-                        setCard({ ...card, cardId: "" })
-                      }} />
-                      <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
-                    </div>
                     {cards.length === 0 ? null :
                       <div className="option">
                         <input type="radio" checked={payment} onClick={() => {
@@ -725,6 +735,16 @@ const Purchase = () => {
                         )
                       })}
                     </select>}
+                    <div className="option">
+                      <input type="radio" checked={!payment} onClick={() => {
+                        setPayment(false);
+                        setCardInfo(true);
+                        setPlan({ method: 'stripe' });
+                        delete card.paymentMethod;
+                        setCard({ ...card, cardId: "" })
+                      }} />
+                      <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
+                    </div>
                     {!payment && <div className="form-row">
                       <label>Número de tarjeta</label>
                       <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
