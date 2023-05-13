@@ -105,6 +105,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           <AiOutlineClose onClick={() => {
             setOpen(!open)
           }}></AiOutlineClose>}
+        <p>Lecciones</p>
       </HamburgerContainer>
       <MainContainer open={open}>
         <div className='course-info'>
