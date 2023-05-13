@@ -695,6 +695,193 @@ const Purchase = () => {
                 <div className="payment-methods">
                   <div className="stripe">
                     <div className="option">
+                      <input type="radio" checked={!payment} onClick={() => {
+                        setPayment(false);
+                        setCardInfo(true);
+                        setPlan({ method: 'stripe' });
+                        delete card.paymentMethod;
+                        setCard({ ...card, cardId: "" })
+                      }} />
+                      <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
+                    </div>
+                    {cards.length === 0 ? null :
+                      <div className="option">
+                        <input type="radio" checked={payment} onClick={() => {
+                          setPayment(true),
+                            setCardInfo(false),
+                            setPlan({ method: 'stripe' })
+                          setCard({ ...card, cardId: "" })
+                        }} />
+                        <p>Pagaré con <span>tarjetas guardadas</span></p>
+                      </div>
+                    }
+                    {payment && <select className="cards" onChange={(e) => {
+                      setDefault(e.target.value)
+                    }}>
+                      <option value="" disabled>--</option>
+                      {cards.map((x: any, idC: number) => {
+                        return (
+                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                        )
+                      })}
+                    </select>}
+                    {!payment && <div className="form-row">
+                      <label>Número de tarjeta</label>
+                      <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
+                        setCard((card: any) => ({ ...card, number: e.target.value }));
+                      }} />
+                      <div className="form-row">
+                        <label>Nombre</label>
+                        <input type="text" placeholder="Nombre del Propietario" onChange={(e) => {
+                          setCard((card: any) => ({ ...card, holder: e.target.value }));
+                        }} />
+                      </div>
+                    </div>}
+                    <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                      <div className="form-row">
+                        <label>Fecha de expiración</label>
+                        {!payment ? <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                          <select className="short" onChange={(e) => {
+                            setCard((card: any) => ({ ...card, exp_month: e.target.value }));
+                          }}>
+                            {payment && defaultCard &&
+                              cards.map((x: any, idC: number) => {
+                                console.log('hola pap', x.defaultCard)
+                                return (
+                                  <option value={x.exp_month} selected={x.defaultCard} hidden>{(x.exp_month < 10) ? '0' + x.exp_month.toString() : x.exp_month.toString()}</option>
+                                )
+                              })
+                            }
+                            <option value="">Mes</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                          <select className="short" onChange={(e) => {
+                            setCard((card: any) => ({ ...card, exp_year: e.target.value }));
+                          }}>
+                            {payment && defaultCard &&
+                              cards.map((x: any, idC: number) => {
+                                return (
+                                  <option value={idC} selected={defaultCard == x} hidden>{x.exp_year - 2000}</option>
+                                )
+                              })
+                            }
+                            <option value="">Año</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                          </select>
+                        </div> :
+                          <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+                            <input className="short" disabled={payment} value={defaultCard.exp_month} />
+                            <input className="short" disabled={payment} value={defaultCard.exp_year} />
+                          </div>}
+                      </div>
+                      <div className="form-row">
+                        <label>CVV</label>
+                        <input className="short" type="password" disabled={payment} placeholder="∗∗∗" maxLength={4} onChange={(e) => {
+                          setCard((card: any) => ({ ...card, cvc: e.target.value }));
+                        }} />
+                      </div>
+                    </div>
+                    {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
+                    {(loader) && <LoaderContainSpinner />}
+                  </div>
+                  {!trial && <div className="paypal" onClick={() => {
+
+                  }}>
+                    {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
+                      "client-id": "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz",
+                      currency: "MXN",
+                      'vault': true,
+                    }}
+                    >
+                      {type == 'subscription' && <PayPalButtons
+                        style={{
+                          color: "blue",
+                          tagline: false,
+                          layout: 'horizontal',
+                          shape: 'pill',
+                          height: 50,
+
+                        }}
+                        createSubscription={(data, actions) => {
+                          setPlan({ method: "paypal" })
+                          return actions.subscription.create({
+                            plan_id: 'P-2P063165RR167053TMRKD7BQ'
+                          })
+                        }}
+                        onApprove={(data: any, actions) => {
+                          let today = new Date().getTime() / 1000;
+                          let finalDate = 0;
+                          finalDate = today + 2629800;
+                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                          setConfirmation(false);
+                          setPay(true);
+                          return data
+                        }}
+                      />}
+                      {type == 'course' && <PayPalButtons
+                        style={{
+                          color: "blue",
+                          tagline: false,
+                          layout: 'horizontal',
+                          shape: 'pill',
+                          height: 50,
+                        }}
+                        createOrder={(data, actions) => {
+                          let price = product.price;
+                          if (coupon) {
+                            if (coupon.type == 'amount') {
+                              price = price - coupon.discount;
+                            } else {
+                              price = (price - (coupon.discount / 100) * price)
+                            }
+                          }
+                          return actions.order.create({
+
+                            purchase_units: [
+                              {
+                                amount: {
+                                  value: price,
+                                },
+                              },
+                            ],
+                          });
+                        }}
+                        onApprove={(data, actions: any) => {
+                          return actions.order.capture().then((details: any) => {
+                            setPlan({ method: "paypal" })
+                          });
+                        }}
+                      />}
+                    </PayPalScriptProvider>}
+                    <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
+                  </div>}
+                </div>
+                {/* <div className="payment-methods">
+                  <div className="stripe">
+                    <div className="option">
                       <input type="radio" checked={cardInfo} onClick={() => {
                         setPayment(false),
                           setCardInfo(!cardInfo),
@@ -702,14 +889,6 @@ const Purchase = () => {
                       }} />
                       <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
                     </div>
-                    {/* <div className="option">
-                      <input type="radio" checked={payment} onClick={() => {
-                        setPayment(!payment),
-                          setCardInfo(false),
-                          setPlan({ method: 'stripe' })
-                      }} />
-                      <p>Pagaré con <span>tarjetas guardadas</span></p>
-                    </div> */}
                     <div className="form-row">
                       <label>Número de tarjeta</label>
                       <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
@@ -843,7 +1022,7 @@ const Purchase = () => {
                     </PayPalScriptProvider>}
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                   </div>}
-                </div>
+                </div> */}
               </div>
               <div className="box">
                 <p className="title">¿Qué estás adquiriendo?</p>
