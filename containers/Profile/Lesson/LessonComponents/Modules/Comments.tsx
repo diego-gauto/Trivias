@@ -15,7 +15,9 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
   const [answer, setAnswer] = useState("");
+  const [answerComment, setAnswerComment] = useState("");
   const [responses, setResponses] = useState<any>([]);
+  const [lastComments, setLastComments] = useState<any>([]);
 
   const addLessonComment = () => {
     let body: any;
@@ -39,11 +41,16 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
 
   const getComments = () => {
     let temp: any = []
+    let tempComments: any = []
     retrieveComments(data.id).then((res) => {
       res.data.data.forEach((element: any, i: number) => {
         temp.push(false);
+        element.answers.forEach((ca: any) => {
+          tempComments.push(false);
+        });
       })
-      setResponses(temp)
+      setResponses(temp);
+      setLastComments(tempComments);
       setCurrentComments(res.data.data)
     })
   }
@@ -125,8 +132,21 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
     setAnswer("");
   }
 
+  const toggleAnswers = (index: number) => {
+    lastComments.forEach((element: any, i: number) => {
+      if (index == i) {
+        lastComments[index] = !lastComments[index];
+      } else {
+        lastComments[i] = false;
+      }
+    });
+    setLastComments([...lastComments]);
+    setAnswerComment("");
+  }
+
   const answerQuestion = (x: any) => {
     let body: any;
+    console.log(x);
 
     if (answer) {
       body = {
@@ -151,6 +171,29 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
         getComments();
       })
     }
+    // if (answerComment) {
+    //   body = {
+    //     userId: user.user_id ? user.user_id : "",
+    //     comment: answerComment,
+    //     commentId: x.comment_id,
+    //     courseId: course.id
+    //   }
+    //   let notification = {
+    //     userId: x.user_id ? x.user_id : "",
+    //     message: 'Alguien te ha comentado',
+    //     type: 'comment',
+    //     notificationId: '',
+    //     courseId: course.id,
+    //     title: course.title,
+    //     lesson: lesson,
+    //     season: season,
+    //     name: user.name
+    //   }
+    //   createNotification(notification);
+    //   addCommentAnswerApi(body).then((res) => {
+    //     getComments();
+    //   })
+    // }
   }
 
   return (
@@ -182,14 +225,6 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
             <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
           </div>
           <div className='comment'>
-            {/* {
-            comments && user.photoURL
-              ?
-              <Profile src={user.photoURL} />
-              :
-              <Profile
-                src={DEFAULT_USER_IMG}
-              />} */}
             <Profile
               src={DEFAULT_USER_IMG}
             />
@@ -262,15 +297,65 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                           src={DEFAULT_USER_IMG}
                         />}
                       <p>{ans.name} <span>{getDate(ans.commentA_created_at)}</span></p>
-                      <div className='like' onClick={() => { likeAnswer(ans) }}>
-                        {ans.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
-                          <FiHeart />}
-                        <p>{ans.likes.length}</p>
-                      </div>
                     </div>
                     <div className='middle'>
                       <p>{ans.comment}</p>
                     </div>
+                    <div className="bottom">
+                      <div className='left'>
+                        <div className='new-comment'>
+                          <div className='like' onClick={() => { likeAnswer(ans) }}>
+                            {ans.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                              <FiHeart />}
+                            <p>{ans.likes.length}</p>
+                          </div>
+                          <button onClick={() => { toggleAnswers(index) }}>Responder</button>
+                        </div>
+                        {lastComments[index] && <div className='answer-input'>
+                          {user.photoURL
+                            ?
+                            <Profile src={user.photo} />
+                            :
+                            <Profile
+                              src={DEFAULT_USER_IMG}
+                            />}
+                          <input value={answer} className='answer' placeholder='Escribe tu respuesta' type="text"
+                            onChange={(e: any) => {
+                              setAnswer(e.target.value)
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                answerQuestion(x);
+                              }
+                            }} /></div>}
+                      </div>
+                    </div>
+                    {/* {x.answers.map((ans: any, idx: any) => {
+                      return (
+                        <div className='answer-container' key={"Comments " + idx}>
+                          <div className="top">
+                            {ans.photo
+                              ?
+                              <Profile src={ans.photo} />
+                              :
+                              <Profile
+                                src={DEFAULT_USER_IMG}
+                              />}
+                            <p>{ans.name} <span>{getDate(ans.commentA_created_at)}</span></p>
+                            <div className='like' onClick={() => { likeAnswer(ans) }}>
+                              {ans.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                                <FiHeart />}
+                              <p>{ans.likes.length}</p>
+                            </div>
+                            <button onClick={() => { toggle(index) }}>Responder</button>
+                          </div>
+                          <div className='middle'>
+                            <p>{ans.comment}</p>
+                          </div>
+
+                        </div>
+                      )
+                    })} */}
                   </div>
                 )
               })}

@@ -35,6 +35,13 @@ export const MainContainer = styled.div`
           font-weight: 500;
         }
       }
+      button {
+        font-size: 18px;
+        color: #3f1168;
+        font-weight: 700;
+        border: none;
+        background: none;
+      }
     }
     .middle {
       p {
