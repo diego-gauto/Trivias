@@ -18,11 +18,8 @@ import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
 import { useGoogleLogin } from "@react-oauth/google";
-import { facebookUserInfo, googleTokens, loginWithProviderApi, updatePastUser } from "../../components/api/auth";
+import { facebookUserInfo, googleTokens, loginWithProviderApi, updatePastUser, updateUserPassword } from "../../components/api/auth";
 import { useLogin, useFacebook } from 'react-facebook';
-import { getWholeCourses } from "../../store/actions/courseActions";
-import { addCourse } from "../../components/api/lessons";
-import router from "next/router";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -45,6 +42,8 @@ type FormValues = {
   email: string;
   password: string;
   confirmPassword: string;
+  newPassword: string;
+  newConfirmPassword: string;
 };
 
 const Login = () => {
@@ -60,8 +59,11 @@ const Login = () => {
   const [pastUser, setPastUser] = useState<any>({})
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
+  const [reset, setReset] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const { login } = useLogin();
+  const [password, setPassword] = useState('');
+  const [confirm_Password, setConfirm_Password] = useState('');
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -100,8 +102,39 @@ const Login = () => {
       credentials: {
         email: formData.email,
         password: formData.password,
+        newPassword: formData.newPassword,
+        newConfirmPassword: formData.newConfirmPassword
       },
     };
+
+    if (reset) {
+      let body = {
+        email: signUpData.credentials.email,
+        password: password,
+        confirm: confirm_Password
+      }
+      if (password === "" || confirm_Password === "" || password !== confirm_Password) {
+        setErrorMsg("Revise que su contraseña este correcta");
+        setAuthLoader(false);
+        return;
+      }
+      await updateUserPassword(body).then((res) => {
+        if (res.status === 202) {
+          alert("Contraseña actualizada");
+          setErrorMsg("")
+          setReset(false);
+          setAuthLoader(false)
+          return;
+        }
+        if (res.data.msg) {
+          alert("El usuario no existe!")
+        }
+        setAuthLoader(false)
+      })
+      return;
+    }
+
+
     loginWithProviderApi(signUpData.credentials).then((res) => {
       if (res[0]) {
         if (res[0].past_user === 'si') {
@@ -283,36 +316,6 @@ const Login = () => {
     }
   }
 
-  // useEffect(() => {
-  //   getWholeCourses().then(async (res) => {
-  //     await Promise.all(res.map(async (element: any) => {
-  //       let tempCoures = {
-  //         title: element.courseTittle,
-  //         subtitle: element.courseSubtittle,
-  //         about: element.courseAbout,
-  //         certificate_color: element.courseCertificateColor || "naranja",
-  //         difficulty: element.courseDifficulty,
-  //         mandatory: element.courseHomeWork,
-  //         image: element.coursePath,
-  //         phrase: element.coursePhrase,
-  //         price: element.coursePrice,
-  //         duration: element.courseDuration,
-  //         rating: element.courseRating,
-  //         reviews: 0,
-  //         type: element.courseType,
-  //         sequential: element.courseHomeWork,
-  //         published: true,
-  //         categories: element.courseCategory,
-  //         materials: element.courseMaterial,
-  //         seasons: element.seasons
-  //       }
-  //       await addCourse(tempCoures).then((res) => {
-  //         console.log(res);
-  //       })
-  //     }))
-  //   })
-  // }, [])
-
   return (
 
     <>
@@ -356,7 +359,7 @@ const Login = () => {
                   {
                     !pastUserScreen ?
                       <div className="box">
-                        <div className="form-row">
+                        {reset && <div className="form-row">
                           <div className="form-input">
                             <label>Correo <span>electrónico</span></label>
                             <input
@@ -375,8 +378,51 @@ const Login = () => {
                               </p>
                             </Error>
                           }
-                        </div>
-                        <div className="form-row">
+                        </div>}
+                        {!reset ? <div className="form-row">
+                          <div className="form-input">
+                            <label>Correo <span>electrónico</span></label>
+                            <input
+                              required
+                              type="text"
+                              placeholder="correo@correo.com"
+                              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                              {...register("email")}
+                            />
+                          </div>
+                          {
+                            errors.email &&
+                            <Error>
+                              <p>
+                                {errors.email?.message}
+                              </p>
+                            </Error>
+                          }
+                        </div> :
+                          <div className="form-row">
+                            <div className="form-input">
+                              <label>Contraseña nueva</label>
+                              <input
+                                required
+                                type={passwordShown_1 ? "text" : "password"}
+                                placeholder="Contraseña"
+                                className={`form-control`}
+                                onChange={(e: any) => { setPassword(e.target.value) }}
+                              />
+                              <div className="eye"
+                                onClick={togglePassword_1}
+                              >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                            </div>
+                            {
+                              errors.newPassword &&
+                              <Error>
+                                <p>
+                                  {errors.newPassword?.message}
+                                </p>
+                              </Error>
+                            }
+                          </div>}
+                        {!reset ? <div className="form-row">
                           <div className="form-input">
                             <label>Contraseña</label>
                             <input
@@ -397,20 +443,43 @@ const Login = () => {
                               </p>
                             </Error>
                           }
-                        </div>
+                        </div> :
+                          <div className="form-row">
+                            <div className="form-input">
+                              <label>Confirmar contraseña</label>
+                              <input
+                                required
+                                type={passwordShown_1 ? "text" : "password"}
+                                placeholder="Contraseña"
+                                className={`form-control`}
+                                onChange={(e: any) => { setConfirm_Password(e.target.value) }}
+                              />
+                              <div className="eye"
+                                onClick={togglePassword_1}
+                              >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                            </div>
+                            {
+                              errors.newConfirmPassword &&
+                              <Error>
+                                <p>
+                                  {errors.newConfirmPassword?.message}
+                                </p>
+                              </Error>
+                            }
+                          </div>}
                         {error && <Error>
                           <p>
                             {errorMsg}
                           </p>
                         </Error>}
-                        {
-                          responsive1023 &&
-                          <p className="forgotText">
-                            ¿Olvidaste tu contraseña?
-                            <span onClick={() => { setShowForgot(true) }}>&nbsp;Click aquí</span>
-                          </p>
-                        }
 
+                        {!reset ? <p className="forgotText">
+                          ¿Olvidaste tu contraseña?
+                          <span onClick={() => { setReset(true) }}>&nbsp;Click aquí</span>
+                        </p> : <p className="forgotText">
+                          Regresar a inicio de sesión
+                          <span onClick={() => { setReset(false) }}>&nbsp;Click aquí</span>
+                        </p>}
                       </div>
                       :
                       <div className="box">

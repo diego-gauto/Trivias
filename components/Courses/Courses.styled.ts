@@ -201,12 +201,12 @@ export const TransparentButton = styled.button`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   padding-inline: 15px;
-  color: #fff;
+  color: #6717cd;
   border-radius: 30px;
   display: flex;
   gap: 10px;
   background: none;
-  border: #fff 2px solid;
+  border: #6717cd 2px solid;
   &:hover {
     transform: scale(1.03);
     transition: 0.5s ease all;
@@ -218,12 +218,12 @@ export const TransparentButton = styled.button`
     font-size: 12px;
     padding-block: 10px;
     padding-inline: 15px;
-    color: #fff;
+    color: #6717cd;
   }
   @media (max-width: 450px) {
     padding-block: 8px;
     font-size: 10px;
-    color: #fff;
+    color: #6717cd;
   }
 `;
 export const Gradient = styled.div`
