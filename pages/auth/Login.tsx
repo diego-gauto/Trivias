@@ -114,6 +114,7 @@ const Login = () => {
         confirm: confirm_Password
       }
       if (password === "" || confirm_Password === "" || password !== confirm_Password) {
+        setError(true)
         setErrorMsg("Revise que su contraseña este correcta");
         setAuthLoader(false);
         return;
