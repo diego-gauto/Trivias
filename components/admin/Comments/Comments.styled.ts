@@ -6,6 +6,9 @@ export const AdminCommentsContainer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 20px;
+  .pl {
+    padding-left: 20px;
+  }
   .comment-row {
     display: flex;
     flex-direction: column;
@@ -48,8 +51,18 @@ export const AdminCommentsContainer = styled.div`
     }
     .answer {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 20px;
+      .add {
+        background: #6717cd;
+      }
+      button {
+        margin-right: auto;
+        padding: 5px;
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+      }
       .left {
         display: flex;
         flex-direction: column;

@@ -1,9 +1,9 @@
 import router from "next/router";
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { deleteCommentAnswers, deleteThisComment, getComments } from "../../api/admin";
+import { deleteCommentAnswers, deleteCommentToAnswers, deleteThisComment, getComments } from "../../api/admin";
 import { getCoursesApi } from "../../api/courses";
-import { addCommentAnswerApi } from "../../api/lessons";
+import { addCommentAnswerApi, addCommentToAnswerApi } from "../../api/lessons";
 import { createNotification } from "../../api/notifications";
 import { getUserApi } from "../../api/users";
 import { AdminContain, Table } from "../SideBar.styled";
@@ -15,9 +15,11 @@ const Comments = () => {
   const [userData, setUserData] = useState<any>(null);
   const [comment, setComment] = useState<any>()
   const [answer, setAnswer] = useState<any>("")
+  const [answerComment, setAnswerComment] = useState<any>("")
   const [popUp, setPopUp] = useState<any>(false)
   const [course, setCourse] = useState<any>([]);
   const [coursesId, setCoursesId] = useState<any>([])
+  const [level, setLevel] = useState<any>(1)
 
   useEffect(() => {
     retrievComments()
@@ -121,6 +123,18 @@ const Comments = () => {
       retrievComments();
     })
   }
+  const deleteAnswerComment = (value: any) => {
+    if (userData.role === "admin" && userData.roles[8].delete === 0) {
+      alert("No tienes permisos para esta acción");
+      return;
+    }
+    let answer = {
+      answer: value
+    }
+    deleteCommentToAnswers(answer).then(() => {
+      retrievComments();
+    })
+  }
 
   const answerQuestion = () => {
     if (userData.role === "admin" && userData.roles[8].create === 0) {
@@ -128,13 +142,13 @@ const Comments = () => {
       return;
     }
     let body: any;
+    body = {
+      userId: userData.id,
+      comment: level === 1 ? answer : answerComment,
+      commentId: comment.id,
+      courseId: comment.course_id
+    }
     if (answer) {
-      body = {
-        userId: userData.id,
-        comment: answer,
-        commentId: comment.id,
-        courseId: comment.course_id
-      }
       // let notification = {
       //   userId: x.user_id ? x.user_id : "",
       //   message: 'Alguien te ha comentado',
@@ -150,6 +164,13 @@ const Comments = () => {
       addCommentAnswerApi(body).then((res) => {
         retrievComments();
         setAnswer("");
+        setPopUp(false);
+      })
+    }
+    if (answerComment) {
+      addCommentToAnswerApi(body).then((res) => {
+        retrievComments();
+        setAnswerComment("");
         setPopUp(false);
       })
     }
@@ -211,7 +232,7 @@ const Comments = () => {
                 <p><span>Fecha: </span>{x.formatDate}</p>
                 <div className="buttons">
                   <button className="add" onClick={() => { goTo(x) }}>Ir a comentario</button>
-                  <button className="add" onClick={() => { setComment(x); setPopUp(true); }}>Agregar Comentario</button>
+                  <button className="add" onClick={() => { setComment(x); setPopUp(true); setLevel(1) }}>Agregar Comentario</button>
                   <button className="delete" onClick={() => { deleteComment(x) }}>Eliminar</button>
                 </div>
               </div>
@@ -220,10 +241,21 @@ const Comments = () => {
                 return (
                   <div className="answer" key={"admin_answer_" + ans_ind}>
                     <div className="left">
-                      <p>Fecha: {formatDate(answer.created_at)}</p>
+                      <p>Fecha: {formatDate(answer.created_at)} <MdDeleteForever onClick={() => { deleteAnswer(answer) }} /></p>
                       <p>{answer.comment}</p>
+                      <button className="add" onClick={() => { setComment(answer); setPopUp(true); setLevel(2) }}>Agregar Comentario</button>
                     </div>
-                    <MdDeleteForever onClick={() => { deleteAnswer(answer) }} />
+                    {answer.comments.length > 0 ? <p className="title pl">Respuestas</p> : <p className="title pl">Sin Respuestas</p>}
+                    {answer.comments.map((answer: any, ans_ind: number) => {
+                      return (
+                        <div className="answer pl" key={"admin_answer_comment_" + ans_ind}>
+                          <div className="left">
+                            <p>Fecha: {formatDate(answer.created_at)} <MdDeleteForever onClick={() => { deleteAnswerComment(answer) }} /></p>
+                            <p>{answer.comment}</p>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
                 )
               })}
@@ -231,9 +263,9 @@ const Comments = () => {
           )
         })}
         {popUp && <div className="pop-up">
-          <GrClose onClick={() => { setPopUp(false); setAnswer(""); }} />
+          <GrClose onClick={() => { setPopUp(false); setAnswer(""); setAnswerComment("") }} />
           <h1>Responder comentario</h1>
-          <textarea placeholder="La solución es..." onChange={(e) => { setAnswer(e.target.value) }} />
+          <textarea placeholder="La solución es..." onChange={(e) => { level === 1 ? setAnswer(e.target.value) : setAnswerComment(e.target.value) }} />
           <button onClick={() => { answerQuestion() }}>Agregar</button>
         </div>}
       </AdminCommentsContainer>

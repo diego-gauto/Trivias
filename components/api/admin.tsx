@@ -273,6 +273,17 @@ export const deleteCommentAnswers = async (answer: any) => {
       return error
     });
 };
+export const deleteCommentToAnswers = async (answer: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/" + "delete-comment-answers-comment", answer)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 
 export const deleteThisComment = async (comment: any) => {
   return axios
