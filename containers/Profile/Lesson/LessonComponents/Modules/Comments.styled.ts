@@ -118,7 +118,7 @@ export const MainContainer = styled.div`
       }
     }
     .answer-container {
-      margin-left: 130px;
+      margin-left: 50px;
       display: flex;
       flex-direction: column;
       gap: 10px;

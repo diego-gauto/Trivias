@@ -227,6 +227,43 @@ export const deleteCommentAnswerLikeApi = async (comment: any) => {
       return error
     });
 };
+
+export const addCommentToAnswerApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/add-comment-to-answer`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const addCommentToAnswerLikeApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/add-answer-comment-like`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const deleteCommentToAnswerLikeApi = async (comment: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + `lessons/delete-answer-comment-like`, comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
 export const getLessonsFromUserId = async (userId: any) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "lessons/lesson/" + userId, userId)
