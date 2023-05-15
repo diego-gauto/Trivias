@@ -10,6 +10,7 @@ import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
 import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addCommentLikeApi, addCommentToAnswerApi, addCommentToAnswerLikeApi, deleteCommentAnswerLikeApi, deleteCommentLikeApi, deleteCommentToAnswerLikeApi, retrieveComments } from '../../../../../components/api/lessons'
 import { createNotification } from '../../../../../components/api/notifications'
+import { MdVerified } from 'react-icons/md'
 const Comments = ({ value, setValue, user, data, comments, course, season, lesson }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
@@ -323,7 +324,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                         <Profile
                           src={DEFAULT_USER_IMG}
                         />}
-                      <p>{ans.name} <span>{getDate(ans.commentA_created_at)}</span></p>
+                      <p>{ans.name} {ans.role === "admin" && <MdVerified />} <span>{getDate(ans.commentA_created_at)}</span></p>
                     </div>
                     <div className='middle'>
                       <p>{ans.comment}</p>
@@ -368,7 +369,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                               <Profile
                                 src={DEFAULT_USER_IMG}
                               />}
-                            <p>{answer_comment.name} <span>{getDate(answer_comment.commentToAnswer_created_at)}</span></p>
+                            <p>{answer_comment.name} {answer_comment.role === "admin" && <MdVerified />} <span>{getDate(answer_comment.commentToAnswer_created_at)}</span></p>
                             <div className='like' onClick={() => { likeCommentAnswer(answer_comment) }}>
                               {answer_comment.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
                                 <FiHeart />}
