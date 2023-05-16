@@ -39,10 +39,10 @@ class MyDocument extends Document {
             }}
           >
           </Script>
-        </Head>
-        <body>
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4DJNFW"
             height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
+        </Head>
+        <body>
           <Main />
           <NextScript />
         </body>
