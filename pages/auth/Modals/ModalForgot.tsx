@@ -1,57 +1,62 @@
 import { useState } from "react";
 
-import { useForm } from "react-hook-form";
-
-import { sendPasswordResetEmail } from "firebase/auth";
-import firebase from "firebase/compat/app";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import { AddText } from "../../../components/admin/Landing/Landing.styled";
 import {
   ButtonContain,
-  CloseButton,
   EmailContain,
-  ForgotContain,
   MessageContainer,
-  PurpleButton2,
-  PurpleButtonLoader,
   Text2,
-  TextContain,
   TextInput,
   Title,
 } from "../../../screens/ModalForgot.styled";
+import { Modal } from "react-bootstrap";
+import { updateUserPassword } from "../../../components/api/auth";
 
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [resetMessage, setResetMessage] = useState(0);
-  const [isEmailSent, setIsEmailSent] = useState(false);
 
   const formSchema2 = yup.object().shape({
     email: yup
       .string()
       .email("Debe ser un email válido")
       .required("Campo requerido"),
+    password: yup.string()
+      .required('Password is required')
+      .min(6, 'La contraseña debe tener al menos 6 carácteres'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "La contraseña no coincide"),
   });
 
   type FormValues = {
     email: string;
+    password: string,
+    confirmPassword: string
   };
-  var auth = firebase.auth();
-  const onSubmit = async () => {
+
+  const onSubmit: SubmitHandler<FormValues> = async formData => {
+    let resetData = {
+      email: formData.email,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword
+    };
+
     setIsLoading(true)
-    auth.sendPasswordResetEmail(email)
-      .then(function () {
-        setResetMessage(1)
-        //setIsEmailSent(true)
-        setIsLoading(false)
-      })
-      .catch(function (error) {
-        setIsLoading(false)
-        setResetMessage(2)
-      });
+    await updateUserPassword(resetData).then((res) => {
+      if (res.status === 202) {
+        alert("Contraseña actualizada");
+        handleClose()
+        return;
+      }
+      if (res.data.msg) {
+        alert("El usuario no existe!")
+      }
+      setIsLoading(false)
+    })
   };
 
   const {
@@ -61,78 +66,77 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   } = useForm<FormValues>({
     resolver: yupResolver(formSchema2)
   });
-  const [email, setEmail] = useState('')
-  //const auth = getAuth();  
-  //const triggerResetEmail = async () => {
-  //console.log("Send recovery email to: " + email);
-  // await sendPasswordResetEmail(auth, email);
-  //console.log("Password reset email sent");
-  //setIsEmailSent(true)
-  //setIsLoading(false)
-  //}
 
   return (
-    <>
-      <ForgotContain>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Title>
-            Reestablecer contraseña
-          </Title>
-          <TextContain>
-            <AddText>
-              Le enviaremos un correo electrónico con más instrucciones
-              sobre cómo reestablecer su contraseña
-            </AddText>
-          </TextContain>
-          <EmailContain>
-            <Text2>
-              Ingresar correo electrónico
-            </Text2>
-            <TextInput
-              placeholder="correo@correo.com"
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-              {...register("email")}
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)} required
-            />
-            <MessageContainer>
-              {resetMessage == 0 && (
-                ""
-              )}
-              {resetMessage == 1 && (
-                "Correo de recuperación enviado, cheque su bandeja de spam"
-              )}
-              {resetMessage == 2 && (
-                <MessageContainer style={{ fontSize: "15px", fontWeight: "bold", color: "#dc3545" }}>Correo no encontrado</MessageContainer>
-              )}
-              <div className="invalid-feedback">
-                {errors.email?.message}
-              </div>
-            </MessageContainer>
-          </EmailContain>
-          <ButtonContain>
-            {!isLoading ? (
-              <PurpleButton2 type='submit'>
-                Enviar Correo
-              </PurpleButton2>
-            ) : (
-              <PurpleButtonLoader>
-                Enviando...
-              </PurpleButtonLoader>
-            )}
-
-          </ButtonContain>
-          <ButtonContain>
-            <CloseButton onClick={handleClose}>
-              Volver
-            </CloseButton>
-          </ButtonContain>
-        </form>
-      </ForgotContain>
-    </>
+    <Modal show={showForgot} onHide={handleClose} centered className="forgot-modal-component">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Title>
+          Reestablecer contraseña
+        </Title>
+        {/* <TextContain>
+          <AddText>
+            Le enviaremos un correo electrónico con más instrucciones
+            sobre cómo reestablecer su contraseña
+          </AddText>
+        </TextContain> */}
+        <EmailContain>
+          <Text2>
+            Ingresar correo electrónico
+          </Text2>
+          <TextInput
+            placeholder="correo@correo.com"
+            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+            {...register("email")}
+            type="email"
+            required
+          />
+          <MessageContainer>
+            <div className="invalid-feedback">
+              {errors.email?.message}
+            </div>
+          </MessageContainer>
+        </EmailContain>
+        <EmailContain>
+          <Text2>
+            Contraseña Nueva
+          </Text2>
+          <TextInput
+            placeholder="********"
+            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+            {...register("password")}
+            type="password"
+            required
+          />
+          <MessageContainer>
+            <div className="invalid-feedback">
+              {errors.password?.message}
+            </div>
+          </MessageContainer>
+        </EmailContain>
+        <EmailContain>
+          <Text2>
+            Confirmar contraseña
+          </Text2>
+          <TextInput
+            placeholder="********"
+            className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+            {...register("confirmPassword")}
+            type="password"
+            required
+          />
+          <MessageContainer>
+            <div className="invalid-feedback">
+              {errors.confirmPassword?.message}
+            </div>
+          </MessageContainer>
+        </EmailContain>
+        <ButtonContain>
+          <button onClick={() => { onSubmit }}>Confirmar</button>
+        </ButtonContain>
+      </form>
+    </Modal>
   )
 }
 export default ModalForgot;

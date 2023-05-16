@@ -329,286 +329,272 @@ const Login = () => {
             </p>
             <img className="imgBottomHand" src="../images/mano1.png" alt="" />
           </div>
-          {
-            (showForgot == false && loginLoader) ?
-              <div className="right-side">
-                <form onSubmit={
-                  !pastUserScreen ?
-                    handleSubmit(onSubmit)
-                    : handleSubmit(onSubmit2)
-                }>
-                  <div className="title-contain">
-                    <Title style={{ fontSize: 26 }}>
-                      Inicia sesión
-                    </Title>
-                    <div className="subtext">
-                      <p className="first-sub">
-                        ¡Te damos la bienvenida a <br />nuestra nueva plataforma!
-                      </p>
-                      <p className="second-sub">
-                        Siempre estamos mejorando para ti.
-                      </p>
-                    </div>
-                  </div>
-                  <p className="registerText">
-                    ¿No tienes una cuenta?
-                    <Link href={SIGNUP_PATH}>
-                      <span>&nbsp;Regístrate</span>
-                    </Link>
+          <div className="right-side">
+            <form onSubmit={
+              !pastUserScreen ?
+                handleSubmit(onSubmit)
+                : handleSubmit(onSubmit2)
+            }>
+              <div className="title-contain">
+                <Title style={{ fontSize: 26 }}>
+                  Inicia sesión
+                </Title>
+                <div className="subtext">
+                  <p className="first-sub">
+                    ¡Te damos la bienvenida a <br />nuestra nueva plataforma!
                   </p>
-
-                  {
-                    !pastUserScreen ?
-                      <div className="box">
-                        {reset && <div className="form-row">
-                          <div className="form-input">
-                            <label>Correo <span>electrónico</span></label>
-                            <input
-                              required
-                              type="text"
-                              placeholder="correo@correo.com"
-                              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                              {...register("email")}
-                            />
-                          </div>
-                          {
-                            errors.email &&
-                            <Error>
-                              <p>
-                                {errors.email?.message}
-                              </p>
-                            </Error>
-                          }
-                        </div>}
-                        {!reset ? <div className="form-row">
-                          <div className="form-input">
-                            <label>Correo <span>electrónico</span></label>
-                            <input
-                              required
-                              type="text"
-                              placeholder="correo@correo.com"
-                              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                              {...register("email")}
-                            />
-                          </div>
-                          {
-                            errors.email &&
-                            <Error>
-                              <p>
-                                {errors.email?.message}
-                              </p>
-                            </Error>
-                          }
-                        </div> :
-                          <div className="form-row">
-                            <div className="form-input">
-                              <label>Contraseña nueva</label>
-                              <input
-                                required
-                                type={passwordShown_1 ? "text" : "password"}
-                                placeholder="Contraseña"
-                                className={`form-control`}
-                                onChange={(e: any) => { setPassword(e.target.value) }}
-                              />
-                              <div className="eye"
-                                onClick={togglePassword_1}
-                              >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                            </div>
-                            {
-                              errors.newPassword &&
-                              <Error>
-                                <p>
-                                  {errors.newPassword?.message}
-                                </p>
-                              </Error>
-                            }
-                          </div>}
-                        {!reset ? <div className="form-row">
-                          <div className="form-input">
-                            <label>Contraseña</label>
-                            <input
-                              required
-                              type={passwordShown_1 ? "text" : "password"}
-                              placeholder="Contraseña"
-                              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                              {...register("password")} />
-                            <div className="eye"
-                              onClick={togglePassword_1}
-                            >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                          </div>
-                          {
-                            errors.password &&
-                            <Error>
-                              <p>
-                                {errors.password?.message}
-                              </p>
-                            </Error>
-                          }
-                        </div> :
-                          <div className="form-row">
-                            <div className="form-input">
-                              <label>Confirmar contraseña</label>
-                              <input
-                                required
-                                type={passwordShown_1 ? "text" : "password"}
-                                placeholder="Contraseña"
-                                className={`form-control`}
-                                onChange={(e: any) => { setConfirm_Password(e.target.value) }}
-                              />
-                              <div className="eye"
-                                onClick={togglePassword_1}
-                              >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                            </div>
-                            {
-                              errors.newConfirmPassword &&
-                              <Error>
-                                <p>
-                                  {errors.newConfirmPassword?.message}
-                                </p>
-                              </Error>
-                            }
-                          </div>}
-                        {error && <Error>
-                          <p>
-                            {errorMsg}
-                          </p>
-                        </Error>}
-
-                        {!reset ? <p className="forgotText">
-                          ¿Olvidaste tu contraseña?
-                          <span onClick={() => { setReset(true) }}>&nbsp;Click aquí</span>
-                        </p> : <p className="forgotText">
-                          Regresar a inicio de sesión
-                          <span onClick={() => { setReset(false) }}>&nbsp;Click aquí</span>
-                        </p>}
-                      </div>
-                      :
-                      <div className="box">
-                        <div className="form-row">
-                          <div className="form-input">
-                            <label>Correo <span>electrónico</span></label>
-                            <input
-                              required
-                              type="text"
-                              value={pastUser.email}
-                              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                              {...register("email")}
-                              disabled={pastUserScreen}
-                            />
-                          </div>
-                          {
-                            errors.email &&
-                            <Error>
-                              <p>
-                                {errors.email?.message}
-                              </p>
-                            </Error>
-                          }
-                        </div>
-                        <div className="line"></div>
-                        <p className="first-paragraph">
-                          Vemos que ya eres parte de <br />la comunidad de Gonvar.
-                        </p>
-                        <p className="second-paragraph">
-                          Para acceder a tu contenido debes crear una contraseña.
-                          <span>
-                            &nbsp; Puedes usar la misma de antes<br /> o pensar en una nueva.
-                          </span>
-                        </p>
-                        <div className="form-row">
-                          <div className="form-input">
-                            <label style={{ fontWeight: 400 }}>Contraseña</label>
-                            <input
-                              required
-                              type={passwordShown_2 ? "text" : "password"}
-                              placeholder="Contraseña"
-                              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                              {...register("password")} />
-                            <div className="eye"
-                              onClick={togglePassword_2}
-                            >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                          </div>
-                          {
-                            errors.password &&
-                            <Error>
-                              <p>
-                                {errors.password?.message}
-                              </p>
-                            </Error>
-                          }
-                        </div>
-                        <div className="form-row">
-                          <div className="form-input">
-                            <label>Confirmar <span>Contraseña</span></label>
-                            <input
-                              required
-                              type={confirmPassword ? "text" : "password"}
-                              placeholder="Contraseña"
-                              className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                              {...register("confirmPassword")} />
-                            <div className="eye"
-                              onClick={toggleConfirmPassword}
-                            >{confirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                          </div>
-                          {
-                            errors.confirmPassword &&
-                            <Error>
-                              <p>
-                                {errors.confirmPassword?.message}
-                              </p>
-                            </Error>
-                          }
-                        </div>
-                      </div>
-                  }
-                  {
-                    !authLoader
-                      ?
-                      <PurpleButton2 type='submit'>
-                        Ingresar
-                      </PurpleButton2>
-                      :
-                      <LoaderImage>
-                        <LoaderContain />
-                      </LoaderImage>
-                  }
-
-                  <div className="social-media-container">
-                    <div className="info">
-                      <p style={{ textAlign: "end" }}>O inicia sesión usando <br />
-                        tu cuenta de <span>Google</span> <br />
-                        o de <span>Facebook</span>
-                      </p>
-                    </div>
-                    <div className="socials">
-                      <img src="../images/googleLogin.png" onClick={() => {
-                        googleLogin();
-                      }} alt="" />
-                      <img src="../images/facebookLogin.png" onClick={() => {
-                        loginWithFacebook();
-                      }} alt="" />
-                    </div>
-                    <p className="terms">Al iniciar sesión, aceptas los <span>términos, <br />
-                      condiciones y políticas de Gonvar</span></p>
-                  </div>
-                </form>
-                <div className="imgResp">
-                  <div className="rightArm">
-                    <div className="circle" />
-                    <img className="imgRight" src="../images/unas_lila.png" alt="" />
-                  </div>
-                  <img className="imgLeft" src="../images/mano1.png" alt="" />
+                  <p className="second-sub">
+                    Siempre estamos mejorando para ti.
+                  </p>
                 </div>
               </div>
-              :
-              <LoaderImage>
-                <LoaderContain />
-              </LoaderImage>
-          }
-          {
-            showForgot == true &&
-            <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
-          }
+              <p className="registerText">
+                ¿No tienes una cuenta?
+                <Link href={SIGNUP_PATH}>
+                  <span>&nbsp;Regístrate</span>
+                </Link>
+              </p>
+
+              {
+                !pastUserScreen ?
+                  <div className="box">
+                    {reset && <div className="form-row">
+                      <div className="form-input">
+                        <label>Correo <span>electrónico</span></label>
+                        <input
+                          required
+                          type="text"
+                          placeholder="correo@correo.com"
+                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                          {...register("email")}
+                        />
+                      </div>
+                      {
+                        errors.email &&
+                        <Error>
+                          <p>
+                            {errors.email?.message}
+                          </p>
+                        </Error>
+                      }
+                    </div>}
+                    {!reset ? <div className="form-row">
+                      <div className="form-input">
+                        <label>Correo <span>electrónico</span></label>
+                        <input
+                          required
+                          type="text"
+                          placeholder="correo@correo.com"
+                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                          {...register("email")}
+                        />
+                      </div>
+                      {
+                        errors.email &&
+                        <Error>
+                          <p>
+                            {errors.email?.message}
+                          </p>
+                        </Error>
+                      }
+                    </div> :
+                      <div className="form-row">
+                        <div className="form-input">
+                          <label>Contraseña nueva</label>
+                          <input
+                            required
+                            type={passwordShown_1 ? "text" : "password"}
+                            placeholder="Contraseña"
+                            className={`form-control`}
+                            onChange={(e: any) => { setPassword(e.target.value) }}
+                          />
+                          <div className="eye"
+                            onClick={togglePassword_1}
+                          >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                        </div>
+                        {
+                          errors.newPassword &&
+                          <Error>
+                            <p>
+                              {errors.newPassword?.message}
+                            </p>
+                          </Error>
+                        }
+                      </div>}
+                    {!reset ? <div className="form-row">
+                      <div className="form-input">
+                        <label>Contraseña</label>
+                        <input
+                          required
+                          type={passwordShown_1 ? "text" : "password"}
+                          placeholder="Contraseña"
+                          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                          {...register("password")} />
+                        <div className="eye"
+                          onClick={togglePassword_1}
+                        >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                      </div>
+                      {
+                        errors.password &&
+                        <Error>
+                          <p>
+                            {errors.password?.message}
+                          </p>
+                        </Error>
+                      }
+                    </div> :
+                      <div className="form-row">
+                        <div className="form-input">
+                          <label>Confirmar contraseña</label>
+                          <input
+                            required
+                            type={passwordShown_1 ? "text" : "password"}
+                            placeholder="Contraseña"
+                            className={`form-control`}
+                            onChange={(e: any) => { setConfirm_Password(e.target.value) }}
+                          />
+                          <div className="eye"
+                            onClick={togglePassword_1}
+                          >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                        </div>
+                        {
+                          errors.newConfirmPassword &&
+                          <Error>
+                            <p>
+                              {errors.newConfirmPassword?.message}
+                            </p>
+                          </Error>
+                        }
+                      </div>}
+                    {error && <Error>
+                      <p>
+                        {errorMsg}
+                      </p>
+                    </Error>}
+
+                    <p className="forgotText">
+                      ¿Olvidaste tu contraseña?
+                      <span onClick={() => { setShowForgot(true) }}>&nbsp;Click aquí</span>
+                    </p>
+                  </div>
+                  :
+                  <div className="box">
+                    <div className="form-row">
+                      <div className="form-input">
+                        <label>Correo <span>electrónico</span></label>
+                        <input
+                          required
+                          type="text"
+                          value={pastUser.email}
+                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                          {...register("email")}
+                          disabled={pastUserScreen}
+                        />
+                      </div>
+                      {
+                        errors.email &&
+                        <Error>
+                          <p>
+                            {errors.email?.message}
+                          </p>
+                        </Error>
+                      }
+                    </div>
+                    <div className="line"></div>
+                    <p className="first-paragraph">
+                      Vemos que ya eres parte de <br />la comunidad de Gonvar.
+                    </p>
+                    <p className="second-paragraph">
+                      Para acceder a tu contenido debes crear una contraseña.
+                      <span>
+                        &nbsp; Puedes usar la misma de antes<br /> o pensar en una nueva.
+                      </span>
+                    </p>
+                    <div className="form-row">
+                      <div className="form-input">
+                        <label style={{ fontWeight: 400 }}>Contraseña</label>
+                        <input
+                          required
+                          type={passwordShown_2 ? "text" : "password"}
+                          placeholder="Contraseña"
+                          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                          {...register("password")} />
+                        <div className="eye"
+                          onClick={togglePassword_2}
+                        >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                      </div>
+                      {
+                        errors.password &&
+                        <Error>
+                          <p>
+                            {errors.password?.message}
+                          </p>
+                        </Error>
+                      }
+                    </div>
+                    <div className="form-row">
+                      <div className="form-input">
+                        <label>Confirmar <span>Contraseña</span></label>
+                        <input
+                          required
+                          type={confirmPassword ? "text" : "password"}
+                          placeholder="Contraseña"
+                          className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                          {...register("confirmPassword")} />
+                        <div className="eye"
+                          onClick={toggleConfirmPassword}
+                        >{confirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                      </div>
+                      {
+                        errors.confirmPassword &&
+                        <Error>
+                          <p>
+                            {errors.confirmPassword?.message}
+                          </p>
+                        </Error>
+                      }
+                    </div>
+                  </div>
+              }
+              {
+                !authLoader
+                  ?
+                  <PurpleButton2 type='submit'>
+                    Ingresar
+                  </PurpleButton2>
+                  :
+                  <LoaderImage>
+                    <LoaderContain />
+                  </LoaderImage>
+              }
+
+              <div className="social-media-container">
+                <div className="info">
+                  <p style={{ textAlign: "end" }}>O inicia sesión usando <br />
+                    tu cuenta de <span>Google</span> <br />
+                    o de <span>Facebook</span>
+                  </p>
+                </div>
+                <div className="socials">
+                  <img src="../images/googleLogin.png" onClick={() => {
+                    googleLogin();
+                  }} alt="" />
+                  <img src="../images/facebookLogin.png" onClick={() => {
+                    loginWithFacebook();
+                  }} alt="" />
+                </div>
+                <p className="terms">Al iniciar sesión, aceptas los <span>términos, <br />
+                  condiciones y políticas de Gonvar</span></p>
+              </div>
+            </form>
+            <div className="imgResp">
+              <div className="rightArm">
+                <div className="circle" />
+                <img className="imgRight" src="../images/unas_lila.png" alt="" />
+              </div>
+              <img className="imgLeft" src="../images/mano1.png" alt="" />
+            </div>
+          </div>
         </LoginBackground >
 
       ) : (
@@ -619,6 +605,7 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
+      <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
   )

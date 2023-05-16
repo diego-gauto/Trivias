@@ -26,47 +26,29 @@ export const ForgotContain = styled.div`
 export const Title = styled.div`
   font-family: Montserrat;
   color: #fff;
-  font-style: normal;
-  font-size: 36px;
+  font-size: 28px;
+  font-weight: 700;
   text-align: center;
-  font-family: Montserrat;
-  @media (max-width: 670px) {
-    font-size: 25px;
-    margin-top: 5%;
-  }
 `;
 export const TextContain = styled.div`
   display: flex;
-  //padding-inline: 40px;
-  padding: 40px;
-  justify-content: center;
+  padding-block: 20px;
   text-align: center;
   color: #fff;
-  @media (max-width: 670px) {
-    padding: 25px;
-  }
 `;
 export const EmailContain = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-inline: 70px;
   width: 100%;
-  @media (max-width: 670px) {
-    width: 100%;
-    padding-inline: 25px;
-  }
+  padding-top: 10px;
 `;
 export const Text2 = styled.label`
-  font-size: 14px;
-  color: #fff;
-  opacity: 0.8;
-  @media (max-width: 670px) {
-    font-size: 14px;
-  }
+  font-size: 18px;
+  color: #3f1168;
+  font-weight: 700;
 `;
 export const MessageContainer = styled.label`
-  display: flex;
+  display: flex !important;
   font-family: Montserrat;
   height: 20px;
   font-size: 13px;
@@ -78,28 +60,13 @@ export const MessageContainer = styled.label`
   }
 `;
 export const TextInput = styled.input`
-  color: #fff;
-  outline: none;
-  opacity: 0.8;
-  border: 1px solid white;
-  width: 100%;
-  height: 40px;
-  background: transparent;
-  box-shadow: 0px 4px 20px -1px rgb(0 0 0 / 25%);
+  background: #e7c9eb;
+  border: 1px solid #942ced;
   border-radius: 20px;
-  padding: 0 0 0 20px;
-  font-size: 14px;
-  ::placeholder {
-    color: #adadac;
-  }
-  :focus {
-    background: transparent;
-    box-shadow: 0px 0px 10px 2px #6717cd;
-    border: 2px solid white;
-  }
-  @media (max-width: 670px) {
-    font-size: 12px;
-  }
+  color: #3f1168;
+  padding-left: 25px;
+  font-weight: bold;
+  line-height: 10px;
 `;
 export const PurpleButton2 = styled.button`
   background-color: #6717cd;
@@ -142,11 +109,15 @@ export const PurpleButtonLoader = styled.div`
 `;
 export const ButtonContain = styled.div`
   display: flex;
-  //margin-top: 25px;
-  justify-content: center;
-  width: 100%;
-  @media (max-width: 670px) {
-    padding: 0px;
+  button {
+    margin: auto;
+    background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 25px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 700;
   }
 `;
 export const CloseButton = styled.button`
