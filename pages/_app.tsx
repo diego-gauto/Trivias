@@ -35,25 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     `
           }}
         />
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></Script>
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `  window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-8N2X594YBK');`
-          }}>
-        </Script>
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-M4DJNFW');`
-          }}
-        >
-        </Script>
+
       </Head>
       <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
         <FacebookProvider appId="3010100615906804">
