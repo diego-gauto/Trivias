@@ -20,16 +20,16 @@ class MyDocument extends Document {
               src="https://www.facebook.com/tr?id=5754458981344109&ev=PageView&noscript=1"
             />
           </noscript>
-          <Script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></Script>
-          <Script
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></script>
+          <script
             dangerouslySetInnerHTML={{
               __html: `  window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-8N2X594YBK');`
             }}>
-          </Script>
-          <Script
+          </script>
+          <script
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -38,7 +38,7 @@ class MyDocument extends Document {
         })(window,document,'script','dataLayer','GTM-M4DJNFW');`
             }}
           >
-          </Script>
+          </script>
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4DJNFW"
             height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
         </Head>
