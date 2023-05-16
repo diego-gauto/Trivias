@@ -54,12 +54,15 @@ const Certificate = () => {
   }
   const downloadCertificateImage = async () => {
     let DATA: any = document.getElementById('certificate');
-    DATA.style.marginBlockStart = 0;
-    htmlToImage.toPng(DATA)
-      .then(function (dataUrl) {
-        download(dataUrl, 'Certificado-Gonvar.png');
-        DATA.style.marginBlockStart = "4rem";
-      });
+    setTimeout(() => {
+      DATA.style.marginBlockStart = 0;
+      htmlToImage.toPng(DATA)
+        .then(function (dataUrl) {
+          download(dataUrl, 'Certificado-Gonvar.png');
+          DATA.style.marginBlockStart = "4rem";
+        });
+    }, 1000);
+
   }
   const downloadCertificate = () => {
     window.scroll(0, 0);
