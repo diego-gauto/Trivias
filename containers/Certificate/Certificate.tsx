@@ -124,7 +124,7 @@ const Certificate = () => {
           <p className="date">{date}</p>
           <p className="folio">{folio}</p>
           <p className="professor-name" id="name" style={{ left: document.getElementById("name")?.clientWidth! > 168 ? "26%" : "32%" }}>{professor}</p>
-          <img id="img" src={image} style={{ height: "80px", width: "80px", position: "absolute", top: "470px", left: "50px" }} alt="" />
+          <img id="img" src={image} style={{ height: "120px", width: "120px", position: "absolute", top: "455px", left: "38px" }} alt="" />
           <img src={aritaSignature} className="main-signature" />
           <img src={profSignature} className="professor-signature" />
         </div>
