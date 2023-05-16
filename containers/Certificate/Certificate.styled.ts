@@ -7,9 +7,17 @@ export const MainContainer = styled.div<{ color: any }>`
   .button-contain {
     display: flex;
     gap: 20px;
+    margin: 40px auto;
     .icon {
       font-size: 30px;
       color: #1877f2;
+    }
+    select {
+      padding-block: 5px;
+      padding-inline: 20px;
+      border-radius: 100px;
+      border: 1px solid #6717cd;
+      height: fit-content;
     }
   }
   button {
@@ -17,7 +25,6 @@ export const MainContainer = styled.div<{ color: any }>`
     color: white;
     border-radius: 20px;
     width: 200px;
-    margin: 40px auto;
     font-size: 24px;
     background: #6610f2;
   }

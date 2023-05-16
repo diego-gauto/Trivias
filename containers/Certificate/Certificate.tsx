@@ -6,9 +6,11 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import QRCode from 'qrcode'
 import { getUserCertificateApi } from "../../components/api/lessons";
+import * as htmlToImage from 'html-to-image';
 import { blob } from "stream/consumers";
 import { FacebookShareButton } from "react-share";
 import { BsFacebook } from "react-icons/bs";
+import download from 'downloadjs';
 
 const Certificate = () => {
   const router = useRouter()
@@ -16,6 +18,7 @@ const Certificate = () => {
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
+  const [downloadType, setDownloadType] = useState("pdf");
   const [link, setLink] = useState('');
   const [profSignature, setProfSignature] = useState<any>()
   let shareCertificate = document.getElementById('my_mm');
@@ -49,7 +52,16 @@ const Certificate = () => {
       setDate(`${day} de ${month} de ${year}`);
     })
   }
-  const downloadCertficate = () => {
+  const downloadCertificateImage = async () => {
+    let DATA: any = document.getElementById('certificate');
+    DATA.style.marginBlockStart = 0;
+    htmlToImage.toPng(DATA)
+      .then(function (dataUrl) {
+        download(dataUrl, 'Certificado-Gonvar.png');
+        DATA.style.marginBlockStart = "4rem";
+      });
+  }
+  const downloadCertificate = () => {
     window.scroll(0, 0);
     let DATA: any = document.getElementById('certificate');
     DATA.classList.add('print');
@@ -125,7 +137,16 @@ const Certificate = () => {
         >
           <BsFacebook className="icon" />
         </FacebookShareButton> */}
-        <button onClick={downloadCertficate}>Descargar</button>
+        <select defaultValue={"Seleccione el fomrato a descargar"} onChange={(e) => setDownloadType(e.target.value)}>
+          <option value="pdf">
+            PDF
+          </option>
+          <option value="png">
+            PNG
+          </option>
+        </select>
+        <button onClick={downloadType === "pdf" ? downloadCertificate : downloadCertificateImage}>Descargar</button>
+
       </div>
     </MainContainer>
   )
