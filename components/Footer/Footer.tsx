@@ -2,29 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import ModalFinish from "../../containers/Profile/User/Modal3/ModalFinish";
 import { db, functions } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import {
-  BottomContainer,
-  BottomText,
-  Column,
   FooterContainer,
-  FooterIcons,
-  FooterResponsive,
-  FooterText,
-  FBIcon,
-  IGIcon,
-  LoaderContain,
-  Logo2,
-  RespContainer,
-  RespContainer2,
-  SocialContainer,
-  TextFinish,
-  WAIcon,
 } from "./Footer.styled";
 import { FooterContainerMobile } from "./FooterMobile.styled";
 
@@ -89,16 +73,9 @@ const Footer = () => {
       })
     }
   }
-  {/* <BottomContainer>
-        <BottomText>
-          Gonvar Nails Academy 2022
-        </BottomText>
-        <BottomText>
-          Gonvar©️ | Todos los derechos reservados
-        </BottomText>
-      </BottomContainer> */}
 
   let { pathname } = useRouter();
+
   return (
     <>
       <FooterContainer>
@@ -108,7 +85,7 @@ const Footer = () => {
             <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
             <p>Todos los derechos reservados</p>
           </div>
-          <p>Términos y Condiciones de Suscripción Gonvar+</p>
+          {pathname !== "/" && <p>Términos y Condiciones de Suscripción Gonvar+</p>}
         </div>
       </FooterContainer>
       <FooterContainerMobile>
@@ -118,7 +95,7 @@ const Footer = () => {
             <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
             <p>Todos los derechos reservados</p>
           </div>
-          <p>Términos y Condiciones de Suscripción Gonvar+</p>
+          {pathname !== "/" && <p>Términos y Condiciones de Suscripción Gonvar+</p>}
         </div>
       </FooterContainerMobile>
       <ModalFinish show={show} setShow={setShow} user={userData} />
