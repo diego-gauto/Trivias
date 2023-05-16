@@ -10,6 +10,17 @@ export const UserContain = styled.div`
 `;
 export const FilterContain = styled.div`
   display: flex;
+  button {
+    border: none;
+    margin-right: 20px;
+    color: #fff;
+    background-color: #6717cd;
+    border-radius: 100px;
+    padding-inline: 20px;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
 export const Select = styled.div`

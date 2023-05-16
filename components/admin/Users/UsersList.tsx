@@ -19,6 +19,7 @@ import { getCoursesApi } from "../../api/lessons";
 import { getLessonFromUserApi, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import UserFilters from "./UserFilters/UserFilters";
 
 export interface SelectedUser {
   id?: string;
@@ -71,6 +72,7 @@ const UsersList = () => {
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [maxPages, setMaxPages] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
   const [loadCard, setLoadCard] = useState(false);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
@@ -248,6 +250,9 @@ const UsersList = () => {
               </DownloadUserData>
             </CsvDownloader>}
             <FilterContain>
+              <button onClick={() => setShowFilters(!showFilters)}>
+                Filtros
+              </button>
               <Select>
                 <select defaultValue={filterValue} onChange={(e: any) => { filter(e.target.value) }}>
                   <option value={"all"}>Todos</option>
@@ -323,6 +328,7 @@ const UsersList = () => {
           <UserCardData user={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
         }
       </UserContain>
+      <UserFilters showFilters={showFilters} />
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
     </AdminContain >
   )
