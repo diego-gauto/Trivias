@@ -94,7 +94,7 @@ const UsersList = () => {
     })
     setIsVisible(true);
   };
-  const filterUsersByValue = (value: string): void => {
+  const filterUsersByValue = (value: string): any => {
     let tempAllUsers = allUsers;
     let query = value.toLocaleLowerCase();
     const filteredUsers = tempAllUsers.filter((item) => {
@@ -152,6 +152,7 @@ const UsersList = () => {
           tempCourses.push(element)
         }
       });
+      setAllCourses(tempCourses);
       setCourses(tempCourses)
     })
   }
@@ -222,7 +223,6 @@ const UsersList = () => {
   const handleClick = () => {
     getUsers();
   }
-  console.log(pageIndex)
 
   if (!loader) {
     return (
@@ -332,6 +332,7 @@ const UsersList = () => {
       </UserContain>
       <UserFilters
         showFilters={showFilters}
+        setShowFilters={setShowFilters}
         pagePerUsers={pagePerUsers}
         allUsers={allUsers}
         allCourses={allCourses}
