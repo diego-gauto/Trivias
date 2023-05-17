@@ -65,6 +65,7 @@ const UsersList = () => {
   const [users, setUsers] = useState<Array<any>>([]);
   const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
+  const [allCourses, setAllCourses] = useState<any>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
   const [show, setShow] = useState<boolean>(false);
   const [user, setUser] = useState<any>([]);
@@ -138,6 +139,7 @@ const UsersList = () => {
   const getCoures = () => {
     let tempCourses: Array<any> = [];
     getCoursesApi().then((res) => {
+      setAllCourses(res);
       res.forEach((element: any) => {
         if (element.type == 'Producto') {
           let counter: number = 0;
@@ -328,7 +330,12 @@ const UsersList = () => {
           <UserCardData user={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
         }
       </UserContain>
-      <UserFilters showFilters={showFilters} />
+      <UserFilters
+        showFilters={showFilters}
+        pagePerUsers={pagePerUsers}
+        allUsers={allUsers}
+        allCourses={allCourses}
+      />
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
     </AdminContain >
   )
