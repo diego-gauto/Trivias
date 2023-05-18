@@ -9,6 +9,9 @@ export const BlogContainer = styled.div`
   width: 100%;
   padding: 40px;
   gap: 30px;
+  @media (max-width: 750px) {
+    padding: 20px;
+  }
   .title-contain {
     display: flex;
     justify-content: space-between;
@@ -39,6 +42,9 @@ export const BlogContainer = styled.div`
     gap: 40px;
     margin-bottom: 50px;
     grid-template-columns: repeat(2, 300px);
+    @media (max-width: 750px) {
+      grid-template-columns: repeat(auto-fill, 300px);
+    }
   }
 `;
 export const BlogCard = styled.div`

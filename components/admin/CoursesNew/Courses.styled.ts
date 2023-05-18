@@ -19,6 +19,12 @@ export const CourseContainer = styled.div`
       gap: 20px;
       width: 100%;
       justify-content: flex-start;
+      @media (max-width: 900px) {
+        flex-direction: column;
+        > * {
+          width: 100% !important;
+        }
+      }
       .input-contain {
         display: flex;
         width: 32%;
@@ -105,6 +111,12 @@ export const CourseContainer = styled.div`
         justify-content: space-between;
         width: 100%;
         gap: 20px;
+        @media (max-width: 700px) {
+          flex-direction: column;
+          > * {
+            width: 100% !important;
+          }
+        }
         .button-data {
           display: flex;
           flex-direction: column;

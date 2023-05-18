@@ -7,6 +7,10 @@ export const UserContain = styled.div`
   height: auto;
   gap: 20px;
   position: relative;
+  overflow: auto;
+  @media (max-width: 1000px) {
+    padding: 20px;
+  }
 `;
 export const FilterContain = styled.div`
   display: flex;

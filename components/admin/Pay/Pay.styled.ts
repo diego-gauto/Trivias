@@ -4,10 +4,12 @@ export const PayContain = styled.div`
   display: flex;
   width: 100%;
   padding: 40px;
+  overflow: auto;
 `;
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  min-width: 1000px;
   height: fit-content;
   border-radius: 10px;
   flex-direction: column;

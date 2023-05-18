@@ -65,6 +65,7 @@ const UsersList = () => {
   const [users, setUsers] = useState<Array<any>>([]);
   const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
+  const [allCourses, setAllCourses] = useState<any>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
   const [show, setShow] = useState<boolean>(false);
   const [user, setUser] = useState<any>([]);
@@ -76,6 +77,7 @@ const UsersList = () => {
   const [loadCard, setLoadCard] = useState(false);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
+
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -93,7 +95,7 @@ const UsersList = () => {
     })
     setIsVisible(true);
   };
-  const filterUsersByValue = (value: string): void => {
+  const filterUsersByValue = (value: string): any => {
     let tempAllUsers = allUsers;
     let query = value.toLocaleLowerCase();
     const filteredUsers = tempAllUsers.filter((item) => {
@@ -138,6 +140,7 @@ const UsersList = () => {
   const getCoures = () => {
     let tempCourses: Array<any> = [];
     getCoursesApi().then((res) => {
+      setAllCourses(res);
       res.forEach((element: any) => {
         if (element.type == 'Producto') {
           let counter: number = 0;
@@ -150,6 +153,7 @@ const UsersList = () => {
           tempCourses.push(element)
         }
       });
+      setAllCourses(tempCourses);
       setCourses(tempCourses)
     })
   }
@@ -220,7 +224,6 @@ const UsersList = () => {
   const handleClick = () => {
     getUsers();
   }
-  console.log(pageIndex)
 
   if (!loader) {
     return (
@@ -237,7 +240,7 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {(user.role === 'admin' && user.roles[4].report === 0) && <CsvDownloader
+            {((user.role === 'admin' && user.roles[4].report === 0) || user.role === "superAdmin") && <CsvDownloader
               filename="usersData"
               extension=".csv"
               separator=","
@@ -249,6 +252,7 @@ const UsersList = () => {
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
             </CsvDownloader>}
+            {user.role}
             <FilterContain>
               <button onClick={() => setShowFilters(!showFilters)}>
                 Filtros
@@ -328,7 +332,13 @@ const UsersList = () => {
           <UserCardData user={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
         }
       </UserContain>
-      <UserFilters showFilters={showFilters} />
+      <UserFilters
+        showFilters={showFilters}
+        setShowFilters={setShowFilters}
+        pagePerUsers={pagePerUsers}
+        allUsers={allUsers}
+        allCourses={allCourses}
+      />
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
     </AdminContain >
   )

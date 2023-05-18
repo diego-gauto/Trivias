@@ -8,6 +8,7 @@ export const GeneralContain = styled.div`
   padding-top: 20px;
   gap: 40px;
   background-color: #f3f3f5;
+  overflow: auto;
 `;
 export const TitleBox = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ export const Container = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
+  min-width: 700px;
 `;
 export const BackGround = styled.div`
   display: flex;

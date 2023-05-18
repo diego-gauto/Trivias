@@ -1,12 +1,30 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ show: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: #26264a;
-  gap: 20px;
   padding: 20px;
   min-height: 100vh;
+  transition: 0.5s ease all;
+  @media (max-width: 1300px) {
+    min-height: auto;
+    position: absolute;
+    z-index: 10;
+    left: -270px;
+    transition: 0.5s ease all;
+    ${(props) =>
+      props.show &&
+      css`
+        left: 0;
+      `}
+    .close-admin-menu {
+      color: #fff;
+      cursor: pointer;
+      font-size: 24px;
+      margin-left: auto;
+    }
+  }
   .tab {
     ul {
       li {
@@ -50,6 +68,12 @@ export const AdminContain = styled.div`
     padding-top: 40px;
     padding-inline: 20px;
     align-items: center;
+    @media (max-width: 700px) {
+      flex-direction: column;
+      select {
+        width: 100%;
+      }
+    }
     .main-title {
       display: flex;
       gap: 10px;
@@ -61,6 +85,10 @@ export const AdminContain = styled.div`
       display: flex;
       justify-content: flex-end;
       gap: 10px;
+      @media (max-width: 450px) {
+        flex-direction: column;
+        width: 80%;
+      }
       .delete-btn {
         &:hover {
           opacity: 0.8;

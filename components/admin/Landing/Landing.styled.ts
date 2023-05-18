@@ -5,9 +5,11 @@ export const GeneralContain = styled.div`
   width: 100%;
   flex-direction: column;
   justify-content: start;
-  //padding-top: 20px;
   gap: 20px;
   background-color: #f3f3f5;
+  @media (max-width: 1100px) {
+    padding: 10px;
+  }
 `;
 export const AllEditInputs = styled.div`
   display: flex;
@@ -19,13 +21,16 @@ export const ColumnsContainer = styled.div`
   gap: 30px;
   justify-content: center;
   margin-bottom: 30px;
-}
+  @media (max-width: 1100px) {
+    flex-wrap: wrap;
+  }
 `;
 export const ColumnsContainer2 = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  width: 380px;
+  max-width: 380px;
+  width: 100%;
   .content {
     display: flex;
     flex-direction: column;
@@ -35,6 +40,9 @@ export const ColumnsContainer2 = styled.div`
     background: #ffffff;
     padding: 20px;
     width: auto;
+    @media (max-width: 500px) {
+      padding: 10px;
+    }
   }
 `;
 export const EditButtons = styled.div`
@@ -106,6 +114,9 @@ export const Inputs = styled.div`
 `;
 export const ProfileData = styled.div`
   padding: 20px;
+  @media (max-width: 1100px) {
+    padding-inline: 0;
+  }
 `;
 export const SaveButton = styled.button`
   padding-block: 15px;
@@ -172,6 +183,7 @@ export const OptionsContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 `;
 export const HomePageContain = styled.div`
   display: flex;
@@ -190,6 +202,10 @@ export const OptionBtn = styled.div`
   text-align: center;
   font-family: "Nunito", sans-serif;
   font-size: 24px;
+  @media (max-width: 1100px) {
+    max-width: 380px;
+    width: 100% !important;
+  }
   &:hover {
     background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
     transform: scale(1.03);

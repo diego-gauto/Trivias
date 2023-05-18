@@ -7,6 +7,9 @@ export const RewardContain = styled.div`
   position: relative;
   padding: 20px;
   gap: 20px;
+  @media (max-width: 1000px) {
+    overflow: auto;
+  }
   .title {
     font-size: 24px;
     font-weight: 600;
@@ -39,6 +42,9 @@ export const RewardContain = styled.div`
     flex-direction: column;
     box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
     border-radius: 10px;
+    @media (max-width: 1000px) {
+      min-width: 1000px;
+    }
     .row-titles {
       display: flex;
       background: #6717cd;

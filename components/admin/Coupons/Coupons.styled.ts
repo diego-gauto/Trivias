@@ -5,6 +5,9 @@ export const CouponContain = styled.div`
   width: 100%;
   padding: 20px;
   gap: 20px;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -16,10 +19,14 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 20px;
   height: fit-content;
+  @media (max-width: 1000px) {
+    min-width: auto;
+    padding-inline: 20px;
+  }
 `;
 export const Title = styled.div`
   font-size: 24px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const InputContain = styled.div`
@@ -29,19 +36,19 @@ export const InputContain = styled.div`
 `;
 export const Label = styled.label`
   font-size: 14px;
-  color: #6717CD;
-  font-family: 'Montserrat',sans-serif;
+  color: #6717cd;
+  font-family: "Montserrat", sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
-  border:1px solid #6717CD;
-  border-radius:20px;
+  border: 1px solid #6717cd;
+  border-radius: 20px;
   outline: none;
-  :focus{
-    border: 2px solid #8E2DE2;
+  :focus {
+    border: 2px solid #8e2de2;
   }
 `;
 export const ButtonContain = styled.div`
@@ -50,17 +57,17 @@ export const ButtonContain = styled.div`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  font-family:'Montserrat',sans-serif;
-  background: #6717CD;
+  font-family: "Montserrat", sans-serif;
+  background: #6717cd;
   color: white;
   padding-block: 10px;
   padding-inline: 30px;
   border-radius: 100px;
   border: none;
-  &:hover{
+  &:hover {
     background-color: #5000b5;
-    transform:scale(1.03);
-    transition:.5s ease all;
+    transform: scale(1.03);
+    transition: 0.5s ease all;
   }
 `;
 export const SelectContain = styled.div`
@@ -73,14 +80,14 @@ export const RadioContain = styled.div`
   align-items: center;
   position: relative;
   gap: 5px;
-  div{
+  div {
     font-size: 14px;
-    font-family:'Montserrat',sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 `;
 export const TagLabel = styled.label`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   display: block;
   position: relative;
@@ -91,21 +98,21 @@ export const TagLabel = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  input{
+  input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     &:hover ~ span {
       background: #ccc;
     }
-    &:checked + span{
-      background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-      &::after{
+    &:checked + span {
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      &::after {
         display: block;
       }
     }
   }
-  span{
+  span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -113,20 +120,20 @@ export const TagLabel = styled.label`
     height: 20px;
     width: 20px;
     background-color: white;
-    border:1px solid black;
+    border: 1px solid black;
     border-radius: 50%;
     &::after {
-    top: 0;
-     left: 0;
-     width: 18px;
-     height: 18px;
-     border-radius: 50%;
-     background: transparent;
-     border: 2px solid white;
-     content: "";
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: transparent;
+      border: 2px solid white;
+      content: "";
       position: absolute;
       display: none;
-   }
+    }
   }
 `;
 export const TableContain = styled.div`
@@ -139,7 +146,7 @@ export const TableContain = styled.div`
 `;
 export const TableTitle = styled.p`
   font-size: 24px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
 `;
 export const TitleContain = styled.div`
@@ -148,29 +155,29 @@ export const TitleContain = styled.div`
 `;
 export const ActiveLbl = styled.label`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   margin: 0;
 `;
 export const ActiveC = styled.div`
-   position: relative;
-   display: flex;
-   width: 16px;
-   height: 16px;
-   border-radius: 50%;
-   border: 1px solid #6717CD;
-   div{
+  position: relative;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #6717cd;
+  div {
     margin: 2px;
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #6717CD;
-   }
+    background-color: #6717cd;
+  }
 `;
 export const UnActiveLbl = styled.label`
   font-size: 14px;
-  font-family:'Montserrat',sans-serif;
-  opactiy: .8;
+  font-family: "Montserrat", sans-serif;
+  opactiy: 0.8;
   margin: 0;
 `;
 export const UnActive = styled.div`

@@ -4,6 +4,7 @@ export const HWContainer = styled.div`
   display: flex;
   width: 100%;
   padding: 40px;
+  overflow: auto;
 `;
 export const TitleContain = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ export const Container = styled.div`
   width: 100%;
   height: fit-content;
   border-radius: 10px;
+  min-width: 1000px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   .pages {
