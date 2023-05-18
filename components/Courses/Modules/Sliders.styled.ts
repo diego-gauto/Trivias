@@ -79,6 +79,7 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
     align-items: center;
     img {
       width: 17px !important;
+      box-shadow: none !important;
     }
     p {
       margin: 0;
@@ -128,8 +129,8 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
   }
 `;
 export const Progress = styled.div`
-  position: relative;
-  bottom: 12px;
+  position: absolute;
+  bottom: 10px;
   display: flex;
   height: 12px;
   background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
@@ -190,6 +191,7 @@ export const ImageContent = styled.div`
   overflow: hidden;
   display: flex;
   position: relative;
+  padding-bottom: 10px;
   .band {
     background-image: url(../images/band.png);
     background-repeat: no-repeat;

@@ -370,12 +370,13 @@ const Sliders = (props: ICourseData) => {
                                   <BsPlayCircle className="play-icon" />
                                 }
                                 <Image src={course.image} fluid style={{ borderRadius: "10px", width: "calc(100% - 20px)" }} />
+                                {
+                                  slideType === "continue-watching" &&
+                                  <Progress style={course.lessonProgress == null ? { 'width': 0 } : { 'width': `calc(${course.lessonProgress}% - 20px)` }} />
+                                }
                               </ImageContent>
                           }
-                          {
-                            slideType === "continue-watching" &&
-                            <Progress style={course.lessonProgress == null ? { 'width': 0 } : { 'width': `calc(${course.lessonProgress}% - 20px)` }} />
-                          }
+
 
                           <p className="title">{course.title}</p>
                           <p className="sub">de <span>{course.professors[0]?.name}</span></p>
