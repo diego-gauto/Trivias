@@ -85,6 +85,10 @@ export const AdminContain = styled.div`
       display: flex;
       justify-content: flex-end;
       gap: 10px;
+      @media (max-width: 450px) {
+        flex-direction: column;
+        width: 80%;
+      }
       .delete-btn {
         &:hover {
           opacity: 0.8;

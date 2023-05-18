@@ -25,6 +25,9 @@ export const SeasonContainer = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @media (max-width: 700px) {
+        flex-direction: column;
+      }
       .title-complete-contain {
         display: flex;
         gap: 10px;
@@ -69,6 +72,9 @@ export const SeasonContainer = styled.div`
       .arrow-button {
         display: flex;
         gap: 5px;
+        @media (max-width: 600px) {
+          flex-wrap: wrap;
+        }
         .button-edit {
           display: flex;
           align-items: center;
@@ -104,6 +110,10 @@ export const SeasonContainer = styled.div`
       .lesson-contain {
         display: flex;
         gap: 30px;
+        @media (max-width: 700px) {
+          flex-direction: column;
+          align-items: center;s
+        }
         p {
           margin: 0;
         }

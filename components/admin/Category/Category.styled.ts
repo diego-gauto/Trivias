@@ -23,6 +23,9 @@ export const FormContain = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
   img {
     border-radius: 50%;
     width: 80px;
@@ -32,6 +35,10 @@ export const FormContain = styled.div`
     display: flex;
     gap: 10px;
     width: 100%;
+    @media (max-width: 820px) {
+      flex-wrap: wrap;
+      width: 100%;
+    }
   }
 `;
 export const InputContain = styled.div`
@@ -41,6 +48,10 @@ export const InputContain = styled.div`
   width: 100%;
   input::file-selector-button {
     display: none;
+  }
+  @media (max-width: 700px) {
+    max-width: 500px;
+    width: 100% !important;
   }
 `;
 export const Label = styled.label`
@@ -84,6 +95,9 @@ export const CatContain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 820px) {
+    flex-direction: column-reverse;
+  }
 `;
 export const CatText = styled.p`
   font-size: 16px;
@@ -92,6 +106,9 @@ export const CatText = styled.p`
   color: #6717cd;
   white-space: nowrap;
   margin: 0;
+  @media (max-width: 600px) {
+    white-space: initial;
+  }
 `;
 export const CatData = styled.div`
   display: flex;
@@ -116,4 +133,7 @@ export const CloseIcon = styled.i`
 export const EditCat = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 820px) {
+    width: 100%;
+  }
 `;

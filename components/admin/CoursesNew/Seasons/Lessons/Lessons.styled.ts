@@ -22,6 +22,12 @@ export const LessonContainer = styled.div`
       gap: 20px;
       width: 100%;
       justify-content: flex-start;
+      @media (max-width: 800px) {
+        flex-direction: column;
+        > * {
+          width: 100% !important;
+        }
+      }
       .toggle {
         cursor: pointer;
         display: flex;
@@ -187,6 +193,9 @@ export const LessonContainer = styled.div`
         .quill-lesson {
           .ql-container {
             height: 115px;
+            @media (max-width: 700px) {
+              height: 140px;
+            }
           }
         }
         .create-button {
