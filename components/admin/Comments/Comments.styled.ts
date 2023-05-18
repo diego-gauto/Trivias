@@ -36,6 +36,9 @@ export const AdminCommentsContainer = styled.div`
     .buttons {
       display: flex;
       gap: 15px;
+      @media (max-width: 500px) {
+        flex-direction: column;
+      }
       .add {
         background: #6717cd;
       }
@@ -81,12 +84,16 @@ export const AdminCommentsContainer = styled.div`
     border-radius: 40px;
     border: 3px solid #6717cd;
     background: #fff;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    @media (max-width: 1000px) {
+      transform: translateX(-50%);
+    }
     svg {
       position: absolute;
       right: 40px;

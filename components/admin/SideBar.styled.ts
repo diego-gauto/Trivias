@@ -68,6 +68,12 @@ export const AdminContain = styled.div`
     padding-top: 40px;
     padding-inline: 20px;
     align-items: center;
+    @media (max-width: 700px) {
+      flex-direction: column;
+      select {
+        width: 100%;
+      }
+    }
     .main-title {
       display: flex;
       gap: 10px;
