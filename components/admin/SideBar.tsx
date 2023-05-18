@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
 import router from "next/router";
-
-import { db } from "../../firebase/firebaseConfig";
 import { useAuth } from "../../hooks/useAuth";
 import { Container, Text } from "./SideBar.styled";
+import { IoClose } from "react-icons/io5";
 
-const SideBar = () => {
+const SideBar = ({ show, onHide }: any) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
   const [isPay, setIsPay] = useState<boolean>();
   const [isCourses, setIsCourses] = useState<boolean>();
@@ -134,7 +132,8 @@ const SideBar = () => {
   }, [userData])
 
   return (
-    <Container>
+    <Container show={show}>
+      <IoClose className="close-admin-menu" onClick={onHide} />
       <div className="tab" style={{ whiteSpace: "pre" }}>
         <Text>Learning Products</Text>
         <ul>

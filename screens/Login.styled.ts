@@ -719,6 +719,16 @@ export const Body = styled.div`
 `;
 export const ChildrenContain = styled.div`
   flex-grow: 1;
+  .admin-menu {
+    border: none;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    background: #6717cd;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
 `;
 const rotate = keyframes`
   from {

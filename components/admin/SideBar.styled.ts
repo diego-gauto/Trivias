@@ -1,12 +1,30 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ show: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: #26264a;
-  gap: 20px;
   padding: 20px;
   min-height: 100vh;
+  transition: 0.5s ease all;
+  @media (max-width: 1300px) {
+    min-height: auto;
+    position: absolute;
+    z-index: 10;
+    left: -270px;
+    transition: 0.5s ease all;
+    ${(props) =>
+      props.show &&
+      css`
+        left: 0;
+      `}
+    .close-admin-menu {
+      color: #fff;
+      cursor: pointer;
+      font-size: 24px;
+      margin-left: auto;
+    }
+  }
   .tab {
     ul {
       li {
