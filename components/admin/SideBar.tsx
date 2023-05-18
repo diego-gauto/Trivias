@@ -140,16 +140,19 @@ const SideBar = ({ show, onHide }: any) => {
           {(isSuperAdmin || isCourses) && <Link href="/admin/Courses">
             <li style={{ color: index == 0 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(0)
+              onHide()
             }}>Courses</li>
           </Link>}
           {(isSuperAdmin || isLanding) && <Link href="/admin/Landing">
             <li style={{ color: index == 1 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(1)
+              onHide()
             }}>Landing</li>
           </Link>}
           {(isSuperAdmin || isRewards) && <Link href="/admin/Rewards">
             <li style={{ color: index == 2 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(2)
+              onHide()
             }}>Rewards</li>
           </Link>}
         </ul>
@@ -158,11 +161,13 @@ const SideBar = ({ show, onHide }: any) => {
           {(isSuperAdmin || isCoupons) && <Link href="/admin/Coupons">
             <li style={{ color: index == 3 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(3)
+              onHide()
             }}>Coupons</li>
           </Link>}
           {(isSuperAdmin || isPay) && <Link href="/admin/Pago">
             <li style={{ color: index == 4 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(4)
+              onHide()
             }}>Orders</li>
           </Link>}
         </ul>
@@ -171,21 +176,25 @@ const SideBar = ({ show, onHide }: any) => {
           {(isSuperAdmin || isUsers) && <Link href="/admin/Users">
             <li style={{ color: index == 5 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(5)
+              onHide()
             }}>Users</li>
           </Link>}
           {(isSuperAdmin || isHomeworks) && <Link href="/admin/HomeWork">
             <li style={{ color: index == 6 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(6)
+              onHide()
             }}>Assigments</li>
           </Link>}
           {(isSuperAdmin || isHomeworks) && <Link href="/admin/Comments">
             <li style={{ color: index == 9 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(9)
+              onHide()
             }}>Comments</li>
           </Link>}
           {(isSuperAdmin || isBlogs) && <Link href="/admin/Blog">
             <li style={{ color: index == 7 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(7)
+              onHide()
             }}>Blogs</li>
           </Link>}
         </ul>
@@ -194,6 +203,7 @@ const SideBar = ({ show, onHide }: any) => {
           <Link href="/admin/Sections">
             <li style={{ color: index == 8 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(8)
+              onHide()
             }}>Team Members</li>
           </Link>
         </ul>}
