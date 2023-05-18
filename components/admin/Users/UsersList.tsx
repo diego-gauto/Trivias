@@ -77,6 +77,7 @@ const UsersList = () => {
   const [loadCard, setLoadCard] = useState(false);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
+
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -239,7 +240,7 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {(user.role === 'admin' && user.roles[4].report === 0) && <CsvDownloader
+            {((user.role === 'admin' && user.roles[4].report === 0) || user.role === "superAdmin") && <CsvDownloader
               filename="usersData"
               extension=".csv"
               separator=","
@@ -251,6 +252,7 @@ const UsersList = () => {
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
             </CsvDownloader>}
+            {user.role}
             <FilterContain>
               <button onClick={() => setShowFilters(!showFilters)}>
                 Filtros

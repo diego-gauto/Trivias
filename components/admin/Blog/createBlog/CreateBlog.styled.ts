@@ -21,6 +21,7 @@ export const BlogBackground = styled.div`
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      flex-wrap: wrap;
       .title-container {
         display: flex;
         gap: 5px;
@@ -41,6 +42,7 @@ export const BlogBackground = styled.div`
     .blog-buttons {
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
     .add-theme {
       border: 1px solid #6717cd;
@@ -94,6 +96,9 @@ export const BlogBackground = styled.div`
         justify-content: space-between;
         width: 100%;
         gap: 20px;
+        @media (max-width: 850px) {
+          flex-wrap: wrap;
+        }
       }
       .blog-column {
         display: flex;
@@ -141,6 +146,9 @@ export const BlogInputs = styled.div`
     outline: none;
     :focus {
       border: 2px solid #6717cd;
+    }
+    @media (max-width: 850px) {
+      width: 100% !important;
     }
   }
 `;
