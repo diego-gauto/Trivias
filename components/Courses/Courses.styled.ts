@@ -183,6 +183,7 @@ export const PurpleButton = styled.button`
     font-size: 10px;
   }
   @media (max-width: 1023px) {
+    user-select: none;
     &:hover {
       transform: scale(1);
       transition: 0.5s ease all;
@@ -224,6 +225,7 @@ export const TransparentButton = styled.button`
     font-size: 10px;
   }
   @media (max-width: 1023px) {
+    user-select: none;
     &:hover {
       transform: scale(1);
       transition: 0.5s ease all;
