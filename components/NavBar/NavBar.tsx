@@ -484,8 +484,8 @@ const NavBar = () => {
               </div> */}
               < UserImage onClick={() => { setHamburger(!hamburger) }}>
                 {
-                  userData && userData.photoURL
-                    ? <img src={userData.photoURL} />
+                  userData && userData.photo
+                    ? <img src={userData.photo} />
                     : <img src={DEFAULT_USER_IMG} />
                 }
               </UserImage>

@@ -43,12 +43,11 @@ const Certificate = () => {
         "mayo", "junio", "julio", "agosto",
         "septiembre", "octubre", "noviembre", "diciembre"
       ];
-      let tempDate = new Date(tempCertificate.created_at).getTime();
+      let tempDate = new Date(tempCertificate.created_at).getTime() + 50400000;
       const dateTime = new Date(tempDate);
-      const day = dateTime.getDate() + 1;
+      const day = dateTime.getDate();
       const month = months[dateTime.getMonth()];
       const year = dateTime.getFullYear();
-
       setDate(`${day} de ${month} de ${year}`);
     })
   }
