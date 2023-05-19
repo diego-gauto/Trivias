@@ -466,7 +466,7 @@ export const HamburgerContain = styled.div<{ hamburger: boolean }>`
     props.hamburger &&
     css`
       pointer-events: auto;
-      height: 160px;
+      height: 180px;
       .menu-hamburger {
         transition: 0.5s ease-in-out;
         opacity: 1;
