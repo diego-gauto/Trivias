@@ -176,12 +176,21 @@ export const PurpleButton = styled.button`
     transform: rotate(90deg);
   }
   &:hover {
-    background-color: #5000b5;
     transform: scale(1.03);
     transition: 0.5s ease all;
   }
   @media (max-width: 1204px) {
     font-size: 10px;
+  }
+  @media (max-width: 1023px) {
+    &:hover {
+      transform: scale(1);
+      transition: 0.5s ease all;
+    }
+    &:active{
+      transform scale(1.03);
+      transition: 0.5s ease all;
+    }
   }
   @media (max-width: 650px) {
     font-size: 12px;
@@ -213,6 +222,16 @@ export const TransparentButton = styled.button`
   }
   @media (max-width: 1204px) {
     font-size: 10px;
+  }
+  @media (max-width: 1023px) {
+    &:hover {
+      transform: scale(1);
+      transition: 0.5s ease all;
+    }
+    &:active{
+      transform scale(1.03);
+      transition: 0.5s ease all;
+    }
   }
   @media (max-width: 650px) {
     font-size: 12px;
