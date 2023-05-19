@@ -497,6 +497,15 @@ const NavBar = () => {
                     Mi Perfil
                   </HBList>
                 </Link>
+                {
+                  (loggedIn && isAdmin) &&
+                  <a>
+                    <HBList onClick={sendAdminTo}
+                      style={position == "/admin" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+                      admin
+                    </HBList>
+                  </a>
+                }
                 <Link href="/Preview" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Preview" ? { fontWeight: 600 } : {}}>
                     Cursos
