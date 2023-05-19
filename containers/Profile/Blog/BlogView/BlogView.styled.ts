@@ -84,17 +84,38 @@ export const FirstSection = styled.div`
         position: relative;
         display: flex;
         width: fit-content;
-        .text-display {
+        .copy-link-text {
           position: absolute;
+          white-space: nowrap;
+          font-size: 14px;
+          top: 30px;
+          right: 50%;
+          z-index: 3;
+          display: flex;
+          gap: 3px;
+          align-items: center;
+          transform: translateX(50%);
+          background-color: white;
+          .icon-check {
+            color: green;
+          }
+        }
+        .text-display {
+          transition: 0.1s ease all;
+          position: absolute;
+          font-size: 12px;
           top: 30px;
           white-space: nowrap;
           opacity: 0;
           margin: 0;
           right: 50%;
           transform: translateX(50%);
+          color: #3f1168;
+          font-weight: 600;
         }
         &:hover {
           .text-display {
+            transition: 0.5s ease all;
             opacity: 1;
           }
         }

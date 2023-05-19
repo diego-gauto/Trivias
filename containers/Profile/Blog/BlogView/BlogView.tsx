@@ -1,7 +1,7 @@
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react'
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillCheckCircle, AiFillStar } from 'react-icons/ai';
 // import Share from 'react-native-share';
 import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
@@ -28,6 +28,7 @@ const BlogView = () => {
   const [blogs, setBlogs] = useState<any>();
   const [blog, setBlog] = useState<IBlog>();
   const [topicLength, setTopicLength] = useState(0);
+  const [linkCopied, setLinkCopied] = useState<boolean>(false);
   const [linkToCopy, setLinkToCopy] = useState<string>("");
   const [demoLink, setDemoLink] = useState<any>("");
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -73,8 +74,8 @@ const BlogView = () => {
   //   });
   // }
   const handleShareToInstagram = () => {
-    const url_forinstagram = 'https://www.instagram.com/share?url=' + encodeURIComponent(url);
-    window.open(url_forinstagram, '_blank');
+    // const url_forinstagram = 'https://www.instagram.com/share?url=' + encodeURIComponent(url);
+    // window.open(url_forinstagram, '_blank');
   };
   const fetchDB_data = async () => {
     try {
@@ -205,6 +206,12 @@ const BlogView = () => {
 
     })
   }
+  const showLinkCopyMessage = () => {
+    setLinkCopied(true);
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, 1500);
+  }
   useEffect(() => {
     fetchDB_data();
     getBlog()
@@ -251,20 +258,28 @@ const BlogView = () => {
                     <BsFacebook className="icon" />
                   </FacebookShareButton>
                   <p className='text-display'>
-                    Facebook
+                    Compartir en Facebook
                   </p>
                 </div>
                 <div className='content'>
                   <BsInstagram className='icon' onClick={handleShareToInstagram} />
                   <p className='text-display'>
-                    Instagram
+                    Compartir en Instagram
                   </p>
                 </div>
                 <div className='content'>
-                  <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy) }} />
+                  <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy); showLinkCopyMessage() }} />
                   <p className='text-display'>
                     Copiar Link
                   </p>
+                  {
+                    linkCopied &&
+                    <div className='copy-link-text'>
+                      <AiFillCheckCircle className='icon-check' />
+                      Link Copiado
+                    </div>
+                  }
+
                 </div>
                 {/* <TwitterShareButton
                   url={url}
