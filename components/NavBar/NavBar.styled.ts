@@ -448,7 +448,7 @@ export const NavResponsive = styled.div`
     opacity: 0;
   }
 `;
-export const HamburgerContain = styled.div<{ hamburger: boolean }>`
+export const HamburgerContain = styled.div<{ hamburger: boolean; admin: any }>`
   background-color: #d244d1;
   transition: 0.4s ease-in-out;
   position: absolute;
@@ -464,9 +464,14 @@ export const HamburgerContain = styled.div<{ hamburger: boolean }>`
   }
   ${(props) =>
     props.hamburger &&
-    css`
+    css<{ admin: any }>`
       pointer-events: auto;
-      height: 180px;
+      height: 160px;
+      ${(props) =>
+        props.admin &&
+        css`
+          height: 180px;
+        `}
       .menu-hamburger {
         transition: 0.5s ease-in-out;
         opacity: 1;

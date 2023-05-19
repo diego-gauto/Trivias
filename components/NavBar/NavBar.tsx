@@ -490,7 +490,7 @@ const NavBar = () => {
                 }
               </UserImage>
             </UserContain>
-            <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger}>
+            <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger} admin={isAdmin}>
               <HBMenu className="menu-hamburger">
                 <Link href="/Profile" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Profile" ? { fontWeight: 600 } : {}}>

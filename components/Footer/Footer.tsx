@@ -85,7 +85,7 @@ const Footer = () => {
             <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
             <p>Todos los derechos reservados</p>
           </div>
-          {pathname !== "/" && <p>Términos y Condiciones de Suscripción Gonvar+</p>}
+          {/* {pathname !== "/" && <p>Términos y Condiciones de Suscripción Gonvar+</p>} */}
         </div>
       </FooterContainer>
       <FooterContainerMobile>
@@ -95,7 +95,7 @@ const Footer = () => {
             <p>Copyright © Gonvar Technologies SAPI de CV <span className="middle">2022</span></p>
             <p>Todos los derechos reservados</p>
           </div>
-          {pathname !== "/" && <p>Términos y Condiciones de Suscripción Gonvar+</p>}
+          {/* {pathname !== "/" && <p>Términos y Condiciones de Suscripción Gonvar+</p>} */}
         </div>
       </FooterContainerMobile>
       <ModalFinish show={show} setShow={setShow} user={userData} />
