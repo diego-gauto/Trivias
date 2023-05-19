@@ -22,6 +22,7 @@ export const WhiteButtonContainer = styled(Button)`
     &:hover {
       background-color: transparent;
       border-color: #6717cd;
+      color: #6717cd;
     }
     &:active {
       background-color: #6717cd;
