@@ -17,7 +17,7 @@ const Certificate = () => {
   const { name, lastName, title, professor, id, color, courseId, teacherSignature }: any = router.query;
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<any>("");
   const [downloadType, setDownloadType] = useState("pdf");
   const [link, setLink] = useState('');
   const [profSignature, setProfSignature] = useState<any>()
@@ -108,13 +108,17 @@ const Certificate = () => {
   useEffect(() => {
     getUserCertificate();
     toDataUrl()
-    QRCode.toDataURL(window.location.href)
-      .then(url => {
-        setImage(url);
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    let opts: any = {
+      errorCorrectionLevel: 'L',
+      margin: 1,
+      color: {
+        light: "#ffffffff"
+      }
+    }
+    QRCode.toDataURL(window.location.href, opts, function (err, url) {
+      if (err) console.log(err)
+      setImage(url)
+    })
   }, [])
 
   return (
