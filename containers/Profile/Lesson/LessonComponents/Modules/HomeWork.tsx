@@ -108,7 +108,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
     addHomeworkApi(tempHomework).then(() => {
       alert("Tarea enviada")
       setImageModal(false);
-      setImageLoader(false)
       setStatus("pending");
     })
   }
@@ -321,7 +320,7 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
                 {status == "" && <div className='homework' onClick={uploadHwk}>
                   <BsFileArrowUp></BsFileArrowUp>
                   Entregar Tarea
-                  <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} hidden />
+                  <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} onClick={(e: any) => { e.target.value = '' }} hidden />
                 </div>}
                 {status == "pending" && <div className='homework' style={{ cursor: "none" }}>
                   Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
