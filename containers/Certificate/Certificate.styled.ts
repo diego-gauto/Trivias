@@ -140,3 +140,57 @@ export const MainContainer = styled.div<{ color: any }>`
     overflow: auto;
   }
 `;
+export const ModalCertificate = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background-color: #d3d3d3;
+  border-radius: 20px;
+  position: relative;
+  p {
+    margin: 0;
+    font-weight: 600;
+    color: #6717cd;
+    @media (max-width: 450px) {
+      font-size: 14px;
+    }
+  }
+  .close-icon {
+    position: absolute;
+    top: 15px;
+    font-size: 20px;
+    right: 15px;
+    cursor: pointer;
+    color: #6717cd;
+  }
+  button {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 100px;
+    cursor: pointer;
+    padding-block: 10px;
+    padding-inline: 20px;
+    width: fit-content;
+    border: none;
+    &:hover {
+      opacity: 0.5;
+    }
+    @media (max-width: 1023px) {
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .png {
+    background-color: #d3bdf7;
+  }
+  .jpeg {
+    background-color: #8e2de2;
+  }
+  .pdf {
+    background-color: #6717cd;
+  }
+`;

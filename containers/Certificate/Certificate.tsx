@@ -11,6 +11,7 @@ import { blob } from "stream/consumers";
 import { FacebookShareButton } from "react-share";
 import { BsFacebook } from "react-icons/bs";
 import download from 'downloadjs';
+import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 
 const Certificate = () => {
   const router = useRouter()
@@ -20,6 +21,7 @@ const Certificate = () => {
   const [image, setImage] = useState<any>("");
   const [downloadType, setDownloadType] = useState("pdf");
   const [link, setLink] = useState('');
+  const [show, setShow] = useState<boolean>(false)
   const [profSignature, setProfSignature] = useState<any>()
   let shareCertificate = document.getElementById('my_mm');
   const aritaSignature = "/images/signatures/AritaGonvar.png";
@@ -29,6 +31,9 @@ const Certificate = () => {
       return words[0]
     }
     return name;
+  }
+  const onHideModal = () => {
+    setShow(false)
   }
   const getUserCertificate = () => {
     let ids = {
@@ -51,15 +56,23 @@ const Certificate = () => {
       setDate(`${day} de ${month} de ${year}`);
     })
   }
-  const downloadCertificateImage = async () => {
+  const downloadCertificateImage = async (format: string) => {
     let DATA: any = document.getElementById('certificate');
     setTimeout(() => {
       DATA.style.marginBlockStart = 0;
-      htmlToImage.toPng(DATA)
-        .then(function (dataUrl) {
-          download(dataUrl, 'Certificado-Gonvar.png');
+      if (format === "jpeg") {
+        htmlToImage.toJpeg(DATA).then(function (dataUrl) {
+          download(dataUrl, 'Certificado-Gonvar.jpeg');
           DATA.style.marginBlockStart = "4rem";
         });
+      }
+      if (format === "png") {
+        htmlToImage.toPng(DATA)
+          .then(function (dataUrl) {
+            download(dataUrl, 'Certificado-Gonvar.png');
+            DATA.style.marginBlockStart = "4rem";
+          });
+      }
     }, 1000);
 
   }
@@ -143,16 +156,13 @@ const Certificate = () => {
         >
           <BsFacebook className="icon" />
         </FacebookShareButton> */}
-        <select defaultValue={"Seleccione el fomrato a descargar"} onChange={(e) => setDownloadType(e.target.value)}>
-          <option value="pdf">
-            PDF
-          </option>
-          <option value="png">
-            PNG
-          </option>
-        </select>
-        <button onClick={downloadType === "pdf" ? downloadCertificate : downloadCertificateImage}>Descargar</button>
-
+        <button onClick={() => setShow(true)}>Descargar</button>
+        <ConfirmationModal
+          show={show}
+          onHide={onHideModal}
+          pdfDownload={downloadCertificate}
+          imageDownload={downloadCertificateImage}
+        />
       </div>
     </MainContainer>
   )
