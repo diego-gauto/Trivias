@@ -59,11 +59,9 @@ export interface Users {
 };
 
 const UsersList = () => {
-  const [filterValue, setFilterValue] = useState<number>(0)
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<any>>([]);
   const [users, setUsers] = useState<Array<any>>([]);
-  const [usersFilter, setUsersFilter] = useState<Array<any>>([]);
   const [courses, setCourses] = useState<Array<any>>([]);
   const [allCourses, setAllCourses] = useState<any>([]);
   const [selectedUser, setSelectedUser] = useState<any>({});
@@ -74,6 +72,7 @@ const UsersList = () => {
   const [maxPages, setMaxPages] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [filterValue, setFilterValue] = useState<string>("");
   const [loadCard, setLoadCard] = useState(false);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
@@ -96,6 +95,7 @@ const UsersList = () => {
     setIsVisible(true);
   };
   const filterUsersByValue = (value: string): any => {
+    setFilterValue(value);
     let tempAllUsers = allUsers;
     let query = value.toLocaleLowerCase();
     const filteredUsers = tempAllUsers.filter((item) => {
@@ -107,7 +107,6 @@ const UsersList = () => {
     //   item.email.includes(query) ||
     //   item.score.toString().includes(query) ||
     //   item.created_at.includes(query));
-    // setUsers(filteredUsers);
     pagePerUsers(filteredUsers);
   };
 
@@ -153,13 +152,13 @@ const UsersList = () => {
           tempCourses.push(element)
         }
       });
-      setAllCourses(tempCourses);
       setCourses(tempCourses)
     })
   }
   const pagePerUsers = (users: any) => {
     setPageIndex(0)
     setTotalUsers(users.length);
+
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(users.length / usersPerPage);
     let tempUsers: any = [];
@@ -172,7 +171,6 @@ const UsersList = () => {
       }
     }
     setMaxPages(pages);
-    setUsersFilter(tempUsers);
     setUsers(tempUsers);
     setLoader(true);
   }
@@ -258,7 +256,7 @@ const UsersList = () => {
                 Filtros
               </button>
               <Select>
-                <select defaultValue={filterValue} onChange={(e: any) => { filter(e.target.value) }}>
+                <select defaultValue={"Todos"} onChange={(e: any) => { filter(e.target.value) }}>
                   <option value={"all"}>Todos</option>
                   <option value={"suscription"}>Suscripción</option>
                   <option value={"name"}>Nombre</option>

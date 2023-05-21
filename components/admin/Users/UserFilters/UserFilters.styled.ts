@@ -11,9 +11,15 @@ export const FilterContainer = styled.div<{ filter: boolean }>`
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   opacity: 0;
+  pointer-events: none;
+  @media (max-width: 1023px) {
+    right: 0px;
+    left: 20px;
+  }
   ${(props) =>
     props.filter === true &&
     css`
+      pointer-events: unset;
       transition: 1s ease all;
       width: 300px;
       opacity: 1;
