@@ -73,6 +73,8 @@ const UsersList = () => {
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [filterValue, setFilterValue] = useState<string>("");
+  const [selectFilters, setSelectFilters] = useState<boolean>(false);
+  const [filters, setFilters] = useState<any>([]);
   const [loadCard, setLoadCard] = useState(false);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
@@ -94,6 +96,39 @@ const UsersList = () => {
     })
     setIsVisible(true);
   };
+  const filteredData = async (filters: any, users: any) => {
+    setFilters(filters);
+    filters.map((value: string, index: number) => {
+      if (value === "mensual") {
+        users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
+      }
+      if (value === "active") {
+        users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
+      }
+      if (value === "not-active") {
+        users = users.filter((userData: any) => userData.level === 0 && userData.final_date < today);
+      }
+      if (value === "asc-create") {
+        users = users.sort((a: any, b: any) => { return new Date(b.created_at).getTime() - new Date(a.created_at).getTime(); });
+      }
+      if (value === "desc-create") {
+        users = users.sort((a: any, b: any) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); });
+      }
+      if (value === "first") {
+        users = users.filter((userData: any) => userData.spent <= 149);
+      }
+      if (value === "second") {
+        users = users.filter((userData: any) => userData.spent >= 150 && userData.spent <= 1000);
+      }
+      if (value === "third") {
+        users = users.filter((userData: any) => userData.spent >= 1000 && userData.spent <= 5000);
+      }
+      if (value === "fourth") {
+        users = users.filter((userData: any) => userData.spent >= 5000);
+      }
+    })
+    return users
+  }
   const filterUsersByValue = (value: string): any => {
     setFilterValue(value);
     let tempAllUsers = allUsers;
@@ -101,13 +136,21 @@ const UsersList = () => {
     const filteredUsers = tempAllUsers.filter((item) => {
       return item.name.toLowerCase().includes(query) || item.email.includes(query)
     })
+    if (selectFilters) {
+      filteredData(filters, filteredUsers).then((data: any) => {
+        pagePerUsers(data);
+      })
+    }
+    else {
+      pagePerUsers(filteredUsers);
+    }
     // if (value === "") return setUsers(usersFilter);
     // const filteredUsers = usersFilter.filter((item) =>
     //   item.name.toLowerCase().includes(query) ||
     //   item.email.includes(query) ||
     //   item.score.toString().includes(query) ||
     //   item.created_at.includes(query));
-    pagePerUsers(filteredUsers);
+
   };
 
   const filter = (value: string) => {
@@ -158,7 +201,6 @@ const UsersList = () => {
   const pagePerUsers = (users: any) => {
     setPageIndex(0)
     setTotalUsers(users.length);
-
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(users.length / usersPerPage);
     let tempUsers: any = [];
@@ -336,6 +378,9 @@ const UsersList = () => {
         pagePerUsers={pagePerUsers}
         allUsers={allUsers}
         allCourses={allCourses}
+        filterValue={filterValue}
+        filteredData={filteredData}
+        setSelectFilters={setSelectFilters}
       />
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
     </AdminContain >

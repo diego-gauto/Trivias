@@ -7,52 +7,33 @@ interface IFilters {
   allUsers: any;
   allCourses: any;
   setShowFilters: any;
+  filterValue: string;
+  filteredData: any;
+  setSelectFilters: any;
 }
 
 const UserFilters = (props: IFilters) => {
-  const { showFilters, pagePerUsers, allUsers, allCourses, setShowFilters } = props;
+  const { showFilters, pagePerUsers, allUsers, allCourses, setShowFilters, filterValue, setSelectFilters, filteredData } = props;
   const [allFilters, setAllFilters] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const [arrayFilter, setArrayFilter] = useState([
     'todos', 'todos', 'todos', 'todos', 'todos', 'todos'
   ])
-
-  const startFilters = (filterType: number, value: string) => {
-    let users = allUsers;
-    let sendUser: any = allUsers;
+  const startFilters = async (filterType: number, value: string) => {
+    let users: any = allUsers;
     let filters = arrayFilter;
     filters[filterType] = value;
-    filters.map((value: string, index: number) => {
-      if (value === "mensual") {
-        users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
-      }
-      if (value === "active") {
-        users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
-      }
-      if (value === "not-active") {
-        users = users.filter((userData: any) => userData.level === 0 && userData.final_date < today);
-      }
-      if (value === "asc-create") {
-        users = users.sort((a: any, b: any) => { return new Date(b.created_at).getTime() - new Date(a.created_at).getTime(); });
-      }
-      if (value === "desc-create") {
-        users = users.sort((a: any, b: any) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); });
-      }
-      if (value === "first") {
-        users = users.filter((userData: any) => userData.spent <= 149);
-      }
-      if (value === "second") {
-        users = users.filter((userData: any) => userData.spent >= 150 && userData.spent <= 1000);
-      }
-      if (value === "third") {
-        users = users.filter((userData: any) => userData.spent >= 1000 && userData.spent <= 5000);
-      }
-      if (value === "fourth") {
-        users = users.filter((userData: any) => userData.spent >= 5000);
-      }
+    if (filterValue !== "") {
+      let query = filterValue.toLocaleLowerCase();
+      users = users.filter((item: any) => {
+        return item.name.toLowerCase().includes(query) || item.email.includes(query)
+      })
+    }
+    await filteredData(filters, users).then((data: any) => {
+      setSelectFilters(true);
+      pagePerUsers(data);
+      setArrayFilter(filters)
     })
-    pagePerUsers(users);
-    setArrayFilter(filters)
   }
   return (
     <FilterContainer filter={showFilters}>
