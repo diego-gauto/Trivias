@@ -174,10 +174,7 @@ const BlogView = () => {
   const getBlog = () => {
     let tempTitle: any = router.query.slug;
     setLinkToCopy('gonvar.io/Blogs/' + tempTitle);
-
     let titleSearch: string = tempTitle.replaceAll("-", " ").replaceAll("&#45;", "-");
-    console.log(tempTitle);
-    console.log(titleSearch);
     let tempBlog: any;
     let allBlogs: any;
     getBlogsApi().then((res) => {
@@ -216,9 +213,13 @@ const BlogView = () => {
     }, 1500);
   }
   useEffect(() => {
-    fetchDB_data();
-    getBlog()
-  }, [])
+    console.log('hola')
+    if (router.query.slug) {
+      console.log('entro')
+      fetchDB_data();
+      getBlog()
+    }
+  }, [router.query.slug])
 
   if (!loader) {
     return (
