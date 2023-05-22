@@ -134,7 +134,7 @@ const UsersList = () => {
     let tempAllUsers = allUsers;
     let query = value.toLocaleLowerCase();
     const filteredUsers = tempAllUsers.filter((item) => {
-      return item.name.toLowerCase().includes(query) || item.email.includes(query)
+      return item.name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query)
     })
     if (selectFilters) {
       filteredData(filters, filteredUsers).then((data: any) => {
