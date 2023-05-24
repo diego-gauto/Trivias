@@ -60,7 +60,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Recompensas por desbloquear",
         title: "Recompensa bloqueda",
         scoreText: "hasta llegar a ",
-        bottomText: "Sin Recompensas..."
+        bottomText: "Próximamente podrás desbloquear nuevas recompensas"
       })
     }
     if (type == "claim-months") {
@@ -94,7 +94,7 @@ const RewardSlider = (props: reward_slider) => {
         header: "Beneficios por desbloquear",
         title: "Beneficio bloqueado",
         scoreText: "hasta cumplir ",
-        bottomText: "Sin Beneficios...",
+        bottomText: "Próximamente podrás desbloquear nuevos beneficios ",
       })
     }
     if (type == "claim-certificates") {

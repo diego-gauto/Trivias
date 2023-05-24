@@ -187,15 +187,18 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
         <div className="main-text">
           <p >
             {
-              (reward === 0 || reward === 1) && <>Siguiente<br />recompensa            <br /></>
+              (reward === 0) && <>Siguiente<br />recompensa            <br /></>
+            }
+            {
+              (reward === 1) && <>Siguiente<br />beneficio            <br /></>
             }
             {
               reward === 0 ?
                 <span>{nextLevel_format} puntos</span>
                 :
                 reward === 1 ?
-                  <span>
-                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin recompensa"}
+                  <span className="time-reward">
+                    {nextTimeReward?.month ? (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes") : "Sin beneficio"}
                   </span>
                   : <></>
             }

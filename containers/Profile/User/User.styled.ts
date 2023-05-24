@@ -688,6 +688,9 @@ export const ProfileMainContainer = styled.div<{
     .main-text {
       display: flex;
       align-items: center;
+      .time-reward {
+        color: #1bb87f;
+      }
     }
     .responsive-picture {
       display: none;

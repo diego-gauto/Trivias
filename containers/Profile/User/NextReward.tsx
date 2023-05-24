@@ -178,8 +178,8 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 <p>
                   {
                     points?.blocked.length > 0 ?
-                      <>Siguiente Recompensa <span>{points?.blocked[0].title}</span></> :
-                      <>Sin <span>Recompensa</span></>
+                      <>Siguiente Recompensa <span>{points?.blocked[0].title}</span> a los <span>{points?.blocked[0].points} puntos</span></> :
+                      <>Próximamente podrás desbloquear <span>nuevas recompensas</span></>
                   }
                 </p>
               }
@@ -189,7 +189,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                   {
                     time.blocked.length > 0 ?
                       <>Siguiente Beneficio <span>{time?.blocked[0].title}</span></>
-                      : <>Sin <span>Beneficio</span></>
+                      : <>Próximamente podrás desbloquear <span>nuevos beneficios</span></>
                   }
                 </p>
               }
@@ -199,7 +199,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                   {
                     certificates?.length > 0 ?
                       <> Certificado más próximo<span> {certificates[0]?.name}</span></>
-                      : <>Sin <span>Certificados</span></>
+                      : <>Próximamente podrás desbloquear <span>nuevos certificados</span></>
                   }
                 </p>
               }
