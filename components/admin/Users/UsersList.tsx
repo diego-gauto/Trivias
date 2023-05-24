@@ -126,6 +126,18 @@ const UsersList = () => {
       if (value === "fourth") {
         users = users.filter((userData: any) => userData.spent >= 5000);
       }
+      if (value === "asc-log") {
+        users = users.sort((a: any, b: any) => { return new Date(b.last_sign_in).getTime() - new Date(a.last_sign_in).getTime(); });
+      }
+      if (value === "desc-log") {
+        users = users.sort((a: any, b: any) => { return new Date(a.last_sign_in).getTime() - new Date(b.last_sign_in).getTime(); });
+      }
+      if (value === "stripe") {
+        users = users.filter((userData: any) => userData.method === "stripe");
+      }
+      if (value === "paypal") {
+        users = users.filter((userData: any) => userData.method === "paypal");
+      }
     })
     return users
   }
@@ -246,6 +258,7 @@ const UsersList = () => {
   }
   const getUsers = async (): Promise<void> => {
     getUsersApi().then((res) => {
+      console.log(res.data.users);
       pagePerUsers(res.data.users)
       setAllUsers(res.data.users);
     })

@@ -18,7 +18,7 @@ import Link from "next/link";
 import { SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
 import { useGoogleLogin } from "@react-oauth/google";
-import { facebookUserInfo, googleTokens, loginWithProviderApi, updatePastUser, updateUserPassword } from "../../components/api/auth";
+import { facebookUserInfo, googleTokens, loginWithProviderApi, updateLastSignIn, updatePastUser, updateUserPassword } from "../../components/api/auth";
 import { useLogin, useFacebook } from 'react-facebook';
 
 const formSchema = yup.object().shape({
@@ -140,11 +140,13 @@ const Login = () => {
       if (res[0]) {
         if (res[0].past_user === 'si') {
           setPastUser(res[0]);
+          // updateSignIn(res[0]);
           setPastUserScreen(true);
           setAuthLoader(false);
           return
         }
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
+          updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
           window.location.href = '/Preview';
           redirect()
@@ -175,15 +177,25 @@ const Login = () => {
     let past_user = {
       password: formData.password,
       provider: "web",
-      userId: pastUser.id
+      userId: pastUser.id,
+      id: pastUser.id
     }
+    updateSignIn(past_user);
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
       window.location.href = "/Preview";
       redirect()
     })
   }
-
+  const updateSignIn = async (user: any) => {
+    let userData = {
+      userId: user.id,
+      last_sign_in: new Date(),
+    }
+    await updateLastSignIn(userData).then((res) => {
+      console.log(res)
+    });
+  }
   const [showForgot, setShowForgot] = useState(false);
 
   useEffect(() => {
@@ -218,6 +230,7 @@ const Login = () => {
                 provider: "google",
                 userId: res[0].id
               }
+              updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 window.location.href = "/Preview";
@@ -240,6 +253,8 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
+            console.log(res[0]);
+            updateSignIn(res[0]);
             localStorage.setItem('email', user.email)
             window.location.href = "/Preview"
             redirect()
@@ -284,6 +299,7 @@ const Login = () => {
                 provider: "facebook",
                 userId: res[0].id
               }
+              updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 redirect()
@@ -306,6 +322,7 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
+            updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             redirect()
             window.location.href = "/Preview"

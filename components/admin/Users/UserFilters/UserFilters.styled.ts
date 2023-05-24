@@ -7,7 +7,7 @@ export const FilterContainer = styled.div<{ filter: boolean }>`
   top: 242px;
   right: 40px;
   transition: 1s ease all;
-  z-index: 1;
+  z-index: 10000;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   opacity: 0;

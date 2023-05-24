@@ -17,7 +17,7 @@ const UserFilters = (props: IFilters) => {
   const [allFilters, setAllFilters] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const [arrayFilter, setArrayFilter] = useState([
-    'todos', 'todos', 'todos', 'todos', 'todos', 'todos'
+    'todos', 'todos', 'todos', 'todos', 'todos', 'todos', 'todos', 'todos'
   ])
   const startFilters = async (filterType: number, value: string) => {
     let users: any = allUsers;
@@ -56,6 +56,40 @@ const UserFilters = (props: IFilters) => {
             <option value="not-active">No Activa</option>
           </select>
         </div>
+        <div className='filter-contain'>
+          <p className='title-filter'>Rango de Fecha de creacion del usuario</p>
+          <select defaultValue="todos" onChange={(e) => startFilters(4, e.target.value)}>
+            <option value="todos">Normal</option>
+            <option value="asc-create">Fecha Ascendente</option>
+            <option value="desc-create">Fecha Descendente</option>
+          </select>
+        </div>
+        <div className='filter-contain'>
+          <p className='title-filter'>Cantidad Gastada</p>
+          <select defaultValue="todos" onChange={(e) => startFilters(5, e.target.value)}>
+            <option value="todos">Todos</option>
+            <option value="first">149 - 0</option>
+            <option value="second">1000 - 150</option>
+            <option value="third">5000 - 1000</option>
+            <option value="fourth">Mayor a 5000</option>
+          </select>
+        </div>
+        <div className='filter-contain'>
+          <p className='title-filter'>Ultimo login del usuario</p>
+          <select defaultValue="todos" onChange={(e) => startFilters(6, e.target.value)}>
+            <option value="todos">Normal</option>
+            <option value="asc-log">Fecha Ascendente</option>
+            <option value="desc-log">Fecha Descendente</option>
+          </select>
+        </div>
+        <div className='filter-contain'>
+          <p className='title-filter'>Método de pago</p>
+          <select defaultValue="todos" onChange={(e) => startFilters(7, e.target.value)}>
+            <option value="todos">Todos</option>
+            <option value="stripe">stripe</option>
+            <option value="paypal">paypal</option>
+          </select>
+        </div>
         {/* <div className='filter-contain'>
           <p className='title-filter'>Cursos</p>
           <select defaultValue="todos" onChange={(e) => startFilters(2, e.target.value)}>
@@ -82,23 +116,7 @@ const UserFilters = (props: IFilters) => {
             <option value="desc">Progreso Descendente</option>
           </select>
         </div> */}
-        <div className='filter-contain'>
-          <p className='title-filter'>Rango de Fecha de creacion del usuario</p>
-          <select defaultValue="todos" onChange={(e) => startFilters(4, e.target.value)}>
-            <option value="asc-create">Fecha Ascendente</option>
-            <option value="desc-create">Fecha Descendente</option>
-          </select>
-        </div>
-        <div className='filter-contain'>
-          <p className='title-filter'>Cantidad Gastada</p>
-          <select defaultValue="todos" onChange={(e) => startFilters(5, e.target.value)}>
-            <option value="todos">Todos</option>
-            <option value="first">149 - 0</option>
-            <option value="second">1000 - 150</option>
-            <option value="third">5000 - 1000</option>
-            <option value="fourth">Mayor a 5000</option>
-          </select>
-        </div>
+
         {/* <div className='filter-contain'>
           <p className='title-filter'>
             Por Pais
@@ -107,20 +125,6 @@ const UserFilters = (props: IFilters) => {
             <option value="todos">Todos</option>
             <option value="mexico">Mexico</option>
             <option value="argentina">Argentina</option>
-          </select>
-        </div> */}
-        {/* <div className='filter-contain'>
-          <p className='title-filter'>Ultimo login del usuario</p>
-          <select defaultValue="todos" onChange={(e) => startFilters("last-login", e.target.value)}>
-            <option value="asc">Fecha Ascendente</option>
-            <option value="desc">Fecha Descendente</option>
-          </select>
-        </div> */}
-        {/* <div className='filter-contain'>
-          <p className='title-filter'>Método de pago</p>
-          <select defaultValue="todos">
-            <option value="todos">Todos</option>
-            <option value="dedqw">dedqw</option>
           </select>
         </div> */}
       </div>

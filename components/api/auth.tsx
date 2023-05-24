@@ -101,3 +101,14 @@ export const testApi = async (user: any) => {
       return error
     });
 };
+export const updateLastSignIn = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "users/updateLastSignIn", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
