@@ -21,7 +21,7 @@ export const FilterContainer = styled.div<{ filter: boolean }>`
     css`
       pointer-events: unset;
       transition: 1s ease all;
-      width: 300px;
+      width: 360px;
       opacity: 1;
     `}
   .content {
