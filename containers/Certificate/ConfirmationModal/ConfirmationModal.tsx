@@ -16,9 +16,9 @@ const ConfirmationModal = (props: IConfirmationModal) => {
       <ModalCertificate>
         <AiOutlineClose className='close-icon' onClick={onHide} />
         <p>¿En qué formato lo quieres descargar?</p>
-        <button className='png' onClick={() => imageDownload("png")}> Descargar en PNG</button>
-        <button className='jpeg' onClick={() => imageDownload("jpeg")}> Descargar en JPEG</button>
-        <button className='pdf' onClick={pdfDownload}> Descargar en PDF</button>
+        {/* <button className='png' onClick={() => imageDownload("png")}> Descargar en PNG</button> */}
+        <button className='jpeg' onClick={() => imageDownload("jpeg")}> Descargar como Imagen</button>
+        <button className='pdf' onClick={pdfDownload}> Descargar como PDF</button>
       </ModalCertificate>
     </Modal>
   )
