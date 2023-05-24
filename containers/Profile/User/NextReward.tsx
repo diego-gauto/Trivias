@@ -188,7 +188,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
                 <p>
                   {
                     time.blocked.length > 0 ?
-                      <>Siguiente Beneficio <span>{time?.blocked[0].title}</span></>
+                      <>Siguiente Beneficio <span>{time?.blocked[0].title}</span> a los <span>{time?.blocked[0].month} meses</span></>
                       : <>Próximamente podrás desbloquear <span>nuevos beneficios</span></>
                   }
                 </p>

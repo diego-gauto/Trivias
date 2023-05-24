@@ -76,19 +76,6 @@ const BlogView = () => {
   const handleShareToInstagram = () => {
     // const url_forinstagram = 'https://www.instagram.com/share?url=' + encodeURIComponent(url);
     // window.open(url_forinstagram, '_blank');
-    let fields = "quota_usage,rate_limit_settings";
-    let since = "1609969714";
-    // let access = "3010100615906804";
-    return axios
-      .get(`https://graph.facebook.com/oauth/access_token?client_id=${3010100615906804}&client_secret=${`93751b6a3c36c698587147cc4b9c531c`}&grant_type=client_credentials`)
-      .then((res) => {
-        console.log(res)
-        return res
-      })
-      .catch((error) => {
-        console.log(error);
-        return error
-      });
     // return axios
     //   .get("https://graph.facebook.com/v9.0/{ig-user-id}/content_publishing_limit?fields=" + fields + "&since=" + since + "&access_token=" + access)
     //   .then((res) => {
@@ -288,12 +275,12 @@ const BlogView = () => {
                     Compartir en Facebook
                   </p>
                 </div>
-                <div className='content'>
+                {/* <div className='content'>
                   <BsInstagram className='icon' onClick={handleShareToInstagram} />
                   <p className='text-display'>
                     Compartir en Instagram
                   </p>
-                </div>
+                </div> */}
                 <div className='content'>
                   <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy); showLinkCopyMessage() }} />
                   <p className='text-display'>
