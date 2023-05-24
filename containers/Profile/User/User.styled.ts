@@ -153,10 +153,10 @@ export const ThirdBox = styled.div`
       color: #fff;
     }
     .left {
-      background: #942ced;
+      background: #3f1168;
     }
     .right {
-      background: #3f1168;
+      background: #942ced;
     }
   }
   @media (max-width: 1500px) {
