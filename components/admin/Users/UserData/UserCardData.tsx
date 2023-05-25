@@ -175,7 +175,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData, i
               Sin métodos de pago...
             </LastContainer>}
         </PayContain> */}
-          <TransparentButton onClick={() => { setShowAddDays(true); }}>Agregar días de suscripción</TransparentButton>
+          <TransparentButton onClick={() => { setShowAddDays(true); }}>Editar días de suscripción</TransparentButton>
           {/* <TransparentButton onClick={() => { deleteUser() }}>Eliminar usuario</TransparentButton> */}
         </>
         <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} openUserCardData={openUserCardData} />
