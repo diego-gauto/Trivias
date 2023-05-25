@@ -25,36 +25,24 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       }
       addUserToLessonApi(tempLesson).then(() => {
         handleComplete();
-        if (course.sequential === 0) {
-          router.push({
-            pathname: 'Lesson',
-            query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
-          })
-        }
-        else {
-          if (data.quiz === 0 && data.homework === 0) {
-            router.push({
-              pathname: 'Lesson',
-              query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
-            })
-          }
-        }
-      })
-    }
-    else {
-      if (course.sequential === 0) {
-        router.push({
-          pathname: 'Lesson',
-          query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
-        })
-      }
-      else {
         if (data.quiz === 0 && data.homework === 0) {
           router.push({
             pathname: 'Lesson',
             query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
           })
+        } else {
+          alert("Esta lección cuenta con tarea o quiz!");
         }
+      })
+    }
+    else {
+      if (data.quiz === 0 && data.homework === 0) {
+        router.push({
+          pathname: 'Lesson',
+          query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+        })
+      } else {
+        alert("Esta lección cuenta con tarea o quiz!");
       }
     }
   }
