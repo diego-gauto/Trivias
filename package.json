@@ -34,6 +34,7 @@
     "react": "17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-bootstrap": "^2.2.0",
+    "react-calendar": "^4.2.1",
     "react-csv-downloader": "^2.8.0",
     "react-device-detect": "^2.2.2",
     "react-doc-viewer": "^0.1.5",

@@ -75,10 +75,12 @@ const UsersList = () => {
   const [filterValue, setFilterValue] = useState<string>("");
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
   const [filters, setFilters] = useState<any>([]);
+  const [dates, setDates] = useState<any>([]);
   const [loadCard, setLoadCard] = useState(false);
+  const [loginDate, setLoginDate] = useState<any>([null, null]);
+  const [createDate, setCreateDate] = useState<any>([null, null]);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
-
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -96,8 +98,15 @@ const UsersList = () => {
     })
     setIsVisible(true);
   };
-  const filteredData = async (filters: any, users: any) => {
+  const updateDate = (date: any) => {
+    setCreateDate(date)
+  }
+  const updateLoginDate = (date: any) => {
+    setLoginDate(date)
+  }
+  const filteredData = async (filters: any, users: any, date: any) => {
     setFilters(filters);
+    setDates(date);
     filters.map((value: string, index: number) => {
       if (value === "mensual") {
         users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
@@ -108,11 +117,14 @@ const UsersList = () => {
       if (value === "not-active") {
         users = users.filter((userData: any) => userData.level === 0 && userData.final_date < today);
       }
-      if (value === "asc-create") {
-        users = users.sort((a: any, b: any) => { return new Date(b.created_at).getTime() - new Date(a.created_at).getTime(); });
-      }
-      if (value === "desc-create") {
-        users = users.sort((a: any, b: any) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); });
+      // if (value === "asc-create") {
+      //   users = users.sort((a: any, b: any) => { return new Date(b.created_at).getTime() - new Date(a.created_at).getTime(); });
+      // }
+      // if (value === "desc-create") {
+      //   users = users.sort((a: any, b: any) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); });
+      // }
+      if (value === "date-create") {
+        users = users.filter((userData: any) => (new Date(userData.created_at).getTime() > date[0][0]) && (new Date(userData.created_at).getTime() < date[0][1]));
       }
       if (value === "first") {
         users = users.filter((userData: any) => userData.spent <= 149);
@@ -126,12 +138,16 @@ const UsersList = () => {
       if (value === "fourth") {
         users = users.filter((userData: any) => userData.spent >= 5000);
       }
-      if (value === "asc-log") {
-        users = users.sort((a: any, b: any) => { return new Date(b.last_sign_in).getTime() - new Date(a.last_sign_in).getTime(); });
+      if (value === "date-login") {
+        console.log(date);
+        users = users.filter((userData: any) => (new Date(userData.last_sign_in).getTime() > date[1][0]) && (new Date(userData.last_sign_in).getTime() < date[1][1]));
       }
-      if (value === "desc-log") {
-        users = users.sort((a: any, b: any) => { return new Date(a.last_sign_in).getTime() - new Date(b.last_sign_in).getTime(); });
-      }
+      // if (value === "asc-log") {
+      //   users = users.sort((a: any, b: any) => { return new Date(b.last_sign_in).getTime() - new Date(a.last_sign_in).getTime(); });
+      // }
+      // if (value === "desc-log") {
+      //   users = users.sort((a: any, b: any) => { return new Date(a.last_sign_in).getTime() - new Date(b.last_sign_in).getTime(); });
+      // }
       if (value === "stripe") {
         users = users.filter((userData: any) => userData.method === "stripe");
       }
@@ -149,7 +165,7 @@ const UsersList = () => {
       return item.name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query)
     })
     if (selectFilters) {
-      filteredData(filters, filteredUsers).then((data: any) => {
+      filteredData(filters, filteredUsers, dates).then((data: any) => {
         pagePerUsers(data);
       })
     }
@@ -190,7 +206,6 @@ const UsersList = () => {
     }
     pagePerUsers(userFilter);
   }
-
   const getCoures = () => {
     let tempCourses: Array<any> = [];
     getCoursesApi().then((res) => {
@@ -399,6 +414,10 @@ const UsersList = () => {
         allCourses={allCourses}
         filterValue={filterValue}
         filteredData={filteredData}
+        loginDate={loginDate}
+        setLoginDate={updateLoginDate}
+        createDate={createDate}
+        setCreateDate={updateDate}
         setSelectFilters={setSelectFilters}
       />
       <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />

@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 
 export const FilterContainer = styled.div<{ filter: boolean }>`
-  position: fixed;
+  position: absolute;
   width: 0;
   background-color: white;
-  top: 242px;
+  top: 170px;
   right: 40px;
   transition: 1s ease all;
   z-index: 10000;
@@ -12,6 +12,18 @@ export const FilterContainer = styled.div<{ filter: boolean }>`
   border-radius: 10px;
   opacity: 0;
   pointer-events: none;
+  max-height: 800px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    background: white;
+    border-radius: 10px;
+    width: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    border-radius: 10px;
+    width: 6px;
+  }
   @media (max-width: 1023px) {
     right: 0px;
     left: 20px;
@@ -52,6 +64,19 @@ export const FilterContainer = styled.div<{ filter: boolean }>`
       .title-filter {
         font-size: 16px;
         color: #6717cd;
+      }
+      .react-calendar__tile {
+        color: #6717cd;
+      }
+      .react-calendar__tile--active {
+        background: #6717cd;
+        color: white;
+      }
+      .react-calendar__month-view__days__day--weekend {
+        color: #d10000;
+      }
+      .react-calendar__tile--now {
+        background: #dad3e5;
       }
     }
   }
