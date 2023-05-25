@@ -139,7 +139,6 @@ const UsersList = () => {
         users = users.filter((userData: any) => userData.spent >= 5000);
       }
       if (value === "date-login") {
-        console.log(date);
         users = users.filter((userData: any) => (new Date(userData.last_sign_in).getTime() > date[1][0]) && (new Date(userData.last_sign_in).getTime() < date[1][1]));
       }
       // if (value === "asc-log") {
