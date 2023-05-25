@@ -91,21 +91,32 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
       }
     }
   }
-  // const testDays = () => {
-  //   let date = new Date(days);
-  //   let seconds = date.getTime() / 1000; //1440516958
-  //   let courseData = {
-  //     user_id: user.id,
-  //     course_id: course.id,
-  //     final_date: seconds,
-  //   }
-  //   addCourseMembershipApi(courseData).then((res) => {
-  //     console.log(res);
-  //     handleClose();
-  //     openUserCardData(user);
-  //   })
-  //   console.log(seconds);
-  // }
+  const deleteCourse = () => {
+    if (!days) {
+      alert("Por favor ingrese número")
+    }
+    else {
+      let tempUserCourse = JSON.parse(JSON.stringify(user.user_courses));
+      let courseForUpdate: any = []
+      courseForUpdate = tempUserCourse.filter((userCourse: any) => {
+        let tempFinalDate = 0;
+        if (userCourse.final_date > today) {
+          tempFinalDate = userCourse.final_date - days * 86400;
+          userCourse.final_date = tempFinalDate;
+        }
+        return userCourse.course_id === course.id
+      })
+
+      if (courseForUpdate.length > 0) {
+        updateCourseMembershipApi(courseForUpdate[0]).then((res) => {
+          alert("Se eliminaron: " + days + " días, para el curso: " + course.title);
+          handleClose();
+          openUserCardData(user);
+        })
+      }
+    }
+  }
+
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Container>
@@ -173,6 +184,10 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
             <ButtonContain>
               <PurpleButton onClick={addCourse}>Agregar Dias al Curso</PurpleButton>
             </ButtonContain>
+            {(user.user_courses.filter((x: any) => x.course_id === course.id).length > 0 &&
+              user.user_courses.filter((x: any) => x.course_id === course.id)[0].final_date > today) && <ButtonContain>
+                <PurpleButton onClick={deleteCourse}>Eliminar Dias al Curso</PurpleButton>
+              </ButtonContain>}
           </>
         }
       </Container>
