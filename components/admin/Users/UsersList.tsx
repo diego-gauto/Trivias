@@ -16,7 +16,7 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getLessonFromUserApi, getUsersApi } from "../../api/admin";
+import { getLessonFromUserApi, getPartialUsers, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
@@ -256,12 +256,18 @@ const UsersList = () => {
     })
     return "Activo " + countCourses
   }
-  const getUsers = async (): Promise<void> => {
-    getUsersApi().then((res) => {
-      console.log(res.data.users);
-      pagePerUsers(res.data.users)
-      setAllUsers(res.data.users);
+  const getUsers = async () => {
+    let demoParams = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    demoParams.map(async (val: any) => {
+      await getPartialUsers((val * 10000), ((val + 1) * 10000)).then((res) => {
+        setAllUsers((prevUsers) => {
+          const updatedUsers = prevUsers.concat(res);
+          pagePerUsers(updatedUsers);
+          return updatedUsers
+        })
+      })
     })
+
   }
 
   useEffect(() => {
