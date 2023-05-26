@@ -247,12 +247,12 @@ const NavBar = () => {
         }
       </LogoContain>
       <NavTags>
-        <Link href="/trivias">
+        {/* <Link href="/trivias">
           <NavText pathname={pathname} color={color} title="trivia"
             style={pathname == "/trivias" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Trivias
           </NavText>
-        </Link>
+        </Link> */}
         <Link href="/Preview">
           <NavText pathname={pathname} color={color} title="Inicio"
             style={pathname == "/Preview" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
@@ -512,11 +512,11 @@ const NavBar = () => {
                     </HBList>
                   </a>
                 }
-                <Link href="/trivias" >
+                {/* <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
                     Trivias
                   </HBList>
-                </Link>
+                </Link> */}
                 <Link href="/Preview" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Preview" ? { fontWeight: 600 } : {}}>
                     Cursos
