@@ -24,6 +24,7 @@ const CreateBlog = () => {
     summary: "",
     image: "",
     link: "",
+    route: "",
     subTopic: [],
   });
   const [topic, setTopic] = useState<any>({
@@ -159,10 +160,11 @@ const CreateBlog = () => {
       return;
     }
     // setProcessLoader(true);
-    let checkTitles: number = 0;
+    let checkRoutes: number = 0;
+    blog.route = blog.route.replaceAll(" ", "-");
     blogs.forEach((element: any) => {
-      if (element.title === blog.title) {
-        checkTitles++;
+      if (element.route === blog.route) {
+        checkRoutes++;
       }
     });
     if (blog.image === "") {
@@ -170,8 +172,8 @@ const CreateBlog = () => {
       setProcessLoader(false);
     }
     else {
-      if (checkTitles > 0) {
-        alert("Titulo repetido, elija uno diferente")
+      if (checkRoutes > 0) {
+        alert("Ruta repedita, elija uno diferente")
         setProcessLoader(false);
       }
       else {
@@ -226,14 +228,15 @@ const CreateBlog = () => {
       return;
     }
     setProcessLoader(true);
-    let checkTitles: number = 0;
+    let checkRoutes: number = 0;
+    blog.route = blog.route.replaceAll(" ", "-");
     blogs.forEach((element: any) => {
-      if (element.title === blog.title) {
-        checkTitles++;
+      if (element.route === blog.route) {
+        checkRoutes++;
       }
     });
-    if (checkTitles > 0) {
-      alert("Titulo repetido, elija uno diferente")
+    if (checkRoutes > 0) {
+      alert("Ruta Repetida")
       setProcessLoader(false);
     }
     else {
@@ -362,7 +365,8 @@ const CreateBlog = () => {
         </div>
         {
           loader
-            ? <div className="blog-form">
+            ?
+            <div className="blog-form">
               <div className="blog-row">
                 <BlogInputs>
                   <label className="blog-label">
@@ -406,6 +410,23 @@ const CreateBlog = () => {
                   />
                 </BlogInputs>
               </div >
+              <div className='blog-row'>
+                <BlogInputs>
+                  <label className="blog-label">
+                    Url del blog
+                  </label>
+                  <input
+                    className="blog-input"
+                    placeholder="unas-francesas-3d"
+                    defaultValue={blog.route}
+                    onChange={(e: any) => {
+                      setBlog({
+                        ...blog, route: e.target.value
+                      })
+                    }}
+                  />
+                </BlogInputs>
+              </div>
               <div className="blog-row">
                 <BlogInputs>
                   <label className="blog-label">
