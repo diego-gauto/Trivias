@@ -271,7 +271,21 @@ const UsersList = () => {
     return "Activo " + countCourses
   }
   const getUsers = async () => {
-    let demoParams = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    let demoParams = [1, 2, 3, 4, 5, 6, 7, 8];
+    await getPartialUsers(0, 150).then((res) => {
+      setAllUsers((prevUsers) => {
+        const updatedUsers = prevUsers.concat(res);
+        pagePerUsers(updatedUsers);
+        return updatedUsers
+      })
+    })
+    await getPartialUsers(150, 10000).then((res) => {
+      setAllUsers((prevUsers) => {
+        const updatedUsers = prevUsers.concat(res);
+        pagePerUsers(updatedUsers);
+        return updatedUsers
+      })
+    })
     demoParams.map(async (val: any) => {
       await getPartialUsers((val * 10000), ((val + 1) * 10000)).then((res) => {
         setAllUsers((prevUsers) => {
@@ -298,15 +312,6 @@ const UsersList = () => {
     getUsers();
   }
 
-  if (!loader) {
-    return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background>
-    )
-  }
   return (
     <AdminContain>
       <UserContain>
@@ -375,30 +380,47 @@ const UsersList = () => {
                 <th>Editar</th>
               </tr>
               {/* TABLAS */}
-              {users.length > 0 && (
-                users[pageIndex].map((user: any, index: number) => {
-                  return (
-                    <tr key={index}>
-                      <td style={{ fontWeight: 600 }}>
-                        <ProfileContain>
-                          <Profile />
-                          {user.name}
-                        </ProfileContain>
-                      </td>
-                      <td >{user.email}</td>
-                      <td>{formatDate(user.created_at)}</td>
-                      <td>{activeCourses(user.user_courses)}</td>
-                      <td>MXN${user.spent}</td>
-                      {/* <td>{user.score} puntos</td> */}
-                      <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-                      <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
-                    </tr>
-                  )
-                })
-              )
+              {
+                <>
+                  {
+                    loader &&
+                    <>
+                      {
+                        users.length > 0 && (
+                          users[pageIndex].map((user: any, index: number) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ fontWeight: 600 }}>
+                                  <ProfileContain>
+                                    <Profile />
+                                    {user.name}
+                                  </ProfileContain>
+                                </td>
+                                <td >{user.email}</td>
+                                <td>{formatDate(user.created_at)}</td>
+                                <td>{activeCourses(user.user_courses)}</td>
+                                <td>MXN${user.spent}</td>
+                                {/* <td>{user.score} puntos</td> */}
+                                <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                                <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
+                              </tr>
+                            )
+                          }))
+                      }
+                    </>
+                  }
+                </>
               }
             </tbody>
           </Table>
+          {
+            !loader &&
+            <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+              <LoaderImage>
+                <LoaderContain />
+              </LoaderImage>
+            </Background>
+          }
         </Container>
         {
           isVisible &&

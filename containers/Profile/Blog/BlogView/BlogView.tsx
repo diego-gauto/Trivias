@@ -282,7 +282,7 @@ const BlogView = () => {
                   </p>
                 </div> */}
                 <div className='content'>
-                  <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(linkToCopy); showLinkCopyMessage() }} />
+                  <FaCopy className='icon' onClick={() => { navigator.clipboard.writeText(window.location.href); showLinkCopyMessage() }} />
                   <p className='text-display'>
                     Copiar Link
                   </p>
