@@ -413,7 +413,7 @@ const CreateBlog = () => {
               <div className='blog-row'>
                 <BlogInputs>
                   <label className="blog-label">
-                    Url del blog
+                    Ruta del blog (Solo usar textos sin acento y separar con "-", evitar usar espacios o los siguientes caracteres: @#$%^&*?``"",./)
                   </label>
                   <input
                     className="blog-input"
