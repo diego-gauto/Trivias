@@ -4,24 +4,39 @@ import { getUser } from "../../store/actions/UserActions";
 import { MainContainer } from "./Certificate.styled";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import QRCode from 'qrcode'
 import { getUserCertificateApi } from "../../components/api/lessons";
 import * as htmlToImage from 'html-to-image';
+import QRCode from 'qrcode'
 import { blob } from "stream/consumers";
 import { FacebookShareButton } from "react-share";
 import { BsFacebook } from "react-icons/bs";
 import download from 'downloadjs';
 import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
+import { getCertificateApi } from "../../components/api/users";
+import { LoaderImage, LoaderContain, BackgroundLoader } from "../../components/Loader.styled";
 
 const Certificate = () => {
   const router = useRouter()
-  const { name, lastName, title, professor, id, color, courseId, teacherSignature }: any = router.query;
+  const { certificate_id }: any = router.query;
   const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState<any>("");
   const [downloadType, setDownloadType] = useState("pdf");
   const [link, setLink] = useState('');
   const [show, setShow] = useState<boolean>(false)
+  const [loader, setLoader] = useState<boolean>(false)
+  const [certificate, setCertificate] = useState<any>({
+    user_name: "",
+    last_name: "",
+    sign: "",
+    certificate_color: "",
+    name: "",
+    title: "",
+    course_id: 0,
+    user_id: 0,
+    id: 0,
+    created_at: "",
+  });
   const [profSignature, setProfSignature] = useState<any>()
   let shareCertificate = document.getElementById('my_mm');
   const aritaSignature = "/images/signatures/AritaGonvar.png";
@@ -35,10 +50,10 @@ const Certificate = () => {
   const onHideModal = () => {
     setShow(false)
   }
-  const getUserCertificate = () => {
+  const getUserCertificate = (certificate_data: any) => {
     let ids = {
-      userId: id,
-      courseId: courseId
+      userId: certificate_data.user_id,
+      courseId: certificate_data.course_id
     }
     getUserCertificateApi(ids).then((res) => {
       let tempCertificate = res.data.data[0];
@@ -101,7 +116,7 @@ const Certificate = () => {
     let my_mm = document.getElementById('my_mm');
     return Math.floor(px / 2);
   }
-  function toDataUrl() {
+  function toDataUrl(sign: any) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'blob';
     xhr.onload = () => {
@@ -112,14 +127,18 @@ const Certificate = () => {
         setProfSignature(base64String);
       };
     };
-    xhr.open('GET', teacherSignature);
+    xhr.open('GET', sign);
     xhr.responseType = 'blob';
     xhr.send();
   }
 
   useEffect(() => {
-    getUserCertificate();
-    toDataUrl()
+    getCertificateApi(certificate_id).then((res: any) => {
+      setCertificate(res);
+      getUserCertificate(res);
+      toDataUrl(res.sign)
+      setLoader(true);
+    })
     let opts: any = {
       errorCorrectionLevel: 'L',
       margin: 1,
@@ -133,16 +152,25 @@ const Certificate = () => {
     })
   }, [])
 
+  if (!loader) {
+    return (
+      <BackgroundLoader>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </BackgroundLoader>
+    )
+  }
   return (
-    <MainContainer color={color}>
+    <MainContainer color={certificate.certificate_color}>
       <div id="my_mm">
         <div className="certificate" id="certificate">
-          <p className="title">{shortName(name)} {shortName(lastName)}</p>
-          <p className="course-title">{title}</p>
-          <p className="professor">{professor}</p>
+          <p className="title">{shortName(certificate.user_name)} {shortName(certificate.last_name)}</p>
+          <p className="course-title">{certificate.title}</p>
+          <p className="professor">{certificate.professor_name}</p>
           <p className="date">{date}</p>
           <p className="folio">{folio}</p>
-          <p className="professor-name" id="name" style={{ left: document.getElementById("name")?.clientWidth! > 168 ? "26%" : "32%" }}>{professor}</p>
+          <p className="professor-name" id="name" style={{ left: document.getElementById("name")?.clientWidth! > 168 ? "26%" : "32%" }}>{certificate.professor_name}</p>
           <img id="img" src={image} style={{ height: "120px", width: "120px", position: "absolute", top: "455px", left: "38px" }} alt="" />
           <img src={aritaSignature} className="main-signature" />
           <img src={profSignature} className="professor-signature" />

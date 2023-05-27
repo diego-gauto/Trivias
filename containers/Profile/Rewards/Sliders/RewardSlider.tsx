@@ -121,17 +121,11 @@ const RewardSlider = (props: reward_slider) => {
   }
 
   const moveToCertificate = (course: any) => {
+    console.log(course)
     router.push({
       pathname: `/Certificates`,
       query: {
-        name: user.name,
-        lastName: user.last_name,
-        title: course.title,
-        professor: course.professor.name,
-        id: user.user_id,
-        color: course.color,
-        courseId: course.courseId,
-        teacherSignature: course.professor.sign,
+        certificate_id: course.certificate_id
       }
     });
   }
