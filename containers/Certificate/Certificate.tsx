@@ -40,12 +40,15 @@ const Certificate = () => {
   const [profSignature, setProfSignature] = useState<any>()
   let shareCertificate = document.getElementById('my_mm');
   const aritaSignature = "/images/signatures/AritaGonvar.png";
-  function shortName(name: string) {
-    const words = name.split(" ");
-    if (words.length > 1) {
-      return words[0]
+  function shortName(name: string, last_name: string) {
+    let complete_name = name + " " + last_name;
+    if (complete_name.length >= 48) {
+      return true;
     }
-    return name;
+    else {
+      return false;
+    }
+
   }
   const onHideModal = () => {
     setShow(false)
@@ -165,7 +168,7 @@ const Certificate = () => {
     <MainContainer color={certificate.certificate_color}>
       <div id="my_mm">
         <div className="certificate" id="certificate">
-          <p className="title">{shortName(certificate.user_name)} {shortName(certificate.last_name)}</p>
+          <p className="title" style={shortName(certificate.user_name, certificate.last_name) ? { fontSize: 24 } : {}}>{certificate.user_name} {certificate.last_name}</p>
           <p className="course-title">{certificate.title}</p>
           <p className="professor">{certificate.professor_name}</p>
           <p className="date">{date}</p>
