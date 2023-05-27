@@ -256,14 +256,20 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
             <Profile
               src={DEFAULT_USER_IMG}
             />
-            <CommentInput value={comment} placeholder="Escribe tus comentarios" onChange={(e: any) => {
-              setComment(e.target.value)
-            }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  addLessonComment()
-                }
-              }} />
+            <div className='comment-contain'>
+              <CommentInput value={comment} maxLength={255} placeholder="Escribe tus comentarios" onChange={(e: any) => {
+                setComment(e.target.value)
+              }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    addLessonComment()
+                  }
+                }} />
+              <p className='comment-limit'>
+                {comment.length}/255
+              </p>
+            </div>
+
             {/* <Button style={{ color: !comment ? 'gray' : '#6717cd', 'borderColor': !comment ? 'gray' : '#6717cd' }} onClick={addLessonComment}>Comentar</Button> */}
           </div>
         </CommentContain>
@@ -302,15 +308,22 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                       <Profile
                         src={DEFAULT_USER_IMG}
                       />}
-                    <input value={answer} className='answer' placeholder='Escribe tu respuesta' type="text"
-                      onChange={(e: any) => {
-                        setAnswer(e.target.value)
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          answerQuestion(x);
-                        }
-                      }} /></div>}
+                    <div className='comment-contain'>
+                      <input value={answer} className='answer' placeholder='Escribe tu respuesta' type="text" maxLength={255}
+                        onChange={(e: any) => {
+                          setAnswer(e.target.value)
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            answerQuestion(x);
+                          }
+                        }} />
+                      <p className='comment-limit'>
+                        {answer.length}/255
+                      </p>
+                    </div>
+                  </div>
+                  }
                 </div>
               </div>
               {x.answers.map((ans: any, idx: any) => {
@@ -347,15 +360,22 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                             <Profile
                               src={DEFAULT_USER_IMG}
                             />}
-                          <input value={answerComment} className='answer' placeholder='Escribe tu respuesta' type="text"
-                            onChange={(e: any) => {
-                              setAnswerComment(e.target.value)
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                answerQuestion(ans);
-                              }
-                            }} /></div>}
+                          <div className='comment-contain'>
+                            <input value={answerComment} className='answer' placeholder='Escribe tu respuesta' type="text"
+                              onChange={(e: any) => {
+                                setAnswerComment(e.target.value)
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  answerQuestion(ans);
+                                }
+                              }} />
+                            <p className='comment-limit'>
+                              {answerComment.length}/255
+                            </p>
+                          </div>
+
+                        </div>}
                       </div>
                     </div>
                     {ans.comments.map((answer_comment: any, idx: any) => {
