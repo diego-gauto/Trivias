@@ -64,6 +64,19 @@ export const MainContainer = styled.div`
         @media (max-width: 1023px) {
           flex-direction: column;
         }
+        .comment-contain {
+          width: 80%;
+          position: relative;
+          .comment-limit {
+            position: absolute;
+            top: 44%;
+            margin: 0;
+            transform: translateY(-50%);
+            right: 15px;
+            color: #74549c;
+            pointer-events: none;
+          }
+        }
         .new-comment {
           display: flex;
           gap: 30px;
@@ -96,7 +109,8 @@ export const MainContainer = styled.div`
           .answer {
             background: none;
             color: #8e2de2;
-            padding-inline: 20px;
+            padding-left: 20px;
+            padding-right: 80px;
             outline: none;
             border: 1px solid #8e2de2;
             width: 100%;
@@ -192,6 +206,19 @@ export const CommentContain = styled.div`
   .comment {
     display: flex;
     gap: 10px;
+    .comment-contain {
+      width: 80%;
+      position: relative;
+      .comment-limit {
+        position: absolute;
+        top: 44%;
+        margin: 0;
+        transform: translateY(-50%);
+        right: 15px;
+        color: #74549c;
+        pointer-events: none;
+      }
+    }
   }
   @media (max-width: 1023px) {
     gap: 10px;
@@ -200,10 +227,11 @@ export const CommentContain = styled.div`
 export const CommentInput = styled.input`
   background: none;
   color: #8e2de2;
-  padding-inline: 20px;
+  padding-left: 20px;
+  padding-right: 80px;
   outline: none;
   border: 1px solid #8e2de2;
-  width: 80%;
+  width: 100%;
   border-radius: 30px;
   font-size: 16px;
   font-weight: 500;
