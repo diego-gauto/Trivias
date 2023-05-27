@@ -16,10 +16,11 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getLessonFromUserApi, getPartialUsers, getUsersApi } from "../../api/admin";
+import { getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
+import { useAuth } from "../../../hooks/useAuth";
 
 export interface SelectedUser {
   id?: string;
@@ -74,13 +75,26 @@ const UsersList = () => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [filterValue, setFilterValue] = useState<string>("");
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(null);
   const [filters, setFilters] = useState<any>([]);
   const [dates, setDates] = useState<any>([]);
+  const [userDownload, setUserDownload] = useState<any>([]);
   const [loadCard, setLoadCard] = useState(false);
   const [loginDate, setLoginDate] = useState<any>([null, null]);
   const [createDate, setCreateDate] = useState<any>([null, null]);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setUserData(userDataAuth.user);
+      }
+    }, [userDataAuth])
+
+  } catch (error) {
+    console.log(error)
+  }
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -156,6 +170,7 @@ const UsersList = () => {
     })
     return users
   }
+
   const filterUsersByValue = (value: string): any => {
     setFilterValue(value);
     let tempAllUsers = allUsers;
@@ -224,9 +239,14 @@ const UsersList = () => {
       setCourses(tempCourses)
     })
   }
-  const pagePerUsers = (users: any) => {
+  console.log(userDownload);
+  const pagePerUsers = async (users: any) => {
     setPageIndex(0)
     setTotalUsers(users.length);
+    setUserDownload(users);
+    // await users.map(async (user: any) => {
+    //   await getProgressForUsers(user.id);
+    // })
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(users.length / usersPerPage);
     let tempUsers: any = [];
@@ -297,7 +317,6 @@ const UsersList = () => {
     })
 
   }
-
   useEffect(() => {
     getUsers();
     getCoures();
@@ -311,6 +330,25 @@ const UsersList = () => {
   const handleClick = () => {
     getUsers();
   }
+  const Gonvar = () => {
+    // let tempusers: any = allUsers;
+    // console.log(allUsers);
+    // let tempArrayCourse: any = [];
+    // tempusers.forEach((user: any) => {
+    //   user.user_courses.forEach((course: any) => {
+    //     if (course.course_id === 45 && course.final_date > today) {
+    //       tempArrayCourse.push({
+    //         nombre: user.name,
+    //         apellido: user.last_name,
+    //         email: user.email,
+    //       });
+    //     }
+    //   })
+    // })
+    // // tempusers = tempusers.filter((user: any) => user.cursos.find(30));
+    // console.log(tempArrayCourse, "hola");
+    // return tempArrayCourse
+  }
 
   return (
     <AdminContain>
@@ -318,18 +356,17 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {((user.role === 'admin' && user.roles[4].report === 0) || user.role === "superAdmin") && <CsvDownloader
+            {/* {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin") && <CsvDownloader
               filename="usersData"
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={allUsers.map(({ ...user }) => user
-              )}
+              datas={users}
             >
               <DownloadUserData>
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
-            </CsvDownloader>}
+            </CsvDownloader>} */}
             {user.role}
             <FilterContain>
               <button onClick={() => setShowFilters(!showFilters)}>
