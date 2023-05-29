@@ -14,6 +14,7 @@ import download from 'downloadjs';
 import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 import { getCertificateApi } from "../../components/api/users";
 import { LoaderImage, LoaderContain, BackgroundLoader } from "../../components/Loader.styled";
+import { date } from "yup";
 
 const Certificate = () => {
   const router = useRouter()
@@ -52,27 +53,6 @@ const Certificate = () => {
   }
   const onHideModal = () => {
     setShow(false)
-  }
-  const getUserCertificate = (certificate_data: any) => {
-    let ids = {
-      userId: certificate_data.user_id,
-      courseId: certificate_data.course_id
-    }
-    getUserCertificateApi(ids).then((res) => {
-      let tempCertificate = res.data.data[0];
-      setFolio(tempCertificate.id);
-      const months = [
-        "enero", "febrero", "marzo", "abril",
-        "mayo", "junio", "julio", "agosto",
-        "septiembre", "octubre", "noviembre", "diciembre"
-      ];
-      let tempDate = new Date(tempCertificate.created_at).getTime() + 50400000;
-      const dateTime = new Date(tempDate);
-      const day = dateTime.getDate();
-      const month = months[dateTime.getMonth()];
-      const year = dateTime.getFullYear();
-      setDate(`${day} de ${month} de ${year}`);
-    })
   }
   const downloadCertificateImage = async (format: string) => {
     let DATA: any = document.getElementById('certificate');
@@ -138,7 +118,17 @@ const Certificate = () => {
   useEffect(() => {
     getCertificateApi(certificate_id).then((res: any) => {
       setCertificate(res);
-      getUserCertificate(res);
+      const months = [
+        "enero", "febrero", "marzo", "abril",
+        "mayo", "junio", "julio", "agosto",
+        "septiembre", "octubre", "noviembre", "diciembre"
+      ];
+      let tempDate = new Date(res.created_at).getTime() + 50400000;
+      const dateTime = new Date(tempDate);
+      const day = dateTime.getDate();
+      const month = months[dateTime.getMonth()];
+      const year = dateTime.getFullYear();
+      setDate(`${day} de ${month} de ${year}`);
       toDataUrl(res.sign)
       setLoader(true);
     })
@@ -172,7 +162,7 @@ const Certificate = () => {
           <p className="course-title">{certificate.title}</p>
           <p className="professor">{certificate.professor_name}</p>
           <p className="date">{date}</p>
-          <p className="folio">{folio}</p>
+          <p className="folio">{certificate.id}</p>
           <p className="professor-name" id="name" style={{ left: document.getElementById("name")?.clientWidth! > 168 ? "26%" : "32%" }}>{certificate.professor_name}</p>
           <img id="img" src={image} style={{ height: "120px", width: "120px", position: "absolute", top: "455px", left: "38px" }} alt="" />
           <img src={aritaSignature} className="main-signature" />
