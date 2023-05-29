@@ -17,6 +17,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const [seasons, setSeasons] = useState<any>([]);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
+  const [certificate_id, setCertificate_id] = useState<any>("");
   const [temp, setTemp] = useState(data);
 
   useEffect(() => {
@@ -54,6 +55,8 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           }
           createNotification(notification);
           addUserCertificateApi(tempCertificate);
+        } else {
+          setCertificate_id(res.data.data[0].id)
         }
       })
       setCertificate(true)
@@ -62,30 +65,19 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
 
   }, [data])
 
-  // useEffect(() => {
-  //   setOpen(menu)
-  // }, [menu])
+  const moveToCertificate = () => {
+    router.push({
+      pathname: `/Certificates`,
+      query: {
+        certificate_id: certificate_id
+      }
+    });
+  }
 
   const toggleHandler = (index: any) => {
     let temp = [...selected]
     temp[index] = !temp[index];
     setSelected(temp)
-  }
-
-  const goTo = () => {
-    router.push({
-      pathname: `/Certificates`,
-      query: {
-        name: userData.name,
-        lastName: userData.last_name,
-        title: course.title,
-        professor: course.professors[0].name,
-        id: userData.user_id,
-        color: course.certificate_color,
-        courseId: course.id,
-        teacherSignature: course.professors[0].sign,
-      }
-    });
   }
 
   useEffect(() => {
@@ -121,7 +113,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           </div>
         </div>
         {(certficate && !responsive1124) && <div className="certificate-container">
-          <button onClick={() => { goTo() }}>
+          <button onClick={() => { moveToCertificate() }}>
             <p>Obtener certificado</p>
           </button>
         </div>}
@@ -139,7 +131,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           </div>
         </div>
         {(certficate && responsive1124) && <div className="certificate-container">
-          <button onClick={() => { goTo() }}>
+          <button onClick={() => { moveToCertificate() }}>
             <p>Obtener certificado</p>
           </button>
         </div>}
