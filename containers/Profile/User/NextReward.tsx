@@ -6,8 +6,6 @@ import { TfiClose } from "react-icons/tfi";
 import { useMediaQuery } from "react-responsive";
 
 import "animate.css";
-import { time } from "console";
-import { user } from "firebase-functions/v1/auth";
 import Link from "next/link";
 import router from "next/router";
 
@@ -127,7 +125,6 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   const getDays = () => {
     return Math.round((user.final_date - today) / 86400)
   }
-  console.log(user.id)
   return (
     <ThirdBox>
       {pop &&
