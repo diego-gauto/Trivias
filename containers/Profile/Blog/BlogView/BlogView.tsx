@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillCheckCircle, AiFillStar } from 'react-icons/ai';
 // import Share from 'react-native-share';
-import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
+import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter, BsWhatsapp } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -12,6 +12,7 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
+  WhatsappShareButton,
 } from "react-share";
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
 import { IBlog, ISubTopic } from './IBlogView';
@@ -273,6 +274,19 @@ const BlogView = () => {
                   </FacebookShareButton>
                   <p className='text-display'>
                     Compartir en Facebook
+                  </p>
+                </div>
+                <div className='content'>
+                  <WhatsappShareButton
+                    url={url}
+                    title={blog?.title}
+                    separator=' --- '
+                    openShareDialogOnClick={true}
+                  >
+                    <BsWhatsapp className="icon" />
+                  </WhatsappShareButton>
+                  <p className='text-display'>
+                    Compartir en Whatsapp
                   </p>
                 </div>
                 {/* <div className='content'>
