@@ -8,6 +8,7 @@ import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.s
 import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
 import { getCourseApi } from "../../../components/api/lessons";
+import ActivityModal from "./ActivityModal/ActivityModal";
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,6 +19,7 @@ const Lesson = () => {
   const [userData, setUserData] = useState<any>(null);
   const [menu, setMenu] = useState<boolean>(false);
   const [currentlesson, setCurrentLesson] = useState<any>({});
+  const [show, setShow] = useState<boolean>(false);
   const [nextLesson, setnextLesson] = useState<any>({
     lessonIndex: 0,
     seasonIndex: 0,
@@ -33,7 +35,12 @@ const Lesson = () => {
   const handleComplete = () => {
     getCourse()
   }
-
+  const onHide = () => {
+    setShow(false)
+  }
+  const openActivityModal = () => {
+    setShow(true)
+  }
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -123,7 +130,7 @@ const Lesson = () => {
             <div className='nav-course'>
               <img src="/images/Navbar/NavbarLogo2.png" alt="" />
             </div>
-            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} />
+            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} openActivityModal={openActivityModal} />
             <Modules course={course} handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
           </div>
           <Courses menu={menu} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
@@ -131,6 +138,7 @@ const Lesson = () => {
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer> */}
         </MainContainer>}
+      <ActivityModal show={show} onHide={onHide} currentlesson={currentlesson} />
     </>
   )
 }

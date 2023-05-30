@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 declare let Hls: any
 
-const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson }: any) => {
+const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson, openActivityModal }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
@@ -31,7 +31,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
             query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
           })
         } else {
-          alert("Esta lección cuenta con tarea o quiz!");
+          openActivityModal();
         }
       })
     }
@@ -42,7 +42,7 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
           query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
         })
       } else {
-        alert("Esta lección cuenta con tarea o quiz!");
+        openActivityModal();
       }
     }
   }
