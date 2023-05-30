@@ -3,9 +3,9 @@ import { BlogContainer, BlogItems } from './Blog.styled';
 import router from "next/router";
 import { getBlogs } from '../../../store/actions/AdminActions';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import { LoaderContain } from '../User/User.styled';
 import { IBlog } from './IBlog';
 import { getBlogsApi } from '../../../components/api/blog';
+import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../components/Loader.styled';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
@@ -115,7 +115,12 @@ const Blog = () => {
               })
             }
           </div>
-          : <LoaderContain />
+          :
+          <BackgroundLoader>
+            <LoaderImage>
+              <LoaderContain />
+            </LoaderImage>
+          </BackgroundLoader>
       }
     </BlogContainer>
   )

@@ -22,6 +22,7 @@ import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 import { FaCopy } from 'react-icons/fa';
 import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
+import { getUserApi } from '../../../../components/api/users';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -88,18 +89,6 @@ const BlogView = () => {
     //     return error
     //   });
   };
-  const fetchDB_data = async () => {
-    try {
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        response.forEach((e: any) => {
-          setUserData({ ...e.data(), id: e.id });
-        });
-      })
-    } catch (error) {
-      return false
-    }
-  }
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -126,10 +115,9 @@ const BlogView = () => {
     })
   }
   const goToCourses = () => {
-    let userDate = userData.membership.finalDate;
     let curentTime = new Date().getTime() / 1000;
     if (userData) {
-      if ((userDate > curentTime)) {
+      if ((userData.final_date > curentTime || userData.level === 1)) {
         router.push("/Preview")
       }
       else {
@@ -137,9 +125,8 @@ const BlogView = () => {
       }
     }
     else {
-      router.push("/Register")
+      router.push("/auth/Register")
     }
-
   }
   const getMonth = (month: any) => {
     if (month === 1) {
@@ -225,9 +212,13 @@ const BlogView = () => {
   }
   useEffect(() => {
     console.log('hola')
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
     if (router.query.slug) {
       console.log('entro')
-      fetchDB_data();
       getBlog()
     }
   }, [router.query.slug])
