@@ -1,17 +1,25 @@
-import { useMediaQuery } from "react-responsive";
-import Link from "next/link";
-import {
-  RewardContainer,
-  ThirdBox,
-  SubscriptionContainer,
-} from "./User.styled";
 import { useEffect, useState } from "react";
+
 import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaArrowRight, FaAward } from "react-icons/fa";
-import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
-import { cancelPaypal, cancelStripe } from "../../../components/api/users";
-import { getRewardsApi } from "../../../components/api/rewards";
+import { TfiClose } from "react-icons/tfi";
+import { useMediaQuery } from "react-responsive";
+
+import "animate.css";
+import { time } from "console";
+import { user } from "firebase-functions/v1/auth";
+import Link from "next/link";
+import router from "next/router";
+
 import { getCoursesApi } from "../../../components/api/lessons";
+import { getRewardsApi } from "../../../components/api/rewards";
+import { cancelPaypal, cancelStripe } from "../../../components/api/users";
+import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
+import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
+
+const or_star = "/images/cancel_modal/or_star.png"
+const gr_star = "/images/cancel_modal/gr_star.png"
+const bl_star = "/images/cancel_modal/bl_star.png"
 const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
@@ -113,21 +121,50 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
         setLoader(false);
       })
     }
+    router.push({ pathname: "/cancel-suscription" });
   }
 
   const getDays = () => {
     return Math.round((user.final_date - today) / 86400)
   }
-
+  console.log(user.id)
   return (
     <ThirdBox>
-      {pop && <div id="confirmBox" className="dialog">
-        <p>Si cancelas tu suscripción perderás el acceso a los cursos, tus avances y también las recompensas y beneficios acumulados</p>
-        <div className="buttons">
-          <button className="left" onClick={() => { setPop(false) }}>No Cancelar</button>
-          <button className="right" onClick={cancelSubscription}>Cancelar suscripción</button>
-        </div>
-      </div>}
+      {pop &&
+        <div className="dimScreen animate__animated animate__slideInUp" >
+          <div id="confirmBox" className="dialog">
+            <div className="exit">
+              <TfiClose className="ex-icon" onClick={() => setPop(false)} />
+            </div>
+            <h2>¡Nos estristece saber que deseas irte!</h2>
+            <p className="sangria sangria-y">Al cancelar tu suscripcion <b className="purple"> se reiniciara todo tu avance. </b>
+              Tus beneficios, recompensas y certificados se perderán.
+            </p>
+            <p>En este momento, <b className="purple">{user.name}</b>, has completado <b>{'x'}</b> cursos y cuentas con:</p>
+            <ul>
+              <div className="space-bt">
+                <img src={or_star} />
+                <p className="p-li"><b className="orange">{'x'}</b> Puntos obtenidos, <b className="orange">{'x'} </b>
+                  recompensas obtenidas por puntaje y una proxima recompensa a los <b className="orange">{'x'}</b> puntos.</p>
+              </div>
+              <div className="space-bt">
+                <img src={gr_star} />
+                <p className="p-li">Llevas <b className="green">{'x tiempo'}</b> de contratar <b><i>Gonvar+</i></b>,
+                  lo que te ha dado como beneficio un descuento del <b className="green">{'x'}% </b>
+                  en todos nuestros productos</p>
+              </div>
+              <div className="space-bt">
+                <img src={bl_star} />
+                <p className="p-li">Has obtenido <b className="blue">{'x'}</b> certificados de tus cursos y estas
+                  por completar <b className="blue">{'x'}</b> cursos mas.</p>
+              </div>
+            </ul>
+            <div className="buttons">
+              <button className="left" onClick={cancelSubscription}>Renuncio a mis beneficios, recompensas y certificados</button>
+              <button className="right" onClick={() => { setPop(false) }}>Salir</button>
+            </div>
+          </div>
+        </div>}
       <RewardContainer reward={reward}>
         <div className="main-container">
           <div className="reward-title-contain">
@@ -256,7 +293,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
           <img src={handImage} />
         </div>
       </SubscriptionContainer>
-    </ThirdBox>
+    </ThirdBox >
   )
 }
 export default NextReward;

@@ -335,15 +335,22 @@ const UsersList = () => {
     // console.log(allUsers);
     // let tempArrayCourse: any = [];
     // tempusers.forEach((user: any) => {
-    //   user.user_courses.forEach((course: any) => {
-    //     if (course.course_id === 45 && course.final_date > today) {
-    //       tempArrayCourse.push({
-    //         nombre: user.name,
-    //         apellido: user.last_name,
-    //         email: user.email,
-    //       });
-    //     }
-    //   })
+    //   if (user.level === 1 || user.final_date > today) {
+    //     tempArrayCourse.push({
+    //       nombre: user.name,
+    //       apellido: user.last_name,
+    //       email: user.email,
+    //     })
+    //   }
+    //   // user.user_courses.forEach((course: any) => {
+    //   //   if (course.course_id === 45 && course.final_date > today) {
+    //   //     tempArrayCourse.push({
+    //   //       nombre: user.name,
+    //   //       apellido: user.last_name,
+    //   //       email: user.email,
+    //   //     });
+    //   //   }
+    //   // })
     // })
     // // tempusers = tempusers.filter((user: any) => user.cursos.find(30));
     // console.log(tempArrayCourse, "hola");
@@ -361,7 +368,7 @@ const UsersList = () => {
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={users}
+              datas={Gonvar}
             >
               <DownloadUserData>
                 <p>Descargar lista de usuarios</p>
