@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
-export const CancelSub = styled.div`
+export const PauseSub = styled.div`
 	background-color: #ede7f2;
 	padding: 4%;
 	font-weight: 500;
 	padding-right: 25%;
-	h2 {
+	width: 100%;
+	h1 {
 		font-weight: 800;
 	}
 	.dialog {
 		padding: 15%;
-		max-width: 65%;
+		max-width: 55%;
 		width: 100%;
 		text-align: center;
 		border-radius: 30px;
@@ -54,14 +55,6 @@ export const CancelSub = styled.div`
 			font-size: medium;
 		}
 	}
-	.under {
-		z-index: 0;
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		margin-bottom: -40%;
-		margin-right: -7%;
-	}
 	.dimScreen {
 		z-index: 99;
 		position: fixed;
@@ -90,6 +83,47 @@ export const CancelSub = styled.div`
 			cursor: pointer;
 		}
 	}
+	.under {
+		z-index: 0;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		margin-bottom: -30%;
+		margin-right: -5%;
+	}
+	.w-80 {
+		width: 80%;
+	}
+	.checkboxgroup {
+		display: inline-block;
+		text-align: center;
+	}
+	.checkboxgroup label {
+		display: block;
+	}
+	.t-area {
+		border-radius: 35px;
+		padding: 10px;
+		text-align: justify;
+		resize: none;
+		height: fit-content;
+		border-color: #d7d8df;
+		vertical-align: middle;
+	}
+	.t-input {
+		border-radius: 30px;
+		text-align: justify;
+		border: none;
+	}
+	.p-radio {
+		background-color: #dad3e5;
+		border-color: #c094e6;
+		accent-color: #c094e6 !important;
+	}
+	.sangria-menor {
+		marging-left: 10%;
+		margin-right: 10%;
+	}
 	.buttons {
 		display: flex;
 		gap: 15px;
@@ -98,7 +132,7 @@ export const CancelSub = styled.div`
 			line-heigth: 90%;
 			font-weight: 500;
 			font-size: small;
-			width: 20%;
+			width: 25%;
 			border: none;
 			padding-inline: 50px;
 			border-radius: 30px;
@@ -122,17 +156,5 @@ export const CancelSub = styled.div`
 	}
 	.purple-dark {
 		color: #3f1168;
-	}
-	.green {
-		color: #29c784;
-	}
-	.blue {
-		color: #1b7beb;
-	}
-	.orange {
-		color: #f88114;
-	}
-	.close {
-		line-height: 50%;
 	}
 `;
