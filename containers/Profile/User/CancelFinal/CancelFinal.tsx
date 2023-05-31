@@ -8,7 +8,7 @@ import { CancelFin } from "./CancelFinal.styles";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
-export const CancelFinal = () => {
+const CancelFinal = () => {
   const [pop, setPop] = useState(false)
   const goBack = () => {
     router.push({ pathname: "/Profile" });
@@ -117,3 +117,4 @@ export const CancelFinal = () => {
     </CancelFin>
   )
 }
+export default CancelFinal;
