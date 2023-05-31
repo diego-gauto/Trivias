@@ -10,7 +10,6 @@ interface IActivityModal {
 }
 const ActivityModal = (props: IActivityModal) => {
   const { show, onHide, currentlesson } = props;
-  console.log(currentlesson)
   return (
     <Modal show={show} onHide={onHide} centered>
       <ModalContainer>

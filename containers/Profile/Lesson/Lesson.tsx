@@ -20,6 +20,12 @@ const Lesson = () => {
   const [menu, setMenu] = useState<boolean>(false);
   const [currentlesson, setCurrentLesson] = useState<any>({});
   const [show, setShow] = useState<boolean>(false);
+  const [firstLesson, setFirstLesson] = useState<boolean>(false);
+  const [lastLesson, setLastLesson] = useState<boolean>(false);
+  const [previousLesson, setPreviousLesson] = useState<any>({
+    lessonIndex: 0,
+    seasonIndex: 0,
+  })
   const [nextLesson, setnextLesson] = useState<any>({
     lessonIndex: 0,
     seasonIndex: 0,
@@ -84,6 +90,7 @@ const Lesson = () => {
   }
   const getDataForNextLesson = (courseData: any) => {
     if (courseData.seasons[season].lessons[+lesson + 1]) {
+      setLastLesson(false);
       setnextLesson({
         lessonIndex: +lesson + 1,
         seasonIndex: +season,
@@ -91,13 +98,38 @@ const Lesson = () => {
     }
     else {
       if (courseData.seasons[+season + 1]) {
+        setLastLesson(false);
         setnextLesson({
           lessonIndex: 0,
           seasonIndex: +season + 1,
         });
       }
       else {
+        setLastLesson(true);
         setnextLesson({
+          lessonIndex: +lesson,
+          seasonIndex: +season,
+        });
+      }
+    }
+    if (courseData.seasons[season].lessons[+lesson - 1]) {
+      setFirstLesson(false);
+      setPreviousLesson({
+        lessonIndex: +lesson - 1,
+        seasonIndex: +season,
+      })
+    }
+    else {
+      if (courseData.seasons[+season - 1]) {
+        setFirstLesson(false);
+        setPreviousLesson({
+          lessonIndex: courseData.seasons[+season - 1].lessons.length - 1,
+          seasonIndex: +season - 1,
+        });
+      }
+      else {
+        setFirstLesson(true);
+        setPreviousLesson({
           lessonIndex: +lesson,
           seasonIndex: +season,
         });
@@ -131,7 +163,20 @@ const Lesson = () => {
               <img src="/images/Navbar/NavbarLogo2.png" alt="" />
             </div>
             <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} openActivityModal={openActivityModal} />
-            <Modules course={course} handleClick={handleClick} data={currentlesson} user={userData} season={season} lesson={lesson} teacherCreds={course.professors} courseIds={{ courseId: id, seasonId: course.seasons[season].id }} />
+            <Modules
+              course={course}
+              handleClick={handleClick}
+              data={currentlesson}
+              user={userData} s
+              eason={season}
+              lesson={lesson}
+              teacherCreds={course.professors}
+              courseIds={{ courseId: id, seasonId: course.seasons[season].id }}
+              previousLesson={previousLesson}
+              nextLesson={nextLesson}
+              firstLesson={firstLesson}
+              lastLesson={lastLesson}
+            />
           </div>
           <Courses menu={menu} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
           {/* <FirstContainer>

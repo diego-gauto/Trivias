@@ -5,10 +5,13 @@ import Comments from './Comments'
 import HomeWork from './HomeWork'
 import { MainContainer } from './Module.styled'
 
-const Modules = ({ data, user, season, lesson, teacherCreds, courseIds, handleClick, course }: any) => {
+const Modules = ({ data, user, season, lesson, teacherCreds, courseIds, handleClick, course, previousLesson, nextLesson, firstLesson, lastLesson }: any) => {
   const { admin }: any = router.query;
   const [position, setPosition] = useState(1)
 
+  const changePosition = (value: number) => {
+    setPosition(value);
+  }
   useEffect(() => {
     if (admin) {
       setPosition(4)
@@ -19,12 +22,12 @@ const Modules = ({ data, user, season, lesson, teacherCreds, courseIds, handleCl
     <MainContainer>
       {
         position === 1
-          ? <About value={position} setValue={setPosition} data={data} teacherCreds={teacherCreds} course={course} /> :
+          ? <About previousLesson={previousLesson} firstLesson={firstLesson} lastLesson={lastLesson} nextLesson={nextLesson} value={position} changeValue={changePosition} data={data} teacherCreds={teacherCreds} course={course} /> :
           position === 3
-            ? <HomeWork handleClick={handleClick} value={position} setValue={setPosition} data={data} user={user} season={season} lesson={lesson} courseIds={courseIds} /> :
+            ? <HomeWork previousLesson={previousLesson} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} course={course} handleClick={handleClick} value={position} changeValue={changePosition} data={data} user={user} season={season} lesson={lesson} courseIds={courseIds} /> :
             position === 4
-              ? <Comments value={position} setValue={setPosition} data={data} user={user} course={course} season={season} lesson={lesson} />
-              : <About value={position} setValue={setPosition} data={data} teacherCreds={teacherCreds} course={course} />
+              ? <Comments previousLesson={previousLesson} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} value={position} changeValue={changePosition} data={data} user={user} course={course} season={season} lesson={lesson} />
+              : <About previousLesson={previousLesson} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} value={position} changeValue={changePosition} data={data} teacherCreds={teacherCreds} course={course} />
       }
     </MainContainer>
   )
