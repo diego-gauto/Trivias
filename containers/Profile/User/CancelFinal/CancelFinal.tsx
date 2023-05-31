@@ -112,8 +112,8 @@ const CancelFinal = () => {
           <button onClick={goCancel} className="left">Cancelar mi suscripción</button>
           <button onClick={goBack} className="right">Volver al inicio</button>
         </div>
-        <img src={corazon} className="under" />
       </div>
+      <img src={corazon} className="under" />
     </CancelFin>
   )
 }
