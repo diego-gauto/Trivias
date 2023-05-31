@@ -119,7 +119,10 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
         setLoader(false);
       })
     }
-    router.push({ pathname: "/cancel-suscription" });
+    router.push({
+      pathname: "/cancel-suscription",
+      query: { id: user.user_id }
+    });
   }
 
   const getDays = () => {
