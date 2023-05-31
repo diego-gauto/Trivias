@@ -22,6 +22,7 @@ const Lesson = () => {
   const [show, setShow] = useState<boolean>(false);
   const [firstLesson, setFirstLesson] = useState<boolean>(false);
   const [lastLesson, setLastLesson] = useState<boolean>(false);
+  const [blockForNextSeason, setBlockForNextSeason] = useState<boolean>(false)
   const [previousLesson, setPreviousLesson] = useState<any>({
     lessonIndex: 0,
     seasonIndex: 0,
@@ -89,6 +90,17 @@ const Lesson = () => {
     })
   }
   const getDataForNextLesson = (courseData: any) => {
+    if (userData) {
+      if (courseData.sequential === 1) {
+        let tempLesson = courseData.seasons[+season].lessons[+lesson];
+        let checkLesson = tempLesson.users.filter((user: number) => userData.user_id === user);
+        let checkProgress = tempLesson.progress.filter((data: any) => userData.user_id === data.user_id);
+        if ((tempLesson.quiz === 1 || tempLesson.homework === 1) && (checkLesson.length === 0 && checkProgress[0].status === 0)) {
+          setBlockForNextSeason(true);
+        }
+      }
+    }
+
     if (courseData.seasons[season].lessons[+lesson + 1]) {
       setLastLesson(false);
       setnextLesson({
@@ -167,7 +179,7 @@ const Lesson = () => {
               course={course}
               handleClick={handleClick}
               data={currentlesson}
-              user={userData} s
+              user={userData}
               eason={season}
               lesson={lesson}
               teacherCreds={course.professors}
@@ -176,6 +188,7 @@ const Lesson = () => {
               nextLesson={nextLesson}
               firstLesson={firstLesson}
               lastLesson={lastLesson}
+              blockForNextSeason={blockForNextSeason}
             />
           </div>
           <Courses menu={menu} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />

@@ -8,7 +8,7 @@ import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addComment
 import { createNotification } from '../../../../../components/api/notifications'
 import { MdVerified } from 'react-icons/md'
 import ModuleTabs from './ModuleTabs/ModuleTabs'
-const Comments = ({ value, changeValue, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
+const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
@@ -224,7 +224,7 @@ const Comments = ({ value, changeValue, user, data, comments, course, season, le
   return (
     <>
       <TitleContain >
-        <ModuleTabs value={value} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} courseId={course.id} firstLesson={firstLesson} lastLesson={lastLesson} />
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} courseId={course.id} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <MainContainer>

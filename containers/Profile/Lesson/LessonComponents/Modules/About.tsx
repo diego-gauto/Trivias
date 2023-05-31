@@ -4,13 +4,13 @@ import { TitleContain } from './Module.styled';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight, } from 'react-icons/md';
 import ModuleTabs from './ModuleTabs/ModuleTabs';
 
-const About = ({ value, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
+const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [index, setIndex] = useState<number>(0)
   return (
     <>
       <TitleContain>
-        <ModuleTabs value={value} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} courseId={course.id} firstLesson={firstLesson} lastLesson={lastLesson} />
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} courseId={course.id} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <AboutContain>

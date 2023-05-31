@@ -14,7 +14,7 @@ import { createNotification } from '../../../../../components/api/notifications'
 import ImagePreview from './imagePreview/imagePreview';
 import ModuleTabs from './ModuleTabs/ModuleTabs';
 
-const HomeWork = ({ value, changeValue, data, user, season, lesson, courseIds, handleClick, nextLesson, previousLesson, course, firstLesson, lastLesson }: any) => {
+const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, lesson, courseIds, handleClick, nextLesson, previousLesson, course, firstLesson, lastLesson }: any) => {
   const [status, setStatus] = useState("");
   const [step, setStep] = useState(0);
   const [index, setIndex] = useState(0);
@@ -247,7 +247,7 @@ const HomeWork = ({ value, changeValue, data, user, season, lesson, courseIds, h
   return (
     <>
       <TitleContain >
-        <ModuleTabs value={value} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} courseId={course.id} firstLesson={firstLesson} lastLesson={lastLesson} />
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} courseId={course.id} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <HomeWorkContain >

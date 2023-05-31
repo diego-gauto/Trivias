@@ -14,12 +14,13 @@ interface IModule {
   courseId: number;
   firstLesson: boolean;
   lastLesson: boolean;
+  blockForNextSeason: boolean
 }
 const ModuleTabs = (props: IModule) => {
-  const { value, changeValue, nextLesson, previousLesson, courseId, firstLesson, lastLesson } = props;
+  const { value, changeValue, blockForNextSeason, nextLesson, previousLesson, courseId, firstLesson, lastLesson } = props;
   const router = useRouter();
   const moveToNextLesson = () => {
-    if (!lastLesson) {
+    if (!lastLesson && !blockForNextSeason) {
       router.push({
         pathname: 'Lesson',
         query: { id: courseId, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
@@ -62,8 +63,8 @@ const ModuleTabs = (props: IModule) => {
           <p className={'btn-text ' + (firstLesson ? "gray" : "")} style={{ maxWidth: 57 }}>Lección <br />anterior</p>
         </div>
         <div className='button-data' onClick={moveToNextLesson}>
-          <p className={'btn-text ' + (lastLesson ? "gray" : "")} style={{ maxWidth: 67 }}> Siguiente<br />Lección</p>
-          <IoPlaySkipForwardSharp className='btn-icon' style={lastLesson ? { color: "gray" } : {}} />
+          <p className={'btn-text ' + ((lastLesson || blockForNextSeason) ? "gray" : "")} style={{ maxWidth: 67 }}> Siguiente<br />Lección</p>
+          <IoPlaySkipForwardSharp className='btn-icon' style={(lastLesson || blockForNextSeason) ? { color: "gray" } : {}} />
         </div>
       </div>
     </div>
