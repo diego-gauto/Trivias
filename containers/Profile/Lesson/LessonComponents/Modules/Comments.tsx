@@ -47,8 +47,9 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
     retrieveComments(data.id).then((res) => {
       res.data.data.forEach((element: any, i: number) => {
         temp.push(false);
+        tempComments.push([]);
         element.answers.forEach((ca: any) => {
-          tempComments.push(false);
+          tempComments[i].push(false);
         });
       })
       setResponses(temp);
@@ -56,6 +57,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
       setCurrentComments(res.data.data)
     })
   }
+
   const like = (x: any) => {
     let temp = {
       userId: user.user_id,
@@ -162,12 +164,20 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
     setAnswer("");
   }
 
-  const toggleAnswers = (index: number) => {
+  const toggleAnswers = (index: number, idxC: number) => {
     lastComments.forEach((element: any, i: number) => {
       if (index == i) {
-        lastComments[index] = !lastComments[index];
+        element.forEach((el: any, idx: number) => {
+          if (idxC === idx) {
+            element[idx] = !element[idx]
+          } else {
+            element[idx] = false
+          }
+        });
       } else {
-        lastComments[i] = false;
+        element.forEach((el: any, idx: number) => {
+          element[idx] = false
+        });
       }
     });
     setLastComments([...lastComments]);
@@ -350,9 +360,9 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                               <FiHeart />}
                             <p>{ans.likes.length}</p>
                           </div>
-                          <button onClick={() => { toggleAnswers(idx) }}>Responder</button>
+                          <button onClick={() => { toggleAnswers(index, idx) }}>Responder</button>
                         </div>
-                        {lastComments[idx] && <div className='answer-input'>
+                        {lastComments[index][idx] && <div className='answer-input'>
                           {user.photoURL
                             ?
                             <Profile src={user.photo} />
