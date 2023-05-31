@@ -6,6 +6,10 @@ export const CancelSub = styled.div`
   font-weight: 500;
   padding-right: 25%;
   position: relative;
+  min-height: 80vh;
+  @media (max-width: 650px) {
+    padding-inline: 5%;
+  }
   h2 {
     font-weight: 800;
   }
@@ -95,15 +99,23 @@ export const CancelSub = styled.div`
     display: flex;
     gap: 15px;
     justify-content: flex-start;
+    @media (max-width: 650px) {
+      flex-direction: column;
+      align-items: center;
+    }
     button {
       line-heigth: 90%;
       font-weight: 500;
       font-size: small;
+      min-width: 180px;
       width: 20%;
       border: none;
       padding-inline: 50px;
       border-radius: 30px;
       color: #fff;
+      &:hover {
+        opacity: 0.5;
+      }
     }
     .btn-link {
       text-decoration: none;

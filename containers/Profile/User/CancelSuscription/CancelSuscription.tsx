@@ -35,9 +35,9 @@ const CancelSuscription = () => {
     <CancelSub>
       <div className="m-3">
         <h2 className="purple-dark">¿Pasando por un mal momento?</h2>
-        <h2 className="purple">Pausa tu suscripción y no pierdas tus avances.</h2>
-        <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p>
-        <p>Ademas al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p>
+        {/* <h2 className="purple">Pausa tu suscripción y no pierdas tus avances.</h2> */}
+        {/* <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p> */}
+        {/* <p>Ademas al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
         <div className="row w-100 justify-content-around">
           <div className="col-sm text-center">
             <img src={GroupN} className="mb-3" />
@@ -64,13 +64,13 @@ const CancelSuscription = () => {
             </div>
           </div>
         </div>
-        <p><b>No dejes que los obstáculos te detengan.</b> Pausa tu suscripción y aprovecha esta oportunidad
+        {/* <p><b>No dejes que los obstáculos te detengan.</b> Pausa tu suscripción y aprovecha esta oportunidad
           para cuidar de ti misma. Cuando estés lista, <b>estaremos aquí para ayudarte a retomar tu camino como
-            Nail Artist.</b></p>
-        <p>Recuerda que esta accion solo la puedes realizar <b>dos veces cada 12 meses.</b> <br />Te quedan <b>{'x'}</b> pausas</p>
+            Nail Artist.</b></p> */}
+        {/* <p>Recuerda que esta accion solo la puedes realizar <b>dos veces cada 12 meses.</b> <br />Te quedan <b>{'x'}</b> pausas</p> */}
         <div className="buttons mt-5">
           <button onClick={goCancel} className="left">Perder mis beneficios</button>
-          <button onClick={goPause} className="right">Si quiero pausar</button>
+          {/* <button onClick={goPause} className="right">Si quiero pausar</button> */}
           <button onClick={goBack} className="btn btn-link ">Regresar al inicio</button>
         </div>
 
