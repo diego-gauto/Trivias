@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { TfiClose } from "react-icons/tfi";
 
 import router from "next/router";
 
 import { CancelFin } from "./CancelFinal.styles";
+import { getUserApi } from "../../../../components/api/users";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
 const CancelFinal = () => {
-  const [pop, setPop] = useState(false)
+  const [pop, setPop] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
+  const [loader, setLoader] = useState<boolean>(false);
   const goBack = () => {
     router.push({ pathname: "/Profile" });
   }
@@ -38,6 +42,23 @@ const CancelFinal = () => {
   { key: 9, value: 9 },
   { key: 10, value: 10 }]
 
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+        setLoader(true);
+      })
+    }
+  }, [])
+  if (!loader) {
+    return (
+      <BackgroundLoader style={{ backgroundColor: "#ede7f2" }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </BackgroundLoader>
+    )
+  }
   return (
     <CancelFin>
       <div className="m-3">

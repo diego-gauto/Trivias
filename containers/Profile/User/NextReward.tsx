@@ -98,30 +98,29 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   }, [])
 
   const cancelSubscription = async () => {
-    setLoader(true);
-    if (user.method == 'stripe') {
-      let sub = {
-        subscriptionId: user.plan_id,
-        userId: user.user_id,
-        planName: ""
-      }
-      cancelStripe(sub).then(() => {
-        handleClick()
-        setLoader(false);
-      })
-    } else {
-      let membership = {
-        planId: user.plan_id,
-        id: user.plan_id
-      }
-      cancelPaypal(membership).then(() => {
-        handleClick()
-        setLoader(false);
-      })
-    }
+    // setLoader(true);
+    // if (user.method == 'stripe') {
+    //   let sub = {
+    //     subscriptionId: user.plan_id,
+    //     userId: user.user_id,
+    //     planName: ""
+    //   }
+    //   cancelStripe(sub).then(() => {
+    //     handleClick()
+    //     setLoader(false);
+    //   })
+    // } else {
+    //   let membership = {
+    //     planId: user.plan_id,
+    //     id: user.plan_id
+    //   }
+    //   cancelPaypal(membership).then(() => {
+    //     handleClick()
+    //     setLoader(false);
+    //   })
+    // }
     router.push({
-      pathname: "/cancel-suscription",
-      query: { id: user.user_id }
+      pathname: "/cancel-suscription"
     });
   }
 

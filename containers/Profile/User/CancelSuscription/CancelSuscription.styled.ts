@@ -6,12 +6,21 @@ export const CancelSub = styled.div`
   font-weight: 500;
   padding-right: 25%;
   position: relative;
-  min-height: 80vh;
+  min-height: 85vh;
   @media (max-width: 650px) {
     padding-inline: 5%;
   }
   h2 {
     font-weight: 800;
+  }
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    .progress {
+      margin-bottom: 20px;
+    }
   }
   .dialog {
     padding: 15%;
@@ -65,7 +74,7 @@ export const CancelSub = styled.div`
     right: 0;
     bottom: 0;
     width: 40%;
-    max-width: 640px;
+    max-width: 580px;
   }
   .dimScreen {
     z-index: 99;
