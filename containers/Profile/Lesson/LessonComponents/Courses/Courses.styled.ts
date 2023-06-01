@@ -245,7 +245,7 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: column;
   transition: 1s ease all;
-  background: #e8ddf2;
+  background: #dad3e5;
   ${(props) =>
     props.active == true &&
     css`

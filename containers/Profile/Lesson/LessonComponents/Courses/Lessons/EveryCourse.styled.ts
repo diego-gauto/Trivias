@@ -5,7 +5,6 @@ export const LessonContain = styled.div`
   width: 100%;
   gap: 15px;
   position: relative;
-  background: #dad3e5;
   height: 100px;
   min-height: 100px;
   align-items: baseline;
@@ -69,18 +68,33 @@ export const Details = styled.div`
 `;
 export const DetailContain = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  justify-content: space-between;
+  .activity {
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+    color: #d244d1;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    img {
+      width: 16px;
+    }
+  }
 `;
 
 export const CourseLength = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   font-family: "Raleway", sans-serif;
   color: #3f1168;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 5px;
+  .icon {
+    font-size: 16px;
+  }
 `;
 export const CoursePoints = styled.p`
   font-size: 12px;
