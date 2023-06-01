@@ -20,7 +20,7 @@ const gr_star = "/images/cancel_modal/gr_star.png"
 const bl_star = "/images/cancel_modal/bl_star.png"
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
+const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [formatDate, setFormatDate] = useState("")
   const [loader, setLoader] = useState<any>(false);
@@ -30,7 +30,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
   const [pop, setPop] = useState<any>(false);
 
   const today = new Date().getTime() / 1000;
-
+  console.log(timePrize)
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
     let tempMonthObj: any = { obtained: [], blocked: [] };
@@ -139,23 +139,23 @@ const NextReward = ({ timeLevel, reward, prizeSize, timePrize, timePrizeSize, se
             <p className="sangria sangria-y">Al cancelar tu suscripcion <b className="purple"> se reiniciara todo tu avance. </b>
               Tus beneficios, recompensas y certificados se perderán.
             </p>
-            <p>En este momento, <b className="purple">{user.name}</b>, has completado <b>{'x'}</b> cursos y cuentas con:</p>
+            <p>En este momento, <b className="purple">{user.name}</b>, has completado <b>{user.user_certificates?.length}</b> {user.user_certificates?.length === 1 ? "curso" : "cursos"} y cuentas con:</p>
             <ul>
               <div className="space-bt">
                 <img src={or_star} />
-                <p className="p-li"><b className="orange">{'x'}</b> Puntos obtenidos, <b className="orange">{'x'} </b>
-                  recompensas obtenidas por puntaje y una proxima recompensa a los <b className="orange">{'x'}</b> puntos.</p>
+                <p className="p-li"><b className="orange">{user.score}</b> Puntos obtenidos, <b className="orange">{points?.obtained.length} </b>
+                  recompensas obtenidas por puntaje y una proxima recompensa a los <b className="orange">{points?.blocked[0].points}</b> puntos.</p>
               </div>
               <div className="space-bt">
                 <img src={gr_star} />
-                <p className="p-li">Llevas <b className="green">{'x tiempo'}</b> de contratar <b><i>Gonvar+</i></b>,
-                  lo que te ha dado como beneficio un descuento del <b className="green">{'x'}% </b>
+                <p className="p-li">Llevas <b className="green">{timeLevel + (timeLevel === 1 ? " mes" : " meses")}</b> de contratar <b><i>Gonvar+</i></b>,
+                  lo que te ha dado como beneficio un descuento del <b className="green">{lastTimeReward[0].title} </b>
                   en todos nuestros productos</p>
               </div>
               <div className="space-bt">
                 <img src={bl_star} />
-                <p className="p-li">Has obtenido <b className="blue">{'x'}</b> certificados de tus cursos y estas
-                  por completar <b className="blue">{'x'}</b> cursos mas.</p>
+                <p className="p-li">Has obtenido <b className="blue">{user.user_certificates?.length}</b> {user.user_certificates?.length === 1 ? "certificado" : "certificados"} de tus cursos y estas
+                  por completar <b className="blue">{certificates?.length}</b> cursos mas.</p>
               </div>
             </ul>
             <div className="buttons">

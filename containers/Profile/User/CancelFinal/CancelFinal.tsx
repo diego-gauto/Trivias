@@ -49,8 +49,9 @@ const CancelFinal = () => {
       third: formData.thirdQuestion,
       fourth: formData.fourthQuestion,
       fifth: formData.fifthQuestion,
+      user_id: userData.user_id,
     }
-
+    console.log(tempData);
     setPop(true)
   }
   const comeback = [{ key: 1, value: 1 },
@@ -73,7 +74,6 @@ const CancelFinal = () => {
   { key: 8, value: 8 },
   { key: 9, value: 9 },
   { key: 10, value: 10 }]
-  console.log(formData);
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
