@@ -198,12 +198,12 @@ const CancelSuscription = () => {
             <CircleProgress progress={data} total={totalPointRewards.length} color={"#f88114"} />
             <p><b className="orange">{userData.score}</b> Puntos obtenidos</p>
             <p><b className="orange">{totalPointRewards.length}</b> Recompensas obtenidas</p>
-            <p>Tu proxima recompensa a los <b className="orange">{pointsRewards.points - userData.score}</b> puntos sera:</p>
-            <p><b className="orange">{pointsRewards.title}</b></p>
+            <p>Tu proxima recompensa a los <b className="orange">{pointsRewards ? (pointsRewards.points - userData.score) : 0}</b> puntos sera:</p>
+            <p><b className="orange">{pointsRewards ? pointsRewards.title : "Ya tienes todas las recompensas!"}</b></p>
           </div>
           <div className="col-sm text-center">
             <CircleProgress progress={timeProgress} total={monthReward.length} color={"#29c784"} />
-            <p>Llevas <b className="green">{timeLevel}</b> meses inscrita a <b>Gonvar+</b>, por lo cúal tienes <b className="green">{monthReward[0].title}.</b></p>
+            <p>Llevas <b className="green">{timeLevel}</b> meses inscrita a <b>Gonvar+</b>, por lo cúal tienes <b className="green">{monthReward[0] ? monthReward[0].title : "por lo cual aun no obtienes descuento en productos Gonvar"}.</b></p>
             {/* <p>Ademas tienes <b className="green">{'x'}</b> cantidad de biletos para nuestra rifa que sera el </p>
             <p className="close"><b className="green">{'fecha'}</b></p> */}
           </div>
