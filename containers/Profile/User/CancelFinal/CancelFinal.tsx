@@ -14,11 +14,43 @@ const CancelFinal = () => {
   const [pop, setPop] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [loader, setLoader] = useState<boolean>(false);
+  const [formData, setFormData] = useState({
+    firstQuestion: 0,
+    secondQuestion: "",
+    thirdQuestion: "",
+    fourthQuestion: 0,
+    fifthQuestion: 0,
+  })
+  const [other, setOther] = useState("");
   const goBack = () => {
     router.push({ pathname: "/Profile" });
   }
+  const getFirstQuestions = (question: number) => {
+    let text = ""
+    if (question === 1) {
+      text = "Dificultades económicas"
+    }
+    if (question === 2) {
+      text = "No me gusto la plataforma"
+    }
+    if (question === 3) {
+      text = "Falta de tiempo"
+    }
+    if (question === 4) {
+      text = other
+    }
+    return text
+  }
   const goCancel = () => {
     //router.push({ pathname: "/pause-suscription" });
+    let tempData = {
+      first: getFirstQuestions(formData.firstQuestion),
+      second: formData.secondQuestion,
+      third: formData.thirdQuestion,
+      fourth: formData.fourthQuestion,
+      fifth: formData.fifthQuestion,
+    }
+
     setPop(true)
   }
   const comeback = [{ key: 1, value: 1 },
@@ -41,7 +73,7 @@ const CancelFinal = () => {
   { key: 8, value: 8 },
   { key: 9, value: 9 },
   { key: 10, value: 10 }]
-
+  console.log(formData);
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -83,36 +115,104 @@ const CancelFinal = () => {
         <div className="row w-100 mx-4 my-4">
           <div className="col-4">
             <div className="form-check m-1">
-              <input type="radio" className="form-check-input p-radio" />
+              <input
+                type="radio"
+                className="form-check-input p-radio"
+                name="first-question"
+                value={formData.firstQuestion}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData, firstQuestion: 1
+                  })
+                }}
+              />
               <label className="form-check-label">Dificultades económicas</label>
             </div>
             <div className="form-check m-1">
-              <input type="radio" className="form-check-input p-radio" />
+              <input
+                type="radio"
+                className="form-check-input p-radio"
+                name="first-question"
+                value={formData.firstQuestion}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData, firstQuestion: 2
+                  })
+                }}
+              />
               <label className="form-check-label">No me gusto la plataforma</label>
             </div>
           </div>
           <div className="col-8">
             <div className="form-check m-1">
-              <input type="radio" className="form-check-input p-radio" />
+              <input
+                type="radio"
+                className="form-check-input p-radio"
+                name="first-question"
+                value={formData.firstQuestion}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData, firstQuestion: 3
+                  })
+                }}
+              />
               <label className="form-check-label">Falta de tiempo</label>
             </div>
             <div className="form-check m-1 w-75">
-              <input type="radio" className="form-check-input p-radio" />
+              <input
+                type="radio"
+                className="form-check-input p-radio"
+                name="first-question"
+                value={formData.firstQuestion}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData, firstQuestion: 4
+                  })
+                }}
+              />
               <label className="form-check-label">Otro</label>
-              <input type="text" className="ms-2 t-input w-75" />
+              <input
+                type="text"
+                className="ms-2 t-input w-75 input-other"
+                onChange={(e) => {
+                  setOther(e.target.value)
+                }}
+              />
             </div>
           </div>
         </div>
         <p>Describe con sinceridad el por qué  quieres cancelar tu suscripción.</p>
-        <textarea className="t-area w-75 ms-3 mb-3" placeholder="Escribe aquí" />
+        <textarea
+          className="t-area w-75 ms-3 mb-3"
+          placeholder="Escribe aquí"
+          onChange={(e) => {
+            setFormData({
+              ...formData, secondQuestion: e.target.value
+            })
+          }}
+        />
         <p>¿Qué te gustaría ve mejorado en la plataforma?*</p>
-        <textarea className="t-area w-75 ms-3 mb-3" placeholder="Escribe aquí" />
+        <textarea
+          className="t-area w-75 ms-3 mb-3"
+          placeholder="Escribe aquí"
+          onChange={(e) => {
+            setFormData({
+              ...formData, thirdQuestion: e.target.value
+            })
+          }}
+        />
         <p>¿Qué tan probable es que regreses en el futuro?*</p>
         <div className="ms-4">
           {comeback && comeback.map((come) => {
             return (
               <div className="checkboxgroup mx-3" key={come.key}>
-                <input className="form-check-input p-radio" name="comeback_value" type="radio" value={come.value} />
+                <input className="form-check-input p-radio" name="comeback_value" type="radio" value={come.value}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData, fourthQuestion: parseInt(e.target.value)
+                    })
+                  }}
+                />
                 <label><b>{come.value}</b></label>
               </div>
             )
@@ -123,7 +223,13 @@ const CancelFinal = () => {
           {calif && calif.map((cal) => {
             return (
               <div className="checkboxgroup mx-3" key={cal.key}>
-                <input className="form-check-input p-radio" name="calif_value" type="radio" value={cal.value} />
+                <input className="form-check-input p-radio" name="calif_value" type="radio" value={cal.value}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData, fifthQuestion: parseInt(e.target.value)
+                    })
+                  }}
+                />
                 <label><b>{cal.value}</b></label>
               </div>
             )
