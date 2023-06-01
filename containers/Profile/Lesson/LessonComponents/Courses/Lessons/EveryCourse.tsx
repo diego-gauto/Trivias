@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, CurrentCourse, CurrentDivider, DetailContain, Details, DividerComplete, DividerIncomplete, IncompleteCircle, LessonContain, ProgressCircle } from './EveryCourse.styled';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { DOWNLOAD_MATERIAL, HW_ICON } from '../../../../../../utils/Constants';
 
 const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
 
@@ -59,8 +61,8 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
     // conditionalDiv(less, lIndex);
     // return 'okey';
   }
-
   const conditionalDiv = (less: any, index: number) => {
+    console.log(less);
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
@@ -72,10 +74,26 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
           {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
         </CourseTitle>}
         <DetailContain>
-          {!("mandatory" in less) && <CourseLength>
-            {hms(less.duration)}
-            {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
-          </CourseLength>}
+          {
+            less.homework === 1 &&
+            <div className='activity'>
+              <img src={HW_ICON} />
+              Esta lección tiene una tarea
+            </div>
+          }
+          {
+            less.lesson_material.length > 0 &&
+            <div className='activity'>
+              <img src={DOWNLOAD_MATERIAL} />
+              Esta lección tiene material descargable
+            </div>
+          }
+          {!("mandatory" in less) &&
+            <CourseLength>
+              <AiOutlineClockCircle className='icon' />
+              {hms(less.duration)}
+              {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
+            </CourseLength>}
           {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
           </CoursePoints>} */}
@@ -109,7 +127,22 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
           {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
         </CourseTitle>}
         <DetailContain>
+          {
+            less.homework === 1 &&
+            <div className='activity'>
+              <img src={HW_ICON} />
+              Esta lección tiene una tarea
+            </div>
+          }
+          {
+            less.lesson_material.length > 0 &&
+            <div className='activity'>
+              <img src={DOWNLOAD_MATERIAL} />
+              Esta lección tiene material descargable
+            </div>
+          }
           <CourseLength>
+            <AiOutlineClockCircle />
             {hms(less.duration)}
             {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>
@@ -124,7 +157,22 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
         {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
       </CourseTitle>
       <DetailContain>
+        {
+          less.homework === 1 &&
+          <div className='activity'>
+            <img src={HW_ICON} />
+            Esta lección tiene una tarea
+          </div>
+        }
+        {
+          less.lesson_material.length > 0 &&
+          <div className='activity'>
+            <img src={DOWNLOAD_MATERIAL} />
+            Esta lección tiene material descargable
+          </div>
+        }
         <CourseLength>
+          <AiOutlineClockCircle />
           {hms(less.duration)}
           {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
         </CourseLength>
