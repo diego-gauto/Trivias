@@ -47,8 +47,6 @@ const NavBar = () => {
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
-
-  //declare any object in state
   const [userData, setUserData] = useState<any>(null);
 
   const toggleIngresarOptionsMenu = () => {
@@ -136,6 +134,9 @@ const NavBar = () => {
           setIsAdmin(true);
         }
         setLoggedIn(true);
+      }
+      if (pathname === "/_error") {
+        router.push("/")
       }
     }, [userDataAuth])
 

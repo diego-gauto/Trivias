@@ -31,7 +31,6 @@ const Lesson = () => {
     lessonIndex: 0,
     seasonIndex: 0,
   });
-
   useEffect(() => {
     if (course) {
       getCourse();
@@ -51,6 +50,10 @@ const Lesson = () => {
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
+      if (router.asPath === "/Lesson") {
+        router.push("/Preview")
+        return
+      }
       if (userDataAuth.user !== null) {
         let user = userDataAuth.user;
         let today = new Date().getTime() / 1000;
