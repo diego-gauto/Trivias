@@ -5,11 +5,13 @@ import { CancelFin } from "./CancelFinal.styles";
 import { cancelPaypal, cancelStripe, getUserApi } from "../../../../components/api/users";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import { cancelReview } from "../../../../components/api/admin";
+import AlertModal from "../../../../components/AlertModal/AlertModal";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
 const CancelFinal = () => {
   const [pop, setPop] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null);
   const [loader, setLoader] = useState<boolean>(false);
   const [buttonLoader, setButtonLoader] = useState(false);
@@ -23,6 +25,9 @@ const CancelFinal = () => {
   const [other, setOther] = useState("");
   const goBack = () => {
     router.push({ pathname: "/Profile" });
+  }
+  const onHide = () => {
+    setShow(false);
   }
   const getFirstQuestions = (question: number) => {
     let text = ""
@@ -51,8 +56,14 @@ const CancelFinal = () => {
       fifth_question: formData.fifthQuestion,
       user_id: userData.user_id,
     }
-    if (tempData.first_question === "" && formData.firstQuestion === 4) {
-      alert("Nos puede indicar el otro motivo porfavor")
+    if ((tempData.first_question === "" && formData.firstQuestion === 4)
+      || formData.firstQuestion === 0
+      || tempData.second_question === ""
+      || tempData.third_question === ""
+      || tempData.fourth_question === 0
+      || tempData.fifth_question === 0
+    ) {
+      setShow(true);
       setButtonLoader(false);
     }
     else {
@@ -275,6 +286,7 @@ const CancelFinal = () => {
         </div>
       </div>
       <img src={corazon} className="under" />
+      <AlertModal show={show} onHide={onHide} message={"Complete todos los campos"} />
     </CancelFin>
   )
 }

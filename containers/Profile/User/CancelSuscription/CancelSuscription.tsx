@@ -6,10 +6,6 @@ import { getUserApi } from "../../../../components/api/users";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/rewards";
 import CircleProgress from "../../../CircleProgress/CircleProgress";
-
-const GroupN = "/images/benefits_placeholder/GroupN.png"
-const GroupG = "/images/benefits_placeholder/GroupG.png"
-const GroupB = "/images/benefits_placeholder/GroupB.png"
 const manitas = "/images/cancel_suscription/manos moradas.png"
 
 const CancelSuscription = () => {
@@ -162,6 +158,22 @@ const CancelSuscription = () => {
       setMissingData(missingData + 1);
     })
   }
+  const getMonthForRaffle = () => {
+    const current_date = new Date().getMonth() + 1;
+    if (current_date >= 1 && current_date <= 3) {
+      return "Mes de Abril"
+    }
+    if (current_date >= 4 && current_date <= 6) {
+      return "Mes de Julio"
+    }
+    if (current_date >= 7 && current_date <= 9) {
+      return "Mes de Octubre"
+    }
+    if (current_date >= 10 && current_date <= 12) {
+      return "Mes de Enero"
+    }
+    return "Mes de Enero"
+  }
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -188,10 +200,12 @@ const CancelSuscription = () => {
   return (
     <CancelSub>
       <div className="m-3">
-        <h2 className="purple-dark">¿Estás seguro que quieres cancelar tu suscripción?</h2>
-        {/* <h2 className="purple-dark">¿Pasando por un mal momento?</h2> */}
+        {/* <h2 className="purple-dark">¿Estás seguro que quieres cancelar tu suscripción?</h2> */}
+        <h2 className="purple-dark">¿Pasando por un mal momento?</h2>
         {/* <h2 className="purple">Pausa tu suscripción y no pierdas tus avances.</h2> */}
-        {/* <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p> */}
+        <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p>
+        <p className="my-4">Quizás no has podido tomar tus clases o no cuentas con el dinero suficiente para continuar. </p>
+        <p className="my-4">Pero debo decirte que <b>Gonvar+</b> no sólo son clases, también tienes recompensas, beneficios y certificados que <b>perderás al cancelar:</b></p>
         {/* <p>Ademas al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
         <div className="row w-100 justify-content-around">
           <div className="col-sm text-center">
@@ -205,8 +219,8 @@ const CancelSuscription = () => {
           <div className="col-sm text-center">
             <CircleProgress progress={timeProgress} total={monthReward.length} color={"#29c784"} />
             <p>Llevas <b className="green">{timeLevel}</b> meses inscrita a <b>Gonvar+</b>, por lo cúal tienes <b className="green">{monthReward[0] ? monthReward[0].title : "por lo cual aun no obtienes descuento en productos Gonvar"}.</b></p>
-            {/* <p>Ademas tienes <b className="green">{'x'}</b> cantidad de biletos para nuestra rifa que sera el </p>
-            <p className="close"><b className="green">{'fecha'}</b></p> */}
+            <p>Ademas tienes <b className="green">{timeLevel}</b> cantidad de biletos para nuestra rifa que sera el </p>
+            <p className="close"><b className="green">{getMonthForRaffle()}</b></p>
           </div>
           <div className="col-sm text-center">
             <CircleProgress progress={certificateProgress} total={userData.user_certificates.length} color={"#1b7beb"} />
@@ -230,6 +244,16 @@ const CancelSuscription = () => {
             </div>
           </div>
         </div>
+        <p className="my-4"><b>¡Haz las cuentas!</b>, todo lo que Gonvar te regala te conviene.</p>
+        <p className="my-4">
+          Si eres una aplicadora que gasta al menos 250 pesos al mes en producto de
+          uñas, créeme que <b>te saldrá más económico</b> quedarte a recibir todos los regalos, que cancelar y
+          comprar de todas formas producto de baja calidad, en otro lado y al mismo precio que el de Gonvar.
+        </p>
+        <p className="my-4">
+          Evita cancelar tu suscripción y recuerda que Gonvar+ te regala producto cada dos meses, te otorga
+          <b> boletos para rifas </b>y <b>descuentos de hasta 40% en producto</b>.
+        </p>
         {/* <p><b>No dejes que los obstáculos te detengan.</b> Pausa tu suscripción y aprovecha esta oportunidad
           para cuidar de ti misma. Cuando estés lista, <b>estaremos aquí para ayudarte a retomar tu camino como
             Nail Artist.</b></p> */}

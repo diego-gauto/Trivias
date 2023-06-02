@@ -7,7 +7,6 @@ export const CancelSub = styled.div`
   padding-right: 25%;
   position: relative;
   min-height: 85vh;
-  text-align: center;
   @media (max-width: 650px) {
     padding-inline: 5%;
   }

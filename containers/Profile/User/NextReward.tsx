@@ -126,7 +126,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
               </div>
               <div className="space-bt">
                 <img src={gr_star} />
-                <p className="p-li">Llevas <b className="green">{timeLevel + (timeLevel === 1 ? " mes" : " meses")}</b> de contratar <b><i>Gonvar+</i></b>,
+                <p className="p-li">Llevas <b className="green">{timeLevel + (timeLevel === 1 ? " mes" : " meses")}</b> inscrita a <b><i>Gonvar+</i></b>,
                   lo que te ha dado como beneficio un descuento del <b className="green">{lastTimeReward[0].title} </b>
                   en todos nuestros productos</p>
               </div>
