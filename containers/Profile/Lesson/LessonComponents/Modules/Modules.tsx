@@ -8,8 +8,6 @@ import { MainContainer } from './Module.styled'
 const Modules = ({ data, blockForNextSeason, user, season, lesson, teacherCreds, courseIds, handleClick, course, previousLesson, nextLesson, firstLesson, lastLesson }: any) => {
   const { admin }: any = router.query;
   const [position, setPosition] = useState(1)
-  console.log(user);
-  console.log(course);
   const changePosition = (value: number) => {
     setPosition(value);
   }

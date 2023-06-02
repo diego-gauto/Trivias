@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, CurrentCourse, CurrentDivider, DetailContain, Details, DividerComplete, DividerIncomplete, IncompleteCircle, LessonContain, ProgressCircle } from './EveryCourse.styled';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { DOWNLOAD_MATERIAL, HW_ICON } from '../../../../../../utils/Constants';
+import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from '../../../../../../utils/Constants';
 
 const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
 
@@ -62,7 +62,6 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
     // return 'okey';
   }
   const conditionalDiv = (less: any, index: number) => {
-    console.log(less);
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
@@ -152,7 +151,9 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
         </DetailContain>
       </Details>)
     }
-    return (<Details style={{ 'background': '#84848499', borderRadius: '5px', cursor: 'auto' }}>
+    return (<Details
+      style={{ borderRadius: '5px', cursor: 'auto' }}
+    >
       <CourseTitle active={data?.id == less.id}>
         {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
       </CourseTitle>
@@ -182,23 +183,45 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
       </DetailContain>
     </Details>)
   }
-
+  console.log(course);
   return (
     <>
       {lessons.map((less: any, index: any) => {
         return (
-          <LessonContain key={"All lesson " + index} style={{
-            borderBottomRightRadius: index == lessons.length - 1 ? "35px" : 0,
-            borderBottomLeftRadius: index == lessons.length - 1 ? "35px" : 0,
-            boxShadow: index == lessons.length - 1 ? "0px 10px 20px -7px rgb(0 0 0 / 35%)" : "none"
-          }}>
-            {data?.id == less.id && <CurrentCircle>
-              {index !== (lessons.length - 1) && <DividerIncomplete />}
-            </CurrentCircle>
+          <LessonContain key={"All lesson " + index}
+            style={{
+              borderBottomRightRadius: index == lessons.length - 1 ? "35px" : 0,
+              borderBottomLeftRadius: index == lessons.length - 1 ? "35px" : 0,
+              maxHeight: index === lessons.length - 1 ? 130 : 100,
+              boxShadow: index == lessons.length - 1 ? "0px 10px 20px -7px rgb(0 0 0 / 35%)" : "none"
+            }}
+          >
+            {data?.id == less.id &&
+              <CurrentCircle>
+                {index !== (lessons.length - 1) && <DividerIncomplete />}
+              </CurrentCircle>
             }
-            {(data?.id !== less.id && !less.users?.includes(userId)) && <IncompleteCircle>
-              {index !== (lessons.length - 1) && <DividerIncomplete />}
-            </IncompleteCircle>}
+            {
+              course.mandatory === 0
+                ?
+                <>
+                  {(data?.id !== less.id && !less.users?.includes(userId)) &&
+                    <div className='lock-icon'>
+                      <img src={LOCK_ICON} />
+                      {index !== (lessons.length - 1) && <DividerIncomplete />}
+                    </div>
+                  }
+                </>
+                :
+                <>
+                  {(data?.id !== less.id && !less.users?.includes(userId)) &&
+                    <IncompleteCircle>
+                      {index !== (lessons.length - 1) && <DividerIncomplete />}
+                    </IncompleteCircle>
+                  }
+                </>
+            }
+
             {(less.users?.includes(userId) && data?.id !== less.id) &&
               <ProgressCircle>
                 {(index !== (lessons.length - 1)) && <DividerComplete />}

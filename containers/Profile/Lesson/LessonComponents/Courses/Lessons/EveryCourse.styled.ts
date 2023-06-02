@@ -5,13 +5,26 @@ export const LessonContain = styled.div`
   width: 100%;
   gap: 15px;
   position: relative;
-  height: 100px;
   min-height: 100px;
+  max-height: 100px;
   align-items: baseline;
   padding-left: 30px;
   padding-top: 20px;
   padding-bottom: 10px;
   cursor: pointer;
+  .lock-icon {
+    position: relative;
+    display: flex;
+    width: 10px;
+    height: 10px;
+    img {
+      position: absolute;
+      width: 10px;
+      height: 15px;
+      top: -2px;
+      z-index: 3;
+    }
+  }
   @media (max-width: 1124px) {
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
@@ -63,7 +76,6 @@ export const Details = styled.div`
   display: flex;
   width: 90%;
   flex-direction: column;
-  gap: 5px;
   cursor: pointer;
 `;
 export const DetailContain = styled.div`

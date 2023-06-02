@@ -11,19 +11,19 @@ interface IModule {
   changeValue: (val: number) => void;
   nextLesson: any;
   previousLesson: any;
-  courseId: number;
+  course: any;
   firstLesson: boolean;
   lastLesson: boolean;
   blockForNextSeason: boolean
 }
 const ModuleTabs = (props: IModule) => {
-  const { value, changeValue, blockForNextSeason, nextLesson, previousLesson, courseId, firstLesson, lastLesson } = props;
+  const { value, changeValue, blockForNextSeason, nextLesson, previousLesson, course, firstLesson, lastLesson } = props;
   const router = useRouter();
   const moveToNextLesson = () => {
     if (!lastLesson && !blockForNextSeason) {
       router.push({
         pathname: 'Lesson',
-        query: { id: courseId, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
+        query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
       })
     }
   }
@@ -31,7 +31,7 @@ const ModuleTabs = (props: IModule) => {
     if (!firstLesson) {
       router.push({
         pathname: 'Lesson',
-        query: { id: courseId, season: previousLesson.seasonIndex, lesson: previousLesson.lessonIndex },
+        query: { id: course.id, season: previousLesson.seasonIndex, lesson: previousLesson.lessonIndex },
       })
     }
   }
@@ -57,16 +57,19 @@ const ModuleTabs = (props: IModule) => {
           Comentarios
         </Titles>
       </div>
-      <div className='button-container'>
-        <div className='button-data' onClick={moveToPreviousLesson}>
-          <IoPlaySkipBackSharp className='btn-icon' style={firstLesson ? { color: "gray" } : {}} />
-          <p className={'btn-text ' + (firstLesson ? "gray" : "")} style={{ maxWidth: 57 }}>Lección <br />anterior</p>
+      {
+        course.mandatory === 1 &&
+        <div className='button-container'>
+          <div className='button-data' onClick={moveToPreviousLesson}>
+            <IoPlaySkipBackSharp className='btn-icon' style={firstLesson ? { color: "gray" } : {}} />
+            <p className={'btn-text ' + (firstLesson ? "gray" : "")} style={{ maxWidth: 57 }}>Lección <br />anterior</p>
+          </div>
+          <div className='button-data' onClick={moveToNextLesson}>
+            <p className={'btn-text ' + ((lastLesson || blockForNextSeason) ? "gray" : "")} style={{ maxWidth: 67 }}> Siguiente<br />Lección</p>
+            <IoPlaySkipForwardSharp className='btn-icon' style={(lastLesson || blockForNextSeason) ? { color: "gray" } : {}} />
+          </div>
         </div>
-        <div className='button-data' onClick={moveToNextLesson}>
-          <p className={'btn-text ' + ((lastLesson || blockForNextSeason) ? "gray" : "")} style={{ maxWidth: 67 }}> Siguiente<br />Lección</p>
-          <IoPlaySkipForwardSharp className='btn-icon' style={(lastLesson || blockForNextSeason) ? { color: "gray" } : {}} />
-        </div>
-      </div>
+      }
     </div>
   )
 }
