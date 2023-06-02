@@ -188,7 +188,8 @@ const CancelSuscription = () => {
   return (
     <CancelSub>
       <div className="m-3">
-        <h2 className="purple-dark">¿Pasando por un mal momento?</h2>
+        <h2 className="purple-dark">¿Estás seguro que quieres cancelar tu suscripción?</h2>
+        {/* <h2 className="purple-dark">¿Pasando por un mal momento?</h2> */}
         {/* <h2 className="purple">Pausa tu suscripción y no pierdas tus avances.</h2> */}
         {/* <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p> */}
         {/* <p>Ademas al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}

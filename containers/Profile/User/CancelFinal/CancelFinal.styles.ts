@@ -7,38 +7,6 @@ export const CancelFin = styled.div`
   padding-right: 25%;
   position: relative;
   width: 100%;
-  @media (max-width: 1023px) {
-    padding-inline: 5%;
-    .col-4 {
-      display: flex;
-      flex-direction: column;
-      .form-check-label {
-        white-space: nowrap;
-      }
-      .t-input {
-        min-width: 200px;
-      }
-    }
-    .buttons {
-      button {
-        min-width: 200px;
-      }
-    }
-  }
-  @media (max-width: 500px) {
-    textarea {
-      margin-left: 0 !important;
-      width: 100% !important;
-    }
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      button {
-        height: 41px;
-      }
-    }
-  }
   h1 {
     font-weight: 800;
   }
@@ -174,10 +142,17 @@ export const CancelFin = styled.div`
     display: flex;
     gap: 15px;
     justify-content: flex-start;
+    align-items: center;
+    .loader {
+      width: 276;
+      min-height: unset;
+      height: 50px;
+    }
     button {
       line-heigth: 90%;
       font-weight: 500;
       font-size: small;
+      height: fit-content;
       width: 25%;
       border: none;
       padding-inline: 50px;
@@ -207,8 +182,48 @@ export const CancelFin = styled.div`
     color: #3f1168;
   }
   @media (max-width: 1023px) {
+    padding-inline: 5%;
     .under {
       display: none;
+    }
+    .row {
+      display: flex;
+      flex-direction: column;
+    }
+    .col-4 {
+      display: flex;
+      flex-direction: column;
+      .form-check-label {
+        white-space: nowrap;
+      }
+      .t-input {
+        min-width: 200px;
+      }
+    }
+    .buttons {
+      button {
+        min-width: 200px;
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    textarea {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+    .t-input {
+      width: 200px !important;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .loader {
+        height: 100px;
+      }
+      button {
+        height: 41px;
+      }
     }
   }
 `;

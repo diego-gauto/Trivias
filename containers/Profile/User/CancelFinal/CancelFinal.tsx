@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-
 import { TfiClose } from "react-icons/tfi";
-
 import router from "next/router";
-
 import { CancelFin } from "./CancelFinal.styles";
-import { getUserApi } from "../../../../components/api/users";
+import { cancelPaypal, cancelStripe, getUserApi } from "../../../../components/api/users";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import { cancelReview } from "../../../../components/api/admin";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
@@ -14,6 +12,7 @@ const CancelFinal = () => {
   const [pop, setPop] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [loader, setLoader] = useState<boolean>(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
   const [formData, setFormData] = useState({
     firstQuestion: 0,
     secondQuestion: "",
@@ -43,16 +42,42 @@ const CancelFinal = () => {
   }
   const goCancel = () => {
     //router.push({ pathname: "/pause-suscription" });
+    setButtonLoader(true);
     let tempData = {
-      first: getFirstQuestions(formData.firstQuestion),
-      second: formData.secondQuestion,
-      third: formData.thirdQuestion,
-      fourth: formData.fourthQuestion,
-      fifth: formData.fifthQuestion,
+      first_question: getFirstQuestions(formData.firstQuestion),
+      second_question: formData.secondQuestion,
+      third_question: formData.thirdQuestion,
+      fourth_question: formData.fourthQuestion,
+      fifth_question: formData.fifthQuestion,
       user_id: userData.user_id,
     }
-    console.log(tempData);
-    setPop(true)
+    if (tempData.first_question === "" && formData.firstQuestion === 4) {
+      alert("Nos puede indicar el otro motivo porfavor")
+      setButtonLoader(false);
+    }
+    else {
+      cancelReview(tempData).then((res) => {
+        if (userData.method == 'stripe') {
+          let sub = {
+            subscriptionId: userData.plan_id,
+            userId: userData.user_id,
+            planName: ""
+          }
+          cancelStripe(sub).then(() => {
+            setPop(true)
+          })
+        } else {
+          let membership = {
+            planId: userData.plan_id,
+            id: userData.plan_id
+          }
+          cancelPaypal(membership).then(() => {
+            setPop(true)
+          })
+        }
+      })
+    }
+
   }
   const comeback = [{ key: 1, value: 1 },
   { key: 2, value: 2 },
@@ -236,7 +261,17 @@ const CancelFinal = () => {
           })}
         </div>
         <div className="buttons mt-5">
-          <button onClick={goCancel} className="left">Cancelar mi suscripción</button>
+          {
+            !buttonLoader
+              ? <button onClick={goCancel} className="left">Cancelar mi suscripción</button>
+              :
+              <BackgroundLoader className="loader">
+                <LoaderImage>
+                  <LoaderContain />
+                </LoaderImage>
+              </BackgroundLoader>
+          }
+
           <button onClick={goBack} className="right">Volver al inicio</button>
         </div>
       </div>

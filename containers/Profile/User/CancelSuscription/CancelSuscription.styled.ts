@@ -7,6 +7,7 @@ export const CancelSub = styled.div`
   padding-right: 25%;
   position: relative;
   min-height: 85vh;
+  text-align: center;
   @media (max-width: 650px) {
     padding-inline: 5%;
   }
@@ -107,7 +108,7 @@ export const CancelSub = styled.div`
   .buttons {
     display: flex;
     gap: 15px;
-    justify-content: flex-start;
+    justify-content: center;
     @media (max-width: 650px) {
       flex-direction: column;
       align-items: center;

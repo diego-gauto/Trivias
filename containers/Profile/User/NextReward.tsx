@@ -28,9 +28,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
   const [time, setTime] = useState<any>();
   const [certificates, setCertificates] = useState<any>();
   const [pop, setPop] = useState<any>(false);
-
   const today = new Date().getTime() / 1000;
-  console.log(timePrize)
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
     let tempMonthObj: any = { obtained: [], blocked: [] };
@@ -98,27 +96,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
   }, [])
 
   const cancelSubscription = async () => {
-    // setLoader(true);
-    // if (user.method == 'stripe') {
-    //   let sub = {
-    //     subscriptionId: user.plan_id,
-    //     userId: user.user_id,
-    //     planName: ""
-    //   }
-    //   cancelStripe(sub).then(() => {
-    //     handleClick()
-    //     setLoader(false);
-    //   })
-    // } else {
-    //   let membership = {
-    //     planId: user.plan_id,
-    //     id: user.plan_id
-    //   }
-    //   cancelPaypal(membership).then(() => {
-    //     handleClick()
-    //     setLoader(false);
-    //   })
-    // }
+    setLoader(true);
     router.push({
       pathname: "/cancel-suscription"
     });
