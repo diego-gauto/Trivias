@@ -199,7 +199,7 @@ const CancelSuscription = () => {
             <CircleProgress progress={data} total={totalPointRewards.length} color={"#f88114"} />
             <p><b className="orange">{userData.score}</b> Puntos obtenidos</p>
             <p><b className="orange">{totalPointRewards.length}</b> Recompensas obtenidas</p>
-            <p>Tu proxima recompensa a los <b className="orange">{pointsRewards ? (pointsRewards.points - userData.score) : 0}</b> puntos sera:</p>
+            <p>Tu proxima recompensa a los <b className="orange">{pointsRewards ? (pointsRewards.points) : 0}</b> puntos sera:</p>
             <p><b className="orange">{pointsRewards ? pointsRewards.title : "Ya tienes todas las recompensas!"}</b></p>
           </div>
           <div className="col-sm text-center">

@@ -152,7 +152,7 @@ export const CancelFin = styled.div`
       line-heigth: 90%;
       font-weight: 500;
       font-size: small;
-      height: fit-content;
+      height: 41px;
       width: 25%;
       border: none;
       padding-inline: 50px;
