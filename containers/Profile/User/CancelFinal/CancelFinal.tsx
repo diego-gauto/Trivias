@@ -145,7 +145,7 @@ const CancelFinal = () => {
             </div>
           </div>}
         <h1 className="purple-dark mb-4">Nos rompe el corazón que te vayas</h1>
-        <p><b>Se que existen multiples razones por las que  ya no puedes continuar con tu carrera de nails artist.</b></p>
+        <p><b>Se que existen múltiple razones por las que  ya no puedes continuar con tu carrera de nails artist.</b></p>
         <p className="my-0">¡Estamos en confianza! Platícame el motivo  por el que quieres cancelar tu suscripción, hermosa:</p>
         <div className="row w-100 mx-4 my-4">
           <div className="col-4">
