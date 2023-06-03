@@ -35,6 +35,7 @@ const ModuleTabs = (props: IModule) => {
       })
     }
   }
+  console.log(course);
   return (
     <div className='tab-container'>
       <div className='tabs'>
@@ -58,7 +59,7 @@ const ModuleTabs = (props: IModule) => {
         </Titles>
       </div>
       {
-        course.mandatory === 1 &&
+        (course.sequential === 0) &&
         <div className='button-container'>
           <div className='button-data' onClick={moveToPreviousLesson}>
             <IoPlaySkipBackSharp className='btn-icon' style={firstLesson ? { color: "gray" } : {}} />

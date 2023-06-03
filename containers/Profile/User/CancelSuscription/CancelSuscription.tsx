@@ -203,7 +203,8 @@ const CancelSuscription = () => {
         {/* <h2 className="purple-dark">¿Estás seguro que quieres cancelar tu suscripción?</h2> */}
         <h2 className="purple-dark">¿Pasando por un mal momento?</h2>
         {/* <h2 className="purple">Pausa tu suscripción y no pierdas tus avances.</h2> */}
-        <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p>
+        <p className="my-4">Sabemos que hay momentos en la vida en la que necesitas hacer un pausa. </p>
+        {/* <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p> */}
         <p className="my-4">Quizás no has podido tomar tus clases o no cuentas con el dinero suficiente para continuar. </p>
         <p className="my-4">Pero debo decirte que <b>Gonvar+</b> no sólo son clases, también tienes recompensas, beneficios y certificados que <b>perderás al cancelar:</b></p>
         {/* <p>Ademas al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
@@ -219,7 +220,7 @@ const CancelSuscription = () => {
           <div className="col-sm text-center">
             <CircleProgress progress={timeProgress} total={monthReward.length} color={"#29c784"} />
             <p>Llevas <b className="green">{timeLevel}</b> meses inscrita a <b>Gonvar+</b>, por lo cúal tienes <b className="green">{monthReward[0] ? monthReward[0].title : "por lo cual aun no obtienes descuento en productos Gonvar"}.</b></p>
-            <p>Ademas tienes <b className="green">{timeLevel}</b> cantidad de biletos para nuestra rifa que sera el </p>
+            <p>Ademas tienes <b className="green">{timeLevel}</b> cantidad de boletos para nuestra rifa que sera el </p>
             <p className="close"><b className="green">{getMonthForRaffle()}</b></p>
           </div>
           <div className="col-sm text-center">

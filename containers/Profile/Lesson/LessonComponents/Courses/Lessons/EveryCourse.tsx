@@ -183,7 +183,6 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
       </DetailContain>
     </Details>)
   }
-  console.log(course);
   return (
     <>
       {lessons.map((less: any, index: any) => {
@@ -202,7 +201,7 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
               </CurrentCircle>
             }
             {
-              course.mandatory === 0
+              course.sequential === 1
                 ?
                 <>
                   {(data?.id !== less.id && !less.users?.includes(userId)) &&
