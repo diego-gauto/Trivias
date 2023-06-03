@@ -207,25 +207,25 @@ const CancelSuscription = () => {
         {/* <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p> */}
         <p className="my-4">Quizás no has podido tomar tus clases o no cuentas con el dinero suficiente para continuar. </p>
         <p className="my-4">Pero debo decirte que <b>Gonvar+</b> no sólo son clases, también tienes recompensas, beneficios y certificados que <b>perderás al cancelar:</b></p>
-        {/* <p>Ademas al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
+        {/* <p>Además al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
         <div className="row w-100 justify-content-around">
           <div className="col-sm text-center">
             {/* <img src={GroupN} className="mb-3" /> */}
             <CircleProgress progress={data} total={totalPointRewards.length} color={"#f88114"} />
             <p><b className="orange">{userData.score}</b> Puntos obtenidos</p>
             <p><b className="orange">{totalPointRewards.length}</b> Recompensas obtenidas</p>
-            <p>Tu proxima recompensa a los <b className="orange">{pointsRewards ? (pointsRewards.points) : 0}</b> puntos sera:</p>
+            <p>Tu próxima recompensa a los <b className="orange">{pointsRewards ? (pointsRewards.points) : 0}</b> puntos será:</p>
             <p><b className="orange">{pointsRewards ? pointsRewards.title : "Ya tienes todas las recompensas!"}</b></p>
           </div>
           <div className="col-sm text-center">
             <CircleProgress progress={timeProgress} total={monthReward.length} color={"#29c784"} />
-            <p>Llevas <b className="green">{timeLevel}</b> meses inscrita a <b>Gonvar+</b>, por lo cúal tienes <b className="green">{monthReward[0] ? monthReward[0].title : "por lo cual aun no obtienes descuento en productos Gonvar"}.</b></p>
-            <p>Ademas tienes <b className="green">{timeLevel}</b> cantidad de boletos para nuestra rifa que sera el </p>
+            <p>Llevas <b className="green">{timeLevel}</b> meses inscrita a <b>Gonvar+</b>, por lo cual tienes <b className="green">{monthReward[0] ? monthReward[0].title : "por lo cual aun no obtienes descuento en productos Gonvar"}.</b></p>
+            <p>Además tienes <b className="green">{timeLevel}</b> boletos para nuestra rifa que será en el </p>
             <p className="close"><b className="green">{getMonthForRaffle()}</b></p>
           </div>
           <div className="col-sm text-center">
             <CircleProgress progress={certificateProgress} total={userData.user_certificates.length} color={"#1b7beb"} />
-            <p>Haz obtenido <b className="blue">{userData.user_certificates.length}</b> certificados con FUV <b>{'('}folio único verificado{')'},</b> y estas
+            <p>Haz obtenido <b className="blue">{userData.user_certificates.length}</b> certificados con FUV <b>{'('}folio único verificado{')'},</b> y estás
               a punto de conseguir el certificado del curso </p>
             <div className="close">
               {

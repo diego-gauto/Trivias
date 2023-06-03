@@ -114,7 +114,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
               <TfiClose className="ex-icon" onClick={() => setPop(false)} />
             </div>
             <h2>¡Nos estristece saber que deseas irte!</h2>
-            <p className="sangria sangria-y">Al cancelar tu suscripcion <b className="purple"> se reiniciara todo tu avance. </b>
+            <p className="sangria sangria-y">Al cancelar tu suscripción <b className="purple"> se reiniciará todo tu avance. </b>
               Tus beneficios, recompensas y certificados se perderán.
             </p>
             <p>En este momento, <b className="purple">{user.name}</b>, has completado <b>{user.user_certificates?.length}</b> {user.user_certificates?.length === 1 ? "curso" : "cursos"} y cuentas con:</p>
@@ -122,7 +122,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
               <div className="space-bt">
                 <img src={or_star} />
                 <p className="p-li"><b className="orange">{user.score}</b> Puntos obtenidos, <b className="orange">{points?.obtained.length} </b>
-                  recompensas obtenidas por puntaje y una proxima recompensa a los <b className="orange">{points?.blocked[0].points}</b> puntos.</p>
+                  recompensas obtenidas por puntaje y una próxima recompensa a los <b className="orange">{points?.blocked[0].points}</b> puntos.</p>
               </div>
               <div className="space-bt">
                 <img src={gr_star} />
@@ -133,7 +133,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
               <div className="space-bt">
                 <img src={bl_star} />
                 <p className="p-li">Has obtenido <b className="blue">{user.user_certificates?.length}</b> {user.user_certificates?.length === 1 ? "certificado" : "certificados"} de tus cursos y estas
-                  por completar <b className="blue">{certificates?.length}</b> cursos mas.</p>
+                  por completar <b className="blue">{certificates?.length}</b> cursos más.</p>
               </div>
             </ul>
             <div className="buttons">
