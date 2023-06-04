@@ -4,7 +4,7 @@ export interface IBlog {
     seconds: number;
   };
   image: string;
-  created_at: string;
+  created_at: Date;
   path: string;
   subTopic: [ISubTopic];
   title: string;

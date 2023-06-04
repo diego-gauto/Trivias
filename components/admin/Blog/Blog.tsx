@@ -9,6 +9,7 @@ import { IBlog } from './IBlog';
 import { createBlogsApi, getBlogsApi, updateBlogImageApi, updateBlogsApi, updateSubTopicImageApi } from '../../api/blog';
 import { updateBlogImage, updateSubTopicImage } from '../../../store/actions/FireBaseImages';
 import { getUserApi } from '../../api/users';
+import { formatBlogDate } from '../../../utils/functions';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
@@ -122,16 +123,7 @@ const Blog = () => {
   useEffect(() => {
     getBlogsApi().then((res) => {
       res.forEach((blog: IBlog, index: number) => {
-        let date = new Date(blog.created_at)
-        let tempDay = date.getDate();
-        let tempMonth = date.getMonth() + 1;
-        let textMonth: string = getMonth(tempMonth);
-        let tempYear = date.getFullYear();
-        blog.date = {
-          day: tempDay,
-          month: textMonth,
-          year: tempYear,
-        };
+        blog.date = formatBlogDate(blog.created_at)
       });
       setBlogs(res)
       setLoader(true);

@@ -1,75 +1,23 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BlogContainer, BlogItems } from './Blog.styled';
 import router from "next/router";
-import { getBlogs } from '../../../store/actions/AdminActions';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { IBlog } from './IBlog';
 import { getBlogsApi } from '../../../components/api/blog';
 import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../components/Loader.styled';
+import { formatBlogDate } from '../../../utils/functions';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
   const [loader, setLoader] = useState(false);
 
-
   const goToBlog = (blog: any) => {
-    let blogText: any = blog.title.replaceAll("-", "&#45;").replaceAll(" ", "-");
-    router.push({ pathname: `/Blogs/${blogText}` })
-  }
-  const getMonth = (month: any) => {
-    if (month === 1) {
-      return "ene"
-    }
-    else if (month === 2) {
-      return "feb"
-    }
-    else if (month === 3) {
-      return "mar"
-    }
-    else if (month === 4) {
-      return "abr"
-    }
-    else if (month === 5) {
-      return "may"
-    }
-    else if (month === 6) {
-      return "jun"
-    }
-    else if (month === 7) {
-      return "jul"
-    }
-    else if (month === 8) {
-      return "ago"
-    }
-    else if (month === 9) {
-      return "sep"
-    }
-    else if (month === 10) {
-      return "oct"
-    }
-    else if (month === 11) {
-      return "nov"
-    }
-    else if (month === 12) {
-      return "dec"
-    }
-    else {
-      return ''
-    }
+    router.push({ pathname: `/Blogs/${blog.route}` })
   }
   useEffect(() => {
     getBlogsApi().then((res) => {
       res.forEach((blog: IBlog, index: number) => {
-        let date = new Date(blog.created_at)
-        let tempDay = date.getDate();
-        let tempMonth = date.getMonth() + 1;
-        let textMonth: string = getMonth(tempMonth);
-        let tempYear = date.getFullYear();
-        blog.date = {
-          day: tempDay,
-          month: textMonth,
-          year: tempYear,
-        };
+        blog.date = formatBlogDate(blog.created_at)
       });
       setBlogs(res)
       setLoader(true);
