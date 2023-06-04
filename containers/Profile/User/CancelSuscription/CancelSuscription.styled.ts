@@ -155,7 +155,7 @@ export const CancelSub = styled.div`
     color: #f88114;
   }
   .close {
-    line-height: 50%;
+    line-height: 18px;
   }
   @media (max-width: 1023px) {
     .under {
