@@ -17,6 +17,7 @@ import ErrorModal from "../../../components/Error/ErrorModal";
 import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, getCourseForCheckoutApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
 import { getUserApi, updateMembership } from "../../../components/api/users";
 import { retrieveCoupons } from "../../../components/api/admin";
+import { PREVIEW_PATH } from "../../../constants/paths";
 
 const Purchase = () => {
   const [user, setUser] = useState("");
@@ -107,7 +108,7 @@ const Purchase = () => {
   const guardCheckout = (userData: any) => {
     let today = new Date().getTime() / 1000;
     if (router.query.type == "subscription" && userData.level === 1) {
-      window.location.href = "/Preview";
+      window.location.href = PREVIEW_PATH;
     }
   }
 
@@ -377,7 +378,7 @@ const Purchase = () => {
                 <b>¡No esperes más y comienza a aprender!</b></p>
 
               <button className="full">
-                <Link href="/Preview">Ver los cursos</Link>
+                <Link href={PREVIEW_PATH}>Ver los cursos</Link>
               </button>
             </div>
           </div>}

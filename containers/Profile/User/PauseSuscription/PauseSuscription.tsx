@@ -8,13 +8,14 @@ import "animate.css";
 import router from "next/router";
 
 import { PauseSub } from "./PauseSuscription.styled";
+import { PROFILE_PATH } from "../../../../constants/paths";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
 export const PauseSuscription = () => {
   const [pop, setPop] = useState(false)
   const goBack = () => {
-    router.push({ pathname: "/Profile" });
+    router.push({ pathname: PROFILE_PATH });
   }
   const goPause = () => {
     //router.push({ pathname: "/pause-suscription" });

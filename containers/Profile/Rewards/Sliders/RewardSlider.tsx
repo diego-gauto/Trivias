@@ -6,6 +6,7 @@ import { reward_slider } from "./IRewardSlider";
 import { createRequestApi } from '../../../../components/api/rewards';
 import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
 import { createNotification } from '../../../../components/api/notifications';
+import { CERTIFICATES_PATH } from '../../../../constants/paths';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -123,7 +124,7 @@ const RewardSlider = (props: reward_slider) => {
   const moveToCertificate = (course: any) => {
     console.log(course)
     router.push({
-      pathname: `/Certificates`,
+      pathname: CERTIFICATES_PATH,
       query: {
         certificate_id: course.certificate_id
       }

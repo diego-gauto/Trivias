@@ -12,6 +12,7 @@ import Img4 from "../Module1/MediaSources/Icon04.svg";
 import { ArrowDownContainer, BlurDiv, FirstSectionContainer } from "./FirstSection.styled";
 import { IFirstSectionProps } from "./IFirstSectionProps";
 import { FaArrowRight } from "react-icons/fa";
+import { PREVIEW_PATH } from "../../../constants/paths";
 
 export const FirstSection = (props: IFirstSectionProps) => {
   const { data, img } = props;
@@ -57,7 +58,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
             </Col>
             <Col xs={12} sm={6} md={6} lg={5} >
               <div className="grey-field">
-                <a onClick={() => router.push("/Preview")}>
+                <a onClick={() => router.push(PREVIEW_PATH)}>
                   {data?.botonSecundario}
                   <FaArrowRight></FaArrowRight>
                 </a>

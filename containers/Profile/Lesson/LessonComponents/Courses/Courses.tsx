@@ -10,6 +10,7 @@ import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer, HamburgerContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
 import { LOCK_ICON } from '../../../../../utils/Constants';
+import { CERTIFICATES_PATH } from '../../../../../constants/paths';
 
 const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
   const [selected, setSelected] = useState<any>([]);
@@ -69,7 +70,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
 
   const moveToCertificate = () => {
     router.push({
-      pathname: `/Certificates`,
+      pathname: CERTIFICATES_PATH,
       query: {
         certificate_id: certificate_id
       }

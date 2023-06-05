@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, CurrentCourse, CurrentDivider, DetailContain, Details, DividerComplete, DividerIncomplete, IncompleteCircle, LessonContain, ProgressCircle } from './EveryCourse.styled';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from '../../../../../../utils/Constants';
+import { LESSON_PATH } from '../../../../../../constants/paths';
 
 const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
 
@@ -25,12 +26,12 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
     let lastIndex;
     let tempPreviousSeason;
     return router.push({
-      pathname: 'Lesson',
+      pathname: LESSON_PATH,
       query: { id: course.id, season: season, lesson: lIndex },
     })
     // if (course.type == "Gratis" || !course.courseHomeWork) {
     //   return router.push({
-    //     pathname: 'Lesson',
+    //     pathname: LESSON_PATH,
     //     query: { id: id, season: season, lesson: lIndex },
     //   })
     // }
@@ -53,7 +54,7 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
     //     season > 0 && lIndex > 0 && !lessons[lIndex - 1].homeworkAvailable && "progress" in lessons[lIndex - 1] && lessons[lIndex - 1].progress[tempIndex]
     //   ) {
     //     router.push({
-    //       pathname: 'Lesson',
+    //       pathname: LESSON_PATH,
     //       query: { id: id, season: season, lesson: lIndex },
     //     });
     //   }

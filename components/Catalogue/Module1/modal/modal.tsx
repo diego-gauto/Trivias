@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import router from "next/router";
 
-import { LOGIN_PATH } from "../../../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../../../constants/paths";
 import { PlayIcon, PurpleButton } from "../../Module1/Module1.styled";
 import {
   Container,
@@ -59,24 +59,24 @@ const Modal = ({ show, setShow, course, user }: any) => {
       let today = new Date().getTime() / 1000;
       if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: course.documentID, season: 0, lesson: 0 },
         });
       }
       if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
         router.push(
-          { pathname: 'Purchase', query: { type: 'subscription' } }
+          { pathname: PURCHASE_PATH, query: { type: 'subscription' } }
         )
       }
       if (course.courseType == 'Producto' && !course.paid) {
         router.push(
-          { pathname: 'Purchase', query: { type: 'course', id: course.documentID } }
+          { pathname: PURCHASE_PATH, query: { type: 'course', id: course.documentID } }
         )
       }
     } else {
       if (course.courseType == 'Gratis') {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }

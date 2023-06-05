@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { LOGIN_PATH } from "../../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../../constants/paths";
 import { useAuth } from "../../../hooks/useAuth";
 import { MainContainer } from "./Lesson.styled";
 import Video from "./LessonComponents/Video/Video";
@@ -50,8 +50,8 @@ const Lesson = () => {
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
-      if (router.asPath === "/Lesson") {
-        router.push("/Preview")
+      if (router.asPath === LESSON_PATH) {
+        router.push(PREVIEW_PATH)
         return
       }
       if (userDataAuth.user !== null) {
@@ -61,12 +61,12 @@ const Lesson = () => {
         getCourseApi(id).then((res) => {
           if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) {
             return router.push(
-              { pathname: 'Purchase', query: { type: 'course', id: res.id } }
+              { pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } }
             )
           }
           if (res.type === 'Mensual' && (user.level === 0 && user.final_date < today)) {
             return router.push({
-              pathname: 'Purchase',
+              pathname: PURCHASE_PATH,
               query: { type: 'subscription' }
             });
           }

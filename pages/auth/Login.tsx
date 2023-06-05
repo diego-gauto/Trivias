@@ -15,7 +15,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../hooks/useAuth";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
-import { SIGNUP_PATH } from "../../constants/paths";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import ErrorModal from "../../components/Error/ErrorModal";
 import { useGoogleLogin } from "@react-oauth/google";
 import { facebookUserInfo, googleTokens, loginWithProviderApi, updateLastSignIn, updatePastUser, updateUserPassword } from "../../components/api/auth";
@@ -148,7 +148,7 @@ const Login = () => {
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
-          window.location.href = '/Preview';
+          window.location.href = PREVIEW_PATH;
           redirect()
         }
         if (res[0].password !== signUpData.credentials.password) {
@@ -183,7 +183,7 @@ const Login = () => {
     updateSignIn(past_user);
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
-      window.location.href = "/Preview";
+      window.location.href = PREVIEW_PATH;
       redirect()
     })
   }
@@ -201,7 +201,7 @@ const Login = () => {
   useEffect(() => {
     if (loggedIn) {
       setIsLoading(true)
-      window.location.href = "/Preview";
+      window.location.href = PREVIEW_PATH;
     }
     setTimeout(() => {
       setLoginLoader(true)
@@ -233,7 +233,7 @@ const Login = () => {
               updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                window.location.href = "/Preview";
+                window.location.href = PREVIEW_PATH;
                 redirect()
               })
               setAuthLoader(false);
@@ -256,7 +256,7 @@ const Login = () => {
             console.log(res[0]);
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email)
-            window.location.href = "/Preview"
+            window.location.href = PREVIEW_PATH
             redirect()
           }
         })
@@ -267,13 +267,13 @@ const Login = () => {
 
   const redirect = () => {
     if (localStorage.getItem("trial") === "true") {
-      window.location.href = "https://www.gonvar.io/Purchase?type=subscription&trial=true"
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = "https://www.gonvar.io/Purchase?type=subscription"
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
     }
     if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io/Purchase?type=course&id=${localStorage.getItem("course")}`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
   }
 
@@ -303,7 +303,7 @@ const Login = () => {
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 redirect()
-                window.location.href = "/Preview";
+                window.location.href = PREVIEW_PATH;
               })
               setAuthLoader(false);
               return
@@ -325,7 +325,7 @@ const Login = () => {
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             redirect()
-            window.location.href = "/Preview"
+            window.location.href = PREVIEW_PATH;
           }
         })
       })

@@ -6,6 +6,7 @@ import { getUserApi } from "../../../../components/api/users";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/rewards";
 import CircleProgress from "../../../CircleProgress/CircleProgress";
+import { PROFILE_PATH } from "../../../../constants/paths";
 const manitas = "/images/cancel_suscription/manos moradas.png"
 
 const CancelSuscription = () => {
@@ -24,7 +25,7 @@ const CancelSuscription = () => {
   const [totalPointRewards, setTotalPointRewards] = useState<any>([]);
   const [monthReward, setMonthReward] = useState<any>([]);
   const goBack = () => {
-    router.push({ pathname: "/Profile" });
+    router.push({ pathname: PROFILE_PATH });
   }
   const goPause = () => {
     router.push({

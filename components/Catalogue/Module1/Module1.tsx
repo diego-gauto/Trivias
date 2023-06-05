@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 
 import router from "next/router";
 
-import { LOGIN_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { getViewedCourses } from "../../../store/actions/courseActions";
 import { getPaidCourses } from "../../../store/actions/UserActions";
 import {
@@ -35,24 +35,24 @@ const Module1 = ({ user, allCourses, isLoading, professor }: any) => {
       let today = new Date().getTime() / 1000;
       if (historyCourse.courseType == 'Mensual' && user.membership.finalDate > today || historyCourse.paid || historyCourse.courseType == 'Gratis') {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: historyCourse.documentID, season: historyCourse.season, lesson: historyCourse.lesson },
         });
       }
       if (historyCourse.courseType == 'Mensual' && user.membership.finalDate < today) {
         router.push(
-          { pathname: 'Purchase', query: { type: 'subscription' } }
+          { pathname: PURCHASE_PATH, query: { type: 'subscription' } }
         )
       }
       if (historyCourse.courseType == 'Producto' && !historyCourse.paid) {
         router.push(
-          { pathname: 'Purchase', query: { type: 'course', id: historyCourse.documentID } }
+          { pathname: PURCHASE_PATH, query: { type: 'course', id: historyCourse.documentID } }
         )
       }
     } else {
       if (historyCourse.courseType == 'Gratis') {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: historyCourse.id, season: 0, lesson: 0 },
         });
       }

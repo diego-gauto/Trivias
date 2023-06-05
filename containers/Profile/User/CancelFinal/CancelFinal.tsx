@@ -6,6 +6,7 @@ import { cancelPaypal, cancelStripe, getUserApi } from "../../../../components/a
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import { cancelReview } from "../../../../components/api/admin";
 import AlertModal from "../../../../components/AlertModal/AlertModal";
+import { PROFILE_PATH } from "../../../../constants/paths";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
@@ -24,7 +25,7 @@ const CancelFinal = () => {
   })
   const [other, setOther] = useState("");
   const goBack = () => {
-    router.push({ pathname: "/Profile" });
+    router.push({ pathname: PROFILE_PATH });
   }
   const onHide = () => {
     setShow(false);

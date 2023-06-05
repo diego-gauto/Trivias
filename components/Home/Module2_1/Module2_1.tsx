@@ -10,6 +10,7 @@ import {
 } from "../Module2_1/Module2_1.styled";
 import { IModule2_1 } from "./IModule2_1";
 import { useMediaQuery } from "react-responsive";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 
 
 export const Module2_1 = (props: IModule2_1) => {
@@ -31,22 +32,22 @@ export const Module2_1 = (props: IModule2_1) => {
     let currentDaySeconds = (newDate.getTime() / 1000);
     if (user) {
       if (user.level === 1) {
-        router.push("/Preview")
+        router.push(PREVIEW_PATH)
       }
       else {
-        router.push("/Purchase?type=subscription")
+        router.push(`${PURCHASE_PATH}?type=subscription`)
       }
     } else {
       localStorage.setItem("sub", "true");
-      router.push("/auth/Register")
+      router.push(SIGNUP_PATH)
     }
   }
 
   const goToPreview = () => {
     if (user) {
-      router.push("/auth/Register")
+      router.push(SIGNUP_PATH)
     } else {
-      router.push("/Preview")
+      router.push(PREVIEW_PATH)
     }
   }
 

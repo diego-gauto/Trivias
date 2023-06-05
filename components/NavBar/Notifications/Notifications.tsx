@@ -6,6 +6,7 @@ import { MdOutlineComment } from 'react-icons/md';
 import { updateNotificationStatusApi } from '../../api/notifications';
 import { INotifications } from './INotifications';
 import { NotificationData } from './Notifications.styled';
+import { LESSON_PATH, REWARDS_PATH } from '../../../constants/paths';
 const Notifications = (props: INotifications) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
@@ -48,12 +49,12 @@ const Notifications = (props: INotifications) => {
   const ClickNotification = () => {
     if (type === "homework" || type === "like" || type === "comment") {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: courseID, season: seasonID, lesson: lessonID },
       });
     }
     if (type === "reward") {
-      router.push("/Rewards")
+      router.push(REWARDS_PATH)
     }
     if (!status) {
       let notificationUpdate = {

@@ -14,6 +14,7 @@ import { getRewardsApi } from "../../../components/api/rewards";
 import { cancelPaypal, cancelStripe } from "../../../components/api/users";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
+import { REWARDS_PATH } from "../../../constants/paths";
 
 const or_star = "/images/cancel_modal/or_star.png"
 const gr_star = "/images/cancel_modal/gr_star.png"
@@ -226,7 +227,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
             </div>
           </div>
         </div>
-        <Link href="/Rewards">
+        <Link href={REWARDS_PATH}>
           <button >Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
         </Link>
       </RewardContainer>

@@ -5,6 +5,7 @@ import { SlNotebook } from 'react-icons/sl'
 import { TfiCommentAlt } from 'react-icons/tfi'
 import { IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from 'react-icons/io5'
 import { useRouter } from 'next/router'
+import { LESSON_PATH } from '../../../../../../constants/paths'
 
 interface IModule {
   value: number;
@@ -22,7 +23,7 @@ const ModuleTabs = (props: IModule) => {
   const moveToNextLesson = () => {
     if (!lastLesson && !blockForNextSeason) {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
       })
     }
@@ -30,7 +31,7 @@ const ModuleTabs = (props: IModule) => {
   const moveToPreviousLesson = () => {
     if (!firstLesson) {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: course.id, season: previousLesson.seasonIndex, lesson: previousLesson.lessonIndex },
       })
     }

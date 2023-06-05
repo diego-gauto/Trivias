@@ -23,6 +23,7 @@ import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import { getUserApi } from '../../../../components/api/users';
 import { formatBlogDate } from '../../../../utils/functions';
+import { BLOGS_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from '../../../../constants/paths';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -108,7 +109,7 @@ const BlogView = () => {
   };
   const goToBlog = (blog: IBlog) => {
     setLoader(true);
-    router.push({ pathname: `/Blogs/${blog.route}` }).then(() => {
+    router.push({ pathname: `${BLOGS_PATH}/${blog.route}` }).then(() => {
       window.location.reload();
     })
   }
@@ -116,14 +117,14 @@ const BlogView = () => {
     let curentTime = new Date().getTime() / 1000;
     if (userData) {
       if ((userData.final_date > curentTime || userData.level === 1)) {
-        router.push("/Preview")
+        router.push(PREVIEW_PATH)
       }
       else {
-        router.push("/Purchase?type=subscription")
+        router.push(`${PURCHASE_PATH}?type=subscription`)
       }
     }
     else {
-      router.push("/auth/Register")
+      router.push(SIGNUP_PATH)
     }
   }
   const getBlog = () => {

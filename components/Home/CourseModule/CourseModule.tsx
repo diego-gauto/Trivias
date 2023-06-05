@@ -2,13 +2,12 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { PREVIEW_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
 import { useEffect, useState } from "react";
-import { NAILS_MASTER_COURSE_ID } from "../../../constants/gonvar";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
 import CourseModal from "../../CourseModal/CourseModal";
 declare let Hls: any
@@ -50,13 +49,13 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const goTo = () => {
     if (loggedIn && data.pay) {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: data.id, season: 0, lesson: 0 },
       });
     }
     if (loggedIn && !data.pay) {
       router.push(
-        { pathname: 'Purchase', query: { type: 'course', id: data.id } }
+        { pathname: PURCHASE_PATH, query: { type: 'course', id: data.id } }
       )
     }
     if (!loggedIn) {

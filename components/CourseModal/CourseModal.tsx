@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import router from "next/router";
 
-import { LOGIN_PATH } from "../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -52,30 +52,30 @@ const CourseModal = (props: ICourseModal) => {
     if (user) {
       if ((course.type === "Mensual") && ((user.level === 1) || (user.level === 0 && user.final_date > today))) {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
       if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
         router.push({
-          pathname: 'Purchase',
+          pathname: PURCHASE_PATH,
           query: { type: 'subscription' }
         });
       }
       if (course.type === "Producto" && course.pay) {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
       if (course.type === 'Producto' && !course.pay) {
         router.push(
-          { pathname: 'Purchase', query: { type: 'course', id: course.id } }
+          { pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } }
         )
       }
     }
     else {
-      router.push({ pathname: '/auth/Login' })
+      router.push({ pathname: LOGIN_PATH })
     }
   }
 
