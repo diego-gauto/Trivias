@@ -345,6 +345,7 @@ export const RewardCardContainer = styled.div<{
         font-size: 20px;
         font-weight: 600;
         line-height: 26px;
+        border: 1px solid #3f1168;
         background: linear-gradient(to right, #e68a0d, #ffac0d,#e68a0d);
         -webkit-text-fill-color: transparent;
         -webkit-background-clip: text;

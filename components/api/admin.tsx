@@ -329,3 +329,14 @@ export const deleteThisComment = async (comment: any) => {
       return error
     });
 };
+export const cancelReview = async (review: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/create-cancel-review", review)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

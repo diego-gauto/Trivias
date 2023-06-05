@@ -16,7 +16,55 @@ export const TitleContain = styled.div`
   position: relative;
   display: flex;
   gap: 50px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
+  .tab-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .tabs {
+      display: flex;
+      gap: 50px;
+    }
+    .button-container {
+      display: flex;
+      gap: 40px;
+      .button-data {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          .btn-text {
+            font-weight: 600;
+            line-height: 16px;
+          }
+          // .btn-icon {
+          //   color: black;
+          // }
+        }
+        .btn-text {
+          font-size: 14px;
+          line-height: 16px;
+          font-weight: 500;
+          color: #8e5fc1;
+          margin: 0;
+        }
+        &:hover {
+          .gray {
+            font-weight: 500;
+          }
+        }
+        .gray {
+          color: gray;
+        }
+        .btn-icon {
+          font-size: 24px;
+          color: #d344d1;
+        }
+      }
+    }
+  }
   .line {
     position: absolute;
     background: #d4cedc;
@@ -25,8 +73,17 @@ export const TitleContain = styled.div`
     bottom: 0;
   }
   @media (max-width: 1124px) {
-    gap: 0;
-    justify-content: space-between;
+    width: 100%;
+    .tab-container {
+      width: 100%;
+      .tabs {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .button-container {
+        display: none;
+      }
+    }
     p {
       font-size: 12px;
     }

@@ -5,6 +5,7 @@ export const MainContainer = styled.div<{ open: any }>`
   flex-direction: column;
   right: 0;
   width: 30%;
+  background: #ede7f2;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -142,6 +143,8 @@ export const SeasonContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  background-color: #e8ddf2;
+  border-radius: 0px 0px 35px 35px;
 `;
 export const CloseButton = styled.div`
   color: #8E2DE2;
@@ -162,7 +165,7 @@ export const Container = styled.div<{ active: any }>`
   align-items: center;
   box-shadow: 0px -11px 10px -10px rgb(0 0 0 / 20%) inset;
   background: #e8ddf2;
-  padding: 20px 10px 20px 40px;
+  padding: 20px 10px 20px 30px;
   cursor: pointer;
   i {
     width: 20px;
@@ -244,8 +247,9 @@ export const CoursesContainer = styled.div<{ active: boolean }>`
   height: 0px;
   display: flex;
   flex-direction: column;
+  border-radius: 0px 0px 35px 35px;
   transition: 1s ease all;
-  background: #e8ddf2;
+  background: #dad3e5;
   ${(props) =>
     props.active == true &&
     css`

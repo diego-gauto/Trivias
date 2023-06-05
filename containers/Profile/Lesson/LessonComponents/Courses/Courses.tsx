@@ -9,6 +9,7 @@ import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideMod
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer, HamburgerContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
+import { LOCK_ICON } from '../../../../../utils/Constants';
 
 const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
   const [selected, setSelected] = useState<any>([]);
@@ -18,6 +19,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
+  const [viewed, setViewed] = useState(0);
   const [temp, setTemp] = useState(data);
 
   useEffect(() => {
@@ -143,7 +145,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
             <SeasonContainer key={"course seasons " + index}>
               <Container onClick={() => { toggleHandler(index) }} active={selected[index]}>
                 <div className='module'>
-                  {selected[index] && <CourseProgress data={temp} title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} />}
+                  <CourseProgress data={temp} title={course?.title} season={index} lesson={lesson} course={course} userId={userData?.user_id} refresh={toggleHandler} selected={selected[index]} />
                   <div>
                     <p className='title'> {season?.name == undefined ? `Módulo ${index + 1}` : season.name}</p>
                     <Episode>

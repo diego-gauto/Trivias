@@ -1,9 +1,8 @@
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillCheckCircle, AiFillStar } from 'react-icons/ai';
 // import Share from 'react-native-share';
-import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter } from 'react-icons/bs';
+import { BsFacebook, BsInstagram, BsLinkedin, BsPrinterFill, BsTwitter, BsWhatsapp } from 'react-icons/bs';
 import ReactPlayer from 'react-player';
 import { db } from '../../../../firebase/firebaseConfig';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -12,6 +11,7 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
+  WhatsappShareButton,
 } from "react-share";
 import { BlogContainer, BottomSection, BoxSection, ContentContainer, FirstSection, GonvarAd, RelatedArticles, VideoBlog } from './BlogView.styled';
 import { IBlog, ISubTopic } from './IBlogView';
@@ -21,6 +21,8 @@ import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 import { FaCopy } from 'react-icons/fa';
 import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
+import { getUserApi } from '../../../../components/api/users';
+import { formatBlogDate } from '../../../../utils/functions';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -29,7 +31,6 @@ const BlogView = () => {
   const [blog, setBlog] = useState<IBlog>();
   const [topicLength, setTopicLength] = useState(0);
   const [linkCopied, setLinkCopied] = useState<boolean>(false);
-  const [linkToCopy, setLinkToCopy] = useState<string>("");
   const [demoLink, setDemoLink] = useState<any>("");
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const url = window.location.href;
@@ -87,18 +88,6 @@ const BlogView = () => {
     //     return error
     //   });
   };
-  const fetchDB_data = async () => {
-    try {
-      const query_1 = query(collection(db, "users"), where("uid", "==", userDataAuth.user.id));
-      return onSnapshot(query_1, (response) => {
-        response.forEach((e: any) => {
-          setUserData({ ...e.data(), id: e.id });
-        });
-      })
-    } catch (error) {
-      return false
-    }
-  }
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -117,18 +106,16 @@ const BlogView = () => {
     let element = document.getElementById(`box-${index}`);
     element?.scrollIntoView({ behavior: "smooth" });
   };
-  const goToBlog = (blog: any) => {
+  const goToBlog = (blog: IBlog) => {
     setLoader(true);
-    let blogText: any = blog.title.replaceAll("-", "&#45;").replaceAll(" ", "-");
-    router.push({ pathname: `/Blogs/${blogText}` }).then(() => {
+    router.push({ pathname: `/Blogs/${blog.route}` }).then(() => {
       window.location.reload();
     })
   }
   const goToCourses = () => {
-    let userDate = userData.membership.finalDate;
     let curentTime = new Date().getTime() / 1000;
     if (userData) {
-      if ((userDate > curentTime)) {
+      if ((userData.final_date > curentTime || userData.level === 1)) {
         router.push("/Preview")
       }
       else {
@@ -136,59 +123,15 @@ const BlogView = () => {
       }
     }
     else {
-      router.push("/Register")
-    }
-
-  }
-  const getMonth = (month: any) => {
-    if (month === 1) {
-      return "enero"
-    }
-    else if (month === 2) {
-      return "febrero"
-    }
-    else if (month === 3) {
-      return "marzo"
-    }
-    else if (month === 4) {
-      return "abril"
-    }
-    else if (month === 5) {
-      return "mayo"
-    }
-    else if (month === 6) {
-      return "junio"
-    }
-    else if (month === 7) {
-      return "julio"
-    }
-    else if (month === 8) {
-      return "agosto"
-    }
-    else if (month === 9) {
-      return "septiembre"
-    }
-    else if (month === 10) {
-      return "octubre"
-    }
-    else if (month === 11) {
-      return "noviembre"
-    }
-    else if (month === 12) {
-      return "diciembre"
-    }
-    else {
-      return ''
+      router.push("/auth/Register")
     }
   }
   const getBlog = () => {
-    let tempTitle: any = router.query.slug;
-    setLinkToCopy('gonvar.io/Blogs/' + tempTitle);
-    let titleSearch: string = tempTitle.replaceAll("-", " ").replaceAll("&#45;", "-");
+    let tempRoute: any = router.query.slug;
     let tempBlog: any;
     let allBlogs: any;
     getBlogsApi().then((res) => {
-      allBlogs = res.filter((blog: IBlog) => blog.title !== titleSearch);
+      allBlogs = res.filter((blog: IBlog) => blog.route !== tempRoute);
       if (allBlogs.length > 4) {
         let shuffleBlog = allBlogs.sort((a: any, b: any) => 0.5 - Math.random());
         shuffleBlog.splice(4);
@@ -197,18 +140,9 @@ const BlogView = () => {
       else {
         setBlogs(allBlogs);
       }
-      tempBlog = res.filter((blog: IBlog) => blog.title === titleSearch);
+      tempBlog = res.filter((blog: IBlog) => blog.route === tempRoute);
       getSingleBlogApi(tempBlog[0].id).then((res) => {
-        let date = new Date(res.created_at)
-        let tempDay = date.getDate();
-        let tempMonth = date.getMonth() + 1;
-        let textMonth: string = getMonth(tempMonth);
-        let tempYear = date.getFullYear();
-        res.date = {
-          day: tempDay,
-          month: textMonth,
-          year: tempYear,
-        };
+        res.date = formatBlogDate(res.created_at);
         setTopicLength(res.subTopic.length)
         setBlog(res)
         setLoader(true);
@@ -223,10 +157,12 @@ const BlogView = () => {
     }, 1500);
   }
   useEffect(() => {
-    console.log('hola')
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
     if (router.query.slug) {
-      console.log('entro')
-      fetchDB_data();
       getBlog()
     }
   }, [router.query.slug])
@@ -273,6 +209,19 @@ const BlogView = () => {
                   </FacebookShareButton>
                   <p className='text-display'>
                     Compartir en Facebook
+                  </p>
+                </div>
+                <div className='content'>
+                  <WhatsappShareButton
+                    url={url}
+                    title={blog?.title}
+                    separator=' --- '
+                    openShareDialogOnClick={true}
+                  >
+                    <BsWhatsapp className="icon" />
+                  </WhatsappShareButton>
+                  <p className='text-display'>
+                    Compartir en Whatsapp
                   </p>
                 </div>
                 {/* <div className='content'>

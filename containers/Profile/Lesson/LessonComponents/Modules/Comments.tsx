@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { DEFAULT_USER_IMG } from '../../../../../constants/paths'
-import { addComment, updateComment } from '../../../../../store/actions/courseActions'
-import { Button, Comment, CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
-import { TitleContain, PositionTitle, Titles } from './Module.styled'
+import { CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
+import { TitleContain } from './Module.styled'
 import { FiHeart } from 'react-icons/fi';
-import { BsPlayBtn } from 'react-icons/bs';
-import { SlNotebook } from 'react-icons/sl';
-import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
 import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addCommentLikeApi, addCommentToAnswerApi, addCommentToAnswerLikeApi, deleteCommentAnswerLikeApi, deleteCommentLikeApi, deleteCommentToAnswerLikeApi, retrieveComments } from '../../../../../components/api/lessons'
 import { createNotification } from '../../../../../components/api/notifications'
 import { MdVerified } from 'react-icons/md'
-const Comments = ({ value, setValue, user, data, comments, course, season, lesson }: any) => {
+import ModuleTabs from './ModuleTabs/ModuleTabs'
+const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
@@ -237,22 +234,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
   return (
     <>
       <TitleContain >
-        <Titles onClick={() => {
-          setValue(1)
-        }}>
-          <BsPlayBtn></BsPlayBtn>
-          Acerca del curso
-        </Titles>
-        {<Titles onClick={() => {
-          setValue(3)
-        }}>
-          <SlNotebook></SlNotebook>
-          Evaluación
-        </Titles>}
-        <PositionTitle position={value}>
-          <TfiCommentAlt></TfiCommentAlt>
-          Comentarios
-        </PositionTitle>
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <MainContainer>
