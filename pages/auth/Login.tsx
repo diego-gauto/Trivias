@@ -334,8 +334,11 @@ const Login = () => {
     }
   }
 
-  return (
+  // const sendResetPassword = () => {
 
+  // }
+
+  return (
     <>
       {!isLoading ? (
         <LoginBackground>

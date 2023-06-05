@@ -112,3 +112,27 @@ export const updateLastSignIn = async (user: any) => {
       return error
     });
 };
+
+export const pastT = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "users/temp")
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const updateStripe = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "users/update-stripe-data", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
