@@ -85,7 +85,7 @@ export const BlogItems = styled.div`
     padding: 20px;
     .blog-title {
       font-size: 24px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 30px;
       overflow: hidden;
     }

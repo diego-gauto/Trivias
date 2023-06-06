@@ -42,9 +42,9 @@ const Blog = () => {
                       <p className="edit-icon"><AiFillPlusCircle /></p>
                     </div>
                     <div className="text-contain">
-                      <h1 className="blog-title">
+                      <p className="blog-title">
                         {blog.title}
-                      </h1>
+                      </p>
                       <div className="create-date-contain">
                         <p className="blog-create">by Academia Gonvar | </p>
                         <p className="blog-date">{blog.date.month} {blog.date.day}, {blog.date.year}</p>
