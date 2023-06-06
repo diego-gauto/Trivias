@@ -257,17 +257,23 @@ export const ThirdBox = styled.div`
   }
   @media (max-width: 630px) {
     .dialog {
+      h2 {
+        font-size: 16px;
+      }
       .sangria {
         margin-inline: 2%;
       }
       p {
-        font-size: 16px;
+        font-size: 12px;
       }
       ul {
         margin-inline: 2%;
         padding-left: 0;
         .space-bt {
           flex-direction: column;
+          .p-li {
+            font-size: 12px;
+          }
         }
       }
       .buttons {

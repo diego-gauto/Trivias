@@ -13,7 +13,7 @@ import {
   Title,
 } from "../../../screens/ModalForgot.styled";
 import { Modal } from "react-bootstrap";
-import { updateUserPassword } from "../../../components/api/auth";
+import { sendEmailPassword, updateUserPassword } from "../../../components/api/auth";
 
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
@@ -24,36 +24,24 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
       .string()
       .email("Debe ser un email válido")
       .required("Campo requerido"),
-    password: yup.string()
-      .required('Password is required')
-      .min(6, 'La contraseña debe tener al menos 6 carácteres'),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "La contraseña no coincide"),
   });
 
   type FormValues = {
     email: string;
-    password: string,
-    confirmPassword: string
   };
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     let resetData = {
       email: formData.email,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword
+      idTemplateBrevo: 13
     };
 
     setIsLoading(true)
-    await updateUserPassword(resetData).then((res) => {
-      if (res.status === 202) {
-        alert("Contraseña actualizada");
-        handleClose()
-        return;
-      }
+    await sendEmailPassword(resetData).then((res) => {
       if (res.data.msg) {
-        alert("El usuario no existe!")
+        localStorage.setItem("reset", "true")
+        alert(res.data.msg);
+        handleClose()
       }
       setIsLoading(false)
     })
@@ -75,12 +63,6 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
         <Title>
           Reestablecer contraseña
         </Title>
-        {/* <TextContain>
-          <AddText>
-            Le enviaremos un correo electrónico con más instrucciones
-            sobre cómo reestablecer su contraseña
-          </AddText>
-        </TextContain> */}
         <EmailContain>
           <Text2>
             Ingresar correo electrónico
@@ -95,40 +77,6 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
           <MessageContainer>
             <div className="invalid-feedback">
               {errors.email?.message}
-            </div>
-          </MessageContainer>
-        </EmailContain>
-        <EmailContain>
-          <Text2>
-            Contraseña Nueva
-          </Text2>
-          <TextInput
-            placeholder="********"
-            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-            {...register("password")}
-            type="password"
-            required
-          />
-          <MessageContainer>
-            <div className="invalid-feedback">
-              {errors.password?.message}
-            </div>
-          </MessageContainer>
-        </EmailContain>
-        <EmailContain>
-          <Text2>
-            Confirmar contraseña
-          </Text2>
-          <TextInput
-            placeholder="********"
-            className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-            {...register("confirmPassword")}
-            type="password"
-            required
-          />
-          <MessageContainer>
-            <div className="invalid-feedback">
-              {errors.confirmPassword?.message}
             </div>
           </MessageContainer>
         </EmailContain>

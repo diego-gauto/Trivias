@@ -58,6 +58,7 @@ export const Module2_1 = (props: IModule2_1) => {
         <img className="background" src="../images/Landing/bgSection1.png" alt="" />
         <img className="women" src="../images/Landing/mujeres_gonvar-min.png" alt="" />
         <div className="left-side">
+          <h1 style={{ display: "none" }}>Academia de belleza</h1>
           {!responsive1023 && <Tittle>Aprende a <br /> aplicar uñas <br /> desde cero</Tittle>}
           {responsive1023 && <Tittle>Aprende a aplicar <br /> uñas desde cero</Tittle>}
           {!responsive1023 && <Subtittle1  >Somos la plataforma de <br /> aprendizaje en línea que <br />
