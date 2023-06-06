@@ -9,5 +9,7 @@ export const LESSON_PATH = "/lesson";
 export const PURCHASE_PATH = "/purchase";
 export const CERTIFICATES_PATH = "/certificates"
 export const BLOGS_PATH = "/Blogs"
+export const PLAN_PATH = "/planes";
 export const SIGNUP_PAST_USER_PATH = "/auth/RegisterPastUser";
+//images
 export const DEFAULT_USER_IMG = "/images/profile/default_img.png";
