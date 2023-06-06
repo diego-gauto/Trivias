@@ -69,6 +69,7 @@ const BlogView = () => {
       }
     }
     else {
+      localStorage.setItem("sub", "true");
       router.push("/auth/Register")
     }
   }
