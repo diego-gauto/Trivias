@@ -11,6 +11,7 @@ import { getUserApi } from "../components/api/users";
 import { getLandingCoursesApi } from "../components/api/lessons";
 import { getLandingProductApi, getLandingReviewApi } from "../components/api/admin";
 import WelcomeModal from "../components/WelcomeModal/WelcomeModal";
+import HelmetMetaTags from "../components/HelmetMetaTags/HelmetMetaTags";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
@@ -128,6 +129,13 @@ const Homepage = () => {
         backgroundColor: "#ede7f2",
         overflow: "hidden",
       }} id="landing">
+      <HelmetMetaTags
+        title={"Academia de Belleza | Gonvar"}
+        image={""}
+        description={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"}
+        hashtag={"#gonvar"}
+        quote={""}
+      />
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} user={userData} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}
