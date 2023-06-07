@@ -1,38 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link';
+import React, { useState } from 'react'
 import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
-import { PositionTitle, TitleContain, Titles } from './Module.styled';
-import { BsPlayBtn } from 'react-icons/bs';
-import { SlNotebook } from 'react-icons/sl';
-import { TfiCommentAlt } from 'react-icons/tfi';
-import { BiDownload } from 'react-icons/bi';
-import { DownlowadContain, DownloadText, Pdf } from './Extra.styled';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { TitleContain } from './Module.styled';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight, } from 'react-icons/md';
+import ModuleTabs from './ModuleTabs/ModuleTabs';
 
-const About = ({ value, setValue, data, teacherCreds, course }: any) => {
-  console.log(data.lesson_material)
-  const [teacher, setTeacher] = useState<any>([])
+const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [index, setIndex] = useState<number>(0)
   return (
     <>
       <TitleContain>
-        <PositionTitle position={value}>
-          <BsPlayBtn></BsPlayBtn>
-          Acerca del curso
-        </PositionTitle>
-        <Titles onClick={() => {
-          setValue(3)
-        }}>
-          <SlNotebook></SlNotebook>
-          Evaluación
-        </Titles>
-        <Titles onClick={() => {
-          setValue(4)
-        }}>
-          <TfiCommentAlt></TfiCommentAlt>
-          Comentarios
-        </Titles>
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <AboutContain>
@@ -58,25 +36,6 @@ const About = ({ value, setValue, data, teacherCreds, course }: any) => {
                 </div>
               </>
             }
-            {/* <p className='title'>Especificaciones</p>
-            <p>{data.about}.</p> */}
-            {/* {data.extra.length > 0 && <p className='title'>Material de apoyo</p>}
-            <ol type="a">
-              {data?.extra?.map((extra: any) => {
-                return (
-                  <Link href={extra.path}>
-                    <a target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
-                      <DownlowadContain>
-                        <DownloadText>
-                          <li>{extra.title.slice(0, -4)}</li>
-                        </DownloadText>
-                        <Pdf><BiDownload></BiDownload> Descargar Pdf</Pdf>
-                      </DownlowadContain>
-                    </a>
-                  </Link>
-                )
-              })}
-            </ol> */}
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>

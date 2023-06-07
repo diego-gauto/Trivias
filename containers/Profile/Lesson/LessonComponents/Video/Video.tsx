@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
 import { addUserHistory, addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
 import { useRouter } from 'next/router';
+import { LESSON_PATH } from '../../../../../constants/paths';
 
 declare let Hls: any
 
-const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson }: any) => {
+const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson, openActivityModal }: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
@@ -27,22 +28,22 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
         handleComplete();
         if (data.quiz === 0 && data.homework === 0) {
           router.push({
-            pathname: 'Lesson',
+            pathname: LESSON_PATH,
             query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
           })
         } else {
-          alert("Esta lección cuenta con tarea o quiz!");
+          openActivityModal();
         }
       })
     }
     else {
       if (data.quiz === 0 && data.homework === 0) {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
         })
       } else {
-        alert("Esta lección cuenta con tarea o quiz!");
+        openActivityModal();
       }
     }
   }

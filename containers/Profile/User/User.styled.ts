@@ -122,42 +122,116 @@ export const SecondBox = styled.div`
   }
 `;
 export const ThirdBox = styled.div`
+  transition: max-height 200ms ease;
   display: flex;
   padding-right: 30px;
   gap: 8%;
+  font-weight: 500;
+  font-size: large;
+  line-height: 90%;
+  max-heigth: 100%;
   .dialog {
-    max-width: 350px;
+    padding: 15%;
+    max-width: 65%;
     width: 100%;
-    text-align: justify;
-    border-radius: 10px;
-    z-index: 10;
+    text-align: center;
+    border-radius: 30px;
+    z-index: 100;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    p {
-      color: #942ced;
+    background-color: #dad3e5;
+    padding: 50px;
+    box-shadow: 0px 12px 15px rgba(0, 0, 0, 0.5);
+    .sangria {
+      margin-left: 15%;
+      margin-right: 15%;
+    }
+    .sangria-y {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+    .purple {
+      color: #a556eb;
+    }
+    .green {
+      color: #29c784;
+    }
+    .blue {
+      color: #1b7beb;
+    }
+    .orange {
+      color: #f88114;
+    }
+    ul {
+      margin-left: 12%;
+      margin-right: 12%;
+      text-align: justify;
+    }
+    .p-li {
+      list-style: none;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      font-size: medium;
+    }
+  }
+  .dimScreen {
+    z-index: 99;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(222, 215, 232, 0.5);
+  }
+  .space-bt {
+    display: flex;
+    align-items: center;
+    img {
+      width: 25px;
+      height: 25px;
+      margin-right: 15px;
+    }
+  }
+  .exit {
+    position: absolute;
+    right: 0;
+    padding-right: 5%;
+    .ex-icon {
+      cursor: pointer;
     }
   }
   .buttons {
     display: flex;
     gap: 15px;
-    justify-content: end;
+    justify-content: center;
     button {
+      font-weight: 500;
+      font-size: x-small !important;
+      max-height: min-content;
+      width: 25%;
+      margin-left: 5%;
+      margin-right: 5%;
       border: none;
       padding-block: 5px;
-      border-radius: 5px;
+      border-radius: 30px;
       color: #fff;
     }
     .left {
-      background: #3f1168;
+      color: black;
+      background: #ede7f2;
     }
     .right {
-      background: #942ced;
+      background: #478ee1;
     }
+  }
+  h2 {
+    color: #3f1168;
+    font-weight: 700;
+    margin: 15px;
   }
   @media (max-width: 1500px) {
     gap: 50px;
@@ -176,6 +250,41 @@ export const ThirdBox = styled.div`
     gap: 30px;
     align-items: center;
     width: 100%;
+    .dialog {
+      padding-inline: 20px;
+      max-width: 90%;
+    }
+  }
+  @media (max-width: 630px) {
+    .dialog {
+      h2 {
+        font-size: 16px;
+      }
+      .sangria {
+        margin-inline: 2%;
+      }
+      p {
+        font-size: 12px;
+      }
+      ul {
+        margin-inline: 2%;
+        padding-left: 0;
+        .space-bt {
+          flex-direction: column;
+          .p-li {
+            font-size: 12px;
+          }
+        }
+      }
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+        button {
+          width: 200px;
+          height: 43px;
+        }
+      }
+    }
   }
 `;
 export const ProfileData = styled.div`

@@ -125,6 +125,28 @@ export const getPartialUsers = async (first: number, second: number) => {
       return error
     });
 };
+export const getProgressForUsers = async (user_id: number) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/course-users/" + user_id)
+    .then((res) => {
+      return res.data.users
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+// export const getPartiaDemolUsers = async (first: number, second: number) => {
+//   return axios
+//     .get("https://gonvar.inowu.dev/" + "admin/partial-users/" + first + "/" + second)
+//     .then((res) => {
+//       return res.data.users
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       return error
+//     });
+// };
 
 export const getLessonFromUserApi = async (userId: any) => {
   return axios
@@ -299,6 +321,17 @@ export const deleteCommentToAnswers = async (answer: any) => {
 export const deleteThisComment = async (comment: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "admin/" + "delete-comment", comment)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const cancelReview = async (review: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/create-cancel-review", review)
     .then((res) => {
       return res
     })

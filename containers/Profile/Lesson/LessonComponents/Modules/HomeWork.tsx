@@ -1,24 +1,20 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { updateProgressStatus, uploadImageHomework } from '../../../../../store/actions/courseActions'
-import { DownlowadContain, DownloadText, FileIcon, Weight, Pdf } from './Extra.styled'
-import { TaskTitle, TaskText, ButtonDiv, UploadButton, UploadIcon, HomeWorkContain, ReviewButton, Answer } from './HomeWork.styled'
-import { TitleContain, PositionTitle, Titles, ListIcon, BookIcon, ChatboxIcon, EaselIcon, IconContain, SelectContain, UnSelected } from './Module.styled'
+import { uploadImageHomework } from '../../../../../store/actions/courseActions'
+import { TaskTitle, HomeWorkContain, Answer } from './HomeWork.styled'
+import { TitleContain, PositionTitle, Titles } from './Module.styled'
 import { BsArrowRepeat } from "react-icons/bs";
 import { BsFileArrowUp } from "react-icons/bs";
 import { BsPlayBtn } from 'react-icons/bs';
 import { SlNotebook } from 'react-icons/sl';
 import { TfiCommentAlt } from 'react-icons/tfi';
-import { updateUser } from '../../../../../store/actions/UserActions';
-import progress from 'antd/es/progress';
 import { addHomeworkApi, getHomeworkUserApi } from '../../../../../components/api/homeworks';
 import { getUserQuizApi, updateUserProgressByQuizApi, updateUserQuizApi, updateUserScoreApi } from '../../../../../components/api/lessons';
-import { user } from 'firebase-functions/v1/auth';
 import { LoaderContainSpinner } from '../../../Purchase/Purchase.styled';
 import { createNotification } from '../../../../../components/api/notifications';
 import ImagePreview from './imagePreview/imagePreview';
+import ModuleTabs from './ModuleTabs/ModuleTabs';
 
-const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, handleClick }: any) => {
+const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, lesson, courseIds, handleClick, nextLesson, previousLesson, course, firstLesson, lastLesson }: any) => {
   const [status, setStatus] = useState("");
   const [step, setStep] = useState(0);
   const [index, setIndex] = useState(0);
@@ -36,7 +32,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
   const [imageDisplay, setImageDisplay] = useState<any>('');
   const [imageLoader, setImageLoader] = useState<boolean>(false);
   const [typeFile, setTypeFile] = useState("");
-
   useEffect(() => {
     if (data.quiz === 1) {
       getUserQuiz();
@@ -228,7 +223,6 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
       user_id: user.user_id
     }
     getHomeworkUserApi(tempData).then((res) => {
-      console.log(res);
       if (res.data.data.length > 0) {
         let temp = res.data.data[0]
         if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
@@ -250,26 +244,10 @@ const HomeWork = ({ value, setValue, data, user, season, lesson, courseIds, hand
     })
   }, [data])
 
-
   return (
     <>
       <TitleContain >
-        <Titles onClick={() => {
-          setValue(1)
-        }}>
-          <BsPlayBtn></BsPlayBtn>
-          Acerca del curso
-        </Titles>
-        {<PositionTitle position={value}>
-          <SlNotebook></SlNotebook>
-          Evaluación
-        </PositionTitle>}
-        <Titles onClick={() => {
-          setValue(4)
-        }}>
-          <TfiCommentAlt></TfiCommentAlt>
-          Comentarios
-        </Titles>
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <HomeWorkContain >

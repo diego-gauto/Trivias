@@ -21,6 +21,7 @@ import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
 import { Container } from "react-bootstrap";
 import { SlideModuleContainer } from "../Module2/Module2.styled";
 import { useMediaQuery } from "react-responsive";
+import { LESSON_PATH } from "../../../constants/paths";
 SwiperCore.use([Scrollbar, Mousewheel]);
 
 const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
@@ -89,7 +90,7 @@ const Module3 = ({ user, allCourses, isLoading, innerWidth }: any) => {
     let today = new Date().getTime() / 1000;
     if (data.courseType == 'Mensual' && user.membership.finalDate > today || data.paid) {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: data.id, season: 0, lesson: 0 },
       });
     }

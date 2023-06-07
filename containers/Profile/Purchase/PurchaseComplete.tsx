@@ -8,6 +8,7 @@ import {
   CourseCostResp
 } from './Purchase.styled';
 import { BottomContain, CompleteContain, PurchaseTitle, Text4, ButtonContain, MainContainer } from './PurchaseComplete.styled';
+import { LESSON_PATH, PREVIEW_PATH } from '../../../constants/paths';
 
 const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
 
@@ -86,7 +87,7 @@ const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
             </Text4>}
         </BottomContain>
         {data.type == 'course' && <ButtonContain>
-          <Link href={{ pathname: 'Lesson', query: { id: id, season: 0, lesson: 0 } }}>
+          <Link href={{ pathname: LESSON_PATH, query: { id: id, season: 0, lesson: 0 } }}>
             <PurpleButton>
               Empezar Curso
             </PurpleButton>
@@ -94,7 +95,7 @@ const PurchaseComplete = ({ data, card, id, coupon, plan }: any) => {
         </ButtonContain>}
       </CompleteContain>
       <ButtonContain>
-        <Link href="/Preview">
+        <Link href={PREVIEW_PATH}>
           <TransparentButton>
             Regresar al Catálogo
           </TransparentButton>

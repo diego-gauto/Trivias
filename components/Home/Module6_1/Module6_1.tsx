@@ -47,6 +47,7 @@ import { SlideModule_1 } from "./SlideModule_1/SlideModule_2";
 import Link from "next/link";
 import About from "../../AboutModal/About";
 import Terms from '../../TermsModal/Terms';
+import { PREVIEW_PATH } from '../../../constants/paths';
 SwiperCore.use([Autoplay]);
 
 export const Module6_1 = (props: IModule6_1) => {
@@ -144,7 +145,7 @@ export const Module6_1 = (props: IModule6_1) => {
               <div className="yellow"></div>
             </div>
             <MoreText>
-              <Link href="/Preview">
+              <Link href={PREVIEW_PATH}>
                 <MoreText_2>Cursos</MoreText_2>
               </Link>
               <a href="https://gonvarnails.mx/" target="_blank" style={{ textDecoration: "none", fontWeight: 600 }}>
@@ -155,7 +156,7 @@ export const Module6_1 = (props: IModule6_1) => {
           <PineappleTextContainer>
             <FooterAText >
               <MoreTextMobile>
-                <Link href="/Preview">
+                <Link href={PREVIEW_PATH}>
                   <MoreText_2Mobile>Cursos</MoreText_2Mobile>
                 </Link>
                 <a href="https://gonvarnails.mx/" target="_blank" style={{ textDecoration: "none", fontWeight: 600 }}>

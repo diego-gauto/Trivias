@@ -91,6 +91,19 @@ export const AdminCommentsContainer = styled.div`
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    .comment-contain {
+      position: relative;
+      width: 100%;
+      .indicator {
+        position: absolute;
+        font-weight: 600;
+        color: #6717cd;
+        bottom: -20px;
+        right: 10px;
+        z-index: 10000;
+        margin: 0;
+      }
+    }
     @media (max-width: 1000px) {
       transform: translateX(-50%);
     }
@@ -108,6 +121,7 @@ export const AdminCommentsContainer = styled.div`
       outline: none;
       border-radius: 10px;
       border: 1px solid #6717cd;
+      width: 100%;
     }
     button {
       background: #6717cd;

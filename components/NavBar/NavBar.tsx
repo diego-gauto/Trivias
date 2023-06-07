@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { BLOGS_PATH, DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, PROFILE_PATH, REWARDS_PATH, SIGNUP_PAST_USER_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   HamburgerContain,
@@ -47,8 +47,6 @@ const NavBar = () => {
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
-
-  //declare any object in state
   const [userData, setUserData] = useState<any>(null);
 
   const toggleIngresarOptionsMenu = () => {
@@ -136,6 +134,9 @@ const NavBar = () => {
           setIsAdmin(true);
         }
         setLoggedIn(true);
+      }
+      if (pathname === "/_error") {
+        router.push("/")
       }
     }, [userDataAuth])
 
@@ -247,15 +248,15 @@ const NavBar = () => {
         }
       </LogoContain>
       <NavTags>
-        <Link href="/trivias">
+        {/* <Link href="/trivias">
           <NavText pathname={pathname} color={color} title="trivia"
             style={pathname == "/trivias" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Trivias
           </NavText>
-        </Link>
-        <Link href="/Preview">
+        </Link> */}
+        <Link href={PREVIEW_PATH}>
           <NavText pathname={pathname} color={color} title="Inicio"
-            style={pathname == "/Preview" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+            style={pathname === PREVIEW_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Cursos
           </NavText>
         </Link>
@@ -271,16 +272,16 @@ const NavBar = () => {
             admin
           </NavText>
         }
-        <Link href="/Blogs">
+        <Link href={BLOGS_PATH}>
           <NavText pathname={pathname} color={color} title="Inicio"
-            style={pathname == "/Blogs" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+            style={pathname === BLOGS_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Blog
           </NavText>
         </Link>
         {
           loggedIn &&
           <UserContain color={color}>
-            <Link href="/Rewards">
+            <Link href={REWARDS_PATH}>
               <div className="rewards-circle">
                 <div className="inside" />
                 <HoverText className="hover-text">Recompensas</HoverText>
@@ -335,7 +336,7 @@ const NavBar = () => {
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
             </div> */}
-            <Link href="/Profile">
+            <Link href={PROFILE_PATH}>
               < UserImage>
                 {
                   userData && userData.photo
@@ -354,13 +355,13 @@ const NavBar = () => {
             <Link href={LOGIN_PATH}>
               <ShopDeco color={color}>
                 <NavText pathname={pathname} color={color} title="Iniciar Sesion"
-                  style={pathname == LOGIN_PATH || pathname == "/auth/RegisterPastUser" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
+                  style={pathname === LOGIN_PATH || pathname === SIGNUP_PAST_USER_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
                 >
                   Iniciar Sesión
                 </NavText>
               </ShopDeco>
             </Link>
-            <Link href="/auth/Register">
+            <Link href={SIGNUP_PATH}>
               <PurpleButton>
                 Registrarse
               </PurpleButton>
@@ -404,7 +405,7 @@ const NavBar = () => {
                       Cursos
                     </FloatingMenuItem>
                   </Link>
-                  <Link href={"/Blogs"}>
+                  <Link href={BLOGS_PATH}>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Blogs
                     </FloatingMenuItem>
@@ -433,7 +434,7 @@ const NavBar = () => {
               </Link>
             </div>
             <UserContain color={color}>
-              <Link href="/Rewards">
+              <Link href={REWARDS_PATH}>
                 <div className="rewards-circle" onClick={closeHamburgerMenu}>
                   <div className="inside" />
                 </div>
@@ -498,8 +499,8 @@ const NavBar = () => {
             </UserContain>
             <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger} admin={isAdmin}>
               <HBMenu className="menu-hamburger">
-                <Link href="/Profile" >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Profile" ? { fontWeight: 600 } : {}}>
+                <Link href={PROFILE_PATH} >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PROFILE_PATH ? { fontWeight: 600 } : {}}>
                     Mi Perfil
                   </HBList>
                 </Link>
@@ -512,13 +513,13 @@ const NavBar = () => {
                     </HBList>
                   </a>
                 }
-                <Link href="/trivias" >
+                {/* <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
                     Trivias
                   </HBList>
-                </Link>
-                <Link href="/Preview" >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Preview" ? { fontWeight: 600 } : {}}>
+                </Link> */}
+                <Link href={PREVIEW_PATH} >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PREVIEW_PATH ? { fontWeight: 600 } : {}}>
                     Cursos
                   </HBList>
                 </Link>
@@ -527,8 +528,8 @@ const NavBar = () => {
                     Tienda
                   </HBList>
                 </a>
-                <Link href="/Blogs" >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/Blogs" ? { fontWeight: 600 } : {}}>
+                <Link href={BLOGS_PATH}>
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === BLOGS_PATH ? { fontWeight: 600 } : {}}>
                     Blog
                   </HBList>
                 </Link>

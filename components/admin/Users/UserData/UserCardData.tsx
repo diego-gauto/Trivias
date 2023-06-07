@@ -69,7 +69,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData, i
     )
   }
   return (
-    <Modal show={isVisible} onHide={() => setIsVisible(false)} center lg>
+    <Modal show={isVisible} onHide={() => setIsVisible(false)} size="lg">
       <UserContain>
         <TitleContain>
           <FirstBox>

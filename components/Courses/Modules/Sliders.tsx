@@ -7,7 +7,7 @@ import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, Ima
 import CourseModal from '../../CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
-import { LOGIN_PATH } from '../../../constants/paths';
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
@@ -247,13 +247,13 @@ const Sliders = (props: ICourseData) => {
   const goTo = (courseData: ICourse) => {
     if (slideType === "continue-watching") {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: courseData.id, season: courseData.currentSeason, lesson: courseData.currentLesson },
       });
     }
     if (slideType === "free-courses") {
       router.push({
-        pathname: 'Lesson',
+        pathname: LESSON_PATH,
         query: { id: courseData.id, season: 0, lesson: 0 },
       });
     }
@@ -404,7 +404,7 @@ const Sliders = (props: ICourseData) => {
               <ButtonContain>
                 {
                   (user && user.level === 0 && user.final_date < today) &&
-                  <Link href={{ pathname: 'Purchase', query: { type: 'subscription' } }}>
+                  <Link href={{ pathname: PURCHASE_PATH, query: { type: 'subscription' } }}>
                     <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                       <PurpleButton>
                         Adquiere Gonvar+

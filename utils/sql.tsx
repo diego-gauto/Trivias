@@ -173,6 +173,44 @@ const sql = () => {
   //     // })
   //   })
   // }
+  //user with membership
+  // const [countdown, setCountdown] = useState(1);
+  // const [past, setPast] = useState([]);
+
+  // useEffect(() => {
+  //   let timeout: any;
+
+  //   if (past.length > 0) {
+  //     if (countdown <= 1000) {
+  //       timeout = setTimeout(() => {
+  //         setCountdown(countdown + 1);
+  //         console.log(countdown);
+  //         testStripe();
+  //       }, 100);
+  //       return () => clearTimeout(timeout);
+  //     }
+  //   }
+  //   return
+  // }, [countdown]);
+  // useEffect(() => {
+  //   pastT().then((res) => {
+  //     console.log(res);
+
+  //     setPast(res);
+  //   })
+  // }, [])
+  // const testStripe = async () => {
+  //   await Promise.all(
+  //     past.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
+  //       let tempUser = {
+  //         email: user.email,
+  //         userId: user.user_id,
+  //       }
+  //       console.log(tempUser);
+  //       await updateStripe(tempUser);
+  //     })
+  //   )
+  // }
   return (
     <div>sql</div>
   )

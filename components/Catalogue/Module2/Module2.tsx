@@ -14,7 +14,7 @@ import {
   SlideModuleContainer,
 } from "./Module2.styled";
 import { Container } from "react-bootstrap";
-import { LOGIN_PATH } from "../../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../../constants/paths";
 import "swiper/css/effect-flip";
 import { useMediaQuery } from "react-responsive";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
@@ -92,24 +92,24 @@ const Module2 = ({ user, allCourses, isLoading, innerWidth, professor }: any) =>
       if (user) {
         if (course.courseType == 'Mensual' && user.membership.finalDate > today || course.paid || course.courseType == 'Gratis') {
           router.push({
-            pathname: 'Lesson',
+            pathname: LESSON_PATH,
             query: { id: course.documentID, season: course.season, lesson: course.lesson },
           });
         }
         if (course.courseType == 'Mensual' && user.membership.finalDate < today) {
           router.push(
-            { pathname: 'Purchase', query: { type: 'subscription' } }
+            { pathname: PURCHASE_PATH, query: { type: 'subscription' } }
           )
         }
         if (course.courseType == 'Producto' && !course.paid) {
           router.push(
-            { pathname: 'Purchase', query: { type: 'course', id: course.documentID } }
+            { pathname: PURCHASE_PATH, query: { type: 'course', id: course.documentID } }
           )
         }
       } else {
         if (course.courseType == 'Gratis') {
           router.push({
-            pathname: 'Lesson',
+            pathname: LESSON_PATH,
             query: { id: course.documentID, season: 0, lesson: 0 },
           });
         }

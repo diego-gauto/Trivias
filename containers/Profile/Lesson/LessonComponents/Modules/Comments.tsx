@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { DEFAULT_USER_IMG } from '../../../../../constants/paths'
-import { addComment, updateComment } from '../../../../../store/actions/courseActions'
-import { Button, Comment, CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
-import { TitleContain, PositionTitle, Titles } from './Module.styled'
+import { CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
+import { TitleContain } from './Module.styled'
 import { FiHeart } from 'react-icons/fi';
-import { BsPlayBtn } from 'react-icons/bs';
-import { SlNotebook } from 'react-icons/sl';
-import { TfiCommentAlt } from 'react-icons/tfi';
 import { FaHeart } from 'react-icons/fa'
 import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addCommentLikeApi, addCommentToAnswerApi, addCommentToAnswerLikeApi, deleteCommentAnswerLikeApi, deleteCommentLikeApi, deleteCommentToAnswerLikeApi, retrieveComments } from '../../../../../components/api/lessons'
 import { createNotification } from '../../../../../components/api/notifications'
 import { MdVerified } from 'react-icons/md'
-const Comments = ({ value, setValue, user, data, comments, course, season, lesson }: any) => {
+import ModuleTabs from './ModuleTabs/ModuleTabs'
+const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
@@ -47,8 +44,9 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
     retrieveComments(data.id).then((res) => {
       res.data.data.forEach((element: any, i: number) => {
         temp.push(false);
+        tempComments.push([]);
         element.answers.forEach((ca: any) => {
-          tempComments.push(false);
+          tempComments[i].push(false);
         });
       })
       setResponses(temp);
@@ -56,6 +54,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
       setCurrentComments(res.data.data)
     })
   }
+
   const like = (x: any) => {
     let temp = {
       userId: user.user_id,
@@ -162,12 +161,20 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
     setAnswer("");
   }
 
-  const toggleAnswers = (index: number) => {
+  const toggleAnswers = (index: number, idxC: number) => {
     lastComments.forEach((element: any, i: number) => {
       if (index == i) {
-        lastComments[index] = !lastComments[index];
+        element.forEach((el: any, idx: number) => {
+          if (idxC === idx) {
+            element[idx] = !element[idx]
+          } else {
+            element[idx] = false
+          }
+        });
       } else {
-        lastComments[i] = false;
+        element.forEach((el: any, idx: number) => {
+          element[idx] = false
+        });
       }
     });
     setLastComments([...lastComments]);
@@ -227,22 +234,7 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
   return (
     <>
       <TitleContain >
-        <Titles onClick={() => {
-          setValue(1)
-        }}>
-          <BsPlayBtn></BsPlayBtn>
-          Acerca del curso
-        </Titles>
-        {<Titles onClick={() => {
-          setValue(3)
-        }}>
-          <SlNotebook></SlNotebook>
-          Evaluación
-        </Titles>}
-        <PositionTitle position={value}>
-          <TfiCommentAlt></TfiCommentAlt>
-          Comentarios
-        </PositionTitle>
+        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <MainContainer>
@@ -256,14 +248,20 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
             <Profile
               src={DEFAULT_USER_IMG}
             />
-            <CommentInput value={comment} placeholder="Escribe tus comentarios" onChange={(e: any) => {
-              setComment(e.target.value)
-            }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  addLessonComment()
-                }
-              }} />
+            <div className='comment-contain'>
+              <CommentInput value={comment} maxLength={255} placeholder="Escribe tus comentarios" onChange={(e: any) => {
+                setComment(e.target.value)
+              }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    addLessonComment()
+                  }
+                }} />
+              <p className='comment-limit'>
+                {comment.length}/255
+              </p>
+            </div>
+
             {/* <Button style={{ color: !comment ? 'gray' : '#6717cd', 'borderColor': !comment ? 'gray' : '#6717cd' }} onClick={addLessonComment}>Comentar</Button> */}
           </div>
         </CommentContain>
@@ -302,15 +300,22 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                       <Profile
                         src={DEFAULT_USER_IMG}
                       />}
-                    <input value={answer} className='answer' placeholder='Escribe tu respuesta' type="text"
-                      onChange={(e: any) => {
-                        setAnswer(e.target.value)
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          answerQuestion(x);
-                        }
-                      }} /></div>}
+                    <div className='comment-contain'>
+                      <input value={answer} className='answer' placeholder='Escribe tu respuesta' type="text" maxLength={255}
+                        onChange={(e: any) => {
+                          setAnswer(e.target.value)
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            answerQuestion(x);
+                          }
+                        }} />
+                      <p className='comment-limit'>
+                        {answer.length}/255
+                      </p>
+                    </div>
+                  </div>
+                  }
                 </div>
               </div>
               {x.answers.map((ans: any, idx: any) => {
@@ -337,9 +342,9 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                               <FiHeart />}
                             <p>{ans.likes.length}</p>
                           </div>
-                          <button onClick={() => { toggleAnswers(idx) }}>Responder</button>
+                          <button onClick={() => { toggleAnswers(index, idx) }}>Responder</button>
                         </div>
-                        {lastComments[idx] && <div className='answer-input'>
+                        {lastComments[index][idx] && <div className='answer-input'>
                           {user.photoURL
                             ?
                             <Profile src={user.photo} />
@@ -347,15 +352,22 @@ const Comments = ({ value, setValue, user, data, comments, course, season, lesso
                             <Profile
                               src={DEFAULT_USER_IMG}
                             />}
-                          <input value={answerComment} className='answer' placeholder='Escribe tu respuesta' type="text"
-                            onChange={(e: any) => {
-                              setAnswerComment(e.target.value)
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                answerQuestion(ans);
-                              }
-                            }} /></div>}
+                          <div className='comment-contain'>
+                            <input value={answerComment} className='answer' placeholder='Escribe tu respuesta' type="text"
+                              onChange={(e: any) => {
+                                setAnswerComment(e.target.value)
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  answerQuestion(ans);
+                                }
+                              }} />
+                            <p className='comment-limit'>
+                              {answerComment.length}/255
+                            </p>
+                          </div>
+
+                        </div>}
                       </div>
                     </div>
                     {ans.comments.map((answer_comment: any, idx: any) => {

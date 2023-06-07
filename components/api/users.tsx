@@ -148,3 +148,14 @@ export const cancelPaypal = async (user: any) => {
       return error
     });
 };
+export const getCertificateApi = async (certificate_id: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "users/user-certificate/" + certificate_id)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

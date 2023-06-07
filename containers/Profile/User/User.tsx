@@ -37,7 +37,7 @@ const User = () => {
   const [nextCertificate, setNextCertificate] = useState([]);
   const [certificateProgress, setCertificateProgress] = useState(0);
   const [missingData, setMissingData] = useState<number>(0);
-
+  const [lastTimeReward, setLastTimeReward] = useState<any>([]);
   const newCard = () => {
     setAddPayment(!addPayment)
   }
@@ -129,11 +129,9 @@ const User = () => {
     let progressPoints: number = 0;
     let progressCertificates: number = 755;
     const {
-      monthCompleted,
       monthPercentage,
       nextCourseCertificate,
       reward,
-      totalCertificates,
       user
     } = data;
     pointsFilter = reward.filter((data: any) => (data.type === "points" && user.score < data.points));
@@ -162,7 +160,6 @@ const User = () => {
       monthPercentage: monthPercentage,
       reward: reward,
     }
-
     setPointsRewards(pointsFilter[0]);
     setData(progressPoints);
     setCertificateProgress(progressCertificates);
@@ -170,6 +167,7 @@ const User = () => {
     await getTimeReward(timeRewardData).then((timeReward) => {
       setTimeProgress(timeReward.progressMonth);
       setTimePrize(timeReward.monthFilter[0]);
+      setLastTimeReward(timeReward.monthRewardCompleted)
       setLoading(false);
       setMissingData(missingData + 1);
     })
@@ -260,6 +258,7 @@ const User = () => {
           timePrizeSize={timePrizeSize}
           nextCertificate={nextCertificate}
           handleClick={handleClick}
+          lastTimeReward={lastTimeReward}
         />
         <ThirdBox>
           {/* Third Container */}

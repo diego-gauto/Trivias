@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap'
 import { BiPlusMedical } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
-import { SIGNUP_PATH } from '../../constants/paths';
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from '../../constants/paths';
 import { getTeacher } from '../../store/actions/courseActions';
 import CourseModal from '../CourseModal/CourseModal';
 import { ICourse } from './IModalGonvarPlus';
@@ -59,10 +59,10 @@ export const ModalGonvarPlus = (props: ICourse) => {
   const goTo = () => {
     if (user) {
       if (user.level === 1 || user.final_date > today) {
-        router.push("/Preview")
+        router.push(PREVIEW_PATH)
       }
       else {
-        router.push("/Purchase?type=subscription")
+        router.push(`${PURCHASE_PATH}?type=subscription`)
       }
     }
     else {

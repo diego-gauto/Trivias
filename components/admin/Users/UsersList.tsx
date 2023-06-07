@@ -16,10 +16,11 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getLessonFromUserApi, getPartialUsers, getUsersApi } from "../../api/admin";
+import { getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
+import { useAuth } from "../../../hooks/useAuth";
 
 export interface SelectedUser {
   id?: string;
@@ -74,13 +75,26 @@ const UsersList = () => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [filterValue, setFilterValue] = useState<string>("");
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(null);
   const [filters, setFilters] = useState<any>([]);
   const [dates, setDates] = useState<any>([]);
+  const [userDownload, setUserDownload] = useState<any>([]);
   const [loadCard, setLoadCard] = useState(false);
   const [loginDate, setLoginDate] = useState<any>([null, null]);
   const [createDate, setCreateDate] = useState<any>([null, null]);
   const menuRef = useRef<any>(null);
   let today = new Date().getTime() / 1000;
+  try {
+    var userDataAuth = useAuth();
+    useEffect(() => {
+      if (userDataAuth.user !== null) {
+        setUserData(userDataAuth.user);
+      }
+    }, [userDataAuth])
+
+  } catch (error) {
+    console.log(error)
+  }
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -156,6 +170,7 @@ const UsersList = () => {
     })
     return users
   }
+
   const filterUsersByValue = (value: string): any => {
     setFilterValue(value);
     let tempAllUsers = allUsers;
@@ -224,9 +239,14 @@ const UsersList = () => {
       setCourses(tempCourses)
     })
   }
-  const pagePerUsers = (users: any) => {
+  console.log(userDownload);
+  const pagePerUsers = async (users: any) => {
     setPageIndex(0)
     setTotalUsers(users.length);
+    setUserDownload(users);
+    // await users.map(async (user: any) => {
+    //   await getProgressForUsers(user.id);
+    // })
     let usersPerPage: number = 100;
     let pages: number = Math.ceil(users.length / usersPerPage);
     let tempUsers: any = [];
@@ -271,7 +291,21 @@ const UsersList = () => {
     return "Activo " + countCourses
   }
   const getUsers = async () => {
-    let demoParams = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    let demoParams = [1, 2, 3, 4, 5, 6, 7, 8];
+    await getPartialUsers(0, 150).then((res) => {
+      setAllUsers((prevUsers) => {
+        const updatedUsers = prevUsers.concat(res);
+        pagePerUsers(updatedUsers);
+        return updatedUsers
+      })
+    })
+    await getPartialUsers(150, 10000).then((res) => {
+      setAllUsers((prevUsers) => {
+        const updatedUsers = prevUsers.concat(res);
+        pagePerUsers(updatedUsers);
+        return updatedUsers
+      })
+    })
     demoParams.map(async (val: any) => {
       await getPartialUsers((val * 10000), ((val + 1) * 10000)).then((res) => {
         setAllUsers((prevUsers) => {
@@ -283,7 +317,6 @@ const UsersList = () => {
     })
 
   }
-
   useEffect(() => {
     getUsers();
     getCoures();
@@ -297,34 +330,50 @@ const UsersList = () => {
   const handleClick = () => {
     getUsers();
   }
-
-  if (!loader) {
-    return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background>
-    )
+  const Gonvar = () => {
+    // let tempusers: any = allUsers;
+    // console.log(allUsers);
+    // let tempArrayCourse: any = [];
+    // tempusers.forEach((user: any) => {
+    //   if (user.level === 1 || user.final_date > today) {
+    //     tempArrayCourse.push({
+    //       nombre: user.name,
+    //       apellido: user.last_name,
+    //       email: user.email,
+    //     })
+    //   }
+    //   // user.user_courses.forEach((course: any) => {
+    //   //   if (course.course_id === 45 && course.final_date > today) {
+    //   //     tempArrayCourse.push({
+    //   //       nombre: user.name,
+    //   //       apellido: user.last_name,
+    //   //       email: user.email,
+    //   //     });
+    //   //   }
+    //   // })
+    // })
+    // // tempusers = tempusers.filter((user: any) => user.cursos.find(30));
+    // console.log(tempArrayCourse, "hola");
+    // return tempArrayCourse
   }
+
   return (
     <AdminContain>
       <UserContain>
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {((user.role === 'admin' && user.roles[4].report === 0) || user.role === "superAdmin") && <CsvDownloader
+            {/* {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin") && <CsvDownloader
               filename="usersData"
               extension=".csv"
               separator=","
               wrapColumnChar=""
-              datas={allUsers.map(({ ...user }) => user
-              )}
+              datas={Gonvar}
             >
               <DownloadUserData>
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
-            </CsvDownloader>}
+            </CsvDownloader>} */}
             {user.role}
             <FilterContain>
               <button onClick={() => setShowFilters(!showFilters)}>
@@ -375,30 +424,47 @@ const UsersList = () => {
                 <th>Editar</th>
               </tr>
               {/* TABLAS */}
-              {users.length > 0 && (
-                users[pageIndex].map((user: any, index: number) => {
-                  return (
-                    <tr key={index}>
-                      <td style={{ fontWeight: 600 }}>
-                        <ProfileContain>
-                          <Profile />
-                          {user.name}
-                        </ProfileContain>
-                      </td>
-                      <td >{user.email}</td>
-                      <td>{formatDate(user.created_at)}</td>
-                      <td>{activeCourses(user.user_courses)}</td>
-                      <td>MXN${user.spent}</td>
-                      {/* <td>{user.score} puntos</td> */}
-                      <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-                      <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
-                    </tr>
-                  )
-                })
-              )
+              {
+                <>
+                  {
+                    loader &&
+                    <>
+                      {
+                        users.length > 0 && (
+                          users[pageIndex].map((user: any, index: number) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ fontWeight: 600 }}>
+                                  <ProfileContain>
+                                    <Profile />
+                                    {user.name}
+                                  </ProfileContain>
+                                </td>
+                                <td >{user.email}</td>
+                                <td>{formatDate(user.created_at)}</td>
+                                <td>{activeCourses(user.user_courses)}</td>
+                                <td>MXN${user.spent}</td>
+                                {/* <td>{user.score} puntos</td> */}
+                                <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                                <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
+                              </tr>
+                            )
+                          }))
+                      }
+                    </>
+                  }
+                </>
               }
             </tbody>
           </Table>
+          {
+            !loader &&
+            <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+              <LoaderImage>
+                <LoaderContain />
+              </LoaderImage>
+            </Background>
+          }
         </Container>
         {
           isVisible &&

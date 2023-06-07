@@ -8,6 +8,7 @@ import { getAllCourseDataApi, getCoursesApi } from "../api/lessons";
 import { ICourses, ILessons, ISeasons } from './ICourses';
 import CourseModal from '../CourseModal/CourseModal';
 import { useRouter } from 'next/router';
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from '../../constants/paths';
 const Courses = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -75,30 +76,30 @@ const Courses = () => {
     if (userData) {
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date >= today))) {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
         });
       }
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date <= today))) {
         router.push({
-          pathname: 'Purchase', query: { type: 'course', id: videoCourse.id }
+          pathname: PURCHASE_PATH, query: { type: 'course', id: videoCourse.id }
         });
       }
       if (videoCourse.type === "Mensual" && (userData.level === 1 || userData.final_date >= today)) {
         router.push({
-          pathname: 'Lesson',
+          pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
         });
       }
       if (videoCourse.type === "Mensual" && (userData.level === 0 && userData.final_date < today)) {
         router.push({
-          pathname: 'Purchase',
+          pathname: PURCHASE_PATH,
           query: { type: 'subscription' }
         });
       }
     }
     else {
-      router.push({ pathname: '/auth/Login' })
+      router.push({ pathname: LOGIN_PATH })
     }
   }
   const handleOpen = () => {

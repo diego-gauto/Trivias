@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LOGIN_PATH } from "../../constants/paths";
+import { LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Background,
   Error,
@@ -117,13 +117,13 @@ const Register = () => {
 
   const redirect = () => {
     if (localStorage.getItem("trial") === "true") {
-      window.location.href = "https://www.gonvar.io/purchase?type=subscription&trial=true"
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = "https://www.gonvar.io/purchase?type=subscription"
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
     }
     if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io/Purchase?type=course&id=${localStorage.getItem("course")}`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
   }
 
@@ -149,7 +149,7 @@ const Register = () => {
         } else {
           localStorage.setItem('email', user.email);
           localStorage.setItem("method", "mail");
-          window.location.href = "/Preview"
+          window.location.href = PREVIEW_PATH;
           redirect()
         }
       })
@@ -181,7 +181,7 @@ const Register = () => {
             setIsLoading(false);
           } else {
             localStorage.setItem('email', user.email)
-            window.location.href = "/Preview"
+            window.location.href = PREVIEW_PATH;
             redirect()
           }
         })
@@ -218,7 +218,7 @@ const Register = () => {
           } else {
             localStorage.setItem('email', user.email);
             localStorage.setItem('method', "facebook");
-            window.location.href = "/Preview"
+            window.location.href = PREVIEW_PATH;
             redirect()
           }
         })
@@ -232,7 +232,7 @@ const Register = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       redirect()
-      window.location.href = "/Preview";
+      window.location.href = PREVIEW_PATH;
     } else {
       setTimeout(() => {
         setIsLoading(false)

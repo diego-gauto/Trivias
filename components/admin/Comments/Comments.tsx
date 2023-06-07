@@ -265,7 +265,10 @@ const Comments = () => {
         {popUp && <div className="pop-up">
           <GrClose onClick={() => { setPopUp(false); setAnswer(""); setAnswerComment("") }} />
           <h1>Responder comentario</h1>
-          <textarea placeholder="La solución es..." onChange={(e) => { level === 1 ? setAnswer(e.target.value) : setAnswerComment(e.target.value) }} />
+          <div className="comment-contain">
+            <textarea placeholder="La solución es..." maxLength={255} onChange={(e) => { level === 1 ? setAnswer(e.target.value) : setAnswerComment(e.target.value) }} />
+            <p className="indicator"> {answer.length} / 255</p>
+          </div>
           <button onClick={() => { answerQuestion() }}>Agregar</button>
         </div>}
       </AdminCommentsContainer>
