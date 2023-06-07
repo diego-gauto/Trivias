@@ -34,8 +34,9 @@ export const CardContainer = styled(Card)`
           }
         }
         .middle {
-          h1 {
+          h3 {
             font-size: 32px !important;
+            font-weight: 600;
           }
           p {
             font-size: 20px !important;
@@ -70,9 +71,10 @@ export const CardContainer = styled(Card)`
       }
 
       .middle {
-        h1 {
+        h3 {
           color: #3f1168;
           font-size: 32px;
+          font-weight: 600;
           span {
             color: #a733e4;
           }
