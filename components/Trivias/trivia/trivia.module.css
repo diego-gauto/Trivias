@@ -1,0 +1,183 @@
+.trivia {
+  height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+  /* margin-left: 5%; */
+}
+
+.trivia_title {
+  position: relative;
+  /* width: 640px;
+  height: 56px; */
+  max-width: 90%;
+  top: 25px;
+  left: 7%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 46px;
+  text-align: start;
+  color: #520795;
+}
+
+.progressBarContainer {
+  position: relative;
+  max-width: 90%;
+  height: 11px;
+  left: 7%;
+  top: 50px;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.pregunta {
+  position: relative;
+  width: 218px;
+  height: 27px;
+  left: 7%;
+  top: 70px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 27px;
+  /* identical to box height */
+  text-align: start;
+  color: #520795;
+}
+
+.question {
+  position: relative;
+  max-width: 90%;
+  /* width: 720px;*/
+  height: 43px; 
+  left: 7%;
+  top: 80px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 33px;
+  color: #962dec;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  max-width: 90%;
+  /* width: 628px; */
+  left: 7%;
+  top: 100px;
+}
+
+.answer {
+  border: 2px solid rgba(156, 48, 234, 0.3);
+  border-radius: 63px;
+  cursor: pointer;
+  height: 48px;
+  margin: 5px 0;
+  padding-left: 7%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 21px;
+
+  color: #515151;
+}
+
+.active {
+  border: 2px solid rgba(156, 48, 234, 0.3);
+  border-radius: 63px;
+  cursor: pointer;
+  height: 48px;
+  margin: 5px 0;
+  padding-left: 7%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 21px;
+
+  color: #515151;
+
+  border: 2px solid #9c30ea;
+}
+
+.button {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 2%;
+  cursor: pointer;
+
+  position: relative;
+  width: 305px;
+  height: 54px;
+  left: 7%;
+  top: 95px;
+}
+
+@media screen and (max-width: 878px) {
+
+  .button {
+    margin-top: 30px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 817px) {
+
+  .answer {
+
+    height: 63px;
+  }
+
+  .active{
+    height: 63px;
+  }
+
+}
+
+
+
+
+@media screen and (max-width: 520px) {
+
+
+  .answer {
+
+    height: 63px;
+  }
+
+  .active{
+    height: 63px;
+  }
+
+}
+
+@media screen and (max-width: 532px) {
+
+  .question {
+    height: 80px; 
+  }
+
+}

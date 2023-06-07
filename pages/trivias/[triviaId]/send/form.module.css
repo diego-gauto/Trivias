@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.formContainer {
+  height: 88vh;
+  display: flex;
+  background-color: #ece7f2;
+  padding-left: 75px;
+}
+
+.form {
+  width: 53%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.volver {
+  display: flex;
+  cursor: pointer;
+}
+
+.volver div {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
+  color: #520795;
+  padding: 28px 0 0 8px;
+}
+
+.volver img {
+  padding-top: 23px;
+}
+
+.textos {
+  margin-top: 25px;
+}
+
+.textos h1 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 51px;
+  line-height: 62px;
+  color: #992eea;
+}
+
+.textos h3 {
+  height: 56px;
+  width: 500px;
+  margin-top: 10px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 28px;
+
+  color: #520795;
+}
+
+.textos span {
+  color: #d24dd3;
+}
+
+.textos p {
+  margin-top: 10px;
+  width: 510px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #520795;
+}
+
+.inputContainer {
+  width: 550px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+.checkboxContainer input {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+}
+
+.checkboxContainer input[type="checkbox"]:checked {
+  background-color: #8a2be2 !important;
+  border-color: #8a2be2 !important;
+}
+
+.checkboxContainer label {
+  margin-left: 24px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 16px;
+  width: 373px;
+  height: 32px;
+
+  letter-spacing: 0.4px;
+
+  color: #7a7289;
+}
+
+.checkboxContainer label span {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 16px;
+
+  letter-spacing: 0.4px;
+  color: #3f1168;
+}
+
+.btnRecibir {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 2%;
+  cursor: pointer;
+
+  position: relative;
+  width: 305px;
+  height: 54px;
+}
+
+.formImg {
+  width: 47%;
+  height: 100%;
+  background-image: url("/images/trivias/Imagen fondo - peticion de datos.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /* padding: 40px 10px 0 0; */
+  text-align: end;
+}
+
+.formImg img {
+  padding: 40px 10px 0 0;
+}
+
+.link {
+  text-decoration: none;
+}
+
+/* width: 40%;
+height: 100%;
+background-image: url("/images/imgTrivia.png");
+background-size: 100%;
+background-repeat: no-repeat; */
