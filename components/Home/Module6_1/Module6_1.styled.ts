@@ -456,7 +456,7 @@ export const SliderSectionTitle = styled.p`
   }
 `;
 
-export const SliderItemLink = styled.h1`
+export const SliderItemLink = styled.h2`
   text-decoration: none;
   color: #fff;
 `;

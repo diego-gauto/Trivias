@@ -78,12 +78,12 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
             <button style={{ cursor: "initial" }}>Suscripción mensual</button>
           </div>
           <div className="middle">
-            <h1>Empieza a cursar <br /> cientos de clases <br /> sobre uñas y belleza <br /> <span>en línea</span> </h1>
+            <h3>Empieza a cursar <br /> cientos de clases <br /> sobre uñas y belleza <br /> <span>en línea</span> </h3>
             <p>Diferentes niveles de dificultad <br />
               e instructores internacionales.
             </p>
           </div>
-          <h1 className="price">Sólo $149 <span>MXN/mes</span></h1>
+          <h3 className="price">Sólo $149 <span>MXN/mes</span></h3>
           {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
               <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={goTo} />
