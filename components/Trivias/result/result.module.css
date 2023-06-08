@@ -111,6 +111,7 @@
 
   .share{
     padding-left: 4%;
+    margin-bottom: 3%;
   }
 
   }
@@ -126,6 +127,11 @@
 .resultText{
   width: 100%;
   margin-top: 3%;
+}
+
+.resultText p {
+
+  height: 100%;
 }
 
 .resultImg{

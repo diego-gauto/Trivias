@@ -69,12 +69,14 @@ width: 100%;
 
   .reclamarPremio {
     padding: 0;
+    margin: 8% 0 0 0;
+    width: 100%;
   }
 
-
-  .reclamarPremio {
-    margin-top: 5%;
-  }
+  .reclamarRedes{
+    width: 100%;
+    margin: 5% 0 0 0;
+      }
 
   .reclamarPremio button{
     /* font-family: "Montserrat";
@@ -91,10 +93,6 @@ width: 100%;
     position: relative; */
     width: 90%;
     /* height: 54px; */
-  }
-  .reclamarRedes, .reclamarPremio{
-width: 100%;
-margin: 0;
   }
 
   .link{

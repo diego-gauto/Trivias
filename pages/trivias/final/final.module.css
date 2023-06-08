@@ -1,0 +1,82 @@
+.finalContainer {
+  height: 100vh;
+  display: flex;
+  background-color: #ece7f2;
+  padding-left: 75px;
+}
+
+.final {
+  width: 53%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.finalVolver {
+  display: flex;
+  cursor: pointer;
+}
+
+.finalVolver div {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
+  color: #520795;
+  padding: 58px 0 0 8px;
+}
+
+.finalVolver img {
+  padding-top: 53px;
+}
+
+.finalTextos {
+  margin-top: 200px;
+}
+
+.finalTextos h1 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 51px;
+  line-height: 62px;
+  color: #992eea;
+}
+
+.finalTextos h3 {
+  height: 56px;
+  width: 500px;
+  margin-top: 10px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 28px;
+
+  color: #520795;
+}
+
+.finalTextos span {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 28px;
+  color: #d24dd3;
+}
+
+.finalImg {
+  width: 47%;
+  height: 100%;
+  background-image: url("/images/imagen\ de\ fondo\ -\ notificacion\ de\ envio\ de\ correo.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding: 40px 10px 0 0;
+  text-align: end;
+}
+
+.link {
+  text-decoration: none;
+}

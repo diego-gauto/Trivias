@@ -8,6 +8,7 @@ import styles from "./form.module.css";
 // import volverFlecha from "/images/icono . retroceder.svg";
 import InputMail from "../../../../components/Trivias/inputMail/inputMail";
 import InputWatsapp from "../../../../components/Trivias/inputWhatsapp/inputWhatsapp";
+import userTrivia from "../../../../components/api/usertrivia"
 
 const Form = () => {
   //   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Form = () => {
   const {
     query: { triviaId, result },
   } = useRouter();
+  const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -57,6 +59,11 @@ const Form = () => {
     setIsChecked(!isChecked);
   }
 
+  const handleRedirect = (createUserSuccess) => {
+    // const router = useRouter();
+    router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
+  };
+
   const handleSubmit = async () => {
     const createUserDto = {
       nombre: nombre,
@@ -69,19 +76,22 @@ const Form = () => {
       resultadoTrivia: result, // Completa el resultado de la trivia según corresponda
     };
 
+    
+
     let createUserSuccess = false; // Variable para almacenar el resultado del primer POST
 
     try {
       // Realizar la solicitud HTTP POST para crear el usuario
-      const createUserResponse = await fetch("http://localhost:3000/userTrivia", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(createUserDto),
-      });
+      // const createUserResponse = await fetch("http://localhost:3000/userTrivia", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(createUserDto),
+      // });
 
-      const createUserResult = await createUserResponse.json(); // Obtener el resultado del primer POST
+      //userTrivia(createUserDto)
+      const createUserResult = userTrivia(createUserDto); // Obtener el resultado del primer POST
 
       if (createUserResult) {
         createUserSuccess = true;
@@ -90,6 +100,7 @@ const Form = () => {
           to: correo,
           username: nombre + " " + apellido,
           subject: "Prueba de envío por SendinBlu desde el front",
+          idTemplateBrevo: 7,
           //numeroWhatsApp: numeroWhatsApp,
         };
 
@@ -113,7 +124,8 @@ const Form = () => {
         // Hubo un error al crear el usuario
         console.log("Error al crear el usuario");
       }
-
+      
+      handleRedirect(createUserSuccess);
       // Redireccionar a `/trivias/final`
       //   navigate(`/trivias/final`, { state: { createUserSuccess } });
     } catch (error) {
@@ -194,7 +206,7 @@ const Form = () => {
           </button>
         </div>
         <div className={formImg}>
-          <img src="/images/logo gonvar blanco.svg" alt="" />
+          <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
         </div>
       </div>
     </>
