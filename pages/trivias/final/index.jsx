@@ -1,48 +1,36 @@
-import React from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "./final.module.css";
-// import logoGonvarBL from "/images/trivia/logo gonvar blanco.svg";
-// import volverFlecha from "/images/trivias/icono . retroceder.svg";
 
 const Final = () => {
-  //   const navigate = useNavigate();
-  //   const location = useLocation();
-  //   const { createUserSuccess } = location.state || {};
+  const { finalContainer, final, finalTextos, finalVolver, finalImg, link } =
+  styles;
 
   const router = useRouter();
-  const { createUserSuccess } = router.query;
+  // const { createUserSuccess } = router.query;
 
-  console.log(createUserSuccess);
-  console.log(Boolean(createUserSuccess));
+  const {
+    query: { createUserSuccess },
+  } = useRouter();
 
-  const { finalContainer, final, finalTextos, finalVolver, finalImg, link } =
-    styles;
+  const [title, setTitle] = useState("Revisa tu email");
+  const [message, setMessage] = useState(
+    "Busca en la bandeja de correo o en spam y"
+  );
+  const [span, setSpan] = useState("disfruta del descuento.");
 
-  //   const handleVolver = () => {
-  //     navigate(`/trivias`);
-  //   };
-  const booleanValue = Boolean(createUserSuccess);
-  let title = "";
-  let message = "";
-  let span = "";
+  const isUserCreated = createUserSuccess === "true";
 
-  if (!booleanValue) {
-    title = "Ya has jugado a esta trivia";
-    message = "Lamentablemente solo podemos entregar el premio la primera vez";
-    span = "";
-    console.log("adentro del true");
-  } else {
-    title = "Revisa tu email";
-    message = "Busca en la bandeja de correo o en spam y ";
-    span = "disfruta del descuento.";
-    console.log("adentro del false");
-  }
-
-  console.log(title);
-  console.log(message);
-  console.log(span);
+  useEffect(() => {
+    if (!isUserCreated) {
+      setTitle("Ya has jugado a esta trivia");
+      setMessage(
+        "Lamentablemente solo podemos entregar el premio la primera vez"
+      );
+      setSpan("");
+    }
+  }, [isUserCreated]);
 
   return (
     <div className={finalContainer}>
@@ -60,7 +48,7 @@ const Final = () => {
         <Link href={"/"}>
           <a className={link}>
             <div className={finalVolver}>
-              <img src="/images/icono . retroceder.svg" alt="" />
+              <img src="/images/trivias/icono . retroceder.svg" alt="" />
               <div> Volver</div>
             </div>
           </a>
@@ -74,7 +62,7 @@ const Final = () => {
         </div>
       </div>
       <div className={finalImg}>
-        <img src="/images/logo gonvar blanco.svg" alt="" />
+        <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
       </div>
     </div>
   );

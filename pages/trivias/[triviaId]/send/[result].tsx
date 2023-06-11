@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
-// import { useNavigate, useParams } from "react-router-dom";
-import InputNombre from "../../../../components/Trivias/inputNombre/inputNombre";
-import styles from "./form.module.css";
-// import logoGonvarBL from "/images/logo gonvar blanco.svg";
-// import volverFlecha from "/images/icono . retroceder.svg";
+
+import { getUserApi } from "../../../../components/api/users";
+import { emailTrivia, userTrivia } from "../../../../components/api/usertrivia";
 import InputMail from "../../../../components/Trivias/inputMail/inputMail";
+import InputNombre from "../../../../components/Trivias/inputNombre/inputNombre";
 import InputWatsapp from "../../../../components/Trivias/inputWhatsapp/inputWhatsapp";
-import userTrivia from "../../../../components/api/usertrivia"
+import styles from "./form.module.css";
 
 const Form = () => {
-  //   const navigate = useNavigate();
-  //   const { id } = useParams();
   const {
     query: { triviaId, result },
   } = useRouter();
+
+  const [userData, setUserData] = useState<any>(null);
+
   const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const [nombre, setNombre] = useState("");
@@ -35,23 +36,19 @@ const Form = () => {
     link,
   } = styles;
 
-  //   const handleVolver = () => {
-  //     navigate(`/trivias`);
-  //   };
-
-  const handleNombreChange = (event) => {
+  const handleNombreChange = (event: any) => {
     setNombre(event.target.value);
   };
 
-  const handleApellidoChange = (event) => {
+  const handleApellidoChange = (event: any) => {
     setApellido(event.target.value);
   };
 
-  const handleMailChange = (event) => {
+  const handleMailChange = (event: any) => {
     setCorreo(event.target.value);
   };
 
-  const handlePaisChange = (event) => {
+  const handlePaisChange = (event: any) => {
     setNumeroWhatsApp(event.target.value);
   };
 
@@ -59,39 +56,27 @@ const Form = () => {
     setIsChecked(!isChecked);
   }
 
-  const handleRedirect = (createUserSuccess) => {
-    // const router = useRouter();
+  const handleRedirect = (createUserSuccess: boolean) => {
     router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
   };
 
   const handleSubmit = async () => {
+
     const createUserDto = {
       nombre: nombre,
       apellido: apellido,
       mail: correo,
       numeroWhatsapp: numeroWhatsApp,
       pais: "Argentina", // Completa el país según corresponda
-      isUser:false,
+      isUser: false,
       numeroTrivia: triviaId, // Completa el número de trivia según corresponda
       resultadoTrivia: result, // Completa el resultado de la trivia según corresponda
     };
 
-    
+    let createUserSuccess: boolean = false; // Variable para almacenar el resultado del primer POST
 
-    let createUserSuccess = false; // Variable para almacenar el resultado del primer POST
-
-    try {
-      // Realizar la solicitud HTTP POST para crear el usuario
-      // const createUserResponse = await fetch("http://localhost:3000/userTrivia", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(createUserDto),
-      // });
-
-      //userTrivia(createUserDto)
-      const createUserResult = userTrivia(createUserDto); // Obtener el resultado del primer POST
+    userTrivia(createUserDto).then((res) => {
+      const createUserResult = res.data.result
 
       if (createUserResult) {
         createUserSuccess = true;
@@ -101,37 +86,32 @@ const Form = () => {
           username: nombre + " " + apellido,
           subject: "Prueba de envío por SendinBlu desde el front",
           idTemplateBrevo: 7,
-          //numeroWhatsApp: numeroWhatsApp,
         };
 
-        // Realizar la solicitud HTTP POST para enviar el correo
-        const sendEmailResponse = await fetch("http://localhost:3000/email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(sendEmailDto),
-        });
+        const sendEmailResponse = emailTrivia(sendEmailDto)
 
-        if (sendEmailResponse.ok) {
-          // El correo se envió correctamente
-          console.log("Correo enviado correctamente");
-        } else {
-          // Hubo un error al enviar el correo
-          console.log("Error al enviar el correo");
-        }
+        console.log(sendEmailResponse)
       } else {
-        // Hubo un error al crear el usuario
-        console.log("Error al crear el usuario");
+        // El usuario ya había jugado a esta trivia
+        console.log("El usuario ya jugó a esta trivia");
       }
-      
+
       handleRedirect(createUserSuccess);
-      // Redireccionar a `/trivias/final`
-      //   navigate(`/trivias/final`, { state: { createUserSuccess } });
-    } catch (error) {
-      console.error(error);
+
+    })
+      .catch((error) => {
+        console.error("Error al crear el usuario", error);
+      });
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
     }
-  };
+    console.log(userData)
+  }, [])
 
   return (
     <>
