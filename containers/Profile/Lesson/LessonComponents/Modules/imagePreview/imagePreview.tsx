@@ -40,8 +40,7 @@ const ImagePreview = (props: any) => {
                     <LoaderImage>
                       <LoaderContain />
                     </LoaderImage>
-                    //onClick={() => getImage(imageDisplay)}
-                    : <button className='btn'  >Aceptar</button>
+                    : <button className='btn' onClick={() => getImage(imageDisplay)} >Aceptar</button>
                 }
               </div>
             </div>
