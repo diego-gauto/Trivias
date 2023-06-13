@@ -125,17 +125,6 @@ export const getPartialUsers = async (first: number, second: number) => {
       return error
     });
 };
-export const getAllUsers = async (limit: number, offset: number, name: string, spent: number, level: number, method: string, state: string) => {
-  return axios
-    .get("https://gonvar.inowu.dev/" + "admin/partial-users-demo/" + limit + "/" + offset + "/" + name + "/" + spent + "/" + level + "/" + method + "/" + state)
-    .then((res) => {
-      return res.data.users
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
-};
 export const getProgressForUsers = async (user_id: number) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/course-users/" + user_id)

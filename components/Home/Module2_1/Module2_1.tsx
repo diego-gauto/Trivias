@@ -1,14 +1,17 @@
+import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
+import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
 import { useEffect, useState } from "react";
 
-import { useMediaQuery } from "react-responsive";
-
 import { useRouter } from "next/router";
-
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
-import { ModuleContainer, Subtittle1, Tittle } from "../Module2_1/Module2_1.styled";
+import {
+  ModuleContainer,
+  Tittle,
+  Subtittle1,
+} from "../Module2_1/Module2_1.styled";
 import { IModule2_1 } from "./IModule2_1";
-import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
-import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
+import { useMediaQuery } from "react-responsive";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+
 
 export const Module2_1 = (props: IModule2_1) => {
   const { data, img, user } = props;
@@ -67,7 +70,7 @@ export const Module2_1 = (props: IModule2_1) => {
             sobre uñas <span>y más servicios de belleza.</span>
           </Subtittle1>}
           <div className="buttons">
-            <PurpleModule2Button b1text={"Comenzar ahora"} n1text={""}
+            <PurpleModule2Button b1text={"Comienza desde $149"} n1text={" MXN/mes"}
               onClick={startFromRedirect} />
             <PurpleEmptyButton text={"Ver cursos"} onClick={() => { goToPreview() }} />
           </div>

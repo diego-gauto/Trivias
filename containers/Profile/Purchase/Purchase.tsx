@@ -368,7 +368,7 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          {/* {(pay && !loader) && <div className="static-modal">
+          {(pay && !loader) && <div className="static-modal">
             <div className="modal-costum">
               <h1>¡Grandes noticias, <span>{user}!</span></h1>
               <p><span>¡Tu compra ha sido exitosa!</span> Enviamos el <br />
@@ -381,7 +381,7 @@ const Purchase = () => {
                 <Link href={PREVIEW_PATH}>Ver los cursos</Link>
               </button>
             </div>
-          </div>} */}
+          </div>}
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">

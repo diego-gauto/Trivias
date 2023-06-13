@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const FilterContainer = styled.div<{ show: boolean }>`
+export const FilterContainer = styled.div<{ filter: boolean }>`
   position: absolute;
   width: 0;
   background-color: white;
@@ -29,7 +29,7 @@ export const FilterContainer = styled.div<{ show: boolean }>`
     left: 20px;
   }
   ${(props) =>
-    props.show === true &&
+    props.filter === true &&
     css`
       pointer-events: unset;
       transition: 1s ease all;

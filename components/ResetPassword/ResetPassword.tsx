@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-
-import { useForm, SubmitHandler } from "react-hook-form";
-
-import router from "next/router";
+import React, { useEffect, useState } from 'react'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-
-//import { useAuth } from "../../hooks/useAuth";
-import { Error, LoaderContain, LoaderImage, Title } from "../../screens/Login.styled";
-import { updateUserPassword } from "../api/auth";
-import { ButtonContain, ResetContainer } from "./ResetPassword.styled";
-
+import {
+  Error, LoaderContain, LoaderImage, Title,
+} from "../../screens/Login.styled";
+import { ButtonContain, ResetContainer } from './ResetPassword.styled';
+import { updateUserPassword } from '../api/auth';
+import { useAuth } from '../../hooks/useAuth';
 const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+
   const formSchema = yup.object().shape({
     email: yup
       .string()
@@ -50,7 +49,6 @@ const ResetPassword = () => {
       if (res.status === 200) {
         alert(res.data.msg);
         setIsLoading(false);
-        router.push('/preview');
       }
       if (res.status === 202) {
         alert(res.data.msg);
