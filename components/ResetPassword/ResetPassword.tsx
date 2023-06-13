@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { SubmitHandler, useForm } from "react-hook-form";
+import React, { useState } from "react";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import router from "next/router";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Error, LoaderContain, LoaderImage, Title,
-} from "../../screens/Login.styled";
-import { ButtonContain, ResetContainer } from './ResetPassword.styled';
-import { updateUserPassword } from '../api/auth';
-import { useAuth } from '../../hooks/useAuth';
+
+//import { useAuth } from "../../hooks/useAuth";
+import { Error, LoaderContain, LoaderImage, Title } from "../../screens/Login.styled";
+import { updateUserPassword } from "../api/auth";
+import { ButtonContain, ResetContainer } from "./ResetPassword.styled";
+
 const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
-
   const formSchema = yup.object().shape({
     email: yup
       .string()
@@ -49,6 +50,7 @@ const ResetPassword = () => {
       if (res.status === 200) {
         alert(res.data.msg);
         setIsLoading(false);
+        router.push('/preview');
       }
       if (res.status === 202) {
         alert(res.data.msg);
@@ -58,16 +60,16 @@ const ResetPassword = () => {
     })
   }
 
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user === null || !localStorage.getItem("reset")) {
-        window.location.href = '/Preview';
-      }
-    }, [])
+  // try {
+  //   var userDataAuth = useAuth();
+  //   useEffect(() => {
+  //     if (userDataAuth.user === null || !localStorage.getItem("reset")) {
+  //       window.location.href = '/Preview';
+  //     }
+  //   }, [])
 
-  } catch (error) {
-  }
+  // } catch (error) {
+  // }
 
   return (
     <ResetContainer>

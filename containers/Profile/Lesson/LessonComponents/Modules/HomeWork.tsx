@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { uploadImageHomework } from '../../../../../store/actions/courseActions'
-import { TaskTitle, HomeWorkContain, Answer } from './HomeWork.styled'
-import { TitleContain, PositionTitle, Titles } from './Module.styled'
-import { BsArrowRepeat } from "react-icons/bs";
-import { BsFileArrowUp } from "react-icons/bs";
-import { BsPlayBtn } from 'react-icons/bs';
-import { SlNotebook } from 'react-icons/sl';
-import { TfiCommentAlt } from 'react-icons/tfi';
-import { addHomeworkApi, getHomeworkUserApi } from '../../../../../components/api/homeworks';
-import { getUserQuizApi, updateUserProgressByQuizApi, updateUserQuizApi, updateUserScoreApi } from '../../../../../components/api/lessons';
-import { LoaderContainSpinner } from '../../../Purchase/Purchase.styled';
-import { createNotification } from '../../../../../components/api/notifications';
-import ImagePreview from './imagePreview/imagePreview';
-import ModuleTabs from './ModuleTabs/ModuleTabs';
+import React, { useEffect, useState } from "react";
+
+import { BsArrowRepeat, BsFileArrowUp } from "react-icons/bs";
+
+import { user } from "firebase-functions/v1/auth";
+
+import { addHomeworkApi, getHomeworkUserApi } from "../../../../../components/api/homeworks";
+import {
+  getUserQuizApi,
+  updateUserProgressByQuizApi,
+  updateUserQuizApi,
+  updateUserScoreApi,
+} from "../../../../../components/api/lessons";
+import { createNotification } from "../../../../../components/api/notifications";
+import { uploadImageHomework } from "../../../../../store/actions/courseActions";
+import { LoaderContainSpinner } from "../../../Purchase/Purchase.styled";
+import { Answer, HomeWorkContain, TaskTitle } from "./HomeWork.styled";
+import ImagePreview from "./imagePreview/imagePreview";
+import { TitleContain } from "./Module.styled";
+import ModuleTabs from "./ModuleTabs/ModuleTabs";
 
 const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, lesson, courseIds, handleClick, nextLesson, previousLesson, course, firstLesson, lastLesson }: any) => {
   const [status, setStatus] = useState("");
@@ -438,6 +443,8 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
         </div>}
       </HomeWorkContain>
       <ImagePreview
+        lesson={data.title}
+        user={user.name}
         show={imageModal}
         setShow={setImageModal}
         imageDisplay={imageDisplay}

@@ -98,7 +98,7 @@ const UserFilters = (props: IFilters) => {
     })
   }
   return (
-    <FilterContainer filter={showFilters}>
+    <FilterContainer show={showFilters}>
       <div className='content'>
         <p className='title'> Filtros</p>
         <AiOutlineClose className='close-icon' onClick={() => setShowFilters(false)} />
