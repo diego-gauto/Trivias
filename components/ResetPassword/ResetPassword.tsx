@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -60,16 +60,15 @@ const ResetPassword = () => {
     })
   }
 
-  // try {
-  //   var userDataAuth = useAuth();
-  //   useEffect(() => {
-  //     if (userDataAuth.user === null || !localStorage.getItem("reset")) {
-  //       window.location.href = '/Preview';
-  //     }
-  //   }, [])
+  try {
+    useEffect(() => {
+      if (!localStorage.getItem("reset")) {
+        window.location.href = '/preview';
+      }
+    }, [])
 
-  // } catch (error) {
-  // }
+  } catch (error) {
+  }
 
   return (
     <ResetContainer>
