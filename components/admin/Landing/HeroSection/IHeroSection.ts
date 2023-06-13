@@ -1,15 +1,15 @@
 export interface IHeroSectionProps {
-  heroSectionData: HeroData
+	heroSectionData: HeroData;
 }
 
 export interface HeroData {
-  tituloInicial: string;
-  parrafoInicial: string;
-  parrafoFinal?: string;
-  botonPrimario: string;
-  botonSecundario: string;
-  primerCaracteristica: string;
-  segundaCaracteristica: string;
-  terceraCaracteristica: string;
-  heroImage: any;
+	id: number;
+	tituloInicial: string;
+	parrafoInicial: string;
+	botonPrimario: string;
+	botonSecundario: string;
+	caracteristica1: string;
+	caracteristica2: string;
+	caracteristica3: string;
+	heroImage: any;
 }

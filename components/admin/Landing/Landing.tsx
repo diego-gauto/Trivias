@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getLandingData } from "../../../store/actions/LandingActions";
-import { createLandingProductApi, createLandingReviewApi, getLandingProductApi, getLandingReviewApi } from "../../api/admin";
-import LandingObject from "../Landing/templates";
+import { getLandingProductApi, getLandingReviewApi } from "../../api/admin";
+import { getLandingInfo } from "../../api/landing";
 import { AdminContain } from "../SideBar.styled";
 import HeroSection from "./HeroSection/HeroSection";
 import {
@@ -21,14 +20,14 @@ import ReviewsSection from "./ReviewsSection/ReviewsSection";
 const Landing = () => {
 
   const [showTab, setShowTab] = useState(1);
-  const [data, setData] = useState<any>(LandingObject);
+  const [data, setData] = useState<any>();
   const [reviews, setReviews] = useState<any>([]);
   const [product, setProduct] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchLandingData = async () => {
-    const landingData = await getLandingData();
-    setData(landingData);
+    const landingData = await getLandingInfo();
+    setData(landingData.data.data[0]);
     setLoading(false);
   };
   // console.log(data.productosDestacadosData);
@@ -75,7 +74,7 @@ const Landing = () => {
       setProduct(res);
     })
     fetchLandingData();
-  }, []);
+  }, [setData]);
 
   if (loading) {
     return (
@@ -134,7 +133,7 @@ const Landing = () => {
                 )
               }
             </OptionsContainer>
-            {showTab == 1 && <HeroSection heroSectionData={data.heroSectionData} />}
+            {showTab == 1 && <HeroSection heroSectionData={data && data} />}
             {showTab == 2 && <ReviewsSection reviewsSectionData={reviews} />}
             {showTab == 3 && <ProductsSection productsSectionData={product} />}
           </HomePageContain>
