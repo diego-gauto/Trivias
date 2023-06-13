@@ -16,7 +16,7 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi } from "../../api/admin";
+import { getAllUsers, getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
@@ -239,7 +239,6 @@ const UsersList = () => {
       setCourses(tempCourses)
     })
   }
-  console.log(userDownload);
   const pagePerUsers = async (users: any) => {
     setPageIndex(0)
     setTotalUsers(users.length);
@@ -291,35 +290,14 @@ const UsersList = () => {
     return "Activo " + countCourses
   }
   const getUsers = async () => {
-    let demoParams = [1, 2, 3, 4, 5, 6, 7, 8];
-    await getPartialUsers(0, 150).then((res) => {
-      setAllUsers((prevUsers) => {
-        const updatedUsers = prevUsers.concat(res);
-        pagePerUsers(updatedUsers);
-        return updatedUsers
-      })
+    getAllUsers(100, 1, 'all_users', 0, -1, 'todos', 'todos').then((res) => {
+      setUsers(res);
+      setLoader(true);
     })
-    await getPartialUsers(150, 10000).then((res) => {
-      setAllUsers((prevUsers) => {
-        const updatedUsers = prevUsers.concat(res);
-        pagePerUsers(updatedUsers);
-        return updatedUsers
-      })
-    })
-    demoParams.map(async (val: any) => {
-      await getPartialUsers((val * 10000), ((val + 1) * 10000)).then((res) => {
-        setAllUsers((prevUsers) => {
-          const updatedUsers = prevUsers.concat(res);
-          pagePerUsers(updatedUsers);
-          return updatedUsers
-        })
-      })
-    })
-
   }
   useEffect(() => {
     getUsers();
-    getCoures();
+    // getCoures();
   }, [show]);
 
   const formatDate = (value: any) => {
@@ -331,30 +309,31 @@ const UsersList = () => {
     getUsers();
   }
   const Gonvar = () => {
-    // let tempusers: any = allUsers;
-    // console.log(allUsers);
-    // let tempArrayCourse: any = [];
-    // tempusers.forEach((user: any) => {
-    //   if (user.level === 1 || user.final_date > today) {
-    //     tempArrayCourse.push({
-    //       nombre: user.name,
-    //       apellido: user.last_name,
-    //       email: user.email,
-    //     })
-    //   }
-    //   // user.user_courses.forEach((course: any) => {
-    //   //   if (course.course_id === 45 && course.final_date > today) {
-    //   //     tempArrayCourse.push({
-    //   //       nombre: user.name,
-    //   //       apellido: user.last_name,
-    //   //       email: user.email,
-    //   //     });
-    //   //   }
-    //   // })
-    // })
-    // // tempusers = tempusers.filter((user: any) => user.cursos.find(30));
-    // console.log(tempArrayCourse, "hola");
-    // return tempArrayCourse
+    let tempusers: any = allUsers;
+    console.log(allUsers);
+    let tempArrayCourse: any = [];
+    tempusers.forEach((user: any) => {
+      // if (user.level === 1 || user.final_date > today) {
+      tempArrayCourse.push({
+        nombre: user.name,
+        apellido: user.last_name,
+        email: user.email,
+        whatsap: user.phone_number,
+      })
+      // }
+      // user.user_courses.forEach((course: any) => {
+      //   if (course.course_id === 45 && course.final_date > today) {
+      //     tempArrayCourse.push({
+      //       nombre: user.name,
+      //       apellido: user.last_name,
+      //       email: user.email,
+      //     });
+      //   }
+      // })
+    })
+    // tempusers = tempusers.filter((user: any) => user.cursos.find(30));
+    console.log(tempArrayCourse, "hola");
+    return tempArrayCourse
   }
 
   return (
@@ -363,7 +342,7 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {/* {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin") && <CsvDownloader
+            {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin") && <CsvDownloader
               filename="usersData"
               extension=".csv"
               separator=","
@@ -373,7 +352,7 @@ const UsersList = () => {
               <DownloadUserData>
                 <p>Descargar lista de usuarios</p>
               </DownloadUserData>
-            </CsvDownloader>} */}
+            </CsvDownloader>}
             {user.role}
             <FilterContain>
               <button onClick={() => setShowFilters(!showFilters)}>
@@ -431,7 +410,7 @@ const UsersList = () => {
                     <>
                       {
                         users.length > 0 && (
-                          users[pageIndex].map((user: any, index: number) => {
+                          users.map((user: any, index: number) => {
                             return (
                               <tr key={index}>
                                 <td style={{ fontWeight: 600 }}>

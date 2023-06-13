@@ -10,7 +10,7 @@ import { WelcomeContainer } from "./WelcomeModal.styled";
 const WelcomeModal = (props: IWelcomeModal) => {
   const { show, setShow } = props
   const handleClose = () => setShow(false);
-  const VideoPlayer = "https://video.gonvar.io/media/instrucciones/1_02/master.m3u8"
+  const VideoPlayer = "https://video.gonvar.io/media/instrucciones/1_04/master.m3u8"
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered>
       <WelcomeContainer>
