@@ -1,11 +1,9 @@
-
-
-import { Modal } from "react-bootstrap";
-import { TfiClose } from "react-icons/tfi";
-import ReactPlayer from "react-player";
-
-import { IWelcomeModal } from "./IWelcomeModa";
-import { WelcomeContainer } from "./WelcomeModal.styled";
+import React from 'react'
+import { Modal } from 'react-bootstrap';
+import { TfiClose } from 'react-icons/tfi';
+import ReactPlayer from 'react-player';
+import { IWelcomeModal } from './IWelcomeModa';
+import { WelcomeContainer } from './WelcomeModal.styled';
 
 const WelcomeModal = (props: IWelcomeModal) => {
   const { show, setShow } = props

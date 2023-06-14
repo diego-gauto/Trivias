@@ -1,15 +1,15 @@
+import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
+import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
 import { useEffect, useState } from "react";
-
-import { useMediaQuery } from "react-responsive";
 
 import { useRouter } from "next/router";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { getLandingInfo } from "../../api/landing";
 import { ModuleContainer, Subtittle1, Tittle } from "../Module2_1/Module2_1.styled";
 import { IModule2_1 } from "./IModule2_1";
-import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
-import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
+import { useMediaQuery } from "react-responsive";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+
 
 export const Module2_1 = (props: IModule2_1) => {
   const { data, img, user } = props;
