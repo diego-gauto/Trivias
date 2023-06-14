@@ -9,14 +9,12 @@ import { LoaderContain } from "../../../../User/User.styled";
 import { ImageContainter } from "./ImagePreview.styled";
 
 const ImagePreview = (props: any) => {
-  console.log(props)
   const { show, setShow, imageDisplay, type, getImage, loader, setTypeFile, setImageDisplay, user, lesson } = props;
   const handleClose = () => {
     setShow(false);
     setTypeFile('');
     setImageDisplay('');
   }
-  console.log(type)
   return (
     <Modal show={show} centered className='modal-xl'>
       <ImageContainter>
@@ -64,8 +62,7 @@ const ImagePreview = (props: any) => {
                   <LoaderImage>
                     <LoaderContain />
                   </LoaderImage>
-                  //onClick={() => getImage(imageDisplay)}
-                  : <button className='btn-down'  >Aceptar</button>
+                  : <button className='btn-down' onClick={() => getImage(imageDisplay)}>Aceptar</button>
               }
             </div>
           </div>
