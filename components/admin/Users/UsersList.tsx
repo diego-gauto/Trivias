@@ -145,6 +145,7 @@ const UsersList = () => {
     }
     setDates(date);
     setFilters(filters);
+    getMaxUsers(filters, date, text_value);
     return tempUsers
   }
 
@@ -229,6 +230,12 @@ const UsersList = () => {
     })
     return "Activo " + countCourses
   }
+  const getMaxUsers = (filters: any, date: any, text_value: any) => {
+    userForExcel(text_value === "" ? "all_users" : text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then(async (res) => {
+      setTotalUsers(res.length);
+      setMaxPages(Math.floor(res.length / usersPerPage));
+    })
+  }
   const getUsers = async () => {
     let demoDate = '14-01-2022 00:00:00'
     let demoDate2 = '14-07-2023 00:00:00'
@@ -239,6 +246,7 @@ const UsersList = () => {
   }
   useEffect(() => {
     getUsers();
+    getMaxUsers(filters, dates, filterValue);
     // getCoures();
   }, [show]);
 
@@ -263,7 +271,6 @@ const UsersList = () => {
         })
       })
     })
-    console.log(sendUsers);
     return sendUsers
   }
 
@@ -273,17 +280,18 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin") && <CsvDownloader
-              filename="usersData"
-              extension=".csv"
-              separator=","
-              wrapColumnChar=""
-              datas={Gonvar}
-            >
-              <DownloadUserData>
-                <p>Descargar lista de usuarios</p>
-              </DownloadUserData>
-            </CsvDownloader>}
+            {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin")
+              && <CsvDownloader
+                filename="usersData"
+                extension=".csv"
+                separator=","
+                wrapColumnChar=""
+                datas={Gonvar}
+              >
+                <DownloadUserData>
+                  <p>Descargar lista de usuarios</p>
+                </DownloadUserData>
+              </CsvDownloader>}
             {user.role}
             <FilterContain>
               <button onClick={() => setShowFilters(!showFilters)}>
