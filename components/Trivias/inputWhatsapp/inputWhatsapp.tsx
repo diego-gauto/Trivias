@@ -8,10 +8,26 @@ import styles from "./inputWhatsapp.module.css";
 
 const InputPais = (props: any) => {
   const [country, setCountry] = useState("mx");
-  // const [number, setNumber] = useState('');
+  const [countryName, setCountryName] = useState("");
   const [value, setValue] = useState("");
 
   const { label, formControl, flagDropdown, flagButton } = styles;
+
+  const handleChange = (value: any, selectedCountry: any) => {
+    setCountry(selectedCountry.countryCode);
+
+    // Buscar el nombre del país correspondiente al código del país seleccionado
+    // const selectedCountryData = countries.find(
+    //   (c) => c.iso2 === selectedCountry.countryCode
+    // );
+    const selectedCountryName = (es as Record<string, string>)[selectedCountry.countryCode];
+    if (selectedCountryName) {
+      setCountryName(selectedCountryName);
+    }
+
+    // Pasar el valor del país seleccionado al componente padre
+    props.onChange(value, selectedCountryName);
+  };
 
   return (
     <div>
@@ -22,7 +38,7 @@ const InputPais = (props: any) => {
         buttonClass={flagButton}
         localization={es}
         country={country}
-        onChange={props.onChange}
+        onChange={handleChange}
         placeholder={props.placeholder}
         countryCodeEditable={false}
       />

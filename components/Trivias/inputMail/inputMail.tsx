@@ -10,6 +10,7 @@ const InputMail = (props: any) => {
         placeholder={props.placeholder}
         name="nombre"
         onChange={props.onChange}
+        disabled={props.disabled}
       />
     </div>
   );

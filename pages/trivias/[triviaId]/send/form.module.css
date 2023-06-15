@@ -154,6 +154,15 @@
   height: 54px;
 }
 
+.btnRecibir:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
+
+
 .formImg {
   position: relative;
   width: 47%;

@@ -210,6 +210,11 @@ function Trivias() {
     ],
     [
       {
+        id: 2,
+        imgSelector: "/images/trivias/mujer3.svg",
+        imgTrivia:"/images/trivias/imgTrivia.png",
+        color: "#7dffa2",
+        trans: "#00c620",
         title: "¿Qué nivel de manicurista eres?",
         questions: [
           {
@@ -335,6 +340,7 @@ function Trivias() {
             Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.            
             `,
             img: "/images/trivias/mujerinfluencer.svg",
+            idTemplateBrevo:7,
           },
           {
             title: "¡A un paso del éxito!",
@@ -344,12 +350,15 @@ function Trivias() {
             No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.            
             `,
             img: "/images/trivias/mujerinfluencer.svg",
+            idTemplateBrevo:7,
           },
           {
-            title: `¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
+            title: `¡Felicidades, valiente principiante en el arte de las uñas!`,
+            body:`Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
             Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.            
            `,
             img: "/images/trivias/mujerinfluencer.svg",
+            idTemplateBrevo:7,
           },
         ],
       },
@@ -384,7 +393,7 @@ function Trivias() {
               />
             </div>
             <div className={styles.publicity}>
-              <img src="/images/trivias/imgTrivia.png" alt="" />
+              <img src={data[triviaId][0]?.imgTrivia} alt="" />
             </div>
           </div>
         // {/* </div> */}

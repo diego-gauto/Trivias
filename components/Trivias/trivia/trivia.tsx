@@ -53,6 +53,8 @@ export default function Trivia({
     setSelectedAnswer(null);
   };
 
+  const isButtonDisabled = selectedAnswer === null;
+
   return (
     <div className={trivia}>
       <div className={trivia_title}>{triviaTitle}</div>
@@ -73,7 +75,10 @@ export default function Trivia({
           </div>
         ))}
       </div>
-      <button className={button} onClick={() => handleClickButton()}>
+      <button
+        className={`${button} ${isButtonDisabled ? styles.disabled : ""}`}
+        onClick={() => handleClickButton()}
+        disabled={isButtonDisabled}>
         Próxima pregunta
       </button>
     </div>

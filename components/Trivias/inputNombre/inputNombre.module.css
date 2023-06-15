@@ -46,3 +46,7 @@
 .inputs input::placeholder {
   font-weight: 500;
 }
+
+.inputs input:disabled::placeholder {
+  font-weight: 600; /* Estilo personalizado para el placeholder cuando está deshabilitado */
+}

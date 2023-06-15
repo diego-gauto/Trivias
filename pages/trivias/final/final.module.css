@@ -8,9 +8,10 @@
   width: 53%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: flex-start;
   padding-left: 5%;
+  margin-top: 3%;
 }
 
 .finalVolver {
@@ -34,7 +35,11 @@
 }
 
 .finalTextos {
-  margin-top: 5%;
+  /* margin-top: 5%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 .finalTextos h1 {
@@ -49,7 +54,7 @@
 
 .finalTextos h3 {
   height: 56px;
-  width: 500px;
+  width: 80%;
   margin-top: 10px;
   font-family: "Montserrat";
   font-style: normal;
@@ -71,14 +76,69 @@
 
 .finalImg {
   width: 47%;
-  height: 100%;
   background-image: url("/images/trivias/imagen\ de\ fondo\ -\ notificacion\ de\ envio\ de\ correo.svg");
   background-size: 100%;
   background-repeat: no-repeat;
   padding: 40px 10px 0 0;
   text-align: end;
+  min-height: 590px;
+
 }
 
 .link {
   text-decoration: none;
+}
+
+@media screen and (max-width: 878px) {
+
+  .finalContainer {
+    position: relative;
+    min-height:100vh;
+  }
+  .final {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .finalImg{
+    position:absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .finalTextos {
+    position:relative;
+    z-index: 2;
+    width: 80%;
+    height: 30%;
+    background-color: #ece7f2;
+    border-radius: 20px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+  }
+
+  .finalTextos h1 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 4.5vh;
+    padding: 0 5%;
+  }
+
+  .finalTextos h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5vh;
+    padding: 0 3%;
+
+  }
+
 }

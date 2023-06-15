@@ -15,14 +15,18 @@ const Form = () => {
     query: { triviaId, result },
   } = useRouter();
 
-  const [userData, setUserData] = useState<any>(null);
-
   const router = useRouter();
+
+  const [userData, setUserData] = useState<any>(null);
+  const [userDataLoaded, setUserDataLoaded] = useState(false);
+
+
   const [isChecked, setIsChecked] = useState(false);
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [correo, setCorreo] = useState("");
   const [numeroWhatsApp, setNumeroWhatsApp] = useState("");
+  const [pais, setPais] = useState("")
 
   const {
     formContainer,
@@ -48,8 +52,9 @@ const Form = () => {
     setCorreo(event.target.value);
   };
 
-  const handlePaisChange = (event: any) => {
-    setNumeroWhatsApp(event.target.value);
+  const handlePaisChange = (value: any, selectedCountry: any) => {
+    setNumeroWhatsApp(value);
+    setPais(selectedCountry)
   };
 
   function handleCheckboxChange() {
@@ -67,7 +72,7 @@ const Form = () => {
       apellido: apellido,
       mail: correo,
       numeroWhatsapp: numeroWhatsApp,
-      pais: "Argentina", // Completa el país según corresponda
+      pais: pais, // Completa el país según corresponda
       isUser: false,
       numeroTrivia: triviaId, // Completa el número de trivia según corresponda
       resultadoTrivia: result, // Completa el resultado de la trivia según corresponda
@@ -108,11 +113,16 @@ const Form = () => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setUserData(res);
+        setNombre(res.name);
+        setApellido(res.last_name);
+        setCorreo(res.email);
+        setUserDataLoaded(true);
       })
     }
-    console.log(userData)
-  }, [])
 
+  }, [])
+  console.log(numeroWhatsApp)
+  console.log(pais)
   return (
     <>
       <style jsx global>{`
@@ -145,23 +155,27 @@ const Form = () => {
           <form action="" className={inputContainer}>
             <InputNombre
               label={"Nombre"}
-              placeholder={"Carla"}
+              placeholder={userDataLoaded ? nombre : "Carla"}
               onChange={handleNombreChange}
+              disabled={userDataLoaded}
             />
             <InputNombre
               label={"Apellido"}
-              placeholder={"Flores"}
+              placeholder={userDataLoaded ? apellido : "Flores"}
               onChange={handleApellidoChange}
+              disabled={userDataLoaded}
             />
             <InputMail
               label={"Correo Electrónico"}
-              placeholder={"carlaflores@gmail.com"}
+              placeholder={userDataLoaded ? correo : "carlaflores@gmail.com"}
               onChange={handleMailChange}
+              disabled={userDataLoaded}
+
             />
             <InputWatsapp
               label={"Número de whatsApp"}
               placeholder={"1153137872"}
-              onChange={setNumeroWhatsApp}
+              onChange={handlePaisChange}
             />
           </form>
           <div className={checkboxContainer}>
@@ -178,6 +192,8 @@ const Form = () => {
           </div>
           <button
             className={btnRecibir}
+            disabled={!isChecked}
+            style={{ pointerEvents: isChecked ? "auto" : "none" }}
             onClick={() => {
               handleSubmit();
             }}

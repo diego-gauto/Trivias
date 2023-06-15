@@ -57,6 +57,14 @@
   width: 305px;
   height: 54px;
 }
+
+.button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
 .centrado{
 width: 100%;
 }

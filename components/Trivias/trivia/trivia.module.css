@@ -136,6 +136,23 @@
   top: 95px;
 }
 
+.button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
+.disabled {
+  cursor: not-allowed;
+  background-color: #5000b5;
+}
+
+.disabled:hover {
+  transform: none;
+  background-color: #5000b5;
+}
+
 @media screen and (max-width: 878px) {
 
   .button {
