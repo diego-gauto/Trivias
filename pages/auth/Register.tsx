@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Background,
   Error,
@@ -122,7 +122,7 @@ const Register = () => {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
+      window.location.href = `https://www.gonvar.io${PLAN_PATH}?type=subscription`
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
