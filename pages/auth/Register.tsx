@@ -26,6 +26,8 @@ import ErrorModal from "../../components/Error/ErrorModal";
 import { facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import { FacebookProvider, useLogin, useFacebook } from 'react-facebook';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+const { getCode, getName } = require('country-list');
 
 
 const formSchema = yup.object().shape({
@@ -127,6 +129,12 @@ const Register = () => {
     }
   }
 
+  const parseNumber = (phone: string) => {
+    const parsedNumber = parsePhoneNumberFromString(phone);
+    const country = getName(parsedNumber?.country)
+    return country;
+  }
+
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setAuthLoader(true);
     setphone(phoneInput);
@@ -135,10 +143,12 @@ const Register = () => {
       last_Name: formData.lastName,
       email: formData.email,
       password: formData.password,
-      phone_number: phoneInput,
+      phone_number: phoneInput.replace("+", ""),
       stripe_id: "",
-      provider: 'web'
+      provider: 'web',
+      country: parseNumber(phoneInput)
     }
+
     if (isValidPhoneNumber(phoneInput)) {
       newUser(user).then((res) => {
         if (res === "Este usuario ya existe!") {
