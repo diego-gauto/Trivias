@@ -125,11 +125,78 @@ export const getPartialUsers = async (first: number, second: number) => {
       return error
     });
 };
-export const getAllUsers = async (limit: number, offset: number, name: string, spent: number, level: number, method: string, state: string) => {
+export const getAllUsers = async (
+  limit: number,
+  offset: number,
+  name: string,
+  spent: number,
+  level: number,
+  method: string,
+  state: string,
+  country: string,
+  date_create_start: string,
+  date_create_1: string,
+  date_create_2: string,
+  date_login_start: string,
+  last_login_1: string,
+  last_login_2: string,
+) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/partial-users-demo/" + limit + "/" + offset + "/" + name + "/" + spent + "/" + level + "/" + method + "/" + state)
+    .get("https://gonvar.inowu.dev/" + "admin/partial-users-demo/"
+      + limit
+      + "/" + offset
+      + "/" + name
+      + "/" + spent
+      + "/" + level
+      + "/" + method
+      + "/" + state
+      + "/" + country
+      + "/" + date_create_start
+      + "/" + date_create_1
+      + "/" + date_create_2
+      + "/" + date_login_start
+      + "/" + last_login_1
+      + "/" + last_login_2
+    )
     .then((res) => {
       return res.data.users
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const userForExcel = async (
+  name: string,
+  spent: number,
+  level: number,
+  method: string,
+  state: string,
+  country: string,
+  date_create_start: string,
+  date_create_1: string,
+  date_create_2: string,
+  date_login_start: string,
+  last_login_1: string,
+  last_login_2: string,
+) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/excel-list/"
+      + name
+      + "/" + spent
+      + "/" + level
+      + "/" + method
+      + "/" + state
+      + "/" + country
+      + "/" + date_create_start
+      + "/" + date_create_1
+      + "/" + date_create_2
+      + "/" + date_login_start
+      + "/" + last_login_1
+      + "/" + last_login_2
+    )
+    .then((res) => {
+      return res.data.sendUsers
     })
     .catch((error) => {
       console.log(error);

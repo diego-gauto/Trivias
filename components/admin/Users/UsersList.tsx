@@ -16,11 +16,12 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getAllUsers, getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi } from "../../api/admin";
+import { getAllUsers, getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi, userForExcel } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
 import { useAuth } from "../../../hooks/useAuth";
+import { FormatDateForBack } from "../../../utils/functions";
 
 export interface SelectedUser {
   id?: string;
@@ -76,13 +77,16 @@ const UsersList = () => {
   const [filterValue, setFilterValue] = useState<string>("");
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null);
-  const [filters, setFilters] = useState<any>([]);
-  const [dates, setDates] = useState<any>([]);
+  const [filters, setFilters] = useState<any>([
+    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', 'todos'
+  ]);
+  const [dates, setDates] = useState<any>([[], []]);
   const [userDownload, setUserDownload] = useState<any>([]);
   const [loadCard, setLoadCard] = useState(false);
   const [loginDate, setLoginDate] = useState<any>([null, null]);
   const [createDate, setCreateDate] = useState<any>([null, null]);
   const menuRef = useRef<any>(null);
+  let usersPerPage: number = 100;
   let today = new Date().getTime() / 1000;
   try {
     var userDataAuth = useAuth();
@@ -118,81 +122,35 @@ const UsersList = () => {
   const updateLoginDate = (date: any) => {
     setLoginDate(date)
   }
-  const filteredData = async (filters: any, users: any, date: any) => {
-    setFilters(filters);
-    setDates(date);
-    filters.map((value: string, index: number) => {
-      if (value === "mensual") {
-        users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
-      }
-      if (value === "active") {
-        users = users.filter((userData: any) => userData.level === 1 || userData.final_date > today);
-      }
-      if (value === "not-active") {
-        users = users.filter((userData: any) => userData.level === 0 && userData.final_date < today);
-      }
-      // if (value === "asc-create") {
-      //   users = users.sort((a: any, b: any) => { return new Date(b.created_at).getTime() - new Date(a.created_at).getTime(); });
-      // }
-      // if (value === "desc-create") {
-      //   users = users.sort((a: any, b: any) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); });
-      // }
-      if (value === "date-create") {
-        users = users.filter((userData: any) => (new Date(userData.created_at).getTime() > date[0][0]) && (new Date(userData.created_at).getTime() < date[0][1]));
-      }
-      if (value === "first") {
-        users = users.filter((userData: any) => userData.spent <= 149);
-      }
-      if (value === "second") {
-        users = users.filter((userData: any) => userData.spent >= 150 && userData.spent <= 1000);
-      }
-      if (value === "third") {
-        users = users.filter((userData: any) => userData.spent >= 1000 && userData.spent <= 5000);
-      }
-      if (value === "fourth") {
-        users = users.filter((userData: any) => userData.spent >= 5000);
-      }
-      if (value === "date-login") {
-        users = users.filter((userData: any) => (new Date(userData.last_sign_in).getTime() > date[1][0]) && (new Date(userData.last_sign_in).getTime() < date[1][1]));
-      }
-      // if (value === "asc-log") {
-      //   users = users.sort((a: any, b: any) => { return new Date(b.last_sign_in).getTime() - new Date(a.last_sign_in).getTime(); });
-      // }
-      // if (value === "desc-log") {
-      //   users = users.sort((a: any, b: any) => { return new Date(a.last_sign_in).getTime() - new Date(b.last_sign_in).getTime(); });
-      // }
-      if (value === "stripe") {
-        users = users.filter((userData: any) => userData.method === "stripe");
-      }
-      if (value === "paypal") {
-        users = users.filter((userData: any) => userData.method === "paypal");
-      }
-    })
-    return users
-  }
-
-  const filterUsersByValue = (value: string): any => {
-    setFilterValue(value);
-    let tempAllUsers = allUsers;
-    let query = value.toLocaleLowerCase();
-    const filteredUsers = tempAllUsers.filter((item) => {
-      return item.name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query)
-    })
-    if (selectFilters) {
-      filteredData(filters, filteredUsers, dates).then((data: any) => {
-        pagePerUsers(data);
+  const filteredData = async (filters: any, date: any, text_value: string, page: number) => {
+    let tempUsers: any = [];
+    setLoader(false);
+    if (text_value === "") {
+      getAllUsers(usersPerPage, page * 100, 'all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
+        setUsers(res);
+        userForExcel('all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
+          console.log(res);
+        })
+        tempUsers = res;
+        setLoader(true);
       })
     }
     else {
-      pagePerUsers(filteredUsers);
-    }
-    // if (value === "") return setUsers(usersFilter);
-    // const filteredUsers = usersFilter.filter((item) =>
-    //   item.name.toLowerCase().includes(query) ||
-    //   item.email.includes(query) ||
-    //   item.score.toString().includes(query) ||
-    //   item.created_at.includes(query));
+      getAllUsers(usersPerPage, page * 100, text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
+        setUsers(res);
 
+        tempUsers = res;
+        setLoader(true);
+      })
+    }
+    setDates(date);
+    setFilters(filters);
+    return tempUsers
+  }
+
+  const filterUsersByValue = (value: string): any => {
+    filteredData(filters, dates, value, pageIndex);
+    setFilterValue(value);
   };
 
   const filter = (value: string) => {
@@ -218,7 +176,6 @@ const UsersList = () => {
         return b.spent - a.spent;
       });
     }
-    pagePerUsers(userFilter);
   }
   const getCoures = () => {
     let tempCourses: Array<any> = [];
@@ -239,46 +196,29 @@ const UsersList = () => {
       setCourses(tempCourses)
     })
   }
-  const pagePerUsers = async (users: any) => {
-    setPageIndex(0)
-    setTotalUsers(users.length);
-    setUserDownload(users);
-    // await users.map(async (user: any) => {
-    //   await getProgressForUsers(user.id);
-    // })
-    let usersPerPage: number = 100;
-    let pages: number = Math.ceil(users.length / usersPerPage);
-    let tempUsers: any = [];
-    for (let i = 0; i < pages; i++) {
-      tempUsers.push([])
-      for (let j = 0; j < usersPerPage; j++) {
-        if (users[j + (usersPerPage * i)]) {
-          tempUsers[i].push(users[j + (usersPerPage * i)])
-        }
-      }
-    }
-    setMaxPages(pages);
-    setUsers(tempUsers);
-    setLoader(true);
-  }
   const getNextUsers = (direction: string) => {
+    let tempPage = 0;
     if (direction === "backward") {
       if (pageIndex !== 0) {
-        setPageIndex(pageIndex - 1)
+        tempPage = pageIndex - 1;
+        setPageIndex(tempPage)
       }
     }
     if (direction === "forward") {
       if (pageIndex !== maxPages - 1) {
-        setPageIndex(pageIndex + 1)
+        tempPage = pageIndex + 1;
+        setPageIndex(tempPage)
       }
     }
     if (direction === "first") {
-      setPageIndex(0)
+      tempPage = 0;
+      setPageIndex(tempPage)
     }
     if (direction === "last") {
-      setPageIndex(maxPages - 1)
+      tempPage = maxPages - 1;
+      setPageIndex(tempPage);
     }
-
+    filteredData(filters, dates, filterValue, tempPage);
   }
   const activeCourses = (user_courses: any) => {
     let countCourses: number = 0
@@ -290,7 +230,9 @@ const UsersList = () => {
     return "Activo " + countCourses
   }
   const getUsers = async () => {
-    getAllUsers(100, 1, 'all_users', 0, -1, 'todos', 'todos').then((res) => {
+    let demoDate = '14-01-2022 00:00:00'
+    let demoDate2 = '14-07-2023 00:00:00'
+    getAllUsers(usersPerPage, pageIndex, 'all_users', 0, -1, 'todos', 'todos', 'todos', 'todos', demoDate, demoDate2, 'todos', demoDate, demoDate2).then((res) => {
       setUsers(res);
       setLoader(true);
     })
@@ -308,32 +250,21 @@ const UsersList = () => {
   const handleClick = () => {
     getUsers();
   }
-  const Gonvar = () => {
-    let tempusers: any = allUsers;
-    console.log(allUsers);
-    let tempArrayCourse: any = [];
-    tempusers.forEach((user: any) => {
-      // if (user.level === 1 || user.final_date > today) {
-      tempArrayCourse.push({
-        nombre: user.name,
-        apellido: user.last_name,
-        email: user.email,
-        whatsap: user.phone_number,
+  const Gonvar: any = async () => {
+    let sendUsers: any = [];
+    await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1])).then(async (res) => {
+      await res.map(async (user: any) => {
+        sendUsers.push({
+          nombre: user.nombre,
+          apellido: user.apellido,
+          correo: user.correo,
+          pais: user.pais,
+          whatsapp: user.whatsapp,
+        })
       })
-      // }
-      // user.user_courses.forEach((course: any) => {
-      //   if (course.course_id === 45 && course.final_date > today) {
-      //     tempArrayCourse.push({
-      //       nombre: user.name,
-      //       apellido: user.last_name,
-      //       email: user.email,
-      //     });
-      //   }
-      // })
     })
-    // tempusers = tempusers.filter((user: any) => user.cursos.find(30));
-    console.log(tempArrayCourse, "hola");
-    return tempArrayCourse
+    console.log(sendUsers);
+    return sendUsers
   }
 
   return (
@@ -453,10 +384,10 @@ const UsersList = () => {
       <UserFilters
         showFilters={showFilters}
         setShowFilters={setShowFilters}
-        pagePerUsers={pagePerUsers}
         allUsers={allUsers}
         allCourses={allCourses}
         filterValue={filterValue}
+        pageIndex={pageIndex}
         filteredData={filteredData}
         loginDate={loginDate}
         setLoginDate={updateLoginDate}

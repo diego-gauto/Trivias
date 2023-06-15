@@ -5,7 +5,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 interface IFilters {
   showFilters: boolean;
-  pagePerUsers: (users: any) => void;
   allUsers: any;
   allCourses: any;
   setShowFilters: any;
@@ -16,12 +15,12 @@ interface IFilters {
   createDate: any,
   setLoginDate: (val: any) => void,
   setCreateDate: (val: any) => void,
+  pageIndex: number;
 }
 
 const UserFilters = (props: IFilters) => {
   const {
     showFilters,
-    pagePerUsers,
     allUsers,
     allCourses,
     setShowFilters,
@@ -32,14 +31,14 @@ const UserFilters = (props: IFilters) => {
     createDate,
     setLoginDate,
     setCreateDate,
-
+    pageIndex,
   } = props;
   const [allFilters, setAllFilters] = useState<any>([]);
   let today = new Date().getTime() / 1000;
   const [openCreateDate, setOpenCreateDate] = useState<boolean>(false);
   const [openLoginDate, setOpenLoginDate] = useState<boolean>(false);
   const [arrayFilter, setArrayFilter] = useState([
-    'todos', 'todos', 'todos', 'todos', 'todos', 'todos', 'todos', 'todos'
+    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', 'todos'
   ])
   const [changeDate, setChangeDate] = useState([
     [], []
@@ -56,8 +55,7 @@ const UserFilters = (props: IFilters) => {
     let allDates = changeDate;
     allDates[1] = date;
     if (date[1] !== null) {
-      setLoginDate(date);
-      startFilters(6, "date-login", allDates)
+      startFilters(4, "date-login", allDates)
     }
     setChangeDate(allDates);
   }
@@ -73,7 +71,7 @@ const UserFilters = (props: IFilters) => {
     }
     if (calendar === 1) {
       if (value === "todos") {
-        startFilters(6, "todos", changeDate)
+        startFilters(4, "todos", changeDate)
         setOpenLoginDate(false);
       }
       if (value === "abrir") {
@@ -81,19 +79,11 @@ const UserFilters = (props: IFilters) => {
       }
     }
   }
-  const startFilters = async (filterType: number, value: string, date: any) => {
-    let users: any = allUsers;
+  const startFilters = async (filterType: number, value: any, date: any) => {
     let filters = arrayFilter;
     filters[filterType] = value;
-    if (filterValue !== "") {
-      let query = filterValue.toLocaleLowerCase();
-      users = users.filter((item: any) => {
-        return item.name.toLowerCase().includes(query) || item.email.includes(query)
-      })
-    }
-    await filteredData(filters, users, date).then((data: any) => {
+    await filteredData(filters, date, filterValue, pageIndex).then((data: any) => {
       setSelectFilters(true);
-      pagePerUsers(data);
       setArrayFilter(filters)
     })
   }
@@ -137,12 +127,11 @@ const UserFilters = (props: IFilters) => {
         </div>
         <div className='filter-contain'>
           <p className='title-filter'>Cantidad Gastada</p>
-          <select defaultValue="todos" onChange={(e) => startFilters(5, e.target.value, changeDate)}>
-            <option value="todos">Todos</option>
-            <option value="first">149 - 0</option>
-            <option value="second">1000 - 150</option>
-            <option value="third">5000 - 1000</option>
-            <option value="fourth">Mayor a 5000</option>
+          <select defaultValue="todos" onChange={(e) => startFilters(3, parseInt(e.target.value), changeDate)}>
+            <option value={-1}>Todos</option>
+            <option value={149}> +149</option>
+            <option value={1000}>+1000</option>
+            <option value={5000}> +5000</option>
           </select>
         </div>
         <div className='filter-contain'>
@@ -163,10 +152,20 @@ const UserFilters = (props: IFilters) => {
         </div>
         <div className='filter-contain'>
           <p className='title-filter'>Método de pago</p>
-          <select defaultValue="todos" onChange={(e) => startFilters(7, e.target.value, changeDate)}>
+          <select defaultValue="todos" onChange={(e) => startFilters(5, e.target.value, changeDate)}>
             <option value="todos">Todos</option>
             <option value="stripe">stripe</option>
             <option value="paypal">paypal</option>
+          </select>
+        </div>
+        <div className='filter-contain'>
+          <p className='title-filter'>
+            Por Pais
+          </p>
+          <select defaultValue="todos" onChange={(e) => startFilters(6, e.target.value, changeDate)}>
+            <option value="todos" >Todos</option>
+            <option value="mexico">Mexico</option>
+            <option value="argentina">Argentina</option>
           </select>
         </div>
         {/* <div className='filter-contain'>
@@ -196,16 +195,6 @@ const UserFilters = (props: IFilters) => {
           </select>
         </div> */}
 
-        {/* <div className='filter-contain'>
-          <p className='title-filter'>
-            Por Pais
-          </p>
-          <select defaultValue="todos">
-            <option value="todos">Todos</option>
-            <option value="mexico">Mexico</option>
-            <option value="argentina">Argentina</option>
-          </select>
-        </div> */}
       </div>
     </FilterContainer>
   )
