@@ -16,7 +16,7 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getAllUsers, getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi, userForExcel } from "../../api/admin";
+import { getAllUsers, getCountriesApi, getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi, userForExcel } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
@@ -75,6 +75,7 @@ const UsersList = () => {
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [filterValue, setFilterValue] = useState<string>("");
+  const [countries, setCountries] = useState<any>([]);
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null);
   const [filters, setFilters] = useState<any>([
@@ -128,9 +129,6 @@ const UsersList = () => {
     if (text_value === "") {
       getAllUsers(usersPerPage, page * 100, 'all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
         setUsers(res);
-        userForExcel('all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
-          console.log(res);
-        })
         tempUsers = res;
         setLoader(true);
       })
@@ -138,7 +136,6 @@ const UsersList = () => {
     else {
       getAllUsers(usersPerPage, page * 100, text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
         setUsers(res);
-
         tempUsers = res;
         setLoader(true);
       })
@@ -247,6 +244,9 @@ const UsersList = () => {
   useEffect(() => {
     getUsers();
     getMaxUsers(filters, dates, filterValue);
+    getCountriesApi().then((res) => {
+      setCountries(res);
+    })
     // getCoures();
   }, [show]);
 
@@ -390,6 +390,7 @@ const UsersList = () => {
         }
       </UserContain>
       <UserFilters
+        countries={countries}
         showFilters={showFilters}
         setShowFilters={setShowFilters}
         allUsers={allUsers}

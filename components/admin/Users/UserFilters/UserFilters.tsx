@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 interface IFilters {
   showFilters: boolean;
+  countries: [];
   allUsers: any;
   allCourses: any;
   setShowFilters: any;
@@ -20,6 +21,7 @@ interface IFilters {
 
 const UserFilters = (props: IFilters) => {
   const {
+    countries,
     showFilters,
     allUsers,
     allCourses,
@@ -164,8 +166,13 @@ const UserFilters = (props: IFilters) => {
           </p>
           <select defaultValue="todos" onChange={(e) => startFilters(6, e.target.value, changeDate)}>
             <option value="todos" >Todos</option>
-            <option value="mexico">Mexico</option>
-            <option value="argentina">Argentina</option>
+            {
+              countries.map((val: any, index: number) => {
+                return (
+                  <option value={val.country} key={"paises" + index}>{val.country}</option>
+                )
+              })
+            }
           </select>
         </div>
         {/* <div className='filter-contain'>

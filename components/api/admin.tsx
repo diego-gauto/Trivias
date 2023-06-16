@@ -214,6 +214,17 @@ export const getProgressForUsers = async (user_id: number) => {
       return error
     });
 };
+export const getCountriesApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/get-countries")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 // export const getPartiaDemolUsers = async (first: number, second: number) => {
 //   return axios
 //     .get("https://gonvar.inowu.dev/" + "admin/partial-users/" + first + "/" + second)
