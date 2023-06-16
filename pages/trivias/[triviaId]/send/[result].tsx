@@ -27,6 +27,7 @@ const Form = () => {
   const [correo, setCorreo] = useState("");
   const [numeroWhatsApp, setNumeroWhatsApp] = useState("");
   const [pais, setPais] = useState("")
+  const [isUser, setIsUser] = useState(false)
 
   const {
     formContainer,
@@ -73,7 +74,7 @@ const Form = () => {
       mail: correo,
       numeroWhatsapp: numeroWhatsApp,
       pais: pais, // Completa el país según corresponda
-      isUser: false,
+      isUser: isUser,
       numeroTrivia: triviaId, // Completa el número de trivia según corresponda
       resultadoTrivia: result, // Completa el resultado de la trivia según corresponda
     };
@@ -117,6 +118,7 @@ const Form = () => {
         setApellido(res.last_name);
         setCorreo(res.email);
         setUserDataLoaded(true);
+        setIsUser(true)
       })
     }
 

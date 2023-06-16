@@ -45,7 +45,7 @@ const Final = () => {
           <img src={volverFlecha} alt="" />
           <div> Volver</div>
         </div> */}
-        <Link href={"/"}>
+        <Link href={"/trivias"}>
           <a className={link}>
             <div className={finalVolver}>
               <img src="/images/trivias/icono . retroceder.svg" alt="" />

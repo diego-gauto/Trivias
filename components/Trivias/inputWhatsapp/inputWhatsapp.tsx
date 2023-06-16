@@ -16,16 +16,12 @@ const InputPais = (props: any) => {
   const handleChange = (value: any, selectedCountry: any) => {
     setCountry(selectedCountry.countryCode);
 
-    // Buscar el nombre del país correspondiente al código del país seleccionado
-    // const selectedCountryData = countries.find(
-    //   (c) => c.iso2 === selectedCountry.countryCode
-    // );
     const selectedCountryName = (es as Record<string, string>)[selectedCountry.countryCode];
     if (selectedCountryName) {
       setCountryName(selectedCountryName);
     }
 
-    // Pasar el valor del país seleccionado al componente padre
+    // Pasa el valor ingreso del numero de WA y del país seleccionado al componente padre
     props.onChange(value, selectedCountryName);
   };
 
