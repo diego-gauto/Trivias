@@ -7,7 +7,9 @@ import { getBlogsApi } from '../../../components/api/blog';
 import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../components/Loader.styled';
 import { formatBlogDate } from '../../../utils/functions';
 
-const Blog = () => {
+const Blog = (props: any) => {
+  const { data } = props;
+  console.log(data);
   const [blogs, setBlogs] = useState<Array<any>>([]);
   const [loader, setLoader] = useState(false);
 
