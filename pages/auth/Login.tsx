@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from "react";
+
+import { useLogin } from "react-facebook";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
+
+import { message } from "antd";
+import Link from "next/link";
 import * as yup from "yup";
+
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useGoogleLogin } from "@react-oauth/google";
+
+import AlertModal from "../../components/AlertModal/AlertModal";
 import {
+  facebookUserInfo,
+  googleTokens,
+  loginWithProviderApi,
+  updateLastSignIn,
+  updatePastUser,
+  updateUserPassword,
+} from "../../components/api/auth";
+import ErrorModal from "../../components/Error/ErrorModal";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
+import {
+  Error,
   LoaderContain,
   LoaderImage,
+  LoginBackground,
   PurpleButton2,
   Title,
-  LoginBackground,
-  Error,
 } from "../../screens/Login.styled";
 import ModalForgot from "./Modals/ModalForgot";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useAuth } from "../../hooks/useAuth";
-import { useMediaQuery } from "react-responsive";
-import Link from "next/link";
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
-import ErrorModal from "../../components/Error/ErrorModal";
-import { useGoogleLogin } from "@react-oauth/google";
-import { facebookUserInfo, googleTokens, loginWithProviderApi, updateLastSignIn, updatePastUser, updateUserPassword } from "../../components/api/auth";
-import { useLogin, useFacebook } from 'react-facebook';
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -59,6 +72,8 @@ const Login = () => {
   const [pastUser, setPastUser] = useState<any>({})
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
+  const [showAlert1, setShowAlert1] = useState<any>(false);
+  const [showAlert2, setShowAlert2] = useState<any>(false);
   const [reset, setReset] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const { login } = useLogin();
@@ -67,6 +82,12 @@ const Login = () => {
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
+  };
+  const toggleAlert1 = () => {
+    setShowAlert1(false);
+  };
+  const toggleAlert2 = () => {
+    setShowAlert2(false);
   };
   const togglePassword_2 = () => {
     setPasswordShown_2(!passwordShown_2);
@@ -121,14 +142,14 @@ const Login = () => {
       }
       await updateUserPassword(body).then((res) => {
         if (res.status === 202) {
-          alert("Contraseña actualizada");
-          setErrorMsg("")
+          setShowAlert1(true);
+          setErrorMsg("");
           setReset(false);
           setAuthLoader(false)
           return;
         }
         if (res.data.msg) {
-          alert("El usuario no existe!")
+          setShowAlert2(true)
         }
         setAuthLoader(false)
       })
@@ -342,6 +363,8 @@ const Login = () => {
     <>
       {!isLoading ? (
         <LoginBackground>
+          <AlertModal show={showAlert1} message={"Contraseña actualizada"} onHide={toggleAlert1} />
+          <AlertModal show={showAlert2} message={"El usuario no existe!"} onHide={toggleAlert2} />
           <div className="left-side">
             <img className="imgUpperHand" src="../images/mano2.png" alt="" />
             <p>¡Es un placer <br />

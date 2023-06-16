@@ -1,9 +1,15 @@
 import { useState } from "react";
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import { message } from "antd";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import AlertModal from "../../../components/AlertModal/AlertModal";
+import { sendEmailPassword } from "../../../components/api/auth";
 import {
   ButtonContain,
   EmailContain,
@@ -12,12 +18,15 @@ import {
   TextInput,
   Title,
 } from "../../../screens/ModalForgot.styled";
-import { Modal } from "react-bootstrap";
-import { sendEmailPassword, updateUserPassword } from "../../../components/api/auth";
 
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAlert, setshowAlert] = useState(false)
+
+  const toggleAlert = () => {
+    setshowAlert(false)
+  }
 
   const formSchema2 = yup.object().shape({
     email: yup
@@ -39,9 +48,8 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
     setIsLoading(true)
     await sendEmailPassword(resetData).then((res) => {
       if (res.data.msg) {
+        setshowAlert(true)
         localStorage.setItem("reset", "true")
-        alert(res.data.msg);
-        handleClose()
       }
       setIsLoading(false)
     })
@@ -57,6 +65,9 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
 
   return (
     <Modal show={showForgot} onHide={handleClose} centered className="forgot-modal-component">
+      <div onClick={() => handleClose()}>
+        <AlertModal show={showAlert} onHide={toggleAlert} message={"Este usuario no existe!"} />
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
       >
