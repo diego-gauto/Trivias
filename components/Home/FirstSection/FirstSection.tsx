@@ -68,7 +68,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
           {!responsiveXl && !responsiveHeight700 && <Row className="features mt-5">
             <Col xs={6} sm={6} md={6} lg={6} xl={4} className="text-center">
               <div className="grey-field">
-                <Feature title={data?.primerCaracteristica} image={Img2.src} />
+                <Feature title={data.primerCaracteristica} image={Img2.src} />
               </div>
             </Col>
             <Col xs={6} sm={6} md={6} lg={6} xl={4} className="text-center">
