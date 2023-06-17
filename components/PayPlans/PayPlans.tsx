@@ -9,36 +9,6 @@ const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
 
-
-  // const goTo = () => {
-  //   if (user) {
-  //     if ((course.type === "Mensual") && ((user.level === 1) || (user.level === 0 && user.final_date > today))) {
-  //       router.push({
-  //         pathname: LESSON_PATH,
-  //         query: { id: course.id, season: 0, lesson: 0 },
-  //       });
-  //     }
-  //     if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
-  //       router.push(`${PLAN_PATH}`)
-  //     }
-  //     if (course.type === "Producto" && course.pay) {
-  //       router.push({
-  //         pathname: LESSON_PATH,
-  //         query: { id: course.id, season: 0, lesson: 0 },
-  //       });
-  //     }
-  //     if (course.type === 'Producto' && !course.pay) {
-  //       router.push(
-  //         { pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } }
-  //       )
-  //     }
-  //   }
-  //   else {
-  //     router.push({ pathname: LOGIN_PATH })
-  //   }
-  // }
-
-
   return (
     <PayStyles className="w-100">
       <div className="colors">

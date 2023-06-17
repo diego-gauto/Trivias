@@ -1,6 +1,9 @@
+import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { PURCHASE_PATH } from "../../../constants/paths";
+import { useAuth } from "../../../hooks/useAuth";
 
 import { PlanStyles } from "./Plans.styled";
 
@@ -17,6 +20,8 @@ views.set(8, false);
 
 const Individual = () => {
   const [ver, setver] = useState(true)
+  var userData = useAuth();
+  const [user, setUser] = useState<any>({});
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -30,6 +35,23 @@ const Individual = () => {
   useEffect(() => {
 
   }, [setver])
+
+  useEffect(() => {
+    if (userData.user !== null) {
+      setUser(userData.user)
+    } else {
+      router.push({ pathname: "/" });
+    }
+  }, [])
+
+  const goTo = () => {
+    if (user) {
+      router.push(
+        { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+      )
+    }
+  }
+
   return (
     <PlanStyles>
       <div className="break plan-container">
@@ -50,7 +72,7 @@ const Individual = () => {
             <span><i>Único pago</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4">Comenzar ahora</button>
+            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
