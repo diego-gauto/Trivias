@@ -44,7 +44,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id, trial } = router.query;
+  const { type, id, trial, frequency } = router.query;
   const [loader, setLoader] = useState<any>(false);
 
   const subscription = {
@@ -178,12 +178,17 @@ const Purchase = () => {
   const FinishPayment = async () => {
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
+        let price = "";
+        if (trial) price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
+        if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
+        if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
+
         const data = {
           new: card.cardId ? card.status : false,
           cardId: card.cardId,
           paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
           stripeId: userData.stripe_id,
-          priceId: !trial ? '9d8fa0e3-2977-46dc-8cb2-19024cd66bb9' : "45f502b3-3e0c-492e-986a-4e0e85e1a34d",
+          priceId: price,
           method: 'stripe'
         }
         stripeSubscriptionApi(data).then((res) => {
@@ -553,7 +558,7 @@ const Purchase = () => {
                       createSubscription={(data, actions) => {
                         setPlan({ method: "paypal" })
                         return actions.subscription.create({
-                          plan_id: 'P-2P063165RR167053TMRKD7BQ'
+                          plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                         })
                       }}
                       onApprove={(data: any, actions) => {
@@ -615,7 +620,8 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" ?
+                    "149" : "1,599"} MXN/mes. </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -633,7 +639,8 @@ const Purchase = () => {
                 </div>}
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
-                  {type == "subscription" && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(type == "subscription" && frequency === "month") ? <p className="total">$ 149 <span>MXN</span></p> :
+                    <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                     (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
@@ -693,7 +700,8 @@ const Purchase = () => {
               {type == "course" && <div className="line"></div>}
               <div className="price-container">
                 <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <span>a pagar</span></p>
-                {type == "subscription" && <p className="total">$ 149 <span>MXN</span></p>}
+                {(type == "subscription" && frequency === "month") ? <p className="total">$ 149 <span>MXN</span></p> :
+                  <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                   (product.price - (coupon.discount / 100) * product.price)} <span>MXN</span></p>}
@@ -849,7 +857,7 @@ const Purchase = () => {
                         createSubscription={(data, actions) => {
                           setPlan({ method: "paypal" })
                           return actions.subscription.create({
-                            plan_id: 'P-2P063165RR167053TMRKD7BQ'
+                            plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                           })
                         }}
                         onApprove={(data: any, actions) => {
@@ -1054,7 +1062,8 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" ?
+                    "149" : "1,599"} MXN/mes. </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />

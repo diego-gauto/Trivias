@@ -61,17 +61,6 @@ const ResetPassword = () => {
       }
     })
   }
-  console.log('hola');
-  // try {
-  //   var userDataAuth = useAuth();
-  //   useEffect(() => {
-  //     if (userDataAuth.user === null || !localStorage.getItem("reset")) {
-  //       window.location.href = '/Preview';
-  //     }
-  //   }, [])
-
-  // } catch (error) {
-  // }
 
   return (
     <ResetContainer>
