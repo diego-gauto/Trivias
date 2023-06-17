@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import router from "next/router";
+import router, { useRouter } from "next/router";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,14 +11,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Error, LoaderContain, LoaderImage, Title } from "../../screens/Login.styled";
 import { updateUserPassword } from "../api/auth";
 import { ButtonContain, ResetContainer } from "./ResetPassword.styled";
+import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
+import { LOGIN_PATH } from "../../constants/paths";
 
 const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
+  const { mail } = router.query;
+
   const formSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Debe ser un email válido")
-      .required("Campo requerido"),
     password: yup.string()
       .required('Password is required')
       .min(6, 'La contraseña debe tener al menos 6 carácteres'),
@@ -43,7 +44,7 @@ const ResetPassword = () => {
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setIsLoading(true)
     let data = {
-      email: formData.email,
+      email: mail,
       password: formData.password
     }
     await updateUserPassword(data).then((res) => {
@@ -56,6 +57,7 @@ const ResetPassword = () => {
         alert(res.data.msg);
         localStorage.removeItem("reset");
         setIsLoading(false);
+        window.location.href = LOGIN_PATH;
       }
     })
   }
@@ -88,6 +90,8 @@ const ResetPassword = () => {
               placeholder="correo@correo.com"
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               {...register("email")}
+              value={mail}
+              disabled
             />
           </div>
           {
@@ -140,9 +144,7 @@ const ResetPassword = () => {
         {!isLoading ? <ButtonContain>
           <button onClick={() => { onSubmit }}>Confirmar</button>
         </ButtonContain> :
-          <LoaderImage>
-            <LoaderContain />
-          </LoaderImage>}
+          <LoaderContainSpinner />}
       </form>
     </ResetContainer>
   )
