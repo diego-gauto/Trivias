@@ -61,7 +61,7 @@ const ResetPassword = () => {
       }
     })
   }
-
+  console.log('hola');
   // try {
   //   var userDataAuth = useAuth();
   //   useEffect(() => {
