@@ -84,8 +84,16 @@
 
   .premio{
     position:relative;
+    display: flex;
+    top: 20px;
+    right: -42%;
+    justify-content: center;
+  }
+
+  /* .premio{
+    position:relative;
     left: 45%;
     top: 2rem;
     width: 5rem;
-  }
+  } */
 }
