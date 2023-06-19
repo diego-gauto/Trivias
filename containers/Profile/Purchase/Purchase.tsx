@@ -44,7 +44,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id, trial } = router.query;
+  const { type, id, trial, frequency } = router.query;
   const [loader, setLoader] = useState<any>(false);
 
   const subscription = {
@@ -201,6 +201,7 @@ const Purchase = () => {
                 res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
                 res.error.raw.code == "processing_error" && "Error de proceso" ||
                 res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+              window.location.href = frequency === "month" ? "/pagofallidomensualidad" : "/pagofallidoanualidad";
             }
             setLoader(false);
           } else {
@@ -209,6 +210,7 @@ const Purchase = () => {
             setLoader(false);
             updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
             setConfirmation(false);
+            window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
           }
         })
       } else {
@@ -244,6 +246,9 @@ const Purchase = () => {
                 res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
                 res.error.raw.code == "processing_error" && "Error de proceso" ||
                 res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+              if (id === "30") {
+                window.location.href = "/pagofallidonailsmaster";
+              }
             }
             setLoader(false);
           } else {
@@ -266,6 +271,9 @@ const Purchase = () => {
               setConfirmation(false);
               setPay(true);
               setLoader(false);
+              if (id === "30") {
+                window.location.href = "/pagoexitosoailsmaster";
+              }
             })
           }
         })
@@ -276,6 +284,7 @@ const Purchase = () => {
       if (type == 'subscription') {
         setConfirmation(false);
         setPay(true);
+        window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
       } else {
         let price = product.price
         if (coupon) {
@@ -304,6 +313,9 @@ const Purchase = () => {
           setConfirmation(false);
           setPay(true);
           setLoader(false);
+          if (id === "30") {
+            window.location.href = "/pagoexitosoailsmaster";
+          }
         })
       }
     }
