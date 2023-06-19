@@ -23,7 +23,7 @@
 }
 
 .inputs input {
-  width: 229px;
+  max-width: 229px;
   height: 32px;
 
   background: #ffffff;
@@ -50,4 +50,14 @@
 
 .inputs input:disabled::placeholder {
   font-weight: 600; /* Estilo personalizado para el placeholder cuando está deshabilitado */
+}
+
+@media screen and (max-width: 800px) {
+
+  .inputs input {
+
+  max-width: 510px;
+  
+  }
+
 }

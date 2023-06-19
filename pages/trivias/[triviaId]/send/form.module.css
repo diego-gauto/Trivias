@@ -118,7 +118,7 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 16px;
-  width: 373px;
+  max-width: 373px;
   height: 32px;
 
   letter-spacing: 0.4px;
@@ -204,8 +204,16 @@ height: 100%;
   } */
 
 }
-/* width: 40%;
-height: 100%;
-background-image: url("/images/imgTrivia.png");
-background-size: 100%;
-background-repeat: no-repeat; */
+
+@media screen and (max-width: 800px) {
+
+
+  .formImg {
+    display: none;
+  }
+
+  .form{
+    width: 100%;
+  }
+
+}
