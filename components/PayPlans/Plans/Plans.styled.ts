@@ -9,6 +9,11 @@ export const PlanStyles = styled.div`
     --purple-pink2: #b746cd;
     --purple: #3f1168;
     .colors {
+      display: flex;
+      justify-content: space-between;
+      .col-lg-3 {
+        width: 33%;
+      }
       .back {
         background-color: #ece7f2;
         height: 100%;
@@ -128,6 +133,20 @@ export const PlanStyles = styled.div`
             border-top: 1px solid var(--purple-pink2);
           }
         }
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    .plans {
+      .col-lg-3 {
+        width: 50% !important;
+      }
+    }
+  }
+  @media (max-width: 576px) {
+    .plans {
+      .col-lg-3 {
+        width: 100% !important;
       }
     }
   }

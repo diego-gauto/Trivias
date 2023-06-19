@@ -29,9 +29,9 @@ export const Plans = () => {
             <Individual />
           </div>
           {/* Ultimo */}
-          <div className="col-sm-6 col-lg-3 my-3">
+          {/* <div className="col-sm-6 col-lg-3 my-3">
             <Ind_Anual />
-          </div>
+          </div> */}
         </div>
       </div>
     </PlanStyles>
