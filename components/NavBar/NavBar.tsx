@@ -413,6 +413,11 @@ const NavBar = () => {
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
+                  <Link href="/trivias" >
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
+                      Trivias
+                    </FloatingMenuItem>
+                  </Link>
                   <Link href={PREVIEW_PATH}>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Cursos
@@ -526,11 +531,11 @@ const NavBar = () => {
                     </HBList>
                   </a>
                 }
-                {/* <Link href="/trivias" >
+                <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
                     Trivias
                   </HBList>
-                </Link> */}
+                </Link>
                 <Link href={PREVIEW_PATH} >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PREVIEW_PATH ? { fontWeight: 600 } : {}}>
                     Cursos
