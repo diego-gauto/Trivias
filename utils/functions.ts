@@ -39,6 +39,14 @@ export function formatBlogDate(created_at: Date) {
     year: tempYear,
   };
 }
+export function formatBlogDateCase2(created_at: Date) {
+  let date = new Date(created_at);
+  let tempDay = date.getDate();
+  let tempMonth = date.getMonth() + 1;
+  let textMonth: string = getMonth(tempMonth);
+  let tempYear = date.getFullYear();
+  return `${textMonth} ${tempDay}, ${tempYear}`;
+}
 
 export function FormatDateForBack(date: Date) {
   if (date) {

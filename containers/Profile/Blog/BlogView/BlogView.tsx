@@ -95,7 +95,6 @@ const BlogView = () => {
         setBlog(res)
         setLoader(true);
       })
-
     })
   }
   const showLinkCopyMessage = () => {
