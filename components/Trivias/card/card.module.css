@@ -83,3 +83,32 @@
   }
 
 }
+
+@media screen and (max-width: 500px) {
+
+  .cardContainer {
+    width: 160px;
+    height: 222px;
+  }
+
+  .cardImageUnder {
+
+    width: 160px;
+    height: 170px;
+    border-radius: 16px;
+  }
+  
+  .cardImageAbove {
+
+    width: 160px;
+    height: 155px;
+    border-radius: 0px 0px 16px 16px;
+  }
+
+  .cardText {
+
+    font-size: 13px;
+    bottom: 25px;
+  }
+
+}
