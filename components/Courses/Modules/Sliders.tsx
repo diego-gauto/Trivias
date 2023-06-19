@@ -7,7 +7,7 @@ import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, Ima
 import CourseModal from '../../CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
-import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from '../../../constants/paths';
+import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
@@ -404,7 +404,7 @@ const Sliders = (props: ICourseData) => {
               <ButtonContain>
                 {
                   (user && user.level === 0 && user.final_date < today) &&
-                  <Link href={{ pathname: PURCHASE_PATH, query: { type: 'subscription' } }}>
+                  <Link href={{ pathname: PLAN_PATH }}>
                     <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                       <PurpleButton>
                         Adquiere Gonvar+

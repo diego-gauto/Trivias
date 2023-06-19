@@ -24,6 +24,8 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "firebase": "^9.9.2",
     "firebase-functions": "^4.1.0",
+    "fs": "^0.0.1-security",
+    "gray-matter": "^4.0.3",
     "hls.js": "^1.2.0",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
@@ -69,6 +71,7 @@
     "stripe": "^10.0.0",
     "styled-components": "^5.3.3",
     "swiper": "^8.4.5",
+    "swr": "^2.1.5",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },

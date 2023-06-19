@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { BsArrowRepeat, BsFileArrowUp } from "react-icons/bs";
 
-import { user } from "firebase-functions/v1/auth";
-
 import { addHomeworkApi, getHomeworkUserApi } from "../../../../../components/api/homeworks";
 import {
   getUserQuizApi,

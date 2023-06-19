@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { useRouter } from "next/router";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { getLandingInfo } from "../../api/landing";
 import { ModuleContainer, Subtittle1, Tittle } from "../Module2_1/Module2_1.styled";
 import { IModule2_1 } from "./IModule2_1";
@@ -33,14 +33,12 @@ export const Module2_1 = (props: IModule2_1) => {
 
 
   const startFromRedirect = () => {
-    let newDate = new Date();
-    let currentDaySeconds = (newDate.getTime() / 1000);
     if (user) {
       if (user.level === 1) {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push(`${PURCHASE_PATH}?type=subscription`)
+        router.push(`${PLAN_PATH}`)
       }
     } else {
       localStorage.setItem("sub", "true");

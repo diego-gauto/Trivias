@@ -8,23 +8,22 @@ import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../component
 import { formatBlogDate } from '../../../utils/functions';
 
 const Blog = (props: any) => {
-  const { data } = props;
-  console.log(data);
-  const [blogs, setBlogs] = useState<Array<any>>([]);
-  const [loader, setLoader] = useState(false);
+  const { blogs } = props;
+  // const [blogs, setBlogs] = useState<Array<any>>([]);
+  const [loader, setLoader] = useState(true);
 
   const goToBlog = (blog: any) => {
     router.push({ pathname: `/Blogs/${blog.route}` })
   }
-  useEffect(() => {
-    getBlogsApi().then((res) => {
-      res.forEach((blog: IBlog, index: number) => {
-        blog.date = formatBlogDate(blog.created_at)
-      });
-      setBlogs(res)
-      setLoader(true);
-    })
-  }, [router])
+  // useEffect(() => {
+  //   getBlogsApi().then((res) => {
+  //     res.forEach((blog: IBlog, index: number) => {
+  //       blog.date = formatBlogDate(blog.created_at)
+  //     });
+  //     setBlogs(res)
+  //     setLoader(true);
+  //   })
+  // }, [router])
   return (
     <BlogContainer>
       <div className="title-contain">
@@ -49,7 +48,7 @@ const Blog = (props: any) => {
                       </p>
                       <div className="create-date-contain">
                         <p className="blog-create">by Academia Gonvar | </p>
-                        <p className="blog-date">{blog.date.month} {blog.date.day}, {blog.date.year}</p>
+                        {/* <p className="blog-date">{blog.date.month} {blog.date.day}, {blog.date.year}</p> */}
                       </div>
                       <div className="last-text">
                         <h3 className="blog-about">

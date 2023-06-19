@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PREVIEW_PATH } from '../../constants/paths';
 import { ThankYouContainer } from './ThankYou.styled';
 
-const ThankYou = () => {
+const ThankYouSubscriptionMonth = () => {
 
   const redirecTo = () => {
     window.location.href = "/preview";
@@ -32,4 +32,4 @@ const ThankYou = () => {
     </ThankYouContainer>
   )
 }
-export default ThankYou;
+export default ThankYouSubscriptionMonth;

@@ -17,6 +17,7 @@ export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async ({ r
   }
 }
 const BlogScreen = ({ repo }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  // console.log(repo.data)
   return (
     <MainContain
       style={{
@@ -24,7 +25,7 @@ const BlogScreen = ({ repo }: InferGetServerSidePropsType<typeof getServerSidePr
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <Blog data={repo.data}></Blog>
+      <Blog blogs={repo.data}></Blog>
       {/* <div dangerouslySetInnerHTML={{ __html: `${Blog(repo.data)}` }} style={{ display: "none" }} /> */}
     </MainContain>
   )

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import router from "next/router";
 
-import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -57,10 +57,7 @@ const CourseModal = (props: ICourseModal) => {
         });
       }
       if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
-        router.push({
-          pathname: PURCHASE_PATH,
-          query: { type: 'subscription' }
-        });
+        router.push(`${PLAN_PATH}`)
       }
       if (course.type === "Producto" && course.pay) {
         router.push({

@@ -39,3 +39,12 @@ export function formatBlogDate(created_at: Date) {
     year: tempYear,
   };
 }
+
+export function FormatDateForBack(date: Date) {
+  if (date) {
+    const formattedDate = date.toISOString().split("T")[0];
+    return formattedDate + " 00:00:00";
+  } else {
+    return "14-05-2023 00:00:00";
+  }
+}

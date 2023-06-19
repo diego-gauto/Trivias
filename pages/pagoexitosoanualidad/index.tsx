@@ -1,7 +1,7 @@
 import React from 'react'
-import ThankYou from '../../components/ThankYou/ThankYou';
+import ThankYouSubscriptionAnual from '../../components/ThankYou/ThankYouSubscriptionAnual';
 import { MainContain } from '../../screens/Styles.styled';
-const ThankYouScreen = () => {
+const paymentSuccessSubscriptionAnualScreen = () => {
   return (
 
     <MainContain
@@ -11,8 +11,8 @@ const ThankYouScreen = () => {
         maxWidth: "100% !important",
         height: "100vh"
       }}>
-      <ThankYou></ThankYou>
+      <ThankYouSubscriptionAnual></ThankYouSubscriptionAnual>
     </MainContain>
   )
 }
-export default ThankYouScreen;
+export default paymentSuccessSubscriptionAnualScreen;

@@ -2,7 +2,6 @@
 
 import { Modal } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
-
 import { LoaderImage } from "../../../../../../components/Loader.styled";
 import { LoaderContain } from "../../../../User/User.styled";
 import { ImageContainter } from "./ImagePreview.styled";

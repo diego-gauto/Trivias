@@ -1,6 +1,9 @@
+import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { PURCHASE_PATH } from "../../../constants/paths";
+import { useAuth } from "../../../hooks/useAuth";
 
 import { PlanStyles } from "./Plans.styled";
 
@@ -18,6 +21,8 @@ views.set(9, false);
 
 const Anual = () => {
   const [ver, setver] = useState(true)
+  var userData = useAuth();
+  const [user, setUser] = useState<any>({});
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -31,6 +36,21 @@ const Anual = () => {
   useEffect(() => {
 
   }, [setver])
+
+  useEffect(() => {
+    if (userData.user !== null) {
+      setUser(userData.user)
+    } else {
+      router.push({ pathname: "/" });
+    }
+  }, [])
+
+  const goTo = () => {
+    if (user) {
+      router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+    }
+  }
+
   return (
     <PlanStyles>
       <div className="back plan-container">
@@ -52,7 +72,7 @@ const Anual = () => {
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4">Comenzar ahora</button>
+            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
