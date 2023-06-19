@@ -79,7 +79,7 @@ const UsersList = () => {
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null);
   const [filters, setFilters] = useState<any>([
-    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', 'todos'
+    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', -1, 0
   ]);
   const [dates, setDates] = useState<any>([[], []]);
   const [userDownload, setUserDownload] = useState<any>([]);
@@ -127,14 +127,14 @@ const UsersList = () => {
     let tempUsers: any = [];
     setLoader(false);
     if (text_value === "") {
-      getAllUsers(usersPerPage, page * 100, 'all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
+      getAllUsers(usersPerPage, page * 100, 'all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8]).then((res) => {
         setUsers(res);
         tempUsers = res;
         setLoader(true);
       })
     }
     else {
-      getAllUsers(usersPerPage, page * 100, text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then((res) => {
+      getAllUsers(usersPerPage, page * 100, text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8]).then((res) => {
         setUsers(res);
         tempUsers = res;
         setLoader(true);
@@ -228,7 +228,7 @@ const UsersList = () => {
     return "Activo " + countCourses
   }
   const getMaxUsers = (filters: any, date: any, text_value: any) => {
-    userForExcel(text_value === "" ? "all_users" : text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1])).then(async (res) => {
+    userForExcel(text_value === "" ? "all_users" : text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8]).then(async (res) => {
       setTotalUsers(res.length);
       setMaxPages(Math.floor(res.length / usersPerPage));
     })
@@ -236,7 +236,7 @@ const UsersList = () => {
   const getUsers = async () => {
     let demoDate = '14-01-2022 00:00:00'
     let demoDate2 = '14-07-2023 00:00:00'
-    getAllUsers(usersPerPage, pageIndex, 'all_users', 0, -1, 'todos', 'todos', 'todos', 'todos', demoDate, demoDate2, 'todos', demoDate, demoDate2).then((res) => {
+    getAllUsers(usersPerPage, pageIndex, 'all_users', 0, -1, 'todos', 'todos', 'todos', 'todos', demoDate, demoDate2, 'todos', demoDate, demoDate2, -1, 0).then((res) => {
       setUsers(res);
       setLoader(true);
     })
@@ -247,7 +247,7 @@ const UsersList = () => {
     getCountriesApi().then((res) => {
       setCountries(res);
     })
-    // getCoures();
+    getCoures();
   }, [show]);
 
   const formatDate = (value: any) => {
@@ -260,7 +260,7 @@ const UsersList = () => {
   }
   const Gonvar: any = async () => {
     let sendUsers: any = [];
-    await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1])).then(async (res) => {
+    await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1]), filters[7], filters[8]).then(async (res) => {
       await res.map(async (user: any) => {
         sendUsers.push({
           nombre: user.nombre,
@@ -280,42 +280,43 @@ const UsersList = () => {
         <Container>
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
-            {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin")
-              && <CsvDownloader
-                filename="usersData"
-                extension=".csv"
-                separator=","
-                wrapColumnChar=""
-                datas={Gonvar}
-              >
-                <DownloadUserData>
-                  <p>Descargar lista de usuarios</p>
-                </DownloadUserData>
-              </CsvDownloader>}
-            {user.role}
             <FilterContain>
-              <button onClick={() => setShowFilters(!showFilters)}>
-                Filtros
-              </button>
-              <Select>
-                <select defaultValue={"Todos"} onChange={(e: any) => { filter(e.target.value) }}>
-                  <option value={"all"}>Todos</option>
-                  <option value={"suscription"}>Suscripción</option>
-                  <option value={"name"}>Nombre</option>
-                  <option value={"spend"}>Amount spend</option>
-                </select>
-              </Select>
-              <SearchContain>
-                <div className="hidden">
+              <div className="filter-contain">
+                <button onClick={() => setShowFilters(!showFilters)}>
+                  Filtros
+                </button>
+                <Select>
+                  <select defaultValue={"Todos"} onChange={(e: any) => { filter(e.target.value) }}>
+                    <option value={"all"}>Todos</option>
+                    <option value={"suscription"}>Suscripción</option>
+                    <option value={"name"}>Nombre</option>
+                    <option value={"spend"}>Amount spend</option>
+                  </select>
+                </Select>
+                <SearchContain>
+                  <div className="hidden">
 
-                </div>
-                <SearchIcon />
-                <SearchInput
-                  placeholder="Buscar un Usuario"
-                  type={"text"}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
-                />
-              </SearchContain>
+                  </div>
+                  <SearchIcon />
+                  <SearchInput
+                    placeholder="Buscar un Usuario"
+                    type={"text"}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
+                  />
+                </SearchContain>
+              </div>
+              {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin")
+                && <CsvDownloader
+                  filename="usersData"
+                  extension=".csv"
+                  separator=","
+                  wrapColumnChar=""
+                  datas={Gonvar}
+                >
+                  <DownloadUserData>
+                    <p>Descargar lista de usuarios</p>
+                  </DownloadUserData>
+                </CsvDownloader>}
             </FilterContain>
           </TitleContain>
           <div className="pages">

@@ -140,6 +140,8 @@ export const getAllUsers = async (
   date_login_start: string,
   last_login_1: string,
   last_login_2: string,
+  course_id: number,
+  course_progress: number,
 ) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/partial-users-demo/"
@@ -157,6 +159,8 @@ export const getAllUsers = async (
       + "/" + date_login_start
       + "/" + last_login_1
       + "/" + last_login_2
+      + "/" + course_id
+      + "/" + course_progress
     )
     .then((res) => {
       return res.data.users
@@ -179,6 +183,8 @@ export const userForExcel = async (
   date_login_start: string,
   last_login_1: string,
   last_login_2: string,
+  course_id: number,
+  course_progress: number,
 ) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/excel-list/"
@@ -194,6 +200,8 @@ export const userForExcel = async (
       + "/" + date_login_start
       + "/" + last_login_1
       + "/" + last_login_2
+      + "/" + course_id
+      + "/" + course_progress
     )
     .then((res) => {
       return res.data.sendUsers

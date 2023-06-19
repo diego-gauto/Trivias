@@ -35,12 +35,10 @@ const UserFilters = (props: IFilters) => {
     setCreateDate,
     pageIndex,
   } = props;
-  const [allFilters, setAllFilters] = useState<any>([]);
-  let today = new Date().getTime() / 1000;
   const [openCreateDate, setOpenCreateDate] = useState<boolean>(false);
   const [openLoginDate, setOpenLoginDate] = useState<boolean>(false);
   const [arrayFilter, setArrayFilter] = useState([
-    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', 'todos'
+    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', -1, 0
   ])
   const [changeDate, setChangeDate] = useState([
     [], []
@@ -175,33 +173,45 @@ const UserFilters = (props: IFilters) => {
             }
           </select>
         </div>
-        {/* <div className='filter-contain'>
-          <p className='title-filter'>Cursos</p>
-          <select defaultValue="todos" onChange={(e) => startFilters(2, e.target.value)}>
-            <option value="todos">Todos</option>
-            {
-              allCourses.map((course: any, index: number) => {
-                return (
-                  <option
-                    value={course.id}
-                    key={"coursos_de_usuario" + index}
-                  >
-                    {course.title}
-                  </option>
-                )
-              })
-            }
-          </select>
-        </div> */}
-        {/* <div className='filter-contain'>
-          <p className='title-filter'>Avance dentro del curso</p>
-          <select defaultValue="todos" onChange={(e) => startFilters(3, e.target.value)}>
-            <option value="todos">Todos</option>
-            <option value="first">Progreso Ascendente</option>
-            <option value="desc">Progreso Descendente</option>
-          </select>
-        </div> */}
+        {
+          allCourses.length > 0 ?
+            <div className='filter-contain'>
+              <p className='title-filter'>Cursos</p>
+              <select defaultValue="todos" onChange={(e) => startFilters(7, parseInt(e.target.value), changeDate)}>
+                <option value={-1}>Todos</option>
+                {
+                  allCourses.map((course: any, index: number) => {
+                    return (
+                      <option
+                        value={course.id}
+                        key={"coursos_de_usuario" + index}
+                      >
+                        {course.title}
+                      </option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            :
+            <div className='filter-contain'>
+              Cargando...
+            </div>
+        }
 
+        {
+          arrayFilter[7] !== -1 &&
+          <div className='filter-contain'>
+            <p className='title-filter'>Avance dentro del curso</p>
+            <select defaultValue="todos" onChange={(e) => startFilters(8, parseInt(e.target.value), changeDate)}>
+              <option value={0}>Todos</option>
+              <option value={25}>Mas de 25%</option>
+              <option value={50}>Mas de 50%</option>
+              <option value={75}>Mas de 75%</option>
+              <option value={100}>Curso Completado</option>
+            </select>
+          </div>
+        }
       </div>
     </FilterContainer>
   )

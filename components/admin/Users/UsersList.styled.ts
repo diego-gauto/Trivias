@@ -14,6 +14,12 @@ export const UserContain = styled.div`
 `;
 export const FilterContain = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  .filter-contain {
+    display: flex;
+  }
   button {
     border: none;
     margin-right: 20px;
@@ -66,6 +72,7 @@ export const DownloadUserData = styled.div`
   padding-block: 9px;
   padding-inline: 15px;
   border: 1px solid #6717cd;
+  width: fit-content;
   border-radius: 100px;
   img {
     height: auto;
