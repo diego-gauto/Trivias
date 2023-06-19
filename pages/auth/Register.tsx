@@ -138,6 +138,11 @@ const Register = () => {
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     setAuthLoader(true);
     setphone(phoneInput);
+    if (phoneInput === "") {
+      alert("Agregue un numero de telefono por favor!");
+      setAuthLoader(false);
+      return;
+    }
     let user = {
       name: formData.name,
       last_Name: formData.lastName,
