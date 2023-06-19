@@ -142,7 +142,12 @@ const NavBar = () => {
           setIsAdmin(true);
         }
         setLoggedIn(true);
+      } else {
+        if (pathname === "/thankyou") {
+          router.push("/")
+        }
       }
+
       if (pathname === "/_error") {
         router.push("/")
       }

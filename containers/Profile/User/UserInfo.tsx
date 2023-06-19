@@ -17,6 +17,8 @@ import {
 import { io } from "socket.io-client";
 import { useAuth } from "../../../hooks/useAuth";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+const { getCode, getName } = require('country-list');
 
 const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
   let today = new Date().getTime() / 1000;
@@ -114,14 +116,19 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
         return;
       }
     }
-    updateUserInfo({
+
+    let body = {
       name: user.name,
       last_name: user.last_name,
-      phone_number: user.phone_number,
+      phone_number: user.phone_number.replace("+", ""),
       userId: user.id,
       photo: photo,
-      password: tempPassword
-    }).then((res) => {
+      password: tempPassword,
+      country: parseNumber(user.phone_number),
+      stripeId: user.stripe_id
+    }
+
+    updateUserInfo(body).then((res) => {
       setStartEdit(false);
       setEditPassword(false);
       setPassword("");
@@ -129,6 +136,11 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       reloadUser();
       handleClick();
     })
+  }
+  const parseNumber = (phone: string) => {
+    const parsedNumber = parsePhoneNumberFromString(phone);
+    const country = getName(parsedNumber?.country)
+    return country;
   }
 
   const getStarCoordinates = () => {

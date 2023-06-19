@@ -4,7 +4,7 @@ import { Image, Row } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { LOGIN_PATH, PURCHASE_PATH } from "../../../constants/paths";
+import { LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../../constants/paths";
 import Modal1 from "../../CourseModal/CourseModal";
 
 import { Container } from "react-bootstrap";
@@ -128,7 +128,7 @@ const Module5 = ({ user, course, isLoading, innerWidth }: any) => {
           </div>
           {
             <ButtonContain>
-              {(userData && userData.final_date < today) && <Link href={{ pathname: PURCHASE_PATH, query: { type: 'subscription' } }}>
+              {(userData && userData.final_date < today) && <Link href={{ pathname: PLAN_PATH }}>
                 <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
                   <PurpleButton>
                     Adquiere Gonvar+

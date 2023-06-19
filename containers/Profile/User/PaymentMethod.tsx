@@ -43,7 +43,11 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
             stripe_id: data.stripe_id,
             payment_method: res.data.paymentMethod.id
           }
-          attachPaymentMethod(cardInfo).then(() => {
+          attachPaymentMethod(cardInfo).then((response) => {
+            if (response.response.status === 400) {
+              alert("Hay un error en los datos de la tarjeta!");
+              setLoader(false);
+            }
             setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
             newCard();
             handleClick(true);

@@ -14,6 +14,7 @@ import { getAdmins, getUserByEmailApi, updateUserRoleApi } from "../../api/admin
 import { Button } from "../Courses/CourseMain.styled";
 import { IoClose } from "react-icons/io5";
 import { getCoursesApi } from "../../api/lessons";
+import { getPastUsers, updateStripe } from "../../api/users";
 
 export type INewUser = {
   name?: string,
@@ -107,6 +108,51 @@ const Sections = () => {
       retrieveAdmin();
     })
   }
+
+  // const [countdown, setCountdown] = useState(1);
+  // const [headersRow, setHeadersRow] = useState<any>();
+  // const [records, setRecords] = useState<any>(null);
+  // const [pastUsers, setPastUsers] = useState([])
+
+  // useEffect(() => {
+  //   let timeout: any;
+  //   if (countdown <= 790 && pastUsers.length > 0) {
+  //     timeout = setTimeout(() => {
+  //       setCountdown(countdown + 1);
+  //       // addDays(records, headersRow);
+  //       console.log(countdown);
+  //       // addProgress()
+  //       testStripe();
+  //     }, 100);
+  //     return () => clearTimeout(timeout);
+
+  //   }
+
+  //   return
+  // }, [records, countdown]);
+  // useEffect(() => {
+  //   let range = {
+  //     start: 49656,
+  //     end: 50485
+  //   }
+  //   getPastUsers(range).then((res) => {
+  //     console.log(res.data.past);
+
+  //     setPastUsers(res.data.past);
+  //   })
+  // }, [])
+
+  // const testStripe = async () => {
+  //   await Promise.all(
+  //     pastUsers.slice((countdown - 1) * 1, (countdown * 1)).map(async (user: any, index: number) => {
+  //       let body = {
+  //         userId: user.stripe_id,
+  //         wa: user.phone_number.replace("+", "", 1)
+  //       }
+  //       await updateStripe(body)
+  //     })
+  //   )
+  // }
 
   return (
     <AdminContain>

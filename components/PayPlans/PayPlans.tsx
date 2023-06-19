@@ -1,3 +1,5 @@
+import router from "next/router";
+import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
@@ -6,6 +8,7 @@ const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
+
   return (
     <PayStyles className="w-100">
       <div className="colors">

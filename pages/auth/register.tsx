@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Background,
   Error,
@@ -26,6 +26,8 @@ import ErrorModal from "../../components/Error/ErrorModal";
 import { facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import { FacebookProvider, useLogin, useFacebook } from 'react-facebook';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+const { getCode, getName } = require('country-list');
 
 
 const formSchema = yup.object().shape({
@@ -120,11 +122,17 @@ const Register = () => {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
+      window.location.href = `https://www.gonvar.io${PLAN_PATH}?type=subscription`
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
+  }
+
+  const parseNumber = (phone: string) => {
+    const parsedNumber = parsePhoneNumberFromString(phone);
+    const country = getName(parsedNumber?.country)
+    return country;
   }
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
@@ -135,10 +143,12 @@ const Register = () => {
       last_Name: formData.lastName,
       email: formData.email,
       password: formData.password,
-      phone_number: phoneInput,
+      phone_number: phoneInput.replace("+", ""),
       stripe_id: "",
-      provider: 'web'
+      provider: 'web',
+      country: parseNumber(phoneInput)
     }
+
     if (isValidPhoneNumber(phoneInput)) {
       newUser(user).then((res) => {
         if (res === "Este usuario ya existe!") {

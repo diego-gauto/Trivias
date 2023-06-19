@@ -159,3 +159,15 @@ export const getCertificateApi = async (certificate_id: any) => {
       return error
     });
 };
+
+export const updateStripe = async (body: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/users/update-stripe-wa", body)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
