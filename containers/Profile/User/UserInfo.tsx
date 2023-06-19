@@ -116,6 +116,10 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
         return;
       }
     }
+    if (user.name === "" || user.last_name === "") {
+      alert("Por favor no deje los campos vacios!");
+      return;
+    }
 
     let body = {
       name: user.name,
