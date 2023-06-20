@@ -231,3 +231,27 @@
   }
 
 }
+
+@media screen and (max-width: 318px) {
+
+  .trivia_title {
+    top: 27px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+
+  .question {
+  
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 25px;
+  }
+
+  .answer, .active{
+    font-size: 15px;
+    line-height: 19px;
+  }
+
+}
