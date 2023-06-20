@@ -7,15 +7,20 @@ import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { LOGIN_PATH } from "../../constants/paths";
+import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 //import { useAuth } from "../../hooks/useAuth";
-import { Error, LoaderContain, LoaderImage, Title } from "../../screens/Login.styled";
+import { Error, Title } from "../../screens/Login.styled";
+import AlertModal from "../AlertModal/AlertModal";
 import { updateUserPassword } from "../api/auth";
 import { ButtonContain, ResetContainer } from "./ResetPassword.styled";
-import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
-import { LOGIN_PATH } from "../../constants/paths";
 
 const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [alert1, setalert1] = useState(false)
+  const [alert2, setalert2] = useState(false)
+  const [alertMsg1, setalertMsg1] = useState()
+  const [alertMsg2, setalertMsg2] = useState()
   const router = useRouter()
   const { mail } = router.query;
 
@@ -48,13 +53,16 @@ const ResetPassword = () => {
       password: formData.password
     }
     await updateUserPassword(data).then((res) => {
+
       if (res.status === 200) {
-        alert(res.data.msg);
+        setalert1(true)
+        setalertMsg1(res.data.msg);
         setIsLoading(false);
         router.push('/preview');
       }
       if (res.status === 202) {
-        alert(res.data.msg);
+        setalert2(true)
+        setalertMsg2(res.data.msg);
         localStorage.removeItem("reset");
         setIsLoading(false);
         window.location.href = LOGIN_PATH;
@@ -62,8 +70,20 @@ const ResetPassword = () => {
     })
   }
 
+  const onHide1 = () => {
+    setalert1(false)
+  }
+  const onHide2 = () => {
+    setalert2(false)
+  }
+
   return (
     <ResetContainer>
+      {!!alertMsg1 &&
+        <AlertModal show={alert1} onHide={onHide1} message={alertMsg1} />}
+
+      {!!alertMsg2 &&
+        <AlertModal show={alert2} onHide={onHide2} message={alertMsg2} />}
       <form
         onSubmit={handleSubmit(onSubmit)}
       >

@@ -23,6 +23,7 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showAlert, setshowAlert] = useState(false)
+  const [alertMsg, setalertMsg] = useState()
 
   const toggleAlert = () => {
     setshowAlert(false)
@@ -47,14 +48,17 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
 
     setIsLoading(true)
     await sendEmailPassword(resetData).then((res) => {
-      if (res.status === 200) {
-        setshowAlert(true)
+      if (res.data.msg) {
+        setalertMsg(res.data.msg)
+        if (res.status === 200) {
+          setshowAlert(true)
+        }
+        if (res.status === 202) {
+          localStorage.setItem("reset", "true");
+          setshowAlert(true)
+        }
+        setIsLoading(false)
       }
-      if (res.status === 202) {
-        localStorage.setItem("reset", "true");
-        handleClose();
-      }
-      setIsLoading(false)
     })
   };
 
@@ -68,9 +72,10 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
 
   return (
     <Modal show={showForgot} onHide={handleClose} centered className="forgot-modal-component">
-      <div onClick={() => handleClose()}>
-        <AlertModal show={showAlert} onHide={toggleAlert} message={"Este usuario no existe!"} />
-      </div>
+      {!!alertMsg && <div onClick={() => handleClose()}>
+        <AlertModal show={showAlert} onHide={toggleAlert} message={alertMsg} />
+      </div>}
+
       <form
         onSubmit={handleSubmit(onSubmit)}
       >

@@ -74,6 +74,8 @@ const Login = () => {
   const [show, setShow] = useState<any>(false);
   const [showAlert1, setShowAlert1] = useState<any>(false);
   const [showAlert2, setShowAlert2] = useState<any>(false);
+  const [alertMsg1, setalertMsg1] = useState<any>()
+  const [alertMsg2, setalertMsg2] = useState()
   const [reset, setReset] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const { login } = useLogin();
@@ -143,12 +145,14 @@ const Login = () => {
       await updateUserPassword(body).then((res) => {
         if (res.status === 202) {
           setShowAlert1(true);
+          setalertMsg1("Contraseña actualizada!")
           setErrorMsg("");
           setReset(false);
           setAuthLoader(false)
           return;
         }
         if (res.data.msg) {
+          setalertMsg2(res.data.msg)
           setShowAlert2(true)
         }
         setAuthLoader(false)
@@ -363,8 +367,10 @@ const Login = () => {
     <>
       {!isLoading ? (
         <LoginBackground>
-          <AlertModal show={showAlert1} message={"Contraseña actualizada"} onHide={toggleAlert1} />
-          <AlertModal show={showAlert2} message={"El usuario no existe!"} onHide={toggleAlert2} />
+          {!!alertMsg1 &&
+            <AlertModal show={showAlert1} message={alertMsg1} onHide={toggleAlert1} />}
+          {!!alertMsg2 &&
+            <AlertModal show={showAlert2} message={alertMsg2} onHide={toggleAlert2} />}
           <div className="left-side">
             <img className="imgUpperHand" src="../images/mano2.png" alt="" />
             <p>¡Es un placer <br />
