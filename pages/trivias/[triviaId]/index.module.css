@@ -15,7 +15,7 @@
 
 .trivia {
   width: 60%;
-  height: 550px;
+  height: 560px;
   position: relative;
   /* background-size: 100%; */
 }
@@ -27,7 +27,7 @@
 
 .publicity img{
   width: 100%;
-  height: 550px;
+  height: 560px;
   object-fit: cover;
 }
 
@@ -62,12 +62,25 @@
 @media screen and (max-width: 1174px) {
 
   .trivia {
-    height: 580px;
+    height: 600px;
     /* background-size: 100%; */
   }
 
   .publicity img{
-    height: 580px;
+    height: 600px;
+  }
+
+}
+
+@media screen and (max-width: 1141px) {
+
+  .trivia {
+    height: 640px;
+    /* background-size: 100%; */
+  }
+
+  .publicity img{
+    height: 640px;
   }
 
 }
@@ -91,7 +104,7 @@
   .trivia {
     order:2;
     width: auto;
-    height: 550px;
+    height: 580px;
   }
 }
 
@@ -108,16 +121,7 @@
 
 }
 
-
 @media screen and (max-width: 704px) {
-
-
-  .trivia {
-    height: 650px;
-  }
-}
-
-@media screen and (max-width: 532px) {
 
 
   .trivia {

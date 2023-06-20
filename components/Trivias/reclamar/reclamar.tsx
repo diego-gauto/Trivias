@@ -23,76 +23,58 @@ const Reclamar = ({ result }: any) => {
   //   navigate(`/trivias/${triviaId}/send/${result}`);
   // };
 
-  // const handleFacebookShare = () => {
-  //   const quote =
-  //     "¡Acabo de obtener X puntos en la trivia! ¿Puedes hacerlo mejor?"; // Mensaje personalizado
-  //   const url = "https://www.gonvar.io"; // URL de la página que deseas compartir
+  const handleFacebookShare = () => {
+    const quote =
+      "¡Acabo de obtener X puntos en la trivia! ¿Puedes hacerlo mejor?"; // Mensaje personalizado
+    const url = "https://www.gonvar.io"; // URL de la página que deseas compartir
 
-  //   // Abre una ventana emergente para compartir en Facebook utilizando la API de Facebook
-  //   window.open(
-  //     `https://www.facebook.com/dialog/share?app_id=1293630141585988&display=popup&href=${encodeURIComponent(
-  //       url
-  //     )}&quote=${encodeURIComponent(quote)}`,
-  //     "_blank"
-  //   );
-  // };
+    // Abre una ventana emergente para compartir en Facebook utilizando la API de Facebook
+    window.open(
+      `https://www.facebook.com/dialog/share?app_id=1293630141585988&display=popup&href=${encodeURIComponent(
+        url
+      )}&quote=${encodeURIComponent(quote)}`,
+      "_blank"
+    );
+  };
 
-  function handleFacebookShare() {
-    // const url = document
-    //   .querySelector('meta[property="og:url"]')
-    //   .getAttribute("content");
-    // const title = document
-    //   .querySelector('meta[property="og:title"]')
-    //   .getAttribute("content");
-    // const description = document
-    //   .querySelector('meta[property="og:description"]')
-    //   .getAttribute("content");
-    // const image = document
-    //   .querySelector('meta[property="og:image"]')
-    //   .getAttribute("content");
+  // function handleFacebookShare() {
 
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: "1293630141585988",
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: "v13.0",
-      });
-    };
+  //   window.fbAsyncInit = function () {
+  //     window.FB.init({
+  //       appId: "1293630141585988",
+  //       autoLogAppEvents: true,
+  //       xfbml: true,
+  //       version: "v13.0",
+  //     });
+  //   };
 
-    (function (d, s, id) {
-      var js: any,
-        fjs: any = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src =
-        "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1293630141585988&autoLogAppEvents=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
+  //   (function (d, s, id) {
+  //     var js: any,
+  //       fjs: any = d.getElementsByTagName(s)[0];
+  //     if (d.getElementById(id)) return;
+  //     js = d.createElement(s);
+  //     js.id = id;
+  //     js.src =
+  //       "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1293630141585988&autoLogAppEvents=1";
+  //     fjs.parentNode.insertBefore(js, fjs);
+  //   })(document, "script", "facebook-jssdk");
 
-    window.setTimeout(function () {
-      window.FB.ui(
-        {
-          method: "feed",
-          name: "Facebook Dialogs",
-          link: "https://www.gonvar.io/",
-          picture: "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/gonvar_purple%20(1).png?alt=media&token=0e6f38b7-1c05-4db7-99fa-b16601681275&_gl=1*1ghy33j*_ga*MTk0NTg4NjYyOC4xNjg0NDY4NDIy*_ga_CW55HF8NVT*MTY4NTk4NzY0MS4yLjEuMTY4NTk4NzY2Mi4wLjAuMA..",
-          caption: "Reference Documentation",
-          description:
-            "Dialogs provide a simple, consistent interface for applications to interface with users.",
-          message: "Facebook Dialogs are easy!",
-        },
-        function (response: any) {
-          if (response && response.post_id) {
-            alert("Post was published.");
-          } else {
-            alert("Post was not published.");
-          }
-        }
-      );
-    }, 1000);
-  }
+  //   window.setTimeout(function () {
+  //     window.FB.ui(
+  //       {
+  //         method: "share",
+  //         href: "https://www.gonvar.io/",
+  //       },
+  //       function (response: any) {
+  //         if (response && response.post_id) {
+  //           alert("Post was published.");
+  //         } else {
+  //           alert("Post was not published.");
+  //         }
+  //       }
+  //     );
+  //   }, 1000);
+  // }
 
   function handleMessengerShare() {
     const url = "https://www.gonvar.io"; // URL de la página que deseas compartir
