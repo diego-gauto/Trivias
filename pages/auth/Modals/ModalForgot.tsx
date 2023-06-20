@@ -47,9 +47,12 @@ const ModalForgot = ({ showForgot, setShowForgot }: any) => {
 
     setIsLoading(true)
     await sendEmailPassword(resetData).then((res) => {
-      if (res.data.msg) {
+      if (res.status === 200) {
         setshowAlert(true)
-        localStorage.setItem("reset", "true")
+      }
+      if (res.status === 202) {
+        localStorage.setItem("reset", "true");
+        handleClose();
       }
       setIsLoading(false)
     })
