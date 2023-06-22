@@ -1,7 +1,7 @@
 .inputs {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .inputs label {
@@ -49,6 +49,15 @@
 
 .inputs input:disabled::placeholder {
   font-weight: 600; /* Estilo personalizado para el placeholder cuando está deshabilitado */
+}
+
+@media screen and (max-width: 1064px) {
+
+  .inputs input {
+
+  max-width: 1000px;
+  
+  }
 }
 
 @media screen and (max-width: 800px) {

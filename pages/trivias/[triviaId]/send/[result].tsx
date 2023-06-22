@@ -220,7 +220,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import * as yup from "yup";
+import * as Yup from "yup";
 
 import { getUserApi } from "../../../../components/api/users";
 import { emailTrivia, userTrivia } from "../../../../components/api/usertrivia";
@@ -238,14 +238,7 @@ const Form = () => {
 
   const [userData, setUserData] = useState<any>(null);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
-
   const [isChecked, setIsChecked] = useState(false);
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [numeroWhatsApp, setNumeroWhatsApp] = useState("");
-  const [pais, setPais] = useState("");
-  const [isUser, setIsUser] = useState(false);
 
   const {
     formContainer,
@@ -257,34 +250,70 @@ const Form = () => {
     btnRecibir,
     formImg,
     link,
+    errorMessageNombre,
+    errorMessageApellido,
+    errorMessageMail,
+    errorMessageWA,
   } = styles;
 
-  const validationSchema = yup.object().shape({
-    nombre: yup.string().required("El nombre es obligatorio").min(3, "El nombre debe tener al menos 3 caracteres"),
-    apellido: yup.string().required("El apellido es obligatorio").min(3, "El apellido debe tener al menos 3 caracteres"),
-    correo: yup.string().required("El correo electrónico es obligatorio").email("Ingresa un correo electrónico válido"),
+  const validationSchema = Yup.object().shape({
+    nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
+    apellido: Yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos 3 letras'),
+    correo: Yup.string().required('El correo electrónico es obligatorio').email('El correo electrónico no es válido'),
+    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
   });
 
-  const handleNombreChange = (event: any) => {
-    setNombre(event.target.value);
+  const formik = useFormik({
+    initialValues: {
+      nombre: "",
+      apellido: "",
+      correo: "",
+      numeroWhatsApp: "",
+      pais: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      await handleSubmit(values);
+    },
+  });
+
+  const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    formik.setFieldValue('nombre', event.target.value);
   };
 
-  const handleApellidoChange = (event: any) => {
-    setApellido(event.target.value);
+  const handleApellidoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    formik.setFieldValue('apellido', event.target.value);
   };
 
-  const handleMailChange = (event: any) => {
-    setCorreo(event.target.value);
+  const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    formik.setFieldValue('correo', event.target.value);
   };
+
 
   const handlePaisChange = (value: any, selectedCountry: any) => {
-    setNumeroWhatsApp(value);
-    setPais(selectedCountry);
+    formik.setFieldValue("numeroWhatsApp", value);
+    formik.setFieldValue("pais", selectedCountry);
   };
 
-  function handleCheckboxChange() {
+  const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-  }
+  };
+
+  const handleNombreBlur = () => {
+    formik.setFieldTouched('nombre', true);
+  };
+
+  const handleApellidoBlur = () => {
+    formik.setFieldTouched('apellido', true);
+  };
+
+  const handleMailBlur = () => {
+    formik.setFieldTouched('correo', true);
+  };
+
+  const handlePaisBlur = () => {
+    formik.setFieldTouched('numeroWhatsApp', true);
+  };
 
   const handleRedirect = (createUserSuccess: boolean) => {
     router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
@@ -295,69 +324,54 @@ const Form = () => {
       nombre: values.nombre,
       apellido: values.apellido,
       mail: values.correo,
-      numeroWhatsapp: numeroWhatsApp,
-      pais: pais, // Completa el país según corresponda
-      isUser: isUser,
-      numeroTrivia: triviaId, // Completa el número de trivia según corresponda
-      resultadoTrivia: result, // Completa el resultado de la trivia según corresponda
+      numeroWhatsapp: values.numeroWhatsApp,
+      pais: values.pais,
+      isUser: false,
+      numeroTrivia: triviaId,
+      resultadoTrivia: result,
     };
 
-    let createUserSuccess: boolean = false; // Variable para almacenar el resultado del primer POST
+    console.log(createUserDto)
 
-    userTrivia(createUserDto)
-      .then((res) => {
-        const createUserResult = res.data.result;
+    let createUserSuccess = false;
 
-        if (createUserResult) {
-          createUserSuccess = true;
-          // El usuario fue creado correctamente, se puede proceder al envío del correo
-          const sendEmailDto = {
-            to: correo,
-            username: values.nombre + " " + values.apellido,
-            subject: "Prueba de envío por SendinBlu desde el front",
-            idTemplateBrevo: 7,
-          };
+    try {
+      const res = await userTrivia(createUserDto);
+      const createUserResult = res.data.result;
 
-          const sendEmailResponse = emailTrivia(sendEmailDto);
+      if (createUserResult) {
+        createUserSuccess = true;
+        const sendEmailDto = {
+          to: values.correo,
+          username: values.nombre + " " + values.apellido,
+          subject: "Prueba de envío por SendinBlu desde el front",
+          idTemplateBrevo: 7,
+        };
 
-          console.log(sendEmailResponse);
-        } else {
-          // El usuario ya había jugado a esta trivia
-          console.log("El usuario ya jugó a esta trivia");
-        }
+        const sendEmailResponse = await emailTrivia(sendEmailDto);
 
-        handleRedirect(createUserSuccess);
-      })
-      .catch((error) => {
-        console.error("Error al crear el usuario", error);
-      });
+        console.log(sendEmailResponse);
+      } else {
+        console.log("El usuario ya jugó a esta trivia");
+      }
+    } catch (error) {
+      console.error("Error al crear el usuario", error);
+    }
+
+    handleRedirect(createUserSuccess);
   };
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
         setUserData(res);
-        setNombre(res.name);
-        setApellido(res.last_name);
-        setCorreo(res.email);
+        formik.setFieldValue("nombre", res.name);
+        formik.setFieldValue("apellido", res.last_name);
+        formik.setFieldValue("correo", res.email);
         setUserDataLoaded(true);
-        setIsUser(true);
       });
     }
   }, []);
-
-  const formik = useFormik({
-    initialValues: {
-      nombre: "",
-      apellido: "",
-      correo: "",
-      numeroWhatsApp: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      handleSubmit(values);
-    },
-  });
 
   return (
     <>
@@ -380,49 +394,69 @@ const Form = () => {
           <div className={textos}>
             <h1>¡Felicidades!</h1>
             <h3>
-              ¡Te ganaste un cupón de 30% para cualquiera de nuestros cursos <span>en línea!</span>
+              ¡Te ganaste un cupón de 30% para cualquiera de nuestros cursos{" "}
+              <span>en línea!</span>
             </h3>
             <p>
-              Nota: Una vez llenes los datos, te enviaremos el cupón de descuento a tu correo electrónico.
+              Nota: Una vez llenes los datos, te enviaremos el cupón de
+              descuento a tu correo electrónico.
             </p>
           </div>
-          <form action="" className={inputContainer} onSubmit={formik.handleSubmit}>
-            <InputNombre
-              label={"Nombre"}
-              placeholder={userDataLoaded ? nombre : "Carla"}
-              onChange={handleNombreChange}
-              disabled={userDataLoaded}
-              value={formik.values.nombre}
-              onBlur={formik.handleBlur("nombre")}
-            />
-            {formik.touched.nombre && formik.errors.nombre && <div>{formik.errors.nombre}</div>}
+          <form onSubmit={formik.handleSubmit} className={inputContainer}>
+            <div>
+              <InputNombre
+                label={"Nombre"}
+                placeholder={userDataLoaded ? userData.name : "Carla"}
+                onChange={handleNombreChange}
+                onBlur={handleNombreBlur}
+                value={formik.values.nombre}
+                disabled={userDataLoaded}
+              />
+              {formik.touched.nombre && formik.errors.nombre && (
+                <div className={errorMessageNombre}>{formik.errors.nombre}</div>
+              )}
+            </div>
+            <div>
 
-            <InputNombre
-              label={"Apellido"}
-              placeholder={userDataLoaded ? apellido : "Flores"}
-              onChange={handleApellidoChange}
-              disabled={userDataLoaded}
-              value={formik.values.apellido}
-              onBlur={formik.handleBlur("apellido")}
-            />
-            {formik.touched.apellido && formik.errors.apellido && <div>{formik.errors.apellido}</div>}
+              <InputNombre
+                label={"Apellido"}
+                placeholder={userDataLoaded ? userData.last_name : "Flores"}
+                onChange={handleApellidoChange}
+                onBlur={handleApellidoBlur}
+                value={formik.values.apellido}
+                disabled={userDataLoaded}
+              />
+              {formik.touched.apellido && formik.errors.apellido && (
+                <div className={errorMessageApellido}>{formik.errors.apellido}</div>
+              )}
+            </div>
+            <div>
 
-            <InputMail
-              label={"Correo Electrónico"}
-              placeholder={userDataLoaded ? correo : "carlaflores@gmail.com"}
-              onChange={handleMailChange}
-              disabled={userDataLoaded}
-              value={formik.values.correo}
-              onBlur={formik.handleBlur("correo")}
-            />
-            {formik.touched.correo && formik.errors.correo && <div>{formik.errors.correo}</div>}
+              <InputMail
+                label={"Correo Electrónico"}
+                placeholder={userDataLoaded ? userData.email : "carlaflores@gmail.com"}
+                onChange={handleMailChange}
+                onBlur={handleMailBlur}
+                value={formik.values.correo}
+                disabled={userDataLoaded}
+              />
+              {formik.touched.correo && formik.errors.correo && (
+                <div className={errorMessageMail}>{formik.errors.correo}</div>
+              )}
+            </div>
+            <div>
 
-            <InputWatsapp
-              label={"Número de WhatsApp"}
-              placeholder={"1153137872"}
-              onChange={handlePaisChange}
-              value={numeroWhatsApp}
-            />
+              <InputWatsapp
+                label={"Número de WhatsApp"}
+                placeholder={"1153137872"}
+                onChange={handlePaisChange}
+                onBlur={handlePaisBlur}
+                value={formik.values.numeroWhatsApp}
+              />
+              {formik.touched.numeroWhatsApp && formik.errors.numeroWhatsApp && (
+                <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
+              )}
+            </div>
           </form>
           <div className={checkboxContainer}>
             <input
@@ -432,20 +466,21 @@ const Form = () => {
               onChange={handleCheckboxChange}
             />
             <label htmlFor="checkbox">
-              He leído y acepto los <span>Términos y Condiciones y Políticas de privacidad</span>
+              He leído y acepto los{" "}
+              <span>Términos y Condiciones y Políticas de privacidad</span>
             </label>
           </div>
           <button
             className={btnRecibir}
             disabled={!isChecked || !formik.isValid}
             style={{ pointerEvents: isChecked ? "auto" : "none" }}
-            type="submit"
+            onClick={() => formik.handleSubmit()}
           >
             Recibir regalo
           </button>
         </div>
         <div className={formImg}>
-          <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
+          <img src="/images/trivias/regalo_trivia.png" alt="" />
         </div>
       </div>
     </>
@@ -453,3 +488,5 @@ const Form = () => {
 };
 
 export default Form;
+
+

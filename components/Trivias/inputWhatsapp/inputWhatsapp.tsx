@@ -35,6 +35,7 @@ const InputPais = (props: any) => {
         localization={es}
         country={country}
         onChange={handleChange}
+        onBlur={props.onBlur}
         placeholder={props.placeholder}
         countryCodeEditable={false}
       />
