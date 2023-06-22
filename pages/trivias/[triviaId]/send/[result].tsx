@@ -79,6 +79,8 @@ const Form = () => {
       resultadoTrivia: result, // Completa el resultado de la trivia según corresponda
     };
 
+    console.log(createUserDto);
+
     let createUserSuccess: boolean = false; // Variable para almacenar el resultado del primer POST
 
     userTrivia(createUserDto).then((res) => {

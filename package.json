@@ -24,6 +24,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "firebase": "^9.9.2",
     "firebase-functions": "^4.1.0",
+    "formik": "^2.4.2",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "hls.js": "^1.2.0",
