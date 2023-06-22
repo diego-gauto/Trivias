@@ -2,23 +2,22 @@ import React from 'react'
 import BlogView from '../../containers/Profile/Blog/BlogView/BlogView';
 import { MainContain } from "../../screens/Styles.styled";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { useRouter } from 'next/router';
 type Repo = {
   data: [],
 }
-export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async ({ req, res }: any) => {
-  const result = await fetch("https://gonvar.inowu.dev/" + "blogs/getBlogs");
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
-  const repo = await result.json();
-
+export const getServerSideProps: GetServerSideProps<{ blog: Repo }> = async (context: any) => {
+  let tempBlog = [];
+  const id = context.params.slug;
+  const result = await fetch("https://gonvar.inowu.dev/blogs/getBlogs");
+  const allBlogs = await result.json();
+  tempBlog = allBlogs.data.filter((blog: any) => blog.route === id);
+  const sendBlog = await fetch("https://gonvar.inowu.dev/" + "blogs/" + tempBlog[0].id)
+  const blog = await sendBlog.json();
   return {
-    props: { repo }
+    props: { blog }
   }
 }
-const BlogScreen = () => {
+const BlogScreen = ({ blog }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <MainContain
       style={{
