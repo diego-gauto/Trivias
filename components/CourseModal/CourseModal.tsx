@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+
+import { AiFillStar } from "react-icons/ai";
+import { useMediaQuery } from "react-responsive";
+import { Rating } from "react-simple-star-rating";
+
 import router from "next/router";
 
 import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
@@ -25,12 +30,9 @@ import {
   TextContainer,
   VideoContain,
 } from "./CourseModal.styled";
-import SelectModule4 from "./Select/SelectModule";
-import ModalMaterials from "./Materials/ModalMaterials";
-import { useMediaQuery } from "react-responsive";
-import { Rating } from 'react-simple-star-rating'
-import { AiFillStar } from "react-icons/ai";
 import { ICourseModal } from "./ICourseModal";
+import ModalMaterials from "./Materials/ModalMaterials";
+import SelectModule4 from "./Select/SelectModule";
 
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;
@@ -72,6 +74,7 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
     else {
+      localStorage.setItem("course", `${course.id}`);
       router.push({ pathname: LOGIN_PATH })
     }
   }

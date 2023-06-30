@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+
+import { AiFillLock } from "react-icons/ai";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
 import InputMask from "react-input-mask";
+
 import router, { useRouter } from "next/router";
-import { FaCheck, FaArrowRight } from 'react-icons/fa';
-import { AiFillLock } from 'react-icons/ai';
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useAuth } from "../../../hooks/useAuth";
-import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import {
-  Container,
-  LoaderContainSpinner,
-} from "./Purchase.styled";
-import ModalError from "./Modal1/ModalError";
-import ErrorModal from "../../../components/Error/ErrorModal";
-import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, getCourseForCheckoutApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
-import { getUserApi, updateMembership } from "../../../components/api/users";
+
 import { retrieveCoupons } from "../../../components/api/admin";
-import { PREVIEW_PATH } from "../../../constants/paths";
+import {
+  addUserCouponApi,
+  createInvoiceApi,
+  createPaymentMethodApi,
+  getCourseForCheckoutApi,
+  stripePaymentApi,
+  stripeSubscriptionApi,
+} from "../../../components/api/checkout";
+import { getUserApi, updateMembership } from "../../../components/api/users";
+import ErrorModal from "../../../components/Error/ErrorModal";
+import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import ModalError from "./Modal1/ModalError";
+import { Container, LoaderContainSpinner } from "./Purchase.styled";
 
 const Purchase = () => {
   const [user, setUser] = useState("");
@@ -46,6 +51,13 @@ const Purchase = () => {
   const router = useRouter()
   const { type, id, trial, frequency } = router.query;
   const [loader, setLoader] = useState<any>(false);
+
+  const courseId = new URLSearchParams(window.location.search)
+  let idC = courseId.get('id')
+  if (!localStorage.getItem("email")) {
+    localStorage.setItem("course", idC ? idC.toString() : '30');
+    router.push({ pathname: LOGIN_PATH })
+  }
 
   const subscription = {
     price: 149.00,
