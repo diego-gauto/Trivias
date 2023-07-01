@@ -15,6 +15,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isLanding, setIsLanding] = useState<boolean>();
   const [isCoupons, setIsCoupons] = useState<boolean>();
   const [isUsers, setIsUsers] = useState<boolean>();
+  const [isTrivias, setIsTrivias] = useState<boolean>();
   const [isComments, setIsComments] = useState<boolean>();
   const [index, setIndex] = useState(0)
   const [section, setSection] = useState(0)
@@ -75,6 +76,9 @@ const SideBar = ({ show, onHide }: any) => {
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Comments") {
         setIndex(9)
       }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Trivias") {
+        setIndex(10)
+      }
     }, [])
   } catch (error) {
   }
@@ -109,21 +113,6 @@ const SideBar = ({ show, onHide }: any) => {
         if (router.pathname == "/admin/Comments" && userData.roles[8].view == 0) {
           router.push({ pathname: "/" });
         }
-        // if (router.pathname == "/admin/Edit" && userData.courses == false) {
-        //   router.push({ pathname: "/" });
-        // }
-        // if (router.pathname == "/admin/EditLesson" && userData.courses == false) {
-        //   router.push({ pathname: "/" });
-        // }
-        // if (router.pathname == "/admin/Teacher" && userData.courses == false) {
-        //   router.push({ pathname: "/" });
-        // }
-        // if (router.pathname == "/admin/Materials" && userData.courses == false) {
-        //   router.push({ pathname: "/" });
-        // }
-        // if (router.pathname == "/admin/CourseAtributes" && userData.courses == false) {
-        //   router.push({ pathname: "/" });
-        // }
         if (router.pathname == "/admin/Sections") {
           router.push({ pathname: "/" });
         }
@@ -196,6 +185,12 @@ const SideBar = ({ show, onHide }: any) => {
               setIndex(7)
               onHide()
             }}>Blogs</li>
+          </Link>}
+          {(isSuperAdmin || isTrivias) && <Link href="/admin/Trivias">
+            <li style={{ color: index == 10 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(10)
+              onHide()
+            }}>Trivias</li>
           </Link>}
         </ul>
         <Text>Organization</Text>
