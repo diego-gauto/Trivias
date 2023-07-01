@@ -18,7 +18,7 @@ const TriviaHome = () => {
     {
       id: 1,
       img: "/images/trivias/mujer2-removebg-preview.png",
-      title: "¿Cuánto conozco de uñas?",
+      title: "¿Qué te depara el mundo de las uñas en los próximos 3 años?",
       color: "#ffcb7d",
       trans: "#ffb800",
     },

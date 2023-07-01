@@ -22,7 +22,7 @@ const InputPais = (props: any) => {
     }
 
     // Pasa el valor ingreso del numero de WA y del país seleccionado al componente padre
-    props.onChange(value, selectedCountryName);
+    props.onChange(value, selectedCountryName, selectedCountry.countryCode);
   };
 
   return (

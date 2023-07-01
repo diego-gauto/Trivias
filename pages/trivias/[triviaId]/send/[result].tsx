@@ -217,6 +217,8 @@
 
 import React, { useEffect, useState } from "react";
 
+import { isValidPhoneNumber } from "react-phone-number-input";
+
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -260,7 +262,7 @@ const Form = () => {
     nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
     apellido: Yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos 3 letras'),
     correo: Yup.string().required('El correo electrónico es obligatorio').email('El correo electrónico no es válido'),
-    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
+    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio')
   });
 
   const formik = useFormik({
@@ -269,13 +271,15 @@ const Form = () => {
       apellido: "",
       correo: "",
       numeroWhatsApp: "",
-      pais: "",
+      codigoPais: "",
+      nombrePais: ""
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       await handleSubmit(values);
     },
   });
+
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('nombre', event.target.value);
@@ -290,9 +294,16 @@ const Form = () => {
   };
 
 
-  const handlePaisChange = (value: any, selectedCountry: any) => {
+  const handlePaisChange = (value: any, selectedCountry: any, selectedCode: any) => {
     formik.setFieldValue("numeroWhatsApp", value);
-    formik.setFieldValue("pais", selectedCountry);
+    formik.setFieldValue("nombrePais", selectedCountry);
+    formik.setFieldValue("codigoPais", selectedCode)
+
+    const isValid = isValidPhoneNumber(value, selectedCode)
+    console.log(value)
+    console.log(selectedCode)
+    console.log(isValid)
+
   };
 
   const handleCheckboxChange = () => {
@@ -325,7 +336,7 @@ const Form = () => {
       apellido: values.apellido,
       mail: values.correo,
       numeroWhatsapp: values.numeroWhatsApp,
-      pais: values.pais,
+      pais: values.nombrePais,
       isUser: false,
       numeroTrivia: triviaId,
       resultadoTrivia: result,
