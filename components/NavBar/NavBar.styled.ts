@@ -466,11 +466,11 @@ export const HamburgerContain = styled.div<{ hamburger: boolean; admin: any }>`
     props.hamburger &&
     css<{ admin: any }>`
       pointer-events: auto;
-      height: 180px;
+      height: 190px;
       ${(props) =>
         props.admin &&
         css`
-          height: 200px;
+          height: 210px;
         `}
       .menu-hamburger {
         transition: 0.5s ease-in-out;

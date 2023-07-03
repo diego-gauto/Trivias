@@ -13,3 +13,10 @@ export interface IUserDataProps {
     last4: number;
   };
 }
+export interface IUser {
+  name: string;
+  last_name: string;
+  phone_number: string;
+  stripeId: string;
+  id: number;
+}

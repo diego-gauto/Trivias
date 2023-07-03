@@ -2,10 +2,11 @@ import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { PURCHASE_PATH } from "../../../constants/paths";
+import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { useAuth } from "../../../hooks/useAuth";
 
 import { PlanStyles } from "./Plans.styled";
+import { IUser } from "../../../interfaces/IUserData";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -19,10 +20,12 @@ views.set(7, false);
 views.set(8, false);
 views.set(9, false);
 
-const Anual = () => {
+interface IData {
+  user: IUser;
+}
+const Anual = (props: IData) => {
   const [ver, setver] = useState(true)
-  var userData = useAuth();
-  const [user, setUser] = useState<any>({});
+  const { user } = props;
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -37,17 +40,12 @@ const Anual = () => {
 
   }, [setver])
 
-  useEffect(() => {
-    if (userData.user !== null) {
-      setUser(userData.user)
-    } else {
-      router.push({ pathname: "/" });
-    }
-  }, [])
-
   const goTo = () => {
-    if (user) {
+    if (user.id) {
       router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+    }
+    else {
+      router.push(SIGNUP_PATH)
     }
   }
 

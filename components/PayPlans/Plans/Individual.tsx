@@ -1,12 +1,9 @@
 import router from "next/router";
 import { useEffect, useState } from "react";
-
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { PURCHASE_PATH } from "../../../constants/paths";
-import { useAuth } from "../../../hooks/useAuth";
-
+import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PlanStyles } from "./Plans.styled";
-
+import { IUser } from "../../../interfaces/IUserData";
 const gStar = "/images/pay_plans/star green.png"
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -18,11 +15,12 @@ views.set(6, false);
 views.set(7, false);
 views.set(8, false);
 
-const Individual = () => {
+interface IData {
+  user: IUser;
+}
+const Individual = (props: IData) => {
   const [ver, setver] = useState(true)
-  var userData = useAuth();
-  const [user, setUser] = useState<any>({});
-
+  const { user } = props;
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -36,19 +34,16 @@ const Individual = () => {
 
   }, [setver])
 
-  useEffect(() => {
-    if (userData.user !== null) {
-      setUser(userData.user)
-    } else {
-      router.push({ pathname: "/" });
-    }
-  }, [])
+
 
   const goTo = () => {
-    if (user) {
+    if (user.id) {
       router.push(
         { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
       )
+    }
+    else {
+      router.push(SIGNUP_PATH)
     }
   }
 

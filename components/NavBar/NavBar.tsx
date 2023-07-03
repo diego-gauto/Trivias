@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { BLOGS_PATH, DEFAULT_USER_IMG, LOGIN_PATH, PREVIEW_PATH, PROFILE_PATH, REWARDS_PATH, SIGNUP_PAST_USER_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { BLOGS_PATH, DEFAULT_USER_IMG, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, REWARDS_PATH, SIGNUP_PAST_USER_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   HamburgerContain,
@@ -259,6 +259,12 @@ const NavBar = () => {
             Trivias
           </NavText>
         </Link> */}
+        <Link href={PLAN_PATH}>
+          <NavText pathname={pathname} color={color} title="Inicio"
+            style={pathname === PLAN_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+            Planes
+          </NavText>
+        </Link>
         <Link href={PREVIEW_PATH}>
           <NavText pathname={pathname} color={color} title="Inicio"
             style={pathname === PREVIEW_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
@@ -405,6 +411,11 @@ const NavBar = () => {
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
+                  <Link href={PLAN_PATH}>
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
+                      Planes
+                    </FloatingMenuItem>
+                  </Link>
                   <Link href={PREVIEW_PATH}>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Cursos
@@ -523,6 +534,11 @@ const NavBar = () => {
                     Trivias
                   </HBList>
                 </Link> */}
+                <Link href={PLAN_PATH} >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PLAN_PATH ? { fontWeight: 600 } : {}}>
+                    Planes
+                  </HBList>
+                </Link>
                 <Link href={PREVIEW_PATH} >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PREVIEW_PATH ? { fontWeight: 600 } : {}}>
                     Cursos

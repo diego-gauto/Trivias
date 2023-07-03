@@ -3,12 +3,21 @@ import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { IUser } from "../../interfaces/IUserData";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
-
+  const [user, setUser] = useState<IUser>({} as IUser);
+  var userData = useAuth();
+  useEffect(() => {
+    if (userData.user !== null) {
+      setUser(userData.user)
+    }
+  }, [])
   return (
     <PayStyles className="w-100">
       <div className="colors">
@@ -22,7 +31,7 @@ const PayPlans = () => {
           {/* Planes */}
           <div className="plans d-flex justify-content-center">
             <div className="middle">
-              <Plans />
+              <Plans user={user} />
             </div>
           </div>
 
