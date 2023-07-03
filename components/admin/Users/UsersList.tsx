@@ -260,6 +260,16 @@ const UsersList = () => {
   }
   const Gonvar: any = async () => {
     let sendUsers: any = [];
+    // await users.map(async (user) => {
+    //   if (user.final_date < today) {
+    //     sendUsers.push({
+    //       nombre: user.name,
+    //       apellido: user.last_name,
+    //       correo: user.email,
+    //       whatsapp: user.phone_number,
+    //     })
+    //   }
+    // })
     await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1]), filters[7], filters[8]).then(async (res) => {
       await res.map(async (user: any) => {
         sendUsers.push({
