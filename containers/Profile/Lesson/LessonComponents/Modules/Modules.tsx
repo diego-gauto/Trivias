@@ -1,9 +1,11 @@
-import router from 'next/router'
-import React, { useEffect, useState } from 'react'
-import About from './About'
-import Comments from './Comments'
-import HomeWork from './HomeWork'
-import { MainContainer } from './Module.styled'
+import React, { useEffect, useState } from "react";
+
+import router from "next/router";
+
+import About from "./About";
+import Comments from "./Comments";
+import HomeWork from "./HomeWork";
+import { MainContainer } from "./Module.styled";
 
 const Modules = ({ data, blockForNextSeason, user, season, lesson, teacherCreds, courseIds, handleClick, course, previousLesson, nextLesson, firstLesson, lastLesson }: any) => {
   const { admin }: any = router.query;
@@ -21,7 +23,7 @@ const Modules = ({ data, blockForNextSeason, user, season, lesson, teacherCreds,
     <MainContainer>
       {
         position === 1
-          ? <About previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} firstLesson={firstLesson} lastLesson={lastLesson} nextLesson={nextLesson} value={position} changeValue={changePosition} data={data} teacherCreds={teacherCreds} course={course} /> :
+          ? <About previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} firstLesson={firstLesson} lastLesson={lastLesson} nextLesson={nextLesson} value={position} changeValue={changePosition} data={data} teacherCreds={teacherCreds} course={course} user={user} /> :
           position === 3
             ? <HomeWork previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} course={course} handleClick={handleClick} value={position} changeValue={changePosition} data={data} user={user} season={season} lesson={lesson} courseIds={courseIds} /> :
             position === 4

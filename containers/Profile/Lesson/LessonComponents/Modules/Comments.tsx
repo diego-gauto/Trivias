@@ -1,13 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { DEFAULT_USER_IMG } from '../../../../../constants/paths'
-import { CommentContain, CommentInput, MainContainer, Profile } from './Comments.styled'
-import { TitleContain } from './Module.styled'
-import { FiHeart } from 'react-icons/fi';
-import { FaHeart } from 'react-icons/fa'
-import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addCommentLikeApi, addCommentToAnswerApi, addCommentToAnswerLikeApi, deleteCommentAnswerLikeApi, deleteCommentLikeApi, deleteCommentToAnswerLikeApi, retrieveComments } from '../../../../../components/api/lessons'
-import { createNotification } from '../../../../../components/api/notifications'
-import { MdVerified } from 'react-icons/md'
-import ModuleTabs from './ModuleTabs/ModuleTabs'
+import React, { useEffect, useState } from "react";
+
+import { FaHeart } from "react-icons/fa";
+import { FiHeart } from "react-icons/fi";
+import { MdVerified } from "react-icons/md";
+
+import {
+  addCommentAnswerApi,
+  addCommentAnswerLikeApi,
+  addCommentApi,
+  addCommentLikeApi,
+  addCommentToAnswerApi,
+  addCommentToAnswerLikeApi,
+  deleteCommentAnswerLikeApi,
+  deleteCommentLikeApi,
+  deleteCommentToAnswerLikeApi,
+  retrieveComments,
+} from "../../../../../components/api/lessons";
+import { createNotification } from "../../../../../components/api/notifications";
+import { DEFAULT_USER_IMG } from "../../../../../constants/paths";
+import { CommentContain, CommentInput, MainContainer, Profile } from "./Comments.styled";
+import { TitleContain } from "./Module.styled";
+import ModuleTabs from "./ModuleTabs/ModuleTabs";
+
 const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
 
   const [currentComments, setCurrentComments] = useState<any>([]);
@@ -234,7 +248,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
   return (
     <>
       <TitleContain >
-        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
+        <ModuleTabs data={data} user={user} value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <MainContainer>
