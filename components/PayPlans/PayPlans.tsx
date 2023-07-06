@@ -25,7 +25,7 @@ const PayPlans = () => {
           {/* Titulo */}
           <div className="title text-center py-5">
             <h3 className="purple h1">Planes y precios</h3>
-            <p className="yellow">¡Elige la mejor suscripcion para ti!</p>
+            <p className="yellow">¡Elige la mejor suscripción para ti!</p>
           </div>
 
           {/* Planes */}

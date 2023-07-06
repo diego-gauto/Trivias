@@ -60,7 +60,7 @@ const Anual = (props: IData) => {
             <img src={gPlus} alt="Gonvar logo" className="mt-3 me-2" />
             <div>
               <p className="blue mb-0">
-                Suscripcion Gonvar+<br />
+                Suscripción Gonvar+<br />
               </p>
               <h3 className="blue h1">Anual</h3>
             </div>
