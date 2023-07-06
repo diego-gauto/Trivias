@@ -136,10 +136,11 @@ export const Progress = styled.div`
   background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
   border-radius: 0px 10px 10px 10px;
 `;
-export const Title = styled.h1`
+export const Title = styled.h2`
   color: #3f1168;
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
+  font-weight: 600;
   margin: 0;
   padding-left: 60px;
   .span-additional {

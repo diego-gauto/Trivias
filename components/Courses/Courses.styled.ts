@@ -106,7 +106,10 @@ export const Container = styled.div`
         color: #3f1168;
         align-items: center;
         margin-bottom: 20px;
-
+        h1 {
+          font-size: 20px;
+          margin: 0;
+        }
         p {
           margin: 0;
           font-size: 20px;
@@ -139,9 +142,11 @@ export const Container = styled.div`
     }
   }
 `;
-export const Title = styled.h1`
+export const Title = styled.h3`
   font-size: 36px;
   font-family: "Montserrat", sans-serif;
+  line-height: 44px;
+  font-weight: 600;
   color: #3f1168;
   margin: 0;
   @media (max-width: 600px) {

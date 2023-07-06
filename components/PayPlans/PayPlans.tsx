@@ -20,6 +20,7 @@ const PayPlans = () => {
   }, [])
   return (
     <PayStyles className="w-100">
+      <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
       <div className="colors">
         <div className="back">
           {/* Titulo */}

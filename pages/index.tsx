@@ -129,13 +129,6 @@ const Homepage = () => {
         backgroundColor: "#ede7f2",
         overflow: "hidden",
       }} id="landing">
-      <HelmetMetaTags
-        title={"Academia de Belleza | Gonvar"}
-        image={""}
-        description={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"}
-        hashtag={"#gonvar"}
-        quote={""}
-      />
       <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} user={userData} />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}

@@ -11,7 +11,6 @@ const Landings = () => {
         maxWidth: "100% !important",
       }}>
       <Rewards></Rewards>
-
     </MainContain>
   )
 }
