@@ -33,6 +33,7 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import ModalForgot from "./Modals/ModalForgot";
+import router from "next/router";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -299,6 +300,15 @@ const Login = () => {
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+    }
+    if (localStorage.getItem("month") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
+    }
+    if (localStorage.getItem("anual") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
+    }
+    if (localStorage.getItem("nailMaster") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
     }
   }
 

@@ -122,10 +122,19 @@ const Register = () => {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}?type=subscription`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+    }
+    if (localStorage.getItem("month") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
+    }
+    if (localStorage.getItem("anual") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
+    }
+    if (localStorage.getItem("nailMaster") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
     }
   }
 

@@ -43,6 +43,7 @@ const Individual = (props: IData) => {
       )
     }
     else {
+      localStorage.setItem("nailMaster", "true");
       router.push(SIGNUP_PATH)
     }
   }

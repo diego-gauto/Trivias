@@ -46,6 +46,7 @@ const Mensual = (props: IData) => {
       router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
     }
     else {
+      localStorage.setItem("month", "true");
       router.push(SIGNUP_PATH)
     }
   }
