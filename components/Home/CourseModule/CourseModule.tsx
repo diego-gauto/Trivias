@@ -59,7 +59,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
       )
     }
     if (!loggedIn) {
-      localStorage.setItem("plan", "true");
+      localStorage.setItem("course", `${data.id}`);
       router.push(SIGNUP_PATH)
     }
   }
