@@ -110,6 +110,7 @@ const Courses = () => {
       }
     }
     else {
+      localStorage.setItem("plan", "true");
       router.push({ pathname: LOGIN_PATH })
     }
   }
