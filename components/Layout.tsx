@@ -30,7 +30,7 @@ const Layout = ({ children }: any) => {
   return (
     <Body >
       <HelmetMetaTags
-        title={"Academia de Belleza | Gonvar"}
+        title={"Academia de Belleza Online | Gonvar"}
         image={""}
         description={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"}
         hashtag={"#gonvar"}

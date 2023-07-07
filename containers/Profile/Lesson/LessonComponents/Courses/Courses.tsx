@@ -104,7 +104,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
       </HamburgerContainer>
       <MainContainer open={open}>
         <div className='course-info'>
-          <p className='title'>{course?.title}</p>
+          <h1 className='title'>{course?.title}</h1>
           <p>Un curso de <span>{course?.professors[0]?.name}</span></p>
           <div className='level-container'>
             {(course.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
