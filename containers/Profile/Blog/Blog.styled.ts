@@ -15,7 +15,7 @@ export const BlogContainer = styled.div`
     justify-content: center;
     .title {
       font-size: 30px;
-      font-weight: 500;
+      font-weight: 500 !important;
       margin-top: 90px;
     }
   }

@@ -212,9 +212,9 @@ const User = () => {
           <p className="first-text">
             PERFIL DE <span>{nameUpperCase}</span>
           </p>
-          <p className="second-text">
+          <h1 className="second-text">
             ¡Dale seguimiento<br /><span> a tu aprendizaje!</span>
-          </p>
+          </h1>
         </div>
       }
 

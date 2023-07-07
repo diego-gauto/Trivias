@@ -42,7 +42,7 @@ export const FAQ = () => {
           {views.get(1) &&
             <div className="border-top mx-3">
               <p className="py-2 animate__animated animate__fadeIn">¡Claro!<br />Cada curso terminado, con prácticas aprobadas,
-                te brinda un certificado con un folio único veificado para que peudas respaldar
+                te brinda un certificado con un folio único veificado para que puedas respaldar
                 tus conocimientos</p>
             </div>}
         </div>

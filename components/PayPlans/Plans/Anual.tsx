@@ -60,7 +60,7 @@ const Anual = (props: IData) => {
             <img src={gPlus} alt="Gonvar logo" className="mt-3 me-2" />
             <div>
               <p className="blue mb-0">
-                Suscripcion Gonvar+<br />
+                Suscripción Gonvar+<br />
               </p>
               <h3 className="blue h1">Anual</h3>
             </div>
@@ -171,7 +171,8 @@ const Anual = (props: IData) => {
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   <b>Recibe un kit gratis con diferentes productos cada dos meses, </b>
                   como acrílicos, geles, monómeros, adherentes, decoración y otros productos.<br />
-                  <i><b>Precio Real con envío: $759.38 MXN aprox.</b></i>
+                  <i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo.
+                    Solo debes pagar el envío de $245 MXN.</b></i>
                 </p>
               </div>}
           </div>

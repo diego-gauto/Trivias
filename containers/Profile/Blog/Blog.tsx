@@ -27,9 +27,9 @@ const Blog = (props: any) => {
   return (
     <BlogContainer>
       <div className="title-contain">
-        <p className="title">
+        <h1 className="title">
           Blog
-        </p>
+        </h1>
       </div>
       {
         loader ?

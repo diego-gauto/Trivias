@@ -208,7 +208,7 @@ const CancelSuscription = () => {
         {/* <br />Por eso, <b>te ofrecemos la opcion de pausar tu suscripción por un mes.</b></p> */}
         <p className="my-4">Quizás no has podido tomar tus clases o no cuentas con el dinero suficiente para continuar. </p>
         <p className="my-4">Pero debo decirte que <b>Gonvar+</b> no sólo son clases, también tienes recompensas, beneficios y certificados que <b>perderás al cancelar:</b></p>
-        {/* <p>Además al pausar tu suscripcion, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
+        {/* <p>Además al pausar tu suscripción, no solo <b>conservarás tu progreso,</b> si no que también se guardarán tus beneficios:</p> */}
         <div className="row w-100 justify-content-around">
           <div className="col-sm text-center">
             {/* <img src={GroupN} className="mb-3" /> */}

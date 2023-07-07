@@ -192,9 +192,9 @@ const RewardSlider = (props: reward_slider) => {
   }, [rewards, type])
   return (
     <BackgroundSlide type={type}>
-      <h1>
+      <h2>
         {texts.header}
-      </h1>
+      </h2>
       {
         slides.length > 0
           ?

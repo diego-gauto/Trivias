@@ -168,7 +168,7 @@ const Courses = () => {
             <div className="grey-field">
               <div className="top">
                 <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                <p>Gonvar+</p>
+                <h1>Gonvar+</h1>
               </div>
               <Title>
                 {!loading && videoCourse.title}

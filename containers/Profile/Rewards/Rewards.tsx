@@ -258,7 +258,8 @@ const Rewards = () => {
         <div className="rewards-circle">
           <div className="inside" />
         </div>
-        <p className="title">CENTRO DE <span>RECOMPENSAS</span></p>
+        <title>Recompensas</title>
+        <h1 className="title" style={{ fontWeight: 500 }}>CENTRO DE <span>RECOMPENSAS</span></h1>
       </TitleContainer>
       <RewardsTitle>
         <div className="hand-container">

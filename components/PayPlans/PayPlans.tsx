@@ -20,12 +20,13 @@ const PayPlans = () => {
   }, [])
   return (
     <PayStyles className="w-100">
+      <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
       <div className="colors">
         <div className="back">
           {/* Titulo */}
           <div className="title text-center py-5">
             <h3 className="purple h1">Planes y precios</h3>
-            <p className="yellow">¡Elige la mejor suscripcion para ti!</p>
+            <p className="yellow">¡Elige la mejor suscripción para ti!</p>
           </div>
 
           {/* Planes */}

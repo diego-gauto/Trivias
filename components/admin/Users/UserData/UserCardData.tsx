@@ -99,7 +99,7 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData, i
                 Suscripción Actual
                 <Label>
                   {
-                    (user.level === 1 || user.final_date >= today) ? "Gonvar Plus" : "Sin suscripcion"
+                    (user.level === 1 || user.final_date >= today) ? "Gonvar Plus" : "Sin suscripción"
                   }
                 </Label>
               </Info>
