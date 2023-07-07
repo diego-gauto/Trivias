@@ -1,4 +1,4 @@
-import MonthlySuscription from "../../components/MonthlySuscription/MonthlySuscription";
+import LandingSuscription from "../../components/LandingSuscription/LandingSuscription";
 import Terms from "../../components/TermsModal/Terms";
 import { MainContain } from "../../screens/Styles.styled";
 
@@ -11,7 +11,7 @@ const termsConditions = () => {
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <MonthlySuscription />
+      <LandingSuscription />
     </MainContain>
   )
 }
