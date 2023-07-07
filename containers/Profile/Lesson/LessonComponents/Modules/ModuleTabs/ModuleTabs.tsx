@@ -56,24 +56,29 @@ const ModuleTabs = (props: IModule) => {
   }
 
   const checkHw = () => {
-    let tempData = {
-      lessonId: data.id,
-      user_id: user.user_id
-    }
-    getHomeworkUserApi(tempData).then((res) => {
-      if (!!res.data.data) {
-        if (res.data.data.length > 0) {
-          if (res.data.data[0].approved === 1 && res.data.data[0].status === 1) {
-            setApprovedHw(true)
-            return;
-          } else {
-            setApprovedHw(false)
-          }
-        } else {
-          setApprovedHw(true);
-        }
+    if (course.sequential === 1) {
+      let tempData = {
+        lessonId: data.id,
+        user_id: user.user_id
       }
-    })
+      getHomeworkUserApi(tempData).then((res) => {
+        if (!!res.data.data) {
+          if (res.data.data.length > 0) {
+            if (res.data.data[0].approved === 1 && res.data.data[0].status === 1) {
+              setApprovedHw(true)
+            } else {
+              setApprovedHw(false)
+            }
+          } else {
+            setApprovedHw(true);
+          }
+        }
+      })
+    } else {
+      setApprovedHw(true)
+    }
+
+
   }
 
   useEffect(() => {
@@ -81,21 +86,26 @@ const ModuleTabs = (props: IModule) => {
   }, [setApprovedHw])
 
   const checkComplete = () => {
-    if (szn && less) {
-      let s = parseInt(szn)
-      let l = parseInt(less)
-      let check: any
-      course.seasons[s].lessons[l].users.forEach((e: any) => {
-        if (user.user_id === e) {
-          check = true
+    if (course.sequential === 1) {
+      if (szn && less) {
+        let s = parseInt(szn)
+        let l = parseInt(less)
+        let check: any
+        course.seasons[s].lessons[l].users.forEach((e: any) => {
+          if (user.user_id === e) {
+            check = true
+          }
+        });
+        if (check === undefined) {
+          return false
+        } else {
+          return check
         }
-      });
-      if (check === undefined) {
-        return false
-      } else {
-        return check
       }
+    } else {
+      return true
     }
+
   }
 
   return (
