@@ -92,7 +92,8 @@ export const SecondBox = styled.div`
     @media (max-width: 1023px) {
       display: none;
     }
-    p {
+    p,
+    h1 {
       margin: 0;
       line-height: 60px;
     }
