@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from "react";
 
+import { useFacebook, useLogin } from "react-facebook";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import es from "react-phone-number-input/locale/es.json";
 import "react-phone-number-input/style.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import { isValidPhoneNumber, parsePhoneNumberFromString } from "libphonenumber-js";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
+
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { useGoogleLogin } from "@react-oauth/google";
+
+import { facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
+import ErrorModal from "../../components/Error/ErrorModal";
+import { LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
 import {
   Background,
+  BackgroundLoader,
   Error,
   InputPhone,
   LoaderContain,
   LoaderImage,
   PurpleButton2,
   Title,
-  BackgroundLoader,
 } from "../../screens/Login.styled";
-import { accessWithAuthProvider, signInWithCreds, signUpCreds, signUpWithCreds } from "../../store/actions/AuthActions";
-import { useAuth } from "../../hooks/useAuth";
-import { isValidPhoneNumber } from "react-phone-number-input";
-import ErrorModal from "../../components/Error/ErrorModal";
-import { facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
-import { useGoogleLogin } from "@react-oauth/google";
-import { FacebookProvider, useLogin, useFacebook } from 'react-facebook';
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
-const { getCode, getName } = require('country-list');
+
+var countries = require("i18n-iso-countries");
+countries.registerLocale(require("i18n-iso-countries/langs/es.json"))
+
+
+//const { getCode, getName } = require('country-list');
 
 
 const formSchema = yup.object().shape({
@@ -140,7 +147,8 @@ const Register = () => {
 
   const parseNumber = (phone: string) => {
     const parsedNumber = parsePhoneNumberFromString(phone);
-    const country = getName(parsedNumber?.country)
+    const code = parsedNumber?.country
+    const country = countries.getName(code, "es")
     return country;
   }
 
@@ -399,6 +407,7 @@ const Register = () => {
                       countryCallingCodeEditable={false}
                       defaultCountry="MX"
                       id="input_1"
+                      labels={es}
                     />
                   </div>
                   {
