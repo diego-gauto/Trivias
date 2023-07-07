@@ -187,6 +187,20 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
   return (
     <>
       {lessons.map((less: any, index: any) => {
+        let tempIndex;
+        let lastIndex;
+        let tempPreviousSeason;
+        if (userId && index > 0 && lessons[index - 1].progress) {
+          tempIndex = lessons[index - 1].progress.findIndex((x: any) => x.user_id == userId);
+        }
+
+        if (userId && index == 0 && season > 0) {
+          tempPreviousSeason = course.seasons[season - 1].lessons[course.seasons[season - 1].lessons.length - 1];
+          if (tempPreviousSeason.progress) {
+            lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.user_id == userId);
+          }
+        }
+
         return (
           <LessonContain key={"All lesson " + index}
             style={{
@@ -196,39 +210,81 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
               boxShadow: index == lessons.length - 1 ? "0px 10px 20px -7px rgb(0 0 0 / 35%)" : "none"
             }}
           >
-            {data?.id == less.id &&
-              <CurrentCircle>
-                {index !== (lessons.length - 1) && <DividerIncomplete />}
-              </CurrentCircle>
+            {
+              course.sequential === 0 &&
+              <>
+                {data?.id == less.id &&
+                  <CurrentCircle>
+                    {index !== (lessons.length - 1) && <DividerIncomplete />}
+                  </CurrentCircle>
+                }
+                {(data?.id !== less.id && !less.users?.includes(userId)) &&
+                  <IncompleteCircle>
+                    {index !== (lessons.length - 1) && <DividerIncomplete />}
+                  </IncompleteCircle>
+                }
+                {(less.users?.includes(userId) && data?.id !== less.id) &&
+                  <ProgressCircle>
+                    {(index !== (lessons.length - 1)) && <DividerComplete />}
+                  </ProgressCircle>
+                }
+              </>
             }
+
             {
               course.sequential === 1
-                ?
-                <>
-                  {(data?.id !== less.id && !less.users?.includes(userId)) &&
+              &&
+              <>
+                {(data?.id !== less.id && !less.users?.includes(userId)) && !(season == 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
+                  season == 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] ||
+                  season > 0 && index == 0 && tempPreviousSeason.homework === 1 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status === 1 ||
+                  season > 0 && index == 0 && tempPreviousSeason.homework === 0 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
+                  season > 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
+                  season > 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]
+                ) ?
+                  <>
                     <div className='lock-icon'>
                       <img src={LOCK_ICON} />
                       {index !== (lessons.length - 1) && <DividerIncomplete />}
                     </div>
-                  }
-                </>
-                :
-                <>
-                  {(data?.id !== less.id && !less.users?.includes(userId)) &&
-                    <IncompleteCircle>
-                      {index !== (lessons.length - 1) && <DividerIncomplete />}
-                    </IncompleteCircle>
-                  }
-                </>
-            }
-
-            {(less.users?.includes(userId) && data?.id !== less.id) &&
-              <ProgressCircle>
-                {(index !== (lessons.length - 1)) && <DividerComplete />}
-              </ProgressCircle>
+                    {data?.id == less.id &&
+                      <CurrentCircle>
+                        {index !== (lessons.length - 1) && <DividerIncomplete />}
+                      </CurrentCircle>
+                    }
+                    {(less.users?.includes(userId) && data?.id !== less.id) &&
+                      <ProgressCircle>
+                        {(index !== (lessons.length - 1)) && <DividerComplete />}
+                      </ProgressCircle>
+                    }
+                  </>
+                  :
+                  <>
+                    {data?.id == less.id ?
+                      <CurrentCircle>
+                        {index !== (lessons.length - 1) && <DividerIncomplete />}
+                      </CurrentCircle>
+                      :
+                      <>
+                        {
+                          !(less.users?.includes(userId) && data?.id !== less.id) &&
+                          <IncompleteCircle>
+                            {index !== (lessons.length - 1) && <DividerIncomplete />}
+                          </IncompleteCircle>
+                        }
+                      </>
+                    }
+                    {(less.users?.includes(userId) && data?.id !== less.id) &&
+                      <ProgressCircle>
+                        {(index !== (lessons.length - 1)) && <DividerComplete />}
+                      </ProgressCircle>
+                    }
+                  </>
+                }
+              </>
             }
             {conditionalDiv(less, index)}
-          </LessonContain>
+          </LessonContain >
         )
       })}
     </>
