@@ -110,7 +110,6 @@ const BlogView = () => {
       })
     }
     if (router.query.slug) {
-      console.log(router.query.slug);
       getBlog()
     }
   }, [router.query.slug])
@@ -129,7 +128,7 @@ const BlogView = () => {
       <HelmetMetaTags
         title={blog?.title}
         image={blog?.image}
-        description={blog?.subtitle ? blog?.subtitle : "Gonvar Nails Academy"}
+        description={blog?.subtitle}
         hashtag={"#gonvar"}
         quote={"gonvar - " + blog?.title}
       />
