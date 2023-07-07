@@ -130,16 +130,20 @@ const ModuleTabs = (props: IModule) => {
           Comentarios
         </Titles>
       </div>
-      <div className='button-container'>
-        <div className='button-data' onClick={moveToPreviousLesson}>
-          <IoPlaySkipBackSharp className='btn-icon' style={firstLesson ? { color: "gray" } : {}} />
-          <p className={'btn-text ' + (firstLesson ? "gray" : "")} style={{ maxWidth: 57 }}>Lección <br />anterior</p>
+      {
+        course.sequential === 0 &&
+        <div className='button-container'>
+          <div className='button-data' onClick={moveToPreviousLesson}>
+            <IoPlaySkipBackSharp className='btn-icon' style={firstLesson ? { color: "gray" } : {}} />
+            <p className={'btn-text ' + (firstLesson ? "gray" : "")} style={{ maxWidth: 57 }}>Lección <br />anterior</p>
+          </div>
+          <div className='button-data' onClick={moveToNextLesson}>
+            <p className={'btn-text ' + ((lastLesson || blockForNextSeason || !checkComplete() || !approvedHw) ? "gray" : "")} style={{ maxWidth: 67 }}> Siguiente<br />Lección</p>
+            <IoPlaySkipForwardSharp className='btn-icon' style={(lastLesson || blockForNextSeason || !checkComplete() || !approvedHw) ? { color: "gray" } : {}} />
+          </div>
         </div>
-        <div className='button-data' onClick={moveToNextLesson}>
-          <p className={'btn-text ' + ((lastLesson || blockForNextSeason || !checkComplete() || !approvedHw) ? "gray" : "")} style={{ maxWidth: 67 }}> Siguiente<br />Lección</p>
-          <IoPlaySkipForwardSharp className='btn-icon' style={(lastLesson || blockForNextSeason || !checkComplete() || !approvedHw) ? { color: "gray" } : {}} />
-        </div>
-      </div>
+      }
+
     </div>
   )
 }
