@@ -9,7 +9,7 @@ export default function HelmetMetaTags(props: DataForHelmet) {
   let quote_tag = quote !== "" ? quote : "";
   let title_tag = title !== "" ? title : "Gonvar Nails Academy";
   let image_tag = image !== "" ? image : "/images/logo-g.png";
-  let description_tag = description !== "" ? description : "Gonvar - La mejor academia";
+  let description_tag = (description !== " ") ? description : "Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!";
   let hashtag_tag = hashtag !== "" ? hashtag : "#gonvar";
   return (
     <Helmet>
