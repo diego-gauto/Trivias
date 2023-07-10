@@ -57,7 +57,7 @@ const Final = () => {
           <h1>{title}</h1>
           <h3>
             {message}
-            <span>{span}</span>
+            <span>{" " + span}</span>
           </h3>
         </div>
       </div>

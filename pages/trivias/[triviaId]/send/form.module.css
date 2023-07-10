@@ -95,7 +95,7 @@
 .checkboxContainer {
   display: flex;
   align-items: flex-start;
-  margin-top: 30px;
+  margin: 60px 0 30px 0;
 }
 
 .checkboxContainer input {
@@ -143,10 +143,10 @@
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
   border: 0;
-  padding: 15px 25px;
+  /* padding: 15px 25px; */
   font-size: 16px;
   font-weight: 600;
-  margin-top: 2%;
+  margin-bottom: 15px;
   cursor: pointer;
 
   position: relative;
@@ -244,7 +244,7 @@ margin-bottom: 25px;
     color: red;
     position: absolute;
     width: 100%;
-    top:774px
+    top:780px
   }
 }
 

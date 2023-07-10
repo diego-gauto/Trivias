@@ -1,5 +1,5 @@
 // import "../containers/home.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 // import { useParams } from "react-router-dom";
 import Trivia from "../../../components/Trivias/trivia/trivia";
@@ -33,7 +33,7 @@ function Trivias() {
 
   const titles = [
     "¿Qué tipo de maquilladora soy",
-    "¿Qué te depara el mundo de las uñas en los próximos 3 años?",
+    "Gonvar te dice tu futuro en el mundo de las uñas",
     "¿Cuánto conozco de labiales?",
     "¿Cuánto se de maquillar pestañas",
   ];
@@ -49,7 +49,7 @@ function Trivias() {
     {
       id: 1,
       img: "/images/trivias/mujer2-removebg-preview.png",
-      title: "¿Qué te depara el mundo de las uñas en los próximos 3 años?",
+      title: "Gonvar te dice tu futuro en el mundo de las uñas",
       color: "#ffcb7d",
       trans: "#ffb800",
     },
@@ -81,6 +81,7 @@ function Trivias() {
         {
           id: 1,
           question: "Es una característica del monómero con MMA.",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Tiene bajo olor",
@@ -102,8 +103,8 @@ function Trivias() {
         },
         {
           id: 2,
-          question:
-            "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+          question: "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "100/100",
@@ -125,8 +126,8 @@ function Trivias() {
         },
         {
           id: 3,
-          question:
-            "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+          question: "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "a 45 grados",
@@ -148,8 +149,8 @@ function Trivias() {
         },
         {
           id: 4,
-          question:
-            "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+          question: "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "El tip",
@@ -172,6 +173,7 @@ function Trivias() {
         {
           id: 5,
           question: "¿En cuántas fases se divide  una aplicación de uñas?",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Pegado del tip, limado, abrillantado",
@@ -214,9 +216,9 @@ function Trivias() {
           idTemplateBrevo:7,
         },
         {
-          title: `¡Felicidades, valiente principiante!`,
-          body:`Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
-          Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.            
+          title: `Una principiante muy  aesthetic`,
+          body:`"¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
+          Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.
          `,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo:7,
@@ -229,11 +231,12 @@ function Trivias() {
       imgTrivia:"/images/trivias/imgTrivia.png",
       color: "#ffcb7d",
       trans: "#ffb800",
-      title: "Pregúntale a Gonvar ¿Qué te depara el mundo de las uñas en los próximos 3 años?",
+      title: "Gonvar te dice tu futuro en el mundo de las uñas",
       questions: [
         {
           id: 1,
           question: "Actualmente ¿has tomado o estás  tomando alguna capacitación en uñas?",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Nunca  he tomado un curso, pero deseo aprender",
@@ -255,8 +258,8 @@ function Trivias() {
         },
         {
           id: 2,
-          question:
-            "Cuando elijo mis capacitaciones me dejo llevar por:",
+          question: "Cuando elijo mis capacitaciones me dejo llevar por:",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "El costo, siempre busco lo más barato",
@@ -278,15 +281,15 @@ function Trivias() {
         },
         {
           id: 3,
-          question:
-            "Si  no obtengo resultados en los primeros intentos yo:",
+          question:"Si  no obtengo resultados en los primeros intentos yo:",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Lo intento pero solo 3 veces y lo dejo por la paz",
               correct: false,
             },
             {
-              text: "Me frustro un poco,  pero lo sigo intentando",
+              text: "Me frustro un poco, pero lo sigo intentando",
               correct: false,
             },
             {
@@ -301,11 +304,11 @@ function Trivias() {
         },
         {
           id: 4,
-          question:
-            "Cuando termino algún curso yo:",
+          question: "Cuando termino algún curso yo:",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
-              text: "Sigo Practicando y repasando para seguir mejorando",
+              text: "Sigo practicando y repasando para seguir mejorando",
               correct: true,
             },
             {
@@ -325,47 +328,47 @@ function Trivias() {
         {
           id: 5,
           question: "Mi  mayor interés en el mundo de  las uñas es :",
+          imgQuestion:"/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Solo aplicarme a mí misma y a familiares cercanos",
               correct: false,
             },
             {
-              text: "Autoemplearme y  trabajar desde mi casa",
+              text: "Autoemplearme y trabajar desde mi casa",
+              correct: false,
+            },
+            {
+              text: "Abrir un local dedicado a la aplicación y servicios de belleza",
+              correct: false,
+            },
+            {
+              text: "Abrir una academia y preparar a más personas en temas de belleza",
               correct: true,
-            },
-            {
-              text: "Abrir un local dedicado a la aplicación y  servicios de belleza",
-              correct: false,
-            },
-            {
-              text: "Abrir una academia  y  preparar a más  personas en temas de  belleza",
-              correct: false,
             },
           ],
         },
       ],
       result: [
         {
-          title: "¡Toda una profesional!",
+          title: "La perseverancia te  llevará  al éxito",
           body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad.
-          Revisa  tu correo para  ver tu futuro completo                      
+          Revisa  tu correo para  ver tu futuro completo                                
           `,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo:7,
         },
         {
-          title: "¡A un paso del éxito!",
+          title: "Tu esfuerzo será recompensado muy pronto",
           body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad.
-          Te envie un correo con algunos consejos para lograrlo                      
+          Te envie un correo con algunos consejos para lograrlo                                
           `,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo:7,
         },
         {
-          title: `¡Felicidades, valiente principiante!`,
-          body:`Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
-          Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.            
+          title: `Tus manos tienen el poder de pintar un camino lleno de éxito`,
+          body:`Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!            
          `,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo:7,
@@ -383,6 +386,7 @@ function Trivias() {
           {
             id: 1,
             question: "Es una característica del monómero con MMA.",
+            imgQuestion:"/images/trivias/imgTrivia.png",
             answers: [
               {
                 text: "Tiene bajo olor",
@@ -404,8 +408,8 @@ function Trivias() {
           },
           {
             id: 2,
-            question:
-              "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+            question:"¿Con qué gramaje de lima es correcto preparar la uña natural?",
+            imgQuestion:"/images/trivias/imgTrivia.png",
             answers: [
               {
                 text: "100/100",
@@ -427,8 +431,8 @@ function Trivias() {
           },
           {
             id: 3,
-            question:
-              "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+            question: "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+            imgQuestion:"/images/trivias/imgTrivia.png",
             answers: [
               {
                 text: "a 45 grados",
@@ -450,8 +454,8 @@ function Trivias() {
           },
           {
             id: 4,
-            question:
-              "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+            question: "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+            imgQuestion:"/images/trivias/imgTrivia.png",
             answers: [
               {
                 text: "El tip",
@@ -474,6 +478,7 @@ function Trivias() {
           {
             id: 5,
             question: "¿En cuántas fases se divide  una aplicación de uñas?",
+            imgQuestion:"/images/trivias/imgTrivia.png",
             answers: [
               {
                 text: "Pegado del tip, limado, abrillantado",
@@ -516,9 +521,9 @@ function Trivias() {
             idTemplateBrevo:7,
           },
           {
-            title: `¡Felicidades, valiente principiante`,
-            body:`Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
-            Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.            
+            title: `Una principiante muy  aesthetic`,
+            body:`¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
+            Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.                        
            `,
             img: "/images/trivias/mujerinfluencer.svg",
             idTemplateBrevo:7,
@@ -527,16 +532,20 @@ function Trivias() {
       },
   ];
 
-  // console.log(data[id][0]);
+  useEffect(() => {
+    if (questionNumber > 5) {
+      window.scrollTo(0, 0); // Desplazamiento hacia arriba al llegar a la pregunta 5
+    }
+  }, [questionNumber]);
 
   return (
     <div className={styles.app}>
-      <style jsx global>{`
+      {/* <style jsx global>{`
         body {
           margin: 0px;
           padding: 0px;
         }
-      `}</style>
+      `}</style> */}
       {questionNumber > 5 ? (
         <Result
           resultInfo={data[triviaId]?.result[RESULT_DIC[correct]]}

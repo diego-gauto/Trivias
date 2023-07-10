@@ -1,11 +1,11 @@
 
-import Trivias from "../../components/admin/Trivias/Trivias";
+import SelectorTrivias from "../../components/admin/Trivias/selectorTrivias";
 import { MainContain } from "../../screens/Styles.styled";
 
 const TriviasView = () => {
   return (
     <MainContain>
-      <Trivias />
+      <SelectorTrivias />
     </MainContain>
   )
 }

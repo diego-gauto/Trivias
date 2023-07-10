@@ -1,37 +1,18 @@
-// import "../containers/home.css";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import { useRouter } from "next/router";
 
-import Trivia from "../../../components/trivia/trivia";
-import Result from "../../../components/result/result";
-import Banner from "../../../components/banner/banner";
-import TriviaSelector from "../../../containers/triviaSelector/triviaSelector";
+import { updateTriviaApi } from "../../../../../components/api/trivias";
+import ITrivia from "../../../../../interfaces/iTrivias";
+import styles from "./update.module.css";
 
-import styles from "./index.module.css";
+const EditableTrivia = () => {
 
-function Trivias() {
-  const [questionNumber, setQuestionNumber] = useState(1);
-  const [correct, setCorrect] = useState(0);
+  const { container, inputGroup } = styles
+
   const {
     query: { triviaId },
   } = useRouter();
-  //   const { id } = useParams();
-
-  const RESULT_DIC = {
-    5: 0,
-    4: 1,
-    3: 1,
-    2: 2,
-    1: 2,
-    0: 2,
-  };
-
-  const titles = [
-    "¿Qué tipo de maquilladora soy",
-    "Gonvar te dice tu futuro en el mundo de las uñas",
-    "¿Cuánto conozco de labiales?",
-    "¿Cuánto se de maquillar pestañas",
-  ];
 
   const trivias = [
     {
@@ -64,11 +45,11 @@ function Trivias() {
     },
   ];
 
-  const data = [
+  const data: ITrivia[] = [
     {
       id: 0,
       imgSelector: "/images/trivias/mujer1.svg",
-      imgTrivia:"/images/trivias/imgTrivia.png",
+      imgTrivia: "/images/trivias/imgTrivia.png",
       color: "#C57DFF",
       trans: "#9115f7",
       title: "¿Qué tipo de maquilladora soy?",
@@ -76,6 +57,7 @@ function Trivias() {
         {
           id: 1,
           question: "Es una característica del monómero con MMA.",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Tiene bajo olor",
@@ -97,8 +79,8 @@ function Trivias() {
         },
         {
           id: 2,
-          question:
-            "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+          question: "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "100/100",
@@ -120,8 +102,8 @@ function Trivias() {
         },
         {
           id: 3,
-          question:
-            "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+          question: "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "a 45 grados",
@@ -143,8 +125,8 @@ function Trivias() {
         },
         {
           id: 4,
-          question:
-            "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+          question: "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "El tip",
@@ -167,6 +149,7 @@ function Trivias() {
         {
           id: 5,
           question: "¿En cuántas fases se divide  una aplicación de uñas?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Pegado del tip, limado, abrillantado",
@@ -196,7 +179,7 @@ function Trivias() {
           Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.            
           `,
           img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          idTemplateBrevo: 7,
         },
         {
           title: "¡A un paso del éxito!",
@@ -206,22 +189,22 @@ function Trivias() {
           No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.            
           `,
           img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          idTemplateBrevo: 7,
         },
         {
           title: `Una principiante muy  aesthetic`,
-          body:`"¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
+          body: `"¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
           Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.
          `,
           img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          idTemplateBrevo: 7,
         },
       ],
     },
     {
       id: 1,
       imgSelector: "/images/trivias/mujer2-removebg-preview.png",
-      imgTrivia:"/images/trivias/imgTrivia.png",
+      imgTrivia: "/images/trivias/imgTrivia.png",
       color: "#ffcb7d",
       trans: "#ffb800",
       title: "Gonvar te dice tu futuro en el mundo de las uñas",
@@ -229,6 +212,7 @@ function Trivias() {
         {
           id: 1,
           question: "Actualmente ¿has tomado o estás  tomando alguna capacitación en uñas?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Nunca  he tomado un curso, pero deseo aprender",
@@ -250,8 +234,8 @@ function Trivias() {
         },
         {
           id: 2,
-          question:
-            "Cuando elijo mis capacitaciones me dejo llevar por:",
+          question: "Cuando elijo mis capacitaciones me dejo llevar por:",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "El costo, siempre busco lo más barato",
@@ -273,8 +257,8 @@ function Trivias() {
         },
         {
           id: 3,
-          question:
-            "Si  no obtengo resultados en los primeros intentos yo:",
+          question: "Si  no obtengo resultados en los primeros intentos yo:",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Lo intento pero solo 3 veces y lo dejo por la paz",
@@ -296,8 +280,8 @@ function Trivias() {
         },
         {
           id: 4,
-          question:
-            "Cuando termino algún curso yo:",
+          question: "Cuando termino algún curso yo:",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Sigo practicando y repasando para seguir mejorando",
@@ -320,6 +304,7 @@ function Trivias() {
         {
           id: 5,
           question: "Mi  mayor interés en el mundo de  las uñas es :",
+          imgQuestion: "/images/trivias/imgTrivia.png",
           answers: [
             {
               text: "Solo aplicarme a mí misma y a familiares cercanos",
@@ -347,7 +332,7 @@ function Trivias() {
           Revisa  tu correo para  ver tu futuro completo                                
           `,
           img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          idTemplateBrevo: 7,
         },
         {
           title: "Tu esfuerzo será recompensado muy pronto",
@@ -355,213 +340,319 @@ function Trivias() {
           Te envie un correo con algunos consejos para lograrlo                                
           `,
           img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          idTemplateBrevo: 7,
         },
         {
           title: `Tus manos tienen el poder de pintar un camino lleno de éxito`,
-          body:`Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!            
+          body: `Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!            
          `,
           img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          idTemplateBrevo: 7,
         },
       ],
     },
-      {
-        id: 2,
-        imgSelector: "/images/trivias/mujer3.svg",
-        imgTrivia:"/images/trivias/imgTrivia.png",
-        color: "#7dffa2",
-        trans: "#00c620",
-        title: "¿Qué nivel de manicurista eres?",
-        questions: [
-          {
-            id: 1,
-            question: "Es una característica del monómero con MMA.",
-            answers: [
-              {
-                text: "Tiene bajo olor",
-                correct: false,
-              },
-              {
-                text: "Es un monómero dental de alto riesgo para la salud cuando se usa para aplicación de uñas",
-                correct: true,
-              },
-              {
-                text: "Ideal para uñas acrilicas",
-                correct: false,
-              },
-              {
-                text: "Es un monómero seguro",
-                correct: false,
-              },
-            ],
-          },
-          {
-            id: 2,
-            question:
-              "¿Con qué gramaje de lima es correcto preparar la uña natural?",
-            answers: [
-              {
-                text: "100/100",
-                correct: false,
-              },
-              {
-                text: "80/80",
-                correct: false,
-              },
-              {
-                text: "150/150",
-                correct: false,
-              },
-              {
-                text: "180 0 220",
-                correct: true,
-              },
-            ],
-          },
-          {
-            id: 3,
-            question:
-              "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
-            answers: [
-              {
-                text: "a 45 grados",
-                correct: true,
-              },
-              {
-                text: "a 90 grados",
-                correct: false,
-              },
-              {
-                text: "a 120 grados",
-                correct: false,
-              },
-              {
-                text: "a 180 grados",
-                correct: false,
-              },
-            ],
-          },
-          {
-            id: 4,
-            question:
-              "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
-            answers: [
-              {
-                text: "El tip",
-                correct: false,
-              },
-              {
-                text: "El molde",
-                correct: false,
-              },
-              {
-                text: "El ápice o apex",
-                correct: true,
-              },
-              {
-                text: "La zona de cutícula",
-                correct: false,
-              },
-            ],
-          },
-          {
-            id: 5,
-            question: "¿En cuántas fases se divide  una aplicación de uñas?",
-            answers: [
-              {
-                text: "Pegado del tip, limado, abrillantado",
-                correct: false,
-              },
-              {
-                text: "Colocación del molde, limado , abrillantado",
-                correct: false,
-              },
-              {
-                text: "Aplicación de producto, limado, abrillantado",
-                correct: false,
-              },
-              {
-                text: "preparación de la uña natural, aplicación del producto, limado, finalizado",
-                correct: true,
-              },
-            ],
-          },
-        ],
-        result: [
-          {
-            title: "¡Toda una profesional!",
-            body: `Se nota tu experiencia a kilómetros.
+    {
+      id: 2,
+      imgSelector: "/images/trivias/mujer3.svg",
+      imgTrivia: "/images/trivias/imgTrivia.png",
+      color: "#7dffa2",
+      trans: "#00c620",
+      title: "¿Qué nivel de manicurista eres?",
+      questions: [
+        {
+          id: 1,
+          question: "Es una característica del monómero con MMA.",
+          imgQuestion: "/images/trivias/imgTrivia.png",
+          answers: [
+            {
+              text: "Tiene bajo olor",
+              correct: false,
+            },
+            {
+              text: "Es un monómero dental de alto riesgo para la salud cuando se usa para aplicación de uñas",
+              correct: true,
+            },
+            {
+              text: "Ideal para uñas acrilicas",
+              correct: false,
+            },
+            {
+              text: "Es un monómero seguro",
+              correct: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
+          answers: [
+            {
+              text: "100/100",
+              correct: false,
+            },
+            {
+              text: "80/80",
+              correct: false,
+            },
+            {
+              text: "150/150",
+              correct: false,
+            },
+            {
+              text: "180 0 220",
+              correct: true,
+            },
+          ],
+        },
+        {
+          id: 3,
+          question: "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
+          answers: [
+            {
+              text: "a 45 grados",
+              correct: true,
+            },
+            {
+              text: "a 90 grados",
+              correct: false,
+            },
+            {
+              text: "a 120 grados",
+              correct: false,
+            },
+            {
+              text: "a 180 grados",
+              correct: false,
+            },
+          ],
+        },
+        {
+          id: 4,
+          question: "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
+          answers: [
+            {
+              text: "El tip",
+              correct: false,
+            },
+            {
+              text: "El molde",
+              correct: false,
+            },
+            {
+              text: "El ápice o apex",
+              correct: true,
+            },
+            {
+              text: "La zona de cutícula",
+              correct: false,
+            },
+          ],
+        },
+        {
+          id: 5,
+          question: "¿En cuántas fases se divide  una aplicación de uñas?",
+          imgQuestion: "/images/trivias/imgTrivia.png",
+          answers: [
+            {
+              text: "Pegado del tip, limado, abrillantado",
+              correct: false,
+            },
+            {
+              text: "Colocación del molde, limado , abrillantado",
+              correct: false,
+            },
+            {
+              text: "Aplicación de producto, limado, abrillantado",
+              correct: false,
+            },
+            {
+              text: "preparación de la uña natural, aplicación del producto, limado, finalizado",
+              correct: true,
+            },
+          ],
+        },
+      ],
+      result: [
+        {
+          title: "¡Toda una profesional!",
+          body: `Se nota tu experiencia a kilómetros.
             Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga.
             Explota tus capacidades y lleva al máximo tus  habilidades.
             Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.            
             `,
-            img: "/images/trivias/mujerinfluencer.svg",
-            idTemplateBrevo:7,
-          },
-          {
-            title: "¡A un paso del éxito!",
-            body: `Se notan tus ganas de crecer en este mágico mundo de las uñas.
+          img: "/images/trivias/mujerinfluencer.svg",
+          idTemplateBrevo: 7,
+        },
+        {
+          title: "¡A un paso del éxito!",
+          body: `Se notan tus ganas de crecer en este mágico mundo de las uñas.
             En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas.
             Eres una persona que aprovecha cada oportunidad para seguir aprendiendo y aunque a veces te  cuesta, con un poco de práctica logras siempre tus objetivos.
             No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.            
             `,
-            img: "/images/trivias/mujerinfluencer.svg",
-            idTemplateBrevo:7,
-          },
-          {
-            title: `Una principiante muy  aesthetic`,
-            body:`¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
+          img: "/images/trivias/mujerinfluencer.svg",
+          idTemplateBrevo: 7,
+        },
+        {
+          title: `Una principiante muy  aesthetic`,
+          body: `¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
             Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.                        
            `,
-            img: "/images/trivias/mujerinfluencer.svg",
-            idTemplateBrevo:7,
-          },
-        ],
-      },
+          img: "/images/trivias/mujerinfluencer.svg",
+          idTemplateBrevo: 7,
+        },
+      ],
+    },
   ];
 
-  // console.log(data[id][0]);
+
+  const [updatedTrivia, setUpdatedTrivia] = useState<ITrivia | null>(null);
+
+  const trivia = data[Number(triviaId)] || null;
+  console.log(trivia)
+
+  useEffect(() => {
+    setUpdatedTrivia(trivia)
+  }, [])
+  // setUpdatedTrivia(trivia)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUpdatedTrivia({
+      ...updatedTrivia!,
+      [name]: value,
+    });
+  };
+
+  const handleQuestionChange = (questionId: number, answerIndex: number, isCorrect: boolean) => {
+    setUpdatedTrivia((prevState: any) => {
+      const updatedQuestions = prevState.questions.map((question: any) => {
+        if (question.id === questionId) {
+          const updatedAnswers = question.answers.map((answer: any, index: number) => {
+            if (index === answerIndex) {
+              return {
+                ...answer,
+                correct: isCorrect,
+              };
+            }
+            return answer;
+          });
+
+          return {
+            ...question,
+            answers: updatedAnswers,
+          };
+        }
+        return question;
+      });
+
+      return {
+        ...prevState,
+        questions: updatedQuestions,
+      };
+    });
+  };
+
+  const handleCancel = () => {
+
+  };
+
+  const handleUpdate = () => {
+    updateTriviaApi(Number(triviaId), updatedTrivia);
+  };
 
   return (
-    <>
-      <style jsx global>{`
-        body {
-          margin: 0px;
-          padding: 0px;
-        }
-      `}</style>
-      {questionNumber > 5 ? (
-        <Result
-          resultInfo={data[triviaId]?.result[RESULT_DIC[correct]]}
-          result={RESULT_DIC[correct]}
+    <div className={container}>
+      <div className={inputGroup}>
+        <label htmlFor="imgSelector">Imagen Selector:</label>
+        <input
+          type="text"
+          id="imgSelector"
+          name="imgSelector"
+          value={updatedTrivia?.imgSelector}
+          onChange={handleInputChange}
         />
-      ) : (
-        <div className={styles.app}>
-          <div className={styles.main}>
-            <div className={styles.trivia}>
-              <Trivia
-                triviaTitle={data[triviaId]?.title}
-                data={data[triviaId]?.questions}
-                questionNumber={questionNumber}
-                setQuestionNumber={setQuestionNumber}
-                setCorrect={setCorrect}
+      </div>
+
+      <div className={inputGroup}>
+        <label htmlFor="color">Color:</label>
+        <input
+          type="text"
+          id="color"
+          name="color"
+          value={updatedTrivia?.color}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className={inputGroup}>
+        <label htmlFor="trans">Trans:</label>
+        <input
+          type="text"
+          id="trans"
+          name="trans"
+          value={updatedTrivia?.trans}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className={inputGroup}>
+        <label htmlFor="title">Título:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={updatedTrivia?.title}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      {updatedTrivia?.questions.map((question) => (
+        <div key={question.id} className={inputGroup}>
+          <label htmlFor={`question-${question.id}`}>Pregunta {question.id}:</label>
+          <input
+            type="text"
+            id={`question-${question.id}`}
+            name={`question-${question.id}`}
+            value={question.question}
+            onChange={handleInputChange}
+          />
+
+          {question.answers.map((answer, index) => (
+            <div key={index}>
+              <label htmlFor={`answer-${question.id}-${index}`}>Respuesta {index + 1}:</label>
+              <input
+                type="text"
+                id={`answer-${question.id}-${index}`}
+                name={`answer-${question.id}-${index}`}
+                value={answer.text}
+                onChange={handleInputChange}
+              />
+
+              <input
+                type="checkbox"
+                checked={answer.correct}
+                onChange={(e) =>
+                  handleQuestionChange(
+                    question.id,
+                    index,
+                    e.target.checked
+                  )
+                }
               />
             </div>
-            <div className={styles.publicity}></div>
-          </div>
+          ))}
         </div>
-      )}
-      <Banner />
+      ))}
 
-      <h3 className={styles.subtitle} style={{ marginTop: 2 + "rem" }}>
-        Más cuestionarios
-      </h3>
-      <div className={styles.triviaSelectorContainer}>
-        <TriviaSelector trivias={trivias} />
-      </div>
-    </>
+      <button onClick={handleCancel}>Cancelar</button>
+      <button onClick={handleUpdate}>Actualizar</button>
+      <p>Trivia {triviaId}</p>
+    </div>
   );
-}
+};
 
-export default Trivias;
+export default EditableTrivia;
