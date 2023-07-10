@@ -22,7 +22,7 @@ import {
   updateUserPassword,
 } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Error,
@@ -309,6 +309,9 @@ const Login = () => {
     }
     if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
+    }
+    if (localStorage.getItem("plan") === "true") {
+      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
     }
   }
 
