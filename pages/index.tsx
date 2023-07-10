@@ -12,8 +12,22 @@ import { getLandingCoursesApi } from "../components/api/lessons";
 import { getLandingProductApi, getLandingReviewApi } from "../components/api/admin";
 import WelcomeModal from "../components/WelcomeModal/WelcomeModal";
 import HelmetMetaTags from "../components/HelmetMetaTags/HelmetMetaTags";
-
-const Homepage = () => {
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+type Repo = {
+  data: [],
+}
+export const getServerSideProps: GetServerSideProps<{ courses: Repo }> = async ({ req, res }: any) => {
+  const result = await fetch("https://gonvar.inowu.dev/" + "courses/getCourses");
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+  const courses = await result.json();
+  return {
+    props: { courses }
+  }
+}
+const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [loading, setLoading] = useState(true);
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
   const [courseGonvarPlus, setCourseGonvarPlus] = useState<any>([]);
