@@ -22,6 +22,8 @@ const PaymentFailedAlineacion = () => {
   useEffect(() => {
     if (userDataAuth.user !== null) {
       setUserData(userDataAuth.user);
+    } else {
+      window.location.href = "/preview";
     }
   }, [userDataAuth])
 
