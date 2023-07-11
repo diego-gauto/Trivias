@@ -10,7 +10,6 @@ const paymentFailedAnualScreen = () => {
         width: "100%",
         padding: "0",
         maxWidth: "100% !important",
-        height: "100vh"
       }}>
       <PaymentFailedSubscriptionAnual></PaymentFailedSubscriptionAnual>
     </MainContain>
