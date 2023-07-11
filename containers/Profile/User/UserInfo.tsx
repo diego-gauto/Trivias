@@ -142,6 +142,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     })
   }
   const parseNumber = (phone: string) => {
+    if (!phone.includes("+")) {
+      phone = "+" + phone;
+    }
     const parsedNumber = parsePhoneNumberFromString(phone);
     const country = getName(parsedNumber?.country)
     return country;

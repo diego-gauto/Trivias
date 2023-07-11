@@ -560,6 +560,7 @@ export const LoaderContain = styled.div`
 `;
 export const InputPhone = styled(PhoneInput)`
   select {
+    opacity: 0;
     position: absolute;
     z-index: 1;
     background: transparent;
