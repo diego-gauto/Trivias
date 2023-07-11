@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import { PREVIEW_PATH } from '../../constants/paths';
 import { ThankYouContainer } from './ThankYou.styled';
+import { useAuth } from '../../hooks/useAuth';
 
 const ThankYouSubscriptionAnual = () => {
+  const [userData, setUserData] = useState<any>(null);
 
   const redirecTo = () => {
     window.location.href = "/preview";
@@ -15,20 +17,30 @@ const ThankYouSubscriptionAnual = () => {
     }, 5000)
   }, [])
 
+  var userDataAuth = useAuth();
+  useEffect(() => {
+    if (userDataAuth.user !== null) {
+      setUserData(userDataAuth.user);
+    }
+  }, [userDataAuth])
+
+  const goTo = () => {
+    window.location.href = "/preview";
+  }
+
   return (
     <ThankYouContainer>
-      <div className='modal-costum'>
-        <h1>¡Grandes noticias</h1>
-        <p><span>¡Tu compra ha sido exitosa!</span> Enviamos el <br />
-          recibo de pago a tu correo electrónico. <br /> <br />
-
-          Ahora formas parte de la comunidad Gonvar+. <br />
-          <b>¡No esperes más y comienza a aprender!</b></p>
-
-        <button className="full">
-          <Link href={PREVIEW_PATH}>Ver los cursos</Link>
-        </button>
+      <div className='left'>
+        <h1>Felicidades tu compra ha <br /> sido exitosa, <span>{userData?.name}!</span></h1>
+        <p>Ahora puedes acceder a nuestros cursos de manera <br />
+          directa, aprende de las mejores maquilladoras en <br />
+          diferentes especialidades.</p>
+        <div className='buttons'>
+          <button className='top' onClick={goTo}>Iniciar curso</button>
+          {/* <button className='bottom'>Descargar factura</button> */}
+        </div>
       </div>
+      <img src="/images/purchase/payment.png" alt="" />
     </ThankYouContainer>
   )
 }
