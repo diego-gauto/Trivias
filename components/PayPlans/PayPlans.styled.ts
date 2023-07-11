@@ -45,6 +45,14 @@ export const PayStyles = styled.div`
       font-size: large;
     }
   }
+  .continue {
+    font-weight: 500;
+    padding-inline: 30px;
+    background: none;
+    border-radius: 20px;
+    border: 1px solid #3f1168;
+    color: #3f1168;
+  }
   @media (max-width: 600px) {
     .py-5 {
       padding-inline: 10px;

@@ -1,5 +1,5 @@
 import router from "next/router";
-import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
@@ -18,6 +18,12 @@ const PayPlans = () => {
       setUser(userData.user)
     }
   }, [])
+
+  const goTo = () => {
+    router.push({ pathname: PREVIEW_PATH })
+  }
+
+
   return (
     <PayStyles className="w-100">
       <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
@@ -37,14 +43,15 @@ const PayPlans = () => {
           </div>
 
           {/* Subtitulo Planes */}
-          <div className="subtitle text-center py-5">
+          <div className="subtitle text-center py-3">
             <h3 className="h4"><b>Nunca subiremos el precio</b> si mantienes tu suscripción activa.</h3>
-            {/* <div className="d-inline-flex">
+            <div className="d-inline-flex">
               <p className="no-bold mt-3">Usa el método de pago más cómodo para ti: </p>
               <img src={tarjetas} alt="cards" className=" align-self-center" />
               <img src={oxxo} alt="oxxo" className=" align-self-center" />
-            </div> */}
+            </div>
           </div>
+          <button className="continue my-4 d-flex mx-auto" onClick={goTo}>Continuar sin suscripción</button>
 
           {/* Banner */}
           <div className="break  py-2 px-5">
