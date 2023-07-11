@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang={appConfig.locale}>
         <Head>
-          <link rel="icon" href="/images/logo.png" />
+          <link rel="icon" href="/images/logo-g.png" />
           <meta name="google-site-verification" content="ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw" />
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
