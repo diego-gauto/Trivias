@@ -1,6 +1,8 @@
 
+import { useEffect, useState } from "react";
 
-import { FAQ } from "../PayPlans/FAQ/FAQ";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+
 import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
@@ -32,9 +34,39 @@ const testimonios = "/images/landing_suscription/Testimonios.png"
 const inspo = "/images/landing_suscription/inspo.png"
 const pointWatsap = "/images/landing_suscription/point_at_button.png"
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png"
+const lineaMaq = "/images/landing_suscription/maquillaje.png"
+const lineaUñas = "/images/landing_suscription/est_uñas.png"
+const lineaArteU = "/images/landing_suscription/art_uñas.png"
+const lineaDif = "/images/landing_suscription/Line dif.png"
+const muyFacil = "/images/landing_suscription/muy facil.png"
+const facil = "/images/landing_suscription/facil.png"
+const intermedio = "/images/landing_suscription/intermedio.png"
+const avanzado = "/images/landing_suscription/avanzado.png"
+const master = "/images/landing_suscription/master.png"
+const rewardBack = "/images/landing_suscription/recompensas_back.png"
+const news = "/images/landing_suscription/newsletter.png"
 
+let views = new Map<number, boolean>();
+views.set(1, false);
+views.set(2, false);
+views.set(3, false);
+views.set(4, false);
 
 const LandingSuscription = () => {
+  const [ver, setver] = useState(true)
+
+  const verQ = (q: any) => {
+    setver(!ver)
+    if (views.get(q)) {
+      views.set(q, false)
+    } else {
+      views.set(q, true)
+    }
+  }
+
+  useEffect(() => {
+
+  }, [setver])
   const mensual = "$149 mxn/mes"
   const anual = "$1,599 mxn/anual"
   return (
@@ -118,11 +150,18 @@ const LandingSuscription = () => {
 
 
       <div className="spacing">
-        <h1>Nuestra suscripción cuneta con <br />
+        <h1>Nuestra suscripción cuenta con <br />
           <b className="p-pink">cursos de diferentes grados de dificultad,</b><br />
           desde principiantes hasta niveles más avanzados.</h1>
 
-        {/* difficulties */}
+        <div className="dif-lines spacing">
+          <img src={lineaDif} className="behind" />
+          <img src={muyFacil} className="level" />
+          <img src={facil} className="level" />
+          <img src={intermedio} className="level" />
+          <img src={avanzado} className="level" />
+          <img src={master} className="level" />
+        </div>
 
         <h2 className="fst-italic">No importa si vas comenzando o si ya tienes conocimientos, <br />
           te aseguramos que tenemos un curso para ti.</h2>
@@ -133,16 +172,40 @@ const LandingSuscription = () => {
         <h2 className="bold">Además, en la plataforma encontrarás diferentes</h2>
         <h1 className="big-title p-pink">Líneas de aprendizaje</h1>
 
-        {/* lineas de aprendizaje */}
+        <div className="teach-lines spacing">
+          <div className="lines m-0">
+            <img src={lineaArteU} />
+            <div className="line-desc">
+              <h2 className="bold">Arte en Uñas</h2>
+              <h3 className="p-pink fw-normal">Linea 1</h3>
+            </div>
+          </div>
+
+          <div className="lines m-0">
+            <img src={lineaUñas} />
+            <div className="line-desc">
+              <h2 className="bold">Estructura de Uñas</h2>
+              <h3 className="p-pink fw-normal">Linea 2</h3>
+            </div>
+          </div>
+
+          <div className="lines m-0">
+            <img src={lineaMaq} />
+            <div className="line-desc">
+              <h2 className="bold">Maquillaje</h2>
+              <h3 className="p-pink fw-normal">Linea 3</h3>
+            </div>
+          </div>
+        </div>
 
         <h2 className="bold">Así tendrás la oportunidad de <br /><b className="p-pink">aprender desde
           lo básico hasta convetirte en Master.</b></h2>
       </div>
 
 
-      <div className="spacing d-flex text-start w-75">
+      <div className="all-center">
         <img src={certificadoMujer} className="mx-5" />
-        <div className="w-50 pt-5">
+        <div className="w-50 pt-5 text-start">
           <h1 className="p-pink big-title mb-4">Certificado FUV</h1>
           <h2 className="bold mb-4">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
             <b className="p-pink">obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
@@ -165,17 +228,17 @@ const LandingSuscription = () => {
             <button className="btn up-down">Comienza ahora<br /> por {anual}</button>
           </div>
         </div>
-        <img src={asesoriaTel} />
+        <img src={asesoriaTel} className="ms-3" />
       </div>
 
 
-      <div className="spacing text-start w-75">
-        <div className="d-flex justify-content-center">
+      <div className="spacing">
+        <div className="all-center">
           <img src={miniLogo} className="mx-3 miniLogo" />
           <h1 className="text-start">Recibe <b className="p-pink">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h1>
         </div>
-        <div className="m-0 d-flex">
-          <div className="m-0">
+        <div className="m-0 all-center">
+          <div className="m-0 w-auto">
             <div className="list">
               <img src={envio} className="me-3" />
               <h3><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h3>
@@ -213,7 +276,7 @@ const LandingSuscription = () => {
               </div>
             </div>
           </div>
-          <div className="right-img">
+          <div className="w-auto">
             <img src={envioMujer} />
           </div>
         </div>
@@ -221,7 +284,7 @@ const LandingSuscription = () => {
       </div>
 
       <div className="spacing d-flex">
-        <img src={chica} className="w-25 ms-5" />
+        <img src={chica} className="ms-5 chica-img" />
         <div className="m-0">
           <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>
           <h1 className="p-pink bolder">Más de 60 cursos completso</h1>
@@ -233,6 +296,10 @@ const LandingSuscription = () => {
 
 
       <div className="spacing">
+        <div className="side-images">
+          <img src={rewardBack} />
+          <img src={rewardBack} className="rotate-img" />
+        </div>
         <div className="m-0 align-items-center d-flex justify-content-center">
           <img src={rewards} className="me-3" />
           <h2>CENTRO DE <b>RECOMPENSAS</b></h2>
@@ -322,14 +389,95 @@ const LandingSuscription = () => {
 
       <div className="spacing">
         <h2 className="p-pink">Preguntas Frecuentes</h2>
-        <div className="m-5 px-5 faq-bold d-flex justify-content-center">
-          <FAQ />
+        <div className="faq">
+          <div className="all-center">
+            <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
+              <div className={`q ${views.get(1) && 'open-q'}`}>
+                <p className={`title`}>¿Entregan reconocimiento?</p>
+                {views.get(1) ?
+                  <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
+              </div>
+
+              <div className='border-top'>
+                <p className="a">¡Claro!<br />Cada curso terminado, con prácticas aprobadas,
+                  te brinda un certificado con un folio único veificado para que puedas respaldar
+                  tus conocimientos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="all-center">
+            <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
+              <div className={`q ${views.get(2) && 'open-q'}`}>
+                <p className={`title`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
+                {views.get(2) ?
+                  <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
+              </div>
+
+              <div className="border-top">
+                <p className="a">Nuestros métodos de pago son súper cómodos.<br />
+                  Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
+                  <i>(El cobro se realiza de manera automática mes con mes por la cantidad
+                    de $149 mxn u 8 dls.)</i><br />
+                  Si prefieres pagar en transferencia, deposito en Oxxo o Paypal, está disponible la anualidad,
+                  $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
+                    ningún cobro adicional por un año).</i></p>
+              </div>
+            </div>
+          </div>
+
+          <div className="all-center">
+            <div className={`q-container ${views.get(3) ? 'max' : 'min'}`} onClick={() => verQ(3)}>
+              <div className={`q ${views.get(3) && 'open-q'}`}>
+                <p className={`title`}>¿Puedo cancelar en cualquier momento?</p>
+                {views.get(3) ?
+                  <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
+              </div>
+
+              <div className="border-top">
+                <p className="a">Así es, tú eliges libremente cuánto tiempo deseas aprender y gozar de todos nuestros beneficios.<br />
+                  Todos los descuentos a los que tienes derecho se pierden al momento de cancelar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="all-center">
+            <div className={`q-container ${views.get(4) ? 'max' : 'min'}`} onClick={() => verQ(4)}>
+              <div className={`q ${views.get(4) && 'open-q'}`}>
+                <p className={`title`}>¿Puedo inscribirme desde cualquier pais?</p>
+                {views.get(4) ?
+                  <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
+              </div>
+
+              <div className="border-top">
+                <p className="a">Si, nuestra plataforma está diseñada para poder utilizarse desde
+                  cualquier lugar del mundo que cuente con acceso a  internet y puedes disfrutar desde un
+                  celular, tableta electrónica o computadora.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
+      <div className="footer-footer all-center">
+        <div className="inside-footer">
+          <div className="info">
+            <h1>Suscríbete a nuestro Newsletter</h1>
+            <p>Mantente actualizado en temas de la industria de la
+              belleza y futuras promociones de Gonvar.</p>
+            <div className="email-send m-0">
+              <input className="email-input" placeholder="Escribe tu e-mail"></input>
+              <button className="email-button">Suscribirme</button>
+            </div>
+            <div className="email-send m-0 mt-2 p-0">
+              <button className="email-button ">Visita nuestro blog</button>
+            </div>
 
-
-      {/* footer footer */}
+          </div>
+          <img className="img" src={news} />
+        </div>
+      </div>
     </SuscriptionContain >
   )
 }
