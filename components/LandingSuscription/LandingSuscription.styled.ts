@@ -64,6 +64,28 @@ export const SuscriptionContain = styled.div`
 		margin-top: 50px;
 		margin-bottom: 50px;
 	}
+
+	.group-buttons {
+		margin-top: 25px;
+		margin-bottom: 25px;
+		width: 100%;
+		button {
+			font-style: italic;
+			margin-inline: 25px;
+			border: none;
+			border-radius: 16px;
+			color: white;
+			padding-inline: 30px;
+			background-image: linear-gradient(to right bottom, #aa1bc4, #eb7c2d);
+		}
+		.center {
+			margin-top: 25px;
+			margin-bottom: 25px;
+			display: flex;
+			justify-content: center;
+		}
+	}
+
 	.back-ghosts {
 		position: absolute;
 		z-index: -1;
@@ -278,13 +300,42 @@ export const SuscriptionContain = styled.div`
 		display: inline-flex;
 		justify-content: center;
 		width: 70%;
+		.points {
+			&:hover {
+				background: linear-gradient(to bottom right, #ff8900, #d244d1, #962dec);
+			}
+		}
+		.time {
+			&:hover {
+				background: linear-gradient(to bottom right, #00da5f, #3d86b8);
+			}
+		}
+		.awards {
+			&:hover {
+				background: linear-gradient(to bottom right, #019fff, #9603ed);
+			}
+		}
 		.reward-card {
 			background-color: #ffffff;
 			position: relative;
-			width: 310px;
+			max-width: 350px;
+			min-width: 310px;
+			min-height: 450px;
 			border-radius: 55px;
 			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-			margin: 20px;
+			margin: 30px;
+			.normal-card {
+				transition: 0.2s ease;
+				display: unset;
+			}
+			.hover-card {
+				transition: 0.2s ease;
+				color: #ffffff;
+				display: none;
+				.yellow {
+					color: #ffb413;
+				}
+			}
 			.blue {
 				color: #3965f8;
 			}
@@ -294,27 +345,16 @@ export const SuscriptionContain = styled.div`
 			.title-img {
 				position: absolute;
 			}
-		}
-	}
-
-	.group-buttons {
-		margin-top: 25px;
-		margin-bottom: 25px;
-		width: 100%;
-		button {
-			font-style: italic;
-			margin-inline: 25px;
-			border: none;
-			border-radius: 16px;
-			color: white;
-			padding-inline: 30px;
-			background-image: linear-gradient(to right bottom, #aa1bc4, #eb7c2d);
-		}
-		.center {
-			margin-top: 25px;
-			margin-bottom: 25px;
-			display: flex;
-			justify-content: center;
+			&:hover {
+				.normal-card {
+					transition: 0.2s ease;
+					display: none;
+				}
+				.hover-card {
+					transition: 0.2s ease;
+					display: unset;
+				}
+			}
 		}
 	}
 

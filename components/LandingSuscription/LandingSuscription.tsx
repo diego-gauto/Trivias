@@ -54,6 +54,9 @@ const certifB3 = "/images/landing_suscription/back_certif_3.png"
 const certifB4 = "/images/landing_suscription/back_certif_4.png"
 const goldStar = "/images/landing_suscription/StarBenefits.png"
 const envioG = "/images/landing_suscription/ghost_envio.png"
+const cursoR = "/images/landing_suscription/cursos_recompensa.png"
+const tiempoR = "/images/landing_suscription/tiempo_recompensa.png"
+const puntoR = "/images/landing_suscription/puntos_recompensa.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -118,6 +121,7 @@ const LandingSuscription = () => {
             <button>Pedicura</button>
           </div>
         </div>
+
         <div className="row d-flex justify-content-center">
           <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
             <img src={cursoBackground} alt="Curso" />
@@ -257,7 +261,7 @@ const LandingSuscription = () => {
 
       <div className="spacing">
         <div className="all-center">
-          <img src={miniLogo} className="mx-3 miniLogo" />
+          <img src={miniLogo} className="mx-3" />
           <h1 className="text-start">Recibe <b className="p-pink">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h1>
         </div>
         <div className="m-0 all-center">
@@ -331,34 +335,59 @@ const LandingSuscription = () => {
         </div>
 
         <div className="card-container">
-          <div className="reward-card">
-            <div className="all-center">
-              <img src={pointReward} className="title-img" />
-              <img src={pointRewardOut} className="title-img" />
+          <div className="reward-card points">
+            <div className="normal-card">
+              <div className="all-center">
+                <img src={pointReward} className="title-img" />
+                <img src={pointRewardOut} className="title-img" />
+              </div>
+              <h4><b className="p-pink"><i>Por puntaje</i></b><br /></h4>
+              <p className="bold m-5">Cada tarea aprobada, clase o curso terminado,
+                te dará puntos que puedes canjear por productos Gonvar.</p>
             </div>
-            <p><b className="p-pink"><i>Por puntaje</i></b><br /></p>
-            <p className="bold m-5">Cada tarea aprobada, clase o curso terminado,
-              te dará puntos que puedes canjear por productos Gonvar.</p>
+            <div className="hover-card">
+              <img src={puntoR} className="my-3" />
+              <h1>¡HOLA MARÍA!</h1>
+              <p>Siguiente recompensa <br /> <b className="yellow">2 monómetros Gonvar</b></p>
+              <h3 className="yellow bold">al reunir <br /> 3,000 puntos</h3>
+            </div>
           </div>
 
-          <div className="reward-card">
-            <div className="all-center">
-              <img src={timeReward} className="title-img" />
-              <img src={timeRewardOut} className="title-img" />
+          <div className="reward-card time">
+            <div className="normal-card">
+              <div className="all-center">
+                <img src={timeReward} className="title-img" />
+                <img src={timeRewardOut} className="title-img" />
+              </div>
+              <h4><b className="teal"><i>Por tiempo </i></b><br /></h4>
+              <p className="bold m-5">Por cada mes que permanezcas suscrita, obtendrás nuevos beneficios y
+                mejores descuentos en nuestros productos.</p>
             </div>
-            <p><b className="teal"><i>Por tiempo </i></b><br /></p>
-            <p className="bold m-5">Por cada mes que permanezcas suscrita, obtendrás nuevos beneficios y
-              mejores descuentos en nuestros productos.</p>
+            <div className="hover-card">
+              <img src={tiempoR} className="my-3" />
+              <h1>¡HOLA MARÍA!</h1>
+              <p>Tu siguiente recompensa <br /> estará disponible <b className="yellow">en Junio</b></p>
+              <h3 className="yellow bold">20% de descuento <br /> en productos Gonvar</h3>
+            </div>
           </div>
 
-          <div className="reward-card">
-            <div className="all-center">
-              <img src={awardReward} className="title-img" />
-              <img src={awardRewardOut} className="title-img" />
+          <div className="reward-card awards">
+            <div className="normal-card">
+              <div className="all-center">
+                <img src={awardReward} className="title-img" />
+                <img src={awardRewardOut} className="title-img" />
+              </div>
+              <h4><b className="blue"><i>Certificados </i></b><br /></h4>
+              <p className="bold m-5">Recibe un certificado oficial de la marca con un Folio Único Verificado (FUV)
+                por cada curso completo que termines.</p>
             </div>
-            <p><b className="blue"><i>Certificados </i></b><br /></p>
-            <p className="bold m-5">Recibe un certificado oficial de la marca con un Folio Único Verificado (FUV)
-              por cada curso completo que termines.</p>
+            <div className="hover-card">
+              <img src={cursoR} className="my-3" />
+              <h1>¡HOLA MARÍA!</h1>
+              <p>Tu siguiente curso a terminar es <br /> <b className="yellow">MANICURE CON BALANCE</b></p>
+              <h3 className="yellow bold">Has conseguido 15 <br /> Certificados FUV</h3>
+            </div>
+
           </div>
         </div>
 
