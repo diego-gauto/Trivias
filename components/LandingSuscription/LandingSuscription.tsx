@@ -45,6 +45,15 @@ const avanzado = "/images/landing_suscription/avanzado.png"
 const master = "/images/landing_suscription/master.png"
 const rewardBack = "/images/landing_suscription/recompensas_back.png"
 const news = "/images/landing_suscription/newsletter.png"
+const ubiG1 = "/images/landing_suscription/ubicacion_ghost_1.png"
+const ubiG2 = "/images/landing_suscription/ubicacion_ghost_2.png"
+const ubiG3 = "/images/landing_suscription/ubicacion_ghost_3.png"
+const certifB1 = "/images/landing_suscription/back_certif_1.png"
+const certifB2 = "/images/landing_suscription/back_certif_2.png"
+const certifB3 = "/images/landing_suscription/back_certif_3.png"
+const certifB4 = "/images/landing_suscription/back_certif_4.png"
+const goldStar = "/images/landing_suscription/StarBenefits.png"
+const envioG = "/images/landing_suscription/ghost_envio.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -71,10 +80,12 @@ const LandingSuscription = () => {
   const anual = "$1,599 mxn/anual"
   return (
     <SuscriptionContain>
-      <div className="spacing">
-        <img src={gonvar} className="gonvarplus" />
-        {/* <img src={backPpal} className="background-images" /> */}
+      <div className="m-0" >
+        <div className="m-0 all-center">
+          <img src={backPpal} className="background-images" />
+        </div>
 
+        <img src={gonvar} className="gonvarplus" />
         <h1>La suscripción anual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h1>
 
         <div>
@@ -132,6 +143,11 @@ const LandingSuscription = () => {
 
 
       <div>
+        <div className="m-0 all-center back-ghosts">
+          <img src={ubiG1} className="g-1" />
+          <img src={ubiG2} className="g-2" />
+          <img src={ubiG3} className="g-3" />
+        </div>
         <img src={ubi} />
         <h1 className="big-title">NO IMPORTA TU UBICACIÓN</h1>
         <h2>Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,
@@ -145,7 +161,7 @@ const LandingSuscription = () => {
         <img src={instructores} className="spacing" />
         <h2 className="bold">Los cursos son impartidos por <b className="p-pink">instructores profesionales
           y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h2>
-        <button className="btn up-down mt-5">Quiero comenzar<br /> hoy mismo</button>
+        <button className="btn up-down spacing mb-5">Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
@@ -163,12 +179,12 @@ const LandingSuscription = () => {
           <img src={master} className="level" />
         </div>
 
-        <h2 className="fst-italic">No importa si vas comenzando o si ya tienes conocimientos, <br />
+        <h2 className="fst-italic bold">No importa si vas comenzando o si ya tienes conocimientos, <br />
           te aseguramos que tenemos un curso para ti.</h2>
       </div>
 
 
-      <div className="spacing">
+      <div className="spacing est-w">
         <h2 className="bold">Además, en la plataforma encontrarás diferentes</h2>
         <h1 className="big-title p-pink">Líneas de aprendizaje</h1>
 
@@ -198,26 +214,33 @@ const LandingSuscription = () => {
           </div>
         </div>
 
-        <h2 className="bold">Así tendrás la oportunidad de <br /><b className="p-pink">aprender desde
-          lo básico hasta convetirte en Master.</b></h2>
+        <h3 className="bold">Así tendrás la oportunidad de <br /><b className="p-pink">aprender desde
+          lo básico hasta convetirte en Master.</b></h3>
       </div>
 
 
-      <div className="all-center">
-        <img src={certificadoMujer} className="mx-5" />
-        <div className="w-50 pt-5 text-start">
-          <h1 className="p-pink big-title mb-4">Certificado FUV</h1>
-          <h2 className="bold mb-4">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
-            <b className="p-pink">obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
-          <h2 className="bold">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
-            <i>(folio único verificado).</i></b></h2>
+      <div className="spacing">
+        {/* <div className="back-lines all-center">
+          <img className="line-1" src={certifB1} />
+          <img className="line-2" src={certifB2} />
+          <img className="line-3" src={certifB3} />
+          <img className="line-4" src={certifB4} />
+        </div> */}
+        <div className="m-0 all-center">
+          <img src={certificadoMujer} className="mx-5" />
+          <div className="pt-5 est-w text-start">
+            <h1 className="p-pink big-title mb-4">Certificado FUV</h1>
+            <h2 className="bold mb-4 w-75">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
+              <b className="p-pink">obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
+            <h2 className="bold w-75">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
+              <i>(folio único verificado).</i></b></h2>
+          </div>
         </div>
-
       </div>
 
 
-      <div className="spacing d-flex w-75">
-        <div className="text-end">
+      <div className="spacing all-center">
+        <div className="text-end est-w">
           <h1>¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
             en uñas y belleza!</h1>
           <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
@@ -276,14 +299,16 @@ const LandingSuscription = () => {
               </div>
             </div>
           </div>
-          <div className="w-auto">
+          <div className="w-auto benefits-ghosts">
+            <img src={envioG} className="back" />
             <img src={envioMujer} />
+            <img src={goldStar} className="star" />
           </div>
         </div>
 
       </div>
 
-      <div className="spacing d-flex">
+      <div className="spacing all-center">
         <img src={chica} className="ms-5 chica-img" />
         <div className="m-0">
           <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>

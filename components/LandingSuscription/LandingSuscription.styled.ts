@@ -23,11 +23,28 @@ export const SuscriptionContain = styled.div`
 		margin-top: 140px;
 		margin-bottom: 100px;
 	}
-	.miniLogo {
-		width: 75px;
-	}
+
 	.subtitle {
 		font-size: large;
+	}
+	.est-w {
+		width: 1200px;
+	}
+	.benefits-ghosts {
+		position: relative;
+		z-index: 0;
+		.girl {
+			z-index: 1;
+		}
+		.star {
+			position: absolute;
+			transform: translateX(-120px) translateY(320px);
+		}
+		.back {
+			position: absolute;
+			transform: translateX(250px) translateY(-30px);
+			z-index: -1;
+		}
 	}
 	.spacing {
 		margin-top: 100px;
@@ -47,8 +64,39 @@ export const SuscriptionContain = styled.div`
 		margin-top: 50px;
 		margin-bottom: 50px;
 	}
+	.back-ghosts {
+		position: absolute;
+		z-index: -1;
+		.g-1 {
+			transform: translateX(-140px);
+		}
+		.g-2 {
+			transform: translateX(320px) translateY(200px);
+		}
+		.g-3 {
+			transform: translateX(-650px) translateY(250px);
+		}
+	}
 	.background-images {
-		background-size: cover;
+		transform: translateY(450px);
+		position: absolute;
+		z-index: -1;
+	}
+	.back-lines {
+		position: absolute;
+		z-index: -1;
+		.line-1 {
+			position: absolute;
+		}
+		.line-2 {
+			position: absolute;
+		}
+		.line-3 {
+			position: absolute;
+		}
+		.line-4 {
+			position: absolute;
+		}
 	}
 	.right-img {
 		width: fit-content;
