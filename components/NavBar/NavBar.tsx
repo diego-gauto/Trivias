@@ -35,6 +35,7 @@ import io from "socket.io-client";
 import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
+import { updateMembership } from "../api/profile";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -129,6 +130,24 @@ const NavBar = () => {
       // logoutFunc();
       if (userDataAuth.user !== null) {
         // userNotifications(userDataAuth.user.user_id)
+        if (userDataAuth.user.level === 2) {
+          let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
+          let today = new Date().getTime() / 1000;
+          if (today > course[0].final_date) {
+            var day = new Date();
+            var nextYear = new Date();
+            nextYear.setFullYear(day.getFullYear() + 1);
+            let data = {
+              final_date: nextYear.getTime() / 1000,
+              start_date: today,
+              user_id: userDataAuth.user.user_id
+            }
+            updateMembership(data).then((res) => {
+              alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
+            })
+          }
+        }
+
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
           setIsAdmin(true);

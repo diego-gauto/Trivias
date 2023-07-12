@@ -62,3 +62,15 @@ export const userInvoices = async (userId: any) => {
       return error
     });
 };
+
+export const updateMembership = async (data: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "profile/plan", data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

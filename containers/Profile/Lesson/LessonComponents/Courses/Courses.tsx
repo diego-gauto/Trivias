@@ -11,6 +11,7 @@ import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesC
 import EveryCourse from './Lessons/EveryCourse';
 import { LOCK_ICON } from '../../../../../utils/Constants';
 import { CERTIFICATES_PATH } from '../../../../../constants/paths';
+import { updateMembership } from '../../../../../components/api/profile';
 
 const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
   const [selected, setSelected] = useState<any>([]);
@@ -62,6 +63,23 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           setCertificate_id(res.data.data[0].id)
         }
       })
+      if (userData.level === 2) {
+        let course = userData.user_courses.filter((x: any) => x.course_id === 30);
+        let today = new Date().getTime() / 1000;
+        if (today > course[0].final_date) {
+          var day = new Date();
+          var nextYear = new Date();
+          nextYear.setFullYear(day.getFullYear() + 1);
+          let data = {
+            final_date: nextYear.getTime() / 1000,
+            start_date: today,
+            user_id: userData.user_id
+          }
+          updateMembership(data).then((res) => {
+            alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
+          })
+        }
+      }
       setCertificate(true)
     }
     setCount(viewed)
