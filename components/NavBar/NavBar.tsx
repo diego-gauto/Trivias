@@ -139,10 +139,6 @@ const NavBar = () => {
           router.push("/")
         }
       }
-
-      if (pathname === "/_error") {
-        router.push("/")
-      }
     }, [userDataAuth])
 
   } catch (error) {

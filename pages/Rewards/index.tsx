@@ -16,9 +16,7 @@ export const getServerSideProps: GetServerSideProps<{ rewards: Repo }> = async (
   }
 }
 const Landings = ({ rewards }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(rewards);
   return (
-
     <MainContain
       style={{
         width: "100%",
