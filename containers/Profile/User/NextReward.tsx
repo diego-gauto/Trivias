@@ -263,7 +263,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
                     <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
                 </div>
             }
-            {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && (user.level > 0 && user.plan_name === "Gonvar Plus")) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>
