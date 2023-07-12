@@ -49,7 +49,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'stripe' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id, trial, frequency } = router.query;
+  const { type, id, trial, frequency, nailmasterplusanual } = router.query;
   const [loader, setLoader] = useState<any>(false);
 
   const courseId = new URLSearchParams(window.location.search)
@@ -74,9 +74,16 @@ const Purchase = () => {
         if (type == 'subscription') {
           setProduct({ ...product, title: subscription.title, price: subscription.price, duration: subscription.duration, type: 'Suscripción' })
           setPaypal(false);
-        } else {
+        }
+        if (type == 'course') {
           getCourseForCheckoutApi(id).then((res: any) => {
             setProduct({ ...product, title: res.title, price: res.price, duration: res.duration, type: 'course', img: res.image });
+            setPaypal(false);
+          })
+        }
+        if (nailmasterplusanual == 'true') {
+          getCourseForCheckoutApi(30).then((res: any) => {
+            setProduct({ ...product, title: "Nails Master 3.0+Anualidad", price: 2599, duration: 90, type: 'course', img: res.image });
             setPaypal(false);
           })
         }
@@ -230,7 +237,8 @@ const Purchase = () => {
             window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
           }
         })
-      } else {
+      }
+      if (type === 'course' || nailmasterplusanual === 'true') {
         let price = product.price
         if (coupon) {
           if (coupon.type == 'amount') {
@@ -275,7 +283,8 @@ const Purchase = () => {
               method: 'stripe',
               user_id: userData.user_id,
               course_id: id,
-              final_date: (new Date().getTime() / 1000) + product.duration * 86400
+              final_date: (new Date().getTime() / 1000) + product.duration * 86400,
+              newPlan: nailmasterplusanual === 'true' ? true : false
             }
             if (coupon) {
               let tempCoupon = {
@@ -302,7 +311,8 @@ const Purchase = () => {
         setConfirmation(false);
         setPay(true);
         window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
-      } else {
+      }
+      if (type === 'course' || nailmasterplusanual === 'true') {
         let price = product.price
         if (coupon) {
           if (coupon.type == 'amount') {
@@ -317,7 +327,8 @@ const Purchase = () => {
           method: 'paypal',
           user_id: userData.user_id,
           course_id: id,
-          final_date: (new Date().getTime() / 1000) + product.duration * 86400
+          final_date: (new Date().getTime() / 1000) + product.duration * 86400,
+          newPlan: nailmasterplusanual === 'true' ? true : false
         }
         if (coupon) {
           let tempCoupon = {
@@ -384,7 +395,7 @@ const Purchase = () => {
     if (card.cardId) {
       FinishPayment();
     }
-    if (plan.method == "paypal" && type == "course") {
+    if ((plan.method == "paypal" && type == "course") || (plan.method == "paypal" && nailmasterplusanual === 'true')) {
       FinishPayment();
     }
   }, [card, plan])
@@ -595,7 +606,7 @@ const Purchase = () => {
                         return data
                       }}
                     />}
-                    {type == 'course' && <PayPalButtons
+                    {(type == 'course' || nailmasterplusanual === 'true') && <PayPalButtons
                       style={{
                         color: "blue",
                         tagline: false,
@@ -645,7 +656,7 @@ const Purchase = () => {
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149"}{frequency === "anual" && "1,599"}{(type == "course" && !coupon) && product.price} MXN/mes. </span><br /><br />
+                    "149 MXN/mes"}{frequency === "anual" && "1,599 MXN/anual"}{(type == "course" && !coupon) && `${product.price} MXN`}{(nailmasterplusanual === "true") && "2,599 MXN"} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -668,6 +679,7 @@ const Purchase = () => {
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                     (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
+                  {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>}
                 </div>
                 <div className="bg"></div>
                 <img className="image" src="../images/purchase/neworange.png" alt="" />
@@ -729,6 +741,7 @@ const Purchase = () => {
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                   (product.price - (coupon.discount / 100) * product.price)} <span>MXN</span></p>}
+                {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>}
               </div>
             </div>
             <div className="slider-container">
@@ -894,7 +907,7 @@ const Purchase = () => {
                           return data
                         }}
                       />}
-                      {type == 'course' && <PayPalButtons
+                      {(type == 'course' || nailmasterplusanual === 'true') && <PayPalButtons
                         style={{
                           color: "blue",
                           tagline: false,
@@ -1087,7 +1100,7 @@ const Purchase = () => {
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149"} {frequency === "anual" && "1,599"}{(type == "course" && !coupon) && product.price} MXN/mes. </span><br /><br />
+                    "149 MXN/mes"}{frequency === "anual" && "1,599 MXN/anual"}{(type == "course" && !coupon) && `${product.price} MXN`}{(nailmasterplusanual === "true") && "2,599 MXN"} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />

@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import { PlanStyles } from "./Plans.styled";
+import { IUser } from "../../../interfaces/IUserData";
+import router from "next/router";
+import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 
 const pStar = "/images/pay_plans/star purple.png"
 let views = new Map<number, boolean>();
@@ -14,10 +17,12 @@ views.set(5, false);
 views.set(6, false);
 views.set(7, false);
 views.set(8, false);
-
-const Ind_Anual = () => {
+interface IData {
+  user: IUser;
+}
+const Ind_Anual = (props: IData) => {
   const [ver, setver] = useState(true)
-
+  const { user } = props;
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -31,6 +36,18 @@ const Ind_Anual = () => {
 
   }, [setver])
 
+  const goTo = () => {
+    if (user.id) {
+      router.push(
+        { pathname: PURCHASE_PATH, query: { nailmasterplusanual: true } }
+      )
+    }
+    else {
+      localStorage.setItem("newPlan", "true");
+      router.push(SIGNUP_PATH)
+    }
+  }
+
   return (
     <PlanStyles>
       <div className="back plan-container">
@@ -43,10 +60,10 @@ const Ind_Anual = () => {
           </div>
           <div className="text-center my-4">
             <h2 className="h3 mb-0">$2,599.00 mxn</h2>
-            <span><i>Cargo automático de $1,599.00 anual</i></span>
+            {/* <span><i>Cargo automático de $1,599.00 anual</i></span> */}
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4">Comenzar ahora</button>
+            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
