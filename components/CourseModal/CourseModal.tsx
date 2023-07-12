@@ -52,8 +52,9 @@ const CourseModal = (props: ICourseModal) => {
   }
   const goTo = () => {
     if (user) {
-      console.log(user);
-
+      if ((course.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
+        router.push(`${PLAN_PATH}`)
+      }
       if ((course.type === "Mensual") && ((user.level === 1) || (user.level === 0 && user.final_date > today))) {
         router.push({
           pathname: LESSON_PATH,
