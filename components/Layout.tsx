@@ -20,6 +20,7 @@ const Layout = ({ children }: any) => {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
+    console.log(router);
     setPath(pathname.split('/')[1]);
   }, [pathname]);
 
