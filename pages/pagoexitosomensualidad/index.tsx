@@ -9,7 +9,6 @@ const paymentSuccessSubscriptionMonthScreen = () => {
         width: "100%",
         padding: "0",
         maxWidth: "100% !important",
-        height: "100vh"
       }}>
       <ThankYouSubscriptionMonth></ThankYouSubscriptionMonth>
     </MainContain>

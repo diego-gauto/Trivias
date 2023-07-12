@@ -1,6 +1,6 @@
 import React from 'react'
-import PaymentFailedNailsMaster from '../../components/PaymentFailed/PaymentFailedNailsMaster';
 import { MainContain } from '../../screens/Styles.styled';
+import PaymentFailedAlineacion from '../../components/PaymentFailed/PaymentFailedAlineacion';
 
 const paymentFailedAlineacionScreen = () => {
   return (
@@ -10,9 +10,8 @@ const paymentFailedAlineacionScreen = () => {
         width: "100%",
         padding: "0",
         maxWidth: "100% !important",
-        height: "100vh"
       }}>
-      <PaymentFailedNailsMaster></PaymentFailedNailsMaster>
+      <PaymentFailedAlineacion></PaymentFailedAlineacion>
     </MainContain>
   )
 }

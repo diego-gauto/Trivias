@@ -8,8 +8,9 @@ import Landings from "../../pages/index";
 //Module 3: Informacion principal del curso y es imagen estatica
 //Module 4: Carrusel de lecciones particulares del curso
 export const HomeContainer = () => {
+  let courses: any = [];
   return <>
-    <Landings />
+    <Landings courses={courses} />
   </>
 };
 
