@@ -68,7 +68,9 @@ export const SuscriptionContain = styled.div`
 	.group-buttons {
 		margin-top: 25px;
 		margin-bottom: 25px;
-		width: 100%;
+		@media (max-width: 800px) {
+			width: 50%;
+		}
 		button {
 			font-style: italic;
 			margin-inline: 25px;
