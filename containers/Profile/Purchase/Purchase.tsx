@@ -54,10 +54,10 @@ const Purchase = () => {
 
   const courseId = new URLSearchParams(window.location.search)
   let idC = courseId.get('id')
-  if (!localStorage.getItem("email")) {
-    localStorage.setItem("course", idC ? idC.toString() : '30');
-    router.push({ pathname: LOGIN_PATH })
-  }
+  // if (!localStorage.getItem("email")) {
+  //   localStorage.setItem("course", idC ? idC.toString() : '30');
+  //   router.push({ pathname: LOGIN_PATH })
+  // }
 
   const subscription = {
     price: 149.00,
@@ -67,7 +67,6 @@ const Purchase = () => {
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
-      localStorage.removeItem("trial")
       getUserApi(localStorage.getItem("email")).then((res) => {
         getAllCoupons();
         setPaypal(!paypal)
@@ -109,8 +108,14 @@ const Purchase = () => {
       if (searchParams.get('trial') == "true") {
         localStorage.setItem("trial", "true");
       }
-      if (searchParams.get('type') === "subscription") {
-        localStorage.setItem("sub", "true");
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "month") {
+        localStorage.setItem("month", "true");
+      }
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "anual") {
+        localStorage.setItem("anual", "true");
+      }
+      if (searchParams.get('type') === "course") {
+        localStorage.setItem("course", `${idC}`);
       }
       window.location.href = "/auth/Register";
       setLoggedIn(false)
@@ -191,7 +196,7 @@ const Purchase = () => {
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
         let price = "";
-        if (trial) price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
+        if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
         if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
         if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
 
@@ -397,20 +402,6 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          {/* {(pay && !loader) && <div className="static-modal">
-            <div className="modal-costum">
-              <h1>¡Grandes noticias, <span>{user}!</span></h1>
-              <p><span>¡Tu compra ha sido exitosa!</span> Enviamos el <br />
-                recibo de pago a tu correo electrónico. <br /> <br />
-
-                Ahora formas parte de la comunidad Gonvar+. <br />
-                <b>¡No esperes más y comienza a aprender!</b></p>
-
-              <button className="full">
-                <Link href={PREVIEW_PATH}>Ver los cursos</Link>
-              </button>
-            </div>
-          </div>} */}
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
@@ -477,7 +468,7 @@ const Purchase = () => {
                       delete card.paymentMethod;
                       setCard({ ...card, cardId: "" })
                     }} />
-                    <p>Pagaré con otra<span>tarjeta de crédito o débito</span></p>
+                    <p>Pagaré con otra <span>tarjeta de crédito o débito</span></p>
                   </div>
                   {!payment && <div className="form-row">
                     <label>Número de tarjeta</label>
@@ -640,12 +631,12 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {frequency === "month" && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149"}{frequency === "anual" && "1,599"}{(type == "course" && !coupon) && product.price} MXN/mes. </span><br /><br />
+                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/anual."}{(type == "course" && !coupon) && product.price} único pago</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -723,7 +714,10 @@ const Purchase = () => {
               </div>}
               {type == "course" && <div className="line"></div>}
               <div className="price-container">
-                <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <span>a pagar</span></p>
+                {(type == "subscription" && frequency === "month") && <p className="title"><span>Suscripción Gonvar+ Mensual</span></p>}
+                {(type == "subscription" && frequency === "anual") && <p className="title"><span>Suscripción Gonvar+ Anual</span></p>}
+                {(type == "course") && <p className="title"><span>{product.title}</span></p>}
+                <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
                 {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
@@ -776,7 +770,7 @@ const Purchase = () => {
                         delete card.paymentMethod;
                         setCard({ ...card, cardId: "" })
                       }} />
-                      <p>Pagaré con otra<span>tarjeta de crédito o débito</span></p>
+                      <p>Pagaré con otra <span>tarjeta de crédito o débito</span></p>
                     </div>
                     {!payment && <div className="form-row">
                       <label>Número de tarjeta</label>
@@ -1082,12 +1076,12 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {frequency === "month" && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149"} {frequency === "anual" && "1,599"}{(type == "course" && !coupon) && product.price} MXN/mes. </span><br /><br />
+                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/anual."}{(type == "course" && !coupon) && product.price} único pago</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
