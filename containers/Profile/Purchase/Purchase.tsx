@@ -636,7 +636,7 @@ const Purchase = () => {
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/anual."}{(type == "course" && !coupon) && product.price}</span><br /><br />
+                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/anual."}{(type == "course" && !coupon) && product.price} único pago</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -1081,7 +1081,7 @@ const Purchase = () => {
                 </div>
                 <div className="info">
                   <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/anual."}{(type == "course" && !coupon) && product.price}</span><br /><br />
+                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/anual."}{(type == "course" && !coupon) && product.price} único pago</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
