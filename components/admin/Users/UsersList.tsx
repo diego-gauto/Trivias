@@ -248,7 +248,7 @@ const UsersList = () => {
       setCountries(res);
     })
     getCoures();
-  }, [show]);
+  }, []);
 
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime() + 50400000;
@@ -256,7 +256,7 @@ const UsersList = () => {
   }
 
   const handleClick = () => {
-    getUsers();
+    filteredData(filters, dates, filterValue, pageIndex);
   }
   const Gonvar: any = async () => {
     let sendUsers: any = [];
