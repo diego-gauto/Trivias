@@ -631,7 +631,7 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {frequency === "month" && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true") && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
@@ -1079,7 +1079,7 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {frequency === "month" && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true")} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
