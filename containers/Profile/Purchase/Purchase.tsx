@@ -54,10 +54,10 @@ const Purchase = () => {
 
   const courseId = new URLSearchParams(window.location.search)
   let idC = courseId.get('id')
-  if (!localStorage.getItem("email")) {
-    localStorage.setItem("course", idC ? idC.toString() : '30');
-    router.push({ pathname: LOGIN_PATH })
-  }
+  // if (!localStorage.getItem("email")) {
+  //   localStorage.setItem("course", idC ? idC.toString() : '30');
+  //   router.push({ pathname: LOGIN_PATH })
+  // }
 
   const subscription = {
     price: 149.00,
@@ -67,7 +67,6 @@ const Purchase = () => {
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
-      localStorage.removeItem("trial")
       getUserApi(localStorage.getItem("email")).then((res) => {
         getAllCoupons();
         setPaypal(!paypal)
@@ -109,8 +108,14 @@ const Purchase = () => {
       if (searchParams.get('trial') == "true") {
         localStorage.setItem("trial", "true");
       }
-      if (searchParams.get('type') === "subscription") {
-        localStorage.setItem("sub", "true");
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "month") {
+        localStorage.setItem("month", "true");
+      }
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "anual") {
+        localStorage.setItem("anual", "true");
+      }
+      if (searchParams.get('type') === "course") {
+        localStorage.setItem("course", `${idC}`);
       }
       window.location.href = "/auth/Register";
       setLoggedIn(false)
