@@ -728,7 +728,10 @@ const Purchase = () => {
               </div>}
               {type == "course" && <div className="line"></div>}
               <div className="price-container">
-                <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <span>a pagar</span></p>
+                {(type == "subscription" && frequency === "month") && <p className="title"><span>Suscripción Gonvar+ Mensual</span></p>}
+                {(type == "subscription" && frequency === "anual") && <p className="title"><span>Suscripción Gonvar+ Anual</span></p>}
+                {(type == "course") && <p className="title"><span>{product.title}</span></p>}
+                <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
                 {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
