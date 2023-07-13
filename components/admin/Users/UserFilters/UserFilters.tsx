@@ -97,7 +97,7 @@ const UserFilters = (props: IFilters) => {
           <select defaultValue="todos" onChange={(e) => startFilters(0, e.target.value, changeDate)}>
             <option value="todos">Todos</option>
             <option value="mensual">Mensual</option>
-            {/* <option value="anual">Anual</option> */}
+            <option value="anual">Anual</option>
           </select>
         </div>
         <div className='filter-contain'>

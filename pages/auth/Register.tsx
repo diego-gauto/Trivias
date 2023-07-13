@@ -128,9 +128,6 @@ const Register = () => {
     if (localStorage.getItem("trial") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
-    if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
-    }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }

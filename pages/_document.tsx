@@ -10,6 +10,10 @@ class MyDocument extends Document {
     return (
       <Html lang={appConfig.locale}>
         <Head>
+          <meta property="og:title" content="Academia de Belleza Online | Gonvar" />
+          <meta property="og:description" content="Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!" />
+          <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/logo-g.png?alt=media&token=ada71c84-75c4-4192-a051-a465f864c115" />
+          <meta property="og:url" content="https://gonvar.io" />
           <link rel="icon" href="/images/logo-g.png" />
           <meta name="google-site-verification" content="ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw" />
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
