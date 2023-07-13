@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PlanStyles = styled.div`
 	height: 100%;
-	.plans {
+	.planes {
 		--purple-pink: #cb5cc0;
 		--blue: #6b77f5;
 		--green: #149e62;
@@ -139,14 +139,14 @@ export const PlanStyles = styled.div`
 		}
 	}
 	@media (max-width: 991px) {
-		.plans {
+		.planes {
 			.col-lg-3 {
 				width: 50% !important;
 			}
 		}
 	}
 	@media (max-width: 576px) {
-		.plans {
+		.planes {
 			.col-lg-3 {
 				width: 100% !important;
 			}

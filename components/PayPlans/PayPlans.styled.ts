@@ -49,6 +49,7 @@ export const PayStyles = styled.div`
 			font-size: large;
 		}
 	}
+
 	.continue {
 		font-weight: 500;
 		padding-inline: 30px;
@@ -57,7 +58,44 @@ export const PayStyles = styled.div`
 		border: 1px solid #3f1168;
 		color: #3f1168;
 	}
+
+	.plans {
+		display: flex;
+	}
+	.plans-res {
+		display: none;
+	}
+
+	.select-plan {
+		display: none;
+		margin-bottom: 50px;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+		.purple-select {
+			padding-block: 10px;
+			padding-inline: 25px;
+			border: none;
+			border-radius: 24px;
+			color: #ffffff;
+			background-color: #3f1168;
+			option {
+				color: #000000;
+				background-color: #ffffff;
+			}
+		}
+	}
+
 	@media (max-width: 600px) {
+		.plans {
+			display: none;
+		}
+		.plans-res {
+			display: flex;
+		}
+		.select-plan {
+			display: flex;
+		}
 		.py-5 {
 			padding-inline: 10px;
 		}

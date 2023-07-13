@@ -1,17 +1,20 @@
+import { useEffect, useState } from "react";
+
 import router from "next/router";
-import { LESSON_PATH, LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
+
+import { PREVIEW_PATH } from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
+import { IUser } from "../../interfaces/IUserData";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { IUser } from "../../interfaces/IUserData";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
+  const [selected, setSelected] = useState(0)
   var userData = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
@@ -23,26 +26,41 @@ const PayPlans = () => {
     router.push({ pathname: PREVIEW_PATH })
   }
 
-
   return (
     <PayStyles className="w-100">
       <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
       <div className="colors">
         <div className="back">
-          {/* Titulo */}
           <div className="title text-center py-5">
             <h3 className="purple h1">Planes y precios</h3>
             <p className="yellow">¡Elige la mejor suscripción para ti!</p>
           </div>
 
-          {/* Planes */}
-          <div className="plans d-flex justify-content-center">
+          {/* Responsive Switch*/}
+          <div className="select-plan">
+            <select className="purple-select" value={selected} onChange={(e: any) => setSelected(+e.target.value)}>
+              <option value={NaN} hidden>Seleccionar plan</option>
+              <option value={1}>Mensual</option>
+              <option value={2}>Anual</option>
+              <option value={3}>Nails Master</option>
+              {/* <option value={4}>Nails Master + Año</option> */}
+            </select>
+          </div>
+
+          <div className="plans justify-content-center">
             <div className="middle">
-              <Plans user={user} />
+              <Plans user={user} selected={0} />
             </div>
           </div>
 
-          {/* Subtitulo Planes */}
+          <div className="plans-res justify-content-center">
+            <div className="middle">
+              <Plans user={user} selected={selected} />
+            </div>
+          </div>
+
+
+
           <div className="subtitle text-center py-3">
             <h3 className="h4"><b>Nunca subiremos el precio</b> si mantienes tu suscripción activa.</h3>
             <div className="d-inline-flex">
@@ -53,7 +71,6 @@ const PayPlans = () => {
           </div>
           <button className="continue my-4 d-flex mx-auto" onClick={goTo}>Continuar sin suscripción</button>
 
-          {/* Banner */}
           <div className="break  py-2 px-5">
             <div className="m-5">
               <h2 className="h3 text-center mb-5">Impulsa tu <b className="purple-pink no-bold">creciemiento profesional como Nail Artist</b>
@@ -75,7 +92,6 @@ const PayPlans = () => {
             </div>
           </div>
 
-          {/* Preguntas frecuentes */}
           <div className="faq py-5">
             <h2 className="text-center purple-pink">Preguntas Frecuentes</h2>
             <div className="m-5 px-5 faq-bold d-flex justify-content-center">
