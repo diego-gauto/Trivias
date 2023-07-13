@@ -14,6 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <Head>
+        <meta property="og:title" content="Academia de Belleza Online | Gonvar" />
+        <meta property="og:description" content="Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!" />
+        {/* <meta property="og:image" content="https://example.com/your-image.png"/> */}
+        <meta property="og:url" content="https://gonvar.io" />
         <link rel="canonical" href={"https://gonvar.io" + router.asPath} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
         <Script
