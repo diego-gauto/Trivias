@@ -14,7 +14,7 @@ const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(1)
   var userData = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
@@ -24,6 +24,10 @@ const PayPlans = () => {
 
   const goTo = () => {
     router.push({ pathname: PREVIEW_PATH })
+  }
+
+  const handleSelected = (value: number) => {
+    setSelected(value)
   }
 
   return (
@@ -38,13 +42,17 @@ const PayPlans = () => {
 
           {/* Responsive Switch*/}
           <div className="select-plan">
-            <select className="purple-select" value={selected} onChange={(e: any) => setSelected(+e.target.value)}>
-              <option value={NaN} hidden>Seleccionar plan</option>
-              <option value={1}>Mensual</option>
-              <option value={2}>Anual</option>
-              <option value={3}>Nails Master</option>
-              {/* <option value={4}>Nails Master + Año</option> */}
-            </select>
+            <p className="text-center">Switch</p>
+            <div className="options">
+              <p className={`option ${selected === 1 ? 'link' : ''}`}
+                onClick={() => handleSelected(1)}>G+ mensual</p>
+              <p className="option">|</p>
+              <p className={`option ${selected === 2 ? 'link' : ''}`}
+                onClick={() => handleSelected(2)}>G+ anual</p>
+              <p className="option">|</p>
+              <p className={`option ${selected === 3 ? 'link' : ''}`}
+                onClick={() => handleSelected(3)}>Nails Máster</p>
+            </div>
           </div>
 
           <div className="plans justify-content-center">
@@ -100,7 +108,7 @@ const PayPlans = () => {
           </div>
         </div>
       </div>
-    </PayStyles>
+    </PayStyles >
   )
 }
 export default PayPlans;
