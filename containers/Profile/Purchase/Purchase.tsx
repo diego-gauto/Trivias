@@ -196,7 +196,7 @@ const Purchase = () => {
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
         let price = "";
-        if (trial) price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
+        if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
         if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
         if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
 
