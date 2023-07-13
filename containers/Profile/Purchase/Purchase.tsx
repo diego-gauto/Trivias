@@ -468,7 +468,7 @@ const Purchase = () => {
                       delete card.paymentMethod;
                       setCard({ ...card, cardId: "" })
                     }} />
-                    <p>Pagaré con otra<span>tarjeta de crédito o débito</span></p>
+                    <p>Pagaré con otra <span>tarjeta de crédito o débito</span></p>
                   </div>
                   {!payment && <div className="form-row">
                     <label>Número de tarjeta</label>
@@ -770,7 +770,7 @@ const Purchase = () => {
                         delete card.paymentMethod;
                         setCard({ ...card, cardId: "" })
                       }} />
-                      <p>Pagaré con otra<span>tarjeta de crédito o débito</span></p>
+                      <p>Pagaré con otra <span>tarjeta de crédito o débito</span></p>
                     </div>
                     {!payment && <div className="form-row">
                       <label>Número de tarjeta</label>
