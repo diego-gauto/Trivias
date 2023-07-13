@@ -1,9 +1,13 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
+
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+
+import router from "next/router";
+
 import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
-import { PlanStyles } from "./Plans.styled";
 import { IUser } from "../../../interfaces/IUserData";
+import { PlanStyles } from "./Plans.styled";
+
 const gStar = "/images/pay_plans/star green.png"
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -68,7 +72,7 @@ const Individual = (props: IData) => {
             <span><i>Único pago</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
