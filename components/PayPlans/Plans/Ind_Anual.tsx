@@ -46,7 +46,7 @@ const Ind_Anual = () => {
             <span><i>Cargo automático de $1,599.00 anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4">Comenzar ahora</button>
+            <button className="purple-button">Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">

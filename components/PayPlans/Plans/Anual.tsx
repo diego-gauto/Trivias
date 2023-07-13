@@ -1,12 +1,12 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
-import { useAuth } from "../../../hooks/useAuth";
 
-import { PlanStyles } from "./Plans.styled";
+import router from "next/router";
+
+import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
+import { PlanStyles } from "./Plans.styled";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -71,7 +71,7 @@ const Anual = (props: IData) => {
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
