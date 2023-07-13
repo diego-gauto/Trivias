@@ -57,6 +57,9 @@ const envioG = "/images/landing_suscription/ghost_envio.png"
 const cursoR = "/images/landing_suscription/cursos_recompensa.png"
 const tiempoR = "/images/landing_suscription/tiempo_recompensa.png"
 const puntoR = "/images/landing_suscription/puntos_recompensa.png"
+const backCell = "/images/landing_suscription/lineBCell.png"
+const backCell2 = "/images/landing_suscription/lineBCell2.png"
+const backCell3 = "/images/landing_suscription/lineBCell3.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -83,10 +86,10 @@ const LandingSuscription = () => {
   const anual = "$1,599 mxn/anual"
   return (
     <SuscriptionContain>
-      <div className="m-0" >
-        <div className="m-0 all-center">
+      <div className="m-0 intro" >
+        {/* <div className="m-0 all-center w-100">
           <img src={backPpal} className="background-images" />
-        </div>
+        </div> */}
 
         <img src={gonvar} className="gonvarplus" />
         <h1>La suscripción anual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h1>
@@ -223,13 +226,13 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing">
-        {/* <div className="back-lines all-center">
-          <img className="line-1" src={certifB1} />
-          <img className="line-2" src={certifB2} />
+      <div className="spacing certificado-section all-center">
+        <div className="back-lines all-center">
           <img className="line-3" src={certifB3} />
           <img className="line-4" src={certifB4} />
-        </div> */}
+          <img className="line-1" src={certifB1} />
+          <img className="line-2" src={certifB2} />
+        </div>
         <div className="m-0 all-center">
           <img src={certificadoMujer} className="mx-5" />
           <div className="pt-5 est-w text-start">
@@ -243,10 +246,15 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing all-center">
-        <div className="text-end est-w">
+      <div className="spacing all-center cellphone-section">
+        <div className="text-end est-w cell-body">
           <h1>¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
             en uñas y belleza!</h1>
+          <div className="back-lines all-center">
+            <img src={backCell} className="line-1" />
+            <img src={backCell3} className="line-2" />
+            <img src={backCell2} className="line-3" />
+          </div>
           <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
             <b className="p-pink"> asesorías individuales e ilimitadas
               con nuestros instructores certificados.</b> Aprende de manera correcta y alcanza tus
@@ -254,6 +262,7 @@ const LandingSuscription = () => {
           <div className="text-center">
             <button className="btn up-down">Comienza ahora<br /> por {anual}</button>
           </div>
+
         </div>
         <img src={asesoriaTel} className="ms-3" />
       </div>
@@ -397,18 +406,12 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing">
+      <div className="spacing testimonio-section">
         <h1>Más de 45,000 alumnas</h1>
-        <div className="card-container">
-          <div className="reward-card">
-            <img src={testimonios} />
-          </div>
-          <div className="reward-card">
-            <img src={testimonios} />
-          </div>
-          <div className="reward-card">
-            <img src={testimonios} />
-          </div>
+        <div className="testimonio-container">
+          <img src={testimonios} />
+          <img src={testimonios} />
+          <img src={testimonios} />
         </div>
       </div>
 

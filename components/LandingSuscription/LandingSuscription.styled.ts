@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SuscriptionContain = styled.div`
 	position: relative;
@@ -68,9 +68,6 @@ export const SuscriptionContain = styled.div`
 	.group-buttons {
 		margin-top: 25px;
 		margin-bottom: 25px;
-		@media (max-width: 800px) {
-			width: 50%;
-		}
 		button {
 			font-style: italic;
 			margin-inline: 25px;
@@ -101,27 +98,72 @@ export const SuscriptionContain = styled.div`
 			transform: translateX(-650px) translateY(250px);
 		}
 	}
-	.background-images {
-		transform: translateY(450px);
-		position: absolute;
-		z-index: -1;
-	}
-	.back-lines {
-		position: absolute;
-		z-index: -1;
-		.line-1 {
+	.intro {
+		position: relative;
+		max-width: 2000px;
+		.background-images {
+			//transform: translateY(450px);
+			top: 0;
+			width: 100%;
 			position: absolute;
-		}
-		.line-2 {
-			position: absolute;
-		}
-		.line-3 {
-			position: absolute;
-		}
-		.line-4 {
-			position: absolute;
+			z-index: -1;
 		}
 	}
+
+	.cellphone-section {
+		width: 1200px;
+		position: relative;
+		.cell-body {
+			.back-lines {
+				position: absolute;
+				z-index: -1;
+				.line-1 {
+					transform: translate(-70px, -120px);
+				}
+				.line-2 {
+					transform: translate(180px, 195px);
+				}
+				.line-3 {
+					transform: translate(100px, -230px);
+				}
+			}
+		}
+	}
+
+	.certificado-section {
+		width: 1200px;
+		position: relative;
+		.back-lines {
+			position: absolute;
+			z-index: -1;
+			.line-1 {
+				position: absolute;
+				transform: translate(-30px, -90px);
+			}
+			.line-2 {
+				position: absolute;
+				transform: translate(260px, 120px);
+			}
+			.line-3 {
+				position: absolute;
+				transform: translate(-600px, -280px);
+			}
+			.line-4 {
+				position: absolute;
+				transform: translate(-440px, 240px);
+			}
+		}
+	}
+
+	.testimonio-section {
+		width: 1200px;
+		.testimonio-container {
+			display: flex;
+			justify-content: center;
+			gap: 25px;
+		}
+	}
+
 	.right-img {
 		width: fit-content;
 	}
