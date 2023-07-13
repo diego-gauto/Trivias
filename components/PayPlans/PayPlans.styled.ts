@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PayStyles = styled.div`
 	p,
@@ -68,20 +68,23 @@ export const PayStyles = styled.div`
 
 	.select-plan {
 		display: none;
-		margin-bottom: 50px;
-		width: 100%;
-		justify-content: center;
 		align-items: center;
-		.purple-select {
-			padding-block: 10px;
-			padding-inline: 25px;
-			border: none;
-			border-radius: 24px;
-			color: #ffffff;
-			background-color: #3f1168;
-			option {
-				color: #000000;
-				background-color: #ffffff;
+		margin-bottom: 50px;
+		justify-content: center;
+		font-size: 20px;
+		flex-wrap: wrap;
+		.options {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			text-align: center;
+			gap: 15px;
+			.option {
+				white-space: nowrap;
+				cursor: pointer;
+			}
+			.link {
+				text-decoration: underline;
 			}
 		}
 	}
