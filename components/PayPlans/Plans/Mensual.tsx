@@ -69,7 +69,7 @@ const Mensual = (props: IData) => {
 
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$149.00 mxn/mes</h2>
+            <h2 className="h3 mb-0">$149.00 MXN/mes</h2>
             <span><i>Cargo automático mensual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
@@ -79,7 +79,7 @@ const Mensual = (props: IData) => {
         <div className="main-body">
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink m-0">Mas de 60 cursos y 400 clases de uñas y belleza en linea</p>
+              <p className="purple-pink m-0">Más de 60 cursos y 400 clases de uñas y belleza en linea</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -99,7 +99,7 @@ const Mensual = (props: IData) => {
             {views.get(2) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Todos nuestros instructores son profesionales de la belleza, </b>
-                  asegurando que así tendrás una educación de calidad bajo los mejores estandares de la industria.</p>
+                  asegurando que así tendrás una educación de calidad bajo los mejores estándares de la industria.</p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(3)}>
@@ -125,7 +125,7 @@ const Mensual = (props: IData) => {
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">¿Tienes duda en tus cursos?
                   No te preocupes, <b>nuestro equipo esta para ayudarte</b> y resolver cualquier duda que tengas. Además,
-                  <b> revisamos individualmente cada una de tus practicas</b>, para que sigas mejorando.</p>
+                  <b> revisamos individualmente cada una de tus prácticas</b>, para que sigas mejorando.</p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(5)}>
@@ -143,7 +143,7 @@ const Mensual = (props: IData) => {
           </div>
           <div className="back tip m-2" onClick={() => verQ(6)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Kit gratis</p>
+              <p className="purple-pink mb-0">Kit de producto Gratis</p>
               {views.get(6) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -171,7 +171,7 @@ const Mensual = (props: IData) => {
           </div>
           <div className="back tip m-2" onClick={() => verQ(8)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Envío gratis</p>
+              <p className="purple-pink mb-0">Envíos de producto Gratis</p>
               {views.get(8) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>

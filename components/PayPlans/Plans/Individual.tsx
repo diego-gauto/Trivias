@@ -68,7 +68,7 @@ const Individual = (props: IData) => {
             </div>
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$1,599.00 mxn</h2>
+            <h2 className="h3 mb-0">$1,599.00 MXN</h2>
             <span><i>Único pago</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
@@ -130,7 +130,7 @@ const Individual = (props: IData) => {
               <div className="b-green">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   ¿Tienes duda en tus cursos? No te preocupes, <b>nuestro equipo esta para ayudarte </b>
-                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicas, </b>
+                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus prácticas, </b>
                   para que sigas mejorando.
                 </p>
               </div>}
