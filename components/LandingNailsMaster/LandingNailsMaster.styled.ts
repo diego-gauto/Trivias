@@ -452,6 +452,7 @@ export const SuscriptionContain = styled.div`
 				transform: translateX(-100px);
 				position: absolute;
 				bottom: 0;
+				z-index: 1;
 			}
 		}
 	}
