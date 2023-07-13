@@ -635,8 +635,9 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${trial === "true" &&
+                    "149  MXN/mes."}{frequency === "month" &&
+                      "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -655,6 +656,7 @@ const Purchase = () => {
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
                   {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(trial === "true") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
@@ -719,6 +721,7 @@ const Purchase = () => {
                 {(type == "course") && <p className="title"><span>{product.title}</span></p>}
                 <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
                 {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
+                {(trial === "true") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
@@ -1080,8 +1083,9 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${trial === "true" &&
+                    "149  MXN/mes."}{frequency === "month" &&
+                      "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
