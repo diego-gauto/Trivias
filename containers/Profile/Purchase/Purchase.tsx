@@ -306,7 +306,7 @@ const Purchase = () => {
       if (type == 'subscription') {
         setConfirmation(false);
         setPay(true);
-        window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
+        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
       } else {
         let price = product.price
         if (coupon) {
