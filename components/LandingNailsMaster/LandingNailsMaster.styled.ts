@@ -76,6 +76,7 @@ export const SuscriptionContain = styled.div`
 	}
 
 	.info {
+		width: 100%;
 		position: relative;
 		padding-top: 75px;
 		padding-bottom: 75px;
@@ -91,7 +92,7 @@ export const SuscriptionContain = styled.div`
 			justify-content: center;
 			.text {
 				text-align: start;
-				h1 {
+				h2 {
 					.subtitle {
 						font-size: x-large;
 						font-weight: unset;
@@ -111,7 +112,7 @@ export const SuscriptionContain = styled.div`
 							max-height: 55px;
 							cursor: pointer;
 							width: 100%;
-							padding: 10px;
+							padding: 12px;
 							border: none;
 							border-radius: 14px;
 							background-color: #ece7f2;
@@ -195,6 +196,7 @@ export const SuscriptionContain = styled.div`
 		display: flex;
 		justify-content: center;
 		gap: 10px;
+		align-items: center;
 		.video-container {
 			display: flex;
 			background-color: #edf3f8;
@@ -206,6 +208,7 @@ export const SuscriptionContain = styled.div`
 			}
 		}
 		.info-video {
+			margin: 10px;
 			text-align: start;
 			align-self: center;
 		}
@@ -241,6 +244,7 @@ export const SuscriptionContain = styled.div`
 		}
 		.image-quote {
 			width: 250px;
+			position: relative;
 			.image {
 				position: relative;
 				z-index: 3;
@@ -432,9 +436,10 @@ export const SuscriptionContain = styled.div`
 			right: 0;
 		}
 		.left-side {
+			margin: 15px;
 			text-align: start;
 			width: 500px;
-			h1 {
+			h2 {
 				margin-block: 30px;
 				font-size: 50px;
 				text-align: center;
@@ -462,7 +467,7 @@ export const SuscriptionContain = styled.div`
 		margin-block: 60px;
 		.title {
 			margin-bottom: 60px;
-			h1 {
+			h2 {
 				font-weight: unset !important;
 			}
 		}
@@ -597,6 +602,9 @@ export const SuscriptionContain = styled.div`
 					max-width: 280px;
 				}
 			}
+			.experiences.resp {
+				display: none;
+			}
 		}
 	}
 
@@ -652,6 +660,10 @@ export const SuscriptionContain = styled.div`
 		h2 {
 			font-weight: 700;
 		}
+		.dudas-img {
+			position: relative;
+			display: flex;
+		}
 		.watsap-button {
 			position: absolute;
 			cursor: pointer;
@@ -668,16 +680,13 @@ export const SuscriptionContain = styled.div`
 
 	.faq-section {
 		margin-block: 50px;
-		h1 {
+		h2 {
 			font-weight: 700;
 		}
 		p {
 			font-weight: 700;
 		}
 		.faq {
-			div {
-				margin: 0;
-			}
 			.q-container {
 				width: 1200px;
 				cursor: pointer;
@@ -694,6 +703,8 @@ export const SuscriptionContain = styled.div`
 						margin-left: 15px;
 						font-weight: 800;
 						font-size: large;
+						width: 80%;
+						text-align: start;
 					}
 					.icon {
 						background-color: #3f1168;
@@ -701,6 +712,8 @@ export const SuscriptionContain = styled.div`
 						color: #ffffff;
 						margin-right: 15px;
 						align-self: center;
+						width: 20px;
+						height: 20px;
 					}
 				}
 				.a {
@@ -773,6 +786,202 @@ export const SuscriptionContain = styled.div`
 			.img {
 				margin: 15px;
 				border-radius: 14px;
+			}
+		}
+	}
+
+	@media (max-width: 550px) {
+		.section {
+			.left-img {
+				display: none;
+			}
+			.right-img-1 {
+				display: none;
+			}
+			.right-img-2 {
+				display: none;
+			}
+		}
+		.info {
+			.info-top {
+				flex-direction: column;
+				.text {
+					.title {
+						margin: 15px;
+					}
+					.uñas {
+						.uñas-q {
+							margin: 5px;
+							.uñas-q-container {
+								width: 90%;
+								.q {
+								}
+							}
+						}
+					}
+				}
+			}
+			.info-cards {
+				flex-direction: column;
+			}
+		}
+
+		.video-section {
+			flex-direction: column;
+		}
+
+		.arita-section {
+			.image-quote {
+				width: unset;
+				.image {
+					position: absolute;
+					bottom: 0;
+					height: 350px;
+					transform: translateX(-60px);
+				}
+			}
+			.text {
+				width: 400px;
+				transform: translate(0px, 0px);
+				.sangria {
+					width: 250px;
+				}
+			}
+		}
+
+		.benefits-section {
+			.benefits-info {
+				.back-hands {
+					display: none;
+				}
+			}
+		}
+
+		.program {
+			.program-course {
+				.course-container {
+					width: 450px;
+					.course-detail {
+						p {
+							text-align: start;
+						}
+					}
+				}
+			}
+		}
+
+		.cost-section {
+			.cost-body {
+				.cost-info {
+					.left-img {
+						display: none;
+					}
+					.right-img {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.certificado-section {
+			flex-direction: column;
+			.left-side {
+				width: 450px;
+				.p-pink {
+					font-size: 50px;
+				}
+			}
+			.right-side {
+				.float-bottom {
+					width: 100%;
+					position: relative;
+					transform: translate(40px, 70px);
+				}
+			}
+		}
+
+		.rewards-section {
+			.rewards-container {
+				width: 100%;
+				flex-direction: column;
+				.points-rewards {
+					.display-row {
+						flex-direction: column;
+					}
+				}
+			}
+		}
+
+		.experiences-section {
+			.experiences-container {
+				.experiences {
+					display: none;
+				}
+				.experiences.resp {
+					display: flex;
+				}
+			}
+		}
+
+		.subject-section {
+			.subject-container {
+				.side {
+					width: 215px;
+				}
+			}
+			.btn {
+				padding-inline: 20px;
+			}
+		}
+
+		.devices-section {
+			.devices {
+				width: 100%;
+			}
+		}
+
+		.dudas-section {
+			flex-direction: column;
+			.text-end {
+				text-align: center !important;
+			}
+			.dudas-img {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.point {
+					width: 80%;
+				}
+				.watsap-button {
+					transform: translate(0px, 100px);
+				}
+			}
+		}
+
+		.faq-section {
+			.faq {
+				.q-container {
+					width: 450px;
+				}
+				.q-container.min {
+					max-height: 68px;
+				}
+			}
+		}
+
+		.footer-footer {
+			.inside-footer {
+				width: 450px;
+				.info {
+					.email-send {
+						.email-input {
+							width: fit-content;
+						}
+					}
+				}
+				.img {
+					display: none;
+				}
 			}
 		}
 	}

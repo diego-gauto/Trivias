@@ -457,7 +457,7 @@ const LandingSuscription = () => {
 
               <div className='border-top'>
                 <p className="a">¡Claro!<br />Cada curso terminado, con prácticas aprobadas,
-                  te brinda un certificado con un folio único veificado para que puedas respaldar
+                  te brinda un certificado con un folio único verificado para que puedas respaldar
                   tus conocimientos.</p>
               </div>
             </div>

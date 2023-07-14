@@ -84,8 +84,8 @@ const LandingNailsMaster = () => {
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
-          <h1 className="big-title"><b>Nail's Master </b><br />
-            <b className="light-p">Revolution</b></h1>
+          <h2 className="big-title h1"><b>Nail's Master </b><br />
+            <b className="light-p">Revolution</b></h2>
           <h2><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
         </div>
 
@@ -107,9 +107,9 @@ const LandingNailsMaster = () => {
       <div className="info">
         <div className="info-top">
           <div className="text">
-            <h1><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
+            <h2 className="title"><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
               <b className="subtitle p-pink">aprenderás a aplicar uñas de manera:</b>
-            </h1>
+            </h2>
             <div className="uñas">
               <div className="uñas-q">
                 <div className={`uñas-q-container ${views.get(5) ? 'open' : ''}`} onClick={() => verQ(5)}>
@@ -184,7 +184,7 @@ const LandingNailsMaster = () => {
           </div>
           <img src={mujer} className="img" />
         </div>
-        <h1>Aprende desde cero y <b className="p-pink">vive de tu pasion</b> <br /> por las uñas acrilicas</h1>
+        <h2 className="h1">Aprende desde cero y <b className="p-pink">vive de tu pasion</b> <br /> por las uñas acrilicas</h2>
         <div className="info-cards all-center">
           <div className="card">
             <div className="adjust">
@@ -237,7 +237,7 @@ const LandingNailsMaster = () => {
           <h2>Te presentamos a</h2>
           <div>
             <div className="header-contain">
-              <h1 className="big-title">Arita Gonvar</h1>
+              <h2 className="big-title">Arita Gonvar</h2>
             </div>
             <p className="p-pink"><b>Ella te guiará paso a paso en el programa Nails Master Revolution</b></p>
             <div className="sangria">
@@ -260,7 +260,7 @@ const LandingNailsMaster = () => {
           la industria de las uñas<br /> <b className="blue">más grande de Latinoamérica.</b></h2>
 
         <div className="benefits-info">
-          <h1 className="yellow">Beneficios exclusivos</h1>
+          <h2 className="yellow">Beneficios exclusivos</h2>
           <div className="info-row">
             <div className="info-content">
               <img src={calendar} className="icon" />
@@ -373,9 +373,9 @@ const LandingNailsMaster = () => {
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
             <div className="center">
-              <h1 className="red">Costo total real: <del>$6,719.00 mxn</del></h1>
-              <h1 className="p-pink"><b>Precio de Lanzamiento con beca</b></h1>
-              <h1 className="green">Sólo $1,599.00 mxn</h1>
+              <h2 className="red h1">Costo total real: <del>$6,719.00 mxn</del></h2>
+              <h2 className="p-pink h1"><b>Precio de Lanzamiento con beca</b></h2>
+              <h2 className="green h1">Sólo $1,599.00 mxn</h2>
               <p>Válido para las primeras 500 personas</p>
               <h2><b>Quedan [x] lugares</b></h2>
               <button className="btn left-right">¡Quiero comenzar<br /> ahora!</button>
@@ -389,7 +389,7 @@ const LandingNailsMaster = () => {
       <div className="certificado-section">
         <img src={linesL} className="left-l" />
         <div className="left-side">
-          <h1 className="p-pink">Certificado oficial</h1>
+          <h2 className="p-pink h1">Certificado oficial</h2>
           <h2>En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
             <i>(Folio único verificado) </i></b> que autentifica y válida que tomaste el curso con nosotros.</h2>
         </div>
@@ -403,7 +403,7 @@ const LandingNailsMaster = () => {
       <div className="rewards-section">
         <div className="all-center title">
           <img src={rewards} className="me-3" />
-          <h1>CENTRO DE <b>RECOMPENSAS</b></h1>
+          <h2 className="h1">CENTRO DE <b>RECOMPENSAS</b></h2>
         </div>
         <div className="rewards-container">
           <div className="reward-card card-style">
@@ -464,12 +464,15 @@ const LandingNailsMaster = () => {
 
 
       <div className="experiences-section">
-        <h1>Conoce las experiencias de nuestras alumnas</h1>
+        <h2 className="h1">Conoce las experiencias de nuestras alumnas</h2>
         <div className="experiences-container">
           <div className="next"><BsChevronLeft className="icon" /></div>
           <div className="experiences">
             <img src={testimonio} className="card" />
             <img src={testimonio} className="card" />
+            <img src={testimonio} className="card" />
+          </div>
+          <div className="experiences resp">
             <img src={testimonio} className="card" />
           </div>
           <div className="next"><BsChevronRight className="icon" /></div>
@@ -479,7 +482,7 @@ const LandingNailsMaster = () => {
 
       <div className="subject-section">
         <img src={linesB} className="up-l" />
-        <h1 className="big-title">TEMARIO</h1>
+        <h2 className="big-title">TEMARIO</h2>
         <h4>Conoce todo lo que aprenderás en <b>Nail Master Revolution</b></h4>
         <div className="subject-container">
           <div className="side">
@@ -562,6 +565,7 @@ const LandingNailsMaster = () => {
             </div>
           </div>
         </div>
+
         <button className="btn up-down">Consulta tu lista de materiales a utilizar</button>
 
         <img src={linesB2} className="down-l" />
@@ -569,9 +573,9 @@ const LandingNailsMaster = () => {
 
 
       <div className="devices-section py-5">
-        <h1 className="big-title">Disfruta tus clases <br />
-          <b className="p-pink">desde cualquier dispositivo</b></h1>
-        <img src={devices} className="py-2" />
+        <h2 className="big-title">Disfruta tus clases <br />
+          <b className="p-pink">desde cualquier dispositivo</b></h2>
+        <img src={devices} className="py-2 devices" />
       </div>
 
       <div className="dudas-section all-center">
@@ -579,8 +583,8 @@ const LandingNailsMaster = () => {
           <h2>¿Tienes alguna duda?</h2>
           <h2 className="p-pink">Nuestro equipo está para ayudarte.</h2>
         </div>
-        <div className="position-relative d-flex">
-          <img src={pointWatsap} className="" />
+        <div className="dudas-img">
+          <img src={pointWatsap} className="point" />
           <div className="watsap-button all-center">
             <img src={watsapOut} className="me-3" />
             <p className="my-1">Contacta con<br /> un agente</p>
@@ -589,7 +593,7 @@ const LandingNailsMaster = () => {
       </div>
 
       <div className="faq-section spacing">
-        <h1 className="p-pink">Preguntas Frecuentes</h1>
+        <h2 className="p-pink h1">Preguntas Frecuentes</h2>
         <div className="faq">
           <div className="all-center">
             <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
@@ -601,7 +605,7 @@ const LandingNailsMaster = () => {
 
               <div className='border-top'>
                 <p className="a">¡Claro!<br />Cada curso terminado, con prácticas aprobadas,
-                  te brinda un certificado con un folio único veificado para que puedas respaldar
+                  te brinda un certificado con un folio único verificado para que puedas respaldar
                   tus conocimientos.</p>
               </div>
             </div>
@@ -664,7 +668,7 @@ const LandingNailsMaster = () => {
       <div className="footer-footer all-center">
         <div className="inside-footer">
           <div className="info">
-            <h1>Suscríbete a nuestro Newsletter</h1>
+            <h2 className="h1">Suscríbete a nuestro Newsletter</h2>
             <p>Mantente actualizado en temas de la industria de la
               belleza y futuras promociones de Gonvar.</p>
             <div className="email-send">
