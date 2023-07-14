@@ -156,8 +156,8 @@ const LandingSuscription = () => {
         </div>
         <img src={ubi} className="ubiImg" />
         <h2 className="big-title bold">NO IMPORTA TU UBICACIÓN</h2>
-        <h2>Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,
-          <br /><b className="p-pink">desde cualquier pais, donde quieras y a la hora que quieras.</b></h2>
+        <h2 className="">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,
+          <b className="p-pink"> desde cualquier pais, donde quieras y a la hora que quieras.</b></h2>
       </div>
 
 
@@ -304,7 +304,7 @@ const LandingSuscription = () => {
             </div>
 
             <div className="list">
-              <img src={star} className="me-3" />
+              <img src={star} className="" />
               <div className="m-0">
                 <h3><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h3>
                 <h3>Cada tarea, clase y curso aprobados genera puntos.</h3>
@@ -470,7 +470,7 @@ const LandingSuscription = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
               <div className={`q ${views.get(2) && 'open-q'}`}>
-                <p className={`title`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
+                <p className={`title special`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
                 {views.get(2) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>

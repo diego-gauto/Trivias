@@ -294,7 +294,7 @@ const LandingNailsMaster = () => {
           <div className="info-row gray">
             <div className="info-content">
               <img src={graph} className="icon" />
-              <h5><b>Cusro definitivo</b> con las técnicas más solicitadas</h5>
+              <h5><b>Curso definitivo</b> con las técnicas más solicitadas</h5>
             </div>
             <div className="info-content info-side">
               <img src={bulb} className="icon" />
@@ -614,7 +614,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
               <div className={`q ${views.get(2) && 'open-q'}`}>
-                <p className={`title`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
+                <p className={`title special`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
                 {views.get(2) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>

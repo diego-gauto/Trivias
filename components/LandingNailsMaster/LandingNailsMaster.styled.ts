@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SuscriptionContain = styled.div`
-	margin: 5px;
-	width: 97%;
+	width: 100%;
+	overflow-x: hidden;
 	color: #3f1168;
 	display: flex;
 	flex-direction: column;
@@ -363,6 +363,8 @@ export const SuscriptionContain = styled.div`
 						height: 30px;
 					}
 					p {
+						position: relative;
+						z-index: 2;
 						font-weight: 700;
 						.p-pink {
 							font-weight: 500;
@@ -794,8 +796,8 @@ export const SuscriptionContain = styled.div`
 			}
 		}
 	}
-
-	@media (max-width: 550px) {
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@media (max-width: 950px) {
 		.section {
 			.left-img {
 				display: none;
@@ -985,6 +987,265 @@ export const SuscriptionContain = styled.div`
 					.email-send {
 						.email-input {
 							width: fit-content;
+						}
+					}
+				}
+				.img {
+					display: none;
+				}
+			}
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////
+	@media (max-width: 390px) {
+		width: 390px;
+		.big-title {
+			font-size: 45px;
+		}
+		.section {
+			.left-img {
+				display: none;
+			}
+			.right-img-1 {
+				display: none;
+			}
+			.right-img-2 {
+				display: none;
+			}
+		}
+		.info {
+			.info-top {
+				flex-direction: column;
+				.text {
+					.title {
+						margin: 15px;
+					}
+					.uñas {
+						flex-direction: column;
+						.uñas-q {
+							margin: 5px;
+							.uñas-q-container {
+								width: fit-content;
+								max-height: 50px;
+							}
+						}
+					}
+				}
+			}
+			.info-cards {
+				flex-direction: column;
+			}
+		}
+
+		.video-section {
+			flex-direction: column;
+			.video-container {
+				width: 350px;
+				height: 350px;
+			}
+		}
+
+		.arita-section {
+			.image-quote {
+				width: unset;
+				.image {
+					position: absolute;
+					bottom: 0;
+					height: 350px;
+					transform: translateX(-60px);
+				}
+			}
+			.text {
+				width: 350px;
+				transform: translate(0px, 0px);
+				.p-pink {
+					width: 250px;
+				}
+				.sangria {
+					width: 220px;
+				}
+			}
+		}
+
+		.benefits-section {
+			width: 390px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			h2 {
+				width: 90%;
+			}
+			.benefits-info {
+				width: 100%;
+				.back-hands {
+					display: none;
+				}
+				.info-row {
+					.info-content {
+						h5 {
+							font-size: 12px;
+						}
+						.icon {
+							width: 20px;
+							height: 20px;
+						}
+					}
+				}
+			}
+		}
+
+		.program {
+			.program-course {
+				.course-container {
+					width: 350px;
+					.course-detail {
+						.icon {
+							width: 20px;
+							height: 20px;
+						}
+						p {
+							text-align: start;
+						}
+					}
+				}
+			}
+		}
+
+		.cost-section {
+			.cost-body {
+				.cost-info {
+					.left-img {
+						display: none;
+					}
+					.right-img {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.certificado-section {
+			flex-direction: column;
+			.left-side {
+				width: 350px;
+				.p-pink {
+					font-size: 45px;
+				}
+			}
+			.right-side {
+				.float-bottom {
+					width: 100%;
+					position: relative;
+					transform: translate(-20px, 70px);
+				}
+			}
+		}
+
+		.rewards-section {
+			.rewards-container {
+				width: unset;
+				flex-direction: column;
+				.points-rewards {
+					.display-row {
+						flex-direction: column;
+					}
+				}
+			}
+		}
+
+		.experiences-section {
+			.experiences-container {
+				.experiences {
+					display: none;
+				}
+				.experiences.resp {
+					display: flex;
+					.card {
+						width: 220px;
+					}
+				}
+			}
+		}
+
+		.subject-section {
+			.subject-container {
+				.side {
+					width: 160px;
+					.subject {
+						.d-flex {
+							h3 {
+								font-size: 16px;
+							}
+						}
+						h5 {
+							font-size: 12px;
+						}
+					}
+				}
+			}
+			.btn {
+				font-size: 14px;
+			}
+		}
+
+		.devices-section {
+			.devices {
+				width: 100%;
+			}
+		}
+
+		.dudas-section {
+			padding-top: 15px;
+			flex-direction: column;
+			.text-end {
+				text-align: center !important;
+			}
+			.dudas-img {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.point {
+					width: 90%;
+				}
+				.watsap-button {
+					transform: translate(0px, 90px);
+					p {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+
+		.faq-section {
+			.faq {
+				.q-container {
+					width: 350px;
+					.q {
+						.title {
+							font-size: 16px;
+						}
+					}
+					.border-top {
+						margin-top: 15px;
+					}
+				}
+				.q-container.min {
+					max-height: 70px;
+				}
+				.q-container.max {
+					max-height: 800px;
+				}
+			}
+		}
+
+		.footer-footer {
+			.inside-footer {
+				width: 350px;
+				.info {
+					.email-send {
+						display: flex;
+						.email-input {
+							width: 80%;
 						}
 					}
 				}

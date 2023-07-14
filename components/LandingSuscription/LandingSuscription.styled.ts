@@ -4,7 +4,8 @@ export const SuscriptionContain = styled.div`
 	position: relative;
 	text-align: center;
 	color: #3f1168;
-	width: 97%;
+	width: 100%;
+	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -209,7 +210,7 @@ export const SuscriptionContain = styled.div`
 			width: fit-content;
 			margin-bottom: 20px;
 			margin-top: 20px;
-			padding-left: 50px;
+			padding-left: 10px;
 			display: flex;
 			align-items: center;
 			text-align: start;
@@ -265,6 +266,7 @@ export const SuscriptionContain = styled.div`
 			z-index: 1;
 			display: inline-flex;
 			justify-content: center;
+			align-items: center;
 			width: 70%;
 			.points {
 				&:hover {
@@ -503,15 +505,21 @@ export const SuscriptionContain = styled.div`
 		}
 	}
 
-	@media (max-width: 550px) {
+	@media (max-width: 850px) {
 		.intro-section {
 			.gonvarplus {
-				width: 450px;
+				width: 350px;
 			}
 		}
 		.courses-section {
 			.group-buttons {
 				width: 100%;
+				.center {
+					gap: 10px;
+					button {
+						margin-inline: 10px;
+					}
+				}
 			}
 			h5 {
 				margin-inline: 15px;
@@ -522,7 +530,7 @@ export const SuscriptionContain = styled.div`
 				display: none;
 			}
 			.ubiImg {
-				width: 450px;
+				width: 380px;
 			}
 		}
 		.instructores-section {
@@ -667,6 +675,202 @@ export const SuscriptionContain = styled.div`
 		.footer-footer {
 			.inside-footer {
 				width: 450px;
+				.img {
+					display: none;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 390px) {
+		width: 380px;
+		overflow-x: hidden;
+		.big-title {
+			font-size: 45px;
+		}
+		.intro-section {
+			.gonvarplus {
+				width: 350px;
+			}
+		}
+		.courses-section {
+			.group-buttons {
+				width: 100%;
+				.center {
+					gap: 10px;
+					button {
+						margin-inline: 10px;
+					}
+				}
+			}
+			h5 {
+				margin-inline: 15px;
+			}
+		}
+		.ubi-section {
+			.back-ghosts {
+				display: none;
+			}
+			.ubiImg {
+				width: 380px;
+			}
+		}
+		.instructores-section {
+			.instructores {
+				width: 350px;
+			}
+		}
+		.difficulties-section {
+			.dif-lines {
+				flex-direction: column;
+				align-items: center;
+
+				width: 350px;
+				.behind {
+					display: none;
+				}
+				.level {
+					width: 170px;
+					margin-block: 10px;
+				}
+			}
+		}
+		.teaching-section {
+			.teach-lines.all-center {
+				flex-direction: column;
+			}
+		}
+		.certificado-section {
+			width: 100%;
+			.back-lines {
+				display: none;
+			}
+			.all-center {
+				flex-direction: column;
+				.cert-img {
+					width: 350px;
+				}
+				.cert-text {
+					width: 350px;
+					.w-75 {
+						width: unset !important;
+					}
+				}
+			}
+		}
+		.cellphone-section {
+			width: 100%;
+			.cell-body {
+				text-align: center !important;
+				margin: 5px;
+				.text-center {
+					margin-block: 25px;
+				}
+				.back-lines {
+					display: none;
+				}
+			}
+			img {
+				display: none;
+			}
+		}
+
+		.benefits-section {
+			.title {
+				h2 {
+					text-align: center !important;
+				}
+			}
+			.benefits-ghosts {
+				display: none;
+			}
+		}
+
+		.cost-section {
+			.chica-img {
+				display: none;
+			}
+			.manos {
+				display: none;
+			}
+		}
+
+		.rewards-section {
+			.side-images {
+				display: none;
+			}
+			.card-container {
+				flex-direction: column;
+			}
+		}
+
+		.testimonio-section {
+			.testimonio-container {
+				display: none;
+			}
+			.testimonio-container.res {
+				display: flex;
+			}
+		}
+
+		.email-send {
+			display: flex;
+			.email-input {
+				width: 80%;
+			}
+		}
+
+		.dudas-section {
+			.all-center {
+				flex-direction: column;
+				.text-end {
+					text-align: center !important;
+				}
+				.dudas-img {
+					.point {
+						width: 350px;
+					}
+					.watsap-button.all-center {
+						flex-direction: row;
+					}
+					.watsap-button {
+						transform: translate(50px, -70px);
+					}
+				}
+			}
+		}
+
+		.faq-section {
+			.faq {
+				.all-center {
+					.q-container {
+						width: 350px;
+						.q {
+							.title {
+								text-align: start;
+								width: 85%;
+							}
+							.title.special {
+								font-size: 16px;
+							}
+						}
+						.border-top {
+							margin-top: 20px;
+						}
+					}
+					.q-container.min {
+						max-height: 75px;
+					}
+					.q-container.max {
+						max-height: 800px;
+					}
+				}
+			}
+		}
+
+		.footer-footer {
+			.inside-footer {
+				width: 350px;
 				.img {
 					display: none;
 				}
