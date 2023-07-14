@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SuscriptionContain = styled.div`
 	margin: 5px;
-	width: 100%;
+	width: 97%;
 	color: #3f1168;
 	display: flex;
 	flex-direction: column;

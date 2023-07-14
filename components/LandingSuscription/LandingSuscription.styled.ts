@@ -4,7 +4,7 @@ export const SuscriptionContain = styled.div`
 	position: relative;
 	text-align: center;
 	color: #3f1168;
-	width: 100%;
+	width: 97%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
