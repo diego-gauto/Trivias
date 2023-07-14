@@ -262,6 +262,7 @@ export const SuscriptionContain = styled.div`
 			z-index: -1;
 		}
 		.card-container {
+			flex-wrap: wrap;
 			position: relative;
 			z-index: 1;
 			display: inline-flex;
@@ -504,8 +505,18 @@ export const SuscriptionContain = styled.div`
 			}
 		}
 	}
-
-	@media (max-width: 850px) {
+	@media (max-width: 1350px) {
+		.cost-section {
+			.chica-img {
+				width: 250px;
+			}
+			.manos {
+				width: 250px;
+			}
+		}
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	@media (max-width: 1100px) {
 		.intro-section {
 			.gonvarplus {
 				width: 350px;
@@ -540,12 +551,13 @@ export const SuscriptionContain = styled.div`
 		}
 		.difficulties-section {
 			.dif-lines {
+				flex-direction: column;
+				align-items: center;
 				.behind {
-					width: 400px;
-					transform: translateY(-35px);
+					display: none;
 				}
 				.level {
-					width: 60px;
+					width: 200px;
 				}
 			}
 		}
@@ -562,14 +574,154 @@ export const SuscriptionContain = styled.div`
 			.all-center {
 				flex-direction: column;
 				.cert-img {
-					width: 450px;
+					width: 550px;
 				}
 				.cert-text {
-					width: 450px;
+					width: 550px;
 					.w-75 {
 						width: unset !important;
 					}
 				}
+			}
+		}
+		.cellphone-section {
+			width: 100%;
+			.cell-body {
+				text-align: center !important;
+				margin: 5px;
+				.text-center {
+					margin-block: 25px;
+				}
+				.back-lines {
+					display: none;
+				}
+			}
+			img {
+				display: none;
+			}
+		}
+
+		.benefits-section {
+			.title {
+				h2 {
+					text-align: center !important;
+				}
+			}
+			.benefits-ghosts {
+				display: none;
+			}
+		}
+
+		.cost-section {
+			.chica-img {
+				display: none;
+			}
+			.manos {
+				display: none;
+			}
+		}
+
+		.testimonio-section {
+			.testimonio-container {
+				display: none;
+			}
+			.testimonio-container.res {
+				display: flex;
+			}
+		}
+
+		.dudas-section {
+			.all-center {
+				flex-direction: column;
+				.text-end {
+					text-align: center !important;
+				}
+				.dudas-img {
+					.point {
+						width: 450px;
+					}
+					.watsap-button.all-center {
+						flex-direction: row;
+					}
+					.watsap-button {
+						transform: translate(100px, -90px);
+					}
+				}
+			}
+		}
+
+		.faq-section {
+			.faq {
+				.all-center {
+					.q-container {
+						width: 450px;
+						.q {
+							.title {
+								text-align: start;
+								width: 85%;
+							}
+						}
+						.border-top {
+							margin-top: 20px;
+						}
+					}
+					.q-container.min {
+						max-height: 75px;
+					}
+					.q-container.max {
+						max-height: 800px;
+					}
+				}
+			}
+		}
+
+		.footer-footer {
+			.inside-footer {
+				width: 650px;
+			}
+			.img {
+				display: none;
+			}
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	@media (max-width: 650px) {
+		.intro-section {
+			.gonvarplus {
+				width: 350px;
+			}
+		}
+		.courses-section {
+			.group-buttons {
+				width: 100%;
+				.center {
+					gap: 10px;
+					button {
+						margin-inline: 10px;
+					}
+				}
+			}
+			h5 {
+				margin-inline: 15px;
+			}
+		}
+		.ubi-section {
+			.back-ghosts {
+				display: none;
+			}
+			.ubiImg {
+				width: 380px;
+			}
+		}
+		.instructores-section {
+			.instructores {
+				width: 450px;
+			}
+		}
+
+		.teaching-section {
+			.teach-lines.all-center {
+				flex-direction: column;
 			}
 		}
 		.cellphone-section {
@@ -681,7 +833,7 @@ export const SuscriptionContain = styled.div`
 			}
 		}
 	}
-
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@media (max-width: 390px) {
 		width: 380px;
 		overflow-x: hidden;
