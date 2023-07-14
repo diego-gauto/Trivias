@@ -796,8 +796,7 @@ export const SuscriptionContain = styled.div`
 			}
 		}
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@media (max-width: 950px) {
+	@media (max-width: 1000px) {
 		.section {
 			.left-img {
 				display: none;
@@ -809,6 +808,146 @@ export const SuscriptionContain = styled.div`
 				display: none;
 			}
 		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@media (max-width: 1250px) {
+		.benefits-section {
+			.benefits-info {
+				.back-hands {
+					display: none;
+				}
+			}
+		}
+
+		.program {
+			.program-course {
+				.course-container {
+					width: 950px;
+					.course-detail {
+						p {
+							text-align: start;
+						}
+					}
+				}
+			}
+		}
+
+		.cost-section {
+			.cost-body {
+				.cost-info {
+					.left-img {
+						display: none;
+					}
+					.right-img {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.certificado-section {
+			.left-side {
+				width: 450px;
+				.p-pink {
+					font-size: 50px;
+				}
+			}
+			.right-side {
+				.float-bottom {
+					width: 650px;
+					transform: translate(-260px, 0px);
+				}
+			}
+		}
+
+		.rewards-section {
+			.rewards-container {
+				width: unset;
+				flex-direction: column;
+				.points-rewards {
+					.display-row {
+					}
+				}
+			}
+		}
+
+		.experiences-section {
+			.experiences-container {
+				.experiences {
+					display: flex;
+				}
+				.experiences.resp {
+					display: none;
+				}
+			}
+		}
+
+		.subject-section {
+			.subject-container {
+				.side {
+					width: 315px;
+				}
+			}
+			.btn {
+				padding-inline: 20px;
+			}
+		}
+
+		.devices-section {
+			.devices {
+				width: 100%;
+			}
+		}
+
+		.dudas-section {
+			padding-top: 15px;
+			flex-direction: column;
+			.text-end {
+				text-align: center !important;
+			}
+			.dudas-img {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.point {
+					width: 80%;
+				}
+				.watsap-button {
+					transform: translate(0px, 100px);
+				}
+			}
+		}
+
+		.faq-section {
+			.faq {
+				.q-container {
+					width: 750px;
+				}
+				.q-container.min {
+					max-height: 68px;
+				}
+			}
+		}
+
+		.footer-footer {
+			.inside-footer {
+				width: 750px;
+				.info {
+					padding-top: 30px;
+					.email-send {
+						.email-input {
+							width: fit-content;
+						}
+					}
+				}
+				.img {
+					width: 300px;
+				}
+			}
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@media (max-width: 850px) {
 		.info {
 			.info-top {
 				flex-direction: column;
@@ -895,6 +1034,7 @@ export const SuscriptionContain = styled.div`
 
 		.certificado-section {
 			flex-direction: column;
+			align-items: center;
 			.left-side {
 				width: 450px;
 				.p-pink {
