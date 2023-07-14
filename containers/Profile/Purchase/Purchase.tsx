@@ -232,7 +232,7 @@ const Purchase = () => {
             setLoader(false);
             updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
             setConfirmation(false);
-            window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
+            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           }
         })
       } else {
