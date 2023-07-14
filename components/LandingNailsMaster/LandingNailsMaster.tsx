@@ -405,7 +405,7 @@ const LandingNailsMaster = () => {
           <img src={rewards} className="me-3" />
           <h2 className="h1">CENTRO DE <b>RECOMPENSAS</b></h2>
         </div>
-        <div className="rewards-container">
+        <div className="rewards-container all-center">
           <div className="reward-card card-style">
             <div className="normal-card">
               <div className="all-center img">

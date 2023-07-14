@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const SuscriptionContain = styled.div`
+	margin: 5px;
 	width: 100%;
 	color: #3f1168;
 	display: flex;
@@ -437,9 +438,9 @@ export const SuscriptionContain = styled.div`
 		}
 		.left-side {
 			margin: 15px;
-			text-align: start;
 			width: 500px;
-			h2 {
+			text-align: start;
+			.h1 {
 				margin-block: 30px;
 				font-size: 50px;
 				text-align: center;
@@ -467,6 +468,7 @@ export const SuscriptionContain = styled.div`
 		margin-block: 60px;
 		.title {
 			margin-bottom: 60px;
+			margin-inline: 15px;
 			h2 {
 				font-weight: unset !important;
 			}
@@ -751,7 +753,6 @@ export const SuscriptionContain = styled.div`
 		border-radius: 14px;
 		background-color: #edf3f8;
 		.email-input {
-			width: 350px;
 			background-color: transparent;
 			border: none;
 			outline: none;
@@ -773,17 +774,21 @@ export const SuscriptionContain = styled.div`
 		.inside-footer {
 			border-radius: 14px;
 			background-color: #3f1168;
-			width: 1200px;
+			width: 1000px;
+			height: 400px;
 			display: flex;
 			justify-content: space-between;
 			.info {
 				text-align: start;
-				margin: 35px;
+				margin-inline: 20px;
 				p {
 					font-size: large;
 				}
 			}
 			.img {
+				align-self: center;
+				width: 500px;
+				height: 300px;
 				margin: 15px;
 				border-radius: 14px;
 			}
@@ -843,6 +848,9 @@ export const SuscriptionContain = styled.div`
 			.text {
 				width: 400px;
 				transform: translate(0px, 0px);
+				.p-pink {
+					width: 300px;
+				}
 				.sangria {
 					width: 250px;
 				}
@@ -902,7 +910,7 @@ export const SuscriptionContain = styled.div`
 
 		.rewards-section {
 			.rewards-container {
-				width: 100%;
+				width: unset;
 				flex-direction: column;
 				.points-rewards {
 					.display-row {
@@ -941,6 +949,7 @@ export const SuscriptionContain = styled.div`
 		}
 
 		.dudas-section {
+			padding-top: 15px;
 			flex-direction: column;
 			.text-end {
 				text-align: center !important;

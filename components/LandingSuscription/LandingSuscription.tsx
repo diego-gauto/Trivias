@@ -86,15 +86,15 @@ const LandingSuscription = () => {
   const anual = "$1,599 mxn/anual"
   return (
     <SuscriptionContain>
-      <div className="m-0 intro" >
+      <div className="intro-section" >
         {/* <div className="m-0 all-center w-100">
           <img src={backPpal} className="background-images" />
         </div> */}
 
         <img src={gonvar} className="gonvarplus" />
-        <h1>La suscripción anual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h1>
+        <h2 className="h1 bold space">La suscripción anual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h2>
 
-        <div>
+        <div className="space">
           <h2 className="bold">¡Accede a <b className="p-pink">más de 60 cursos</b> hoy mismo!</h2>
           <h2 className="bold">Sólo {anual}</h2>
         </div>
@@ -102,30 +102,29 @@ const LandingSuscription = () => {
         <button className="btn left-right">¡Comenzar ahora!</button>
       </div>
 
-      <div className="spacing">
-        <div className="spacing">
+      <div className="courses-section">
+        <div className="space">
           <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h1><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS Y BELLEZA EN LÍNEA</b></h1>
+          <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y paso a paso.</h2>
         </div>
-
-        <div className="group-buttons">
-          <div className="center">
-            <button>Tips</button>
-            <button>Escultural</button>
-            <button>Mano Alzada</button>
-            <button>Stamping</button>
-            <button>3D</button>
-          </div>
-          <div className="center">
-            <button>Micropintura</button>
-            <button>Manicura</button>
-            <button>Maquillaje</button>
-            <button>Pedicura</button>
+        <div className="all-center space">
+          <div className="group-buttons">
+            <div className="center">
+              <button>Tips</button>
+              <button>Escultural</button>
+              <button>Mano Alzada</button>
+              <button>Stamping</button>
+              <button>3D</button>
+              <button>Micropintura</button>
+              <button>Manicura</button>
+              <button>Maquillaje</button>
+              <button>Pedicura</button>
+            </div>
           </div>
         </div>
 
-        <div className="row d-flex justify-content-center">
+        <div className="row all-center space">
           <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
             <img src={cursoBackground} alt="Curso" />
             <p><b className="p-pink">Nombre del curso </b><br />
@@ -149,35 +148,35 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div>
-        <div className="m-0 all-center back-ghosts">
+      <div className="ubi-section">
+        <div className="back-ghosts">
           <img src={ubiG1} className="g-1" />
-          <img src={ubiG2} className="g-2" />
           <img src={ubiG3} className="g-3" />
+          <img src={ubiG2} className="g-2" />
         </div>
-        <img src={ubi} />
-        <h1 className="big-title">NO IMPORTA TU UBICACIÓN</h1>
+        <img src={ubi} className="ubiImg" />
+        <h2 className="big-title bold">NO IMPORTA TU UBICACIÓN</h2>
         <h2>Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,
           <br /><b className="p-pink">desde cualquier pais, donde quieras y a la hora que quieras.</b></h2>
       </div>
 
 
-      <div className="spacing">
-        <h1 className="big-title"><b className="p-pink">¡Nunca te dejaremos sola, </b><br />en tu
-          proceso de aprendizaje!</h1>
-        <img src={instructores} className="spacing" />
-        <h2 className="bold">Los cursos son impartidos por <b className="p-pink">instructores profesionales
+      <div className="instructores-section">
+        <h2 className="big-title"><b className="p-pink">¡Nunca te dejaremos sola, </b><br />en tu
+          proceso de aprendizaje!</h2>
+        <img src={instructores} className="space instructores" />
+        <h2 className="bold space">Los cursos son impartidos por <b className="p-pink">instructores profesionales
           y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h2>
         <button className="btn up-down spacing mb-5">Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
-      <div className="spacing">
-        <h1>Nuestra suscripción cuenta con <br />
-          <b className="p-pink">cursos de diferentes grados de dificultad,</b><br />
-          desde principiantes hasta niveles más avanzados.</h1>
+      <div className="difficulties-section">
+        <h2 className="h1 bold">Nuestra suscripción cuenta con <br />
+          <b className="p-pink bold">cursos de diferentes grados de dificultad,</b><br />
+          desde principiantes hasta niveles más avanzados.</h2>
 
-        <div className="dif-lines spacing">
+        <div className="dif-lines">
           <img src={lineaDif} className="behind" />
           <img src={muyFacil} className="level" />
           <img src={facil} className="level" />
@@ -186,17 +185,17 @@ const LandingSuscription = () => {
           <img src={master} className="level" />
         </div>
 
-        <h2 className="fst-italic bold">No importa si vas comenzando o si ya tienes conocimientos, <br />
-          te aseguramos que tenemos un curso para ti.</h2>
+        <h4 className="fst-italic bold">No importa si vas comenzando o si ya tienes conocimientos, <br />
+          te aseguramos que tenemos un curso para ti.</h4>
       </div>
 
 
-      <div className="spacing est-w">
+      <div className="teaching-section">
         <h2 className="bold">Además, en la plataforma encontrarás diferentes</h2>
-        <h1 className="big-title p-pink">Líneas de aprendizaje</h1>
+        <h2 className="big-title p-pink">Líneas de aprendizaje</h2>
 
-        <div className="teach-lines spacing">
-          <div className="lines m-0">
+        <div className="teach-lines all-center">
+          <div className="lines">
             <img src={lineaArteU} />
             <div className="line-desc">
               <h2 className="bold">Arte en Uñas</h2>
@@ -204,7 +203,7 @@ const LandingSuscription = () => {
             </div>
           </div>
 
-          <div className="lines m-0">
+          <div className="lines">
             <img src={lineaUñas} />
             <div className="line-desc">
               <h2 className="bold">Estructura de Uñas</h2>
@@ -212,7 +211,7 @@ const LandingSuscription = () => {
             </div>
           </div>
 
-          <div className="lines m-0">
+          <div className="lines">
             <img src={lineaMaq} />
             <div className="line-desc">
               <h2 className="bold">Maquillaje</h2>
@@ -223,20 +222,20 @@ const LandingSuscription = () => {
 
         <h3 className="bold">Así tendrás la oportunidad de <br /><b className="p-pink">aprender desde
           lo básico hasta convetirte en Master.</b></h3>
-      </div>
+      </div >
 
 
-      <div className="spacing certificado-section all-center">
+      <div className="certificado-section all-center">
         <div className="back-lines all-center">
           <img className="line-3" src={certifB3} />
           <img className="line-4" src={certifB4} />
           <img className="line-1" src={certifB1} />
           <img className="line-2" src={certifB2} />
         </div>
-        <div className="m-0 all-center">
-          <img src={certificadoMujer} className="mx-5" />
-          <div className="pt-5 est-w text-start">
-            <h1 className="p-pink big-title mb-4">Certificado FUV</h1>
+        <div className="all-center">
+          <img src={certificadoMujer} className="cert-img" />
+          <div className="cert-text">
+            <h2 className="p-pink big-title mb-4">Certificado FUV</h2>
             <h2 className="bold mb-4 w-75">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
               <b className="p-pink">obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
             <h2 className="bold w-75">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
@@ -246,10 +245,10 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing all-center cellphone-section">
-        <div className="text-end est-w cell-body">
-          <h1>¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
-            en uñas y belleza!</h1>
+      <div className="all-center cellphone-section">
+        <div className="text-end cell-body">
+          <h2 className="h1">¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
+            en uñas y belleza!</h2>
           <div className="back-lines all-center">
             <img src={backCell} className="line-1" />
             <img src={backCell3} className="line-2" />
@@ -268,13 +267,13 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing">
-        <div className="all-center">
+      <div className="benefits-section">
+        <div className="title all-center">
           <img src={miniLogo} className="mx-3" />
-          <h1 className="text-start">Recibe <b className="p-pink">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h1>
+          <h2 className="text-start h1">Recibe <b className="p-pink">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h2>
         </div>
-        <div className="m-0 all-center">
-          <div className="m-0 w-auto">
+        <div className="all-center">
+          <div className="w-auto">
             <div className="list">
               <img src={envio} className="me-3" />
               <h3><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h3>
@@ -321,19 +320,19 @@ const LandingSuscription = () => {
 
       </div>
 
-      <div className="spacing all-center">
+      <div className="cost-section all-center">
         <img src={chica} className="ms-5 chica-img" />
-        <div className="m-0">
+        <div className="">
           <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>
-          <h1 className="p-pink bolder">Más de 60 cursos completso</h1>
-          <h1 className="green bolder">Sólo {anual}</h1>
+          <h2 className="p-pink bolder h1">Más de 60 cursos completso</h2>
+          <h2 className="green bolder h1">Sólo {anual}</h2>
           <button className="btn left-right mt-5">¡Quiero comenzar <br />ahora</button>
         </div>
-        <img src={manosPrecio} />
+        <img src={manosPrecio} className="manos" />
       </div>
 
 
-      <div className="spacing">
+      <div className="rewards-section">
         <div className="side-images">
           <img src={rewardBack} />
           <img src={rewardBack} className="rotate-img" />
@@ -346,7 +345,7 @@ const LandingSuscription = () => {
         <div className="card-container">
           <div className="reward-card points">
             <div className="normal-card">
-              <div className="all-center">
+              <div className="all-center icons">
                 <img src={pointReward} className="title-img" />
                 <img src={pointRewardOut} className="title-img" />
               </div>
@@ -356,7 +355,7 @@ const LandingSuscription = () => {
             </div>
             <div className="hover-card">
               <img src={puntoR} className="my-3" />
-              <h1>¡HOLA MARÍA!</h1>
+              <h2 className="h1">¡HOLA MARÍA!</h2>
               <p>Siguiente recompensa <br /> <b className="yellow">2 monómetros Gonvar</b></p>
               <h3 className="yellow bold">al reunir <br /> 3,000 puntos</h3>
             </div>
@@ -364,7 +363,7 @@ const LandingSuscription = () => {
 
           <div className="reward-card time">
             <div className="normal-card">
-              <div className="all-center">
+              <div className="all-center icons">
                 <img src={timeReward} className="title-img" />
                 <img src={timeRewardOut} className="title-img" />
               </div>
@@ -374,7 +373,7 @@ const LandingSuscription = () => {
             </div>
             <div className="hover-card">
               <img src={tiempoR} className="my-3" />
-              <h1>¡HOLA MARÍA!</h1>
+              <h2 className="h1">¡HOLA MARÍA!</h2>
               <p>Tu siguiente recompensa <br /> estará disponible <b className="yellow">en Junio</b></p>
               <h3 className="yellow bold">20% de descuento <br /> en productos Gonvar</h3>
             </div>
@@ -382,7 +381,7 @@ const LandingSuscription = () => {
 
           <div className="reward-card awards">
             <div className="normal-card">
-              <div className="all-center">
+              <div className="all-center icons">
                 <img src={awardReward} className="title-img" />
                 <img src={awardRewardOut} className="title-img" />
               </div>
@@ -392,7 +391,7 @@ const LandingSuscription = () => {
             </div>
             <div className="hover-card">
               <img src={cursoR} className="my-3" />
-              <h1>¡HOLA MARÍA!</h1>
+              <h2 className="h1">¡HOLA MARÍA!</h2>
               <p>Tu siguiente curso a terminar es <br /> <b className="yellow">MANICURE CON BALANCE</b></p>
               <h3 className="yellow bold">Has conseguido 15 <br /> Certificados FUV</h3>
             </div>
@@ -406,23 +405,26 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing testimonio-section">
-        <h1>Más de 45,000 alumnas</h1>
-        <div className="testimonio-container">
+      <div className="testimonio-section">
+        <h2 className="h1 bold">Más de 45,000 alumnas</h2>
+        <div className="testimonio-container ">
           <img src={testimonios} />
           <img src={testimonios} />
+          <img src={testimonios} />
+        </div>
+        <div className="testimonio-container res ">
           <img src={testimonios} />
         </div>
       </div>
 
 
-      <div className="spacing">
-        <h1 className="p-pink big-title">¿Necesitas Inspiración?</h1>
-        <h3 className="bold my-5">Si no sabes que diseños aplicar a tus clientas, <br /> descarga nuestro catálogo completo con más de <b className="p-pink">400 diseños ya disponibles.</b></h3>
+      <div className="inspo-section">
+        <h2 className="p-pink big-title">¿Necesitas Inspiración?</h2>
+        <h3 className="bold">Si no sabes que diseños aplicar a tus clientas, <br /> descarga nuestro catálogo completo con más de <b className="p-pink">400 diseños ya disponibles.</b></h3>
         <img src={inspo} />
-        <h3 className="bold my-5">Además, <b className="p-pink">aprende a hacer todos estos diseños</b> en nuestros más de 60 cursos.</h3>
+        <h3 className="bold">Además, <b className="p-pink">aprende a hacer todos estos diseños</b> en nuestros más de 60 cursos.</h3>
         <div className="all-center">
-          <div className="email-send m-0">
+          <div className="email-send">
             <input className="email-input" placeholder="Escribe tu e-mail"></input>
             <button className="email-button">Envíame el catalogo</button>
           </div>
@@ -430,22 +432,24 @@ const LandingSuscription = () => {
       </div>
 
 
-      <div className="spacing all-center">
-        <div className="text-end m-0">
-          <h2>¿Tienes alguna duda?</h2>
-          <h2 className="p-pink">Nuestro equipo está para ayudarte.</h2>
-        </div>
-        <div className="m-0 position-relative d-flex">
-          <img src={pointWatsap} className="" />
-          <div className="m-0 watsap-button all-center">
-            <img src={watsapOut} className="me-3" />
-            <p className="my-1 bold">Contacta con<br /> un agente</p>
+      <div className="dudas-section">
+        <div className="all-center">
+          <div className="text-end">
+            <h2 className="bold">¿Tienes alguna duda?</h2>
+            <h2 className="p-pink bold">Nuestro equipo está para ayudarte.</h2>
+          </div>
+          <div className="dudas-img">
+            <img src={pointWatsap} className="point" />
+            <div className="watsap-button all-center">
+              <img src={watsapOut} className="me-3" />
+              <p className="my-1 bold">Contacta con<br /> un agente</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="spacing">
-        <h2 className="p-pink">Preguntas Frecuentes</h2>
+      <div className="faq-section">
+        <h2 className="p-pink bold">Preguntas Frecuentes</h2>
         <div className="faq">
           <div className="all-center">
             <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
@@ -520,7 +524,7 @@ const LandingSuscription = () => {
       <div className="footer-footer all-center">
         <div className="inside-footer">
           <div className="info">
-            <h1>Suscríbete a nuestro Newsletter</h1>
+            <h2 className="h1">Suscríbete a nuestro Newsletter</h2>
             <p>Mantente actualizado en temas de la industria de la
               belleza y futuras promociones de Gonvar.</p>
             <div className="email-send m-0">
