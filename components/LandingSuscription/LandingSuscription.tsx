@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
+import router from "next/router";
+
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { getUserApi } from "../api/users";
 import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
@@ -69,6 +73,7 @@ views.set(4, false);
 
 const LandingSuscription = () => {
   const [ver, setver] = useState(true)
+  const [month, setMonth] = useState(true)
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -84,6 +89,32 @@ const LandingSuscription = () => {
   }, [setver])
   const mensual = "$149 mxn/mes"
   const anual = "$1,599 mxn/anual"
+
+  const handleRedirection = () => {
+    if (localStorage.getItem('email')) {
+      getUserApi(localStorage.getItem('email')).then((res) => {
+        if (res.level !== 0) {
+          router.push(PREVIEW_PATH)
+        } else {
+          if (!!month) {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+          } else {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+          }
+        }
+
+      })
+
+    } else {
+      if (!!month) {
+        localStorage.setItem('month', 'true')
+      } else {
+        localStorage.setItem('anual', 'true')
+      }
+      router.push(SIGNUP_PATH)
+    }
+  }
+
   return (
     <SuscriptionContain>
       <div className="intro-section" >
@@ -92,14 +123,14 @@ const LandingSuscription = () => {
         </div> */}
 
         <img src={gonvar} className="gonvarplus" />
-        <h2 className="h1 bold space">La suscripción anual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h2>
+        <h2 className="h1 bold space">La suscripción mensual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h2>
 
         <div className="space">
           <h2 className="bold">¡Accede a <b className="p-pink">más de 60 cursos</b> hoy mismo!</h2>
-          <h2 className="bold">Sólo {anual}</h2>
+          <h2 className="bold">Sólo {mensual}</h2>
         </div>
 
-        <button className="btn left-right">¡Comenzar ahora!</button>
+        <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
       </div>
 
       <div className="courses-section">
@@ -143,7 +174,7 @@ const LandingSuscription = () => {
               <i>Nombre del instructor</i></p>
           </div>
         </div>
-        <button className="btn left-right mb-3">¡Comenzar ahora!</button>
+        <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comenzar ahora!</button>
         <h5 className="p-pink"><i>Y aprende muchas otras técnicas sobre imagen personal.</i></h5>
       </div>
 
@@ -167,7 +198,7 @@ const LandingSuscription = () => {
         <img src={instructores} className="space instructores" />
         <h2 className="bold space">Los cursos son impartidos por <b className="p-pink">instructores profesionales
           y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h2>
-        <button className="btn up-down spacing mb-5">Quiero comenzar<br /> hoy mismo</button>
+        <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
@@ -259,7 +290,7 @@ const LandingSuscription = () => {
               con nuestros instructores certificados.</b> Aprende de manera correcta y alcanza tus
             metas con confianza.</h3>
           <div className="text-center">
-            <button className="btn up-down">Comienza ahora<br /> por {anual}</button>
+            <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {mensual}</button>
           </div>
 
         </div>
@@ -325,8 +356,8 @@ const LandingSuscription = () => {
         <div className="">
           <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>
           <h2 className="p-pink bolder h1">Más de 60 cursos completso</h2>
-          <h2 className="green bolder h1">Sólo {anual}</h2>
-          <button className="btn left-right mt-5">¡Quiero comenzar <br />ahora</button>
+          <h2 className="green bolder h1">Sólo {mensual}</h2>
+          <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />
       </div>

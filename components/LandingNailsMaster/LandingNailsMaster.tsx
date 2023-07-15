@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
 
+import router from "next/router";
+
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { getUserApi } from "../api/users";
 import { SuscriptionContain } from "./LandingNailsMaster.styled";
 
 const news = "/images/landing_suscription/newsletter.png"
@@ -71,6 +75,21 @@ const LandingNailsMaster = () => {
     }
   }
 
+  const handleRedirection = () => {
+    if (localStorage.getItem('email')) {
+      getUserApi(localStorage.getItem('email')).then((res) => {
+        if (res.level !== 0) {
+          router.push(PREVIEW_PATH)
+        } else {
+          router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
+        }
+      })
+    } else {
+      localStorage.setItem('nailMaster', 'true')
+      router.push(SIGNUP_PATH)
+    }
+  }
+
   useEffect(() => {
 
   }, [setver])
@@ -100,7 +119,7 @@ const LandingNailsMaster = () => {
         <h4><b>El curso de aplicación de uñas </b><b className="p-pink">más exitoso de Latinoámerica.<br />
           Más de 5,700 alumnas</b> <b>han aprendido con nosotros.</b></h4>
 
-        <button className="space btn left-right">Comienza ahora <br />por $1,599.00 mxn</button>
+        <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 mxn</button>
       </div>
 
 
@@ -222,7 +241,7 @@ const LandingNailsMaster = () => {
             <b className="big-title p-pink">más de 40 clases</b></h2>
           <p>Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
-          <button className="btn">Obtener acceso</button>
+          <button className="btn" onClick={() => handleRedirection()}>Obtener acceso</button>
         </div>
       </div>
 
@@ -378,7 +397,7 @@ const LandingNailsMaster = () => {
               <h2 className="green h1">Sólo $1,599.00 mxn</h2>
               <p>Válido para las primeras 500 personas</p>
               <h2><b>Quedan [x] lugares</b></h2>
-              <button className="btn left-right">¡Quiero comenzar<br /> ahora!</button>
+              <button className="btn left-right" onClick={() => handleRedirection()}>¡Quiero comenzar<br /> ahora!</button>
             </div>
             <img src={chica} className="right-img" />
           </div>

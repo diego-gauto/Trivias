@@ -617,6 +617,7 @@ export const SuscriptionContain = styled.div`
 		width: 100%;
 		background-color: #ece7f2;
 		padding-block: 50px;
+		padding-bottom: 150px;
 		.up-l {
 			z-index: 0;
 			position: absolute;
