@@ -16,8 +16,27 @@ export const getServerSideProps = async ({ res }: any) => {
       <loc>https://www.gonvar.io/</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
-    
-    
+    <url>
+      <loc>https://www.gonvar.io/preview</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>
+    <url>
+      <loc>https://www.gonvar.io/rewards</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>
+    <url>
+      <loc>https://www.gonvar.io/Blogs</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>  
+    <url>
+      <loc>https://www.gonvar.io/planes</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>  
+    <url>
+      <loc>https://www.gonvar.io/Blogs/para-que-sirve-cada-punta-pulidora-unas-drill</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url> 
+      
     </urlset>
   `;
 
