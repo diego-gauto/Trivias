@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../api/admin";
+import { getLandingCoursesApi } from "../api/lessons";
 import { getUserApi } from "../api/users";
 import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
@@ -81,6 +82,7 @@ const LandingSuscription = () => {
   const [ver, setver] = useState(true)
   const [month, setMonth] = useState(true)
   const [reviews, setReviews] = useState([])
+  const [courseGonvarPlus, setCourseGonvarPlus] = useState([])
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -108,6 +110,9 @@ const LandingSuscription = () => {
         reviewData.push(tempReview)
       });
       setReviews(reviewData);
+    })
+    getLandingCoursesApi(null).then((data) => {
+      setCourseGonvarPlus(data.gonvar_courses.slice(0, 3));
     })
   }
 
@@ -145,7 +150,7 @@ const LandingSuscription = () => {
       router.push(SIGNUP_PATH)
     }
   }
-
+  console.log(courseGonvarPlus);
   return (
     <SuscriptionContain>
       <div className="intro-section" >
@@ -170,7 +175,7 @@ const LandingSuscription = () => {
           <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y paso a paso.</h2>
         </div>
-        <div className="all-center space">
+        {/* <div className="all-center space">
           <div className="group-buttons">
             <div className="center">
               <button>Tips</button>
@@ -184,27 +189,41 @@ const LandingSuscription = () => {
               <button>Pedicura</button>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="row all-center space">
-          <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
-            <img src={cursoBackground} alt="Curso" />
-            <p><b className="p-pink">Nombre del curso </b><br />
-              <i>Nombre del instructor</i></p>
-          </div>
+        {courseGonvarPlus.length > 0 ?
+          <div className="row all-center space">
+            {courseGonvarPlus.map((e: any) => {
+              return (
+                <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
+                  <img src={e.image} alt="Curso" className="thumbnail" />
+                  <p><b className="p-pink">{e.title} </b><br />
+                    <i>{e.professors[0].name}</i></p>
+                </div>
+              )
+            })}
 
-          <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
-            <img src={cursoBackground} alt="Curso" />
-            <p><b className="p-pink">Nombre del curso </b><br />
-              <i>Nombre del instructor</i></p>
           </div>
+          :
+          <div className="row all-center space">
+            <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
+              <img src={cursoBackground} alt="Curso" />
+              <p><b className="p-pink">Nombre del curso </b><br />
+                <i>Nombre del instructor</i></p>
+            </div>
 
-          <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
-            <img src={cursoBackground} alt="Curso" />
-            <p><b className="p-pink">Nombre del curso </b><br />
-              <i>Nombre del instructor</i></p>
-          </div>
-        </div>
+            <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
+              <img src={cursoBackground} alt="Curso" />
+              <p><b className="p-pink">Nombre del curso </b><br />
+                <i>Nombre del instructor</i></p>
+            </div>
+
+            <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
+              <img src={cursoBackground} alt="Curso" />
+              <p><b className="p-pink">Nombre del curso </b><br />
+                <i>Nombre del instructor</i></p>
+            </div>
+          </div>}
         <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comenzar ahora!</button>
         <h5 className="p-pink"><i>Y aprende muchas otras técnicas sobre imagen personal.</i></h5>
       </div>

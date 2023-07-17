@@ -74,6 +74,11 @@ export const SuscriptionContain = styled.div`
 				flex-wrap: wrap;
 			}
 		}
+		.thumbnail {
+			border-radius: 18px;
+			width: 370px;
+			height: 200px;
+		}
 		.course-container {
 			gap: 20px;
 		}
@@ -87,7 +92,7 @@ export const SuscriptionContain = styled.div`
 			.g-1 {
 				position: absolute;
 				z-index: -1;
-				transform: translateX(-525px);
+				transform: translateX(-540px);
 			}
 			.g-2 {
 				position: absolute;
