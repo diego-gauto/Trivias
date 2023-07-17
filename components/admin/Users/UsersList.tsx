@@ -124,6 +124,7 @@ const UsersList = () => {
     setLoginDate(date)
   }
   const filteredData = async (filters: any, date: any, text_value: string, page: number) => {
+    console.log(filters);
     let tempUsers: any = [];
     setLoader(false);
     if (text_value === "") {
@@ -228,6 +229,7 @@ const UsersList = () => {
     return "Activo " + countCourses
   }
   const getMaxUsers = (filters: any, date: any, text_value: any) => {
+    console.log(filters);
     userForExcel(text_value === "" ? "all_users" : text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
       setTotalUsers(res.length);
       setMaxPages(Math.floor(res.length / usersPerPage));
@@ -271,6 +273,7 @@ const UsersList = () => {
     //   }
     // })
     await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
+      console.log(res);
       await res.map(async (user: any) => {
         sendUsers.push({
           nombre: user.nombre,

@@ -56,3 +56,7 @@ export function FormatDateForBack(date: Date) {
     return "14-05-2023 00:00:00";
   }
 }
+export function FormatCourses(course: any) {
+  let tempCourse = course.filter((c: any) => c.type === "Producto");
+  return tempCourse;
+}
