@@ -5,10 +5,18 @@ import { useEffect, useState } from "react";
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
+import { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
+import { getLandingReviewApi } from "../api/admin";
 import { getUserApi } from "../api/users";
+import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingNailsMaster.styled";
+import MaterialesModal from "./MaterialesModal";
 
 const news = "/images/landing_suscription/newsletter.png"
 const testimonio = "/images/landing_suscription/testimonios.png"
@@ -65,6 +73,38 @@ views.set(8, false);
 
 const LandingNailsMaster = () => {
   const [ver, setver] = useState(true)
+  const [verMat, setverMat] = useState(false)
+  const [reviews, setReviews] = useState([])
+
+  const handleMats = () => {
+    setverMat(false)
+  }
+
+  const getRevs = () => {
+    getLandingReviewApi().then((res) => {
+      let reviewData: any = [];
+      res.forEach((review: any) => {
+        let tempReview = {
+          descripcion: review.about,
+          id: review.id,
+          convertedDate: review.date,
+          imgURL: review.image,
+          usrFacebookURL: review.facebook_url,
+          isNew: review.new === 0 ? false : true,
+          username: review.user_name,
+          usrImgURL: review.user_image,
+        }
+        reviewData.push(tempReview)
+      });
+      setReviews(reviewData);
+    })
+  }
+
+  useEffect(() => {
+    getRevs()
+  }, [setReviews])
+
+
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -485,16 +525,65 @@ const LandingNailsMaster = () => {
       <div className="experiences-section">
         <h2 className="h1">Conoce las experiencias de nuestras alumnas</h2>
         <div className="experiences-container">
-          <div className="next"><BsChevronLeft className="icon" /></div>
-          <div className="experiences">
-            <img src={testimonio} className="card" />
-            <img src={testimonio} className="card" />
-            <img src={testimonio} className="card" />
-          </div>
-          <div className="experiences resp">
-            <img src={testimonio} className="card" />
-          </div>
-          <div className="next"><BsChevronRight className="icon" /></div>
+          <div className="next swiper-prev"><BsChevronLeft className="icon" /></div>
+          <Swiper
+            className="experiences"
+            slidesPerView={3}
+            spaceBetween={30}
+            loop={true}
+            navigation={{
+              nextEl: '.swiper-next',
+              prevEl: '.swiper-prev',
+            }}
+            modules={[Navigation]}
+          >
+            {reviews.length > 0 && reviews.map((review: any, index: any) => {
+              return (
+                <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
+                  <SlideModule_1
+                    index={index}
+                    isNew={review.isNew}
+                    descripcion={review.descripcion}
+                    datePublication={review.convertedDate}
+                    usrFacebookURL={review.usrFacebookURL}
+                    username={review.username}
+                    imgURL={downloadFileWithStoragePath(review.imgURL)}
+                    usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                  />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+
+          <Swiper
+            className="experiences resp"
+            slidesPerView={1}
+            loop={true}
+            spaceBetween={30}
+            navigation={{
+              nextEl: '.swiper-next',
+              prevEl: '.swiper-prev',
+            }}
+            modules={[Navigation]}
+          >
+            {reviews.length > 0 && reviews.map((review: any, index: any) => {
+              return (
+                <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
+                  <SlideModule_1
+                    index={index}
+                    isNew={review.isNew}
+                    descripcion={review.descripcion}
+                    datePublication={review.convertedDate}
+                    usrFacebookURL={review.usrFacebookURL}
+                    username={review.username}
+                    imgURL={downloadFileWithStoragePath(review.imgURL)}
+                    usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                  />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+          <div className="next swiper-next"><BsChevronRight className="icon" /></div>
         </div>
       </div>
 
@@ -585,8 +674,8 @@ const LandingNailsMaster = () => {
           </div>
         </div>
 
-        <button className="btn up-down">Consulta tu lista de materiales a utilizar</button>
-
+        <button className="btn up-down" onClick={() => setverMat(true)}>Consulta tu lista de materiales a utilizar</button>
+        {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
         <img src={linesB2} className="down-l" />
       </div>
 

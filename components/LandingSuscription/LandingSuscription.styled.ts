@@ -341,12 +341,47 @@ export const SuscriptionContain = styled.div`
 	.testimonio-section {
 		margin-block: 75px;
 		.testimonio-container {
+			margin-top: 50px;
 			display: flex;
 			justify-content: center;
-			gap: 25px;
+			width: 947px;
+			gap: 15px;
 		}
 		.testimonio-container.res {
 			display: none;
+		}
+	}
+
+	.experiences-section {
+		padding-block: 50px;
+		width: 100%;
+		background-color: #e2b4e7;
+		.experiences-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-inline: 50px;
+			.next {
+				margin-inline: 25px;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				border-radius: 100%;
+				width: fit-content;
+				padding: 15px;
+				border: 1px solid black;
+				background-color: transparent;
+				.icon {
+					color: #000000;
+					width: 10px;
+					height: 10px;
+				}
+			}
+			.experiences {
+			}
+			.experiences.resp {
+				display: none;
+			}
 		}
 	}
 
@@ -623,6 +658,7 @@ export const SuscriptionContain = styled.div`
 
 		.testimonio-section {
 			.testimonio-container {
+				max-width: 300px;
 				display: none;
 			}
 			.testimonio-container.res {

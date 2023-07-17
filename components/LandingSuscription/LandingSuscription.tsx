@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
+import { Navigation } from "swiper";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
+import { getLandingReviewApi } from "../api/admin";
 import { getUserApi } from "../api/users";
+import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
@@ -74,6 +80,7 @@ views.set(4, false);
 const LandingSuscription = () => {
   const [ver, setver] = useState(true)
   const [month, setMonth] = useState(true)
+  const [reviews, setReviews] = useState([])
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -83,6 +90,30 @@ const LandingSuscription = () => {
       views.set(q, true)
     }
   }
+
+  const getRevs = () => {
+    getLandingReviewApi().then((res) => {
+      let reviewData: any = [];
+      res.forEach((review: any) => {
+        let tempReview = {
+          descripcion: review.about,
+          id: review.id,
+          convertedDate: review.date,
+          imgURL: review.image,
+          usrFacebookURL: review.facebook_url,
+          isNew: review.new === 0 ? false : true,
+          username: review.user_name,
+          usrImgURL: review.user_image,
+        }
+        reviewData.push(tempReview)
+      });
+      setReviews(reviewData);
+    })
+  }
+
+  useEffect(() => {
+    getRevs()
+  }, [setReviews])
 
   useEffect(() => {
 
@@ -438,14 +469,58 @@ const LandingSuscription = () => {
 
       <div className="testimonio-section">
         <h2 className="h1 bold">Más de 45,000 alumnas</h2>
-        <div className="testimonio-container ">
-          <img src={testimonios} />
-          <img src={testimonios} />
-          <img src={testimonios} />
-        </div>
-        <div className="testimonio-container res ">
-          <img src={testimonios} />
-        </div>
+        <Swiper
+          className="testimonio-container"
+          slidesPerView={3}
+          spaceBetween={30}
+          loop={true}
+        >
+          {reviews.map((review: any, index: any) => {
+            return (
+              <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
+                <SlideModule_1
+                  index={index}
+                  isNew={review.isNew}
+                  descripcion={review.descripcion}
+                  datePublication={review.convertedDate}
+                  usrFacebookURL={review.usrFacebookURL}
+                  username={review.username}
+                  imgURL={downloadFileWithStoragePath(review.imgURL)}
+                  usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
+
+        <Swiper
+          className="testimonio-container res"
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          navigation={{
+            nextEl: '.swiper-next',
+            prevEl: '.swiper-prev',
+          }}
+          modules={[Navigation]}
+        >
+          {reviews.length > 0 && reviews.map((review: any, index: any) => {
+            return (
+              <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
+                <SlideModule_1
+                  index={index}
+                  isNew={review.isNew}
+                  descripcion={review.descripcion}
+                  datePublication={review.convertedDate}
+                  usrFacebookURL={review.usrFacebookURL}
+                  username={review.username}
+                  imgURL={downloadFileWithStoragePath(review.imgURL)}
+                  usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
       </div>
 
 

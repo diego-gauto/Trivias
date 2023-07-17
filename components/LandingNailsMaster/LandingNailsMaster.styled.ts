@@ -18,6 +18,63 @@ export const SuscriptionContain = styled.div`
 	.fechas {
 		margin-bottom: 100px;
 	}
+
+	.materials-modal {
+		width: 100%;
+		.end {
+			width: 100%;
+			display: flex;
+			justify-content: end;
+			align-items: center;
+		}
+		.title {
+			margin-bottom: 15px;
+			font-weight: 800;
+		}
+		.subtitle {
+			margin-bottom: 15px;
+			font-weight: 700;
+		}
+		.materials-list {
+			display: flex;
+			padding: 20px;
+			.materials-column {
+				width: 33%;
+				display: flex;
+				flex-direction: column;
+				.icon-row {
+					width: 90%;
+					display: flex;
+					align-items: flex-start;
+					height: fit-content;
+					img {
+						margin-top: 5px;
+						margin-right: 10px;
+					}
+					p {
+						text-align: start;
+						font-weight: 500;
+						font-size: 20px;
+					}
+				}
+			}
+		}
+		.materials-footer {
+			margin-bottom: 20px;
+			.tip {
+				width: 90%;
+				margin-block: 15px;
+				font-style: italic;
+				color: #952cee;
+				font-size: 20px;
+			}
+		}
+		.icon {
+			cursor: pointer;
+			width: 40px;
+			height: 40px;
+		}
+	}
 	.section {
 		width: 100%;
 		position: relative;
@@ -598,13 +655,8 @@ export const SuscriptionContain = styled.div`
 				margin-top: 50px;
 				display: flex;
 				justify-content: center;
-				width: 950px;
+				width: 947px;
 				gap: 15px;
-				.card {
-					border: none;
-					background-color: transparent;
-					max-width: 280px;
-				}
 			}
 			.experiences.resp {
 				display: none;
@@ -807,6 +859,19 @@ export const SuscriptionContain = styled.div`
 			}
 			.right-img-2 {
 				display: none;
+			}
+		}
+	}
+	//////////////////////////////////////////////////////////////
+	@media (max-width: 1000px) {
+		.materials-modal {
+			width: unset;
+			.materials-list {
+				padding: 0;
+				flex-direction: column;
+				.materials-column {
+					width: 100%;
+				}
 			}
 		}
 	}
@@ -1065,7 +1130,9 @@ export const SuscriptionContain = styled.div`
 
 		.experiences-section {
 			.experiences-container {
+				margin-inline: 0;
 				.experiences {
+					max-width: 300px;
 					display: none;
 				}
 				.experiences.resp {
@@ -1296,6 +1363,9 @@ export const SuscriptionContain = styled.div`
 
 		.experiences-section {
 			.experiences-container {
+				.next {
+					margin-inline: 5px;
+				}
 				.experiences {
 					display: none;
 				}
