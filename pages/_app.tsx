@@ -8,13 +8,14 @@ import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { FacebookProvider } from 'react-facebook';
 import Script from "next/script";
+import { CanonicalURL } from "../utils/functions";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <AuthProvider>
       <Head>
-        <link rel="canonical" href={"https://gonvar.io" + router.asPath} />
+        <link rel="canonical" href={CanonicalURL()} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
         <Script
           id="fb-pixel"
