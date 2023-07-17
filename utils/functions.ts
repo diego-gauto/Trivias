@@ -1,3 +1,5 @@
+import router, { useRouter } from "next/router";
+
 const getMonth = (month: number) => {
   if (month === 1) {
     return "enero";
@@ -27,6 +29,13 @@ const getMonth = (month: number) => {
     return "";
   }
 };
+export function CanonicalURL() {
+  const router: any = useRouter();
+  const siteUrl: any = "https://www.gonvar.io";
+  const cleanPath: any = router.asPath.split("#")[0].split("?")[0];
+  const canonicalUrl = `${siteUrl}` + (router.asPath === "/" ? "" : cleanPath);
+  return canonicalUrl;
+}
 export function formatBlogDate(created_at: Date) {
   let date = new Date(created_at);
   let tempDay = date.getDate();
