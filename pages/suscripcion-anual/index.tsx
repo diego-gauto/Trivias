@@ -3,8 +3,8 @@ import Terms from "../../components/TermsModal/Terms";
 import { MainContain } from "../../screens/Styles.styled";
 
 const termsConditions = () => {
-  const price = "$149 mxn/mes"
-  const month = true;
+  const price = "$1,599 mxn/anual"
+  const month = false;
   return (
     <MainContain
       style={{

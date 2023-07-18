@@ -82,9 +82,14 @@ views.set(2, false);
 views.set(3, false);
 views.set(4, false);
 
-const LandingSuscription = () => {
+interface ILandingSuscription {
+  price: string;
+  isMonth: boolean;
+}
+
+const LandingSuscription = (props: ILandingSuscription) => {
+  const { price, isMonth } = props;
   const [ver, setver] = useState(true)
-  const [month, setMonth] = useState(true)
   const [reviews, setReviews] = useState([])
   const [courseGonvarPlus, setCourseGonvarPlus] = useState([])
 
@@ -134,8 +139,6 @@ const LandingSuscription = () => {
   useEffect(() => {
 
   }, [setver])
-  const mensual = "$149 mxn/mes"
-  const anual = "$1,599 mxn/anual"
 
   const handleRedirection = () => {
     if (localStorage.getItem('email')) {
@@ -143,7 +146,7 @@ const LandingSuscription = () => {
         if (res.level !== 0) {
           router.push(PREVIEW_PATH)
         } else {
-          if (!!month) {
+          if (isMonth) {
             router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
           } else {
             router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
@@ -153,7 +156,7 @@ const LandingSuscription = () => {
       })
 
     } else {
-      if (!!month) {
+      if (isMonth) {
         localStorage.setItem('month', 'true')
       } else {
         localStorage.setItem('anual', 'true')
@@ -161,7 +164,6 @@ const LandingSuscription = () => {
       router.push(SIGNUP_PATH)
     }
   }
-  console.log(courseGonvarPlus);
   return (
     <SuscriptionContain>
       <div className="intro-section" >
@@ -174,7 +176,7 @@ const LandingSuscription = () => {
 
         <div className="space">
           <h2 className="bold">¡Accede a <b className="p-pink">más de 60 cursos</b> hoy mismo!</h2>
-          <h2 className="bold">Sólo {mensual}</h2>
+          <h2 className="bold">Sólo {price}</h2>
         </div>
 
         <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
@@ -351,7 +353,7 @@ const LandingSuscription = () => {
               con nuestros instructores certificados.</b> Aprende de manera correcta y alcanza tus
             metas con confianza.</h3>
           <div className="text-center">
-            <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {mensual}</button>
+            <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
           </div>
 
         </div>
@@ -417,7 +419,7 @@ const LandingSuscription = () => {
         <div className="mx-3">
           <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>
           <h2 className="p-pink bolder h1">Más de 60 cursos completso</h2>
-          <h2 className="green bolder h1">Sólo {mensual}</h2>
+          <h2 className="green bolder h1">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />
@@ -522,7 +524,6 @@ const LandingSuscription = () => {
             )
           })}
         </Swiper>
-
         <Swiper
           className="testimonio-container res"
           slidesPerView={1}
@@ -569,9 +570,9 @@ const LandingSuscription = () => {
             <SwiperSlide>
               <img src={inspo3} />
             </SwiperSlide>
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <img src={inspo4} />
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Swiper>
         </div>
 
