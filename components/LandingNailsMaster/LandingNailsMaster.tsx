@@ -130,6 +130,13 @@ const LandingNailsMaster = () => {
     }
   }
 
+  const redirectToWhatsAppChat = () => {
+    const phoneNumber = '+52 1 55 3893 3134';
+    const formattedPhoneNumber = phoneNumber.replace(/\D/g, '');
+    const url = `https://wa.me/${formattedPhoneNumber}`;
+    window.open(url, '_blank');
+  };
+
   useEffect(() => {
 
   }, [setver])
@@ -693,7 +700,7 @@ const LandingNailsMaster = () => {
         </div>
         <div className="dudas-img">
           <img src={pointWatsap} className="point" />
-          <div className="watsap-button all-center">
+          <div className="watsap-button all-center" onClick={() => redirectToWhatsAppChat()}>
             <img src={watsapOut} className="me-3" />
             <p className="my-1">Contacta con<br /> un agente</p>
           </div>
@@ -773,7 +780,7 @@ const LandingNailsMaster = () => {
         </div>
       </div>
 
-      <div className="footer-footer all-center">
+      {/* <div className="footer-footer all-center">
         <div className="inside-footer">
           <div className="info">
             <h2 className="h1">Suscríbete a nuestro Newsletter</h2>
@@ -790,7 +797,7 @@ const LandingNailsMaster = () => {
           </div>
           <img className="img" src={news} />
         </div>
-      </div>
+      </div> */}
 
 
     </SuscriptionContain >

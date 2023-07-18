@@ -71,6 +71,10 @@ const puntoR = "/images/landing_suscription/puntos_recompensa.png"
 const backCell = "/images/landing_suscription/lineBCell.png"
 const backCell2 = "/images/landing_suscription/lineBCell2.png"
 const backCell3 = "/images/landing_suscription/lineBCell3.png"
+const inspo1 = "/images/landing_suscription/nails_inspo_1.png"
+const inspo2 = "/images/landing_suscription/nails_inspo_2.png"
+const inspo3 = "/images/landing_suscription/nails_inspo_3.png"
+const inspo4 = "/images/landing_suscription/nails_inspo_4.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -119,6 +123,13 @@ const LandingSuscription = () => {
   useEffect(() => {
     getRevs()
   }, [setReviews])
+
+  const redirectToWhatsAppChat = () => {
+    const phoneNumber = '+52 1 55 3893 3134';
+    const formattedPhoneNumber = phoneNumber.replace(/\D/g, '');
+    const url = `https://wa.me/${formattedPhoneNumber}`;
+    window.open(url, '_blank');
+  };
 
   useEffect(() => {
 
@@ -175,7 +186,7 @@ const LandingSuscription = () => {
           <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y paso a paso.</h2>
         </div>
-        {/* <div className="all-center space">
+        <div className="all-center space">
           <div className="group-buttons">
             <div className="center">
               <button>Tips</button>
@@ -189,7 +200,7 @@ const LandingSuscription = () => {
               <button>Pedicura</button>
             </div>
           </div>
-        </div> */}
+        </div>
 
         {courseGonvarPlus.length > 0 ?
           <div className="row all-center space">
@@ -403,7 +414,7 @@ const LandingSuscription = () => {
 
       <div className="cost-section all-center">
         <img src={chica} className="ms-5 chica-img" />
-        <div className="">
+        <div className="mx-3">
           <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>
           <h2 className="p-pink bolder h1">Más de 60 cursos completso</h2>
           <h2 className="green bolder h1">Sólo {mensual}</h2>
@@ -418,7 +429,7 @@ const LandingSuscription = () => {
           <img src={rewardBack} />
           <img src={rewardBack} className="rotate-img" />
         </div>
-        <div className="m-0 align-items-center d-flex justify-content-center">
+        <div className="mx-3 all-center">
           <img src={rewards} className="me-3" />
           <h2>CENTRO DE <b>RECOMPENSAS</b></h2>
         </div>
@@ -546,14 +557,49 @@ const LandingSuscription = () => {
       <div className="inspo-section">
         <h2 className="p-pink big-title">¿Necesitas Inspiración?</h2>
         <h3 className="bold">Si no sabes que diseños aplicar a tus clientas, <br /> descarga nuestro catálogo completo con más de <b className="p-pink">400 diseños ya disponibles.</b></h3>
-        <img src={inspo} />
+        {/* <img src={inspo} /> */}
+        <div className="inspo-swiper">
+          <Swiper slidesPerView={3} spaceBetween={30} loop={true} >
+            <SwiperSlide >
+              <img src={inspo1} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={inspo2} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={inspo3} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={inspo4} />
+            </SwiperSlide>
+          </Swiper>
+        </div>
+
+        <div className="inspo-swiper res">
+          <Swiper slidesPerView={1} spaceBetween={30} loop={true} >
+            <SwiperSlide >
+              <img src={inspo1} className="swiper-item" />
+            </SwiperSlide>
+            <SwiperSlide >
+              <img src={inspo2} className="swiper-item" />
+            </SwiperSlide>
+            <SwiperSlide >
+              <img src={inspo3} className="swiper-item" />
+            </SwiperSlide>
+            <SwiperSlide >
+              <img src={inspo4} className="swiper-item" />
+            </SwiperSlide>
+          </Swiper>
+        </div>
         <h3 className="bold">Además, <b className="p-pink">aprende a hacer todos estos diseños</b> en nuestros más de 60 cursos.</h3>
+
+        {/*     Catalogo?????????????????????????????????????         
         <div className="all-center">
           <div className="email-send">
             <input className="email-input" placeholder="Escribe tu e-mail"></input>
             <button className="email-button">Envíame el catalogo</button>
           </div>
-        </div>
+        </div> */}
       </div>
 
 
@@ -565,7 +611,7 @@ const LandingSuscription = () => {
           </div>
           <div className="dudas-img">
             <img src={pointWatsap} className="point" />
-            <div className="watsap-button all-center">
+            <div className="watsap-button all-center" onClick={() => redirectToWhatsAppChat()}>
               <img src={watsapOut} className="me-3" />
               <p className="my-1 bold">Contacta con<br /> un agente</p>
             </div>
@@ -646,6 +692,7 @@ const LandingSuscription = () => {
         </div>
       </div>
 
+      {/* Newsletter????????????????????????????????????????????????????????????
       <div className="footer-footer all-center">
         <div className="inside-footer">
           <div className="info">
@@ -663,7 +710,7 @@ const LandingSuscription = () => {
           </div>
           <img className="img" src={news} />
         </div>
-      </div>
+      </div> */}
     </SuscriptionContain >
   )
 }

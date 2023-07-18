@@ -59,6 +59,7 @@ export const SuscriptionContain = styled.div`
 			margin-top: 25px;
 			margin-bottom: 25px;
 			button {
+				cursor: default;
 				font-style: italic;
 				margin-inline: 25px;
 				border: none;
@@ -394,6 +395,16 @@ export const SuscriptionContain = styled.div`
 		overflow: hidden;
 		width: 90%;
 		margin-block: 75px;
+		.inspo-swiper {
+			display: unset;
+			.swiper-item {
+				width: 280px;
+				height: 230px;
+			}
+		}
+		.inspo-swiper.res {
+			display: none;
+		}
 	}
 
 	.dudas-section {
@@ -820,6 +831,15 @@ export const SuscriptionContain = styled.div`
 			}
 		}
 
+		.inspo-section {
+			.inspo-swiper {
+				display: none;
+			}
+			.inspo-swiper.res {
+				display: unset;
+			}
+		}
+
 		.dudas-section {
 			.all-center {
 				flex-direction: column;
@@ -993,6 +1013,7 @@ export const SuscriptionContain = styled.div`
 				display: none;
 			}
 			.card-container {
+				width: 100%;
 				flex-direction: column;
 			}
 		}

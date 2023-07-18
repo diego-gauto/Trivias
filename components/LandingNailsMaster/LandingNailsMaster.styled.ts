@@ -1207,6 +1207,13 @@ export const SuscriptionContain = styled.div`
 	////////////////////////////////////////////////////////////////////////////////////
 	@media (max-width: 390px) {
 		width: 390px;
+
+		.materials-modal {
+			width: 80%;
+		}
+		.materials-modal.modal-body {
+			padding-left: 0;
+		}
 		.big-title {
 			font-size: 45px;
 		}
@@ -1267,7 +1274,7 @@ export const SuscriptionContain = styled.div`
 				width: 350px;
 				transform: translate(0px, 0px);
 				.p-pink {
-					width: 250px;
+					width: 230px;
 				}
 				.sangria {
 					width: 220px;

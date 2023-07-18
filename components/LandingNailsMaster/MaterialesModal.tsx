@@ -14,6 +14,11 @@ interface Materiales {
 
 const MaterialesModal = (props: Materiales) => {
   const { show, setShow } = props;
+
+  const shopRedirect = () => {
+    window.open('https://gonvarnails.mx')
+  }
+
   return (
     <Modal show={show} onHide={setShow} size="xl">
       <SuscriptionContain>
@@ -145,7 +150,7 @@ const MaterialesModal = (props: Materiales) => {
           </div>
 
           <div className="materials-footer">
-            <button className="btn">¡Vamos a la tienda!</button>
+            <button className="btn" onClick={() => shopRedirect()}>¡Vamos a la tienda!</button>
             <p className="tip">Tip: Toma captura de pantalla y ve rellenando las estrellas de los productos que ya tengas</p>
           </div>
         </Modal.Body>
