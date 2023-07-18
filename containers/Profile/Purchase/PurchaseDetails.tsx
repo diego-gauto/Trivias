@@ -58,7 +58,7 @@ const PurchaseDetails = ({ data, type }: any) => {
             </CourseCostResp>
           </ContainTitle>
           <CourseName>
-            Subscripción {subscription.title}
+            Suscripción {subscription.title}
             <CourseCost>
               $ {subscription.price}.00
             </CourseCost>
