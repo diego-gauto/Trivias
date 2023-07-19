@@ -441,3 +441,14 @@ export const cancelReview = async (review: any) => {
       return error
     });
 };
+export const getCancelReviewApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/cancel/reviews")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
