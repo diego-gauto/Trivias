@@ -294,7 +294,7 @@ const Purchase = () => {
               setPay(true);
               setLoader(false);
               if (id === "30") {
-                window.location.href = "/pagoexitosoailsmastern";
+                window.location.href = "/pagoexitosonailsmaster";
               }
             })
           }
