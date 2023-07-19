@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
@@ -25,6 +25,7 @@ interface IData {
 const Individual = (props: IData) => {
   const [ver, setver] = useState(true)
   const { user } = props;
+  let today = new Date().getTime() / 1000;
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -42,11 +43,19 @@ const Individual = (props: IData) => {
 
   const goTo = () => {
     if (user.id) {
-      router.push(
-        { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-      )
-    }
-    else {
+      let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
+      if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+        router.push({
+          pathname: LESSON_PATH,
+          query: { id: 30, season: 0, lesson: 0 },
+        });
+      }
+      if (tempCourse.length > 0 && tempCourse[0].final_date < today) {
+        router.push(
+          { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+        )
+      }
+    } else {
       localStorage.setItem("nailMaster", "true");
       router.push(SIGNUP_PATH)
     }

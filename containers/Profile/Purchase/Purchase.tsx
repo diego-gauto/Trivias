@@ -303,7 +303,7 @@ const Purchase = () => {
               setPay(true);
               setLoader(false);
               if (id === "30") {
-                window.location.href = "/pagoexitosoailsmaster";
+                window.location.href = "/pagoexitosonailsmaster";
               }
             })
           }
@@ -346,7 +346,7 @@ const Purchase = () => {
           setPay(true);
           setLoader(false);
           if (id === "30") {
-            window.location.href = "/pagoexitosoailsmaster";
+            window.location.href = "/pagoexitosonailsmaster";
           }
         })
       }
