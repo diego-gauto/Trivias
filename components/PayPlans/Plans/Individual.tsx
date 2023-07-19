@@ -45,10 +45,10 @@ const Individual = (props: IData) => {
     if (user.id) {
       let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
       if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
-        // router.push({
-        //   pathname: LESSON_PATH,
-        //   query: { id: 30, season: 0, lesson: 0 },
-        // });
+        router.push({
+          pathname: LESSON_PATH,
+          query: { id: 30, season: 0, lesson: 0 },
+        });
       }
       if (tempCourse.length > 0 && tempCourse[0].final_date < today) {
         router.push(
