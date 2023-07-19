@@ -20,4 +20,7 @@ export interface IUser {
   stripeId: string;
   id: number;
   user_courses: Array<any>;
+  level: number;
+  final_date: any;
+  plan_name: string;
 }
