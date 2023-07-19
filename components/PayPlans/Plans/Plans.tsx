@@ -13,12 +13,14 @@ const pStar = "/images/pay_plans/star purple.png"
 
 interface IData {
   user: IUser;
+  selected: any;
 }
 export const Plans = (props: IData) => {
-  const { user } = props;
+  const { user, selected } = props;
+  console.log(selected);
   return (
     <PlanStyles className="w-100">
-      <div className="plans">
+      <div className="planes">
         <div className="row colors">
           <div className="col-sm-6 col-lg-3 my-3">
             {/* 1ero */}

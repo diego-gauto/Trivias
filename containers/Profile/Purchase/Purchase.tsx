@@ -239,7 +239,7 @@ const Purchase = () => {
             setLoader(false);
             updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
             setConfirmation(false);
-            window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
+            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           }
         })
       }
@@ -315,9 +315,8 @@ const Purchase = () => {
       if (type == 'subscription') {
         setConfirmation(false);
         setPay(true);
-        window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
-      }
-      if (type === 'course' || nailmasterplusanual === 'true') {
+        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+      } else {
         let price = product.price
         if (coupon) {
           if (coupon.type == 'amount') {
@@ -642,12 +641,13 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {frequency === "month" && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true") && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149 MXN/mes"}{frequency === "anual" && "1,599 MXN/anual"}{(type == "course" && !coupon) && `${product.price} MXN único pago`}{(nailmasterplusanual === "true") && "2,599 MXN único pago"} </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${trial === "true" &&
+                    "149  MXN/mes."}{frequency === "month" &&
+                      "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -666,6 +666,7 @@ const Purchase = () => {
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
                   {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(trial === "true") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
@@ -731,6 +732,7 @@ const Purchase = () => {
                 {(type == "course") && <p className="title"><span>{product.title}</span></p>}
                 <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
                 {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
+                {(trial === "true") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
@@ -1089,12 +1091,13 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {frequency === "month" && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true")} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${frequency === "month" &&
-                    "149 MXN/mes"}{frequency === "anual" && "1,599 MXN/anual"}{(type == "course" && !coupon) && `${product.price} MXN único pago`}{(nailmasterplusanual === "true") && "2,599 MXN único pago"} </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${trial === "true" &&
+                    "149  MXN/mes."}{frequency === "month" &&
+                      "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />

@@ -67,7 +67,7 @@ const Anual = (props: IData) => {
 
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$1,599.00 mxn/año</h2>
+            <h2 className="h3 mb-0">$1,599.00 MXN/año</h2>
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
@@ -78,7 +78,7 @@ const Anual = (props: IData) => {
 
           <div className="break tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="blue m-0">Mas de 60 cursos y 400 clases de uñas y belleza en linea</p>
+              <p className="blue m-0">Más de 60 cursos y 400 clases de uñas y belleza en linea</p>
               {views.get(1) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -104,7 +104,7 @@ const Anual = (props: IData) => {
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   Todos <b>nuestros instructores son profesionales de la belleza,</b> asegurando que así
-                  tendrás una educación de calidad bajo los mejores estandares de la industria.
+                  tendrás una educación de calidad bajo los mejores estándares de la industria.
                 </p>
               </div>}
           </div>
@@ -136,7 +136,7 @@ const Anual = (props: IData) => {
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   ¿Tienes duda en tus cursos? No te preocupes, <b>nuestro equipo esta para ayudarte </b>
-                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicas, </b>
+                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicás, </b>
                   para que sigas mejorando.
                 </p>
               </div>}
@@ -161,7 +161,7 @@ const Anual = (props: IData) => {
 
           <div className="break tip m-2" onClick={() => verQ(6)}>
             <div className="tip-q mb-1">
-              <p className="blue mb-0">Kit gratis</p>
+              <p className="blue mb-0">Kit de producto Gratis</p>
               {views.get(6) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -179,7 +179,7 @@ const Anual = (props: IData) => {
 
           <div className="break tip m-2" onClick={() => verQ(7)}>
             <div className="tip-q mb-1">
-              <p className="blue mb-0">Envío gratis</p>
+              <p className="blue mb-0">Envíos de producto Gratis</p>
               {views.get(7) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -187,7 +187,7 @@ const Anual = (props: IData) => {
             {views.get(7) &&
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00 mx.
+                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00 MXN.
                 </p>
               </div>}
           </div>

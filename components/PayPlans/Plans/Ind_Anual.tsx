@@ -85,7 +85,7 @@ const Ind_Anual = (props: IData) => {
 
           <div className="break tip m-2" onClick={() => verQ(2)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink2 m-0">Mas de 60 cursos y 400 clases</p>
+              <p className="purple-pink2 m-0">Más de 60 cursos y 400 clases</p>
               {views.get(2) ? <BsChevronUp className="tip-icon Back-p-pink2" />
                 : <BsChevronDown className="tip-icon Back-p-pink2" />}
             </div>
@@ -140,7 +140,7 @@ const Ind_Anual = (props: IData) => {
               <div className="b-p-pink2">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   <b>Todos nuestros instructores son profesionales de la belleza, </b>
-                  asegurando que así tendrás una educación de calidad bajo los mejores estandares de la industria.
+                  asegurando que así tendrás una educación de calidad bajo los mejores estándares de la industria.
                 </p>
               </div>}
           </div>
@@ -155,7 +155,7 @@ const Ind_Anual = (props: IData) => {
               <div className="b-p-pink2">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   ¿Tienes duda en tus cursos? No te preocupes, <b>nuestro equipo esta para ayudarte </b>
-                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicas, </b>
+                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus prácticas, </b>
                   para que sigas mejorando.
                 </p>
               </div>}
@@ -163,7 +163,7 @@ const Ind_Anual = (props: IData) => {
 
           <div className="break tip m-2" onClick={() => verQ(7)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink2 mb-0">Kit gratis + envios gratis</p>
+              <p className="purple-pink2 mb-0">Kit de producto Gratis + envios gratis</p>
               {views.get(7) ? <BsChevronUp className="tip-icon Back-p-pink2" />
                 : <BsChevronDown className="tip-icon Back-p-pink2" />}
             </div>
