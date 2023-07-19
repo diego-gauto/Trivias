@@ -18,7 +18,12 @@ export const SuscriptionContain = styled.div`
 	.fechas {
 		margin-bottom: 100px;
 	}
-
+	.bold {
+		font-weight: 700;
+	}
+	.no-bold {
+		font-weight: unset;
+	}
 	.materials-modal {
 		width: 100%;
 		.end {
@@ -54,7 +59,7 @@ export const SuscriptionContain = styled.div`
 					p {
 						text-align: start;
 						font-weight: 500;
-						font-size: 20px;
+						font-size: 18px;
 					}
 				}
 			}
@@ -75,25 +80,34 @@ export const SuscriptionContain = styled.div`
 			height: 40px;
 		}
 	}
+
 	.section {
 		width: 100%;
 		position: relative;
 		margin-top: 75px;
 		margin-bottom: 75px;
+		.big-text {
+			font-size: 90px;
+		}
 		.left-img {
+			width: 500px;
 			z-index: -1;
 			position: absolute;
+			transform: translate(0px, -40px);
 			left: 0;
 		}
 		.right-img-1 {
+			width: 350px;
 			z-index: -1;
 			position: absolute;
 			right: 0;
-			transform: translateY(-300px);
+			transform: translateY(-400px);
 		}
 		.right-img-2 {
+			width: 350px;
 			z-index: -1;
 			position: absolute;
+			transform: translateY(100px);
 			right: 0;
 		}
 	}
@@ -157,7 +171,7 @@ export const SuscriptionContain = styled.div`
 					}
 				}
 				.uñas {
-					max-width: 800px;
+					max-width: 600px;
 					display: flex;
 					.uñas-q {
 						margin-bottom: 15px;
@@ -180,6 +194,7 @@ export const SuscriptionContain = styled.div`
 								justify-content: space-between;
 							}
 							.icon {
+								margin-bottom: 15px;
 								border-radius: 100%;
 								background-color: #3f1168;
 								color: #ffffff;
@@ -204,6 +219,7 @@ export const SuscriptionContain = styled.div`
 			}
 			.img {
 				height: fit-content;
+				width: 400px;
 			}
 		}
 		.info-cards {
@@ -259,7 +275,7 @@ export const SuscriptionContain = styled.div`
 			display: flex;
 			background-color: #edf3f8;
 			width: 450px;
-			height: 450px;
+			height: 300px;
 			justify-content: center;
 			p {
 				align-self: center;
@@ -412,7 +428,7 @@ export const SuscriptionContain = styled.div`
 			.course-container {
 				width: 1200px;
 				.course-detail {
-					margin: 20px;
+					margin: 10px;
 					display: flex;
 					.icon {
 						margin-right: 30px;
@@ -420,6 +436,7 @@ export const SuscriptionContain = styled.div`
 						height: 30px;
 					}
 					p {
+						font-size: 16px;
 						position: relative;
 						z-index: 2;
 						font-weight: 700;
@@ -458,15 +475,20 @@ export const SuscriptionContain = styled.div`
 					transform: translateY(55px);
 				}
 				.center {
+					.btn {
+						padding-inline: 70px;
+					}
 					h2 {
+						font-weight: 700;
 						margin-block: 30px;
 					}
 					p {
+						font-size: 18px;
 						font-style: italic;
-						font-weight: 700;
 					}
 					.red {
 						color: #ff1616;
+						font-weight: 800;
 					}
 					.green {
 						color: #16a854;
@@ -514,7 +536,7 @@ export const SuscriptionContain = styled.div`
 		.right-side {
 			width: 400px;
 			.float-bottom {
-				transform: translateX(-100px);
+				transform: translateX(-300px);
 				position: absolute;
 				bottom: 0;
 				z-index: 1;
@@ -670,6 +692,9 @@ export const SuscriptionContain = styled.div`
 		background-color: #ece7f2;
 		padding-block: 50px;
 		padding-bottom: 150px;
+		.title-ppal {
+			font-size: 65px;
+		}
 		.up-l {
 			z-index: 0;
 			position: absolute;
@@ -695,11 +720,18 @@ export const SuscriptionContain = styled.div`
 				.subject {
 					text-align: start;
 					margin: 20px;
-					.num {
-						transform: translateX(-25px);
-					}
-					.title {
-						transform: translateX(-20px);
+					margin-block: 40px;
+					.lessons {
+						display: flex;
+						margin-bottom: 20px;
+						.num {
+							font-size: 23px;
+							transform: translateX(-25px);
+						}
+						.title {
+							font-size: 23px;
+							transform: translateX(-20px);
+						}
 					}
 				}
 			}
@@ -714,9 +746,7 @@ export const SuscriptionContain = styled.div`
 	.dudas-section {
 		width: 100%;
 		background-color: #f6f7fa;
-		h2 {
-			font-weight: 700;
-		}
+
 		.dudas-img {
 			position: relative;
 			display: flex;
@@ -752,14 +782,14 @@ export const SuscriptionContain = styled.div`
 				border-radius: 24px;
 				background-color: #f6f7fa;
 				.q {
-					margin-bottom: 10px;
+					margin-bottom: 3px;
 					display: flex;
 					justify-content: space-between;
 					.title {
 						margin-top: 15px;
 						margin-left: 15px;
 						font-weight: 800;
-						font-size: large;
+						font-size: 25px;
 						width: 80%;
 						text-align: start;
 					}

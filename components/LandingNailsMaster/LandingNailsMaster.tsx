@@ -146,11 +146,11 @@ const LandingNailsMaster = () => {
       <div className="section mt-0">
         <div className="mt-3 fechas">
           <h4><b>Actualización 2023</b><br />
-            Inicio: [x] de [x] del 2023</h4>
+            Inicio: 20 de Julio del 2023</h4>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
-          <h2 className="big-title h1"><b>Nail's Master </b><br />
+          <h2 className="big-text "><b>Nail's Master </b><br />
             <b className="light-p">Revolution</b></h2>
           <h2><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
         </div>
@@ -173,7 +173,7 @@ const LandingNailsMaster = () => {
       <div className="info">
         <div className="info-top">
           <div className="text">
-            <h2 className="title"><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
+            <h2 className="title bold"><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
               <b className="subtitle p-pink">aprenderás a aplicar uñas de manera:</b>
             </h2>
             <div className="uñas">
@@ -250,7 +250,7 @@ const LandingNailsMaster = () => {
           </div>
           <img src={mujer} className="img" />
         </div>
-        <h2 className="h1">Aprende desde cero y <b className="p-pink">vive de tu pasion</b> <br /> por las uñas acrilicas</h2>
+        <h2 className="h1 bold">Aprende desde cero y <b className="p-pink no-bold">vive de tu pasion</b> <br /> por las uñas acrilicas</h2>
         <div className="info-cards all-center">
           <div className="card">
             <div className="adjust">
@@ -281,7 +281,7 @@ const LandingNailsMaster = () => {
 
       <div className="video-section">
         <div className="video-container">
-          <p>video</p>
+          <iframe width="450px" height="300px" src="https://www.youtube.com/embed/2QlI9_CTkqk?autoplay=1&mute=1" />
         </div>
         <div className="info-video">
           <h2><b>Durante 3 meses podrás acceder a</b><br />
@@ -303,7 +303,7 @@ const LandingNailsMaster = () => {
           <h2>Te presentamos a</h2>
           <div>
             <div className="header-contain">
-              <h2 className="big-title">Arita Gonvar</h2>
+              <h2 className="big-title bold">Arita Gonvar</h2>
             </div>
             <p className="p-pink"><b>Ella te guiará paso a paso en el programa Nails Master Revolution</b></p>
             <div className="sangria">
@@ -383,8 +383,8 @@ const LandingNailsMaster = () => {
 
 
       <div className="program">
-        <h2 className="yellow"><b>Todo lo que incluye este incrible programa</b></h2>
-        <p><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
+        <h2 className="yellow h1"><b>Todo lo que incluye este increible programa</b></h2>
+        <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
           obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
 
         <div className="program-course">
@@ -439,11 +439,11 @@ const LandingNailsMaster = () => {
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
             <div className="center">
-              <h2 className="red h1">Costo total real: <del>$6,719.00 mxn</del></h2>
+              <h2 className="red h2">Costo total real: <del>$6,719.00 mxn</del></h2>
               <h2 className="p-pink h1"><b>Precio de Lanzamiento con beca</b></h2>
               <h2 className="green h1">Sólo $1,599.00 mxn</h2>
-              <p>Válido para las primeras 500 personas</p>
-              <h2><b>Quedan [x] lugares</b></h2>
+              <p className="">Válido para las primeras 500 personas</p>
+              <h2><b>Quedan 123 lugares</b></h2>
               <button className="btn left-right" onClick={() => handleRedirection()}>¡Quiero comenzar<br /> ahora!</button>
             </div>
             <img src={chica} className="right-img" />
@@ -530,7 +530,7 @@ const LandingNailsMaster = () => {
 
 
       <div className="experiences-section">
-        <h2 className="h1">Conoce las experiencias de nuestras alumnas</h2>
+        <h2 className="h1 bold">Conoce las experiencias de nuestras alumnas</h2>
         <div className="experiences-container">
           <div className="next swiper-prev"><BsChevronLeft className="icon" /></div>
           <Swiper
@@ -597,12 +597,12 @@ const LandingNailsMaster = () => {
 
       <div className="subject-section">
         <img src={linesB} className="up-l" />
-        <h2 className="big-title">TEMARIO</h2>
+        <h2 className="title-ppal bold">TEMARIO</h2>
         <h4>Conoce todo lo que aprenderás en <b>Nail Master Revolution</b></h4>
         <div className="subject-container">
           <div className="side">
             <div className="subject">
-              <div className="d-flex">
+              <div className="lessons">
                 <h3 className="num"><b>1.</b></h3>
                 <h3 className="title"><b>¿Cómo funciona la plataforma?</b></h3>
               </div>
@@ -610,7 +610,7 @@ const LandingNailsMaster = () => {
               <h5><b className="p-pink">Lección 2.</b> Entrega de Prácticas y Certificados</h5>
             </div>
             <div className="subject">
-              <div className="d-flex">
+              <div className="lessons">
                 <h3 className="num"><b>2.</b></h3>
                 <h3 className="title"><b>Bienvenida a Nails Master Revolution</b></h3>
               </div>
@@ -619,7 +619,7 @@ const LandingNailsMaster = () => {
               <h5><b className="p-pink">Lección 3.</b> ¿Cómo evaluaremos tu aprendizaje?</h5>
             </div>
             <div className="subject">
-              <div className="d-flex">
+              <div className="lessons">
                 <h3 className="num"><b>3.</b></h3>
                 <h3 className="title"><b>Productos y Herramientas Para Comenzar</b></h3>
               </div>
@@ -631,10 +631,11 @@ const LandingNailsMaster = () => {
               <h5><b className="p-pink">Lección 4.</b> Herramientas Eléctricas y Mobiliario.</h5>
               <h5><b className="p-pink">Lección 5.</b> Dónde Comprar Tus Productos.</h5>
             </div>
-            <div className="subject"><div className="d-flex">
-              <h3 className="num"><b>4.</b></h3>
-              <h3 className="title"><b>Fundamentos Teóricos para la Aplicación de Uñas Acrílicas</b></h3>
-            </div>
+            <div className="subject">
+              <div className="lessons">
+                <h3 className="num"><b>4.</b></h3>
+                <h3 className="title"><b>Fundamentos Teóricos para la Aplicación de Uñas Acrílicas</b></h3>
+              </div>
               <h5><b className="p-pink">Lección 1.</b> Morfología de la Uña Natural.</h5>
               <h5><b className="p-pink">Lección 2.</b> Partes de la Uña Artificial.</h5>
               <h5><b className="p-pink">Lección 3.</b> Diferencia entre Enfermedades, Alteraciones e
@@ -645,10 +646,11 @@ const LandingNailsMaster = () => {
             </div>
           </div>
           <div className="side">
-            <div className="subject"><div className="d-flex">
-              <h3 className="num"><b>5.</b></h3>
-              <h3 className="title"><b>Comportamiento de los Productos Químicos</b></h3>
-            </div>
+            <div className="subject">
+              <div className="lessons">
+                <h3 className="num"><b>5.</b></h3>
+                <h3 className="title"><b>Comportamiento de los Productos Químicos</b></h3>
+              </div>
               <h5><b className="p-pink">Lección 1.</b> La perla Perfecta 1.</h5>
               <h5><b className="p-pink">Lección 2.</b> La perla Perfecta 2.</h5>
               <h5><b className="p-pink">Lección 3.</b> La perla Perfecta 3.</h5>
@@ -656,10 +658,11 @@ const LandingNailsMaster = () => {
               <h5><b className="p-pink">Lección 5.</b> La perla Perfecta 5.</h5>
               <h5><b className="p-pink">Lección 6.</b> La perla Perfecta 6.</h5>
             </div>
-            <div className="subject"><div className="d-flex">
-              <h3 className="num"><b>6.</b></h3>
-              <h3 className="title"><b>Práctica en Mano Real de Técnicas y Diseños Más Comerciales</b></h3>
-            </div>
+            <div className="subject">
+              <div className="lessons">
+                <h3 className="num"><b>6.</b></h3>
+                <h3 className="title"><b>Práctica en Mano Real de Técnicas y Diseños Más Comerciales</b></h3>
+              </div>
               <h5><b className="p-pink">Lección 1.</b> ¿Cómo medir el Tip?</h5>
               <h5><b className="p-pink">Lección 2.</b> Punta Coffin: Aplicación con Técnica Perfect Natural.</h5>
               <h5><b className="p-pink">Lección 3.</b> Punta Coffin: Limado.</h5>
@@ -688,15 +691,15 @@ const LandingNailsMaster = () => {
 
 
       <div className="devices-section py-5">
-        <h2 className="big-title">Disfruta tus clases <br />
-          <b className="p-pink">desde cualquier dispositivo</b></h2>
+        <h2 className="big-title bold">Disfruta tus clases <br />
+          <b className="p-pink no-bold">desde cualquier dispositivo</b></h2>
         <img src={devices} className="py-2 devices" />
       </div>
 
       <div className="dudas-section all-center">
         <div className="text-end">
-          <h2>¿Tienes alguna duda?</h2>
-          <h2 className="p-pink">Nuestro equipo está para ayudarte.</h2>
+          <h2 className="">¿Tienes alguna duda?</h2>
+          <h2 className="p-pink bold">Nuestro equipo <br /> está para ayudarte.</h2>
         </div>
         <div className="dudas-img">
           <img src={pointWatsap} className="point" />
@@ -708,12 +711,12 @@ const LandingNailsMaster = () => {
       </div>
 
       <div className="faq-section spacing">
-        <h2 className="p-pink h1">Preguntas Frecuentes</h2>
+        <h2 className="p-pink big-title">Preguntas Frecuentes</h2>
         <div className="faq">
           <div className="all-center">
             <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
               <div className={`q ${views.get(1) && 'open-q'}`}>
-                <p className={`title`}>¿Entregan reconocimiento?</p>
+                <p className={`title bold`}>¿Entregan reconocimiento?</p>
                 {views.get(1) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>

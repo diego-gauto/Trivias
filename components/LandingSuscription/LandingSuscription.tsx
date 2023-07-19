@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 import { Navigation } from "swiper";
@@ -172,10 +172,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div> */}
 
         <img src={gonvar} className="gonvarplus" />
-        <h2 className="h1 bold space">La suscripción mensual que te permite ver <b className="p-pink">cientos <br /> de cursos</b> de uñas y belleza en línea.</h2>
+        <h2 className="h1 bold space">La suscripción mensual que te permite ver <b className="p-pink no-bold">cientos <br /> de cursos</b> de uñas y belleza en línea.</h2>
 
         <div className="space">
-          <h2 className="bold">¡Accede a <b className="p-pink">más de 60 cursos</b> hoy mismo!</h2>
+          <h2 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos</b> hoy mismo!</h2>
           <h2 className="bold">Sólo {price}</h2>
         </div>
 
@@ -191,7 +191,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <div className="all-center space">
           <div className="group-buttons">
             <div className="center">
-              <button>Tips</button>
+              <button className="select">Tips</button>
               <button>Escultural</button>
               <button>Mano Alzada</button>
               <button>Stamping</button>
@@ -237,7 +237,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 <i>Nombre del instructor</i></p>
             </div>
           </div>}
-        <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comenzar ahora!</button>
+        <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comienza ahora!</button>
         <h5 className="p-pink"><i>Y aprende muchas otras técnicas sobre imagen personal.</i></h5>
       </div>
 
@@ -250,16 +250,16 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <img src={ubi} className="ubiImg" />
         <h2 className="big-title bold">NO IMPORTA TU UBICACIÓN</h2>
-        <h2 className="">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,
-          <b className="p-pink"> desde cualquier pais, donde quieras y a la hora que quieras.</b></h2>
+        <h2 className=" fs-3">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,<br />
+          <b className="p-pink fs-2 no-bold"> desde cualquier pais, donde quieras y a la hora que quieras.</b></h2>
       </div>
 
 
       <div className="instructores-section">
-        <h2 className="big-title"><b className="p-pink">¡Nunca te dejaremos sola, </b><br />en tu
+        <h2 className="big-title bold"><b className="p-pink no-bold">¡Nunca te dejaremos sola, </b><br />en tu
           proceso de aprendizaje!</h2>
         <img src={instructores} className="space instructores" />
-        <h2 className="bold space">Los cursos son impartidos por <b className="p-pink">instructores profesionales
+        <h2 className="bold space">Los cursos son impartidos por <b className="p-pink no-bold">instructores profesionales
           y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h2>
         <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
@@ -279,7 +279,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={master} className="level" />
         </div>
 
-        <h4 className="fst-italic bold">No importa si vas comenzando o si ya tienes conocimientos, <br />
+        <h4 className="fst-italic">No importa si vas comenzando o si ya tienes conocimientos, <br />
           te aseguramos que tenemos un curso para ti.</h4>
       </div>
 
@@ -329,10 +329,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <div className="all-center">
           <img src={certificadoMujer} className="cert-img" />
           <div className="cert-text">
-            <h2 className="p-pink big-title mb-4">Certificado FUV</h2>
-            <h2 className="bold mb-4 w-75">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
+            <h2 className="p-pink big-title mb-4 bold">Certificado FUV</h2>
+            <h2 className="bold mb-4 text-width">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
               <b className="p-pink">obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
-            <h2 className="bold w-75">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
+            <h2 className="bold text-width">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
               <i>(folio único verificado).</i></b></h2>
           </div>
         </div>
@@ -341,18 +341,20 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
       <div className="all-center cellphone-section">
         <div className="text-end cell-body">
-          <h2 className="h1">¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
+          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
             en uñas y belleza!</h2>
           <div className="back-lines all-center">
             <img src={backCell} className="line-1" />
             <img src={backCell3} className="line-2" />
             <img src={backCell2} className="line-3" />
           </div>
-          <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
-            <b className="p-pink"> asesorías individuales e ilimitadas
-              con nuestros instructores certificados.</b> Aprende de manera correcta y alcanza tus
-            metas con confianza.</h3>
-          <div className="text-center">
+          <div className="subtitle">
+            <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
+              <b className="p-pink no-bold"> asesorías individuales e ilimitadas
+                con nuestros instructores certificados.</b> Aprende de manera correcta y alcanza tus
+              metas con confianza.</h3>
+          </div>
+          <div className="text-center ">
             <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
           </div>
 
@@ -364,44 +366,44 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="benefits-section">
         <div className="title all-center">
           <img src={miniLogo} className="mx-3" />
-          <h2 className="text-start h1">Recibe <b className="p-pink">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h2>
+          <h2 className="text-start h1 bold">Recibe <b className="p-pink no-bold">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h2>
         </div>
-        <div className="all-center">
+        <div className="list-container">
           <div className="w-auto">
             <div className="list">
               <img src={envio} className="me-3" />
-              <h3><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h3>
+              <h4><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h4>
             </div>
 
             <div className="list">
               <img src={boleto} className="me-3" />
-              <h3>Por cada mes dentro, recibes un boleto acumulable más para el<br /> <b className="p-pink">sorteo trimestral donde podrás ganas hasta $20,000.00</b></h3>
+              <h4>Por cada mes dentro, recibes un boleto acumulable más para el<b className="p-pink">sorteo trimestral donde podrás ganas hasta $20,000.00</b></h4>
             </div>
 
             <div className="list">
               <img src={descuento} className="me-3" />
               <div className="m-0">
-                <h3><b className="p-pink">20% de descuento</b> en productos a partir del 3° mes</h3>
-                <h3><b className="p-pink">40% de descuento</b> en productos a partir del 6° mes</h3>
+                <h4><b className="p-pink">20% de descuento</b> en productos a partir del 3° mes</h4>
+                <h4><b className="p-pink">40% de descuento</b> en productos a partir del 6° mes</h4>
               </div>
             </div>
 
             <div className="list">
               <img src={regalo} className="me-3" />
-              <h3>Envíos de <b className="p-pink">Kits de producto de regalo. </b>
-                <i className="subtitle">(Sólo pagarás envio)</i></h3>
+              <h4>Envíos de <b className="p-pink">Kits de producto de regalo. </b>
+                <i className="subtitle">(Sólo pagarás envio)</i></h4>
             </div>
 
             <div className="list">
               <img src={certificado} className="me-3" />
-              <h3><b className="p-pink">Certificaión oficial de la marca</b> por cada curso que completes.</h3>
+              <h4><b className="p-pink">Certificaión oficial de la marca</b> por cada curso que completes.</h4>
             </div>
 
             <div className="list">
               <img src={star} className="" />
               <div className="m-0">
-                <h3><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h3>
-                <h3>Cada tarea, clase y curso aprobados genera puntos.</h3>
+                <h4><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h4>
+                <h4>Cada tarea, clase y curso aprobados genera puntos.</h4>
               </div>
             </div>
           </div>
@@ -417,9 +419,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="cost-section all-center">
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
-          <h2 className="red bolder">Costo total real: <del>$74,719.00 mxn</del></h2>
-          <h2 className="p-pink bolder h1">Más de 60 cursos completso</h2>
-          <h2 className="green bolder h1">Sólo {price}</h2>
+          <h2 className="red bolder big-font">Costo total real: <del>$74,719.00 mxn</del></h2>
+          <h2 className="p-pink bolder big-title">Más de 60 cursos completso</h2>
+          <h2 className="green bolder big-title">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />
@@ -500,67 +502,79 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
 
       <div className="testimonio-section">
-        <h2 className="h1 bold">Más de 45,000 alumnas</h2>
-        <Swiper
-          className="testimonio-container"
-          slidesPerView={3}
-          spaceBetween={30}
-          loop={true}
-        >
-          {reviews.map((review: any, index: any) => {
-            return (
-              <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
-                <SlideModule_1
-                  index={index}
-                  isNew={review.isNew}
-                  descripcion={review.descripcion}
-                  datePublication={review.convertedDate}
-                  usrFacebookURL={review.usrFacebookURL}
-                  username={review.username}
-                  imgURL={downloadFileWithStoragePath(review.imgURL)}
-                  usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
-                />
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
-        <Swiper
-          className="testimonio-container res"
-          slidesPerView={1}
-          spaceBetween={30}
-          loop={true}
-          navigation={{
-            nextEl: '.swiper-next',
-            prevEl: '.swiper-prev',
-          }}
-          modules={[Navigation]}
-        >
-          {reviews.length > 0 && reviews.map((review: any, index: any) => {
-            return (
-              <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
-                <SlideModule_1
-                  index={index}
-                  isNew={review.isNew}
-                  descripcion={review.descripcion}
-                  datePublication={review.convertedDate}
-                  usrFacebookURL={review.usrFacebookURL}
-                  username={review.username}
-                  imgURL={downloadFileWithStoragePath(review.imgURL)}
-                  usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
-                />
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
+        <h2 className="h1 bold big-title">Más de 45,000 alumnas</h2>
+        <div className="experiences-container">
+          <div className="next swiper-prev"><BsChevronLeft className="icon" /></div>
+          <Swiper
+            className="experiences"
+            slidesPerView={3}
+            spaceBetween={30}
+            loop={true}
+            navigation={{
+              nextEl: '.swiper-next',
+              prevEl: '.swiper-prev',
+            }}
+            modules={[Navigation]}
+          >
+            {reviews.length > 0 && reviews.map((review: any, index: any) => {
+              return (
+                <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
+                  <SlideModule_1
+                    index={index}
+                    isNew={review.isNew}
+                    descripcion={review.descripcion}
+                    datePublication={review.convertedDate}
+                    usrFacebookURL={review.usrFacebookURL}
+                    username={review.username}
+                    imgURL={downloadFileWithStoragePath(review.imgURL)}
+                    usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                  />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+
+          <Swiper
+            className="experiences resp"
+            slidesPerView={1}
+            loop={true}
+            spaceBetween={30}
+            navigation={{
+              nextEl: '.swiper-next',
+              prevEl: '.swiper-prev',
+            }}
+            modules={[Navigation]}
+          >
+            {reviews.length > 0 && reviews.map((review: any, index: any) => {
+              return (
+                <SwiperSlide id={"slide" + index} key={review.username + "_ID"}>
+                  <SlideModule_1
+                    index={index}
+                    isNew={review.isNew}
+                    descripcion={review.descripcion}
+                    datePublication={review.convertedDate}
+                    usrFacebookURL={review.usrFacebookURL}
+                    username={review.username}
+                    imgURL={downloadFileWithStoragePath(review.imgURL)}
+                    usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                  />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+          <div className="next swiper-next"><BsChevronRight className="icon" /></div>
+        </div>
       </div>
 
 
       <div className="inspo-section">
-        <h2 className="p-pink big-title">¿Necesitas Inspiración?</h2>
-        <h3 className="bold">Si no sabes que diseños aplicar a tus clientas, <br /> descarga nuestro catálogo completo con más de <b className="p-pink">400 diseños ya disponibles.</b></h3>
+        <h2 className="p-pink big-title bold mb-5">¿Necesitas Inspiración?</h2>
+        <h4 className="bold mb-5">Si no sabes que diseños aplicar a tus clientas, <br />
+          descarga nuestro catálogo completo con más de <b className="p-pink no-bold">400 diseños ya
+            disponibles.</b></h4>
         {/* <img src={inspo} /> */}
         <div className="inspo-swiper">
-          <Swiper slidesPerView={3} spaceBetween={30} loop={true} >
+          <Swiper slidesPerView={3} spaceBetween={15} loop={true} className="w-est" >
             <SwiperSlide >
               <img src={inspo1} />
             </SwiperSlide>
@@ -592,7 +606,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <h3 className="bold">Además, <b className="p-pink">aprende a hacer todos estos diseños</b> en nuestros más de 60 cursos.</h3>
+        <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños</b>
+          en nuestros más de 60 cursos.</h4>
 
         {/*     Catalogo?????????????????????????????????????         
         <div className="all-center">
@@ -607,8 +622,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="dudas-section">
         <div className="all-center">
           <div className="text-end">
-            <h2 className="bold">¿Tienes alguna duda?</h2>
-            <h2 className="p-pink bold">Nuestro equipo está para ayudarte.</h2>
+            <h2 className="">¿Tienes alguna duda?</h2>
+            <h2 className="p-pink bold">Nuestro equipo<br /> está para ayudarte.</h2>
           </div>
           <div className="dudas-img">
             <img src={pointWatsap} className="point" />
@@ -621,12 +636,12 @@ const LandingSuscription = (props: ILandingSuscription) => {
       </div>
 
       <div className="faq-section">
-        <h2 className="p-pink bold">Preguntas Frecuentes</h2>
+        <h2 className="p-pink bold big-title">Preguntas Frecuentes</h2>
         <div className="faq">
           <div className="all-center">
             <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
               <div className={`q ${views.get(1) && 'open-q'}`}>
-                <p className={`title`}>¿Entregan reconocimiento?</p>
+                <p className={`title bolder`}>¿Entregan reconocimiento?</p>
                 {views.get(1) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
