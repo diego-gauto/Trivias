@@ -19,6 +19,7 @@ export const CancelReview = styled.div`
     gap: 5px;
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
     border-radius: 30px 30px 0px 0px;
+    min-width: 600px;
     th {
       &:first-child {
         border-radius: 30px 0px 0px 0px;
