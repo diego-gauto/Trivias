@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { CancelReview } from './Cancel.styled';
 import { ICancelReview } from '../../../interfaces/IAdmin';
 import { getCancelReviewApi } from '../../api/admin';
-import { AdminLoader } from '../SideBar.styled';
+import { AdminLoader, Table } from '../SideBar.styled';
 
 const Cancel = () => {
   const [reviews, setReviews] = useState<ICancelReview[]>([]);
@@ -29,28 +29,46 @@ const Cancel = () => {
         <h2>Cancelación de usuarios</h2>
       </div>
       <div className='user-answers'>
-        <div className='headers'>
-          <p>Nombre</p>
-          <p>Por que quieres cancelar tu suscripción</p>
-          <p>Describe con sinceridad el por qué  quieres cancelar tu suscripción</p>
-          <p>¿Qué te gustaría ve mejorado en la plataforma?</p>
-          <p>¿Qué tan probable es que regreses en el futuro?</p>
-          <p>Del 1 al 10 como ha sido la experiencia con tu suscripción</p>
-        </div>
-        {
-          reviews.map((review: ICancelReview, index: number) => {
-            return (
-              <div className='review-container' key={"cancel-review-" + index}>
-                <p>{review.name}</p>
-                <p>{review.first_question}</p>
-                <p>{review.second_question}</p>
-                <p>{review.third_question}</p>
-                <p>{review.fourth_question}</p>
-                <p>{review.fifth_question}</p>
-              </div>
-            )
-          })
-        }
+        <Table className='table-contain'>
+          <thead>
+            <tr>
+              <th>
+                Nombre
+              </th>
+              <th>
+                Por que quieres cancelar tu suscripción
+              </th>
+              <th>
+                Describe con sinceridad el por qué  quieres cancelar tu suscripción
+              </th>
+              <th>
+                ¿Qué te gustaría ve mejorado en la plataforma?
+              </th>
+              <th>
+                ¿Qué tan probable es que regreses en el futuro?
+              </th>
+              <th>
+                Del 1 al 10 como ha sido la experiencia con tu suscripción
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              reviews.map((review: ICancelReview, index: number) => {
+                return (
+                  <tr key={"cancel-review-" + index}>
+                    <td>{review.name}</td>
+                    <td>{review.first_question}</td>
+                    <td>{review.second_question}</td>
+                    <td>{review.third_question}</td>
+                    <td>{review.fourth_question}</td>
+                    <td>{review.fifth_question}</td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </Table>
       </div>
     </CancelReview>
   )

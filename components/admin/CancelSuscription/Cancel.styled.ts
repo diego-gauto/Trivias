@@ -17,23 +17,18 @@ export const CancelReview = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    .headers {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid black;
-    }
-    p {
-      width: 16%;
-      margin: 0;
-    }
-    .review-container {
-      display: flex;
-      gap: 10px;
-      border-bottom: 1px solid black;
-      p {
-        font-size: 14px;
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 30px 30px 0px 0px;
+    th {
+      &:first-child {
+        border-radius: 30px 0px 0px 0px;
       }
+      &:last-child {
+        border-radius: 0px 30px 0px 0px;
+      }
+    }
+    td {
+      font-size: 12px;
     }
   }
 `;
