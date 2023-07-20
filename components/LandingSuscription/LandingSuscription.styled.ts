@@ -315,8 +315,11 @@ export const SuscriptionContain = styled.div`
   .benefits-section {
     width: 100%;
     margin-block: 75px;
+    padding-right: 100px;
+    .all-center {
+      padding-left: 50px;
+    }
     .list-container {
-      width: 1220px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -342,7 +345,7 @@ export const SuscriptionContain = styled.div`
         .girl {
           position: absolute;
           width: 400px;
-          transform: translate(-140px, -190px);
+          transform: translate(-160px, -190px);
           z-index: 1;
         }
         .star {
