@@ -731,7 +731,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
               <div className={`q ${views.get(2) && 'open-q'}`}>
-                <p className={`title special`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
+                <p className={`title bolder`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
                 {views.get(2) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
@@ -751,7 +751,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(3) ? 'max' : 'min'}`} onClick={() => verQ(3)}>
               <div className={`q ${views.get(3) && 'open-q'}`}>
-                <p className={`title`}>¿Puedo cancelar en cualquier momento?</p>
+                <p className={`title bolder`}>¿Puedo cancelar en cualquier momento?</p>
                 {views.get(3) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
@@ -766,7 +766,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(4) ? 'max' : 'min'}`} onClick={() => verQ(4)}>
               <div className={`q ${views.get(4) && 'open-q'}`}>
-                <p className={`title`}>¿Puedo inscribirme desde cualquier pais?</p>
+                <p className={`title bolder`}>¿Puedo inscribirme desde cualquier pais?</p>
                 {views.get(4) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>

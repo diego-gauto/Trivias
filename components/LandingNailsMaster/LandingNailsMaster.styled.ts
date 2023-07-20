@@ -749,16 +749,16 @@ export const SuscriptionContain = styled.div`
       left: 0;
     }
     .subject-container {
+      display: flex;
       margin-block: 15px;
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 150px;
+      padding-left: 50px;
       .side {
-        width: 550px;
+        width: 500px;
         .subject {
           text-align: start;
-          margin: 20px;
-          margin-block: 40px;
           .lessons {
             display: flex;
             margin-bottom: 20px;
@@ -1030,11 +1030,6 @@ export const SuscriptionContain = styled.div`
     }
 
     .subject-section {
-      .subject-container {
-        .side {
-          width: 315px;
-        }
-      }
       .btn {
         padding-inline: 20px;
       }
@@ -1238,8 +1233,17 @@ export const SuscriptionContain = styled.div`
 
     .subject-section {
       .subject-container {
+        flex-direction: column;
+        gap: 0px;
+        align-items: center;
         .side {
-          width: 215px;
+          width: 100%;
+        }
+        h3 {
+          font-size: 20px;
+        }
+        h5 {
+          font-size: 18px;
         }
       }
       .btn {
