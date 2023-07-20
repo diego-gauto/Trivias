@@ -178,7 +178,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="intro-section" >
         <div className="background-images">
           <img src={upsideLines} />
-          <img src={backPpal} className="women-back" />
+          <div className="image-contain">
+            <img src={backPpal} className="women-back" />
+            <div className="images-fade" />
+          </div>
         </div>
 
         <div className="">
