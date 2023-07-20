@@ -23,7 +23,7 @@ import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
-
+declare let window: any
 const Purchase = () => {
   const [user, setUser] = useState("");
   const [userData, setUserData] = useState<any>(null);
@@ -46,7 +46,7 @@ const Purchase = () => {
   });
   const [defaultCard, setDefaultCard] = useState<any>({});
   const [product, setProduct] = useState<any>({});
-  const [plan, setPlan] = useState<any>({ method: 'stripe' });
+  const [plan, setPlan] = useState<any>({ method: 'conekta' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
   const { type, id, trial, frequency, nailmasterplusanual } = router.query;
@@ -54,16 +54,16 @@ const Purchase = () => {
 
   const courseId = new URLSearchParams(window.location.search)
   let idC = courseId.get('id')
-  // if (!localStorage.getItem("email")) {
-  //   localStorage.setItem("course", idC ? idC.toString() : '30');
-  //   router.push({ pathname: LOGIN_PATH })
-  // }
 
   const subscription = {
     price: 149.00,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
+
+  useEffect(() => {
+    window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
+  }, [])
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
@@ -181,15 +181,32 @@ const Purchase = () => {
       setLoader(false)
     }
     if (cardInfo && Object.values(card).every(value => value !== '')) {
-      createPaymentMethodApi(card).then((res) => {
-        if (res.status === 400) {
-          setError(true);
-          setErrorMsg("Hay un error en los datos de la tarjeta!")
-          setLoader(false);
-        } else {
-          setCard({ ...card, cardId: res.id, brand: res.card.brand, last4: res.card.last4, status: true })
+      if (plan.method === 'stripe') {
+        createPaymentMethodApi(card).then((res) => {
+          if (res.status === 400) {
+            setError(true);
+            setErrorMsg("Hay un error en los datos de la tarjeta!")
+            setLoader(false);
+          } else {
+            setCard({ ...card, cardId: res.id, brand: res.card.brand, last4: res.card.last4, status: true })
+          }
+        })
+      } else {
+        let tempCard = {
+          card: {
+            number: card.number.replaceAll(" ", ""),
+            name: card.holder,
+            exp_month: card.exp_month,
+            exp_year: card.exp_year,
+            cvc: card.cvc,
+          }
         }
-      })
+        window.Conekta.Token.create(
+          tempCard,
+          conektaSuccessResponseHandler,
+          conektaErrorResponseHandler, 'web'
+        );
+      }
     }
     if (payment && defaultCard.paymentMethod) {
       FinishPayment();
@@ -198,6 +215,15 @@ const Purchase = () => {
       setPaypal(!paypal);
     }
   }
+  const conektaSuccessResponseHandler = (token: any) => {
+    let tokenId = token.id
+    console.log(token);
+    setLoader(false)
+  }
+  const conektaErrorResponseHandler = (response: any) => {
+    console.log(response);
+    setLoader(false)
+  };
 
   const FinishPayment = async () => {
     if (plan.method == 'stripe') {
@@ -941,150 +967,6 @@ const Purchase = () => {
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                   </div>}
                 </div>
-                {/* <div className="payment-methods">
-                  <div className="stripe">
-                    <div className="option">
-                      <input type="radio" checked={cardInfo} onClick={() => {
-                        setPayment(false),
-                          setCardInfo(!cardInfo),
-                          setPlan({ method: 'stripe' })
-                      }} />
-                      <p>Pagaré con <span>tarjeta de crédito o débito</span></p>
-                    </div>
-                    <div className="form-row">
-                      <label>Número de tarjeta</label>
-                      <InputMask type="text" mask='9999 9999 9999 9999' maskChar={null} placeholder="∗∗∗∗ ∗∗∗∗ ∗∗∗∗ ∗∗∗∗" onChange={(e: any) => {
-                        setCard((card: any) => ({ ...card, number: e.target.value }));
-                      }} />
-                      <div className="form-row">
-                        <label>Nombre</label>
-                        <input type="text" placeholder="Nombre del Propietario" onChange={(e) => {
-                          setCard((card: any) => ({ ...card, holder: e.target.value }));
-                        }} />
-                      </div>
-                    </div>
-                    <div style={{ "display": "flex", "justifyContent": "space-between" }}>
-                      <div className="form-row">
-                        <label>Fecha de expiración</label>
-                        <div style={{ "display": "flex", "justifyContent": "space-between" }}>
-                          <select className="short" onChange={(e) => {
-                            setCard((card: any) => ({ ...card, exp_month: e.target.value }));
-                          }}>
-                            <option value="">Mes</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                          </select>
-                          <select className="short" onChange={(e) => {
-                            setCard((card: any) => ({ ...card, exp_year: e.target.value }));
-                          }}>
-                            <option value="">Año</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                            <option value="32">32</option>
-                            <option value="33">33</option>
-                            <option value="34">34</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="form-row">
-                        <label>CVV</label>
-                        <input className="short" type="password" placeholder="∗∗∗" maxLength={4} onChange={(e) => {
-                          setCard((card: any) => ({ ...card, cvc: e.target.value }));
-                        }} />
-                      </div>
-                    </div>
-                    {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
-                    {loader && <LoaderContainSpinner />}
-                  </div>
-                  {!trial && <div className="paypal" onClick={() => {
-
-                  }}>
-                    {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
-                      "client-id": "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz",
-                      currency: "MXN",
-                      'vault': true,
-                    }}
-                    >
-                      {type == 'subscription' && <PayPalButtons
-                        style={{
-                          color: "blue",
-                          layout: 'horizontal',
-                          shape: 'pill',
-                          height: 50,
-                          tagline: false
-                        }}
-                        createSubscription={(data, actions) => {
-                          setPlan({ method: "paypal" })
-                          return actions.subscription.create({
-                            plan_id: 'P-2P063165RR167053TMRKD7BQ'
-                          })
-                        }}
-                        onApprove={(data: any, actions) => {
-                          let today = new Date().getTime() / 1000;
-                          let finalDate = 0;
-                          finalDate = today + 2629800;
-                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
-                          setConfirmation(false);
-                          setPay(true);
-                          return data
-                        }}
-                      />}
-                      {type == 'course' && <PayPalButtons
-                        style={{
-                          color: "gold",
-                          layout: 'horizontal',
-                          shape: 'pill',
-                          height: 50,
-                          tagline: false
-                        }}
-                        createOrder={(data, actions) => {
-                          let price = product.price;
-                          if (coupon) {
-                            if (coupon.type == 'amount') {
-                              price = price - coupon.discount;
-                            } else {
-                              price = (price - (coupon.discount / 100) * price)
-                            }
-                          }
-                          return actions.order.create({
-
-                            purchase_units: [
-                              {
-                                amount: {
-                                  value: price,
-                                },
-                              },
-                            ],
-                          });
-                        }}
-                        onApprove={(data, actions: any) => {
-                          return actions.order.capture().then((details: any) => {
-                            setPlan({ method: "paypal" })
-                          });
-                        }}
-                      />}
-                    </PayPalScriptProvider>}
-                    <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
-                  </div>}
-                </div> */}
               </div>
               <div className="box">
                 <p className="title">¿Qué estás adquiriendo?</p>

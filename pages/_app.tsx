@@ -9,7 +9,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { FacebookProvider } from 'react-facebook';
 import Script from "next/script";
 import { CanonicalURL } from "../utils/functions";
-
+import { useEffect } from "react";
+declare let Conekta: any
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
