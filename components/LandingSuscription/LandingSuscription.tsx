@@ -18,6 +18,7 @@ import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
+const upsideLines = "/images/landing_suscription/lines-d.png"
 const plus = "/images/landing_suscription/gonvar cuad 2.png"
 const backPpal = "/images/landing_suscription/background principal.png"
 const ubi = "/images/landing_suscription/ubicacion.png"
@@ -75,6 +76,11 @@ const inspo1 = "/images/landing_suscription/nails_inspo_1.png"
 const inspo2 = "/images/landing_suscription/nails_inspo_2.png"
 const inspo3 = "/images/landing_suscription/nails_inspo_3.png"
 const inspo4 = "/images/landing_suscription/nails_inspo_4.png"
+const arita = "/images/landing_suscription/Arita.png"
+const reina = "/images/landing_suscription/Reina.png"
+const cony = "/images/landing_suscription/Cony.png"
+const antonio = "/images/landing_suscription/Antonio.png"
+const liz = "/images/landing_suscription/Liz.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -166,17 +172,25 @@ const LandingSuscription = (props: ILandingSuscription) => {
   }
   return (
     <SuscriptionContain>
+      <div className="extra-header">
+        <button className="header-button">Comenzar ahora</button>
+      </div>
       <div className="intro-section" >
-        {/* <div className="m-0 all-center w-100">
-          <img src={backPpal} className="background-images" />
-        </div> */}
+        <div className="background-images">
+          <img src={upsideLines} />
+          <img src={backPpal} className="women-back" />
+        </div>
 
-        <img src={gonvar} className="gonvarplus" />
-        <h2 className="h1 bold space">La suscripción mensual que te permite ver <b className="p-pink no-bold">cientos <br /> de cursos</b> de uñas y belleza en línea.</h2>
+        <div className="">
+          <img src={gonvar} className="gonvarplus" />
+          <img src={plus} className="mt-4 plusgonvar" />
+        </div>
+
+        <h3 className="bold space">La suscripción mensual que te permite ver <b className="p-pink no-bold">cientos <br /> de cursos</b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h2 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos</b> hoy mismo!</h2>
-          <h2 className="bold">Sólo {price}</h2>
+          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos</b> hoy mismo!</h4>
+          <h4 className="bold">Sólo {price}</h4>
         </div>
 
         <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
@@ -258,9 +272,35 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="instructores-section">
         <h2 className="big-title bold"><b className="p-pink no-bold">¡Nunca te dejaremos sola, </b><br />en tu
           proceso de aprendizaje!</h2>
-        <img src={instructores} className="space instructores" />
-        <h2 className="bold space">Los cursos son impartidos por <b className="p-pink no-bold">instructores profesionales
-          y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h2>
+        <div className="instructores">
+          <div className="inst-cont">
+            <img src={reina} />
+            <p><b>Reina Rauda </b><br />
+              <i className="p-pink">Especialista en maquillaje</i></p>
+          </div>
+          <div className="inst-cont">
+            <img src={cony} />
+            <p><b className="middle">Cony Juárez </b><br />
+              <i className="p-pink">Especialista en mano alzada</i></p>
+          </div>
+          <div className="inst-cont">
+            <img src={arita} />
+            <p><b className="arita">Arita Gonvar </b><br />
+              <i className="p-pink">Especialista en uñas</i></p>
+          </div>
+          <div className="inst-cont">
+            <img src={antonio} />
+            <p><b className="middle">Antonio Rico </b><br />
+              <i className="p-pink">Especialista en micropintura</i></p>
+          </div>
+          <div className="inst-cont">
+            <img src={liz} />
+            <p><b>Liz Torres </b><br />
+              <i className="p-pink">Especialista en Manicura Rusa</i></p>
+          </div>
+        </div>
+        <h3 className="bold space">Los cursos son impartidos por <b className="p-pink no-bold">instructores profesionales
+          y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h3>
         <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 

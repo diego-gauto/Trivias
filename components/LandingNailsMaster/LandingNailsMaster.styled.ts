@@ -18,6 +18,9 @@ export const SuscriptionContain = styled.div`
 	.fechas {
 		margin-bottom: 100px;
 	}
+	.bolder {
+		font-weight: 800 !important;
+	}
 	.bold {
 		font-weight: 700;
 	}
@@ -162,6 +165,7 @@ export const SuscriptionContain = styled.div`
 		.info-top {
 			display: flex;
 			justify-content: center;
+			align-items: center;
 			.text {
 				text-align: start;
 				h2 {
@@ -770,9 +774,6 @@ export const SuscriptionContain = styled.div`
 		h2 {
 			font-weight: 700;
 		}
-		p {
-			font-weight: 700;
-		}
 		.faq {
 			.q-container {
 				width: 1200px;
@@ -788,10 +789,10 @@ export const SuscriptionContain = styled.div`
 					.title {
 						margin-top: 15px;
 						margin-left: 15px;
-						font-weight: 800;
 						font-size: 25px;
 						width: 80%;
 						text-align: start;
+						font-weight: 700;
 					}
 					.icon {
 						background-color: #3f1168;
@@ -1018,9 +1019,17 @@ export const SuscriptionContain = styled.div`
 			.faq {
 				.q-container {
 					width: 750px;
+					.q {
+						.title {
+							font-size: 20px;
+						}
+					}
 				}
 				.q-container.min {
-					max-height: 68px;
+					max-height: 80px;
+					.border-top {
+						display: none;
+					}
 				}
 			}
 		}
@@ -1044,6 +1053,13 @@ export const SuscriptionContain = styled.div`
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@media (max-width: 850px) {
+		.section {
+			.space {
+				.big-text {
+					font-size: 75px;
+				}
+			}
+		}
 		.info {
 			.info-top {
 				flex-direction: column;

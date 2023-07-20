@@ -9,6 +9,22 @@ export const SuscriptionContain = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	.extra-header {
+		padding-inline: 10px;
+		padding-block: 15px;
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		.header-button {
+			padding-block: 5px;
+			padding-inline: 15px;
+			border: none;
+			background-color: #d9d9d9;
+			border-radius: 28px;
+			color: #3f1168;
+			font-weight: 700;
+		}
+	}
 	.all-center {
 		display: flex;
 		justify-content: center;
@@ -48,9 +64,30 @@ export const SuscriptionContain = styled.div`
 
 	.intro-section {
 		width: 100%;
-		margin-block: 100px;
+		margin-bottom: 100px;
+		position: relative;
 		.gonvarplus {
-			margin-block: 90px;
+			margin-block: 60px;
+		}
+		.plusgonvar {
+			width: 70px;
+			height: 70px;
+		}
+		.background-images {
+			position: relative;
+			width: 100%;
+			.back-lines {
+				top: 0;
+				width: 100%;
+				position: absolute;
+			}
+			.women-back {
+				width: 100%;
+				transform: translate(0px, -20px);
+				position: absolute;
+				left: 0;
+				z-index: -1;
+			}
 		}
 	}
 
@@ -122,6 +159,27 @@ export const SuscriptionContain = styled.div`
 	.instructores-section {
 		margin-block: 75px;
 		width: 100%;
+		.instructores {
+			margin-block: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.inst-cont {
+				margin-inline: 15px;
+				.middle {
+					font-size: 21px;
+				}
+				.arita {
+					font-size: 24px;
+				}
+				b {
+					font-size: 18px;
+				}
+				i {
+					font-size: 14px;
+				}
+			}
+		}
 	}
 
 	.difficulties-section {
@@ -241,12 +299,12 @@ export const SuscriptionContain = styled.div`
 		width: 100%;
 		margin-block: 75px;
 		.list-container {
-      width: 1220px;
+			width: 1220px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			.left-side {
-				width:800px;
+				width: 800px;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -265,19 +323,19 @@ export const SuscriptionContain = styled.div`
 				z-index: 0;
 				display: flex;
 				.girl {
-          position: absolute;
+					position: absolute;
 					width: 400px;
-          transform: translate(-140px, -190px);
+					transform: translate(-140px, -190px);
 					z-index: 1;
 				}
 				.star {
 					position: absolute;
-          z-index: 2
-					transform: translateX(-120px) translateY(320px);
+					z-index: 2;
+					transform: translateX(140px) translateY(80px);
 				}
 				.back {
 					position: absolute;
-					transform: translateX(250px) translateY(-30px);
+					transform: translateX(80px) translateY(-220px);
 					z-index: -1;
 				}
 			}
@@ -293,9 +351,9 @@ export const SuscriptionContain = styled.div`
 			left: 0;
 			width: 250px;
 		}
-    .red-font {
-      font-size: 30px;
-    }
+		.red-font {
+			font-size: 30px;
+		}
 		.big-font {
 			font-size: 40px;
 		}
@@ -516,6 +574,7 @@ export const SuscriptionContain = styled.div`
 		padding-inline: 40px;
 		font-size: 20px;
 		font-weight: 700;
+		background-color: #3f1168;
 		&.left-right {
 			background-image: linear-gradient(to right, #9e2fea, #c940d7);
 		}
@@ -655,6 +714,9 @@ export const SuscriptionContain = styled.div`
 			.gonvarplus {
 				width: 350px;
 			}
+			.background-images {
+				display: none;
+			}
 		}
 		.courses-section {
 			.group-buttons {
@@ -680,7 +742,7 @@ export const SuscriptionContain = styled.div`
 		}
 		.instructores-section {
 			.instructores {
-				width: 450px;
+				flex-direction: column;
 			}
 		}
 		.difficulties-section {
@@ -708,10 +770,10 @@ export const SuscriptionContain = styled.div`
 			.all-center {
 				flex-direction: column;
 				.cert-img {
-					width: 550px;
+					width: 500px;
 				}
 				.cert-text {
-					width: 550px;
+					width: 450px;
 					.w-75 {
 						width: unset !important;
 					}
@@ -741,8 +803,24 @@ export const SuscriptionContain = styled.div`
 					text-align: center !important;
 				}
 			}
-			.benefits-ghosts {
-				display: none;
+			.list-container {
+				flex-direction: column;
+				width: unset;
+				.left-side {
+					width: unset;
+				}
+				.benefits-ghosts {
+					.back {
+						transform: translate(0px, 0px);
+					}
+					.girl {
+						position: unset;
+						transform: translate(0px, 0px);
+					}
+					.star {
+						transform: translate(300px, 270px);
+					}
+				}
 			}
 		}
 
@@ -762,12 +840,14 @@ export const SuscriptionContain = styled.div`
 		}
 
 		.testimonio-section {
-			.testimonio-container {
-				max-width: 300px;
-				display: none;
-			}
-			.testimonio-container.res {
-				display: flex;
+			.experiences-container {
+				.experiences {
+					max-width: 300px;
+					display: none;
+				}
+				.experiences.resp {
+					display: flex;
+				}
 			}
 		}
 
@@ -795,11 +875,12 @@ export const SuscriptionContain = styled.div`
 			.faq {
 				.all-center {
 					.q-container {
-						width: 450px;
+						width: 850px;
 						.q {
 							.title {
 								text-align: start;
 								width: 85%;
+								font-size: 20px;
 							}
 						}
 						.border-top {

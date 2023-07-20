@@ -716,7 +716,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
               <div className={`q ${views.get(1) && 'open-q'}`}>
-                <p className={`title bold`}>¿Entregan reconocimiento?</p>
+                <p className={`title bolder`}>¿Entregan reconocimiento?</p>
                 {views.get(1) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
