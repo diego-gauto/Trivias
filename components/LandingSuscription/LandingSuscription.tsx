@@ -369,47 +369,47 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h2 className="text-start h1 bold">Recibe <b className="p-pink no-bold">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h2>
         </div>
         <div className="list-container">
-          <div className="w-auto">
+          <div className="left-side">
             <div className="list">
               <img src={envio} className="me-3" />
-              <h4><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h4>
+              <h5><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h5>
             </div>
 
             <div className="list">
               <img src={boleto} className="me-3" />
-              <h4>Por cada mes dentro, recibes un boleto acumulable más para el<b className="p-pink">sorteo trimestral donde podrás ganas hasta $20,000.00</b></h4>
+              <h5>Por cada mes dentro, recibes un boleto acumulable más para el <b className="p-pink">sorteo trimestral donde podrás ganas hasta $20,000.00</b></h5>
             </div>
 
             <div className="list">
               <img src={descuento} className="me-3" />
               <div className="m-0">
-                <h4><b className="p-pink">20% de descuento</b> en productos a partir del 3° mes</h4>
-                <h4><b className="p-pink">40% de descuento</b> en productos a partir del 6° mes</h4>
+                <h5><b className="p-pink">20% de descuento</b> en productos a partir del 3° mes</h5>
+                <h5><b className="p-pink">40% de descuento</b> en productos a partir del 6° mes</h5>
               </div>
             </div>
 
             <div className="list">
               <img src={regalo} className="me-3" />
-              <h4>Envíos de <b className="p-pink">Kits de producto de regalo. </b>
-                <i className="subtitle">(Sólo pagarás envio)</i></h4>
+              <h5>Envíos de <b className="p-pink">Kits de producto de regalo. </b>
+                <i className="subtitle fs-6">(Sólo pagarás envio)</i></h5>
             </div>
 
             <div className="list">
               <img src={certificado} className="me-3" />
-              <h4><b className="p-pink">Certificaión oficial de la marca</b> por cada curso que completes.</h4>
+              <h5><b className="p-pink">Certificaión oficial de la marca</b> por cada curso que completes.</h5>
             </div>
 
             <div className="list">
               <img src={star} className="" />
               <div className="m-0">
-                <h4><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h4>
-                <h4>Cada tarea, clase y curso aprobados genera puntos.</h4>
+                <h5><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h5>
+                <h5>Cada tarea, clase y curso aprobados genera puntos.</h5>
               </div>
             </div>
           </div>
-          <div className="w-auto benefits-ghosts">
+          <div className="benefits-ghosts">
             <img src={envioG} className="back" />
-            <img src={envioMujer} />
+            <img src={envioMujer} className="girl" />
             <img src={goldStar} className="star" />
           </div>
         </div>
@@ -419,9 +419,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="cost-section all-center">
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
-          <h2 className="red bolder big-font">Costo total real: <del>$74,719.00 mxn</del></h2>
-          <h2 className="p-pink bolder big-title">Más de 60 cursos completso</h2>
-          <h2 className="green bolder big-title">Sólo {price}</h2>
+          <h2 className="red bolder red-font">Costo total real: <del>$74,719.00 mxn</del></h2>
+          <h2 className="p-pink bolder big-font">Más de 60 cursos completso</h2>
+          <h2 className="green bolder big-font">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />

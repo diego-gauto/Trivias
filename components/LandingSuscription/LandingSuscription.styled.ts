@@ -241,35 +241,45 @@ export const SuscriptionContain = styled.div`
 		width: 100%;
 		margin-block: 75px;
 		.list-container {
-			width: 1200px;
+      width: 1220px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			.list {
-				width: fit-content;
-				margin-bottom: 20px;
-				margin-top: 20px;
-				padding-left: 10px;
+			.left-side {
+				width:800px;
 				display: flex;
-				align-items: center;
-				text-align: start;
+				flex-direction: column;
+				justify-content: center;
+				.list {
+					width: fit-content;
+					margin-bottom: 20px;
+					margin-top: 20px;
+					padding-left: 10px;
+					display: flex;
+					align-items: center;
+					text-align: start;
+				}
 			}
-		}
-
-		.benefits-ghosts {
-			position: relative;
-			z-index: 0;
-			.girl {
-				z-index: 1;
-			}
-			.star {
-				position: absolute;
-				transform: translateX(-120px) translateY(320px);
-			}
-			.back {
-				position: absolute;
-				transform: translateX(250px) translateY(-30px);
-				z-index: -1;
+			.benefits-ghosts {
+				position: relative;
+				z-index: 0;
+				display: flex;
+				.girl {
+          position: absolute;
+					width: 400px;
+          transform: translate(-140px, -190px);
+					z-index: 1;
+				}
+				.star {
+					position: absolute;
+          z-index: 2
+					transform: translateX(-120px) translateY(320px);
+				}
+				.back {
+					position: absolute;
+					transform: translateX(250px) translateY(-30px);
+					z-index: -1;
+				}
 			}
 		}
 	}
@@ -283,6 +293,9 @@ export const SuscriptionContain = styled.div`
 			left: 0;
 			width: 250px;
 		}
+    .red-font {
+      font-size: 30px;
+    }
 		.big-font {
 			font-size: 40px;
 		}
@@ -293,7 +306,7 @@ export const SuscriptionContain = styled.div`
 		.manos {
 			position: absolute;
 			right: 0;
-			width: 350px;
+			width: 300px;
 		}
 	}
 
