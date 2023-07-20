@@ -212,17 +212,17 @@ const Purchase = () => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              setError(true);
-              setErrorMsg(res.error.raw.code == "card_declined" && (
-                res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-              ) ||
-                res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
-                res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-                res.error.raw.code == "processing_error" && "Error de proceso" ||
-                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+              // setError(true);
+              // setErrorMsg(res.error.raw.code == "card_declined" && (
+              //   res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+              //   res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+              //   res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+              //   res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              // ) ||
+              //   res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
+              //   res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+              //   res.error.raw.code == "processing_error" && "Error de proceso" ||
+              //   res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
               window.location.href = frequency === "month" ? "/pagofallidomensualidad" : "/pagofallidoanualidad";
             }
             setLoader(false);
@@ -257,17 +257,17 @@ const Purchase = () => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              setError(true);
-              setErrorMsg(res.error.raw.code == "card_declined" && (
-                res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-              ) ||
-                res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
-                res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-                res.error.raw.code == "processing_error" && "Error de proceso" ||
-                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+              // setError(true);
+              // setErrorMsg(res.error.raw.code == "card_declined" && (
+              //   res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+              //   res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+              //   res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+              //   res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              // ) ||
+              //   res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
+              //   res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+              //   res.error.raw.code == "processing_error" && "Error de proceso" ||
+              //   res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
               if (id === "30") {
                 window.location.href = "/pagofallidonailsmaster";
               }
