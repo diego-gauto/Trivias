@@ -26,7 +26,9 @@ interface IData {
 const Anual = (props: IData) => {
   const [ver, setver] = useState(true)
   const { user } = props;
-
+  const goToRoute = () => {
+    router.push('/suscripcion-anual');
+  }
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -224,7 +226,7 @@ const Anual = (props: IData) => {
                 </p>
               </div>}
           </div>
-          <span className="text-center my-2"><i>Más información</i></span>
+          <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>
         </div>
       </div>
     </PlanStyles>
