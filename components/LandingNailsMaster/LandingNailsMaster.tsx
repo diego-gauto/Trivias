@@ -162,8 +162,7 @@ const LandingNailsMaster = () => {
           <img src={stars} className="stars" />
           <h3 className="space"><b>(5) 7,378 opiniones</b></h3>
         </div>
-
-        <h4><b>El curso de aplicación de uñas </b><b className="p-pink">más exitoso de Latinoámerica.<br />
+        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">más exitoso de Latinoámerica.<br />
           Más de 5,700 alumnas</b> <b>han aprendido con nosotros.</b></h4>
 
         <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 mxn</button>
@@ -281,10 +280,10 @@ const LandingNailsMaster = () => {
 
       <div className="video-section">
         <div className="video-container">
-          <iframe width="450px" height="300px" src="https://www.youtube.com/embed/2QlI9_CTkqk?autoplay=1&mute=1" />
+          <iframe src="https://www.youtube.com/embed/2QlI9_CTkqk?autoplay=1&mute=1" />
         </div>
         <div className="info-video">
-          <h2><b>Durante 3 meses podrás acceder a</b><br />
+          <h2><b className="title-text">Durante 3 meses podrás acceder a</b><br />
             <b className="big-title p-pink">más de 40 clases</b></h2>
           <p>Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
