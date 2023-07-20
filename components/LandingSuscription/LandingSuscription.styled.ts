@@ -122,11 +122,11 @@ export const SuscriptionContain = styled.div`
         flex-wrap: wrap;
         button {
           font-style: italic;
-          margin-inline: 25px;
+          margin-inline: 10px;
           border: none;
           border-radius: 16px;
           color: white;
-          padding-inline: 45px;
+          padding-inline: 65px;
           background-image: linear-gradient(to right bottom, #aa1bc4, #eb7c2d);
         }
         .select {
