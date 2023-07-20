@@ -671,12 +671,13 @@ export const SuscriptionContain = styled.div`
               align-self: center;
               padding-inline: 25px;
               width: fit-content;
-              font-size: x-large;
+              font-size: 20px;
               font-style: italic;
               font-weight: 700;
               color: #ffffff;
               border-radius: 28px;
               background-color: #3f1168;
+              width: 280px;
             }
           }
         }
@@ -715,6 +716,7 @@ export const SuscriptionContain = styled.div`
         justify-content: center;
         width: 947px;
         gap: 15px;
+        padding-block: 30px;
       }
       .experiences.resp {
         display: none;
