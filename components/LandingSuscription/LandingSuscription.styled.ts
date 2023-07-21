@@ -318,6 +318,9 @@ export const SuscriptionContain = styled.div`
     padding-right: 100px;
     .all-center {
       padding-left: 50px;
+      h2 {
+        font-size: 2.3rem;
+      }
     }
     .list-container {
       display: flex;

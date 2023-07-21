@@ -173,7 +173,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
   return (
     <SuscriptionContain>
       <div className="extra-header">
-        <button className="header-button">Comenzar ahora</button>
+        <button className="header-button" onClick={() => handleRedirection()}>Comenzar ahora</button>
       </div>
       <div className="intro-section" >
         <div className="background-images">
@@ -223,9 +223,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
         {courseGonvarPlus.length > 0 ?
           <div className="row all-center space">
-            {courseGonvarPlus.map((e: any) => {
+            {courseGonvarPlus.map((e: any, index: number) => {
               return (
-                <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
+                <div className="responsive-unset col-lg-4 col-md-6 col-sm-12" key={"data-landing-" + index}>
                   <img src={e.image} alt="Curso" className="thumbnail" />
                   <p><b className="p-pink">{e.title} </b><br />
                     <i>{e.professors[0].name}</i></p>
