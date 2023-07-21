@@ -1,9 +1,8 @@
 import LandingSuscription from "../../components/LandingSuscription/LandingSuscription";
-import Terms from "../../components/TermsModal/Terms";
 import { MainContain } from "../../screens/Styles.styled";
 
 const termsConditions = () => {
-  const price = "$149 mxn/mes"
+  const price = "$149 MXN/mes"
   const month = true;
   return (
     <MainContain

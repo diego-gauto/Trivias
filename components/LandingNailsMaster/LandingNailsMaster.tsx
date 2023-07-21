@@ -165,7 +165,7 @@ const LandingNailsMaster = () => {
         <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">más exitoso de Latinoámerica.<br />
           Más de 5,700 alumnas</b> <b>han aprendido con nosotros.</b></h4>
 
-        <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 mxn</button>
+        <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 MXN</button>
       </div>
 
 
@@ -185,8 +185,8 @@ const LandingNailsMaster = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p><b>✅Logra aplicaciones </b><b className="p-pink">útiles y cómodas.</b></p>
-                    <p><b>✅Aplicaciones con las que puedas realizar todas tus actividades de manera sencilla,
+                    <p><b>✅ Logra aplicaciones </b><b className="p-pink">útiles y cómodas.</b></p>
+                    <p><b>✅ Aplicaciones con las que puedas realizar todas tus actividades de manera sencilla,
                       cómoda y con confianza, </b><b className="p-pink">sin riesgo a estropearlas o romperlas.</b></p>
                   </div>
                 </div>
@@ -198,16 +198,16 @@ const LandingNailsMaster = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p><b className="p-pink">✅Aprende a realizar un diagnóstico inicial </b><b>para determinar si
+                    <p><b className="p-pink">✅ Aprende a realizar un diagnóstico inicial </b><b>para determinar si
                       puedes o no realizar una aplicación de uñas en sistema artificial.</b></p>
-                    <p><b className="p-pink">✅Conoce todas las medidas de higiene y seguridad</b><b>en tu mesa de
+                    <p><b className="p-pink">✅ Conoce todas las medidas de higiene y seguridad</b><b> en tu mesa de
                       aplicación.</b></p>
-                    <p><b className="p-pink">✅Aprende a evitar hongos y enfermedades </b><b>en las uñas naturales
+                    <p><b className="p-pink">✅ Aprende a evitar hongos y enfermedades </b><b>en las uñas naturales
                       de tus clientas.</b></p>
-                    <p><b>✅Aprende los</b><b className="p-pink">lineamientos de acomodo </b><b>de materiales para
+                    <p><b>✅ Aprende los</b><b className="p-pink"> lineamientos de acomodo </b><b>de materiales para
                       evitar riesgos de derrame y quemaduras.
                       <i>(Prevención de accidentes)</i></b></p>
-                    <p>✅<b className="p-pink">Aprende el uso correcto</b><b> de los materiales químicos y medidas
+                    <p>✅<b className="p-pink"> Aprende el uso correcto</b><b> de los materiales químicos y medidas
                       de protección dérmica y respiratoria.</b></p>
                   </div>
                 </div>
@@ -221,7 +221,7 @@ const LandingNailsMaster = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p>✅<b>Logra aplicaciones </b><b className="p-pink">hermosas y detaladas.</b></p>
+                    <p>✅<b> Logra aplicaciones </b><b className="p-pink">hermosas y detalladas.</b></p>
                     <p>✅<b> Aprende a realizar aplicaciones realmente bellas y con </b><b className="p-pink">
                       lineamientos europeos.</b></p>
                     <p>✅<b className="p-pink"> Conoce y domina las técnicas de limado de competencia, </b>
@@ -237,7 +237,7 @@ const LandingNailsMaster = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p>✅<b>Logra aplicaciones </b><b className="p-pink">con duración de más de 21 días.</b></p>
+                    <p>✅<b> Logra aplicaciones </b><b className="p-pink">con duración de más de 21 días.</b></p>
                     <p>✅<b> Domina el </b><b className="p-pink">
                       cero desprendimiento.</b></p>
                     <p>✅<b className="p-pink"> Garantiza </b><b>que tus aplicaciones no se quiebren
@@ -249,7 +249,7 @@ const LandingNailsMaster = () => {
           </div>
           <img src={mujer} className="img" />
         </div>
-        <h2 className="h1 bold">Aprende desde cero y <b className="p-pink no-bold">vive de tu pasion</b> <br /> por las uñas acrilicas</h2>
+        <h2 className="h1 bold">Aprende desde cero y <b className="p-pink no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
         <div className="info-cards all-center">
           <div className="card">
             <div className="adjust">
@@ -307,7 +307,7 @@ const LandingNailsMaster = () => {
             <p className="p-pink"><b>Ella te guiará paso a paso en el programa Nails Master Revolution</b></p>
             <div className="sangria">
               <p><b>Instructora certificada</b> bajo estándares de aplicación de uñas artificiales por competencia</p>
-              <p><b>Especialista en capacitación para principiantes,</b> estrucutra profesional en escultural<br />
+              <p><b>Especialista en capacitación para principiantes,</b> estructura profesional en escultural<br />
                 y máster en técnicas y métodos de enseñanza teóricos-prácticos.</p>
               <p>Creadora de la técnica <b>"Cero Desprendimiento en 4 Pasos"</b> y co-fundadora de la academia<br />
                 de uñas <b>más grande de Latinoamerica.</b></p>
@@ -321,7 +321,7 @@ const LandingNailsMaster = () => {
       <div className="benefits-section">
 
         <h2>Con <b className="blue">Nails Master Revolution</b> te daremos <b className="blue">beneficios
-          <br />exclusivos</b> y tendras acceso a la comunidad de <br />estudiantes y profesionales de
+          <br />exclusivos</b> y tendrás acceso a la comunidad de <br />estudiantes y profesionales de
           la industria de las uñas<br /> <b className="blue">más grande de Latinoamérica.</b></h2>
 
         <div className="benefits-info">
@@ -349,7 +349,7 @@ const LandingNailsMaster = () => {
           <div className="info-row">
             <div className="info-content">
               <img src={revisado} className="icon" />
-              <h5>Revision de practicas y <b>asesorías ilimitadas</b></h5>
+              <h5>Revisión de prácticas y <b>asesorías ilimitadas</b></h5>
             </div>
             <div className="info-content info-side">
               <img src={check} className="icon" />
@@ -369,7 +369,7 @@ const LandingNailsMaster = () => {
           <div className="info-row">
             <div className="info-content">
               <img src={asesorias} className="icon" />
-              <h5><b>Certificado oficial</b> al terminar el curso, con folio único vrificado (FUV)</h5>
+              <h5><b>Certificado oficial</b> al terminar el curso, con folio único verificado (FUV)</h5>
             </div>
             <div className="info-content info-side">
               <img src={clock} className="icon" />
@@ -382,7 +382,7 @@ const LandingNailsMaster = () => {
 
 
       <div className="program">
-        <h2 className="yellow h1"><b>Todo lo que incluye este increible programa</b></h2>
+        <h2 className="yellow h1"><b>Todo lo que incluye este increíble programa</b></h2>
         <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
           obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
 
@@ -390,41 +390,41 @@ const LandingNailsMaster = () => {
           <div className="course-container">
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Curso | <b className="p-pink">Costo real: $2,399.00 mxn</b></p>
+              <p>Curso | <b className="p-pink">Costo real: $2,399.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p><b>Certificado</b> fisico y digital (no incluye envío) | <b className="p-pink">Costo real: $490.00 mxn</b></p>
+              <p><b>Certificado</b> físico y digital (no incluye envío) | <b className="p-pink">Costo real: $490.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p><b>Comunidad exclusiva</b> en What'sApp | <b className="p-pink">Costo real: $239.00 mxn</b></p>
+              <p><b>Comunidad exclusiva</b> en What'sApp | <b className="p-pink">Costo real: $239.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>La Perla Perfecta</b> | <b className="p-pink">Costo real: $297.00 mxn</b></p>
+              <p>Manual <b>La Perla Perfecta</b> | <b className="p-pink">Costo real: $297.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>Química del Producto nivel básico</b> | <b className="p-pink">Costo real: $497.00 mxn</b></p>
+              <p>Manual <b>Química del Producto nivel básico</b> | <b className="p-pink">Costo real: $497.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Revista Gonvar: <b>10 diseños increibles</b> | <b className="p-pink">Costo real: $649.00 mxn</b></p>
+              <p>Revista Gonvar: <b>10 diseños increibles</b> | <b className="p-pink">Costo real: $649.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>Obtén tus primeros clientes</b> | <b className="p-pink">Costo real: $649.00 mxn</b></p>
+              <p>Manual <b>Obtén tus primeros clientes</b> | <b className="p-pink">Costo real: $649.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>Los secretos del gel semipermanente</b> | <b className="p-pink">Costo real: $649.00 mxn</b></p>
+              <p>Manual <b>Los secretos del gel semipermanente</b> | <b className="p-pink">Costo real: $649.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={revisado} className="icon" />
               <div className="d-block text-start">
-                <p>Manual <b>Cómo obtener un documento oficial que respalde mi vocavión.</b> <br />
-                  <b className="p-pink">Costo real: $850.00 mxn</b></p>
+                <p>Manual <b>Cómo obtener un documento oficial que respalde mi vocación.</b> <br />
+                  <b className="p-pink">Costo real: $850.00 MXN</b></p>
               </div>
             </div>
           </div>
@@ -438,9 +438,9 @@ const LandingNailsMaster = () => {
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
             <div className="center">
-              <h2 className="red h2">Costo total real: <del>$6,719.00 mxn</del></h2>
+              <h2 className="red h2">Costo total real: <del>$6,719.00 MXN</del></h2>
               <h2 className="p-pink h1"><b>Precio de Lanzamiento con beca</b></h2>
-              <h2 className="green h1">Sólo $1,599.00 mxn</h2>
+              <h2 className="green h1">Sólo $1,599.00 MXN</h2>
               <p className="">Válido para las primeras 500 personas</p>
               <h2><b>Quedan 123 lugares</b></h2>
               <button className="btn left-right" onClick={() => handleRedirection()}>¡Quiero comenzar<br /> ahora!</button>
@@ -456,7 +456,7 @@ const LandingNailsMaster = () => {
         <div className="left-side">
           <h2 className="p-pink h1">Certificado oficial</h2>
           <h2>En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
-            <i>(Folio único verificado) </i></b> que autentifica y válida que tomaste el curso con nosotros.</h2>
+            <i>(Folio único verificado) </i></b> que autentifica y valida que tomaste el curso con nosotros.</h2>
         </div>
         <div className="right-side">
           <img src={cert} className="float-bottom" />
@@ -740,7 +740,7 @@ const LandingNailsMaster = () => {
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                   <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $149 mxn u 8 dls.)</i><br />
+                    de $149 MXN u 8 dls.)</i><br />
                   Si prefieres pagar en transferencia, deposito en Oxxo o Paypal, está disponible la anualidad,
                   $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>
@@ -766,7 +766,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(4) ? 'max' : 'min'}`} onClick={() => verQ(4)}>
               <div className={`q ${views.get(4) && 'open-q'}`}>
-                <p className={`title bolder`}>¿Puedo inscribirme desde cualquier pais?</p>
+                <p className={`title bolder`}>¿Puedo inscribirme desde cualquier país?</p>
                 {views.get(4) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>

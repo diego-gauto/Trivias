@@ -189,7 +189,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
 
-        <h3 className="bold space">La suscripción mensual que te permite ver <b className="p-pink no-bold">cientos <br /> de cursos</b> de uñas y belleza en línea.</h3>
+        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'} que te permite ver <b className="p-pink no-bold">cientos <br /> de cursos</b> de uñas y belleza en línea.</h3>
 
         <div className="space">
           <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos</b> hoy mismo!</h4>
@@ -268,7 +268,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <img src={ubi} className="ubiImg" />
         <h2 className="big-title bold">NO IMPORTA TU UBICACIÓN</h2>
         <h2 className=" fs-3">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,<br />
-          <b className="p-pink fs-2 no-bold"> desde cualquier pais, donde quieras y a la hora que quieras.</b></h2>
+          <b className="p-pink fs-2 no-bold"> desde cualquier país, donde quieras y a la hora que quieras.</b></h2>
       </div>
 
 
@@ -374,7 +374,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <div className="cert-text">
             <h2 className="p-pink big-title mb-4 bold">Certificado FUV</h2>
             <h2 className="bold mb-4 text-width">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
-              <b className="p-pink">obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
+              <b className="p-pink"> obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
             <h2 className="bold text-width">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
               <i>(folio único verificado).</i></b></h2>
           </div>
@@ -415,7 +415,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <div className="left-side">
             <div className="list">
               <img src={envio} className="me-3" />
-              <h5><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 mx</h5>
+              <h5><b className="p-pink">Envío gratis</b> de productos en compras superiores a $1,000.00 MXN</h5>
             </div>
 
             <div className="list">
@@ -434,17 +434,17 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <div className="list">
               <img src={regalo} className="me-3" />
               <h5>Envíos de <b className="p-pink">Kits de producto de regalo. </b>
-                <i className="subtitle fs-6">(Sólo pagarás envio)</i></h5>
+                <i className="subtitle fs-6">(Sólo pagarás envío)</i></h5>
             </div>
 
             <div className="list">
               <img src={certificado} className="me-3" />
-              <h5><b className="p-pink">Certificaión oficial de la marca</b> por cada curso que completes.</h5>
+              <h5><b className="p-pink">Certificación oficial de la marca</b> por cada curso que completes.</h5>
             </div>
 
             <div className="list">
               <img src={star} className="" />
-              <div className="m-0">
+              <div className="ms-3">
                 <h5><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h5>
                 <h5>Cada tarea, clase y curso aprobados genera puntos.</h5>
               </div>
@@ -462,8 +462,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="cost-section all-center">
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
-          <h2 className="red bolder red-font">Costo total real: <del>$74,719.00 mxn</del></h2>
-          <h2 className="p-pink bolder big-font">Más de 60 cursos completso</h2>
+          <h2 className="red bolder red-font">Costo total real: <del>$74,719.00 MXN</del></h2>
+          <h2 className="p-pink bolder big-font">Más de 60 cursos completos</h2>
           <h2 className="green bolder big-font">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
@@ -700,7 +700,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <div className="all-center">
             <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
               <div className={`q ${views.get(2) && 'open-q'}`}>
-                <p className={`title bolder`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
+                <p className={`title bolder`}>¿Qué métodos de pago puedo usar para pagar mi suscripción?</p>
                 {views.get(2) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
@@ -709,8 +709,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                   <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $149 mxn u 8 dls.)</i><br />
-                  Si prefieres pagar en transferencia, deposito en Oxxo o Paypal, está disponible la anualidad,
+                    de $149 MXN u 8 dls.)</i><br />
+                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
                   $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>
               </div>
@@ -735,7 +735,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <div className="all-center">
             <div className={`q-container ${views.get(4) ? 'max' : 'min'}`} onClick={() => verQ(4)}>
               <div className={`q ${views.get(4) && 'open-q'}`}>
-                <p className={`title bolder`}>¿Puedo inscribirme desde cualquier pais?</p>
+                <p className={`title bolder`}>¿Puedo inscribirme desde cualquier país?</p>
                 {views.get(4) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
