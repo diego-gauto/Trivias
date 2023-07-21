@@ -731,7 +731,7 @@ const LandingNailsMaster = () => {
           <div className="all-center">
             <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
               <div className={`q ${views.get(2) && 'open-q'}`}>
-                <p className={`title bolder`}>¿Qué metodos de pago puedo usar para pagar mi suscripción?</p>
+                <p className={`title bolder`}>¿Qué métodos de pago puedo usar para pagar mi suscripción?</p>
                 {views.get(2) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
@@ -741,7 +741,7 @@ const LandingNailsMaster = () => {
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                   <i>(El cobro se realiza de manera automática mes con mes por la cantidad
                     de $149 MXN u 8 dls.)</i><br />
-                  Si prefieres pagar en transferencia, deposito en Oxxo o Paypal, está disponible la anualidad,
+                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
                   $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>
               </div>
