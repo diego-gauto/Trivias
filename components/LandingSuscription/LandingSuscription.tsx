@@ -15,6 +15,7 @@ import { getLandingCoursesApi } from "../api/lessons";
 import { getUserApi } from "../api/users";
 import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
+import { useMediaQuery } from "react-responsive";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -97,6 +98,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
   const { price, isMonth } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
+  const responsive650 = useMediaQuery({ query: "(max-width: 650px)" });
   const [courseGonvarPlus, setCourseGonvarPlus] = useState([])
 
   const verQ = (q: any) => {
@@ -185,7 +187,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
 
         <div className="">
-          <img src={gonvar} className="gonvarplus" />
+          <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
 
@@ -267,13 +269,14 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <img src={ubi} className="ubiImg" />
         <h2 className="big-title bold">NO IMPORTA TU UBICACIÓN</h2>
-        <h2 className=" fs-3">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,<br />
+        <h2 className="fs-3">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,<br />
           <b className="p-pink fs-2 no-bold"> desde cualquier país, donde quieras y a la hora que quieras.</b></h2>
       </div>
 
 
       <div className="instructores-section">
-        <h2 className="big-title bold"><b className="p-pink no-bold">¡Nunca te dejaremos sola, </b><br />en tu
+        <h2 className="big-title bold"><b className="p-pink no-bold">¡Nunca te dejaremos sola, </b> {!responsive650 && <br />}
+          en tu
           proceso de aprendizaje!</h2>
         <div className="instructores">
           <div className="inst-cont">

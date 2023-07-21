@@ -737,8 +737,16 @@ export const SuscriptionContain = styled.div`
       .gonvarplus {
         width: 350px;
       }
+      .plusgonvar {
+        width: 40px;
+        height: 40px;
+      }
       .background-images {
         display: none;
+        .image-contain {
+          transform: unset;
+          top: 200px;
+        }
       }
     }
     .courses-section {
@@ -933,16 +941,29 @@ export const SuscriptionContain = styled.div`
   @media (max-width: 650px) {
     .intro-section {
       .gonvarplus {
-        width: 350px;
+        width: 280px;
+      }
+      h3,
+      h4 {
+        font-size: 20px;
+        padding-inline: 20px;
+      }
+      button {
+        padding-inline: 25px;
+        font-size: 16px;
       }
     }
     .courses-section {
+      h2 {
+        padding-inline: 20px;
+      }
       .group-buttons {
         width: 100%;
         .center {
           gap: 10px;
           button {
-            margin-inline: 10px;
+            width: 180px;
+            padding-inline: unset;
           }
         }
       }
@@ -957,10 +978,20 @@ export const SuscriptionContain = styled.div`
       .ubiImg {
         width: 380px;
       }
+      .big-title {
+        margin-block: 20px;
+        font-size: 2rem;
+      }
     }
     .instructores-section {
       .instructores {
-        width: 450px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .big-title {
+        margin-block: 20px;
+        font-size: 2rem;
+        padding-inline: 20px;
       }
     }
 
