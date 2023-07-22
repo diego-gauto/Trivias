@@ -279,53 +279,94 @@ const LandingSuscription = (props: ILandingSuscription) => {
           en tu
           proceso de aprendizaje!</h2>
         <div className="instructores">
-          <div className="inst-cont">
-            <img src={reina} />
-            <p><b>Reina Rauda </b><br />
-              <i className="p-pink">Especialista en maquillaje</i></p>
-          </div>
-          <div className="inst-cont">
-            <img src={cony} />
-            <p><b className="middle">Cony Juárez </b><br />
-              <i className="p-pink">Especialista en mano alzada</i></p>
-          </div>
-          <div className="inst-cont">
-            <img src={arita} />
-            <p><b className="arita">Arita Gonvar </b><br />
-              <i className="p-pink">Especialista en uñas</i></p>
-          </div>
-          <div className="inst-cont">
-            <img src={antonio} />
-            <p><b className="middle">Antonio Rico </b><br />
-              <i className="p-pink">Especialista en micropintura</i></p>
-          </div>
-          <div className="inst-cont">
-            <img src={liz} />
-            <p><b>Liz Torres </b><br />
-              <i className="p-pink">Especialista en Manicura Rusa</i></p>
-          </div>
+          {
+            !responsive650 ?
+              <>
+                <div className="inst-cont">
+                  <img src={reina} />
+                  <p><b>Reina Rauda </b><br />
+                    <i className="p-pink">Especialista en maquillaje</i></p>
+                </div>
+                <div className="inst-cont">
+                  <img src={cony} />
+                  <p><b className="middle">Cony Juárez </b><br />
+                    <i className="p-pink">Especialista en mano alzada</i></p>
+                </div>
+                <div className="inst-cont">
+                  <img src={arita} />
+                  <p><b className="arita">Arita Gonvar </b><br />
+                    <i className="p-pink">Especialista en uñas</i></p>
+                </div>
+                <div className="inst-cont">
+                  <img src={antonio} />
+                  <p><b className="middle">Antonio Rico </b><br />
+                    <i className="p-pink">Especialista en micropintura</i></p>
+                </div>
+                <div className="inst-cont">
+                  <img src={liz} />
+                  <p><b>Liz Torres </b><br />
+                    <i className="p-pink">Especialista en Manicura Rusa</i></p>
+                </div>
+              </>
+              :
+              <>
+                <div className="inst-cont">
+                  <img src={arita} />
+                  <p><b className="arita">Arita Gonvar </b><br />
+                    <i className="p-pink">Especialista en uñas</i></p>
+                </div>
+                <div className="duo-containers">
+                  <div className="inst-cont">
+                    <img src={reina} />
+                    <p><b>Reina Rauda </b><br />
+                      <i className="p-pink">Especialista en maquillaje</i></p>
+                  </div>
+                  <div className="inst-cont">
+                    <img src={antonio} />
+                    <p><b className="middle">Antonio Rico </b><br />
+                      <i className="p-pink">Especialista en micropintura</i></p>
+                  </div>
+                </div>
+              </>
+          }
+
         </div>
         <h3 className="bold space">Los cursos son impartidos por <b className="p-pink no-bold">instructores profesionales
-          y certificados,</b><br /> que estarán guiándote paso a paso, durante tu aprendizaje.</h3>
+          y certificados,</b> {!responsive650 && <br />}que estarán guiándote paso a paso, durante tu aprendizaje.</h3>
         <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
       <div className="difficulties-section">
-        <h2 className="h1 bold">Nuestra suscripción cuenta con <br />
-          <b className="p-pink bold">cursos de diferentes grados de dificultad,</b><br />
+        <h2 className="h1 bold">Nuestra suscripción cuenta con {!responsive650 && <br />}
+          <b className="p-pink bold">cursos de diferentes grados de dificultad,</b> {!responsive650 && <br />}
           desde principiantes hasta niveles más avanzados.</h2>
+        {
+          !responsive650 ?
+            <div className="dif-lines">
+              <img src={lineaDif} className="behind" />
+              <img src={muyFacil} className="level" />
+              <img src={facil} className="level bigger" />
+              <img src={intermedio} className="level" />
+              <img src={avanzado} className="level bigger" />
+              <img src={master} className="level bigger" />
+            </div>
+            :
+            <div className="resp-difficulty">
+              <div className="container-difficulty">
+                <img src={muyFacil} className="level-size" />
+                <img src={facil} className="level" />
+                <img src={intermedio} className="level-size extra-margin" />
+              </div>
+              <div className="container-difficulty">
+                <img src={avanzado} className="level" />
+                <img src={master} className="level" />
+              </div>
+            </div>
+        }
 
-        <div className="dif-lines">
-          <img src={lineaDif} className="behind" />
-          <img src={muyFacil} className="level" />
-          <img src={facil} className="level" />
-          <img src={intermedio} className="level" />
-          <img src={avanzado} className="level" />
-          <img src={master} className="level" />
-        </div>
 
-        <h4 className="fst-italic">No importa si vas comenzando o si ya tienes conocimientos, <br />
+        <h4 className="fst-italic">No importa si vas comenzando o si ya tienes conocimientos, {!responsive650 && <br />}
           te aseguramos que tenemos un curso para ti.</h4>
       </div>
 
@@ -378,9 +419,12 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <h2 className="p-pink big-title mb-4 bold">Certificado FUV</h2>
             <h2 className="bold mb-4 text-width">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
               <b className="p-pink"> obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
-            <h2 className="bold text-width">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
-              <i>(folio único verificado).</i></b></h2>
+            {!responsive650 && <h2 className="bold text-width">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
+              <i>(folio único verificado).</i></b></h2>}
+
           </div>
+          {responsive650 && <h2 className="bold text-width resp-text">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
+            <i>(folio único verificado).</i></b></h2>}
         </div>
       </div>
 

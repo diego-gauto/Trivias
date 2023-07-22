@@ -176,11 +176,26 @@ export const SuscriptionContain = styled.div`
   .instructores-section {
     margin-block: 75px;
     width: 100%;
+    button {
+      padding-block: 5px;
+      font-size: 18px;
+      line-height: 22px;
+    }
+    h3 {
+      padding-inline: 20px;
+      font-size: 20px;
+    }
     .instructores {
       margin-block: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
+      .duo-containers {
+        display: flex;
+        img {
+          width: 160px;
+        }
+      }
       .inst-cont {
         margin-inline: 15px;
         .middle {
@@ -778,13 +793,15 @@ export const SuscriptionContain = styled.div`
     }
     .difficulties-section {
       .dif-lines {
-        flex-direction: column;
-        align-items: center;
         .behind {
           display: none;
         }
         .level {
-          width: 200px;
+          width: 150px;
+          margin-inline: 5px;
+        }
+        .bigger {
+          width: 123px;
         }
       }
     }
@@ -985,8 +1002,6 @@ export const SuscriptionContain = styled.div`
     }
     .instructores-section {
       .instructores {
-        display: flex;
-        flex-wrap: wrap;
       }
       .big-title {
         margin-block: 20px;
@@ -994,10 +1009,72 @@ export const SuscriptionContain = styled.div`
         padding-inline: 20px;
       }
     }
-
+    .difficulties-section {
+      margin-block: 40px;
+      h2 {
+        padding-inline: 20px;
+      }
+      h4 {
+        margin-top: 40px;
+        font-weight: 600;
+        font-size: 18px;
+        padding-inline: 20px;
+      }
+      .resp-difficulty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .container-difficulty {
+          display: flex;
+          gap: 15px;
+          padding-inline: 20px;
+          align-items: center;
+          img {
+            width: 100px;
+          }
+          .level-size {
+            width: 120px;
+            margin-top: 30px;
+          }
+          .extra-margin {
+            margin-top: 40px;
+          }
+        }
+      }
+    }
     .teaching-section {
+      .big-title {
+        font-size: 45px;
+        font-weight: 600;
+      }
       .teach-lines.all-center {
         flex-direction: column;
+      }
+    }
+    .certificado-section {
+      margin-block: 50px;
+      .all-center {
+        padding-inline: 30px;
+      }
+      .big-title {
+        font-size: 45px;
+      }
+      .text-width {
+        font-size: 20px;
+      }
+      .cert-text {
+        order: 1;
+        width: unset !important;
+      }
+      .resp-text {
+        order: 3;
+        text-align: start;
+        margin-top: 20px;
+      }
+      img {
+        order: 2;
+        width: 350px !important;
       }
     }
     .cellphone-section {
