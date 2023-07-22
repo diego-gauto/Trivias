@@ -1079,6 +1079,10 @@ export const SuscriptionContain = styled.div`
     }
     .cellphone-section {
       width: 100%;
+      margin-block: 25px;
+      .title {
+        font-size: 1.6rem !important;
+      }
       .cell-body {
         text-align: center !important;
         margin: 5px;
@@ -1089,41 +1093,151 @@ export const SuscriptionContain = styled.div`
           display: none;
         }
       }
+      .subtitle {
+        margin-left: 0px !important;
+        display: flex;
+        gap: 20px;
+        padding-inline: 20px;
+        img {
+          order: 1;
+          max-width: 130px;
+          margin-left: 0px !important;
+        }
+        h3 {
+          order: 2;
+          text-align: end;
+          font-size: 16px;
+          button {
+            margin-top: 20px;
+            font-size: 12px;
+            line-height: 20px;
+            padding-inline: 40px;
+            padding-block: 2px;
+            white-space: nowrap;
+          }
+        }
+      }
       img {
-        display: none;
+        display: unset;
       }
     }
 
     .benefits-section {
+      margin-block: 25px;
+      padding-inline: 20px;
       .title {
+        padding-left: 0px;
+        img {
+          margin: 0px !important;
+          width: 50px;
+        }
         h2 {
-          text-align: center !important;
+          padding-left: 20px;
+          text-align: start !important;
+          font-size: 1.6rem;
         }
       }
-      .benefits-ghosts {
-        display: none;
+      .list-container {
+        .left-side {
+          order: 2;
+          .list {
+            padding-left: 0px;
+            img {
+              width: 40px;
+              height: 40px;
+            }
+            h5 {
+              font-size: 0.9rem;
+              font-weight: 600;
+            }
+          }
+        }
+        .benefits-ghosts {
+          order: 1;
+          margin-top: 20px;
+          .back {
+            right: -20px;
+            transform: unset;
+            width: 150px;
+          }
+          .girl {
+            width: 320px;
+          }
+          .star {
+            transform: translate(240px, 205px);
+            width: 50px;
+          }
+        }
       }
     }
 
     .cost-section {
+      margin-block: 25px;
+      display: flex;
+      flex-direction: column;
       .chica-img {
-        display: none;
+        display: unset;
+        position: unset;
+        margin-left: 0px !important;
+        margin-bottom: 20px;
       }
       .manos {
         display: none;
       }
+      .red {
+        font-size: 28px;
+      }
+      .p-pink {
+        font-size: 34px;
+      }
+      .green {
+        margin-top: 10px;
+        font-size: 28px;
+      }
+      .btn {
+        margin-top: 20px !important;
+        font-size: 1.2rem !important;
+        line-height: 1.4rem;
+        padding-block: 2px;
+        padding-inline: 40px;
+      }
     }
 
     .rewards-section {
+      margin-block: 50px;
+      h2 {
+        font-size: 1.2rem !important;
+      }
+      h5 {
+        margin-top: 20px;
+        padding-inline: 20px;
+      }
+      .all-center {
+        img {
+          width: 40px;
+        }
+      }
       .side-images {
         display: none;
       }
       .card-container {
         flex-direction: column;
+        width: unset;
+      }
+      .reward-card {
+        margin: 15px !important;
+        min-height: 370px !important;
+        .m-5 {
+          margin: 1.5rem !important;
+        }
       }
     }
 
     .testimonio-section {
+      .big-title {
+        font-size: 44px;
+        font-weight: 800;
+      }
       .testimonio-container {
         display: none;
       }
@@ -1142,10 +1256,14 @@ export const SuscriptionContain = styled.div`
     }
 
     .dudas-section {
+      margin-block: 25px;
       .all-center {
         flex-direction: column;
         .text-end {
           text-align: center !important;
+          .p-pink {
+            text-align: end !important;
+          }
         }
         .dudas-img {
           .point {
@@ -1189,203 +1307,6 @@ export const SuscriptionContain = styled.div`
     .footer-footer {
       .inside-footer {
         width: 450px;
-        .img {
-          display: none;
-        }
-      }
-    }
-  }
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  @media (max-width: 390px) {
-    width: 380px;
-    overflow-x: hidden;
-    .big-title {
-      font-size: 45px;
-    }
-    .intro-section {
-      .gonvarplus {
-        width: 350px;
-      }
-    }
-    .courses-section {
-      .group-buttons {
-        width: 100%;
-        .center {
-          gap: 10px;
-          button {
-            margin-inline: 10px;
-          }
-        }
-      }
-      h5 {
-        margin-inline: 15px;
-      }
-    }
-    .ubi-section {
-      .back-ghosts {
-        display: none;
-      }
-      .ubiImg {
-        width: 380px;
-      }
-    }
-    .instructores-section {
-      .instructores {
-        width: 350px;
-      }
-    }
-    .difficulties-section {
-      .dif-lines {
-        flex-direction: column;
-        align-items: center;
-
-        width: 350px;
-        .behind {
-          display: none;
-        }
-        .level {
-          width: 170px;
-          margin-block: 10px;
-        }
-      }
-    }
-    .teaching-section {
-      .teach-lines.all-center {
-        flex-direction: column;
-      }
-    }
-    .certificado-section {
-      width: 100%;
-      .back-lines {
-        display: none;
-      }
-      .all-center {
-        flex-direction: column;
-        .cert-img {
-          width: 350px;
-        }
-        .cert-text {
-          width: 350px;
-          .w-75 {
-            width: unset !important;
-          }
-        }
-      }
-    }
-    .cellphone-section {
-      width: 100%;
-      .cell-body {
-        text-align: center !important;
-        margin: 5px;
-        .text-center {
-          margin-block: 25px;
-        }
-        .back-lines {
-          display: none;
-        }
-      }
-      img {
-        display: none;
-      }
-    }
-
-    .benefits-section {
-      .title {
-        h2 {
-          text-align: center !important;
-        }
-      }
-      .benefits-ghosts {
-        display: none;
-      }
-    }
-
-    .cost-section {
-      .chica-img {
-        display: none;
-      }
-      .manos {
-        display: none;
-      }
-    }
-
-    .rewards-section {
-      .side-images {
-        display: none;
-      }
-      .card-container {
-        width: 100%;
-        flex-direction: column;
-      }
-    }
-
-    .testimonio-section {
-      .testimonio-container {
-        display: none;
-      }
-      .testimonio-container.res {
-        display: flex;
-      }
-    }
-
-    .email-send {
-      display: flex;
-      .email-input {
-        width: 80%;
-      }
-    }
-
-    .dudas-section {
-      .all-center {
-        flex-direction: column;
-        .text-end {
-          text-align: center !important;
-        }
-        .dudas-img {
-          .point {
-            width: 350px;
-          }
-          .watsap-button.all-center {
-            flex-direction: row;
-          }
-          .watsap-button {
-            transform: translate(50px, -70px);
-          }
-        }
-      }
-    }
-
-    .faq-section {
-      .faq {
-        .all-center {
-          .q-container {
-            width: 350px;
-            .q {
-              .title {
-                text-align: start;
-                width: 85%;
-              }
-              .title.special {
-                font-size: 16px;
-              }
-            }
-            .border-top {
-              margin-top: 20px;
-            }
-          }
-          .q-container.min {
-            max-height: 75px;
-          }
-          .q-container.max {
-            max-height: 800px;
-          }
-        }
-      }
-    }
-
-    .footer-footer {
-      .inside-footer {
-        width: 350px;
         .img {
           display: none;
         }

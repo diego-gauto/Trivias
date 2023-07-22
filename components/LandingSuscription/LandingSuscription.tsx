@@ -431,7 +431,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
       <div className="all-center cellphone-section">
         <div className="text-end cell-body">
-          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas<br /></b> y conviértete en una experta <br />
+          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas{!responsive650 && <br />}</b> y conviértete en una experta {!responsive650 && <br />}
             en uñas y belleza!</h2>
           <div className="back-lines all-center">
             <img src={backCell} className="line-1" />
@@ -441,22 +441,31 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <div className="subtitle">
             <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
               <b className="p-pink no-bold"> asesorías individuales e ilimitadas
-                con nuestros instructores certificados.</b> Aprende de manera correcta y alcanza tus
-              metas con confianza.</h3>
+                con nuestros instructores certificados.</b>{responsive650 && <><br /><br /></>} Aprende de manera correcta y alcanza tus
+              metas con confianza.
+              {
+                responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+              }
+            </h3>
+            {
+              responsive650 && <img src={asesoriaTel} className="ms-3" />
+            }
           </div>
           <div className="text-center ">
-            <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+            {
+              !responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+            }
           </div>
 
         </div>
-        <img src={asesoriaTel} className="ms-3" />
+        {
+          !responsive650 && <img src={asesoriaTel} className="ms-3" />
+        }
       </div>
-
-
       <div className="benefits-section">
         <div className="title all-center">
           <img src={miniLogo} className="mx-3" />
-          <h2 className="text-start h1 bold">Recibe <b className="p-pink no-bold">beneficios, contenido exclusivos<br /> y recompensas</b> con tu suscripción</h2>
+          <h2 className="text-start h1 bold">Recibe <b className="p-pink no-bold">beneficios, contenido exclusivos{!responsive650 && <br />} y recompensas</b> con tu suscripción</h2>
         </div>
         <div className="list-container">
           <div className="left-side">
@@ -492,8 +501,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <div className="list">
               <img src={star} className="" />
               <div className="ms-3">
-                <h5><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios.</h5>
-                <h5>Cada tarea, clase y curso aprobados genera puntos.</h5>
+                <h5><b className="p-pink">Sistema de puntos acumulables</b> que podrás cambiar por premios. Cada tarea, clase y curso aprobados genera puntos.</h5>
               </div>
             </div>
           </div>
@@ -509,8 +517,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="cost-section all-center">
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
-          <h2 className="red bolder red-font">Costo total real: <del>$74,719.00 MXN</del></h2>
-          <h2 className="p-pink bolder big-font">Más de 60 cursos completos</h2>
+          <h2 className="red bolder red-font">Costo total real: <del>{responsive650 && <br />}$74,719.00 MXN</del></h2>
+          <h2 className="p-pink bolder big-font">Más de 60{responsive650 && <br />} cursos completos</h2>
           <h2 className="green bolder big-font">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
@@ -585,14 +593,14 @@ const LandingSuscription = (props: ILandingSuscription) => {
           </div>
         </div>
 
-        <h5>Gracias a nuestro sistema de puntos, beneficios y certificados acumulables, <br />
-          <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b><br />
+        <h5>Gracias a nuestro sistema de puntos, beneficios y certificados acumulables, {!responsive650 && <br />}
+          <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b> {!responsive650 && <br />}
           sólo por <b>permanecer suscrita, concluir tus cursos y hacer tus tareas.</b></h5>
       </div>
 
 
       <div className="testimonio-section">
-        <h2 className="h1 bold big-title">Más de 45,000 alumnas</h2>
+        <h2 className="h1 bold big-title">Más de 45,000{responsive650 && <br />} alumnas</h2>
         <div className="experiences-container">
           <div className="next swiper-prev"><BsChevronLeft className="icon" /></div>
           <Swiper
@@ -656,57 +664,59 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
       </div>
 
-
-      <div className="inspo-section">
-        <h2 className="p-pink big-title bold mb-5">¿Necesitas Inspiración?</h2>
-        <h4 className="bold mb-5">Si no sabes que diseños aplicar a tus clientas, <br />
-          descarga nuestro catálogo completo con más de <b className="p-pink no-bold">400 diseños ya
-            disponibles.</b></h4>
-        {/* <img src={inspo} /> */}
-        <div className="inspo-swiper">
-          <Swiper slidesPerView={3} spaceBetween={15} loop={true} className="w-est" >
-            <SwiperSlide >
-              <img src={inspo1} />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={inspo2} />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={inspo3} />
-            </SwiperSlide>
-            {/* <SwiperSlide>
-              <img src={inspo4} />
-            </SwiperSlide> */}
-          </Swiper>
-        </div>
-
-        <div className="inspo-swiper res">
-          <Swiper slidesPerView={1} spaceBetween={30} loop={true} >
-            <SwiperSlide >
-              <img src={inspo1} className="swiper-item" />
-            </SwiperSlide>
-            <SwiperSlide >
-              <img src={inspo2} className="swiper-item" />
-            </SwiperSlide>
-            <SwiperSlide >
-              <img src={inspo3} className="swiper-item" />
-            </SwiperSlide>
-            <SwiperSlide >
-              <img src={inspo4} className="swiper-item" />
-            </SwiperSlide>
-          </Swiper>
-        </div>
-        <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños </b>
-          en nuestros más de 60 cursos.</h4>
-
-        {/*     Catalogo?????????????????????????????????????         
-        <div className="all-center">
-          <div className="email-send">
-            <input className="email-input" placeholder="Escribe tu e-mail"></input>
-            <button className="email-button">Envíame el catalogo</button>
+      {!responsive650 &&
+        <div className="inspo-section">
+          <h2 className="p-pink big-title bold mb-5">¿Necesitas Inspiración?</h2>
+          <h4 className="bold mb-5">Si no sabes que diseños aplicar a tus clientas, <br />
+            descarga nuestro catálogo completo con más de <b className="p-pink no-bold">400 diseños ya
+              disponibles.</b></h4>
+          {/* <img src={inspo} /> */}
+          <div className="inspo-swiper">
+            <Swiper slidesPerView={3} spaceBetween={15} loop={true} className="w-est" >
+              <SwiperSlide >
+                <img src={inspo1} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={inspo2} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={inspo3} />
+              </SwiperSlide>
+              {/* <SwiperSlide>
+                  <img src={inspo4} />
+                </SwiperSlide> */}
+            </Swiper>
           </div>
-        </div> */}
-      </div>
+
+          <div className="inspo-swiper res">
+            <Swiper slidesPerView={1} spaceBetween={30} loop={true} >
+              <SwiperSlide >
+                <img src={inspo1} className="swiper-item" />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src={inspo2} className="swiper-item" />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src={inspo3} className="swiper-item" />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src={inspo4} className="swiper-item" />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños </b>
+            en nuestros más de 60 cursos.</h4>
+
+          {/*     Catalogo?????????????????????????????????????         
+            <div className="all-center">
+              <div className="email-send">
+                <input className="email-input" placeholder="Escribe tu e-mail"></input>
+                <button className="email-button">Envíame el catalogo</button>
+              </div>
+            </div> */}
+        </div>
+      }
+
 
 
       <div className="dudas-section">
