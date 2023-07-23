@@ -17,6 +17,7 @@ import { getUserApi } from "../api/users";
 import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingNailsMaster.styled";
 import MaterialesModal from "./MaterialesModal";
+import { useMediaQuery } from "react-responsive";
 
 const news = "/images/landing_suscription/newsletter.png"
 const testimonio = "/images/landing_suscription/testimonios.png"
@@ -75,7 +76,7 @@ const LandingNailsMaster = () => {
   const [ver, setver] = useState(true)
   const [verMat, setverMat] = useState(false)
   const [reviews, setReviews] = useState([])
-
+  const responsive650 = useMediaQuery({ query: "(max-width: 650px)" });
   const handleMats = () => {
     setverMat(false)
   }
@@ -152,7 +153,7 @@ const LandingNailsMaster = () => {
         <div className="space">
           <h2 className="big-text "><b>Nail's Master </b><br />
             <b className="light-p">Revolution</b></h2>
-          <h2><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
+          <h2 className="subtitle"><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
         </div>
 
         <img src={nailYellow} className="right-img-1" />
@@ -162,9 +163,8 @@ const LandingNailsMaster = () => {
           <img src={stars} className="stars" />
           <h3 className="space"><b>(5) 7,378 opiniones</b></h3>
         </div>
-        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">más exitoso de Latinoámerica.<br />
-          Más de 5,700 alumnas</b> <b>han aprendido con nosotros.</b></h4>
-
+        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">{responsive650 && <br />}más exitoso de Latinoámerica.<br />{responsive650 && <br />}
+          Más de 5,700 alumnas{responsive650 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
         <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 MXN</button>
       </div>
 
@@ -249,7 +249,7 @@ const LandingNailsMaster = () => {
           </div>
           <img src={mujer} className="img" />
         </div>
-        <h2 className="h1 bold">Aprende desde cero y <b className="p-pink no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
+        <h2 className="h1 bold">Aprende desde cero y {responsive650 && <br />}<b className="p-pink no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
         <div className="info-cards all-center">
           <div className="card">
             <div className="adjust">
@@ -285,7 +285,7 @@ const LandingNailsMaster = () => {
         <div className="info-video">
           <h2><b className="title-text">Durante 3 meses podrás acceder a</b><br />
             <b className="big-title p-pink">más de 40 clases</b></h2>
-          <p>Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
+          <p className="reg-text">Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
           <button className="btn" onClick={() => handleRedirection()}>Obtener acceso</button>
         </div>
