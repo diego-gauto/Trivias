@@ -1238,6 +1238,20 @@ export const SuscriptionContain = styled.div`
         font-size: 44px;
         font-weight: 800;
       }
+      .swiper-wrapper {
+        padding-block: 20px;
+      }
+      .experiences-container {
+        margin-inline: 0px;
+        .next {
+          margin-inline: 15px;
+          border: none;
+          .icon {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
       .testimonio-container {
         display: none;
       }
@@ -1274,20 +1288,46 @@ export const SuscriptionContain = styled.div`
           }
           .watsap-button {
             transform: translate(100px, -90px);
+            padding-block: 6px;
+            padding-inline: 10px;
+            width: 200px;
+            img {
+              width: 25px;
+              margin-right: 0.5rem !important;
+            }
+            p {
+              margin-top: 0 !important;
+              margin-bottom: 0 !important;
+              font-size: 16px !important;
+              line-height: 18px;
+              text-align: start;
+            }
           }
         }
       }
     }
 
     .faq-section {
+      background-color: #ece7f2;
+      margin-block: 0px;
+      margin-inline: 0px;
+      padding-block: 45px;
+      padding-inline: 15px;
+      width: 100%;
+      .big-title {
+        font-size: 50px;
+      }
       .faq {
         .all-center {
           .q-container {
             width: 450px;
+            background-color: transparent;
             .q {
               .title {
                 text-align: start;
                 width: 85%;
+                font-size: 22px !important;
+                margin-block: 10px !important;
               }
             }
             .border-top {
