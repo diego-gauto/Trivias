@@ -324,14 +324,14 @@ const LandingSuscription = (props: ILandingSuscription) => {
                     <i className="p-pink">Especialista en uñas</i></p>
                 </div>
                 <div className="duo-containers">
-                  <div className="inst-cont">
+                  <div className="inst-cont left-img">
                     <img src={reina} />
                     <p><b>Reina Rauda </b><br />
                       <i className="p-pink">Especialista en maquillaje</i></p>
                   </div>
-                  <div className="inst-cont">
+                  <div className="inst-cont resp-img">
                     <img src={antonio} />
-                    <p><b className="middle">Antonio Rico </b><br />
+                    <p><b>Antonio Rico </b><br />
                       <i className="p-pink">Especialista en micropintura</i></p>
                   </div>
                 </div>
@@ -362,7 +362,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             :
             <div className="resp-difficulty">
               <div className="container-difficulty">
-                <img src={muyFacil} className="level-size" />
+                <img src={muyFacil} className="level-size easy" />
                 <img src={facil} className="level" />
                 <img src={intermedio} className="level-size extra-margin" />
               </div>
@@ -388,7 +388,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <img src={lineaArteU} />
             <div className="line-desc">
               <h2 className="bold">Arte en Uñas</h2>
-              <h3 className="p-pink fw-normal">Linea 1</h3>
+              <h3 className="p-pink fw-normal">Línea 1</h3>
             </div>
           </div>
 
@@ -396,7 +396,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <img src={lineaUñas} />
             <div className="line-desc">
               <h2 className="bold">Estructura de Uñas</h2>
-              <h3 className="p-pink fw-normal">Linea 2</h3>
+              <h3 className="p-pink fw-normal">Línea 2</h3>
             </div>
           </div>
 
@@ -404,7 +404,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <img src={lineaMaq} />
             <div className="line-desc">
               <h2 className="bold">Maquillaje</h2>
-              <h3 className="p-pink fw-normal">Linea 3</h3>
+              <h3 className="p-pink fw-normal">Línea 3</h3>
             </div>
           </div>
         </div>
@@ -541,7 +541,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <div className="mx-3 all-center">
           <img src={rewards} className="me-3" />
-          <h2>CENTRO DE <b>RECOMPENSAS</b></h2>
+          <h2 className="text-title">CENTRO DE <b>RECOMPENSAS</b></h2>
         </div>
 
         <div className="card-container">

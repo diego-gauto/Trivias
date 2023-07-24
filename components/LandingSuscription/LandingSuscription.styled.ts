@@ -1034,6 +1034,14 @@ export const SuscriptionContain = styled.div`
     .instructores-section {
       margin-block: 40px;
       .instructores {
+        .left-img {
+          margin-top: 11px;
+        }
+        .resp-img {
+          img {
+            width: 153px;
+          }
+        }
       }
       .big-title {
         margin-block: 20px;
@@ -1065,11 +1073,12 @@ export const SuscriptionContain = styled.div`
           img {
             width: 100px;
           }
-          .level-size {
-            width: 120px;
-            margin-top: 30px;
+          .easy {
+            width: 130px;
+            margin-top: 20px;
           }
           .extra-margin {
+            width: 120px;
             margin-top: 40px;
           }
         }
@@ -1239,8 +1248,12 @@ export const SuscriptionContain = styled.div`
 
     .rewards-section {
       margin-block: 50px;
-      h2 {
+      .text-title {
         font-size: 1.2rem !important;
+        text-align: start;
+      }
+      img {
+        margin-right: 0.5rem !important;
       }
       h5 {
         margin-top: 20px;
