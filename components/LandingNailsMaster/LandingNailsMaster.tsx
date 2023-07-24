@@ -76,7 +76,7 @@ const LandingNailsMaster = () => {
   const [ver, setver] = useState(true)
   const [verMat, setverMat] = useState(false)
   const [reviews, setReviews] = useState([])
-  const responsive650 = useMediaQuery({ query: "(max-width: 650px)" });
+  const responsive850 = useMediaQuery({ query: "(max-width: 850px)" });
   const handleMats = () => {
     setverMat(false)
   }
@@ -163,8 +163,8 @@ const LandingNailsMaster = () => {
           <img src={stars} className="stars" />
           <h3 className="space"><b>(5) 7,378 opiniones</b></h3>
         </div>
-        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">{responsive650 && <br />}más exitoso de Latinoámerica.<br />{responsive650 && <br />}
-          Más de 5,700 alumnas{responsive650 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
+        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">{responsive850 && <br />}más exitoso de Latinoámerica.<br />{responsive850 && <br />}
+          Más de 5,700 alumnas{responsive850 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
         <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 MXN</button>
       </div>
 
@@ -249,7 +249,7 @@ const LandingNailsMaster = () => {
           </div>
           <img src={mujer} className="img" />
         </div>
-        <h2 className="h1 bold">Aprende desde cero y {responsive650 && <br />}<b className="p-pink no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
+        <h2 className="h1 bold">Aprende desde cero y {responsive850 && <br />}<b className="p-pink no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
         <div className="info-cards all-center">
           <div className="card">
             <div className="adjust">
@@ -295,7 +295,9 @@ const LandingNailsMaster = () => {
       <div className="arita-section">
         <div className="circle corner-left"></div>
         <div className="image-quote">
-          <p className="quote"><i>"Hago lo que me <br /> apasiona y disfruto <br /> enseñando a otras"</i></p>
+          {
+            !responsive850 && <p className="quote"><i>"Hago lo que me <br /> apasiona y disfruto <br /> enseñando a otras"</i></p>
+          }
           <img src={arita} className="image" />
         </div>
         <div className="text">
@@ -304,7 +306,7 @@ const LandingNailsMaster = () => {
             <div className="header-contain">
               <h2 className="big-title bold">Arita Gonvar</h2>
             </div>
-            <p className="p-pink"><b>Ella te guiará paso a paso en el programa Nails Master Revolution</b></p>
+            <p className="p-pink"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master Revolution</b></p>
             <div className="sangria">
               <p><b>Instructora certificada</b> bajo estándares de aplicación de uñas artificiales por competencia</p>
               <p><b>Especialista en capacitación para principiantes,</b> estructura profesional en escultural<br />
@@ -312,8 +314,12 @@ const LandingNailsMaster = () => {
               <p>Creadora de la técnica <b>"Cero Desprendimiento en 4 Pasos"</b> y co-fundadora de la academia<br />
                 de uñas <b>más grande de Latinoamerica.</b></p>
             </div>
+            {
+              responsive850 && <p className="quote-resp"><i>"Hago lo que me apasiona  <br />y disfruto enseñando a otras"</i><br /> <span>-Arita Gonvar</span></p>
+            }
           </div>
         </div>
+
         <div className="circle corner-right"></div>
       </div>
 
@@ -321,8 +327,8 @@ const LandingNailsMaster = () => {
       <div className="benefits-section">
 
         <h2>Con <b className="blue">Nails Master Revolution</b> te daremos <b className="blue">beneficios
-          <br />exclusivos</b> y tendrás acceso a la comunidad de <br />estudiantes y profesionales de
-          la industria de las uñas<br /> <b className="blue">más grande de Latinoamérica.</b></h2>
+          {!responsive850 && <br />}exclusivos</b> y tendrás acceso a la comunidad de {!responsive850 && <br />}estudiantes y profesionales de
+          la industria de las uñas{!responsive850 && <br />} <b className="blue">más grande de Latinoamérica.</b></h2>
 
         <div className="benefits-info">
           <h2 className="yellow">Beneficios exclusivos</h2>

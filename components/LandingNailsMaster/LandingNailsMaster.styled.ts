@@ -1210,23 +1210,66 @@ export const SuscriptionContain = styled.div`
     }
 
     .arita-section {
+      .corner-left {
+        right: 0px;
+        left: unset;
+        transform: translate(60px, -60px);
+        width: 150px;
+        height: 150px;
+      }
+      .corner-right {
+        display: none;
+      }
       .image-quote {
         width: unset;
         .image {
           position: absolute;
-          bottom: 0;
-          height: 350px;
-          transform: translateX(-60px);
+          top: 50%;
+          // height: 350px;
+          width: 180px;
+          transform: translateY(-50%);
+          right: -460px;
+          background-color: #ffde5e;
+          border-radius: 100%;
         }
       }
       .text {
-        width: 400px;
+        margin-left: 0px;
+        margin-top: 50px;
         transform: translate(0px, 0px);
+        width: 100%;
+        padding-inline: 30px;
+        .quote-resp {
+          text-align: center;
+          background-color: #ffde5e;
+          border-radius: 100px;
+          padding-inline: 30px;
+          line-height: 20px;
+          font-size: 14px;
+          margin-inline: 30px;
+          span {
+            font-weight: 600;
+          }
+          i {
+            font-weight: 800;
+          }
+        }
+        .header-contain {
+          background-color: unset;
+          padding-left: unset;
+          transform: unset;
+          padding-right: unset;
+          .big-title {
+            font-size: 50px;
+            font-weight: 800;
+          }
+        }
         .p-pink {
-          width: 300px;
+          font-style: italic;
         }
         .sangria {
           width: 250px;
+          margin-left: 0px;
         }
       }
     }
