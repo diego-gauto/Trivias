@@ -191,7 +191,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
 
-        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'} que te permite ver <b className="p-pink no-bold">cientos <br /> de cursos</b> de uñas y belleza en línea.</h3>
+        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'} que te permite ver <b className="p-pink no-bold">cientos {!responsive650 && <br />} de cursos</b> de uñas y belleza en línea.</h3>
 
         <div className="space">
           <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos</b> hoy mismo!</h4>
@@ -372,7 +372,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
 
       <div className="teaching-section">
-        <h2 className="bold">Además, en la plataforma encontrarás diferentes</h2>
+        <h2 className="bold title-size">Además, en la plataforma encontrarás diferentes</h2>
         <h2 className="big-title p-pink">Líneas de aprendizaje</h2>
 
         <div className="teach-lines all-center">

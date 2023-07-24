@@ -957,6 +957,7 @@ export const SuscriptionContain = styled.div`
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 650px) {
     .intro-section {
+      margin-bottom: 40px;
       .gonvarplus {
         width: 280px;
       }
@@ -979,7 +980,7 @@ export const SuscriptionContain = styled.div`
         .center {
           gap: 10px;
           button {
-            width: 180px;
+            width: 165px;
             padding-inline: unset;
           }
         }
@@ -989,6 +990,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .ubi-section {
+      margin-block: 40px;
       .back-ghosts {
         display: none;
       }
@@ -1001,6 +1003,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .instructores-section {
+      margin-block: 40px;
       .instructores {
       }
       .big-title {
@@ -1044,6 +1047,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .teaching-section {
+      margin-block: 40px;
       .big-title {
         font-size: 45px;
         font-weight: 600;
@@ -1062,6 +1066,7 @@ export const SuscriptionContain = styled.div`
       }
       .text-width {
         font-size: 20px;
+        width: 100% !important;
       }
       .cert-text {
         order: 1;
@@ -1349,6 +1354,123 @@ export const SuscriptionContain = styled.div`
         width: 450px;
         .img {
           display: none;
+        }
+      }
+    }
+  }
+  @media (max-width: 400px) {
+    .intro-section {
+      .gonvarplus {
+        width: 250px;
+      }
+      .plusgonvar {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .courses-section {
+      .all-center {
+        .center {
+          button {
+            width: 150px;
+          }
+        }
+      }
+      .space {
+        .responsive-unset {
+          .thumbnail {
+            width: 320px;
+            height: 170px;
+          }
+        }
+      }
+    }
+    .ubi-section {
+      .fs-3 {
+        padding-inline: 20px;
+        font-size: 20px !important;
+        .fs-2 {
+          font-size: 20px !important;
+        }
+      }
+    }
+    .teaching-section {
+      .bold {
+        padding-inline: 20px;
+      }
+      .title-size {
+        font-size: 22px !important;
+      }
+      h3 {
+        font-size: 20px !important;
+      }
+    }
+    .certificado-section {
+      .big-title {
+        font-size: 40px;
+      }
+      .all-center {
+        padding-inline: 20px;
+      }
+      .cert-img {
+        width: 300px !important;
+      }
+    }
+    .cellphone-section {
+      .text-end {
+        padding-inline: 20px;
+      }
+      .title {
+        font-size: 1.4rem !important;
+        padding-inline: 20px;
+      }
+      .subtitle {
+        img {
+          max-width: 110px;
+        }
+        h3 {
+          font-size: 14px;
+        }
+      }
+    }
+    .benefits-section {
+      .title {
+        h2 {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    .testimonio-section {
+      .big-title {
+        font-size: 40px;
+      }
+      .experiences-container {
+        .next {
+          padding: 5px;
+          margin-inline: 3px;
+        }
+      }
+    }
+    .faq-section {
+      .big-title {
+        font-size: 40px;
+      }
+      .faq {
+        .all-center {
+          .q-container.min {
+            max-height: 87px !important;
+          }
+          .q-container.max {
+            max-height: 800px;
+          }
+          .q-container {
+            .q {
+              .title {
+                width: 85%;
+                font-size: 18px !important;
+              }
+            }
+          }
         }
       }
     }
