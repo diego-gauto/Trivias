@@ -78,6 +78,9 @@ export const SuscriptionContain = styled.div`
       width: 70px;
       height: 70px;
     }
+    .background-images-responsive {
+      display: none;
+    }
     .background-images {
       position: relative;
       width: 100%;
@@ -749,12 +752,39 @@ export const SuscriptionContain = styled.div`
   /////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 1100px) {
     .intro-section {
+      position: relative;
       .gonvarplus {
         width: 350px;
       }
       .plusgonvar {
         width: 40px;
         height: 40px;
+      }
+      .background-images-responsive {
+        display: unset;
+        width: 100%;
+        .image-resp {
+          position: absolute;
+          bottom: -180px;
+        }
+        .resp-left {
+          min-width: 160px;
+          left: 0px;
+        }
+        .image-right {
+          right: 0px;
+          position: absolute;
+          bottom: -180px;
+          .white-line {
+            width: 100%;
+            background-color: white;
+            height: 4px;
+            position: absolute;
+          }
+        }
+        .resp-right {
+          min-width: 120px;
+        }
       }
       .background-images {
         display: none;
@@ -957,7 +987,6 @@ export const SuscriptionContain = styled.div`
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 650px) {
     .intro-section {
-      margin-bottom: 40px;
       .gonvarplus {
         width: 280px;
       }

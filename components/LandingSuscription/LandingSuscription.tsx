@@ -82,6 +82,8 @@ const reina = "/images/landing_suscription/Reina.png"
 const cony = "/images/landing_suscription/Cony.png"
 const antonio = "/images/landing_suscription/Antonio.png"
 const liz = "/images/landing_suscription/Liz.png"
+const left_responsive_girls = "/images/landing_suscription/responsive/chica_izquierda.svg"
+const right_responsive_girls = "/images/landing_suscription/responsive/chica_derecha.svg"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -185,7 +187,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <div className="images-fade" />
           </div>
         </div>
-
+        <div className="background-images-responsive">
+          <img src={left_responsive_girls} className="resp-left image-resp" alt="chicas-lado-izquierdo" />
+          <div className="image-right image-resp">
+            <div className="white-line" />
+            <img src={right_responsive_girls} className="resp-right" alt="chicas-lado-derecho" />
+          </div>
+        </div>
         <div className="">
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
           <img src={plus} className="mt-4 plusgonvar" />
