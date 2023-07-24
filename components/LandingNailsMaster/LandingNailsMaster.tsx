@@ -326,7 +326,7 @@ const LandingNailsMaster = () => {
 
       <div className="benefits-section">
 
-        <h2>Con <b className="blue">Nails Master Revolution</b> te daremos <b className="blue">beneficios
+        <h2 className="text-blue">Con <b className="blue">Nails Master Revolution</b> te daremos <b className="blue">beneficios
           {!responsive850 && <br />}exclusivos</b> y tendrás acceso a la comunidad de {!responsive850 && <br />}estudiantes y profesionales de
           la industria de las uñas{!responsive850 && <br />} <b className="blue">más grande de Latinoamérica.</b></h2>
 

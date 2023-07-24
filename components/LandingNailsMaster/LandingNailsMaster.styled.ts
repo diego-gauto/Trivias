@@ -1275,7 +1275,29 @@ export const SuscriptionContain = styled.div`
     }
 
     .benefits-section {
+      .text-blue {
+        padding-inline: 20px;
+        font-size: 20px;
+      }
       .benefits-info {
+        .gray {
+          background-color: unset;
+        }
+        .info-row {
+          .info-content {
+            width: unset;
+            margin: unset;
+            padding-block: 10px;
+            padding-inline: 20px;
+          }
+          .info-side {
+            background-color: #f6f7fa;
+          }
+          flex-direction: column;
+          h5 {
+            font-size: 1rem;
+          }
+        }
         .back-hands {
           display: none;
         }
