@@ -17,7 +17,7 @@ const TriviaHome = () => {
     },
     {
       id: 1,
-      img: "/images/trivias/mujer2-removebg-preview.png",
+      img: "/images/trivias/Trivia01/T01-Portada.png",
       title: "Gonvar te dice tu futuro en el mundo de las uñas",
       color: "#ffcb7d",
       trans: "#ffb800",

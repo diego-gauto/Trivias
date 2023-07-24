@@ -48,7 +48,7 @@ function Trivias() {
     },
     {
       id: 1,
-      img: "/images/trivias/mujer2-removebg-preview.png",
+      img: "/images/trivias/Trivia01/T01-Portada.png",
       title: "Gonvar te dice tu futuro en el mundo de las uñas",
       color: "#ffcb7d",
       trans: "#ffb800",
@@ -227,7 +227,7 @@ function Trivias() {
     },
     {
       id: 1,
-      imgSelector: "/images/trivias/mujer2-removebg-preview.png",
+      imgSelector: "/images/trivias/Trivia01/T01-Portada.png",
       imgTrivia:"/images/trivias/imgTrivia.png",
       color: "#ffcb7d",
       trans: "#ffb800",
@@ -236,7 +236,7 @@ function Trivias() {
         {
           id: 1,
           question: "Actualmente ¿has tomado o estás  tomando alguna capacitación en uñas?",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia01/T01Q1.jpg",
           answers: [
             {
               text: "Nunca  he tomado un curso, pero deseo aprender",
@@ -259,7 +259,7 @@ function Trivias() {
         {
           id: 2,
           question: "Cuando elijo mis capacitaciones me dejo llevar por:",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia01/T01Q2.jpg",
           answers: [
             {
               text: "El costo, siempre busco lo más barato",
@@ -282,7 +282,7 @@ function Trivias() {
         {
           id: 3,
           question:"Si  no obtengo resultados en los primeros intentos yo:",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia01/T01Q3.jpg",
           answers: [
             {
               text: "Lo intento pero solo 3 veces y lo dejo por la paz",
@@ -305,7 +305,7 @@ function Trivias() {
         {
           id: 4,
           question: "Cuando termino algún curso yo:",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia01/T01Q4.jpg",
           answers: [
             {
               text: "Sigo practicando y repasando para seguir mejorando",
@@ -328,7 +328,7 @@ function Trivias() {
         {
           id: 5,
           question: "Mi  mayor interés en el mundo de  las uñas es :",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia01/T01Q5.jpg",
           answers: [
             {
               text: "Solo aplicarme a mí misma y a familiares cercanos",
@@ -386,7 +386,7 @@ function Trivias() {
           {
             id: 1,
             question: "Es una característica del monómero con MMA.",
-            imgQuestion:"/images/trivias/imgTrivia.png",
+            imgQuestion:"/images/trivias/Trivia02/T02Q1.jpg",
             answers: [
               {
                 text: "Tiene bajo olor",
@@ -409,7 +409,7 @@ function Trivias() {
           {
             id: 2,
             question:"¿Con qué gramaje de lima es correcto preparar la uña natural?",
-            imgQuestion:"/images/trivias/imgTrivia.png",
+            imgQuestion:"/images/trivias/Trivia02/T02Q2.jpg",
             answers: [
               {
                 text: "100/100",
@@ -432,7 +432,7 @@ function Trivias() {
           {
             id: 3,
             question: "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
-            imgQuestion:"/images/trivias/imgTrivia.png",
+            imgQuestion:"/images/trivias/Trivia02/T02Q3.jpg",
             answers: [
               {
                 text: "a 45 grados",
@@ -455,7 +455,7 @@ function Trivias() {
           {
             id: 4,
             question: "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
-            imgQuestion:"/images/trivias/imgTrivia.png",
+            imgQuestion:"/images/trivias/Trivia02/T02Q4.jpg",
             answers: [
               {
                 text: "El tip",
@@ -478,7 +478,7 @@ function Trivias() {
           {
             id: 5,
             question: "¿En cuántas fases se divide  una aplicación de uñas?",
-            imgQuestion:"/images/trivias/imgTrivia.png",
+            imgQuestion:"/images/trivias/Trivia02/T02Q5.jpg",
             answers: [
               {
                 text: "Pegado del tip, limado, abrillantado",
@@ -564,7 +564,7 @@ function Trivias() {
               />
             </div>
             <div className={styles.publicity}>
-              <img src={data[triviaId]?.imgTrivia} alt="" />
+              <img src={data[triviaId]?.questions[questionNumber-1]?.imgQuestion} alt="" />
             </div>
           </div>
         // {/* </div> */}

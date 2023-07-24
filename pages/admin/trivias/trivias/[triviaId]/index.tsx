@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { updateTriviaApi } from "../../../../../components/api/trivias";
-import ITrivia from "../../../../../interfaces/iTrivias";
+import ITrivia, { ITriviaResult } from "../../../../../interfaces/iTrivias";
 import styles from "./update.module.css";
 
 const EditableTrivia = () => {
 
-  const { container, inputGroup } = styles
+  const { container, inputGroup, inputGroupQuestion, inputGroupAnswers, inputGroupResult } = styles
 
   const {
     query: { triviaId },
@@ -328,24 +327,19 @@ const EditableTrivia = () => {
       result: [
         {
           title: "La perseverancia te  llevará  al éxito",
-          body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad.
-          Revisa  tu correo para  ver tu futuro completo                                
-          `,
+          body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad. Revisa tu correo para ver tu futuro completo`,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo: 7,
         },
         {
           title: "Tu esfuerzo será recompensado muy pronto",
-          body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad.
-          Te envie un correo con algunos consejos para lograrlo                                
-          `,
+          body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad. Te envie un correo con algunos consejos para lograrlo`,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo: 7,
         },
         {
           title: `Tus manos tienen el poder de pintar un camino lleno de éxito`,
-          body: `Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!            
-         `,
+          body: `Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!`,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo: 7,
         },
@@ -510,21 +504,117 @@ const EditableTrivia = () => {
 
 
   const [updatedTrivia, setUpdatedTrivia] = useState<ITrivia | null>(null);
+  const [imagePaths, setImagePaths] = useState<{ [key: string]: string }>({});
 
   const trivia = data[Number(triviaId)] || null;
-  console.log(trivia)
 
   useEffect(() => {
-    setUpdatedTrivia(trivia)
-  }, [])
-  // setUpdatedTrivia(trivia)
+    if (trivia) {
+      let prevTrivia = trivia;
+      setUpdatedTrivia(prevTrivia);
+
+      const initialImagePaths: { [key: string]: string } = {};
+
+      initialImagePaths["imgPathSelector"] = prevTrivia.imgSelector;
+
+      prevTrivia.questions.forEach((question) => {
+        initialImagePaths[`imgPathQuestion-${question.id}`] = question.imgQuestion;
+      });
+
+      prevTrivia.result.forEach((result, index) => {
+        initialImagePaths[`imgPathResult-${index}`] = result.img;
+      });
+
+      setImagePaths(initialImagePaths);
+    }
+  }, []);
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+
+  //   // Verificar si el input corresponde a una imagen
+  //   if (name.startsWith("imgPath")) {
+  //     setImagePaths((prevImagePaths) => ({
+  //       ...prevImagePaths,
+  //       [name]: value,
+  //     }));
+  //   }
+
+  //   setUpdatedTrivia({
+  //     ...updatedTrivia!,
+  //     [name]: value,
+  //   });
+  // };
+
+
+  const isQuestionInput = (name: string) => name.startsWith("question-");
+  const isAnswerInput = (name: string) => name.startsWith("answer-");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUpdatedTrivia({
-      ...updatedTrivia!,
-      [name]: value,
-    });
+
+    // Verificar si el input corresponde a una imagen
+    if (name.startsWith("imgPath")) {
+      setImagePaths((prevImagePaths) => ({
+        ...prevImagePaths,
+        [name]: value,
+      }));
+    } else if (isQuestionInput(name)) {
+      const questionId = parseInt(name?.split("-")[1] || "");
+      setUpdatedTrivia((prevState) => {
+        if (!prevState) return null;
+
+        const updatedQuestions = prevState.questions.map((question) => {
+          if (question.id === questionId) {
+            return {
+              ...question,
+              question: value,
+            };
+          }
+          return question;
+        });
+
+        return {
+          ...prevState,
+          questions: updatedQuestions,
+        };
+      });
+    } else if (isAnswerInput(name)) {
+      const [questionId, answerIndex] = name.split("-").slice(1).map((part) => parseInt(part));
+      setUpdatedTrivia((prevState) => {
+        if (!prevState) return null;
+
+        const updatedQuestions = prevState.questions.map((question) => {
+          if (question.id === questionId) {
+            const updatedAnswers = question.answers.map((answer, index) => {
+              if (index === answerIndex) {
+                return {
+                  ...answer,
+                  text: value,
+                };
+              }
+              return answer;
+            });
+
+            return {
+              ...question,
+              answers: updatedAnswers,
+            };
+          }
+          return question;
+        });
+
+        return {
+          ...prevState,
+          questions: updatedQuestions,
+        };
+      });
+    } else {
+      setUpdatedTrivia({
+        ...updatedTrivia!,
+        [name]: value,
+      });
+    }
   };
 
   const handleQuestionChange = (questionId: number, answerIndex: number, isCorrect: boolean) => {
@@ -556,49 +646,49 @@ const EditableTrivia = () => {
     });
   };
 
+  const handleResultChange = (
+    resultIndex: number,
+    fieldName: keyof ITriviaResult,
+    value: string | number
+  ) => {
+    setUpdatedTrivia((prevState) => {
+      if (!prevState) return null;
+
+      const updatedResult = prevState.result.map((result, index) => {
+        if (index === resultIndex) {
+          return {
+            ...result,
+            [fieldName]: value,
+          };
+        }
+        return result;
+      });
+
+      return {
+        ...prevState,
+        result: updatedResult,
+      };
+    });
+
+    // Actualizar también el estado de imagePaths
+    setImagePaths((prevImagePaths) => {
+      const updatedImagePaths = { ...prevImagePaths };
+      updatedImagePaths[`imgPathResult-${resultIndex}`] = value.toString();
+      return updatedImagePaths;
+    });
+  };
+
   const handleCancel = () => {
 
   };
 
   const handleUpdate = () => {
-    updateTriviaApi(Number(triviaId), updatedTrivia);
+    // updateTriviaApi(Number(triviaId), updatedTrivia);
+    console.log(updatedTrivia)
   };
 
   return (
     <div className={container}>
-      <div className={inputGroup}>
-        <label htmlFor="imgSelector">Imagen Selector:</label>
-        <input
-          type="text"
-          id="imgSelector"
-          name="imgSelector"
-          value={updatedTrivia?.imgSelector}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div className={inputGroup}>
-        <label htmlFor="color">Color:</label>
-        <input
-          type="text"
-          id="color"
-          name="color"
-          value={updatedTrivia?.color}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div className={inputGroup}>
-        <label htmlFor="trans">Trans:</label>
-        <input
-          type="text"
-          id="trans"
-          name="trans"
-          value={updatedTrivia?.trans}
-          onChange={handleInputChange}
-        />
-      </div>
-
       <div className={inputGroup}>
         <label htmlFor="title">Título:</label>
         <input
@@ -610,8 +700,48 @@ const EditableTrivia = () => {
         />
       </div>
 
+      <div className={inputGroup}>
+        <label htmlFor="imgPathSelector">Imagen:</label>
+        <input
+          type="text"
+          id="imgPathSelector"
+          name="imgPathSelector"
+          value={imagePaths["imgPathSelector"]}
+          onChange={handleInputChange}
+        />
+        {imagePaths["imgPathSelector"] && (
+          <img
+            src={imagePaths["imgPathSelector"]}
+            alt="Imagen 2"
+            style={{ width: "100px" }}
+          />
+        )}
+      </div>
+
+      <div className={inputGroup}>
+        <label htmlFor="color">Color principal:</label>
+        <input
+          type="text"
+          id="color"
+          name="color"
+          value={updatedTrivia?.color}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className={inputGroup}>
+        <label htmlFor="trans">Color de transparencia:</label>
+        <input
+          type="text"
+          id="trans"
+          name="trans"
+          value={updatedTrivia?.trans}
+          onChange={handleInputChange}
+        />
+      </div>
+
       {updatedTrivia?.questions.map((question) => (
-        <div key={question.id} className={inputGroup}>
+        <div key={question.id} className={inputGroupQuestion}>
           <label htmlFor={`question-${question.id}`}>Pregunta {question.id}:</label>
           <input
             type="text"
@@ -621,8 +751,24 @@ const EditableTrivia = () => {
             onChange={handleInputChange}
           />
 
+          <label htmlFor={`imgPathQuestion-${question.id}`}>Imagen:</label>
+          <input
+            type="text"
+            id={`imgPathQuestion-${question.id}`}
+            name={`imgPathQuestion-${question.id}`}
+            value={imagePaths[`imgPathQuestion-${question.id}`]}
+            onChange={handleInputChange}
+          />
+          {imagePaths[`imgPathQuestion-${question.id}`] && (
+            <img
+              src={imagePaths[`imgPathQuestion-${question.id}`]}
+              alt={imagePaths[`imgPathQuestion-${question.id}`]}
+              style={{ width: "100px" }}
+            />
+          )}
+
           {question.answers.map((answer, index) => (
-            <div key={index}>
+            <div key={index} className={inputGroupAnswers}>
               <label htmlFor={`answer-${question.id}-${index}`}>Respuesta {index + 1}:</label>
               <input
                 type="text"
@@ -648,9 +794,57 @@ const EditableTrivia = () => {
         </div>
       ))}
 
+      {updatedTrivia?.result.map((result, index) => (
+        <div key={index} className={inputGroupResult}>
+          <label htmlFor={`result-title-${index}`}>Título del resultado {index + 1}:</label>
+          <input
+            type="text"
+            id={`result-title-${index}`}
+            name={`result-title-${index}`}
+            value={result.title}
+            onChange={(e) => handleResultChange(index, 'title', e.target.value)}
+          />
+
+          <label htmlFor={`result-body-${index}`}>Cuerpo del resultado {index + 1}:</label>
+          <textarea
+            id={`result-body-${index}`}
+            name={`result-body-${index}`}
+            rows={4}
+            value={result.body}
+            onChange={(e) => handleResultChange(index, 'body', e.target.value)}
+          />
+
+          <label htmlFor={imagePaths[`imgPathResult-${index}`]}>Imagen del resultado {index + 1}:</label>
+          <input
+            type="text"
+            id={imagePaths[`imgPathResult-${index}`]}
+            name={imagePaths[`imgPathResult-${index}`]}
+            value={imagePaths[`imgPathResult-${index}`]}
+            onChange={(e) => handleResultChange(index, 'img', e.target.value)}
+          />
+          {imagePaths[`imgPathResult-${index}`] && (
+            <img
+              src={imagePaths[`imgPathResult-${index}`]}
+              alt={imagePaths[`imgPathResult-${index}`]}
+              style={{ width: "100px" }}
+            />
+          )}
+
+          <label htmlFor={`result-idTemplateBrevo-${index}`}>ID del template Brevo del resultado {index + 1}:</label>
+          <input
+            type="number"
+            id={`result-idTemplateBrevo-${index}`}
+            name={`result-idTemplateBrevo-${index}`}
+            value={result.idTemplateBrevo}
+            onChange={(e) =>
+              handleResultChange(index, 'idTemplateBrevo', parseInt(e.target.value))
+            }
+          />
+        </div>
+      ))}
+
       <button onClick={handleCancel}>Cancelar</button>
       <button onClick={handleUpdate}>Actualizar</button>
-      <p>Trivia {triviaId}</p>
     </div>
   );
 };

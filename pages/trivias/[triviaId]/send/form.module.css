@@ -95,7 +95,7 @@
 .checkboxContainer {
   display: flex;
   align-items: flex-start;
-  margin: 60px 0 30px 0;
+  margin: 0 0 5px 0;
 }
 
 .checkboxContainer input {
@@ -166,7 +166,8 @@
 .formImg {
   position: relative;
   width: 47%;
-  background-image: url("/images/trivias/Imagen fondo - peticion de datos.svg");
+  height: 648px;
+  background-image: url("/images/trivias/Ganaste-cupon.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   /*padding: 40px 10px 0 0;*/

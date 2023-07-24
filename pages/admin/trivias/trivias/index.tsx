@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 import TriviaList from "../../../../components/admin/Trivias/triviaList/triviaList";
 
 interface Trivia {
@@ -61,6 +63,11 @@ const ListTrivias = () => {
   return (
     <div>
       <h2>Listados de trivias</h2>
+      <Link href="/admin/trivias/trivias/create">
+        <a>
+          <button>Crear Trivias</button>
+        </a>
+      </Link>
       <TriviaList trivias={trivias} />
     </div>
   );

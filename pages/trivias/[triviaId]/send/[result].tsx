@@ -274,7 +274,7 @@ const Form = () => {
           </button>
         </div>
         <div className={formImg}>
-          <img src="/images/trivias/regalo_trivia.png" alt="" />
+          <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
         </div>
       </div>
     </>
