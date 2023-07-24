@@ -1334,7 +1334,7 @@ export const SuscriptionContain = styled.div`
             flex-direction: row;
           }
           .watsap-button {
-            transform: translate(100px, -90px);
+            transform: translate(120px, -90px);
             padding-block: 6px;
             padding-inline: 10px;
             width: 200px;
