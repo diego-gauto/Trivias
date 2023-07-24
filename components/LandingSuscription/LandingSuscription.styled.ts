@@ -1317,7 +1317,7 @@ export const SuscriptionContain = styled.div`
     }
 
     .dudas-section {
-      margin-block: 25px;
+      margin-block: 0px;
       .all-center {
         flex-direction: column;
         .text-end {
