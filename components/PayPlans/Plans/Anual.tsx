@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
@@ -29,6 +29,7 @@ const Anual = (props: IData) => {
   const goToRoute = () => {
     router.push('/suscripcion-anual');
   }
+  let today = new Date().getTime() / 1000;
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -44,10 +45,21 @@ const Anual = (props: IData) => {
 
   const goTo = () => {
     if (user.id) {
-      router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+      if (user.level === 0 && user.final_date < today) {
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+      }
+      if (user.level === 0 && user.final_date > today) {
+        router.push(PREVIEW_PATH)
+      }
+      if (user.level === 1 && user.final_date < today) {
+        router.push(PREVIEW_PATH)
+      }
+      if (user.level === 1 && user.final_date > today) {
+        router.push(PREVIEW_PATH)
+      }
     }
     else {
-      localStorage.setItem("anual", "true");
+      localStorage.setItem("month", "true");
       router.push(SIGNUP_PATH)
     }
   }
