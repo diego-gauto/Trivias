@@ -35,7 +35,7 @@ const Individual = (props: IData) => {
     }
   }
   const goToRoute = () => {
-    router.push('/nails-master');
+    // router.push('/nails-master');
   }
   useEffect(() => {
 
