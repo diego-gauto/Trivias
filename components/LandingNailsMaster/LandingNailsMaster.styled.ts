@@ -921,6 +921,10 @@ export const SuscriptionContain = styled.div`
     .section {
       .left-img {
         display: none;
+        trasnform: unset;
+        top: 450px;
+        width: 30%;
+        min-width: 150px;
       }
       .right-img-1 {
         display: none;
@@ -1221,17 +1225,7 @@ export const SuscriptionContain = styled.div`
         display: none;
       }
       .image-quote {
-        width: unset;
-        .image {
-          position: absolute;
-          top: 50%;
-          // height: 350px;
-          width: 180px;
-          transform: translateY(-50%);
-          right: -460px;
-          background-color: #ffde5e;
-          border-radius: 100%;
-        }
+        display: none;
       }
       .text {
         margin-left: 0px;
@@ -1239,6 +1233,23 @@ export const SuscriptionContain = styled.div`
         transform: translate(0px, 0px);
         width: 100%;
         padding-inline: 30px;
+        .text-container {
+          position: relative;
+          .sangria {
+            width: 60%;
+          }
+          .image-container {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 60%;
+            width: 100%;
+            .image {
+              width: 45%;
+              min-width: 150px;
+            }
+          }
+        }
         .quote-resp {
           text-align: center;
           background-color: #ffde5e;
@@ -1315,10 +1326,28 @@ export const SuscriptionContain = styled.div`
         }
       }
     }
-
     .cost-section {
+      background-image: unset;
+      padding-block: 20px;
       .cost-body {
         .cost-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .center {
+            order: 2;
+            padding-inline: 20px;
+            .btn {
+              padding-inline: 25px;
+              font-size: 16px;
+              padding-block: 8px;
+              line-height: 20px;
+            }
+            .green {
+              margin-block: 0px;
+              margin-top: 30px;
+            }
+          }
           .left-img {
             display: none;
           }
@@ -1332,36 +1361,92 @@ export const SuscriptionContain = styled.div`
     .certificado-section {
       flex-direction: column;
       align-items: center;
+      gap: 40px;
+      padding-block: 0px;
+      padding-top: 75px;
+      margin-bottom: 30px;
+      .left-l {
+        width: 50px;
+        top: 50%;
+      }
+      .right-l {
+        top: 0px;
+        width: 40px;
+      }
       .left-side {
-        width: 450px;
+        margin: 0px;
+        width: 100%;
+        padding-inline: 30px;
         .p-pink {
-          font-size: 50px;
+          font-size: 36px;
+          font-size: 20px;
+        }
+        .text-certificate {
+          font-size: 20px;
+          font-weight: 400;
+          text-align: justify;
         }
       }
       .right-side {
-        .float-bottom {
-          width: 100%;
-          position: relative;
-          transform: translate(40px, 70px);
-        }
+        display: none;
+      }
+      .float-bottom {
+        width: 100%;
       }
     }
-
     .rewards-section {
+      .title {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        img {
+          margin-right: 0rem !important;
+          width: 40px;
+          height: 40px;
+        }
+        h2 {
+          font-size: 1.4rem;
+          text-align: start;
+          margin: 0;
+        }
+      }
       .rewards-container {
         width: unset;
         flex-direction: column;
+        margin-inline: 0px;
         .points-rewards {
+          gap: 50px;
+          margin-top: 40px;
           .display-row {
-            flex-direction: column;
+            gap: 50px;
+            .card {
+              width: 180px;
+              .points {
+                width: 180px;
+                font-size: 14px;
+                padding-inline: 0px;
+              }
+            }
           }
         }
       }
     }
 
     .experiences-section {
+      .h1 {
+        font-size: 40px;
+      }
       .experiences-container {
         margin-inline: 0;
+        .next {
+          margin-inline: 5px;
+          border: none;
+          padding: 5px;
+          .icon {
+            width: 30px;
+            height: 30px;
+          }
+        }
         .experiences {
           max-width: 300px;
           display: none;
@@ -1373,34 +1458,56 @@ export const SuscriptionContain = styled.div`
     }
 
     .subject-section {
+      h4 {
+        margin-bottom: 40px;
+        font-size: 20px;
+      }
       .subject-container {
         flex-direction: column;
         gap: 0px;
         align-items: center;
         .side {
           width: 100%;
+          .subject {
+            margin-bottom: 20px;
+            .lessons {
+              .title {
+                font-size: 20px;
+              }
+            }
+          }
         }
         h3 {
           font-size: 20px;
         }
         h5 {
-          font-size: 18px;
+          font-size: 14px;
         }
       }
       .btn {
         padding-inline: 20px;
+        font-size: 14px;
+        font-weight: 400;
       }
     }
 
     .devices-section {
+      display: flex;
+      flex-direction: column;
+      .big-title {
+        font-size: 40px;
+        order: 2;
+      }
       .devices {
         width: 100%;
+        order: 1;
       }
     }
 
     .dudas-section {
       padding-top: 15px;
       flex-direction: column;
+      background-color: white;
       .text-end {
         text-align: center !important;
       }
@@ -1410,20 +1517,49 @@ export const SuscriptionContain = styled.div`
         align-items: center;
         .point {
           width: 80%;
+          min-width: 420px;
         }
         .watsap-button {
           transform: translate(0px, 100px);
+          width: unset;
+          padding-block: 5px;
+          padding-left: 15px;
+          paddin-right: 40px;
+          img {
+            width: 30px;
+            height: 30px;
+          }
+          p {
+            text-align: start;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 600;
+          }
         }
       }
     }
 
     .faq-section {
+      background-color: #ece7f2;
+      margin-block: 0px;
+      padding-block: 50px;
+      width: 100%;
+      .big-title {
+        font-size: 40px;
+      }
       .faq {
         .q-container {
           width: 450px;
+          background-color: unset;
         }
         .q-container.min {
-          max-height: 68px;
+          max-height: 75px;
+          .q {
+            .title {
+              font-size: 16px;
+              font-weight: 600 !important;
+            }
+          }
         }
       }
     }
@@ -1440,6 +1576,109 @@ export const SuscriptionContain = styled.div`
         }
         .img {
           display: none;
+        }
+      }
+    }
+    @media (max-width: 400px) {
+      .devices-section {
+        .big-title {
+          font-size: 34px;
+        }
+      }
+      .arita-section {
+        .text {
+          padding-inline: 15px;
+          .header-contain {
+            .big-title {
+              font-size: 44px;
+            }
+          }
+          .p-pink {
+            font-size: 14px;
+          }
+          .sangria {
+            width: 180px;
+            p {
+              font-size: 13px;
+            }
+          }
+          .quote-resp {
+            margin-inline: 10px;
+            font-size: 12px;
+            line-height: 18px;
+          }
+        }
+      }
+      .benefits-section {
+        h2 {
+          margin-bottom: 1rem;
+        }
+      }
+      .program {
+        padding-bottom: 60px;
+        h2 {
+          padding-inline: 20px;
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+        .h4 {
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 400;
+          letter-spacing: 1px;
+          margin-bottom: 30px;
+        }
+        .program-course {
+          .ghost {
+            width: 150px;
+            bottom: 0px;
+          }
+          .course-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .course-detail {
+              display: flex;
+              gap: 10px;
+              margin: 0px;
+              .icon {
+                margin-right: 0px;
+              }
+              p {
+                font-size: 12px;
+                margin-bottom: 0px;
+              }
+              .p-pink {
+                font-style: italic;
+              }
+            }
+          }
+        }
+      }
+      .rewards-section {
+        .title {
+          img {
+            width: 34px;
+            height: 34px;
+          }
+          h2 {
+            font-size: 1.2rem;
+          }
+        }
+        .rewards-container {
+          .points-rewards {
+            gap: 20px;
+            .display-row {
+              gap: 20px;
+              .card {
+                width: 160px;
+                .points {
+                  width: 160px;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
         }
       }
     }

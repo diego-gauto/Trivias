@@ -61,6 +61,8 @@ const linesR = "/images/landing_nails_master/lines-right.png"
 const linesU = "/images/landing_nails_master/lines-up.png"
 const stars = "/images/landing_nails_master/estrellas.png"
 const linesB2 = "/images/landing_nails_master/lines-bottom2.png"
+const arita_responsive = "/images/landing_suscription/responsive/arita_responsive.svg";
+const chica_responsive = "/images/landing_suscription/responsive/chica_fondo.svg";
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -302,7 +304,7 @@ const LandingNailsMaster = () => {
         </div>
         <div className="text">
           <h2>Te presentamos a</h2>
-          <div>
+          <div className="text-container">
             <div className="header-contain">
               <h2 className="big-title bold">Arita Gonvar</h2>
             </div>
@@ -316,6 +318,12 @@ const LandingNailsMaster = () => {
             </div>
             {
               responsive850 && <p className="quote-resp"><i>"Hago lo que me apasiona  <br />y disfruto enseñando a otras"</i><br /> <span>-Arita Gonvar</span></p>
+            }
+            {
+              responsive850 &&
+              <div className="image-container">
+                <img src={arita_responsive} className="image" />
+              </div>
             }
           </div>
         </div>
@@ -389,42 +397,49 @@ const LandingNailsMaster = () => {
 
       <div className="program">
         <h2 className="yellow h1"><b>Todo lo que incluye este increíble programa</b></h2>
-        <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
-          obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
+        {
+          !responsive850 ?
+            <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
+              obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
+            :
+            <p className="h4">Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution
+              <b> obtendrás cuadernillos, manuales y textos</b> que te ayudarán en tu carrera de Nail Artist.</p>
+        }
+
 
         <div className="program-course">
           <div className="course-container">
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Curso | <b className="p-pink">Costo real: $2,399.00 MXN</b></p>
+              <p>Curso {responsive850 && "Nails Master Revolution"}{responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $2,399.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p><b>Certificado</b> físico y digital (no incluye envío) | <b className="p-pink">Costo real: $490.00 MXN</b></p>
+              <p><b>Certificado</b> físico y digital (no incluye envío){responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $490.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p><b>Comunidad exclusiva</b> en What'sApp | <b className="p-pink">Costo real: $239.00 MXN</b></p>
+              <p><b>Comunidad exclusiva</b> en What'sApp {responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $239.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>La Perla Perfecta</b> | <b className="p-pink">Costo real: $297.00 MXN</b></p>
+              <p>Manual <b>La Perla Perfecta</b> {responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $297.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>Química del Producto nivel básico</b> | <b className="p-pink">Costo real: $497.00 MXN</b></p>
+              <p>Manual <b>Química del Producto nivel básico</b> {responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $497.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Revista Gonvar: <b>10 diseños increibles</b> | <b className="p-pink">Costo real: $649.00 MXN</b></p>
+              <p>Revista Gonvar: <b>10 diseños increibles</b> {responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $649.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>Obtén tus primeros clientes</b> | <b className="p-pink">Costo real: $649.00 MXN</b></p>
+              <p>Manual <b>Obtén tus primeros clientes</b> {responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $649.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Manual <b>Los secretos del gel semipermanente</b> | <b className="p-pink">Costo real: $649.00 MXN</b></p>
+              <p>Manual <b>Los secretos del gel semipermanente</b> {responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $649.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={revisado} className="icon" />
@@ -443,6 +458,7 @@ const LandingNailsMaster = () => {
         <div className="cost-body">
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
+            <img src={chica_responsive} className="chica-resp" />
             <div className="center">
               <h2 className="red h2">Costo total real: <del>$6,719.00 MXN</del></h2>
               <h2 className="p-pink h1"><b>Precio de Lanzamiento con beca</b></h2>
@@ -461,9 +477,19 @@ const LandingNailsMaster = () => {
         <img src={linesL} className="left-l" />
         <div className="left-side">
           <h2 className="p-pink h1">Certificado oficial</h2>
-          <h2>En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
-            <i>(Folio único verificado) </i></b> que autentifica y valida que tomaste el curso con nosotros.</h2>
+          {
+            !responsive850 ?
+              <h2 >En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
+                <i>(Folio único verificado) </i></b> que autentifica y valida que tomaste el curso con nosotros.</h2>
+              :
+              <h2 className="text-certificate">En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
+                <i>(Folio único verificado) </i></b> <b>que autentifica y valida </b>que tomaste el curso con nosotros.</h2>
+          }
+
         </div>
+        {
+          responsive850 && <img src={cert} className="float-bottom" />
+        }
         <div className="right-side">
           <img src={cert} className="float-bottom" />
         </div>
@@ -500,42 +526,81 @@ const LandingNailsMaster = () => {
             </div>
 
           </div>
-          <div className="points-rewards">
-            <div className="display-row">
-              <div className="card card-style">
-                <img src={pincel} />
-                <div className="points">Necesitas 1000 pts</div>
+          {
+            !responsive850
+              ?
+              <div className="points-rewards">
+                <div className="display-row">
+                  <div className="card card-style">
+                    <img src={pincel} />
+                    <div className="points">Necesitas 1000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={adherentes} />
+                    <div className="points">Necesitas 3000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={monomero} />
+                    <div className="points">Necesitas 4000 pts</div>
+                  </div>
+                </div>
+                <div className="display-row">
+                  <div className="card card-style">
+                    <img src={colecciones} />
+                    <div className="points">Necesitas 6000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={davinci} />
+                    <div className="points">Necesitas 15,000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={mas} />
+                    <div className="points">Y mucho más...</div>
+                  </div>
+                </div>
               </div>
-              <div className="card card-style">
-                <img src={adherentes} />
-                <div className="points">Necesitas 3000 pts</div>
+              :
+              <div className="points-rewards">
+                <div className="display-row">
+                  <div className="card card-style">
+                    <img src={pincel} />
+                    <div className="points">Necesitas 1000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={adherentes} />
+                    <div className="points">Necesitas 3000 pts</div>
+                  </div>
+                </div>
+                <div className="display-row">
+                  <div className="card card-style">
+                    <img src={monomero} />
+                    <div className="points">Necesitas 4000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={colecciones} />
+                    <div className="points">Necesitas 6000 pts</div>
+                  </div>
+                </div>
+                <div className="display-row">
+                  <div className="card card-style">
+                    <img src={davinci} />
+                    <div className="points">Necesitas 15,000 pts</div>
+                  </div>
+                  <div className="card card-style">
+                    <img src={mas} />
+                    <div className="points">Y mucho más...</div>
+                  </div>
+                </div>
               </div>
-              <div className="card card-style">
-                <img src={monomero} />
-                <div className="points">Necesitas 4000 pts</div>
-              </div>
-            </div>
-            <div className="display-row">
-              <div className="card card-style">
-                <img src={colecciones} />
-                <div className="points">Necesitas 6000 pts</div>
-              </div>
-              <div className="card card-style">
-                <img src={davinci} />
-                <div className="points">Necesitas 15,000 pts</div>
-              </div>
-              <div className="card card-style">
-                <img src={mas} />
-                <div className="points">Y mucho más...</div>
-              </div>
-            </div>
-          </div>
+          }
         </div>
       </div>
-
-
       <div className="experiences-section">
-        <h2 className="h1 bold">Conoce las experiencias de nuestras alumnas</h2>
+        {
+          !responsive850 ? <h2 className="h1 bold">Conoce las experiencias de nuestras alumnas</h2>
+            : <h2 className="h1 bold">Más de 45,000<br /> alumnas</h2>
+        }
+
         <div className="experiences-container">
           <div className="next swiper-prev"><BsChevronLeft className="icon" /></div>
           <Swiper
@@ -603,7 +668,7 @@ const LandingNailsMaster = () => {
       <div className="subject-section">
         <img src={linesB} className="up-l" />
         <h2 className="title-ppal bold">TEMARIO</h2>
-        <h4>Conoce todo lo que aprenderás en <b>Nail Master Revolution</b></h4>
+        <h4>Conoce todo lo que aprenderás {responsive850 && <br />}en <b>Nail Master Revolution</b></h4>
         <div className="subject-container">
           <div className="side">
             <div className="subject">
@@ -716,7 +781,7 @@ const LandingNailsMaster = () => {
       </div>
 
       <div className="faq-section spacing">
-        <h2 className="p-pink big-title">Preguntas Frecuentes</h2>
+        <h2 className="p-pink big-title">Preguntas {responsive850 && <br />}Frecuentes</h2>
         <div className="faq">
           <div className="all-center">
             <div className={`q-container ${views.get(1) ? 'max' : 'min'}`} onClick={() => verQ(1)}>
