@@ -344,6 +344,9 @@ const Purchase = () => {
           if (id === "30") {
             window.location.href = "/pagoexitosonailsmaster";
           }
+          if (id === "45") {
+            window.location.href = "/pagoexitosoalineacion";
+          }
         })
       }
     }
