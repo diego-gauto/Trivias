@@ -23,6 +23,7 @@ import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
+import { SUB_EXPIRED } from "../../../constants/dummies";
 declare let window: any
 const Purchase = () => {
   const [user, setUser] = useState("");
@@ -63,6 +64,8 @@ const Purchase = () => {
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
+    console.log(SUB_EXPIRED);
+
   }, [])
 
   useEffect(() => {
