@@ -989,6 +989,9 @@ export const SuscriptionContain = styled.div`
     .intro-section {
       .gonvarplus {
         width: 280px;
+        margin-block: 0px;
+        margin-top: 40px;
+        margin-bottom: 20px;
       }
       h3,
       h4 {
@@ -996,13 +999,24 @@ export const SuscriptionContain = styled.div`
         padding-inline: 20px;
       }
       button {
+        padding-block: 8px;
         padding-inline: 25px;
-        font-size: 16px;
+        font-size: 14px;
       }
     }
     .courses-section {
-      h2 {
-        padding-inline: 20px;
+      .space {
+        .bold {
+          font-size: 18px;
+          font-weight: 500;
+        }
+        .h1 {
+          font-size: 21px;
+        }
+      }
+      .btn {
+        padding-block: 8px;
+        font-size: 16px;
       }
       .group-buttons {
         width: 100%;
@@ -1016,6 +1030,7 @@ export const SuscriptionContain = styled.div`
       }
       h5 {
         margin-inline: 15px;
+        font-size: 14px;
       }
     }
     .ubi-section {
@@ -1030,33 +1045,69 @@ export const SuscriptionContain = styled.div`
         margin-block: 20px;
         font-size: 2rem;
       }
+      .fs-3 {
+        font-size: 18px !important;
+        .fs-2 {
+          font-size: 18px !important;
+          font-weight: 600;
+        }
+      }
     }
     .instructores-section {
-      margin-block: 40px;
+      margin-block: 20px;
+      .btn {
+        padding: unset;
+        padding-block: 5px;
+        padding-inline: 30px;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      h3 {
+        font-size: 16px;
+        padding-inline: unset;
+      }
       .instructores {
+        .inst-cont {
+          img {
+            width: 130px;
+          }
+          p {
+            .arita {
+              font-size: 18px;
+            }
+            b {
+              font-size: 18px;
+            }
+            .p-pink {
+              font-size: 10px;
+            }
+          }
+        }
         .left-img {
-          margin-top: 11px;
+          margin-top: 8px;
         }
         .resp-img {
           img {
-            width: 153px;
+            width: 123px;
           }
         }
       }
       .big-title {
         margin-block: 20px;
-        font-size: 2rem;
-        padding-inline: 20px;
+        font-size: 1.7rem;
       }
     }
     .difficulties-section {
       margin-block: 40px;
+      .h1 {
+        font-size: 21px;
+      }
       h2 {
         padding-inline: 20px;
       }
       h4 {
         margin-top: 40px;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 18px;
         padding-inline: 20px;
       }
@@ -1086,12 +1137,22 @@ export const SuscriptionContain = styled.div`
     }
     .teaching-section {
       margin-block: 40px;
+      h3 {
+        .p-pink {
+          font-weight: 600;
+        }
+      }
       .big-title {
-        font-size: 45px;
+        font-size: 50px;
         font-weight: 600;
       }
       .teach-lines.all-center {
         flex-direction: column;
+      }
+      .line-desc {
+        h3 {
+          font-style: italic;
+        }
       }
     }
     .certificado-section {
@@ -1125,6 +1186,9 @@ export const SuscriptionContain = styled.div`
       margin-block: 25px;
       .title {
         font-size: 1.6rem !important;
+        .p-pink {
+          font-weight: 600;
+        }
       }
       .cell-body {
         text-align: center !important;
@@ -1191,7 +1255,6 @@ export const SuscriptionContain = styled.div`
             }
             h5 {
               font-size: 0.9rem;
-              font-weight: 600;
             }
           }
         }
@@ -1228,28 +1291,30 @@ export const SuscriptionContain = styled.div`
         display: none;
       }
       .red {
-        font-size: 28px;
+        font-size: 22px;
       }
       .p-pink {
-        font-size: 34px;
+        font-size: 30px;
+        margin-top: 20px;
       }
       .green {
-        margin-top: 10px;
-        font-size: 28px;
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: 600 !important;
       }
       .btn {
         margin-top: 20px !important;
-        font-size: 1.2rem !important;
+        font-size: 1rem !important;
         line-height: 1.4rem;
-        padding-block: 2px;
-        padding-inline: 40px;
+        padding-block: 5px;
+        padding-inline: 30px;
       }
     }
 
     .rewards-section {
       margin-block: 50px;
       .text-title {
-        font-size: 1.2rem !important;
+        font-size: 2rem !important;
         text-align: start;
       }
       img {
@@ -1375,6 +1440,7 @@ export const SuscriptionContain = styled.div`
                 width: 85%;
                 font-size: 22px !important;
                 margin-block: 10px !important;
+                font-weight: 700 !important;
               }
             }
             .border-top {
@@ -1383,9 +1449,6 @@ export const SuscriptionContain = styled.div`
           }
           .q-container.min {
             max-height: 75px;
-          }
-          .q-container.max {
-            max-height: 800px;
           }
         }
       }
@@ -1401,6 +1464,12 @@ export const SuscriptionContain = styled.div`
     }
   }
   @media (max-width: 400px) {
+    .rewards-section {
+      h5 {
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+    }
     .intro-section {
       .gonvarplus {
         width: 250px;
@@ -1413,8 +1482,10 @@ export const SuscriptionContain = styled.div`
     .courses-section {
       .all-center {
         .center {
+          gap: 8px;
           button {
-            width: 150px;
+            width: 142px;
+            font-size: 14px !important;
           }
         }
       }
@@ -1427,12 +1498,20 @@ export const SuscriptionContain = styled.div`
         }
       }
     }
-    .ubi-section {
-      .fs-3 {
-        padding-inline: 20px;
-        font-size: 20px !important;
-        .fs-2 {
-          font-size: 20px !important;
+    .difficulties-section {
+      .resp-difficulty {
+        .container-difficulty {
+          img {
+            width: 80px;
+          }
+          .easy {
+            margin-top: 16px;
+            width: 105px;
+          }
+          .extra-margin {
+            width: 96px;
+            margin-top: 35px;
+          }
         }
       }
     }
@@ -1441,21 +1520,39 @@ export const SuscriptionContain = styled.div`
         padding-inline: 20px;
       }
       .title-size {
-        font-size: 22px !important;
+        font-size: 20px !important;
+      }
+      .teach-lines {
+        gap: 60px;
       }
       h3 {
-        font-size: 20px !important;
+        font-size: 18px !important;
+      }
+      img {
+        width: 150px;
+      }
+      .line-desc {
+        h2 {
+          font-size: 20px;
+        }
+        h3 {
+          font-size: 14px !important;
+        }
       }
     }
     .certificado-section {
       .big-title {
-        font-size: 40px;
+        font-size: 35px;
       }
       .all-center {
-        padding-inline: 20px;
+        padding-inline: 10px;
       }
       .cert-img {
         width: 300px !important;
+      }
+      .text-width {
+        font-size: 17px;
+        line-height: 24px;
       }
     }
     .cellphone-section {
@@ -1463,7 +1560,7 @@ export const SuscriptionContain = styled.div`
         padding-inline: 20px;
       }
       .title {
-        font-size: 1.4rem !important;
+        font-size: 1.2rem !important;
         padding-inline: 20px;
       }
       .subtitle {
@@ -1478,7 +1575,32 @@ export const SuscriptionContain = styled.div`
     .benefits-section {
       .title {
         h2 {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
+        }
+      }
+      .list-container {
+        .left-side {
+          margin-top: 20px;
+          .list {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            h5 {
+              font-size: 0.8rem;
+            }
+          }
+        }
+        .benefits-ghosts {
+          .girl {
+            width: 250px;
+          }
+          .star {
+            transform: translate(185px, 165px);
+            width: 40px;
+          }
+          .back {
+            width: 120px;
+            right: -10px;
+          }
         }
       }
     }
@@ -1495,12 +1617,14 @@ export const SuscriptionContain = styled.div`
     }
     .faq-section {
       .big-title {
-        font-size: 40px;
+        font-size: 35px;
+        margin-bottom: 30px;
       }
       .faq {
         .all-center {
           .q-container.min {
-            max-height: 87px !important;
+            max-height: 60px !important;
+            margin-block: 5px;
           }
           .q-container.max {
             max-height: 800px;
@@ -1508,8 +1632,9 @@ export const SuscriptionContain = styled.div`
           .q-container {
             .q {
               .title {
+                margin-left: 5px;
                 width: 85%;
-                font-size: 18px !important;
+                font-size: 16px !important;
               }
             }
           }
