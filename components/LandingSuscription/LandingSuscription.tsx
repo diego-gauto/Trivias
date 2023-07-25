@@ -199,10 +199,11 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
 
-        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'} que te permite ver <b className="p-pink no-bold">cientos {!responsive650 && <br />} de cursos</b> de uñas y belleza en línea.</h3>
+        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">cientos {!responsive650 && <br />} de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos</b> hoy mismo!</h4>
+          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          {responsive650 && <br />}
           <h4 className="bold">Sólo {price}</h4>
         </div>
 
@@ -212,8 +213,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS Y BELLEZA EN LÍNEA</b></h2>
-          <h2 className="bold">donde aprenderás desde cero y paso a paso.</h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="all-center space">
           <div className="group-buttons">
@@ -265,7 +266,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </div>
           </div>}
         <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comienza ahora!</button>
-        <h5 className="p-pink"><i>Y aprende muchas otras técnicas sobre imagen personal.</i></h5>
+        <h5 className="p-pink"><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
       </div>
 
 
@@ -276,16 +277,14 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={ubiG2} className="g-2" />
         </div>
         <img src={ubi} className="ubiImg" />
-        <h2 className="big-title bold">NO IMPORTA TU UBICACIÓN</h2>
-        <h2 className="fs-3">Disfruta de clases en línea pregrabadas en alta definición, aprende a tu ritmo,<br />
-          <b className="p-pink fs-2 no-bold"> desde cualquier país, donde quieras y a la hora que quieras.</b></h2>
+        <h2 className="big-title bold">NO IMPORTA {responsive650 && <br />}TU UBICACIÓN</h2>
+        <h2 className="fs-3">Disfruta de clases en línea{responsive650 && <br />} pregrabadas en alta definición, {responsive650 && <br />}aprende a tu ritmo,<br />
+          <b className="p-pink fs-2 no-bold"> desde cualquier país, donde{responsive650 && <br />}  quieras y a la hora que quieras.</b></h2>
       </div>
 
-
       <div className="instructores-section">
-        <h2 className="big-title bold"><b className="p-pink no-bold">¡Nunca te dejaremos sola, </b> {!responsive650 && <br />}
-          en tu
-          proceso de aprendizaje!</h2>
+        <h2 className="big-title bold"><b className="p-pink no-bold">¡Nunca te dejaremos {responsive650 && <br />}sola, </b> {!responsive650 && <br />}
+          en tu proceso {responsive650 && <br />}de aprendizaje!</h2>
         <div className="instructores">
           {
             !responsive650 ?
@@ -320,18 +319,18 @@ const LandingSuscription = (props: ILandingSuscription) => {
               <>
                 <div className="inst-cont">
                   <img src={arita} />
-                  <p><b className="arita">Arita Gonvar </b><br />
+                  <p className="text-person"><b className="arita">Arita Gonvar </b><br />
                     <i className="p-pink">Especialista en uñas</i></p>
                 </div>
                 <div className="duo-containers">
                   <div className="inst-cont left-img">
                     <img src={reina} />
-                    <p><b>Reina Rauda </b><br />
+                    <p className="text-person"><b>Reina Rauda </b><br />
                       <i className="p-pink">Especialista en maquillaje</i></p>
                   </div>
                   <div className="inst-cont resp-img">
                     <img src={antonio} />
-                    <p><b>Antonio Rico </b><br />
+                    <p className="text-person"><b>Antonio Rico </b><br />
                       <i className="p-pink">Especialista en micropintura</i></p>
                   </div>
                 </div>
@@ -339,16 +338,16 @@ const LandingSuscription = (props: ILandingSuscription) => {
           }
 
         </div>
-        <h3 className="bold space">Los cursos son impartidos por <b className="p-pink no-bold">instructores profesionales
-          y certificados,</b> {!responsive650 && <br />}que estarán guiándote paso a paso, durante tu aprendizaje.</h3>
+        <h3 className="bold space">Los cursos son impartidos por {responsive650 && <br />}<b className="p-pink no-bold">instructores profesionales
+          y {responsive650 && <br />}certificados,</b> {!responsive650 && <br />}que estarán guiándote {responsive650 && <br />}paso a paso, durante tu aprendizaje.</h3>
         <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
       <div className="difficulties-section">
-        <h2 className="h1 bold">Nuestra suscripción cuenta con {!responsive650 && <br />}
-          <b className="p-pink bold">cursos de diferentes grados de dificultad,</b> {!responsive650 && <br />}
-          desde principiantes hasta niveles más avanzados.</h2>
+        <h2 className="h1 bold">Nuestra suscripción{responsive650 && <br />} cuenta con {!responsive650 && <br />}
+          <b className="p-pink bold">cursos de {responsive650 && <br />}diferentes grados de {responsive650 && <br />}dificultad,</b> {!responsive650 && <br />}
+          desde {responsive650 && <br />}principiantes hasta niveles {responsive650 && <br />}más avanzados.</h2>
         {
           !responsive650 ?
             <div className="dif-lines">
@@ -380,7 +379,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
 
       <div className="teaching-section">
-        <h2 className="bold title-size">Además, en la plataforma encontrarás diferentes</h2>
+        <h2 className="bold title-size">Además, en la plataforma {responsive650 && <br />} encontrarás diferentes</h2>
         <h2 className="big-title p-pink">Líneas de aprendizaje</h2>
 
         <div className="teach-lines all-center">
@@ -410,7 +409,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
 
         <h3 className="bold">Así tendrás la oportunidad de <br /><b className="p-pink">aprender desde
-          lo básico hasta convetirte en Master.</b></h3>
+          lo básico hasta{responsive650 && <br />} convetirte en Master.</b></h3>
       </div >
 
 
@@ -425,13 +424,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={certificadoMujer} className="cert-img" />
           <div className="cert-text">
             <h2 className="p-pink big-title mb-4 bold">Certificado FUV</h2>
-            <h2 className="bold mb-4 text-width">Con <b className="p-pink">Gonvar+</b> podrás enviar tus prácticas para revisión y al aprobarlas,
-              <b className="p-pink"> obtendrás la certificación</b> correspondiente al curso que hayas tomado.</h2>
+            <h2 className="bold mb-4 text-width">Con <b className="p-pink">Gonvar+</b> podrás enviar tus{responsive650 && <br />} prácticas para revisión y al{responsive650 && <br />} aprobarlas,
+              <b className="p-pink"> obtendrás la {responsive650 && <br />}certificación</b> correspondiente {responsive650 && <br />}al curso que hayas tomado.</h2>
             {!responsive650 && <h2 className="bold text-width">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
               <i>(folio único verificado).</i></b></h2>}
 
           </div>
-          {responsive650 && <h2 className="bold text-width resp-text">Te entregaremos un <b className="p-pink"> certificado oficial de la marca, que cuenta con un FUV
+          {responsive650 && <h2 className="bold text-width resp-text">Te entregaremos un <b className="p-pink"> certificado {responsive650 && <br />}oficial de la marca, que cuenta {responsive650 && <br />}con un FUV
             <i>(folio único verificado).</i></b></h2>}
         </div>
       </div>
@@ -439,7 +438,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
       <div className="all-center cellphone-section">
         <div className="text-end cell-body">
-          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas{!responsive650 && <br />}</b> y conviértete en una experta {!responsive650 && <br />}
+          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas <br /></b> y conviértete en una experta <br />
             en uñas y belleza!</h2>
           <div className="back-lines all-center">
             <img src={backCell} className="line-1" />
@@ -473,7 +472,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="benefits-section">
         <div className="title all-center">
           <img src={miniLogo} className="mx-3" />
-          <h2 className="text-start h1 bold">Recibe <b className="p-pink no-bold">beneficios, contenido exclusivos{!responsive650 && <br />} y recompensas</b> con tu suscripción</h2>
+          <h2 className="text-start h1 bold">Recibe <b className="p-pink no-bold">beneficios, {responsive650 && <br />}contenido exclusivos <br /> y recompensas</b> con tu {responsive650 && <br />}suscripción</h2>
         </div>
         <div className="list-container">
           <div className="left-side">
@@ -541,7 +540,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <div className="mx-3 all-center">
           <img src={rewards} className="me-3" />
-          <h2 className="text-title">CENTRO DE <b>RECOMPENSAS</b></h2>
+          <h2 className="text-title">CENTRO DE {responsive650 && <br />}<b>RECOMPENSAS</b></h2>
         </div>
 
         <div className="card-container">
@@ -601,9 +600,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
           </div>
         </div>
 
-        <h5>Gracias a nuestro sistema de puntos, beneficios y certificados acumulables, {!responsive650 && <br />}
-          <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b> {!responsive650 && <br />}
-          sólo por <b>permanecer suscrita, concluir tus cursos y hacer tus tareas.</b></h5>
+        <h5>Gracias a nuestro sistema de puntos,{responsive650 && <br />} beneficios y certificados acumulables, <br />
+          <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b> <br />
+          sólo por <b>permanecer suscrita, concluir tus {responsive650 && <br />}cursos y hacer tus tareas.</b></h5>
       </div>
 
 
