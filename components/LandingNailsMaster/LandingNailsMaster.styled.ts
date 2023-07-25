@@ -920,17 +920,21 @@ export const SuscriptionContain = styled.div`
   @media (max-width: 1000px) {
     .section {
       .left-img {
-        display: none;
         trasnform: unset;
-        top: 450px;
+        top: 650px;
         width: 30%;
-        min-width: 150px;
+        min-width: 240px;
       }
       .right-img-1 {
-        display: none;
+        max-width: 350px;
+        width: 32%;
+        min-width: unset;
+        transform: translateY(-290px);
+        min-width: 250px;
       }
       .right-img-2 {
-        display: none;
+        min-width: 250px;
+        transform: translateY(220px);
       }
     }
   }
@@ -1105,8 +1109,22 @@ export const SuscriptionContain = styled.div`
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 850px) {
+
+  }
     .section {
       margin-bottom: 25px;
+      .left-img {
+        top: 550px;
+        min-width: 200px;
+      }
+      .right-img-1 {
+        transform: translateY(-270px);
+        min-width: 160px;
+      }
+      .right-img-2 {
+        min-width: 140px;
+        transform: translateY(200px);
+      }
       .fechas {
         margin-top: 1.5rem !important;
         margin-bottom: 70px !important;
@@ -1580,6 +1598,25 @@ export const SuscriptionContain = styled.div`
       }
     }
     @media (max-width: 400px) {
+      .section{
+        .left-img {
+          top: 570px;
+          min-width: 180px;
+        }
+        .right-img-1 {
+          transform: translateY(-260px);
+          min-width: 120px;
+        }
+        .right-img-2 {
+          min-width: 100px;
+          transform: translateY(220px);
+        }
+        .btn{
+          padding-block: 5px;
+          font-size: 13px;
+          padding-inline: 25px;
+        }
+      }
       .devices-section {
         .big-title {
           font-size: 34px;
