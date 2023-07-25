@@ -917,8 +917,14 @@ export const SuscriptionContain = styled.div`
       }
     }
   }
+  //////////////////////////////////////////////////////////////
   @media (max-width: 1000px) {
     .section {
+      .space{
+        .big-text{
+          font-size: 75px;
+        }
+      }
       .left-img {
         trasnform: unset;
         top: 650px;
@@ -929,7 +935,7 @@ export const SuscriptionContain = styled.div`
         max-width: 350px;
         width: 32%;
         min-width: unset;
-        transform: translateY(-290px);
+        transform: translateY(-360px);
         min-width: 250px;
       }
       .right-img-2 {
@@ -937,9 +943,6 @@ export const SuscriptionContain = styled.div`
         transform: translateY(220px);
       }
     }
-  }
-  //////////////////////////////////////////////////////////////
-  @media (max-width: 1000px) {
     .materials-modal {
       width: unset;
       .materials-list {
@@ -1109,8 +1112,6 @@ export const SuscriptionContain = styled.div`
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 850px) {
-
-  }
     .section {
       margin-bottom: 25px;
       .left-img {
@@ -1118,7 +1119,7 @@ export const SuscriptionContain = styled.div`
         min-width: 200px;
       }
       .right-img-1 {
-        transform: translateY(-270px);
+        transform: translateY(-345px);
         min-width: 160px;
       }
       .right-img-2 {
@@ -1130,9 +1131,6 @@ export const SuscriptionContain = styled.div`
         margin-bottom: 70px !important;
       }
       .space {
-        .big-text {
-          font-size: 50px;
-        }
         .subtitle {
           font-size: 18px;
           margin-top: 20px;
@@ -1597,15 +1595,33 @@ export const SuscriptionContain = styled.div`
         }
       }
     }
+  }
+   @media(max-width: 550px){
+    .section{
+      .right-img-1 {
+        transform: translateY(-270px);
+        min-width: 120px;
+      }
+      .space{
+        .big-text{
+          font-size: 60px;
+        }
+      }
+    }
+   }
     @media (max-width: 400px) {
       .section{
+        .space{
+          .big-text{
+            font-size: 45px;
+          }
+        }
         .left-img {
           top: 570px;
           min-width: 180px;
         }
         .right-img-1 {
-          transform: translateY(-260px);
-          min-width: 120px;
+          transform: translateY(-250px);
         }
         .right-img-2 {
           min-width: 100px;
