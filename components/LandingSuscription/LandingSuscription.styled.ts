@@ -1440,7 +1440,7 @@ export const SuscriptionContain = styled.div`
                 width: 85%;
                 font-size: 22px !important;
                 margin-block: 10px !important;
-                font-weight: 600 !important;
+                font-weight: 700 !important;
               }
             }
             .border-top {
