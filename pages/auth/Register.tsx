@@ -15,7 +15,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useGoogleLogin } from "@react-oauth/google";
 
-import { facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
+import { conektaCustomer, facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
 import { LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
@@ -160,7 +160,7 @@ const Register = () => {
       setAuthLoader(false);
       return;
     }
-    let user = {
+    let user: any = {
       name: formData.name,
       last_Name: formData.lastName,
       email: formData.email,
@@ -172,17 +172,20 @@ const Register = () => {
     }
 
     if (isValidPhoneNumber(phoneInput)) {
-      newUser(user).then((res) => {
-        if (res === "Este usuario ya existe!") {
+      newUser(user).then(async (res) => {
+        if (res?.msg === "Este usuario ya existe!") {
           setErrorMsg('Este usuario ya existe!');
           setAuthLoader(false);
           setShow(true);
           setIsLoading(false);
         } else {
-          localStorage.setItem('email', user.email);
-          localStorage.setItem("method", "mail");
-          window.location.href = PREVIEW_PATH;
-          redirect()
+          user.userId = res.userId.insertId;
+          conektaCustomer(user).then(() => {
+            localStorage.setItem('email', user.email);
+            localStorage.setItem("method", "mail");
+            window.location.href = PREVIEW_PATH;
+            redirect()
+          })
         }
       })
     } else {
@@ -197,7 +200,7 @@ const Register = () => {
     onSuccess: tokenResponse => {
       setAuthLoader(true);
       googleTokens(tokenResponse.code).then((res) => {
-        let user = {
+        let user: any = {
           name: res.given_name,
           last_Name: res.family_name,
           email: res.email,
@@ -206,15 +209,18 @@ const Register = () => {
           provider: 'google'
         }
         newUser(user).then((res) => {
-          if (res === "Este usuario ya existe!") {
+          if (res?.msg === "Este usuario ya existe!") {
             setErrorMsg('Este usuario ya existe!');
             setAuthLoader(false);
             setShow(true);
             setIsLoading(false);
           } else {
-            localStorage.setItem('email', user.email)
-            window.location.href = PREVIEW_PATH;
-            redirect()
+            user.userId = res.userId.insertId;
+            conektaCustomer(user).then(() => {
+              localStorage.setItem('email', user.email)
+              window.location.href = PREVIEW_PATH;
+              redirect()
+            })
           }
         })
       })
@@ -233,7 +239,7 @@ const Register = () => {
         access_token: response.authResponse.accessToken
       }
       facebookUserInfo(userInfo).then((res) => {
-        let user = {
+        let user: any = {
           name: res.name,
           last_Name: "",
           email: res.email,
@@ -242,16 +248,19 @@ const Register = () => {
           provider: 'facebook'
         }
         newUser(user).then((res) => {
-          if (res === "Este usuario ya existe!") {
+          if (res?.msg === "Este usuario ya existe!") {
             setErrorMsg('Este usuario ya existe!');
             setAuthLoader(false);
             setShow(true);
             setIsLoading(false);
           } else {
-            localStorage.setItem('email', user.email);
-            localStorage.setItem('method', "facebook");
-            window.location.href = PREVIEW_PATH;
-            redirect()
+            user.userId = res.userId.insertId;
+            conektaCustomer(user).then(() => {
+              localStorage.setItem('email', user.email);
+              localStorage.setItem('method', "facebook");
+              window.location.href = PREVIEW_PATH;
+              redirect()
+            })
           }
         })
       })

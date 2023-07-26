@@ -1,10 +1,23 @@
 import axios from "axios";
 
+export const conektaCustomer = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "auth/conekta/customer", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+
+      return error
+    });
+};
+
 export const newUser = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "auth/register", user)
     .then((res) => {
-      return res.data.msg
+      return res.data
     })
     .catch((error) => {
       console.log(error);
