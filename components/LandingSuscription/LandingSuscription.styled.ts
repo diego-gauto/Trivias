@@ -1214,12 +1214,14 @@ export const SuscriptionContain = styled.div`
           order: 2;
           text-align: end;
           font-size: 16px;
+          min-width: 200px;
           button {
+            font-weight: 500;
             margin-top: 20px;
-            font-size: 12px;
-            line-height: 20px;
-            padding-inline: 40px;
-            padding-block: 2px;
+            font-size: 11px;
+            line-height: 15px;
+            padding-inline: 25px;
+            padding-block: 4px;
             white-space: nowrap;
           }
         }
@@ -1299,22 +1301,23 @@ export const SuscriptionContain = styled.div`
       }
       .green {
         margin-top: 20px;
-        font-size: 24px;
+        font-size: 26px;
         font-weight: 600 !important;
       }
       .btn {
         margin-top: 20px !important;
-        font-size: 1rem !important;
-        line-height: 1.4rem;
+        font-size: 0.9rem !important;
+        line-height: 1.1rem;
         padding-block: 5px;
-        padding-inline: 30px;
+        padding-inline: 25px;
+        font-weight: 600;
       }
     }
 
     .rewards-section {
       margin-block: 50px;
       .text-title {
-        font-size: 2rem !important;
+        font-size: 1.7rem !important;
         text-align: start;
       }
       img {
