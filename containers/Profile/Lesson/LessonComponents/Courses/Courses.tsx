@@ -87,12 +87,28 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   }, [data])
 
   const moveToCertificate = () => {
-    router.push({
-      pathname: CERTIFICATES_PATH,
-      query: {
-        certificate_id: certificate_id
-      }
-    });
+    let ids = {
+      userId: userData.user_id,
+      courseId: course.id
+    }
+    if (certificate_id !== "") {
+      router.push({
+        pathname: CERTIFICATES_PATH,
+        query: {
+          certificate_id: certificate_id
+        }
+      });
+    }
+    else {
+      getUserCertificateApi(ids).then((res) => {
+        router.push({
+          pathname: CERTIFICATES_PATH,
+          query: {
+            certificate_id: res.data.data[0].id
+          }
+        });
+      })
+    }
   }
 
   const toggleHandler = (index: any) => {

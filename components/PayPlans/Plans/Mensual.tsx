@@ -29,6 +29,9 @@ const Mensual = (props: IData) => {
   const [ver, setver] = useState(true)
   let today = new Date().getTime() / 1000;
   var userData = useAuth();
+  const goToRoute = () => {
+    router.push('/suscripcion-mensual');
+  }
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -206,7 +209,7 @@ const Mensual = (props: IData) => {
                   <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto adicional) </i></p>
               </div>}
           </div>
-          <span className="text-center my-2"><i>Más información</i></span>
+          <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>
         </div>
       </div>
     </PlanStyles>

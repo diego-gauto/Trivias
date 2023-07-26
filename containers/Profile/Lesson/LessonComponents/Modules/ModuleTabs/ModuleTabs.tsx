@@ -57,12 +57,13 @@ const ModuleTabs = (props: IModule) => {
 
   const checkHw = () => {
     if (course.sequential === 1) {
-      let tempData = {
-        lessonId: data.id,
-        user_id: user.user_id
-      }
-      getHomeworkUserApi(tempData).then((res) => {
-        if (!!res.data.data) {
+      setApprovedHw(false)
+      if (!!data.lesson_homeworks) {
+        let tempData = {
+          lessonId: data.id,
+          user_id: user.user_id
+        }
+        getHomeworkUserApi(tempData).then((res) => {
           if (res.data.data.length > 0) {
             if (res.data.data[0].approved === 1 && res.data.data[0].status === 1) {
               setApprovedHw(true)
@@ -70,15 +71,16 @@ const ModuleTabs = (props: IModule) => {
               setApprovedHw(false)
             }
           } else {
-            setApprovedHw(true);
+            setApprovedHw(false);
           }
         }
-      })
+        )
+      } else {
+        setApprovedHw(true)
+      }
     } else {
       setApprovedHw(true)
     }
-
-
   }
 
   useEffect(() => {
@@ -105,9 +107,7 @@ const ModuleTabs = (props: IModule) => {
     } else {
       return true
     }
-
   }
-
   return (
     <div className='tab-container'>
       <div className='tabs'>

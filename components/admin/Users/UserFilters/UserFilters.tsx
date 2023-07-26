@@ -3,6 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { FilterContainer } from './UserFilters.styled';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { FormatCourses } from '../../../../utils/functions';
 interface IFilters {
   showFilters: boolean;
   countries: [];
@@ -40,6 +41,7 @@ const UserFilters = (props: IFilters) => {
   const [arrayFilter, setArrayFilter] = useState([
     'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', -1, 0
   ])
+  const [courseType, setCourseType] = useState<string>("");
   const [changeDate, setChangeDate] = useState([
     [], []
   ])
@@ -185,6 +187,7 @@ const UserFilters = (props: IFilters) => {
                       <option
                         value={course.id}
                         key={"coursos_de_usuario" + index}
+                        onClick={() => setCourseType(course.type)}
                       >
                         {course.title}
                       </option>
@@ -198,7 +201,6 @@ const UserFilters = (props: IFilters) => {
               Cargando...
             </div>
         }
-
         {
           arrayFilter[7] !== -1 &&
           <div className='filter-contain'>
@@ -209,6 +211,20 @@ const UserFilters = (props: IFilters) => {
               <option value={50}>Mas de 50%</option>
               <option value={75}>Mas de 75%</option>
               <option value={100}>Curso Completado</option>
+            </select>
+          </div>
+        }
+        {
+          (arrayFilter[7] === 30 || arrayFilter[7] === 45) &&
+          <div className='filter-contain'>
+            <p className='title-filter'>Activo en el curso</p>
+            <select
+              defaultValue="todos"
+            // onChange={(e) => startFilters(8, parseInt(e.target.value), changeDate)}
+            >
+              <option value={'todos'}>Todos</option>
+              <option value={'active'}>Activo</option>
+              <option value={'not-active'}>Inactivo</option>
             </select>
           </div>
         }

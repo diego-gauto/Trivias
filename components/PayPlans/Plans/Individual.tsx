@@ -25,6 +25,7 @@ interface IData {
 const Individual = (props: IData) => {
   const [ver, setver] = useState(true)
   const { user } = props;
+
   let today = new Date().getTime() / 1000;
   const verQ = (q: any) => {
     setver(!ver)
@@ -34,7 +35,9 @@ const Individual = (props: IData) => {
       views.set(q, true)
     }
   }
-
+  const goToRoute = () => {
+    // router.push('/nails-master');
+  }
   useEffect(() => {
 
   }, [setver])
@@ -202,7 +205,7 @@ const Individual = (props: IData) => {
                 </p>
               </div>}
           </div>
-          <span className="text-center my-2"><i>Más información</i></span>
+          <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>
         </div>
       </div>
     </PlanStyles>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal } from 'react-bootstrap';
 import { IMaterialData, IMaterials } from './IModalMaterials';
 import { Container } from './ModalMaterials.styled';
+import { IoClose } from 'react-icons/io5';
 
 export const ModalMaterials = (props: IMaterials) => {
 
@@ -22,7 +23,8 @@ export const ModalMaterials = (props: IMaterials) => {
             )
           })}
         </div>
-        <button onClick={handleClose}>x</button>
+        <IoClose className='icon' onClick={handleClose} />
+        {/* <button onClick={handleClose}></button> */}
       </Container>
     </Modal>
   )
