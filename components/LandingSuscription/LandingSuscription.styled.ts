@@ -258,6 +258,9 @@ export const SuscriptionContain = styled.div`
           background-color: #ffffff;
           transform: translateY(50px);
           bottom: 0;
+          .bold {
+            font-size: 1.8rem;
+          }
         }
       }
     }
