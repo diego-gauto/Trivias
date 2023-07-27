@@ -851,7 +851,7 @@ export const SuscriptionContain = styled.div`
           width: 500px;
         }
         .cert-text {
-          width: 450px;
+          width: 550px;
           .w-75 {
             width: unset !important;
           }
