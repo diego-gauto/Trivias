@@ -95,6 +95,20 @@ export const SuscriptionContain = styled.div`
         position: absolute;
         left: 0;
         z-index: -2;
+        top: 460px;
+        .left-woman {
+          position: absolute;
+          left: -80px;
+          width: 30%;
+          max-width: 550px;
+        }
+        .right-woman {
+          position: absolute;
+          right: -80px;
+          width: 22%;
+          max-width: 390px;
+          top: -15px;
+        }
         .images-fade {
           position: absolute;
           background: linear-gradient(180deg, transparent 0%, #fff 100%);
@@ -104,9 +118,6 @@ export const SuscriptionContain = styled.div`
           height: 20%;
           z-index: 100;
         }
-      }
-      .women-back {
-        width: 100%;
       }
     }
   }
@@ -258,6 +269,9 @@ export const SuscriptionContain = styled.div`
           background-color: #ffffff;
           transform: translateY(50px);
           bottom: 0;
+          .bold {
+            font-size: 1.8rem;
+          }
         }
       }
     }
