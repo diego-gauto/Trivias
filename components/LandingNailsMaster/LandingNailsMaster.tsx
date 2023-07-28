@@ -311,11 +311,11 @@ const LandingNailsMaster = () => {
             </div>
             <p className="p-pink"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master Revolution</b></p>
             <div className="sangria">
-              <p><b>Instructora certificada</b> bajo estándares de aplicación de uñas artificiales por competencia</p>
-              <p><b>Especialista en capacitación para principiantes,</b> estructura profesional en escultural<br />
-                y máster en técnicas y métodos de enseñanza teóricos-prácticos.</p>
-              <p>Creadora de la técnica <b>"Cero Desprendimiento en 4 Pasos"</b> y co-fundadora de la academia<br />
-                de uñas <b>más grande de Latinoamerica.</b></p>
+              <p><b>Instructora certificada</b> bajo {responsive850 && <br />}estándares de aplicación de {responsive850 && <br />}uñas artificiales por {responsive850 && <br />}competencia.</p>
+              <p><b>Especialista en capacitación{responsive850 && <br />} para principiantes,</b> estructura {responsive850 && <br />}profesional en escultural {!responsive850 && <br />}
+                y {responsive850 && <br />}máster en técnicas y métodos {responsive850 && <br />}de enseñanza teóricos-prácticos.</p>
+              <p>Creadora de la técnica {responsive850 && <br />}<b>"Cero Desprendimiento en 4 Pasos"</b>{responsive850 && <br />} y co-fundadora de la academia{!responsive850 && <br />}
+                de uñas {responsive850 && <br />}<b>más grande de Latinoamerica.</b></p>
             </div>
             {
               responsive850 && <p className="quote-resp"><i>"Hago lo que me apasiona  <br />y disfruto enseñando a otras"</i><br /> <span>-Arita Gonvar</span></p>
@@ -461,7 +461,7 @@ const LandingNailsMaster = () => {
             <img src={manoCosto} className="left-img" />
             <img src={chica_responsive} className="chica-resp" />
             <div className="center">
-              <h2 className="red h2">Costo total real: <del>$6,719.00 MXN</del></h2>
+              <h2 className="red h2">Costo total real: {responsive850 && <br />}<del>$6,719.00 MXN</del></h2>
               <h2 className="p-pink h1"><b>Precio de Lanzamiento {!responsive850 && "con beca"}</b></h2>
               <h2 className="green h1">Sólo $1,599.00 MXN</h2>
               <p className="">Válido para las primeras 500 personas</p>

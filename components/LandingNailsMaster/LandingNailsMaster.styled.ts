@@ -308,9 +308,9 @@ export const SuscriptionContain = styled.div`
     }
     @media (max-width: 450px) {
       .video-container {
-        width: 350px;
-        min-width: 350px;
-        height: 200px;
+        width: 300px;
+        min-width: 300px;
+        height: 169px;
       }
       .info-video {
         display: flex;
@@ -1113,6 +1113,9 @@ export const SuscriptionContain = styled.div`
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 850px) {
     .section {
+      h4{
+        font-size: .8rem;
+      }
       margin-bottom: 25px;
       .left-img {
         top: 550px;
@@ -1252,13 +1255,13 @@ export const SuscriptionContain = styled.div`
         .text-container {
           position: relative;
           .sangria {
-            width: 60%;
+            width: 100%;
           }
           .image-container {
             position: absolute;
-            top: 50%;
+            top: 41%;
             transform: translateY(-50%);
-            left: 60%;
+            left: 250px;
             width: 100%;
             .image {
               width: 45%;
@@ -1358,6 +1361,9 @@ export const SuscriptionContain = styled.div`
               font-size: 16px;
               padding-block: 8px;
               line-height: 20px;
+            }
+            .red{
+              font-weight: 500;
             }
             .green {
               margin-block: 0px;
@@ -1473,6 +1479,7 @@ export const SuscriptionContain = styled.div`
     }
 
     .subject-section {
+      padding-inline: 20px;
       h4 {
         margin-bottom: 40px;
         font-size: 20px;
@@ -1637,15 +1644,19 @@ export const SuscriptionContain = styled.div`
           font-size: 14px;
         }
         .left-img {
-          top: 490px;
-          min-width: 165px;
+          top: 470px;
+          min-width: 190px;
+          left: -10px;
         }
         .right-img-1 {
-          transform: translateY(-225px);
+          transform: translateY(-240px);
+          min-width: 185px;
+          right: -25px;
         }
         .right-img-2 {
-          min-width: 100px;
+          min-width: 140px;
           transform: translateY(190px);
+          right: -10px;
         }
         .btn{
           padding-block: 5px;
@@ -1658,28 +1669,28 @@ export const SuscriptionContain = styled.div`
       .info{
         .info-cards{
           .card{
-            width: 220px;
+            width: 185px;
             min-height: unset;
             h4{
-              font-size: 1rem;
+              font-size: .9rem;
               font-weight: 600;
             }
             p{
-              font-size: 14px;
+              font-size: 12px;
             }
             .adjust{
               padding: 30px;
               .icon-shop{
-                width: 50px;
-                height: 42px;
+                width: 40px;
+                height: 32px;
               }
               .icon-pc{
-                width: 42px;
-                height: 40px;
+                width: 32px;
+                height: 30px;
               }
               .icon-page{
-                width: 40px;
-                height: 44px;
+                width: 30px;
+                height: 34px;
               }
             }
           }
@@ -1705,15 +1716,19 @@ export const SuscriptionContain = styled.div`
                 .uñas-q-container{
                   max-width: 140px;
                   padding: 5px;
-                  max-height: 34px;
+                  max-height: 32px;
                   border-radius: 10px;
+                  p{
+                    font-size: 10px;
+                  }
                   h2{
-                    font-size: 18px;
+                    margin-left: 10px;
+                    font-size: 14px;
                     margin-bottom: 0px;
                   }
                   svg{
-                    width: 14px;
-                    height: 14px;
+                    width: 12px;
+                    height: 12px;
                   }
                 }
               }
@@ -1740,6 +1755,15 @@ export const SuscriptionContain = styled.div`
       .arita-section {
         .text {
           padding-inline: 15px;
+          .text-container{
+            .image-container{
+              left: 160px;
+              top: 43%;
+              .image{
+                min-width: 166px;
+              }
+            }
+          }
           .header-contain {
             .big-title {
               font-size: 44px;
@@ -1751,7 +1775,7 @@ export const SuscriptionContain = styled.div`
           .sangria {
             width: 180px;
             p {
-              font-size: 13px;
+              font-size: 11px;
             }
           }
           .quote-resp {
@@ -1828,9 +1852,6 @@ export const SuscriptionContain = styled.div`
                 font-size: 14px;
                 font-weight: 500;
               }
-              .red{
-                font-weight: 500;
-              }
               .p-pink{
                 font-size: 2.2rem;
                 text-transform: uppercase;
@@ -1865,7 +1886,7 @@ export const SuscriptionContain = styled.div`
             height: 34px;
           }
           h2 {
-            font-size: 2rem;
+            font-size: 1.6rem;
           }
         }
         .rewards-container {
@@ -1897,9 +1918,16 @@ export const SuscriptionContain = styled.div`
         padding-bottom: 80px;
         .btn{
           font-size: 11px;
+          padding-inline: 12px;
+        }
+        .title-ppal{
+          font-size: 50px;
+        }
+        h4{
+          font-size: 18px;
         }
         .subject-container{
-          padding-left: 40px;
+          padding-left: 20px;
           .side{
             .subject{
               .lessons{
