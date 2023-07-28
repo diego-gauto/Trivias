@@ -500,6 +500,9 @@ export const SuscriptionContain = styled.div`
       .cost-info {
         width: 100%;
         position: relative;
+        .chica-resp{
+          display: none;
+        }
         .left-img {
           position: absolute;
           z-index: 0;
@@ -997,10 +1000,13 @@ export const SuscriptionContain = styled.div`
       .cost-body {
         .cost-info {
           .left-img {
-            display: none;
+            width: 360px;
+            transform: translateY(-40px);
           }
           .right-img {
-            display: none;
+            width: 220px;
+            right: -30px;
+            top: 25px;
           }
         }
       }
@@ -1353,6 +1359,9 @@ export const SuscriptionContain = styled.div`
           display: flex;
           flex-direction: column;
           align-items: center;
+          .chica-resp{
+            display: unset;
+          }
           .center {
             order: 2;
             padding-inline: 20px;
