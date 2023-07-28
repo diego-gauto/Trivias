@@ -335,6 +335,9 @@ export const SuscriptionContain = styled.div`
     justify-content: center;
     position: relative;
     z-index: 2;
+    .big-title{
+      white-space: nowrap;
+    }
     .circle {
       background-color: #ffde5e;
       border-radius: 100%;
@@ -978,6 +981,16 @@ export const SuscriptionContain = styled.div`
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 1250px) {
+    .arita-section{
+      .text{
+        max-width: 430px;
+        .text-container{
+          .big-title{
+            font-size: 60px;
+          }
+        }
+      }
+    }
     .benefits-section {
       .benefits-info {
         .back-hands {
@@ -1115,6 +1128,14 @@ export const SuscriptionContain = styled.div`
         .img {
           width: 300px;
         }
+      }
+    }
+  }
+  /////////////////////////////////////////////////
+  @media(max-width: 1000px){
+    .arita-section{
+      .text{
+        max-width: 380px;
       }
     }
   }
@@ -1258,7 +1279,6 @@ export const SuscriptionContain = styled.div`
         margin-left: 0px;
         margin-top: 50px;
         transform: translate(0px, 0px);
-        width: 100%;
         padding-inline: 30px;
         .text-container {
           position: relative;
