@@ -765,6 +765,7 @@ export const SuscriptionContain = styled.div`
         width: 500px;
         .subject {
           text-align: start;
+          margin-bottom: 30px;
           .lessons {
             display: flex;
             margin-bottom: 20px;
@@ -1015,8 +1016,8 @@ export const SuscriptionContain = styled.div`
     .certificado-section {
       .left-side {
         width: 450px;
-        .p-pink {
-          font-size: 50px;
+        .h1{
+          white-space: nowrap;
         }
       }
       .right-side {
@@ -1040,6 +1041,7 @@ export const SuscriptionContain = styled.div`
 
     .experiences-section {
       .experiences-container {
+        margin-inline: 0px;
         .experiences {
           display: flex;
         }
