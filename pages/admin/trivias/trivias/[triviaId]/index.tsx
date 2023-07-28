@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
+import { getTriviaApi } from "../../../../../components/api/trivias";
 import ITrivia, { ITriviaResult } from "../../../../../interfaces/iTrivias";
 import styles from "./update.module.css";
 
@@ -13,38 +14,7 @@ const EditableTrivia = () => {
     query: { triviaId },
   } = useRouter();
 
-  const trivias = [
-    {
-      id: 0,
-      img: "/images/trivias/mujer1.svg",
-      title: "¿Qué tipo de maquilladora soy",
-      color: "#C57DFF",
-      trans: "#9115f7",
-    },
-    {
-      id: 1,
-      img: "/images/trivias/mujer2-removebg-preview.png",
-      title: "Gonvar te dice tu futuro en el mundo de las uñas",
-      color: "#ffcb7d",
-      trans: "#ffb800",
-    },
-    {
-      id: 2,
-      img: "/images/trivias/mujer3.svg",
-      title: "¿Cuánto conozco de labiales?",
-      color: "#7dffa2",
-      trans: "#00c620",
-    },
-    {
-      id: 3,
-      img: "/images/trivias/mujer4.svg",
-      title: "¿Cuánto se de maquillar pestañas",
-      color: "#7de0ff",
-      trans: "#156ff7",
-    },
-  ];
-
-  const data: ITrivia[] = [
+  const data = [
     {
       id: 0,
       imgSelector: "/images/trivias/mujer1.svg",
@@ -175,8 +145,7 @@ const EditableTrivia = () => {
           body: `Se nota tu experiencia a kilómetros.
           Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga.
           Explota tus capacidades y lleva al máximo tus  habilidades.
-          Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.            
-          `,
+          Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.`,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo: 7,
         },
@@ -185,16 +154,14 @@ const EditableTrivia = () => {
           body: `Se notan tus ganas de crecer en este mágico mundo de las uñas.
           En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas.
           Eres una persona que aprovecha cada oportunidad para seguir aprendiendo y aunque a veces te  cuesta, con un poco de práctica logras siempre tus objetivos.
-          No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.            
-          `,
+          No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.`,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo: 7,
         },
         {
           title: `Una principiante muy  aesthetic`,
           body: `"¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
-          Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.
-         `,
+          Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.`,
           img: "/images/trivias/mujerinfluencer.svg",
           idTemplateBrevo: 7,
         },
@@ -202,7 +169,7 @@ const EditableTrivia = () => {
     },
     {
       id: 1,
-      imgSelector: "/images/trivias/mujer2-removebg-preview.png",
+      imgSelector: "/images/trivias/Trivia01/T01-Portada.png",
       imgTrivia: "/images/trivias/imgTrivia.png",
       color: "#ffcb7d",
       trans: "#ffb800",
@@ -211,7 +178,7 @@ const EditableTrivia = () => {
         {
           id: 1,
           question: "Actualmente ¿has tomado o estás  tomando alguna capacitación en uñas?",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia01/T01Q1.jpg",
           answers: [
             {
               text: "Nunca  he tomado un curso, pero deseo aprender",
@@ -234,7 +201,7 @@ const EditableTrivia = () => {
         {
           id: 2,
           question: "Cuando elijo mis capacitaciones me dejo llevar por:",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia01/T01Q2.jpg",
           answers: [
             {
               text: "El costo, siempre busco lo más barato",
@@ -257,7 +224,7 @@ const EditableTrivia = () => {
         {
           id: 3,
           question: "Si  no obtengo resultados en los primeros intentos yo:",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia01/T01Q3.jpg",
           answers: [
             {
               text: "Lo intento pero solo 3 veces y lo dejo por la paz",
@@ -280,7 +247,7 @@ const EditableTrivia = () => {
         {
           id: 4,
           question: "Cuando termino algún curso yo:",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia01/T01Q4.jpg",
           answers: [
             {
               text: "Sigo practicando y repasando para seguir mejorando",
@@ -303,7 +270,7 @@ const EditableTrivia = () => {
         {
           id: 5,
           question: "Mi  mayor interés en el mundo de  las uñas es :",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia01/T01Q5.jpg",
           answers: [
             {
               text: "Solo aplicarme a mí misma y a familiares cercanos",
@@ -327,27 +294,29 @@ const EditableTrivia = () => {
       result: [
         {
           title: "La perseverancia te  llevará  al éxito",
-          body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad. Revisa tu correo para ver tu futuro completo`,
-          img: "/images/trivias/mujerinfluencer.svg",
+          body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad.
+Revisa  tu correo para  ver tu futuro completo`,
+          img: "/images/trivias/Trivia01/T01R1.png",
           idTemplateBrevo: 7,
         },
         {
           title: "Tu esfuerzo será recompensado muy pronto",
-          body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad. Te envie un correo con algunos consejos para lograrlo`,
-          img: "/images/trivias/mujerinfluencer.svg",
+          body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad.
+Te envie un correo con algunos consejos para lograrlo`,
+          img: "/images/trivias/Trivia01/T01R2.png",
           idTemplateBrevo: 7,
         },
         {
           title: `Tus manos tienen el poder de pintar un camino lleno de éxito`,
           body: `Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!`,
-          img: "/images/trivias/mujerinfluencer.svg",
+          img: "/images/trivias/Trivia01/T01R3.png",
           idTemplateBrevo: 7,
         },
       ],
     },
     {
       id: 2,
-      imgSelector: "/images/trivias/mujer3.svg",
+      imgSelector: "/images/trivias/Trivia02/T02-Portada.png",
       imgTrivia: "/images/trivias/imgTrivia.png",
       color: "#7dffa2",
       trans: "#00c620",
@@ -356,7 +325,7 @@ const EditableTrivia = () => {
         {
           id: 1,
           question: "Es una característica del monómero con MMA.",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia02/T02Q1.jpg",
           answers: [
             {
               text: "Tiene bajo olor",
@@ -379,7 +348,7 @@ const EditableTrivia = () => {
         {
           id: 2,
           question: "¿Con qué gramaje de lima es correcto preparar la uña natural?",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia02/T02Q2.jpg",
           answers: [
             {
               text: "100/100",
@@ -402,7 +371,7 @@ const EditableTrivia = () => {
         {
           id: 3,
           question: "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia02/T02Q3.jpg",
           answers: [
             {
               text: "a 45 grados",
@@ -425,7 +394,7 @@ const EditableTrivia = () => {
         {
           id: 4,
           question: "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia02/T02Q4.jpg",
           answers: [
             {
               text: "El tip",
@@ -448,7 +417,7 @@ const EditableTrivia = () => {
         {
           id: 5,
           question: "¿En cuántas fases se divide  una aplicación de uñas?",
-          imgQuestion: "/images/trivias/imgTrivia.png",
+          imgQuestion: "/images/trivias/Trivia02/T02Q5.jpg",
           answers: [
             {
               text: "Pegado del tip, limado, abrillantado",
@@ -473,29 +442,27 @@ const EditableTrivia = () => {
         {
           title: "¡Toda una profesional!",
           body: `Se nota tu experiencia a kilómetros.
-            Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga.
-            Explota tus capacidades y lleva al máximo tus  habilidades.
-            Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.            
-            `,
-          img: "/images/trivias/mujerinfluencer.svg",
+Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga.
+Explota tus capacidades y lleva al máximo tus  habilidades.
+Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.`,
+          img: "/images/trivias/Trivia02/T02R1.jpg",
           idTemplateBrevo: 7,
         },
         {
           title: "¡A un paso del éxito!",
           body: `Se notan tus ganas de crecer en este mágico mundo de las uñas.
-            En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas.
-            Eres una persona que aprovecha cada oportunidad para seguir aprendiendo y aunque a veces te  cuesta, con un poco de práctica logras siempre tus objetivos.
-            No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.            
-            `,
-          img: "/images/trivias/mujerinfluencer.svg",
+En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas.
+Eres una persona que aprovecha cada oportunidad para seguir aprendiendo y aunque a veces te  cuesta, con un poco de práctica logras siempre tus objetivos.
+No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.`,
+          img: "/images/trivias/Trivia02/T02R2.jpg",
           idTemplateBrevo: 7,
         },
         {
           title: `Una principiante muy  aesthetic`,
-          body: `¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
-            Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.                        
-           `,
-          img: "/images/trivias/mujerinfluencer.svg",
+          body: `¡Felicidades, valiente principiante en el arte de las uñas!
+Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
+Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.`,
+          img: "/images/trivias/Trivia02/T02R3.jpg",
           idTemplateBrevo: 7,
         },
       ],
@@ -506,9 +473,32 @@ const EditableTrivia = () => {
   const [updatedTrivia, setUpdatedTrivia] = useState<ITrivia | null>(null);
   const [imagePaths, setImagePaths] = useState<{ [key: string]: string }>({});
 
-  const trivia = data[Number(triviaId)] || null;
+  const trivia = data[Number(triviaId) - 1] || null;
 
   useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        console.log(Number(triviaId))
+        // const trivia = await getAllTriviasApi();
+        const res = await getTriviaApi(Number(triviaId));
+        const trivia = res[0]
+        // Parsear la cadena JSON en la propiedad "questions"
+        trivia.questions = JSON.parse(trivia.questions);
+
+        // Parsear la cadena JSON en la propiedad "result"
+        trivia.result = JSON.parse(trivia.result);
+
+
+        console.log(trivia)
+      } catch (error) {
+        console.error('Error al obtener los usuarios:', error);
+      }
+
+    };
+
+    fetchData();
+
     if (trivia) {
       let prevTrivia = trivia;
       setUpdatedTrivia(prevTrivia);
@@ -529,38 +519,50 @@ const EditableTrivia = () => {
     }
   }, []);
 
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-
-  //   // Verificar si el input corresponde a una imagen
-  //   if (name.startsWith("imgPath")) {
-  //     setImagePaths((prevImagePaths) => ({
-  //       ...prevImagePaths,
-  //       [name]: value,
-  //     }));
-  //   }
-
-  //   setUpdatedTrivia({
-  //     ...updatedTrivia!,
-  //     [name]: value,
-  //   });
-  // };
-
-
   const isQuestionInput = (name: string) => name.startsWith("question-");
   const isAnswerInput = (name: string) => name.startsWith("answer-");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // Verificar si el input corresponde a una imagen
-    if (name.startsWith("imgPath")) {
+    // Verificar si el input corresponde a una imagen de pregunta
+    if (name.startsWith("imgPathQuestion-")) {
+      const questionId = parseInt(name.split("-")[1] || "");
       setImagePaths((prevImagePaths) => ({
         ...prevImagePaths,
         [name]: value,
       }));
-    } else if (isQuestionInput(name)) {
-      const questionId = parseInt(name?.split("-")[1] || "");
+      setUpdatedTrivia((prevState) => {
+        if (!prevState) return null;
+        const updatedQuestions = prevState.questions.map((question) => {
+          if (question.id === questionId) {
+            return {
+              ...question,
+              imgQuestion: value,
+            };
+          }
+          return question;
+        });
+        return {
+          ...prevState,
+          questions: updatedQuestions,
+        };
+      });
+    }
+    // Verificar si el input corresponde a una imagen de selector
+    else if (name.startsWith("imgPathSelector")) {
+      setImagePaths((prevImagePaths) => ({
+        ...prevImagePaths,
+        [name]: value,
+      }));
+      setUpdatedTrivia({
+        ...updatedTrivia!,
+        ["imgSelector"]: value,
+      });
+    }
+    // Verificar si el input corresponde a una pregunta
+    else if (isQuestionInput(name)) {
+      const questionId = parseInt(name.split("-")[1] || "");
       setUpdatedTrivia((prevState) => {
         if (!prevState) return null;
 
@@ -579,7 +581,9 @@ const EditableTrivia = () => {
           questions: updatedQuestions,
         };
       });
-    } else if (isAnswerInput(name)) {
+    }
+    // Verificar si el input corresponde a una respuesta
+    else if (isAnswerInput(name)) {
       const [questionId, answerIndex] = name.split("-").slice(1).map((part) => parseInt(part));
       setUpdatedTrivia((prevState) => {
         if (!prevState) return null;
@@ -609,7 +613,9 @@ const EditableTrivia = () => {
           questions: updatedQuestions,
         };
       });
-    } else {
+    }
+    // Actualizar otros campos de input
+    else {
       setUpdatedTrivia({
         ...updatedTrivia!,
         [name]: value,
@@ -670,12 +676,14 @@ const EditableTrivia = () => {
       };
     });
 
-    // Actualizar también el estado de imagePaths
-    setImagePaths((prevImagePaths) => {
-      const updatedImagePaths = { ...prevImagePaths };
-      updatedImagePaths[`imgPathResult-${resultIndex}`] = value.toString();
-      return updatedImagePaths;
-    });
+    // Solo actualizamos imagePaths si fieldName es "img"
+    if (fieldName === "img") {
+      setImagePaths((prevImagePaths) => {
+        const updatedImagePaths = { ...prevImagePaths };
+        updatedImagePaths[`imgPathResult-${resultIndex}`] = value.toString();
+        return updatedImagePaths;
+      });
+    }
   };
 
   const handleCancel = () => {

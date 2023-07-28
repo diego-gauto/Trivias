@@ -11,7 +11,7 @@ const TriviaHome = () => {
     {
       id: 0,
       img: "/images/trivias/mujer1.svg",
-      title: "¿Qué tipo de maquilladora soy?",
+      title: "¿Cuánto te apoya tu esposo en tu emprendimiento de uñas?",
       color: "#C57DFF",
       trans: "#9115f7",
     },
@@ -24,7 +24,7 @@ const TriviaHome = () => {
     },
     {
       id: 2,
-      img: "/images/trivias/mujer3.svg",
+      img: "/images/trivias/Trivia02/T02-Portada.png",
       title: "¿Qué nivel de manicurista eres?",
       color: "#7dffa2",
       trans: "#00c620",
@@ -32,7 +32,7 @@ const TriviaHome = () => {
     {
       id: 3,
       img: "/images/trivias/mujer4.svg",
-      title: "¿Cuánto se de maquillar pestañas?",
+      title: "Descubre  tu bandera roja como manicurista",
       color: "#7de0ff",
       trans: "#156ff7",
     },

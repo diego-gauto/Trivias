@@ -10,9 +10,10 @@ interface Trivia {
 
 interface TriviaRowProps {
   trivia: Trivia;
+  idTrivia: Number
 }
 
-const TriviaRow = ({ trivia }: TriviaRowProps) => {
+const TriviaRow = ({ trivia, idTrivia }: TriviaRowProps) => {
 
 
   return (
@@ -21,7 +22,7 @@ const TriviaRow = ({ trivia }: TriviaRowProps) => {
 
       <td>{trivia.id + 1}</td>
       <td>
-        <Link href={`/admin/trivias/trivias/${trivia.id}`}>
+        <Link href={`/admin/trivias/trivias/${idTrivia}`}>
           <a>{trivia.title}</a>
         </Link>
       </td>

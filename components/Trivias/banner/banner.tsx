@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // import logoGonvar from "/images/Logo Gonvar degradado.svg";
 import styles from "./banner.module.css";
 
@@ -27,9 +29,12 @@ const Banner = () => {
           Diferentes niveles de dificultad e instructores internacionales
         </div>
       </div>
-      <div className={comenzar}>
-        <button className={buttonComenzar}>Comenzar ahora</button>
-      </div>
+      <Link href={"/planes"}>
+
+        <div className={comenzar}>
+          <button className={buttonComenzar}>Comenzar ahora</button>
+        </div>
+      </Link>
     </div>
   );
 };

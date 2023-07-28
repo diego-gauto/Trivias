@@ -18,9 +18,7 @@ export interface ITriviaResult {
 }
 
 export default interface ITrivia {
-  id: number;
   imgSelector: string;
-  imgTrivia: string;
   color: string;
   trans: string;
   title: string;

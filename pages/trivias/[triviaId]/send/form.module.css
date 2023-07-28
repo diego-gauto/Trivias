@@ -226,6 +226,10 @@ margin-bottom: 25px;
     flex-direction: column;
   }
 
+  .checkboxContainer {
+    margin: 20px 0 20px 0;
+  }
+
   .errorMessageNombre{
     width: 100%;
     top:462px;

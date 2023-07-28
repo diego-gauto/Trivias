@@ -25,8 +25,8 @@ const TriviaList = ({ trivias }: TriviaListProps) => {
           </tr>
         </thead>
         <tbody>
-          {trivias.map((trivia) => (
-            <TriviaRow key={trivia.id} trivia={trivia} />
+          {trivias.map((trivia, index) => (
+            <TriviaRow key={index} trivia={trivia} idTrivia={index + 1} />
           ))}
         </tbody>
       </Table>

@@ -1,0 +1,59 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2%;
+}
+
+.inputGroup{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.inputGroup input{
+  width: 40%;
+}
+
+.inputGroupQuestion{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.inputGroupQuestion input{
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.inputGroupAnswers{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.inputGroupAnswers label{
+  width: 15%;
+}
+
+.inputGroupAnswers input{
+  width: 70%;
+}
+
+div.inputGroupAnswers input[type="checkbox"] {
+  width: 15%;
+}
+
+.inputGroupResult{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.inputGroupResult input{
+  margin-bottom: 10px;
+}
+
+.inputGroupResult textarea{
+  margin-bottom: 10px;
+}

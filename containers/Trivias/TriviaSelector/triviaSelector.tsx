@@ -6,7 +6,7 @@ const TriviaSelector = (trivias: { trivias: any[]; }) => {
   return (
     <div className={styles.triviaSelectorContainer}>
       {trivias.trivias.map((trivia, index) => (
-        <Card triviaInfo={trivia} key={index} />
+        <Card triviaInfo={trivia} triviaId={index} key={index} />
       ))}
     </div>
   );

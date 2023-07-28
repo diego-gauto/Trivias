@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllTriviasApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/trivias")
+    .get("https://gonvar.inowu.dev/trivia")
     .then((res) => {
       return res.data.data
     })
@@ -14,7 +14,7 @@ export const getAllTriviasApi = async () => {
 
 export const getTriviaApi = async (idTrivia: number) => {
   return axios
-    .get("https://gonvar.inowu.dev/trivias" + `${idTrivia}`)
+    .get("https://gonvar.inowu.dev/trivia/" + `${idTrivia}`)
     .then((res) => {
       return res.data.data
     })
@@ -26,7 +26,7 @@ export const getTriviaApi = async (idTrivia: number) => {
 
 export const createTriviaApi = async (trivia: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/trivias", trivia)
+    .post("https://gonvar.inowu.dev/trivia", trivia)
     .then((res) => {
       return res.data.data
     })
@@ -37,7 +37,7 @@ export const createTriviaApi = async (trivia: any) => {
 };
 export const updateTriviaApi = async (idTrivia: number, trivia: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/trivias" + `${idTrivia}`, trivia)
+    .post("https://gonvar.inowu.dev/trivia/" + `${idTrivia}`, trivia)
     .then((res) => {
       return res.data.data
     })
@@ -48,7 +48,7 @@ export const updateTriviaApi = async (idTrivia: number, trivia: any) => {
 };
 export const deleteTriviaApi = async (idTrivia: number, trivia: any) => {
   return axios
-    .delete("https://gonvar.inowu.dev/trivias" + `${idTrivia}`, trivia)
+    .delete("https://gonvar.inowu.dev/trivia/" + `${idTrivia}`, trivia)
     .then((res) => {
       return res.data.data
     })
