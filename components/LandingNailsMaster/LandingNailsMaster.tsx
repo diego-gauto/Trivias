@@ -79,6 +79,7 @@ const LandingNailsMaster = () => {
   const [verMat, setverMat] = useState(false)
   const [reviews, setReviews] = useState([])
   const responsive850 = useMediaQuery({ query: "(max-width: 850px)" });
+  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const handleMats = () => {
     setverMat(false)
   }
@@ -310,11 +311,11 @@ const LandingNailsMaster = () => {
             </div>
             <p className="p-pink"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master Revolution</b></p>
             <div className="sangria">
-              <p><b>Instructora certificada</b> bajo estándares de aplicación de uñas artificiales por competencia</p>
-              <p><b>Especialista en capacitación para principiantes,</b> estructura profesional en escultural<br />
-                y máster en técnicas y métodos de enseñanza teóricos-prácticos.</p>
-              <p>Creadora de la técnica <b>"Cero Desprendimiento en 4 Pasos"</b> y co-fundadora de la academia<br />
-                de uñas <b>más grande de Latinoamerica.</b></p>
+              <p><b>Instructora certificada</b> bajo {responsive850 && <br />}estándares de aplicación de {responsive850 && <br />}uñas artificiales por {responsive850 && <br />}competencia.</p>
+              <p><b>Especialista en capacitación{responsive850 && <br />} para principiantes,</b> estructura {responsive850 && <br />}profesional en escultural {!responsive850 && <br />}
+                y {responsive850 && <br />}máster en técnicas y métodos {responsive850 && <br />}de enseñanza teóricos-prácticos.</p>
+              <p>Creadora de la técnica {responsive850 && <br />}<b>"Cero Desprendimiento en 4 Pasos"</b>{responsive850 && <br />} y co-fundadora de la academia{!responsive850 && <br />}
+                de uñas {responsive850 && <br />}<b>más grande de Latinoamerica.</b></p>
             </div>
             {
               responsive850 && <p className="quote-resp"><i>"Hago lo que me apasiona  <br />y disfruto enseñando a otras"</i><br /> <span>-Arita Gonvar</span></p>
@@ -334,9 +335,9 @@ const LandingNailsMaster = () => {
 
       <div className="benefits-section">
 
-        <h2 className="text-blue">Con <b className="blue">Nails Master Revolution</b> te daremos <b className="blue">beneficios
-          {!responsive850 && <br />}exclusivos</b> y tendrás acceso a la comunidad de {!responsive850 && <br />}estudiantes y profesionales de
-          la industria de las uñas{!responsive850 && <br />} <b className="blue">más grande de Latinoamérica.</b></h2>
+        <h2 className="text-blue">Con <b className="blue">Nails Master Revolution</b> te{responsive850 && <br />} daremos  <b className="blue">beneficios
+          {!responsive850 && <br />} exclusivos</b> y {responsive850 && <br />}tendrás acceso a la comunidad{responsive850 && <br />} de {!responsive850 && <br />}estudiantes y profesionales {responsive850 && <br />}de
+          la industria de las uñas <br /><b className="blue">más grande de Latinoamérica.</b></h2>
 
         <div className="benefits-info">
           <h2 className="yellow">Beneficios exclusivos</h2>
@@ -396,14 +397,14 @@ const LandingNailsMaster = () => {
 
 
       <div className="program">
-        <h2 className="yellow h1"><b>Todo lo que incluye este increíble programa</b></h2>
+        <h2 className="yellow h1"><b>Todo lo que incluye este {responsive850 && <br />}increíble programa</b></h2>
         {
           !responsive850 ?
             <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
               obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
             :
-            <p className="h4">Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution
-              <b> obtendrás cuadernillos, manuales y textos</b> que te ayudarán en tu carrera de Nail Artist.</p>
+            <p className="h4">Para complementar tu aprendizaje, <br />al inscribirte a Nails MasterRevolution<br />
+              <b> obtendrás cuadernillos, manuales y textos<br /></b> que te ayudarán en tu carrera de Nail Artist.</p>
         }
 
 
@@ -460,8 +461,8 @@ const LandingNailsMaster = () => {
             <img src={manoCosto} className="left-img" />
             <img src={chica_responsive} className="chica-resp" />
             <div className="center">
-              <h2 className="red h2">Costo total real: <del>$6,719.00 MXN</del></h2>
-              <h2 className="p-pink h1"><b>Precio de Lanzamiento con beca</b></h2>
+              <h2 className="red h2">Costo total real: {responsive850 && <br />}<del>$6,719.00 MXN</del></h2>
+              <h2 className="p-pink h1"><b>Precio de Lanzamiento {!responsive850 && "con beca"}</b></h2>
               <h2 className="green h1">Sólo $1,599.00 MXN</h2>
               <p className="">Válido para las primeras 500 personas</p>
               <h2><b>Quedan 123 lugares</b></h2>
@@ -482,8 +483,8 @@ const LandingNailsMaster = () => {
               <h2 >En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
                 <i>(Folio único verificado) </i></b> que autentifica y valida que tomaste el curso con nosotros.</h2>
               :
-              <h2 className="text-certificate">En Gonvar cada uno de nuestros certificados cuenta con <b className="p-pink">FUV
-                <i>(Folio único verificado) </i></b> <b>que autentifica y valida </b>que tomaste el curso con nosotros.</h2>
+              <h2 className="text-certificate">En Gonvar cada uno de nuestros <br />certificados cuenta con <b className="p-pink">FUV
+                <i> (Folio <br />único verificado) </i></b> <b> que autentifica y <br />valida </b>que tomaste el curso con <br />nosotros.</h2>
           }
 
         </div>
@@ -500,7 +501,7 @@ const LandingNailsMaster = () => {
       <div className="rewards-section">
         <div className="all-center title">
           <img src={rewards} className="me-3" />
-          <h2 className="h1">CENTRO DE <b>RECOMPENSAS</b></h2>
+          <h2 className="h1">CENTRO DE {responsive500 && <br />}<b>RECOMPENSAS</b></h2>
         </div>
         <div className="rewards-container all-center">
           <div className="reward-card card-style">
@@ -509,7 +510,7 @@ const LandingNailsMaster = () => {
                 <img src={pointReward} className="title-img" />
                 <img src={pointRewardOut} className="title-img" />
               </div>
-              <h4 className="light-p">Recompensas por puntaje</h4>
+              <h4 className="light-p">Recompensas {responsive500 && <br />}por puntaje</h4>
               <h5>Cada tarea aprobada, clase o curso terminado, te dará <b className="p-pink">puntos </b>
                 que puedes canjear por productos Gonvar.</h5>
             </div>
@@ -518,7 +519,7 @@ const LandingNailsMaster = () => {
                 <img src={whitePoint} className="title-img" />
                 <img src={whiteOut} className="title-img" />
               </div>
-              <h4>Recompensas por puntaje</h4>
+              <h4>Recompensas {responsive500 && <br />}por puntaje</h4>
               <h5>Obtén puntos por:</h5>
               <p>Tarea aprobada: +50 pts<br />
                 Clase terminada: +100 pts<br />
