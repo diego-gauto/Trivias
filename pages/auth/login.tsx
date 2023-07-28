@@ -1,25 +1,39 @@
 import React, { useEffect, useState } from "react";
+
+import { useLogin } from "react-facebook";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
+
+import { message } from "antd";
+import Link from "next/link";
 import * as yup from "yup";
+
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useGoogleLogin } from "@react-oauth/google";
+
+import AlertModal from "../../components/AlertModal/AlertModal";
 import {
+  facebookUserInfo,
+  googleTokens,
+  loginWithProviderApi,
+  updateLastSignIn,
+  updatePastUser,
+  updateUserPassword,
+} from "../../components/api/auth";
+import ErrorModal from "../../components/Error/ErrorModal";
+import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
+import {
+  Error,
   LoaderContain,
   LoaderImage,
+  LoginBackground,
   PurpleButton2,
   Title,
-  LoginBackground,
-  Error,
 } from "../../screens/Login.styled";
 import ModalForgot from "./Modals/ModalForgot";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useAuth } from "../../hooks/useAuth";
-import { useMediaQuery } from "react-responsive";
-import Link from "next/link";
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
-import ErrorModal from "../../components/Error/ErrorModal";
-import { useGoogleLogin } from "@react-oauth/google";
-import { facebookUserInfo, googleTokens, loginWithProviderApi, updateLastSignIn, updatePastUser, updateUserPassword } from "../../components/api/auth";
-import { useLogin, useFacebook } from 'react-facebook';
+import router from "next/router";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -59,6 +73,10 @@ const Login = () => {
   const [pastUser, setPastUser] = useState<any>({})
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
+  const [showAlert1, setShowAlert1] = useState<any>(false);
+  const [showAlert2, setShowAlert2] = useState<any>(false);
+  const [alertMsg1, setalertMsg1] = useState<any>()
+  const [alertMsg2, setalertMsg2] = useState()
   const [reset, setReset] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const { login } = useLogin();
@@ -67,6 +85,12 @@ const Login = () => {
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
+  };
+  const toggleAlert1 = () => {
+    setShowAlert1(false);
+  };
+  const toggleAlert2 = () => {
+    setShowAlert2(false);
   };
   const togglePassword_2 = () => {
     setPasswordShown_2(!passwordShown_2);
@@ -121,14 +145,16 @@ const Login = () => {
       }
       await updateUserPassword(body).then((res) => {
         if (res.status === 202) {
-          alert("Contraseña actualizada");
-          setErrorMsg("")
+          setShowAlert1(true);
+          setalertMsg1("Contraseña actualizada!")
+          setErrorMsg("");
           setReset(false);
           setAuthLoader(false)
           return;
         }
         if (res.data.msg) {
-          alert("El usuario no existe!")
+          setalertMsg2(res.data.msg)
+          setShowAlert2(true)
         }
         setAuthLoader(false)
       })
@@ -269,11 +295,20 @@ const Login = () => {
     if (localStorage.getItem("trial") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     }
-    if (localStorage.getItem("sub") === "true" && !localStorage.getItem("trial")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription`
-    }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+    }
+    if (localStorage.getItem("month") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
+    }
+    if (localStorage.getItem("anual") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
+    }
+    if (localStorage.getItem("nailMaster") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
+    }
+    if (localStorage.getItem("plan") === "true") {
+      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
     }
   }
 
@@ -342,6 +377,10 @@ const Login = () => {
     <>
       {!isLoading ? (
         <LoginBackground>
+          {!!alertMsg1 &&
+            <AlertModal show={showAlert1} message={alertMsg1} onHide={toggleAlert1} />}
+          {!!alertMsg2 &&
+            <AlertModal show={showAlert2} message={alertMsg2} onHide={toggleAlert2} />}
           <div className="left-side">
             <img className="imgUpperHand" src="../images/mano2.png" alt="" />
             <p>¡Es un placer <br />

@@ -40,6 +40,7 @@ export const TitleContainer = styled.div`
     font-size: 36px;
     color: #3f1168;
     letter-spacing: 4px;
+    font-weight: 400 !important;
     @media (max-width: 1023px) {
       font-size: 28px;
       letter-spacing: 3px;
@@ -457,8 +458,9 @@ export const AllSlider = styled.div`
   @media (max-width: 550px) {
     margin-top: 220px;
   }
-  h1 {
+  h2 {
     padding-left: 20px;
+    font-weight: 600;
     font-size: 20px;
     color: #3f1168;
     @media (max-width: 450px) {

@@ -11,6 +11,7 @@ export interface IBlog {
   image: string;
   link: string;
   summary: string;
+  route: string;
   date: {
     day: number;
     month: string;

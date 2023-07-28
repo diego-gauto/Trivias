@@ -6,10 +6,10 @@ export const Container = styled.div`
   flex-direction: column;
   background: #ede7f2;
   border-radius: 40px !important;
-  button {
+  .icon {
+    cursor: pointer;
     background: #3f1168;
     position: absolute;
-    border: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -18,6 +18,7 @@ export const Container = styled.div`
     transform: translateX(-50%);
     color: white;
     font-size: 24px;
+    padding: 6px;
   }
   .bottom-section {
     background: #d2aff1;

@@ -7,11 +7,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { googleLogout } from "@react-oauth/google";
-
 import {
   BLOGS_PATH,
   DEFAULT_USER_IMG,
   LOGIN_PATH,
+  PLAN_PATH,
   PREVIEW_PATH,
   PROFILE_PATH,
   REWARDS_PATH,
@@ -147,10 +147,6 @@ const NavBar = () => {
           router.push("/")
         }
       }
-
-      if (pathname === "/_error") {
-        router.push("/")
-      }
     }, [userDataAuth])
 
   } catch (error) {
@@ -265,6 +261,12 @@ const NavBar = () => {
           <NavText pathname={pathname} color={color} title="trivia"
             style={pathname == "/trivias" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Trivias
+          </NavText>
+        </Link>
+        <Link href={PLAN_PATH}>
+          <NavText pathname={pathname} color={color} title="Inicio"
+            style={pathname === PLAN_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+            Planes
           </NavText>
         </Link>
         <Link href={PREVIEW_PATH}>
@@ -418,6 +420,11 @@ const NavBar = () => {
                       Trivias
                     </FloatingMenuItem>
                   </Link>
+                  <Link href={PLAN_PATH}>
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
+                      Planes
+                    </FloatingMenuItem>
+                  </Link>
                   <Link href={PREVIEW_PATH}>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Cursos
@@ -534,6 +541,11 @@ const NavBar = () => {
                 <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
                     Trivias
+                  </HBList>
+                </Link>
+                <Link href={PLAN_PATH} >
+                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PLAN_PATH ? { fontWeight: 600 } : {}}>
+                    Planes
                   </HBList>
                 </Link>
                 <Link href={PREVIEW_PATH} >

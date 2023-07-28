@@ -1,3 +1,5 @@
+import router, { useRouter } from "next/router";
+
 const getMonth = (month: number) => {
   if (month === 1) {
     return "enero";
@@ -27,6 +29,13 @@ const getMonth = (month: number) => {
     return "";
   }
 };
+export function CanonicalURL() {
+  const router: any = useRouter();
+  const siteUrl: any = "https://www.gonvar.io";
+  const cleanPath: any = router.asPath.split("#")[0].split("?")[0];
+  const canonicalUrl = `${siteUrl}` + (router.asPath === "/" ? "" : cleanPath);
+  return canonicalUrl;
+}
 export function formatBlogDate(created_at: Date) {
   let date = new Date(created_at);
   let tempDay = date.getDate();
@@ -39,6 +48,14 @@ export function formatBlogDate(created_at: Date) {
     year: tempYear,
   };
 }
+export function formatBlogDateCase2(created_at: Date) {
+  let date = new Date(created_at);
+  let tempDay = date.getDate();
+  let tempMonth = date.getMonth() + 1;
+  let textMonth: string = getMonth(tempMonth);
+  let tempYear = date.getFullYear();
+  return `${textMonth} ${tempDay}, ${tempYear}`;
+}
 
 export function FormatDateForBack(date: Date) {
   if (date) {
@@ -47,4 +64,8 @@ export function FormatDateForBack(date: Date) {
   } else {
     return "14-05-2023 00:00:00";
   }
+}
+export function FormatCourses(course: any) {
+  let tempCourse = course.filter((c: any) => c.type === "Producto");
+  return tempCourse;
 }

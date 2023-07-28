@@ -5,7 +5,7 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import { IBlog } from './IBlog';
 import { getBlogsApi } from '../../../components/api/blog';
 import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../components/Loader.styled';
-import { formatBlogDate } from '../../../utils/functions';
+import { formatBlogDateCase2 } from '../../../utils/functions';
 
 const Blog = (props: any) => {
   const { blogs } = props;
@@ -27,9 +27,9 @@ const Blog = (props: any) => {
   return (
     <BlogContainer>
       <div className="title-contain">
-        <p className="title">
+        <h1 className="title">
           Blog
-        </p>
+        </h1>
       </div>
       {
         loader ?
@@ -48,6 +48,7 @@ const Blog = (props: any) => {
                       </p>
                       <div className="create-date-contain">
                         <p className="blog-create">by Academia Gonvar | </p>
+                        <p className="blog-date">{formatBlogDateCase2(blog.created_at)}</p>
                         {/* <p className="blog-date">{blog.date.month} {blog.date.day}, {blog.date.year}</p> */}
                       </div>
                       <div className="last-text">

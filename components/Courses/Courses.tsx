@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { BsTriangle } from 'react-icons/bs';
-import ReactPlayer from 'react-player';
-import { Container, CoursesContain, PurpleButton, SubText, Title, TransparentButton, Gradient, GonvarLoader } from './Courses.styled';
-import Sliders from './Modules/Sliders';
-import { getUserApi } from "../api/users";
+import React, { useEffect, useState } from "react";
+
+import { BsTriangle } from "react-icons/bs";
+import ReactPlayer from "react-player";
+
+import { useRouter } from "next/router";
+
+import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { getAllCourseDataApi, getCoursesApi } from "../api/lessons";
-import { ICourses, ILessons, ISeasons } from './ICourses';
-import CourseModal from '../CourseModal/CourseModal';
-import { useRouter } from 'next/router';
-import { LESSON_PATH, LOGIN_PATH, PURCHASE_PATH } from '../../constants/paths';
+import { getUserApi } from "../api/users";
+import CourseModal from "../CourseModal/CourseModal";
+import {
+  Container,
+  CoursesContain,
+  Gradient,
+  PurpleButton,
+  SubText,
+  Title,
+  TransparentButton,
+} from "./Courses.styled";
+import { ICourses, ILessons, ISeasons } from "./ICourses";
+import Sliders from "./Modules/Sliders";
+
 const Courses = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -93,12 +105,12 @@ const Courses = () => {
       }
       if (videoCourse.type === "Mensual" && (userData.level === 0 && userData.final_date < today)) {
         router.push({
-          pathname: PURCHASE_PATH,
-          query: { type: 'subscription' }
+          pathname: PLAN_PATH,
         });
       }
     }
     else {
+      localStorage.setItem("plan", "true");
       router.push({ pathname: LOGIN_PATH })
     }
   }
@@ -157,7 +169,7 @@ const Courses = () => {
             <div className="grey-field">
               <div className="top">
                 <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                <p>Gonvar+</p>
+                <h1>Gonvar+</h1>
               </div>
               <Title>
                 {!loading && videoCourse.title}

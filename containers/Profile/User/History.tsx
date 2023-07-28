@@ -10,7 +10,7 @@ export const History = ({ user, addPayment }: any) => {
   const [option, setOption] = useState(0);
   const [invoices, setInvoices] = useState<any>([])
   const [allOptions, setAllOptions] = useState([])
-
+  const today = new Date().getTime() / 1000;
   const handleLeft = () => {
     if (option == 0) {
       setOption(allOptions.length - 1)
@@ -28,6 +28,10 @@ export const History = ({ user, addPayment }: any) => {
     }
   }
 
+  const getDays = () => {
+    return Math.round((user.final_date - today) / 86400)
+  }
+
   const retrieveInvoices = () => {
     userInvoices(user.id).then((res) => {
       let tempInvoice: any = [];
@@ -39,16 +43,15 @@ export const History = ({ user, addPayment }: any) => {
         let tempYear = tempDate.getFullYear();
         element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
         element.amount = element.amount / 100;
-
-        if (element.amount == 149) {
+        if (element.product === "Gonvar Plus" && (element.amount === 149 || element.amount === 1599)) {
           let tempFinalDate: any = new Date(element.paid_at).getTime() / 1000;
-          tempDate = new Date((tempFinalDate + 2628000) * 1000);
+          tempDate = new Date((tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) * 1000);
           tempDay = tempDate.getDate();
           tempMonth = tempDate.getMonth() + 1;
           tempYear = tempDate.getFullYear();
           element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
           let date = new Date().getTime() / 1000;
-          if ((tempFinalDate + 2628000) > date) {
+          if ((tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) > date) {
             element.status = "Activo"
           } else {
             element.status = "Inactivo"
@@ -60,7 +63,6 @@ export const History = ({ user, addPayment }: any) => {
           tempMonth = tempDate.getMonth() + 1;
           tempYear = tempDate.getFullYear();
           element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
-
           let date = new Date().getTime() / 1000;
           if ((tempFinalDate) > date) {
             element.status = "Activo"

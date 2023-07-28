@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+
+import { AiFillLock } from "react-icons/ai";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
 import InputMask from "react-input-mask";
+
 import router, { useRouter } from "next/router";
-import { FaCheck, FaArrowRight } from 'react-icons/fa';
-import { AiFillLock } from 'react-icons/ai';
 
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useAuth } from "../../../hooks/useAuth";
-import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import {
-  Container,
-  LoaderContainSpinner,
-} from "./Purchase.styled";
-import ModalError from "./Modal1/ModalError";
-import ErrorModal from "../../../components/Error/ErrorModal";
-import { addUserCouponApi, createInvoiceApi, createPaymentMethodApi, getCourseForCheckoutApi, stripePaymentApi, stripeSubscriptionApi } from "../../../components/api/checkout";
-import { getUserApi, updateMembership } from "../../../components/api/users";
+
 import { retrieveCoupons } from "../../../components/api/admin";
-import { PREVIEW_PATH } from "../../../constants/paths";
+import {
+  addUserCouponApi,
+  createInvoiceApi,
+  createPaymentMethodApi,
+  getCourseForCheckoutApi,
+  stripePaymentApi,
+  stripeSubscriptionApi,
+} from "../../../components/api/checkout";
+import { getUserApi, updateMembership } from "../../../components/api/users";
+import ErrorModal from "../../../components/Error/ErrorModal";
+import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import ModalError from "./Modal1/ModalError";
+import { Container, LoaderContainSpinner } from "./Purchase.styled";
 
 const Purchase = () => {
   const [user, setUser] = useState("");
@@ -47,6 +52,13 @@ const Purchase = () => {
   const { type, id, trial, frequency } = router.query;
   const [loader, setLoader] = useState<any>(false);
 
+  const courseId = new URLSearchParams(window.location.search)
+  let idC = courseId.get('id')
+  // if (!localStorage.getItem("email")) {
+  //   localStorage.setItem("course", idC ? idC.toString() : '30');
+  //   router.push({ pathname: LOGIN_PATH })
+  // }
+
   const subscription = {
     price: 149.00,
     title: 'Gonvar Plus',
@@ -55,7 +67,6 @@ const Purchase = () => {
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
-      localStorage.removeItem("trial")
       getUserApi(localStorage.getItem("email")).then((res) => {
         getAllCoupons();
         setPaypal(!paypal)
@@ -97,8 +108,14 @@ const Purchase = () => {
       if (searchParams.get('trial') == "true") {
         localStorage.setItem("trial", "true");
       }
-      if (searchParams.get('type') === "subscription") {
-        localStorage.setItem("sub", "true");
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "month") {
+        localStorage.setItem("month", "true");
+      }
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "anual") {
+        localStorage.setItem("anual", "true");
+      }
+      if (searchParams.get('type') === "course") {
+        localStorage.setItem("course", `${idC}`);
       }
       window.location.href = "/auth/Register";
       setLoggedIn(false)
@@ -178,20 +195,35 @@ const Purchase = () => {
   const FinishPayment = async () => {
     if (plan.method == 'stripe') {
       if (type == 'subscription') {
+        let price = "";
+        if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
+        if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
+        if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
+
         const data = {
           new: card.cardId ? card.status : false,
           cardId: card.cardId,
           paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
           stripeId: userData.stripe_id,
-          priceId: !trial ? '9d8fa0e3-2977-46dc-8cb2-19024cd66bb9' : "45f502b3-3e0c-492e-986a-4e0e85e1a34d",
+          priceId: price,
           method: 'stripe'
         }
         stripeSubscriptionApi(data).then((res) => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              setError(true);
-              setErrorMsg(res.error.raw.code == "card_declined" && (
+              // setError(true);
+              // setErrorMsg(res.error.raw.code == "card_declined" && (
+              //   res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+              //   res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+              //   res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+              //   res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              // ) ||
+              //   res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
+              //   res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+              //   res.error.raw.code == "processing_error" && "Error de proceso" ||
+              //   res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+              const msg = res.error.raw.code == "card_declined" && (
                 res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
                 res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
                 res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
@@ -200,8 +232,8 @@ const Purchase = () => {
                 res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
                 res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
                 res.error.raw.code == "processing_error" && "Error de proceso" ||
-                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
-              window.location.href = frequency === "month" ? "/pagofallidomensualidad" : "/pagofallidoanualidad";
+                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
+              window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
             }
             setLoader(false);
           } else {
@@ -210,7 +242,7 @@ const Purchase = () => {
             setLoader(false);
             updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
             setConfirmation(false);
-            window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
+            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           }
         })
       } else {
@@ -235,8 +267,18 @@ const Purchase = () => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              setError(true);
-              setErrorMsg(res.error.raw.code == "card_declined" && (
+              // setError(true);
+              // setErrorMsg(res.error.raw.code == "card_declined" && (
+              //   res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
+              //   res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
+              //   res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
+              //   res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
+              // ) ||
+              //   res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
+              //   res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
+              //   res.error.raw.code == "processing_error" && "Error de proceso" ||
+              //   res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+              const msg = res.error.raw.code == "card_declined" && (
                 res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
                 res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
                 res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
@@ -245,9 +287,12 @@ const Purchase = () => {
                 res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
                 res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
                 res.error.raw.code == "processing_error" && "Error de proceso" ||
-                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
+                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
               if (id === "30") {
-                window.location.href = "/pagofallidonailsmaster";
+                window.location.href = `/pagofallidonailsmaster?error=${msg}`;
+              }
+              if (id === "45") {
+                window.location.href = `/pagofallidoalineacion?error=${msg}`;
               }
             }
             setLoader(false);
@@ -272,7 +317,10 @@ const Purchase = () => {
               setPay(true);
               setLoader(false);
               if (id === "30") {
-                window.location.href = "/pagoexitosoailsmaster";
+                window.location.href = "/pagoexitosonailsmaster";
+              }
+              if (id === "45") {
+                window.location.href = "/pagoexitosoalineacion";
               }
             })
           }
@@ -284,7 +332,7 @@ const Purchase = () => {
       if (type == 'subscription') {
         setConfirmation(false);
         setPay(true);
-        window.location.href = frequency === "month" ? "/pagoexitosomensualiad" : "/pagoexitosoanualidad";
+        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
       } else {
         let price = product.price
         if (coupon) {
@@ -314,7 +362,10 @@ const Purchase = () => {
           setPay(true);
           setLoader(false);
           if (id === "30") {
-            window.location.href = "/pagoexitosoailsmaster";
+            window.location.href = "/pagoexitosonailsmaster";
+          }
+          if (id === "45") {
+            window.location.href = "/pagoexitosoalineacion";
           }
         })
       }
@@ -380,20 +431,6 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          {/* {(pay && !loader) && <div className="static-modal">
-            <div className="modal-costum">
-              <h1>¡Grandes noticias, <span>{user}!</span></h1>
-              <p><span>¡Tu compra ha sido exitosa!</span> Enviamos el <br />
-                recibo de pago a tu correo electrónico. <br /> <br />
-
-                Ahora formas parte de la comunidad Gonvar+. <br />
-                <b>¡No esperes más y comienza a aprender!</b></p>
-
-              <button className="full">
-                <Link href={PREVIEW_PATH}>Ver los cursos</Link>
-              </button>
-            </div>
-          </div>} */}
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
@@ -460,7 +497,7 @@ const Purchase = () => {
                       delete card.paymentMethod;
                       setCard({ ...card, cardId: "" })
                     }} />
-                    <p>Pagaré con otra<span>tarjeta de crédito o débito</span></p>
+                    <p>Pagaré con otra <span>tarjeta de crédito o débito</span></p>
                   </div>
                   {!payment && <div className="form-row">
                     <label>Número de tarjeta</label>
@@ -565,7 +602,7 @@ const Purchase = () => {
                       createSubscription={(data, actions) => {
                         setPlan({ method: "paypal" })
                         return actions.subscription.create({
-                          plan_id: 'P-2P063165RR167053TMRKD7BQ'
+                          plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                         })
                       }}
                       onApprove={(data: any, actions) => {
@@ -623,11 +660,13 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true") && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${trial === "true" &&
+                    "149  MXN/mes."}{frequency === "month" &&
+                      "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -645,7 +684,9 @@ const Purchase = () => {
                 </div>}
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
-                  {type == "subscription" && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(trial === "true") && <p className="total">$ 149 <span>MXN</span></p>}
+                  {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                     (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
@@ -704,8 +745,13 @@ const Purchase = () => {
               </div>}
               {type == "course" && <div className="line"></div>}
               <div className="price-container">
-                <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <span>a pagar</span></p>
-                {type == "subscription" && <p className="total">$ 149 <span>MXN</span></p>}
+                {(type == "subscription" && frequency === "month") && <p className="title"><span>Suscripción Gonvar+ Mensual</span></p>}
+                {(type == "subscription" && frequency === "anual") && <p className="title"><span>Suscripción Gonvar+ Anual</span></p>}
+                {(type == "course") && <p className="title"><span>{product.title}</span></p>}
+                <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
+                {(type == "subscription" && frequency === "month") && <p className="total">$ 149 <span>MXN</span></p>}
+                {(trial === "true") && <p className="total">$ 149 <span>MXN</span></p>}
+                {(type == "subscription" && frequency === "anual") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                   (product.price - (coupon.discount / 100) * product.price)} <span>MXN</span></p>}
@@ -756,7 +802,7 @@ const Purchase = () => {
                         delete card.paymentMethod;
                         setCard({ ...card, cardId: "" })
                       }} />
-                      <p>Pagaré con otra<span>tarjeta de crédito o débito</span></p>
+                      <p>Pagaré con otra <span>tarjeta de crédito o débito</span></p>
                     </div>
                     {!payment && <div className="form-row">
                       <label>Número de tarjeta</label>
@@ -861,7 +907,7 @@ const Purchase = () => {
                         createSubscription={(data, actions) => {
                           setPlan({ method: "paypal" })
                           return actions.subscription.create({
-                            plan_id: 'P-2P063165RR167053TMRKD7BQ'
+                            plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                           })
                         }}
                         onApprove={(data: any, actions) => {
@@ -1062,11 +1108,13 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true")} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>$149 MXN/mes. </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${trial === "true" &&
+                    "149  MXN/mes."}{frequency === "month" &&
+                      "149  MXN/mes."}{frequency === "anual" && "1,599  MXN/año."}{(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />

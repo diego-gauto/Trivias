@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
-import { AboutContain, TextContainer, LessonTitle, LessonContent } from './About.styled';
-import { TitleContain } from './Module.styled';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight, } from 'react-icons/md';
-import ModuleTabs from './ModuleTabs/ModuleTabs';
+import React, { useState } from "react";
 
-const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+
+import { AboutContain, LessonContent, LessonTitle, TextContainer } from "./About.styled";
+import { TitleContain } from "./Module.styled";
+import ModuleTabs from "./ModuleTabs/ModuleTabs";
+
+const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson, user }: any) => {
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [index, setIndex] = useState<number>(0)
   return (
     <>
       <TitleContain>
-        <ModuleTabs value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
+        <ModuleTabs data={data} user={user} value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
         <div className='line'></div>
       </TitleContain>
       <AboutContain>

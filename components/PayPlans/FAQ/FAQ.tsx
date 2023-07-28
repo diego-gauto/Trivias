@@ -42,7 +42,7 @@ export const FAQ = () => {
           {views.get(1) &&
             <div className="border-top mx-3">
               <p className="py-2 animate__animated animate__fadeIn">¡Claro!<br />Cada curso terminado, con prácticas aprobadas,
-                te brinda un certificado con un folio único veificado para que peudas respaldar
+                te brinda un certificado con un folio único verificado para que puedas respaldar
                 tus conocimientos</p>
             </div>}
         </div>
@@ -58,8 +58,8 @@ export const FAQ = () => {
               <p className="py-2 animate__animated animate__fadeIn">Nuestros métodos de pago son súper cómodos.<br />
                 Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                 <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                  de $149 mxn u 8 dls.)</i><br />
-                Si prefieres pagar en transferencia, deposito en Oxxo o Paypal, está disponible la anualidad,
+                  de $149 MXN u 8 dls.)</i><br />
+                Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
                 $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                   ningún cobro adicional por un año).</i></p>
             </div>}

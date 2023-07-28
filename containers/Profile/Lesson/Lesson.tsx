@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { LESSON_PATH, LOGIN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../../constants/paths";
 import { useAuth } from "../../../hooks/useAuth";
 import { MainContainer } from "./Lesson.styled";
 import Video from "./LessonComponents/Video/Video";
@@ -69,6 +69,9 @@ const Lesson = () => {
               pathname: PURCHASE_PATH,
               query: { type: 'subscription' }
             });
+          }
+          if ((res.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
+            router.push(`${PLAN_PATH}`)
           }
           setCurrentLesson(res.seasons[season].lessons[lesson]);
           setCourse(res);

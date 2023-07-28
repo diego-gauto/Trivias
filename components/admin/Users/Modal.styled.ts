@@ -41,10 +41,12 @@ export const ModalContent = styled.div`
     .column {
       display: flex;
       gap: 20px;
+      width: 100%;
       .input {
         display: flex;
         flex-direction: column;
         gap: 5px;
+        width: 45%;
         label {
           font-size: 20px;
           font-weight: bold;

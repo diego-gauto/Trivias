@@ -92,7 +92,8 @@ export const SecondBox = styled.div`
     @media (max-width: 1023px) {
       display: none;
     }
-    p {
+    p,
+    h1 {
       margin: 0;
       line-height: 60px;
     }
@@ -559,6 +560,7 @@ export const LoaderContain = styled.div`
 `;
 export const InputPhone = styled(PhoneInput)`
   select {
+    opacity: 0;
     position: absolute;
     z-index: 1;
     background: transparent;

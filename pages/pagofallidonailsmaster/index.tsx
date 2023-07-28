@@ -10,7 +10,6 @@ const paymentFailedNailsMasterScreen = () => {
         width: "100%",
         padding: "0",
         maxWidth: "100% !important",
-        height: "100vh"
       }}>
       <PaymentFailedNailsMaster></PaymentFailedNailsMaster>
     </MainContain>

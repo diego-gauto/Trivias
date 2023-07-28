@@ -1,7 +1,10 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap';
-import { AlertModalContain } from './AlertModal.styled';
-import { IoClose } from 'react-icons/io5';
+
+
+import { Modal } from "react-bootstrap";
+import { IoClose } from "react-icons/io5";
+
+import { AlertModalContain } from "./AlertModal.styled";
+
 interface IModal {
   show: boolean;
   message: string;

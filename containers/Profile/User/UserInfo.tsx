@@ -116,6 +116,10 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
         return;
       }
     }
+    if (user.name === "" || user.last_name === "") {
+      alert("Por favor no deje los campos vacios!");
+      return;
+    }
 
     let body = {
       name: user.name,
@@ -138,6 +142,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     })
   }
   const parseNumber = (phone: string) => {
+    if (!phone.includes("+")) {
+      phone = "+" + phone;
+    }
     const parsedNumber = parsePhoneNumberFromString(phone);
     const country = getName(parsedNumber?.country)
     return country;
@@ -505,12 +512,14 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                 <Box2>
                   <div className="separate" />
                   <InputPhone
-                    value={userData.phone_number === 'undefined' ? '' : userData.phone_number}
+                    value={userData.phone_number === 'undefined' ? '' : "+" + userData.phone_number}
                     limitMaxLength={true}
                     international={true}
                     countryCallingCodeEditable={false}
                     onChange={(e: any) => {
-                      setUser({ ...user, phone_number: e })
+                      setUser({ ...user, phone_number: e });
+                      console.log(e);
+
                     }}
                   />
                 </Box2>

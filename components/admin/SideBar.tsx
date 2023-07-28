@@ -77,6 +77,9 @@ const SideBar = ({ show, onHide }: any) => {
         setIndex(9)
       }
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Trivias") {
+        setIndex(11)
+      }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Cancel") {
         setIndex(10)
       }
     }, [])
@@ -168,6 +171,12 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Users</li>
           </Link>}
+          {(isSuperAdmin || isUsers) && <Link href="/admin/Cancel">
+            <li style={{ color: index == 10 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(10)
+              onHide()
+            }}>Cancel Review</li>
+          </Link>}
           {(isSuperAdmin || isHomeworks) && <Link href="/admin/HomeWork">
             <li style={{ color: index == 6 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(6)
@@ -187,8 +196,8 @@ const SideBar = ({ show, onHide }: any) => {
             }}>Blogs</li>
           </Link>}
           {(isSuperAdmin || isTrivias) && <Link href="/admin/Trivias">
-            <li style={{ color: index == 10 ? "#ffa500" : "#fff" }} onClick={() => {
-              setIndex(10)
+            <li style={{ color: index == 11 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(11)
               onHide()
             }}>Trivias</li>
           </Link>}

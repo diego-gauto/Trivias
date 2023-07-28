@@ -41,7 +41,7 @@ export const Module2_1 = (props: IModule2_1) => {
         router.push(`${PLAN_PATH}`)
       }
     } else {
-      localStorage.setItem("sub", "true");
+      localStorage.setItem("plan", "true");
       router.push(SIGNUP_PATH)
     }
   }

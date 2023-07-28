@@ -142,6 +142,7 @@ export const getAllUsers = async (
   last_login_2: string,
   course_id: number,
   course_progress: number,
+  membership: string,
 ) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/partial-users-demo/"
@@ -161,6 +162,7 @@ export const getAllUsers = async (
       + "/" + last_login_2
       + "/" + course_id
       + "/" + course_progress
+      + "/" + membership
     )
     .then((res) => {
       return res.data.users
@@ -185,6 +187,7 @@ export const userForExcel = async (
   last_login_2: string,
   course_id: number,
   course_progress: number,
+  membership: string,
 ) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/excel-list/"
@@ -202,6 +205,7 @@ export const userForExcel = async (
       + "/" + last_login_2
       + "/" + course_id
       + "/" + course_progress
+      + "/" + membership
     )
     .then((res) => {
       return res.data.sendUsers
@@ -431,6 +435,17 @@ export const cancelReview = async (review: any) => {
     .post("https://gonvar.inowu.dev/" + "admin/create-cancel-review", review)
     .then((res) => {
       return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const getCancelReviewApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/cancel/reviews")
+    .then((res) => {
+      return res.data.data
     })
     .catch((error) => {
       console.log(error);

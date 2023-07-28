@@ -1,10 +1,11 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { PURCHASE_PATH } from "../../../constants/paths";
-import { useAuth } from "../../../hooks/useAuth";
 
+import router from "next/router";
+
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
 const gPlus = "/images/pay_plans/G+.png"
@@ -19,11 +20,16 @@ views.set(7, false);
 views.set(8, false);
 views.set(9, false);
 
-const Anual = () => {
+interface IData {
+  user: IUser;
+}
+const Anual = (props: IData) => {
   const [ver, setver] = useState(true)
-  var userData = useAuth();
-  const [user, setUser] = useState<any>({});
-
+  const { user } = props;
+  const goToRoute = () => {
+    router.push('/suscripcion-anual');
+  }
+  let today = new Date().getTime() / 1000;
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -37,17 +43,24 @@ const Anual = () => {
 
   }, [setver])
 
-  useEffect(() => {
-    if (userData.user !== null) {
-      setUser(userData.user)
-    } else {
-      router.push({ pathname: "/" });
-    }
-  }, [])
-
   const goTo = () => {
-    if (user) {
-      router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+    if (user.id) {
+      if (user.level === 0 && user.final_date < today) {
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+      }
+      if (user.level === 0 && user.final_date > today) {
+        router.push(PREVIEW_PATH)
+      }
+      if (user.level === 1 && user.final_date < today) {
+        router.push(PREVIEW_PATH)
+      }
+      if (user.level === 1 && user.final_date > today) {
+        router.push(PREVIEW_PATH)
+      }
+    }
+    else {
+      localStorage.setItem("month", "true");
+      router.push(SIGNUP_PATH)
     }
   }
 
@@ -61,25 +74,25 @@ const Anual = () => {
             <img src={gPlus} alt="Gonvar logo" className="mt-3 me-2" />
             <div>
               <p className="blue mb-0">
-                Suscripcion Gonvar+<br />
+                Suscripción Gonvar+<br />
               </p>
               <h3 className="blue h1">Anual</h3>
             </div>
 
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$1,599.00 mxn/año</h2>
+            <h2 className="h3 mb-0">$1,599.00 MXN/año</h2>
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
 
           <div className="break tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="blue m-0">Mas de 60 cursos y 400 clases de uñas y belleza en linea</p>
+              <p className="blue m-0">Más de 60 cursos y 400 clases de uñas y belleza en linea</p>
               {views.get(1) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -105,7 +118,7 @@ const Anual = () => {
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   Todos <b>nuestros instructores son profesionales de la belleza,</b> asegurando que así
-                  tendrás una educación de calidad bajo los mejores estandares de la industria.
+                  tendrás una educación de calidad bajo los mejores estándares de la industria.
                 </p>
               </div>}
           </div>
@@ -137,7 +150,7 @@ const Anual = () => {
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   ¿Tienes duda en tus cursos? No te preocupes, <b>nuestro equipo esta para ayudarte </b>
-                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicas, </b>
+                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicás, </b>
                   para que sigas mejorando.
                 </p>
               </div>}
@@ -162,7 +175,7 @@ const Anual = () => {
 
           <div className="break tip m-2" onClick={() => verQ(6)}>
             <div className="tip-q mb-1">
-              <p className="blue mb-0">Kit gratis</p>
+              <p className="blue mb-0">Kit de producto Gratis</p>
               {views.get(6) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -172,14 +185,15 @@ const Anual = () => {
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   <b>Recibe un kit gratis con diferentes productos cada dos meses, </b>
                   como acrílicos, geles, monómeros, adherentes, decoración y otros productos.<br />
-                  <i><b>Precio Real con envío: $759.38 MXN aprox.</b></i>
+                  <i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo.
+                    Solo debes pagar el envío de $245 MXN.</b></i>
                 </p>
               </div>}
           </div>
 
           <div className="break tip m-2" onClick={() => verQ(7)}>
             <div className="tip-q mb-1">
-              <p className="blue mb-0">Envío gratis</p>
+              <p className="blue mb-0">Envíos de producto Gratis</p>
               {views.get(7) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -187,7 +201,7 @@ const Anual = () => {
             {views.get(7) &&
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00 mx.
+                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00 MXN.
                 </p>
               </div>}
           </div>
@@ -224,7 +238,7 @@ const Anual = () => {
                 </p>
               </div>}
           </div>
-          <span className="text-center my-2"><i>Más información</i></span>
+          <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>
         </div>
       </div>
     </PlanStyles>

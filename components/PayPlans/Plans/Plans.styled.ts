@@ -2,13 +2,18 @@ import styled from "styled-components";
 
 export const PlanStyles = styled.div`
   height: 100%;
-  .plans {
+  .planes {
     --purple-pink: #cb5cc0;
     --blue: #6b77f5;
     --green: #149e62;
     --purple-pink2: #b746cd;
     --purple: #3f1168;
     .colors {
+      display: flex;
+      justify-content: space-between;
+      .col-lg-3 {
+        width: 33%;
+      }
       .back {
         background-color: #ece7f2;
         height: 100%;
@@ -81,6 +86,8 @@ export const PlanStyles = styled.div`
           border-bottom: 1px solid var(--purple-pink2);
         }
         .purple-button {
+          padding-block: 10px;
+          padding-inline: 25px;
           border: none;
           border-radius: 24px;
           color: #ffffff;
@@ -94,6 +101,12 @@ export const PlanStyles = styled.div`
         justify-content: center;
         .text-center {
           font-size: 14px;
+          i {
+            cursor: pointer;
+            &:hover {
+              opacity: 0.6;
+            }
+          }
         }
         .tip {
           cursor: pointer;
@@ -128,6 +141,20 @@ export const PlanStyles = styled.div`
             border-top: 1px solid var(--purple-pink2);
           }
         }
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    .planes {
+      .col-lg-3 {
+        width: 50% !important;
+      }
+    }
+  }
+  @media (max-width: 576px) {
+    .planes {
+      .col-lg-3 {
+        width: 100% !important;
       }
     }
   }

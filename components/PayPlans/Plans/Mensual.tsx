@@ -1,10 +1,12 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { PURCHASE_PATH } from "../../../constants/paths";
-import { useAuth } from "../../../hooks/useAuth";
 
+import router from "next/router";
+
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { useAuth } from "../../../hooks/useAuth";
+import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
 const gPlus = "/images/pay_plans/G+.png"
@@ -19,12 +21,17 @@ views.set(7, false);
 views.set(8, false);
 views.set(9, false);
 
-const Mensual = () => {
+interface IData {
+  user: IUser;
+}
+const Mensual = (props: IData) => {
+  const { user } = props;
   const [ver, setver] = useState(true)
   let today = new Date().getTime() / 1000;
   var userData = useAuth();
-  const [user, setUser] = useState<any>({});
-
+  const goToRoute = () => {
+    router.push('/suscripcion-mensual');
+  }
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -38,17 +45,24 @@ const Mensual = () => {
 
   }, [setver])
 
-  useEffect(() => {
-    if (userData.user !== null) {
-      setUser(userData.user)
-    } else {
-      router.push({ pathname: "/" });
-    }
-  }, [])
-
   const goTo = () => {
-    if (user) {
-      router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+    if (user.id) {
+      if (user.level === 0 && user.final_date < today) {
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+      }
+      if (user.level === 0 && user.final_date > today) {
+        router.push(PREVIEW_PATH)
+      }
+      if (user.level === 1 && user.final_date < today) {
+        router.push(PREVIEW_PATH)
+      }
+      if (user.level === 1 && user.final_date > today) {
+        router.push(PREVIEW_PATH)
+      }
+    }
+    else {
+      localStorage.setItem("month", "true");
+      router.push(SIGNUP_PATH)
     }
   }
 
@@ -62,24 +76,24 @@ const Mensual = () => {
             <img src={gPlus} alt="Gonvar logo" className="mt-3 me-2" />
             <div>
               <p className="purple-pink mb-0">
-                Suscripcion Gonvar+
+                Suscripción Gonvar+
               </p>
               <h3 className="h1 purple-pink">Mensual</h3>
             </div>
 
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$149.00 mxn/mes</h2>
+            <h2 className="h3 mb-0">$149.00 MXN/mes</h2>
             <span><i>Cargo automático mensual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button " onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink m-0">Mas de 60 cursos y 400 clases de uñas y belleza en linea</p>
+              <p className="purple-pink m-0">Más de 60 cursos y 400 clases de uñas y belleza en linea</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -99,7 +113,7 @@ const Mensual = () => {
             {views.get(2) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Todos nuestros instructores son profesionales de la belleza, </b>
-                  asegurando que así tendrás una educación de calidad bajo los mejores estandares de la industria.</p>
+                  asegurando que así tendrás una educación de calidad bajo los mejores estándares de la industria.</p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(3)}>
@@ -125,7 +139,7 @@ const Mensual = () => {
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">¿Tienes duda en tus cursos?
                   No te preocupes, <b>nuestro equipo esta para ayudarte</b> y resolver cualquier duda que tengas. Además,
-                  <b> revisamos individualmente cada una de tus practicas</b>, para que sigas mejorando.</p>
+                  <b> revisamos individualmente cada una de tus prácticas</b>, para que sigas mejorando.</p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(5)}>
@@ -143,7 +157,7 @@ const Mensual = () => {
           </div>
           <div className="back tip m-2" onClick={() => verQ(6)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Kit gratis</p>
+              <p className="purple-pink mb-0">Kit de producto Gratis</p>
               {views.get(6) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -152,7 +166,7 @@ const Mensual = () => {
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Recibe un kit gratis con
                   diferentes productos cada dos meses,</b> como acrílicos, geles, monómeros, adherentes,
                   decoración y otros productos.
-                  <br /><i><b>Precio Real con envío: $759.38 MXN aprox.</b></i></p>
+                  <br /><i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo. Solo debes pagar el envío de $245 MXN.</b></i></p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(7)}>
@@ -171,7 +185,7 @@ const Mensual = () => {
           </div>
           <div className="back tip m-2" onClick={() => verQ(8)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Envío gratis</p>
+              <p className="purple-pink mb-0">Envíos de producto Gratis</p>
               {views.get(8) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -195,7 +209,7 @@ const Mensual = () => {
                   <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto adicional) </i></p>
               </div>}
           </div>
-          <span className="text-center my-2"><i>Más información</i></span>
+          <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>
         </div>
       </div>
     </PlanStyles>

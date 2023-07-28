@@ -243,9 +243,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
             <div className="subscription-info">
               {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
                 Gonvar+<br />
-                <span className="span">Suscripción mensual</span>
+                <span className="span">Suscripción {(user.level === 1 && getDays() > 31) ? "anual" : "mensual"}</span>
               </p> :
-                <p>Sin subscripción</p>}
+                <p>Sin suscripción</p>}
             </div>
             <p className="text-1">
               Próximo cargo

@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+
+import { AiFillStar } from "react-icons/ai";
+import { useMediaQuery } from "react-responsive";
+import { Rating } from "react-simple-star-rating";
+
 import router from "next/router";
 
 import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
@@ -25,12 +30,9 @@ import {
   TextContainer,
   VideoContain,
 } from "./CourseModal.styled";
-import SelectModule4 from "./Select/SelectModule";
-import ModalMaterials from "./Materials/ModalMaterials";
-import { useMediaQuery } from "react-responsive";
-import { Rating } from 'react-simple-star-rating'
-import { AiFillStar } from "react-icons/ai";
 import { ICourseModal } from "./ICourseModal";
+import ModalMaterials from "./Materials/ModalMaterials";
+import SelectModule4 from "./Select/SelectModule";
 
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;
@@ -50,6 +52,9 @@ const CourseModal = (props: ICourseModal) => {
   }
   const goTo = () => {
     if (user) {
+      if ((course.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
+        router.push(`${PLAN_PATH}`)
+      }
       if ((course.type === "Mensual") && ((user.level === 1) || (user.level === 0 && user.final_date > today))) {
         router.push({
           pathname: LESSON_PATH,
@@ -72,6 +77,7 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
     else {
+      localStorage.setItem("plan", "true");
       router.push({ pathname: LOGIN_PATH })
     }
   }

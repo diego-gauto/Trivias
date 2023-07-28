@@ -1,10 +1,11 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { PURCHASE_PATH } from "../../../constants/paths";
-import { useAuth } from "../../../hooks/useAuth";
 
+import router from "next/router";
+
+import { LESSON_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
 const gStar = "/images/pay_plans/star green.png"
@@ -18,11 +19,14 @@ views.set(6, false);
 views.set(7, false);
 views.set(8, false);
 
-const Individual = () => {
+interface IData {
+  user: IUser;
+}
+const Individual = (props: IData) => {
   const [ver, setver] = useState(true)
-  var userData = useAuth();
-  const [user, setUser] = useState<any>({});
+  const { user } = props;
 
+  let today = new Date().getTime() / 1000;
   const verQ = (q: any) => {
     setver(!ver)
     if (views.get(q)) {
@@ -31,24 +35,32 @@ const Individual = () => {
       views.set(q, true)
     }
   }
-
+  const goToRoute = () => {
+    // router.push('/nails-master');
+  }
   useEffect(() => {
 
   }, [setver])
 
-  useEffect(() => {
-    if (userData.user !== null) {
-      setUser(userData.user)
-    } else {
-      router.push({ pathname: "/" });
-    }
-  }, [])
+
 
   const goTo = () => {
-    if (user) {
-      router.push(
-        { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-      )
+    if (user.id) {
+      let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
+      if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+        router.push({
+          pathname: LESSON_PATH,
+          query: { id: 30, season: 0, lesson: 0 },
+        });
+      }
+      if (tempCourse.length > 0 && tempCourse[0].final_date < today) {
+        router.push(
+          { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+        )
+      }
+    } else {
+      localStorage.setItem("nailMaster", "true");
+      router.push(SIGNUP_PATH)
     }
   }
 
@@ -68,11 +80,11 @@ const Individual = () => {
             </div>
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$1,599.00 mxn</h2>
+            <h2 className="h3 mb-0">$1,599.00 MXN</h2>
             <span><i>Único pago</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button px-4" onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button" onClick={goTo}>Comenzar ahora</button>
           </div>
         </div>
         <div className="main-body">
@@ -130,7 +142,7 @@ const Individual = () => {
               <div className="b-green">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   ¿Tienes duda en tus cursos? No te preocupes, <b>nuestro equipo esta para ayudarte </b>
-                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus practicas, </b>
+                  y resolver cualquier duda que tengas. Además, <b>revisamos individualmente cada una de tus prácticas, </b>
                   para que sigas mejorando.
                 </p>
               </div>}
@@ -193,7 +205,7 @@ const Individual = () => {
                 </p>
               </div>}
           </div>
-          <span className="text-center my-2"><i>Más información</i></span>
+          <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>
         </div>
       </div>
     </PlanStyles>

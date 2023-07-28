@@ -25,7 +25,8 @@ export const MainContainer = styled.div<{ open: any }>`
       font-size: 16px;
       font-weight: bold;
     }
-    p {
+    p,
+    h1 {
       font-size: 14px;
       color: #3f1168;
       margin: 0;
