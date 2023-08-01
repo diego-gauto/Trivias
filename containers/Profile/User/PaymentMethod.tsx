@@ -13,6 +13,7 @@ import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineSta
 import { FaTrashAlt } from "react-icons/fa";
 import { addPaymentMethod } from "../../../store/actions/PaymentActions";
 import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, setDefaultPaymentMethod } from "../../../components/api/profile";
+import AlertModal from "../../../components/AlertModal/AlertModal";
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   const [show, setShow] = useState(false);
@@ -70,6 +71,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
     })
   }
   const detachPayment = async (card: any) => {
+    if (card.default || pm.length === 1) {
+      setShow(true);
+      return;
+    }
     setDeleteLoad(!loader);
     let info = {
       payment_method: card.id
@@ -86,6 +91,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
 
   return (
     <PaymentMethodContainer add={addPayment}>
+      <AlertModal show={show} onHide={() => { setShow(false) }}
+        message="Si desea eliminar su metodo de pago, por favor de agregar otro metodo de pago y hacerlo su metodo de pago predeterminado o si desea puede cancelar su suscripcion, gracias!"
+
+      />
       <div className="main-container">
         <div className="title">
           Métodos de pago
