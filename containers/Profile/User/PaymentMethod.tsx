@@ -45,7 +45,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
             payment_method: res.data.paymentMethod.id
           }
           attachPaymentMethod(cardInfo).then((response) => {
-            if (response.response.status === 400) {
+            if (response.status === 400) {
               alert("Hay un error en los datos de la tarjeta!");
               setLoader(false);
             }

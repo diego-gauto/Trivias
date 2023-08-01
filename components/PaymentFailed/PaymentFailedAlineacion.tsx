@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { PREVIEW_PATH, PURCHASE_PATH } from '../../constants/paths';
 import { FailedContainer } from './PaymentFailed.styled';
 import { useAuth } from '../../hooks/useAuth';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 const PaymentFailedAlineacion = () => {
 
   const [userData, setUserData] = useState<any>(null);
-
+  const router = useRouter()
+  const { error } = router.query;
+  const [msg, setMsg] = useState<any>("Puede que tu tarjeta no este activada para enviar pagos de manera online, intenta de nuevo o usa otro método de pago.")
   const redirecTo = () => {
     window.location.href = "/preview";
   }
@@ -21,6 +23,7 @@ const PaymentFailedAlineacion = () => {
   var userDataAuth = useAuth();
   useEffect(() => {
     if (userDataAuth.user !== null) {
+      setMsg(error);
       setUserData(userDataAuth.user);
     } else {
       window.location.href = "/preview";
@@ -37,9 +40,7 @@ const PaymentFailedAlineacion = () => {
     <FailedContainer>
       <div className='left'>
         <h1>Tu compra no se ha podido<br /> realizar, <span>{userData?.name}!</span></h1>
-        <p>Puede que tu tarjeta no este activada para enviar <br />
-          pagos de manera online, intenta de nuevo o usa otro <br />
-          método de pago.</p>
+        <p style={{ width: "300px" }}>{error}</p>
         <div className='buttons'>
           <button className='top' onClick={goTo}>Reintentar</button>
         </div>
