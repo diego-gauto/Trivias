@@ -400,10 +400,10 @@ const LandingNailsMaster = () => {
         <h2 className="yellow h1"><b>Todo lo que incluye este {responsive850 && <br />}increíble programa</b></h2>
         {
           !responsive850 ?
-            <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails MasterRevolution <br />
+            <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails Master Revolution <br />
               obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
             :
-            <p className="h4">Para complementar tu aprendizaje, <br />al inscribirte a Nails MasterRevolution<br />
+            <p className="h4">Para complementar tu aprendizaje, <br />al inscribirte a Nails Master Revolution<br />
               <b> obtendrás cuadernillos, manuales y textos<br /></b> que te ayudarán en tu carrera de Nail Artist.</p>
         }
 
@@ -412,7 +412,7 @@ const LandingNailsMaster = () => {
           <div className="course-container">
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Curso {responsive850 && "Nails Master Revolution"}{responsive850 ? <br /> : " |"}<b className="p-pink">Costo real: $2,399.00 MXN</b></p>
+              <p>Curso {responsive850 && "Nails Master Revolution"}{responsive850 ? <br /> : " | "}<b className="p-pink">Costo real: $2,399.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
