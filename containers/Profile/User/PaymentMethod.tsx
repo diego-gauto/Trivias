@@ -6,19 +6,16 @@ import {
   WhiteLoader,
   LoaderContain,
 } from "./User.styled";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../../firebase/firebaseConfig";
-import { deletePaymentMethod, updatePaymentMethod } from "../../../store/actions/ProfileActions";
+
 import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { addPaymentMethod } from "../../../store/actions/PaymentActions";
 import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, setDefaultPaymentMethod } from "../../../components/api/profile";
-import AlertModal from "../../../components/AlertModal/AlertModal";
+import PaymentMethodModal from "../../../components/PaymentMethodModal/PaymentMethodModal";
+import router from "next/router";
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState<any>({ data })
-  const handleShow = () => setShow(true);
   const [loader, setLoader] = useState<any>(false);
   const [deleteLoad, setDeleteLoad] = useState<any>(false);
   const [card, setCard] = useState<any>({
@@ -91,7 +88,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
 
   return (
     <PaymentMethodContainer add={addPayment}>
-      <AlertModal show={show} onHide={() => { setShow(false) }}
+      <PaymentMethodModal show={show} onHide={() => { setShow(false); }} newCard={() => { newCard(true); setShow(false); }}
         message="Si desea eliminar su metodo de pago, por favor de agregar otro metodo de pago y hacerlo su metodo de pago predeterminado o si desea puede cancelar su suscripcion, gracias!"
 
       />

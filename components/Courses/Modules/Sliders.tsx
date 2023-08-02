@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import { ICourse, ICourseData, IUserCourse, IUserHistory, IUserProgress } from './ISliders';
+import { ICourse, ICourseData } from './ISliders';
 import { Image } from "react-bootstrap";
 import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, ImageContent, Arrows } from './Sliders.styled';
 import CourseModal from '../../CourseModal/CourseModal';
@@ -11,7 +11,6 @@ import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '../../../cons
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
-import { user } from 'firebase-functions/v1/auth';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user, containLoader } = props;
@@ -31,126 +30,6 @@ const Sliders = (props: ICourseData) => {
     spanTitle: "",
     spanAditional: "",
   })
-  // const getCourseContent = () => {
-  //   let tempTexts: any = {
-  //     title: "",
-  //     spanTitle: "",
-  //   }
-  //   let tempCourses: any = allCourses;
-  //   let tempShowCourse: any = [];
-  //   if (slideType === "continue-watching") {
-  //     tempTexts.title = "Continua Viendo";
-  //     tempTexts.spanTitle = "";
-  //     if (user && user.user_history) {
-  //       if (user.user_history.length > 0) {
-  //         user.user_history.forEach((courses: IUserHistory) => {
-  //           tempCourses.forEach((course: ICourse) => {
-  //             if (course.id === courses.course_id) {
-  //               course.seasons.forEach((season: any, index: number) => {
-  //                 if (season.id === courses.season_id) {
-  //                   course.seasonId = index;
-  //                   season.lessons.forEach((lesson: any, index: number) => {
-  //                     if (lesson.id === courses.lesson_id) {
-  //                       course.lessonId = index;
-  //                     }
-  //                   });
-  //                 }
-  //               });
-  //             }
-  //             if (user.user_courses && (course.id === courses.course_id)) {
-  //               if (course.type === "Producto") {
-  //                 user.user_courses.forEach((userCourse: IUserCourse) => {
-  //                   if (userCourse.final_date >= today && course.id === userCourse.course_id) {
-  //                     user.user_progress.forEach((progress: IUserProgress) => {
-  //                       if (courses.lesson_id === progress.lessons_id) {
-  //                         course.lessonProgress = progress.time;
-  //                       }
-  //                     });
-  //                     tempShowCourse.push(course)
-  //                   }
-  //                 })
-  //               }
-  //               if (course.type === "Mensual" && ((user.level === 1) || (user.level === 0 && user.final_date > today))) {
-  //                 user.user_progress.forEach((progress: IUserProgress) => {
-  //                   if (courses.lesson_id === progress.lessons_id) {
-  //                     course.lessonProgress = progress.time;
-  //                   }
-  //                 });
-  //                 tempShowCourse.push(course)
-  //               }
-  //             }
-  //           })
-  //         });
-  //       }
-  //     }
-  //     setCourses(tempShowCourse);
-  //     setTexts(tempTexts);
-  //   }
-  //   if (slideType === "my-courses") {
-  //     tempTexts.title = "Tus Cursos";
-  //     tempTexts.spanTitle = "";
-  //     if (user && user.user_courses) {
-  //       tempCourses.forEach((course: ICourse) => {
-  //         // if (user.level === 1 && course.type === "Mensual") {
-  //         //   tempShowCourse.push(course);
-  //         // }
-  //         if (user.user_courses.length > 0) {
-  //           user.user_courses.forEach((courses: IUserCourse) => {
-  //             if ((courses.final_date >= today) && (course.id === courses.course_id)) {
-  //               course.days = Math.round((courses.final_date - today) / 86400)
-  //               tempShowCourse.push(course)
-  //             }
-  //           });
-  //         }
-  //       })
-  //     }
-  //     setCourses(tempShowCourse);
-  //     setTexts(tempTexts);
-  //   }
-  //   if (slideType === "all-courses") {
-  //     tempTexts.title = "Cursos disponibles";
-  //     tempTexts.spanTitle = "";
-  //     tempShowCourse = tempCourses;
-  //     setCourses(tempShowCourse);
-  //     setTexts(tempTexts);
-  //   }
-  //   if (slideType === "product-courses") {
-  //     tempTexts.title = "Cursos especiales ";
-  //     tempTexts.spanTitle = "de pago individual";
-  //     tempCourses.forEach((course: ICourse) => {
-  //       if (course.type === "Producto") {
-  //         tempShowCourse.push(course);
-  //       }
-  //       if (user && user.user_courses) {
-  //         user.user_courses.forEach((courses: IUserCourse) => {
-  //           if ((courses.final_date > today) && (course.id === courses.course_id)) {
-  //             course.pay = true;
-  //           }
-  //           else {
-  //             course.pay = false;
-  //           }
-  //         });
-  //       }
-  //       else {
-  //         course.pay = false;
-  //       }
-
-  //     })
-  //     setCourses(tempShowCourse);
-  //     setTexts(tempTexts);
-  //   }
-  //   if (slideType === "monthly-courses") {
-  //     tempTexts.title = "Cursos incluidos en ";
-  //     tempTexts.spanTitle = "Gonvar+";
-  //     tempCourses.forEach((course: ICourse) => {
-  //       if (course.type === "Mensual") {
-  //         tempShowCourse.push(course);
-  //       }
-  //     })
-  //     setCourses(tempShowCourse);
-  //     setTexts(tempTexts);
-  //   }
-  // }
   const getCourseContent = () => {
     let tempTexts: any = {
       title: "",
