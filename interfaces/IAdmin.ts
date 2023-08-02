@@ -1,6 +1,7 @@
 export interface ICancelReview {
   created_at: string;
   email: string;
+  last_name: string;
   fifth_question: number;
   first_question: string;
   fourth_question: number;

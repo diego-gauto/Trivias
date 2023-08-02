@@ -71,6 +71,7 @@ const Cancel = () => {
       await res.map(async (user: ICancelReview) => {
         sendData.push({
           nombre: user.name,
+          apellido: user.last_name,
           email: user.email,
           whatsapp: user.phone_number,
           fecha_de_reacion: user.created_at,
@@ -131,7 +132,7 @@ const Cancel = () => {
                 </div>
               }
               <CsvDownloader
-                filename="usersData"
+                filename="suscripcion_canceladas"
                 extension=".csv"
                 separator=","
                 wrapColumnChar=""

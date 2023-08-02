@@ -39,14 +39,28 @@ export const Container = styled.div`
   .calendar-contain {
     display: flex;
     flex-direction: column;
-    background-color: #6717cd;
     border-radius: 10px 10px 0px 0px;
     position: absolute;
+    background-color: white;
+    .react-calendar__tile {
+      color: #6717cd;
+    }
+    .react-calendar__tile--active {
+      background: #6717cd;
+      color: white;
+    }
+    .react-calendar__month-view__days__day--weekend {
+      color: #d10000;
+    }
+    .react-calendar__tile--now {
+      background: #dad3e5;
+    }
     right: 0px;
     .close-tab {
       display: flex;
       justify-content: flex-end;
       padding: 5px;
+      background-color: #6717cd;
       .close {
         color: white;
         font-size: 20px;
