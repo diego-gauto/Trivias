@@ -18,16 +18,8 @@ export const CancelReview = styled.div`
     flex-direction: column;
     gap: 5px;
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 30px 30px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     min-width: 600px;
-    th {
-      &:first-child {
-        border-radius: 30px 0px 0px 0px;
-      }
-      &:last-child {
-        border-radius: 0px 30px 0px 0px;
-      }
-    }
     td {
       font-size: 12px;
     }
