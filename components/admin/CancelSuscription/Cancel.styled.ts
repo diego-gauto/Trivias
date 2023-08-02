@@ -31,5 +31,31 @@ export const CancelReview = styled.div`
     td {
       font-size: 12px;
     }
+    .name-td {
+      position: relative;
+      .tp {
+        opacity: 0;
+        position: absolute;
+        top: -30px;
+        left: 0;
+        background-color: black;
+        padding-inline: 20px;
+        padding-block: 5px;
+        border-radius: 12px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        p {
+          margin: 0;
+          white-space: nowrap;
+        }
+      }
+      &:hover {
+        .tp {
+          transition: 0.4s ease all;
+          opacity: 1;
+        }
+      }
+    }
   }
 `;

@@ -8,4 +8,5 @@ export interface ICancelReview {
   second_question: string;
   third_question: string;
   user_id: number;
+  phone_number: string;
 }
