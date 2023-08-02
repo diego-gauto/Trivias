@@ -485,7 +485,7 @@ const Purchase = () => {
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}> **** **** **** {x.card.last4}</option>
                       )
                     })}
                   </select>}
@@ -790,7 +790,7 @@ const Purchase = () => {
                       <option value="" disabled>--</option>
                       {cards.map((x: any, idC: number) => {
                         return (
-                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>**** **** **** {x.card.last4}</option>
                         )
                       })}
                     </select>}
