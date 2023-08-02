@@ -8,6 +8,7 @@ import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/pat
 import { useAuth } from "../../../hooks/useAuth";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
+import { conektaCreateSubscription } from "../../api/conekta/test";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -66,9 +67,14 @@ const Mensual = (props: IData) => {
     }
   }
 
+  const test = () => {
+    conektaCreateSubscription()
+  }
+
   return (
     <PlanStyles>
       <div className="break plan-container">
+        <button onClick={test}>Test</button>
         <div className="header">
           <div className="top-tab border Back-p-pink">
           </div>
