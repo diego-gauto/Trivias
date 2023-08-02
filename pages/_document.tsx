@@ -21,7 +21,7 @@ class MyDocument extends Document {
           <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
           <noscript>
             <img height="1" width="1" style={{ display: "none" }}
-              src="https://www.facebook.com/tr?id=5754458981344109&ev=PageView&noscript=1"
+              src="https://www.facebook.com/tr?id=804211551373021&ev=PageView&noscript=1"
             />
           </noscript>
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></script>
