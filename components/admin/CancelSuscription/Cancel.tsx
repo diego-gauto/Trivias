@@ -57,7 +57,12 @@ const Cancel = () => {
               reviews.map((review: ICancelReview, index: number) => {
                 return (
                   <tr key={"cancel-review-" + index}>
-                    <td>{review.name}</td>
+                    <td className='name-td'>{review.name}
+                      <div className='tp'>
+                        <p>Email: {review.email}</p>
+                        <p>Telefono: {review.phone_number}</p>
+                      </div>
+                    </td>
                     <td>{review.first_question}</td>
                     <td>{review.second_question}</td>
                     <td>{review.third_question}</td>
