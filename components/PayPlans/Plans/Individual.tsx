@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { LESSON_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
@@ -47,13 +47,13 @@ const Individual = (props: IData) => {
   const goTo = () => {
     if (user.id) {
       let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
+      console.log(user)
       if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
         router.push({
-          pathname: LESSON_PATH,
-          query: { id: 30, season: 0, lesson: 0 },
+          pathname: PREVIEW_PATH
         });
       }
-      if (tempCourse.length > 0 && tempCourse[0].final_date < today) {
+      if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
         router.push(
           { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
         )
