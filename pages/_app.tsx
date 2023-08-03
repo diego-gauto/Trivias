@@ -17,25 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="canonical" href={CanonicalURL()} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
-        <Script
-          id="fb-pixel"
-          dangerouslySetInnerHTML={{
-            __html:
-              `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '804211551373021');
-              fbq('track', 'PageView');
-    `
-          }}
-        />
-
       </Head>
       <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
         <FacebookProvider appId="3010100615906804">
