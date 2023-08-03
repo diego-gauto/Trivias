@@ -24,6 +24,8 @@ const Form = () => {
   const [userData, setUserData] = useState<any>(null);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+
 
   const {
     formContainer,
@@ -39,6 +41,7 @@ const Form = () => {
     errorMessageApellido,
     errorMessageMail,
     errorMessageWA,
+    buttonEnabled,
   } = styles;
 
   const validationSchema = Yup.object().shape({
@@ -155,6 +158,35 @@ const Form = () => {
     handleRedirect(createUserSuccess);
   };
 
+  const handleButtonClick = () => {
+    console.log("button clicked")
+    // Marcar todos los campos como "touched"
+    formik.setTouched({
+      nombre: true,
+      apellido: true,
+      correo: true,
+      numeroWhatsApp: true,
+    });
+
+    // Realizar la validación del formulario
+    formik.validateForm().then((errors) => {
+      // Verificar si hay errores en los campos
+      const formIsValid = Object.keys(errors).length === 0;
+
+      // Actualizar el estado de validez del formulario
+      setIsFormValid(formIsValid);
+
+      // Si el checkbox está marcado y el formulario es válido, enviar el formulario
+      if (isChecked && formIsValid) {
+        try {
+          formik.handleSubmit();
+        } catch (error) {
+          console.error("Error al enviar el formulario", error);
+        }
+      }
+    });
+  };
+
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -266,9 +298,8 @@ const Form = () => {
           </div>
           <button
             className={btnRecibir}
-            disabled={!isChecked || !formik.isValid}
-            style={{ pointerEvents: isChecked ? "auto" : "none" }}
-            onClick={() => formik.handleSubmit()}
+            disabled={!isChecked}
+            onClick={() => handleButtonClick()}
           >
             Recibir regalo
           </button>

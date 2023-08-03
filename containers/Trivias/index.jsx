@@ -26,13 +26,6 @@ function Trivias() {
     0: 2,
   };
 
-  const titles = [
-    "¿Qué tipo de maquilladora soy",
-    "Gonvar te dice tu futuro en el mundo de las uñas",
-    "¿Cuánto conozco de labiales?",
-    "¿Cuánto se de maquillar pestañas",
-  ];
-
   const trivias = [
     {
       id: 0,

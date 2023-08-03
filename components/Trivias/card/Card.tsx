@@ -22,7 +22,7 @@ export default function Card(props: any) {
 
 
   return (
-    <Link href={`/trivias/${props.triviaId}`}>
+    <Link href={`/trivias/${props.triviaInfo.id}`}>
       <a className={styles.link}>
         <div className={styles.cardContainer}>
           <div className={styles.cardImageUnder} style={cardStyle1}></div>

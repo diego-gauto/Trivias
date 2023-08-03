@@ -1,17 +1,23 @@
+import { useEffect, useState } from "react";
+
+import { getAllTriviasApi } from "../../../components/api/trivias";
 import TriviaSelector from "../TriviaSelector/triviaSelector";
 import styles from "./triviasHome.module.css";
 
-// import mujer1 from "../public/images/mujer1.svg";
-// import mujer2 from "../public/images/mujer2-removebg-preview.png";
-// import mujer3 from "../public/images/mujer3.svg";
-// import mujer4 from "../public/images/mujer4.svg";
+interface Trivia {
+  id: number;
+  img: string;
+  title: string;
+  color: string;
+  trans: string;
+}
 
 const TriviaHome = () => {
-  const trivias = [
+  const triviasMock = [
     {
       id: 0,
-      img: "/images/trivias/mujer1.svg",
-      title: "¿Cuánto te apoya tu esposo en tu emprendimiento de uñas?",
+      img: "/images/trivias/Trivia00/T00-Portada.png",
+      title: "¿Cuánto te apoya tu esposo en tu emprendimiento?",
       color: "#C57DFF",
       trans: "#9115f7",
     },
@@ -37,6 +43,23 @@ const TriviaHome = () => {
       trans: "#156ff7",
     },
   ];
+
+  const [trivias, setTrivias] = useState<Trivia[]>([]);
+
+  useEffect(() => {
+    const fetchTrivias = async () => {
+      try {
+        const triviasData = await getAllTriviasApi();
+        console.log(triviasData)
+        setTrivias(triviasData);
+        // setTrivias(triviasMock)
+      } catch (error) {
+        console.error('Error al obtener las trivias:', error);
+      }
+    };
+
+    fetchTrivias();
+  }, []);
 
   return (
     <div className={styles.home}>

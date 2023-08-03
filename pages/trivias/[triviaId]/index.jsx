@@ -1,6 +1,8 @@
 // import "../containers/home.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+
+import {getTriviaApi} from "../../../components/api/trivias"
 // import { useParams } from "react-router-dom";
 import Trivia from "../../../components/Trivias/trivia/trivia";
 import Result from "../../../components/Trivias/result/result";
@@ -17,6 +19,7 @@ import styles from "./index.module.css";
 function Trivias() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [correct, setCorrect] = useState(0);
+  const [trivia, setTrivia] = useState({})
   const {
     query: { triviaId },
   } = useRouter();
@@ -31,18 +34,11 @@ function Trivias() {
     0: 2,
   };
 
-  const titles = [
-    "¿Cuánto te apoya tu esposo en tu emprendimiento de uñas?",
-    "Gonvar te dice tu futuro en el mundo de las uñas",
-    "¿Qué nivel de manicurista eres?",
-    "Descubre tu bandera roja como manicurista",
-  ];
-
   const trivias = [
     {
       id: 0,
-      img: "/images/trivias/mujer1.svg",
-      title: "¿Cuánto te apoya tu esposo en tu emprendimiento de uñas?",
+      img: "/images/trivias/Trivia00/T00-Portada.png",
+      title: "¿Cuánto te apoya tu esposo en tu emprendimiento?",
       color: "#C57DFF",
       trans: "#9115f7",
     },
@@ -72,16 +68,16 @@ function Trivias() {
   const data = [
     {
       id: 0,
-      imgSelector: "/images/trivias/mujer1.svg",
+      imgSelector: "/images/trivias/Trivia00/T00-Portada.png",
       imgTrivia:"/images/trivias/imgTrivia.png",
       color: "#C57DFF",
       trans: "#9115f7",
-      title: "¿Cuánto te apoya tu esposo en tu emprendimiento de uñas?",
+      title: "¿Cuánto te apoya tu esposo en tu emprendimiento?",
       questions: [
         {
           id: 1,
           question: "Cuando compras material tu esposo …",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia00/T00Q1.jpg",
           answers: [
             {
               text: "Te dice que compres lo que necesites y te da algo más de dinero para que compres algo que te gusto",
@@ -104,7 +100,7 @@ function Trivias() {
         {
           id: 2,
           question: "Tu master favorito estará en tu ciudad, tu esposo …",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia00/T00Q2.jpg",
           answers: [
             {
               text: "Te dice que seguramente habrá otras fechas y además que el costo es muy alto",
@@ -115,7 +111,7 @@ function Trivias() {
               correct: false,
             },
             {
-              text: "Tengo una importante reunión de trabajo ese mismo día y necesito tu apoyo y ayuda en casa. Sería complicado para mí manejar todas las responsabilidades sin ti",
+              text: "Necesito tu apoyo en casa. Tengo una reunión de trabajo importante ese día y no puedo manejar todas las responsabilidades sin ti",
               correct: false,
             },
             {
@@ -127,14 +123,14 @@ function Trivias() {
         {
           id: 3,
           question: "No te fue muy bien en tu curso básico, entonces planeas intentar con otro curso, tu esposo…",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia00/T00Q3.jpg",
           answers: [
             {
               text: "Te dice que siempre es lo mismo, que inicias las cosas y no avanzas",
               correct: false,
             },
             {
-              text: "Te lo dije” solo te iban a robar el dinero y ahora no tienes el dinero y no aprendiste, todo fue una pérdida de tiempo y dinero",
+              text: "Te lo dije, sólo te iban a robar el dinero y ahora no tienes el dinero y no aprendiste. Todo fue una pérdida de tiempo y dinero",
               correct: false,
             },
             {
@@ -150,10 +146,10 @@ function Trivias() {
         {
           id: 4,
           question: "Ya eres una experta aplicando uñas pero aún no tienes un salón, tu esposo…",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia00/T00Q4.jpg",
           answers: [
             {
-              text: "Empieza manos a la obra para convertir tu cochera en tu propio salon",
+              text: "Empieza manos a la obra para convertir tu cochera en tu propio salón",
               correct: true,
             },
             {
@@ -173,7 +169,7 @@ function Trivias() {
         {
           id: 5,
           question: "Estas atendiendo a una clienta y uno de tus hijos te dice que tiene hambre, tu esposo…",
-          imgQuestion:"/images/trivias/imgTrivia.png",
+          imgQuestion:"/images/trivias/Trivia00/T00Q5.jpg",
           answers: [
             {
               text: "Hace como que no escucha y se mete al baño",
@@ -198,21 +194,20 @@ function Trivias() {
         {
           title: "¡Te sacaste la lotería!",
           body: `Querida amiga, tienes un esposo que vale oro. Su apoyo incondicional en tus sueños y emprendimiento de uñas es invaluable. No dejes de valorar cada gesto y palabra de aliento que te brinda. Revisa tu correo para leer tu predicción completa`,
-          img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          img: "/images/trivias/Trivia00/T00R1.jpg",
+          idTemplateBrevo:50,
         },
         {
-          title: "¡A un paso del éxito!",
-          body: `Recuerda que el apoyo y la motivación mutua son fundamentales para que cualquier emprendimiento prospere. Con una comunicación abierta, esfuerzo constante y demostración de resultados, podrán fortalecer su unidad como pareja y avanzar hacia un futuro económico próspero para toda la familia.
-          Revisa tu correo para leer tu predicción completa`,
-          img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          title: "¡Es un buen hombre!",
+          body: `Recuerda que el apoyo y la motivación mutua son fundamentales para que cualquier emprendimiento prospere. Con una comunicación abierta, esfuerzo constante y demostración de resultados, podrán fortalecer su unidad como pareja y avanzar hacia un futuro económico próspero para toda la familia. Revisa tu correo para leer tu predicción completa`,
+          img: "/images/trivias/Trivia00/T00R2.jpg",
+          idTemplateBrevo:51,
         },
         {
-          title: `Una principiante muy  aesthetic`,
-          body:`"Si sientes que la falta de apoyo está afectando seriamente tu relación, es importante abordar el tema de manera abierta y honesta con tu esposo. Comunicar tus sentimientos y tus razones para perseguir este emprendimiento puede ayudar a que él comprenda mejor tus motivaciones y, con el tiempo, quizás cambie de opinión o encuentre maneras de ofrecerte más apoyo.`,
-          img: "/images/trivias/mujerinfluencer.svg",
-          idTemplateBrevo:7,
+          title: `¡Necesitan hablar!`,
+          body:`Si sientes que la falta de apoyo está afectando seriamente tu relación, es importante abordar el tema de manera abierta y honesta con tu esposo. Comunicar tus sentimientos y tus razones para perseguir este emprendimiento puede ayudar a que él comprenda mejor tus motivaciones y, con el tiempo, quizás cambie de opinión o encuentre maneras de ofrecerte más apoyo`,
+          img: "/images/trivias/Trivia00/T00R3.jpg",
+          idTemplateBrevo:52,
         },
       ],
     },
@@ -318,7 +313,7 @@ function Trivias() {
         },
         {
           id: 5,
-          question: "Mi  mayor interés en el mundo de  las uñas es :",
+          question: "Mi  mayor interés en el mundo de  las uñas es:",
           imgQuestion:"/images/trivias/Trivia01/T01Q5.jpg",
           answers: [
             {
@@ -343,26 +338,21 @@ function Trivias() {
       result: [
         {
           title: "La perseverancia te  llevará  al éxito",
-          body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad.
-          Revisa  tu correo para  ver tu futuro completo                                
-          `,
+          body: `Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor. No hay límite para lo que puedes lograr. Cada golpe de pincel es un paso más hacia la realización de tus sueños. Tus habilidades son excepcionales y tu determinación es inspiradora. Los éxitos y las oportunidades están a punto de desplegarse ante ti. Sigue creyendo en ti misma, porque tus sueños están a punto de hacerse realidad. Revisa  tu correo para  ver tu futuro completo`,
           img: "/images/trivias/Trivia01/T01R1.png",
-          idTemplateBrevo:7,
+          idTemplateBrevo:48,
         },
         {
           title: "Tu esfuerzo será recompensado muy pronto",
-          body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad.
-          Te envie un correo con algunos consejos para lograrlo                                
-          `,
+          body: `Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada, donde tus sueños están a punto de materializarse. Tu dedicación y pasión te han preparado para un futuro prometedor. Con cada pincelada, construirás una carrera brillante, dejando huella en cada mano que toques. Las puertas se abrirán para ti, y te encontrarás rodeada de éxitos y oportunidades. Mantén la fe en ti misma, porque tus sueños están a punto de convertirse en realidad. Te envie un correo con algunos consejos para lograrlo`,
           img: "/images/trivias/Trivia01/T01R2.png",
-          idTemplateBrevo:7,
+          idTemplateBrevo:47,
         },
         {
           title: `Tus manos tienen el poder de pintar un camino lleno de éxito`,
-          body:`Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!            
-         `,
+          body:`Querida mujer, tu determinación y valentía son inquebrantables. Aunque puedas enfrentar desafíos y falta de apoyo, no permitas que eso te detenga. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte. Tus habilidades brillantes y tu dedicación te llevarán lejos. Recuerda que las opiniones negativas no definen tu camino, sino tu fuerza interior. Sigue adelante con confianza y alcanzarás tus metas. El mundo espera ansiosamente tu talento. ¡No te rindas!`,
           img: "/images/trivias/Trivia01/T01R3.png",
-          idTemplateBrevo:7,
+          idTemplateBrevo:49,
         },
       ],
     },
@@ -376,7 +366,7 @@ function Trivias() {
         questions: [
           {
             id: 1,
-            question: "Es una característica del monómero con MMA.",
+            question: "Es una característica del monómero con MMA",
             imgQuestion:"/images/trivias/Trivia02/T02Q1.jpg",
             answers: [
               {
@@ -476,7 +466,7 @@ function Trivias() {
                 correct: false,
               },
               {
-                text: "Colocación del molde, limado , abrillantado",
+                text: "Colocación del molde, limado, abrillantado",
                 correct: false,
               },
               {
@@ -493,31 +483,21 @@ function Trivias() {
         result: [
           {
             title: "¡Toda una profesional!",
-            body: `Se nota tu experiencia a kilómetros.
-            Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga.
-            Explota tus capacidades y lleva al máximo tus  habilidades.
-            Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico.            
-            `,
+            body: `Se nota tu experiencia a kilómetros. Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga. Explota tus capacidades y lleva al máximo tus  habilidades. Comienza a prepararte para que  en poco tiempo puedas impartir cursos y ampliar también tu crecimiento económico`,
             img: "/images/trivias/Trivia02/T02R1.jpg",
-            idTemplateBrevo:7,
+            idTemplateBrevo:44,
           },
           {
             title: "¡A un paso del éxito!",
-            body: `Se notan tus ganas de crecer en este mágico mundo de las uñas.
-            En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas.
-            Eres una persona que aprovecha cada oportunidad para seguir aprendiendo y aunque a veces te  cuesta, con un poco de práctica logras siempre tus objetivos.
-            No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración.            
-            `,
+            body: `Se notan tus ganas de crecer en este mágico mundo de las uñas. En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas. Eres una persona que aprovecha cada oportunidad para seguir aprendiendo y aunque a veces te cuesta, con un poco de práctica logras siempre tus objetivos. No necesitas de grandes cantidades de productos para lograr  diseños increíbles y tienes personas muy cercanas que creen en ti y que son tu fuente de inspiración`,
             img: "/images/trivias/Trivia02/T02R2.jpg",
-            idTemplateBrevo:7,
+            idTemplateBrevo:45,
           },
           {
             title: `Una principiante muy  aesthetic`,
-            body:`¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.
-            Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia.                        
-           `,
+            body:`¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación. Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que aprendas te llevarán un paso más cerca de convertirte en una maestra de las uñas. No te desanimes si al principio tus creaciones no son perfectas. El progreso se logra a través de la práctica y la perseverancia`,
             img: "/images/trivias/Trivia02/T02R3.jpg",
-            idTemplateBrevo:7,
+            idTemplateBrevo:46,
           },
         ],
       },
@@ -547,7 +527,7 @@ function Trivias() {
                 correct: false,
               },
               {
-                text: "Cierras y te vas a tu casa ",
+                text: "Cierras y te vas a tu casa",
                 correct: false,
               },
             ],
@@ -570,7 +550,7 @@ function Trivias() {
                 correct: false,
               },
               {
-                text: "Si es un error de nuestra parte, lo corregiremos sin costo adicional. Siempre estamos dispuestos a ayudar y asegurarnos de que estés contenta con nuestros servicios",
+                text: "Corregiremos cualquier error sin costo adicional. Siempre dispuestos a ayudarte y garantizar tu satisfacción",
                 correct: true,
               },
             ],
@@ -589,7 +569,7 @@ function Trivias() {
                 correct: false,
               },
               {
-                text: "Evaluaría críticamente mi progreso y buscaría retroalimentación de profesionales para identificar áreas de mejora y seguir capacitándome hasta alcanzar los resultados que deseo",
+                text: "Evaluaría mi progreso, buscaría retroalimentación y me capacitaría para alcanzar mis metas",
                 correct: true,
               },
               {
@@ -604,7 +584,7 @@ function Trivias() {
             imgQuestion:"/images/trivias/imgTrivia.png",
             answers: [
               {
-                text: "Le expresaría sinceramente que no tengo experiencia en ese diseño específico, pero que estaría encantada de ofrecerle otras opciones de diseños que pueda realizar con confianza y habilidad. También podría ofrecerle referencias de otros profesionales que se especialicen en el diseño que está buscando",
+                text: "Ofrecería opciones confiables y referencias de otros profesionales",
                 correct: true,
               },
               {
@@ -612,7 +592,7 @@ function Trivias() {
                 correct: false,
               },
               {
-                text: "Podría intentar diluir el monómero de baja calidad para estirar el producto y reducir costos",
+                text: "Intentaría hacer el diseño a pesar de no saber cómo, arriesgándome a arruinar las uñas de la cliente",
                 correct: false,
               },
               {
@@ -636,41 +616,71 @@ function Trivias() {
               },
               {
                 text: "Podría intentar diluir el monómero de baja calidad para estirar el producto y reducir costos",
-                correct: true,
+                correct: false,
               },
               {
-                text: "Rechazaría el monómero de baja calidad, ya que la calidad de mis aplicaciones y la satisfacción de mis clientes son mi máxima prioridad. Buscaría un proveedor confiable que me ofrezca productos de alta calidad a precios razonables para garantizar un servicio excepcional",
-                correct: false,
+                text: "Priorizo la calidad y satisfacción del cliente. Buscaría un proveedor confiable con productos de alta calidad a precios razonables",
+                correct: true,
               },
             ],
           },
         ],
         result: [
           {
-            title: "¡Te sacaste la lotería!",
-            body: `Tu capacidad para actuar con calma y confianza en cada situación es asombrosa y te ha convertido en un referente en el mundo de la belleza. Sin duda, tu habilidad para aplicar uñas sin cometer errores y sin que aparezcan banderas rojas es excepcional, y ha dejado maravillados a todos aquellos que han tenido el placer de disfrutar de tus creaciones.
-            revisa tu correo para revisar tu reporte completo
-            `,
+            title: "¡Eres la resiliencia en su totalidad!",
+            body: `Tu capacidad para actuar con calma y confianza en cada situación es asombrosa y te ha convertido en un referente en el mundo de la belleza. Sin duda, tu habilidad para aplicar uñas sin cometer errores y sin que aparezcan banderas rojas es excepcional, y ha dejado maravillados a todos aquellos que han tenido el placer de disfrutar de tus creaciones. Revisa tu correo para revisar tu reporte completo`,
             img: "/images/trivias/mujerinfluencer.svg",
-            idTemplateBrevo:7,
+            idTemplateBrevo:53,
           },
           {
-            title: "¡A un paso del éxito!",
-            body: `¡Eres una estrella en ascenso en el arte de las uñas! Tu pasión y talento son evidentes, y aunque aún estás desarrollando tu experiencia, ¡lo estás haciendo genial! Si sueñas con perfeccionar tus habilidades y alcanzar nuevas alturas en este emocionante campo
-            revisa tu correo para ver tu reporte completo
-            `,
+            title: "¡Eres una estrella en ascenso en el arte de las uñas!",
+            body: `Tu pasión y talento son evidentes, y aunque aún estás desarrollando tu experiencia, ¡lo estás haciendo genial! Si sueñas con perfeccionar tus habilidades y alcanzar nuevas alturas en este emocionante campo. Revisa tu correo para ver tu reporte completo`,
             img: "/images/trivias/mujerinfluencer.svg",
-            idTemplateBrevo:7,
+            idTemplateBrevo:54,
           },
           {
-            title: `Una principiante muy  aesthetic`,
+            title: `¡Estás cerca de ser lo que soñaste!`,
             body:`Sé que tienes una pasión innata por el arte de aplicar uñas y que actualmente sientes que la falta de capacitación y experiencia puede estar obstaculizando tu crecimiento profesional. Pero déjame decirte que estás a punto de descubrir una oportunidad única que cambiará tu vida de manera extraordinaria`,
             img: "/images/trivias/mujerinfluencer.svg",
-            idTemplateBrevo:7,
+            idTemplateBrevo:55,
           },
         ],
       },
   ];
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        console.log(triviaId)
+        const res = await getTriviaApi(Number(triviaId));
+        console.log(res)
+
+        const triviaTemp = res[0]
+
+        // Parsear la cadena JSON en la propiedad "questions"
+        triviaTemp.questions = JSON.parse(triviaTemp.questions);
+
+        // Parsear la cadena JSON en la propiedad "result"
+        triviaTemp.result = JSON.parse(triviaTemp.result);
+
+
+        console.log(triviaTemp)
+
+        if (triviaTemp) {
+          // let prevTrivia = trivia;
+          setTrivia(triviaTemp);
+        }
+        console.log(trivia)
+      } catch (error) {
+        console.error('Error al obtener los datos de la trivia:', error);
+      }
+
+    };
+
+    fetchData();
+
+  }, []);
 
   useEffect(() => {
     if (questionNumber > 5) {
@@ -680,24 +690,20 @@ function Trivias() {
 
   return (
     <div className={styles.app}>
-      {/* <style jsx global>{`
-        body {
-          margin: 0px;
-          padding: 0px;
-        }
-      `}</style> */}
-      {questionNumber > 5 ? (
+      {/* {questionNumber > 5 ? (
         <Result
-          resultInfo={data[triviaId]?.result[RESULT_DIC[correct]]}
+          // resultInfo={data[triviaId]?.result[RESULT_DIC[correct]]}
+          resultInfo={trivia?.result[RESULT_DIC[correct]]}
           result={RESULT_DIC[correct]}
         />
       ) : (
-        // <div className={styles.app}>
           <div className={styles.main}>
             <div className={styles.trivia}>
               <Trivia
-                triviaTitle={data[triviaId]?.title}
-                data={data[triviaId]?.questions}
+                // triviaTitle={data[triviaId]?.title}
+                // data={data[triviaId]?.questions}
+                triviaTitle={trivia?.title}
+                data={trivia?.questions}
                 questionNumber={questionNumber}
                 setQuestionNumber={setQuestionNumber}
                 setCorrect={setCorrect}
@@ -707,8 +713,32 @@ function Trivias() {
               <img src={data[triviaId]?.questions[questionNumber-1]?.imgQuestion} alt="" />
             </div>
           </div>
-        // {/* </div> */}
-      )}
+      )} */}
+          {trivia?.questions ? (
+      questionNumber > 5 ? (
+        <Result
+          resultInfo={trivia?.result[RESULT_DIC[correct]]}
+          result={RESULT_DIC[correct]}
+        />
+      ) : (
+        <div className={styles.main}>
+          <div className={styles.trivia}>
+            <Trivia
+              triviaTitle={trivia?.title}
+              data={trivia?.questions}
+              questionNumber={questionNumber}
+              setQuestionNumber={setQuestionNumber}
+              setCorrect={setCorrect}
+            />
+          </div>
+          <div className={styles.publicity}>
+            <img src={trivia?.questions[questionNumber - 1]?.imgQuestion} alt="" />
+          </div>
+        </div>
+      )
+    ) : (
+      <p>Cargando...</p>
+    )}
       <Banner />
 
       <h3 className={styles.subtitle} style={{ marginTop: 2 + "rem" }}>

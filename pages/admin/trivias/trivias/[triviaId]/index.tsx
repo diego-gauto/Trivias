@@ -482,41 +482,60 @@ Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que 
         console.log(Number(triviaId))
         // const trivia = await getAllTriviasApi();
         const res = await getTriviaApi(Number(triviaId));
-        const trivia = res[0]
+        const triviaTemp = res[0]
         // Parsear la cadena JSON en la propiedad "questions"
-        trivia.questions = JSON.parse(trivia.questions);
+        triviaTemp.questions = JSON.parse(triviaTemp.questions);
 
         // Parsear la cadena JSON en la propiedad "result"
-        trivia.result = JSON.parse(trivia.result);
+        triviaTemp.result = JSON.parse(triviaTemp.result);
 
 
-        console.log(trivia)
+        console.log(triviaTemp)
+
+        if (triviaTemp) {
+          // let prevTrivia = trivia;
+          setUpdatedTrivia(triviaTemp);
+
+          const initialImagePaths: { [key: string]: string } = {};
+
+          initialImagePaths["imgPathSelector"] = triviaTemp.imgSelector;
+
+          triviaTemp.questions.forEach((question: any) => {
+            initialImagePaths[`imgPathQuestion-${question.id}`] = question.imgQuestion;
+          });
+
+          triviaTemp.result.forEach((result: any, index: any) => {
+            initialImagePaths[`imgPathResult-${index}`] = result.img;
+          });
+
+          setImagePaths(initialImagePaths);
+        }
       } catch (error) {
-        console.error('Error al obtener los usuarios:', error);
+        console.error('Error al obtener la trivia:', error);
       }
 
     };
 
     fetchData();
 
-    if (trivia) {
-      let prevTrivia = trivia;
-      setUpdatedTrivia(prevTrivia);
+    // if (trivia) {
+    //   let prevTrivia = trivia;
+    //   setUpdatedTrivia(prevTrivia);
 
-      const initialImagePaths: { [key: string]: string } = {};
+    //   const initialImagePaths: { [key: string]: string } = {};
 
-      initialImagePaths["imgPathSelector"] = prevTrivia.imgSelector;
+    //   initialImagePaths["imgPathSelector"] = prevTrivia.imgSelector;
 
-      prevTrivia.questions.forEach((question) => {
-        initialImagePaths[`imgPathQuestion-${question.id}`] = question.imgQuestion;
-      });
+    //   prevTrivia.questions.forEach((question) => {
+    //     initialImagePaths[`imgPathQuestion-${question.id}`] = question.imgQuestion;
+    //   });
 
-      prevTrivia.result.forEach((result, index) => {
-        initialImagePaths[`imgPathResult-${index}`] = result.img;
-      });
+    //   prevTrivia.result.forEach((result, index) => {
+    //     initialImagePaths[`imgPathResult-${index}`] = result.img;
+    //   });
 
-      setImagePaths(initialImagePaths);
-    }
+    //   setImagePaths(initialImagePaths);
+    // }
   }, []);
 
   const isQuestionInput = (name: string) => name.startsWith("question-");

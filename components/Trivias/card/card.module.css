@@ -40,12 +40,12 @@
 
 .cardText {
   position: relative;
-  bottom: 55px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
   color: white;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: bold;
   width: 100%;
   text-align: center;

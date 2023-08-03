@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import TriviaList from "../../../../components/admin/Trivias/triviaList/triviaList";
+import { getAllTriviasApi } from "../../../../components/api/trivias";
 
 interface Trivia {
   id: number;
@@ -49,9 +50,9 @@ const ListTrivias = () => {
   useEffect(() => {
     const fetchTrivias = async () => {
       try {
-        // const triviasData = await getAllTriviasApi();
-        // setTrivias(triviasData.data.data);
-        setTrivias(triviasMock)
+        const triviasData = await getAllTriviasApi();
+        setTrivias(triviasData);
+        // setTrivias(triviasMock)
       } catch (error) {
         console.error('Error al obtener las trivias:', error);
       }

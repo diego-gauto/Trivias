@@ -29,7 +29,7 @@ export default function Trivia({
 
   useEffect(() => {
     setQuestionTrivia(data[questionNumber - 1]);
-  }, [data, questionNumber]);
+  }, [questionNumber]);
 
   const handleClickOption = (a: any) => {
     setSelectedAnswer(a.text);

@@ -20,7 +20,7 @@ const TriviaRow = ({ trivia, idTrivia }: TriviaRowProps) => {
 
     <tr className="pointer">
 
-      <td>{trivia.id + 1}</td>
+      <td>{trivia.id}</td>
       <td>
         <Link href={`/admin/trivias/trivias/${idTrivia}`}>
           <a>{trivia.title}</a>
