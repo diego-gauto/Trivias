@@ -83,6 +83,7 @@ const LandingNailsMaster = () => {
   const handleMats = () => {
     setverMat(false)
   }
+  let today = new Date().getTime() / 1000;
 
   const getRevs = () => {
     getLandingReviewApi().then((res) => {
@@ -122,10 +123,16 @@ const LandingNailsMaster = () => {
   const handleRedirection = () => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then((res) => {
-        if (res.level !== 0) {
-          router.push(PREVIEW_PATH)
-        } else {
-          router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
+        let tempCourse = res.user_courses.filter((x: any) => x.course_id === 30)
+        if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+          router.push({
+            pathname: PREVIEW_PATH
+          });
+        }
+        if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
+          router.push(
+            { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+          )
         }
       })
     } else {
