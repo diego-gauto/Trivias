@@ -13,6 +13,7 @@ import {
   addUserCouponApi,
   createInvoiceApi,
   createPaymentMethodApi,
+  deleteSubscriptionAfterCreation,
   getCourseForCheckoutApi,
   stripePaymentApi,
   stripeSubscriptionApi,
@@ -241,12 +242,24 @@ const Purchase = () => {
             }
             setLoader(false);
           } else {
-            localStorage.removeItem("trial")
-            setPay(true);
-            setLoader(false);
-            updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
-            setConfirmation(false);
-            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+            if (res.subscription.status === "active") {
+              localStorage.removeItem("trial")
+              setPay(true);
+              setLoader(false);
+              updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+              setConfirmation(false);
+              window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+
+            } else {
+              let sub = {
+                subscriptionId: res.subscription.id,
+                userId: userData.user_id
+              }
+              deleteSubscriptionAfterCreation(sub).then((res) => {
+                const msg = "Pago Rechazado"
+                window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+              })
+            }
           }
         })
       } else {

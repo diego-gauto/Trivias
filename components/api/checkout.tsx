@@ -65,3 +65,15 @@ export const getCourseForCheckoutApi = async (courseId: any) => {
       return error
     });
 };
+
+export const deleteSubscriptionAfterCreation = async (subscription: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "checkout/delete/subscription", subscription)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
