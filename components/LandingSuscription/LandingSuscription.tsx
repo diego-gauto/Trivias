@@ -84,6 +84,8 @@ const antonio = "/images/landing_suscription/Antonio.png"
 const liz = "/images/landing_suscription/Liz.png"
 const left_responsive_girls = "/images/landing_suscription/responsive/chica_izquierda.svg"
 const right_responsive_girls = "/images/landing_suscription/responsive/chica_derecha.svg"
+const left_girl = "/images/landing_suscription/left_girl.png"
+const right_girl = "/images/landing_suscription/right_girl.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -183,7 +185,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <div className="background-images">
           <img src={upsideLines} />
           <div className="image-contain">
-            <img src={backPpal} className="women-back" />
+            <img src={left_girl} className="left-woman" />
+            <img src={right_girl} className="right-woman" />
             <div className="images-fade" />
           </div>
         </div>

@@ -14,6 +14,60 @@ export const Container = styled.div`
   border-radius: 10px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  .right-data {
+    position: relative;
+    width: 350px;
+  }
+  .input-contain {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-weight: 600;
+      color: #6717cd;
+    }
+    select {
+      padding-block: 5px;
+      padding-inline: 20px;
+      border-radius: 100px;
+      border: 1px solid #6717cd;
+    }
+    option {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  .calendar-contain {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px 10px 0px 0px;
+    position: absolute;
+    background-color: white;
+    .react-calendar__tile {
+      color: #6717cd;
+    }
+    .react-calendar__tile--active {
+      background: #6717cd;
+      color: white;
+    }
+    .react-calendar__month-view__days__day--weekend {
+      color: #d10000;
+    }
+    .react-calendar__tile--now {
+      background: #dad3e5;
+    }
+    right: 0px;
+    .close-tab {
+      display: flex;
+      justify-content: flex-end;
+      padding: 5px;
+      background-color: #6717cd;
+      .close {
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+  }
   .pages {
     display: flex;
     justify-content: space-between;

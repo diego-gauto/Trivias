@@ -82,6 +82,7 @@ const Purchase = () => {
         guardCheckout(res);
         let cards = res.payment_methods;
         if (cards.length > 0) {
+          setCardInfo(false);
           setPayment(true);
           if (cards.filter((x: any) => x.default).length === 0) {
             cards[0].default = true;
@@ -162,6 +163,7 @@ const Purchase = () => {
 
   const handleConfirm = async () => {
     setLoader(true);
+
     if (cardInfo) {
       delete card.brand
       delete card.cardId
@@ -169,10 +171,12 @@ const Purchase = () => {
       delete card.status
       delete card.paymentMethod
     }
+
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
       setError(true);
-      setLoader(false)
+      setLoader(false);
     }
+
     if (cardInfo && Object.values(card).every(value => value !== '')) {
       createPaymentMethodApi(card).then((res) => {
         if (res.status === 400) {
@@ -485,7 +489,7 @@ const Purchase = () => {
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}> **** **** **** {x.card.last4}</option>
                       )
                     })}
                   </select>}
@@ -790,7 +794,7 @@ const Purchase = () => {
                       <option value="" disabled>--</option>
                       {cards.map((x: any, idC: number) => {
                         return (
-                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>**** **** **** {x.card.last4}</option>
                         )
                       })}
                     </select>}
