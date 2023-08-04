@@ -9,6 +9,9 @@ import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
 
+const tarjetas = "/images/pay_plans/cards.png"
+const oxxo = "/images/pay_plans/oxxo.png"
+
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [selected, setSelected] = useState(1)
