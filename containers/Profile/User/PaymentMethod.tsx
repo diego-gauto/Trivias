@@ -68,7 +68,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
     })
   }
   const detachPayment = async (card: any) => {
-    if (card.default || pm.length === 1) {
+    if (card.default && user.level === 1 || pm.length === 1 && user.level === 1) {
       setShow(true);
       return;
     }
