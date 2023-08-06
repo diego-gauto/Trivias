@@ -345,8 +345,11 @@ const Purchase = () => {
       }
     }
     if (plan.method == 'paypal') {
+      console.log(1);
+
       setLoader(false);
       if (type == 'subscription') {
+        console.log(2);
         setConfirmation(false);
         setPay(true);
         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -436,6 +439,9 @@ const Purchase = () => {
       FinishPayment();
     }
     if (plan.method == "paypal" && type == "course") {
+      FinishPayment();
+    }
+    if (plan.method == "paypal" && type == "subscription") {
       FinishPayment();
     }
   }, [card, plan])
