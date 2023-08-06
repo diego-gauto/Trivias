@@ -345,11 +345,8 @@ const Purchase = () => {
       }
     }
     if (plan.method == 'paypal') {
-      console.log(1);
-
       setLoader(false);
       if (type == 'subscription') {
-        console.log(2);
         setConfirmation(false);
         setPay(true);
         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -635,7 +632,7 @@ const Purchase = () => {
                         updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                         setConfirmation(false);
                         setPay(true);
-                        FinishPayment();
+                        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
                         return data
                       }}
                     />}
@@ -941,7 +938,7 @@ const Purchase = () => {
                           updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                           setConfirmation(false);
                           setPay(true);
-                          FinishPayment();
+                          window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
                           return data
                         }}
                       />}
