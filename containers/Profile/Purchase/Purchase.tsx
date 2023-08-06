@@ -438,9 +438,9 @@ const Purchase = () => {
     if (card.cardId) {
       FinishPayment();
     }
-    if (plan.method == "paypal" && type == "course") {
-      FinishPayment();
-    }
+    // if (plan.method == "paypal" && type == "course") {
+    //   FinishPayment();
+    // }
     // if (plan.method == "paypal" && type == "subscription") {
     //   FinishPayment();
     // }
@@ -635,6 +635,7 @@ const Purchase = () => {
                         updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                         setConfirmation(false);
                         setPay(true);
+                        FinishPayment();
                         return data
                       }}
                     />}
@@ -669,6 +670,7 @@ const Purchase = () => {
                       onApprove={(data, actions: any) => {
                         return actions.order.capture().then((details: any) => {
                           setPlan({ method: "paypal" })
+                          FinishPayment();
                         });
                       }}
                     />}
@@ -940,6 +942,7 @@ const Purchase = () => {
                           updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                           setConfirmation(false);
                           setPay(true);
+                          FinishPayment();
                           return data
                         }}
                       />}
@@ -974,6 +977,7 @@ const Purchase = () => {
                         onApprove={(data, actions: any) => {
                           return actions.order.capture().then((details: any) => {
                             setPlan({ method: "paypal" })
+                            FinishPayment();
                           });
                         }}
                       />}
