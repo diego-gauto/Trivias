@@ -438,9 +438,9 @@ const Purchase = () => {
     if (card.cardId) {
       FinishPayment();
     }
-    // if (plan.method == "paypal" && type == "course") {
-    //   FinishPayment();
-    // }
+    if (plan.method == "paypal" && type == "course") {
+      FinishPayment();
+    }
     // if (plan.method == "paypal" && type == "subscription") {
     //   FinishPayment();
     // }
@@ -670,7 +670,6 @@ const Purchase = () => {
                       onApprove={(data, actions: any) => {
                         return actions.order.capture().then((details: any) => {
                           setPlan({ method: "paypal" })
-                          FinishPayment();
                         });
                       }}
                     />}
@@ -977,7 +976,6 @@ const Purchase = () => {
                         onApprove={(data, actions: any) => {
                           return actions.order.capture().then((details: any) => {
                             setPlan({ method: "paypal" })
-                            FinishPayment();
                           });
                         }}
                       />}
