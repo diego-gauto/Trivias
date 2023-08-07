@@ -171,3 +171,25 @@ export const updateStripe = async (body: any) => {
       return error
     });
 };
+
+export const stripePm = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "users/stripe/paymentMethods", user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      return error
+    });
+};
+
+export const conektaPm = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "users/conekta/paymentMethods", user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      return error
+    });
+};

@@ -6,20 +6,15 @@ import {
   WhiteLoader,
   LoaderContain,
 } from "./User.styled";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../../firebase/firebaseConfig";
-import { deletePaymentMethod, updatePaymentMethod } from "../../../store/actions/ProfileActions";
-import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { addPaymentMethod } from "../../../store/actions/PaymentActions";
 import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, setDefaultPaymentMethod } from "../../../components/api/profile";
+import { conektaPm, stripePm } from "../../../components/api/users";
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
-  const [show, setShow] = useState(false);
-  const [user, setUser] = useState<any>({ data })
-  const handleShow = () => setShow(true);
   const [loader, setLoader] = useState<any>(false);
   const [deleteLoad, setDeleteLoad] = useState<any>(false);
+  const [paymentMethods, setPaymentMethods] = useState([]);
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
@@ -69,6 +64,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
       setDeleteLoad(false);
     })
   }
+
   const detachPayment = async (card: any) => {
     setDeleteLoad(!loader);
     let info = {
@@ -81,8 +77,26 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   }
 
   useEffect(() => {
-    setUser({ ...data })
+    let body = {
+      stripe_id: data.stripe_id,
+      conekta_id: data.conekta_id
+    }
+    if (data.conekta_id === null) {
+      stripePm(body).then((res) => {
+        const conektaPaymentMethods = res.data.payment_methods.data
+        const extractedProperties = conektaPaymentMethods.map(({ id, card: { brand }, card: { last4 }, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
+        setPaymentMethods(extractedProperties);
+      })
+    } else {
+      conektaPm(body).then((res) => {
+        const conektaPaymentMethods = res.data.payment_methods.data
+        const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
+        setPaymentMethods(extractedProperties);
+      })
+    }
   }, [data])
+
+
 
   return (
     <PaymentMethodContainer add={addPayment}>
@@ -94,8 +108,8 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
           !deleteLoad
             ?
             <>
-              {pm.length > 0 ? <>
-                {pm.map((pm: any, index: any) => {
+              {paymentMethods.length > 0 ? <>
+                {paymentMethods.map((pm: any, index: any) => {
                   return (
                     <React.Fragment key={"pmUser " + index}>
                       <div className="card-contain" >
@@ -105,16 +119,16 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
                         >
                           <CardIconResp>
                             {
-                              pm.card.brand == "visa" &&
+                              pm.brand == "visa" &&
                               <img src="/images/profile/visaLogo.png" />
                             }
                             {
-                              pm.card.brand == "mastercard" &&
+                              pm.brand == "mastercard" &&
                               <img src="/images/profile/masterCardLogo.png" />
                             }
                           </CardIconResp>
                           {/* <CardIconResp brand={pm.brand} /> */}
-                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.card.last4}</span></p>
+                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
                           {
                             pm.default
                               ?
