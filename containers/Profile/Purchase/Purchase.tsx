@@ -625,11 +625,11 @@ const Purchase = () => {
                           plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                         })
                       }}
-                      onApprove={(data: any, actions) => {
+                      onApprove={async (data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
                         finalDate = today + 2629800;
-                        updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                         setConfirmation(false);
                         setPay(true);
                         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -931,11 +931,11 @@ const Purchase = () => {
                             plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                           })
                         }}
-                        onApprove={(data: any, actions) => {
+                        onApprove={async (data: any, actions) => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
                           finalDate = today + 2629800;
-                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                           setConfirmation(false);
                           setPay(true);
                           window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
