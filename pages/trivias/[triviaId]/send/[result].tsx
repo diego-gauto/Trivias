@@ -42,6 +42,7 @@ const Form = () => {
     errorMessageMail,
     errorMessageWA,
     buttonEnabled,
+    terminos
   } = styles;
 
   const validationSchema = Yup.object().shape({
@@ -293,7 +294,7 @@ const Form = () => {
             />
             <label htmlFor="checkbox">
               He leído y acepto los{" "}
-              <span>Términos y Condiciones y Políticas de privacidad</span>
+              <span><Link href={"https://www.gonvar.io/terms-condition"}><a className={terminos} target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></Link> y <Link href={"https://www.gonvar.io/politica-privacidad"}><a className={terminos} target="_blank" rel="noopener noreferrer">Políticas de privacidad</a></Link></span>
             </label>
           </div>
           <button

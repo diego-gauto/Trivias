@@ -17,9 +17,6 @@ export default function Card(props: any) {
     background: `linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, ${props.triviaInfo?.trans} 100%)`,
   };
 
-  const triviaId = Number(props.key)
-  console.log(props)
-
 
   return (
     <Link href={`/trivias/${props.triviaInfo.id}`}>

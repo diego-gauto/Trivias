@@ -49,6 +49,7 @@
   font-weight: bold;
   width: 100%;
   text-align: center;
+  padding: 0 2px 0 2px;
 }
 
 .link {
@@ -79,7 +80,7 @@
   .cardText {
 
     font-size: 17px;
-    bottom: 30px;
+    bottom: 60px;
   }
 
 }
@@ -108,7 +109,7 @@
   .cardText {
 
     font-size: 12px;
-    bottom: 25px;
+    bottom: 40px;
   }
 
 }
@@ -137,7 +138,7 @@
   .cardText {
 
     font-size: 11px;
-    bottom: 22px;
+    bottom: 35px;
   }
 
 }
