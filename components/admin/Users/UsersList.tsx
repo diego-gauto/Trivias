@@ -232,7 +232,7 @@ const UsersList = () => {
     console.log(filters);
     userForExcel(text_value === "" ? "all_users" : text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
       setTotalUsers(res.length);
-      setMaxPages(Math.floor(res.length / usersPerPage));
+      setMaxPages(Math.ceil(res.length / usersPerPage));
     })
   }
   const getUsers = async () => {

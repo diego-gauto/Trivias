@@ -13,6 +13,7 @@ import {
   addUserCouponApi,
   createInvoiceApi,
   createPaymentMethodApi,
+  deleteSubscriptionAfterCreation,
   getCourseForCheckoutApi,
   stripePaymentApi,
   stripeSubscriptionApi,
@@ -92,6 +93,7 @@ const Purchase = () => {
         guardCheckout(res);
         let cards = res.payment_methods;
         if (cards.length > 0) {
+          setCardInfo(false);
           setPayment(true);
           if (cards.filter((x: any) => x.default).length === 0) {
             cards[0].default = true;
@@ -172,6 +174,7 @@ const Purchase = () => {
 
   const handleConfirm = async () => {
     setLoader(true);
+
     if (cardInfo) {
       delete card.brand
       delete card.cardId
@@ -179,10 +182,12 @@ const Purchase = () => {
       delete card.status
       delete card.paymentMethod
     }
+
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
       setError(true);
-      setLoader(false)
+      setLoader(false);
     }
+
     if (cardInfo && Object.values(card).every(value => value !== '')) {
       if (plan.method === 'stripe') {
         createPaymentMethodApi(card).then((res) => {
@@ -273,12 +278,24 @@ const Purchase = () => {
             }
             setLoader(false);
           } else {
-            localStorage.removeItem("trial")
-            setPay(true);
-            setLoader(false);
-            updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
-            setConfirmation(false);
-            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+            if (res.subscription.status === "active") {
+              localStorage.removeItem("trial")
+              setPay(true);
+              setLoader(false);
+              updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+              setConfirmation(false);
+              window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+
+            } else {
+              let sub = {
+                subscriptionId: res.subscription.id,
+                userId: userData.user_id
+              }
+              deleteSubscriptionAfterCreation(sub).then((res) => {
+                const msg = "Pago Rechazado"
+                window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+              })
+            }
           }
         })
       }
@@ -460,6 +477,9 @@ const Purchase = () => {
     if ((plan.method == "paypal" && type == "course") || (plan.method == "paypal" && nailmasterplusanual === 'true')) {
       FinishPayment();
     }
+    // if (plan.method == "paypal" && type == "subscription") {
+    //   FinishPayment();
+    // }
   }, [card, plan])
 
   return (
@@ -524,7 +544,7 @@ const Purchase = () => {
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}> **** **** **** {x.card.last4}</option>
                       )
                     })}
                   </select>}
@@ -644,13 +664,14 @@ const Purchase = () => {
                           plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                         })
                       }}
-                      onApprove={(data: any, actions) => {
+                      onApprove={async (data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
                         finalDate = today + 2629800;
-                        updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                         setConfirmation(false);
                         setPay(true);
+                        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
                         return data
                       }}
                     />}
@@ -831,7 +852,7 @@ const Purchase = () => {
                       <option value="" disabled>--</option>
                       {cards.map((x: any, idC: number) => {
                         return (
-                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>{x.card.last4}</option>
+                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>**** **** **** {x.card.last4}</option>
                         )
                       })}
                     </select>}
@@ -951,13 +972,14 @@ const Purchase = () => {
                             plan_id: frequency === "month" ? 'P-2P063165RR167053TMRKD7BQ' : 'P-1VN62329L4770474AMSHBSZY'
                           })
                         }}
-                        onApprove={(data: any, actions) => {
+                        onApprove={async (data: any, actions) => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
                           finalDate = today + 2629800;
-                          updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
                           setConfirmation(false);
                           setPay(true);
+                          window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
                           return data
                         }}
                       />}

@@ -163,6 +163,9 @@ export const MainContainer = styled.div`
           color: #74549c;
           margin: 0;
           font-weight: 600;
+          svg {
+            color: #4fb6ec;
+          }
           span {
             font-size: 14px;
             font-weight: 500;

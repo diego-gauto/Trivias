@@ -512,12 +512,14 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                 <Box2>
                   <div className="separate" />
                   <InputPhone
-                    value={userData.phone_number === 'undefined' ? '' : userData.phone_number}
+                    value={userData.phone_number === 'undefined' ? '' : "+" + userData.phone_number}
                     limitMaxLength={true}
                     international={true}
                     countryCallingCodeEditable={false}
                     onChange={(e: any) => {
-                      setUser({ ...user, phone_number: e })
+                      setUser({ ...user, phone_number: e });
+                      console.log(e);
+
                     }}
                   />
                 </Box2>

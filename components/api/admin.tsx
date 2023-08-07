@@ -441,9 +441,32 @@ export const cancelReview = async (review: any) => {
       return error
     });
 };
-export const getCancelReviewApi = async () => {
+export const getCancelReviewApi = async (limit: number, offset: number, date: string, date_1: string, date_2: string) => {
+  let body = {
+    limit: limit,
+    offset: offset,
+    date_status: date,
+    date_1: date_1,
+    date_2: date_2,
+  }
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/cancel/reviews")
+    .post("https://gonvar.inowu.dev/" + "admin/cancel/reviews", body)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const cancelReviewExcel = async (date: string, date_1: string, date_2: string) => {
+  let body = {
+    date_status: date,
+    date_1: date_1,
+    date_2: date_2,
+  }
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/cancel-excel/reviews", body)
     .then((res) => {
       return res.data.data
     })

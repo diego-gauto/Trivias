@@ -21,7 +21,7 @@ class MyDocument extends Document {
           <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
           <noscript>
             <img height="1" width="1" style={{ display: "none" }}
-              src="https://www.facebook.com/tr?id=5754458981344109&ev=PageView&noscript=1"
+              src="https://www.facebook.com/tr?id=804211551373021&ev=PageView&noscript=1"
             />
           </noscript>
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></script>
@@ -33,6 +33,22 @@ class MyDocument extends Document {
               gtag('config', 'G-8N2X594YBK');`
             }}>
           </script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '804211551373021');
+                fbq('track', 'PageView');
+              `,
+            }}
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
