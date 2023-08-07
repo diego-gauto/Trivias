@@ -433,8 +433,8 @@ const Register = () => {
                   <input type="checkbox" name="terms" id="terms" onChange={(e) => {
                     setTerms(e.target.checked)
                   }} />
-                  <p className="terms">Al registrarte, aceptas los <span>términos, <br />
-                    condiciones y políticas de Gonvar</span></p>
+                  <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition">términos, <br />
+                    condiciones y políticas de Gonvar</a></p>
                 </div>
               </div>
               {

@@ -31,7 +31,9 @@ export const Background = styled.div`
     color: #74549e;
     line-height: initial;
     text-align: center;
-    span {
+    a {
+         text-decoration: none;
+        color: #952ced;
         font-weight: bold;
       }
   }
