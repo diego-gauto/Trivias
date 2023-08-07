@@ -75,14 +75,16 @@ export const TitleContain = styled.div`
   @media (max-width: 1124px) {
     width: 100%;
     .tab-container {
+      flex-direction: column-reverse;
+      gap: 30px;
       width: 100%;
       .tabs {
         width: 100%;
         justify-content: space-between;
       }
-      .button-container {
-        display: none;
-      }
+      // .button-container {
+      //   display: none;
+      // }
     }
     p {
       font-size: 12px;
