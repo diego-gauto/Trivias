@@ -33,10 +33,6 @@ import {
 var countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/es.json"))
 
-
-//const { getCode, getName } = require('country-list');
-
-
 const formSchema = yup.object().shape({
   name: yup
     .string()
@@ -84,10 +80,10 @@ const Register = () => {
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [authLoader, setAuthLoader] = useState(false);
+  const [terms, setTerms] = useState(false);
   const [phone, setphone] = useState("")
   const [show, setShow] = useState<any>(false);
   const { login } = useLogin();
-  const { api } = useFacebook();
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -153,6 +149,11 @@ const Register = () => {
   }
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
+    if (!terms) {
+      setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
+      setShow(true);
+      return
+    }
     setAuthLoader(true);
     setphone(phoneInput);
     if (phoneInput === "") {
@@ -190,11 +191,16 @@ const Register = () => {
       setErrorPhoneMsg("Número de teléfono Invalido");
       setAuthLoader(false);
     }
-
   }
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: tokenResponse => {
+      if (!terms) {
+        setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
+        setShow(true);
+        setAuthLoader(false);
+        return
+      }
       setAuthLoader(true);
       googleTokens(tokenResponse.code).then((res) => {
         let user = {
@@ -225,6 +231,12 @@ const Register = () => {
   const loginWithFacebook = async () => {
     try {
       setAuthLoader(true);
+      if (!terms) {
+        setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
+        setShow(true);
+        setAuthLoader(false);
+        return
+      }
       const response = await login({
         scope: 'email',
       });
@@ -417,7 +429,13 @@ const Register = () => {
                     </div>
                   }
                 </div>
-
+                <div className="terms-container">
+                  <input type="checkbox" name="terms" id="terms" onChange={(e) => {
+                    setTerms(e.target.checked)
+                  }} />
+                  <p className="terms">Al registrarte, aceptas los <span>términos, <br />
+                    condiciones y políticas de Gonvar</span></p>
+                </div>
               </div>
               {
                 !authLoader
@@ -447,8 +465,6 @@ const Register = () => {
                     loginWithFacebook()
                   }} alt="" />
                 </div>
-                <p className="terms">Al registrarte, aceptas los <span>términos, <br />
-                  condiciones y políticas de Gonvar</span></p>
               </div>
             </form>
             <div className="imgResp">

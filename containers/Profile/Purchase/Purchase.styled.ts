@@ -18,6 +18,23 @@ export const Container = styled.div`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+   .terms-container{
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .terms {
+    font-size: 14px;
+    color: #74549e;
+    line-height: initial;
+    text-align: center;
+    a {
+        text-decoration: none;
+        color: #952ced;
+        font-weight: bold;
+      }
+  }
   .static-modal {
     background: rgb(237 231 242 / 60%);
     height: 100%;

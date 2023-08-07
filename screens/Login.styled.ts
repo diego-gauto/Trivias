@@ -21,7 +21,20 @@ export const Background = styled.div`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-
+  .terms-container{
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .terms {
+    font-size: 14px;
+    color: #74549e;
+    line-height: initial;
+    text-align: center;
+    span {
+        font-weight: bold;
+      }
+  }
   .left-side {
     position: relative;
     background-color: #d4a2f1;
@@ -232,15 +245,6 @@ export const Background = styled.div`
             cursor: pointer;
             width: 50px;
             height: auto;
-          }
-        }
-        .terms {
-          font-size: 14px;
-          color: #74549e;
-          line-height: initial;
-          text-align: center;
-          span {
-            font-weight: bold;
           }
         }
       }

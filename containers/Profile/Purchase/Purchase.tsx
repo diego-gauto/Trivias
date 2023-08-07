@@ -52,8 +52,9 @@ const Purchase = () => {
   const router = useRouter()
   const { type, id, trial, frequency } = router.query;
   const [loader, setLoader] = useState<any>(false);
-
-  const courseId = new URLSearchParams(window.location.search)
+  const [terms, setTerms] = useState(false);
+  const courseId = new URLSearchParams(window.location.search);
+  const [show, setShow] = useState<any>(false);
   let idC = courseId.get('id')
   // if (!localStorage.getItem("email")) {
   //   localStorage.setItem("course", idC ? idC.toString() : '30');
@@ -164,7 +165,6 @@ const Purchase = () => {
 
   const handleConfirm = async () => {
     setLoader(true);
-
     if (cardInfo) {
       delete card.brand
       delete card.cardId
@@ -179,6 +179,12 @@ const Purchase = () => {
     }
 
     if (cardInfo && Object.values(card).every(value => value !== '')) {
+      if (!terms) {
+        setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
+        setShow(true);
+        setLoader(false);
+        return
+      }
       createPaymentMethodApi(card).then((res) => {
         if (res.status === 400) {
           setError(true);
@@ -190,6 +196,12 @@ const Purchase = () => {
       })
     }
     if (payment && defaultCard.paymentMethod) {
+      if (!terms) {
+        setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
+        setShow(true);
+        setLoader(false);
+        return
+      }
       FinishPayment();
     }
     if (plan.method == 'paypal') {
@@ -451,6 +463,7 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
+          <ErrorModal show={show} setShow={setShow} error={errorMsg} />
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
@@ -484,6 +497,7 @@ const Purchase = () => {
                 </div>
                 <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
                   Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
+
               </div>
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
@@ -597,6 +611,13 @@ const Purchase = () => {
                         setCard((card: any) => ({ ...card, cvc: e.target.value }));
                       }} />
                     </div>
+                  </div>
+                  <div className="terms-container">
+                    <input type="checkbox" name="terms" id="terms" onChange={(e) => {
+                      setTerms(e.target.checked)
+                    }} />
+                    <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition">términos, <br />
+                      condiciones y políticas de Gonvar</a></p>
                   </div>
                   {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                   {(loader) && <LoaderContainSpinner />}
@@ -903,6 +924,13 @@ const Purchase = () => {
                           setCard((card: any) => ({ ...card, cvc: e.target.value }));
                         }} />
                       </div>
+                    </div>
+                    <div className="terms-container">
+                      <input type="checkbox" name="terms" id="terms" onChange={(e) => {
+                        setTerms(e.target.checked)
+                      }} />
+                      <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition">términos, <br />
+                        condiciones y políticas de Gonvar</a></p>
                     </div>
                     {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
                     {(loader) && <LoaderContainSpinner />}
