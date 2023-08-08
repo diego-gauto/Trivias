@@ -160,12 +160,12 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
         />
       }
       {/* SEP Module Card */}
-      <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&
         <Module4_Carousel user={userData} courses={courseSEPData} type={"product"} isInfinite={true} title={courseSEPData.title} slideData={
           courseSEPData.lessons
         } />
-      }
+      } */}
       <Module5_1 slideData={reviews} />
       <Module6_1 slideData={product} />
       <WelcomeModal show={welcomeModal} setShow={setWelcomeModal} />
