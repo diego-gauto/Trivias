@@ -8,7 +8,7 @@ import {
 } from "./User.styled";
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, setDefaultPaymentMethod } from "../../../components/api/profile";
+import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, detachPaymentMethodConekta, setDefaultPaymentMethod } from "../../../components/api/profile";
 import { conektaPm, stripePm } from "../../../components/api/users";
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
@@ -67,16 +67,25 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
 
   const detachPayment = async (card: any) => {
     setDeleteLoad(!loader);
-    let info = {
-      payment_method: card.id
+    let body = {
+      payment_method: card.id,
+      conekta_id: data.conekta_id
     }
-    detachPaymentMethod(info).then(() => {
-      setDeleteLoad(false);
-      handleClick(true);
-    })
+    if (data.conekta_id === null) {
+      detachPaymentMethod(body).then(() => {
+        setDeleteLoad(false);
+        handleClick(true);
+      })
+    } else {
+      detachPaymentMethodConekta(body).then(() => {
+        setDeleteLoad(false);
+        handleClick(true);
+      })
+    }
   }
 
   useEffect(() => {
+    setDeleteLoad(true);
     let body = {
       stripe_id: data.stripe_id,
       conekta_id: data.conekta_id
@@ -86,12 +95,14 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
         const conektaPaymentMethods = res.data.payment_methods.data
         const extractedProperties = conektaPaymentMethods.map(({ id, card: { brand }, card: { last4 }, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
         setPaymentMethods(extractedProperties);
+        setDeleteLoad(false);
       })
     } else {
       conektaPm(body).then((res) => {
         const conektaPaymentMethods = res.data.payment_methods.data
         const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
         setPaymentMethods(extractedProperties);
+        setDeleteLoad(false);
       })
     }
   }, [data])
@@ -108,7 +119,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
           !deleteLoad
             ?
             <>
-              {paymentMethods.length > 0 ? <>
+              {(paymentMethods.length > 0 && !deleteLoad) ? <>
                 {paymentMethods.map((pm: any, index: any) => {
                   return (
                     <React.Fragment key={"pmUser " + index}>

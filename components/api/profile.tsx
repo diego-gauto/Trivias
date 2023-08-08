@@ -48,6 +48,18 @@ export const detachPaymentMethod = async (card: any) => {
     });
 };
 
+export const detachPaymentMethodConekta = async (card: any) => {
+  return axios
+    .delete("https://gonvar.inowu.dev/" + `profile/conekta/${card.conekta_id}/paymentMethod/${card.payment_method}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
 export const userInvoices = async (userId: any) => {
   let user = {
     userId
