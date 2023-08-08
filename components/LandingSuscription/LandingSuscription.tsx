@@ -8,7 +8,7 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { ANUAL_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../api/admin";
 import { getLandingCoursesApi } from "../api/lessons";
@@ -161,7 +161,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
           if (isMonth) {
             router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
           } else {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+            // router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+            router.push({ pathname: ANUAL_FORM });
           }
         }
 

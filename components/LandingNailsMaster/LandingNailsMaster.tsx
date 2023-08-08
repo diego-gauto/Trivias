@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../api/admin";
 import { getUserApi } from "../api/users";
@@ -131,7 +131,8 @@ const LandingNailsMaster = () => {
         }
         if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
           router.push(
-            { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+            // { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+            { pathname: NAILS_FORM }
           )
         }
       })

@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 
 import router from "next/router";
 
-import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, NAILS_FORM, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -71,9 +71,14 @@ const CourseModal = (props: ICourseModal) => {
         });
       }
       if (course.type === 'Producto' && !course.pay) {
-        router.push(
-          { pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } }
-        )
+        if (course.id === 45) {
+          router.push(
+            { pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } }
+          )
+        }
+        else {
+          router.push({ pathname: NAILS_FORM })
+        }
       }
     }
     else {

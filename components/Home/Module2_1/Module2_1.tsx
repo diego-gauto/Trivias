@@ -47,11 +47,7 @@ export const Module2_1 = (props: IModule2_1) => {
   }
 
   const goToPreview = () => {
-    if (user) {
-      router.push(SIGNUP_PATH)
-    } else {
-      router.push(PREVIEW_PATH)
-    }
+    router.push(PREVIEW_PATH)
   }
 
   return (

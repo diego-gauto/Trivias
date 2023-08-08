@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 
 import { useRouter } from "next/router";
 
-import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, NAILS_FORM, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { getAllCourseDataApi, getCoursesApi } from "../api/lessons";
 import { getUserApi } from "../api/users";
 import CourseModal from "../CourseModal/CourseModal";
@@ -93,9 +93,15 @@ const Courses = () => {
         });
       }
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date <= today))) {
-        router.push({
-          pathname: PURCHASE_PATH, query: { type: 'course', id: videoCourse.id }
-        });
+        if (videoCourse.id === 45) {
+          router.push({
+            pathname: PURCHASE_PATH, query: { type: 'course', id: videoCourse.id }
+          });
+        }
+        else {
+          router.push({ pathname: NAILS_FORM })
+        }
+
       }
       if (videoCourse.type === "Mensual" && (userData.level === 1 || userData.final_date >= today)) {
         router.push({

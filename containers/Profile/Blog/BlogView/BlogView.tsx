@@ -21,7 +21,7 @@ import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 import { FaCopy } from 'react-icons/fa';
 import { getUserApi } from '../../../../components/api/users';
 import { formatBlogDate } from '../../../../utils/functions';
-import { BLOGS_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from '../../../../constants/paths';
+import { BLOGS_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from '../../../../constants/paths';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -66,7 +66,8 @@ const BlogView = () => {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push(`${PURCHASE_PATH}?type=subscription`)
+        // router.push(`${PURCHASE_PATH}?type=subscription`)
+        router.push({ pathname: PLAN_PATH });
       }
     }
     else {
