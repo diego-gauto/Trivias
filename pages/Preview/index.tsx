@@ -1,5 +1,4 @@
 import React from 'react'
-import Preview from '../../components/Catalogue/Preview';
 import Courses from '../../components/Courses/Courses';
 import { MainContain } from '../../screens/Styles.styled';
 // import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'

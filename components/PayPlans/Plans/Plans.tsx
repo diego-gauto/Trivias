@@ -20,11 +20,11 @@ export const Plans = (props: IData) => {
   return (
     <PlanStyles className="w-100">
       <div className="planes">
-        <div className="row colors">
-          {(selected === 0 || selected === 1) &&
+        <div className="row colors" style={{ justifyContent: "space-around" }}>
+          {/* {(selected === 0 || selected === 1) &&
             <div className="col-sm-6 col-lg-3 my-3 month">
               <Mensual user={user} />
-            </div>}
+            </div>} */}
           {(selected === 0 || selected === 2) &&
             <div className="col-sm-6 col-lg-3 my-3 year">
               <Anual user={user} />

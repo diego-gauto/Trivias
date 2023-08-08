@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { ANUAL_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
@@ -46,7 +46,8 @@ const Anual = (props: IData) => {
   const goTo = () => {
     if (user.id) {
       if (user.level === 0 && user.final_date < today) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+        // router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+        router.push({ pathname: ANUAL_FORM })
       }
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)

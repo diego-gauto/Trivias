@@ -70,30 +70,12 @@ const Sliders = (props: ICourseData) => {
       setCourses(tempCourses.makeup_courses);
       setTexts(tempTexts);
     }
-    // if (slideType === "my-courses") {
-    //   tempTexts.title = "Tus Cursos";
-    //   tempTexts.spanTitle = "";
-    //   setCourses(tempCourses.my_courses);
-    //   setTexts(tempTexts);
-    // }
-    // if (slideType === "all-courses") {
-    //   tempTexts.title = "Cursos disponibles";
-    //   tempTexts.spanTitle = "";
-    //   setCourses(tempCourses.all_courses);
-    //   setTexts(tempTexts);
-    // }
     if (slideType === "product-courses") {
       tempTexts.title = "Cursos especiales ";
       tempTexts.spanTitle = "de pago individual";
       setCourses(tempCourses.product_courses);
       setTexts(tempTexts);
     }
-    // if (slideType === "monthly-courses") {
-    //   tempTexts.title = "Cursos incluidos en ";
-    //   tempTexts.spanTitle = "Gonvar+";
-    //   setCourses(tempCourses.monthly_courses);
-    //   setTexts(tempTexts);
-    // }
   }
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   let slider: any = document.querySelector(`.scroll-container${slideNumber}`) as HTMLElement;
