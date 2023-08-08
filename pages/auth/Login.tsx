@@ -14,6 +14,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import AlertModal from "../../components/AlertModal/AlertModal";
 import {
+  conektaCustomer,
   facebookUserInfo,
   googleTokens,
   loginWithProviderApi,
@@ -162,16 +163,24 @@ const Login = () => {
     }
 
 
-    loginWithProviderApi(signUpData.credentials).then((res) => {
+    loginWithProviderApi(signUpData.credentials).then(async (res) => {
       if (res[0]) {
         if (res[0].past_user === 'si') {
           setPastUser(res[0]);
-          // updateSignIn(res[0]);
           setPastUserScreen(true);
           setAuthLoader(false);
           return
         }
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
+          let body = {
+            phone_number: res[0].phone_number,
+            country: res[0].country,
+            name: res[0].name,
+            email: res[0].email
+          }
+          if (res[0].conekta_id === null) {
+            await conektaCustomer(body)
+          }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
           window.location.href = PREVIEW_PATH;
@@ -248,7 +257,7 @@ const Login = () => {
         let user = {
           email: res.email,
         }
-        loginWithProviderApi(user).then((res) => {
+        loginWithProviderApi(user).then(async (res) => {
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
@@ -279,10 +288,18 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
-            console.log(res[0]);
+            let body = {
+              phone_number: res[0].phone_number,
+              country: res[0].country,
+              name: res[0].name,
+              email: res[0].email
+            }
+            if (res[0].conekta_id === null) {
+              await conektaCustomer(body)
+            }
             updateSignIn(res[0]);
-            localStorage.setItem('email', user.email)
-            window.location.href = PREVIEW_PATH
+            localStorage.setItem('email', user.email);
+            window.location.href = PREVIEW_PATH;
             redirect()
           }
         })
@@ -326,7 +343,7 @@ const Login = () => {
         let user = {
           email: res.email,
         }
-        loginWithProviderApi(user).then((res) => {
+        loginWithProviderApi(user).then(async (res) => {
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
@@ -357,10 +374,19 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
+            let body = {
+              phone_number: res[0].phone_number,
+              country: res[0].country,
+              name: res[0].name,
+              email: res[0].email
+            }
+            if (res[0].conekta_id === null) {
+              await conektaCustomer(body)
+            }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            redirect()
             window.location.href = PREVIEW_PATH;
+            redirect()
           }
         })
       })
@@ -368,10 +394,6 @@ const Login = () => {
       setAuthLoader(false);
     }
   }
-
-  // const sendResetPassword = () => {
-
-  // }
 
   return (
     <>
