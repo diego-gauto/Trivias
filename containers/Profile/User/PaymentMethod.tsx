@@ -103,12 +103,12 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
     }
     if (data.conekta_id === null) {
       setDefaultPaymentMethod(body).then(() => {
-        handleClick();
+        handleClick(true);
         setDeleteLoad(false);
       })
     } else {
       setDefaultPaymentMethodConekta(body).then((res) => {
-        handleClick();
+        handleClick(true);
         setDeleteLoad(false);
       })
     }
