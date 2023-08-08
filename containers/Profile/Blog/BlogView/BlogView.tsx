@@ -317,7 +317,7 @@ const BlogView = () => {
                           </p>
                           <div className="button-contain">
                             <button className="button-gonvar" onClick={goToCourses}>
-                              Inscríbete a solo $149 MXN al mes
+                              Inscríbete a solo $1599 MXN al año
                             </button>
                           </div>
                         </div>

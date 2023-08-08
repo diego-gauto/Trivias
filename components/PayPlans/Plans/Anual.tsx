@@ -60,7 +60,7 @@ const Anual = (props: IData) => {
       }
     }
     else {
-      localStorage.setItem("month", "true");
+      localStorage.setItem("anual", "true");
       router.push(SIGNUP_PATH)
     }
   }

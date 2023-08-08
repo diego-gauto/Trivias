@@ -17,7 +17,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import { facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Background,
@@ -135,11 +135,11 @@ const Register = () => {
     }
     if (localStorage.getItem("anual") === "true") {
       // window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+      window.location.href = ANUAL_FORM
     }
     if (localStorage.getItem("nailMaster") === "true") {
       // window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+      window.location.href = NAILS_FORM
     }
     if (localStorage.getItem("plan") === "true") {
       window.location.href = `https://www.gonvar.io${PLAN_PATH}`
