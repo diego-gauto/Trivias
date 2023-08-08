@@ -8,8 +8,9 @@ import {
 } from "./User.styled";
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, detachPaymentMethodConekta, setDefaultPaymentMethod } from "../../../components/api/profile";
+import { attachPaymentMethod, attachPaymentMethodConekta, createPaymentMethod, detachPaymentMethod, detachPaymentMethodConekta, setDefaultPaymentMethod, setDefaultPaymentMethodConekta } from "../../../components/api/profile";
 import { conektaPm, stripePm } from "../../../components/api/users";
+declare let window: any
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   const [loader, setLoader] = useState<any>(false);
@@ -19,6 +20,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
 
+  useEffect(() => {
+    window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
+  }, [])
+
   const addNewCard = async () => {
     setLoader(!loader);
     if (Object.keys(card).some(key => card[key] === '')) {
@@ -27,42 +32,86 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
     } else {
       const info = {
         card: card,
-        stripe_id: data.stripe_id
+        stripe_id: data.stripe_id,
       }
-      createPaymentMethod(info).then((res) => {
-        if (res.status === 400) {
-          alert("Hay un error en los datos de la tarjeta!");
-          setLoader(false);
-        } else {
-          let cardInfo = {
-            stripe_id: data.stripe_id,
-            payment_method: res.data.paymentMethod.id
-          }
-          attachPaymentMethod(cardInfo).then((response) => {
-            if (response.status === 400) {
-              alert("Hay un error en los datos de la tarjeta!");
-              setLoader(false);
-            }
-            setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-            newCard();
-            handleClick(true);
+
+      if (data.conekta_id === null) {
+        createPaymentMethod(info).then((res) => {
+          if (res.status === 400) {
+            alert("Hay un error en los datos de la tarjeta!");
             setLoader(false);
-          })
+          } else {
+            let cardInfo = {
+              stripe_id: data.stripe_id,
+              payment_method: res.data.paymentMethod.id
+            }
+            attachPaymentMethod(cardInfo).then((response) => {
+              if (response.status === 400) {
+                alert("Hay un error en los datos de la tarjeta!");
+                setLoader(false);
+              }
+              setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+              newCard();
+              handleClick(true);
+              setLoader(false);
+            })
+          }
+        })
+      } else {
+        let tempCard = {
+          card: {
+            number: card.number.replaceAll(" ", ""),
+            name: card.holder,
+            exp_month: card.exp_month,
+            exp_year: card.exp_year,
+            cvc: card.cvc,
+          }
         }
-      })
+        window.Conekta.Token.create(
+          tempCard,
+          conektaSuccessResponseHandler,
+          conektaErrorResponseHandler, 'web'
+        );
+      }
     }
   }
 
+  const conektaSuccessResponseHandler = (token: any) => {
+    let tokenId = token.id
+    const body = {
+      token_id: tokenId,
+      conekta_id: data.conekta_id
+    }
+    attachPaymentMethodConekta(body).then((res) => {
+      handleClick(true);
+      setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+      newCard();
+      setLoader(false);
+    })
+  }
+  const conektaErrorResponseHandler = (response: any) => {
+    alert("Hay un error en los datos de la tarjeta!")
+    setLoader(false)
+  };
+
   const updateUserCard = async (card: any) => {
     setDeleteLoad(true);
-    let info = {
+    let body = {
       payment_method: card.id,
-      stripe_id: data.stripe_id
+      stripe_id: data.stripe_id,
+      conekta_id: data.conekta_id
     }
-    setDefaultPaymentMethod(info).then(() => {
-      handleClick();
-      setDeleteLoad(false);
-    })
+    if (data.conekta_id === null) {
+      setDefaultPaymentMethod(body).then(() => {
+        handleClick();
+        setDeleteLoad(false);
+      })
+    } else {
+      setDefaultPaymentMethodConekta(body).then((res) => {
+        handleClick();
+        setDeleteLoad(false);
+      })
+    }
   }
 
   const detachPayment = async (card: any) => {

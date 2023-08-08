@@ -24,9 +24,33 @@ export const attachPaymentMethod = async (data: any) => {
     });
 };
 
+export const attachPaymentMethodConekta = async (data: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "profile/conekta/paymentMethod", data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
 export const setDefaultPaymentMethod = async (card: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "profile/update-payment-method", card)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const setDefaultPaymentMethodConekta = async (card: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "profile/conekta/paymentMethod", card)
     .then((res) => {
       return res;
     })
