@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 
 import router from "next/router";
 
-import { LESSON_PATH, LOGIN_PATH, NAILS_FORM, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -77,7 +77,7 @@ const CourseModal = (props: ICourseModal) => {
           )
         }
         else {
-          router.push({ pathname: NAILS_FORM })
+          router.push({ pathname: NAILS_LANDING_REDIRECT })
         }
       }
     }
