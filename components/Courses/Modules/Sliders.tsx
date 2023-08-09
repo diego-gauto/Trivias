@@ -7,7 +7,7 @@ import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, Ima
 import CourseModal from '../../CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
-import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '../../../constants/paths';
+import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
@@ -26,6 +26,11 @@ const Sliders = (props: ICourseData) => {
   const [course, setCourse] = useState<any>({});
   const router = useRouter();
   const GonvarLogo = "../images/purchase/logo.png";
+  const sendTo = () => {
+    router.push({
+      pathname: ANUAL_FORM
+    })
+  }
   const [texts, setTexts] = useState({
     title: "",
     spanTitle: "",
@@ -266,13 +271,13 @@ const Sliders = (props: ICourseData) => {
               <ButtonContain>
                 {
                   (user && user.level === 0 && user.final_date < today) &&
-                  <Link href={{ pathname: PLAN_PATH }}>
-                    <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
-                      <PurpleButton>
-                        Adquiere Gonvar+
-                      </PurpleButton>
-                    </div>
-                  </Link>
+                  // <Link href={{ pathname: PLAN_PATH }}>
+                  <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }} onClick={sendTo}>
+                    <PurpleButton>
+                      Adquiere Gonvar+
+                    </PurpleButton>
+                  </div>
+                  // </Link>
                 }
                 {!user && <Link href={LOGIN_PATH}>
                   <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>

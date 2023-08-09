@@ -1,7 +1,7 @@
 import { Card, Col, Image, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { ANUAL_SUSCRIPTION_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
@@ -55,7 +55,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push(`${PLAN_PATH}`)
+        router.push({ pathname: ANUAL_FORM })
       }
     }
     else {

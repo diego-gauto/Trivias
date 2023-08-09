@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 
 import { useRouter } from "next/router";
 
-import { LESSON_PATH, LOGIN_PATH, NAILS_FORM, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, NAILS_FORM, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { getAllCourseDataApi, getCoursesApi } from "../api/lessons";
 import { getUserApi } from "../api/users";
 import CourseModal from "../CourseModal/CourseModal";
@@ -111,7 +111,7 @@ const Courses = () => {
       }
       if (videoCourse.type === "Mensual" && (userData.level === 0 && userData.final_date < today)) {
         router.push({
-          pathname: PLAN_PATH,
+          pathname: ANUAL_FORM,
         });
       }
     }
