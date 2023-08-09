@@ -47,7 +47,6 @@ const Individual = (props: IData) => {
   const goTo = () => {
     if (user.id) {
       let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
-      console.log(user)
       if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
         router.push({
           pathname: PREVIEW_PATH

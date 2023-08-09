@@ -77,3 +77,15 @@ export const deleteSubscriptionAfterCreation = async (subscription: any) => {
       return error
     });
 };
+
+export const conektaPaymentApi = async (order: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "checkout/conekta", order)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

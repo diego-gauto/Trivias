@@ -42,10 +42,6 @@ const Mensual = (props: IData) => {
     }
   }
 
-  useEffect(() => {
-
-  }, [setver])
-
   const goTo = () => {
     if (user.id) {
       if (user.level === 0 && user.final_date < today) {
@@ -67,14 +63,9 @@ const Mensual = (props: IData) => {
     }
   }
 
-  const test = () => {
-    conektaCreateSubscription()
-  }
-
   return (
     <PlanStyles>
       <div className="break plan-container">
-        <button onClick={test}>Test</button>
         <div className="header">
           <div className="top-tab border Back-p-pink">
           </div>

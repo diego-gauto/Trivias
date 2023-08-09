@@ -11,6 +11,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { retrieveCoupons } from "../../../components/api/admin";
 import {
   addUserCouponApi,
+  conektaPaymentApi,
   createInvoiceApi,
   createPaymentMethodApi,
   deleteSubscriptionAfterCreation,
@@ -18,13 +19,12 @@ import {
   stripePaymentApi,
   stripeSubscriptionApi,
 } from "../../../components/api/checkout";
-import { getUserApi, updateMembership } from "../../../components/api/users";
+import { conektaPm, getUserApi, updateMembership } from "../../../components/api/users";
 import ErrorModal from "../../../components/Error/ErrorModal";
 import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
-import { SUB_EXPIRED } from "../../../constants/dummies";
 declare let window: any
 const Purchase = () => {
   const [user, setUser] = useState("");
@@ -65,13 +65,11 @@ const Purchase = () => {
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
-    console.log(SUB_EXPIRED);
-
   }, [])
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
+      getUserApi(localStorage.getItem("email")).then(async (res) => {
         getAllCoupons();
         setPaypal(!paypal)
         if (type == 'subscription') {
@@ -91,27 +89,30 @@ const Purchase = () => {
           })
         }
         guardCheckout(res);
-        let cards = res.payment_methods;
+        let body = {
+          conekta_id: res.conekta_id
+        }
+        let conektaCards = await conektaPm(body);
+        const conektaPaymentMethods = conektaCards.data.payment_methods.data
+        const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean, exp_month, exp_year }: any) => ({ id, brand, last4, default: boolean, exp_month, exp_year }));
+        let cards = extractedProperties;
         if (cards.length > 0) {
           setCardInfo(false);
           setPayment(true);
-          if (cards.filter((x: any) => x.default).length === 0) {
-            cards[0].default = true;
-          }
           cards.forEach((element: any) => {
             if (element.default) {
               let tempCard = {
                 paymentMethod: element.id,
                 status: false,
-                exp_month: element.card.exp_month,
-                exp_year: element.card.exp_year
+                exp_month: element.exp_month,
+                exp_year: element.exp_year
               }
               setDefaultCard({ ...tempCard });
             }
           });
         }
         setUserData(res);
-        setCards(res.payment_methods);
+        setCards(extractedProperties);
         setLoggedIn(true);
         setIsLoading(false);
       })
@@ -152,8 +153,8 @@ const Purchase = () => {
             let tempCard = {
               paymentMethod: element.id,
               status: false,
-              exp_month: element.card.exp_month,
-              exp_year: element.card.exp_year
+              exp_month: element.exp_month,
+              exp_year: element.exp_year
             }
             setDefaultCard({ ...tempCard });
           }
@@ -166,13 +167,14 @@ const Purchase = () => {
     let tempCard = {
       paymentMethod: cards[idx].id,
       status: false,
-      exp_month: cards[idx].card.exp_month,
-      exp_year: cards[idx].card.exp_year
+      exp_month: cards[idx].exp_month,
+      exp_year: cards[idx].exp_year
     }
     setDefaultCard(tempCard);
   }
 
   const handleConfirm = async () => {
+
     setLoader(true);
 
     if (cardInfo) {
@@ -225,8 +227,7 @@ const Purchase = () => {
   }
   const conektaSuccessResponseHandler = (token: any) => {
     let tokenId = token.id
-    console.log(token);
-    setLoader(false)
+    setCard({ ...card, id: tokenId });
   }
   const conektaErrorResponseHandler = (response: any) => {
     console.log(response);
@@ -253,17 +254,6 @@ const Purchase = () => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              // setError(true);
-              // setErrorMsg(res.error.raw.code == "card_declined" && (
-              //   res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-              //   res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-              //   res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-              //   res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-              // ) ||
-              //   res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
-              //   res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-              //   res.error.raw.code == "processing_error" && "Error de proceso" ||
-              //   res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
               const msg = res.error.raw.code == "card_declined" && (
                 res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
                 res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
@@ -321,17 +311,6 @@ const Purchase = () => {
           if (res.error) {
             setCard({ ...card, cardId: "" })
             if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              // setError(true);
-              // setErrorMsg(res.error.raw.code == "card_declined" && (
-              //   res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-              //   res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-              //   res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-              //   res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-              // ) ||
-              //   res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
-              //   res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-              //   res.error.raw.code == "processing_error" && "Error de proceso" ||
-              //   res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta")
               const msg = res.error.raw.code == "card_declined" && (
                 res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
                 res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
@@ -426,6 +405,80 @@ const Purchase = () => {
         })
       }
     }
+    if (plan.method === 'conekta') {
+      if (type === 'course' || nailmasterplusanual === 'true') {
+        let price = product.price
+        if (coupon) {
+          if (coupon.type == 'amount') {
+            price = price - coupon.discount;
+          } else {
+            price = (price - (coupon.discount / 100) * price)
+          }
+        }
+        let data = {
+          name: card.holder,
+          number: card.number,
+          exp_month: card.exp_month,
+          exp_year: card.exp_year,
+          cvc: card.cvc,
+          id: card.id ? card.id : defaultCard.paymentMethod,
+          conekta_id: userData.conekta_id,
+          price: price * 100,
+          product_name: product.title,
+          userId: userData.user_id
+        }
+        conektaPaymentApi(data).then(async (res) => {
+          if (res.status === 200) {
+            let invoice = {
+              amount: price * 100,
+              product: product.title,
+              method: 'conekta',
+              user_id: userData.user_id,
+              course_id: id,
+              final_date: (new Date().getTime() / 1000) + product.duration * 86400,
+              newPlan: nailmasterplusanual === 'true' ? true : false
+            }
+            if (coupon) {
+              let tempCoupon = {
+                coupons_id: coupon.id,
+                user_id: userData.user_id
+              }
+              await addUserCouponApi(tempCoupon)
+            }
+            createInvoiceApi(invoice).then((res) => {
+              setConfirmation(false);
+              setPay(true);
+              if (id === "30") {
+                window.location.href = "/pagoexitosonailsmaster";
+              }
+              if (id === "45") {
+                window.location.href = "/pagoexitosoalineacion";
+              }
+            })
+            return;
+          }
+          if (res.response.status === 400) {
+            setCard({ ...card, cardId: "" });
+            let error = res.response.data.error.data.details[0].message
+            if (id === "30") {
+              window.location.href = `/pagofallidonailsmaster?error=${error}`;
+            }
+            if (id === "45") {
+              window.location.href = `/pagofallidoalineacion?error=${error}`;
+            }
+            setLoader(false)
+          }
+        })
+      }
+      if (type === 'subscription') {
+        let price = "";
+        if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
+        if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
+        if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
+        console.log(price);
+
+      }
+    }
   }
 
   const getAllCoupons = () => {
@@ -471,15 +524,12 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    if (card.cardId) {
+    if (card.id) {
       FinishPayment();
     }
     if ((plan.method == "paypal" && type == "course") || (plan.method == "paypal" && nailmasterplusanual === 'true')) {
       FinishPayment();
     }
-    // if (plan.method == "paypal" && type == "subscription") {
-    //   FinishPayment();
-    // }
   }, [card, plan])
 
   return (
@@ -532,7 +582,7 @@ const Purchase = () => {
                       <input type="radio" checked={payment} onClick={() => {
                         setPayment(true),
                           setCardInfo(false),
-                          setPlan({ method: 'stripe' })
+                          setPlan({ method: 'conekta' })
                         setCard({ ...card, cardId: "" })
                       }} />
                       <p>Pagaré con <span>tarjetas guardadas</span></p>
@@ -544,7 +594,7 @@ const Purchase = () => {
                     <option value="" disabled>--</option>
                     {cards.map((x: any, idC: number) => {
                       return (
-                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}> **** **** **** {x.card.last4}</option>
+                        <option key={"cards_pay_" + idC} value={idC} selected={x.default}> **** **** **** {x.last4}</option>
                       )
                     })}
                   </select>}
@@ -552,7 +602,7 @@ const Purchase = () => {
                     <input type="radio" checked={!payment} onClick={() => {
                       setPayment(false);
                       setCardInfo(true);
-                      setPlan({ method: 'stripe' });
+                      setPlan({ method: 'conekta' });
                       delete card.paymentMethod;
                       setCard({ ...card, cardId: "" })
                     }} />
@@ -840,7 +890,7 @@ const Purchase = () => {
                         <input type="radio" checked={payment} onClick={() => {
                           setPayment(true),
                             setCardInfo(false),
-                            setPlan({ method: 'stripe' })
+                            setPlan({ method: 'conekta' })
                           setCard({ ...card, cardId: "" })
                         }} />
                         <p>Pagaré con <span>tarjetas guardadas</span></p>
@@ -852,7 +902,7 @@ const Purchase = () => {
                       <option value="" disabled>--</option>
                       {cards.map((x: any, idC: number) => {
                         return (
-                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>**** **** **** {x.card.last4}</option>
+                          <option key={"cards_pay_" + idC} value={idC} selected={x.default}>**** **** **** {x.last4}</option>
                         )
                       })}
                     </select>}
@@ -860,7 +910,7 @@ const Purchase = () => {
                       <input type="radio" checked={!payment} onClick={() => {
                         setPayment(false);
                         setCardInfo(true);
-                        setPlan({ method: 'stripe' });
+                        setPlan({ method: 'conekta' });
                         delete card.paymentMethod;
                         setCard({ ...card, cardId: "" })
                       }} />
