@@ -298,7 +298,8 @@ const Login = () => {
     }
     if (localStorage.getItem("course")) {
       // window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+      // window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+      window.location.href = NAILS_FORM
     }
     if (localStorage.getItem("month") === "true") {
       // window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
