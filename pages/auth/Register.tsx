@@ -142,7 +142,7 @@ const Register = () => {
       window.location.href = NAILS_FORM
     }
     if (localStorage.getItem("plan") === "true") {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+      window.location.href = ANUAL_FORM
     }
   }
 
