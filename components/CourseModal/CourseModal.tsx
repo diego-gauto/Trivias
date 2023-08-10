@@ -55,19 +55,17 @@ const CourseModal = (props: ICourseModal) => {
       if ((course.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
         router.push(`${PLAN_PATH}`)
       }
-      // if (course.type === "Mensual" && user.level === 0 && user.final_date > today) {
-      //   router.push({
-      //     pathname: LESSON_PATH,
-      //     query: { id: course.id, season: 0, lesson: 0 },
-      //   });
-      // }
       //New condition subscription flow
-      if (course.type === "Mensual" && user.final_date > today && user.plan_name !== "Gonvar plus+") {
+      if (course.type === "Mensual" && ((user.final_date > today && user.level === 0) || (user.final_date > today && user.level === 1))) {
         router.push({
           pathname: LESSON_PATH,
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
+      //Condition for level === 1
+      // if (course.type === "Mensual" &&user.level === 1 && user.final_date < today) {
+      //   router.push(`${PLAN_PATH}`)
+      // }
       if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
         router.push(`${PLAN_PATH}`)
       }

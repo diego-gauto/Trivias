@@ -64,14 +64,11 @@ const Lesson = () => {
               { pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } }
             )
           }
-          if (res.type === 'Mensual' && (user.level === 0 && user.final_date < today)) {
+          if (res.type === 'Mensual' && user.final_date < today) {
             return router.push({
               pathname: PURCHASE_PATH,
               query: { type: 'subscription' }
             });
-          }
-          if ((res.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
-            router.push(`${PLAN_PATH}`)
           }
           setCurrentLesson(res.seasons[season].lessons[lesson]);
           setCourse(res);
