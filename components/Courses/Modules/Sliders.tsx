@@ -26,9 +26,17 @@ const Sliders = (props: ICourseData) => {
   const router = useRouter();
   const GonvarLogo = "../images/purchase/logo.png";
   const sendTo = () => {
-    router.push({
-      pathname: ANUAL_FORM
-    })
+    if (user && user.level === 0 && user.final_date < today) {
+      router.push({
+        pathname: ANUAL_FORM
+      })
+    }
+    else {
+      localStorage.setItem("plan", "true");
+      router.push({
+        pathname: LOGIN_PATH
+      })
+    }
   }
   const [texts, setTexts] = useState({
     title: "",
@@ -278,13 +286,12 @@ const Sliders = (props: ICourseData) => {
                   </div>
                   // </Link>
                 }
-                {!user && <Link href={LOGIN_PATH}>
-                  <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }}>
+                {!user &&
+                  <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }} onClick={sendTo}>
                     <PurpleButton>
                       Adquiere Gonvar+
                     </PurpleButton>
-                  </div>
-                </Link>}
+                  </div>}
               </ButtonContain>
             }
           </div>
