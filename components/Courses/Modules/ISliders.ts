@@ -5,6 +5,7 @@ export interface ICourseData {
   innerWidth: any;
   allCourses: [];
   user: {
+    method: string;
     final_date: number;
     level: number;
     user_courses: [IUserCourse];
