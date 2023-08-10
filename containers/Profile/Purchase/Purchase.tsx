@@ -12,6 +12,7 @@ import { retrieveCoupons } from "../../../components/api/admin";
 import {
   addUserCouponApi,
   conektaPaymentApi,
+  conektaSubscriptionApi,
   createInvoiceApi,
   createPaymentMethodApi,
   deleteSubscriptionAfterCreation,
@@ -428,8 +429,6 @@ const Purchase = () => {
           userId: userData.user_id
         }
         conektaPaymentApi(data).then(async (res) => {
-          console.log(res);
-
           if (res.status === 200) {
             let invoice = {
               amount: price * 100,
@@ -489,10 +488,31 @@ const Purchase = () => {
       if (type === 'subscription') {
         let price = "";
         if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
-        if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
+        if (frequency === "month") price = "20MIN";
         if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
-        console.log(price);
 
+        let data = {
+          name: card.holder,
+          number: card.number,
+          exp_month: card.exp_month,
+          exp_year: card.exp_year,
+          cvc: card.cvc,
+          id: card.id ? card.id : defaultCard.paymentMethod,
+          conekta_id: userData.conekta_id,
+          plan_id: price,
+          userId: userData.user_id
+        }
+        conektaSubscriptionApi(data).then(async (res) => {
+          console.log(res);
+          if (res.data.data.status === 'active') {
+            let sub = res.data.data;
+            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id })
+            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+          } else {
+            const msg = "Pago Rechazado"
+            window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+          }
+        })
       }
     }
   }
