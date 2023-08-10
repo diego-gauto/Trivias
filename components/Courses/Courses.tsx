@@ -97,7 +97,7 @@ const Courses = () => {
           pathname: PURCHASE_PATH, query: { type: 'course', id: videoCourse.id }
         });
       }
-      if (videoCourse.type === "Mensual" && (userData.level === 1 || userData.final_date >= today)) {
+      if (videoCourse.type === "Mensual" && userData.final_date > today) {
         router.push({
           pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
