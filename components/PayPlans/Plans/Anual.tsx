@@ -51,18 +51,7 @@ const Anual = (props: IData) => {
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)
       }
-      if (user.level === 1 && user.final_date > today && user.method === "conekta") {
-        router.push(PREVIEW_PATH);
-        return
-      }
-      if (user.level === 1 && user.final_date < today && user.method === "conekta") {
-        router.push(PREVIEW_PATH);
-        return
-      }
       if (user.level === 1 && user.final_date < today) {
-        router.push(PREVIEW_PATH)
-      }
-      if (user.level === 1 && user.final_date > today) {
         router.push(PREVIEW_PATH)
       }
     }
