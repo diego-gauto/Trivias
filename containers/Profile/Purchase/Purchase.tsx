@@ -428,6 +428,8 @@ const Purchase = () => {
           userId: userData.user_id
         }
         conektaPaymentApi(data).then(async (res) => {
+          console.log(res);
+
           if (res.status === 200) {
             let invoice = {
               amount: price * 100,
@@ -445,17 +447,31 @@ const Purchase = () => {
               }
               await addUserCouponApi(tempCoupon)
             }
-            createInvoiceApi(invoice).then((res) => {
-              setConfirmation(false);
-              setPay(true);
+            if (res.data.data.payment_status === "paid" || res.data.data.payment_status === "pending_payment") {
+              createInvoiceApi(invoice).then((res) => {
+                setConfirmation(false);
+                setPay(true);
+
+                if (id === "30") {
+                  window.location.href = "/pagoexitosonailsmaster";
+                }
+                if (id === "45") {
+                  window.location.href = "/pagoexitosoalineacion";
+                }
+              })
+              return;
+            } else {
+              setCard({ ...card, cardId: "" });
+              let error = "Su pago fue declinado"
               if (id === "30") {
-                window.location.href = "/pagoexitosonailsmaster";
+                window.location.href = `/pagofallidonailsmaster?error=${error}`;
               }
               if (id === "45") {
-                window.location.href = "/pagoexitosoalineacion";
+                window.location.href = `/pagofallidoalineacion?error=${error}`;
               }
-            })
-            return;
+              setLoader(false)
+              return
+            }
           }
           if (res.response.status === 400) {
             setCard({ ...card, cardId: "" });
