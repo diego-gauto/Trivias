@@ -1,15 +1,14 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
 import { useMediaQuery } from "react-responsive";
-import { useLocation } from "react-router-dom";
-import {
-  Body,
-  ChildrenContain,
-} from "../screens/Login.styled";
+
+import { useRouter } from "next/router";
+
+import { Body, ChildrenContain } from "../screens/Login.styled";
 import SideBar from "./admin/SideBar";
 import Footer from "./Footer/Footer";
-import NavBar from "./NavBar/NavBar";
 import HelmetMetaTags from "./HelmetMetaTags/HelmetMetaTags";
+import NavBar from "./NavBar/NavBar";
 
 const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);

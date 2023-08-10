@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { getTriviaApi } from "../../../../../components/api/trivias";
+import { getTriviaApi, updateTriviaApi } from "../../../../../components/api/trivias";
 import ITrivia, { ITriviaResult } from "../../../../../interfaces/iTrivias";
 import styles from "./update.module.css";
 
@@ -710,7 +710,7 @@ Recuerda, cada pincelada cuenta. Cada esmalte, cada diseño y cada técnica que 
   };
 
   const handleUpdate = () => {
-    // updateTriviaApi(Number(triviaId), updatedTrivia);
+    updateTriviaApi(Number(triviaId), updatedTrivia);
     console.log(updatedTrivia)
   };
 

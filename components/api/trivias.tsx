@@ -37,7 +37,7 @@ export const createTriviaApi = async (trivia: any) => {
 };
 export const updateTriviaApi = async (idTrivia: number, trivia: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/trivia/" + `${idTrivia}`, trivia)
+    .put("https://gonvar.inowu.dev/trivia/" + `${idTrivia}`, trivia)
     .then((res) => {
       return res.data.data
     })

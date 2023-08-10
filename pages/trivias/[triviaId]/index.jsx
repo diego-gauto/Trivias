@@ -1,18 +1,12 @@
-// import "../containers/home.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import {getAllTriviasApi, getTriviaApi} from "../../../components/api/trivias"
-// import { useParams } from "react-router-dom";
 import Trivia from "../../../components/Trivias/trivia/trivia";
 import Result from "../../../components/Trivias/result/result";
 import Banner from "../../../components/Trivias/banner/banner";
 import TriviaSelector from "../../../containers/Trivias/TriviaSelector/triviaSelector";
-// import mujer1 from "../assets/Mujer1.svg";
-// import mujer2 from "../assets/mujer2-removebg-preview.png";
-// import mujer3 from "../assets/mujer3.svg";
-// import mujer4 from "../assets/mujer4.svg";
-// import imgResult from "../assets/mujerinfluencer.svg";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 
 import styles from "./index.module.css";
 
@@ -21,6 +15,7 @@ function Trivias() {
   const [correct, setCorrect] = useState(0);
   const [trivia, setTrivia] = useState({})
   const [trivias, setTrivias] = useState([])
+  const [loading, setLoading] = useState(true);
   const {
     query: { triviaId },
   } = useRouter();
@@ -63,6 +58,7 @@ function Trivias() {
           setTrivia(triviaTemp);
         }
         setQuestionNumber(1)
+        setLoading(false);
       } catch (error) {
         console.error('Error al obtener los datos de la trivia:', error);
       }
@@ -79,6 +75,16 @@ function Trivias() {
     }
   }, [questionNumber]);
 
+
+  if (loading) {
+    return (
+      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
 
   return (
     <div className={styles.app}>
