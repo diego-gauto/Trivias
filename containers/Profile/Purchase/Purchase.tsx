@@ -503,7 +503,6 @@ const Purchase = () => {
           userId: userData.user_id
         }
         conektaSubscriptionApi(data).then(async (res) => {
-          console.log(res);
           if (res.data.data.status === 'active') {
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id })
