@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
+
+import { useFacebook } from "react-facebook";
+import { SlBell } from "react-icons/sl";
 import { useMediaQuery } from "react-responsive";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { BLOGS_PATH, DEFAULT_USER_IMG, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, REWARDS_PATH, SIGNUP_PAST_USER_PATH, SIGNUP_PATH } from "../../constants/paths";
-import { useAuth } from "../../hooks/useAuth";
+import { googleLogout } from "@react-oauth/google";
+
 import {
+  BLOGS_PATH,
+  DEFAULT_USER_IMG,
+  LOGIN_PATH,
+  PLAN_PATH,
+  PREVIEW_PATH,
+  PROFILE_PATH,
+  REWARDS_PATH,
+  SIGNUP_PAST_USER_PATH,
+  SIGNUP_PATH,
+} from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
+import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import {
+  FloatingMenuItem,
   HamburgerContain,
   HamburgerMenu,
+  HamburgerMenuOptionsList,
+  HoverText,
   HBList,
   HBMenu,
   IngresarOptionsList,
-  FloatingMenuItem,
   Logo,
   LogoContain,
   LogoS,
@@ -25,14 +44,7 @@ import {
   TagsResp,
   UserContain,
   UserImage,
-  HamburgerMenuOptionsList,
-  HoverText,
 } from "./NavBar.styled";
-import { SlBell } from "react-icons/sl";
-import { googleLogout } from "@react-oauth/google";
-import { useFacebook } from "react-facebook";
-import io from "socket.io-client";
-import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
 
@@ -48,6 +60,8 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
+
+  const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const toggleIngresarOptionsMenu = () => {
     setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
@@ -294,7 +308,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            {/* <div className="bell-contain">
+            <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -307,9 +321,9 @@ const NavBar = () => {
                   <h1 className='title'>
                     Notificaciones
                   </h1>
-                  <p className='read-all-tag' onClick={updateNotificationStatus}>
-                    Marcar como leidos
-                  </p>
+                  <div className="close-circle" onClick={openNotifications}>
+                    <img src={closeNotif} className="icon" />
+                  </div>
                 </div>
                 <div className="all-notifications">
                   {
@@ -337,12 +351,17 @@ const NavBar = () => {
                       <div className="empty-notifications">Sin Notificaciones!</div>
                   }
                 </div>
+                <div className="title-container justify-content-end">
+                  <p className='read-all-tag' onClick={updateNotificationStatus}>
+                    Marcar como leidos
+                  </p>
+                </div>
               </NotificationContainer>
               {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div> */}
+            </div>
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {
