@@ -7,6 +7,7 @@ import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screen
 import { cancelReview } from "../../../../components/api/admin";
 import AlertModal from "../../../../components/AlertModal/AlertModal";
 import { PROFILE_PATH } from "../../../../constants/paths";
+import { conektaCancelSubscription, conektaPausedSubscription } from "../../../../components/api/profile";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
@@ -23,6 +24,7 @@ const CancelFinal = () => {
     fourthQuestion: 0,
     fifthQuestion: 0,
   })
+  const { type } = router.query;
   const [other, setOther] = useState("");
   const goBack = () => {
     router.push({ pathname: PROFILE_PATH });
@@ -75,10 +77,28 @@ const CancelFinal = () => {
             userId: userData.user_id,
             planName: ""
           }
-          cancelStripe(sub).then(() => {
-            setPop(true)
-          })
-        } else {
+          if (type === 'pause') {
+
+          } else {
+            cancelStripe(sub).then(() => {
+              setPop(true)
+            })
+          }
+        } else if (userData.method === "conekta") {
+          let data = { conekta_id: userData.conekta_id, plan_id: userData.plan_id }
+          if (type === 'pause') {
+            conektaPausedSubscription(data).then((res) => {
+              setPop(true)
+            })
+          } else {
+            conektaCancelSubscription(data).then((res) => {
+              console.log(res);
+
+              setPop(true)
+            })
+          }
+        }
+        else {
           let membership = {
             planId: userData.plan_id,
             id: userData.plan_id
@@ -136,7 +156,7 @@ const CancelFinal = () => {
               <div className="exit">
                 <TfiClose className="ex-icon" onClick={goBack} />
               </div>
-              <h1 className="purple-dark">Tu suscripción fue cancelada exitosamente</h1>
+              <h1 className="purple-dark">Tu suscripción fue {type === 'pause' ? "pausada" : "cancelada"} exitosamente</h1>
               <p className="sangria sangria-y">Te enviamos un correo confirmando esta acción.</p>
               <p>Recuerda que <b>puedes reactivar tu cuenta </b> encualquier momento que quieras, para acceder a los
                 <b> más de 60 cursos</b> que tenemos disponibles para ti.</p>
@@ -274,7 +294,7 @@ const CancelFinal = () => {
         <div className="buttons mt-5">
           {
             !buttonLoader
-              ? <button onClick={goCancel} className="left">Cancelar mi suscripción</button>
+              ? <button onClick={goCancel} className="left">{type === 'pause' ? "Pausar" : "Cancelar"} mi suscripción</button>
               :
               <BackgroundLoader className="loader">
                 <LoaderImage>

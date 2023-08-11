@@ -110,3 +110,28 @@ export const updateMembership = async (data: any) => {
       return error
     });
 };
+
+
+export const conektaCancelSubscription = async (data: any) => {
+  return axios
+    .delete("https://gonvar.inowu.dev/" + `subscriptions/conekta/${data.conekta_id}/subscription/${data.plan_id}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const conektaPausedSubscription = async (data: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + `subscriptions/conekta/subscription/paused`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

@@ -262,7 +262,7 @@ const CancelSuscription = () => {
         {/* <p>Recuerda que esta accion solo la puedes realizar <b>dos veces cada 12 meses.</b> <br />Te quedan <b>{'x'}</b> pausas</p> */}
         <div className="buttons mt-5">
           <button onClick={goCancel} className="left">Perder mis beneficios</button>
-          {/* <button onClick={goPause} className="right">Si quiero pausar</button> */}
+          <button onClick={goPause} className="right">Si quiero pausar</button>
           <button onClick={goBack} className="btn btn-link ">Regresar al inicio</button>
         </div>
 

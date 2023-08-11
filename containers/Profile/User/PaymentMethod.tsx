@@ -21,6 +21,8 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   });
 
   useEffect(() => {
+    console.log(data);
+
     window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
   }, [])
 
