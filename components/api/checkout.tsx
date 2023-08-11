@@ -101,3 +101,15 @@ export const conektaSubscriptionApi = async (order: any) => {
       return error
     });
 };
+
+export const conektaOxxoApi = async (order: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "checkout/conekta/payment/oxxo", order)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

@@ -11,6 +11,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { retrieveCoupons } from "../../../components/api/admin";
 import {
   addUserCouponApi,
+  conektaOxxoApi,
   conektaPaymentApi,
   conektaSubscriptionApi,
   createInvoiceApi,
@@ -566,6 +567,28 @@ const Purchase = () => {
     }
   }, [card, plan])
 
+  const payWithOxxo = () => {
+    const currentDate: any = new Date();
+    const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+    let data = {
+      conekta_id: userData.conekta_id,
+      expires_at: Math.round(new Date(futureDate).getTime() / 1000),
+      title: product.title,
+      price: product.price * 100,
+      meta: {
+        type: type,
+        course_id: type === "subscription" ? 0 : id,
+        frecuency: type === "subscription" ? frequency : "",
+        duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
+      }
+    }
+
+    conektaOxxoApi(data).then((res) => {
+      window.location.href = '/preview'
+    })
+  }
+
   return (
     <>
       {isLoading ? <BackgroundLoader>
@@ -609,6 +632,7 @@ const Purchase = () => {
                   Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
               </div>
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
+              <button onClick={payWithOxxo}>oxxo</button>
               <div className="payment-methods">
                 <div className="stripe">
                   {cards.length === 0 ? null :
