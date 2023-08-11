@@ -62,10 +62,6 @@ const CourseModal = (props: ICourseModal) => {
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
-      //Condition for level === 1
-      // if (course.type === "Mensual" &&user.level === 1 && user.final_date < today) {
-      //   router.push(`${PLAN_PATH}`)
-      // }
       if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
         router.push(`${PLAN_PATH}`)
       }
