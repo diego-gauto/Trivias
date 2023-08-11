@@ -11,17 +11,17 @@ import router from "next/router";
 
 import { getCoursesApi } from "../../../components/api/lessons";
 import { getRewardsApi } from "../../../components/api/rewards";
-import { cancelPaypal, cancelStripe } from "../../../components/api/users";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
 import { REWARDS_PATH } from "../../../constants/paths";
+import { conektaResumeSubscription } from "../../../components/api/profile";
 
 const or_star = "/images/cancel_modal/or_star.png"
 const gr_star = "/images/cancel_modal/gr_star.png"
 const bl_star = "/images/cancel_modal/bl_star.png"
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
+const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [formatDate, setFormatDate] = useState("")
   const [loader, setLoader] = useState<any>(false);
@@ -106,6 +106,17 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
   const getDays = () => {
     return Math.round((user.final_date - today) / 86400)
   }
+
+  const resumeSubscription = () => {
+    setLoader(true);
+    let body = {
+      conekta_id: user.conekta_id
+    }
+    conektaResumeSubscription(body).then((res) => {
+      window.location.reload()
+    })
+  }
+
   return (
     <ThirdBox>
       {pop &&
@@ -241,7 +252,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
+              {(user.level === 1 || (user.level === 0 && user.final_date > today) || user.level === 3) ? <p >
                 Gonvar+<br />
                 <span className="span">Suscripción {(user.level === 1 && getDays() > 31) ? "anual" : "mensual"}</span>
               </p> :
@@ -263,7 +274,8 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
                     <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
                 </div>
             }
-            {(!loader && (user.level > 0 && user.plan_name === "Gonvar Plus")) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && (user.level === 1 && user.plan_name === "Gonvar Plus")) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Resumir Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>

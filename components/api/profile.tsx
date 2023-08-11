@@ -135,3 +135,15 @@ export const conektaPausedSubscription = async (data: any) => {
       return error
     });
 };
+
+export const conektaResumeSubscription = async (data: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + `subscriptions/conekta/subscription/resume`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
