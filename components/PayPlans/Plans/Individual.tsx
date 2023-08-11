@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { LESSON_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
@@ -53,9 +53,8 @@ const Individual = (props: IData) => {
         });
       }
       if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-        router.push(
-          { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-        )
+        // router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
+        router.push({ pathname: NAILS_FORM })
       }
     } else {
       localStorage.setItem("nailMaster", "true");

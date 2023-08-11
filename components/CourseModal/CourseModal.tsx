@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 
 import router from "next/router";
 
-import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -53,7 +53,7 @@ const CourseModal = (props: ICourseModal) => {
   const goTo = () => {
     if (user) {
       if ((course.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
-        router.push(`${PLAN_PATH}`)
+        router.push(`${ANUAL_FORM}`)
       }
       //New condition subscription flow
       if (course.type === "Mensual" && ((user.final_date > today && user.level === 0) || (user.final_date > today && user.level === 1))) {
@@ -63,7 +63,7 @@ const CourseModal = (props: ICourseModal) => {
         });
       }
       if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
-        router.push(`${PLAN_PATH}`)
+        router.push(`${ANUAL_FORM}`)
       }
       if (course.type === "Producto" && course.pay) {
         router.push({
@@ -72,9 +72,14 @@ const CourseModal = (props: ICourseModal) => {
         });
       }
       if (course.type === 'Producto' && !course.pay) {
-        router.push(
-          { pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } }
-        )
+        if (course.id === 45) {
+          router.push(
+            { pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } }
+          )
+        }
+        else {
+          router.push({ pathname: NAILS_FORM })
+        }
       }
     }
     else {

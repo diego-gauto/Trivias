@@ -61,8 +61,9 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
           setCourseGonvarPlus(data.gonvar_courses);
           data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
           setCourseNailsData(data.nails_master);
-          data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
-          setCourseSEPData(data.alineacion_cert);
+          // console.log(data.nails_master);
+          // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
+          // setCourseSEPData(data.alineacion_cert);
           setLoading(true);
         })
       })
@@ -76,8 +77,8 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
         setCourseGonvarPlus(data.gonvar_courses);
         data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
         setCourseNailsData(data.nails_master);
-        data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
-        setCourseSEPData(data.alineacion_cert);
+        // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
+        // setCourseSEPData(data.alineacion_cert);
         setLoading(true);
       })
     }
@@ -160,12 +161,12 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
         />
       }
       {/* SEP Module Card */}
-      <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
+      {/* <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&
         <Module4_Carousel user={userData} courses={courseSEPData} type={"product"} isInfinite={true} title={courseSEPData.title} slideData={
           courseSEPData.lessons
         } />
-      }
+      } */}
       <Module5_1 slideData={reviews} />
       <Module6_1 slideData={product} />
       <WelcomeModal show={welcomeModal} setShow={setWelcomeModal} />
