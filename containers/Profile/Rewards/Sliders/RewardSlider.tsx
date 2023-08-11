@@ -154,7 +154,7 @@ const RewardSlider = (props: reward_slider) => {
       score: 0,
       title: reward.title,
     }
-    createNotification(notification);
+    // createNotification(notification);
     createRequestApi(tempRequest).then(() => {
       alert("Recompensa reclamada con éxito")
       getSliders();

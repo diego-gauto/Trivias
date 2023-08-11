@@ -102,7 +102,7 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
       lesson: lesson,
       title: data.lesson_homeworks.title,
     }
-    createNotification(notification);
+    // createNotification(notification);
     addHomeworkApi(tempHomework).then(() => {
       alert("Tarea enviada")
       setImageModal(false);

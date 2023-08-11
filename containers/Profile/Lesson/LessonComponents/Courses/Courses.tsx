@@ -56,7 +56,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
             courseId: course.id,
             title: course.title,
           }
-          createNotification(notification);
+          // createNotification(notification);
           addUserCertificateApi(tempCertificate);
         } else {
           setCertificate_id(res.data.data[0].id)
