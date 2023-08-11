@@ -16,6 +16,7 @@ import { Answer, HomeWorkContain, TaskTitle } from "./HomeWork.styled";
 import ImagePreview from "./imagePreview/imagePreview";
 import { TitleContain } from "./Module.styled";
 import ModuleTabs from "./ModuleTabs/ModuleTabs";
+import router from "next/router";
 
 const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, lesson, courseIds, handleClick, nextLesson, previousLesson, course, firstLesson, lastLesson }: any) => {
   const [status, setStatus] = useState("");
@@ -57,7 +58,6 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
       setUserQuizzes([...res.data.data])
     })
   }
-
   const approvalHomeWork = (file: any) => {
     if (file.length > 0) {
       var reader = new FileReader();
@@ -78,7 +78,7 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
       lessonId: data.id,
       courseId: parseInt(courseIds.courseId),
       seasonId: courseIds.seasonId,
-      season: season,
+      season: router.query.season,
       lesson: lesson,
       status: false,
       user_id: user.user_id,
@@ -98,7 +98,7 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
       subType: "",
       notificationId: '',
       courseId: parseInt(courseIds.courseId),
-      season: season,
+      season: router.query.season,
       lesson: lesson,
       title: data.lesson_homeworks.title,
     }
