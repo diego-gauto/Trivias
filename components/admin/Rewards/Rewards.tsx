@@ -79,7 +79,7 @@ const Rewards = () => {
       score: 0,
       title: data.title,
     }
-    createNotification(notification);
+    // createNotification(notification);
     if (!data.status) {
       var result = confirm("Desea que esta recompensa sea reclamada?");
       if (result === true) {

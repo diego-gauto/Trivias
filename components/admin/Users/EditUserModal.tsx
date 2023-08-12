@@ -40,7 +40,7 @@ const EditUserModal = ({ show, setShow, user, handleClick }: any) => {
       notificationId: '',
       score: update.score,
     }
-    createNotification(notification);
+    // createNotification(notification);
     updateUserInfoApi(tempUser).then(() => {
       handleClick();
       setUpdating(false);
