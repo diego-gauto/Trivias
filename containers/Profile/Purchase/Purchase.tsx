@@ -13,6 +13,7 @@ import {
   addUserCouponApi,
   conektaOxxoApi,
   conektaPaymentApi,
+  conektaSpeiApi,
   conektaSubscriptionApi,
   createInvoiceApi,
   createPaymentMethodApi,
@@ -601,6 +602,32 @@ const Purchase = () => {
     })
   }
 
+  const payWitSpei = () => {
+    const currentDate: any = new Date();
+    const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+    let data = {
+      conekta_id: userData.conekta_id,
+      expires_at: Math.round(new Date(futureDate).getTime() / 1000),
+      title: product.title,
+      price: product.price * 100,
+      meta: {
+        type: type,
+        course_id: type === "subscription" ? 0 : id,
+        frecuency: type === "subscription" ? frequency : "",
+        duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
+      }
+    }
+
+    conektaSpeiApi(data).then((res) => {
+      console.log(res);
+      const charges = res.data.data.charges.data[0];
+      const reference = charges.payment_method.clabe;
+
+      // window.location.href = '/preview'
+    })
+  }
+
   return (
     <>
       {isLoading ? <BackgroundLoader>
@@ -646,7 +673,6 @@ const Purchase = () => {
 
               </div>
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
-              <button onClick={payWithOxxo}>oxxo</button>
               <div className="payment-methods">
                 <div className="stripe">
                   {cards.length === 0 ? null :
@@ -841,6 +867,8 @@ const Purchase = () => {
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo}>oxxo</button>}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>}
               </div>
             </div>
             <div className="right-section">
