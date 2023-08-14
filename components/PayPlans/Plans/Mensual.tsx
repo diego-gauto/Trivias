@@ -9,6 +9,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 import { conektaCreateSubscription } from "../../api/conekta/test";
+import { user } from "firebase-functions/v1/auth";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -44,9 +45,10 @@ const Mensual = (props: IData) => {
 
   const goTo = () => {
     if (user.id) {
+      console.log(user.final_date, today, user.level);
+
       if (user.level === 0 && user.final_date < today) {
-        // router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
-        router.push({ pathname: PLAN_PATH });
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
       }
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)

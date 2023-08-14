@@ -46,8 +46,8 @@ const Anual = (props: IData) => {
   const goTo = () => {
     if (user.id) {
       if (user.level === 0 && user.final_date < today) {
-        // router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
-        router.push({ pathname: ANUAL_FORM })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+        // router.push({ pathname: ANUAL_FORM })
       }
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)
