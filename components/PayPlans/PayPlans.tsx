@@ -43,9 +43,9 @@ const PayPlans = () => {
           {/* Responsive Switch*/}
           <div className="select-plan">
             <div className="options">
-              <p className={`option ${selected === 1 ? 'link' : ''}`}
+              {/* <p className={`option ${selected === 1 ? 'link' : ''}`}
                 onClick={() => handleSelected(1)}>G+ mensual</p>
-              <p className="option">|</p>
+              <p className="option">|</p> */}
               <p className={`option ${selected === 2 ? 'link' : ''}`}
                 onClick={() => handleSelected(2)}>G+ anual</p>
               <p className="option">|</p>

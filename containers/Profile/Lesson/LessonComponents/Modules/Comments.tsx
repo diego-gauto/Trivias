@@ -86,7 +86,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         season: season,
         name: user.name
       }
-      createNotification(notification);
+      // createNotification(notification);
       addCommentLikeApi(temp).then(() => {
         getComments();
       })
@@ -114,7 +114,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         season: season,
         name: user.name
       }
-      createNotification(notification);
+      // createNotification(notification);
       addCommentAnswerLikeApi(temp).then(() => {
         getComments();
       })
@@ -142,7 +142,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         season: season,
         name: user.name
       }
-      createNotification(notification);
+      // createNotification(notification);
       addCommentToAnswerLikeApi(temp).then(() => {
         getComments();
       })
@@ -215,7 +215,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         season: season,
         name: user.name
       }
-      createNotification(notification);
+      // createNotification(notification);
       addCommentAnswerApi(body).then((res) => {
         getComments();
       })
@@ -238,7 +238,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         season: season,
         name: user.name
       }
-      createNotification(notification);
+      // createNotification(notification);
       addCommentToAnswerApi(body).then((res) => {
         getComments();
       })
