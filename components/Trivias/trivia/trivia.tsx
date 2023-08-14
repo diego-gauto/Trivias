@@ -13,6 +13,7 @@ const {
   answers,
   button,
   active,
+  popup
 } = styles;
 
 export default function Trivia({
@@ -26,10 +27,25 @@ export default function Trivia({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [correcta, setCorrecta] = useState(false);
   const [className, setClassName] = useState(answer);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleMouseEnter = () => {
+    if (isButtonDisabled) {
+      setShowPopup(true);
+    }
+    console.log("adentro del boton")
+  };
+
+  const handleMouseLeave = () => {
+    setShowPopup(false);
+    console.log("saliendo del boton")
+
+  };
+
 
   useEffect(() => {
     setQuestionTrivia(data[questionNumber - 1]);
-  }, [questionNumber, data]);
+  }, [questionNumber, data, showPopup]);
 
   const handleClickOption = (a: any) => {
     setSelectedAnswer(a.text);
@@ -55,6 +71,8 @@ export default function Trivia({
 
   const isButtonDisabled = selectedAnswer === null;
 
+  console.log(showPopup)
+
   return (
     <div className={trivia}>
       <div className={trivia_title}>{triviaTitle}</div>
@@ -78,9 +96,16 @@ export default function Trivia({
       <button
         className={`${button} ${isButtonDisabled ? styles.disabled : ""}`}
         onClick={() => handleClickButton()}
+        onMouseEnter={() => { console.log("onMouseEnter"); handleMouseEnter() }}
+        onMouseLeave={() => { console.log("onMouseLeave"); handleMouseLeave() }}
         disabled={isButtonDisabled}>
         Próxima pregunta
       </button>
+      {showPopup && isButtonDisabled && (
+        <div className={popup}>
+          Por favor selecciona una respuesta antes de continuar.
+        </div>
+      )}
     </div>
   );
 }

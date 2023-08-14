@@ -149,6 +149,19 @@
   background-color: #5000b5;
 }
 
+.popup {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  top: -30px; /* Ajusta la posición vertical del mensaje emergente */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
 .disabled {
   cursor: not-allowed;
   background-color: #5000b5;

@@ -19,6 +19,7 @@ function Trivias() {
   const {
     query: { triviaId },
   } = useRouter();
+  const triviaIdNumber = Number(triviaId)
   const router = useRouter();
 
   const RESULT_DIC = {
@@ -38,12 +39,12 @@ function Trivias() {
 
         const triviasRes = await getAllTriviasApi()
         if (triviasRes) {
-          const triviasFilter = triviasRes.filter(trivia => trivia.id !== Number(triviaId))
+          const triviasFilter = triviasRes.filter(trivia => trivia.id !== triviaIdNumber)
           // let prevTrivia = trivia;
           setTrivias(triviasFilter);
         }
 
-        const res = await getTriviaApi(Number(triviaId));
+        const res = await getTriviaApi(triviaIdNumber);
 
         const triviaTemp = res[0]
 
@@ -58,6 +59,7 @@ function Trivias() {
           setTrivia(triviaTemp);
         }
         setQuestionNumber(1)
+        setCorrect(0)
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener los datos de la trivia:', error);
@@ -67,7 +69,7 @@ function Trivias() {
 
     fetchData();
 
-  }, [triviaId]);
+  }, [triviaIdNumber]);
 
   useEffect(() => {
     if (questionNumber > 5) {
@@ -86,9 +88,14 @@ function Trivias() {
     )
   }
 
+  console.log(trivia?.result[RESULT_DIC[correct]])
+  console.log(RESULT_DIC[correct])
+  console.log(correct)
+  console.log(triviaIdNumber)
+
   return (
     <div className={styles.app}>
-          {trivia?.questions ? (
+          {
       questionNumber > 5 ? (
         <Result
           resultInfo={trivia?.result[RESULT_DIC[correct]]}
@@ -110,9 +117,7 @@ function Trivias() {
           </div>
         </div>
       )
-    ) : (
-      <p>Cargando...</p>
-    )}
+     }
       <Banner />
 
       <h3 className={styles.subtitle} style={{ marginTop: 2 + "rem" }}>
