@@ -158,7 +158,7 @@ const LandingNailsMaster = () => {
       <div className="section mt-0">
         <div className="mt-3 fechas">
           <h4><b>Actualización 2023</b><br />
-            Inicio: 20 de Julio del 2023</h4>
+            Inicio: 28 de Agosto del 2023</h4>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
