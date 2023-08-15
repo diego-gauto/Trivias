@@ -1,4 +1,5 @@
 import router, { useRouter } from "next/router";
+import { HWK_APPROVED_ICON, HWK_FAILED_ICON } from "./Constants";
 
 const getMonth = (month: number) => {
   if (month === 1) {
@@ -68,4 +69,136 @@ export function FormatDateForBack(date: Date) {
 export function FormatCourses(course: any) {
   let tempCourse = course.filter((c: any) => c.type === "Producto");
   return tempCourse;
+}
+
+export const returnNotificationImage = (notification: any) => {
+  if (notification.type === "1") {
+    return HWK_APPROVED_ICON;
+  } else if (notification.type === "2") {
+    return HWK_FAILED_ICON;
+  } else if (notification.type === "3") {
+    return;
+  } else if (notification.type === "4") {
+    return "abril";
+  } else if (notification.type === "5") {
+    return "mayo";
+  } else if (notification.type === "6") {
+    return "junio";
+  } else if (notification.type === 7) {
+    return "julio";
+  } else if (notification.type === 8) {
+    return "agosto";
+  } else if (notification.type === 9) {
+    return "septiembre";
+  } else if (notification.type === 10) {
+    return "octubre";
+  } else if (notification.type === 11) {
+    return "noviembre";
+  } else if (notification.type === 12) {
+    return "diciembre";
+  } else {
+    return "";
+  }
+};
+
+export const returnNotificationTitles = (notification: any, name: any) => {
+  if (notification.type === "1") {
+    return `!Hola ${name}!`;
+  } else if (notification.type === "2") {
+    return `!Hola ${name}!`;
+  } else if (notification.type === "3") {
+    return;
+  } else if (notification.type === "4") {
+    return "abril";
+  } else if (notification.type === "5") {
+    return "mayo";
+  } else if (notification.type === "6") {
+    return "junio";
+  } else if (notification.type === 7) {
+    return "julio";
+  } else if (notification.type === 8) {
+    return "agosto";
+  } else if (notification.type === 9) {
+    return "septiembre";
+  } else if (notification.type === 10) {
+    return "octubre";
+  } else if (notification.type === 11) {
+    return "noviembre";
+  } else if (notification.type === 12) {
+    return "diciembre";
+  } else {
+    return "";
+  }
+};
+
+export const returnNotificationMessage = (notification: any, name: any) => {
+  if (notification.type === "1") {
+    return `Ya está calificada tu tarea de tu curso de ${notification.title}.`;
+  } else if (notification.type === "2") {
+    return `Ya está calificada tu tarea de tu curso de ${notification.title}.`;
+  } else if (notification.type === "3") {
+    return;
+  } else if (notification.type === "4") {
+    return "abril";
+  } else if (notification.type === "5") {
+    return "mayo";
+  } else if (notification.type === "6") {
+    return "junio";
+  } else if (notification.type === 7) {
+    return "julio";
+  } else if (notification.type === 8) {
+    return "agosto";
+  } else if (notification.type === 9) {
+    return "septiembre";
+  } else if (notification.type === 10) {
+    return "octubre";
+  } else if (notification.type === 11) {
+    return "noviembre";
+  } else if (notification.type === 12) {
+    return "diciembre";
+  } else {
+    return "";
+  }
+};
+
+export function formatDateNotification(created_at: number) {
+  const daysOfWeek = [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+  ];
+  const monthsOfYear = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
+
+  const date = new Date(created_at);
+  const dayOfWeek = daysOfWeek[date.getDay()];
+  const dayOfMonth = date.getDate();
+  const month = monthsOfYear[date.getMonth()];
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hours >= 12 ? "p.m." : "a.m.";
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+
+  const formattedDate = `${dayOfWeek} ${dayOfMonth} de ${month}, ${year}. ${formattedHours}:${minutes
+    .toString()
+    .padStart(2, "0")} ${period}`;
+
+  return formattedDate;
 }

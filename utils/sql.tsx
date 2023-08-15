@@ -211,6 +211,99 @@ const sql = () => {
   //     })
   //   )
   // }
+
+
+
+  //    SELECT
+  //    user_notification.notification_id, 
+  //    user_id, 
+  //    n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //    'user_notification' AS source_table, 
+  //    NULL AS course_id, 
+  //   NULL AS season, 
+  //   NULL AS lesson,
+  //   NULL AS title,
+  //   NULL AS name 
+  //   FROM user_notification
+  //   INNER JOIN notification as n ON n.id = user_notification.notification_id
+  // WHERE user_id = ${notification.userId}
+
+  //   UNION
+  // SELECT
+  // homework_notification.notification_id,
+  //   user_id,
+  //   n.type,
+  //   n.status,
+  //   n.created_at,
+  //   'homework_notification' AS source_table,
+  //     homework_notification.course_id,
+  //     homework_notification.season,
+  //     homework_notification.lesson,
+  //     homework_notification.title,
+  //     NULL AS name 
+  //     FROM homework_notification
+  //     INNER JOIN notification as n ON n.id = homework_notification.notification_id
+  //    WHERE user_id = ${ notification.userId }
+
+  //  UNION
+
+  //   SELECT
+  //    reward_notification.notification_id,
+  //    user_id,
+  //    n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //    'reward_notification' AS source_table,
+  //    NULL AS course_id,
+  //   NULL AS season,
+  //   NULL AS lesson,
+  //   reward_notification.title,
+  //   NULL AS name
+  //   FROM reward_notification
+  //   INNER JOIN notification as n ON n.id = reward_notification.notification_id
+  // WHERE user_id = ${notification.userId}
+
+  // UNION
+
+  //   SELECT
+  //   certificate_notification.notification_id,
+  //   user_id,
+  //   n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //   'certificate_notification' AS source_table,
+  //   certificate_notification.course_id,
+  //   certificate_notification.season,
+  //   certificate_notification.lesson,
+  //   certificate_notification.title,
+  //   NULL AS name
+  //   FROM certificate_notification
+  //   INNER JOIN notification as n ON n.id = certificate_notification.notification_id
+  //  WHERE user_id = ${notification.userId}
+
+  //  UNION
+
+  //   SELECT
+  //   lesson_notification.notification_id,
+  //   user_id,
+  //   n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //   'lesson_notification' AS source_table,
+  //   lesson_notification.course_id,
+  //   lesson_notification.season,
+  //   lesson_notification.lesson,
+  //   lesson_notification.title,
+  //   lesson_notification.name
+  //   FROM lesson_notification
+  //   INNER JOIN notification as n ON n.id = lesson_notification.notification_id
+  // WHERE user_id = ${notification.userId}
   return (
     <div>sql</div>
   )

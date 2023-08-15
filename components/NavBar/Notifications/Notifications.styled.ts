@@ -4,14 +4,14 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   position: absolute;
   cursor: auto;
   transition: 0.4s ease-in-out;
-  background-color: white;
+  background-color: #dad3e5;
   height: 0;
   opacity: 0;
-  top: 46px;
+  top: 60px;
   right: -545px;
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
   padding-top: 20px;
-  border-radius: 0 0 10px 10px;
+  border-radius: 8px;
   width: 400px;
   z-indez: 10;
   gap: 20px;
@@ -22,11 +22,11 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
     props.not &&
     css`
       max-height: 350px;
-      height: 350px;
+      height: 255px;
       overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
-      right: -145px;
+      right: -130px;
       ::-webkit-scrollbar {
         background: white;
         border-radius: 10px;
@@ -44,6 +44,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   }
   .title {
     font-size: 18px;
+    color: #d244d1;
   }
   .title-container {
     display: flex;
@@ -52,9 +53,14 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
     min-height: 22px;
   }
   .read-all-tag {
-    font-size: 12px;
-    text-decoration: underline;
-    color: #0000ee;
+    align-self: flex-end;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 10px;
+    text-decoration: none;
+    color: #d244d1;
     cursor: pointer;
   }
   .all-notifications {
@@ -63,21 +69,21 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   }
 `;
 export const NotificationData = styled.div<{
-  status: boolean;
+  status: number;
   newStatus: boolean;
 }>`
   .hr-line {
     color: #3f1168;
     margin: 0;
   }
+  cursor: pointer;
   .notification-data {
     display: flex;
     padding: 15px;
     gap: 20px;
-    cursor: pointer;
-    background-color: #ece8f0;
+    background-color: #d9d9d9;
     ${(props) =>
-      (props.status || props.newStatus) &&
+      (props.status === 1 || props.newStatus) &&
       css`
         background-color: white;
       `};
@@ -85,8 +91,9 @@ export const NotificationData = styled.div<{
       background-color: #c4aade;
     }
     .notification-image {
-      width: 50px;
-      height: 50px;
+      align-self: center;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
     }
     .notification-texts {
@@ -96,14 +103,31 @@ export const NotificationData = styled.div<{
         margin: 0;
       }
       .notification-info {
-        color: #3f1168;
-        font-size: 14px;
-        span {
-          font-weight: 600;
+        p.title {
+          font-size: 14px;
+          color: #3f1168;
+          font-weight: 800;
+        }
+        p.message {
+          color: #d244d1;
+          font-weight: 500;
+          font-size: 12px;
+        }
+        p.score {
+          font-style: italic;
+          font-size: 12px;
+          color: #3f1168;
+          font-weight: 500;
+          span.approved {
+            color: #12701b;
+          }
+          span.failed {
+            color: #d62929;
+          }
         }
       }
       .date-text {
-        font-size: 10px;
+        font-size: 7px;
         font-weight: 600;
         color: #868686;
       }

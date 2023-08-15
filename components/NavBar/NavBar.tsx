@@ -90,6 +90,8 @@ const NavBar = () => {
       userId: userId
     }
     getNotifications(data).then((res) => {
+      console.log(res);
+
       let tempCounter = 0;
       res.forEach((not: any) => {
         if (!not.status) {
@@ -129,7 +131,7 @@ const NavBar = () => {
       // localStorage.clear();
       // logoutFunc();
       if (userDataAuth.user !== null) {
-        // userNotifications(userDataAuth.user.user_id)
+        userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
           let today = new Date().getTime() / 1000;
@@ -313,7 +315,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            {/* <div className="bell-contain">
+            <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -326,9 +328,6 @@ const NavBar = () => {
                   <h1 className='title'>
                     Notificaciones
                   </h1>
-                  <p className='read-all-tag' onClick={updateNotificationStatus}>
-                    Marcar como leidos
-                  </p>
                 </div>
                 <div className="all-notifications">
                   {
@@ -336,16 +335,9 @@ const NavBar = () => {
                       notifications.map((not: any, index: number) => {
                         return (
                           <Notifications
-                            message={not.message === "Recompensa aprovada" ? "Recompensa aprobada" : not.message}
-                            status={not.status}
-                            title={not.title}
-                            type={not.type}
-                            courseID={not.course_id}
-                            seasonID={not.season}
-                            lessonID={not.lesson}
-                            created_at={not.created_at}
+                            notification={not}
+                            user={userData}
                             openNotifications={openNotifications}
-                            notification_id={not.notification_id}
                             unReadNotification={unReadNotification}
                             setUnReadNotification={setUnReadNotification}
                             key={"Notifications_" + index}
@@ -356,12 +348,15 @@ const NavBar = () => {
                       <div className="empty-notifications">Sin Notificaciones!</div>
                   }
                 </div>
+                <p className='read-all-tag' onClick={updateNotificationStatus}>
+                  Marcar todas como leído
+                </p>
               </NotificationContainer>
               {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div> */}
+            </div>
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {

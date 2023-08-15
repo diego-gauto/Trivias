@@ -7,63 +7,28 @@ import { updateNotificationStatusApi } from '../../api/notifications';
 import { INotifications } from './INotifications';
 import { NotificationData } from './Notifications.styled';
 import { LESSON_PATH, REWARDS_PATH } from '../../../constants/paths';
-const Notifications = (props: INotifications) => {
+import { formatDateNotification, returnNotificationImage, returnNotificationMessage, returnNotificationTitles } from '../../../utils/functions';
+import { user } from 'firebase-functions/v1/auth';
+const Notifications = (props: any) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
-  const { message, status, title, type, courseID, seasonID, lessonID, created_at, openNotifications, notification_id, unReadNotification, setUnReadNotification } = props;
-  const [newStatus, setNewStatus] = useState<boolean>(!status ? false : true);
-  const GonvarImg = "/images/purchase/logo.png";
-  const spanColor = () => {
-    if (message === "Tarea subida") {
-      return '#6717cd'
-    }
-    if (type === "certificate") {
-      return '#524af5'
-    }
-    if (message === "Tarea revisada") {
-      return '#1bb87f'
-    }
-    if (message === "Nueva recompensa") {
-      return '#dd5900'
-    }
-    if (message === "Recompensa reclamada") {
-      return '#d22978'
-    }
-    if (message === "Recompensa aprobada") {
-      return '#006ca8'
-    }
-    if (message === "Alguien le dio like a tu comentario") {
-      return 'red'
-    }
-    if (message === "Alguien te ha comentado") {
-      return '#e68a0d'
-    }
-    if (message === "Su suscripción ha fallado" || message === "Su suscripción ha sido cancelada por falta de pago") {
-      return '#ff0000'
-    }
-    if (message === "Pago de suscripción") {
-      return '#4BB543'
-    }
-    return '#3f1168'
-  }
+  const { notification, openNotifications, unReadNotification, setUnReadNotification, user } = props;
+  const [newStatus, setNewStatus] = useState<boolean>(notification.status === 0 ? false : true);
+
   const ClickNotification = () => {
-    if (type === "homework" || type === "like" || type === "comment") {
+    if (notification.type === "1" || notification.type === "2" || notification.type === "comment") {
       router.push({
         pathname: LESSON_PATH,
-        query: { id: courseID, season: seasonID, lesson: lessonID },
+        query: { id: notification.course_id, season: notification.season, lesson: notification.lesson },
       });
     }
-    if (type === "reward") {
-      router.push(REWARDS_PATH)
-    }
-    if (!status) {
+    if (notification.status === 0) {
       let notificationUpdate = {
         status: 1,
-        id: notification_id,
+        id: notification.notification_id,
       }
       setNewStatus(true);
       updateNotificationStatusApi(notificationUpdate).then((res) => {
-        console.log(res)
         setUnReadNotification(unReadNotification - 1);
         // openNotifications();
       })
@@ -71,34 +36,14 @@ const Notifications = (props: INotifications) => {
       // openNotifications();
     }
   }
-  const TransformDate = () => {
-    let notification_date = new Date(created_at);
-    let transformToSeconds = notification_date.getTime() / 1000;
-    let secondsAfterCreate = today - transformToSeconds;
-    let timeData = 'hace 1 min'
-    if (secondsAfterCreate <= 3600) {
-      timeData = 'hace ' + Math.round(secondsAfterCreate / 60) + ' min'
-    }
-    if (secondsAfterCreate > 3600 && secondsAfterCreate <= 86400) {
-      timeData = 'hace ' + Math.round(secondsAfterCreate / 3600) + ' h'
-    }
-    if (secondsAfterCreate > 86400 && secondsAfterCreate <= 2592000) {
-      timeData = 'hace ' + (Math.round(secondsAfterCreate / 86400) === 1
-        ? Math.round(secondsAfterCreate / 86400) + ' dia'
-        : Math.round(secondsAfterCreate / 86400) + ' dias')
-    }
-    if (secondsAfterCreate > 2592000) {
-      timeData = new Date(transformToSeconds * 1000).toLocaleDateString("es-MX")
-    }
-    return timeData
-  }
+
   return (
-    <NotificationData newStatus={newStatus} status={status} >
+    <NotificationData newStatus={newStatus} status={notification} >
       <div className="notification-data" onClick={ClickNotification}>
-        <img className='notification-image' src={GonvarImg} />
+        <img className='notification-image' src={returnNotificationImage(notification)} />
         <div className="notification-texts">
           <p className='notification-info'>
-            {
+            {/* {
               type === 'like' &&
               <FaHeart className='like-icon' />
             }
@@ -111,16 +56,21 @@ const Notifications = (props: INotifications) => {
               (type === 'certificate' || type === "homework" || type === 'comment' || type === 'like') ?
                 " en el curso: "
                 : " - "
-            }
-            <span>{title && title}</span>
+            } */}
+            <p className='title'>{returnNotificationTitles(notification, user.name)}</p>
+            <p className='message'>{returnNotificationMessage(notification, "")}</p>
+            {(notification.type === "1" || "2") && <p className='score'>{notification.type === "1" ? `Aprobada` : `Rechazada`}
+              {notification.type === "1" ? <span className='approved'> +{notification.score} puntos.</span> :
+                <span className='failed'> +0 puntos.</span>}
+            </p>}
           </p>
           <p className='date-text'>
-            {TransformDate()}
+            {formatDateNotification(notification.created_at)}
           </p>
         </div>
 
       </div>
-      <hr className='hr-line' />
+      {/* <hr className='hr-line' /> */}
     </NotificationData>
   )
 }
