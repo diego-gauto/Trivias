@@ -91,18 +91,7 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
     }
     const url = await uploadImageHomework(tempData);
     tempHomework.image = url;
-    let notification = {
-      userId: user.user_id,
-      message: 'Tarea subida',
-      type: 'homework',
-      subType: "",
-      notificationId: '',
-      courseId: parseInt(courseIds.courseId),
-      season: router.query.season,
-      lesson: lesson,
-      title: data.lesson_homeworks.title,
-    }
-    // createNotification(notification);
+    //Homework create notification
     addHomeworkApi(tempHomework).then(() => {
       alert("Tarea enviada")
       setImageModal(false);
