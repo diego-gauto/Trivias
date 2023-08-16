@@ -273,7 +273,6 @@ const UsersList = () => {
     //   }
     // })
     await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
-      console.log(res);
       await res.map(async (user: any) => {
         sendUsers.push({
           nombre: user.nombre,
@@ -281,6 +280,7 @@ const UsersList = () => {
           correo: user.correo,
           pais: user.pais,
           whatsapp: user.whatsapp,
+          stripe_id: user.stripe_id
         })
       })
     })
