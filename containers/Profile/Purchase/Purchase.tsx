@@ -501,7 +501,7 @@ const Purchase = () => {
       if (type === 'subscription') {
         let price = "";
         if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
-        if (frequency === "month") price = "20MIN";
+        if (frequency === "month") price = "mensual";
         if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
 
         let data = {
@@ -520,7 +520,7 @@ const Purchase = () => {
         conektaSubscriptionApi(data).then(async (res) => {
           console.log(res);
 
-          if (res.data.data.status === 'active') {
+          if (res?.data.data.status === 'active') {
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
