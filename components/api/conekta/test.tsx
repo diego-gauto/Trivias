@@ -49,3 +49,14 @@ export const conektaCreateSubscription = async () => {
       return error
     });
 };
+
+export const getStripeInfo = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "users/search/stripe/customer", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};

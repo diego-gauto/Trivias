@@ -8,6 +8,8 @@ import { IUser } from "../../interfaces/IUserData";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
+import { CsvData } from "../admin/HomeWork/HomeWork";
+import { getStripeInfo } from "../api/conekta/test";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
@@ -30,8 +32,67 @@ const PayPlans = () => {
     setSelected(value)
   }
 
+  const uploadCsv = (event: any) => {
+    const reader = new FileReader()
+    const fileContent = event.target
+    reader.readAsText(fileContent.files[0])
+
+    reader.onload = () => {
+      let csvData: any = reader.result
+      let csvRecordsArray = csvData.split(/\r\n|\n/);
+
+      const records = getDataRecordsArrayFromCSVFile(csvRecordsArray);
+
+      processArrayWithDelay(records)
+    }
+    reader.onerror = function () {
+    };
+  }
+
+
+  const getDataRecordsArrayFromCSVFile = (csvRecordsArray: any) => {
+    let csvArr = [];
+    for (let i = 1; i < csvRecordsArray.length; i++) {
+      let currentRecord = (csvRecordsArray[i]).split(',');
+      let csvRecord: any = new CsvData();
+      for (let i = 0; i < currentRecord.length; i++) {
+        csvRecord.properties.push(currentRecord[i].trim())
+      }
+      if (csvRecord.properties[0] != '') { csvArr.push(csvRecord); }
+    }
+    return csvArr;
+  }
+
+  async function processArrayWithDelay(arrayOfEndpoints: any) {
+    for (const endpoint of arrayOfEndpoints) {
+      try {
+        let body = {
+          stripe_id: endpoint.properties[5]
+        }
+
+        const response = await getStripeInfo(body);
+        // console.log(response);
+        let today = new Date().getTime() / 1000;
+        let days = (endpoint.properties[6] - today) / 86400
+        let subscriptionArray = response.data.subscriptions.data
+        if (days < 90) {
+          if (subscriptionArray.length > 0 && subscriptionArray[0].status === 'active') {
+            console.log(1);
+
+          }
+        }
+        // console.log(response);
+      } catch (error) {
+        console.log(endpoint);
+        console.error(`Error fetching data from ${endpoint}:`, error);
+      }
+    }
+  }
+
   return (
     <PayStyles className="w-100">
+      <button onClick={uploadCsv}>add</button>
+      <input type="file" name="" id="" onChange={(e) => { uploadCsv(e) }} />
       <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
       <div className="colors">
         <div className="back">

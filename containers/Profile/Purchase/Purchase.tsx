@@ -68,7 +68,7 @@ const Purchase = () => {
   }
 
   useEffect(() => {
-    window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
+    window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, [])
 
   useEffect(() => {
@@ -515,7 +515,11 @@ const Purchase = () => {
           plan_id: price,
           userId: userData.user_id
         }
+        console.log(data);
+
         conektaSubscriptionApi(data).then(async (res) => {
+          console.log(res);
+
           if (res.data.data.status === 'active') {
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id })

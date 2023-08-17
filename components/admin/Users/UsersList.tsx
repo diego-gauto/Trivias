@@ -280,7 +280,10 @@ const UsersList = () => {
           correo: user.correo,
           pais: user.pais,
           whatsapp: user.whatsapp,
-          stripe_id: user.stripe_id
+          stripe_id: user.stripe_id,
+          final_date: user.final_date,
+          level: user.level,
+          id: user.user_id
         })
       })
     })
