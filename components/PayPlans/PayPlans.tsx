@@ -14,7 +14,7 @@ const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [selected, setSelected] = useState(1)
+  const [selected, setSelected] = useState(2)
   var userData = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
