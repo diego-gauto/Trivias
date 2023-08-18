@@ -71,3 +71,37 @@ export const updateConektaInfo = async (user: any) => {
       return error
     });
 };
+
+export const getConektaUsers = async () => {
+  let headers = {
+    accept: 'application/vnd.conekta-v2.1.0+json',
+    'Accept-Language': 'es',
+    'content-type': 'application/json',
+    authorization: 'Bearer key_kzfZaHhMC7Q3f2QPP4Ue9QT'
+  }
+  return axios
+    .get("https://api.conekta.io/customers?limit=8", { headers })
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};
+
+export const delConektaUsers = async (user: string) => {
+  let headers = {
+    accept: 'application/vnd.conekta-v2.1.0+json',
+    'Accept-Language': 'es',
+    'content-type': 'application/json',
+    authorization: 'Bearer key_kzfZaHhMC7Q3f2QPP4Ue9QT'
+  }
+  return axios
+    .delete("https://api.conekta.io/customers/" + user, { headers })
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};

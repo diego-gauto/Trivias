@@ -304,6 +304,73 @@ const sql = () => {
   //   FROM lesson_notification
   //   INNER JOIN notification as n ON n.id = lesson_notification.notification_id
   // WHERE user_id = ${notification.userId}
+
+  // const uploadCsv = (event: any) => {
+  //   const reader = new FileReader()
+  //   const fileContent = event.target
+  //   reader.readAsText(fileContent.files[0])
+
+  //   reader.onload = () => {
+  //     let csvData: any = reader.result
+  //     let csvRecordsArray = csvData.split(/\r\n|\n/);
+
+  //     const records = getDataRecordsArrayFromCSVFile(csvRecordsArray);
+
+  //     processArrayWithDelay(records)
+  //   }
+  //   reader.onerror = function () {
+  //   };
+  // }
+
+
+  // const getDataRecordsArrayFromCSVFile = (csvRecordsArray: any) => {
+  //   let csvArr = [];
+  //   for (let i = 1; i < csvRecordsArray.length; i++) {
+  //     let currentRecord = (csvRecordsArray[i]).split(',');
+  //     let csvRecord: any = new CsvData();
+  //     for (let i = 0; i < currentRecord.length; i++) {
+  //       csvRecord.properties.push(currentRecord[i].trim())
+  //     }
+  //     if (csvRecord.properties[0] != '') { csvArr.push(csvRecord); }
+  //   }
+  //   return csvArr;
+  // }
+
+  // async function processArrayWithDelay(arrayOfEndpoints: any) {
+  //   for (const endpoint of arrayOfEndpoints) {
+  //     try {
+  //       let body = {
+  //         stripe_id: endpoint.properties[5]
+  //       }
+  //       const response = await getStripeInfo(body);
+  //       let today = new Date().getTime() / 1000;
+  //       let days = (endpoint.properties[6] - today) / 86400
+  //       let subscriptionArray = response.data.subscriptions.data
+  //       if (days < 90) {
+  //         if (subscriptionArray.length > 0 && subscriptionArray[0].status === 'active') {
+  //           let body = {
+  //             userId: endpoint.properties[7],
+  //             email: endpoint.properties[2],
+  //             name: endpoint.properties[0],
+  //             phone_number: (endpoint.properties[4] && endpoint.properties[4].length > 9) ? endpoint.properties[4] : "5211111111",
+  //           }
+  //           await updateConektaInfo(body)
+  //           console.log(1);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.log(endpoint);
+  //       console.error(`Error fetching data from ${endpoint}:`, error);
+  //     }
+  //   }
+  // }
+
+  // const getU = async () => {
+  //   let users = await getConektaUsers()
+  //   users.data.data.forEach(async (element: any) => {
+  //     await delConektaUsers(element.id)
+  //   });
+  // }
   return (
     <div>sql</div>
   )
