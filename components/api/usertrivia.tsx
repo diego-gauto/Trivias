@@ -25,7 +25,7 @@ export const userTrivia = async (user: any) => {
 };
 export const emailTrivia = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/email/trivias", user)
+    .post("https://gonvar.inowu.dev/email", user)
     .then((res) => {
       return res;
     })
