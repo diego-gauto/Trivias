@@ -11,13 +11,14 @@ import styles from "./reclamar.module.css";
 const { reclamarContainer, reclamarPremio, reclamarRedes, iconos, button, centrado, link } =
   styles;
 
-const Reclamar = ({ result }: any) => {
+const Reclamar = ({ result, idTemplateBrevo }: any) => {
   // const navigate = useNavigate();
   // const { id } = useParams();
   const {
     query: { triviaId },
   } = useRouter();
   console.log(result);
+  console.log(idTemplateBrevo)
 
   // const handleClick = () => {
   //   navigate(`/trivias/${triviaId}/send/${result}`);
@@ -126,7 +127,7 @@ const Reclamar = ({ result }: any) => {
       <div className={reclamarPremio}>
         <div className={centrado}>
           <h3>Reclamá tu regalo :</h3>
-          <Link href={`/trivias/${triviaId}/send/${result}`}>
+          <Link href={`/trivias/${triviaId}/send/${result}?br=${idTemplateBrevo}`}>
             <a className={link}>
               <button className={button}>Ver regalo</button>
             </a>

@@ -16,7 +16,7 @@ import styles from "./form.module.css";
 
 const Form = () => {
   const {
-    query: { triviaId, result },
+    query: { triviaId, result, br },
   } = useRouter();
 
   const router = useRouter();
@@ -142,8 +142,8 @@ const Form = () => {
         const sendEmailDto = {
           to: values.correo,
           username: values.nombre + " " + values.apellido,
-          subject: "Prueba de envío por SendinBlu desde el front",
-          idTemplateBrevo: 7,
+          subject: "Prueba 2",
+          idTemplateBrevo: Number(br),
         };
 
         const sendEmailResponse = await emailTrivia(sendEmailDto);

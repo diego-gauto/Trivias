@@ -15,7 +15,7 @@ const Result = (props: any) => {
     img: "",
     idTemplateBrevo: 0,
   })
-  const { title, body, img } = props.resultInfo;
+  const { title, body, img, idTemplateBrevo } = props.resultInfo;
   const { resultContainer, resultado, resultText, resultImg, share } = styles;
 
   const {
@@ -64,7 +64,7 @@ const Result = (props: any) => {
           </div>
         </div>
         <div className={share}>
-          <Reclamar result={result} />
+          <Reclamar result={result} idTemplateBrevo={idTemplateBrevo} />
         </div>
       </div>
     </>
