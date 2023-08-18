@@ -9,7 +9,7 @@ import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
 import { CsvData } from "../admin/HomeWork/HomeWork";
-import { getStripeInfo } from "../api/conekta/test";
+import { getStripeInfo, updateConektaInfo } from "../api/conekta/test";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
@@ -69,19 +69,22 @@ const PayPlans = () => {
         let body = {
           stripe_id: endpoint.properties[5]
         }
-
         const response = await getStripeInfo(body);
-        // console.log(response);
         let today = new Date().getTime() / 1000;
         let days = (endpoint.properties[6] - today) / 86400
         let subscriptionArray = response.data.subscriptions.data
         if (days < 90) {
           if (subscriptionArray.length > 0 && subscriptionArray[0].status === 'active') {
             console.log(1);
-
+            let body = {
+              userId: endpoint.properties[7],
+              email: endpoint.properties[2],
+              name: endpoint.properties[0],
+              phone_number: endpoint.properties[4],
+            }
+            await updateConektaInfo(body);
           }
         }
-        // console.log(response);
       } catch (error) {
         console.log(endpoint);
         console.error(`Error fetching data from ${endpoint}:`, error);

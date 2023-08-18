@@ -515,18 +515,14 @@ const Purchase = () => {
           plan_id: price,
           userId: userData.user_id
         }
-        console.log(data);
-
         conektaSubscriptionApi(data).then(async (res) => {
-          console.log(res);
-
           if (res?.data.data.status === 'active') {
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           } else {
             const msg = "Pago Rechazado"
-            // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+            window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
           }
         })
       }

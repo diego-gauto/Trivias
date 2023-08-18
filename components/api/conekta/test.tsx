@@ -60,3 +60,14 @@ export const getStripeInfo = async (user: any) => {
       return error
     });
 };
+
+export const updateConektaInfo = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "auth/conekta", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};
