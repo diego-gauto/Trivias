@@ -51,13 +51,6 @@ export default function Trivia({
     setSelectedAnswer(a.text);
     setClassName(active);
     setCorrecta(a.correct);
-
-    // if (a.correct) {
-    //   setCorrect((prev) => prev + 1);
-    // }
-
-    // setQuestionNumber((prev) => prev + 1);
-    // setSelectedAnswer(null);
   };
 
   const handleClickButton = () => {

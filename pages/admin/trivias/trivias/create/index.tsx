@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 import { createTriviaApi } from "../../../../../components/api/trivias";
 import ITrivia, { ITriviaResult } from "../../../../../interfaces/iTrivias";
 import styles from "./create.module.css";
 
 const CreateTrivia = () => {
 
-  const { container, inputGroup, inputGroupQuestion, inputGroupAnswers, inputGroupResult } = styles
+  const { container, inputGroup, inputGroupQuestion, inputGroupAnswers, inputGroupResult, button, buttonContainer } = styles
 
 
   const data =
@@ -510,9 +512,16 @@ const CreateTrivia = () => {
           />
         </div>
       ))}
+      <div className={buttonContainer}>
 
-      <button onClick={handleCancel}>Cancelar</button>
-      <button onClick={handleCreate}>Crear Trivia</button>
+        <Link href={"/admin/trivias/trivias"}>
+          <a>
+            <button className={button}>Cancelar</button>
+          </a>
+        </Link>
+        <button className={button} onClick={handleCreate}>Crear Trivia</button>
+      </div>
+
     </div>
   );
 };

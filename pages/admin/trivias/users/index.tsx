@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
 import Papa from "papaparse";
 
 import UserTriviaList from "../../../../components/admin/Trivias/userTriviaList/userTriviaList";
 import { getAllUsersApi } from "../../../../components/api/usertrivia";
+import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import styles from "./listUser.module.css";
 
 interface UserTrivia {
   id: number;
@@ -15,34 +18,12 @@ interface UserTrivia {
   isUser: boolean;
 }
 
-const userTriviasMock = [{
-  id: 1,
-  nombre: "Diego",
-  apellido: "Gauto",
-  correo: "diego@gonvar.io",
-  whatsApp: "541153137872",
-  pais: "Argentina",
-  isUser: true,
-}, {
-  id: 2,
-  nombre: "Leonardo",
-  apellido: "Contreras",
-  correo: "leo@gonvar.io",
-  whatsApp: "525528992739",
-  pais: "Mexico",
-  isUser: true,
-}, {
-  id: 3,
-  nombre: "Victor",
-  apellido: "Diseñador",
-  correo: "victor@gonvar.io",
-  whatsApp: "524621020389",
-  pais: "Mexico",
-  isUser: false,
-}]
-
 const UsersTrivias = () => {
   const [userTrivias, setUserTrivias] = useState<UserTrivia[]>([]);
+  const [loading, setLoading] = useState(true);
+
+
+  const { main, buttonContainer, volver, link, titles } = styles
 
   const downloadCsv = () => {
     const csv = Papa.unparse(userTrivias);
@@ -63,6 +44,7 @@ const UsersTrivias = () => {
         const users = await getAllUsersApi();
 
         setUserTrivias(users)
+        setLoading(false);
       } catch (error) {
         console.error('Error al obtener los usuarios:', error);
       }
@@ -72,10 +54,33 @@ const UsersTrivias = () => {
     fetchData();
   }, []);
 
+  if (loading) {
+    return (
+      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
+
   return (
-    <div>
-      <h2>Listados de usuarios</h2>
-      <button onClick={downloadCsv}>Descargar CSV</button>
+    <div className={main}>
+      <div className={titles}>
+        <Link href={"/admin/Trivias"}>
+          <a className={link}>
+            <div className={volver}>
+              <img src="/images/trivias/icono . retroceder.svg" alt="" />
+              <div> Volver</div>
+            </div>
+          </a>
+        </Link>
+        <h2>Listados de usuarios</h2>
+      </div>
+
+      <div className={buttonContainer}>
+        <button onClick={downloadCsv}>Descargar CSV</button>
+      </div>
       <UserTriviaList usersTrivia={userTrivias} />
     </div>
   );
