@@ -99,7 +99,7 @@ const Courses = () => {
           });
         }
         else {
-          router.push({ pathname: NAILS_FORM })
+          router.push({ pathname: PLAN_PATH })
         }
 
       }
@@ -111,7 +111,7 @@ const Courses = () => {
       }
       if (videoCourse.type === "Mensual" && (userData.level === 0 && userData.final_date < today)) {
         router.push({
-          pathname: ANUAL_FORM,
+          pathname: PLAN_PATH,
         });
       }
     }

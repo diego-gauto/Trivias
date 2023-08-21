@@ -54,10 +54,9 @@ export const CourseModule = (props: ICourseModuleProps) => {
       });
     }
     if (loggedIn && !data.pay) {
-      // router.push(
-      //   { pathname: PURCHASE_PATH, query: { type: 'course', id: data.id } }
-      // )
-      router.push({ pathname: NAILS_FORM })
+      router.push(
+        { pathname: PURCHASE_PATH, query: { type: 'course', id: data.id } }
+      )
     }
     if (!loggedIn) {
       localStorage.setItem("course", `${data.id}`);

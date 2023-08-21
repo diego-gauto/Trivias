@@ -16,5 +16,5 @@ export const ANUAL_SUSCRIPTION_REDIRECT = "/suscripcion-anual";
 //images
 export const DEFAULT_USER_IMG = "/images/profile/default_img.png";
 // temporary paths
-export const ANUAL_FORM = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`;
-export const NAILS_FORM = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`;
+export const ANUAL_FORM = 'https://forms.gle/kjGgEEMEvYzmq7118';
+export const NAILS_FORM = 'https://forms.gle/LN27h3QKtYq1v29s9';

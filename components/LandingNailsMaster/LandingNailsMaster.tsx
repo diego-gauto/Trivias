@@ -131,8 +131,8 @@ const LandingNailsMaster = () => {
         }
         if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
           router.push(
-            // { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-            { pathname: NAILS_FORM }
+            { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+            // { pathname: NAILS_FORM }
           )
         }
       })
