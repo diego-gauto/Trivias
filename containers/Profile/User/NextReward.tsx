@@ -275,7 +275,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
                 </div>
             }
             {(!loader && (user.level > 0 && user.plan_name === "Gonvar Plus")) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
-            {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Resumir Suscripción</button>}
+            {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Reactivar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>
