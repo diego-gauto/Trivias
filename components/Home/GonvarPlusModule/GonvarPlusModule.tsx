@@ -55,7 +55,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push({ pathname: ANUAL_FORM })
+        router.push({ pathname: PLAN_PATH })
       }
     }
     else {
