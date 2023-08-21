@@ -122,22 +122,22 @@ const Register = () => {
 
   const redirect = () => {
     if (localStorage.getItem("trial") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
+      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
     if (localStorage.getItem("month") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
+      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=month`
     }
     if (localStorage.getItem("anual") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
+      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=anual`
     }
     if (localStorage.getItem("nailMaster") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
+      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=30`
     }
     if (localStorage.getItem("plan") === "true") {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PLAN_PATH}`
     }
   }
 
