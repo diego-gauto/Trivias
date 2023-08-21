@@ -10,9 +10,12 @@ import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-
 import { FaTrashAlt } from "react-icons/fa";
 import { attachPaymentMethod, attachPaymentMethodConekta, createPaymentMethod, detachPaymentMethod, detachPaymentMethodConekta, setDefaultPaymentMethod, setDefaultPaymentMethodConekta } from "../../../components/api/profile";
 import { conektaPm, stripePm } from "../../../components/api/users";
+import PaymentMethodModal from "../../../components/PaymentMethodModal/PaymentMethodModal";
 declare let window: any
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState<any>({ data })
   const [loader, setLoader] = useState<any>(false);
   const [deleteLoad, setDeleteLoad] = useState<any>(false);
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -115,6 +118,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   }
 
   const detachPayment = async (card: any) => {
+    if (card.default && user.level === 1 || pm.length === 1 && user.level === 1) {
+      setShow(true);
+      return;
+    }
     setDeleteLoad(!loader);
     let body = {
       payment_method: card.id,
@@ -160,6 +167,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
 
   return (
     <PaymentMethodContainer add={addPayment}>
+      <PaymentMethodModal show={show} onHide={() => { setShow(false); }} newCard={() => { newCard(true); setShow(false); }}
+        message="Si desea eliminar su metodo de pago, por favor de agregar otro metodo de pago y hacerlo su metodo de pago predeterminado o si desea puede cancelar su suscripcion, gracias!"
+
+      />
       <div className="main-container">
         <div className="title">
           Métodos de pago

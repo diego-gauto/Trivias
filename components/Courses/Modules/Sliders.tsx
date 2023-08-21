@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import { ICourse, ICourseData, IUserCourse, IUserHistory, IUserProgress } from './ISliders';
+import { ICourse, ICourseData } from './ISliders';
 import { Image } from "react-bootstrap";
 import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, ImageContent, Arrows } from './Sliders.styled';
 import CourseModal from '../../CourseModal/CourseModal';
@@ -11,7 +11,6 @@ import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '.
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
-import { user } from 'firebase-functions/v1/auth';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user, containLoader } = props;

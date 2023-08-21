@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
+
+import { useFacebook } from "react-facebook";
+import { SlBell } from "react-icons/sl";
 import { useMediaQuery } from "react-responsive";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { BLOGS_PATH, DEFAULT_USER_IMG, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, REWARDS_PATH, SIGNUP_PAST_USER_PATH, SIGNUP_PATH } from "../../constants/paths";
-import { useAuth } from "../../hooks/useAuth";
+import { googleLogout } from "@react-oauth/google";
+
 import {
+  BLOGS_PATH,
+  DEFAULT_USER_IMG,
+  LOGIN_PATH,
+  PLAN_PATH,
+  PREVIEW_PATH,
+  PROFILE_PATH,
+  REWARDS_PATH,
+  SIGNUP_PAST_USER_PATH,
+  SIGNUP_PATH,
+} from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
+import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import {
+  FloatingMenuItem,
   HamburgerContain,
   HamburgerMenu,
+  HamburgerMenuOptionsList,
+  HoverText,
   HBList,
   HBMenu,
   IngresarOptionsList,
-  FloatingMenuItem,
   Logo,
   LogoContain,
   LogoS,
@@ -25,14 +44,7 @@ import {
   TagsResp,
   UserContain,
   UserImage,
-  HamburgerMenuOptionsList,
-  HoverText,
 } from "./NavBar.styled";
-import { SlBell } from "react-icons/sl";
-import { googleLogout } from "@react-oauth/google";
-import { useFacebook } from "react-facebook";
-import io from "socket.io-client";
-import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
 import { updateMembership } from "../api/profile";
@@ -49,6 +61,8 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
+
+  const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const toggleIngresarOptionsMenu = () => {
     setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);

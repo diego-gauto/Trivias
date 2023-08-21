@@ -1,7 +1,29 @@
+import { renderToString } from "react-dom/server";
+
+import { type } from "os";
+
 import LandingNailsMaster from "../../components/LandingNailsMaster/LandingNailsMaster";
 import { MainContain } from "../../screens/Styles.styled";
 
-const termsConditions = () => {
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+type Repo = {
+  data: [],
+}
+//: GetServerSideProps<{ nails: Repo }>
+export const getServerSideProps = async ({ req, res }: any) => {
+  const result = await fetch("https://gonvar.inowu.dev/" + "courses/getCourses");
+  const html = [renderToString(<LandingNailsMaster />)]
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+  // let nails = await result.json();
+  let nails = html;
+  return {
+    props: { nails }
+  }
+}
+const termsConditions = ({ nails }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
 
     <MainContain

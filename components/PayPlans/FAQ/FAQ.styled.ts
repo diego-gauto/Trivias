@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FaqStyle = styled.div`
   .faq {
@@ -13,6 +13,7 @@ export const FaqStyle = styled.div`
     .q-container {
       border-radius: 14px;
       cursor: pointer;
+      max-width: 700px
     }
     .q {     
       align-items: center;
