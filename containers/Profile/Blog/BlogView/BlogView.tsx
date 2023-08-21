@@ -230,13 +230,13 @@ const BlogView = () => {
           </FirstSection>
           {
             blog?.link &&
-            <VideoBlog>
+            <VideoBlog >
               <ReactPlayer
                 url={blog.link}
                 playing={false}
                 muted={false}
                 controls
-                width="100%" height="100%"
+                width="100%" height="300px"
               />
             </VideoBlog>
           }
