@@ -53,8 +53,8 @@ const Individual = (props: IData) => {
         });
       }
       if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-        // router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
-        router.push({ pathname: NAILS_FORM })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
+        // router.push({ pathname: NAILS_FORM })
       }
     } else {
       localStorage.setItem("nailMaster", "true");

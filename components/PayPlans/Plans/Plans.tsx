@@ -35,9 +35,9 @@ export const Plans = (props: IData) => {
             <Individual user={user} />
           </div>
           {/* Ultimo */}
-          <div className="col-sm-6 col-lg-3 my-3">
+          {/* <div className="col-sm-6 col-lg-3 my-3">
             <Ind_Anual user={user} />
-          </div>
+          </div> */}
         </div>
       </div>
     </PlanStyles>

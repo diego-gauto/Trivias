@@ -12,7 +12,7 @@ export const PlanStyles = styled.div`
       display: flex;
       justify-content: space-between;
       .col-lg-3 {
-        width: 25%;
+        width: 33%;
       }
       .back {
         background-color: #ece7f2;
