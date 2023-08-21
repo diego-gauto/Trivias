@@ -308,7 +308,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            <div className="bell-contain">
+            {/* <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -361,7 +361,7 @@ const NavBar = () => {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div>
+            </div> */}
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {
