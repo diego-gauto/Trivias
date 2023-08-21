@@ -65,6 +65,16 @@ export const PlanStyles = styled.div`
           width: 100%;
           height: 20px;
         }
+        .text-center {
+          .save {
+            color: #3f1168;
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+        .tit-contain {
+          margin-top: 7px !important;
+        }
         .title {
           img {
             self-align: center;
