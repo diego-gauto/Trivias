@@ -500,9 +500,9 @@ const Purchase = () => {
       }
       if (type === 'subscription') {
         let price = "";
-        if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
+        if (trial === "true") price = "mes_gratis";
         if (frequency === "month") price = "mensual";
-        if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
+        if (frequency === "anual") price = "anual";
 
         let data = {
           name: card.holder,
@@ -518,7 +518,7 @@ const Purchase = () => {
         conektaSubscriptionApi(data).then(async (res) => {
           if (res?.data.data.status === 'active') {
             let sub = res.data.data;
-            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id })
+            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           } else {
             const msg = "Pago Rechazado"
@@ -823,7 +823,7 @@ const Purchase = () => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
                         finalDate = today + 2629800;
-                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
                         setConfirmation(false);
                         setPay(true);
                         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -867,8 +867,8 @@ const Purchase = () => {
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo}>oxxo</button>}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>}
+                {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo}>oxxo</button>}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>} */}
               </div>
             </div>
             <div className="right-section">
@@ -1140,7 +1140,7 @@ const Purchase = () => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
                           finalDate = today + 2629800;
-                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
+                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
                           setConfirmation(false);
                           setPay(true);
                           window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";

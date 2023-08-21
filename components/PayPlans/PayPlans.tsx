@@ -8,8 +8,6 @@ import { IUser } from "../../interfaces/IUserData";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
-import { CsvData } from "../admin/HomeWork/HomeWork";
-import { getStripeInfo, updateConektaInfo } from "../api/conekta/test";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
