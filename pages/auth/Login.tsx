@@ -313,21 +313,21 @@ const Login = () => {
   const redirect = (userInfo: any) => {
     let today = new Date().getTime() / 1000;
     if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&trial=true`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
     } else if (localStorage.getItem("course")) {
-      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
     else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=month`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
     }
     else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=anual`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
     }
     else if (localStorage.getItem("nailMaster") === "true") {
-      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=30`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
     }
     else if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PLAN_PATH}`
+      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
     } else {
       window.location.href = PREVIEW_PATH;
     }

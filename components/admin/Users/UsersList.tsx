@@ -280,7 +280,7 @@ const UsersList = () => {
           correo: user.correo,
           pais: user.pais,
           whatsapp: user.whatsapp,
-          stripe_id: user.stripe_id,
+          conekta_id: user.conekta_id,
           final_date: user.final_date,
           level: user.level,
           id: user.user_id
