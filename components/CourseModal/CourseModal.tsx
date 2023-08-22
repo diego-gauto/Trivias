@@ -76,7 +76,12 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
     else {
-      localStorage.setItem("course", `${course.id}`);
+      if (course.type === "Producto") {
+        localStorage.setItem("course", `${course.id}`);
+      }
+      if (course.type === "Mensual") {
+        localStorage.setItem("plan", `true`);
+      }
       router.push({ pathname: LOGIN_PATH })
     }
   }

@@ -184,7 +184,7 @@ const Login = () => {
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
           window.location.href = PREVIEW_PATH;
-          redirect()
+          redirect(res[0])
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -219,7 +219,7 @@ const Login = () => {
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
       window.location.href = PREVIEW_PATH;
-      redirect()
+      redirect(res[0])
     })
   }
   const updateSignIn = async (user: any) => {
@@ -269,7 +269,7 @@ const Login = () => {
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 window.location.href = PREVIEW_PATH;
-                redirect()
+                redirect(res[0])
               })
               setAuthLoader(false);
               return
@@ -300,7 +300,7 @@ const Login = () => {
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             window.location.href = PREVIEW_PATH;
-            redirect()
+            redirect(res[0])
           }
         })
       })
@@ -308,23 +308,24 @@ const Login = () => {
     flow: 'auth-code',
   });
 
-  const redirect = () => {
-    if (localStorage.getItem("trial") === "true") {
+  const redirect = (userInfo: any) => {
+    let today = new Date().getTime() / 1000;
+    if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&trial=true`
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
-    if (localStorage.getItem("month") === "true") {
+    if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=month`
     }
-    if (localStorage.getItem("anual") === "true") {
+    if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=anual`
     }
     if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=30`
     }
-    if (localStorage.getItem("plan") === "true") {
+    if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PLAN_PATH}`
     }
   }
@@ -354,7 +355,7 @@ const Login = () => {
               updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                redirect()
+                redirect(res[0])
                 window.location.href = PREVIEW_PATH;
               })
               setAuthLoader(false);
@@ -386,7 +387,7 @@ const Login = () => {
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             window.location.href = PREVIEW_PATH;
-            redirect()
+            redirect(res[0])
           }
         })
       })
