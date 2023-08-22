@@ -53,16 +53,16 @@ const CourseModal = (props: ICourseModal) => {
   const goTo = () => {
     if (user) {
       //New condition subscription flow
-      if (course.type === "Mensual" && user.final_date > today) {
+      if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin') {
         router.push({
           pathname: LESSON_PATH,
           query: { id: course.id, season: 0, lesson: 0 },
         });
       }
-      if ((course.type === "Mensual") && (user.level === 0 && user.final_date < today)) {
+      if (course.type === "Mensual" && user.level === 0 && user.final_date < today) {
         router.push(`${PLAN_PATH}`)
       }
-      if ((course.type === "Mensual") && (user.final_date < today && (user.level === 1 || user.level > 2))) {
+      if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && (user.level === 1 || user.level > 2))) {
         router.push(`${PROFILE_PATH}`)
       }
       if (course.type === "Producto" && course.pay) {

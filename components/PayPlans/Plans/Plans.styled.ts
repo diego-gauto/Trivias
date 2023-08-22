@@ -111,15 +111,12 @@ export const PlanStyles = styled.div`
         justify-content: center;
         .text-center {
           font-size: 14px;
-<<<<<<< HEAD
-=======
           i {
             cursor: pointer;
             &:hover {
               opacity: 0.6;
             }
           }
->>>>>>> main
         }
         .tip {
           cursor: pointer;

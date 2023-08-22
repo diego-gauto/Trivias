@@ -63,7 +63,7 @@ const Lesson = () => {
             return router.push({ pathname: PLAN_PATH });
             // router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
           }
-          if (res.type === 'Mensual' && user.final_date < today) {
+          if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
             return router.push({
               pathname: PURCHASE_PATH,
               query: { type: 'subscription' }

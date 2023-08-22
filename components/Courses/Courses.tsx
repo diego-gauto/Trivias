@@ -103,7 +103,7 @@ const Courses = () => {
         }
 
       }
-      if (videoCourse.type === "Mensual" && userData.final_date > today) {
+      if (videoCourse.type === "Mensual" && userData.final_date > today || userData.role === 'superAdmin') {
         router.push({
           pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
