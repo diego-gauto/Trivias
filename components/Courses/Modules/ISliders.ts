@@ -8,6 +8,7 @@ export interface ICourseData {
     method: string;
     final_date: number;
     level: number;
+    role: string;
     user_courses: [IUserCourse];
     user_history: [IUserHistory];
     user_progress: [IUserProgress];

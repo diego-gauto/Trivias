@@ -6,5 +6,6 @@ export interface ICourseModuleContainerProps {
     final_date: number;
     level: number;
     method: string;
+    role: string;
   };
 }
