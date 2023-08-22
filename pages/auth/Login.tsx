@@ -35,6 +35,7 @@ import {
 } from "../../screens/Login.styled";
 import ModalForgot from "./Modals/ModalForgot";
 import router from "next/router";
+import { activeUsers } from "../../constants/dummies";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -184,7 +185,6 @@ const Login = () => {
           }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
-          window.location.href = PREVIEW_PATH;
           redirect(res[0])
         }
         if (res[0].password !== signUpData.credentials.password) {
@@ -314,21 +314,22 @@ const Login = () => {
     let today = new Date().getTime() / 1000;
     if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&trial=true`
-    }
-    if (localStorage.getItem("course")) {
+    } else if (localStorage.getItem("course")) {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
-    if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+    else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=month`
     }
-    if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+    else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=subscription&frequency=anual`
     }
-    if (localStorage.getItem("nailMaster") === "true") {
+    else if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PURCHASE_PATH}?type=course&id=30`
     }
-    if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+    else if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://plans--sunny-hummingbird-9f6a67.netlify.app${PLAN_PATH}`
+    } else {
+      window.location.href = PREVIEW_PATH;
     }
   }
 
