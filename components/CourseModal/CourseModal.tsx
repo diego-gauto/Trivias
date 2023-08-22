@@ -76,7 +76,7 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
     else {
-      localStorage.setItem("plan", "true");
+      localStorage.setItem("course", `${course.id}`);
       router.push({ pathname: LOGIN_PATH })
     }
   }

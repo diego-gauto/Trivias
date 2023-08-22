@@ -59,7 +59,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
       }
     }
     else {
-      localStorage.setItem("plan", "true");
+      localStorage.setItem('anual', 'true');
       router.push(SIGNUP_PATH)
     }
   }
