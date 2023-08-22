@@ -176,11 +176,12 @@ const Login = () => {
             phone_number: res[0].phone_number,
             country: res[0].country,
             name: res[0].name,
-            email: res[0].email
+            email: res[0].email,
+            userId: res[0].user_id
           }
-          // if (res[0].conekta_id === null) {
-          //   await conektaCustomer(body)
-          // }
+          if (res[0].conekta_id === null) {
+            await conektaCustomer(body)
+          }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
           window.location.href = PREVIEW_PATH;
@@ -292,11 +293,12 @@ const Login = () => {
               phone_number: res[0].phone_number,
               country: res[0].country,
               name: res[0].name,
-              email: res[0].email
+              email: res[0].email,
+              userId: res[0].user_id
             }
-            // if (res[0].conekta_id === null) {
-            //   await conektaCustomer(body)
-            // }
+            if (res[0].conekta_id === null) {
+              await conektaCustomer(body)
+            }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             window.location.href = PREVIEW_PATH;
@@ -379,11 +381,12 @@ const Login = () => {
               phone_number: res[0].phone_number,
               country: res[0].country,
               name: res[0].name,
-              email: res[0].email
+              email: res[0].email,
+              userId: res[0].user_id
             }
-            // if (res[0].conekta_id === null) {
-            //   await conektaCustomer(body)
-            // }
+            if (res[0].conekta_id === null) {
+              await conektaCustomer(body)
+            }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             window.location.href = PREVIEW_PATH;
