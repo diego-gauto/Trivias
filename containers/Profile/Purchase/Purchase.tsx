@@ -790,7 +790,7 @@ const Purchase = () => {
                     <input type="checkbox" name="terms" id="terms" onChange={(e) => {
                       setTerms(e.target.checked)
                     }} />
-                    <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition">términos, <br />
+                    <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition-subscription">términos, <br />
                       condiciones y políticas de Gonvar</a></p>
                   </div>
                   {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
@@ -1107,7 +1107,7 @@ const Purchase = () => {
                       <input type="checkbox" name="terms" id="terms" onChange={(e) => {
                         setTerms(e.target.checked)
                       }} />
-                      <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition">términos, <br />
+                      <p className="terms">Al registrarte, aceptas los <a target="_blank" href="/terms-condition-subscription">términos, <br />
                         condiciones y políticas de Gonvar</a></p>
                     </div>
                     {!loader && <button onClick={handleConfirm}>Confirmar compra</button>}
