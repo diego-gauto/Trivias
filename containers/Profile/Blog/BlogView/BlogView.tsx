@@ -66,13 +66,12 @@ const BlogView = () => {
         router.push(PREVIEW_PATH)
       }
       else {
-        // router.push(`${PURCHASE_PATH}?type=subscription`)
-        router.push({ pathname: ANUAL_FORM });
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
       }
     }
     else {
       router.push(SIGNUP_PATH)
-      localStorage.setItem("sub", "true");
+      localStorage.setItem('anual', 'true')
     }
   }
   const getBlog = async () => {

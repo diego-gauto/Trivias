@@ -28,7 +28,7 @@ const Sliders = (props: ICourseData) => {
   const sendTo = () => {
     if (user && user.level === 0 && user.final_date < today) {
       router.push({
-        pathname: ANUAL_FORM
+        pathname: PLAN_PATH
       })
     }
     else {

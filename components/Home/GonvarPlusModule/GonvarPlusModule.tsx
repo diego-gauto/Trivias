@@ -51,11 +51,11 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   }
   const goTo = () => {
     if (user) {
-      if (user.level === 1 || user.final_date > today) {
+      if (user.level > 0 || user.final_date > today) {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push({ pathname: PLAN_PATH })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
       }
     }
     else {

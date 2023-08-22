@@ -72,7 +72,7 @@ const CourseModal = (props: ICourseModal) => {
         });
       }
       if (course.type === 'Producto' && !course.pay) {
-        router.push({ pathname: PLAN_PATH })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } })
       }
     }
     else {
