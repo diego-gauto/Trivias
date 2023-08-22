@@ -74,3 +74,34 @@ export const ErrorContainer = styled.div`
     }
   }
 `;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background-color: #ede7f2;
+  border-radius: 12px;
+  p {
+    font-size: 18px;
+    color: #3f1168;
+    font-weight: 600;
+    text-align: center;
+  }
+  .p14 {
+    text-align: start;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .p14-bold {
+    font-size: 14px;
+  }
+  button {
+    padding: 5px;
+    border: none;
+    border-radius: 20px;
+    background-color: #3f1168;
+    color: #ffffff;
+  }
+`;

@@ -36,6 +36,7 @@ import {
 import ModalForgot from "./Modals/ModalForgot";
 import router from "next/router";
 import { activeUsers } from "../../constants/dummies";
+import ActiveUserConekta from "./Modals/ActiveUserConekta";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -691,6 +692,7 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
+      <ActiveUserConekta show={true} setShow={setShow} error={errorMsg} />
       <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>

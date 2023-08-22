@@ -1,3 +1,4 @@
+
 export const SUB_EXPIRED = [
   {
     "id": "sub_1NVgj1AaQg7w1ZH2953rkilN",
@@ -32243,10 +32244,10 @@ export const activeUsers = [
     "correo": "leo_dany_1998@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525528992739,
-    "stripe_id": "cus_IPn3CLfUsMSfKF",
-    "final_date": 1691990000,
-    "id": 7,
-    "level": 1
+    "conekta_id": "cus_2uQhDnVqpJ9k3CeJo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7
   },
   {
     "nombre": "irene",
@@ -32254,10 +32255,10 @@ export const activeUsers = [
     "correo": "velaxquex832@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527291000745,
-    "stripe_id": "cus_M4kLa1Xdm4iWMJ",
-    "final_date": 1692290000,
-    "id": 133,
-    "level": 1
+    "conekta_id": "cus_2uQhDnzJioKVZGPm3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 133
   },
   {
     "nombre": "Nancy Azucena",
@@ -32265,10 +32266,10 @@ export const activeUsers = [
     "correo": "nazucego@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523334023792,
-    "stripe_id": "cus_M00O0JSs1G1HUw",
-    "final_date": 1693790000,
-    "id": 154,
-    "level": 1
+    "conekta_id": "cus_2uQhDp2eE5djpsTfV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 154
   },
   {
     "nombre": "vanne",
@@ -32276,10 +32277,10 @@ export const activeUsers = [
     "correo": "4381315725vane@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524381315725,
-    "stripe_id": "cus_K6bEHjHcikCj9i",
-    "final_date": 1693580000,
-    "id": 157,
-    "level": 1
+    "conekta_id": "cus_2uQhDoyUrhH3HjyHz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 157
   },
   {
     "nombre": "Leo",
@@ -32287,10 +32288,10 @@ export const activeUsers = [
     "correo": "leonister.oficial@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525528992739,
-    "stripe_id": "cus_IPo1xgohSUKukK",
-    "final_date": 1692070000,
-    "id": 206,
-    "level": 1
+    "conekta_id": "cus_2uQhDpUWyo6jVqHLz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 206
   },
   {
     "nombre": "Ma. de Lourdes",
@@ -32298,10 +32299,10 @@ export const activeUsers = [
     "correo": "tukituki0409@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524426095628,
-    "stripe_id": "cus_NLyPRCsLalcmMQ",
-    "final_date": 1691990000,
-    "id": 326,
-    "level": 1
+    "conekta_id": "cus_2uQhDqDLVzfP86wqX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 326
   },
   {
     "nombre": "Nancy",
@@ -32309,10 +32310,10 @@ export const activeUsers = [
     "correo": "nancygzayas3@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522251224388,
-    "stripe_id": "cus_K6ahwhc3eJvDaa",
-    "final_date": 1691440000,
-    "id": 344,
-    "level": 1
+    "conekta_id": "cus_2uQhDqPMC5y8ohHzX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 344
   },
   {
     "nombre": "Marlen",
@@ -32320,10 +32321,10 @@ export const activeUsers = [
     "correo": "msalanuevaperez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543840755,
-    "stripe_id": "cus_JqeEC0FSkKBM8U",
-    "final_date": 1692580000,
-    "id": 436,
-    "level": 1
+    "conekta_id": "cus_2uQhDrBwRHxzDijL4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 436
   },
   {
     "nombre": "Alejandra",
@@ -32331,10 +32332,10 @@ export const activeUsers = [
     "correo": "novapjana@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581482999,
-    "stripe_id": "cus_JsYsCvKuPBYdG5",
-    "final_date": 1691720000,
-    "id": 594,
-    "level": 1
+    "conekta_id": "cus_2uQhDrrzEV6S4Ecyo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 594
   },
   {
     "nombre": "Berenice Guadalupe",
@@ -32342,10 +32343,10 @@ export const activeUsers = [
     "correo": "berego2526@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525577983179,
-    "stripe_id": "cus_JpE8s5ikc7wnRk",
-    "final_date": 1691990000,
-    "id": 607,
-    "level": 1
+    "conekta_id": "cus_2uQhDrgyYPngNeGqT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 607
   },
   {
     "nombre": "Gabriela",
@@ -32353,10 +32354,10 @@ export const activeUsers = [
     "correo": "solis4464@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524611081812,
-    "stripe_id": "cus_LcMLWRhOd2kIIW",
-    "final_date": 1693690000,
-    "id": 766,
-    "level": 1
+    "conekta_id": "cus_2uQhDsbokgf5hWvYM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 766
   },
   {
     "nombre": "flaka",
@@ -32364,10 +32365,9 @@ export const activeUsers = [
     "correo": "apoyoalicfrancisco@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314676457,
-    "stripe_id": "cus_Nlnp4QVD4uNKi2",
     "final_date": 1723610000,
-    "id": 815,
-    "level": 0
+    "level": 0,
+    "id": 815
   },
   {
     "nombre": "Sonia",
@@ -32375,10 +32375,10 @@ export const activeUsers = [
     "correo": "sonia8558@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 17139626080,
-    "stripe_id": "cus_JpDMebBFwAqwF8",
-    "final_date": 1692680000,
-    "id": 1100,
-    "level": 1
+    "conekta_id": "cus_2uQhDtAcanuydBbpv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1100
   },
   {
     "nombre": "Teresa Diocelina",
@@ -32386,10 +32386,9 @@ export const activeUsers = [
     "correo": "villarsita@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529541077090,
-    "stripe_id": "cus_MX0pMcVo5i9UjW",
     "final_date": 1680240000,
-    "id": 1175,
-    "level": 1
+    "level": 1,
+    "id": 1175
   },
   {
     "nombre": "Andy",
@@ -32397,10 +32396,10 @@ export const activeUsers = [
     "correo": "andmed2092@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525615921821,
-    "stripe_id": "cus_MY03m8EWKbvMwi",
-    "final_date": 1686720000,
-    "id": 1223,
-    "level": 1
+    "conekta_id": "cus_2uQhDu9DW6DaioPKr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1223
   },
   {
     "nombre": "Janeth Esmeralda",
@@ -32408,10 +32407,9 @@ export const activeUsers = [
     "correo": "enammassad@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525571854072,
-    "stripe_id": "cus_JwY4S5IPLsg2Of",
     "final_date": 1689100000,
-    "id": 1266,
-    "level": 1
+    "level": 1,
+    "id": 1266
   },
   {
     "nombre": "Ana Paulina",
@@ -32419,10 +32417,10 @@ export const activeUsers = [
     "correo": "pauliniux17@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523327183870,
-    "stripe_id": "cus_NgwNneVqLSC632",
-    "final_date": 1691730000,
-    "id": 1273,
-    "level": 1
+    "conekta_id": "cus_2uQhDuwCPg8vt6tWZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1273
   },
   {
     "nombre": "Martha lizbeth",
@@ -32430,10 +32428,9 @@ export const activeUsers = [
     "correo": "thamar_12@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528681153469,
-    "stripe_id": "cus_MX0dh5qAAHYnmT",
     "final_date": 1690780000,
-    "id": 1378,
-    "level": 1
+    "level": 1,
+    "id": 1378
   },
   {
     "nombre": "Blanca Ivette",
@@ -32441,10 +32438,10 @@ export const activeUsers = [
     "correo": "blancafloresgutierrez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513643211,
-    "stripe_id": "cus_JpXGiYhW09p9lG",
-    "final_date": 1692330000,
-    "id": 1379,
-    "level": 1
+    "conekta_id": "cus_2uQhDvcrYVLsyLiKA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1379
   },
   {
     "nombre": "Beatriz Eugenia",
@@ -32452,10 +32449,9 @@ export const activeUsers = [
     "correo": "heugeniator25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527225054902,
-    "stripe_id": "cus_NlnqMc267tmh1E",
     "final_date": 1723320000,
-    "id": 1409,
-    "level": 0
+    "level": 0,
+    "id": 1409
   },
   {
     "nombre": "Luz Maria",
@@ -32463,20 +32459,20 @@ export const activeUsers = [
     "correo": "marioli9conde@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522491010960,
-    "stripe_id": "cus_Kzf2lShSxt5VYS",
-    "final_date": 1692460000,
-    "id": 1420,
-    "level": 1
+    "conekta_id": "cus_2uQhDwMg4guXbcNor",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1420
   },
   {
     "nombre": "Gabriela Irazema",
     "apellido": "Mora González",
     "correo": "gabrielairazemamora@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_JpCaKHUFo1PLE8",
-    "final_date": 1694010000,
-    "id": 1476,
-    "level": 1
+    "conekta_id": "cus_2uQhDx6VatUBDt3JQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1476
   },
   {
     "nombre": "Alejandra",
@@ -32484,10 +32480,10 @@ export const activeUsers = [
     "correo": "ale.albarran32@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774293342,
-    "stripe_id": "cus_JpD6a0CEEjcc0V",
-    "final_date": 1692390000,
-    "id": 1491,
-    "level": 1
+    "conekta_id": "cus_2uQhDxaxVPdvgn2A2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1491
   },
   {
     "nombre": "Dexa",
@@ -32495,20 +32491,19 @@ export const activeUsers = [
     "correo": "dexachevez1993@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524437410894,
-    "stripe_id": "cus_LofU8zFCIMHuDo",
     "final_date": 1691180000,
-    "id": 1561,
-    "level": 1
+    "level": 1,
+    "id": 1561
   },
   {
     "nombre": "anabelki",
     "apellido": "Loaisiga",
     "correo": "anabelkys1983@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_N9Rls6C1sK9TRM",
-    "final_date": 1691780000,
-    "id": 1698,
-    "level": 1
+    "conekta_id": "cus_2uQhDya8dHbUURNHV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 1698
   },
   {
     "nombre": "iluhitl",
@@ -32516,10 +32511,9 @@ export const activeUsers = [
     "correo": "aparicioiluhitl85@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461899445,
-    "stripe_id": "cus_JpkC9CwtJNCrcQ",
     "final_date": 1689690000,
-    "id": 1727,
-    "level": 1
+    "level": 1,
+    "id": 1727
   },
   {
     "nombre": "beatriz",
@@ -32527,10 +32521,10 @@ export const activeUsers = [
     "correo": "marlopbety38@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525560774391,
-    "stripe_id": "cus_Jr3CUpTQrwEFCW",
-    "final_date": 1693820000,
-    "id": 2025,
-    "level": 1
+    "conekta_id": "cus_2uQhDzN7WsWpdisTh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2025
   },
   {
     "nombre": "ana deli",
@@ -32538,10 +32532,9 @@ export const activeUsers = [
     "correo": "anadelidelacruzdelacruz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529131013489,
-    "stripe_id": "cus_Nlnrz4K4bGE7y1",
     "final_date": 1705790000,
-    "id": 2042,
-    "level": 0
+    "level": 0,
+    "id": 2042
   },
   {
     "nombre": "vanessa",
@@ -32549,10 +32542,10 @@ export const activeUsers = [
     "correo": "4381315725@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524381315725,
-    "stripe_id": "cus_Juchgk3Z4HTwRt",
-    "final_date": 1693500000,
-    "id": 2113,
-    "level": 1
+    "conekta_id": "cus_2uQhDzozGaypFcaFu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2113
   },
   {
     "nombre": "gabriela",
@@ -32560,10 +32553,9 @@ export const activeUsers = [
     "correo": "memane624@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523333179061,
-    "stripe_id": "cus_JrKEjxuadpD689",
     "final_date": 1632340000,
-    "id": 2175,
-    "level": 1
+    "level": 1,
+    "id": 2175
   },
   {
     "nombre": "Erika",
@@ -32571,10 +32563,10 @@ export const activeUsers = [
     "correo": "erika.lara.robles21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525630715360,
-    "stripe_id": "cus_Jsk88w2AxC9xBI",
-    "final_date": 1692900000,
-    "id": 2221,
-    "level": 1
+    "conekta_id": "cus_2uQhE1YonnYTpxwuw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2221
   },
   {
     "nombre": "Ana lilia",
@@ -32582,20 +32574,20 @@ export const activeUsers = [
     "correo": "analiliabarrios62@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581718910,
-    "stripe_id": "cus_JrieUv1KlMLidO",
-    "final_date": 1693000000,
-    "id": 2236,
-    "level": 1
+    "conekta_id": "cus_2uQhE2HdJz77TEcQd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2236
   },
   {
     "nombre": "lorena",
     "apellido": "espejel",
     "correo": "lorena_ehl@hotmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_KyivA4a3QJm9eg",
-    "final_date": 1692240000,
-    "id": 2330,
-    "level": 1
+    "conekta_id": "cus_2uQhE2aa5UCmWXrwm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2330
   },
   {
     "nombre": "María de Jesús",
@@ -32603,10 +32595,10 @@ export const activeUsers = [
     "correo": "mariquita6917@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523321342487,
-    "stripe_id": "cus_JuJQbs01y2V9XH",
-    "final_date": 1693430000,
-    "id": 2455,
-    "level": 1
+    "conekta_id": "cus_2uQhE32SqBfm8RZjN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2455
   },
   {
     "nombre": "Lilia",
@@ -32614,10 +32606,10 @@ export const activeUsers = [
     "correo": "lopez.g.liliy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527737394556,
-    "stripe_id": "cus_JuI6jOwjwl2Js4",
-    "final_date": 1693420000,
-    "id": 2465,
-    "level": 1
+    "conekta_id": "cus_2uQhE413kUyNDXbfP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2465
   },
   {
     "nombre": "erika Edith",
@@ -32625,10 +32617,10 @@ export const activeUsers = [
     "correo": "edithcare1402@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631348193,
-    "stripe_id": "cus_JvmFHURs9623El",
-    "final_date": 1692460000,
-    "id": 2540,
-    "level": 1
+    "conekta_id": "cus_2uQhE3wH3UYATJDTS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2540
   },
   {
     "nombre": "itzel",
@@ -32636,10 +32628,10 @@ export const activeUsers = [
     "correo": "itzelgonzalez318@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526863704907,
-    "stripe_id": "cus_K3mAlvsDJRDHis",
-    "final_date": 1692930000,
-    "id": 2633,
-    "level": 1
+    "conekta_id": "cus_2uQhE4VWez97gwL6a",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2633
   },
   {
     "nombre": "Natalia Mayela",
@@ -32647,10 +32639,10 @@ export const activeUsers = [
     "correo": "nataliamdf@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523311230030,
-    "stripe_id": "cus_JyP4qgjTI52kuq",
-    "final_date": 1691690000,
-    "id": 2687,
-    "level": 1
+    "conekta_id": "cus_2uQhE5Qv5sfTdfzQA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2687
   },
   {
     "nombre": "ADRIANA",
@@ -32658,10 +32650,10 @@ export const activeUsers = [
     "correo": "adrianaxm100@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522225810196,
-    "stripe_id": "cus_LoQwtN0yvoGxWL",
-    "final_date": 1693800000,
-    "id": 2827,
-    "level": 1
+    "conekta_id": "cus_2uQhE6DWK5fK6Lb8r",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2827
   },
   {
     "nombre": "Georgina Montserrat",
@@ -32669,10 +32661,10 @@ export const activeUsers = [
     "correo": "montsemn13@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525520920100,
-    "stripe_id": "cus_L83j0h1ryueeBs",
-    "final_date": 1691730000,
-    "id": 2989,
-    "level": 1
+    "conekta_id": "cus_2uQhE6DWK5fK6Lb8y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 2989
   },
   {
     "nombre": "Grecia Berenice",
@@ -32680,10 +32672,9 @@ export const activeUsers = [
     "correo": "grecia-b@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522871187555,
-    "stripe_id": "cus_K8YmEqEGv2t3Iu",
     "final_date": 1633560000,
-    "id": 3250,
-    "level": 1
+    "level": 1,
+    "id": 3250
   },
   {
     "nombre": "Marcela",
@@ -32691,10 +32682,10 @@ export const activeUsers = [
     "correo": "mruizc346@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525621962321,
-    "stripe_id": "cus_K73G0Adx9Q4ROb",
-    "final_date": 1693630000,
-    "id": 3251,
-    "level": 1
+    "conekta_id": "cus_2uQhE6iYSBV1FmtCT",
+    "final_date": 1724030000,
+    "level": 0,
+    "id": 3251
   },
   {
     "nombre": "paola",
@@ -32702,10 +32693,9 @@ export const activeUsers = [
     "correo": "paolamadariaga0606@gmail.com",
     "pais": "Argentina",
     "whatsapp": 542974764987,
-    "stripe_id": "cus_MX9S7CTkhB0QAW",
     "final_date": 1685540000,
-    "id": 3270,
-    "level": 1
+    "level": 1,
+    "id": 3270
   },
   {
     "nombre": "Diana Violeta",
@@ -32713,10 +32703,10 @@ export const activeUsers = [
     "correo": "dianavioletareyeslopez4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522224492156,
-    "stripe_id": "cus_K7ZH30X4lnyYcc",
-    "final_date": 1691990000,
-    "id": 3333,
-    "level": 1
+    "conekta_id": "cus_2uQhE7TMxP3enDwCZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3333
   },
   {
     "nombre": "julia",
@@ -32724,10 +32714,10 @@ export const activeUsers = [
     "correo": "uvakoncreto@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525549119979,
-    "stripe_id": "cus_McUK0GHvNYgtGw",
-    "final_date": 1692130000,
-    "id": 3344,
-    "level": 1
+    "conekta_id": "cus_2uQhE8V8F4hxWhAtJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3344
   },
   {
     "nombre": "Janeth",
@@ -32735,30 +32725,28 @@ export const activeUsers = [
     "correo": "chinibaby1352@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522331108035,
-    "stripe_id": "cus_K911ex6FH9PyFb",
     "final_date": 1689170000,
-    "id": 3382,
-    "level": 1
+    "level": 1,
+    "id": 3382
   },
   {
     "nombre": "Jazmin",
     "apellido": "Mozqueda",
     "correo": "wychysbebe@hotmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_K8gB8ImS2z56mC",
     "final_date": 1691380000,
-    "id": 3422,
-    "level": 1
+    "level": 1,
+    "id": 3422
   },
   {
     "nombre": "erika valeska",
     "apellido": "guevara ortiz",
     "correo": "evguevarao@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_KA3GqvFiSKwpjx",
-    "final_date": 1691700000,
-    "id": 3478,
-    "level": 1
+    "conekta_id": "cus_2uQhE8vzznAx7DtPU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3478
   },
   {
     "nombre": "martha patricia",
@@ -32766,10 +32754,10 @@ export const activeUsers = [
     "correo": "granopatricia100@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14086184292,
-    "stripe_id": "cus_KPVJsqDzsKavPD",
-    "final_date": 1692070000,
-    "id": 3482,
-    "level": 1
+    "conekta_id": "cus_2uQhE9fpWyjbkrYAi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3482
   },
   {
     "nombre": "Nohemi",
@@ -32777,10 +32765,10 @@ export const activeUsers = [
     "correo": "nohemi0727@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522271256141,
-    "stripe_id": "cus_KAUfusG5IVOSwL",
-    "final_date": 1693280000,
-    "id": 3513,
-    "level": 1
+    "conekta_id": "cus_2uQhEAQe3BJFMmDNg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3513
   },
   {
     "nombre": "Ma.Guadalupe",
@@ -32788,10 +32776,10 @@ export const activeUsers = [
     "correo": "delgadolupita2803@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528672235674,
-    "stripe_id": "cus_KAVNxec1zdYICs",
-    "final_date": 1691800000,
-    "id": 3516,
-    "level": 1
+    "conekta_id": "cus_2uQhEB9TZNrtz2ssG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3516
   },
   {
     "nombre": "María del Rosario",
@@ -32799,10 +32787,10 @@ export const activeUsers = [
     "correo": "chinabr44@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981688235,
-    "stripe_id": "cus_L2oDh6DElTdqwL",
-    "final_date": 1693100000,
-    "id": 3577,
-    "level": 1
+    "conekta_id": "cus_2uQhEBtH5aRYakEo7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3577
   },
   {
     "nombre": "Alessandraa",
@@ -32810,10 +32798,9 @@ export const activeUsers = [
     "correo": "ncontrerasreyes51@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522216932606,
-    "stripe_id": "cus_KD7KYZOABDKIIW",
     "final_date": 1689730000,
-    "id": 3606,
-    "level": 1
+    "level": 1,
+    "id": 3606
   },
   {
     "nombre": "maria magdalena",
@@ -32821,10 +32808,10 @@ export const activeUsers = [
     "correo": "mponceguerrero01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524321264102,
-    "stripe_id": "cus_N99UtoYCSTU4BI",
-    "final_date": 1692200000,
-    "id": 3707,
-    "level": 1
+    "conekta_id": "cus_2uQhECv3NG5rEF1yu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3707
   },
   {
     "nombre": "Paola",
@@ -32832,10 +32819,10 @@ export const activeUsers = [
     "correo": "paola_me284@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525561119476,
-    "stripe_id": "cus_KQRXCsUQ7Kq6d0",
-    "final_date": 1692280000,
-    "id": 3732,
-    "level": 1
+    "conekta_id": "cus_2uQhECrszsj9imZZr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3732
   },
   {
     "nombre": "Monica",
@@ -32843,20 +32830,20 @@ export const activeUsers = [
     "correo": "monicachavez553@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513669485,
-    "stripe_id": "cus_L2TMqfpkZfeUMp",
-    "final_date": 1692550000,
-    "id": 3863,
-    "level": 1
+    "conekta_id": "cus_2uQhEDXvp4rbaoqts",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3863
   },
   {
     "nombre": "Ana",
     "apellido": "Garcia",
     "correo": "jorgegarcia040188@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_L1dRWtLAZCuDve",
-    "final_date": 1692910000,
-    "id": 3943,
-    "level": 1
+    "conekta_id": "cus_2uQhEEGkLGRFD5WPY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 3943
   },
   {
     "nombre": "Dillanes",
@@ -32864,10 +32851,9 @@ export const activeUsers = [
     "correo": "dillanesramirez83@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526242117991,
-    "stripe_id": "cus_KMo41kGu80XeFD",
     "final_date": 1691220000,
-    "id": 3970,
-    "level": 1
+    "level": 1,
+    "id": 3970
   },
   {
     "nombre": "Susana",
@@ -32875,10 +32861,9 @@ export const activeUsers = [
     "correo": "susanaostria@outlook.com",
     "pais": "Mexico",
     "whatsapp": 529613752532,
-    "stripe_id": "cus_NN4z3zcmcFpCwi",
     "final_date": 0,
-    "id": 4014,
-    "level": 1
+    "level": 1,
+    "id": 4014
   },
   {
     "nombre": "Deyanira",
@@ -32886,10 +32871,10 @@ export const activeUsers = [
     "correo": "deyanirarmz17@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528781593590,
-    "stripe_id": "cus_NbwLrBarC9bHbR",
-    "final_date": 1693290000,
-    "id": 4027,
-    "level": 1
+    "conekta_id": "cus_2uQhEEpywn2CSicyd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4027
   },
   {
     "nombre": "Lysseette Sinaí",
@@ -32897,10 +32882,10 @@ export const activeUsers = [
     "correo": "lysseette_nual@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525539046784,
-    "stripe_id": "cus_Koza9k36nXyS23",
-    "final_date": 1692680000,
-    "id": 4134,
-    "level": 1
+    "conekta_id": "cus_2uQhEFkPNfYYScCDh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4134
   },
   {
     "nombre": "Maricela",
@@ -32908,10 +32893,10 @@ export const activeUsers = [
     "correo": "hehmaricheli@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566594358,
-    "stripe_id": "cus_KyBzaJ2CXANSd4",
-    "final_date": 1692120000,
-    "id": 4160,
-    "level": 1
+    "conekta_id": "cus_2uQhEGYybsYPrddcN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4160
   },
   {
     "nombre": "Cristina",
@@ -32919,10 +32904,10 @@ export const activeUsers = [
     "correo": "cristi_marisol@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525546869628,
-    "stripe_id": "cus_KosX6iVAZAqmRC",
-    "final_date": 1692650000,
-    "id": 4164,
-    "level": 1
+    "conekta_id": "cus_2uQhEH41iyN5ujZd3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4164
   },
   {
     "nombre": "Andrea",
@@ -32930,10 +32915,10 @@ export const activeUsers = [
     "correo": "agarnier40@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 523531531163,
-    "stripe_id": "cus_KYoF0ETRWKtkD6",
-    "final_date": 1691540000,
-    "id": 4286,
-    "level": 1
+    "conekta_id": "cus_2uQhEHnG2aGnwoGwS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4286
   },
   {
     "nombre": "Angeles carmina",
@@ -32941,10 +32926,9 @@ export const activeUsers = [
     "correo": "angeleshuizar16@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581626760,
-    "stripe_id": "cus_MuoeW3fUxya5lZ",
     "final_date": 1691000000,
-    "id": 4288,
-    "level": 1
+    "level": 1,
+    "id": 4288
   },
   {
     "nombre": "Edith",
@@ -32952,10 +32936,9 @@ export const activeUsers = [
     "correo": "edith.martinezhdz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528134153485,
-    "stripe_id": "cus_KZuzN5nKEgXKZs",
     "final_date": 1654980000,
-    "id": 4337,
-    "level": 1
+    "level": 1,
+    "id": 4337
   },
   {
     "nombre": "Arely",
@@ -32963,10 +32946,10 @@ export const activeUsers = [
     "correo": "arely.flores01@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522223714027,
-    "stripe_id": "cus_LVE6wSgGcXRGop",
-    "final_date": 1691960000,
-    "id": 4375,
-    "level": 1
+    "conekta_id": "cus_2uQhEJmSAUELjSd62",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4375
   },
   {
     "nombre": "Anabel",
@@ -32974,10 +32957,9 @@ export const activeUsers = [
     "correo": "apz021283@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566585086,
-    "stripe_id": "cus_L2Lby1EYWQfuKQ",
     "final_date": 1690310000,
-    "id": 4400,
-    "level": 1
+    "level": 1,
+    "id": 4400
   },
   {
     "nombre": "lucia beatriz",
@@ -32985,10 +32967,10 @@ export const activeUsers = [
     "correo": "reyesluciabeatriz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524612234149,
-    "stripe_id": "cus_L2UjNGO9DW6vZP",
-    "final_date": 1693030000,
-    "id": 4407,
-    "level": 1
+    "conekta_id": "cus_2uQhEKZR449gtk8LK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4407
   },
   {
     "nombre": "martha veronica",
@@ -32996,10 +32978,10 @@ export const activeUsers = [
     "correo": "verozamora73@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526442360444,
-    "stripe_id": "cus_MX0gneHwUuZhh7",
-    "final_date": 1693450000,
-    "id": 4483,
-    "level": 1
+    "conekta_id": "cus_2uQhELF5CsMdyyx58",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4483
   },
   {
     "nombre": "Jessica Guadalupe",
@@ -33007,10 +32989,9 @@ export const activeUsers = [
     "correo": "jessycarbajal21@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 527223022270,
-    "stripe_id": "cus_L7hBxoVtlxilGJ",
     "final_date": 1691070000,
-    "id": 4522,
-    "level": 1
+    "level": 1,
+    "id": 4522
   },
   {
     "nombre": "Eva Raquel",
@@ -33018,10 +32999,9 @@ export const activeUsers = [
     "correo": "alvaradoevaraquel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526194514954,
-    "stripe_id": "cus_LFtfvpyaoa2Qyy",
     "final_date": 1691270000,
-    "id": 4533,
-    "level": 1
+    "level": 1,
+    "id": 4533
   },
   {
     "nombre": "ana",
@@ -33029,10 +33009,9 @@ export const activeUsers = [
     "correo": "pecosa19778@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 12672582999,
-    "stripe_id": "cus_KjxXdbNwEYKbO1",
     "final_date": 0,
-    "id": 4550,
-    "level": 1
+    "level": 1,
+    "id": 4550
   },
   {
     "nombre": "Diana",
@@ -33040,10 +33019,9 @@ export const activeUsers = [
     "correo": "dianavazquezdelacruz78@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513944538,
-    "stripe_id": "cus_LLZ0Ax4hD9XEmD",
     "final_date": 1723060000,
-    "id": 4605,
-    "level": 0
+    "level": 0,
+    "id": 4605
   },
   {
     "nombre": "Rudy A.",
@@ -33051,10 +33029,10 @@ export const activeUsers = [
     "correo": "moralesru12@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 529366459322,
-    "stripe_id": "cus_L2lY6J2KaEs7ra",
-    "final_date": 1693090000,
-    "id": 4683,
-    "level": 1
+    "conekta_id": "cus_2uQhEMewYG3jTn9L4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4683
   },
   {
     "nombre": "Evangelina",
@@ -33062,10 +33040,10 @@ export const activeUsers = [
     "correo": "evangelinareyes050987@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525622096122,
-    "stripe_id": "cus_KmOXajoPmfc1ru",
-    "final_date": 1693020000,
-    "id": 4731,
-    "level": 1
+    "conekta_id": "cus_2uQhENTXmU3arHBy3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4731
   },
   {
     "nombre": "Eliannet",
@@ -33073,10 +33051,10 @@ export const activeUsers = [
     "correo": "elianneta79@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525536084665,
-    "stripe_id": "cus_LLxc0CQIZK9wW7",
-    "final_date": 1692600000,
-    "id": 4758,
-    "level": 1
+    "conekta_id": "cus_2uQhENwzfyDLMHL1v",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4758
   },
   {
     "nombre": "Elizabeth",
@@ -33084,10 +33062,10 @@ export const activeUsers = [
     "correo": "chiquis_um@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526642633924,
-    "stripe_id": "cus_Kmu87gmXN0lAp5",
-    "final_date": 1692190000,
-    "id": 4763,
-    "level": 1
+    "conekta_id": "cus_2uQhEPwAosAt7LGYR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4763
   },
   {
     "nombre": "Nadya Mayina",
@@ -33095,10 +33073,10 @@ export const activeUsers = [
     "correo": "mjanuary1792@gmail.com",
     "pais": "El Salvador",
     "whatsapp": 50371296539,
-    "stripe_id": "cus_KmxgNJXyNXLwy3",
-    "final_date": 1692210000,
-    "id": 4778,
-    "level": 1
+    "conekta_id": "cus_2uQhEPzLBFXaZ9c2V",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4778
   },
   {
     "nombre": "Liliana",
@@ -33106,10 +33084,10 @@ export const activeUsers = [
     "correo": "lilichina_17@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524271160277,
-    "stripe_id": "cus_KnKhKaWFG3v28v",
-    "final_date": 1692290000,
-    "id": 4807,
-    "level": 1
+    "conekta_id": "cus_2uQhEQfzL4jXj6BTG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4807
   },
   {
     "nombre": "Darsy",
@@ -33117,10 +33095,10 @@ export const activeUsers = [
     "correo": "darsyrivera1982@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14093657084,
-    "stripe_id": "cus_NgwVFXAJLlohGo",
-    "final_date": 1691730000,
-    "id": 4817,
-    "level": 1
+    "conekta_id": "cus_2uQhERQorGJBMMqwn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4817
   },
   {
     "nombre": "Irais",
@@ -33128,10 +33106,10 @@ export const activeUsers = [
     "correo": "feris0406@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526611138715,
-    "stripe_id": "cus_L1zWCvJcMYe27V",
-    "final_date": 1692910000,
-    "id": 4833,
-    "level": 1
+    "conekta_id": "cus_2uQhERTyDeesogw1Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4833
   },
   {
     "nombre": "Karla Yadira",
@@ -33139,10 +33117,10 @@ export const activeUsers = [
     "correo": "karlym.smile.okey@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524446133666,
-    "stripe_id": "cus_NgxQKigNlzo8qn",
-    "final_date": 1691730000,
-    "id": 4843,
-    "level": 1
+    "conekta_id": "cus_2uQhERuqyN7sQyXaE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4843
   },
   {
     "nombre": "Sarai",
@@ -33150,10 +33128,10 @@ export const activeUsers = [
     "correo": "yezzy.sankhez12@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19293040002,
-    "stripe_id": "cus_L4jOapE2Z3mdJK",
-    "final_date": 1693630000,
-    "id": 4846,
-    "level": 1
+    "conekta_id": "cus_2uQhESwcG3nB4EFzm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4846
   },
   {
     "nombre": "Adriana",
@@ -33161,10 +33139,10 @@ export const activeUsers = [
     "correo": "adriks77@hotmail.com",
     "pais": "España",
     "whatsapp": 346519708,
-    "stripe_id": "cus_Kr1jKygTNfLvUW",
-    "final_date": 1693140000,
-    "id": 4857,
-    "level": 1
+    "conekta_id": "cus_2uQhETNuoAbE5JuLJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4857
   },
   {
     "nombre": "Enriqueta Carolina",
@@ -33172,10 +33150,10 @@ export const activeUsers = [
     "correo": "cpb_1504@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17735818776,
-    "stripe_id": "cus_LoQhBPDNdG2OO3",
-    "final_date": 1693800000,
-    "id": 4874,
-    "level": 1
+    "conekta_id": "cus_2uQhEUJKE47a6D7mp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4874
   },
   {
     "nombre": "claudia Estefany",
@@ -33183,10 +33161,10 @@ export const activeUsers = [
     "correo": "fannyh540@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524421190538,
-    "stripe_id": "cus_MFjyIJM7O8AQWG",
-    "final_date": 1692150000,
-    "id": 4929,
-    "level": 1
+    "conekta_id": "cus_2uQhEUs84ANTv4BYW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4929
   },
   {
     "nombre": "Soemi",
@@ -33194,10 +33172,10 @@ export const activeUsers = [
     "correo": "soeminrgelite@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529993638920,
-    "stripe_id": "cus_KrcL8TuQNQLuqm",
-    "final_date": 1691440000,
-    "id": 4966,
-    "level": 1
+    "conekta_id": "cus_2uQhEV6uTG7RVDuz2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 4966
   },
   {
     "nombre": "edith",
@@ -33205,10 +33183,10 @@ export const activeUsers = [
     "correo": "delossantosedith94@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529513793684,
-    "stripe_id": "cus_MXEFyc9ZFrnNgw",
-    "final_date": 1693500000,
-    "id": 5007,
-    "level": 1
+    "conekta_id": "cus_2uQhEVttLr2meXRFq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5007
   },
   {
     "nombre": "angelica",
@@ -33216,20 +33194,19 @@ export const activeUsers = [
     "correo": "angelicasalas400@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528442345006,
-    "stripe_id": "cus_LWkJmgdZ47gihX",
     "final_date": 1689630000,
-    "id": 5017,
-    "level": 1
+    "level": 1,
+    "id": 5017
   },
   {
     "nombre": "Karina",
     "apellido": "Rodríguex",
     "correo": "kariroga@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_Ksc9usC2FW4vyQ",
-    "final_date": 1693840000,
-    "id": 5026,
-    "level": 1
+    "conekta_id": "cus_2uQhEWaYVfEijmEy2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5026
   },
   {
     "nombre": "Isabel",
@@ -33237,10 +33214,10 @@ export const activeUsers = [
     "correo": "isamr7331@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525527046354,
-    "stripe_id": "cus_LF7WNh0N31JECb",
-    "final_date": 1693600000,
-    "id": 5061,
-    "level": 1
+    "conekta_id": "cus_2uQhEXKN1roNN2uTd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5061
   },
   {
     "nombre": "francis",
@@ -33248,10 +33225,10 @@ export const activeUsers = [
     "correo": "johannalinda0415@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18187701028,
-    "stripe_id": "cus_KtsnlY0ggGlapg",
-    "final_date": 1693800000,
-    "id": 5113,
-    "level": 1
+    "conekta_id": "cus_2uQhEXKN1roNN2uU4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5113
   },
   {
     "nombre": "Alma Patricia",
@@ -33259,10 +33236,10 @@ export const activeUsers = [
     "correo": "alpavaga@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523334071822,
-    "stripe_id": "cus_Ku1aykFTG1n7gP",
-    "final_date": 1693460000,
-    "id": 5156,
-    "level": 1
+    "conekta_id": "cus_2uQhEXpQ8xd4R8qWd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5156
   },
   {
     "nombre": "maricela",
@@ -33270,10 +33247,9 @@ export const activeUsers = [
     "correo": "maricelapineda09@icloud.com",
     "pais": "Estados Unidos",
     "whatsapp": 18044182555,
-    "stripe_id": "cus_KuBowiDN8zmqxr",
     "final_date": 1691200000,
-    "id": 5228,
-    "level": 1
+    "level": 1,
+    "id": 5228
   },
   {
     "nombre": "Diega",
@@ -33281,10 +33257,10 @@ export const activeUsers = [
     "correo": "fernandaperezmartinez77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548857740,
-    "stripe_id": "cus_KuFH3LEq0DuTUQ",
-    "final_date": 1693890000,
-    "id": 5247,
-    "level": 1
+    "conekta_id": "cus_2uQhEYYeSZXmQXKXK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5247
   },
   {
     "nombre": "Irma",
@@ -33292,10 +33268,9 @@ export const activeUsers = [
     "correo": "lopezirmacat@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529994048295,
-    "stripe_id": "cus_KuFswqztGhwntH",
     "final_date": 1690780000,
-    "id": 5248,
-    "level": 1
+    "level": 1,
+    "id": 5248
   },
   {
     "nombre": "Ingrid",
@@ -33303,10 +33278,10 @@ export const activeUsers = [
     "correo": "yarelialejandro97@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529331228448,
-    "stripe_id": "cus_LoQkuE6BVTiFz1",
-    "final_date": 1693800000,
-    "id": 5273,
-    "level": 1
+    "conekta_id": "cus_2uQhEZHTxm6R2nz25",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5273
   },
   {
     "nombre": "Karina",
@@ -33314,10 +33289,10 @@ export const activeUsers = [
     "correo": "karyyleo25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527228472440,
-    "stripe_id": "cus_Kuq6JgIPJHgSQ0",
-    "final_date": 1692890000,
-    "id": 5277,
-    "level": 1
+    "conekta_id": "cus_2uQhEaGe6f3xmGM8T",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5277
   },
   {
     "nombre": "Rocío del Carmen",
@@ -33325,10 +33300,10 @@ export const activeUsers = [
     "correo": "rohuzrios@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529212735795,
-    "stripe_id": "cus_Lr3AjgEIQfC98i",
-    "final_date": 1693600000,
-    "id": 5281,
-    "level": 1
+    "conekta_id": "cus_2uQhEb1TcrccPY1cz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5281
   },
   {
     "nombre": "Ana",
@@ -33336,10 +33311,10 @@ export const activeUsers = [
     "correo": "anaanaani@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529515805307,
-    "stripe_id": "cus_L8ip2aoHRmgtBz",
-    "final_date": 1692920000,
-    "id": 5351,
-    "level": 1
+    "conekta_id": "cus_2uQhEbVvXMnMubyWB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5351
   },
   {
     "nombre": "imelda",
@@ -33347,10 +33322,10 @@ export const activeUsers = [
     "correo": "mcastro4572@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17605957908,
-    "stripe_id": "cus_LPjCXlWbeeyvAW",
-    "final_date": 1693370000,
-    "id": 5404,
-    "level": 1
+    "conekta_id": "cus_2uQhEcFKG9zxDf93M",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5404
   },
   {
     "nombre": "Laila janet",
@@ -33358,21 +33333,21 @@ export const activeUsers = [
     "correo": "mejialaila56@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616092558,
-    "stripe_id": "cus_KwLPxSPLfl0OVs",
-    "final_date": 1694020000,
-    "id": 5418,
-    "level": 1
+    "conekta_id": "cus_2uQhEcFKG9zxAkpUF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5418
   },
   {
     "nombre": "Abril",
     "apellido": "López",
     "correo": "viris_valm@hotmail.com",
     "pais": "Mexico",
-    "whatsapp": 524771059815,
-    "stripe_id": "cus_KwsiYw35RftwMG",
-    "final_date": 1693860000,
-    "id": 5469,
-    "level": 1
+    "whatsapp": 524771059715,
+    "conekta_id": "cus_2uQhEdA9USsMetf2W",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5469
   },
   {
     "nombre": "Araceli",
@@ -33380,10 +33355,10 @@ export const activeUsers = [
     "correo": "aracrlicasillas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526462233356,
-    "stripe_id": "cus_LezXUaep6vUtXf",
-    "final_date": 1691620000,
-    "id": 5487,
-    "level": 1
+    "conekta_id": "cus_2uQhEe1u53DuXVige",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5487
   },
   {
     "nombre": "Iveth",
@@ -33391,10 +33366,10 @@ export const activeUsers = [
     "correo": "ivethrdzfonseca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528673220051,
-    "stripe_id": "cus_Kx5rxCQnbm9lOS",
-    "final_date": 1691870000,
-    "id": 5491,
-    "level": 1
+    "conekta_id": "cus_2uQhEeTmpkgu3Zows",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5491
   },
   {
     "nombre": "Fanny",
@@ -33402,10 +33377,9 @@ export const activeUsers = [
     "correo": "fannydejesus92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524427184655,
-    "stripe_id": "cus_KwtrIbhCCsoR1y",
     "final_date": 1691120000,
-    "id": 5494,
-    "level": 1
+    "level": 1,
+    "id": 5494
   },
   {
     "nombre": "karen",
@@ -33413,10 +33387,10 @@ export const activeUsers = [
     "correo": "karennatali12345@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529979795475,
-    "stripe_id": "cus_KwtuKDhPdwd8KY",
-    "final_date": 1691820000,
-    "id": 5495,
-    "level": 1
+    "conekta_id": "cus_2uQhEfC28Mbc2xHxs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5495
   },
   {
     "nombre": "Monica",
@@ -33424,20 +33398,19 @@ export const activeUsers = [
     "correo": "mnava0937@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524531730781,
-    "stripe_id": "cus_Kx2pGGJxrI7KfI",
     "final_date": 0,
-    "id": 5507,
-    "level": 1
+    "level": 1,
+    "id": 5507
   },
   {
     "nombre": "Karina",
     "apellido": "Sanchez Pina",
     "correo": "sanchezkary1994@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_LoQptjg4hDqkAQ",
-    "final_date": 1693800000,
-    "id": 5537,
-    "level": 1
+    "conekta_id": "cus_2uQhEfvqeZAFfDxTP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5537
   },
   {
     "nombre": "Maria laura",
@@ -33445,10 +33418,10 @@ export const activeUsers = [
     "correo": "marialaurarp77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522464573540,
-    "stripe_id": "cus_KxSAsD9Rvhizzl",
-    "final_date": 1691950000,
-    "id": 5560,
-    "level": 1
+    "conekta_id": "cus_2uQhEgyB9qUVyWFag",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5560
   },
   {
     "nombre": "maria fernanda",
@@ -33456,10 +33429,10 @@ export const activeUsers = [
     "correo": "lopezf0509@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13616928946,
-    "stripe_id": "cus_KxVnCdaYJOrzt7",
-    "final_date": 1691960000,
-    "id": 5566,
-    "level": 1
+    "conekta_id": "cus_2uQhEgyB9qUVyWFar",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5566
   },
   {
     "nombre": "Lilia",
@@ -33467,10 +33440,10 @@ export const activeUsers = [
     "correo": "liliaurrieta01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522491185028,
-    "stripe_id": "cus_KxXNh9wwB5FcEX",
-    "final_date": 1691970000,
-    "id": 5568,
-    "level": 1
+    "conekta_id": "cus_2uQhEhb4beFFM54fC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5568
   },
   {
     "nombre": "ena elianet",
@@ -33478,10 +33451,10 @@ export const activeUsers = [
     "correo": "elianet_alvarez@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529931435736,
-    "stripe_id": "cus_Kxb5IcbPeeqYXP",
-    "final_date": 1692070000,
-    "id": 5575,
-    "level": 1
+    "conekta_id": "cus_2uQhEi9JD9rCduqfo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5575
   },
   {
     "nombre": "Elizabeth",
@@ -33489,10 +33462,9 @@ export const activeUsers = [
     "correo": "elizabeth.07120@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524777009209,
-    "stripe_id": "cus_Nlo2nqK9eRuKwy",
     "final_date": 1723410000,
-    "id": 5581,
-    "level": 0
+    "level": 0,
+    "id": 5581
   },
   {
     "nombre": "Catalina",
@@ -33500,10 +33472,10 @@ export const activeUsers = [
     "correo": "caty21yo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525626155483,
-    "stripe_id": "cus_KxdN5ZlOI7owj0",
-    "final_date": 1691610000,
-    "id": 5591,
-    "level": 1
+    "conekta_id": "cus_2uQhEj4he3NYXSqW9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5591
   },
   {
     "nombre": "Fernanda Guadalupe",
@@ -33511,10 +33483,9 @@ export const activeUsers = [
     "correo": "herrera.gutierrez.cbtis37@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526444574772,
-    "stripe_id": "cus_KxmW9ZXyXu2Eef",
     "final_date": 1670550000,
-    "id": 5598,
-    "level": 1
+    "level": 1,
+    "id": 5598
   },
   {
     "nombre": "Gimena",
@@ -33522,10 +33493,10 @@ export const activeUsers = [
     "correo": "gimediaz681@gmail.com",
     "pais": "Argentina",
     "whatsapp": 541138202971,
-    "stripe_id": "cus_Ky0RgtdveDFDY4",
-    "final_date": 1692080000,
-    "id": 5634,
-    "level": 1
+    "conekta_id": "cus_2uQhEjdWU9dSUMmyC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5634
   },
   {
     "nombre": "Rosa",
@@ -33533,10 +33504,10 @@ export const activeUsers = [
     "correo": "rosy200693@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518452874,
-    "stripe_id": "cus_KyLW322KkfoL8R",
-    "final_date": 1693670000,
-    "id": 5659,
-    "level": 1
+    "conekta_id": "cus_2uQhEkYLgSVqmzAVZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5659
   },
   {
     "nombre": "Maria Esmeralda",
@@ -33544,10 +33515,9 @@ export const activeUsers = [
     "correo": "mere040279@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528781327915,
-    "stripe_id": "cus_KycL9JZQof21Wl",
     "final_date": 1689530000,
-    "id": 5672,
-    "level": 1
+    "level": 1,
+    "id": 5672
   },
   {
     "nombre": "Raquel",
@@ -33555,10 +33525,10 @@ export const activeUsers = [
     "correo": "bernaberaquel.10@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527661210385,
-    "stripe_id": "cus_Kyde6wmc4mz951",
-    "final_date": 1692220000,
-    "id": 5675,
-    "level": 1
+    "conekta_id": "cus_2uQhEmHACe4VXrxSo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5675
   },
   {
     "nombre": "ilse adilene",
@@ -33566,10 +33536,9 @@ export const activeUsers = [
     "correo": "mercadosotojoseluis9@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526182185008,
-    "stripe_id": "cus_KyiM3tlA7UN3Ok",
     "final_date": 1689560000,
-    "id": 5679,
-    "level": 1
+    "level": 1,
+    "id": 5679
   },
   {
     "nombre": "alma",
@@ -33577,10 +33546,10 @@ export const activeUsers = [
     "correo": "aag.260.aag@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525565602336,
-    "stripe_id": "cus_L1Aeh9MMlieqKu",
-    "final_date": 1693420000,
-    "id": 5707,
-    "level": 1
+    "conekta_id": "cus_2uQhEn5kRr4Lmay2Q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5707
   },
   {
     "nombre": "Sonia",
@@ -33588,10 +33557,10 @@ export const activeUsers = [
     "correo": "so_tott@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 527711290429,
-    "stripe_id": "cus_KzKfPLunheGo86",
-    "final_date": 1691530000,
-    "id": 5714,
-    "level": 1
+    "conekta_id": "cus_2uQhEnsjKRygwXBJM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5714
   },
   {
     "nombre": "Dennis Guadalupe",
@@ -33599,10 +33568,10 @@ export const activeUsers = [
     "correo": "yiinned@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525570081927,
-    "stripe_id": "cus_MX0XSTdDl8xQIj",
-    "final_date": 1693450000,
-    "id": 5733,
-    "level": 1
+    "conekta_id": "cus_2uQhEoVcmEkSMENby",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5733
   },
   {
     "nombre": "Adriana Leticia",
@@ -33610,10 +33579,10 @@ export const activeUsers = [
     "correo": "adrianabarron26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528113913734,
-    "stripe_id": "cus_LoQpEIQ9kd7yNf",
-    "final_date": 1693800000,
-    "id": 5743,
-    "level": 1
+    "conekta_id": "cus_2uQhEpMNMq6zC4WHY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5743
   },
   {
     "nombre": "judith",
@@ -33621,10 +33590,10 @@ export const activeUsers = [
     "correo": "yuyi_japo@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528180861534,
-    "stripe_id": "cus_KzWApQfnZlVUpQ",
-    "final_date": 1692420000,
-    "id": 5747,
-    "level": 1
+    "conekta_id": "cus_2uQhEpyFodsjfDGv3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5747
   },
   {
     "nombre": "adriana",
@@ -33632,10 +33601,10 @@ export const activeUsers = [
     "correo": "adriana-martinez@gmx.es",
     "pais": "Mexico",
     "whatsapp": 528341007648,
-    "stripe_id": "cus_KzYNiWXpRK9d5D",
-    "final_date": 1693800000,
-    "id": 5749,
-    "level": 1
+    "conekta_id": "cus_2uQhEpoF7YZyrFRRE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5749
   },
   {
     "nombre": "evelin",
@@ -33643,10 +33612,10 @@ export const activeUsers = [
     "correo": "evelynbsf8@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17705455599,
-    "stripe_id": "cus_LhZMRKOwsrqjz4",
-    "final_date": 1692220000,
-    "id": 5757,
-    "level": 1
+    "conekta_id": "cus_2uQhEqmr2qsatwHVB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5757
   },
   {
     "nombre": "Katia Guadalupe",
@@ -33654,10 +33623,10 @@ export const activeUsers = [
     "correo": "katto-usc@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527773870934,
-    "stripe_id": "cus_LDikOHcZblT3Xj",
-    "final_date": 1693200000,
-    "id": 5794,
-    "level": 1
+    "conekta_id": "cus_2uQhErWfZ3SEcYQgw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5794
   },
   {
     "nombre": "Silvia",
@@ -33665,10 +33634,20 @@ export const activeUsers = [
     "correo": "lovelytraviesa34@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 14055145326,
-    "stripe_id": "cus_L1N9oMkD6A8CsY",
-    "final_date": 1692850000,
-    "id": 5838,
-    "level": 1
+    "conekta_id": "cus_2uQhEs1hg9Fvj4QuB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5838
+  },
+  {
+    "nombre": "Elena",
+    "apellido": "Delgado",
+    "correo": "elena.delma4@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 528712214342,
+    "final_date": 1723930000,
+    "level": 0,
+    "id": 5851
   },
   {
     "nombre": "kimberly",
@@ -33676,10 +33655,10 @@ export const activeUsers = [
     "correo": "kimberlyej@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14042685386,
-    "stripe_id": "cus_L1lr4oDg5KKRyq",
-    "final_date": 1693800000,
-    "id": 5883,
-    "level": 1
+    "conekta_id": "cus_2uQhEsBiNEZgY2GPW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5883
   },
   {
     "nombre": "Erika elizabeth",
@@ -33687,10 +33666,10 @@ export const activeUsers = [
     "correo": "elyarias66@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523318479039,
-    "stripe_id": "cus_L1ltgPUeSmiGCm",
-    "final_date": 1693330000,
-    "id": 5886,
-    "level": 1
+    "conekta_id": "cus_2uQhEt3TxpvEKQpmB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5886
   },
   {
     "nombre": "alma",
@@ -33698,10 +33677,10 @@ export const activeUsers = [
     "correo": "gepeque-s.c-01@hormail.com",
     "pais": "Mexico",
     "whatsapp": 525517988144,
-    "stripe_id": "cus_L1m3zJfuyFLJmt",
-    "final_date": 1692950000,
-    "id": 5887,
-    "level": 1
+    "conekta_id": "cus_2uQhEtnHV2UswgVFk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5887
   },
   {
     "nombre": "arita",
@@ -33709,10 +33688,10 @@ export const activeUsers = [
     "correo": "isivelita_090@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525538933134,
-    "stripe_id": "cus_L1mFwZx4wPiZ3e",
-    "final_date": 1692950000,
-    "id": 5891,
-    "level": 1
+    "conekta_id": "cus_2uQhEuQAvqFdQqFs7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5891
   },
   {
     "nombre": "sinahi",
@@ -33720,10 +33699,9 @@ export const activeUsers = [
     "correo": "sinahirivera416@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522791048221,
-    "stripe_id": "cus_L1tw2ajE7wbMWh",
     "final_date": 1682100000,
-    "id": 5932,
-    "level": 1
+    "level": 1,
+    "id": 5932
   },
   {
     "nombre": "Nuvia Alejandra",
@@ -33731,10 +33709,10 @@ export const activeUsers = [
     "correo": "nube_1089@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525532809724,
-    "stripe_id": "cus_L1uai2BzCtfyYW",
-    "final_date": 1692980000,
-    "id": 5965,
-    "level": 1
+    "conekta_id": "cus_2uQhEv8zT2pH36vMi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5965
   },
   {
     "nombre": "tarsis",
@@ -33742,10 +33720,10 @@ export const activeUsers = [
     "correo": "tarsisalti@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529811030523,
-    "stripe_id": "cus_L1unWSuPzNGpW6",
-    "final_date": 1692890000,
-    "id": 5975,
-    "level": 1
+    "conekta_id": "cus_2uQhEvzk3dAprdrwr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5975
   },
   {
     "nombre": "Diana Patricia",
@@ -33753,10 +33731,10 @@ export const activeUsers = [
     "correo": "pathuolmedo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527841106291,
-    "stripe_id": "cus_L1unzfQzR7dWDk",
-    "final_date": 1692890000,
-    "id": 5976,
-    "level": 1
+    "conekta_id": "cus_2uQhEwcdVRwaECg2m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5976
   },
   {
     "nombre": "Aneci Mirely",
@@ -33764,10 +33742,10 @@ export const activeUsers = [
     "correo": "aneci.romero@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532601275,
-    "stripe_id": "cus_L1uwMFHaf3Fcy5",
-    "final_date": 1692890000,
-    "id": 5983,
-    "level": 1
+    "conekta_id": "cus_2uQhEwjZZpjUUuXSe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 5983
   },
   {
     "nombre": "Lizeth Guadalupe",
@@ -33775,10 +33753,10 @@ export const activeUsers = [
     "correo": "lizethgcs@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524442785201,
-    "stripe_id": "cus_LLwodDkogpU5i4",
-    "final_date": 1692500000,
-    "id": 6018,
-    "level": 1
+    "conekta_id": "cus_2uQhExMT1dWDnJnP7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6018
   },
   {
     "nombre": "María Berenice",
@@ -33786,10 +33764,10 @@ export const activeUsers = [
     "correo": "bellocorazon.bv@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524613058120,
-    "stripe_id": "cus_LN5LMIzwdxtqdh",
-    "final_date": 1692680000,
-    "id": 6044,
-    "level": 1
+    "conekta_id": "cus_2uQhExvFqjm7jDiqm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6044
   },
   {
     "nombre": "karina",
@@ -33797,10 +33775,10 @@ export const activeUsers = [
     "correo": "karina27@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 12097152755,
-    "stripe_id": "cus_L1wV0pusriZg5a",
-    "final_date": 1692900000,
-    "id": 6065,
-    "level": 1
+    "conekta_id": "cus_2uQhEyq642dXATEpR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6065
   },
   {
     "nombre": "Araceli",
@@ -33808,10 +33786,10 @@ export const activeUsers = [
     "correo": "aramarvid@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513368290,
-    "stripe_id": "cus_L21rmnCiRhBFoB",
-    "final_date": 1692920000,
-    "id": 6141,
-    "level": 1
+    "conekta_id": "cus_2uQhEzPKfYEUPrSVy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6141
   },
   {
     "nombre": "Martha Elena",
@@ -33819,10 +33797,10 @@ export const activeUsers = [
     "correo": "mar.helena@outlook.es",
     "pais": "Mexico",
     "whatsapp": 525549530972,
-    "stripe_id": "cus_L22RYKKNQfPV5V",
-    "final_date": 1692500000,
-    "id": 6147,
-    "level": 1
+    "conekta_id": "cus_2uQhEzZuaECAf7mru",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6147
   },
   {
     "nombre": "cecilia veronica",
@@ -33830,10 +33808,10 @@ export const activeUsers = [
     "correo": "cecymn04@hotmail.com",
     "pais": "Argentina",
     "whatsapp": 541167123796,
-    "stripe_id": "cus_L25N1fH4Qg302b",
-    "final_date": 1692190000,
-    "id": 6184,
-    "level": 1
+    "conekta_id": "cus_2uQhF18iQLT4c2iKx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6184
   },
   {
     "nombre": "Maria Elena",
@@ -33841,10 +33819,10 @@ export const activeUsers = [
     "correo": "suzzanash@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525524333953,
-    "stripe_id": "cus_L25NNwDUah7JDC",
-    "final_date": 1692930000,
-    "id": 6185,
-    "level": 1
+    "conekta_id": "cus_2uQhF2AUh27NCP8Av",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6185
   },
   {
     "nombre": "Sandra",
@@ -33852,10 +33830,10 @@ export const activeUsers = [
     "correo": "mina_stoker@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 525540857677,
-    "stripe_id": "cus_L25X2vZHvpH2d5",
-    "final_date": 1692930000,
-    "id": 6191,
-    "level": 1
+    "conekta_id": "cus_2uQhF2nN8pt7XvmLY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6191
   },
   {
     "nombre": "Natali",
@@ -33863,10 +33841,10 @@ export const activeUsers = [
     "correo": "nuecriat500@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522711321523,
-    "stripe_id": "cus_L25n26Wxiwz1qG",
-    "final_date": 1692930000,
-    "id": 6195,
-    "level": 1
+    "conekta_id": "cus_2uQhF3e7jREfY8xUW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6195
   },
   {
     "nombre": "MARTHA ISABEL",
@@ -33874,10 +33852,10 @@ export const activeUsers = [
     "correo": "izzaa.mary@outlook.com",
     "pais": "Mexico",
     "whatsapp": 522381858568,
-    "stripe_id": "cus_L26GEfxr6u6r8S",
-    "final_date": 1692930000,
-    "id": 6202,
-    "level": 1
+    "conekta_id": "cus_2uQhF45zV8hf77NK1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6202
   },
   {
     "nombre": "paola joselin",
@@ -33885,10 +33863,9 @@ export const activeUsers = [
     "correo": "paolajoselinsanchezvazquez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528211202715,
-    "stripe_id": "cus_L273aX2qeixjmG",
     "final_date": 1648270000,
-    "id": 6221,
-    "level": 1
+    "level": 1,
+    "id": 6221
   },
   {
     "nombre": "BETTY",
@@ -33896,10 +33873,10 @@ export const activeUsers = [
     "correo": "bettylumur@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13478058183,
-    "stripe_id": "cus_L277el5JHSCfz7",
-    "final_date": 1692940000,
-    "id": 6222,
-    "level": 1
+    "conekta_id": "cus_2uQhF4NwFcoK5C7f8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6222
   },
   {
     "nombre": "Gladys",
@@ -33907,10 +33884,10 @@ export const activeUsers = [
     "correo": "oziago23@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18649920804,
-    "stripe_id": "cus_L52YGiAWVHa8Un",
-    "final_date": 1693700000,
-    "id": 6230,
-    "level": 1
+    "conekta_id": "cus_2uQhF57kmpMxhTn9d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6230
   },
   {
     "nombre": "Olga Janet",
@@ -33918,10 +33895,9 @@ export const activeUsers = [
     "correo": "jan3t2531@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221581254,
-    "stripe_id": "cus_L2LzlSNcI9g2IN",
     "final_date": 1723240000,
-    "id": 6249,
-    "level": 0
+    "level": 0,
+    "id": 6249
   },
   {
     "nombre": "Guadalupe",
@@ -33929,10 +33905,10 @@ export const activeUsers = [
     "correo": "lic.garciag23@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529381578435,
-    "stripe_id": "cus_L2U2Tm4oVBZHI6",
-    "final_date": 1693110000,
-    "id": 6272,
-    "level": 1
+    "conekta_id": "cus_2uQhF5raJ1vcKjSe8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6272
   },
   {
     "nombre": "SARAHI",
@@ -33940,10 +33916,9 @@ export const activeUsers = [
     "correo": "sarahi.urbinavargas2016@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528119787343,
-    "stripe_id": "cus_L2U8bz6LA8yyTf",
     "final_date": 1690430000,
-    "id": 6275,
-    "level": 1
+    "level": 1,
+    "id": 6275
   },
   {
     "nombre": "Mónica",
@@ -33951,10 +33926,10 @@ export const activeUsers = [
     "correo": "monick6934@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525611332164,
-    "stripe_id": "cus_L2UBNNaTnL6ge6",
-    "final_date": 1693860000,
-    "id": 6280,
-    "level": 1
+    "conekta_id": "cus_2uQhF6Hsq8jfQ1kSm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6280
   },
   {
     "nombre": "Verónica Yadira",
@@ -33962,10 +33937,10 @@ export const activeUsers = [
     "correo": "veroyr2903@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526623885879,
-    "stripe_id": "cus_L2UMQsTwCZCnOj",
-    "final_date": 1692130000,
-    "id": 6292,
-    "level": 1
+    "conekta_id": "cus_2uQhF7DHG2G1HYkJ8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6292
   },
   {
     "nombre": "Beatriz",
@@ -33973,10 +33948,10 @@ export const activeUsers = [
     "correo": "bettylara000@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15014781222,
-    "stripe_id": "cus_L2UTAJOMqTwbcg",
-    "final_date": 1693110000,
-    "id": 6302,
-    "level": 1
+    "conekta_id": "cus_2uQhF7x6nDpeupQnd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6302
   },
   {
     "nombre": "Sandra",
@@ -33984,10 +33959,10 @@ export const activeUsers = [
     "correo": "sandyrs_jl@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527443464081,
-    "stripe_id": "cus_L2UYkxyXIYMG1y",
-    "final_date": 1693110000,
-    "id": 6306,
-    "level": 1
+    "conekta_id": "cus_2uQhF8WLPjRcGpjv9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6306
   },
   {
     "nombre": "Lucero",
@@ -33995,10 +33970,9 @@ export const activeUsers = [
     "correo": "luzmorah222@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510954391,
-    "stripe_id": "cus_L2lFOlNB8c2FX3",
     "final_date": 0,
-    "id": 6344,
-    "level": 1
+    "level": 1,
+    "id": 6344
   },
   {
     "nombre": "maria",
@@ -34006,10 +33980,9 @@ export const activeUsers = [
     "correo": "mariadm653@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529991545130,
-    "stripe_id": "cus_L2mAizSRmXri8Y",
     "final_date": 1682830000,
-    "id": 6360,
-    "level": 1
+    "level": 1,
+    "id": 6360
   },
   {
     "nombre": "mary",
@@ -34017,10 +33990,10 @@ export const activeUsers = [
     "correo": "dias.id@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525526891011,
-    "stripe_id": "cus_L2rVCdVCYW4zs5",
-    "final_date": 1693200000,
-    "id": 6419,
-    "level": 1
+    "conekta_id": "cus_2uQhF9RjpcwxDWecd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6419
   },
   {
     "nombre": "María de Lourdes",
@@ -34028,10 +34001,10 @@ export const activeUsers = [
     "correo": "romerobarrera81@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543529797,
-    "stripe_id": "cus_L2s08fNdYvaCfX",
-    "final_date": 1693200000,
-    "id": 6429,
-    "level": 1
+    "conekta_id": "cus_2uQhFAEL3pwod2LZX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6429
   },
   {
     "nombre": "Aracely",
@@ -34039,10 +34012,10 @@ export const activeUsers = [
     "correo": "shelyangelofdarkness@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528126794108,
-    "stripe_id": "cus_L3RtDDMvEGQK1C",
-    "final_date": 1692410000,
-    "id": 6459,
-    "level": 1
+    "conekta_id": "cus_2uQhFAuNs25FV4cuP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6459
   },
   {
     "nombre": "Fabiola Judith",
@@ -34050,10 +34023,10 @@ export const activeUsers = [
     "correo": "fabyllamadaf@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525533440822,
-    "stripe_id": "cus_L4sJ32HKfxV5o0",
-    "final_date": 1693660000,
-    "id": 6504,
-    "level": 1
+    "conekta_id": "cus_2uQhFBeCPDdu7LHPt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6504
   },
   {
     "nombre": "Esthela Berenice",
@@ -34061,10 +34034,10 @@ export const activeUsers = [
     "correo": "berenicepr98@outlook.com",
     "pais": "Mexico",
     "whatsapp": 528136327711,
-    "stripe_id": "cus_L4HzarRcBTY9Do",
-    "final_date": 1691960000,
-    "id": 6507,
-    "level": 1
+    "conekta_id": "cus_2uQhFBm8TcRoR7Fu5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6507
   },
   {
     "nombre": "Melina",
@@ -34072,10 +34045,9 @@ export const activeUsers = [
     "correo": "mellibeautystudio@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15035165520,
-    "stripe_id": "cus_L4N2j3aqY4ew9C",
     "final_date": 1690870000,
-    "id": 6516,
-    "level": 1
+    "level": 1,
+    "id": 6516
   },
   {
     "nombre": "Concepción de María",
@@ -34083,10 +34055,10 @@ export const activeUsers = [
     "correo": "cancino_pinto@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529631113433,
-    "stripe_id": "cus_L4su0PRfRFLq7a",
-    "final_date": 1693660000,
-    "id": 6571,
-    "level": 1
+    "conekta_id": "cus_2uQhFCwpjXTSZT1dF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6571
   },
   {
     "nombre": "Blanca",
@@ -34094,10 +34066,10 @@ export const activeUsers = [
     "correo": "blanca3186@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17087248361,
-    "stripe_id": "cus_L57HXg8Z0q1JEy",
-    "final_date": 1693720000,
-    "id": 6615,
-    "level": 1
+    "conekta_id": "cus_2uQhFDEmW1Z6featL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6615
   },
   {
     "nombre": "Alejandra",
@@ -34105,10 +34077,10 @@ export const activeUsers = [
     "correo": "noemi.royce1006@icloud.com",
     "pais": "Estados Unidos",
     "whatsapp": 19565699887,
-    "stripe_id": "cus_LK5Qqs4HEbsAoi",
-    "final_date": 1692070000,
-    "id": 6627,
-    "level": 1
+    "conekta_id": "cus_2uQhFDgeFj26EczjM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6627
   },
   {
     "nombre": "Linnet",
@@ -34116,10 +34088,10 @@ export const activeUsers = [
     "correo": "linnettello@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513193703,
-    "stripe_id": "cus_LChQMmb9Yq47r5",
-    "final_date": 1693160000,
-    "id": 6695,
-    "level": 1
+    "conekta_id": "cus_2uQhFEbUU1tVfrWfy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6695
   },
   {
     "nombre": "M√§g√§ly",
@@ -34127,10 +34099,9 @@ export const activeUsers = [
     "correo": "magaliceballos932@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631229919,
-    "stripe_id": "cus_N22p2L8nms0Xs5",
     "final_date": 0,
-    "id": 6709,
-    "level": 1
+    "level": 1,
+    "id": 6709
   },
   {
     "nombre": "Ana Cristina",
@@ -34138,10 +34109,9 @@ export const activeUsers = [
     "correo": "anacristinadiaz733@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524191318654,
-    "stripe_id": "cus_L6arsuyAzKhH4v",
     "final_date": 1680840000,
-    "id": 6713,
-    "level": 1
+    "level": 1,
+    "id": 6713
   },
   {
     "nombre": "María Sarahy",
@@ -34149,10 +34119,9 @@ export const activeUsers = [
     "correo": "isaias250688@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525579887026,
-    "stripe_id": "cus_L6x8daIULAReu8",
     "final_date": 1727990000,
-    "id": 6731,
-    "level": 0
+    "level": 0,
+    "id": 6731
   },
   {
     "nombre": "Odette",
@@ -34160,10 +34129,10 @@ export const activeUsers = [
     "correo": "panthera.heco@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525531189019,
-    "stripe_id": "cus_Lob6lIR4xciAqT",
-    "final_date": 1693840000,
-    "id": 6747,
-    "level": 1
+    "conekta_id": "cus_2uQhFFu6pKi34XfcL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6747
   },
   {
     "nombre": "Jeniffer",
@@ -34171,10 +34140,10 @@ export const activeUsers = [
     "correo": "montalvojeni@gmail.com",
     "pais": "Puerto Rico",
     "whatsapp": 17872177613,
-    "stripe_id": "cus_LoQlGfUIxCpcin",
-    "final_date": 1693800000,
-    "id": 6799,
-    "level": 1
+    "conekta_id": "cus_2uQhFFtXbj46ReV4y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6799
   },
   {
     "nombre": "Gabriela",
@@ -34182,10 +34151,10 @@ export const activeUsers = [
     "correo": "gab.glezor@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527775724151,
-    "stripe_id": "cus_L7jXReImBIzVMs",
-    "final_date": 1691640000,
-    "id": 6813,
-    "level": 1
+    "conekta_id": "cus_2uQhFGvs71NLkvmFs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6813
   },
   {
     "nombre": "carolina",
@@ -34193,10 +34162,10 @@ export const activeUsers = [
     "correo": "carolain_rc89@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525512967762,
-    "stripe_id": "cus_L7l6D191ZOgDyv",
-    "final_date": 1691650000,
-    "id": 6820,
-    "level": 1
+    "conekta_id": "cus_2uQhFHYkYp966Ux3J",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6820
   },
   {
     "nombre": "Elena",
@@ -34204,10 +34173,10 @@ export const activeUsers = [
     "correo": "hielenaortega@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525519215087,
-    "stripe_id": "cus_L7uxugPN8QnOM5",
-    "final_date": 1691990000,
-    "id": 6829,
-    "level": 1
+    "conekta_id": "cus_2uQhFHYkYp967VbLH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6829
   },
   {
     "nombre": "Brenda Citlally",
@@ -34215,10 +34184,10 @@ export const activeUsers = [
     "correo": "soanala24_27@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529671145250,
-    "stripe_id": "cus_L7yWepfpxyLUF7",
-    "final_date": 1692130000,
-    "id": 6842,
-    "level": 1
+    "conekta_id": "cus_2uQhFJMLn28wVzdzZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6842
   },
   {
     "nombre": "Juliana",
@@ -34226,10 +34195,10 @@ export const activeUsers = [
     "correo": "juliianadiaz198@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523549554422,
-    "stripe_id": "cus_L82k0tZdfzCo2p",
-    "final_date": 1691710000,
-    "id": 6850,
-    "level": 1
+    "conekta_id": "cus_2uQhFK6AJDhb8GJVB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6850
   },
   {
     "nombre": "Liliana Josefina",
@@ -34237,10 +34206,10 @@ export const activeUsers = [
     "correo": "lilytowers88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528673286644,
-    "stripe_id": "cus_NMjmmB0ACQtQeW",
-    "final_date": 1692160000,
-    "id": 6858,
-    "level": 1
+    "conekta_id": "cus_2uQhFKbCRKXHHhbNk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6858
   },
   {
     "nombre": "Ana María",
@@ -34248,10 +34217,10 @@ export const activeUsers = [
     "correo": "anavazquez31289@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525522852814,
-    "stripe_id": "cus_L8U32nGDr4Tuxm",
-    "final_date": 1693800000,
-    "id": 6912,
-    "level": 1
+    "conekta_id": "cus_2uQhFKt9BocwJ5ZKv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6912
   },
   {
     "nombre": "Andrea",
@@ -34259,10 +34228,10 @@ export const activeUsers = [
     "correo": "andreanails91@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527228333605,
-    "stripe_id": "cus_L9SCVXGURUD3k4",
-    "final_date": 1692040000,
-    "id": 6948,
-    "level": 1
+    "conekta_id": "cus_2uQhFLL1wX5vs3yBY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6948
   },
   {
     "nombre": "Rosa Nayeli",
@@ -34270,10 +34239,10 @@ export const activeUsers = [
     "correo": "rosa.sunun.221@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525547638132,
-    "stripe_id": "cus_LoRszATZbkiZ8S",
-    "final_date": 1694050000,
-    "id": 6976,
-    "level": 1
+    "conekta_id": "cus_2uQhFM4qTieaVKdg6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 6976
   },
   {
     "nombre": "Daniela",
@@ -34281,10 +34250,10 @@ export const activeUsers = [
     "correo": "daisagm97@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523151103387,
-    "stripe_id": "cus_LAA8ShbjqrkVlg",
-    "final_date": 1692200000,
-    "id": 7008,
-    "level": 1
+    "conekta_id": "cus_2uQhFN6bkQJt5g3Sb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7008
   },
   {
     "nombre": "Adriana",
@@ -34292,10 +34261,10 @@ export const activeUsers = [
     "correo": "chiquisuri@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525520952575,
-    "stripe_id": "cus_LABhEDJiXzsTbj",
-    "final_date": 1692210000,
-    "id": 7014,
-    "level": 1
+    "conekta_id": "cus_2uQhFNYUW7msjrxf7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7014
   },
   {
     "nombre": "Josefina",
@@ -34303,10 +34272,10 @@ export const activeUsers = [
     "correo": "jperezjoss@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522227212306,
-    "stripe_id": "cus_LAMD8CYEFKTisv",
-    "final_date": 1692250000,
-    "id": 7031,
-    "level": 1
+    "conekta_id": "cus_2uQhFNnFuDWqCxbou",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7031
   },
   {
     "nombre": "laura",
@@ -34314,10 +34283,10 @@ export const activeUsers = [
     "correo": "ladylaurac19@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 12069633198,
-    "stripe_id": "cus_MLFscUmJvmaYWL",
-    "final_date": 1693420000,
-    "id": 7043,
-    "level": 1
+    "conekta_id": "cus_2uQhFQK4JzzpxV2v9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7043
   },
   {
     "nombre": "yariseth",
@@ -34325,10 +34294,10 @@ export const activeUsers = [
     "correo": "yarisethcruzjuarez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528991230409,
-    "stripe_id": "cus_LAOe37AFGd8oXh",
-    "final_date": 1692260000,
-    "id": 7044,
-    "level": 1
+    "conekta_id": "cus_2uQhFQziTpCn8wMwj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7044
   },
   {
     "nombre": "Maria Fernanda",
@@ -34336,10 +34305,10 @@ export const activeUsers = [
     "correo": "fernandasifuentesc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524447118177,
-    "stripe_id": "cus_LAh3DA5LvktX7X",
-    "final_date": 1692320000,
-    "id": 7062,
-    "level": 1
+    "conekta_id": "cus_2uQhFRnhMQ88FAk84",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7062
   },
   {
     "nombre": "Araceli",
@@ -34347,10 +34316,10 @@ export const activeUsers = [
     "correo": "aggr.19@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529841852246,
-    "stripe_id": "cus_LAhccnUKv3kl28",
-    "final_date": 1692330000,
-    "id": 7066,
-    "level": 1
+    "conekta_id": "cus_2uQhFRVBNKNXZA7VF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7066
   },
   {
     "nombre": "RUTH ABIGAIL",
@@ -34358,10 +34327,9 @@ export const activeUsers = [
     "correo": "abigail.arreguin91@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524921723939,
-    "stripe_id": "cus_LAj9wPjstE0507",
     "final_date": 1694720000,
-    "id": 7072,
-    "level": 1
+    "level": 1,
+    "id": 7072
   },
   {
     "nombre": "yolanda edith",
@@ -34369,10 +34337,10 @@ export const activeUsers = [
     "correo": "amorcitopanter@outlook.com",
     "pais": "Estados Unidos",
     "whatsapp": 12812827311,
-    "stripe_id": "cus_LAsvwBJV233790",
-    "final_date": 1692370000,
-    "id": 7084,
-    "level": 1
+    "conekta_id": "cus_2uQhFSxpQiVpsy5UJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7084
   },
   {
     "nombre": "Daniela",
@@ -34380,10 +34348,10 @@ export const activeUsers = [
     "correo": "hsdani.3264@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525534340688,
-    "stripe_id": "cus_LAuX9nC1iksMmi",
-    "final_date": 1692370000,
-    "id": 7087,
-    "level": 1
+    "conekta_id": "cus_2uQhFTDB2Qtiuu97H",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7087
   },
   {
     "nombre": "mayra Lizeth",
@@ -34391,10 +34359,9 @@ export const activeUsers = [
     "correo": "lizdegalicia2005@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528683666278,
-    "stripe_id": "cus_MX0dF0rB46Je6J",
     "final_date": 1690780000,
-    "id": 7095,
-    "level": 1
+    "level": 1,
+    "id": 7095
   },
   {
     "nombre": "Liliana",
@@ -34402,10 +34369,10 @@ export const activeUsers = [
     "correo": "sofi.garcia.martinez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525517011701,
-    "stripe_id": "cus_LB8NRc2qlXDPeq",
-    "final_date": 1692480000,
-    "id": 7123,
-    "level": 1
+    "conekta_id": "cus_2uQhFUSTT7d84EmTg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7123
   },
   {
     "nombre": "Olga Lydia",
@@ -34413,10 +34380,10 @@ export const activeUsers = [
     "correo": "mandisfacturacion@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524871322219,
-    "stripe_id": "cus_LBhi3CfsmNgCTc",
-    "final_date": 1692560000,
-    "id": 7149,
-    "level": 1
+    "conekta_id": "cus_2uQhFUjySCNii71t3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7149
   },
   {
     "nombre": "Elena",
@@ -34424,10 +34391,10 @@ export const activeUsers = [
     "correo": "nena290885@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524446580407,
-    "stripe_id": "cus_LC6v6ryLhJStOn",
-    "final_date": 0,
-    "id": 7172,
-    "level": 1
+    "conekta_id": "cus_2uQhFVMrt19U3ef4c",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7172
   },
   {
     "nombre": "Belen",
@@ -34435,10 +34402,10 @@ export const activeUsers = [
     "correo": "belen24mr@icloud.com",
     "pais": "Mexico",
     "whatsapp": 525631614370,
-    "stripe_id": "cus_LC9VB7hMnk4uxI",
-    "final_date": 1692660000,
-    "id": 7183,
-    "level": 1
+    "conekta_id": "cus_2uQhFWDcUbW1xeLsX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7183
   },
   {
     "nombre": "Miriam",
@@ -34446,10 +34413,10 @@ export const activeUsers = [
     "correo": "wamba_gdl@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523328218161,
-    "stripe_id": "cus_LCRxfRHTARGnAd",
-    "final_date": 1692740000,
-    "id": 7199,
-    "level": 1
+    "conekta_id": "cus_2uQhFWuGdQhy8avNF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7199
   },
   {
     "nombre": "Araceli",
@@ -34457,10 +34424,9 @@ export const activeUsers = [
     "correo": "ara_g3@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524426069611,
-    "stripe_id": "cus_LCV1OkJxt8GvOf",
     "final_date": 1690060000,
-    "id": 7235,
-    "level": 1
+    "level": 1,
+    "id": 7235
   },
   {
     "nombre": "Yoana",
@@ -34468,10 +34434,9 @@ export const activeUsers = [
     "correo": "yoana9904@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461246910,
-    "stripe_id": "cus_LCYq03KN6CEb2F",
     "final_date": 1688450000,
-    "id": 7240,
-    "level": 1
+    "level": 1,
+    "id": 7240
   },
   {
     "nombre": "Tania Monserrat",
@@ -34479,10 +34444,10 @@ export const activeUsers = [
     "correo": "tania202253@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525524458900,
-    "stripe_id": "cus_LCbQCGZnDQiLD2",
-    "final_date": 1692940000,
-    "id": 7254,
-    "level": 1
+    "conekta_id": "cus_2uQhFXQJkWXfF6vcL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7254
   },
   {
     "nombre": "ana Luisa",
@@ -34490,10 +34455,10 @@ export const activeUsers = [
     "correo": "analuisamg1989@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526531333255,
-    "stripe_id": "cus_LCbPp4Slyku8CN",
-    "final_date": 1692940000,
-    "id": 7284,
-    "level": 1
+    "conekta_id": "cus_2uQhFYS53CBxqTLMa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7284
   },
   {
     "nombre": "Cecilia",
@@ -34501,10 +34466,10 @@ export const activeUsers = [
     "correo": "cecyrojast101822@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522727827699,
-    "stripe_id": "cus_LCbSFHLEjaE0T6",
-    "final_date": 1693770000,
-    "id": 7291,
-    "level": 1
+    "conekta_id": "cus_2uQhFYswnuexVeFbz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7291
   },
   {
     "nombre": "Alexa",
@@ -34512,10 +34477,9 @@ export const activeUsers = [
     "correo": "arekuzax3@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525517316063,
-    "stripe_id": "cus_LCbVLMWwDcl1QX",
     "final_date": 1690390000,
-    "id": 7314,
-    "level": 1
+    "level": 1,
+    "id": 7314
   },
   {
     "nombre": "mariana",
@@ -34523,10 +34487,9 @@ export const activeUsers = [
     "correo": "marianalucianovaldes@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529542060921,
-    "stripe_id": "cus_LCbWSWSvwxaViF",
     "final_date": 1687670000,
-    "id": 7316,
-    "level": 1
+    "level": 1,
+    "id": 7316
   },
   {
     "nombre": "Ashley Ximena",
@@ -34534,10 +34497,9 @@ export const activeUsers = [
     "correo": "rosalesashley59@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522441575277,
-    "stripe_id": "cus_LCbc71Xg0snTzu",
     "final_date": 1682400000,
-    "id": 7320,
-    "level": 1
+    "level": 1,
+    "id": 7320
   },
   {
     "nombre": "Marian",
@@ -34545,10 +34507,10 @@ export const activeUsers = [
     "correo": "zaratesol@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522461016586,
-    "stripe_id": "cus_LCbbsIeM6yzJkY",
-    "final_date": 1692940000,
-    "id": 7327,
-    "level": 1
+    "conekta_id": "cus_2uQhFaXbXQ61Z9RzR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7327
   },
   {
     "nombre": "mariana",
@@ -34556,10 +34518,10 @@ export const activeUsers = [
     "correo": "marianahuitron7@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524436146188,
-    "stripe_id": "cus_LCbnHQEm0S7hxt",
-    "final_date": 0,
-    "id": 7358,
-    "level": 1
+    "conekta_id": "cus_2uQhFaMaqJnFo6sE6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7358
   },
   {
     "nombre": "Zeydi",
@@ -34567,10 +34529,10 @@ export const activeUsers = [
     "correo": "osoriozey@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525620467569,
-    "stripe_id": "cus_LCrVmfzlb9taN0",
-    "final_date": 1692000000,
-    "id": 7377,
-    "level": 1
+    "conekta_id": "cus_2uQhFbGR3befBR6Uw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7377
   },
   {
     "nombre": "Claudia Susana",
@@ -34578,10 +34540,10 @@ export const activeUsers = [
     "correo": "jacintoclaudia04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524432065841,
-    "stripe_id": "cus_LCdzJC0B3pU3TS",
-    "final_date": 1692950000,
-    "id": 7385,
-    "level": 1
+    "conekta_id": "cus_2uQhFc8AeC1Cxoeqb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7385
   },
   {
     "nombre": "Argelia",
@@ -34589,10 +34551,10 @@ export const activeUsers = [
     "correo": "argeliareynoso0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518488558,
-    "stripe_id": "cus_LCwjmadF4yGE00",
-    "final_date": 1692920000,
-    "id": 7412,
-    "level": 1
+    "conekta_id": "cus_2uQhFca3PuUCcza6s",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7412
   },
   {
     "nombre": "Maricarmen",
@@ -34600,10 +34562,10 @@ export const activeUsers = [
     "correo": "rocafer1216@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17733444591,
-    "stripe_id": "cus_LCzWMQ4jchMIXL",
-    "final_date": 1692850000,
-    "id": 7418,
-    "level": 1
+    "conekta_id": "cus_2uQhFdJHhWNuZUjPu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7418
   },
   {
     "nombre": "María Fernanda",
@@ -34611,10 +34573,9 @@ export const activeUsers = [
     "correo": "marifer199836@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525512325628,
-    "stripe_id": "cus_LInBqVycjRcyrY",
     "final_date": 1681230000,
-    "id": 7454,
-    "level": 1
+    "level": 1,
+    "id": 7454
   },
   {
     "nombre": "adriana",
@@ -34622,10 +34583,9 @@ export const activeUsers = [
     "correo": "adry332014@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527121678775,
-    "stripe_id": "cus_LDioMoC28zESMY",
     "final_date": 1690670000,
-    "id": 7467,
-    "level": 1
+    "level": 1,
+    "id": 7467
   },
   {
     "nombre": "yesenia",
@@ -34633,10 +34593,10 @@ export const activeUsers = [
     "correo": "yezzyjose02@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16825405161,
-    "stripe_id": "cus_LDjBbtfpsV1Rg4",
-    "final_date": 1693200000,
-    "id": 7537,
-    "level": 1
+    "conekta_id": "cus_2uQhFe37DhwZG22tV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7537
   },
   {
     "nombre": "Anakaren",
@@ -34644,10 +34604,10 @@ export const activeUsers = [
     "correo": "ortizanakaren806@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526771083890,
-    "stripe_id": "cus_LDjKcE2TUNJSmZ",
-    "final_date": 1693200000,
-    "id": 7538,
-    "level": 1
+    "conekta_id": "cus_2uQhFf2HMbu6xuCcP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7538
   },
   {
     "nombre": "Arisbeth",
@@ -34655,10 +34615,10 @@ export const activeUsers = [
     "correo": "arisbethnava04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526611060029,
-    "stripe_id": "cus_LDjchR0fZM9cA9",
-    "final_date": 1693800000,
-    "id": 7549,
-    "level": 1
+    "conekta_id": "cus_2uQhFf2HMbu6xuCcc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7549
   },
   {
     "nombre": "jacky",
@@ -34666,10 +34626,10 @@ export const activeUsers = [
     "correo": "itziazavala93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530406759,
-    "stripe_id": "cus_LDji7ThOgxKMlj",
-    "final_date": 1693200000,
-    "id": 7558,
-    "level": 1
+    "conekta_id": "cus_2uQhFfWkG74rWZMtG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7558
   },
   {
     "nombre": "María de Lourdes",
@@ -34677,10 +34637,10 @@ export const activeUsers = [
     "correo": "lulufuertemh@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522881111591,
-    "stripe_id": "cus_LDkm298sEHOigs",
-    "final_date": 1693460000,
-    "id": 7560,
-    "level": 1
+    "conekta_id": "cus_2uQhFgFZnJdW8q2Nu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7560
   },
   {
     "nombre": "Ana Laura",
@@ -34688,10 +34648,10 @@ export const activeUsers = [
     "correo": "yuananails@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522871554865,
-    "stripe_id": "cus_LE7TzaDTMW5G9A",
-    "final_date": 1693110000,
-    "id": 7610,
-    "level": 1
+    "conekta_id": "cus_2uQhFhEjvCb3tsxkx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7610
   },
   {
     "nombre": "jose",
@@ -34699,10 +34659,10 @@ export const activeUsers = [
     "correo": "josehernandez.anaya@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13126759284,
-    "stripe_id": "cus_LoReEytzIjyW07",
-    "final_date": 1693800000,
-    "id": 7626,
-    "level": 1
+    "conekta_id": "cus_2uQhFhEjvCb3tsxm3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7626
   },
   {
     "nombre": "Patricia Del Carmen",
@@ -34710,10 +34670,10 @@ export const activeUsers = [
     "correo": "patriciapalas60@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13362677153,
-    "stripe_id": "cus_LEOrEEWlvSzZse",
-    "final_date": 1693350000,
-    "id": 7629,
-    "level": 1
+    "conekta_id": "cus_2uQhFhyZSQ9hX9dFa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7629
   },
   {
     "nombre": "alicia tatiana",
@@ -34721,10 +34681,9 @@ export const activeUsers = [
     "correo": "tay_cam@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529981577501,
-    "stripe_id": "cus_LErC5X7xak1EEK",
     "final_date": 1682920000,
-    "id": 7685,
-    "level": 1
+    "level": 1,
+    "id": 7685
   },
   {
     "nombre": "Nancy Mariana",
@@ -34732,10 +34691,9 @@ export const activeUsers = [
     "correo": "nmbom1702@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524611325713,
-    "stripe_id": "cus_LErJYpoCOKoBbs",
     "final_date": 1690870000,
-    "id": 7692,
-    "level": 1
+    "level": 1,
+    "id": 7692
   },
   {
     "nombre": "Lorena",
@@ -34743,10 +34701,9 @@ export const activeUsers = [
     "correo": "lorenita1104@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 525577596474,
-    "stripe_id": "cus_LF3sh85VePLtuj",
     "final_date": 1688230000,
-    "id": 7703,
-    "level": 1
+    "level": 1,
+    "id": 7703
   },
   {
     "nombre": "NEYVA GUADALUPE",
@@ -34754,10 +34711,10 @@ export const activeUsers = [
     "correo": "neyvacota13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526121550350,
-    "stripe_id": "cus_LF7ejoXuELysmF",
-    "final_date": 1693600000,
-    "id": 7712,
-    "level": 1
+    "conekta_id": "cus_2uQhFjDR5hY3CXDnJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7712
   },
   {
     "nombre": "graciela Lizbeth",
@@ -34765,10 +34722,9 @@ export const activeUsers = [
     "correo": "gracismith9807@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529513790444,
-    "stripe_id": "cus_LF9nGH8enJeIxg",
     "final_date": 1680390000,
-    "id": 7719,
-    "level": 1
+    "level": 1,
+    "id": 7719
   },
   {
     "nombre": "Azalia",
@@ -34776,10 +34732,10 @@ export const activeUsers = [
     "correo": "azalia.perez2013@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13477376354,
-    "stripe_id": "cus_LFDYZDW8U1dHp3",
-    "final_date": 1693630000,
-    "id": 7733,
-    "level": 1
+    "conekta_id": "cus_2uQhFks4pBy6BKbPh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7733
   },
   {
     "nombre": "janet",
@@ -34787,10 +34743,9 @@ export const activeUsers = [
     "correo": "gumychan92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583234306,
-    "stripe_id": "cus_LFROcfLl38BKzz",
     "final_date": 1691280000,
-    "id": 7756,
-    "level": 1
+    "level": 1,
+    "id": 7756
   },
   {
     "nombre": "brisa",
@@ -34798,10 +34753,10 @@ export const activeUsers = [
     "correo": "poisoncruepd@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525526696599,
-    "stripe_id": "cus_LFTXbfoSCMAlCe",
-    "final_date": 1693240000,
-    "id": 7764,
-    "level": 1
+    "conekta_id": "cus_2uQhFmRseJDz5LDGA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7764
   },
   {
     "nombre": "Beyanira",
@@ -34809,10 +34764,10 @@ export const activeUsers = [
     "correo": "beya-nira@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16463539596,
-    "stripe_id": "cus_LFa2GHDUdvB3d3",
-    "final_date": 1693710000,
-    "id": 7787,
-    "level": 1
+    "conekta_id": "cus_2uQhFmipQnKe8TfPM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7787
   },
   {
     "nombre": "Brenda Roxana",
@@ -34820,10 +34775,9 @@ export const activeUsers = [
     "correo": "idcmaestrasdelbien@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528211206935,
-    "stripe_id": "cus_LGDIE4b7HCbIbS",
     "final_date": 1694070000,
-    "id": 7840,
-    "level": 1
+    "level": 1,
+    "id": 7840
   },
   {
     "nombre": "scarlin",
@@ -34831,10 +34785,10 @@ export const activeUsers = [
     "correo": "carpioscarlin@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528329514254,
-    "stripe_id": "cus_LKHlfzSJdelQLW",
-    "final_date": 1692120000,
-    "id": 7859,
-    "level": 1
+    "conekta_id": "cus_2uQhFoCTTBSwLrcEP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7859
   },
   {
     "nombre": "Martha Monserrat",
@@ -34842,10 +34796,10 @@ export const activeUsers = [
     "correo": "martha.monse@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527221477944,
-    "stripe_id": "cus_LoQweGRLoE7AZI",
-    "final_date": 1693800000,
-    "id": 7866,
-    "level": 1
+    "conekta_id": "cus_2uQhFodkzJFzR8uxK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7866
   },
   {
     "nombre": "Adriana Guadalupe",
@@ -34853,10 +34807,10 @@ export const activeUsers = [
     "correo": "juarezlopezadriana90@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611325152,
-    "stripe_id": "cus_LGgB7xrQ6QEZmY",
-    "final_date": 1693960000,
-    "id": 7874,
-    "level": 1
+    "conekta_id": "cus_2uQhFot7bzetXJwCY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7874
   },
   {
     "nombre": "Dulce Marlenne",
@@ -34864,10 +34818,10 @@ export const activeUsers = [
     "correo": "dmarlennegonzalez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528715135358,
-    "stripe_id": "cus_LGv93TU41gfj2W",
-    "final_date": 1694020000,
-    "id": 7882,
-    "level": 1
+    "conekta_id": "cus_2uQhFpZARBnLJfut7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7882
   },
   {
     "nombre": "Erica",
@@ -34875,10 +34829,10 @@ export const activeUsers = [
     "correo": "cpluzvazquez@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526823295506,
-    "stripe_id": "cus_LH2lvBvPWtHzV1",
-    "final_date": 1694050000,
-    "id": 7895,
-    "level": 1
+    "conekta_id": "cus_2uQhFqQv1n8tDfbig",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7895
   },
   {
     "nombre": "Selene",
@@ -34886,10 +34840,9 @@ export const activeUsers = [
     "correo": "selenemendez0283@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524521066302,
-    "stripe_id": "cus_LH5gdaIltPxjAJ",
     "final_date": 1691380000,
-    "id": 7902,
-    "level": 1
+    "level": 1,
+    "id": 7902
   },
   {
     "nombre": "Ana Laura",
@@ -34897,10 +34850,10 @@ export const activeUsers = [
     "correo": "lorien.ortizmartinz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510792427,
-    "stripe_id": "cus_LHFGBywXJi4JSX",
-    "final_date": 1691500000,
-    "id": 7917,
-    "level": 1
+    "conekta_id": "cus_2uQhFqrnmVbspxCDT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7917
   },
   {
     "nombre": "Alejandra",
@@ -34908,10 +34861,10 @@ export const activeUsers = [
     "correo": "ale89yan26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525578041295,
-    "stripe_id": "cus_LHJSsEhC72kLJF",
-    "final_date": 1691430000,
-    "id": 7926,
-    "level": 1
+    "conekta_id": "cus_2uQhFrqPgnuV2PbAp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7926
   },
   {
     "nombre": "nancy elizabeth",
@@ -34919,10 +34872,10 @@ export const activeUsers = [
     "correo": "nancygrajeda484@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523320409834,
-    "stripe_id": "cus_NgxIgTPYJKzZNF",
-    "final_date": 1691730000,
-    "id": 7943,
-    "level": 1
+    "conekta_id": "cus_2uQhFrmcynUHEdpER",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7943
   },
   {
     "nombre": "Viridiana",
@@ -34930,10 +34883,10 @@ export const activeUsers = [
     "correo": "vdiana_mtz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526564432250,
-    "stripe_id": "cus_LHT0yG3YmL2Afm",
-    "final_date": 1691470000,
-    "id": 7965,
-    "level": 1
+    "conekta_id": "cus_2uQhFsdNaNpqBh6Xw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7965
   },
   {
     "nombre": "Miriam",
@@ -34941,10 +34894,10 @@ export const activeUsers = [
     "correo": "zunigamikel418@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526863892387,
-    "stripe_id": "cus_LHT1mmkKkDIJJk",
-    "final_date": 1691470000,
-    "id": 7967,
-    "level": 1
+    "conekta_id": "cus_2uQhFt4g7Vdt7ZEQo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7967
   },
   {
     "nombre": "Pilar Alejandra",
@@ -34952,10 +34905,10 @@ export const activeUsers = [
     "correo": "alejandrahdezf.ah@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981002664,
-    "stripe_id": "cus_LHT3fDAvFgP7Ep",
-    "final_date": 1691470000,
-    "id": 7970,
-    "level": 1
+    "conekta_id": "cus_2uQhFu3rFPbRuCafH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7970
   },
   {
     "nombre": "Christian",
@@ -34963,10 +34916,10 @@ export const activeUsers = [
     "correo": "garciagranadoschristian@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530072125,
-    "stripe_id": "cus_LHTHxXau7HlnJ0",
-    "final_date": 1691470000,
-    "id": 7984,
-    "level": 1
+    "conekta_id": "cus_2uQhFuqq8yWmyHafu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7984
   },
   {
     "nombre": "Ana Rosa",
@@ -34974,10 +34927,10 @@ export const activeUsers = [
     "correo": "anabenavidez784@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522414191449,
-    "stripe_id": "cus_LHTHXJ4Xbs8WDC",
-    "final_date": 1691470000,
-    "id": 7988,
-    "level": 1
+    "conekta_id": "cus_2uQhFuYtNVR848836",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 7988
   },
   {
     "nombre": "Maria de los Angeles",
@@ -34985,10 +34938,9 @@ export const activeUsers = [
     "correo": "angylinda3212@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525575620436,
-    "stripe_id": "cus_LHTc5FK8cUGBYy",
     "final_date": 1692320000,
-    "id": 8002,
-    "level": 1
+    "level": 1,
+    "id": 8002
   },
   {
     "nombre": "Betzayda",
@@ -34996,10 +34948,10 @@ export const activeUsers = [
     "correo": "betbari261@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527442870931,
-    "stripe_id": "cus_LHToj7J5F0j50y",
-    "final_date": 1691470000,
-    "id": 8005,
-    "level": 1
+    "conekta_id": "cus_2uQhFw2XQtYRCqqgM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8005
   },
   {
     "nombre": "Anayeli",
@@ -35007,10 +34959,10 @@ export const activeUsers = [
     "correo": "azulilegal_09@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526563872764,
-    "stripe_id": "cus_LHTgIJYRpKTFZZ",
-    "final_date": 1691470000,
-    "id": 8011,
-    "level": 1
+    "conekta_id": "cus_2uQhFw1xCHtUfqYta",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8011
   },
   {
     "nombre": "Lorena",
@@ -35018,10 +34970,10 @@ export const activeUsers = [
     "correo": "barbie_eclipce@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523323333645,
-    "stripe_id": "cus_MuvkybpzsKNn3L",
-    "final_date": 1691910000,
-    "id": 8035,
-    "level": 1
+    "conekta_id": "cus_2uQhFwmLw674vw7Wi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8035
   },
   {
     "nombre": "Angelica",
@@ -35029,10 +34981,9 @@ export const activeUsers = [
     "correo": "aleon161@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17205890419,
-    "stripe_id": "cus_LHqI85UU9HHigp",
     "final_date": 0,
-    "id": 8039,
-    "level": 1
+    "level": 1,
+    "id": 8039
   },
   {
     "nombre": "yanel",
@@ -35040,10 +34991,10 @@ export const activeUsers = [
     "correo": "rubioyanel4@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 12399615303,
-    "stripe_id": "cus_LISucoCLlp6Mqo",
-    "final_date": 1691700000,
-    "id": 8040,
-    "level": 1
+    "conekta_id": "cus_2uQhFxgB9NyUEo8Am",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8040
   },
   {
     "nombre": "Claudia",
@@ -35051,10 +35002,10 @@ export const activeUsers = [
     "correo": "clauvota4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525586172523,
-    "stripe_id": "cus_LHj2t5cvXtGrHZ",
-    "final_date": 1691530000,
-    "id": 8065,
-    "level": 1
+    "conekta_id": "cus_2uQhFyXvjyL26du9C",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8065
   },
   {
     "nombre": "Martha Laura",
@@ -35062,10 +35013,10 @@ export const activeUsers = [
     "correo": "martuchislatruchis@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526241642372,
-    "stripe_id": "cus_LHlyMgqc8DUsq0",
-    "final_date": 1692150000,
-    "id": 8074,
-    "level": 1
+    "conekta_id": "cus_2uQhFzGkGAtfp84zz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8074
   },
   {
     "nombre": "Corina",
@@ -35073,10 +35024,10 @@ export const activeUsers = [
     "correo": "montielcorina@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528118430694,
-    "stripe_id": "cus_LHqMQDPCHNPrut",
-    "final_date": 1691550000,
-    "id": 8089,
-    "level": 1
+    "conekta_id": "cus_2uQhFzid1tMfQenBs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8089
   },
   {
     "nombre": "Jorgelina",
@@ -35084,10 +35035,10 @@ export const activeUsers = [
     "correo": "jorgelinaflores2@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19093320291,
-    "stripe_id": "cus_LIacFLR4c31wkZ",
-    "final_date": 1691730000,
-    "id": 8094,
-    "level": 1
+    "conekta_id": "cus_2uQhG1hDwBfGUTnPB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8094
   },
   {
     "nombre": "maria",
@@ -35095,10 +35046,10 @@ export const activeUsers = [
     "correo": "katiuscajimenez6@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529292724572,
-    "stripe_id": "cus_LHr5TzHpnnqxdr",
-    "final_date": 1691560000,
-    "id": 8100,
-    "level": 1
+    "conekta_id": "cus_2uQhG1kPJa1xyStdL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8100
   },
   {
     "nombre": "Flor Guadalupe",
@@ -35106,10 +35057,10 @@ export const activeUsers = [
     "correo": "romerolupita1294@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524521364527,
-    "stripe_id": "cus_LI7jxF5vAJN4Nw",
-    "final_date": 1691620000,
-    "id": 8124,
-    "level": 1
+    "conekta_id": "cus_2uQhG2NGkNniJzXnh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8124
   },
   {
     "nombre": "gloria jaretzy",
@@ -35117,10 +35068,10 @@ export const activeUsers = [
     "correo": "villarrealg975@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528123436466,
-    "stripe_id": "cus_LIWTglHptj8rxy",
-    "final_date": 1691710000,
-    "id": 8154,
-    "level": 1
+    "conekta_id": "cus_2uQhG2vWMtPffzrrU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8154
   },
   {
     "nombre": "Marisela",
@@ -35128,10 +35079,10 @@ export const activeUsers = [
     "correo": "mavarico1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511856013,
-    "stripe_id": "cus_LIWfG7DpFHZmps",
-    "final_date": 1691710000,
-    "id": 8156,
-    "level": 1
+    "conekta_id": "cus_2uQhG3xqsAhuwUPTt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8156
   },
   {
     "nombre": "singli monserrat",
@@ -35139,10 +35090,10 @@ export const activeUsers = [
     "correo": "montse21revolution@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529842795516,
-    "stripe_id": "cus_LIbBXhzPQ1bUhH",
-    "final_date": 1686460000,
-    "id": 8171,
-    "level": 1
+    "conekta_id": "cus_2uQhG3fKt5xKF4rpz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8171
   },
   {
     "nombre": "Vanessa",
@@ -35150,10 +35101,9 @@ export const activeUsers = [
     "correo": "vanessavillanuevamendoza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523333199158,
-    "stripe_id": "cus_LIdcrNGu6yqc1B",
     "final_date": 0,
-    "id": 8175,
-    "level": 1
+    "level": 1,
+    "id": 8175
   },
   {
     "nombre": "Virginia",
@@ -35161,10 +35111,9 @@ export const activeUsers = [
     "correo": "virginialaradelgado382@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530754505,
-    "stripe_id": "cus_MX0YeJDnd68llt",
     "final_date": 1690780000,
-    "id": 8184,
-    "level": 1
+    "level": 1,
+    "id": 8184
   },
   {
     "nombre": "Maria de los Angeles",
@@ -35172,10 +35121,9 @@ export const activeUsers = [
     "correo": "geluzoxxo@icloud.com",
     "pais": "Mexico",
     "whatsapp": 526641518121,
-    "stripe_id": "cus_LIyvdBdk7o8rLm",
     "final_date": 1689140000,
-    "id": 8203,
-    "level": 1
+    "level": 1,
+    "id": 8203
   },
   {
     "nombre": "Angela",
@@ -35183,10 +35131,10 @@ export const activeUsers = [
     "correo": "angelicnashvega@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526462152100,
-    "stripe_id": "cus_LJh2tV5zFVQsSf",
-    "final_date": 1691540000,
-    "id": 8243,
-    "level": 1
+    "conekta_id": "cus_2uQhG5tMfHJCi5odA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8243
   },
   {
     "nombre": "Brenda",
@@ -35194,10 +35142,10 @@ export const activeUsers = [
     "correo": "dayara05@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 15122169276,
-    "stripe_id": "cus_LLtS7cKhSyU3pg",
-    "final_date": 1692490000,
-    "id": 8246,
-    "level": 1
+    "conekta_id": "cus_2uQhG5tMfHJCnYRdg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8246
   },
   {
     "nombre": "Delma",
@@ -35205,10 +35153,10 @@ export const activeUsers = [
     "correo": "ilamex2003@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 13363016682,
-    "stripe_id": "cus_LJihGRyMlix8t2",
-    "final_date": 1691990000,
-    "id": 8248,
-    "level": 1
+    "conekta_id": "cus_2uQhG6oBsaAc4cWmB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8248
   },
   {
     "nombre": "Lizeth",
@@ -35216,10 +35164,10 @@ export const activeUsers = [
     "correo": "liiz.domii@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528711098463,
-    "stripe_id": "cus_LsXYbqmhIjBxEe",
-    "final_date": 1692070000,
-    "id": 8261,
-    "level": 1
+    "conekta_id": "cus_2uQhG7ewUAXA2kZkm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8261
   },
   {
     "nombre": "Marlene",
@@ -35227,10 +35175,9 @@ export const activeUsers = [
     "correo": "marlene.2000mtz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522371132724,
-    "stripe_id": "cus_Nlo7N0KYOz6G2f",
     "final_date": 1693130000,
-    "id": 8268,
-    "level": 1
+    "level": 1,
+    "id": 8268
   },
   {
     "nombre": "paulina",
@@ -35238,10 +35185,10 @@ export const activeUsers = [
     "correo": "paulina0850@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525547317745,
-    "stripe_id": "cus_LK1L5LQFrM2USO",
-    "final_date": 1692060000,
-    "id": 8269,
-    "level": 1
+    "conekta_id": "cus_2uQhG8GpuyHuSkyDP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8269
   },
   {
     "nombre": "Carolina",
@@ -35249,10 +35196,10 @@ export const activeUsers = [
     "correo": "carolmancia366@gmail.com",
     "pais": "El Salvador",
     "whatsapp": 50377502067,
-    "stripe_id": "cus_Nlo75vNGo0r0xO",
-    "final_date": 1693750000,
-    "id": 8309,
-    "level": 1
+    "conekta_id": "cus_2uQhG8q4XUtrcxWHb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8309
   },
   {
     "nombre": "Andrea",
@@ -35260,10 +35207,10 @@ export const activeUsers = [
     "correo": "perzyta1511@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526183536072,
-    "stripe_id": "cus_LKIuV3Ux50ndGb",
-    "final_date": 1692120000,
-    "id": 8310,
-    "level": 1
+    "conekta_id": "cus_2uQhG9sQ2mD6uZZF7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8310
   },
   {
     "nombre": "Brigitte",
@@ -35271,10 +35218,10 @@ export const activeUsers = [
     "correo": "avilenedguez19@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526641654654,
-    "stripe_id": "cus_LKLyasDj4g2Ede",
-    "final_date": 1692130000,
-    "id": 8319,
-    "level": 1
+    "conekta_id": "cus_2uQhGAJhZt29sVqGk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8319
   },
   {
     "nombre": "Daniela de Jesus",
@@ -35282,10 +35229,10 @@ export const activeUsers = [
     "correo": "pedresmendezdaniela@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522291729327,
-    "stripe_id": "cus_LKSy8rm9XjNJnu",
-    "final_date": 1692980000,
-    "id": 8350,
-    "level": 1
+    "conekta_id": "cus_2uQhGAKGnUg6ThnbT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8350
   },
   {
     "nombre": "micaela ayelen",
@@ -35293,10 +35240,9 @@ export const activeUsers = [
     "correo": "aquinomicaelaayelen@gmail.com",
     "pais": "Argentina",
     "whatsapp": 541162603673,
-    "stripe_id": "cus_LL01lTbLQqFtxR",
     "final_date": 1689730000,
-    "id": 8376,
-    "level": 1
+    "level": 1,
+    "id": 8376
   },
   {
     "nombre": "Lucero Leticia",
@@ -35304,10 +35250,9 @@ export const activeUsers = [
     "correo": "dark2283@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525585095616,
-    "stripe_id": "cus_LoRDv1JWuxfkzF",
     "final_date": 1691120000,
-    "id": 8394,
-    "level": 1
+    "level": 1,
+    "id": 8394
   },
   {
     "nombre": "Edith Viridiana",
@@ -35315,10 +35260,10 @@ export const activeUsers = [
     "correo": "eviridiana.mg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528129344816,
-    "stripe_id": "cus_LoQeemPxQimwmF",
-    "final_date": 1693800000,
-    "id": 8398,
-    "level": 1
+    "conekta_id": "cus_2uQhGC2hDyYMEF5HX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8398
   },
   {
     "nombre": "yohanna",
@@ -35326,10 +35271,10 @@ export const activeUsers = [
     "correo": "marteyohanna38@gmail.com",
     "pais": "Dominican Republic",
     "whatsapp": 18497630877,
-    "stripe_id": "cus_LL3u0MNG7yFGQq",
-    "final_date": 1692300000,
-    "id": 8413,
-    "level": 1
+    "conekta_id": "cus_2uQhGChk3Afo4mpi6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8413
   },
   {
     "nombre": "Esmeralda",
@@ -35337,10 +35282,9 @@ export const activeUsers = [
     "correo": "esmeraldacastrocornelio@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525556809594,
-    "stripe_id": "cus_LKqYFaKFAjWpUC",
     "final_date": 1721630000,
-    "id": 8421,
-    "level": 1
+    "level": 1,
+    "id": 8421
   },
   {
     "nombre": "Veronica del Rocío",
@@ -35348,10 +35292,10 @@ export const activeUsers = [
     "correo": "gavidia209@gmail.com",
     "pais": "España",
     "whatsapp": 34626804962,
-    "stripe_id": "cus_LRws92GZ7VpzIi",
-    "final_date": 1692410000,
-    "id": 8447,
-    "level": 1
+    "conekta_id": "cus_2uQhGDWLGNfeUnQGp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8447
   },
   {
     "nombre": "Viviana",
@@ -35359,10 +35303,10 @@ export const activeUsers = [
     "correo": "frank_10v@icloud.com",
     "pais": "Mexico",
     "whatsapp": 529711940536,
-    "stripe_id": "cus_LMg3Xl4B3Zx9aC",
-    "final_date": 1692670000,
-    "id": 8450,
-    "level": 1
+    "conekta_id": "cus_2uQhGDWLGNfeXxB1X",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8450
   },
   {
     "nombre": "María Antonia",
@@ -35370,10 +35314,10 @@ export const activeUsers = [
     "correo": "empresariac.18@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523171072968,
-    "stripe_id": "cus_LLDIcMR6kb37Uq",
-    "final_date": 1692330000,
-    "id": 8461,
-    "level": 1
+    "conekta_id": "cus_2uQhGEF9naEJADqW5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8461
   },
   {
     "nombre": "yadira",
@@ -35381,10 +35325,9 @@ export const activeUsers = [
     "correo": "yadis_santos@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 528994998942,
-    "stripe_id": "cus_LLDYe7SfI9C203",
     "final_date": 1674010000,
-    "id": 8464,
-    "level": 1
+    "level": 1,
+    "id": 8464
   },
   {
     "nombre": "Jocelyn damaris",
@@ -35392,10 +35335,10 @@ export const activeUsers = [
     "correo": "joselinchiapas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522481104031,
-    "stripe_id": "cus_LoQoPsyHKiml96",
+    "conekta_id": "cus_2uQhGEkBug3zDKmZJ",
     "final_date": 1694040000,
-    "id": 8547,
-    "level": 1
+    "level": 0,
+    "id": 8547
   },
   {
     "nombre": "María Esther",
@@ -35403,10 +35346,9 @@ export const activeUsers = [
     "correo": "estherleon959@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525512339511,
-    "stripe_id": "cus_NNqg96IgLcjNQ5",
     "final_date": 1691040000,
-    "id": 8549,
-    "level": 1
+    "level": 1,
+    "id": 8549
   },
   {
     "nombre": "Ayerim Guadalupe",
@@ -35414,10 +35356,9 @@ export const activeUsers = [
     "correo": "ayerimmonroy@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 525513767469,
-    "stripe_id": "cus_LoQqSZomZBebd2",
     "final_date": 1691120000,
-    "id": 8555,
-    "level": 1
+    "level": 1,
+    "id": 8555
   },
   {
     "nombre": "Jael Jazmín",
@@ -35425,10 +35366,10 @@ export const activeUsers = [
     "correo": "jael.069@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19097516276,
-    "stripe_id": "cus_LsjQaLj01S0Yo7",
-    "final_date": 1692110000,
-    "id": 8560,
-    "level": 1
+    "conekta_id": "cus_2uQhGGDFjUXLvrome",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8560
   },
   {
     "nombre": "Mayra Isabel",
@@ -35436,10 +35377,10 @@ export const activeUsers = [
     "correo": "lpz4482@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523344788402,
-    "stripe_id": "cus_MKw0PNo5TE7XYR",
-    "final_date": 1693350000,
-    "id": 8577,
-    "level": 1
+    "conekta_id": "cus_2uQhGHCRsNUtenk2F",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8577
   },
   {
     "nombre": "Paulina Monserrat",
@@ -35447,10 +35388,10 @@ export const activeUsers = [
     "correo": "paulinamrs87@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548183597,
-    "stripe_id": "cus_MXNNJxL2oNoeNJ",
-    "final_date": 1693540000,
-    "id": 8582,
-    "level": 1
+    "conekta_id": "cus_2uQhGHgtmsee8CUDC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8582
   },
   {
     "nombre": "Lesvia Lucia",
@@ -35458,10 +35399,10 @@ export const activeUsers = [
     "correo": "levis.luci_411@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525534515962,
-    "stripe_id": "cus_M2pTUFpNkewAI2",
-    "final_date": 1691850000,
-    "id": 8583,
-    "level": 1
+    "conekta_id": "cus_2uQhGHgtmseeBQ8kt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8583
   },
   {
     "nombre": "Wendy Alicia",
@@ -35469,10 +35410,10 @@ export const activeUsers = [
     "correo": "waliciaar@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527712193064,
-    "stripe_id": "cus_MFgwaJwof4X0Vg",
-    "final_date": 1692140000,
-    "id": 8617,
-    "level": 1
+    "conekta_id": "cus_2uQhGJRiJ5DHofoFT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8617
   },
   {
     "nombre": "Gloria",
@@ -35480,10 +35421,9 @@ export const activeUsers = [
     "correo": "gmastranzovictory2017@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17186837948,
-    "stripe_id": "cus_Nlo8yV6pnBXyjs",
     "final_date": 1720030000,
-    "id": 8626,
-    "level": 0
+    "level": 0,
+    "id": 8626
   },
   {
     "nombre": "Elizabeth",
@@ -35491,10 +35431,10 @@ export const activeUsers = [
     "correo": "eliarem78@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711798261,
-    "stripe_id": "cus_MX0YqD8Ok5duMe",
-    "final_date": 1693450000,
-    "id": 8688,
-    "level": 1
+    "conekta_id": "cus_2uQhGKB72sRsxwkWv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8688
   },
   {
     "nombre": "Magdalena",
@@ -35502,10 +35442,10 @@ export const activeUsers = [
     "correo": "maggymtz915@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528666301466,
-    "stripe_id": "cus_LMcx4eBhg5XMkq",
-    "final_date": 1692660000,
-    "id": 8695,
-    "level": 1
+    "conekta_id": "cus_2uQhGL9hxAjVAP9SU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8695
   },
   {
     "nombre": "diana Laura",
@@ -35513,10 +35453,10 @@ export const activeUsers = [
     "correo": "lauj.dianh@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524171406579,
-    "stripe_id": "cus_Nlo8ZmNumNxFdv",
-    "final_date": 0,
-    "id": 8697,
-    "level": 1
+    "conekta_id": "cus_2uQhGLeArfuEabtuy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8697
   },
   {
     "nombre": "Jadeera Lizet",
@@ -35524,10 +35464,10 @@ export const activeUsers = [
     "correo": "jadeera2@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523921836095,
-    "stripe_id": "cus_MX0HoATfDKyGxa",
-    "final_date": 1693450000,
-    "id": 8709,
-    "level": 1
+    "conekta_id": "cus_2uQhGMgWMxDUutBA2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8709
   },
   {
     "nombre": "Blanca Isabel",
@@ -35535,10 +35475,10 @@ export const activeUsers = [
     "correo": "blancaisabelgabriel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529581096697,
-    "stripe_id": "cus_LMrxenbg8JSO6q",
-    "final_date": 1692710000,
-    "id": 8718,
-    "level": 1
+    "conekta_id": "cus_2uQhGMZaHZRahcv61",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8718
   },
   {
     "nombre": "Martha Carolina",
@@ -35546,10 +35486,10 @@ export const activeUsers = [
     "correo": "0527fama@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525540428585,
-    "stripe_id": "cus_LN1PILNop6rK8p",
-    "final_date": 1692750000,
-    "id": 8737,
-    "level": 1
+    "conekta_id": "cus_2uQhGNJPokzECHT8Y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8737
   },
   {
     "nombre": "BRENDA",
@@ -35557,10 +35497,9 @@ export const activeUsers = [
     "correo": "bren.saucedo9624@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524435349445,
-    "stripe_id": "cus_MX0Fyjg8eXAJ4P",
     "final_date": 1682830000,
-    "id": 8741,
-    "level": 1
+    "level": 1,
+    "id": 8741
   },
   {
     "nombre": "Zoemi",
@@ -35568,20 +35507,20 @@ export const activeUsers = [
     "correo": "zoe.070683@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528714181649,
-    "stripe_id": "cus_LN5OsxZy0x22n1",
-    "final_date": 1692760000,
-    "id": 8746,
-    "level": 1
+    "conekta_id": "cus_2uQhGNrdRGbBW67gG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8746
   },
   {
     "nombre": "CASTRO",
     "apellido": "MARIA",
     "correo": "mc9998545@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_LoR9S4l7Ud7WJP",
-    "final_date": 1693800000,
-    "id": 8779,
-    "level": 1
+    "conekta_id": "cus_2uQhGPn2rA7XSpn86",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8779
   },
   {
     "nombre": "Edith",
@@ -35589,10 +35528,10 @@ export const activeUsers = [
     "correo": "edithalvarez544@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526644976977,
-    "stripe_id": "cus_LNLWY2nZxSibuc",
-    "final_date": 1692820000,
-    "id": 8795,
-    "level": 1
+    "conekta_id": "cus_2uQhGQad5N7Np9v1a",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8795
   },
   {
     "nombre": "alejandra",
@@ -35600,10 +35539,9 @@ export const activeUsers = [
     "correo": "jandy_1591@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526692149201,
-    "stripe_id": "cus_LkUg5eH2jKeqSI",
     "final_date": 1690210000,
-    "id": 8797,
-    "level": 1
+    "level": 1,
+    "id": 8797
   },
   {
     "nombre": "Judith",
@@ -35611,10 +35549,9 @@ export const activeUsers = [
     "correo": "blanjutozag@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532547136,
-    "stripe_id": "cus_LNLvBjk32lPoPS",
     "final_date": 1682280000,
-    "id": 8798,
-    "level": 1
+    "level": 1,
+    "id": 8798
   },
   {
     "nombre": "cecilia",
@@ -35622,10 +35559,10 @@ export const activeUsers = [
     "correo": "cecy22.valencia@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17606202350,
-    "stripe_id": "cus_LoR2QbG0xEAsio",
-    "final_date": 1693800000,
-    "id": 8829,
-    "level": 1
+    "conekta_id": "cus_2uQhGR5fCTw53ZgRx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8829
   },
   {
     "nombre": "perla",
@@ -35633,10 +35570,10 @@ export const activeUsers = [
     "correo": "perla_zn@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528717616351,
-    "stripe_id": "cus_Me29RgYxMkvVOG",
-    "final_date": 1692400000,
-    "id": 8836,
-    "level": 1
+    "conekta_id": "cus_2uQhGSZJEs4NKTzjV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8836
   },
   {
     "nombre": "Kelly yatziry",
@@ -35644,10 +35581,10 @@ export const activeUsers = [
     "correo": "botellokelly@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528335313490,
-    "stripe_id": "cus_LNiyzdneZKfYMf",
-    "final_date": 1692910000,
-    "id": 8838,
-    "level": 1
+    "conekta_id": "cus_2uQhGSrF1MA2Hmpd4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8838
   },
   {
     "nombre": "Karla",
@@ -35655,10 +35592,9 @@ export const activeUsers = [
     "correo": "kalu214mo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522221542114,
-    "stripe_id": "cus_LNzMWiA0CIRAQh",
     "final_date": 1682430000,
-    "id": 8863,
-    "level": 1
+    "level": 1,
+    "id": 8863
   },
   {
     "nombre": "Janeth",
@@ -35666,10 +35602,10 @@ export const activeUsers = [
     "correo": "janeth19802001@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 525527110123,
-    "stripe_id": "cus_LomX5f5ln58JKL",
-    "final_date": 1693880000,
-    "id": 8880,
-    "level": 1
+    "conekta_id": "cus_2uQhGTU8T9vmaB6b6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8880
   },
   {
     "nombre": "Barbara",
@@ -35677,10 +35613,10 @@ export const activeUsers = [
     "correo": "3bocaditos82.bv@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525519326416,
-    "stripe_id": "cus_LOWYzgH5DCW1kh",
-    "final_date": 1693100000,
-    "id": 8893,
-    "level": 1
+    "conekta_id": "cus_2uQhGUCwyMVRL3tWy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8893
   },
   {
     "nombre": "Maria",
@@ -35688,10 +35624,10 @@ export const activeUsers = [
     "correo": "susanamelendez295@icloud.com",
     "pais": "Estados Unidos",
     "whatsapp": 15125544100,
-    "stripe_id": "cus_LwGAgE1yk1hfLH",
-    "final_date": 1692930000,
-    "id": 8920,
-    "level": 1
+    "conekta_id": "cus_2uQhGUmkoTkKAuzu5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8920
   },
   {
     "nombre": "Diana Paola",
@@ -35699,10 +35635,9 @@ export const activeUsers = [
     "correo": "payolastrong4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525576644006,
-    "stripe_id": "cus_LOwlSiTdCS2uhv",
     "final_date": 1690580000,
-    "id": 8935,
-    "level": 1
+    "level": 1,
+    "id": 8935
   },
   {
     "nombre": "Dina",
@@ -35710,10 +35645,10 @@ export const activeUsers = [
     "correo": "dinaramos8218@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15619322655,
-    "stripe_id": "cus_LPKmO9oGy1c2gb",
-    "final_date": 1693280000,
-    "id": 8980,
-    "level": 1
+    "conekta_id": "cus_2uQhGVkMim3vHP2Qo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8980
   },
   {
     "nombre": "Sarahi",
@@ -35721,10 +35656,10 @@ export const activeUsers = [
     "correo": "sarypaan97@outlook.es",
     "pais": "Mexico",
     "whatsapp": 529141217619,
-    "stripe_id": "cus_LXYfSuQ4bmROWi",
-    "final_date": 1692500000,
-    "id": 9001,
-    "level": 1
+    "conekta_id": "cus_2uQhGWFPqrscSpKCA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9001
   },
   {
     "nombre": "Sthefany Cristell",
@@ -35732,10 +35667,9 @@ export const activeUsers = [
     "correo": "sthef10_22@hotmail.com",
     "pais": "Peru",
     "whatsapp": 51954974030,
-    "stripe_id": "cus_LPzE2TcxLrQH0p",
     "final_date": 1689310000,
-    "id": 9030,
-    "level": 1
+    "level": 1,
+    "id": 9030
   },
   {
     "nombre": "Denise",
@@ -35743,10 +35677,10 @@ export const activeUsers = [
     "correo": "gdalan1512@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523222087044,
-    "stripe_id": "cus_LQJYGBef07Wd71",
-    "final_date": 1693510000,
-    "id": 9040,
-    "level": 1
+    "conekta_id": "cus_2uQhGXDzmABDSatSj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9040
   },
   {
     "nombre": "Perla",
@@ -35754,10 +35688,10 @@ export const activeUsers = [
     "correo": "perla_con@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14693099930,
-    "stripe_id": "cus_LQHkWl7DCTQd0Y",
-    "final_date": 1693500000,
-    "id": 9043,
-    "level": 1
+    "conekta_id": "cus_2uQhGY1yek6ZefUpw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9043
   },
   {
     "nombre": "Zoe Alejandra",
@@ -35765,10 +35699,10 @@ export const activeUsers = [
     "correo": "livy28_ojeda@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 13134693036,
-    "stripe_id": "cus_LoQuhrLiHqxOmD",
-    "final_date": 1693800000,
-    "id": 9071,
-    "level": 1
+    "conekta_id": "cus_2uQhGYhdoZJWjof7C",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9071
   },
   {
     "nombre": "Leidy",
@@ -35776,10 +35710,10 @@ export const activeUsers = [
     "correo": "garcialeidy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611729027,
-    "stripe_id": "cus_MX0Yuy7PQskWLb",
-    "final_date": 1693450000,
-    "id": 9086,
-    "level": 1
+    "conekta_id": "cus_2uQhGYkoAwfDGw9KY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9086
   },
   {
     "nombre": "Diana",
@@ -35787,10 +35721,10 @@ export const activeUsers = [
     "correo": "diana_vi_he@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525579793323,
-    "stripe_id": "cus_LSm87Imnw8GSih",
-    "final_date": 1693840000,
-    "id": 9143,
-    "level": 1
+    "conekta_id": "cus_2uQhGZSTKksAQjLsx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9143
   },
   {
     "nombre": "Karen",
@@ -35798,10 +35732,10 @@ export const activeUsers = [
     "correo": "karentovar.2603@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513604488,
-    "stripe_id": "cus_LRq0AKWQBXPiSN",
-    "final_date": 1693860000,
-    "id": 9149,
-    "level": 1
+    "conekta_id": "cus_2uQhGa7W8wzcCc52X",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9149
   },
   {
     "nombre": "Janeth",
@@ -35809,10 +35743,10 @@ export const activeUsers = [
     "correo": "janeth0895@icloud.com",
     "pais": "Mexico",
     "whatsapp": 523751078251,
-    "stripe_id": "cus_LRqrLWZ2tqYisJ",
-    "final_date": 1693860000,
-    "id": 9180,
-    "level": 1
+    "conekta_id": "cus_2uQhGagJy4FWB5Jr1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9180
   },
   {
     "nombre": "zuleimy",
@@ -35820,10 +35754,10 @@ export const activeUsers = [
     "correo": "zuleimyramirez8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525514051357,
-    "stripe_id": "cus_LRx0cGCh4nSuzK",
-    "final_date": 1693880000,
-    "id": 9194,
-    "level": 1
+    "conekta_id": "cus_2uQhGbb9BM7uakXSa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9194
   },
   {
     "nombre": "Nohemi Silvana",
@@ -35831,10 +35765,9 @@ export const activeUsers = [
     "correo": "ciruelo_051902@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529994306309,
-    "stripe_id": "cus_LS7PNHVWbpCaCN",
     "final_date": 1691240000,
-    "id": 9205,
-    "level": 1
+    "level": 1,
+    "id": 9205
   },
   {
     "nombre": "Dalia cecilia",
@@ -35842,10 +35775,9 @@ export const activeUsers = [
     "correo": "amyaguirre596@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527911029146,
-    "stripe_id": "cus_LS8R3KuVbAfM3f",
     "final_date": 1691250000,
-    "id": 9208,
-    "level": 1
+    "level": 1,
+    "id": 9208
   },
   {
     "nombre": "Viridiana",
@@ -35853,10 +35785,9 @@ export const activeUsers = [
     "correo": "viridiana_0714@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527122562537,
-    "stripe_id": "cus_LSD7BG4E0BvfNd",
     "final_date": 1691270000,
-    "id": 9225,
-    "level": 1
+    "level": 1,
+    "id": 9225
   },
   {
     "nombre": "YOLANDA",
@@ -35864,10 +35795,9 @@ export const activeUsers = [
     "correo": "yrios717@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526333502509,
-    "stripe_id": "cus_LTfJVZAayTODqt",
     "final_date": 0,
-    "id": 9276,
-    "level": 1
+    "level": 1,
+    "id": 9276
   },
   {
     "nombre": "Esmeralda Guadalupe",
@@ -35875,10 +35805,9 @@ export const activeUsers = [
     "correo": "esmvillafana@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221628891,
-    "stripe_id": "cus_LSaLj37Zl64oNn",
     "final_date": 1691350000,
-    "id": 9279,
-    "level": 1
+    "level": 1,
+    "id": 9279
   },
   {
     "nombre": "Karen Nícole",
@@ -35886,10 +35815,10 @@ export const activeUsers = [
     "correo": "kh7460166@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428225394,
-    "stripe_id": "cus_LSwJVJXxHDZBzr",
-    "final_date": 1691430000,
-    "id": 9317,
-    "level": 1
+    "conekta_id": "cus_2uQhGctmXewT3tJKq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9317
   },
   {
     "nombre": "Irma",
@@ -35897,10 +35826,10 @@ export const activeUsers = [
     "correo": "morositahernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525516793518,
-    "stripe_id": "cus_LoQj6KC7NugOzK",
-    "final_date": 1693800000,
-    "id": 9359,
-    "level": 1
+    "conekta_id": "cus_2uQhGdd1qFrA4h42j",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9359
   },
   {
     "nombre": "Nohemi",
@@ -35908,10 +35837,10 @@ export const activeUsers = [
     "correo": "chouemimtzsalazar@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525579930861,
-    "stripe_id": "cus_LTaQ0xhde5ozj9",
-    "final_date": 1693930000,
-    "id": 9397,
-    "level": 1
+    "conekta_id": "cus_2uQhGeMqMTQob5pih",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9397
   },
   {
     "nombre": "Brenda Belina",
@@ -35919,10 +35848,10 @@ export const activeUsers = [
     "correo": "sweetbreranie@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528331205984,
-    "stripe_id": "cus_LoQchuYNYgItqb",
-    "final_date": 1693800000,
-    "id": 9400,
-    "level": 1
+    "conekta_id": "cus_2uQhGfM1VMNMQteq4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9400
   },
   {
     "nombre": "Claudia Cristina",
@@ -35930,20 +35859,19 @@ export const activeUsers = [
     "correo": "criisvam@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528781350614,
-    "stripe_id": "cus_LoyXdnLQ4q4yAx",
-    "final_date": 1691880000,
-    "id": 9422,
-    "level": 1
+    "conekta_id": "cus_2uQhGfr3cTC3YxxJS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9422
   },
   {
     "nombre": "virginia",
     "apellido": "zamudio",
     "correo": "biqixham1921@icloud.com",
     "pais": "Mexico",
-    "stripe_id": "cus_LoQnjJ6VZ6qYav",
     "final_date": 1683170000,
-    "id": 9431,
-    "level": 1
+    "level": 1,
+    "id": 9431
   },
   {
     "nombre": "Sara Nohemí",
@@ -35951,10 +35879,10 @@ export const activeUsers = [
     "correo": "saradepalomo@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50255550418,
-    "stripe_id": "cus_LoQbKqjhe5Pz0c",
-    "final_date": 1693800000,
-    "id": 9519,
-    "level": 1
+    "conekta_id": "cus_2uQhGgpeXkVecmxXj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9519
   },
   {
     "nombre": "TERESA",
@@ -35962,10 +35890,10 @@ export const activeUsers = [
     "correo": "terecamacho.perssa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525529433218,
-    "stripe_id": "cus_LUTddOF26dpgEN",
-    "final_date": 1691790000,
-    "id": 9538,
-    "level": 1
+    "conekta_id": "cus_2uQhGgaHv46kWa3ZW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9538
   },
   {
     "nombre": "Berenice",
@@ -35973,10 +35901,10 @@ export const activeUsers = [
     "correo": "melodysalvador317@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543582738,
-    "stripe_id": "cus_LUj3zVSSUoUVAF",
-    "final_date": 1691850000,
-    "id": 9568,
-    "level": 1
+    "conekta_id": "cus_2uQhGhZU3x4JHheJb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9568
   },
   {
     "nombre": "Erika",
@@ -35984,10 +35912,9 @@ export const activeUsers = [
     "correo": "erikapatraca107@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523324328293,
-    "stripe_id": "cus_LUxCLtz4NKcHdc",
     "final_date": 1689270000,
-    "id": 9604,
-    "level": 1
+    "level": 1,
+    "id": 9604
   },
   {
     "nombre": "María de la luz",
@@ -35995,10 +35922,9 @@ export const activeUsers = [
     "correo": "luz_camposr@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524922058652,
-    "stripe_id": "cus_MX1ZJkHXfII27A",
     "final_date": 1690780000,
-    "id": 9607,
-    "level": 1
+    "level": 1,
+    "id": 9607
   },
   {
     "nombre": "julia",
@@ -36006,10 +35932,10 @@ export const activeUsers = [
     "correo": "juliatovar11@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16786874682,
-    "stripe_id": "cus_MX0QpzRtE2tgeZ",
-    "final_date": 1693450000,
-    "id": 9666,
-    "level": 1
+    "conekta_id": "cus_2uQhGj6GTjYJ3iRUv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9666
   },
   {
     "nombre": "Dulce María",
@@ -36017,10 +35943,10 @@ export const activeUsers = [
     "correo": "dulcemariamunoz33568@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526241372214,
-    "stripe_id": "cus_LW03XDG8jQ7ymK",
-    "final_date": 1692140000,
-    "id": 9695,
-    "level": 1
+    "conekta_id": "cus_2uQhGiyLPLkPqTAPD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9695
   },
   {
     "nombre": "Miriam Teresita",
@@ -36028,10 +35954,10 @@ export const activeUsers = [
     "correo": "psicmiriamflores@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526862674893,
-    "stripe_id": "cus_LVkF1qmDtiDEmV",
-    "final_date": 1692080000,
-    "id": 9697,
-    "level": 1
+    "conekta_id": "cus_2uQhGji9uYK3L7hSz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9697
   },
   {
     "nombre": "ANA LUISA",
@@ -36039,10 +35965,10 @@ export const activeUsers = [
     "correo": "luhyza07@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525586128670,
-    "stripe_id": "cus_LVvaKF8kfNk7Lr",
-    "final_date": 1692120000,
-    "id": 9708,
-    "level": 1
+    "conekta_id": "cus_2uQhGkWk8kJtnnJHF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9708
   },
   {
     "nombre": "Dorina",
@@ -36050,10 +35976,10 @@ export const activeUsers = [
     "correo": "dorislareina@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524441212521,
-    "stripe_id": "cus_M2Wec7g4nrs3FI",
-    "final_date": 1691780000,
-    "id": 9713,
-    "level": 1
+    "conekta_id": "cus_2uQhGmJj2LEEvXQy5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9713
   },
   {
     "nombre": "Yuny",
@@ -36061,10 +35987,10 @@ export const activeUsers = [
     "correo": "sandybellmolina1987@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524251345360,
-    "stripe_id": "cus_LVz85tryKgdh9T",
-    "final_date": 1692250000,
-    "id": 9715,
-    "level": 1
+    "conekta_id": "cus_2uQhGm1nFr8axDb4t",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9715
   },
   {
     "nombre": "glory",
@@ -36072,10 +35998,10 @@ export const activeUsers = [
     "correo": "glory.azcona@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524445429390,
-    "stripe_id": "cus_LW4ES4DT4HagkO",
-    "final_date": 1692160000,
-    "id": 9727,
-    "level": 1
+    "conekta_id": "cus_2uQhGmk2ZT3HwfMSr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9727
   },
   {
     "nombre": "FABIOLA",
@@ -36083,10 +36009,9 @@ export const activeUsers = [
     "correo": "faby-1427@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525520818933,
-    "stripe_id": "cus_LWQrV1IzXcAflT",
     "final_date": 1684290000,
-    "id": 9766,
-    "level": 1
+    "level": 1,
+    "id": 9766
   },
   {
     "nombre": "Fernanda",
@@ -36094,10 +36019,9 @@ export const activeUsers = [
     "correo": "amalli1996@icloud.com",
     "pais": "Mexico",
     "whatsapp": 526646105215,
-    "stripe_id": "cus_LWfGC4lzTMLcy7",
     "final_date": 1681750000,
-    "id": 9779,
-    "level": 1
+    "level": 1,
+    "id": 9779
   },
   {
     "nombre": "Isaura",
@@ -36105,10 +36029,10 @@ export const activeUsers = [
     "correo": "gubisaura@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19096423397,
-    "stripe_id": "cus_LWoPjU8rwyOAEC",
-    "final_date": 1692330000,
-    "id": 9794,
-    "level": 1
+    "conekta_id": "cus_2uQhGnUr5ebwWjMWC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9794
   },
   {
     "nombre": "Ana Rosa",
@@ -36116,10 +36040,9 @@ export const activeUsers = [
     "correo": "annie.rouco.arrg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529995012119,
-    "stripe_id": "cus_LWoW5NG4vQTluv",
     "final_date": 1689650000,
-    "id": 9797,
-    "level": 1
+    "level": 1,
+    "id": 9797
   },
   {
     "nombre": "ROSARIO ALEDANY",
@@ -36127,10 +36050,9 @@ export const activeUsers = [
     "correo": "rosa100613rio@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529984846392,
-    "stripe_id": "cus_LX8LXKGlG9Hzcq",
     "final_date": 1669780000,
-    "id": 9837,
-    "level": 1
+    "level": 1,
+    "id": 9837
   },
   {
     "nombre": "Eliza",
@@ -36138,10 +36060,10 @@ export const activeUsers = [
     "correo": "eliza_estrada90@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524661605079,
-    "stripe_id": "cus_LX8sG2cwaa0j7g",
-    "final_date": 1692400000,
-    "id": 9841,
-    "level": 1
+    "conekta_id": "cus_2uQhGoy4LePBTJF35",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9841
   },
   {
     "nombre": "Valeria",
@@ -36149,10 +36071,10 @@ export const activeUsers = [
     "correo": "llella.silva13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511129220,
-    "stripe_id": "cus_LXBZWvNy3eVsl6",
-    "final_date": 1693240000,
-    "id": 9844,
-    "level": 1
+    "conekta_id": "cus_2uQhGoxV83jEpULvw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9844
   },
   {
     "nombre": "Mariuxi",
@@ -36160,10 +36082,10 @@ export const activeUsers = [
     "correo": "mau3-0@hotmail.com",
     "pais": "Ecuador",
     "whatsapp": 593969517816,
-    "stripe_id": "cus_LXBwE4gqhtmO5u",
-    "final_date": 1692420000,
-    "id": 9849,
-    "level": 1
+    "conekta_id": "cus_2uQhGpstYwFaqcULS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9849
   },
   {
     "nombre": "Yaretzi",
@@ -36171,10 +36093,10 @@ export const activeUsers = [
     "correo": "yaretzihernandez702@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525560494427,
-    "stripe_id": "cus_LXCZR2RfsuSwe1",
-    "final_date": 1693150000,
-    "id": 9863,
-    "level": 1
+    "conekta_id": "cus_2uQhGqShP3WUc1xiK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9863
   },
   {
     "nombre": "Maria Guadalupe",
@@ -36182,10 +36104,10 @@ export const activeUsers = [
     "correo": "gupitatorres@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314085295,
-    "stripe_id": "cus_LXMRO2bSGpBpTQ",
-    "final_date": 1692450000,
-    "id": 9878,
-    "level": 1
+    "conekta_id": "cus_2uQhGrUTfjAnJR4RU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9878
   },
   {
     "nombre": "Valeria",
@@ -36193,10 +36115,10 @@ export const activeUsers = [
     "correo": "vaaleeria_1996@outlook.com",
     "pais": "Mexico",
     "whatsapp": 524747476527,
-    "stripe_id": "cus_LXQI4dUg8BbME7",
-    "final_date": 1692470000,
-    "id": 9891,
-    "level": 1
+    "conekta_id": "cus_2uQhGrBWuF58EHdCw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9891
   },
   {
     "nombre": "ANA  LILIA",
@@ -36204,10 +36126,10 @@ export const activeUsers = [
     "correo": "kahami09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561048086,
-    "stripe_id": "cus_LXTRfeWXQZMQNZ",
-    "final_date": 1692480000,
-    "id": 9904,
-    "level": 1
+    "conekta_id": "cus_2uQhGrvLRSdmuTcGo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9904
   },
   {
     "nombre": "Marychuy",
@@ -36215,10 +36137,10 @@ export const activeUsers = [
     "correo": "marychuy112@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526643030825,
-    "stripe_id": "cus_LXbseSxYK7jWcI",
-    "final_date": 1692510000,
-    "id": 9931,
-    "level": 1
+    "conekta_id": "cus_2uQhGsf9weCRXjGmK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9931
   },
   {
     "nombre": "Catalina",
@@ -36226,10 +36148,10 @@ export const activeUsers = [
     "correo": "casscaser64@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314686544,
-    "stripe_id": "cus_LXn1dcBcUHdjfe",
-    "final_date": 1692330000,
-    "id": 9941,
-    "level": 1
+    "conekta_id": "cus_2uQhGtdkrwW2aR8i6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9941
   },
   {
     "nombre": "Flor Itzel",
@@ -36237,10 +36159,10 @@ export const activeUsers = [
     "correo": "itzy1995@outlook.es",
     "pais": "Mexico",
     "whatsapp": 527471194972,
-    "stripe_id": "cus_LXohbbdy6uXRxe",
-    "final_date": 1692670000,
-    "id": 9945,
-    "level": 1
+    "conekta_id": "cus_2uQhGtPyTqm576cgy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9945
   },
   {
     "nombre": "Beatriz del Carmen",
@@ -36248,10 +36170,9 @@ export const activeUsers = [
     "correo": "creditoccm@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526161247394,
-    "stripe_id": "cus_MMAoxJwvqdYLkN",
     "final_date": 1683010000,
-    "id": 9974,
-    "level": 1
+    "level": 1,
+    "id": 9974
   },
   {
     "nombre": "Nadya",
@@ -36259,10 +36180,10 @@ export const activeUsers = [
     "correo": "anhela777@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526188068130,
-    "stripe_id": "cus_LYE1VrTnP74VGj",
-    "final_date": 1692650000,
-    "id": 9996,
-    "level": 1
+    "conekta_id": "cus_2uQhGu8DmSfn9AKxa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 9996
   },
   {
     "nombre": "alondra",
@@ -36270,10 +36191,10 @@ export const activeUsers = [
     "correo": "hishamvs89@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528112897592,
-    "stripe_id": "cus_LYhJwYgSTgRJk1",
-    "final_date": 1692880000,
-    "id": 10044,
-    "level": 1
+    "conekta_id": "cus_2uQhGv7PuLdKsduS5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10044
   },
   {
     "nombre": "Marisol",
@@ -36281,10 +36202,10 @@ export const activeUsers = [
     "correo": "lopezsosamarisol@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525612714002,
-    "stripe_id": "cus_Mag1yazqPWI574",
-    "final_date": 1691620000,
-    "id": 10069,
-    "level": 1
+    "conekta_id": "cus_2uQhGvcS2ST24NECP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10069
   },
   {
     "nombre": "Alejandra",
@@ -36292,10 +36213,10 @@ export const activeUsers = [
     "correo": "alezapata1125@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981871463,
-    "stripe_id": "cus_LZEBPhs9cC0aNj",
-    "final_date": 1691730000,
-    "id": 10087,
-    "level": 1
+    "conekta_id": "cus_2uQhGvnSiXkmmKZW6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10087
   },
   {
     "nombre": "Roselfina Rueda",
@@ -36303,10 +36224,10 @@ export const activeUsers = [
     "correo": "roselfina2704@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522225259456,
-    "stripe_id": "cus_LZH2hiik6rF9tV",
-    "final_date": 1692900000,
-    "id": 10090,
-    "level": 1
+    "conekta_id": "cus_2uQhGwXGEjKRLSKMA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10090
   },
   {
     "nombre": "Brenda Esmeralda",
@@ -36314,10 +36235,9 @@ export const activeUsers = [
     "correo": "brendarodrigueez311@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529516665401,
-    "stripe_id": "cus_La5paigV06jpfr",
     "final_date": 1689570000,
-    "id": 10171,
-    "level": 1
+    "level": 1,
+    "id": 10171
   },
   {
     "nombre": "Laura Lorena",
@@ -36325,10 +36245,10 @@ export const activeUsers = [
     "correo": "laura_scarreon@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528187770890,
-    "stripe_id": "cus_LaoYWYYJ8J5aSq",
-    "final_date": 1693250000,
-    "id": 10216,
-    "level": 1
+    "conekta_id": "cus_2uQhGxP1qKfyFS15x",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10216
   },
   {
     "nombre": "Andrea Melissa",
@@ -36336,10 +36256,9 @@ export const activeUsers = [
     "correo": "melizap.mtz.tamayo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523334420606,
-    "stripe_id": "cus_LoXsMixLIg08gN",
     "final_date": 1690750000,
-    "id": 10233,
-    "level": 1
+    "level": 1,
+    "id": 10233
   },
   {
     "nombre": "brenda",
@@ -36347,10 +36266,10 @@ export const activeUsers = [
     "correo": "daniskabren@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13238998518,
-    "stripe_id": "cus_LawjOnAv9BWGu3",
-    "final_date": 1693320000,
-    "id": 10238,
-    "level": 1
+    "conekta_id": "cus_2uQhGxptb38xwBDgD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10238
   },
   {
     "nombre": "Karla anahi",
@@ -36358,10 +36277,9 @@ export const activeUsers = [
     "correo": "karla.anmari@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523119093021,
-    "stripe_id": "cus_NloDzTeMBUoscg",
     "final_date": 1717880000,
-    "id": 10248,
-    "level": 0
+    "level": 0,
+    "id": 10248
   },
   {
     "nombre": "Adriana",
@@ -36369,10 +36287,10 @@ export const activeUsers = [
     "correo": "adrianajimenezt04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523332399752,
-    "stripe_id": "cus_NloDXzykLTgUbu",
-    "final_date": 0,
-    "id": 10269,
-    "level": 1
+    "conekta_id": "cus_2uQhGyresioGVyL5U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10269
   },
   {
     "nombre": "Karen Iveth",
@@ -36380,10 +36298,10 @@ export const activeUsers = [
     "correo": "kari_9619@outlook.com",
     "pais": "Mexico",
     "whatsapp": 529231325830,
-    "stripe_id": "cus_LoQrmJ5st4ixJq",
-    "final_date": 1693800000,
-    "id": 10277,
-    "level": 1
+    "conekta_id": "cus_2uQhGzbUPvMvAPNag",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10277
   },
   {
     "nombre": "Angélica",
@@ -36391,10 +36309,10 @@ export const activeUsers = [
     "correo": "angycuca16@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525580606226,
-    "stripe_id": "cus_LoQpLpWOtJike5",
-    "final_date": 1693800000,
-    "id": 10297,
-    "level": 1
+    "conekta_id": "cus_2uQhH13M9dpuozD9h",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10297
   },
   {
     "nombre": "Martha Isabel",
@@ -36402,10 +36320,10 @@ export const activeUsers = [
     "correo": "isabel20lopezr@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525630959775,
-    "stripe_id": "cus_LbjkxkbjtAhw2E",
-    "final_date": 1694030000,
-    "id": 10320,
-    "level": 1
+    "conekta_id": "cus_2uQhH1nAfqPZSFseS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10320
   },
   {
     "nombre": "Dulce",
@@ -36413,10 +36331,10 @@ export const activeUsers = [
     "correo": "mariely1998hdz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523329788283,
-    "stripe_id": "cus_LeVr2UDe3AyL6Y",
-    "final_date": 1691510000,
-    "id": 10327,
-    "level": 1
+    "conekta_id": "cus_2uQhH1nAfqPZSFseb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10327
   },
   {
     "nombre": "Liduvina",
@@ -36424,10 +36342,9 @@ export const activeUsers = [
     "correo": "ludymdc89@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526241328240,
-    "stripe_id": "cus_Lzzh1NTHpXm56L",
     "final_date": 1691200000,
-    "id": 10411,
-    "level": 1
+    "level": 1,
+    "id": 10411
   },
   {
     "nombre": "GARET ABIGAIL",
@@ -36435,10 +36352,10 @@ export const activeUsers = [
     "correo": "garet1993@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524771795129,
-    "stripe_id": "cus_LehBLOHBoqVqEk",
-    "final_date": 1693960000,
-    "id": 10435,
-    "level": 1
+    "conekta_id": "cus_2uQhH3Vb7LFp8LYNk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10435
   },
   {
     "nombre": "Maritza",
@@ -36446,10 +36363,10 @@ export const activeUsers = [
     "correo": "cristalsanchezbarajas@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18312884889,
-    "stripe_id": "cus_Lerc2kA3qWIAZu",
-    "final_date": 1692600000,
-    "id": 10460,
-    "level": 1
+    "conekta_id": "cus_2uQhH3FoiEWrgoCdg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10460
   },
   {
     "nombre": "Elena",
@@ -36457,10 +36374,10 @@ export const activeUsers = [
     "correo": "euginelena@gmail.com",
     "pais": "España",
     "whatsapp": 34606900964,
-    "stripe_id": "cus_N9njXPptajRxeb",
-    "final_date": 1691860000,
-    "id": 10479,
-    "level": 1
+    "conekta_id": "cus_2uQhH4EQdXpTomyR9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10479
   },
   {
     "nombre": "yanet",
@@ -36468,10 +36385,9 @@ export const activeUsers = [
     "correo": "flaviagagy@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525531926316,
-    "stripe_id": "cus_NloDduxgUh0ugy",
     "final_date": 1747410000,
-    "id": 10485,
-    "level": 0
+    "level": 0,
+    "id": 10485
   },
   {
     "nombre": "Dulce Violeta",
@@ -36479,10 +36395,10 @@ export const activeUsers = [
     "correo": "dulvio_garcia86@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525535715907,
-    "stripe_id": "cus_Lg6houJg6CTm7o",
-    "final_date": 1691880000,
-    "id": 10497,
-    "level": 1
+    "conekta_id": "cus_2uQhH4isY2zDGfxMo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10497
   },
   {
     "nombre": "Sandra",
@@ -36490,10 +36406,10 @@ export const activeUsers = [
     "correo": "sandypaiztuda@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524881015539,
-    "stripe_id": "cus_Lgruyf2O2vwDYN",
-    "final_date": 1692050000,
-    "id": 10539,
-    "level": 1
+    "conekta_id": "cus_2uQhH5i3fvwm19XsR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10539
   },
   {
     "nombre": "Dalia",
@@ -36501,10 +36417,10 @@ export const activeUsers = [
     "correo": "lucero301919@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526862565942,
-    "stripe_id": "cus_Li00epgA4nx3Dm",
-    "final_date": 1692320000,
-    "id": 10598,
-    "level": 1
+    "conekta_id": "cus_2uQhH6P6V85CuqqDZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10598
   },
   {
     "nombre": "Silvia",
@@ -36512,10 +36428,10 @@ export const activeUsers = [
     "correo": "silvia10046@hotmail.com",
     "pais": "España",
     "whatsapp": 34667868804,
-    "stripe_id": "cus_LuphgpXsjC3Iqd",
-    "final_date": 1692050000,
-    "id": 10607,
-    "level": 1
+    "conekta_id": "cus_2uQhH7Er5iRkkfxzK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10607
   },
   {
     "nombre": "Coni",
@@ -36523,10 +36439,10 @@ export const activeUsers = [
     "correo": "gonvarplus.oficial@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522482283543,
-    "stripe_id": "cus_LoNvjpjDNb4SYm",
-    "final_date": 1693790000,
-    "id": 10685,
-    "level": 1
+    "conekta_id": "cus_2uQhH7BgiL54Fgrrk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10685
   },
   {
     "nombre": "sayuri",
@@ -36534,10 +36450,10 @@ export const activeUsers = [
     "correo": "sayuriijames1402@icloud.com",
     "pais": "Aruba",
     "whatsapp": 2975625878,
-    "stripe_id": "cus_Loaqw97jAxHrOO",
-    "final_date": 1693840000,
-    "id": 10763,
-    "level": 1
+    "conekta_id": "cus_2uQhH7giqRtkSRBcF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10763
   },
   {
     "nombre": "Ana Laura",
@@ -36545,10 +36461,9 @@ export const activeUsers = [
     "correo": "ani_estrella20@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525527497066,
-    "stripe_id": "cus_LoR8DJUC4Qs72D",
     "final_date": 0,
-    "id": 10812,
-    "level": 1
+    "level": 1,
+    "id": 10812
   },
   {
     "nombre": "Sandra",
@@ -36556,10 +36471,10 @@ export const activeUsers = [
     "correo": "sandragutmat80@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524871105555,
-    "stripe_id": "cus_MyaaiZyxtVYqjT",
-    "final_date": 1691870000,
-    "id": 10834,
-    "level": 1
+    "conekta_id": "cus_2uQhH8RYMdTQ4gr6n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 10834
   },
   {
     "nombre": "Shelle",
@@ -36567,10 +36482,10 @@ export const activeUsers = [
     "correo": "dianamhg14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525522196675,
-    "stripe_id": "cus_LoQ1inFplGbvXZ",
-    "final_date": 1693800000,
-    "id": 11055,
-    "level": 1
+    "conekta_id": "cus_2uQhH9LNZvKoQvVC5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11055
   },
   {
     "nombre": "Jayte",
@@ -36578,10 +36493,10 @@ export const activeUsers = [
     "correo": "jaytelin@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523111668035,
-    "stripe_id": "cus_LoQh7w99khxKjl",
-    "final_date": 1693800000,
-    "id": 11060,
-    "level": 1
+    "conekta_id": "cus_2uQhHA8xo8Kei653n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11060
   },
   {
     "nombre": "sarahi",
@@ -36589,10 +36504,10 @@ export const activeUsers = [
     "correo": "lolis_salicona@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527841183851,
-    "stripe_id": "cus_LoRYjZ7X82cmyh",
-    "final_date": 1693800000,
-    "id": 11081,
-    "level": 1
+    "conekta_id": "cus_2uQhHAdzvE9LwVqaa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11081
   },
   {
     "nombre": "Elizabeth",
@@ -36600,10 +36515,9 @@ export const activeUsers = [
     "correo": "sumomo_black@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528110682684,
-    "stripe_id": "cus_LoQS34qQgs5Nmc",
     "final_date": 1691120000,
-    "id": 11096,
-    "level": 1
+    "level": 1,
+    "id": 11096
   },
   {
     "nombre": "Mariana",
@@ -36611,10 +36525,10 @@ export const activeUsers = [
     "correo": "mgutierrezbps@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525563730706,
-    "stripe_id": "cus_LoQWrEHIzyIJmk",
-    "final_date": 1693800000,
-    "id": 11180,
-    "level": 1
+    "conekta_id": "cus_2uQhHBYq8X1kHjUfq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11180
   },
   {
     "nombre": "Janín Eunice",
@@ -36622,10 +36536,10 @@ export const activeUsers = [
     "correo": "jana-mareu@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524622721753,
-    "stripe_id": "cus_LoQRvWe8bkGfUl",
-    "final_date": 1693800000,
-    "id": 11205,
-    "level": 1
+    "conekta_id": "cus_2uQhHCHeeiaPv19AM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11205
   },
   {
     "nombre": "Diana",
@@ -36633,10 +36547,10 @@ export const activeUsers = [
     "correo": "dianis2000dhe@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522461379510,
-    "stripe_id": "cus_LoQdJt8qpXRP0W",
-    "final_date": 1693800000,
-    "id": 11250,
-    "level": 1
+    "conekta_id": "cus_2uQhHCrTUpqHqfpH2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11250
   },
   {
     "nombre": "Laura Beatriz",
@@ -36644,10 +36558,10 @@ export const activeUsers = [
     "correo": "cruzbty11@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523320916351,
-    "stripe_id": "cus_MF05XPRZsg4MSj",
-    "final_date": 1691890000,
-    "id": 11327,
-    "level": 1
+    "conekta_id": "cus_2uQhHD6EsvaFFrAqH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11327
   },
   {
     "nombre": "linda",
@@ -36655,10 +36569,9 @@ export const activeUsers = [
     "correo": "asharlette09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525512364517,
-    "stripe_id": "cus_LomPwRJedxLGUs",
     "final_date": 0,
-    "id": 11374,
-    "level": 1
+    "level": 1,
+    "id": 11374
   },
   {
     "nombre": "maria de los Dolores",
@@ -36666,10 +36579,9 @@ export const activeUsers = [
     "correo": "mariaregaladolede85@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523441050864,
-    "stripe_id": "cus_LoQUrPBmZhGkcV",
     "final_date": 1680580000,
-    "id": 11439,
-    "level": 1
+    "level": 1,
+    "id": 11439
   },
   {
     "nombre": "Leslie",
@@ -36677,10 +36589,10 @@ export const activeUsers = [
     "correo": "arq.leslie.mayram@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525544503938,
-    "stripe_id": "cus_NloFaiPKPHcHnz",
-    "final_date": 1692240000,
-    "id": 11443,
-    "level": 1
+    "conekta_id": "cus_2uQhHEd3Hi4F3WyxV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11443
   },
   {
     "nombre": "dulce olivia",
@@ -36688,10 +36600,10 @@ export const activeUsers = [
     "correo": "dlc.zhanthoz.vrgs22@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583202636,
-    "stripe_id": "cus_LoQT98gmoDjTFV",
+    "conekta_id": "cus_2uQhHEL6XDxb6D9GK",
     "final_date": 1694040000,
-    "id": 11463,
-    "level": 1
+    "level": 0,
+    "id": 11463
   },
   {
     "nombre": "Elisa",
@@ -36699,10 +36611,10 @@ export const activeUsers = [
     "correo": "elisa_bm10@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525531266456,
-    "stripe_id": "cus_M1LJGzNrnqIjte",
-    "final_date": 1691510000,
-    "id": 11485,
-    "level": 1
+    "conekta_id": "cus_2uQhHFJhSXGCBpvn1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11485
   },
   {
     "nombre": "Zarahi",
@@ -36710,10 +36622,10 @@ export const activeUsers = [
     "correo": "zarahijimenez08900@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525562069163,
-    "stripe_id": "cus_LoQVG3q1bUCadK",
-    "final_date": 1693800000,
-    "id": 11492,
-    "level": 1
+    "conekta_id": "cus_2uQhHFojZd5tLkUFH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11492
   },
   {
     "nombre": "Elizabeth Anely",
@@ -36721,10 +36633,10 @@ export const activeUsers = [
     "correo": "anely21tm@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545349190,
-    "stripe_id": "cus_LoQX417CJY18KV",
-    "final_date": 1693800000,
-    "id": 11497,
-    "level": 1
+    "conekta_id": "cus_2uQhHGYZ5peXwf9X3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11497
   },
   {
     "nombre": "Rocío",
@@ -36732,10 +36644,9 @@ export const activeUsers = [
     "correo": "rociobautist3@outlook.es",
     "pais": "Mexico",
     "whatsapp": 523481065335,
-    "stripe_id": "cus_LoQq7tKQCKUJTC",
     "final_date": 1691120000,
-    "id": 11539,
-    "level": 1
+    "level": 1,
+    "id": 11539
   },
   {
     "nombre": "Lizzeth",
@@ -36743,10 +36654,10 @@ export const activeUsers = [
     "correo": "lalizz_23@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528129177265,
-    "stripe_id": "cus_LoQY5fUtf7M1D4",
-    "final_date": 1693800000,
-    "id": 11568,
-    "level": 1
+    "conekta_id": "cus_2uQhHHGoPRZEuGEjt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11568
   },
   {
     "nombre": "Brenda Montserrat",
@@ -36754,10 +36665,10 @@ export const activeUsers = [
     "correo": "brendaramgon20@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428836416,
-    "stripe_id": "cus_LoQY7ckYcLJuwv",
-    "final_date": 1693800000,
-    "id": 11636,
-    "level": 1
+    "conekta_id": "cus_2uQhHJ2C8DmqDZTip",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11636
   },
   {
     "nombre": "Karla Fernanda",
@@ -36765,10 +36676,10 @@ export const activeUsers = [
     "correo": "kfreyesma@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522224551440,
-    "stripe_id": "cus_LoQlmCwbFhwZyD",
-    "final_date": 1693800000,
-    "id": 11665,
-    "level": 1
+    "conekta_id": "cus_2uQhHK3xQuS8o8xv8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11665
   },
   {
     "nombre": "Silvia",
@@ -36776,10 +36687,10 @@ export const activeUsers = [
     "correo": "silviabarrioss765@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527296792863,
-    "stripe_id": "cus_LopTfefWARufUO",
-    "final_date": 1693890000,
-    "id": 11705,
-    "level": 1
+    "conekta_id": "cus_2uQhHJw2LWeEYS7cB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11705
   },
   {
     "nombre": "Aydee",
@@ -36787,10 +36698,9 @@ export const activeUsers = [
     "correo": "ige.av95@outlook.com",
     "pais": "Mexico",
     "whatsapp": 522725729896,
-    "stripe_id": "cus_LoQfbrZl1KgaeE",
     "final_date": 1691120000,
-    "id": 11733,
-    "level": 1
+    "level": 1,
+    "id": 11733
   },
   {
     "nombre": "Brenda Elizabeth",
@@ -36798,10 +36708,9 @@ export const activeUsers = [
     "correo": "brendaperezgomez98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529671959269,
-    "stripe_id": "cus_LoQcocXInlJQph",
     "final_date": 0,
-    "id": 11749,
-    "level": 1
+    "level": 1,
+    "id": 11749
   },
   {
     "nombre": "rocio",
@@ -36809,10 +36718,9 @@ export const activeUsers = [
     "correo": "roxibotita242503@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525554034792,
-    "stripe_id": "cus_LoQjfQAEFMSyhp",
     "final_date": 1689470000,
-    "id": 11765,
-    "level": 1
+    "level": 1,
+    "id": 11765
   },
   {
     "nombre": "jimena",
@@ -36820,10 +36728,10 @@ export const activeUsers = [
     "correo": "20luna.jimena@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527776035203,
-    "stripe_id": "cus_LoRUn2dXPg7Mdp",
-    "final_date": 1693800000,
-    "id": 11771,
-    "level": 1
+    "conekta_id": "cus_2uQhHLEegpTn3TAXi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11771
   },
   {
     "nombre": "Flor Alicia",
@@ -36831,10 +36739,9 @@ export const activeUsers = [
     "correo": "floraliciareyes12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522941033971,
-    "stripe_id": "cus_LoQj2r1XCQP9rn",
     "final_date": 1691120000,
-    "id": 11772,
-    "level": 1
+    "level": 1,
+    "id": 11772
   },
   {
     "nombre": "Massiel",
@@ -36842,10 +36749,10 @@ export const activeUsers = [
     "correo": "massielmod@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525533554099,
-    "stripe_id": "cus_LoQeIMTI1hcaaD",
-    "final_date": 1693800000,
-    "id": 11821,
-    "level": 1
+    "conekta_id": "cus_2uQhHM9Uu7LBRF764",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11821
   },
   {
     "nombre": "Estela",
@@ -36853,10 +36760,10 @@ export const activeUsers = [
     "correo": "estelatapiadelacrz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527353473060,
-    "stripe_id": "cus_LogVox8QhJrgbj",
-    "final_date": 1693860000,
-    "id": 11860,
-    "level": 1
+    "conekta_id": "cus_2uQhHN1EVhgjJDcti",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11860
   },
   {
     "nombre": "Rocío",
@@ -36864,10 +36771,10 @@ export const activeUsers = [
     "correo": "princessofgod1331@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566159334,
-    "stripe_id": "cus_LoR5LWCeukejsb",
-    "final_date": 1693800000,
-    "id": 11877,
-    "level": 1
+    "conekta_id": "cus_2uQhHNd7wWTUfnS5M",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11877
   },
   {
     "nombre": "Lilian Elizabeth",
@@ -36875,10 +36782,9 @@ export const activeUsers = [
     "correo": "liliansolano24@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50243214030,
-    "stripe_id": "cus_LoQfPzohiTxRv9",
     "final_date": 1691120000,
-    "id": 11881,
-    "level": 1
+    "level": 1,
+    "id": 11881
   },
   {
     "nombre": "Mitzi Daniela",
@@ -36886,10 +36792,10 @@ export const activeUsers = [
     "correo": "mitzi_rubior@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525519096869,
-    "stripe_id": "cus_LoQik7Nd6zPmLB",
-    "final_date": 1693800000,
-    "id": 11902,
-    "level": 1
+    "conekta_id": "cus_2uQhHPBMZ24RuRYgD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11902
   },
   {
     "nombre": "Lizeth",
@@ -36897,10 +36803,10 @@ export const activeUsers = [
     "correo": "lizmaya739a@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527226023708,
-    "stripe_id": "cus_LoQpb4hZooxF35",
-    "final_date": 1693800000,
-    "id": 11929,
-    "level": 1
+    "conekta_id": "cus_2uQhHQDh4JNgB2cNX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11929
   },
   {
     "nombre": "Melissa Mileydi",
@@ -36908,10 +36814,10 @@ export const activeUsers = [
     "correo": "melissablanco7788@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5274776637,
-    "stripe_id": "cus_LoR0rll60LYZCc",
-    "final_date": 1693800000,
-    "id": 11989,
-    "level": 1
+    "conekta_id": "cus_2uQhHQezbRBj9xsf9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 11989
   },
   {
     "nombre": "Michelle",
@@ -36919,10 +36825,10 @@ export const activeUsers = [
     "correo": "celinamargueta@gmail.com",
     "pais": "El Salvador",
     "whatsapp": 50376136700,
-    "stripe_id": "cus_LoQjvyDUdNkSew",
-    "final_date": 1693800000,
-    "id": 12020,
-    "level": 1
+    "conekta_id": "cus_2uQhHQezbRBj9xsfL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12020
   },
   {
     "nombre": "Elena Elizabeth",
@@ -36930,10 +36836,9 @@ export const activeUsers = [
     "correo": "thecoloreddoor.nails@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525579384469,
-    "stripe_id": "cus_LoQl0yVBlQm0mf",
     "final_date": 0,
-    "id": 12042,
-    "level": 1
+    "level": 1,
+    "id": 12042
   },
   {
     "nombre": "maribel",
@@ -36941,10 +36846,10 @@ export const activeUsers = [
     "correo": "mcp969608@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525585182238,
-    "stripe_id": "cus_LoQlR0Bx7bZ9OG",
-    "final_date": 1693800000,
-    "id": 12098,
-    "level": 1
+    "conekta_id": "cus_2uQhHSS9cu4d6uj1v",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12098
   },
   {
     "nombre": "Claudia",
@@ -36952,10 +36857,10 @@ export const activeUsers = [
     "correo": "claujisa26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526371112031,
-    "stripe_id": "cus_LoQj7XYaR9WUj5",
-    "final_date": 1693800000,
-    "id": 12123,
-    "level": 1
+    "conekta_id": "cus_2uQhHSNzFWhvZst9z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12123
   },
   {
     "nombre": "Daniela",
@@ -36963,10 +36868,9 @@ export const activeUsers = [
     "correo": "bimilcg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529221635176,
-    "stripe_id": "cus_LoQlzvDogHjDBo",
     "final_date": 1662260000,
-    "id": 12127,
-    "level": 1
+    "level": 1,
+    "id": 12127
   },
   {
     "nombre": "Marisol",
@@ -36974,10 +36878,9 @@ export const activeUsers = [
     "correo": "solmar199905@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524778204082,
-    "stripe_id": "cus_LoQwmVMyqdg2b2",
     "final_date": 0,
-    "id": 12180,
-    "level": 1
+    "level": 1,
+    "id": 12180
   },
   {
     "nombre": "Manuela",
@@ -36985,10 +36888,10 @@ export const activeUsers = [
     "correo": "mpinales1318@gmail.com",
     "pais": "Puerto Rico",
     "whatsapp": 17879430658,
-    "stripe_id": "cus_LoQkZVuYUTflfh",
-    "final_date": 1693800000,
-    "id": 12191,
-    "level": 1
+    "conekta_id": "cus_2uQhHTcGgDSKgdwMb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12191
   },
   {
     "nombre": "Eunice",
@@ -36996,10 +36899,9 @@ export const activeUsers = [
     "correo": "euni7459@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524433882370,
-    "stripe_id": "cus_LomvDCdSQVpSWM",
     "final_date": 1691210000,
-    "id": 12217,
-    "level": 1
+    "level": 1,
+    "id": 12217
   },
   {
     "nombre": "Vianey",
@@ -37007,10 +36909,10 @@ export const activeUsers = [
     "correo": "viianeyar.234@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526864045324,
-    "stripe_id": "cus_LoQmsxVGS2bVGh",
-    "final_date": 1693800000,
-    "id": 12232,
-    "level": 1
+    "conekta_id": "cus_2uQhHUbSp7PsPX79s",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12232
   },
   {
     "nombre": "María de Jesús",
@@ -37018,10 +36920,10 @@ export const activeUsers = [
     "correo": "marichuynava05@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527292806061,
-    "stripe_id": "cus_LoQmTDAsfEywWN",
-    "final_date": 1693800000,
-    "id": 12340,
-    "level": 1
+    "conekta_id": "cus_2uQhHV6UwDDZYh8T5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12340
   },
   {
     "nombre": "Wildally",
@@ -37029,10 +36931,10 @@ export const activeUsers = [
     "correo": "wd5577242010@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561992426,
-    "stripe_id": "cus_LoQnpp5myMSEr2",
-    "final_date": 1693800000,
-    "id": 12362,
-    "level": 1
+    "conekta_id": "cus_2uQhHW1K9W5xvV529",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12362
   },
   {
     "nombre": "Jasmin del Carmen",
@@ -37040,10 +36942,9 @@ export const activeUsers = [
     "correo": "jasminlaturneria@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529331583074,
-    "stripe_id": "cus_LoRy2pA1GhSSnh",
     "final_date": 1659590000,
-    "id": 12393,
-    "level": 1
+    "level": 1,
+    "id": 12393
   },
   {
     "nombre": "Alejandra",
@@ -37051,10 +36952,9 @@ export const activeUsers = [
     "correo": "barojas901@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774263041,
-    "stripe_id": "cus_LodrUZt8h5TfSd",
     "final_date": 1691170000,
-    "id": 12403,
-    "level": 1
+    "level": 1,
+    "id": 12403
   },
   {
     "nombre": "Jennifer",
@@ -37062,10 +36962,9 @@ export const activeUsers = [
     "correo": "jenniolvera258@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616832849,
-    "stripe_id": "cus_LoRJjjG6Ja5IAI",
     "final_date": 1691120000,
-    "id": 12429,
-    "level": 1
+    "level": 1,
+    "id": 12429
   },
   {
     "nombre": "Heidy",
@@ -37073,10 +36972,10 @@ export const activeUsers = [
     "correo": "marinayat@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50257644692,
-    "stripe_id": "cus_LoQr0MhsqH6QdO",
-    "final_date": 1693800000,
-    "id": 12451,
-    "level": 1
+    "conekta_id": "cus_2uQhHXJNHDFZozFpk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12451
   },
   {
     "nombre": "Araceli",
@@ -37084,10 +36983,9 @@ export const activeUsers = [
     "correo": "cheli181200@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522231312693,
-    "stripe_id": "cus_LoQrhEkwSebEVi",
     "final_date": 1691120000,
-    "id": 12520,
-    "level": 1
+    "level": 1,
+    "id": 12520
   },
   {
     "nombre": "Gloria Gabriela",
@@ -37095,10 +36993,9 @@ export const activeUsers = [
     "correo": "gloria302231@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527731381372,
-    "stripe_id": "cus_LoQz4Me4HYVbJ6",
     "final_date": 1679160000,
-    "id": 12541,
-    "level": 1
+    "level": 1,
+    "id": 12541
   },
   {
     "nombre": "Lizeth",
@@ -37106,10 +37003,10 @@ export const activeUsers = [
     "correo": "lizztyle25@outlook.com",
     "pais": "Mexico",
     "whatsapp": 528443596403,
-    "stripe_id": "cus_LoQnDMQJfVxQgl",
-    "final_date": 1693800000,
-    "id": 12588,
-    "level": 1
+    "conekta_id": "cus_2uQhHYDmi6muoJ4Wh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12588
   },
   {
     "nombre": "Martha Vianney",
@@ -37117,10 +37014,10 @@ export const activeUsers = [
     "correo": "ing.marthaespinoza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525540942364,
-    "stripe_id": "cus_LoQzqz7eNSxKGL",
-    "final_date": 1693800000,
-    "id": 12605,
-    "level": 1
+    "conekta_id": "cus_2uQhHZ2MwJmm6TeJN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12605
   },
   {
     "nombre": "itzel Guadalupe",
@@ -37128,10 +37025,10 @@ export const activeUsers = [
     "correo": "curielmartinezalice@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527491047589,
-    "stripe_id": "cus_LoQyzMyt05wLZm",
-    "final_date": 1693870000,
-    "id": 12678,
-    "level": 1
+    "conekta_id": "cus_2uQhHZ2MwJmm6TeJT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12678
   },
   {
     "nombre": "Lillian",
@@ -37139,10 +37036,9 @@ export const activeUsers = [
     "correo": "lianvp_2518@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529515709091,
-    "stripe_id": "cus_LoQpe0SFtPyTOh",
     "final_date": 1672800000,
-    "id": 12686,
-    "level": 1
+    "level": 1,
+    "id": 12686
   },
   {
     "nombre": "Patricia",
@@ -37150,10 +37046,10 @@ export const activeUsers = [
     "correo": "paty.gamboa.pg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526141961083,
-    "stripe_id": "cus_LoxT9nSxdXX6yu",
-    "final_date": 1693920000,
-    "id": 12693,
-    "level": 1
+    "conekta_id": "cus_2uQhHZpLpth7KYE9o",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12693
   },
   {
     "nombre": "jaqueline",
@@ -37161,10 +37057,9 @@ export const activeUsers = [
     "correo": "jaquelinebunis@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530272820,
-    "stripe_id": "cus_LoQp0W5nL3tah2",
     "final_date": 1690950000,
-    "id": 12742,
-    "level": 1
+    "level": 1,
+    "id": 12742
   },
   {
     "nombre": "Karina",
@@ -37172,10 +37067,10 @@ export const activeUsers = [
     "correo": "karinapaulino904@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525516446935,
-    "stripe_id": "cus_LoQpQ1jNLsLfB6",
-    "final_date": 1693800000,
-    "id": 12759,
-    "level": 1
+    "conekta_id": "cus_2uQhHb136oikbmj3W",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12759
   },
   {
     "nombre": "celsa",
@@ -37183,10 +37078,9 @@ export const activeUsers = [
     "correo": "zelzhiz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522228318695,
-    "stripe_id": "cus_LoQpPBf9TJDqPm",
     "final_date": 1662260000,
-    "id": 12809,
-    "level": 1
+    "level": 1,
+    "id": 12809
   },
   {
     "nombre": "Noelia",
@@ -37194,10 +37088,10 @@ export const activeUsers = [
     "correo": "nolyhf@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 527121648997,
-    "stripe_id": "cus_LoQq0hG5amaM6t",
-    "final_date": 1693800000,
-    "id": 12844,
-    "level": 1
+    "conekta_id": "cus_2uQhHbye272MeDk5v",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12844
   },
   {
     "nombre": "Paola",
@@ -37205,10 +37099,9 @@ export const activeUsers = [
     "correo": "munozpaolazoe@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522411506845,
-    "stripe_id": "cus_LoRMuHlXdAUa6X",
     "final_date": 1662270000,
-    "id": 12852,
-    "level": 1
+    "level": 1,
+    "id": 12852
   },
   {
     "nombre": "Raquel",
@@ -37216,10 +37109,9 @@ export const activeUsers = [
     "correo": "raquelrm490@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525563377493,
-    "stripe_id": "cus_LoQvihDOOpEqqk",
     "final_date": 1662260000,
-    "id": 12859,
-    "level": 1
+    "level": 1,
+    "id": 12859
   },
   {
     "nombre": "Gabriela",
@@ -37227,10 +37119,9 @@ export const activeUsers = [
     "correo": "demigm2012@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529612657884,
-    "stripe_id": "cus_LoQpZURwLAoGyA",
     "final_date": 0,
-    "id": 12892,
-    "level": 1
+    "level": 1,
+    "id": 12892
   },
   {
     "nombre": "María Magnolia",
@@ -37238,20 +37129,18 @@ export const activeUsers = [
     "correo": "magnareyeshernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525525308211,
-    "stripe_id": "cus_LoQr3tH5gaRWD7",
     "final_date": 1691120000,
-    "id": 12894,
-    "level": 1
+    "level": 1,
+    "id": 12894
   },
   {
     "nombre": "María José",
     "apellido": "Sánchez Araque",
     "correo": "marijo21_araque21@hotmal.com",
     "pais": "Mexico",
-    "stripe_id": "cus_LoQrIjagwJ0IPZ",
     "final_date": 1691120000,
-    "id": 12930,
-    "level": 1
+    "level": 1,
+    "id": 12930
   },
   {
     "nombre": "Monica",
@@ -37259,10 +37148,10 @@ export const activeUsers = [
     "correo": "ochoa.monica.72@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518205646,
-    "stripe_id": "cus_LoRZPeDLUwx6iP",
-    "final_date": 1693800000,
-    "id": 12977,
-    "level": 1
+    "conekta_id": "cus_2uQhHdWSRtWMRtZEZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12977
   },
   {
     "nombre": "SANDRA",
@@ -37270,10 +37159,10 @@ export const activeUsers = [
     "correo": "yopsee57@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522281522172,
-    "stripe_id": "cus_LoQtqPm2yOMEXr",
-    "final_date": 1693860000,
-    "id": 13003,
-    "level": 1
+    "conekta_id": "cus_2uQhHdwjy1KQN9b81",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13003
   },
   {
     "nombre": "Ana Yely",
@@ -37281,10 +37170,9 @@ export const activeUsers = [
     "correo": "salashdz5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524441259424,
-    "stripe_id": "cus_LoR0dokWn9ZRYE",
     "final_date": 1691120000,
-    "id": 13030,
-    "level": 1
+    "level": 1,
+    "id": 13030
   },
   {
     "nombre": "any hernandez",
@@ -37292,10 +37180,10 @@ export const activeUsers = [
     "correo": "anyhernandez541@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528993390819,
-    "stripe_id": "cus_LoQrqDZP0WkFLv",
-    "final_date": 1693800000,
-    "id": 13204,
-    "level": 1
+    "conekta_id": "cus_2uQhHes9PtqkQiPaw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13204
   },
   {
     "nombre": "Laura",
@@ -37303,10 +37191,10 @@ export const activeUsers = [
     "correo": "lacruzm24@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524772880093,
-    "stripe_id": "cus_LoQq9fpOEDcCzc",
-    "final_date": 1693800000,
-    "id": 13242,
-    "level": 1
+    "conekta_id": "cus_2uQhHfRP1QShfN9VP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13242
   },
   {
     "nombre": "Zeltzin Ameyalli",
@@ -37314,10 +37202,10 @@ export const activeUsers = [
     "correo": "america_yalli@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524431304996,
-    "stripe_id": "cus_LoQsFjGfTswuQj",
-    "final_date": 1693800000,
-    "id": 13385,
-    "level": 1
+    "conekta_id": "cus_2uQhHfRP1QShiZoxL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13385
   },
   {
     "nombre": "Martha",
@@ -37325,10 +37213,9 @@ export const activeUsers = [
     "correo": "amamm_11@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525614880590,
-    "stripe_id": "cus_LoQw9AmKExD2NO",
     "final_date": 1691120000,
-    "id": 13387,
-    "level": 1
+    "level": 1,
+    "id": 13387
   },
   {
     "nombre": "María Teresa Sofía",
@@ -37336,10 +37223,10 @@ export const activeUsers = [
     "correo": "mteresas26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535464124,
-    "stripe_id": "cus_LoQsb8gLtaKPJV",
-    "final_date": 1693800000,
-    "id": 13431,
-    "level": 1
+    "conekta_id": "cus_2uQhHgubGQDwaa3nQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13431
   },
   {
     "nombre": "laysha yesenia",
@@ -37347,10 +37234,9 @@ export const activeUsers = [
     "correo": "vazquezlaysha0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523141602141,
-    "stripe_id": "cus_LoR8dGUQPCgXyn",
     "final_date": 1680900000,
-    "id": 13487,
-    "level": 1
+    "level": 1,
+    "id": 13487
   },
   {
     "nombre": "Jaquelin Victoria",
@@ -37358,10 +37244,9 @@ export const activeUsers = [
     "correo": "jaquelin_chica56@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522731350615,
-    "stripe_id": "cus_LoQvbQHUPagjnq",
     "final_date": 1683210000,
-    "id": 13496,
-    "level": 1
+    "level": 1,
+    "id": 13496
   },
   {
     "nombre": "Alejandra",
@@ -37369,10 +37254,10 @@ export const activeUsers = [
     "correo": "jolie83@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525523360251,
-    "stripe_id": "cus_LoS3dysXcijDyY",
-    "final_date": 1693800000,
-    "id": 13500,
-    "level": 1
+    "conekta_id": "cus_2uQhHhdqa18eZmYju",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13500
   },
   {
     "nombre": "Estela",
@@ -37380,10 +37265,9 @@ export const activeUsers = [
     "correo": "lizeste82@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529934020718,
-    "stripe_id": "cus_LoR6uq6T3HlELB",
     "final_date": 1659590000,
-    "id": 13544,
-    "level": 1
+    "level": 1,
+    "id": 13544
   },
   {
     "nombre": "Elva Verónica",
@@ -37391,10 +37275,9 @@ export const activeUsers = [
     "correo": "elvaa3008@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528125634632,
-    "stripe_id": "cus_LoQttcyL71ncx4",
     "final_date": 1691120000,
-    "id": 13573,
-    "level": 1
+    "level": 1,
+    "id": 13573
   },
   {
     "nombre": "Arminda",
@@ -37402,10 +37285,20 @@ export const activeUsers = [
     "correo": "arminda20alvarez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523324424260,
-    "stripe_id": "cus_LodHWAMACHJuvJ",
-    "final_date": 1693850000,
-    "id": 13581,
-    "level": 1
+    "conekta_id": "cus_2uQhHjJ4X6De7BTpZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13581
+  },
+  {
+    "nombre": "Farisa Arizay",
+    "apellido": "Martinez Torres",
+    "correo": "farisa_17_08@hotmail.com",
+    "pais": "Mexico",
+    "whatsapp": 529921154984,
+    "final_date": 1724020000,
+    "level": 0,
+    "id": 13627
   },
   {
     "nombre": "María Teresa",
@@ -37413,10 +37306,9 @@ export const activeUsers = [
     "correo": "mariateresacruzcruz59@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528992190069,
-    "stripe_id": "cus_LoQwGy7so483KC",
     "final_date": 1691120000,
-    "id": 13675,
-    "level": 1
+    "level": 1,
+    "id": 13675
   },
   {
     "nombre": "Andrea Itzel",
@@ -37424,10 +37316,10 @@ export const activeUsers = [
     "correo": "reba.anditzel18@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529933460587,
-    "stripe_id": "cus_LoQz02FVeAGwkv",
-    "final_date": 1693800000,
-    "id": 13691,
-    "level": 1
+    "conekta_id": "cus_2uQhHk9p7gaC5KX3v",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13691
   },
   {
     "nombre": "yolanda",
@@ -37435,10 +37327,10 @@ export const activeUsers = [
     "correo": "alvarezcruzmariayolanda@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428679684,
-    "stripe_id": "cus_LoQvtrxwnfizfO",
-    "final_date": 1693800000,
-    "id": 13719,
-    "level": 1
+    "conekta_id": "cus_2uQhHkbgsQ3BdTkCJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13719
   },
   {
     "nombre": "Mónica",
@@ -37446,10 +37338,9 @@ export const activeUsers = [
     "correo": "mony_miramon@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529211046117,
-    "stripe_id": "cus_LoQxPRQdDRNjtg",
     "final_date": 1691120000,
-    "id": 13732,
-    "level": 1
+    "level": 1,
+    "id": 13732
   },
   {
     "nombre": "karen",
@@ -37457,10 +37348,10 @@ export const activeUsers = [
     "correo": "karodrihuezcam@gmail.com",
     "pais": "Costa Rica",
     "whatsapp": 50686181018,
-    "stripe_id": "cus_LoQw1pnJbW9BUh",
-    "final_date": 1693800000,
-    "id": 13787,
-    "level": 1
+    "conekta_id": "cus_2uQhHmLWPbbqFjQh1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13787
   },
   {
     "nombre": "Elizabeth",
@@ -37468,10 +37359,9 @@ export const activeUsers = [
     "correo": "lizydedios93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529371418312,
-    "stripe_id": "cus_LoQxsoApsxK2ji",
     "final_date": 1691120000,
-    "id": 13821,
-    "level": 1
+    "level": 1,
+    "id": 13821
   },
   {
     "nombre": "Celeste Abigail",
@@ -37479,10 +37369,10 @@ export const activeUsers = [
     "correo": "ivan3_segura@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528331418687,
-    "stripe_id": "cus_LoQxp8toTVWkQx",
-    "final_date": 1693840000,
-    "id": 13864,
-    "level": 1
+    "conekta_id": "cus_2uQhHnK7JtuSMKbAk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13864
   },
   {
     "nombre": "Fanny",
@@ -37490,10 +37380,9 @@ export const activeUsers = [
     "correo": "masa_deyna83@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525521058753,
-    "stripe_id": "cus_NHkew7BA9A8RoY",
     "final_date": 1691010000,
-    "id": 13865,
-    "level": 1
+    "level": 1,
+    "id": 13865
   },
   {
     "nombre": "Idalia",
@@ -37501,10 +37390,9 @@ export const activeUsers = [
     "correo": "bonillaguilar@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528331401795,
-    "stripe_id": "cus_LoR24vPQMs6fQq",
     "final_date": 1683170000,
-    "id": 13909,
-    "level": 1
+    "level": 1,
+    "id": 13909
   },
   {
     "nombre": "shunhashi",
@@ -37512,10 +37400,10 @@ export const activeUsers = [
     "correo": "shunhashigarcia89@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529511620283,
-    "stripe_id": "cus_LoR61t0KlIHM3u",
-    "final_date": 1693800000,
-    "id": 14033,
-    "level": 1
+    "conekta_id": "cus_2uQhHoiyeHbXvxzrs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14033
   },
   {
     "nombre": "Jazmín",
@@ -37523,10 +37411,10 @@ export const activeUsers = [
     "correo": "jazminanastacio25@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526567762202,
-    "stripe_id": "cus_LoR2mEH8WDMnN2",
-    "final_date": 1693460000,
-    "id": 14044,
-    "level": 1
+    "conekta_id": "cus_2uQhHpHnUPrRkp4g1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14044
   },
   {
     "nombre": "Elda Yadira",
@@ -37534,10 +37422,10 @@ export const activeUsers = [
     "correo": "eldadelacruzguerrero@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525568931156,
-    "stripe_id": "cus_LoQzQhza7NORfa",
-    "final_date": 1691730000,
-    "id": 14086,
-    "level": 1
+    "conekta_id": "cus_2uQhHpHDFoCVAc7PG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14086
   },
   {
     "nombre": "Marilu",
@@ -37545,10 +37433,10 @@ export const activeUsers = [
     "correo": "marilu.avilesreyes93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711433137,
-    "stripe_id": "cus_LoR16xM0EE4Ct4",
-    "final_date": 1693800000,
-    "id": 14096,
-    "level": 1
+    "conekta_id": "cus_2uQhHq2bzbR5Rz3pM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14096
   },
   {
     "nombre": "Denise",
@@ -37556,10 +37444,9 @@ export const activeUsers = [
     "correo": "denismerlo9@gmail.com",
     "pais": "Argentina",
     "whatsapp": 542214883207,
-    "stripe_id": "cus_LpUpiACFWGh36E",
     "final_date": 0,
-    "id": 14107,
-    "level": 1
+    "level": 1,
+    "id": 14107
   },
   {
     "nombre": "Adriana",
@@ -37567,10 +37454,10 @@ export const activeUsers = [
     "correo": "adriaba299@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527717740789,
-    "stripe_id": "cus_LoR5wjRiCc50Eg",
-    "final_date": 1693800000,
-    "id": 14168,
-    "level": 1
+    "conekta_id": "cus_2uQhHqkrJCKnR9SNT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14168
   },
   {
     "nombre": "Jenny",
@@ -37578,10 +37465,10 @@ export const activeUsers = [
     "correo": "flash_jenny@live.com",
     "pais": "Mexico",
     "whatsapp": 525617755113,
-    "stripe_id": "cus_LoR99tTuFLcb8P",
-    "final_date": 1693840000,
-    "id": 14211,
-    "level": 1
+    "conekta_id": "cus_2uQhHrk2S6HLCH3Hk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14211
   },
   {
     "nombre": "Graciela",
@@ -37589,10 +37476,10 @@ export const activeUsers = [
     "correo": "coronitas2.gr@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14086282131,
-    "stripe_id": "cus_LoR27y7tNa4gvE",
-    "final_date": 1693800000,
-    "id": 14282,
-    "level": 1
+    "conekta_id": "cus_2uQhHsF4ZC72Ftiem",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14282
   },
   {
     "nombre": "Dulce María",
@@ -37600,10 +37487,10 @@ export const activeUsers = [
     "correo": "neera_saya@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527714841147,
-    "stripe_id": "cus_LoR8Mh4l2Qml8Y",
-    "final_date": 1693800000,
-    "id": 14324,
-    "level": 1
+    "conekta_id": "cus_2uQhHtGpqsmKu9T4z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14324
   },
   {
     "nombre": "ANA LILIA",
@@ -37611,10 +37498,9 @@ export const activeUsers = [
     "correo": "analiliasaba@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525515338317,
-    "stripe_id": "cus_MYVYR9DkGfcVlx",
     "final_date": 1683170000,
-    "id": 14355,
-    "level": 1
+    "level": 1,
+    "id": 14355
   },
   {
     "nombre": "Itzel",
@@ -37622,10 +37508,9 @@ export const activeUsers = [
     "correo": "manualidadesabril07@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525624761604,
-    "stripe_id": "cus_LpkFd3Gze9EkrH",
     "final_date": 1691420000,
-    "id": 14361,
-    "level": 1
+    "level": 1,
+    "id": 14361
   },
   {
     "nombre": "Gloriella",
@@ -37633,10 +37518,9 @@ export const activeUsers = [
     "correo": "gloriella.76@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525529573060,
-    "stripe_id": "cus_Np9IaP53ZjHHwZ",
     "final_date": 1717300000,
-    "id": 14373,
-    "level": 0
+    "level": 0,
+    "id": 14373
   },
   {
     "nombre": "Guiomar",
@@ -37644,10 +37528,9 @@ export const activeUsers = [
     "correo": "guiomarojedasiles91@gmail.com",
     "pais": "España",
     "whatsapp": 34662484703,
-    "stripe_id": "cus_LoR6mFCJu0ch5J",
     "final_date": 1691120000,
-    "id": 14380,
-    "level": 1
+    "level": 1,
+    "id": 14380
   },
   {
     "nombre": "Clara Beatriz",
@@ -37655,10 +37538,10 @@ export const activeUsers = [
     "correo": "clarabeatrizzapata@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529995468644,
-    "stripe_id": "cus_LoRFyhb0YR1jok",
-    "final_date": 1693800000,
-    "id": 14427,
-    "level": 1
+    "conekta_id": "cus_2uQhHuSwuC92a6Ad6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14427
   },
   {
     "nombre": "Maria Clara",
@@ -37666,10 +37549,10 @@ export const activeUsers = [
     "correo": "aralc99@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524191140819,
-    "stripe_id": "cus_LoR4GEEUOLfj2T",
-    "final_date": 1693800000,
-    "id": 14437,
-    "level": 1
+    "conekta_id": "cus_2uQhHvBmRPhgAmRKT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14437
   },
   {
     "nombre": "arizbeth",
@@ -37677,10 +37560,10 @@ export const activeUsers = [
     "correo": "arizbeth.vazquez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525584329362,
-    "stripe_id": "cus_LoRXx8DS5nCsrz",
-    "final_date": 1694060000,
-    "id": 14458,
-    "level": 1
+    "conekta_id": "cus_2uQhHvVHQUTGsAwfe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14458
   },
   {
     "nombre": "Karen",
@@ -37688,10 +37571,9 @@ export const activeUsers = [
     "correo": "k_andy03@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524775658008,
-    "stripe_id": "cus_LoR5OSCF5c5TUd",
     "final_date": 1675480000,
-    "id": 14501,
-    "level": 1
+    "level": 1,
+    "id": 14501
   },
   {
     "nombre": "saumarie",
@@ -37699,10 +37581,9 @@ export const activeUsers = [
     "correo": "sarochoroman@gmail.com",
     "pais": "Puerto Rico",
     "whatsapp": 17874072852,
-    "stripe_id": "cus_LoRANc99zTrVy1",
     "final_date": 0,
-    "id": 14509,
-    "level": 1
+    "level": 1,
+    "id": 14509
   },
   {
     "nombre": "Aída Gloria",
@@ -37710,10 +37591,10 @@ export const activeUsers = [
     "correo": "gloriaksmk@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525527095762,
-    "stripe_id": "cus_LoR8F1jeEQ3nuy",
-    "final_date": 1693800000,
-    "id": 14521,
-    "level": 1
+    "conekta_id": "cus_2uQhHwfygPUv4R2Gm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14521
   },
   {
     "nombre": "Samanta",
@@ -37721,10 +37602,10 @@ export const activeUsers = [
     "correo": "zamii.linda.666@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527223422465,
-    "stripe_id": "cus_LoRAvld8qg5YGI",
-    "final_date": 1693800000,
-    "id": 14576,
-    "level": 1
+    "conekta_id": "cus_2uQhHwxvSsaa5e8vu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14576
   },
   {
     "nombre": "Alma Lizbeth",
@@ -37732,10 +37613,9 @@ export const activeUsers = [
     "correo": "alma41975@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524433022842,
-    "stripe_id": "cus_LoRasJMUayKtG8",
     "final_date": 1691120000,
-    "id": 14589,
-    "level": 1
+    "level": 1,
+    "id": 14589
   },
   {
     "nombre": "Briseida Hebe",
@@ -37743,10 +37623,9 @@ export const activeUsers = [
     "correo": "brisoso29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522831240610,
-    "stripe_id": "cus_LoRESoV17ZhPik",
     "final_date": 1672810000,
-    "id": 14680,
-    "level": 1
+    "level": 1,
+    "id": 14680
   },
   {
     "nombre": "Orfelina",
@@ -37754,10 +37633,10 @@ export const activeUsers = [
     "correo": "orfecamacho8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527531005866,
-    "stripe_id": "cus_LoRJahlmOrENBk",
-    "final_date": 1693830000,
-    "id": 14706,
-    "level": 1
+    "conekta_id": "cus_2uQhHy9cincDMsdkg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14706
   },
   {
     "nombre": "Sara",
@@ -37765,10 +37644,10 @@ export const activeUsers = [
     "correo": "sherrera3826@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16304866023,
-    "stripe_id": "cus_LoRCQHJ4EIv1dn",
-    "final_date": 1693800000,
-    "id": 14727,
-    "level": 1
+    "conekta_id": "cus_2uQhHyPQ7tMApi1jK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14727
   },
   {
     "nombre": "Mayra",
@@ -37776,10 +37655,10 @@ export const activeUsers = [
     "correo": "emmitagarcia5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526623980448,
-    "stripe_id": "cus_LoRH67BbKCvTmn",
-    "final_date": 1693800000,
-    "id": 14812,
-    "level": 1
+    "conekta_id": "cus_2uQhHyss2PWvMKQHm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14812
   },
   {
     "nombre": "Guadalupe",
@@ -37787,10 +37666,9 @@ export const activeUsers = [
     "correo": "castilloguadalupe695@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529641386178,
-    "stripe_id": "cus_LoSMwXLroq5UAp",
     "final_date": 1683180000,
-    "id": 14871,
-    "level": 1
+    "level": 1,
+    "id": 14871
   },
   {
     "nombre": "Gloria guadalupe",
@@ -37798,10 +37676,10 @@ export const activeUsers = [
     "correo": "gloriasan2704@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528334004384,
-    "stripe_id": "cus_LoRHFqRTToOgK8",
-    "final_date": 1693800000,
-    "id": 14890,
-    "level": 1
+    "conekta_id": "cus_2uQhHzs3AHUU2bKP8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14890
   },
   {
     "nombre": "Claudia",
@@ -37809,10 +37687,9 @@ export const activeUsers = [
     "correo": "kviz71090@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529532272515,
-    "stripe_id": "cus_LoRakBYB8ZOxC9",
     "final_date": 1691120000,
-    "id": 14896,
-    "level": 1
+    "level": 1,
+    "id": 14896
   },
   {
     "nombre": "Norma",
@@ -37820,10 +37697,10 @@ export const activeUsers = [
     "correo": "nslrjlsf9211@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524621323977,
-    "stripe_id": "cus_LoddR5VGpGfJpP",
-    "final_date": 1693850000,
-    "id": 14921,
-    "level": 1
+    "conekta_id": "cus_2uQhJ2GuVgAZYYdui",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14921
   },
   {
     "nombre": "Guadalupe",
@@ -37831,10 +37708,10 @@ export const activeUsers = [
     "correo": "sanchezlupita0105@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524661084268,
-    "stripe_id": "cus_LoRJNNTtDYNt0s",
-    "final_date": 1693800000,
-    "id": 14937,
-    "level": 1
+    "conekta_id": "cus_2uQhJ35VitAQx4LCS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14937
   },
   {
     "nombre": "Luisa J.",
@@ -37842,10 +37719,10 @@ export const activeUsers = [
     "correo": "marialuisa.lt68@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524192708273,
-    "stripe_id": "cus_LojV0kKjqYngF3",
-    "final_date": 1693870000,
-    "id": 14966,
-    "level": 1
+    "conekta_id": "cus_2uQhJ2qiKnRTVDxDZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14966
   },
   {
     "nombre": "rocio del carmen",
@@ -37853,10 +37730,10 @@ export const activeUsers = [
     "correo": "rocioriosvalle@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524142791204,
-    "stripe_id": "cus_LoRLgZX3UFV7BL",
-    "final_date": 1693830000,
-    "id": 14983,
-    "level": 1
+    "conekta_id": "cus_2uQhJ3ZxdPLAT4U3e",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14983
   },
   {
     "nombre": "Veronica",
@@ -37864,10 +37741,10 @@ export const activeUsers = [
     "correo": "veronicaherrera1019@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19564007872,
-    "stripe_id": "cus_LoRLpgZi6fKGSL",
-    "final_date": 1693800000,
-    "id": 14988,
-    "level": 1
+    "conekta_id": "cus_2uQhJ4cJ8feQi57N7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 14988
   },
   {
     "nombre": "Beatriz Selena",
@@ -37875,10 +37752,10 @@ export const activeUsers = [
     "correo": "karysellmedina@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529821174513,
-    "stripe_id": "cus_LoRM8cKCf3xeDY",
-    "final_date": 1693800000,
-    "id": 15034,
-    "level": 1
+    "conekta_id": "cus_2uQhJ54AtP7QN2wgw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15034
   },
   {
     "nombre": "Reyna de jesus",
@@ -37886,10 +37763,9 @@ export const activeUsers = [
     "correo": "reynaramirezcanche@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529995505143,
-    "stripe_id": "cus_LoRRkAgfVEAv5u",
     "final_date": 1691120000,
-    "id": 15074,
-    "level": 1
+    "level": 1,
+    "id": 15074
   },
   {
     "nombre": "Ana Karen",
@@ -37897,10 +37773,9 @@ export const activeUsers = [
     "correo": "karenglez2117@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522491372857,
-    "stripe_id": "cus_LoTeBmto71g0PL",
     "final_date": 1690700000,
-    "id": 15142,
-    "level": 1
+    "level": 1,
+    "id": 15142
   },
   {
     "nombre": "Cynthia",
@@ -37908,10 +37783,9 @@ export const activeUsers = [
     "correo": "cynthiamelany21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524445178463,
-    "stripe_id": "cus_LoRTSgVCyqh9Uh",
     "final_date": 1670130000,
-    "id": 15182,
-    "level": 1
+    "level": 1,
+    "id": 15182
   },
   {
     "nombre": "Rebeca",
@@ -37919,10 +37793,9 @@ export const activeUsers = [
     "correo": "rebeyo0903@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522441319644,
-    "stripe_id": "cus_LoRboWxJvDIpby",
     "final_date": 1689650000,
-    "id": 15191,
-    "level": 1
+    "level": 1,
+    "id": 15191
   },
   {
     "nombre": "Elvia",
@@ -37930,10 +37803,10 @@ export const activeUsers = [
     "correo": "elvissrl2887@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525534841779,
-    "stripe_id": "cus_LoRbYQjApjDNm5",
-    "final_date": 1693800000,
-    "id": 15248,
-    "level": 1
+    "conekta_id": "cus_2uQhJ6XEiBakykNiz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15248
   },
   {
     "nombre": "Luis Antonio",
@@ -37941,10 +37814,9 @@ export const activeUsers = [
     "correo": "luis49davilant6yy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523326111269,
-    "stripe_id": "cus_LoRfSe7uzLYPEv",
     "final_date": 1747290000,
-    "id": 15335,
-    "level": 0
+    "level": 0,
+    "id": 15335
   },
   {
     "nombre": "Mariana",
@@ -37952,10 +37824,10 @@ export const activeUsers = [
     "correo": "ml4325095@gmail.com",
     "pais": "United States of America",
     "whatsapp": 19082477201,
-    "stripe_id": "cus_LoRqk8jUqj2fnU",
-    "final_date": 1692320000,
-    "id": 15420,
-    "level": 1
+    "conekta_id": "cus_2uQhJ7Se9576ztW3d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15420
   },
   {
     "nombre": "Verónica",
@@ -37963,10 +37835,10 @@ export const activeUsers = [
     "correo": "verzaem80@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513850573,
-    "stripe_id": "cus_LoRlVAeTHTZS0o",
-    "final_date": 1691430000,
-    "id": 15436,
-    "level": 1
+    "conekta_id": "cus_2uQhJ8BTfGfkZibBp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15436
   },
   {
     "nombre": "Ana Karen",
@@ -37974,20 +37846,20 @@ export const activeUsers = [
     "correo": "ana986480@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525538605677,
-    "stripe_id": "cus_LoRnQYkW0Qljov",
-    "final_date": 1691730000,
-    "id": 15487,
-    "level": 1
+    "conekta_id": "cus_2uQhJ81SyBMzpCKCy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15487
   },
   {
     "nombre": "paula",
     "apellido": "penuelas",
     "correo": "penuelas1992@icloud.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_LoRsoweShN2qgf",
-    "final_date": 1693800000,
-    "id": 15571,
-    "level": 1
+    "conekta_id": "cus_2uQhJ93DFs2JQYiuR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15571
   },
   {
     "nombre": "ESTEFANIA",
@@ -37995,10 +37867,9 @@ export const activeUsers = [
     "correo": "fanycervantes27@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525540944278,
-    "stripe_id": "cus_LoS2C0WqwWWDi3",
     "final_date": 1691130000,
-    "id": 15786,
-    "level": 1
+    "level": 1,
+    "id": 15786
   },
   {
     "nombre": "Karen",
@@ -38006,10 +37877,10 @@ export const activeUsers = [
     "correo": "emiilceortgon@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522281030800,
-    "stripe_id": "cus_LoSCZYt7Y9YLkP",
-    "final_date": 1693800000,
-    "id": 15892,
-    "level": 1
+    "conekta_id": "cus_2uQhJ9isQgEFb13m6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 15892
   },
   {
     "nombre": "blanca Elizabeth",
@@ -38017,10 +37888,9 @@ export const activeUsers = [
     "correo": "beayhmys46@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526442027446,
-    "stripe_id": "cus_LoSSo0Ka3rgW2t",
     "final_date": 1675490000,
-    "id": 16022,
-    "level": 1
+    "level": 1,
+    "id": 16022
   },
   {
     "nombre": "Catalina",
@@ -38028,10 +37898,10 @@ export const activeUsers = [
     "correo": "kbalderramapesina76@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526862568018,
-    "stripe_id": "cus_LoTJ4b9yYtMiQg",
-    "final_date": 1693810000,
-    "id": 16216,
-    "level": 1
+    "conekta_id": "cus_2uQhJADuXn3wh1Jh6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16216
   },
   {
     "nombre": "irina",
@@ -38039,10 +37909,10 @@ export const activeUsers = [
     "correo": "kereberny@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545284009,
-    "stripe_id": "cus_LoTMnv1ekpjYdl",
-    "final_date": 1693810000,
-    "id": 16223,
-    "level": 1
+    "conekta_id": "cus_2uQhJBCWT5MYjhARs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16223
   },
   {
     "nombre": "diana",
@@ -38050,10 +37920,10 @@ export const activeUsers = [
     "correo": "dianalmc019@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525528597685,
-    "stripe_id": "cus_MX0SA8Pg0YG2o2",
-    "final_date": 1693450000,
-    "id": 16246,
-    "level": 1
+    "conekta_id": "cus_2uQhJBzVLfGtzqt2U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16246
   },
   {
     "nombre": "Ma. Guadalupe",
@@ -38061,10 +37931,9 @@ export const activeUsers = [
     "correo": "lupiz_nenis@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528673070206,
-    "stripe_id": "cus_LogVvzVZqVwrIF",
     "final_date": 1672860000,
-    "id": 16274,
-    "level": 1
+    "level": 1,
+    "id": 16274
   },
   {
     "nombre": "Guadalupe",
@@ -38072,10 +37941,9 @@ export const activeUsers = [
     "correo": "guadalupemtz2909@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525520804279,
-    "stripe_id": "cus_LoTs6YviAbghSp",
     "final_date": 1691130000,
-    "id": 16289,
-    "level": 1
+    "level": 1,
+    "id": 16289
   },
   {
     "nombre": "Itzel Paola",
@@ -38083,10 +37951,9 @@ export const activeUsers = [
     "correo": "itzel_75garcia@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524731171545,
-    "stripe_id": "cus_LomGz7q7TsCIyT",
     "final_date": 1691200000,
-    "id": 16302,
-    "level": 1
+    "level": 1,
+    "id": 16302
   },
   {
     "nombre": "karent",
@@ -38094,10 +37961,9 @@ export const activeUsers = [
     "correo": "karent26_@live.comm.mx",
     "pais": "Mexico",
     "whatsapp": 525630727915,
-    "stripe_id": "cus_LoUp2BCDsVTWPG",
     "final_date": 1659600000,
-    "id": 16365,
-    "level": 1
+    "level": 1,
+    "id": 16365
   },
   {
     "nombre": "ana Lilia",
@@ -38105,10 +37971,9 @@ export const activeUsers = [
     "correo": "anaserranosalamanca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525618000471,
-    "stripe_id": "cus_Loj2wbc5ALQf4R",
     "final_date": 1690170000,
-    "id": 16376,
-    "level": 1
+    "level": 1,
+    "id": 16376
   },
   {
     "nombre": "Lucia Rosario",
@@ -38116,10 +37981,9 @@ export const activeUsers = [
     "correo": "lucia.jim.181286@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525584899956,
-    "stripe_id": "cus_NloQO05IeTyloX",
     "final_date": 1718990000,
-    "id": 16535,
-    "level": 0
+    "level": 0,
+    "id": 16535
   },
   {
     "nombre": "Amalia",
@@ -38127,10 +37991,10 @@ export const activeUsers = [
     "correo": "amaliahern0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527225399287,
-    "stripe_id": "cus_LoYr6ciUhaNXdT",
-    "final_date": 1693830000,
-    "id": 16547,
-    "level": 1
+    "conekta_id": "cus_2uQhJE61psAwViM16",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16547
   },
   {
     "nombre": "Alexandra",
@@ -38138,10 +38002,10 @@ export const activeUsers = [
     "correo": "alextorr816@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18183171272,
-    "stripe_id": "cus_LoZ4UVW596EdBi",
-    "final_date": 1693830000,
-    "id": 16624,
-    "level": 1
+    "conekta_id": "cus_2uQhJEepeyRqSdHfK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16624
   },
   {
     "nombre": "ahinuam",
@@ -38149,10 +38013,10 @@ export const activeUsers = [
     "correo": "ahinuam.pech.vera@outlook.com",
     "pais": "Mexico",
     "whatsapp": 529961270080,
-    "stripe_id": "cus_LomCoFlnSkG6pd",
-    "final_date": 1691730000,
-    "id": 16653,
-    "level": 1
+    "conekta_id": "cus_2uQhJEepeyRqSdHfd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16653
   },
   {
     "nombre": "Arely",
@@ -38160,10 +38024,10 @@ export const activeUsers = [
     "correo": "arelyguzm@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522291180890,
-    "stripe_id": "cus_Loigpnrs5lg0c2",
-    "final_date": 1693870000,
-    "id": 16747,
-    "level": 1
+    "conekta_id": "cus_2uQhJFZesGJEpRE7z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16747
   },
   {
     "nombre": "Evelin Monsserrat",
@@ -38171,10 +38035,9 @@ export const activeUsers = [
     "correo": "evelinmonsserrat@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522481675361,
-    "stripe_id": "cus_N2k0OtD8di2OVq",
     "final_date": 0,
-    "id": 16765,
-    "level": 1
+    "level": 1,
+    "id": 16765
   },
   {
     "nombre": "Estefania",
@@ -38182,10 +38045,9 @@ export const activeUsers = [
     "correo": "fanzy501@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526861582175,
-    "stripe_id": "cus_LocbFA0PPi5ElY",
     "final_date": 1691160000,
-    "id": 16868,
-    "level": 1
+    "level": 1,
+    "id": 16868
   },
   {
     "nombre": "Adriana Berenice",
@@ -38193,10 +38055,10 @@ export const activeUsers = [
     "correo": "beresgar@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524431593076,
-    "stripe_id": "cus_NRB6mUsklKSs3k",
-    "final_date": 1693250000,
-    "id": 16871,
-    "level": 1
+    "conekta_id": "cus_2uQhJGrhzyTqjXfdd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16871
   },
   {
     "nombre": "abigail",
@@ -38204,10 +38066,9 @@ export const activeUsers = [
     "correo": "abigaildelvalle5@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50256930011,
-    "stripe_id": "cus_LoapQVzXbNf5rG",
     "final_date": 1688480000,
-    "id": 16892,
-    "level": 1
+    "level": 1,
+    "id": 16892
   },
   {
     "nombre": "Marychuy",
@@ -38215,10 +38076,10 @@ export const activeUsers = [
     "correo": "marygo0328@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524499802615,
-    "stripe_id": "cus_Lob0MA8uBVGKOY",
-    "final_date": 1693840000,
-    "id": 16932,
-    "level": 1
+    "conekta_id": "cus_2uQhJHqt8sRPN88rT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16932
   },
   {
     "nombre": "Laura Beatriz",
@@ -38226,10 +38087,10 @@ export const activeUsers = [
     "correo": "laubty11@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523320916351,
-    "stripe_id": "cus_LoaboZ8P3gEneO",
-    "final_date": 1693840000,
-    "id": 16983,
-    "level": 1
+    "conekta_id": "cus_2uQhJJds2TLjY4MKx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 16983
   },
   {
     "nombre": "Claudia",
@@ -38237,10 +38098,10 @@ export const activeUsers = [
     "correo": "claudia_rico123@outlook.com",
     "pais": "Mexico",
     "whatsapp": 522225083518,
-    "stripe_id": "cus_Lobbg5EbDJstNX",
-    "final_date": 1693840000,
-    "id": 17283,
-    "level": 1
+    "conekta_id": "cus_2uQhJK5jnAoj9Lwsa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17283
   },
   {
     "nombre": "carmen",
@@ -38248,10 +38109,10 @@ export const activeUsers = [
     "correo": "mortis_love@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523411061680,
-    "stripe_id": "cus_LobleGridPKdX2",
-    "final_date": 1693840000,
-    "id": 17394,
-    "level": 1
+    "conekta_id": "cus_2uQhJK5AZa9ncLf7t",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17394
   },
   {
     "nombre": "Jessica Yessenia",
@@ -38259,10 +38120,10 @@ export const activeUsers = [
     "correo": "jessicadiazg00@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525551953885,
-    "stripe_id": "cus_LpL0L8gejIglD0",
-    "final_date": 1694010000,
-    "id": 17519,
-    "level": 1
+    "conekta_id": "cus_2uQhJKpZJNNNmccN8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17519
   },
   {
     "nombre": "Eva Isabel",
@@ -38270,10 +38131,10 @@ export const activeUsers = [
     "correo": "neloflores15@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529381763451,
-    "stripe_id": "cus_LogGbED9NNPmzV",
-    "final_date": 1693860000,
-    "id": 17710,
-    "level": 1
+    "conekta_id": "cus_2uQhJLrKb42gU1iEH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17710
   },
   {
     "nombre": "Gema",
@@ -38281,10 +38142,10 @@ export const activeUsers = [
     "correo": "chagala.21051996@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522831288191,
-    "stripe_id": "cus_Log9vJDJHPHcRS",
-    "final_date": 1693860000,
-    "id": 17800,
-    "level": 1
+    "conekta_id": "cus_2uQhJMUD2roRkQyvr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17800
   },
   {
     "nombre": "Paula",
@@ -38292,10 +38153,10 @@ export const activeUsers = [
     "correo": "omanapau2@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561139680,
-    "stripe_id": "cus_Lodh4viFb8Dzhk",
-    "final_date": 1693850000,
-    "id": 17892,
-    "level": 1
+    "conekta_id": "cus_2uQhJNGoG4oHARZeH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17892
   },
   {
     "nombre": "ruth",
@@ -38303,10 +38164,10 @@ export const activeUsers = [
     "correo": "buterfly5237@hotmail.com",
     "pais": "Guatemala",
     "whatsapp": 50254389860,
-    "stripe_id": "cus_MX16TXeXIUtzfv",
-    "final_date": 1693460000,
-    "id": 17929,
-    "level": 1
+    "conekta_id": "cus_2uQhJND2Z4N5WHmtd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 17929
   },
   {
     "nombre": "daniela",
@@ -38314,10 +38175,9 @@ export const activeUsers = [
     "correo": "aranzazudelarosa21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523323599120,
-    "stripe_id": "cus_Loe3UHUoQMCBf9",
     "final_date": 1659630000,
-    "id": 17944,
-    "level": 1
+    "level": 1,
+    "id": 17944
   },
   {
     "nombre": "María Antonia",
@@ -38325,10 +38185,10 @@ export const activeUsers = [
     "correo": "6zoeamericamanoatl@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522461955163,
-    "stripe_id": "cus_NloTQv9aaRxVwq",
-    "final_date": 1692060000,
-    "id": 18061,
-    "level": 1
+    "conekta_id": "cus_2uQhJPgfbTVNdDyQJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 18061
   },
   {
     "nombre": "Sabina",
@@ -38336,10 +38196,9 @@ export const activeUsers = [
     "correo": "villatosaby@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525572021078,
-    "stripe_id": "cus_LofLBnMRbP5izB",
     "final_date": 1680630000,
-    "id": 18124,
-    "level": 1
+    "level": 1,
+    "id": 18124
   },
   {
     "nombre": "Yazmin Berenice",
@@ -38347,10 +38206,10 @@ export const activeUsers = [
     "correo": "brnyc_mndz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525543763273,
-    "stripe_id": "cus_LofTb4ef5wHoIE",
-    "final_date": 1693850000,
-    "id": 18179,
-    "level": 1
+    "conekta_id": "cus_2uQhJPobfrHGuwzoE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 18179
   },
   {
     "nombre": "Sandra Erika",
@@ -38358,10 +38217,9 @@ export const activeUsers = [
     "correo": "arcossandovalanaruth@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524494908243,
-    "stripe_id": "cus_M5sUT1kiGBVKvw",
     "final_date": 1684730000,
-    "id": 18214,
-    "level": 1
+    "level": 1,
+    "id": 18214
   },
   {
     "nombre": "Blanca Alicia",
@@ -38369,10 +38227,9 @@ export const activeUsers = [
     "correo": "santesmorgadoblancaalicia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525533680139,
-    "stripe_id": "cus_Log4oElZ2iquBF",
     "final_date": 1691180000,
-    "id": 18387,
-    "level": 1
+    "level": 1,
+    "id": 18387
   },
   {
     "nombre": "Natividad de jesús",
@@ -38380,10 +38237,9 @@ export const activeUsers = [
     "correo": "naty081908@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527443803484,
-    "stripe_id": "cus_Lok78pKu4JZRXz",
     "final_date": 1691190000,
-    "id": 18448,
-    "level": 1
+    "level": 1,
+    "id": 18448
   },
   {
     "nombre": "Tania",
@@ -38391,10 +38247,9 @@ export const activeUsers = [
     "correo": "trujillomontesinostanializbeth@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611031633,
-    "stripe_id": "cus_LogZLNQWQB9lTw",
     "final_date": 1691180000,
-    "id": 18567,
-    "level": 1
+    "level": 1,
+    "id": 18567
   },
   {
     "nombre": "Elizabeth",
@@ -38402,10 +38257,9 @@ export const activeUsers = [
     "correo": "lindaeli362@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 525573360859,
-    "stripe_id": "cus_LoiQFQzRSPUQ9g",
     "final_date": 1659650000,
-    "id": 18656,
-    "level": 1
+    "level": 1,
+    "id": 18656
   },
   {
     "nombre": "Diana",
@@ -38413,10 +38267,10 @@ export const activeUsers = [
     "correo": "dkgarcia.1419@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524612100029,
-    "stripe_id": "cus_LoiW9Tp1i3x8TL",
-    "final_date": 1693870000,
-    "id": 18823,
-    "level": 1
+    "conekta_id": "cus_2uQhJRxts4cXHmt7Q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 18823
   },
   {
     "nombre": "Nadia Andrea",
@@ -38424,10 +38278,10 @@ export const activeUsers = [
     "correo": "namartoy18@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528991041257,
-    "stripe_id": "cus_Loj20ExG84ltPB",
-    "final_date": 1675550000,
-    "id": 18863,
-    "level": 1
+    "conekta_id": "cus_2uQhJSdwgFjy8JdNS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 18863
   },
   {
     "nombre": "Diana",
@@ -38435,10 +38289,9 @@ export const activeUsers = [
     "correo": "dt245233@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523481233247,
-    "stripe_id": "cus_LojEyqfPRx41qD",
     "final_date": 1691190000,
-    "id": 18883,
-    "level": 1
+    "level": 1,
+    "id": 18883
   },
   {
     "nombre": "Dulce Arely",
@@ -38446,10 +38299,9 @@ export const activeUsers = [
     "correo": "dulcearely_dym2610@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 525541136051,
-    "stripe_id": "cus_LolRYn6s8jS9HI",
     "final_date": 1659660000,
-    "id": 19053,
-    "level": 1
+    "level": 1,
+    "id": 19053
   },
   {
     "nombre": "laura",
@@ -38457,10 +38309,10 @@ export const activeUsers = [
     "correo": "diana.019mojica.dolores.28@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582785685,
-    "stripe_id": "cus_LpVNwJNPRmwOgx",
-    "final_date": 1694050000,
-    "id": 19177,
-    "level": 1
+    "conekta_id": "cus_2uQhJTNmCTJckaHs7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19177
   },
   {
     "nombre": "Maria Eugenia",
@@ -38468,10 +38320,10 @@ export const activeUsers = [
     "correo": "makler@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 525616679654,
-    "stripe_id": "cus_Lp1VqStKQWKRsr",
-    "final_date": 1693800000,
-    "id": 19264,
-    "level": 1
+    "conekta_id": "cus_2uQhJU7aiesGWT5qY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19264
   },
   {
     "nombre": "Abigail",
@@ -38479,10 +38331,9 @@ export const activeUsers = [
     "correo": "cauiba.abi.91@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522741082393,
-    "stripe_id": "cus_LoyqEpXpKj6fau",
     "final_date": 1691250000,
-    "id": 19338,
-    "level": 1
+    "level": 1,
+    "id": 19338
   },
   {
     "nombre": "Yolimar",
@@ -38490,10 +38341,10 @@ export const activeUsers = [
     "correo": "yoleto@yahoo.es",
     "pais": "Peru",
     "whatsapp": 51975551959,
-    "stripe_id": "cus_LoyvyNay1p09uE",
-    "final_date": 1693930000,
-    "id": 19341,
-    "level": 1
+    "conekta_id": "cus_2uQhJUfpLAUDiF2pY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19341
   },
   {
     "nombre": "Leticia",
@@ -38501,10 +38352,9 @@ export const activeUsers = [
     "correo": "carrilloletty36@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524571008831,
-    "stripe_id": "cus_MucFL55V3S4Hjh",
     "final_date": 1690950000,
-    "id": 19360,
-    "level": 1
+    "level": 1,
+    "id": 19360
   },
   {
     "nombre": "elizabeth",
@@ -38512,10 +38362,9 @@ export const activeUsers = [
     "correo": "elichuky76@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526181099102,
-    "stripe_id": "cus_N2LVKGDWo3XcVL",
     "final_date": 0,
-    "id": 19419,
-    "level": 1
+    "level": 1,
+    "id": 19419
   },
   {
     "nombre": "Jocelyn",
@@ -38523,10 +38372,10 @@ export const activeUsers = [
     "correo": "jocelyn-limon@outlook.es",
     "pais": "Mexico",
     "whatsapp": 528123636275,
-    "stripe_id": "cus_LpYpEWo8GNhalW",
-    "final_date": 1694060000,
-    "id": 19518,
-    "level": 1
+    "conekta_id": "cus_2uQhJWSyMeM7YNyEz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19518
   },
   {
     "nombre": "sarbia yuzeth",
@@ -38534,10 +38383,9 @@ export const activeUsers = [
     "correo": "yuzethsandoval@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526682309632,
-    "stripe_id": "cus_LwGCgQBkTcqxtv",
     "final_date": 1689710000,
-    "id": 19540,
-    "level": 1
+    "level": 1,
+    "id": 19540
   },
   {
     "nombre": "Maria Isabel",
@@ -38545,10 +38393,9 @@ export const activeUsers = [
     "correo": "isavz56@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522337594874,
-    "stripe_id": "cus_MsMLq7LFuX2YaI",
     "final_date": 0,
-    "id": 19567,
-    "level": 1
+    "level": 1,
+    "id": 19567
   },
   {
     "nombre": "Ana Gabriela",
@@ -38556,10 +38403,10 @@ export const activeUsers = [
     "correo": "anna.m172716@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711124713,
-    "stripe_id": "cus_LpLX4t84TzZmPx",
-    "final_date": 1694010000,
-    "id": 19656,
-    "level": 1
+    "conekta_id": "cus_2uQhJWtr7Mp7FVAsh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19656
   },
   {
     "nombre": "Blanca jazmín",
@@ -38567,10 +38414,10 @@ export const activeUsers = [
     "correo": "jazpato78@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524494990004,
-    "stripe_id": "cus_Muc288pQrYSCdH",
-    "final_date": 1693860000,
-    "id": 19701,
-    "level": 1
+    "conekta_id": "cus_2uQhJXdfdZNkrPrEA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19701
   },
   {
     "nombre": "Lucia Guadalupe",
@@ -38578,10 +38425,10 @@ export const activeUsers = [
     "correo": "lugugame@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221154602,
-    "stripe_id": "cus_LqxWJIfYanu9lD",
-    "final_date": 1691720000,
-    "id": 19731,
-    "level": 1
+    "conekta_id": "cus_2uQhJYYVqrFAG54oY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19731
   },
   {
     "nombre": "Maria Izabel",
@@ -38589,10 +38436,10 @@ export const activeUsers = [
     "correo": "marijoet16@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522213113079,
-    "stripe_id": "cus_LplsTBB5hYjXgy",
-    "final_date": 1691720000,
-    "id": 19820,
-    "level": 1
+    "conekta_id": "cus_2uQhJYYVqrFAG54oj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19820
   },
   {
     "nombre": "Rosalia Karime",
@@ -38600,10 +38447,10 @@ export const activeUsers = [
     "correo": "rossdek14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583075024,
-    "stripe_id": "cus_LpkucwMUpxRPtg",
-    "final_date": 1691470000,
-    "id": 19993,
-    "level": 1
+    "conekta_id": "cus_2uQhJZM654F1Vo5B2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 19993
   },
   {
     "nombre": "Casandra",
@@ -38611,10 +38458,10 @@ export const activeUsers = [
     "correo": "cassie8bel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525542363728,
-    "stripe_id": "cus_LpzxVQYCVJYrJ9",
-    "final_date": 1691480000,
-    "id": 20104,
-    "level": 1
+    "conekta_id": "cus_2uQhJZqYyZQm7jw2E",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20104
   },
   {
     "nombre": "Rosa Laura",
@@ -38622,10 +38469,9 @@ export const activeUsers = [
     "correo": "rosajaime772@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526131371493,
-    "stripe_id": "cus_LqAQ4rEDCAxBEk",
     "final_date": 1662660000,
-    "id": 20140,
-    "level": 1
+    "level": 1,
+    "id": 20140
   },
   {
     "nombre": "roxana",
@@ -38633,10 +38479,9 @@ export const activeUsers = [
     "correo": "rox_velez31@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525583524293,
-    "stripe_id": "cus_LqVYrdsuRPPEqj",
     "final_date": 1660150000,
-    "id": 20195,
-    "level": 1
+    "level": 1,
+    "id": 20195
   },
   {
     "nombre": "Alma victoria",
@@ -38644,10 +38489,9 @@ export const activeUsers = [
     "correo": "victoriass.vcm17@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527773365926,
-    "stripe_id": "cus_Lqe56KSL4S4wq8",
     "final_date": 0,
-    "id": 20219,
-    "level": 1
+    "level": 1,
+    "id": 20219
   },
   {
     "nombre": "Norma Liliana",
@@ -38655,10 +38499,10 @@ export const activeUsers = [
     "correo": "vcnormalilianavitalalfaro@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524498977537,
-    "stripe_id": "cus_Lr2hFI9fXAf4sP",
-    "final_date": 1691720000,
-    "id": 20375,
-    "level": 1
+    "conekta_id": "cus_2uQhJbVmveVkm9inh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20375
   },
   {
     "nombre": "Susana",
@@ -38666,10 +38510,10 @@ export const activeUsers = [
     "correo": "su.solis.g@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525515050722,
-    "stripe_id": "cus_Lr36VIiLiDn02U",
-    "final_date": 1691720000,
-    "id": 20520,
-    "level": 1
+    "conekta_id": "cus_2uQhJc41YA6hzYvWE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20520
   },
   {
     "nombre": "Cristina",
@@ -38677,10 +38521,10 @@ export const activeUsers = [
     "correo": "cristinamagallon97@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17025179479,
-    "stripe_id": "cus_LrQ0CY9KF7DRev",
-    "final_date": 1691810000,
-    "id": 20638,
-    "level": 1
+    "conekta_id": "cus_2uQhJcJN9rVc3ZB2w",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20638
   },
   {
     "nombre": "Esperanza",
@@ -38688,10 +38532,10 @@ export const activeUsers = [
     "correo": "elamaon_taikaa@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527711045498,
-    "stripe_id": "cus_Lrn4KGAHldlhLi",
-    "final_date": 1691990000,
-    "id": 20660,
-    "level": 1
+    "conekta_id": "cus_2uQhJd6M3SQxCxKjc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20660
   },
   {
     "nombre": "Jessica",
@@ -38699,10 +38543,10 @@ export const activeUsers = [
     "correo": "jessicavenegas608@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529581259978,
-    "stripe_id": "cus_Ls5dGr1QazG1Bk",
-    "final_date": 1691980000,
-    "id": 20695,
-    "level": 1
+    "conekta_id": "cus_2uQhJdn1CFcuJ6W2G",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20695
   },
   {
     "nombre": "jennilay",
@@ -38710,10 +38554,10 @@ export const activeUsers = [
     "correo": "jenly10.88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5217026378065,
-    "stripe_id": "cus_LsX9rzYNu18XpI",
-    "final_date": 1692070000,
-    "id": 20867,
-    "level": 1
+    "conekta_id": "cus_2uQhJeH3KMSbQNChR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20867
   },
   {
     "nombre": "Erika",
@@ -38721,10 +38565,9 @@ export const activeUsers = [
     "correo": "erimorales428@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711738071,
-    "stripe_id": "cus_LsXuj16ZfwErXZ",
     "final_date": 1689390000,
-    "id": 20868,
-    "level": 1
+    "level": 1,
+    "id": 20868
   },
   {
     "nombre": "Aranza Paulina",
@@ -38732,10 +38575,10 @@ export const activeUsers = [
     "correo": "valdezaranzapaulina@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525549123199,
-    "stripe_id": "cus_LsXeLBWmzQ7wQP",
-    "final_date": 1692070000,
-    "id": 20996,
-    "level": 1
+    "conekta_id": "cus_2uQhJf1HcxMJVdaVt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 20996
   },
   {
     "nombre": "Cynthia",
@@ -38743,10 +38586,10 @@ export const activeUsers = [
     "correo": "cynthia_019@hotmail.com",
     "pais": "Puerto Rico",
     "whatsapp": 17875600014,
-    "stripe_id": "cus_LsXlioOdNwRHU7",
-    "final_date": 1692070000,
-    "id": 21006,
-    "level": 1
+    "conekta_id": "cus_2uQhJfk799ux7uEzS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21006
   },
   {
     "nombre": "luz Gabriela",
@@ -38754,10 +38597,10 @@ export const activeUsers = [
     "correo": "gluz94393@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526442006032,
-    "stripe_id": "cus_LsvK4mqTCuSbsh",
-    "final_date": 1692160000,
-    "id": 21061,
-    "level": 1
+    "conekta_id": "cus_2uQhJfkgMkZtkj8n4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21061
   },
   {
     "nombre": "Cristina",
@@ -38765,10 +38608,10 @@ export const activeUsers = [
     "correo": "cristygamezg25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523312696066,
-    "stripe_id": "cus_LtVc2uG97ETaKw",
-    "final_date": 1692290000,
-    "id": 21124,
-    "level": 1
+    "conekta_id": "cus_2uQhJgnSeSECMJdYT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21124
   },
   {
     "nombre": "Briseyda",
@@ -38776,10 +38619,9 @@ export const activeUsers = [
     "correo": "bris.alexa14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522321023774,
-    "stripe_id": "cus_NQ6Ok8uG76LLfM",
     "final_date": 1690260000,
-    "id": 21132,
-    "level": 1
+    "level": 1,
+    "id": 21132
   },
   {
     "nombre": "Sarahi",
@@ -38787,10 +38629,9 @@ export const activeUsers = [
     "correo": "cabreracontreras1996@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524191581820,
-    "stripe_id": "cus_LtfFGhdSdAYrri",
     "final_date": 1723600000,
-    "id": 21145,
-    "level": 0
+    "level": 0,
+    "id": 21145
   },
   {
     "nombre": "Yveth Anarely",
@@ -38798,10 +38639,10 @@ export const activeUsers = [
     "correo": "anarelyramirez04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526691151659,
-    "stripe_id": "cus_Lun7XN0yMLacM1",
-    "final_date": 1692590000,
-    "id": 21280,
-    "level": 1
+    "conekta_id": "cus_2uQhJhDkBZ3FNSZyo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21280
   },
   {
     "nombre": "María de los Ángeles",
@@ -38809,10 +38650,10 @@ export const activeUsers = [
     "correo": "masahe1970@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525536764466,
-    "stripe_id": "cus_NMriht6jG6SV3B",
-    "final_date": 1692190000,
-    "id": 21307,
-    "level": 1
+    "conekta_id": "cus_2uQhJhxZhkbtziEUW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21307
   },
   {
     "nombre": "laura",
@@ -38820,10 +38661,9 @@ export const activeUsers = [
     "correo": "sampayogarciaaimeloreto@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527714834464,
-    "stripe_id": "cus_LwG1B8wxsiqois",
     "final_date": 1690250000,
-    "id": 21472,
-    "level": 1
+    "level": 1,
+    "id": 21472
   },
   {
     "nombre": "lizeth",
@@ -38831,10 +38671,9 @@ export const activeUsers = [
     "correo": "gatalara09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522461387330,
-    "stripe_id": "cus_Muc7Tbqcx2oSLP",
     "final_date": 1675310000,
-    "id": 21489,
-    "level": 1
+    "level": 1,
+    "id": 21489
   },
   {
     "nombre": "Gloria",
@@ -38842,10 +38681,10 @@ export const activeUsers = [
     "correo": "gloria.garciavazquez85@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17609054784,
-    "stripe_id": "cus_LwG3E08bBVqFCd",
-    "final_date": 1692930000,
-    "id": 21514,
-    "level": 1
+    "conekta_id": "cus_2uQhJjjijEUnrPHWh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21514
   },
   {
     "nombre": "Vianey",
@@ -38853,10 +38692,10 @@ export const activeUsers = [
     "correo": "viayneth_adc@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527291238164,
-    "stripe_id": "cus_MX0az8sZFUkOMe",
-    "final_date": 1693450000,
-    "id": 21635,
-    "level": 1
+    "conekta_id": "cus_2uQhJjcneqgtWWthK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21635
   },
   {
     "nombre": "Susana",
@@ -38864,21 +38703,20 @@ export const activeUsers = [
     "correo": "susanagonzalez1011@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 12134480112,
-    "stripe_id": "cus_MXDAaSPZHPLdUh",
-    "final_date": 1693500000,
-    "id": 21805,
-    "level": 1
+    "conekta_id": "cus_2uQhJkMcB3FY8nZBp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21805
   },
   {
     "nombre": "Fernanda",
-    "apellido": "Montes",
+    "apellido": "Montes Lopez",
     "correo": "jaacielrosales@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522215584500,
-    "stripe_id": "cus_Lyw60Y87pXIBLH",
     "final_date": 0,
-    "id": 21868,
-    "level": 1
+    "level": 1,
+    "id": 21868
   },
   {
     "nombre": "mariana",
@@ -38886,10 +38724,10 @@ export const activeUsers = [
     "correo": "marianabaas648@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529992203521,
-    "stripe_id": "cus_NlodBcDRNDjJLf",
-    "final_date": 1692850000,
-    "id": 21889,
-    "level": 1
+    "conekta_id": "cus_2uQhJkuqnYrVVntUM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 21889
   },
   {
     "nombre": "Fanny",
@@ -38897,10 +38735,10 @@ export const activeUsers = [
     "correo": "fanny_nena51@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524421190538,
-    "stripe_id": "cus_MX0mLPQVO1ISQM",
-    "final_date": 1693450000,
-    "id": 22029,
-    "level": 1
+    "conekta_id": "cus_2uQhJmu1vSp3B4oVs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22029
   },
   {
     "nombre": "Guadalupe",
@@ -38908,10 +38746,10 @@ export const activeUsers = [
     "correo": "barreramezaguadalupemerary@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525562388377,
-    "stripe_id": "cus_NloeMurv8TpOsx",
-    "final_date": 1692570000,
-    "id": 22132,
-    "level": 1
+    "conekta_id": "cus_2uQhJndqSeNgoLTza",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22132
   },
   {
     "nombre": "MARILU",
@@ -38919,10 +38757,10 @@ export const activeUsers = [
     "correo": "ledes171@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524661036683,
-    "stripe_id": "cus_Nm59fDm7CdRq4i",
-    "final_date": 1692910000,
-    "id": 22197,
-    "level": 1
+    "conekta_id": "cus_2uQhJna4jdwV1bYfn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22197
   },
   {
     "nombre": "Jannete",
@@ -38930,10 +38768,10 @@ export const activeUsers = [
     "correo": "jacopeforma@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525531570732,
-    "stripe_id": "cus_N21GbYKkm1o0aU",
-    "final_date": 1692660000,
-    "id": 22205,
-    "level": 1
+    "conekta_id": "cus_2uQhJoNexqwLRc8Vg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22205
   },
   {
     "nombre": "Kerena",
@@ -38941,10 +38779,10 @@ export const activeUsers = [
     "correo": "kerena231a@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526645008849,
-    "stripe_id": "cus_NloemzHDF0TJaW",
-    "final_date": 1693600000,
-    "id": 22238,
-    "level": 1
+    "conekta_id": "cus_2uQhJos7sM75zsYTg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22238
   },
   {
     "nombre": "fabiola",
@@ -38952,10 +38790,9 @@ export const activeUsers = [
     "correo": "fabiolaespinozanails@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528125958260,
-    "stripe_id": "cus_M00iSyzpOAeyMm",
     "final_date": 1662260000,
-    "id": 22241,
-    "level": 1
+    "level": 1,
+    "id": 22241
   },
   {
     "nombre": "yesenia",
@@ -38963,10 +38800,9 @@ export const activeUsers = [
     "correo": "yeseniagarcia690@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528131393536,
-    "stripe_id": "cus_NHS7Ct6BxLlMou",
     "final_date": 0,
-    "id": 22327,
-    "level": 1
+    "level": 1,
+    "id": 22327
   },
   {
     "nombre": "yessica",
@@ -38974,10 +38810,9 @@ export const activeUsers = [
     "correo": "fam.morenolopez1905@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525208338185,
-    "stripe_id": "cus_NloeCwVhKdigcO",
     "final_date": 1716680000,
-    "id": 22355,
-    "level": 0
+    "level": 0,
+    "id": 22355
   },
   {
     "nombre": "Miriam Janet",
@@ -38985,10 +38820,10 @@ export const activeUsers = [
     "correo": "mirijan1226@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525546756097,
-    "stripe_id": "cus_Nln5N8LWbkQ7nb",
-    "final_date": 1692850000,
-    "id": 22391,
-    "level": 1
+    "conekta_id": "cus_2uQhJqeGtpyyoQE2Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22391
   },
   {
     "nombre": "Guadalupe",
@@ -38996,10 +38831,10 @@ export const activeUsers = [
     "correo": "trinity.emoforevergdm@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631437703,
-    "stripe_id": "cus_M2GJNKleZHXhW2",
-    "final_date": 1691630000,
-    "id": 22531,
-    "level": 1
+    "conekta_id": "cus_2uQhJrP6R2YdUpFy3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22531
   },
   {
     "nombre": "Leticia",
@@ -39007,10 +38842,9 @@ export const activeUsers = [
     "correo": "lettyhotch21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525633460486,
-    "stripe_id": "cus_M27VqKk8kVG9Vt",
     "final_date": 0,
-    "id": 22545,
-    "level": 1
+    "level": 1,
+    "id": 22545
   },
   {
     "nombre": "Ruth",
@@ -39018,10 +38852,10 @@ export const activeUsers = [
     "correo": "alvarezruth004@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16155027,
-    "stripe_id": "cus_M2ZbYcE4356QHx",
-    "final_date": 1691470000,
-    "id": 22583,
-    "level": 1
+    "conekta_id": "cus_2uQhJrpyAk1d8n6B3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22583
   },
   {
     "nombre": "esther",
@@ -39029,10 +38863,9 @@ export const activeUsers = [
     "correo": "toro_esther@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 16152786987,
-    "stripe_id": "cus_M49jydewuCo4DC",
     "final_date": 1684210000,
-    "id": 22713,
-    "level": 1
+    "level": 1,
+    "id": 22713
   },
   {
     "nombre": "Yolanda",
@@ -39040,10 +38873,10 @@ export const activeUsers = [
     "correo": "yolandaangelmontano@gmail.com",
     "pais": "Aruba",
     "whatsapp": 2975659191,
-    "stripe_id": "cus_N6LoW8oqeJ3SLj",
-    "final_date": 1693740000,
-    "id": 22733,
-    "level": 1
+    "conekta_id": "cus_2uQhJsZngwaGm3kff",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22733
   },
   {
     "nombre": "Nuria",
@@ -39051,10 +38884,10 @@ export const activeUsers = [
     "correo": "nucamo08@gmail.com",
     "pais": "España",
     "whatsapp": 34642309200,
-    "stripe_id": "cus_M4G5fVaEFjErcH",
-    "final_date": 1692090000,
-    "id": 22755,
-    "level": 1
+    "conekta_id": "cus_2uQhJsZDULvL8Drx8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22755
   },
   {
     "nombre": "Yenny DV",
@@ -39062,10 +38895,10 @@ export const activeUsers = [
     "correo": "yennygd@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529996386129,
-    "stripe_id": "cus_M6oEQxRicE2ndF",
-    "final_date": 1692770000,
-    "id": 22865,
-    "level": 1
+    "conekta_id": "cus_2uQhJtJcD98vLQ8p3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22865
   },
   {
     "nombre": "Gabriela",
@@ -39073,10 +38906,10 @@ export const activeUsers = [
     "correo": "gabi.ocana.402@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526631234677,
-    "stripe_id": "cus_M6mA8GPPdu98l9",
-    "final_date": 1692760000,
-    "id": 22923,
-    "level": 1
+    "conekta_id": "cus_2uQhJu2rWk3dNmBwL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22923
   },
   {
     "nombre": "Adriana",
@@ -39084,10 +38917,9 @@ export const activeUsers = [
     "correo": "adyy210783@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522226531944,
-    "stripe_id": "cus_M7IVba8juLaiMq",
     "final_date": 1669780000,
-    "id": 22936,
-    "level": 1
+    "level": 1,
+    "id": 22936
   },
   {
     "nombre": "Teresa",
@@ -39095,10 +38927,9 @@ export const activeUsers = [
     "correo": "hua_ciru@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525574658714,
-    "stripe_id": "cus_M6mRXGfHdmCaXl",
     "final_date": 0,
-    "id": 22942,
-    "level": 1
+    "level": 1,
+    "id": 22942
   },
   {
     "nombre": "Maritza",
@@ -39106,10 +38937,10 @@ export const activeUsers = [
     "correo": "mariet.dylc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524494013456,
-    "stripe_id": "cus_M6mbDz8yXonW5M",
-    "final_date": 1692760000,
-    "id": 22946,
-    "level": 1
+    "conekta_id": "cus_2uQhJumg2wcGu9xKM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 22946
   },
   {
     "nombre": "Dulce",
@@ -39117,10 +38948,9 @@ export const activeUsers = [
     "correo": "dulce.anguiano79@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526444602137,
-    "stripe_id": "cus_M7AkkjjjW1ueUC",
     "final_date": 1679630000,
-    "id": 22976,
-    "level": 1
+    "level": 1,
+    "id": 22976
   },
   {
     "nombre": "Viridiana Janette",
@@ -39128,10 +38958,9 @@ export const activeUsers = [
     "correo": "viridiana_angelita@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525564897596,
-    "stripe_id": "cus_M7LAFNBod9QStn",
     "final_date": 1721250000,
-    "id": 22982,
-    "level": 0
+    "level": 0,
+    "id": 22982
   },
   {
     "nombre": "Yanelis",
@@ -39139,10 +38968,10 @@ export const activeUsers = [
     "correo": "yane1981@yahoo.com",
     "pais": "Costa Rica",
     "whatsapp": 50688697196,
-    "stripe_id": "cus_M7nNWKxGXcxMSV",
-    "final_date": 1692990000,
-    "id": 23021,
-    "level": 1
+    "conekta_id": "cus_2uQhJwFtHwPWtQ595",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23021
   },
   {
     "nombre": "sarahi",
@@ -39150,10 +38979,10 @@ export const activeUsers = [
     "correo": "saucedo.sarahi@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 17733265665,
-    "stripe_id": "cus_MQq9t37b5J6WjF",
-    "final_date": 1692030000,
-    "id": 23075,
-    "level": 1
+    "conekta_id": "cus_2uQhJxEVDEh7vr6SW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23075
   },
   {
     "nombre": "alma",
@@ -39161,10 +38990,10 @@ export const activeUsers = [
     "correo": "almagarcia_1973@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14694320133,
-    "stripe_id": "cus_MX1arG9raLzsSp",
-    "final_date": 1693460000,
-    "id": 23082,
-    "level": 1
+    "conekta_id": "cus_2uQhJxEVDEh7vr6Sf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23082
   },
   {
     "nombre": "abigahil",
@@ -39172,10 +39001,10 @@ export const activeUsers = [
     "correo": "hanyaby1992@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 161489788885,
-    "stripe_id": "cus_MGs6wogudqWZD1",
-    "final_date": 1692410000,
-    "id": 23181,
-    "level": 1
+    "conekta_id": "cus_2uQhJy2U6pcU7FERQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23181
   },
   {
     "nombre": "Dulce",
@@ -39183,10 +39012,10 @@ export const activeUsers = [
     "correo": "dlcarc69@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526864266635,
-    "stripe_id": "cus_NloguDqxEcquZP",
-    "final_date": 1693080000,
-    "id": 23195,
-    "level": 1
+    "conekta_id": "cus_2uQhJyTmdwRX8PAuJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23195
   },
   {
     "nombre": "Manuel Alejandro",
@@ -39194,10 +39023,10 @@ export const activeUsers = [
     "correo": "alexperaltaarriaga@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525573598679,
-    "stripe_id": "cus_NlogreAaEhF313",
-    "final_date": 1694090000,
-    "id": 23196,
-    "level": 1
+    "conekta_id": "cus_2uQhJzPB4pws1vAZw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23196
   },
   {
     "nombre": "paulina",
@@ -39205,10 +39034,10 @@ export const activeUsers = [
     "correo": "paulina.flores2410@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525531450075,
-    "stripe_id": "cus_MX0xgZJCeYYDLQ",
-    "final_date": 1691440000,
-    "id": 23212,
-    "level": 1
+    "conekta_id": "cus_2uQhJzwytwCkxq7Fd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23212
   },
   {
     "nombre": "Pau",
@@ -39216,10 +39045,10 @@ export const activeUsers = [
     "correo": "amorahernandez839@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525528222621,
-    "stripe_id": "cus_Nlog97pKOztrkf",
-    "final_date": 1691730000,
-    "id": 23235,
-    "level": 1
+    "conekta_id": "cus_2uQhK1BmJ2wiRvkRc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23235
   },
   {
     "nombre": "Ilse Yaniri",
@@ -39227,10 +39056,10 @@ export const activeUsers = [
     "correo": "yaniks2890@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527712836112,
-    "stripe_id": "cus_MX1rvJCUVFD8w1",
-    "final_date": 1693460000,
-    "id": 23317,
-    "level": 1
+    "conekta_id": "cus_2uQhK1ykBcs4ZBWv2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23317
   },
   {
     "nombre": "Elizabeth",
@@ -39238,10 +39067,10 @@ export const activeUsers = [
     "correo": "emr.170595@outlook.com",
     "pais": "Mexico",
     "whatsapp": 527291462950,
-    "stripe_id": "cus_MX0RPzqO1LKzm8",
-    "final_date": 1693980000,
-    "id": 23356,
-    "level": 1
+    "conekta_id": "cus_2uQhK2RcwLL4GHibY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23356
   },
   {
     "nombre": "Yadira",
@@ -39249,10 +39078,10 @@ export const activeUsers = [
     "correo": "yadime878130@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528671294660,
-    "stripe_id": "cus_M9mDvTVohQkFF4",
-    "final_date": 1693450000,
-    "id": 23357,
-    "level": 1
+    "conekta_id": "cus_2uQhK3QDrddfJjjuC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23357
   },
   {
     "nombre": "Brenda",
@@ -39260,10 +39089,9 @@ export const activeUsers = [
     "correo": "brencahe172@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616497316,
-    "stripe_id": "cus_MBTuMysPOv0X9N",
     "final_date": 1690780000,
-    "id": 23358,
-    "level": 1
+    "level": 1,
+    "id": 23358
   },
   {
     "nombre": "Daniela",
@@ -39271,20 +39099,19 @@ export const activeUsers = [
     "correo": "amtm.2579@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522491465354,
-    "stripe_id": "cus_Nlog7NaII665jh",
     "final_date": 1717880000,
-    "id": 23384,
-    "level": 0
+    "level": 0,
+    "id": 23384
   },
   {
     "nombre": "Yesenia",
     "apellido": "Lopez Altamirano",
     "correo": "yeloalt@hotmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_MBw6k5VJNgNXQd",
-    "final_date": 1693860000,
-    "id": 23445,
-    "level": 1
+    "conekta_id": "cus_2uQhK493NqCJw1QQ5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23445
   },
   {
     "nombre": "Rosaura",
@@ -39292,10 +39119,10 @@ export const activeUsers = [
     "correo": "rosauramc1@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15622349764,
-    "stripe_id": "cus_MXHv8zQeClnnUb",
-    "final_date": 1693520000,
-    "id": 23451,
-    "level": 1
+    "conekta_id": "cus_2uQhK4dWHLN4T59ZT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23451
   },
   {
     "nombre": "Adriana",
@@ -39303,10 +39130,9 @@ export const activeUsers = [
     "correo": "adryp11@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525584200776,
-    "stripe_id": "cus_MYLqSPzaifb7Re",
     "final_date": 1691090000,
-    "id": 23551,
-    "level": 1
+    "level": 1,
+    "id": 23551
   },
   {
     "nombre": "elvia",
@@ -39314,10 +39140,9 @@ export const activeUsers = [
     "correo": "elviaesquivel0987@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524962081671,
-    "stripe_id": "cus_NlogRSAxTMRKJD",
     "final_date": 1747870000,
-    "id": 23554,
-    "level": 0
+    "level": 0,
+    "id": 23554
   },
   {
     "nombre": "Felipa",
@@ -39325,10 +39150,10 @@ export const activeUsers = [
     "correo": "jimena.jarquin.96@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528316019311,
-    "stripe_id": "cus_MVveURD3IHnULg",
-    "final_date": 1693550000,
-    "id": 23568,
-    "level": 1
+    "conekta_id": "cus_2uQhK5YuiDtQPop2e",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23568
   },
   {
     "nombre": "Aurora",
@@ -39336,10 +39161,9 @@ export const activeUsers = [
     "correo": "aurora.verdejo@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 17027619316,
-    "stripe_id": "cus_MBes747mXVILli",
     "final_date": 1691220000,
-    "id": 23600,
-    "level": 1
+    "level": 1,
+    "id": 23600
   },
   {
     "nombre": "janeth",
@@ -39347,10 +39171,9 @@ export const activeUsers = [
     "correo": "janethalecash.r4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525571121799,
-    "stripe_id": "cus_MX0fzxlgpvFg8W",
     "final_date": 1705290000,
-    "id": 23611,
-    "level": 0
+    "level": 0,
+    "id": 23611
   },
   {
     "nombre": "jacqueline",
@@ -39358,10 +39181,10 @@ export const activeUsers = [
     "correo": "hernandezjacky557@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525617882534,
-    "stripe_id": "cus_MX0Wn2kw1BebQB",
-    "final_date": 1693450000,
-    "id": 23636,
-    "level": 1
+    "conekta_id": "cus_2uQhK67iYL9JLikha",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23636
   },
   {
     "nombre": "Angeles",
@@ -39369,10 +39192,10 @@ export const activeUsers = [
     "correo": "angyprlt22@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527226118584,
-    "stripe_id": "cus_MYPlgZCq0EhFGz",
-    "final_date": 1691960000,
-    "id": 23648,
-    "level": 1
+    "conekta_id": "cus_2uQhK76KTdSuS64Pc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23648
   },
   {
     "nombre": "Guadalupe del Carmen",
@@ -39380,20 +39203,20 @@ export const activeUsers = [
     "correo": "noylu87@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526622023794,
-    "stripe_id": "cus_MX0agIKxb9Yh8v",
-    "final_date": 1693450000,
-    "id": 23649,
-    "level": 1
+    "conekta_id": "cus_2uQhK7anN8cex9oYT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23649
   },
   {
     "nombre": "Mayra Lucia",
     "apellido": "Palomares Tovar",
     "correo": "mayra.mlpt@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_Ma1sTAqCvKu0NV",
-    "final_date": 1692220000,
-    "id": 23710,
-    "level": 1
+    "conekta_id": "cus_2uQhK8ZxW2aCgdPP3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23710
   },
   {
     "nombre": "lizbeth",
@@ -39401,10 +39224,10 @@ export const activeUsers = [
     "correo": "lizonofre301290@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525534993279,
-    "stripe_id": "cus_MwPJ5CdNciFAmB",
-    "final_date": 0,
-    "id": 23736,
-    "level": 1
+    "conekta_id": "cus_2uQhK9MwPcVYot9qG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23736
   },
   {
     "nombre": "Mónica Ivonne",
@@ -39412,10 +39235,10 @@ export const activeUsers = [
     "correo": "monymarquez2012@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527131388941,
-    "stripe_id": "cus_MunBvQ4iDmdJhH",
-    "final_date": 1693670000,
-    "id": 23738,
-    "level": 1
+    "conekta_id": "cus_2uQhK9Jn2E8rJu3sp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23738
   },
   {
     "nombre": "Angelica",
@@ -39423,10 +39246,10 @@ export const activeUsers = [
     "correo": "angystyle.am@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582789411,
-    "stripe_id": "cus_MEeuIKzCz3qMb6",
-    "final_date": 1691900000,
-    "id": 23746,
-    "level": 1
+    "conekta_id": "cus_2uQhK9op9KxYRAkNr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23746
   },
   {
     "nombre": "Edith",
@@ -39434,10 +39257,10 @@ export const activeUsers = [
     "correo": "emarquez208@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527712641139,
-    "stripe_id": "cus_MGISNpFtnVwI9q",
-    "final_date": 1693320000,
-    "id": 23756,
-    "level": 1
+    "conekta_id": "cus_2uQhKAieMcpwmhTW7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23756
   },
   {
     "nombre": "Alisson",
@@ -39445,10 +39268,10 @@ export const activeUsers = [
     "correo": "alicambron.mac@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525526718511,
-    "stripe_id": "cus_MEt7EukYgXiSTn",
-    "final_date": 1691870000,
-    "id": 23767,
-    "level": 1
+    "conekta_id": "cus_2uQhKBHTBj5qicQ9P",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23767
   },
   {
     "nombre": "Vanesa",
@@ -39456,10 +39279,10 @@ export const activeUsers = [
     "correo": "vanemn_4991@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526421459054,
-    "stripe_id": "cus_MG2P0dnVHsX5M3",
-    "final_date": 1692130000,
-    "id": 23768,
-    "level": 1
+    "conekta_id": "cus_2uQhKC2GhveVLt4e9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23768
   },
   {
     "nombre": "karina",
@@ -39467,10 +39290,9 @@ export const activeUsers = [
     "correo": "kovaarellano@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525573650299,
-    "stripe_id": "cus_MEvnAzxxAHjI9V",
     "final_date": 1689280000,
-    "id": 23771,
-    "level": 1
+    "level": 1,
+    "id": 23771
   },
   {
     "nombre": "Miriam",
@@ -39478,10 +39300,10 @@ export const activeUsers = [
     "correo": "miriamf.arehiga@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526381139228,
-    "stripe_id": "cus_MFHvhkFBYv5VK8",
-    "final_date": 1693850000,
-    "id": 23776,
-    "level": 1
+    "conekta_id": "cus_2uQhKCm6E8D9251WH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23776
   },
   {
     "nombre": "Angelica",
@@ -39489,10 +39311,9 @@ export const activeUsers = [
     "correo": "angie0804ys@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528688184485,
-    "stripe_id": "cus_MX1YQzY0L99QR8",
     "final_date": 1690780000,
-    "id": 23793,
-    "level": 1
+    "level": 1,
+    "id": 23793
   },
   {
     "nombre": "Nancy",
@@ -39500,10 +39321,10 @@ export const activeUsers = [
     "correo": "nancy_aguirrestrada@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525580317382,
-    "stripe_id": "cus_MF3Z6ewJ7KL8PJ",
-    "final_date": 1693100000,
-    "id": 23794,
-    "level": 1
+    "conekta_id": "cus_2uQhKDfvSR5YGn7V8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23794
   },
   {
     "nombre": "Brenda Ivonne",
@@ -39511,10 +39332,10 @@ export const activeUsers = [
     "correo": "lindhermosa26@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525610027529,
-    "stripe_id": "cus_MFHoS6MbzOpnRP",
-    "final_date": 1692040000,
-    "id": 23806,
-    "level": 1
+    "conekta_id": "cus_2uQhKEEA3vgVdnSkx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23806
   },
   {
     "nombre": "ismar",
@@ -39522,10 +39343,10 @@ export const activeUsers = [
     "correo": "ismarcastilloquezada@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523221541377,
-    "stripe_id": "cus_MG8OXR7J7iSUBF",
-    "final_date": 1692240000,
-    "id": 23808,
-    "level": 1
+    "conekta_id": "cus_2uQhKFDLBpe3K4Mpy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23808
   },
   {
     "nombre": "susana",
@@ -39533,10 +39354,10 @@ export const activeUsers = [
     "correo": "ceballossussy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526641924922,
-    "stripe_id": "cus_MFdMHVl5aLTLgH",
-    "final_date": 1692410000,
-    "id": 23830,
-    "level": 1
+    "conekta_id": "cus_2uQhKFGVZCzjrBqqN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23830
   },
   {
     "nombre": "perla",
@@ -39544,10 +39365,9 @@ export const activeUsers = [
     "correo": "perlapersi30@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314282564,
-    "stripe_id": "cus_MuciRs7jQFwDOm",
     "final_date": 1690950000,
-    "id": 23843,
-    "level": 1
+    "level": 1,
+    "id": 23843
   },
   {
     "nombre": "Elena",
@@ -39555,10 +39375,10 @@ export const activeUsers = [
     "correo": "guerraele0303@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528123266911,
-    "stripe_id": "cus_MG4IXisUlYVTRf",
-    "final_date": 1692220000,
-    "id": 23901,
-    "level": 1
+    "conekta_id": "cus_2uQhKFx9i2CgwL2Kn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23901
   },
   {
     "nombre": "Rosario",
@@ -39566,10 +39386,10 @@ export const activeUsers = [
     "correo": "barbie_comex@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525630988882,
-    "stripe_id": "cus_MGATpJvOZHlDC5",
-    "final_date": 1692250000,
-    "id": 23909,
-    "level": 1
+    "conekta_id": "cus_2uQhKGgyEDmLZbgpP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23909
   },
   {
     "nombre": "DAPHNE JOARA",
@@ -39577,10 +39397,10 @@ export const activeUsers = [
     "correo": "djvega79@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529831403163,
-    "stripe_id": "cus_MGKzkPdO2BbEKM",
-    "final_date": 1692200000,
-    "id": 23916,
-    "level": 1
+    "conekta_id": "cus_2uQhKHN23QtnQ8Ry9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23916
   },
   {
     "nombre": "WENDY",
@@ -39588,10 +39408,9 @@ export const activeUsers = [
     "correo": "mitsuki.niwa@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525535240128,
-    "stripe_id": "cus_MX0RgvLiG2XUPW",
     "final_date": 1694380000,
-    "id": 23924,
-    "level": 1
+    "level": 1,
+    "id": 23924
   },
   {
     "nombre": "Diana",
@@ -39599,10 +39418,9 @@ export const activeUsers = [
     "correo": "suarezluara782@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527751920384,
-    "stripe_id": "cus_MY6Mnn0S2m1RBa",
     "final_date": 1680490000,
-    "id": 23956,
-    "level": 1
+    "level": 1,
+    "id": 23956
   },
   {
     "nombre": "Rossy giselle",
@@ -39610,20 +39428,19 @@ export const activeUsers = [
     "correo": "rossygiselledelacruzdelacruz1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529321283481,
-    "stripe_id": "cus_MGl2Y7aO6X13C1",
     "final_date": 0,
-    "id": 23970,
-    "level": 1
+    "level": 1,
+    "id": 23970
   },
   {
     "nombre": "narmi",
     "apellido": "antonio zarate",
     "correo": "narmanton11@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_MX1AaIQuETuup0",
-    "final_date": 1693460000,
-    "id": 23991,
-    "level": 1
+    "conekta_id": "cus_2uQhKJxbACoz2cHNg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 23991
   },
   {
     "nombre": "lizbethguadalupe",
@@ -39631,10 +39448,10 @@ export const activeUsers = [
     "correo": "lizojedaa557@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529384058013,
-    "stripe_id": "cus_MX0xr4d1HHDOTY",
-    "final_date": 1693450000,
-    "id": 24006,
-    "level": 1
+    "conekta_id": "cus_2uQhKKQTuvGyd8zh9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24006
   },
   {
     "nombre": "Patty",
@@ -39642,10 +39459,10 @@ export const activeUsers = [
     "correo": "soniapatricia_0610@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528991834977,
-    "stripe_id": "cus_MX0fo46C1l0CA7",
-    "final_date": 1693460000,
-    "id": 24017,
-    "level": 1
+    "conekta_id": "cus_2uQhKKPthKd31g6DJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24017
   },
   {
     "nombre": "yolizet",
@@ -39653,10 +39470,9 @@ export const activeUsers = [
     "correo": "yolinails09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529541575218,
-    "stripe_id": "cus_MH7k9HGwFnyBOt",
     "final_date": 1689790000,
-    "id": 24037,
-    "level": 1
+    "level": 1,
+    "id": 24037
   },
   {
     "nombre": "Alma Alessia",
@@ -39664,10 +39480,10 @@ export const activeUsers = [
     "correo": "gomita020914@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523321681189,
-    "stripe_id": "cus_MXD2ZAmOybd2jC",
-    "final_date": 1693500000,
-    "id": 24048,
-    "level": 1
+    "conekta_id": "cus_2uQhKLSECbwHE5VGx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24048
   },
   {
     "nombre": "Claudia",
@@ -39675,10 +39491,10 @@ export const activeUsers = [
     "correo": "hiclaumartinez0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711374927,
-    "stripe_id": "cus_MX9OIdKYAb6Iov",
-    "final_date": 1693490000,
-    "id": 24057,
-    "level": 1
+    "conekta_id": "cus_2uQhKLsXjikLALX1x",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24057
   },
   {
     "nombre": "Marichuy",
@@ -39686,10 +39502,9 @@ export const activeUsers = [
     "correo": "hemoxa_pollita@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527851124250,
-    "stripe_id": "cus_MHEG4HwN4fK1t6",
     "final_date": 1687220000,
-    "id": 24080,
-    "level": 1
+    "level": 1,
+    "id": 24080
   },
   {
     "nombre": "Maria guadalupe",
@@ -39697,10 +39512,10 @@ export const activeUsers = [
     "correo": "marihdezmir9412@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527531378393,
-    "stripe_id": "cus_NlohmzlEhhpFGc",
-    "final_date": 1692800000,
-    "id": 24085,
-    "level": 1
+    "conekta_id": "cus_2uQhKMusF14aVcomF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24085
   },
   {
     "nombre": "Martha Estrella",
@@ -39708,10 +39523,10 @@ export const activeUsers = [
     "correo": "inesmarthaestrella@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529515649180,
-    "stripe_id": "cus_MHDCGmBL53SSs0",
-    "final_date": 1692490000,
-    "id": 24095,
-    "level": 1
+    "conekta_id": "cus_2uQhKNXkgoqKrBdVU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24095
   },
   {
     "nombre": "Francisca cicera",
@@ -39719,10 +39534,9 @@ export const activeUsers = [
     "correo": "freirecicera88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525521705032,
-    "stripe_id": "cus_MHDvvs4NALw4Je",
     "final_date": 0,
-    "id": 24105,
-    "level": 1
+    "level": 1,
+    "id": 24105
   },
   {
     "nombre": "Cecilia",
@@ -39730,10 +39544,10 @@ export const activeUsers = [
     "correo": "cecilia_navaa@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524425731766,
-    "stripe_id": "cus_NhC9HT77ohaTIv",
-    "final_date": 1691800000,
-    "id": 24133,
-    "level": 1
+    "conekta_id": "cus_2uQhKPPWHQBskA8km",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24133
   },
   {
     "nombre": "Lidia Guadalupe",
@@ -39741,10 +39555,10 @@ export const activeUsers = [
     "correo": "lcantun0479@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529381964108,
-    "stripe_id": "cus_Nloi6nm5YPN6oi",
-    "final_date": 1694060000,
-    "id": 24149,
-    "level": 1
+    "conekta_id": "cus_2uQhKQ5ASDPppJKku",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24149
   },
   {
     "nombre": "Yadira",
@@ -39752,10 +39566,10 @@ export const activeUsers = [
     "correo": "yadirah192@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529211495314,
-    "stripe_id": "cus_MX0q77DR7LQ2o3",
-    "final_date": 1693450000,
-    "id": 24174,
-    "level": 1
+    "conekta_id": "cus_2uQhKQoyxQxUSZzFb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24174
   },
   {
     "nombre": "María Elena",
@@ -39763,10 +39577,20 @@ export const activeUsers = [
     "correo": "marynela_cuatro@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 526641748581,
-    "stripe_id": "cus_NloidbWGB4Y4zM",
-    "final_date": 1691550000,
-    "id": 24176,
-    "level": 1
+    "conekta_id": "cus_2uQhKRbxqzspZpkfT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24176
+  },
+  {
+    "nombre": "Fabiola Jared",
+    "apellido": "Espinosa Diaz",
+    "correo": "zaidus21@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 524731198015,
+    "final_date": 1724210000,
+    "level": 0,
+    "id": 24191
   },
   {
     "nombre": "Gabriela",
@@ -39774,10 +39598,9 @@ export const activeUsers = [
     "correo": "eduardosalinasvasquez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529512569133,
-    "stripe_id": "cus_MX2EfMxHgvsw98",
     "final_date": 1690780000,
-    "id": 24194,
-    "level": 1
+    "level": 1,
+    "id": 24194
   },
   {
     "nombre": "Ana Laura",
@@ -39785,10 +39608,10 @@ export const activeUsers = [
     "correo": "bonillagarciastephany@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522244755600,
-    "stripe_id": "cus_MIOJ16RjMUw5yb",
-    "final_date": 1692760000,
-    "id": 24300,
-    "level": 1
+    "conekta_id": "cus_2uQhKS3qbiLpE1g1L",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24300
   },
   {
     "nombre": "Karla",
@@ -39796,10 +39619,10 @@ export const activeUsers = [
     "correo": "alrak_asenav19@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523331716396,
-    "stripe_id": "cus_MK8RP0Prlxao5l",
-    "final_date": 1693160000,
-    "id": 24420,
-    "level": 1
+    "conekta_id": "cus_2uQhKS3GP7gsauPsk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24420
   },
   {
     "nombre": "Verónica",
@@ -39807,10 +39630,10 @@ export const activeUsers = [
     "correo": "veronicagarcianu@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523535631105,
-    "stripe_id": "cus_MvAW3iSlzfBcpo",
-    "final_date": 1693760000,
-    "id": 24465,
-    "level": 1
+    "conekta_id": "cus_2uQhKSn5uKFXDB4NZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24465
   },
   {
     "nombre": "Mirtha",
@@ -39818,10 +39641,10 @@ export const activeUsers = [
     "correo": "mirthariquene@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529983509725,
-    "stripe_id": "cus_NloiK74sSp1KSV",
-    "final_date": 1692410000,
-    "id": 24468,
-    "level": 1
+    "conekta_id": "cus_2uQhKTmG3DD4zpQf3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24468
   },
   {
     "nombre": "Hanny Livier",
@@ -39829,10 +39652,10 @@ export const activeUsers = [
     "correo": "hannylivier@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525632565682,
-    "stripe_id": "cus_Nloiyo18wW5UCX",
-    "final_date": 1692730000,
-    "id": 24516,
-    "level": 1
+    "conekta_id": "cus_2uQhKUW5ZQmid659a",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24516
   },
   {
     "nombre": "Rubi. Mariana",
@@ -39840,10 +39663,9 @@ export const activeUsers = [
     "correo": "arlethrubiohernandez462@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528671181874,
-    "stripe_id": "cus_MLzqPB2GKl1UFF",
     "final_date": 1718990000,
-    "id": 24539,
-    "level": 1
+    "level": 1,
+    "id": 24539
   },
   {
     "nombre": "Elizabeth",
@@ -39851,10 +39673,10 @@ export const activeUsers = [
     "correo": "guadalupeelizabethvidal@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523241168599,
-    "stripe_id": "cus_MYYfSLukAyyPPP",
-    "final_date": 1693810000,
-    "id": 24571,
-    "level": 1
+    "conekta_id": "cus_2uQhKVEu5cLNFMjeH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24571
   },
   {
     "nombre": "Haronid",
@@ -39862,10 +39684,10 @@ export const activeUsers = [
     "correo": "ababyalon37@icloud.com",
     "pais": "Puerto Rico",
     "whatsapp": 17873290328,
-    "stripe_id": "cus_MN6OstcxQFJ3tT",
-    "final_date": 1693850000,
-    "id": 24580,
-    "level": 1
+    "conekta_id": "cus_2uQhKVjMz7W7mTP8X",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24580
   },
   {
     "nombre": "Margarita",
@@ -39873,10 +39695,10 @@ export const activeUsers = [
     "correo": "vertizlopezmargarita81@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616638789,
-    "stripe_id": "cus_MOh1Fsl4ohx8Dc",
-    "final_date": 1691540000,
-    "id": 24648,
-    "level": 1
+    "conekta_id": "cus_2uQhKVjwCiA4MMzUa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24648
   },
   {
     "nombre": "Marcela",
@@ -39884,10 +39706,10 @@ export const activeUsers = [
     "correo": "marce2411@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525619260168,
-    "stripe_id": "cus_MQDbZJ3X9G3AHl",
-    "final_date": 1691890000,
-    "id": 24686,
-    "level": 1
+    "conekta_id": "cus_2uQhKWUkiuihydey6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24686
   },
   {
     "nombre": "Leonardo",
@@ -39895,10 +39717,10 @@ export const activeUsers = [
     "correo": "leo@gonvar.io",
     "pais": "Mexico",
     "whatsapp": 525528992739,
-    "stripe_id": "cus_MT3VvJXVbPWNfD",
-    "final_date": 1693780000,
-    "id": 24749,
-    "level": 1
+    "conekta_id": "cus_2uQhKXDaF7HMepbqG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24749
   },
   {
     "nombre": "Elizabeth",
@@ -39906,10 +39728,10 @@ export const activeUsers = [
     "correo": "elizabeth_ha47@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524521665519,
-    "stripe_id": "cus_MXCcohlIiauPhk",
-    "final_date": 1693580000,
-    "id": 24754,
-    "level": 1
+    "conekta_id": "cus_2uQhKXwpYiC4b4hpz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24754
   },
   {
     "nombre": "EMILY MARISOL",
@@ -39917,10 +39739,10 @@ export const activeUsers = [
     "correo": "emily.qo05@outlook.com",
     "pais": "Mexico",
     "whatsapp": 522481664916,
-    "stripe_id": "cus_MTCNI0QnaZ0Z5F",
-    "final_date": 1693460000,
-    "id": 24760,
-    "level": 1
+    "conekta_id": "cus_2uQhKYvzgc9cKYHhD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24760
   },
   {
     "nombre": "Cris",
@@ -39928,10 +39750,9 @@ export const activeUsers = [
     "correo": "crisvazquezngg24@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522283404235,
-    "stripe_id": "cus_MX0Ox3KtQroes9",
     "final_date": 1677560000,
-    "id": 24870,
-    "level": 1
+    "level": 1,
+    "id": 24870
   },
   {
     "nombre": "Magaly",
@@ -39939,10 +39760,10 @@ export const activeUsers = [
     "correo": "magabrit@msn.com",
     "pais": "Mexico",
     "whatsapp": 525513092710,
-    "stripe_id": "cus_MX0FK0ms7mtWAM",
-    "final_date": 1693450000,
-    "id": 24904,
-    "level": 1
+    "conekta_id": "cus_2uQhKZfpCoiFwoxBs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24904
   },
   {
     "nombre": "Alma Delia",
@@ -39950,10 +39771,9 @@ export const activeUsers = [
     "correo": "almadcardoso@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525534485103,
-    "stripe_id": "cus_MX0GB6iHtyt8qr",
     "final_date": 1672460000,
-    "id": 24909,
-    "level": 1
+    "level": 1,
+    "id": 24909
   },
   {
     "nombre": "Carolina",
@@ -39961,10 +39781,10 @@ export const activeUsers = [
     "correo": "elizabeth.gogodoy@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523324856816,
-    "stripe_id": "cus_MX0GreK4t9NZxK",
-    "final_date": 1693450000,
-    "id": 24991,
-    "level": 1
+    "conekta_id": "cus_2uQhKaLs1zqhnLhMK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 24991
   },
   {
     "nombre": "Gayeta",
@@ -39972,10 +39792,9 @@ export const activeUsers = [
     "correo": "lilys_kaoru@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525620281861,
-    "stripe_id": "cus_MX0Jb3L5UtvKF2",
     "final_date": 0,
-    "id": 24997,
-    "level": 1
+    "level": 1,
+    "id": 24997
   },
   {
     "nombre": "Aby",
@@ -39983,10 +39802,10 @@ export const activeUsers = [
     "correo": "alondra1926@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 528116826488,
-    "stripe_id": "cus_MX0N9rOO5tBc0j",
-    "final_date": 1693450000,
-    "id": 25019,
-    "level": 1
+    "conekta_id": "cus_2uQhKaufr76bnAvJ4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25019
   },
   {
     "nombre": "Jaquelin",
@@ -39994,10 +39813,9 @@ export const activeUsers = [
     "correo": "jackybeltran25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523325369324,
-    "stripe_id": "cus_MX0Hq47AXcpXQ1",
     "final_date": 1690770000,
-    "id": 25035,
-    "level": 1
+    "level": 1,
+    "id": 25035
   },
   {
     "nombre": "Oralia",
@@ -40005,10 +39823,10 @@ export const activeUsers = [
     "correo": "oraliaflores91@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529532104108,
-    "stripe_id": "cus_MX0IW9tq3nRT84",
-    "final_date": 1693450000,
-    "id": 25060,
-    "level": 1
+    "conekta_id": "cus_2uQhKbtGmQQCpcwfs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25060
   },
   {
     "nombre": "Abigail",
@@ -40016,10 +39834,9 @@ export const activeUsers = [
     "correo": "abbi.gciia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528119638812,
-    "stripe_id": "cus_MX0UhwNR8wEYoZ",
     "final_date": 1690400000,
-    "id": 25098,
-    "level": 1
+    "level": 1,
+    "id": 25098
   },
   {
     "nombre": "Claudia",
@@ -40027,10 +39844,10 @@ export const activeUsers = [
     "correo": "claudia.garcia.rdz5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528116397933,
-    "stripe_id": "cus_MX0IjcLdEvypu9",
-    "final_date": 1693450000,
-    "id": 25101,
-    "level": 1
+    "conekta_id": "cus_2uQhKcZKabXef9gqF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25101
   },
   {
     "nombre": "Karina",
@@ -40038,10 +39855,9 @@ export const activeUsers = [
     "correo": "karilujan21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528110611301,
-    "stripe_id": "cus_MX0Jj8vJMaqWoD",
     "final_date": 1690770000,
-    "id": 25117,
-    "level": 1
+    "level": 1,
+    "id": 25117
   },
   {
     "nombre": "Gisela",
@@ -40049,10 +39865,9 @@ export const activeUsers = [
     "correo": "yisvn@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527351748685,
-    "stripe_id": "cus_MX1VT5PmpDyqOp",
     "final_date": 1682830000,
-    "id": 25141,
-    "level": 1
+    "level": 1,
+    "id": 25141
   },
   {
     "nombre": "Yannis",
@@ -40060,10 +39875,10 @@ export const activeUsers = [
     "correo": "yaninevillarreal@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529982492158,
-    "stripe_id": "cus_MX0OtcUrNnWBSC",
-    "final_date": 1693450000,
-    "id": 25147,
-    "level": 1
+    "conekta_id": "cus_2uQhKdrNiJhFbE1nB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25147
   },
   {
     "nombre": "Blanca estela",
@@ -40071,10 +39886,9 @@ export const activeUsers = [
     "correo": "blanquitha_08@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529934362102,
-    "stripe_id": "cus_MX0KZmI0acYCOq",
     "final_date": 1677550000,
-    "id": 25158,
-    "level": 1
+    "level": 1,
+    "id": 25158
   },
   {
     "nombre": "Cindy Abigail",
@@ -40082,10 +39896,10 @@ export const activeUsers = [
     "correo": "cindyabigailchavezlara1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522831033082,
-    "stripe_id": "cus_MX0KZfZXgvT7h8",
-    "final_date": 1693450000,
-    "id": 25175,
-    "level": 1
+    "conekta_id": "cus_2uQhKeqYrCeoKhbf1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25175
   },
   {
     "nombre": "Dania",
@@ -40093,10 +39907,10 @@ export const activeUsers = [
     "correo": "dan.bu6@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523141793164,
-    "stripe_id": "cus_MX7ACxIwPxOdw6",
-    "final_date": 1693490000,
-    "id": 25208,
-    "level": 1
+    "conekta_id": "cus_2uQhKebCEWFuGhM27",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25208
   },
   {
     "nombre": "Gefsi",
@@ -40104,10 +39918,9 @@ export const activeUsers = [
     "correo": "rgefsi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526611104667,
-    "stripe_id": "cus_MX0LdQParTyCYY",
     "final_date": 1690770000,
-    "id": 25210,
-    "level": 1
+    "level": 1,
+    "id": 25210
   },
   {
     "nombre": "Mariana de la Luz",
@@ -40115,10 +39928,9 @@ export const activeUsers = [
     "correo": "mariana.86.jimenez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525619380307,
-    "stripe_id": "cus_MX0P9tNsslAhod",
     "final_date": 1690770000,
-    "id": 25267,
-    "level": 1
+    "level": 1,
+    "id": 25267
   },
   {
     "nombre": "Koky",
@@ -40126,10 +39938,9 @@ export const activeUsers = [
     "correo": "coqui_013@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529994745240,
-    "stripe_id": "cus_MX1LAaaaOlHt02",
     "final_date": 1682870000,
-    "id": 25306,
-    "level": 1
+    "level": 1,
+    "id": 25306
   },
   {
     "nombre": "Miranda",
@@ -40137,10 +39948,9 @@ export const activeUsers = [
     "correo": "alemy172307@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525616913754,
-    "stripe_id": "cus_MX0UcFeHHTI5j7",
     "final_date": 1682830000,
-    "id": 25318,
-    "level": 1
+    "level": 1,
+    "id": 25318
   },
   {
     "nombre": "Karen Paola",
@@ -40148,10 +39958,9 @@ export const activeUsers = [
     "correo": "nerak_pozas@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524421265155,
-    "stripe_id": "cus_MX0NWW2kb0g7Xm",
     "final_date": 1682830000,
-    "id": 25325,
-    "level": 1
+    "level": 1,
+    "id": 25325
   },
   {
     "nombre": "Hidai",
@@ -40159,10 +39968,10 @@ export const activeUsers = [
     "correo": "oxig3no-4dih@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522381624443,
-    "stripe_id": "cus_MX0ONSSHZH4HsP",
-    "final_date": 1693450000,
-    "id": 25358,
-    "level": 1
+    "conekta_id": "cus_2uQhKgpE1hbnnLEEk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25358
   },
   {
     "nombre": "Luz arely",
@@ -40170,10 +39979,9 @@ export const activeUsers = [
     "correo": "luzarelymorenobeltran@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526673823544,
-    "stripe_id": "cus_MX0PlTqmttgRjS",
     "final_date": 1690770000,
-    "id": 25435,
-    "level": 1
+    "level": 1,
+    "id": 25435
   },
   {
     "nombre": "Mitzy",
@@ -40181,10 +39989,9 @@ export const activeUsers = [
     "correo": "mitzycae@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526675479849,
-    "stripe_id": "cus_MX0P00zKziwM3I",
     "final_date": 1680230000,
-    "id": 25444,
-    "level": 1
+    "level": 1,
+    "id": 25444
   },
   {
     "nombre": "Mireya Yazmin",
@@ -40192,10 +39999,10 @@ export const activeUsers = [
     "correo": "brunitoojosbonitos@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525528286127,
-    "stripe_id": "cus_MX0P1rsdeXJWJI",
-    "final_date": 1693160000,
-    "id": 25460,
-    "level": 1
+    "conekta_id": "cus_2uQhKiHHqW59JAmJd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25460
   },
   {
     "nombre": "Karla Yurelli",
@@ -40203,10 +40010,9 @@ export const activeUsers = [
     "correo": "karla.licpedagogia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527721504687,
-    "stripe_id": "cus_MX0PHo8FsLnq2L",
     "final_date": 1690590000,
-    "id": 25541,
-    "level": 1
+    "level": 1,
+    "id": 25541
   },
   {
     "nombre": "Lizbeth",
@@ -40214,10 +40020,10 @@ export const activeUsers = [
     "correo": "lpereyra09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564207699,
-    "stripe_id": "cus_MX0QLCEzArdO57",
-    "final_date": 1693450000,
-    "id": 25627,
-    "level": 1
+    "conekta_id": "cus_2uQhKjKdLnPPaJgTb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25627
   },
   {
     "nombre": "Areli",
@@ -40225,10 +40031,10 @@ export const activeUsers = [
     "correo": "arelitamendoza1994@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525536743974,
-    "stripe_id": "cus_MX0Qb4jT2GwWl1",
-    "final_date": 1693450000,
-    "id": 25639,
-    "level": 1
+    "conekta_id": "cus_2uQhKjwWnbA8z1snX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25639
   },
   {
     "nombre": "Elia",
@@ -40236,10 +40042,10 @@ export const activeUsers = [
     "correo": "eliamontalvotrejo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528126941902,
-    "stripe_id": "cus_MX0QPzrYFLWiOq",
-    "final_date": 1692280000,
-    "id": 25689,
-    "level": 1
+    "conekta_id": "cus_2uQhKk4Sryx3Eiizv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25689
   },
   {
     "nombre": "Myrid",
@@ -40247,10 +40053,10 @@ export const activeUsers = [
     "correo": "secodm@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 525536708234,
-    "stripe_id": "cus_MX0Ri88nHZxZS6",
-    "final_date": 1693450000,
-    "id": 25719,
-    "level": 1
+    "conekta_id": "cus_2uQhKkoGPBWgpr1TA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25719
   },
   {
     "nombre": "Isela",
@@ -40258,10 +40064,10 @@ export const activeUsers = [
     "correo": "dvnbelleza40@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522431219707,
-    "stripe_id": "cus_MX0cCfr3CzaZeG",
-    "final_date": 1693540000,
-    "id": 25736,
-    "level": 1
+    "conekta_id": "cus_2uQhKmR9pzHSEZCmi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25736
   },
   {
     "nombre": "Enriqueta",
@@ -40269,20 +40075,21 @@ export const activeUsers = [
     "correo": "queta777loge@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524691284175,
-    "stripe_id": "cus_MX0SmFX0Mxzz5w",
-    "final_date": 1693450000,
-    "id": 25762,
-    "level": 1
+    "conekta_id": "cus_2uQhKn9yMBr5rpsGE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25762
   },
   {
     "nombre": "Ericka",
     "apellido": "Martinez",
     "correo": "martinezericka38@gmail.com",
-    "pais": "Mexico",
-    "stripe_id": "cus_MX0RIGrT04zUEW",
-    "final_date": 1693450000,
-    "id": 25781,
-    "level": 1
+    "pais": "United States of America",
+    "whatsapp": 14158505425,
+    "conekta_id": "cus_2uQhKmyPSVtPVniyd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25781
   },
   {
     "nombre": "Carolina",
@@ -40290,10 +40097,9 @@ export const activeUsers = [
     "correo": "carolrosy.22@gmail.com",
     "pais": "El Salvador",
     "whatsapp": 50370279717,
-    "stripe_id": "cus_MX0R8lMKNkImBJ",
     "final_date": 1690770000,
-    "id": 25860,
-    "level": 1
+    "level": 1,
+    "id": 25860
   },
   {
     "nombre": "Cynthia",
@@ -40301,10 +40107,10 @@ export const activeUsers = [
     "correo": "cunurivel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510084593,
-    "stripe_id": "cus_MX0RclCHyDKc7f",
-    "final_date": 1693450000,
-    "id": 25884,
-    "level": 1
+    "conekta_id": "cus_2uQhKohP6bQapwZa6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25884
   },
   {
     "nombre": "Dalia G.",
@@ -40312,10 +40118,10 @@ export const activeUsers = [
     "correo": "florecillabella@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525521793826,
-    "stripe_id": "cus_MX0SMs8rdFsXD2",
-    "final_date": 1693450000,
-    "id": 25922,
-    "level": 1
+    "conekta_id": "cus_2uQhKokYTymHKvfRB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 25922
   },
   {
     "nombre": "Karlita",
@@ -40323,10 +40129,9 @@ export const activeUsers = [
     "correo": "karla.9711.kc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525580832648,
-    "stripe_id": "cus_NlonqYYldtOzeD",
     "final_date": 1694610000,
-    "id": 25952,
-    "level": 1
+    "level": 1,
+    "id": 25952
   },
   {
     "nombre": "Deni",
@@ -40334,10 +40139,9 @@ export const activeUsers = [
     "correo": "deni_monley@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526462886430,
-    "stripe_id": "cus_MX0TLHi9hZftLv",
     "final_date": 1682830000,
-    "id": 25967,
-    "level": 1
+    "level": 1,
+    "id": 25967
   },
   {
     "nombre": "Guadalupe",
@@ -40345,10 +40149,9 @@ export const activeUsers = [
     "correo": "lupita_lak-pa@hotmail.com",
     "pais": "Argentina",
     "whatsapp": 543883100344,
-    "stripe_id": "cus_MX0dqf81S9E5ci",
     "final_date": 1685500000,
-    "id": 26023,
-    "level": 1
+    "level": 1,
+    "id": 26023
   },
   {
     "nombre": "Cristell Nayeli",
@@ -40356,10 +40159,9 @@ export const activeUsers = [
     "correo": "cnulloa8816@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513107310,
-    "stripe_id": "cus_MX0SOX0CKThhLZ",
     "final_date": 1680230000,
-    "id": 26033,
-    "level": 1
+    "level": 1,
+    "id": 26033
   },
   {
     "nombre": "Gabyy",
@@ -40367,10 +40169,9 @@ export const activeUsers = [
     "correo": "babys_cld@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524931068080,
-    "stripe_id": "cus_Mua9X9FH0TlgF0",
     "final_date": 1691030000,
-    "id": 26055,
-    "level": 1
+    "level": 1,
+    "id": 26055
   },
   {
     "nombre": "Ana",
@@ -40378,10 +40179,10 @@ export const activeUsers = [
     "correo": "015574386927a@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525574386927,
-    "stripe_id": "cus_MX1WuezDvJpnt4",
-    "final_date": 1691990000,
-    "id": 26061,
-    "level": 1
+    "conekta_id": "cus_2uQhKqfV3VhdekJQo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26061
   },
   {
     "nombre": "BoosterMaria de los Angeles",
@@ -40389,10 +40190,10 @@ export const activeUsers = [
     "correo": "annvelaz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525545487860,
-    "stripe_id": "cus_MX0Te7bi1gr6bx",
-    "final_date": 1693450000,
-    "id": 26066,
-    "level": 1
+    "conekta_id": "cus_2uQhKqr4xBfKv1diY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26066
   },
   {
     "nombre": "Karla",
@@ -40400,10 +40201,9 @@ export const activeUsers = [
     "correo": "ernestopootpoog@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529932867836,
-    "stripe_id": "cus_MX0WfnzUakdQfZ",
     "final_date": 1677560000,
-    "id": 26081,
-    "level": 1
+    "level": 1,
+    "id": 26081
   },
   {
     "nombre": "Paola Elizabeth",
@@ -40411,10 +40211,9 @@ export const activeUsers = [
     "correo": "prinsess.nahomi08@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526462082561,
-    "stripe_id": "cus_MX0TYsrALqcwRN",
     "final_date": 1669780000,
-    "id": 26086,
-    "level": 1
+    "level": 1,
+    "id": 26086
   },
   {
     "nombre": "Gabriela n",
@@ -40422,10 +40221,9 @@ export const activeUsers = [
     "correo": "gabytips01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529992391267,
-    "stripe_id": "cus_MX0TjCI4qKynjM",
     "final_date": 0,
-    "id": 26115,
-    "level": 1
+    "level": 1,
+    "id": 26115
   },
   {
     "nombre": "Alma",
@@ -40433,10 +40231,10 @@ export const activeUsers = [
     "correo": "alma.santoyo@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526141922356,
-    "stripe_id": "cus_MX0UPUhafOAhJG",
-    "final_date": 1693450000,
-    "id": 26211,
-    "level": 1
+    "conekta_id": "cus_2uQhKs9hJVUsVCEnk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26211
   },
   {
     "nombre": "Brenda",
@@ -40444,10 +40242,10 @@ export const activeUsers = [
     "correo": "fernandezbrendita92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525567517413,
-    "stripe_id": "cus_MX0Uel2eqKixbm",
-    "final_date": 1693450000,
-    "id": 26266,
-    "level": 1
+    "conekta_id": "cus_2uQhKt8JDnnUaZYZN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26266
   },
   {
     "nombre": "Nuria",
@@ -40455,10 +40253,10 @@ export const activeUsers = [
     "correo": "nucamo8@gmail.com",
     "pais": "España",
     "whatsapp": 34642309200,
-    "stripe_id": "cus_MX0WTeW6KuDNe5",
-    "final_date": 1693450000,
-    "id": 26270,
-    "level": 1
+    "conekta_id": "cus_2uQhKsswc6PaRgPhR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26270
   },
   {
     "nombre": "Mirelle Abigail",
@@ -40466,10 +40264,10 @@ export const activeUsers = [
     "correo": "ellerimpinacho@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529515664740,
-    "stripe_id": "cus_MX0UYFZ2EDjFFt",
-    "final_date": 1693450000,
-    "id": 26288,
-    "level": 1
+    "conekta_id": "cus_2uQhKtdLLtcAner8L",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26288
   },
   {
     "nombre": "Rocio Abigail",
@@ -40477,10 +40275,10 @@ export const activeUsers = [
     "correo": "rapl240503@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522225193808,
-    "stripe_id": "cus_MX0Uh3CgRaioug",
-    "final_date": 1693350000,
-    "id": 26304,
-    "level": 1
+    "conekta_id": "cus_2uQhKuf6daGUNEMSj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26304
   },
   {
     "nombre": "Luz elena",
@@ -40488,10 +40286,10 @@ export const activeUsers = [
     "correo": "elena.alvarez.2201@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566302939,
-    "stripe_id": "cus_MX0UAfOhq0kGDg",
-    "final_date": 1693450000,
-    "id": 26311,
-    "level": 1
+    "conekta_id": "cus_2uQhKuMaeVWsgDigp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26311
   },
   {
     "nombre": "Angelica",
@@ -40499,10 +40297,10 @@ export const activeUsers = [
     "correo": "gelyparamo84@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15097920437,
-    "stripe_id": "cus_MYOXwt568uviNs",
-    "final_date": 1693770000,
-    "id": 26331,
-    "level": 1
+    "conekta_id": "cus_2uQhKv6yPHjU3CB7q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26331
   },
   {
     "nombre": "Deydri viviana",
@@ -40510,10 +40308,9 @@ export const activeUsers = [
     "correo": "viviardez92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529933970766,
-    "stripe_id": "cus_MX0UyQXGPXFUVg",
     "final_date": 1690770000,
-    "id": 26332,
-    "level": 1
+    "level": 1,
+    "id": 26332
   },
   {
     "nombre": "María fernanda",
@@ -40521,10 +40318,10 @@ export const activeUsers = [
     "correo": "ferhuertaz2700@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528681595936,
-    "stripe_id": "cus_MX0UpQH7YDL1Zd",
-    "final_date": 1693450000,
-    "id": 26344,
-    "level": 1
+    "conekta_id": "cus_2uQhKvqnuVJ7e6rGr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26344
   },
   {
     "nombre": "Nadia",
@@ -40532,10 +40329,9 @@ export const activeUsers = [
     "correo": "nsaedj@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529931660637,
-    "stripe_id": "cus_MX0Vuwc4RgElUA",
     "final_date": 1685500000,
-    "id": 26360,
-    "level": 1
+    "level": 1,
+    "id": 26360
   },
   {
     "nombre": "Daniela",
@@ -40543,10 +40339,10 @@ export const activeUsers = [
     "correo": "danisanz7@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529371537160,
-    "stripe_id": "cus_MX0VvJofy3ogJ2",
-    "final_date": 1693450000,
-    "id": 26364,
-    "level": 1
+    "conekta_id": "cus_2uQhKwacRgrmHjW74",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26364
   },
   {
     "nombre": "Zulma",
@@ -40554,10 +40350,9 @@ export const activeUsers = [
     "correo": "bercis-06@outlook.com",
     "pais": "Mexico",
     "whatsapp": 523221992599,
-    "stripe_id": "cus_MX0XRFy6W0tAyy",
     "final_date": 1690780000,
-    "id": 26376,
-    "level": 1
+    "level": 1,
+    "id": 26376
   },
   {
     "nombre": "Johara",
@@ -40565,10 +40360,10 @@ export const activeUsers = [
     "correo": "joharamay8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529631790942,
-    "stripe_id": "cus_MX0V5DE4YFcMLi",
-    "final_date": 1693620000,
-    "id": 26378,
-    "level": 1
+    "conekta_id": "cus_2uQhKy4FU5z4YGq6B",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26378
   },
   {
     "nombre": "Elizabeth",
@@ -40576,10 +40371,10 @@ export const activeUsers = [
     "correo": "liza.040590@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528442129204,
-    "stripe_id": "cus_MX0Vy5RkK5mPvW",
-    "final_date": 1693450000,
-    "id": 26394,
-    "level": 1
+    "conekta_id": "cus_2uQhKz2rPPHfdtcty",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26394
   },
   {
     "nombre": "Mery",
@@ -40587,10 +40382,9 @@ export const activeUsers = [
     "correo": "marysagastume03@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50247223948,
-    "stripe_id": "cus_MX0W3BvI3rlFxU",
     "final_date": 1680230000,
-    "id": 26397,
-    "level": 1
+    "level": 1,
+    "id": 26397
   },
   {
     "nombre": "Iris",
@@ -40598,10 +40392,10 @@ export const activeUsers = [
     "correo": "irispacheco018@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19394154868,
-    "stripe_id": "cus_MX0VtL0Mc7CTHs",
-    "final_date": 1693450000,
-    "id": 26417,
-    "level": 1
+    "conekta_id": "cus_2uQhKzXtWV7MgzYtN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26417
   },
   {
     "nombre": "Sandra Iveth",
@@ -40609,10 +40403,9 @@ export const activeUsers = [
     "correo": "ledesmasand@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527295490692,
-    "stripe_id": "cus_MX0Vcw5tBPTpbp",
     "final_date": 1677560000,
-    "id": 26420,
-    "level": 1
+    "level": 1,
+    "id": 26420
   },
   {
     "nombre": "Cecilia",
@@ -40620,10 +40413,10 @@ export const activeUsers = [
     "correo": "joe.martinez870822@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528673416201,
-    "stripe_id": "cus_MX0VMBKJ482chH",
-    "final_date": 1693330000,
-    "id": 26434,
-    "level": 1
+    "conekta_id": "cus_2uQhL1Siimym7gpAG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26434
   },
   {
     "nombre": "Karina",
@@ -40631,10 +40424,9 @@ export const activeUsers = [
     "correo": "karinagalvan78@hotmail.com",
     "pais": "Argentina",
     "whatsapp": 542235556358,
-    "stripe_id": "cus_MX1PqDKYaFAOqV",
     "final_date": 1690780000,
-    "id": 26465,
-    "level": 1
+    "level": 1,
+    "id": 26465
   },
   {
     "nombre": "Yesenia",
@@ -40642,10 +40434,9 @@ export const activeUsers = [
     "correo": "yom_87@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525531367302,
-    "stripe_id": "cus_MX0Y5OtcZgPluT",
     "final_date": 1689980000,
-    "id": 26470,
-    "level": 1
+    "level": 1,
+    "id": 26470
   },
   {
     "nombre": "Gabriela",
@@ -40653,10 +40444,10 @@ export const activeUsers = [
     "correo": "ruth_gabriela74@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525618394330,
-    "stripe_id": "cus_MX17M5qTilG1u0",
-    "final_date": 1693460000,
-    "id": 26479,
-    "level": 1
+    "conekta_id": "cus_2uQhL33HqZtxg17Uo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26479
   },
   {
     "nombre": "Beth",
@@ -40664,10 +40455,10 @@ export const activeUsers = [
     "correo": "elizabeth.perez19@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522722813983,
-    "stripe_id": "cus_NMGNhMVTlyZIeW",
-    "final_date": 1692060000,
-    "id": 26519,
-    "level": 1
+    "conekta_id": "cus_2uQhL2z8UBYG5oWYH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26519
   },
   {
     "nombre": "Verenice viviana",
@@ -40675,10 +40466,9 @@ export const activeUsers = [
     "correo": "viviocana311@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529371310791,
-    "stripe_id": "cus_MX0W80iiNKuhvO",
     "final_date": 1690770000,
-    "id": 26527,
-    "level": 1
+    "level": 1,
+    "id": 26527
   },
   {
     "nombre": "Miriam",
@@ -40686,10 +40476,9 @@ export const activeUsers = [
     "correo": "nena_noemi_miriam@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522212625055,
-    "stripe_id": "cus_MX1kdWLpiCOAol",
     "final_date": 1677560000,
-    "id": 26568,
-    "level": 1
+    "level": 1,
+    "id": 26568
   },
   {
     "nombre": "Oscar",
@@ -40697,10 +40486,9 @@ export const activeUsers = [
     "correo": "marianasolorzano12009@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529631097093,
-    "stripe_id": "cus_MX1EwJRbNkMrmN",
     "final_date": 1690780000,
-    "id": 26635,
-    "level": 1
+    "level": 1,
+    "id": 26635
   },
   {
     "nombre": "Ana Laura",
@@ -40708,10 +40496,10 @@ export const activeUsers = [
     "correo": "analaur@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524422007805,
-    "stripe_id": "cus_MX0X3A53iAjI07",
-    "final_date": 1693450000,
-    "id": 26637,
-    "level": 1
+    "conekta_id": "cus_2uQhL4Dz7UvbsFCBU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26637
   },
   {
     "nombre": "Maritza",
@@ -40719,10 +40507,9 @@ export const activeUsers = [
     "correo": "maritza_patricio@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527411253475,
-    "stripe_id": "cus_MX0cH12NWTeO7C",
     "final_date": 1682830000,
-    "id": 26646,
-    "level": 1
+    "level": 1,
+    "id": 26646
   },
   {
     "nombre": "Marcelina",
@@ -40730,10 +40517,10 @@ export const activeUsers = [
     "correo": "pereamarce31@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522283083262,
-    "stripe_id": "cus_MX0YNHBVxMZe3p",
-    "final_date": 1693450000,
-    "id": 26697,
-    "level": 1
+    "conekta_id": "cus_2uQhL58pKmo1F38dj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26697
   },
   {
     "nombre": "Norma Angélica",
@@ -40741,10 +40528,10 @@ export const activeUsers = [
     "correo": "normatoas@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525513452964,
-    "stripe_id": "cus_MX0YZztLWkoUrk",
-    "final_date": 1693450000,
-    "id": 26713,
-    "level": 1
+    "conekta_id": "cus_2uQhL5hd9t3u9LpC8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26713
   },
   {
     "nombre": "Katiuska",
@@ -40752,10 +40539,9 @@ export const activeUsers = [
     "correo": "katty-eliza1992@hotmail.com",
     "pais": "Ecuador",
     "whatsapp": 593996449354,
-    "stripe_id": "cus_MX0ZGXstVajZhG",
     "final_date": 1690780000,
-    "id": 26761,
-    "level": 1
+    "level": 1,
+    "id": 26761
   },
   {
     "nombre": "Maria Guadalupe",
@@ -40763,10 +40549,9 @@ export const activeUsers = [
     "correo": "mariamarquez.mm39@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524621011369,
-    "stripe_id": "cus_MX0ZhSTjEEjeT9",
     "final_date": 1690780000,
-    "id": 26769,
-    "level": 1
+    "level": 1,
+    "id": 26769
   },
   {
     "nombre": "Cristina",
@@ -40774,10 +40559,10 @@ export const activeUsers = [
     "correo": "cris89mtzc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525529004815,
-    "stripe_id": "cus_MX0ZMi0meRWv0p",
-    "final_date": 1693450000,
-    "id": 26802,
-    "level": 1
+    "conekta_id": "cus_2uQhL6RsTUxc4Gg3X",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26802
   },
   {
     "nombre": "Adela",
@@ -40785,10 +40570,10 @@ export const activeUsers = [
     "correo": "adela36951828@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523326691588,
-    "stripe_id": "cus_MX0dt2QS9EpAh6",
-    "final_date": 1693450000,
-    "id": 26819,
-    "level": 1
+    "conekta_id": "cus_2uQhL7BGCHBCKRXM7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26819
   },
   {
     "nombre": "Maricela",
@@ -40796,10 +40581,10 @@ export const activeUsers = [
     "correo": "maricela020478@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528186902236,
-    "stripe_id": "cus_MX0avEF3OWtBnV",
-    "final_date": 1693450000,
-    "id": 26841,
-    "level": 1
+    "conekta_id": "cus_2uQhL7uWVt5uMVEVt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26841
   },
   {
     "nombre": "Yasmin",
@@ -40807,10 +40592,10 @@ export const activeUsers = [
     "correo": "gyasmin464@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525619174783,
-    "stripe_id": "cus_MX0aHcv4LyHYTp",
-    "final_date": 1693450000,
-    "id": 26846,
-    "level": 1
+    "conekta_id": "cus_2uQhL8tgdn3T5xpVj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26846
   },
   {
     "nombre": "Mandy",
@@ -40818,10 +40603,9 @@ export const activeUsers = [
     "correo": "sierramandy081@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528180547119,
-    "stripe_id": "cus_MX0cotrjaU5A9b",
     "final_date": 1690780000,
-    "id": 26854,
-    "level": 1
+    "level": 1,
+    "id": 26854
   },
   {
     "nombre": "Guadalupe",
@@ -40829,10 +40613,9 @@ export const activeUsers = [
     "correo": "guadalupepercastegui@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 525551634529,
-    "stripe_id": "cus_MX0bFc21fAKrki",
     "final_date": 1680230000,
-    "id": 26907,
-    "level": 1
+    "level": 1,
+    "id": 26907
   },
   {
     "nombre": "Yessica",
@@ -40840,10 +40623,9 @@ export const activeUsers = [
     "correo": "ortizyessica354@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528727719321,
-    "stripe_id": "cus_MX0bt4rWtXujtN",
     "final_date": 1682830000,
-    "id": 26935,
-    "level": 1
+    "level": 1,
+    "id": 26935
   },
   {
     "nombre": "Erika",
@@ -40851,10 +40633,10 @@ export const activeUsers = [
     "correo": "kikalizama@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529981443415,
-    "stripe_id": "cus_MX0czyLCuCbzNS",
-    "final_date": 1693450000,
-    "id": 26943,
-    "level": 1
+    "conekta_id": "cus_2uQhL9gfXMxoJS5ui",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26943
   },
   {
     "nombre": "Lucia",
@@ -40862,10 +40644,10 @@ export const activeUsers = [
     "correo": "luciaperezesquivel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525573861236,
-    "stripe_id": "cus_MX0cyHa8OIrKm9",
-    "final_date": 1691730000,
-    "id": 26944,
-    "level": 1
+    "conekta_id": "cus_2uQhLANKgBAkLW9VB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26944
   },
   {
     "nombre": "vanessa",
@@ -40873,10 +40655,10 @@ export const activeUsers = [
     "correo": "vanessamadeleyndukes@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526651213804,
-    "stripe_id": "cus_MX0dApVGJyv2G9",
-    "final_date": 1693600000,
-    "id": 26971,
-    "level": 1
+    "conekta_id": "cus_2uQhLAsMoGzSYbSx8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26971
   },
   {
     "nombre": "Delser Marilyn",
@@ -40884,10 +40666,10 @@ export const activeUsers = [
     "correo": "ioselyne0828@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529612763071,
-    "stripe_id": "cus_MX0cBzieOW43Ly",
-    "final_date": 1693450000,
-    "id": 26975,
-    "level": 1
+    "conekta_id": "cus_2uQhLBnC1ZrqsU752",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26975
   },
   {
     "nombre": "Yajaira oyuki",
@@ -40895,10 +40677,9 @@ export const activeUsers = [
     "correo": "yajairaoyukit@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522281268323,
-    "stripe_id": "cus_MX0cwvx7NVSvEQ",
     "final_date": 1690780000,
-    "id": 26978,
-    "level": 1
+    "level": 1,
+    "id": 26978
   },
   {
     "nombre": "Alma Beatriz",
@@ -40906,10 +40687,10 @@ export const activeUsers = [
     "correo": "beatrizrem123@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527712428756,
-    "stripe_id": "cus_MX0cI7P0pXmh8n",
-    "final_date": 1693450000,
-    "id": 26982,
-    "level": 1
+    "conekta_id": "cus_2uQhLCanEmrhDK8y1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26982
   },
   {
     "nombre": "Rosy",
@@ -40917,10 +40698,10 @@ export const activeUsers = [
     "correo": "jjrosy503@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525554518700,
-    "stripe_id": "cus_MX0dxhBnUxpor7",
-    "final_date": 1693450000,
-    "id": 26993,
-    "level": 1
+    "conekta_id": "cus_2uQhLD5F9H2SgheTs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 26993
   },
   {
     "nombre": "Lizbeth",
@@ -40928,10 +40709,9 @@ export const activeUsers = [
     "correo": "zuzu06oct@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525578981649,
-    "stripe_id": "cus_MX0dHdRtejoZcu",
     "final_date": 1680230000,
-    "id": 27014,
-    "level": 1
+    "level": 1,
+    "id": 27014
   },
   {
     "nombre": "Mónica Deyanira",
@@ -40939,10 +40719,10 @@ export const activeUsers = [
     "correo": "monystarh@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523311120637,
-    "stripe_id": "cus_MX0e6YzTaYUlhh",
-    "final_date": 1693450000,
-    "id": 27038,
-    "level": 1
+    "conekta_id": "cus_2uQhLDp4fUb6QrDAn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27038
   },
   {
     "nombre": "Claudia Lorena",
@@ -40950,10 +40730,10 @@ export const activeUsers = [
     "correo": "claudialec1804@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582951348,
-    "stripe_id": "cus_MX0e078c1Mcf5A",
-    "final_date": 1693450000,
-    "id": 27064,
-    "level": 1
+    "conekta_id": "cus_2uQhLDpdt5F2wrVoD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27064
   },
   {
     "nombre": "Erica",
@@ -40961,10 +40741,9 @@ export const activeUsers = [
     "correo": "kuqui@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525620856623,
-    "stripe_id": "cus_MX0f67ku9nK1PZ",
     "final_date": 1682830000,
-    "id": 27072,
-    "level": 1
+    "level": 1,
+    "id": 27072
   },
   {
     "nombre": "Puchi",
@@ -40972,10 +40751,10 @@ export const activeUsers = [
     "correo": "puchi29_f@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525515968471,
-    "stripe_id": "cus_MX0h38JUqjTas4",
-    "final_date": 1693450000,
-    "id": 27099,
-    "level": 1
+    "conekta_id": "cus_2uQhLEYtBg9jwEyT9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27099
   },
   {
     "nombre": "Beatriz",
@@ -40983,10 +40762,9 @@ export const activeUsers = [
     "correo": "beatriz.cortezc@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525582761442,
-    "stripe_id": "cus_MX0gIldy8FUiHS",
     "final_date": 1690780000,
-    "id": 27102,
-    "level": 1
+    "level": 1,
+    "id": 27102
   },
   {
     "nombre": "Ruth",
@@ -40994,10 +40772,9 @@ export const activeUsers = [
     "correo": "stevdelacruz123@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50246408831,
-    "stripe_id": "cus_MX0g2b1NwfiP9I",
     "final_date": 1686460000,
-    "id": 27138,
-    "level": 1
+    "level": 1,
+    "id": 27138
   },
   {
     "nombre": "Karina",
@@ -41005,10 +40782,9 @@ export const activeUsers = [
     "correo": "karina.jackie@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526645061743,
-    "stripe_id": "cus_MX0hAUlyz7eCCl",
     "final_date": 1680230000,
-    "id": 27153,
-    "level": 1
+    "level": 1,
+    "id": 27153
   },
   {
     "nombre": "Monica",
@@ -41016,10 +40792,9 @@ export const activeUsers = [
     "correo": "monicamarcial-13@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524494262585,
-    "stripe_id": "cus_MX0iZjroXwIqrI",
     "final_date": 1682830000,
-    "id": 27174,
-    "level": 1
+    "level": 1,
+    "id": 27174
   },
   {
     "nombre": "Yesenia",
@@ -41027,10 +40802,10 @@ export const activeUsers = [
     "correo": "yes28bebe08@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18639566625,
-    "stripe_id": "cus_MX0iql88p8oUtd",
-    "final_date": 1693450000,
-    "id": 27215,
-    "level": 1
+    "conekta_id": "cus_2uQhLGL3DA2dtnvmz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27215
   },
   {
     "nombre": "Paula Pérez",
@@ -41038,10 +40813,10 @@ export const activeUsers = [
     "correo": "francopaola706@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528689031937,
-    "stripe_id": "cus_MX0i5x0wTEzePz",
-    "final_date": 1693450000,
-    "id": 27219,
-    "level": 1
+    "conekta_id": "cus_2uQhLGmuxsVdSw9mx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27219
   },
   {
     "nombre": "Irma Angelica",
@@ -41049,10 +40824,9 @@ export const activeUsers = [
     "correo": "angie_qner@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525539945079,
-    "stripe_id": "cus_MX0j7WtS7SMJDw",
     "final_date": 1690780000,
-    "id": 27258,
-    "level": 1
+    "level": 1,
+    "id": 27258
   },
   {
     "nombre": "Adriana",
@@ -41060,10 +40834,9 @@ export const activeUsers = [
     "correo": "adri_ruici90@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525539398464,
-    "stripe_id": "cus_MX0jR6ynWK1xJt",
     "final_date": 0,
-    "id": 27282,
-    "level": 1
+    "level": 1,
+    "id": 27282
   },
   {
     "nombre": "Dalia",
@@ -41071,10 +40844,9 @@ export const activeUsers = [
     "correo": "fdaliacelia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525538625921,
-    "stripe_id": "cus_MX0lkmitqlS0ES",
     "final_date": 1682830000,
-    "id": 27286,
-    "level": 1
+    "level": 1,
+    "id": 27286
   },
   {
     "nombre": "Leticia",
@@ -41082,20 +40854,20 @@ export const activeUsers = [
     "correo": "lmoealesflores@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 525521298599,
-    "stripe_id": "cus_MX0kBc3xDaLrZJ",
-    "final_date": 1693450000,
-    "id": 27311,
-    "level": 1
+    "conekta_id": "cus_2uQhLJFZ1GcvhUUky",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27311
   },
   {
     "nombre": "Yajaira",
     "apellido": "Gaucin",
     "correo": "gpyajaira596@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_MX0lhMDgxhjLyE",
-    "final_date": 1693600000,
-    "id": 27317,
-    "level": 1
+    "conekta_id": "cus_2uQhLKAPDZVL8Ak2F",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27317
   },
   {
     "nombre": "Nora Angélica",
@@ -41103,10 +40875,10 @@ export const activeUsers = [
     "correo": "zaratenora2020@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561597936,
-    "stripe_id": "cus_MX0ku56oLPglJn",
-    "final_date": 1693450000,
-    "id": 27323,
-    "level": 1
+    "conekta_id": "cus_2uQhLKuCjm3ykSQX7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27323
   },
   {
     "nombre": "Arlett",
@@ -41114,10 +40886,10 @@ export const activeUsers = [
     "correo": "arlett023@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525529137181,
-    "stripe_id": "cus_MX0lCzDZJPPWvr",
-    "final_date": 1691990000,
-    "id": 27333,
-    "level": 1
+    "conekta_id": "cus_2uQhLLe2FxcdJYWvN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27333
   },
   {
     "nombre": "Maria Del Carmen",
@@ -41125,10 +40897,10 @@ export const activeUsers = [
     "correo": "ledezmary02@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528112123661,
-    "stripe_id": "cus_MX0l3eQ0VfkE0o",
-    "final_date": 1693450000,
-    "id": 27342,
-    "level": 1
+    "conekta_id": "cus_2uQhLMCFsUDaZfwt8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27342
   },
   {
     "nombre": "Bianca",
@@ -41136,10 +40908,10 @@ export const activeUsers = [
     "correo": "bg842594@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525521048858,
-    "stripe_id": "cus_MX0lDQNi0gGCFv",
-    "final_date": 1693450000,
-    "id": 27346,
-    "level": 1
+    "conekta_id": "cus_2uQhLMNqnABGvpBR7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27346
   },
   {
     "nombre": "Laura",
@@ -41147,10 +40919,9 @@ export const activeUsers = [
     "correo": "yulisgalicia79@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525617108146,
-    "stripe_id": "cus_MX0lOGOpG2s12x",
     "final_date": 1675140000,
-    "id": 27349,
-    "level": 1
+    "level": 1,
+    "id": 27349
   },
   {
     "nombre": "Carin",
@@ -41158,10 +40929,9 @@ export const activeUsers = [
     "correo": "mendoza473ka@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564695742,
-    "stripe_id": "cus_MX0oDSKsKBwOzR",
     "final_date": 1672460000,
-    "id": 27358,
-    "level": 1
+    "level": 1,
+    "id": 27358
   },
   {
     "nombre": "Chantal",
@@ -41169,10 +40939,9 @@ export const activeUsers = [
     "correo": "prinseeza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528117840352,
-    "stripe_id": "cus_MX0mjBoJuyvYOe",
     "final_date": 1677560000,
-    "id": 27360,
-    "level": 1
+    "level": 1,
+    "id": 27360
   },
   {
     "nombre": "Matilde",
@@ -41180,10 +40949,10 @@ export const activeUsers = [
     "correo": "matypatricio1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528117440153,
-    "stripe_id": "cus_MX0m5TJd7nbkAI",
-    "final_date": 1693450000,
-    "id": 27384,
-    "level": 1
+    "conekta_id": "cus_2uQhLNyQtx6UZJ2nn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27384
   },
   {
     "nombre": "Abigail",
@@ -41191,10 +40960,10 @@ export const activeUsers = [
     "correo": "abiutrerammoli@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522293686802,
-    "stripe_id": "cus_MX0n4vBJEvSQkS",
-    "final_date": 1693450000,
-    "id": 27403,
-    "level": 1
+    "conekta_id": "cus_2uQhLPQiS4uXWkajY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27403
   },
   {
     "nombre": "Celina",
@@ -41202,10 +40971,10 @@ export const activeUsers = [
     "correo": "celbysbetsabe5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529541441773,
-    "stripe_id": "cus_MX0nYLrjceqKFa",
-    "final_date": 1693480000,
-    "id": 27408,
-    "level": 1
+    "conekta_id": "cus_2uQhLQT3wMDmmmEDK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27408
   },
   {
     "nombre": "Gabriela",
@@ -41213,10 +40982,10 @@ export const activeUsers = [
     "correo": "estradax175@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523512824657,
-    "stripe_id": "cus_MX0rLJ3jaOMYIs",
-    "final_date": 1692320000,
-    "id": 27473,
-    "level": 1
+    "conekta_id": "cus_2uQhLQL7rxRsZVxhJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27473
   },
   {
     "nombre": "Jocelyn",
@@ -41224,10 +40993,9 @@ export const activeUsers = [
     "correo": "nemyvaldez90@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524731841632,
-    "stripe_id": "cus_MX0rNB9CALeSLJ",
     "final_date": 1690780000,
-    "id": 27499,
-    "level": 1
+    "level": 1,
+    "id": 27499
   },
   {
     "nombre": "Elisa",
@@ -41235,10 +41003,10 @@ export const activeUsers = [
     "correo": "elidan785@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522481263218,
-    "stripe_id": "cus_MX0sT29Sp1Be9D",
-    "final_date": 1693980000,
-    "id": 27511,
-    "level": 1
+    "conekta_id": "cus_2uQhLR8i6ARiquRM3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27511
   },
   {
     "nombre": "Fatima del pilar",
@@ -41246,10 +41014,10 @@ export const activeUsers = [
     "correo": "fatimaromerorod06@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529991720498,
-    "stripe_id": "cus_MX0tcNKIclqFzl",
-    "final_date": 1693450000,
-    "id": 27534,
-    "level": 1
+    "conekta_id": "cus_2uQhLRdAzfbURAq2x",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27534
   },
   {
     "nombre": "Wendy",
@@ -41257,10 +41025,10 @@ export const activeUsers = [
     "correo": "wenreza2343@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513951812,
-    "stripe_id": "cus_MX0vJp8qsrFLal",
-    "final_date": 1693450000,
-    "id": 27542,
-    "level": 1
+    "conekta_id": "cus_2uQhLSYaRZ7pNsNxr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27542
   },
   {
     "nombre": "Amanda",
@@ -41268,10 +41036,10 @@ export const activeUsers = [
     "correo": "al4605184@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524495603626,
-    "stripe_id": "cus_MX0wgulNGvAhPF",
-    "final_date": 1693450000,
-    "id": 27578,
-    "level": 1
+    "conekta_id": "cus_2uQhLTQL29UNGqtCe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27578
   },
   {
     "nombre": "Nayeli",
@@ -41279,10 +41047,10 @@ export const activeUsers = [
     "correo": "kassyjuan@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524448292300,
-    "stripe_id": "cus_MX0yYltIZKbHup",
-    "final_date": 1693450000,
-    "id": 27588,
-    "level": 1
+    "conekta_id": "cus_2uQhLTHPwkgTvyVMD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27588
   },
   {
     "nombre": "Darasury",
@@ -41290,10 +41058,9 @@ export const activeUsers = [
     "correo": "dasuli1@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527298105155,
-    "stripe_id": "cus_MX0xt4m32V8lgE",
     "final_date": 1690780000,
-    "id": 27601,
-    "level": 1
+    "level": 1,
+    "id": 27601
   },
   {
     "nombre": "María Alejandra",
@@ -41301,10 +41068,10 @@ export const activeUsers = [
     "correo": "mare8986@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527831042434,
-    "stripe_id": "cus_MX0yRHzBPzb7hT",
-    "final_date": 1692280000,
-    "id": 27617,
-    "level": 1
+    "conekta_id": "cus_2uQhLTrCmrwMpz7C3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27617
   },
   {
     "nombre": "Isabel",
@@ -41312,10 +41079,10 @@ export const activeUsers = [
     "correo": "saenz.isabel@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527225845584,
-    "stripe_id": "cus_MX0zZVS632Wbby",
-    "final_date": 1693460000,
-    "id": 27624,
-    "level": 1
+    "conekta_id": "cus_2uQhLUb2J4W1TFmgY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27624
   },
   {
     "nombre": "Cinthya",
@@ -41323,10 +41090,10 @@ export const activeUsers = [
     "correo": "cinther610@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522731263780,
-    "stripe_id": "cus_MX10FW3zFNvL7g",
-    "final_date": 1693460000,
-    "id": 27638,
-    "level": 1
+    "conekta_id": "cus_2uQhLVKGbfQiYX9W6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27638
   },
   {
     "nombre": "Abigail Esmeralda",
@@ -41334,10 +41101,9 @@ export const activeUsers = [
     "correo": "abby.3083@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526563018400,
-    "stripe_id": "cus_MX10RQVxdf9g2q",
     "final_date": 1692830000,
-    "id": 27643,
-    "level": 0
+    "level": 0,
+    "id": 27643
   },
   {
     "nombre": "Lucia",
@@ -41345,10 +41111,10 @@ export const activeUsers = [
     "correo": "luceca487@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524281268250,
-    "stripe_id": "cus_MX12erYhM3qZ5C",
-    "final_date": 1682830000,
-    "id": 27662,
-    "level": 1
+    "conekta_id": "cus_2uQhLWJSjZNGDo4oY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27662
   },
   {
     "nombre": "Ivette",
@@ -41356,10 +41122,10 @@ export const activeUsers = [
     "correo": "alli_090387@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527671067923,
-    "stripe_id": "cus_MX1BRcwY2R6uuz",
-    "final_date": 1693460000,
-    "id": 27703,
-    "level": 1
+    "conekta_id": "cus_2uQhLWoUrfBxRtNGB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27703
   },
   {
     "nombre": "Maria",
@@ -41367,10 +41133,10 @@ export const activeUsers = [
     "correo": "gatiro12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529911144631,
-    "stripe_id": "cus_MX16YsWtNjcGAc",
-    "final_date": 1693480000,
-    "id": 27709,
-    "level": 1
+    "conekta_id": "cus_2uQhLXqF9LrG2TsAC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27709
   },
   {
     "nombre": "Janette",
@@ -41378,10 +41144,10 @@ export const activeUsers = [
     "correo": "janetteantonia@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528110793352,
-    "stripe_id": "cus_MX16wLrtm2F7sZ",
-    "final_date": 1693460000,
-    "id": 27720,
-    "level": 1
+    "conekta_id": "cus_2uQhLYGYgTfJwiuGX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27720
   },
   {
     "nombre": "Zayra Alejandra",
@@ -41389,10 +41155,10 @@ export const activeUsers = [
     "correo": "zayrabay.e@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526144587633,
-    "stripe_id": "cus_MX16rXJkRNg2R6",
-    "final_date": 1693540000,
-    "id": 27726,
-    "level": 1
+    "conekta_id": "cus_2uQhLYH7u4KFgRhFQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27726
   },
   {
     "nombre": "Sonia",
@@ -41400,10 +41166,9 @@ export const activeUsers = [
     "correo": "soniagr9316@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525614797011,
-    "stripe_id": "cus_MX18DaTKqm9P6M",
     "final_date": 1690780000,
-    "id": 27730,
-    "level": 1
+    "level": 1,
+    "id": 27730
   },
   {
     "nombre": "Cecilia",
@@ -41411,10 +41176,9 @@ export const activeUsers = [
     "correo": "cecilianava383@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527441172298,
-    "stripe_id": "cus_MX1Bex75c1znEA",
     "final_date": 1672460000,
-    "id": 27765,
-    "level": 1
+    "level": 1,
+    "id": 27765
   },
   {
     "nombre": "Rojita",
@@ -41422,10 +41186,10 @@ export const activeUsers = [
     "correo": "candy_1392@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525527266032,
-    "stripe_id": "cus_MX1BY89kTqQ4Xn",
-    "final_date": 1693460000,
-    "id": 27768,
-    "level": 1
+    "conekta_id": "cus_2uQhLa3hhwYCuGre2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27768
   },
   {
     "nombre": "Verónica",
@@ -41433,10 +41197,9 @@ export const activeUsers = [
     "correo": "veronicaespinozastore@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526622455065,
-    "stripe_id": "cus_MX1B21V89P4Ggv",
     "final_date": 1690780000,
-    "id": 27771,
-    "level": 1
+    "level": 1,
+    "id": 27771
   },
   {
     "nombre": "Maria Citlalli",
@@ -41444,10 +41207,9 @@ export const activeUsers = [
     "correo": "citlacocoletzi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523316921981,
-    "stripe_id": "cus_MX1C2h7xyQywoe",
     "final_date": 1690780000,
-    "id": 27777,
-    "level": 1
+    "level": 1,
+    "id": 27777
   },
   {
     "nombre": "Veronica",
@@ -41455,10 +41217,10 @@ export const activeUsers = [
     "correo": "chiquitamoxa_52@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524423799769,
-    "stripe_id": "cus_MX1G3GfoXAp8kH",
-    "final_date": 1693460000,
-    "id": 27801,
-    "level": 1
+    "conekta_id": "cus_2uQhLaVaTf1CTR5cj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27801
   },
   {
     "nombre": "Rosa",
@@ -41466,10 +41228,9 @@ export const activeUsers = [
     "correo": "rrdiz93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524411329782,
-    "stripe_id": "cus_MX1HKLvt99QBao",
     "final_date": 1716670000,
-    "id": 27836,
-    "level": 0
+    "level": 0,
+    "id": 27836
   },
   {
     "nombre": "Danae Monserrat",
@@ -41477,10 +41238,9 @@ export const activeUsers = [
     "correo": "monsezita@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524436840242,
-    "stripe_id": "cus_MX1HL9NzmjP2KM",
     "final_date": 1682830000,
-    "id": 27838,
-    "level": 1
+    "level": 1,
+    "id": 27838
   },
   {
     "nombre": "Gemma",
@@ -41488,10 +41248,10 @@ export const activeUsers = [
     "correo": "gemma.hannibal@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528126841870,
-    "stripe_id": "cus_MX1JS0ABlkoZO4",
-    "final_date": 1693460000,
-    "id": 27847,
-    "level": 1
+    "conekta_id": "cus_2uQhLcCzu9sTGcPTW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27847
   },
   {
     "nombre": "Tania Paredes",
@@ -41499,10 +41259,9 @@ export const activeUsers = [
     "correo": "tapalu.lp@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525517873398,
-    "stripe_id": "cus_MX1NE7DIGLmbrW",
     "final_date": 1690780000,
-    "id": 27867,
-    "level": 1
+    "level": 1,
+    "id": 27867
   },
   {
     "nombre": "Karen",
@@ -41510,10 +41269,10 @@ export const activeUsers = [
     "correo": "anakarenbb5030@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525560751113,
-    "stripe_id": "cus_MX1TjxBNxuDFEV",
-    "final_date": 1691730000,
-    "id": 27894,
-    "level": 1
+    "conekta_id": "cus_2uQhLct3iLzuC6F9M",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27894
   },
   {
     "nombre": "Mercedes Piedras",
@@ -41521,10 +41280,9 @@ export const activeUsers = [
     "correo": "mercypiedras@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525632860133,
-    "stripe_id": "cus_MX1SvSGvT6Cm2w",
     "final_date": 1690780000,
-    "id": 27910,
-    "level": 1
+    "level": 1,
+    "id": 27910
   },
   {
     "nombre": "Lizbeth",
@@ -41532,10 +41290,9 @@ export const activeUsers = [
     "correo": "lizadaprins@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 524622422541,
-    "stripe_id": "cus_MX1TQL4O1jRtRv",
     "final_date": 1682830000,
-    "id": 27921,
-    "level": 1
+    "level": 1,
+    "id": 27921
   },
   {
     "nombre": "Meli",
@@ -41543,10 +41300,10 @@ export const activeUsers = [
     "correo": "6711079491amm@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526182204388,
-    "stripe_id": "cus_MX1XBjT56TfWbV",
-    "final_date": 1693460000,
-    "id": 27941,
-    "level": 1
+    "conekta_id": "cus_2uQhLeMgkk8CSda8n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27941
   },
   {
     "nombre": "Erika",
@@ -41554,10 +41311,10 @@ export const activeUsers = [
     "correo": "erikamaciel1@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526681027103,
-    "stripe_id": "cus_MX1W7r16qqM9AC",
-    "final_date": 1693460000,
-    "id": 27957,
-    "level": 1
+    "conekta_id": "cus_2uQhLeMgkk8CSda9H",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27957
   },
   {
     "nombre": "Diana",
@@ -41565,10 +41322,10 @@ export const activeUsers = [
     "correo": "dianaornelas1194@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19188501647,
-    "stripe_id": "cus_MX1XsvoPhmQ1I2",
-    "final_date": 1693460000,
-    "id": 27990,
-    "level": 1
+    "conekta_id": "cus_2uQhLevVarP6JrfhJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 27990
   },
   {
     "nombre": "Camila",
@@ -41576,10 +41333,9 @@ export const activeUsers = [
     "correo": "luquemoralesc@gmail.com",
     "pais": "Chile",
     "whatsapp": 56999380738,
-    "stripe_id": "cus_MX1YGb0i4cpY5Z",
     "final_date": 1680240000,
-    "id": 28012,
-    "level": 1
+    "level": 1,
+    "id": 28012
   },
   {
     "nombre": "Magdalena Carolina",
@@ -41587,10 +41343,10 @@ export const activeUsers = [
     "correo": "magdaprincesa63@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525541328254,
-    "stripe_id": "cus_MX1byFVHz5oNr5",
-    "final_date": 1693460000,
-    "id": 28050,
-    "level": 1
+    "conekta_id": "cus_2uQhLfxFsY3PwWJBE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28050
   },
   {
     "nombre": "María Teresa",
@@ -41598,10 +41354,10 @@ export const activeUsers = [
     "correo": "teresaher0119@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530096106,
-    "stripe_id": "cus_MX1cSCJhkQNwPj",
-    "final_date": 1693460000,
-    "id": 28071,
-    "level": 1
+    "conekta_id": "cus_2uQhLgQ8dFWPZPzgY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28071
   },
   {
     "nombre": "Kenia maylett",
@@ -41609,10 +41365,10 @@ export const activeUsers = [
     "correo": "kenitacalderon@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527441314327,
-    "stripe_id": "cus_MX1eAZVkSwXY7L",
-    "final_date": 1693460000,
-    "id": 28096,
-    "level": 1
+    "conekta_id": "cus_2uQhLhJxqYNnsG1FH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28096
   },
   {
     "nombre": "Magdalena",
@@ -41620,10 +41376,10 @@ export const activeUsers = [
     "correo": "magdalenamendoza76358@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524881270557,
-    "stripe_id": "cus_MX1qCResam0Tnc",
-    "final_date": 1693460000,
-    "id": 28142,
-    "level": 1
+    "conekta_id": "cus_2uQhLi3nMjwSWYKGo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28142
   },
   {
     "nombre": "Paula Catalina",
@@ -41631,10 +41387,10 @@ export const activeUsers = [
     "correo": "paulette011019@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524171248310,
-    "stripe_id": "cus_MX1hviRBKWXU86",
-    "final_date": 1693460000,
-    "id": 28147,
-    "level": 1
+    "conekta_id": "cus_2uQhLiuXxLHzQWpZe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28147
   },
   {
     "nombre": "Lupita",
@@ -41642,10 +41398,10 @@ export const activeUsers = [
     "correo": "floreslupita624@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523531323727,
-    "stripe_id": "cus_MX1mvkGe5RtELb",
-    "final_date": 1693460000,
-    "id": 28163,
-    "level": 1
+    "conekta_id": "cus_2uQhLiuXxLHzQWpZk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28163
   },
   {
     "nombre": "Ana María",
@@ -41653,10 +41409,10 @@ export const activeUsers = [
     "correo": "anamariasanch78@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523141647261,
-    "stripe_id": "cus_MX1jAwBRAiuqn4",
-    "final_date": 1693460000,
-    "id": 28167,
-    "level": 1
+    "conekta_id": "cus_2uQhLjLqVT73Q3W3C",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28167
   },
   {
     "nombre": "Rosa Isela",
@@ -41664,10 +41420,9 @@ export const activeUsers = [
     "correo": "rosaiselauff@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525522161832,
-    "stripe_id": "cus_MX1kUQqFNEPl9Q",
     "final_date": 1690780000,
-    "id": 28180,
-    "level": 1
+    "level": 1,
+    "id": 28180
   },
   {
     "nombre": "Paola",
@@ -41675,10 +41430,9 @@ export const activeUsers = [
     "correo": "paola.alegarcia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526561058374,
-    "stripe_id": "cus_MX1qzQawBukdWb",
     "final_date": 1690780000,
-    "id": 28192,
-    "level": 1
+    "level": 1,
+    "id": 28192
   },
   {
     "nombre": "Wendy",
@@ -41686,10 +41440,10 @@ export const activeUsers = [
     "correo": "frankowendy77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529511917008,
-    "stripe_id": "cus_MX1suJKjxDZp92",
-    "final_date": 1693460000,
-    "id": 28235,
-    "level": 1
+    "conekta_id": "cus_2uQhLk6EEFKdgkK9d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28235
   },
   {
     "nombre": "Suleyma",
@@ -41697,10 +41451,10 @@ export const activeUsers = [
     "correo": "zuleiiiima19@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529241095717,
-    "stripe_id": "cus_MX1tvnLdI9tavN",
-    "final_date": 1693460000,
-    "id": 28267,
-    "level": 1
+    "conekta_id": "cus_2uQhLm14SYC31cyFM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28267
   },
   {
     "nombre": "Veronica",
@@ -41708,10 +41462,10 @@ export const activeUsers = [
     "correo": "zunigaveronica979@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523318809363,
-    "stripe_id": "cus_MX20neBGbSaD45",
-    "final_date": 1694070000,
-    "id": 28299,
-    "level": 1
+    "conekta_id": "cus_2uQhLmjsxjkghLD7f",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28299
   },
   {
     "nombre": "Ana",
@@ -41719,10 +41473,9 @@ export const activeUsers = [
     "correo": "achriisperez89@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528123305462,
-    "stripe_id": "cus_MX272WSOuyefv5",
     "final_date": 0,
-    "id": 28313,
-    "level": 1
+    "level": 1,
+    "id": 28313
   },
   {
     "nombre": "Vianey Monserrat",
@@ -41730,10 +41483,10 @@ export const activeUsers = [
     "correo": "vianey20sch@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522441129938,
-    "stripe_id": "cus_MX29Cmjs7I3zyt",
-    "final_date": 1693460000,
-    "id": 28333,
-    "level": 1
+    "conekta_id": "cus_2uQhLnbdZL7EZwGdw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28333
   },
   {
     "nombre": "Susana",
@@ -41741,10 +41494,10 @@ export const activeUsers = [
     "correo": "sl6460182@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525611256222,
-    "stripe_id": "cus_MX2RCasMaj43YQ",
-    "final_date": 1692850000,
-    "id": 28349,
-    "level": 1
+    "conekta_id": "cus_2uQhLoHHi9KBc1L8B",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28349
   },
   {
     "nombre": "Ruth Yareni",
@@ -41752,10 +41505,10 @@ export const activeUsers = [
     "correo": "ruthyarenilopez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535177322,
-    "stripe_id": "cus_MX2Q4ndv1GVtQ1",
-    "final_date": 1693550000,
-    "id": 28365,
-    "level": 1
+    "conekta_id": "cus_2uQhLomkceUw9fUzF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28365
   },
   {
     "nombre": "Mariela",
@@ -41763,10 +41516,9 @@ export const activeUsers = [
     "correo": "hedwin0402@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545964852,
-    "stripe_id": "cus_MX2UegEStBvEoz",
     "final_date": 1690780000,
-    "id": 28395,
-    "level": 1
+    "level": 1,
+    "id": 28395
   },
   {
     "nombre": "Airam Pamela",
@@ -41774,10 +41526,9 @@ export const activeUsers = [
     "correo": "airampme98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525618380781,
-    "stripe_id": "cus_MX2bpjLlHPTeY3",
     "final_date": 1690780000,
-    "id": 28406,
-    "level": 1
+    "level": 1,
+    "id": 28406
   },
   {
     "nombre": "Nuria",
@@ -41785,10 +41536,10 @@ export const activeUsers = [
     "correo": "nurialopez889@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 5026095164860,
-    "stripe_id": "cus_MX2sVgWXxMeIpL",
-    "final_date": 1693460000,
-    "id": 28424,
-    "level": 1
+    "conekta_id": "cus_2uQhLpX9MShXLYh1L",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28424
   },
   {
     "nombre": "Yanin Ivett",
@@ -41796,20 +41547,19 @@ export const activeUsers = [
     "correo": "yanincita23@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523221486219,
-    "stripe_id": "cus_MX3sMvxV06BKor",
     "final_date": 0,
-    "id": 28470,
-    "level": 1
+    "level": 1,
+    "id": 28470
   },
   {
     "nombre": "Marina",
     "apellido": "Lizarraga",
     "correo": "marinaliz71@hotmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_MX4agTNOkHXKGF",
-    "final_date": 1693550000,
-    "id": 28488,
-    "level": 1
+    "conekta_id": "cus_2uQhLqFxseGB3GyEw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28488
   },
   {
     "nombre": "Luisa Maria",
@@ -41817,10 +41567,9 @@ export const activeUsers = [
     "correo": "luisita_buga_2006@hotmail.com",
     "pais": "España",
     "whatsapp": 34677856147,
-    "stripe_id": "cus_MX4oclaSnnEkL7",
     "final_date": 1682840000,
-    "id": 28491,
-    "level": 1
+    "level": 1,
+    "id": 28491
   },
   {
     "nombre": "Marisol",
@@ -41828,10 +41577,10 @@ export const activeUsers = [
     "correo": "kiana1209@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525623791601,
-    "stripe_id": "cus_MX4urnzQLUCB8M",
-    "final_date": 1693470000,
-    "id": 28496,
-    "level": 1
+    "conekta_id": "cus_2uQhLryPK98RjMeb7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28496
   },
   {
     "nombre": "Julia Xóchitl",
@@ -41839,10 +41588,10 @@ export const activeUsers = [
     "correo": "jxoga@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527221206833,
-    "stripe_id": "cus_MX8jh1X6eVMmO3",
-    "final_date": 1693480000,
-    "id": 28550,
-    "level": 1
+    "conekta_id": "cus_2uQhLs2YgXV8ELkEz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28550
   },
   {
     "nombre": "Carina",
@@ -41850,10 +41599,10 @@ export const activeUsers = [
     "correo": "karyormeno@gmail.com",
     "pais": "Argentina",
     "whatsapp": 5492966758902,
-    "stripe_id": "cus_MX8m6Y4EG0PObA",
-    "final_date": 1672490000,
-    "id": 28552,
-    "level": 1
+    "conekta_id": "cus_2uQhLsmNCj3muknUf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28552
   },
   {
     "nombre": "Cinthia",
@@ -41861,10 +41610,9 @@ export const activeUsers = [
     "correo": "cintymiranda.1704@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529931574350,
-    "stripe_id": "cus_MX8uw54YlbcPey",
     "final_date": 1680270000,
-    "id": 28558,
-    "level": 1
+    "level": 1,
+    "id": 28558
   },
   {
     "nombre": "Liliana",
@@ -41872,10 +41620,10 @@ export const activeUsers = [
     "correo": "lilianacabrera00@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523957837967,
-    "stripe_id": "cus_MXBWlno9LjYYrB",
-    "final_date": 1693490000,
-    "id": 28571,
-    "level": 1
+    "conekta_id": "cus_2uQhLtPFeXpXKmBaC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28571
   },
   {
     "nombre": "Karla",
@@ -41883,10 +41631,9 @@ export const activeUsers = [
     "correo": "karla7524bff@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525630997525,
-    "stripe_id": "cus_MX9TtQO5FvHFMk",
     "final_date": 1669810000,
-    "id": 28575,
-    "level": 1
+    "level": 1,
+    "id": 28575
   },
   {
     "nombre": "Karla mayte",
@@ -41894,10 +41641,9 @@ export const activeUsers = [
     "correo": "karlamaytesantiagohernandez67@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529932867836,
-    "stripe_id": "cus_MXAI0iot6OO6ec",
     "final_date": 1680270000,
-    "id": 28612,
-    "level": 1
+    "level": 1,
+    "id": 28612
   },
   {
     "nombre": "Raquel",
@@ -41905,10 +41651,9 @@ export const activeUsers = [
     "correo": "raquelauroras46@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525619591459,
-    "stripe_id": "cus_MXCEnNr5PFULvV",
     "final_date": 1677600000,
-    "id": 28695,
-    "level": 1
+    "level": 1,
+    "id": 28695
   },
   {
     "nombre": "Herendira",
@@ -41916,10 +41661,10 @@ export const activeUsers = [
     "correo": "mh7178566@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526241655078,
-    "stripe_id": "cus_MXCLsvGSAKLaPc",
-    "final_date": 1693500000,
-    "id": 28696,
-    "level": 1
+    "conekta_id": "cus_2uQhLurtgvwpaJWZT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28696
   },
   {
     "nombre": "Felisa",
@@ -41927,10 +41672,10 @@ export const activeUsers = [
     "correo": "hrricardo@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525549614461,
-    "stripe_id": "cus_Nlos7KxOJh9sXB",
-    "final_date": 1693980000,
-    "id": 28732,
-    "level": 1
+    "conekta_id": "cus_2uQhLvieHXJNQqSSX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28732
   },
   {
     "nombre": "Ma. De la Luz",
@@ -41938,10 +41683,10 @@ export const activeUsers = [
     "correo": "madelaluzcruz203@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524141228401,
-    "stripe_id": "cus_MYIN3UhhRZs99s",
-    "final_date": 1693840000,
-    "id": 28738,
-    "level": 1
+    "conekta_id": "cus_2uQhLwAX3EmN4oGZb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28738
   },
   {
     "nombre": "ALMA ALEJANDRA",
@@ -41949,10 +41694,10 @@ export const activeUsers = [
     "correo": "melaniesanchezmagallanes1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545136730,
-    "stripe_id": "cus_MXDx32aZDWGQCP",
-    "final_date": 1693500000,
-    "id": 28744,
-    "level": 1
+    "conekta_id": "cus_2uQhLwAX3EmMxyfSP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28744
   },
   {
     "nombre": "Yunuen",
@@ -41960,10 +41705,9 @@ export const activeUsers = [
     "correo": "fabypadilla949@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527297427245,
-    "stripe_id": "cus_MXE0FvmLBE1ecg",
     "final_date": 1680310000,
-    "id": 28746,
-    "level": 1
+    "level": 1,
+    "id": 28746
   },
   {
     "nombre": "Flaquita",
@@ -41971,10 +41715,10 @@ export const activeUsers = [
     "correo": "estheruzcanga71@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525613762042,
-    "stripe_id": "cus_MXJ8iaQy77uDwM",
-    "final_date": 1693520000,
-    "id": 28828,
-    "level": 1
+    "conekta_id": "cus_2uQhLx5MFXdmT7W3a",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28828
   },
   {
     "nombre": "Rocio",
@@ -41982,10 +41726,10 @@ export const activeUsers = [
     "correo": "chiio7405@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529983737381,
-    "stripe_id": "cus_MXJ5MoT96OT4bT",
-    "final_date": 1693520000,
-    "id": 28843,
-    "level": 1
+    "conekta_id": "cus_2uQhLxdas3EigWhmw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28843
   },
   {
     "nombre": "Angeles zunaxi",
@@ -41993,10 +41737,10 @@ export const activeUsers = [
     "correo": "annggee21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5242327726,
-    "stripe_id": "cus_MXJG9m5dU4mzq1",
-    "final_date": 1693520000,
-    "id": 28851,
-    "level": 1
+    "conekta_id": "cus_2uQhLyYzHvm4dCc3f",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28851
   },
   {
     "nombre": "Carla Karina",
@@ -42004,10 +41748,10 @@ export const activeUsers = [
     "correo": "cksm_87@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525545600867,
-    "stripe_id": "cus_MXJR20Of9xcPfR",
-    "final_date": 1693530000,
-    "id": 28870,
-    "level": 1
+    "conekta_id": "cus_2uQhLzMaX8kuz4HWa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28870
   },
   {
     "nombre": "Mirna",
@@ -42015,10 +41759,10 @@ export const activeUsers = [
     "correo": "mirnazaar24@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523312978741,
-    "stripe_id": "cus_MXJXEUTupqffk4",
-    "final_date": 1693520000,
-    "id": 28874,
-    "level": 1
+    "conekta_id": "cus_2uQhLzQjtX7cXBmFo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28874
   },
   {
     "nombre": "Lupita",
@@ -42026,10 +41770,10 @@ export const activeUsers = [
     "correo": "yaguaps8@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522224246297,
-    "stripe_id": "cus_MXJYWkilUw0dUo",
-    "final_date": 1693520000,
-    "id": 28877,
-    "level": 1
+    "conekta_id": "cus_2uQhLzrceEac6Kytx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28877
   },
   {
     "nombre": "Michelle",
@@ -42037,10 +41781,10 @@ export const activeUsers = [
     "correo": "michelle269309@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525578947731,
-    "stripe_id": "cus_MXJk7hnECHfWEd",
-    "final_date": 1693520000,
-    "id": 28880,
-    "level": 1
+    "conekta_id": "cus_2uQhM1mSrXT1W1bXc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 28880
   },
   {
     "nombre": "Pierina",
@@ -42048,10 +41792,9 @@ export const activeUsers = [
     "correo": "pierinaromero31@gmail.com",
     "pais": "Peru",
     "whatsapp": 51956591457,
-    "stripe_id": "cus_MXKPfp57N7GRgn",
     "final_date": 1682900000,
-    "id": 28901,
-    "level": 1
+    "level": 1,
+    "id": 28901
   },
   {
     "nombre": "Bea",
@@ -42059,10 +41802,9 @@ export const activeUsers = [
     "correo": "beatrizsanchez822@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522741206821,
-    "stripe_id": "cus_MXL5DERQdZ7ZNh",
     "final_date": 1675210000,
-    "id": 28918,
-    "level": 1
+    "level": 1,
+    "id": 28918
   },
   {
     "nombre": "Nailisbeth",
@@ -42070,10 +41812,9 @@ export const activeUsers = [
     "correo": "nailisbethcarolinacastillosalsedo@gmail.com",
     "pais": "Peru",
     "whatsapp": 51903050087,
-    "stripe_id": "cus_MXMKncuqGtAHQi",
     "final_date": 1682910000,
-    "id": 28939,
-    "level": 1
+    "level": 1,
+    "id": 28939
   },
   {
     "nombre": "Gabriela",
@@ -42081,10 +41822,10 @@ export const activeUsers = [
     "correo": "gacovi2686@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524432582776,
-    "stripe_id": "cus_MY0JPYPGMAXCtj",
-    "final_date": 1693680000,
-    "id": 29037,
-    "level": 1
+    "conekta_id": "cus_2uQhM2KgU33xhz81Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29037
   },
   {
     "nombre": "esmeralda",
@@ -42092,10 +41833,10 @@ export const activeUsers = [
     "correo": "smecastroc22@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525556809594,
-    "stripe_id": "cus_MY5pCyBAPIUtaP",
-    "final_date": 1693790000,
-    "id": 29141,
-    "level": 1
+    "conekta_id": "cus_2uQhM34VzEccNw1u9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29141
   },
   {
     "nombre": "Miriam",
@@ -42103,10 +41844,9 @@ export const activeUsers = [
     "correo": "culturebelleza199@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522491630041,
-    "stripe_id": "cus_MvhYudzGE0Oe7A",
     "final_date": 1691200000,
-    "id": 29146,
-    "level": 1
+    "level": 1,
+    "id": 29146
   },
   {
     "nombre": "Mayra Yubili",
@@ -42114,10 +41854,10 @@ export const activeUsers = [
     "correo": "mayra.yubili@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523481327373,
-    "stripe_id": "cus_MY9iiWZYOP1E6N",
-    "final_date": 1693720000,
-    "id": 29184,
-    "level": 1
+    "conekta_id": "cus_2uQhM43g88aA7QbyJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29184
   },
   {
     "nombre": "Susana Alejandra",
@@ -42125,10 +41865,9 @@ export const activeUsers = [
     "correo": "cardonabautistaalejandra88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524731620495,
-    "stripe_id": "cus_Me0ZBNuThZIj6h",
     "final_date": 1689710000,
-    "id": 29219,
-    "level": 1
+    "level": 1,
+    "id": 29219
   },
   {
     "nombre": "Diana",
@@ -42136,10 +41875,9 @@ export const activeUsers = [
     "correo": "kpi_tali@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525545149852,
-    "stripe_id": "cus_MYLLErvT45So7i",
     "final_date": 1691080000,
-    "id": 29253,
-    "level": 1
+    "level": 1,
+    "id": 29253
   },
   {
     "nombre": "Karla Cristiana",
@@ -42147,10 +41885,10 @@ export const activeUsers = [
     "correo": "estetica.boutiquekyg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524425906291,
-    "stripe_id": "cus_MYM9mTQ1mMt67i",
-    "final_date": 1692470000,
-    "id": 29276,
-    "level": 1
+    "conekta_id": "cus_2uQhM5XKAXhTMwvxJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29276
   },
   {
     "nombre": "María Eugenia",
@@ -42158,10 +41896,9 @@ export const activeUsers = [
     "correo": "marymunoz2809@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511903691,
-    "stripe_id": "cus_MYMOA0dbxdsatC",
     "final_date": 1691090000,
-    "id": 29289,
-    "level": 1
+    "level": 1,
+    "id": 29289
   },
   {
     "nombre": "Aidé",
@@ -42169,10 +41906,10 @@ export const activeUsers = [
     "correo": "sanjuaide@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529157585727,
-    "stripe_id": "cus_N9wzDE0FNhPF1V",
-    "final_date": 1691890000,
-    "id": 29381,
-    "level": 1
+    "conekta_id": "cus_2uQhM61n52sCt1fsM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29381
   },
   {
     "nombre": "Angie",
@@ -42180,10 +41917,10 @@ export const activeUsers = [
     "correo": "angie_dvl@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525540301542,
-    "stripe_id": "cus_MYmJwsviGE6hDA",
-    "final_date": 1693860000,
-    "id": 29407,
-    "level": 1
+    "conekta_id": "cus_2uQhM6zxCvpkff2JL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29407
   },
   {
     "nombre": "Claudia",
@@ -42191,10 +41928,9 @@ export const activeUsers = [
     "correo": "villegashernandezclaudia4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522871424404,
-    "stripe_id": "cus_MZGojnWijAMZ70",
     "final_date": 1678080000,
-    "id": 29538,
-    "level": 1
+    "level": 1,
+    "id": 29538
   },
   {
     "nombre": "silvia",
@@ -42202,10 +41938,9 @@ export const activeUsers = [
     "correo": "ss5340177@icloud.com",
     "pais": "Mexico",
     "whatsapp": 525624708878,
-    "stripe_id": "cus_MZeQbnuLUIpcJo",
     "final_date": 1681240000,
-    "id": 29610,
-    "level": 1
+    "level": 1,
+    "id": 29610
   },
   {
     "nombre": "mariana Yolanda",
@@ -42213,10 +41948,10 @@ export const activeUsers = [
     "correo": "am_alexa@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 522283134854,
-    "stripe_id": "cus_MZerwuEZpnweJZ",
-    "final_date": 1691610000,
-    "id": 29627,
-    "level": 1
+    "conekta_id": "cus_2uQhM7jmj8PQHvgny",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29627
   },
   {
     "nombre": "Miralda Judith",
@@ -42224,10 +41959,10 @@ export const activeUsers = [
     "correo": "miraldadavila74@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528126272718,
-    "stripe_id": "cus_NLyLfyxtBn5MeL",
-    "final_date": 1691990000,
-    "id": 29690,
-    "level": 1
+    "conekta_id": "cus_2uQhM8UbFKx3vCMHZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29690
   },
   {
     "nombre": "Fátima",
@@ -42235,10 +41970,10 @@ export const activeUsers = [
     "correo": "fatimagarciamora653@gmail.com",
     "pais": "Colombia",
     "whatsapp": 573172627662,
-    "stripe_id": "cus_MZtTrQPOdO0P2V",
-    "final_date": 1693240000,
-    "id": 29699,
-    "level": 1
+    "conekta_id": "cus_2uQhM99e4X5VhZKvF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29699
   },
   {
     "nombre": "Laura",
@@ -42246,10 +41981,10 @@ export const activeUsers = [
     "correo": "lauravyn88@gmail.com",
     "pais": "España",
     "whatsapp": 34698836604,
-    "stripe_id": "cus_MaWy1ILMR04lNX",
-    "final_date": 1691670000,
-    "id": 29828,
-    "level": 1
+    "conekta_id": "cus_2uQhM9Ga8usQ2RjD1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29828
   },
   {
     "nombre": "Cristina noemi",
@@ -42257,10 +41992,10 @@ export const activeUsers = [
     "correo": "bolanosvillegascristina@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535193301,
-    "stripe_id": "cus_MaajlK6CN40JiJ",
-    "final_date": 1691690000,
-    "id": 29919,
-    "level": 1
+    "conekta_id": "cus_2uQhM9hsg2gT4ZfA4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29919
   },
   {
     "nombre": "Linda",
@@ -42268,10 +42003,10 @@ export const activeUsers = [
     "correo": "juan18231@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526462886503,
-    "stripe_id": "cus_Maanaes3ZUAsrX",
-    "final_date": 1691600000,
-    "id": 29923,
-    "level": 1
+    "conekta_id": "cus_2uQhMATGQpu3DqcK4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 29923
   },
   {
     "nombre": "yesica",
@@ -42279,10 +42014,9 @@ export const activeUsers = [
     "correo": "yesica.arganaraz87@gmail.com",
     "pais": "Argentina",
     "whatsapp": 543834904767,
-    "stripe_id": "cus_Mae0tODBwI2OQH",
     "final_date": 1678390000,
-    "id": 29986,
-    "level": 1
+    "level": 1,
+    "id": 29986
   },
   {
     "nombre": "nelly",
@@ -42290,10 +42024,10 @@ export const activeUsers = [
     "correo": "nellyzpirriz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524131222967,
-    "stripe_id": "cus_NloxDuhHKJy36u",
-    "final_date": 1691670000,
-    "id": 30037,
-    "level": 1
+    "conekta_id": "cus_2uQhMBBWiRokDE5vs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30037
   },
   {
     "nombre": "agustina",
@@ -42301,10 +42035,10 @@ export const activeUsers = [
     "correo": "aguleles@gmail.com",
     "pais": "Uruguay",
     "whatsapp": 59899227916,
-    "stripe_id": "cus_MaibqH8Pv87iUh",
-    "final_date": 1691630000,
-    "id": 30038,
-    "level": 1
+    "conekta_id": "cus_2uQhMC6v9KL6CdytE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30038
   },
   {
     "nombre": "Esperanza",
@@ -42312,10 +42046,9 @@ export const activeUsers = [
     "correo": "esperanzajuarez56@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529381969445,
-    "stripe_id": "cus_NAKDOTDjTvLEQC",
     "final_date": 0,
-    "id": 30134,
-    "level": 1
+    "level": 1,
+    "id": 30134
   },
   {
     "nombre": "Daen",
@@ -42323,10 +42056,9 @@ export const activeUsers = [
     "correo": "soloriofranky@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526861446567,
-    "stripe_id": "cus_Mb5Mucl2N2XAkh",
     "final_date": 1683850000,
-    "id": 30276,
-    "level": 1
+    "level": 1,
+    "id": 30276
   },
   {
     "nombre": "miriam",
@@ -42334,10 +42066,10 @@ export const activeUsers = [
     "correo": "mimiimoon@outlook.com",
     "pais": "Estados Unidos",
     "whatsapp": 13102918362,
-    "stripe_id": "cus_NLy76PYKwwHxfN",
-    "final_date": 1691990000,
-    "id": 30279,
-    "level": 1
+    "conekta_id": "cus_2uQhMDhVG7FHn3iB9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30279
   },
   {
     "nombre": "Diana",
@@ -42345,10 +42077,10 @@ export const activeUsers = [
     "correo": "dt0246625@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525574173380,
-    "stripe_id": "cus_MbG63CX5MBzced",
-    "final_date": 1693440000,
-    "id": 30336,
-    "level": 1
+    "conekta_id": "cus_2uQhMDeKtitbEvEMr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30336
   },
   {
     "nombre": "María Teresa",
@@ -42356,10 +42088,9 @@ export const activeUsers = [
     "correo": "terelugo546@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527732216147,
-    "stripe_id": "cus_NloyaAGAJ6FwzD",
     "final_date": 1721510000,
-    "id": 30367,
-    "level": 0
+    "level": 0,
+    "id": 30367
   },
   {
     "nombre": "Lizbeth",
@@ -42367,10 +42098,9 @@ export const activeUsers = [
     "correo": "lizbeth.ki87@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524151701707,
-    "stripe_id": "cus_MwlCbe14qBwMNx",
     "final_date": 1676570000,
-    "id": 30403,
-    "level": 1
+    "level": 1,
+    "id": 30403
   },
   {
     "nombre": "Leslie",
@@ -42378,10 +42108,10 @@ export const activeUsers = [
     "correo": "leslie.megan18@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525573512744,
-    "stripe_id": "cus_NLySdL6QCQVEkO",
-    "final_date": 1691990000,
-    "id": 30418,
-    "level": 1
+    "conekta_id": "cus_2uQhMF7xw81tVTZLo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30418
   },
   {
     "nombre": "norma Angélica",
@@ -42389,10 +42119,9 @@ export const activeUsers = [
     "correo": "kasanfer7@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564778991,
-    "stripe_id": "cus_McNu07vwb4p3X3",
     "final_date": 1689340000,
-    "id": 30517,
-    "level": 1
+    "level": 1,
+    "id": 30517
   },
   {
     "nombre": "Maria Angelina",
@@ -42400,10 +42129,9 @@ export const activeUsers = [
     "correo": "luna.merci.canul@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529982914143,
-    "stripe_id": "cus_MbUipKTAMzAtjn",
     "final_date": 1689130000,
-    "id": 30565,
-    "level": 1
+    "level": 1,
+    "id": 30565
   },
   {
     "nombre": "Karla",
@@ -42411,10 +42139,10 @@ export const activeUsers = [
     "correo": "abimartinez1900@outlook.es",
     "pais": "Mexico",
     "whatsapp": 529181118742,
-    "stripe_id": "cus_Mcw7IXvZew8sr9",
-    "final_date": 1692140000,
-    "id": 30591,
-    "level": 1
+    "conekta_id": "cus_2uQhMFd14DqabjFmS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30591
   },
   {
     "nombre": "Ana Luisa",
@@ -42422,10 +42150,9 @@ export const activeUsers = [
     "correo": "pekni_13@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529613420839,
-    "stripe_id": "cus_MbepNlGNF0ONRM",
     "final_date": 1681450000,
-    "id": 30637,
-    "level": 1
+    "level": 1,
+    "id": 30637
   },
   {
     "nombre": "vanessa lizeth",
@@ -42433,10 +42160,9 @@ export const activeUsers = [
     "correo": "vanessalizeth2012@hptmail.com",
     "pais": "Mexico",
     "whatsapp": 523461032720,
-    "stripe_id": "cus_Mbl1vo1QtMS9Ui",
     "final_date": 1681420000,
-    "id": 30733,
-    "level": 1
+    "level": 1,
+    "id": 30733
   },
   {
     "nombre": "Mónica Yazmin",
@@ -42444,10 +42170,10 @@ export const activeUsers = [
     "correo": "monikbite@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525613380481,
-    "stripe_id": "cus_Mbna4S8ifMv9j1",
-    "final_date": 1691880000,
-    "id": 30767,
-    "level": 1
+    "conekta_id": "cus_2uQhMHLRVihqRSKDz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30767
   },
   {
     "nombre": "Maria",
@@ -42455,10 +42181,9 @@ export const activeUsers = [
     "correo": "emilianoreyes391@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526561371208,
-    "stripe_id": "cus_MboTQjWIqJRA6h",
     "final_date": 0,
-    "id": 30782,
-    "level": 1
+    "level": 1,
+    "id": 30782
   },
   {
     "nombre": "Jazmin",
@@ -42466,10 +42191,10 @@ export const activeUsers = [
     "correo": "vero.jazz.vj@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510158526,
-    "stripe_id": "cus_MbqzpZD132Ddqr",
-    "final_date": 1691890000,
-    "id": 30803,
-    "level": 1
+    "conekta_id": "cus_2uQhMJ8QPJdBXfhAP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30803
   },
   {
     "nombre": "ana elsy",
@@ -42477,10 +42202,9 @@ export const activeUsers = [
     "correo": "anaelsysageymi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529711504011,
-    "stripe_id": "cus_MbtoJMEkIs00RF",
     "final_date": 1676290000,
-    "id": 30832,
-    "level": 1
+    "level": 1,
+    "id": 30832
   },
   {
     "nombre": "Guadalupe",
@@ -42488,10 +42212,9 @@ export const activeUsers = [
     "correo": "rosa0206lopezjimenez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525637189188,
-    "stripe_id": "cus_N6E0xux19EhwC0",
     "final_date": 1683090000,
-    "id": 30837,
-    "level": 1
+    "level": 1,
+    "id": 30837
   },
   {
     "nombre": "Livonia",
@@ -42499,10 +42222,10 @@ export const activeUsers = [
     "correo": "livosierra@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50255511939,
-    "stripe_id": "cus_Mc427iDmyr69hE",
-    "final_date": 1691940000,
-    "id": 30919,
-    "level": 1
+    "conekta_id": "cus_2uQhMKJXSczt8scjt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30919
   },
   {
     "nombre": "Wendy",
@@ -42510,10 +42233,10 @@ export const activeUsers = [
     "correo": "wpf.elp@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774419526,
-    "stripe_id": "cus_Mc4jJOH6ujPyl9",
-    "final_date": 1691940000,
-    "id": 30932,
-    "level": 1
+    "conekta_id": "cus_2uQhMLDvsWXEDDQsC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 30932
   },
   {
     "nombre": "Julio",
@@ -42521,10 +42244,9 @@ export const activeUsers = [
     "correo": "spark86123@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527771065721,
-    "stripe_id": "cus_Nloz5owpWrsXcf",
     "final_date": 1723610000,
-    "id": 30988,
-    "level": 0
+    "level": 0,
+    "id": 30988
   },
   {
     "nombre": "Berenise",
@@ -42532,10 +42254,10 @@ export const activeUsers = [
     "correo": "betobere506@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525632725324,
-    "stripe_id": "cus_NZLkFTof1pRYzl",
-    "final_date": 1692650000,
-    "id": 31008,
-    "level": 1
+    "conekta_id": "cus_2uQhMLnAV28BPQwjJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 31008
   },
   {
     "nombre": "N√Æñ√§ M√§l√§",
@@ -42543,10 +42265,9 @@ export const activeUsers = [
     "correo": "dilennyramirez2015@hotmail.com",
     "pais": "Dominican Republic",
     "whatsapp": 18298506107,
-    "stripe_id": "cus_NlozYfaSvCrVS3",
     "final_date": 1685100000,
-    "id": 31115,
-    "level": 1
+    "level": 1,
+    "id": 31115
   },
   {
     "nombre": "Rosalía",
@@ -42554,10 +42275,9 @@ export const activeUsers = [
     "correo": "rosaliagonzalez690@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525544781168,
-    "stripe_id": "cus_McRDNQejDWWkyG",
     "final_date": 1681750000,
-    "id": 31152,
-    "level": 1
+    "level": 1,
+    "id": 31152
   },
   {
     "nombre": "Maribel",
@@ -42565,10 +42285,10 @@ export const activeUsers = [
     "correo": "maryhd06@gamil.com",
     "pais": "Mexico",
     "whatsapp": 528211419569,
-    "stripe_id": "cus_McRv7UFByw2Aid",
-    "final_date": 1692030000,
-    "id": 31156,
-    "level": 1
+    "conekta_id": "cus_2uQhMMmLcv5j7tXmJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 31156
   },
   {
     "nombre": "mary",
@@ -42576,10 +42296,10 @@ export const activeUsers = [
     "correo": "maryhd06@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528211419569,
-    "stripe_id": "cus_NAIFDpTDndPcho",
-    "final_date": 1691970000,
-    "id": 31166,
-    "level": 1
+    "conekta_id": "cus_2uQhMNGNk1uRKyqGY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 31166
   },
   {
     "nombre": "kelly",
@@ -42587,10 +42307,10 @@ export const activeUsers = [
     "correo": "kelly1997campos@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523143384480,
-    "stripe_id": "cus_MszhD7rqYde3zQ",
-    "final_date": 1693250000,
-    "id": 31408,
-    "level": 1
+    "conekta_id": "cus_2uQhMP1CGDU4xFVmF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 31408
   },
   {
     "nombre": "GRISELDA VALERIA",
@@ -42598,10 +42318,10 @@ export const activeUsers = [
     "correo": "g.vale.f.l@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525544930907,
-    "stripe_id": "cus_MdE7nrkOTZ6wRT",
-    "final_date": 1692300000,
-    "id": 31511,
-    "level": 1
+    "conekta_id": "cus_2uQhMP1CGDU4xFVmQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 31511
   },
   {
     "nombre": "Ana luisa",
@@ -42609,10 +42329,9 @@ export const activeUsers = [
     "correo": "isabella_301012@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529241108383,
-    "stripe_id": "cus_MdXI2y0XNm0H2m",
     "final_date": 1679060000,
-    "id": 31644,
-    "level": 1
+    "level": 1,
+    "id": 31644
   },
   {
     "nombre": "Yessica",
@@ -42620,10 +42339,9 @@ export const activeUsers = [
     "correo": "yessica2501gonza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524296978422,
-    "stripe_id": "cus_MdgeL2eoaJCot6",
     "final_date": 1689640000,
-    "id": 31647,
-    "level": 1
+    "level": 1,
+    "id": 31647
   },
   {
     "nombre": "Monserrath",
@@ -42631,10 +42349,9 @@ export const activeUsers = [
     "correo": "monsevbaez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522212673200,
-    "stripe_id": "cus_NWhe5y7PbkmRdp",
     "final_date": 1689370000,
-    "id": 31884,
-    "level": 1
+    "level": 1,
+    "id": 31884
   },
   {
     "nombre": "Angela",
@@ -42642,10 +42359,10 @@ export const activeUsers = [
     "correo": "angelaestrada110499@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18549026069,
-    "stripe_id": "cus_MdznFP5tLS7yjx",
-    "final_date": 1692470000,
-    "id": 31889,
-    "level": 1
+    "conekta_id": "cus_2uQhMQUqJcbN9sYUG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 31889
   },
   {
     "nombre": "Wendy Mercedes",
@@ -42653,10 +42370,9 @@ export const activeUsers = [
     "correo": "wvalde4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529984645923,
-    "stripe_id": "cus_N6VX5GDf55vkbJ",
     "final_date": 1683150000,
-    "id": 31941,
-    "level": 1
+    "level": 1,
+    "id": 31941
   },
   {
     "nombre": "Cristina",
@@ -42664,10 +42380,9 @@ export const activeUsers = [
     "correo": "cristy76_gr@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526562449912,
-    "stripe_id": "cus_Mf44iATtEGHygy",
     "final_date": 1674400000,
-    "id": 31956,
-    "level": 1
+    "level": 1,
+    "id": 31956
   },
   {
     "nombre": "Agustina",
@@ -42675,10 +42390,9 @@ export const activeUsers = [
     "correo": "zarate2_chisco@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523481331227,
-    "stripe_id": "cus_MgMXvbhl4seJNE",
     "final_date": 1685070000,
-    "id": 32028,
-    "level": 1
+    "level": 1,
+    "id": 32028
   },
   {
     "nombre": "Dulce Paola",
@@ -42686,10 +42400,10 @@ export const activeUsers = [
     "correo": "dpaola.nd2018@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528121201513,
-    "stripe_id": "cus_N9c8AlXdj1HUKE",
-    "final_date": 1691820000,
-    "id": 32092,
-    "level": 1
+    "conekta_id": "cus_2uQhMS8V372RDNioc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32092
   },
   {
     "nombre": "Marilú",
@@ -42697,10 +42411,10 @@ export const activeUsers = [
     "correo": "amazonafairy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522223391540,
-    "stripe_id": "cus_MzNfhFb1PbzZZr",
-    "final_date": 1692390000,
-    "id": 32097,
-    "level": 1
+    "conekta_id": "cus_2uQhMS8V372RDNiou",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32097
   },
   {
     "nombre": "Miriam",
@@ -42708,10 +42422,9 @@ export const activeUsers = [
     "correo": "sotomiriam206@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526645580888,
-    "stripe_id": "cus_MucCcYjczn4fjw",
     "final_date": 1723660000,
-    "id": 32130,
-    "level": 0
+    "level": 0,
+    "id": 32130
   },
   {
     "nombre": "Hydee Paola",
@@ -42719,10 +42432,10 @@ export const activeUsers = [
     "correo": "espacios414@gmil.com",
     "pais": "Guatemala",
     "whatsapp": 50231001690,
-    "stripe_id": "cus_MmcEZbCfFYJZdt",
-    "final_date": 1691780000,
-    "id": 32188,
-    "level": 1
+    "conekta_id": "cus_2uQhMTftnWavBDc7c",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32188
   },
   {
     "nombre": "Nancy",
@@ -42730,10 +42443,9 @@ export const activeUsers = [
     "correo": "lilihernandez819@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16264948844,
-    "stripe_id": "cus_Ml1fWCGmNmJuO4",
     "final_date": 1690990000,
-    "id": 32223,
-    "level": 1
+    "level": 1,
+    "id": 32223
   },
   {
     "nombre": "Claudia",
@@ -42741,10 +42453,10 @@ export const activeUsers = [
     "correo": "c_mapa@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524774014096,
-    "stripe_id": "cus_NJCjuLo5oe9d7k",
-    "final_date": 1694030000,
-    "id": 32255,
-    "level": 1
+    "conekta_id": "cus_2uQhMULwbhiN6BiHi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32255
   },
   {
     "nombre": "Laura",
@@ -42752,10 +42464,9 @@ export const activeUsers = [
     "correo": "laurencortes1984@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581763053,
-    "stripe_id": "cus_N239AEATMLuLpi",
     "final_date": 1689990000,
-    "id": 32334,
-    "level": 1
+    "level": 1,
+    "id": 32334
   },
   {
     "nombre": "Susana",
@@ -42763,10 +42474,10 @@ export const activeUsers = [
     "correo": "orocio04@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17086578296,
-    "stripe_id": "cus_Momh9Uk25oajFl",
-    "final_date": 1692280000,
-    "id": 32347,
-    "level": 1
+    "conekta_id": "cus_2uQhMVChCJ4uvie5d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32347
   },
   {
     "nombre": "Daniela",
@@ -42774,10 +42485,10 @@ export const activeUsers = [
     "correo": "dannietr_08@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525576217577,
-    "stripe_id": "cus_NLaNpj9ckc7Emp",
-    "final_date": 1691900000,
-    "id": 32364,
-    "level": 1
+    "conekta_id": "cus_2uQhMVpae6qfLj3H1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32364
   },
   {
     "nombre": "ale",
@@ -42785,10 +42496,10 @@ export const activeUsers = [
     "correo": "yessmichelle502@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15053890806,
-    "stripe_id": "cus_MpdFrI8ESKEaFA",
-    "final_date": 1692480000,
-    "id": 32403,
-    "level": 1
+    "conekta_id": "cus_2uQhMWgLEhCDBFy4f",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32403
   },
   {
     "nombre": "María Dolores",
@@ -42796,10 +42507,9 @@ export const activeUsers = [
     "correo": "lolis.lre77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524271893359,
-    "stripe_id": "cus_MucjbFuIrilIuo",
     "final_date": 1690950000,
-    "id": 32420,
-    "level": 1
+    "level": 1,
+    "id": 32420
   },
   {
     "nombre": "Ana Nydia",
@@ -42807,10 +42517,10 @@ export const activeUsers = [
     "correo": "nydthia23@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528111838988,
-    "stripe_id": "cus_MucAK7qC2ASUKR",
-    "final_date": 1693630000,
-    "id": 32448,
-    "level": 1
+    "conekta_id": "cus_2uQhMXR9ktkrkPFoe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32448
   },
   {
     "nombre": "Cindy Christian",
@@ -42818,10 +42528,10 @@ export const activeUsers = [
     "correo": "sandy19850121@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523525237723,
-    "stripe_id": "cus_NgwPv1cZfrHkp9",
-    "final_date": 1691730000,
-    "id": 32452,
-    "level": 1
+    "conekta_id": "cus_2uQhMY6ouhxosfpgr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32452
   },
   {
     "nombre": "aniela yadimara",
@@ -42829,10 +42539,10 @@ export const activeUsers = [
     "correo": "yadimara@icloud.com",
     "pais": "Mexico",
     "whatsapp": 529612030026,
-    "stripe_id": "cus_NP8Tne9PsRR8MT",
-    "final_date": 1693060000,
-    "id": 32460,
-    "level": 1
+    "conekta_id": "cus_2uQhMYmriu6FqohFU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32460
   },
   {
     "nombre": "Perla Jacqueline",
@@ -42840,10 +42550,10 @@ export const activeUsers = [
     "correo": "perlaaguilar9jacqueli9@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525615084250,
-    "stripe_id": "cus_MvMKxKhqUueeBq",
-    "final_date": 1693800000,
-    "id": 32478,
-    "level": 1
+    "conekta_id": "cus_2uQhMYqdRuXTTG2gX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32478
   },
   {
     "nombre": "angelica",
@@ -42851,10 +42561,9 @@ export const activeUsers = [
     "correo": "yoselinsalinas372@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525586469063,
-    "stripe_id": "cus_N2Gq5EYIfVi8vs",
     "final_date": 1677160000,
-    "id": 32495,
-    "level": 1
+    "level": 1,
+    "id": 32495
   },
   {
     "nombre": "Irais",
@@ -42862,10 +42571,10 @@ export const activeUsers = [
     "correo": "keyanw24@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522382067930,
-    "stripe_id": "cus_MudW4VZtuwbgCt",
-    "final_date": 1693950000,
-    "id": 32511,
-    "level": 1
+    "conekta_id": "cus_2uQhMZWgF6euU5Mk4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32511
   },
   {
     "nombre": "Anyaneth",
@@ -42873,10 +42582,10 @@ export const activeUsers = [
     "correo": "0283anny@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525542672731,
-    "stripe_id": "cus_NM5HOykHLWJw4V",
-    "final_date": 1692010000,
-    "id": 32534,
-    "level": 1
+    "conekta_id": "cus_2uQhMa5V5CuoJwToK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32534
   },
   {
     "nombre": "alicia",
@@ -42884,10 +42593,10 @@ export const activeUsers = [
     "correo": "orijimenezstudio@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528131549669,
-    "stripe_id": "cus_N8dquB1WLvZu6x",
-    "final_date": 1691590000,
-    "id": 32538,
-    "level": 1
+    "conekta_id": "cus_2uQhMazKHVnCicgjE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32538
   },
   {
     "nombre": "erika",
@@ -42895,10 +42604,10 @@ export const activeUsers = [
     "correo": "erikapalomareshernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522222096508,
-    "stripe_id": "cus_NLxpz1PkSTQlFv",
-    "final_date": 1691990000,
-    "id": 32539,
-    "level": 1
+    "conekta_id": "cus_2uQhMb7FMta6vsx29",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32539
   },
   {
     "nombre": "Guadalupe",
@@ -42906,10 +42615,9 @@ export const activeUsers = [
     "correo": "zapata_lupiitha@outlook.com",
     "pais": "Mexico",
     "whatsapp": 522213065438,
-    "stripe_id": "cus_MupfNuc3Ju1kAt",
     "final_date": 0,
-    "id": 32561,
-    "level": 1
+    "level": 1,
+    "id": 32561
   },
   {
     "nombre": "olga",
@@ -42917,10 +42625,10 @@ export const activeUsers = [
     "correo": "olgaceballos52@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522295314409,
-    "stripe_id": "cus_Msh5jTOm4MdNLX",
-    "final_date": 1693180000,
-    "id": 32568,
-    "level": 1
+    "conekta_id": "cus_2uQhMcXj2uLhacM9B",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32568
   },
   {
     "nombre": "ANA VICTORIA",
@@ -42928,10 +42636,10 @@ export const activeUsers = [
     "correo": "vicko.vargas.v25.vs@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525573841302,
-    "stripe_id": "cus_MucBEtSMmyNhAz",
-    "final_date": 1693630000,
-    "id": 32575,
-    "level": 1
+    "conekta_id": "cus_2uQhMcHNRCwoX5t5f",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32575
   },
   {
     "nombre": "Sandybell",
@@ -42939,10 +42647,9 @@ export const activeUsers = [
     "correo": "tototito1724@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522221659129,
-    "stripe_id": "cus_MvYPPtssqxgdkz",
     "final_date": 1691250000,
-    "id": 32588,
-    "level": 1
+    "level": 1,
+    "id": 32588
   },
   {
     "nombre": "aidee",
@@ -42950,10 +42657,10 @@ export const activeUsers = [
     "correo": "ramirezaidee495@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548831609,
-    "stripe_id": "cus_Mubzl65cDHuRKT",
-    "final_date": 1693630000,
-    "id": 32770,
-    "level": 1
+    "conekta_id": "cus_2uQhMdGYZ6uMJjEYL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32770
   },
   {
     "nombre": "paula",
@@ -42961,10 +42668,9 @@ export const activeUsers = [
     "correo": "avilapucca_avila@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525511310187,
-    "stripe_id": "cus_MucAtOt7AqvqpT",
     "final_date": 0,
-    "id": 32782,
-    "level": 1
+    "level": 1,
+    "id": 32782
   },
   {
     "nombre": "Erika cristina",
@@ -42972,10 +42678,9 @@ export const activeUsers = [
     "correo": "ledezmaerikacristina@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527712798559,
-    "stripe_id": "cus_MubwlqxH6Frnm7",
     "final_date": 1690950000,
-    "id": 32859,
-    "level": 1
+    "level": 1,
+    "id": 32859
   },
   {
     "nombre": "Adriana",
@@ -42983,20 +42688,19 @@ export const activeUsers = [
     "correo": "cottadri77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522231181999,
-    "stripe_id": "cus_MucERMY4O24Y1T",
     "final_date": 1677730000,
-    "id": 32874,
-    "level": 1
+    "level": 1,
+    "id": 32874
   },
   {
     "nombre": "liliana",
     "apellido": "Molina",
     "correo": "srayuli@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_Muc1kkpMotlhIj",
-    "final_date": 1693630000,
-    "id": 32898,
-    "level": 1
+    "conekta_id": "cus_2uQhMegQtVbSmWn8e",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32898
   },
   {
     "nombre": "amira yaneth",
@@ -43004,10 +42708,9 @@ export const activeUsers = [
     "correo": "arteagamataa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528994287663,
-    "stripe_id": "cus_MucPXxXjCX1ihp",
     "final_date": 1680410000,
-    "id": 32900,
-    "level": 1
+    "level": 1,
+    "id": 32900
   },
   {
     "nombre": "Martha Sandra",
@@ -43015,10 +42718,10 @@ export const activeUsers = [
     "correo": "sandra.flots@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523310420054,
-    "stripe_id": "cus_MusntwEAlhMzgq",
-    "final_date": 1694390000,
-    "id": 32964,
-    "level": 1
+    "conekta_id": "cus_2uQhMfEeW1CPyVJeZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32964
   },
   {
     "nombre": "cecilia",
@@ -43026,10 +42729,9 @@ export const activeUsers = [
     "correo": "cecycarrera38@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522382022167,
-    "stripe_id": "cus_Muc1p6D8WYUCKt",
     "final_date": 1675310000,
-    "id": 33001,
-    "level": 1
+    "level": 1,
+    "id": 33001
   },
   {
     "nombre": "Willi Artemio",
@@ -43037,10 +42739,9 @@ export const activeUsers = [
     "correo": "artemioortiz675@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529932812480,
-    "stripe_id": "cus_MubzC9e0EdOM5r",
     "final_date": 0,
-    "id": 33052,
-    "level": 1
+    "level": 1,
+    "id": 33052
   },
   {
     "nombre": "Abigail",
@@ -43048,10 +42749,10 @@ export const activeUsers = [
     "correo": "abigail16sanchez02medina02@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525562265794,
-    "stripe_id": "cus_Muc1jjJYJfhraa",
-    "final_date": 1693630000,
-    "id": 33141,
-    "level": 1
+    "conekta_id": "cus_2uQhMgxeA6ibLEL7D",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33141
   },
   {
     "nombre": "gabriela",
@@ -43059,10 +42760,10 @@ export const activeUsers = [
     "correo": "gaby_chay92@outlook.com",
     "pais": "Mexico",
     "whatsapp": 529981447766,
-    "stripe_id": "cus_Muc3wvamyNTPcW",
-    "final_date": 1693630000,
-    "id": 33169,
-    "level": 1
+    "conekta_id": "cus_2uQhMgxeA6ibS5Z17",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33169
   },
   {
     "nombre": "Alejandra Guadalupe",
@@ -43070,10 +42771,10 @@ export const activeUsers = [
     "correo": "alelupe_12@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525625792210,
-    "stripe_id": "cus_Muc25NDmm6VSpk",
-    "final_date": 1693630000,
-    "id": 33212,
-    "level": 1
+    "conekta_id": "cus_2uQhMhkd3gdwYJvvm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33212
   },
   {
     "nombre": "Wendy Maricruz",
@@ -43081,10 +42782,9 @@ export const activeUsers = [
     "correo": "wendy2402oliva@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525578326870,
-    "stripe_id": "cus_MucHq53gI0nI2i",
     "final_date": 1690950000,
-    "id": 33217,
-    "level": 1
+    "level": 1,
+    "id": 33217
   },
   {
     "nombre": "Idania",
@@ -43092,10 +42792,10 @@ export const activeUsers = [
     "correo": "danny.gari19@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523221316636,
-    "stripe_id": "cus_Muc5adTEqhshu3",
-    "final_date": 1693630000,
-    "id": 33225,
-    "level": 1
+    "conekta_id": "cus_2uQhMiCVoQ6wDGkbM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33225
   },
   {
     "nombre": "osiris paola",
@@ -43103,10 +42803,9 @@ export const activeUsers = [
     "correo": "osmasar437@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981286797,
-    "stripe_id": "cus_Mubz4E45rXxK7l",
     "final_date": 1690950000,
-    "id": 33245,
-    "level": 1
+    "level": 1,
+    "id": 33245
   },
   {
     "nombre": "Rosa María",
@@ -43114,10 +42813,10 @@ export const activeUsers = [
     "correo": "osorioavila82@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522228296896,
-    "stripe_id": "cus_Muc29nYDlIUsoy",
-    "final_date": 1693630000,
-    "id": 33278,
-    "level": 1
+    "conekta_id": "cus_2uQhMj7L1gyLbaz9R",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33278
   },
   {
     "nombre": "Virginia",
@@ -43125,10 +42824,9 @@ export const activeUsers = [
     "correo": "vm0397331@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527641157804,
-    "stripe_id": "cus_N04DnjaVFTqf3H",
     "final_date": 1676570000,
-    "id": 33301,
-    "level": 1
+    "level": 1,
+    "id": 33301
   },
   {
     "nombre": "Ana Laura",
@@ -43136,10 +42834,9 @@ export const activeUsers = [
     "correo": "anagonzalez2.mi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528441987089,
-    "stripe_id": "cus_Muc4xgzJb7dKIl",
     "final_date": 1690950000,
-    "id": 33365,
-    "level": 1
+    "level": 1,
+    "id": 33365
   },
   {
     "nombre": "Diana",
@@ -43147,10 +42844,10 @@ export const activeUsers = [
     "correo": "dianamondragon92@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17049633900,
-    "stripe_id": "cus_MucDgMBBeQ1kX4",
-    "final_date": 1693710000,
-    "id": 33376,
-    "level": 1
+    "conekta_id": "cus_2uQhMkay466dmg64r",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33376
   },
   {
     "nombre": "Tannia Yazmin",
@@ -43158,10 +42855,10 @@ export const activeUsers = [
     "correo": "pueblatannia@gmil.com",
     "pais": "Mexico",
     "whatsapp": 524421603010,
-    "stripe_id": "cus_Muc24l7thDU2Zf",
-    "final_date": 1693630000,
-    "id": 33380,
-    "level": 1
+    "conekta_id": "cus_2uQhMkejm6XqTaeaX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33380
   },
   {
     "nombre": "Gabriela",
@@ -43169,10 +42866,10 @@ export const activeUsers = [
     "correo": "gabybaez0868@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524492438138,
-    "stripe_id": "cus_MuchIpsPr88nhz",
-    "final_date": 1693630000,
-    "id": 33403,
-    "level": 1
+    "conekta_id": "cus_2uQhMmSiegTBdWs9w",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33403
   },
   {
     "nombre": "Sara María",
@@ -43180,10 +42877,10 @@ export const activeUsers = [
     "correo": "leviger_045@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526641760857,
-    "stripe_id": "cus_Muby4VNbgaIy73",
-    "final_date": 1693410000,
-    "id": 33406,
-    "level": 1
+    "conekta_id": "cus_2uQhMn4c6VDw2DR3n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33406
   },
   {
     "nombre": "Karina Erika",
@@ -43191,10 +42888,9 @@ export const activeUsers = [
     "correo": "kerg81@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524612725178,
-    "stripe_id": "cus_Muc2WgyZdFmaqQ",
     "final_date": 1680410000,
-    "id": 33436,
-    "level": 1
+    "level": 1,
+    "id": 33436
   },
   {
     "nombre": "Angelica",
@@ -43202,10 +42898,9 @@ export const activeUsers = [
     "correo": "perezangiie1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525528188997,
-    "stripe_id": "cus_Muc0PYnxS01QlW",
     "final_date": 1677730000,
-    "id": 33525,
-    "level": 1
+    "level": 1,
+    "id": 33525
   },
   {
     "nombre": "dulce maria",
@@ -43213,10 +42908,10 @@ export const activeUsers = [
     "correo": "dulce050788@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52618109986,
-    "stripe_id": "cus_Muc2G0WGZgdsD2",
-    "final_date": 1693630000,
-    "id": 33579,
-    "level": 1
+    "conekta_id": "cus_2uQhMoMfECPXrTc4W",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33579
   },
   {
     "nombre": "karla",
@@ -43224,10 +42919,9 @@ export const activeUsers = [
     "correo": "sarahiramosj98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523411592347,
-    "stripe_id": "cus_Muc1sND8L3urUi",
     "final_date": 1690950000,
-    "id": 33628,
-    "level": 1
+    "level": 1,
+    "id": 33628
   },
   {
     "nombre": "Martha",
@@ -43235,10 +42929,10 @@ export const activeUsers = [
     "correo": "martha09122007@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528064942652,
-    "stripe_id": "cus_Muc2R6cGfzIduO",
-    "final_date": 1693630000,
-    "id": 33641,
-    "level": 1
+    "conekta_id": "cus_2uQhMpLqN6M5gnBum",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33641
   },
   {
     "nombre": "stephanie",
@@ -43246,10 +42940,9 @@ export const activeUsers = [
     "correo": "fanysilva621@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525611796561,
-    "stripe_id": "cus_Muc2hXSjmiWZfk",
     "final_date": 1690950000,
-    "id": 33650,
-    "level": 1
+    "level": 1,
+    "id": 33650
   },
   {
     "nombre": "Mayra Sujey",
@@ -43257,10 +42950,10 @@ export const activeUsers = [
     "correo": "mayra_mkj@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528126023427,
-    "stripe_id": "cus_Muc5B9zMQqmCZF",
-    "final_date": 1693630000,
-    "id": 33662,
-    "level": 1
+    "conekta_id": "cus_2uQhMpqsVCAmpLjfZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33662
   },
   {
     "nombre": "Alicia",
@@ -43268,10 +42961,10 @@ export const activeUsers = [
     "correo": "acuario521991@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526681134907,
-    "stripe_id": "cus_Muc4zPJYigqRKS",
-    "final_date": 1693630000,
-    "id": 33670,
-    "level": 1
+    "conekta_id": "cus_2uQhMqpUQVUNt9kWg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33670
   },
   {
     "nombre": "yanely",
@@ -43279,10 +42972,10 @@ export const activeUsers = [
     "correo": "yanelycabrera26@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14843873936,
-    "stripe_id": "cus_Muc8JbjekSjYVn",
-    "final_date": 1693630000,
-    "id": 33672,
-    "level": 1
+    "conekta_id": "cus_2uQhMqa7no5UjGbYo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33672
   },
   {
     "nombre": "bethsabee",
@@ -43290,10 +42983,10 @@ export const activeUsers = [
     "correo": "bethsy0319@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19515579625,
-    "stripe_id": "cus_Muc17tZ0QSEMFa",
-    "final_date": 1693630000,
-    "id": 33688,
-    "level": 1
+    "conekta_id": "cus_2uQhMrKWXbJ53KmeQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33688
   },
   {
     "nombre": "Luisa Guadalupe",
@@ -43301,10 +42994,9 @@ export const activeUsers = [
     "correo": "luisaguadalupenava@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527291349141,
-    "stripe_id": "cus_NLyUZigjQ6xxhX",
     "final_date": 0,
-    "id": 33707,
-    "level": 1
+    "level": 1,
+    "id": 33707
   },
   {
     "nombre": "itzel de los angeles",
@@ -43312,10 +43004,10 @@ export const activeUsers = [
     "correo": "itange_2307@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527121714475,
-    "stripe_id": "cus_Muc3AkGb3Pjy7X",
-    "final_date": 1693630000,
-    "id": 33714,
-    "level": 1
+    "conekta_id": "cus_2uQhMs4L3nrifbS8u",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33714
   },
   {
     "nombre": "Laura",
@@ -43323,10 +43015,10 @@ export const activeUsers = [
     "correo": "javiereveles1@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18317895050,
-    "stripe_id": "cus_Muc4VAUwxA8HD3",
-    "final_date": 1693630000,
-    "id": 33721,
-    "level": 1
+    "conekta_id": "cus_2uQhMt66LUX2K6DMB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33721
   },
   {
     "nombre": "Iday",
@@ -43334,10 +43026,10 @@ export const activeUsers = [
     "correo": "idaliahernandez020387@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529511101492,
-    "stripe_id": "cus_Muc3lrSEzESSxW",
-    "final_date": 1693630000,
-    "id": 33726,
-    "level": 1
+    "conekta_id": "cus_2uQhMtXPsbL5EMFXM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33726
   },
   {
     "nombre": "yazmin del carmen",
@@ -43345,10 +43037,10 @@ export const activeUsers = [
     "correo": "yazminangles31@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529331632734,
-    "stripe_id": "cus_Muc3yq4jqmijNR",
-    "final_date": 1693630000,
-    "id": 33738,
-    "level": 1
+    "conekta_id": "cus_2uQhMtpurg5fwMsqh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33738
   },
   {
     "nombre": "Yesica",
@@ -43356,10 +43048,10 @@ export const activeUsers = [
     "correo": "alevangy4501@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527751036818,
-    "stripe_id": "cus_Muc3K8nfZbyDAw",
-    "final_date": 1693630000,
-    "id": 33740,
-    "level": 1
+    "conekta_id": "cus_2uQhMuWa1VHd4fqMN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33740
   },
   {
     "nombre": "Yesenia",
@@ -43367,10 +43059,9 @@ export const activeUsers = [
     "correo": "niayese0208@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525540140595,
-    "stripe_id": "cus_Muc3t9h7oiviAL",
     "final_date": 1690950000,
-    "id": 33746,
-    "level": 1
+    "level": 1,
+    "id": 33746
   },
   {
     "nombre": "Mayra Josefina",
@@ -43378,10 +43069,9 @@ export const activeUsers = [
     "correo": "mayraj.esquivelmaya@outlook.es",
     "pais": "Mexico",
     "whatsapp": 527151312445,
-    "stripe_id": "cus_Muc3xOpoqvVzce",
     "final_date": 1677730000,
-    "id": 33806,
-    "level": 1
+    "level": 1,
+    "id": 33806
   },
   {
     "nombre": "Mayeli Madelin",
@@ -43389,10 +43079,10 @@ export const activeUsers = [
     "correo": "maye15morpe@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221661639,
-    "stripe_id": "cus_Muc3riimfGAjJR",
-    "final_date": 1693630000,
-    "id": 33835,
-    "level": 1
+    "conekta_id": "cus_2uQhMvjrSC22D39Bj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33835
   },
   {
     "nombre": "guadalpe",
@@ -43400,10 +43090,10 @@ export const activeUsers = [
     "correo": "guadaluperamirezestanislao36@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529222322795,
-    "stripe_id": "cus_Muc6XVRkDvpNJ8",
-    "final_date": 1691540000,
-    "id": 33843,
-    "level": 1
+    "conekta_id": "cus_2uQhMvzD3tQvG3PyD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33843
   },
   {
     "nombre": "Ma. Guadalupe",
@@ -43411,10 +43101,10 @@ export const activeUsers = [
     "correo": "lupisdemunoz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524493395120,
-    "stripe_id": "cus_Muc3eZawsdSQJy",
-    "final_date": 1693630000,
-    "id": 33854,
-    "level": 1
+    "conekta_id": "cus_2uQhMwVFAzEcU8hVk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33854
   },
   {
     "nombre": "yessica",
@@ -43422,10 +43112,10 @@ export const activeUsers = [
     "correo": "yessicamorales38@jotnail.com",
     "pais": "Estados Unidos",
     "whatsapp": 13213140846,
-    "stripe_id": "cus_Muc5esvildtkIc",
-    "final_date": 1693630000,
-    "id": 33856,
-    "level": 1
+    "conekta_id": "cus_2uQhMxDVUb9KMhZzW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33856
   },
   {
     "nombre": "Yazmin Gabriela",
@@ -43433,10 +43123,10 @@ export const activeUsers = [
     "correo": "gabyruiz0918@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524614019006,
-    "stripe_id": "cus_Muc3i07myfjC73",
-    "final_date": 1693630000,
-    "id": 33871,
-    "level": 1
+    "conekta_id": "cus_2uQhMxX1Tftv4iCKU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33871
   },
   {
     "nombre": "Mayra Abigail",
@@ -43444,10 +43134,10 @@ export const activeUsers = [
     "correo": "abi_gs@outlook.es",
     "pais": "Mexico",
     "whatsapp": 525546909636,
-    "stripe_id": "cus_Muc5EUZgDjh3jx",
-    "final_date": 1693630000,
-    "id": 33913,
-    "level": 1
+    "conekta_id": "cus_2uQhMy8tuUffRH21K",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33913
   },
   {
     "nombre": "Elvia América",
@@ -43455,10 +43145,10 @@ export const activeUsers = [
     "correo": "acirema_aja@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522227096081,
-    "stripe_id": "cus_MucBI15ZQiEtik",
-    "final_date": 1693630000,
-    "id": 33921,
-    "level": 1
+    "conekta_id": "cus_2uQhMysiRgEK3YgVr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33921
   },
   {
     "nombre": "mayra flor",
@@ -43466,10 +43156,9 @@ export const activeUsers = [
     "correo": "mayflorra@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524921044793,
-    "stripe_id": "cus_MucMrwjWTQeWrr",
     "final_date": 1690950000,
-    "id": 33970,
-    "level": 1
+    "level": 1,
+    "id": 33970
   },
   {
     "nombre": "Gabriela",
@@ -43477,10 +43166,10 @@ export const activeUsers = [
     "correo": "gabyota1021@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522471067909,
-    "stripe_id": "cus_Muc8ahnljcsr9m",
-    "final_date": 1693630000,
-    "id": 33976,
-    "level": 1
+    "conekta_id": "cus_2uQhMzcXwsnxbenvr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33976
   },
   {
     "nombre": "Mayra Dayana",
@@ -43488,10 +43177,10 @@ export const activeUsers = [
     "correo": "mdayanameza997@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523319076628,
-    "stripe_id": "cus_Mucke8YUwumdDX",
-    "final_date": 1692210000,
-    "id": 33988,
-    "level": 1
+    "conekta_id": "cus_2uQhN1R8B5np4q9HR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 33988
   },
   {
     "nombre": "Vero",
@@ -43499,10 +43188,9 @@ export const activeUsers = [
     "correo": "gorditapuzquita@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525538003642,
-    "stripe_id": "cus_MucqkXY1qw8BE1",
     "final_date": 1690950000,
-    "id": 33995,
-    "level": 1
+    "level": 1,
+    "id": 33995
   },
   {
     "nombre": "fabiola",
@@ -43510,10 +43198,9 @@ export const activeUsers = [
     "correo": "fabidedioscanto@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529984423723,
-    "stripe_id": "cus_Muc7v0VGqmfH7H",
     "final_date": 1675310000,
-    "id": 34036,
-    "level": 1
+    "level": 1,
+    "id": 34036
   },
   {
     "nombre": "Ana laura",
@@ -43521,10 +43208,9 @@ export const activeUsers = [
     "correo": "pantojagarcialaura@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524251628659,
-    "stripe_id": "cus_MucCTGAYUd3aut",
     "final_date": 1680410000,
-    "id": 34042,
-    "level": 1
+    "level": 1,
+    "id": 34042
   },
   {
     "nombre": "Laura Rebeca",
@@ -43532,10 +43218,10 @@ export const activeUsers = [
     "correo": "nwa2327@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525571664957,
-    "stripe_id": "cus_MucALKhkjiEObL",
-    "final_date": 1693630000,
-    "id": 34043,
-    "level": 1
+    "conekta_id": "cus_2uQhN2tmDUv7KNUGV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34043
   },
   {
     "nombre": "kenia",
@@ -43543,10 +43229,9 @@ export const activeUsers = [
     "correo": "hilssegarcia@edubc.mx",
     "pais": "Mexico",
     "whatsapp": 526631160610,
-    "stripe_id": "cus_Muc7NAcyRo4BPj",
     "final_date": 1683000000,
-    "id": 34058,
-    "level": 1
+    "level": 1,
+    "id": 34058
   },
   {
     "nombre": "maria herlinda",
@@ -43554,10 +43239,9 @@ export const activeUsers = [
     "correo": "herlindalerma09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528131315333,
-    "stripe_id": "cus_Muc6NaIlpCzSwy",
     "final_date": 1680410000,
-    "id": 34059,
-    "level": 1
+    "level": 1,
+    "id": 34059
   },
   {
     "nombre": "Maria Esther",
@@ -43565,10 +43249,10 @@ export const activeUsers = [
     "correo": "esthersita1966@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513655397,
-    "stripe_id": "cus_Muc66zTis2TMZP",
-    "final_date": 1693630000,
-    "id": 34074,
-    "level": 1
+    "conekta_id": "cus_2uQhN3PE7z5rnGSnq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34074
   },
   {
     "nombre": "Elizabeth",
@@ -43576,10 +43260,10 @@ export const activeUsers = [
     "correo": "elizahermar3@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527761001072,
-    "stripe_id": "cus_Muc9hY5emBjm5i",
-    "final_date": 1693630000,
-    "id": 34185,
-    "level": 1
+    "conekta_id": "cus_2uQhN4RZdGQ74sWGe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34185
   },
   {
     "nombre": "Ma de los Remedios",
@@ -43587,10 +43271,9 @@ export const activeUsers = [
     "correo": "maryrememiranda@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525516801836,
-    "stripe_id": "cus_Muc8OtoWCqvRzA",
     "final_date": 1680410000,
-    "id": 34220,
-    "level": 1
+    "level": 1,
+    "id": 34220
   },
   {
     "nombre": "María de Lourdes",
@@ -43598,10 +43281,10 @@ export const activeUsers = [
     "correo": "tametzona.granados30@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525519320561,
-    "stripe_id": "cus_Muc7cFglnCjrvY",
-    "final_date": 1693630000,
-    "id": 34224,
-    "level": 1
+    "conekta_id": "cus_2uQhN57Dn5c491hPb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34224
   },
   {
     "nombre": "Maite",
@@ -43609,10 +43292,10 @@ export const activeUsers = [
     "correo": "maitegv0304@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524451934704,
-    "stripe_id": "cus_MucBc7joDIneCP",
-    "final_date": 1693630000,
-    "id": 34237,
-    "level": 1
+    "conekta_id": "cus_2uQhN5cFuBRkJBiVr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34237
   },
   {
     "nombre": "Marisol",
@@ -43620,10 +43303,9 @@ export const activeUsers = [
     "correo": "marishopacg@gmail.com.mx",
     "pais": "Mexico",
     "whatsapp": 526121326605,
-    "stripe_id": "cus_Muc9bRuuaNlNgi",
     "final_date": 1680410000,
-    "id": 34253,
-    "level": 1
+    "level": 1,
+    "id": 34253
   },
   {
     "nombre": "maria delcarmen",
@@ -43631,10 +43313,9 @@ export const activeUsers = [
     "correo": "mariguz161285@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524613093865,
-    "stripe_id": "cus_Muc9c7gQdyLZBM",
     "final_date": 1683000000,
-    "id": 34255,
-    "level": 1
+    "level": 1,
+    "id": 34255
   },
   {
     "nombre": "Mariana",
@@ -43642,10 +43323,9 @@ export const activeUsers = [
     "correo": "mhm300898@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522228428908,
-    "stripe_id": "cus_MucArJ0YMoyfD6",
     "final_date": 1690950000,
-    "id": 34261,
-    "level": 1
+    "level": 1,
+    "id": 34261
   },
   {
     "nombre": "abigail",
@@ -43653,10 +43333,9 @@ export const activeUsers = [
     "correo": "yadir@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525542906437,
-    "stripe_id": "cus_MucEH7R5AsBIAO",
     "final_date": 1675310000,
-    "id": 34282,
-    "level": 1
+    "level": 1,
+    "id": 34282
   },
   {
     "nombre": "Catalina",
@@ -43664,10 +43343,10 @@ export const activeUsers = [
     "correo": "romyangel401@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528184591088,
-    "stripe_id": "cus_MucASzeOcns04a",
-    "final_date": 1693540000,
-    "id": 34292,
-    "level": 1
+    "conekta_id": "cus_2uQhN7FudfroMgtvA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34292
   },
   {
     "nombre": "Maria Esther",
@@ -43675,10 +43354,9 @@ export const activeUsers = [
     "correo": "extrella2006@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524434779905,
-    "stripe_id": "cus_MucAiLz1VQXpUm",
     "final_date": 1683000000,
-    "id": 34301,
-    "level": 1
+    "level": 1,
+    "id": 34301
   },
   {
     "nombre": "clara jasmin",
@@ -43686,10 +43364,9 @@ export const activeUsers = [
     "correo": "clarajasminf@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525571487142,
-    "stripe_id": "cus_MucAZDoJrp4zkg",
     "final_date": 1690950000,
-    "id": 34324,
-    "level": 1
+    "level": 1,
+    "id": 34324
   },
   {
     "nombre": "Celia Belinda",
@@ -43697,10 +43374,19 @@ export const activeUsers = [
     "correo": "cbelindari2602@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528182758678,
-    "stripe_id": "cus_MucBGnl2fv7Gxi",
     "final_date": 1690950000,
-    "id": 34327,
-    "level": 1
+    "level": 1,
+    "id": 34327
+  },
+  {
+    "nombre": "Adriana",
+    "apellido": "González Greene",
+    "correo": "adrianagonzalezgreene@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 526121779735,
+    "final_date": 1724180000,
+    "level": 0,
+    "id": 34329
   },
   {
     "nombre": "iliana sarahi",
@@ -43708,10 +43394,10 @@ export const activeUsers = [
     "correo": "sarahi13211@icloud.com",
     "pais": "Mexico",
     "whatsapp": 526567708458,
-    "stripe_id": "cus_Muc9NP6G9A6yoR",
-    "final_date": 1693630000,
-    "id": 34332,
-    "level": 1
+    "conekta_id": "cus_2uQhN84VrsrehG7iQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34332
   },
   {
     "nombre": "Fabiola Araceli",
@@ -43719,10 +43405,10 @@ export const activeUsers = [
     "correo": "faby.araeli@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524491473283,
-    "stripe_id": "cus_MucAoVwB7imcaI",
-    "final_date": 1693630000,
-    "id": 34337,
-    "level": 1
+    "conekta_id": "cus_2uQhN8ZXyygLppfVa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34337
   },
   {
     "nombre": "Itzy",
@@ -43730,10 +43416,9 @@ export const activeUsers = [
     "correo": "yani_az@hotmail.com",
     "pais": "Chile",
     "whatsapp": 56948724481,
-    "stripe_id": "cus_MucELdwAUQKklh",
     "final_date": 1690950000,
-    "id": 34338,
-    "level": 1
+    "level": 1,
+    "id": 34338
   },
   {
     "nombre": "Josefina",
@@ -43741,10 +43426,10 @@ export const activeUsers = [
     "correo": "lajoss.mtz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522231050101,
-    "stripe_id": "cus_MucBC2U7F2ATYd",
-    "final_date": 1693630000,
-    "id": 34347,
-    "level": 1
+    "conekta_id": "cus_2uQhN9UNCGYkEVtPh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34347
   },
   {
     "nombre": "Mayra",
@@ -43752,10 +43437,10 @@ export const activeUsers = [
     "correo": "vidalmagavy3@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523330205082,
-    "stripe_id": "cus_MucBYm9TCnn5hI",
-    "final_date": 1693630000,
-    "id": 34373,
-    "level": 1
+    "conekta_id": "cus_2uQhNA2bon9hSHqAV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34373
   },
   {
     "nombre": "Eunice",
@@ -43763,10 +43448,10 @@ export const activeUsers = [
     "correo": "cosamoxa.512@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526651131188,
-    "stripe_id": "cus_MucBLtVloc4iiQ",
-    "final_date": 1693630000,
-    "id": 34383,
-    "level": 1
+    "conekta_id": "cus_2uQhNA3B2Noe3ohTd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34383
   },
   {
     "nombre": "Melannie Aidee",
@@ -43774,10 +43459,9 @@ export const activeUsers = [
     "correo": "melagonvar00@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529994168220,
-    "stripe_id": "cus_MucJYTvLT5dG4w",
     "final_date": 1683000000,
-    "id": 34394,
-    "level": 1
+    "level": 1,
+    "id": 34394
   },
   {
     "nombre": "Luz Aurora",
@@ -43785,10 +43469,10 @@ export const activeUsers = [
     "correo": "luzvet_90@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526562418565,
-    "stripe_id": "cus_MucMwV8TUj44Tl",
-    "final_date": 1691470000,
-    "id": 34395,
-    "level": 1
+    "conekta_id": "cus_2uQhNAmRKyiM4ZVf1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34395
   },
   {
     "nombre": "Mayela Sarahí",
@@ -43796,10 +43480,10 @@ export const activeUsers = [
     "correo": "yelastudionails@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528123972900,
-    "stripe_id": "cus_MucC5mxoZYiUeV",
-    "final_date": 1693630000,
-    "id": 34436,
-    "level": 1
+    "conekta_id": "cus_2uQhNBWErBGzfEkBr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34436
   },
   {
     "nombre": "Elvia",
@@ -43807,10 +43491,9 @@ export const activeUsers = [
     "correo": "soliselvia055@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523015739382,
-    "stripe_id": "cus_MucE400P96LRnn",
     "final_date": 1690950000,
-    "id": 34453,
-    "level": 1
+    "level": 1,
+    "id": 34453
   },
   {
     "nombre": "Maria Abigail",
@@ -43818,10 +43501,10 @@ export const activeUsers = [
     "correo": "mumelabigail@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529843205432,
-    "stripe_id": "cus_MucEeXGPJSesWN",
-    "final_date": 1693630000,
-    "id": 34473,
-    "level": 1
+    "conekta_id": "cus_2uQhNDAToGMzJQdN5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34473
   },
   {
     "nombre": "kassandra corayma",
@@ -43829,10 +43512,9 @@ export const activeUsers = [
     "correo": "hkassandra738@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524111117512,
-    "stripe_id": "cus_MucFW8bjmsCAh1",
     "final_date": 1690950000,
-    "id": 34487,
-    "level": 1
+    "level": 1,
+    "id": 34487
   },
   {
     "nombre": "Carmela",
@@ -43840,10 +43522,9 @@ export const activeUsers = [
     "correo": "karmelitagal@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525547276457,
-    "stripe_id": "cus_MucbmLe4DXJmSX",
     "final_date": 1690950000,
-    "id": 34490,
-    "level": 1
+    "level": 1,
+    "id": 34490
   },
   {
     "nombre": "Susana",
@@ -43851,10 +43532,10 @@ export const activeUsers = [
     "correo": "susy-0510@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525523130263,
-    "stripe_id": "cus_MucFlmtQb4v1Ua",
-    "final_date": 1693630000,
-    "id": 34491,
-    "level": 1
+    "conekta_id": "cus_2uQhNE2DPriYETGJ3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34491
   },
   {
     "nombre": "susana",
@@ -43862,10 +43543,9 @@ export const activeUsers = [
     "correo": "susanhijuitl@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564020998,
-    "stripe_id": "cus_MucFk9gkfxdCKC",
     "final_date": 1690950000,
-    "id": 34516,
-    "level": 1
+    "level": 1,
+    "id": 34516
   },
   {
     "nombre": "Imelda",
@@ -43873,10 +43553,10 @@ export const activeUsers = [
     "correo": "imelda.071321@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19563522104,
-    "stripe_id": "cus_MucGzS2IL3G19t",
-    "final_date": 1693630000,
-    "id": 34552,
-    "level": 1
+    "conekta_id": "cus_2uQhNEm2v4HBpeoAP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34552
   },
   {
     "nombre": "edith",
@@ -43884,10 +43564,9 @@ export const activeUsers = [
     "correo": "jeidybarrios32@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527791339162,
-    "stripe_id": "cus_MupotzWAx3NXD2",
     "final_date": 1691000000,
-    "id": 34553,
-    "level": 1
+    "level": 1,
+    "id": 34553
   },
   {
     "nombre": "Iris Fabiola",
@@ -43895,10 +43574,10 @@ export const activeUsers = [
     "correo": "faguilarmahe@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525610800164,
-    "stripe_id": "cus_MucnBtShm2Uxzr",
-    "final_date": 1693630000,
-    "id": 34639,
-    "level": 1
+    "conekta_id": "cus_2uQhNFVrSFqqSvTeu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34639
   },
   {
     "nombre": "María del Rosario",
@@ -43906,10 +43585,9 @@ export const activeUsers = [
     "correo": "alejandro.lujan@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 524922322213,
-    "stripe_id": "cus_MucQpN12yYoe11",
     "final_date": 1685680000,
-    "id": 34674,
-    "level": 1
+    "level": 1,
+    "id": 34674
   },
   {
     "nombre": "Maricruz",
@@ -43917,10 +43595,10 @@ export const activeUsers = [
     "correo": "aracelymtz299@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528132476674,
-    "stripe_id": "cus_MucPz5l2n2Vqov",
-    "final_date": 1692800000,
-    "id": 34701,
-    "level": 1
+    "conekta_id": "cus_2uQhNGEfxTQV7GFmY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34701
   },
   {
     "nombre": "Deida",
@@ -43928,10 +43606,10 @@ export const activeUsers = [
     "correo": "deidavaldez45@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526261041448,
-    "stripe_id": "cus_MuzSfOCwhOCIae",
-    "final_date": 1693950000,
-    "id": 34730,
-    "level": 1
+    "conekta_id": "cus_2uQhNGrZQGBEMbPkC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34730
   },
   {
     "nombre": "Madai",
@@ -43939,10 +43617,10 @@ export const activeUsers = [
     "correo": "maditaahipolito@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529221296318,
-    "stripe_id": "cus_MuctKFyhobuB4f",
-    "final_date": 1693630000,
-    "id": 34735,
-    "level": 1
+    "conekta_id": "cus_2uQhNHbNvTjt42cLD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34735
   },
   {
     "nombre": "Diana",
@@ -43950,10 +43628,10 @@ export const activeUsers = [
     "correo": "dianarduran94@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522871258471,
-    "stripe_id": "cus_MucWZbkAZAgBrD",
-    "final_date": 1693630000,
-    "id": 34758,
-    "level": 1
+    "conekta_id": "cus_2uQhNJT8X46Rtrjnn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34758
   },
   {
     "nombre": "MITZY",
@@ -43961,10 +43639,9 @@ export const activeUsers = [
     "correo": "mimicazarez888@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526675479849,
-    "stripe_id": "cus_MucSpL1FcWz4yd",
     "final_date": 1677730000,
-    "id": 34762,
-    "level": 1
+    "level": 1,
+    "id": 34762
   },
   {
     "nombre": "blanca flor",
@@ -43972,10 +43649,9 @@ export const activeUsers = [
     "correo": "blancaglz1@icloud.com",
     "pais": "Mexico",
     "whatsapp": 524171270627,
-    "stripe_id": "cus_MucU647ePrLbbH",
     "final_date": 1675310000,
-    "id": 34779,
-    "level": 1
+    "level": 1,
+    "id": 34779
   },
   {
     "nombre": "Karla Lizbeth",
@@ -43983,10 +43659,10 @@ export const activeUsers = [
     "correo": "achautla.fdz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527821667878,
-    "stripe_id": "cus_MucUiVUyY4CdkY",
-    "final_date": 1693630000,
-    "id": 34781,
-    "level": 1
+    "conekta_id": "cus_2uQhNK8nfsJNyTrDy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34781
   },
   {
     "nombre": "Yessenia lizeth",
@@ -43994,10 +43670,9 @@ export const activeUsers = [
     "correo": "yessenializethmaganaislas096@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523541349665,
-    "stripe_id": "cus_Muca7V3Ra8tHEM",
     "final_date": 1690950000,
-    "id": 34802,
-    "level": 1
+    "level": 1,
+    "id": 34802
   },
   {
     "nombre": "Rosa Isabel",
@@ -44005,10 +43680,10 @@ export const activeUsers = [
     "correo": "rosaisabelsalvadorpetalta@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528121968187,
-    "stripe_id": "cus_MuceTFPusA183m",
-    "final_date": 1693630000,
-    "id": 34849,
-    "level": 1
+    "conekta_id": "cus_2uQhNLcRiGRgKrQ6v",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34849
   },
   {
     "nombre": "Athziry Itzel",
@@ -44016,10 +43691,9 @@ export const activeUsers = [
     "correo": "alexaxel.itz.201528@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525529969924,
-    "stripe_id": "cus_MucqiFgQOd0ufA",
     "final_date": 1675740000,
-    "id": 34911,
-    "level": 1
+    "level": 1,
+    "id": 34911
   },
   {
     "nombre": "lucero",
@@ -44027,10 +43701,10 @@ export const activeUsers = [
     "correo": "luceroceron.90@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528119061159,
-    "stripe_id": "cus_Mud1kd5EKR7TIH",
-    "final_date": 1693630000,
-    "id": 34966,
-    "level": 1
+    "conekta_id": "cus_2uQhNMMFETzKrGqhS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34966
   },
   {
     "nombre": "Talia Elena",
@@ -44038,10 +43712,10 @@ export const activeUsers = [
     "correo": "taliaelena.ca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527831241214,
-    "stripe_id": "cus_Mud1TuzTUYYIKp",
-    "final_date": 1693630000,
-    "id": 34980,
-    "level": 1
+    "conekta_id": "cus_2uQhNM7TqNFNRrerx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34980
   },
   {
     "nombre": "Carla",
@@ -44049,10 +43723,10 @@ export const activeUsers = [
     "correo": "liecarlagarcia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524437357391,
-    "stripe_id": "cus_Mud17ax4iPui8Q",
-    "final_date": 1693630000,
-    "id": 34983,
-    "level": 1
+    "conekta_id": "cus_2uQhNN2J3f7mjV3Bo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34983
   },
   {
     "nombre": "Mercedes",
@@ -44060,10 +43734,10 @@ export const activeUsers = [
     "correo": "mmanzanares17@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 13232456482,
-    "stripe_id": "cus_Mud2K40UpiEtfp",
-    "final_date": 1693630000,
-    "id": 34985,
-    "level": 1
+    "conekta_id": "cus_2uQhNNaXfAiizcUF4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34985
   },
   {
     "nombre": "Elibeth",
@@ -44071,10 +43745,10 @@ export const activeUsers = [
     "correo": "gardunoelizabeth678@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525565095657,
-    "stripe_id": "cus_Mud56if8Rzn0FO",
-    "final_date": 1693720000,
-    "id": 35007,
-    "level": 1
+    "conekta_id": "cus_2uQhNPVw64F54BvHM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35007
   },
   {
     "nombre": "Margarita Leticia",
@@ -44082,10 +43756,9 @@ export const activeUsers = [
     "correo": "mar_let1211@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522711253513,
-    "stripe_id": "cus_MudRRVlmcyNxJa",
     "final_date": 1683010000,
-    "id": 35028,
-    "level": 1
+    "level": 1,
+    "id": 35028
   },
   {
     "nombre": "Anahi",
@@ -44093,10 +43766,9 @@ export const activeUsers = [
     "correo": "anahinolazco01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525623693227,
-    "stripe_id": "cus_MuiGb3519fQHre",
     "final_date": 1690970000,
-    "id": 35046,
-    "level": 1
+    "level": 1,
+    "id": 35046
   },
   {
     "nombre": "Alejandra",
@@ -44104,10 +43776,9 @@ export const activeUsers = [
     "correo": "oscarfigo0719@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526564302248,
-    "stripe_id": "cus_MudmRiiTfgPMrU",
     "final_date": 1683010000,
-    "id": 35059,
-    "level": 1
+    "level": 1,
+    "id": 35059
   },
   {
     "nombre": "Gabriela",
@@ -44115,20 +43786,18 @@ export const activeUsers = [
     "correo": "rodriguezotoniel166@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525514082301,
-    "stripe_id": "cus_MueKMyOUR7adAp",
     "final_date": 1683010000,
-    "id": 35086,
-    "level": 1
+    "level": 1,
+    "id": 35086
   },
   {
     "nombre": "Abigail",
     "apellido": "Arismendiz Arroyo",
     "correo": "abigail76arroyo@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_MufFJFKExPRCXo",
     "final_date": 1690960000,
-    "id": 35095,
-    "level": 1
+    "level": 1,
+    "id": 35095
   },
   {
     "nombre": "adi Yesenia",
@@ -44136,10 +43805,9 @@ export const activeUsers = [
     "correo": "oliveaddy92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529171196021,
-    "stripe_id": "cus_MuzVsc9k6dAraJ",
     "final_date": 1680500000,
-    "id": 35125,
-    "level": 1
+    "level": 1,
+    "id": 35125
   },
   {
     "nombre": "Bartola",
@@ -44147,10 +43815,9 @@ export const activeUsers = [
     "correo": "tolyhdez@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525521511132,
-    "stripe_id": "cus_Mun8m3sL1S7vTg",
     "final_date": 1690990000,
-    "id": 35165,
-    "level": 1
+    "level": 1,
+    "id": 35165
   },
   {
     "nombre": "María del Rosario",
@@ -44158,10 +43825,10 @@ export const activeUsers = [
     "correo": "chavezrosario776@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647868723,
-    "stripe_id": "cus_MurVTaaxmri5Vm",
-    "final_date": 1693680000,
-    "id": 35236,
-    "level": 1
+    "conekta_id": "cus_2uQhNRYNxZdGD2vqg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35236
   },
   {
     "nombre": "María Ivonne",
@@ -44169,10 +43836,9 @@ export const activeUsers = [
     "correo": "ivonnram55@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527121511950,
-    "stripe_id": "cus_MuvewNM5W73fP0",
     "final_date": 1718030000,
-    "id": 35258,
-    "level": 0
+    "level": 0,
+    "id": 35258
   },
   {
     "nombre": "maria dolores",
@@ -44180,10 +43846,9 @@ export const activeUsers = [
     "correo": "loliz23752@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529331222154,
-    "stripe_id": "cus_MvAKJBOO5S1f0o",
     "final_date": 1675440000,
-    "id": 35298,
-    "level": 1
+    "level": 1,
+    "id": 35298
   },
   {
     "nombre": "Rafaela",
@@ -44191,10 +43856,10 @@ export const activeUsers = [
     "correo": "pavelcruz2@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16154034238,
-    "stripe_id": "cus_MwJPoMVR41JFFa",
-    "final_date": 1692020000,
-    "id": 35385,
-    "level": 1
+    "conekta_id": "cus_2uQhNT1SnN6cr7MSQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35385
   },
   {
     "nombre": "Eva",
@@ -44202,10 +43867,10 @@ export const activeUsers = [
     "correo": "koba-1412@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525578669477,
-    "stripe_id": "cus_Mx4addfqDS1IGi",
-    "final_date": 1691520000,
-    "id": 35387,
-    "level": 1
+    "conekta_id": "cus_2uQhNTJxmSrDVKDAC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35387
   },
   {
     "nombre": "Sweet",
@@ -44213,10 +43878,10 @@ export const activeUsers = [
     "correo": "ad4799109@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522722844938,
-    "stripe_id": "cus_MwVtDe2NJElMpj",
-    "final_date": 1691470000,
-    "id": 35428,
-    "level": 1
+    "conekta_id": "cus_2uQhNU3nHeQs7asei",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35428
   },
   {
     "nombre": "Maria Guadalupe",
@@ -44224,10 +43889,10 @@ export const activeUsers = [
     "correo": "hurgell.93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529381856677,
-    "stripe_id": "cus_NLy0FIHVVWS88u",
-    "final_date": 1691990000,
-    "id": 35445,
-    "level": 1
+    "conekta_id": "cus_2uQhNUnboqyWjrY9F",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35445
   },
   {
     "nombre": "jessica vanessa",
@@ -44235,10 +43900,9 @@ export const activeUsers = [
     "correo": "espinosaromovanessa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524491097309,
-    "stripe_id": "cus_NZOfZGWtluxunw",
     "final_date": 0,
-    "id": 35469,
-    "level": 1
+    "level": 1,
+    "id": 35469
   },
   {
     "nombre": "Nicole Hazel",
@@ -44246,10 +43910,10 @@ export const activeUsers = [
     "correo": "nicole.kjn@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522282199882,
-    "stripe_id": "cus_NLxyZTcNCb594B",
-    "final_date": 1691990000,
-    "id": 35477,
-    "level": 1
+    "conekta_id": "cus_2uQhNVUFxfBTpacJG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35477
   },
   {
     "nombre": "Rosalba",
@@ -44257,10 +43921,10 @@ export const activeUsers = [
     "correo": "rosalbafloresdolores@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522371139729,
-    "stripe_id": "cus_NM92bFp5jVxePE",
-    "final_date": 1692030000,
-    "id": 35483,
-    "level": 1
+    "conekta_id": "cus_2uQhNVyJ5m19w6cng",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35483
   },
   {
     "nombre": "Alma Noemi",
@@ -44268,10 +43932,10 @@ export const activeUsers = [
     "correo": "alma.noemi.vla@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526863566356,
-    "stripe_id": "cus_NlpAxLClo9NSSG",
-    "final_date": 1692650000,
-    "id": 35492,
-    "level": 1
+    "conekta_id": "cus_2uQhNWi7bxZoZNHHF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35492
   },
   {
     "nombre": "Daniela Zizinette",
@@ -44279,10 +43943,10 @@ export const activeUsers = [
     "correo": "zizi.iker@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529999692183,
-    "stripe_id": "cus_NSSnUjIRSkDse8",
-    "final_date": 1693740000,
-    "id": 35497,
-    "level": 1
+    "conekta_id": "cus_2uQhNWhYPMursamfQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35497
   },
   {
     "nombre": "Raquel",
@@ -44290,10 +43954,10 @@ export const activeUsers = [
     "correo": "raquejuab1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522311059837,
-    "stripe_id": "cus_NMh03MRc7Ppt4c",
-    "final_date": 1692150000,
-    "id": 35573,
-    "level": 1
+    "conekta_id": "cus_2uQhNXSw8A8TBdwmw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35573
   },
   {
     "nombre": "Araceli",
@@ -44301,10 +43965,9 @@ export const activeUsers = [
     "correo": "aracelict95@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526481254692,
-    "stripe_id": "cus_MyzupyeCnnPp3Z",
     "final_date": 0,
-    "id": 35586,
-    "level": 1
+    "level": 1,
+    "id": 35586
   },
   {
     "nombre": "Paola",
@@ -44312,10 +43975,9 @@ export const activeUsers = [
     "correo": "quepaoshooow@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525619485192,
-    "stripe_id": "cus_Mz7FjJmF64hlP7",
     "final_date": 1691200000,
-    "id": 35606,
-    "level": 1
+    "level": 1,
+    "id": 35606
   },
   {
     "nombre": "Martha",
@@ -44323,10 +43985,10 @@ export const activeUsers = [
     "correo": "mkbeya86@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14422888921,
-    "stripe_id": "cus_NLy8PEEaYYRSR4",
-    "final_date": 1691990000,
-    "id": 35623,
-    "level": 1
+    "conekta_id": "cus_2uQhNYBkeMh6rptdm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35623
   },
   {
     "nombre": "Adriana",
@@ -44334,10 +43996,10 @@ export const activeUsers = [
     "correo": "kikaady@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525521877545,
-    "stripe_id": "cus_MzjTb4CBfZLAv5",
-    "final_date": 1692130000,
-    "id": 35658,
-    "level": 1
+    "conekta_id": "cus_2uQhNYuzwxbopfQTZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35658
   },
   {
     "nombre": "Sandra Aida",
@@ -44345,10 +44007,10 @@ export const activeUsers = [
     "correo": "sandry.aida@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525618834728,
-    "stripe_id": "cus_NLyrVcHRPMfa7P",
-    "final_date": 1691990000,
-    "id": 35669,
-    "level": 1
+    "conekta_id": "cus_2uQhNZAMZezhuGv7B",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35669
   },
   {
     "nombre": "Dulce Jaqueline",
@@ -44356,10 +44018,10 @@ export const activeUsers = [
     "correo": "chagomez98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526341058168,
-    "stripe_id": "cus_NLy9BVtprED2ij",
-    "final_date": 1691990000,
-    "id": 35670,
-    "level": 1
+    "conekta_id": "cus_2uQhNZuB5rZMXYabk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35670
   },
   {
     "nombre": "naty",
@@ -44367,10 +44029,9 @@ export const activeUsers = [
     "correo": "natyhernnadez1977@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529361042061,
-    "stripe_id": "cus_N03Ol7WBDNeP6X",
     "final_date": 0,
-    "id": 35683,
-    "level": 1
+    "level": 1,
+    "id": 35683
   },
   {
     "nombre": "Magali Yamileth",
@@ -44378,10 +44039,10 @@ export const activeUsers = [
     "correo": "magaliservellon713@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14432207234,
-    "stripe_id": "cus_N059AWKrtmXf8H",
-    "final_date": 1692210000,
-    "id": 35696,
-    "level": 1
+    "conekta_id": "cus_2uQhNaPdzMj75CjT3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35696
   },
   {
     "nombre": "Rocío",
@@ -44389,10 +44050,9 @@ export const activeUsers = [
     "correo": "rocioruiz130738@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616424807,
-    "stripe_id": "cus_NLxqrRLkc7xi2p",
     "final_date": 1689310000,
-    "id": 35719,
-    "level": 1
+    "level": 1,
+    "id": 35719
   },
   {
     "nombre": "Rocío",
@@ -44400,10 +44060,10 @@ export const activeUsers = [
     "correo": "rossherave85@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523151194865,
-    "stripe_id": "cus_NLycp9ymwnKOtw",
-    "final_date": 1691990000,
-    "id": 35721,
-    "level": 1
+    "conekta_id": "cus_2uQhNc3rwSp6gnCiK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35721
   },
   {
     "nombre": "alondra monserrat",
@@ -44411,10 +44071,10 @@ export const activeUsers = [
     "correo": "alondramonserratcanocervantes@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523339053626,
-    "stripe_id": "cus_N1aSpuJgDkZaYF",
-    "final_date": 1692640000,
-    "id": 35746,
-    "level": 1
+    "conekta_id": "cus_2uQhNc7deTFJTXLTP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35746
   },
   {
     "nombre": "Lupis",
@@ -44422,10 +44082,10 @@ export const activeUsers = [
     "correo": "lupita-197@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525569783431,
-    "stripe_id": "cus_N3Qz3jMHGwTCah",
-    "final_date": 1693070000,
-    "id": 35755,
-    "level": 1
+    "conekta_id": "cus_2uQhNcrTAeowywn1U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35755
   },
   {
     "nombre": "lizeth",
@@ -44433,10 +44093,10 @@ export const activeUsers = [
     "correo": "lizpolicarpo1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522311461335,
-    "stripe_id": "cus_N1iJs7TqCqlgTJ",
-    "final_date": 1692590000,
-    "id": 35771,
-    "level": 1
+    "conekta_id": "cus_2uQhNdXVyqwPwKXi9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35771
   },
   {
     "nombre": "Rubi",
@@ -44444,10 +44104,9 @@ export const activeUsers = [
     "correo": "tinkerbellrubi@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522291076043,
-    "stripe_id": "cus_N1wGlZiHcxEbp6",
     "final_date": 1689960000,
-    "id": 35803,
-    "level": 1
+    "level": 1,
+    "id": 35803
   },
   {
     "nombre": "Guadalupe",
@@ -44455,10 +44114,9 @@ export const activeUsers = [
     "correo": "guadalupevegatorres3@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523323460761,
-    "stripe_id": "cus_N1yF0RDTFp6gpW",
     "final_date": 1677010000,
-    "id": 35846,
-    "level": 1
+    "level": 1,
+    "id": 35846
   },
   {
     "nombre": "Mayra",
@@ -44466,10 +44124,10 @@ export const activeUsers = [
     "correo": "09mayra2000ramirez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524421911491,
-    "stripe_id": "cus_N1ymx1jBeGdpOI",
-    "final_date": 1692650000,
-    "id": 35853,
-    "level": 1
+    "conekta_id": "cus_2uQhNepZ7Z6zoEJKn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35853
   },
   {
     "nombre": "María Fernanda",
@@ -44477,10 +44135,9 @@ export const activeUsers = [
     "correo": "ferguerrero_21@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 523541501301,
-    "stripe_id": "cus_N1z1fXwbJ4hAhO",
     "final_date": 0,
-    "id": 35866,
-    "level": 1
+    "level": 1,
+    "id": 35866
   },
   {
     "nombre": "ana karina",
@@ -44488,10 +44145,10 @@ export const activeUsers = [
     "correo": "karinarojas69897@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524424660264,
-    "stripe_id": "cus_N1zOcTyehFWKgj",
-    "final_date": 1692650000,
-    "id": 35884,
-    "level": 1
+    "conekta_id": "cus_2uQhNfjxYSdLp8XDA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35884
   },
   {
     "nombre": "Jessica Janeth",
@@ -44499,10 +44156,10 @@ export const activeUsers = [
     "correo": "lapequejess.jjma17@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522311467418,
-    "stripe_id": "cus_N21m62KxIa9jgL",
-    "final_date": 1692660000,
-    "id": 35946,
-    "level": 1
+    "conekta_id": "cus_2uQhNfrtcqRF7uVZ4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35946
   },
   {
     "nombre": "keila Mariana",
@@ -44510,10 +44167,9 @@ export const activeUsers = [
     "correo": "marianakmrg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526188400831,
-    "stripe_id": "cus_N24e6zc98qRGTR",
     "final_date": 1689280000,
-    "id": 35986,
-    "level": 1
+    "level": 1,
+    "id": 35986
   },
   {
     "nombre": "Diana Berenice",
@@ -44521,10 +44177,10 @@ export const activeUsers = [
     "correo": "dianaberenice69@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524431783381,
-    "stripe_id": "cus_N24onNnHmUN4Rr",
-    "final_date": 1692640000,
-    "id": 35988,
-    "level": 1
+    "conekta_id": "cus_2uQhNh31g9nwhdhuh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35988
   },
   {
     "nombre": "ROSALBA",
@@ -44532,10 +44188,10 @@ export const activeUsers = [
     "correo": "rositacardenas766@gmail.con",
     "pais": "Mexico",
     "whatsapp": 526563859209,
-    "stripe_id": "cus_N24H1LKAMldezX",
-    "final_date": 1692670000,
-    "id": 35990,
-    "level": 1
+    "conekta_id": "cus_2uQhNhDbaqke4frCu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35990
   },
   {
     "nombre": "Gabriela",
@@ -44543,10 +44199,10 @@ export const activeUsers = [
     "correo": "gabrielabarrera4759@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543774567,
-    "stripe_id": "cus_N24JLltmkQSs6g",
-    "final_date": 1692670000,
-    "id": 36017,
-    "level": 1
+    "conekta_id": "cus_2uQhNhnQQx1XxyXfA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36017
   },
   {
     "nombre": "Yuliana",
@@ -44554,10 +44210,9 @@ export const activeUsers = [
     "correo": "yulivar82@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525584109153,
-    "stripe_id": "cus_N26crFTMWQau9z",
     "final_date": 1690000000,
-    "id": 36054,
-    "level": 1
+    "level": 1,
+    "id": 36054
   },
   {
     "nombre": "micaela",
@@ -44565,10 +44220,9 @@ export const activeUsers = [
     "correo": "karen--30@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525510795937,
-    "stripe_id": "cus_N2Vo057qdRFsoE",
     "final_date": 1690090000,
-    "id": 36073,
-    "level": 1
+    "level": 1,
+    "id": 36073
   },
   {
     "nombre": "Xóchitl Verónica",
@@ -44576,10 +44230,9 @@ export const activeUsers = [
     "correo": "veritos822@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524623512232,
-    "stripe_id": "cus_N2JpCTZA2WK9AY",
     "final_date": 1690230000,
-    "id": 36084,
-    "level": 1
+    "level": 1,
+    "id": 36084
   },
   {
     "nombre": "Jaira Cecilia",
@@ -44587,10 +44240,10 @@ export const activeUsers = [
     "correo": "jairaceciliavalenzuelaramirez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526182101776,
-    "stripe_id": "cus_N3CNZXAp8ojoFb",
-    "final_date": 1693690000,
-    "id": 36120,
-    "level": 1
+    "conekta_id": "cus_2uQhNjFUEkUtWB45D",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36120
   },
   {
     "nombre": "Natalia",
@@ -44598,10 +44251,10 @@ export const activeUsers = [
     "correo": "natyesb@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523333491091,
-    "stripe_id": "cus_N98gEtC9QxAp6E",
-    "final_date": 1691710000,
-    "id": 36138,
-    "level": 1
+    "conekta_id": "cus_2uQhNkHok2o8sXUXF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36138
   },
   {
     "nombre": "Evelin",
@@ -44609,10 +44262,9 @@ export const activeUsers = [
     "correo": "evelinalvajim@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529982338166,
-    "stripe_id": "cus_N6FYB7uP1sfh5N",
     "final_date": 1691040000,
-    "id": 36166,
-    "level": 1
+    "level": 1,
+    "id": 36166
   },
   {
     "nombre": "jeny mariel",
@@ -44620,10 +44272,9 @@ export const activeUsers = [
     "correo": "darla_jeny@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525524076120,
-    "stripe_id": "cus_NRVE27x0BuaegP",
     "final_date": 1690590000,
-    "id": 36216,
-    "level": 1
+    "level": 1,
+    "id": 36216
   },
   {
     "nombre": "Florencia América",
@@ -44631,10 +44282,10 @@ export const activeUsers = [
     "correo": "styleflorenciahidalgo28@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526242418387,
-    "stripe_id": "cus_N7jmBZlkgBnTFp",
-    "final_date": 1691730000,
-    "id": 36236,
-    "level": 1
+    "conekta_id": "cus_2uQhNkjgVkG8U4Bdi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36236
   },
   {
     "nombre": "yesica",
@@ -44642,10 +44293,10 @@ export const activeUsers = [
     "correo": "juvapa90@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525518135903,
-    "stripe_id": "cus_N6Ea2W02SBooZW",
-    "final_date": 1693720000,
-    "id": 36240,
-    "level": 1
+    "conekta_id": "cus_2uQhNmmSnRvS2rHzd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36240
   },
   {
     "nombre": "Dorian Marvella",
@@ -44653,10 +44304,10 @@ export const activeUsers = [
     "correo": "dorianmarbellarodriguezsaldiva@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523223536488,
-    "stripe_id": "cus_N3qLbjugXOWWM3",
-    "final_date": 1693160000,
-    "id": 36256,
-    "level": 1
+    "conekta_id": "cus_2uQhNmUW1wpn6Kr8u",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36256
   },
   {
     "nombre": "Diana",
@@ -44664,10 +44315,9 @@ export const activeUsers = [
     "correo": "kucastillodiana@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529971088742,
-    "stripe_id": "cus_N3rKcqCNmxQVLY",
     "final_date": 1690760000,
-    "id": 36262,
-    "level": 1
+    "level": 1,
+    "id": 36262
   },
   {
     "nombre": "Danna",
@@ -44675,10 +44325,9 @@ export const activeUsers = [
     "correo": "danna.estef12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525552976729,
-    "stripe_id": "cus_NCVVvoiWvYebgd",
     "final_date": 0,
-    "id": 36280,
-    "level": 1
+    "level": 1,
+    "id": 36280
   },
   {
     "nombre": "Samanta",
@@ -44686,10 +44335,10 @@ export const activeUsers = [
     "correo": "yasumi70@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16783491021,
-    "stripe_id": "cus_N47rsZmR3jDU05",
-    "final_date": 1693230000,
-    "id": 36296,
-    "level": 1
+    "conekta_id": "cus_2uQhNoBvTSh2jj4uz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36296
   },
   {
     "nombre": "maria",
@@ -44697,10 +44346,10 @@ export const activeUsers = [
     "correo": "isabelbarcenascortez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528603288472,
-    "stripe_id": "cus_N4b08KyaH0CZtD",
-    "final_date": 1693250000,
-    "id": 36359,
-    "level": 1
+    "conekta_id": "cus_2uQhNogxaYWiy8qd7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36359
   },
   {
     "nombre": "Claudia",
@@ -44708,10 +44357,10 @@ export const activeUsers = [
     "correo": "claudia.berciuc@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 52742472125,
-    "stripe_id": "cus_N51B7plobEorh8",
-    "final_date": 1692810000,
-    "id": 36383,
-    "level": 1
+    "conekta_id": "cus_2uQhNogPMwrnFo32u",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36383
   },
   {
     "nombre": "Liliana",
@@ -44719,10 +44368,10 @@ export const activeUsers = [
     "correo": "lilib3romero@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529711856568,
-    "stripe_id": "cus_N6DoHRbpSKOPAj",
-    "final_date": 1693710000,
-    "id": 36392,
-    "level": 1
+    "conekta_id": "cus_2uQhNpRn6k5NWwtEC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36392
   },
   {
     "nombre": "Nadia",
@@ -44730,10 +44379,10 @@ export const activeUsers = [
     "correo": "nadianava1@hormail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16026191165,
-    "stripe_id": "cus_N5KAv9fcikg7mP",
-    "final_date": 1693510000,
-    "id": 36394,
-    "level": 1
+    "conekta_id": "cus_2uQhNqTYPRjgACcTy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36394
   },
   {
     "nombre": "Nadia",
@@ -44741,10 +44390,10 @@ export const activeUsers = [
     "correo": "nadianava1@hotmail.com",
     "pais": "United States of America",
     "whatsapp": 16026191165,
-    "stripe_id": "cus_NlpCv3xn7AOGa0",
-    "final_date": 1692150000,
-    "id": 36398,
-    "level": 1
+    "conekta_id": "cus_2uQhNquR99CfmVDDR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36398
   },
   {
     "nombre": "Lourdes",
@@ -44752,10 +44401,10 @@ export const activeUsers = [
     "correo": "lulucuazitl@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524431341131,
-    "stripe_id": "cus_NSg1TvOMict8YH",
-    "final_date": 1691690000,
-    "id": 36407,
-    "level": 1
+    "conekta_id": "cus_2uQhNrt24SWGs5PNd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36407
   },
   {
     "nombre": "ERENDIRA",
@@ -44763,10 +44412,10 @@ export const activeUsers = [
     "correo": "erearevalo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524151775940,
-    "stripe_id": "cus_N65dRwBqToqaWh",
-    "final_date": 1693600000,
-    "id": 36410,
-    "level": 1
+    "conekta_id": "cus_2uQhNscqae4vVM3sN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36410
   },
   {
     "nombre": "Dulce María",
@@ -44774,10 +44423,10 @@ export const activeUsers = [
     "correo": "dulce.espitia11@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524613495207,
-    "stripe_id": "cus_N6DmLHxkYTUxyi",
-    "final_date": 1693710000,
-    "id": 36418,
-    "level": 1
+    "conekta_id": "cus_2uQhNsNUxwg2P9MWW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36418
   },
   {
     "nombre": "Christian",
@@ -44785,10 +44434,9 @@ export const activeUsers = [
     "correo": "iveethramirez@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16507333451,
-    "stripe_id": "cus_N6DlOJlo2NFCGc",
     "final_date": 1691030000,
-    "id": 36420,
-    "level": 1
+    "level": 1,
+    "id": 36420
   },
   {
     "nombre": "Yasmin",
@@ -44796,10 +44444,9 @@ export const activeUsers = [
     "correo": "familyunited349@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616490752,
-    "stripe_id": "cus_N6DoARHslxPr7u",
     "final_date": 1683090000,
-    "id": 36422,
-    "level": 1
+    "level": 1,
+    "id": 36422
   },
   {
     "nombre": "Adriana",
@@ -44807,10 +44454,10 @@ export const activeUsers = [
     "correo": "hane_kniz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525554046860,
-    "stripe_id": "cus_N6DpzvHmZkKcQ4",
-    "final_date": 1693710000,
-    "id": 36423,
-    "level": 1
+    "conekta_id": "cus_2uQhNu9dzRYvNmSRZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36423
   },
   {
     "nombre": "Ana Cristina",
@@ -44818,10 +44465,10 @@ export const activeUsers = [
     "correo": "sanchezanacristina606@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522731066578,
-    "stripe_id": "cus_N6Drh1H0vUfJDq",
-    "final_date": 1693710000,
-    "id": 36426,
-    "level": 1
+    "conekta_id": "cus_2uQhNuawXYMyFxLzV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36426
   },
   {
     "nombre": "María de Jesús",
@@ -44829,10 +44476,10 @@ export const activeUsers = [
     "correo": "mary2671@icloud.com",
     "pais": "Mexico",
     "whatsapp": 529671058570,
-    "stripe_id": "cus_N6DrrcuQVIGLip",
-    "final_date": 1693710000,
-    "id": 36427,
-    "level": 1
+    "conekta_id": "cus_2uQhNvdH2pgDY6FvR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36427
   },
   {
     "nombre": "Gloria",
@@ -44840,10 +44487,10 @@ export const activeUsers = [
     "correo": "erayalli@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525527283005,
-    "stripe_id": "cus_N6E6XQXkoQ3106",
-    "final_date": 1693710000,
-    "id": 36448,
-    "level": 1
+    "conekta_id": "cus_2uQhNvKm3jvctE1Vi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36448
   },
   {
     "nombre": "Adriana",
@@ -44851,10 +44498,9 @@ export const activeUsers = [
     "correo": "adriana1998zp@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522711322114,
-    "stripe_id": "cus_N6EBR1K3stOP2e",
     "final_date": 1683090000,
-    "id": 36452,
-    "level": 1
+    "level": 1,
+    "id": 36452
   },
   {
     "nombre": "cesia jemina",
@@ -44862,10 +44508,9 @@ export const activeUsers = [
     "correo": "cesia_martinez@email.com",
     "pais": "Mexico",
     "whatsapp": 529516457467,
-    "stripe_id": "cus_N6ELIaKOlwYfQz",
     "final_date": 1685770000,
-    "id": 36453,
-    "level": 1
+    "level": 1,
+    "id": 36453
   },
   {
     "nombre": "Zenaida",
@@ -44873,10 +44518,9 @@ export const activeUsers = [
     "correo": "ca_ndia@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527331396306,
-    "stripe_id": "cus_N6Eb0g36sIe7sA",
     "final_date": 1691040000,
-    "id": 36461,
-    "level": 1
+    "level": 1,
+    "id": 36461
   },
   {
     "nombre": "Patricia",
@@ -44884,10 +44528,10 @@ export const activeUsers = [
     "correo": "patrick.chapan17@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522227009861,
-    "stripe_id": "cus_N6ElzGNQgWieJI",
-    "final_date": 1693720000,
-    "id": 36481,
-    "level": 1
+    "conekta_id": "cus_2uQhNx3khqSpEy2pD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36481
   },
   {
     "nombre": "Isabel",
@@ -44895,10 +44539,9 @@ export const activeUsers = [
     "correo": "reyes.mariposa.1978@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525626388607,
-    "stripe_id": "cus_N6EyKbUNRx2L1E",
     "final_date": 1691040000,
-    "id": 36488,
-    "level": 1
+    "level": 1,
+    "id": 36488
   },
   {
     "nombre": "Beatriz",
@@ -44906,10 +44549,10 @@ export const activeUsers = [
     "correo": "tybe1984bety@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527775621667,
-    "stripe_id": "cus_N6aTflLOQnk3Fw",
-    "final_date": 1693800000,
-    "id": 36493,
-    "level": 1
+    "conekta_id": "cus_2uQhNxioX2aGCLndY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36493
   },
   {
     "nombre": "Yesica",
@@ -44917,10 +44560,10 @@ export const activeUsers = [
     "correo": "esasmileyforever@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529514692133,
-    "stripe_id": "cus_N6FcYcUpi0VfjG",
-    "final_date": 1693580000,
-    "id": 36495,
-    "level": 1
+    "conekta_id": "cus_2uQhNyH38YBDPJfVK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36495
   },
   {
     "nombre": "yas",
@@ -44928,10 +44571,9 @@ export const activeUsers = [
     "correo": "yas29091@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524421761231,
-    "stripe_id": "cus_N6VdOeRH3mPHvS",
     "final_date": 1677880000,
-    "id": 36500,
-    "level": 1
+    "level": 1,
+    "id": 36500
   },
   {
     "nombre": "Maria de los Angeles",
@@ -44939,10 +44581,10 @@ export const activeUsers = [
     "correo": "selegna27.inna@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525547720495,
-    "stripe_id": "cus_N6M3ydICV4mn1M",
-    "final_date": 1693740000,
-    "id": 36508,
-    "level": 1
+    "conekta_id": "cus_2uQhNzCSZRhZSt7d4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36508
   },
   {
     "nombre": "Maria",
@@ -44950,10 +44592,9 @@ export const activeUsers = [
     "correo": "814772@universidad-une.com",
     "pais": "Mexico",
     "whatsapp": 523321864149,
-    "stripe_id": "cus_N6NH3wFEPDSX57",
     "final_date": 1683120000,
-    "id": 36511,
-    "level": 1
+    "level": 1,
+    "id": 36511
   },
   {
     "nombre": "yakelin",
@@ -44961,10 +44602,10 @@ export const activeUsers = [
     "correo": "ayakelin726@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532404095,
-    "stripe_id": "cus_N6YlDPmqAlwdvV",
-    "final_date": 1693180000,
-    "id": 36535,
-    "level": 1
+    "conekta_id": "cus_2uQhNzkgAwJWdqzUo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36535
   },
   {
     "nombre": "Elizabeth",
@@ -44972,10 +44613,10 @@ export const activeUsers = [
     "correo": "elizabethmendozafrias@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524271512119,
-    "stripe_id": "cus_N6qtsVtOQWIGOP",
-    "final_date": 1693860000,
-    "id": 36541,
-    "level": 1
+    "conekta_id": "cus_2uQhP1W4ujX6tzqdh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36541
   },
   {
     "nombre": "fernanda",
@@ -44983,10 +44624,9 @@ export const activeUsers = [
     "correo": "fernanda941107@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524446419245,
-    "stripe_id": "cus_N6sT7sX7p3iAKP",
     "final_date": 1680640000,
-    "id": 36548,
-    "level": 1
+    "level": 1,
+    "id": 36548
   },
   {
     "nombre": "LIZBETH  MAGALY",
@@ -44994,10 +44634,9 @@ export const activeUsers = [
     "correo": "lozanolizbeth337@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527752289204,
-    "stripe_id": "cus_N6tCoiEscUx5Ab",
     "final_date": 1723690000,
-    "id": 36555,
-    "level": 0
+    "level": 0,
+    "id": 36555
   },
   {
     "nombre": "Daniela",
@@ -45005,10 +44644,9 @@ export const activeUsers = [
     "correo": "dannyjime10@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525560401685,
-    "stripe_id": "cus_N6tl3dsvI6wZdn",
     "final_date": 1691190000,
-    "id": 36557,
-    "level": 1
+    "level": 1,
+    "id": 36557
   },
   {
     "nombre": "Carolina",
@@ -45016,10 +44654,10 @@ export const activeUsers = [
     "correo": "carolayeuan278@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529843091474,
-    "stripe_id": "cus_N6tfid3RZRQIYY",
-    "final_date": 1692480000,
-    "id": 36560,
-    "level": 1
+    "conekta_id": "cus_2uQhP3DVMEPMiC9X7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36560
   },
   {
     "nombre": "Leonor",
@@ -45027,10 +44665,9 @@ export const activeUsers = [
     "correo": "miaaby23@outlook.com",
     "pais": "Mexico",
     "whatsapp": 528442691241,
-    "stripe_id": "cus_N6uA76gnmZvWgU",
     "final_date": 1691270000,
-    "id": 36568,
-    "level": 1
+    "level": 1,
+    "id": 36568
   },
   {
     "nombre": "Kely Isabel",
@@ -45038,10 +44675,10 @@ export const activeUsers = [
     "correo": "vicky19971302@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528129697556,
-    "stripe_id": "cus_NLxoYEAgDS8j0q",
-    "final_date": 1691990000,
-    "id": 36570,
-    "level": 1
+    "conekta_id": "cus_2uQhP3hxFjZ78veT3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36570
   },
   {
     "nombre": "Lizeth del Rocío",
@@ -45049,10 +44686,10 @@ export const activeUsers = [
     "correo": "lizeth_pegui@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522299848280,
-    "stripe_id": "cus_N6vF8IOYIOOqgV",
-    "final_date": 1693870000,
-    "id": 36572,
-    "level": 1
+    "conekta_id": "cus_2uQhP4kHm1sMUCw89",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36572
   },
   {
     "nombre": "Yessica",
@@ -45060,10 +44697,9 @@ export const activeUsers = [
     "correo": "yessicacruz123@icloud.com",
     "pais": "Mexico",
     "whatsapp": 529511697207,
-    "stripe_id": "cus_N78hKam8jMIk6O",
     "final_date": 1680710000,
-    "id": 36589,
-    "level": 1
+    "level": 1,
+    "id": 36589
   },
   {
     "nombre": "Ana Laura",
@@ -45071,10 +44707,9 @@ export const activeUsers = [
     "correo": "anithacorthez57@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524531031124,
-    "stripe_id": "cus_N7EpNSFJgvssya",
     "final_date": 1722820000,
-    "id": 36592,
-    "level": 0
+    "level": 0,
+    "id": 36592
   },
   {
     "nombre": "Perla",
@@ -45082,10 +44717,9 @@ export const activeUsers = [
     "correo": "perlasigala20@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526566516798,
-    "stripe_id": "cus_N7O814fVfJ26Cu",
     "final_date": 1689480000,
-    "id": 36603,
-    "level": 1
+    "level": 1,
+    "id": 36603
   },
   {
     "nombre": "Gisela",
@@ -45093,10 +44727,10 @@ export const activeUsers = [
     "correo": "yisel_anaya@hotmail.com",
     "pais": "El Salvador",
     "whatsapp": 50379377258,
-    "stripe_id": "cus_N7ZQuThyjxZeN1",
-    "final_date": 1694020000,
-    "id": 36608,
-    "level": 1
+    "conekta_id": "cus_2uQhP6DvoQzehkGez",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36608
   },
   {
     "nombre": "Montserrat",
@@ -45104,20 +44738,19 @@ export const activeUsers = [
     "correo": "montsezzitha@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523221601528,
-    "stripe_id": "cus_N7jDbdN5iIR7F9",
     "final_date": 1683430000,
-    "id": 36659,
-    "level": 1
+    "level": 1,
+    "id": 36659
   },
   {
     "nombre": "Lidia",
     "apellido": "Garcia",
     "correo": "machelitaca1021@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_N7kDAyzHObpUTY",
-    "final_date": 1694060000,
-    "id": 36668,
-    "level": 1
+    "conekta_id": "cus_2uQhP6xkKcZJHsYq2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36668
   },
   {
     "nombre": "America",
@@ -45125,10 +44758,9 @@ export const activeUsers = [
     "correo": "peralezamerika@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524641868088,
-    "stripe_id": "cus_NlpCaSWOygMBSO",
     "final_date": 1693530000,
-    "id": 36679,
-    "level": 0
+    "level": 0,
+    "id": 36679
   },
   {
     "nombre": "Berenice",
@@ -45136,10 +44768,10 @@ export const activeUsers = [
     "correo": "berenicita1380@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528332908518,
-    "stripe_id": "cus_N7wny68CYZAJLd",
-    "final_date": 1691430000,
-    "id": 36690,
-    "level": 1
+    "conekta_id": "cus_2uQhP7admRL3hakZx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36690
   },
   {
     "nombre": "Yesenia",
@@ -45147,10 +44779,10 @@ export const activeUsers = [
     "correo": "yes1708pess@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525512957464,
-    "stripe_id": "cus_N7yCIw52loisyu",
-    "final_date": 1691440000,
-    "id": 36700,
-    "level": 1
+    "conekta_id": "cus_2uQhP88sNvvzzRXUV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36700
   },
   {
     "nombre": "María Cristina",
@@ -45158,10 +44790,10 @@ export const activeUsers = [
     "correo": "cristyrama_jn@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525532035620,
-    "stripe_id": "cus_NgxN2He2hBNqAM",
-    "final_date": 1691730000,
-    "id": 36703,
-    "level": 1
+    "conekta_id": "cus_2uQhP8SPN1gbYQspe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36703
   },
   {
     "nombre": "Marifer",
@@ -45169,10 +44801,10 @@ export const activeUsers = [
     "correo": "maferzub@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524681205034,
-    "stripe_id": "cus_N9x0uzTLmNb6LZ",
-    "final_date": 1692470000,
-    "id": 36714,
-    "level": 1
+    "conekta_id": "cus_2uQhP94GopTLsxX8x",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36714
   },
   {
     "nombre": "Janete",
@@ -45180,10 +44812,10 @@ export const activeUsers = [
     "correo": "yakk_yakk@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 524492795952,
-    "stripe_id": "cus_N8rmzZM88c79Fk",
-    "final_date": 1691640000,
-    "id": 36747,
-    "level": 1
+    "conekta_id": "cus_2uQhP9v2QQottAiGp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36747
   },
   {
     "nombre": "Ana Maria",
@@ -45191,10 +44823,9 @@ export const activeUsers = [
     "correo": "anafgaribay@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528722146988,
-    "stripe_id": "cus_N8rdMWSjoXtawk",
     "final_date": 1681100000,
-    "id": 36750,
-    "level": 1
+    "level": 1,
+    "id": 36750
   },
   {
     "nombre": "denia sandi bell",
@@ -45202,10 +44833,10 @@ export const activeUsers = [
     "correo": "anethl147@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526674772586,
-    "stripe_id": "cus_N8rpF7GnnMHsxU",
-    "final_date": 1691650000,
-    "id": 36759,
-    "level": 1
+    "conekta_id": "cus_2uQhPAMKwXcwqdGAS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36759
   },
   {
     "nombre": "luis octavio",
@@ -45213,10 +44844,10 @@ export const activeUsers = [
     "correo": "luischavolla@outlook.com",
     "pais": "Mexico",
     "whatsapp": 529661240671,
-    "stripe_id": "cus_N8rqkSwhAnOw4p",
-    "final_date": 1691640000,
-    "id": 36760,
-    "level": 1
+    "conekta_id": "cus_2uQhPBGjNR9HkmWd3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36760
   },
   {
     "nombre": "Freya",
@@ -45224,10 +44855,10 @@ export const activeUsers = [
     "correo": "freya.sanlo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526161128434,
-    "stripe_id": "cus_N8rxAaF1lxGUAR",
-    "final_date": 1691650000,
-    "id": 36763,
-    "level": 1
+    "conekta_id": "cus_2uQhPBGjNR9HkmWd8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36763
   },
   {
     "nombre": "Karla",
@@ -45235,10 +44866,10 @@ export const activeUsers = [
     "correo": "karolaso0rt@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522321135231,
-    "stripe_id": "cus_N8sCDmcNu62Kc9",
-    "final_date": 1691730000,
-    "id": 36768,
-    "level": 1
+    "conekta_id": "cus_2uQhPBpxyvkF7mqwq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36768
   },
   {
     "nombre": "yenifer",
@@ -45246,10 +44877,10 @@ export const activeUsers = [
     "correo": "yeniferr2@icloud.com",
     "pais": "Mexico",
     "whatsapp": 525548049959,
-    "stripe_id": "cus_N968Eysnzz1x5J",
-    "final_date": 1691700000,
-    "id": 36794,
-    "level": 1
+    "conekta_id": "cus_2uQhPCaMiixqMWQyq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36794
   },
   {
     "nombre": "Karen",
@@ -45257,10 +44888,9 @@ export const activeUsers = [
     "correo": "karenolvera1138@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524423604444,
-    "stripe_id": "cus_NC9YgtocxTtgVp",
     "final_date": 1689720000,
-    "id": 36798,
-    "level": 1
+    "level": 1,
+    "id": 36798
   },
   {
     "nombre": "Lorena",
@@ -45268,10 +44898,10 @@ export const activeUsers = [
     "correo": "lorena260686@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527891306202,
-    "stripe_id": "cus_N99kdjk83NSYtg",
-    "final_date": 1691710000,
-    "id": 36811,
-    "level": 1
+    "conekta_id": "cus_2uQhPDc81Qd8ySu36",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36811
   },
   {
     "nombre": "GIOVANA MICHEL",
@@ -45279,10 +44909,10 @@ export const activeUsers = [
     "correo": "michogg96@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314996080,
-    "stripe_id": "cus_N9AWIbAriKTsaU",
-    "final_date": 1691720000,
-    "id": 36814,
-    "level": 1
+    "conekta_id": "cus_2uQhPE3zm868aVSpv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36814
   },
   {
     "nombre": "PAOLA CATALINA",
@@ -45290,10 +44920,9 @@ export const activeUsers = [
     "correo": "hernandezpaola97551@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518187201,
-    "stripe_id": "cus_N9oOxLREdU6Ue4",
     "final_date": 1683910000,
-    "id": 36834,
-    "level": 1
+    "level": 1,
+    "id": 36834
   },
   {
     "nombre": "Paola mishel",
@@ -45301,10 +44930,10 @@ export const activeUsers = [
     "correo": "jaramishel25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525633284987,
-    "stripe_id": "cus_N9qhb1SGO7H3By",
-    "final_date": 1691870000,
-    "id": 36863,
-    "level": 1
+    "conekta_id": "cus_2uQhPF2bgRPjfrknF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36863
   },
   {
     "nombre": "Alexandra",
@@ -45312,10 +44941,10 @@ export const activeUsers = [
     "correo": "alexandrarosete198@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518422115,
-    "stripe_id": "cus_NBr2kaTWYvPDPF",
-    "final_date": 1692330000,
-    "id": 36883,
-    "level": 1
+    "conekta_id": "cus_2uQhPFmRCcxPJ8RGk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36883
   },
   {
     "nombre": "Isaura",
@@ -45323,10 +44952,9 @@ export const activeUsers = [
     "correo": "iza140299@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526771193658,
-    "stripe_id": "cus_NHqcVEnu0UoCsX",
     "final_date": 0,
-    "id": 36893,
-    "level": 1
+    "level": 1,
+    "id": 36893
   },
   {
     "nombre": "Yeimy",
@@ -45334,10 +44962,9 @@ export const activeUsers = [
     "correo": "yeimy010887@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528120994755,
-    "stripe_id": "cus_NAvQLmeX6x3To3",
     "final_date": 1689440000,
-    "id": 36896,
-    "level": 1
+    "level": 1,
+    "id": 36896
   },
   {
     "nombre": "flor",
@@ -45345,10 +44972,9 @@ export const activeUsers = [
     "correo": "floryaravid34@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525537755880,
-    "stripe_id": "cus_NB5mLDZJxxl4Om",
     "final_date": 0,
-    "id": 36901,
-    "level": 1
+    "level": 1,
+    "id": 36901
   },
   {
     "nombre": "Yessenia",
@@ -45356,10 +44982,9 @@ export const activeUsers = [
     "correo": "cabrerajesz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527226433107,
-    "stripe_id": "cus_NBT9eyDVnjPJmU",
     "final_date": 1689570000,
-    "id": 36902,
-    "level": 1
+    "level": 1,
+    "id": 36902
   },
   {
     "nombre": "miriam",
@@ -45367,10 +44992,10 @@ export const activeUsers = [
     "correo": "villarrealmiriam927@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524351037304,
-    "stripe_id": "cus_NBSoDwK9Qw7EVX",
-    "final_date": 1692240000,
-    "id": 36923,
-    "level": 1
+    "conekta_id": "cus_2uQhPHF4F25gYfkFr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36923
   },
   {
     "nombre": "Karina",
@@ -45378,10 +45003,10 @@ export const activeUsers = [
     "correo": "karinithachan0809@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529871416681,
-    "stripe_id": "cus_NBTGOjaKbuBcj5",
-    "final_date": 1692240000,
-    "id": 36933,
-    "level": 1
+    "conekta_id": "cus_2uQhPHBHY1eUkvpb8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36933
   },
   {
     "nombre": "ivonne",
@@ -45389,10 +45014,10 @@ export const activeUsers = [
     "correo": "shaydnicolcruz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529511605096,
-    "stripe_id": "cus_NBTSHe1LiAlwq7",
-    "final_date": 1692250000,
-    "id": 36940,
-    "level": 1
+    "conekta_id": "cus_2uQhPJ338c12fvWED",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36940
   },
   {
     "nombre": "Ameltzin",
@@ -45400,10 +45025,9 @@ export const activeUsers = [
     "correo": "ameltzin@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522331073494,
-    "stripe_id": "cus_NBTUD16YSXN1lE",
     "final_date": 0,
-    "id": 36942,
-    "level": 1
+    "level": 1,
+    "id": 36942
   },
   {
     "nombre": "Yolva",
@@ -45411,10 +45035,9 @@ export const activeUsers = [
     "correo": "yolvasanchezrodriguez29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522484891790,
-    "stripe_id": "cus_NBZz0R2rkLPKSO",
     "final_date": 0,
-    "id": 36948,
-    "level": 1
+    "level": 1,
+    "id": 36948
   },
   {
     "nombre": "Eugenia",
@@ -45422,10 +45045,10 @@ export const activeUsers = [
     "correo": "eugeniagom73@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527821454761,
-    "stripe_id": "cus_NBiTpI1DimZIo1",
-    "final_date": 1692320000,
-    "id": 36953,
-    "level": 1
+    "conekta_id": "cus_2uQhPJihHRCyoD5F5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36953
   },
   {
     "nombre": "Juana María",
@@ -45433,10 +45056,9 @@ export const activeUsers = [
     "correo": "mariavidalmendez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528683525870,
-    "stripe_id": "cus_NBo6er5WhxNEIU",
     "final_date": 0,
-    "id": 36960,
-    "level": 1
+    "level": 1,
+    "id": 36960
   },
   {
     "nombre": "Luzma",
@@ -45444,10 +45066,9 @@ export const activeUsers = [
     "correo": "maluva2667@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524491032550,
-    "stripe_id": "cus_NBrGquJfVoilKH",
     "final_date": 0,
-    "id": 36966,
-    "level": 1
+    "level": 1,
+    "id": 36966
   },
   {
     "nombre": "Aurelia",
@@ -45455,10 +45076,9 @@ export const activeUsers = [
     "correo": "aureaparicio818@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52735249479,
-    "stripe_id": "cus_NBrQpO4QGVfNBj",
     "final_date": 1679120000,
-    "id": 36967,
-    "level": 1
+    "level": 1,
+    "id": 36967
   },
   {
     "nombre": "DANIA",
@@ -45466,10 +45086,10 @@ export const activeUsers = [
     "correo": "decocedillo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525539553050,
-    "stripe_id": "cus_NCQ4ZBdyn9mWHb",
-    "final_date": 1692460000,
-    "id": 36976,
-    "level": 1
+    "conekta_id": "cus_2uQhPKxYvibKXkRyT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36976
   },
   {
     "nombre": "mayra isabel",
@@ -45477,10 +45097,9 @@ export const activeUsers = [
     "correo": "iv618408@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525515960028,
-    "stripe_id": "cus_NCSxuokrsS8EyP",
     "final_date": 1684530000,
-    "id": 36986,
-    "level": 1
+    "level": 1,
+    "id": 36986
   },
   {
     "nombre": "Anahi",
@@ -45488,10 +45107,10 @@ export const activeUsers = [
     "correo": "dree_hinaa@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527717488223,
-    "stripe_id": "cus_NCTNnMZt5oBxKV",
-    "final_date": 1691990000,
-    "id": 36987,
-    "level": 1
+    "conekta_id": "cus_2uQhPLgoEKW2d1ot4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36987
   },
   {
     "nombre": "Lourdes",
@@ -45499,10 +45118,10 @@ export const activeUsers = [
     "correo": "kimyvii@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19563130772,
-    "stripe_id": "cus_NCWH9hLHk8082R",
-    "final_date": 1692490000,
-    "id": 36994,
-    "level": 1
+    "conekta_id": "cus_2uQhPMcCfD2Ne9wDH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 36994
   },
   {
     "nombre": "Karina",
@@ -45510,10 +45129,10 @@ export const activeUsers = [
     "correo": "kariiznava2@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525571850851,
-    "stripe_id": "cus_NLxxlbNRuk2s6Z",
-    "final_date": 1691990000,
-    "id": 37014,
-    "level": 1
+    "conekta_id": "cus_2uQhPNM2BQb28pU3d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37014
   },
   {
     "nombre": "fabiola",
@@ -45521,10 +45140,9 @@ export const activeUsers = [
     "correo": "arlahet.mendez.map@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582147509,
-    "stripe_id": "cus_NLyNOf0RLlzCVg",
     "final_date": 1689310000,
-    "id": 37025,
-    "level": 1
+    "level": 1,
+    "id": 37025
   },
   {
     "nombre": "Fatima",
@@ -45532,10 +45150,9 @@ export const activeUsers = [
     "correo": "thdezfaty@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524271513675,
-    "stripe_id": "cus_NLxuBuXvtH9ttZ",
     "final_date": 1681450000,
-    "id": 37028,
-    "level": 1
+    "level": 1,
+    "id": 37028
   },
   {
     "nombre": "andrea",
@@ -45543,10 +45160,9 @@ export const activeUsers = [
     "correo": "andykaled19@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524521800041,
-    "stripe_id": "cus_NWMRXcrQh0uzBf",
     "final_date": 1684020000,
-    "id": 37044,
-    "level": 1
+    "level": 1,
+    "id": 37044
   },
   {
     "nombre": "Milenka Geovanna",
@@ -45554,10 +45170,10 @@ export const activeUsers = [
     "correo": "milenkage_88@gmail.com",
     "pais": "Bolivia (Plurinational State of)",
     "whatsapp": 59178799424,
-    "stripe_id": "cus_NCy1TFum7WbrcM",
-    "final_date": 1692590000,
-    "id": 37048,
-    "level": 1
+    "conekta_id": "cus_2uQhPP9cQcasYq4Dp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37048
   },
   {
     "nombre": "Barbara",
@@ -45565,10 +45181,9 @@ export const activeUsers = [
     "correo": "vivipalma1994@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647680243,
-    "stripe_id": "cus_NFCtwBZCJm0dLD",
     "final_date": 0,
-    "id": 37049,
-    "level": 1
+    "level": 1,
+    "id": 37049
   },
   {
     "nombre": "Vanessa",
@@ -45576,10 +45191,10 @@ export const activeUsers = [
     "correo": "enrique_sylva@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525633489957,
-    "stripe_id": "cus_NDHCOQUMDEa1YZ",
-    "final_date": 1692660000,
-    "id": 37062,
-    "level": 1
+    "conekta_id": "cus_2uQhPPwbJCWDmJKf3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37062
   },
   {
     "nombre": "Andrea Guadalupe",
@@ -45587,10 +45202,10 @@ export const activeUsers = [
     "correo": "andreaguadalupesanchezislas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523781438806,
-    "stripe_id": "cus_NEK1QLFfLyGpdZ",
-    "final_date": 1691710000,
-    "id": 37077,
-    "level": 1
+    "conekta_id": "cus_2uQhPQgQpQ4sPZz9d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37077
   },
   {
     "nombre": "Maria Nallely",
@@ -45598,10 +45213,10 @@ export const activeUsers = [
     "correo": "marianallelysanchezislas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523781159834,
-    "stripe_id": "cus_NDX5fZpE8qDNOX",
-    "final_date": 1693160000,
-    "id": 37079,
-    "level": 1
+    "conekta_id": "cus_2uQhPRRELbdX1qeeD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37079
   },
   {
     "nombre": "Amalia C.",
@@ -45609,10 +45224,10 @@ export const activeUsers = [
     "correo": "amycantante@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525535012651,
-    "stripe_id": "cus_NDaIMcMpAhNkCl",
-    "final_date": 1692730000,
-    "id": 37091,
-    "level": 1
+    "conekta_id": "cus_2uQhPRs76K6WcNMrM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37091
   },
   {
     "nombre": "Marisol Abigail",
@@ -45620,10 +45235,10 @@ export const activeUsers = [
     "correo": "marisolmejia992812@gmail.com",
     "pais": "El Salvador",
     "whatsapp": 50360128607,
-    "stripe_id": "cus_NDaq6wWLrzxLUD",
-    "final_date": 1692730000,
-    "id": 37092,
-    "level": 1
+    "conekta_id": "cus_2uQhPSqi1cQ7iqPLd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37092
   },
   {
     "nombre": "Jessica beatriz",
@@ -45631,10 +45246,10 @@ export const activeUsers = [
     "correo": "jessy2020.jv@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543020405,
-    "stripe_id": "cus_NDfzf0vNgS264r",
-    "final_date": 1692750000,
-    "id": 37096,
-    "level": 1
+    "conekta_id": "cus_2uQhPSmwJbxutSSzp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37096
   },
   {
     "nombre": "Maria Isabel",
@@ -45642,10 +45257,9 @@ export const activeUsers = [
     "correo": "ixabhel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522451091074,
-    "stripe_id": "cus_NDhnChQ5L3t32n",
     "final_date": 1689310000,
-    "id": 37100,
-    "level": 1
+    "level": 1,
+    "id": 37100
   },
   {
     "nombre": "Paolina Lizeth",
@@ -45653,10 +45267,9 @@ export const activeUsers = [
     "correo": "lizeth.loz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527775009232,
-    "stripe_id": "cus_NDykCrK3Zm1TRt",
     "final_date": 1690800000,
-    "id": 37101,
-    "level": 1
+    "level": 1,
+    "id": 37101
   },
   {
     "nombre": "Rocio",
@@ -45664,10 +45277,10 @@ export const activeUsers = [
     "correo": "chiguiltotorocio@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523316025963,
-    "stripe_id": "cus_NDwT5v5lwiVIId",
-    "final_date": 1691990000,
-    "id": 37109,
-    "level": 1
+    "conekta_id": "cus_2uQhPUKM41XQyNiKu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37109
   },
   {
     "nombre": "Layla",
@@ -45675,10 +45288,10 @@ export const activeUsers = [
     "correo": "archundiad21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525519369885,
-    "stripe_id": "cus_NDxRnYGMKLJt75",
-    "final_date": 1692830000,
-    "id": 37112,
-    "level": 1
+    "conekta_id": "cus_2uQhPUooxWhAVz7JT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37112
   },
   {
     "nombre": "valeria",
@@ -45686,10 +45299,10 @@ export const activeUsers = [
     "correo": "valeryperaltagutierrez@gmail.com",
     "pais": "Nicaragua",
     "whatsapp": 50558878113,
-    "stripe_id": "cus_NaD9lNQwtMRaGq",
-    "final_date": 1692850000,
-    "id": 37116,
-    "level": 1
+    "conekta_id": "cus_2uQhPVYdUiFp546pw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37116
   },
   {
     "nombre": "Maria Guadalupe",
@@ -45697,10 +45310,10 @@ export const activeUsers = [
     "correo": "aguilup2109@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525619881211,
-    "stripe_id": "cus_NE1oYY1rpnnOK2",
-    "final_date": 1692840000,
-    "id": 37128,
-    "level": 1
+    "conekta_id": "cus_2uQhPVYdUiFp8FmoB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37128
   },
   {
     "nombre": "Laura Marcela",
@@ -45708,10 +45321,9 @@ export const activeUsers = [
     "correo": "lauralupitahector@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524611116060,
-    "stripe_id": "cus_NLxrXijCT4lp1H",
     "final_date": 0,
-    "id": 37130,
-    "level": 1
+    "level": 1,
+    "id": 37130
   },
   {
     "nombre": "Sandra",
@@ -45719,10 +45331,9 @@ export const activeUsers = [
     "correo": "sandramaribelberenice@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525514219279,
-    "stripe_id": "cus_NE6sw6hbkSDZCN",
     "final_date": 1690170000,
-    "id": 37137,
-    "level": 1
+    "level": 1,
+    "id": 37137
   },
   {
     "nombre": "Marina",
@@ -45730,10 +45341,20 @@ export const activeUsers = [
     "correo": "marinatec21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523222317350,
-    "stripe_id": "cus_NELvXk86vztBAU",
-    "final_date": 1691460000,
-    "id": 37161,
-    "level": 1
+    "conekta_id": "cus_2uQhPXCrRoLohDLQm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37161
+  },
+  {
+    "nombre": "Diana Cristina",
+    "apellido": "Reyes Siller",
+    "correo": "dcrisreyes@hotmail.com",
+    "pais": "Mexico",
+    "whatsapp": 528441074646,
+    "final_date": 1723920000,
+    "level": 0,
+    "id": 37166
   },
   {
     "nombre": "Abigails",
@@ -45741,10 +45362,9 @@ export const activeUsers = [
     "correo": "iaga18@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525580469236,
-    "stripe_id": "cus_NETsrNXSwDQGiC",
     "final_date": 1690260000,
-    "id": 37180,
-    "level": 1
+    "level": 1,
+    "id": 37180
   },
   {
     "nombre": "noemi",
@@ -45752,10 +45372,9 @@ export const activeUsers = [
     "correo": "trujillohuertanoemimontserrat@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525526793930,
-    "stripe_id": "cus_NGKK807x6uWIih",
     "final_date": 1682820000,
-    "id": 37200,
-    "level": 1
+    "level": 1,
+    "id": 37200
   },
   {
     "nombre": "Carolina",
@@ -45763,10 +45382,10 @@ export const activeUsers = [
     "correo": "carocg1.cg@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 12622200289,
-    "stripe_id": "cus_NLyBh83JWuTQPM",
-    "final_date": 1691990000,
-    "id": 37201,
-    "level": 1
+    "conekta_id": "cus_2uQhPYVuZWWQa8kp4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37201
   },
   {
     "nombre": "Deisy",
@@ -45774,10 +45393,10 @@ export const activeUsers = [
     "correo": "deisy_72@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529671358318,
-    "stripe_id": "cus_NEotunMlXLu9qG",
-    "final_date": 1693020000,
-    "id": 37209,
-    "level": 1
+    "conekta_id": "cus_2uQhPYgVUCU6tbkxM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37209
   },
   {
     "nombre": "Daniela",
@@ -45785,10 +45404,10 @@ export const activeUsers = [
     "correo": "dangioalpa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525576263358,
-    "stripe_id": "cus_NLyQpXSUks7w92",
-    "final_date": 1691990000,
-    "id": 37211,
-    "level": 1
+    "conekta_id": "cus_2uQhPZFJJJizs4znD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37211
   },
   {
     "nombre": "alma yanet",
@@ -45796,10 +45415,10 @@ export const activeUsers = [
     "correo": "almixnails@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529984142635,
-    "stripe_id": "cus_NlpDYieHs5rBXw",
-    "final_date": 1693000000,
-    "id": 37227,
-    "level": 1
+    "conekta_id": "cus_2uQhPaA8WbbQDJeKv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37227
   },
   {
     "nombre": "JOSELIN",
@@ -45807,10 +45426,10 @@ export const activeUsers = [
     "correo": "jossyledezma_@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528711574729,
-    "stripe_id": "cus_NF6BjMa7Fsnllk",
-    "final_date": 1693080000,
-    "id": 37230,
-    "level": 1
+    "conekta_id": "cus_2uQhPatx2oA3qaJpn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37230
   },
   {
     "nombre": "Silvia Patricia",
@@ -45818,10 +45437,9 @@ export const activeUsers = [
     "correo": "patyherall@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522711021506,
-    "stripe_id": "cus_NF7vfMTk4IIccZ",
     "final_date": 1690410000,
-    "id": 37233,
-    "level": 1
+    "level": 1,
+    "id": 37233
   },
   {
     "nombre": "María del Rosario",
@@ -45829,10 +45447,9 @@ export const activeUsers = [
     "correo": "mariayola46@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523141475173,
-    "stripe_id": "cus_NFB5sWUtiJZh9g",
     "final_date": 1682560000,
-    "id": 37238,
-    "level": 1
+    "level": 1,
+    "id": 37238
   },
   {
     "nombre": "Alejandra Noemi",
@@ -45840,10 +45457,10 @@ export const activeUsers = [
     "correo": "noemipine78@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527293216467,
-    "stripe_id": "cus_NFPB1kkXIg525Z",
-    "final_date": 1693160000,
-    "id": 37245,
-    "level": 1
+    "conekta_id": "cus_2uQhPbdmYzihSqKPW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37245
   },
   {
     "nombre": "Viviana",
@@ -45851,10 +45468,10 @@ export const activeUsers = [
     "correo": "andreavivi0908@gmail.com",
     "pais": "Ecuador",
     "whatsapp": 593982786720,
-    "stripe_id": "cus_NUQByu1VPHvxup",
-    "final_date": 1691520000,
-    "id": 37247,
-    "level": 1
+    "conekta_id": "cus_2uQhPcVX9b5FJg6XA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37247
   },
   {
     "nombre": "Elizabeth",
@@ -45862,10 +45479,10 @@ export const activeUsers = [
     "correo": "garridohelizabeth@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527761248597,
-    "stripe_id": "cus_NFRE34dCJJVEmm",
-    "final_date": 1693170000,
-    "id": 37253,
-    "level": 1
+    "conekta_id": "cus_2uQhPcwPuJYEzRKFZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37253
   },
   {
     "nombre": "Emma",
@@ -45873,10 +45490,10 @@ export const activeUsers = [
     "correo": "mateoemma74@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527122162052,
-    "stripe_id": "cus_NFWnrPt0L7yqUM",
-    "final_date": 1693180000,
-    "id": 37263,
-    "level": 1
+    "conekta_id": "cus_2uQhPdgDRW6tcgykB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37263
   },
   {
     "nombre": "Liliana",
@@ -45884,10 +45501,9 @@ export const activeUsers = [
     "correo": "lilycor3@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561202302,
-    "stripe_id": "cus_NFYEpAg5ayKory",
     "final_date": 1747250000,
-    "id": 37265,
-    "level": 0
+    "level": 0,
+    "id": 37265
   },
   {
     "nombre": "karina Elizabeth",
@@ -45895,10 +45511,10 @@ export const activeUsers = [
     "correo": "karelywal@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526146036419,
-    "stripe_id": "cus_NFqMTYMAQXaqLC",
-    "final_date": 1693250000,
-    "id": 37298,
-    "level": 1
+    "conekta_id": "cus_2uQhPeb3dnyHwuyNK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37298
   },
   {
     "nombre": "Nayeli",
@@ -45906,10 +45522,10 @@ export const activeUsers = [
     "correo": "naye_perez@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522297787048,
-    "stripe_id": "cus_NG8execVkube0C",
-    "final_date": 1693320000,
-    "id": 37313,
-    "level": 1
+    "conekta_id": "cus_2uQhPeQTj71bbtUsN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37313
   },
   {
     "nombre": "Janet",
@@ -45917,10 +45533,10 @@ export const activeUsers = [
     "correo": "janethvillegas12345@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526562685331,
-    "stripe_id": "cus_NPaYavFgp5WPJb",
-    "final_date": 1692820000,
-    "id": 37318,
-    "level": 1
+    "conekta_id": "cus_2uQhPfSoEPKqtyG1U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37318
   },
   {
     "nombre": "Tania Mariela",
@@ -45928,10 +45544,10 @@ export const activeUsers = [
     "correo": "tania_alvarez_01@outlook.es",
     "pais": "Mexico",
     "whatsapp": 524531387690,
-    "stripe_id": "cus_NGIvE5VQ94OJsB",
-    "final_date": 1693360000,
-    "id": 37321,
-    "level": 1
+    "conekta_id": "cus_2uQhPft6mW8trRorr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37321
   },
   {
     "nombre": "Tania",
@@ -45939,10 +45555,10 @@ export const activeUsers = [
     "correo": "tcarrillohoran1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561966900,
-    "stripe_id": "cus_NlpD02dqoU6R0Q",
-    "final_date": 1692600000,
-    "id": 37329,
-    "level": 1
+    "conekta_id": "cus_2uQhPft6mW8trRos4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37329
   },
   {
     "nombre": "Juana Guadalupe",
@@ -45950,10 +45566,9 @@ export const activeUsers = [
     "correo": "jc9166549@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522411021736,
-    "stripe_id": "cus_NGWEn8VsGZYeRn",
     "final_date": 1680360000,
-    "id": 37334,
-    "level": 1
+    "level": 1,
+    "id": 37334
   },
   {
     "nombre": "Araceli",
@@ -45961,10 +45576,10 @@ export const activeUsers = [
     "correo": "araceli.martinez03@icloud.com",
     "pais": "Estados Unidos",
     "whatsapp": 15599175932,
-    "stripe_id": "cus_NSLQHQWgraE2dr",
-    "final_date": 1693720000,
-    "id": 37339,
-    "level": 1
+    "conekta_id": "cus_2uQhPhNK2Vv8k3JDH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37339
   },
   {
     "nombre": "Yesenia",
@@ -45972,10 +45587,10 @@ export const activeUsers = [
     "correo": "retecyesenia@outlook.com",
     "pais": "Mexico",
     "whatsapp": 524441932671,
-    "stripe_id": "cus_NGgscTeHCid1GW",
-    "final_date": 1693450000,
-    "id": 37351,
-    "level": 1
+    "conekta_id": "cus_2uQhPhc6Rbf6BaeXj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37351
   },
   {
     "nombre": "Emma",
@@ -45983,10 +45598,10 @@ export const activeUsers = [
     "correo": "ariasbenitez1987emma@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527226467152,
-    "stripe_id": "cus_NGvN5UPJFUq4lF",
-    "final_date": 1693500000,
-    "id": 37365,
-    "level": 1
+    "conekta_id": "cus_2uQhPiLuwoDjmArKm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37365
   },
   {
     "nombre": "tania",
@@ -45994,10 +45609,10 @@ export const activeUsers = [
     "correo": "oliveratania_1999@icloud.com",
     "pais": "Mexico",
     "whatsapp": 524531532354,
-    "stripe_id": "cus_NgwP5GQ2FCAjYj",
-    "final_date": 1691730000,
-    "id": 37384,
-    "level": 1
+    "conekta_id": "cus_2uQhPiqNrJPVMWTr3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37384
   },
   {
     "nombre": "María Guadalupe",
@@ -46005,10 +45620,10 @@ export const activeUsers = [
     "correo": "lupita7916@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523929284421,
-    "stripe_id": "cus_NHSXLSwCw7Cy6t",
-    "final_date": 1693630000,
-    "id": 37400,
-    "level": 1
+    "conekta_id": "cus_2uQhPjaCNVx8yn8Lg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37400
   },
   {
     "nombre": "reyna",
@@ -46016,10 +45631,9 @@ export const activeUsers = [
     "correo": "rg.95@outlook.es",
     "pais": "Mexico",
     "whatsapp": 528110807984,
-    "stripe_id": "cus_NHYDl16krqzCdZ",
     "final_date": 1689840000,
-    "id": 37410,
-    "level": 1
+    "level": 1,
+    "id": 37410
   },
   {
     "nombre": "Maria del carmen guadalupe",
@@ -46027,10 +45641,9 @@ export const activeUsers = [
     "correo": "carmen83mor@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522831311635,
-    "stripe_id": "cus_NHi3dBlKPXlXBm",
     "final_date": 1691010000,
-    "id": 37423,
-    "level": 1
+    "level": 1,
+    "id": 37423
   },
   {
     "nombre": "Rocio",
@@ -46038,10 +45651,10 @@ export const activeUsers = [
     "correo": "rocdur32@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529811219210,
-    "stripe_id": "cus_NI3xXAPNg5F3v3",
-    "final_date": 1693420000,
-    "id": 37454,
-    "level": 1
+    "conekta_id": "cus_2uQhPkZNWPugjKKF5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37454
   },
   {
     "nombre": "Martha Ameyali",
@@ -46049,10 +45662,10 @@ export const activeUsers = [
     "correo": "ame.ortega3021@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529842541766,
-    "stripe_id": "cus_NIAvZ9bu2WBssN",
-    "final_date": 1691450000,
-    "id": 37467,
-    "level": 1
+    "conekta_id": "cus_2uQhPm3qQu5SEKTKq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37467
   },
   {
     "nombre": "Gloria berenice",
@@ -46060,10 +45673,9 @@ export const activeUsers = [
     "correo": "berecarmonahair@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524525063570,
-    "stripe_id": "cus_NIDIgX6fqcPffx",
     "final_date": 1683170000,
-    "id": 37481,
-    "level": 1
+    "level": 1,
+    "id": 37481
   },
   {
     "nombre": "Mónica Andrea",
@@ -46071,10 +45683,10 @@ export const activeUsers = [
     "correo": "mnktorres1205@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15109380936,
-    "stripe_id": "cus_NIPyLUjt38lTEV",
-    "final_date": 1693990000,
-    "id": 37483,
-    "level": 1
+    "conekta_id": "cus_2uQhPmnew6e5rb7pf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37483
   },
   {
     "nombre": "giovana",
@@ -46082,10 +45694,10 @@ export const activeUsers = [
     "correo": "giovana_pam@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525581996879,
-    "stripe_id": "cus_NgwVUhBqR8LOg4",
-    "final_date": 1691730000,
-    "id": 37533,
-    "level": 1
+    "conekta_id": "cus_2uQhPnmq4zbdce4Dt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37533
   },
   {
     "nombre": "Brandon",
@@ -46093,10 +45705,9 @@ export const activeUsers = [
     "correo": "brandonromang@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527775987423,
-    "stripe_id": "cus_NM3v5foLYvRU05",
     "final_date": 1684060000,
-    "id": 37548,
-    "level": 1
+    "level": 1,
+    "id": 37548
   },
   {
     "nombre": "María del rosario",
@@ -46104,10 +45715,10 @@ export const activeUsers = [
     "correo": "orosario443@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525531569418,
-    "stripe_id": "cus_NJDINzg4eXpU07",
+    "conekta_id": "cus_2uQhPoGsC6RKkCcBG",
     "final_date": 1694040000,
-    "id": 37553,
-    "level": 1
+    "level": 0,
+    "id": 37553
   },
   {
     "nombre": "Diana Kristal",
@@ -46115,10 +45726,9 @@ export const activeUsers = [
     "correo": "kriatal_tutis@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525569368798,
-    "stripe_id": "cus_NKI2cOjaoDJazV",
     "final_date": 0,
-    "id": 37570,
-    "level": 1
+    "level": 1,
+    "id": 37570
   },
   {
     "nombre": "maria Imelda yecenia",
@@ -46126,10 +45736,10 @@ export const activeUsers = [
     "correo": "imeldayeniatamayo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523319808530,
-    "stripe_id": "cus_NJdfRfCtwLejJW",
-    "final_date": 1691450000,
-    "id": 37579,
-    "level": 1
+    "conekta_id": "cus_2uQhPpFU7PivmLAGT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37579
   },
   {
     "nombre": "Merli",
@@ -46137,10 +45747,9 @@ export const activeUsers = [
     "correo": "merliserafin.mer@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981447545,
-    "stripe_id": "cus_NJfW0PxiWve6JI",
     "final_date": 1722400000,
-    "id": 37584,
-    "level": 0
+    "level": 0,
+    "id": 37584
   },
   {
     "nombre": "SAIRA LIZBETH",
@@ -46148,10 +45757,9 @@ export const activeUsers = [
     "correo": "amistad_arias@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523313968876,
-    "stripe_id": "cus_NKDMre6AsebdxV",
     "final_date": 1694090000,
-    "id": 37627,
-    "level": 1
+    "level": 1,
+    "id": 37627
   },
   {
     "nombre": "Itzel",
@@ -46159,10 +45767,9 @@ export const activeUsers = [
     "correo": "palafoxitzel0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711149107,
-    "stripe_id": "cus_NeC5nswElPr1Mq",
     "final_date": 1691090000,
-    "id": 37630,
-    "level": 1
+    "level": 1,
+    "id": 37630
   },
   {
     "nombre": "Lilian",
@@ -46170,10 +45777,10 @@ export const activeUsers = [
     "correo": "garcialily742@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 14158795956,
-    "stripe_id": "cus_NKJLTFFphHKdaU",
-    "final_date": 1691610000,
-    "id": 37634,
-    "level": 1
+    "conekta_id": "cus_2uQhPqnGXBCvZY3QA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37634
   },
   {
     "nombre": "Kritma",
@@ -46181,10 +45788,10 @@ export const activeUsers = [
     "correo": "kla1309@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774388809,
-    "stripe_id": "cus_NKaRRwhPQ23Iov",
-    "final_date": 1691990000,
-    "id": 37653,
-    "level": 1
+    "conekta_id": "cus_2uQhPrTvfzQsjUdCw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37653
   },
   {
     "nombre": "Isabel",
@@ -46192,10 +45799,10 @@ export const activeUsers = [
     "correo": "isabelmontejanovasques@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523515005911,
-    "stripe_id": "cus_NL4QPi8gtxDjHy",
-    "final_date": 1691780000,
-    "id": 37683,
-    "level": 1
+    "conekta_id": "cus_2uQhPrTvfzQsjUdD3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37683
   },
   {
     "nombre": "Diana Laura",
@@ -46203,10 +45810,10 @@ export const activeUsers = [
     "correo": "dlmm0312@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774770931,
-    "stripe_id": "cus_NL4jqwDgF5C6r3",
-    "final_date": 1691780000,
-    "id": 37685,
-    "level": 1
+    "conekta_id": "cus_2uQhPsCkCByXMkHhZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37685
   },
   {
     "nombre": "Judith",
@@ -46214,10 +45821,9 @@ export const activeUsers = [
     "correo": "juditharcep@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525548990698,
-    "stripe_id": "cus_NR8GukjC7EHU4c",
     "final_date": 1690500000,
-    "id": 37701,
-    "level": 1
+    "level": 1,
+    "id": 37701
   },
   {
     "nombre": "Linda Raquel",
@@ -46225,10 +45831,9 @@ export const activeUsers = [
     "correo": "cris.linda25@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528971286743,
-    "stripe_id": "cus_NeGfU8PXaqNf9k",
     "final_date": 1689130000,
-    "id": 37711,
-    "level": 1
+    "level": 1,
+    "id": 37711
   },
   {
     "nombre": "Alejandra",
@@ -46236,10 +45841,10 @@ export const activeUsers = [
     "correo": "alejandraefonz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522211359857,
-    "stripe_id": "cus_NLY6W7m2m2PpZN",
-    "final_date": 1691890000,
-    "id": 37717,
-    "level": 1
+    "conekta_id": "cus_2uQhPsso1P6yDnaAf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37717
   },
   {
     "nombre": "Claudia",
@@ -46247,10 +45852,10 @@ export const activeUsers = [
     "correo": "claudialemusc68@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525523001912,
-    "stripe_id": "cus_NLxo4BVliHxgpj",
-    "final_date": 1691990000,
-    "id": 37753,
-    "level": 1
+    "conekta_id": "cus_2uQhPtSbqVMs86Fdg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37753
   },
   {
     "nombre": "Kenia Arizbeth",
@@ -46258,10 +45863,10 @@ export const activeUsers = [
     "correo": "ariz.krh@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522292431171,
-    "stripe_id": "cus_NLxoBOI5nnN0Wa",
-    "final_date": 1691990000,
-    "id": 37757,
-    "level": 1
+    "conekta_id": "cus_2uQhPuMS3nEGXmUMJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37757
   },
   {
     "nombre": "aida eugenia",
@@ -46269,10 +45874,10 @@ export const activeUsers = [
     "correo": "aidaelgin2@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529993317538,
-    "stripe_id": "cus_NLxoOMCH6HTz2D",
-    "final_date": 1693580000,
-    "id": 37761,
-    "level": 1
+    "conekta_id": "cus_2uQhPuvEstVANdad6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37761
   },
   {
     "nombre": "Maria del rocio",
@@ -46280,10 +45885,10 @@ export const activeUsers = [
     "correo": "roxygarcia.0505@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522411778180,
-    "stripe_id": "cus_NLxoAkrl6Sd4Tz",
-    "final_date": 1691990000,
-    "id": 37765,
-    "level": 1
+    "conekta_id": "cus_2uQhPvtqoBnmV6cAN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37765
   },
   {
     "nombre": "Diana Laura",
@@ -46291,10 +45896,10 @@ export const activeUsers = [
     "correo": "dianaqum96@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528135847251,
-    "stripe_id": "cus_NLxoad7LBBxk0l",
-    "final_date": 1691990000,
-    "id": 37768,
-    "level": 1
+    "conekta_id": "cus_2uQhPwZtcNvDGyLAt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37768
   },
   {
     "nombre": "Nadia",
@@ -46302,10 +45907,10 @@ export const activeUsers = [
     "correo": "nadiaesparza1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524491867159,
-    "stripe_id": "cus_NLxpe4U7AaU643",
-    "final_date": 1691990000,
-    "id": 37769,
-    "level": 1
+    "conekta_id": "cus_2uQhPwPsvHcTbccLy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37769
   },
   {
     "nombre": "Rocío Guadalupe",
@@ -46313,10 +45918,10 @@ export const activeUsers = [
     "correo": "r.d180114irm@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611784850,
-    "stripe_id": "cus_NLxoqx0NcmPkYe",
-    "final_date": 1691990000,
-    "id": 37772,
-    "level": 1
+    "conekta_id": "cus_2uQhPx8hSVB7FSa7M",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37772
   },
   {
     "nombre": "lucia",
@@ -46324,10 +45929,10 @@ export const activeUsers = [
     "correo": "luzylucc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525525404555,
-    "stripe_id": "cus_NLxo0phxsVfZ7U",
-    "final_date": 1691990000,
-    "id": 37773,
-    "level": 1
+    "conekta_id": "cus_2uQhPxsWxgjku5DqU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37773
   },
   {
     "nombre": "Cinthia",
@@ -46335,10 +45940,10 @@ export const activeUsers = [
     "correo": "cinthia_0911@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525621172726,
-    "stripe_id": "cus_NLxpBPQ9FHsPrF",
-    "final_date": 1691990000,
-    "id": 37780,
-    "level": 1
+    "conekta_id": "cus_2uQhPyr7sz3Mzh1bV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37780
   },
   {
     "nombre": "anabel",
@@ -46346,10 +45951,9 @@ export const activeUsers = [
     "correo": "7070651@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535536536,
-    "stripe_id": "cus_NLxoYRE2UA3S5x",
     "final_date": 1689310000,
-    "id": 37783,
-    "level": 1
+    "level": 1,
+    "id": 37783
   },
   {
     "nombre": "Joselyn Montserrat",
@@ -46357,10 +45961,10 @@ export const activeUsers = [
     "correo": "evana1503@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525585206392,
-    "stripe_id": "cus_NLxozqMOz1Lpto",
-    "final_date": 1691990000,
-    "id": 37784,
-    "level": 1
+    "conekta_id": "cus_2uQhPzXAhBAorDYde",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37784
   },
   {
     "nombre": "Vicky",
@@ -46368,10 +45972,10 @@ export const activeUsers = [
     "correo": "vickygutierrezblanco@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525550544570,
-    "stripe_id": "cus_NLxprQhHIhl9fo",
-    "final_date": 1691990000,
-    "id": 37802,
-    "level": 1
+    "conekta_id": "cus_2uQhQ1KkvPAfC4aKi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37802
   },
   {
     "nombre": "Ana Karen",
@@ -46379,10 +45983,9 @@ export const activeUsers = [
     "correo": "karen.mm.221017@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525516987155,
-    "stripe_id": "cus_NLy3dJIkaPQJ9w",
     "final_date": 0,
-    "id": 37809,
-    "level": 1
+    "level": 1,
+    "id": 37809
   },
   {
     "nombre": "Ana Karen",
@@ -46390,21 +45993,20 @@ export const activeUsers = [
     "correo": "aaca_lk@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525637080121,
-    "stripe_id": "cus_NLxoicEyI6vSoI",
     "final_date": 0,
-    "id": 37815,
-    "level": 1
+    "level": 1,
+    "id": 37815
   },
   {
     "nombre": "Griselda",
-    "apellido": "Álvarez Fabela",
+    "apellido": "Alvarez Fabela",
     "correo": "grisifut@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525563335332,
-    "stripe_id": "cus_NLxp55GKlzLivM",
-    "final_date": 1691990000,
-    "id": 37833,
-    "level": 1
+    "conekta_id": "cus_2uQhQ1zojaJ76ksd2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37833
   },
   {
     "nombre": "Aarón",
@@ -46412,10 +46014,9 @@ export const activeUsers = [
     "correo": "dulce.campuzano.e7d@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525635519006,
-    "stripe_id": "cus_NLxphtwmhgpXKW",
     "final_date": 0,
-    "id": 37839,
-    "level": 1
+    "level": 1,
+    "id": 37839
   },
   {
     "nombre": "Melina",
@@ -46423,10 +46024,9 @@ export const activeUsers = [
     "correo": "susan_magys@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522382420512,
-    "stripe_id": "cus_NLxpqwDtay6tAq",
     "final_date": 0,
-    "id": 37843,
-    "level": 1
+    "level": 1,
+    "id": 37843
   },
   {
     "nombre": "sofia itzayana",
@@ -46434,10 +46034,10 @@ export const activeUsers = [
     "correo": "sofialamarque52@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526681449752,
-    "stripe_id": "cus_NLxoTJybwdgHic",
-    "final_date": 1691990000,
-    "id": 37845,
-    "level": 1
+    "conekta_id": "cus_2uQhQ3HrsHThzG4Aa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37845
   },
   {
     "nombre": "erika",
@@ -46445,10 +46045,9 @@ export const activeUsers = [
     "correo": "ritharam22@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524981148014,
-    "stripe_id": "cus_NU2tAED18ZvTq9",
     "final_date": 1683490000,
-    "id": 37849,
-    "level": 1
+    "level": 1,
+    "id": 37849
   },
   {
     "nombre": "margarita",
@@ -46456,10 +46055,10 @@ export const activeUsers = [
     "correo": "maguiovando2729@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529931082512,
-    "stripe_id": "cus_NLxsPyLNiXml5G",
-    "final_date": 1691990000,
-    "id": 37859,
-    "level": 1
+    "conekta_id": "cus_2uQhQ43Fc5gJGxsJT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37859
   },
   {
     "nombre": "analis",
@@ -46467,10 +46066,9 @@ export const activeUsers = [
     "correo": "annaamendez1994@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525591882748,
-    "stripe_id": "cus_NLxpTixfSJyE4S",
     "final_date": 1689310000,
-    "id": 37888,
-    "level": 1
+    "level": 1,
+    "id": 37888
   },
   {
     "nombre": "Monica de la cruz",
@@ -46478,10 +46076,9 @@ export const activeUsers = [
     "correo": "maxiyallis1408@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522292218267,
-    "stripe_id": "cus_NLxvWaNW6x6nsW",
     "final_date": 0,
-    "id": 37894,
-    "level": 1
+    "level": 1,
+    "id": 37894
   },
   {
     "nombre": "vianca",
@@ -46489,10 +46086,9 @@ export const activeUsers = [
     "correo": "viancag450@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631299393,
-    "stripe_id": "cus_NLxp7wQAoiNso8",
     "final_date": 0,
-    "id": 37897,
-    "level": 1
+    "level": 1,
+    "id": 37897
   },
   {
     "nombre": "Pamela Ayli",
@@ -46500,10 +46096,10 @@ export const activeUsers = [
     "correo": "ayliamador2000@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525554636798,
-    "stripe_id": "cus_NLxpgcROr26FvA",
-    "final_date": 1691990000,
-    "id": 37906,
-    "level": 1
+    "conekta_id": "cus_2uQhQ5kg3aYYu16cQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37906
   },
   {
     "nombre": "Abigail",
@@ -46511,10 +46107,9 @@ export const activeUsers = [
     "correo": "abiyforlan@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525542725644,
-    "stripe_id": "cus_NLxr6Qnjp2mRLD",
     "final_date": 1684040000,
-    "id": 37907,
-    "level": 1
+    "level": 1,
+    "id": 37907
   },
   {
     "nombre": "Claudia",
@@ -46522,10 +46117,9 @@ export const activeUsers = [
     "correo": "claudia840713@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525574156852,
-    "stripe_id": "cus_NLxqaCm1K9oPpD",
     "final_date": 1689310000,
-    "id": 37922,
-    "level": 1
+    "level": 1,
+    "id": 37922
   },
   {
     "nombre": "angelica",
@@ -46533,10 +46127,10 @@ export const activeUsers = [
     "correo": "normaalonso1989@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525534801437,
-    "stripe_id": "cus_NLxrn03g5lgRDt",
-    "final_date": 1691990000,
-    "id": 37931,
-    "level": 1
+    "conekta_id": "cus_2uQhQ6FiAgNF9mrnj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37931
   },
   {
     "nombre": "Maria del Carmen",
@@ -46544,10 +46138,9 @@ export const activeUsers = [
     "correo": "ma.0110203@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523314511585,
-    "stripe_id": "cus_NLxqPCKYJEaeiI",
     "final_date": 0,
-    "id": 37937,
-    "level": 1
+    "level": 1,
+    "id": 37937
   },
   {
     "nombre": "Carolina",
@@ -46555,10 +46148,10 @@ export const activeUsers = [
     "correo": "hcarolinah8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524771366437,
-    "stripe_id": "cus_NLxubToZu0OIbH",
-    "final_date": 1691990000,
-    "id": 37938,
-    "level": 1
+    "conekta_id": "cus_2uQhQ7AYNyEeTdsAS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37938
   },
   {
     "nombre": "Fabiola",
@@ -46566,10 +46159,10 @@ export const activeUsers = [
     "correo": "fabiaguilera16@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524381006742,
-    "stripe_id": "cus_NLxqXWdgA55MLF",
-    "final_date": 1691990000,
-    "id": 37943,
-    "level": 1
+    "conekta_id": "cus_2uQhQ7jMD5VYQKBnD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37943
   },
   {
     "nombre": "brenda cecilia",
@@ -46577,10 +46170,9 @@ export const activeUsers = [
     "correo": "ceciespinorivas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524433585369,
-    "stripe_id": "cus_NLxtk2nR5nVfG1",
     "final_date": 1689310000,
-    "id": 37945,
-    "level": 1
+    "level": 1,
+    "id": 37945
   },
   {
     "nombre": "Priscilla",
@@ -46588,10 +46180,9 @@ export const activeUsers = [
     "correo": "priissvr@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583571317,
-    "stripe_id": "cus_NLxq2wD6Zztaem",
     "final_date": 1689310000,
-    "id": 37947,
-    "level": 1
+    "level": 1,
+    "id": 37947
   },
   {
     "nombre": "Marisol",
@@ -46599,10 +46190,9 @@ export const activeUsers = [
     "correo": "soesma@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524432545817,
-    "stripe_id": "cus_NLy1dHFJZKL7bO",
     "final_date": 0,
-    "id": 37991,
-    "level": 1
+    "level": 1,
+    "id": 37991
   },
   {
     "nombre": "Isaura Jazmin",
@@ -46610,10 +46200,10 @@ export const activeUsers = [
     "correo": "chawy.green@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523316207075,
-    "stripe_id": "cus_NLxyogdFaY4Uke",
-    "final_date": 1691990000,
-    "id": 37992,
-    "level": 1
+    "conekta_id": "cus_2uQhQ9NzwZvbLSreY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37992
   },
   {
     "nombre": "cindy nallely",
@@ -46621,10 +46211,10 @@ export const activeUsers = [
     "correo": "nellytrevino530@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528130517196,
-    "stripe_id": "cus_NLxq4uULUAnlLT",
-    "final_date": 1691990000,
-    "id": 37996,
-    "level": 1
+    "conekta_id": "cus_2uQhQABbAmvSjxZ6B",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 37996
   },
   {
     "nombre": "ximena lizete",
@@ -46632,10 +46222,9 @@ export const activeUsers = [
     "correo": "lizetegnzlz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529531037531,
-    "stripe_id": "cus_NMAqh1tLobXKAG",
     "final_date": 0,
-    "id": 38004,
-    "level": 1
+    "level": 1,
+    "id": 38004
   },
   {
     "nombre": "Tania Guadalupe",
@@ -46643,10 +46232,10 @@ export const activeUsers = [
     "correo": "taniam773@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525617247945,
-    "stripe_id": "cus_NLxsZzsRmUSoMp",
-    "final_date": 1691990000,
-    "id": 38019,
-    "level": 1
+    "conekta_id": "cus_2uQhQAg45H6CGZwxF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38019
   },
   {
     "nombre": "Gloria",
@@ -46654,10 +46243,10 @@ export const activeUsers = [
     "correo": "gaam2984@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524425037665,
-    "stripe_id": "cus_NLxpkeddDyi5ys",
-    "final_date": 1692570000,
-    "id": 38033,
-    "level": 1
+    "conekta_id": "cus_2uQhQBiPaZQSSpxiJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38033
   },
   {
     "nombre": "Mayela Velazquez",
@@ -46665,10 +46254,9 @@ export const activeUsers = [
     "correo": "aleyam_cocom@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525579608099,
-    "stripe_id": "cus_NLxrusXk9RHHJY",
     "final_date": 1689310000,
-    "id": 38043,
-    "level": 1
+    "level": 1,
+    "id": 38043
   },
   {
     "nombre": "Ana Elizabeth",
@@ -46676,10 +46264,9 @@ export const activeUsers = [
     "correo": "roma.ana.eli@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524444136012,
-    "stripe_id": "cus_NLxsuJv2vJA5Ur",
     "final_date": 0,
-    "id": 38053,
-    "level": 1
+    "level": 1,
+    "id": 38053
   },
   {
     "nombre": "noemi",
@@ -46687,10 +46274,10 @@ export const activeUsers = [
     "correo": "98lgnohemy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524411309703,
-    "stripe_id": "cus_NlpF1zTEtNdVQY",
-    "final_date": 1691440000,
-    "id": 38061,
-    "level": 1
+    "conekta_id": "cus_2uQhQCAGLGsS8aBUN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38061
   },
   {
     "nombre": "Leslie Nallely",
@@ -46698,10 +46285,10 @@ export const activeUsers = [
     "correo": "lessol0523@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528186788422,
-    "stripe_id": "cus_NLxrZTkEetp7cI",
-    "final_date": 1691990000,
-    "id": 38062,
-    "level": 1
+    "conekta_id": "cus_2uQhQD56YZjqQeGVj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38062
   },
   {
     "nombre": "Daniela Guadalupe",
@@ -46709,10 +46296,10 @@ export const activeUsers = [
     "correo": "danylu_tenorio@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525547280164,
-    "stripe_id": "cus_NLxwz2kk8zSWO4",
-    "final_date": 1691990000,
-    "id": 38066,
-    "level": 1
+    "conekta_id": "cus_2uQhQDov4mJV2uvzE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38066
   },
   {
     "nombre": "Danna Paola",
@@ -46720,10 +46307,9 @@ export const activeUsers = [
     "correo": "dannamunoz502@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523231338079,
-    "stripe_id": "cus_NLxsqCTQxaMHcP",
     "final_date": 0,
-    "id": 38081,
-    "level": 1
+    "level": 1,
+    "id": 38081
   },
   {
     "nombre": "Diocelinne",
@@ -46731,10 +46317,10 @@ export const activeUsers = [
     "correo": "jatcirioseguera@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526645180168,
-    "stripe_id": "cus_NLxtID0Sgo8bWs",
-    "final_date": 1691990000,
-    "id": 38096,
-    "level": 1
+    "conekta_id": "cus_2uQhQEYjaxs8jMA3E",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38096
   },
   {
     "nombre": "Susana Elizabeth",
@@ -46742,10 +46328,10 @@ export const activeUsers = [
     "correo": "susy.cruz1234@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524641760268,
-    "stripe_id": "cus_NLy1oOo40K4sRN",
-    "final_date": 1691990000,
-    "id": 38098,
-    "level": 1
+    "conekta_id": "cus_2uQhQENitsZNypsep",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38098
   },
   {
     "nombre": "Nestor",
@@ -46753,10 +46339,10 @@ export const activeUsers = [
     "correo": "salas.cruz1920@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528995228507,
-    "stripe_id": "cus_NLxr7xUnZvQdYl",
-    "final_date": 1691990000,
-    "id": 38101,
-    "level": 1
+    "conekta_id": "cus_2uQhQFHZ7ARnMcpY1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38101
   },
   {
     "nombre": "gabriela isabel",
@@ -46764,10 +46350,10 @@ export const activeUsers = [
     "correo": "gabrielagamzlopez21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526424820946,
-    "stripe_id": "cus_NLxspYIgCIsBuO",
-    "final_date": 1691990000,
-    "id": 38105,
-    "level": 1
+    "conekta_id": "cus_2uQhQG69LNRdk7s4c",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38105
   },
   {
     "nombre": "Alejandra",
@@ -46775,10 +46361,10 @@ export const activeUsers = [
     "correo": "alejandraolveraa2@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525611532011,
-    "stripe_id": "cus_NLy7GbC5mIbaYp",
-    "final_date": 1691990000,
-    "id": 38109,
-    "level": 1
+    "conekta_id": "cus_2uQhQGbBTUFKtCASs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38109
   },
   {
     "nombre": "Olivia Elizabeth",
@@ -46786,10 +46372,10 @@ export const activeUsers = [
     "correo": "oli.86@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 525591617653,
-    "stripe_id": "cus_NLy88KBL9Vlx4R",
-    "final_date": 1691990000,
-    "id": 38115,
-    "level": 1
+    "conekta_id": "cus_2uQhQHKzyfoyWTpwe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38115
   },
   {
     "nombre": "Nicole Alexis",
@@ -46797,10 +46383,10 @@ export const activeUsers = [
     "correo": "nico.prz75@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522881044918,
-    "stripe_id": "cus_NLxsPAh9TC2bnl",
-    "final_date": 1691990000,
-    "id": 38117,
-    "level": 1
+    "conekta_id": "cus_2uQhQHW1fm7jDRA6R",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38117
   },
   {
     "nombre": "nancy",
@@ -46808,10 +46394,10 @@ export const activeUsers = [
     "correo": "nanmeji97@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525537118959,
-    "stripe_id": "cus_NLxr2FJyRBnG3q",
-    "final_date": 1691990000,
-    "id": 38118,
-    "level": 1
+    "conekta_id": "cus_2uQhQJJbty7aaGqf3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38118
   },
   {
     "nombre": "giovana",
@@ -46819,10 +46405,10 @@ export const activeUsers = [
     "correo": "giovanatlatelpa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525519222754,
-    "stripe_id": "cus_NLxyxWhFOh6YUz",
-    "final_date": 1691990000,
-    "id": 38132,
-    "level": 1
+    "conekta_id": "cus_2uQhQK6anZ2vhXbe8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38132
   },
   {
     "nombre": "Juanita",
@@ -46830,10 +46416,10 @@ export const activeUsers = [
     "correo": "matjuani09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526641143620,
-    "stripe_id": "cus_NLxxPFWQ5EmA6v",
-    "final_date": 1691460000,
-    "id": 38149,
-    "level": 1
+    "conekta_id": "cus_2uQhQKqQJkbaKoG8h",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38149
   },
   {
     "nombre": "Sandra",
@@ -46841,10 +46427,9 @@ export const activeUsers = [
     "correo": "sandravaladez1991@outlook.com",
     "pais": "Mexico",
     "whatsapp": 524495125357,
-    "stripe_id": "cus_NLxqOlUMbo0nX8",
     "final_date": 0,
-    "id": 38155,
-    "level": 1
+    "level": 1,
+    "id": 38155
   },
   {
     "nombre": "Adriana",
@@ -46852,10 +46437,10 @@ export const activeUsers = [
     "correo": "yanyaulr@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524741759673,
-    "stripe_id": "cus_NLxxQhLyGokpXt",
-    "final_date": 1691990000,
-    "id": 38157,
-    "level": 1
+    "conekta_id": "cus_2uQhQLGhqsQdQ5aPV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38157
   },
   {
     "nombre": "Esmeralda",
@@ -46863,10 +46448,9 @@ export const activeUsers = [
     "correo": "esmegtz2312@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631302636,
-    "stripe_id": "cus_NLxuU2y2DeWkGg",
     "final_date": 1689310000,
-    "id": 38177,
-    "level": 1
+    "level": 1,
+    "id": 38177
   },
   {
     "nombre": "Esther",
@@ -46874,10 +46458,9 @@ export const activeUsers = [
     "correo": "aome0223@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527761021407,
-    "stripe_id": "cus_NLxro0gXxM5gRg",
     "final_date": 0,
-    "id": 38180,
-    "level": 1
+    "level": 1,
+    "id": 38180
   },
   {
     "nombre": "Abygail",
@@ -46885,10 +46468,9 @@ export const activeUsers = [
     "correo": "abygailmaas826@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529994157781,
-    "stripe_id": "cus_NLxrIO5gg0gSRC",
     "final_date": 1689810000,
-    "id": 38192,
-    "level": 1
+    "level": 1,
+    "id": 38192
   },
   {
     "nombre": "luz Elena",
@@ -46896,10 +46478,10 @@ export const activeUsers = [
     "correo": "luzlj11032000@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428639713,
-    "stripe_id": "cus_NLxrZqP3cY4RiL",
-    "final_date": 1691990000,
-    "id": 38203,
-    "level": 1
+    "conekta_id": "cus_2uQhQMFsymNB5MVdX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38203
   },
   {
     "nombre": "Gabriela Andrea",
@@ -46907,10 +46489,10 @@ export const activeUsers = [
     "correo": "torresa.880826@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50253172672,
-    "stripe_id": "cus_NLxrLMwTrHmkWE",
-    "final_date": 1691990000,
-    "id": 38209,
-    "level": 1
+    "conekta_id": "cus_2uQhQMkv6sBsHSoBX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38209
   },
   {
     "nombre": "Andrea Alejandra",
@@ -46918,10 +46500,9 @@ export const activeUsers = [
     "correo": "andrea.olivo2108@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528714353530,
-    "stripe_id": "cus_NLxswXtEkLpJFm",
     "final_date": 0,
-    "id": 38210,
-    "level": 1
+    "level": 1,
+    "id": 38210
   },
   {
     "nombre": "Karla",
@@ -46929,10 +46510,10 @@ export const activeUsers = [
     "correo": "karlatebillo0207@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774990525,
-    "stripe_id": "cus_NLxsImthY7U1Sj",
-    "final_date": 1691990000,
-    "id": 38211,
-    "level": 1
+    "conekta_id": "cus_2uQhQNjX2AVUP4ap4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38211
   },
   {
     "nombre": "Selene Iragey",
@@ -46940,10 +46521,9 @@ export const activeUsers = [
     "correo": "floresselene818@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526145945719,
-    "stripe_id": "cus_NLxtSquOqbLAaR",
     "final_date": 1689310000,
-    "id": 38220,
-    "level": 1
+    "level": 1,
+    "id": 38220
   },
   {
     "nombre": "Talia Monserrat",
@@ -46951,10 +46531,9 @@ export const activeUsers = [
     "correo": "mons20_itali_@hotmail.es",
     "pais": "Mexico",
     "whatsapp": 527211150090,
-    "stripe_id": "cus_NLxsz0w6zAYFd4",
     "final_date": 0,
-    "id": 38230,
-    "level": 1
+    "level": 1,
+    "id": 38230
   },
   {
     "nombre": "Angely Lucero",
@@ -46962,10 +46541,9 @@ export const activeUsers = [
     "correo": "angysantes123@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543620925,
-    "stripe_id": "cus_NLy0hiMltXXU4x",
     "final_date": 0,
-    "id": 38240,
-    "level": 1
+    "level": 1,
+    "id": 38240
   },
   {
     "nombre": "Diana",
@@ -46973,10 +46551,10 @@ export const activeUsers = [
     "correo": "dianalopez21916@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525573421132,
-    "stripe_id": "cus_NLxt6ubKuZzXzW",
-    "final_date": 1691990000,
-    "id": 38242,
-    "level": 1
+    "conekta_id": "cus_2uQhQPxoSsDsVpdz8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38242
   },
   {
     "nombre": "Roxana",
@@ -46984,10 +46562,10 @@ export const activeUsers = [
     "correo": "oliverroxana05@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525634024379,
-    "stripe_id": "cus_NLxtwV8AGoergm",
-    "final_date": 1691990000,
-    "id": 38250,
-    "level": 1
+    "conekta_id": "cus_2uQhQQiCBfSTjcAXo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38250
   },
   {
     "nombre": "michel alejandra",
@@ -46995,10 +46573,10 @@ export const activeUsers = [
     "correo": "zaragozaale@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523313651313,
-    "stripe_id": "cus_NLxttyoVHgD0Wr",
-    "final_date": 1691990000,
-    "id": 38264,
-    "level": 1
+    "conekta_id": "cus_2uQhQQwyamBRA2MQY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38264
   },
   {
     "nombre": "Ariana",
@@ -47006,10 +46584,9 @@ export const activeUsers = [
     "correo": "arianaevan96@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524747941447,
-    "stripe_id": "cus_NLxttORd9SIelz",
     "final_date": 0,
-    "id": 38273,
-    "level": 1
+    "level": 1,
+    "id": 38273
   },
   {
     "nombre": "Carla Yazmin",
@@ -47017,10 +46594,10 @@ export const activeUsers = [
     "correo": "cysotob@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526146108795,
-    "stripe_id": "cus_NMKCnjhz77VMfV",
-    "final_date": 1692070000,
-    "id": 38277,
-    "level": 1
+    "conekta_id": "cus_2uQhQRSSVGMAimYj2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38277
   },
   {
     "nombre": "Cristal",
@@ -47028,10 +46605,9 @@ export const activeUsers = [
     "correo": "criss6108@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525515749856,
-    "stripe_id": "cus_NLy6J5nK9G84LD",
     "final_date": 1689310000,
-    "id": 38291,
-    "level": 1
+    "level": 1,
+    "id": 38291
   },
   {
     "nombre": "karen",
@@ -47039,10 +46615,10 @@ export const activeUsers = [
     "correo": "karencitanesquik2202@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525591257396,
-    "stripe_id": "cus_NLxw53GMl4hOJy",
-    "final_date": 1691990000,
-    "id": 38311,
-    "level": 1
+    "conekta_id": "cus_2uQhQSMqv9sWjfmwQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38311
   },
   {
     "nombre": "Angeles Nathalia",
@@ -47050,10 +46626,10 @@ export const activeUsers = [
     "correo": "angelesnathalia07@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525532383207,
-    "stripe_id": "cus_NLy2BuozBYCNvn",
-    "final_date": 1691990000,
-    "id": 38317,
-    "level": 1
+    "conekta_id": "cus_2uQhQSv5XfUU2WYqw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38317
   },
   {
     "nombre": "brenda jimena",
@@ -47061,10 +46637,9 @@ export const activeUsers = [
     "correo": "brendavg670@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535868336,
-    "stripe_id": "cus_NLy3dYkR6xTfr3",
     "final_date": 0,
-    "id": 38322,
-    "level": 1
+    "level": 1,
+    "id": 38322
   },
   {
     "nombre": "María de la luz",
@@ -47072,10 +46647,9 @@ export const activeUsers = [
     "correo": "marialaeluzhernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524426331808,
-    "stripe_id": "cus_NlpF3Hn6NQP1ul",
     "final_date": 1723330000,
-    "id": 38323,
-    "level": 0
+    "level": 0,
+    "id": 38323
   },
   {
     "nombre": "Alma Veronica",
@@ -47083,10 +46657,10 @@ export const activeUsers = [
     "correo": "almasalazar72@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528124473082,
-    "stripe_id": "cus_NLxsVxgcepKUJm",
-    "final_date": 1691990000,
-    "id": 38324,
-    "level": 1
+    "conekta_id": "cus_2uQhQTxR2wniEuwsZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38324
   },
   {
     "nombre": "Gabriela",
@@ -47094,10 +46668,10 @@ export const activeUsers = [
     "correo": "tremendita162@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647702460,
-    "stripe_id": "cus_NLxsrRbI9vf60I",
-    "final_date": 1691990000,
-    "id": 38330,
-    "level": 1
+    "conekta_id": "cus_2uQhQUQHnfFhusmci",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38330
   },
   {
     "nombre": "Maria de Lourdes",
@@ -47105,10 +46679,10 @@ export const activeUsers = [
     "correo": "lulusan77012@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522382197800,
-    "stripe_id": "cus_NOvEvva8GNvw4N",
-    "final_date": 1692750000,
-    "id": 38338,
-    "level": 1
+    "conekta_id": "cus_2uQhQVNthxZJueLMi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38338
   },
   {
     "nombre": "Deyra",
@@ -47116,10 +46690,10 @@ export const activeUsers = [
     "correo": "licdeyradelbosque@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528183090448,
-    "stripe_id": "cus_NLxul42fmDJTcR",
-    "final_date": 1691990000,
-    "id": 38340,
-    "level": 1
+    "conekta_id": "cus_2uQhQW3wX9gkr1SX2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38340
   },
   {
     "nombre": "olga",
@@ -47127,10 +46701,9 @@ export const activeUsers = [
     "correo": "olguitamar@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527838395948,
-    "stripe_id": "cus_NLyCutKkc2OJXY",
     "final_date": 1689310000,
-    "id": 38353,
-    "level": 1
+    "level": 1,
+    "id": 38353
   },
   {
     "nombre": "Rosa Maria",
@@ -47138,10 +46711,10 @@ export const activeUsers = [
     "correo": "rous_tatis@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525572415382,
-    "stripe_id": "cus_NLxuJGWhIM3WMv",
-    "final_date": 1691990000,
-    "id": 38377,
-    "level": 1
+    "conekta_id": "cus_2uQhQWuh7k3JjzbrH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38377
   },
   {
     "nombre": "ana",
@@ -47149,10 +46722,9 @@ export const activeUsers = [
     "correo": "annapelagio721@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524621417132,
-    "stripe_id": "cus_NLy4w3C8iKaPcs",
     "final_date": 0,
-    "id": 38378,
-    "level": 1
+    "level": 1,
+    "id": 38378
   },
   {
     "nombre": "soledad",
@@ -47160,10 +46732,10 @@ export const activeUsers = [
     "correo": "crulevi@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529514553437,
-    "stripe_id": "cus_NM89LkLKc3ZjV8",
-    "final_date": 1692020000,
-    "id": 38383,
-    "level": 1
+    "conekta_id": "cus_2uQhQXeWdwbxPGFq3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38383
   },
   {
     "nombre": "CINDY",
@@ -47171,10 +46743,10 @@ export const activeUsers = [
     "correo": "mindy.cca@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525543707669,
-    "stripe_id": "cus_NLxsJjEd93Pinb",
-    "final_date": 1691990000,
-    "id": 38390,
-    "level": 1
+    "conekta_id": "cus_2uQhQYPLA9AbzXvqn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38390
   },
   {
     "nombre": "karen Andrea",
@@ -47182,10 +46754,10 @@ export const activeUsers = [
     "correo": "juarezkendra003@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522211585163,
-    "stripe_id": "cus_NLxtqBTKs0PL2W",
-    "final_date": 1691990000,
-    "id": 38394,
-    "level": 1
+    "conekta_id": "cus_2uQhQYpdhFyeyUBdi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38394
   },
   {
     "nombre": "Araceli",
@@ -47193,10 +46765,10 @@ export const activeUsers = [
     "correo": "araceliolverafranco@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523111347096,
-    "stripe_id": "cus_NLzEJXqw8N9Vr3",
-    "final_date": 1691990000,
-    "id": 38395,
-    "level": 1
+    "conekta_id": "cus_2uQhQYpdhFyf2frnW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38395
   },
   {
     "nombre": "Stephanny Lourdes",
@@ -47204,10 +46776,10 @@ export const activeUsers = [
     "correo": "stephanny.becvel@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525518228153,
-    "stripe_id": "cus_NLxtFwRUFh7BlH",
-    "final_date": 1691990000,
-    "id": 38396,
-    "level": 1
+    "conekta_id": "cus_2uQhQZZTDTYJdLGPu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38396
   },
   {
     "nombre": "Jessica Anahí",
@@ -47215,10 +46787,10 @@ export const activeUsers = [
     "correo": "yesenianc06@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528334503615,
-    "stripe_id": "cus_NLxs6hl7cWef7z",
-    "final_date": 1691990000,
-    "id": 38400,
-    "level": 1
+    "conekta_id": "cus_2uQhQaJqxFktv35aQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38400
   },
   {
     "nombre": "Michelle",
@@ -47226,10 +46798,9 @@ export const activeUsers = [
     "correo": "mialmore21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523121959447,
-    "stripe_id": "cus_NLxt78Vsz4mSPJ",
     "final_date": 0,
-    "id": 38401,
-    "level": 1
+    "level": 1,
+    "id": 38401
   },
   {
     "nombre": "maria de los angeles",
@@ -47237,10 +46808,10 @@ export const activeUsers = [
     "correo": "angelesmurilloloera@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528714772191,
-    "stripe_id": "cus_NLy0arDeLsquRx",
-    "final_date": 1691990000,
-    "id": 38406,
-    "level": 1
+    "conekta_id": "cus_2uQhQb3fUTKYYJk54",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38406
   },
   {
     "nombre": "Alejandra",
@@ -47248,10 +46819,9 @@ export const activeUsers = [
     "correo": "ale0301barbosa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525627263762,
-    "stripe_id": "cus_NLy01BynU6hhcQ",
     "final_date": 1689310000,
-    "id": 38411,
-    "level": 1
+    "level": 1,
+    "id": 38411
   },
   {
     "nombre": "danidza",
@@ -47259,10 +46829,10 @@ export const activeUsers = [
     "correo": "alejandrohidalgo054@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526371379448,
-    "stripe_id": "cus_NLxuGFk2ZZTggT",
-    "final_date": 1691990000,
-    "id": 38424,
-    "level": 1
+    "conekta_id": "cus_2uQhQbxVgkBwrAkVU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38424
   },
   {
     "nombre": "Ariana Stephanie",
@@ -47270,10 +46840,10 @@ export const activeUsers = [
     "correo": "stephanie.produccion@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525585643233,
-    "stripe_id": "cus_NLxtjLPqo2nJAW",
-    "final_date": 1691990000,
-    "id": 38433,
-    "level": 1
+    "conekta_id": "cus_2uQhQcXJWrSqmV5nZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38433
   },
   {
     "nombre": "Barbara Abigail",
@@ -47281,10 +46851,10 @@ export const activeUsers = [
     "correo": "barbaranarvaez4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529994370269,
-    "stripe_id": "cus_NLxtAN8VPcailO",
-    "final_date": 1691990000,
-    "id": 38446,
-    "level": 1
+    "conekta_id": "cus_2uQhQdS8j9KF6i5V2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38446
   },
   {
     "nombre": "Gabriela",
@@ -47292,10 +46862,10 @@ export const activeUsers = [
     "correo": "magaby.ororo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529512536810,
-    "stripe_id": "cus_NLy2GsFAX507fs",
-    "final_date": 1691990000,
-    "id": 38450,
-    "level": 1
+    "conekta_id": "cus_2uQhQeAxFLstiyjyv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38450
   },
   {
     "nombre": "dulce",
@@ -47303,10 +46873,10 @@ export const activeUsers = [
     "correo": "albipanther@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522281106678,
-    "stripe_id": "cus_NLxzrR2kKPuxNB",
-    "final_date": 1691990000,
-    "id": 38457,
-    "level": 1
+    "conekta_id": "cus_2uQhQeEixMK6WDmvq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38457
   },
   {
     "nombre": "Angélica",
@@ -47314,10 +46884,9 @@ export const activeUsers = [
     "correo": "princesapili.2403@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529842410374,
-    "stripe_id": "cus_NLy0LuueuVYAyb",
     "final_date": 0,
-    "id": 38459,
-    "level": 1
+    "level": 1,
+    "id": 38459
   },
   {
     "nombre": "María de Jesús",
@@ -47325,10 +46894,9 @@ export const activeUsers = [
     "correo": "marychuchis3.mdjmj@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529842085907,
-    "stripe_id": "cus_NlpFc36uO57BHN",
     "final_date": 1717690000,
-    "id": 38461,
-    "level": 0
+    "level": 0,
+    "id": 38461
   },
   {
     "nombre": "Amparo Ivonne",
@@ -47336,10 +46904,9 @@ export const activeUsers = [
     "correo": "ivonne.ramazu@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523335078118,
-    "stripe_id": "cus_NLxvMgN9oY4hLr",
     "final_date": 0,
-    "id": 38477,
-    "level": 1
+    "level": 1,
+    "id": 38477
   },
   {
     "nombre": "Maria Elizabeth",
@@ -47347,10 +46914,10 @@ export const activeUsers = [
     "correo": "elizabethsalinas1608@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529541493138,
-    "stripe_id": "cus_NLxvGrJCZPN9mm",
-    "final_date": 1691990000,
-    "id": 38497,
-    "level": 1
+    "conekta_id": "cus_2uQhQfiMzkSPkm6vC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38497
   },
   {
     "nombre": "Maria Luisa",
@@ -47358,10 +46925,10 @@ export const activeUsers = [
     "correo": "mara.nails81@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526721189324,
-    "stripe_id": "cus_NLxyRslCHkPPJ2",
-    "final_date": 1691990000,
-    "id": 38510,
-    "level": 1
+    "conekta_id": "cus_2uQhQgDQ7rG5pNnEM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38510
   },
   {
     "nombre": "Angelica karely",
@@ -47369,10 +46936,9 @@ export const activeUsers = [
     "correo": "castrokarely48@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526462125887,
-    "stripe_id": "cus_NLxvukhmQ4w2xj",
     "final_date": 0,
-    "id": 38519,
-    "level": 1
+    "level": 1,
+    "id": 38519
   },
   {
     "nombre": "Daily maureny",
@@ -47380,10 +46946,9 @@ export const activeUsers = [
     "correo": "dailymena@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529983397841,
-    "stripe_id": "cus_NLxv151iPxloQP",
     "final_date": 0,
-    "id": 38524,
-    "level": 1
+    "level": 1,
+    "id": 38524
   },
   {
     "nombre": "Montserrat",
@@ -47391,10 +46956,10 @@ export const activeUsers = [
     "correo": "monseyarmando1609@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525517809349,
-    "stripe_id": "cus_NLxu4lf9v0rVUs",
-    "final_date": 1691990000,
-    "id": 38528,
-    "level": 1
+    "conekta_id": "cus_2uQhQhFAQXvPVmtnP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38528
   },
   {
     "nombre": "Jacqueline",
@@ -47402,10 +46967,10 @@ export const activeUsers = [
     "correo": "jacquelineosuna482@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526567048010,
-    "stripe_id": "cus_NLxxUoZloTuN7J",
-    "final_date": 1691990000,
-    "id": 38529,
-    "level": 1
+    "conekta_id": "cus_2uQhQhh3AFPP7pRqN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38529
   },
   {
     "nombre": "Miillyy",
@@ -47413,10 +46978,10 @@ export const activeUsers = [
     "correo": "lorealday01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528122037386,
-    "stripe_id": "cus_NLxv7jaLp7JwhT",
-    "final_date": 1691990000,
-    "id": 38539,
-    "level": 1
+    "conekta_id": "cus_2uQhQibsNYFnUbixv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38539
   },
   {
     "nombre": "diana victoria",
@@ -47424,10 +46989,10 @@ export const activeUsers = [
     "correo": "dianavictoriavazquezflores4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529162348373,
-    "stripe_id": "cus_NLyJAg3CKvPFnB",
-    "final_date": 1692020000,
-    "id": 38546,
-    "level": 1
+    "conekta_id": "cus_2uQhQiioSw3giAqP5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38546
   },
   {
     "nombre": "Araceli",
@@ -47435,10 +47000,10 @@ export const activeUsers = [
     "correo": "araceliriveramanuel1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529241179375,
-    "stripe_id": "cus_NLxv8YjRVt9vUb",
-    "final_date": 1691990000,
-    "id": 38550,
-    "level": 1
+    "conekta_id": "cus_2uQhQjQTbkFdqTQSc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38550
   },
   {
     "nombre": "viviana",
@@ -47446,10 +47011,9 @@ export const activeUsers = [
     "correo": "viosil1429@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523125949889,
-    "stripe_id": "cus_NLxvFsvJyqgbY4",
     "final_date": 1681450000,
-    "id": 38551,
-    "level": 1
+    "level": 1,
+    "id": 38551
   },
   {
     "nombre": "Ruth Noemi",
@@ -47457,10 +47021,10 @@ export const activeUsers = [
     "correo": "gomreyrutno@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524775987114,
-    "stripe_id": "cus_NLxwl8q5pusDuq",
-    "final_date": 1691990000,
-    "id": 38561,
-    "level": 1
+    "conekta_id": "cus_2uQhQjuVir5KzdRLH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38561
   },
   {
     "nombre": "Carolina",
@@ -47468,10 +47032,9 @@ export const activeUsers = [
     "correo": "carbt_@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522224088931,
-    "stripe_id": "cus_NLxvABTrORjS35",
     "final_date": 1684040000,
-    "id": 38569,
-    "level": 1
+    "level": 1,
+    "id": 38569
   },
   {
     "nombre": "marisol Guadalupe",
@@ -47479,10 +47042,9 @@ export const activeUsers = [
     "correo": "elcaprichoantojo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525618196264,
-    "stripe_id": "cus_NLxw6MEU89QWW6",
     "final_date": 1689310000,
-    "id": 38576,
-    "level": 1
+    "level": 1,
+    "id": 38576
   },
   {
     "nombre": "MariCruz",
@@ -47490,10 +47052,9 @@ export const activeUsers = [
     "correo": "lophezmaricruz155@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522215805065,
-    "stripe_id": "cus_NLy1L0qLqkJM8k",
     "final_date": 1681450000,
-    "id": 38582,
-    "level": 1
+    "level": 1,
+    "id": 38582
   },
   {
     "nombre": "Ana Laura",
@@ -47501,10 +47062,9 @@ export const activeUsers = [
     "correo": "annie.garca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525521824357,
-    "stripe_id": "cus_NLxyW5CwjJRFYE",
     "final_date": 0,
-    "id": 38589,
-    "level": 1
+    "level": 1,
+    "id": 38589
   },
   {
     "nombre": "Hadith milena",
@@ -47512,10 +47072,9 @@ export const activeUsers = [
     "correo": "hnavarrom88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545337385,
-    "stripe_id": "cus_NLxwQ6cBzSWg5r",
     "final_date": 1689310000,
-    "id": 38590,
-    "level": 1
+    "level": 1,
+    "id": 38590
   },
   {
     "nombre": "maria de los angeles",
@@ -47523,10 +47082,10 @@ export const activeUsers = [
     "correo": "angiieangiie@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523313207294,
-    "stripe_id": "cus_NLxxUAZzaBJ15d",
-    "final_date": 1691990000,
-    "id": 38618,
-    "level": 1
+    "conekta_id": "cus_2uQhQn7P4r7LFvYoN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38618
   },
   {
     "nombre": "Isabel",
@@ -47534,20 +47093,20 @@ export const activeUsers = [
     "correo": "misan_8603@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528123460910,
-    "stripe_id": "cus_NLy0eEnurRILxg",
-    "final_date": 1691990000,
-    "id": 38633,
-    "level": 1
+    "conekta_id": "cus_2uQhQnrmoeKvVi5Km",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38633
   },
   {
     "nombre": "María Adriana",
     "apellido": "Virgilio Peralta",
     "correo": "adri.virgiliop@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NLxzKEbTuiUiyl",
-    "final_date": 1691990000,
-    "id": 38639,
-    "level": 1
+    "conekta_id": "cus_2uQhQo6ZCk4sv8GAJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38639
   },
   {
     "nombre": "Lizbeth Guadalupe",
@@ -47555,10 +47114,9 @@ export const activeUsers = [
     "correo": "liztejeda2@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529933875812,
-    "stripe_id": "cus_NLy0ntqwHFloxR",
     "final_date": 0,
-    "id": 38646,
-    "level": 1
+    "level": 1,
+    "id": 38646
   },
   {
     "nombre": "edna rosa",
@@ -47566,10 +47124,9 @@ export const activeUsers = [
     "correo": "rousbutchart@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526861352631,
-    "stripe_id": "cus_NLxy7ft4KWadhr",
     "final_date": 1689310000,
-    "id": 38651,
-    "level": 1
+    "level": 1,
+    "id": 38651
   },
   {
     "nombre": "Jennyfer Guadalupe",
@@ -47577,10 +47134,9 @@ export const activeUsers = [
     "correo": "jennyguz044@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525578342754,
-    "stripe_id": "cus_NLy2ZuvJrjZuCp",
     "final_date": 0,
-    "id": 38653,
-    "level": 1
+    "level": 1,
+    "id": 38653
   },
   {
     "nombre": "Angela",
@@ -47588,10 +47144,9 @@ export const activeUsers = [
     "correo": "caidademar@icloud.com",
     "pais": "Mexico",
     "whatsapp": 527774572702,
-    "stripe_id": "cus_NLy0w5qfLpMds8",
     "final_date": 1689310000,
-    "id": 38655,
-    "level": 1
+    "level": 1,
+    "id": 38655
   },
   {
     "nombre": "mariana",
@@ -47599,10 +47154,10 @@ export const activeUsers = [
     "correo": "mmtz_ma@hotmail.es",
     "pais": "Mexico",
     "whatsapp": 529212678970,
-    "stripe_id": "cus_NLxxGv6opGh4UP",
-    "final_date": 1691990000,
-    "id": 38659,
-    "level": 1
+    "conekta_id": "cus_2uQhQpLQr3TDhM5dp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38659
   },
   {
     "nombre": "talia",
@@ -47610,10 +47165,10 @@ export const activeUsers = [
     "correo": "panditalia28@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522761267010,
-    "stripe_id": "cus_NLxxIncAZXAqS4",
-    "final_date": 1691990000,
-    "id": 38671,
-    "level": 1
+    "conekta_id": "cus_2uQhQq4f9eMvgjZVR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38671
   },
   {
     "nombre": "Santa Jaqueline",
@@ -47621,10 +47176,10 @@ export const activeUsers = [
     "correo": "jackie.tg@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 528714805466,
-    "stripe_id": "cus_NLy2pG2E8yKoqa",
-    "final_date": 1691990000,
-    "id": 38682,
-    "level": 1
+    "conekta_id": "cus_2uQhQr3qHYKURCv8n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38682
   },
   {
     "nombre": "yuliana judith",
@@ -47632,10 +47187,9 @@ export const activeUsers = [
     "correo": "yejotacege@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528661152699,
-    "stripe_id": "cus_NLxz9YCNA4xHrc",
     "final_date": 1689310000,
-    "id": 38690,
-    "level": 1
+    "level": 1,
+    "id": 38690
   },
   {
     "nombre": "Sofia",
@@ -47643,10 +47197,9 @@ export const activeUsers = [
     "correo": "yaquisof@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529932804187,
-    "stripe_id": "cus_NLzFxD7SpjyI9C",
     "final_date": 1681450000,
-    "id": 38695,
-    "level": 1
+    "level": 1,
+    "id": 38695
   },
   {
     "nombre": "Gonzala",
@@ -47654,10 +47207,9 @@ export const activeUsers = [
     "correo": "armand.gonz1976@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564090733,
-    "stripe_id": "cus_NLy1CgLQd6z9mG",
     "final_date": 0,
-    "id": 38703,
-    "level": 1
+    "level": 1,
+    "id": 38703
   },
   {
     "nombre": "sofia",
@@ -47665,10 +47217,9 @@ export const activeUsers = [
     "correo": "sofysolorza06305@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522791156002,
-    "stripe_id": "cus_NLy7Mnf4X8vyYF",
     "final_date": 1681450000,
-    "id": 38708,
-    "level": 1
+    "level": 1,
+    "id": 38708
   },
   {
     "nombre": "Maria Cruz",
@@ -47676,10 +47227,9 @@ export const activeUsers = [
     "correo": "floresvazquezmariacruz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524781143238,
-    "stripe_id": "cus_NLy3mKCcAGTL6i",
     "final_date": 0,
-    "id": 38712,
-    "level": 1
+    "level": 1,
+    "id": 38712
   },
   {
     "nombre": "María de la luz",
@@ -47687,10 +47237,10 @@ export const activeUsers = [
     "correo": "renterialucero28@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525514494820,
-    "stripe_id": "cus_NLy1HUwO8RQUQA",
-    "final_date": 1691990000,
-    "id": 38715,
-    "level": 1
+    "conekta_id": "cus_2uQhQsXUKwSmiRhtE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38715
   },
   {
     "nombre": "Guadalupe azucena",
@@ -47698,10 +47248,10 @@ export const activeUsers = [
     "correo": "gleyvaverdugo19@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461074668,
-    "stripe_id": "cus_NLy1DGbyxUEoTK",
-    "final_date": 1691990000,
-    "id": 38718,
-    "level": 1
+    "conekta_id": "cus_2uQhQt2WT3GTphQ7D",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38718
   },
   {
     "nombre": "Isabel",
@@ -47709,10 +47259,9 @@ export const activeUsers = [
     "correo": "facturasisabelrosales@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524432732248,
-    "stripe_id": "cus_NLy0ks7SHlryBG",
     "final_date": 0,
-    "id": 38725,
-    "level": 1
+    "level": 1,
+    "id": 38725
   },
   {
     "nombre": "Alejandra",
@@ -47720,10 +47269,10 @@ export const activeUsers = [
     "correo": "aleja_03_09@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528444494394,
-    "stripe_id": "cus_NLy0fmdEY03yu4",
-    "final_date": 1691990000,
-    "id": 38726,
-    "level": 1
+    "conekta_id": "cus_2uQhQtkkkeBAuxn8D",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38726
   },
   {
     "nombre": "Karla Guadalupe",
@@ -47731,10 +47280,9 @@ export const activeUsers = [
     "correo": "batista.karla93@icloud.com",
     "pais": "Mexico",
     "whatsapp": 523141974538,
-    "stripe_id": "cus_NLy49HpIhajUvF",
     "final_date": 1681450000,
-    "id": 38727,
-    "level": 1
+    "level": 1,
+    "id": 38727
   },
   {
     "nombre": "patricia natalia",
@@ -47742,10 +47290,9 @@ export const activeUsers = [
     "correo": "patriciadiazloaeza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525638322592,
-    "stripe_id": "cus_NLyIEzYbjI3dP7",
     "final_date": 1689310000,
-    "id": 38734,
-    "level": 1
+    "level": 1,
+    "id": 38734
   },
   {
     "nombre": "Gabriela Belén",
@@ -47753,10 +47300,10 @@ export const activeUsers = [
     "correo": "gabriela.osoria@zapopan.gob.mx",
     "pais": "Mexico",
     "whatsapp": 523333538764,
-    "stripe_id": "cus_NLy34gupHw0Dg1",
-    "final_date": 1691990000,
-    "id": 38738,
-    "level": 1
+    "conekta_id": "cus_2uQhQvUkQjhNGANoH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38738
   },
   {
     "nombre": "Mireya",
@@ -47764,10 +47311,9 @@ export const activeUsers = [
     "correo": "yaremi.soto@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525543187518,
-    "stripe_id": "cus_NLy9WhhRvVJT9l",
     "final_date": 1689310000,
-    "id": 38741,
-    "level": 1
+    "level": 1,
+    "id": 38741
   },
   {
     "nombre": "sandra itzel",
@@ -47775,10 +47321,10 @@ export const activeUsers = [
     "correo": "itzelgarfiasromero@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525554596492,
-    "stripe_id": "cus_NLzcbUbnmzW23v",
-    "final_date": 1691990000,
-    "id": 38747,
-    "level": 1
+    "conekta_id": "cus_2uQhQwDZvwG1tS3Hw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38747
   },
   {
     "nombre": "Maria del Carmen",
@@ -47786,10 +47332,9 @@ export const activeUsers = [
     "correo": "mcmelendezgonzalez94@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50231583009,
-    "stripe_id": "cus_NLy9UCY6cbPoY4",
     "final_date": 0,
-    "id": 38748,
-    "level": 1
+    "level": 1,
+    "id": 38748
   },
   {
     "nombre": "Gloria",
@@ -47797,10 +47342,10 @@ export const activeUsers = [
     "correo": "gkory1008@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525571987266,
-    "stripe_id": "cus_NLy694sw4LwJ9q",
-    "final_date": 1691990000,
-    "id": 38760,
-    "level": 1
+    "conekta_id": "cus_2uQhQwtck8PTkUKed",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38760
   },
   {
     "nombre": "Dionicia",
@@ -47808,10 +47353,10 @@ export const activeUsers = [
     "correo": "ritamarianorita@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526566593390,
-    "stripe_id": "cus_NLy4UZXnn18ne0",
-    "final_date": 1691990000,
-    "id": 38763,
-    "level": 1
+    "conekta_id": "cus_2uQhQxhCyLPK8yNH8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38763
   },
   {
     "nombre": "Laura Reynalda",
@@ -47819,10 +47364,10 @@ export const activeUsers = [
     "correo": "reynaldamc7@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524493982443,
-    "stripe_id": "cus_NLy501PSHkvsSJ",
-    "final_date": 1691990000,
-    "id": 38772,
-    "level": 1
+    "conekta_id": "cus_2uQhQxdSGKx7MjLKK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38772
   },
   {
     "nombre": "Deysi",
@@ -47830,10 +47375,10 @@ export const activeUsers = [
     "correo": "cruzdeysi231@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981925449,
-    "stripe_id": "cus_NLyV45CsazC05W",
-    "final_date": 1692070000,
-    "id": 38786,
-    "level": 1
+    "conekta_id": "cus_2uQhQyS2VXwxib1r3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38786
   },
   {
     "nombre": "Abigail",
@@ -47841,10 +47386,9 @@ export const activeUsers = [
     "correo": "abigailnieves836@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524426658140,
-    "stripe_id": "cus_NLy8hUF7d5WjBk",
     "final_date": 0,
-    "id": 38792,
-    "level": 1
+    "level": 1,
+    "id": 38792
   },
   {
     "nombre": "Maria Cristina",
@@ -47852,10 +47396,9 @@ export const activeUsers = [
     "correo": "cris0505be@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527731801097,
-    "stripe_id": "cus_NLyA4kPvY1CIev",
     "final_date": 1681450000,
-    "id": 38798,
-    "level": 1
+    "level": 1,
+    "id": 38798
   },
   {
     "nombre": "Vanessa",
@@ -47863,10 +47406,10 @@ export const activeUsers = [
     "correo": "vannecampos82@icloud.com",
     "pais": "Mexico",
     "whatsapp": 525551574025,
-    "stripe_id": "cus_NLy80oX0BftIx8",
-    "final_date": 1691990000,
-    "id": 38813,
-    "level": 1
+    "conekta_id": "cus_2uQhQzxpuKRxZKwo4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38813
   },
   {
     "nombre": "Lydia Esther",
@@ -47874,10 +47417,10 @@ export const activeUsers = [
     "correo": "bancocoary@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528111942328,
-    "stripe_id": "cus_NLzHAugY57Nqya",
-    "final_date": 1692040000,
-    "id": 38815,
-    "level": 1
+    "conekta_id": "cus_2uQhQzxpuKRxU7SF1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38815
   },
   {
     "nombre": "Buena Ventura",
@@ -47885,10 +47428,10 @@ export const activeUsers = [
     "correo": "geminis14lula@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527751062660,
-    "stripe_id": "cus_NLyHXsBE31k1QP",
-    "final_date": 1691990000,
-    "id": 38817,
-    "level": 1
+    "conekta_id": "cus_2uQhR1eV48dubQ1Kd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38817
   },
   {
     "nombre": "Martha",
@@ -47896,10 +47439,10 @@ export const activeUsers = [
     "correo": "patricianetza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535954863,
-    "stripe_id": "cus_NLy9nVBQ2mKlPw",
-    "final_date": 1691990000,
-    "id": 38818,
-    "level": 1
+    "conekta_id": "cus_2uQhR29XBETbka2FW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38818
   },
   {
     "nombre": "ana leyde",
@@ -47907,10 +47450,10 @@ export const activeUsers = [
     "correo": "yeyislans84@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522292547538,
-    "stripe_id": "cus_NLyBuTgqCL1gUo",
-    "final_date": 1691990000,
-    "id": 38821,
-    "level": 1
+    "conekta_id": "cus_2uQhR2tLhS2FNqgkJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38821
   },
   {
     "nombre": "vilma",
@@ -47918,10 +47461,10 @@ export const activeUsers = [
     "correo": "esmeraldahuete1992@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 1415342879,
-    "stripe_id": "cus_NLy9885UIAFmTc",
-    "final_date": 1691990000,
-    "id": 38825,
-    "level": 1
+    "conekta_id": "cus_2uQhR2tLhS2FNqgkZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38825
   },
   {
     "nombre": "Aseneth",
@@ -47929,10 +47472,10 @@ export const activeUsers = [
     "correo": "aseneth.levosi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522291393749,
-    "stripe_id": "cus_NLyA3jHXg3aXDU",
-    "final_date": 1691990000,
-    "id": 38829,
-    "level": 1
+    "conekta_id": "cus_2uQhR3cb12vxRCk5V",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38829
   },
   {
     "nombre": "Elvira",
@@ -47940,10 +47483,10 @@ export const activeUsers = [
     "correo": "elvis.rom.mx@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526566381117,
-    "stripe_id": "cus_NLyDuoVJoLlnZs",
-    "final_date": 1691990000,
-    "id": 38833,
-    "level": 1
+    "conekta_id": "cus_2uQhR4Myjq9YdP1jp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38833
   },
   {
     "nombre": "maria",
@@ -47951,10 +47494,10 @@ export const activeUsers = [
     "correo": "rosario.lezma@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19496301891,
-    "stripe_id": "cus_NLyBOC01qz3c0S",
-    "final_date": 1691990000,
-    "id": 38842,
-    "level": 1
+    "conekta_id": "cus_2uQhR56oG2iCFegEr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38842
   },
   {
     "nombre": "Genesis elizabeth",
@@ -47962,10 +47505,10 @@ export const activeUsers = [
     "correo": "aquino7896@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523315182968,
-    "stripe_id": "cus_NLyBdBzcKPCqiH",
-    "final_date": 1691990000,
-    "id": 38843,
-    "level": 1
+    "conekta_id": "cus_2uQhR5Pk2WorJwvkG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38843
   },
   {
     "nombre": "Mariana",
@@ -47973,10 +47516,10 @@ export const activeUsers = [
     "correo": "margodiaz0579@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564033190,
-    "stripe_id": "cus_NLyKJWWwXwNJGQ",
-    "final_date": 1691990000,
-    "id": 38854,
-    "level": 1
+    "conekta_id": "cus_2uQhR5q3ZdcuEp4HT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38854
   },
   {
     "nombre": "Mónica María",
@@ -47984,10 +47527,10 @@ export const activeUsers = [
     "correo": "monicbermu@gmail.com",
     "pais": "Costa Rica",
     "whatsapp": 50683080028,
-    "stripe_id": "cus_NLyD4sqCEowFRo",
-    "final_date": 1691990000,
-    "id": 38859,
-    "level": 1
+    "conekta_id": "cus_2uQhR6pDhXaT1wfia",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38859
   },
   {
     "nombre": "silvia gabriela",
@@ -47995,10 +47538,10 @@ export const activeUsers = [
     "correo": "gabrieladelahoya@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526144870412,
-    "stripe_id": "cus_NLyFViDqKNgwi1",
-    "final_date": 1693170000,
-    "id": 38863,
-    "level": 1
+    "conekta_id": "cus_2uQhR7Jgc2kCYZ4YT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38863
   },
   {
     "nombre": "Estefania",
@@ -48006,10 +47549,10 @@ export const activeUsers = [
     "correo": "fanyrmz@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525564054330,
-    "stripe_id": "cus_NLyYyAX6B3qw33",
-    "final_date": 1691990000,
-    "id": 38866,
-    "level": 1
+    "conekta_id": "cus_2uQhR83W8EJr7d3mU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38866
   },
   {
     "nombre": "Rosa Isela",
@@ -48017,10 +47560,10 @@ export const activeUsers = [
     "correo": "rousebriones1997@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529141241112,
-    "stripe_id": "cus_NLyKpLGIDITm4r",
-    "final_date": 1691990000,
-    "id": 38869,
-    "level": 1
+    "conekta_id": "cus_2uQhR8nts2XSNzziz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38869
   },
   {
     "nombre": "Carmela",
@@ -48028,10 +47571,9 @@ export const activeUsers = [
     "correo": "karm1262@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525515288837,
-    "stripe_id": "cus_NLyGmJ3TavTtvL",
     "final_date": 0,
-    "id": 38872,
-    "level": 1
+    "level": 1,
+    "id": 38872
   },
   {
     "nombre": "Anahi",
@@ -48039,10 +47581,10 @@ export const activeUsers = [
     "correo": "anahisierraf@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524662130019,
-    "stripe_id": "cus_NLyHEBJO3ly3Js",
-    "final_date": 1692040000,
-    "id": 38877,
-    "level": 1
+    "conekta_id": "cus_2uQhR9hj5KPqgdNuH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38877
   },
   {
     "nombre": "Marisol",
@@ -48050,10 +47592,9 @@ export const activeUsers = [
     "correo": "marisolespinoza250@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461083097,
-    "stripe_id": "cus_NLyNi45hUWT51k",
     "final_date": 0,
-    "id": 38899,
-    "level": 1
+    "level": 1,
+    "id": 38899
   },
   {
     "nombre": "Rosario",
@@ -48061,10 +47602,10 @@ export const activeUsers = [
     "correo": "mariadelrosariogarciaroman@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522971028276,
-    "stripe_id": "cus_NLyOGoTC455GxY",
-    "final_date": 1691990000,
-    "id": 38900,
-    "level": 1
+    "conekta_id": "cus_2uQhRASYbWxVJu3Pu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38900
   },
   {
     "nombre": "Getzemani Guadalupe",
@@ -48072,20 +47613,20 @@ export const activeUsers = [
     "correo": "floresnanhy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527541107425,
-    "stripe_id": "cus_NLyPAwLY4czgFC",
-    "final_date": 1691990000,
-    "id": 38904,
-    "level": 1
+    "conekta_id": "cus_2uQhRBBN7iX91LGWc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38904
   },
   {
     "nombre": "Cecilia",
     "apellido": "Trujillo",
     "correo": "trujillocalvacecylia@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NM0XWQ1jCGvKDF",
-    "final_date": 1692000000,
-    "id": 38917,
-    "level": 1
+    "conekta_id": "cus_2uQhRBF8pixLmZegs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38917
   },
   {
     "nombre": "Ami",
@@ -48093,10 +47634,10 @@ export const activeUsers = [
     "correo": "amirelithemedina612@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529979793296,
-    "stripe_id": "cus_NLyTDWi8825jWV",
-    "final_date": 1691990000,
-    "id": 38926,
-    "level": 1
+    "conekta_id": "cus_2uQhRByxLvWzPqKBk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38926
   },
   {
     "nombre": "verónica",
@@ -48104,10 +47645,9 @@ export const activeUsers = [
     "correo": "damianveronica032@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529372305763,
-    "stripe_id": "cus_NLyl4k8aNI1VsP",
     "final_date": 1686720000,
-    "id": 38927,
-    "level": 1
+    "level": 1,
+    "id": 38927
   },
   {
     "nombre": "Heymilim Margarita",
@@ -48115,10 +47655,10 @@ export const activeUsers = [
     "correo": "heymitorres18@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50259746003,
-    "stripe_id": "cus_NLyTvCYbLKUtuI",
-    "final_date": 1692130000,
-    "id": 38928,
-    "level": 1
+    "conekta_id": "cus_2uQhRCf1A7eSFsbW7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38928
   },
   {
     "nombre": "Elva Patricia",
@@ -48126,10 +47666,10 @@ export const activeUsers = [
     "correo": "epbarrientosd@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528442597695,
-    "stripe_id": "cus_NLySlVW6b8aDsD",
-    "final_date": 1691990000,
-    "id": 38933,
-    "level": 1
+    "conekta_id": "cus_2uQhRDWkkhzz8r6zm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38933
   },
   {
     "nombre": "Teresa de jesus",
@@ -48137,10 +47677,9 @@ export const activeUsers = [
     "correo": "tere_scarlett@hotmail.es",
     "pais": "Mexico",
     "whatsapp": 529933743761,
-    "stripe_id": "cus_NLyiYWc2nq3C0Q",
     "final_date": 1681790000,
-    "id": 38954,
-    "level": 1
+    "level": 1,
+    "id": 38954
   },
   {
     "nombre": "Mariela",
@@ -48148,10 +47687,9 @@ export const activeUsers = [
     "correo": "marielaalbaalbino@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527121432268,
-    "stripe_id": "cus_NMY9RTk3Nae2Td",
     "final_date": 1684180000,
-    "id": 38961,
-    "level": 1
+    "level": 1,
+    "id": 38961
   },
   {
     "nombre": "Miriam",
@@ -48159,10 +47697,10 @@ export const activeUsers = [
     "correo": "miryy221@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524491905641,
-    "stripe_id": "cus_NLyqZRPbmIWWHh",
-    "final_date": 1691990000,
-    "id": 38965,
-    "level": 1
+    "conekta_id": "cus_2uQhREgsp2Ngk42CF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38965
   },
   {
     "nombre": "Adriana",
@@ -48170,10 +47708,10 @@ export const activeUsers = [
     "correo": "thinkerbry10@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524611099662,
-    "stripe_id": "cus_NLz7hXdwpJGmWh",
-    "final_date": 1691990000,
-    "id": 38989,
-    "level": 1
+    "conekta_id": "cus_2uQhREsTiiLP8gayt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38989
   },
   {
     "nombre": "Johana",
@@ -48181,20 +47719,19 @@ export const activeUsers = [
     "correo": "johana.zbravo1608@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525586887120,
-    "stripe_id": "cus_NLz7EFjBZWMFos",
     "final_date": 1689310000,
-    "id": 38995,
-    "level": 1
+    "level": 1,
+    "id": 38995
   },
   {
     "nombre": "Daniela Fernanda",
     "apellido": "Gonzalez Perez",
     "correo": "daferglez.gl@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NLzCKwOJoZnvQg",
-    "final_date": 1691990000,
-    "id": 38998,
-    "level": 1
+    "conekta_id": "cus_2uQhRGQsU7tt9TJAG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 38998
   },
   {
     "nombre": "Araceli",
@@ -48202,10 +47739,10 @@ export const activeUsers = [
     "correo": "ara742009@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581429991,
-    "stripe_id": "cus_NM0Phx4IBOfpSM",
-    "final_date": 1692000000,
-    "id": 39003,
-    "level": 1
+    "conekta_id": "cus_2uQhRGB6529vgcvD7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39003
   },
   {
     "nombre": "Lizbeth",
@@ -48213,10 +47750,9 @@ export const activeUsers = [
     "correo": "bambyno911211@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525577927257,
-    "stripe_id": "cus_NLzG4hy734JnHD",
     "final_date": 1689310000,
-    "id": 39005,
-    "level": 1
+    "level": 1,
+    "id": 39005
   },
   {
     "nombre": "Carol Antelma",
@@ -48224,10 +47760,9 @@ export const activeUsers = [
     "correo": "ruizcarol388@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524151673213,
-    "stripe_id": "cus_NM3QNbrSHkrfto",
     "final_date": 1689330000,
-    "id": 39013,
-    "level": 1
+    "level": 1,
+    "id": 39013
   },
   {
     "nombre": "Rosineli",
@@ -48235,10 +47770,9 @@ export const activeUsers = [
     "correo": "rosinelihernandez98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525526555097,
-    "stripe_id": "cus_NM6VLzNOXNJOwq",
     "final_date": 1689340000,
-    "id": 39027,
-    "level": 1
+    "level": 1,
+    "id": 39027
   },
   {
     "nombre": "Guadalupe",
@@ -48246,10 +47780,9 @@ export const activeUsers = [
     "correo": "gl948866@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529512031126,
-    "stripe_id": "cus_NM6flOovhPxfvy",
     "final_date": 1681480000,
-    "id": 39049,
-    "level": 1
+    "level": 1,
+    "id": 39049
   },
   {
     "nombre": "fanny karina",
@@ -48257,10 +47790,10 @@ export const activeUsers = [
     "correo": "ckjg95@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528111262977,
-    "stripe_id": "cus_NM6rasg5WyViqX",
-    "final_date": 1692020000,
-    "id": 39053,
-    "level": 1
+    "conekta_id": "cus_2uQhRJPYdcqsZRugc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39053
   },
   {
     "nombre": "Martha",
@@ -48268,10 +47801,10 @@ export const activeUsers = [
     "correo": "huertamar70@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523125547437,
-    "stripe_id": "cus_NM7JO9nP58Ip8D",
-    "final_date": 1692020000,
-    "id": 39056,
-    "level": 1
+    "conekta_id": "cus_2uQhRJdL2iaq2GHee",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39056
   },
   {
     "nombre": "Karina",
@@ -48279,10 +47812,9 @@ export const activeUsers = [
     "correo": "karinasanrod@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524423805364,
-    "stripe_id": "cus_NM7VXLHehhxmFw",
     "final_date": 1723160000,
-    "id": 39061,
-    "level": 0
+    "level": 0,
+    "id": 39061
   },
   {
     "nombre": "rosalinda",
@@ -48290,10 +47822,9 @@ export const activeUsers = [
     "correo": "cosara_86@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529999056110,
-    "stripe_id": "cus_NM7ymyNBbLpWXK",
     "final_date": 1684080000,
-    "id": 39066,
-    "level": 1
+    "level": 1,
+    "id": 39066
   },
   {
     "nombre": "patricia",
@@ -48301,10 +47832,9 @@ export const activeUsers = [
     "correo": "patriciazapata360@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529932165251,
-    "stripe_id": "cus_NMAK3bz48wvoDu",
     "final_date": 1691300000,
-    "id": 39081,
-    "level": 1
+    "level": 1,
+    "id": 39081
   },
   {
     "nombre": "ALEJANDRA",
@@ -48312,10 +47842,9 @@ export const activeUsers = [
     "correo": "ale_12614@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522491136110,
-    "stripe_id": "cus_NMCiGSgQC5Zm84",
     "final_date": 1690310000,
-    "id": 39095,
-    "level": 1
+    "level": 1,
+    "id": 39095
   },
   {
     "nombre": "Carolina",
@@ -48323,10 +47852,10 @@ export const activeUsers = [
     "correo": "caro.bran.ax.93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647937641,
-    "stripe_id": "cus_NMBxhyF1CLZCeS",
-    "final_date": 1692040000,
-    "id": 39096,
-    "level": 1
+    "conekta_id": "cus_2uQhRKrcTRKEB9LvV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39096
   },
   {
     "nombre": "Marcela",
@@ -48334,10 +47863,9 @@ export const activeUsers = [
     "correo": "marcelacanuto9@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527721890229,
-    "stripe_id": "cus_NNOUCnZYuuF13B",
     "final_date": 0,
-    "id": 39098,
-    "level": 1
+    "level": 1,
+    "id": 39098
   },
   {
     "nombre": "Areli",
@@ -48345,10 +47873,10 @@ export const activeUsers = [
     "correo": "rafpitufurrioflores2@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525613377734,
-    "stripe_id": "cus_NMCJlfMEYvBdKE",
-    "final_date": 1692040000,
-    "id": 39100,
-    "level": 1
+    "conekta_id": "cus_2uQhRLqnbKGmrRG7h",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39100
   },
   {
     "nombre": "noemi",
@@ -48356,10 +47884,10 @@ export const activeUsers = [
     "correo": "nl489048@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524411309703,
-    "stripe_id": "cus_NLxyvvpNJd3cOy",
-    "final_date": 1691990000,
-    "id": 39106,
-    "level": 1
+    "conekta_id": "cus_2uQhRMLFVpSXKomhv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39106
   },
   {
     "nombre": "Sayra",
@@ -48367,10 +47895,10 @@ export const activeUsers = [
     "correo": "saymarquezb@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527736820037,
-    "stripe_id": "cus_NMJVKpM1wToMPE",
-    "final_date": 1692070000,
-    "id": 39129,
-    "level": 1
+    "conekta_id": "cus_2uQhRNNb16kme64u7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39129
   },
   {
     "nombre": "María José",
@@ -48378,10 +47906,10 @@ export const activeUsers = [
     "correo": "gmariagarcia1997@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981868553,
-    "stripe_id": "cus_NMVJk3G1ut5vZ6",
-    "final_date": 1692110000,
-    "id": 39151,
-    "level": 1
+    "conekta_id": "cus_2uQhRNzUSuXWzeEZ5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39151
   },
   {
     "nombre": "Yesenia",
@@ -48389,10 +47917,10 @@ export const activeUsers = [
     "correo": "minniunchs0486@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711905787,
-    "stripe_id": "cus_NMeSKRFqNqZWkk",
-    "final_date": 1692150000,
-    "id": 39251,
-    "level": 1
+    "conekta_id": "cus_2uQhRPo4g7XNQ9w8m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39251
   },
   {
     "nombre": "Jazmin",
@@ -48400,10 +47928,10 @@ export const activeUsers = [
     "correo": "alayjazz25@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50257135912,
-    "stripe_id": "cus_NlpHt0AQhYSatu",
-    "final_date": 1692680000,
-    "id": 39305,
-    "level": 1
+    "conekta_id": "cus_2uQhRPjHy76Acuu3r",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39305
   },
   {
     "nombre": "Natali",
@@ -48411,10 +47939,9 @@ export const activeUsers = [
     "correo": "gorositoalejandro94@gmail.com",
     "pais": "Argentina",
     "whatsapp": 543496652010,
-    "stripe_id": "cus_NMqei06Jkb4tKp",
     "final_date": 0,
-    "id": 39318,
-    "level": 1
+    "level": 1,
+    "id": 39318
   },
   {
     "nombre": "Esmeralda",
@@ -48422,10 +47949,10 @@ export const activeUsers = [
     "correo": "yuyirios05@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522282884151,
-    "stripe_id": "cus_NMsBHnfzxCOJgM",
-    "final_date": 1692200000,
-    "id": 39327,
-    "level": 1
+    "conekta_id": "cus_2uQhRQU7VJepGCDPt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39327
   },
   {
     "nombre": "Casandra",
@@ -48433,10 +47960,10 @@ export const activeUsers = [
     "correo": "casandragonzalez125@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583441272,
-    "stripe_id": "cus_NgwP5G4xWxEJqH",
-    "final_date": 1691730000,
-    "id": 39344,
-    "level": 1
+    "conekta_id": "cus_2uQhRRGhiWefehG8g",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39344
   },
   {
     "nombre": "Evelin Itzel",
@@ -48444,10 +47971,9 @@ export const activeUsers = [
     "correo": "evelin23-09@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528442464208,
-    "stripe_id": "cus_NMv4IAIJXA60KU",
     "final_date": 0,
-    "id": 39346,
-    "level": 1
+    "level": 1,
+    "id": 39346
   },
   {
     "nombre": "Claudia Olivia",
@@ -48455,10 +47981,10 @@ export const activeUsers = [
     "correo": "clausomg12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525539026873,
-    "stripe_id": "cus_NMwudkMCzMtfOK",
-    "final_date": 1692300000,
-    "id": 39361,
-    "level": 1
+    "conekta_id": "cus_2uQhRRmAd1pR5Rkgf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39361
   },
   {
     "nombre": "Rubenia Elizabeth",
@@ -48466,10 +47992,10 @@ export const activeUsers = [
     "correo": "rubiaguila1980@hotmail.com",
     "pais": "Costa Rica",
     "whatsapp": 50670361678,
-    "stripe_id": "cus_NN2TenuhpFW9Kv",
-    "final_date": 1692230000,
-    "id": 39401,
-    "level": 1
+    "conekta_id": "cus_2uQhRSga3uLm7zZ22",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39401
   },
   {
     "nombre": "Belen",
@@ -48477,10 +48003,9 @@ export const activeUsers = [
     "correo": "bely120988@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526865117895,
-    "stripe_id": "cus_NN6xOeU0VvvccC",
     "final_date": 0,
-    "id": 39437,
-    "level": 1
+    "level": 1,
+    "id": 39437
   },
   {
     "nombre": "Atenea",
@@ -48488,10 +48013,10 @@ export const activeUsers = [
     "correo": "akanee_15@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529511169036,
-    "stripe_id": "cus_NN9aFkWoUBtr1f",
-    "final_date": 1692260000,
-    "id": 39444,
-    "level": 1
+    "conekta_id": "cus_2uQhRTEofQwiRqyra",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39444
   },
   {
     "nombre": "V.Estefanía",
@@ -48499,10 +48024,9 @@ export const activeUsers = [
     "correo": "stefyrdex@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529516558919,
-    "stripe_id": "cus_NNIwtLzyIguQjD",
     "final_date": 1689620000,
-    "id": 39494,
-    "level": 1
+    "level": 1,
+    "id": 39494
   },
   {
     "nombre": "María Fernanda",
@@ -48510,10 +48034,9 @@ export const activeUsers = [
     "correo": "mar.fheer06@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524731282335,
-    "stripe_id": "cus_NNM2HKAQWZDdTq",
     "final_date": 1684360000,
-    "id": 39521,
-    "level": 1
+    "level": 1,
+    "id": 39521
   },
   {
     "nombre": "Fulgencia",
@@ -48521,10 +48044,10 @@ export const activeUsers = [
     "correo": "fulmejia1@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17208629438,
-    "stripe_id": "cus_NNPq2Nm7OAnmB1",
-    "final_date": 1692320000,
-    "id": 39572,
-    "level": 1
+    "conekta_id": "cus_2uQhRUH9AhFxc6zVW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39572
   },
   {
     "nombre": "carolina del consuelo",
@@ -48532,10 +48055,9 @@ export const activeUsers = [
     "correo": "caroconsuelocc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529842768714,
-    "stripe_id": "cus_NNRw5p8o8tZX4n",
     "final_date": 1689650000,
-    "id": 39592,
-    "level": 1
+    "level": 1,
+    "id": 39592
   },
   {
     "nombre": "alejandra",
@@ -48543,10 +48065,10 @@ export const activeUsers = [
     "correo": "ayofu5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526642129802,
-    "stripe_id": "cus_NgwSxLt7dQhqpP",
-    "final_date": 1691730000,
-    "id": 39599,
-    "level": 1
+    "conekta_id": "cus_2uQhRVTGE1dfJeyLD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39599
   },
   {
     "nombre": "Blanca gardenia",
@@ -48554,10 +48076,9 @@ export const activeUsers = [
     "correo": "gardeniamiramontesgalindo5722@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523251121527,
-    "stripe_id": "cus_NNWvSkUNTN2u0k",
     "final_date": 0,
-    "id": 39604,
-    "level": 1
+    "level": 1,
+    "id": 39604
   },
   {
     "nombre": "Karen",
@@ -48565,10 +48086,9 @@ export const activeUsers = [
     "correo": "karen.carballo@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529994943660,
-    "stripe_id": "cus_NNjieVDxFRy5kc",
     "final_date": 0,
-    "id": 39616,
-    "level": 1
+    "level": 1,
+    "id": 39616
   },
   {
     "nombre": "yadira",
@@ -48576,10 +48096,9 @@ export const activeUsers = [
     "correo": "yadirastudio26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528712516085,
-    "stripe_id": "cus_NR1NXPin1HnO2m",
     "final_date": 1682610000,
-    "id": 39679,
-    "level": 1
+    "level": 1,
+    "id": 39679
   },
   {
     "nombre": "luis",
@@ -48587,10 +48106,10 @@ export const activeUsers = [
     "correo": "luismejiala88@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 12139481886,
-    "stripe_id": "cus_NO8RyEoQriX0sD",
-    "final_date": 1692490000,
-    "id": 39680,
-    "level": 1
+    "conekta_id": "cus_2uQhRX7VB6ietdBpq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39680
   },
   {
     "nombre": "maritza",
@@ -48598,10 +48117,10 @@ export const activeUsers = [
     "correo": "maritzamaritza20@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 15707514016,
-    "stripe_id": "cus_NPYDNqYNxfmA53",
-    "final_date": 1692810000,
-    "id": 39711,
-    "level": 1
+    "conekta_id": "cus_2uQhRWvuGQkxVzd1B",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39711
   },
   {
     "nombre": "Jessica",
@@ -48609,10 +48128,9 @@ export const activeUsers = [
     "correo": "jessgzzh@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528119797913,
-    "stripe_id": "cus_NNsDMGuuU9WTXe",
     "final_date": 1689750000,
-    "id": 39723,
-    "level": 1
+    "level": 1,
+    "id": 39723
   },
   {
     "nombre": "Yadira Ivonne",
@@ -48620,10 +48138,9 @@ export const activeUsers = [
     "correo": "ivon.ariday@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526251513747,
-    "stripe_id": "cus_NO1GXj7EaEHpQ8",
     "final_date": 1689780000,
-    "id": 39733,
-    "level": 1
+    "level": 1,
+    "id": 39733
   },
   {
     "nombre": "Gerardo",
@@ -48631,10 +48148,9 @@ export const activeUsers = [
     "correo": "gerardogm190700@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513940395,
-    "stripe_id": "cus_NlpIc892C0EG3O",
     "final_date": 1721750000,
-    "id": 39752,
-    "level": 0
+    "level": 0,
+    "id": 39752
   },
   {
     "nombre": "sivoney del rosario",
@@ -48642,10 +48158,10 @@ export const activeUsers = [
     "correo": "lopezrodriguezsivoney@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529331603504,
-    "stripe_id": "cus_NODYJ2LAjMZY62",
-    "final_date": 1692590000,
-    "id": 39766,
-    "level": 1
+    "conekta_id": "cus_2uQhRYR7XQYCRCXgE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39766
   },
   {
     "nombre": "teresa",
@@ -48653,10 +48169,9 @@ export const activeUsers = [
     "correo": "teresaargumedo79@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526242444245,
-    "stripe_id": "cus_NONnJ8Y16jYbta",
     "final_date": 0,
-    "id": 39792,
-    "level": 1
+    "level": 1,
+    "id": 39792
   },
   {
     "nombre": "Luz del Carmen",
@@ -48664,10 +48179,10 @@ export const activeUsers = [
     "correo": "lopezherreraluzdelcarmen@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528993528921,
-    "stripe_id": "cus_NOP3ULoFD6ooPp",
-    "final_date": 1692550000,
-    "id": 39800,
-    "level": 1
+    "conekta_id": "cus_2uQhRZPiShqoXfZbj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39800
   },
   {
     "nombre": "Zurisadai",
@@ -48675,10 +48190,9 @@ export const activeUsers = [
     "correo": "aberatza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525617542800,
-    "stripe_id": "cus_NlpIksIJCEDUko",
     "final_date": 1720300000,
-    "id": 39812,
-    "level": 1
+    "level": 1,
+    "id": 39812
   },
   {
     "nombre": "Ana Nohemi",
@@ -48686,10 +48200,9 @@ export const activeUsers = [
     "correo": "anhy.3007@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525625124311,
-    "stripe_id": "cus_NOQq00lXCgsfEY",
     "final_date": 0,
-    "id": 39814,
-    "level": 1
+    "level": 1,
+    "id": 39814
   },
   {
     "nombre": "Diana Esmeralda",
@@ -48697,10 +48210,9 @@ export const activeUsers = [
     "correo": "esmediaortiz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527713553410,
-    "stripe_id": "cus_NOQxDkByMmm9uk",
     "final_date": 0,
-    "id": 39820,
-    "level": 1
+    "level": 1,
+    "id": 39820
   },
   {
     "nombre": "Dulce María",
@@ -48708,10 +48220,9 @@ export const activeUsers = [
     "correo": "dulceamado94@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524811266975,
-    "stripe_id": "cus_NOTteXF35tBg4w",
     "final_date": 1689890000,
-    "id": 39873,
-    "level": 1
+    "level": 1,
+    "id": 39873
   },
   {
     "nombre": "marlene",
@@ -48719,10 +48230,10 @@ export const activeUsers = [
     "correo": "marlene.carreon@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528115451850,
-    "stripe_id": "cus_NOXIsoCzG507Fj",
-    "final_date": 1692580000,
-    "id": 39936,
-    "level": 1
+    "conekta_id": "cus_2uQhRaczsQaCgYcnt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39936
   },
   {
     "nombre": "Olga Lidia",
@@ -48730,20 +48241,20 @@ export const activeUsers = [
     "correo": "olgalidiah93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529511921654,
-    "stripe_id": "cus_NOakUbJcgArZ3S",
-    "final_date": 1692590000,
-    "id": 39972,
-    "level": 1
+    "conekta_id": "cus_2uQhRbYQJJ6YeFAoD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39972
   },
   {
     "nombre": "Jeimy",
     "apellido": "zepeda",
     "correo": "jeimyzepeda11@gmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_NOyAcCxzGqs9dt",
-    "final_date": 1692680000,
-    "id": 39988,
-    "level": 1
+    "conekta_id": "cus_2uQhRc6duohVstGTG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39988
   },
   {
     "nombre": "nelly",
@@ -48751,10 +48262,10 @@ export const activeUsers = [
     "correo": "tolocerva10@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524131222967,
-    "stripe_id": "cus_NOjronGviO3lb6",
-    "final_date": 1692630000,
-    "id": 39996,
-    "level": 1
+    "conekta_id": "cus_2uQhRcQ9ttT6V5HvT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 39996
   },
   {
     "nombre": "Jenny",
@@ -48762,10 +48273,10 @@ export const activeUsers = [
     "correo": "jennysancign@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513690603,
-    "stripe_id": "cus_NlpKk4oL3kWvCv",
-    "final_date": 0,
-    "id": 40037,
-    "level": 1
+    "conekta_id": "cus_2uQhRcr2ebv69GDVV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40037
   },
   {
     "nombre": "Denisse Guadalupe",
@@ -48773,10 +48284,10 @@ export const activeUsers = [
     "correo": "denisse.18skate@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524495255153,
-    "stripe_id": "cus_NVzUV5g3sArt91",
-    "final_date": 1691880000,
-    "id": 40045,
-    "level": 1
+    "conekta_id": "cus_2uQhRdaGxCpoBdGmD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40045
   },
   {
     "nombre": "Johanna",
@@ -48784,10 +48295,10 @@ export const activeUsers = [
     "correo": "valentin.9463@yahoo.com",
     "pais": "Puerto Rico",
     "whatsapp": 19392433626,
-    "stripe_id": "cus_NOt8lcOo7H3e36",
-    "final_date": 1692660000,
-    "id": 40054,
-    "level": 1
+    "conekta_id": "cus_2uQhReZT66nLruBwL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40054
   },
   {
     "nombre": "Cassandra Too",
@@ -48795,10 +48306,9 @@ export const activeUsers = [
     "correo": "cass.aguirre.sanchez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527225290983,
-    "stripe_id": "cus_NlpKskfKVVFEAZ",
     "final_date": 1722560000,
-    "id": 40058,
-    "level": 1
+    "level": 1,
+    "id": 40058
   },
   {
     "nombre": "Laura",
@@ -48806,10 +48316,10 @@ export const activeUsers = [
     "correo": "lariscollado@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525610761626,
-    "stripe_id": "cus_Ngwd68onoHVnJA",
-    "final_date": 1691730000,
-    "id": 40117,
-    "level": 1
+    "conekta_id": "cus_2uQhRfEVuHunmbVGS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40117
   },
   {
     "nombre": "Maria del Carmen",
@@ -48817,10 +48327,9 @@ export const activeUsers = [
     "correo": "juanitotorres989@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526645616391,
-    "stripe_id": "cus_NPcKNve0oMyIPL",
     "final_date": 0,
-    "id": 40191,
-    "level": 1
+    "level": 1,
+    "id": 40191
   },
   {
     "nombre": "linda",
@@ -48828,10 +48337,9 @@ export const activeUsers = [
     "correo": "linda05brype1712@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526741104944,
-    "stripe_id": "cus_NQHqnjMCyTIMQA",
     "final_date": 1690310000,
-    "id": 40206,
-    "level": 1
+    "level": 1,
+    "id": 40206
   },
   {
     "nombre": "Valeria",
@@ -48839,10 +48347,10 @@ export const activeUsers = [
     "correo": "aguileraortiz.26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526643879505,
-    "stripe_id": "cus_NPlL3ZSGEgGsf2",
-    "final_date": 1692990000,
-    "id": 40225,
-    "level": 1
+    "conekta_id": "cus_2uQhRfoJjQAgfuAbz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40225
   },
   {
     "nombre": "alondra",
@@ -48850,10 +48358,10 @@ export const activeUsers = [
     "correo": "alondracanela13@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15418516708,
-    "stripe_id": "cus_Ngy4XpmX8YhLsq",
-    "final_date": 1691730000,
-    "id": 40231,
-    "level": 1
+    "conekta_id": "cus_2uQhRgq525pzKunNH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40231
   },
   {
     "nombre": "Margarita",
@@ -48861,10 +48369,9 @@ export const activeUsers = [
     "correo": "margaritaz1909@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523324976775,
-    "stripe_id": "cus_NQ1XGJYw6O2lA7",
     "final_date": 1690240000,
-    "id": 40256,
-    "level": 1
+    "level": 1,
+    "id": 40256
   },
   {
     "nombre": "Victoria",
@@ -48872,10 +48379,10 @@ export const activeUsers = [
     "correo": "victoriasolanosalto@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526562386470,
-    "stripe_id": "cus_NQ2EfQROXOwApX",
-    "final_date": 1692930000,
-    "id": 40263,
-    "level": 1
+    "conekta_id": "cus_2uQhRhWjAu2wQds3Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40263
   },
   {
     "nombre": "Erika teresa",
@@ -48883,10 +48390,10 @@ export const activeUsers = [
     "correo": "kika.tere88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582939147,
-    "stripe_id": "cus_NlpL8OKNJ4SsEp",
-    "final_date": 1693540000,
-    "id": 40268,
-    "level": 1
+    "conekta_id": "cus_2uQhRiFYh6bazFWPv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40268
   },
   {
     "nombre": "monica angelica",
@@ -48894,10 +48401,9 @@ export const activeUsers = [
     "correo": "mbonillas195@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461884302,
-    "stripe_id": "cus_NQGLmMmUAXfAny",
     "final_date": 1690300000,
-    "id": 40290,
-    "level": 1
+    "level": 1,
+    "id": 40290
   },
   {
     "nombre": "Yessica",
@@ -48905,10 +48411,10 @@ export const activeUsers = [
     "correo": "zunygayessica@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528716063326,
-    "stripe_id": "cus_NR0z3Jygk41esO",
-    "final_date": 1693150000,
-    "id": 40308,
-    "level": 1
+    "conekta_id": "cus_2uQhRivbWHj2xPNog",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40308
   },
   {
     "nombre": "Adriana Lizbeth",
@@ -48916,10 +48422,9 @@ export const activeUsers = [
     "correo": "lg2385965@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525634069215,
-    "stripe_id": "cus_NQMTWV4o53TkRZ",
     "final_date": 1690320000,
-    "id": 40324,
-    "level": 1
+    "level": 1,
+    "id": 40324
   },
   {
     "nombre": "Ana",
@@ -48927,10 +48432,9 @@ export const activeUsers = [
     "correo": "anapatriciaibarracamacho@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523322681137,
-    "stripe_id": "cus_NQSvEsU6SNd94M",
     "final_date": 1685080000,
-    "id": 40348,
-    "level": 1
+    "level": 1,
+    "id": 40348
   },
   {
     "nombre": "Jannet",
@@ -48938,10 +48442,9 @@ export const activeUsers = [
     "correo": "jannetlopez081@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 522211012849,
-    "stripe_id": "cus_NZOGLeNE5p58u7",
     "final_date": 0,
-    "id": 40363,
-    "level": 1
+    "level": 1,
+    "id": 40363
   },
   {
     "nombre": "Isabel",
@@ -48949,10 +48452,10 @@ export const activeUsers = [
     "correo": "isa.rosasmendez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522431085234,
-    "stripe_id": "cus_NQckITcb5bnpTA",
-    "final_date": 1693060000,
-    "id": 40368,
-    "level": 1
+    "conekta_id": "cus_2uQhRkQEYgrLCvhoJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40368
   },
   {
     "nombre": "Mary",
@@ -48960,10 +48463,10 @@ export const activeUsers = [
     "correo": "marychuy.gg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461272783,
-    "stripe_id": "cus_NQeZlAlMt7o4zb",
-    "final_date": 1693070000,
-    "id": 40372,
-    "level": 1
+    "conekta_id": "cus_2uQhRkxUACTHSKugs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40372
   },
   {
     "nombre": "Maria Guadalupe",
@@ -48971,10 +48474,10 @@ export const activeUsers = [
     "correo": "hdezlu2816@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527757572583,
-    "stripe_id": "cus_NQhBaFy0aLoZUc",
-    "final_date": 1693080000,
-    "id": 40377,
-    "level": 1
+    "conekta_id": "cus_2uQhRmweJ6Qq7bpri",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40377
   },
   {
     "nombre": "Marely",
@@ -48982,10 +48485,10 @@ export const activeUsers = [
     "correo": "marelymendez@63gmail.com",
     "pais": "Mexico",
     "whatsapp": 525559024179,
-    "stripe_id": "cus_NQztk9AhE4Yrl1",
-    "final_date": 1693150000,
-    "id": 40417,
-    "level": 1
+    "conekta_id": "cus_2uQhRmweJ6Qq7bpro",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40417
   },
   {
     "nombre": "Marcela Maryelli",
@@ -48993,10 +48496,10 @@ export const activeUsers = [
     "correo": "jocelynmaryelli@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523311175167,
-    "stripe_id": "cus_NVFDPaCfRy47es",
-    "final_date": 1691710000,
-    "id": 40427,
-    "level": 1
+    "conekta_id": "cus_2uQhRngTpHyUnXWWu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40427
   },
   {
     "nombre": "Diana Belen",
@@ -49004,10 +48507,9 @@ export const activeUsers = [
     "correo": "anaid.mendoza1507@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527411516148,
-    "stripe_id": "cus_NR4gUenjf49xnW",
     "final_date": 1682620000,
-    "id": 40446,
-    "level": 1
+    "level": 1,
+    "id": 40446
   },
   {
     "nombre": "Claudia",
@@ -49015,10 +48517,9 @@ export const activeUsers = [
     "correo": "claudiazeron019@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527717024784,
-    "stripe_id": "cus_NR7V63k1aCqr6Z",
     "final_date": 1682630000,
-    "id": 40448,
-    "level": 1
+    "level": 1,
+    "id": 40448
   },
   {
     "nombre": "Monica Guadalupe",
@@ -49026,10 +48527,9 @@ export const activeUsers = [
     "correo": "bscfrrj2516@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524777465804,
-    "stripe_id": "cus_NRX4dgsHdn5yCV",
     "final_date": 1682900000,
-    "id": 40465,
-    "level": 1
+    "level": 1,
+    "id": 40465
   },
   {
     "nombre": "Leonor",
@@ -49037,10 +48537,10 @@ export const activeUsers = [
     "correo": "leonchivesi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543908694,
-    "stripe_id": "cus_NRMQ7RUEsxLhL4",
-    "final_date": 1693230000,
-    "id": 40476,
-    "level": 1
+    "conekta_id": "cus_2uQhRpA6rh6n3aaMW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40476
   },
   {
     "nombre": "maria fernanda",
@@ -49048,10 +48548,9 @@ export const activeUsers = [
     "correo": "mariabarrientos03.01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522471049445,
-    "stripe_id": "cus_NRQ2F35FBTlyvg",
     "final_date": 1682700000,
-    "id": 40491,
-    "level": 1
+    "level": 1,
+    "id": 40491
   },
   {
     "nombre": "Sofia",
@@ -49059,10 +48558,10 @@ export const activeUsers = [
     "correo": "ksofiaosornio@gmail.com",
     "pais": "Canada",
     "whatsapp": 14038372789,
-    "stripe_id": "cus_NRTpORS3OUsEWO",
-    "final_date": 1693260000,
-    "id": 40512,
-    "level": 1
+    "conekta_id": "cus_2uQhRpq9ftEDu77iM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40512
   },
   {
     "nombre": "Elisa Maricruz",
@@ -49070,10 +48569,10 @@ export const activeUsers = [
     "correo": "vicbfavo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524531738095,
-    "stripe_id": "cus_NRWUU4l2fh3iGK",
-    "final_date": 1693530000,
-    "id": 40516,
-    "level": 1
+    "conekta_id": "cus_2uQhRqguGUamo5cdU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40516
   },
   {
     "nombre": "Tania Lizbeth",
@@ -49081,10 +48580,9 @@ export const activeUsers = [
     "correo": "isisvan1121@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525621431468,
-    "stripe_id": "cus_NRkvcMYfdgLxg3",
     "final_date": 1685630000,
-    "id": 40534,
-    "level": 1
+    "level": 1,
+    "id": 40534
   },
   {
     "nombre": "Elian Nohemi",
@@ -49092,10 +48590,10 @@ export const activeUsers = [
     "correo": "babyerwin91@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527352998084,
-    "stripe_id": "cus_NRnqQfNYOUAOEO",
-    "final_date": 1693590000,
-    "id": 40535,
-    "level": 1
+    "conekta_id": "cus_2uQhRrRing9RRMH8J",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40535
   },
   {
     "nombre": "Alejandra Pamela",
@@ -49103,10 +48601,10 @@ export const activeUsers = [
     "correo": "pame2amarillos@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526651416179,
-    "stripe_id": "cus_NlpLhtHPplOWro",
-    "final_date": 1693630000,
-    "id": 40570,
-    "level": 1
+    "conekta_id": "cus_2uQhRs3cEUvAqMgEx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40570
   },
   {
     "nombre": "Paloma",
@@ -49114,10 +48612,9 @@ export const activeUsers = [
     "correo": "palmeras.nia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524493935908,
-    "stripe_id": "cus_NVCYDgmUg61Nyl",
     "final_date": 0,
-    "id": 40604,
-    "level": 1
+    "level": 1,
+    "id": 40604
   },
   {
     "nombre": "Osiris Paulina",
@@ -49125,10 +48622,9 @@ export const activeUsers = [
     "correo": "pau08162@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525537666148,
-    "stripe_id": "cus_NT0JNs3X4ljZU2",
     "final_date": 1691190000,
-    "id": 40606,
-    "level": 1
+    "level": 1,
+    "id": 40606
   },
   {
     "nombre": "Evelyn",
@@ -49136,20 +48632,19 @@ export const activeUsers = [
     "correo": "evejlvc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529622205419,
-    "stripe_id": "cus_NTHyfdFokrSkFN",
     "final_date": 1683310000,
-    "id": 40625,
-    "level": 1
+    "level": 1,
+    "id": 40625
   },
   {
     "nombre": "Katherine",
     "apellido": "Cordero",
     "correo": "kattie_295@hotmail.com",
     "pais": "Estados Unidos",
-    "stripe_id": "cus_NWSSpdcSbSnWU8",
-    "final_date": 1691990000,
-    "id": 40630,
-    "level": 1
+    "conekta_id": "cus_2uQhRtXFGt3U5u1E2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40630
   },
   {
     "nombre": "Xóchitl",
@@ -49157,10 +48652,10 @@ export const activeUsers = [
     "correo": "xochitlher0306@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530609071,
-    "stripe_id": "cus_NTOWHSXcOXTjFx",
-    "final_date": 1693960000,
-    "id": 40633,
-    "level": 1
+    "conekta_id": "cus_2uQhRu5UtPeRKJD9Y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40633
   },
   {
     "nombre": "Mich",
@@ -49168,10 +48663,9 @@ export const activeUsers = [
     "correo": "michflores370@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522251213790,
-    "stripe_id": "cus_NTdWc3GIq8WJCZ",
     "final_date": 0,
-    "id": 40649,
-    "level": 1
+    "level": 1,
+    "id": 40649
   },
   {
     "nombre": "Elizabeth",
@@ -49179,10 +48673,9 @@ export const activeUsers = [
     "correo": "eelicamposs@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523317890635,
-    "stripe_id": "cus_NTeqJP8tD7jsz9",
     "final_date": 1691340000,
-    "id": 40653,
-    "level": 1
+    "level": 1,
+    "id": 40653
   },
   {
     "nombre": "Isabel",
@@ -49190,10 +48683,10 @@ export const activeUsers = [
     "correo": "isabelsanchezestela195@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524423827629,
-    "stripe_id": "cus_NTpO9Trad3OXay",
-    "final_date": 1694060000,
-    "id": 40667,
-    "level": 1
+    "conekta_id": "cus_2uQhRv7pPfxfamjEi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40667
   },
   {
     "nombre": "Ana",
@@ -49201,10 +48694,10 @@ export const activeUsers = [
     "correo": "anamag_83@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525540337849,
-    "stripe_id": "cus_Ngwgwcm0gdzwp8",
-    "final_date": 1691730000,
-    "id": 40696,
-    "level": 1
+    "conekta_id": "cus_2uQhRvrdusXKD3PjD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40696
   },
   {
     "nombre": "Agueda",
@@ -49212,10 +48705,10 @@ export const activeUsers = [
     "correo": "aguedarara@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525627263319,
-    "stripe_id": "cus_NlpLLrIslTQpIV",
-    "final_date": 1693500000,
-    "id": 40697,
-    "level": 1
+    "conekta_id": "cus_2uQhRwYJ4gjGF7TGi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40697
   },
   {
     "nombre": "Tamara",
@@ -49223,10 +48716,9 @@ export const activeUsers = [
     "correo": "yeskakristyn@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525591649114,
-    "stripe_id": "cus_NUFktw3Snciyxo",
     "final_date": 0,
-    "id": 40700,
-    "level": 1
+    "level": 1,
+    "id": 40700
   },
   {
     "nombre": "Lizeth",
@@ -49234,10 +48726,9 @@ export const activeUsers = [
     "correo": "lizethrosas019@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524444691103,
-    "stripe_id": "cus_NUz2fiVpHhXPae",
     "final_date": 0,
-    "id": 40730,
-    "level": 1
+    "level": 1,
+    "id": 40730
   },
   {
     "nombre": "Karla",
@@ -49245,10 +48736,10 @@ export const activeUsers = [
     "correo": "karguzman0403@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19184305790,
-    "stripe_id": "cus_NUPLEarn1JIrlU",
-    "final_date": 1691510000,
-    "id": 40748,
-    "level": 1
+    "conekta_id": "cus_2uQhRxDLssri8o6gn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40748
   },
   {
     "nombre": "Ana lidia",
@@ -49256,10 +48747,9 @@ export const activeUsers = [
     "correo": "al.microblading.mx@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524422724062,
-    "stripe_id": "cus_NUV9e7E27pcKmy",
     "final_date": 0,
-    "id": 40759,
-    "level": 1
+    "level": 1,
+    "id": 40759
   },
   {
     "nombre": "cristina",
@@ -49267,10 +48757,10 @@ export const activeUsers = [
     "correo": "cristinafimbre@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15202832005,
-    "stripe_id": "cus_NUVFqeU7Vgs3I5",
-    "final_date": 1691540000,
-    "id": 40760,
-    "level": 1
+    "conekta_id": "cus_2uQhRxxAQ5RMqWzCm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40760
   },
   {
     "nombre": "Xay",
@@ -49278,10 +48768,10 @@ export const activeUsers = [
     "correo": "yadiratap@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522831167393,
-    "stripe_id": "cus_NUW79jY5bbBlY9",
-    "final_date": 1691540000,
-    "id": 40764,
-    "level": 1
+    "conekta_id": "cus_2uQhRyouzfmui83hW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40764
   },
   {
     "nombre": "Gabriela",
@@ -49289,10 +48779,10 @@ export const activeUsers = [
     "correo": "dagabaral8186@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528442917697,
-    "stripe_id": "cus_NV9ojA8OILr5Go",
-    "final_date": 1693000000,
-    "id": 40767,
-    "level": 1
+    "conekta_id": "cus_2uQhRzFnkPEuJekum",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40767
   },
   {
     "nombre": "Maple",
@@ -49300,10 +48790,10 @@ export const activeUsers = [
     "correo": "sguarneros6175@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523324187542,
-    "stripe_id": "cus_NUbJ4StNyzstTw",
-    "final_date": 1691560000,
-    "id": 40779,
-    "level": 1
+    "conekta_id": "cus_2uQhS1EPfgYWRdXkf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40779
   },
   {
     "nombre": "Ariadna Leticia",
@@ -49311,10 +48801,10 @@ export const activeUsers = [
     "correo": "aryuribe12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528134563904,
-    "stripe_id": "cus_NVBdiL0TdoiPlb",
-    "final_date": 1691690000,
-    "id": 40829,
-    "level": 1
+    "conekta_id": "cus_2uQhS1uSUsfxG9R9e",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40829
   },
   {
     "nombre": "Gabriela Estefany",
@@ -49322,10 +48812,10 @@ export const activeUsers = [
     "correo": "la21007@ues.edu.sv",
     "pais": "El Salvador",
     "whatsapp": 50379659154,
-    "stripe_id": "cus_NcgpcZzPU2YzNq",
-    "final_date": 1693420000,
-    "id": 40832,
-    "level": 1
+    "conekta_id": "cus_2uQhS1uSUsfxLbeBK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40832
   },
   {
     "nombre": "Brenda",
@@ -49333,10 +48823,10 @@ export const activeUsers = [
     "correo": "azul_venus94@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527226507245,
-    "stripe_id": "cus_NgwcrRUCjqWgda",
-    "final_date": 1691730000,
-    "id": 40833,
-    "level": 1
+    "conekta_id": "cus_2uQhS2eG15EbtR5eG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40833
   },
   {
     "nombre": "Ailyn Elide",
@@ -49344,10 +48834,9 @@ export const activeUsers = [
     "correo": "aylincamarillo15@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528110452753,
-    "stripe_id": "cus_NVMXq19QfWAHJf",
     "final_date": 0,
-    "id": 40839,
-    "level": 1
+    "level": 1,
+    "id": 40839
   },
   {
     "nombre": "Karmen",
@@ -49355,10 +48844,10 @@ export const activeUsers = [
     "correo": "prins_carmen99@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525539629312,
-    "stripe_id": "cus_NVypSgZ4d6wsSh",
-    "final_date": 1691880000,
-    "id": 40846,
-    "level": 1
+    "conekta_id": "cus_2uQhS3CVcaqZCGWcY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40846
   },
   {
     "nombre": "Charls",
@@ -49366,10 +48855,10 @@ export const activeUsers = [
     "correo": "karlacabrera821@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525531501565,
-    "stripe_id": "cus_NVXjFFtz09hOaH",
-    "final_date": 1691780000,
-    "id": 40849,
-    "level": 1
+    "conekta_id": "cus_2uQhS3wtMP49MYTMg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40849
   },
   {
     "nombre": "Ariadna",
@@ -49377,10 +48866,9 @@ export const activeUsers = [
     "correo": "arispadilla40@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522481065859,
-    "stripe_id": "cus_NVcv1hSxFL72Gq",
     "final_date": 1683850000,
-    "id": 40852,
-    "level": 1
+    "level": 1,
+    "id": 40852
   },
   {
     "nombre": "Iram",
@@ -49388,10 +48876,9 @@ export const activeUsers = [
     "correo": "hdzk6121@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528131602148,
-    "stripe_id": "cus_NXGiVeFWi805Va",
     "final_date": 1689500000,
-    "id": 40861,
-    "level": 1
+    "level": 1,
+    "id": 40861
   },
   {
     "nombre": "Guadalupe",
@@ -49399,10 +48886,10 @@ export const activeUsers = [
     "correo": "rosariolima951@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529831548790,
-    "stripe_id": "cus_NW08WVgNmdl8fs",
-    "final_date": 1691980000,
-    "id": 40867,
-    "level": 1
+    "conekta_id": "cus_2uQhS5RXPnBSgYQMT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40867
   },
   {
     "nombre": "Paty",
@@ -49410,10 +48897,10 @@ export const activeUsers = [
     "correo": "pp002852@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524445046780,
-    "stripe_id": "cus_NlpM65gxnxkTuh",
-    "final_date": 0,
-    "id": 40875,
-    "level": 1
+    "conekta_id": "cus_2uQhS5bY5sVCTwxeg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40875
   },
   {
     "nombre": "Blanca Mariela",
@@ -49421,10 +48908,10 @@ export const activeUsers = [
     "correo": "contrerasrodriguezmariela@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523142189127,
-    "stripe_id": "cus_NWMQiQYowNlPkq",
-    "final_date": 1691970000,
-    "id": 40892,
-    "level": 1
+    "conekta_id": "cus_2uQhS6ALuyk6EMSqZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40892
   },
   {
     "nombre": "Dulce Olivia",
@@ -49432,10 +48919,10 @@ export const activeUsers = [
     "correo": "dulceoliviahernandez5@gmail.comm",
     "pais": "Mexico",
     "whatsapp": 525951225271,
-    "stripe_id": "cus_NXBAarUO10e632",
-    "final_date": 1692150000,
-    "id": 40893,
-    "level": 1
+    "conekta_id": "cus_2uQhS6uASBJjrd7LW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40893
   },
   {
     "nombre": "Cristina",
@@ -49443,10 +48930,10 @@ export const activeUsers = [
     "correo": "cristinapastranagallardo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527411459394,
-    "stripe_id": "cus_NWq8n6iOuJSRQk",
-    "final_date": 1692080000,
-    "id": 40898,
-    "level": 1
+    "conekta_id": "cus_2uQhS7smMUcLztkBZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40898
   },
   {
     "nombre": "sady Janeth",
@@ -49454,10 +48941,10 @@ export const activeUsers = [
     "correo": "sadymerida14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529624196653,
-    "stripe_id": "cus_NWQ3dChWq6hdWT",
-    "final_date": 1691980000,
-    "id": 40899,
-    "level": 1
+    "conekta_id": "cus_2uQhS7dyxNsPUtmqG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40899
   },
   {
     "nombre": "marlene",
@@ -49465,10 +48952,10 @@ export const activeUsers = [
     "correo": "marleneeaguilar03@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526242411936,
-    "stripe_id": "cus_NWQ6c4D32zhNxL",
-    "final_date": 1691980000,
-    "id": 40904,
-    "level": 1
+    "conekta_id": "cus_2uQhS8NEFyn6UHFm7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40904
   },
   {
     "nombre": "karina",
@@ -49476,10 +48963,9 @@ export const activeUsers = [
     "correo": "karolina.martinez982@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524442250940,
-    "stripe_id": "cus_NWRSeAa3PjT6GU",
     "final_date": 1683950000,
-    "id": 40905,
-    "level": 1
+    "level": 1,
+    "id": 40905
   },
   {
     "nombre": "osmar",
@@ -49487,10 +48973,10 @@ export const activeUsers = [
     "correo": "osmardl7@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17815344958,
-    "stripe_id": "cus_NWRzJlT7wfOoXd",
-    "final_date": 1691990000,
-    "id": 40906,
-    "level": 1
+    "conekta_id": "cus_2uQhS9MQPsjeJbqCm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40906
   },
   {
     "nombre": "Dulce Mariana",
@@ -49498,10 +48984,9 @@ export const activeUsers = [
     "correo": "marianabonita212@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522481624887,
-    "stripe_id": "cus_NWfHPbu12Cugux",
     "final_date": 0,
-    "id": 40925,
-    "level": 1
+    "level": 1,
+    "id": 40925
   },
   {
     "nombre": "Jeny Mishell",
@@ -49509,10 +48994,10 @@ export const activeUsers = [
     "correo": "balbuenajeny273@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529512915150,
-    "stripe_id": "cus_NlpMADV2HMjCYF",
-    "final_date": 1692460000,
-    "id": 40928,
-    "level": 1
+    "conekta_id": "cus_2uQhSA6Dv5JHvsVhd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40928
   },
   {
     "nombre": "Reyna",
@@ -49520,10 +49005,10 @@ export const activeUsers = [
     "correo": "eolivap@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525576965875,
-    "stripe_id": "cus_NWleufQpp18VOE",
-    "final_date": 1692060000,
-    "id": 40930,
-    "level": 1
+    "conekta_id": "cus_2uQhSAbG3B7yyyRov",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40930
   },
   {
     "nombre": "Ana Karen",
@@ -49531,20 +49016,19 @@ export const activeUsers = [
     "correo": "midbrave12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525521104882,
-    "stripe_id": "cus_NX5MfjOYUTuUdD",
-    "final_date": 1692130000,
-    "id": 40936,
-    "level": 1
+    "conekta_id": "cus_2uQhSBW6FTzPQfhX2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40936
   },
   {
     "nombre": "Tania",
     "apellido": "Martinez",
     "correo": "tania6paris@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NXVW91mqOvn2Xk",
     "final_date": 1689550000,
-    "id": 40943,
-    "level": 1
+    "level": 1,
+    "id": 40943
   },
   {
     "nombre": "Boanca Georgina",
@@ -49552,10 +49036,9 @@ export const activeUsers = [
     "correo": "giinagrort92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526242260851,
-    "stripe_id": "cus_NX3NG07QK8Znov",
     "final_date": 0,
-    "id": 40948,
-    "level": 1
+    "level": 1,
+    "id": 40948
   },
   {
     "nombre": "Fabiola Alejandra",
@@ -49563,10 +49046,10 @@ export const activeUsers = [
     "correo": "ac826567@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528111856244,
-    "stripe_id": "cus_NX5ihBjXIt6tGS",
-    "final_date": 1692140000,
-    "id": 40954,
-    "level": 1
+    "conekta_id": "cus_2uQhSC4KrybLfuDUK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40954
   },
   {
     "nombre": "Osiris",
@@ -49574,10 +49057,9 @@ export const activeUsers = [
     "correo": "aalexmartinez593@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524421175966,
-    "stripe_id": "cus_NXOiDKiKbh8FPY",
     "final_date": 0,
-    "id": 40972,
-    "level": 1
+    "level": 1,
+    "id": 40972
   },
   {
     "nombre": "Daniela",
@@ -49585,10 +49067,9 @@ export const activeUsers = [
     "correo": "danielagonzalezsanchez141092@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583193480,
-    "stripe_id": "cus_NXTJZqBx5QcmwK",
     "final_date": 1689540000,
-    "id": 40979,
-    "level": 1
+    "level": 1,
+    "id": 40979
   },
   {
     "nombre": "Estela",
@@ -49596,10 +49077,9 @@ export const activeUsers = [
     "correo": "br04041985@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522228104853,
-    "stripe_id": "cus_NXT5M2vFdzAHf6",
     "final_date": 1684270000,
-    "id": 40984,
-    "level": 1
+    "level": 1,
+    "id": 40984
   },
   {
     "nombre": "Adriana",
@@ -49607,10 +49087,9 @@ export const activeUsers = [
     "correo": "addriana9508@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522481027139,
-    "stripe_id": "cus_NXXFUWQnzcWwb9",
     "final_date": 1689560000,
-    "id": 40986,
-    "level": 1
+    "level": 1,
+    "id": 40986
   },
   {
     "nombre": "Claudia Verónica",
@@ -49618,10 +49097,10 @@ export const activeUsers = [
     "correo": "veroky01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528682209893,
-    "stripe_id": "cus_NXpQeKodhB9CMM",
-    "final_date": 1692300000,
-    "id": 40999,
-    "level": 1
+    "conekta_id": "cus_2uQhSDnKX57Y4DpBA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 40999
   },
   {
     "nombre": "Cristina Alejandra",
@@ -49629,10 +49108,10 @@ export const activeUsers = [
     "correo": "crisale702@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526861007571,
-    "stripe_id": "cus_NXsNUvYi61DIKU",
-    "final_date": 1692310000,
-    "id": 41021,
-    "level": 1
+    "conekta_id": "cus_2uQhSETNLGEyqangZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41021
   },
   {
     "nombre": "Marisol",
@@ -49640,10 +49119,10 @@ export const activeUsers = [
     "correo": "marii_lo96@live.com.mx",
     "pais": "Mexico",
     "whatsapp": 529646241457,
-    "stripe_id": "cus_Ngwu94WKHk10mr",
-    "final_date": 1693920000,
-    "id": 41024,
-    "level": 1
+    "conekta_id": "cus_2uQhSF1bwmqw6iEBn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41024
   },
   {
     "nombre": "Marianita",
@@ -49651,10 +49130,10 @@ export const activeUsers = [
     "correo": "mily_emo_@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527721289994,
-    "stripe_id": "cus_NXtQj643vdHPRp",
-    "final_date": 1692320000,
-    "id": 41027,
-    "level": 1
+    "conekta_id": "cus_2uQhSFw1NfNH687fY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41027
   },
   {
     "nombre": "maria gudalupe",
@@ -49662,10 +49141,10 @@ export const activeUsers = [
     "correo": "montomaria1995@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526721262905,
-    "stripe_id": "cus_NXuNYt7rXzsyVK",
-    "final_date": 1692320000,
-    "id": 41028,
-    "level": 1
+    "conekta_id": "cus_2uQhSFkRTyQaoFXwP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41028
   },
   {
     "nombre": "Alejandra",
@@ -49673,10 +49152,10 @@ export const activeUsers = [
     "correo": "guerrero.rosas.alejandra.cecilia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582045501,
-    "stripe_id": "cus_NXut7cN1XJQgVZ",
-    "final_date": 1692320000,
-    "id": 41039,
-    "level": 1
+    "conekta_id": "cus_2uQhSGjbbsN8ZJUAE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41039
   },
   {
     "nombre": "Alinne",
@@ -49684,10 +49163,10 @@ export const activeUsers = [
     "correo": "corazon140519@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527714045051,
-    "stripe_id": "cus_NY81e4QWi8JenV",
-    "final_date": 1692370000,
-    "id": 41058,
-    "level": 1
+    "conekta_id": "cus_2uQhSHEdiyBpfJj8R",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41058
   },
   {
     "nombre": "martha irene",
@@ -49695,10 +49174,10 @@ export const activeUsers = [
     "correo": "marthairenefelipe@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523921007953,
-    "stripe_id": "cus_NY8HOGwb1zRe1L",
-    "final_date": 1692370000,
-    "id": 41060,
-    "level": 1
+    "conekta_id": "cus_2uQhSJ9TwG4Dxw79U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41060
   },
   {
     "nombre": "aida",
@@ -49706,10 +49185,10 @@ export const activeUsers = [
     "correo": "paxtania@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511126590,
-    "stripe_id": "cus_NY8Xnlm04p89Vd",
-    "final_date": 1692370000,
-    "id": 41061,
-    "level": 1
+    "conekta_id": "cus_2uQhSJhhYmfBE4Yej",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41061
   },
   {
     "nombre": "belen",
@@ -49717,10 +49196,9 @@ export const activeUsers = [
     "correo": "088805blc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523325298668,
-    "stripe_id": "cus_NcqAWQ0NQ9HLWY",
     "final_date": 0,
-    "id": 41064,
-    "level": 1
+    "level": 1,
+    "id": 41064
   },
   {
     "nombre": "Claudia Leticia",
@@ -49728,10 +49206,10 @@ export const activeUsers = [
     "correo": "lty_mg@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524939594672,
-    "stripe_id": "cus_NYFx6AMqjVBw07",
-    "final_date": 1692400000,
-    "id": 41074,
-    "level": 1
+    "conekta_id": "cus_2uQhSKd6yfBXHdzwf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41074
   },
   {
     "nombre": "Doribelli",
@@ -49739,10 +49217,9 @@ export const activeUsers = [
     "correo": "2402.avalos@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529984024231,
-    "stripe_id": "cus_NYIeoRLjhkjDig",
     "final_date": 0,
-    "id": 41078,
-    "level": 1
+    "level": 1,
+    "id": 41078
   },
   {
     "nombre": "abigail Verónica",
@@ -49750,10 +49227,10 @@ export const activeUsers = [
     "correo": "abivero4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524425190132,
-    "stripe_id": "cus_NYLzQ3CpbQe2ND",
-    "final_date": 1692510000,
-    "id": 41079,
-    "level": 1
+    "conekta_id": "cus_2uQhSLUraFY5BcVtB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41079
   },
   {
     "nombre": "Karina",
@@ -49761,10 +49238,9 @@ export const activeUsers = [
     "correo": "karinacastillo736@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566746088,
-    "stripe_id": "cus_NYYY9AEcf79QMa",
     "final_date": 0,
-    "id": 41088,
-    "level": 1
+    "level": 1,
+    "id": 41088
   },
   {
     "nombre": "rubi esmeralda",
@@ -49772,10 +49248,10 @@ export const activeUsers = [
     "correo": "ruby18855@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52932710809,
-    "stripe_id": "cus_NYYuGRuDtK7TXt",
-    "final_date": 1692470000,
-    "id": 41093,
-    "level": 1
+    "conekta_id": "cus_2uQhSLvjKy14nf3bB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41093
   },
   {
     "nombre": "Claudia Lizet",
@@ -49783,21 +49259,20 @@ export const activeUsers = [
     "correo": "klaudianails.0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526311991838,
-    "stripe_id": "cus_NYk4J5yupHxL9L",
     "final_date": 1689840000,
-    "id": 41106,
-    "level": 1
+    "level": 1,
+    "id": 41106
   },
   {
     "nombre": "Diana Gabriela",
     "apellido": "Rodriguez Macedo",
     "correo": "roma_dany@hotmail.com",
     "pais": "Mexico",
-    "whatsapp": 527291210672,
-    "stripe_id": "cus_NgwPHJD0R7G5Qn",
-    "final_date": 1691730000,
-    "id": 41141,
-    "level": 1
+    "whatsapp": 527227859122,
+    "conekta_id": "cus_2uQhSMqZYFsUASzRU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41141
   },
   {
     "nombre": "Denise",
@@ -49805,10 +49280,9 @@ export const activeUsers = [
     "correo": "deniche037@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527341366169,
-    "stripe_id": "cus_NZGssBbSJSxvcD",
     "final_date": 0,
-    "id": 41146,
-    "level": 1
+    "level": 1,
+    "id": 41146
   },
   {
     "nombre": "Ingrid",
@@ -49816,10 +49290,9 @@ export const activeUsers = [
     "correo": "ingridmtz85@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528134436104,
-    "stripe_id": "cus_NZMMkbiIO0YxSM",
     "final_date": 0,
-    "id": 41160,
-    "level": 1
+    "level": 1,
+    "id": 41160
   },
   {
     "nombre": "Beatriz",
@@ -49827,10 +49300,9 @@ export const activeUsers = [
     "correo": "bettycastelo@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525529480915,
-    "stripe_id": "cus_NZL4WfFynSfWFo",
     "final_date": 1689970000,
-    "id": 41161,
-    "level": 1
+    "level": 1,
+    "id": 41161
   },
   {
     "nombre": "Liiz",
@@ -49838,10 +49310,9 @@ export const activeUsers = [
     "correo": "liza_zago@hotmail.es",
     "pais": "Mexico",
     "whatsapp": 524191418480,
-    "stripe_id": "cus_NZMJZPeyoYJ8R4",
     "final_date": 1689980000,
-    "id": 41162,
-    "level": 1
+    "level": 1,
+    "id": 41162
   },
   {
     "nombre": "Rosa Maria Monica",
@@ -49849,10 +49320,10 @@ export const activeUsers = [
     "correo": "rosmarymeraz@hitmail.com",
     "pais": "Mexico",
     "whatsapp": 525633212444,
-    "stripe_id": "cus_NZlmxkNx9ZsUcP",
-    "final_date": 1692750000,
-    "id": 41164,
-    "level": 1
+    "conekta_id": "cus_2uQhSPS8f3nfdYmxP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41164
   },
   {
     "nombre": "julissa",
@@ -49860,10 +49331,10 @@ export const activeUsers = [
     "correo": "julissahernadez896@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529231304200,
-    "stripe_id": "cus_NZbvlimAbpCVLj",
-    "final_date": 1692710000,
-    "id": 41182,
-    "level": 1
+    "conekta_id": "cus_2uQhSPt1QmFfHjhZu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41182
   },
   {
     "nombre": "maigualida",
@@ -49871,10 +49342,10 @@ export const activeUsers = [
     "correo": "maywacarreon@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523141182405,
-    "stripe_id": "cus_NZcjyJ4Lp8wpL1",
-    "final_date": 1692720000,
-    "id": 41185,
-    "level": 1
+    "conekta_id": "cus_2uQhSQcFiNANJVVsq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41185
   },
   {
     "nombre": "Miroslava Sinai",
@@ -49882,10 +49353,9 @@ export const activeUsers = [
     "correo": "ayasina556@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631648642,
-    "stripe_id": "cus_NZhDb0SprDQCFX",
     "final_date": 0,
-    "id": 41192,
-    "level": 1
+    "level": 1,
+    "id": 41192
   },
   {
     "nombre": "Sabrina",
@@ -49893,10 +49363,9 @@ export const activeUsers = [
     "correo": "sabripiagino@gmail.com",
     "pais": "Argentina",
     "whatsapp": 543468565622,
-    "stripe_id": "cus_NZuQtVogYVYQXn",
     "final_date": 1687510000,
-    "id": 41201,
-    "level": 1
+    "level": 1,
+    "id": 41201
   },
   {
     "nombre": "Laura Elisa",
@@ -49904,10 +49373,9 @@ export const activeUsers = [
     "correo": "lauraesg93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564322075,
-    "stripe_id": "cus_NZyMMjV7UhHxiM",
     "final_date": 1690120000,
-    "id": 41206,
-    "level": 1
+    "level": 1,
+    "id": 41206
   },
   {
     "nombre": "Thelyca Alejandra",
@@ -49915,10 +49383,10 @@ export const activeUsers = [
     "correo": "soportetecnicothely@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529621532165,
-    "stripe_id": "cus_NarDCZz9hJcwJw",
-    "final_date": 1693000000,
-    "id": 41239,
-    "level": 1
+    "conekta_id": "cus_2uQhSSGUfTFMquQZd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41239
   },
   {
     "nombre": "Diana",
@@ -49926,10 +49394,9 @@ export const activeUsers = [
     "correo": "janethcendejas123janeth@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524521687254,
-    "stripe_id": "cus_NaCuCgS8NTUVSh",
     "final_date": 0,
-    "id": 41244,
-    "level": 1
+    "level": 1,
+    "id": 41244
   },
   {
     "nombre": "Esperanza Abigail",
@@ -49937,10 +49404,9 @@ export const activeUsers = [
     "correo": "santiagoelizeth1019@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528941081317,
-    "stripe_id": "cus_NoSnnqXqhCVhQc",
     "final_date": 1690870000,
-    "id": 41248,
-    "level": 1
+    "level": 1,
+    "id": 41248
   },
   {
     "nombre": "Vanessa",
@@ -49948,10 +49414,10 @@ export const activeUsers = [
     "correo": "vaneflores_0912@outlook.com",
     "pais": "Mexico",
     "whatsapp": 528442761671,
-    "stripe_id": "cus_NbDWM7BHDZAmwK",
-    "final_date": 1693090000,
-    "id": 41252,
-    "level": 1
+    "conekta_id": "cus_2uQhST8EG3buo3Umm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41252
   },
   {
     "nombre": "Brenda Monserrat",
@@ -49959,10 +49425,10 @@ export const activeUsers = [
     "correo": "brendayjesus14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525613430994,
-    "stripe_id": "cus_NlpM9yvpi3uA9h",
-    "final_date": 0,
-    "id": 41269,
-    "level": 1
+    "conekta_id": "cus_2uQhSTotQrorwMRbN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41269
   },
   {
     "nombre": "Rosa Guillermina",
@@ -49970,10 +49436,10 @@ export const activeUsers = [
     "correo": "guillerminadesolorzano@gmail.com",
     "pais": "El Salvador",
     "whatsapp": 50375422538,
-    "stripe_id": "cus_NaZRE3zhyxg4xD",
-    "final_date": 1692940000,
-    "id": 41281,
-    "level": 1
+    "conekta_id": "cus_2uQhSUJMKMycMaB4f",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41281
   },
   {
     "nombre": "carina",
@@ -49981,10 +49447,10 @@ export const activeUsers = [
     "correo": "carinadelcarmenlopezsilva158@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529631560437,
-    "stripe_id": "cus_Naixpk2QsMtUXa",
-    "final_date": 1693840000,
-    "id": 41287,
-    "level": 1
+    "conekta_id": "cus_2uQhSVDkkFVxLz4Xh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41287
   },
   {
     "nombre": "Alondra",
@@ -49992,10 +49458,10 @@ export const activeUsers = [
     "correo": "canoalondra769@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523339053628,
-    "stripe_id": "cus_NaoFyI3KGSDvMU",
-    "final_date": 1692990000,
-    "id": 41300,
-    "level": 1
+    "conekta_id": "cus_2uQhSVnZaMkrHu1X8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41300
   },
   {
     "nombre": "Brenda",
@@ -50003,10 +49469,9 @@ export const activeUsers = [
     "correo": "brenda040298@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522289883358,
-    "stripe_id": "cus_NbAtGSCqbqjyGF",
     "final_date": 1690400000,
-    "id": 41327,
-    "level": 1
+    "level": 1,
+    "id": 41327
   },
   {
     "nombre": "Karina",
@@ -50014,10 +49479,9 @@ export const activeUsers = [
     "correo": "ak.garnica.a@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525551049904,
-    "stripe_id": "cus_NbCPKtEt1iBAbE",
     "final_date": 1690400000,
-    "id": 41329,
-    "level": 1
+    "level": 1,
+    "id": 41329
   },
   {
     "nombre": "Viviana",
@@ -50025,10 +49489,10 @@ export const activeUsers = [
     "correo": "leyvavivi06@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529711940536,
-    "stripe_id": "cus_NbUG5sgiLyDnox",
-    "final_date": 1693150000,
-    "id": 41333,
-    "level": 1
+    "conekta_id": "cus_2uQhSWhPnedFfgxKW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41333
   },
   {
     "nombre": "Analy",
@@ -50036,10 +49500,10 @@ export const activeUsers = [
     "correo": "lnanaly.baca@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528662577227,
-    "stripe_id": "cus_NhEAacDXtKhb87",
-    "final_date": 1691540000,
-    "id": 41335,
-    "level": 1
+    "conekta_id": "cus_2uQhSXZ9PEyobjat7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41335
   },
   {
     "nombre": "Ana Nayelli",
@@ -50047,10 +49511,10 @@ export const activeUsers = [
     "correo": "ananayellim@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525591625691,
-    "stripe_id": "cus_NdMmMQJ90saDPQ",
-    "final_date": 1693580000,
-    "id": 41348,
-    "level": 1
+    "conekta_id": "cus_2uQhSXSDJrBuDo41Q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41348
   },
   {
     "nombre": "Anita",
@@ -50058,10 +49522,9 @@ export const activeUsers = [
     "correo": "kozapz170494@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524192651432,
-    "stripe_id": "cus_NlpNhASq6l0zqD",
     "final_date": 1689870000,
-    "id": 41361,
-    "level": 1
+    "level": 1,
+    "id": 41361
   },
   {
     "nombre": "xochitl",
@@ -50069,20 +49532,19 @@ export const activeUsers = [
     "correo": "xochitlaparicio29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525584157079,
-    "stripe_id": "cus_Nd4HHPUNMpBd7J",
     "final_date": 0,
-    "id": 41396,
-    "level": 1
+    "level": 1,
+    "id": 41396
   },
   {
     "nombre": "Adriana",
     "apellido": "Guarneros",
     "correo": "irwinjared09@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NcQbEJSbVxv6ev",
-    "final_date": 1693360000,
-    "id": 41417,
-    "level": 1
+    "conekta_id": "cus_2uQhSYyd4FkQKF53p",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41417
   },
   {
     "nombre": "ADRIANA",
@@ -50090,10 +49552,20 @@ export const activeUsers = [
     "correo": "adrysmorletsuarez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525537012703,
-    "stripe_id": "cus_NcjrjlCAXt2mOP",
-    "final_date": 1693440000,
-    "id": 41448,
-    "level": 1
+    "conekta_id": "cus_2uQhSZU5xkv9jTpWg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41448
+  },
+  {
+    "nombre": "Karen Edith",
+    "apellido": "López Castillo",
+    "correo": "kedycast@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 525577567670,
+    "final_date": 1724190000,
+    "level": 0,
+    "id": 41453
   },
   {
     "nombre": "Silvia jeaninne",
@@ -50101,10 +49573,10 @@ export const activeUsers = [
     "correo": "janinsilvia@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525520102914,
-    "stripe_id": "cus_NdCxbdB1PjkhCA",
-    "final_date": 1693620000,
-    "id": 41459,
-    "level": 1
+    "conekta_id": "cus_2uQhSZiSaTK3vzzaV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41459
   },
   {
     "nombre": "Dania Yoshelin",
@@ -50112,10 +49584,9 @@ export const activeUsers = [
     "correo": "dania_dna9331@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528136848824,
-    "stripe_id": "cus_NdPXeUy3VHiYXG",
     "final_date": 1690910000,
-    "id": 41485,
-    "level": 1
+    "level": 1,
+    "id": 41485
   },
   {
     "nombre": "Ma sofia",
@@ -50123,10 +49594,10 @@ export const activeUsers = [
     "correo": "sofiajaime1800@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428246689,
-    "stripe_id": "cus_NdQINHiiLHdb5j",
-    "final_date": 1693590000,
-    "id": 41489,
-    "level": 1
+    "conekta_id": "cus_2uQhSawj1A3Sz19Vx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41489
   },
   {
     "nombre": "Mayolit zohe",
@@ -50134,10 +49605,9 @@ export const activeUsers = [
     "correo": "mayolitrodriguez9@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525582663142,
-    "stripe_id": "cus_NdvOdcPb58hxvv",
     "final_date": 1694040000,
-    "id": 41507,
-    "level": 0
+    "level": 0,
+    "id": 41507
   },
   {
     "nombre": "Aída",
@@ -50145,10 +49615,10 @@ export const activeUsers = [
     "correo": "mdzs_aida@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525523362078,
-    "stripe_id": "cus_NdxKyWQ9LxADMh",
-    "final_date": 1693720000,
-    "id": 41508,
-    "level": 1
+    "conekta_id": "cus_2uQhSbgYXMc6cGozo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41508
   },
   {
     "nombre": "laura",
@@ -50156,10 +49626,10 @@ export const activeUsers = [
     "correo": "casstillolauraelisa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523781487643,
-    "stripe_id": "cus_NdvjFKeG8NDXl6",
-    "final_date": 1693710000,
-    "id": 41532,
-    "level": 1
+    "conekta_id": "cus_2uQhScRN3ZAkEYUVM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41532
   },
   {
     "nombre": "Patricia",
@@ -50167,10 +49637,10 @@ export const activeUsers = [
     "correo": "patyizquierdo2018@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428777325,
-    "stripe_id": "cus_NlpNBFdF61zsBZ",
-    "final_date": 1692470000,
-    "id": 41537,
-    "level": 1
+    "conekta_id": "cus_2uQhScbwxF8SbghTY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41537
   },
   {
     "nombre": "marbella",
@@ -50178,10 +49648,10 @@ export const activeUsers = [
     "correo": "pmarbella990@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5266443799793,
-    "stripe_id": "cus_NeVy59J8i6IEw4",
-    "final_date": 1693850000,
-    "id": 41554,
-    "level": 1
+    "conekta_id": "cus_2uQhSdThYqUzYpmfc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41554
   },
   {
     "nombre": "Almajaneth",
@@ -50189,10 +49659,10 @@ export const activeUsers = [
     "correo": "janeth_nava_sr@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525513214606,
-    "stripe_id": "cus_NeWBx33mTLlRPz",
-    "final_date": 1693850000,
-    "id": 41556,
-    "level": 1
+    "conekta_id": "cus_2uQhSe9Mhegwh8iW2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41556
   },
   {
     "nombre": "Ross",
@@ -50200,10 +49670,10 @@ export const activeUsers = [
     "correo": "trocio47@yahoo.com",
     "pais": "Mexico",
     "whatsapp": 528681547979,
-    "stripe_id": "cus_NeXLNKipPb9rH8",
-    "final_date": 1693850000,
-    "id": 41562,
-    "level": 1
+    "conekta_id": "cus_2uQhSetBDrFbJte27",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41562
   },
   {
     "nombre": "Daniela",
@@ -50211,10 +49681,10 @@ export const activeUsers = [
     "correo": "danielafernandezhernandez1228@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527491033980,
-    "stripe_id": "cus_NeaTaLtn4QZkR6",
-    "final_date": 1693860000,
-    "id": 41572,
-    "level": 1
+    "conekta_id": "cus_2uQhSedpc9rh7MTyC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41572
   },
   {
     "nombre": "Emma",
@@ -50222,10 +49692,9 @@ export const activeUsers = [
     "correo": "coriaflakita@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529878789923,
-    "stripe_id": "cus_NecmJ07OZuUZO9",
     "final_date": 1689270000,
-    "id": 41579,
-    "level": 1
+    "level": 1,
+    "id": 41579
   },
   {
     "nombre": "Jannette",
@@ -50233,10 +49702,10 @@ export const activeUsers = [
     "correo": "janey_tian85@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522225177495,
-    "stripe_id": "cus_Nef1WJycrLqhgf",
-    "final_date": 1693880000,
-    "id": 41584,
-    "level": 1
+    "conekta_id": "cus_2uQhSg7TeYyzSASKT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41584
   },
   {
     "nombre": "Marlem",
@@ -50244,10 +49713,9 @@ export const activeUsers = [
     "correo": "marlemtorres728@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525516127555,
-    "stripe_id": "cus_NhqP7diSoZ7Bmu",
     "final_date": 1689260000,
-    "id": 41588,
-    "level": 1
+    "level": 1,
+    "id": 41588
   },
   {
     "nombre": "sandraluz",
@@ -50255,10 +49723,10 @@ export const activeUsers = [
     "correo": "luzmariaa233@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529671571262,
-    "stripe_id": "cus_Nf26RbiXWre7Kq",
-    "final_date": 1693970000,
-    "id": 41614,
-    "level": 1
+    "conekta_id": "cus_2uQhSh9o9qJEjFDK7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41614
   },
   {
     "nombre": "jessica",
@@ -50266,10 +49734,9 @@ export const activeUsers = [
     "correo": "janetak_@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526642213632,
-    "stripe_id": "cus_Nf1aHEtS8npziL",
     "final_date": 1691280000,
-    "id": 41619,
-    "level": 1
+    "level": 1,
+    "id": 41619
   },
   {
     "nombre": "Maríadelaluz",
@@ -50277,10 +49744,9 @@ export const activeUsers = [
     "correo": "madelaluzmontoya@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525614530182,
-    "stripe_id": "cus_Nn8zKjElqAMmXJ",
     "final_date": 1690480000,
-    "id": 41649,
-    "level": 1
+    "level": 1,
+    "id": 41649
   },
   {
     "nombre": "Maritza",
@@ -50288,10 +49754,9 @@ export const activeUsers = [
     "correo": "marizarebau1996@outlook.es",
     "pais": "Mexico",
     "whatsapp": 524471518801,
-    "stripe_id": "cus_NfRmxwcjzq2pLV",
     "final_date": 1691380000,
-    "id": 41657,
-    "level": 1
+    "level": 1,
+    "id": 41657
   },
   {
     "nombre": "Rocio",
@@ -50299,10 +49764,10 @@ export const activeUsers = [
     "correo": "hcrocio10@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524181812586,
-    "stripe_id": "cus_NfeVK5nOgywodp",
-    "final_date": 1691430000,
-    "id": 41667,
-    "level": 1
+    "conekta_id": "cus_2uQhSiaGpr4qSkhU9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41667
   },
   {
     "nombre": "GuadalupePatricia",
@@ -50310,10 +49775,10 @@ export const activeUsers = [
     "correo": "ventas_ipsa_gppr@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525621059977,
-    "stripe_id": "cus_NfgC2DUJ0MUULA",
-    "final_date": 1691440000,
-    "id": 41677,
-    "level": 1
+    "conekta_id": "cus_2uQhSiWW7qddbr1Pd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41677
   },
   {
     "nombre": "Yamile",
@@ -50321,10 +49786,9 @@ export const activeUsers = [
     "correo": "garciayamii526@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525621948988,
-    "stripe_id": "cus_NgwQ7XVBYBHugC",
     "final_date": 1689050000,
-    "id": 41678,
-    "level": 1
+    "level": 1,
+    "id": 41678
   },
   {
     "nombre": "TeresadeJesus",
@@ -50332,10 +49796,10 @@ export const activeUsers = [
     "correo": "torresmteresa14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524341392197,
-    "stripe_id": "cus_Nfjh5c6KxrGdq9",
-    "final_date": 1691450000,
-    "id": 41685,
-    "level": 1
+    "conekta_id": "cus_2uQhSjK6M3dV52Mxq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41685
   },
   {
     "nombre": "juany",
@@ -50343,10 +49807,9 @@ export const activeUsers = [
     "correo": "dafneperezs@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528212111946,
-    "stripe_id": "cus_NgwUGgFIlJlKpl",
     "final_date": 1689110000,
-    "id": 41699,
-    "level": 1
+    "level": 1,
+    "id": 41699
   },
   {
     "nombre": "reyna",
@@ -50354,10 +49817,10 @@ export const activeUsers = [
     "correo": "guadarramamunguiar@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525562049051,
-    "stripe_id": "cus_NgkOo8148n7Xpw",
-    "final_date": 1691680000,
-    "id": 41719,
-    "level": 1
+    "conekta_id": "cus_2uQhSjp8U9TBB2ctn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41719
   },
   {
     "nombre": "ingrid",
@@ -50365,10 +49828,9 @@ export const activeUsers = [
     "correo": "ingy301906@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525570773272,
-    "stripe_id": "cus_NgwK1VH7QlB3iD",
     "final_date": 1689050000,
-    "id": 41742,
-    "level": 1
+    "level": 1,
+    "id": 41742
   },
   {
     "nombre": "MariaAngelita",
@@ -50376,10 +49838,9 @@ export const activeUsers = [
     "correo": "mariachopox@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526531049524,
-    "stripe_id": "cus_NlpNzEWjtFEoPX",
     "final_date": 1694560000,
-    "id": 41747,
-    "level": 0
+    "level": 0,
+    "id": 41747
   },
   {
     "nombre": "Mariafernanda",
@@ -50387,20 +49848,18 @@ export const activeUsers = [
     "correo": "fer21matber@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525572339615,
-    "stripe_id": "cus_NgwPl6brxAZhlI",
     "final_date": 1689050000,
-    "id": 41915,
-    "level": 1
+    "level": 1,
+    "id": 41915
   },
   {
     "nombre": "Evelyn",
     "apellido": "GamezRamos",
     "correo": "evytachula@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NlpOAX5qvz8Gj8",
     "final_date": 1716920000,
-    "id": 41927,
-    "level": 0
+    "level": 0,
+    "id": 41927
   },
   {
     "nombre": "LILI",
@@ -50408,10 +49867,10 @@ export const activeUsers = [
     "correo": "lilyzz265@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581265973,
-    "stripe_id": "cus_NgwMn7fBxshUSt",
-    "final_date": 1691730000,
-    "id": 41930,
-    "level": 1
+    "conekta_id": "cus_2uQhSn2b2k983qcNP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41930
   },
   {
     "nombre": "ASHLY",
@@ -50419,10 +49878,10 @@ export const activeUsers = [
     "correo": "ashlypiche11@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50234820061,
-    "stripe_id": "cus_NgxOSHJGMWIQu0",
-    "final_date": 1691730000,
-    "id": 41984,
-    "level": 1
+    "conekta_id": "cus_2uQhSnGNRqt5a71x5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41984
   },
   {
     "nombre": "PAULETYOLANDA",
@@ -50430,10 +49889,10 @@ export const activeUsers = [
     "correo": "pauletsalcido@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526621999278,
-    "stripe_id": "cus_NgwLSFpDwKnLe1",
-    "final_date": 1691730000,
-    "id": 41987,
-    "level": 1
+    "conekta_id": "cus_2uQhSnmQYwhmdCx1n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 41987
   },
   {
     "nombre": "VANESSA",
@@ -50441,10 +49900,10 @@ export const activeUsers = [
     "correo": "vanessavaldez140578@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524498977739,
-    "stripe_id": "cus_NgwO7INvwtZ1Fj",
-    "final_date": 1691730000,
-    "id": 42041,
-    "level": 1
+    "conekta_id": "cus_2uQhSok1UF1Nio7jW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42041
   },
   {
     "nombre": "Mariana",
@@ -50452,20 +49911,20 @@ export const activeUsers = [
     "correo": "barriosmariana288@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50251898038,
-    "stripe_id": "cus_NgwanCaBFYsCrF",
-    "final_date": 1691730000,
-    "id": 42108,
-    "level": 1
+    "conekta_id": "cus_2uQhSpEUNkB8K8jjg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42108
   },
   {
     "nombre": "Norma",
     "apellido": "PiñaPiña",
     "correo": "malina.28@hotmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NgwMeCeJPtUwcy",
-    "final_date": 1691730000,
-    "id": 42110,
-    "level": 1
+    "conekta_id": "cus_2uQhSpyHtwjms8ksk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42110
   },
   {
     "nombre": "RocíoIsabella",
@@ -50473,10 +49932,10 @@ export const activeUsers = [
     "correo": "dalopez461@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611200272,
-    "stripe_id": "cus_NgwX0sX36ZQNGo",
-    "final_date": 1691730000,
-    "id": 42139,
-    "level": 1
+    "conekta_id": "cus_2uQhSqGot2VNa9P6U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42139
   },
   {
     "nombre": "Leslie",
@@ -50484,10 +49943,10 @@ export const activeUsers = [
     "correo": "leslinda803@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525544503938,
-    "stripe_id": "cus_NgwOMJ2ZrhFMUU",
-    "final_date": 1691730000,
-    "id": 42175,
-    "level": 1
+    "conekta_id": "cus_2uQhSqi7R9JRZg4jn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42175
   },
   {
     "nombre": "luisamaria",
@@ -50495,10 +49954,10 @@ export const activeUsers = [
     "correo": "lumatruli25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566740632,
-    "stripe_id": "cus_NgwMzoR2O4Mdpp",
-    "final_date": 1691730000,
-    "id": 42180,
-    "level": 1
+    "conekta_id": "cus_2uQhSrkSvRcfpgi5o",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42180
   },
   {
     "nombre": "Brisa",
@@ -50506,10 +49965,10 @@ export const activeUsers = [
     "correo": "brissamond@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525514947517,
-    "stripe_id": "cus_NgwM5YPs2Ay84s",
-    "final_date": 1691730000,
-    "id": 42195,
-    "level": 1
+    "conekta_id": "cus_2uQhSsNLNEPRBFY6m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42195
   },
   {
     "nombre": "Monserrat",
@@ -50517,10 +49976,10 @@ export const activeUsers = [
     "correo": "monseos2203@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525581037377,
-    "stripe_id": "cus_NgwJ8CF5aCARrx",
-    "final_date": 1691780000,
-    "id": 42292,
-    "level": 1
+    "conekta_id": "cus_2uQhStE5xpjy4E3Xy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42292
   },
   {
     "nombre": "ItzelGuadalupe",
@@ -50528,10 +49987,10 @@ export const activeUsers = [
     "correo": "lorenzoitzel1298@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527713407841,
-    "stripe_id": "cus_NgwRIEILzfC5gX",
-    "final_date": 1691730000,
-    "id": 42293,
-    "level": 1
+    "conekta_id": "cus_2uQhSsw9CLeK16bTS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42293
   },
   {
     "nombre": "MiriamEdith",
@@ -50539,10 +49998,10 @@ export const activeUsers = [
     "correo": "diabliya06@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527122433697,
-    "stripe_id": "cus_NgwMVZCTBFGRgr",
-    "final_date": 1691730000,
-    "id": 42308,
-    "level": 1
+    "conekta_id": "cus_2uQhStfxiYCxhpsrU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42308
   },
   {
     "nombre": "Esmeralda",
@@ -50550,10 +50009,10 @@ export const activeUsers = [
     "correo": "esmetcruz@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17634771951,
-    "stripe_id": "cus_Ngwd7MxV0OE7HV",
-    "final_date": 1691730000,
-    "id": 42342,
-    "level": 1
+    "conekta_id": "cus_2uQhSuQnEjmcFdvSi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42342
   },
   {
     "nombre": "Ivanna",
@@ -50561,10 +50020,10 @@ export const activeUsers = [
     "correo": "ivannamugo05@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52461297380,
-    "stripe_id": "cus_NjTQVN5iruuual",
-    "final_date": 1692640000,
-    "id": 42346,
-    "level": 1
+    "conekta_id": "cus_2uQhSv9bkwLFvoumt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42346
   },
   {
     "nombre": "Ana",
@@ -50572,10 +50031,10 @@ export const activeUsers = [
     "correo": "ana.nelba413@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19544591725,
-    "stripe_id": "cus_NgwMhDicghxBlY",
-    "final_date": 1691730000,
-    "id": 42360,
-    "level": 1
+    "conekta_id": "cus_2uQhSwBN3czZZJhW6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42360
   },
   {
     "nombre": "karenzulema",
@@ -50583,10 +50042,10 @@ export const activeUsers = [
     "correo": "ka_zu_15@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526311894435,
-    "stripe_id": "cus_NgwLCfIwWVeVad",
-    "final_date": 1691730000,
-    "id": 42363,
-    "level": 1
+    "conekta_id": "cus_2uQhSw8CgEdryVkex",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42363
   },
   {
     "nombre": "ItzelAlejandra",
@@ -50594,10 +50053,10 @@ export const activeUsers = [
     "correo": "jani_603_azul@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527293205390,
-    "stripe_id": "cus_NgwOvMg3KcTfWO",
-    "final_date": 1691730000,
-    "id": 42396,
-    "level": 1
+    "conekta_id": "cus_2uQhSwoFVRmJvsX4k",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42396
   },
   {
     "nombre": "dayanna",
@@ -50605,10 +50064,10 @@ export const activeUsers = [
     "correo": "beautydayann20@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16313089147,
-    "stripe_id": "cus_NgwXrSL39iLnYK",
-    "final_date": 1691730000,
-    "id": 42423,
-    "level": 1
+    "conekta_id": "cus_2uQhSxN4KY2CkiaR9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42423
   },
   {
     "nombre": "Joana",
@@ -50616,10 +50075,10 @@ export const activeUsers = [
     "correo": "kalyjoa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525633804063,
-    "stripe_id": "cus_NgwLxmAZjU4CWn",
-    "final_date": 1691730000,
-    "id": 42486,
-    "level": 1
+    "conekta_id": "cus_2uQhSyGtXptcBQr3y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42486
   },
   {
     "nombre": "Cecilia",
@@ -50627,10 +50086,9 @@ export const activeUsers = [
     "correo": "torresmendozacecilia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524641869028,
-    "stripe_id": "cus_NgwLHmAqvaOTlf",
     "final_date": 1689050000,
-    "id": 42488,
-    "level": 1
+    "level": 1,
+    "id": 42488
   },
   {
     "nombre": "karla",
@@ -50638,10 +50096,10 @@ export const activeUsers = [
     "correo": "yanez34@icloud.com",
     "pais": "Mexico",
     "whatsapp": 525576204452,
-    "stripe_id": "cus_NgwMH2mmh0kycm",
-    "final_date": 1691730000,
-    "id": 42498,
-    "level": 1
+    "conekta_id": "cus_2uQhSz8e8RFA5PM1j",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42498
   },
   {
     "nombre": "KarlaLiliana",
@@ -50649,10 +50107,10 @@ export const activeUsers = [
     "correo": "karlacabrera389@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522331244964,
-    "stripe_id": "cus_NgwMegqfB7cZCH",
-    "final_date": 1691730000,
-    "id": 42567,
-    "level": 1
+    "conekta_id": "cus_2uQhSzpJHET76r58A",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42567
   },
   {
     "nombre": "AishBerenice",
@@ -50660,10 +50118,10 @@ export const activeUsers = [
     "correo": "garciazuritaaishaberenice@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525618322278,
-    "stripe_id": "cus_NgwLQFFgF5Fs5E",
-    "final_date": 1694390000,
-    "id": 42619,
-    "level": 1
+    "conekta_id": "cus_2uQhT1cHApNTKvfzp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42619
   },
   {
     "nombre": "villarreal",
@@ -50671,10 +50129,10 @@ export const activeUsers = [
     "correo": "villarrealmiriam@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524351212953,
-    "stripe_id": "cus_NgwVlpwVxZ2Zsi",
-    "final_date": 1691730000,
-    "id": 42655,
-    "level": 1
+    "conekta_id": "cus_2uQhT2EAcd9CgVW2d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42655
   },
   {
     "nombre": "Elisa",
@@ -50682,10 +50140,10 @@ export const activeUsers = [
     "correo": "lisa191086@hotmail.com",
     "pais": "Costa Rica",
     "whatsapp": 50664311359,
-    "stripe_id": "cus_NgwLwyoUdMGcx2",
-    "final_date": 1691730000,
-    "id": 42681,
-    "level": 1
+    "conekta_id": "cus_2uQhT2nySjQ6ZEtDR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42681
   },
   {
     "nombre": "vanesa",
@@ -50693,10 +50151,9 @@ export const activeUsers = [
     "correo": "vanesaguzmanrivera1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528441989402,
-    "stripe_id": "cus_NgwMxwwM2Nhfcr",
     "final_date": 1689050000,
-    "id": 42774,
-    "level": 1
+    "level": 1,
+    "id": 42774
   },
   {
     "nombre": "CarmenAlicia",
@@ -50704,10 +50161,10 @@ export const activeUsers = [
     "correo": "carmen.kottry162807@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526441429998,
-    "stripe_id": "cus_NgwRApdsXJQS9p",
-    "final_date": 1691730000,
-    "id": 42808,
-    "level": 1
+    "conekta_id": "cus_2uQhT3hof2GVv2B9j",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42808
   },
   {
     "nombre": "ItzeldeJesus",
@@ -50715,10 +50172,10 @@ export const activeUsers = [
     "correo": "i.castillo231293@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525522162149,
-    "stripe_id": "cus_NgwWOEDAO2bZ6a",
-    "final_date": 1691730000,
-    "id": 42844,
-    "level": 1
+    "conekta_id": "cus_2uQhT4G3GXsT7zhjt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42844
   },
   {
     "nombre": "Rocio",
@@ -50726,10 +50183,10 @@ export const activeUsers = [
     "correo": "ro.rocio74@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526642208604,
-    "stripe_id": "cus_NgwW8kWrEnVPP7",
-    "final_date": 1691730000,
-    "id": 42855,
-    "level": 1
+    "conekta_id": "cus_2uQhT4ZZFcd3p1LRC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42855
   },
   {
     "nombre": "GreciaXscareth",
@@ -50737,10 +50194,10 @@ export const activeUsers = [
     "correo": "xscarethcr@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561803410,
-    "stripe_id": "cus_NgwSREggFYJxEH",
-    "final_date": 1691730000,
-    "id": 42863,
-    "level": 1
+    "conekta_id": "cus_2uQhT5JNmpBhSGzuy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42863
   },
   {
     "nombre": "Laura",
@@ -50748,10 +50205,9 @@ export const activeUsers = [
     "correo": "arudi044@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221771077,
-    "stripe_id": "cus_NgwZDmBjDloKQ0",
     "final_date": 1689050000,
-    "id": 42872,
-    "level": 1
+    "level": 1,
+    "id": 42872
   },
   {
     "nombre": "Estefany",
@@ -50759,10 +50215,10 @@ export const activeUsers = [
     "correo": "esanchezheredia@hotmail.com",
     "pais": "Dominican Republic",
     "whatsapp": 18094908283,
-    "stripe_id": "cus_NgwLyxrE4XOTNJ",
-    "final_date": 1691730000,
-    "id": 42897,
-    "level": 1
+    "conekta_id": "cus_2uQhT63CJ1kM5Yexp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42897
   },
   {
     "nombre": "AdrianaWendoline",
@@ -50770,10 +50226,10 @@ export const activeUsers = [
     "correo": "wenhurtado35@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525554605343,
-    "stripe_id": "cus_NgwLv2ka3B2ODB",
-    "final_date": 1691690000,
-    "id": 42899,
-    "level": 1
+    "conekta_id": "cus_2uQhT6UVq8ZQ55LdG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42899
   },
   {
     "nombre": "Jaqueline",
@@ -50781,10 +50237,10 @@ export const activeUsers = [
     "correo": "tellezjack@icloud.com",
     "pais": "Mexico",
     "whatsapp": 527331555413,
-    "stripe_id": "cus_NgwSkxto5UNoto",
-    "final_date": 1691730000,
-    "id": 42930,
-    "level": 1
+    "conekta_id": "cus_2uQhT7WqLQseK5zPM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42930
   },
   {
     "nombre": "KarlaArely",
@@ -50792,10 +50248,10 @@ export const activeUsers = [
     "correo": "karligea20@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524441300115,
-    "stripe_id": "cus_NgwQOWWL3oIa0g",
-    "final_date": 1691730000,
-    "id": 42988,
-    "level": 1
+    "conekta_id": "cus_2uQhT7Tfy2WwjH3ZX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 42988
   },
   {
     "nombre": "judit guadalupe",
@@ -50803,10 +50259,10 @@ export const activeUsers = [
     "correo": "juditguadalupehernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530220905,
-    "stripe_id": "cus_NgwSSATaR62OVm",
-    "final_date": 1691730000,
-    "id": 43000,
-    "level": 1
+    "conekta_id": "cus_2uQhT88inDePfeA6y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43000
   },
   {
     "nombre": "MariaAlejandra",
@@ -50814,10 +50270,10 @@ export const activeUsers = [
     "correo": "alejim103@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529831831511,
-    "stripe_id": "cus_NgwMkFhkpxoE3r",
-    "final_date": 1691730000,
-    "id": 43024,
-    "level": 1
+    "conekta_id": "cus_2uQhT8gxPjFLyVavq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43024
   },
   {
     "nombre": "Débora",
@@ -50825,10 +50281,10 @@ export const activeUsers = [
     "correo": "debynimzii@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526648212708,
-    "stripe_id": "cus_NgwMheEO2k6375",
-    "final_date": 1691730000,
-    "id": 43027,
-    "level": 1
+    "conekta_id": "cus_2uQhT8hXcKuHWVsJy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43027
   },
   {
     "nombre": "Montserrat",
@@ -50836,10 +50292,10 @@ export const activeUsers = [
     "correo": "monsunset@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525614729504,
-    "stripe_id": "cus_NgwMdpKdbsBX6A",
-    "final_date": 1691730000,
-    "id": 43029,
-    "level": 1
+    "conekta_id": "cus_2uQhT9jHu1ZbCtyT6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43029
   },
   {
     "nombre": "Doris",
@@ -50847,10 +50303,10 @@ export const activeUsers = [
     "correo": "fernandezdoris723@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529848076521,
-    "stripe_id": "cus_NgwR2HOxEkdlpw",
-    "final_date": 1691730000,
-    "id": 43032,
-    "level": 1
+    "conekta_id": "cus_2uQhTABAej2am3CJ8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43032
   },
   {
     "nombre": "maribel",
@@ -50858,10 +50314,10 @@ export const activeUsers = [
     "correo": "chicbella_98@icloud.com",
     "pais": "Mexico",
     "whatsapp": 526413528251,
-    "stripe_id": "cus_Ngxks6V5TrmErM",
-    "final_date": 1691730000,
-    "id": 43033,
-    "level": 1
+    "conekta_id": "cus_2uQhTB9ma2LBrdN2Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43033
   },
   {
     "nombre": "Jazmin",
@@ -50869,10 +50325,10 @@ export const activeUsers = [
     "correo": "jazmintor@live.com",
     "pais": "Mexico",
     "whatsapp": 527222404639,
-    "stripe_id": "cus_NgwPGLSjszKwiu",
-    "final_date": 1691730000,
-    "id": 43051,
-    "level": 1
+    "conekta_id": "cus_2uQhTBppPDTdp18Sg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43051
   },
   {
     "nombre": "Araceli",
@@ -50880,10 +50336,10 @@ export const activeUsers = [
     "correo": "aracasvel@live.com",
     "pais": "Mexico",
     "whatsapp": 525549173625,
-    "stripe_id": "cus_NgwLMm2Kxuu2XU",
-    "final_date": 1691730000,
-    "id": 43054,
-    "level": 1
+    "conekta_id": "cus_2uQhTBwkTcFY2Zazx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43054
   },
   {
     "nombre": "rosalina",
@@ -50891,10 +50347,10 @@ export const activeUsers = [
     "correo": "rosalina.fragua@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522293379178,
-    "stripe_id": "cus_NgwMpaw1AVvKN8",
-    "final_date": 1691730000,
-    "id": 43056,
-    "level": 1
+    "conekta_id": "cus_2uQhTCdQcRTVCWBGP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43056
   },
   {
     "nombre": "JacintaGraciela",
@@ -50902,10 +50358,10 @@ export const activeUsers = [
     "correo": "jasgreis.so@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525569067942,
-    "stripe_id": "cus_NgwMCpPnL1RPeN",
-    "final_date": 1691730000,
-    "id": 43063,
-    "level": 1
+    "conekta_id": "cus_2uQhTDRPW1NqKFJLM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43063
   },
   {
     "nombre": "Rocio",
@@ -50913,10 +50369,10 @@ export const activeUsers = [
     "correo": "salazarnrocio29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525536056595,
-    "stripe_id": "cus_NgwMMpCGpCIYtT",
-    "final_date": 1691730000,
-    "id": 43064,
-    "level": 1
+    "conekta_id": "cus_2uQhTDrh38BtFWL9H",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43064
   },
   {
     "nombre": "MarielaNoemi",
@@ -50924,10 +50380,10 @@ export const activeUsers = [
     "correo": "marii0612@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525527301109,
-    "stripe_id": "cus_NkDuLrNMqgyvbP",
-    "final_date": 1692580000,
-    "id": 43073,
-    "level": 1
+    "conekta_id": "cus_2uQhTE73epanQPV2j",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43073
   },
   {
     "nombre": "karlavianey",
@@ -50935,10 +50391,9 @@ export const activeUsers = [
     "correo": "cabkarla6@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529831374571,
-    "stripe_id": "cus_NlpQ3erUAKJ39a",
     "final_date": 1748040000,
-    "id": 43075,
-    "level": 0
+    "level": 0,
+    "id": 43075
   },
   {
     "nombre": "ROSALIA",
@@ -50946,10 +50401,10 @@ export const activeUsers = [
     "correo": "flashlizsg@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525510728204,
-    "stripe_id": "cus_NgwstmA5LTZQiq",
-    "final_date": 1691730000,
-    "id": 43159,
-    "level": 1
+    "conekta_id": "cus_2uQhTFLuJ7y8BqAZt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43159
   },
   {
     "nombre": "sadyJaneth",
@@ -50957,10 +50412,10 @@ export const activeUsers = [
     "correo": "janis948718@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529624196653,
-    "stripe_id": "cus_NgwLWFHW63XcSR",
-    "final_date": 1691730000,
-    "id": 43198,
-    "level": 1
+    "conekta_id": "cus_2uQhTGFjWQqXZd7RQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43198
   },
   {
     "nombre": "ana",
@@ -50968,10 +50423,10 @@ export const activeUsers = [
     "correo": "mendozaanny492@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18327820655,
-    "stripe_id": "cus_NgwOy9zMbVQWsw",
-    "final_date": 1691730000,
-    "id": 43215,
-    "level": 1
+    "conekta_id": "cus_2uQhTG5ipKXmqf8CQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43215
   },
   {
     "nombre": "DannaPaola",
@@ -50979,10 +50434,10 @@ export const activeUsers = [
     "correo": "dannapao190107@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522761005366,
-    "stripe_id": "cus_NgwQ6gwmWpV16v",
-    "final_date": 1691730000,
-    "id": 43219,
-    "level": 1
+    "conekta_id": "cus_2uQhTGoy7vSUoGCup",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43219
   },
   {
     "nombre": "Julia",
@@ -50990,10 +50445,10 @@ export const activeUsers = [
     "correo": "julianuez44@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 18163289419,
-    "stripe_id": "cus_NgwMf0wmOuP3hg",
-    "final_date": 1691730000,
-    "id": 43220,
-    "level": 1
+    "conekta_id": "cus_2uQhTHo9FpQ2V4LUc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43220
   },
   {
     "nombre": "norma",
@@ -51001,10 +50456,10 @@ export const activeUsers = [
     "correo": "normadhg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583198729,
-    "stripe_id": "cus_NgwMCH1iLEwBjl",
-    "final_date": 1692840000,
-    "id": 43244,
-    "level": 1
+    "conekta_id": "cus_2uQhTJb89QKNezZSZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43244
   },
   {
     "nombre": "Diana Janeth",
@@ -51012,10 +50467,10 @@ export const activeUsers = [
     "correo": "dianavelazquez269@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526566458357,
-    "stripe_id": "cus_NgwNdxurRF0dGG",
-    "final_date": 1691730000,
-    "id": 43248,
-    "level": 1
+    "conekta_id": "cus_2uQhTK2RgX8RjGsp7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43248
   },
   {
     "nombre": "MayelaGuadalupe",
@@ -51023,10 +50478,10 @@ export const activeUsers = [
     "correo": "mayelasaucedo1306@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528130931894,
-    "stripe_id": "cus_NgwVK2FEGi5XQG",
-    "final_date": 1691810000,
-    "id": 43287,
-    "level": 1
+    "conekta_id": "cus_2uQhTKmpRKM1y1Sf1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43287
   },
   {
     "nombre": "EleryLizeth",
@@ -51034,10 +50489,10 @@ export const activeUsers = [
     "correo": "lizlopez200518@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513057929,
-    "stripe_id": "cus_NgwYPe4ilD4hpy",
-    "final_date": 1691730000,
-    "id": 43290,
-    "level": 1
+    "conekta_id": "cus_2uQhTL1bpR5yQYnzj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43290
   },
   {
     "nombre": "AnaCristina",
@@ -51045,10 +50500,10 @@ export const activeUsers = [
     "correo": "fonsecacristy11@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524411018307,
-    "stripe_id": "cus_NgwNKLVM7UjJTK",
-    "final_date": 1691730000,
-    "id": 43292,
-    "level": 1
+    "conekta_id": "cus_2uQhTLkRLced2pTVK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43292
   },
   {
     "nombre": "crisselGuadalupe",
@@ -51056,10 +50511,10 @@ export const activeUsers = [
     "correo": "crissel_tglv@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529661136800,
-    "stripe_id": "cus_NgwNtRrld3Lo6b",
-    "final_date": 1691730000,
-    "id": 43294,
-    "level": 1
+    "conekta_id": "cus_2uQhTMFTTiUKDYmeE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43294
   },
   {
     "nombre": "Karen",
@@ -51067,10 +50522,10 @@ export const activeUsers = [
     "correo": "karenkaflaca@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525591614238,
-    "stripe_id": "cus_NgwNi2dPwILahA",
-    "final_date": 1691730000,
-    "id": 43343,
-    "level": 1
+    "conekta_id": "cus_2uQhTMzGyv2xqpS8z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43343
   },
   {
     "nombre": "GemaGuadalupe",
@@ -51078,10 +50533,9 @@ export const activeUsers = [
     "correo": "lgema1724@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510740011,
-    "stripe_id": "cus_NgwNAPgWCn9BKu",
     "final_date": 1689050000,
-    "id": 43356,
-    "level": 1
+    "level": 1,
+    "id": 43356
   },
   {
     "nombre": "Leticia",
@@ -51089,10 +50543,10 @@ export const activeUsers = [
     "correo": "leticiasantosca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522221350068,
-    "stripe_id": "cus_NgwUqXHKTdWzv4",
-    "final_date": 1691780000,
-    "id": 43358,
-    "level": 1
+    "conekta_id": "cus_2uQhTP23GbhGSkvkb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43358
   },
   {
     "nombre": "CarmenFlor",
@@ -51100,10 +50554,10 @@ export const activeUsers = [
     "correo": "florislas41@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525577596022,
-    "stripe_id": "cus_NgwN7LMn2lPsr8",
-    "final_date": 1691730000,
-    "id": 43399,
-    "level": 1
+    "conekta_id": "cus_2uQhTPhhRQuDVDeQg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43399
   },
   {
     "nombre": "EVELYN MAYERLY",
@@ -51111,10 +50565,10 @@ export const activeUsers = [
     "correo": "flaco21111@hotmail.com",
     "pais": "Colombia",
     "whatsapp": 573137045142,
-    "stripe_id": "cus_NgwQ0leVG7mai8",
-    "final_date": 1691780000,
-    "id": 43409,
-    "level": 1
+    "conekta_id": "cus_2uQhTPTv2KAG6Mm8D",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43409
   },
   {
     "nombre": "JUANVICTOR",
@@ -51122,10 +50576,10 @@ export const activeUsers = [
     "correo": "johann.estrada.97@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524581443427,
-    "stripe_id": "cus_NgwNN6D5R6gppG",
-    "final_date": 1691730000,
-    "id": 43411,
-    "level": 1
+    "conekta_id": "cus_2uQhTQVgJzpZiJFKN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43411
   },
   {
     "nombre": "jaqueline",
@@ -51133,10 +50587,9 @@ export const activeUsers = [
     "correo": "jakis_810@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527721348182,
-    "stripe_id": "cus_NlpQc0shwhv4Y8",
     "final_date": 0,
-    "id": 43414,
-    "level": 1
+    "level": 1,
+    "id": 43414
   },
   {
     "nombre": "mariadelcarmen",
@@ -51144,10 +50597,10 @@ export const activeUsers = [
     "correo": "marygom.nett@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525579765670,
-    "stripe_id": "cus_NgwQeMd8pHM7pU",
-    "final_date": 1686460000,
-    "id": 43422,
-    "level": 1
+    "conekta_id": "cus_2uQhTRBLTp2WnSSTk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43422
   },
   {
     "nombre": "nayeli",
@@ -51155,10 +50608,10 @@ export const activeUsers = [
     "correo": "naymike_2287@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525631062224,
-    "stripe_id": "cus_NgwMD8JWwnoO79",
-    "final_date": 1691730000,
-    "id": 43423,
-    "level": 1
+    "conekta_id": "cus_2uQhTRgNaurCyAkbs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43423
   },
   {
     "nombre": "Teresita",
@@ -51166,10 +50619,10 @@ export const activeUsers = [
     "correo": "ereth03@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522226528144,
-    "stripe_id": "cus_NgwPNMF0TSbMNA",
-    "final_date": 1691780000,
-    "id": 43424,
-    "level": 1
+    "conekta_id": "cus_2uQhTSbCoCicFEqVj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43424
   },
   {
     "nombre": "mariafernanda",
@@ -51177,10 +50630,10 @@ export const activeUsers = [
     "correo": "fer.bv.98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527293461147,
-    "stripe_id": "cus_NgwOLcRUrdMmKs",
-    "final_date": 1691730000,
-    "id": 43426,
-    "level": 1
+    "conekta_id": "cus_2uQhTTL2KQHG17dsk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43426
   },
   {
     "nombre": "yazminesmeralda",
@@ -51188,10 +50641,10 @@ export const activeUsers = [
     "correo": "yasminesmeralda0206@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523311776751,
-    "stripe_id": "cus_NgwSB68zw6lnPg",
-    "final_date": 1691730000,
-    "id": 43433,
-    "level": 1
+    "conekta_id": "cus_2uQhTTL2KQHFsWVzc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43433
   },
   {
     "nombre": "Rosario",
@@ -51199,10 +50652,9 @@ export const activeUsers = [
     "correo": "roman.sharon24@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522721110029,
-    "stripe_id": "cus_NgwMqqb0TaK9Pg",
     "final_date": 1689050000,
-    "id": 43436,
-    "level": 1
+    "level": 1,
+    "id": 43436
   },
   {
     "nombre": "WuandaTamara",
@@ -51210,10 +50662,10 @@ export const activeUsers = [
     "correo": "wuandaleal23@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527751508496,
-    "stripe_id": "cus_Ngxo96PqiHc7MZ",
-    "final_date": 1691640000,
-    "id": 43441,
-    "level": 1
+    "conekta_id": "cus_2uQhTUsS4oqks7HrW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43441
   },
   {
     "nombre": "YeniGuadalupe",
@@ -51221,10 +50673,10 @@ export const activeUsers = [
     "correo": "lupitha8837.yl@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529161501000,
-    "stripe_id": "cus_NgwNpHMrgePX7l",
-    "final_date": 1691730000,
-    "id": 43459,
-    "level": 1
+    "conekta_id": "cus_2uQhTUvbSCCTQmrME",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43459
   },
   {
     "nombre": "Marisol",
@@ -51232,10 +50684,10 @@ export const activeUsers = [
     "correo": "arq.marisol.jp@outlook.es",
     "pais": "Mexico",
     "whatsapp": 523313108358,
-    "stripe_id": "cus_NgwMcvXraAC3RO",
-    "final_date": 1691730000,
-    "id": 43460,
-    "level": 1
+    "conekta_id": "cus_2uQhTVfQxPm733Wr2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43460
   },
   {
     "nombre": "MariaConcepcion",
@@ -51243,10 +50695,10 @@ export const activeUsers = [
     "correo": "connycg2006@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525564257575,
-    "stripe_id": "cus_NgwQwbse9fUxde",
-    "final_date": 1691730000,
-    "id": 43485,
-    "level": 1
+    "conekta_id": "cus_2uQhTW7Hi7E6eL7gT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43485
   },
   {
     "nombre": "Sodelva A.",
@@ -51254,10 +50706,10 @@ export const activeUsers = [
     "correo": "sodelva.ramirez@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525534479609,
-    "stripe_id": "cus_NgwN3JfxwpxDpX",
-    "final_date": 1691730000,
-    "id": 43490,
-    "level": 1
+    "conekta_id": "cus_2uQhTWqY1i8ohzEsF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43490
   },
   {
     "nombre": "KarinaLizeth",
@@ -51265,10 +50717,10 @@ export const activeUsers = [
     "correo": "lizethkarinacasas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526161217332,
-    "stripe_id": "cus_NgwOcm91t0u6ec",
-    "final_date": 1691730000,
-    "id": 43519,
-    "level": 1
+    "conekta_id": "cus_2uQhTXaMXuhTMsAAn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43519
   },
   {
     "nombre": "EstrellaGuadalupe",
@@ -51276,10 +50728,9 @@ export const activeUsers = [
     "correo": "estrellaq910223@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525525700342,
-    "stripe_id": "cus_NgwStbS3mt6x16",
     "final_date": 1689050000,
-    "id": 43569,
-    "level": 1
+    "level": 1,
+    "id": 43569
   },
   {
     "nombre": "Yoselin",
@@ -51287,10 +50738,10 @@ export const activeUsers = [
     "correo": "yozerony13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525544531288,
-    "stripe_id": "cus_NgwNb2JyOWTd9J",
-    "final_date": 1691730000,
-    "id": 43631,
-    "level": 1
+    "conekta_id": "cus_2uQhTYKB47G6z8pfM",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43631
   },
   {
     "nombre": "JuliaBerenice",
@@ -51298,10 +50749,10 @@ export const activeUsers = [
     "correo": "jbererh@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631025767,
-    "stripe_id": "cus_NgwVDOTMQV4lnx",
-    "final_date": 1691730000,
-    "id": 43656,
-    "level": 1
+    "conekta_id": "cus_2uQhTYVkxoDoFQ9T1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43656
   },
   {
     "nombre": "mariaelena",
@@ -51309,10 +50760,10 @@ export const activeUsers = [
     "correo": "polancoriveramariaelena27@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18067300512,
-    "stripe_id": "cus_NgwNcBRS4bSBWO",
-    "final_date": 1691730000,
-    "id": 43667,
-    "level": 1
+    "conekta_id": "cus_2uQhTZ4ZnuUhCK6NF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43667
   },
   {
     "nombre": "DenisseMonserrat",
@@ -51320,10 +50771,10 @@ export const activeUsers = [
     "correo": "denymon851@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524426686325,
-    "stripe_id": "cus_NgwRQhSWSpUc3d",
-    "final_date": 1691730000,
-    "id": 43711,
-    "level": 1
+    "conekta_id": "cus_2uQhTZnp6WPQ8oFSj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43711
   },
   {
     "nombre": "TaniadelCarmen",
@@ -51331,10 +50782,10 @@ export const activeUsers = [
     "correo": "tan_go16@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525532727006,
-    "stripe_id": "cus_NgwNgnYq5jxNuj",
-    "final_date": 1691730000,
-    "id": 43712,
-    "level": 1
+    "conekta_id": "cus_2uQhTaiDXPukFpGnq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43712
   },
   {
     "nombre": "Odalis",
@@ -51342,10 +50793,10 @@ export const activeUsers = [
     "correo": "delgadodalis103@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524961248010,
-    "stripe_id": "cus_NgwS6ylgXWeaFc",
-    "final_date": 1691730000,
-    "id": 43713,
-    "level": 1
+    "conekta_id": "cus_2uQhTbWokbubaskZf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43713
   },
   {
     "nombre": "IrisSujey",
@@ -51353,10 +50804,9 @@ export const activeUsers = [
     "correo": "castanedasujey7@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527131087594,
-    "stripe_id": "cus_NgwTG1BliRnstP",
     "final_date": 1689050000,
-    "id": 43734,
-    "level": 1
+    "level": 1,
+    "id": 43734
   },
   {
     "nombre": "EsthelaThalia",
@@ -51364,10 +50814,10 @@ export const activeUsers = [
     "correo": "thali23cantero@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525614695530,
-    "stripe_id": "cus_NgwObqpP2WtpAv",
-    "final_date": 1691730000,
-    "id": 43741,
-    "level": 1
+    "conekta_id": "cus_2uQhTbH2MWAe2DmAP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43741
   },
   {
     "nombre": "verónicaxitlalli",
@@ -51375,10 +50825,10 @@ export const activeUsers = [
     "correo": "vero.080297@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524523057761,
-    "stripe_id": "cus_NgwNSjIg1Zksmf",
-    "final_date": 1691730000,
-    "id": 43759,
-    "level": 1
+    "conekta_id": "cus_2uQhTcFdGoUF7ovmX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43759
   },
   {
     "nombre": "Fernanda",
@@ -51386,10 +50836,10 @@ export const activeUsers = [
     "correo": "feergrimaldo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525587382806,
-    "stripe_id": "cus_NgwNS9qlnR1Pik",
-    "final_date": 1691730000,
-    "id": 43764,
-    "level": 1
+    "conekta_id": "cus_2uQhTd3cAPPbNxfGA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43764
   },
   {
     "nombre": "dianakaren",
@@ -51397,10 +50847,10 @@ export const activeUsers = [
     "correo": "pekorrinydiana@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526648040017,
-    "stripe_id": "cus_NgwNp4Dk0OEiV4",
-    "final_date": 1691450000,
-    "id": 43795,
-    "level": 1
+    "conekta_id": "cus_2uQhTdVUv6razrMgW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43795
   },
   {
     "nombre": "lizbeth",
@@ -51408,10 +50858,10 @@ export const activeUsers = [
     "correo": "lizbethdm1502@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523326032130,
-    "stripe_id": "cus_NgwNtAwIE7SsfU",
-    "final_date": 1691730000,
-    "id": 43817,
-    "level": 1
+    "conekta_id": "cus_2uQhTeU5qQAC5xQYa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43817
   },
   {
     "nombre": "Aide",
@@ -51419,10 +50869,10 @@ export const activeUsers = [
     "correo": "aidenohemisantillanpaez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526182769889,
-    "stripe_id": "cus_NgwOv13bjc7etB",
-    "final_date": 1691730000,
-    "id": 43838,
-    "level": 1
+    "conekta_id": "cus_2uQhTeDjDhmHtREQC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43838
   },
   {
     "nombre": "américayoselyn",
@@ -51430,10 +50880,10 @@ export const activeUsers = [
     "correo": "yoselyn941999@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525579818814,
-    "stripe_id": "cus_NgwNnGkJP80Fj3",
-    "final_date": 1691730000,
-    "id": 43876,
-    "level": 1
+    "conekta_id": "cus_2uQhTfG4iz5YFmekD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43876
   },
   {
     "nombre": "Mericia Nereyda",
@@ -51441,10 +50891,9 @@ export const activeUsers = [
     "correo": "ciemarfermon@gmail.com",
     "pais": "Chile",
     "whatsapp": 56979387471,
-    "stripe_id": "cus_NgwNDm19SLxXfe",
     "final_date": 1689050000,
-    "id": 43890,
-    "level": 1
+    "level": 1,
+    "id": 43890
   },
   {
     "nombre": "perlaMireya",
@@ -51452,10 +50901,9 @@ export const activeUsers = [
     "correo": "mireyayantonio.82@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545159519,
-    "stripe_id": "cus_NgwWdHJhtGcwZK",
     "final_date": 1686460000,
-    "id": 43894,
-    "level": 1
+    "level": 1,
+    "id": 43894
   },
   {
     "nombre": "PaolaYanely",
@@ -51463,10 +50911,10 @@ export const activeUsers = [
     "correo": "ppola_yanely02@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529993099734,
-    "stripe_id": "cus_NgxFxJlWx65Woo",
-    "final_date": 1691630000,
-    "id": 43933,
-    "level": 1
+    "conekta_id": "cus_2uQhTfhNG6tbDECmo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 43933
   },
   {
     "nombre": "AlmaV.",
@@ -51474,10 +50922,10 @@ export const activeUsers = [
     "correo": "mega.911018@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532146247,
-    "stripe_id": "cus_NgwNHE8ATZFlp6",
-    "final_date": 1691730000,
-    "id": 44044,
-    "level": 1
+    "conekta_id": "cus_2uQhTgcmgzQwBXMk3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44044
   },
   {
     "nombre": "Cristina",
@@ -51485,10 +50933,10 @@ export const activeUsers = [
     "correo": "crisibarra1299@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529621040397,
-    "stripe_id": "cus_NgwOZibwEoegVI",
-    "final_date": 1691730000,
-    "id": 44081,
-    "level": 1
+    "conekta_id": "cus_2uQhThBaX6fq8CgA4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44081
   },
   {
     "nombre": "CarmenEmiret",
@@ -51496,10 +50944,10 @@ export const activeUsers = [
     "correo": "emiretgarfias922@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524433251427,
-    "stripe_id": "cus_NgwNesQP21RFaI",
-    "final_date": 1691730000,
-    "id": 44127,
-    "level": 1
+    "conekta_id": "cus_2uQhTi6QjPYES4gjC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44127
   },
   {
     "nombre": "NaaraMarlene",
@@ -51507,10 +50955,10 @@ export const activeUsers = [
     "correo": "naaracruz7@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711586682,
-    "stripe_id": "cus_NlpSXCEMxTn4eF",
-    "final_date": 1693700000,
-    "id": 44131,
-    "level": 1
+    "conekta_id": "cus_2uQhTifDZVo8GvQ72",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44131
   },
   {
     "nombre": "karla",
@@ -51518,10 +50966,10 @@ export const activeUsers = [
     "correo": "criamar_007@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526131413576,
-    "stripe_id": "cus_NgwOe9CCMVTTDx",
-    "final_date": 1691730000,
-    "id": 44141,
-    "level": 1
+    "conekta_id": "cus_2uQhTja3mnfXgc1iX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44141
   },
   {
     "nombre": "tlaneziMargarita",
@@ -51529,10 +50977,20 @@ export const activeUsers = [
     "correo": "tlanetemp.98@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525535053570,
-    "stripe_id": "cus_NgwOMoEVvoCUWm",
-    "final_date": 1691730000,
-    "id": 44146,
-    "level": 1
+    "conekta_id": "cus_2uQhTk8HPJGUtaYM2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44146
+  },
+  {
+    "nombre": "Verónica",
+    "apellido": "Hernández",
+    "correo": "verohdz.2024@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 525546421704,
+    "final_date": 1724200000,
+    "level": 0,
+    "id": 44178
   },
   {
     "nombre": "ANGELES",
@@ -51540,10 +50998,10 @@ export const activeUsers = [
     "correo": "angeles-m25@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529991742830,
-    "stripe_id": "cus_NgwNKePhaVb6N4",
-    "final_date": 1691730000,
-    "id": 44182,
-    "level": 1
+    "conekta_id": "cus_2uQhTk8rbtvRXTj6d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44182
   },
   {
     "nombre": "sandymayela",
@@ -51551,10 +51009,9 @@ export const activeUsers = [
     "correo": "sandyquintanilla95@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524491371481,
-    "stripe_id": "cus_NhqzSFlk3E7AQI",
     "final_date": 1689350000,
-    "id": 44186,
-    "level": 1
+    "level": 1,
+    "id": 44186
   },
   {
     "nombre": "Gabriela",
@@ -51562,10 +51019,10 @@ export const activeUsers = [
     "correo": "gabiymo0890@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522212498066,
-    "stripe_id": "cus_NgwNtaZ5Wcz1Bw",
-    "final_date": 1689050000,
-    "id": 44226,
-    "level": 1
+    "conekta_id": "cus_2uQhTks6uVq8WrCqw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44226
   },
   {
     "nombre": "Paola",
@@ -51573,10 +51030,9 @@ export const activeUsers = [
     "correo": "toribiopaola25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525637075266,
-    "stripe_id": "cus_NgwTmzdWLicfv5",
     "final_date": 1686520000,
-    "id": 44238,
-    "level": 1
+    "level": 1,
+    "id": 44238
   },
   {
     "nombre": "KarinaGuadalupe",
@@ -51584,10 +51040,10 @@ export const activeUsers = [
     "correo": "kary.mv27@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527771391305,
-    "stripe_id": "cus_NgwOr4AOjZY82c",
-    "final_date": 1691730000,
-    "id": 44240,
-    "level": 1
+    "conekta_id": "cus_2uQhTnXKrav8BgfhA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44240
   },
   {
     "nombre": "AlejandraAlicia",
@@ -51595,10 +51051,10 @@ export const activeUsers = [
     "correo": "ale-butron@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525563190860,
-    "stripe_id": "cus_NgwPJRiaoWC93S",
-    "final_date": 1691730000,
-    "id": 44267,
-    "level": 1
+    "conekta_id": "cus_2uQhTo68ghB25ShiK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44267
   },
   {
     "nombre": "DianaJaneth",
@@ -51606,10 +51062,9 @@ export const activeUsers = [
     "correo": "janethguerrerolopez699@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529821314907,
-    "stripe_id": "cus_NgwO0Dv1FJemnG",
     "final_date": 1689050000,
-    "id": 44273,
-    "level": 1
+    "level": 1,
+    "id": 44273
   },
   {
     "nombre": "INGRITHMARGELY",
@@ -51617,10 +51072,10 @@ export const activeUsers = [
     "correo": "inmarel13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529851110026,
-    "stripe_id": "cus_NgwOmpWRlJHAWj",
-    "final_date": 1691730000,
-    "id": 44293,
-    "level": 1
+    "conekta_id": "cus_2uQhTp7tyNqKiwV8W",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44293
   },
   {
     "nombre": "KETZYAVALERIA",
@@ -51628,10 +51083,10 @@ export const activeUsers = [
     "correo": "valeriamena.vm01@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524495853141,
-    "stripe_id": "cus_NgwOwsvpLIvTHC",
-    "final_date": 1691730000,
-    "id": 44325,
-    "level": 1
+    "conekta_id": "cus_2uQhTopNzJ5j7okzk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44325
   },
   {
     "nombre": "karina",
@@ -51639,10 +51094,10 @@ export const activeUsers = [
     "correo": "cielorojo08@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524271281057,
-    "stripe_id": "cus_NgwNGYkhHsqaI2",
-    "final_date": 1691730000,
-    "id": 44328,
-    "level": 1
+    "conekta_id": "cus_2uQhTpZmj6JKKz2hw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44328
   },
   {
     "nombre": "Analid",
@@ -51650,10 +51105,10 @@ export const activeUsers = [
     "correo": "analidteuci@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527331702868,
-    "stripe_id": "cus_NgwURLZ9wmvKpl",
-    "final_date": 1686460000,
-    "id": 44332,
-    "level": 1
+    "conekta_id": "cus_2uQhTqYNePbvUX6nN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44332
   },
   {
     "nombre": "rosalinda",
@@ -51661,10 +51116,10 @@ export const activeUsers = [
     "correo": "rosalindaramirezhdz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528181756176,
-    "stripe_id": "cus_NgwPQQPh1lrrNV",
-    "final_date": 1691820000,
-    "id": 44333,
-    "level": 1
+    "conekta_id": "cus_2uQhTr3QmVRcaXMgw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44333
   },
   {
     "nombre": "IlseVanity",
@@ -51672,10 +51127,10 @@ export const activeUsers = [
     "correo": "vanity055@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526183189960,
-    "stripe_id": "cus_NgwO8Fn2VZj6lF",
-    "final_date": 1691730000,
-    "id": 44344,
-    "level": 1
+    "conekta_id": "cus_2uQhTrnEHgzGCo2BT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44344
   },
   {
     "nombre": "Valeria",
@@ -51683,10 +51138,10 @@ export const activeUsers = [
     "correo": "valeriarg4l87@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511315946,
-    "stripe_id": "cus_NgwQ1gIEbm7Ckl",
-    "final_date": 1691730000,
-    "id": 44404,
-    "level": 1
+    "conekta_id": "cus_2uQhTs5B4B5vE297D",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44404
   },
   {
     "nombre": "MariadelConsuelo",
@@ -51694,10 +51149,10 @@ export const activeUsers = [
     "correo": "chelitomartinezromero@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522711470289,
-    "stripe_id": "cus_NgwRhMictolxto",
-    "final_date": 1691730000,
-    "id": 44434,
-    "level": 1
+    "conekta_id": "cus_2uQhTsozaNeZrHoc2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44434
   },
   {
     "nombre": "HassielMontserrat",
@@ -51705,10 +51160,10 @@ export const activeUsers = [
     "correo": "hassielita@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523324334764,
-    "stripe_id": "cus_NgwOGLtl014DMD",
-    "final_date": 1691730000,
-    "id": 44448,
-    "level": 1
+    "conekta_id": "cus_2uQhTtRt2BRKBqyeN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44448
   },
   {
     "nombre": "patriciaguadalupe",
@@ -51716,10 +51171,10 @@ export const activeUsers = [
     "correo": "pattyfernandez257@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314280792,
-    "stripe_id": "cus_NgwOdjIFbcCopj",
-    "final_date": 1691730000,
-    "id": 44469,
-    "level": 1
+    "conekta_id": "cus_2uQhTtFJ7VTcqpV9K",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44469
   },
   {
     "nombre": "Yetcel Aline",
@@ -51727,10 +51182,10 @@ export const activeUsers = [
     "correo": "alinzitaanaiia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525613602091,
-    "stripe_id": "cus_NgwO3vjp53t1UJ",
-    "final_date": 1691730000,
-    "id": 44471,
-    "level": 1
+    "conekta_id": "cus_2uQhTtz7dh2GU69dp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44471
   },
   {
     "nombre": "AnaBertha",
@@ -51738,10 +51193,10 @@ export const activeUsers = [
     "correo": "anyvences2511@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527228410314,
-    "stripe_id": "cus_NgwPFl9Bzg4xR8",
-    "final_date": 1691730000,
-    "id": 44488,
-    "level": 1
+    "conekta_id": "cus_2uQhTv2T8yLWmAvbV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44488
   },
   {
     "nombre": "Arlena",
@@ -51749,10 +51204,10 @@ export const activeUsers = [
     "correo": "arlenamartinez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527581008899,
-    "stripe_id": "cus_NgwS6U2ERMgBmL",
-    "final_date": 1691730000,
-    "id": 44508,
-    "level": 1
+    "conekta_id": "cus_2uQhTvi7HnYTqu1RP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44508
   },
   {
     "nombre": "Livia",
@@ -51760,10 +51215,10 @@ export const activeUsers = [
     "correo": "mariposasecret25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525617264512,
-    "stripe_id": "cus_NgwOWEH7Dg6qhX",
-    "final_date": 1691730000,
-    "id": 44581,
-    "level": 1
+    "conekta_id": "cus_2uQhTveLan7G97C4s",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44581
   },
   {
     "nombre": "diana",
@@ -51771,10 +51226,10 @@ export const activeUsers = [
     "correo": "airamanaid_89@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525535101521,
-    "stripe_id": "cus_NgwP8w339Ezmud",
-    "final_date": 1691730000,
-    "id": 44622,
-    "level": 1
+    "conekta_id": "cus_2uQhTwSvoz77UAfvd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44622
   },
   {
     "nombre": "korayma",
@@ -51782,10 +51237,10 @@ export const activeUsers = [
     "correo": "koraimapadillacardenas@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526672646632,
-    "stripe_id": "cus_NgwSXG5J3XIRJQ",
-    "final_date": 1686460000,
-    "id": 44646,
-    "level": 1
+    "conekta_id": "cus_2uQhTxEuha2TYmQZ9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44646
   },
   {
     "nombre": "Karla",
@@ -51793,10 +51248,10 @@ export const activeUsers = [
     "correo": "mopuka1815@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525621355344,
-    "stripe_id": "cus_NgwQFNJ8GdIXv8",
-    "final_date": 1691730000,
-    "id": 44651,
-    "level": 1
+    "conekta_id": "cus_2uQhTxvZrPEQdNWXd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44651
   },
   {
     "nombre": "TeresitaLiliana",
@@ -51804,10 +51259,10 @@ export const activeUsers = [
     "correo": "gracefer02suazzo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524411151492,
-    "stripe_id": "cus_NgwPg7QDd6PFCM",
-    "final_date": 1691730000,
-    "id": 44678,
-    "level": 1
+    "conekta_id": "cus_2uQhTyR2ktQAFKPPX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44678
   },
   {
     "nombre": "LluviaNeri",
@@ -51815,10 +51270,10 @@ export const activeUsers = [
     "correo": "lluviajimenezhernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525527517791,
-    "stripe_id": "cus_NgwSdMwC4R92hS",
-    "final_date": 1686460000,
-    "id": 44687,
-    "level": 1
+    "conekta_id": "cus_2uQhTyR2ktQAFKPPi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44687
   },
   {
     "nombre": "liliana",
@@ -51826,10 +51281,10 @@ export const activeUsers = [
     "correo": "gadealili38@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511791374,
-    "stripe_id": "cus_NgwP39WaeIpmR1",
-    "final_date": 1691730000,
-    "id": 44702,
-    "level": 1
+    "conekta_id": "cus_2uQhTzQCtnMhyFKuH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44702
   },
   {
     "nombre": "Roció",
@@ -51837,10 +51292,10 @@ export const activeUsers = [
     "correo": "chiio7405@icloud.com",
     "pais": "Mexico",
     "whatsapp": 529983737381,
-    "stripe_id": "cus_NgwO3j5fs5XezC",
-    "final_date": 1691730000,
-    "id": 44758,
-    "level": 1
+    "conekta_id": "cus_2uQhU192QyvMWBW1Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44758
   },
   {
     "nombre": "Ma.Angelica",
@@ -51848,10 +51303,10 @@ export const activeUsers = [
     "correo": "ma.angiepadilla@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524771148992,
-    "stripe_id": "cus_NgwTOKdPTT11Id",
-    "final_date": 1691730000,
-    "id": 44759,
-    "level": 1
+    "conekta_id": "cus_2uQhU1sqwBV18TAW5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44759
   },
   {
     "nombre": "Joselin",
@@ -51859,10 +51314,10 @@ export const activeUsers = [
     "correo": "mercadojoselin09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522287540058,
-    "stripe_id": "cus_NgwRU6DnMtI3yp",
-    "final_date": 1691730000,
-    "id": 44781,
-    "level": 1
+    "conekta_id": "cus_2uQhU2YtkNcT1fNBt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44781
   },
   {
     "nombre": "Georgina",
@@ -51870,10 +51325,10 @@ export const activeUsers = [
     "correo": "ginanails.2015@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529371634460,
-    "stripe_id": "cus_NgwQRltgmKFqL5",
-    "final_date": 1691730000,
-    "id": 44789,
-    "level": 1
+    "conekta_id": "cus_2uQhU2YtkNcT9GW23",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44789
   },
   {
     "nombre": "marlaAMAIRANY",
@@ -51881,10 +51336,10 @@ export const activeUsers = [
     "correo": "amairanypadilla819@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529612886384,
-    "stripe_id": "cus_NgwQoXadw3tjZj",
-    "final_date": 1691730000,
-    "id": 44837,
-    "level": 1
+    "conekta_id": "cus_2uQhU378MtDQNfhre",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44837
   },
   {
     "nombre": "Rosalba",
@@ -51892,10 +51347,10 @@ export const activeUsers = [
     "correo": "torreshiguerarosalba@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526861640153,
-    "stripe_id": "cus_NgwQe0zfpT3Y1i",
-    "final_date": 1691730000,
-    "id": 44844,
-    "level": 1
+    "conekta_id": "cus_2uQhU3rX6gRzcQGjt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44844
   },
   {
     "nombre": "DIANA",
@@ -51903,10 +51358,9 @@ export const activeUsers = [
     "correo": "dianuxa1978@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527225385416,
-    "stripe_id": "cus_NgwRmO3ZV1y7mD",
     "final_date": 1689050000,
-    "id": 44853,
-    "level": 1
+    "level": 1,
+    "id": 44853
   },
   {
     "nombre": "Analee",
@@ -51914,10 +51368,10 @@ export const activeUsers = [
     "correo": "velvethbcc18@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50245387983,
-    "stripe_id": "cus_NgwPAEJDQTo4D7",
-    "final_date": 1691730000,
-    "id": 44925,
-    "level": 1
+    "conekta_id": "cus_2uQhU4amQHLhdD2qb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 44925
   },
   {
     "nombre": "Alejandra",
@@ -51925,10 +51379,10 @@ export const activeUsers = [
     "correo": "ale.0708.velasco@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528991384206,
-    "stripe_id": "cus_NgwQZOcyJFUUru",
-    "final_date": 1691730000,
-    "id": 45035,
-    "level": 1
+    "conekta_id": "cus_2uQhU5d6uZewoU3VG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45035
   },
   {
     "nombre": "LuceroAnahi",
@@ -51936,10 +51390,10 @@ export const activeUsers = [
     "correo": "lucero3350.45@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525611708478,
-    "stripe_id": "cus_NgwPyxAX9kAB4u",
-    "final_date": 1691730000,
-    "id": 45038,
-    "level": 1
+    "conekta_id": "cus_2uQhU6Jm4Nrtt59T1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45038
   },
   {
     "nombre": "Diana",
@@ -51947,10 +51401,10 @@ export const activeUsers = [
     "correo": "dianarzcasta@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525615182959,
-    "stripe_id": "cus_NgwPCZsXK3k6cu",
-    "final_date": 1691730000,
-    "id": 45074,
-    "level": 1
+    "conekta_id": "cus_2uQhU6Jm4NrtyQdsS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45074
   },
   {
     "nombre": "Marysol",
@@ -51958,10 +51412,10 @@ export const activeUsers = [
     "correo": "rinconzamoranomarysol@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524411075226,
-    "stripe_id": "cus_NgwSganSzjJOEL",
-    "final_date": 1691730000,
-    "id": 45090,
-    "level": 1
+    "conekta_id": "cus_2uQhU6yosZzLpSG1w",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45090
   },
   {
     "nombre": "Jacqueline",
@@ -51969,10 +51423,9 @@ export const activeUsers = [
     "correo": "jacqueline.naaj@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583708267,
-    "stripe_id": "cus_NgwRZ0j1t3YLWB",
     "final_date": 1686460000,
-    "id": 45107,
-    "level": 1
+    "level": 1,
+    "id": 45107
   },
   {
     "nombre": "mariadelosangeles",
@@ -51980,10 +51433,10 @@ export const activeUsers = [
     "correo": "angelesmorna@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522761230219,
-    "stripe_id": "cus_NgwbjhZkmptN2g",
-    "final_date": 1691730000,
-    "id": 45110,
-    "level": 1
+    "conekta_id": "cus_2uQhU7qZUALtgH2xm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45110
   },
   {
     "nombre": "Erika",
@@ -51991,10 +51444,9 @@ export const activeUsers = [
     "correo": "aries2608@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525525079251,
-    "stripe_id": "cus_NgwPdsxLOaNhre",
     "final_date": 1689050000,
-    "id": 45153,
-    "level": 1
+    "level": 1,
+    "id": 45153
   },
   {
     "nombre": "Alix",
@@ -52002,10 +51454,10 @@ export const activeUsers = [
     "correo": "alixhau88@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529812419011,
-    "stripe_id": "cus_NgwTuewdH40J5Y",
-    "final_date": 1691730000,
-    "id": 45182,
-    "level": 1
+    "conekta_id": "cus_2uQhU8aNzMuYMh5UH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45182
   },
   {
     "nombre": "María",
@@ -52013,10 +51465,10 @@ export const activeUsers = [
     "correo": "arelyarizaga1414@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16613007017,
-    "stripe_id": "cus_NgwP1bc153WfhH",
-    "final_date": 1691730000,
-    "id": 45194,
-    "level": 1
+    "conekta_id": "cus_2uQhU91gXUibGx7bT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45194
   },
   {
     "nombre": "ElisAbigail",
@@ -52024,10 +51476,10 @@ export const activeUsers = [
     "correo": "v_elis@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529222172204,
-    "stripe_id": "cus_NgwPOIAn5r7OiR",
-    "final_date": 1691730000,
-    "id": 45201,
-    "level": 1
+    "conekta_id": "cus_2uQhUA422m2qZ62SP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45201
   },
   {
     "nombre": "LeninaBetsabeth",
@@ -52035,10 +51487,10 @@ export const activeUsers = [
     "correo": "leni.palomo80@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525565721054,
-    "stripe_id": "cus_NgwRbeJKnqD64U",
-    "final_date": 1691730000,
-    "id": 45209,
-    "level": 1
+    "conekta_id": "cus_2uQhUAVKZsqtdNLmn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45209
   },
   {
     "nombre": "perlacarina",
@@ -52046,10 +51498,10 @@ export const activeUsers = [
     "correo": "perlarumualdo31@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528461059808,
-    "stripe_id": "cus_NgwQQpqai1XhXH",
-    "final_date": 1691730000,
-    "id": 45280,
-    "level": 1
+    "conekta_id": "cus_2uQhUBEiJg4UqYcW5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45280
   },
   {
     "nombre": "AtzínSinai",
@@ -52057,10 +51509,10 @@ export const activeUsers = [
     "correo": "atzin.sinai04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532440691,
-    "stripe_id": "cus_NgwPMmpA7UhAH8",
-    "final_date": 1691730000,
-    "id": 45308,
-    "level": 1
+    "conekta_id": "cus_2uQhUBE965QYFe1GU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45308
   },
   {
     "nombre": "Rubisela",
@@ -52068,10 +51520,10 @@ export const activeUsers = [
     "correo": "rubiseladelarivadiaz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524922194167,
-    "stripe_id": "cus_NgwVDroj5VjuAh",
-    "final_date": 1691730000,
-    "id": 45322,
-    "level": 1
+    "conekta_id": "cus_2uQhUC9YWxvtCKuTb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45322
   },
   {
     "nombre": "Karen",
@@ -52079,10 +51531,10 @@ export const activeUsers = [
     "correo": "karencavazos008@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529241791190,
-    "stripe_id": "cus_NgwTTpBoqJ3fhY",
-    "final_date": 1691730000,
-    "id": 45339,
-    "level": 1
+    "conekta_id": "cus_2uQhUD1J7ZHS9PBxD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45339
   },
   {
     "nombre": "JessicaIsasbel",
@@ -52090,10 +51542,10 @@ export const activeUsers = [
     "correo": "zacura_luby_jessi@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527772535309,
-    "stripe_id": "cus_Ngx6r52Yj1PlFh",
-    "final_date": 1691730000,
-    "id": 45358,
-    "level": 1
+    "conekta_id": "cus_2uQhUCiMM5Bn91Dve",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45358
   },
   {
     "nombre": "jeniferLizeth",
@@ -52101,10 +51553,10 @@ export const activeUsers = [
     "correo": "lizethsalazar860@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522941574727,
-    "stripe_id": "cus_NgwSxPDqzEfo9Y",
-    "final_date": 1691730000,
-    "id": 45380,
-    "level": 1
+    "conekta_id": "cus_2uQhUDgxGNVP8mnNn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45380
   },
   {
     "nombre": "Erimdania",
@@ -52112,10 +51564,10 @@ export const activeUsers = [
     "correo": "erimdaniacano@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522299571183,
-    "stripe_id": "cus_NgwQIvTAkOf3uO",
-    "final_date": 1691730000,
-    "id": 45390,
-    "level": 1
+    "conekta_id": "cus_2uQhUEN15Zcq1yz3h",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45390
   },
   {
     "nombre": "Milena",
@@ -52123,10 +51575,10 @@ export const activeUsers = [
     "correo": "milenaj020@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525531313310,
-    "stripe_id": "cus_NhAKwDp5zikQce",
-    "final_date": 1691780000,
-    "id": 45420,
-    "level": 1
+    "conekta_id": "cus_2uQhUFDkg9yNvyfsm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45420
   },
   {
     "nombre": "ElizabethJoana",
@@ -52134,10 +51586,10 @@ export const activeUsers = [
     "correo": "joesanchezortiz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543381960,
-    "stripe_id": "cus_NgwR4x2lvWTzKB",
-    "final_date": 1691730000,
-    "id": 45472,
-    "level": 1
+    "conekta_id": "cus_2uQhUF6pbmBUeFeYX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45472
   },
   {
     "nombre": "Estela",
@@ -52145,10 +51597,10 @@ export const activeUsers = [
     "correo": "estelacesarhernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510526271,
-    "stripe_id": "cus_NgwQy1DtePIyud",
-    "final_date": 1691730000,
-    "id": 45500,
-    "level": 1
+    "conekta_id": "cus_2uQhUFfdRsSNYGGkC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45500
   },
   {
     "nombre": "adriana",
@@ -52156,10 +51608,10 @@ export const activeUsers = [
     "correo": "adriacosta.aa25@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221405707,
-    "stripe_id": "cus_NgwVdNoL3Yi9FM",
-    "final_date": 1691730000,
-    "id": 45505,
-    "level": 1
+    "conekta_id": "cus_2uQhUGaTeAJmxxYPb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45505
   },
   {
     "nombre": "Brenda",
@@ -52167,10 +51619,9 @@ export const activeUsers = [
     "correo": "sara.par.rodriguez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527732326051,
-    "stripe_id": "cus_NgwYiW1nkL21Wt",
     "final_date": 1693130000,
-    "id": 45524,
-    "level": 1
+    "level": 1,
+    "id": 45524
   },
   {
     "nombre": "Guadalupe",
@@ -52178,10 +51629,10 @@ export const activeUsers = [
     "correo": "josetrinidadjuarezmoreno@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522216280344,
-    "stripe_id": "cus_NgwSSTQfyyw2BX",
-    "final_date": 1691730000,
-    "id": 45550,
-    "level": 1
+    "conekta_id": "cus_2uQhUHKHAMsRX4e21",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45550
   },
   {
     "nombre": "Andreamaybelline",
@@ -52189,10 +51640,10 @@ export const activeUsers = [
     "correo": "andy_maybe@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527228432987,
-    "stripe_id": "cus_NgwUPeNnVQtj27",
-    "final_date": 1691730000,
-    "id": 45555,
-    "level": 1
+    "conekta_id": "cus_2uQhUJ7sPZsGw5EQb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45555
   },
   {
     "nombre": "Maríadelsagrario",
@@ -52200,10 +51651,10 @@ export const activeUsers = [
     "correo": "saghivelasco@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523333723707,
-    "stripe_id": "cus_NgwQM49loFkpr8",
-    "final_date": 1691730000,
-    "id": 45575,
-    "level": 1
+    "conekta_id": "cus_2uQhUJ7sPZsGw5EQi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45575
   },
   {
     "nombre": "mayracecilia",
@@ -52211,10 +51662,10 @@ export const activeUsers = [
     "correo": "ramosvelamayracecilia0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523314330228,
-    "stripe_id": "cus_NgwQQ64a9I3pKF",
-    "final_date": 1691730000,
-    "id": 45660,
-    "level": 1
+    "conekta_id": "cus_2uQhUJrgumRvZLtuG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45660
   },
   {
     "nombre": "BerthaCitlalli",
@@ -52222,10 +51673,10 @@ export const activeUsers = [
     "correo": "citlallinails2631@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523323938143,
-    "stripe_id": "cus_NgwSA84IOcs6pS",
-    "final_date": 1691730000,
-    "id": 45719,
-    "level": 1
+    "conekta_id": "cus_2uQhUKMj2sFcfcbE6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45719
   },
   {
     "nombre": "RocioAlejandra",
@@ -52233,10 +51684,10 @@ export const activeUsers = [
     "correo": "gasela_ro14@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 524151690411,
-    "stripe_id": "cus_NgwQEbAfz6o5jC",
-    "final_date": 1691730000,
-    "id": 45720,
-    "level": 1
+    "conekta_id": "cus_2uQhULLKxAZDrYFJE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45720
   },
   {
     "nombre": "JessicaAlejandra",
@@ -52244,10 +51695,10 @@ export const activeUsers = [
     "correo": "jessymtz217@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528186532499,
-    "stripe_id": "cus_NgwQQDzQeSw7ZG",
-    "final_date": 1691730000,
-    "id": 45774,
-    "level": 1
+    "conekta_id": "cus_2uQhUM59UN7sUounu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45774
   },
   {
     "nombre": "miriam",
@@ -52255,10 +51706,10 @@ export const activeUsers = [
     "correo": "xflores1196@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524777200906,
-    "stripe_id": "cus_NgwQyKks2tuNnA",
-    "final_date": 1691730000,
-    "id": 45795,
-    "level": 1
+    "conekta_id": "cus_2uQhUM59UN7sS9tNp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45795
   },
   {
     "nombre": "almarosa",
@@ -52266,10 +51717,10 @@ export const activeUsers = [
     "correo": "almis1991@outlook.com",
     "pais": "Mexico",
     "whatsapp": 526643324077,
-    "stripe_id": "cus_NgwQb1F3KN8KRj",
-    "final_date": 1691730000,
-    "id": 45815,
-    "level": 1
+    "conekta_id": "cus_2uQhUMs8Mx3Ded9u2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45815
   },
   {
     "nombre": "América",
@@ -52277,10 +51728,10 @@ export const activeUsers = [
     "correo": "america191089@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525613087342,
-    "stripe_id": "cus_NgwlVkDRKnW4RL",
-    "final_date": 1691730000,
-    "id": 45927,
-    "level": 1
+    "conekta_id": "cus_2uQhUNbwt9bsEpgqz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45927
   },
   {
     "nombre": "almayadira",
@@ -52288,10 +51739,10 @@ export const activeUsers = [
     "correo": "amezcuaalma54@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526646429255,
-    "stripe_id": "cus_NgwQBpm7oZNHmU",
-    "final_date": 1691730000,
-    "id": 45930,
-    "level": 1
+    "conekta_id": "cus_2uQhUP3pds4rtnWrP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45930
   },
   {
     "nombre": "Yarethsi",
@@ -52299,10 +51750,10 @@ export const activeUsers = [
     "correo": "yarethsima94@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526771190860,
-    "stripe_id": "cus_NgwUKeMXqimYeX",
-    "final_date": 1691730000,
-    "id": 45944,
-    "level": 1
+    "conekta_id": "cus_2uQhUPn4wTyZq2cMx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45944
   },
   {
     "nombre": "LuzAdriana",
@@ -52310,10 +51761,10 @@ export const activeUsers = [
     "correo": "luana246@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525579582308,
-    "stripe_id": "cus_NgwRDHXtKA7CDx",
-    "final_date": 1691730000,
-    "id": 45973,
-    "level": 1
+    "conekta_id": "cus_2uQhUQ2RZANTytZnW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45973
   },
   {
     "nombre": "Maria",
@@ -52321,10 +51772,10 @@ export const activeUsers = [
     "correo": "rafaelmary.040320@gmail.con",
     "pais": "Mexico",
     "whatsapp": 524622660687,
-    "stripe_id": "cus_NgwQuiaABiosIk",
-    "final_date": 1691730000,
-    "id": 45976,
-    "level": 1
+    "conekta_id": "cus_2uQhUQWtTfYDQd3yv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 45976
   },
   {
     "nombre": "MaríaCristina",
@@ -52332,10 +51783,10 @@ export const activeUsers = [
     "correo": "mahengcristina@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529841139067,
-    "stripe_id": "cus_NgwTomz3wkiHrr",
-    "final_date": 1691730000,
-    "id": 46056,
-    "level": 1
+    "conekta_id": "cus_2uQhURW4bZVmEwdQ6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46056
   },
   {
     "nombre": "Gracia",
@@ -52343,10 +51794,10 @@ export const activeUsers = [
     "correo": "graciavenegas87@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529512192387,
-    "stripe_id": "cus_NgwYyhpJUWJ75G",
-    "final_date": 1694100000,
-    "id": 46061,
-    "level": 1
+    "conekta_id": "cus_2uQhURFhys6s2tiUf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46061
   },
   {
     "nombre": "leticiaMontserrat",
@@ -52354,10 +51805,10 @@ export const activeUsers = [
     "correo": "ramiroalejo545@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523517477769,
-    "stripe_id": "cus_NgwSTdyaHqK6dR",
-    "final_date": 1691730000,
-    "id": 46153,
-    "level": 1
+    "conekta_id": "cus_2uQhUS16ifKTLwtMt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46153
   },
   {
     "nombre": "Minerva",
@@ -52365,10 +51816,10 @@ export const activeUsers = [
     "correo": "xinol202@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527772689158,
-    "stripe_id": "cus_NgwRXnuQ3owXpl",
-    "final_date": 1691730000,
-    "id": 46158,
-    "level": 1
+    "conekta_id": "cus_2uQhUSyhdxd4UyDmU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46158
   },
   {
     "nombre": "Betzabet",
@@ -52376,10 +51827,9 @@ export const activeUsers = [
     "correo": "betza940@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528998773392,
-    "stripe_id": "cus_NgwdibaxvHNGaK",
     "final_date": 1705720000,
-    "id": 46234,
-    "level": 0
+    "level": 0,
+    "id": 46234
   },
   {
     "nombre": "yzamantamaria",
@@ -52387,10 +51837,10 @@ export const activeUsers = [
     "correo": "zurda516@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522941105605,
-    "stripe_id": "cus_NgwYe4yO5tFlmH",
-    "final_date": 1691730000,
-    "id": 46239,
-    "level": 1
+    "conekta_id": "cus_2uQhUTekT9kWGqvvm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46239
   },
   {
     "nombre": "LilianaMontserrat",
@@ -52398,10 +51848,10 @@ export const activeUsers = [
     "correo": "lilia.monchermosa@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527298598437,
-    "stripe_id": "cus_NgwSZdUM0r5DYW",
-    "final_date": 1691730000,
-    "id": 46247,
-    "level": 1
+    "conekta_id": "cus_2uQhUTUAYTnoxNvqQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46247
   },
   {
     "nombre": "BeatrizAdriana",
@@ -52409,10 +51859,10 @@ export const activeUsers = [
     "correo": "belladri13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529221271286,
-    "stripe_id": "cus_NpBtBr4jjie69k",
-    "final_date": 1693720000,
-    "id": 46253,
-    "level": 1
+    "conekta_id": "cus_2uQhUUTLgMkMk2HN1",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46253
   },
   {
     "nombre": "Jeniffer",
@@ -52420,10 +51870,10 @@ export const activeUsers = [
     "correo": "jeniffercifuentes@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50256994247,
-    "stripe_id": "cus_NgwRRhMQ73ouJx",
-    "final_date": 1691730000,
-    "id": 46278,
-    "level": 1
+    "conekta_id": "cus_2uQhUUwoarv7G7w59",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46278
   },
   {
     "nombre": "Laura",
@@ -52431,10 +51881,10 @@ export const activeUsers = [
     "correo": "belau0311@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523521162428,
-    "stripe_id": "cus_NgwRKu3rjD9hhL",
-    "final_date": 1691730000,
-    "id": 46314,
-    "level": 1
+    "conekta_id": "cus_2uQhUVsD1kSTHG4Ed",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46314
   },
   {
     "nombre": "sandi",
@@ -52442,10 +51892,9 @@ export const activeUsers = [
     "correo": "sandi12yaneth29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611847401,
-    "stripe_id": "cus_NgwRvpBqgcjZou",
     "final_date": 1718000000,
-    "id": 46347,
-    "level": 1
+    "level": 1,
+    "id": 46347
   },
   {
     "nombre": "koraima",
@@ -52453,10 +51902,10 @@ export const activeUsers = [
     "correo": "koraimanails@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647287020,
-    "stripe_id": "cus_NgwRrqVMhqCGU3",
-    "final_date": 1691730000,
-    "id": 46382,
-    "level": 1
+    "conekta_id": "cus_2uQhUWixcLo19s7pd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46382
   },
   {
     "nombre": "Mariadelourdes",
@@ -52464,10 +51913,10 @@ export const activeUsers = [
     "correo": "lu-lucita-bonita@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525528961549,
-    "stripe_id": "cus_NgwS6ELp12YLkq",
-    "final_date": 1691730000,
-    "id": 46398,
-    "level": 1
+    "conekta_id": "cus_2uQhUXLr49ZkXoPDr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46398
   },
   {
     "nombre": "Nancy",
@@ -52475,10 +51924,10 @@ export const activeUsers = [
     "correo": "nan.correa.81@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525628304710,
-    "stripe_id": "cus_NgwRiYgkxZZEVB",
-    "final_date": 1691730000,
-    "id": 46404,
-    "level": 1
+    "conekta_id": "cus_2uQhUXQcm9zxEbCjT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46404
   },
   {
     "nombre": "Maricela",
@@ -52486,10 +51935,9 @@ export const activeUsers = [
     "correo": "nahima525@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525578582609,
-    "stripe_id": "cus_NgwR2YQlq08D4z",
     "final_date": 1689050000,
-    "id": 46420,
-    "level": 1
+    "level": 1,
+    "id": 46420
   },
   {
     "nombre": "LauraNelly",
@@ -52497,10 +51945,10 @@ export const activeUsers = [
     "correo": "lauritamoralea211997@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527971260798,
-    "stripe_id": "cus_Ngwg0wS044D9tm",
-    "final_date": 1691730000,
-    "id": 46423,
-    "level": 1
+    "conekta_id": "cus_2uQhUXuetFpeM7CK3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46423
   },
   {
     "nombre": "Noemi",
@@ -52508,10 +51956,10 @@ export const activeUsers = [
     "correo": "noemidiaz67@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528682304210,
-    "stripe_id": "cus_NgwScXgnvcoyQe",
-    "final_date": 1691730000,
-    "id": 46495,
-    "level": 1
+    "conekta_id": "cus_2uQhUYtFoZ8FV8XiT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46495
   },
   {
     "nombre": "Yodi",
@@ -52519,10 +51967,10 @@ export const activeUsers = [
     "correo": "yodifallas@gmail.com",
     "pais": "Costa Rica",
     "whatsapp": 50684006883,
-    "stripe_id": "cus_NgwS2e23GkHdju",
-    "final_date": 1691730000,
-    "id": 46510,
-    "level": 1
+    "conekta_id": "cus_2uQhUZgEh93bZjGAP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46510
   },
   {
     "nombre": "JazminA.",
@@ -52530,10 +51978,10 @@ export const activeUsers = [
     "correo": "jaz_mares54@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524646409957,
-    "stripe_id": "cus_NgwSdIEdKMwaVi",
-    "final_date": 1691730000,
-    "id": 46515,
-    "level": 1
+    "conekta_id": "cus_2uQhUaJ88wpM2t3CU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46515
   },
   {
     "nombre": "MaríaPaulina",
@@ -52541,10 +51989,10 @@ export const activeUsers = [
     "correo": "ninatg29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525540118492,
-    "stripe_id": "cus_NgwTD1OyciPgUQ",
-    "final_date": 1691730000,
-    "id": 46552,
-    "level": 1
+    "conekta_id": "cus_2uQhUb2wf9Nzbi8fP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46552
   },
   {
     "nombre": "Berenice",
@@ -52552,20 +52000,20 @@ export const activeUsers = [
     "correo": "berinar86@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543918610,
-    "stripe_id": "cus_NhKJflTS0nPhhm",
-    "final_date": 1691820000,
-    "id": 46556,
-    "level": 1
+    "conekta_id": "cus_2uQhUb6iN9pCMwXCN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46556
   },
   {
     "nombre": "mariaGuadalupe",
     "apellido": "OrtizLuna",
     "correo": "amartinezayelet@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_NgwSAZ9jp63y6N",
-    "final_date": 1691730000,
-    "id": 46563,
-    "level": 1
+    "conekta_id": "cus_2uQhUbthFjjYVgdhF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46563
   },
   {
     "nombre": "viridiana",
@@ -52573,10 +52021,10 @@ export const activeUsers = [
     "correo": "viryamezquita@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524621013800,
-    "stripe_id": "cus_NgwS7EeEJKPDzq",
-    "final_date": 1691730000,
-    "id": 46669,
-    "level": 1
+    "conekta_id": "cus_2uQhUcLa1TCY6jBGt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46669
   },
   {
     "nombre": "Irene",
@@ -52584,10 +52032,10 @@ export const activeUsers = [
     "correo": "yeny1303@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525623358523,
-    "stripe_id": "cus_NgwnFVVBS8aPud",
-    "final_date": 1691730000,
-    "id": 46678,
-    "level": 1
+    "conekta_id": "cus_2uQhUd5PXemBizqmQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46678
   },
   {
     "nombre": "IzandaSurema",
@@ -52595,10 +52043,10 @@ export const activeUsers = [
     "correo": "luanda_alvarez@hotmail.com",
     "pais": "Guatemala",
     "whatsapp": 50248040302,
-    "stripe_id": "cus_NgwR0f2I4Eb8QO",
-    "final_date": 1691730000,
-    "id": 46691,
-    "level": 1
+    "conekta_id": "cus_2uQhUdzDjwdbAEMfa",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46691
   },
   {
     "nombre": "BrendaDenisse",
@@ -52606,10 +52054,10 @@ export const activeUsers = [
     "correo": "denisse.moreno.970126@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528131806107,
-    "stripe_id": "cus_NgwUYsn0fKzY4x",
-    "final_date": 1691730000,
-    "id": 46699,
-    "level": 1
+    "conekta_id": "cus_2uQhUdzDjwdb6nndr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46699
   },
   {
     "nombre": "elizabethadriana",
@@ -52617,10 +52065,10 @@ export const activeUsers = [
     "correo": "elizabethadrianaruizdiaz14@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221489098,
-    "stripe_id": "cus_NgwTVynLsCkk3p",
-    "final_date": 1691730000,
-    "id": 46707,
-    "level": 1
+    "conekta_id": "cus_2uQhUeYTMTEYN2JiF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46707
   },
   {
     "nombre": "karla",
@@ -52628,10 +52076,10 @@ export const activeUsers = [
     "correo": "nahomisauce170106@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528117790793,
-    "stripe_id": "cus_NgwYXYcZMohuPJ",
-    "final_date": 1691730000,
-    "id": 46719,
-    "level": 1
+    "conekta_id": "cus_2uQhUfTrnLktML7d5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46719
   },
   {
     "nombre": "anahortencia",
@@ -52639,10 +52087,10 @@ export const activeUsers = [
     "correo": "anahortencialugomartinez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524191207364,
-    "stripe_id": "cus_NgwUl8ZdaUcZrP",
-    "final_date": 1691730000,
-    "id": 46725,
-    "level": 1
+    "conekta_id": "cus_2uQhUgGT1YkjkLuER",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46725
   },
   {
     "nombre": "Linda",
@@ -52650,10 +52098,10 @@ export const activeUsers = [
     "correo": "adnilbq@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 523222324995,
-    "stripe_id": "cus_NgwSpVNFiiGeC7",
-    "final_date": 1691730000,
-    "id": 46748,
-    "level": 1
+    "conekta_id": "cus_2uQhUh4Ru8g5raHVz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46748
   },
   {
     "nombre": "Hilda",
@@ -52661,10 +52109,10 @@ export const activeUsers = [
     "correo": "hildaelias33@icloud.com",
     "pais": "Mexico",
     "whatsapp": 526566953997,
-    "stripe_id": "cus_NgwSLA4mia4UO8",
-    "final_date": 1691730000,
-    "id": 46751,
-    "level": 1
+    "conekta_id": "cus_2uQhUh1GXkKPNcZj3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46751
   },
   {
     "nombre": "Yaraced",
@@ -52672,10 +52120,10 @@ export const activeUsers = [
     "correo": "yrmjmr1971@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523317991004,
-    "stripe_id": "cus_NgwSgsGQoY6rHt",
-    "final_date": 1691730000,
-    "id": 46782,
-    "level": 1
+    "conekta_id": "cus_2uQhUhVjSFV8nqKJn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46782
   },
   {
     "nombre": "Miriam",
@@ -52683,10 +52131,10 @@ export const activeUsers = [
     "correo": "mirglz2508@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522382354178,
-    "stripe_id": "cus_NgwT1Xag1UNnfr",
-    "final_date": 1691730000,
-    "id": 46796,
-    "level": 1
+    "conekta_id": "cus_2uQhUiY4wXoP87c8c",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46796
   },
   {
     "nombre": "AndreaCristina",
@@ -52694,10 +52142,10 @@ export const activeUsers = [
     "correo": "andycris9@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527979778170,
-    "stripe_id": "cus_NgwTSyO7v92RI0",
-    "final_date": 1691730000,
-    "id": 46818,
-    "level": 1
+    "conekta_id": "cus_2uQhUiR8s91UrQmbs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46818
   },
   {
     "nombre": "Bárbara",
@@ -52705,10 +52153,10 @@ export const activeUsers = [
     "correo": "barbara_caballero@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525519868864,
-    "stripe_id": "cus_NgwTtxjq7MfdpQ",
-    "final_date": 1691730000,
-    "id": 46858,
-    "level": 1
+    "conekta_id": "cus_2uQhUiyNUecS7eHgT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46858
   },
   {
     "nombre": "alejandra",
@@ -52716,10 +52164,10 @@ export const activeUsers = [
     "correo": "aless_criss@hotmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19292457763,
-    "stripe_id": "cus_NgwURr2GRFfEg7",
-    "final_date": 1691730000,
-    "id": 46897,
-    "level": 1
+    "conekta_id": "cus_2uQhUjimDSq2JXVVc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46897
   },
   {
     "nombre": "MaríaErendida",
@@ -52727,10 +52175,10 @@ export const activeUsers = [
     "correo": "erendidaramirez988@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525585678232,
-    "stripe_id": "cus_NgwUUNL24Z8AmA",
-    "final_date": 1691730000,
-    "id": 46907,
-    "level": 1
+    "conekta_id": "cus_2uQhUkhN8k8dVxtBj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46907
   },
   {
     "nombre": "Lilia",
@@ -52738,10 +52186,10 @@ export const activeUsers = [
     "correo": "lilys077@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526161083176,
-    "stripe_id": "cus_NgwT3QYWo4Puex",
-    "final_date": 1686460000,
-    "id": 46909,
-    "level": 1
+    "conekta_id": "cus_2uQhUmSBewhH2PKYk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46909
   },
   {
     "nombre": "AniaMurieli",
@@ -52749,10 +52197,10 @@ export const activeUsers = [
     "correo": "animurieliarellanog2004@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527731151350,
-    "stripe_id": "cus_NgwTeeLLYJoUbe",
-    "final_date": 1691730000,
-    "id": 46920,
-    "level": 1
+    "conekta_id": "cus_2uQhUmCQFqxKZ4pUY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46920
   },
   {
     "nombre": "Jannay",
@@ -52760,10 +52208,10 @@ export const activeUsers = [
     "correo": "jannaypila32@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518051105,
-    "stripe_id": "cus_NgwTjP4fLNyqyh",
-    "final_date": 1693580000,
-    "id": 46943,
-    "level": 1
+    "conekta_id": "cus_2uQhUmwDn3WyBLUy3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46943
   },
   {
     "nombre": "astridguadalupe",
@@ -52771,10 +52219,9 @@ export const activeUsers = [
     "correo": "galiciaastrid261@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631013132,
-    "stripe_id": "cus_NgwX7CCLjCcrBn",
     "final_date": 1689140000,
-    "id": 46950,
-    "level": 1
+    "level": 1,
+    "id": 46950
   },
   {
     "nombre": "samia",
@@ -52782,10 +52229,10 @@ export const activeUsers = [
     "correo": "smfjs@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525534520234,
-    "stripe_id": "cus_NgwuXwxSjdYnYV",
-    "final_date": 1691730000,
-    "id": 46992,
-    "level": 1
+    "conekta_id": "cus_2uQhUng3JF5coc9TY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46992
   },
   {
     "nombre": "jaqueline",
@@ -52793,10 +52240,10 @@ export const activeUsers = [
     "correo": "jaquelinemoreno250893@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525634092914,
-    "stripe_id": "cus_NgwrjIFtNqodDc",
-    "final_date": 1691770000,
-    "id": 46999,
-    "level": 1
+    "conekta_id": "cus_2uQhUoQHbqzKsGGeS",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 46999
   },
   {
     "nombre": "AnaBeatriz",
@@ -52804,10 +52251,10 @@ export const activeUsers = [
     "correo": "anabeatrizflores23@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525511985708,
-    "stripe_id": "cus_NgwUw3dtlOM060",
-    "final_date": 1691730000,
-    "id": 47016,
-    "level": 1
+    "conekta_id": "cus_2uQhUp9gLeCv49USn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47016
   },
   {
     "nombre": "Mariadelaluz",
@@ -52815,10 +52262,9 @@ export const activeUsers = [
     "correo": "luz.magenta.29@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525546731840,
-    "stripe_id": "cus_NgwVI8FhCPCgZE",
     "final_date": 1718000000,
-    "id": 47084,
-    "level": 1
+    "level": 1,
+    "id": 47084
   },
   {
     "nombre": "Anabel",
@@ -52826,10 +52272,10 @@ export const activeUsers = [
     "correo": "toledoanabel362@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524423280426,
-    "stripe_id": "cus_NgwYP8NFCnefUr",
-    "final_date": 1691730000,
-    "id": 47105,
-    "level": 1
+    "conekta_id": "cus_2uQhUq4WYw5KTq63U",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47105
   },
   {
     "nombre": "Yanet",
@@ -52837,10 +52283,9 @@ export const activeUsers = [
     "correo": "yanet-george@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522462700884,
-    "stripe_id": "cus_NgwUT2bjaTumDp",
     "final_date": 1689050000,
-    "id": 47131,
-    "level": 1
+    "level": 1,
+    "id": 47131
   },
   {
     "nombre": "Natalia",
@@ -52848,10 +52293,9 @@ export const activeUsers = [
     "correo": "nabues2008@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525516960514,
-    "stripe_id": "cus_NgxF07nUXiBJqX",
     "final_date": 1689100000,
-    "id": 47145,
-    "level": 1
+    "level": 1,
+    "id": 47145
   },
   {
     "nombre": "Angeles",
@@ -52859,10 +52303,10 @@ export const activeUsers = [
     "correo": "maangelesmtzhdez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525633040601,
-    "stripe_id": "cus_NgwVyWQhIa709r",
-    "final_date": 1691730000,
-    "id": 47173,
-    "level": 1
+    "conekta_id": "cus_2uQhUqs6n95An1JVh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47173
   },
   {
     "nombre": "mariaGuadalupe",
@@ -52870,10 +52314,10 @@ export const activeUsers = [
     "correo": "guadalupepatino097@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524613674554,
-    "stripe_id": "cus_NgwZsgFRwmSMyE",
-    "final_date": 1691730000,
-    "id": 47175,
-    "level": 1
+    "conekta_id": "cus_2uQhUrMZgeEvJ5HCj",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47175
   },
   {
     "nombre": "TaniaBerenice",
@@ -52881,10 +52325,9 @@ export const activeUsers = [
     "correo": "tanissb@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527223632190,
-    "stripe_id": "cus_NgwTEfTvK0fgDl",
     "final_date": 1689010000,
-    "id": 47177,
-    "level": 1
+    "level": 1,
+    "id": 47177
   },
   {
     "nombre": "Estela",
@@ -52892,10 +52335,10 @@ export const activeUsers = [
     "correo": "estela.valentina@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524423435281,
-    "stripe_id": "cus_NgwWw4q8af3OwB",
-    "final_date": 1691730000,
-    "id": 47204,
-    "level": 1
+    "conekta_id": "cus_2uQhUsGy7XmGR6JYE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47204
   },
   {
     "nombre": "Alejandra",
@@ -52903,10 +52346,10 @@ export const activeUsers = [
     "correo": "alejcruz679@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525529983965,
-    "stripe_id": "cus_Ngwhpp1I25nj89",
-    "final_date": 1691730000,
-    "id": 47207,
-    "level": 1
+    "conekta_id": "cus_2uQhUt5ZLjm7kfX6d",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47207
   },
   {
     "nombre": "ORFANOHEMI",
@@ -52914,10 +52357,10 @@ export const activeUsers = [
     "correo": "robleroorfa90@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529982055883,
-    "stripe_id": "cus_NgwUmZSJrWwUwY",
-    "final_date": 1686460000,
-    "id": 47263,
-    "level": 1
+    "conekta_id": "cus_2uQhUtabTqaorfn7Z",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47263
   },
   {
     "nombre": "Beatriz",
@@ -52925,10 +52368,10 @@ export const activeUsers = [
     "correo": "betty.g.gonzalez33@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525566977465,
-    "stripe_id": "cus_NgwURvWq6on3NI",
-    "final_date": 1691730000,
-    "id": 47264,
-    "level": 1
+    "conekta_id": "cus_2uQhUta2FEvsAtGgc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47264
   },
   {
     "nombre": "Greisy",
@@ -52936,10 +52379,10 @@ export const activeUsers = [
     "correo": "grei11aguilar@gmail.com",
     "pais": "Honduras",
     "whatsapp": 50498700800,
-    "stripe_id": "cus_NgxAsQ7munMNow",
-    "final_date": 1691730000,
-    "id": 47266,
-    "level": 1
+    "conekta_id": "cus_2uQhUuZCP8tR1Cr6N",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47266
   },
   {
     "nombre": "violeta",
@@ -52947,10 +52390,10 @@ export const activeUsers = [
     "correo": "zacariasvioleta805@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525634540324,
-    "stripe_id": "cus_NgwVXauoffW530",
-    "final_date": 1691730000,
-    "id": 47267,
-    "level": 1
+    "conekta_id": "cus_2uQhUvEFCL1rqijVs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47267
   },
   {
     "nombre": "Vanessa",
@@ -52958,10 +52401,10 @@ export const activeUsers = [
     "correo": "luisalejandrotorresmendoza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528993311980,
-    "stripe_id": "cus_NgwV7GJvkSoygU",
-    "final_date": 1691730000,
-    "id": 47276,
-    "level": 1
+    "conekta_id": "cus_2uQhUw5znvNQhZWSg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47276
   },
   {
     "nombre": "Noelia",
@@ -52969,10 +52412,10 @@ export const activeUsers = [
     "correo": "bm9051819@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525575449107,
-    "stripe_id": "cus_Ni4ftnZeq5gEYd",
-    "final_date": 1691990000,
-    "id": 47288,
-    "level": 1
+    "conekta_id": "cus_2uQhUwXJL3BTfxvet",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47288
   },
   {
     "nombre": "AnaKaren",
@@ -52980,10 +52423,10 @@ export const activeUsers = [
     "correo": "anakmj0708@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631042102,
-    "stripe_id": "cus_NgwUFPi2Qr5cpZ",
-    "final_date": 1691730000,
-    "id": 47290,
-    "level": 1
+    "conekta_id": "cus_2uQhUwXJL3BTie9YP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47290
   },
   {
     "nombre": "MagdalenaHernández",
@@ -52991,10 +52434,10 @@ export const activeUsers = [
     "correo": "magdahernandez46641@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524624198743,
-    "stripe_id": "cus_NgwU9bu0yTladW",
-    "final_date": 1691730000,
-    "id": 47291,
-    "level": 1
+    "conekta_id": "cus_2uQhUxWUTw91QSGvi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47291
   },
   {
     "nombre": "johanaElizabeth",
@@ -53002,10 +52445,10 @@ export const activeUsers = [
     "correo": "reyesmejiajohana1988@gmail.com",
     "pais": "Honduras",
     "whatsapp": 50487937347,
-    "stripe_id": "cus_Ngwf532stdQeog",
-    "final_date": 1691730000,
-    "id": 47301,
-    "level": 1
+    "conekta_id": "cus_2uQhUxzwNSJkvWFeG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47301
   },
   {
     "nombre": "Alejandra",
@@ -53013,10 +52456,10 @@ export const activeUsers = [
     "correo": "alegomez306306@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524443913462,
-    "stripe_id": "cus_NgwUvujKjl64Jl",
-    "final_date": 1691730000,
-    "id": 47335,
-    "level": 1
+    "conekta_id": "cus_2uQhUykL7EXMEZRZc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47335
   },
   {
     "nombre": "TirsaYadira",
@@ -53024,10 +52467,10 @@ export const activeUsers = [
     "correo": "tirsapereda008@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525627943444,
-    "stripe_id": "cus_NgwWLSHs3UA7zT",
-    "final_date": 1691730000,
-    "id": 47403,
-    "level": 1
+    "conekta_id": "cus_2uQhUzfAKXPkfnwUU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47403
   },
   {
     "nombre": "Nawir",
@@ -53035,10 +52478,10 @@ export const activeUsers = [
     "correo": "navikitis@gmail.com",
     "pais": "Ecuador",
     "whatsapp": 593969995856,
-    "stripe_id": "cus_NgwVPGwj9oJdXL",
-    "final_date": 1691730000,
-    "id": 47476,
-    "level": 1
+    "conekta_id": "cus_2uQhUzn6PvBepupuE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47476
   },
   {
     "nombre": "Sarapatricia",
@@ -53046,10 +52489,9 @@ export const activeUsers = [
     "correo": "sarachapispato@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525519284580,
-    "stripe_id": "cus_NhERYklzfPDgqN",
     "final_date": 1689120000,
-    "id": 47622,
-    "level": 1
+    "level": 1,
+    "id": 47622
   },
   {
     "nombre": "MariaMagdalena",
@@ -53057,10 +52499,10 @@ export const activeUsers = [
     "correo": "magdavalencia221993@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522212650068,
-    "stripe_id": "cus_NgwX1U13LFCx0E",
-    "final_date": 1691730000,
-    "id": 47624,
-    "level": 1
+    "conekta_id": "cus_2uQhV1TkYjPc1NA4k",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47624
   },
   {
     "nombre": "JuliaAlejandra",
@@ -53068,10 +52510,10 @@ export const activeUsers = [
     "correo": "alejandra07junio@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528771405551,
-    "stripe_id": "cus_NgwWuD9QiEx0oz",
-    "final_date": 1691730000,
-    "id": 47652,
-    "level": 1
+    "conekta_id": "cus_2uQhV1xnfqDJ7NR3V",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47652
   },
   {
     "nombre": "Carol",
@@ -53079,10 +52521,10 @@ export const activeUsers = [
     "correo": "carol.schz.g@icloud.com",
     "pais": "Mexico",
     "whatsapp": 522224862433,
-    "stripe_id": "cus_NgwWyfDi3uyscO",
-    "final_date": 1691730000,
-    "id": 47735,
-    "level": 1
+    "conekta_id": "cus_2uQhV2hcC2mwmCNeE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47735
   },
   {
     "nombre": "Leticia",
@@ -53090,10 +52532,10 @@ export const activeUsers = [
     "correo": "lety297710@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522711800102,
-    "stripe_id": "cus_NgwYBiQEj8skMo",
-    "final_date": 1691730000,
-    "id": 47737,
-    "level": 1
+    "conekta_id": "cus_2uQhV3gD7L5YnKvNZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47737
   },
   {
     "nombre": "Lupita",
@@ -53101,10 +52543,10 @@ export const activeUsers = [
     "correo": "lupitalanderos1970@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526642296418,
-    "stripe_id": "cus_NgwoVyPnDYjceO",
-    "final_date": 1691730000,
-    "id": 47779,
-    "level": 1
+    "conekta_id": "cus_2uQhV4Ag1qFJJPu79",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47779
   },
   {
     "nombre": "MiriamEdith",
@@ -53112,10 +52554,9 @@ export const activeUsers = [
     "correo": "miriamysys@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711833125,
-    "stripe_id": "cus_NgwcvPkFDYnmQ0",
     "final_date": 1689050000,
-    "id": 47780,
-    "level": 1
+    "level": 1,
+    "id": 47780
   },
   {
     "nombre": "Gabriela",
@@ -53123,10 +52564,10 @@ export const activeUsers = [
     "correo": "gabrielasandovaltorres@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 525548193914,
-    "stripe_id": "cus_NgwXpLvR5xU607",
-    "final_date": 1691730000,
-    "id": 47792,
-    "level": 1
+    "conekta_id": "cus_2uQhV5D1X7ZYdgBy4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47792
   },
   {
     "nombre": "mayra",
@@ -53134,10 +52575,10 @@ export const activeUsers = [
     "correo": "mayrapachecoj@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524421225767,
-    "stripe_id": "cus_NgwYf0aWQhqOET",
-    "final_date": 1691730000,
-    "id": 47795,
-    "level": 1
+    "conekta_id": "cus_2uQhV5eK4ENbYwE6b",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47795
   },
   {
     "nombre": "AnaMaría",
@@ -53145,10 +52586,10 @@ export const activeUsers = [
     "correo": "anaelizalde293@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526861682220,
-    "stripe_id": "cus_Ngwl5kzZXdMwTU",
-    "final_date": 1691960000,
-    "id": 47804,
-    "level": 1
+    "conekta_id": "cus_2uQhV6P8aRwFH5nj9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47804
   },
   {
     "nombre": "susana",
@@ -53156,10 +52597,10 @@ export const activeUsers = [
     "correo": "susy.maceda@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525587730954,
-    "stripe_id": "cus_NgwdnzejRdth2K",
-    "final_date": 1691730000,
-    "id": 47805,
-    "level": 1
+    "conekta_id": "cus_2uQhV77x6dVtoUZ5t",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47805
   },
   {
     "nombre": "Raquel",
@@ -53167,10 +52608,10 @@ export const activeUsers = [
     "correo": "acevedotrejo314@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526131216421,
-    "stripe_id": "cus_Ni27KF4mtueRZ2",
-    "final_date": 1691980000,
-    "id": 47851,
-    "level": 1
+    "conekta_id": "cus_2uQhV7JY1KTbDmgte",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47851
   },
   {
     "nombre": "Guadalupe",
@@ -53178,10 +52619,9 @@ export const activeUsers = [
     "correo": "ramirezleonlupita0312@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529515313592,
-    "stripe_id": "cus_NlpbfFmEZ9CO62",
     "final_date": 1717020000,
-    "id": 47877,
-    "level": 0
+    "level": 0,
+    "id": 47877
   },
   {
     "nombre": "Alexandra",
@@ -53189,10 +52629,10 @@ export const activeUsers = [
     "correo": "alexandra.delaluz.gomez@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524471119945,
-    "stripe_id": "cus_NgwaSITUcDO6dG",
-    "final_date": 1691730000,
-    "id": 47919,
-    "level": 1
+    "conekta_id": "cus_2uQhV7sLqRiV7XizJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47919
   },
   {
     "nombre": "Rocío",
@@ -53200,10 +52640,10 @@ export const activeUsers = [
     "correo": "sernajaneth71@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524775069345,
-    "stripe_id": "cus_Ngwa6BpOYCoUbm",
-    "final_date": 1691730000,
-    "id": 47933,
-    "level": 1
+    "conekta_id": "cus_2uQhV8cAMdH8joPUr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47933
   },
   {
     "nombre": "CinthiaSarahi",
@@ -53211,10 +52651,10 @@ export const activeUsers = [
     "correo": "cinthia.elias280118@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528127569668,
-    "stripe_id": "cus_NgwZGiy5z1lyyA",
-    "final_date": 1692930000,
-    "id": 47954,
-    "level": 1
+    "conekta_id": "cus_2uQhV9dveJwSL9npP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47954
   },
   {
     "nombre": "MariadelSocorro",
@@ -53222,10 +52662,10 @@ export const activeUsers = [
     "correo": "miakoca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522212849702,
-    "stripe_id": "cus_NgwaZ0kiX3tGVO",
-    "final_date": 1691730000,
-    "id": 47960,
-    "level": 1
+    "conekta_id": "cus_2uQhVA5oQ2QRzLiUL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47960
   },
   {
     "nombre": "MaríadelRosario",
@@ -53233,10 +52673,10 @@ export const activeUsers = [
     "correo": "mariarosarionava44@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525615006449,
-    "stripe_id": "cus_NgwaPw8WyZeMdd",
-    "final_date": 1691730000,
-    "id": 47998,
-    "level": 1
+    "conekta_id": "cus_2uQhVANkAWW61ZqRW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 47998
   },
   {
     "nombre": "Fabiola",
@@ -53244,10 +52684,10 @@ export const activeUsers = [
     "correo": "fabioladiazgarcia68@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526871408641,
-    "stripe_id": "cus_NgwbmpXiXhWtT3",
-    "final_date": 1691730000,
-    "id": 48013,
-    "level": 1
+    "conekta_id": "cus_2uQhVAzdcKGqM81M6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48013
   },
   {
     "nombre": "Alejandra",
@@ -53255,10 +52695,10 @@ export const activeUsers = [
     "correo": "alejandramedina130501@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525520170371,
-    "stripe_id": "cus_NgwkORe0DtWaEA",
-    "final_date": 1691730000,
-    "id": 48102,
-    "level": 1
+    "conekta_id": "cus_2uQhVBoDqXGgfJDoA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48102
   },
   {
     "nombre": "LuzMarina",
@@ -53266,10 +52706,10 @@ export const activeUsers = [
     "correo": "marinasalcido1906@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526624161420,
-    "stripe_id": "cus_Ngx3BBdlwATY6H",
-    "final_date": 1691730000,
-    "id": 48104,
-    "level": 1
+    "conekta_id": "cus_2uQhVCY3MiqLHZtHi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48104
   },
   {
     "nombre": "mindra",
@@ -53277,10 +52717,10 @@ export const activeUsers = [
     "correo": "mindra0789@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524272779378,
-    "stripe_id": "cus_NgwfUVXGGiF5Dk",
-    "final_date": 1691770000,
-    "id": 48105,
-    "level": 1
+    "conekta_id": "cus_2uQhVDD6AuxnJPDsE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48105
   },
   {
     "nombre": "Katya",
@@ -53288,10 +52728,10 @@ export const activeUsers = [
     "correo": "katy_glz_c@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523311176151,
-    "stripe_id": "cus_NgwcJpEM07qgjG",
-    "final_date": 1691730000,
-    "id": 48132,
-    "level": 1
+    "conekta_id": "cus_2uQhVDGrsvPyxX1sv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48132
   },
   {
     "nombre": "CaludiaZelina",
@@ -53299,10 +52739,10 @@ export const activeUsers = [
     "correo": "ibq.zelinagarcia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523251112525,
-    "stripe_id": "cus_NgwjD7YzZtdEdR",
-    "final_date": 1691730000,
-    "id": 48153,
-    "level": 1
+    "conekta_id": "cus_2uQhVE1gQ7xddShoY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48153
   },
   {
     "nombre": "Fernanda",
@@ -53310,10 +52750,10 @@ export const activeUsers = [
     "correo": "maferrrath93@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525523011197,
-    "stripe_id": "cus_NgwewQJtaM1ho6",
-    "final_date": 1691730000,
-    "id": 48177,
-    "level": 1
+    "conekta_id": "cus_2uQhVEW9Jd8P4BC2m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48177
   },
   {
     "nombre": "AnaMaria",
@@ -53321,10 +52761,10 @@ export const activeUsers = [
     "correo": "annavazkz91@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611934216,
-    "stripe_id": "cus_NgwnfAGiVfBnJR",
-    "final_date": 1691730000,
-    "id": 48181,
-    "level": 1
+    "conekta_id": "cus_2uQhVFFY3RLyNEMwo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48181
   },
   {
     "nombre": "Alejandramargarita",
@@ -53332,10 +52772,10 @@ export const activeUsers = [
     "correo": "meganchimichurri@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525550539344,
-    "stripe_id": "cus_NgwfNNwhNxoIUv",
-    "final_date": 1691730000,
-    "id": 48188,
-    "level": 1
+    "conekta_id": "cus_2uQhVGE8xieaQvCkq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48188
   },
   {
     "nombre": "P.Selene",
@@ -53343,10 +52783,10 @@ export const activeUsers = [
     "correo": "paolaselenebarroso0854@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522221617870,
-    "stripe_id": "cus_NgweiBILofEAhf",
-    "final_date": 1691730000,
-    "id": 48192,
-    "level": 1
+    "conekta_id": "cus_2uQhVFzMZcuczW2Sn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48192
   },
   {
     "nombre": "Feliciana",
@@ -53354,10 +52794,9 @@ export const activeUsers = [
     "correo": "anaicilef.tuz30@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529831017033,
-    "stripe_id": "cus_NgwfC8PFgu1KsU",
     "final_date": 1721950000,
-    "id": 48217,
-    "level": 0
+    "level": 0,
+    "id": 48217
   },
   {
     "nombre": "Teresa",
@@ -53365,10 +52804,10 @@ export const activeUsers = [
     "correo": "tezzahernandez144@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527732601520,
-    "stripe_id": "cus_Nh76aIgeIQygNc",
-    "final_date": 1691770000,
-    "id": 48281,
-    "level": 1
+    "conekta_id": "cus_2uQhVGuBmun2RjYLt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48281
   },
   {
     "nombre": "JhanetJacqueline",
@@ -53376,10 +52815,10 @@ export const activeUsers = [
     "correo": "jacque1025.dc@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529811035025,
-    "stripe_id": "cus_NgxDW9eZgjOwH5",
-    "final_date": 1691730000,
-    "id": 48293,
-    "level": 1
+    "conekta_id": "cus_2uQhVHhn17msfTXkT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48293
   },
   {
     "nombre": "BlancaEstela",
@@ -53387,10 +52826,10 @@ export const activeUsers = [
     "correo": "acembvr_love@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525569134190,
-    "stripe_id": "cus_NgwjSl8tqnd7ch",
-    "final_date": 1691730000,
-    "id": 48295,
-    "level": 1
+    "conekta_id": "cus_2uQhVJNppJuKbpeH4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48295
   },
   {
     "nombre": "Abigail",
@@ -53398,10 +52837,10 @@ export const activeUsers = [
     "correo": "blancabigail.baby@outlook.com",
     "pais": "Mexico",
     "whatsapp": 524461324536,
-    "stripe_id": "cus_NgwkRUlONjY26I",
-    "final_date": 1691730000,
-    "id": 48306,
-    "level": 1
+    "conekta_id": "cus_2uQhVKBR3WuAuzrje",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48306
   },
   {
     "nombre": "anagabriela",
@@ -53409,10 +52848,10 @@ export const activeUsers = [
     "correo": "gabrielaespinoza33052@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524772849856,
-    "stripe_id": "cus_Ngwojl3C9DNHhW",
-    "final_date": 1691730000,
-    "id": 48314,
-    "level": 1
+    "conekta_id": "cus_2uQhVK7eLWTyJYXpP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48314
   },
   {
     "nombre": "Nancy",
@@ -53420,20 +52859,20 @@ export const activeUsers = [
     "correo": "n_arcea@yahoo.com.mx",
     "pais": "Mexico",
     "whatsapp": 525511482504,
-    "stripe_id": "cus_Ngwyd0PsnRlbpK",
-    "final_date": 1691730000,
-    "id": 48452,
-    "level": 1
+    "conekta_id": "cus_2uQhVKrTri2cvpCJw",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48452
   },
   {
     "nombre": "ana",
     "apellido": "panti",
     "correo": "estherpanti6@gmail.com",
     "pais": "Mexico",
-    "stripe_id": "cus_Ngx6PPBOre1v30",
-    "final_date": 1691730000,
-    "id": 48454,
-    "level": 1
+    "conekta_id": "cus_2uQhVLiDTJPAoRFm2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48454
   },
   {
     "nombre": "Laura",
@@ -53441,10 +52880,10 @@ export const activeUsers = [
     "correo": "elizarrarazdominick@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526641896633,
-    "stripe_id": "cus_NgwxuDuGJYAMlT",
-    "final_date": 1691730000,
-    "id": 48465,
-    "level": 1
+    "conekta_id": "cus_2uQhVMA6D1rANPftg",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48465
   },
   {
     "nombre": "Sandra",
@@ -53452,10 +52891,10 @@ export const activeUsers = [
     "correo": "sandypaz610@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529713084989,
-    "stripe_id": "cus_Ngx6LBqOs0sduy",
-    "final_date": 1691730000,
-    "id": 48481,
-    "level": 1
+    "conekta_id": "cus_2uQhVMA6D1rANPftn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48481
   },
   {
     "nombre": "anamariela",
@@ -53463,10 +52902,10 @@ export const activeUsers = [
     "correo": "marielabeniz79080@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529981238670,
-    "stripe_id": "cus_Ngx5Zee7ZMKqNQ",
-    "final_date": 1691730000,
-    "id": 48504,
-    "level": 1
+    "conekta_id": "cus_2uQhVN4vRJiZg23zr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48504
   },
   {
     "nombre": "GenyEutimia",
@@ -53474,21 +52913,21 @@ export const activeUsers = [
     "correo": "ggarciapanti@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529818214418,
-    "stripe_id": "cus_Ngx8yRpbh6nhII",
-    "final_date": 1691730000,
-    "id": 48514,
-    "level": 1
+    "conekta_id": "cus_2uQhVNdA2pKX32PZr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48514
   },
   {
-    "nombre": "tomasa",
+    "nombre": "t͎o͎m͎a͎s͎a͎",
     "apellido": "a͎r͎c͎e͎",
     "correo": "tomasaarce84@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527751017442,
-    "stripe_id": "cus_NgxBJf7efPR1rx",
-    "final_date": 1689050000,
-    "id": 48519,
-    "level": 1
+    "conekta_id": "cus_2uQhVPcLAiH4fcqgr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48519
   },
   {
     "nombre": "Aleli",
@@ -53496,10 +52935,10 @@ export const activeUsers = [
     "correo": "alelivargas13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532500656,
-    "stripe_id": "cus_NgxMQSQHHJCBHK",
-    "final_date": 1686460000,
-    "id": 48537,
-    "level": 1
+    "conekta_id": "cus_2uQhVPfVY6dmJVuji",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48537
   },
   {
     "nombre": "saraiJocabet",
@@ -53507,10 +52946,10 @@ export const activeUsers = [
     "correo": "zariroxita.sd@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529992173202,
-    "stripe_id": "cus_NgxcFvYVggAzEl",
-    "final_date": 1691730000,
-    "id": 48630,
-    "level": 1
+    "conekta_id": "cus_2uQhVQM9guqiHtWBN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48630
   },
   {
     "nombre": "Martha",
@@ -53518,10 +52957,10 @@ export const activeUsers = [
     "correo": "marthapool89@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529838356567,
-    "stripe_id": "cus_NgxrDOov4W3l3p",
-    "final_date": 1691730000,
-    "id": 48631,
-    "level": 1
+    "conekta_id": "cus_2uQhVR98aVm4Z3Eig",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48631
   },
   {
     "nombre": "DanaGabriela",
@@ -53529,10 +52968,9 @@ export const activeUsers = [
     "correo": "dgabriela2407@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518440494,
-    "stripe_id": "cus_NgxdTGC8fWBfBj",
     "final_date": 1689050000,
-    "id": 48632,
-    "level": 1
+    "level": 1,
+    "id": 48632
   },
   {
     "nombre": "MariaDelCarmen",
@@ -53540,10 +52978,10 @@ export const activeUsers = [
     "correo": "macarmen.rape@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525536364438,
-    "stripe_id": "cus_NgxkweeMpZKvWt",
-    "final_date": 1691730000,
-    "id": 48646,
-    "level": 1
+    "conekta_id": "cus_2uQhVRsx6hKiBJuDP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48646
   },
   {
     "nombre": "marina",
@@ -53551,10 +52989,10 @@ export const activeUsers = [
     "correo": "mar-arruby@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522227812829,
-    "stripe_id": "cus_Ngxm6Yb4f8kd7r",
-    "final_date": 1691730000,
-    "id": 48659,
-    "level": 1
+    "conekta_id": "cus_2uQhVSKFdp8mANi2k",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48659
   },
   {
     "nombre": "MarthaPatricia",
@@ -53562,10 +53000,10 @@ export const activeUsers = [
     "correo": "patynava_69@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528333463093,
-    "stripe_id": "cus_NgxoUeJZ71YRGY",
-    "final_date": 1691730000,
-    "id": 48665,
-    "level": 1
+    "conekta_id": "cus_2uQhVSKprQnhkHKLo",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48665
   },
   {
     "nombre": "Mabel",
@@ -53573,10 +53011,10 @@ export const activeUsers = [
     "correo": "mabelmontejocastillo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529372271314,
-    "stripe_id": "cus_NgxsgUNbFHfHjt",
-    "final_date": 1691730000,
-    "id": 48681,
-    "level": 1
+    "conekta_id": "cus_2uQhVTJRmi6JtpPLs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48681
   },
   {
     "nombre": "Marian",
@@ -53584,10 +53022,10 @@ export const activeUsers = [
     "correo": "marh0309@outlook.com",
     "pais": "Mexico",
     "whatsapp": 522461955163,
-    "stripe_id": "cus_Ngy6gurfwp5Gnz",
-    "final_date": 1691730000,
-    "id": 48723,
-    "level": 1
+    "conekta_id": "cus_2uQhVToTtouzzpeKk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48723
   },
   {
     "nombre": "AlejandraYazmin",
@@ -53595,10 +53033,10 @@ export const activeUsers = [
     "correo": "mingomez77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528677295344,
-    "stripe_id": "cus_NlpcOs3WYaX8PE",
-    "final_date": 1691510000,
-    "id": 48828,
-    "level": 1
+    "conekta_id": "cus_2uQhVUiJ76nQMbwAf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48828
   },
   {
     "nombre": "ArianaIsabel",
@@ -53606,10 +53044,10 @@ export const activeUsers = [
     "correo": "arianaespadas999@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529851026145,
-    "stripe_id": "cus_Nh6fjGTRy72zHU",
-    "final_date": 1691770000,
-    "id": 48898,
-    "level": 1
+    "conekta_id": "cus_2uQhVUXiCQpi3BhWW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48898
   },
   {
     "nombre": "Karla",
@@ -53617,10 +53055,10 @@ export const activeUsers = [
     "correo": "karlizvale65@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527714858149,
-    "stripe_id": "cus_Nh7mjSHq5lLZuY",
-    "final_date": 1691770000,
-    "id": 48935,
-    "level": 1
+    "conekta_id": "cus_2uQhVVT7dJM3vigvV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48935
   },
   {
     "nombre": "MelanySoany",
@@ -53628,10 +53066,10 @@ export const activeUsers = [
     "correo": "melanyg675@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529995075799,
-    "stripe_id": "cus_Nh84r9z5RL1Jep",
-    "final_date": 1686500000,
-    "id": 48937,
-    "level": 1
+    "conekta_id": "cus_2uQhVWBw9VuhYzMR8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48937
   },
   {
     "nombre": "ANAI",
@@ -53639,10 +53077,10 @@ export const activeUsers = [
     "correo": "anaiortejar12@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524424986938,
-    "stripe_id": "cus_Nh9q0TlX0XrjN3",
-    "final_date": 1691780000,
-    "id": 48978,
-    "level": 1
+    "conekta_id": "cus_2uQhVWzXNhuZ1ey8Q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48978
   },
   {
     "nombre": "Adriana",
@@ -53650,10 +53088,10 @@ export const activeUsers = [
     "correo": "adrydico@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548840895,
-    "stripe_id": "cus_Nh9c5sAxVpGfk6",
-    "final_date": 1691780000,
-    "id": 48982,
-    "level": 1
+    "conekta_id": "cus_2uQhVWkAm1Wep7nuG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 48982
   },
   {
     "nombre": "Shamara",
@@ -53661,10 +53099,10 @@ export const activeUsers = [
     "correo": "bautistashamara@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532585251,
-    "stripe_id": "cus_NhAiR0OT5TlTSZ",
-    "final_date": 1691780000,
-    "id": 49006,
-    "level": 1
+    "conekta_id": "cus_2uQhVXUzHD5JYGMUU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49006
   },
   {
     "nombre": "LizbethAlejandra",
@@ -53672,10 +53110,10 @@ export const activeUsers = [
     "correo": "alejandra01mar74@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522371088950,
-    "stripe_id": "cus_NhAmm61C9uGFeD",
-    "final_date": 1691780000,
-    "id": 49008,
-    "level": 1
+    "conekta_id": "cus_2uQhVYDooQdxAY1yK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49008
   },
   {
     "nombre": "Mercedes",
@@ -53683,10 +53121,10 @@ export const activeUsers = [
     "correo": "esteticameche@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522288530678,
-    "stripe_id": "cus_NhAprY9lRfVfu8",
-    "final_date": 1691780000,
-    "id": 49010,
-    "level": 1
+    "conekta_id": "cus_2uQhVZCywJbVo8U5k",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49010
   },
   {
     "nombre": "Mirnaconsuelo",
@@ -53694,10 +53132,10 @@ export const activeUsers = [
     "correo": "mirnalemusm@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50246924351,
-    "stripe_id": "cus_NhC2F9jFqevlmF",
-    "final_date": 1691790000,
-    "id": 49032,
-    "level": 1
+    "conekta_id": "cus_2uQhVZzxptWr4HCeB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49032
   },
   {
     "nombre": "edithdelCarmen",
@@ -53705,10 +53143,10 @@ export const activeUsers = [
     "correo": "edithdelcarmen-70@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529818186056,
-    "stripe_id": "cus_NhC5Wn5NsTTXCZ",
-    "final_date": 1691790000,
-    "id": 49036,
-    "level": 1
+    "conekta_id": "cus_2uQhVZi24QRBx5dTT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49036
   },
   {
     "nombre": "RebecaAbigail",
@@ -53716,10 +53154,9 @@ export const activeUsers = [
     "correo": "beckya.g20@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528331927012,
-    "stripe_id": "cus_NhDhWvUOAbD6Kd",
     "final_date": 1723670000,
-    "id": 49054,
-    "level": 0
+    "level": 0,
+    "id": 49054
   },
   {
     "nombre": "Mariana",
@@ -53727,10 +53164,10 @@ export const activeUsers = [
     "correo": "mariana.islaskida@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527751962719,
-    "stripe_id": "cus_NhEO2ytA8SjxwU",
-    "final_date": 1691790000,
-    "id": 49064,
-    "level": 1
+    "conekta_id": "cus_2uQhVagcyhio91Hbr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49064
   },
   {
     "nombre": "KarenSusana",
@@ -53738,10 +53175,10 @@ export const activeUsers = [
     "correo": "kaevsualf@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525539519798,
-    "stripe_id": "cus_NhHTBdD460UN2S",
-    "final_date": 1691810000,
-    "id": 49095,
-    "level": 1
+    "conekta_id": "cus_2uQhVbMfntrF13Zar",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49095
   },
   {
     "nombre": "linetKarenina",
@@ -53749,10 +53186,9 @@ export const activeUsers = [
     "correo": "gbrescia587@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524351201481,
-    "stripe_id": "cus_NhKlU69sjZD3rH",
     "final_date": 1689190000,
-    "id": 49125,
-    "level": 1
+    "level": 1,
+    "id": 49125
   },
   {
     "nombre": "Airam Thamara",
@@ -53760,10 +53196,10 @@ export const activeUsers = [
     "correo": "maayaahgroo@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523324967966,
-    "stripe_id": "cus_NhKaNsig0ORiKc",
-    "final_date": 1693860000,
-    "id": 49135,
-    "level": 1
+    "conekta_id": "cus_2uQhVc6VK6QtcJa6u",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49135
   },
   {
     "nombre": "MagnamaraMarianaIrazema",
@@ -53771,10 +53207,10 @@ export const activeUsers = [
     "correo": "moronaguzman@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523310966635,
-    "stripe_id": "cus_NhVqlheKxqSYIe",
-    "final_date": 1691860000,
-    "id": 49168,
-    "level": 1
+    "conekta_id": "cus_2uQhVceivc1qpH6rn",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49168
   },
   {
     "nombre": "Karina",
@@ -53782,10 +53218,10 @@ export const activeUsers = [
     "correo": "kari.8upn@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525626451536,
-    "stripe_id": "cus_Nlpd5weGEmPKld",
-    "final_date": 1692300000,
-    "id": 49174,
-    "level": 1
+    "conekta_id": "cus_2uQhVdQ7fQESBFZ8e",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49174
   },
   {
     "nombre": "Claudia",
@@ -53793,10 +53229,10 @@ export const activeUsers = [
     "correo": "claudiamry89@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 17025924671,
-    "stripe_id": "cus_NhcKU6fy0h28Mi",
-    "final_date": 1691880000,
-    "id": 49197,
-    "level": 1
+    "conekta_id": "cus_2uQhVdQ7fQESBFZ8o",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49197
   },
   {
     "nombre": "yose",
@@ -53804,10 +53240,10 @@ export const activeUsers = [
     "correo": "yosects517@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527351429043,
-    "stripe_id": "cus_NhghUqgR5vqc34",
-    "final_date": 1693000000,
-    "id": 49203,
-    "level": 1
+    "conekta_id": "cus_2uQhVe8My1994pRri",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49203
   },
   {
     "nombre": "Susana",
@@ -53815,10 +53251,10 @@ export const activeUsers = [
     "correo": "almanzaperezsusana0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528134074522,
-    "stripe_id": "cus_Nm9IMgdsdb6nWL",
-    "final_date": 1692930000,
-    "id": 49229,
-    "level": 1
+    "conekta_id": "cus_2uQhVf7Y6u6goHn1M",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49229
   },
   {
     "nombre": "CarmenAlejandra",
@@ -53826,10 +53262,10 @@ export const activeUsers = [
     "correo": "alejandra.cgm90@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528711072051,
-    "stripe_id": "cus_NhuCybTxKhHV7Q",
-    "final_date": 1691950000,
-    "id": 49246,
-    "level": 1
+    "conekta_id": "cus_2uQhVfcaDzvP19GDB",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49246
   },
   {
     "nombre": "monica",
@@ -53837,10 +53273,9 @@ export const activeUsers = [
     "correo": "acinom-14@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524444267307,
-    "stripe_id": "cus_NhzJRoJyVsx7nZ",
     "final_date": 1686700000,
-    "id": 49274,
-    "level": 1
+    "level": 1,
+    "id": 49274
   },
   {
     "nombre": "Yadira",
@@ -53848,10 +53283,10 @@ export const activeUsers = [
     "correo": "yadis2279@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528116090221,
-    "stripe_id": "cus_Ni4Sz4utaP6Byr",
-    "final_date": 1691990000,
-    "id": 49316,
-    "level": 1
+    "conekta_id": "cus_2uQhVgbB9JDz9AbZV",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49316
   },
   {
     "nombre": "Daniela",
@@ -53859,10 +53294,9 @@ export const activeUsers = [
     "correo": "logan.burquez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526241775860,
-    "stripe_id": "cus_Ni68Zmk5iHFDm9",
     "final_date": 1689320000,
-    "id": 49324,
-    "level": 1
+    "level": 1,
+    "id": 49324
   },
   {
     "nombre": "Rosario",
@@ -53870,10 +53304,10 @@ export const activeUsers = [
     "correo": "chayis1223@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527721224546,
-    "stripe_id": "cus_NlpdAfCD2nHCyA",
-    "final_date": 1692810000,
-    "id": 49326,
-    "level": 1
+    "conekta_id": "cus_2uQhVhGDxVMS1CsWJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49326
   },
   {
     "nombre": "VirginiaPaola",
@@ -53881,10 +53315,10 @@ export const activeUsers = [
     "correo": "paolagtz1523@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524433455779,
-    "stripe_id": "cus_NiHYDs32f5bkoq",
-    "final_date": 1692040000,
-    "id": 49351,
-    "level": 1
+    "conekta_id": "cus_2uQhVhGDxVMRzCDZK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49351
   },
   {
     "nombre": "Maria",
@@ -53892,10 +53326,10 @@ export const activeUsers = [
     "correo": "rafaelmary.040320@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524622660687,
-    "stripe_id": "cus_NlpdAfLZbLoHIo",
-    "final_date": 1692760000,
-    "id": 49359,
-    "level": 1
+    "conekta_id": "cus_2uQhVi13Ugv5cTt3r",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49359
   },
   {
     "nombre": "Violeta",
@@ -53903,10 +53337,10 @@ export const activeUsers = [
     "correo": "violetatellez77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525542459161,
-    "stripe_id": "cus_NiLozNy0FwMU1V",
-    "final_date": 1692050000,
-    "id": 49376,
-    "level": 1
+    "conekta_id": "cus_2uQhViZrJoAyZ9Cbc",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49376
   },
   {
     "nombre": "Aline",
@@ -53914,10 +53348,9 @@ export const activeUsers = [
     "correo": "aline270803moreno@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513720366,
-    "stripe_id": "cus_NiOeNYePkLIZIy",
     "final_date": 1686790000,
-    "id": 49385,
-    "level": 1
+    "level": 1,
+    "id": 49385
   },
   {
     "nombre": "MaríaGraciela",
@@ -53925,10 +53358,10 @@ export const activeUsers = [
     "correo": "cardenasgrace26@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616235839,
-    "stripe_id": "cus_NifIuow8uyoKyH",
-    "final_date": 1692120000,
-    "id": 49415,
-    "level": 1
+    "conekta_id": "cus_2uQhVjJ6cQ5gYayMh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49415
   },
   {
     "nombre": "LillianVeronica",
@@ -53936,10 +53369,9 @@ export const activeUsers = [
     "correo": "borjalillian66@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461320928,
-    "stripe_id": "cus_NihXFWdOFRmVPc",
     "final_date": 1689450000,
-    "id": 49424,
-    "level": 1
+    "level": 1,
+    "id": 49424
   },
   {
     "nombre": "Cecilia",
@@ -53947,10 +53379,10 @@ export const activeUsers = [
     "correo": "cecivirgen@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525611123109,
-    "stripe_id": "cus_Ne8kuh390FcZWS",
-    "final_date": 1693760000,
-    "id": 49455,
-    "level": 1
+    "conekta_id": "cus_2uQhVk2v8beL4yjpm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49455
   },
   {
     "nombre": "Jacqueline",
@@ -53958,10 +53390,10 @@ export const activeUsers = [
     "correo": "jaky_yos@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522462088225,
-    "stripe_id": "cus_Ne8SwotFJ0RiXQ",
-    "final_date": 1693760000,
-    "id": 49458,
-    "level": 1
+    "conekta_id": "cus_2uQhVkxKZVAg7YY2R",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49458
   },
   {
     "nombre": "Natalhia",
@@ -53969,10 +53401,10 @@ export const activeUsers = [
     "correo": "naryalarcon@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527712196326,
-    "stripe_id": "cus_NeF4mWDeg1j3lb",
-    "final_date": 1693780000,
-    "id": 49471,
-    "level": 1
+    "conekta_id": "cus_2uQhVmX8PbRa1Ja9j",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49471
   },
   {
     "nombre": "Ma.del Carmen",
@@ -53980,10 +53412,10 @@ export const activeUsers = [
     "correo": "carmenproxd777@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 15627047121,
-    "stripe_id": "cus_NeIqXkxbSojsN3",
-    "final_date": 1693800000,
-    "id": 49484,
-    "level": 1
+    "conekta_id": "cus_2uQhVnRxbtHyJvxLK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49484
   },
   {
     "nombre": "Ariana",
@@ -53991,10 +53423,10 @@ export const activeUsers = [
     "correo": "arianajoseantonio@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583838415,
-    "stripe_id": "cus_NeJm1tiWRlDVaN",
-    "final_date": 1693800000,
-    "id": 49490,
-    "level": 1
+    "conekta_id": "cus_2uQhVnYtgH5sbeyPp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49490
   },
   {
     "nombre": "danya lizette",
@@ -54002,10 +53434,10 @@ export const activeUsers = [
     "correo": "danya28127@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526643609613,
-    "stripe_id": "cus_NeeiF7AXcdW4sw",
-    "final_date": 1693880000,
-    "id": 49494,
-    "level": 1
+    "conekta_id": "cus_2uQhVoEYq6HpgG5R6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49494
   },
   {
     "nombre": "Esmeralda",
@@ -54013,20 +53445,19 @@ export const activeUsers = [
     "correo": "princesscgoesme@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522461957464,
-    "stripe_id": "cus_NeZB0kh34Aqgdk",
-    "final_date": 1693860000,
-    "id": 49501,
-    "level": 1
+    "conekta_id": "cus_2uQhVoj1jbTaCL4J8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49501
   },
   {
     "nombre": "kevin",
     "apellido": "Han",
     "correo": "kevin@test.com",
     "whatsapp": "+526623400635",
-    "stripe_id": "cus_NlfRoVQIQxAOJm",
     "final_date": 1693860000,
-    "id": 49519,
-    "level": 1
+    "level": 1,
+    "id": 49519
   },
   {
     "nombre": "Celia",
@@ -54034,10 +53465,9 @@ export const activeUsers = [
     "correo": "cema93112@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528991598579,
-    "stripe_id": "cus_Nj7VwunOJrawuH",
     "final_date": 1689550000,
-    "id": 49526,
-    "level": 1
+    "level": 1,
+    "id": 49526
   },
   {
     "nombre": "Estefania",
@@ -54045,10 +53475,9 @@ export const activeUsers = [
     "correo": "reginofanny@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525517845705,
-    "stripe_id": "cus_Nk9QLlXflxa4TN",
     "final_date": 1689790000,
-    "id": 49554,
-    "level": 1
+    "level": 1,
+    "id": 49554
   },
   {
     "nombre": "Annel Guadalupe",
@@ -54056,10 +53485,10 @@ export const activeUsers = [
     "correo": "annelsandoval82@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528129371957,
-    "stripe_id": "cus_NkFkWBWhFc7vgw",
-    "final_date": 1692490000,
-    "id": 49577,
-    "level": 1
+    "conekta_id": "cus_2uQhVqWAm5LUBx91q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49577
   },
   {
     "nombre": "iridian",
@@ -54067,10 +53496,10 @@ export const activeUsers = [
     "correo": "lopeziridian599@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527151453549,
-    "stripe_id": "cus_NkEA29dTLux8zn",
-    "final_date": 1692480000,
-    "id": 49601,
-    "level": 1
+    "conekta_id": "cus_2uQhVrBputYRHBxbH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49601
   },
   {
     "nombre": "Gabriela",
@@ -54078,10 +53507,10 @@ export const activeUsers = [
     "correo": "gabrielanicolasaguilar@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522722492321,
-    "stripe_id": "cus_ONAMkgzlAXHZg5",
-    "final_date": 0,
-    "id": 49606,
-    "level": 1
+    "conekta_id": "cus_2uQhVrrsj5fs4YwJJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49606
   },
   {
     "nombre": "Nallely Chavarría",
@@ -54089,10 +53518,10 @@ export const activeUsers = [
     "correo": "omaringis2403@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527752168202,
-    "stripe_id": "cus_NkovoYtbni6awX",
-    "final_date": 1692620000,
-    "id": 49618,
-    "level": 1
+    "conekta_id": "cus_2uQhVryooUTmMGxM7",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49618
   },
   {
     "nombre": "Edith Guadalupe",
@@ -54100,10 +53529,10 @@ export const activeUsers = [
     "correo": "aneshcute@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526567059519,
-    "stripe_id": "cus_Nn5qiloBAdg4w1",
-    "final_date": 1693150000,
-    "id": 49630,
-    "level": 1
+    "conekta_id": "cus_2uQhVsbhFHEWgpbo3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49630
   },
   {
     "nombre": "Cinthia",
@@ -54111,10 +53540,10 @@ export const activeUsers = [
     "correo": "cinthialife5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523113392820,
-    "stripe_id": "cus_NksL8VISWs8LPO",
-    "final_date": 1692630000,
-    "id": 49647,
-    "level": 1
+    "conekta_id": "cus_2uQhVtAW5PVQgeq2M",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49647
   },
   {
     "nombre": "Berenice",
@@ -54122,10 +53551,10 @@ export const activeUsers = [
     "correo": "420sheyann@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525534282184,
-    "stripe_id": "cus_NlhhTlndEta9xV",
-    "final_date": 1693240000,
-    "id": 49652,
-    "level": 1
+    "conekta_id": "cus_2uQhVtuKbb44JvVWv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49652
   },
   {
     "nombre": "Mayra",
@@ -54133,10 +53562,10 @@ export const activeUsers = [
     "correo": "oscarito.carrillo2001@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528118922038,
-    "stripe_id": "cus_NlGkZV0Yxh8OIr",
-    "final_date": 1693170000,
-    "id": 49659,
-    "level": 1
+    "conekta_id": "cus_2uQhVtuKbb44G1D4u",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49659
   },
   {
     "nombre": "Angelica",
@@ -54144,10 +53573,9 @@ export const activeUsers = [
     "correo": "li4meg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525560282181,
-    "stripe_id": "cus_Nlhh6rxo0dss4R",
     "final_date": 1718150000,
-    "id": 49660,
-    "level": 0
+    "level": 0,
+    "id": 49660
   },
   {
     "nombre": "haudrey",
@@ -54155,10 +53583,9 @@ export const activeUsers = [
     "correo": "haudreyconashe@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524428713635,
-    "stripe_id": "cus_NlR9aVRcZjM59m",
     "final_date": 1693950000,
-    "id": 49672,
-    "level": 1
+    "level": 1,
+    "id": 49672
   },
   {
     "nombre": "jeny",
@@ -54166,10 +53593,10 @@ export const activeUsers = [
     "correo": "sheila.torres.vaca@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525529370465,
-    "stripe_id": "cus_NlhhkuJnCNyn6s",
-    "final_date": 1691970000,
-    "id": 49674,
-    "level": 1
+    "conekta_id": "cus_2uQhVvck35vK2owYb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49674
   },
   {
     "nombre": "Inowu",
@@ -54177,10 +53604,10 @@ export const activeUsers = [
     "correo": "inowu@dev.com",
     "pais": "Mexico",
     "whatsapp": 526623400635,
-    "stripe_id": "cus_NliH8rG0JRbTFG",
+    "conekta_id": "cus_2uRxzmW5y1eSojiJ5",
     "final_date": 1000,
-    "id": 49677,
-    "level": 1
+    "level": 1,
+    "id": 49677
   },
   {
     "nombre": "Diego",
@@ -54188,10 +53615,9 @@ export const activeUsers = [
     "correo": "diego@gonvar.io",
     "pais": "Argentina",
     "whatsapp": 5491153137872,
-    "stripe_id": "cus_Nlj6W3HjnKIDZr",
     "final_date": 0,
-    "id": 49678,
-    "level": 1
+    "level": 1,
+    "id": 49678
   },
   {
     "nombre": "andrei",
@@ -54199,10 +53625,9 @@ export const activeUsers = [
     "correo": "andreiwoolfolk95@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526623374415,
-    "stripe_id": "cus_NlkiB2TnofEdQL",
     "final_date": 1683570000,
-    "id": 49679,
-    "level": 1
+    "level": 1,
+    "id": 49679
   },
   {
     "nombre": "Angelica Sinai",
@@ -54210,10 +53635,9 @@ export const activeUsers = [
     "correo": "paulinoangelicasinai@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527223512317,
-    "stripe_id": "cus_NmPxegy9RFSoUn",
     "final_date": 0,
-    "id": 49680,
-    "level": 1
+    "level": 1,
+    "id": 49680
   },
   {
     "nombre": "Lucía del Carmen",
@@ -54221,10 +53645,9 @@ export const activeUsers = [
     "correo": "caleiva.30@gmail.com",
     "pais": "España",
     "whatsapp": 34692271217,
-    "stripe_id": "cus_NmPxqdLy7aa4iI",
     "final_date": 0,
-    "id": 49681,
-    "level": 1
+    "level": 1,
+    "id": 49681
   },
   {
     "nombre": "mary",
@@ -54232,10 +53655,9 @@ export const activeUsers = [
     "correo": "trunimal@gmail.com",
     "pais": "España",
     "whatsapp": 34663978911,
-    "stripe_id": "cus_NmPx3XpAHHchYf",
     "final_date": 0,
-    "id": 49682,
-    "level": 1
+    "level": 1,
+    "id": 49682
   },
   {
     "nombre": "teresa",
@@ -54243,10 +53665,9 @@ export const activeUsers = [
     "correo": "borreguita_150@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527821722215,
-    "stripe_id": "cus_NmPxr8J7JEc0Fq",
     "final_date": 0,
-    "id": 49683,
-    "level": 1
+    "level": 1,
+    "id": 49683
   },
   {
     "nombre": "Elizabeth",
@@ -54254,10 +53675,9 @@ export const activeUsers = [
     "correo": "elizabethduran1983@gmail.com",
     "pais": "Chile",
     "whatsapp": 56997099367,
-    "stripe_id": "cus_NmPxGtykVRLfry",
     "final_date": 0,
-    "id": 49684,
-    "level": 1
+    "level": 1,
+    "id": 49684
   },
   {
     "nombre": "xochitl",
@@ -54265,10 +53685,9 @@ export const activeUsers = [
     "correo": "xg925700@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522491199809,
-    "stripe_id": "cus_NmPxrCCqnKeej1",
     "final_date": 0,
-    "id": 49685,
-    "level": 1
+    "level": 1,
+    "id": 49685
   },
   {
     "nombre": "Antonia",
@@ -54276,10 +53695,9 @@ export const activeUsers = [
     "correo": "achz1963@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524286878158,
-    "stripe_id": "cus_Nlnr2HmLBzf1k6",
     "final_date": 0,
-    "id": 49686,
-    "level": 1
+    "level": 1,
+    "id": 49686
   },
   {
     "nombre": "Danae Monserrat",
@@ -54287,10 +53705,9 @@ export const activeUsers = [
     "correo": "danae.mc13@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523325420879,
-    "stripe_id": "cus_NmPxMkFiHOK4BO",
     "final_date": 0,
-    "id": 49687,
-    "level": 1
+    "level": 1,
+    "id": 49687
   },
   {
     "nombre": "Sandra",
@@ -54298,10 +53715,9 @@ export const activeUsers = [
     "correo": "sv4576127@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525585487516,
-    "stripe_id": "cus_NlrjLM058bghex",
     "final_date": 0,
-    "id": 49688,
-    "level": 1
+    "level": 1,
+    "id": 49688
   },
   {
     "nombre": "Carla Janeth",
@@ -54309,10 +53725,9 @@ export const activeUsers = [
     "correo": "carlajanethcontrerasgutierrez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527531621239,
-    "stripe_id": "cus_NlwmdTB1buyWz0",
     "final_date": 0,
-    "id": 49689,
-    "level": 1
+    "level": 1,
+    "id": 49689
   },
   {
     "nombre": "Flor",
@@ -54320,10 +53735,9 @@ export const activeUsers = [
     "correo": "gonzalezflor0102@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529141008814,
-    "stripe_id": "cus_NmPxZ8joIn7ucg",
     "final_date": 0,
-    "id": 49690,
-    "level": 1
+    "level": 1,
+    "id": 49690
   },
   {
     "nombre": "Carmen",
@@ -54331,10 +53745,9 @@ export const activeUsers = [
     "correo": "carmenespitia455@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524171578299,
-    "stripe_id": "cus_NmPxgnZifJtAAI",
     "final_date": 0,
-    "id": 49691,
-    "level": 1
+    "level": 1,
+    "id": 49691
   },
   {
     "nombre": "karla",
@@ -54342,10 +53755,9 @@ export const activeUsers = [
     "correo": "kmaganaramirez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529931811505,
-    "stripe_id": "cus_NmPxXyVJsBp0wh",
     "final_date": 0,
-    "id": 49692,
-    "level": 1
+    "level": 1,
+    "id": 49692
   },
   {
     "nombre": "Fernanda",
@@ -54353,10 +53765,9 @@ export const activeUsers = [
     "correo": "emanuelyliah1501@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523312305807,
-    "stripe_id": "cus_NmPxx0esReV86f",
     "final_date": 0,
-    "id": 49693,
-    "level": 1
+    "level": 1,
+    "id": 49693
   },
   {
     "nombre": "lilibed",
@@ -54364,10 +53775,9 @@ export const activeUsers = [
     "correo": "lilijoma.8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527293387174,
-    "stripe_id": "cus_Nm0JMc9LYgmtdT",
     "final_date": 0,
-    "id": 49694,
-    "level": 1
+    "level": 1,
+    "id": 49694
   },
   {
     "nombre": "Emily Nicole",
@@ -54375,10 +53785,9 @@ export const activeUsers = [
     "correo": "emilynicolediaz8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528180843125,
-    "stripe_id": "cus_Nm2nf9epYahXoQ",
     "final_date": 0,
-    "id": 49695,
-    "level": 1
+    "level": 1,
+    "id": 49695
   },
   {
     "nombre": "Eri",
@@ -54386,10 +53795,9 @@ export const activeUsers = [
     "correo": "flaquitacardozo34@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525512322160,
-    "stripe_id": "cus_NmPxJp5PlnZX6x",
     "final_date": 0,
-    "id": 49696,
-    "level": 1
+    "level": 1,
+    "id": 49696
   },
   {
     "nombre": "Perla",
@@ -54397,10 +53805,9 @@ export const activeUsers = [
     "correo": "alrep2504@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221398263,
-    "stripe_id": "cus_NmPxHVEdIEvtGI",
     "final_date": 0,
-    "id": 49697,
-    "level": 1
+    "level": 1,
+    "id": 49697
   },
   {
     "nombre": "Elsa",
@@ -54408,10 +53815,9 @@ export const activeUsers = [
     "correo": "elsafelix@outlook.es",
     "pais": "Mexico",
     "whatsapp": 526692619312,
-    "stripe_id": "cus_NmPxSm9IkFVtBB",
     "final_date": 0,
-    "id": 49698,
-    "level": 1
+    "level": 1,
+    "id": 49698
   },
   {
     "nombre": "citlaly",
@@ -54419,10 +53825,9 @@ export const activeUsers = [
     "correo": "citlalyrivera068@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523841187647,
-    "stripe_id": "cus_NmPxY4pXGae0l3",
     "final_date": 0,
-    "id": 49699,
-    "level": 1
+    "level": 1,
+    "id": 49699
   },
   {
     "nombre": "alejandro",
@@ -54430,10 +53835,9 @@ export const activeUsers = [
     "correo": "aleejandro486@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522211666462,
-    "stripe_id": "cus_NmPx61c4SLy4yG",
     "final_date": 0,
-    "id": 49700,
-    "level": 1
+    "level": 1,
+    "id": 49700
   },
   {
     "nombre": "amairani",
@@ -54441,10 +53845,9 @@ export const activeUsers = [
     "correo": "04amy00@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548583382,
-    "stripe_id": "cus_NmPxJLRpqf8khM",
     "final_date": 0,
-    "id": 49701,
-    "level": 1
+    "level": 1,
+    "id": 49701
   },
   {
     "nombre": "Diana",
@@ -54452,10 +53855,9 @@ export const activeUsers = [
     "correo": "diana_romero_@live.com",
     "pais": "Mexico",
     "whatsapp": 524272283742,
-    "stripe_id": "cus_NmPxpYEplTUlbH",
     "final_date": 0,
-    "id": 49702,
-    "level": 1
+    "level": 1,
+    "id": 49702
   },
   {
     "nombre": "America Jacqueline",
@@ -54463,10 +53865,9 @@ export const activeUsers = [
     "correo": "garciaamerica86@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525610896387,
-    "stripe_id": "cus_NmPy1tVAtiVH9o",
     "final_date": 0,
-    "id": 49703,
-    "level": 1
+    "level": 1,
+    "id": 49703
   },
   {
     "nombre": "Mariela",
@@ -54474,10 +53875,9 @@ export const activeUsers = [
     "correo": "ximenaleo85@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529934552594,
-    "stripe_id": "cus_NmPy8HnVXJDpua",
     "final_date": 0,
-    "id": 49704,
-    "level": 1
+    "level": 1,
+    "id": 49704
   },
   {
     "nombre": "Shirley",
@@ -54485,10 +53885,9 @@ export const activeUsers = [
     "correo": "tashy2225@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50234262061,
-    "stripe_id": "cus_NmPyeFWoEHlDAf",
     "final_date": 0,
-    "id": 49705,
-    "level": 1
+    "level": 1,
+    "id": 49705
   },
   {
     "nombre": "Yasmin",
@@ -54496,10 +53895,9 @@ export const activeUsers = [
     "correo": "yasmin.sesento@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523312731198,
-    "stripe_id": "cus_NmPyomlaf8rNZU",
     "final_date": 0,
-    "id": 49706,
-    "level": 1
+    "level": 1,
+    "id": 49706
   },
   {
     "nombre": "Karol",
@@ -54507,10 +53905,9 @@ export const activeUsers = [
     "correo": "kadito.kt@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616966258,
-    "stripe_id": "cus_NmPyQQ2YSv7Obd",
     "final_date": 0,
-    "id": 49707,
-    "level": 1
+    "level": 1,
+    "id": 49707
   },
   {
     "nombre": "Fátima",
@@ -54518,10 +53915,9 @@ export const activeUsers = [
     "correo": "citlapark18@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522216501040,
-    "stripe_id": "cus_NmPyGywUsIrGZk",
     "final_date": 0,
-    "id": 49708,
-    "level": 1
+    "level": 1,
+    "id": 49708
   },
   {
     "nombre": "Georgina",
@@ -54529,10 +53925,10 @@ export const activeUsers = [
     "correo": "ginatla.40b@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527772525051,
-    "stripe_id": "cus_NmPDeUtfEclzwN",
-    "final_date": 1692990000,
-    "id": 49709,
-    "level": 1
+    "conekta_id": "cus_2uQhW3wAY57bVkoQv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49709
   },
   {
     "nombre": "Carolina Guadalupe",
@@ -54540,10 +53936,9 @@ export const activeUsers = [
     "correo": "karo_gva@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527471444467,
-    "stripe_id": "cus_NmPyy0fR4by5IL",
     "final_date": 0,
-    "id": 49710,
-    "level": 1
+    "level": 1,
+    "id": 49710
   },
   {
     "nombre": "Katerine",
@@ -54551,10 +53946,9 @@ export const activeUsers = [
     "correo": "katt.vbo@hotmail.com",
     "pais": "Ecuador",
     "whatsapp": 593996214400,
-    "stripe_id": "cus_NmPyYMmqhU0vUq",
     "final_date": 0,
-    "id": 49711,
-    "level": 1
+    "level": 1,
+    "id": 49711
   },
   {
     "nombre": "María Alicia",
@@ -54562,10 +53956,9 @@ export const activeUsers = [
     "correo": "marialicianguianovillegas.02@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528713536078,
-    "stripe_id": "cus_NmPy3hcNvZxkLn",
     "final_date": 0,
-    "id": 49712,
-    "level": 1
+    "level": 1,
+    "id": 49712
   },
   {
     "nombre": "test1",
@@ -54573,10 +53966,9 @@ export const activeUsers = [
     "correo": "test1@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526623400635,
-    "stripe_id": "cus_NmQa1KbplswIqE",
     "final_date": 0,
-    "id": 49713,
-    "level": 1
+    "level": 1,
+    "id": 49713
   },
   {
     "nombre": "janet",
@@ -54584,17 +53976,15 @@ export const activeUsers = [
     "correo": "santiagofercho04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529582193124,
-    "stripe_id": "cus_NmWX0ak6Ji1ilC",
     "final_date": 1690340000,
-    "id": 49717,
-    "level": 1
+    "level": 1,
+    "id": 49717
   },
   {
     "correo": "pamelitanicole@hotmail.com",
-    "stripe_id": "cus_LohquNPQ68OUOM",
     "final_date": 1692960000,
-    "id": 49721,
-    "level": 1
+    "level": 1,
+    "id": 49721
   },
   {
     "nombre": "Magdalena",
@@ -54602,10 +53992,9 @@ export const activeUsers = [
     "correo": "tresbellezas75@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529564145254,
-    "stripe_id": "cus_NnF1IqGqpm5SX8",
     "final_date": 1722560000,
-    "id": 49739,
-    "level": 0
+    "level": 0,
+    "id": 49739
   },
   {
     "nombre": "Luz Angélica",
@@ -54613,45 +54002,40 @@ export const activeUsers = [
     "correo": "angelyorozco20@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526641298609,
-    "stripe_id": "cus_NnF1v1xgThGenV",
-    "final_date": 1692910000,
-    "id": 49741,
-    "level": 1
+    "conekta_id": "cus_2uQhW6GZB4bSc8uDq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49741
   },
   {
     "correo": "naxhielysanchez@gmail.com",
-    "stripe_id": "cus_LW1Ft7gYyTJ15U",
     "final_date": 1692370000,
-    "id": 49763,
-    "level": 1
+    "level": 1,
+    "id": 49763
   },
   {
     "correo": "nemo1945@hotmail.com",
-    "stripe_id": "cus_NneiuN83dJfWbS",
     "final_date": 1693280000,
-    "id": 49765,
-    "level": 1
+    "level": 1,
+    "id": 49765
   },
   {
     "correo": "jakilove20@hotmail.com",
-    "stripe_id": "cus_LoQVF0FVR9BRJD",
     "final_date": 1664860000,
-    "id": 49766,
-    "level": 1
+    "level": 1,
+    "id": 49766
   },
   {
     "correo": "eduardosalinasvazquez@gmail.com",
-    "stripe_id": "cus_MX0ke9NMojB3lA",
     "final_date": 1690780000,
-    "id": 49771,
-    "level": 1
+    "level": 1,
+    "id": 49771
   },
   {
     "correo": "estefani_leo@hotmail.com",
-    "stripe_id": "cus_MX0lDdVwJjALGY",
     "final_date": 1690780000,
-    "id": 49772,
-    "level": 1
+    "level": 1,
+    "id": 49772
   },
   {
     "nombre": "Abigail",
@@ -54659,10 +54043,9 @@ export const activeUsers = [
     "correo": "abigailbarrios26899@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52221744305,
-    "stripe_id": "cus_NoT0UG59N8ficz",
     "final_date": 0,
-    "id": 49773,
-    "level": 1
+    "level": 1,
+    "id": 49773
   },
   {
     "nombre": "Fernanda",
@@ -54670,10 +54053,9 @@ export const activeUsers = [
     "correo": "fernandaalvarado0131@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527472245616,
-    "stripe_id": "cus_NoT0YwaIPOyEGt",
     "final_date": 0,
-    "id": 49774,
-    "level": 1
+    "level": 1,
+    "id": 49774
   },
   {
     "nombre": "Jade",
@@ -54681,10 +54063,9 @@ export const activeUsers = [
     "correo": "mariaisabel123an@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526611476910,
-    "stripe_id": "cus_NoT0hxYH2fxyKe",
     "final_date": 0,
-    "id": 49775,
-    "level": 1
+    "level": 1,
+    "id": 49775
   },
   {
     "nombre": "Lesly Madai",
@@ -54692,10 +54073,9 @@ export const activeUsers = [
     "correo": "leslymadai5416@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522223499184,
-    "stripe_id": "cus_NoT0a36WehnQbp",
     "final_date": 0,
-    "id": 49776,
-    "level": 1
+    "level": 1,
+    "id": 49776
   },
   {
     "nombre": "sonia",
@@ -54703,10 +54083,9 @@ export const activeUsers = [
     "correo": "chinita.mabreu1011@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543602845,
-    "stripe_id": "cus_NoT0zCGqvMQxmr",
     "final_date": 0,
-    "id": 49777,
-    "level": 1
+    "level": 1,
+    "id": 49777
   },
   {
     "nombre": "ana karen",
@@ -54714,10 +54093,9 @@ export const activeUsers = [
     "correo": "karenn.correa43@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524774134598,
-    "stripe_id": "cus_NoT0iaCWDNsrQx",
     "final_date": 0,
-    "id": 49778,
-    "level": 1
+    "level": 1,
+    "id": 49778
   },
   {
     "nombre": "Diana Estela",
@@ -54725,10 +54103,9 @@ export const activeUsers = [
     "correo": "decj1403@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523121489532,
-    "stripe_id": "cus_NoT0a3Y4mzEzOc",
     "final_date": 0,
-    "id": 49779,
-    "level": 1
+    "level": 1,
+    "id": 49779
   },
   {
     "nombre": "Vanessa yamileth",
@@ -54736,10 +54113,9 @@ export const activeUsers = [
     "correo": "vanessavalladaresrosales150413@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528994608323,
-    "stripe_id": "cus_NoT00DXaW0DBCO",
     "final_date": 0,
-    "id": 49780,
-    "level": 1
+    "level": 1,
+    "id": 49780
   },
   {
     "nombre": "Marielena",
@@ -54747,10 +54123,9 @@ export const activeUsers = [
     "correo": "mva1587@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523411494892,
-    "stripe_id": "cus_NoT0WFRKQBaLZw",
     "final_date": 0,
-    "id": 49781,
-    "level": 1
+    "level": 1,
+    "id": 49781
   },
   {
     "nombre": "grethel",
@@ -54758,10 +54133,9 @@ export const activeUsers = [
     "correo": "grethel_flores2012@hotmail.com",
     "pais": "Nicaragua",
     "whatsapp": 50578571236,
-    "stripe_id": "cus_NoT0CSjTYhCunC",
     "final_date": 0,
-    "id": 49782,
-    "level": 1
+    "level": 1,
+    "id": 49782
   },
   {
     "nombre": "Aileth",
@@ -54769,10 +54143,9 @@ export const activeUsers = [
     "correo": "ce183076@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527451251472,
-    "stripe_id": "cus_NoT03sBRTQgWSH",
     "final_date": 0,
-    "id": 49783,
-    "level": 1
+    "level": 1,
+    "id": 49783
   },
   {
     "nombre": "Leli",
@@ -54780,10 +54153,9 @@ export const activeUsers = [
     "correo": "halit-sabila@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529631677661,
-    "stripe_id": "cus_NoT0ggPdqPv5tA",
     "final_date": 0,
-    "id": 49784,
-    "level": 1
+    "level": 1,
+    "id": 49784
   },
   {
     "nombre": "MARIAN",
@@ -54791,10 +54163,9 @@ export const activeUsers = [
     "correo": "marianspineda1987@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525514104458,
-    "stripe_id": "cus_NoT0I0n0p5IsOj",
     "final_date": 0,
-    "id": 49785,
-    "level": 1
+    "level": 1,
+    "id": 49785
   },
   {
     "nombre": "Montserrat",
@@ -54802,10 +54173,9 @@ export const activeUsers = [
     "correo": "ali_mont88@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525529768591,
-    "stripe_id": "cus_NoT0i73RYKTmB6",
     "final_date": 0,
-    "id": 49786,
-    "level": 1
+    "level": 1,
+    "id": 49786
   },
   {
     "nombre": "María del Rosario",
@@ -54813,10 +54183,9 @@ export const activeUsers = [
     "correo": "vargasrous1082@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525527107075,
-    "stripe_id": "cus_NoT0DMrL3IzZXM",
     "final_date": 0,
-    "id": 49787,
-    "level": 1
+    "level": 1,
+    "id": 49787
   },
   {
     "nombre": "Berenice",
@@ -54824,10 +54193,9 @@ export const activeUsers = [
     "correo": "berenicemagana230@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523511465147,
-    "stripe_id": "cus_NoT0iVB1Oro7uj",
     "final_date": 0,
-    "id": 49788,
-    "level": 1
+    "level": 1,
+    "id": 49788
   },
   {
     "nombre": "Karen",
@@ -54835,10 +54203,9 @@ export const activeUsers = [
     "correo": "karenramirezmolina0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525517302926,
-    "stripe_id": "cus_NoT0n9a8LGxK7X",
     "final_date": 0,
-    "id": 49789,
-    "level": 1
+    "level": 1,
+    "id": 49789
   },
   {
     "nombre": "Natalia",
@@ -54846,10 +54213,9 @@ export const activeUsers = [
     "correo": "nm245181@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52671136144,
-    "stripe_id": "cus_NoT03oNfztQY8G",
     "final_date": 0,
-    "id": 49790,
-    "level": 1
+    "level": 1,
+    "id": 49790
   },
   {
     "nombre": "Rocio",
@@ -54857,10 +54223,9 @@ export const activeUsers = [
     "correo": "atzmely822@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524881421872,
-    "stripe_id": "cus_NoT0vB8hyUsFJa",
     "final_date": 0,
-    "id": 49791,
-    "level": 1
+    "level": 1,
+    "id": 49791
   },
   {
     "nombre": "Maria del carmen",
@@ -54868,19 +54233,17 @@ export const activeUsers = [
     "correo": "maryariasmery1414@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529984968915,
-    "stripe_id": "cus_NoT01UiA5TjNx2",
     "final_date": 0,
-    "id": 49792,
-    "level": 1
+    "level": 1,
+    "id": 49792
   },
   {
     "nombre": "iphone_wlpt",
     "apellido": "iphone_wlpt",
     "correo": "ptzfacbghea@bestwork24.store",
-    "stripe_id": "cus_NoT0MgbM0ZoaMr",
     "final_date": 0,
-    "id": 49793,
-    "level": 1
+    "level": 1,
+    "id": 49793
   },
   {
     "nombre": "Maria Elena",
@@ -54888,10 +54251,9 @@ export const activeUsers = [
     "correo": "uribesaenzjuan@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528067300512,
-    "stripe_id": "cus_NoT0DYRJeSs4jA",
     "final_date": 0,
-    "id": 49794,
-    "level": 1
+    "level": 1,
+    "id": 49794
   },
   {
     "nombre": "raquel",
@@ -54899,10 +54261,9 @@ export const activeUsers = [
     "correo": "eekjay0@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529921166099,
-    "stripe_id": "cus_NoT0eLAbyE39bE",
     "final_date": 0,
-    "id": 49795,
-    "level": 1
+    "level": 1,
+    "id": 49795
   },
   {
     "nombre": "Silvia",
@@ -54910,10 +54271,9 @@ export const activeUsers = [
     "correo": "soft241@gmail.com",
     "pais": "España",
     "whatsapp": 34637021092,
-    "stripe_id": "cus_NoT05sRn40FQZt",
     "final_date": 0,
-    "id": 49796,
-    "level": 1
+    "level": 1,
+    "id": 49796
   },
   {
     "nombre": "Adriana",
@@ -54921,10 +54281,9 @@ export const activeUsers = [
     "correo": "adrianabeyzi@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525546720510,
-    "stripe_id": "cus_NoT0YzEiEq4wAA",
     "final_date": 0,
-    "id": 49797,
-    "level": 1
+    "level": 1,
+    "id": 49797
   },
   {
     "nombre": "Isabel",
@@ -54932,10 +54291,9 @@ export const activeUsers = [
     "correo": "isabelmunozpasquett@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529613633548,
-    "stripe_id": "cus_NoT0taUXzzyJDm",
     "final_date": 0,
-    "id": 49798,
-    "level": 1
+    "level": 1,
+    "id": 49798
   },
   {
     "nombre": "Alejandra",
@@ -54943,49 +54301,45 @@ export const activeUsers = [
     "correo": "alejandramota.20@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525615152396,
-    "stripe_id": "cus_NoT09MQGObvyQ9",
     "final_date": 0,
-    "id": 49799,
-    "level": 1
+    "level": 1,
+    "id": 49799
   },
   {
     "correo": "nancylabra20@gmail.com",
-    "stripe_id": "cus_NopmLmBZ7aRZhc",
     "final_date": 1693630000,
-    "id": 49803,
-    "level": 1
+    "level": 1,
+    "id": 49803
   },
   {
     "correo": "mirry_10@hotmail.com",
-    "stripe_id": "cus_NozsB1rcIfeQMn",
     "final_date": 1690990000,
-    "id": 49805,
-    "level": 1
+    "level": 1,
+    "id": 49805
   },
   {
     "correo": "karla.glez.sosa@gmail.com",
-    "stripe_id": "cus_Np1407mCxdXsvo",
     "final_date": 1691000000,
-    "id": 49806,
-    "level": 1
+    "level": 1,
+    "id": 49806
   },
   {
     "nombre": "Ale",
     "apellido": "De Carcamo",
     "correo": "naye.nena15@hotmail.com",
-    "stripe_id": "cus_NeF2TGMGodOl6a",
-    "final_date": 1693780000,
-    "id": 49809,
-    "level": 1
+    "conekta_id": "cus_2uQhWCcQsmugeyGqN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49809
   },
   {
     "nombre": "Magaly",
     "apellido": "Lozano",
     "correo": "magalylozanoc@gmail.com",
-    "stripe_id": "cus_LoQgMRZUFTUeMj",
-    "final_date": 1693800000,
-    "id": 49811,
-    "level": 1
+    "conekta_id": "cus_2uQhWDekP4DvrqY9e",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49811
   },
   {
     "nombre": "Lorena",
@@ -54993,37 +54347,36 @@ export const activeUsers = [
     "correo": "kikito_karisma@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 523321448517,
-    "stripe_id": "cus_LoQn0VgoJQiimq",
-    "final_date": 1693800000,
-    "id": 49812,
-    "level": 1
+    "conekta_id": "cus_2uQhWELQXsRt2n8mh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49812
   },
   {
     "nombre": "viviana",
     "apellido": "leyva",
     "correo": "vivi_ana@iclud.com",
-    "stripe_id": "cus_LoRICSX9eUSUgm",
-    "final_date": 1693800000,
-    "id": 49813,
-    "level": 1
+    "conekta_id": "cus_2uQhWFaGBApDo85z9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49813
   },
   {
     "nombre": "Karencita",
     "apellido": "Guzmán",
     "correo": "velazquezelvira042@gmail.com",
-    "stripe_id": "cus_LoeydN6fF17D2Z",
-    "final_date": 1693850000,
-    "id": 49815,
-    "level": 1
+    "conekta_id": "cus_2uQhWFp3aGZBHKTmH",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49815
   },
   {
     "nombre": "Israel",
     "apellido": "gómez",
     "correo": "israel.canul.90@gmail.com",
-    "stripe_id": "cus_NptTnmct4ei2a9",
     "final_date": 1691200000,
-    "id": 49817,
-    "level": 1
+    "level": 1,
+    "id": 49817
   },
   {
     "nombre": "Durdané",
@@ -55031,10 +54384,9 @@ export const activeUsers = [
     "correo": "durdaneduran70@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522283389949,
-    "stripe_id": "cus_NptutkDcojG9IW",
     "final_date": 1691200000,
-    "id": 49818,
-    "level": 1
+    "level": 1,
+    "id": 49818
   },
   {
     "nombre": "Esme",
@@ -55042,19 +54394,17 @@ export const activeUsers = [
     "correo": "fuentesvanessa160697@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525638026845,
-    "stripe_id": "cus_NpuZbRICVfjveG",
     "final_date": 1691200000,
-    "id": 49819,
-    "level": 1
+    "level": 1,
+    "id": 49819
   },
   {
     "nombre": "Mónica Yazmin",
     "apellido": "Martín Pech",
     "correo": "mony.martin.125@gmail.com",
-    "stripe_id": "cus_Nq5CKIq8sCqM4h",
     "final_date": 1691240000,
-    "id": 49822,
-    "level": 1
+    "level": 1,
+    "id": 49822
   },
   {
     "nombre": "Reyna",
@@ -55062,19 +54412,17 @@ export const activeUsers = [
     "correo": "dulceocotlbautista@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522441002361,
-    "stripe_id": "cus_Nq9rka3do4UpcE",
     "final_date": 0,
-    "id": 49864,
-    "level": 1
+    "level": 1,
+    "id": 49864
   },
   {
     "nombre": "Liced yaqueline",
     "apellido": "Cataño",
     "correo": "juancamilorestrepiocampo@hmail.com",
-    "stripe_id": "cus_Nq9rNHcla46NF0",
     "final_date": 0,
-    "id": 49865,
-    "level": 1
+    "level": 1,
+    "id": 49865
   },
   {
     "nombre": "Paola",
@@ -55082,10 +54430,9 @@ export const activeUsers = [
     "correo": "paolaavendano50@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528331210177,
-    "stripe_id": "cus_Nq9rDqrxM8bx2A",
     "final_date": 0,
-    "id": 49866,
-    "level": 1
+    "level": 1,
+    "id": 49866
   },
   {
     "nombre": "Davey",
@@ -55093,10 +54440,9 @@ export const activeUsers = [
     "correo": "davey.guzman1101@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527721202467,
-    "stripe_id": "cus_Nq9rnE5MEySTlf",
     "final_date": 0,
-    "id": 49867,
-    "level": 1
+    "level": 1,
+    "id": 49867
   },
   {
     "nombre": "Gabriela",
@@ -55104,10 +54450,9 @@ export const activeUsers = [
     "correo": "lalogaby0802@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545572315,
-    "stripe_id": "cus_Nq9rZb4goVVX5x",
     "final_date": 0,
-    "id": 49868,
-    "level": 1
+    "level": 1,
+    "id": 49868
   },
   {
     "nombre": "maria gabriela",
@@ -55115,10 +54460,9 @@ export const activeUsers = [
     "correo": "gabyvivas0212@gmail.com",
     "pais": "Peru",
     "whatsapp": 51950193758,
-    "stripe_id": "cus_Nq9rX6cQjdn5CA",
     "final_date": 0,
-    "id": 49869,
-    "level": 1
+    "level": 1,
+    "id": 49869
   },
   {
     "nombre": "Elizabeth",
@@ -55126,10 +54470,9 @@ export const activeUsers = [
     "correo": "agustinelizabeth53@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647524239,
-    "stripe_id": "cus_Nq9rnmKOeSOyzQ",
     "final_date": 0,
-    "id": 49870,
-    "level": 1
+    "level": 1,
+    "id": 49870
   },
   {
     "nombre": "Miriam",
@@ -55137,10 +54480,9 @@ export const activeUsers = [
     "correo": "miriamrm_2011@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522481259178,
-    "stripe_id": "cus_Nq9reQzSZ49FgO",
     "final_date": 0,
-    "id": 49871,
-    "level": 1
+    "level": 1,
+    "id": 49871
   },
   {
     "nombre": "Danitza",
@@ -55148,10 +54490,9 @@ export const activeUsers = [
     "correo": "danitzagaray774@gmail.com",
     "pais": "Mexico",
     "whatsapp": 52928279741,
-    "stripe_id": "cus_Nq9rLwS73tCpFO",
     "final_date": 0,
-    "id": 49872,
-    "level": 1
+    "level": 1,
+    "id": 49872
   },
   {
     "nombre": "Alexy",
@@ -55159,10 +54500,9 @@ export const activeUsers = [
     "correo": "alexybarahona5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5272412431,
-    "stripe_id": "cus_Nq9rXX2HQBA89p",
     "final_date": 0,
-    "id": 49873,
-    "level": 1
+    "level": 1,
+    "id": 49873
   },
   {
     "nombre": "Mónica",
@@ -55170,10 +54510,9 @@ export const activeUsers = [
     "correo": "monica.ojeda.22ventura@gmail.com",
     "pais": "Chile",
     "whatsapp": 5620447125,
-    "stripe_id": "cus_Nq9rtTZOmDr3Ry",
     "final_date": 0,
-    "id": 49874,
-    "level": 1
+    "level": 1,
+    "id": 49874
   },
   {
     "nombre": "Maria Fernanda",
@@ -55181,10 +54520,9 @@ export const activeUsers = [
     "correo": "fernandadiaz12@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 52984789472,
-    "stripe_id": "cus_Nq9rbAufkbvelH",
     "final_date": 0,
-    "id": 49875,
-    "level": 1
+    "level": 1,
+    "id": 49875
   },
   {
     "nombre": "daniela",
@@ -55192,10 +54530,9 @@ export const activeUsers = [
     "correo": "danielaarmenta02@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526462400268,
-    "stripe_id": "cus_Nq9rJDeTjYGivM",
     "final_date": 0,
-    "id": 49876,
-    "level": 1
+    "level": 1,
+    "id": 49876
   },
   {
     "nombre": "Blanca Patricia",
@@ -55203,10 +54540,9 @@ export const activeUsers = [
     "correo": "sandovalutrillablanca@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528444050223,
-    "stripe_id": "cus_Nq9rLMa40JFiuD",
     "final_date": 0,
-    "id": 49877,
-    "level": 1
+    "level": 1,
+    "id": 49877
   },
   {
     "nombre": "sarahi",
@@ -55214,10 +54550,9 @@ export const activeUsers = [
     "correo": "escaolv6828@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524422866316,
-    "stripe_id": "cus_Nq9ruh8Ncui3sG",
     "final_date": 0,
-    "id": 49878,
-    "level": 1
+    "level": 1,
+    "id": 49878
   },
   {
     "nombre": "Wendi",
@@ -55225,10 +54560,9 @@ export const activeUsers = [
     "correo": "wen.guevara.hernandez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525627273669,
-    "stripe_id": "cus_Nq9r2Oe2tEBsNR",
     "final_date": 0,
-    "id": 49879,
-    "level": 1
+    "level": 1,
+    "id": 49879
   },
   {
     "nombre": "yolanda",
@@ -55236,10 +54570,9 @@ export const activeUsers = [
     "correo": "yolymaju1@icloud.com",
     "pais": "Mexico",
     "whatsapp": 528771266166,
-    "stripe_id": "cus_Nq9r6zhcnK2pXJ",
     "final_date": 0,
-    "id": 49880,
-    "level": 1
+    "level": 1,
+    "id": 49880
   },
   {
     "nombre": "Berenice",
@@ -55247,10 +54580,9 @@ export const activeUsers = [
     "correo": "miron.villasenor.beree@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525619147806,
-    "stripe_id": "cus_Nq9rK01YvbtAjN",
     "final_date": 0,
-    "id": 49881,
-    "level": 1
+    "level": 1,
+    "id": 49881
   },
   {
     "nombre": "Paola Guadalupe",
@@ -55258,10 +54590,9 @@ export const activeUsers = [
     "correo": "pmagana278@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524361140645,
-    "stripe_id": "cus_Nq9rYLI33jXhdx",
     "final_date": 0,
-    "id": 49882,
-    "level": 1
+    "level": 1,
+    "id": 49882
   },
   {
     "nombre": "Esther",
@@ -55269,10 +54600,9 @@ export const activeUsers = [
     "correo": "tetecarbajal27@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529921205944,
-    "stripe_id": "cus_Nq9rK1Had8pbBd",
     "final_date": 0,
-    "id": 49883,
-    "level": 1
+    "level": 1,
+    "id": 49883
   },
   {
     "nombre": "Carolina",
@@ -55280,10 +54610,9 @@ export const activeUsers = [
     "correo": "sofia.mojica.99@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526461508380,
-    "stripe_id": "cus_Nq9r9NbWIcZKyy",
     "final_date": 0,
-    "id": 49884,
-    "level": 1
+    "level": 1,
+    "id": 49884
   },
   {
     "nombre": "Mariana",
@@ -55291,10 +54620,9 @@ export const activeUsers = [
     "correo": "polmb1806@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525571122809,
-    "stripe_id": "cus_Nq9rIGBBGcuxAq",
     "final_date": 0,
-    "id": 49885,
-    "level": 1
+    "level": 1,
+    "id": 49885
   },
   {
     "nombre": "Martha",
@@ -55302,10 +54630,9 @@ export const activeUsers = [
     "correo": "marthaarenas21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527147661582,
-    "stripe_id": "cus_Nq9rzmAo6fcKmu",
     "final_date": 0,
-    "id": 49886,
-    "level": 1
+    "level": 1,
+    "id": 49886
   },
   {
     "nombre": "Jazmin",
@@ -55313,10 +54640,9 @@ export const activeUsers = [
     "correo": "jazmin.lun.jua@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524361042233,
-    "stripe_id": "cus_Nq9rQL1ahNftIc",
     "final_date": 0,
-    "id": 49887,
-    "level": 1
+    "level": 1,
+    "id": 49887
   },
   {
     "nombre": "Liliana",
@@ -55324,10 +54650,9 @@ export const activeUsers = [
     "correo": "liliana.12fuentes80@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525587096903,
-    "stripe_id": "cus_Nq9rnFh8XgK0JB",
     "final_date": 0,
-    "id": 49888,
-    "level": 1
+    "level": 1,
+    "id": 49888
   },
   {
     "nombre": "Zita yesenia",
@@ -55335,10 +54660,9 @@ export const activeUsers = [
     "correo": "soylacasarrubias2@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524421222968,
-    "stripe_id": "cus_Nq9r9e2iK1KZQV",
     "final_date": 0,
-    "id": 49889,
-    "level": 1
+    "level": 1,
+    "id": 49889
   },
   {
     "nombre": "Werita",
@@ -55346,10 +54670,9 @@ export const activeUsers = [
     "correo": "werita-gmz22@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 529971391248,
-    "stripe_id": "cus_Nq9rt2wgWALmkc",
     "final_date": 0,
-    "id": 49890,
-    "level": 1
+    "level": 1,
+    "id": 49890
   },
   {
     "nombre": "Isa",
@@ -55357,10 +54680,9 @@ export const activeUsers = [
     "correo": "moncerathreyes@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5233315938,
-    "stripe_id": "cus_Nq9rHhKMIECqs3",
     "final_date": 0,
-    "id": 49891,
-    "level": 1
+    "level": 1,
+    "id": 49891
   },
   {
     "nombre": "Evu",
@@ -55368,10 +54690,9 @@ export const activeUsers = [
     "correo": "evu7635@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524641194524,
-    "stripe_id": "cus_Nq9rNOk9AAHcGj",
     "final_date": 0,
-    "id": 49892,
-    "level": 1
+    "level": 1,
+    "id": 49892
   },
   {
     "nombre": "Ana",
@@ -55379,10 +54700,9 @@ export const activeUsers = [
     "correo": "munguiaana54@gmail.com",
     "pais": "Mexico",
     "whatsapp": 5233315938,
-    "stripe_id": "cus_Nq9rNNadeRNe3a",
     "final_date": 0,
-    "id": 49893,
-    "level": 1
+    "level": 1,
+    "id": 49893
   },
   {
     "nombre": "Rosy",
@@ -55390,10 +54710,9 @@ export const activeUsers = [
     "correo": "rousl07@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 528441603826,
-    "stripe_id": "cus_Nq9rcCkny1KGCh",
     "final_date": 0,
-    "id": 49894,
-    "level": 1
+    "level": 1,
+    "id": 49894
   },
   {
     "nombre": "stephanie",
@@ -55401,10 +54720,9 @@ export const activeUsers = [
     "correo": "faninequiz1106@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529511289942,
-    "stripe_id": "cus_Nq9rhSJBaDFYLZ",
     "final_date": 0,
-    "id": 49895,
-    "level": 1
+    "level": 1,
+    "id": 49895
   },
   {
     "nombre": "Lupita",
@@ -55412,10 +54730,9 @@ export const activeUsers = [
     "correo": "lupiitaft031617@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525518960225,
-    "stripe_id": "cus_Nq9rcRAMPn6lzk",
     "final_date": 0,
-    "id": 49896,
-    "level": 1
+    "level": 1,
+    "id": 49896
   },
   {
     "nombre": "Gabriela",
@@ -55423,10 +54740,9 @@ export const activeUsers = [
     "correo": "gabyr8264@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526864042790,
-    "stripe_id": "cus_Nq9rxtv4duXBbS",
     "final_date": 0,
-    "id": 49897,
-    "level": 1
+    "level": 1,
+    "id": 49897
   },
   {
     "nombre": "Karï",
@@ -55434,10 +54750,9 @@ export const activeUsers = [
     "correo": "olverakarina74@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524412130074,
-    "stripe_id": "cus_Nq9rhp1CtKlQXb",
     "final_date": 0,
-    "id": 49898,
-    "level": 1
+    "level": 1,
+    "id": 49898
   },
   {
     "nombre": "Nallely",
@@ -55445,10 +54760,9 @@ export const activeUsers = [
     "correo": "nayelimartinez181992@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528641165146,
-    "stripe_id": "cus_Nq9rDaowHnvr9d",
     "final_date": 0,
-    "id": 49899,
-    "level": 1
+    "level": 1,
+    "id": 49899
   },
   {
     "nombre": "carmen julieta",
@@ -55456,10 +54770,9 @@ export const activeUsers = [
     "correo": "julietalopez1612@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522382491699,
-    "stripe_id": "cus_Nq9rmE5XcW0J9J",
     "final_date": 0,
-    "id": 49900,
-    "level": 1
+    "level": 1,
+    "id": 49900
   },
   {
     "nombre": "Yesenia",
@@ -55467,10 +54780,9 @@ export const activeUsers = [
     "correo": "yesemalafa@gmail.com",
     "pais": "Peru",
     "whatsapp": 51915222105,
-    "stripe_id": "cus_Nq9r2AI7F8gyk1",
     "final_date": 0,
-    "id": 49901,
-    "level": 1
+    "level": 1,
+    "id": 49901
   },
   {
     "nombre": "Xóchitl",
@@ -55478,10 +54790,9 @@ export const activeUsers = [
     "correo": "lupusnails@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527472738921,
-    "stripe_id": "cus_Nq9resdJzdFpSx",
     "final_date": 0,
-    "id": 49902,
-    "level": 1
+    "level": 1,
+    "id": 49902
   },
   {
     "nombre": "dalia",
@@ -55489,10 +54800,9 @@ export const activeUsers = [
     "correo": "verarmedag@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525618292411,
-    "stripe_id": "cus_Nq9rqxf3aEnIIf",
     "final_date": 0,
-    "id": 49903,
-    "level": 1
+    "level": 1,
+    "id": 49903
   },
   {
     "nombre": "Raquel",
@@ -55500,10 +54810,9 @@ export const activeUsers = [
     "correo": "raquelarce62@gmail.com",
     "pais": "Argentina",
     "whatsapp": 541161681707,
-    "stripe_id": "cus_Nq9tHYDk73DNJV",
     "final_date": 0,
-    "id": 49904,
-    "level": 1
+    "level": 1,
+    "id": 49904
   },
   {
     "nombre": "itzel",
@@ -55511,10 +54820,9 @@ export const activeUsers = [
     "correo": "itzel402alvarez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529624578529,
-    "stripe_id": "cus_Nq9tNyn9h6q7dz",
     "final_date": 0,
-    "id": 49905,
-    "level": 1
+    "level": 1,
+    "id": 49905
   },
   {
     "nombre": "Anksunamun",
@@ -55522,10 +54830,9 @@ export const activeUsers = [
     "correo": "el-cadaver-de-la-novia@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525616558786,
-    "stripe_id": "cus_Nq9teikw15R4dP",
     "final_date": 0,
-    "id": 49906,
-    "level": 1
+    "level": 1,
+    "id": 49906
   },
   {
     "nombre": "Monica",
@@ -55533,10 +54840,9 @@ export const activeUsers = [
     "correo": "monicabelenruiz@outlook.com",
     "pais": "Mexico",
     "whatsapp": 523221996026,
-    "stripe_id": "cus_Nq9tV9hC4m9Pge",
     "final_date": 0,
-    "id": 49907,
-    "level": 1
+    "level": 1,
+    "id": 49907
   },
   {
     "nombre": "Marlene",
@@ -55544,10 +54850,9 @@ export const activeUsers = [
     "correo": "qmjulianamarlene@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525610114197,
-    "stripe_id": "cus_Nq9tpG2S3r9xti",
     "final_date": 0,
-    "id": 49908,
-    "level": 1
+    "level": 1,
+    "id": 49908
   },
   {
     "nombre": "Marilú",
@@ -55555,10 +54860,9 @@ export const activeUsers = [
     "correo": "mariludiazrendon4@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525576111878,
-    "stripe_id": "cus_Nq9tbQllU80DCA",
     "final_date": 0,
-    "id": 49909,
-    "level": 1
+    "level": 1,
+    "id": 49909
   },
   {
     "nombre": "Celina",
@@ -55566,10 +54870,9 @@ export const activeUsers = [
     "correo": "cdominguezboites@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523328260732,
-    "stripe_id": "cus_Nq9tahgT61orBG",
     "final_date": 0,
-    "id": 49910,
-    "level": 1
+    "level": 1,
+    "id": 49910
   },
   {
     "nombre": "Beatriz adriana",
@@ -55577,10 +54880,9 @@ export const activeUsers = [
     "correo": "adybeatriz98@outlook.com",
     "pais": "Mexico",
     "whatsapp": 523320441009,
-    "stripe_id": "cus_Nq9tswhg6JvCBN",
     "final_date": 0,
-    "id": 49911,
-    "level": 1
+    "level": 1,
+    "id": 49911
   },
   {
     "nombre": "Sonia",
@@ -55588,10 +54890,9 @@ export const activeUsers = [
     "correo": "soni2022mar@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522381700686,
-    "stripe_id": "cus_Nq9tz8nBkD9OgG",
     "final_date": 0,
-    "id": 49912,
-    "level": 1
+    "level": 1,
+    "id": 49912
   },
   {
     "nombre": "Asesorías Gonvar",
@@ -55599,10 +54900,9 @@ export const activeUsers = [
     "correo": "Cony@gonvar.io",
     "pais": "Mexico",
     "whatsapp": 522223326539,
-    "stripe_id": "cus_NqAgltZtNg5fTN",
     "final_date": 1698940000,
-    "id": 49913,
-    "level": 0
+    "level": 0,
+    "id": 49913
   },
   {
     "nombre": "Abilene",
@@ -55610,10 +54910,10 @@ export const activeUsers = [
     "correo": "Mabilene7@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529851068608,
-    "stripe_id": "cus_NqJenxyqbzTVnw",
-    "final_date": 1693790000,
-    "id": 49921,
-    "level": 1
+    "conekta_id": "cus_2uQhWV6nwrgrYBQfx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49921
   },
   {
     "nombre": "Nanci Ramón Morales",
@@ -55621,10 +54921,9 @@ export const activeUsers = [
     "correo": "nanciramon84@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527451410716,
-    "stripe_id": "cus_NqpZPT6u4Wz8sI",
     "final_date": 1688740000,
-    "id": 49971,
-    "level": 1
+    "level": 1,
+    "id": 49971
   },
   {
     "nombre": "Bertha Alicia",
@@ -55632,10 +54931,10 @@ export const activeUsers = [
     "correo": "balvijiv@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526623262464,
-    "stripe_id": "cus_NqtdVvBI1ZTVHT",
-    "final_date": 1691430000,
-    "id": 49975,
-    "level": 1
+    "conekta_id": "cus_2uQhWVqcU4FWAT5Ab",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49975
   },
   {
     "nombre": "Lizbeth",
@@ -55643,10 +54942,10 @@ export const activeUsers = [
     "correo": "Lizbethalilopez75@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543528056,
-    "stripe_id": "cus_Nr03EqSGz6i4xV",
-    "final_date": 1691460000,
-    "id": 49986,
-    "level": 1
+    "conekta_id": "cus_2uQhWWWfHFNx1UhBy",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49986
   },
   {
     "nombre": "Raquel",
@@ -55654,10 +54953,10 @@ export const activeUsers = [
     "correo": "macias.raquel.089@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529384059147,
-    "stripe_id": "cus_Nr30TfpEmcUuBu",
-    "final_date": 1691520000,
-    "id": 49999,
-    "level": 1
+    "conekta_id": "cus_2uQhWX5U7MdqxA1jv",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 49999
   },
   {
     "nombre": "Guadalupe Cristhell",
@@ -55665,10 +54964,10 @@ export const activeUsers = [
     "correo": "Cristhellperez245@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529171108846,
-    "stripe_id": "cus_Nr4DH01SAKvoWX",
-    "final_date": 1691470000,
-    "id": 50045,
-    "level": 1
+    "conekta_id": "cus_2uQhWXzJKeWFCs7WZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50045
   },
   {
     "nombre": "Yatziry",
@@ -55676,10 +54975,9 @@ export const activeUsers = [
     "correo": "yatzirymorles@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525610994093,
-    "stripe_id": "cus_Nr6UCknBib2ke2",
     "final_date": 1717710000,
-    "id": 50054,
-    "level": 0
+    "level": 0,
+    "id": 50054
   },
   {
     "nombre": "Gloria Maritza",
@@ -55687,10 +54985,9 @@ export const activeUsers = [
     "correo": "mtzan21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526383845527,
-    "stripe_id": "cus_Nr6f9zRlomQqwq",
     "final_date": 1689750000,
-    "id": 50055,
-    "level": 1
+    "level": 1,
+    "id": 50055
   },
   {
     "nombre": "Kenia",
@@ -55698,10 +54995,9 @@ export const activeUsers = [
     "correo": "kcalvillo980@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525545836191,
-    "stripe_id": "cus_NrGdCRbYEbK1au",
     "final_date": 1717460000,
-    "id": 50088,
-    "level": 0
+    "level": 0,
+    "id": 50088
   },
   {
     "nombre": "Veronica del Carmen",
@@ -55709,10 +55005,9 @@ export const activeUsers = [
     "correo": "zackmarthen@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529841067890,
-    "stripe_id": "cus_NrGuPJOmIsiuV8",
     "final_date": 1747290000,
-    "id": 50090,
-    "level": 0
+    "level": 0,
+    "id": 50090
   },
   {
     "nombre": "Martha Alejandra",
@@ -55720,10 +55015,9 @@ export const activeUsers = [
     "correo": "ale.rangel.monroy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525591113446,
-    "stripe_id": "cus_NrJvvh56W2sXz1",
     "final_date": 1717880000,
-    "id": 50104,
-    "level": 0
+    "level": 0,
+    "id": 50104
   },
   {
     "nombre": "Ana laura",
@@ -55731,19 +55025,19 @@ export const activeUsers = [
     "correo": "analaurareyesvalenzuela058@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528672856940,
-    "stripe_id": "cus_NrfUIvFHAbBE2Q",
-    "final_date": 1693010000,
-    "id": 50128,
-    "level": 1
+    "conekta_id": "cus_2uQhWZHvfxKnoc1qF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50128
   },
   {
     "nombre": "Lizeth",
     "apellido": "Jimenez",
     "correo": "6242175698m@gmail.com",
-    "stripe_id": "cus_Mlx9Ns8BQ35FmW",
-    "final_date": 1691630000,
-    "id": 50143,
-    "level": 1
+    "conekta_id": "cus_2uQhWaGXbFdPv548g",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50143
   },
   {
     "nombre": "Edith",
@@ -55751,10 +55045,9 @@ export const activeUsers = [
     "correo": "edithlopez100992@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221293149,
-    "stripe_id": "cus_NsQRlyksqGm35l",
     "final_date": 1689440000,
-    "id": 50157,
-    "level": 1
+    "level": 1,
+    "id": 50157
   },
   {
     "nombre": "Mayolit Zohe",
@@ -55762,10 +55055,10 @@ export const activeUsers = [
     "correo": "mzoerodriguez09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525610276071,
-    "stripe_id": "cus_NsRxi3cMnF86mb",
-    "final_date": 1693610000,
-    "id": 50160,
-    "level": 1
+    "conekta_id": "cus_2uQhWb1M7TC3YLidF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50160
   },
   {
     "nombre": "Ángela",
@@ -55773,10 +55066,9 @@ export const activeUsers = [
     "correo": "amoxomiju@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525529394147,
-    "stripe_id": "cus_NsUMtZ8ByuBIHG",
     "final_date": 1746920000,
-    "id": 50162,
-    "level": 0
+    "level": 0,
+    "id": 50162
   },
   {
     "nombre": "Monica Rocio",
@@ -55784,10 +55076,10 @@ export const activeUsers = [
     "correo": "rociocanizales1@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526421519779,
-    "stripe_id": "cus_Nt9L2wVzlfoGUl",
-    "final_date": 1691880000,
-    "id": 50177,
-    "level": 1
+    "conekta_id": "cus_2uQhWbgPveKVLDRyt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50177
   },
   {
     "nombre": "Esmirna Rubí Basti Teodoro",
@@ -55795,10 +55087,10 @@ export const activeUsers = [
     "correo": "esmirnateodoro@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526648575572,
-    "stripe_id": "cus_NtY4O9LPagrapY",
-    "final_date": 1692040000,
-    "id": 50183,
-    "level": 1
+    "conekta_id": "cus_2uQhWcRDSqt91e17s",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50183
   },
   {
     "nombre": "Iliana Cecilia",
@@ -55806,18 +55098,9 @@ export const activeUsers = [
     "correo": "ilianavillalobos09@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528714652796,
-    "stripe_id": "cus_NtjMi9SA758p93",
     "final_date": 1689410000,
-    "id": 50187,
-    "level": 1
-  },
-  {
-    "correo": "mruizc346@gmail.com.mx",
-    "whatsapp": "+5252",
-    "stripe_id": "cus_NtuQ0mxhMRblTG",
-    "final_date": 1723740000,
-    "id": 50194,
-    "level": 0
+    "level": 1,
+    "id": 50187
   },
   {
     "nombre": "Maricela",
@@ -55825,19 +55108,18 @@ export const activeUsers = [
     "correo": "Mari.2001mrls@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522381794203,
-    "stripe_id": "cus_Nu54ZHAUixIfNq",
     "final_date": 1779570000,
-    "id": 50207,
-    "level": 0
+    "level": 0,
+    "id": 50207
   },
   {
     "nombre": "Ivette Madrigal",
     "correo": "cordero.madrigal@hotmail.com",
     "whatsapp": "undefined",
-    "stripe_id": "cus_Nu5WE9x5ktvNOS",
-    "final_date": 1692200000,
-    "id": 50208,
-    "level": 1
+    "conekta_id": "cus_2uQhWcz2Gx92uQ39E",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50208
   },
   {
     "nombre": "Giovanna Raquel",
@@ -55845,10 +55127,9 @@ export const activeUsers = [
     "correo": "zayra-ximena@live.com",
     "pais": "Mexico",
     "whatsapp": 526621999318,
-    "stripe_id": "cus_NuKwEni2STQjwZ",
     "final_date": 1747360000,
-    "id": 50216,
-    "level": 0
+    "level": 0,
+    "id": 50216
   },
   {
     "nombre": "VIVIANA",
@@ -55856,10 +55137,10 @@ export const activeUsers = [
     "correo": "lic_medina@outlook.com",
     "pais": "Mexico",
     "whatsapp": 525561833291,
-    "stripe_id": "cus_NuRyu0UoZZ0DKW",
-    "final_date": 1692280000,
-    "id": 50227,
-    "level": 1
+    "conekta_id": "cus_2uQhWdtrVF1SLdYxm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50227
   },
   {
     "nombre": "Giulete",
@@ -55867,10 +55148,9 @@ export const activeUsers = [
     "correo": "giuleteocegueda@outlook.com",
     "pais": "Estados Unidos",
     "whatsapp": 15595751124,
-    "stripe_id": "cus_NuZnphe40IiJcC",
     "final_date": 1694900000,
-    "id": 50230,
-    "level": 1
+    "level": 1,
+    "id": 50230
   },
   {
     "nombre": "María Guadalupe",
@@ -55878,10 +55158,9 @@ export const activeUsers = [
     "correo": "lupitarebolledo24@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527711114296,
-    "stripe_id": "cus_NubyjP2DVdwYut",
     "final_date": 1778950000,
-    "id": 50232,
-    "level": 0
+    "level": 0,
+    "id": 50232
   },
   {
     "nombre": "Luzmaria",
@@ -55889,10 +55168,9 @@ export const activeUsers = [
     "correo": "luzma_19_tellez@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525514973087,
-    "stripe_id": "cus_NuloVGxhpbLygZ",
     "final_date": 1719420000,
-    "id": 50237,
-    "level": 0
+    "level": 0,
+    "id": 50237
   },
   {
     "nombre": "Mariana",
@@ -55900,10 +55178,10 @@ export const activeUsers = [
     "correo": "marianaabril1307@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548596152,
-    "stripe_id": "cus_Nv2m1YfPVN1k7G",
-    "final_date": 1692650000,
-    "id": 50245,
-    "level": 1
+    "conekta_id": "cus_2uQhWfBucxB3CJRGF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50245
   },
   {
     "nombre": "Blanca",
@@ -55911,10 +55189,10 @@ export const activeUsers = [
     "correo": "josanaau02140931@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525624527656,
-    "stripe_id": "cus_Nv8f2QUI6a44Qz",
-    "final_date": 1692410000,
-    "id": 50247,
-    "level": 1
+    "conekta_id": "cus_2uQhWgEF8EVHRhp3w",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50247
   },
   {
     "nombre": "Dulce",
@@ -55922,10 +55200,9 @@ export const activeUsers = [
     "correo": "dulcemaria.marino.donjuan@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 524443053117,
-    "stripe_id": "cus_NvREMhmHYpwsjh",
     "final_date": 1689800000,
-    "id": 50257,
-    "level": 1
+    "level": 1,
+    "id": 50257
   },
   {
     "nombre": "Estefany Guadalupe",
@@ -55933,10 +55210,9 @@ export const activeUsers = [
     "correo": "calderonestefany069@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527298108336,
-    "stripe_id": "cus_NvrDFSBo4zzwvj",
     "final_date": 1689900000,
-    "id": 50265,
-    "level": 1
+    "level": 1,
+    "id": 50265
   },
   {
     "nombre": "Eliana",
@@ -55944,10 +55220,10 @@ export const activeUsers = [
     "correo": "maldoeli9@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525575512053,
-    "stripe_id": "cus_NwCrW4qKGa15Ni",
-    "final_date": 1692660000,
-    "id": 50272,
-    "level": 1
+    "conekta_id": "cus_2uQhWhhtAdcad6krR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50272
   },
   {
     "nombre": "Sury Shadday",
@@ -55955,10 +55231,10 @@ export const activeUsers = [
     "correo": "lopezsuryshadday@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532183377,
-    "stripe_id": "cus_NwyDBq3dd80s30",
-    "final_date": 1691690000,
-    "id": 50291,
-    "level": 1
+    "conekta_id": "cus_2uQhWhax6EpgTysRp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50291
   },
   {
     "nombre": "Erika",
@@ -55966,10 +55242,9 @@ export const activeUsers = [
     "correo": "erikarangelmoreno@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525516278654,
-    "stripe_id": "cus_NwzvClsrnFM4za",
     "final_date": 1692350000,
-    "id": 50292,
-    "level": 1
+    "level": 1,
+    "id": 50292
   },
   {
     "nombre": "Dayana",
@@ -55977,10 +55252,9 @@ export const activeUsers = [
     "correo": "dayaope79@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525617373010,
-    "stripe_id": "cus_Ny8qJtfXT5u95M",
     "final_date": 1690690000,
-    "id": 50315,
-    "level": 1
+    "level": 1,
+    "id": 50315
   },
   {
     "nombre": "Karla",
@@ -55988,10 +55262,9 @@ export const activeUsers = [
     "correo": "Karlymelina21@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529222147395,
-    "stripe_id": "cus_Nyb2dFZbOtS4P8",
     "final_date": 1690530000,
-    "id": 50327,
-    "level": 1
+    "level": 1,
+    "id": 50327
   },
   {
     "nombre": "Fatima",
@@ -55999,10 +55272,10 @@ export const activeUsers = [
     "correo": "Fatimaamosqda@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524111459233,
-    "stripe_id": "cus_Nyphc0ElzfBWqo",
-    "final_date": 1693800000,
-    "id": 50332,
-    "level": 1
+    "conekta_id": "cus_2uQhWitaSYeDxUddu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50332
   },
   {
     "nombre": "Aaron",
@@ -56010,19 +55283,18 @@ export const activeUsers = [
     "correo": "Aaron.robles@inowu.dev",
     "pais": "Mexico",
     "whatsapp": 526371135052,
-    "stripe_id": "cus_Nz7t4YA6eXkqB4",
     "final_date": 1685990000,
-    "id": 50337,
-    "level": 1
+    "level": 1,
+    "id": 50337
   },
   {
     "nombre": "Victorea",
     "apellido": "Mendez",
     "correo": "victoreamendez@gmail.com",
-    "stripe_id": "cus_NzCxSNAgHgYzrV",
-    "final_date": 1693350000,
-    "id": 50342,
-    "level": 1
+    "conekta_id": "cus_2uQhWjdPxkCsUvggQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50342
   },
   {
     "nombre": "Yazmin",
@@ -56030,10 +55302,10 @@ export const activeUsers = [
     "correo": "ontiverosyaz@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523337806962,
-    "stripe_id": "cus_NzR5dT4roOuGZ7",
-    "final_date": 1693400000,
-    "id": 50351,
-    "level": 1
+    "conekta_id": "cus_2uQhWkYEB35GtcJXm",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50351
   },
   {
     "nombre": "arizbeth",
@@ -56041,10 +55313,10 @@ export const activeUsers = [
     "correo": "arizgarciavasquez@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529531197597,
-    "stripe_id": "cus_NzXz2eeEoUYdJE",
-    "final_date": 1693430000,
-    "id": 50356,
-    "level": 1
+    "conekta_id": "cus_2uQhWmH3hEdvTj4P2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50356
   },
   {
     "nombre": "Criis",
@@ -56052,10 +55324,9 @@ export const activeUsers = [
     "correo": "criisjimenez07@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525521938101,
-    "stripe_id": "cus_NzuuSuDnZhHyXa",
     "final_date": 1722830000,
-    "id": 50369,
-    "level": 0
+    "level": 0,
+    "id": 50369
   },
   {
     "nombre": "lizeth",
@@ -56063,10 +55334,10 @@ export const activeUsers = [
     "correo": "lizethmascorro19@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528114844707,
-    "stripe_id": "cus_O02vxeQsiKnq1N",
-    "final_date": 1692120000,
-    "id": 50377,
-    "level": 1
+    "conekta_id": "cus_2uQhWmqrXLtpQe15i",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50377
   },
   {
     "nombre": "Jaqueline",
@@ -56074,10 +55345,10 @@ export const activeUsers = [
     "correo": "jaqueline.acosta3.1416@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528116265080,
-    "stripe_id": "cus_O0IBsRkBJ1KD20",
-    "final_date": 1692560000,
-    "id": 50384,
-    "level": 1
+    "conekta_id": "cus_2uQhWmqHJkEso88zL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50384
   },
   {
     "nombre": "Melissa",
@@ -56085,10 +55356,9 @@ export const activeUsers = [
     "correo": "msc150796@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525542590122,
-    "stripe_id": "cus_O0QHCBaiTtSTc8",
     "final_date": 1721330000,
-    "id": 50392,
-    "level": 0
+    "level": 0,
+    "id": 50392
   },
   {
     "nombre": "Monserrat",
@@ -56096,10 +55366,9 @@ export const activeUsers = [
     "correo": "sanchezmonse00@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523333549822,
-    "stripe_id": "cus_O0g4XBdy5ZqvUM",
     "final_date": 1717280000,
-    "id": 50397,
-    "level": 0
+    "level": 0,
+    "id": 50397
   },
   {
     "nombre": "Maria Sandra",
@@ -56107,10 +55376,9 @@ export const activeUsers = [
     "correo": "S.armenta12@yahoo.com",
     "pais": "Estados Unidos",
     "whatsapp": 19515653679,
-    "stripe_id": "cus_O1lcfePupuXaDg",
     "final_date": 1717700000,
-    "id": 50410,
-    "level": 0
+    "level": 0,
+    "id": 50410
   },
   {
     "nombre": "YISEL",
@@ -56118,10 +55386,9 @@ export const activeUsers = [
     "correo": "itzelmota123654@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561465704,
-    "stripe_id": "cus_O1pigw6OXTWB5k",
     "final_date": 1717550000,
-    "id": 50411,
-    "level": 0
+    "level": 0,
+    "id": 50411
   },
   {
     "nombre": "Rocío",
@@ -56129,10 +55396,9 @@ export const activeUsers = [
     "correo": "rocioszms@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19719839789,
-    "stripe_id": "cus_O1uLJJpIwCvhTR",
     "final_date": 1717650000,
-    "id": 50415,
-    "level": 0
+    "level": 0,
+    "id": 50415
   },
   {
     "nombre": "jessica natalia",
@@ -56140,10 +55406,9 @@ export const activeUsers = [
     "correo": "jessnayaab33@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525529117649,
-    "stripe_id": "cus_O25keTb3qWKXFo",
     "final_date": 1717630000,
-    "id": 50421,
-    "level": 0
+    "level": 0,
+    "id": 50421
   },
   {
     "nombre": "Angeles",
@@ -56151,10 +55416,9 @@ export const activeUsers = [
     "correo": "angysme77@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525570479240,
-    "stripe_id": "cus_O2DJze3eWvg95W",
     "final_date": 1717880000,
-    "id": 50424,
-    "level": 0
+    "level": 0,
+    "id": 50424
   },
   {
     "nombre": "Ashley",
@@ -56162,10 +55426,9 @@ export const activeUsers = [
     "correo": "ashley.armass04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525510961936,
-    "stripe_id": "cus_O2EhztejgoBOA9",
     "final_date": 1691370000,
-    "id": 50426,
-    "level": 1
+    "level": 1,
+    "id": 50426
   },
   {
     "nombre": "Teresa",
@@ -56173,10 +55436,10 @@ export const activeUsers = [
     "correo": "teresavalverdeespinosa@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525586846106,
-    "stripe_id": "cus_O2GgQj2O4gWeLd",
-    "final_date": 1694050000,
-    "id": 50430,
-    "level": 1
+    "conekta_id": "cus_2uQhWpnZPYVUGcNJA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50430
   },
   {
     "nombre": "Sandra",
@@ -56184,10 +55447,9 @@ export const activeUsers = [
     "correo": "sandramaldonado197627@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525523375423,
-    "stripe_id": "cus_O2VkEJAJVh0zkL",
     "final_date": 1717700000,
-    "id": 50433,
-    "level": 0
+    "level": 0,
+    "id": 50433
   },
   {
     "nombre": "Herandi Alejandra",
@@ -56195,10 +55457,9 @@ export const activeUsers = [
     "correo": "gherandialejandra@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525560331355,
-    "stripe_id": "cus_O2eNe1UPQ8CPpS",
     "final_date": 1719090000,
-    "id": 50437,
-    "level": 0
+    "level": 0,
+    "id": 50437
   },
   {
     "nombre": "Magaly",
@@ -56206,10 +55467,9 @@ export const activeUsers = [
     "correo": "maggyexzjmx1dx@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525628521253,
-    "stripe_id": "cus_O2gEF2xmhs23aQ",
     "final_date": 1719600000,
-    "id": 50440,
-    "level": 0
+    "level": 0,
+    "id": 50440
   },
   {
     "nombre": "Rocio",
@@ -56217,10 +55477,9 @@ export const activeUsers = [
     "correo": "Madelrociomoreno5@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525574021467,
-    "stripe_id": "cus_O3Z5nQWvosGXYA",
     "final_date": 1718730000,
-    "id": 50454,
-    "level": 0
+    "level": 0,
+    "id": 50454
   },
   {
     "nombre": "Yasmin Martinez",
@@ -56228,10 +55487,10 @@ export const activeUsers = [
     "correo": "yasmindiaz.mady@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526641983338,
-    "stripe_id": "cus_O3vqQZTv3ul0Nh",
-    "final_date": 1691760000,
-    "id": 50464,
-    "level": 1
+    "conekta_id": "cus_2uQhWrWZ3e1fdMdND",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50464
   },
   {
     "nombre": "Kali Kundalini",
@@ -56239,10 +55498,10 @@ export const activeUsers = [
     "correo": "kalikap1191@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631208043,
-    "stripe_id": "cus_O46yoaFGJvPRJq",
-    "final_date": 1693780000,
-    "id": 50475,
-    "level": 1
+    "conekta_id": "cus_2uQhWrGCRwcmaMNd6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50475
   },
   {
     "nombre": "Sonia Guadalupe Enríquez Cabrera",
@@ -56250,10 +55509,10 @@ export const activeUsers = [
     "correo": "soniagpeenriquez121281@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647846671,
-    "stripe_id": "cus_O4CKH8xXrM1Nre",
-    "final_date": 1691820000,
-    "id": 50477,
-    "level": 1
+    "conekta_id": "cus_2uQhWs1bAjqMnXeYi",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50477
   },
   {
     "nombre": "Jessica",
@@ -56261,10 +55520,10 @@ export const activeUsers = [
     "correo": "jessicaarchundiaarchundia@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525548923117,
-    "stripe_id": "cus_O4LFGGTXXKAZXl",
-    "final_date": 1693180000,
-    "id": 50482,
-    "level": 1
+    "conekta_id": "cus_2uQhWszC638xstxMD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50482
   },
   {
     "nombre": "Paola",
@@ -56272,10 +55531,9 @@ export const activeUsers = [
     "correo": "sharapovaruvalcaba@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523333632657,
-    "stripe_id": "cus_O4jlGIKtDC49dd",
     "final_date": 1689270000,
-    "id": 50503,
-    "level": 1
+    "level": 1,
+    "id": 50503
   },
   {
     "nombre": "Adriana",
@@ -56283,10 +55541,9 @@ export const activeUsers = [
     "correo": "bonitha.angelique45@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525631296542,
-    "stripe_id": "cus_O4n1ASPDfBcyc1",
     "final_date": 1689280000,
-    "id": 50505,
-    "level": 1
+    "level": 1,
+    "id": 50505
   },
   {
     "nombre": "Sofia",
@@ -56294,10 +55551,10 @@ export const activeUsers = [
     "correo": "bedaj259@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527774432473,
-    "stripe_id": "cus_O4sqcpdZT3pYUV",
-    "final_date": 1691980000,
-    "id": 50510,
-    "level": 1
+    "conekta_id": "cus_2uQhWuTq8SGGBc3RK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50510
   },
   {
     "nombre": "Violeta Isabel",
@@ -56305,29 +55562,28 @@ export const activeUsers = [
     "correo": "celishernadezviole@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529931691974,
-    "stripe_id": "cus_O4uoUkS9MPVPWE",
-    "final_date": 1691990000,
-    "id": 50512,
-    "level": 1
+    "conekta_id": "cus_2uQhWuxJ2wS1g6SSU",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50512
   },
   {
     "nombre": "Lizbeth guadalupe",
     "apellido": "PÉREZ",
     "correo": "lizbeth.rubio18@gmail.com",
-    "stripe_id": "cus_O78XFfIZmzGjWN",
     "final_date": 1690000000,
-    "id": 50518,
-    "level": 1
+    "level": 1,
+    "id": 50518
   },
   {
     "nombre": "Sabrina Holmos",
     "correo": "sabrenee_@hotmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_O7mv4TMPELubXf",
-    "final_date": 1691440000,
-    "id": 50530,
-    "level": 1
+    "conekta_id": "cus_2uQhWvshTpxMePbRf",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50530
   },
   {
     "nombre": "Rocio Guadalupe",
@@ -56335,10 +55591,9 @@ export const activeUsers = [
     "correo": "rociotovarovalle7442@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524443869778,
-    "stripe_id": "cus_O89o2zLYYEjoYe",
     "final_date": 1690420000,
-    "id": 50534,
-    "level": 1
+    "level": 1,
+    "id": 50534
   },
   {
     "nombre": "Monica",
@@ -56346,10 +55601,10 @@ export const activeUsers = [
     "correo": "juradoherediam@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524591044821,
-    "stripe_id": "cus_O8G4zdKT04OyjE",
-    "final_date": 1692760000,
-    "id": 50536,
-    "level": 1
+    "conekta_id": "cus_2uQhWwcWz2X1DWMHN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50536
   },
   {
     "nombre": "Gabriela",
@@ -56357,10 +55612,9 @@ export const activeUsers = [
     "correo": "gabyangel2930@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525616455890,
-    "stripe_id": "cus_O8T54XL6u4BcpD",
     "final_date": 1693600000,
-    "id": 50539,
-    "level": 1
+    "level": 1,
+    "id": 50539
   },
   {
     "nombre": "Lucia Cecilia",
@@ -56368,10 +55622,9 @@ export const activeUsers = [
     "correo": "cecil6590@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528995642752,
-    "stripe_id": "cus_O8UqlAnSsTmK9G",
     "final_date": 1719330000,
-    "id": 50540,
-    "level": 0
+    "level": 0,
+    "id": 50540
   },
   {
     "nombre": "Danielle",
@@ -56379,10 +55632,10 @@ export const activeUsers = [
     "correo": "Lunamagiiehom@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522431192034,
-    "stripe_id": "cus_O8Xizk1gOEN1MF",
-    "final_date": 1692830000,
-    "id": 50542,
-    "level": 1
+    "conekta_id": "cus_2uQhWxBKp8muByb3t",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50542
   },
   {
     "nombre": "Evelyn",
@@ -56390,10 +55643,9 @@ export const activeUsers = [
     "correo": "evelyn07esca@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19564134070,
-    "stripe_id": "cus_O8qlbTdBafwAjv",
     "final_date": 1691020000,
-    "id": 50550,
-    "level": 1
+    "level": 1,
+    "id": 50550
   },
   {
     "nombre": "Ingrid Marisol",
@@ -56401,10 +55653,10 @@ export const activeUsers = [
     "correo": "Lal.dridd8@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522271055484,
-    "stripe_id": "cus_O9JLlqwNrbJool",
-    "final_date": 1692290000,
-    "id": 50560,
-    "level": 1
+    "conekta_id": "cus_2uQhWyexrXuCSWv3C",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50560
   },
   {
     "nombre": "Zuri jazmin",
@@ -56412,10 +55664,9 @@ export const activeUsers = [
     "correo": "zurycampos942@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526647706025,
-    "stripe_id": "cus_O9NrWPmfUP7cuJ",
     "final_date": 1690340000,
-    "id": 50561,
-    "level": 1
+    "level": 1,
+    "id": 50561
   },
   {
     "nombre": "Lizeth",
@@ -56423,10 +55674,9 @@ export const activeUsers = [
     "correo": "lrv0855@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525633241953,
-    "stripe_id": "cus_O9TrWmzrWxy2NL",
     "final_date": 1690360000,
-    "id": 50562,
-    "level": 1
+    "level": 1,
+    "id": 50562
   },
   {
     "nombre": "Gina",
@@ -56434,10 +55684,10 @@ export const activeUsers = [
     "correo": "ginawendo34@gmail.com",
     "pais": "Canada",
     "whatsapp": 14184557689,
-    "stripe_id": "cus_O9nLJD7BxhQgyp",
-    "final_date": 1693110000,
-    "id": 50571,
-    "level": 1
+    "conekta_id": "cus_2uQhWzPnNjTr3EHVC",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50571
   },
   {
     "nombre": "Ximena",
@@ -56445,10 +55695,10 @@ export const activeUsers = [
     "correo": "xime3317@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527841053064,
-    "stripe_id": "cus_OAAc2F1e5RhHcN",
-    "final_date": 1694060000,
-    "id": 50584,
-    "level": 1
+    "conekta_id": "cus_2uQhX18btw2Vh4F2n",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50584
   },
   {
     "nombre": "Rocio",
@@ -56456,10 +55706,9 @@ export const activeUsers = [
     "correo": "rgraciazavala@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527295567116,
-    "stripe_id": "cus_OAQzN3p2fevjp1",
     "final_date": 1719670000,
-    "id": 50596,
-    "level": 0
+    "level": 0,
+    "id": 50596
   },
   {
     "nombre": "Nereida",
@@ -56467,10 +55716,10 @@ export const activeUsers = [
     "correo": "nereidacamacho917@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528121950776,
-    "stripe_id": "cus_OAv61vu9hn9gVs",
-    "final_date": 1693890000,
-    "id": 50612,
-    "level": 1
+    "conekta_id": "cus_2uQhX23S7Dtu2HEtD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50612
   },
   {
     "nombre": "Amairany Esmeralda",
@@ -56478,10 +55727,9 @@ export const activeUsers = [
     "correo": "amairany1012.2019.pom@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526648242115,
-    "stripe_id": "cus_OAvTKEAWjkDmjK",
     "final_date": 1690870000,
-    "id": 50613,
-    "level": 1
+    "level": 1,
+    "id": 50613
   },
   {
     "nombre": "Sinaí Alexandra",
@@ -56489,10 +55737,9 @@ export const activeUsers = [
     "correo": "sinaialexandragrandelima@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522411743271,
-    "stripe_id": "cus_OB9RjBZf5O5Kru",
     "final_date": 1719770000,
-    "id": 50627,
-    "level": 0
+    "level": 0,
+    "id": 50627
   },
   {
     "nombre": "Abigail yuqueri",
@@ -56500,10 +55747,10 @@ export const activeUsers = [
     "correo": "yuqueri.18@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522722305313,
-    "stripe_id": "cus_OBBf9gN6wsEohG",
-    "final_date": 1692310000,
-    "id": 50628,
-    "level": 1
+    "conekta_id": "cus_2uQhX2nFdRTYeYuNz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50628
   },
   {
     "nombre": "Nemitzel Guadalupe",
@@ -56511,10 +55758,10 @@ export const activeUsers = [
     "correo": "garciauribe1214@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524423936018,
-    "stripe_id": "cus_OBRh88jGG3ZJkG",
-    "final_date": 1692140000,
-    "id": 50641,
-    "level": 1
+    "conekta_id": "cus_2uQhX3M4TXiSZsEWs",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50641
   },
   {
     "nombre": "Yuridia",
@@ -56522,10 +55769,10 @@ export const activeUsers = [
     "correo": "Yuridiapacheco256@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527451181516,
-    "stripe_id": "cus_OBpWYP9Nwg5PVQ",
-    "final_date": 1693670000,
-    "id": 50652,
-    "level": 1
+    "conekta_id": "cus_2uQhX4NpkDNkAojBe",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50652
   },
   {
     "nombre": "Edith Domínguez Martínez",
@@ -56533,10 +55780,9 @@ export const activeUsers = [
     "correo": "mariaedithdominguez72@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529222120052,
-    "stripe_id": "cus_OBqPXop3AjFlpC",
     "final_date": 1690990000,
-    "id": 50653,
-    "level": 1
+    "level": 1,
+    "id": 50653
   },
   {
     "nombre": "Miriam",
@@ -56544,10 +55790,9 @@ export const activeUsers = [
     "correo": "zmiriam136@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528134193611,
-    "stripe_id": "cus_OCCTxURdqm6UGq",
     "final_date": 1691070000,
-    "id": 50658,
-    "level": 1
+    "level": 1,
+    "id": 50658
   },
   {
     "nombre": "Brenda",
@@ -56555,10 +55800,9 @@ export const activeUsers = [
     "correo": "leon_bren@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525639580929,
-    "stripe_id": "cus_OCFZ6eOjXv7Nct",
     "final_date": 1720200000,
-    "id": 50660,
-    "level": 0
+    "level": 0,
+    "id": 50660
   },
   {
     "nombre": "Maribel",
@@ -56566,10 +55810,9 @@ export const activeUsers = [
     "correo": "jaramillocervantesmaribel@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525621246225,
-    "stripe_id": "cus_OCYq2KH25Cosgd",
     "final_date": 1720390000,
-    "id": 50674,
-    "level": 0
+    "level": 0,
+    "id": 50674
   },
   {
     "nombre": "Elvia Martinez",
@@ -56577,10 +55820,9 @@ export const activeUsers = [
     "correo": "ddeennitta@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525545157645,
-    "stripe_id": "cus_OCnor8sTDODs98",
     "final_date": 1691210000,
-    "id": 50696,
-    "level": 1
+    "level": 1,
+    "id": 50696
   },
   {
     "nombre": "Sonia",
@@ -56588,10 +55830,9 @@ export const activeUsers = [
     "correo": "leonportillosonia49@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525561317733,
-    "stripe_id": "cus_OD0e7CfoMseNEw",
     "final_date": 1693860000,
-    "id": 50708,
-    "level": 1
+    "level": 1,
+    "id": 50708
   },
   {
     "nombre": "Jeimmy",
@@ -56599,10 +55840,9 @@ export const activeUsers = [
     "correo": "jeimmy.yunuet@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525619450235,
-    "stripe_id": "cus_ODN186frwAHIvj",
     "final_date": 1691350000,
-    "id": 50718,
-    "level": 1
+    "level": 1,
+    "id": 50718
   },
   {
     "nombre": "Janet",
@@ -56610,10 +55850,9 @@ export const activeUsers = [
     "correo": "Mitzicnstobremex@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525540039139,
-    "stripe_id": "cus_ODRLGAM5MVpw7c",
     "final_date": 1723240000,
-    "id": 50722,
-    "level": 0
+    "level": 0,
+    "id": 50722
   },
   {
     "nombre": "Daniela",
@@ -56621,10 +55860,10 @@ export const activeUsers = [
     "correo": "zavaletaantonio04@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522791128491,
-    "stripe_id": "cus_ODh7pqBiDnPIGb",
-    "final_date": 1694100000,
-    "id": 50734,
-    "level": 1
+    "conekta_id": "cus_2uQhX6Y7wRhzTomjG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50734
   },
   {
     "nombre": "Delia Azhalea",
@@ -56632,10 +55871,9 @@ export const activeUsers = [
     "correo": "mandragora.daga@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528332356561,
-    "stripe_id": "cus_ODnQqUMbsLXfKd",
     "final_date": 1720990000,
-    "id": 50740,
-    "level": 0
+    "level": 0,
+    "id": 50740
   },
   {
     "nombre": "Claudia",
@@ -56643,10 +55881,10 @@ export const activeUsers = [
     "correo": "claubeflores@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524772860571,
-    "stripe_id": "cus_ODqgliKUflDHOU",
-    "final_date": 1691450000,
-    "id": 50743,
-    "level": 1
+    "conekta_id": "cus_2uQhX73A4XXghDYyu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50743
   },
   {
     "nombre": "Guadalupe Arcos",
@@ -56654,10 +55892,10 @@ export const activeUsers = [
     "correo": "emilup2005@gmail.com",
     "pais": "Mexico",
     "whatsapp": 526632089101,
-    "stripe_id": "cus_ODr7GV6pLC2YbQ",
-    "final_date": 1692560000,
-    "id": 50744,
-    "level": 1
+    "conekta_id": "cus_2uQhX7wzGpQ62SYq8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50744
   },
   {
     "nombre": "Karina",
@@ -56665,10 +55903,9 @@ export const activeUsers = [
     "correo": "castelan2420xar@gmail.com",
     "pais": "Mexico",
     "whatsapp": 522461900570,
-    "stripe_id": "cus_OEBtarnG8aJgrJ",
     "final_date": 1720550000,
-    "id": 50755,
-    "level": 0
+    "level": 0,
+    "id": 50755
   },
   {
     "nombre": "Adriana",
@@ -56676,10 +55913,10 @@ export const activeUsers = [
     "correo": "adrirosas07@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525559665882,
-    "stripe_id": "cus_OESEo1v8dy7e1B",
-    "final_date": 1693250000,
-    "id": 50766,
-    "level": 1
+    "conekta_id": "cus_2uQhX8ojsQkdwRhoX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50766
   },
   {
     "nombre": "Julieny",
@@ -56687,10 +55924,10 @@ export const activeUsers = [
     "correo": "julyr0053@gmail.com",
     "pais": "Mexico",
     "whatsapp": 524461491574,
-    "stripe_id": "cus_OESzBDGH0FRCLp",
-    "final_date": 1691600000,
-    "id": 50767,
-    "level": 1
+    "conekta_id": "cus_2uQhX9F3QXZgrgkDP",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50767
   },
   {
     "nombre": "Arleth",
@@ -56698,10 +55935,9 @@ export const activeUsers = [
     "correo": "arlethibarra73@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 18057440425,
-    "stripe_id": "cus_OEbsAHABorMHg4",
     "final_date": 1694210000,
-    "id": 50772,
-    "level": 1
+    "level": 1,
+    "id": 50772
   },
   {
     "nombre": "Lucia Ivette",
@@ -56709,10 +55945,10 @@ export const activeUsers = [
     "correo": "ivetteminor@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525572450598,
-    "stripe_id": "cus_OEnlRZYaaqXJwo",
-    "final_date": 1691670000,
-    "id": 50783,
-    "level": 1
+    "conekta_id": "cus_2uQhXAEDYRXEh1KHJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50783
   },
   {
     "nombre": "Laura",
@@ -56720,10 +55956,10 @@ export const activeUsers = [
     "correo": "lauck151426@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525530469310,
-    "stripe_id": "cus_OEtnObbHbSTw9i",
-    "final_date": 1691700000,
-    "id": 50792,
-    "level": 1
+    "conekta_id": "cus_2uQhXAigSvgz7E5D2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50792
   },
   {
     "nombre": "Rubí Esmeralda",
@@ -56731,10 +55967,10 @@ export const activeUsers = [
     "correo": "esmeraldita.2003rubiza@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529542073369,
-    "stripe_id": "cus_OF1Ca4dm6ic3Jc",
-    "final_date": 1692150000,
-    "id": 50800,
-    "level": 1
+    "conekta_id": "cus_2uQhXAuGMcegbyRiD",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50800
   },
   {
     "nombre": "Laura Olivia",
@@ -56742,21 +55978,21 @@ export const activeUsers = [
     "correo": "laur709@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525513381945,
-    "stripe_id": "cus_OF2D8XYtfVj2WN",
-    "final_date": 1692590000,
-    "id": 50814,
-    "level": 1
+    "conekta_id": "cus_2uQhXBTVy8FdomNos",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50814
   },
   {
-    "nombre": "Veronica Garita",
-    "apellido": "Garita",
+    "nombre": "Veronica",
+    "apellido": "Garita Hernandez",
     "correo": "garitah2522@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522215886927,
-    "stripe_id": "cus_OFA2PmZQrioGUA",
-    "final_date": 1693760000,
-    "id": 50828,
-    "level": 1
+    "conekta_id": "cus_2uQhXCCKVKpHTeHx2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50828
   },
   {
     "nombre": "Lorena del Carmen",
@@ -56764,10 +56000,10 @@ export const activeUsers = [
     "correo": "lorebolom45@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529672723888,
-    "stripe_id": "cus_OFA7epyE8rWfLx",
-    "final_date": 1691780000,
-    "id": 50829,
-    "level": 1
+    "conekta_id": "cus_2uQhXCwiE82shNrvQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50829
   },
   {
     "nombre": "Fatima",
@@ -56775,10 +56011,10 @@ export const activeUsers = [
     "correo": "coronadofg@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523781057972,
-    "stripe_id": "cus_OFBqvIOCsyi447",
-    "final_date": 1691760000,
-    "id": 50841,
-    "level": 1
+    "conekta_id": "cus_2uQhXDrYSQuH2brmt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50841
   },
   {
     "nombre": "Verónica",
@@ -56786,10 +56022,10 @@ export const activeUsers = [
     "correo": "sushijoshtuti@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529831337350,
-    "stripe_id": "cus_OFBuLJC6MjvqL5",
-    "final_date": 1691760000,
-    "id": 50843,
-    "level": 1
+    "conekta_id": "cus_2uQhXDgXkKbXJ6ENW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50843
   },
   {
     "nombre": "Moni",
@@ -56797,21 +56033,21 @@ export const activeUsers = [
     "correo": "moni.vega.vr@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527712280755,
-    "stripe_id": "cus_OFG9zaSQAHx3L6",
-    "final_date": 1691790000,
-    "id": 50853,
-    "level": 1
+    "conekta_id": "cus_2uQhXEbMxcTvjKkBk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50853
   },
   {
     "nombre": "Fernanda",
-    "apellido": "Alcantara",
+    "apellido": "Alcántara",
     "correo": "malcantarareyes789@gmail.com",
-    "pais": "México",
+    "pais": "Mexico",
     "whatsapp": 525517004978,
-    "stripe_id": "cus_OFJCx3ns02YIRC",
-    "final_date": 1693790000,
-    "id": 50862,
-    "level": 1
+    "conekta_id": "cus_2uQhXFT7ZCpUZrgF6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50862
   },
   {
     "nombre": "Daniella Kaylin",
@@ -56819,10 +56055,10 @@ export const activeUsers = [
     "correo": "daniellakaylinmevans@gmail.com",
     "pais": "México",
     "whatsapp": 524427729180,
-    "stripe_id": "cus_OFLsnCSgmpHRdM",
-    "final_date": 1691870000,
-    "id": 50869,
-    "level": 1
+    "conekta_id": "cus_2uQhXFtzJvHUCTWtK",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50869
   },
   {
     "nombre": "Cinthya",
@@ -56830,10 +56066,10 @@ export const activeUsers = [
     "correo": "crpcinthya09@gmail.com",
     "pais": "México",
     "whatsapp": 525574297987,
-    "stripe_id": "cus_OFQ6aL4m4igPGI",
-    "final_date": 1691820000,
-    "id": 50873,
-    "level": 1
+    "conekta_id": "cus_2uQhXGBw5QP8C8Lje",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50873
   },
   {
     "nombre": "Lupita",
@@ -56841,10 +56077,10 @@ export const activeUsers = [
     "correo": "lupismcuevas29@gmail.com",
     "pais": "México",
     "whatsapp": 523471001490,
-    "stripe_id": "cus_OFesl51TVmRmvZ",
-    "final_date": 1691970000,
-    "id": 50887,
-    "level": 1
+    "conekta_id": "cus_2uQhXGvkbbwmmFd3Y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50887
   },
   {
     "nombre": "Romina",
@@ -56852,10 +56088,10 @@ export const activeUsers = [
     "correo": "rominauscanga082@gmail.com",
     "pais": "México",
     "whatsapp": 522294861203,
-    "stripe_id": "cus_OFjLDGeIF3RnTS",
-    "final_date": 1692210000,
-    "id": 50893,
-    "level": 1
+    "conekta_id": "cus_2uQhXHfa7oWRPXHYF",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50893
   },
   {
     "nombre": "Heredia higuera",
@@ -56863,10 +56099,10 @@ export const activeUsers = [
     "correo": "oscarrodriguezjuarez6@gmail.com",
     "pais": "Mexico",
     "whatsapp": 523680615,
-    "stripe_id": "cus_OFwXOREzgC6EJ8",
-    "final_date": 1691980000,
-    "id": 50905,
-    "level": 1
+    "conekta_id": "cus_2uQhXJQPe1551nx2m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50905
   },
   {
     "nombre": "Thamara de los santos",
@@ -56874,10 +56110,10 @@ export const activeUsers = [
     "correo": "thamymilu@ymail.com",
     "pais": "Uruguay",
     "whatsapp": 598098497553,
-    "stripe_id": "cus_OFyFuhqvYrSjxQ",
-    "final_date": 1692320000,
-    "id": 50906,
-    "level": 1
+    "conekta_id": "cus_2uQhXJHTZcHArg4em",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50906
   },
   {
     "nombre": "Blanca",
@@ -56885,10 +56121,10 @@ export const activeUsers = [
     "correo": "blanarriaga2004@gmail.com",
     "pais": "México",
     "whatsapp": 527292557490,
-    "stripe_id": "cus_OG2OoFJ22AZdEc",
-    "final_date": 1691960000,
-    "id": 50920,
-    "level": 1
+    "conekta_id": "cus_2uQhXJqhB7t84U1jE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50920
   },
   {
     "nombre": "Yeraldy Joselinne",
@@ -56896,10 +56132,10 @@ export const activeUsers = [
     "correo": "ynneft@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525576690853,
-    "stripe_id": "cus_OG47eB2eU5MgsQ",
-    "final_date": 1692890000,
-    "id": 50931,
-    "level": 1
+    "conekta_id": "cus_2uQhXKpsK1qfmMBeJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50931
   },
   {
     "nombre": "Berenice",
@@ -56907,10 +56143,10 @@ export const activeUsers = [
     "correo": "brenda@aypinternet.com",
     "pais": "México",
     "whatsapp": 525541924914,
-    "stripe_id": "cus_OG5EUDIViTXu4p",
-    "final_date": 1692500000,
-    "id": 50941,
-    "level": 1
+    "conekta_id": "cus_2uQhXLVv8Cy7f2qDx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50941
   },
   {
     "nombre": "Surille",
@@ -56918,10 +56154,10 @@ export const activeUsers = [
     "correo": "sllimsurille@gmail.com",
     "pais": "México",
     "whatsapp": 527321044920,
-    "stripe_id": "cus_OG7ugrfWjpbMxm",
-    "final_date": 1691980000,
-    "id": 50947,
-    "level": 1
+    "conekta_id": "cus_2uQhXLcrCbm1ypT9S",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50947
   },
   {
     "nombre": "Sara",
@@ -56929,10 +56165,10 @@ export const activeUsers = [
     "correo": "sara_izelo@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522228014513,
-    "stripe_id": "cus_OGBobh1eHIorIQ",
-    "final_date": 1691990000,
-    "id": 50956,
-    "level": 1
+    "conekta_id": "cus_2uQhXM4ixKE1bi9ph",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50956
   },
   {
     "nombre": "Georgina Fabiola",
@@ -56940,10 +56176,10 @@ export const activeUsers = [
     "correo": "fa_glomas@hotmail.com",
     "pais": "México",
     "whatsapp": 525516049399,
-    "stripe_id": "cus_OGISAHaxyai7jm",
-    "final_date": 1692130000,
-    "id": 50960,
-    "level": 1
+    "conekta_id": "cus_2uQhXN6VEztKBHf2c",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50960
   },
   {
     "nombre": "Atziry Jocelyn",
@@ -56951,10 +56187,10 @@ export const activeUsers = [
     "correo": "atziryacosta1310@gmail.com",
     "pais": "México",
     "whatsapp": 525560428709,
-    "stripe_id": "cus_OGRxiORdomn4Bn",
-    "final_date": 1692140000,
-    "id": 50979,
-    "level": 1
+    "conekta_id": "cus_2uQhXNiNgof4cJ3cq",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50979
   },
   {
     "nombre": "Concepción",
@@ -56962,10 +56198,10 @@ export const activeUsers = [
     "correo": "Nja85539@gmail.com",
     "pais": "México",
     "whatsapp": 522223326539,
-    "stripe_id": "cus_OGVZsfq8vB8ukO",
-    "final_date": 1692460000,
-    "id": 50985,
-    "level": 1
+    "conekta_id": "cus_2uQhXNn9Pp6GK5sAh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50985
   },
   {
     "nombre": "Paloma",
@@ -56973,20 +56209,20 @@ export const activeUsers = [
     "correo": "italia_pam@hotmail.com",
     "pais": "México",
     "whatsapp": 527774460120,
-    "stripe_id": "cus_OGhJqCi8WDY01C",
-    "final_date": 1693930000,
-    "id": 50995,
-    "level": 1
+    "conekta_id": "cus_2uQhXPWxv1euwMXfX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 50995
   },
   {
     "nombre": "Vero Pico",
     "correo": "pinaveronica833@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_OGmbrcpOIuwQaU",
-    "final_date": 1692140000,
-    "id": 51003,
-    "level": 1
+    "conekta_id": "cus_2uQhXQ1RpWpfTxupt",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51003
   },
   {
     "nombre": "Jennifer",
@@ -56994,10 +56230,10 @@ export const activeUsers = [
     "correo": "jtovarlozada@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 16082132615,
-    "stripe_id": "cus_OHAtuY32rSBHRP",
-    "final_date": 1692460000,
-    "id": 51013,
-    "level": 1
+    "conekta_id": "cus_2uQhXR3mKo8ugNK1N",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51013
   },
   {
     "nombre": "Marina",
@@ -57005,10 +56241,10 @@ export const activeUsers = [
     "correo": "Ortiz.maryna2017@gmail.com",
     "pais": "México",
     "whatsapp": 522751079822,
-    "stripe_id": "cus_OHGbplsqnzkzJQ",
-    "final_date": 1692250000,
-    "id": 51017,
-    "level": 1
+    "conekta_id": "cus_2uQhXRjRUcLrmWVcX",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51017
   },
   {
     "nombre": "Vanessa",
@@ -57016,10 +56252,9 @@ export const activeUsers = [
     "correo": "vanne87gar@gmail.com",
     "pais": "México",
     "whatsapp": 524151159719,
-    "stripe_id": "cus_OHp6SPmdaq3ECt",
     "final_date": 1692320000,
-    "id": 51042,
-    "level": 1
+    "level": 1,
+    "id": 51042
   },
   {
     "nombre": "Nereyda",
@@ -57027,10 +56262,10 @@ export const activeUsers = [
     "correo": "lizita2802@gmail.com",
     "pais": "México",
     "whatsapp": 528991131513,
-    "stripe_id": "cus_OHwUTR574HQyW2",
-    "final_date": 1692410000,
-    "id": 51047,
-    "level": 1
+    "conekta_id": "cus_2uQhXSDtP7WcHaDuW",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51047
   },
   {
     "nombre": "Ingrid Monsserrat",
@@ -57038,10 +56273,10 @@ export const activeUsers = [
     "correo": "monsseysebasr@gmail.com",
     "pais": "México",
     "whatsapp": 525537522930,
-    "stripe_id": "cus_OHzuSuB9HOHJJx",
-    "final_date": 1692410000,
-    "id": 51053,
-    "level": 1
+    "conekta_id": "cus_2uQhXT9Hp12xMv2am",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51053
   },
   {
     "nombre": "Berenice",
@@ -57049,10 +56284,9 @@ export const activeUsers = [
     "correo": "bereemilevan@gmail.com",
     "pais": "México",
     "whatsapp": 528129000346,
-    "stripe_id": "cus_OIIcMBgCQ40OBR",
     "final_date": 1721340000,
-    "id": 51065,
-    "level": 0
+    "level": 0,
+    "id": 51065
   },
   {
     "nombre": "Karen",
@@ -57060,10 +56294,10 @@ export const activeUsers = [
     "correo": "karen_bh07@hotmail.com",
     "pais": "México",
     "whatsapp": 522297790499,
-    "stripe_id": "cus_OIblJn0eU0jnCE",
-    "final_date": 1693080000,
-    "id": 51073,
-    "level": 1
+    "conekta_id": "cus_2uQhXTt7LCbbzBh5R",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51073
   },
   {
     "nombre": "Ale Ambriz",
@@ -57071,10 +56305,9 @@ export const activeUsers = [
     "correo": "alebonita_26@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 527226288085,
-    "stripe_id": "cus_OIih475BWImq6k",
     "final_date": 1693900000,
-    "id": 51085,
-    "level": 1
+    "level": 1,
+    "id": 51085
   },
   {
     "nombre": "Tania Mariela",
@@ -57082,10 +56315,10 @@ export const activeUsers = [
     "correo": "Tania_avarez_01@outlook.es",
     "pais": "México",
     "whatsapp": 524531387690,
-    "stripe_id": "cus_OInwzziFbVufZL",
-    "final_date": 1692600000,
-    "id": 51090,
-    "level": 1
+    "conekta_id": "cus_2uQhXUSLwiCZDatnA",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51090
   },
   {
     "nombre": "Himelda Escobar del Valle",
@@ -57093,10 +56326,10 @@ export const activeUsers = [
     "correo": "himeldaescobar8@gmail.com",
     "pais": "México",
     "whatsapp": 529721086386,
-    "stripe_id": "cus_OJf2H6OIKvSuGy",
-    "final_date": 1692800000,
-    "id": 51118,
-    "level": 1
+    "conekta_id": "cus_2uQhXVRX5cA6trp6S",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51118
   },
   {
     "nombre": "Valentina",
@@ -57104,10 +56337,10 @@ export const activeUsers = [
     "correo": "valemorales426@gmail.com",
     "pais": "México",
     "whatsapp": 529341210988,
-    "stripe_id": "cus_OJkwZvWbNkl7D0",
-    "final_date": 1692820000,
-    "id": 51121,
-    "level": 1
+    "conekta_id": "cus_2uQhXW6ZtoHYnYTex",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51121
   },
   {
     "nombre": "Elena Gtz Gtz",
@@ -57115,10 +56348,20 @@ export const activeUsers = [
     "correo": "luttziii@gmai.com",
     "pais": "México",
     "whatsapp": 523314134401,
-    "stripe_id": "cus_OJpoMVm11bFld3",
-    "final_date": 1692840000,
-    "id": 51124,
-    "level": 1
+    "conekta_id": "cus_2uQhXWALboikX8UbR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51124
+  },
+  {
+    "nombre": "Jessica Selene",
+    "apellido": "Palma",
+    "correo": "acissej_2188@hotmail.com",
+    "pais": "Mexico",
+    "whatsapp": 527227025521,
+    "final_date": 1724010000,
+    "level": 0,
+    "id": 51132
   },
   {
     "nombre": "Renata",
@@ -57126,10 +56369,10 @@ export const activeUsers = [
     "correo": "renyfvillarreal@gmail.com",
     "pais": "México",
     "whatsapp": 525633596826,
-    "stripe_id": "cus_OKH3STrdnHAt1E",
-    "final_date": 1692940000,
-    "id": 51141,
-    "level": 1
+    "conekta_id": "cus_2uQhXWqPQzrCQp89m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51141
   },
   {
     "nombre": "Nabil yarely",
@@ -57137,10 +56380,10 @@ export const activeUsers = [
     "correo": "nabil.yep@icloud.com",
     "pais": "México",
     "whatsapp": 529811208794,
-    "stripe_id": "cus_OKI5zDfDdeWev6",
-    "final_date": 1692940000,
-    "id": 51145,
-    "level": 1
+    "conekta_id": "cus_2uQhXXPd2WT9ifYkJ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51145
   },
   {
     "nombre": "Dulce Yeraldin",
@@ -57148,10 +56391,10 @@ export const activeUsers = [
     "correo": "yeraldin_tovar_27@hotmail.com",
     "pais": "México",
     "whatsapp": 524441341091,
-    "stripe_id": "cus_OKT2iEjXHmREey",
-    "final_date": 1692980000,
-    "id": 51152,
-    "level": 1
+    "conekta_id": "cus_2uQhXYK2TPyVfMT9A",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51152
   },
   {
     "nombre": "Yhoali",
@@ -57159,10 +56402,10 @@ export const activeUsers = [
     "correo": "yhoalibethmontejo@gmail.com",
     "pais": "México",
     "whatsapp": 529381960922,
-    "stripe_id": "cus_OKUMcjrpXNathu",
-    "final_date": 1693100000,
-    "id": 51156,
-    "level": 1
+    "conekta_id": "cus_2uQhXYsG4uaSwbd6Q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51156
   },
   {
     "nombre": "VERÓNICA",
@@ -57170,10 +56413,10 @@ export const activeUsers = [
     "correo": "edierarias2022@gmail.com",
     "pais": "México",
     "whatsapp": 529192045757,
-    "stripe_id": "cus_OKVhkyxNhQOneY",
-    "final_date": 1692990000,
-    "id": 51158,
-    "level": 1
+    "conekta_id": "cus_2uQhXYsqHWEPafnBh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51158
   },
   {
     "nombre": "Gabriela",
@@ -57181,10 +56424,10 @@ export const activeUsers = [
     "correo": "alexgabylove@gmail.com",
     "pais": "México",
     "whatsapp": 527443523756,
-    "stripe_id": "cus_OKfsfm7a3EqMwv",
-    "final_date": 1693340000,
-    "id": 51163,
-    "level": 1
+    "conekta_id": "cus_2uQhXZc5b796bUYE5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51163
   },
   {
     "nombre": "Silvia",
@@ -57192,10 +56435,10 @@ export const activeUsers = [
     "correo": "silviasantiz230@gmail.com",
     "pais": "Mexico",
     "whatsapp": 529611544515,
-    "stripe_id": "cus_OKoF0OF7lplvuR",
-    "final_date": 1693060000,
-    "id": 51164,
-    "level": 1
+    "conekta_id": "cus_2uQhXaMUKuMgoepBL",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51164
   },
   {
     "nombre": "kevin",
@@ -57203,10 +56446,10 @@ export const activeUsers = [
     "correo": "kevinhm53@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_OKthXFJ95WwdvH",
-    "final_date": 1723680000,
-    "id": 51176,
-    "level": 0
+    "conekta_id": "cus_2uH8w6NoVNGrrEvJr",
+    "final_date": 1695320000,
+    "level": 3,
+    "id": 51176
   },
   {
     "nombre": "Carolina",
@@ -57214,10 +56457,10 @@ export const activeUsers = [
     "correo": "carolinamv1986@gmail.com",
     "pais": "México",
     "whatsapp": 527121939096,
-    "stripe_id": "cus_OKxzrOubW1zJab",
-    "final_date": 1693100000,
-    "id": 51181,
-    "level": 1
+    "conekta_id": "cus_2uQhXb5idWGPpQcad",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51181
   },
   {
     "nombre": "Valeria",
@@ -57225,10 +56468,10 @@ export const activeUsers = [
     "correo": "valeriaaketzalih@gmail.com",
     "pais": "México",
     "whatsapp": 525610561738,
-    "stripe_id": "cus_OL3Muvw2ZhTPto",
-    "final_date": 1693120000,
-    "id": 51188,
-    "level": 1
+    "conekta_id": "cus_2uQhXc848nae4RGSE",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51188
   },
   {
     "nombre": "Zeida",
@@ -57236,10 +56479,9 @@ export const activeUsers = [
     "correo": "zeytg.ds@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_OLEjCxZjiywky9",
     "final_date": 1693110000,
-    "id": 51193,
-    "level": 1
+    "level": 1,
+    "id": 51193
   },
   {
     "nombre": "Asly",
@@ -57247,10 +56489,10 @@ export const activeUsers = [
     "correo": "Wendy16@live.com",
     "pais": "México",
     "whatsapp": 525569351725,
-    "stripe_id": "cus_OLHdKkWXxRG4Cw",
-    "final_date": 1693170000,
-    "id": 51194,
-    "level": 1
+    "conekta_id": "cus_2uQhXcjwabMPQyS7m",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51194
   },
   {
     "nombre": "Fabiola",
@@ -57258,32 +56500,31 @@ export const activeUsers = [
     "correo": "fabiola_renteria679@outlook.com",
     "pais": "México",
     "whatsapp": 523310793604,
-    "stripe_id": "cus_OLbNYXyjplx4Tl",
-    "final_date": 1693260000,
-    "id": 51211,
-    "level": 1
+    "conekta_id": "cus_2uQhXdJBC6xLiprgb",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51211
   },
   {
     "nombre": "Lucina",
-    "apellido": "Santiago",
+    "apellido": "Santiago García",
     "correo": "LucinaSantiago91@gmail.com",
-    "pais": "México",
+    "pais": "Mexico",
     "whatsapp": 522282366268,
-    "stripe_id": "cus_OLefw3xX7zQHbT",
-    "final_date": 1693250000,
-    "id": 51215,
-    "level": 1
+    "conekta_id": "cus_2uQhXe3ZvuAvt6og6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51215
   },
   {
     "nombre": "Coral María de Jesús",
     "apellido": "Domínguez Zoriano",
     "correo": "coral8dominguez@gmail.com",
-    "pais": "México",
+    "pais": "Mexico",
     "whatsapp": 525541575056,
-    "stripe_id": "cus_OLep22mI7IlOP3",
     "final_date": 1723410000,
-    "id": 51216,
-    "level": 0
+    "level": 0,
+    "id": 51216
   },
   {
     "nombre": "Itzel Anai",
@@ -57291,10 +56532,10 @@ export const activeUsers = [
     "correo": "annaii.monroy@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525532702438,
-    "stripe_id": "cus_OLgPYYiVNx6Z8M",
-    "final_date": 1693260000,
-    "id": 51220,
-    "level": 1
+    "conekta_id": "cus_2uQhXf2ArCUY5YCWT",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51220
   },
   {
     "nombre": "Karime",
@@ -57302,10 +56543,10 @@ export const activeUsers = [
     "correo": "Karimediazgonzalez46@gmail.com",
     "pais": "México",
     "whatsapp": 527775534408,
-    "stripe_id": "cus_OLjDPZSW8PBCqt",
-    "final_date": 1693250000,
-    "id": 51224,
-    "level": 1
+    "conekta_id": "cus_2uQhXf2ArCUY2NSYx",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51224
   },
   {
     "nombre": "Melisa Yasmin",
@@ -57313,10 +56554,10 @@ export const activeUsers = [
     "correo": "azpeitiamelina2@gmail.com",
     "pais": "México",
     "whatsapp": 525540696181,
-    "stripe_id": "cus_OM4FB4Q31C61js",
-    "final_date": 1693360000,
-    "id": 51231,
-    "level": 1
+    "conekta_id": "cus_2uQhXfXCyJJE8e8fZ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51231
   },
   {
     "nombre": "Itza",
@@ -57324,10 +56565,9 @@ export const activeUsers = [
     "correo": "cvhatma@gmail.com",
     "pais": "México",
     "whatsapp": 525612063290,
-    "stripe_id": "cus_OM95WvpBWO3Cq2",
     "final_date": 1693320000,
-    "id": 51237,
-    "level": 1
+    "level": 1,
+    "id": 51237
   },
   {
     "nombre": "Michelle Alondra",
@@ -57335,10 +56575,10 @@ export const activeUsers = [
     "correo": "michellealondra_650@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522461809882,
-    "stripe_id": "cus_OMLnzWgAhNbSLq",
-    "final_date": 1693420000,
-    "id": 51243,
-    "level": 1
+    "conekta_id": "cus_2uQhXgYyFyxXq3Ez8",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51243
   },
   {
     "nombre": "Paola",
@@ -57346,10 +56586,10 @@ export const activeUsers = [
     "correo": "paokenjy050505@gmail.com",
     "pais": "México",
     "whatsapp": 526241090759,
-    "stripe_id": "cus_OMOPgK9WgSHfTr",
-    "final_date": 1693430000,
-    "id": 51245,
-    "level": 1
+    "conekta_id": "cus_2uQhXgzGo6marBBAQ",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51245
   },
   {
     "nombre": "Alicia",
@@ -57357,10 +56597,9 @@ export const activeUsers = [
     "correo": "maraligar189@gmail.com",
     "pais": "México",
     "whatsapp": 522381554676,
-    "stripe_id": "cus_OMnjcLBcdkaYS5",
     "final_date": 0,
-    "id": 51261,
-    "level": 1
+    "level": 1,
+    "id": 51261
   },
   {
     "nombre": "Mayra Dafne",
@@ -57368,10 +56607,10 @@ export const activeUsers = [
     "correo": "dafnealabat@hotmail.com",
     "pais": "México",
     "whatsapp": 528671286892,
-    "stripe_id": "cus_OMtzOfzCavCGR5",
-    "final_date": 1693700000,
-    "id": 51275,
-    "level": 1
+    "conekta_id": "cus_2uQhXi2cJP5q4aaNd",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51275
   },
   {
     "nombre": "Mariana",
@@ -57379,10 +56618,10 @@ export const activeUsers = [
     "correo": "bonillagmariana@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525543192338,
-    "stripe_id": "cus_OMugGHKWoZAY9P",
-    "final_date": 1693550000,
-    "id": 51281,
-    "level": 1
+    "conekta_id": "cus_2uQhXieVkBraR8k5s",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51281
   },
   {
     "nombre": "Marlene",
@@ -57390,10 +56629,9 @@ export const activeUsers = [
     "correo": "nenilopez507@gmail.com",
     "pais": "Panamá",
     "whatsapp": 50768454386,
-    "stripe_id": "cus_ON64sDCsZ9T2MN",
     "final_date": 1694100000,
-    "id": 51287,
-    "level": 1
+    "level": 1,
+    "id": 51287
   },
   {
     "nombre": "Berenice",
@@ -57401,10 +56639,9 @@ export const activeUsers = [
     "correo": "berenicemk52@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_ON9lRsqTq9SBvz",
     "final_date": 1723590000,
-    "id": 51290,
-    "level": 0
+    "level": 0,
+    "id": 51290
   },
   {
     "nombre": "Paola Elizabeth",
@@ -57412,10 +56649,9 @@ export const activeUsers = [
     "correo": "paolaejardonr@gmail.com",
     "pais": "México",
     "whatsapp": 525583355274,
-    "stripe_id": "cus_ONAOKrIbEjromC",
     "final_date": 1722550000,
-    "id": 51296,
-    "level": 1
+    "level": 1,
+    "id": 51296
   },
   {
     "nombre": "Alejandra",
@@ -57423,10 +56659,9 @@ export const activeUsers = [
     "correo": "alejandra.glezdelgadillo@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_ONAt6OmEgcs1ws",
     "final_date": 1722550000,
-    "id": 51299,
-    "level": 1
+    "level": 1,
+    "id": 51299
   },
   {
     "nombre": "Brenda Yohaly",
@@ -57434,10 +56669,9 @@ export const activeUsers = [
     "correo": "brendayohaly@live.com.mx",
     "pais": "México",
     "whatsapp": 525530557294,
-    "stripe_id": "cus_ONCHGcW9zrLmie",
     "final_date": 1723580000,
-    "id": 51302,
-    "level": 0
+    "level": 0,
+    "id": 51302
   },
   {
     "nombre": "Wendoly",
@@ -57445,21 +56679,21 @@ export const activeUsers = [
     "correo": "Nwendolyvm44@outlook.com",
     "pais": "México",
     "whatsapp": 528662182672,
-    "stripe_id": "cus_ONDyHI3CaKMVrJ",
-    "final_date": 1693620000,
-    "id": 51303,
-    "level": 1
+    "conekta_id": "cus_2uQhXjx86Vg7tG7dY",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51303
   },
   {
-    "nombre": "Laura",
-    "apellido": "García",
+    "nombre": "Laura Nancy",
+    "apellido": "García Trigueros",
     "correo": "trigueroslau@hotmail.com",
-    "pais": "México",
+    "pais": "Mexico",
     "whatsapp": 525528547894,
-    "stripe_id": "cus_ONGNb4yEZpt16g",
-    "final_date": 1693630000,
-    "id": 51306,
-    "level": 1
+    "conekta_id": "cus_2uQhXkvj1nyj5hWT4",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51306
   },
   {
     "nombre": "Adriana",
@@ -57467,21 +56701,20 @@ export const activeUsers = [
     "correo": "adyver@live.com.mx",
     "pais": "México",
     "whatsapp": 523131363042,
-    "stripe_id": "cus_ONGmWsnS43QXIE",
     "final_date": 1693590000,
-    "id": 51308,
-    "level": 1
+    "level": 1,
+    "id": 51308
   },
   {
-    "nombre": "momla",
+    "nombre": "momla_22",
     "apellido": "undefined",
     "correo": "lauramontejo8605@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_ONb4pOJ1Owr2Lt",
-    "final_date": 1693700000,
-    "id": 51332,
-    "level": 1
+    "conekta_id": "cus_2uQhXmRm8toRBhmZk",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51332
   },
   {
     "nombre": "Angela Teresa Zuñiga Silva",
@@ -57489,10 +56722,10 @@ export const activeUsers = [
     "correo": "vielkazuniga28@gmail.com",
     "pais": "México",
     "whatsapp": 528115776816,
-    "stripe_id": "cus_ONcAhyLN9lC9d2",
-    "final_date": 1693710000,
-    "id": 51335,
-    "level": 1
+    "conekta_id": "cus_2uQhXmbmpz7AvDQ4y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51335
   },
   {
     "nombre": "abigail",
@@ -57500,10 +56733,10 @@ export const activeUsers = [
     "correo": "liagiba1901@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_ONd2CGmL3JZjqv",
-    "final_date": 1693720000,
-    "id": 51340,
-    "level": 1
+    "conekta_id": "cus_2uQhXnQN4C72LEqS3",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51340
   },
   {
     "nombre": "JIMENA",
@@ -57511,10 +56744,9 @@ export const activeUsers = [
     "correo": "noriko.jimena@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_ONggGwDQEMrAGM",
     "final_date": 1722710000,
-    "id": 51346,
-    "level": 1
+    "level": 1,
+    "id": 51346
   },
   {
     "nombre": "Mayra Evelin",
@@ -57522,10 +56754,9 @@ export const activeUsers = [
     "correo": "evelinzitha_1994@hotmail.com",
     "pais": "México",
     "whatsapp": 526634380776,
-    "stripe_id": "cus_ONodrvSWWnShaC",
     "final_date": 1694090000,
-    "id": 51350,
-    "level": 1
+    "level": 1,
+    "id": 51350
   },
   {
     "nombre": "Eda",
@@ -57533,10 +56764,9 @@ export const activeUsers = [
     "correo": "bnizdali@gmail.com",
     "pais": "México",
     "whatsapp": 523335977403,
-    "stripe_id": "cus_ONou6biYL9w8PF",
     "final_date": 1722630000,
-    "id": 51351,
-    "level": 0
+    "level": 0,
+    "id": 51351
   },
   {
     "nombre": "Valeria",
@@ -57544,10 +56774,9 @@ export const activeUsers = [
     "correo": "valeriarebolledo807@gmail.com",
     "pais": "Mexico",
     "whatsapp": 527221099478,
-    "stripe_id": "cus_ONrmx5PLLHrggH",
     "final_date": 1723590000,
-    "id": 51353,
-    "level": 0
+    "level": 0,
+    "id": 51353
   },
   {
     "nombre": "Katya yazmin",
@@ -57555,10 +56784,10 @@ export const activeUsers = [
     "correo": "Kym_94@hotmail.com",
     "pais": "México",
     "whatsapp": 529511882591,
-    "stripe_id": "cus_ONs3cMzgJPHfxN",
-    "final_date": 1694110000,
-    "id": 51354,
-    "level": 1
+    "conekta_id": "cus_2uQhXodeUtqRNjFqu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51354
   },
   {
     "nombre": "Cecilia",
@@ -57566,10 +56795,9 @@ export const activeUsers = [
     "correo": "cesyalfredo.2015@gmail.com",
     "pais": "México",
     "whatsapp": 526771018896,
-    "stripe_id": "cus_ONvxH98gnNU6pK",
     "final_date": 0,
-    "id": 51361,
-    "level": 1
+    "level": 1,
+    "id": 51361
   },
   {
     "nombre": "Cinthia Alejandra",
@@ -57577,10 +56805,9 @@ export const activeUsers = [
     "correo": "camijesar@gmail.com",
     "pais": "Mexico",
     "whatsapp": 528444642022,
-    "stripe_id": "cus_ONxTjtERG0cnsi",
     "final_date": 0,
-    "id": 51366,
-    "level": 1
+    "level": 1,
+    "id": 51366
   },
   {
     "nombre": "Jacqueline",
@@ -57588,10 +56815,10 @@ export const activeUsers = [
     "correo": "stylejaki@gmail.com",
     "pais": "México",
     "whatsapp": 525618751727,
-    "stripe_id": "cus_ONzpKWeeC141Sp",
-    "final_date": 1693800000,
-    "id": 51375,
-    "level": 1
+    "conekta_id": "cus_2uQhXq7HXHxij9UcR",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51375
   },
   {
     "nombre": "Yeneida Modesta",
@@ -57599,10 +56826,10 @@ export const activeUsers = [
     "correo": "Powernailsnery@gmail.com",
     "pais": "México",
     "whatsapp": 522871074486,
-    "stripe_id": "cus_OOCIJQkPom53FD",
-    "final_date": 1693840000,
-    "id": 51382,
-    "level": 1
+    "conekta_id": "cus_2uQhXq7rjtcfK4631",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51382
   },
   {
     "nombre": "Berenice",
@@ -57610,10 +56837,9 @@ export const activeUsers = [
     "correo": "tameralopez55@gmail.com",
     "pais": "Guatemala",
     "whatsapp": 50253117120,
-    "stripe_id": "cus_OOCbHl10JaWiqr",
     "final_date": 0,
-    "id": 51383,
-    "level": 1
+    "level": 1,
+    "id": 51383
   },
   {
     "nombre": "Alondra mairu",
@@ -57621,10 +56847,10 @@ export const activeUsers = [
     "correo": "ag5087222@gmail.com",
     "pais": "México",
     "whatsapp": 527421057790,
-    "stripe_id": "cus_OOFTZ6qBgGXf9V",
-    "final_date": 1693850000,
-    "id": 51393,
-    "level": 1
+    "conekta_id": "cus_2uQhXr9d2aGxxYsRh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51393
   },
   {
     "nombre": "Maria del Socorro Vanessa",
@@ -57632,10 +56858,9 @@ export const activeUsers = [
     "correo": "vanne_sgh@hotmail.com",
     "pais": "México",
     "whatsapp": 525528305919,
-    "stripe_id": "cus_OOH4GFa36qvYB5",
     "final_date": 1723580000,
-    "id": 51397,
-    "level": 0
+    "level": 0,
+    "id": 51397
   },
   {
     "nombre": "Abigail",
@@ -57643,10 +56868,10 @@ export const activeUsers = [
     "correo": "uribeabundizabigail@gmail.com",
     "pais": "México",
     "whatsapp": 522411384357,
-    "stripe_id": "cus_OOHNGUx1Y2hCE7",
-    "final_date": 1693860000,
-    "id": 51401,
-    "level": 1
+    "conekta_id": "cus_2uQhXsa6hb3Zi8Ut5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51401
   },
   {
     "nombre": "Sheila del Carmen",
@@ -57654,10 +56879,10 @@ export const activeUsers = [
     "correo": "sheilasaaest96@gmail.com",
     "pais": "México",
     "whatsapp": 529711410907,
-    "stripe_id": "cus_OOIhf8FcaeOQtP",
-    "final_date": 1693870000,
-    "id": 51407,
-    "level": 1
+    "conekta_id": "cus_2uQhXt4Zc6DKCcsve",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51407
   },
   {
     "nombre": "Jocelyn ixchel",
@@ -57665,10 +56890,10 @@ export const activeUsers = [
     "correo": "Jocelynramirez353@gmail.com",
     "pais": "México",
     "whatsapp": 529712068530,
-    "stripe_id": "cus_OOIwYqrK0QECf8",
-    "final_date": 1693870000,
-    "id": 51408,
-    "level": 1
+    "conekta_id": "cus_2uQhXtN5bAxuqMrua",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51408
   },
   {
     "nombre": "Wendy Daniela",
@@ -57676,10 +56901,10 @@ export const activeUsers = [
     "correo": "nanishgzmn00flrs@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_OORPxCfrW9QGhO",
-    "final_date": 1694070000,
-    "id": 51430,
-    "level": 1
+    "conekta_id": "cus_2uQhXtoP8HmxrVo5Y",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51430
   },
   {
     "nombre": "Ma Magdalena",
@@ -57687,10 +56912,9 @@ export const activeUsers = [
     "correo": "hmagdalena622@gmail.com",
     "pais": "México",
     "whatsapp": 525532531938,
-    "stripe_id": "cus_OOYaE4F38bnz69",
     "final_date": 1723680000,
-    "id": 51436,
-    "level": 0
+    "level": 0,
+    "id": 51436
   },
   {
     "nombre": "Sandra Analy",
@@ -57698,10 +56922,9 @@ export const activeUsers = [
     "correo": "analy20152016@gmail.com",
     "pais": "México",
     "whatsapp": 528342667988,
-    "stripe_id": "cus_OOZ0iYclFLhliO",
     "final_date": 0,
-    "id": 51437,
-    "level": 1
+    "level": 1,
+    "id": 51437
   },
   {
     "nombre": "Abisag",
@@ -57709,10 +56932,9 @@ export const activeUsers = [
     "correo": "abi.sag1328@gmail.com",
     "pais": "México",
     "whatsapp": 527121558090,
-    "stripe_id": "cus_OOcxYYafrWhXYi",
     "final_date": 1723340000,
-    "id": 51450,
-    "level": 0
+    "level": 0,
+    "id": 51450
   },
   {
     "nombre": "Fariba Milagros",
@@ -57720,10 +56942,10 @@ export const activeUsers = [
     "correo": "ortizrodriguezfaribamilagros@gmail.com",
     "pais": "México",
     "whatsapp": 524181152707,
-    "stripe_id": "cus_OOi7FA2Q71OW4n",
-    "final_date": 1694010000,
-    "id": 51465,
-    "level": 1
+    "conekta_id": "cus_2uQhXvaY9merhArnG",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51465
   },
   {
     "nombre": "Patricia",
@@ -57731,10 +56953,9 @@ export const activeUsers = [
     "correo": "Patolineteee@gmail.com",
     "pais": "México",
     "whatsapp": 529511099093,
-    "stripe_id": "cus_OOn0tXuKeyE4rj",
     "final_date": 1693930000,
-    "id": 51481,
-    "level": 1
+    "level": 1,
+    "id": 51481
   },
   {
     "nombre": "Erika Elizabeth",
@@ -57742,10 +56963,10 @@ export const activeUsers = [
     "correo": "Ericka18ian@gmail.com",
     "pais": "México",
     "whatsapp": 525547576692,
-    "stripe_id": "cus_OOxKXtxHr7IzMv",
-    "final_date": 0,
-    "id": 51504,
-    "level": 1
+    "conekta_id": "cus_2uQhXw1qgtTujJnZh",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51504
   },
   {
     "nombre": "Adriana",
@@ -57753,10 +56974,10 @@ export const activeUsers = [
     "correo": "adyhdz2005v@gmail.com",
     "pais": "México",
     "whatsapp": 525539665792,
-    "stripe_id": "cus_OOySkViuVIltA3",
-    "final_date": 1694060000,
-    "id": 51509,
-    "level": 1
+    "conekta_id": "cus_2uQhXwmERggVy3MSp",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51509
   },
   {
     "nombre": "Betsy",
@@ -57764,10 +56985,10 @@ export const activeUsers = [
     "correo": "betsybsbbeauty@gmail.com",
     "pais": "México",
     "whatsapp": 527227160375,
-    "stripe_id": "cus_OP6JrZPmXqEDOh",
-    "final_date": 1694060000,
-    "id": 51533,
-    "level": 1
+    "conekta_id": "cus_2uQhXxVUjHbCxErtu",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51533
   },
   {
     "nombre": "Ramón",
@@ -57775,10 +56996,10 @@ export const activeUsers = [
     "correo": "ramon_1192@hotmail.com",
     "pais": "México",
     "whatsapp": 526677550467,
-    "stripe_id": "cus_OP6y8D5EYhyB9s",
-    "final_date": 1694050000,
-    "id": 51538,
-    "level": 1
+    "conekta_id": "cus_2uQhXxg4dyYuJGMX6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51538
   },
   {
     "nombre": "Hilda",
@@ -57786,10 +57007,10 @@ export const activeUsers = [
     "correo": "hildahargueta@gmail.com",
     "pais": "México",
     "whatsapp": 527721748730,
-    "stripe_id": "cus_OPGEEWWUxVOAuo",
-    "final_date": 1694090000,
-    "id": 51554,
-    "level": 1
+    "conekta_id": "cus_2uQhXyQtAB7YvY22Q",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51554
   },
   {
     "nombre": "Luna Anel",
@@ -57797,10 +57018,10 @@ export const activeUsers = [
     "correo": "silvergirl-1308@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 522294494981,
-    "stripe_id": "cus_OPKU3BJVB16k1Y",
-    "final_date": 1694100000,
-    "id": 51565,
-    "level": 1
+    "conekta_id": "cus_2uQhXyygzHNSqrLvN",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 51565
   },
   {
     "nombre": "Erika",
@@ -57808,10 +57029,9 @@ export const activeUsers = [
     "correo": "kikamiiranda@hotmail.com",
     "pais": "México",
     "whatsapp": 525534566617,
-    "stripe_id": "cus_OPNYTaRyqJ2wrs",
     "final_date": 1694070000,
-    "id": 51578,
-    "level": 1
+    "level": 1,
+    "id": 51578
   },
   {
     "nombre": "Fatima",
@@ -57819,10 +57039,9 @@ export const activeUsers = [
     "correo": "flrloto@gmail.com",
     "pais": "México",
     "whatsapp": 525510250796,
-    "stripe_id": "cus_OPNf11sFgm8QJ7",
     "final_date": 1694140000,
-    "id": 51579,
-    "level": 1
+    "level": 1,
+    "id": 51579
   },
   {
     "nombre": "Dulce",
@@ -57830,10 +57049,9 @@ export const activeUsers = [
     "correo": "dulcearteaga.282@gmail.com",
     "pais": "México",
     "whatsapp": 524422395073,
-    "stripe_id": "cus_OPlrnNCoD6i4kS",
     "final_date": 1723160000,
-    "id": 51605,
-    "level": 0
+    "level": 0,
+    "id": 51605
   },
   {
     "nombre": "Isabel",
@@ -57841,10 +57059,9 @@ export const activeUsers = [
     "correo": "im6225927@gmail.com",
     "pais": "México",
     "whatsapp": 527228453453,
-    "stripe_id": "cus_OPoRyjmbBz16ny",
     "final_date": 1723080000,
-    "id": 51608,
-    "level": 0
+    "level": 0,
+    "id": 51608
   },
   {
     "nombre": "Maribel",
@@ -57852,10 +57069,9 @@ export const activeUsers = [
     "correo": "maribel1327@icloud.com",
     "pais": "Estados Unidos",
     "whatsapp": 16784676139,
-    "stripe_id": "cus_OPq9SRLRgXZQfj",
     "final_date": 1694170000,
-    "id": 51609,
-    "level": 1
+    "level": 1,
+    "id": 51609
   },
   {
     "nombre": "Celina",
@@ -57863,10 +57079,9 @@ export const activeUsers = [
     "correo": "Celpeque@live.com",
     "pais": "México",
     "whatsapp": 522099812527,
-    "stripe_id": "cus_OQDCilFUcgp7ZV",
     "final_date": 1723160000,
-    "id": 51617,
-    "level": 0
+    "level": 0,
+    "id": 51617
   },
   {
     "nombre": "Ashley",
@@ -57874,10 +57089,19 @@ export const activeUsers = [
     "correo": "ah455130@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 17372876230,
-    "stripe_id": "cus_OQSLlmQK6oa1no",
     "final_date": 1723660000,
-    "id": 51626,
-    "level": 0
+    "level": 0,
+    "id": 51626
+  },
+  {
+    "nombre": "Catherine",
+    "apellido": "Mejía",
+    "correo": "catulfo20@hotmail.com",
+    "pais": "Mexico",
+    "whatsapp": 524151970862,
+    "final_date": 1724190000,
+    "level": 0,
+    "id": 51637
   },
   {
     "nombre": "Ana Cristina",
@@ -57885,10 +57109,9 @@ export const activeUsers = [
     "correo": "zavalaanacristina14@gmail.com",
     "pais": "México",
     "whatsapp": 524622918951,
-    "stripe_id": "cus_OQeTYY2zPmwd8V",
     "final_date": 1723270000,
-    "id": 51640,
-    "level": 0
+    "level": 0,
+    "id": 51640
   },
   {
     "nombre": "Annette Guadalupe",
@@ -57896,10 +57119,9 @@ export const activeUsers = [
     "correo": "annetteguadalupegonzalezdiaz@gmail.com",
     "pais": "México",
     "whatsapp": 525568955955,
-    "stripe_id": "cus_OQenrxcVsbKgh5",
     "final_date": 1723310000,
-    "id": 51642,
-    "level": 0
+    "level": 0,
+    "id": 51642
   },
   {
     "nombre": "Mariela",
@@ -57907,10 +57129,9 @@ export const activeUsers = [
     "correo": "hmariela280@gmail.com",
     "pais": "México",
     "whatsapp": 522227122124,
-    "stripe_id": "cus_OQnV2yNGglq5LQ",
     "final_date": 1723580000,
-    "id": 51649,
-    "level": 0
+    "level": 0,
+    "id": 51649
   },
   {
     "nombre": "Yesenia",
@@ -57918,10 +57139,9 @@ export const activeUsers = [
     "correo": "yesang_15@hotmail.com",
     "pais": "México",
     "whatsapp": 525548311212,
-    "stripe_id": "cus_OQvBtCluJQ5LMg",
     "final_date": 1723330000,
-    "id": 51658,
-    "level": 0
+    "level": 0,
+    "id": 51658
   },
   {
     "nombre": "Gabriela Guadalupe",
@@ -57929,10 +57149,9 @@ export const activeUsers = [
     "correo": "gabyjin@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526381122580,
-    "stripe_id": "cus_ORDzKFF1FxnDIl",
     "final_date": 1723680000,
-    "id": 51672,
-    "level": 0
+    "level": 0,
+    "id": 51672
   },
   {
     "nombre": "Sherlyn",
@@ -57940,10 +57159,9 @@ export const activeUsers = [
     "correo": "Sherlyn.martinez15@gmail.com",
     "pais": "México",
     "whatsapp": 526143384497,
-    "stripe_id": "cus_ORMUvDTXZbVmBW",
     "final_date": 1723670000,
-    "id": 51677,
-    "level": 0
+    "level": 0,
+    "id": 51677
   },
   {
     "nombre": "NADIA",
@@ -57951,10 +57169,9 @@ export const activeUsers = [
     "correo": "nadia.ram.cha@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_ORe6R1ftpAe0j7",
     "final_date": 1723610000,
-    "id": 51683,
-    "level": 0
+    "level": 0,
+    "id": 51683
   },
   {
     "nombre": "Brenda Delgado Rodríguez",
@@ -57962,10 +57179,9 @@ export const activeUsers = [
     "correo": "bdr_94@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 525518267127,
-    "stripe_id": "cus_ORz73fQfTRouaW",
     "final_date": 1723750000,
-    "id": 51702,
-    "level": 0
+    "level": 0,
+    "id": 51702
   },
   {
     "nombre": "Vania Haruko",
@@ -57973,10 +57189,9 @@ export const activeUsers = [
     "correo": "harukogarc@gmail.com",
     "pais": "México",
     "whatsapp": 525532814975,
-    "stripe_id": "cus_OS1kt2hxNEHLUq",
     "final_date": 1694760000,
-    "id": 51707,
-    "level": 1
+    "level": 1,
+    "id": 51707
   },
   {
     "nombre": "Mishel",
@@ -57984,10 +57199,9 @@ export const activeUsers = [
     "correo": "mishel.delgado.crimi@gmail.com",
     "pais": "México",
     "whatsapp": 527291001984,
-    "stripe_id": "cus_OS9AMEJqejZEwr",
     "final_date": 1723690000,
-    "id": 51720,
-    "level": 0
+    "level": 0,
+    "id": 51720
   },
   {
     "nombre": "Laura",
@@ -57995,43 +57209,19 @@ export const activeUsers = [
     "correo": "Lauraalanias@gmail.com",
     "pais": "México",
     "whatsapp": 524436263606,
-    "stripe_id": "cus_OSHRDUgXY5AOl5",
     "final_date": 1723660000,
-    "id": 51727,
-    "level": 0
+    "level": 0,
+    "id": 51727
   },
   {
-    "nombre": "Diego",
-    "apellido": "Gauto",
-    "correo": "diegoTest1@gmail.com",
-    "pais": "Argentina",
-    "whatsapp": 541153137872,
-    "stripe_id": "cus_OSIa2Dr1B9SoSA",
-    "final_date": 1692300000,
-    "id": 51729,
-    "level": 1
-  },
-  {
-    "nombre": "Diego",
-    "apellido": "Gauto",
-    "correo": "diegoTest3@gmail.com",
-    "pais": "Argentina",
-    "whatsapp": 541153137872,
-    "stripe_id": "cus_OSIhesj5CD6OJO",
-    "final_date": 1692300000,
-    "id": 51732,
-    "level": 1
-  },
-  {
-    "nombre": "Diego",
-    "apellido": "Gauto",
-    "correo": "diegoTest4@gmail.com",
-    "pais": "Argentina",
-    "whatsapp": 541153137872,
-    "stripe_id": "cus_OSIovzom9DeaBA",
-    "final_date": 1692300000,
-    "id": 51733,
-    "level": 1
+    "nombre": "Lidia",
+    "apellido": "Escobar",
+    "correo": "lidiaescobar0426@gmail.com",
+    "pais": "México",
+    "whatsapp": 525541791452,
+    "final_date": 1724200000,
+    "level": 0,
+    "id": 51730
   },
   {
     "nombre": "Lizbet",
@@ -58039,10 +57229,9 @@ export const activeUsers = [
     "correo": "mahely.cosmetologia@hotmail.com",
     "pais": "México",
     "whatsapp": 525544518748,
-    "stripe_id": "cus_OSKyXgAflPI8YK",
     "final_date": 1723700000,
-    "id": 51742,
-    "level": 0
+    "level": 0,
+    "id": 51742
   },
   {
     "nombre": "Blanca Elizabeth",
@@ -58050,10 +57239,9 @@ export const activeUsers = [
     "correo": "nellyross817@gmail.com",
     "pais": "México",
     "whatsapp": 525576473927,
-    "stripe_id": "cus_OSWswUOLgBkbFW",
     "final_date": 1723700000,
-    "id": 51752,
-    "level": 0
+    "level": 0,
+    "id": 51752
   },
   {
     "nombre": "Cristian",
@@ -58061,10 +57249,9 @@ export const activeUsers = [
     "correo": "robledocristian313@gmail.com",
     "pais": "undefined",
     "whatsapp": "undefined",
-    "stripe_id": "cus_OSq9djlHduRdX5",
     "final_date": 1723770000,
-    "id": 51760,
-    "level": 0
+    "level": 0,
+    "id": 51760
   },
   {
     "nombre": "Julia",
@@ -58072,9 +57259,69 @@ export const activeUsers = [
     "correo": "Lunyen1314@gmail.com",
     "pais": "Estados Unidos",
     "whatsapp": 19496373363,
-    "stripe_id": "cus_OSqUftAyHyVkvJ",
     "final_date": 1723770000,
-    "id": 51761,
-    "level": 0
+    "level": 0,
+    "id": 51761
+  },
+  {
+    "nombre": "kevin",
+    "apellido": "woolfolk",
+    "correo": "pruebaw1@gmail.com",
+    "pais": "México",
+    "whatsapp": 526623290233,
+    "conekta_id": "cus_2uQdAQHA2d6nherHs",
+    "final_date": 1695060000,
+    "level": 0,
+    "id": 51780
+  },
+  {
+    "nombre": "Mariana Celeste",
+    "apellido": "Bautista Trejo",
+    "correo": "baumariana61@gmail.com",
+    "pais": "México",
+    "whatsapp": 525547874749,
+    "final_date": 1724190000,
+    "level": 0,
+    "id": 51782
+  },
+  {
+    "nombre": "Alejandra",
+    "apellido": "Perez Silva",
+    "correo": "alejandraperezmac@gmail.com",
+    "pais": "México",
+    "whatsapp": 525530210276,
+    "final_date": 1723950000,
+    "level": 0,
+    "id": 51784
+  },
+  {
+    "nombre": "Lucía",
+    "apellido": "De la Cruz",
+    "correo": "Lucidelacruzcamarillo@gmail.com",
+    "pais": "México",
+    "whatsapp": 522312072558,
+    "final_date": 1724010000,
+    "level": 0,
+    "id": 51785
+  },
+  {
+    "nombre": "Zabdizareth",
+    "apellido": "Saade Jiménez",
+    "correo": "zabdizareths@gmail.com",
+    "pais": "México",
+    "whatsapp": 525613683407,
+    "final_date": 1724040000,
+    "level": 0,
+    "id": 51797
+  },
+  {
+    "nombre": "Diana Laura",
+    "apellido": "Garcia Vargas",
+    "correo": "aguilargarciadiana.29@gmail.com",
+    "pais": "México",
+    "whatsapp": 529984307552,
+    "final_date": 1724180000,
+    "level": 0,
+    "id": 51801
   }
 ]
