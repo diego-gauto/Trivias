@@ -1,9 +1,12 @@
+.phoneInputGroup {
+  max-width: 330px;
+}
 
 .formControl {
   background-color: #ffffff !important;
   height: 32px !important;
   margin-bottom: 50px !important;
-  max-width: 230px !important;
+  max-width: 330px !important;
   border-radius: 40px !important;
   border: none !important;
 

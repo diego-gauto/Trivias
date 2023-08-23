@@ -42,7 +42,13 @@ const Form = () => {
     errorMessageMail,
     errorMessageWA,
     buttonEnabled,
-    terminos
+    terminos,
+    costo,
+    tachado,
+    verde,
+    bold,
+    ital,
+    nota
   } = styles;
 
   const validationSchema = Yup.object().shape({
@@ -220,14 +226,15 @@ const Form = () => {
           </Link>
           <div className={textos}>
             <h1>¡Felicidades!</h1>
-            <h3>
-              ¡Te ganaste un cupón de 30% para cualquiera de nuestros cursos{" "}
-              <span>en línea!</span>
-            </h3>
             <p>
-              Nota: Una vez llenes los datos, te enviaremos el cupón de
-              descuento a tu correo electrónico.
+              Por tu participación <span>ganaste el acceso a más de 63 cursos de uñas y belleza </span>
+              en línea con un descuento especial
             </p>
+            <p className={costo}>Costo total real: <span className={tachado}>$74,719.00 MXN</span></p>
+            <p className={`${verde} ${bold}`} > Sólo $1,599.00 MXN</p>
+            <p className={`${verde} ${ital}`}>(Acceso por un año)</p>
+            <p className={nota}>Nota: Una vez que rellenes el formulario te llegará un correo con la información del programa
+              y también podrás reclamar tu acceso al hacer click en “Reclamar suscripción”</p>
           </div>
           <form onSubmit={formik.handleSubmit} className={inputContainer}>
             <div>
@@ -308,7 +315,7 @@ const Form = () => {
         <div className={formImg}>
           <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
         </div>
-      </div>
+      </div >
     </>
   );
 };

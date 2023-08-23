@@ -7,7 +7,7 @@
 }
 
 .form {
-  width: 53%;
+  width: 60%;
   height: 600px;
   display: flex;
   flex-direction: column;
@@ -28,14 +28,14 @@
   line-height: 27px;
   text-align: center;
   color: #520795;
-  padding: 28px 0 0 8px;
+  padding: 20px 0 0 8px;
 }
 
 .volver img {
-  padding-top: 23px;
+  padding-top: 15px;
 }
 
-.textos {
+.form .textos {
   margin-top: 0px;
   width: 90%;
   display: flex;
@@ -43,16 +43,17 @@
 }
 
 .textos h1 {
+  text-align: center;
   position: relative;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 51px;
   line-height: 62px;
-  color: #992eea;
+  color: #520795;
 }
 
-.textos h3 {
+/* .textos h3 {
   position: relative;
   height: 56px;
   max-width: 500px;
@@ -64,29 +65,59 @@
   line-height: 28px;
 
   color: #520795;
-}
+} */
 
 .textos span {
-  color: #d24dd3;
-  position: relative;
+  font-weight: 600;
 }
 
 .textos p {
   position: relative;
-  margin-top: 10px;
-  max-width: 510px;
+  text-align: center;
+  margin-top:0px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 17px;
+  line-height: 20px;
+  padding: 0 11%;
 
   color: #520795;
 }
 
+.textos .costo{
+  color: red;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 0px;
+}
+
+.textos .verde{
+  color: #16A854;
+}
+
+.tachado{
+  text-decoration: line-through;
+}
+
+.textos .bold{
+  font-size: 38px;
+  font-weight: 600;
+}
+
+.textos .ital{
+  font-style: italic;
+  margin-top: 0;
+}
+
+.textos .nota{
+  padding: 0 4%;
+  font-size: 14px;
+}
+
 .inputContainer {
   width: 95%;
-  margin-top: 20px;
+  /* margin-top: 10px; */
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -95,7 +126,7 @@
 .checkboxContainer {
   display: flex;
   align-items: flex-start;
-  margin: 50px 0 5px 0;
+  margin: 10px 0 5px 0;
 }
 
 .checkboxContainer input {
@@ -180,9 +211,9 @@
 
 .formImg {
   position: relative;
-  width: 47%;
+  width: 40%;
   height: 600px;
-  background-image: url("/images/trivias/Ganaste-cupon.jpg");
+  background-image: url("/images/trivias/mailexitoso.png");
   background-size: 100%;
   background-repeat: no-repeat;
   /*padding: 40px 10px 0 0;*/
@@ -206,7 +237,7 @@
   color: red;
   position: absolute;
   width: 229px;
-  top:420px;
+  top:480px;
   height: 50px;
 }
 
@@ -214,30 +245,30 @@
   color: red;
   position: absolute;
   width: 229px;
-  top:420px;
+  top:480px;
   height: 50px;
 }
 
 .errorMessageMail{
   color: red;
   position: absolute;
-  width: 229px;
-  top:420px
+  width: 300px;
+  top:580px
 }
 
 .errorMessageWA{
   color: red;
   position: absolute;
-  width: 229px;
-  top:520px
+  width: 300px;
+  top:580px
 }
 
 @media screen and (max-width: 1475px) {
 
   
-  .errorMessageWA, .errorMessageMail{
+  /* .errorMessageWA, .errorMessageMail{
     top:520px
-  }
+  } */
 
   .checkboxContainer {
     margin: 0px 0 5px 0;

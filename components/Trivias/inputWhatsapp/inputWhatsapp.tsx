@@ -11,7 +11,7 @@ const InputPais = (props: any) => {
   const [countryName, setCountryName] = useState("");
   const [value, setValue] = useState("");
 
-  const { label, formControl, flagDropdown, flagButton } = styles;
+  const { label, formControl, flagDropdown, flagButton, PhoneInputGroup } = styles;
 
   const handleChange = (value: any, selectedCountry: any) => {
     setCountry(selectedCountry.countryCode);
@@ -26,7 +26,7 @@ const InputPais = (props: any) => {
   };
 
   return (
-    <div>
+    <div className={PhoneInputGroup}>
       <h3 className={label}>{props.label}</h3>
       <PhoneInput
         inputClass={formControl}
