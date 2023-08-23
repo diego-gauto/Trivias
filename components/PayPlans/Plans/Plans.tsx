@@ -22,16 +22,16 @@ export const Plans = (props: IData) => {
     <PlanStyles className="w-100">
       <div className="planes">
         <div className="row colors">
-          {selected === 1 && <div className="col-sm-6 col-lg-3 my-3">
+          {(selected === 1 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
             {/* 1ero */}
             <Mensual user={user} />
           </div>}
           {/* Blue */}
-          {selected === 2 && <div className="col-sm-6 col-lg-3 my-3">
+          {(selected === 2 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
             <Anual user={user} />
           </div>}
           {/* Green */}
-          {selected === 3 && <div className="col-sm-6 col-lg-3 my-3">
+          {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
             <Individual user={user} />
           </div>}
           {/* Ultimo */}
