@@ -83,6 +83,12 @@ export const InfoContainer = styled.div`
   padding: 20px;
   background-color: #ede7f2;
   border-radius: 12px;
+  svg {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
   p {
     font-size: 18px;
     color: #3f1168;

@@ -8,6 +8,9 @@ import { IUser } from "../../interfaces/IUserData";
 import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
+import { activeUsers } from "../../constants/dummies";
+import { conektaPm, updateMembership } from "../api/users";
+import { conektaSubscriptionApi } from "../api/checkout";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
@@ -30,8 +33,50 @@ const PayPlans = () => {
     setSelected(value)
   }
 
+  async function processArrayWithDelay() {
+    for (const endpoint of activeUsers) {
+      try {
+        if (endpoint.conekta_id && endpoint.correo === "conekta@hotmail.com") {
+          let response = await conektaPm({ conekta_id: endpoint.conekta_id });
+          const conektaPaymentMethods = response.data.payment_methods.data
+          if (conektaPaymentMethods.length > 0) {
+            const pm = conektaPaymentMethods.filter((x: any) => x.default)[0]
+            console.log(1);
+
+            let body = {
+              id: pm.id,
+              plan_id: "mensual",
+              conekta_id: endpoint.conekta_id,
+            }
+            conektaSubscriptionApi(body).then(async (res) => {
+              if (res?.data.data.status === "active") {
+                let sub = res.data.data;
+                let membership = {
+                  final_date: sub.billing_cycle_end,
+                  payment_method: sub.card_id,
+                  plan_id: sub.id,
+                  plan_name: "Gonvar Plus",
+                  start_date: sub.billing_cycle_start,
+                  userId: endpoint.id,
+                  level: 1,
+                  method: "conekta"
+                }
+                await updateMembership(membership);
+              }
+            })
+          }
+        }
+
+      } catch (error) {
+        console.log(endpoint);
+        console.error(`Error fetching data from ${endpoint}:`, error);
+      }
+    }
+  }
+
   return (
     <PayStyles className="w-100">
+      <button onClick={processArrayWithDelay}>Ready</button>
       <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
       <div className="colors">
         <div className="back">

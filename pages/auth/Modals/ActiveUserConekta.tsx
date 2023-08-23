@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ModalContainer, InfoContainer } from '../../../components/Error/ErrorModal.styled';
 import { InputCard, WhiteLoader } from '../../../containers/Profile/User/User.styled';
 import { attachPaymentMethod, attachPaymentMethodConekta, createPaymentMethod } from '../../../components/api/profile';
+import { IoClose } from 'react-icons/io5';
 declare let window: any
 const ActiveUserConekta = ({ ondHide, show, user }: any) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -58,6 +59,7 @@ const ActiveUserConekta = ({ ondHide, show, user }: any) => {
   return (
     <ModalContainer show={show} onHide={ondHide} centered>
       <InfoContainer>
+        <IoClose className='close-icon' onClick={ondHide} />
         <p>Gonvar está pasando por un cambio importante en beneficio de nuestras alumnas.</p>
         <p className='p14'>🚨Para esto es necesario que vuelvas a ingresar tus datos bancarios para no perder el acceso a tu
           suscripción mensual por $149 MXN al mes y todos tus beneficios acumulados.</p>
