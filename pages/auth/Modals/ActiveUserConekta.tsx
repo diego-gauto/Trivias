@@ -12,7 +12,7 @@ const ActiveUserConekta = ({ ondHide, show, user }: any) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   useEffect(() => {
-    window.Conekta.setPublicKey('key_KQ9Suw1jHY4aeDbPZDTPS1i');
+    window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, [])
 
 
@@ -31,6 +31,7 @@ const ActiveUserConekta = ({ ondHide, show, user }: any) => {
           cvc: card.cvc,
         }
       }
+
       window.Conekta.Token.create(
         tempCard,
         conektaSuccessResponseHandler,
@@ -46,8 +47,7 @@ const ActiveUserConekta = ({ ondHide, show, user }: any) => {
       conekta_id: user.conekta_id
     }
     attachPaymentMethodConekta(body).then((res) => {
-      console.log(res);
-
+      ondHide();
     })
   }
   const conektaErrorResponseHandler = (response: any) => {
