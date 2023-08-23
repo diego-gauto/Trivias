@@ -23,7 +23,7 @@ import {
   updateUserPassword,
 } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { ANUAL_FORM, NAILS_FORM, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Error,
@@ -37,6 +37,7 @@ import ModalForgot from "./Modals/ModalForgot";
 import router from "next/router";
 import { activeUsers } from "../../constants/dummies";
 import ActiveUserConekta from "./Modals/ActiveUserConekta";
+import { conektaPm } from "../../components/api/users";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -85,6 +86,8 @@ const Login = () => {
   const { login } = useLogin();
   const [password, setPassword] = useState('');
   const [confirm_Password, setConfirm_Password] = useState('');
+  const [user, setUser] = useState({});
+  const [open, setOpen] = useState(false);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -179,14 +182,24 @@ const Login = () => {
             country: res[0].country,
             name: res[0].name,
             email: res[0].email,
-            userId: res[0].user_id
+            userId: res[0].user_id,
           }
           if (res[0].conekta_id === null) {
             await conektaCustomer(body)
           }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
-          redirect(res[0])
+          if (activeUsers.filter((x) => x.conekta_id === res[0].conekta_id).length > 0) {
+            const pm = await conektaPm({ conekta_id: res[0].conekta_id });
+            if (pm.data.payment_methods.data.length === 0) {
+              setUser(res[0]);
+              setOpen(true);
+            } else {
+              redirect(res[0])
+            }
+          } else {
+            redirect(res[0])
+          }
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -692,7 +705,7 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
-      <ActiveUserConekta show={true} setShow={setShow} error={errorMsg} />
+      <ActiveUserConekta show={open} ondHide={() => { redirect(user) }} user={user} />
       <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
