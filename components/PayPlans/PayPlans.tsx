@@ -54,11 +54,11 @@ const PayPlans = () => {
             </div>
           </div>
 
-          {/* <div className="plans justify-content-center">
+          <div className="plans justify-content-center">
             <div className="middle">
               <Plans user={user} selected={0} />
             </div>
-          </div> */}
+          </div>
 
           <div className="plans-res justify-content-center">
             <div className="middle">
