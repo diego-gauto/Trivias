@@ -14,7 +14,7 @@ const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [selected, setSelected] = useState(2)
+  const [selected, setSelected] = useState(1)
   var userData = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
@@ -43,9 +43,9 @@ const PayPlans = () => {
           {/* Responsive Switch*/}
           <div className="select-plan">
             <div className="options">
-              {/* <p className={`option ${selected === 1 ? 'link' : ''}`}
+              <p className={`option ${selected === 1 ? 'link' : ''}`}
                 onClick={() => handleSelected(1)}>G+ mensual</p>
-              <p className="option">|</p> */}
+              <p className="option">|</p>
               <p className={`option ${selected === 2 ? 'link' : ''}`}
                 onClick={() => handleSelected(2)}>G+ anual</p>
               <p className="option">|</p>
@@ -65,8 +65,6 @@ const PayPlans = () => {
               <Plans user={user} selected={selected} />
             </div>
           </div>
-
-
 
           <div className="subtitle text-center py-3">
             <h3 className="h4"><b>Nunca subiremos el precio</b> si mantienes tu suscripción activa.</h3>
