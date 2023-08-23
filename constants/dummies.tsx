@@ -57333,6 +57333,17 @@ export const activeUsers = [
     "whatsapp": 529984307552,
     "final_date": 1724180000,
     "level": 0,
-    "id": 51801
+    "id": 51801,
+  },
+  {
+    "nombre": "diego",
+    "apellido": "han",
+    "correo": "diegogauto@yahoo.com.ar",
+    "conekta_id": "cus_2uRxzqEH87BytXhRz",
+    "pais": "México",
+    "whatsapp": 529984307552,
+    "final_date": 1724180000,
+    "level": 0,
+    "id": 51801,
   }
 ]
