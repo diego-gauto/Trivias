@@ -187,7 +187,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
   const format = (start_date: any, level: any) => {
     let tempDayCount: any = today - start_date;
     let getMonth: any;
-    if (level === 1) {
+    if (level === 1 || userData.final_date > today) {
       if (start_date === 0) {
         getMonth = 0;
       }
