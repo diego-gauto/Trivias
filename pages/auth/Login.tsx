@@ -315,8 +315,17 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            window.location.href = PREVIEW_PATH;
-            redirect(res[0])
+            if (activeUsers.filter((x) => x.conekta_id === res[0].conekta_id).length > 0) {
+              const pm = await conektaPm({ conekta_id: res[0].conekta_id });
+              if (pm.data.payment_methods.data.length === 0) {
+                setUser(res[0]);
+                setOpen(true);
+              } else {
+                redirect(res[0])
+              }
+            } else {
+              redirect(res[0])
+            }
           }
         })
       })
@@ -404,8 +413,17 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            window.location.href = PREVIEW_PATH;
-            redirect(res[0])
+            if (activeUsers.filter((x) => x.conekta_id === res[0].conekta_id).length > 0) {
+              const pm = await conektaPm({ conekta_id: res[0].conekta_id });
+              if (pm.data.payment_methods.data.length === 0) {
+                setUser(res[0]);
+                setOpen(true);
+              } else {
+                redirect(res[0])
+              }
+            } else {
+              redirect(res[0])
+            }
           }
         })
       })
