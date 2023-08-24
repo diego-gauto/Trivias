@@ -53453,15 +53453,6 @@ export const activeUsers = [
     "id": 49501
   },
   {
-    "nombre": "kevin",
-    "apellido": "Han",
-    "correo": "kevin@test.com",
-    "whatsapp": "+526623400635",
-    "final_date": 1693860000,
-    "level": 1,
-    "id": 49519
-  },
-  {
     "nombre": "Celia",
     "apellido": "Marquez",
     "correo": "cema93112@gmail.com",
@@ -56443,17 +56434,6 @@ export const activeUsers = [
     "id": 51164
   },
   {
-    "nombre": "kevin",
-    "apellido": "Han",
-    "correo": "kevinhm53@gmail.com",
-    "pais": "undefined",
-    "whatsapp": "undefined",
-    "conekta_id": "cus_2uH8w6NoVNGrrEvJr",
-    "final_date": 1695320000,
-    "level": 3,
-    "id": 51176
-  },
-  {
     "nombre": "Carolina",
     "apellido": "Martínez",
     "correo": "carolinamv1986@gmail.com",
@@ -57266,17 +57246,6 @@ export const activeUsers = [
     "id": 51761
   },
   {
-    "nombre": "kevin",
-    "apellido": "woolfolk",
-    "correo": "pruebaw1@gmail.com",
-    "pais": "México",
-    "whatsapp": 526623290233,
-    "conekta_id": "cus_2uQdAQHA2d6nherHs",
-    "final_date": 1695060000,
-    "level": 0,
-    "id": 51780
-  },
-  {
     "nombre": "Mariana Celeste",
     "apellido": "Bautista Trejo",
     "correo": "baumariana61@gmail.com",
@@ -57325,27 +57294,5 @@ export const activeUsers = [
     "final_date": 1724180000,
     "level": 0,
     "id": 51801
-  },
-  {
-    "nombre": "kevin han",
-    "apellido": "han",
-    "correo": "conekta@hotmail.com",
-    "conekta_id": "cus_2uQKw5PxwvsJBsRcm",
-    "pais": "México",
-    "whatsapp": 529984307552,
-    "final_date": 1724180000,
-    "level": 0,
-    "id": 51801,
-  },
-  {
-    "nombre": "diego",
-    "apellido": "han",
-    "correo": "diegogauto@yahoo.com.ar",
-    "conekta_id": "cus_2uRxzqEH87BytXhRz",
-    "pais": "México",
-    "whatsapp": 529984307552,
-    "final_date": 1724180000,
-    "level": 0,
-    "id": 51801,
   }
 ]
