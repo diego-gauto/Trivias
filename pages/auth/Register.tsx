@@ -17,7 +17,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import { conektaCustomer, facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH } from "../../constants/paths";
+import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Background,
@@ -143,7 +143,7 @@ const Register = () => {
       window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
     }
     if (localStorage.getItem("rewards") === "true") {
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
+      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
     }
   }
 
