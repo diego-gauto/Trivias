@@ -29,6 +29,7 @@ import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/L
 import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
 import OxxoModal from "./Modals/Oxxo";
+import SpeiModal from "./Modals/Spei";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -61,8 +62,10 @@ const Purchase = () => {
   const [show, setShow] = useState<any>(false);
   const [barcode, setBarcode] = useState("");
   const [reference, setReference] = useState("");
+  const [bank_ref, setBank_ref] = useState("");
   const [expiresAt, setExpiresAt] = useState();
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
+  const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   let idC = courseId.get('id')
 
   const subscription = {
@@ -629,11 +632,10 @@ const Purchase = () => {
     }
 
     conektaSpeiApi(data).then((res) => {
-      console.log(res);
       const charges = res.data.data.charges.data[0];
       const reference = charges.payment_method.clabe;
-
-      // window.location.href = '/preview'
+      setBank_ref(reference);
+      setSpeiIsActive(true);
     })
   }
 
@@ -647,6 +649,7 @@ const Purchase = () => {
         <Container>
           <ErrorModal show={show} setShow={setShow} error={errorMsg} />
           <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={userData} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
+          <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={userData} product={product} bank_ref={bank_ref} />
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
@@ -878,7 +881,7 @@ const Purchase = () => {
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
                 {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo} className="oxxo">Oxxo</button>}
-                {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>} */}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei} className="spei">Transferencia</button>}
               </div>
             </div>
             <div className="right-section">

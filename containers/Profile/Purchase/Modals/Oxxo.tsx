@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ModalContainer, OxxoContainer } from './Modals.styled';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { getImage } from '../../../../components/api/conekta/test';
 
 const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_at }: any) => {
   const [ref, setRef] = useState("");
@@ -35,7 +36,6 @@ const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_a
       var doc_h = pxTomm(img_h);
       //Set doc size
       var doc = new jsPDF('p', 'px', [doc_w, doc_h]);
-      pdf.addImage(barcode, 'JPEG', 10, 40, 100, 100);
       //set image height similar to doc size
       doc.addImage(imgData, 'PNG', 0, 0, doc_w, doc_h);
       DATA.classList.remove('print');
@@ -47,25 +47,32 @@ const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_a
     return Math.floor(px / 2);
   }
 
-  // function toDataUrl(tempReference: any) {
-  //   const xhr = new XMLHttpRequest();
-  //   xhr.responseType = 'blob';
-  //   xhr.onload = () => {
-  //     const reader: any = new FileReader();
-  //     reader.readAsDataURL(xhr.response);
-  //     reader.onload = () => {
-  //       const base64String = reader.result;
-  //       setRef(base64String);
-  //     };
-  //   };
-  //   xhr.open('GET', tempReference);
-  //   xhr.responseType = 'blob';
-  //   xhr.send();
-  // }
+  function toDataUrl(tempReference: any) {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = () => {
+      const reader: any = new FileReader();
+      reader.readAsDataURL(xhr.response);
+      reader.onload = () => {
+        const base64String = reader.result;
+        console.log(base64String);
 
-  // useEffect(() => {
-  //   toDataUrl(barcode)
-  // }, [])
+        setRef(base64String);
+      };
+    };
+    xhr.open('GET', tempReference);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+
+
+  useEffect(() => {
+    getImage().then((res) => {
+      console.log(res);
+
+    })
+    toDataUrl(barcode)
+  }, [])
 
 
   return (
