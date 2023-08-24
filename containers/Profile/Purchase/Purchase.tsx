@@ -28,9 +28,9 @@ import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
+import OxxoModal from "./Modals/Oxxo";
 declare let window: any
 const Purchase = () => {
-  const [user, setUser] = useState("");
   const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
@@ -59,6 +59,10 @@ const Purchase = () => {
   const [terms, setTerms] = useState(false);
   const courseId = new URLSearchParams(window.location.search);
   const [show, setShow] = useState<any>(false);
+  const [barcode, setBarcode] = useState("");
+  const [reference, setReference] = useState("");
+  const [expiresAt, setExpiresAt] = useState();
+  const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   let idC = courseId.get('id')
 
   const subscription = {
@@ -599,7 +603,11 @@ const Purchase = () => {
     }
 
     conektaOxxoApi(data).then((res) => {
-      window.location.href = '/preview'
+      let response = res.data.data;
+      setBarcode(response.charges.data[0].payment_method.barcode_url);
+      setReference(response.charges.data[0].payment_method.reference);
+      setExpiresAt(response.charges.data[0].payment_method.expires_at)
+      setOxxoIsActive(true);
     })
   }
 
@@ -638,6 +646,7 @@ const Purchase = () => {
       </BackgroundLoader> :
         <Container>
           <ErrorModal show={show} setShow={setShow} error={errorMsg} />
+          <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={userData} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
           <div className="purchase-container">
             <div className="left-section">
               <div className="steps">
@@ -868,8 +877,8 @@ const Purchase = () => {
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
-                {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo}>oxxo</button>}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>} */}
+                {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo} className="oxxo">Oxxo</button>} */}
+                {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>} */}
               </div>
             </div>
             <div className="right-section">

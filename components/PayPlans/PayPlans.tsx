@@ -36,13 +36,11 @@ const PayPlans = () => {
   async function processArrayWithDelay() {
     for (const endpoint of activeUsers) {
       try {
-        if (endpoint.conekta_id && endpoint.correo === "conekta@hotmail.com") {
+        if (endpoint.conekta_id) {
           let response = await conektaPm({ conekta_id: endpoint.conekta_id });
           const conektaPaymentMethods = response.data.payment_methods.data
           if (conektaPaymentMethods.length > 0) {
             const pm = conektaPaymentMethods.filter((x: any) => x.default)[0]
-            console.log(1);
-
             let body = {
               id: pm.id,
               plan_id: "mensual",
@@ -76,7 +74,7 @@ const PayPlans = () => {
 
   return (
     <PayStyles className="w-100">
-      <button onClick={processArrayWithDelay}>Ready</button>
+      {/* <button onClick={processArrayWithDelay}>Ready</button> */}
       <h1 style={{ display: "none" }}>Planes de suscripción Gonvar</h1>
       <div className="colors">
         <div className="back">

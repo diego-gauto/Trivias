@@ -34743,6 +34743,7 @@ export const activeUsers = [
     "correo": "gumychan92@gmail.com",
     "pais": "Mexico",
     "whatsapp": 525583234306,
+    "conekta_id": "cus_2uSMxGgGBG1WjQwGq",
     "final_date": 1691280000,
     "level": 1,
     "id": 7756
@@ -49734,6 +49735,7 @@ export const activeUsers = [
     "correo": "janetak_@hotmail.com",
     "pais": "Mexico",
     "whatsapp": 526642213632,
+    "conekta_id": "cus_2uSbzRHft5qUgDSX7",
     "final_date": 1691280000,
     "level": 1,
     "id": 41619
