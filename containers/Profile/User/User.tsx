@@ -16,6 +16,7 @@ import { History } from "./History";
 import { getNextCertificate } from "../../../store/actions/courseActions";
 import { getUserApi } from "../../../components/api/users";
 import { getAllRewardDataApi, getRewardsApi } from "../../../components/api/rewards";
+import router from "next/router";
 
 const User = () => {
   let today = new Date().getTime() / 1000;
@@ -185,6 +186,9 @@ const User = () => {
         setNameUpperCase(shortName.toUpperCase())
         getRewardData(res);
       })
+    } else {
+      localStorage.setItem("login", "true")
+      router.push({ pathname: "/auth/Login" });
     }
   }, [])
   useEffect(() => {
