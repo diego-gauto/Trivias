@@ -23,7 +23,7 @@ import {
   updateUserPassword,
 } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Error,
@@ -356,7 +356,7 @@ const Login = () => {
       window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
     }
     else if (localStorage.getItem("rewards") === "true") {
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
+      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
     } else {
       window.location.href = PREVIEW_PATH;
     }
