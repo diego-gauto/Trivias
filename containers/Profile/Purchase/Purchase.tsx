@@ -877,7 +877,7 @@ const Purchase = () => {
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
-                {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo} className="oxxo">Oxxo</button>} */}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo} className="oxxo">Oxxo</button>}
                 {/* {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei}>Transferencia</button>} */}
               </div>
             </div>

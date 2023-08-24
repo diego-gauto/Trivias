@@ -1,29 +1,20 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { getUser } from "../../store/actions/UserActions";
 import { MainContainer } from "./Certificate.styled";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { getUserCertificateApi } from "../../components/api/lessons";
 import * as htmlToImage from 'html-to-image';
 import QRCode from 'qrcode'
-import { blob } from "stream/consumers";
-import { FacebookShareButton } from "react-share";
-import { BsFacebook } from "react-icons/bs";
 import download from 'downloadjs';
 import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 import { getCertificateApi } from "../../components/api/users";
 import { LoaderImage, LoaderContain, BackgroundLoader } from "../../components/Loader.styled";
-import { date } from "yup";
 
 const Certificate = () => {
   const router = useRouter()
   const { certificate_id }: any = router.query;
-  const [folio, setFolio] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState<any>("");
-  const [downloadType, setDownloadType] = useState("pdf");
-  const [link, setLink] = useState('');
   const [show, setShow] = useState<boolean>(false)
   const [loader, setLoader] = useState<boolean>(false)
   const [certificate, setCertificate] = useState<any>({
