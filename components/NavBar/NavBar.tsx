@@ -48,6 +48,7 @@ import {
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
 import { updateMembership } from "../api/profile";
+import { conektaCustomer } from "../api/auth";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -145,6 +146,15 @@ const NavBar = () => {
       // localStorage.clear();
       // logoutFunc();
       if (userDataAuth.user !== null) {
+        if (userDataAuth.user.conekta_id === null) {
+          let body = {
+            phone_number: "5211111111",
+            name: userDataAuth.user.name,
+            email: userDataAuth.user.email,
+            userId: userDataAuth.user.user_id
+          }
+          conektaCustomer(body)
+        }
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
