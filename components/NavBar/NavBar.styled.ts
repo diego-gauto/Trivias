@@ -236,12 +236,6 @@ export const UserContain = styled.div<{ color: any }>`
   display: flex;
   align-items: center;
   gap: 40px;
-  @media (max-width: 1023px) {
-    gap: 30px;
-  }
-  @media (max-width: 400px) {
-    gap: 20px;
-  }
   .bell-contain {
     position: relative;
     cursor: pointer;
@@ -395,6 +389,20 @@ export const NavResponsive = styled.div`
   padding-inline: 20px;
   justify-content: space-between;
   background-color: #dad3e5;
+
+  .hamburguer-contain {
+    position: relative;
+    .title {
+      position: absolute;
+      bottom: -35px;
+      font-size: 12px;
+      font-weight: 600;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgb(63, 47, 113);
+    }
+  }
+
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -531,6 +539,7 @@ export const TagsResp = styled.div`
   @media (max-width: 450px) {
     height: 37px;
   }
+
   a {
     color: black;
     text-decoration: none;
