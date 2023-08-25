@@ -1,0 +1,66 @@
+.failedContainer{
+  max-width: 95%;
+}
+
+.failedContainer H1{
+
+  margin-top: 5%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 55px;
+  text-align: center;
+
+  color: #992EEA;
+}
+
+.failedContainer p{
+
+  margin-top: 2%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 25px;
+  text-align:start;
+  color: #520795;
+}
+
+.failedContainer .comienza{
+  color: #992EEA;
+}
+
+.failedContainer .width80{
+  max-width: 80%;
+}
+
+.centrado{
+  padding-left: 25%;
+  text-decoration: none;
+}
+
+.failedContainer button {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 1% 0;
+  cursor: pointer;
+
+  position: relative;
+  width: 229px;
+  height: 40px;
+
+  align-items: center;
+}
+
+.failedContainer button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}

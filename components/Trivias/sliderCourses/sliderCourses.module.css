@@ -1,0 +1,17 @@
+.portada{
+  width: 90%;
+}
+
+.textos .curso{
+  color: #D244D1;
+  font-size: 1.2vw;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.textos .instructor{
+  font-size: 1.2vw;
+  font-style: italic;
+  margin-top: 0px;
+
+}

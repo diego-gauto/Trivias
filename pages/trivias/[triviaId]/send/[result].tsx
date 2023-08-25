@@ -48,7 +48,8 @@ const Form = () => {
     verde,
     bold,
     ital,
-    nota
+    nota,
+    ganaste
   } = styles;
 
   const validationSchema = Yup.object().shape({
@@ -226,7 +227,7 @@ const Form = () => {
           </Link>
           <div className={textos}>
             <h1>¡Felicidades!</h1>
-            <p>
+            <p className={ganaste}>
               Por tu participación <span>ganaste el acceso a más de 63 cursos de uñas y belleza </span>
               en línea con un descuento especial
             </p>
