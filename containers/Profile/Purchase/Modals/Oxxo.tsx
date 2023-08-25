@@ -47,34 +47,6 @@ const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_a
     return Math.floor(px / 2);
   }
 
-  function toDataUrl(tempReference: any) {
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = () => {
-      const reader: any = new FileReader();
-      reader.readAsDataURL(xhr.response);
-      reader.onload = () => {
-        const base64String = reader.result;
-        console.log(base64String);
-
-        setRef(base64String);
-      };
-    };
-    xhr.open('GET', tempReference);
-    xhr.responseType = 'blob';
-    xhr.send();
-  }
-
-
-  useEffect(() => {
-    getImage().then((res) => {
-      console.log(res);
-
-    })
-    toDataUrl(barcode)
-  }, [])
-
-
   return (
     <ModalContainer show={show} onHide={() => { setShow(false) }} centered>
       <OxxoContainer id="oxxo">
