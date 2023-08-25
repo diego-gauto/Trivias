@@ -52,13 +52,14 @@
   font-weight: 600; /* Estilo personalizado para el placeholder cuando está deshabilitado */
 }
 
-@media screen and (max-width: 1064px) {
+@media screen and (max-width: 1127px) {
 
   .inputs input {
 
-  max-width: 1000px;
+  max-width: 500px;
   
   }
+
 }
 
 @media screen and (max-width: 800px) {
@@ -73,13 +74,10 @@
 
 @media screen and (max-width: 657px) {
 
-  .inputs{
-    width: 100%;
-  }
 
   .inputs input {
 
-  max-width: 100%;
+  max-width: 600px;
   
   }
 

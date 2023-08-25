@@ -334,6 +334,8 @@
 
   .inputContainer{
     height: auto;
+    flex-direction: column;
+    max-width: 100%;
   }
 
   .form .ganaste {
@@ -398,19 +400,6 @@
 
   .form, .formImg {
     height: 850px;
-  }
-
-}
-
-@media screen and (max-width: 800px) {
-
-
-  .formImg {
-    display: none;
-  }
-
-  .form{
-    width: 100%;
   }
 
 }
