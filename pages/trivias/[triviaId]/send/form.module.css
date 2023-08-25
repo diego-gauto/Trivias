@@ -95,6 +95,7 @@
 
 .textos .verde{
   color: #16A854;
+  padding: 0 5%;
 }
 
 .tachado{
@@ -201,7 +202,7 @@
 
   position: relative;
   width: 305px;
-  height: 54px;
+  height: 45px;
 }
 
 .btnRecibir:hover {
@@ -305,14 +306,40 @@
   }
 }
 
+@media screen and (max-width: 1227px) {
 
-@media screen and (max-width: 1064px) {
+  .form .ganaste {
+    padding: 0 7%;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+
+  .form .ganaste {
+    padding: 0 5%;
+  }
+}
+
+
+@media screen and (max-width: 1127px) {
 
   .form, .formImg {
     height: 800px;
   }
 
   .formImg{
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .inputContainer{
+    height: auto;
+  }
+
+  .form .ganaste {
+    padding: 0 2%;
+  }
+  /* .formImg{
     background-size: auto 100%;
     background-position: center;
   }
@@ -323,7 +350,7 @@
   .inputContainer {
     flex-direction: column;
     margin-top: 5px;
-  }
+  }*/
 
   .checkboxContainer {
     margin: 35px 0 20px 0;
@@ -350,24 +377,42 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1048px) {
 
 
-  .errorMessageNombre{
-    top:417px;
+  .form .ganaste {
+    padding: 0 1%
   }
-  
-  .errorMessageApellido{
-    top:522px;
+}
+
+@media screen and (max-width: 1027px) {
+
+  .form, .formImg {
+    height: 830px;
   }
-  
-  .errorMessageMail{
-    top:623px
+
+}
+
+@media screen and (max-width: 833px) {
+
+
+  .form, .formImg {
+    height: 850px;
   }
-  
-  .errorMessageWA{
-    top:726px
+
+}
+
+@media screen and (max-width: 800px) {
+
+
+  .formImg {
+    display: none;
   }
+
+  .form{
+    width: 100%;
+  }
+
 }
 
 @media screen and (max-width: 800px) {

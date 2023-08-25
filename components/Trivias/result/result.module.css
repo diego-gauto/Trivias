@@ -73,13 +73,12 @@
 
 .resultImg {
   width: 50%;
-  height: 387px;
-  border-radius: 20px;
-}
+  height: 387px;}
 
 .resultImg img {
-  width: 95%;
-  height: 387px;
+  max-width: 95%;
+  max-height:400px;
+  border-radius: 20px;
 }
 
 .share{
@@ -161,7 +160,10 @@
 
 .resultImg img{
   width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   height: auto;
+  border-radius: 0;
 }
 
 .share{
