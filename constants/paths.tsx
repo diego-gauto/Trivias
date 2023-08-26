@@ -13,6 +13,7 @@ export const PLAN_PATH = "/planes";
 export const SIGNUP_PAST_USER_PATH = "/auth/RegisterPastUser";
 export const NAILS_LANDING_REDIRECT = "/nails-master";
 export const ANUAL_SUSCRIPTION_REDIRECT = "/suscripcion-anual";
+export const SUPPORT_PATH = "/centro-de-ayuda";
 //images
 export const DEFAULT_USER_IMG = "/images/profile/default_img.png";
 // temporary paths

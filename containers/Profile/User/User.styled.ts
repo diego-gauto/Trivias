@@ -1393,7 +1393,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
   flex-direction: column;
   justify-content: space-between;
   min-width: 60%;
-  gap: 20px;
+  gap: 10px;
   @media (max-width: 1200px) {
     min-width: 420px;
   }
@@ -1868,11 +1868,22 @@ export const RewardContainer = styled.div<{ reward: any }>`
       font-size: 14px;
     }
   }
+  .help-btn {
+    background: #942ced;
+    gap: 30px;
+    p {
+      margin: 0;
+      margin-left: 50px;
+    }
+    svg {
+    }
+  }
 `;
 export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 352px;
   button {
     margin-bottom: 20px;
     background: #3f1168;
