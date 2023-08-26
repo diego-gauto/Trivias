@@ -76,7 +76,7 @@ export const SecondBox = styled.div`
   @media (max-width: 1280px) {
     padding-left: 0;
   }
-  gap: 40px;
+  gap: 20px;
   width: 70%;
   height: 100%;
   margin-top: 38px;
@@ -1393,7 +1393,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
   flex-direction: column;
   justify-content: space-between;
   min-width: 60%;
-  gap: 10px;
+  gap: 15px;
   @media (max-width: 1200px) {
     min-width: 420px;
   }
