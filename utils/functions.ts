@@ -1,5 +1,6 @@
 import router, { useRouter } from "next/router";
 import { HWK_APPROVED_ICON, HWK_FAILED_ICON } from "./Constants";
+import { userById } from "../components/api/users";
 
 const getMonth = (month: number) => {
   if (month === 1) {
@@ -107,9 +108,9 @@ export const returnNotificationTitles = (notification: any, name: any) => {
   } else if (notification.type === "2") {
     return `!Hola ${name}!`;
   } else if (notification.type === "3") {
-    return;
+    return `!Hola ${name}!`;
   } else if (notification.type === "4") {
-    return "abril";
+    return `!Hola ${name}!`;
   } else if (notification.type === "5") {
     return "mayo";
   } else if (notification.type === "6") {
@@ -131,15 +132,15 @@ export const returnNotificationTitles = (notification: any, name: any) => {
   }
 };
 
-export const returnNotificationMessage = (notification: any, name: any) => {
+export const returnNotificationMessage = (notification: any, user: any) => {
   if (notification.type === "1") {
     return `Ya está calificada tu tarea de tu curso de ${notification.title}.`;
   } else if (notification.type === "2") {
     return `Ya está calificada tu tarea de tu curso de ${notification.title}.`;
   } else if (notification.type === "3") {
-    return;
+    return `${user} respondió a tu comentario.`;
   } else if (notification.type === "4") {
-    return "abril";
+    return `${user} le dio like a tu comentario.`;
   } else if (notification.type === "5") {
     return "mayo";
   } else if (notification.type === "6") {
@@ -187,18 +188,17 @@ export function formatDateNotification(created_at: number) {
   ];
 
   const date = new Date(created_at);
-  const dayOfWeek = daysOfWeek[date.getDay()];
-  const dayOfMonth = date.getDate();
+  const dayOfWeek = daysOfWeek[date.getUTCDay()];
+  const dayOfMonth = date.getUTCDate();
   const month = monthsOfYear[date.getMonth()];
   const year = date.getFullYear();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
   const period = hours >= 12 ? "p.m." : "a.m.";
   const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
 
   const formattedDate = `${dayOfWeek} ${dayOfMonth} de ${month}, ${year}. ${formattedHours}:${minutes
     .toString()
     .padStart(2, "0")} ${period}`;
-
   return formattedDate;
 }

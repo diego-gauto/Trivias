@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import { type } from 'os';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaHeart } from 'react-icons/fa';
 import { MdOutlineComment } from 'react-icons/md';
 import { updateNotificationStatusApi } from '../../api/notifications';
@@ -9,14 +8,18 @@ import { NotificationData } from './Notifications.styled';
 import { LESSON_PATH, REWARDS_PATH } from '../../../constants/paths';
 import { formatDateNotification, returnNotificationImage, returnNotificationMessage, returnNotificationTitles } from '../../../utils/functions';
 import { user } from 'firebase-functions/v1/auth';
+import { userById } from '../../api/users';
 const Notifications = (props: any) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
   const { notification, openNotifications, unReadNotification, setUnReadNotification, user } = props;
   const [newStatus, setNewStatus] = useState<boolean>(notification.status === 0 ? false : true);
+  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+
 
   const ClickNotification = () => {
-    if (notification.type === "1" || notification.type === "2" || notification.type === "comment") {
+    if (notification.type === "1" || notification.type === "2" || notification.type === "3" || notification.type === "4") {
       router.push({
         pathname: LESSON_PATH,
         query: { id: notification.course_id, season: notification.season, lesson: notification.lesson },
@@ -37,29 +40,30 @@ const Notifications = (props: any) => {
     }
   }
 
+  useEffect(() => {
+    if (notification.type === "3" || notification.type === "4") {
+      userById(notification.type === "4" ? notification.user_like_id : notification.user_comment_id).then((res) => {
+        setImage(res.data[0].photo);
+        setName(res.data[0].name)
+      })
+    }
+  }, [])
+
   return (
     <NotificationData newStatus={newStatus} status={notification} >
       <div className="notification-data" onClick={ClickNotification}>
-        <img className='notification-image' src={returnNotificationImage(notification)} />
+        {(notification.type !== "3" && notification.type !== "4") && <img className='notification-image' src={returnNotificationImage(notification)} />}
+        {(notification.type === "3" || notification.type === "4") && <div style={{ position: "relative" }}>
+          <img className='notification-image' src={image} />
+          <div className='circle'>
+            <img src={notification.type === "3" ? "/images/notifications/comment.png" : "/images/notifications/like.png"} alt="" />
+          </div>
+        </div>}
         <div className="notification-texts">
           <p className='notification-info'>
-            {/* {
-              type === 'like' &&
-              <FaHeart className='like-icon' />
-            }
-            {
-              type === 'comment' &&
-              <MdOutlineComment className='comment-icon' />
-            }
-            <span style={{ color: spanColor() }}> {message} </span>
-            {
-              (type === 'certificate' || type === "homework" || type === 'comment' || type === 'like') ?
-                " en el curso: "
-                : " - "
-            } */}
             <p className='title'>{returnNotificationTitles(notification, user.name)}</p>
-            <p className='message'>{returnNotificationMessage(notification, "")}</p>
-            {(notification.type === "1" || "2") && <p className='score'>{notification.type === "1" ? `Aprobada` : `Rechazada`}
+            <p className='message'>{returnNotificationMessage(notification, name)}</p>
+            {(notification.type === "1" || notification.type === "2") && <p className='score'>{notification.type === "1" ? `Aprobada` : `Rechazada`}
               {notification.type === "1" ? <span className='approved'> +{notification.score} puntos.</span> :
                 <span className='failed'> +0 puntos.</span>}
             </p>}

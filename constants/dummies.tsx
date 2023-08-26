@@ -53592,17 +53592,6 @@ export const activeUsers = [
     "id": 49674
   },
   {
-    "nombre": "Inowu",
-    "apellido": "Han",
-    "correo": "inowu@dev.com",
-    "pais": "Mexico",
-    "whatsapp": 526623400635,
-    "conekta_id": "cus_2uRxzmW5y1eSojiJ5",
-    "final_date": 1000,
-    "level": 1,
-    "id": 49677
-  },
-  {
     "nombre": "Diego",
     "apellido": "Gauto",
     "correo": "diego@gonvar.io",

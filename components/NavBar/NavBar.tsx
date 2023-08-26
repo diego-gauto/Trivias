@@ -339,7 +339,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            {/* <div className="bell-contain">
+            <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -355,32 +355,30 @@ const NavBar = () => {
                 </div>
                 <div className="all-notifications">
                   {
-                    notifications.length > 0 ?
-                      notifications.map((not: any, index: number) => {
-                        return (
-                          <Notifications
-                            notification={not}
-                            user={userData}
-                            openNotifications={openNotifications}
-                            unReadNotification={unReadNotification}
-                            setUnReadNotification={setUnReadNotification}
-                            key={"Notifications_" + index}
-                          />
-                        )
-                      })
-                      :
-                      <div className="empty-notifications">Sin Notificaciones!</div>
+                    notifications.length > 0 &&
+                    notifications.map((not: any, index: number) => {
+                      return (
+                        <Notifications
+                          notification={not}
+                          user={userData}
+                          openNotifications={openNotifications}
+                          unReadNotification={unReadNotification}
+                          setUnReadNotification={setUnReadNotification}
+                          key={"Notifications_" + index}
+                        />
+                      )
+                    })
                   }
                 </div>
-                <p className='read-all-tag' onClick={updateNotificationStatus}>
+                {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
                   Marcar todas como leído
-                </p>
+                </p>}
               </NotificationContainer>
               {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div> */}
+            </div>
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {

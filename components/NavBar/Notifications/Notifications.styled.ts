@@ -82,6 +82,20 @@ export const NotificationData = styled.div<{
     padding: 15px;
     gap: 20px;
     background-color: #d9d9d9;
+    .circle {
+      display: flex;
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      background: #fff;
+      width: 20px;
+      height: 20px;
+      border-radius: 40px;
+      border: 1px solid #d244d1;
+      img {
+        margin: auto;
+      }
+    }
     ${(props) =>
       (props.status === 1 || props.newStatus) &&
       css`

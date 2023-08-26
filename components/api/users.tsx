@@ -193,3 +193,14 @@ export const conektaPm = async (user: any) => {
       return error
     });
 };
+
+export const userById = async (userId: string) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "users/" + userId)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      return error
+    });
+};
