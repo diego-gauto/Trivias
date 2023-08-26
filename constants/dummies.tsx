@@ -57283,5 +57283,16 @@ export const activeUsers = [
     "final_date": 1724180000,
     "level": 0,
     "id": 51801
-  }
+  },
+  {
+    "nombre": "Elizabeth",
+    "apellido": "de Dios Gerónimo",
+    "correo": "lizydedios93@gmail.com",
+    "pais": "México",
+    "whatsapp": 529371418312,
+    "conekta_id": "cus_2uSGQNiRjdcDEoquz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13821
+  },
 ]
