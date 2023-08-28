@@ -51,7 +51,7 @@ export const History = ({ user, addPayment }: any) => {
           tempYear = tempDate.getFullYear();
           element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
           let date = new Date().getTime() / 1000;
-          if ((tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) > date) {
+          if (user.final_date > date) {
             element.status = "Activo"
           } else {
             element.status = "Inactivo"
