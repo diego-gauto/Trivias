@@ -127,7 +127,6 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
-    localStorage.setItem("email", "dlc.zhanthoz.vrgs22@gmail.com")
     window.addEventListener('scroll', ChangeNav);
     // localStorage.clear();
     // logoutFunc();
