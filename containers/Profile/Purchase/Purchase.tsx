@@ -30,6 +30,7 @@ import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
 import OxxoModal from "./Modals/Oxxo";
 import SpeiModal from "./Modals/Spei";
+import { createNotification } from "../../../components/api/notifications";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -252,137 +253,12 @@ const Purchase = () => {
     setCard({ ...card, id: tokenId });
   }
   const conektaErrorResponseHandler = (response: any) => {
-    console.log(response);
+    setErrorMsg('Verifique que los datos de su tarjeta sean los correctos!');
+    setShow(true);
     setLoader(false)
   };
 
   const FinishPayment = async () => {
-    if (plan.method == 'stripe') {
-      if (type == 'subscription') {
-        let price = "";
-        if (trial === "true") price = "45f502b3-3e0c-492e-986a-4e0e85e1a34d";
-        if (frequency === "month") price = "9d8fa0e3-2977-46dc-8cb2-19024cd66bb9";
-        if (frequency === "anual") price = "price_1NJPN7AaQg7w1ZH2sx0JRQKq";
-
-        const data = {
-          new: card.cardId ? card.status : false,
-          cardId: card.cardId,
-          paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
-          stripeId: userData.stripe_id,
-          priceId: price,
-          method: 'stripe'
-        }
-        stripeSubscriptionApi(data).then((res) => {
-          if (res.error) {
-            setCard({ ...card, cardId: "" })
-            if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              const msg = res.error.raw.code == "card_declined" && (
-                res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-              ) ||
-                res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
-                res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-                res.error.raw.code == "processing_error" && "Error de proceso" ||
-                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
-              window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
-            }
-            setLoader(false);
-          } else {
-            if (res.subscription.status === "active") {
-              localStorage.removeItem("trial")
-              setPay(true);
-              setLoader(false);
-              updateMembership({ ...plan, final_date: res.subscription.current_period_end, payment_method: card.cardId || card.paymentMethod, plan_id: res.subscription.id, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id })
-              setConfirmation(false);
-              window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-
-            } else {
-              let sub = {
-                subscriptionId: res.subscription.id,
-                userId: userData.user_id
-              }
-              deleteSubscriptionAfterCreation(sub).then((res) => {
-                const msg = "Pago Rechazado"
-                window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
-              })
-            }
-          }
-        })
-      }
-      if (type === 'course' || nailmasterplusanual === 'true') {
-        let price = product.price
-        if (coupon) {
-          if (coupon.type == 'amount') {
-            price = price - coupon.discount;
-          } else {
-            price = (price - (coupon.discount / 100) * price)
-          }
-        }
-        const data = {
-          new: card.cardId ? card.status : false,
-          cardId: card.cardId,
-          paymentMethod: card.cardId ? card.paymentMethod : defaultCard.paymentMethod,
-          stripeId: userData.stripe_id,
-          amount: price,
-          method: 'stripe',
-          userId: userData.user_id
-        }
-        stripePaymentApi(data).then(async (res) => {
-          if (res.error) {
-            setCard({ ...card, cardId: "" })
-            if (res.error.raw.code == "card_declined" || "expired_card" || "incorrect_cvc" || "processing_error" || "incorrect_number") {
-              const msg = res.error.raw.code == "card_declined" && (
-                res.error.raw.decline_code == "generic_decline" && "Pago Rechazado" ||
-                res.error.raw.decline_code == "insufficient_funds" && "Tarjeta rechazada: fondos insuficientes" ||
-                res.error.raw.decline_code == "lost_card" && "Pago Rechazado: Tarjeta extraviada" ||
-                res.error.raw.decline_code == "stolen_card" && "Pago Rechazado: Tarjeta robada"
-              ) ||
-                res.error.raw.code == "expired_card" && "Tarjeta expirada" ||
-                res.error.raw.code == "incorrect_cvc" && "Codigo incorrecto" ||
-                res.error.raw.code == "processing_error" && "Error de proceso" ||
-                res.error.raw.code == "incorrect_number" && "Tarjeta Incorrecta"
-              if (id === "30") {
-                window.location.href = `/pagofallidonailsmaster?error=${msg}`;
-              }
-              if (id === "45") {
-                window.location.href = `/pagofallidoalineacion?error=${msg}`;
-              }
-            }
-            setLoader(false);
-          } else {
-            let invoice = {
-              amount: res.paymentIntent.amount,
-              product: product.title,
-              method: 'stripe',
-              user_id: userData.user_id,
-              course_id: id,
-              final_date: (new Date().getTime() / 1000) + product.duration * 86400,
-              newPlan: nailmasterplusanual === 'true' ? true : false
-            }
-            if (coupon) {
-              let tempCoupon = {
-                coupons_id: coupon.id,
-                user_id: userData.user_id
-              }
-              await addUserCouponApi(tempCoupon)
-            }
-            createInvoiceApi(invoice).then((res) => {
-              setConfirmation(false);
-              setPay(true);
-              setLoader(false);
-              if (id === "30") {
-                window.location.href = "/pagoexitosonailsmaster";
-              }
-              if (id === "45") {
-                window.location.href = "/pagoexitosoalineacion";
-              }
-            })
-          }
-        })
-      }
-    }
     if (plan.method == 'paypal') {
       setLoader(false);
       if (type == 'subscription') {
@@ -483,6 +359,14 @@ const Purchase = () => {
             } else {
               setCard({ ...card, cardId: "" });
               let error = "Su pago fue declinado"
+              let notification = {
+                userId: userData.user_id,
+                type: "8",
+                notificationId: '',
+                amount: price,
+                productName: product.title
+              }
+              await createNotification(notification);
               if (id === "30") {
                 window.location.href = `/pagofallidonailsmaster?error=${error}`;
               }
@@ -495,6 +379,14 @@ const Purchase = () => {
           }
           if (res.response.status === 400) {
             setCard({ ...card, cardId: "" });
+            let notification = {
+              userId: userData.user_id,
+              type: "8",
+              notificationId: '',
+              amount: price,
+              productName: product.title
+            }
+            await createNotification(notification);
             let error = res.response.data.error.data.details[0].message
             if (id === "30") {
               window.location.href = `/pagofallidonailsmaster?error=${error}`;
@@ -529,6 +421,14 @@ const Purchase = () => {
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           } else {
+            let notification = {
+              userId: userData.user_id,
+              type: "8",
+              notificationId: '',
+              amount: price,
+              productName: product.title
+            }
+            await createNotification(notification);
             const msg = "Pago Rechazado"
             window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
           }

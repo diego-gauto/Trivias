@@ -1,5 +1,10 @@
 import router, { useRouter } from "next/router";
-import { HWK_APPROVED_ICON, HWK_FAILED_ICON } from "./Constants";
+import {
+  HWK_APPROVED_ICON,
+  HWK_FAILED_ICON,
+  PAYMENT_FAILED_ICON,
+  PAYMETN_SUCCESS_ICON,
+} from "./Constants";
 import { userById } from "../components/api/users";
 
 const getMonth = (month: number) => {
@@ -87,10 +92,10 @@ export const returnNotificationImage = (notification: any) => {
     return "junio";
   } else if (notification.type === 7) {
     return "julio";
-  } else if (notification.type === 8) {
-    return "agosto";
-  } else if (notification.type === 9) {
-    return "septiembre";
+  } else if (notification.type === "8") {
+    return PAYMENT_FAILED_ICON;
+  } else if (notification.type === "9") {
+    return PAYMETN_SUCCESS_ICON;
   } else if (notification.type === 10) {
     return "octubre";
   } else if (notification.type === 11) {
@@ -117,10 +122,10 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return "junio";
   } else if (notification.type === 7) {
     return "julio";
-  } else if (notification.type === 8) {
-    return "agosto";
-  } else if (notification.type === 9) {
-    return "septiembre";
+  } else if (notification.type === "8") {
+    return "Cargo no exitoso";
+  } else if (notification.type === "9") {
+    return "¡Tu cargo fue exitoso!";
   } else if (notification.type === 10) {
     return "octubre";
   } else if (notification.type === 11) {
@@ -147,10 +152,10 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return "junio";
   } else if (notification.type === 7) {
     return "julio";
-  } else if (notification.type === 8) {
-    return "agosto";
-  } else if (notification.type === 9) {
-    return "septiembre";
+  } else if (notification.type === "8") {
+    return `Tu pago por ${notification.amount} de ${notification.product_name} NO se pudo procesar.`;
+  } else if (notification.type === "9") {
+    return `Tu pago por ${notification.amount} de ${notification.product_name} se pudo procesar correctamente. Disfruta tu aprendizaje.`;
   } else if (notification.type === 10) {
     return "octubre";
   } else if (notification.type === 11) {

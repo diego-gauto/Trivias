@@ -127,6 +127,7 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
+    localStorage.setItem("email", "dlc.zhanthoz.vrgs22@gmail.com")
     window.addEventListener('scroll', ChangeNav);
     // localStorage.clear();
     // logoutFunc();
@@ -154,7 +155,8 @@ const NavBar = () => {
             userId: userDataAuth.user.user_id
           }
           conektaCustomer(body)
-        }
+        };
+
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
