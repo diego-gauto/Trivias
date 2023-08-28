@@ -11,6 +11,7 @@ import { AdminContain } from '../SideBar.styled';
 import AllCourses from './AllCourses/AllCourses';
 import { CourseContainer, LoaderButton, OptionColor, SelectOption } from './Courses.styled';
 import { ICategories, ICourses, IMaterials, IProfessors } from './ICourses';
+import { createNotification } from '../../api/notifications';
 
 const Courses = () => {
   const [loader, setLoader] = useState(false);
@@ -200,6 +201,15 @@ const Courses = () => {
       course.image = "";
       createCoursesApi(course).then((res) => {
         course.id = res;
+        let notification = {
+          type: "10",
+          notificationId: '',
+          title: course.title,
+          courseId: res,
+          season: 0,
+          lesson: 0,
+        }
+        createNotification(notification);
         updateCourseImage(course.id, tempImage).then((image) => {
           course.image = image;
           updateCourseImageFromApi(course).then(() => {
