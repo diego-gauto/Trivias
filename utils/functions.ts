@@ -1,5 +1,7 @@
 import router, { useRouter } from "next/router";
 import {
+  CERTIFICATE_ICON,
+  COURSE_CREATED_ICON,
   HWK_APPROVED_ICON,
   HWK_FAILED_ICON,
   PAYMENT_FAILED_ICON,
@@ -96,10 +98,10 @@ export const returnNotificationImage = (notification: any) => {
     return PAYMENT_FAILED_ICON;
   } else if (notification.type === "9") {
     return PAYMETN_SUCCESS_ICON;
-  } else if (notification.type === 10) {
-    return "octubre";
-  } else if (notification.type === 11) {
-    return "noviembre";
+  } else if (notification.type === "10") {
+    return COURSE_CREATED_ICON;
+  } else if (notification.type === "11") {
+    return CERTIFICATE_ICON;
   } else if (notification.type === 12) {
     return "diciembre";
   } else {
@@ -126,10 +128,10 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return "Cargo no exitoso";
   } else if (notification.type === "9") {
     return "¡Tu cargo fue exitoso!";
-  } else if (notification.type === 10) {
-    return "octubre";
-  } else if (notification.type === 11) {
-    return "noviembre";
+  } else if (notification.type === "10") {
+    return "Tenemos un nuevo curso para ti";
+  } else if (notification.type === "11") {
+    return "¡Felicidades! Conseguiste un nuevo certificado";
   } else if (notification.type === 12) {
     return "diciembre";
   } else {
@@ -156,10 +158,10 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return `Tu pago por ${notification.amount} de ${notification.product_name} NO se pudo procesar.`;
   } else if (notification.type === "9") {
     return `Tu pago por ${notification.amount} de ${notification.product_name} se pudo procesar correctamente. Disfruta tu aprendizaje.`;
-  } else if (notification.type === 10) {
-    return "octubre";
-  } else if (notification.type === 11) {
-    return "noviembre";
+  } else if (notification.type === "10") {
+    return `Acabamos de publicar un nuevo curso: ${notification.title}, ¡Comiénzalo ahora!`;
+  } else if (notification.type === "11") {
+    return `Ahora puedes solicitar tu certificado por haber terminado el curso de ${notification.title}`;
   } else if (notification.type === 12) {
     return "diciembre";
   } else {

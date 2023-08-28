@@ -19,7 +19,7 @@ const Notifications = (props: any) => {
 
 
   const ClickNotification = () => {
-    if (notification.type === "1" || notification.type === "2" || notification.type === "3" || notification.type === "4") {
+    if (notification.type === "1" || notification.type === "2" || notification.type === "3" || notification.type === "4" || notification.type === "10") {
       router.push({
         pathname: LESSON_PATH,
         query: { id: notification.course_id, season: notification.season, lesson: notification.lesson },

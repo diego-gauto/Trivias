@@ -46,6 +46,9 @@ import {
   UserContain,
   UserImage,
 } from "./NavBar.styled";
+import { SlBell } from "react-icons/sl";
+import Notifications from "./Notifications/Notifications";
+import { NotificationContainer } from "./Notifications/Notifications.styled";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
