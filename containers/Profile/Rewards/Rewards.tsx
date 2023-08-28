@@ -80,7 +80,7 @@ const Rewards = () => {
     let getMonth: any;
     let requests: any;
     let tempRewards: any = [];
-    if (user.level === 1) {
+    if (user.level === 1 || user.final_date > today) {
       if (user.start_date === 0) {
         getMonth = 0;
       }
