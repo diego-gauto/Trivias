@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { useFacebook } from "react-facebook";
-import { SlBell } from "react-icons/sl";
 import { useMediaQuery } from "react-responsive";
 
 import Link from "next/link";
@@ -21,7 +20,9 @@ import {
   SIGNUP_PATH,
 } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
+import { conektaCustomer } from "../api/auth";
 import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -45,10 +46,6 @@ import {
   UserContain,
   UserImage,
 } from "./NavBar.styled";
-import Notifications from "./Notifications/Notifications";
-import { NotificationContainer } from "./Notifications/Notifications.styled";
-import { updateMembership } from "../api/profile";
-import { conektaCustomer } from "../api/auth";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -438,7 +435,8 @@ const NavBar = () => {
                   </FloatingMenuItem>
                 </Link>
               </IngresarOptionsList>
-              <div>
+              <div className="hamburguer-contain">
+                <p className="title">Menu</p>
                 <HamburgerMenu
                   src="/images/Navbar/menu2.png"
                   onClick={toggleNewHamburgerMenuIsOpen}
@@ -484,8 +482,11 @@ const NavBar = () => {
             </div>
             <UserContain color={color}>
               <Link href={REWARDS_PATH}>
-                <div className="rewards-circle" onClick={closeHamburgerMenu}>
-                  <div className="inside" />
+                <div className="hamburguer-contain">
+                  <p className="title" style={{ bottom: -37 }}>Recompensas</p>
+                  <div className="rewards-circle" onClick={closeHamburgerMenu}>
+                    <div className="inside" />
+                  </div>
                 </div>
               </Link>
               {/* <div className="bell-contain">
@@ -538,14 +539,18 @@ const NavBar = () => {
                   <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
                 }
               </div> */}
-              < UserImage onClick={() => { setHamburger(!hamburger) }}>
-                {
-                  userData && userData.photo
-                    ? <img src={userData.photo} />
-                    : <img src={DEFAULT_USER_IMG} />
-                }
-              </UserImage>
+              <div className="hamburguer-contain">
+                <p className="title">Menu</p>
+                < UserImage onClick={() => { setHamburger(!hamburger) }}>
+                  {
+                    userData && userData.photo
+                      ? <img src={userData.photo} />
+                      : <img src={DEFAULT_USER_IMG} />
+                  }
+                </UserImage>
+              </div>
             </UserContain>
+
             <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger} admin={isAdmin}>
               <HBMenu className="menu-hamburger">
                 <Link href={PROFILE_PATH} >
@@ -564,7 +569,7 @@ const NavBar = () => {
                 }
                 {/* <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
-                    Trivias
+                  Trivias
                   </HBList>
                 </Link> */}
                 <Link href={PLAN_PATH} >
