@@ -50,6 +50,7 @@ import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
 import { getRewardsApi } from "../api/rewards";
+import { getCourseApi } from "../api/lessons";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -114,7 +115,6 @@ const NavBar = () => {
       })
       let tempDayCount: any = today - userDataAuth.user.start_date;
       let getMonth = tempDayCount / (3600 * 24 * 30);
-
       getRewardsApi().then(async (response) => {
         if (response.filter((x: any) => x.month <= getMonth).length > 0) {
           let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
@@ -132,6 +132,31 @@ const NavBar = () => {
           });
         }
       })
+      let courses = userDataAuth.user.user_history;
+      courses.forEach((element: any) => {
+        getCourseApi(element.course_id).then((response) => {
+          let count = 0
+          response.lessons.forEach((lesson: any) => {
+            if (lesson.users.includes(userDataAuth.user.user_id)) {
+              count++
+            }
+          });
+          if (count !== response.lessons.length) {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "7",
+              notificationId: '',
+              courseId: element.course_id,
+              season: element.season_id,
+              lesson: element.lesson_id,
+              title: response.title,
+            }
+            if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
+              createNotification(notification);
+            }
+          }
+        })
+      });
 
       setUnReadNotification(tempCounter);
       setNotifications(res);
@@ -173,6 +198,7 @@ const NavBar = () => {
           }
           conektaCustomer(body)
         };
+
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);

@@ -7,6 +7,7 @@ import {
   HWK_FAILED_ICON,
   PAYMENT_FAILED_ICON,
   PAYMETN_SUCCESS_ICON,
+  PENDING_ICON,
   REWARD_ICON,
 } from "./Constants";
 import { userById } from "../components/api/users";
@@ -94,8 +95,8 @@ export const returnNotificationImage = (notification: any) => {
     return "mayo";
   } else if (notification.type === "6") {
     return "junio";
-  } else if (notification.type === 7) {
-    return "julio";
+  } else if (notification.type === "7") {
+    return PENDING_ICON;
   } else if (notification.type === "8") {
     return PAYMENT_FAILED_ICON;
   } else if (notification.type === "9") {
@@ -126,8 +127,8 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return "mayo";
   } else if (notification.type === "6") {
     return "junio";
-  } else if (notification.type === 7) {
-    return "julio";
+  } else if (notification.type === "7") {
+    return "Tienes un curso pendiente";
   } else if (notification.type === "8") {
     return "Cargo no exitoso";
   } else if (notification.type === "9") {
@@ -158,8 +159,8 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return "mayo";
   } else if (notification.type === "6") {
     return "junio";
-  } else if (notification.type === 7) {
-    return "julio";
+  } else if (notification.type === "7") {
+    return `${user} no olvides terminar el curso de ${notification.title}, podrás solicitar tu certificado al terminar.`;
   } else if (notification.type === "8") {
     return `Tu pago por ${notification.amount} de ${notification.product_name} NO se pudo procesar.`;
   } else if (notification.type === "9") {

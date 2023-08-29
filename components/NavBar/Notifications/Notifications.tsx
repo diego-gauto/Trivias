@@ -25,6 +25,12 @@ const Notifications = (props: any) => {
         query: { id: notification.course_id, season: notification.season, lesson: notification.lesson },
       });
     }
+    if (notification.type === "7") {
+      router.push({
+        pathname: LESSON_PATH,
+        query: { id: notification.course_id, season: 0, lesson: 0 },
+      });
+    }
     if (notification.type === "13" || notification.type === "12") {
       router.push({
         pathname: REWARDS_PATH,
@@ -67,7 +73,7 @@ const Notifications = (props: any) => {
         <div className="notification-texts">
           <p className='notification-info'>
             <p className='title'>{returnNotificationTitles(notification, user.name)}</p>
-            <p className='message'>{returnNotificationMessage(notification, name)}</p>
+            <p className='message'>{returnNotificationMessage(notification, !name ? user.name : name)}</p>
             {(notification.type === "1" || notification.type === "2") && <p className='score'>{notification.type === "1" ? `Aprobada` : `Rechazada`}
               {notification.type === "1" ? <span className='approved'> +{notification.score} puntos.</span> :
                 <span className='failed'> +0 puntos.</span>}
