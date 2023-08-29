@@ -1,5 +1,6 @@
 import router, { useRouter } from "next/router";
 import {
+  BENEFIT_ICON,
   CERTIFICATE_ICON,
   COURSE_CREATED_ICON,
   HWK_APPROVED_ICON,
@@ -103,8 +104,8 @@ export const returnNotificationImage = (notification: any) => {
     return COURSE_CREATED_ICON;
   } else if (notification.type === "11") {
     return CERTIFICATE_ICON;
-  } else if (notification.type === 12) {
-    return "diciembre";
+  } else if (notification.type === "12") {
+    return BENEFIT_ICON;
   } else if (notification.type === "13") {
     return REWARD_ICON;
   } else {
@@ -135,8 +136,8 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return "Tenemos un nuevo curso para ti";
   } else if (notification.type === "11") {
     return "¡Felicidades! Conseguiste un nuevo certificado";
-  } else if (notification.type === 12) {
-    return "diciembre";
+  } else if (notification.type === "12") {
+    return "¡Felicidades! Has recibido un nuevo beneficio";
   } else if (notification.type === "13") {
     return `¡Nueva recompensa disponible!`;
   } else {
@@ -167,8 +168,8 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return `Acabamos de publicar un nuevo curso: ${notification.title}, ¡Comiénzalo ahora!`;
   } else if (notification.type === "11") {
     return `Ahora puedes solicitar tu certificado por haber terminado el curso de ${notification.title}`;
-  } else if (notification.type === 12) {
-    return "diciembre";
+  } else if (notification.type === "12") {
+    return "Revisa tu sección de recompensas para conocer más sobre los nuevos beneficios que obtuviste.";
   } else if (notification.type === "13") {
     return `Hasta ahora has acumulado ${notification.score} puntos. Ahora puedes solicitar una nueva recompensa.`;
   } else {

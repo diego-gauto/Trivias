@@ -780,8 +780,8 @@ const Purchase = () => {
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWithOxxo} className="oxxo">Oxxo</button>}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <button onClick={payWitSpei} className="spei">Transferencia</button>}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/oxxo.svg" onClick={payWithOxxo} />}
+                {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/spei.svg" onClick={payWitSpei} />}
               </div>
             </div>
             <div className="right-section">
@@ -1097,6 +1097,8 @@ const Purchase = () => {
                     </PayPalScriptProvider>}
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                   </div>}
+                  {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/oxxo.svg" onClick={payWithOxxo} />}
+                  {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/spei.svg" onClick={payWitSpei} />}
                 </div>
               </div>
               <div className="box">

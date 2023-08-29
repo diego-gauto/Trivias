@@ -25,6 +25,11 @@ const Notifications = (props: any) => {
         query: { id: notification.course_id, season: notification.season, lesson: notification.lesson },
       });
     }
+    if (notification.type === "13" || notification.type === "12") {
+      router.push({
+        pathname: REWARDS_PATH,
+      });
+    }
     if (notification.status === 0) {
       let notificationUpdate = {
         status: 1,
