@@ -10,3 +10,4 @@ export const PAYMENT_FAILED_ICON = "../images/notifications/not_8.png";
 export const PAYMETN_SUCCESS_ICON = "../images/notifications/not_9.png";
 export const COURSE_CREATED_ICON = "../images/notifications/not_10.png";
 export const CERTIFICATE_ICON = "../images/notifications/not_11.png";
+export const REWARD_ICON = "../images/notifications/not_13.png";

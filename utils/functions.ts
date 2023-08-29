@@ -6,6 +6,7 @@ import {
   HWK_FAILED_ICON,
   PAYMENT_FAILED_ICON,
   PAYMETN_SUCCESS_ICON,
+  REWARD_ICON,
 } from "./Constants";
 import { userById } from "../components/api/users";
 
@@ -104,6 +105,8 @@ export const returnNotificationImage = (notification: any) => {
     return CERTIFICATE_ICON;
   } else if (notification.type === 12) {
     return "diciembre";
+  } else if (notification.type === "13") {
+    return REWARD_ICON;
   } else {
     return "";
   }
@@ -134,6 +137,8 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return "¡Felicidades! Conseguiste un nuevo certificado";
   } else if (notification.type === 12) {
     return "diciembre";
+  } else if (notification.type === "13") {
+    return `¡Nueva recompensa disponible!`;
   } else {
     return "";
   }
@@ -164,6 +169,8 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return `Ahora puedes solicitar tu certificado por haber terminado el curso de ${notification.title}`;
   } else if (notification.type === 12) {
     return "diciembre";
+  } else if (notification.type === "13") {
+    return `Hasta ahora has acumulado ${notification.score} puntos. Ahora puedes solicitar una nueva recompensa.`;
   } else {
     return "";
   }

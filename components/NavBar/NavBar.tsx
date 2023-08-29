@@ -21,7 +21,7 @@ import {
 } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
-import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { createNotification, getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
 import { updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
@@ -49,6 +49,7 @@ import {
 import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
+import { getRewardsApi } from "../api/rewards";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -62,7 +63,7 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-
+  let today = new Date().getTime() / 1000;
   const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const toggleIngresarOptionsMenu = () => {
@@ -105,14 +106,33 @@ const NavBar = () => {
       userId: userId
     }
     getNotifications(data).then((res) => {
-      console.log(res);
-
       let tempCounter = 0;
       res.forEach((not: any) => {
         if (!not.status) {
           tempCounter++;
         }
       })
+      let tempDayCount: any = today - userDataAuth.user.start_date;
+      let getMonth = tempDayCount / (3600 * 24 * 30);
+
+      getRewardsApi().then(async (response) => {
+        if (response.filter((x: any) => x.month <= getMonth).length > 0) {
+          let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
+          tempRewards.forEach(async (element: any) => {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "12",
+              notificationId: '',
+              rewardId: element.id
+            }
+
+            if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
+              createNotification(notification);
+            }
+          });
+        }
+      })
+
       setUnReadNotification(tempCounter);
       setNotifications(res);
     })
@@ -140,11 +160,9 @@ const NavBar = () => {
     setNewHamburgerMenuIsOpen(false);
   }
   try {
-    var userDataAuth = useAuth();
+    var userDataAuth: any = useAuth();
 
     useEffect(() => {
-      // localStorage.clear();
-      // logoutFunc();
       if (userDataAuth.user !== null) {
         if (userDataAuth.user.conekta_id === null) {
           let body = {
@@ -155,7 +173,6 @@ const NavBar = () => {
           }
           conektaCustomer(body)
         };
-
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
