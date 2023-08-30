@@ -21,7 +21,7 @@ import {
 } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
-import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { createNotification, getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
 import { updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
@@ -46,6 +46,11 @@ import {
   UserContain,
   UserImage,
 } from "./NavBar.styled";
+import { SlBell } from "react-icons/sl";
+import Notifications from "./Notifications/Notifications";
+import { NotificationContainer } from "./Notifications/Notifications.styled";
+import { getRewardsApi } from "../api/rewards";
+import { getCourseApi } from "../api/lessons";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -59,7 +64,7 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-
+  let today = new Date().getTime() / 1000;
   const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const toggleIngresarOptionsMenu = () => {
@@ -102,14 +107,57 @@ const NavBar = () => {
       userId: userId
     }
     getNotifications(data).then((res) => {
-      console.log(res);
-
       let tempCounter = 0;
       res.forEach((not: any) => {
         if (!not.status) {
           tempCounter++;
         }
       })
+      let tempDayCount: any = today - userDataAuth.user.start_date;
+      let getMonth = tempDayCount / (3600 * 24 * 30);
+      getRewardsApi().then(async (response) => {
+        if (response.filter((x: any) => x.month <= getMonth).length > 0) {
+          let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
+          tempRewards.forEach(async (element: any) => {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "12",
+              notificationId: '',
+              rewardId: element.id
+            }
+
+            if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
+              createNotification(notification);
+            }
+          });
+        }
+      })
+      let courses = userDataAuth.user.user_history;
+      courses.forEach((element: any) => {
+        getCourseApi(element.course_id).then((response) => {
+          let count = 0
+          response.lessons.forEach((lesson: any) => {
+            if (lesson.users.includes(userDataAuth.user.user_id)) {
+              count++
+            }
+          });
+          if (count !== response.lessons.length) {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "7",
+              notificationId: '',
+              courseId: element.course_id,
+              season: element.season_id,
+              lesson: element.lesson_id,
+              title: response.title,
+            }
+            if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
+              createNotification(notification);
+            }
+          }
+        })
+      });
+
       setUnReadNotification(tempCounter);
       setNotifications(res);
     })
@@ -137,11 +185,9 @@ const NavBar = () => {
     setNewHamburgerMenuIsOpen(false);
   }
   try {
-    var userDataAuth = useAuth();
+    var userDataAuth: any = useAuth();
 
     useEffect(() => {
-      // localStorage.clear();
-      // logoutFunc();
       if (userDataAuth.user !== null) {
         if (userDataAuth.user.conekta_id === null) {
           let body = {
@@ -151,7 +197,8 @@ const NavBar = () => {
             userId: userDataAuth.user.user_id
           }
           conektaCustomer(body)
-        }
+        };
+
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
@@ -352,26 +399,24 @@ const NavBar = () => {
                 </div>
                 <div className="all-notifications">
                   {
-                    notifications.length > 0 ?
-                      notifications.map((not: any, index: number) => {
-                        return (
-                          <Notifications
-                            notification={not}
-                            user={userData}
-                            openNotifications={openNotifications}
-                            unReadNotification={unReadNotification}
-                            setUnReadNotification={setUnReadNotification}
-                            key={"Notifications_" + index}
-                          />
-                        )
-                      })
-                      :
-                      <div className="empty-notifications">Sin Notificaciones!</div>
+                    notifications.length > 0 &&
+                    notifications.map((not: any, index: number) => {
+                      return (
+                        <Notifications
+                          notification={not}
+                          user={userData}
+                          openNotifications={openNotifications}
+                          unReadNotification={unReadNotification}
+                          setUnReadNotification={setUnReadNotification}
+                          key={"Notifications_" + index}
+                        />
+                      )
+                    })
                   }
                 </div>
-                <p className='read-all-tag' onClick={updateNotificationStatus}>
+                {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
                   Marcar todas como leído
-                </p>
+                </p>}
               </NotificationContainer>
               {
                 !openNotification &&

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { ModalContainer, OxxoContainer } from './Modals.styled';
+import { ModalContainer, OxxoContainer, SpeiContainer } from './Modals.styled';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { getImage } from '../../../../components/api/conekta/test';
 
-const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_at }: any) => {
+const SpeiModal = ({ show, setShow, user, product, bank_ref }: any) => {
   const [ref, setRef] = useState("");
 
   const transformDate = (timestamp: any) => {
@@ -23,7 +22,7 @@ const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_a
   }
 
   const downloadReference = () => {
-    let DATA: any = document.getElementById('oxxo');
+    let DATA: any = document.getElementById('spei');
     DATA.classList.add('print');
     html2canvas(DATA).then((canvas) => {
       var imgData = canvas.toDataURL('image/jpeg', 1.0);
@@ -39,7 +38,7 @@ const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_a
       //set image height similar to doc size
       doc.addImage(imgData, 'PNG', 0, 0, doc_w, doc_h);
       DATA.classList.remove('print');
-      doc.save('oxxo.pdf');
+      doc.save('spei.pdf');
     });
   }
 
@@ -49,24 +48,36 @@ const OxxoModal = ({ show, setShow, user, product, barcode, reference, expires_a
 
   return (
     <ModalContainer show={show} onHide={() => { setShow(false) }} centered>
-      <OxxoContainer id="oxxo">
-        <h3>Hola {user.name}</h3>
-        <p>Gonvar Nails te ha enviado una referencia
-          para pago seguro en efectivo con <span>Conekta</span> en <span>tiendas OXXO</span>
-        </p>
-        <p className='p10'>Los pagos en oxxo tardan en reflejarse hasta 48 hrs. <br />
-          Ingresa a la plataforma después de este tiempo para tener validado tu pago</p>
-        <p className='p10'>*La referencia le llegara a su correo electronico.</p>
-        <p className='p12-bold'>Referencia: {reference}</p>
-        <img src={barcode} />
-        <p className='p12'>Monto a pagar:</p>
-        <p className='p18'>${product.price} MXN</p>
-        <p className='p12-bold'>+$14.00 MXN por comisión de OXXO</p>
-        <p className='p12'>Paga antes del {transformDate(expires_at)}.</p>
-        <img style={{ width: "50px" }} src="/images/purchase/oxxo.png" alt="" />
+      <SpeiContainer id="spei">
+        <div className='top'>
+          <img src="/images/purchase/spei.png" alt="" />
+          <div>
+            <p>Monto a pagar</p>
+            <p className='p30'>${product.price} MXN</p>
+          </div>
+        </div>
+        <p className='p18-bold' style={{ paddingLeft: "20px" }}>Clabe:</p>
+        <div className='box'>
+          <p className='p18'>{bank_ref}</p>
+        </div>
+        <p className='p16-bold'>Instrucciones</p>
+        <ol >
+          <li>Ingresa al servicio de banca por internet o al servicio
+            de banca móvil de tu banco.</li>
+          <li>Identifica la opción de transferencia.</li>
+          <li>Realiza la transferencia a la CLABE indicada, por el monto exacto marcado arriba o la transferencia será rechazada.</li>
+          <li>Confirma tu pago en tu banca online, se producirá
+            un comprobante de pago digital. Revisa que haya sido
+            enviado de manera correcta</li>
+        </ol>
+        <div className='box-green'>
+          <p>Al realizar correctamente todos los pasos
+            recibirás una confirmación por email de
+            Gonvar+</p>
+        </div>
         <button onClick={downloadReference}>Descargar</button>
-      </OxxoContainer>
+      </SpeiContainer>
     </ModalContainer>
   )
 }
-export default OxxoModal;
+export default SpeiModal;

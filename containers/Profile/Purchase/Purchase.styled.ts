@@ -396,6 +396,14 @@ export const Container = styled.div`
           border-radius: 30px;
           font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
         }
+        .spei{
+          border: none;
+          background: #272d3a;;
+          color: white;
+          font-size: 30px;
+          border-radius: 30px;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
       .paypal {
         i {
           color: #009cde;

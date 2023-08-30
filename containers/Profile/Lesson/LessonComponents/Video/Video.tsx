@@ -84,8 +84,8 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
     if (user) {
       let temp = {
         courseId: course.id,
-        seasonId: course.seasons[season].id,
-        lessonId: course.seasons[season].lessons[lesson].id,
+        seasonId: course.seasons[season]?.id,
+        lessonId: course.seasons[season]?.lessons[lesson].id,
         userId: user.user_id
       }
       addUserHistory(temp)

@@ -185,7 +185,7 @@ const Lesson = () => {
               eason={season}
               lesson={lesson}
               teacherCreds={course.professors}
-              courseIds={{ courseId: id, seasonId: course.seasons[season].id }}
+              courseIds={{ courseId: id, seasonId: course.seasons[season]?.id }}
               previousLesson={previousLesson}
               nextLesson={nextLesson}
               firstLesson={firstLesson}

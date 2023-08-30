@@ -36645,6 +36645,7 @@ export const activeUsers = [
     "correo": "rociobautist3@outlook.es",
     "pais": "Mexico",
     "whatsapp": 523481065335,
+    "conekta_id": "cus_2uTr3kmVc6D8BkbVV",
     "final_date": 1691120000,
     "level": 1,
     "id": 11539
@@ -53592,17 +53593,6 @@ export const activeUsers = [
     "id": 49674
   },
   {
-    "nombre": "Inowu",
-    "apellido": "Han",
-    "correo": "inowu@dev.com",
-    "pais": "Mexico",
-    "whatsapp": 526623400635,
-    "conekta_id": "cus_2uRxzmW5y1eSojiJ5",
-    "final_date": 1000,
-    "level": 1,
-    "id": 49677
-  },
-  {
     "nombre": "Diego",
     "apellido": "Gauto",
     "correo": "diego@gonvar.io",
@@ -57294,5 +57284,16 @@ export const activeUsers = [
     "final_date": 1724180000,
     "level": 0,
     "id": 51801
-  }
+  },
+  {
+    "nombre": "Elizabeth",
+    "apellido": "de Dios Gerónimo",
+    "correo": "lizydedios93@gmail.com",
+    "pais": "México",
+    "whatsapp": 529371418312,
+    "conekta_id": "cus_2uSGQNiRjdcDEoquz",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 13821
+  },
 ]

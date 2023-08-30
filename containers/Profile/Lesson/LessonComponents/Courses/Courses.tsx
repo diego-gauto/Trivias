@@ -9,7 +9,6 @@ import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideMod
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer, HamburgerContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
-import { LOCK_ICON } from '../../../../../utils/Constants';
 import { CERTIFICATES_PATH } from '../../../../../constants/paths';
 import { updateMembership } from '../../../../../components/api/profile';
 
@@ -17,11 +16,9 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
-  const [seasons, setSeasons] = useState<any>([]);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
-  const [viewed, setViewed] = useState(0);
   const [temp, setTemp] = useState(data);
 
   useEffect(() => {
@@ -51,13 +48,14 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
         if (res.data.data.length === 0) {
           let notification = {
             userId: userData.user_id,
-            message: 'Nuevo certificado',
-            type: 'certificate',
+            type: "11",
             notificationId: '',
             courseId: course.id,
+            season: +season,
+            lesson: +lesson,
             title: course.title,
           }
-          // createNotification(notification);
+          createNotification(notification);
           addUserCertificateApi(tempCertificate);
         } else {
           setCertificate_id(res.data.data[0].id)

@@ -105,3 +105,14 @@ export const delConektaUsers = async (user: string) => {
       return error
     });
 };
+
+export const getImage = async () => {
+  return axios
+    .get("https://barcodes.conekta.com/1fcff263b5076a42b66294ede6fc5c0cf2fa39c4.png")
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};
