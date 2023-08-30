@@ -208,17 +208,7 @@ const Purchase = () => {
         setLoader(false);
         return
       }
-      if (plan.method === 'stripe') {
-        createPaymentMethodApi(card).then((res) => {
-          if (res.status === 400) {
-            setError(true);
-            setErrorMsg("Hay un error en los datos de la tarjeta!")
-            setLoader(false);
-          } else {
-            setCard({ ...card, cardId: res.id, brand: res.card.brand, last4: res.card.last4, status: true })
-          }
-        })
-      } else {
+      if (plan.method === 'conekta') {
         let tempCard = {
           card: {
             number: card.number.replaceAll(" ", ""),
@@ -314,11 +304,6 @@ const Purchase = () => {
           }
         }
         let data = {
-          name: card.holder,
-          number: card.number,
-          exp_month: card.exp_month,
-          exp_year: card.exp_year,
-          cvc: card.cvc,
           id: card.id ? card.id : defaultCard.paymentMethod,
           conekta_id: userData.conekta_id,
           price: price * 100,
@@ -405,11 +390,6 @@ const Purchase = () => {
         if (frequency === "anual") price = "anual";
 
         let data = {
-          name: card.holder,
-          number: card.number,
-          exp_month: card.exp_month,
-          exp_year: card.exp_year,
-          cvc: card.cvc,
           id: card.id ? card.id : defaultCard.paymentMethod,
           conekta_id: userData.conekta_id,
           plan_id: price,

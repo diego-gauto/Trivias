@@ -92,8 +92,6 @@ const CancelFinal = () => {
             })
           } else {
             conektaCancelSubscription(data).then((res) => {
-              console.log(res);
-
               setPop(true)
             })
           }
