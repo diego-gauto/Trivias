@@ -2077,6 +2077,7 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
       }
     `}
   @media (max-width: 1200px) {
+    max-width: 260px;
     min-width: 260px;
     padding-inline: 15px;
   }
@@ -2202,7 +2203,7 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
 export const PaymentMethodContainer = styled.div<{ add: any }>`
   min-width: 60%;
   @media (max-width: 1200px) {
-    min-width: 420px;
+    // min-width: 420px;
     max-width: 420px;
   }
   @media (max-width: 1023px) {

@@ -28,7 +28,7 @@ const title_3 = "PREGUNTAS FRECUENTES";
 const image_3 = "../images/Support/img_3.png";
 const default_text_3_1 = `Dentro de nuestro <b>centro de<br/> preguntas frecuentes</b>, <br/>encontrarás ayuda a las principales dudas de Gonvar.io`;
 const default_text_3_2 = "";
-const button_text_3 = "Preguntas frecuentes";
+const button_text_3 = "PROXIMAMENTE";
 
 export const object_3 = {
   title: title_3,

@@ -46,7 +46,6 @@ const Support = () => {
         <Cards
           card_data={object_3}
           handleAction={sendTo}
-          disable={true}
         />
       </div>
     </SupportContainer>
