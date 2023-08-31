@@ -149,7 +149,7 @@ const Purchase = () => {
 
   const guardCheckout = (userData: any) => {
     let today = new Date().getTime() / 1000;
-    if (router.query.type == "subscription" && (userData.level === 1 || userData.final_date > today)) {
+    if (router.query.type == "subscription" && (userData.level === 1 || userData.final_date > today || userData.level === 3 || userData.level === 4)) {
       window.location.href = PREVIEW_PATH;
     }
   }

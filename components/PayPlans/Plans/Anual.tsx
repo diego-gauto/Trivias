@@ -52,7 +52,7 @@ const Anual = (props: IData) => {
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)
       }
-      if (user.level === 1 && user.final_date < today) {
+      if (user.level > 0 && user.final_date < today) {
         router.push(PREVIEW_PATH)
       }
     }
