@@ -32,7 +32,7 @@ const PaymentFailedSubscriptionMonth = () => {
   }, [userDataAuth])
 
   const goTo = () => {
-    router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+    router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '1' } })
   }
 
   return (

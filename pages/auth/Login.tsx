@@ -336,15 +336,15 @@ const Login = () => {
   const redirect = (userInfo: any) => {
     let today = new Date().getTime() / 1000;
     if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=1`
     } else if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
     else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`
     }
     else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
     }
     else if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`

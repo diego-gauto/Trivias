@@ -159,9 +159,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
           router.push(PREVIEW_PATH)
         } else {
           if (isMonth) {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '1' } })
           } else {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
           }
         }
 

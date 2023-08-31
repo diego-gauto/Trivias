@@ -45,10 +45,8 @@ const Mensual = (props: IData) => {
 
   const goTo = () => {
     if (user.id) {
-      console.log(user.final_date, today, user.level);
-
       if (user.level === 0 && user.final_date < today) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "1" } })
       }
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)

@@ -66,7 +66,7 @@ const BlogView = () => {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual' } })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
       }
     }
     else {

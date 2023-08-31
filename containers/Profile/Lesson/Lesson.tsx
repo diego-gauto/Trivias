@@ -66,7 +66,7 @@ const Lesson = () => {
           if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
             return router.push({
               pathname: PURCHASE_PATH,
-              query: { type: 'subscription' }
+              query: { type: 'subscription', frequency: 'month', v: '1' }
             });
           }
           setCurrentLesson(res.seasons[season].lessons[lesson]);
