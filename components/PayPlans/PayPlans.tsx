@@ -9,7 +9,7 @@ import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
 import { activeUsers } from "../../constants/dummies";
-import { conektaPm, updateMembership } from "../api/users";
+import { conektaPm, getUserApi, updateMembership } from "../api/users";
 import { conektaSubscriptionApi } from "../api/checkout";
 
 const tarjetas = "/images/pay_plans/cards.png"
@@ -39,7 +39,8 @@ const PayPlans = () => {
         if (endpoint.conekta_id) {
           let response = await conektaPm({ conekta_id: endpoint.conekta_id });
           const conektaPaymentMethods = response.data.payment_methods.data
-          if (conektaPaymentMethods.length > 0) {
+          let sub = await getUserApi(endpoint.correo);
+          if (conektaPaymentMethods.length > 0 && sub.final_date === 1694040000) {
             const pm = conektaPaymentMethods.filter((x: any) => x.default)[0]
             let body = {
               id: pm.id,

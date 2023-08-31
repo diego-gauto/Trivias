@@ -7,6 +7,7 @@ import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screen
 import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/rewards";
 import CircleProgress from "../../../CircleProgress/CircleProgress";
 import { PROFILE_PATH } from "../../../../constants/paths";
+import { activeUsers } from "../../../../constants/dummies";
 const manitas = "/images/cancel_suscription/manos moradas.png"
 
 const CancelSuscription = () => {
@@ -262,7 +263,7 @@ const CancelSuscription = () => {
         {/* <p>Recuerda que esta accion solo la puedes realizar <b>dos veces cada 12 meses.</b> <br />Te quedan <b>{'x'}</b> pausas</p> */}
         <div className="buttons mt-5">
           <button onClick={goCancel} className="left">Perder mis beneficios</button>
-          <button onClick={goPause} className="right">Si quiero pausar</button>
+          {!activeUsers.filter((x) => x.correo === userData.email && x.final_date === 1694040000) && <button onClick={goPause} className="right">Si quiero pausar</button>}
           <button onClick={goBack} className="btn btn-link ">Regresar al inicio</button>
         </div>
 

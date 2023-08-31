@@ -116,3 +116,14 @@ export const getImage = async () => {
       return error
     });
 };
+
+export const canelConektaUserArray = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "subscriptions/conekta/array", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};

@@ -15,6 +15,7 @@ import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
 import { REWARDS_PATH } from "../../../constants/paths";
 import { conektaResumeSubscription } from "../../../components/api/profile";
+import { activeUsers } from "../../../constants/dummies";
 
 const or_star = "/images/cancel_modal/or_star.png"
 const gr_star = "/images/cancel_modal/gr_star.png"
@@ -274,7 +275,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
                     <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
                 </div>
             }
-            {(!loader && (user.level > 0 && user.plan_name === "Gonvar Plus")) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus") || (activeUsers.filter((x) => x.correo === user.email && user.final_date === 1694040000).length > 0))) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
             {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Reactivar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
