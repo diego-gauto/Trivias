@@ -13,7 +13,7 @@ import { getCoursesApi } from "../../../components/api/lessons";
 import { getRewardsApi } from "../../../components/api/rewards";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
-import { REWARDS_PATH } from "../../../constants/paths";
+import { REWARDS_PATH, SUPPORT_PATH } from "../../../constants/paths";
 import { conektaResumeSubscription } from "../../../components/api/profile";
 import { activeUsers } from "../../../constants/dummies";
 
@@ -241,6 +241,9 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
         </div>
         <Link href={REWARDS_PATH}>
           <button >Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
+        </Link>
+        <Link href={SUPPORT_PATH}>
+          <button className="help-btn"><p>Ir al <span>Centro de Ayuda </span></p><FaArrowRight /> </button>
         </Link>
       </RewardContainer>
       <SubscriptionContainer>
