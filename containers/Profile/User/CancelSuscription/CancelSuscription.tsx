@@ -8,6 +8,7 @@ import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/r
 import CircleProgress from "../../../CircleProgress/CircleProgress";
 import { PROFILE_PATH } from "../../../../constants/paths";
 import { activeUsers } from "../../../../constants/dummies";
+import { getPausedSubscription } from "../../../../components/api/profile";
 const manitas = "/images/cancel_suscription/manos moradas.png"
 
 const CancelSuscription = () => {
@@ -29,10 +30,17 @@ const CancelSuscription = () => {
     router.push({ pathname: PROFILE_PATH });
   }
   const goPause = () => {
-    router.push({
-      pathname: "/end-suscription",
-      query: { type: "pause" }
-    });
+    getPausedSubscription({ user_id: userData.user_id }).then((res) => {
+      let arr = res.data;
+      if (arr.length === 2) {
+        alert("Alcanzaste el limite de pausas por año")
+      } else {
+        router.push({
+          pathname: "/end-suscription",
+          query: { type: "pause" }
+        });
+      }
+    })
   }
   const goCancel = () => {
     router.push({
@@ -263,7 +271,7 @@ const CancelSuscription = () => {
         {/* <p>Recuerda que esta accion solo la puedes realizar <b>dos veces cada 12 meses.</b> <br />Te quedan <b>{'x'}</b> pausas</p> */}
         <div className="buttons mt-5">
           <button onClick={goCancel} className="left">Perder mis beneficios</button>
-          {!activeUsers.filter((x) => x.correo === userData.email && x.final_date === 1694040000) && <button onClick={goPause} className="right">Si quiero pausar</button>}
+          {activeUsers.filter((x) => x.correo === userData.email && x.final_date === 1694040000).length === 0 && <button onClick={goPause} className="right">Si quiero pausar</button>}
           <button onClick={goBack} className="btn btn-link ">Regresar al inicio</button>
         </div>
 
