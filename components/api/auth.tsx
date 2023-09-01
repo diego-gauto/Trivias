@@ -91,18 +91,6 @@ export const loginWithProviderApi = async (user: any) => {
     });
 };
 
-export const addPastUsers = async (user: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "auth/login-past-users", user)
-    .then((res) => {
-      return res.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
-};
-
 export const updatePastUser = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "auth/register-past-user", user)
