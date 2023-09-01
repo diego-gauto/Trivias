@@ -147,3 +147,15 @@ export const conektaResumeSubscription = async (data: any) => {
       return error
     });
 };
+
+export const getPausedSubscription = async (data: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + `subscriptions/user/${data.user_id}/paused`)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
