@@ -33,49 +33,20 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
       alert('Por favor acomplete todos los campos!');
       setLoader(false);
     } else {
-      const info = {
-        card: card,
-        stripe_id: data.stripe_id,
-      }
-
-      if (data.conekta_id === null) {
-        createPaymentMethod(info).then((res) => {
-          if (res.status === 400) {
-            alert("Hay un error en los datos de la tarjeta!");
-            setLoader(false);
-          } else {
-            let cardInfo = {
-              stripe_id: data.stripe_id,
-              payment_method: res.data.paymentMethod.id
-            }
-            attachPaymentMethod(cardInfo).then((response) => {
-              if (response.status === 400) {
-                alert("Hay un error en los datos de la tarjeta!");
-                setLoader(false);
-              }
-              setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-              newCard();
-              handleClick(true);
-              setLoader(false);
-            })
-          }
-        })
-      } else {
-        let tempCard = {
-          card: {
-            number: card.number.replaceAll(" ", ""),
-            name: card.holder,
-            exp_month: card.exp_month,
-            exp_year: card.exp_year,
-            cvc: card.cvc,
-          }
+      let tempCard = {
+        card: {
+          number: card.number.replaceAll(" ", ""),
+          name: card.holder,
+          exp_month: card.exp_month,
+          exp_year: card.exp_year,
+          cvc: card.cvc,
         }
-        window.Conekta.Token.create(
-          tempCard,
-          conektaSuccessResponseHandler,
-          conektaErrorResponseHandler, 'web'
-        );
       }
+      window.Conekta.Token.create(
+        tempCard,
+        conektaSuccessResponseHandler,
+        conektaErrorResponseHandler, 'web'
+      );
     }
   }
 
@@ -104,17 +75,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
       stripe_id: data.stripe_id,
       conekta_id: data.conekta_id
     }
-    if (data.conekta_id === null) {
-      setDefaultPaymentMethod(body).then(() => {
-        handleClick(true);
-        setDeleteLoad(false);
-      })
-    } else {
-      setDefaultPaymentMethodConekta(body).then((res) => {
-        handleClick(true);
-        setDeleteLoad(false);
-      })
-    }
+    setDefaultPaymentMethodConekta(body).then((res) => {
+      handleClick(true);
+      setDeleteLoad(false);
+    })
   }
 
   const detachPayment = async (card: any) => {
@@ -127,17 +91,10 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
       payment_method: card.id,
       conekta_id: data.conekta_id
     }
-    if (data.conekta_id === null) {
-      detachPaymentMethod(body).then(() => {
-        setDeleteLoad(false);
-        handleClick(true);
-      })
-    } else {
-      detachPaymentMethodConekta(body).then(() => {
-        setDeleteLoad(false);
-        handleClick(true);
-      })
-    }
+    detachPaymentMethodConekta(body).then(() => {
+      setDeleteLoad(false);
+      handleClick(true);
+    })
   }
 
   useEffect(() => {
@@ -146,21 +103,12 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
       stripe_id: data.stripe_id,
       conekta_id: data.conekta_id
     }
-    if (data.conekta_id === null) {
-      stripePm(body).then((res) => {
-        const conektaPaymentMethods = res.data.payment_methods.data
-        const extractedProperties = conektaPaymentMethods.map(({ id, card: { brand }, card: { last4 }, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
-        setPaymentMethods(extractedProperties);
-        setDeleteLoad(false);
-      })
-    } else {
-      conektaPm(body).then((res) => {
-        const conektaPaymentMethods = res.data.payment_methods.data
-        const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
-        setPaymentMethods(extractedProperties);
-        setDeleteLoad(false);
-      })
-    }
+    conektaPm(body).then((res) => {
+      const conektaPaymentMethods = res.data.payment_methods.data
+      const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
+      setPaymentMethods(extractedProperties);
+      setDeleteLoad(false);
+    })
   }, [data])
 
 
