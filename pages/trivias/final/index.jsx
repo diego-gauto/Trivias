@@ -5,6 +5,7 @@ import styles from "./final.module.css";
 
 import Failed from "../../../components/Trivias/final/failed"
 import Success from "../../../components/Trivias/final/success"
+import Beneficios from "../../../components/Trivias/final/beneficios"
 
 const Final = () => {
   const { finalContainer, final, finalTextos, finalVolver, finalImg, link } =
@@ -21,6 +22,7 @@ const Final = () => {
   console.log(success)
 
   return (
+    <>
     <div className={finalContainer}>
       <style jsx global>{`
         body {
@@ -38,12 +40,13 @@ const Final = () => {
           </a>
         </Link>
         {success?<Success></Success>:<Failed></Failed>}
-        
       </div>
       <div className={finalImg}>
         <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
       </div>
     </div>
+          {success && <Beneficios></Beneficios>}
+    </>
   );
 };
 

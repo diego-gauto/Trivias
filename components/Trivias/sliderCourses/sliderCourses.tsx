@@ -1,42 +1,47 @@
-
-const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
+const aplicacionBasica = "/images/trivias/Portadas/Aplicación basica de acrilico.jpg"
+const vipEsculturalBasico = "/images/trivias/Portadas/perfeccionamiento en tips pergo.jpg"
+const perfeccionamientoEnTips = "/images/trivias/Portadas/vip basico rico.jpg"
 
 import styles from "./sliderCourses.module.css";
 
-const SliderCourses = (props: any) => {
+const SliderCourses = () => {
 
-  const { portada, textos, curso, instructor } = styles
+  const { courseContainer, portada, textos, curso, instructor } = styles
 
 
   return (
-    <>
-      <div className="row all-center space">
-        <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
-          <img className={portada} src={cursoBackground} alt="Curso" />
-          <div className={textos}>
-            <p className={curso}>Nombre del curso</p>
-            <p className={instructor}>Nombre del instructor</p>
-          </div>
-        </div>
+    // <div className="row all-center space">
+    <div className={courseContainer}>
 
-        <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
-          <img className={portada} src={cursoBackground} alt="Curso" />
-          <div className={textos}>
-            <p className={curso}>Nombre del curso</p>
-            <p className={instructor}>Nombre del instructor</p>
-          </div>
-        </div>
-
-        <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
-          <img className={portada} src={cursoBackground} alt="Curso" />
-          <div className={textos}>
-            <p className={curso}>Nombre del curso</p>
-            <p className={instructor}>Nombre del instructor</p>
-          </div>
+      {/* <div className="responsive-unset col-lg-4 col-md-6 col-sm-12"> */}
+      <div>
+        <img className={portada} src={aplicacionBasica} alt="Aplicación Básica de Acrílico" />
+        <div className={textos}>
+          <p className={curso}>Aplicación Básica de Acrílico</p>
+          <p className={instructor}>por Arita Gonvar</p>
         </div>
       </div>
-    </>
 
+      {/* <div className="responsive-unset col-lg-4 col-md-6 col-sm-12"> */}
+      <div>
+
+        <img className={portada} src={vipEsculturalBasico} alt="VIP Escultural Básico" />
+        <div className={textos}>
+          <p className={curso}>V.I.P. Escultural Básico</p>
+          <p className={instructor}>por J. Antonio Rico</p>
+        </div>
+      </div>
+
+      {/* // <div className="responsive-unset col-lg-4 col-md-6 col-sm-12"> */}
+      <div>
+
+        <img className={portada} src={perfeccionamientoEnTips} alt="Perfeccionamiento en Tips" />
+        <div className={textos}>
+          <p className={curso}>Perfeccionamiento en Tips</p>
+          <p className={instructor}>por Andrés Pergo</p>
+        </div>
+      </div>
+    </div>
   );
 };
 

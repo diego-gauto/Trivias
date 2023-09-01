@@ -17,7 +17,7 @@
 
 .failedContainer p{
 
-  margin-top: 2%;
+  margin: 2% 0  13px 0;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
@@ -48,7 +48,7 @@
   border: 0;
   font-size: 16px;
   font-weight: 600;
-  margin: 1% 0;
+  margin: 3% 0;
   cursor: pointer;
 
   position: relative;
@@ -63,4 +63,58 @@
   -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all;
   background-color: #5000b5;
+}
+
+@media screen and (max-width: 1080px) {
+
+  .failedContainer .width80{
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+  .failedContainer{
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .failedContainer p{
+    max-width: 80%;
+  }
+
+  .failedContainer .width80{
+    max-width: 80%;
+  }
+
+  .failedContainer .comienza{
+    display: flex;
+    text-align: start;
+    width: 100%;
+  }
+
+  .centrado{
+    padding-left: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  .failedContainer h1{
+    font-size: 40px;
+    line-height: 45px;
+    max-width: 90%;
+  }
+
+  .failedContainer p{
+    max-width: 90%;
+  }
+
+  .failedContainer .width80{
+    max-width: 90%;
+  }
+
 }

@@ -1,7 +1,7 @@
 .inputs {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   width: 300px;
 }
 
@@ -54,26 +54,9 @@
 
 @media screen and (max-width: 1127px) {
 
-  .inputs input {
-
-  max-width: 500px;
-  
+  .inputs{
+    width: 100%;
   }
-
-}
-
-@media screen and (max-width: 800px) {
-
-  .inputs input {
-
-  max-width: 510px;
-  
-  }
-
-}
-
-@media screen and (max-width: 657px) {
-
 
   .inputs input {
 

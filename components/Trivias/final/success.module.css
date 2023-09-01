@@ -1,10 +1,14 @@
-.failedContainer{
+.successContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   max-width: 95%;
+  height: auto;
 }
 
-.failedContainer H1{
+.successContainer H1{
 
-  margin-top: 5%;
+  margin-top: 3%;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
@@ -15,52 +19,101 @@
   color: #992EEA;
 }
 
-.failedContainer p{
+.successContainer p{
 
-  margin-top: 5%;
+  margin: 2% 0  13px 0;
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 22px;
   line-height: 25px;
   text-align:start;
   color: #520795;
 }
 
-.failedContainer .comienza{
+.successContainer .comienza{
   color: #992EEA;
 }
 
-.failedContainer .width80{
-  max-width: 80%;
+.successContainer .width90{
+  max-width: 90%;
 }
 
-.centrado{
-  padding-left: 25%;
+.successContainer .buttonContainer{
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 2%;
 }
 
-.failedContainer button {
+.buttonContainer a {
+  margin: 0 1%; /* Agregar espacio entre los botones */
+}
+
+.buttonContainer button {
   font-family: "Montserrat";
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
   border: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  margin-top: 2%;
   cursor: pointer;
-
   position: relative;
   width: 229px;
   height: 40px;
-
-  align-items: center;
 }
 
-.failedContainer button:hover {
+.successContainer button:hover {
   transform: scale(1.03);
   -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all;
   background-color: #5000b5;
+}
+
+@media screen and (max-width: 950px) {
+
+  .successContainer .buttonContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttonContainer a {
+    margin: 2% 0; /* Agregar espacio entre los botones */
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+  .successContainer .width80{
+    max-width: 100%;
+  }
+
+  .centrado{
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+    .successContainer .buttonContainer{
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .buttonContainer a {
+      margin: 1% 2%; /* Agregar espacio entre los botones */
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+  .successContainer .buttonContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttonContainer a {
+    margin: 2% 0; /* Agregar espacio entre los botones */
+  }
 }

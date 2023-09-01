@@ -1,17 +1,48 @@
+.courseContainer{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2%;
+}
+
 .portada{
   width: 90%;
+  border-radius:10px;
 }
 
 .textos .curso{
   color: #D244D1;
-  font-size: 1.2vw;
-  font-weight: 800;
+  font-size: 65%;
+  font-weight: 600;
   margin-bottom: 3px;
 }
 
 .textos .instructor{
-  font-size: 1.2vw;
+  font-size: 65%;
   font-style: italic;
   margin-top: 0px;
+
+}
+
+@media screen and (max-width: 800px) {
+
+  .courseContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2% 15% 0 15%;
+  }
+
+  .portada{
+   width: 80%;
+  }
+
+  .textos .curso{
+    font-size: 90%;
+  }
+  
+  .textos .instructor{
+    font-size: 90%;
+  
+  }
 
 }

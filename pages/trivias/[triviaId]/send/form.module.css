@@ -8,11 +8,19 @@
 
 .form {
   width: 60%;
-  height: 600px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  /* padding-left: 4%; */
+}
+
+.link {
+  text-decoration: none;
+  display: flex;
   align-items: flex-start;
-  padding-left: 4%;
+  width: 100%;
+  padding-left: 5%;
 }
 
 .volver {
@@ -40,6 +48,7 @@
   width: 90%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .textos h1 {
@@ -49,87 +58,55 @@
   font-style: normal;
   font-weight: 700;
   font-size: 51px;
-  line-height: 62px;
+  line-height: 55px;
   color: #520795;
+  margin-top: 2%;
 }
 
-/* .textos h3 {
+.textos h3 {
+  text-align: center;
   position: relative;
-  height: 56px;
-  max-width: 500px;
-  margin-top: 10px;
+  margin-top: 3%;
+  padding: 0 5%;
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 700;
-  font-size: 23px;
-  line-height: 28px;
-
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 25px;
   color: #520795;
-} */
+  max-width:100%
+}
 
-.textos span {
+.textos h3 span {
   font-weight: 600;
 }
 
 .textos p {
-  position: relative;
   text-align: center;
-  margin-top:0px;
-  margin-bottom: 12px;
+  position: relative;
+  margin-top: 2%;
   font-family: "Montserrat";
-  font-style: normal;
+  font-style: italic;
   font-weight: 500;
   font-size: 17px;
   line-height: 20px;
-  padding: 0 11%;
-
-  color: #520795;
-}
-
-.textos .costo{
-  color: red;
-  font-weight: 600;
-  font-size: 20px;
-  margin-top: 0px;
-}
-
-.textos .verde{
-  color: #16A854;
-  padding: 0 5%;
-}
-
-.tachado{
-  text-decoration: line-through;
-}
-
-.textos .bold{
-  font-size: 36px;
-  font-weight: 600;
-}
-
-.textos .ital{
-  font-style: italic;
-  margin-top: 0;
-}
-
-.textos .nota{
-  padding: 0 4%;
-  font-size: 14px;
+  color: #CD42D3;
 }
 
 .inputContainer {
-  width: 95%;
+  max-width: 80%;
   height: 165px;
-  /* margin-top: 10px; */
+  margin-top: 1%;
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   flex-wrap: wrap;
 }
 
 .checkboxContainer {
   display: flex;
   align-items: flex-start;
-  margin: 0px 0 5px 0;
+  margin: 2% 0 2% 0;
+  padding: 0 2%;
 }
 
 .checkboxContainer input {
@@ -139,11 +116,6 @@
   background-color: white;
   accent-color: #952ced;
 }
-
-/* .checkboxContainer input[type="checkbox"]:checked {
-  background-color: #8a2be2 !important;
-  border-color: #8a2be2 !important;
-} */
 
 .checkboxContainer label {
   margin-left: 24px;
@@ -159,17 +131,6 @@
 
   color: #7a7289;
 }
-
-/* .checkboxContainer label span {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 16px;
-
-  letter-spacing: 0.4px;
-  color: #3f1168;
-} */
 
 .terminos{
   font-family: "Montserrat";
@@ -197,7 +158,7 @@
   /* padding: 15px 25px; */
   font-size: 16px;
   font-weight: 600;
-  margin: 5px 0 10px 0;
+  margin: 3px 0 10px 0;
   cursor: pointer;
 
   position: relative;
@@ -215,7 +176,7 @@
 .formImg {
   position: relative;
   width: 40%;
-  height: 600px;
+  min-height: 600px;
   background-image: url("/images/trivias/mailexitoso.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -225,107 +186,65 @@
 
 .formImg img {
   padding: 40px 10px 0 0;
-
-  /* width: 100%;
-  height: 550px;
-  object-fit: cover; */
-}
-
-.link {
-  text-decoration: none;
 }
 
 
 .errorMessageNombre{
   color: red;
-  position: absolute;
-  width: 229px;
-  top:455px;
-  height: 50px;
+  position: relative;
+  top:-8px;
+  width: 245px;
 }
 
 .errorMessageApellido{
   color: red;
-  position: absolute;
-  width: 229px;
-  top:455px;
-  height: 50px;
+  position: relative;
+  top:-8px;
+  width: 245px;
 }
 
 .errorMessageMail{
   color: red;
-  position: absolute;
+  position: relative;
+  top:-8px;
   width: 300px;
-  top:540px
 }
 
 .errorMessageWA{
   color: red;
-  position: absolute;
+  position: relative;
+  top:-3px;
   width: 300px;
-  top:540px
-}
-
-@media screen and (max-width: 1475px) {
-
-  
-  /* .errorMessageWA, .errorMessageMail{
-    top:520px
-  } */
-
-  .checkboxContainer {
-    margin: 0px 0 5px 0;
-  }
-}
-
-@media screen and (max-width: 1342px) {
-
-  .form .nota {
-    padding: 0 2%;
-  }
 }
 
 @media screen and (max-width: 1313px) {
 
-  .form .nota {
-    padding: 0 1%;
+  .textos h1 {
+    font-size: 45px;
+    line-height: 50px;
   }
-}
-
-@media screen and (max-width: 1290px) {
-
-  .form .ganaste {
-    padding: 0 9%;
+  
+  .textos h3 {
+    font-size: 18px;
+    line-height: 20px;
   }
-}
 
-@media screen and (max-width: 1259px) {
-
-  .form .nota {
-    padding: 0;
+  .textos p {
+    font-size: 15px;
+    line-height: 17px;
   }
-}
 
-@media screen and (max-width: 1227px) {
-
-  .form .ganaste {
-    padding: 0 7%;
+  .inputContainer {
+    max-width: 90%;
   }
+
 }
-
-@media screen and (max-width: 1170px) {
-
-  .form .ganaste {
-    padding: 0 5%;
-  }
-}
-
 
 @media screen and (max-width: 1127px) {
 
-  .form, .formImg {
-    height: 800px;
-  }
+    /* .form, .formImg {
+      min-height: 620px;
+    } */
 
   .formImg{
     background-size: cover;
@@ -333,75 +252,15 @@
   }
 
   .inputContainer{
-    height: auto;
+    height: 330px;
     flex-direction: column;
-    max-width: 100%;
+    width: 80%;
+    margin-bottom: 40px;
   }
-
-  .form .ganaste {
-    padding: 0 2%;
-  }
-  /* .formImg{
-    background-size: auto 100%;
-    background-position: center;
-  }
-
-  .textos h3 {
-    margin-bottom: 25px;
-  }
-  .inputContainer {
-    flex-direction: column;
-    margin-top: 5px;
-  }*/
 
   .checkboxContainer {
-    margin: 35px 0 20px 0;
+    margin: 10px 0;
   }
-
-  .errorMessageNombre{
-    width: 100%;
-    top:420px;
-  }
-  
-  .errorMessageApellido{
-    width: 100%;
-    top:525px;
-  }
-  
-  .errorMessageMail{
-    width: 100%;
-    top:628px
-  }
-  
-  .errorMessageWA{
-    width: 100%;
-    top:733px
-  }
-}
-
-@media screen and (max-width: 1048px) {
-
-
-  .form .ganaste {
-    padding: 0 1%
-  }
-}
-
-@media screen and (max-width: 1027px) {
-
-  .form, .formImg {
-    height: 830px;
-  }
-
-}
-
-@media screen and (max-width: 833px) {
-
-
-  .form, .formImg {
-    height: 850px;
-  }
-
 }
 
 @media screen and (max-width: 800px) {
@@ -415,65 +274,49 @@
     width: 100%;
   }
 
-}
-
-@media screen and (max-width: 381px) {
-
-
-  .form{
-    height: 830px;
-  }
-
-  .errorMessageNombre{
-    top:433px;
-  }
-  
-  .errorMessageApellido{
-    top:538px;
-  }
-  
-  .errorMessageMail{
-    top:639px
-  }
-  
-  .errorMessageWA{
-    top:742px
+  .textos h3 {
+    padding: 0;
   }
 
 }
 
-@media screen and (max-width: 346px) {
+@media screen and (max-width: 430px) {
+
+  .inputContainer {
+    width: 90%;
+  }
+
+}
+
+@media screen and (max-width: 347px) {
+
+  /* .form {
+    min-height: 780px;
+  } */
 
   .textos h1 {
-    font-size: 45px;
+    font-size: 40px;
+    line-height: 45px;
   }
 
-  .textos h3 {
-    height: 50px;
-    font-size: 20px;
-    line-height: 25px;
-    margin-top: 5px;
+  .inputContainer {
+    max-width: 90%;
   }
 
-  .errorMessageNombre{
-    top:423px;
-  }
-  
-  .errorMessageApellido{
-    top:528px;
-  }
-  
   .errorMessageMail{
-    top:629px
+    width: 245px;
   }
   
   .errorMessageWA{
-    top:732px
+    width: 245px;
+  }
+
+  .checkboxContainer {
+    margin-bottom: 20px;
   }
 
   .btnRecibir {
-    margin-top: 15px;
-    width: 90%;
+    max-width: 90%;
   }
 
 }

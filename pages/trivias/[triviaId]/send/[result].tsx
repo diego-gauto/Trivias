@@ -226,7 +226,7 @@ const Form = () => {
             </a>
           </Link>
           <div className={textos}>
-            <h1>¡Felicidades!</h1>
+            {/* <h1>¡Felicidades!</h1>
             <p className={ganaste}>
               Por tu participación <span>ganaste el acceso a más de 63 cursos de uñas y belleza </span>
               en línea con un descuento especial
@@ -235,7 +235,10 @@ const Form = () => {
             <p className={`${verde} ${bold}`} > Sólo $1,599.00 MXN</p>
             <p className={`${verde} ${ital}`}>(Acceso por un año)</p>
             <p className={nota}>Nota: Una vez que rellenes el formulario te llegará un correo con la información del programa
-              y también podrás reclamar tu acceso al hacer click en “Reclamar suscripción”</p>
+              y también podrás reclamar tu acceso al hacer click en “Reclamar suscripción”</p> */}
+            <h1>¡Completa el formulario!</h1>
+            <h3>Una vez que envíes el formulario, <span>te llegará un correo</span> con tus resultados completos y además te daremos acceso a <span>más de 63 cursos en línea por un precio especial.</span></h3>
+            <p>Podrás reclamar tu acceso haciendo click en el botón de abajo.</p>
           </div>
           <form onSubmit={formik.handleSubmit} className={inputContainer}>
             <div>
@@ -310,7 +313,7 @@ const Form = () => {
             disabled={!isChecked}
             onClick={() => handleButtonClick()}
           >
-            Recibir regalo
+            Reclamar suscripción
           </button>
         </div>
         <div className={formImg}>
