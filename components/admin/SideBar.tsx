@@ -78,6 +78,9 @@ const SideBar = ({ show, onHide }: any) => {
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Cancel") {
         setIndex(10)
       }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Pause") {
+        setIndex(11)
+      }
     }, [])
   } catch (error) {
   }
@@ -181,6 +184,12 @@ const SideBar = ({ show, onHide }: any) => {
               setIndex(5)
               onHide()
             }}>Users</li>
+          </Link>}
+          {(isSuperAdmin || isUsers) && <Link href="/admin/Pause">
+            <li style={{ color: index == 11 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(11)
+              onHide()
+            }}>Pause Review</li>
           </Link>}
           {(isSuperAdmin || isUsers) && <Link href="/admin/Cancel">
             <li style={{ color: index == 10 ? "#ffa500" : "#fff" }} onClick={() => {
