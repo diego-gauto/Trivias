@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { ModalContainer, InfoContainer } from '../../../components/Error/ErrorModal.styled';
 import { InputCard, WhiteLoader } from '../../../containers/Profile/User/User.styled';
-import { attachPaymentMethod, attachPaymentMethodConekta, createPaymentMethod } from '../../../components/api/profile';
+import { attachPaymentMethodConekta } from '../../../components/api/profile';
 import { IoClose } from 'react-icons/io5';
 declare let window: any
 const ActiveUserConekta = ({ ondHide, show, user }: any) => {
-  const [open, setOpen] = useState<boolean>(false);
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });

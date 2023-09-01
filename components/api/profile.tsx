@@ -1,17 +1,5 @@
 import axios from "axios";
 
-export const createPaymentMethod = async (data: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "profile/create-payment-method", data)
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-};
-
 export const attachPaymentMethod = async (data: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "profile/attach-payment-method", data)

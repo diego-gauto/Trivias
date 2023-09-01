@@ -8,8 +8,8 @@ import {
 } from "./User.styled";
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { attachPaymentMethod, attachPaymentMethodConekta, createPaymentMethod, detachPaymentMethod, detachPaymentMethodConekta, setDefaultPaymentMethod, setDefaultPaymentMethodConekta } from "../../../components/api/profile";
-import { conektaPm, stripePm } from "../../../components/api/users";
+import { attachPaymentMethodConekta, detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../../../components/api/profile";
+import { conektaPm } from "../../../components/api/users";
 import PaymentMethodModal from "../../../components/PaymentMethodModal/PaymentMethodModal";
 declare let window: any
 

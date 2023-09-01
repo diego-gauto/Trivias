@@ -1,16 +1,5 @@
 import axios from "axios";
 
-export const createPaymentMethodApi = async (card: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "users/create-payment-method", card)
-    .then((res) => {
-      return { card: res.data.paymentMethod.card, id: res.data.paymentMethod.id };
-    })
-    .catch((error) => {
-      return error.response
-    });
-};
-
 export const stripeSubscriptionApi = async (data: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "checkout/subscription-stripe", data)

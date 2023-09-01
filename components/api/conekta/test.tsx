@@ -50,17 +50,6 @@ export const conektaCreateSubscription = async () => {
     });
 };
 
-export const getStripeInfo = async (user: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "users/search/stripe/customer", user)
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      return error
-    });
-};
-
 export const updateConektaInfo = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "auth/conekta", user)
