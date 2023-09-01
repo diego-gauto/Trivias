@@ -16,11 +16,7 @@ import {
   conektaSpeiApi,
   conektaSubscriptionApi,
   createInvoiceApi,
-  createPaymentMethodApi,
-  deleteSubscriptionAfterCreation,
   getCourseForCheckoutApi,
-  stripePaymentApi,
-  stripeSubscriptionApi,
 } from "../../../components/api/checkout";
 import { conektaPm, getUserApi, updateMembership } from "../../../components/api/users";
 import ErrorModal from "../../../components/Error/ErrorModal";

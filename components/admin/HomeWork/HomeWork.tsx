@@ -1,12 +1,8 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { getTeacher } from '../../../store/actions/courseActions';
-import { addCourseMembershipApi } from '../../api/admin';
-import { addPastUsers, testApi } from '../../api/auth';
 import { getCoursesApi } from '../../api/courses';
 import { getHomeworksApi } from '../../api/homeworks';
-import { addUserCertificateApi, getCourseApi } from '../../api/lessons';
-import { addPastUserProgress, getPastUsers, getUserApi } from '../../api/users';
+import { getUserApi } from '../../api/users';
 import { CaretD2, Label2 } from '../Courses/Form/Select/SelectStyles.styled';
 import { Option, OptionContain, SelectContain, Selected } from '../Pay/Select/Select.styled';
 import { AdminContain } from '../SideBar.styled';

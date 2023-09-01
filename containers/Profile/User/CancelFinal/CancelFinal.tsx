@@ -84,20 +84,7 @@ const CancelFinal = () => {
           })
           return
         }
-        if (userData.method == 'stripe') {
-          let sub = {
-            subscriptionId: userData.plan_id,
-            userId: userData.user_id,
-            planName: ""
-          }
-          if (type === 'pause') {
-
-          } else {
-            cancelStripe(sub).then(() => {
-              setPop(true)
-            })
-          }
-        } else if (userData.method === "conekta") {
+        if (userData.method === "conekta") {
           let data = { conekta_id: userData.conekta_id, plan_id: userData.plan_id }
           if (type === 'pause') {
             conektaPausedSubscription(data).then((res) => {
