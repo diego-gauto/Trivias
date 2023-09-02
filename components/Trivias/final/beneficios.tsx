@@ -1,14 +1,18 @@
 import Link from "next/link";
 
 import styles from "./beneficios.module.css";
+import BeneficiosCardContainer from "./beneficiosCardContainer";
 
 const Beneficios = () => {
-  const { beneficiosContainer, recuerda, comienza, centrado, width90, buttonContainer } = styles;
+  const { beneficiosContainer, containerTitle, textContainer, img, titulo, buttonContainer } = styles;
 
   return (
     <div className={beneficiosContainer}>
-      <h1>Algunos beneficios Incluidos en </h1>
-      <h2>componente de fotos</h2>
+      <div className={containerTitle}>
+        <h2 className={titulo}>Algunos beneficios Incluidos en </h2>
+        <img className={img} src="/images/trivias/Logo Gonvar degradado.svg" alt="" />
+      </div>
+      <BeneficiosCardContainer></BeneficiosCardContainer>
       <Link href={`/`}>
         <a>
           <button>Más información</button>

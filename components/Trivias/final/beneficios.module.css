@@ -1,14 +1,14 @@
 .beneficiosContainer{
-  max-width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #ece7f2;
 }
 
-.beneficiosContainer H1{
-
-  margin-top: 5%;
+.beneficiosContainer H2{
+  flex:1;
+  margin:0;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
@@ -17,6 +17,26 @@
   text-align: center;
 
   color: #992EEA;
+}
+
+.beneficiosContainer .containerTitle{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
+
+    .titulo {
+      margin: 0; /* Elimina los márgenes del h2 para evitar espacios innecesarios */
+    }
+
+    .titulo::after{
+      content: ""; /* Crea un elemento virtual */
+      display: inline;
+    }
+
+    .img {
+      margin-left: 5px; /* Añade un margen izquierdo para separar la imagen del texto */
+    }
+    
 }
 
 .beneficiosContainer p{
@@ -55,7 +75,7 @@
   border: 0;
   font-size: 14px;
   font-weight: 600;
-  margin: 1% 3%;
+  margin: 10% 0;
   cursor: pointer;
 
   position: relative;

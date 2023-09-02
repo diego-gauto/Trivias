@@ -45,7 +45,7 @@ const Final = () => {
         <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
       </div>
     </div>
-          {success && <Beneficios></Beneficios>}
+    {success && <Beneficios></Beneficios>}
     </>
   );
 };
