@@ -9,6 +9,7 @@ import {
   PAYMENT_REMINDER_ANUALY,
   PAYMENT_REMINDER_MONTHLY,
   PAYMETN_SUCCESS_ICON,
+  PENDING_HOMEWORK_ICON,
   PENDING_ICON,
   REWARD_ICON,
 } from "./Constants";
@@ -111,6 +112,8 @@ export const returnNotificationImage = (notification: any) => {
     return BENEFIT_ICON;
   } else if (notification.type === "13") {
     return REWARD_ICON;
+  } else if (notification.type === "14") {
+    return PENDING_HOMEWORK_ICON;
   } else {
     return "";
   }
@@ -143,6 +146,8 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return "¡Felicidades! Has recibido un nuevo beneficio";
   } else if (notification.type === "13") {
     return `¡Nueva recompensa disponible!`;
+  } else if (notification.type === "14") {
+    return `Tienes una tarea pendiente`;
   } else {
     return "";
   }
@@ -179,6 +184,8 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return "Revisa tu sección de recompensas para conocer más sobre los nuevos beneficios que obtuviste.";
   } else if (notification.type === "13") {
     return `Hasta ahora has acumulado ${notification.score} puntos. Ahora puedes solicitar una nueva recompensa.`;
+  } else if (notification.type === "14") {
+    return `Tienes tarea pendiente de tu curso ${notification.title}.`;
   } else {
     return "";
   }

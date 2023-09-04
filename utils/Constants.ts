@@ -15,3 +15,4 @@ export const COURSE_CREATED_ICON = "../images/notifications/not_10.png";
 export const CERTIFICATE_ICON = "../images/notifications/not_11.png";
 export const BENEFIT_ICON = "../images/notifications/not_12.png";
 export const REWARD_ICON = "../images/notifications/not_13.png";
+export const PENDING_HOMEWORK_ICON = "../images/notifications/not_14.png";

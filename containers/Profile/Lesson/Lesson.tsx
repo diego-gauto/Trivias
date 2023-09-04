@@ -9,6 +9,7 @@ import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
 import { getCourseApi } from "../../../components/api/lessons";
 import ActivityModal from "./ActivityModal/ActivityModal";
+import { createNotification, getNotifications } from "../../../components/api/notifications";
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -45,8 +46,25 @@ const Lesson = () => {
     setShow(false)
   }
   const openActivityModal = () => {
+    let notification = {
+      userId: userDataAuth.user.user_id,
+      type: "14",
+      notificationId: '',
+      courseId: id,
+      season: +season,
+      lesson: +lesson,
+      title: course.title,
+    }
+    getNotifications({ userId: userDataAuth.user.user_id }).then((res) => {
+      if (res.filter((x: any) => x.course_id !== null &&
+        x.type === "14" &&
+        x.course_id === id).length === 0) {
+        createNotification(notification);
+      }
+    })
     setShow(true)
   }
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {

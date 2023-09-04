@@ -104,9 +104,10 @@ const NavBar = () => {
 
   const userNotifications = (userId: any) => {
     let data = {
-      userId: userId
+      userId: userId,
+      conekta_id: userDataAuth.user.conekta_id
     }
-    retrieveConektaCustomerInfo(userDataAuth.user.conekta_id)
+    retrieveConektaCustomerInfo(data)
     getNotifications(data).then((res) => {
       let tempCounter = 0;
       res.forEach((not: any) => {

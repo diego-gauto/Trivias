@@ -148,9 +148,9 @@ export const getPausedSubscription = async (data: any) => {
     });
 };
 
-export const retrieveConektaCustomerInfo = async (conekta_id: string) => {
+export const retrieveConektaCustomerInfo = async (data: any) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + `profile/conekta/${conekta_id}`)
+    .get("https://gonvar.inowu.dev/" + `profile/conekta/${data.conekta_id}/user/${data.userId}`)
     .then((res) => {
       return res;
     })
