@@ -135,6 +135,7 @@ export const SuscriptionContain = styled.div`
 				justify-content: center;
 				flex-wrap: wrap;
 				button {
+					white-space: nowrap;
 					font-style: italic;
 					margin-inline: 10px;
 					border: none;
@@ -1068,7 +1069,7 @@ export const SuscriptionContain = styled.div`
 				.center {
 					gap: 10px;
 					button {
-						width: 165px;
+						width: 195px;
 						padding-inline: unset;
 					}
 				}
@@ -1532,7 +1533,7 @@ export const SuscriptionContain = styled.div`
 				.center {
 					gap: 8px;
 					button {
-						width: 142px;
+						width: 155px;
 						font-size: 14px !important;
 					}
 				}
