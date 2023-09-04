@@ -22,7 +22,7 @@ import {
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
 import { createNotification, getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
-import { updateMembership } from "../api/profile";
+import { retrieveConektaCustomerInfo, updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -106,6 +106,7 @@ const NavBar = () => {
     let data = {
       userId: userId
     }
+    retrieveConektaCustomerInfo(userDataAuth.user.conekta_id)
     getNotifications(data).then((res) => {
       let tempCounter = 0;
       res.forEach((not: any) => {
@@ -383,7 +384,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            {/* <div className="bell-contain">
+            <div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -422,7 +423,7 @@ const NavBar = () => {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div> */}
+            </div>
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {

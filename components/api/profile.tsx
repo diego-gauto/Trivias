@@ -147,3 +147,15 @@ export const getPausedSubscription = async (data: any) => {
       return error
     });
 };
+
+export const retrieveConektaCustomerInfo = async (conekta_id: string) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + `profile/conekta/${conekta_id}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
