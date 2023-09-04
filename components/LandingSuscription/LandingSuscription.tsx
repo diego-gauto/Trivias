@@ -230,9 +230,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <div className="all-center space">
           <div className="group-buttons">
             <div className="center">
-              <button className={`${cursos === 1 && 'select'}`} onClick={() => setCursos(1)}>Curso de Arte</button>
-              <button className={`${cursos === 2 && 'select'}`} onClick={() => setCursos(2)}>Curso de Estructura</button>
-              <button className={`${cursos === 3 && 'select'}`} onClick={() => setCursos(3)}>Curso de Maquillaje</button>
+              <button className={`${cursos === 1 && 'select'}`} onClick={() => setCursos(1)}>Cursos de Arte</button>
+              <button className={`${cursos === 2 && 'select'}`} onClick={() => setCursos(2)}>Cursos de Estructura</button>
+              <button className={`${cursos === 3 && 'select'}`} onClick={() => setCursos(3)}>Cursos de Maquillaje</button>
             </div>
           </div>
         </div>

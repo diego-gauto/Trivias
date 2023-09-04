@@ -2,21 +2,17 @@
 import { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
+
+import router from "next/router";
+
+import { getAllRewardDataApi, getRewardsApi } from "../../../components/api/rewards";
+import { getUserApi } from "../../../components/api/users";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getRewards } from "../../../store/actions/RewardActions";
-import {
-  BackgroundProfile,
-  SecondBox,
-  ThirdBox,
-} from "../../Profile/User/User.styled";
+import { BackgroundProfile, SecondBox, ThirdBox } from "../../Profile/User/User.styled";
+import { History } from "./History";
 import NextReward from "./NextReward";
 import PaymentMethod from "./PaymentMethod";
 import UserInfo from "./UserInfo";
-import { History } from "./History";
-import { getNextCertificate } from "../../../store/actions/courseActions";
-import { getUserApi } from "../../../components/api/users";
-import { getAllRewardDataApi, getRewardsApi } from "../../../components/api/rewards";
-import router from "next/router";
 
 const User = () => {
   let today = new Date().getTime() / 1000;
@@ -166,11 +162,20 @@ const User = () => {
     setCertificateProgress(progressCertificates);
     setNextCertificate(nextCourseCertificate);
     await getTimeReward(timeRewardData).then((timeReward) => {
-      setTimeProgress(timeReward.progressMonth);
-      setTimePrize(timeReward.monthFilter[0]);
-      setLastTimeReward(timeReward.monthRewardCompleted)
-      setLoading(false);
-      setMissingData(missingData + 1);
+      if (monthPercentage === 0) {
+        setTimeProgress(0);
+        setTimePrize([]);
+        setLastTimeReward([])
+        setLoading(false);
+        setMissingData(missingData + 1);
+      } else {
+        setTimeProgress(timeReward.progressMonth);
+        setTimePrize(timeReward.monthFilter[0]);
+        setLastTimeReward(timeReward.monthRewardCompleted)
+        setLoading(false);
+        setMissingData(missingData + 1);
+
+      }
     })
 
   }

@@ -135,13 +135,14 @@ export const SuscriptionContain = styled.div`
 				justify-content: center;
 				flex-wrap: wrap;
 				button {
+					width: 220px;
 					white-space: nowrap;
 					font-style: italic;
 					margin-inline: 10px;
 					border: none;
 					border-radius: 16px;
 					color: white;
-					padding-inline: 65px;
+					text-align: center;
 					background-image: linear-gradient(to right bottom, #aa1bc4, #eb7c2d);
 				}
 				.select {
@@ -1068,10 +1069,6 @@ export const SuscriptionContain = styled.div`
 				width: 100%;
 				.center {
 					gap: 10px;
-					button {
-						width: 195px;
-						padding-inline: unset;
-					}
 				}
 			}
 			h5 {

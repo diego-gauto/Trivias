@@ -1,23 +1,27 @@
-import { googleLogout } from "@react-oauth/google";
-import { getAuth, reload, signOut, updatePassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+
+import { useFacebook } from "react-facebook";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
+
+import { getAuth } from "firebase/auth";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+
+import { googleLogout } from "@react-oauth/google";
+
 import { updateUserInfo } from "../../../components/api/users";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
+import { useAuth } from "../../../hooks/useAuth";
 import { updateProfileImage } from "../../../store/actions/UserActions";
-import { FacebookProvider, useLogin, useFacebook } from 'react-facebook';
 import {
+  Box2,
+  InputPhone,
   PictureContain,
   ProfileIcon,
   ProfileMainContainer,
-  InputPhone,
-  Box2,
   ProfileText,
 } from "./User.styled";
-import { io } from "socket.io-client";
-import { useAuth } from "../../../hooks/useAuth";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
+
 const { getCode, getName } = require('country-list');
 
 const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgress, data, reward, responsive1023, starPosition, timeLevel, nextCertificate, certificateProgress }: any) => {
@@ -234,9 +238,15 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     nextCertificate
                       ?
                       (
-                        nextCertificate.lessonsLeft === 1
-                          ? "Estás a " + nextCertificate.lessonsLeft + " lección"
-                          : "Estás a " + nextCertificate.lessonsLeft + " lecciones"
+                        nextCertificate.lessonsLeft === 0
+                          ? 'Estás a algunas tareas'
+                          : <>
+                            {
+                              nextCertificate.lessonsLeft === 1 ? "Estás a " + nextCertificate.lessonsLeft + " lección"
+                                : "Estás a " + nextCertificate.lessonsLeft + " lecciones"
+
+                            }
+                          </>
                       )
                       : "Mira lecciones "
                   }
@@ -246,7 +256,6 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     ? <><br /> de un nuevo <br /> certificado</>
                     : <><br /> para obtener <br /> certificados!</>
                 }
-
               </>
             }
           </p>
