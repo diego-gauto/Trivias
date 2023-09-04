@@ -6,6 +6,8 @@ import {
   HWK_APPROVED_ICON,
   HWK_FAILED_ICON,
   PAYMENT_FAILED_ICON,
+  PAYMENT_REMINDER_ANUALY,
+  PAYMENT_REMINDER_MONTHLY,
   PAYMETN_SUCCESS_ICON,
   PENDING_ICON,
   REWARD_ICON,
@@ -92,9 +94,9 @@ export const returnNotificationImage = (notification: any) => {
   } else if (notification.type === "4") {
     return "abril";
   } else if (notification.type === "5") {
-    return "mayo";
+    return PAYMENT_REMINDER_MONTHLY;
   } else if (notification.type === "6") {
-    return "junio";
+    return PAYMENT_REMINDER_ANUALY;
   } else if (notification.type === "7") {
     return PENDING_ICON;
   } else if (notification.type === "8") {
@@ -124,9 +126,9 @@ export const returnNotificationTitles = (notification: any, name: any) => {
   } else if (notification.type === "4") {
     return `!Hola ${name}!`;
   } else if (notification.type === "5") {
-    return "mayo";
+    return "Tu suscripción mensual está por renovarse.";
   } else if (notification.type === "6") {
-    return "junio";
+    return "Tu suscripción anual está por renovarse.";
   } else if (notification.type === "7") {
     return "Tienes un curso pendiente";
   } else if (notification.type === "8") {
@@ -156,9 +158,13 @@ export const returnNotificationMessage = (notification: any, user: any) => {
   } else if (notification.type === "4") {
     return `${user} le dio like a tu comentario.`;
   } else if (notification.type === "5") {
-    return "mayo";
+    return `Tu suscripción a Gonvar+ está próxima a renovarse el ${new Date(
+      notification.due_date * 1000
+    ).toLocaleDateString()}.`;
   } else if (notification.type === "6") {
-    return "junio";
+    return `Tu suscripción anual se renovará el ${new Date(
+      notification.due_date * 1000
+    ).toLocaleDateString()} de manera automática.`;
   } else if (notification.type === "7") {
     return `${user} no olvides terminar el curso de ${notification.title}, podrás solicitar tu certificado al terminar.`;
   } else if (notification.type === "8") {
