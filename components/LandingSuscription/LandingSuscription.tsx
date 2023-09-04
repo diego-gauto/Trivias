@@ -2,20 +2,21 @@
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+import { useMediaQuery } from "react-responsive";
 
 import router from "next/router";
 import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { ANUAL_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../api/admin";
-import { getLandingCoursesApi } from "../api/lessons";
+import { getAllCourseDataApi } from "../api/lessons";
 import { getUserApi } from "../api/users";
 import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
-import { useMediaQuery } from "react-responsive";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -102,8 +103,11 @@ const LandingSuscription = (props: ILandingSuscription) => {
   const { price, isMonth } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
+  const [cursos, setCursos] = useState(1)
   const responsive650 = useMediaQuery({ query: "(max-width: 650px)" });
-  const [courseGonvarPlus, setCourseGonvarPlus] = useState([])
+  const [courseArt, setCourseArt] = useState([])
+  const [courseEst, setCourseEst] = useState([])
+  const [courseMake, setCourseMake] = useState([])
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -132,8 +136,11 @@ const LandingSuscription = (props: ILandingSuscription) => {
       });
       setReviews(reviewData);
     })
-    getLandingCoursesApi(null).then((data) => {
-      setCourseGonvarPlus(data.gonvar_courses.slice(0, 3));
+    // coursesAll(null);
+    getAllCourseDataApi(null).then((data) => {
+      setCourseArt(data.art_courses)
+      setCourseEst(data.structure_courses)
+      setCourseMake(data.makeup_courses)
     })
   }
 
@@ -176,6 +183,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
       router.push(SIGNUP_PATH)
     }
   }
+
   return (
     <SuscriptionContain>
       <div className="extra-header">
@@ -222,32 +230,148 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <div className="all-center space">
           <div className="group-buttons">
             <div className="center">
-              <button className="select">Tips</button>
-              <button>Escultural</button>
-              <button>Mano Alzada</button>
-              <button>Stamping</button>
-              <button>3D</button>
-              <button>Micropintura</button>
-              <button>Manicura</button>
-              <button>Maquillaje</button>
-              <button>Pedicura</button>
+              <button className={`${cursos === 1 && 'select'}`} onClick={() => setCursos(1)}>Curso de Arte</button>
+              <button className={`${cursos === 2 && 'select'}`} onClick={() => setCursos(2)}>Curso de Estructura</button>
+              <button className={`${cursos === 3 && 'select'}`} onClick={() => setCursos(3)}>Curso de Maquillaje</button>
             </div>
           </div>
         </div>
 
-        {courseGonvarPlus.length > 0 ?
-          <div className="row all-center space">
-            {courseGonvarPlus.map((e: any, index: number) => {
-              return (
-                <div className="responsive-unset col-lg-4 col-md-6 col-sm-12" key={"data-landing-" + index}>
-                  <img src={e.image} alt="Curso" className="thumbnail" />
-                  <p><b className="p-pink">{e.title} </b><br />
-                    <i>{e.professors[0].name}</i></p>
-                </div>
-              )
-            })}
-
+        {cursos === 1 && courseArt.length > 0 &&
+          <div className="course-container all-center">
+            <div className="next courses-prev"><MdArrowBackIosNew className="icon" /></div>
+            <Swiper
+              className="no-res"
+              slidesPerView={3}
+              spaceBetween={15}
+              navigation={{
+                nextEl: '.courses-next',
+                prevEl: '.courses-prev',
+              }}
+              modules={[Navigation]}>
+              {courseArt.map((e: any, index: number) => {
+                return (
+                  <SwiperSlide key={"data-landing-" + index}>
+                    <img src={e.image} alt="Curso" className="thumbnail" />
+                    <p><b className="p-pink">{e.title} </b><br />
+                      <i>{e.professors[0].name}</i></p>
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+            <Swiper
+              className="res"
+              slidesPerView={1}
+              spaceBetween={15}
+              navigation={{
+                nextEl: '.courses-next',
+                prevEl: '.courses-prev',
+              }}
+              modules={[Navigation]}>
+              {courseArt.map((e: any, index: number) => {
+                return (
+                  <SwiperSlide key={"data-landing-" + index}>
+                    <img src={e.image} alt="Curso" className="thumbnail" />
+                    <p><b className="p-pink">{e.title} </b><br />
+                      <i>{e.professors[0].name}</i></p>
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+            <div className="next courses-next"><MdArrowForwardIos className="icon" /></div>
           </div>
+        }
+        {cursos === 2 && courseEst.length > 0 &&
+          <div className="course-container all-center">
+            <div className="next courses-prev"><MdArrowBackIosNew className="icon" /></div>
+            <Swiper
+              className="no-res"
+              slidesPerView={3}
+              spaceBetween={15}
+              navigation={{
+                nextEl: '.courses-next',
+                prevEl: '.courses-prev',
+              }}
+              modules={[Navigation]}>
+              {courseEst.map((e: any, index: number) => {
+                return (
+                  <SwiperSlide key={"data-landing-" + index}>
+                    <img src={e.image} alt="Curso" className="thumbnail" />
+                    <p><b className="p-pink">{e.title} </b><br />
+                      <i>{e.professors[0].name}</i></p>
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+            <Swiper
+              className="res"
+              slidesPerView={1}
+              spaceBetween={15}
+              navigation={{
+                nextEl: '.courses-next',
+                prevEl: '.courses-prev',
+              }}
+              modules={[Navigation]}>
+              {courseEst.map((e: any, index: number) => {
+                return (
+                  <SwiperSlide key={"data-landing-" + index}>
+                    <img src={e.image} alt="Curso" className="thumbnail" />
+                    <p><b className="p-pink">{e.title} </b><br />
+                      <i>{e.professors[0].name}</i></p>
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+            <div className="next courses-next"><MdArrowForwardIos className="icon" /></div>
+          </div>
+        }
+        {cursos === 3 && courseMake.length > 0 &&
+          <div className="course-container all-center">
+            <div className="next courses-prev"><MdArrowBackIosNew className="icon" /></div>
+            <Swiper
+              className="no-res"
+              slidesPerView={3}
+              spaceBetween={15}
+              navigation={{
+                nextEl: '.courses-next',
+                prevEl: '.courses-prev',
+              }}
+              modules={[Navigation]}>
+              {courseMake.map((e: any, index: number) => {
+                return (
+                  <SwiperSlide key={"data-landing-" + index}>
+                    <img src={e.image} alt="Curso" className="thumbnail" />
+                    <p><b className="p-pink">{e.title} </b><br />
+                      <i>{e.professors[0].name}</i></p>
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+            <Swiper
+              className="res"
+              slidesPerView={1}
+              spaceBetween={15}
+              navigation={{
+                nextEl: '.courses-next',
+                prevEl: '.courses-prev',
+              }}
+              modules={[Navigation]}>
+              {courseMake.map((e: any, index: number) => {
+                return (
+                  <SwiperSlide key={"data-landing-" + index}>
+                    <img src={e.image} alt="Curso" className="thumbnail" />
+                    <p><b className="p-pink">{e.title} </b><br />
+                      <i>{e.professors[0].name}</i></p>
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+            <div className="next courses-next"><MdArrowForwardIos className="icon" /></div>
+          </div>
+        }
+
+        {/* {courseGonvarPlus.length > 0 ?
+          
           :
           <div className="row all-center space">
             <div className="responsive-unset col-lg-4 col-md-6 col-sm-12">
@@ -267,7 +391,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               <p><b className="p-pink">Nombre del curso </b><br />
                 <i>Nombre del instructor</i></p>
             </div>
-          </div>}
+          </div>} */}
         <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comienza ahora!</button>
         <h5 className="p-pink"><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
       </div>
