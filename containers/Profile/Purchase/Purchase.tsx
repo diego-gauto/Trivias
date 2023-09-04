@@ -403,7 +403,7 @@ const Purchase = () => {
               userId: userData.user_id,
               type: "8",
               notificationId: '',
-              amount: price,
+              amount: product.price,
               productName: product.title
             }
             await createNotification(notification);
