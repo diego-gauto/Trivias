@@ -162,7 +162,7 @@ const LandingNailsMaster = () => {
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
-          <h2 className="big-text "><b>Nail's Master </b><br />
+          <h2 className="big-text "><b>Nail's Master </b>
             <b className="light-p">2.0</b></h2>
           <h2 className="subtitle"><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
         </div>

@@ -89,7 +89,7 @@ const Individual = (props: IData) => {
 
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="green m-0">3 meses de acceso a Nails Master Revolution</p>
+              <p className="green m-0">3 meses de acceso a Nails Master 2.0</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-green" />
                 : <BsChevronDown className="tip-icon Back-green" />}
             </div>
