@@ -163,7 +163,7 @@ const LandingNailsMaster = () => {
         <img src={nailPintura} className="left-img" />
         <div className="space">
           <h2 className="big-text "><b>Nail's Master </b><br />
-            <b className="light-p">Revolution</b></h2>
+            <b className="light-p">2.0</b></h2>
           <h2 className="subtitle"><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
         </div>
 
@@ -677,7 +677,7 @@ const LandingNailsMaster = () => {
       <div className="subject-section">
         <img src={linesB} className="up-l" />
         <h2 className="title-ppal bold">TEMARIO</h2>
-        <h4>Conoce todo lo que aprenderás {responsive850 && <br />}en <b>Nail Master Revolution</b></h4>
+        <h4>Conoce todo lo que aprenderás {responsive850 && <br />}en <b>Nail Master 2.0</b></h4>
         <div className="subject-container">
           <div className="side">
             <div className="subject">
