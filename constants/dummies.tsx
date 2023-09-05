@@ -34934,16 +34934,6 @@ export const activeUsers = [
     "id": 7988
   },
   {
-    "nombre": "Maria de los Angeles",
-    "apellido": "Lindero Gonzalez",
-    "correo": "angylinda3212@gmail.com",
-    "pais": "Mexico",
-    "whatsapp": 525575620436,
-    "final_date": 1692320000,
-    "level": 1,
-    "id": 8002
-  },
-  {
     "nombre": "Betzayda",
     "apellido": "Barrientos Rios",
     "correo": "betbari261@gmail.com",
@@ -36980,16 +36970,6 @@ export const activeUsers = [
     "id": 12451
   },
   {
-    "nombre": "Araceli",
-    "apellido": "Melchor",
-    "correo": "cheli181200@gmail.com",
-    "pais": "Mexico",
-    "whatsapp": 522231312693,
-    "final_date": 1691120000,
-    "level": 1,
-    "id": 12520
-  },
-  {
     "nombre": "Gloria Gabriela",
     "apellido": "Callejas Velázquez",
     "correo": "gloria302231@gmail.com",
@@ -37356,16 +37336,6 @@ export const activeUsers = [
     "id": 13787
   },
   {
-    "nombre": "Elizabeth",
-    "apellido": "de Dios Gerónimo",
-    "correo": "lizydedios93@gmail.com",
-    "pais": "Mexico",
-    "whatsapp": 529371418312,
-    "final_date": 1691120000,
-    "level": 1,
-    "id": 13821
-  },
-  {
     "nombre": "Celeste Abigail",
     "apellido": "Martínez Ramírez",
     "correo": "ivan3_segura@hotmail.com",
@@ -37523,16 +37493,6 @@ export const activeUsers = [
     "final_date": 1717300000,
     "level": 0,
     "id": 14373
-  },
-  {
-    "nombre": "Guiomar",
-    "apellido": "Ojeda Siles",
-    "correo": "guiomarojedasiles91@gmail.com",
-    "pais": "España",
-    "whatsapp": 34662484703,
-    "final_date": 1691120000,
-    "level": 1,
-    "id": 14380
   },
   {
     "nombre": "Clara Beatriz",
@@ -42644,16 +42604,6 @@ export const activeUsers = [
     "id": 32575
   },
   {
-    "nombre": "Sandybell",
-    "apellido": "Sanchez",
-    "correo": "tototito1724@hotmail.com",
-    "pais": "Mexico",
-    "whatsapp": 522221659129,
-    "final_date": 1691250000,
-    "level": 1,
-    "id": 32588
-  },
-  {
     "nombre": "aidee",
     "apellido": "Ramirez",
     "correo": "ramirezaidee495@gmail.com",
@@ -43540,16 +43490,6 @@ export const activeUsers = [
     "id": 34491
   },
   {
-    "nombre": "susana",
-    "apellido": "Hijuitl Tovar",
-    "correo": "susanhijuitl@gmail.com",
-    "pais": "Mexico",
-    "whatsapp": 525564020998,
-    "final_date": 1690950000,
-    "level": 1,
-    "id": 34516
-  },
-  {
     "nombre": "Imelda",
     "apellido": "Reyes",
     "correo": "imelda.071321@gmail.com",
@@ -43970,16 +43910,6 @@ export const activeUsers = [
     "final_date": 0,
     "level": 1,
     "id": 35586
-  },
-  {
-    "nombre": "Paola",
-    "apellido": "Solano",
-    "correo": "quepaoshooow@gmail.com",
-    "pais": "Mexico",
-    "whatsapp": 525619485192,
-    "final_date": 1691200000,
-    "level": 1,
-    "id": 35606
   },
   {
     "nombre": "Martha",
@@ -57306,5 +57236,60 @@ export const activeUsers = [
     "final_date": 1694040000,
     "level": 0,
     "id": 14380
+  },
+  {
+    "nombre": "Maria de los Angeles",
+    "apellido": "Lindero Gonzalez",
+    "correo": "angylinda3212@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 525575620436,
+    "conekta_id": "cus_2uTK6hRGcGxJgKzo6",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 8002
+  },
+  {
+    "nombre": "Araceli",
+    "apellido": "Melchor",
+    "correo": "cheli181200@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 522231312693,
+    "conekta_id": "cus_2uVcCFwDRTjmpppFr",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 12520
+  },
+  {
+    "nombre": "Sandybell",
+    "apellido": "Sánchez",
+    "correo": "tototito1724@hotmail.com",
+    "pais": "Mexico",
+    "whatsapp": 522221659129,
+    "conekta_id": "cus_2uUaUhoLjUuh1vxd2",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 32588
+  },
+  {
+    "nombre": "susana",
+    "apellido": "Hijuitl Tovar",
+    "correo": "susanhijuitl@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 525564020998,
+    "conekta_id": "cus_2uTDefsqxSZu3fph9",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 34516
+  },
+  {
+    "nombre": "Paola",
+    "apellido": "Solano",
+    "correo": "quepaoshooow@gmail.com",
+    "pais": "Mexico",
+    "whatsapp": 525619485192,
+    "conekta_id": "cus_2uTEz4XKgZ45CK1t5",
+    "final_date": 1694040000,
+    "level": 0,
+    "id": 35606
   },
 ]
