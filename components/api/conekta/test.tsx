@@ -57,6 +57,29 @@ export const updateConektaInfo = async (user: any) => {
       return res
     })
     .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+
+export const getUsersStripe = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "auth/user/conekta")
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      return error
+    });
+};
+
+export const updateUsersStripe = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "auth/user/membership", user)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
       return error
     });
 };

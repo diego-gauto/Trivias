@@ -11,6 +11,8 @@ import { Plans } from "./Plans/Plans";
 import { activeUsers } from "../../constants/dummies";
 import { conektaPm, getUserApi, updateMembership } from "../api/users";
 import { conektaSubscriptionApi } from "../api/checkout";
+import { getUsersStripe, updateConektaInfo, updateUsersStripe } from "../api/conekta/test";
+import { display } from "html2canvas/dist/types/css/property-descriptors/display";
 
 const tarjetas = "/images/pay_plans/cards.png"
 const oxxo = "/images/pay_plans/oxxo.png"
@@ -18,6 +20,8 @@ const oxxo = "/images/pay_plans/oxxo.png"
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [selected, setSelected] = useState(2)
+  const [users, setUsers] = useState<any>([])
+
   var userData = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
@@ -39,8 +43,7 @@ const PayPlans = () => {
         if (endpoint.conekta_id) {
           let response = await conektaPm({ conekta_id: endpoint.conekta_id });
           const conektaPaymentMethods = response.data.payment_methods.data
-          let sub = await getUserApi(endpoint.correo);
-          if (conektaPaymentMethods.length > 0 && sub.final_date === 1694040000) {
+          if (conektaPaymentMethods.length > 0) {
             const pm = conektaPaymentMethods.filter((x: any) => x.default)[0]
             let body = {
               id: pm.id,
@@ -56,7 +59,7 @@ const PayPlans = () => {
                   plan_id: sub.id,
                   plan_name: "Gonvar Plus",
                   start_date: sub.billing_cycle_start,
-                  userId: endpoint.id,
+                  userId: endpoint.user_id,
                   level: 1,
                   method: "conekta"
                 }
