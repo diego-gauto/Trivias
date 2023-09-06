@@ -8,8 +8,7 @@ import { cancelReview } from "../../../../components/api/admin";
 import AlertModal from "../../../../components/AlertModal/AlertModal";
 import { PROFILE_PATH } from "../../../../constants/paths";
 import { conektaCancelSubscription, conektaPausedSubscription } from "../../../../components/api/profile";
-import { activeUsers } from "../../../../constants/dummies";
-import { canelConektaUserArray } from "../../../../components/api/conekta/test";
+import { canelConektaUserArray, getUsersStripe } from "../../../../components/api/conekta/test";
 
 const corazon = "/images/cancel_suscription/corazon morado.png"
 
@@ -26,6 +25,7 @@ const CancelFinal = () => {
     fourthQuestion: 0,
     fifthQuestion: 0,
   })
+  const [conektaUsers, setConketaUsers] = useState<any>([]);
   const { type } = router.query;
   const [other, setOther] = useState("");
   const goBack = () => {
@@ -74,7 +74,7 @@ const CancelFinal = () => {
     else {
       cancelReview(tempData).then((res) => {
 
-        if (activeUsers.filter((x) => x.correo === userData.email && x.final_date === 1694040000).length > 0) {
+        if (conektaUsers.filter((x: any) => x.email === userData.email && x.final_date === 1694040000).length > 0) {
           let body = {
             final_date: 0,
             user_id: userData.user_id
@@ -131,6 +131,9 @@ const CancelFinal = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
+        getUsersStripe().then((res) => {
+          setConketaUsers(res.data)
+        })
         setUserData(res);
         setLoader(true);
       })

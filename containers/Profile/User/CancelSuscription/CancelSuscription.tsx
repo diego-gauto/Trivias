@@ -7,8 +7,8 @@ import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screen
 import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/rewards";
 import CircleProgress from "../../../CircleProgress/CircleProgress";
 import { PROFILE_PATH } from "../../../../constants/paths";
-import { activeUsers } from "../../../../constants/dummies";
 import { getPausedSubscription } from "../../../../components/api/profile";
+import { getUsersStripe } from "../../../../components/api/conekta/test";
 const manitas = "/images/cancel_suscription/manos moradas.png"
 
 const CancelSuscription = () => {
@@ -29,6 +29,7 @@ const CancelSuscription = () => {
   const goBack = () => {
     router.push({ pathname: PROFILE_PATH });
   }
+  const [conektaUsers, setConketaUsers] = useState<any>([]);
   const goPause = () => {
     getPausedSubscription({ user_id: userData.user_id }).then((res) => {
       let arr = res.data;
@@ -187,6 +188,9 @@ const CancelSuscription = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
+        getUsersStripe().then((res) => {
+          setConketaUsers(res.data)
+        })
         setUserData(res);
         getRewardData(res);
       })
