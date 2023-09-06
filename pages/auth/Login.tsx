@@ -5,7 +5,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 
-import { message } from "antd";
 import Link from "next/link";
 import * as yup from "yup";
 
@@ -34,10 +33,8 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import ModalForgot from "./Modals/ModalForgot";
-import router from "next/router";
-import { activeUsers } from "../../constants/dummies";
 import ActiveUserConekta from "./Modals/ActiveUserConekta";
-import { conektaPm } from "../../components/api/users";
+import { getUsersStripe } from "../../components/api/conekta/test";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -189,14 +186,10 @@ const Login = () => {
           }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
-          if (activeUsers.filter((x) => x.conekta_id === res[0].conekta_id).length > 0) {
-            const pm = await conektaPm({ conekta_id: res[0].conekta_id });
-            if (pm.data.payment_methods.data.length === 0) {
-              setUser(res[0]);
-              setOpen(true);
-            } else {
-              redirect(res[0])
-            }
+          let conketaUsers = await getUsersStripe()
+          if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
+            setUser(res[0]);
+            setOpen(true);
           } else {
             redirect(res[0])
           }
@@ -315,14 +308,10 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            if (activeUsers.filter((x) => x.conekta_id === res[0].conekta_id).length > 0) {
-              const pm = await conektaPm({ conekta_id: res[0].conekta_id });
-              if (pm.data.payment_methods.data.length === 0) {
-                setUser(res[0]);
-                setOpen(true);
-              } else {
-                redirect(res[0])
-              }
+            let conketaUsers = await getUsersStripe()
+            if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
+              setUser(res[0]);
+              setOpen(true);
             } else {
               redirect(res[0])
             }
@@ -419,14 +408,10 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            if (activeUsers.filter((x) => x.conekta_id === res[0].conekta_id).length > 0) {
-              const pm = await conektaPm({ conekta_id: res[0].conekta_id });
-              if (pm.data.payment_methods.data.length === 0) {
-                setUser(res[0]);
-                setOpen(true);
-              } else {
-                redirect(res[0])
-              }
+            let conketaUsers = await getUsersStripe()
+            if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
+              setUser(res[0]);
+              setOpen(true);
             } else {
               redirect(res[0])
             }
