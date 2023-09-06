@@ -133,7 +133,7 @@ const ModuleTabs = (props: IModule) => {
         <Link href={SUPPORT_PATH}>
           <Titles >
             <FcSupport className="icon" />
-            Asistencia
+            Asesoría
           </Titles>
         </Link>
       </div>
