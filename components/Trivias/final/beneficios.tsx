@@ -9,11 +9,11 @@ const Beneficios = () => {
   return (
     <div className={beneficiosContainer}>
       <div className={containerTitle}>
-        <h2 className={titulo}>Algunos beneficios Incluidos en </h2>
+        <h2 className={titulo}>Algunos beneficios Incluídos en </h2>
         <img className={img} src="/images/trivias/Logo Gonvar degradado.svg" alt="" />
       </div>
       <BeneficiosCardContainer></BeneficiosCardContainer>
-      <Link href={`/`}>
+      <Link href={`/suscripcion-anual`}>
         <a>
           <button>Más información</button>
         </a>

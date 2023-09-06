@@ -154,11 +154,11 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
               alt="Icon WhatsApp"
               onClick={handleWhatsAppShare}
             />
-            <img
+            {/* <img
               src="/images/trivias/logo instagram.svg"
               alt="Icon Instagram"
               onClick={handleInstagramShare}
-            />
+            /> */}
           </div>
         </div>
         {/* <div className="sharethis-inline-share-buttons">

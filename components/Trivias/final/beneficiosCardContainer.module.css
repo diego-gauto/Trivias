@@ -2,6 +2,15 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 85%;
+  width: 95%;
   margin-top: 40px;
+}
+
+@media screen and (max-width: 550px) {
+
+  .cardContainer {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 }

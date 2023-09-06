@@ -1,10 +1,16 @@
 import Link from "next/link";
+import router from "next/router";
 
 import SliderCourses from "../../../components/Trivias/sliderCourses/sliderCourses";
 import styles from "./success.module.css";
 
 const Success = () => {
   const { successContainer, title, ganaste, span, red, green, acceso, recomendamos, revisa, tachado, buttonContainer } = styles;
+
+  const handleClick = () => {
+    localStorage.setItem("plan", "true");
+    router.push({ pathname: `/purchase?type=subscription&frequency=anual` })
+  }
 
   return (
     <div className={successContainer}>
@@ -17,12 +23,9 @@ const Success = () => {
       <SliderCourses></SliderCourses>
       <p className={revisa}>Revisa tu correo electrónico para conocer los pasos para suscribirte y obtener tu descuento o haz click en Comenzar y suscríbete ahora.</p>
       <div className={buttonContainer}>
-        <Link href={`/`}>
-          <a>
-            <button>Comienza por $1.599</button>
-          </a>
-        </Link>
-        <Link href={`/`}>
+
+        <button onClick={handleClick}>Comienza por $1.599</button>
+        <Link href={`/suscripcion-anual`}>
           <a>
             <button>Más información</button>
           </a>

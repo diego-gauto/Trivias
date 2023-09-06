@@ -20,21 +20,17 @@
 }
 
 .beneficiosContainer .containerTitle{
+  position: relative;
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
+
+
 
     .titulo {
-      margin: 0; /* Elimina los márgenes del h2 para evitar espacios innecesarios */
-    }
-
-    .titulo::after{
-      content: ""; /* Crea un elemento virtual */
-      display: inline;
     }
 
     .img {
-      margin-left: 5px; /* Añade un margen izquierdo para separar la imagen del texto */
+    
     }
     
 }
@@ -88,6 +84,30 @@
   -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all;
   background-color: #5000b5;
+}
+
+@media screen and (max-width: 920px) {
+
+  .beneficiosContainer{
+    padding-top: 35px;
+  }
+
+  .beneficiosContainer .containerTitle{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+      .titulo {
+        max-width: 90%;
+      }
+  
+      .img {
+        position: relative;
+        top: -40px;
+      }
+      
+  }
 }
 
 @media screen and (max-width: 800px) {
