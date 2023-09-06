@@ -84,7 +84,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [confirm_Password, setConfirm_Password] = useState('');
   const [user, setUser] = useState({});
-  const [open, setOpen] = useState(false);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -186,13 +185,7 @@ const Login = () => {
           }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
-          let conketaUsers = await getUsersStripe()
-          if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
-            setUser(res[0]);
-            setOpen(true);
-          } else {
-            redirect(res[0])
-          }
+          redirect(res[0])
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -236,7 +229,6 @@ const Login = () => {
       last_sign_in: new Date(),
     }
     await updateLastSignIn(userData).then((res) => {
-      console.log(res)
     });
   }
   const [showForgot, setShowForgot] = useState(false);
@@ -308,13 +300,8 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            let conketaUsers = await getUsersStripe()
-            if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
-              setUser(res[0]);
-              setOpen(true);
-            } else {
-              redirect(res[0])
-            }
+            setUser(res[0]);
+            redirect(res[0])
           }
         })
       })
@@ -408,13 +395,7 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            let conketaUsers = await getUsersStripe()
-            if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
-              setUser(res[0]);
-              setOpen(true);
-            } else {
-              redirect(res[0])
-            }
+            redirect(res[0])
           }
         })
       })
@@ -714,7 +695,6 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
-      <ActiveUserConekta show={open} ondHide={() => { redirect(user) }} user={user} />
       <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
