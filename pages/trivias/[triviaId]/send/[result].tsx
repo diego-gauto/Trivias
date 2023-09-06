@@ -122,6 +122,7 @@ const Form = () => {
 
   const handleRedirect = (createUserSuccess: boolean) => {
     router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
+    console.log("entro")
   };
 
   const handleSubmit = async (values: any) => {

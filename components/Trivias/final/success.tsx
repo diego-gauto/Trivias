@@ -2,6 +2,7 @@ import Link from "next/link";
 import router from "next/router";
 
 import SliderCourses from "../../../components/Trivias/sliderCourses/sliderCourses";
+import { PURCHASE_PATH } from "../../../constants/paths";
 import styles from "./success.module.css";
 
 const Success = () => {
@@ -9,7 +10,7 @@ const Success = () => {
 
   const handleClick = () => {
     localStorage.setItem("plan", "true");
-    router.push({ pathname: `/purchase?type=subscription&frequency=anual` })
+    router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
   }
 
   return (
