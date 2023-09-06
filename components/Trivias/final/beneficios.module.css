@@ -121,3 +121,14 @@
     display: flex;
     justify-content: center;  }
 }
+
+@media screen and (max-width: 491px) {
+
+  .beneficiosContainer .containerTitle{
+      .titulo {
+        font-size: 35px;
+        line-height: 40px;
+      }
+      
+  }
+}
