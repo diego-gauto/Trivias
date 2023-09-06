@@ -1,10 +1,23 @@
 import axios from "axios";
 
+export const conektaCustomer = async (user: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "auth/conekta/customer", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+
+      return error
+    });
+};
+
 export const newUser = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "auth/register", user)
     .then((res) => {
-      return res.data.msg
+      return res.data
     })
     .catch((error) => {
       console.log(error);
@@ -78,18 +91,6 @@ export const loginWithProviderApi = async (user: any) => {
     });
 };
 
-export const addPastUsers = async (user: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "auth/login-past-users", user)
-    .then((res) => {
-      return res.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
-};
-
 export const updatePastUser = async (user: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "auth/register-past-user", user)
@@ -102,17 +103,6 @@ export const updatePastUser = async (user: any) => {
     });
 };
 
-export const testApi = async (user: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "auth/login-past-users-test", user)
-    .then((res) => {
-      return res.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
-};
 export const updateLastSignIn = async (user: any) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "users/updateLastSignIn", user)

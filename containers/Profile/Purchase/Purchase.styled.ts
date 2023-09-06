@@ -18,6 +18,23 @@ export const Container = styled.div`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
+   .terms-container{
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .terms {
+    font-size: 14px;
+    color: #74549e;
+    line-height: initial;
+    text-align: center;
+    a {
+        text-decoration: none;
+        color: #952ced;
+        font-weight: bold;
+      }
+  }
   .static-modal {
     background: rgb(237 231 242 / 60%);
     height: 100%;
@@ -371,6 +388,22 @@ export const Container = styled.div`
       gap: 20px;
       max-width: 600px;
       margin: auto;
+      .oxxo{
+          border: none;
+          background: #ba2020;
+          color: white;
+          font-size: 30px;
+          border-radius: 30px;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
+        .spei{
+          border: none;
+          background: #272d3a;;
+          color: white;
+          font-size: 30px;
+          border-radius: 30px;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
       .paypal {
         i {
           color: #009cde;
@@ -901,29 +934,7 @@ export const Container = styled.div`
             }
 
           }
-    // .bottom{
-    //   position: relative;
-    //   img{
-    //     position: relative;
-    //     z-index: 1;
-    //     display: flex;
-    //     width: 400px;
-    //   }
-    //   .bg{
-    //     height: 400px;
-    //     border-radius: 50%;
-    //     position: absolute;
-    //     background: #FFDD67;
-    //     bottom: -62%;
-    //     width: 100%;
-    //     max-width: 400px;
-    //     z-index: 0;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //   }
-    // }
-
-  }
+        }
 `;
 
 export const Title = styled.h1`

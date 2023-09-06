@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { LESSON_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 
@@ -47,16 +47,14 @@ const Individual = (props: IData) => {
   const goTo = () => {
     if (user.id) {
       let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
-      console.log(user)
       if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
         router.push({
           pathname: PREVIEW_PATH
         });
       }
       if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-        router.push(
-          { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-        )
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
+        // router.push({ pathname: NAILS_FORM })
       }
     } else {
       localStorage.setItem("nailMaster", "true");
@@ -73,7 +71,7 @@ const Individual = (props: IData) => {
           <div className="title b-green mx-4 mt-4">
             <img src={gStar} alt="Gonvar logo" className="mt-3 me-2" />
             <div className="mt-2">
-              <h3 className="green h5 mb-0"><b>Nails Master Revolution</b></h3>
+              <h3 className="green h5 mb-0"><b>Nails Master 2.0</b></h3>
               <p className="green">
                 Curso Individual
               </p>
@@ -91,7 +89,7 @@ const Individual = (props: IData) => {
 
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="green m-0">3 meses de acceso a Nails Master Revolution</p>
+              <p className="green m-0">3 meses de acceso a Nails Master 2.0</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-green" />
                 : <BsChevronDown className="tip-icon Back-green" />}
             </div>

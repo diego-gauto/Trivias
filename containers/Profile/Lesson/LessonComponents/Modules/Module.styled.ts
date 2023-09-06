@@ -24,11 +24,11 @@ export const TitleContain = styled.div`
     width: 100%;
     .tabs {
       display: flex;
-      gap: 50px;
+      gap: 30px;
     }
     .button-container {
       display: flex;
-      gap: 40px;
+      gap: 20px;
       .button-data {
         display: flex;
         gap: 5px;
@@ -75,14 +75,17 @@ export const TitleContain = styled.div`
   @media (max-width: 1124px) {
     width: 100%;
     .tab-container {
+      flex-direction: column-reverse;
+      gap: 30px;
       width: 100%;
       .tabs {
         width: 100%;
+        gap: 5px;
         justify-content: space-between;
       }
-      .button-container {
-        display: none;
-      }
+      // .button-container {
+      //   display: none;
+      // }
     }
     p {
       font-size: 12px;
@@ -132,9 +135,13 @@ export const Titles = styled.p`
   opacity: 0.7;
   margin: 0;
   cursor: pointer;
+  white-space: nowrap;
   svg {
     display: none;
     font-size: 20px;
+  }
+  .icon {
+    color: #8e2de2;
   }
   @media (max-width: 1023px) {
     display: flex;

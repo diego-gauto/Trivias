@@ -21,6 +21,7 @@ import { DEFAULT_USER_IMG } from "../../../../../constants/paths";
 import { CommentContain, CommentInput, MainContainer, Profile } from "./Comments.styled";
 import { TitleContain } from "./Module.styled";
 import ModuleTabs from "./ModuleTabs/ModuleTabs";
+import router from "next/router";
 
 const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
 
@@ -76,15 +77,13 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
     }
     if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
       let notification = {
-        userId: x.user_id ? x.user_id : "",
-        message: 'Alguien le dio like a tu comentario',
-        type: 'like',
+        userId: x.user_id,
+        type: "4",
         notificationId: '',
         courseId: course.id,
-        title: course.title,
         lesson: lesson,
-        season: season,
-        name: user.name
+        season: router.query.season,
+        userLikeId: user.user_id,
       }
       createNotification(notification);
       addCommentLikeApi(temp).then(() => {
@@ -104,15 +103,13 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
     }
     if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
       let notification = {
-        userId: x.comment_user_id ? x.comment_user_id : "",
-        message: 'Alguien le dio like a tu comentario',
-        type: 'like',
+        userId: x.comment_user_id,
+        type: "4",
         notificationId: '',
         courseId: course.id,
-        title: course.title,
         lesson: lesson,
-        season: season,
-        name: user.name
+        season: router.query.season,
+        userLikeId: user.user_id,
       }
       createNotification(notification);
       addCommentAnswerLikeApi(temp).then(() => {
@@ -132,20 +129,19 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
     }
     if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
       let notification = {
-        userId: x.comment_user_id ? x.comment_user_id : "",
-        message: 'Alguien le dio like a tu comentario',
-        type: 'like',
+        userId: x.comment_user_id,
+        type: "4",
         notificationId: '',
         courseId: course.id,
-        title: course.title,
         lesson: lesson,
-        season: season,
-        name: user.name
+        season: router.query.season,
+        userLikeId: user.user_id,
       }
       createNotification(notification);
       addCommentToAnswerLikeApi(temp).then(() => {
         getComments();
       })
+
     } else {
       deleteCommentToAnswerLikeApi(temp).then(() => {
         getComments();
@@ -205,15 +201,13 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         courseId: course.id
       }
       let notification = {
-        userId: x.user_id ? x.user_id : "",
-        message: 'Alguien te ha comentado',
-        type: 'comment',
+        userId: x.user_id,
+        type: "3",
         notificationId: '',
         courseId: course.id,
-        title: course.title,
         lesson: lesson,
-        season: season,
-        name: user.name
+        season: router.query.season,
+        userCommentId: user.user_id,
       }
       createNotification(notification);
       addCommentAnswerApi(body).then((res) => {
@@ -228,15 +222,13 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         courseId: course.id
       }
       let notification = {
-        userId: x.comment_user_id ? x.comment_user_id : "",
-        message: 'Alguien te ha comentado',
-        type: 'comment',
+        userId: x.user_id,
+        type: "3",
         notificationId: '',
         courseId: course.id,
-        title: course.title,
         lesson: lesson,
-        season: season,
-        name: user.name
+        season: router.query.season,
+        userCommentId: user.user_id,
       }
       createNotification(notification);
       addCommentToAnswerApi(body).then((res) => {

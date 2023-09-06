@@ -14,7 +14,8 @@ const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [selected, setSelected] = useState(1)
+  const [selected, setSelected] = useState(2)
+
   var userData = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
@@ -65,8 +66,6 @@ const PayPlans = () => {
               <Plans user={user} selected={selected} />
             </div>
           </div>
-
-
 
           <div className="subtitle text-center py-3">
             <h3 className="h4"><b>Nunca subiremos el precio</b> si mantienes tu suscripción activa.</h3>

@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { LESSON_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
@@ -16,11 +16,11 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const { data, num, user, loggedIn } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
-  let today = new Date().getTime() / 1000;
   const router = useRouter();
   const [show, setShow] = useState(false);
   const handleShow = () => {
-    setShow(true);
+    // setShow(true);
+    router.push({ pathname: NAILS_LANDING_REDIRECT })
   }
 
   const doVideoStuff = () => {

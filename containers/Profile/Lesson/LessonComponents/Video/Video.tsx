@@ -84,8 +84,8 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
     if (user) {
       let temp = {
         courseId: course.id,
-        seasonId: course.seasons[season].id,
-        lessonId: course.seasons[season].lessons[lesson].id,
+        seasonId: course.seasons[season]?.id,
+        lessonId: course.seasons[season]?.lessons[lesson].id,
         userId: user.user_id
       }
       addUserHistory(temp)
@@ -149,74 +149,6 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
         handleProgress(state.playedSeconds)
       }}
     />
-    // <Segment>
-    //   <VideoContain>
-    //     <div className='nav-course'>
-    //       <img src="/images/Navbar/NavbarLogo2.png" alt="" />
-    //       {!menu ? <GiHamburgerMenu onClick={() => {
-    //         setMenu(!menu)
-    //       }}></GiHamburgerMenu> :
-    //         <AiOutlineClose onClick={() => {
-    //           setMenu(!menu)
-    //         }}></AiOutlineClose>}
-    //     </div>
-    //     {"mandatory" in course.seasons[season].lessons[lesson] ?
-    //       <div className='quiz-container'>
-    //         <Title>
-    //           Quiz: {course.seasons[season].lessons[lesson].title}
-    //         </Title>
-    //         {course.seasons[season].lessons[lesson].questions.map((question: any, index: number) => {
-    //           return (
-    //             <div className='question-container'>
-    //               <div className='question'>
-    //                 <p>{index + 1}.</p>
-    //                 <p dangerouslySetInnerHTML={{ __html: question.question }}></p>
-    //               </div>
-    //               <div className='answers'>
-    //                 {question.answers.map((answer: any, ind: number) => {
-    //                   return (
-    //                     <div style={{ display: "flex" }}>
-    //                       <p>{answer.answer}</p>
-    //                       <input type="radio" id={"q" + index + "a" + ind} onChange={() => {
-    //                         chooseAnswer(index, ind)
-    //                       }} />
-    //                     </div>
-    //                   )
-    //                 })}
-    //               </div>
-    //             </div>
-    //           )
-    //         })}
-    //         <button onClick={submit}>Responder</button>
-    //       </div>
-    //       :
-    //       <ReactPlayer
-    //         className='absolute'
-    //         ref={p => p?.seekTo(handleViewed())}
-    //         url={data.link}
-    //         playing={true}
-    //         muted={false}
-    //         controls
-    //         width="100%" height="auto"
-    //         onEnded={finishedLesson}
-    //         onDuration={(duration) =>
-    //           handleDuration(duration)
-    //         }
-    //         onProgress={(state) => {
-    //           handleProgress(state.playedSeconds)
-    //         }}
-    //       />
-    //     }
-    //     {
-    //       responsive1124 && <div className='module-selector'>
-    //         <p>{course.courseTittle}</p>
-    //         <p><span>Un curso de</span> {course.courseProfessor[0]?.name}</p>
-    //       </div>
-    //     }
-    //     {/* <Modules data={data} user={user} comments={comments} season={season} lesson={lesson} teacherCreds={course.courseProfessor} /> */}
-    //   </VideoContain>
-    //   {/* <Courses menu={menu} handleClick={handleClick} id={id} course={course} data={current} userData={user} season={season} lesson={lesson} /> */}
-    // </Segment>
   )
 }
 export default Video;

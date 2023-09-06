@@ -12,6 +12,7 @@ export const ThankYouContainer = styled.div`
     width: 100%;
     max-width: 500px;
     height: fit-content;
+    max-height: 273px;
   }
   .left {
     padding-top: 60px;

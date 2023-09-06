@@ -7,6 +7,8 @@ import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screen
 import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/rewards";
 import CircleProgress from "../../../CircleProgress/CircleProgress";
 import { PROFILE_PATH } from "../../../../constants/paths";
+import { getPausedSubscription } from "../../../../components/api/profile";
+import { getUsersStripe } from "../../../../components/api/conekta/test";
 const manitas = "/images/cancel_suscription/manos moradas.png"
 
 const CancelSuscription = () => {
@@ -27,11 +29,19 @@ const CancelSuscription = () => {
   const goBack = () => {
     router.push({ pathname: PROFILE_PATH });
   }
+  const [conektaUsers, setConketaUsers] = useState<any>([]);
   const goPause = () => {
-    router.push({
-      pathname: "/end-suscription",
-      query: { type: "pause" }
-    });
+    getPausedSubscription({ user_id: userData.user_id }).then((res) => {
+      let arr = res.data;
+      if (arr.length === 2) {
+        alert("Alcanzaste el limite de pausas por año")
+      } else {
+        router.push({
+          pathname: "/end-suscription",
+          query: { type: "pause" }
+        });
+      }
+    })
   }
   const goCancel = () => {
     router.push({
@@ -178,6 +188,9 @@ const CancelSuscription = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
+        getUsersStripe().then((res) => {
+          setConketaUsers(res.data)
+        })
         setUserData(res);
         getRewardData(res);
       })
@@ -262,7 +275,7 @@ const CancelSuscription = () => {
         {/* <p>Recuerda que esta accion solo la puedes realizar <b>dos veces cada 12 meses.</b> <br />Te quedan <b>{'x'}</b> pausas</p> */}
         <div className="buttons mt-5">
           <button onClick={goCancel} className="left">Perder mis beneficios</button>
-          {/* <button onClick={goPause} className="right">Si quiero pausar</button> */}
+          {/* {activeUsers.filter((x) => x.correo === userData.email && x.final_date === 1694040000).length === 0 && <button onClick={goPause} className="right">Si quiero pausar</button>} */}
           <button onClick={goBack} className="btn btn-link ">Regresar al inicio</button>
         </div>
 

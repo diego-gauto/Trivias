@@ -13,15 +13,12 @@ import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
 import { getAllRewardDataApi, getClaimedReward, getRewardsApi } from "../../../components/api/rewards";
 import { getUserApi } from "../../../components/api/users";
-import { getCoursesApi, getLessonsFromUserId } from "../../../components/api/lessons";
 
 const Rewards = () => {
   const [rewards, setRewards] = useState<any>([]);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any>([]);
   const [completeCertificates, setCompleteCertificates] = useState<any>([])
-  const [certLoader, setCertLoader] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   let today = new Date().getTime() / 1000;
@@ -83,7 +80,7 @@ const Rewards = () => {
     let getMonth: any;
     let requests: any;
     let tempRewards: any = [];
-    if (user.level === 1) {
+    if (user.level === 1 || user.final_date > today) {
       if (user.start_date === 0) {
         getMonth = 0;
       }
@@ -235,6 +232,9 @@ const Rewards = () => {
         setUserData(res);
         getRewardData(res);
       })
+    } else {
+      localStorage.setItem("rewards", "true")
+      router.push({ pathname: "/auth/Login" });
     }
   }, [])
   useEffect(() => {

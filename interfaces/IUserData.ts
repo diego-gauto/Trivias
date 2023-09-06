@@ -23,4 +23,5 @@ export interface IUser {
   level: number;
   final_date: any;
   plan_name: string;
+  method: string;
 }

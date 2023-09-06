@@ -211,6 +211,166 @@ const sql = () => {
   //     })
   //   )
   // }
+
+
+
+  //    SELECT
+  //    user_notification.notification_id, 
+  //    user_id, 
+  //    n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //    'user_notification' AS source_table, 
+  //    NULL AS course_id, 
+  //   NULL AS season, 
+  //   NULL AS lesson,
+  //   NULL AS title,
+  //   NULL AS name 
+  //   FROM user_notification
+  //   INNER JOIN notification as n ON n.id = user_notification.notification_id
+  // WHERE user_id = ${notification.userId}
+
+  //   UNION
+  // SELECT
+  // homework_notification.notification_id,
+  //   user_id,
+  //   n.type,
+  //   n.status,
+  //   n.created_at,
+  //   'homework_notification' AS source_table,
+  //     homework_notification.course_id,
+  //     homework_notification.season,
+  //     homework_notification.lesson,
+  //     homework_notification.title,
+  //     NULL AS name 
+  //     FROM homework_notification
+  //     INNER JOIN notification as n ON n.id = homework_notification.notification_id
+  //    WHERE user_id = ${ notification.userId }
+
+  //  UNION
+
+  //   SELECT
+  //    reward_notification.notification_id,
+  //    user_id,
+  //    n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //    'reward_notification' AS source_table,
+  //    NULL AS course_id,
+  //   NULL AS season,
+  //   NULL AS lesson,
+  //   reward_notification.title,
+  //   NULL AS name
+  //   FROM reward_notification
+  //   INNER JOIN notification as n ON n.id = reward_notification.notification_id
+  // WHERE user_id = ${notification.userId}
+
+  // UNION
+
+  //   SELECT
+  //   certificate_notification.notification_id,
+  //   user_id,
+  //   n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //   'certificate_notification' AS source_table,
+  //   certificate_notification.course_id,
+  //   certificate_notification.season,
+  //   certificate_notification.lesson,
+  //   certificate_notification.title,
+  //   NULL AS name
+  //   FROM certificate_notification
+  //   INNER JOIN notification as n ON n.id = certificate_notification.notification_id
+  //  WHERE user_id = ${notification.userId}
+
+  //  UNION
+
+  //   SELECT
+  //   lesson_notification.notification_id,
+  //   user_id,
+  //   n.type,
+  //    n.message,
+  //    n.status,
+  //    n.created_at,
+  //   'lesson_notification' AS source_table,
+  //   lesson_notification.course_id,
+  //   lesson_notification.season,
+  //   lesson_notification.lesson,
+  //   lesson_notification.title,
+  //   lesson_notification.name
+  //   FROM lesson_notification
+  //   INNER JOIN notification as n ON n.id = lesson_notification.notification_id
+  // WHERE user_id = ${notification.userId}
+
+  // const uploadCsv = (event: any) => {
+  //   const reader = new FileReader()
+  //   const fileContent = event.target
+  //   reader.readAsText(fileContent.files[0])
+
+  //   reader.onload = () => {
+  //     let csvData: any = reader.result
+  //     let csvRecordsArray = csvData.split(/\r\n|\n/);
+
+  //     const records = getDataRecordsArrayFromCSVFile(csvRecordsArray);
+
+  //     processArrayWithDelay(records)
+  //   }
+  //   reader.onerror = function () {
+  //   };
+  // }
+
+
+  // const getDataRecordsArrayFromCSVFile = (csvRecordsArray: any) => {
+  //   let csvArr = [];
+  //   for (let i = 1; i < csvRecordsArray.length; i++) {
+  //     let currentRecord = (csvRecordsArray[i]).split(',');
+  //     let csvRecord: any = new CsvData();
+  //     for (let i = 0; i < currentRecord.length; i++) {
+  //       csvRecord.properties.push(currentRecord[i].trim())
+  //     }
+  //     if (csvRecord.properties[0] != '') { csvArr.push(csvRecord); }
+  //   }
+  //   return csvArr;
+  // }
+
+  // async function processArrayWithDelay(arrayOfEndpoints: any) {
+  //   for (const endpoint of arrayOfEndpoints) {
+  //     try {
+  //       let body = {
+  //         stripe_id: endpoint.properties[5]
+  //       }
+  //       const response = await getStripeInfo(body);
+  //       let today = new Date().getTime() / 1000;
+  //       let days = (endpoint.properties[6] - today) / 86400
+  //       let subscriptionArray = response.data.subscriptions.data
+  //       if (days < 90) {
+  //         if (subscriptionArray.length > 0 && subscriptionArray[0].status === 'active') {
+  //           let body = {
+  //             userId: endpoint.properties[7],
+  //             email: endpoint.properties[2],
+  //             name: endpoint.properties[0],
+  //             phone_number: (endpoint.properties[4] && endpoint.properties[4].length > 9) ? endpoint.properties[4] : "5211111111",
+  //           }
+  //           await updateConektaInfo(body)
+  //           console.log(1);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.log(endpoint);
+  //       console.error(`Error fetching data from ${endpoint}:`, error);
+  //     }
+  //   }
+  // }
+
+  // const getU = async () => {
+  //   let users = await getConektaUsers()
+  //   users.data.data.forEach(async (element: any) => {
+  //     await delConektaUsers(element.id)
+  //   });
+  // }
   return (
     <div>sql</div>
   )

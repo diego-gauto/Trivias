@@ -5,5 +5,7 @@ export interface ICourseModuleContainerProps {
   user: {
     final_date: number;
     level: number;
+    method: string;
+    role: string;
   };
 }

@@ -11,17 +11,18 @@ import router from "next/router";
 
 import { getCoursesApi } from "../../../components/api/lessons";
 import { getRewardsApi } from "../../../components/api/rewards";
-import { cancelPaypal, cancelStripe } from "../../../components/api/users";
 import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
 import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
-import { REWARDS_PATH } from "../../../constants/paths";
+import { REWARDS_PATH, SUPPORT_PATH } from "../../../constants/paths";
+import { conektaResumeSubscription } from "../../../components/api/profile";
+import { getUsersStripe } from "../../../components/api/conekta/test";
 
 const or_star = "/images/cancel_modal/or_star.png"
 const gr_star = "/images/cancel_modal/gr_star.png"
 const bl_star = "/images/cancel_modal/bl_star.png"
 const handImage = "/images/profile/hand.png"
 
-const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, timePrizeSize, setReward, user, prize, nextCertificate, monthProgress, handleClick }: any) => {
+const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const [formatDate, setFormatDate] = useState("")
   const [loader, setLoader] = useState<any>(false);
@@ -30,6 +31,8 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
   const [certificates, setCertificates] = useState<any>();
   const [pop, setPop] = useState<any>(false);
   const today = new Date().getTime() / 1000;
+  const [conektaUsers, setConketaUsers] = useState<any>([]);
+
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
     let tempMonthObj: any = { obtained: [], blocked: [] };
@@ -89,6 +92,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
     let tempMonth = tempDate.getMonth() + 1;
     let tempYear = tempDate.getFullYear();
     setFormatDate(`${tempDay}/${tempMonth}/${tempYear}`);
+    getUsersStripe().then((res) => {
+      setConketaUsers(res.data)
+    })
 
   }, [])
 
@@ -106,6 +112,17 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
   const getDays = () => {
     return Math.round((user.final_date - today) / 86400)
   }
+
+  const resumeSubscription = () => {
+    setLoader(true);
+    let body = {
+      conekta_id: user.conekta_id
+    }
+    conektaResumeSubscription(body).then((res) => {
+      window.location.reload()
+    })
+  }
+
   return (
     <ThirdBox>
       {pop &&
@@ -230,6 +247,9 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
         <Link href={REWARDS_PATH}>
           <button >Ir al <span>Centro de Recompensas </span><FaArrowRight /> </button>
         </Link>
+        <Link href={SUPPORT_PATH}>
+          <button className="help-btn"><p>Ir al <span>Centro de Ayuda </span></p><FaArrowRight /> </button>
+        </Link>
       </RewardContainer>
       <SubscriptionContainer>
         <div className="first-section">
@@ -241,7 +261,7 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {(user.level === 1 || (user.level === 0 && user.final_date > today)) ? <p >
+              {(user.level === 1 || (user.level === 0 && user.final_date > today) || user.level === 3) ? <p >
                 Gonvar+<br />
                 <span className="span">Suscripción {(user.level === 1 && getDays() > 31) ? "anual" : "mensual"}</span>
               </p> :
@@ -263,7 +283,8 @@ const NextReward = ({ timeLevel, reward, prizeSize, lastTimeReward, timePrize, t
                     <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
                 </div>
             }
-            {(!loader && (user.level > 0 && user.plan_name)) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus") || (conektaUsers.filter((x: any) => x.email === user.email && user.final_date === 1694040000).length > 0))) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Reactivar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
         </div>

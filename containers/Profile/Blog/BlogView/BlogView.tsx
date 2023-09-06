@@ -21,7 +21,7 @@ import { getBlogsApi, getSingleBlogApi } from '../../../../components/api/blog';
 import { FaCopy } from 'react-icons/fa';
 import { getUserApi } from '../../../../components/api/users';
 import { formatBlogDate } from '../../../../utils/functions';
-import { BLOGS_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from '../../../../constants/paths';
+import { ANUAL_FORM, BLOGS_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from '../../../../constants/paths';
 const BlogView = () => {
   const [loader, setLoader] = useState(false)
   const [userData, setUserData] = useState<any>(null);
@@ -66,12 +66,12 @@ const BlogView = () => {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push(`${PURCHASE_PATH}?type=subscription`)
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
       }
     }
     else {
       router.push(SIGNUP_PATH)
-      localStorage.setItem("sub", "true");
+      localStorage.setItem('anual', 'true')
     }
   }
   const getBlog = async () => {
@@ -229,13 +229,13 @@ const BlogView = () => {
           </FirstSection>
           {
             blog?.link &&
-            <VideoBlog>
+            <VideoBlog >
               <ReactPlayer
                 url={blog.link}
                 playing={false}
                 muted={false}
                 controls
-                width="100%" height="100%"
+                width="100%" height="300px"
               />
             </VideoBlog>
           }
@@ -316,7 +316,7 @@ const BlogView = () => {
                           </p>
                           <div className="button-contain">
                             <button className="button-gonvar" onClick={goToCourses}>
-                              Inscríbete a solo $149 MXN al mes
+                              Inscríbete a solo $1599 MXN al año
                             </button>
                           </div>
                         </div>

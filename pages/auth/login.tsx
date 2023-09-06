@@ -5,7 +5,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 
-import { message } from "antd";
 import Link from "next/link";
 import * as yup from "yup";
 
@@ -14,6 +13,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import AlertModal from "../../components/AlertModal/AlertModal";
 import {
+  conektaCustomer,
   facebookUserInfo,
   googleTokens,
   loginWithProviderApi,
@@ -22,7 +22,7 @@ import {
   updateUserPassword,
 } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Error,
@@ -33,7 +33,8 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import ModalForgot from "./Modals/ModalForgot";
-import router from "next/router";
+import ActiveUserConekta from "./Modals/ActiveUserConekta";
+import { getUsersStripe } from "../../components/api/conekta/test";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -82,6 +83,8 @@ const Login = () => {
   const { login } = useLogin();
   const [password, setPassword] = useState('');
   const [confirm_Password, setConfirm_Password] = useState('');
+  const [user, setUser] = useState({});
+  const [open, setOpen] = useState(false);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -162,20 +165,34 @@ const Login = () => {
     }
 
 
-    loginWithProviderApi(signUpData.credentials).then((res) => {
+    loginWithProviderApi(signUpData.credentials).then(async (res) => {
       if (res[0]) {
         if (res[0].past_user === 'si') {
           setPastUser(res[0]);
-          // updateSignIn(res[0]);
           setPastUserScreen(true);
           setAuthLoader(false);
           return
         }
         if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
+          let body = {
+            phone_number: res[0].phone_number,
+            country: res[0].country,
+            name: res[0].name,
+            email: res[0].email,
+            userId: res[0].user_id,
+          }
+          if (res[0].conekta_id === null) {
+            await conektaCustomer(body)
+          }
           updateSignIn(res[0]);
           localStorage.setItem('email', signUpData.credentials.email);
-          window.location.href = PREVIEW_PATH;
-          redirect()
+          let conketaUsers = await getUsersStripe()
+          if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
+            setUser(res[0]);
+            setOpen(true);
+          } else {
+            redirect(res[0])
+          }
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -210,7 +227,7 @@ const Login = () => {
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
       window.location.href = PREVIEW_PATH;
-      redirect()
+      redirect(res[0])
     })
   }
   const updateSignIn = async (user: any) => {
@@ -248,7 +265,7 @@ const Login = () => {
         let user = {
           email: res.email,
         }
-        loginWithProviderApi(user).then((res) => {
+        loginWithProviderApi(user).then(async (res) => {
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
@@ -260,7 +277,7 @@ const Login = () => {
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 window.location.href = PREVIEW_PATH;
-                redirect()
+                redirect(res[0])
               })
               setAuthLoader(false);
               return
@@ -279,11 +296,25 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
-            console.log(res[0]);
+            let body = {
+              phone_number: res[0].phone_number,
+              country: res[0].country,
+              name: res[0].name,
+              email: res[0].email,
+              userId: res[0].user_id
+            }
+            if (res[0].conekta_id === null) {
+              await conektaCustomer(body)
+            }
             updateSignIn(res[0]);
-            localStorage.setItem('email', user.email)
-            window.location.href = PREVIEW_PATH
-            redirect()
+            localStorage.setItem('email', user.email);
+            let conketaUsers = await getUsersStripe()
+            if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
+              setUser(res[0]);
+              setOpen(true);
+            } else {
+              redirect(res[0])
+            }
           }
         })
       })
@@ -291,24 +322,32 @@ const Login = () => {
     flow: 'auth-code',
   });
 
-  const redirect = () => {
-    if (localStorage.getItem("trial") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true`
-    }
-    if (localStorage.getItem("course")) {
+  const redirect = (userInfo: any) => {
+    let today = new Date().getTime() / 1000;
+    if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=1`
+    } else if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
-    if (localStorage.getItem("month") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month`
+    else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`
     }
-    if (localStorage.getItem("anual") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual`
+    else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
     }
-    if (localStorage.getItem("nailMaster") === "true") {
+    else if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
     }
-    if (localStorage.getItem("plan") === "true") {
+    else if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+    }
+    else if (localStorage.getItem("login") === "true") {
+      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
+    }
+    else if (localStorage.getItem("rewards") === "true") {
+      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
+    } else {
+      window.location.href = PREVIEW_PATH;
     }
   }
 
@@ -326,7 +365,7 @@ const Login = () => {
         let user = {
           email: res.email,
         }
-        loginWithProviderApi(user).then((res) => {
+        loginWithProviderApi(user).then(async (res) => {
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
@@ -337,7 +376,7 @@ const Login = () => {
               updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                redirect()
+                redirect(res[0])
                 window.location.href = PREVIEW_PATH;
               })
               setAuthLoader(false);
@@ -357,10 +396,25 @@ const Login = () => {
             setShow(true);
             setIsLoading(false);
           } else {
+            let body = {
+              phone_number: res[0].phone_number,
+              country: res[0].country,
+              name: res[0].name,
+              email: res[0].email,
+              userId: res[0].user_id
+            }
+            if (res[0].conekta_id === null) {
+              await conektaCustomer(body)
+            }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            redirect()
-            window.location.href = PREVIEW_PATH;
+            let conketaUsers = await getUsersStripe()
+            if (conketaUsers.data.filter((x: any) => x.conekta_id === res[0].conekta_id).length > 0) {
+              setUser(res[0]);
+              setOpen(true);
+            } else {
+              redirect(res[0])
+            }
           }
         })
       })
@@ -368,10 +422,6 @@ const Login = () => {
       setAuthLoader(false);
     }
   }
-
-  // const sendResetPassword = () => {
-
-  // }
 
   return (
     <>
@@ -664,6 +714,7 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
+      <ActiveUserConekta show={open} ondHide={() => { redirect(user) }} user={user} />
       <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>

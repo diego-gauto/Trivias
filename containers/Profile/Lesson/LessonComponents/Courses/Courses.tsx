@@ -9,18 +9,16 @@ import { Text03 } from '../../../../../components/Home/Module4_Carousel/SlideMod
 import CourseProgress from '../Progress/CourseProgress';
 import { MainContainer, Title, UploadIcon, Container, Episode, Divider, CoursesContainer, CloseButton, SeasonContainer, HamburgerContainer } from './Courses.styled';
 import EveryCourse from './Lessons/EveryCourse';
-import { LOCK_ICON } from '../../../../../utils/Constants';
 import { CERTIFICATES_PATH } from '../../../../../constants/paths';
+import { updateMembership } from '../../../../../components/api/profile';
 
 const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: any) => {
   const [selected, setSelected] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
-  const [seasons, setSeasons] = useState<any>([]);
   const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
   const [certficate, setCertificate] = useState<any>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
-  const [viewed, setViewed] = useState(0);
   const [temp, setTemp] = useState(data);
 
   useEffect(() => {
@@ -50,10 +48,11 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
         if (res.data.data.length === 0) {
           let notification = {
             userId: userData.user_id,
-            message: 'Nuevo certificado',
-            type: 'certificate',
+            type: "11",
             notificationId: '',
             courseId: course.id,
+            season: +season,
+            lesson: +lesson,
             title: course.title,
           }
           createNotification(notification);
@@ -62,6 +61,23 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           setCertificate_id(res.data.data[0].id)
         }
       })
+      if (userData.level === 2) {
+        let course = userData.user_courses.filter((x: any) => x.course_id === 30);
+        let today = new Date().getTime() / 1000;
+        if (today > course[0].final_date) {
+          var day = new Date();
+          var nextYear = new Date();
+          nextYear.setFullYear(day.getFullYear() + 1);
+          let data = {
+            final_date: nextYear.getTime() / 1000,
+            start_date: today,
+            user_id: userData.user_id
+          }
+          updateMembership(data).then((res) => {
+            alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
+          })
+        }
+      }
       setCertificate(true)
     }
     setCount(viewed)

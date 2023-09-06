@@ -9,6 +9,7 @@ import Modules from "./LessonComponents/Modules/Modules";
 import Courses from "./LessonComponents/Courses/Courses";
 import { getCourseApi } from "../../../components/api/lessons";
 import ActivityModal from "./ActivityModal/ActivityModal";
+import { createNotification, getNotifications } from "../../../components/api/notifications";
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -45,8 +46,25 @@ const Lesson = () => {
     setShow(false)
   }
   const openActivityModal = () => {
+    let notification = {
+      userId: userDataAuth.user.user_id,
+      type: "14",
+      notificationId: '',
+      courseId: id,
+      season: +season,
+      lesson: +lesson,
+      title: course.title,
+    }
+    getNotifications({ userId: userDataAuth.user.user_id }).then((res) => {
+      if (res.filter((x: any) => x.course_id !== null &&
+        x.type === "14" &&
+        x.course_id === id).length === 0) {
+        createNotification(notification);
+      }
+    })
     setShow(true)
   }
+
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
@@ -60,18 +78,14 @@ const Lesson = () => {
         setUserData(user);
         getCourseApi(id).then((res) => {
           if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) {
-            return router.push(
-              { pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } }
-            )
+            return router.push({ pathname: PLAN_PATH });
+            // router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
           }
-          if (res.type === 'Mensual' && (user.level === 0 && user.final_date < today)) {
+          if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
             return router.push({
               pathname: PURCHASE_PATH,
-              query: { type: 'subscription' }
+              query: { type: 'subscription', frequency: 'month', v: '1' }
             });
-          }
-          if ((res.type === "Mensual") && (user.level === 1 && user.final_date < today && user.plan_name === "Gonvar plus+")) {
-            router.push(`${PLAN_PATH}`)
           }
           setCurrentLesson(res.seasons[season].lessons[lesson]);
           setCourse(res);
@@ -189,7 +203,7 @@ const Lesson = () => {
               eason={season}
               lesson={lesson}
               teacherCreds={course.professors}
-              courseIds={{ courseId: id, seasonId: course.seasons[season].id }}
+              courseIds={{ courseId: id, seasonId: course.seasons[season]?.id }}
               previousLesson={previousLesson}
               nextLesson={nextLesson}
               firstLesson={firstLesson}

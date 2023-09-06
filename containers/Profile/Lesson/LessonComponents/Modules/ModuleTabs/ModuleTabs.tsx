@@ -6,13 +6,14 @@ import { BsPlayBtn } from "react-icons/bs";
 import { IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from "react-icons/io5";
 import { SlNotebook } from "react-icons/sl";
 import { TfiCommentAlt } from "react-icons/tfi";
-
+import { FcSupport } from 'react-icons/fc'
 import { user } from "firebase-functions/v1/auth";
 import { useRouter } from "next/router";
 
 import { getHomeworkUserApi } from "../../../../../../components/api/homeworks";
-import { LESSON_PATH } from "../../../../../../constants/paths";
+import { LESSON_PATH, SUPPORT_PATH } from "../../../../../../constants/paths";
 import { Titles } from "../Module.styled";
+import Link from "next/link";
 
 interface IModule {
   value: number;
@@ -129,6 +130,12 @@ const ModuleTabs = (props: IModule) => {
           <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </Titles>
+        <Link href={SUPPORT_PATH}>
+          <Titles >
+            <FcSupport className="icon" />
+            Asesoría
+          </Titles>
+        </Link>
       </div>
       {
         course.sequential === 0 &&

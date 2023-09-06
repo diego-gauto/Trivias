@@ -76,7 +76,7 @@ export const SecondBox = styled.div`
   @media (max-width: 1280px) {
     padding-left: 0;
   }
-  gap: 40px;
+  gap: 20px;
   width: 70%;
   height: 100%;
   margin-top: 38px;
@@ -1393,7 +1393,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
   flex-direction: column;
   justify-content: space-between;
   min-width: 60%;
-  gap: 20px;
+  gap: 15px;
   @media (max-width: 1200px) {
     min-width: 420px;
   }
@@ -1868,11 +1868,22 @@ export const RewardContainer = styled.div<{ reward: any }>`
       font-size: 14px;
     }
   }
+  .help-btn {
+    background: #942ced;
+    gap: 30px;
+    p {
+      margin: 0;
+      margin-left: 50px;
+    }
+    svg {
+    }
+  }
 `;
 export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 352px;
   button {
     margin-bottom: 20px;
     background: #3f1168;
@@ -2066,6 +2077,7 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
       }
     `}
   @media (max-width: 1200px) {
+    max-width: 260px;
     min-width: 260px;
     padding-inline: 15px;
   }
@@ -2191,7 +2203,7 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
 export const PaymentMethodContainer = styled.div<{ add: any }>`
   min-width: 60%;
   @media (max-width: 1200px) {
-    min-width: 420px;
+    // min-width: 420px;
     max-width: 420px;
   }
   @media (max-width: 1023px) {

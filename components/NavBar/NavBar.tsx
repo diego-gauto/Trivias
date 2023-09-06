@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { googleLogout } from "@react-oauth/google";
+
 import {
   BLOGS_PATH,
   DEFAULT_USER_IMG,
@@ -19,7 +20,9 @@ import {
   SIGNUP_PATH,
 } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
-import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { conektaCustomer } from "../api/auth";
+import { createNotification, getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { retrieveConektaCustomerInfo, updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -43,6 +46,11 @@ import {
   UserContain,
   UserImage,
 } from "./NavBar.styled";
+import { SlBell } from "react-icons/sl";
+import Notifications from "./Notifications/Notifications";
+import { NotificationContainer } from "./Notifications/Notifications.styled";
+import { getRewardsApi } from "../api/rewards";
+import { getCourseApi } from "../api/lessons";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -56,6 +64,8 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
+  let today = new Date().getTime() / 1000;
+  const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const toggleIngresarOptionsMenu = () => {
     setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
@@ -94,8 +104,10 @@ const NavBar = () => {
 
   const userNotifications = (userId: any) => {
     let data = {
-      userId: userId
+      userId: userId,
+      conekta_id: userDataAuth.user.conekta_id
     }
+    retrieveConektaCustomerInfo(data)
     getNotifications(data).then((res) => {
       let tempCounter = 0;
       res.forEach((not: any) => {
@@ -103,6 +115,51 @@ const NavBar = () => {
           tempCounter++;
         }
       })
+      let tempDayCount: any = today - userDataAuth.user.start_date;
+      let getMonth = tempDayCount / (3600 * 24 * 30);
+      getRewardsApi().then(async (response) => {
+        if (response.filter((x: any) => x.month <= getMonth).length > 0) {
+          let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
+          tempRewards.forEach(async (element: any) => {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "12",
+              notificationId: '',
+              rewardId: element.id
+            }
+
+            if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
+              createNotification(notification);
+            }
+          });
+        }
+      })
+      let courses = userDataAuth.user.user_history;
+      courses.forEach((element: any) => {
+        getCourseApi(element.course_id).then((response) => {
+          let count = 0
+          response.lessons.forEach((lesson: any) => {
+            if (lesson.users.includes(userDataAuth.user.user_id)) {
+              count++
+            }
+          });
+          if (count !== response.lessons.length) {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "7",
+              notificationId: '',
+              courseId: element.course_id,
+              season: element.season_id,
+              lesson: element.lesson_id,
+              title: response.title,
+            }
+            if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
+              createNotification(notification);
+            }
+          }
+        })
+      });
+
       setUnReadNotification(tempCounter);
       setNotifications(res);
     })
@@ -130,13 +187,39 @@ const NavBar = () => {
     setNewHamburgerMenuIsOpen(false);
   }
   try {
-    var userDataAuth = useAuth();
+    var userDataAuth: any = useAuth();
 
     useEffect(() => {
-      // localStorage.clear();
-      // logoutFunc();
       if (userDataAuth.user !== null) {
-        // userNotifications(userDataAuth.user.user_id)
+        if (userDataAuth.user.conekta_id === null) {
+          let body = {
+            phone_number: "5211111111",
+            name: userDataAuth.user.name,
+            email: userDataAuth.user.email,
+            userId: userDataAuth.user.user_id
+          }
+          conektaCustomer(body)
+        };
+
+        userNotifications(userDataAuth.user.user_id)
+        if (userDataAuth.user.level === 2) {
+          let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
+          let today = new Date().getTime() / 1000;
+          if (today > course[0].final_date) {
+            var day = new Date();
+            var nextYear = new Date();
+            nextYear.setFullYear(day.getFullYear() + 1);
+            let data = {
+              final_date: nextYear.getTime() / 1000,
+              start_date: today,
+              user_id: userDataAuth.user.user_id
+            }
+            updateMembership(data).then((res) => {
+              alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
+            })
+          }
+        }
+
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
           setIsAdmin(true);
@@ -315,36 +398,27 @@ const NavBar = () => {
                   <h1 className='title'>
                     Notificaciones
                   </h1>
-                  <p className='read-all-tag' onClick={updateNotificationStatus}>
-                    Marcar como leidos
-                  </p>
                 </div>
                 <div className="all-notifications">
                   {
-                    notifications.length > 0 ?
-                      notifications.map((not: any, index: number) => {
-                        return (
-                          <Notifications
-                            message={not.message === "Recompensa aprovada" ? "Recompensa aprobada" : not.message}
-                            status={not.status}
-                            title={not.title}
-                            type={not.type}
-                            courseID={not.course_id}
-                            seasonID={not.season}
-                            lessonID={not.lesson}
-                            created_at={not.created_at}
-                            openNotifications={openNotifications}
-                            notification_id={not.notification_id}
-                            unReadNotification={unReadNotification}
-                            setUnReadNotification={setUnReadNotification}
-                            key={"Notifications_" + index}
-                          />
-                        )
-                      })
-                      :
-                      <div className="empty-notifications">Sin Notificaciones!</div>
+                    notifications.length > 0 &&
+                    notifications.map((not: any, index: number) => {
+                      return (
+                        <Notifications
+                          notification={not}
+                          user={userData}
+                          openNotifications={openNotifications}
+                          unReadNotification={unReadNotification}
+                          setUnReadNotification={setUnReadNotification}
+                          key={"Notifications_" + index}
+                        />
+                      )
+                    })
                   }
                 </div>
+                {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
+                  Marcar todas como leído
+                </p>}
               </NotificationContainer>
               {
                 !openNotification &&
@@ -409,7 +483,8 @@ const NavBar = () => {
                   </FloatingMenuItem>
                 </Link>
               </IngresarOptionsList>
-              <div>
+              <div className="hamburguer-contain">
+                <p className="title">Menu</p>
                 <HamburgerMenu
                   src="/images/Navbar/menu2.png"
                   onClick={toggleNewHamburgerMenuIsOpen}
@@ -460,8 +535,11 @@ const NavBar = () => {
             </div>
             <UserContain color={color}>
               <Link href={REWARDS_PATH}>
-                <div className="rewards-circle" onClick={closeHamburgerMenu}>
-                  <div className="inside" />
+                <div className="hamburguer-contain">
+                  <p className="title" style={{ bottom: -37 }}>Recompensas</p>
+                  <div className="rewards-circle" onClick={closeHamburgerMenu}>
+                    <div className="inside" />
+                  </div>
                 </div>
               </Link>
               {/* <div className="bell-contain">
@@ -514,14 +592,18 @@ const NavBar = () => {
                   <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
                 }
               </div> */}
-              < UserImage onClick={() => { setHamburger(!hamburger) }}>
-                {
-                  userData && userData.photo
-                    ? <img src={userData.photo} />
-                    : <img src={DEFAULT_USER_IMG} />
-                }
-              </UserImage>
+              <div className="hamburguer-contain">
+                <p className="title">Menu</p>
+                < UserImage onClick={() => { setHamburger(!hamburger) }}>
+                  {
+                    userData && userData.photo
+                      ? <img src={userData.photo} />
+                      : <img src={DEFAULT_USER_IMG} />
+                  }
+                </UserImage>
+              </div>
             </UserContain>
+
             <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger} admin={isAdmin}>
               <HBMenu className="menu-hamburger">
                 <Link href={PROFILE_PATH} >
@@ -540,7 +622,7 @@ const NavBar = () => {
                 }
                 <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
-                    Trivias
+                  Trivias
                   </HBList>
                 </Link>
                 <Link href={PLAN_PATH} >

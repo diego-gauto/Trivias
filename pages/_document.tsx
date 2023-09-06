@@ -61,6 +61,7 @@ class MyDocument extends Document {
           </script>
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4DJNFW"
             height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
+          <script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
         </Head>
         <body>
           <Main />

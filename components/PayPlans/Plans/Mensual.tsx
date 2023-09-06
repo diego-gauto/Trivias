@@ -4,10 +4,12 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import router from "next/router";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { useAuth } from "../../../hooks/useAuth";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
+import { conektaCreateSubscription } from "../../api/conekta/test";
+import { user } from "firebase-functions/v1/auth";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -41,22 +43,15 @@ const Mensual = (props: IData) => {
     }
   }
 
-  useEffect(() => {
-
-  }, [setver])
-
   const goTo = () => {
     if (user.id) {
       if (user.level === 0 && user.final_date < today) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month' } })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "1" } })
       }
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)
       }
-      if (user.level === 1 && user.final_date < today) {
-        router.push(PREVIEW_PATH)
-      }
-      if (user.level === 1 && user.final_date > today) {
+      if (user.level > 0 && user.final_date < today) {
         router.push(PREVIEW_PATH)
       }
     }

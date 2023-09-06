@@ -25,6 +25,8 @@ export interface ICourseModal {
     level: number;
     final_date: number;
     plan_name?: string;
+    method: string;
+    role: string;
   };
 }
 export interface ISeasons {

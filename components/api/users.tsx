@@ -160,14 +160,24 @@ export const getCertificateApi = async (certificate_id: any) => {
     });
 };
 
-export const updateStripe = async (body: any) => {
+export const conektaPm = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/users/update-stripe-wa", body)
+    .post("https://gonvar.inowu.dev/" + "users/conekta/paymentMethods", user)
     .then((res) => {
-      return res.data.data;
+      return res;
     })
     .catch((error) => {
-      console.log(error);
+      return error
+    });
+};
+
+export const userById = async (userId: string) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "users/" + userId)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
       return error
     });
 };

@@ -35,15 +35,13 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
       }
       let notification = {
         userId: data.userId,
-        message: 'Tarea revisada',
-        type: 'homework',
-        subType: "update",
+        type: review.approved === 1 ? "1" : "2",
         notificationId: '',
-        score: data.lessonPoints,
         courseId: data.courseId,
         season: data.seasonNumber - 1,
         lesson: data.lessonNumber - 1,
         title: data.courseTitle,
+        score: review.approved === 1 ? data.lessonPoints : 0
       }
       createNotification(notification);
       reviewHomeworkApi(temp).then(() => {

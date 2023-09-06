@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../api/admin";
 import { getUserApi } from "../api/users";
@@ -132,6 +132,7 @@ const LandingNailsMaster = () => {
         if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
           router.push(
             { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
+            // { pathname: NAILS_FORM }
           )
         }
       })
@@ -157,12 +158,12 @@ const LandingNailsMaster = () => {
       <div className="section mt-0">
         <div className="mt-3 fechas">
           <h4><b>Actualización 2023</b><br />
-            Inicio: 20 de Julio del 2023</h4>
+            Inicio: 28 de Agosto del 2023</h4>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
-          <h2 className="big-text "><b>Nail's Master </b><br />
-            <b className="light-p">Revolution</b></h2>
+          <h2 className="big-text "><b>Nail's Master </b>
+            <b className="light-p">2.0</b></h2>
           <h2 className="subtitle"><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
         </div>
 
@@ -316,7 +317,7 @@ const LandingNailsMaster = () => {
             <div className="header-contain">
               <h2 className="big-title bold">Arita Gonvar</h2>
             </div>
-            <p className="p-pink"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master Revolution</b></p>
+            <p className="p-pink"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master 2.0</b></p>
             <div className="sangria">
               <p><b>Instructora certificada</b> bajo {responsive850 && <br />}estándares de aplicación de {responsive850 && <br />}uñas artificiales por {responsive850 && <br />}competencia.</p>
               <p><b>Especialista en capacitación{responsive850 && <br />} para principiantes,</b> estructura {responsive850 && <br />}profesional en escultural {!responsive850 && <br />}
@@ -342,7 +343,7 @@ const LandingNailsMaster = () => {
 
       <div className="benefits-section">
 
-        <h2 className="text-blue">Con <b className="blue">Nails Master Revolution</b> te{responsive850 && <br />} daremos  <b className="blue">beneficios
+        <h2 className="text-blue">Con <b className="blue">Nails Master 2.0</b> te{responsive850 && <br />} daremos  <b className="blue">beneficios
           {!responsive850 && <br />} exclusivos</b> y {responsive850 && <br />}tendrás acceso a la comunidad{responsive850 && <br />} de {!responsive850 && <br />}estudiantes y profesionales {responsive850 && <br />}de
           la industria de las uñas <br /><b className="blue">más grande de Latinoamérica.</b></h2>
 
@@ -351,7 +352,7 @@ const LandingNailsMaster = () => {
           <div className="info-row">
             <div className="info-content">
               <img src={calendar} className="icon" />
-              <h5>3 meses de acceso a <b>Nails Master Revolution</b></h5>
+              <h5>3 meses de acceso a <b>Nails Master 2.0</b></h5>
             </div>
             <div className="info-content info-side">
               <img src={calendar} className="icon" />
@@ -407,10 +408,10 @@ const LandingNailsMaster = () => {
         <h2 className="yellow h1"><b>Todo lo que incluye este {responsive850 && <br />}increíble programa</b></h2>
         {
           !responsive850 ?
-            <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails Master Revolution <br />
+            <p className="h4"><b>Para complementar tu aprendizaje, al inscribirte a Nails Master 2.0 <br />
               obtendrás cuadernillos, manuales y textos que te ayudarán en tu carrera de Nail Artist.</b></p>
             :
-            <p className="h4">Para complementar tu aprendizaje, <br />al inscribirte a Nails Master Revolution<br />
+            <p className="h4">Para complementar tu aprendizaje, <br />al inscribirte a Nails Master 2.0<br />
               <b> obtendrás cuadernillos, manuales y textos<br /></b> que te ayudarán en tu carrera de Nail Artist.</p>
         }
 
@@ -419,7 +420,7 @@ const LandingNailsMaster = () => {
           <div className="course-container">
             <div className="course-detail">
               <img src={book} className="icon" />
-              <p>Curso {responsive850 && "Nails Master Revolution"}{responsive850 ? <br /> : " | "}<b className="p-pink">Costo real: $2,399.00 MXN</b></p>
+              <p>Curso {responsive850 && "Nails Master 2.0"}{responsive850 ? <br /> : " | "}<b className="p-pink">Costo real: $2,399.00 MXN</b></p>
             </div>
             <div className="course-detail">
               <img src={book} className="icon" />
@@ -676,7 +677,7 @@ const LandingNailsMaster = () => {
       <div className="subject-section">
         <img src={linesB} className="up-l" />
         <h2 className="title-ppal bold">TEMARIO</h2>
-        <h4>Conoce todo lo que aprenderás {responsive850 && <br />}en <b>Nail Master Revolution</b></h4>
+        <h4>Conoce todo lo que aprenderás {responsive850 && <br />}en <b>Nail Master 2.0</b></h4>
         <div className="subject-container">
           <div className="side">
             <div className="subject">
@@ -690,7 +691,7 @@ const LandingNailsMaster = () => {
             <div className="subject">
               <div className="lessons">
                 <h3 className="num"><b>2.</b></h3>
-                <h3 className="title"><b>Bienvenida a Nails Master Revolution</b></h3>
+                <h3 className="title"><b>Bienvenida a Nails Master 2.0</b></h3>
               </div>
               <h5><b className="p-pink">Lección 1.</b> Presentación y Bienvenida.</h5>
               <h5><b className="p-pink">Lección 2.</b> Objetivos y Perfil de Egreso.</h5>

@@ -6,23 +6,26 @@ import {
   WhiteLoader,
   LoaderContain,
 } from "./User.styled";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../../../firebase/firebaseConfig";
-import { deletePaymentMethod, updatePaymentMethod } from "../../../store/actions/ProfileActions";
-import { AiFillStar, AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { addPaymentMethod } from "../../../store/actions/PaymentActions";
-import { attachPaymentMethod, createPaymentMethod, detachPaymentMethod, setDefaultPaymentMethod } from "../../../components/api/profile";
+import { attachPaymentMethodConekta, detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../../../components/api/profile";
+import { conektaPm } from "../../../components/api/users";
+import PaymentMethodModal from "../../../components/PaymentMethodModal/PaymentMethodModal";
+declare let window: any
 
 const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState<any>({ data })
-  const handleShow = () => setShow(true);
   const [loader, setLoader] = useState<any>(false);
   const [deleteLoad, setDeleteLoad] = useState<any>(false);
+  const [paymentMethods, setPaymentMethods] = useState([]);
   const [card, setCard] = useState<any>({
     holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
   });
+
+  useEffect(() => {
+    window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
+  }, [])
 
   const addNewCard = async () => {
     setLoader(!loader);
@@ -30,62 +33,92 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
       alert('Por favor acomplete todos los campos!');
       setLoader(false);
     } else {
-      const info = {
-        card: card,
-        stripe_id: data.stripe_id
-      }
-      createPaymentMethod(info).then((res) => {
-        if (res.status === 400) {
-          alert("Hay un error en los datos de la tarjeta!");
-          setLoader(false);
-        } else {
-          let cardInfo = {
-            stripe_id: data.stripe_id,
-            payment_method: res.data.paymentMethod.id
-          }
-          attachPaymentMethod(cardInfo).then((response) => {
-            if (response.status === 400) {
-              alert("Hay un error en los datos de la tarjeta!");
-              setLoader(false);
-            }
-            setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-            newCard();
-            handleClick(true);
-            setLoader(false);
-          })
+      let tempCard = {
+        card: {
+          number: card.number.replaceAll(" ", ""),
+          name: card.holder,
+          exp_month: card.exp_month,
+          exp_year: card.exp_year,
+          cvc: card.cvc,
         }
-      })
+      }
+      window.Conekta.Token.create(
+        tempCard,
+        conektaSuccessResponseHandler,
+        conektaErrorResponseHandler, 'web'
+      );
     }
   }
 
+  const conektaSuccessResponseHandler = (token: any) => {
+    let tokenId = token.id
+    const body = {
+      token_id: tokenId,
+      conekta_id: data.conekta_id
+    }
+    attachPaymentMethodConekta(body).then((res) => {
+      handleClick(true);
+      setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+      newCard();
+      setLoader(false);
+    })
+  }
+  const conektaErrorResponseHandler = (response: any) => {
+    alert("Hay un error en los datos de la tarjeta!")
+    setLoader(false)
+  };
+
   const updateUserCard = async (card: any) => {
     setDeleteLoad(true);
-    let info = {
+    let body = {
       payment_method: card.id,
-      stripe_id: data.stripe_id
+      stripe_id: data.stripe_id,
+      conekta_id: data.conekta_id
     }
-    setDefaultPaymentMethod(info).then(() => {
-      handleClick();
+    setDefaultPaymentMethodConekta(body).then((res) => {
+      handleClick(true);
       setDeleteLoad(false);
     })
   }
+
   const detachPayment = async (card: any) => {
-    setDeleteLoad(!loader);
-    let info = {
-      payment_method: card.id
+    if (card.default && user.level === 1 || pm.length === 1 && user.level === 1) {
+      setShow(true);
+      return;
     }
-    detachPaymentMethod(info).then(() => {
+    setDeleteLoad(!loader);
+    let body = {
+      payment_method: card.id,
+      conekta_id: data.conekta_id
+    }
+    detachPaymentMethodConekta(body).then(() => {
       setDeleteLoad(false);
       handleClick(true);
     })
   }
 
   useEffect(() => {
-    setUser({ ...data })
+    setDeleteLoad(true);
+    let body = {
+      stripe_id: data.stripe_id,
+      conekta_id: data.conekta_id
+    }
+    conektaPm(body).then((res) => {
+      const conektaPaymentMethods = res.data.payment_methods.data
+      const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
+      setPaymentMethods(extractedProperties);
+      setDeleteLoad(false);
+    })
   }, [data])
+
+
 
   return (
     <PaymentMethodContainer add={addPayment}>
+      <PaymentMethodModal show={show} onHide={() => { setShow(false); }} newCard={() => { newCard(true); setShow(false); }}
+        message="Si desea eliminar su metodo de pago, por favor de agregar otro metodo de pago y hacerlo su metodo de pago predeterminado o si desea puede cancelar su suscripcion, gracias!"
+
+      />
       <div className="main-container">
         <div className="title">
           Métodos de pago
@@ -94,8 +127,8 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
           !deleteLoad
             ?
             <>
-              {pm.length > 0 ? <>
-                {pm.map((pm: any, index: any) => {
+              {(paymentMethods.length > 0 && !deleteLoad) ? <>
+                {paymentMethods.map((pm: any, index: any) => {
                   return (
                     <React.Fragment key={"pmUser " + index}>
                       <div className="card-contain" >
@@ -105,16 +138,16 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
                         >
                           <CardIconResp>
                             {
-                              pm.card.brand == "visa" &&
+                              pm.brand == "visa" &&
                               <img src="/images/profile/visaLogo.png" />
                             }
                             {
-                              pm.card.brand == "mastercard" &&
+                              pm.brand == "mastercard" &&
                               <img src="/images/profile/masterCardLogo.png" />
                             }
                           </CardIconResp>
                           {/* <CardIconResp brand={pm.brand} /> */}
-                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.card.last4}</span></p>
+                          <p className="text-card">Tarjeta de débito | <span className="last-digits">Terminación</span><span className="last-4"> •••• {pm.last4}</span></p>
                           {
                             pm.default
                               ?

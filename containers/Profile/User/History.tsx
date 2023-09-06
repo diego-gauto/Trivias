@@ -5,6 +5,7 @@ import { userInvoices } from '../../../components/api/profile';
 import { getInvoice } from '../../../store/actions/PaymentActions';
 import { getUserInvoices } from '../../../store/actions/ProfileActions';
 import { HistoryContainer } from './User.styled'
+import { getCourseApi } from '../../../components/api/lessons';
 
 export const History = ({ user, addPayment }: any) => {
   const [option, setOption] = useState(0);
@@ -33,9 +34,10 @@ export const History = ({ user, addPayment }: any) => {
   }
 
   const retrieveInvoices = () => {
-    userInvoices(user.id).then((res) => {
+    userInvoices(user.id).then(async (res) => {
       let tempInvoice: any = [];
       let tempOption: any = [];
+      const course = await getCourseApi(30);
       res.data.invoices.forEach((element: any) => {
         let tempDate: any = new Date(element.paid_at);
         let tempDay = tempDate.getDate();
@@ -51,14 +53,15 @@ export const History = ({ user, addPayment }: any) => {
           tempYear = tempDate.getFullYear();
           element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
           let date = new Date().getTime() / 1000;
-          if ((tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) > date) {
+          if (user.final_date > date) {
             element.status = "Activo"
           } else {
             element.status = "Inactivo"
           }
-        } else {
-          let tempFinalDate = element.finalDate
-          tempDate = new Date((element.finalDate) * 1000);
+        }
+        else {
+          let tempFinalDate = (new Date(element.paid_at).getTime() / 1000) + course.duration * 86400
+          tempDate = new Date((tempFinalDate) * 1000);
           tempDay = tempDate.getDate();
           tempMonth = tempDate.getMonth() + 1;
           tempYear = tempDate.getFullYear();

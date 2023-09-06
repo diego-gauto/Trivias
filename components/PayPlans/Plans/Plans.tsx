@@ -2,6 +2,7 @@
 
 import { IUser } from "../../../interfaces/IUserData";
 import Anual from "./Anual";
+import Ind_Anual from "./Ind_Anual";
 import Individual from "./Individual";
 import Mensual from "./Mensual";
 import { PlanStyles } from "./Plans.styled";
@@ -21,24 +22,21 @@ export const Plans = (props: IData) => {
     <PlanStyles className="w-100">
       <div className="planes">
         <div className="row colors">
-          {(selected === 0 || selected === 1) &&
-            <div className="col-sm-6 col-lg-3 my-3 month">
-              <Mensual user={user} />
-            </div>}
-          {(selected === 0 || selected === 2) &&
-            <div className="col-sm-6 col-lg-3 my-3 year">
-              <Anual user={user} />
-            </div>}
-
-          {(selected === 0 || selected === 3) &&
-            <div className="col-sm-6 col-lg-3 my-3 ind">
-              <Individual user={user} />
-            </div>}
-
-          {(selected === 0 || selected === 4) &&
-            ''}
-          {/* <div className="col-sm-6 col-lg-3 my-3 ind-y">
-            <Ind_Anual />
+          {(selected === 1 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
+            {/* 1ero */}
+            <Mensual user={user} />
+          </div>}
+          {/* Blue */}
+          {(selected === 2 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
+            <Anual user={user} />
+          </div>}
+          {/* Green */}
+          {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
+            <Individual user={user} />
+          </div>}
+          {/* Ultimo */}
+          {/* <div className="col-sm-6 col-lg-3 my-3">
+            <Ind_Anual user={user} />
           </div> */}
         </div>
       </div>
