@@ -541,7 +541,10 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          <ActiveUserConekta show={open} ondHide={() => { setOpen(false) }} user={userData} />
+          {
+            frequency === "month" && v === "1" &&
+            <ActiveUserConekta show={open} ondHide={() => { setOpen(false) }} user={userData} />
+          }
           <ErrorModal show={show} setShow={setShow} error={errorMsg} />
           <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={userData} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
           <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={userData} product={product} bank_ref={bank_ref} />
