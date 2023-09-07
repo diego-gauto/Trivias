@@ -283,7 +283,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
                     <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
                 </div>
             }
-            {(!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus") || (conektaUsers.filter((x: any) => x.email === user.email && user.final_date === 1694040000).length > 0))) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {(!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus") || (conektaUsers.filter((x: any) => x.email === user.email && user.final_date === 1694040000).length > 0 && today < user.final_date))) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
             {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Reactivar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>
