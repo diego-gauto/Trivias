@@ -69,7 +69,7 @@ const Purchase = () => {
   let idC = courseId.get('id')
 
   const subscription = {
-    price: 149.00,
+    price: frequency === "month" ? 149.00 : 1599.00,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
