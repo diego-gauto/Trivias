@@ -3,7 +3,7 @@
   width: 298px;
   height: 340px;
   cursor: pointer;
-  margin-bottom: 10%;
+  margin: 0 10px 80px 10px;
 }
 
 .cardImage {
@@ -60,7 +60,7 @@
 
   .cardContainer {
     width: 200px;
-    height: 277px;
+    height: 230px;
   }
 
   .cardImageUnder {
