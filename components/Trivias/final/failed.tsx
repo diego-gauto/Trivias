@@ -13,7 +13,7 @@ const Failed = () => {
       <SliderCourses></SliderCourses>
       <p className={width80}>Recuerda que tenemos más de 60 cursos disponibles para ti.</p>
       <p className={comienza}>¡Comienza tu carrera de Nails Artist hoy!</p>
-      <Link href={`/`}>
+      <Link href={`/planes`}>
         <a className={centrado}>
           <button>Comenzar</button>
         </a>

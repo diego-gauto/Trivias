@@ -25,7 +25,7 @@ const Success = () => {
       <p className={revisa}>Revisa tu correo electrónico para conocer los pasos para suscribirte y obtener tu descuento o haz click en Comenzar y suscríbete ahora.</p>
       <div className={buttonContainer}>
 
-        <button onClick={handleClick}>Comienza por $1.599</button>
+        <button onClick={handleClick}>Comienza por $1,599</button>
         <Link href={`/suscripcion-anual`}>
           <a>
             <button>Más información</button>
