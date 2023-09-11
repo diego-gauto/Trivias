@@ -16,6 +16,7 @@ export interface ICourses {
   created_at: string;
   route: string;
   course_number: number;
+  with_certificate: boolean;
   id: number;
   professors: [IProfessors];
   categories: [ICategories];

@@ -69,7 +69,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       array.push(element.course_id)
     });
     getCoursesApi().then((courses) => {
-      let tempCertificates = courses.filter((x: any) => !array.includes(x.id));
+      let tempCertificates = courses.filter((x: any) => !array.includes(x.id) && x.with_certificate === 1);
       let countArray: any = []
       tempCertificates.forEach((course: any, index: number) => {
         countArray.push({ id: course.id, name: course.title, count: 0 })
