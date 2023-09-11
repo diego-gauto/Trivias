@@ -69,6 +69,7 @@ export const Input = styled.input`
 export const ButtonContain = styled.div`
   display: flex;
   justify-content: center;
+  gap: 20px;
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
