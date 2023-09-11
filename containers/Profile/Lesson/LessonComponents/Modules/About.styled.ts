@@ -153,6 +153,16 @@ export const LessonContent = styled.div`
       font-weight: 700;
     }
   }
+  .btn-material {
+    padding: 8px 20px;
+    color: #f8a44c;
+    border-radius: 100px;
+    border: 1px solid #f8a44c;
+    background: transparent;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
   @media (max-width: 1023px) {
     font-size: 12px;
   }

@@ -5,7 +5,6 @@ import { Container } from './ModalMaterials.styled';
 import { IoClose } from 'react-icons/io5';
 
 export const ModalMaterials = (props: IMaterials) => {
-
   const { show, setShow, materials } = props;
 
   const handleClose = () => setShow(false);
