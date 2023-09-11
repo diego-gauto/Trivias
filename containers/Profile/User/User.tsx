@@ -35,6 +35,7 @@ const User = () => {
   const [certificateProgress, setCertificateProgress] = useState(0);
   const [missingData, setMissingData] = useState<number>(0);
   const [lastTimeReward, setLastTimeReward] = useState<any>([]);
+  const [totalCertificates, setTotalCertificates] = useState<number>(0);
   const newCard = () => {
     setAddPayment(!addPayment)
   }
@@ -77,9 +78,9 @@ const User = () => {
       await Promise.all(res.map((reward: any) => {
         tempRewards.push(reward);
       }))
-      // setRewards(res);
     })
     await getAllRewardDataApi(user.id).then((res) => {
+      console.log(res);
       completedCertificates = res.certificates;
       nextCourseCertificate = res.nextCertificates;
     });
@@ -91,8 +92,6 @@ const User = () => {
       monthCompleted: tempTimeLevel,
       monthPercentage: getMonth
     }
-    // setCompleteCertificates(completedCertificates);
-    // setCourses(nextCourseCertificate);
     await getNextRewards(data);
   }
   const getTimeReward = async (props: any) => {

@@ -5,7 +5,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { updateUserPlan } from "../../../../../store/actions/UserActions";
-import { updateMembershipDaysApi } from "../../../../api/users";
+import { updateMembershipAnualApi, updateMembershipDaysApi } from "../../../../api/users";
 
 import { CloseIcon } from "../UsersCardData.styled";
 import {
@@ -38,14 +38,30 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
         tempFinalDate = today + days * 86400;
         user.final_date = tempFinalDate;
       }
-
       updateMembershipDaysApi(user).then((res: any) => {
         alert("Se agregaron: " + days + " días")
         handleClose();
       });
     }
   }
-
+  const addYearSubscription = () => {
+    if (confirm(`Estas seguro que quieres agregar anualidad al usuario ${user.email}?`)) {
+      let tempFinalDate = 0;
+      if (user.final_date > today) {
+        tempFinalDate = user.final_date + 365 * 86400;
+        user.final_date = tempFinalDate;
+      }
+      if (user.final_date < today) {
+        tempFinalDate = today + 365 * 86400;
+        user.final_date = tempFinalDate;
+      }
+      updateMembershipAnualApi(user).then((res: any) => {
+        console.log(res);
+        alert("Se agrego la anualidad correctamente!")
+        handleClose();
+      });
+    }
+  }
   const deleteDays = () => {
     if (!days) {
       alert("Agregue dias");
@@ -80,6 +96,8 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
           />
         </InputContain>
         <ButtonContain>
+          <PurpleButton style={{ background: "blue" }} onClick={addYearSubscription}>
+            Agregar Anualidad</PurpleButton>
           <PurpleButton onClick={() => {
             addDays()
           }}>Agregar días</PurpleButton>

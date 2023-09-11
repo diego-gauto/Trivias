@@ -82,6 +82,13 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
             </div>
           }
           {
+            less.quiz === 1 &&
+            <div className='activity'>
+              <img src={HW_ICON} />
+              Esta lección tiene un quiz
+            </div>
+          }
+          {
             less.lesson_material.length > 0 &&
             <div className='activity'>
               <img src={DOWNLOAD_MATERIAL} />
@@ -135,6 +142,13 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
             </div>
           }
           {
+            less.quiz === 1 &&
+            <div className='activity'>
+              <img src={HW_ICON} />
+              Esta lección tiene un quiz
+            </div>
+          }
+          {
             less.lesson_material.length > 0 &&
             <div className='activity'>
               <img src={DOWNLOAD_MATERIAL} />
@@ -164,6 +178,13 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
           <div className='activity'>
             <img src={HW_ICON} />
             Esta lección tiene una tarea
+          </div>
+        }
+        {
+          less.quiz === 1 &&
+          <div className='activity'>
+            <img src={HW_ICON} />
+            Esta lección tiene un quiz
           </div>
         }
         {

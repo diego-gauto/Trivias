@@ -13,7 +13,7 @@ export const getUserApi = async (email: any) => {
         user_courses: res.data.courses,
         user_progress: res.data.progress,
         user_history: res.data.history,
-        user_certificates: res.data.certificates,
+        user_certificates: res.data.certificates_filter,
         roles: res.data.roles
       };
     })
@@ -73,6 +73,17 @@ export const updateScorePastUser = async (progress: any) => {
 export const updateMembershipDaysApi = async (user: any) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "admin/updateMembership", user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateMembershipAnualApi = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "admin/updateToAnualMembership", user)
     .then((res) => {
       return res;
     })

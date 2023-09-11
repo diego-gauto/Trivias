@@ -10,7 +10,7 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
+import { Landing_Facebook, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
 import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../api/admin";
 import { getAllCourseDataApi } from "../api/lessons";
@@ -97,10 +97,11 @@ views.set(4, false);
 interface ILandingSuscription {
   price: string;
   isMonth: boolean;
+  isFacebook?: boolean;
 }
 
 const LandingSuscription = (props: ILandingSuscription) => {
-  const { price, isMonth } = props;
+  const { price, isMonth, isFacebook } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
   const [cursos, setCursos] = useState(1)
@@ -160,27 +161,31 @@ const LandingSuscription = (props: ILandingSuscription) => {
   }, [setver])
 
   const handleRedirection = () => {
-    if (localStorage.getItem('email')) {
-      getUserApi(localStorage.getItem('email')).then((res) => {
-        if (res.level !== 0) {
-          router.push(PREVIEW_PATH)
-        } else {
-          if (isMonth) {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '1' } })
-          } else {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
-          }
-        }
-
-      })
-
+    if (isFacebook) {
+      router.push(Landing_Facebook);
     } else {
-      if (isMonth) {
-        localStorage.setItem('month', 'true')
+      if (localStorage.getItem('email')) {
+        getUserApi(localStorage.getItem('email')).then((res) => {
+          if (res.level !== 0) {
+            router.push(PREVIEW_PATH)
+          } else {
+            if (isMonth) {
+              router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '1' } })
+            } else {
+              router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
+            }
+          }
+
+        })
+
       } else {
-        localStorage.setItem('anual', 'true')
+        if (isMonth) {
+          localStorage.setItem('month', 'true')
+        } else {
+          localStorage.setItem('anual', 'true')
+        }
+        router.push(SIGNUP_PATH)
       }
-      router.push(SIGNUP_PATH)
     }
   }
 

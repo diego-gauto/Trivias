@@ -64,6 +64,7 @@ const AllCourses = (props: IAllCourses) => {
     id,
     index,
     getAllCourses,
+    with_certificate,
   } = props;
   const [course, setCourse] = useState<any>({
     id: id,
@@ -888,6 +889,24 @@ const AllCourses = (props: IAllCourses) => {
                   placeholder="Seleccione una imagen"
                   onChange={(e) => { getImage(e.target.files) }}
                 />
+              </div>
+              <div className="course-data">
+                <label className="course-data-title">Curso con certificado</label>
+                <select onChange={(e) => { setCourse({ ...course, with_certificate: parseInt(e.target.value) }) }}>
+                  <option value={1}>Con Certificado</option>
+                  <option value={0}>Sin Certificado</option>
+                </select>
+              </div>
+            </div>
+          }
+          {
+            !startEdit &&
+            <div className='rows'>
+              <div className="course-data">
+                <label className="course-data-title">Curso con certificado</label>
+                <p className="content">
+                  {with_certificate ? "Con certificado" : "Sin certificado"}
+                </p>
               </div>
             </div>
           }
