@@ -66,6 +66,7 @@ const Purchase = () => {
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [option, setOption] = useState("");
   let idC = courseId.get('id')
 
   const subscription = {
@@ -197,6 +198,12 @@ const Purchase = () => {
       delete card.last4
       delete card.status
       delete card.paymentMethod
+    }
+
+    if (option === "") {
+      alert("Por favor seleccione una opción para poder continuar!");
+      setLoader(false);
+      return;
     }
 
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
@@ -476,6 +483,10 @@ const Purchase = () => {
   const payWithOxxo = () => {
     const currentDate: any = new Date();
     const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+    if (option === "") {
+      alert("Por favor seleccione una opción para poder continuar!");
+      return;
+    }
 
     let data = {
       conekta_id: userData.conekta_id,
@@ -502,6 +513,10 @@ const Purchase = () => {
   const payWitSpei = () => {
     const currentDate: any = new Date();
     const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+    if (option === "") {
+      alert("Por favor seleccione una opción para poder continuar!");
+      return;
+    }
 
     let data = {
       conekta_id: userData.conekta_id,
@@ -583,6 +598,17 @@ const Purchase = () => {
                   Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
 
               </div>
+              <p style={{ fontWeight: "bold" }}>Menciona el medio por el cual te enteraste de nosotros:</p>
+              <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }}>
+                <option value="">Seleccione una opción</option>
+                <option value="Pagina web">Pagina web</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Tiktok">Tiktok</option>
+                <option value="Google">Google</option>
+                <option value="Youtube">Youtube</option>
+                <option value="Amistad / Familiar">Amistad / Familiar</option>
+              </select>
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
                 <div className="stripe">
@@ -707,7 +733,6 @@ const Purchase = () => {
                   {(loader) && <LoaderContainSpinner />}
                 </div>
                 {!trial && <div className="paypal" onClick={() => {
-
                 }}>
                   {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
                     "client-id": "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz",
@@ -723,6 +748,12 @@ const Purchase = () => {
                         shape: 'pill',
                         height: 50,
 
+                      }}
+                      onClick={() => {
+                        if (option === "") {
+                          alert("Por favor seleccione una opción para poder continuar!");
+                          return;
+                        }
                       }}
                       createSubscription={(data, actions) => {
                         setPlan({ method: "paypal" })
@@ -909,6 +940,17 @@ const Purchase = () => {
                     <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
                       Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
                   </div>
+                  <p style={{ fontWeight: "bold" }}>Menciona el medio por el cual te enteraste de nosotros:</p>
+                  <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }}>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Pagina web">Pagina web</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Tiktok">Tiktok</option>
+                    <option value="Google">Google</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="Amistad / Familiar">Amistad / Familiar</option>
+                  </select>
                   <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
                 </div>
                 <div className="payment-methods">
