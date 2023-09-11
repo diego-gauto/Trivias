@@ -18,7 +18,7 @@ import {
   createInvoiceApi,
   getCourseForCheckoutApi,
 } from "../../../components/api/checkout";
-import { conektaPm, getUserApi, updateMembership } from "../../../components/api/users";
+import { conektaPm, getUserApi, updateMembership, updateUser } from "../../../components/api/users";
 import ErrorModal from "../../../components/Error/ErrorModal";
 import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
@@ -262,6 +262,7 @@ const Purchase = () => {
     if (plan.method == 'paypal') {
       setLoader(false);
       if (type == 'subscription') {
+        updateUser({ comeFrom: option, userId: userData.user_id });
         setConfirmation(false);
         setPay(true);
         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -290,6 +291,7 @@ const Purchase = () => {
           }
           await addUserCouponApi(tempCoupon)
         }
+        updateUser({ comeFrom: option, userId: userData.user_id });
         createInvoiceApi(invoice).then((res) => {
           setConfirmation(false);
           setPay(true);
@@ -339,6 +341,7 @@ const Purchase = () => {
               await addUserCouponApi(tempCoupon)
             }
             if (res.data.data.payment_status === "paid" || res.data.data.payment_status === "pending_payment") {
+              updateUser({ comeFrom: option, userId: userData.user_id });
               createInvoiceApi(invoice).then((res) => {
                 setConfirmation(false);
                 setPay(true);
@@ -409,6 +412,7 @@ const Purchase = () => {
         }
         conektaSubscriptionApi(data).then(async (res) => {
           if (res?.data.data.status === 'active') {
+            updateUser({ comeFrom: option, userId: userData.user_id });
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -500,7 +504,7 @@ const Purchase = () => {
         duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
       }
     }
-
+    updateUser({ comeFrom: option, userId: userData.user_id });
     conektaOxxoApi(data).then((res) => {
       let response = res.data.data;
       setBarcode(response.charges.data[0].payment_method.barcode_url);
@@ -530,7 +534,7 @@ const Purchase = () => {
         duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
       }
     }
-
+    updateUser({ comeFrom: option, userId: userData.user_id });
     conektaSpeiApi(data).then((res) => {
       const charges = res.data.data.charges.data[0];
       const reference = charges.payment_method.clabe;
