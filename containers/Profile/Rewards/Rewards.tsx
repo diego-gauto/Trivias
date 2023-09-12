@@ -101,6 +101,7 @@ const Rewards = () => {
       setRewards(res);
     })
     await getAllRewardDataApi(user.id).then((res) => {
+      console.log(res);
       completedCertificates = res.certificates;
       nextCourseCertificate = res.nextCertificates;
       requests = res.requests;
