@@ -7,6 +7,9 @@ import { createRequestApi } from '../../../../components/api/rewards';
 import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
 import { createNotification } from '../../../../components/api/notifications';
 import { CERTIFICATES_PATH } from '../../../../constants/paths';
+import router from 'next/router';
+import { user } from 'firebase-functions/v1/auth';
+import rewards from '../../../../pages/rewards';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -30,6 +33,7 @@ const RewardSlider = (props: reward_slider) => {
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
   const [loader, setLoader] = useState<boolean>(false);
+  let today = new Date().getTime() / 1000;
   const [texts, setTexts] = useState<any>({
     header: "",
     title: "",
@@ -65,7 +69,7 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "claim-months") {
-      tempFilter = rewards.filter((val: any) => { return (val.type == "months" && val.published === "publicado" && months >= val.month) });
+      tempFilter = rewards.filter((val: any) => { return ((val.type == "months" && val.published === "publicado" && months >= val.month) || ((user.level === 5 && today < user.final_date) && val.type == "months" && val.published === "publicado")) });
       tempFilter.sort((a: any, b: any) => a.month - b.month);
       tempFilter.forEach((element: any) => {
         if (!userReward.find((x: any) => x.reward_id == element.id && x.status)) {
@@ -80,7 +84,7 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     if (type == "months") {
-      tempFilter = rewards.filter((val: any) => { return (val.type == "months" && val.published === "publicado" && months < val.month) });
+      tempFilter = rewards.filter((val: any) => { return (val.type === "months" && val.published === "publicado" && months < val.month) && !((user.level === 5 || user.level === 4) && user.final_date > today) });
       tempFilter.sort((a: any, b: any) => a.month - b.month)
       slides = tempFilter;
       // tempFilter.forEach((element: any) => {
@@ -259,7 +263,9 @@ const RewardSlider = (props: reward_slider) => {
                           }
                           {
                             ((reward.type === "points" && score >= reward.points && !userReward.find((x: any) => x.reward_id == reward.id)) ||
-                              (reward.type === "months" && months >= reward.month && !userReward.find((x: any) => x.reward_id == reward.id))) &&
+                              (reward.type === "months" && months >= reward.month && !userReward.find((x: any) => x.reward_id == reward.id)) ||
+                              ((reward.type === "months") && (user.level === 5 || user.level === 4) && user.final_date > today))
+                            &&
                             <>
                               {
                                 !loader ?
