@@ -349,6 +349,13 @@ const Login = () => {
         access_token: response.authResponse.accessToken
       }
       facebookUserInfo(userInfo).then((res) => {
+        if (!res) {
+          setErrorMsg('Hubo un error en el inicio de sesión!');
+          setAuthLoader(false);
+          setShow(true);
+          setIsLoading(false);
+          return;
+        }
         let user = {
           email: res.email,
         }
