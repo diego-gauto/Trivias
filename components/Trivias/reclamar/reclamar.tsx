@@ -1,33 +1,24 @@
 import Link from "next/link";
-// import { useNavigate, useParams } from "react-router-dom";
 import { useRouter } from "next/router";
 
-// import facebook from "/images/logo facebook.svg";
-// import messenger from "/images/logo messenger.svg";
-// import whatsApp from "/images/logo whatsapp.svg";
-// import instagram from "/images/logo instagram.svg";
 import styles from "./reclamar.module.css";
 
 const { reclamarContainer, reclamarPremio, reclamarRedes, iconos, button, centrado, link } =
   styles;
 
 const Reclamar = ({ result, idTemplateBrevo }: any) => {
-  // const navigate = useNavigate();
-  // const { id } = useParams();
+
   const {
     query: { triviaId },
   } = useRouter();
   console.log(result);
   console.log(idTemplateBrevo)
 
-  // const handleClick = () => {
-  //   navigate(`/trivias/${triviaId}/send/${result}`);
-  // };
 
   const handleFacebookShare = () => {
     const quote =
       "¡Acabo de obtener X puntos en la trivia! ¿Puedes hacerlo mejor?"; // Mensaje personalizado
-    const url = "https://www.gonvar.io"; // URL de la página que deseas compartir
+    const url = "https://trivias--sunny-hummingbird-9f6a67.netlify.app/trivias"; // URL de la página que deseas compartir
 
     // Abre una ventana emergente para compartir en Facebook utilizando la API de Facebook
     window.open(
@@ -78,7 +69,7 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
   // }
 
   function handleMessengerShare() {
-    const url = "https://www.gonvar.io"; // URL de la página que deseas compartir
+    const url = "https://trivias--sunny-hummingbird-9f6a67.netlify.app/trivias"; // URL de la página que deseas compartir
 
     window.open(
       `https://www.facebook.com/dialog/send?app_id=1293630141585988&link=${encodeURIComponent(
@@ -90,7 +81,7 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
 
   function handleWhatsAppShare() {
     const text =
-      "Soy toda una profesional!!! Intenta hacerlo mejor que yo: https://www.gonvar.io"; // Texto de la página que deseas compartir
+      "Soy toda una profesional!!! Intenta hacerlo mejor que yo: https://trivias--sunny-hummingbird-9f6a67.netlify.app/trivias"; // Texto de la página que deseas compartir
 
     const encodedText = encodeURIComponent(text);
 
