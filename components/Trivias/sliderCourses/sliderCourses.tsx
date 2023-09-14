@@ -6,7 +6,7 @@ import styles from "./sliderCourses.module.css";
 
 const SliderCourses = () => {
 
-  const { courseContainer, portada, textos, curso, instructor } = styles
+  const { courseContainer, cursos, portada, textos, curso, instructor } = styles
 
 
   return (
@@ -14,7 +14,7 @@ const SliderCourses = () => {
     <div className={courseContainer}>
 
       {/* <div className="responsive-unset col-lg-4 col-md-6 col-sm-12"> */}
-      <div>
+      <div className={cursos}>
         <img className={portada} src={aplicacionBasica} alt="Aplicación Básica de Acrílico" />
         <div className={textos}>
           <p className={curso}>Aplicación Básica de Acrílico</p>
@@ -23,7 +23,7 @@ const SliderCourses = () => {
       </div>
 
       {/* <div className="responsive-unset col-lg-4 col-md-6 col-sm-12"> */}
-      <div>
+      <div className={cursos}>
 
         <img className={portada} src={vipEsculturalBasico} alt="VIP Escultural Básico" />
         <div className={textos}>
@@ -33,7 +33,7 @@ const SliderCourses = () => {
       </div>
 
       {/* // <div className="responsive-unset col-lg-4 col-md-6 col-sm-12"> */}
-      <div>
+      <div className={cursos}>
 
         <img className={portada} src={perfeccionamientoEnTips} alt="Perfeccionamiento en Tips" />
         <div className={textos}>

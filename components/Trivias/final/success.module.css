@@ -126,8 +126,33 @@
 
 @media screen and (max-width: 800px) {
 
+  .successContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
   .successContainer .width80{
     max-width: 100%;
+  }
+
+  .successContainer .ganaste{
+    max-width: 100%;
+    padding: 0 2%;
+    text-align: center;
+  }
+
+  .successContainer .recomendamos{
+    max-width: 100%;
+    padding: 0 2%;
+    text-align: center;
+  }
+
+  .successContainer .revisa{
+    width: 90%;
+    padding: 0 2%;
+    text-align: center;
   }
 
   .centrado{

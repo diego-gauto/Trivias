@@ -58,6 +58,7 @@ const Result = (props: any) => {
             <h2>Tu resultado:</h2>
             <h1>{title}</h1>
             <p>{body}</p>
+            <h3>Haz click en Ver regalo para recibir una sorpresa y tus resultados completos</h3>
           </div>
           <div className={resultImg}>
             <img src={img} alt="" />

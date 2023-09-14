@@ -4,7 +4,7 @@ export default function BeneficiosCard(props: any) {
 
   const { img, title, description, extra } = props.cardInfo
 
-  const { cardImage, cardContainer, cardTitle, cardDescription, cardExtra } = styles
+  const { cardImage, cardContainer, cardText, cardTitle, cardDescription, cardExtra } = styles
 
   return (
     <div className={cardContainer}>
@@ -13,8 +13,10 @@ export default function BeneficiosCard(props: any) {
         alt={"imagen"}
         className={cardImage}
       />
-      <h3 className={cardTitle}>{title} <span className={cardDescription}>{description}</span></h3>
-      <p className={cardExtra}>{extra}</p>
+      <div className={cardText}>
+        <h3 className={cardTitle}>{title} <span className={cardDescription}>{description}</span></h3>
+        <p className={cardExtra}>{extra}</p>
+      </div>
     </div>
   );
 }

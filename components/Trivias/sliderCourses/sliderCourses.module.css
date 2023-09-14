@@ -32,8 +32,17 @@
     padding: 2% 15% 0 15%;
   }
 
+  .cursos{
+    padding-left: 8%;
+    max-width: 100%;
+  }
+
   .portada{
-   width: 80%;
+   width: 100%;
+  }
+
+  .textos{
+    width: 100%;
   }
 
   .textos .curso{

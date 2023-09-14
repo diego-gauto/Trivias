@@ -70,6 +70,20 @@
   color: #520795;
 }
 
+.resultText h3 {
+  margin-top: 2%;
+  width: 95%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+
+  text-align: start;
+
+  color: #520795;
+}
+
 .resultImg {
   width: 50%;
   height: 387px;}
