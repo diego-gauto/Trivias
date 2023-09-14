@@ -64,6 +64,8 @@ const UsersTrivias = () => {
     )
   }
 
+
+  console.log(userTrivias)
   return (
     <div className={main}>
       <div className={titles}>
