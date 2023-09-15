@@ -1,11 +1,6 @@
 import React from 'react'
 import BlogView from '../../containers/Profile/Blog/BlogView/BlogView';
 import { MainContain } from "../../screens/Styles.styled";
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { IBlog } from '../../containers/Profile/Blog/IBlog';
-type Repo = {
-  data: any,
-}
 // export const getServerSideProps: GetServerSideProps<{ blog: Repo }> = async (context: any) => {
 //   let tempBlog = [];
 //   const id = context.params.slug;
