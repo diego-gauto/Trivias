@@ -194,6 +194,7 @@ const RewardSlider = (props: reward_slider) => {
   useEffect(() => {
     getSliders();
   }, [rewards, type])
+  console.log(slides);
   return (
     <BackgroundSlide type={type}>
       <h2>
@@ -283,7 +284,7 @@ const RewardSlider = (props: reward_slider) => {
                               }
                             </>
                           }
-                          {
+                          {!('totalLessons' in reward) &&
                             ((userReward.find((x: any) => x.reward_id === reward.id && !x.status))) &&
                             <button className="btn-info">
                               <p className='text'>

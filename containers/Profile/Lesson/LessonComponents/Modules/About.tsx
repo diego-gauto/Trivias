@@ -43,9 +43,9 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
                 </div>
               </>
             }
-            <button className="btn-material" onClick={openMaterial}>
+            {/* <button className="btn-material" onClick={openMaterial}>
               Materiales
-            </button>
+            </button> */}
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>
