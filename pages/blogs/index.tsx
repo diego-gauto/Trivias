@@ -17,7 +17,6 @@ export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async ({ r
   }
 }
 const BlogScreen = ({ repo }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log('hola');
   return (
     <MainContain
       style={{
