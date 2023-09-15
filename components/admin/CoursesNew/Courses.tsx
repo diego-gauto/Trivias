@@ -61,6 +61,7 @@ const Courses = () => {
     type: "Gratis",
     sequential: false,
     published: true,
+    with_certificate: true,
     professors: [],
     categories: [],
     materials: [],
@@ -722,6 +723,13 @@ const Courses = () => {
                 }}
               />
             </div>
+            <div className="input-contain">
+              <label className="input-label">Curso con certificado</label>
+              <select onChange={(e) => { setCourse({ ...course, with_certificate: e.target.value }) }}>
+                <option value={1}>Con Certificado</option>
+                <option value={0}>Sin Certificado</option>
+              </select>
+            </div>
           </div>
           <div className="rows" style={{ justifyContent: "center" }}>
             <div className="input-contain" style={{ alignItems: "center" }}>
@@ -744,6 +752,7 @@ const Courses = () => {
             return (
               <AllCourses
                 title={course.title}
+                with_certificate={course.with_certificate}
                 subtitle={course.subtitle}
                 about={course.about}
                 difficulty={course.difficulty}

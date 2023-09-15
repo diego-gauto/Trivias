@@ -181,7 +181,6 @@ const Lesson = () => {
   const handleClick = () => {
     getCourse();
   }
-
   return (
     <>
       {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>

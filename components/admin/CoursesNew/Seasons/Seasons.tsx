@@ -41,6 +41,7 @@ const Seasons = () => {
       course_id: +courseID,
     }
     createSeason(newSeasons).then(() => {
+      retrieveSeasons()
       setLoader(false);
       getSeasonsFromCourseApi(+courseID).then((resSeason) => {
         setSeasons(resSeason);
@@ -99,8 +100,9 @@ const Seasons = () => {
           }
         })
       })
-      // deleteSeasonFromApi(seasonData).then(() => {
-      // })
+      deleteSeasonFromApi(seasonData).then(() => {
+        retrieveSeasons()
+      })
     }
   }
   const saveData = (seasonData: ISeason, index: number) => {
@@ -123,6 +125,10 @@ const Seasons = () => {
     return result;
   }
   useEffect(() => {
+    retrieveSeasons()
+  }, [])
+
+  const retrieveSeasons = () => {
     getSingleCourseApi(+courseID).then((res) => {
       setCourse(res);
       getSeasonsFromCourseApi(+courseID).then((resSeason) => {
@@ -138,7 +144,7 @@ const Seasons = () => {
       })
       setLoader(true);
     })
-  }, [])
+  }
 
   return (
     <AdminContain style={{ flexDirection: "column" }}>

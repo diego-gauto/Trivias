@@ -73,9 +73,10 @@ const ActiveUserConekta = ({ ondHide, show, user }: any) => {
               method: "conekta"
             }
             await updateMembership(membership);
-            ondHide();
+            window.location.href = "/pagoexitosomensualidad";
           } else {
-            ondHide();
+            const msg = "Pago Rechazado"
+            window.location.href = `/pagofallidomensualidad?error=${msg}`
           }
         })
       }

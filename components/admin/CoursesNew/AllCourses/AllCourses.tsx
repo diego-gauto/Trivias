@@ -64,6 +64,7 @@ const AllCourses = (props: IAllCourses) => {
     id,
     index,
     getAllCourses,
+    with_certificate,
   } = props;
   const [course, setCourse] = useState<any>({
     id: id,
@@ -87,6 +88,7 @@ const AllCourses = (props: IAllCourses) => {
     categories: categories,
     materials: materials,
     published: published,
+    with_certificate: with_certificate
   })
   const difficultyData = [
     "Muy Fácil",
@@ -217,6 +219,8 @@ const AllCourses = (props: IAllCourses) => {
         })
       }
       setLoader(true);
+      console.log(course);
+
       updateCourseApi(course).then(() => {
         setStartEdit(false);
         getAllCourses();
@@ -888,6 +892,24 @@ const AllCourses = (props: IAllCourses) => {
                   placeholder="Seleccione una imagen"
                   onChange={(e) => { getImage(e.target.files) }}
                 />
+              </div>
+              <div className="course-data">
+                <label className="course-data-title">Curso con certificado</label>
+                <select onChange={(e) => { setCourse({ ...course, with_certificate: parseInt(e.target.value) }) }}>
+                  <option value={1}>Con Certificado</option>
+                  <option value={0}>Sin Certificado</option>
+                </select>
+              </div>
+            </div>
+          }
+          {
+            !startEdit &&
+            <div className='rows'>
+              <div className="course-data">
+                <label className="course-data-title">Curso con certificado</label>
+                <p className="content">
+                  {with_certificate ? "Con certificado" : "Sin certificado"}
+                </p>
               </div>
             </div>
           }

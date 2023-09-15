@@ -5,10 +5,15 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { AboutContain, LessonContent, LessonTitle, TextContainer } from "./About.styled";
 import { TitleContain } from "./Module.styled";
 import ModuleTabs from "./ModuleTabs/ModuleTabs";
+import ModalMaterials from "../../../../../components/CourseModal/Materials/ModalMaterials";
 
 const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson, user }: any) => {
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
-  const [index, setIndex] = useState<number>(0)
+  const [showMaterial, setShowMaterial] = useState<boolean>(false);
+  const [index, setIndex] = useState<number>(0);
+  const openMaterial = () => {
+    setShowMaterial(true);
+  }
   return (
     <>
       <TitleContain>
@@ -38,6 +43,9 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
                 </div>
               </>
             }
+            {/* <button className="btn-material" onClick={openMaterial}>
+              Materiales
+            </button> */}
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>
@@ -61,6 +69,7 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
           </p>
           <p>{teacherCreds[index]?.about}</p>
         </div>
+        <ModalMaterials show={showMaterial} setShow={setShowMaterial} materials={course.materials}></ModalMaterials>
       </AboutContain>
     </>
   )

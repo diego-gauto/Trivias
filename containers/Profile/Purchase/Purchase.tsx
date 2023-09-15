@@ -27,6 +27,8 @@ import { Container, LoaderContainSpinner } from "./Purchase.styled";
 import OxxoModal from "./Modals/Oxxo";
 import SpeiModal from "./Modals/Spei";
 import { createNotification } from "../../../components/api/notifications";
+import { getUsersStripe } from "../../../components/api/conekta/test";
+import ActiveUserConekta from "../../../pages/auth/Modals/ActiveUserConekta";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -63,10 +65,11 @@ const Purchase = () => {
   const [expiresAt, setExpiresAt] = useState();
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   let idC = courseId.get('id')
 
   const subscription = {
-    price: 149.00,
+    price: frequency === "month" ? 149.00 : 1599.00,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
@@ -120,6 +123,10 @@ const Purchase = () => {
           });
         }
         setUserData(res);
+        let conketaUsers = await getUsersStripe();
+        if (conketaUsers.data.filter((x: any) => x.conekta_id === res.conekta_id).length > 0) {
+          setOpen(true);
+        }
         setCards(extractedProperties);
         setLoggedIn(true);
         setIsLoading(false);
@@ -534,6 +541,10 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
+          {
+            frequency === "month" && v === "1" &&
+            <ActiveUserConekta show={open} ondHide={() => { setOpen(false) }} user={userData} />
+          }
           <ErrorModal show={show} setShow={setShow} error={errorMsg} />
           <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={userData} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
           <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={userData} product={product} bank_ref={bank_ref} />

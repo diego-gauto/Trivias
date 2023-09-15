@@ -20,7 +20,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const [certficate, setCertificate] = useState<any>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
   const [temp, setTemp] = useState(data);
-
+  console.log(course);
   useEffect(() => {
     let viewed = 0;
     course.seasons.forEach((s: any) => {
@@ -147,7 +147,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
             <Text03 style={{ padding: 0 }} level={course?.difficulty}><span>{course?.difficulty}</span></Text03>
           </div>
         </div>
-        {(certficate && !responsive1124) && <div className="certificate-container">
+        {(course.with_certificate === 1 && certficate && !responsive1124) && <div className="certificate-container">
           <button onClick={() => { moveToCertificate() }}>
             <p>Obtener certificado</p>
           </button>
@@ -165,7 +165,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
             </div>
           </div>
         </div>
-        {(certficate && responsive1124) && <div className="certificate-container">
+        {(course.with_certificate === 1 && certficate && responsive1124) && <div className="certificate-container">
           <button onClick={() => { moveToCertificate() }}>
             <p>Obtener certificado</p>
           </button>
