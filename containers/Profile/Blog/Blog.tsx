@@ -5,25 +5,25 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import { IBlog } from './IBlog';
 import { getBlogsApi } from '../../../components/api/blog';
 import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../components/Loader.styled';
-import { formatBlogDateCase2 } from '../../../utils/functions';
+import { formatBlogDate, formatBlogDateCase2 } from '../../../utils/functions';
 
-const Blog = (props: any) => {
-  const { blogs } = props;
-  // const [blogs, setBlogs] = useState<Array<any>>([]);
+const Blog = () => {
+  // const { blogs } = props;
+  const [blogs, setBlogs] = useState<Array<any>>([]);
   const [loader, setLoader] = useState(true);
 
   const goToBlog = (blog: any) => {
     router.push({ pathname: `/Blogs/${blog.route}` })
   }
-  // useEffect(() => {
-  //   getBlogsApi().then((res) => {
-  //     res.forEach((blog: IBlog, index: number) => {
-  //       blog.date = formatBlogDate(blog.created_at)
-  //     });
-  //     setBlogs(res)
-  //     setLoader(true);
-  //   })
-  // }, [router])
+  useEffect(() => {
+    getBlogsApi().then((res) => {
+      res.forEach((blog: IBlog, index: number) => {
+        blog.date = formatBlogDate(blog.created_at)
+      });
+      setBlogs(res)
+      setLoader(true);
+    })
+  }, [router])
   return (
     <BlogContainer>
       <div className="title-contain">
