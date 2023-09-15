@@ -48,6 +48,7 @@
     max-width: 100%;
     flex-direction: row;
     margin-bottom: 5%;
+    align-items: center;
 
     .cardText{
       padding: 0 1%;
