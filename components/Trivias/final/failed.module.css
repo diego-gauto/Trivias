@@ -83,6 +83,7 @@
 
   .failedContainer p{
     max-width: 80%;
+    text-align: center;
   }
 
   .failedContainer .width80{
@@ -91,8 +92,8 @@
 
   .failedContainer .comienza{
     display: flex;
-    text-align: start;
-    width: 100%;
+    text-align: center;
+    max-width: 100%;
   }
 
   .centrado{

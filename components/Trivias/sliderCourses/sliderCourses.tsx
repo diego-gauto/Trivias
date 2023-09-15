@@ -1,6 +1,6 @@
 const aplicacionBasica = "/images/trivias/Portadas/Aplicación basica de acrilico.jpg"
-const vipEsculturalBasico = "/images/trivias/Portadas/perfeccionamiento en tips pergo.jpg"
-const perfeccionamientoEnTips = "/images/trivias/Portadas/vip basico rico.jpg"
+const vipEsculturalBasico = "/images/trivias/Portadas/vip basico rico.jpg"
+const perfeccionamientoEnTips = "/images/trivias/Portadas/perfeccionamiento en tips pergo.jpg"
 
 import styles from "./sliderCourses.module.css";
 

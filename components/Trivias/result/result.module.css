@@ -56,7 +56,6 @@
 .resultText p {
   position: relative;
   width: 95%;
-  height: 154px;
   top: 5px;
   text-align: start;
 
@@ -111,7 +110,6 @@
   .resultText p {
     position: relative;
     width: 95%;
-    height: 154px;
     top: 5px;
     font-size: 16px;
   }
