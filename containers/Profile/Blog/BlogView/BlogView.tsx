@@ -116,7 +116,8 @@ const BlogView = () => {
       })
     }
     if (router.query.slug) {
-      getBlog()
+      console.log(router.query.slug)
+      // getBlog()
     }
   }, [router.query.slug])
 

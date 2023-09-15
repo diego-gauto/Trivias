@@ -1,6 +1,5 @@
 import React from 'react'
 import BlogView from '../../containers/Profile/Blog/BlogView/BlogView';
-import router from "next/router";
 import { MainContain } from "../../screens/Styles.styled";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import { IBlog } from '../../containers/Profile/Blog/IBlog';
