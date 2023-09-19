@@ -69,7 +69,7 @@ const Purchase = () => {
   let idC = courseId.get('id')
 
   const subscription = {
-    price: frequency === "month" ? 149.00 : 1599.00,
+    price: frequency === "month" ? 249.00 : 1599.00,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
@@ -796,7 +796,7 @@ const Purchase = () => {
                     "149  MXN/mes."}{(frequency === "month" && v === '1') &&
                       "149  MXN/mes."}{(frequency === "anual" && v === '1') && "1,599  MXN/año."}
                     {(trial === "true" && v === '2') &&
-                      "249  MXN/mes."}{(frequency === "month" && v === '2') &&
+                      "249  MXN/mes."}{(frequency === "month" && v === '2' && !trial) &&
                         "249  MXN/mes."}{(frequency === "anual" && v === '2') && "1,599  MXN/año."}
                     {(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
@@ -819,7 +819,7 @@ const Purchase = () => {
                   {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(trial === "true" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "anual" && v === "1") && <p className="total">$ 1,599 <span>MXN</span></p>}
-                  {(type == "subscription" && frequency === "month" && v === "2") && <p className="total">$ 249 <span>MXN</span></p>}
+                  {(type == "subscription" && frequency === "month" && v === "2" && !trial) && <p className="total">$ 249 <span>MXN</span></p>}
                   {(trial === "true" && v === "2") && <p className="total">$ 249 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "anual" && v === "2") && <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
@@ -888,7 +888,7 @@ const Purchase = () => {
                 {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(trial === "true" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual" && v === "1") && <p className="total">$ 1,599 <span>MXN</span></p>}
-                {(type == "subscription" && frequency === "month" && v === "2") && <p className="total">$ 249 <span>MXN</span></p>}
+                {(type == "subscription" && frequency === "month" && v === "2" && !trial) && <p className="total">$ 249 <span>MXN</span></p>}
                 {(trial === "true" && v === "2") && <p className="total">$ 249 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual" && v === "2") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
@@ -1122,7 +1122,7 @@ const Purchase = () => {
                     "149  MXN/mes."}{(frequency === "month" && v === '1') &&
                       "149  MXN/mes."}{(frequency === "anual" && v === '1') && "1,599  MXN/año."}
                     {(trial === "true" && v === '2') &&
-                      "249  MXN/mes."}{(frequency === "month" && v === '2') &&
+                      "249  MXN/mes."}{(frequency === "month" && v === '2' && !trial) &&
                         "249  MXN/mes."}{(frequency === "anual" && v === '2') && "1,599  MXN/año."}
                     {(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,

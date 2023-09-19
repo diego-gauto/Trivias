@@ -46,7 +46,7 @@ const Mensual = (props: IData) => {
   const goTo = () => {
     if (user.id) {
       if (user.level === 0 && user.final_date < today) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "1" } })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "2" } })
       }
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)
@@ -81,7 +81,7 @@ const Mensual = (props: IData) => {
 
           </div>
           <div className="text-center my-4">
-            <h2 className="h3 mb-0">$149.00 MXN/mes</h2>
+            <h2 className="h3 mb-0">$249.00 MXN/mes</h2>
             <span><i>Cargo automático mensual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
