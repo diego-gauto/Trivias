@@ -123,10 +123,6 @@ const Purchase = () => {
           });
         }
         setUserData(res);
-        let conketaUsers = await getUsersStripe();
-        if (conketaUsers.data.filter((x: any) => x.conekta_id === res.conekta_id).length > 0) {
-          setOpen(true);
-        }
         setCards(extractedProperties);
         setLoggedIn(true);
         setIsLoading(false);
@@ -541,10 +537,10 @@ const Purchase = () => {
         </LoaderImage>
       </BackgroundLoader> :
         <Container>
-          {
+          {/* {
             frequency === "month" && v === "1" &&
             <ActiveUserConekta show={open} ondHide={() => { setOpen(false) }} user={userData} />
-          }
+          } */}
           <ErrorModal show={show} setShow={setShow} error={errorMsg} />
           <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={userData} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
           <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={userData} product={product} bank_ref={bank_ref} />
