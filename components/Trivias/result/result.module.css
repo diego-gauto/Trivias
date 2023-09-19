@@ -1,0 +1,195 @@
+.resultContainer {
+  height: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.resultado {
+  display: flex;
+  flex-direction: row;
+  margin: 30px 0 0 0;
+  /* justify-content: center;
+  text-align: center;
+  padding: 5%;
+  margin: 0px auto;
+  height: 50%;
+  width: 80%;
+  background-color: #dad3e5;
+  border-radius: 1rem; */
+}
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-left: 4%;
+}
+
+.resultText h2 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 27px;
+  /* identical to box height */
+
+  text-align: start;
+
+  color: #520795;
+}
+
+.resultText h1 {
+  position: relative;
+  top: 12px;
+  width: 90%;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #962dec;
+}
+
+.resultText p {
+  position: relative;
+  width: 95%;
+  top: 5px;
+  text-align: start;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 29px;
+  /* or 161% */
+
+  color: #520795;
+}
+
+.resultText h3 {
+  margin-top: 2%;
+  width: 95%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+
+  text-align: start;
+
+  color: #520795;
+}
+
+.resultImg {
+  width: 50%;
+  height: 387px;}
+
+.resultImg img {
+  max-width: 95%;
+  max-height:400px;
+  border-radius: 20px;
+}
+
+.share{
+  margin-top: 45px;
+}
+
+@media screen and (max-width: 1112px) {
+
+  .resultContainer{
+    height: 100%;
+  }
+  
+  .resultText{
+    height: 100%;
+  }
+
+  .resultText p {
+    position: relative;
+    width: 95%;
+    top: 5px;
+    font-size: 16px;
+  }
+
+  .resultImg {
+    height: 100%;
+  }
+
+  .share{
+    padding-left: 4%;
+    margin-bottom: 3%;
+  }
+
+}
+
+@media screen and (max-width: 988px) {
+
+  
+    .resultText p {
+      font-size: 15px;
+      line-height: 27px;
+    }
+  
+  
+}
+
+@media screen and (max-width: 885px) {
+
+  
+  .resultText p {
+    line-height: 25px;
+  }
+
+
+}
+
+@media screen and (max-width: 792px) {
+
+
+.resultado{
+  flex-direction: column-reverse;
+  margin: 0;
+}
+
+.resultText{
+  width: 100%;
+  margin-top: 3%;
+}
+
+.resultText p {
+  font-size: 18px;
+  line-height: 29px;
+  height: 100%;
+}
+
+.resultImg{
+  width: 100%;
+}
+
+.resultImg img{
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+.share{
+  margin-bottom: 3%;
+}
+}
+
+
+@media screen and (max-width: 380px) {
+
+  .resultText h1 {
+    width: 95%;
+    font-size: 25px;
+    line-height: 33px;
+  }
+
+  }
+

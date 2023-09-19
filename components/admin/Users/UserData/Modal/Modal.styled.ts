@@ -68,8 +68,13 @@ export const Input = styled.input`
 `;
 export const ButtonContain = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
+  button {
+    width: 225px;
+  }
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;

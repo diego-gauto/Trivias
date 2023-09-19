@@ -1,0 +1,284 @@
+.trivia {
+  height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+  /* margin-left: 5%; */
+}
+
+.trivia_title {
+  position: relative;
+  /* width: 640px;
+  height: 56px; */
+  max-width: 90%;
+  top: 10px;
+  left: 5%;
+  right: 5%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 46px;
+  text-align: start;
+  color: #520795;
+}
+
+.progressBarContainer {
+  position: relative;
+  max-width: 90%;
+  height: 11px;
+  left: 5%;
+  right: 5%;
+  top: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.pregunta {
+  position: relative;
+  width: 218px;
+  /* height: 27px; */
+  left: 5%;
+  right: 5%;
+  top: 40px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 27px;
+  /* identical to box height */
+  text-align: start;
+  color: #520795;
+}
+
+.question {
+  position: relative;
+  max-width: 90%;
+  /* width: 720px;*/
+  /* height: 43px;  */
+  left: 5%;
+  right: 5%;
+  top: 50px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 33px;
+  color: #962dec;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  max-width: 90%;
+  /* width: 628px; */
+  left: 5%;
+  right: 5%;
+  top: 60px;
+}
+
+.answer {
+  border: 2px solid rgba(156, 48, 234, 0.3);
+  border-radius: 63px;
+  cursor: pointer;
+  height: 48px;
+  margin: 5px 0;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 21px;
+
+  color: #515151;
+}
+
+.active {
+  /* border: 2px solid rgba(156, 48, 234, 0.3); */
+  border-radius: 63px;
+  cursor: pointer;
+  height: 48px;
+  margin: 5px 0;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 21px;
+
+  color: #515151;
+
+  border: 2px solid #9c30ea;
+}
+
+.button {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 2%;
+  cursor: pointer;
+
+  position: relative;
+  width: 305px;
+  height: 54px;
+  left: 5%;
+  right: 5%;
+  top: 55px;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
+.popup {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  top: -30px; /* Ajusta la posición vertical del mensaje emergente */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.disabled {
+  cursor: not-allowed;
+  background-color: #5000b5;
+}
+
+.disabled:hover {
+  transform: none;
+  background-color: #5000b5;
+}
+
+@media screen and (max-width: 1130px) {
+
+  .answers {
+    top: 65px;
+  }
+
+  .answer, .active{
+    height: 60px;
+  }
+
+  .button {
+    top: 60px;
+  }
+}
+
+@media screen and (max-width: 942px) {
+
+  .answers {
+    top: 70px;
+  }
+
+  .answer, .active{
+    height: 65px;
+  }
+
+  .button {
+    top: 65px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+
+  .button {
+    margin-top: 30px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 817px) {
+
+  .answer {
+
+    height: 63px;
+  }
+
+  .active{
+    height: 63px;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  .answer, .active{
+    height: 80px;
+    font-size: 15px;
+    line-height: 17px;  
+  }
+
+  /* .button {
+    top: 65px;
+  } */
+
+}
+
+@media screen and (max-width: 455px) {
+
+  .trivia_title {
+    top: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .progressBarContainer {
+
+    top: 30px;
+  }
+
+  .pregunta {
+    top: 50px;
+  
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  .question {
+    top: 60px;
+  
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  /* .answer, .active{
+    font-size: 14px;
+    line-height: 17px;
+  } */
+
+}
+
+@media screen and (max-width: 324px) {
+
+  .button {
+    top: 55px;
+  }
+
+}

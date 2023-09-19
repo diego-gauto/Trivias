@@ -17,7 +17,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
   //     return x
   //   }
   // })
-  const html = [renderToString(<LandingSuscription price={"$149 MXN/mes"} isMonth={true} />)]
+  const html = [renderToString(<LandingSuscription price={"$249 MXN/mes"} isMonth={true} />)]
   res.setHeader(
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59'
@@ -28,7 +28,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
   }
 }
 const termsConditions = ({ mensual }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const price = "$149 MXN/mes"
+  const price = "$249 MXN/mes"
   const month = true;
   return (
     <MainContain

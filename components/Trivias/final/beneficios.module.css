@@ -1,0 +1,134 @@
+.beneficiosContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ece7f2;
+}
+
+.beneficiosContainer H2{
+  flex:1;
+  margin:0;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 50px;
+  text-align: center;
+
+  color: #992EEA;
+}
+
+.beneficiosContainer .containerTitle{
+  position: relative;
+  display: flex;
+  align-items: center;
+
+
+
+    .titulo {
+    }
+
+    .img {
+    
+    }
+    
+}
+
+.beneficiosContainer p{
+
+  margin: 2% 0  13px 0;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 25px;
+  text-align:start;
+  color: #520795;
+}
+
+.beneficiosContainer .comienza{
+  color: #992EEA;
+}
+
+.beneficiosContainer .width90{
+  max-width: 90%;
+}
+
+.beneficiosContainer .buttonContainer{
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  padding-left: 5%;
+}
+
+.beneficiosContainer button {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 10% 0;
+  cursor: pointer;
+
+  position: relative;
+  width: 229px;
+  height: 40px;
+}
+
+.beneficiosContainer button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
+@media screen and (max-width: 920px) {
+
+  .beneficiosContainer{
+    padding-top: 35px;
+  }
+
+  .beneficiosContainer .containerTitle{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+      .titulo {
+        max-width: 90%;
+      }
+  
+      .img {
+        position: relative;
+        top: -40px;
+      }
+      
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+  .beneficiosContainer .width80{
+    max-width: 100%;
+  }
+
+  .centrado{
+    padding-left: 0;
+    display: flex;
+    justify-content: center;  }
+}
+
+@media screen and (max-width: 491px) {
+
+  .beneficiosContainer .containerTitle{
+      .titulo {
+        font-size: 35px;
+        line-height: 40px;
+      }
+      
+  }
+}

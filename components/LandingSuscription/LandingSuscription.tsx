@@ -160,25 +160,24 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
   }, [setver])
 
-  const handleRedirection = () => {
+  const handleRedirection = async () => {
     if (isFacebook) {
       router.push(Landing_Facebook);
     } else {
       if (localStorage.getItem('email')) {
-        getUserApi(localStorage.getItem('email')).then((res) => {
-          if (res.level !== 0) {
-            router.push(PREVIEW_PATH)
+        const user = await getUserApi(localStorage.getItem('email'))
+        if (user.level !== 0) {
+          router.push(PREVIEW_PATH)
+        } else {
+          if (isMonth) {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '2' } })
           } else {
-            if (isMonth) {
-              router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '1' } })
-            } else {
-              router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
-            }
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
           }
-
-        })
-
+        }
       } else {
+        console.log(2);
+
         if (isMonth) {
           localStorage.setItem('month', 'true')
         } else {
@@ -905,7 +904,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                   <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $149 MXN u 8 dls.)</i><br />
+                    de $249 MXN u 8 dls.)</i><br />
                   Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
                   $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>

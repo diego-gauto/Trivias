@@ -1,0 +1,112 @@
+.reclamarContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+  .reclamarContainer h3 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+
+    text-align: start;
+
+    color: #520795;
+  }
+
+.reclamarPremio {
+  width: 50%;
+  padding-left: 90px;
+}
+
+.reclamarPremio button {
+  height: 48px;
+  width: 217px;
+  margin-right: 10px;
+}
+.reclamarRedes {
+  width: 50%;
+}
+
+.reclamarRedes h3{
+  width: 100%;
+}
+.iconos {
+  padding-top: 15px;
+}
+
+.iconos img {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.button {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 2%;
+  cursor: pointer;
+
+  position: relative;
+  width: 305px;
+  height: 54px;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
+.centrado{
+width: 100%;
+}
+
+@media screen and (max-width: 785px) {
+
+  .reclamarContainer {
+    flex-direction: column-reverse;
+  }
+
+  .reclamarPremio {
+    padding: 0;
+    margin: 5% 0 0 0;
+    width: 100%;
+  }
+
+  .reclamarRedes{
+    width: 100%;
+    margin: 1% 0 0 0;
+      }
+
+  .reclamarPremio button{
+    /* font-family: "Montserrat";
+    border-radius: 100px;
+    background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+    color: #ede7f2;
+    border: 0;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 2%;
+    cursor: pointer;
+  
+    position: relative; */
+    width: 90%;
+    /* height: 54px; */
+  }
+
+  .link{
+    display:flex;
+    width: 100%;
+    text-decoration: none;
+  }
+
+  }

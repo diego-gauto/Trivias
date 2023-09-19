@@ -1,0 +1,14 @@
+.cardContainer{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 95%;
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 920px) {
+
+  .cardContainer {
+    margin-top: -40px;
+  }
+}

@@ -88,6 +88,7 @@ const AllCourses = (props: IAllCourses) => {
     categories: categories,
     materials: materials,
     published: published,
+    with_certificate: with_certificate
   })
   const difficultyData = [
     "Muy Fácil",
@@ -218,6 +219,8 @@ const AllCourses = (props: IAllCourses) => {
         })
       }
       setLoader(true);
+      console.log(course);
+
       updateCourseApi(course).then(() => {
         setStartEdit(false);
         getAllCourses();

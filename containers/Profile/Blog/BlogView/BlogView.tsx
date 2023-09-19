@@ -92,7 +92,7 @@ const BlogView = () => {
       if (tempBlog.length === 0) {
         let tempTitle = tempRoute.replaceAll("-", " ").replaceAll("%3F?", "?");
         tempBlog = res.filter((blog: IBlog) => blog.title === tempTitle);
-        router.push({ pathname: `/Blogs/${tempBlog[0].route}` })
+        router.push({ pathname: BLOGS_PATH + '/' + tempBlog[0].route })
         return
       }
       getSingleBlogApi(tempBlog[0].id).then((res) => {

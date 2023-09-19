@@ -14,6 +14,7 @@ export const Container = styled.div`
   min-height: 100vh;
   padding-inline: 60px;
   padding-block: 40px;
+  overflow-x: hidden;
   @font-face {
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
@@ -429,7 +430,6 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
-
         .cards{
           border: 1px solid #942ced;
           outline: none;
@@ -805,6 +805,9 @@ export const Container = styled.div`
             display: flex;
             flex-direction: column;
             gap: 20px;
+            @media(max-width: 450px){
+              padding: 20px 10px;
+            }
             .cards{
               border: 1px solid #942ced;
               outline: none;
@@ -878,6 +881,9 @@ export const Container = styled.div`
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                @media(max-width: 450px){
+                  padding: 10px;
+                }
                 input[type="radio"] {
                   accent-color: #9900ed;
                   width: 25px;

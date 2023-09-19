@@ -340,12 +340,12 @@ const NavBar = () => {
         }
       </LogoContain>
       <NavTags>
-        {/* <Link href="/trivias">
+        <Link href="/trivias">
           <NavText pathname={pathname} color={color} title="trivia"
             style={pathname == "/trivias" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
             Trivias
           </NavText>
-        </Link> */}
+        </Link>
         <Link href={PLAN_PATH}>
           <NavText pathname={pathname} color={color} title="Inicio"
             style={pathname === PLAN_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
@@ -490,6 +490,11 @@ const NavBar = () => {
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
+                  <Link href="/trivias" >
+                    <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
+                      Trivias
+                    </FloatingMenuItem>
+                  </Link>
                   <Link href={PLAN_PATH}>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Planes
@@ -615,11 +620,11 @@ const NavBar = () => {
                     </HBList>
                   </a>
                 }
-                {/* <Link href="/trivias" >
+                <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
                   Trivias
                   </HBList>
-                </Link> */}
+                </Link>
                 <Link href={PLAN_PATH} >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PLAN_PATH ? { fontWeight: 600 } : {}}>
                     Planes
