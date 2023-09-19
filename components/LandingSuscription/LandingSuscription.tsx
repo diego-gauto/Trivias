@@ -160,25 +160,24 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
   }, [setver])
 
-  const handleRedirection = () => {
+  const handleRedirection = async () => {
     if (isFacebook) {
       router.push(Landing_Facebook);
     } else {
       if (localStorage.getItem('email')) {
-        getUserApi(localStorage.getItem('email')).then((res) => {
-          if (res.level !== 0) {
-            router.push(PREVIEW_PATH)
+        const user = await getUserApi(localStorage.getItem('email'))
+        if (user.level !== 0) {
+          router.push(PREVIEW_PATH)
+        } else {
+          if (isMonth) {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '2' } })
           } else {
-            if (isMonth) {
-              router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '2' } })
-            } else {
-              router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
-            }
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
           }
-
-        })
-
+        }
       } else {
+        console.log(2);
+
         if (isMonth) {
           localStorage.setItem('month', 'true')
         } else {
