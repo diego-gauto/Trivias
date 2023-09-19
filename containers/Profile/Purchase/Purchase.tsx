@@ -358,7 +358,8 @@ const Purchase = () => {
                 type: "8",
                 notificationId: '',
                 amount: price,
-                productName: product.title
+                productName: product.title,
+                frequency: ''
               }
               await createNotification(notification);
               if (id === "30") {
@@ -378,7 +379,8 @@ const Purchase = () => {
               type: "8",
               notificationId: '',
               amount: price,
-              productName: product.title
+              productName: product.title,
+              frequency: ''
             }
             await createNotification(notification);
             let error = res.response.data.error.data.details[0].message
@@ -418,7 +420,8 @@ const Purchase = () => {
               type: "8",
               notificationId: '',
               amount: product.price,
-              productName: product.title
+              productName: product.title,
+              frecuency: frequency
             }
             await createNotification(notification);
             const msg = "Pago Rechazado"
