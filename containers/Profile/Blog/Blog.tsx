@@ -6,6 +6,7 @@ import { IBlog } from './IBlog';
 import { getBlogsApi } from '../../../components/api/blog';
 import { BackgroundLoader, LoaderContain, LoaderImage } from '../../../components/Loader.styled';
 import { formatBlogDate, formatBlogDateCase2 } from '../../../utils/functions';
+import { BLOGS_PATH } from '../../../constants/paths';
 
 const Blog = () => {
   // const { blogs } = props;
@@ -13,7 +14,7 @@ const Blog = () => {
   const [loader, setLoader] = useState(true);
 
   const goToBlog = (blog: any) => {
-    router.push({ pathname: `/Blogs/${blog.route}` })
+    router.push({ pathname: BLOGS_PATH + "/" + blog.route })
   }
   useEffect(() => {
     getBlogsApi().then((res) => {
