@@ -722,6 +722,7 @@ export const Body = styled.div`
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 `;
 export const ChildrenContain = styled.div`
   flex-grow: 1;

@@ -18,7 +18,7 @@ import {
   createInvoiceApi,
   getCourseForCheckoutApi,
 } from "../../../components/api/checkout";
-import { conektaPm, getUserApi, updateMembership } from "../../../components/api/users";
+import { conektaPm, getUserApi, updateMembership, updateUser } from "../../../components/api/users";
 import ErrorModal from "../../../components/Error/ErrorModal";
 import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
@@ -66,6 +66,7 @@ const Purchase = () => {
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [option, setOption] = useState("");
   let idC = courseId.get('id')
 
   const subscription = {
@@ -195,6 +196,12 @@ const Purchase = () => {
       delete card.paymentMethod
     }
 
+    if (option === "") {
+      alert("Por favor seleccione una opción para poder continuar!");
+      setLoader(false);
+      return;
+    }
+
     if (cardInfo && Object.keys(card).some(key => card[key] === '')) {
       setError(true);
       setLoader(false);
@@ -251,6 +258,7 @@ const Purchase = () => {
     if (plan.method == 'paypal') {
       setLoader(false);
       if (type == 'subscription') {
+        updateUser({ comeFrom: option, userId: userData.user_id });
         setConfirmation(false);
         setPay(true);
         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -279,6 +287,7 @@ const Purchase = () => {
           }
           await addUserCouponApi(tempCoupon)
         }
+        updateUser({ comeFrom: option, userId: userData.user_id });
         createInvoiceApi(invoice).then((res) => {
           setConfirmation(false);
           setPay(true);
@@ -328,6 +337,7 @@ const Purchase = () => {
               await addUserCouponApi(tempCoupon)
             }
             if (res.data.data.payment_status === "paid" || res.data.data.payment_status === "pending_payment") {
+              updateUser({ comeFrom: option, userId: userData.user_id });
               createInvoiceApi(invoice).then((res) => {
                 setConfirmation(false);
                 setPay(true);
@@ -348,7 +358,8 @@ const Purchase = () => {
                 type: "8",
                 notificationId: '',
                 amount: price,
-                productName: product.title
+                productName: product.title,
+                frequency: ''
               }
               await createNotification(notification);
               if (id === "30") {
@@ -368,7 +379,8 @@ const Purchase = () => {
               type: "8",
               notificationId: '',
               amount: price,
-              productName: product.title
+              productName: product.title,
+              frequency: ''
             }
             await createNotification(notification);
             let error = res.response.data.error.data.details[0].message
@@ -385,7 +397,7 @@ const Purchase = () => {
       if (type === 'subscription') {
         let price = "";
         if (trial === "true" && v === "1") price = "mes_gratis";
-        if (trial === "true" && v === "2") price = "mes_gratis_v1_1";
+        if (trial === "true" && v === "2") price = "mes_gratis";
         if (frequency === "month" && v === "1") price = "mensual";
         if (frequency === "month" && v === "2") price = "mensual_v1_1";
         if (frequency === "anual") price = "anual";
@@ -398,6 +410,7 @@ const Purchase = () => {
         }
         conektaSubscriptionApi(data).then(async (res) => {
           if (res?.data.data.status === 'active') {
+            updateUser({ comeFrom: option, userId: userData.user_id });
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -407,7 +420,8 @@ const Purchase = () => {
               type: "8",
               notificationId: '',
               amount: product.price,
-              productName: product.title
+              productName: product.title,
+              frecuency: frequency
             }
             await createNotification(notification);
             const msg = "Pago Rechazado"
@@ -472,6 +486,10 @@ const Purchase = () => {
   const payWithOxxo = () => {
     const currentDate: any = new Date();
     const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+    if (option === "") {
+      alert("Por favor seleccione una opción para poder continuar!");
+      return;
+    }
 
     let data = {
       conekta_id: userData.conekta_id,
@@ -485,7 +503,7 @@ const Purchase = () => {
         duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
       }
     }
-
+    updateUser({ comeFrom: option, userId: userData.user_id });
     conektaOxxoApi(data).then((res) => {
       let response = res.data.data;
       setBarcode(response.charges.data[0].payment_method.barcode_url);
@@ -498,6 +516,10 @@ const Purchase = () => {
   const payWitSpei = () => {
     const currentDate: any = new Date();
     const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+    if (option === "") {
+      alert("Por favor seleccione una opción para poder continuar!");
+      return;
+    }
 
     let data = {
       conekta_id: userData.conekta_id,
@@ -511,7 +533,7 @@ const Purchase = () => {
         duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
       }
     }
-
+    updateUser({ comeFrom: option, userId: userData.user_id });
     conektaSpeiApi(data).then((res) => {
       const charges = res.data.data.charges.data[0];
       const reference = charges.payment_method.clabe;
@@ -579,6 +601,17 @@ const Purchase = () => {
                   Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
 
               </div>
+              <p style={{ fontWeight: "bold" }}>Menciona el medio por el cual te enteraste de nosotros:</p>
+              <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }}>
+                <option value="">Seleccione una opción</option>
+                <option value="Pagina web">Pagina web</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Tiktok">Tiktok</option>
+                <option value="Google">Google</option>
+                <option value="Youtube">Youtube</option>
+                <option value="Amistad / Familiar">Amistad / Familiar</option>
+              </select>
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
                 <div className="stripe">
@@ -703,7 +736,6 @@ const Purchase = () => {
                   {(loader) && <LoaderContainSpinner />}
                 </div>
                 {!trial && <div className="paypal" onClick={() => {
-
                 }}>
                   {!paypal && <PayPalScriptProvider deferLoading={paypal} options={{
                     "client-id": "ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz",
@@ -719,6 +751,12 @@ const Purchase = () => {
                         shape: 'pill',
                         height: 50,
 
+                      }}
+                      onClick={() => {
+                        if (option === "") {
+                          alert("Por favor seleccione una opción para poder continuar!");
+                          return;
+                        }
                       }}
                       createSubscription={(data, actions) => {
                         setPlan({ method: "paypal" })
@@ -905,6 +943,17 @@ const Purchase = () => {
                     <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado. <br />
                       Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
                   </div>
+                  <p style={{ fontWeight: "bold" }}>Menciona el medio por el cual te enteraste de nosotros:</p>
+                  <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }}>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Pagina web">Pagina web</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Tiktok">Tiktok</option>
+                    <option value="Google">Google</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="Amistad / Familiar">Amistad / Familiar</option>
+                  </select>
                   <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
                 </div>
                 <div className="payment-methods">
