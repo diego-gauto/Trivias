@@ -385,7 +385,7 @@ const Purchase = () => {
       if (type === 'subscription') {
         let price = "";
         if (trial === "true" && v === "1") price = "mes_gratis";
-        if (trial === "true" && v === "2") price = "mes_gratis_v1_1";
+        if (trial === "true" && v === "2") price = "mes_gratis";
         if (frequency === "month" && v === "1") price = "mensual";
         if (frequency === "month" && v === "2") price = "mensual_v1_1";
         if (frequency === "anual") price = "anual";
