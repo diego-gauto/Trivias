@@ -22,6 +22,7 @@ export interface ICourses {
   categories: [ICategories];
   materials: [IMaterials];
   published: boolean;
+  material_route: string;
 }
 export interface IProfessors {
   id: number;

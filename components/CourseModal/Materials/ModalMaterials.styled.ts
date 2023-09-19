@@ -6,6 +6,32 @@ export const Container = styled.div`
   flex-direction: column;
   background: #ede7f2;
   border-radius: 40px !important;
+  .btn-contain {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    p {
+      margin: 0;
+      text-align: center;
+      color: #3f1168;
+      font-weight: 500;
+    }
+    margin-bottom: 20px;
+    .btn-buy {
+      padding-inline: 20px;
+      padding-block: 8px;
+      border-radius: 100px;
+      background-color: #3f1168;
+      color: white;
+      border: none;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
   .icon {
     cursor: pointer;
     background: #3f1168;
@@ -56,7 +82,8 @@ export const Container = styled.div`
   }
   .top-section {
     padding: 20px;
-    padding-block: 40px;
+    padding-block: 30px;
+    padding-bottom: 20px;
     border-radius: 40px !important;
     h1 {
       margin: 0;

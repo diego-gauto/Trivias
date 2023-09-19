@@ -139,7 +139,6 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
   };
-
   return (
     <ModalContain >
       <ModalMod show={show} onHide={handleClose} size="lg" centered>
@@ -316,7 +315,12 @@ const CourseModal = (props: ICourseModal) => {
           </LessonContain>
         </ModalCont>
       </ModalMod>
-      <ModalMaterials show={material} setShow={setMaterial} materials={course.materials}></ModalMaterials>
+      <ModalMaterials
+        show={material}
+        setShow={setMaterial}
+        materials={course.materials}
+        route={course.material_route}
+      />
     </ModalContain >
   )
 }

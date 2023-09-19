@@ -20,6 +20,7 @@ export interface ICourseModal {
     about: string;
     materials: [IMaterialData];
     totalDuration: number;
+    material_route: string;
   };
   user: {
     level: number;

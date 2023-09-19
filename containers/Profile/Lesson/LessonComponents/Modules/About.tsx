@@ -43,9 +43,9 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
                 </div>
               </>
             }
-            {/* <button className="btn-material" onClick={openMaterial}>
+            <button className="btn-material" onClick={openMaterial}>
               Materiales
-            </button> */}
+            </button>
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>
@@ -69,7 +69,12 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
           </p>
           <p>{teacherCreds[index]?.about}</p>
         </div>
-        <ModalMaterials show={showMaterial} setShow={setShowMaterial} materials={course.materials}></ModalMaterials>
+        <ModalMaterials
+          show={showMaterial}
+          setShow={setShowMaterial}
+          materials={course.materials}
+          route={course.material_route}
+        />
       </AboutContain>
     </>
   )
