@@ -154,6 +154,7 @@ export const HamburgerMenuOptionsList = styled(FloatingMenu)<{
 }>`
   width: 100px;
   right: 3%;
+  top: 57px;
   ${(props) =>
     props.isOpen &&
     css`
@@ -474,11 +475,11 @@ export const HamburgerContain = styled.div<{ hamburger: boolean; admin: any }>`
     props.hamburger &&
     css<{ admin: any }>`
       pointer-events: auto;
-      height: 190px;
+      height: 210px;
       ${(props) =>
         props.admin &&
         css`
-          height: 210px;
+          height: 230px;
         `}
       .menu-hamburger {
         transition: 0.5s ease-in-out;

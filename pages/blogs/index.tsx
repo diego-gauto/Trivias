@@ -24,7 +24,7 @@ const BlogScreen = ({ repo }: InferGetServerSidePropsType<typeof getServerSidePr
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <Blog blogs={repo.data}></Blog>
+      <Blog ></Blog>
       {/* <div dangerouslySetInnerHTML={{ __html: `${Blog(repo.data)}` }} style={{ display: "none" }} /> */}
     </MainContain>
   )

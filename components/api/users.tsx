@@ -81,6 +81,17 @@ export const updateMembershipDaysApi = async (user: any) => {
       return error
     });
 };
+export const updateMembershipPlanApi = async (body: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "admin/updateMembershipPlan", body)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+}
 export const updateMembershipAnualApi = async (user: any) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "admin/updateToAnualMembership", user)

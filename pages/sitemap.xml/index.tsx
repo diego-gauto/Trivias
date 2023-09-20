@@ -29,11 +29,11 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs</loc>
+      <loc>https://www.gonvar.io/blogss</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/[slug]</loc>
+      <loc>https://www.gonvar.io/blogss/[slug]</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
@@ -41,7 +41,7 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>  
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-cada-punta-pulidora-unas-drill</loc>
+      <loc>https://www.gonvar.io/blogss/para-que-sirve-cada-punta-pulidora-unas-drill</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url> 
     <url>
@@ -125,631 +125,631 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-cada-punta-pulidora-unas-drill</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-cada-punta-pulidora-unas-drill</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/encuentra-color-perfecto-temporada-unas</loc>
+      <loc>https://www.gonvar.io/blogs/encuentra-color-perfecto-temporada-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/sirve-top-coat-unas</loc>
+      <loc>https://www.gonvar.io/blogs/sirve-top-coat-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-poner-unas-acrilicas-sin-monomero-lampara</loc>
+      <loc>https://www.gonvar.io/blogs/como-poner-unas-acrilicas-sin-monomero-lampara</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/pedicura-disenos-elegantes</loc>
+      <loc>https://www.gonvar.io/blogs/pedicura-disenos-elegantes</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/curso-pedicura-profesional</loc>
+      <loc>https://www.gonvar.io/blogs/curso-pedicura-profesional</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-base-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-base-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/manicura-francesa-colores</loc>
+      <loc>https://www.gonvar.io/blogs/manicura-francesa-colores</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-pedicura-casa</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-pedicura-casa</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/cuanto-duran-unas-acrilicas</loc>
+      <loc>https://www.gonvar.io/blogs/cuanto-duran-unas-acrilicas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-encapsulador-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-encapsulador-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-unas-ponen-amarillas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-unas-ponen-amarillas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/limaron-mucho-unas-duele</loc>
+      <loc>https://www.gonvar.io/blogs/limaron-mucho-unas-duele</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-quita-gelish-gel-semipermanente-unas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-quita-gelish-gel-semipermanente-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-praimer-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-praimer-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-manicura-casa-facil</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-manicura-casa-facil</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/puse-unas-acrilicas-duelen-dedos</loc>
+      <loc>https://www.gonvar.io/blogs/puse-unas-acrilicas-duelen-dedos</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/buen-negocio-aplicar-unas-acrilico</loc>
+      <loc>https://www.gonvar.io/blogs/buen-negocio-aplicar-unas-acrilico</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/onicomadesis-por-que-caen-unas</loc>
+      <loc>https://www.gonvar.io/blogs/onicomadesis-por-que-caen-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-unas-ponen-blancas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-unas-ponen-blancas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-poner-formas-unas-esculturales</loc>
+      <loc>https://www.gonvar.io/blogs/como-poner-formas-unas-esculturales</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/lima-unas-para-que-sirve</loc>
+      <loc>https://www.gonvar.io/blogs/lima-unas-para-que-sirve</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-salen-padrastros-unas-como-tratarlos</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-salen-padrastros-unas-como-tratarlos</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-puedo-despintar-tipo-unas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-puedo-despintar-tipo-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-pegar-unas-postizas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-pegar-unas-postizas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-decorar-unas-pies</loc>
+      <loc>https://www.gonvar.io/blogs/como-decorar-unas-pies</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-monomero-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-monomero-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-decorar-salon-manicura-pedicura</loc>
+      <loc>https://www.gonvar.io/blogs/como-decorar-salon-manicura-pedicura</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/bueno-quitar-cuticula-unas</loc>
+      <loc>https://www.gonvar.io/blogs/bueno-quitar-cuticula-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-ponen-unas-moradas-razon-aparente</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-ponen-unas-moradas-razon-aparente</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-bueno-hongos-unas</loc>
+      <loc>https://www.gonvar.io/blogs/que-bueno-hongos-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-significan-lineas-negras-unas</loc>
+      <loc>https://www.gonvar.io/blogs/que-significan-lineas-negras-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-necesito-emprender-negocio-unas</loc>
+      <loc>https://www.gonvar.io/blogs/que-necesito-emprender-negocio-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-pegar-unas-postizas-no-pegamento</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-pegar-unas-postizas-no-pegamento</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-hacer-crezcan-unas-semana</loc>
+      <loc>https://www.gonvar.io/blogs/que-hacer-crezcan-unas-semana</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-lima-una-natural</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-lima-una-natural</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/curso-intensivo-unas</loc>
+      <loc>https://www.gonvar.io/blogs/curso-intensivo-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-manera-mantener-unas-limpias-sanas</loc>
+      <loc>https://www.gonvar.io/blogs/que-manera-mantener-unas-limpias-sanas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/sales-pedicure</loc>
+      <loc>https://www.gonvar.io/blogs/sales-pedicure</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-producto-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-producto-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/one-stroke-como-funciona</loc>
+      <loc>https://www.gonvar.io/blogs/one-stroke-como-funciona</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/especialista-trata-unas-manos</loc>
+      <loc>https://www.gonvar.io/blogs/especialista-trata-unas-manos</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/material-unas-esculturales</loc>
+      <loc>https://www.gonvar.io/blogs/material-unas-esculturales</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-quitar-unas-acrilicas-facil</loc>
+      <loc>https://www.gonvar.io/blogs/como-quitar-unas-acrilicas-facil</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/unas-largas-bonitas</loc>
+      <loc>https://www.gonvar.io/blogs/unas-largas-bonitas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-esta-hecho-barniz-unas</loc>
+      <loc>https://www.gonvar.io/blogs/que-esta-hecho-barniz-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/unas-decoradas-piedras-cristales</loc>
+      <loc>https://www.gonvar.io/blogs/unas-decoradas-piedras-cristales</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-monomero-unas-acrilicas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-monomero-unas-acrilicas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/curso-unas-certificado-mexico</loc>
+      <loc>https://www.gonvar.io/blogs/curso-unas-certificado-mexico</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-funciona-resina-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-funciona-resina-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/puedo-pintarme-unas-estoy-embarazada</loc>
+      <loc>https://www.gonvar.io/blogs/puedo-pintarme-unas-estoy-embarazada</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-crecen-unas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-crecen-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-rompen-unas-hacer-evitarlo</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-rompen-unas-hacer-evitarlo</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/mejor-unas-acrilico-gel-semipermanente</loc>
+      <loc>https://www.gonvar.io/blogs/mejor-unas-acrilico-gel-semipermanente</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-matizador-una</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-matizador-una</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-calmar-dolor-una-encarnada</loc>
+      <loc>https://www.gonvar.io/blogs/como-calmar-dolor-una-encarnada</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-rompen-menos-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-rompen-menos-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/edad-poner-unas-artificiales</loc>
+      <loc>https://www.gonvar.io/blogs/edad-poner-unas-artificiales</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/unas-navidenas-3d</loc>
+      <loc>https://www.gonvar.io/blogs/unas-navidenas-3d</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/pincel-abanico-unas</loc>
+      <loc>https://www.gonvar.io/blogs/pincel-abanico-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-unas-tienen-ondas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-unas-tienen-ondas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-manchas-blancas-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-manchas-blancas-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-cortar-unas-manos-pies-hombres</loc>
+      <loc>https://www.gonvar.io/blogs/como-cortar-unas-manos-pies-hombres</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-estan-hechas-unas</loc>
+      <loc>https://www.gonvar.io/blogs/que-estan-hechas-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-entierran-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-entierran-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-polvo-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-polvo-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-gel-frio-unas-acrilicas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-gel-frio-unas-acrilicas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-duelen-unas-pies</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-duelen-unas-pies</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-importante-cortarse-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-importante-cortarse-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-unas-ponen-negras</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-unas-ponen-negras</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-quiebran-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-quiebran-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/cuantos-dias-nacido-cortan-unas</loc>
+      <loc>https://www.gonvar.io/blogs/cuantos-dias-nacido-cortan-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-pegan-unas-postizas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-pegan-unas-postizas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/cuanto-tiempo-tardan-crecer-unas</loc>
+      <loc>https://www.gonvar.io/blogs/cuanto-tiempo-tardan-crecer-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/malo-cortarse-unas-durante-embarazo</loc>
+      <loc>https://www.gonvar.io/blogs/malo-cortarse-unas-durante-embarazo</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/puedo-pintar-unas-despues-parto</loc>
+      <loc>https://www.gonvar.io/blogs/puedo-pintar-unas-despues-parto</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-aceite-ricino-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-aceite-ricino-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-unas-pies-huelen-mal</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-unas-pies-huelen-mal</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-deforman-unas-manos</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-deforman-unas-manos</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-diluir-esmalte-unas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-diluir-esmalte-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-unas-popote</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-unas-popote</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-aceite-oregano-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-aceite-oregano-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/que-estan-hechas-unas-cabello</loc>
+      <loc>https://www.gonvar.io/blogs/que-estan-hechas-unas-cabello</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/bueno-limar-unas-hongos</loc>
+      <loc>https://www.gonvar.io/blogs/bueno-limar-unas-hongos</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/malo-cortarse-unas-noche</loc>
+      <loc>https://www.gonvar.io/blogs/malo-cortarse-unas-noche</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/malo-cortarle-unas-bebe</loc>
+      <loc>https://www.gonvar.io/blogs/malo-cortarle-unas-bebe</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-ph-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-ph-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-gel-construccion-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-gel-construccion-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-latex-liquido-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-latex-liquido-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/concepto-decoracion-negocio-unas</loc>
+      <loc>https://www.gonvar.io/blogs/concepto-decoracion-negocio-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-sellador-organico</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-sellador-organico</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-hacen-burbujas-esmalte-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-hacen-burbujas-esmalte-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-doblan-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-doblan-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-ponen-unas-azules</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-ponen-unas-azules</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-tengo-unas-naranjas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-tengo-unas-naranjas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-aprender-decorar-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-aprender-decorar-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-despintarse-unas-sin-acetona</loc>
+      <loc>https://www.gonvar.io/blogs/como-despintarse-unas-sin-acetona</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-unas-botella</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-unas-botella</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-pintar-unas-correctamente</loc>
+      <loc>https://www.gonvar.io/blogs/como-pintar-unas-correctamente</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-decorar-unas-ninas</loc>
+      <loc>https://www.gonvar.io/blogs/como-decorar-unas-ninas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-fosforo-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-fosforo-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-alicate-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-alicate-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/crecen-unas-rapido</loc>
+      <loc>https://www.gonvar.io/blogs/crecen-unas-rapido</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-aceite-almendras-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-aceite-almendras-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-acrilico-casero-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-acrilico-casero-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-descarapelan-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-descarapelan-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-agua-oxigenada-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-agua-oxigenada-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-ganar-dinero-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-ganar-dinero-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/melanoniquia-unas</loc>
+      <loc>https://www.gonvar.io/blogs/melanoniquia-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/conoce-nueva-plataforma-gonvar</loc>
+      <loc>https://www.gonvar.io/blogs/conoce-nueva-plataforma-gonvar</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-decorar-unas-sombras</loc>
+      <loc>https://www.gonvar.io/blogs/como-decorar-unas-sombras</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-esmalte-unas-transparente</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-esmalte-unas-transparente</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/programa-afiliados-gonvar</loc>
+      <loc>https://www.gonvar.io/blogs/programa-afiliados-gonvar</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/mejoras-encontraremos-cursos-unas-gonvar-nueva-plataforma</loc>
+      <loc>https://www.gonvar.io/blogs/mejoras-encontraremos-cursos-unas-gonvar-nueva-plataforma</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/nombres-negocio-unas</loc>
+      <loc>https://www.gonvar.io/blogs/nombres-negocio-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-aceite-argan-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-aceite-argan-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-nailex-desenterrador-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-nailex-desenterrador-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-lampara-uv-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-lampara-uv-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/multiplataforma-gonvar</loc>
+      <loc>https://www.gonvar.io/blogs/multiplataforma-gonvar</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirven-pinceles-goma-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirven-pinceles-goma-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/nueva-experiencia-aprendizaje-linea-gonvar</loc>
+      <loc>https://www.gonvar.io/blogs/nueva-experiencia-aprendizaje-linea-gonvar</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirven-pinceles-silicona-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirven-pinceles-silicona-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/cuantos-watts-recomendable-lampara-unas</loc>
+      <loc>https://www.gonvar.io/blogs/cuantos-watts-recomendable-lampara-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/herramientas-manicure-2023</loc>
+      <loc>https://www.gonvar.io/blogs/herramientas-manicure-2023</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/por-que-despegan-unas</loc>
+      <loc>https://www.gonvar.io/blogs/por-que-despegan-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/puedo-poner-unas-embarazada</loc>
+      <loc>https://www.gonvar.io/blogs/puedo-poner-unas-embarazada</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/stamping-unas</loc>
+      <loc>https://www.gonvar.io/blogs/stamping-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-unas-efecto-espejo</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-unas-efecto-espejo</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-decorar-unas-papel-aluminio</loc>
+      <loc>https://www.gonvar.io/blogs/como-decorar-unas-papel-aluminio</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/ajo-ayuda-unas-crezcan</loc>
+      <loc>https://www.gonvar.io/blogs/ajo-ayuda-unas-crezcan</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-decorar-unas-piedritas-caseras</loc>
+      <loc>https://www.gonvar.io/blogs/como-decorar-unas-piedritas-caseras</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-elegir-productos-salon-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-elegir-productos-salon-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-eliminar-esmalte-unas-dura-21-dias</loc>
+      <loc>https://www.gonvar.io/blogs/como-eliminar-esmalte-unas-dura-21-dias</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-esmalte-unas-dure-tiempo</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-esmalte-unas-dure-tiempo</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/limon-hace-unas-crezcan</loc>
+      <loc>https://www.gonvar.io/blogs/limon-hace-unas-crezcan</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-unas-postizas-harina-papel-higienico</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-unas-postizas-harina-papel-higienico</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-limpiar-unas-aluminio</loc>
+      <loc>https://www.gonvar.io/blogs/como-limpiar-unas-aluminio</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/para-que-sirve-kola-loca-unas</loc>
+      <loc>https://www.gonvar.io/blogs/para-que-sirve-kola-loca-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/painting-gel</loc>
+      <loc>https://www.gonvar.io/blogs/painting-gel</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/surcos-unas</loc>
+      <loc>https://www.gonvar.io/blogs/surcos-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/unas-tablaroca</loc>
+      <loc>https://www.gonvar.io/blogs/unas-tablaroca</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/bueno-barniz-unas</loc>
+      <loc>https://www.gonvar.io/blogs/bueno-barniz-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/unas-prolija</loc>
+      <loc>https://www.gonvar.io/blogs/unas-prolija</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-hacer-unas-almendra</loc>
+      <loc>https://www.gonvar.io/blogs/como-hacer-unas-almendra</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/unas-polygel</loc>
+      <loc>https://www.gonvar.io/blogs/unas-polygel</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-quita-shellac-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-quita-shellac-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/vitaminas-endurecen-unas</loc>
+      <loc>https://www.gonvar.io/blogs/vitaminas-endurecen-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/tengo-unas-resecas</loc>
+      <loc>https://www.gonvar.io/blogs/tengo-unas-resecas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-pegar-foil-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-pegar-foil-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/quitar-plumon-permanente-una</loc>
+      <loc>https://www.gonvar.io/blogs/quitar-plumon-permanente-una</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-colocan-swarovskis-unas</loc>
+      <loc>https://www.gonvar.io/blogs/como-colocan-swarovskis-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/con-que-hace-efecto-camaleon-unas</loc>
+      <loc>https://www.gonvar.io/blogs/con-que-hace-efecto-camaleon-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/como-ponen-unas-postizas-iman</loc>
+      <loc>https://www.gonvar.io/blogs/como-ponen-unas-postizas-iman</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/bueno-yodo-blanco-unas</loc>
+      <loc>https://www.gonvar.io/blogs/bueno-yodo-blanco-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/bueno-poner-unas-leche</loc>
+      <loc>https://www.gonvar.io/blogs/bueno-poner-unas-leche</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/danino-gelish-unas</loc>
+      <loc>https://www.gonvar.io/blogs/danino-gelish-unas</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/Blogs/malo-ponerse-unas-embarazada</loc>
+      <loc>https://www.gonvar.io/blogs/malo-ponerse-unas-embarazada</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
 

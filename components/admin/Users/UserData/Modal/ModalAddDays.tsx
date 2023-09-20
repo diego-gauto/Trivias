@@ -5,7 +5,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { updateUserPlan } from "../../../../../store/actions/UserActions";
-import { updateMembershipAnualApi, updateMembershipDaysApi } from "../../../../api/users";
+import { updateMembershipAnualApi, updateMembershipDaysApi, updateMembershipPlanApi } from "../../../../api/users";
 
 import { CloseIcon } from "../UsersCardData.styled";
 import {
@@ -44,22 +44,63 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
       });
     }
   }
-  const addYearSubscription = () => {
-    if (confirm(`Estas seguro que quieres agregar anualidad al usuario ${user.email}?`)) {
-      let tempFinalDate = 0;
-      if (user.final_date > today) {
-        tempFinalDate = user.final_date + 365 * 86400;
-        user.final_date = tempFinalDate;
+  // const addYearSubscription = () => {
+  //   if (confirm(`Estas seguro que quieres agregar anualidad al usuario ${user.email}?`)) {
+  //     let tempFinalDate = 0;
+  //     if (user.final_date > today) {
+  //       tempFinalDate = user.final_date + 365 * 86400;
+  //       user.final_date = tempFinalDate;
+  //     }
+  //     if (user.final_date < today) {
+  //       tempFinalDate = today + 365 * 86400;
+  //       user.final_date = tempFinalDate;
+  //     }
+  //     updateMembershipAnualApi(user).then((res: any) => {
+  //       console.log(res);
+  //       alert("Se agrego la anualidad correctamente!")
+  //       handleClose();
+  //     });
+  //   }
+  // }
+  console.log(user);
+  const addMembership = async (type: number) => {
+    if (confirm("Seguro que quieres agregar una " + (type === 1 ? "Mensualidad" : "Anualidad"))) {
+      if (type === 1) {
+        //mensual
+        let body = {
+          user_final_date: user.final_date,
+          start_date: user.start_date,
+          level: 6,
+          id: user.id,
+          days: 30,
+        }
+        await updateMembershipPlanApi(body).then((res) => {
+          if (res.response) {
+            alert(res.response.data.data)
+          }
+          else {
+            alert("Membresia Actualizada con exito!")
+          }
+        });
       }
-      if (user.final_date < today) {
-        tempFinalDate = today + 365 * 86400;
-        user.final_date = tempFinalDate;
+      if (type === 2) {
+        //anual
+        let body = {
+          user_final_date: user.final_date,
+          start_date: user.start_date,
+          level: 5,
+          id: user.id,
+          days: 365,
+        }
+        await updateMembershipPlanApi(body).then((res) => {
+          if (res.response) {
+            alert(res.response.data.data)
+          }
+          else {
+            alert("Anualidad Actualizada con exito!")
+          }
+        });
       }
-      updateMembershipAnualApi(user).then((res: any) => {
-        console.log(res);
-        alert("Se agrego la anualidad correctamente!")
-        handleClose();
-      });
     }
   }
   const deleteDays = () => {
@@ -96,11 +137,12 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
           />
         </InputContain>
         <ButtonContain>
-          <PurpleButton style={{ background: "blue" }} onClick={addYearSubscription}>
+          <PurpleButton onClick={addDays} style={{ background: "green" }} >Agregar Dias</PurpleButton>
+          <PurpleButton style={{ background: "blue" }} onClick={() => addMembership(2)}>
             Agregar Anualidad</PurpleButton>
           <PurpleButton onClick={() => {
-            addDays()
-          }}>Agregar días</PurpleButton>
+            addMembership(1);
+          }}>Agregar Mensualidad</PurpleButton>
         </ButtonContain>
         {(user.final_date > today && user.level === 0) && <ButtonContain>
           <PurpleButton onClick={() => {
