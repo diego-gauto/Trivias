@@ -43,11 +43,11 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
                 </div>
               </>
             }
-            <p className='title'>Materiales</p>
+            {/* <p className='title'>Materiales</p>
             <p>Da click en el botón de abajo para que puedas ver los materiales que necesitarás para este curso.</p>
             <button className="btn-material" onClick={openMaterial}>
               Comprar materiales
-            </button>
+            </button> */}
           </LessonContent>
         </TextContainer>
         <div className='teacher-container'>

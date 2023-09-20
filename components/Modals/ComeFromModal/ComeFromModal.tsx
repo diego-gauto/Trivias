@@ -55,7 +55,7 @@ const ComeFromModal = (props: IComeFromModal) => {
           </h2>
         </div>
         <div className='bottom-data'>
-          <p>Nos gustaria conocerte mejor, queremos saber como nos conociste!</p>
+          <p>¿Porqué medio te enteraste de nuestros cursos?</p>
           <div className='select-container'>
             <SelectInput onChange={(e) => optionSelect(e.target.value)} defaultValue=''>
               <option value="" disabled >Seleccione una opción</option>
