@@ -23,7 +23,7 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
       <AboutContain>
         <TextContainer>
           <LessonTitle>
-            {data.title}, <span>de {teacherCreds[0]?.name}</span>
+            {course.title}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>
