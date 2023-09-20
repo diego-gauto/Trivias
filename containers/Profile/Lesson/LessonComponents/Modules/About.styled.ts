@@ -155,9 +155,9 @@ export const LessonContent = styled.div`
   }
   .btn-material {
     padding: 8px 20px;
-    color: #f8a44c;
+    color: #8e2de2;
     border-radius: 100px;
-    border: 1px solid #f8a44c;
+    border: 1px solid #8e2de2;
     background: transparent;
     &:hover {
       opacity: 0.7;
