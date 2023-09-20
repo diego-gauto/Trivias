@@ -2,8 +2,6 @@ import { useRouter } from "next/router";
 import { CERTIFICATES_PATH, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH } from "./paths";
 import { IUser } from "../interfaces/IUserData";
 import { ICourse } from "../interfaces/ICourse";
-
-const router = useRouter();
 let today = new Date().getTime() / 1000;
 
 export const authRedirect = (type: string, userInfo?: any) => {
@@ -64,7 +62,7 @@ export const authRedirect = (type: string, userInfo?: any) => {
 }
 
 export const goToCertificate = (course: any) => {
-  console.log(course)
+  const router = useRouter();
   router.push({
     pathname: CERTIFICATES_PATH,
     query: {
@@ -73,6 +71,7 @@ export const goToCertificate = (course: any) => {
   });
 }
 export const goToSuscription = (user: IUser, course: ICourse) => {
+  const router = useRouter();
   if (user) {
     //New condition subscription flow
     if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin') {
