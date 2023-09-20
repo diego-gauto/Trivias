@@ -171,6 +171,16 @@ export const Background = styled.div`
               color: #3f1168;
               background: rgb(218 211 229 / 40%);
             }
+            .select-contain{
+              position: relative;
+              .icon{
+                position: absolute;
+                top: 52%;
+                transform: translateY(-50%);
+                right: 15px;
+                pointer-events: none;
+              }
+            }
             .eye {
               cursor: pointer;
               position: absolute;

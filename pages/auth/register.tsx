@@ -31,6 +31,7 @@ import {
 } from "../../screens/Login.styled";
 import { SOCIALS_ARRAY } from "../../constants/arrays";
 import { authRedirect } from "../../constants/redirects";
+import { IoChevronDown } from "react-icons/io5";
 
 var countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/es.json"))
@@ -422,16 +423,19 @@ const Register = () => {
                 <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
                   <div className="form-input">
                     <label>Cómo nos conociste</label>
-                    <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
-                      <option value="" disabled>Seleccione una opción</option>
-                      {
-                        SOCIALS_ARRAY.map((val: string, index: number) => {
-                          return (
-                            <option value={val} key={"socials_" + index}>{val}</option>
-                          )
-                        })
-                      }
-                    </select>
+                    <div className="select-contain">
+                      <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
+                        <option value="" disabled>Seleccione una opción</option>
+                        {
+                          SOCIALS_ARRAY.map((val: string, index: number) => {
+                            return (
+                              <option value={val} key={"socials_" + index}>{val}</option>
+                            )
+                          })
+                        }
+                      </select>
+                      <IoChevronDown className="icon" />
+                    </div>
                   </div>
                 </div>
                 <div className="form-row">
