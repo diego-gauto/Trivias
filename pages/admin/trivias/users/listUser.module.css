@@ -3,65 +3,103 @@
   padding: 3% 3% 0 3%;
   display: flex;
   flex-direction: column;
-}
 
-.titles{
-  display: flex;
-}
+  .titles{
+    display: flex;
+    flex-direction: column;
 
-.main h2{
-  width: 100%;
-  text-align: center;
-  margin-bottom: 2%;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2%;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 27px;
+    color: #520795;
 
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 27px;
-  color: #520795;
-}
+    .buttonContainer{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2%;
 
-.buttonContainer{
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 2%;
-}
+      .button{
+        width: 300px;
+        height: 50px;
+        border: 0;
+        cursor: pointer;
+        font-family: "Montserrat";
+        border-radius: 100px;
+        background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        /* identical to box height */
+        color: #ffffff;
+      }
 
-.main button{
-  width: 300px;
-  height: 50px;
-  border: 0;
-  cursor: pointer;
-  font-family: "Montserrat";
-  border-radius: 100px;
-  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
-  /* identical to box height */
-  color: #ffffff;
-}
+      .link {
+        text-decoration: none;
 
-.volver {
-  display: flex;
-  cursor: pointer;
-}
+        .volver {
+          display: flex;
+          cursor: pointer;
 
-.volver div {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 27px;
-  text-align: center;
-  color: #520795;
-  padding: 5px 0 0 8px;
-}
+          font-family: "Montserrat";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 22px;
+          line-height: 27px;
+          color: #520795;
 
-.link {
-  text-decoration: none;
+          .volverText{
+            text-align: center;
+            padding: 5px 0 0 8px;
+          }
+        }
+      }
+    }
+
+    .title{
+      font-style: normal;
+      font-weight: 700;
+      font-size: 60px;
+      line-height: 65px;
+    }
+  }
+
+  .selectContainer{
+    display: flex;
+    justify-content: space-around;
+
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    color: #520795;
+
+    .selectGroup{
+      display: flex;
+      flex-direction: column;
+
+      .select{
+        color: #520795;
+        border-radius: 20px;
+        border-color: #520795;
+        border-width: 2px;
+        height: 30px;
+        padding-left: 5px;
+      }
+
+      .select:focus{
+        border-color: #520795;
+      }
+
+    }
+  }
+
 }
 
 @media (max-width: 768px) {

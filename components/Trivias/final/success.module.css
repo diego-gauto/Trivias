@@ -85,8 +85,8 @@
 .successContainer .buttonContainer{
   text-decoration: none;
   display: flex;
-  justify-content: center;
-  width: 100%;
+  justify-content: space-around;
+  width: 582px;
   padding-bottom: 2%;
 }
 
@@ -100,9 +100,9 @@
   font-weight: 600;
   cursor: pointer;
   position: relative;
-  width: 229px;
+  width: 250px;
   height: 40px;
-  margin: 0 20px;
+  margin: 0;
 }
 
 .successContainer button:hover {
@@ -110,6 +110,24 @@
   -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all;
   background-color: #5000b5;
+}
+
+@media screen and (max-width: 1190px) {
+
+  .successContainer .buttonContainer{
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 2%;
+  }
+
+  .successContainer .buttonContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttonContainer a {
+    margin: 2% 0; /* Agregar espacio entre los botones */
+  }
 }
 
 @media screen and (max-width: 950px) {
