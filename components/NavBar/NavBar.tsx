@@ -489,7 +489,7 @@ const NavBar = () => {
                   src="/images/Navbar/menu2.png"
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
-                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
+                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
                   <Link href="/trivias" >
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Trivias
