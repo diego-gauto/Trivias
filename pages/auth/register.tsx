@@ -422,7 +422,7 @@ const Register = () => {
                 <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
                   <div className="form-input">
                     <label>Cómo nos conociste</label>
-                    <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} {...register("option")} onChange={(e) => setOption(e.target.value)}>
+                    <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
                       <option value="" disabled>Seleccione una opción</option>
                       {
                         SOCIALS_ARRAY.map((val: string, index: number) => {
