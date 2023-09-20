@@ -17,7 +17,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import { conektaCustomer, facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH } from "../../constants/paths";
+import { LOGIN_PATH, PREVIEW_PATH, } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Background,
@@ -30,6 +30,7 @@ import {
   Title,
 } from "../../screens/Login.styled";
 import { SOCIALS_ARRAY } from "../../constants/arrays";
+import { authRedirect } from "../../constants/redirects";
 
 var countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/es.json"))
@@ -125,32 +126,7 @@ const Register = () => {
     resolver: yupResolver(formSchema)
   });
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
-  const redirect = () => {
-    if (localStorage.getItem("trial") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
-    }
-    if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
-    }
-    if (localStorage.getItem("month") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
-    }
-    if (localStorage.getItem("anual") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
-    }
-    if (localStorage.getItem("nailMaster") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
-    }
-    if (localStorage.getItem("plan") === "true") {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
-    }
-    if (localStorage.getItem("login") === "true") {
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
-    }
-    if (localStorage.getItem("rewards") === "true") {
-      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
-    }
-  }
+
   const parseNumber = (phone: string) => {
     const parsedNumber = parsePhoneNumberFromString(phone);
     const code = parsedNumber?.country
@@ -195,7 +171,7 @@ const Register = () => {
             localStorage.setItem('email', user.email);
             localStorage.setItem("method", "mail");
             window.location.href = PREVIEW_PATH;
-            redirect()
+            authRedirect('register')
           })
         }
       })
@@ -245,7 +221,7 @@ const Register = () => {
             conektaCustomer(user).then(() => {
               localStorage.setItem('email', user.email)
               window.location.href = PREVIEW_PATH;
-              redirect()
+              authRedirect('register')
             })
           }
         })
@@ -292,7 +268,7 @@ const Register = () => {
                 localStorage.setItem('email', user.email);
                 localStorage.setItem('method', "facebook");
                 window.location.href = PREVIEW_PATH;
-                redirect()
+                authRedirect('register')
               })
             }
           })
@@ -310,7 +286,7 @@ const Register = () => {
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
-      redirect()
+      authRedirect('register')
       window.location.href = PREVIEW_PATH;
     } else {
       setTimeout(() => {

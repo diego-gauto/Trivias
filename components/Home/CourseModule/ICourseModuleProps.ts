@@ -1,12 +1,8 @@
 import { ICourse } from "../../../interfaces/ICourse";
+import { IUser } from "../../../interfaces/IUserData";
 export interface ICourseModuleProps {
   data: ICourse;
   num: number;
   loggedIn: boolean;
-  user: {
-    final_date: number;
-    level: number;
-    method: string;
-    role: string;
-  };
+  user: IUser;
 }

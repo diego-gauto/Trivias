@@ -1,11 +1,8 @@
+import { IUser } from "../../../interfaces/IUserData";
+
 export interface ICourseModuleContainerProps {
   courses: any;
   num: number;
   loggedIn: boolean;
-  user: {
-    final_date: number;
-    level: number;
-    method: string;
-    role: string;
-  };
+  user: IUser;
 }

@@ -1,18 +1,12 @@
+import { IUser } from "../../../interfaces/IUserData";
+
 export interface ICourseData {
   slideType: string;
   containLoader: boolean;
   slideNumber: number;
   innerWidth: any;
   allCourses: [];
-  user: {
-    method: string;
-    final_date: number;
-    level: number;
-    role: string;
-    user_courses: [IUserCourse];
-    user_history: [IUserHistory];
-    user_progress: [IUserProgress];
-  };
+  user: IUser;
 }
 export interface ICourse {
   id: number;

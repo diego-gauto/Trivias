@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import { AiFillStar } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 import { Rating } from "react-simple-star-rating";
-
-import router from "next/router";
-
-import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PROFILE_PATH, PURCHASE_PATH } from "../../constants/paths";
 import {
   Container,
   ContainerVideo,
@@ -33,6 +28,7 @@ import {
 import { ICourseModal } from "./ICourseModal";
 import ModalMaterials from "./Materials/ModalMaterials";
 import SelectModule4 from "./Select/SelectModule";
+import { goToSuscription } from "../../constants/redirects";
 
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;
@@ -49,41 +45,6 @@ const CourseModal = (props: ICourseModal) => {
   };
   const handleShow = () => {
     setMaterial(true);
-  }
-  const goTo = () => {
-    if (user) {
-      //New condition subscription flow
-      if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin') {
-        router.push({
-          pathname: LESSON_PATH,
-          query: { id: course.id, season: 0, lesson: 0 },
-        });
-      }
-      if (course.type === "Mensual" && user.level === 0 && user.final_date < today) {
-        router.push(`${PLAN_PATH}`)
-      }
-      if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && (user.level === 1 || user.level > 2))) {
-        router.push(`${PROFILE_PATH}`)
-      }
-      if (course.type === "Producto" && course.pay) {
-        router.push({
-          pathname: LESSON_PATH,
-          query: { id: course.id, season: 0, lesson: 0 },
-        });
-      }
-      if (course.type === 'Producto' && !course.pay) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } })
-      }
-    }
-    else {
-      if (course.type === "Producto") {
-        localStorage.setItem("course", `${course.id}`);
-      }
-      if (course.type === "Mensual") {
-        localStorage.setItem("plan", `true`);
-      }
-      router.push({ pathname: LOGIN_PATH })
-    }
   }
 
   useEffect(() => {
@@ -157,7 +118,7 @@ const CourseModal = (props: ICourseModal) => {
               </div>
               <TextContainer>
                 {course.type == "Producto" && <p className="price">por ${course.price?.toLocaleString('en-US')} <span>MXN</span></p>}
-                <button onClick={goTo}>
+                <button onClick={() => goToSuscription(user, course)}>
                   Comenzar ahora
                 </button>
               </TextContainer>

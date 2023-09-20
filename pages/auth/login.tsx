@@ -37,6 +37,7 @@ import ActiveUserConekta from "./Modals/ActiveUserConekta";
 import { getUsersStripe } from "../../components/api/conekta/test";
 import { IUser } from "../../interfaces/IUserData";
 import ComeFromModal from "../../components/Modals/ComeFromModal/ComeFromModal";
+import { authRedirect } from "../../constants/redirects";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -104,7 +105,7 @@ const Login = () => {
     setShowUpdateComeFrom(false);
     updateSignIn(user);
     localStorage.setItem('email', user.email);
-    redirect(user)
+    authRedirect("login", user)
   }
 
   try {
@@ -163,7 +164,7 @@ const Login = () => {
           } else {
             updateSignIn(res[0]);
             localStorage.setItem('email', signUpData.credentials.email);
-            redirect(res[0])
+            authRedirect("login", res[0])
           }
         }
         if (res[0].password !== signUpData.credentials.password) {
@@ -199,7 +200,7 @@ const Login = () => {
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
       window.location.href = PREVIEW_PATH;
-      redirect(res[0])
+      authRedirect('login', res[0])
     })
   }
   const updateSignIn = async (user: any) => {
@@ -248,7 +249,7 @@ const Login = () => {
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 window.location.href = PREVIEW_PATH;
-                redirect(res[0])
+                authRedirect('login', res[0])
               })
               setAuthLoader(false);
               return
@@ -280,7 +281,7 @@ const Login = () => {
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
             setUser(res[0]);
-            redirect(res[0])
+            authRedirect('login', res[0])
           }
         })
       })
@@ -320,7 +321,7 @@ const Login = () => {
               updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                redirect(res[0])
+                authRedirect('login', res[0])
                 window.location.href = PREVIEW_PATH;
               })
               setAuthLoader(false);
@@ -352,40 +353,12 @@ const Login = () => {
             }
             updateSignIn(res[0]);
             localStorage.setItem('email', user.email);
-            redirect(res[0])
+            authRedirect('login', res[0])
           }
         })
       })
     } catch (error: any) {
       setAuthLoader(false);
-    }
-  }
-  const redirect = (userInfo: any) => {
-    let today = new Date().getTime() / 1000;
-    if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
-    } else if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
-    }
-    else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
-    }
-    else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
-    }
-    else if (localStorage.getItem("nailMaster") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
-    }
-    else if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
-    }
-    else if (localStorage.getItem("login") === "true") {
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
-    }
-    else if (localStorage.getItem("rewards") === "true") {
-      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
-    } else {
-      window.location.href = PREVIEW_PATH;
     }
   }
   return (

@@ -1,13 +1,10 @@
+import { IUser } from "../../../interfaces/IUserData";
+
 export interface ICourse {
   openModal: boolean;
   setOpenModal: any;
   course: [];
-  user: {
-    final_date: number;
-    level: number;
-    method: string;
-    role: string;
-  };
+  user: IUser;
   loggedIn: boolean;
 }
 interface IProfessor {

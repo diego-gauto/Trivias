@@ -11,7 +11,6 @@ export interface reward_slider {
   // getAllUserRewards: any;
   courses: course[];
   completeCertificates: courses[];
-  router: any;
   getRewardData: any;
 }
 interface SlideObj {

@@ -25,4 +25,5 @@ export interface IUser {
   final_date: any;
   plan_name: string;
   method: string;
+  role: string;
 }
