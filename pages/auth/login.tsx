@@ -19,7 +19,6 @@ import {
   loginWithProviderApi,
   updateLastSignIn,
   updatePastUser,
-  updateUserPassword,
 } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
 import { PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH, SIGNUP_PATH } from "../../constants/paths";
@@ -278,10 +277,14 @@ const Login = () => {
             if (res[0].conekta_id === null) {
               await conektaCustomer(body)
             }
-            updateSignIn(res[0]);
-            localStorage.setItem('email', user.email);
-            setUser(res[0]);
-            authRedirect('login', res[0])
+            if (!res[0].come_from) {
+              setUser(res[0]);
+              setShowUpdateComeFrom(true);
+            } else {
+              updateSignIn(res[0]);
+              localStorage.setItem('email', user.email);
+              authRedirect('login', res[0])
+            }
           }
         })
       })
@@ -351,9 +354,14 @@ const Login = () => {
             if (res[0].conekta_id === null) {
               await conektaCustomer(body)
             }
-            updateSignIn(res[0]);
-            localStorage.setItem('email', user.email);
-            authRedirect('login', res[0])
+            if (!res[0].come_from) {
+              setUser(res[0]);
+              setShowUpdateComeFrom(true);
+            } else {
+              updateSignIn(res[0]);
+              localStorage.setItem('email', user.email);
+              authRedirect('login', res[0])
+            }
           }
         })
       })

@@ -34,7 +34,6 @@ const ComeFromModal = (props: IComeFromModal) => {
       id: user.id,
       come_from: option,
     }
-    console.log(body);
     try {
       await updateComeFromApi(body).then(() => {
         setLoader(false);
@@ -47,14 +46,13 @@ const ComeFromModal = (props: IComeFromModal) => {
     }
   }
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show}>
       <ComeFromContainer>
         <div className='header'>
           <h2 className='title'>
             Hola
             <span> {user.name}!</span>
           </h2>
-          <IoClose className='icon' />
         </div>
         <div className='bottom-data'>
           <p>Nos gustaria conocerte mejor, queremos saber como nos conociste!</p>
