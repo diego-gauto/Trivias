@@ -96,11 +96,11 @@ export const Background = styled.div`
       margin: auto;
       height: 100%;
       display: flex;
-      padding-block: 40px;
+      padding-block: 20px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
       p,
       h1 {
         margin: 0;
@@ -165,6 +165,12 @@ export const Background = styled.div`
             width: 100%;
             flex-grow: 1;
             position: relative;
+            select{
+              border-radius: 100px;
+              border: 1px solid #942ced;
+              color: #3f1168;
+              background: rgb(218 211 229 / 40%);
+            }
             .eye {
               cursor: pointer;
               position: absolute;

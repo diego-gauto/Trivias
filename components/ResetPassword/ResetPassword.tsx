@@ -11,7 +11,7 @@ import { LOGIN_PATH } from "../../constants/paths";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 //import { useAuth } from "../../hooks/useAuth";
 import { Error, Title } from "../../screens/Login.styled";
-import AlertModal from "../AlertModal/AlertModal";
+import AlertModal from "../Modals/AlertModal/AlertModal";
 import { updateUserPassword } from "../api/auth";
 import { ButtonContain, ResetContainer } from "./ResetPassword.styled";
 

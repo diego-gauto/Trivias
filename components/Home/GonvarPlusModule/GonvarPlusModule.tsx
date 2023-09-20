@@ -6,7 +6,7 @@ import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
-import { ModalGonvarPlus } from "../../ModalGonvarPlus/ModalGonvarPlus";
+import { ModalGonvarPlus } from "../../Modals/ModalGonvarPlus/ModalGonvarPlus";
 import { getWholeCourses } from "../../../store/actions/courseActions";
 declare let Hls: any
 

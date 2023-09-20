@@ -11,7 +11,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useGoogleLogin } from "@react-oauth/google";
 
-import AlertModal from "../../components/AlertModal/AlertModal";
+import AlertModal from "../../components/Modals/AlertModal/AlertModal";
 import {
   conektaCustomer,
   facebookUserInfo,
@@ -35,6 +35,8 @@ import {
 import ModalForgot from "./Modals/ModalForgot";
 import ActiveUserConekta from "./Modals/ActiveUserConekta";
 import { getUsersStripe } from "../../components/api/conekta/test";
+import { IUser } from "../../interfaces/IUserData";
+import ComeFromModal from "../../components/Modals/ComeFromModal/ComeFromModal";
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -74,16 +76,14 @@ const Login = () => {
   const [pastUser, setPastUser] = useState<any>({})
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
-  const [showAlert1, setShowAlert1] = useState<any>(false);
-  const [showAlert2, setShowAlert2] = useState<any>(false);
+  const [showAlert1, setShowAlert1] = useState<boolean>(false);
+  const [showAlert2, setShowAlert2] = useState<boolean>(false);
+  const [showUpdateComeFrom, setShowUpdateComeFrom] = useState<boolean>(false);
   const [alertMsg1, setalertMsg1] = useState<any>()
   const [alertMsg2, setalertMsg2] = useState()
-  const [reset, setReset] = useState<any>(false);
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const { login } = useLogin();
-  const [password, setPassword] = useState('');
-  const [confirm_Password, setConfirm_Password] = useState('');
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({} as IUser);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
@@ -100,6 +100,12 @@ const Login = () => {
   const toggleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
   };
+  const closeUpdate = () => {
+    setShowUpdateComeFrom(false);
+    updateSignIn(user);
+    localStorage.setItem('email', user.email);
+    redirect(user)
+  }
 
   try {
     var userDataAuth = useAuth();
@@ -132,38 +138,6 @@ const Login = () => {
         newConfirmPassword: formData.newConfirmPassword
       },
     };
-
-    if (reset) {
-      let body = {
-        email: signUpData.credentials.email,
-        password: password,
-        confirm: confirm_Password
-      }
-      if (password === "" || confirm_Password === "" || password !== confirm_Password) {
-        setError(true)
-        setErrorMsg("Revise que su contraseña este correcta");
-        setAuthLoader(false);
-        return;
-      }
-      await updateUserPassword(body).then((res) => {
-        if (res.status === 202) {
-          setShowAlert1(true);
-          setalertMsg1("Contraseña actualizada!")
-          setErrorMsg("");
-          setReset(false);
-          setAuthLoader(false)
-          return;
-        }
-        if (res.data.msg) {
-          setalertMsg2(res.data.msg)
-          setShowAlert2(true)
-        }
-        setAuthLoader(false)
-      })
-      return;
-    }
-
-
     loginWithProviderApi(signUpData.credentials).then(async (res) => {
       if (res[0]) {
         if (res[0].past_user === 'si') {
@@ -183,9 +157,14 @@ const Login = () => {
           if (res[0].conekta_id === null) {
             await conektaCustomer(body)
           }
-          updateSignIn(res[0]);
-          localStorage.setItem('email', signUpData.credentials.email);
-          redirect(res[0])
+          if (!res[0].come_from) {
+            setUser(res[0]);
+            setShowUpdateComeFrom(true);
+          } else {
+            updateSignIn(res[0]);
+            localStorage.setItem('email', signUpData.credentials.email);
+            redirect(res[0])
+          }
         }
         if (res[0].password !== signUpData.credentials.password) {
           setErrorMsg('La contraseña es incorrecta!');
@@ -309,35 +288,6 @@ const Login = () => {
     flow: 'auth-code',
   });
 
-  const redirect = (userInfo: any) => {
-    let today = new Date().getTime() / 1000;
-    if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
-    } else if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
-    }
-    else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
-    }
-    else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
-    }
-    else if (localStorage.getItem("nailMaster") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
-    }
-    else if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
-    }
-    else if (localStorage.getItem("login") === "true") {
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
-    }
-    else if (localStorage.getItem("rewards") === "true") {
-      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
-    } else {
-      window.location.href = PREVIEW_PATH;
-    }
-  }
-
   const loginWithFacebook = async () => {
     try {
       setAuthLoader(true);
@@ -410,7 +360,34 @@ const Login = () => {
       setAuthLoader(false);
     }
   }
-
+  const redirect = (userInfo: any) => {
+    let today = new Date().getTime() / 1000;
+    if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
+    } else if (localStorage.getItem("course")) {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+    }
+    else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
+    }
+    else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
+    }
+    else if (localStorage.getItem("nailMaster") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
+    }
+    else if (localStorage.getItem("plan") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
+    }
+    else if (localStorage.getItem("login") === "true") {
+      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
+    }
+    else if (localStorage.getItem("rewards") === "true") {
+      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
+    } else {
+      window.location.href = PREVIEW_PATH;
+    }
+  }
   return (
     <>
       {!isLoading ? (
@@ -455,7 +432,7 @@ const Login = () => {
               {
                 !pastUserScreen ?
                   <div className="box">
-                    {reset && <div className="form-row">
+                    <div className="form-row">
                       <div className="form-input">
                         <label>Correo <span>electrónico</span></label>
                         <input
@@ -474,51 +451,8 @@ const Login = () => {
                           </p>
                         </Error>
                       }
-                    </div>}
-                    {!reset ? <div className="form-row">
-                      <div className="form-input">
-                        <label>Correo <span>electrónico</span></label>
-                        <input
-                          required
-                          type="text"
-                          placeholder="correo@correo.com"
-                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                          {...register("email")}
-                        />
-                      </div>
-                      {
-                        errors.email &&
-                        <Error>
-                          <p>
-                            {errors.email?.message}
-                          </p>
-                        </Error>
-                      }
-                    </div> :
-                      <div className="form-row">
-                        <div className="form-input">
-                          <label>Contraseña nueva</label>
-                          <input
-                            required
-                            type={passwordShown_1 ? "text" : "password"}
-                            placeholder="Contraseña"
-                            className={`form-control`}
-                            onChange={(e: any) => { setPassword(e.target.value) }}
-                          />
-                          <div className="eye"
-                            onClick={togglePassword_1}
-                          >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                        </div>
-                        {
-                          errors.newPassword &&
-                          <Error>
-                            <p>
-                              {errors.newPassword?.message}
-                            </p>
-                          </Error>
-                        }
-                      </div>}
-                    {!reset ? <div className="form-row">
+                    </div>
+                    <div className="form-row">
                       <div className="form-input">
                         <label>Contraseña</label>
                         <input
@@ -539,30 +473,7 @@ const Login = () => {
                           </p>
                         </Error>
                       }
-                    </div> :
-                      <div className="form-row">
-                        <div className="form-input">
-                          <label>Confirmar contraseña</label>
-                          <input
-                            required
-                            type={passwordShown_1 ? "text" : "password"}
-                            placeholder="Contraseña"
-                            className={`form-control`}
-                            onChange={(e: any) => { setConfirm_Password(e.target.value) }}
-                          />
-                          <div className="eye"
-                            onClick={togglePassword_1}
-                          >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                        </div>
-                        {
-                          errors.newConfirmPassword &&
-                          <Error>
-                            <p>
-                              {errors.newConfirmPassword?.message}
-                            </p>
-                          </Error>
-                        }
-                      </div>}
+                    </div>
                     {error && <Error>
                       <p>
                         {errorMsg}
@@ -702,6 +613,7 @@ const Login = () => {
           </LoaderImage>
         </LoginBackground>
       )}
+      <ComeFromModal user={user} show={showUpdateComeFrom} onHide={closeUpdate} />
       <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
