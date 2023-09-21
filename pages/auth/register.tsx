@@ -422,7 +422,7 @@ const Register = () => {
                 </div>
                 <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
                   <div className="form-input">
-                    <label>Vi su publicidad en:</label>
+                    <label>Me enteré de Gonvar en:</label>
                     <div className="select-contain">
                       <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
                         <option value="" disabled>Seleccione una opción</option>

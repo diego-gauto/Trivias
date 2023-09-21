@@ -19,19 +19,22 @@ import {
 import { createNotification } from "../../../../../components/api/notifications";
 import { DEFAULT_USER_IMG } from "../../../../../constants/paths";
 import { CommentContain, CommentInput, MainContainer, Profile } from "./Comments.styled";
-import { TitleContain } from "./Module.styled";
-import ModuleTabs from "./ModuleTabs/ModuleTabs";
 import router from "next/router";
 
-const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
-
+interface IComments {
+  user: any,
+  data: any,
+  course: any,
+  lesson: any,
+}
+const Comments = (props: IComments) => {
+  const { user, data, course, lesson } = props;
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
   const [answer, setAnswer] = useState("");
   const [answerComment, setAnswerComment] = useState("");
   const [responses, setResponses] = useState<any>([]);
   const [lastComments, setLastComments] = useState<any>([]);
-
   const addLessonComment = () => {
     let body: any;
     if (comment) {
@@ -239,10 +242,6 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
 
   return (
     <>
-      <TitleContain >
-        <ModuleTabs data={data} user={user} value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
-        <div className='line'></div>
-      </TitleContain>
       <MainContainer>
         <CommentContain>
           <div className='comments-info'>
@@ -276,7 +275,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
           return (
             <div className='comment-container' key={'comments-' + index}>
               <div className="top">
-                {comments && x.photo
+                {x.photo
                   ?
                   <Profile src={x.photo} />
                   :

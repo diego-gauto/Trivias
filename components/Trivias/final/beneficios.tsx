@@ -10,7 +10,7 @@ const Beneficios = () => {
     <div className={beneficiosContainer}>
       <div className={containerTitle}>
         <h2 className={titulo}>Algunos beneficios Incluídos en </h2>
-        <img className={img} src="/images/trivias/Logo Gonvar degradado.svg" alt="" />
+        <img className={img} src="/images/trivias/logoGonvar+.png" alt="" />
       </div>
       <BeneficiosCardContainer></BeneficiosCardContainer>
       <Link href={`/suscripcion-anual`}>

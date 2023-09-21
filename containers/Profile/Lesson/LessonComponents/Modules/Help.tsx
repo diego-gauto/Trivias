@@ -1,0 +1,19 @@
+import React from 'react'
+import { HelpContainer } from './Help.styled';
+import { SUPPORT_PATH } from '../../../../../constants/paths';
+
+const Help = () => {
+  return (
+    <HelpContainer>
+      <p>
+        Dirígete al Centro de Ayuda para obtener apoyo. Si quieres obtener ayuda de forma más rápida, selecciona “Comentarios” y escribe tu pregunta.
+      </p>
+      <a href={SUPPORT_PATH} target="_blank" style={{ textDecoration: "none", width: "100%" }}>
+        <button>
+          Ir al Centro de ayuda
+        </button>
+      </a>
+    </HelpContainer>
+  )
+}
+export default Help;

@@ -112,30 +112,30 @@ const ModuleTabs = (props: IModule) => {
   return (
     <div className='tab-container'>
       <div className='tabs'>
-        <Titles style={value === 1 ? { fontWeight: 600 } : {}} onClick={() => {
+        <Titles style={value === 1 ? { fontWeight: 800 } : {}} onClick={() => {
           changeValue(1)
         }}>
           <BsPlayBtn></BsPlayBtn>
           Acerca del curso
         </Titles>
-        <Titles style={value === 3 ? { fontWeight: 600 } : {}} onClick={() => {
+        <Titles style={value === 3 ? { fontWeight: 800 } : {}} onClick={() => {
           changeValue(3)
         }}>
           <SlNotebook></SlNotebook>
           Evaluación
         </Titles>
-        <Titles style={value === 4 ? { fontWeight: 600 } : {}} onClick={() => {
+        <Titles style={value === 4 ? { fontWeight: 800 } : {}} onClick={() => {
           changeValue(4)
         }}>
           <TfiCommentAlt></TfiCommentAlt>
           Comentarios
         </Titles>
-        <Link href={SUPPORT_PATH}>
-          <Titles >
-            <FcSupport className="icon" />
-            Asesoría
-          </Titles>
-        </Link>
+        <Titles style={value === 5 ? { fontWeight: 800 } : {}} onClick={() => {
+          changeValue(5)
+        }}>
+          <FcSupport className="icon" />
+          Ayuda
+        </Titles>
       </div>
       {
         course.sequential === 0 &&

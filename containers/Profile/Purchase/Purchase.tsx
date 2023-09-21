@@ -29,6 +29,7 @@ import SpeiModal from "./Modals/Spei";
 import { createNotification } from "../../../components/api/notifications";
 import { getUsersStripe } from "../../../components/api/conekta/test";
 import ActiveUserConekta from "../../../pages/auth/Modals/ActiveUserConekta";
+import { SOCIALS_ARRAY } from "../../../constants/arrays";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -602,15 +603,15 @@ const Purchase = () => {
 
               </div>
               <p style={{ fontWeight: "bold" }}>Menciona el medio por el cual te enteraste de nosotros:</p>
-              <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }}>
-                <option value="">Seleccione una opción</option>
-                <option value="Pagina web">Pagina web</option>
-                <option value="Facebook">Facebook</option>
-                <option value="Instagram">Instagram</option>
-                <option value="Tiktok">Tiktok</option>
-                <option value="Google">Google</option>
-                <option value="Youtube">Youtube</option>
-                <option value="Amistad / Familiar">Amistad / Familiar</option>
+              <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }} defaultValue={""}>
+                <option value="" disabled>Seleccione una opción</option>
+                {
+                  SOCIALS_ARRAY.map((val: string, index: number) => {
+                    return (
+                      <option value={val} key={"socials_1_" + index}>{val}</option>
+                    )
+                  })
+                }
               </select>
               <img className="cards" src="../images/purchase/tarjetas_gonvar.png" alt="" />
               <div className="payment-methods">
@@ -944,15 +945,15 @@ const Purchase = () => {
                       Tus tarjetas se guardan de forma segura para que puedas reutilizar el método de pago.</p>
                   </div>
                   <p style={{ fontWeight: "bold" }}>Menciona el medio por el cual te enteraste de nosotros:</p>
-                  <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }}>
-                    <option value="">Seleccione una opción</option>
-                    <option value="Pagina web">Pagina web</option>
-                    <option value="Facebook">Facebook</option>
-                    <option value="Instagram">Instagram</option>
-                    <option value="Tiktok">Tiktok</option>
-                    <option value="Google">Google</option>
-                    <option value="Youtube">Youtube</option>
-                    <option value="Amistad / Familiar">Amistad / Familiar</option>
+                  <select className="comeFrom" onChange={(e) => { setOption(e.target.value) }} defaultValue={""}>
+                    <option value="" disabled>Seleccione una opción</option>
+                    {
+                      SOCIALS_ARRAY.map((val: string, index: number) => {
+                        return (
+                          <option value={val} key={"socials_2_" + index}>{val}</option>
+                        )
+                      })
+                    }
                   </select>
                   <img src="../images/purchase/tarjetas_gonvar.png" alt="" />
                 </div>

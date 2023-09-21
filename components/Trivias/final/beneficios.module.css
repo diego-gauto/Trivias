@@ -30,7 +30,10 @@
     }
 
     .img {
-    
+      width: 200px;
+      height: 100%;
+      position: relative;
+      top:-5px
     }
     
 }
@@ -86,7 +89,7 @@
   background-color: #5000b5;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 934px) {
 
   .beneficiosContainer{
     padding-top: 35px;
@@ -103,8 +106,7 @@
       }
   
       .img {
-        position: relative;
-        top: -40px;
+        top: -60px;
       }
       
   }
