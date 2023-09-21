@@ -199,7 +199,6 @@ const Lesson = () => {
               handleClick={handleClick}
               data={currentlesson}
               user={userData}
-              eason={season}
               lesson={lesson}
               teacherCreds={course.professors}
               courseIds={{ courseId: id, seasonId: course.seasons[season]?.id }}

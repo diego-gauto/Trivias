@@ -18,7 +18,15 @@ import { TitleContain } from "./Module.styled";
 import ModuleTabs from "./ModuleTabs/ModuleTabs";
 import router from "next/router";
 
-const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, lesson, courseIds, handleClick, nextLesson, previousLesson, course, firstLesson, lastLesson }: any) => {
+interface IHomeWork {
+  data: any,
+  user: any,
+  lesson: any,
+  courseIds: any,
+  handleClick: any,
+}
+const HomeWork = (props: IHomeWork) => {
+  const { data, user, lesson, courseIds, handleClick } = props;
   const [status, setStatus] = useState("");
   const [step, setStep] = useState(0);
   const [index, setIndex] = useState(0);
@@ -238,10 +246,6 @@ const HomeWork = ({ value, changeValue, blockForNextSeason, data, user, season, 
 
   return (
     <>
-      <TitleContain >
-        <ModuleTabs data={data} user={user} value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
-        <div className='line'></div>
-      </TitleContain>
       <HomeWorkContain >
         {(data.quiz === 0) &&
           <div className="complete-hw">

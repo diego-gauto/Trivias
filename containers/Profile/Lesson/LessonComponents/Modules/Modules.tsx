@@ -5,9 +5,26 @@ import router from "next/router";
 import About from "./About";
 import Comments from "./Comments";
 import HomeWork from "./HomeWork";
-import { MainContainer } from "./Module.styled";
+import { MainContainer, TitleContain } from "./Module.styled";
+import Help from "./Help";
+import ModuleTabs from "./ModuleTabs/ModuleTabs";
 
-const Modules = ({ data, blockForNextSeason, user, season, lesson, teacherCreds, courseIds, handleClick, course, previousLesson, nextLesson, firstLesson, lastLesson }: any) => {
+interface IModules {
+  data: any,
+  blockForNextSeason: any,
+  user: any,
+  lesson: any,
+  teacherCreds: any,
+  courseIds: any,
+  handleClick: any,
+  course: any,
+  previousLesson: any,
+  nextLesson: any,
+  firstLesson: any,
+  lastLesson: any,
+}
+const Modules = (props: IModules) => {
+  const { data, blockForNextSeason, user, lesson, teacherCreds, courseIds, handleClick, course, previousLesson, nextLesson, firstLesson, lastLesson } = props;
   const { admin }: any = router.query;
   const [position, setPosition] = useState(1)
   const changePosition = (value: number) => {
@@ -21,14 +38,20 @@ const Modules = ({ data, blockForNextSeason, user, season, lesson, teacherCreds,
 
   return (
     <MainContainer>
+      <TitleContain>
+        <ModuleTabs data={data} user={user} value={position} blockForNextSeason={blockForNextSeason} changeValue={changePosition} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
+        <div className='line'></div>
+      </TitleContain>
       {
         position === 1
-          ? <About previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} firstLesson={firstLesson} lastLesson={lastLesson} nextLesson={nextLesson} value={position} changeValue={changePosition} data={data} teacherCreds={teacherCreds} course={course} user={user} /> :
+          ? <About data={data} teacherCreds={teacherCreds} course={course} /> :
           position === 3
-            ? <HomeWork previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} course={course} handleClick={handleClick} value={position} changeValue={changePosition} data={data} user={user} season={season} lesson={lesson} courseIds={courseIds} /> :
+            ? <HomeWork handleClick={handleClick} data={data} user={user} lesson={lesson} courseIds={courseIds} /> :
             position === 4
-              ? <Comments previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} value={position} changeValue={changePosition} data={data} user={user} course={course} season={season} lesson={lesson} />
-              : <About previousLesson={previousLesson} blockForNextSeason={blockForNextSeason} nextLesson={nextLesson} firstLesson={firstLesson} lastLesson={lastLesson} value={position} changeValue={changePosition} data={data} teacherCreds={teacherCreds} course={course} />
+              ? <Comments data={data} user={user} course={course} lesson={lesson} /> :
+              position === 5
+                ? <Help />
+                : <About data={data} teacherCreds={teacherCreds} course={course} />
       }
     </MainContainer>
   )
