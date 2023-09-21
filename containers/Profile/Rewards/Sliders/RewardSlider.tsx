@@ -1,15 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
 import { reward_slider } from "./IRewardSlider";
 import { createRequestApi } from '../../../../components/api/rewards';
 import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
-import { createNotification } from '../../../../components/api/notifications';
-import { CERTIFICATES_PATH } from '../../../../constants/paths';
-import router from 'next/router';
-import { user } from 'firebase-functions/v1/auth';
-import rewards from '../../../../pages/rewards';
+import { goToCertificate } from '../../../../constants/redirects';
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -28,7 +24,6 @@ const RewardSlider = (props: reward_slider) => {
     getRewardData,
     courses,
     completeCertificates,
-    router
   } = props;
   const [slides, setSlides] = useState([]);
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
@@ -123,16 +118,6 @@ const RewardSlider = (props: reward_slider) => {
       })
     }
     setSlides(slides)
-  }
-
-  const moveToCertificate = (course: any) => {
-    console.log(course)
-    router.push({
-      pathname: CERTIFICATES_PATH,
-      query: {
-        certificate_id: course.certificate_id
-      }
-    });
   }
   const showRewardData = (index: any, rewardPoints: any) => {
     if (index == openRewardInfo) {
@@ -248,7 +233,7 @@ const RewardSlider = (props: reward_slider) => {
                         <div className="btn-contain">
                           {
                             type == "claim-certificates" &&
-                            <button className="btn-info" onClick={() => moveToCertificate(reward)}>
+                            <button className="btn-info" onClick={() => goToCertificate(reward)}>
                               <p className='text'>
                                 Ver certificado
                               </p>

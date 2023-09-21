@@ -203,3 +203,15 @@ export const userById = async (userId: string) => {
       return error
     });
 };
+
+export const updateUser = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "users/user", user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

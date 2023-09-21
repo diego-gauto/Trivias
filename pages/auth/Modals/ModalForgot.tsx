@@ -8,7 +8,7 @@ import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import AlertModal from "../../../components/AlertModal/AlertModal";
+import AlertModal from "../../../components/Modals/AlertModal/AlertModal";
 import { sendEmailPassword } from "../../../components/api/auth";
 import {
   ButtonContain,

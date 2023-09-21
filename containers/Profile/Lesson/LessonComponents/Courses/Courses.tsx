@@ -84,7 +84,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
 
   }, [data])
 
-  const moveToCertificate = () => {
+  const goToCertificate = () => {
     let ids = {
       userId: userData.user_id,
       courseId: course.id
@@ -148,7 +148,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           </div>
         </div>
         {(course.with_certificate === 1 && certficate && !responsive1124) && <div className="certificate-container">
-          <button onClick={() => { moveToCertificate() }}>
+          <button onClick={() => { goToCertificate() }}>
             <p>Obtener certificado</p>
           </button>
         </div>}
@@ -166,7 +166,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
           </div>
         </div>
         {(course.with_certificate === 1 && certficate && responsive1124) && <div className="certificate-container">
-          <button onClick={() => { moveToCertificate() }}>
+          <button onClick={() => { goToCertificate() }}>
             <p>Obtener certificado</p>
           </button>
         </div>}

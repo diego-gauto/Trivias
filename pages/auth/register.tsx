@@ -17,7 +17,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import { conektaCustomer, facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, LOGIN_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH } from "../../constants/paths";
+import { LOGIN_PATH, PREVIEW_PATH, } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Background,
@@ -29,6 +29,9 @@ import {
   PurpleButton2,
   Title,
 } from "../../screens/Login.styled";
+import { SOCIALS_ARRAY } from "../../constants/arrays";
+import { authRedirect } from "../../constants/redirects";
+import { IoChevronDown } from "react-icons/io5";
 
 var countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/es.json"))
@@ -58,6 +61,9 @@ const formSchema = yup.object().shape({
   confirmPassword: yup.string()
     .required('Confirm Password is required')
     .oneOf([yup.ref('password'), null], 'La contraseña no coincide'),
+  option: yup.string()
+    .required('Debe seleccionar una opcion')
+
 });
 
 type FormValues = {
@@ -66,6 +72,7 @@ type FormValues = {
   email: string;
   password: string;
   confirmPassword: string;
+  option: string;
 };
 
 const Register = () => {
@@ -83,6 +90,7 @@ const Register = () => {
   const [terms, setTerms] = useState(false);
   const [phone, setphone] = useState("")
   const [show, setShow] = useState<any>(false);
+  const [option, setOption] = useState('');
   const { login } = useLogin();
 
   const togglePassword_1 = () => {
@@ -120,33 +128,6 @@ const Register = () => {
   });
   const phoneCode = phoneInput != null && phoneInput.slice(0, 3);
 
-  const redirect = () => {
-    if (localStorage.getItem("trial") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
-    }
-    if (localStorage.getItem("course")) {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
-    }
-    if (localStorage.getItem("month") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
-    }
-    if (localStorage.getItem("anual") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
-    }
-    if (localStorage.getItem("nailMaster") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
-    }
-    if (localStorage.getItem("plan") === "true") {
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`
-    }
-    if (localStorage.getItem("login") === "true") {
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`
-    }
-    if (localStorage.getItem("rewards") === "true") {
-      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`
-    }
-  }
-
   const parseNumber = (phone: string) => {
     const parsedNumber = parsePhoneNumberFromString(phone);
     const code = parsedNumber?.country
@@ -175,9 +156,9 @@ const Register = () => {
       phone_number: phoneInput.replace("+", ""),
       stripe_id: "",
       provider: 'web',
-      country: parseNumber(phoneInput)
+      country: parseNumber(phoneInput),
+      come_from: formData.option,
     }
-
     if (isValidPhoneNumber(phoneInput)) {
       newUser(user).then(async (res) => {
         if (res?.msg === "Este usuario ya existe!") {
@@ -191,7 +172,7 @@ const Register = () => {
             localStorage.setItem('email', user.email);
             localStorage.setItem("method", "mail");
             window.location.href = PREVIEW_PATH;
-            redirect()
+            authRedirect('register')
           })
         }
       })
@@ -201,7 +182,16 @@ const Register = () => {
       setAuthLoader(false);
     }
   }
+  const startGoogleLogin = () => {
+    if (option !== "") {
+      loginWithGoogle();
+      setAuthLoader(true);
+    } else {
+      setErrorMsg('Seleccione por donde nos conocio');
+      setShow(true);
+    }
 
+  }
   const loginWithGoogle = useGoogleLogin({
     onSuccess: tokenResponse => {
       if (!terms) {
@@ -218,7 +208,8 @@ const Register = () => {
           email: res.email,
           stripe_id: "",
           photo: res.picture,
-          provider: 'google'
+          provider: 'google',
+          come_from: option,
         }
         newUser(user).then((res) => {
           if (res?.msg === "Este usuario ya existe!") {
@@ -231,7 +222,7 @@ const Register = () => {
             conektaCustomer(user).then(() => {
               localStorage.setItem('email', user.email)
               window.location.href = PREVIEW_PATH;
-              redirect()
+              authRedirect('register')
             })
           }
         })
@@ -239,58 +230,64 @@ const Register = () => {
     },
     flow: 'auth-code',
   });
-
   const loginWithFacebook = async () => {
-    try {
-      setAuthLoader(true);
-      if (!terms) {
-        setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
-        setShow(true);
-        setAuthLoader(false);
-        return
-      }
-      const response = await login({
-        scope: 'email',
-      });
-      let userInfo = {
-        id: response.authResponse.userID,
-        access_token: response.authResponse.accessToken
-      }
-      facebookUserInfo(userInfo).then((res) => {
-        let user: any = {
-          name: res.name,
-          last_Name: "",
-          email: res.email,
-          stripe_id: "",
-          photo: res.picture.data.url,
-          provider: 'facebook'
+    if (option !== '') {
+      try {
+        setAuthLoader(true);
+        if (!terms) {
+          setErrorMsg('Por favor de aceptar los terminos y condiciones para poder continuar!');
+          setShow(true);
+          setAuthLoader(false);
+          return
         }
-        newUser(user).then((res) => {
-          if (res?.msg === "Este usuario ya existe!") {
-            setErrorMsg('Este usuario ya existe!');
-            setAuthLoader(false);
-            setShow(true);
-            setIsLoading(false);
-          } else {
-            user.userId = res.userId.insertId;
-            conektaCustomer(user).then(() => {
-              localStorage.setItem('email', user.email);
-              localStorage.setItem('method', "facebook");
-              window.location.href = PREVIEW_PATH;
-              redirect()
-            })
+        const response = await login({
+          scope: 'email',
+        });
+        let userInfo = {
+          id: response.authResponse.userID,
+          access_token: response.authResponse.accessToken
+        }
+        facebookUserInfo(userInfo).then((res) => {
+          let user: any = {
+            name: res.name,
+            last_Name: "",
+            email: res.email,
+            stripe_id: "",
+            photo: res.picture.data.url,
+            provider: 'facebook',
+            come_from: option,
           }
+          newUser(user).then((res) => {
+            if (res?.msg === "Este usuario ya existe!") {
+              setErrorMsg('Este usuario ya existe!');
+              setAuthLoader(false);
+              setShow(true);
+              setIsLoading(false);
+            } else {
+              user.userId = res.userId.insertId;
+              conektaCustomer(user).then(() => {
+                localStorage.setItem('email', user.email);
+                localStorage.setItem('method', "facebook");
+                window.location.href = PREVIEW_PATH;
+                authRedirect('register')
+              })
+            }
+          })
         })
-      })
-    } catch (error: any) {
-      setAuthLoader(false);
+      } catch (error: any) {
+        setAuthLoader(false);
+      }
+    }
+    else {
+      setErrorMsg('Seleccione por donde nos conocio');
+      setShow(true);
     }
   }
 
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
-      redirect()
+      authRedirect('register')
       window.location.href = PREVIEW_PATH;
     } else {
       setTimeout(() => {
@@ -423,6 +420,24 @@ const Register = () => {
                     </Error>
                   }
                 </div>
+                <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
+                  <div className="form-input">
+                    <label>Vi su publicidad en:</label>
+                    <div className="select-contain">
+                      <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
+                        <option value="" disabled>Seleccione una opción</option>
+                        {
+                          SOCIALS_ARRAY.map((val: string, index: number) => {
+                            return (
+                              <option value={val} key={"socials_" + index}>{val}</option>
+                            )
+                          })
+                        }
+                      </select>
+                      <IoChevronDown className="icon" />
+                    </div>
+                  </div>
+                </div>
                 <div className="form-row">
                   <div className="form-input">
                     <label>WhatsApp</label>
@@ -472,13 +487,9 @@ const Register = () => {
                   </p>
                 </div>
                 <div className="socials">
-                  <img src="../images/googleLogin.png" onClick={() => {
-                    loginWithGoogle(); setAuthLoader(true);
-                  }} alt="" />
+                  <img src="../images/googleLogin.png" onClick={startGoogleLogin} alt="" />
 
-                  <img src="../images/facebookLogin.png" onClick={() => {
-                    loginWithFacebook()
-                  }} alt="" />
+                  <img src="../images/facebookLogin.png" onClick={loginWithFacebook} alt="" />
                 </div>
               </div>
             </form>

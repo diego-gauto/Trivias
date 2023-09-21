@@ -114,7 +114,17 @@ export const updateLastSignIn = async (user: any) => {
       return error
     });
 };
-
+export const updateComeFromApi = async (user: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "auth/user/comefrom", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 export const pastT = async () => {
   return axios
     .get("https://gonvar.inowu.dev/" + "users/temp")
