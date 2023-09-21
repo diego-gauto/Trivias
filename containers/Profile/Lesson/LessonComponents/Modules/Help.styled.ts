@@ -8,6 +8,12 @@ export const HelpContainer = styled.div`
     font-weight: 500;
     color: #74549c;
   }
+  a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+  }
   button {
     font-weight: 600;
     padding: 8px 20px;
@@ -15,7 +21,7 @@ export const HelpContainer = styled.div`
     border-radius: 100px;
     border: 1px solid #8e2de2;
     background: transparent;
-    width: 100%;
+    width: 80%;
     &:hover {
       opacity: 0.7;
     }

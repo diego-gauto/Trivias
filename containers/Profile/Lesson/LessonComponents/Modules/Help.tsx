@@ -8,7 +8,7 @@ const Help = () => {
       <p>
         Dirígete al Centro de Ayuda para obtener apoyo. Si quieres obtener ayuda de forma más rápida, selecciona “Comentarios” y escribe tu pregunta.
       </p>
-      <a href={SUPPORT_PATH} target="_blank" style={{ textDecoration: "none", width: "100%" }}>
+      <a href={SUPPORT_PATH} target="_blank">
         <button>
           Ir al Centro de ayuda
         </button>
