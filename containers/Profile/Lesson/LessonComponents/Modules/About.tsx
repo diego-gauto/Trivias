@@ -48,7 +48,7 @@ const About = (props: IAbout) => {
             <p className='title'>Materiales</p>
             <p>Da click en el botón de abajo para que puedas ver los materiales que necesitarás para este curso.</p>
             <button className="btn-material" onClick={openMaterial}>
-              Comprar materiales
+              Ver Materiales
             </button>
           </LessonContent>
         </TextContainer>
