@@ -18,7 +18,7 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
   const handleFacebookShare = () => {
     const quote =
       "¡Acabo de obtener X puntos en la trivia! ¿Puedes hacerlo mejor?"; // Mensaje personalizado
-    const url = "https://trivias--sunny-hummingbird-9f6a67.netlify.app/trivias"; // URL de la página que deseas compartir
+    const url = "https://gonvar.io/trivias"; // URL de la página que deseas compartir
 
     // Abre una ventana emergente para compartir en Facebook utilizando la API de Facebook
     window.open(
@@ -69,7 +69,7 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
   // }
 
   function handleMessengerShare() {
-    const url = "https://trivias--sunny-hummingbird-9f6a67.netlify.app/trivias"; // URL de la página que deseas compartir
+    const url = "https://gonvar.io/trivias"; // URL de la página que deseas compartir
 
     window.open(
       `https://www.facebook.com/dialog/send?app_id=1293630141585988&link=${encodeURIComponent(
@@ -81,7 +81,7 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
 
   function handleWhatsAppShare() {
     const text =
-      "Soy toda una profesional!!! Intenta hacerlo mejor que yo: https://trivias--sunny-hummingbird-9f6a67.netlify.app/trivias"; // Texto de la página que deseas compartir
+      "Juega a estas trivias: https://gonvar.io/trivias"; // Texto de la página que deseas compartir
 
     const encodedText = encodeURIComponent(text);
 
