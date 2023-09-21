@@ -5,7 +5,7 @@ import { CancelFin } from "./CancelFinal.styles";
 import { cancelPaypal, cancelStripe, getUserApi } from "../../../../components/api/users";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import { cancelReview } from "../../../../components/api/admin";
-import AlertModal from "../../../../components/AlertModal/AlertModal";
+import AlertModal from "../../../../components/Modals/AlertModal/AlertModal";
 import { PROFILE_PATH } from "../../../../constants/paths";
 import { conektaCancelSubscription, conektaPausedSubscription } from "../../../../components/api/profile";
 import { canelConektaUserArray, getUsersStripe } from "../../../../components/api/conekta/test";

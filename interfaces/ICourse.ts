@@ -5,6 +5,7 @@ export interface ICourse {
   id: number;
   // same as the id
   pay: boolean;
+  material_route: string;
   data: any;
   type: string;
   duration: number;

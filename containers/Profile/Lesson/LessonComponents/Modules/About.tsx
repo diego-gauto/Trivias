@@ -23,7 +23,7 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
       <AboutContain>
         <TextContainer>
           <LessonTitle>
-            {data.title}, <span>de {teacherCreds[0]?.name}</span>
+            {course.title}, <span>de {teacherCreds[0]?.name}</span>
           </LessonTitle>
           <LessonContent>
             <p className='title'>Objetivo principal</p>
@@ -43,8 +43,10 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
                 </div>
               </>
             }
-            {/* <button className="btn-material" onClick={openMaterial}>
-              Materiales
+            {/* <p className='title'>Materiales</p>
+            <p>Da click en el botón de abajo para que puedas ver los materiales que necesitarás para este curso.</p>
+            <button className="btn-material" onClick={openMaterial}>
+              Comprar materiales
             </button> */}
           </LessonContent>
         </TextContainer>
@@ -69,7 +71,12 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
           </p>
           <p>{teacherCreds[index]?.about}</p>
         </div>
-        <ModalMaterials show={showMaterial} setShow={setShowMaterial} materials={course.materials}></ModalMaterials>
+        <ModalMaterials
+          show={showMaterial}
+          setShow={setShowMaterial}
+          materials={course.materials}
+          route={course.material_route}
+        />
       </AboutContain>
     </>
   )

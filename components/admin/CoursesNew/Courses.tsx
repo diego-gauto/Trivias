@@ -730,6 +730,18 @@ const Courses = () => {
                 <option value={0}>Sin Certificado</option>
               </select>
             </div>
+            <div className="input-contain">
+              <label className="input-label">Ruta de Materiales</label>
+              <input
+                className="input-create"
+                placeholder="rutademateriales.com"
+                onChange={(e: any) => {
+                  setCourse({
+                    ...course, material_route: e.target.value
+                  })
+                }}
+              />
+            </div>
           </div>
           <div className="rows" style={{ justifyContent: "center" }}>
             <div className="input-contain" style={{ alignItems: "center" }}>
@@ -778,6 +790,7 @@ const Courses = () => {
                 allCategories={categories}
                 allMaterials={materials}
                 moveTo={moveTo}
+                material_route={course.material_route}
                 getAllCourses={getAllCourses}
                 id={course.id}
                 index={index}

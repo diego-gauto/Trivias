@@ -65,6 +65,7 @@ const AllCourses = (props: IAllCourses) => {
     index,
     getAllCourses,
     with_certificate,
+    material_route,
   } = props;
   const [course, setCourse] = useState<any>({
     id: id,
@@ -88,7 +89,8 @@ const AllCourses = (props: IAllCourses) => {
     categories: categories,
     materials: materials,
     published: published,
-    with_certificate: with_certificate
+    with_certificate: with_certificate,
+    material_route: material_route,
   })
   const difficultyData = [
     "Muy Fácil",
@@ -881,38 +883,61 @@ const AllCourses = (props: IAllCourses) => {
               }
             </div>
           </div>
-          {
-            startEdit &&
-            <div className='rows'>
-              <div className="course-data">
-                <label className="course-data-title">Portada del curso</label>
-                <input
-                  type="file"
-                  className="input-edit"
-                  placeholder="Seleccione una imagen"
-                  onChange={(e) => { getImage(e.target.files) }}
-                />
-              </div>
-              <div className="course-data">
-                <label className="course-data-title">Curso con certificado</label>
-                <select onChange={(e) => { setCourse({ ...course, with_certificate: parseInt(e.target.value) }) }}>
-                  <option value={1}>Con Certificado</option>
-                  <option value={0}>Sin Certificado</option>
-                </select>
-              </div>
+          <div className='rows'>
+            {
+              startEdit &&
+              <>
+                <div className="course-data">
+                  <label className="course-data-title">Portada del curso</label>
+                  <input
+                    type="file"
+                    className="input-edit"
+                    placeholder="Seleccione una imagen"
+                    onChange={(e) => { getImage(e.target.files) }}
+                  />
+                </div>
+                <div className="course-data">
+                  <label className="course-data-title">Curso con certificado</label>
+                  <select onChange={(e) => { setCourse({ ...course, with_certificate: parseInt(e.target.value) }) }}>
+                    <option value={1}>Con Certificado</option>
+                    <option value={0}>Sin Certificado</option>
+                  </select>
+                </div>
+              </>
+            }
+            <div className="course-data">
+              <label className="course-data-title">
+                Ruta de Materiales
+              </label>
+              {
+                !startEdit
+                  ?
+                  <p className="content">
+                    {material_route === "" ? "Sin Ruta" : material_route}
+                  </p>
+                  :
+                  <input
+                    className="input-edit"
+                    defaultValue={material_route}
+                    placeholder="Titulo del Curso"
+                    onChange={(e: any) => {
+                      setCourse({
+                        ...course, material_route: e.target.value
+                      })
+                    }}
+                  />
+              }
             </div>
-          }
-          {
-            !startEdit &&
-            <div className='rows'>
+            {
+              !startEdit &&
               <div className="course-data">
                 <label className="course-data-title">Curso con certificado</label>
                 <p className="content">
                   {with_certificate ? "Con certificado" : "Sin certificado"}
                 </p>
               </div>
-            </div>
-          }
+            }
+          </div>
           <div className="rows" style={{ justifyContent: "center", marginTop: 10 }}>
             <div className="button-data">
               <button

@@ -3,9 +3,10 @@ import { Modal } from 'react-bootstrap';
 import { IMaterialData, IMaterials } from './IModalMaterials';
 import { Container } from './ModalMaterials.styled';
 import { IoClose } from 'react-icons/io5';
+import Link from 'next/link';
 
 export const ModalMaterials = (props: IMaterials) => {
-  const { show, setShow, materials } = props;
+  const { show, setShow, materials, route } = props;
 
   const handleClose = () => setShow(false);
 
@@ -24,6 +25,18 @@ export const ModalMaterials = (props: IMaterials) => {
         </div>
         <IoClose className='icon' onClick={handleClose} />
         {/* <button onClick={handleClose}></button> */}
+        {
+          route !== "" &&
+          <div className='btn-contain'>
+            <p>Da click en el botón de abajo para que puedas ver los materiales que necesitarás para este curso.</p>
+            <Link href={route}>
+              <a target="_blank" style={{ textDecoration: "none" }}>
+                <button className='btn-buy'>Comprar materiales</button>
+              </a>
+            </Link>
+          </div>
+        }
+
       </Container>
     </Modal>
   )

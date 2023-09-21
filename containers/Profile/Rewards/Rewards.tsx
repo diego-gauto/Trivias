@@ -400,7 +400,6 @@ const Rewards = () => {
                 getRewardData={getRewardData}
                 courses={courses}
                 completeCertificates={completeCertificates}
-                router={router}
               />
             )
           })

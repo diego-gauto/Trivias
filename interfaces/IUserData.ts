@@ -16,6 +16,7 @@ export interface IUserDataProps {
 export interface IUser {
   name: string;
   last_name: string;
+  email: string;
   phone_number: string;
   stripeId: string;
   id: number;
@@ -24,4 +25,5 @@ export interface IUser {
   final_date: any;
   plan_name: string;
   method: string;
+  role: string;
 }

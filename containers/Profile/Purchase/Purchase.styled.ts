@@ -126,6 +126,17 @@ export const Container = styled.div`
     width: 100%;
     justify-content: space-around;
   }
+   .comeFrom{
+      border: 1px solid #942ced;
+      padding-inline: 10px;
+      font-size: 20px;
+      color: #942ced;
+      outline: none;
+      width: fit-content;
+      height: 34px;
+      background: none;
+      border-radius: 20px;
+    }
   .right-section {
     .box {
       position: relative;

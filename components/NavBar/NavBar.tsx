@@ -489,7 +489,7 @@ const NavBar = () => {
                   src="/images/Navbar/menu2.png"
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
-                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen} style={{ right: 12 }}>
+                <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
                   <Link href="/trivias" >
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Trivias
@@ -622,7 +622,7 @@ const NavBar = () => {
                 }
                 <Link href="/trivias" >
                   <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
-                  Trivias
+                    Trivias
                   </HBList>
                 </Link>
                 <Link href={PLAN_PATH} >

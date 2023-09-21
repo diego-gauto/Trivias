@@ -21,6 +21,7 @@ export interface IAllCourses {
   id: number;
   index: number;
   getAllCourses: any;
+  material_route: string;
   with_certificate: boolean;
   professors: [IProfessors];
   categories: [ICategories];
