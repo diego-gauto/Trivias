@@ -206,6 +206,11 @@ export const CommentContain = styled.div`
       }
     }
   }
+  .regular-text {
+    margin: 0;
+    font-weight: 500;
+    color: #74549c;
+  }
   .comment {
     display: flex;
     gap: 10px;

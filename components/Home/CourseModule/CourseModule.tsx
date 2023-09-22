@@ -9,7 +9,7 @@ import { CardContainer } from "./CourseModule.styled";
 import { ICourseModuleProps } from "./ICourseModuleProps";
 import { useEffect, useState } from "react";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
-import CourseModal from "../../CourseModal/CourseModal";
+import CourseModal from "../../Modals/CourseModal/CourseModal";
 declare let Hls: any
 
 export const CourseModule = (props: ICourseModuleProps) => {

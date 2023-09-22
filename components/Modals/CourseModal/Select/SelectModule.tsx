@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io";
 import { ISeason, ISelect, ISeasons } from './ISelectModule';
 import { SelectContain, Selected, OptionContain, Input, Option } from './SelectModule.styled';
@@ -7,6 +7,20 @@ const SelectModule4 = (props: ISelect) => {
   const { course, handleClick, seasons } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(course.seasons[0]?.name)
+  const selectRef = useRef<any>(null);
+
+  const handleClickOutside = (event: any) => {
+    if (selectRef.current && !selectRef.current.contains(event.target)) {
+      // Click occurred outside of the component
+      setOpen(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
   useEffect(() => {
     course.seasons.forEach((element: ISeason) => {
       seasons.forEach((season: ISeasons) => {
@@ -19,7 +33,7 @@ const SelectModule4 = (props: ISelect) => {
   }, [])
 
   return (
-    <SelectContain>
+    <SelectContain ref={selectRef}>
       <Selected onClick={() => { setOpen(!open) }}>
         {value == undefined ? "Módulo 1" : value}
         <IoIosArrowDown />

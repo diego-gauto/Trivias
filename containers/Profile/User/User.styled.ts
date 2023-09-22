@@ -1860,10 +1860,6 @@ export const RewardContainer = styled.div<{ reward: any }>`
       transition: 1s ease all;
     }
     @media (max-width: 480px) {
-      padding-block: 12px;
-      font-size: 16px;
-    }
-    @media (max-width: 480px) {
       padding-block: 10px;
       font-size: 14px;
     }

@@ -190,7 +190,7 @@ const Mensual = (props: IData) => {
             {views.get(8) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Obtén envíos gratis </b>
-                  en compras superiores a $1,000.00 mx.</p>
+                  en compras superiores a $1,000.00 MXN.</p>
               </div>}
           </div>
           <div className="back tip 

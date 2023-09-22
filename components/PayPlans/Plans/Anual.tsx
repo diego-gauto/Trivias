@@ -82,7 +82,7 @@ const Anual = (props: IData) => {
 
           </div>
           <div className="text-center my-4 tit-contain">
-            <i className="save">Ahorras $789 MXN por año</i>
+            <i className="save">Ahorras $1,389 MXN por año</i>
             <h2 className="h3 mb-0">$1,599.00 MXN/año</h2>
             <span><i>Cargo automático anual</i></span>
           </div>
@@ -185,7 +185,7 @@ const Anual = (props: IData) => {
             {views.get(6) &&
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  <b>Recibe un kit gratis con diferentes productos cada dos meses, </b>
+                  <b>Recibe un kit gratis con diferentes productos cada mes, </b>
                   como acrílicos, geles, monómeros, adherentes, decoración y otros productos.<br />
                   <i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo.
                     Solo debes pagar el envío de $245 MXN.</b></i>

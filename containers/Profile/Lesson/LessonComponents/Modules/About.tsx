@@ -5,7 +5,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { AboutContain, LessonContent, LessonTitle, TextContainer } from "./About.styled";
 import { TitleContain } from "./Module.styled";
 import ModuleTabs from "./ModuleTabs/ModuleTabs";
-import ModalMaterials from "../../../../../components/CourseModal/Materials/ModalMaterials";
+import ModalMaterials from "../../../../../components/Modals/CourseModal/Materials/ModalMaterials";
 
 interface IAbout {
   data: any,

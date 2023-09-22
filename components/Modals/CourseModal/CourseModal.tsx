@@ -28,7 +28,7 @@ import {
 import { ICourseModal } from "./ICourseModal";
 import ModalMaterials from "./Materials/ModalMaterials";
 import SelectModule4 from "./Select/SelectModule";
-import { goToSuscription } from "../../constants/redirects";
+import { goToSuscription } from "../../../constants/redirects";
 
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;

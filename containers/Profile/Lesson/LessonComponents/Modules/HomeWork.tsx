@@ -101,6 +101,7 @@ const HomeWork = (props: IHomeWork) => {
     tempHomework.image = url;
     //Homework create notification
     addHomeworkApi(tempHomework).then(() => {
+      setImageLoader(false);
       alert("Tarea enviada")
       setImageModal(false);
       setStatus("pending");
@@ -291,6 +292,10 @@ const HomeWork = (props: IHomeWork) => {
                   <p style={{ color: "#bc1515" }}>Tarea Rechazada</p>
                   <p style={{ color: "#8e2de2" }}>{homework.comment}</p>
                 </>}
+                {
+                  status === "" &&
+                  <p style={{ margin: 0 }}>Haz click en el botón “Entregar tarea” para subir tu archivo.</p>
+                }
                 {status == "" && <div className='homework' onClick={uploadHwk}>
                   <BsFileArrowUp></BsFileArrowUp>
                   Entregar Tarea
