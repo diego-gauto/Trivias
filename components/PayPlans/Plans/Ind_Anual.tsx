@@ -171,7 +171,7 @@ const Ind_Anual = (props: IData) => {
               <div className="b-p-pink2">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   Recibe un kit con diferentes productos cada dos meses, más <b>envios gratis en compras mayores </b>
-                  a $1,000.00.
+                  a $1,000.00 MXN.
                 </p>
               </div>}
           </div>
