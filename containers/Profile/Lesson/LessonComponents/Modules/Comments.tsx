@@ -249,6 +249,7 @@ const Comments = (props: IComments) => {
             <div className='line'></div>
             <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
           </div>
+          <p className="regular-text">En esta sección puedes realizar comentarios, preguntas o sugerencias relacionadas a esta clase.</p>
           <div className='comment'>
             <Profile
               src={DEFAULT_USER_IMG}
