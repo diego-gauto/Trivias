@@ -101,6 +101,7 @@ const HomeWork = (props: IHomeWork) => {
     tempHomework.image = url;
     //Homework create notification
     addHomeworkApi(tempHomework).then(() => {
+      setImageLoader(false);
       alert("Tarea enviada")
       setImageModal(false);
       setStatus("pending");

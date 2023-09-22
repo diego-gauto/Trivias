@@ -27,15 +27,13 @@ const ImagePreview = (props: any) => {
               (type !== "aplication/pdf" && type.substring(0, 5) !== "image") &&
               <p className='note'>(Los documentos .doc y .docx no cuentan con vista previa)</p>
             }
-            <div className="button-contain">
+            <div className="button-contain normal">
               <div className='buttons'>
                 <button className='btn' onClick={handleClose}>Salir</button>
                 {
                   loader
                     ?
-                    <LoaderImage>
-                      <LoaderContain />
-                    </LoaderImage>
+                    <LoaderContain />
                     : <button className='btn' onClick={() => getImage(imageDisplay)} >Aceptar</button>
                 }
               </div>
@@ -51,15 +49,12 @@ const ImagePreview = (props: any) => {
               <img src={imageDisplay} className="image" />
             }
           </div>
-          <div className="button-contain">
+          <div className="button-contain responsive">
             <div className='buttons mt-3'>
               <button className='btn-down' onClick={handleClose}>Salir</button>
               {
                 loader
-                  ?
-                  <LoaderImage>
-                    <LoaderContain />
-                  </LoaderImage>
+                  ? <LoaderContain />
                   : <button className='btn-down' onClick={() => getImage(imageDisplay)}>Aceptar</button>
               }
             </div>
