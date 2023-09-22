@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import { ICourse, ICourseData } from './ISliders';
 import { Image } from "react-bootstrap";
 import { Title, Progress, SlideContain, SlideModuleContainer, ButtonContain, ImageContent, Arrows } from './Sliders.styled';
-import CourseModal from '../../CourseModal/CourseModal';
+import CourseModal from '../../Modals/CourseModal/CourseModal';
 import { PurpleButton } from '../Courses.styled';
 import Link from 'next/link';
 import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '../../../constants/paths';

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Image, Row } from "react-bootstrap";
 import { number } from "yup";
-import CourseModal from "../../../CourseModal/CourseModal";
+import CourseModal from "../../../Modals/CourseModal/CourseModal";
 import { ISlideModule } from "./ISlideModule";
 import { SlideModuleContainer, Text01, Text01_p, Text02, Text02_p, Text03, TextSectionWrapper } from "./SlideModule.styled";
 
