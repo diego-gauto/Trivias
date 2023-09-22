@@ -24,7 +24,7 @@ const MaterialesModal = (props: Materiales) => {
       <SuscriptionContain>
         <Modal.Body className="materials-modal">
           <div className="end"><AiOutlineClose className="icon" onClick={setShow} /></div>
-          <h2 className="title">¡Hola Hermosa!</h2>
+          <h2 className="title">¡Hola!</h2>
           <h5 className="subtitle">Estos son todos los materiales que necesitarás para <b>Nails Master Revolution.</b><br />
             Recuerda que puedes encontrar todo esto y más en nuestra tienda oficial Gonvar.</h5>
 

@@ -14,8 +14,9 @@ export const ImageContainter = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 40px;
-    .purple {
+    .purple {retroalimentación
       color: #3e0f67;
+      font-size: 28px;
     }
     b {
       font-weight: 700;
@@ -46,6 +47,13 @@ export const ImageContainter = styled.div`
       justify-content: center;
       align-items: center;
       gap: 40px;
+    }
+    .btn-red{
+      background-color: red;
+      padding-inline: 70px;
+      &:hover{
+        opacity: .67;
+      }
     }
     .btn {
       padding-inline: 70px;
@@ -81,11 +89,29 @@ export const ImageContainter = styled.div`
         display: none;
       }
     }
+    @media(max-width: 1200px){
+      .buttons{
+        gap: 20px;
+      }
+      .btn{
+        padding-inline: 40px;
+      }
+      .btn-red{
+        padding-inline: 40px;
+      }
+    }
+    @media(max-width: 991px){
+      .btn{
+        padding-inline: 70px;
+      }
+      .btn-red{
+        padding-inline: 70px;
+      }
+    }
   }
   button {
     border-radius: 100px;
     border: none;
-    padding-inline: 20px;
     padding-block: 8px;
     color: white;
   }
