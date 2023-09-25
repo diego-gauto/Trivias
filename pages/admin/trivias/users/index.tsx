@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 
 import select from "antd/es/select";
 import Link from "next/link";
@@ -35,8 +35,15 @@ const UsersTrivias = () => {
   const [selectedIsUser, setSelectedIsUser] = useState<string | null>(""); // Nuevo estado
   const [loading, setLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 25;
+  const lastIndex = currentPage * usersPerPage;
+  const firstIndex = lastIndex - usersPerPage;
+  const users = userTrivias.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(userTrivias.length / usersPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1)
 
-  const { main, buttonContainer, volver, volverText, link, titles, title, selectContainer, selectGroup, select, button } = styles
+  const { main, buttonContainer, volver, volverText, link, titles, title, selectContainer, selectGroup, select, button, pagination, pageItem, pageLink, active } = styles
 
   const downloadCsv = () => {
     const csv = Papa.unparse(userTrivias);
@@ -73,22 +80,6 @@ const UsersTrivias = () => {
     // Llama a la función para cargar las trivias al cargar inicialmente el componente
     fetchTrivias();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const users = await getAllUsersApi();
-
-  //       setUserTrivias(users)
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error al obtener los usuarios:', error);
-  //     }
-
-  //   };
-
-  //   fetchUsers();
-  // }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -171,6 +162,26 @@ const UsersTrivias = () => {
     setSelectedIsUser(selectedIsUser);
   };
 
+  const prevPage = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const changeCurrentPage = (e: MouseEvent<HTMLAnchorElement>, page: number) => {
+    e.preventDefault()
+    setCurrentPage(page)
+  }
+
+  const nextPage = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+
   if (loading) {
     return (
       <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
@@ -240,7 +251,66 @@ const UsersTrivias = () => {
         </div>
 
       </div>
-      <UserTriviaList usersTrivia={userTrivias} />
+      <UserTriviaList usersTrivia={users} />
+      {/* <nav>
+        <ul className={pagination}>
+          <li className={pageItem}>
+            <a href="" className={pageLink} onClick={(e) => prevPage(e)}>Anterior</a>
+          </li>
+          {numbers.map((number, index) => (
+            <li className={`${pageItem} ${currentPage === number ? active : ''}`} key={index}>
+              <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, number)}>{number}</a>
+            </li>
+          ))}
+          <li className={pageItem}>
+            <a href="" className={pageLink} onClick={nextPage}>Siguiente</a>
+          </li>
+
+        </ul>
+      </nav> */}
+      <nav>
+        <ul className={pagination}>
+
+          {npage <= 5 ? (
+            // Si hay 3 o menos páginas, muestra opciones para llegar directamente a las páginas
+            numbers.map((number, index) => (
+              <li
+                className={`${pageItem} ${currentPage === number ? active : ''}`}
+                key={index}
+              >
+                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, number)}>
+                  {number}
+                </a>
+              </li>
+            ))
+          ) : (
+            // Si hay más de 5 páginas, muestra controles para la primera, anterior, actual, siguiente y última página
+            <>
+              <li className={pageItem}>
+                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, 1)}>Primera</a>
+              </li>
+              <li className={pageItem}>
+                <a href="" className={pageLink} onClick={(e) => prevPage(e)}>Anterior</a>
+              </li>
+
+              <li className={`${pageItem} ${active}`}>
+                <span className={pageLink}>
+                  {currentPage}
+                </span>
+              </li>
+
+              <li className={pageItem}>
+                <a href="" className={pageLink} onClick={nextPage}>Siguiente</a>
+              </li>
+              <li className={pageItem}>
+                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, npage)}>
+                  Última
+                </a>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
     </div>
   );
 }
