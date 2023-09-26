@@ -288,7 +288,6 @@ const HomeWork = (props: IHomeWork) => {
               <>
                 <p dangerouslySetInnerHTML={{ __html: data.lesson_homeworks.about }} className="quill-hw" />
                 {(homework && homework.status === 1 && homework.approved === 0 && status !== "pending") && <>
-                  {/* <p className='reason'>Lamentablemente tu tarea no cuenta con las pautas para ser aprobada.Te invitamos a que la hagas nuevamente y la vuelvas a entregar:</p> */}
                   <p style={{ color: "#bc1515" }}>Tarea Rechazada</p>
                   <p style={{ color: "#8e2de2" }}>{homework.comment}</p>
                 </>}
