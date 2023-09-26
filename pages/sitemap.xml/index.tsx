@@ -33,10 +33,6 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/blogs/[slug]</loc>
-      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
-    </url>
-    <url>
       <loc>https://www.gonvar.io/planes</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>  
