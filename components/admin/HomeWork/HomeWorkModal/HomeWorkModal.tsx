@@ -62,7 +62,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
     else {
       setReview({
         ...review,
-        comment: 'Lamentablemente tu tarea no cuenta con las pautas para ser aprobada.Te invitamos a que la hagas nuevamente y la vuelvas a entregar.',
+        comment: 'Lamentablemente tu tarea no cuenta con las pautas para ser aprobada. Te invitamos a que la hagas nuevamente y la vuelvas a entregar.',
         approved: approved,
       })
     }
