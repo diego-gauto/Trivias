@@ -83,6 +83,7 @@ export const InputContain = styled.div`
 export const ItemContain = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 `;
 export const Text = styled.p`
   font-size: 16px;
@@ -96,6 +97,7 @@ export const Text2 = styled.p`
   color: #8e2de2;
   font-weight: 600;
   margin: 0;
+  text-align: end;
 `;
 export const ButtonContain = styled.div`
   display: flex;

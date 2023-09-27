@@ -162,7 +162,7 @@ const Mensual = (props: IData) => {
             {views.get(6) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Recibe un kit gratis con
-                  diferentes productos cada dos meses,</b> como acrílicos, geles, monómeros, adherentes,
+                  diferentes productos cada mes,</b> como acrílicos, geles, monómeros, adherentes,
                   decoración y otros productos.
                   <br /><i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo. Solo debes pagar el envío de $245 MXN.</b></i></p>
               </div>}
@@ -190,7 +190,7 @@ const Mensual = (props: IData) => {
             {views.get(8) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Obtén envíos gratis </b>
-                  en compras superiores a $1,000.00 mx.</p>
+                  en compras superiores a $1,000.00 MXN.</p>
               </div>}
           </div>
           <div className="back tip 

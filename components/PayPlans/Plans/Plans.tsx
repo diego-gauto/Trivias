@@ -17,7 +17,7 @@ interface IData {
 }
 export const Plans = (props: IData) => {
   const { user, selected } = props;
-  console.log(selected);
+
   return (
     <PlanStyles className="w-100">
       <div className="planes">

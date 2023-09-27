@@ -20,15 +20,17 @@ export const HomeWorkContain = styled.div`
       gap: 10px;
       justify-content: flex-start;
       font-weight: 500;
-      opacity: 0.7;
-      color: #8e5fc1;
+      color: #8e2de2;
+      width: fit-content;
+      padding-inline: 30px;
+      padding-block: 8px;
+      border: 1px solid #8e2de2;
+      border-radius: 100px;
       svg {
         font-size: 22px;
       }
       &:hover {
-        opacity: 1;
-        color: #8e2de2;
-        font-weight: 600;
+        transform: scale(1.03);
         transition: 0.5s ease all;
       }
     }

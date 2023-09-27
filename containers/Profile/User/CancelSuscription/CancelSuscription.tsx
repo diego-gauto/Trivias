@@ -266,7 +266,7 @@ const CancelSuscription = () => {
           comprar de todas formas producto de baja calidad, en otro lado y al mismo precio que el de Gonvar.
         </p>
         <p className="my-4">
-          Evita cancelar tu suscripción y recuerda que Gonvar+ te regala producto cada dos meses, te otorga
+          Evita cancelar tu suscripción y recuerda que Gonvar+ te regala producto cada mes, te otorga
           <b> boletos para rifas </b>y <b>descuentos de hasta 40% en producto</b>.
         </p>
         {/* <p><b>No dejes que los obstáculos te detengan.</b> Pausa tu suscripción y aprovecha esta oportunidad

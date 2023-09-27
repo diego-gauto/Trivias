@@ -19,19 +19,22 @@ import {
 import { createNotification } from "../../../../../components/api/notifications";
 import { DEFAULT_USER_IMG } from "../../../../../constants/paths";
 import { CommentContain, CommentInput, MainContainer, Profile } from "./Comments.styled";
-import { TitleContain } from "./Module.styled";
-import ModuleTabs from "./ModuleTabs/ModuleTabs";
 import router from "next/router";
 
-const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments, course, season, lesson, nextLesson, previousLesson, firstLesson, lastLesson }: any) => {
-
+interface IComments {
+  user: any,
+  data: any,
+  course: any,
+  lesson: any,
+}
+const Comments = (props: IComments) => {
+  const { user, data, course, lesson } = props;
   const [currentComments, setCurrentComments] = useState<any>([]);
   const [comment, setComment] = useState("");
   const [answer, setAnswer] = useState("");
   const [answerComment, setAnswerComment] = useState("");
   const [responses, setResponses] = useState<any>([]);
   const [lastComments, setLastComments] = useState<any>([]);
-
   const addLessonComment = () => {
     let body: any;
     if (comment) {
@@ -101,7 +104,8 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
       userId: user.user_id,
       commentId: x.commentA_id
     }
-    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+
+    if (x.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
       let notification = {
         userId: x.comment_user_id,
         type: "4",
@@ -116,7 +120,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
         getComments();
       })
     } else {
-      deleteCommentAnswerLikeApi(temp).then(() => {
+      deleteCommentAnswerLikeApi(temp).then((res) => {
         getComments();
       })
     }
@@ -127,7 +131,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
       userId: user.user_id,
       commentId: x.commentToAnswer_id
     }
-    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+    if (x.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
       let notification = {
         userId: x.comment_user_id,
         type: "4",
@@ -239,10 +243,6 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
 
   return (
     <>
-      <TitleContain >
-        <ModuleTabs data={data} user={user} value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
-        <div className='line'></div>
-      </TitleContain>
       <MainContainer>
         <CommentContain>
           <div className='comments-info'>
@@ -250,6 +250,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
             <div className='line'></div>
             <p className='total'>Total de preguntas en este curso <span>({currentComments.length})</span></p>
           </div>
+          <p className="regular-text">En esta sección puedes realizar comentarios, preguntas o sugerencias relacionadas a esta clase.</p>
           <div className='comment'>
             <Profile
               src={DEFAULT_USER_IMG}
@@ -276,7 +277,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
           return (
             <div className='comment-container' key={'comments-' + index}>
               <div className="top">
-                {comments && x.photo
+                {x.photo
                   ?
                   <Profile src={x.photo} />
                   :
@@ -344,7 +345,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
                       <div className='left'>
                         <div className='new-comment'>
                           <div className='like' onClick={() => { likeAnswer(ans) }}>
-                            {ans.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                            {ans.likes.findIndex((x: any) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
                               <FiHeart />}
                             <p>{ans.likes.length}</p>
                           </div>
@@ -389,7 +390,7 @@ const Comments = ({ value, changeValue, blockForNextSeason, user, data, comments
                               />}
                             <p>{answer_comment.name} {answer_comment.role === "admin" && <MdVerified />} <span>{getDate(answer_comment.commentToAnswer_created_at)}</span></p>
                             <div className='like' onClick={() => { likeCommentAnswer(answer_comment) }}>
-                              {answer_comment.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                              {answer_comment.likes.findIndex((x: any) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
                                 <FiHeart />}
                               <p>{answer_comment.likes.length}</p>
                             </div>

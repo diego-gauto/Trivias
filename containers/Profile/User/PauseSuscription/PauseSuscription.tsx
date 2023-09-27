@@ -62,7 +62,7 @@ export const PauseSuscription = () => {
           </div>}
         <h1 className="purple-dark mb-4">¡Te estaremos esperando!</h1>
         <p><b>Se que existen multiples razones por las que  ya no puedes continuar con tu carrera de nails artist.</b></p>
-        <p className="my-0">¡Estamos en confianza! Platícame el motivo  por el que quieres pausar tu suscripción, hermosa:</p>
+        <p className="my-0">¡Estamos en confianza! Platícame el motivo  por el que quieres pausar tu suscripción:</p>
         <div className="row w-100 mx-4 my-4">
           <div className="col-4">
             <div className="form-check m-1">

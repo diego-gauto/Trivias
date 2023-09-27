@@ -20,22 +20,21 @@ const ImagePreview = (props: any) => {
         <AiOutlineClose onClick={handleClose} className='close' />
         <div className="row">
           <div className='text-contain col-lg-5 col-md-12'>
-            <h2 className="purple h1 fw-semibold text-center">¡Hola <b>{user}</b>!</h2>
-            <p className="purple h2 fw-semibold text-center">Hermosa, estás por entregar tu tarea de <b>{lesson}</b></p>
-            <p className="purple h2 fw-semibold text-center">Si todo está bien, solo da click en aceptar para enviarla.</p>
+            <h2 className="purple h1 fw-semibold text-center">¡Hola, <b>{user}</b>!</h2>
+            <p className="purple h2 fw-semibold text-center">Estás por entregar tu tarea de <b>{lesson}.</b></p>
+            <p className="purple h2 fw-semibold text-center">Recibirás tu <b>calificación</b> y <b>retroalimentación</b> en esta sección y por correo electrónico.</p>
+            <p className="purple h2 fw-semibold text-center">Si subiste la <b>tarea correcta</b>, sólo da click en aceptar para enviarla.</p>
             {
               (type !== "aplication/pdf" && type.substring(0, 5) !== "image") &&
               <p className='note'>(Los documentos .doc y .docx no cuentan con vista previa)</p>
             }
-            <div className="button-contain">
+            <div className="button-contain normal">
               <div className='buttons'>
-                <button className='btn' onClick={handleClose}>Salir</button>
+                <button className='btn-red' onClick={handleClose}>Salir</button>
                 {
                   loader
                     ?
-                    <LoaderImage>
-                      <LoaderContain />
-                    </LoaderImage>
+                    <LoaderContain />
                     : <button className='btn' onClick={() => getImage(imageDisplay)} >Aceptar</button>
                 }
               </div>
@@ -51,15 +50,12 @@ const ImagePreview = (props: any) => {
               <img src={imageDisplay} className="image" />
             }
           </div>
-          <div className="button-contain">
+          <div className="button-contain responsive">
             <div className='buttons mt-3'>
-              <button className='btn-down' onClick={handleClose}>Salir</button>
+              <button className='btn-red' onClick={handleClose}>Salir</button>
               {
                 loader
-                  ?
-                  <LoaderImage>
-                    <LoaderContain />
-                  </LoaderImage>
+                  ? <LoaderContain />
                   : <button className='btn-down' onClick={() => getImage(imageDisplay)}>Aceptar</button>
               }
             </div>

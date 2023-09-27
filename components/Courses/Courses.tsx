@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, NAILS_FORM, PLAN_PATH, PURCHASE_PATH } from "../../constants/paths";
 import { getAllCourseDataApi, getCoursesApi } from "../api/lessons";
 import { getUserApi } from "../api/users";
-import CourseModal from "../CourseModal/CourseModal";
+import CourseModal from "../Modals/CourseModal/CourseModal";
 import {
   Container,
   CoursesContain,

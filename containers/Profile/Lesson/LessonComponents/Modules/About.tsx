@@ -5,9 +5,15 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { AboutContain, LessonContent, LessonTitle, TextContainer } from "./About.styled";
 import { TitleContain } from "./Module.styled";
 import ModuleTabs from "./ModuleTabs/ModuleTabs";
-import ModalMaterials from "../../../../../components/CourseModal/Materials/ModalMaterials";
+import ModalMaterials from "../../../../../components/Modals/CourseModal/Materials/ModalMaterials";
 
-const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, course, nextLesson, previousLesson, firstLesson, lastLesson, user }: any) => {
+interface IAbout {
+  data: any,
+  teacherCreds: any,
+  course: any,
+}
+const About = (props: IAbout) => {
+  const { data, teacherCreds, course } = props;
   const defaultImg = "/images/teachers/Brenda_instructora.jpg";
   const [showMaterial, setShowMaterial] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
@@ -16,10 +22,6 @@ const About = ({ value, blockForNextSeason, changeValue, data, teacherCreds, cou
   }
   return (
     <>
-      <TitleContain>
-        <ModuleTabs data={data} user={user} value={value} blockForNextSeason={blockForNextSeason} changeValue={changeValue} nextLesson={nextLesson} previousLesson={previousLesson} course={course} firstLesson={firstLesson} lastLesson={lastLesson} />
-        <div className='line'></div>
-      </TitleContain>
       <AboutContain>
         <TextContainer>
           <LessonTitle>
