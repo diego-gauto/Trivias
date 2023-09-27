@@ -104,7 +104,8 @@ const Comments = (props: IComments) => {
       userId: user.user_id,
       commentId: x.commentA_id
     }
-    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+
+    if (x.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
       let notification = {
         userId: x.comment_user_id,
         type: "4",
@@ -119,7 +120,7 @@ const Comments = (props: IComments) => {
         getComments();
       })
     } else {
-      deleteCommentAnswerLikeApi(temp).then(() => {
+      deleteCommentAnswerLikeApi(temp).then((res) => {
         getComments();
       })
     }
@@ -130,7 +131,7 @@ const Comments = (props: IComments) => {
       userId: user.user_id,
       commentId: x.commentToAnswer_id
     }
-    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+    if (x.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
       let notification = {
         userId: x.comment_user_id,
         type: "4",
@@ -344,7 +345,7 @@ const Comments = (props: IComments) => {
                       <div className='left'>
                         <div className='new-comment'>
                           <div className='like' onClick={() => { likeAnswer(ans) }}>
-                            {ans.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                            {ans.likes.findIndex((x: any) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
                               <FiHeart />}
                             <p>{ans.likes.length}</p>
                           </div>
@@ -389,7 +390,7 @@ const Comments = (props: IComments) => {
                               />}
                             <p>{answer_comment.name} {answer_comment.role === "admin" && <MdVerified />} <span>{getDate(answer_comment.commentToAnswer_created_at)}</span></p>
                             <div className='like' onClick={() => { likeCommentAnswer(answer_comment) }}>
-                              {answer_comment.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                              {answer_comment.likes.findIndex((x: any) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
                                 <FiHeart />}
                               <p>{answer_comment.likes.length}</p>
                             </div>

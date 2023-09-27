@@ -100,7 +100,32 @@
     }
   }
 
+  .pagination {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    list-style: none; /* Elimina los puntos de lista */
+    padding: 0;
+
+    .pageItem {
+      padding: 10px 20px;
+      background-color: #d24dd3;
+      border: none;
+      cursor: pointer;
+      margin: 5px;
+
+      .pageLink{
+        text-decoration: none;
+        color: #ffffff;
+      }
+    }
+
+    .active{
+      background-color: #520795;
+    }
+  }
+
 }
+
 
 @media (max-width: 768px) {
   .volver {
