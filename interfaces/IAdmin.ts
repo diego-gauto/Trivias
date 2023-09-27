@@ -11,3 +11,5 @@ export interface ICancelReview {
   user_id: number;
   phone_number: string;
 }
+
+export interface IUserFilters {}
