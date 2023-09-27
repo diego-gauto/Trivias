@@ -7,6 +7,7 @@ import router from "next/router";
 import { ANUAL_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
+import ChangePlanModal from "../../Modals/ChangePlanModal/ChangePlanModal";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -26,6 +27,8 @@ interface IData {
 const Anual = (props: IData) => {
   const [ver, setver] = useState(true)
   const { user } = props;
+  const [open, setOpen] = useState(false);
+
   const goToRoute = () => {
     router.push('/suscripcion-anual');
   }
@@ -38,10 +41,6 @@ const Anual = (props: IData) => {
       views.set(q, true)
     }
   }
-
-  useEffect(() => {
-
-  }, [setver])
 
   const goTo = () => {
     if (user.id) {
@@ -67,6 +66,7 @@ const Anual = (props: IData) => {
 
   return (
     <PlanStyles>
+      <ChangePlanModal show={open} onHide={() => { setOpen(false) }} user={user} />
       <div className="back plan-container">
         <div className="header">
           <div className="top-tab border Back-blue">
@@ -87,7 +87,8 @@ const Anual = (props: IData) => {
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button" onClick={goTo}>Comenzar ahora</button>
+            {(user && user.level) ? <button className="purple-button" onClick={goTo}>Comenzar ahora</button> :
+              <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
           </div>
         </div>
         <div className="main-body">

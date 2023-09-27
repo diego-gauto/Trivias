@@ -8,8 +8,6 @@ import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../co
 import { useAuth } from "../../../hooks/useAuth";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
-import { conektaCreateSubscription } from "../../api/conekta/test";
-import { user } from "firebase-functions/v1/auth";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
