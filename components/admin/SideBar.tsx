@@ -123,8 +123,6 @@ const SideBar = ({ show, onHide }: any) => {
           router.push({ pathname: "/" });
         }
       }
-    } else {
-      router.push({ pathname: "/" });
     }
   }, [userData])
 
