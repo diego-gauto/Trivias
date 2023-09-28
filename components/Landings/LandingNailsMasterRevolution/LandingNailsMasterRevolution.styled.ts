@@ -85,6 +85,9 @@ export const SuscriptionContain = styled.div`
     &.left-right {
       background: linear-gradient(to right, #6253f6, #4189f5);
     }
+    &.right-left {
+      background: linear-gradient(to left, #6253f6, #4189f5);
+    }
     &.up-down {
       background: linear-gradient(to top, #6253f6, #4189f5);
     }
@@ -383,7 +386,7 @@ export const SecondSection = styled.div`
             }
           }
           .uñas-q-container.open {
-            transition: 0.3s ease;
+            transition: 0.6s ease;
             height: fit-content;
             max-height: 1000px;
             .q {
@@ -428,10 +431,6 @@ export const SecondSection = styled.div`
       }
       .adjust {
         padding: 50px;
-        .icon-shop {
-          width: 70px;
-          height: 60px;
-        }
         .icon-page {
           width: 55px;
           height: 60px;
@@ -655,9 +654,10 @@ export const FourthSection = styled.div`
   z-index: 2;
   .big-title {
     white-space: nowrap;
+    color: #fff;
   }
   .circle {
-    background-color: #ffde5e;
+    background-color: #04dffc;
     border-radius: 100%;
     width: 300px;
     height: 300px;
@@ -727,6 +727,9 @@ export const FourthSection = styled.div`
     }
   }
   @media (max-width: 850px) {
+    .big-title {
+      color: unset;
+    }
     .corner-left {
       right: 0px;
       left: unset;
@@ -745,6 +748,14 @@ export const FourthSection = styled.div`
       margin-top: 50px;
       transform: translate(0px, 0px);
       padding-inline: 30px;
+      .present {
+        color: #3f1168;
+        font-weight: 500;
+      }
+      .italic {
+        font-style: italic;
+        white-space: nowrap;
+      }
       .text-container {
         position: relative;
         .sangria {
@@ -763,19 +774,7 @@ export const FourthSection = styled.div`
         }
       }
       .quote-resp {
-        text-align: center;
-        background-color: #ffde5e;
-        border-radius: 100px;
-        padding-inline: 30px;
-        line-height: 20px;
-        font-size: 14px;
-        margin-inline: 30px;
-        span {
-          font-weight: 600;
-        }
-        i {
-          font-weight: 800;
-        }
+        display: none;
       }
       .header-contain {
         background-color: unset;
@@ -822,12 +821,26 @@ export const FourthSection = styled.div`
           font-size: 11px;
         }
       }
-      .quote-resp {
-        margin-inline: 10px;
-        font-size: 12px;
-        line-height: 18px;
-      }
     }
+  }
+`;
+export const Quote = styled.div`
+  background: linear-gradient(to right, #46108a, #3f0969);
+  display: none;
+  width: 100%;
+  justify-content: center;
+  padding-block: 20px;
+  margin-top: 20px;
+  .white {
+    font-weight: 600;
+    font-style: italic;
+    margin: 0;
+    span {
+      font-weight: 400;
+    }
+  }
+  @media (max-width: 850px) {
+    display: flex;
   }
 `;
 export const FifthSection = styled.div`
@@ -937,7 +950,8 @@ export const SixthSection = styled.div`
   padding-top: 60px;
   padding-bottom: 40px;
   width: 100%;
-  background-color: #ece7f2;
+  background: linear-gradient(to right, #46108a, #3f0969);
+  color: #fff;
   .ghost {
     position: absolute;
     right: 0;
@@ -963,9 +977,10 @@ export const SixthSection = styled.div`
           position: relative;
           z-index: 2;
           font-weight: 700;
-          .p-pink {
-            font-weight: 500;
-          }
+        }
+        span {
+          font-weight: 400;
+          font-style: italic;
         }
       }
     }
@@ -997,6 +1012,11 @@ export const SixthSection = styled.div`
     }
   }
   @media (max-width: 850px) {
+    .h4 {
+      font-weight: 200;
+      font-size: 16px;
+      line-height: 20px;
+    }
     .program-course {
       .course-container {
         .course-detail {
@@ -1017,7 +1037,6 @@ export const SixthSection = styled.div`
     .h4 {
       font-size: 11px;
       line-height: 18px;
-      font-weight: 400;
       letter-spacing: 1px;
       margin-bottom: 30px;
       width: unset;
@@ -1136,6 +1155,10 @@ export const SeventhSection = styled.div`
             padding-block: 8px;
             line-height: 20px;
           }
+          .dark-blue {
+            text-transform: uppercase;
+            font-size: 40px;
+          }
           .red {
             font-weight: 500;
           }
@@ -1183,7 +1206,8 @@ export const EightSection = styled.div`
   padding-block: 70px;
   width: 100%;
   min-height: 450px;
-  background-color: #f6f7fa;
+  background: linear-gradient(to right, #46108a, #3f0969);
+  color: #fff;
   display: flex;
   justify-content: center;
   gap: 25px;
@@ -1256,12 +1280,16 @@ export const EightSection = styled.div`
       margin: 0px;
       width: 100%;
       padding-inline: 20px;
+      .h1 {
+        font-size: 40px;
+      }
       .p-pink {
         font-size: 36px;
       }
       .text-certificate {
         font-size: 20px;
         font-weight: 400;
+        line-height: 28px;
         text-align: justify;
       }
     }
@@ -1275,7 +1303,7 @@ export const EightSection = styled.div`
   @media (max-width: 400px) {
     .left-side {
       padding-inline: 15px;
-      .p-pink {
+      .h1 {
         font-size: 32px;
       }
       .text-certificate {
@@ -1482,7 +1510,8 @@ export const TenthSection = styled.div`
   //EXPERIENCIAS
   padding-block: 50px;
   width: 100%;
-  background-color: #e2b4e7;
+  background: linear-gradient(to right, #46108a, #3f0969);
+  color: #fff;
   .experiences-container {
     display: flex;
     justify-content: center;
@@ -1496,10 +1525,10 @@ export const TenthSection = styled.div`
       border-radius: 100%;
       width: fit-content;
       padding: 15px;
-      border: 1px solid black;
+      border: 1px solid white;
       background-color: transparent;
       .icon {
-        color: #000000;
+        color: white;
         width: 10px;
         height: 10px;
       }
@@ -1555,10 +1584,14 @@ export const TenthSection = styled.div`
 export const EleventhSection = styled.div`
   //SUBJECT
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
-  background-color: #ece7f2;
+  background-color: #fff;
   padding-block: 50px;
   padding-bottom: 150px;
+  align-items: center;
   .title-ppal {
     font-size: 65px;
   }
@@ -1578,52 +1611,83 @@ export const EleventhSection = styled.div`
     left: 0;
   }
   .btn {
-    padding-inline: 20px;
+    padding-inline: 40px;
+    padding-block: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    width: fit-content;
   }
   .subject-container {
     display: flex;
     margin-block: 15px;
-    display: flex;
     justify-content: center;
-    gap: 150px;
+    gap: 120px;
     padding-left: 50px;
     .side {
-      width: 500px;
+      width: 450px;
       .subject {
         text-align: start;
         margin-bottom: 30px;
-        .lessons {
-          display: flex;
-          margin-bottom: 20px;
-          .num {
-            font-size: 23px;
-            transform: translateX(-25px);
-          }
-          .title {
-            font-size: 23px;
-            transform: translateX(-20px);
-          }
+        .num {
+          font-size: 23px;
+          transform: translateX(-25px);
+        }
+        .title {
+          font-size: 23px;
         }
       }
+    }
+    .side-right {
+      width: 520px;
     }
   }
   @media (max-width: 850px) {
     padding-inline: 20px;
+    gap: 0px;
+    .line {
+      width: 200px;
+      height: 2px;
+      background-color: #3f1168;
+      margin-bottom: 30px;
+    }
+    .h6 {
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 30px;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
     h4 {
-      margin-bottom: 40px;
+      margin-bottom: 60px;
       font-size: 20px;
+    }
+    .resp-class {
+      max-height: 860px;
+      overflow-y: hidden;
+      transition: 1s ease all;
+    }
+    .un-resp {
+      max-height: 3400px;
+      transition: 1s ease all;
     }
     .subject-container {
       flex-direction: column;
       gap: 0px;
       align-items: center;
+      justify-content: unset;
+      padding-inline: 15px;
       .side {
         width: 100%;
         .subject {
-          margin-bottom: 20px;
-          .lessons {
-            .title {
-              font-size: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .title {
+            font-size: 18px;
+            line-height: 28px;
+            .p-pink {
+              color: #3f1168;
             }
           }
         }
@@ -1633,12 +1697,22 @@ export const EleventhSection = styled.div`
       }
       h5 {
         font-size: 14px;
+        position: relative;
+        margin-left: 5px;
+        .p-pink {
+          background-color: #3f1168;
+          position: absolute;
+          left: -10px;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          top: 40%;
+          trasnform: translateY(-50%);
+        }
       }
     }
     .btn {
-      padding-inline: 20px;
       font-size: 14px;
-      font-weight: 400;
     }
   }
   @media (max-width: 400px) {
@@ -1657,14 +1731,12 @@ export const EleventhSection = styled.div`
       padding-left: 20px;
       .side {
         .subject {
-          .lessons {
-            margin-bottom: 0;
-            .num {
-              font-size: 18px;
-            }
-            .title {
-              font-size: 16px;
-            }
+          margin-bottom: 0;
+          .num {
+            font-size: 18px;
+          }
+          .title {
+            font-size: 16px;
           }
         }
       }
@@ -1677,7 +1749,12 @@ export const EleventhSection = styled.div`
 export const TwelveSection = styled.div`
   //DISPOSITIVOS
   width: 100%;
-  background-color: #eaeef3;
+  background: linear-gradient(to right, #46108a, #3f0969);
+  color: #fff;
+  padding-block: 50px;
+  .big-title {
+    font-size: 50px;
+  }
   @media (max-width: 1000px) {
     .devices {
       width: 100%;
@@ -1695,12 +1772,9 @@ export const TwelveSection = styled.div`
       order: 1;
     }
   }
-  @media (max-width: 400px) {
-    .devices-section {
-      .big-title {
-        font-size: 28px;
-        margin-block: 20px;
-      }
+  @media (max-width: 450px) {
+    .big-title {
+      font-size: 30px;
     }
   }
 `;
@@ -1783,6 +1857,9 @@ export const FourteenSection = styled.div`
   h2 {
     font-weight: 700;
   }
+  .big-title {
+    font-size: 50px;
+  }
   .faq {
     .q-container {
       width: 1200px;
@@ -1822,10 +1899,10 @@ export const FourteenSection = styled.div`
       .q.open-q {
         transition: 0.2s ease;
         .icon {
-          background-color: #d244d1;
+          background-color: #6253f6;
         }
         .title {
-          color: #d244d1;
+          color: #6253f6;
         }
       }
     }
