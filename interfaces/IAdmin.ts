@@ -13,3 +13,5 @@ export interface ICancelReview {
 }
 
 export interface IUserFilters {}
+
+export interface IAdminUsers {}

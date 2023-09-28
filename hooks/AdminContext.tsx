@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useAuth } from "./useAuth";
-import { IUserFilters } from "../interfaces/IAdmin";
+import { IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
 
 
 interface Props {
@@ -17,6 +17,8 @@ export const useAdmin = () => {
 
 export const AdminsContext = (props: Props) => {
   const [userFilters, setUserFilters] = useState({} as IUserFilters);
+  const [countries, setCountries] = useState([]);
+  const [users, setUsers] = useState({} as IAdminUsers);
   const { children } = props;
   let userContext = useAuth();
   const { user } = userContext;
@@ -28,7 +30,7 @@ export const AdminsContext = (props: Props) => {
   }, [user])
 
   const values = {
-
+    countries,
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;

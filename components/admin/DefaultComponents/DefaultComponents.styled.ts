@@ -1,1 +1,116 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+export const DefaultContainer = styled.div`
+  display: flex;
+  width: 100%;
+  min-width: 1000px;
+  height: fit-content;
+  border-radius: 10px;
+  flex-direction: column;
+  margin: 30px;
+  gap: 10px;
+  padding: 30px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  p,
+  h2 {
+    margin: 0;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .title-filter {
+    font-size: 20px;
+    font-weight: 600;
+  }
+`;
+export const DefaultSearchContainer = styled.div`
+  display: flex;
+  position: relative;
+  .search-input {
+    font-size: 14px;
+    border: 1px solid #6717cd;
+    border-radius: 10px 10px 10px 10px;
+    outline: none;
+    padding-block: 10px;
+    padding-inline: 50px 30px;
+  }
+  .search-icon {
+    background-image: url(../images/admin/search.png);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+  }
+`;
+export const DefaultColumn = styled.div<{ gap?: number }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  ${(props) =>
+    props.gap &&
+    css`
+      gap: ${props.gap}px;
+    `}
+`;
+export const DefaultRow = styled.div<{ gap?: number }>`
+  display: flex;
+  justify-content: space-between;
+  ${(props) =>
+    props.gap &&
+    css`
+      gap: ${props.gap}px;
+    `}
+`;
+export const DefaultFilterContain = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  position: relative;
+  .title-filter {
+    font-size: 14px;
+    color: #6717cd;
+  }
+  .calendar-contain {
+    position: absolute;
+    width: 300px;
+    top: 70px;
+    background-color: white;
+  }
+  .icon {
+    position: absolute;
+    left: 280px;
+    cursor: pointer;
+    color: #6717cd;
+  }
+  .icon-open {
+    font-size: 20px;
+    position: absolute;
+    cursor: pointer;
+    bottom: -15px;
+    left: 280px;
+    color: #6717cd;
+  }
+  .react-calendar__tile {
+    color: #6717cd;
+  }
+  .react-calendar__tile--active {
+    background: #6717cd;
+    color: white;
+  }
+  .react-calendar__month-view__days__day--weekend {
+    color: #d10000;
+  }
+  .react-calendar__tile--now {
+    background: #dad3e5;
+  }
+`;
