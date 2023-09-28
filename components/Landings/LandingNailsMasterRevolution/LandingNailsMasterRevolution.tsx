@@ -16,7 +16,12 @@ import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1"
 
 import { useMediaQuery } from "react-responsive";
 import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
-import { SuscriptionContain } from "./LandingNailsMasterRevolution.styled";
+import {
+  EightSection, EleventhSection, FifteenSection, FifthSection,
+  FirstSection, FourteenSection, FourthSection, NinthSection,
+  SecondSection, SeventhSection, SixthSection, SuscriptionContain,
+  TenthSection, ThirdSection, ThirteenSection, TwelveSection
+} from "./LandingNailsMasterRevolution.styled";
 
 const news = "/images/landing_suscription/newsletter.png"
 const testimonio = "/images/landing_suscription/testimonios.png"
@@ -154,16 +159,17 @@ const LandingNailsMasterRevolution = () => {
 
   return (
     <SuscriptionContain>
-      <div className="section mt-0">
+      <FirstSection>
         <div className="mt-3 fechas">
           <h4><b>Actualización 2023</b><br />
             Inicio: 28 de Agosto del 2023</h4>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
-          <h2 className="big-text "><b>Nail's Master </b>
-            <b className="light-p">2.0</b></h2>
-          <h2 className="subtitle"><b>Aprende a aplicar uñas </b><b className="p-pink">desde cero.</b></h2>
+          <h2 className="big-text"><b>Nail's Master </b>
+            <br />
+            <b className="blue-gradient">Revolution</b></h2>
+          <h2 className="subtitle"><b>Aprende a aplicar uñas </b><b className="light-blue">desde cero.</b></h2>
         </div>
 
         <img src={nailYellow} className="right-img-1" />
@@ -173,17 +179,15 @@ const LandingNailsMasterRevolution = () => {
           <img src={stars} className="stars" />
           <h3 className="space"><b>(5) 7,378 opiniones</b></h3>
         </div>
-        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="p-pink">{responsive850 && <br />}más exitoso de Latinoámerica.<br />{responsive850 && <br />}
+        <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="light-blue">{responsive850 && <br />}más exitoso de Latinoámerica.<br />{responsive850 && <br />}
           Más de 5,700 alumnas{responsive850 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
         <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 MXN</button>
-      </div>
-
-
-      <div className="info">
+      </FirstSection>
+      <SecondSection>
         <div className="info-top">
           <div className="text">
-            <h2 className="title bold"><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
-              <b className="subtitle p-pink">aprenderás a aplicar uñas de manera:</b>
+            <h2 className="title bold dark-blue"><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
+              <b className="subtitle purple">aprenderás a aplicar uñas de manera:</b>
             </h2>
             <div className="uñas">
               <div className="uñas-q">
@@ -195,9 +199,9 @@ const LandingNailsMasterRevolution = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p><b>✅ Logra aplicaciones </b><b className="p-pink">útiles y cómodas.</b></p>
+                    <p><b>✅ Logra aplicaciones </b><b className="dark-blue">útiles y cómodas.</b></p>
                     <p><b>✅ Aplicaciones con las que puedas realizar todas tus actividades de manera sencilla,
-                      cómoda y con confianza, </b><b className="p-pink">sin riesgo a estropearlas o romperlas.</b></p>
+                      cómoda y con confianza, </b><b className="dark-blue">sin riesgo a estropearlas o romperlas.</b></p>
                   </div>
                 </div>
                 <div className={`uñas-q-container ${views.get(7) ? 'open' : ''}`} onClick={() => verQ(7)}>
@@ -208,16 +212,16 @@ const LandingNailsMasterRevolution = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p><b className="p-pink">✅ Aprende a realizar un diagnóstico inicial </b><b>para determinar si
+                    <p><b className="dark-blue">✅ Aprende a realizar un diagnóstico inicial </b><b>para determinar si
                       puedes o no realizar una aplicación de uñas en sistema artificial.</b></p>
-                    <p><b className="p-pink">✅ Conoce todas las medidas de higiene y seguridad</b><b> en tu mesa de
+                    <p><b className="dark-blue">✅ Conoce todas las medidas de higiene y seguridad</b><b> en tu mesa de
                       aplicación.</b></p>
-                    <p><b className="p-pink">✅ Aprende a evitar hongos y enfermedades </b><b>en las uñas naturales
+                    <p><b className="dark-blue">✅ Aprende a evitar hongos y enfermedades </b><b>en las uñas naturales
                       de tus clientas.</b></p>
-                    <p><b>✅ Aprende los</b><b className="p-pink"> lineamientos de acomodo </b><b>de materiales para
+                    <p><b>✅ Aprende los</b><b className="dark-blue"> lineamientos de acomodo </b><b>de materiales para
                       evitar riesgos de derrame y quemaduras.
                       <i>(Prevención de accidentes)</i></b></p>
-                    <p>✅<b className="p-pink"> Aprende el uso correcto</b><b> de los materiales químicos y medidas
+                    <p>✅<b className="dark-blue"> Aprende el uso correcto</b><b> de los materiales químicos y medidas
                       de protección dérmica y respiratoria.</b></p>
                   </div>
                 </div>
@@ -231,12 +235,12 @@ const LandingNailsMasterRevolution = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p>✅<b> Logra aplicaciones </b><b className="p-pink">hermosas y detalladas.</b></p>
-                    <p>✅<b> Aprende a realizar aplicaciones realmente bellas y con </b><b className="p-pink">
+                    <p>✅<b> Logra aplicaciones </b><b className="dark-blue">hermosas y detalladas.</b></p>
+                    <p>✅<b> Aprende a realizar aplicaciones realmente bellas y con </b><b className="dark-blue">
                       lineamientos europeos.</b></p>
-                    <p>✅<b className="p-pink"> Conoce y domina las técnicas de limado de competencia, </b>
+                    <p>✅<b className="dark-blue"> Conoce y domina las técnicas de limado de competencia, </b>
                       <b>para lograr aplicaciones con estructuras simétricas y con brillo</b>
-                      <b className="p-pink"> de alto impacto.</b></p>
+                      <b className="dark-blue"> de alto impacto.</b></p>
                   </div>
                 </div>
                 <div className={`uñas-q-container ${views.get(8) ? 'open' : ''}`} onClick={() => verQ(8)}>
@@ -247,10 +251,10 @@ const LandingNailsMasterRevolution = () => {
                       <BsChevronDown className="icon" />}
                   </div>
                   <div className="border-top">
-                    <p>✅<b> Logra aplicaciones </b><b className="p-pink">con duración de más de 21 días.</b></p>
-                    <p>✅<b> Domina el </b><b className="p-pink">
+                    <p>✅<b> Logra aplicaciones </b><b className="dark-blue">con duración de más de 21 días.</b></p>
+                    <p>✅<b> Domina el </b><b className="dark-blue">
                       cero desprendimiento.</b></p>
-                    <p>✅<b className="p-pink"> Garantiza </b><b>que tus aplicaciones no se quiebren
+                    <p>✅<b className="dark-blue"> Garantiza </b><b>que tus aplicaciones no se quiebren
                       o se caigan.</b></p>
                   </div>
                 </div>
@@ -259,7 +263,7 @@ const LandingNailsMasterRevolution = () => {
           </div>
           <img src={mujer} className="img" />
         </div>
-        <h2 className="h1 bold">Aprende desde cero y {responsive850 && <br />}<b className="p-pink no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
+        <h2 className="h1 bold">Aprende desde cero y {responsive850 && <br />}<b className="dark-blue no-bold">vive de tu pasión</b> <br /> por las uñas acrílicas</h2>
         <div className="info-cards all-center">
           <div className="card">
             <div className="adjust">
@@ -285,24 +289,20 @@ const LandingNailsMasterRevolution = () => {
           </div>
         </div>
         <img src={linesB} className="bottom-l" />
-      </div>
-
-
-      <div className="video-section">
+      </SecondSection>
+      <ThirdSection>
         <div className="video-container">
           <iframe src="https://www.youtube.com/embed/2QlI9_CTkqk?autoplay=1&mute=1" />
         </div>
         <div className="info-video">
           <h2><b className="title-text">Durante 3 meses podrás acceder a</b><br />
-            <b className="big-title p-pink">más de 40 clases</b></h2>
+            <b className="big-title blue-gradient">más de 40 clases</b></h2>
           <p className="reg-text">Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
-          <button className="btn" onClick={() => handleRedirection()}>Obtener acceso</button>
+          <button className="btn left-right" onClick={() => handleRedirection()}>Obtener acceso</button>
         </div>
-      </div>
-
-
-      <div className="arita-section">
+      </ThirdSection>
+      <FourthSection>
         <div className="circle corner-left"></div>
         <div className="image-quote">
           {
@@ -311,12 +311,12 @@ const LandingNailsMasterRevolution = () => {
           <img src={arita} className="image" />
         </div>
         <div className="text">
-          <h2>Te presentamos a</h2>
+          <h2 className="dark-blue bold">Te presentamos a</h2>
           <div className="text-container">
             <div className="header-contain">
-              <h2 className="big-title bold">Arita Gonvar</h2>
+              <h2 className="big-title bold white">Arita Gonvar</h2>
             </div>
-            <p className="p-pink"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master 2.0</b></p>
+            <p className="dark-blue italic"><b>Ella te guiará paso a paso en el programa {responsive850 && <br />} Nails Master 2.0</b></p>
             <div className="sangria">
               <p><b>Instructora certificada</b> bajo {responsive850 && <br />}estándares de aplicación de {responsive850 && <br />}uñas artificiales por {responsive850 && <br />}competencia.</p>
               <p><b>Especialista en capacitación{responsive850 && <br />} para principiantes,</b> estructura {responsive850 && <br />}profesional en escultural {!responsive850 && <br />}
@@ -335,13 +335,9 @@ const LandingNailsMasterRevolution = () => {
             }
           </div>
         </div>
-
         <div className="circle corner-right"></div>
-      </div>
-
-
-      <div className="benefits-section">
-
+      </FourthSection>
+      <FifthSection>
         <h2 className="text-blue">Con <b className="blue">Nails Master 2.0</b> te{responsive850 && <br />} daremos  <b className="blue">beneficios
           {!responsive850 && <br />} exclusivos</b> y {responsive850 && <br />}tendrás acceso a la comunidad{responsive850 && <br />} de {!responsive850 && <br />}estudiantes y profesionales {responsive850 && <br />}de
           la industria de las uñas <br /><b className="blue">más grande de Latinoamérica.</b></h2>
@@ -400,10 +396,8 @@ const LandingNailsMasterRevolution = () => {
           </div>
           <img src={manoBenefits} className="back-hands" />
         </div>
-      </div>
-
-
-      <div className="program">
+      </FifthSection>
+      <SixthSection>
         <h2 className="yellow h1"><b>Todo lo que incluye este {responsive850 && <br />}increíble programa</b></h2>
         {
           !responsive850 ?
@@ -413,8 +407,6 @@ const LandingNailsMasterRevolution = () => {
             <p className="h4">Para complementar tu aprendizaje, <br />al inscribirte a Nails Master 2.0<br />
               <b> obtendrás cuadernillos, manuales y textos<br /></b> que te ayudarán en tu carrera de Nail Artist.</p>
         }
-
-
         <div className="program-course">
           <div className="course-container">
             <div className="course-detail">
@@ -459,10 +451,8 @@ const LandingNailsMasterRevolution = () => {
           </div>
           <img src={manuales} className="ghost" />
         </div>
-      </div>
-
-
-      <div className="cost-section">
+      </SixthSection>
+      <SeventhSection>
         <div className="cost-body">
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
@@ -478,10 +468,8 @@ const LandingNailsMasterRevolution = () => {
             <img src={chica} className="right-img" />
           </div>
         </div>
-      </div>
-
-
-      <div className="certificado-section">
+      </SeventhSection>
+      <EightSection>
         <img src={linesL} className="left-l" />
         <div className="left-side">
           <h2 className="p-pink h1">Certificado oficial</h2>
@@ -502,10 +490,9 @@ const LandingNailsMasterRevolution = () => {
           <img src={cert} className="float-bottom" />
         </div>
         <img src={linesR} className="right-l" />
-      </div>
+      </EightSection>
 
-
-      <div className="rewards-section">
+      <NinthSection>
         <div className="all-center title">
           <img src={rewards} className="me-3" />
           <h2 className="h1">CENTRO DE {responsive500 && <br />}<b>RECOMPENSAS</b></h2>
@@ -602,8 +589,8 @@ const LandingNailsMasterRevolution = () => {
               </div>
           }
         </div>
-      </div>
-      <div className="experiences-section">
+      </NinthSection>
+      <TenthSection>
         {
           !responsive850 ? <h2 className="h1 bold">Conoce las experiencias de nuestras alumnas</h2>
             : <h2 className="h1 bold">Más de 45,000<br /> alumnas</h2>
@@ -670,10 +657,8 @@ const LandingNailsMasterRevolution = () => {
           </Swiper>
           <div className="next swiper-next"><BsChevronRight className="icon" /></div>
         </div>
-      </div>
-
-
-      <div className="subject-section">
+      </TenthSection>
+      <EleventhSection>
         <img src={linesB} className="up-l" />
         <h2 className="title-ppal bold">TEMARIO</h2>
         <h4>Conoce todo lo que aprenderás {responsive850 && <br />}en <b>Nail Master 2.0</b></h4>
@@ -765,16 +750,14 @@ const LandingNailsMasterRevolution = () => {
         <button className="btn up-down" onClick={() => setverMat(true)}>Consulta tu lista de materiales a utilizar</button>
         {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
         <img src={linesB2} className="down-l" />
-      </div>
+      </EleventhSection>
 
-
-      <div className="devices-section py-5">
+      <TwelveSection>
         <h2 className="big-title bold">Disfruta tus clases <br />
           <b className="p-pink no-bold">desde cualquier dispositivo</b></h2>
         <img src={devices} className="py-2 devices" />
-      </div>
-
-      <div className="dudas-section all-center">
+      </TwelveSection>
+      <ThirteenSection className="all-center">
         <div className="text-end">
           <h2 className="">¿Tienes alguna duda?</h2>
           <h2 className="p-pink bold">Nuestro equipo <br /> está para ayudarte.</h2>
@@ -786,9 +769,8 @@ const LandingNailsMasterRevolution = () => {
             <p className="my-1">Contacta con<br /> un agente</p>
           </div>
         </div>
-      </div>
-
-      <div className="faq-section spacing">
+      </ThirteenSection>
+      <FourteenSection className="spacing">
         <h2 className="p-pink big-title">Preguntas {responsive850 && <br />}Frecuentes</h2>
         <div className="faq">
           <div className="all-center">
@@ -806,7 +788,6 @@ const LandingNailsMasterRevolution = () => {
               </div>
             </div>
           </div>
-
           <div className="all-center">
             <div className={`q-container ${views.get(2) ? 'max' : 'min'}`} onClick={() => verQ(2)}>
               <div className={`q ${views.get(2) && 'open-q'}`}>
@@ -814,7 +795,6 @@ const LandingNailsMasterRevolution = () => {
                 {views.get(2) ?
                   <BsChevronUp className="icon" /> : <BsChevronDown className="icon" />}
               </div>
-
               <div className="border-top">
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
@@ -826,7 +806,6 @@ const LandingNailsMasterRevolution = () => {
               </div>
             </div>
           </div>
-
           <div className="all-center">
             <div className={`q-container ${views.get(3) ? 'max' : 'min'}`} onClick={() => verQ(3)}>
               <div className={`q ${views.get(3) && 'open-q'}`}>
@@ -841,7 +820,6 @@ const LandingNailsMasterRevolution = () => {
               </div>
             </div>
           </div>
-
           <div className="all-center">
             <div className={`q-container ${views.get(4) ? 'max' : 'min'}`} onClick={() => verQ(4)}>
               <div className={`q ${views.get(4) && 'open-q'}`}>
@@ -857,11 +835,9 @@ const LandingNailsMasterRevolution = () => {
               </div>
             </div>
           </div>
-
         </div>
-      </div>
-
-      {/* <div className="footer-footer all-center">
+      </FourteenSection>
+      {/* <FifteenSection className="all-center">
         <div className="inside-footer">
           <div className="info">
             <h2 className="h1">Suscríbete a nuestro Newsletter</h2>
@@ -878,9 +854,7 @@ const LandingNailsMasterRevolution = () => {
           </div>
           <img className="img" src={news} />
         </div>
-      </div> */}
-
-
+      </FifteenSection> */}
     </SuscriptionContain >
   )
 }
