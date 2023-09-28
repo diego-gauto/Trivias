@@ -1,7 +1,7 @@
 
 import { renderToString } from "react-dom/server";
 
-import LandingSuscription from "../../components/LandingSuscription/LandingSuscription";
+import LandingSuscription from "../../components/Landings/LandingSuscription/LandingSuscription";
 import { MainContain } from "../../screens/Styles.styled";
 
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'

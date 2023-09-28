@@ -10,12 +10,12 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Landing_Facebook, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
-import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
-import { getLandingReviewApi } from "../api/admin";
-import { getAllCourseDataApi } from "../api/lessons";
-import { getUserApi } from "../api/users";
-import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
+import { Landing_Facebook, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
+import { getLandingReviewApi } from "../../api/admin";
+import { getAllCourseDataApi } from "../../api/lessons";
+import { getUserApi } from "../../api/users";
+import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
