@@ -38,4 +38,11 @@ export const ChangePlanModalContain = styled.div`
       color: beige;
     }
   }
+  .link{
+    font-size: 14px;
+    word-wrap: break-word;
+    span{
+      
+    }
+  }
 `;

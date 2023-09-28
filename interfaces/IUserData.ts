@@ -27,4 +27,5 @@ export interface IUser {
   method: string;
   role: string;
   conekta_id: string;
+  plan_id: string;
 }
