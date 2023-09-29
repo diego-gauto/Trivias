@@ -127,7 +127,7 @@ export const getPartialUsers = async (first: number, second: number) => {
 };
 export const getAdminUsersApi = async (filters: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/users", filters)
+    .post("https://gonvar.inowu.dev/" + "admin/admin-users", filters)
     .then((res) => {
       return res
     })
@@ -240,6 +240,17 @@ export const getProgressForUsers = async (user_id: number) => {
 export const getCountriesApi = async () => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/get-countries")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const getMethodsApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/get-methods")
     .then((res) => {
       return res.data.data
     })

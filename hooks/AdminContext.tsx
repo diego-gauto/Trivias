@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useAuth } from "./useAuth";
 import { IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
-import { getAdminUsersApi } from "../components/api/admin";
+import { getAdminUsersApi, getCountriesApi, getMethodsApi } from "../components/api/admin";
 
 
 interface Props {
@@ -20,7 +20,7 @@ export const AdminsContext = (props: Props) => {
   const [userFilters, setUserFilters] = useState<IUserFilters>({
     country: "todos",
     name: "all_users",
-    current_page: 1,
+    offset: 0,
     spent: 0,
     level: -1,
     method: "todos",
@@ -39,26 +39,48 @@ export const AdminsContext = (props: Props) => {
     }
   });
   const [countries, setCountries] = useState([]);
-  const [users, setUsers] = useState({} as IAdminUsers);
+  const [methods, setMethods] = useState([]);
+  const [comeFrom, setComeFrom] = useState([]);
+  const [users, setUsers] = useState<IAdminUsers[]>([]);
   const [userLoader, setUserLoader] = useState<boolean>(true);
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+
   const { children } = props;
   let userContext = useAuth();
   const { user } = userContext;
 
   const loadUsers = async () => {
+    setUserLoader(true)
     const adminUsers = await getAdminUsersApi(userFilters);
+    setUsers(adminUsers.data.data)
+    setUserLoader(false)
   }
+  const loadData = async () => {
+    const countries = await getCountriesApi();
+    setCountries(countries)
+    const methods = await getMethodsApi();
+    setMethods(methods);
+  }
+  useEffect(() => {
+    loadData();
+  }, [])
+
   useEffect(() => {
     if (user && user.role === "admin" || "superAdmin") {
       loadUsers();
     }
-  }, [user])
+  }, [user, userFilters])
 
   const values = {
     countries,
     users,
     userLoader,
+    comeFrom,
     loadUsers,
+    methods,
+    userFilters,
+    totalUsers,
+    setUserFilters,
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;

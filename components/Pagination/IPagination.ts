@@ -1,8 +1,5 @@
 export interface IPagination {
-  previousPage: () => void;
-  nextPage: () => void;
-  firstPage: () => void;
-  finalPage: () => void;
+  changePage: (val: number) => void;
   currentPage: number;
   totalPage: number;
 }
