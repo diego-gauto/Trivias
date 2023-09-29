@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { CERTIFICATES_PATH, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH } from "./paths";
 import { IUser } from "../interfaces/IUserData";
 import { ICourse } from "../interfaces/ICourse";
@@ -63,7 +62,6 @@ export const authRedirect = (type: string, userInfo?: any) => {
 }
 
 export const goToCertificate = (course: any) => {
-  const router = useRouter();
   router.push({
     pathname: CERTIFICATES_PATH,
     query: {
