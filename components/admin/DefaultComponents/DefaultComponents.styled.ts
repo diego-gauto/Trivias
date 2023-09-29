@@ -8,8 +8,6 @@ export const DefaultContainer = styled.div`
   border-radius: 10px;
   flex-direction: column;
   margin: 30px;
-  gap: 10px;
-  padding: 30px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   p,
   h2 {
@@ -27,6 +25,13 @@ export const DefaultContainer = styled.div`
   .title-filter {
     font-size: 20px;
     font-weight: 600;
+  }
+  .top-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-inline: 30px;
+    padding-block: 20px;
   }
 `;
 export const DefaultSearchContainer = styled.div`
@@ -112,5 +117,46 @@ export const DefaultFilterContain = styled.div`
   }
   .react-calendar__tile--now {
     background: #dad3e5;
+  }
+`;
+export const AdminTable = styled.table`
+  td {
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+    padding-left: 10px;
+    padding-block: 15px;
+    text-align: left;
+    &:last-child {
+      color: #6717cd;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+  th {
+    padding-left: 10px;
+    padding-block: 15px;
+    text-align: left;
+    background-color: #6717cd;
+    color: white;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+  }
+  tr {
+    &:hover {
+      background: #d3d3d3;
+      &:last-child {
+        border-radius: 0 0 10px 10px;
+      }
+    }
+    border-bottom: 1px solid gray;
+    &:first-child {
+      border-bottom: none;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
   }
 `;

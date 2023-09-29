@@ -14,4 +14,9 @@ export interface ICancelReview {
 
 export interface IUserFilters {}
 
-export interface IAdminUsers {}
+export interface IAdminUsers {
+  name: string;
+  created_at: string;
+  email: string;
+  spent: string;
+}

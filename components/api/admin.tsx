@@ -125,6 +125,17 @@ export const getPartialUsers = async (first: number, second: number) => {
       return error
     });
 };
+export const getAdminUsersApi = async (filters: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/users", filters)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 export const getAllUsers = async (
   limit: number,
   offset: number,

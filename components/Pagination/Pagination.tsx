@@ -1,10 +1,10 @@
 import React from 'react'
-import { IPagination } from './Pagination'
+import { IPagination } from './IPagination'
 import { PaginationContainer } from './Pagination.styled'
 import { HiArrowCircleRight, HiArrowCircleLeft } from 'react-icons/hi'
 
-const Pagination = (props: any) => {
-  const { } = props;
+const Pagination = () => {
+  // const { } = props;
 
   return (
     <PaginationContainer>
