@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useAuth } from "./useAuth";
 import { IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
-import { getAdminUsersApi, getCountriesApi, getMethodsApi } from "../components/api/admin";
+import { getAdminUsersApi, getComeFromApi, getCountriesApi, getMethodsApi } from "../components/api/admin";
+import { getCoursesApi } from "../components/api/lessons";
 
 
 interface Props {
@@ -12,7 +13,6 @@ interface Props {
 const AdminContext = createContext<any>(null);
 
 export const useAdmin = () => {
-  //console.log(db)
   return useContext(AdminContext);
 };
 
@@ -27,6 +27,7 @@ export const AdminsContext = (props: Props) => {
     membership: "todos",
     course_id: -1,
     state: "todos",
+    come_from: "todos",
     dates_login: {
       valid: 0,
       date_1: "",
@@ -44,15 +45,17 @@ export const AdminsContext = (props: Props) => {
   const [users, setUsers] = useState<IAdminUsers[]>([]);
   const [userLoader, setUserLoader] = useState<boolean>(true);
   const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [courses, setCourses] = useState<any>([]);
+  const [payCourses, setPayCourses] = useState<any>([]);
 
   const { children } = props;
   let userContext = useAuth();
   const { user } = userContext;
-
   const loadUsers = async () => {
     setUserLoader(true)
     const adminUsers = await getAdminUsersApi(userFilters);
-    setUsers(adminUsers.data.data)
+    setTotalUsers(adminUsers.data.totalUsers);
+    setUsers(adminUsers.data.users)
     setUserLoader(false)
   }
   const loadData = async () => {
@@ -60,6 +63,24 @@ export const AdminsContext = (props: Props) => {
     setCountries(countries)
     const methods = await getMethodsApi();
     setMethods(methods);
+    const comeFrom = await getComeFromApi();
+    setComeFrom(comeFrom);
+    let tempPayCourses: Array<any> = [];
+    const courses = await getCoursesApi();
+    setCourses(courses);
+    courses.forEach((element: any) => {
+      if (element.type == 'Producto') {
+        let counter: number = 0;
+        element.seasons.forEach((season: any) => {
+          season.lessons.forEach((lesson: any) => {
+            counter++;
+          })
+        });
+        element.totalLessons = counter;
+        tempPayCourses.push(element)
+      }
+    });
+    setPayCourses(tempPayCourses)
   }
   useEffect(() => {
     loadData();
@@ -81,6 +102,8 @@ export const AdminsContext = (props: Props) => {
     userFilters,
     totalUsers,
     setUserFilters,
+    courses,
+    payCourses,
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;

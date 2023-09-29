@@ -19,4 +19,6 @@ export interface IAdminUsers {
   created_at: string;
   email: string;
   spent: string;
+  id: number;
+  user_courses: any;
 }

@@ -62,7 +62,6 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
   //     });
   //   }
   // }
-  console.log(user);
   const addMembership = async (type: number) => {
     if (confirm("Seguro que quieres agregar una " + (type === 1 ? "Mensualidad" : "Anualidad"))) {
       if (type === 1) {

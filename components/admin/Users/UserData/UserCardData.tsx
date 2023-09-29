@@ -1,24 +1,18 @@
 
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal1 from "./Modal/Modal";
 import ModalAddDays from "./Modal/ModalAddDays";
 import {
-  CardIconResp,
   CloseIcon,
   Columns,
   ColumnContain,
   Courses,
   CourseContain,
   FirstBox,
-  Image1,
   Info,
   Label,
-  LastContainer,
-  Level,
-  PayContain,
   ProfileContain,
-  ProfilePic,
   Title,
   TitleBox,
   TitleContain,
@@ -26,7 +20,6 @@ import {
   UserContain,
 } from "./UsersCardData.styled";
 import ErrorModal from "../../../Error/ErrorModal";
-import { getLessonFromUserApi } from "../../../api/admin";
 import { AdminLoader } from "../../SideBar.styled";
 import { Modal } from "react-bootstrap";
 
@@ -39,7 +32,8 @@ type CardData = {
   openUserCardData: any;
 };
 
-const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData, isVisible }: CardData) => {
+const UserCardData = (props: CardData) => {
+  const { user, setIsVisible, courses, loader, openUserCardData, isVisible } = props;
   const [show, setShow] = useState(false);
   const [showAddDays, setShowAddDays] = useState(false);
   const [error, setError] = useState(false);

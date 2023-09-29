@@ -90,6 +90,7 @@ export const DefaultFilterContain = styled.div`
     width: 300px;
     top: 70px;
     background-color: white;
+    z-index: 2;
   }
   .icon {
     position: absolute;

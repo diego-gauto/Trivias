@@ -13,10 +13,10 @@ const Pagination = (props: IPagination) => {
     if (val === "first" && currentPage !== 0) {
       changePage(0);
     }
-    if (val === "last" && currentPage !== 100) {
-      changePage(totalPage);
+    if (val === "last" && currentPage !== totalPage - 1) {
+      changePage(totalPage - 1);
     }
-    if (val === "next" && currentPage !== 100) {
+    if (val === "next" && currentPage !== totalPage - 1) {
       changePage(currentPage + 1);
     }
   }

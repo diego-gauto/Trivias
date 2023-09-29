@@ -10,55 +10,85 @@ import { EditIcon } from '../Category/Category.styled';
 import { ProfileContain, Profile } from '../Pay/Pay.styled';
 import { UserShow } from '../Users/UsersList.styled';
 import { IAdminUsers } from '../../../interfaces/IAdmin';
-import { formatDate } from '../../../utils/functions';
+import { FormatDateForBack, formatDate } from '../../../utils/functions';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { getLessonFromUserApi } from '../../api/admin';
+import UserCardData from '../Users/UserData/UserCardData';
 const Users = () => {
   const [userCalendar, setUserCalendar] = useState<boolean>(true);
   const [loginCalendar, setLoginCalendar] = useState<boolean>(true);
   const [openUserCalendar, setOpenUserCalendar] = useState<boolean>(false);
   const [openloginCalendar, setOpenLoginCalendar] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState({} as IAdminUsers);
+  const [loadCard, setLoadCard] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   let adminContext = useAdmin();
-  const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters } = adminContext;
+  const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses } = adminContext;
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
   }
   const handleLoginCalendar = () => {
     setLoginCalendar(!loginCalendar);
   }
+
+  const changePage = (page: number) => {
+    setUserFilters({
+      ...userFilters, offset: page * 100
+    });
+  }
+  const changeData = (key: string, data: string | number) => {
+    let filters = userFilters;
+    filters[key] = data;
+    setUserFilters({ ...filters, offset: 0 });
+  }
+  const filterDate = (key: string, date: any) => {
+    if (date[1] !== null) {
+      let filters = userFilters;
+      filters[key].date_1 = FormatDateForBack(date[0]);
+      filters[key].date_2 = FormatDateForBack(date[1]);
+      filters[key].valid = 1;
+      setUserFilters({ ...filters, offset: 0 });
+    }
+  }
   const showUserCalendar = (value: string) => {
+    let filters = userFilters;
     if (value === "todos") {
       setOpenUserCalendar(false);
+      filters['dates_created'].valid = 0;
+      setUserFilters({ ...filters });
     }
     if (value === "abrir") {
       setOpenUserCalendar(true);
     }
   }
-  const changeMethod = (method: string) => {
-    setUserFilters({
-      ...userFilters, method: method
-    });
-  }
-  const changeCountry = (country: string) => {
-    setUserFilters({
-      ...userFilters, country: country
-    });
-  }
-  const changePage = (page: number) => {
-    setUserFilters({
-      ...userFilters, offset: page * 20
-    });
-  }
-  const openUserCard = (user: IAdminUsers) => {
-
-  }
   const showLoginCalendar = (value: string) => {
+    let filters = userFilters;
     if (value === "todos") {
       setOpenLoginCalendar(false);
+      filters['dates_login'].valid = 0;
+      setUserFilters({ ...filters });
     }
     if (value === "abrir") {
       setOpenLoginCalendar(true);
     }
   }
+  const openUserCard = async (user: IAdminUsers) => {
+    setLoadCard(false);
+    getLessonFromUserApi(user.id).then((res) => {
+      res.data.data.forEach((userCourse: any) => {
+        courses.forEach((course: any) => {
+          if (userCourse.course_id === course.id) {
+            userCourse.courseTitle = course.title;
+            userCourse.image = course.image;
+          }
+        });
+      });
+      user.user_courses = res.data.data;
+      setCurrentUser(user);
+      setLoadCard(true);
+    })
+    setIsVisible(true);
+  };
   return (
     <AdminContain>
       <DefaultContainer>
@@ -71,13 +101,14 @@ const Users = () => {
                 <input
                   className='search-input'
                   placeholder="Buscar un Usuario"
+                  onChange={(e) => { changeData('name', e.target.value) }}
                   type={"text"}
                 />
               </DefaultSearchContainer>
             </DefaultColumn>
             <Pagination
               changePage={changePage}
-              currentPage={(userFilters.offset / 20)}
+              currentPage={(userFilters.offset / 100)}
               totalPage={Math.ceil(totalUsers / 100)}
             />
           </div>
@@ -86,7 +117,7 @@ const Users = () => {
             <DefaultRow gap={20}>
               <DefaultFilterContain>
                 <p className='title-filter'>Por Suscripción</p>
-                <select defaultValue="todos">
+                <select defaultValue="todos" onChange={(e) => { changeData('membership', e.target.value) }}>
                   <option value="todos">Todos</option>
                   <option value="mensual">Mensual</option>
                   <option value="anual">Anual</option>
@@ -94,7 +125,7 @@ const Users = () => {
               </DefaultFilterContain>
               <DefaultFilterContain>
                 <p className='title-filter'>Estado de Suscripción</p>
-                <select defaultValue="todos">
+                <select defaultValue="todos" onChange={(e) => { changeData('state', e.target.value) }}>
                   <option value="todos">Todos</option>
                   <option value="active">Activa</option>
                   <option value="not-active">No Activa</option>
@@ -102,7 +133,7 @@ const Users = () => {
               </DefaultFilterContain>
               <DefaultFilterContain>
                 <p className='title-filter'>Cantidad Gastada</p>
-                <select defaultValue="todos">
+                <select defaultValue="todos" onChange={(e) => { changeData('spent', parseInt(e.target.value)) }}>
                   <option value={-1}>Todos</option>
                   <option value={149}> +149</option>
                   <option value={1000}>+1000</option>
@@ -113,7 +144,7 @@ const Users = () => {
             <DefaultRow gap={20}>
               <DefaultFilterContain>
                 <p className='title-filter'>Método de pago</p>
-                <select defaultValue="todos" onChange={(e) => { changeMethod(e.target.value) }}>
+                <select defaultValue="todos" onChange={(e) => { changeData('method', e.target.value) }}>
                   <option value="todos">Todos</option>
                   {
                     methods.map((val: any, index: number) => {
@@ -139,7 +170,7 @@ const Users = () => {
                         <>
                           <IoClose className='icon' onClick={handleUserCalendar} />
                           <Calendar
-                            onChange={(e: any) => { }}
+                            onChange={(e: any) => { filterDate('dates_created', e) }}
                             allowPartialRange={true}
                             returnValue='range'
                             selectRange={true}
@@ -166,7 +197,7 @@ const Users = () => {
                         <>
                           <IoClose className='icon' onClick={handleLoginCalendar} />
                           <Calendar
-                            onChange={(e: any) => { }}
+                            onChange={(e: any) => { filterDate('dates_login', e) }}
                             allowPartialRange={true}
                             returnValue='range'
                             selectRange={true}
@@ -184,7 +215,7 @@ const Users = () => {
                 <p className='title-filter'>
                   Por Pais
                 </p>
-                <select defaultValue="todos" onChange={(e) => { changeCountry(e.target.value) }}>
+                <select defaultValue="todos" onChange={(e) => { changeData("country", e.target.value) }}>
                   <option value="todos" >Todos</option>
                   {
                     countries.map((val: any, index: number) => {
@@ -197,12 +228,12 @@ const Users = () => {
               </DefaultFilterContain>
               <DefaultFilterContain style={{ width: "33%" }}>
                 <p className='title-filter'>Procedencia</p>
-                <select defaultValue="todos">
+                <select defaultValue="todos" onChange={(e) => { changeData("come_from", e.target.value) }}>
                   <option value={"todos"}>Todos</option>
                   {
                     comeFrom.map((val: any, index: number) => {
                       return (
-                        <option value={val.comeFrom} key={"procedencia" + index}>{val.comeFrom}</option>
+                        <option value={val.come_from} key={"procedencia" + index}>{val.come_from}</option>
                       )
                     })
                   }
@@ -260,6 +291,10 @@ const Users = () => {
           </Background>
         }
       </DefaultContainer>
+      {
+        isVisible &&
+        <UserCardData user={currentUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={payCourses} loader={loadCard} openUserCardData={openUserCard} />
+      }
     </AdminContain>
   )
 }

@@ -259,6 +259,17 @@ export const getMethodsApi = async () => {
       return error
     });
 };
+export const getComeFromApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/get-comefrom")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 // export const getPartiaDemolUsers = async (first: number, second: number) => {
 //   return axios
 //     .get("https://gonvar.inowu.dev/" + "admin/partial-users/" + first + "/" + second)
