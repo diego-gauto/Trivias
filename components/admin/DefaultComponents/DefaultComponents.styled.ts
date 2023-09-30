@@ -17,9 +17,19 @@ export const DefaultContainer = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    .title {
-      font-size: 24px;
-      font-weight: 600;
+    .top-title {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .title {
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .icon {
+        font-size: 20px;
+        color: #6717cd;
+        cursor: pointer;
+      }
     }
   }
   .title-filter {
@@ -54,6 +64,10 @@ export const DefaultSearchContainer = styled.div`
     top: 50%;
     transform: translateY(-50%);
     left: 15px;
+  }
+  .users {
+    display: flex;
+    gap: 20px;
   }
 `;
 export const DefaultColumn = styled.div<{ gap?: number }>`

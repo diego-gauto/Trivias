@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useAuth } from "./useAuth";
 import { IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
-import { getAdminUsersApi, getComeFromApi, getCountriesApi, getMethodsApi } from "../components/api/admin";
-import { getCoursesApi } from "../components/api/lessons";
+import { getAdminUsersApi, getComeFromApi, getCountriesApi, getCoursesApi, getMethodsApi } from "../components/api/admin";
+
 
 
 interface Props {
@@ -47,6 +47,7 @@ export const AdminsContext = (props: Props) => {
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [courses, setCourses] = useState<any>([]);
   const [payCourses, setPayCourses] = useState<any>([]);
+  const [permits, setPermits] = useState(false);
 
   const { children } = props;
   let userContext = useAuth();
@@ -65,22 +66,9 @@ export const AdminsContext = (props: Props) => {
     setMethods(methods);
     const comeFrom = await getComeFromApi();
     setComeFrom(comeFrom);
-    let tempPayCourses: Array<any> = [];
     const courses = await getCoursesApi();
-    setCourses(courses);
-    courses.forEach((element: any) => {
-      if (element.type == 'Producto') {
-        let counter: number = 0;
-        element.seasons.forEach((season: any) => {
-          season.lessons.forEach((lesson: any) => {
-            counter++;
-          })
-        });
-        element.totalLessons = counter;
-        tempPayCourses.push(element)
-      }
-    });
-    setPayCourses(tempPayCourses)
+    setCourses(courses.courses);
+    setPayCourses(courses.product_course);
   }
   useEffect(() => {
     loadData();
@@ -89,6 +77,12 @@ export const AdminsContext = (props: Props) => {
   useEffect(() => {
     if (user && user.role === "admin" || "superAdmin") {
       loadUsers();
+      if (user.role === "superAdmin") {
+        setPermits(true);
+      }
+      if (user.role === "admin" && user.roles[4].report === 0) {
+        setPermits(true);
+      }
     }
   }, [user, userFilters])
 
@@ -104,6 +98,7 @@ export const AdminsContext = (props: Props) => {
     setUserFilters,
     courses,
     payCourses,
+    permits,
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;

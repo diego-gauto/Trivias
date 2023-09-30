@@ -155,13 +155,13 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
               <Card>
                 <ImageContain>
                   <img src={course.image} className="img-course" />
-                  {course.totalLessons === 1 ? <LessonText>Unica Lección</LessonText> :
-                    <LessonText>{course.totalLessons} Lecciones</LessonText>
+                  {course.countLessons === 1 ? <LessonText>Unica Lección</LessonText> :
+                    <LessonText>{course.countLessons} Lecciones</LessonText>
                   }
                 </ImageContain>
                 <CardContain>
                   <CardTitle>Curso: {course.title}</CardTitle>
-                  <CardSubTitle>
+                  {/* <CardSubTitle>
                     {
                       course.categories.map((val: any, idx: number) => {
                         return (
@@ -171,7 +171,7 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
                         )
                       })
                     }
-                  </CardSubTitle>
+                  </CardSubTitle> */}
                 </CardContain>
               </Card>
             </MainCard>

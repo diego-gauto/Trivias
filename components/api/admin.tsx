@@ -103,17 +103,6 @@ export const getInvoicesApi = async () => {
 
 //Users
 
-export const getUsersApi = async () => {
-  return axios
-    .get("https://gonvar.inowu.dev/" + "admin/users")
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
-};
 export const getPartialUsers = async (first: number, second: number) => {
   return axios
     .get("https://gonvar.inowu.dev/" + "admin/partial-users/" + first + "/" + second)
@@ -128,6 +117,17 @@ export const getPartialUsers = async (first: number, second: number) => {
 export const getAdminUsersApi = async (filters: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "admin/admin-users", filters)
+    .then((res) => {
+      return res
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const usersForExcelApi = async (filters: any) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "admin/admin-users-excel", filters)
     .then((res) => {
       return res
     })
@@ -270,21 +270,20 @@ export const getComeFromApi = async () => {
       return error
     });
 };
-// export const getPartiaDemolUsers = async (first: number, second: number) => {
-//   return axios
-//     .get("https://gonvar.inowu.dev/" + "admin/partial-users/" + first + "/" + second)
-//     .then((res) => {
-//       return res.data.users
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       return error
-//     });
-// };
-
+export const getCoursesApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "admin/admin-courses")
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 export const getLessonFromUserApi = async (userId: any) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/" + userId, userId)
+    .get("https://gonvar.inowu.dev/" + "admin/" + userId)
     .then((res) => {
       return res
     })

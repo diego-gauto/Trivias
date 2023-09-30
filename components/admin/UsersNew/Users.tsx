@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AdminContain } from '../SideBar.styled';
 import { AdminTable, DefaultColumn, DefaultContainer, DefaultFilterContain, DefaultRow, DefaultSearchContainer } from '../DefaultComponents/DefaultComponents.styled';
 import { useAdmin } from '../../../hooks/AdminContext';
+import CsvDownloader from "react-csv-downloader";
 import Calendar from 'react-calendar';
 import { IoClose } from 'react-icons/io5';
 import { AiFillPlusCircle } from 'react-icons/ai';
@@ -12,18 +13,18 @@ import { UserShow } from '../Users/UsersList.styled';
 import { IAdminUsers } from '../../../interfaces/IAdmin';
 import { FormatDateForBack, formatDate } from '../../../utils/functions';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getLessonFromUserApi } from '../../api/admin';
+import { getLessonFromUserApi, usersForExcelApi } from '../../api/admin';
 import UserCardData from '../Users/UserData/UserCardData';
+import { BsFileEarmarkExcelFill } from 'react-icons/bs';
 const Users = () => {
   const [userCalendar, setUserCalendar] = useState<boolean>(true);
   const [loginCalendar, setLoginCalendar] = useState<boolean>(true);
   const [openUserCalendar, setOpenUserCalendar] = useState<boolean>(false);
   const [openloginCalendar, setOpenLoginCalendar] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState({} as IAdminUsers);
-  const [loadCard, setLoadCard] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   let adminContext = useAdmin();
-  const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses } = adminContext;
+  const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses, permits } = adminContext;
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
   }
@@ -72,21 +73,12 @@ const Users = () => {
       setOpenLoginCalendar(true);
     }
   }
+  const downloadExcel = async () => {
+    const excel = await usersForExcelApi(userFilters);
+    return excel.data
+  }
   const openUserCard = async (user: IAdminUsers) => {
-    setLoadCard(false);
-    getLessonFromUserApi(user.id).then((res) => {
-      res.data.data.forEach((userCourse: any) => {
-        courses.forEach((course: any) => {
-          if (userCourse.course_id === course.id) {
-            userCourse.courseTitle = course.title;
-            userCourse.image = course.image;
-          }
-        });
-      });
-      user.user_courses = res.data.data;
-      setCurrentUser(user);
-      setLoadCard(true);
-    })
+    setCurrentUser(user);
     setIsVisible(true);
   };
   return (
@@ -95,7 +87,22 @@ const Users = () => {
         <div className='top-data'>
           <div className='header'>
             <DefaultColumn gap={5}>
-              <h2 className='title'>Usuarios: {totalUsers}</h2>
+              <div className='top-title'>
+                {
+                  permits &&
+                  <CsvDownloader
+                    filename="usersData"
+                    extension=".csv"
+                    separator=","
+                    wrapColumnChar=""
+                    datas={downloadExcel}
+                  >
+                    <BsFileEarmarkExcelFill className='icon' />
+                  </CsvDownloader>
+
+                }
+                <h2 className='title'>Usuarios: {totalUsers}</h2>
+              </div>
               <DefaultSearchContainer>
                 <div className='search-icon' />
                 <input
@@ -293,7 +300,7 @@ const Users = () => {
       </DefaultContainer>
       {
         isVisible &&
-        <UserCardData user={currentUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={payCourses} loader={loadCard} openUserCardData={openUserCard} />
+        <UserCardData currentUser={currentUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={payCourses} openUserCardData={openUserCard} />
       }
     </AdminContain>
   )
