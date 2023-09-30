@@ -70,7 +70,6 @@ export const goToCertificate = (course: any) => {
   });
 }
 export const goToSuscription = (user: IUser, course: ICourse) => {
-
   if (user) {
     //New condition subscription flow
     if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin') {
