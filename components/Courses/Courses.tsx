@@ -46,44 +46,6 @@ const Courses = () => {
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
-  const coursesAll = (user: any) => {
-    getCoursesApi().then((res) => {
-      setCourses(res);
-      let courseforVideo: any = JSON.parse(JSON.stringify(res));
-      let courseForModal: any = [];
-      if (user && user.user_history.length > 0) {
-        courseForModal = res.filter((course: ICourses) => {
-          return course.id === user.user_history[0].course_id
-        })
-        courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
-          return course.id === user.user_history[0].course_id
-        })
-        courseforVideo[0].seasons = courseforVideo[0].seasons.filter((season: ISeasons, index: number) => {
-          if (season.id === user.user_history[0].season_id) {
-            setSeasonIndex(index);
-          }
-          return season.id === user.user_history[0].season_id
-        })
-        courseforVideo[0].seasons[0].lessons = courseforVideo[0].seasons[0].lessons.filter((lesson: ILessons, index: number) => {
-          if (lesson.id === user.user_history[0].lesson_id) {
-            setLessonIndex(index);
-          }
-          return lesson.id === user.user_history[0].lesson_id
-        })
-      }
-      else {
-        courseforVideo = courseforVideo.filter((course: ICourses, index: number) => {
-          return course.id === 35
-        })
-        courseForModal = courseforVideo;
-        setSeasonIndex(0);
-        setLessonIndex(0);
-      }
-      setCourseForModal(courseForModal[0]);
-      setVideoCourse(courseforVideo[0]);
-      setLoading(false);
-    })
-  }
   const goTo = () => {
     if (userData) {
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date >= today))) {

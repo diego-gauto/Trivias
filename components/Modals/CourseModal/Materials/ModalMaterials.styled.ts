@@ -6,6 +6,15 @@ export const Container = styled.div`
   flex-direction: column;
   background: #ede7f2;
   border-radius: 40px !important;
+  .reg-text {
+    font-size: 12px;
+    font-weight: 600;
+    padding-inline: 30px;
+    color: #3f1168;
+    line-height: initial;
+    text-align: center;
+    margin: 0;
+  }
   .btn-contain {
     display: flex;
     flex-direction: column;
@@ -15,7 +24,6 @@ export const Container = styled.div`
     gap: 10px;
     p {
       margin: 0;
-      text-align: center;
       color: #3f1168;
       font-weight: 500;
     }
@@ -68,7 +76,6 @@ export const Container = styled.div`
       font-size: 17px;
       color: #3f1168;
       line-height: initial;
-      text-align: center;
       margin: 0;
       span {
         color: #942ced;
@@ -85,6 +92,16 @@ export const Container = styled.div`
     padding-block: 30px;
     padding-bottom: 20px;
     border-radius: 40px !important;
+    .circle {
+      width: 8px;
+      height: 8px;
+      background-color: #3f1168;
+      position: absolute;
+      top: 47%;
+      transform: translateY(-50%);
+      left: -15px;
+      border-radius: 50%;
+    }
     h1 {
       margin: 0;
       text-align: center;
@@ -104,8 +121,9 @@ export const Container = styled.div`
       font-size: 17px;
       color: #3f1168;
       line-height: initial;
-      text-align: center;
       margin: 0;
+      position: relative;
+      margin-left: 20px;
       span {
         color: #942ced;
         font-weight: bold;

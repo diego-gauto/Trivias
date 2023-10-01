@@ -40,7 +40,6 @@ const PayPlans = () => {
             <h3 className="purple h1">Planes y precios</h3>
             <p className="yellow">¡Elige la mejor suscripción para ti!</p>
           </div>
-
           {/* Responsive Switch*/}
           <div className="select-plan">
             <div className="options">
@@ -50,8 +49,8 @@ const PayPlans = () => {
               <p className={`option ${selected === 2 ? 'link' : ''}`}
                 onClick={() => handleSelected(2)}>G+ anual</p>
               <p className="option">|</p>
-              <p className={`option ${selected === 3 ? 'link' : ''}`}
-                onClick={() => handleSelected(3)}>Nails Máster</p>
+              {/* <p className={`option ${selected === 3 ? 'link' : ''}`}
+                onClick={() => handleSelected(3)}>Nails Máster</p> */}
             </div>
           </div>
 

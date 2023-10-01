@@ -4,21 +4,15 @@ import { useEffect, useState } from "react";
 import Modal1 from "./Modal/Modal";
 import ModalAddDays from "./Modal/ModalAddDays";
 import {
-  CardIconResp,
   CloseIcon,
   Columns,
   ColumnContain,
   Courses,
   CourseContain,
   FirstBox,
-  Image1,
   Info,
   Label,
-  LastContainer,
-  Level,
-  PayContain,
   ProfileContain,
-  ProfilePic,
   Title,
   TitleBox,
   TitleContain,
@@ -26,23 +20,26 @@ import {
   UserContain,
 } from "./UsersCardData.styled";
 import ErrorModal from "../../../Error/ErrorModal";
-import { getLessonFromUserApi } from "../../../api/admin";
 import { AdminLoader } from "../../SideBar.styled";
 import { Modal } from "react-bootstrap";
+import { getLessonFromUserApi } from "../../../api/admin";
+import { user } from "firebase-functions/v1/auth";
 
-type CardData = {
-  user: any;
-  loader: any;
+interface CardData {
+  currentUser: any;
   isVisible: any;
   setIsVisible: (open: boolean) => void;
   courses: Array<any>;
   openUserCardData: any;
 };
 
-const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData, isVisible }: CardData) => {
+const UserCardData = (props: CardData) => {
+  const { currentUser, setIsVisible, courses, openUserCardData, isVisible } = props;
   const [show, setShow] = useState(false);
   const [showAddDays, setShowAddDays] = useState(false);
   const [error, setError] = useState(false);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [user, setUser] = useState(currentUser);
   const GonvarImg = "/images/purchase/logo.png";
   let today = new Date().getTime() / 1000;
   const handleCourse = () => {
@@ -59,6 +56,28 @@ const UserCardData = ({ user, setIsVisible, courses, loader, openUserCardData, i
   const deleteUser = () => {
     setError(true);
   }
+  const getData = async () => {
+    setLoader(false);
+    const lessonUser = await getLessonFromUserApi(currentUser.id);
+    lessonUser.data.data.map((userCourse: any) => {
+      courses.forEach((course: any) => {
+        if (userCourse.course_id === course.id) {
+          userCourse.courseTitle = course.title;
+          userCourse.image = course.image;
+        }
+      });
+    })
+    user.user_courses = lessonUser.data.data;
+    console.log(user);
+    setUser(user);
+    setLoader(true);
+  }
+  useEffect(() => {
+    if (currentUser) {
+      getData();
+    }
+  }, [currentUser])
+
   if (!loader) {
     return (
       <AdminLoader style={{ position: "absolute" }}>

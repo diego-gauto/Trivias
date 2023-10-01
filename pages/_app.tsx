@@ -9,20 +9,25 @@ import { FacebookProvider } from 'react-facebook';
 import { CanonicalURL } from "../utils/functions";
 
 
+import { useEffect } from "react";
+import { AdminsContext } from "../hooks/AdminContext";
+declare let Conekta: any
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Head>
-        <link rel="canonical" href={CanonicalURL()} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
-      </Head>
-      <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
-        <FacebookProvider appId="3010100615906804">
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </FacebookProvider>
-      </GoogleOAuthProvider>
+      <AdminsContext>
+        <Head>
+          <link rel="canonical" href={CanonicalURL()} />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+        </Head>
+        <GoogleOAuthProvider clientId="723229844184-qls1eibq3e0b6g4uase8l5b94sm3cukl.apps.googleusercontent.com">
+          <FacebookProvider appId="3010100615906804">
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </FacebookProvider>
+        </GoogleOAuthProvider>
+      </AdminsContext>
     </AuthProvider>
   );
 }
