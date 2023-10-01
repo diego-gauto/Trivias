@@ -4,15 +4,12 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import "./styles.css";
 import { AuthProvider } from "../hooks/useAuth";
-import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { FacebookProvider } from 'react-facebook';
-import Script from "next/script";
 import { CanonicalURL } from "../utils/functions";
-import { useEffect } from "react";
-declare let Conekta: any
+
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
   return (
     <AuthProvider>
       <Head>
