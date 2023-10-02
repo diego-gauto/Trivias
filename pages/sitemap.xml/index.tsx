@@ -37,6 +37,10 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>  
     <url>
+      <loc>https://www.gonvar.io/trivias</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>  
+    <url>
       <loc>https://www.gonvar.io/blogs/para-que-sirve-cada-punta-pulidora-unas-drill</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url> 
