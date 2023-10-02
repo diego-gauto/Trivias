@@ -75,12 +75,12 @@ export const AdminsContext = (props: Props) => {
   }, [])
 
   useEffect(() => {
-    if (user && user.role === "admin" || "superAdmin") {
+    if ((user && user.role === "admin") || (user && user.role === "superAdmin")) {
       loadUsers();
-      if (user.role === "superAdmin") {
+      if (user && user.role === "superAdmin") {
         setPermits(true);
       }
-      if (user.role === "admin" && user.roles[4].report === 0) {
+      if (user && user.role === "admin" && user.roles[4].report === 0) {
         setPermits(true);
       }
     }
