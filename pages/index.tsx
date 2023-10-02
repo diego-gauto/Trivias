@@ -154,12 +154,12 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
         } />
       }
       {/* Nails Master Module Card */}
-      {/* <CourseModuleContainer courses={courseNailsData} num={1} loggedIn={loggedIn} user={userData} />
+      <CourseModuleContainer courses={courseNailsData} num={1} loggedIn={loggedIn} user={userData} />
       {courseNailsData &&
         <Module4_Carousel user={userData} courses={courseNailsData} type={"product"} isInfinite={true} title={courseNailsData.title}
           slideData={courseNailsData.lessons}
         />
-      } */}
+      }
       {/* SEP Module Card */}
       {/* <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&

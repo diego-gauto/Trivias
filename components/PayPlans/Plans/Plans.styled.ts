@@ -10,7 +10,7 @@ export const PlanStyles = styled.div`
     --purple: #3f1168;
     .colors {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       .col-lg-3 {
         width: 33%;
       }

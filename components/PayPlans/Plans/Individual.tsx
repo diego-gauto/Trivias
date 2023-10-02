@@ -45,21 +45,21 @@ const Individual = (props: IData) => {
 
 
   const goTo = () => {
-    if (user.id) {
-      let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
-      if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
-        router.push({
-          pathname: PREVIEW_PATH
-        });
-      }
-      if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
-        // router.push({ pathname: NAILS_FORM })
-      }
-    } else {
-      localStorage.setItem("nailMaster", "true");
-      router.push(SIGNUP_PATH)
-    }
+    // if (user.id) {
+    //   let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
+    //   if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+    //     router.push({
+    //       pathname: PREVIEW_PATH
+    //     });
+    //   }
+    //   if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
+    //     router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
+    //     // router.push({ pathname: NAILS_FORM })
+    //   }
+    // } else {
+    //   localStorage.setItem("nailMaster", "true");
+    //   router.push(SIGNUP_PATH)
+    // }
   }
 
   return (
