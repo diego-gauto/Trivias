@@ -12,3 +12,22 @@ export const lessonGuard = (user: IUser) => {
   }
   return;
 };
+
+export const returnLevel = (level: string) => {
+  if (level === "Muy Fácil") {
+    return "../images/iconoAzul.png";
+  }
+  if (level === "Fácil") {
+    return "../images/iconoLila.png";
+  }
+  if (level === "Intermedio") {
+    return "../images/iconoNaranja.png";
+  }
+  if (level === "Avanzado") {
+    return "../images/iconoVerde.png";
+  }
+  if (level === "Máster") {
+    return "../images/iconoRosa.png";
+  }
+  return;
+};
