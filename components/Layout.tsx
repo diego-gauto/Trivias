@@ -20,9 +20,6 @@ const Layout = ({ children }: any) => {
 
   useEffect(() => {
     setPath(pathname.split('/')[1]);
-    console.log(pathname)
-    console.log(asPath.slice(0, 6));
-    console.log(asPath.slice(6));
     if (pathname === "/_error" && asPath.slice(0, 6) === "/Blogs") {
       router.push("/blogs/" + asPath.slice(6))
     }
