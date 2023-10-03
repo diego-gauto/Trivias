@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, NAILS_REVOLUTION_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
@@ -20,7 +20,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const [show, setShow] = useState(false);
   const handleShow = () => {
     // setShow(true);
-    router.push({ pathname: NAILS_LANDING_REDIRECT })
+    router.push({ pathname: NAILS_REVOLUTION_REDIRECT })
   }
 
   const doVideoStuff = () => {

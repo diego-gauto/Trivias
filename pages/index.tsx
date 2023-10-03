@@ -59,8 +59,10 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
             course.totalDuration = hms(course.totalDuration);
           })
           setCourseGonvarPlus(data.gonvar_courses);
-          data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
-          setCourseNailsData(data.nails_master);
+          // data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
+          let nails_revolution = data.productCourses.filter((val: any) => val.id === 57);
+          nails_revolution[0].totalDuration = hms(data.nails_master.totalDuration);
+          setCourseNailsData(nails_revolution[0]);
           // console.log(data.nails_master);
           // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
           // setCourseSEPData(data.alineacion_cert);
@@ -75,8 +77,9 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
           course.totalDuration = hms(course.totalDuration);
         })
         setCourseGonvarPlus(data.gonvar_courses);
-        data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
-        setCourseNailsData(data.nails_master);
+        let nails_revolution = data.productCourses.filter((val: any) => val.id === 57);
+        nails_revolution[0].totalDuration = hms(data.nails_master.totalDuration);
+        setCourseNailsData(nails_revolution[0]);
         // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
         // setCourseSEPData(data.alineacion_cert);
         setLoading(true);

@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { NAILS_FORM, NAilS_REVOLUTION_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../../api/admin";
 import { getUserApi } from "../../api/users";
@@ -67,7 +67,11 @@ views.set(6, false);
 views.set(7, false);
 views.set(8, false);
 
-const LandingNailsMasterRevolution = () => {
+interface ILandingNailsRevolution {
+  isFacebook?: boolean;
+}
+const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
+  const { isFacebook } = props;
   const [ver, setver] = useState(true)
   const [verMat, setverMat] = useState(false)
   const [reviews, setReviews] = useState([])
@@ -118,24 +122,30 @@ const LandingNailsMasterRevolution = () => {
   }
 
   const handleRedirection = () => {
-    if (localStorage.getItem('email')) {
-      getUserApi(localStorage.getItem('email')).then((res) => {
-        let tempCourse = res.user_courses.filter((x: any) => x.course_id === 30)
-        if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
-          router.push({
-            pathname: PREVIEW_PATH
-          });
-        }
-        // if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-        //   router.push(
-        //     { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-        //   )
-        // }
-      })
-    } else {
-      localStorage.setItem('nailMaster', 'true')
-      router.push(SIGNUP_PATH)
+    if (isFacebook) {
+      router.push(NAilS_REVOLUTION_FORM)
     }
+    else {
+      if (localStorage.getItem('email')) {
+        getUserApi(localStorage.getItem('email')).then((res) => {
+          let tempCourse = res.user_courses.filter((x: any) => x.course_id === 57)
+          if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+            router.push({
+              pathname: PREVIEW_PATH
+            });
+          }
+          if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
+            router.push(
+              { pathname: PURCHASE_PATH, query: { type: 'course', id: 57 } }
+            )
+          }
+        })
+      } else {
+        localStorage.setItem('nailMaster', 'true')
+        router.push(SIGNUP_PATH)
+      }
+    }
+
   }
 
   const redirectToWhatsAppChat = () => {
@@ -154,7 +164,7 @@ const LandingNailsMasterRevolution = () => {
       <FirstSection>
         <div className="mt-3 fechas">
           <h4><b>Actualización 2023</b><br />
-            Inicio: 28 de Agosto del 2023</h4>
+            Inscripciones solo desde <br />9 de Octubre al 13 de Noviembre</h4>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
@@ -751,7 +761,7 @@ const LandingNailsMasterRevolution = () => {
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                   <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $149 MXN u 8 dls.)</i><br />
+                    de $249 MXN u 14 dls.)</i><br />
                   Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
                   $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>

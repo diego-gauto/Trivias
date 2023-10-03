@@ -36,7 +36,7 @@ const Individual = (props: IData) => {
     }
   }
   const goToRoute = () => {
-    router.push('/nails-master');
+    router.push('/nails-master-revolution');
   }
   useEffect(() => {
 
@@ -45,21 +45,21 @@ const Individual = (props: IData) => {
 
 
   const goTo = () => {
-    // if (user.id) {
-    //   let tempCourse = user.user_courses.filter((x) => x.course_id === 30)
-    //   if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
-    //     router.push({
-    //       pathname: PREVIEW_PATH
-    //     });
-    //   }
-    //   if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-    //     router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } })
-    //     // router.push({ pathname: NAILS_FORM })
-    //   }
-    // } else {
-    //   localStorage.setItem("nailMaster", "true");
-    //   router.push(SIGNUP_PATH)
-    // }
+    if (user.id) {
+      let tempCourse = user.user_courses.filter((x) => x.course_id === 57)
+      if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+        router.push({
+          pathname: PREVIEW_PATH
+        });
+      }
+      if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: 57 } })
+        // router.push({ pathname: NAILS_FORM })
+      }
+    } else {
+      localStorage.setItem("nailMaster", "true");
+      router.push(SIGNUP_PATH)
+    }
   }
 
   return (
@@ -71,7 +71,7 @@ const Individual = (props: IData) => {
           <div className="title b-green mx-4 mt-4">
             <img src={gStar} alt="Gonvar logo" className="mt-3 me-2" />
             <div className="mt-2">
-              <h3 className="green h5 mb-0"><b>Nails Master 2.0</b></h3>
+              <h3 className="green h5 mb-0"><b>Nails Master Revolution</b></h3>
               <p className="green">
                 Curso Individual
               </p>
@@ -89,14 +89,14 @@ const Individual = (props: IData) => {
 
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="green m-0">3 meses de acceso a Nails Master 2.0</p>
+              <p className="green m-0">3 meses de acceso a Nails Master Revolution</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-green" />
                 : <BsChevronDown className="tip-icon Back-green" />}
             </div>
             {views.get(1) &&
               <div className="b-green">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  Obtén acceso al curso <b>Nail Masters 2.0 durante 3 meses, </b>
+                  Obtén acceso al curso <b>Nail Masters Revolution durante 3 meses, </b>
                   con <b>más de 40 lecciones</b> para ti.
                 </p>
               </div>}
