@@ -167,6 +167,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             Inscripciones sólo desde el<br />9 de Octubre al 13 de Octubre</h4>
           <Countdown
             date={1697213198000}
+          // renderer={props => <div>{props.total}</div>}
           />
         </div>
         <img src={nailPintura} className="left-img" />
