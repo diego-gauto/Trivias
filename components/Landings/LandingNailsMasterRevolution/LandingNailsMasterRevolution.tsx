@@ -163,10 +163,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     <SuscriptionContain>
       <FirstSection>
         <div className="mt-3 fechas">
-          <h4><b>Actualización 2023</b><br />
-            Inscripciones solo desde <br />9 de Octubre al 13 de Noviembre</h4>
+          <h4><b>Actualización 2024</b><br />
+            Inscripciones sólo desde el<br />9 de Octubre al 13 de Octubre</h4>
           <Countdown
-            date={1699857693000}
+            date={1697213198000}
           />
         </div>
         <img src={nailPintura} className="left-img" />
