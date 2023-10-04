@@ -225,6 +225,41 @@ export const FirstSection = styled.div`
 			}
 		}
 	}
+	.progress-container {
+		display: flex;
+		justify-content: center;
+		.progress-bar {
+			border-radius: 32px;
+			background-color: #f6f7fa;
+			width: 400px;
+			height: 50px;
+			position: relative;
+			&.full {
+				outline: 2px solid #ff0000;
+				&::after {
+					content: 'INSCRIPCIONES TERMINADAS';
+				}
+			}
+      &.ready {
+        border 2px solid #04dffc;
+      }
+			&::after {
+				position: relative;
+				content: 'CUPO LIMITADO';
+				font-weight: 700;
+				font-size: 1.2rem;
+				color: #3f1168;
+			}
+			&::before {
+				content: '';
+				position: absolute;
+				width: var(--progress);
+				height: 100%;
+				border-radius: 32px;
+				background-color: #dad3e5;
+			}
+		}
+	}
 	@media (max-width: 1000px) {
 		.space {
 			.big-text {

@@ -189,6 +189,51 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     const url = `https://wa.me/${formattedPhoneNumber}`;
     window.open(url, '_blank');
   };
+  const checkProgress = () => {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const firstDate = new Date('13/04/2023 23:00:00');
+    const secondDate = new Date();
+    //Fechas pa calar
+    // const firstDate = new Date('10/04/2023 18:00:00');
+    // const secondDate = new Date('10/04/2023 17:59:00');
+    const diffDays = Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay);
+    let data = ['', '']
+    data = diffDays.toString().split('.')
+    let x100 = 0
+    if (secondDate >= firstDate) {
+      return 100
+    } else {
+      if (diffDays <= 4) {
+        switch (data[0]) {
+          case '3':
+            break;
+          case '2':
+            x100 = x100 + 25
+            break;
+          case '1':
+            x100 = x100 + 50
+            break;
+          case '0':
+            x100 = x100 + 75
+            break;
+          default:
+            break;
+        }
+        x100 = x100 + (Math.abs(1 - parseFloat('.' + data[1])) * 100) * .25
+        return x100
+      } else {
+        return 0
+      }
+    }
+  }
+
+  //No se como hacer que se este actualizando ------------------------------------------------------------/
+  // const min = 60000;
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log('set interval de minuto');
+  //   }, min);
+  // }, [])
 
   useEffect(() => {
 
@@ -201,7 +246,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <h4><b>Actualización 2024</b><br />
             Inscripciones sólo desde el<br />9 de Octubre al 13 de Octubre</h4>
           <Countdown
-            date={1697213198000}
+            date={1697263200000}
             renderer={props =>
               <div className="countdown">
                 <h2>TIEMPO RESTANTE</h2>
@@ -225,6 +270,12 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 </div>
               </div>}
           />
+          <div className="progress-container" >
+            <div
+              className={`progress-bar ${checkProgress() >= 100 && 'full'} ${(checkProgress() > 0 && checkProgress() < 100) && 'ready'}`}
+              style={{ "--progress": checkProgress() + '%' } as React.CSSProperties}
+            />
+          </div>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
