@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
+import Countdown from "react-countdown";
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
+import { useMediaQuery } from "react-responsive";
 
 import router from "next/router";
 import { Navigation } from "swiper";
@@ -8,23 +10,56 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { NAILS_FORM, NAilS_REVOLUTION_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import {
+  NAilS_REVOLUTION_FORM,
+  PREVIEW_PATH,
+  PURCHASE_PATH,
+  SIGNUP_PATH,
+} from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../../api/admin";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-import Countdown from 'react-countdown';
-import { useMediaQuery } from "react-responsive";
 import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
 import {
-  EightSection, EleventhSection, FifteenSection, FifthSection,
-  FirstSection, FourteenSection, FourthSection, NinthSection,
-  Quote,
-  SecondSection, SeventhSection, SixthSection, SuscriptionContain,
-  TenthSection, ThirdSection, ThirteenSection, TwelveSection
-} from "./LandingNailsMasterRevolution.styled";
-import { arita_fondo_azul, icon_1, icon_2, icon_3, icon_book, icon_book_blue, icon_bookmark, icon_bulb, icon_calendar, icon_checkmark, icon_clock, icon_file, icon_file_blue, icon_graph, mujer_fondo_azul, TEMARIO_ARRAY_1, TEMARIO_ARRAY_2 } from "./constants";
+  arita_fondo_azul,
+  icon_1,
+  icon_2,
+  icon_3,
+  icon_book,
+  icon_bookmark,
+  icon_book_blue,
+  icon_bulb,
+  icon_calendar,
+  icon_checkmark,
+  icon_clock,
+  icon_file,
+  icon_file_blue,
+  icon_graph,
+  mujer_fondo_azul,
+  TEMARIO_ARRAY_1,
+  TEMARIO_ARRAY_2,
+} from "./constants";
 import { ITemario } from "./ILandingNailsMasterRevolution";
+import {
+  EightSection,
+  EleventhSection,
+  FifthSection,
+  FirstSection,
+  FourteenSection,
+  FourthSection,
+  NinthSection,
+  Quote,
+  SecondSection,
+  SeventhSection,
+  SixthSection,
+  SuscriptionContain,
+  TenthSection,
+  ThirdSection,
+  ThirteenSection,
+  TwelveSection,
+} from "./LandingNailsMasterRevolution.styled";
+
 const pointWatsap = "/images/landing_suscription/point_at_button.png"
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png"
 const arita = "/images/landing_nails_master/arita-gonvar.png"
@@ -167,7 +202,28 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             Inscripciones sólo desde el<br />9 de Octubre al 13 de Octubre</h4>
           <Countdown
             date={1697213198000}
-          // renderer={props => <div>{props.total}</div>}
+            renderer={props =>
+              <div className="countdown">
+                <h2>TIEMPO RESTANTE</h2>
+                <div className="time">
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.days < 10 && 0}{props.days}</p>
+                    <p className="sub">DIAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.hours < 10 && 0}{props.hours}</p>
+                    <p className="sub">HORAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.minutes < 10 && 0}{props.minutes}</p>
+                    <p className="sub">MINUTOS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.seconds < 10 && 0}{props.seconds}</p>
+                    <p className="sub">SEGUNDOS</p>
+                  </div>
+                </div>
+              </div>}
           />
         </div>
         <img src={nailPintura} className="left-img" />
