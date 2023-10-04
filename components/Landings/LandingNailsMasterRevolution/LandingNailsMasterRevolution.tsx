@@ -13,7 +13,7 @@ import { downloadFileWithStoragePath } from "../../../store/actions/LandingActio
 import { getLandingReviewApi } from "../../api/admin";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-
+import Countdown from 'react-countdown';
 import { useMediaQuery } from "react-responsive";
 import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
 import {
@@ -165,6 +165,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         <div className="mt-3 fechas">
           <h4><b>Actualización 2023</b><br />
             Inscripciones solo desde <br />9 de Octubre al 13 de Noviembre</h4>
+          <Countdown
+            date={1699857693000}
+          />
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
