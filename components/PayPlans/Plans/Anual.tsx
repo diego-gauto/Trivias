@@ -87,8 +87,8 @@ const Anual = (props: IData) => {
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            {(user && user.level) ? <button className="purple-button" onClick={goTo}>Comenzar ahora</button> :
-              <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
+            {(!user.level || user.level === 0) && <button className="purple-button" onClick={goTo}>Comenzar ahora</button>}
+            {user.level === 1 && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
           </div>
         </div>
         <div className="main-body">

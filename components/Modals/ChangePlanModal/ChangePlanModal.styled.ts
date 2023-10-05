@@ -8,6 +8,7 @@ export const ChangePlanModalContain = styled.div`
   border-radius: 20px;
   padding: 20px;
   justify-content: center;
+  align-items: center;
   p {
     font-size: 24px;
     font-weight: 600;
@@ -22,6 +23,7 @@ export const ChangePlanModalContain = styled.div`
     color: #3f1168;
   }
   .buttons-container{
+    margin-top: 20px;
     display: flex;
     gap 10px;
     button{

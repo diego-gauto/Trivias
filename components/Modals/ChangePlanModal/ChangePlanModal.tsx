@@ -7,6 +7,7 @@ import router from "next/router";
 import { changePaypalApiPlan, changePaypalPlan, paypalToken, token } from "../../api/paypal";
 import { useState } from "react";
 import { LoaderContainSpinner } from "../../../containers/Profile/Purchase/Purchase.styled";
+import { textAlign } from "html2canvas/dist/types/css/property-descriptors/text-align";
 
 
 interface IModal {
@@ -52,14 +53,15 @@ const ChangePlanModal = (props: IModal) => {
   return (
     <Modal show={show} onHide={() => { onHide(); setLink(""); }} centered >
       <ChangePlanModalContain>
-        <p>
-          Desea cambiar su plan mensual a anual?
+        <p style={{ textAlign: "center" }}>
+          Ahorra $𝟭𝟯𝟴𝟵 𝗠𝗫𝗡 al adquirir nuestra suscripción anual. <br></br>
+          ¡No pierdas esta oportunidad!
         </p>
         <IoClose className='close-icon' onClick={onHide} />
         <div className="buttons-container">
-          {!loading ? <button className="left" onClick={update}>Cambiar a Anualidad</button> :
+          {!loading ? <button className="left" onClick={update}>Comprar a Anualidad</button> :
             <LoaderContainSpinner />}
-          <button className="right" onClick={onHide}>Mantener membresia actual</button>
+          {/* <button className="right" onClick={onHide}>Mantener membresia actual</button> */}
         </div>
         {link && <p className="link">Accede al link para poder continuar con el proceso: <br></br>
           <a href={link}>{link}</a>
