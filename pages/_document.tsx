@@ -1,6 +1,7 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
 import { appConfig } from "../utils/appConfig";
+import HelmetMetaTags from "../components/HelmetMetaTags/HelmetMetaTags";
 /**
  * Document class
  * @class
@@ -10,6 +11,13 @@ class MyDocument extends Document {
     return (
       <Html lang={appConfig.locale}>
         <Head>
+          <HelmetMetaTags
+            title={"Academia de Belleza Online | Gonvar"}
+            image={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"}
+            description={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"}
+            hashtag={"#gonvar"}
+            quote={""}
+          />
           <link rel="icon" href="/images/32px.png" />
           <meta name="google-site-verification" content="ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw" />
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
