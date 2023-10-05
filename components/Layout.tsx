@@ -37,6 +37,7 @@ const Layout = ({ children }: any) => {
         hashtag={"#gonvar"}
         quote={""}
       /> */}
+      <meta property="og:image" content={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"} />
       <NavBar />
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
