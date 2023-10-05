@@ -17,7 +17,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import { conektaCustomer, facebookUserInfo, googleTokens, newUser } from "../../components/api/auth";
 import ErrorModal from "../../components/Error/ErrorModal";
-import { LOGIN_PATH, PREVIEW_PATH, } from "../../constants/paths";
+import { LOGIN_PATH, PLAN_PATH, } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Background,
@@ -171,7 +171,7 @@ const Register = () => {
           conektaCustomer(user).then(() => {
             localStorage.setItem('email', user.email);
             localStorage.setItem("method", "mail");
-            window.location.href = PREVIEW_PATH;
+            window.location.href = PLAN_PATH;
             authRedirect('register')
           })
         }
@@ -221,7 +221,7 @@ const Register = () => {
             user.userId = res.userId.insertId;
             conektaCustomer(user).then(() => {
               localStorage.setItem('email', user.email)
-              window.location.href = PREVIEW_PATH;
+              window.location.href = PLAN_PATH;
               authRedirect('register')
             })
           }
@@ -268,7 +268,7 @@ const Register = () => {
               conektaCustomer(user).then(() => {
                 localStorage.setItem('email', user.email);
                 localStorage.setItem('method', "facebook");
-                window.location.href = PREVIEW_PATH;
+                window.location.href = PLAN_PATH;
                 authRedirect('register')
               })
             }
@@ -288,7 +288,7 @@ const Register = () => {
   useEffect(() => {
     if (localStorage.getItem("email")) {
       authRedirect('register')
-      window.location.href = PREVIEW_PATH;
+      window.location.href = PLAN_PATH;
     } else {
       setTimeout(() => {
         setIsLoading(false)
