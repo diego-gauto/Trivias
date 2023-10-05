@@ -9,6 +9,7 @@ import Top from "./components/Top/Top";
 import Progress from "./components/Progress/Progress";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import Menu from "./components/Menu/Menu";
 
 const Lesson = () => {
   const context = useAuth();
@@ -35,12 +36,13 @@ const Lesson = () => {
                 <p>Lecciones</p>
               </HamburgerContainer>
             </div>
-            <Video lesson={tempLesson} user={context.user} />
+            <Video actualLesson={tempLesson} user={context.user} course={course} />
             <Modules lesson={tempLesson} course={course} />
           </LeftSide>
           <RightSide open={open}>
             <Top course={course} />
             <Progress course={course} user={context.user} />
+            <Menu course={course} user={context.user} />
           </RightSide>
         </MainContainer>}
     </>

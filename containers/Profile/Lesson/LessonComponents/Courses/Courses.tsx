@@ -20,7 +20,7 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
   const [certficate, setCertificate] = useState<any>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
   const [temp, setTemp] = useState(data);
-  console.log(course);
+
   useEffect(() => {
     let viewed = 0;
     course.seasons.forEach((s: any) => {
