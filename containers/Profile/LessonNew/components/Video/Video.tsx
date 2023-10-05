@@ -5,33 +5,32 @@ import router, { useRouter } from 'next/router';
 import { useCourse } from '../../../../../hooks/useLesson';
 import { goToNextLesson, handleProgress, handleViewed } from '../../utils/functions';
 
-const Video = ({ user, actualLesson, course }: any) => {
+const Video = ({ user, actualLesson, course, openModal }: any) => {
   const params = useRouter()
   const { season, lesson }: any = params.query;
   const { reload } = useCourse();
   const [duration, setDuration] = useState<any>(0);
 
-  const finishedLesson = () => {
+  const finishedLesson = async () => {
     if (!actualLesson.users.includes(user.user_id)) {
       let tempLesson = {
         lessonId: actualLesson.id,
         userId: user.user_id,
         points: parseInt(actualLesson.points)
       }
-      addUserToLessonApi(tempLesson).then(() => {
-        reload()
-        if (actualLesson.quiz === 0 && actualLesson.homework === 0) {
-          goToNextLesson(course, +season, +lesson);
-        } else {
-          // openActivityModal();
-        }
-      })
+      await addUserToLessonApi(tempLesson)
+      reload()
+      if (actualLesson.quiz === 0 && actualLesson.homework === 0) {
+        goToNextLesson(course, +season, +lesson)
+      } else {
+        openModal();
+      }
     }
     else {
       if (actualLesson.quiz === 0 && actualLesson.homework === 0) {
         goToNextLesson(course, +season, +lesson);
       } else {
-        // openActivityModal();
+        openModal();
       }
     }
   }

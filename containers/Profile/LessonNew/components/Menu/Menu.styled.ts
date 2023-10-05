@@ -162,3 +162,21 @@ export const LessonContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 20px -7px;
   z-index: 1;
 `;
+
+export const DetailContain = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .activity {
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+    color: #d244d1;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    img {
+      width: 16px;
+    }
+  }
+`;

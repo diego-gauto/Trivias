@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import router, { useRouter } from "next/router";
-import { ArrowUpIcon, Circle, CourseLength, LessonCard, LessonContainer, Line, MainContainer, SeasonCard, SeasonInfo } from "./Menu.styled";
+import { ArrowUpIcon, Circle, CourseLength, DetailContain, LessonCard, LessonContainer, Line, MainContainer, SeasonCard, SeasonInfo } from "./Menu.styled";
 import { IUser } from "../../../../../interfaces/IUserData";
 import { Progress, Space } from "antd";
 import { goTo, hms, returnProgress, returnStatus } from "../../utils/functions";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import { DOWNLOAD_MATERIAL, HW_ICON } from "../../../../../utils/Constants";
 
 
 interface IMenu {
@@ -72,6 +73,29 @@ const Menu = (props: IMenu) => {
                       </div>
                       <div className="right">
                         <p>{l.title}</p>
+                        <DetailContain>
+                          {
+                            l.homework === 1 &&
+                            <div className='activity'>
+                              <img src={HW_ICON} />
+                              Esta lección tiene una tarea
+                            </div>
+                          }
+                          {
+                            l.quiz === 1 &&
+                            <div className='activity'>
+                              <img src={HW_ICON} />
+                              Esta lección tiene un quiz
+                            </div>
+                          }
+                          {
+                            l.lesson_material.length > 0 &&
+                            <div className='activity'>
+                              <img src={DOWNLOAD_MATERIAL} />
+                              Esta lección tiene material descargable
+                            </div>
+                          }
+                        </DetailContain>
                         <CourseLength>
                           <AiOutlineClockCircle className='icon' />
                           <p>{hms(l.duration)}</p>
