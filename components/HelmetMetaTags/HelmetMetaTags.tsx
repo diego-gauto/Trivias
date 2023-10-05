@@ -26,7 +26,7 @@ export default function HelmetMetaTags(props: DataForHelmet) {
       <meta property="title" content={title_tag} />
       <meta property="quote" content={quote_tag} />
       <meta name="description" content={description_tag} />
-      <meta property="image" content={image_tag} />
+      <meta property="image" content={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"} />
       <meta property="og:locale" content="es_MX" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title_tag} />
