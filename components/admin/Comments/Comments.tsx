@@ -232,7 +232,7 @@ const Comments = () => {
                 <p><span>Fecha: </span>{x.formatDate}</p>
                 <div className="buttons">
                   <button className="add" onClick={() => { goTo(x) }}>Ir a comentario</button>
-                  <button className="add" onClick={() => { setComment(x); setPopUp(true); setLevel(1) }}>Agregar Comentario</button>
+                  <button className="add" onClick={() => { setComment(x); setPopUp(true); setLevel(1) }}>Responder Comentario</button>
                   <button className="delete" onClick={() => { deleteComment(x) }}>Eliminar</button>
                 </div>
               </div>
@@ -243,7 +243,7 @@ const Comments = () => {
                     <div className="left">
                       <p>Fecha: {formatDate(answer.created_at)} <MdDeleteForever onClick={() => { deleteAnswer(answer) }} /></p>
                       <p>{answer.comment}</p>
-                      <button className="add" onClick={() => { setComment(answer); setPopUp(true); setLevel(2) }}>Agregar Comentario</button>
+                      <button className="add" onClick={() => { setComment(answer); setPopUp(true); setLevel(2) }}>Responder Comentario</button>
                     </div>
                     {answer.comments.length > 0 ? <p className="title pl">Respuestas</p> : <p className="title pl">Sin Respuestas</p>}
                     {answer.comments.map((answer: any, ans_ind: number) => {
