@@ -236,16 +236,10 @@ export const FirstSection = styled.div`
 			position: relative;
 			&.full {
 				outline: 2px solid #ff0000;
-				&::after {
-					content: 'INSCRIPCIONES TERMINADAS';
-				}
 			}
-      &.ready {
-        border 2px solid #04dffc;
-      }
 			&::after {
 				position: relative;
-				content: 'CUPO LIMITADO';
+				content: attr(progress-text);
 				font-weight: 700;
 				font-size: 1.2rem;
 				color: #3f1168;
@@ -357,6 +351,13 @@ export const FirstSection = styled.div`
 		}
 	}
 	@media (max-width: 400px) {
+		.progress-container {
+			.progress-bar {
+				margin-bottom: 8px;
+				width: 350px;
+				height: 40px;
+			}
+		}
 		.countdown {
 			.time {
 				.countdown-block {

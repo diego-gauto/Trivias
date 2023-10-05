@@ -191,52 +191,40 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
   };
   const checkProgress = () => {
     const oneDay = 24 * 60 * 60 * 1000;
-    const firstDate = new Date('13/04/2023 23:00:00');
-    const secondDate = new Date();
+    const firstDate = new Date('13/04/2023 23:00:00'); //final
+    const secondDate = new Date(); //today
     //Fechas pa calar
-    // const firstDate = new Date('10/04/2023 18:00:00');
-    // const secondDate = new Date('10/04/2023 17:59:00');
-    const diffDays = Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay);
-    let data = ['', '']
-    data = diffDays.toString().split('.')
-    let x100 = 0
+    // const firstDate = new Date('10/13/2023 23:59:00');
+    // const secondDate = new Date('10/09/2023 00:00:00');
+    const diffDays = Math.floor(Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay));
+    let returnValue = {
+      x100: 0,
+      texto: ''
+    }
     if (secondDate >= firstDate) {
-      return 100
+      returnValue = {
+        x100: 100,
+        texto: 'INSCRIPCIONES TERMINADAS'
+      }
+      return returnValue
     } else {
       if (diffDays <= 4) {
-        switch (data[0]) {
-          case '3':
-            break;
-          case '2':
-            x100 = x100 + 25
-            break;
-          case '1':
-            x100 = x100 + 50
-            break;
-          case '0':
-            x100 = x100 + 75
-            break;
-          default:
-            break;
+        returnValue = {
+          x100: 80,
+          texto: 'CUPO CASI AGOTADO'
         }
-        x100 = x100 + (Math.abs(1 - parseFloat('.' + data[1])) * 100) * .25
-        return x100
+        return returnValue;
       } else {
-        return 0
+        returnValue = {
+          x100: 20,
+          texto: 'CUPOS LIMITADOS'
+        }
+        return returnValue;
       }
     }
   }
 
-  //No se como hacer que se este actualizando ------------------------------------------------------------/
-  // const min = 60000;
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('set interval de minuto');
-  //   }, min);
-  // }, [])
-
   useEffect(() => {
-
   }, [setver])
 
   return (
@@ -272,8 +260,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           />
           <div className="progress-container" >
             <div
-              className={`progress-bar ${checkProgress() >= 100 && 'full'} ${(checkProgress() > 0 && checkProgress() < 100) && 'ready'}`}
-              style={{ "--progress": checkProgress() + '%' } as React.CSSProperties}
+              className={`progress-bar ${checkProgress().x100 >= 100 && 'full'}`}
+              style={{ "--progress": checkProgress().x100 + '%' } as React.CSSProperties}
+              progress-text={checkProgress().texto}
             />
           </div>
         </div>
