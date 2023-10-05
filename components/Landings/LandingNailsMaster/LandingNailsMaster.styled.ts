@@ -32,62 +32,6 @@ export const SuscriptionContain = styled.div`
   .no-bold {
     font-weight: unset;
   }
-  .materials-modal {
-    width: 100%;
-    .end {
-      width: 100%;
-      display: flex;
-      justify-content: end;
-      align-items: center;
-    }
-    .title {
-      margin-bottom: 15px;
-      font-weight: 800;
-    }
-    .subtitle {
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-    .materials-list {
-      display: flex;
-      padding: 20px;
-      .materials-column {
-        width: 33%;
-        display: flex;
-        flex-direction: column;
-        .icon-row {
-          width: 90%;
-          display: flex;
-          align-items: flex-start;
-          height: fit-content;
-          img {
-            margin-top: 5px;
-            margin-right: 10px;
-          }
-          p {
-            text-align: start;
-            font-weight: 500;
-            font-size: 18px;
-          }
-        }
-      }
-    }
-    .materials-footer {
-      margin-bottom: 20px;
-      .tip {
-        width: 90%;
-        margin-block: 15px;
-        font-style: italic;
-        color: #952cee;
-        font-size: 20px;
-      }
-    }
-    .icon {
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-    }
-  }
 
   .section {
     width: 100%;

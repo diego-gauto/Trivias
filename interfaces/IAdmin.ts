@@ -11,3 +11,14 @@ export interface ICancelReview {
   user_id: number;
   phone_number: string;
 }
+
+export interface IUserFilters {}
+
+export interface IAdminUsers {
+  name: string;
+  created_at: string;
+  email: string;
+  spent: string;
+  id: number;
+  user_courses: any;
+}

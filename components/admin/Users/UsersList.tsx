@@ -16,7 +16,7 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getAllUsers, getCountriesApi, getLessonFromUserApi, getPartialUsers, getProgressForUsers, getUsersApi, userForExcel } from "../../api/admin";
+import { getAllUsers, getCountriesApi, getLessonFromUserApi, userForExcel } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
@@ -403,7 +403,7 @@ const UsersList = () => {
         </Container>
         {
           isVisible &&
-          <UserCardData user={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} loader={loadCard} openUserCardData={openUserCardData} />
+          <UserCardData currentUser={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} openUserCardData={openUserCardData} />
         }
       </UserContain>
       <UserFilters

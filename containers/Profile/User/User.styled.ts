@@ -1234,6 +1234,11 @@ export const ProfileMainContainer = styled.div<{
       color: #441a6f;
       border: 1px solid #441a6f;
     }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
   }
 `;
 export const PictureContain = styled.div<{

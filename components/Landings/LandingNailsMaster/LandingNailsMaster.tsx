@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
@@ -10,11 +8,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../constants/paths";
-import { downloadFileWithStoragePath } from "../../store/actions/LandingActions";
-import { getLandingReviewApi } from "../api/admin";
-import { getUserApi } from "../api/users";
-import { SlideModule_1 } from "../Home/Module5_1/SlideModule_1/SlideModule_1";
+import { NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
+import { getLandingReviewApi } from "../../api/admin";
+import { getUserApi } from "../../api/users";
+import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingNailsMaster.styled";
 import MaterialesModal from "./MaterialesModal";
 import { useMediaQuery } from "react-responsive";

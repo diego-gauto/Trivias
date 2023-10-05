@@ -10,6 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang={appConfig.locale}>
         <Head>
+          <meta property="og:image" content={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"} />
           <link rel="icon" href="/images/32px.png" />
           <meta name="google-site-verification" content="ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw" />
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>

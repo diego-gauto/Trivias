@@ -19,21 +19,22 @@ export const ModalMaterials = (props: IMaterials) => {
           </h1>
           {materials?.map((material: IMaterialData, index: any) => {
             return (
-              <p key={"Materiales " + index}>{material.name}</p>
+              <p key={"Materiales " + index}><div className='circle' />{material.name}</p>
             )
           })}
         </div>
         <IoClose className='icon' onClick={handleClose} />
         {/* <button onClick={handleClose}></button> */}
+        <p className='reg-text'>
+          Lista de material avalado por el Sistema de Educación Profesional Gonvar®️.
+        </p>
         {
           route !== "" &&
           <div className='btn-contain'>
             <p>Da click en el botón de abajo para que puedas ver los materiales que necesitarás para este curso.</p>
-            <Link href={route}>
-              <a target="_blank" style={{ textDecoration: "none" }}>
-                <button className='btn-buy'>Comprar materiales</button>
-              </a>
-            </Link>
+            <a target="_blank" href={route} style={{ textDecoration: "none" }}>
+              <button className='btn-buy'>Comprar Materiales</button>
+            </a>
           </div>
         }
 

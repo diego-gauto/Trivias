@@ -31,9 +31,9 @@ export const Plans = (props: IData) => {
             <Anual user={user} />
           </div>}
           {/* Green */}
-          {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
+          {/* {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
             <Individual user={user} />
-          </div>}
+          </div>} */}
           {/* Ultimo */}
           {/* <div className="col-sm-6 col-lg-3 my-3">
             <Ind_Anual user={user} />

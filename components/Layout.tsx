@@ -14,12 +14,15 @@ const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const responsive1300 = useMediaQuery({ query: "(max-width: 1300px)" });
   const router = useRouter();
-  const { pathname } = router;
+  const { pathname, query, asPath } = router;
   const [path, setPath] = useState(pathname.split('/')[1]);
   const [show, setShow] = useState(false)
 
   useEffect(() => {
     setPath(pathname.split('/')[1]);
+    if (pathname === "/_error" && asPath.slice(0, 6) === "/Blogs") {
+      router.push("/blogs/" + asPath.slice(6))
+    }
   }, [pathname]);
 
   useEffect(() => {

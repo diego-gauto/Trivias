@@ -103,7 +103,7 @@ export const Container = styled.div`
     }
   }
   img {
-    width: fit-content;
+    width: auto;
     margin: auto;
   }
   label {
@@ -866,6 +866,7 @@ export const Container = styled.div`
               flex-direction: column;
               gap: 20px;
               max-width: 600px;
+              width: 100%;
               margin: auto;
               .paypal {
                 text-align: center;

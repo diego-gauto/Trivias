@@ -2,10 +2,11 @@ import { renderToString } from "react-dom/server";
 
 import { type } from "os";
 
-import LandingNailsMaster from "../../components/LandingNailsMaster/LandingNailsMaster";
+import LandingNailsMaster from "../../components/Landings/LandingNailsMaster/LandingNailsMaster";
 import { MainContain } from "../../screens/Styles.styled";
 
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import LandingNailsMasterRevolution from "../../components/Landings/LandingNailsMasterRevolution/LandingNailsMasterRevolution";
 type Repo = {
   data: [],
 }
