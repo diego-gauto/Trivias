@@ -30,13 +30,13 @@ const Layout = ({ children }: any) => {
   }, []);
   return (
     <Body >
-      <HelmetMetaTags
+      {/* <HelmetMetaTags
         title={"Academia de Belleza Online | Gonvar"}
         image={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"}
         description={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"}
         hashtag={"#gonvar"}
         quote={""}
-      />
+      /> */}
       <NavBar />
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
