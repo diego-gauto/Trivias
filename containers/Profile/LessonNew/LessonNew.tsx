@@ -9,10 +9,13 @@ import Top from "./components/Top/Top";
 import Progress from "./components/Progress/Progress";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import Menu from "./components/Menu/Menu";
+import ActivityModal from "./ActivityModal/ActivityModal";
 
 const Lesson = () => {
   const context = useAuth();
   const { course, isLoading, tempLesson, open, setOpen } = useCourse();
+  const [show, setShow] = useState(false);
 
   return (
     <>
@@ -35,13 +38,15 @@ const Lesson = () => {
                 <p>Lecciones</p>
               </HamburgerContainer>
             </div>
-            <Video lesson={tempLesson} user={context.user} />
+            <Video actualLesson={tempLesson} user={context.user} course={course} openModal={() => { setShow(true) }} />
             <Modules lesson={tempLesson} course={course} />
           </LeftSide>
           <RightSide open={open}>
             <Top course={course} />
             <Progress course={course} user={context.user} />
+            <Menu course={course} user={context.user} />
           </RightSide>
+          <ActivityModal show={show} setShow={() => { setShow(false) }} lesson={tempLesson} />
         </MainContainer>}
     </>
   )

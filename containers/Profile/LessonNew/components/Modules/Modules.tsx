@@ -29,7 +29,7 @@ const Modules = (props: IModules) => {
   return (
     <MainContainer>
       <TitleContain>
-        <ModuleTabs value={position} changeValue={changePosition} />
+        <ModuleTabs value={position} changeValue={changePosition} course={course} />
         <div className='line'></div>
       </TitleContain>
       {

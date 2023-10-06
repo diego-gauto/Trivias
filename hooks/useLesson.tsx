@@ -16,27 +16,40 @@ export const CourseProvider = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tempLesson, setTempLesson] = useState(null);
   const context = useAuth();
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
+
+  const reload = () => {
+    getCourseApi(id).then((res) => {
+      setCourse(res);
+      let data = res.seasons[+season].lessons[+lesson];
+      setTempLesson(data);
+      setIsLoading(false);
+    })
+  }
 
   useEffect(() => {
     if (lessonGuard(context.user)) {
-      getCourseApi(id).then((res) => {
-        console.log(res);
+      reload()
+    }
+  }, [])
 
-        setCourse(res);
-        let data = res.seasons[+season].lessons[+lesson];
+  useEffect(() => {
+    if (lessonGuard(context.user)) {
+      if (course) {
+        let data = course.seasons[+season].lessons[+lesson];
         setTempLesson(data);
-        setIsLoading(false);
-      })
+      }
     }
   }, [season, lesson])
+
 
   const values = {
     course,
     isLoading,
     tempLesson,
     open,
-    setOpen
+    setOpen,
+    reload
   };
 
   return <CourseContext.Provider value={values}>{children}</CourseContext.Provider>;

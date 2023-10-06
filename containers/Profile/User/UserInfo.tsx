@@ -485,7 +485,13 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               </div>
               {
                 responsive1023 &&
-                <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", marginTop: 10, flexDirection: "column", gap: "10px" }}>
+                  <button
+                    className="btn-edit"
+                    onClick={() => { setStartEdit(false) }}
+                  >
+                    Cancelar Cambios
+                  </button>
                   <button
                     className="btn-edit"
                     onClick={handleUpdateData}
@@ -630,12 +636,20 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               Editar Perfil
             </button>
             :
-            <button
-              className="btn-edit"
-              onClick={handleUpdateData}
-            >
-              Guardar Cambios
-            </button>
+            <div className="options">
+              <button
+                className="btn-edit"
+                onClick={() => { setStartEdit(false) }}
+              >
+                Cancelar Cambios
+              </button>
+              <button
+                className="btn-edit"
+                onClick={handleUpdateData}
+              >
+                Guardar Cambios
+              </button>
+            </div>
         }
 
         <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
