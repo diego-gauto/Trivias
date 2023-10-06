@@ -793,7 +793,7 @@ export const ProfileMainContainer = styled.div<{
       }
       @media (max-width: 750px) {
         font-size: 24px;
-        line-height: 40px;
+        line-height: 50px;
       }
     }
     .main-text {
@@ -1465,6 +1465,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
         padding-inline: 10px;
         display: flex;
         justify-content: center;
+        height: 84px;
+        align-items: center;
         p {
           margin: 0;
           color: white;
