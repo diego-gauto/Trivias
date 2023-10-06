@@ -32,7 +32,7 @@ const Menu = (props: IMenu) => {
   }
 
   const handleGotTo = (season: number, lesson: number) => {
-    if (course.type === "Mensual" && course.sequential === 0) {
+    if ((course.type === "Mensual" && course.sequential === 0) || course.type === "Gratis") {
       goTo(course.id, season, lesson)
     }
     if (course.type === "Mensual" && course.sequential === 1) {
