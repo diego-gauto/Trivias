@@ -225,7 +225,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     {
                       nextTimeReward?.month ?
                         (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes")
-                        : <>¡Próximamente: <br /> más beneficios para ti!</>
+                        : <div style={{ lineHeight: "25px" }}>¡Próximamente: <br /> más beneficios para ti!</div>
                     }
                   </span>
                   : <></>
@@ -485,13 +485,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               </div>
               {
                 responsive1023 &&
-                <div style={{ display: "flex", alignItems: "center", marginTop: 10, flexDirection: "column", gap: "10px" }}>
-                  <button
-                    className="btn-edit"
-                    onClick={() => { setStartEdit(false) }}
-                  >
-                    Cancelar Cambios
-                  </button>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
                   <button
                     className="btn-edit"
                     onClick={handleUpdateData}
@@ -636,20 +630,12 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               Editar Perfil
             </button>
             :
-            <div className="options">
-              <button
-                className="btn-edit"
-                onClick={() => { setStartEdit(false) }}
-              >
-                Cancelar Cambios
-              </button>
-              <button
-                className="btn-edit"
-                onClick={handleUpdateData}
-              >
-                Guardar Cambios
-              </button>
-            </div>
+            <button
+              className="btn-edit"
+              onClick={handleUpdateData}
+            >
+              Guardar Cambios
+            </button>
         }
 
         <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
